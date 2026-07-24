@@ -1,0 +1,9 @@
+[submodule "AfterglowRender"]
+	path = AfterglowRender
+	url = https://github.com/Celumina/AfterglowRender.git
+	branch = main
+[submodule "Project/Vulkan-Tutorial"]
+	path = Project/Vulkan-Tutorial
+	url = https://github.com/KhronosGroup/Vulkan-Tutorial.git
+	branch = main
+	ignore = untracked
