@@ -16,10 +16,12 @@
 - tinygltf：3.0.0
 - stb：2024-07-29#1
 
-参考仓库固定版本：
+参考仓库版本：
 
-- AfterglowRender：`8380690c82912a787511172c91671742f62ccff5`
 - Khronos Vulkan-Tutorial：`4780b519f078f9a7213c3b1dd27982ee0b9e5c71`
+
+`AfterglowRender/` 仅为可选的本地学习参考目录，已加入 ignore，不属于
+AzureRender 的 clone 或测试依赖。
 
 ## 首次获取
 
@@ -81,4 +83,3 @@ cmake --build --preset ninja-release
 - 私有角色：81,487 vertices、284,673 indices、14 primitives、15 materials。
 
 构建目录、IDE 配置和截图是本机生成内容，不进入版本控制。测试资产、转换工具、源码、shader、开发日志和环境清单进入版本控制。
-

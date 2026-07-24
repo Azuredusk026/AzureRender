@@ -16,7 +16,9 @@ Start here:
 
 This private repository intentionally contains third-party test assets under `Project/MyVulkanApp/assets_private`. Access must only be granted to trusted collaborators. Repository privacy does not replace the original asset license; do not publish, redistribute or change the repository to public without a separate license review.
 
-`AfterglowRender` and `Project/Vulkan-Tutorial` are fixed-version Git submodules used as references. Clone with:
+`Project/Vulkan-Tutorial` is a fixed-version Git submodule. `AfterglowRender/`
+is an optional local reference directory and is intentionally ignored by this
+repository. Clone the tracked workspace with:
 
 ```powershell
 git clone --recurse-submodules https://github.com/Azuredusk026/AzureRender.git
