@@ -741,3 +741,301 @@ Shader：
 - S22 优先实现可交互的灯光/背景展示预设，并增加一个更有设计感的终末地风格构图模式；
 - 随后在 Shadow Map、屏幕空间内轮廓与骨骼动画之间选择下一个技术节点；
 - 秋招作品集侧可先使用 S21 全身图和近景图，补充一张 F9 开关或多角度对比。
+
+### S22：可交互展示预设
+
+目标：在不重新导出角色资产的前提下，把 S21 的单一展示场景扩展为可复现的作品集构图、主题构图和材质检查环境。
+
+交互与数据：
+
+- `F1`：Afterglow Gallery；
+- `F2`：Endfield Industrial；
+- `F3`：Neutral Material Check；
+- Camera UBO 新增 `showcaseParameters`：
+  - X：预设编号；
+  - Y：主光强度；
+  - Z：辅光强度；
+  - W：轮廓光强度；
+- 三套参数依次为 `(0, 1.00, 0.13, 0.12)`、`(1, 0.92, 0.16, 0.16)`、`(2, 0.95, 0.08, 0.05)`；
+- 背景管线绑定当前帧已有 Descriptor Set，以便读取 Camera UBO；未新增贴图、描述符类型或资产依赖。
+
+三套视觉路径：
+
+- Afterglow Gallery 保留 S21 的深蓝紫渐变、暖紫 Halo、暖主光和冷辅光；
+- Endfield Industrial 使用深青渐变、低对比度规则网格和右侧琥珀色斜向警戒条纹；
+- 工业预设首轮 QA 中网格和条纹过亮，最终将网格能量压低约四倍，并把条纹限制到更靠右的区域；
+- Neutral Material Check 使用中性灰渐变、白色主光和低饱和辅光，避免主题颜色干扰材质判断；
+- 地台按预设改变轻微色调，仍保留 S21 的中心接触压暗与边缘环带；
+- Key、Fill、Rim 的颜色和强度均由当前预设响应，toon band、头发 KK、Matcap 和 F9 总开关保持兼容。
+
+视觉 QA：
+
+- 三套全身固定机位均保留角色、地台和背景的完整构图；
+- F2 网格和警戒条纹不会覆盖角色边缘或抢夺面部焦点；
+- F3 没有出现皮肤、白色肩甲或金属区域过曝；
+- F2 近景中头发、眼睛、口腔、肩甲和衣物前后遮挡连续；
+- 未观察到头部后层口腔结构、手臂或其他内部几何穿过前层表面，角色整体不透明；
+- F1 全身：`captures/capture_1785246779291.png`；
+- F2 全身：`captures/capture_1785246788011.png`；
+- F3 全身：`captures/capture_1785246798074.png`；
+- F2 近景：`captures/capture_1785246808707.png`；
+- 截图均由 Vulkan 交换链原生读回，不包含 Windows 鼠标或通知层。
+
+回归：
+
+- Debug 与 Release 最终构建通过；
+- 莱万汀 Debug Validation Layer 120 帧通过，无 warning/error；
+- 莱万汀 Release 120 帧通过；
+- 公共测试模型 Debug Validation Layer 120 帧通过；
+- 莱万汀统计保持为 81,487 vertices、284,673 indices、14 primitives、15 materials；
+- 公共模型统计保持为 337 vertices、900 indices、3 primitives、4 materials；
+- 预设切换不改变 Alpha、混合、深度写入或实体遮挡路径。
+
+结论：
+
+- S22 提供了可直接用于作品集的默认、主题和诊断三种展示环境；
+- F2 是当前秋招展示的推荐主画面，F1 可作为较克制的备选，F3 用于技术拆解或材质对照；
+- 本节点只扩展运行时 UBO 与 shader 响应，没有扩散或改写私有角色资产。
+
+下一节点：
+
+- S23 实现方向光 Shadow Map，并使用 3×3 PCF 降低锯齿；
+- 真实阴影优先覆盖角色投射到地台的接触与轮廓关系；
+- 保留现有程序化中心压暗作为禁用 Shadow Map 时的稳定回退；
+- 继续使用数字键 `1` 全身和 `5` 近景完成遮挡、阴影偏移与 Peter-panning QA。
+
+### S23：方向光 Shadow Map 与 3×3 PCF
+
+目标：把 S21/S22 的程序化接触压暗升级为真实的角色投影和自阴影，同时保持现有 Forward + Toon、透明排序、实体遮挡和作品集预设稳定。
+
+资源与同步：
+
+- 新增固定 2048×2048 Shadow Map；
+- 深度图使用设备本地内存，同时具备 Depth Attachment 与 Sampled usage；
+- 新增独立 Shadow Render Pass、Framebuffer 和 Clamp-to-Border 采样器；
+- Shadow Render Pass 清除深度、保存结果，并转换到只读采样布局；
+- External → Shadow dependency 同步上一帧 Fragment Shader 读取与本帧深度写入；
+- Shadow → External dependency 同步深度写入与随后主材质 Fragment Shader 读取；
+- 该同步允许双帧在途继续共用一张 Shadow Map，而不引入额外 CPU 等待。
+
+光源矩阵与管线：
+
+- Camera UBO 新增 64-byte `lightModelViewProjection`；
+- 光方向与现有主光保持一致：`normalize(0.48, 0.82, 0.32)`；
+- 光源位于目标沿光方向 4.5 单位处；
+- 使用 `[-1.9, 1.9]` 的 Vulkan Y 翻转正交投影和 0.1–8.0 深度范围；
+- 新增 `shadow.vert` 与 `shadow.frag`；
+- Shadow Pipeline 使用 Position 与 UV 两个顶点属性；
+- 关闭面剔除，以兼容 S14.1 中确认过的混合三角形绕序；
+- Raster Depth Bias 为 constant 1.25、slope 1.75；
+- 程序化地台不作为 caster，避免自阴影；所有角色 primitive 均参与投影。
+
+Alpha 与 PCF：
+
+- Shadow Fragment Shader 采样每材质 Base Color；
+- MASK 继续使用材质原始 `alphaCutoff`；
+- BLEND 使用 0.35 的阴影投射阈值，避免眉毛、发影等薄层投出完整矩形；
+- 主材质新增 Descriptor binding 9；
+- 手动 3×3 PCF 使用 9 次相邻深度比较；
+- 接收偏移根据 `1 - N·L` 在 0.00025–0.0011 之间变化；
+- Shadow Map 只削弱主光漫反射、直接高光和 KK 头发高光；
+- 主光阴影最大混合权重 0.72，环境光、辅光和轮廓光仍保留可读性。
+
+地台可读性调校：
+
+- 第一轮实现已产生正确角色自阴影，但正面机位中地台投影被主光/相机同侧构图和原程序化中心压暗掩盖；
+- 将程序化中心压暗从 0.48 减弱到 0.72；
+- 地台接收面在 Shadow Map 覆盖处额外把环境光最低降到 44%；
+- 正面机位保持克制，避免脚下形成生硬黑斑；
+- 左侧机位 `4` 能清楚显示裙甲、机械外装和长条结构投向地台的轮廓。
+
+视觉 QA：
+
+- 左侧全身机位能识别真实投影方向、机械轮廓和 3×3 PCF 软化边缘；
+- 脚底阴影与接触点连续，没有明显悬浮或 Peter-panning；
+- F2 正面构图保持角色为视觉中心，阴影不会盖过工业网格背景；
+- F2 近景中脸部、刘海、头角和肩甲没有条纹状 shadow acne；
+- 近景未出现脸部整体压黑、口腔穿透、手臂穿衣或新的 Alpha 回归；
+- 侧面投影证据：`captures/capture_1785248100701.png`；
+- F2 正面节点图：`captures/capture_1785248137040.png`；
+- F2 近景证据：`captures/capture_1785248160325.png`；
+- 三张图均由 Vulkan 交换链原生读回生成。
+
+回归：
+
+- Debug 与 Release 最终构建通过，新增八个 shader 均成功编译；
+- 莱万汀 Debug Validation Layer 120 帧通过，无 warning/error；
+- 莱万汀 Release 120 帧通过；
+- 公共测试模型 Debug Validation Layer 120 帧通过；
+- 最大化窗口触发 Swapchain 重建后 Shadow Pipeline 正常重建；
+- Shadow Render Pass、Framebuffer、Sampler、Image View、Image 和 Device Memory 均进入明确销毁路径。
+
+结论：
+
+- S23 已形成真实方向光深度通道，而不是基于屏幕或 UV 的伪阴影；
+- 投影与主光使用同一方向，材质 Alpha 和角色双面表面得到兼容处理；
+- 当前单张 2048² Shadow Map 适合单角色作品集展示，但不是开放世界级阴影方案。
+
+下一节点：
+
+- S24 优先实现屏幕空间内轮廓/深度法线边缘增强，使机械装甲内部结构在正面机位更清晰；
+- 保留现有 inverted-hull 外描边，新增效果只补充角色内部结构线；
+- 完成后再进入骨骼蒙皮与基础 Idle 动画，避免动画放大当前内部轮廓不足的问题。
+
+### S24：屏幕空间深度/法线内部轮廓
+
+目标：在保留 S13 inverted-hull 外描边的前提下，通过真实的屏幕空间深度与法线邻域检测，补充肩甲、服装接缝和机械结构的内部轮廓。
+
+附件与 Render Pass：
+
+- 每张交换链图像新增 `VK_FORMAT_R8G8B8A8_UNORM` 法线附件；
+- 主场景深度图增加 `VK_IMAGE_USAGE_SAMPLED_BIT`，深度格式选择同时检查采样支持；
+- 主场景 Subpass 同时写入交换链颜色和法线两个 Color Attachment；
+- 法线附件结束布局为 `SHADER_READ_ONLY_OPTIMAL`，深度附件结束布局为 `DEPTH_STENCIL_READ_ONLY_OPTIMAL`；
+- 新增第二个 Post-process Render Pass，以 `LOAD` 保留场景颜色，并在结束时转换到 Present；
+- 新增 Post-process Descriptor Set Layout、Pool、每交换链图像 Descriptor Set、最近点 Clamp-to-Edge Sampler、Pipeline Layout、Pipeline 与 Framebuffer；
+- Swapchain 重建和清理路径覆盖上述全部资源。
+
+Shader：
+
+- 新增无 Vertex Buffer 的 fullscreen-triangle `inner_outline.vert`；
+- `mesh.frag` 在 location 1 输出编码几何法线与内部轮廓参与权重；
+- `inner_outline.frag` 读取法线和深度，检查八个相邻像素；
+- 深度差放大系数为 1400，深度阈值为 0.18；
+- 法线差使用 `1 - dot(N0, N1)`，阈值为 0.20；
+- 输出颜色为深蓝黑 `(0.008, 0.013, 0.022)`，默认强度由首轮 0.48 收敛到 0.40；
+- 背景/地台参与度为 0，普通角色材质为 1；
+- Hair Data 和 Matcap 材质参与度为 0.22，邻域差异再乘中心与相邻像素的较小参与度；
+- `F10` 切换内部轮廓开关，关闭时只把 Push Constant 强度设为 0。
+
+Validation 修复：
+
+- 首轮公开模型 Validation 发现两个 Color Attachment 使用不同 Blend State，而设备未启用 `independentBlend`；
+- 修复为两个附件使用相同的 Blend Attachment State；
+- 法线附件的 Alpha 仍由 shader 正常写入，不依赖独立颜色混合配置；
+- 修复后私有 Debug 120 帧立即通过，无 warning/error。
+
+视觉调校：
+
+- 首轮强度 0.48 能增强肩甲，但近景会逐条描出头发网格法线岛，形成过密线条；
+- 引入材质参与权重并把强度降至 0.40 后，脸部恢复干净，头发只保留少量发束分界；
+- 肩甲外层、内层板件、领口与胸前机械层次仍明显强于关闭状态；
+- 屏幕空间 pass 不重新描绘背景和地台，也不会替代已有角色外轮廓；
+- 首轮过密线条参考：`captures/capture_1785249959349.png`；
+- 最终 F10 开启近景：`captures/capture_1785250216981.png`；
+- 最终 F10 关闭对照：`captures/capture_1785250231178.png`；
+- 对照图均由 Vulkan 交换链原生读回生成。
+
+回归：
+
+- Debug 与 Release 最终构建通过，`inner_outline.vert/frag` 和修改后的 `mesh.frag` 均成功编译；
+- 莱万汀 Debug Validation Layer 120 帧通过，无 warning/error；
+- 莱万汀 Release 120 帧通过；
+- 公共测试模型 Debug Validation Layer 120 帧通过，无 warning/error；
+- 莱万汀统计保持为 81,487 vertices、284,673 indices、14 primitives、15 materials；
+- 公共模型统计保持为 337 vertices、900 indices、3 primitives、4 materials；
+- 最大化窗口触发 Swapchain 重建后，法线/深度采样和 Post-process Pipeline 正常工作。
+
+结论：
+
+- S24 已形成真实的屏幕空间内部轮廓路径，而不是材质 Fragment Shader 内的导数近似；
+- 外轮廓、内部轮廓、方向光阴影和材质响应现在是相互独立的四条路径，可分别调试；
+- 材质参与权重解决了角色近景中“结构增强”和“头发/脸部过描”之间的冲突；
+- 当前阈值针对单角色作品集画面调校，尚未提供运行时连续参数 UI。
+
+下一节点：
+
+- S25 开始骨骼蒙皮基础：读取 `JOINTS_0`、`WEIGHTS_0`、skin joints 与 inverse bind matrices；
+- 先在静态 bind pose 下验证 GPU joint palette 和顶点变换，再接入 animation sampler/channel；
+- 保留静态资产和公共模型 fallback，避免蒙皮功能破坏当前作品集节点。
+
+### S25：Bind Pose GPU 蒙皮基础
+
+目标：在进入动画播放前，建立可验证的 glTF Skin、Joint Palette 和四权重 GPU 顶点蒙皮路径，并保持 S24 静态作品集节点完全兼容。
+
+资产审计：
+
+- `laevat_static_material.glb` 只有 1 node、1 mesh、0 skins、0 animations；
+- 顶点属性只有 POSITION、NORMAL、TANGENT、TEXCOORD_0/1；
+- 原静态导出脚本明确设置了 `export_vertex_skin_weights = False`；
+- 因此不能从旧 GLB 恢复真实骨骼，必须从 Unreal Skeletal Mesh 重新导出；
+- 新导出不覆盖旧文件，使用独立的 `assets_private/laevat_skinned` 目录。
+
+Unreal 导出：
+
+- 新增 `tools/unreal_export_laevat_skinned.py`；
+- Unreal 5.7 Python Commandlet 以 Null RHI 只读导出 Skeletal Mesh；
+- 开启 Vertex Skin Weights，暂时关闭 Morph Target 和 Animation Sequence；
+- 新原始 GLB 为 6,142,592 bytes；
+- 审计结果为 469 nodes、1 skin、468 joints、105 accessors；
+- 顶点属性包含 `JOINTS_0` 与 `WEIGHTS_0`；
+- `inject_gltf_textures.js` 增加可选输入/输出路径，同时保持无参数静态流程兼容；
+- 最终材质版骨骼 GLB 为 64,324,908 bytes，包含原 23 张纹理。
+
+Loader：
+
+- `AssetVertex` 增加 `uvec4 joints` 和 `vec4 weights`；
+- 静态顶点默认使用 joints `(0,0,0,0)`、weights `(1,0,0,0)`；
+- JOINTS 支持 U8/U16/U32；
+- WEIGHTS 支持 float 和 normalized U8/U16；
+- 对四权重重新归一化并处理零权重回退；
+- 建立节点 Parent 表并递归计算全局 Transform；
+- 读取 MAT4 Float inverse bind accessor；
+- Bind Pose Joint Palette 使用 `jointWorld × inverseBindMatrix`；
+- Skinned Primitive 保留原始顶点空间，静态 Primitive 继续烘焙 Node Transform；
+- 当前明确限制为每资产一个 skin，非法 Joint Index 会在 Loader 阶段报错；
+- `LoadedAsset` 保存 Joint Matrix 数组和 `hasSkin` 状态。
+
+GPU 路径：
+
+- Vertex Layout 从 4 个属性扩展为 6 个属性；
+- location 4 为 `R32G32B32A32_UINT` Joint Indices；
+- location 5 为 `R32G32B32A32_SFLOAT` Joint Weights；
+- 每帧创建一个 Host-visible、Host-coherent Joint Storage Buffer；
+- Descriptor binding 10 为 `VK_DESCRIPTOR_TYPE_STORAGE_BUFFER`，仅 Vertex Stage 可见；
+- `mesh.vert` 蒙皮 Position、Normal 和 Tangent；
+- `outline.vert` 使用蒙皮后的 Position/Normal 生成 inverted hull；
+- `shadow.vert` 使用同一蒙皮 Position 写入 Light Clip Space；
+- 无 Skin 的资产绑定单张 Identity Matrix，所有资产共用相同 Pipeline 和 Descriptor Layout。
+
+Validation 调整：
+
+- 首轮测试发现 Outline Pipeline 仍只声明两个 Vertex Attribute，缺少新增 location 4/5；
+- 补齐后能创建 Pipeline，但把完整六属性传给 Outline Shader 会产生未使用 location 2/3 警告；
+- 最终为 Outline 使用 0/1/4/5 精确属性子集，为 Shadow 使用 0/3/4/5 子集；
+- 最终 Debug Validation 无 warning/error。
+
+视觉 QA：
+
+- Bind Pose 全身比例、位置和 S24 静态版本一致；
+- 脸部、刘海、头角、肩甲、衣物与手臂前后遮挡连续；
+- Base Color、Normal、Metallic/Roughness、Matcap、Hair Data 与 Style Mask 保持有效；
+- 外描边贴合蒙皮后几何；
+- 屏幕空间内部轮廓没有新增噪点；
+- Shadow Map 与角色几何一致，没有静态/蒙皮位置分离；
+- 正面证据：`captures/capture_1785253111387.png`；
+- 近景证据：`captures/capture_1785253132877.png`。
+
+回归：
+
+- Debug 与 Release 构建通过；
+- 骨骼版莱万汀 Debug Validation 120 帧通过，无 warning/error；
+- 骨骼版莱万汀 Release 120 帧通过；
+- 原静态莱万汀 Debug Validation 120 帧通过；
+- 公共静态模型 Debug Validation 120 帧通过；
+- 静态 fallback 日志显示 1 joint matrix，骨骼版显示 468 joint matrices。
+
+结论：
+
+- S25 已完成真实 glTF Skin 数据到 Vulkan Vertex Shader 的端到端路径；
+- 当前画面仍是 Bind Pose，但顶点已经实际通过 Joint Storage Buffer 计算；
+- 静态与骨骼资产不需要不同的 Pipeline，降低了 S26 动画接入的回归风险；
+- 旧静态作品集资产继续保留，可随时作为视觉和性能基线。
+
+下一节点：
+
+- S26 解析 glTF animation sampler/channel；
+- 保存节点 Local TRS、Parent、Joint Node 映射和 inverse bind matrices；
+- 实现 Translation/Scale Linear、Rotation Slerp 与循环时间轴；
+- 每帧重建 Joint Palette 并写入当前帧 Storage Buffer；
+- 优先接入一个可复现的 Idle Animation，再进行蒙皮动态视觉 QA。

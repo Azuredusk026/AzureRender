@@ -579,3 +579,134 @@ S21 不修改私有 GLB。地台与背景在载入任意 glTF 后由 renderer �
 - 莱万汀运行时统计变为 81,487 顶点、284,673 索引、14 primitives、15 materials；
 - 公共测试模型运行时统计变为 337 顶点、900 索引、3 primitives、4 materials；
 - 两种资产使用同一背景、地台和灯光代码，私有/公共资产边界保持不变。
+
+## S22 运行时展示预设
+
+S22 仍不修改或重新导出私有 GLB。三套预设完全属于 renderer 运行时状态，通过 `F1/F2/F3` 切换：
+
+- `F1 Afterglow Gallery`：保留深蓝紫渐变、暖色主光与低强度冷色辅光，适合作为默认作品集构图；
+- `F2 Endfield Industrial`：青绿色工业网格、右侧低对比度警戒条纹、偏青的主/辅/轮廓光，用于类终末地主题展示；
+- `F3 Neutral Material Check`：中性灰渐变与接近白平衡的三点光，用于检查 Base Color、法线、粗糙度和材质分区。
+
+数据边界：
+
+- Camera UBO 新增 `showcaseParameters`，增加 16 bytes；
+- 四个分量依次保存预设编号、主光强度、辅光强度和轮廓光强度；
+- 背景管线复用当前帧已有 Descriptor Set 的 Camera UBO，不增加私有纹理或 GLB extras；
+- 地台继续使用 S21 的运行时 primitive，只按预设改变色调；
+- Material Push Constants 仍为 80 bytes；
+- Descriptor binding 0–8、私有 GLB 大小、23 张内嵌纹理以及材质导出约定均不变；
+- 三套预设不修改 Alpha Mode、Blend State、Depth Test、Depth Write 或 S14.1 的双面实体遮挡修复。
+
+最终运行时统计保持为 81,487 vertices、284,673 indices、14 primitives、15 materials。公共测试模型仍通过同一套预设路径和中性材质回退。
+
+## S23 方向光 Shadow Map
+
+S23 继续保持私有资产只读。Shadow Map、光源矩阵和阴影采样全部由 renderer 运行时生成，莱万汀 GLB 的大小、23 张内嵌纹理和 material extras 均不改变。
+
+运行时资源：
+
+- 新增一张固定 2048×2048 的设备本地深度图；
+- 格式通过现有 `findDepthFormat` 从 GPU 支持格式中选择；
+- Usage 为 `DEPTH_STENCIL_ATTACHMENT | SAMPLED`；
+- 新增独立的纯深度 Render Pass、Framebuffer 和 Clamp-to-Border 线性采样器；
+- Render Pass 在结束时把深度图转换为 `DEPTH_STENCIL_READ_ONLY_OPTIMAL`；
+- 前后两个 Subpass Dependency 分别同步上一帧采样到本帧写入，以及本帧写入到主材质采样。
+
+投影与材质：
+
+- Camera UBO 新增 `lightModelViewProjection`，增加 64 bytes；
+- 使用与主光一致的方向 `(0.48, 0.82, 0.32)`；
+- 使用固定正交投影覆盖归一化后的角色和运行时地台；
+- 新增 `shadow.vert` 与 `shadow.frag`；
+- Shadow Fragment Shader 读取 Base Color Alpha；
+- MASK 材质使用原 `alphaCutoff`，BLEND 材质使用 0.35 的保守投影阈值；
+- 程序化地台不写入 Shadow Map，只作为接收面；
+- Descriptor binding 9 为 Shadow Map；
+- Descriptor binding 0–8 与 Material Push Constants 80 bytes 均保持不变。
+
+采样约定：
+
+- 主材质使用手动 3×3 PCF；
+- 法线相关接收偏移在 0.00025–0.0011 之间；
+- Shadow Pipeline 同时启用 1.25 constant / 1.75 slope raster depth bias；
+- 角色的主光漫反射、直接高光和 KK 头发高光响应 Shadow Map；
+- 环境光、辅光与轮廓光不会被方向光阴影完全压黑；
+- 地台接收面额外衰减环境光，使投影在作品集画面中可读；
+- S21 的程序化中心压暗由 0.48 减弱到 0.72，现作为低强度稳定回退而非主要阴影。
+
+运行时统计仍为莱万汀 81,487 vertices、284,673 indices、14 primitives、15 materials；公共模型仍为 337 vertices、900 indices、3 primitives、4 materials。
+
+## S24 屏幕空间内部轮廓
+
+S24 不修改或重新导出莱万汀 GLB。新增数据完全属于 renderer 的交换链相关运行时资源，私有资产大小、23 张内嵌纹理、材质 extras 和 Descriptor binding 0–9 均保持不变。
+
+运行时附件：
+
+- 每张交换链图像新增一张 `VK_FORMAT_R8G8B8A8_UNORM` 法线附件；
+- 主场景深度附件增加 `SAMPLED` usage，并在 Render Pass 结束时转为只读采样布局；
+- 主材质 Fragment Shader 在 location 1 写入编码后的几何法线和内部轮廓参与权重；
+- 新增第二个 Post-process Render Pass，在交换链颜色附件上以 `LOAD` 方式叠加结果；
+- 新增最近点、Clamp-to-Edge 屏幕附件采样器，以及每张交换链图像对应的法线/深度 Descriptor Set；
+- Swapchain 重建和销毁路径覆盖法线 Image、Memory、View、Post Framebuffer、Descriptor Pool、Pipeline、Pipeline Layout 与 Render Pass。
+
+边缘检测约定：
+
+- `inner_outline.frag` 采样中心像素和八个相邻像素；
+- 深度差乘以 1400 后使用 0.18 阈值，法线差使用 0.20 阈值；
+- 最终深蓝黑叠加强度为 0.40；
+- 背景像素和程序化地台参与度为 0，因此不会重复描绘角色剪影或地台圆周；
+- 普通服装与机械材质参与度为 1；
+- Hair Data 或 Matcap 材质参与度降为 0.22，避免近景中逐条描绘头发法线岛或污染面部；
+- 相邻像素使用两者较小参与度缩放深度差和法线差；
+- `F10` 只把后处理强度切换为 0/0.40，不重建 Pipeline 或 Descriptor。
+
+该路径保留 S13 inverted-hull 外描边；S24 只补充角色内部结构线，不改变 Alpha Mode、双面实体遮挡、透明排序、Shadow Map 或材质纹理语义。
+
+## S25 骨骼版 GLB 与 Bind Pose GPU 蒙皮
+
+资产审计首先确认：S7–S24 使用的 `laevat_static_material.glb` 是纯静态导出，只有 1 个节点，`skins=0`、`animations=0`，属性中没有 `JOINTS_0/WEIGHTS_0`。该文件继续保留为稳定的静态作品集基线，不进行覆盖。
+
+新增导出：
+
+- `tools/unreal_export_laevat_skinned.py` 只读加载 `/Game/ZMD/莱万汀/莱万汀`；
+- `export_vertex_skin_weights = True`；
+- `export_animation_sequences = False`，S25 只验证 Bind Pose；
+- 输出到 `assets_private/laevat_skinned/laevat_skinned.glb`；
+- 原始 `.uasset`、Skeleton 和 Physics Asset 均未修改；
+- `inject_gltf_textures.js` 增加可选输入/输出参数，默认静态导出行为保持不变；
+- 材质注入后生成 `laevat_skinned_material.glb`，大小为 64,324,908 bytes；
+- 仍包含 23 张去重纹理及 S20–S24 的全部材质 extras。
+
+新 GLB 数据：
+
+- 469 nodes；
+- 1 mesh；
+- 1 skin；
+- 468 joints；
+- 1 个 inverse bind matrix accessor；
+- 所有角色 primitive 提供 `JOINTS_0` 与 `WEIGHTS_0`；
+- 当前仍为 0 animations；
+- 运行时几何统计保持为 81,487 vertices、284,673 indices、14 primitives、15 materials。
+
+Renderer 约定：
+
+- `JOINTS_0` 支持 unsigned byte、unsigned short 和 unsigned int；
+- `WEIGHTS_0` 支持 float，或 normalized unsigned byte/short；
+- 每个顶点四权重会重新归一化，零权重顶点回退到 joint 0；
+- 当前每个资产只支持一个 skin；
+- Loader 计算节点全局 Bind Transform，并生成 `jointWorld × inverseBindMatrix`；
+- Joint Palette 使用每帧 Host-visible Storage Buffer，S25 当前写入后保持不变；
+- Descriptor binding 10 为 Vertex Shader 可读的 Joint Storage Buffer；
+- 主材质、inverted-hull 外描边和 Shadow Pass 共用相同蒙皮矩阵；
+- 无 skin 的静态 GLB 自动使用一张 Identity Joint Matrix，不需要另一套 Pipeline。
+
+验证：
+
+- 骨骼版莱万汀 Debug Validation 120 帧通过；
+- 骨骼版莱万汀 Release 120 帧通过；
+- 原静态莱万汀 Debug Validation 120 帧通过；
+- 公共静态模型 Debug Validation 120 帧通过；
+- 正面 Bind Pose：`captures/capture_1785253111387.png`；
+- 近景 Bind Pose：`captures/capture_1785253132877.png`；
+- 未发现顶点爆炸、关节索引越界、法线/切线错位、阴影分离、外描边脱离或实体遮挡回归。

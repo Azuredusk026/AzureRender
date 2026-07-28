@@ -8,8 +8,12 @@ const {
 
 const root = path.resolve(__dirname, "..");
 const assetRoot = path.join(root, "assets_private", "laevat_static");
-const inputPath = path.join(assetRoot, "laevat_static.glb");
-const outputPath = path.join(assetRoot, "laevat_static_material.glb");
+const inputPath = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : path.join(assetRoot, "laevat_static.glb");
+const outputPath = process.argv[3]
+  ? path.resolve(process.argv[3])
+  : path.join(assetRoot, "laevat_static_material.glb");
 const manifestPath = path.join(assetRoot, "unreal_material_textures.json");
 const textureRoot = path.join(assetRoot, "textures");
 

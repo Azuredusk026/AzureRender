@@ -22,6 +22,7 @@ public:
 private:
     static constexpr std::uint32_t kInitialWidth = 1280;
     static constexpr std::uint32_t kInitialHeight = 720;
+    static constexpr std::uint32_t kShadowMapSize = 2048;
     static constexpr std::size_t kMaxFramesInFlight = 2;
 
 #if defined(MYVULKANAPP_ENABLE_VALIDATION)
@@ -48,8 +49,10 @@ private:
     struct UniformBufferObject {
         std::array<float, 16> model{};
         std::array<float, 16> modelViewProjection{};
+        std::array<float, 16> lightModelViewProjection{};
         std::array<float, 4> cameraPosition{};
         std::array<float, 4> renderingParameters{};
+        std::array<float, 4> showcaseParameters{};
     };
 
     struct GpuTexture {
@@ -81,6 +84,14 @@ private:
     };
     static_assert(sizeof(MaterialPushConstants) == 80);
 
+    struct PostProcessPushConstants {
+        float strength = 0.40F;
+        float depthThreshold = 0.18F;
+        float normalThreshold = 0.20F;
+        float padding = 0.0F;
+    };
+    static_assert(sizeof(PostProcessPushConstants) == 16);
+
     GLFWwindow* window_ = nullptr;
     bool glfwInitialized_ = false;
     bool framebufferResized_ = false;
@@ -100,21 +111,41 @@ private:
     std::vector<VkImage> swapchainImages_;
     std::vector<VkImageView> swapchainImageViews_;
     std::vector<VkFramebuffer> swapchainFramebuffers_;
+    std::vector<VkFramebuffer> postProcessFramebuffers_;
     std::vector<VkImage> depthImages_;
     std::vector<VkDeviceMemory> depthImageMemories_;
     std::vector<VkImageView> depthImageViews_;
+    VkFormat normalFormat_ = VK_FORMAT_R8G8B8A8_UNORM;
+    std::vector<VkImage> normalImages_;
+    std::vector<VkDeviceMemory> normalImageMemories_;
+    std::vector<VkImageView> normalImageViews_;
+    VkFormat shadowFormat_ = VK_FORMAT_UNDEFINED;
+    VkImage shadowImage_ = VK_NULL_HANDLE;
+    VkDeviceMemory shadowImageMemory_ = VK_NULL_HANDLE;
+    VkImageView shadowImageView_ = VK_NULL_HANDLE;
+    VkSampler shadowSampler_ = VK_NULL_HANDLE;
+    VkRenderPass shadowRenderPass_ = VK_NULL_HANDLE;
+    VkFramebuffer shadowFramebuffer_ = VK_NULL_HANDLE;
 
     VkRenderPass renderPass_ = VK_NULL_HANDLE;
+    VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
+    VkDescriptorPool postProcessDescriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> descriptorSets_;
+    std::vector<VkDescriptorSet> postProcessDescriptorSets_;
     VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
+    VkPipelineLayout postProcessPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline opaquePipeline_ = VK_NULL_HANDLE;
     VkPipeline opaqueDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
+    VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
+    VkPipeline innerOutlinePipeline_ = VK_NULL_HANDLE;
+    VkSampler screenAttachmentSampler_ = VK_NULL_HANDLE;
 
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     LoadedAsset asset_;
@@ -127,6 +158,9 @@ private:
     std::vector<VkBuffer> uniformBuffers_;
     std::vector<VkDeviceMemory> uniformBufferMemories_;
     std::vector<void*> uniformBufferMapped_;
+    std::vector<VkBuffer> jointBuffers_;
+    std::vector<VkDeviceMemory> jointBufferMemories_;
+    std::vector<void*> jointBufferMapped_;
     std::array<float, 16> currentModel_{};
     std::array<float, 3> cameraPosition_{2.8F, 2.1F, 3.2F};
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
@@ -136,6 +170,8 @@ private:
     bool stylizedLightingEnabled_ = true;
     float styleMaskStrength_ = 1.0F;
     float diffuseBandThreshold_ = 0.40F;
+    std::uint32_t showcasePreset_ = 0;
+    bool innerOutlineEnabled_ = true;
     bool screenshotRequested_ = false;
     std::vector<VkCommandBuffer> commandBuffers_;
     std::vector<VkSemaphore> imageAvailableSemaphores_;
@@ -156,18 +192,25 @@ private:
     void createSwapchain();
     void createImageViews();
     void createDepthResources();
+    void createNormalResources();
+    void createShadowResources();
     void createRenderPass();
+    void createPostProcessRenderPass();
     void createDescriptorSetLayout();
+    void createPostProcessDescriptorSetLayout();
     void createGraphicsPipeline();
     void createFramebuffers();
+    void createPostProcessFramebuffers();
     void createSwapchainSemaphores();
     void createCommandPool();
     void createVertexBuffer();
     void createIndexBuffer();
     void createTexture();
     void createUniformBuffers();
+    void createJointBuffers();
     void createDescriptorPool();
     void createDescriptorSets();
+    void createPostProcessDescriptorSets();
     void createCommandBuffers();
     void createSyncObjects();
 

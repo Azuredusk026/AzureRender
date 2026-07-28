@@ -3,7 +3,7 @@
 Portfolio-first Vulkan renderer for a stylized character and industrial
 science-fiction showcase scene.
 
-The current `S1-S19` baseline creates a resizable Windows GLFW surface, selects a
+The current `S1-S25` baseline creates a resizable Windows GLFW surface, selects a
 Vulkan GPU, enables the Khronos validation layer in Debug builds, manages a
 two-frame swapchain loop, uploads device-local vertex/index buffers through
 staging buffers, updates a per-frame camera uniform, and loads a textured glTF
@@ -53,6 +53,29 @@ S19 adds a deterministic face close-up preset on key 5, with an independent
 camera target and distance while preserving the existing full-body views. The
 close-up QA also replaces the hard face Matcap edge with a nine-tap softened,
 skin-tinted highlight suitable for portfolio captures.
+S20 restores the hair material's packed `_HN` data as separate base/highlight
+normals and uses it for a restrained Kajiya-Kay-style highlight.
+S21 adds a renderer-generated circular showcase platform, fullscreen procedural
+background, and key/fill/rim presentation lighting.
+S22 turns the showcase into three runtime-selectable presentation presets:
+Afterglow Gallery, Endfield Industrial, and Neutral Material Check. The presets
+change the background, platform tint, and key/fill/rim response without modifying
+the imported character asset.
+S23 adds a 2048×2048 directional Shadow Map, alpha-aware shadow casters,
+raster depth bias, and manual 3×3 PCF filtering. Character shadows now reach the
+runtime showcase platform while direct key-light specular and hair highlights
+remain consistent with the same light direction.
+S24 adds a sampled per-swapchain normal attachment, reuses the sampled scene
+depth attachment, and composites true screen-space internal outlines in a
+second render pass. Depth and normal discontinuities now reinforce clothing and
+mechanical structure without replacing the existing inverted-hull silhouette.
+Hair and face materials carry reduced participation weights to avoid tracing
+every authored normal island in close-up views.
+S25 adds the first GPU skinning foundation. The loader now accepts glTF
+`JOINTS_0`, `WEIGHTS_0`, one skin, and inverse bind matrices, calculates the bind
+pose joint palette, and uploads it through a per-frame storage buffer. Material,
+inverted-hull outline, and shadow vertex shaders use the same four-weight skin
+transform. Assets without a skin continue through a one-joint identity fallback.
 
 ## Requirements
 
@@ -124,6 +147,10 @@ them automatically and copies the GLFW runtime beside the executable.
 | `4` | Left-side view and pause |
 | `5` | Face close-up view and pause |
 | `Left` / `Right` | Rotate by 5 degrees and pause |
+| `F1` | Afterglow Gallery showcase preset |
+| `F2` | Endfield Industrial showcase preset |
+| `F3` | Neutral Material Check preset |
+| `F10` | Toggle screen-space internal outlines |
 | `F9` | Toggle all stylized lighting layers |
 | `F7` / `F8` | Decrease/increase style-mask strength |
 | `F5` / `F6` | Decrease/increase diffuse-band threshold |
@@ -156,6 +183,9 @@ PNG, a sampler, and a base-color material without depending on private files.
 
 - glTF 2.0 `.gltf` and `.glb` input
 - scene/node hierarchy with Matrix or TRS transforms
+- one glTF skin with joint hierarchy and inverse bind matrices
+- `JOINTS_0` and normalized `WEIGHTS_0` four-weight GPU skinning
+- per-frame joint-palette storage buffer with static-asset identity fallback
 - multiple triangle-list meshes and primitives
 - multiple base-color materials
 - TANGENT input or automatic tangent generation
@@ -168,6 +198,12 @@ PNG, a sampler, and a base-color material without depending on private files.
 - warm key light, cool fill light, and view-dependent rim lighting
 - fullscreen procedural gradient, halo, and vignette background
 - bounds-derived procedural showcase platform with contact-darkening
+- three runtime showcase presets for gallery, industrial, and neutral inspection
+- 2048×2048 directional Shadow Map with alpha cutout and 3×3 PCF
+- synchronized character self-shadow and showcase-platform cast shadow
+- sampled scene depth and R8G8B8A8 screen-space normal attachment
+- depth/normal internal-outline post-process with per-material participation
+- runtime internal-outline toggle for deterministic comparison captures
 - packed Specular level and masked Emissive color
 - sparse style-mask texture and smooth banded diffuse lighting
 - Unreal hair `_HN` data as RG base normal plus BA highlight normal
@@ -184,9 +220,9 @@ PNG, a sampler, and a base-color material without depending on private files.
 - unsigned 8/16/32-bit indices
 - base-color texture with an RGBA fallback texture
 
-Skinning, animation, morph targets, per-triangle
-transparency sorting/OIT, prefiltered HDR environment maps, bloom, and mipmap
-generation are intentionally deferred to later milestones.
+Animation playback, morph targets, per-triangle transparency sorting/OIT,
+prefiltered HDR environment maps, bloom, and mipmap generation are intentionally
+deferred to later milestones.
 
 The Laevat import result and reproducible export pipeline are documented in
 `docs/LAEVAT_ASSET_EXPORT_CN.md`. Milestone decisions and verification results

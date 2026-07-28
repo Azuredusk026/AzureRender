@@ -10,6 +10,7 @@
 #include <cmath>
 #include <cstring>
 #include <filesystem>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
@@ -196,6 +197,127 @@ void copyFloatAttribute(
             std::copy_n(values.begin(), componentCount, vertices[index].tangent.begin());
         } else {
             std::copy_n(values.begin(), componentCount, vertices[index].texcoord.begin());
+        }
+    }
+}
+
+std::uint32_t readUnsignedComponent(
+    const unsigned char* source,
+    const int componentType) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return *source;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        std::uint16_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
+        std::uint32_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    throw std::runtime_error("Unsupported JOINTS_0 component type");
+}
+
+float readWeightComponent(
+    const unsigned char* source,
+    const int componentType,
+    const bool normalized) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
+        float value = 0.0F;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    if (!normalized) {
+        throw std::runtime_error(
+            "Integer WEIGHTS_0 accessor must be normalized");
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return static_cast<float>(*source) / 255.0F;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        std::uint16_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return static_cast<float>(value) / 65535.0F;
+    }
+    throw std::runtime_error("Unsupported WEIGHTS_0 component type");
+}
+
+std::size_t componentByteSize(const int componentType) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return sizeof(std::uint8_t);
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        return sizeof(std::uint16_t);
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT
+        || componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
+        return sizeof(std::uint32_t);
+    }
+    throw std::runtime_error("Unsupported glTF skin component type");
+}
+
+void copySkinAttributes(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    std::vector<AssetVertex>& vertices) {
+    const auto jointsAttribute = primitive.attributes.find("JOINTS_0");
+    const auto weightsAttribute = primitive.attributes.find("WEIGHTS_0");
+    if (jointsAttribute == primitive.attributes.end()
+        && weightsAttribute == primitive.attributes.end()) {
+        return;
+    }
+    if (jointsAttribute == primitive.attributes.end()
+        || weightsAttribute == primitive.attributes.end()) {
+        throw std::runtime_error(
+            "Skinned glTF primitive must provide both JOINTS_0 and WEIGHTS_0");
+    }
+
+    const auto& jointsAccessor =
+        model.accessors.at(static_cast<std::size_t>(jointsAttribute->second));
+    const auto& weightsAccessor =
+        model.accessors.at(static_cast<std::size_t>(weightsAttribute->second));
+    if (jointsAccessor.type != TINYGLTF_TYPE_VEC4
+        || weightsAccessor.type != TINYGLTF_TYPE_VEC4
+        || jointsAccessor.count != vertices.size()
+        || weightsAccessor.count != vertices.size()) {
+        throw std::runtime_error("Unsupported glTF skin attribute layout");
+    }
+
+    const unsigned char* jointsSource = accessorData(model, jointsAccessor);
+    const unsigned char* weightsSource = accessorData(model, weightsAccessor);
+    const std::size_t jointsStride = accessorStride(model, jointsAccessor);
+    const std::size_t weightsStride = accessorStride(model, weightsAccessor);
+    const std::size_t jointComponentSize =
+        componentByteSize(jointsAccessor.componentType);
+    const std::size_t weightComponentSize =
+        componentByteSize(weightsAccessor.componentType);
+    for (std::size_t vertexIndex = 0;
+         vertexIndex < vertices.size();
+         ++vertexIndex) {
+        float weightSum = 0.0F;
+        for (std::size_t component = 0; component < 4; ++component) {
+            vertices[vertexIndex].joints[component] =
+                readUnsignedComponent(
+                    jointsSource + vertexIndex * jointsStride
+                        + component * jointComponentSize,
+                    jointsAccessor.componentType);
+            const float weight = readWeightComponent(
+                weightsSource + vertexIndex * weightsStride
+                    + component * weightComponentSize,
+                weightsAccessor.componentType,
+                weightsAccessor.normalized);
+            vertices[vertexIndex].weights[component] = weight;
+            weightSum += weight;
+        }
+        if (weightSum <= 1.0e-8F) {
+            vertices[vertexIndex].joints = {};
+            vertices[vertexIndex].weights = {1.0F, 0.0F, 0.0F, 0.0F};
+            continue;
+        }
+        for (float& weight : vertices[vertexIndex].weights) {
+            weight /= weightSum;
         }
     }
 }
@@ -612,10 +734,113 @@ AssetMaterial loadMaterial(
     return result;
 }
 
+std::vector<Matrix4> calculateNodeWorldTransforms(
+    const tinygltf::Model& model) {
+    std::vector<int> parents(model.nodes.size(), -1);
+    for (std::size_t parent = 0; parent < model.nodes.size(); ++parent) {
+        for (const int child : model.nodes[parent].children) {
+            parents.at(static_cast<std::size_t>(child)) =
+                static_cast<int>(parent);
+        }
+    }
+
+    std::vector<Matrix4> worldTransforms(
+        model.nodes.size(),
+        identityMatrix());
+    std::vector<bool> calculated(model.nodes.size(), false);
+    std::function<const Matrix4&(std::size_t)> calculate =
+        [&](const std::size_t index) -> const Matrix4& {
+        if (calculated[index]) {
+            return worldTransforms[index];
+        }
+        const Matrix4 local = nodeTransform(model.nodes[index]);
+        const int parent = parents[index];
+        worldTransforms[index] = parent >= 0
+            ? multiply(calculate(static_cast<std::size_t>(parent)), local)
+            : local;
+        calculated[index] = true;
+        return worldTransforms[index];
+    };
+    for (std::size_t index = 0; index < model.nodes.size(); ++index) {
+        calculate(index);
+    }
+    return worldTransforms;
+}
+
+void loadJointMatrices(
+    const tinygltf::Model& model,
+    const std::vector<Matrix4>& nodeWorldTransforms,
+    LoadedAsset& asset) {
+    if (model.skins.empty()) {
+        std::array<float, 16> identity{};
+        const Matrix4 sourceIdentity = identityMatrix();
+        std::transform(
+            sourceIdentity.begin(),
+            sourceIdentity.end(),
+            identity.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        asset.jointMatrices.push_back(identity);
+        return;
+    }
+    if (model.skins.size() != 1) {
+        throw std::runtime_error(
+            "The current renderer supports one glTF skin per asset");
+    }
+
+    const tinygltf::Skin& skin = model.skins.front();
+    if (skin.joints.empty()) {
+        throw std::runtime_error("glTF skin contains no joints");
+    }
+    std::vector<Matrix4> inverseBindMatrices(
+        skin.joints.size(),
+        identityMatrix());
+    if (skin.inverseBindMatrices >= 0) {
+        const auto& accessor = model.accessors.at(
+            static_cast<std::size_t>(skin.inverseBindMatrices));
+        if (accessor.type != TINYGLTF_TYPE_MAT4
+            || accessor.componentType != TINYGLTF_COMPONENT_TYPE_FLOAT
+            || accessor.count != skin.joints.size()) {
+            throw std::runtime_error(
+                "Unsupported inverse bind matrix accessor layout");
+        }
+        const unsigned char* source = accessorData(model, accessor);
+        const std::size_t stride = accessorStride(model, accessor);
+        for (std::size_t index = 0; index < skin.joints.size(); ++index) {
+            std::array<float, 16> values{};
+            std::memcpy(
+                values.data(),
+                source + index * stride,
+                sizeof(values));
+            std::transform(
+                values.begin(),
+                values.end(),
+                inverseBindMatrices[index].begin(),
+                [](const float value) { return static_cast<double>(value); });
+        }
+    }
+
+    asset.jointMatrices.reserve(skin.joints.size());
+    for (std::size_t index = 0; index < skin.joints.size(); ++index) {
+        const int jointNode = skin.joints[index];
+        const Matrix4 jointMatrix = multiply(
+            nodeWorldTransforms.at(static_cast<std::size_t>(jointNode)),
+            inverseBindMatrices[index]);
+        std::array<float, 16> gpuMatrix{};
+        std::transform(
+            jointMatrix.begin(),
+            jointMatrix.end(),
+            gpuMatrix.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        asset.jointMatrices.push_back(gpuMatrix);
+    }
+    asset.hasSkin = true;
+}
+
 void appendPrimitive(
     const tinygltf::Model& model,
     const tinygltf::Primitive& primitive,
     const Matrix4& transform,
+    const bool skinned,
     const std::uint32_t fallbackMaterial,
     LoadedAsset& asset) {
     if (primitive.mode != TINYGLTF_MODE_TRIANGLES) {
@@ -633,12 +858,24 @@ void appendPrimitive(
     copyFloatAttribute(model, primitive, "NORMAL", 3, vertices);
     copyFloatAttribute(model, primitive, "TANGENT", 4, vertices);
     copyFloatAttribute(model, primitive, "TEXCOORD_0", 2, vertices);
+    copySkinAttributes(model, primitive, vertices);
     std::vector<std::uint32_t> indices = readIndices(model, primitive, vertices.size());
     if (primitive.attributes.find("TANGENT") == primitive.attributes.end()) {
         generateTangents(vertices, indices);
     }
-    for (auto& vertex : vertices) {
-        transformVertex(vertex, transform);
+    if (!skinned) {
+        for (auto& vertex : vertices) {
+            transformVertex(vertex, transform);
+        }
+    } else {
+        for (const AssetVertex& vertex : vertices) {
+            for (const std::uint32_t joint : vertex.joints) {
+                if (joint >= asset.jointMatrices.size()) {
+                    throw std::runtime_error(
+                        "JOINTS_0 index exceeds the glTF skin joint count");
+                }
+            }
+        }
     }
 
     const std::uint32_t baseVertex = static_cast<std::uint32_t>(asset.vertices.size());
@@ -682,9 +919,20 @@ void visitNode(
     const auto& node = model.nodes.at(static_cast<std::size_t>(nodeIndex));
     const Matrix4 worldTransform = multiply(parentTransform, nodeTransform(node));
     if (node.mesh >= 0) {
+        const bool skinned = node.skin >= 0;
+        if (skinned && node.skin != 0) {
+            throw std::runtime_error(
+                "The current renderer supports only glTF skin index 0");
+        }
         const auto& mesh = model.meshes.at(static_cast<std::size_t>(node.mesh));
         for (const auto& primitive : mesh.primitives) {
-            appendPrimitive(model, primitive, worldTransform, fallbackMaterial, asset);
+            appendPrimitive(
+                model,
+                primitive,
+                worldTransform,
+                skinned,
+                fallbackMaterial,
+                asset);
         }
     }
     for (const int child : node.children) {
@@ -718,6 +966,9 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     const std::uint32_t fallbackMaterial =
         static_cast<std::uint32_t>(asset.materials.size());
     asset.materials.push_back(loadMaterial(model, nullptr));
+    const std::vector<Matrix4> nodeWorldTransforms =
+        calculateNodeWorldTransforms(model);
+    loadJointMatrices(model, nodeWorldTransforms, asset);
 
     if (!model.scenes.empty()) {
         const int sceneIndex = model.defaultScene >= 0 ? model.defaultScene : 0;

@@ -10,6 +10,8 @@ struct AssetVertex {
     std::array<float, 3> normal{0.0F, 1.0F, 0.0F};
     std::array<float, 4> tangent{1.0F, 0.0F, 0.0F, 1.0F};
     std::array<float, 2> texcoord{};
+    std::array<std::uint32_t, 4> joints{};
+    std::array<float, 4> weights{1.0F, 0.0F, 0.0F, 0.0F};
 };
 
 enum class AssetAlphaMode : std::uint32_t {
@@ -65,6 +67,8 @@ struct LoadedAsset {
     std::vector<AssetPrimitive> primitives;
     std::array<float, 3> boundsMin{};
     std::array<float, 3> boundsMax{};
+    std::vector<std::array<float, 16>> jointMatrices;
+    bool hasSkin = false;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);

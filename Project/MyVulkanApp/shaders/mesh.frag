@@ -3,8 +3,10 @@
 layout(binding = 0) uniform CameraData {
     mat4 model;
     mat4 modelViewProjection;
+    mat4 lightModelViewProjection;
     vec4 cameraPosition;
     vec4 renderingParameters;
+    vec4 showcaseParameters;
 } camera;
 
 layout(binding = 1) uniform sampler2D baseColorTexture;
@@ -15,6 +17,7 @@ layout(binding = 5) uniform sampler2D specularEmissiveTexture;
 layout(binding = 6) uniform sampler2D styleMaskTexture;
 layout(binding = 7) uniform sampler2D matcapTexture;
 layout(binding = 8) uniform sampler2D hairDataTexture;
+layout(binding = 9) uniform sampler2D shadowMap;
 
 layout(push_constant) uniform MaterialData {
     float alphaCutoff;
@@ -31,7 +34,9 @@ layout(location = 0) in vec3 worldNormal;
 layout(location = 1) in vec4 worldTangent;
 layout(location = 2) in vec2 textureCoordinate;
 layout(location = 3) in vec3 worldPosition;
+layout(location = 4) in vec4 shadowPosition;
 layout(location = 0) out vec4 outputColor;
+layout(location = 1) out vec4 outputNormal;
 
 vec2 directionToEquirectangular(vec3 direction) {
     const float pi = 3.14159265358979323846;
@@ -50,16 +55,48 @@ vec3 decodePackedHairNormal(vec2 encodedNormal) {
     return normalize(vec3(xy, z));
 }
 
+float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
+    vec3 projected = lightClipPosition.xyz / lightClipPosition.w;
+    vec2 shadowUv = projected.xy * 0.5 + 0.5;
+    if (projected.z <= 0.0 || projected.z >= 1.0
+        || any(lessThan(shadowUv, vec2(0.0)))
+        || any(greaterThan(shadowUv, vec2(1.0)))) {
+        return 1.0;
+    }
+
+    vec2 texelSize = 1.0 / vec2(textureSize(shadowMap, 0));
+    float bias = max(0.0011 * (1.0 - normalDotLight), 0.00025);
+    float visibility = 0.0;
+    for (int y = -1; y <= 1; ++y) {
+        for (int x = -1; x <= 1; ++x) {
+            float storedDepth = texture(
+                shadowMap,
+                shadowUv + vec2(x, y) * texelSize).r;
+            visibility +=
+                projected.z - bias <= storedDepth ? 1.0 : 0.0;
+        }
+    }
+    return visibility / 9.0;
+}
+
 void main() {
     vec4 baseColor = texture(baseColorTexture, textureCoordinate);
     float platformMask = clamp(material.showcasePlatform, 0.0, 1.0);
     float platformRadius = length(textureCoordinate - vec2(0.5)) * 2.0;
     float contactShadow = 1.0 - smoothstep(0.10, 0.62, platformRadius);
     float platformRing = smoothstep(0.68, 0.98, platformRadius);
+    float showcasePreset = floor(camera.showcaseParameters.x + 0.5);
+    vec3 platformPresetTint = vec3(1.0);
+    if (showcasePreset == 1.0) {
+        platformPresetTint = vec3(0.62, 1.02, 1.08);
+    } else if (showcasePreset == 2.0) {
+        platformPresetTint = vec3(1.16, 1.14, 1.10);
+    }
     baseColor.rgb *= mix(
         vec3(1.0),
         mix(vec3(0.58), vec3(1.12), platformRing)
-            * mix(vec3(1.0), vec3(0.48), contactShadow),
+            * mix(vec3(1.0), vec3(0.72), contactShadow)
+            * platformPresetTint,
         platformMask);
     if (material.alphaMode == 1 && baseColor.a < material.alphaCutoff) {
         discard;
@@ -107,6 +144,20 @@ void main() {
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
+    float shadowVisibility = sampleShadowMap(shadowPosition, diffuse);
+    float keyVisibility = mix(1.0, shadowVisibility, 0.72);
+    vec3 keyColor = vec3(1.04, 0.98, 0.94);
+    vec3 fillColor = vec3(0.58, 0.76, 1.0);
+    vec3 rimColor = vec3(0.20, 0.34, 0.52);
+    if (showcasePreset == 1.0) {
+        keyColor = vec3(0.90, 1.00, 1.02);
+        fillColor = vec3(0.24, 0.82, 0.88);
+        rimColor = vec3(0.16, 0.62, 0.72);
+    } else if (showcasePreset == 2.0) {
+        keyColor = vec3(1.0);
+        fillColor = vec3(0.72, 0.78, 0.85);
+        rimColor = vec3(0.62, 0.68, 0.74);
+    }
     float specularPower = mix(96.0, 6.0, roughness);
     float specularLobe = pow(
         max(dot(shadedNormal, halfDirection), 0.0),
@@ -139,6 +190,11 @@ void main() {
         roughness * roughness * 0.65);
     vec3 ambientDiffuse =
         diffuseColor * (vec3(0.30) + environmentDiffuse * 0.70);
+    float platformAmbientVisibility = mix(
+        1.0,
+        mix(0.44, 1.0, shadowVisibility),
+        platformMask);
+    ambientDiffuse *= platformAmbientVisibility;
     vec3 ambientSpecular =
         environmentSpecular * fresnel * mix(0.70, 0.20, roughness);
     ambientSpecular +=
@@ -153,8 +209,10 @@ void main() {
     vec3 directDiffuse =
         diffuseColor
         * (
-            stylizedDiffuse * diffuseScale * vec3(1.04, 0.98, 0.94)
-            + fillDiffuse * 0.13 * vec3(0.58, 0.76, 1.0));
+            stylizedDiffuse * diffuseScale * keyColor
+                * camera.showcaseParameters.y
+                * keyVisibility
+            + fillDiffuse * camera.showcaseParameters.z * fillColor);
     float shadowWeight = (1.0 - diffuseBand) * bandEnabled;
     vec3 lamShadowTint = mix(
         vec3(1.0),
@@ -167,13 +225,14 @@ void main() {
     vec3 tintedDiffuse =
         (ambientDiffuse + directDiffuse) * lamShadowTint * aoShadowTint;
     vec3 directSpecular =
-        f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness);
+        f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
+        * keyVisibility;
     float rim = pow(1.0 - normalDotView, 3.2)
         * smoothstep(-0.25, 0.65, dot(shadedNormal, -fillDirection));
     vec3 rimLighting =
-        mix(vec3(0.20, 0.34, 0.52), baseColor.rgb, 0.22)
+        mix(rimColor, baseColor.rgb, 0.22)
         * rim
-        * 0.12
+        * camera.showcaseParameters.w
         * bandEnabled
         * (1.0 - platformMask);
     vec3 hairHighlightNormal = normalize(
@@ -208,6 +267,7 @@ void main() {
         * max(diffuse, 0.18)
         * material.hairParameters.y
         * 0.48
+        * keyVisibility
         * hairActive
         * bandEnabled;
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
@@ -261,4 +321,13 @@ void main() {
             + matcapAccent
             + emissive,
         outputAlpha);
+    float innerOutlineParticipation =
+        (1.0 - platformMask)
+        * mix(
+            1.0,
+            0.22,
+            max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
+    outputNormal = vec4(
+        geometricNormal * 0.5 + 0.5,
+        innerOutlineParticipation);
 }

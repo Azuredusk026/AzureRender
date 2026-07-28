@@ -40,6 +40,10 @@ compile_shader("${SHADER_SOURCE_DIR}/outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/background.vert")
 compile_shader("${SHADER_SOURCE_DIR}/background.frag")
+compile_shader("${SHADER_SOURCE_DIR}/shadow.vert")
+compile_shader("${SHADER_SOURCE_DIR}/shadow.frag")
+compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
+compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 add_custom_target(MyVulkanAppShaders ALL DEPENDS ${COMPILED_SHADERS})
 
 add_executable(
