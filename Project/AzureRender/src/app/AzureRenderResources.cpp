@@ -1,0 +1,517 @@
+#include "AzureRenderApp.hpp"
+#include "AzureRenderInternal.hpp"
+
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <cstring>
+#include <vector>
+
+using namespace azurerender::internal;
+
+void AzureRenderApp::createImageViews() {
+    swapchainImageViews_.resize(swapchainImages_.size());
+    for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
+        createInfo.image = swapchainImages_[index];
+        createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        createInfo.format = swapchainFormat_;
+        createInfo.components = {
+            VK_COMPONENT_SWIZZLE_IDENTITY,
+            VK_COMPONENT_SWIZZLE_IDENTITY,
+            VK_COMPONENT_SWIZZLE_IDENTITY,
+            VK_COMPONENT_SWIZZLE_IDENTITY,
+        };
+        createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        createInfo.subresourceRange.levelCount = 1;
+        createInfo.subresourceRange.layerCount = 1;
+
+        vkCheck(
+            vkCreateImageView(device_, &createInfo, nullptr, &swapchainImageViews_[index]),
+            "vkCreateImageView");
+    }
+}
+
+void AzureRenderApp::createSceneColorResources() {
+    sceneColorImages_.resize(swapchainImages_.size());
+    sceneColorImageMemories_.resize(swapchainImages_.size());
+    sceneColorImageViews_.resize(swapchainImages_.size());
+
+    for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        createImage(
+            swapchainExtent_.width,
+            swapchainExtent_.height,
+            kHdrSceneColorFormat,
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+            sceneColorImages_[index],
+            sceneColorImageMemories_[index]);
+        sceneColorImageViews_[index] = createImageView(
+            sceneColorImages_[index],
+            kHdrSceneColorFormat,
+            VK_IMAGE_ASPECT_COLOR_BIT);
+    }
+}
+
+void AzureRenderApp::createDepthResources() {
+    depthFormat_ = findDepthFormat();
+    depthImages_.resize(swapchainImages_.size());
+    depthImageMemories_.resize(swapchainImages_.size());
+    depthImageViews_.resize(swapchainImages_.size());
+
+    for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        createImage(
+            swapchainExtent_.width,
+            swapchainExtent_.height,
+            depthFormat_,
+            VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+                | VK_IMAGE_USAGE_SAMPLED_BIT,
+            depthImages_[index],
+            depthImageMemories_[index]);
+        depthImageViews_[index] = createImageView(
+            depthImages_[index], depthFormat_, VK_IMAGE_ASPECT_DEPTH_BIT);
+    }
+}
+
+void AzureRenderApp::createNormalResources() {
+    normalImages_.resize(swapchainImages_.size());
+    normalImageMemories_.resize(swapchainImages_.size());
+    normalImageViews_.resize(swapchainImages_.size());
+    for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        createImage(
+            swapchainExtent_.width,
+            swapchainExtent_.height,
+            normalFormat_,
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
+                | VK_IMAGE_USAGE_SAMPLED_BIT,
+            normalImages_[index],
+            normalImageMemories_[index]);
+        normalImageViews_[index] = createImageView(
+            normalImages_[index],
+            normalFormat_,
+            VK_IMAGE_ASPECT_COLOR_BIT);
+    }
+}
+
+void AzureRenderApp::createShadowResources() {
+    shadowFormat_ = findDepthFormat();
+    createImage(
+        kShadowMapSize,
+        kShadowMapSize,
+        shadowFormat_,
+        VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
+            | VK_IMAGE_USAGE_SAMPLED_BIT,
+        shadowImage_,
+        shadowImageMemory_);
+    shadowImageView_ = createImageView(
+        shadowImage_,
+        shadowFormat_,
+        VK_IMAGE_ASPECT_DEPTH_BIT);
+
+    VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
+    samplerInfo.magFilter = VK_FILTER_LINEAR;
+    samplerInfo.minFilter = VK_FILTER_LINEAR;
+    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
+    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.borderColor = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE;
+    samplerInfo.maxLod = 1.0F;
+    vkCheck(
+        vkCreateSampler(device_, &samplerInfo, nullptr, &shadowSampler_),
+        "vkCreateSampler(shadow)");
+
+    VkAttachmentDescription depthAttachment{};
+    depthAttachment.format = shadowFormat_;
+    depthAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
+    depthAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    depthAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+    depthAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    depthAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    depthAttachment.finalLayout =
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+
+    VkAttachmentReference depthReference{};
+    depthReference.attachment = 0;
+    depthReference.layout =
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+    VkSubpassDescription subpass{};
+    subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+    subpass.pDepthStencilAttachment = &depthReference;
+
+    std::array<VkSubpassDependency, 2> dependencies{};
+    dependencies[0].srcSubpass = VK_SUBPASS_EXTERNAL;
+    dependencies[0].dstSubpass = 0;
+    dependencies[0].srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    dependencies[0].dstStageMask =
+        VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
+    dependencies[0].srcAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    dependencies[0].dstAccessMask =
+        VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    dependencies[0].dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
+    dependencies[1].srcSubpass = 0;
+    dependencies[1].dstSubpass = VK_SUBPASS_EXTERNAL;
+    dependencies[1].srcStageMask =
+        VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    dependencies[1].dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    dependencies[1].srcAccessMask =
+        VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    dependencies[1].dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    dependencies[1].dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
+
+    VkRenderPassCreateInfo renderPassInfo{
+        VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
+    renderPassInfo.attachmentCount = 1;
+    renderPassInfo.pAttachments = &depthAttachment;
+    renderPassInfo.subpassCount = 1;
+    renderPassInfo.pSubpasses = &subpass;
+    renderPassInfo.dependencyCount =
+        static_cast<std::uint32_t>(dependencies.size());
+    renderPassInfo.pDependencies = dependencies.data();
+    vkCheck(
+        vkCreateRenderPass(
+            device_,
+            &renderPassInfo,
+            nullptr,
+            &shadowRenderPass_),
+        "vkCreateRenderPass(shadow)");
+
+    VkFramebufferCreateInfo framebufferInfo{
+        VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
+    framebufferInfo.renderPass = shadowRenderPass_;
+    framebufferInfo.attachmentCount = 1;
+    framebufferInfo.pAttachments = &shadowImageView_;
+    framebufferInfo.width = kShadowMapSize;
+    framebufferInfo.height = kShadowMapSize;
+    framebufferInfo.layers = 1;
+    vkCheck(
+        vkCreateFramebuffer(
+            device_,
+            &framebufferInfo,
+            nullptr,
+            &shadowFramebuffer_),
+        "vkCreateFramebuffer(shadow)");
+}
+
+
+
+void AzureRenderApp::createVertexBuffer() {
+    const VkDeviceSize size = sizeof(AssetVertex) * asset_.vertices.size();
+
+    VkBuffer stagingBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
+    createBuffer(
+        size,
+        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+        stagingBuffer,
+        stagingMemory);
+
+    void* mapped = nullptr;
+    vkCheck(vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped), "vkMapMemory(vertex)");
+    std::memcpy(mapped, asset_.vertices.data(), static_cast<std::size_t>(size));
+    vkUnmapMemory(device_, stagingMemory);
+
+    createBuffer(
+        size,
+        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+        vertexBuffer_,
+        vertexBufferMemory_);
+    copyBuffer(stagingBuffer, vertexBuffer_, size);
+    vkDestroyBuffer(device_, stagingBuffer, nullptr);
+    vkFreeMemory(device_, stagingMemory, nullptr);
+}
+
+void AzureRenderApp::createIndexBuffer() {
+    const VkDeviceSize size = sizeof(std::uint32_t) * asset_.indices.size();
+
+    VkBuffer stagingBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
+    createBuffer(
+        size,
+        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+        stagingBuffer,
+        stagingMemory);
+
+    void* mapped = nullptr;
+    vkCheck(vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped), "vkMapMemory(index)");
+    std::memcpy(mapped, asset_.indices.data(), static_cast<std::size_t>(size));
+    vkUnmapMemory(device_, stagingMemory);
+
+    createBuffer(
+        size,
+        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+        indexBuffer_,
+        indexBufferMemory_);
+    copyBuffer(stagingBuffer, indexBuffer_, size);
+    vkDestroyBuffer(device_, stagingBuffer, nullptr);
+    vkFreeMemory(device_, stagingMemory, nullptr);
+}
+
+void AzureRenderApp::createTexture() {
+    const auto uploadTexture = [this](
+        const std::vector<std::uint8_t>& pixels,
+        const std::uint32_t width,
+        const std::uint32_t height,
+        const VkFormat format,
+        const bool clampVertical,
+        GpuTexture& texture) {
+        const VkDeviceSize size = pixels.size();
+        VkBuffer stagingBuffer = VK_NULL_HANDLE;
+        VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
+        createBuffer(
+            size,
+            VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            stagingBuffer,
+            stagingMemory);
+        void* mapped = nullptr;
+        vkCheck(
+            vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped),
+            "vkMapMemory(texture)");
+        std::memcpy(mapped, pixels.data(), static_cast<std::size_t>(size));
+        vkUnmapMemory(device_, stagingMemory);
+        createImage(
+            width,
+            height,
+            format,
+            VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+            texture.image,
+            texture.memory);
+        transitionImageLayout(
+            texture.image,
+            VK_IMAGE_LAYOUT_UNDEFINED,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+        copyBufferToImage(stagingBuffer, texture.image, width, height);
+        transitionImageLayout(
+            texture.image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        vkDestroyBuffer(device_, stagingBuffer, nullptr);
+        vkFreeMemory(device_, stagingMemory, nullptr);
+        texture.view = createImageView(
+            texture.image, format, VK_IMAGE_ASPECT_COLOR_BIT);
+        VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
+        samplerInfo.magFilter = VK_FILTER_LINEAR;
+        samplerInfo.minFilter = VK_FILTER_LINEAR;
+        samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        samplerInfo.addressModeV = clampVertical
+            ? VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
+            : VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
+        samplerInfo.maxLod = 0.0F;
+        vkCheck(
+            vkCreateSampler(device_, &samplerInfo, nullptr, &texture.sampler),
+            "vkCreateSampler");
+    };
+
+    gpuMaterials_.resize(asset_.materials.size());
+    for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
+        const AssetMaterial& material = asset_.materials[index];
+        uploadTexture(
+            material.baseColorPixels,
+            material.baseColorWidth,
+
+            material.baseColorHeight,
+            VK_FORMAT_R8G8B8A8_SRGB,
+            false,
+            gpuMaterials_[index].baseColor);
+        uploadTexture(
+            material.normalPixels,
+            material.normalWidth,
+            material.normalHeight,
+            VK_FORMAT_R8G8B8A8_UNORM,
+            false,
+            gpuMaterials_[index].normal);
+        uploadTexture(
+            material.metallicRoughnessPixels,
+            material.metallicRoughnessWidth,
+            material.metallicRoughnessHeight,
+            VK_FORMAT_R8G8B8A8_UNORM,
+            false,
+            gpuMaterials_[index].metallicRoughness);
+        uploadTexture(
+            material.specularEmissivePixels,
+            material.specularEmissiveWidth,
+            material.specularEmissiveHeight,
+            VK_FORMAT_R8G8B8A8_SRGB,
+            false,
+            gpuMaterials_[index].specularEmissive);
+        uploadTexture(
+            material.styleMaskPixels,
+            material.styleMaskWidth,
+            material.styleMaskHeight,
+            VK_FORMAT_R8G8B8A8_UNORM,
+            false,
+            gpuMaterials_[index].styleMask);
+        uploadTexture(
+            material.matcapPixels,
+            material.matcapWidth,
+            material.matcapHeight,
+            VK_FORMAT_R8G8B8A8_SRGB,
+            false,
+            gpuMaterials_[index].matcap);
+        uploadTexture(
+            material.hairDataPixels,
+            material.hairDataWidth,
+            material.hairDataHeight,
+            VK_FORMAT_R8G8B8A8_UNORM,
+            false,
+            gpuMaterials_[index].hairData);
+    }
+
+    constexpr std::uint32_t kEnvironmentWidth = 512;
+    constexpr std::uint32_t kEnvironmentHeight = 256;
+    constexpr float kPi = 3.14159265358979323846F;
+    std::vector<std::uint8_t> environmentPixels(
+        static_cast<std::size_t>(kEnvironmentWidth)
+        * kEnvironmentHeight
+        * 4);
+    const Vector3 sunDirection = {0.45F, 0.85F, 0.35F};
+    const float sunLength = std::sqrt(dot(sunDirection, sunDirection));
+    const Vector3 normalizedSun = {
+        sunDirection[0] / sunLength,
+        sunDirection[1] / sunLength,
+        sunDirection[2] / sunLength,
+    };
+    for (std::uint32_t y = 0; y < kEnvironmentHeight; ++y) {
+        const float v =
+            (static_cast<float>(y) + 0.5F)
+            / static_cast<float>(kEnvironmentHeight);
+        const float theta = v * kPi;
+        const float directionY = std::cos(theta);
+        const float ringRadius = std::sin(theta);
+        for (std::uint32_t x = 0; x < kEnvironmentWidth; ++x) {
+            const float u =
+                (static_cast<float>(x) + 0.5F)
+                / static_cast<float>(kEnvironmentWidth);
+            const float phi = (u - 0.5F) * 2.0F * kPi;
+            const Vector3 direction = {
+                ringRadius * std::cos(phi),
+                directionY,
+                ringRadius * std::sin(phi),
+            };
+            const float skyAmount = std::clamp(directionY * 0.5F + 0.5F, 0.0F, 1.0F);
+            const float horizon = std::exp(-std::abs(directionY) * 9.0F);
+            const float sun = std::pow(
+                std::max(dot(direction, normalizedSun), 0.0F),
+                320.0F);
+            const std::array<float, 3> ground = {0.055F, 0.075F, 0.090F};
+            const std::array<float, 3> zenith = {0.20F, 0.34F, 0.46F};
+            const std::array<float, 3> horizonColor = {0.38F, 0.43F, 0.46F};
+            const std::size_t pixel =
+                (static_cast<std::size_t>(y) * kEnvironmentWidth + x) * 4;
+            for (std::size_t channel = 0; channel < 3; ++channel) {
+                float color =
+                    ground[channel] * (1.0F - skyAmount)
+                    + zenith[channel] * skyAmount;
+                color = color * (1.0F - horizon * 0.55F)
+                    + horizonColor[channel] * horizon * 0.55F;
+                color += sun * (channel == 2 ? 0.70F : 1.0F);
+                environmentPixels[pixel + channel] =
+                    static_cast<std::uint8_t>(
+                        std::clamp(color, 0.0F, 1.0F) * 255.0F);
+            }
+            environmentPixels[pixel + 3] = 255;
+        }
+    }
+    uploadTexture(
+        environmentPixels,
+        kEnvironmentWidth,
+        kEnvironmentHeight,
+        VK_FORMAT_R8G8B8A8_UNORM,
+        true,
+        environmentTexture_);
+}
+
+void AzureRenderApp::createUniformBuffers() {
+    const VkDeviceSize size = sizeof(UniformBufferObject);
+    uniformBuffers_.resize(kMaxFramesInFlight);
+    uniformBufferMemories_.resize(kMaxFramesInFlight);
+    uniformBufferMapped_.resize(kMaxFramesInFlight);
+
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        createBuffer(
+
+            size,
+            VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            uniformBuffers_[index],
+            uniformBufferMemories_[index]);
+        vkCheck(
+            vkMapMemory(
+                device_,
+                uniformBufferMemories_[index],
+                0,
+                size,
+                0,
+                &uniformBufferMapped_[index]),
+            "vkMapMemory(uniform)");
+    }
+}
+
+void AzureRenderApp::createJointBuffers() {
+    if (asset_.jointMatrices.empty()) {
+        throw std::runtime_error("Asset has no joint-matrix fallback");
+    }
+    const VkDeviceSize size =
+        sizeof(asset_.jointMatrices.front()) * asset_.jointMatrices.size();
+    jointBuffers_.resize(kMaxFramesInFlight);
+    jointBufferMemories_.resize(kMaxFramesInFlight);
+    jointBufferMapped_.resize(kMaxFramesInFlight);
+
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        createBuffer(
+            size,
+            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            jointBuffers_[index],
+            jointBufferMemories_[index]);
+        vkCheck(
+            vkMapMemory(
+                device_,
+                jointBufferMemories_[index],
+                0,
+                size,
+                0,
+                &jointBufferMapped_[index]),
+            "vkMapMemory(joints)");
+        std::memcpy(
+            jointBufferMapped_[index],
+            asset_.jointMatrices.data(),
+            static_cast<std::size_t>(size));
+    }
+}
+
+void AzureRenderApp::createHudBuffers() {
+    const VkDeviceSize size =
+        sizeof(HudVertex) * kMaxHudVertices;
+    hudVertexBuffers_.resize(kMaxFramesInFlight);
+    hudVertexBufferMemories_.resize(kMaxFramesInFlight);
+    hudVertexBufferMapped_.resize(kMaxFramesInFlight);
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        createBuffer(
+            size,
+            VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            hudVertexBuffers_[index],
+            hudVertexBufferMemories_[index]);
+        vkCheck(
+            vkMapMemory(
+                device_,
+                hudVertexBufferMemories_[index],
+                0,
+                size,
+                0,
+                &hudVertexBufferMapped_[index]),
+            "vkMapMemory(HUD)");
+    }
+}

@@ -1,0 +1,73 @@
+{
+  "material": "/Game/ZMD/MaterialLibrary/M_Common_Cloth.M_Common_Cloth",
+  "roots": {
+    "MP_BASE_COLOR": {
+      "expression": "MaterialExpressionEyeAdaptationInverse_0",
+      "output": "EyeAdaptationInverse"
+    },
+    "MP_METALLIC": {
+      "expression": "MaterialExpressionVectorParameter_5",
+      "output": "Metallic"
+    },
+    "MP_SPECULAR": {
+      "expression": "MaterialExpressionVectorParameter_5",
+      "output": "Specular"
+    },
+    "MP_ROUGHNESS": {
+      "expression": "MaterialExpressionReroute_8",
+      "output": ""
+    },
+    "MP_EMISSIVE_COLOR": {
+      "expression": "MaterialExpressionEyeAdaptationInverse_1",
+      "output": "EyeAdaptationInverse"
+    },
+    "MP_NORMAL": {
+      "expression": "MaterialExpressionNamedRerouteUsage_2",
+      "output": ""
+    },
+    "MP_OPACITY": {
+      "expression": "MaterialExpressionReroute_6",
+      "output": ""
+    },
+    "MP_OPACITY_MASK": {
+      "expression": "MaterialExpressionReroute_6",
+      "output": ""
+    }
+  },
+  "expression_count": 6,
+  "expressions": [
+    {
+      "name": "MaterialExpressionReroute_6",
+      "class": "MaterialExpressionReroute",
+      "desc": ""
+    },
+    {
+      "name": "MaterialExpressionNamedRerouteUsage_2",
+      "class": "MaterialExpressionNamedRerouteUsage",
+      "desc": ""
+    },
+    {
+      "name": "MaterialExpressionEyeAdaptationInverse_1",
+      "class": "MaterialExpressionEyeAdaptationInverse",
+      "desc": ""
+    },
+    {
+      "name": "MaterialExpressionReroute_8",
+      "class": "MaterialExpressionReroute",
+      "desc": ""
+    },
+    {
+      "name": "MaterialExpressionVectorParameter_5",
+      "class": "MaterialExpressionVectorParameter",
+      "desc": "",
+      "parameter_name": "MSRE",
+      "default_value": "<Struct 'LinearColor' (0x000001A488DD4A78) {r: 0.000000, g: 1.000000, b: 1.000000, a: 0.000000}>",
+      "channel_names": "<Struct 'ParameterChannelNames' (0x000001A488DD4A90) {}>"
+    },
+    {
+      "name": "MaterialExpressionEyeAdaptationInverse_0",
+      "class": "MaterialExpressionEyeAdaptationInverse",
+      "desc": ""
+    }
+  ]
+}
