@@ -27,6 +27,11 @@ struct AzureRenderOptions {
     bool innerOutlineEnabled = true;
     bool hudEnabled = false;
     bool technicalSequence = false;
+    std::string qaCamera;
+    std::string qaLight;
+    std::string qaEffect;
+    std::string qaEffectState;
+    std::string qaIsolation;
 };
 
 class AzureRenderApp final {
@@ -74,6 +79,7 @@ private:
         std::array<float, 4> cameraPosition{};
         std::array<float, 4> renderingParameters{};
         std::array<float, 4> showcaseParameters{};
+        std::array<float, 4> qaParameters{};
     };
 
     struct GpuTexture {
@@ -102,8 +108,14 @@ private:
         std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};
         std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
         std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
+        std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
+        std::array<float, 4> featureParameters{1.0F, 1.0F, 1.0F, 1.0F};
+        std::uint32_t materialClass = 0;
+        std::uint32_t materialFeatures = 0;
+        std::uint32_t materialProfileVersion = 1;
+        std::uint32_t padding = 0;
     };
-    static_assert(sizeof(MaterialPushConstants) == 80);
+    static_assert(sizeof(MaterialPushConstants) == 128);
 
     struct PostProcessPushConstants {
         float strength = 0.40F;
@@ -235,8 +247,18 @@ private:
     float diffuseBandThreshold_ = 0.40F;
     std::uint32_t showcasePreset_ = 0;
     bool innerOutlineEnabled_ = true;
+    bool silhouetteOutlineEnabled_ = true;
     std::uint32_t diagnosticView_ = 0;
     bool hudEnabled_ = false;
+    bool qaHarnessEnabled_ = false;
+    std::string qaCameraName_ = "none";
+    std::string qaLightName_ = "current";
+    std::string qaEffectName_ = "none";
+    std::string qaEffectStateName_ = "enabled";
+    std::string qaIsolationName_ = "beauty";
+    std::uint32_t qaIsolationMode_ = 0;
+    std::uint32_t qaEffectMode_ = 0;
+    bool qaEffectEnabled_ = true;
     bool screenshotRequested_ = false;
     bool fixedSimulation_ = false;
     bool fixedSimulationStarted_ = false;
@@ -254,6 +276,7 @@ private:
     void initVulkan(const std::string& assetPath);
     void mainLoop(std::uint64_t smokeFrameLimit);
     void activatePortfolioOrbit();
+    void configureQaHarness();
     void updateTechnicalSequenceState(std::uint64_t frameIndex);
     void prepareCaptureDirectory();
     void writeCaptureManifest(std::uint64_t renderedFrames) const;

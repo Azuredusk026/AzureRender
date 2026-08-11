@@ -3,7 +3,7 @@
 > 最后核对：2026-08-02（Asia/Singapore）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-0 固定视觉 QA Harness**
+> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-2 真正的 Toon Ramp 与 Shadow 层级**
 
 ## 0. 长期路线入口
 
@@ -12,9 +12,11 @@
 Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级高于本文中的历史
 “下一节点”记录。
 
-当前执行顺序已冻结为：
+CQ-0 与 CQ-1 已于 2026-08-02 通过。当前执行顺序为：
 
-`CQ-0 Visual QA -> CQ-1 Material Classes/Data -> CQ-2 Toon Ramp -> CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
+`CQ-2 Toon Ramp -> CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
+
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。恢复开发时从 CQ-2 的 Ramp LUT 数据格式与采样路径开始，不提前实现 Face SDF、最终 Hair KK 或 Bloom。
 
 在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
 Pending/Deferred，不能成为主要开发节点。

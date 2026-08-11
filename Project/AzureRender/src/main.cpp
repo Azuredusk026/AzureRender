@@ -81,6 +81,21 @@ int main(const int argumentCount, char** argumentValues) {
                 options.technicalSequence = true;
                 options.portfolioMode = true;
                 options.gpuTimingEnabled = true;
+            } else if (argument == "--qa-camera"
+                       && index + 1 < argumentCount) {
+                options.qaCamera = argumentValues[++index];
+            } else if (argument == "--qa-light"
+                       && index + 1 < argumentCount) {
+                options.qaLight = argumentValues[++index];
+            } else if (argument == "--qa-effect"
+                       && index + 1 < argumentCount) {
+                options.qaEffect = argumentValues[++index];
+            } else if (argument == "--qa-effect-state"
+                       && index + 1 < argumentCount) {
+                options.qaEffectState = argumentValues[++index];
+            } else if (argument == "--qa-isolation"
+                       && index + 1 < argumentCount) {
+                options.qaIsolation = argumentValues[++index];
             } else {
                 throw std::invalid_argument(
                     "Usage: AzureRender.exe [--asset <gltf/glb path>] "
@@ -90,6 +105,16 @@ int main(const int argumentCount, char** argumentValues) {
                     "[--diagnostic-view <beauty|normal|outline|shadow>] "
                     "[--no-stylized] [--no-inner-outline] [--hud] "
                     "[--technical-sequence] "
+                    "[--qa-camera <full-body-front|face-front|"
+                    "face-three-quarter|back-detail|lighting-sweep>] "
+                    "[--qa-light <neutral-material|stylized-key|"
+                    "specular-rim|rear-emissive>] "
+                    "[--qa-effect <toon|shadow|hair-kk|rim|specular|"
+                    "emissive|outline> --qa-effect-state "
+                    "<enabled|disabled|isolation>] "
+                    "[--qa-isolation <beauty|albedo|world-normal|depth|"
+                    "diffuse-band|shadow-visibility|hair-kk|rim|"
+                    "specular|emissive|outline|shadow-map|material-id>] "
                     "[--capture-dir <empty directory> "
                     "--capture-frames <positive integer> "
                     "--capture-fps <1-240>]");
@@ -116,6 +141,20 @@ int main(const int argumentCount, char** argumentValues) {
             && options.captureFrameLimit % 5 != 0) {
             throw std::invalid_argument(
                 "--technical-sequence capture frames must be divisible by 5");
+        }
+        if (!options.qaEffectState.empty() && options.qaEffect.empty()) {
+            throw std::invalid_argument(
+                "--qa-effect-state requires --qa-effect");
+        }
+        const bool qaRequested = !options.qaCamera.empty()
+            || !options.qaLight.empty()
+            || !options.qaEffect.empty()
+            || !options.qaEffectState.empty()
+            || !options.qaIsolation.empty();
+        if (qaRequested && options.technicalSequence) {
+            throw std::invalid_argument(
+                "CQ-0 --qa-* options cannot be combined with "
+                "--technical-sequence");
         }
 
         AzureRenderApp application;

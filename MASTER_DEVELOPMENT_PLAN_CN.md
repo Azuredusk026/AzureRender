@@ -246,6 +246,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.1 CQ-0 固定视觉 QA Harness
 
+**状态：Complete（2026-08-02）。** 已形成 20 个固定 Camera/Light Baseline、12 个 Isolation、21 个 Enabled/Disabled/Isolation A/B Case，以及 Current/Reference/Isolation 对照表。Face SDF 与 Material ID 因对应系统尚未实现，分别在 CQ-3 与 CQ-1 接入，不伪造输出。
+
 **目的：** 从“代码存在”改为“画面证据通过”。
 
 必须实现：
@@ -261,6 +263,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.2 CQ-1 材质分类与参数系统
 
+**状态：Complete（2026-08-02）。** Material Class/Data v1 已覆盖显式 glTF Profile、Feature Flags、两组材质参数、Schema、公共 Generic Fallback、Material ID、HUD 与 Manifest Inventory。
+
 **任务：**
 
 - 为每个 Primitive 建立明确 Material Class，不再只依赖通用 PBR Factor；
@@ -272,6 +276,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 **退出条件：** Face/Hair/Fabric/Metal 在相同灯光下使用不同、可解释的着色配置；修改一类材质不会无意改变其他材质。
 
 ### 6.3 CQ-2 真正的 Toon Ramp 与 Shadow 层级
+
+**状态：Active。** 使用 CQ-1 的 Class/参数所有权接入可编辑 Ramp LUT；禁止退回全局 `smoothstep` 或材质序号硬编码。
 
 **任务：**
 
@@ -704,9 +710,9 @@ data/
 
 **M1 — Character Rendering Quality Foundation**
 
-### 当前第一个 Work Package
+### 当前 Work Package
 
-**CQ-0 — 固定视觉 QA Harness**
+**CQ-2 — 真正的 Toon Ramp 与 Shadow 层级**
 
 ### CQ-0 之后的固定顺序
 
@@ -725,7 +731,7 @@ CQ-0 Visual QA
 
 ### 下一次开发的明确目标
 
-建立 CQ-0 的确定性角色美术 QA：固定五类机位、四类灯光环境、主要效果 Isolation View、A/B Capture 与 Manifest。完成后，所有后续角色 Shader 节点都通过相同测试框架验收。
+建立 CQ-2 Ramp/Shadow v1：为 Skin/Face、Hair、Fabric、Metal/Eye 准备独立、可编辑的 Ramp LUT，分离 Direct Diffuse、Ambient、Shadow Map Visibility、AO 与 Shadow Tint，并用固定 Lighting Sweep 检查明暗边界。该节点不实现 Face SDF、最终 Hair KK、Bloom 或最终调色。
 
 ---
 

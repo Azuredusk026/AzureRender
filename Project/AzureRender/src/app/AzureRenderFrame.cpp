@@ -246,15 +246,23 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
         stylizedLightingEnabled_ ? diffuseBandThreshold_ : -1.0F,
         0.12F,
     };
-    constexpr std::array<std::array<float, 4>, 3> kShowcasePresets = {{
+    constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.00F, 0.13F, 0.12F},
         {1.0F, 0.92F, 0.16F, 0.16F},
         {2.0F, 0.95F, 0.08F, 0.05F},
+        {3.0F, 0.48F, 0.04F, 0.85F},
+        {4.0F, 0.18F, 0.02F, 0.08F},
     }};
     uniform.showcaseParameters =
         kShowcasePresets[std::min<std::size_t>(
             showcasePreset_,
             kShowcasePresets.size() - 1)];
+    uniform.qaParameters = {
+        static_cast<float>(qaIsolationMode_),
+        static_cast<float>(qaEffectMode_),
+        qaEffectEnabled_ ? 1.0F : 0.0F,
+        qaHarnessEnabled_ ? 1.0F : 0.0F,
+    };
     std::memcpy(
         uniformBufferMapped_[frameIndex],
         &uniform,
@@ -481,11 +489,12 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
         }
         return value;
     };
-    constexpr std::array<const char*, 4> kDiagnosticNames = {
+    constexpr std::array<const char*, 5> kDiagnosticNames = {
         "BEAUTY",
         "WORLD NORMAL",
         "INTERNAL OUTLINE",
         "SHADOW MAP",
+        "DEPTH",
     };
     std::string animationName = "NONE";
     float animationDuration = 0.0F;
@@ -506,6 +515,21 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
     }
 
     std::ostringstream text;
+    std::array<std::size_t, 10> materialClassCounts{};
+    const AssetMaterial* faceProfile = nullptr;
+    const AssetMaterial* hairProfile = nullptr;
+    for (const AssetMaterial& material : asset_.materials) {
+        const std::size_t classIndex = static_cast<std::size_t>(
+            material.materialClass);
+        if (classIndex < materialClassCounts.size()) {
+            ++materialClassCounts[classIndex];
+        }
+        if (material.materialClass == AssetMaterialClass::Face) {
+            faceProfile = &material;
+        } else if (material.materialClass == AssetMaterialClass::Hair) {
+            hairProfile = &material;
+        }
+    }
     text << "AZURERENDER VULKAN RENDERER\n"
          << "GPU  : " << printable(selectedGpuName_, 46) << '\n'
          << "FRAME: " << swapchainExtent_.width << 'X'
@@ -518,6 +542,21 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << std::fixed << std::setprecision(2)
          << animationPlayhead << '/' << animationDuration << " S  "
          << (animationPlaying_ ? "PLAYING" : "PAUSED") << '\n';
+    text << "MAT V1: SKIN " << materialClassCounts[1]
+         << " FACE " << materialClassCounts[2]
+         << " HAIR " << materialClassCounts[3]
+         << " FABRIC " << materialClassCounts[4]
+         << " METAL " << materialClassCounts[5]
+         << " EYE " << materialClassCounts[6]
+         << " OVERLAY " << materialClassCounts[7] << '\n';
+    if (faceProfile != nullptr && hairProfile != nullptr) {
+        text << "MAT PARAM: FACE T" << faceProfile->styleParameters[0]
+             << " S" << faceProfile->styleParameters[2]
+             << " R" << faceProfile->styleParameters[3]
+             << " | HAIR T" << hairProfile->styleParameters[0]
+             << " S" << hairProfile->styleParameters[2]
+             << " R" << hairProfile->styleParameters[3] << '\n';
+    }
     if (gpuTiming_.samples > 0) {
         const double count = static_cast<double>(gpuTiming_.samples);
         text << "GPU MS: SHADOW "
@@ -656,6 +695,12 @@ void AzureRenderApp::recordCommandBuffer(
             material.lamShadowColor,
             material.matcapColor,
             material.hairParameters,
+            material.styleParameters,
+            material.featureParameters,
+            static_cast<std::uint32_t>(material.materialClass),
+            material.materialFeatures,
+            material.materialProfileVersion,
+            0,
         };
         vkCmdPushConstants(
             commandBuffer,
@@ -731,34 +776,36 @@ void AzureRenderApp::recordCommandBuffer(
     const VkDeviceSize offsets[] = {0};
     vkCmdBindVertexBuffers(commandBuffer, 0, 1, &vertexBuffer_, offsets);
     vkCmdBindIndexBuffer(commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
-    vkCmdBindPipeline(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        outlinePipeline_);
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        if (asset_.materials[primitive.materialIndex].alphaMode
-            == AssetAlphaMode::Blend) {
-            continue;
-        }
-        const std::size_t descriptorIndex =
-            currentFrame_ * asset_.materials.size()
-            + primitive.materialIndex;
-        vkCmdBindDescriptorSets(
+    if (silhouetteOutlineEnabled_) {
+        vkCmdBindPipeline(
             commandBuffer,
             VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[descriptorIndex],
-            0,
-            nullptr);
-        vkCmdDrawIndexed(
-            commandBuffer,
-            primitive.indexCount,
-            1,
-            primitive.firstIndex,
-            0,
-            0);
+            outlinePipeline_);
+        for (const AssetPrimitive& primitive : asset_.primitives) {
+            if (asset_.materials[primitive.materialIndex].alphaMode
+                == AssetAlphaMode::Blend) {
+                continue;
+            }
+            const std::size_t descriptorIndex =
+                currentFrame_ * asset_.materials.size()
+                + primitive.materialIndex;
+            vkCmdBindDescriptorSets(
+                commandBuffer,
+                VK_PIPELINE_BIND_POINT_GRAPHICS,
+                pipelineLayout_,
+                0,
+                1,
+                &descriptorSets_[descriptorIndex],
+                0,
+                nullptr);
+            vkCmdDrawIndexed(
+                commandBuffer,
+                primitive.indexCount,
+                1,
+                primitive.firstIndex,
+                0,
+                0);
+        }
     }
     const auto drawPrimitive = [&](const AssetPrimitive& primitive) {
         const AssetMaterial& material = asset_.materials[primitive.materialIndex];
@@ -787,6 +834,12 @@ void AzureRenderApp::recordCommandBuffer(
             material.lamShadowColor,
             material.matcapColor,
             material.hairParameters,
+            material.styleParameters,
+            material.featureParameters,
+            static_cast<std::uint32_t>(material.materialClass),
+            material.materialFeatures,
+            material.materialProfileVersion,
+            0,
         };
         vkCmdPushConstants(
             commandBuffer,

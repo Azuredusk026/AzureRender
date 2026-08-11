@@ -126,8 +126,78 @@ let boundAoColors = 0;
 let boundLamShadowColors = 0;
 let boundMatcaps = 0;
 let boundHairData = 0;
+let boundMaterialProfiles = 0;
+
+function buildMaterialProfile(materialName, parameters = {}) {
+  const name = materialName.toLowerCase();
+  let materialClass = "generic";
+  let features = ["neutral-fallback"];
+  if (name.includes("hairshadow") || name.includes("eyeshadow") || name.includes("brow")) {
+    materialClass = "overlay";
+    features = ["overlay"];
+  } else if (name.includes("face")) {
+    materialClass = "face";
+    features = ["stylized-shadow", "face-sdf-eligible"];
+  } else if (name.includes("iris") || name.includes("eye")) {
+    materialClass = "eye";
+    features = ["stylized-shadow"];
+  } else if (name.includes("hair")) {
+    materialClass = "hair";
+    features = ["stylized-shadow", "hair-anisotropy"];
+  } else if (name.includes("body") || name.includes("skin")) {
+    materialClass = "skin";
+    features = ["stylized-shadow"];
+  } else if (name.includes("cloth") || name.includes("fabric")) {
+    materialClass = "fabric";
+    features = ["stylized-shadow"];
+  } else if (name.includes("metal")) {
+    materialClass = "metal";
+    features = ["stylized-shadow"];
+  }
+  if (parameters._E && !features.includes("emissive-mask")) {
+    features.push("emissive-mask");
+  }
+  const styleParameters = {
+    generic: [1.0, 1.0, 1.0, 1.0],
+    skin: [0.9, 0.8, 0.35, 0.35],
+    face: [0.85, 0.75, 0.15, 0.25],
+    hair: [1.0, 1.0, 0.4, 0.65],
+    fabric: [1.0, 1.0, 0.6, 0.5],
+    metal: [0.85, 0.75, 1.35, 0.75],
+    eye: [0.65, 0.5, 0.65, 0.25],
+    overlay: [0.0, 0.0, 0.0, 0.0],
+    emissive: [0.5, 0.0, 0.0, 0.0],
+    showcase: [1.0, 1.0, 1.0, 1.0],
+  }[materialClass];
+  const featureParameters = {
+    generic: [1.0, 0.0, 1.0, 0.0],
+    skin: [0.75, 0.0, 1.0, 0.0],
+    face: [0.65, 0.0, 1.0, 1.0],
+    hair: [0.85, 1.0, 1.0, 0.0],
+    fabric: [1.0, 0.0, 1.0, 0.0],
+    metal: [1.0, 0.0, 1.0, 0.0],
+    eye: [0.5, 0.0, 1.0, 0.0],
+    overlay: [0.0, 0.0, 0.0, 0.0],
+    emissive: [0.5, 0.0, 1.5, 0.0],
+    showcase: [1.0, 0.0, 1.0, 0.0],
+  }[materialClass];
+  return {
+    schemaVersion: 1,
+    class: materialClass,
+    features,
+    styleParameters,
+    featureParameters,
+  };
+}
+
 for (const material of json.materials ?? []) {
   const parameters = manifest.material_textures[material.name];
+  material.extras ??= {};
+  material.extras.azureRenderMaterial = buildMaterialProfile(
+    material.name,
+    parameters
+  );
+  boundMaterialProfiles += 1;
   if (!parameters) {
     continue;
   }
@@ -159,7 +229,6 @@ for (const material of json.materials ?? []) {
   const lamShadowColor = toValidShadowColor(
     vectorParameters.Lam_Shadow_Color ?? vectorParameters.Lam_ShadowColor
   );
-  material.extras ??= {};
   if (aoColor) {
     material.extras.afterglowAoColor = aoColor;
     boundAoColors += 1;
@@ -372,5 +441,6 @@ console.log(
     `${boundStyleMasks} style-mask materials, ` +
     `${boundAoColors} AO colors, ${boundLamShadowColors} Lam shadow colors, ` +
     `${boundMatcaps} matcaps, ${boundHairData} hair-data materials, ` +
+    `${boundMaterialProfiles} material profiles, ` +
     `${textureIndices.size} unique embedded textures)`
 );

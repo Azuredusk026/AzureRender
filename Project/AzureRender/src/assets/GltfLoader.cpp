@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cctype>
 #include <cmath>
 #include <cstring>
 #include <filesystem>
@@ -19,6 +20,209 @@
 namespace {
 
 using Matrix4 = std::array<double, 16>;
+
+std::array<float, 4> readMaterialVectorExtra(
+    const tinygltf::Value& extras,
+    const std::string& key,
+    const std::array<float, 4>& fallback);
+
+AssetMaterialClass materialClassFromName(const std::string& value) {
+    std::string normalized = value;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (normalized == "skin") return AssetMaterialClass::Skin;
+    if (normalized == "face") return AssetMaterialClass::Face;
+    if (normalized == "hair") return AssetMaterialClass::Hair;
+    if (normalized == "fabric") return AssetMaterialClass::Fabric;
+    if (normalized == "metal") return AssetMaterialClass::Metal;
+    if (normalized == "eye") return AssetMaterialClass::Eye;
+    if (normalized == "overlay") return AssetMaterialClass::Overlay;
+    if (normalized == "emissive") return AssetMaterialClass::Emissive;
+    if (normalized == "showcase") return AssetMaterialClass::Showcase;
+    return AssetMaterialClass::Generic;
+}
+
+std::uint32_t defaultMaterialFeatures(const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Hair:
+            return MaterialFeatureStylizedShadow
+                | MaterialFeatureHairAnisotropy;
+        case AssetMaterialClass::Face:
+            return MaterialFeatureStylizedShadow
+                | MaterialFeatureFaceSdfEligible;
+        case AssetMaterialClass::Overlay:
+            return MaterialFeatureOverlay;
+        case AssetMaterialClass::Emissive:
+            return MaterialFeatureEmissiveMask;
+        case AssetMaterialClass::Showcase:
+            return 0;
+        case AssetMaterialClass::Generic:
+            return MaterialFeatureNeutralFallback;
+        default:
+            return MaterialFeatureStylizedShadow;
+    }
+}
+
+std::array<float, 4> defaultStyleParameters(
+    const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Skin: return {0.90F, 0.80F, 0.35F, 0.35F};
+        case AssetMaterialClass::Face: return {0.85F, 0.75F, 0.15F, 0.25F};
+        case AssetMaterialClass::Hair: return {1.00F, 1.00F, 0.40F, 0.65F};
+        case AssetMaterialClass::Fabric: return {1.00F, 1.00F, 0.60F, 0.50F};
+        case AssetMaterialClass::Metal: return {0.85F, 0.75F, 1.35F, 0.75F};
+        case AssetMaterialClass::Eye: return {0.65F, 0.50F, 0.65F, 0.25F};
+        case AssetMaterialClass::Overlay: return {0.00F, 0.00F, 0.00F, 0.00F};
+        case AssetMaterialClass::Emissive: return {0.50F, 0.00F, 0.00F, 0.00F};
+        default: return {1.00F, 1.00F, 1.00F, 1.00F};
+    }
+}
+
+std::array<float, 4> defaultFeatureParameters(
+    const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Skin: return {0.75F, 0.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Face: return {0.65F, 0.00F, 1.00F, 1.00F};
+        case AssetMaterialClass::Hair: return {0.85F, 1.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Eye: return {0.50F, 0.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Overlay: return {0.00F, 0.00F, 0.00F, 0.00F};
+        case AssetMaterialClass::Emissive: return {0.50F, 0.00F, 1.50F, 0.00F};
+        default: return {1.00F, 0.00F, 1.00F, 0.00F};
+    }
+}
+
+AssetMaterialClass inferLegacyMaterialClass(const std::string& name) {
+    std::string normalized = name;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (normalized.find("hairshadow") != std::string::npos
+        || normalized.find("eyeshadow") != std::string::npos
+        || normalized.find("brow") != std::string::npos) {
+        return AssetMaterialClass::Overlay;
+    }
+    if (normalized.find("face") != std::string::npos) {
+        return AssetMaterialClass::Face;
+    }
+    if (normalized.find("iris") != std::string::npos
+        || normalized.find("eye") != std::string::npos) {
+        return AssetMaterialClass::Eye;
+    }
+    if (normalized.find("hair") != std::string::npos) {
+        return AssetMaterialClass::Hair;
+    }
+    if (normalized.find("body") != std::string::npos
+        || normalized.find("skin") != std::string::npos) {
+        return AssetMaterialClass::Skin;
+    }
+    if (normalized.find("cloth") != std::string::npos
+        || normalized.find("fabric") != std::string::npos) {
+        return AssetMaterialClass::Fabric;
+    }
+    if (normalized.find("metal") != std::string::npos) {
+        return AssetMaterialClass::Metal;
+    }
+    return AssetMaterialClass::Generic;
+}
+
+std::uint32_t materialFeatureFromName(const std::string& value) {
+    if (value == "stylized-shadow") return MaterialFeatureStylizedShadow;
+    if (value == "hair-anisotropy") return MaterialFeatureHairAnisotropy;
+    if (value == "face-sdf-eligible") return MaterialFeatureFaceSdfEligible;
+    if (value == "emissive-mask") return MaterialFeatureEmissiveMask;
+    if (value == "overlay") return MaterialFeatureOverlay;
+    if (value == "neutral-fallback") return MaterialFeatureNeutralFallback;
+    return 0;
+}
+
+void loadMaterialProfile(
+    const tinygltf::Material& material,
+    AssetMaterial& result) {
+    result.name = material.name.empty() ? "UnnamedMaterial" : material.name;
+    result.materialClass = inferLegacyMaterialClass(result.name);
+    result.materialFeatures = defaultMaterialFeatures(result.materialClass);
+    if (!material.extras.IsObject()
+        || !material.extras.Has("azureRenderMaterial")) {
+        return;
+    }
+    const tinygltf::Value& profile =
+        material.extras.Get("azureRenderMaterial");
+    if (!profile.IsObject()) {
+        throw std::runtime_error(
+            "azureRenderMaterial must be an object for " + result.name);
+    }
+    if (!profile.Has("schemaVersion")
+        || !profile.Get("schemaVersion").IsNumber()
+        || static_cast<int>(
+            profile.Get("schemaVersion").GetNumberAsDouble()) != 1) {
+        throw std::runtime_error(
+            "Unsupported azureRenderMaterial schemaVersion for "
+            + result.name);
+    }
+    if (!profile.Has("class") || !profile.Get("class").IsString()) {
+        throw std::runtime_error(
+            "azureRenderMaterial.class is required for " + result.name);
+    }
+    result.materialProfileVersion = 1;
+    result.materialProfileExplicit = true;
+    const std::string className = profile.Get("class").Get<std::string>();
+    result.materialClass = materialClassFromName(className);
+    std::string normalizedClassName = className;
+    std::transform(
+        normalizedClassName.begin(),
+        normalizedClassName.end(),
+        normalizedClassName.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (result.materialClass == AssetMaterialClass::Generic
+        && normalizedClassName != "generic") {
+        throw std::runtime_error(
+            "Unknown azureRenderMaterial class '" + className
+            + "' for " + result.name);
+    }
+    result.materialFeatures = defaultMaterialFeatures(result.materialClass);
+    result.styleParameters = defaultStyleParameters(result.materialClass);
+    result.featureParameters = defaultFeatureParameters(result.materialClass);
+    result.styleParameters = readMaterialVectorExtra(
+        profile, "styleParameters", result.styleParameters);
+    result.featureParameters = readMaterialVectorExtra(
+        profile, "featureParameters", result.featureParameters);
+    if (profile.Has("features")) {
+        const tinygltf::Value& features = profile.Get("features");
+        if (!features.IsArray()) {
+            throw std::runtime_error(
+                "azureRenderMaterial.features must be an array for "
+                + result.name);
+        }
+        result.materialFeatures = 0;
+        for (std::size_t index = 0; index < features.ArrayLen(); ++index) {
+            const tinygltf::Value& feature = features.Get(index);
+            if (!feature.IsString()) {
+                throw std::runtime_error(
+                    "azureRenderMaterial feature must be a string for "
+                    + result.name);
+            }
+            const std::string featureName = feature.Get<std::string>();
+            const std::uint32_t flag = materialFeatureFromName(featureName);
+            if (flag == 0) {
+                throw std::runtime_error(
+                    "Unknown azureRenderMaterial feature '" + featureName
+                    + "' for " + result.name);
+            }
+            result.materialFeatures |= flag;
+        }
+    }
+}
 
 Matrix4 identityMatrix() {
     return {
@@ -527,6 +731,7 @@ AssetMaterial loadMaterial(
     int hairDataImage = -1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
+        loadMaterialProfile(*material, result);
         const auto& sourceFactor = material->pbrMetallicRoughness.baseColorFactor;
         if (sourceFactor.size() == 4) {
             std::copy(sourceFactor.begin(), sourceFactor.end(), factor.begin());
@@ -562,6 +767,9 @@ AssetMaterial loadMaterial(
                 material->emissiveFactor[1],
                 material->emissiveFactor[2],
             }));
+            if (result.emissiveStrength > 0.0F) {
+                result.materialFeatures |= MaterialFeatureEmissiveMask;
+            }
         }
         result.aoColor =
             readMaterialColorExtra(material->extras, "afterglowAoColor");
@@ -1248,6 +1456,22 @@ std::array<float, 4> sampleAnimationSampler(
 }
 
 }  // namespace
+
+const char* assetMaterialClassName(const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Generic: return "generic";
+        case AssetMaterialClass::Skin: return "skin";
+        case AssetMaterialClass::Face: return "face";
+        case AssetMaterialClass::Hair: return "hair";
+        case AssetMaterialClass::Fabric: return "fabric";
+        case AssetMaterialClass::Metal: return "metal";
+        case AssetMaterialClass::Eye: return "eye";
+        case AssetMaterialClass::Overlay: return "overlay";
+        case AssetMaterialClass::Emissive: return "emissive";
+        case AssetMaterialClass::Showcase: return "showcase";
+    }
+    return "generic";
+}
 
 LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::TinyGLTF loader;

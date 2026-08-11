@@ -7,6 +7,7 @@ layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
+    vec4 qaParameters;
 } camera;
 
 layout(location = 0) in vec2 screenUv;
@@ -23,7 +24,18 @@ void main() {
     float vertical = smoothstep(0.0, 1.0, uv.y);
     float preset = floor(camera.showcaseParameters.x + 0.5);
     vec3 color;
-    if (preset == 1.0) {
+    if (preset == 4.0) {
+        vec3 bottomColor = vec3(0.002, 0.003, 0.005);
+        vec3 topColor = vec3(0.008, 0.010, 0.014);
+        color = mix(bottomColor, topColor, vertical);
+    } else if (preset == 3.0) {
+        vec3 bottomColor = vec3(0.008, 0.012, 0.018);
+        vec3 topColor = vec3(0.024, 0.032, 0.044);
+        color = mix(bottomColor, topColor, vertical);
+        vec2 haloOffset = (uv - vec2(0.50, 0.56)) * vec2(1.0, 0.82);
+        float halo = exp(-dot(haloOffset, haloOffset) * 5.6);
+        color += vec3(0.010, 0.018, 0.030) * halo;
+    } else if (preset == 1.0) {
         vec3 bottomColor = vec3(0.006, 0.015, 0.020);
         vec3 topColor = vec3(0.016, 0.042, 0.049);
         color = mix(bottomColor, topColor, vertical);
@@ -54,6 +66,10 @@ void main() {
         vec2 haloOffset = (uv - vec2(0.50, 0.56)) * vec2(1.05, 0.82);
         float halo = exp(-dot(haloOffset, haloOffset) * 5.2);
         color += vec3(0.038, 0.016, 0.028) * halo;
+    }
+
+    if (camera.qaParameters.x > 0.5) {
+        color = vec3(0.018, 0.024, 0.040);
     }
 
     vec2 vignetteOffset = uv - vec2(0.5);

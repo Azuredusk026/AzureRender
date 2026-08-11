@@ -10,11 +10,27 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
 using namespace azurerender::internal;
+
+namespace {
+
+std::string fnv1a64Hex(const std::string& value) {
+    std::uint64_t hash = 14695981039346656037ULL;
+    for (const unsigned char byte : value) {
+        hash ^= byte;
+        hash *= 1099511628211ULL;
+    }
+    std::ostringstream output;
+    output << std::hex << std::setfill('0') << std::setw(16) << hash;
+    return output.str();
+}
+
+}  // namespace
 
 void AzureRenderApp::prepareCaptureDirectory() {
     const std::filesystem::path directory = runOptions_.captureDirectory;
@@ -51,12 +67,48 @@ void AzureRenderApp::writeCaptureManifest(
         asset_.animations.empty()
         ? std::string()
         : asset_.animations[animationIndex_].name;
-    constexpr std::array<const char*, 4> kDiagnosticNames = {
+    constexpr std::array<const char*, 5> kDiagnosticNames = {
         "beauty",
         "world-normal",
         "internal-outline",
         "shadow-map",
+        "depth",
     };
+    std::ostringstream qaState;
+    qaState
+        << resolvedAssetPath_ << '|'
+        << qaCameraName_ << '|'
+        << qaLightName_ << '|'
+        << qaEffectName_ << '|'
+        << qaEffectStateName_ << '|'
+        << qaIsolationName_ << '|'
+        << diagnosticView_ << '|'
+        << qaIsolationMode_ << '|'
+        << qaEffectMode_ << '|'
+        << qaEffectEnabled_ << '|'
+        << showcasePreset_ << '|'
+        << rotationAngle_ << '|'
+        << cameraPosition_[0] << ',' << cameraPosition_[1] << ','
+        << cameraPosition_[2] << '|'
+        << cameraTarget_[0] << ',' << cameraTarget_[1] << ','
+        << cameraTarget_[2] << '|'
+        << stylizedLightingEnabled_ << '|'
+        << innerOutlineEnabled_;
+    for (const AssetMaterial& material : asset_.materials) {
+        qaState
+            << '|' << material.name
+            << ':' << static_cast<std::uint32_t>(material.materialClass)
+            << ':' << material.materialFeatures
+            << ':' << material.materialProfileVersion
+            << ':' << material.materialProfileExplicit;
+        for (const float parameter : material.styleParameters) {
+            qaState << ':' << parameter;
+        }
+        for (const float parameter : material.featureParameters) {
+            qaState << ':' << parameter;
+        }
+    }
+    const std::string qaStateHash = fnv1a64Hex(qaState.str());
     output
         << "{\n"
         << "  \"format\": \"Afterglow PNG sequence v1\",\n"
@@ -81,6 +133,65 @@ void AzureRenderApp::writeCaptureManifest(
         << (innerOutlineEnabled_ ? "true" : "false") << ",\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
+        << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
+        << "  \"qaHarnessEnabled\": "
+        << (qaHarnessEnabled_ ? "true" : "false") << ",\n"
+        << "  \"qaCamera\": " << std::quoted(qaCameraName_) << ",\n"
+        << "  \"qaLight\": " << std::quoted(qaLightName_) << ",\n"
+        << "  \"qaEffect\": " << std::quoted(qaEffectName_) << ",\n"
+        << "  \"qaEffectState\": "
+        << std::quoted(qaEffectStateName_) << ",\n"
+        << "  \"qaIsolation\": "
+        << std::quoted(qaIsolationName_) << ",\n"
+        << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
+        << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
+        << "  \"qaCameraPosition\": ["
+        << cameraPosition_[0] << ", " << cameraPosition_[1] << ", "
+        << cameraPosition_[2] << "],\n"
+        << "  \"qaCameraTarget\": ["
+        << cameraTarget_[0] << ", " << cameraTarget_[1] << ", "
+        << cameraTarget_[2] << "],\n"
+        << "  \"qaModelRotationRadians\": " << rotationAngle_ << ",\n"
+        << "  \"qaShowcasePreset\": " << showcasePreset_ << ",\n"
+        << "  \"materialProfileSchemaVersion\": 1,\n"
+        << "  \"materialInventory\": [\n";
+    for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
+        const AssetMaterial& material = asset_.materials[index];
+        std::size_t primitiveCount = 0;
+        for (const AssetPrimitive& primitive : asset_.primitives) {
+            if (primitive.materialIndex == index) {
+                ++primitiveCount;
+            }
+        }
+        output
+            << "    {\"index\": " << index
+            << ", \"name\": " << std::quoted(material.name)
+            << ", \"class\": "
+            << std::quoted(assetMaterialClassName(material.materialClass))
+            << ", \"features\": " << material.materialFeatures
+            << ", \"profileVersion\": "
+            << material.materialProfileVersion
+            << ", \"styleParameters\": ["
+            << material.styleParameters[0] << ", "
+            << material.styleParameters[1] << ", "
+            << material.styleParameters[2] << ", "
+            << material.styleParameters[3] << "]"
+            << ", \"featureParameters\": ["
+            << material.featureParameters[0] << ", "
+            << material.featureParameters[1] << ", "
+            << material.featureParameters[2] << ", "
+            << material.featureParameters[3] << "]"
+            << ", \"profileSource\": "
+            << std::quoted(
+                material.materialProfileExplicit
+                    ? "asset-extras"
+                    : "fallback/inferred")
+            << ", \"primitiveCount\": " << primitiveCount << "}"
+            << (index + 1 < asset_.materials.size() ? "," : "")
+            << '\n';
+    }
+    output
+        << "  ],\n"
         << "  \"technicalSequence\": "
         << (runOptions_.technicalSequence ? "true" : "false");
     if (runOptions_.technicalSequence) {

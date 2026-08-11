@@ -11,6 +11,12 @@ layout(push_constant) uniform MaterialData {
     vec4 lamShadowColor;
     vec4 matcapColor;
     vec4 hairParameters;
+    vec4 styleParameters;
+    vec4 featureParameters;
+    uint materialClass;
+    uint materialFeatures;
+    uint materialProfileVersion;
+    uint materialPadding;
 } material;
 
 layout(location = 0) in vec2 textureCoordinate;

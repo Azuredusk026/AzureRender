@@ -7,6 +7,7 @@ layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
+    vec4 qaParameters;
 } camera;
 
 layout(std430, binding = 10) readonly buffer JointData {

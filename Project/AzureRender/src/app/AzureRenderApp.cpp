@@ -48,6 +48,11 @@ void appendShowcasePlatform(LoadedAsset& asset) {
     const float bottomY = topY - largestExtent * 0.050F;
 
     AssetMaterial platformMaterial;
+    platformMaterial.name = "AzureRender_ShowcasePlatform";
+    platformMaterial.materialClass = AssetMaterialClass::Showcase;
+    platformMaterial.materialFeatures = 0;
+    platformMaterial.materialProfileVersion = 1;
+    platformMaterial.materialProfileExplicit = true;
     platformMaterial.baseColorWidth = 2;
     platformMaterial.baseColorHeight = 2;
     platformMaterial.baseColorPixels = {
@@ -220,11 +225,13 @@ void AzureRenderApp::run(
     stylizedLightingEnabled_ = runOptions_.stylizedLightingEnabled;
     innerOutlineEnabled_ = runOptions_.innerOutlineEnabled;
     hudEnabled_ = runOptions_.hudEnabled;
-    constexpr std::array<const char*, 4> kDiagnosticNames = {
+    configureQaHarness();
+    constexpr std::array<const char*, 5> kDiagnosticNames = {
         "Beauty",
         "World Normal",
         "Internal Outline",
         "Shadow Map",
+        "Depth",
     };
     std::cout
         << "Diagnostic view: " << kDiagnosticNames[diagnosticView_]
@@ -298,6 +305,19 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
               << asset_.indices.size() << " indices, "
               << asset_.primitives.size() << " primitives, "
               << asset_.materials.size() << " materials\n";
+    std::cout << "Material Class v1 inventory:\n";
+    for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
+        const AssetMaterial& material = asset_.materials[index];
+        std::cout
+            << "  [" << index << "] " << material.name
+            << " -> " << assetMaterialClassName(material.materialClass)
+            << ", flags=0x" << std::hex << material.materialFeatures
+            << std::dec
+            << (material.materialProfileExplicit
+                ? ", source=asset-extras"
+                : ", source=fallback/inferred")
+            << '\n';
+    }
     std::cout << "Skinning: "
               << (asset_.hasSkin ? "enabled" : "static fallback")
               << ", " << asset_.jointMatrices.size() << " joint matrices\n";
@@ -400,6 +420,154 @@ void AzureRenderApp::activatePortfolioOrbit() {
     }
     std::cout
         << "View preset: 6 (portfolio orbit, Endfield Industrial)\n";
+}
+
+void AzureRenderApp::configureQaHarness() {
+    qaHarnessEnabled_ = !runOptions_.qaCamera.empty()
+        || !runOptions_.qaLight.empty()
+        || !runOptions_.qaEffect.empty()
+        || !runOptions_.qaEffectState.empty()
+        || !runOptions_.qaIsolation.empty();
+    if (!qaHarnessEnabled_) {
+        return;
+    }
+
+    constexpr float kPi = 3.14159265358979323846F;
+    qaCameraName_ = runOptions_.qaCamera.empty()
+        ? "full-body-front"
+        : runOptions_.qaCamera;
+    if (qaCameraName_ == "full-body-front") {
+        rotationAngle_ = kPi * 0.25F;
+        cameraPosition_ = {2.25F, 1.75F, 2.55F};
+        cameraTarget_ = {0.0F, 0.10F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "face-front") {
+        rotationAngle_ = kPi * 0.25F;
+        cameraPosition_ = {0.915F, 1.507F, 1.046F};
+        cameraTarget_ = {0.0F, 0.82F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "face-three-quarter") {
+        rotationAngle_ = kPi * 0.40F;
+        cameraPosition_ = {0.915F, 1.507F, 1.046F};
+        cameraTarget_ = {0.0F, 0.82F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "back-detail") {
+        rotationAngle_ = kPi * 1.25F;
+        cameraPosition_ = {1.45F, 1.58F, 1.72F};
+        cameraTarget_ = {0.0F, 0.38F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "lighting-sweep") {
+        rotationAngle_ = kPi * 0.25F;
+        cameraPosition_ = {2.25F, 1.75F, 2.55F};
+        cameraTarget_ = {0.0F, 0.10F, 0.0F};
+        rotationSpeed_ = 0.60F;
+        autoRotate_ = true;
+    } else {
+        throw std::invalid_argument(
+            "Unknown --qa-camera: " + qaCameraName_);
+    }
+
+    qaLightName_ = runOptions_.qaLight.empty()
+        ? "stylized-key"
+        : runOptions_.qaLight;
+    if (qaLightName_ == "neutral-material") {
+        showcasePreset_ = 2;
+    } else if (qaLightName_ == "stylized-key") {
+        showcasePreset_ = 1;
+    } else if (qaLightName_ == "specular-rim") {
+        showcasePreset_ = 3;
+    } else if (qaLightName_ == "rear-emissive") {
+        showcasePreset_ = 4;
+    } else {
+        throw std::invalid_argument(
+            "Unknown --qa-light: " + qaLightName_);
+    }
+
+    qaEffectName_ = runOptions_.qaEffect.empty()
+        ? "none"
+        : runOptions_.qaEffect;
+    constexpr std::array<const char*, 8> kEffectNames = {
+        "none", "toon", "shadow", "hair-kk", "rim", "specular",
+        "emissive", "outline",
+    };
+    const auto effect = std::find(
+        kEffectNames.begin(), kEffectNames.end(), qaEffectName_);
+    if (effect == kEffectNames.end()) {
+        throw std::invalid_argument(
+            "Unknown --qa-effect: " + qaEffectName_);
+    }
+    qaEffectMode_ = static_cast<std::uint32_t>(
+        std::distance(kEffectNames.begin(), effect));
+
+    qaEffectStateName_ = runOptions_.qaEffectState.empty()
+        ? "enabled"
+        : runOptions_.qaEffectState;
+    if (qaEffectStateName_ != "enabled"
+        && qaEffectStateName_ != "disabled"
+        && qaEffectStateName_ != "isolation") {
+        throw std::invalid_argument(
+            "Unknown --qa-effect-state: " + qaEffectStateName_);
+    }
+    qaEffectEnabled_ = qaEffectStateName_ != "disabled";
+
+    qaIsolationName_ = runOptions_.qaIsolation.empty()
+        ? "beauty"
+        : runOptions_.qaIsolation;
+    constexpr std::array<const char*, 13> kIsolationNames = {
+        "beauty", "albedo", "world-normal", "depth", "diffuse-band",
+        "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
+        "outline", "shadow-map", "material-id",
+    };
+    const auto isolation = std::find(
+        kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
+    if (isolation == kIsolationNames.end()) {
+        throw std::invalid_argument(
+            "Unknown --qa-isolation: " + qaIsolationName_);
+    }
+    const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
+        std::distance(kIsolationNames.begin(), isolation));
+    constexpr std::array<std::uint32_t, 13> kPostProcessViews = {
+        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0,
+    };
+    constexpr std::array<std::uint32_t, 13> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8,
+    };
+    diagnosticView_ = kPostProcessViews[isolationIndex];
+    qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
+
+    if (qaEffectStateName_ == "isolation") {
+        constexpr std::array<std::uint32_t, 8> kEffectIsolationModes = {
+            0, 2, 3, 4, 5, 6, 7, 0,
+        };
+        qaIsolationMode_ = kEffectIsolationModes[qaEffectMode_];
+        qaIsolationName_ = qaEffectName_;
+        if (qaEffectName_ == "outline") {
+            diagnosticView_ = 2;
+            qaIsolationName_ = "outline";
+        } else {
+            diagnosticView_ = 0;
+        }
+    }
+    if (qaIsolationMode_ > 0) {
+        // Component isolation must not be contaminated by either outline path.
+        innerOutlineEnabled_ = false;
+        silhouetteOutlineEnabled_ = false;
+    }
+    if (qaEffectName_ == "outline") {
+        innerOutlineEnabled_ = qaEffectEnabled_;
+        silhouetteOutlineEnabled_ = qaEffectEnabled_;
+    }
+    if (!asset_.animations.empty() && qaCameraName_ != "lighting-sweep") {
+        animationTime_ = 0.0F;
+        animationPlaying_ = false;
+    }
+    std::cout
+        << "CQ-0 QA: camera=" << qaCameraName_
+        << ", light=" << qaLightName_
+        << ", effect=" << qaEffectName_
+        << ", state=" << qaEffectStateName_
+        << ", isolation=" << qaIsolationName_
+        << '\n';
 }
 
 void AzureRenderApp::updateTechnicalSequenceState(
@@ -958,12 +1126,13 @@ void AzureRenderApp::keyCallback(
             printAnimationStatus();
         } else if (key == GLFW_KEY_0) {
             application->diagnosticView_ =
-                (application->diagnosticView_ + 1) % 4;
-            constexpr std::array<const char*, 4> kDiagnosticNames = {
+                (application->diagnosticView_ + 1) % 5;
+            constexpr std::array<const char*, 5> kDiagnosticNames = {
                 "Beauty",
                 "World Normal",
                 "Internal Outline",
                 "Shadow Map",
+                "Depth",
             };
             std::cout
                 << "Diagnostic view: "

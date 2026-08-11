@@ -2455,3 +2455,74 @@ Final Composite：
 - 建立 CQ-0 的五类固定机位、四类灯光环境、效果 Isolation View、Enabled/Disabled A/B
   Capture 与 Manifest；
 - 后续所有角色 Shader 节点必须通过同一 QA Harness 验收。
+
+## M1/CQ-0 — 固定角色视觉 QA Harness
+
+日期：2026-08-02
+
+本次完成：
+
+- 新增五类确定性 QA Camera：Full Body Front、Face Front、Face 3/4、Back Detail、Lighting Sweep；
+- 新增 Neutral Material、Stylized Key、Specular/Rim、Rear Emissive 四类灯光环境；
+- 新增 Beauty、Albedo、World Normal、Depth、Diffuse Band、Shadow Visibility、Hair KK、Rim、Specular、Emissive、Outline、Shadow Map 共 12 类视图；
+- 为 Toon、Shadow、Hair KK、Rim、Specular、Emissive、Outline 建立 Enabled/Disabled/Isolation 三态 A/B；
+- 普通分量 Isolation 会关闭倒壳与内部轮廓，Outline A/B 同时控制两条轮廓路径；
+- Capture Manifest 记录 QA 状态与 FNV-1a-64 状态哈希；批量索引记录资产、可执行文件和 12 个 SPIR-V 的 SHA-256；
+- 新增可恢复批次脚本以及通用 QA/Reference Contact Sheet 工具。
+
+验证与证据：
+
+- Ninja Debug 与 Release 构建成功；
+- `captures/cq0_public_smoke_v2`：公共资产两帧 Debug Validation，退出码 0；
+- `captures/cq0_laevat_baseline_v2`：20 Case，四个 Lighting Sweep 各 60 帧；
+- `captures/cq0_laevat_isolation_v2`：12 Case；
+- `captures/cq0_laevat_ab_v1`：21 Case；
+- `captures/cq0_release_representative_v1`：私有角色 Release 代表帧；
+- `captures/cq0_review_v1/current_reference_isolation.png`：Reference/Current/Isolation 三列人工评审图；
+- 所有 Debug 批次未报告 Validation Warning/Error，Manifest 与索引均成功解析。
+
+视觉审计：
+
+- Specular、Rim、Outline 的 A/B 差异可见；
+- Toon 与 Hair KK 差异过弱，不能视为作品集级完成；
+- Emissive 仅集中在少量红色发光部件，尚无 Bloom 与亮度层级系统；
+- Depth 诊断接近二值，Material ID 和 Face SDF 尚不存在；
+- 以上缺口已分别进入 CQ-1～CQ-6，CQ-0 不伪造结果。
+
+1280×720 全图 A/B 首帧量化（Mean Absolute RGB Difference / Changed Pixels）：Toon 0.8091 / 12.986%，Shadow 0.1101 / 2.836%，Hair KK 0.0142 / 1.597%，Rim 1.6797 / 4.365%，Specular 6.0733 / 23.056%，Emissive 0.0277 / 0.244%，Outline 1.0557 / 4.260%。这些数字只证明效果开关是否产生可复现差异，不等价于美术质量评分。
+
+结论：CQ-0 Complete。当前唯一 Active Work Package 切换为 CQ-1 Material Classes/Data v1；下一步先做资产/材质用途审计与版本化分类，不提前实现 Ramp、Face SDF 或 Hair KK。
+
+## M1/CQ-1 — Material Class / Data v1
+
+日期：2026-08-02
+
+资产审计：
+
+- 莱万汀源 GLB 实际为 13 个源材质、13 个角色 Primitive；Fallback 与运行时地台使最终统计成为 15 材质、14 Primitive；
+- 分类为 Skin 2、Face 1、Hair 1、Fabric 5、Eye 1、Overlay 3；当前没有独立 Metal 或 Emissive Primitive，金属/发光区域存在于 Cloth 复合纹理；
+- 不再根据材质序号硬编码分类。
+
+实现：
+
+- 新增 Material Class v1：Generic/Skin/Face/Hair/Fabric/Metal/Eye/Overlay/Emissive/Showcase；
+- 新增 Stylized Shadow、Hair Anisotropy、Face SDF Eligible、Emissive Mask、Overlay、Neutral Fallback Feature Flags；
+- glTF `extras.azureRenderMaterial` 保存 Schema Version、Class、Flags、`styleParameters` 和 `featureParameters`；
+- 新增 `schemas/azure_render_material.schema.json` 与无第三方依赖的 `tools/validate_material_profiles.py`；
+- Push Constant 从 80 bytes 扩展至 Vulkan 最低保证上限 128 bytes；后续参数不得继续塞入 Push Constant；
+- Shader 使用 Feature Flags 限制 Hair、Face Matcap、Emissive 与 Shadow Tint 的材质所有权；
+- 新增 `material-id` Isolation、启动材质清单、HUD Class 数量/Face-Hair 关键参数，以及 Manifest `materialInventory`；
+- 旧私有资产可使用明确标记的名称推断；未知公共资产进入 Generic Neutral Fallback。
+
+验证：
+
+- 13 个显式 Profile 全部通过 Schema 字段、枚举、唯一性和范围验证；
+- Debug/Release 构建成功；
+- `captures/cq1_laevat_isolation_v1` 完成 13 个 Isolation Case，无 Validation Error；
+- `captures/cq1_material_id_face_v2` 显示 Face/Hair/Skin/Fabric/Eye/Overlay 边界；
+- `captures/cq1_material_hud_v1` 显示 Class 数量和 Face/Hair 参数；
+- `captures/cq1_public_fallback_v1` 验证公共资产全部使用 Generic Fallback；
+- `captures/cq1_release_beauty_v1` 完成 Release 代表帧；
+- 在参数介入前的 CQ-1 结构回归与 CQ-0 基线 SHA-256 完全一致；启用显式分类参数后的变化只属于预期材质分离，并完成近景视觉检查。
+
+结论：CQ-1 Complete。当前 Active Work Package 切换为 CQ-2 Toon Ramp/Shadow v1；下一步只实现可编辑 Ramp 与阴影层级，不提前进入 Face SDF、Hair KK、Bloom 或最终调色。

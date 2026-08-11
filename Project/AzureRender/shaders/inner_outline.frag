@@ -50,6 +50,14 @@ void main() {
         outputColor = vec4(vec3(readableDepth), 1.0);
         return;
     }
+    if (diagnosticView == 4) {
+        float depth = texture(depthTexture, screenUv).r;
+        float readableDepth = centerSample.a < 0.01
+            ? 0.0
+            : 1.0 - pow(clamp(depth, 0.0, 1.0), 32.0);
+        outputColor = vec4(vec3(readableDepth), 1.0);
+        return;
+    }
     float edge = 0.0;
     if (centerSample.a >= 0.01 && outline.strength > 0.0) {
         vec3 centerNormal = normalize(centerSample.xyz * 2.0 - 1.0);

@@ -7,6 +7,7 @@ layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
+    vec4 qaParameters;
 } camera;
 
 layout(binding = 1) uniform sampler2D baseColorTexture;
@@ -28,6 +29,12 @@ layout(push_constant) uniform MaterialData {
     vec4 lamShadowColor;
     vec4 matcapColor;
     vec4 hairParameters;
+    vec4 styleParameters;
+    vec4 featureParameters;
+    uint materialClass;
+    uint materialFeatures;
+    uint materialProfileVersion;
+    uint materialPadding;
 } material;
 
 layout(location = 0) in vec3 worldNormal;
@@ -53,6 +60,25 @@ vec3 decodePackedHairNormal(vec2 encodedNormal) {
         1.0 - encodedNormal.y * 2.0);
     float z = sqrt(max(1.0 - dot(xy, xy), 0.001));
     return normalize(vec3(xy, z));
+}
+
+vec3 materialClassColor(uint materialClass) {
+    const vec3 palette[10] = vec3[10](
+        vec3(0.45, 0.45, 0.45),
+        vec3(0.96, 0.58, 0.48),
+        vec3(1.00, 0.78, 0.66),
+        vec3(0.82, 0.20, 0.42),
+        vec3(0.20, 0.58, 0.92),
+        vec3(0.78, 0.82, 0.88),
+        vec3(0.45, 0.92, 0.96),
+        vec3(0.74, 0.34, 0.92),
+        vec3(1.00, 0.32, 0.08),
+        vec3(0.12, 0.78, 0.58));
+    return palette[min(materialClass, 9U)];
+}
+
+float materialFeatureEnabled(uint feature) {
+    return (material.materialFeatures & feature) != 0U ? 1.0 : 0.0;
 }
 
 float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
@@ -114,7 +140,8 @@ void main() {
     vec3 sampledNormal = texture(normalTexture, textureCoordinate).xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
     vec4 hairData = texture(hairDataTexture, textureCoordinate);
-    float hairActive = clamp(material.hairParameters.w, 0.0, 1.0);
+    float hairActive = clamp(material.hairParameters.w, 0.0, 1.0)
+        * materialFeatureEnabled(2U);
     vec3 hairBaseNormal = normalize(
         tangentToWorld * decodePackedHairNormal(hairData.rg));
     shadedNormal = normalize(mix(
@@ -145,6 +172,11 @@ void main() {
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
     float shadowVisibility = sampleShadowMap(shadowPosition, diffuse);
+    int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
+    bool qaEffectDisabled = camera.qaParameters.z < 0.5;
+    if (qaEffectMode == 2 && qaEffectDisabled) {
+        shadowVisibility = 1.0;
+    }
     float keyVisibility = mix(1.0, shadowVisibility, 0.72);
     vec3 keyColor = vec3(1.04, 0.98, 0.94);
     vec3 fillColor = vec3(0.58, 0.76, 1.0);
@@ -204,8 +236,12 @@ void main() {
         safeBandThreshold - diffuseBandSoftness,
         safeBandThreshold + diffuseBandSoftness,
         diffuse);
-    float stylizedDiffuse = mix(diffuse, diffuseBand, bandEnabled);
-    float diffuseScale = mix(0.55, 0.50, bandEnabled);
+    float toonEnabled = qaEffectMode == 1 && qaEffectDisabled
+        ? 0.0
+        : bandEnabled;
+    float toonWeight = clamp(toonEnabled * material.styleParameters.x, 0.0, 1.0);
+    float stylizedDiffuse = mix(diffuse, diffuseBand, toonWeight);
+    float diffuseScale = mix(0.55, 0.50, toonWeight);
     vec3 directDiffuse =
         diffuseColor
         * (
@@ -213,7 +249,9 @@ void main() {
                 * camera.showcaseParameters.y
                 * keyVisibility
             + fillDiffuse * camera.showcaseParameters.z * fillColor);
-    float shadowWeight = (1.0 - diffuseBand) * bandEnabled;
+    float shadowWeight =
+        (1.0 - diffuseBand) * toonWeight * material.styleParameters.y
+        * materialFeatureEnabled(1U);
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
@@ -226,7 +264,12 @@ void main() {
         (ambientDiffuse + directDiffuse) * lamShadowTint * aoShadowTint;
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
-        * keyVisibility;
+        * keyVisibility * material.styleParameters.z;
+    ambientSpecular *= material.styleParameters.z;
+    if (qaEffectMode == 5 && qaEffectDisabled) {
+        ambientSpecular = vec3(0.0);
+        directSpecular = vec3(0.0);
+    }
     float rim = pow(1.0 - normalDotView, 3.2)
         * smoothstep(-0.25, 0.65, dot(shadedNormal, -fillDirection));
     vec3 rimLighting =
@@ -234,7 +277,11 @@ void main() {
         * rim
         * camera.showcaseParameters.w
         * bandEnabled
+        * material.styleParameters.w
         * (1.0 - platformMask);
+    if (qaEffectMode == 4 && qaEffectDisabled) {
+        rimLighting = vec3(0.0);
+    }
     vec3 hairHighlightNormal = normalize(
         tangentToWorld * decodePackedHairNormal(hairData.ba));
     float hairShift = dot(hairHighlightNormal, tangent) * 0.16;
@@ -269,10 +316,19 @@ void main() {
         * 0.48
         * keyVisibility
         * hairActive
+        * material.featureParameters.y
         * bandEnabled;
+    if (qaEffectMode == 3 && qaEffectDisabled) {
+        kkSpecular = vec3(0.0);
+    }
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
     vec3 emissive =
-        specularEmissive.rgb * material.emissiveStrength * 3.0;
+        specularEmissive.rgb * material.emissiveStrength * 3.0
+        * material.featureParameters.z
+        * materialFeatureEnabled(8U);
+    if (qaEffectMode == 6 && qaEffectDisabled) {
+        emissive = vec3(0.0);
+    }
     vec3 cameraForward = normalize(worldPosition - camera.cameraPosition.xyz);
     vec3 cameraRight = normalize(cross(cameraForward, vec3(0.0, 1.0, 0.0)));
     vec3 cameraUp = normalize(cross(cameraRight, cameraForward));
@@ -305,24 +361,46 @@ void main() {
         matcapMask
         * matcapTint
         * material.matcapColor.a
+        * material.featureParameters.w
+        * materialFeatureEnabled(4U)
         * bandEnabled
         * 0.055;
     vec3 styleAccent =
         styleStrength
         * styleMask
         * (baseColor.rgb * 0.12 + vec3(0.10, 0.015, 0.004));
-    outputColor = vec4(
+    vec3 beautyColor =
         tintedDiffuse
-            + ambientSpecular
-            + directSpecular
-            + rimLighting
-            + kkSpecular
-            + styleAccent
-            + matcapAccent
-            + emissive,
-        outputAlpha);
+        + ambientSpecular
+        + directSpecular
+        + rimLighting
+        + kkSpecular
+        + styleAccent
+        + matcapAccent
+        + emissive;
+    int qaIsolationMode = int(floor(camera.qaParameters.x + 0.5));
+    vec3 qaColor = beautyColor;
+    if (qaIsolationMode == 1) {
+        qaColor = baseColor.rgb;
+    } else if (qaIsolationMode == 2) {
+        qaColor = vec3(diffuseBand);
+    } else if (qaIsolationMode == 3) {
+        qaColor = vec3(shadowVisibility);
+    } else if (qaIsolationMode == 4) {
+        qaColor = kkSpecular * 4.0;
+    } else if (qaIsolationMode == 5) {
+        qaColor = rimLighting * 3.0;
+    } else if (qaIsolationMode == 6) {
+        qaColor = (ambientSpecular + directSpecular) * 3.0;
+    } else if (qaIsolationMode == 7) {
+        qaColor = emissive;
+    } else if (qaIsolationMode == 8) {
+        qaColor = materialClassColor(material.materialClass);
+    }
+    outputColor = vec4(qaColor, outputAlpha);
     float innerOutlineParticipation =
         (1.0 - platformMask)
+        * material.featureParameters.x
         * mix(
             1.0,
             0.22,

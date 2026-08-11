@@ -21,7 +21,34 @@ enum class AssetAlphaMode : std::uint32_t {
     Blend = 2,
 };
 
+enum class AssetMaterialClass : std::uint32_t {
+    Generic = 0,
+    Skin = 1,
+    Face = 2,
+    Hair = 3,
+    Fabric = 4,
+    Metal = 5,
+    Eye = 6,
+    Overlay = 7,
+    Emissive = 8,
+    Showcase = 9,
+};
+
+enum AssetMaterialFeature : std::uint32_t {
+    MaterialFeatureStylizedShadow = 1U << 0U,
+    MaterialFeatureHairAnisotropy = 1U << 1U,
+    MaterialFeatureFaceSdfEligible = 1U << 2U,
+    MaterialFeatureEmissiveMask = 1U << 3U,
+    MaterialFeatureOverlay = 1U << 4U,
+    MaterialFeatureNeutralFallback = 1U << 5U,
+};
+
 struct AssetMaterial {
+    std::string name = "FallbackMaterial";
+    AssetMaterialClass materialClass = AssetMaterialClass::Generic;
+    std::uint32_t materialFeatures = MaterialFeatureNeutralFallback;
+    std::uint32_t materialProfileVersion = 1;
+    bool materialProfileExplicit = false;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
@@ -48,6 +75,10 @@ struct AssetMaterial {
     std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
+    // toon, shadow tint, specular, rim
+    std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
+    // outline, hair highlight, emissive, face overlay
+    std::array<float, 4> featureParameters{1.0F, 1.0F, 1.0F, 1.0F};
     float showcasePlatform = 0.0F;
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
@@ -118,6 +149,7 @@ struct LoadedAsset {
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
+[[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
 void sampleAnimation(
     const LoadedAsset& asset,
     std::size_t animationIndex,

@@ -242,6 +242,27 @@ Run the S26 animated private test asset:
 
 `--asset` and `--smoke-frames` can be used together in either order.
 
+## CQ-0 deterministic character QA
+
+CQ-0 completed on 2026-08-02. The long-term M1 art-quality work uses this fixed
+command-line QA harness for every subsequent shader node. It
+provides five camera presets, four lighting environments, effect-specific
+enabled/disabled/isolation states, resumable batches, compiled-shader hashes,
+and reproducible manifest metadata.
+
+See [`docs/CHARACTER_QA_HARNESS_CN.md`](docs/CHARACTER_QA_HARNESS_CN.md) for
+the complete matrix and run `tools/run_character_qa.ps1` to generate baseline,
+isolation, A/B, or full QA evidence.
+
+CQ-1 Material Classes/Data v1 is complete; CQ-2 Toon Ramp/Shadow is active. CQ-0 evidence is
+kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
+`cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
+part of a public source package.
+
+Material Class/Data v1 is documented in
+[`docs/MATERIAL_SYSTEM_V1_CN.md`](docs/MATERIAL_SYSTEM_V1_CN.md). Use
+`--qa-isolation material-id` to inspect the per-primitive class assignment.
+
 ## Deterministic portfolio capture
 
 Generate a four-second, 1080p60 lossless frame sequence using the S27 portfolio
