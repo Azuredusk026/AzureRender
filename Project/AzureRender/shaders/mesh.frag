@@ -362,10 +362,21 @@ void main() {
     float hairShift = dot(hairHighlightNormal, tangent) * 0.16;
     vec3 hairStrandDirection = normalize(
         bitangent + shadedNormal * hairShift);
+    vec3 secondaryHairStrand = normalize(
+        bitangent
+        + shadedNormal * (hairShift + material.hairParameters.z * 0.018));
     float tangentDotHalf = dot(hairStrandDirection, halfDirection);
+    float secondaryTangentDotHalf = dot(
+        secondaryHairStrand,
+        halfDirection);
     float kkSine = sqrt(max(1.0 - tangentDotHalf * tangentDotHalf, 0.0));
+    float secondaryKkSine = sqrt(max(
+        1.0 - secondaryTangentDotHalf * secondaryTangentDotHalf,
+        0.0));
     float kkPower = clamp(material.hairParameters.x * 0.15, 24.0, 96.0);
+    float secondaryKkPower = clamp(kkPower * 0.56, 14.0, 56.0);
     float kkLobe = pow(kkSine, kkPower);
+    float secondaryKkLobe = pow(secondaryKkSine, secondaryKkPower);
     float kkRampSoftness = mix(
         0.09,
         0.025,
@@ -374,6 +385,10 @@ void main() {
         0.34 - kkRampSoftness,
         0.34 + kkRampSoftness,
         kkLobe);
+    float secondaryKkBand = smoothstep(
+        0.29 - kkRampSoftness * 1.35,
+        0.29 + kkRampSoftness * 1.35,
+        secondaryKkLobe);
     float highlightFacing = smoothstep(
         0.22,
         0.78,
@@ -393,8 +408,24 @@ void main() {
         * hairActive
         * material.featureParameters.y
         * bandEnabled;
+    vec3 secondaryKkTint = mix(
+        baseColor.rgb,
+        vec3(0.72, 0.88, 1.0),
+        0.12);
+    vec3 secondaryKkSpecular =
+        secondaryKkTint
+        * secondaryKkBand
+        * mix(0.24, 0.70, highlightFacing)
+        * max(diffuse, 0.12)
+        * material.hairParameters.y
+        * 0.22
+        * keyVisibility
+        * hairActive
+        * material.featureParameters.y
+        * bandEnabled;
     if (qaEffectMode == 3 && qaEffectDisabled) {
         kkSpecular = vec3(0.0);
+        secondaryKkSpecular = vec3(0.0);
     }
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
     vec3 emissive =
@@ -446,6 +477,7 @@ void main() {
         + directSpecular
         + rimLighting
         + kkSpecular
+        + secondaryKkSpecular
         + matcapAccent
         + emissive;
     int qaIsolationMode = int(floor(camera.qaParameters.x + 0.5));
@@ -463,7 +495,7 @@ void main() {
     } else if (qaIsolationMode == 3) {
         qaColor = vec3(shadowVisibility);
     } else if (qaIsolationMode == 4) {
-        qaColor = kkSpecular * 4.0;
+        qaColor = (kkSpecular + secondaryKkSpecular) * 3.0;
     } else if (qaIsolationMode == 5) {
         qaColor = rimLighting * 3.0;
     } else if (qaIsolationMode == 6) {

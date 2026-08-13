@@ -13,6 +13,18 @@
 - QA 新增 `overlay` effect/isolation；enabled/disabled/isolation 三态 Vulkan 捕获通过，Alpha 保持 `255..255`。
 - Debug/Release 构建通过；CQ-3 Face SDF/Overlay v1 完成，下一节点为 CQ-4 Hair KK。
 
+## 2026-08-13：CQ-4 Hair KK vertical slice
+
+- 保留 `_HN` RG/BA 主/副发束方向语义，新增 Shift 派生的第二层 Kajiya-Kay lobe 与独立冷色 tint。
+- Hair KK isolation 同时显示主层和次层；enabled/disabled/isolation 三态、Face 3/4 机位和 60 帧 lighting sweep 均通过。
+- Debug/Release Shader 构建通过；CQ-4 Hair KK v1 完成，下一节点为 CQ-5 Rim/Specular/Emissive/Bloom。
+
+## 2026-08-13：CQ-4 Hair KK vertical slice
+
+- 保留 `_HN` RG/BA 主/副发束方向语义，新增 Shift 派生的第二层 Kajiya-Kay lobe 与独立冷色 tint。
+- Hair KK isolation 同时显示主层和次层；enabled/disabled/isolation 三态、Face 3/4 机位和 60 帧 lighting sweep 均通过。
+- Debug/Release Shader 构建通过；CQ-4 Hair KK v1 完成，下一节点为 CQ-5 Rim/Specular/Emissive/Bloom。
+
 ## 2026-07-24
 
 ### S7：莱万汀静态角色首次接入
@@ -2626,3 +2638,9 @@ Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 
 - Loader 解析并规范化距离/遮罩通道；运行时接入 binding 12、Head-local 光向量和 Face 漫反射分带。
 - 新增 `face-sdf` QA effect/isolation，契约校验与兼容性审计通过。
 - Debug Shader/C++ 增量构建通过；Vulkan/Xvfb 视觉回归受当前执行环境 loopback 初始化错误阻塞，节点保持 Review。
+
+## 2026-08-13：CQ-4 Hair KK vertical slice
+
+- 保留 `_HN` RG/BA 主/副发束方向语义，新增 Shift 派生的第二层 Kajiya-Kay lobe 与独立冷色 tint。
+- Hair KK isolation 同时显示主层和次层；enabled/disabled/isolation 三态、Face 3/4 机位和 60 帧 lighting sweep 均通过。
+- Debug/Release Shader 构建通过；CQ-4 Hair KK v1 完成，下一节点为 CQ-5 Rim/Specular/Emissive/Bloom。
