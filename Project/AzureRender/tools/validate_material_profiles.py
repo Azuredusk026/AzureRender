@@ -43,6 +43,7 @@ def main() -> None:
     required = set(schema["required"])
     allowed = set(schema["properties"])
     vector_rule = schema["$defs"]["parameterVector"]
+    face_sdf_rule = schema["$defs"]["faceSdfProfile"]
     materials = document.get("materials", [])
     errors: list[str] = []
 
@@ -58,7 +59,9 @@ def main() -> None:
             errors.append(f"{name}: missing {sorted(missing)}")
         if unexpected:
             errors.append(f"{name}: unexpected {sorted(unexpected)}")
-        if profile.get("schemaVersion") != 1:
+        if type(profile.get("schemaVersion")) is not int or profile.get(
+            "schemaVersion"
+        ) != 1:
             errors.append(f"{name}: schemaVersion must be 1")
         if profile.get("class") not in allowed_classes:
             errors.append(f"{name}: unknown class {profile.get('class')!r}")
@@ -81,6 +84,44 @@ def main() -> None:
                 )
             if not valid:
                 errors.append(f"{name}: invalid {key}")
+        face_sdf = profile.get("faceSdf")
+        if face_sdf is not None:
+            valid_face_sdf = isinstance(face_sdf, dict)
+            if valid_face_sdf:
+                required_face_sdf = set(face_sdf_rule["required"])
+                allowed_face_sdf = set(face_sdf_rule["properties"])
+                if required_face_sdf - set(face_sdf):
+                    errors.append(
+                        f"{name}: faceSdf missing "
+                        f"{sorted(required_face_sdf - set(face_sdf))}"
+                    )
+                if set(face_sdf) - allowed_face_sdf:
+                    errors.append(
+                        f"{name}: faceSdf unexpected "
+                        f"{sorted(set(face_sdf) - allowed_face_sdf)}"
+                    )
+                valid_face_sdf = (
+                    type(face_sdf.get("schemaVersion")) is int
+                    and face_sdf.get("schemaVersion") == 1
+                    and type(face_sdf.get("texture")) is int
+                    and face_sdf.get("texture", -1) >= 0
+                    and face_sdf.get("texCoord") == 0
+                    and face_sdf.get("channel") in {"r", "g", "b", "a"}
+                    and isinstance(face_sdf.get("shadowOnLowValues"), bool)
+                    and face_sdf.get("horizontalAxis")
+                    in {"left-to-right", "right-to-left"}
+                    and isinstance(face_sdf.get("headNode"), str)
+                    and bool(face_sdf.get("headNode"))
+                )
+            if not valid_face_sdf:
+                errors.append(f"{name}: invalid faceSdf profile")
+            if profile.get("class") != "face" or "face-sdf-eligible" not in (
+                features if isinstance(features, list) else []
+            ):
+                errors.append(
+                    f"{name}: faceSdf requires face class and "
+                    "face-sdf-eligible feature"
+                )
         print(
             f"[{index:02d}] {name} -> {profile.get('class', 'INVALID')} "
             f"features={profile.get('features', [])}"

@@ -58,22 +58,22 @@ int main(const int argumentCount, char** argumentValues) {
                        && index + 1 < argumentCount) {
                 const std::string view = argumentValues[++index];
                 if (view == "beauty") {
-                    options.diagnosticView = 0;
+                    options.renderSettings.diagnosticView = 0;
                 } else if (view == "normal") {
-                    options.diagnosticView = 1;
+                    options.renderSettings.diagnosticView = 1;
                 } else if (view == "outline") {
-                    options.diagnosticView = 2;
+                    options.renderSettings.diagnosticView = 2;
                 } else if (view == "shadow") {
-                    options.diagnosticView = 3;
+                    options.renderSettings.diagnosticView = 3;
                 } else {
                     throw std::invalid_argument(
                         "--diagnostic-view must be beauty, normal, "
                         "outline, or shadow");
                 }
             } else if (argument == "--no-stylized") {
-                options.stylizedLightingEnabled = false;
+                options.renderSettings.stylizedLightingEnabled = false;
             } else if (argument == "--no-inner-outline") {
-                options.innerOutlineEnabled = false;
+                options.renderSettings.innerOutlineEnabled = false;
             } else if (argument == "--hud") {
                 options.hudEnabled = true;
                 options.gpuTimingEnabled = true;

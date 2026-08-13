@@ -1,6 +1,7 @@
 #pragma once
 
 #include "assets/GltfLoader.hpp"
+#include "render/RenderSettings.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -22,9 +23,7 @@ struct AzureRenderOptions {
     bool portfolioMode = false;
     bool gpuTimingEnabled = false;
     std::string gpuTimingOutput;
-    std::uint32_t diagnosticView = 0;
-    bool stylizedLightingEnabled = true;
-    bool innerOutlineEnabled = true;
+    azurerender::RenderSettings renderSettings;
     bool hudEnabled = false;
     bool technicalSequence = false;
     std::string qaCamera;
@@ -243,13 +242,7 @@ private:
     std::size_t animationIndex_ = 0;
     float animationTime_ = 0.0F;
     bool animationPlaying_ = true;
-    bool stylizedLightingEnabled_ = true;
-    float styleMaskStrength_ = 1.0F;
-    float diffuseBandThreshold_ = 0.40F;
-    std::uint32_t showcasePreset_ = 0;
-    bool innerOutlineEnabled_ = true;
-    bool silhouetteOutlineEnabled_ = true;
-    std::uint32_t diagnosticView_ = 0;
+    azurerender::RenderSettings renderSettings_;
     bool hudEnabled_ = false;
     bool qaHarnessEnabled_ = false;
     std::string qaCameraName_ = "none";

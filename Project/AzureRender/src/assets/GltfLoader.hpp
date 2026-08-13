@@ -43,6 +43,27 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureNeutralFallback = 1U << 5U,
 };
 
+enum class AssetFaceSdfChannel : std::uint32_t {
+    Red = 0,
+    Green = 1,
+    Blue = 2,
+    Alpha = 3,
+};
+
+struct AssetFaceSdfProfile {
+    static constexpr std::uint32_t kSchemaVersion = 1;
+
+    bool present = false;
+    std::vector<std::uint8_t> pixels;
+    std::uint32_t width = 0;
+    std::uint32_t height = 0;
+    AssetFaceSdfChannel channel = AssetFaceSdfChannel::Red;
+    bool shadowOnLowValues = true;
+    bool mirrorHorizontal = false;
+    std::uint32_t headNode = 0;
+    std::string headNodeName;
+};
+
 struct AssetMaterial {
     std::string name = "FallbackMaterial";
     AssetMaterialClass materialClass = AssetMaterialClass::Generic;
@@ -79,6 +100,7 @@ struct AssetMaterial {
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay
     std::array<float, 4> featureParameters{1.0F, 1.0F, 1.0F, 1.0F};
+    AssetFaceSdfProfile faceSdf;
     float showcasePlatform = 0.0F;
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
@@ -93,6 +115,7 @@ struct AssetPrimitive {
 };
 
 struct AssetNode {
+    std::string name;
     std::int32_t parent = -1;
     std::array<float, 3> translation{};
     std::array<float, 4> rotation{0.0F, 0.0F, 0.0F, 1.0F};

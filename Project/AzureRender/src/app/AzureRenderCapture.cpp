@@ -107,18 +107,31 @@ void AzureRenderApp::writeCaptureManifest(
         << qaEffectName_ << '|'
         << qaEffectStateName_ << '|'
         << qaIsolationName_ << '|'
-        << diagnosticView_ << '|'
+        << renderSettings_.diagnosticView << '|'
         << qaIsolationMode_ << '|'
         << qaEffectMode_ << '|'
         << qaEffectEnabled_ << '|'
-        << showcasePreset_ << '|'
+        << renderSettings_.showcasePreset << '|'
         << rotationAngle_ << '|'
         << cameraPosition_[0] << ',' << cameraPosition_[1] << ','
         << cameraPosition_[2] << '|'
         << cameraTarget_[0] << ',' << cameraTarget_[1] << ','
         << cameraTarget_[2] << '|'
-        << stylizedLightingEnabled_ << '|'
-        << innerOutlineEnabled_ << '|'
+        << renderSettings_.stylizedLightingEnabled << '|'
+        << renderSettings_.innerOutlineEnabled << '|'
+        << azurerender::RenderSettings::kSchemaVersion << '|'
+        << azurerender::FaceSdfSettings::kSchemaVersion << '|'
+        << renderSettings_.faceSdf.enabled << '|'
+        << renderSettings_.faceSdf.mirrorHorizontal << '|'
+        << renderSettings_.faceSdf.threshold << '|'
+        << renderSettings_.faceSdf.softness << '|'
+        << renderSettings_.faceSdf.noseShadowStrength << '|'
+        << renderSettings_.faceSdf.jawShadowStrength << '|';
+    for (const float channel : renderSettings_.faceSdf.shadowColor) {
+        qaState << channel << ',';
+    }
+    qaState
+        << '|'
         << rampProfileHash << '|'
         << rampAtlasHash;
     for (const AssetMaterial& material : asset_.materials) {
@@ -153,11 +166,35 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"portfolioMode\": "
         << (runOptions_.portfolioMode ? "true" : "false") << ",\n"
         << "  \"diagnosticView\": "
-        << std::quoted(kDiagnosticNames[diagnosticView_]) << ",\n"
+        << std::quoted(kDiagnosticNames[renderSettings_.diagnosticView]) << ",\n"
         << "  \"stylizedLighting\": "
-        << (stylizedLightingEnabled_ ? "true" : "false") << ",\n"
+        << (renderSettings_.stylizedLightingEnabled ? "true" : "false") << ",\n"
         << "  \"internalOutline\": "
-        << (innerOutlineEnabled_ ? "true" : "false") << ",\n"
+        << (renderSettings_.innerOutlineEnabled ? "true" : "false") << ",\n"
+        << "  \"renderSettingsVersion\": "
+        << azurerender::RenderSettings::kSchemaVersion << ",\n"
+        << "  \"faceSdfSettings\": {\n"
+        << "    \"schemaVersion\": "
+        << azurerender::FaceSdfSettings::kSchemaVersion << ",\n"
+        << "    \"enabled\": "
+        << (renderSettings_.faceSdf.enabled ? "true" : "false") << ",\n"
+        << "    \"mirrorHorizontal\": "
+        << (renderSettings_.faceSdf.mirrorHorizontal ? "true" : "false")
+        << ",\n"
+        << "    \"threshold\": " << renderSettings_.faceSdf.threshold
+        << ",\n"
+        << "    \"softness\": " << renderSettings_.faceSdf.softness
+        << ",\n"
+        << "    \"noseShadowStrength\": "
+        << renderSettings_.faceSdf.noseShadowStrength << ",\n"
+        << "    \"jawShadowStrength\": "
+        << renderSettings_.faceSdf.jawShadowStrength << ",\n"
+        << "    \"shadowColor\": ["
+        << renderSettings_.faceSdf.shadowColor[0] << ", "
+        << renderSettings_.faceSdf.shadowColor[1] << ", "
+        << renderSettings_.faceSdf.shadowColor[2] << ", "
+        << renderSettings_.faceSdf.shadowColor[3] << "]\n"
+        << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
         << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
@@ -192,7 +229,7 @@ void AzureRenderApp::writeCaptureManifest(
         << cameraTarget_[0] << ", " << cameraTarget_[1] << ", "
         << cameraTarget_[2] << "],\n"
         << "  \"qaModelRotationRadians\": " << rotationAngle_ << ",\n"
-        << "  \"qaShowcasePreset\": " << showcasePreset_ << ",\n"
+        << "  \"qaShowcasePreset\": " << renderSettings_.showcasePreset << ",\n"
         << "  \"materialProfileSchemaVersion\": 1,\n"
         << "  \"materialInventory\": [\n";
     for (std::size_t index = 0; index < asset_.materials.size(); ++index) {

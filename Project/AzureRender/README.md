@@ -9,6 +9,18 @@ ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
 style-mask routing have independent QA views. The active work package is CQ-3
 Face SDF/Overlays.
 
+AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
+runtime controls, frame uniforms and capture manifests. Face SDF assets use an
+explicit glTF material contract rather than inferred texture semantics. Audit an
+asset before CQ-3 authoring with:
+
+```bash
+python3 tools/audit_face_sdf_compatibility.py path/to/character.glb
+```
+
+The staged renderer/editor architecture is documented in
+`docs/RENDERER_MODULARIZATION_PLAN_CN.md`.
+
 The current `S1-S36.2` baseline creates a resizable Windows GLFW surface, selects a
 Vulkan GPU, enables the Khronos validation layer in Debug builds, manages a
 two-frame swapchain loop, uploads device-local vertex/index buffers through

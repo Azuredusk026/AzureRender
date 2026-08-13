@@ -2561,3 +2561,49 @@ Final Composite：
 - Release GPU Timestamp 功能探针：Shadow 0.102 ms、Main 0.264 ms、Final 0.024 ms、Total 0.390 ms；该数据不作为正式性能结论。
 
 结论：CQ-2 Complete。当前 Active Work Package 切换为 CQ-3 Face SDF 与脸部 Overlay；不提前进入最终 Hair KK、Bloom 或最终调色。
+
+## M1/CQ-3 + AR-0 — Face SDF 契约与 RenderSettings 基线
+
+日期：2026-08-13
+
+目标：在实现 Face SDF Shader 前先冻结输入契约和外部控制边界，避免 CLI、未来 GUI、
+Capture 与 Renderer 各自维护一套参数，也避免把普通脸部贴图误判为 SDF。
+
+实现：
+
+- 新增 `src/render/RenderSettings.*`，收口 Stylized Lighting、Style Mask、Ramp
+  Threshold、Showcase Preset、Outline、Diagnostic View 和 Face SDF v1 参数；
+- `AzureRenderOptions`、键盘控制、UBO、HUD、Command Recording 与 Capture Manifest
+  改为读写同一 `RenderSettings`；
+- Manifest 新增 `renderSettingsVersion` 和完整 `faceSdfSettings`，并纳入 QA State Hash；
+- Material Profile Schema 增加可选 `faceSdf`：Texture、UV Set、Channel、值域方向、
+  Horizontal Axis 与 Head Node；
+- Loader 严格解析该配置，保存 SDF 像素与 Head Node 索引；错误索引、通道、UV 或节点
+  在资产加载阶段失败；无 `faceSdf` 的旧资产保持兼容；
+- 新增 `tools/audit_face_sdf_compatibility.py`，报告 Face Primitive、UV、纹理来源、
+  Head Node 和具体不兼容原因；
+- 新增 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`，冻结 AR-0 至 AR-4 的增量边界。
+
+资产结论：
+
+- 公共 `test_model.gltf` 没有 Face Material，不能作为 Face SDF 验证资产；
+- 莱万汀 `M_actor_laevat_face_01` 有一个 Face Primitive、`TEXCOORD_0` 和
+  `face-sdf-eligible`；
+- 当前私有 GLB 没有 `azureRenderMaterial.faceSdf`，也没有可审计的来源、通道、方向和
+  Head Node 绑定；
+- 决策：不复用 `T_actor_laevat_face_01_D` 等普通贴图，制作 AzureRender 自有 Face SDF。
+
+验证：
+
+- Material Profile v1 的 13 个私有材质继续通过 Schema 验证；
+- Linux Debug/Release 重新配置并构建成功；
+- Python 审计/验证工具通过语法检查；
+- 公共资产 Debug Validation、私有资产 Debug Validation 与私有 Release 各运行
+  120 帧，均退出码 0，Debug 未报告 Validation warning/error；
+- 公共资产 640x360 单帧 Capture 成功，Manifest JSON 合法且包含
+  `renderSettingsVersion: 1` 与完整 `faceSdfSettings`；
+- `git diff --check` 通过。
+
+结论：AR-0 的设置与资产契约增量完成；CQ-3 仍为 Active。下一步制作自有 Face SDF，
+绑定明确 Head Node，并实现 Head-local 光照、左右翻转、Threshold/Softness 与 Face SDF
+Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 Editor/ECS。

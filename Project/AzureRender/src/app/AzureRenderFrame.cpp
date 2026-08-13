@@ -242,8 +242,12 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
     };
     uniform.renderingParameters = {
         largestExtent * 0.004F,
-        stylizedLightingEnabled_ ? styleMaskStrength_ : 0.0F,
-        stylizedLightingEnabled_ ? diffuseBandThreshold_ : -1.0F,
+        renderSettings_.stylizedLightingEnabled
+            ? renderSettings_.styleMaskStrength
+            : 0.0F,
+        renderSettings_.stylizedLightingEnabled
+            ? renderSettings_.diffuseBandThreshold
+            : -1.0F,
         0.12F,
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
@@ -255,7 +259,7 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
     }};
     uniform.showcaseParameters =
         kShowcasePresets[std::min<std::size_t>(
-            showcasePreset_,
+            renderSettings_.showcasePreset,
             kShowcasePresets.size() - 1)];
     uniform.qaParameters = {
         static_cast<float>(qaIsolationMode_),
@@ -534,9 +538,9 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << "GPU  : " << printable(selectedGpuName_, 46) << '\n'
          << "FRAME: " << swapchainExtent_.width << 'X'
          << swapchainExtent_.height
-         << "  VIEW: " << kDiagnosticNames[diagnosticView_]
-         << "  STYLE: " << (stylizedLightingEnabled_ ? "ON" : "OFF")
-         << "  OUTLINE: " << (innerOutlineEnabled_ ? "ON" : "OFF")
+         << "  VIEW: " << kDiagnosticNames[renderSettings_.diagnosticView]
+         << "  STYLE: " << (renderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
+         << "  OUTLINE: " << (renderSettings_.innerOutlineEnabled ? "ON" : "OFF")
          << '\n'
          << "ANIM : " << animationName << "  "
          << std::fixed << std::setprecision(2)
@@ -550,8 +554,8 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << " EYE " << materialClassCounts[6]
          << " OVERLAY " << materialClassCounts[7] << '\n'
          << "TOON : RAMP V1 / 10 CLASSES  MASK "
-         << std::fixed << std::setprecision(2) << styleMaskStrength_
-         << "  LEGACY THRESHOLD " << diffuseBandThreshold_ << '\n';
+         << std::fixed << std::setprecision(2) << renderSettings_.styleMaskStrength
+         << "  LEGACY THRESHOLD " << renderSettings_.diffuseBandThreshold << '\n';
     if (faceProfile != nullptr && hairProfile != nullptr) {
         text << "MAT PARAM: FACE T" << faceProfile->styleParameters[0]
              << " S" << faceProfile->styleParameters[2]
@@ -779,7 +783,7 @@ void AzureRenderApp::recordCommandBuffer(
     const VkDeviceSize offsets[] = {0};
     vkCmdBindVertexBuffers(commandBuffer, 0, 1, &vertexBuffer_, offsets);
     vkCmdBindIndexBuffer(commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
-    if (silhouetteOutlineEnabled_) {
+    if (renderSettings_.silhouetteOutlineEnabled) {
         vkCmdBindPipeline(
             commandBuffer,
             VK_PIPELINE_BIND_POINT_GRAPHICS,
@@ -928,12 +932,12 @@ void AzureRenderApp::recordCommandBuffer(
         0,
         nullptr);
     const PostProcessPushConstants postProcessConstants{
-        diagnosticView_ == 2
+        renderSettings_.diagnosticView == 2
             ? 1.0F
-            : (innerOutlineEnabled_ ? 0.40F : 0.0F),
+            : (renderSettings_.innerOutlineEnabled ? 0.40F : 0.0F),
         0.18F,
         0.20F,
-        static_cast<float>(diagnosticView_),
+        static_cast<float>(renderSettings_.diagnosticView),
         0.0F,
         1.0F,
         0.0F,

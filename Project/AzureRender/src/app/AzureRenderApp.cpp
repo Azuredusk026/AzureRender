@@ -203,6 +203,8 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    azurerender::validateRenderSettings(runOptions_.renderSettings);
+    renderSettings_ = runOptions_.renderSettings;
     fixedSimulation_ = runOptions_.captureFrameLimit > 0;
     fixedSimulationStarted_ = false;
     fixedDeltaSeconds_ = 1.0F / static_cast<float>(runOptions_.captureFps);
@@ -221,9 +223,12 @@ void AzureRenderApp::run(
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
-    diagnosticView_ = runOptions_.diagnosticView;
-    stylizedLightingEnabled_ = runOptions_.stylizedLightingEnabled;
-    innerOutlineEnabled_ = runOptions_.innerOutlineEnabled;
+    renderSettings_.diagnosticView =
+        runOptions_.renderSettings.diagnosticView;
+    renderSettings_.stylizedLightingEnabled =
+        runOptions_.renderSettings.stylizedLightingEnabled;
+    renderSettings_.innerOutlineEnabled =
+        runOptions_.renderSettings.innerOutlineEnabled;
     hudEnabled_ = runOptions_.hudEnabled;
     configureQaHarness();
     constexpr std::array<const char*, 5> kDiagnosticNames = {
@@ -234,11 +239,11 @@ void AzureRenderApp::run(
         "Depth",
     };
     std::cout
-        << "Diagnostic view: " << kDiagnosticNames[diagnosticView_]
+        << "Diagnostic view: " << kDiagnosticNames[renderSettings_.diagnosticView]
         << ", stylized lighting: "
-        << (stylizedLightingEnabled_ ? "on" : "off")
+        << (renderSettings_.stylizedLightingEnabled ? "on" : "off")
         << ", internal outline: "
-        << (innerOutlineEnabled_ ? "on" : "off")
+        << (renderSettings_.innerOutlineEnabled ? "on" : "off")
         << ", HUD: " << (hudEnabled_ ? "on" : "off")
         << '\n';
     mainLoop(runOptions_.smokeFrameLimit);
@@ -410,9 +415,9 @@ void AzureRenderApp::activatePortfolioOrbit() {
     rotationSpeed_ = 0.16F;
     cameraPosition_ = {2.32F, 1.80F, 2.66F};
     cameraTarget_ = {0.0F, 0.05F, 0.0F};
-    showcasePreset_ = 1;
-    stylizedLightingEnabled_ = true;
-    innerOutlineEnabled_ = true;
+    renderSettings_.showcasePreset = 1;
+    renderSettings_.stylizedLightingEnabled = true;
+    renderSettings_.innerOutlineEnabled = true;
     autoRotate_ = true;
     if (!asset_.animations.empty()) {
         animationTime_ = 0.0F;
@@ -471,13 +476,13 @@ void AzureRenderApp::configureQaHarness() {
         ? "stylized-key"
         : runOptions_.qaLight;
     if (qaLightName_ == "neutral-material") {
-        showcasePreset_ = 2;
+        renderSettings_.showcasePreset = 2;
     } else if (qaLightName_ == "stylized-key") {
-        showcasePreset_ = 1;
+        renderSettings_.showcasePreset = 1;
     } else if (qaLightName_ == "specular-rim") {
-        showcasePreset_ = 3;
+        renderSettings_.showcasePreset = 3;
     } else if (qaLightName_ == "rear-emissive") {
-        showcasePreset_ = 4;
+        renderSettings_.showcasePreset = 4;
     } else {
         throw std::invalid_argument(
             "Unknown --qa-light: " + qaLightName_);
@@ -533,7 +538,7 @@ void AzureRenderApp::configureQaHarness() {
     constexpr std::array<std::uint32_t, 17> kShaderIsolationModes = {
         0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12,
     };
-    diagnosticView_ = kPostProcessViews[isolationIndex];
+    renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
 
     if (qaEffectStateName_ == "isolation") {
@@ -543,20 +548,20 @@ void AzureRenderApp::configureQaHarness() {
         qaIsolationMode_ = kEffectIsolationModes[qaEffectMode_];
         qaIsolationName_ = qaEffectName_;
         if (qaEffectName_ == "outline") {
-            diagnosticView_ = 2;
+            renderSettings_.diagnosticView = 2;
             qaIsolationName_ = "outline";
         } else {
-            diagnosticView_ = 0;
+            renderSettings_.diagnosticView = 0;
         }
     }
     if (qaIsolationMode_ > 0) {
         // Component isolation must not be contaminated by either outline path.
-        innerOutlineEnabled_ = false;
-        silhouetteOutlineEnabled_ = false;
+        renderSettings_.innerOutlineEnabled = false;
+        renderSettings_.silhouetteOutlineEnabled = false;
     }
     if (qaEffectName_ == "outline") {
-        innerOutlineEnabled_ = qaEffectEnabled_;
-        silhouetteOutlineEnabled_ = qaEffectEnabled_;
+        renderSettings_.innerOutlineEnabled = qaEffectEnabled_;
+        renderSettings_.silhouetteOutlineEnabled = qaEffectEnabled_;
     }
     if (!asset_.animations.empty() && qaCameraName_ != "lighting-sweep") {
         animationTime_ = 0.0F;
@@ -603,10 +608,10 @@ void AzureRenderApp::updateTechnicalSequenceState(
         "Shadow Map",
         "Beauty + HUD",
     };
-    diagnosticView_ = kDiagnosticViews[chapter];
+    renderSettings_.diagnosticView = kDiagnosticViews[chapter];
     hudEnabled_ = kHudStates[chapter];
-    stylizedLightingEnabled_ = true;
-    innerOutlineEnabled_ = true;
+    renderSettings_.stylizedLightingEnabled = true;
+    renderSettings_.innerOutlineEnabled = true;
     if (technicalSequenceChapter_ != chapter) {
         technicalSequenceChapter_ = chapter;
         const double chapterTime =
@@ -1130,8 +1135,8 @@ void AzureRenderApp::keyCallback(
         } else if (key == GLFW_KEY_9) {
             printAnimationStatus();
         } else if (key == GLFW_KEY_0) {
-            application->diagnosticView_ =
-                (application->diagnosticView_ + 1) % 5;
+            application->renderSettings_.diagnosticView =
+                (application->renderSettings_.diagnosticView + 1) % 5;
             constexpr std::array<const char*, 5> kDiagnosticNames = {
                 "Beauty",
                 "World Normal",
@@ -1141,7 +1146,7 @@ void AzureRenderApp::keyCallback(
             };
             std::cout
                 << "Diagnostic view: "
-                << kDiagnosticNames[application->diagnosticView_]
+                << kDiagnosticNames[application->renderSettings_.diagnosticView]
                 << '\n';
         } else if (key == GLFW_KEY_H) {
             application->hudEnabled_ = !application->hudEnabled_;
@@ -1159,7 +1164,7 @@ void AzureRenderApp::keyCallback(
             application->screenshotRequested_ = true;
             std::cout << "Screenshot requested\n";
         } else if (key >= GLFW_KEY_F1 && key <= GLFW_KEY_F3) {
-            application->showcasePreset_ =
+            application->renderSettings_.showcasePreset =
                 static_cast<std::uint32_t>(key - GLFW_KEY_F1);
             constexpr std::array<const char*, 3> kPresetNames = {
                 "Azure Gallery",
@@ -1170,7 +1175,7 @@ void AzureRenderApp::keyCallback(
                 << "Showcase preset: "
                 << key - GLFW_KEY_F1 + 1
                 << " ("
-                << kPresetNames[application->showcasePreset_]
+                << kPresetNames[application->renderSettings_.showcasePreset]
                 << ")\n";
         } else if (key == GLFW_KEY_F4) {
             if (application->asset_.animations.empty()) {
@@ -1192,18 +1197,18 @@ void AzureRenderApp::keyCallback(
                 std::cout << "Animation: restarted\n";
             }
         } else if (key == GLFW_KEY_F10) {
-            application->innerOutlineEnabled_ =
-                !application->innerOutlineEnabled_;
+            application->renderSettings_.innerOutlineEnabled =
+                !application->renderSettings_.innerOutlineEnabled;
             std::cout
                 << "Inner outlines: "
-                << (application->innerOutlineEnabled_ ? "on" : "off")
+                << (application->renderSettings_.innerOutlineEnabled ? "on" : "off")
                 << '\n';
         } else if (key == GLFW_KEY_F9) {
-            application->stylizedLightingEnabled_ =
-                !application->stylizedLightingEnabled_;
+            application->renderSettings_.stylizedLightingEnabled =
+                !application->renderSettings_.stylizedLightingEnabled;
             std::cout
                 << "Stylized lighting: "
-                << (application->stylizedLightingEnabled_ ? "on" : "off")
+                << (application->renderSettings_.stylizedLightingEnabled ? "on" : "off")
                 << '\n';
         }
     }
@@ -1215,36 +1220,36 @@ void AzureRenderApp::keyCallback(
             application->rotationAngle_ += kFineStep;
             application->autoRotate_ = false;
         } else if (key == GLFW_KEY_F7) {
-            application->styleMaskStrength_ = std::max(
-                application->styleMaskStrength_ - 0.10F,
+            application->renderSettings_.styleMaskStrength = std::max(
+                application->renderSettings_.styleMaskStrength - 0.10F,
                 0.0F);
             std::cout
                 << "Style mask strength: "
-                << application->styleMaskStrength_
+                << application->renderSettings_.styleMaskStrength
                 << '\n';
         } else if (key == GLFW_KEY_F8) {
-            application->styleMaskStrength_ = std::min(
-                application->styleMaskStrength_ + 0.10F,
+            application->renderSettings_.styleMaskStrength = std::min(
+                application->renderSettings_.styleMaskStrength + 0.10F,
                 2.0F);
             std::cout
                 << "Style mask strength: "
-                << application->styleMaskStrength_
+                << application->renderSettings_.styleMaskStrength
                 << '\n';
         } else if (key == GLFW_KEY_F5) {
-            application->diffuseBandThreshold_ = std::max(
-                application->diffuseBandThreshold_ - 0.05F,
+            application->renderSettings_.diffuseBandThreshold = std::max(
+                application->renderSettings_.diffuseBandThreshold - 0.05F,
                 0.05F);
             std::cout
                 << "Diffuse band threshold: "
-                << application->diffuseBandThreshold_
+                << application->renderSettings_.diffuseBandThreshold
                 << '\n';
         } else if (key == GLFW_KEY_F6) {
-            application->diffuseBandThreshold_ = std::min(
-                application->diffuseBandThreshold_ + 0.05F,
+            application->renderSettings_.diffuseBandThreshold = std::min(
+                application->renderSettings_.diffuseBandThreshold + 0.05F,
                 0.95F);
             std::cout
                 << "Diffuse band threshold: "
-                << application->diffuseBandThreshold_
+                << application->renderSettings_.diffuseBandThreshold
                 << '\n';
         }
     }

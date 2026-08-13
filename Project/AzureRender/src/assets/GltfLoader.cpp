@@ -14,6 +14,7 @@
 #include <functional>
 #include <iostream>
 #include <limits>
+#include <optional>
 #include <stdexcept>
 #include <utility>
 
@@ -729,6 +730,7 @@ AssetMaterial loadMaterial(
     int styleMaskImage = -1;
     int matcapImage = -1;
     int hairDataImage = -1;
+    int faceSdfImage = -1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
@@ -813,6 +815,133 @@ AssetMaterial loadMaterial(
                     hairDataImage =
                         model.textures[static_cast<std::size_t>(textureIndex)].source;
                 }
+            }
+        }
+        if (material->extras.IsObject()
+            && material->extras.Has("azureRenderMaterial")) {
+            const tinygltf::Value& profile =
+                material->extras.Get("azureRenderMaterial");
+            if (profile.IsObject() && profile.Has("faceSdf")) {
+                const tinygltf::Value& faceSdf = profile.Get("faceSdf");
+                if (!faceSdf.IsObject()) {
+                    throw std::runtime_error(
+                        "azureRenderMaterial.faceSdf must be an object for "
+                        + result.name);
+                }
+                if ((result.materialFeatures
+                     & MaterialFeatureFaceSdfEligible) == 0) {
+                    throw std::runtime_error(
+                        "faceSdf requires the face-sdf-eligible feature for "
+                        + result.name);
+                }
+                const auto requireNumber = [&](const char* key) -> int {
+                    if (!faceSdf.Has(key) || !faceSdf.Get(key).IsNumber()) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be a number for " + result.name);
+                    }
+                    const double value =
+                        faceSdf.Get(key).GetNumberAsDouble();
+                    if (!std::isfinite(value) || std::floor(value) != value
+                        || value < static_cast<double>(
+                            std::numeric_limits<int>::min())
+                        || value > static_cast<double>(
+                            std::numeric_limits<int>::max())) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be an integer for " + result.name);
+                    }
+                    return static_cast<int>(value);
+                };
+                const auto requireString = [&](const char* key) -> std::string {
+                    if (!faceSdf.Has(key) || !faceSdf.Get(key).IsString()) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be a string for " + result.name);
+                    }
+                    return faceSdf.Get(key).Get<std::string>();
+                };
+                if (requireNumber("schemaVersion")
+                    != static_cast<int>(AssetFaceSdfProfile::kSchemaVersion)) {
+                    throw std::runtime_error(
+                        "Unsupported faceSdf schemaVersion for "
+                        + result.name);
+                }
+                const int textureIndex = requireNumber("texture");
+                if (textureIndex < 0
+                    || static_cast<std::size_t>(textureIndex)
+                        >= model.textures.size()) {
+                    throw std::runtime_error(
+                        "faceSdf.texture is out of range for " + result.name);
+                }
+                faceSdfImage = model.textures[
+                    static_cast<std::size_t>(textureIndex)].source;
+                if (faceSdfImage < 0
+                    || static_cast<std::size_t>(faceSdfImage)
+                        >= model.images.size()) {
+                    throw std::runtime_error(
+                        "faceSdf.texture has no valid image for "
+                        + result.name);
+                }
+                if (requireNumber("texCoord") != 0) {
+                    throw std::runtime_error(
+                        "Face SDF v1 supports only TEXCOORD_0 for "
+                        + result.name);
+                }
+                const std::string channel = requireString("channel");
+                if (channel == "r") {
+                    result.faceSdf.channel = AssetFaceSdfChannel::Red;
+                } else if (channel == "g") {
+                    result.faceSdf.channel = AssetFaceSdfChannel::Green;
+                } else if (channel == "b") {
+                    result.faceSdf.channel = AssetFaceSdfChannel::Blue;
+                } else if (channel == "a") {
+                    result.faceSdf.channel = AssetFaceSdfChannel::Alpha;
+                } else {
+                    throw std::runtime_error(
+                        "Unknown faceSdf.channel for " + result.name);
+                }
+                if (!faceSdf.Has("shadowOnLowValues")
+                    || !faceSdf.Get("shadowOnLowValues").IsBool()) {
+                    throw std::runtime_error(
+                        "faceSdf.shadowOnLowValues must be boolean for "
+                        + result.name);
+                }
+                result.faceSdf.shadowOnLowValues =
+                    faceSdf.Get("shadowOnLowValues").Get<bool>();
+                const std::string horizontalAxis =
+                    requireString("horizontalAxis");
+                if (horizontalAxis == "left-to-right") {
+                    result.faceSdf.mirrorHorizontal = false;
+                } else if (horizontalAxis == "right-to-left") {
+                    result.faceSdf.mirrorHorizontal = true;
+                } else {
+                    throw std::runtime_error(
+                        "Unknown faceSdf.horizontalAxis for " + result.name);
+                }
+                result.faceSdf.headNodeName = requireString("headNode");
+                std::optional<std::uint32_t> headNode;
+                for (std::size_t nodeIndex = 0;
+                     nodeIndex < model.nodes.size();
+                     ++nodeIndex) {
+                    if (model.nodes[nodeIndex].name
+                        != result.faceSdf.headNodeName) {
+                        continue;
+                    }
+                    if (headNode.has_value()) {
+                        throw std::runtime_error(
+                            "faceSdf.headNode is not unique for "
+                            + result.name);
+                    }
+                    headNode = static_cast<std::uint32_t>(nodeIndex);
+                }
+                if (!headNode.has_value()) {
+                    throw std::runtime_error(
+                        "faceSdf.headNode does not resolve for "
+                        + result.name);
+                }
+                result.faceSdf.headNode = *headNode;
+                result.faceSdf.present = true;
             }
         }
         result.alphaCutoff = static_cast<float>(material->alphaCutoff);
@@ -940,6 +1069,15 @@ AssetMaterial loadMaterial(
             128, 128, 128, 128, 128, 128, 128, 128,
         };
     }
+    if (faceSdfImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.faceSdf.pixels = decodeImageRgba(
+            model,
+            faceSdfImage,
+            kNoFactor,
+            result.faceSdf.width,
+            result.faceSdf.height);
+    }
     return result;
 }
 
@@ -981,6 +1119,7 @@ void loadNodes(const tinygltf::Model& model, LoadedAsset& asset) {
     for (std::size_t index = 0; index < model.nodes.size(); ++index) {
         const tinygltf::Node& source = model.nodes[index];
         AssetNode& destination = asset.nodes[index];
+        destination.name = source.name;
         if (source.translation.size() == 3) {
             std::transform(
                 source.translation.begin(),

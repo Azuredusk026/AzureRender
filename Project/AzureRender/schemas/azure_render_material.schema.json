@@ -50,6 +50,9 @@
     "featureParameters": {
       "description": "outline, hair highlight, emissive, face overlay",
       "$ref": "#/$defs/parameterVector"
+    },
+    "faceSdf": {
+      "$ref": "#/$defs/faceSdfProfile"
     }
   },
   "$defs": {
@@ -61,6 +64,46 @@
         "type": "number",
         "minimum": 0.0,
         "maximum": 4.0
+      }
+    },
+    "faceSdfProfile": {
+      "description": "Face SDF texture and head-local orientation contract.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "texture",
+        "texCoord",
+        "channel",
+        "shadowOnLowValues",
+        "horizontalAxis",
+        "headNode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "texCoord": {
+          "const": 0
+        },
+        "channel": {
+          "enum": ["r", "g", "b", "a"]
+        },
+        "shadowOnLowValues": {
+          "type": "boolean"
+        },
+        "horizontalAxis": {
+          "description": "Which face side is stored at increasing U.",
+          "enum": ["left-to-right", "right-to-left"]
+        },
+        "headNode": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     }
   }

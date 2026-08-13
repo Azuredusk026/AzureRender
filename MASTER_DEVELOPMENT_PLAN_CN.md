@@ -187,6 +187,24 @@ S1–S36.2 已形成以下可靠基础：
 | Render Path Backend | Multi-pass/Subpass/DRLR 的组织差异。 | 改变 Shader 数学或资产。 |
 | Capture/QA | Golden Image、A/B、Effect Isolation、Video、RenderDoc 证据。 | 修改渲染结果。 |
 | Benchmark/Data | Runner、Timing、Metadata、CSV/JSON、统计脚本。 | 手工修正原始数据。 |
+| Application/Editor | CLI、输入、未来 ImGui、Scene Outliner、Inspector、Asset Browser。 | 直接拥有 Vulkan Descriptor/Pipeline 或复制 Renderer 状态。 |
+
+### 4.1.1 发布化与模块化支线
+
+从 CQ-3 开始启用受控的 AR 支线，详细方案见
+`Project/AzureRender/docs/RENDERER_MODULARIZATION_PLAN_CN.md`。该支线服务于角色调参、
+场景复现和发布质量，不取代 CQ-3 至 CQ-6：
+
+```text
+AR-0 RenderSettings/Asset Contract
+-> AR-1 Renderer Core Boundary
+-> AR-2 Scene/Asset Model
+-> AR-3 Editor Preview
+-> AR-4 Feature Registry/Release Hardening
+```
+
+完整 ECS、脚本系统和动态插件 ABI 仍不在当前范围；先建立进程内可注册接口与稳定数据
+所有权，接口冻结后再评估动态插件。
 
 ### 4.2 材质分类目标
 
@@ -296,6 +314,11 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 ### 6.4 CQ-3 Face SDF 与脸部 Overlay
 
 **状态：Active。** 当前唯一主工作包；不得提前进入最终 Hair KK、Bloom 或最终调色。
+
+**当前增量（2026-08-13）：** AR-0 已建立 `RenderSettings v1` 与 Face SDF v1
+资产契约。兼容性审计确认莱万汀 Face Primitive 有 `TEXCOORD_0` 和
+`face-sdf-eligible`，但当前 GLB 没有显式 SDF 纹理、通道、方向或 Head Node 绑定，
+因此不复用普通脸部贴图，下一步制作 AzureRender 自有 Face SDF。
 
 **实现顺序：**
 
@@ -656,7 +679,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### Should
 
-- 可调试 HUD/ImGui、Material Preset 保存；
+- AR-0/AR-1 设置与 Renderer Core 边界；
+- 可调试 HUD/ImGui、Material Preset 保存、轻量 Scene Outliner 与 Asset Browser；
 - 轻量 Bloom、Color Grade、场景模块化和 LOD；
 - RenderDoc Capture 索引、自动 Contact Sheet、作品集网页集成；
 - 公共自制替代角色/场景资产。
@@ -666,7 +690,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 - TAA、复杂后处理、额外 Tone Mapper；
 - 多角色、复杂动画状态机；
 - 粒子、天气、体积效果；
-- ECS、Editor、Hot Reload、脚本系统；
+- 完整 ECS、通用 Editor、Hot Reload、脚本系统、动态插件 ABI；
 - Ray Tracing、SSR、GI 实验。
 
 Could 项只有在所有 Must 项完成且不会影响实验冻结时才可开始。
@@ -735,7 +759,7 @@ CQ-0 Visual QA
 
 ### 下一次开发的明确目标
 
-先验证现有公共女性 Face SDF 与莱万汀脸部 UV 的兼容性；若不兼容，则制作 AzureRender 自有 Face SDF。随后建立 Head-local 光照方向、左右翻转/阈值/Softness/Shadow Color，并重建 Hair Shadow 与 Eye Shadow Overlay 的 Depth、Opacity、Color 和偏移行为。该节点不实现最终 Hair KK、Bloom 或最终调色。
+兼容性审计已确认当前莱万汀资产没有显式 Face SDF 输入。下一步制作 AzureRender 自有 Face SDF，验证 `Bip001_Head`、`Face_Head` 等候选并冻结唯一 Head Basis；随后接入 Head-local 光照方向、左右翻转/阈值/Softness/Shadow Color，并重建 Hair Shadow 与 Eye Shadow Overlay 的 Depth、Opacity、Color 和偏移行为。该节点不实现最终 Hair KK、Bloom 或最终调色。
 
 ---
 

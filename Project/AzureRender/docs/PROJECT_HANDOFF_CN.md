@@ -12,11 +12,12 @@
 Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级高于本文中的历史
 “下一节点”记录。
 
-CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2 已于 2026-08-13 通过。当前执行顺序为：
+CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2 已于 2026-08-13 通过。CQ-3 的
+AR-0 设置/资产契约增量已完成，当前执行顺序为：
 
 `CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
 
-CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`；恢复开发时直接进入 CQ-3 的 Face SDF 兼容性验证，不提前实现最终 Hair KK 或 Bloom。
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3 审计已确认现有莱万汀 GLB 没有显式 Face SDF 输入，下一步制作 AzureRender 自有 SDF 并接入 Head-local 光照。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
 
 在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
 Pending/Deferred，不能成为主要开发节点。
@@ -100,6 +101,7 @@ DRLR feature probe、正式实验 CSV 或 Android 端。现有 GPU Timestamp JSO
   Shader Module、Framebuffer/Debug Callback 支持；
 - `src/app/AzureRenderCapture.cpp`：捕获目录、Manifest、GPU Timing 与 Screenshot；
 - `src/assets/GltfLoader.*`：glTF 数据与自定义材质 extras；
+- `src/render/RenderSettings.*`：CLI、运行时、Capture 与未来 GUI 共用的版本化渲染设置；
 - `shaders/`：当前十二个 GLSL shader；
 - `tools/`：Unreal 导出、纹理转换与 glTF 注入工具；
 - `assets_public/test_model.gltf`：可公开、可回归的自有测试资产；
@@ -107,6 +109,7 @@ DRLR feature probe、正式实验 CSV 或 Android 端。现有 GPU Timestamp JSO
 - `docs/DEVELOPMENT_LOG_CN.md`：S7–S35 的实现与 QA 记录；
 - `docs/LAEVAT_ASSET_EXPORT_CN.md`：私有角色导出、材质映射和限制；
 - `docs/HDR_TONEMAPPING_DESIGN_CN.md`：S36 HDR Scene Color、Tone Mapping 与验收方案；
+- `docs/RENDERER_MODULARIZATION_PLAN_CN.md`：AR-0 至 AR-4 的 Renderer/Scene/Editor 发布化路线；
 - 根目录 `FYP_Development_Plan_v1.3.docx`：完整研究路线；其中早期“starter app”描述已过时，实际代码状态以本文件、源码和最新开发日志为准。
 
 ## 4. 构建、运行与本次验证
