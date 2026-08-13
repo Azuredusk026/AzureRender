@@ -710,7 +710,8 @@ void AzureRenderApp::recordCommandBuffer(
     for (const AssetPrimitive& primitive : asset_.primitives) {
         const AssetMaterial& material =
             asset_.materials[primitive.materialIndex];
-        if (material.showcasePlatform > 0.5F) {
+        if (material.showcasePlatform > 0.5F
+            || material.materialClass == AssetMaterialClass::Overlay) {
             continue;
         }
         const std::size_t descriptorIndex =

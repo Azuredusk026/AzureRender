@@ -123,6 +123,8 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
 
 void main() {
     vec4 baseColor = texture(baseColorTexture, textureCoordinate);
+    bool overlayMaterial = material.materialClass == 7U
+        && materialFeatureEnabled(16U) > 0.5;
     float platformMask = clamp(material.showcasePlatform, 0.0, 1.0);
     float platformRadius = length(textureCoordinate - vec2(0.5)) * 2.0;
     float contactShadow = 1.0 - smoothstep(0.10, 0.62, platformRadius);
@@ -447,6 +449,12 @@ void main() {
         + matcapAccent
         + emissive;
     int qaIsolationMode = int(floor(camera.qaParameters.x + 0.5));
+    bool overlayDisabled = qaEffectMode == 9 && qaEffectDisabled;
+    float overlayVisible = overlayMaterial && !overlayDisabled ? 1.0 : 0.0;
+    beautyColor = mix(beautyColor, baseColor.rgb, overlayVisible);
+    if (overlayMaterial && overlayDisabled) {
+        outputAlpha = 0.0;
+    }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {
         qaColor = baseColor.rgb;
@@ -479,6 +487,8 @@ void main() {
         qaColor = material.materialClass == 2U
             ? mix(vec3(0.04), vec3(faceIllumination), faceSdfSample.a)
             : vec3(0.0);
+    } else if (qaIsolationMode == 14) {
+        qaColor = overlayMaterial ? baseColor.rgb : vec3(0.0);
     }
     outputColor = vec4(qaColor, outputAlpha);
     float innerOutlineParticipation =

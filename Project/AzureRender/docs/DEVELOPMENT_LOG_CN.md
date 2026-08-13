@@ -7,6 +7,12 @@
 - enabled/disabled 图像差异为 17,971 个通道，最大差异 55，Alpha 范围 `255..255`；Face SDF lighting sweep 60 帧通过。
 - 节点已满足运行验收，后续进入 Face overlay 和发布证据整理。
 
+### CQ-3 Face Overlay vertical slice
+
+- Overlay 材质（`class=overlay` + `feature=overlay`）现在使用 authored Base Color/Alpha，跳过 Shadow Map、toon、specular 与 Matcap。
+- QA 新增 `overlay` effect/isolation；enabled/disabled/isolation 三态 Vulkan 捕获通过，Alpha 保持 `255..255`。
+- Debug/Release 构建通过；CQ-3 Face SDF/Overlay v1 完成，下一节点为 CQ-4 Hair KK。
+
 ## 2026-07-24
 
 ### S7：莱万汀静态角色首次接入

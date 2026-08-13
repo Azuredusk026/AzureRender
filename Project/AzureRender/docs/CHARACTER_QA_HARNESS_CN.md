@@ -40,11 +40,11 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 
 `--qa-isolation` 当前支持：
 
-`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id|style-mask|ambient|direct-diffuse|shadow-tint`
+`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id|style-mask|ambient|direct-diffuse|shadow-tint|face-sdf|overlay`
 
 `--qa-effect` 当前支持：
 
-`toon|shadow|hair-kk|rim|specular|emissive|outline`
+`toon|shadow|hair-kk|rim|specular|emissive|outline|face-sdf|overlay`
 
 `--qa-effect-state` 支持：
 
@@ -54,8 +54,9 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 
 普通 Shader 分量 Isolation 会同时关闭倒壳轮廓与屏幕空间内部轮廓，避免其他效果污染输出。`outline` A/B 同时控制两条轮廓路径；Isolation 本身显示屏幕空间边缘响应。
 
-Face SDF 尚未实现，因此当前不伪造该输出；它将在 CQ-3 接入。Material ID 已在
-CQ-1 接入同一 Harness。CQ-2 增加 Style Mask、Ambient、Direct Diffuse 与 Shadow
+Face SDF 与 Overlay 已在 CQ-3 接入同一 Harness。Overlay 为 authored Base Color/Alpha
+透明层，不参与 Shadow Map、toon、specular、Matcap；两者均支持 enabled/disabled/isolation。
+Material ID 已在 CQ-1 接入，CQ-2 增加 Style Mask、Ambient、Direct Diffuse 与 Shadow
 Tint 分层视图，并把 Ramp Profile/Atlas Hash 写入 Manifest 与 QA Index。
 
 ## 5. 单次 Capture
@@ -85,8 +86,8 @@ Tint 分层视图，并把 Ramp Profile/Atlas Hash 写入 Manifest 与 QA Index�
 模式：
 
 - `baseline`：5 机位 × 4 灯光；
-- `isolation`：13 种 Beauty/Isolation 输出；
-- `ab`：7 种效果的 Enabled/Disabled/Isolation；
+- `isolation`：19 种 Beauty/Isolation 输出；
+- `ab`：9 种效果的 Enabled/Disabled/Isolation；
 - `all`：执行全部 54 个 Case。
 
 脚本拒绝写入非空 Output Root，不覆盖已有证据。使用 `-Resume` 可复用完整 Case，并安全重建上次中断产生的不完整 Case。每个 Case 保留独立 PNG Manifest，根目录生成 `qa_index.json`。

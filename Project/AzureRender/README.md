@@ -272,7 +272,7 @@ See [`docs/CHARACTER_QA_HARNESS_CN.md`](docs/CHARACTER_QA_HARNESS_CN.md) for
 the complete matrix and run `tools/run_character_qa.ps1` to generate baseline,
 isolation, A/B, or full QA evidence.
 
-CQ-1 Material Classes/Data v1 and CQ-2 Toon Ramp/Shadow v1 are complete; CQ-3 Face SDF/Overlays is active. CQ-0 evidence is
+CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, and CQ-3 Face SDF/Overlay v1 are complete; CQ-4 is next. CQ-0 evidence is
 kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
 `cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
 part of a public source package.
