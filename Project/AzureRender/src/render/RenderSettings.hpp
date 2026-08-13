@@ -8,7 +8,7 @@ namespace azurerender {
 struct FaceSdfSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
-    bool enabled = false;
+    bool enabled = true;
     bool mirrorHorizontal = false;
     float threshold = 0.50F;
     float softness = 0.08F;

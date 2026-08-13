@@ -58,6 +58,7 @@ struct AssetFaceSdfProfile {
     std::uint32_t width = 0;
     std::uint32_t height = 0;
     AssetFaceSdfChannel channel = AssetFaceSdfChannel::Red;
+    AssetFaceSdfChannel maskChannel = AssetFaceSdfChannel::Alpha;
     bool shadowOnLowValues = true;
     bool mirrorHorizontal = false;
     std::uint32_t headNode = 0;
@@ -168,13 +169,14 @@ struct LoadedAsset {
     std::vector<std::array<float, 16>> inverseBindMatrices;
     std::vector<std::array<float, 16>> jointMatrices;
     std::vector<AssetAnimation> animations;
+    std::vector<std::array<float, 16>> nodeWorldMatrices;
     bool hasSkin = false;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
 void sampleAnimation(
-    const LoadedAsset& asset,
+    LoadedAsset& asset,
     std::size_t animationIndex,
     float time,
     std::vector<std::array<float, 16>>& jointMatrices);

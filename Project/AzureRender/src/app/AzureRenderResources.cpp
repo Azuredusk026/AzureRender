@@ -408,6 +408,20 @@ void AzureRenderApp::createTexture() {
             VK_FORMAT_R8G8B8A8_UNORM,
             false,
             gpuMaterials_[index].hairData);
+        const std::vector<std::uint8_t> faceSdfPixels =
+            material.faceSdf.present
+            ? material.faceSdf.pixels
+            : std::vector<std::uint8_t>{
+                0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0,
+            };
+        uploadTexture(
+            faceSdfPixels,
+            material.faceSdf.present ? material.faceSdf.width : 2,
+            material.faceSdf.present ? material.faceSdf.height : 2,
+            VK_FORMAT_R8G8B8A8_UNORM,
+            false,
+            gpuMaterials_[index].faceSdf);
     }
 
     constexpr std::uint32_t kEnvironmentWidth = 512;

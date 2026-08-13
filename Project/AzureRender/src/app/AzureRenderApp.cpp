@@ -304,6 +304,22 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         ? std::string(AZURERENDER_ASSET_DIR) + "/test_model.gltf"
         : assetPath;
     asset_ = loadGltfAsset(resolvedAssetPath_);
+    for (const AssetMaterial& material : asset_.materials) {
+        if (!material.faceSdf.present) {
+            continue;
+        }
+        if (faceSdfHeadNode_.has_value()
+            && *faceSdfHeadNode_ != material.faceSdf.headNode) {
+            throw std::runtime_error(
+                "Face SDF materials must share one headNode");
+        }
+        faceSdfHeadNode_ = material.faceSdf.headNode;
+        std::cout
+            << "Face SDF: material=" << material.name
+            << ", texture=" << material.faceSdf.width << 'x'
+            << material.faceSdf.height
+            << ", headNode=" << material.faceSdf.headNodeName << '\n';
+    }
     appendShowcasePlatform(asset_);
     std::cout << "Asset path: " << resolvedAssetPath_ << '\n';
     std::cout << "Loaded asset: " << asset_.vertices.size() << " vertices, "
@@ -491,9 +507,9 @@ void AzureRenderApp::configureQaHarness() {
     qaEffectName_ = runOptions_.qaEffect.empty()
         ? "none"
         : runOptions_.qaEffect;
-    constexpr std::array<const char*, 8> kEffectNames = {
+    constexpr std::array<const char*, 9> kEffectNames = {
         "none", "toon", "shadow", "hair-kk", "rim", "specular",
-        "emissive", "outline",
+        "emissive", "outline", "face-sdf",
     };
     const auto effect = std::find(
         kEffectNames.begin(), kEffectNames.end(), qaEffectName_);
@@ -518,11 +534,11 @@ void AzureRenderApp::configureQaHarness() {
     qaIsolationName_ = runOptions_.qaIsolation.empty()
         ? "beauty"
         : runOptions_.qaIsolation;
-    constexpr std::array<const char*, 17> kIsolationNames = {
+    constexpr std::array<const char*, 18> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
-        "direct-diffuse", "shadow-tint",
+        "direct-diffuse", "shadow-tint", "face-sdf",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -532,18 +548,18 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 17> kPostProcessViews = {
-        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0,
+    constexpr std::array<std::uint32_t, 18> kPostProcessViews = {
+        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 17> kShaderIsolationModes = {
-        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12,
+    constexpr std::array<std::uint32_t, 18> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
 
     if (qaEffectStateName_ == "isolation") {
-        constexpr std::array<std::uint32_t, 8> kEffectIsolationModes = {
-            0, 2, 3, 4, 5, 6, 7, 0,
+        constexpr std::array<std::uint32_t, 9> kEffectIsolationModes = {
+            0, 2, 3, 4, 5, 6, 7, 0, 13,
         };
         qaIsolationMode_ = kEffectIsolationModes[qaEffectMode_];
         qaIsolationName_ = qaEffectName_;
@@ -694,7 +710,8 @@ void AzureRenderApp::cleanup() {
                      &material.specularEmissive,
                      &material.styleMask,
                      &material.matcap,
-                     &material.hairData}) {
+                     &material.hairData,
+                     &material.faceSdf}) {
                 vkDestroySampler(device_, texture->sampler, nullptr);
                 vkDestroyImageView(device_, texture->view, nullptr);
                 vkDestroyImage(device_, texture->image, nullptr);

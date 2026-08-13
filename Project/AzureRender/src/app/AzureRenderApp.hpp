@@ -79,6 +79,9 @@ private:
         std::array<float, 4> renderingParameters{};
         std::array<float, 4> showcaseParameters{};
         std::array<float, 4> qaParameters{};
+        std::array<float, 4> faceLightDirection{};
+        std::array<float, 4> faceSdfParameters{};
+        std::array<float, 4> faceSdfShadowColor{};
     };
 
     struct GpuTexture {
@@ -96,6 +99,7 @@ private:
         GpuTexture styleMask;
         GpuTexture matcap;
         GpuTexture hairData;
+        GpuTexture faceSdf;
     };
 
     struct MaterialPushConstants {
@@ -243,6 +247,7 @@ private:
     float animationTime_ = 0.0F;
     bool animationPlaying_ = true;
     azurerender::RenderSettings renderSettings_;
+    std::optional<std::uint32_t> faceSdfHeadNode_;
     bool hudEnabled_ = false;
     bool qaHarnessEnabled_ = false;
     std::string qaCameraName_ = "none";

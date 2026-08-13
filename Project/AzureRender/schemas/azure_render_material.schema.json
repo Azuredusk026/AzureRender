@@ -75,6 +75,7 @@
         "texture",
         "texCoord",
         "channel",
+        "maskChannel",
         "shadowOnLowValues",
         "horizontalAxis",
         "headNode"
@@ -91,6 +92,9 @@
           "const": 0
         },
         "channel": {
+          "enum": ["r", "g", "b", "a"]
+        },
+        "maskChannel": {
           "enum": ["r", "g", "b", "a"]
         },
         "shadowOnLowValues": {

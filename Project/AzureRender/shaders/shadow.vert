@@ -8,6 +8,9 @@ layout(binding = 0) uniform CameraData {
     vec4 renderingParameters;
     vec4 showcaseParameters;
     vec4 qaParameters;
+    vec4 faceLightDirection;
+    vec4 faceSdfParameters;
+    vec4 faceSdfShadowColor;
 } camera;
 
 layout(std430, binding = 10) readonly buffer JointData {

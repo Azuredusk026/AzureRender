@@ -131,10 +131,13 @@ if ($Mode -in @('all', 'isolation')) {
         'style-mask',
         'ambient',
         'direct-diffuse',
-        'shadow-tint'
+        'shadow-tint',
+        'face-sdf'
     )
     foreach ($view in $isolationViews) {
-        $camera = if ($view -in @('hair-kk', 'rim', 'specular')) {
+        $camera = if ($view -eq 'face-sdf') {
+            'face-front'
+        } elseif ($view -in @('hair-kk', 'rim', 'specular')) {
             'face-three-quarter'
         } elseif ($view -eq 'emissive') {
             'back-detail'
@@ -165,6 +168,7 @@ if ($Mode -in @('all', 'ab')) {
         @{ effect = 'specular'; camera = 'face-three-quarter'; light = 'specular-rim' },
         @{ effect = 'emissive'; camera = 'back-detail'; light = 'rear-emissive' },
         @{ effect = 'outline'; camera = 'full-body-front'; light = 'neutral-material' }
+        @{ effect = 'face-sdf'; camera = 'face-front'; light = 'stylized-key' }
     )
     foreach ($effectCase in $effectCases) {
         foreach ($state in @('enabled', 'disabled', 'isolation')) {

@@ -107,6 +107,7 @@ def main() -> None:
                     and face_sdf.get("texture", -1) >= 0
                     and face_sdf.get("texCoord") == 0
                     and face_sdf.get("channel") in {"r", "g", "b", "a"}
+                    and face_sdf.get("maskChannel") in {"r", "g", "b", "a"}
                     and isinstance(face_sdf.get("shadowOnLowValues"), bool)
                     and face_sdf.get("horizontalAxis")
                     in {"left-to-right", "right-to-left"}

@@ -8,6 +8,9 @@ layout(binding = 0) uniform CameraData {
     vec4 renderingParameters;
     vec4 showcaseParameters;
     vec4 qaParameters;
+    vec4 faceLightDirection;
+    vec4 faceSdfParameters;
+    vec4 faceSdfShadowColor;
 } camera;
 
 layout(binding = 1) uniform sampler2D baseColorTexture;
@@ -20,6 +23,7 @@ layout(binding = 7) uniform sampler2D matcapTexture;
 layout(binding = 8) uniform sampler2D hairDataTexture;
 layout(binding = 9) uniform sampler2D shadowMap;
 layout(binding = 11) uniform sampler2D toonRampTexture;
+layout(binding = 12) uniform sampler2D faceSdfTexture;
 
 layout(push_constant) uniform MaterialData {
     float alphaCutoff;
@@ -253,6 +257,39 @@ void main() {
             - styleMask * mix(0.04, 0.13, material.styleParameters.y),
         0.0,
         1.0);
+    vec4 faceSdfSample = texture(faceSdfTexture, textureCoordinate);
+    float faceSdfEligible = material.materialClass == 2U
+        ? materialFeatureEnabled(4U)
+        : 0.0;
+    float faceSdfEnabled = camera.faceSdfParameters.x
+        * camera.faceLightDirection.w
+        * faceSdfEligible;
+    if (qaEffectMode == 8 && qaEffectDisabled) {
+        faceSdfEnabled = 0.0;
+    }
+    float faceCoordinate = camera.faceSdfParameters.w > 0.5
+        ? 1.0 - faceSdfSample.r
+        : faceSdfSample.r;
+    float lateralLight = camera.faceLightDirection.y;
+    float frontLight = max(-camera.faceLightDirection.z, 0.0);
+    float orientedCoordinate = lateralLight >= 0.0
+        ? faceCoordinate
+        : 1.0 - faceCoordinate;
+    float faceThreshold = clamp(
+        camera.faceSdfParameters.y
+            - frontLight * 0.34
+            + (1.0 - abs(lateralLight)) * 0.04,
+        0.08,
+        0.92);
+    float faceIllumination = smoothstep(
+        faceThreshold - camera.faceSdfParameters.z,
+        faceThreshold + camera.faceSdfParameters.z,
+        orientedCoordinate);
+    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a;
+    rampCoordinate = mix(
+        rampCoordinate,
+        mix(0.20, 0.88, faceIllumination),
+        faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
@@ -290,6 +327,12 @@ void main() {
             * 0.32);
     vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
         + directDiffuse * lamShadowTint * aoShadowTint;
+    tintedDiffuse *= mix(
+        vec3(1.0),
+        camera.faceSdfShadowColor.rgb,
+        (1.0 - faceIllumination)
+            * faceSdfWeight
+            * camera.faceSdfShadowColor.a);
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
         * keyVisibility * material.styleParameters.z;
@@ -432,6 +475,10 @@ void main() {
             (vec3(1.0) - lamShadowTint * aoShadowTint) * 5.0,
             vec3(0.0),
             vec3(1.0));
+    } else if (qaIsolationMode == 13) {
+        qaColor = material.materialClass == 2U
+            ? mix(vec3(0.04), vec3(faceIllumination), faceSdfSample.a)
+            : vec3(0.0);
     }
     outputColor = vec4(qaColor, outputAlpha);
     float innerOutlineParticipation =

@@ -118,6 +118,8 @@ def audit(document: dict) -> dict:
                 material_issues.append("only TEXCOORD_0 is supported in Face SDF v1")
             if face_sdf.get("channel") not in {"r", "g", "b", "a"}:
                 material_issues.append("invalid Face SDF channel")
+            if face_sdf.get("maskChannel") not in {"r", "g", "b", "a"}:
+                material_issues.append("invalid Face SDF maskChannel")
             if face_sdf.get("horizontalAxis") not in {
                 "left-to-right",
                 "right-to-left",

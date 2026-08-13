@@ -48,6 +48,8 @@ void AzureRenderApp::createDescriptorSetLayout() {
     jointBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     VkDescriptorSetLayoutBinding toonRampBinding = textureBinding;
     toonRampBinding.binding = 11;
+    VkDescriptorSetLayoutBinding faceSdfBinding = textureBinding;
+    faceSdfBinding.binding = 12;
 
     const std::array bindings = {
         uniformBinding,
@@ -62,6 +64,7 @@ void AzureRenderApp::createDescriptorSetLayout() {
         shadowBinding,
         jointBinding,
         toonRampBinding,
+        faceSdfBinding,
     };
     VkDescriptorSetLayoutCreateInfo createInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
@@ -128,7 +131,7 @@ void AzureRenderApp::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * asset_.materials.size());
     const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 10},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount},
     }};
 
@@ -225,8 +228,12 @@ void AzureRenderApp::createDescriptorSets() {
             toonRampInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             toonRampInfo.imageView = toonRampTexture_.view;
             toonRampInfo.sampler = toonRampTexture_.sampler;
+            VkDescriptorImageInfo faceSdfInfo{};
+            faceSdfInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            faceSdfInfo.imageView = gpuMaterials_[material].faceSdf.view;
+            faceSdfInfo.sampler = gpuMaterials_[material].faceSdf.sampler;
 
-            std::array<VkWriteDescriptorSet, 12> writes{};
+            std::array<VkWriteDescriptorSet, 13> writes{};
             writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
             writes[0].dstSet = descriptorSets_[descriptorIndex];
             writes[0].dstBinding = 0;
@@ -300,6 +307,12 @@ void AzureRenderApp::createDescriptorSets() {
             writes[11].descriptorCount = 1;
             writes[11].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
             writes[11].pImageInfo = &toonRampInfo;
+            writes[12] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+            writes[12].dstSet = descriptorSets_[descriptorIndex];
+            writes[12].dstBinding = 12;
+            writes[12].descriptorCount = 1;
+            writes[12].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            writes[12].pImageInfo = &faceSdfInfo;
             vkUpdateDescriptorSets(
                 device_,
                 static_cast<std::uint32_t>(writes.size()),

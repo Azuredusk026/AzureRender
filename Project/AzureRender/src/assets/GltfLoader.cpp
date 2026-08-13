@@ -889,18 +889,20 @@ AssetMaterial loadMaterial(
                         + result.name);
                 }
                 const std::string channel = requireString("channel");
-                if (channel == "r") {
-                    result.faceSdf.channel = AssetFaceSdfChannel::Red;
-                } else if (channel == "g") {
-                    result.faceSdf.channel = AssetFaceSdfChannel::Green;
-                } else if (channel == "b") {
-                    result.faceSdf.channel = AssetFaceSdfChannel::Blue;
-                } else if (channel == "a") {
-                    result.faceSdf.channel = AssetFaceSdfChannel::Alpha;
-                } else {
+                const auto parseChannel = [&](const std::string& value,
+                                              const char* key) {
+                    if (value == "r") return AssetFaceSdfChannel::Red;
+                    if (value == "g") return AssetFaceSdfChannel::Green;
+                    if (value == "b") return AssetFaceSdfChannel::Blue;
+                    if (value == "a") return AssetFaceSdfChannel::Alpha;
                     throw std::runtime_error(
-                        "Unknown faceSdf.channel for " + result.name);
-                }
+                        std::string("Unknown faceSdf.") + key
+                        + " for " + result.name);
+                };
+                result.faceSdf.channel = parseChannel(channel, "channel");
+                result.faceSdf.maskChannel = parseChannel(
+                    requireString("maskChannel"),
+                    "maskChannel");
                 if (!faceSdf.Has("shadowOnLowValues")
                     || !faceSdf.Get("shadowOnLowValues").IsBool()) {
                     throw std::runtime_error(
@@ -1077,6 +1079,28 @@ AssetMaterial loadMaterial(
             kNoFactor,
             result.faceSdf.width,
             result.faceSdf.height);
+        const std::size_t distanceChannel =
+            static_cast<std::size_t>(result.faceSdf.channel);
+        const std::size_t maskChannel =
+            static_cast<std::size_t>(result.faceSdf.maskChannel);
+        for (std::size_t pixel = 0;
+             pixel < result.faceSdf.pixels.size();
+             pixel += 4) {
+            std::uint8_t distance =
+                result.faceSdf.pixels[pixel + distanceChannel];
+            if (!result.faceSdf.shadowOnLowValues) {
+                distance = static_cast<std::uint8_t>(255U - distance);
+            }
+            if (result.faceSdf.mirrorHorizontal) {
+                distance = static_cast<std::uint8_t>(255U - distance);
+            }
+            const std::uint8_t mask =
+                result.faceSdf.pixels[pixel + maskChannel];
+            result.faceSdf.pixels[pixel] = distance;
+            result.faceSdf.pixels[pixel + 1] = distance;
+            result.faceSdf.pixels[pixel + 2] = distance;
+            result.faceSdf.pixels[pixel + 3] = mask;
+        }
     }
     return result;
 }
@@ -1639,6 +1663,14 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     loadNodes(model, asset);
     const std::vector<Matrix4> nodeWorldTransforms =
         calculateNodeWorldTransforms(model);
+    asset.nodeWorldMatrices.resize(nodeWorldTransforms.size());
+    for (std::size_t index = 0; index < nodeWorldTransforms.size(); ++index) {
+        std::transform(
+            nodeWorldTransforms[index].begin(),
+            nodeWorldTransforms[index].end(),
+            asset.nodeWorldMatrices[index].begin(),
+            [](const double value) { return static_cast<float>(value); });
+    }
     loadJointMatrices(model, nodeWorldTransforms, asset);
     loadAnimations(model, asset);
 
@@ -1678,7 +1710,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
 }
 
 void sampleAnimation(
-    const LoadedAsset& asset,
+    LoadedAsset& asset,
     const std::size_t animationIndex,
     const float time,
     std::vector<std::array<float, 16>>& jointMatrices) {
@@ -1759,6 +1791,15 @@ void sampleAnimation(
     };
     for (std::size_t index = 0; index < asset.nodes.size(); ++index) {
         calculate(index);
+    }
+
+    asset.nodeWorldMatrices.resize(worldTransforms.size());
+    for (std::size_t index = 0; index < worldTransforms.size(); ++index) {
+        std::transform(
+            worldTransforms[index].begin(),
+            worldTransforms[index].end(),
+            asset.nodeWorldMatrices[index].begin(),
+            [](const double value) { return static_cast<float>(value); });
     }
 
     jointMatrices.resize(asset.jointNodes.size());

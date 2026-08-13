@@ -267,6 +267,38 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
         qaEffectEnabled_ ? 1.0F : 0.0F,
         qaHarnessEnabled_ ? 1.0F : 0.0F,
     };
+    Vector3 faceLight = {0.0F, 0.0F, -1.0F};
+    bool hasFaceSdf = false;
+    if (faceSdfHeadNode_.has_value()
+        && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
+        const float cosine = std::cos(rotationAngle_);
+        const float sine = std::sin(rotationAngle_);
+        const Vector3 objectLight = normalize({
+            cosine * lightDirection[0] - sine * lightDirection[2],
+            lightDirection[1],
+            sine * lightDirection[0] + cosine * lightDirection[2],
+        });
+        const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
+        const Vector3 headX = normalize({head[0], head[1], head[2]});
+        const Vector3 headY = normalize({head[4], head[5], head[6]});
+        const Vector3 headZ = normalize({head[8], head[9], head[10]});
+        faceLight = normalize({
+            dot(objectLight, headX),
+            dot(objectLight, headY),
+            dot(objectLight, headZ),
+        });
+        hasFaceSdf = true;
+    }
+    uniform.faceLightDirection = {
+        faceLight[0], faceLight[1], faceLight[2], hasFaceSdf ? 1.0F : 0.0F,
+    };
+    uniform.faceSdfParameters = {
+        renderSettings_.faceSdf.enabled ? 1.0F : 0.0F,
+        renderSettings_.faceSdf.threshold,
+        renderSettings_.faceSdf.softness,
+        renderSettings_.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,
+    };
+    uniform.faceSdfShadowColor = renderSettings_.faceSdf.shadowColor;
     std::memcpy(
         uniformBufferMapped_[frameIndex],
         &uniform,

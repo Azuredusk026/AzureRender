@@ -2607,3 +2607,9 @@ Capture 与 Renderer 各自维护一套参数，也避免把普通脸部贴图�
 结论：AR-0 的设置与资产契约增量完成；CQ-3 仍为 Active。下一步制作自有 Face SDF，
 绑定明确 Head Node，并实现 Head-local 光照、左右翻转、Threshold/Softness 与 Face SDF
 Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 Editor/ECS。
+## 2026-08-13 CQ-3 Face SDF v1
+
+- 建立 Face SDF v1 资产契约，生成 `assets_public/face_sdf_v1.png` 并注入私有 CQ-3 GLB。
+- Loader 解析并规范化距离/遮罩通道；运行时接入 binding 12、Head-local 光向量和 Face 漫反射分带。
+- 新增 `face-sdf` QA effect/isolation，契约校验与兼容性审计通过。
+- Debug Shader/C++ 增量构建通过；Vulkan/Xvfb 视觉回归受当前执行环境 loopback 初始化错误阻塞，节点保持 Review。
