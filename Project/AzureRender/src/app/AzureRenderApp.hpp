@@ -222,6 +222,7 @@ private:
     VkDeviceMemory indexBufferMemory_ = VK_NULL_HANDLE;
     std::vector<GpuMaterial> gpuMaterials_;
     GpuTexture environmentTexture_;
+    GpuTexture toonRampTexture_;
     std::vector<VkBuffer> uniformBuffers_;
     std::vector<VkDeviceMemory> uniformBufferMemories_;
     std::vector<void*> uniformBufferMapped_;

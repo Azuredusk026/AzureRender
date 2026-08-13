@@ -513,10 +513,11 @@ void AzureRenderApp::configureQaHarness() {
     qaIsolationName_ = runOptions_.qaIsolation.empty()
         ? "beauty"
         : runOptions_.qaIsolation;
-    constexpr std::array<const char*, 13> kIsolationNames = {
+    constexpr std::array<const char*, 17> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
-        "outline", "shadow-map", "material-id",
+        "outline", "shadow-map", "material-id", "style-mask", "ambient",
+        "direct-diffuse", "shadow-tint",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -526,11 +527,11 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 13> kPostProcessViews = {
-        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0,
+    constexpr std::array<std::uint32_t, 17> kPostProcessViews = {
+        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 13> kShaderIsolationModes = {
-        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8,
+    constexpr std::array<std::uint32_t, 17> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12,
     };
     diagnosticView_ = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
@@ -699,6 +700,10 @@ void AzureRenderApp::cleanup() {
         vkDestroyImageView(device_, environmentTexture_.view, nullptr);
         vkDestroyImage(device_, environmentTexture_.image, nullptr);
         vkFreeMemory(device_, environmentTexture_.memory, nullptr);
+        vkDestroySampler(device_, toonRampTexture_.sampler, nullptr);
+        vkDestroyImageView(device_, toonRampTexture_.view, nullptr);
+        vkDestroyImage(device_, toonRampTexture_.image, nullptr);
+        vkFreeMemory(device_, toonRampTexture_.memory, nullptr);
         if (shadowFramebuffer_ != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, shadowFramebuffer_, nullptr);
         }

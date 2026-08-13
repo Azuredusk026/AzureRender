@@ -114,7 +114,8 @@ int main(const int argumentCount, char** argumentValues) {
                     "<enabled|disabled|isolation>] "
                     "[--qa-isolation <beauty|albedo|world-normal|depth|"
                     "diffuse-band|shadow-visibility|hair-kk|rim|"
-                    "specular|emissive|outline|shadow-map|material-id>] "
+                    "specular|emissive|outline|shadow-map|material-id|"
+                    "style-mask|ambient|direct-diffuse|shadow-tint>] "
                     "[--capture-dir <empty directory> "
                     "--capture-frames <positive integer> "
                     "--capture-fps <1-240>]");

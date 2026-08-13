@@ -1,9 +1,9 @@
 # 项目开发交接摘要
 
-> 最后核对：2026-08-02（Asia/Singapore）
+> 最后核对：2026-08-13（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-2 真正的 Toon Ramp 与 Shadow 层级**
+> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-3 Face SDF 与脸部 Overlay**
 
 ## 0. 长期路线入口
 
@@ -12,11 +12,11 @@
 Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级高于本文中的历史
 “下一节点”记录。
 
-CQ-0 与 CQ-1 已于 2026-08-02 通过。当前执行顺序为：
+CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2 已于 2026-08-13 通过。当前执行顺序为：
 
-`CQ-2 Toon Ramp -> CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
+`CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
 
-CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。恢复开发时从 CQ-2 的 Ramp LUT 数据格式与采样路径开始，不提前实现 Face SDF、最终 Hair KK 或 Bloom。
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`；恢复开发时直接进入 CQ-3 的 Face SDF 兼容性验证，不提前实现最终 Hair KK 或 Bloom。
 
 在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
 Pending/Deferred，不能成为主要开发节点。
@@ -438,3 +438,23 @@ Main Scene -> RGBA16F Scene Color -> HDR Outline Composite
 S36.2 至此完成。这里原定的 S36.3 已被长期主计划重新排序为 Deferred。当前下一节点
 不是曝光或正式性能测量，而是 **M1/CQ-0 固定视觉 QA Harness**；只有角色质量通过 M2
 Gate 后，才按 Master Plan 恢复后续工程与研究节点。
+
+## 13. CQ-2 Toon Ramp / Shadow v1 与当前恢复入口
+
+CQ-2 已于 2026-08-13 完成：
+
+- `assets_public/toon_ramp_profiles.json` 是版本化 Ramp 源；
+- `assets_public/toon_ramp_atlas.ppm` 是 10x64 线性 UNORM Atlas；
+- Skin/Face 使用软 Ramp，Hair/Fabric/Metal/Eye 使用阶梯 Ramp；
+- Direct Diffuse、Ambient、Shadow Visibility、AO、Shadow Tint 和 Style Mask
+  已拆分并可单独 Isolation；
+- Descriptor binding 11 持有 Renderer-owned Ramp，128-byte Push Constant 未扩展；
+- Manifest 和 QA Index 保存 Ramp 文件 Hash；
+- 详细设计与证据见 `docs/TOON_RAMP_SHADOW_V1_CN.md`。
+
+最终验证在 NVIDIA GeForce RTX 5070 Ti Laptop GPU 上完成：Debug/Release 构建、
+公共/私有 120 帧 Smoke、60 帧 Lighting Sweep、1920x1080 Release Beauty 和 Alpha/
+Manifest 检查通过。评审图位于 `captures/cq2_review_v1/cq2_review_sheet.png`。
+
+当前恢复入口为 **CQ-3 Face SDF 与脸部 Overlay**。第一步只验证公共 Face SDF 与
+莱万汀 UV、方向和镜像规则的兼容性；不提前实现最终 Hair KK、Bloom 或最终调色。

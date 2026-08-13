@@ -277,7 +277,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.3 CQ-2 真正的 Toon Ramp 与 Shadow 层级
 
-**状态：Active。** 使用 CQ-1 的 Class/参数所有权接入可编辑 Ramp LUT；禁止退回全局 `smoothstep` 或材质序号硬编码。
+**状态：Complete（2026-08-13）。** 已使用 CQ-1 的 Class/参数所有权接入版本化 Ramp Atlas，并把 Direct Diffuse、Ambient、Shadow Map Visibility、AO 与 Material Shadow Tint 拆分为可独立诊断的层级。
 
 **任务：**
 
@@ -291,7 +291,11 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 **退出条件：** 参考图中的皮肤柔和分区、头发暗面、布料金属层次能在画面中直接辨认；关闭 Ramp 后差异明显但不破坏材质纹理。
 
+**验收结果：** Skin/Face 使用线性软 Ramp，Hair/Fabric/Metal/Eye 使用阶梯 Ramp；Style Mask 控制 Ramp 坐标、Shadow/AO 和 Specular 权重。Toon Enabled/Disabled 在 1280×720 代表帧中产生 0.981119 Mean Absolute RGB Difference 和 18.503255% Changed Pixels，变化集中在角色区域；公共/私有 Debug Validation、Release、60 帧 Lighting Sweep、Alpha 与 Manifest Hash 检查通过。
+
 ### 6.4 CQ-3 Face SDF 与脸部 Overlay
+
+**状态：Active。** 当前唯一主工作包；不得提前进入最终 Hair KK、Bloom 或最终调色。
 
 **实现顺序：**
 
@@ -712,7 +716,7 @@ data/
 
 ### 当前 Work Package
 
-**CQ-2 — 真正的 Toon Ramp 与 Shadow 层级**
+**CQ-3 — Face SDF 与脸部 Overlay**
 
 ### CQ-0 之后的固定顺序
 
@@ -731,7 +735,7 @@ CQ-0 Visual QA
 
 ### 下一次开发的明确目标
 
-建立 CQ-2 Ramp/Shadow v1：为 Skin/Face、Hair、Fabric、Metal/Eye 准备独立、可编辑的 Ramp LUT，分离 Direct Diffuse、Ambient、Shadow Map Visibility、AO 与 Shadow Tint，并用固定 Lighting Sweep 检查明暗边界。该节点不实现 Face SDF、最终 Hair KK、Bloom 或最终调色。
+先验证现有公共女性 Face SDF 与莱万汀脸部 UV 的兼容性；若不兼容，则制作 AzureRender 自有 Face SDF。随后建立 Head-local 光照方向、左右翻转/阈值/Softness/Shadow Color，并重建 Hair Shadow 与 Eye Shadow Overlay 的 Depth、Opacity、Color 和偏移行为。该节点不实现最终 Hair KK、Bloom 或最终调色。
 
 ---
 

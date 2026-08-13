@@ -548,7 +548,10 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << " FABRIC " << materialClassCounts[4]
          << " METAL " << materialClassCounts[5]
          << " EYE " << materialClassCounts[6]
-         << " OVERLAY " << materialClassCounts[7] << '\n';
+         << " OVERLAY " << materialClassCounts[7] << '\n'
+         << "TOON : RAMP V1 / 10 CLASSES  MASK "
+         << std::fixed << std::setprecision(2) << styleMaskStrength_
+         << "  LEGACY THRESHOLD " << diffuseBandThreshold_ << '\n';
     if (faceProfile != nullptr && hairProfile != nullptr) {
         text << "MAT PARAM: FACE T" << faceProfile->styleParameters[0]
              << " S" << faceProfile->styleParameters[2]

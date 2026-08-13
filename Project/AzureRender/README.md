@@ -3,6 +3,12 @@
 Portfolio-first Vulkan renderer for a stylized character and industrial
 science-fiction showcase scene.
 
+M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
+Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
+ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
+style-mask routing have independent QA views. The active work package is CQ-3
+Face SDF/Overlays.
+
 The current `S1-S36.2` baseline creates a resizable Windows GLFW surface, selects a
 Vulkan GPU, enables the Khronos validation layer in Debug builds, manages a
 two-frame swapchain loop, uploads device-local vertex/index buffers through
@@ -254,7 +260,7 @@ See [`docs/CHARACTER_QA_HARNESS_CN.md`](docs/CHARACTER_QA_HARNESS_CN.md) for
 the complete matrix and run `tools/run_character_qa.ps1` to generate baseline,
 isolation, A/B, or full QA evidence.
 
-CQ-1 Material Classes/Data v1 is complete; CQ-2 Toon Ramp/Shadow is active. CQ-0 evidence is
+CQ-1 Material Classes/Data v1 and CQ-2 Toon Ramp/Shadow v1 are complete; CQ-3 Face SDF/Overlays is active. CQ-0 evidence is
 kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
 `cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
 part of a public source package.
@@ -262,6 +268,10 @@ part of a public source package.
 Material Class/Data v1 is documented in
 [`docs/MATERIAL_SYSTEM_V1_CN.md`](docs/MATERIAL_SYSTEM_V1_CN.md). Use
 `--qa-isolation material-id` to inspect the per-primitive class assignment.
+CQ-2 adds `style-mask`, `ambient`, `direct-diffuse`, and `shadow-tint`
+isolation views. Ramp source data lives in
+`assets_public/toon_ramp_profiles.json`; regenerate the sampled atlas with
+`python tools/build_toon_ramp_atlas.py`.
 
 ## Deterministic portfolio capture
 

@@ -46,6 +46,8 @@ void AzureRenderApp::createDescriptorSetLayout() {
     jointBinding.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
     jointBinding.descriptorCount = 1;
     jointBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+    VkDescriptorSetLayoutBinding toonRampBinding = textureBinding;
+    toonRampBinding.binding = 11;
 
     const std::array bindings = {
         uniformBinding,
@@ -59,6 +61,7 @@ void AzureRenderApp::createDescriptorSetLayout() {
         hairDataBinding,
         shadowBinding,
         jointBinding,
+        toonRampBinding,
     };
     VkDescriptorSetLayoutCreateInfo createInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
@@ -125,7 +128,7 @@ void AzureRenderApp::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * asset_.materials.size());
     const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 9},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 10},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount},
     }};
 
@@ -218,8 +221,12 @@ void AzureRenderApp::createDescriptorSets() {
                 VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             shadowInfo.imageView = shadowImageView_;
             shadowInfo.sampler = shadowSampler_;
+            VkDescriptorImageInfo toonRampInfo{};
+            toonRampInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            toonRampInfo.imageView = toonRampTexture_.view;
+            toonRampInfo.sampler = toonRampTexture_.sampler;
 
-            std::array<VkWriteDescriptorSet, 11> writes{};
+            std::array<VkWriteDescriptorSet, 12> writes{};
             writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
             writes[0].dstSet = descriptorSets_[descriptorIndex];
             writes[0].dstBinding = 0;
@@ -287,6 +294,12 @@ void AzureRenderApp::createDescriptorSets() {
             writes[10].descriptorCount = 1;
             writes[10].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
             writes[10].pBufferInfo = &jointBufferInfo;
+            writes[11] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+            writes[11].dstSet = descriptorSets_[descriptorIndex];
+            writes[11].dstBinding = 11;
+            writes[11].descriptorCount = 1;
+            writes[11].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            writes[11].pImageInfo = &toonRampInfo;
             vkUpdateDescriptorSets(
                 device_,
                 static_cast<std::uint32_t>(writes.size()),

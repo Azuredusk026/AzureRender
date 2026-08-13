@@ -4,4 +4,4 @@
 
 # Reproducible CQ material-profile probes; regenerate with
 # tools/inject_gltf_textures.js instead of committing duplicate 64 MiB GLBs.
-/laevat_skinned/laevat_skinned_material_cq1*.glb
+/laevat_skinned/laevat_skinned_material_cq*.glb

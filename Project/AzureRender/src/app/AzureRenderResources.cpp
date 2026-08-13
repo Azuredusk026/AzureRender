@@ -6,6 +6,10 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <fstream>
+#include <stdexcept>
+#include <string>
+#include <utility>
 #include <vector>
 
 using namespace azurerender::internal;
@@ -311,6 +315,46 @@ void AzureRenderApp::createTexture() {
             "vkCreateSampler");
     };
 
+    const auto loadPpmTexture = [](const std::string& path) {
+        std::ifstream stream(path);
+        if (!stream) {
+            throw std::runtime_error("Could not open toon-ramp atlas: " + path);
+        }
+        std::string magic;
+        std::uint32_t width = 0;
+        std::uint32_t height = 0;
+        std::uint32_t maximum = 0;
+        stream >> magic >> width >> height >> maximum;
+        if (magic != "P3" || width < 8 || height != 10 || maximum != 255) {
+            throw std::runtime_error("Invalid P3 toon-ramp atlas: " + path);
+        }
+        std::vector<std::uint8_t> pixels(
+            static_cast<std::size_t>(width) * height * 4);
+        for (std::size_t pixel = 0; pixel < pixels.size() / 4; ++pixel) {
+            std::uint32_t red = 0;
+            std::uint32_t green = 0;
+            std::uint32_t blue = 0;
+            if (!(stream >> red >> green >> blue)
+                || red > maximum || green > maximum || blue > maximum) {
+                throw std::runtime_error("Invalid toon-ramp pixel data: " + path);
+            }
+            pixels[pixel * 4 + 0] = static_cast<std::uint8_t>(red);
+            pixels[pixel * 4 + 1] = static_cast<std::uint8_t>(green);
+            pixels[pixel * 4 + 2] = static_cast<std::uint8_t>(blue);
+            pixels[pixel * 4 + 3] = 255;
+        }
+        std::string trailing;
+        if (stream >> trailing) {
+            throw std::runtime_error("Unexpected trailing toon-ramp data: " + path);
+        }
+        struct LoadedPpm {
+            std::vector<std::uint8_t> pixels;
+            std::uint32_t width;
+            std::uint32_t height;
+        };
+        return LoadedPpm{std::move(pixels), width, height};
+    };
+
     gpuMaterials_.resize(asset_.materials.size());
     for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
         const AssetMaterial& material = asset_.materials[index];
@@ -428,6 +472,15 @@ void AzureRenderApp::createTexture() {
         VK_FORMAT_R8G8B8A8_UNORM,
         true,
         environmentTexture_);
+
+    const auto toonRamp = loadPpmTexture(AZURERENDER_RAMP_ATLAS_PATH);
+    uploadTexture(
+        toonRamp.pixels,
+        toonRamp.width,
+        toonRamp.height,
+        VK_FORMAT_R8G8B8A8_UNORM,
+        true,
+        toonRampTexture_);
 }
 
 void AzureRenderApp::createUniformBuffers() {

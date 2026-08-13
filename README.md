@@ -4,7 +4,7 @@ AzureRender is a C++17/Vulkan stylized character renderer and the implementation
 
 > Comparative Evaluation of Vulkan Subpasses and Dynamic Rendering Local Read for Real-Time NPR Rendering
 
-The active application is in [`Project/AzureRender`](Project/AzureRender). The current engineering baseline is S36.2; CQ-0 visual QA and CQ-1 Material Classes/Data v1 are complete, and the active work package is M1/CQ-2 Toon Ramp/Shadow. The deferred Multi-pass/Subpass/DRLR benchmark begins only after the portfolio release gate.
+The active application is in [`Project/AzureRender`](Project/AzureRender). The current engineering baseline is S36.2 plus M1/CQ-2 Toon Ramp/Shadow v1; CQ-0, CQ-1 and CQ-2 are complete, and the active work package is M1/CQ-3 Face SDF/Overlays. The deferred Multi-pass/Subpass/DRLR benchmark begins only after the portfolio release gate.
 
 Start here:
 

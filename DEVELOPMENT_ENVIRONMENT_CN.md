@@ -56,7 +56,7 @@ $env:VCPKG_ROOT = "C:\path\to\vcpkg"
 ## 配置、构建与回归
 
 ```powershell
-cd Project\MyVulkanApp
+cd Project\AzureRender
 cmake --preset ninja-debug
 cmake --build --preset ninja-debug
 cmake --preset ninja-release
@@ -66,13 +66,13 @@ cmake --build --preset ninja-release
 公共资产 Debug Validation 回归：
 
 ```powershell
-.\build\ninja-debug\MyVulkanApp.exe --smoke-frames 120
+.\build\ninja-debug\AzureRender.exe --smoke-frames 120
 ```
 
 私有角色 Release 回归：
 
 ```powershell
-.\build\ninja-release\MyVulkanApp.exe `
+.\build\ninja-release\AzureRender.exe `
   --asset .\assets_private\laevat_static\laevat_static_material.glb `
   --smoke-frames 120
 ```
@@ -83,3 +83,11 @@ cmake --build --preset ninja-release
 - 私有角色：81,487 vertices、284,673 indices、14 primitives、15 materials。
 
 构建目录、IDE 配置和截图是本机生成内容，不进入版本控制。测试资产、转换工具、源码、shader、开发日志和环境清单进入版本控制。
+
+## 2026-08-13 Linux CQ-2 补充验证
+
+本次 CQ-2 额外在 Ubuntu 24.04、GCC 13.3、CMake 3.28.3、Ninja 1.11.1、
+Vulkan headers/Validation 1.3.275、glslc 2023.8 和 NVIDIA GeForce RTX 5070 Ti
+Laptop GPU 上完成 Debug/Release 构建、Xvfb Swapchain、公共/私有 Validation Smoke、
+Capture 和 GPU Timestamp 功能验证。该环境用于跨平台工程回归，不替代上述 Windows
+正式发布基线。

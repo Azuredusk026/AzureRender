@@ -40,7 +40,7 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 
 `--qa-isolation` 当前支持：
 
-`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id`
+`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id|style-mask|ambient|direct-diffuse|shadow-tint`
 
 `--qa-effect` 当前支持：
 
@@ -54,7 +54,9 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 
 普通 Shader 分量 Isolation 会同时关闭倒壳轮廓与屏幕空间内部轮廓，避免其他效果污染输出。`outline` A/B 同时控制两条轮廓路径；Isolation 本身显示屏幕空间边缘响应。
 
-Face SDF 尚未实现，因此当前不伪造该输出；它将在 CQ-3 接入。Material ID 已在 CQ-1 接入同一 Harness。
+Face SDF 尚未实现，因此当前不伪造该输出；它将在 CQ-3 接入。Material ID 已在
+CQ-1 接入同一 Harness。CQ-2 增加 Style Mask、Ambient、Direct Diffuse 与 Shadow
+Tint 分层视图，并把 Ramp Profile/Atlas Hash 写入 Manifest 与 QA Index。
 
 ## 5. 单次 Capture
 

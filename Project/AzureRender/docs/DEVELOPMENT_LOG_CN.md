@@ -2526,3 +2526,38 @@ Final Composite：
 - 在参数介入前的 CQ-1 结构回归与 CQ-0 基线 SHA-256 完全一致；启用显式分类参数后的变化只属于预期材质分离，并完成近景视觉检查。
 
 结论：CQ-1 Complete。当前 Active Work Package 切换为 CQ-2 Toon Ramp/Shadow v1；下一步只实现可编辑 Ramp 与阴影层级，不提前进入 Face SDF、Hair KK、Bloom 或最终调色。
+
+## M1/CQ-2 — Toon Ramp / Shadow v1
+
+日期：2026-08-13
+
+实现：
+
+- 新增版本化 `assets_public/toon_ramp_profiles.json` 与生成的 10x64 线性 PPM Atlas；
+- `linear` Ramp 用于 Skin/Face，`step` Ramp 用于 Hair/Fabric/Metal/Eye；
+- 新增 Descriptor binding 11，使用 Renderer-owned UNORM Ramp Texture；
+- 保持 128-byte Material Push Constant 不变；
+- 删除主光照对全局 `smoothstep(N dot L)` 的依赖，Material Class 选择 Ramp 行；
+- 分离 Direct Diffuse、Ambient、Shadow Map Visibility、AO 与 Lam Shadow Tint；
+- Style Mask 改为控制 Ramp 坐标、Shadow/AO 和 Specular 权重，不再只叠加弱 Accent；
+- Toon 单项关闭只关闭 Ramp，保留 Rim、Hair KK、Matcap 等其他效果；
+- 新增 `style-mask`、`ambient`、`direct-diffuse`、`shadow-tint` Isolation；
+- Manifest 与 QA Index 保存 Ramp Profile/Atlas Hash；
+- Background 与 Inverted-Hull Outline 显式写 Normal Attachment，消除两条 Validation warning；
+- CMake 正式发现 stb include path，Linux 系统包布局可编译。
+
+资产与验证：
+
+- 从 `laevat_skinned.glb` 生成忽略提交的 `laevat_skinned_material_cq2_v1.glb`；
+- 13 个源材质全部通过显式 Material Profile v1 验证；
+- Linux Debug/Release 构建成功，12 个 GLSL Shader 全部由 glslc 编译；
+- NVIDIA GeForce RTX 5070 Ti Laptop GPU 上公共资产 Debug Validation 120 帧通过；
+- 私有角色 Debug Validation 与 Release 各 120 帧通过，468 Joint Matrix 正常；
+- 最终 60 帧 Lighting Sweep 通过，无 Validation warning/error；
+- 1920x1080 Release Beauty 位于 `captures/cq2_release_beauty_v2`；
+- 评审图位于 `captures/cq2_review_v1/cq2_review_sheet.png`；
+- Toon A/B：Mean Absolute RGB Difference 0.981119，Changed Pixels 18.503255%；
+- 所有代表 Capture Alpha 非 255 像素数为 0；
+- Release GPU Timestamp 功能探针：Shadow 0.102 ms、Main 0.264 ms、Final 0.024 ms、Total 0.390 ms；该数据不作为正式性能结论。
+
+结论：CQ-2 Complete。当前 Active Work Package 切换为 CQ-3 Face SDF 与脸部 Overlay；不提前进入最终 Hair KK、Bloom 或最终调色。

@@ -12,6 +12,7 @@ layout(binding = 0) uniform CameraData {
 
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
+layout(location = 1) out vec4 outputNormal;
 
 float gridLines(vec2 coordinate) {
     vec2 cell = fract(coordinate);
@@ -77,4 +78,5 @@ void main() {
     float vignetteFloor = preset == 2.0 ? 0.78 : 0.60;
     color *= mix(1.0, vignetteFloor, vignette);
     outputColor = vec4(color, 1.0);
+    outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
 }

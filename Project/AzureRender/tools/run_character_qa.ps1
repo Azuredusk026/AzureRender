@@ -32,6 +32,9 @@ $resolvedExecutable = [System.IO.Path]::GetFullPath($Executable)
 $resolvedAsset = [System.IO.Path]::GetFullPath($Asset)
 $resolvedOutputRoot = [System.IO.Path]::GetFullPath($OutputRoot)
 $shaderRoot = Join-Path (Split-Path -Parent $resolvedExecutable) 'shaders'
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$rampProfile = Join-Path $projectRoot 'assets_public/toon_ramp_profiles.json'
+$rampAtlas = Join-Path $projectRoot 'assets_public/toon_ramp_atlas.ppm'
 
 if (-not (Test-Path -LiteralPath $resolvedExecutable -PathType Leaf)) {
     throw "AzureRender executable not found: $resolvedExecutable"
@@ -41,6 +44,10 @@ if (-not (Test-Path -LiteralPath $resolvedAsset -PathType Leaf)) {
 }
 if (-not (Test-Path -LiteralPath $shaderRoot -PathType Container)) {
     throw "Compiled shader directory not found: $shaderRoot"
+}
+if (-not (Test-Path -LiteralPath $rampProfile -PathType Leaf) -or
+    -not (Test-Path -LiteralPath $rampAtlas -PathType Leaf)) {
+    throw "CQ-2 toon-ramp assets are missing"
 }
 if (Test-Path -LiteralPath $resolvedOutputRoot) {
     if (-not (Test-Path -LiteralPath $resolvedOutputRoot -PathType Container)) {
@@ -120,7 +127,11 @@ if ($Mode -in @('all', 'isolation')) {
         'emissive',
         'outline',
         'shadow-map',
-        'material-id'
+        'material-id',
+        'style-mask',
+        'ambient',
+        'direct-diffuse',
+        'shadow-tint'
     )
     foreach ($view in $isolationViews) {
         $camera = if ($view -in @('hair-kk', 'rim', 'specular')) {
@@ -276,6 +287,10 @@ $index = [ordered]@{
     executableSha256 = (Get-FileHash -LiteralPath $resolvedExecutable -Algorithm SHA256).Hash
     shaderDirectory = $shaderRoot
     shaderFiles = $shaderFiles
+    toonRampProfile = $rampProfile
+    toonRampProfileSha256 = (Get-FileHash -LiteralPath $rampProfile -Algorithm SHA256).Hash
+    toonRampAtlas = $rampAtlas
+    toonRampAtlasSha256 = (Get-FileHash -LiteralPath $rampAtlas -Algorithm SHA256).Hash
     asset = $resolvedAsset
     assetSha256 = (Get-FileHash -LiteralPath $resolvedAsset -Algorithm SHA256).Hash
     width = $Width

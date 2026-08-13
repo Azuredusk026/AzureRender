@@ -30,6 +30,27 @@ std::string fnv1a64Hex(const std::string& value) {
     return output.str();
 }
 
+std::string fnv1a64FileHex(const std::filesystem::path& path) {
+    std::ifstream input(path, std::ios::binary);
+    if (!input) {
+        throw std::runtime_error("Failed to hash file: " + path.string());
+    }
+    std::uint64_t hash = 14695981039346656037ULL;
+    std::array<char, 4096> buffer{};
+    while (input) {
+        input.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
+        const std::streamsize count = input.gcount();
+        for (std::streamsize index = 0; index < count; ++index) {
+            hash ^= static_cast<unsigned char>(
+                buffer[static_cast<std::size_t>(index)]);
+            hash *= 1099511628211ULL;
+        }
+    }
+    std::ostringstream output;
+    output << std::hex << std::setfill('0') << std::setw(16) << hash;
+    return output.str();
+}
+
 }  // namespace
 
 void AzureRenderApp::prepareCaptureDirectory() {
@@ -74,6 +95,10 @@ void AzureRenderApp::writeCaptureManifest(
         "shadow-map",
         "depth",
     };
+    const std::filesystem::path rampProfilePath = AZURERENDER_RAMP_PROFILE_PATH;
+    const std::filesystem::path rampAtlasPath = AZURERENDER_RAMP_ATLAS_PATH;
+    const std::string rampProfileHash = fnv1a64FileHex(rampProfilePath);
+    const std::string rampAtlasHash = fnv1a64FileHex(rampAtlasPath);
     std::ostringstream qaState;
     qaState
         << resolvedAssetPath_ << '|'
@@ -93,7 +118,9 @@ void AzureRenderApp::writeCaptureManifest(
         << cameraTarget_[0] << ',' << cameraTarget_[1] << ','
         << cameraTarget_[2] << '|'
         << stylizedLightingEnabled_ << '|'
-        << innerOutlineEnabled_;
+        << innerOutlineEnabled_ << '|'
+        << rampProfileHash << '|'
+        << rampAtlasHash;
     for (const AssetMaterial& material : asset_.materials) {
         qaState
             << '|' << material.name
@@ -145,6 +172,19 @@ void AzureRenderApp::writeCaptureManifest(
         << std::quoted(qaIsolationName_) << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
+        << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"
+        << "  \"toonRampVersion\": 1,\n"
+        << "  \"toonRampClassCount\": 10,\n"
+        << "  \"toonRampProfile\": "
+        << std::quoted(rampProfilePath.string()) << ",\n"
+        << "  \"toonRampProfileHashAlgorithm\": \"FNV-1a-64\",\n"
+        << "  \"toonRampProfileHash\": "
+        << std::quoted(rampProfileHash) << ",\n"
+        << "  \"toonRampAtlas\": "
+        << std::quoted(rampAtlasPath.string()) << ",\n"
+        << "  \"toonRampAtlasHashAlgorithm\": \"FNV-1a-64\",\n"
+        << "  \"toonRampAtlasHash\": "
+        << std::quoted(rampAtlasHash) << ",\n"
         << "  \"qaCameraPosition\": ["
         << cameraPosition_[0] << ", " << cameraPosition_[1] << ", "
         << cameraPosition_[2] << "],\n"

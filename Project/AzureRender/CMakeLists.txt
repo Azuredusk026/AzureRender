@@ -14,6 +14,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_path(TINYGLTF_INCLUDE_DIR tiny_gltf.h REQUIRED)
+find_path(STB_INCLUDE_DIR stb_easy_font.h PATH_SUFFIXES stb REQUIRED)
 
 set(SHADER_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
 set(SHADER_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
@@ -73,7 +74,13 @@ target_link_libraries(
         glfw
 )
 
-target_include_directories(AzureRender PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${TINYGLTF_INCLUDE_DIR}")
+target_include_directories(
+    AzureRender
+    PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
+        "${TINYGLTF_INCLUDE_DIR}"
+        "${STB_INCLUDE_DIR}"
+)
 
 target_compile_definitions(
     AzureRender
@@ -81,6 +88,8 @@ target_compile_definitions(
         GLFW_INCLUDE_VULKAN
         AZURERENDER_SHADER_DIR="${SHADER_BINARY_DIR}"
         AZURERENDER_ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets_public"
+        AZURERENDER_RAMP_PROFILE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/toon_ramp_profiles.json"
+        AZURERENDER_RAMP_ATLAS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/toon_ramp_atlas.ppm"
         AZURERENDER_CAPTURE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/captures"
         $<$<CONFIG:Debug>:AZURERENDER_ENABLE_VALIDATION=1>
 )
