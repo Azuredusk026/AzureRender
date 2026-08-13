@@ -131,6 +131,11 @@ void AzureRenderApp::writeCaptureManifest(
         qaState << channel << ',';
     }
     qaState
+        << '|' << azurerender::BloomSettings::kSchemaVersion
+        << '|' << renderSettings_.bloom.enabled
+        << '|' << renderSettings_.bloom.threshold
+        << '|' << renderSettings_.bloom.strength;
+    qaState
         << '|'
         << rampProfileHash << '|'
         << rampAtlasHash;
@@ -194,6 +199,14 @@ void AzureRenderApp::writeCaptureManifest(
         << renderSettings_.faceSdf.shadowColor[1] << ", "
         << renderSettings_.faceSdf.shadowColor[2] << ", "
         << renderSettings_.faceSdf.shadowColor[3] << "]\n"
+        << "  },\n"
+        << "  \"bloomSettings\": {\n"
+        << "    \"schemaVersion\": "
+        << azurerender::BloomSettings::kSchemaVersion << ",\n"
+        << "    \"enabled\": "
+        << (renderSettings_.bloom.enabled ? "true" : "false") << ",\n"
+        << "    \"threshold\": " << renderSettings_.bloom.threshold << ",\n"
+        << "    \"strength\": " << renderSettings_.bloom.strength << "\n"
         << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"

@@ -127,8 +127,8 @@ private:
         float diagnosticView = 0.0F;
         float exposureEv = 0.0F;
         float toneMappingEnabled = 1.0F;
-        float padding0 = 0.0F;
-        float padding1 = 0.0F;
+        float bloomEnabled = 1.0F;
+        float bloomIsolation = 0.0F;
     };
     static_assert(sizeof(PostProcessPushConstants) == 32);
 

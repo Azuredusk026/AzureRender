@@ -507,9 +507,9 @@ void AzureRenderApp::configureQaHarness() {
     qaEffectName_ = runOptions_.qaEffect.empty()
         ? "none"
         : runOptions_.qaEffect;
-    constexpr std::array<const char*, 10> kEffectNames = {
+    constexpr std::array<const char*, 11> kEffectNames = {
         "none", "toon", "shadow", "hair-kk", "rim", "specular",
-        "emissive", "outline", "face-sdf", "overlay",
+        "emissive", "outline", "face-sdf", "overlay", "bloom",
     };
     const auto effect = std::find(
         kEffectNames.begin(), kEffectNames.end(), qaEffectName_);
@@ -534,11 +534,11 @@ void AzureRenderApp::configureQaHarness() {
     qaIsolationName_ = runOptions_.qaIsolation.empty()
         ? "beauty"
         : runOptions_.qaIsolation;
-    constexpr std::array<const char*, 19> kIsolationNames = {
+    constexpr std::array<const char*, 20> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
-        "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
+        "direct-diffuse", "shadow-tint", "face-sdf", "overlay", "bloom",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -548,18 +548,18 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 19> kPostProcessViews = {
-        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0,
+    constexpr std::array<std::uint32_t, 20> kPostProcessViews = {
+        0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 19> kShaderIsolationModes = {
-        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14,
+    constexpr std::array<std::uint32_t, 20> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
 
     if (qaEffectStateName_ == "isolation") {
-        constexpr std::array<std::uint32_t, 10> kEffectIsolationModes = {
-            0, 2, 3, 4, 5, 6, 7, 0, 13, 14,
+        constexpr std::array<std::uint32_t, 11> kEffectIsolationModes = {
+            0, 2, 3, 4, 5, 6, 7, 0, 13, 14, 15,
         };
         qaIsolationMode_ = kEffectIsolationModes[qaEffectMode_];
         qaIsolationName_ = qaEffectName_;

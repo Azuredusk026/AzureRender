@@ -19,6 +19,30 @@
 - Hair KK isolation 同时显示主层和次层；enabled/disabled/isolation 三态、Face 3/4 机位和 60 帧 lighting sweep 均通过。
 - Debug/Release Shader 构建通过；CQ-4 Hair KK v1 完成，下一节点为 CQ-5 Rim/Specular/Emissive/Bloom。
 
+## 2026-08-13：CQ-5 Rim/Specular/Emissive/Bloom v1
+
+- Rim、Specular、Emissive 保持独立 QA effect；新增轻量 HDR Scene Color Bloom，参数纳入 RenderSettings 与 Capture Manifest。
+- Bloom enabled/disabled/isolation 三态 Vulkan 捕获通过；Debug/Release 构建和 Shader 编译通过。
+- CQ-5 v1 完成；Bloom 仅用于作品集渲染后处理，不宣称论文三路径 benchmark 已完成。
+
+## 2026-08-13：CQ-5 Rim/Specular/Emissive/Bloom v1
+
+- Rim、Specular、Emissive 保持独立 QA effect；新增轻量 HDR Scene Color Bloom，参数纳入 RenderSettings 与 Capture Manifest。
+- Bloom enabled/disabled/isolation 三态 Vulkan 捕获通过；Debug/Release 构建和 Shader 编译通过。
+- CQ-5 v1 完成；Bloom 仅用于作品集渲染后处理，不宣称论文三路径 benchmark 已完成。
+
+## 2026-08-13：CQ-5 Rim/Specular/Emissive/Bloom v1
+
+- Rim、Specular、Emissive 保持独立 QA effect；新增轻量 HDR Scene Color Bloom，参数纳入 RenderSettings 与 Capture Manifest。
+- Bloom enabled/disabled/isolation 三态 Vulkan 捕获通过；Debug/Release 构建和 Shader 编译通过。
+- CQ-5 v1 完成；Bloom 仅用于作品集渲染后处理，不宣称论文三路径 benchmark 已完成。
+
+## 2026-08-13：CQ-5 Rim/Specular/Emissive/Bloom v1
+
+- Rim、Specular、Emissive 保持独立 QA effect；新增轻量 HDR Scene Color Bloom，参数纳入 RenderSettings 与 Capture Manifest。
+- Bloom enabled/disabled/isolation 三态 Vulkan 捕获通过；Debug/Release 构建和 Shader 编译通过。
+- CQ-5 v1 完成；Bloom 仅用于作品集渲染后处理，不宣称论文三路径 benchmark 已完成。
+
 ## 2026-08-13：CQ-4 Hair KK vertical slice
 
 - 保留 `_HN` RG/BA 主/副发束方向语义，新增 Shift 派生的第二层 Kajiya-Kay lobe 与独立冷色 tint。

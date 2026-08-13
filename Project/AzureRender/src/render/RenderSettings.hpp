@@ -17,6 +17,14 @@ struct FaceSdfSettings {
     std::array<float, 4> shadowColor{0.55F, 0.36F, 0.34F, 0.55F};
 };
 
+struct BloomSettings {
+    static constexpr std::uint32_t kSchemaVersion = 1;
+
+    bool enabled = true;
+    float threshold = 1.05F;
+    float strength = 0.16F;
+};
+
 struct RenderSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
@@ -28,6 +36,7 @@ struct RenderSettings {
     bool silhouetteOutlineEnabled = true;
     std::uint32_t diagnosticView = 0;
     FaceSdfSettings faceSdf;
+    BloomSettings bloom;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

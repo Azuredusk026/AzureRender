@@ -133,7 +133,8 @@ if ($Mode -in @('all', 'isolation')) {
         'direct-diffuse',
         'shadow-tint',
         'face-sdf',
-        'overlay'
+        'overlay',
+        'bloom'
     )
     foreach ($view in $isolationViews) {
         $camera = if ($view -eq 'face-sdf') {
@@ -170,7 +171,8 @@ if ($Mode -in @('all', 'ab')) {
         @{ effect = 'emissive'; camera = 'back-detail'; light = 'rear-emissive' },
         @{ effect = 'outline'; camera = 'full-body-front'; light = 'neutral-material' }
         @{ effect = 'face-sdf'; camera = 'face-front'; light = 'stylized-key' },
-        @{ effect = 'overlay'; camera = 'face-front'; light = 'neutral-material' }
+        @{ effect = 'overlay'; camera = 'face-front'; light = 'neutral-material' },
+        @{ effect = 'bloom'; camera = 'face-three-quarter'; light = 'rear-emissive' }
     )
     foreach ($effectCase in $effectCases) {
         foreach ($state in @('enabled', 'disabled', 'isolation')) {

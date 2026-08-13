@@ -11,11 +11,11 @@
 
 ## 0. 文档权威、使用方法与变更规则
 
-### CQ-3 Face SDF v1 当前状态（2026-08-13）
+### CQ-3/CQ-4/CQ-5 当前状态（2026-08-13）
 
 - `azureRenderMaterial.faceSdf` v1 契约、公共 PNG 资产和私有 CQ-3 GLB 已建立。
 - Loader 已将任意输入通道规范化为 `R=距离、A=参与遮罩`；descriptor binding 12、Head-local 光向量 UBO、Face Shader 分带和 `face-sdf` QA effect/isolation 已接入。
-- 契约验证、Debug/Release 构建、Vulkan smoke、enabled/disabled/isolation 捕获和 60 帧 lighting sweep 均已通过；Face SDF v1 进入 Complete，CQ-3 其余 Face overlay 仍待开发。
+- CQ-3 Face SDF/Overlay、CQ-4 双层 Hair KK、CQ-5 Rim/Specular/Emissive/Bloom v1 均已完成 Debug/Release 构建与 enabled/disabled/isolation 捕获。Bloom 当前为轻量 HDR Scene Color 后处理，不代表论文三路径 benchmark。
 
 ### 0.1 文档层级
 

@@ -972,9 +972,11 @@ void AzureRenderApp::recordCommandBuffer(
         0.20F,
         static_cast<float>(renderSettings_.diagnosticView),
         0.0F,
-        1.0F,
-        0.0F,
-        0.0F,
+        renderSettings_.bloom.enabled
+            && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
+            ? renderSettings_.bloom.strength : 0.0F,
+        qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
+            ? 1.0F : 0.0F,
     };
     vkCmdPushConstants(
         commandBuffer,

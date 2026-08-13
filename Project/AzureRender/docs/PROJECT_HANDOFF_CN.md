@@ -3,7 +3,7 @@
 > 最后核对：2026-08-13（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-5 Rim/Specular/Emissive/Bloom**
+> 当前长期节点：**M1 Character Rendering Quality Foundation / CQ-6 Outline/Lighting/Grade**
 
 ## 0. 长期路线入口
 
@@ -17,7 +17,7 @@ AR-0 设置/资产契约、Face SDF v1、Face Overlay 和 CQ-4 Hair KK vertical 
 
 `CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
 
-CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3/CQ-4 已完成 Face SDF、Overlay 和双层 Hair KK enabled/disabled/isolation 验收。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3/CQ-4/CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
 
 在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
 Pending/Deferred，不能成为主要开发节点。

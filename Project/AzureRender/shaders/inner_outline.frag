@@ -12,8 +12,8 @@ layout(push_constant) uniform OutlineParameters {
     float diagnosticView;
     float exposureEv;
     float toneMappingEnabled;
-    float padding0;
-    float padding1;
+    float bloomEnabled;
+    float bloomIsolation;
 } outline;
 
 layout(location = 0) in vec2 screenUv;
@@ -111,6 +111,29 @@ void main() {
         outputColor = vec4(mix(background, edgeColor, edge), 1.0);
     } else {
         vec3 hdrColor = texture(sceneColorTexture, screenUv).rgb;
+        vec3 bloom = vec3(0.0);
+        if (outline.bloomEnabled > 0.0 || outline.bloomIsolation > 0.5) {
+            const vec2 bloomOffsets[8] = vec2[](
+                vec2(-2.0, 0.0), vec2(2.0, 0.0),
+                vec2(0.0, -2.0), vec2(0.0, 2.0),
+                vec2(-1.4, -1.4), vec2(1.4, -1.4),
+                vec2(-1.4, 1.4), vec2(1.4, 1.4));
+            for (int index = 0; index < 8; ++index) {
+                vec3 sampleColor = texture(
+                    sceneColorTexture,
+                    clamp(screenUv + bloomOffsets[index] * texelSize * 2.0,
+                          texelSize * 0.5,
+                          vec2(1.0) - texelSize * 0.5)).rgb;
+                bloom += max(sampleColor - vec3(1.05), vec3(0.0));
+            }
+            bloom *= 0.125 * outline.bloomEnabled;
+        }
+        if (outline.bloomIsolation > 0.5) {
+            vec3 bloomDisplay = clamp(bloom * 4.0, vec3(0.0), vec3(1.0));
+            outputColor = vec4(bloomDisplay, 1.0);
+            return;
+        }
+        hdrColor += bloom;
         vec3 outlineColor = vec3(0.008, 0.013, 0.022);
         hdrColor = mix(hdrColor, outlineColor, edge);
         hdrColor *= exp2(outline.exposureEv);

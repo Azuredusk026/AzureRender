@@ -40,11 +40,11 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 
 `--qa-isolation` 当前支持：
 
-`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id|style-mask|ambient|direct-diffuse|shadow-tint|face-sdf|overlay`
+`beauty|albedo|world-normal|depth|diffuse-band|shadow-visibility|hair-kk|rim|specular|emissive|outline|shadow-map|material-id|style-mask|ambient|direct-diffuse|shadow-tint|face-sdf|overlay|bloom`
 
 `--qa-effect` 当前支持：
 
-`toon|shadow|hair-kk|rim|specular|emissive|outline|face-sdf|overlay`
+`toon|shadow|hair-kk|rim|specular|emissive|outline|face-sdf|overlay|bloom`
 
 `--qa-effect-state` 支持：
 
@@ -86,8 +86,8 @@ Tint 分层视图，并把 Ramp Profile/Atlas Hash 写入 Manifest 与 QA Index�
 模式：
 
 - `baseline`：5 机位 × 4 灯光；
-- `isolation`：19 种 Beauty/Isolation 输出；
-- `ab`：9 种效果的 Enabled/Disabled/Isolation；
+- `isolation`：20 种 Beauty/Isolation 输出；
+- `ab`：10 种效果的 Enabled/Disabled/Isolation；
 - `all`：执行全部 54 个 Case。
 
 脚本拒绝写入非空 Output Root，不覆盖已有证据。使用 `-Resume` 可复用完整 Case，并安全重建上次中断产生的不完整 Case。每个 Case 保留独立 PNG Manifest，根目录生成 `qa_index.json`。

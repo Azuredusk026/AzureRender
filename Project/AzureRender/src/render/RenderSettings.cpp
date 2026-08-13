@@ -47,6 +47,8 @@ void validateRenderSettings(const RenderSettings& settings) {
     for (const float channel : settings.faceSdf.shadowColor) {
         requireRange(channel, 0.0F, 1.0F, "faceSdf.shadowColor channel");
     }
+    requireRange(settings.bloom.threshold, 0.0F, 8.0F, "bloom.threshold");
+    requireRange(settings.bloom.strength, 0.0F, 2.0F, "bloom.strength");
 }
 
 }  // namespace azurerender
