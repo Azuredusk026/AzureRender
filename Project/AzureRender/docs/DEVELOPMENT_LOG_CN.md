@@ -1,5 +1,12 @@
 # 开发日志
 
+## 2026-08-13：CQ-3 Face SDF 运行验收
+
+- 修复 Face SDF GLB 注入器未同步 `buffers[0].byteLength` 的 bug；重新生成后 Loader 可正常解码 PNG。
+- Release 构建通过；公开测试资产 1 帧 smoke 通过，CQ-3 私有资产 Face SDF enabled/disabled/isolation 三态捕获通过。
+- enabled/disabled 图像差异为 17,971 个通道，最大差异 55，Alpha 范围 `255..255`；Face SDF lighting sweep 60 帧通过。
+- 节点已满足运行验收，后续进入 Face overlay 和发布证据整理。
+
 ## 2026-07-24
 
 ### S7：莱万汀静态角色首次接入

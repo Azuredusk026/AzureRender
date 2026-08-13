@@ -91,11 +91,15 @@ def inject(document: dict, binary: bytes, image: bytes) -> tuple[dict, bytes]:
     document.setdefault("images", [])
     document.setdefault("textures", [])
     binary += b"\x00" * ((4 - len(binary) % 4) % 4)
+    document.setdefault("buffers", [{"byteLength": len(binary)}])
+    if not document["buffers"]:
+        document["buffers"].append({"byteLength": len(binary)})
     view_index = len(document["bufferViews"])
     document["bufferViews"].append(
         {"buffer": 0, "byteOffset": len(binary), "byteLength": len(image)}
     )
     binary += image
+    document["buffers"][0]["byteLength"] = len(binary)
     image_index = len(document["images"])
     document["images"].append(
         {"name": "azure_face_sdf_v1", "mimeType": "image/png", "bufferView": view_index}

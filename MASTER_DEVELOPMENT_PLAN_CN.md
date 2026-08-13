@@ -15,7 +15,7 @@
 
 - `azureRenderMaterial.faceSdf` v1 契约、公共 PNG 资产和私有 CQ-3 GLB 已建立。
 - Loader 已将任意输入通道规范化为 `R=距离、A=参与遮罩`；descriptor binding 12、Head-local 光向量 UBO、Face Shader 分带和 `face-sdf` QA effect/isolation 已接入。
-- 契约验证已通过；Debug Shader/C++ 增量构建已通过。仍需在可用 Vulkan/Xvfb 环境完成 enabled/disabled/isolation 与 lighting sweep 视觉回归，完成前节点保持 Review。
+- 契约验证、Debug/Release 构建、Vulkan smoke、enabled/disabled/isolation 捕获和 60 帧 lighting sweep 均已通过；Face SDF v1 进入 Complete，CQ-3 其余 Face overlay 仍待开发。
 
 ### 0.1 文档层级
 
