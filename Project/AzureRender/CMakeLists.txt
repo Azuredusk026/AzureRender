@@ -75,6 +75,9 @@ add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 add_executable(
     AzureRender
     src/main.cpp
+    src/app/AzureRenderOptions.hpp
+    src/app/CommandLine.cpp
+    src/app/CommandLine.hpp
     src/app/AzureRenderApp.cpp
     src/app/AzureRenderApp.hpp
     src/app/AzureRenderInternal.hpp
@@ -117,6 +120,18 @@ add_executable(
 add_dependencies(AzureRender AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(
+        AzureRenderCommandLineTests
+        tests/CommandLineTests.cpp
+        src/app/CommandLine.cpp
+        src/app/CommandLine.hpp
+        src/app/AzureRenderOptions.hpp
+    )
+    target_include_directories(
+        AzureRenderCommandLineTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.CommandLine
+        COMMAND AzureRenderCommandLineTests)
     add_executable(
         AzureRenderEditorCameraTests
         tests/EditorCameraControllerTests.cpp
@@ -277,6 +292,7 @@ install(
     FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/CLI_CONTRACT_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC0_BASELINE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC_RELEASE_CN.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")

@@ -7,8 +7,8 @@ M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
 style-mask routing have independent QA views. CQ-3 through CQ-6 and the M2 Hero
-quality gate are complete. AR-1 through AR-5.0 release-gate orchestration are
-complete; AR-5.1 typed CLI contracts are the next fixed task.
+quality gate are complete. AR-1 through AR-5.1 typed CLI contracts are
+complete; AR-5.2 atomic scene saving is the next fixed task.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an

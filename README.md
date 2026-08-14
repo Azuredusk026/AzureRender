@@ -5,7 +5,7 @@ AzureRender is a C++17/Vulkan stylized character renderer and the implementation
 > Comparative Evaluation of Vulkan Subpasses and Dynamic Rendering Local Read for Real-Time NPR Rendering
 
 The active application is in [`Project/AzureRender`](Project/AzureRender). M2 and
-AR-1 through AR-5.0 are complete; AR-5.1 typed CLI contracts are next in the RC1
+AR-1 through AR-5.1 are complete; AR-5.2 atomic scene saving is next in the RC1
 hardening queue. M3/SC and the Multi-pass/Subpass/DRLR benchmark remain
 deferred.
 

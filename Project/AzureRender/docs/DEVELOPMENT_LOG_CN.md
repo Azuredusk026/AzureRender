@@ -1,5 +1,14 @@
 # 开发日志
 
+## 2026-08-14：AR-5.1 命令行契约
+
+- 将 `AzureRenderOptions` 抽为轻量边界，并新增不依赖窗口/Vulkan 初始化的 `CommandLine` 解析模块。
+- 新增 `CommandLineErrorCode`：未知参数、缺值、非法值、非法组合均有稳定类型和关联参数。
+- 数值参数改用 C++17 `from_chars` 完整解析，拒绝负数、尾随字符、零值与 `uint32_t/uint64_t` 溢出。
+- Capture、Technical Sequence、QA 与场景入口组合规则集中校验；CLI 错误直接映射诊断码/退出码 2，不再依赖消息文本猜测。
+- 新增 Release 下仍真实执行的 CLI 契约测试；三套构建均为 7/7 CTest 通过，真实缺值/非法数字/未知参数调用均返回 2。
+- 新增 `docs/CLI_CONTRACT_CN.md` 并纳入安装包；AR-5.1 Complete，下一节点固定为 AR-5.2。
+
 ## 2026-08-14：AR-5.0 发布门禁编排
 
 - 新增跨平台 `tools/run_release_gate.cmake`，单一入口执行 configure、build、CTest、install、移动目录版本/资源检查、CPack、隐私扫描和 manifest。

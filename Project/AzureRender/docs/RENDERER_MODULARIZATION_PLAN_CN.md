@@ -1,6 +1,6 @@
 # AzureRender 发布化与模块化路线
 
-> 状态：AR-0～AR-5.0 Complete；AR-5.1 Ready；RC1 工程质量收口进行中。
+> 状态：AR-0～AR-5.1 Complete；AR-5.2 Ready；RC1 工程质量收口进行中。
 >
 > 具体执行顺序、退出条件和预定 Commit 标题以
 > `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md` 为唯一近期事实来源。
