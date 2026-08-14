@@ -1,5 +1,13 @@
 # 开发日志
 
+## 2026-08-14：AR-4.2 运行资源定位
+
+- 新增 `ResourceLocator`，统一解析 Shader、公共资产、Ramp Profile/Atlas、Capture 默认目录和显式资产路径。
+- 搜索顺序支持 `--resource-root`、`AZURERENDER_RESOURCE_ROOT`、可执行文件同级、`../share/AzureRender` 安装树、开发树和当前目录。
+- Shader、Ramp、默认测试资产和截图不再由各模块直接读取源码绝对路径宏；缺失错误列出资源类型与全部搜索路径。
+- 新增临时可移动资源树和缺失资源负向测试；Linux Debug、Release、ImGui 三套构建及 4/4 CTest 通过。
+- AR-4.2 Complete，下一节点固定为 AR-4.3。
+
 ## 2026-08-14：AR-4.1 运行诊断基础
 
 - 新增 `RuntimeDiagnostics` 统一日志源，支持时间、级别、子系统、稳定错误码，Console 与 JSONL 文件输出；文件不可写时降级到 stderr。

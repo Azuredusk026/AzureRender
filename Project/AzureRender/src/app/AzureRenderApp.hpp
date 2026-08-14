@@ -2,6 +2,7 @@
 
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
+#include "resources/ResourceLocator.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -21,6 +22,7 @@ class ImGuiEditorLayer;
 
 struct AzureRenderOptions {
     std::string assetPath;
+    std::string resourceRoot;
     std::uint64_t smokeFrameLimit = 0;
     std::string captureDirectory;
     std::uint64_t captureFrameLimit = 0;
@@ -241,6 +243,7 @@ private:
 
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     AzureRenderOptions runOptions_;
+    azurerender::ResourceLocator resourceLocator_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
     LoadedAsset asset_;

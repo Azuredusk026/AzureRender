@@ -30,6 +30,9 @@ int main(const int argumentCount, char** argumentValues) {
                 }
             } else if (argument == "--asset" && index + 1 < argumentCount) {
                 options.assetPath = argumentValues[++index];
+            } else if (argument == "--resource-root"
+                       && index + 1 < argumentCount) {
+                options.resourceRoot = argumentValues[++index];
             } else if (argument == "--scene" && index + 1 < argumentCount) {
                 scenePath = argumentValues[++index];
             } else if (argument == "--create-scene"
@@ -117,6 +120,7 @@ int main(const int argumentCount, char** argumentValues) {
             } else {
                 throw std::invalid_argument(
                     "Usage: AzureRender.exe [--asset <gltf/glb path>] "
+                    "[--resource-root <directory>] "
                     "[--scene <azscene path>] "
                     "[--create-scene <azscene path>] "
                     "[--editor <azscene path>] "

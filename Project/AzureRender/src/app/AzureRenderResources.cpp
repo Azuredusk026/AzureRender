@@ -524,7 +524,7 @@ void AzureRenderApp::createTexture() {
         true,
         environmentTexture_);
 
-    const auto toonRamp = loadPpmTexture(AZURERENDER_RAMP_ATLAS_PATH);
+    const auto toonRamp = loadPpmTexture(resourceLocator_.rampAtlas().string());
     uploadTexture(
         toonRamp.pixels,
         toonRamp.width,

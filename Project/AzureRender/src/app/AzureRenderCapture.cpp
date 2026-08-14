@@ -95,8 +95,8 @@ void AzureRenderApp::writeCaptureManifest(
         "shadow-map",
         "depth",
     };
-    const std::filesystem::path rampProfilePath = AZURERENDER_RAMP_PROFILE_PATH;
-    const std::filesystem::path rampAtlasPath = AZURERENDER_RAMP_ATLAS_PATH;
+    const std::filesystem::path rampProfilePath = resourceLocator_.rampProfile();
+    const std::filesystem::path rampAtlasPath = resourceLocator_.rampAtlas();
     const std::string rampProfileHash = fnv1a64FileHex(rampProfilePath);
     const std::string rampAtlasHash = fnv1a64FileHex(rampAtlasPath);
     std::ostringstream qaState;
@@ -551,7 +551,7 @@ void AzureRenderApp::saveScreenshot(
     std::filesystem::path outputPath;
     if (requestedOutputPath.empty()) {
         const std::filesystem::path captureDirectory =
-            AZURERENDER_CAPTURE_DIR;
+            resourceLocator_.captureDirectory();
         std::filesystem::create_directories(captureDirectory);
         const auto timestamp = std::chrono::duration_cast<
             std::chrono::milliseconds>(

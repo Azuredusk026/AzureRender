@@ -3,7 +3,7 @@
 > 最后核对：2026-08-14（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前近期节点：**AR-4.1 Complete / AR-4.2 Ready**
+> 当前近期节点：**AR-4.2 Complete / AR-4.3 Ready**
 
 ## 0. 长期路线入口
 
@@ -125,6 +125,7 @@ DRLR feature probe、正式实验 CSV 或 Android 端。现有 GPU Timestamp JSO
 - `docs/RENDERER_MODULARIZATION_PLAN_CN.md`：AR-0 至 AR-4 的 Renderer/Scene/Editor 发布化路线；
 - `docs/RC0_BASELINE_CN.md`：RC0 支持范围、行为契约和统一门禁；
 - `src/diagnostics/RuntimeDiagnostics.*`：结构化运行日志、错误码和 CLI 退出码；
+- `src/resources/ResourceLocator.*`：开发树、安装树及显式覆盖的运行资源定位；
 - 根目录 `FYP_Development_Plan_v1.3.docx`：完整研究路线；其中早期“starter app”描述已过时，实际代码状态以本文件、源码和最新开发日志为准。
 
 ## 4. 构建、运行与本次验证

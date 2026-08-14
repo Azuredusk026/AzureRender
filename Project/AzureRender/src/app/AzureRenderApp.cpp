@@ -211,10 +211,9 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::SceneView sceneView;
-    sceneView.assetPath = options.assetPath.empty()
-        ? std::string(AZURERENDER_ASSET_DIR) + "/test_model.gltf"
-        : options.assetPath;
+    sceneView.assetPath = resourceLocator_.resolveAsset(options.assetPath).string();
     sceneView.renderSettings = options.renderSettings;
     azurerender::RendererCoreBoundary::validateSceneView(sceneView);
     azurerender::validateRenderSettings(runOptions_.renderSettings);
@@ -309,9 +308,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     createDescriptorSetLayout();
     createPostProcessDescriptorSetLayout();
-    resolvedAssetPath_ = assetPath.empty()
-        ? std::string(AZURERENDER_ASSET_DIR) + "/test_model.gltf"
-        : assetPath;
+    resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
     asset_ = loadGltfAsset(resolvedAssetPath_);
     for (const AssetMaterial& material : asset_.materials) {
         if (!material.faceSdf.present) {

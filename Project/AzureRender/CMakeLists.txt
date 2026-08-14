@@ -100,6 +100,8 @@ add_executable(
     src/diagnostics/GpuCapabilityReport.hpp
     src/diagnostics/RuntimeDiagnostics.cpp
     src/diagnostics/RuntimeDiagnostics.hpp
+    src/resources/ResourceLocator.cpp
+    src/resources/ResourceLocator.hpp
     src/platform/GlfwFrontend.cpp
     src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
@@ -152,6 +154,19 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.RuntimeDiagnostics
         COMMAND AzureRenderRuntimeDiagnosticsTests)
+    add_executable(
+        AzureRenderResourceLocatorTests
+        tests/ResourceLocatorTests.cpp
+        src/resources/ResourceLocator.cpp
+        src/resources/ResourceLocator.hpp
+        src/diagnostics/RuntimeDiagnostics.cpp
+        src/diagnostics/RuntimeDiagnostics.hpp
+    )
+    target_include_directories(
+        AzureRenderResourceLocatorTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.ResourceLocator
+        COMMAND AzureRenderResourceLocatorTests)
 endif()
 
 target_link_libraries(

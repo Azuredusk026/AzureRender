@@ -223,7 +223,7 @@ void AzureRenderApp::createEditorUiRenderPass() {
 
 
 void AzureRenderApp::createGraphicsPipeline() {
-    const std::string shaderDirectory = AZURERENDER_SHADER_DIR;
+    const std::string shaderDirectory = resourceLocator_.shaderDirectory().string();
     const auto vertexCode = readBinaryFile(shaderDirectory + "/mesh.vert.spv");
     const auto fragmentCode = readBinaryFile(shaderDirectory + "/mesh.frag.spv");
     const auto outlineVertexCode =
