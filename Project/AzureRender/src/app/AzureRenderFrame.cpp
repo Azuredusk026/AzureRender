@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "platform/GlfwFrontend.hpp"
 
 #include <stb_easy_font.h>
 
@@ -156,7 +157,7 @@ void AzureRenderApp::drawFrame() {
 }
 
 void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
-    const double currentTime = glfwGetTime();
+    const double currentTime = frontend_->timeSeconds();
     const float deltaSeconds = fixedSimulation_
         ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
         : static_cast<float>(

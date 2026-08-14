@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "platform/GlfwFrontend.hpp"
 #include "AzureRenderInternal.hpp"
 
 #include <algorithm>
@@ -119,8 +120,10 @@ void AzureRenderApp::recreateSwapchain() {
     int width = 0;
     int height = 0;
     while (width == 0 || height == 0) {
-        glfwGetFramebufferSize(window_, &width, &height);
-        glfwWaitEvents();
+        const auto size = frontend_->framebufferSize();
+        width = size.first;
+        height = size.second;
+        frontend_->waitEvents();
     }
 
     vkDeviceWaitIdle(device_);
@@ -265,13 +268,8 @@ void AzureRenderApp::cleanupSwapchain() {
 }
 
 std::vector<const char*> AzureRenderApp::requiredInstanceExtensions() const {
-    std::uint32_t extensionCount = 0;
-    const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&extensionCount);
-    if (glfwExtensions == nullptr) {
-        throw std::runtime_error("GLFW did not provide Vulkan instance extensions");
-    }
-
-    std::vector<const char*> extensions(glfwExtensions, glfwExtensions + extensionCount);
+    std::vector<const char*> extensions =
+        frontend_->requiredVulkanExtensions();
     if (kEnableValidation) {
         extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
     }
@@ -304,9 +302,7 @@ VkExtent2D AzureRenderApp::chooseExtent(
         return capabilities.currentExtent;
     }
 
-    int width = 0;
-    int height = 0;
-    glfwGetFramebufferSize(window_, &width, &height);
+    const auto [width, height] = frontend_->framebufferSize();
     VkExtent2D extent{
         static_cast<std::uint32_t>(width),
         static_cast<std::uint32_t>(height),

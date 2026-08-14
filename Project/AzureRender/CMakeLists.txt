@@ -65,6 +65,8 @@ add_executable(
     src/assets/GltfLoader.hpp
     src/editor/SceneModel.cpp
     src/editor/SceneModel.hpp
+    src/platform/GlfwFrontend.cpp
+    src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
     src/render/RendererCore.hpp
     src/render/RenderSettings.cpp

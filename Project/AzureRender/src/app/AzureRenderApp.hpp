@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <array>
 #include <limits>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
@@ -38,9 +39,13 @@ struct AzureRenderOptions {
     std::vector<std::string> editorResourcePaths;
 };
 
+namespace azurerender {
+class GlfwFrontend;
+}
+
 class AzureRenderApp final {
 public:
-    AzureRenderApp() = default;
+    AzureRenderApp();
     AzureRenderApp(const AzureRenderApp&) = delete;
     AzureRenderApp& operator=(const AzureRenderApp&) = delete;
     ~AzureRenderApp();
@@ -158,8 +163,7 @@ private:
     };
     static_assert(sizeof(HudVertex) == 12);
 
-    GLFWwindow* window_ = nullptr;
-    bool glfwInitialized_ = false;
+    std::unique_ptr<azurerender::GlfwFrontend> frontend_;
     bool framebufferResized_ = false;
 
     VkInstance instance_ = VK_NULL_HANDLE;

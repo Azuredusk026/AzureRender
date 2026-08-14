@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "AzureRenderInternal.hpp"
 
@@ -197,6 +198,8 @@ void destroyDebugUtilsMessenger(
 
 }  // namespace
 
+AzureRenderApp::AzureRenderApp() = default;
+
 AzureRenderApp::~AzureRenderApp() {
     cleanup();
 }
@@ -257,32 +260,18 @@ void AzureRenderApp::run(
 }
 
 void AzureRenderApp::initWindow() {
-    if (glfwInit() != GLFW_TRUE) {
-        throw std::runtime_error("GLFW initialization failed");
-    }
-    glfwInitialized_ = true;
-
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(
-        GLFW_RESIZABLE,
-        fixedSimulation_ ? GLFW_FALSE : GLFW_TRUE);
-    window_ = glfwCreateWindow(
-        static_cast<int>(runOptions_.width),
-        static_cast<int>(runOptions_.height),
-        runOptions_.editorMode
-            ? "AzureRender Editor Preview"
-            : "AzureRender - Stylized Vulkan Renderer",
-        nullptr,
-        nullptr);
-
-    if (window_ == nullptr) {
-        throw std::runtime_error("GLFW window creation failed");
-    }
-
-    glfwSetWindowUserPointer(window_, this);
-    glfwSetFramebufferSizeCallback(window_, framebufferResizeCallback);
-    glfwSetKeyCallback(window_, keyCallback);
-    lastRotationTime_ = glfwGetTime();
+    azurerender::GlfwFrontendConfig config;
+    config.width = runOptions_.width;
+    config.height = runOptions_.height;
+    config.title = runOptions_.editorMode
+        ? "AzureRender Editor Preview"
+        : "AzureRender - Stylized Vulkan Renderer";
+    config.resizable = !fixedSimulation_;
+    config.userPointer = this;
+    config.framebufferSizeCallback = framebufferResizeCallback;
+    config.keyCallback = keyCallback;
+    frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
+    lastRotationTime_ = frontend_->timeSeconds();
     std::cout
         << "Controls: Space pause/resume, R auto rotate, "
         << "1/2/3/4 full-body angles, 5 face close-up, "
@@ -362,7 +351,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     animationIndex_ = 0;
     animationTime_ = 0.0F;
     animationPlaying_ = true;
-    lastRotationTime_ = glfwGetTime();
+    lastRotationTime_ = frontend_->timeSeconds();
     createVertexBuffer();
     createIndexBuffer();
     createTexture();
@@ -401,16 +390,16 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     std::uint64_t renderedFrames = 0;
-    while (glfwWindowShouldClose(window_) == GLFW_FALSE) {
-        glfwPollEvents();
+    while (!frontend_->shouldClose()) {
+        frontend_->pollEvents();
         drawFrame();
         ++renderedFrames;
         if (smokeFrameLimit > 0 && renderedFrames >= smokeFrameLimit) {
-            glfwSetWindowShouldClose(window_, GLFW_TRUE);
+            frontend_->requestClose();
         }
         if (fixedSimulation_
             && capturedFrames_ >= runOptions_.captureFrameLimit) {
-            glfwSetWindowShouldClose(window_, GLFW_TRUE);
+            frontend_->requestClose();
         }
     }
 
@@ -775,14 +764,7 @@ void AzureRenderApp::cleanup() {
         vkDestroyInstance(instance_, nullptr);
         instance_ = VK_NULL_HANDLE;
     }
-    if (window_ != nullptr) {
-        glfwDestroyWindow(window_);
-        window_ = nullptr;
-    }
-    if (glfwInitialized_) {
-        glfwTerminate();
-        glfwInitialized_ = false;
-    }
+    frontend_.reset();
 }
 
 void AzureRenderApp::createInstance() {
@@ -827,9 +809,7 @@ void AzureRenderApp::setupDebugMessenger() {
 }
 
 void AzureRenderApp::createSurface() {
-    vkCheck(
-        glfwCreateWindowSurface(instance_, window_, nullptr, &surface_),
-        "glfwCreateWindowSurface");
+    surface_ = frontend_->createSurface(instance_);
 }
 
 void AzureRenderApp::pickPhysicalDevice() {
