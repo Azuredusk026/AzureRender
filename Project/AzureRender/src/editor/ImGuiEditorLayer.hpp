@@ -1,7 +1,7 @@
 #pragma once
 
-#include "EditorContext.hpp"
 #include "EditorCameraController.hpp"
+#include "EditorSession.hpp"
 #include "IEditorPanel.hpp"
 
 #include <vulkan/vulkan.h>
@@ -15,7 +15,7 @@ namespace azurerender {
 
 class ImGuiEditorLayer final {
 public:
-    explicit ImGuiEditorLayer(std::shared_ptr<EditorContext> context);
+    explicit ImGuiEditorLayer(std::shared_ptr<EditorSession> session);
     ImGuiEditorLayer(const ImGuiEditorLayer&) = delete;
     ImGuiEditorLayer& operator=(const ImGuiEditorLayer&) = delete;
     ~ImGuiEditorLayer();
@@ -55,7 +55,8 @@ private:
     void drawAssetBrowserPanel();
     void drawConsolePanel();
 
-    std::shared_ptr<EditorContext> context_;
+    std::shared_ptr<EditorSession> session_;
+    EditorContext* context_ = nullptr;
     std::vector<std::unique_ptr<IEditorPanel>> panels_;
     VkDevice device_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;

@@ -62,11 +62,12 @@ private:
 
 }  // namespace
 
-ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorContext> context)
-    : context_(std::move(context)) {
-    if (context_ == nullptr) {
-        throw std::invalid_argument("ImGui editor requires an editor context");
+ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
+    : session_(std::move(session)) {
+    if (session_ == nullptr) {
+        throw std::invalid_argument("ImGui editor requires an editor session");
     }
+    context_ = &session_->context();
     panels_.push_back(std::make_unique<CallbackEditorPanel>(
         "viewport", "Viewport", [this] { drawViewportPanel(); }));
     panels_.push_back(std::make_unique<CallbackEditorPanel>(
@@ -205,9 +206,14 @@ void ImGuiEditorLayer::drawPanels() {
     const ImGuiID dockspace = ImGui::DockSpaceOverViewport(
         ImGui::GetMainViewport(),
         ImGuiDockNodeFlags_PassthruCentralNode);
+    const bool resetLayout = session_->consumeLayoutResetRequest();
+    if (resetLayout) {
+        ImGui::DockBuilderRemoveNode(dockspace);
+        dockingLayoutInitialized_ = false;
+    }
     if (!dockingLayoutInitialized_) {
         ImGuiDockNode* node = ImGui::DockBuilderGetNode(dockspace);
-        if (node != nullptr && node->IsEmpty()) {
+        if (resetLayout || (node != nullptr && node->IsEmpty())) {
             ImGui::DockBuilderRemoveNode(dockspace);
             ImGui::DockBuilderAddNode(
                 dockspace,
@@ -232,6 +238,35 @@ void ImGuiEditorLayer::drawPanels() {
         dockingLayoutInitialized_ = true;
     }
 #endif
+    const ImGuiIO& io = ImGui::GetIO();
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
+        static_cast<void>(session_->execute(EditorCommand::Save));
+    }
+    if (ImGui::BeginMainMenuBar()) {
+        if (ImGui::BeginMenu("File")) {
+            if (ImGui::MenuItem("Save", "Ctrl+S")) {
+                static_cast<void>(session_->execute(EditorCommand::Save));
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("View")) {
+            if (ImGui::MenuItem("Reset Layout")) {
+                static_cast<void>(
+                    session_->execute(EditorCommand::ResetLayout));
+            }
+            ImGui::EndMenu();
+        }
+        if (context_->dirty()) {
+            ImGui::TextUnformatted("Unsaved changes");
+        }
+        if (!session_->lastError().empty()) {
+            ImGui::TextColored(
+                ImVec4(0.95F, 0.35F, 0.30F, 1.0F),
+                "%s",
+                session_->lastError().c_str());
+        }
+        ImGui::EndMainMenuBar();
+    }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
         panel->draw(*context_);
     }
@@ -435,8 +470,12 @@ void ImGuiEditorLayer::drawConsolePanel() {
 }  // namespace azurerender
 #else
 
-ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorContext> context)
-    : context_(std::move(context)) {}
+ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
+    : session_(std::move(session)) {
+    if (session_ != nullptr) {
+        context_ = &session_->context();
+    }
+}
 
 ImGuiEditorLayer::~ImGuiEditorLayer() = default;
 

@@ -1,7 +1,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "editor/EditorCameraController.hpp"
-#include "editor/EditorContext.hpp"
+#include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
 
@@ -627,8 +627,9 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
              << " R" << hairProfile->styleParameters[3] << '\n';
     }
     if (runOptions_.editorMode) {
-        const azurerender::SceneDocument& editorScene =
-            runOptions_.editorContext->scene();
+        const azurerender::EditorContext& editorContext =
+            runOptions_.editorSession->context();
+        const azurerender::SceneDocument& editorScene = editorContext.scene();
         text << "EDITOR PREVIEW V1 | VIEWPORT: LIVE VULKAN\n"
              << "SCENE OUTLINER: ";
         if (editorScene.nodes.empty()) {
@@ -637,7 +638,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
             for (std::size_t index = 0;
                  index < editorScene.nodes.size(); ++index) {
                 if (index > 0) text << " | ";
-                text << (index == runOptions_.editorContext->selectedNodeIndex()
+                text << (index == editorContext.selectedNodeIndex()
                              ? "*" : " ")
                      << printable(editorScene.nodes[index].name, 20);
             }

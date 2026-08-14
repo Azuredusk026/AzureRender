@@ -1,5 +1,6 @@
 #include "app/AzureRenderApp.hpp"
 #include "editor/EditorContext.hpp"
+#include "editor/EditorSession.hpp"
 #include "editor/SceneModel.hpp"
 
 #include <algorithm>
@@ -206,17 +207,20 @@ int main(const int argumentCount, char** argumentValues) {
             options.assetPath = asset->path.string();
             options.renderSettings = scene.renderSettings;
             if (options.editorMode) {
-                options.editorContext =
-                    std::make_shared<azurerender::EditorContext>(
-                        std::move(scene), editorScenePath);
+                options.editorSession =
+                    std::make_shared<azurerender::EditorSession>(
+                        std::make_shared<azurerender::EditorContext>(
+                            std::move(scene), editorScenePath));
             }
         }
 
         AzureRenderApp application;
         application.run(options);
-        if (options.editorContext != nullptr) {
-            options.editorContext->save();
-            std::cout << "Editor scene saved: " << editorScenePath << '\n';
+        if (options.editorSession != nullptr
+            && !options.editorSession->saveOnClose()) {
+            throw std::runtime_error(
+                "Editor close save failed: "
+                + options.editorSession->lastError());
         }
     } catch (const std::exception& exception) {
         std::cerr << "Fatal error: " << exception.what() << '\n';

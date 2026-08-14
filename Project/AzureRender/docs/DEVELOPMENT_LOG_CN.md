@@ -1,5 +1,14 @@
 # 开发日志
 
+## 2026-08-14：AR-3.7 编辑器会话闭环
+
+- 新增 `EditorSession` 和 `EditorCommand`，面板通过 Save/Reset Layout 命令操作会话，不直接执行文件保存。
+- 编辑器菜单提供 Save、Ctrl+S、Reset Layout；脏状态显示在菜单栏，保存异常显示错误并保留 dirty 状态。
+- 关闭流程改为 `saveOnClose()`，仅在有未保存修改时保存；失败返回错误，不静默丢失修改。
+- 新增 EditorSession 单元测试，覆盖保存成功、非法路径失败、dirty 保留和布局重置请求。
+- Linux Debug、Release、ImGui 三套构建和 CTest 通过，测试由 1 项增至 2 项；运行时窗口探针仍受当前容器无 X11/Wayland 限制。
+- AR-3.7 Complete，下一节点固定为 AR-4.0。
+
 ## 2026-08-14：AR-3.6 Viewport 资源独立重建
 
 - Dock 尺寸变化不再调用 `recreateSwapchain()`；新增只重建 Scene Color、Depth、Normal、Viewport Color、相关 framebuffer 和 post-process descriptor 的路径。

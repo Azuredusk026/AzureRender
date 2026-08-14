@@ -89,6 +89,8 @@ add_executable(
     src/editor/EditorCameraController.hpp
     src/editor/EditorContext.cpp
     src/editor/EditorContext.hpp
+    src/editor/EditorSession.cpp
+    src/editor/EditorSession.hpp
     src/editor/IEditorPanel.hpp
     src/editor/ImGuiEditorLayer.cpp
     src/editor/ImGuiEditorLayer.hpp
@@ -116,6 +118,23 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.EditorCameraController
         COMMAND AzureRenderEditorCameraTests)
+    add_executable(
+        AzureRenderEditorSessionTests
+        tests/EditorSessionTests.cpp
+        src/editor/EditorContext.cpp
+        src/editor/EditorContext.hpp
+        src/editor/EditorSession.cpp
+        src/editor/EditorSession.hpp
+        src/editor/SceneModel.cpp
+        src/editor/SceneModel.hpp
+        src/render/RenderSettings.cpp
+        src/render/RenderSettings.hpp
+    )
+    target_include_directories(
+        AzureRenderEditorSessionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.EditorSession
+        COMMAND AzureRenderEditorSessionTests)
 endif()
 
 target_link_libraries(

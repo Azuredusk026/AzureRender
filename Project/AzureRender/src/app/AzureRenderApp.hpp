@@ -14,7 +14,7 @@
 #include <vector>
 
 namespace azurerender {
-class EditorContext;
+class EditorSession;
 class GlfwFrontend;
 class ImGuiEditorLayer;
 }
@@ -40,7 +40,7 @@ struct AzureRenderOptions {
     std::string qaIsolation;
     bool editorMode = false;
     std::string editorScenePath;
-    std::shared_ptr<azurerender::EditorContext> editorContext;
+    std::shared_ptr<azurerender::EditorSession> editorSession;
 };
 
 class AzureRenderApp final {
