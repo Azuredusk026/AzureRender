@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-14 v1
-> 当前节点：AR-4.1 Ready
+> 当前节点：AR-4.2 Ready
 > 适用范围：Renderer 模块化、编辑器基础设施、Release Candidate 加固
 
 ## 1. 计划治理
@@ -38,6 +38,7 @@
 | AR-3.6 | Complete | Viewport 资源独立重建，不重建 swapchain/ImGui Context |
 | AR-3.7 | Complete | `EditorSession`/Command、保存、脏状态、布局重置和错误反馈 |
 | AR-4.0 | Complete | RC0 行为基线、支持平台、兼容策略和统一测试门禁 |
+| AR-4.1 | Complete | 结构化日志、GPU 能力报告、错误分类与退出码 |
 | M3 / SC | Deferred | 按当前决策暂不执行场景与工业场景工作包 |
 
 这里的 AR-1 `Complete` 指 v1 契约边界完成，不代表 Vulkan 资源所有权已经完全移出
@@ -50,8 +51,8 @@
 | 1 | AR-3.6 | Complete | Viewport RenderTarget 独立重建，不再重建交换链或 ImGui Context | AR-3.5 | `完成 AR-3.6 视口资源独立重建` |
 | 2 | AR-3.7 | Complete | 编辑器 Session 与命令层：保存、脏状态、布局重置、错误反馈 | AR-3.6 | `完成 AR-3.7 编辑器会话闭环` |
 | 3 | AR-4.0 | Complete | 冻结 RC0 行为基线、测试矩阵和支持平台 | AR-3.7 | `完成 AR-4.0 RC0 基线冻结` |
-| 4 | AR-4.1 | Ready | 结构化日志、GPU 能力报告、错误分类与退出码 | AR-4.0 | `完成 AR-4.1 运行诊断基础` |
-| 5 | AR-4.2 | Backlog | `ResourceLocator` 与安装目录，移除运行时源码绝对路径依赖 | AR-4.1 | `完成 AR-4.2 运行资源定位` |
+| 4 | AR-4.1 | Complete | 结构化日志、GPU 能力报告、错误分类与退出码 | AR-4.0 | `完成 AR-4.1 运行诊断基础` |
+| 5 | AR-4.2 | Ready | `ResourceLocator` 与安装目录，移除运行时源码绝对路径依赖 | AR-4.1 | `完成 AR-4.2 运行资源定位` |
 | 6 | AR-4.3 | Backlog | `IRenderFeature`、`IAssetImporter`、`IEditorPanel` 进程内 Registry | AR-4.2 | `完成 AR-4.3 扩展注册中心` |
 | 7 | AR-4.4 | Backlog | Windows/Linux CI：构建、CTest、公共资产 smoke 与文档检查 | AR-4.3 | `完成 AR-4.4 跨平台持续集成` |
 | 8 | AR-4.5 | Backlog | 可安装 RC 包、公共 Demo、许可证与干净环境验收 | AR-4.4 | `完成 AR-4.5 RC 发布包` |

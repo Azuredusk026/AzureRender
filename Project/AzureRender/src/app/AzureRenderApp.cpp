@@ -1,6 +1,8 @@
 #include "AzureRenderApp.hpp"
 #include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
+#include "diagnostics/GpuCapabilityReport.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "AzureRenderInternal.hpp"
@@ -890,6 +892,12 @@ void AzureRenderApp::pickPhysicalDevice() {
     VkPhysicalDeviceProperties properties{};
     vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
     selectedGpuName_ = properties.deviceName;
+    const std::filesystem::path capabilityDirectory =
+        runOptions_.captureDirectory.empty()
+        ? std::filesystem::path("captures")
+        : std::filesystem::path(runOptions_.captureDirectory);
+    static_cast<void>(azurerender::writeGpuCapabilityReport(
+        physicalDevice_, capabilityDirectory / "gpu_capabilities.json"));
     timestampPeriodNanoseconds_ = properties.limits.timestampPeriod;
     const QueueFamilyIndices queueIndices =
         findQueueFamilies(physicalDevice_);

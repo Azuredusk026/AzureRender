@@ -1,5 +1,7 @@
 #include "EditorContext.hpp"
 
+#include "diagnostics/RuntimeDiagnostics.hpp"
+
 #include <stdexcept>
 #include <utility>
 
@@ -72,6 +74,7 @@ void EditorContext::log(std::string message) {
     if (consoleMessages_.size() == kConsoleCapacity) {
         consoleMessages_.erase(consoleMessages_.begin());
     }
+    RuntimeDiagnostics::instance().info("editor", message);
     consoleMessages_.push_back(std::move(message));
 }
 

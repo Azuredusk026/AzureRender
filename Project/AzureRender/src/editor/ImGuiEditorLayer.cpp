@@ -1,4 +1,5 @@
 #include "ImGuiEditorLayer.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -461,7 +462,8 @@ void ImGuiEditorLayer::drawConsolePanel() {
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
     ImGui::Begin("Console");
-    for (const std::string& message : context_->consoleMessages()) {
+    for (const std::string& message :
+         azurerender::RuntimeDiagnostics::instance().messages()) {
         ImGui::TextUnformatted(message.c_str());
     }
     ImGui::End();

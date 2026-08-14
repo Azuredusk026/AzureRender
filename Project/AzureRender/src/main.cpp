@@ -1,6 +1,7 @@
 #include "app/AzureRenderApp.hpp"
 #include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/SceneModel.hpp"
 
 #include <algorithm>
@@ -13,6 +14,8 @@
 #include <string>
 
 int main(const int argumentCount, char** argumentValues) {
+    azurerender::RuntimeDiagnostics::instance().configure(
+        "captures/azurerender.log.jsonl");
     try {
         AzureRenderOptions options;
         std::string scenePath;
@@ -223,8 +226,13 @@ int main(const int argumentCount, char** argumentValues) {
                 + options.editorSession->lastError());
         }
     } catch (const std::exception& exception) {
+        azurerender::RuntimeDiagnostics::instance().error(
+            "main",
+            static_cast<azurerender::DiagnosticCode>(
+                azurerender::diagnosticExitCode(exception.what())),
+            exception.what());
         std::cerr << "Fatal error: " << exception.what() << '\n';
-        return EXIT_FAILURE;
+        return azurerender::diagnosticExitCode(exception.what());
     }
 
     return EXIT_SUCCESS;

@@ -1,5 +1,14 @@
 # 开发日志
 
+## 2026-08-14：AR-4.1 运行诊断基础
+
+- 新增 `RuntimeDiagnostics` 统一日志源，支持时间、级别、子系统、稳定错误码，Console 与 JSONL 文件输出；文件不可写时降级到 stderr。
+- 编辑器 Console 消费统一诊断消息源；EditorContext 旧日志接口保留兼容并写入同一源。
+- 新增 `GpuCapabilityReport`，记录设备、驱动/API 版本、关键 Feature 和扩展到机器可读 JSON。
+- CLI 错误分类为非法参数=2、资产/场景=3、Vulkan/GLFW 初始化=4、其他运行错误=5；错误路径日志同步记录。
+- Linux Debug、Release、ImGui 三套构建和 CTest 通过，3 个 CLI/诊断单元测试全部通过。
+- AR-4.1 Complete，下一节点固定为 AR-4.2。
+
 ## 2026-08-14：AR-4.0 RC0 基线冻结
 
 - 新增 `docs/RC0_BASELINE_CN.md`，冻结 CLI、`.azscene v1`、`RenderSettings`、Capture Manifest、编辑器最小功能面、支持平台和非目标范围。

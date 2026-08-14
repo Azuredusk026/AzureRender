@@ -96,6 +96,10 @@ add_executable(
     src/editor/ImGuiEditorLayer.hpp
     src/editor/SceneModel.cpp
     src/editor/SceneModel.hpp
+    src/diagnostics/GpuCapabilityReport.cpp
+    src/diagnostics/GpuCapabilityReport.hpp
+    src/diagnostics/RuntimeDiagnostics.cpp
+    src/diagnostics/RuntimeDiagnostics.hpp
     src/platform/GlfwFrontend.cpp
     src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
@@ -129,12 +133,25 @@ if(BUILD_TESTING)
         src/editor/SceneModel.hpp
         src/render/RenderSettings.cpp
         src/render/RenderSettings.hpp
+        src/diagnostics/RuntimeDiagnostics.cpp
+        src/diagnostics/RuntimeDiagnostics.hpp
     )
     target_include_directories(
         AzureRenderEditorSessionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(
         NAME AzureRender.EditorSession
         COMMAND AzureRenderEditorSessionTests)
+    add_executable(
+        AzureRenderRuntimeDiagnosticsTests
+        tests/RuntimeDiagnosticsTests.cpp
+        src/diagnostics/RuntimeDiagnostics.cpp
+        src/diagnostics/RuntimeDiagnostics.hpp
+    )
+    target_include_directories(
+        AzureRenderRuntimeDiagnosticsTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.RuntimeDiagnostics
+        COMMAND AzureRenderRuntimeDiagnosticsTests)
 endif()
 
 target_link_libraries(
