@@ -7,8 +7,8 @@ M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
 style-mask routing have independent QA views. CQ-3 through CQ-6 and the M2 Hero
-quality gate are complete. AR-1 through AR-3.7 Editor Preview infrastructure
-is complete; AR-4.0 is the next implementation task.
+quality gate are complete. AR-1 through AR-4.0 RC0 baseline freeze are complete;
+AR-4.1 is the next implementation task.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
@@ -301,7 +301,7 @@ pan, and wheel zoom. `Tab` selects nodes, `[`/`]` changes outline strength,
 CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, CQ-3 Face SDF/Overlay
 v1, CQ-4 Hair KK v1, CQ-5 Rim/Specular/Emissive/Bloom v1, and the CQ-6
 Outline/Final Grade implementation are complete. M2 is complete and the next
-fixed task is AR-4.0 RC0 baseline freeze. CQ-0 evidence is
+fixed task is AR-4.1 runtime diagnostics. CQ-0 evidence is
 kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
 `cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
 part of a public source package.

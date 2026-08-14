@@ -1,5 +1,12 @@
 # 开发日志
 
+## 2026-08-14：AR-4.0 RC0 基线冻结
+
+- 新增 `docs/RC0_BASELINE_CN.md`，冻结 CLI、`.azscene v1`、`RenderSettings`、Capture Manifest、编辑器最小功能面、支持平台和非目标范围。
+- 统一门禁固定为 Linux Debug/Release/ImGui 构建、CTest、公共资产 Renderer/Editor Validation smoke、UI 尺寸检查和差异检查。
+- 明确无窗口服务器时不得伪报运行时通过；M3/SC、对象拾取/Gizmo、资源导入、动态插件、Android 和论文三路径继续 Deferred。
+- AR-4.0 Complete，下一节点固定为 AR-4.1。
+
 ## 2026-08-14：AR-3.7 编辑器会话闭环
 
 - 新增 `EditorSession` 和 `EditorCommand`，面板通过 Save/Reset Layout 命令操作会话，不直接执行文件保存。
