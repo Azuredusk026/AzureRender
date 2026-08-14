@@ -217,6 +217,9 @@ void AzureRenderApp::run(
     azurerender::RendererCoreBoundary::validateSceneView(sceneView);
     azurerender::validateRenderSettings(runOptions_.renderSettings);
     renderSettings_ = runOptions_.renderSettings;
+#if defined(AZURERENDER_HAS_IMGUI)
+    editorUiEnabled_ = runOptions_.editorContext != nullptr;
+#endif
     fixedSimulation_ = runOptions_.captureFrameLimit > 0;
     fixedSimulationStarted_ = false;
     fixedDeltaSeconds_ = 1.0F / static_cast<float>(runOptions_.captureFps);
@@ -379,14 +382,17 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
             + std::to_string(runOptions_.height));
     }
     createImageViews();
+    createEditorViewportResources();
     createSceneColorResources();
     createDepthResources();
     createNormalResources();
     createRenderPass();
     createPostProcessRenderPass();
+    createEditorUiRenderPass();
     createGraphicsPipeline();
     createFramebuffers();
     createPostProcessFramebuffers();
+    createEditorUiFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
     createCommandBuffers();
@@ -396,7 +402,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
 }
 
 void AzureRenderApp::initEditorUi() {
-    if (runOptions_.editorContext == nullptr) {
+    if (!editorUiEnabled_) {
         return;
     }
     if (editorLayer_ == nullptr) {
@@ -410,8 +416,13 @@ void AzureRenderApp::initEditorUi() {
         device_,
         graphicsQueueFamily_,
         graphicsQueue_,
-        postProcessRenderPass_,
+        editorUiRenderPass_,
         static_cast<std::uint32_t>(swapchainImages_.size()));
+    editorLayer_->setViewportImages(
+        editorViewportSampler_,
+        editorViewportImageViews_,
+        swapchainExtent_.width,
+        swapchainExtent_.height);
 }
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {

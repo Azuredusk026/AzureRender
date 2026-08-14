@@ -95,6 +95,7 @@ void ImGuiEditorLayer::initialize(
         shutdownVulkan();
     }
     device_ = device;
+    dockingLayoutInitialized_ = false;
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
@@ -171,6 +172,10 @@ void ImGuiEditorLayer::shutdownVulkan() {
     if (!initialized_) {
         return;
     }
+    for (const VkDescriptorSet texture : viewportTextures_) {
+        ImGui_ImplVulkan_RemoveTexture(texture);
+    }
+    viewportTextures_.clear();
     ImGui_ImplVulkan_Shutdown();
     if (descriptorPool_ != VK_NULL_HANDLE) {
         vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
@@ -239,6 +244,37 @@ void ImGuiEditorLayer::render(const VkCommandBuffer commandBuffer) {
     ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), commandBuffer);
 }
 
+void ImGuiEditorLayer::setViewportImages(
+    const VkSampler sampler,
+    const std::vector<VkImageView>& imageViews,
+    const std::uint32_t width,
+    const std::uint32_t height) {
+    if (!initialized_) {
+        return;
+    }
+    for (const VkDescriptorSet texture : viewportTextures_) {
+        ImGui_ImplVulkan_RemoveTexture(texture);
+    }
+    viewportTextures_.clear();
+    viewportTextures_.reserve(imageViews.size());
+    for (const VkImageView imageView : imageViews) {
+        viewportTextures_.push_back(ImGui_ImplVulkan_AddTexture(
+            sampler,
+            imageView,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL));
+    }
+    viewportWidth_ = std::max(width, 1U);
+    viewportHeight_ = std::max(height, 1U);
+    viewportImageIndex_ = 0;
+}
+
+void ImGuiEditorLayer::setViewportImageIndex(
+    const std::uint32_t imageIndex) {
+    if (imageIndex < viewportTextures_.size()) {
+        viewportImageIndex_ = imageIndex;
+    }
+}
+
 bool ImGuiEditorLayer::wantsKeyboardCapture() const noexcept {
     return initialized_ && ImGui::GetIO().WantCaptureKeyboard;
 }
@@ -247,9 +283,26 @@ void ImGuiEditorLayer::drawViewportPanel() {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
-    ImGui::Begin("Viewport", nullptr, ImGuiWindowFlags_NoBackground);
-    ImGui::TextUnformatted("Live Vulkan Renderer");
-    ImGui::Text("Scene: %s", context_->scene().sceneId.c_str());
+    ImGui::Begin("Viewport");
+    if (!viewportTextures_.empty()) {
+        const ImVec2 available = ImGui::GetContentRegionAvail();
+        const float aspect = static_cast<float>(viewportWidth_)
+            / static_cast<float>(viewportHeight_);
+        ImVec2 imageSize{available.x, available.x / aspect};
+        if (imageSize.y > available.y) {
+            imageSize.y = available.y;
+            imageSize.x = available.y * aspect;
+        }
+        const ImVec2 cursor = ImGui::GetCursorPos();
+        ImGui::SetCursorPos({
+            cursor.x + std::max((available.x - imageSize.x) * 0.5F, 0.0F),
+            cursor.y + std::max((available.y - imageSize.y) * 0.5F, 0.0F),
+        });
+        ImGui::Image(
+            reinterpret_cast<ImTextureID>(
+                viewportTextures_[viewportImageIndex_]),
+            imageSize);
+    }
     ImGui::End();
 }
 
@@ -334,6 +387,9 @@ void ImGuiEditorLayer::shutdownVulkan() {}
 void ImGuiEditorLayer::newFrame() {}
 void ImGuiEditorLayer::drawPanels() {}
 void ImGuiEditorLayer::render(VkCommandBuffer) {}
+void ImGuiEditorLayer::setViewportImages(
+    VkSampler, const std::vector<VkImageView>&, std::uint32_t, std::uint32_t) {}
+void ImGuiEditorLayer::setViewportImageIndex(std::uint32_t) {}
 bool ImGuiEditorLayer::wantsKeyboardCapture() const noexcept { return false; }
 
 }  // namespace azurerender

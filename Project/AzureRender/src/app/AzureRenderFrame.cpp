@@ -68,6 +68,7 @@ void AzureRenderApp::drawFrame() {
         updateTechnicalSequenceState(capturedFrames_);
     }
     if (editorLayer_ != nullptr) {
+        editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
     }
@@ -1065,10 +1066,27 @@ void AzureRenderApp::recordCommandBuffer(
             0,
             0);
     }
-    if (editorLayer_ != nullptr) {
-        editorLayer_->render(commandBuffer);
-    }
     vkCmdEndRenderPass(commandBuffer);
+    if (editorUiEnabled_ && editorLayer_ != nullptr) {
+        VkClearValue editorClear{};
+        editorClear.color.float32[0] = 0.035F;
+        editorClear.color.float32[1] = 0.040F;
+        editorClear.color.float32[2] = 0.050F;
+        editorClear.color.float32[3] = 1.0F;
+        VkRenderPassBeginInfo editorPassInfo{
+            VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+        editorPassInfo.renderPass = editorUiRenderPass_;
+        editorPassInfo.framebuffer = editorUiFramebuffers_[imageIndex];
+        editorPassInfo.renderArea.extent = swapchainExtent_;
+        editorPassInfo.clearValueCount = 1;
+        editorPassInfo.pClearValues = &editorClear;
+        vkCmdBeginRenderPass(
+            commandBuffer, &editorPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+        vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
+        vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
+        editorLayer_->render(commandBuffer);
+        vkCmdEndRenderPass(commandBuffer);
+    }
     if (runOptions_.gpuTimingEnabled) {
         vkCmdWriteTimestamp(
             commandBuffer,

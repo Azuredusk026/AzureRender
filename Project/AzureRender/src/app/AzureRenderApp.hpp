@@ -188,11 +188,16 @@ private:
     VkExtent2D swapchainExtent_{};
     std::vector<VkImage> swapchainImages_;
     std::vector<VkImageView> swapchainImageViews_;
+    std::vector<VkImage> editorViewportImages_;
+    std::vector<VkDeviceMemory> editorViewportImageMemories_;
+    std::vector<VkImageView> editorViewportImageViews_;
+    VkSampler editorViewportSampler_ = VK_NULL_HANDLE;
     std::vector<VkImage> sceneColorImages_;
     std::vector<VkDeviceMemory> sceneColorImageMemories_;
     std::vector<VkImageView> sceneColorImageViews_;
     std::vector<VkFramebuffer> swapchainFramebuffers_;
     std::vector<VkFramebuffer> postProcessFramebuffers_;
+    std::vector<VkFramebuffer> editorUiFramebuffers_;
     std::vector<VkImage> depthImages_;
     std::vector<VkDeviceMemory> depthImageMemories_;
     std::vector<VkImageView> depthImageViews_;
@@ -210,6 +215,7 @@ private:
 
     VkRenderPass renderPass_ = VK_NULL_HANDLE;
     VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
+    VkRenderPass editorUiRenderPass_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
@@ -265,6 +271,7 @@ private:
     azurerender::RenderSettings renderSettings_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
     bool hudEnabled_ = false;
+    bool editorUiEnabled_ = false;
     bool qaHarnessEnabled_ = false;
     std::string qaCameraName_ = "none";
     std::string qaLightName_ = "current";
@@ -308,17 +315,20 @@ private:
     void createLogicalDevice();
     void createSwapchain();
     void createImageViews();
+    void createEditorViewportResources();
     void createSceneColorResources();
     void createDepthResources();
     void createNormalResources();
     void createShadowResources();
     void createRenderPass();
     void createPostProcessRenderPass();
+    void createEditorUiRenderPass();
     void createDescriptorSetLayout();
     void createPostProcessDescriptorSetLayout();
     void createGraphicsPipeline();
     void createFramebuffers();
     void createPostProcessFramebuffers();
+    void createEditorUiFramebuffers();
     void createSwapchainSemaphores();
     void createCommandPool();
     void createVertexBuffer();

@@ -32,6 +32,12 @@ public:
     void newFrame();
     void drawPanels();
     void render(VkCommandBuffer commandBuffer);
+    void setViewportImages(
+        VkSampler sampler,
+        const std::vector<VkImageView>& imageViews,
+        std::uint32_t width,
+        std::uint32_t height);
+    void setViewportImageIndex(std::uint32_t imageIndex);
     [[nodiscard]] bool wantsKeyboardCapture() const noexcept;
 
 private:
@@ -45,6 +51,10 @@ private:
     std::vector<std::unique_ptr<IEditorPanel>> panels_;
     VkDevice device_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
+    std::vector<VkDescriptorSet> viewportTextures_;
+    std::uint32_t viewportImageIndex_ = 0;
+    std::uint32_t viewportWidth_ = 1;
+    std::uint32_t viewportHeight_ = 1;
     bool initialized_ = false;
     bool dockingLayoutInitialized_ = false;
 };

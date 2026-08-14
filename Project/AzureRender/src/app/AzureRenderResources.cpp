@@ -37,6 +37,41 @@ void AzureRenderApp::createImageViews() {
     }
 }
 
+void AzureRenderApp::createEditorViewportResources() {
+    if (!editorUiEnabled_) {
+        return;
+    }
+    editorViewportImages_.resize(swapchainImages_.size());
+    editorViewportImageMemories_.resize(swapchainImages_.size());
+    editorViewportImageViews_.resize(swapchainImages_.size());
+    for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        createImage(
+            swapchainExtent_.width,
+            swapchainExtent_.height,
+            swapchainFormat_,
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+            editorViewportImages_[index],
+            editorViewportImageMemories_[index]);
+        editorViewportImageViews_[index] = createImageView(
+            editorViewportImages_[index],
+            swapchainFormat_,
+            VK_IMAGE_ASPECT_COLOR_BIT);
+    }
+
+    VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
+    samplerInfo.magFilter = VK_FILTER_LINEAR;
+    samplerInfo.minFilter = VK_FILTER_LINEAR;
+    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
+    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerInfo.maxLod = 1.0F;
+    vkCheck(
+        vkCreateSampler(
+            device_, &samplerInfo, nullptr, &editorViewportSampler_),
+        "vkCreateSampler(editor viewport)");
+}
+
 void AzureRenderApp::createSceneColorResources() {
     sceneColorImages_.resize(swapchainImages_.size());
     sceneColorImageMemories_.resize(swapchainImages_.size());

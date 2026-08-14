@@ -134,14 +134,17 @@ void AzureRenderApp::recreateSwapchain() {
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
+    createEditorViewportResources();
     createSceneColorResources();
     createDepthResources();
     createNormalResources();
     createRenderPass();
     createPostProcessRenderPass();
+    createEditorUiRenderPass();
     createGraphicsPipeline();
     createFramebuffers();
     createPostProcessFramebuffers();
+    createEditorUiFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
     initEditorUi();
@@ -170,6 +173,27 @@ void AzureRenderApp::cleanupSwapchain() {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
     }
     postProcessFramebuffers_.clear();
+    for (const auto framebuffer : editorUiFramebuffers_) {
+        vkDestroyFramebuffer(device_, framebuffer, nullptr);
+    }
+    editorUiFramebuffers_.clear();
+
+    for (const auto imageView : editorViewportImageViews_) {
+        vkDestroyImageView(device_, imageView, nullptr);
+    }
+    for (const auto image : editorViewportImages_) {
+        vkDestroyImage(device_, image, nullptr);
+    }
+    for (const auto memory : editorViewportImageMemories_) {
+        vkFreeMemory(device_, memory, nullptr);
+    }
+    editorViewportImageViews_.clear();
+    editorViewportImages_.clear();
+    editorViewportImageMemories_.clear();
+    if (editorViewportSampler_ != VK_NULL_HANDLE) {
+        vkDestroySampler(device_, editorViewportSampler_, nullptr);
+        editorViewportSampler_ = VK_NULL_HANDLE;
+    }
 
     for (const auto imageView : sceneColorImageViews_) {
         vkDestroyImageView(device_, imageView, nullptr);
@@ -259,6 +283,10 @@ void AzureRenderApp::cleanupSwapchain() {
             postProcessRenderPass_,
             nullptr);
         postProcessRenderPass_ = VK_NULL_HANDLE;
+    }
+    if (editorUiRenderPass_ != VK_NULL_HANDLE) {
+        vkDestroyRenderPass(device_, editorUiRenderPass_, nullptr);
+        editorUiRenderPass_ = VK_NULL_HANDLE;
     }
     for (const auto imageView : swapchainImageViews_) {
         vkDestroyImageView(device_, imageView, nullptr);
