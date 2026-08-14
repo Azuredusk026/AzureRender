@@ -63,6 +63,8 @@ add_executable(
     src/app/AzureRenderSupport.cpp
     src/assets/GltfLoader.cpp
     src/assets/GltfLoader.hpp
+    src/render/RendererCore.cpp
+    src/render/RendererCore.hpp
     src/render/RenderSettings.cpp
     src/render/RenderSettings.hpp
 )

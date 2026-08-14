@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "render/RendererCore.hpp"
 #include "AzureRenderInternal.hpp"
 
 #include <stb_easy_font.h>
@@ -203,6 +204,12 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    azurerender::SceneView sceneView;
+    sceneView.assetPath = options.assetPath.empty()
+        ? std::string(AZURERENDER_ASSET_DIR) + "/test_model.gltf"
+        : options.assetPath;
+    sceneView.renderSettings = options.renderSettings;
+    azurerender::RendererCoreBoundary::validateSceneView(sceneView);
     azurerender::validateRenderSettings(runOptions_.renderSettings);
     renderSettings_ = runOptions_.renderSettings;
     fixedSimulation_ = runOptions_.captureFrameLimit > 0;
