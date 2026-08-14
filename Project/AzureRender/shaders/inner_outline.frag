@@ -12,8 +12,11 @@ layout(push_constant) uniform OutlineParameters {
     float diagnosticView;
     float exposureEv;
     float toneMappingEnabled;
-    float bloomEnabled;
+    float bloomStrength;
     float bloomIsolation;
+    vec4 outlineColor;
+    vec4 gradeParameters;
+    vec4 gradeTint;
 } outline;
 
 layout(location = 0) in vec2 screenUv;
@@ -112,7 +115,7 @@ void main() {
     } else {
         vec3 hdrColor = texture(sceneColorTexture, screenUv).rgb;
         vec3 bloom = vec3(0.0);
-        if (outline.bloomEnabled > 0.0 || outline.bloomIsolation > 0.5) {
+        if (outline.bloomStrength > 0.0 || outline.bloomIsolation > 0.5) {
             const vec2 bloomOffsets[8] = vec2[](
                 vec2(-2.0, 0.0), vec2(2.0, 0.0),
                 vec2(0.0, -2.0), vec2(0.0, 2.0),
@@ -124,9 +127,11 @@ void main() {
                     clamp(screenUv + bloomOffsets[index] * texelSize * 2.0,
                           texelSize * 0.5,
                           vec2(1.0) - texelSize * 0.5)).rgb;
-                bloom += max(sampleColor - vec3(1.05), vec3(0.0));
+                bloom += max(
+                    sampleColor - vec3(outline.gradeParameters.z),
+                    vec3(0.0));
             }
-            bloom *= 0.125 * outline.bloomEnabled;
+            bloom *= 0.125 * outline.bloomStrength;
         }
         if (outline.bloomIsolation > 0.5) {
             vec3 bloomDisplay = clamp(bloom * 4.0, vec3(0.0), vec3(1.0));
@@ -134,12 +139,22 @@ void main() {
             return;
         }
         hdrColor += bloom;
-        vec3 outlineColor = vec3(0.008, 0.013, 0.022);
-        hdrColor = mix(hdrColor, outlineColor, edge);
+        hdrColor = mix(hdrColor, outline.outlineColor.rgb, edge);
         hdrColor *= exp2(outline.exposureEv);
         vec3 displayLinear = outline.toneMappingEnabled > 0.5
             ? acesFitted(hdrColor)
             : clamp(hdrColor, 0.0, 1.0);
+        displayLinear *= outline.gradeTint.rgb;
+        float luminance = dot(
+            displayLinear,
+            vec3(0.2126, 0.7152, 0.0722));
+        displayLinear = mix(
+            vec3(luminance),
+            displayLinear,
+            outline.gradeParameters.x);
+        displayLinear = (displayLinear - vec3(0.5))
+            * outline.gradeParameters.y + vec3(0.5);
+        displayLinear = clamp(displayLinear, vec3(0.0), vec3(1.0));
         outputColor = vec4(displayLinear, 1.0);
     }
 }

@@ -1,5 +1,15 @@
 # 开发日志
 
+## 2026-08-14：CQ-6 Outline / Lighting / Final Grade
+
+- `RenderSettings` 升级为 v2，新增版本化 Outline/Grade v1；最终合成参数 ABI 从 32 bytes 扩展为 80 bytes，覆盖轮廓强度、阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint。
+- 修正 CQ-5 Bloom push constant 字段错位，并让 Shader 使用设置中的 Bloom threshold；Emissive HDR 乘数从 `3.0` 校准为 `6.0`，使默认 `1.05` 阈值产生真实高亮响应。
+- Capture Manifest 与 FNV-1a-64 状态哈希已纳入 Outline/Grade 的完整参数和 Schema 版本。
+- Debug/Release 构建与 Shader 编译通过；llvmpipe Release 完成 Outline enabled/disabled/isolation、Face Front、Full Body Front 和 60 帧 Lighting Sweep 捕获，全部 Alpha 为 `255..255`。
+- Outline enabled/disabled 在 1280×720 下有 78,356 个变化像素，占 8.502170%；RGB 平均绝对差为 1.093655/1.507368/1.347554。
+- Bloom enabled/disabled 在 Rear Emissive 代表帧有 71 个变化像素，isolation 有 104 个非黑像素；确认轻量 Bloom 已真实接入，而不是由旧字段错位产生的伪通过。
+- 当前 Linux 环境缺少 `VK_LAYER_KHRONOS_validation`，Debug Validation 运行未执行；CQ-6 实现完成并进入 M2 Gate Review，仍需用户视觉确认和 Validation 环境复验。
+
 ## 2026-08-13：CQ-3 Face SDF 运行验收
 
 - 修复 Face SDF GLB 注入器未同步 `buffers[0].byteLength` 的 bug；重新生成后 Loader 可正常解码 PNG。

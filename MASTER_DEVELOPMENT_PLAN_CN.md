@@ -11,11 +11,12 @@
 
 ## 0. 文档权威、使用方法与变更规则
 
-### CQ-3/CQ-4/CQ-5 当前状态（2026-08-13）
+### CQ-3～CQ-6 当前状态（2026-08-14）
 
 - `azureRenderMaterial.faceSdf` v1 契约、公共 PNG 资产和私有 CQ-3 GLB 已建立。
 - Loader 已将任意输入通道规范化为 `R=距离、A=参与遮罩`；descriptor binding 12、Head-local 光向量 UBO、Face Shader 分带和 `face-sdf` QA effect/isolation 已接入。
 - CQ-3 Face SDF/Overlay、CQ-4 双层 Hair KK、CQ-5 Rim/Specular/Emissive/Bloom v1 均已完成 Debug/Release 构建与 enabled/disabled/isolation 捕获。Bloom 当前为轻量 HDR Scene Color 后处理，不代表论文三路径 benchmark。
+- CQ-6 已完成版本化 Outline/Grade 参数、最终合成 ABI、Manifest/状态哈希闭环和 Release Vulkan 代表捕获，进入 M2 Gate Review；用户视觉确认与具备 Khronos Validation Layer 的环境复验仍是门槛。
 
 ### 0.1 文档层级
 
@@ -319,7 +320,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.4 CQ-3 Face SDF 与脸部 Overlay
 
-**状态：Active。** 当前唯一主工作包；不得提前进入最终 Hair KK、Bloom 或最终调色。
+**状态：Complete（2026-08-13）。** Face SDF、Face Overlay 和固定 QA 三态捕获均已完成。
 
 **当前增量（2026-08-13）：** AR-0 已建立 `RenderSettings v1` 与 Face SDF v1
 资产契约。兼容性审计确认莱万汀 Face Primitive 有 `TEXCOORD_0` 和
@@ -339,6 +340,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.5 CQ-4 Hair Anisotropic / Kajiya–Kay
 
+**状态：Complete（2026-08-13）。** 双层 Hair KK 与固定机位/Lighting Sweep 验收已完成。
+
 **任务：**
 
 - 导出并采样真实 `CB_LWT_KK_Ramp_01`；
@@ -353,6 +356,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.6 CQ-5 Rim、Specular、Emissive 与 Bloom
 
+**状态：Complete（2026-08-13）。** Rim/Specular/Emissive QA 与轻量 HDR Bloom v1 已完成。
+
 **任务：**
 
 - 将 Rim 从弱全局 Fresnel 改为 Material-aware Key/Fill/Rim 光照；
@@ -365,6 +370,8 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 **退出条件：** Rim 能稳定分离角色和背景；金属、布料、皮革在灰度图中也能通过高光形状区分；图 5 类型的背面 Emissive 具有明确视觉层级而不过曝。
 
 ### 6.7 CQ-6 Outline 与最终 Lighting/Grade
+
+**状态：Review（2026-08-14）。** `RenderSettings v2` 已建立 Outline/Grade v1 参数所有权，最终合成从设置读取轮廓强度、深度/法线阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint；Bloom strength/threshold 上传映射已修正。Debug/Release 构建和 Release Vulkan 代表捕获通过，等待 M2 Gate 的用户视觉确认与 Validation 环境复验。
 
 **任务：**
 

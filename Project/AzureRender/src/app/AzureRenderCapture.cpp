@@ -136,6 +136,23 @@ void AzureRenderApp::writeCaptureManifest(
         << '|' << renderSettings_.bloom.threshold
         << '|' << renderSettings_.bloom.strength;
     qaState
+        << '|' << azurerender::OutlineSettings::kSchemaVersion
+        << '|' << renderSettings_.outline.strength
+        << '|' << renderSettings_.outline.depthThreshold
+        << '|' << renderSettings_.outline.normalThreshold;
+    for (const float channel : renderSettings_.outline.color) {
+        qaState << '|' << channel;
+    }
+    qaState
+        << '|' << azurerender::GradeSettings::kSchemaVersion
+        << '|' << renderSettings_.grade.exposureEv
+        << '|' << renderSettings_.grade.saturation
+        << '|' << renderSettings_.grade.contrast
+        << '|' << renderSettings_.grade.toneMappingEnabled;
+    for (const float channel : renderSettings_.grade.tint) {
+        qaState << '|' << channel;
+    }
+    qaState
         << '|'
         << rampProfileHash << '|'
         << rampAtlasHash;
@@ -145,7 +162,8 @@ void AzureRenderApp::writeCaptureManifest(
             << ':' << static_cast<std::uint32_t>(material.materialClass)
             << ':' << material.materialFeatures
             << ':' << material.materialProfileVersion
-            << ':' << material.materialProfileExplicit;
+            << ':' << material.materialProfileExplicit
+            << ':' << material.emissiveStrength;
         for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
         }
@@ -208,6 +226,32 @@ void AzureRenderApp::writeCaptureManifest(
         << "    \"threshold\": " << renderSettings_.bloom.threshold << ",\n"
         << "    \"strength\": " << renderSettings_.bloom.strength << "\n"
         << "  },\n"
+        << "  \"outlineSettings\": {\n"
+        << "    \"schemaVersion\": "
+        << azurerender::OutlineSettings::kSchemaVersion << ",\n"
+        << "    \"strength\": " << renderSettings_.outline.strength << ",\n"
+        << "    \"depthThreshold\": "
+        << renderSettings_.outline.depthThreshold << ",\n"
+        << "    \"normalThreshold\": "
+        << renderSettings_.outline.normalThreshold << ",\n"
+        << "    \"color\": ["
+        << renderSettings_.outline.color[0] << ", "
+        << renderSettings_.outline.color[1] << ", "
+        << renderSettings_.outline.color[2] << "]\n"
+        << "  },\n"
+        << "  \"gradeSettings\": {\n"
+        << "    \"schemaVersion\": "
+        << azurerender::GradeSettings::kSchemaVersion << ",\n"
+        << "    \"exposureEv\": " << renderSettings_.grade.exposureEv << ",\n"
+        << "    \"saturation\": " << renderSettings_.grade.saturation << ",\n"
+        << "    \"contrast\": " << renderSettings_.grade.contrast << ",\n"
+        << "    \"tint\": ["
+        << renderSettings_.grade.tint[0] << ", "
+        << renderSettings_.grade.tint[1] << ", "
+        << renderSettings_.grade.tint[2] << "],\n"
+        << "    \"toneMappingEnabled\": "
+        << (renderSettings_.grade.toneMappingEnabled ? "true" : "false") << "\n"
+        << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
         << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
@@ -261,6 +305,8 @@ void AzureRenderApp::writeCaptureManifest(
             << ", \"features\": " << material.materialFeatures
             << ", \"profileVersion\": "
             << material.materialProfileVersion
+            << ", \"emissiveStrength\": "
+            << material.emissiveStrength
             << ", \"styleParameters\": ["
             << material.styleParameters[0] << ", "
             << material.styleParameters[1] << ", "

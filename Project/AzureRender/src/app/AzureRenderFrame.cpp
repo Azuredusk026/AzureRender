@@ -967,16 +967,36 @@ void AzureRenderApp::recordCommandBuffer(
     const PostProcessPushConstants postProcessConstants{
         renderSettings_.diagnosticView == 2
             ? 1.0F
-            : (renderSettings_.innerOutlineEnabled ? 0.40F : 0.0F),
-        0.18F,
-        0.20F,
+            : (renderSettings_.innerOutlineEnabled
+                ? renderSettings_.outline.strength : 0.0F),
+        renderSettings_.outline.depthThreshold,
+        renderSettings_.outline.normalThreshold,
         static_cast<float>(renderSettings_.diagnosticView),
-        0.0F,
+        renderSettings_.grade.exposureEv,
+        renderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
         renderSettings_.bloom.enabled
             && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
             ? renderSettings_.bloom.strength : 0.0F,
         qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
             ? 1.0F : 0.0F,
+        {
+            renderSettings_.outline.color[0],
+            renderSettings_.outline.color[1],
+            renderSettings_.outline.color[2],
+            1.0F,
+        },
+        {
+            renderSettings_.grade.saturation,
+            renderSettings_.grade.contrast,
+            renderSettings_.bloom.threshold,
+            0.0F,
+        },
+        {
+            renderSettings_.grade.tint[0],
+            renderSettings_.grade.tint[1],
+            renderSettings_.grade.tint[2],
+            0.0F,
+        },
     };
     vkCmdPushConstants(
         commandBuffer,

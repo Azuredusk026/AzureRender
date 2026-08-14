@@ -6,8 +6,8 @@ science-fiction showcase scene.
 M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
-style-mask routing have independent QA views. The active work package is CQ-3
-Face SDF/Overlays.
+style-mask routing have independent QA views. CQ-3 through CQ-6 implementation
+is complete; the active work package is the M2 release gate review.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
@@ -272,7 +272,10 @@ See [`docs/CHARACTER_QA_HARNESS_CN.md`](docs/CHARACTER_QA_HARNESS_CN.md) for
 the complete matrix and run `tools/run_character_qa.ps1` to generate baseline,
 isolation, A/B, or full QA evidence.
 
-CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, CQ-3 Face SDF/Overlay v1, CQ-4 Hair KK v1, and CQ-5 Rim/Specular/Emissive/Bloom v1 are complete; CQ-6 is next. CQ-0 evidence is
+CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, CQ-3 Face SDF/Overlay
+v1, CQ-4 Hair KK v1, CQ-5 Rim/Specular/Emissive/Bloom v1, and the CQ-6
+Outline/Final Grade implementation are complete. M2 release-gate review is
+next. CQ-0 evidence is
 kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
 `cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
 part of a public source package.

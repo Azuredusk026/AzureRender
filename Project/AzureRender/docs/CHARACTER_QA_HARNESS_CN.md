@@ -11,6 +11,7 @@ CQ-0 不负责改善角色 Shader。它固定后续所有角色美术节点共�
 - 被测试效果、Enabled/Disabled/Isolation 状态；
 - Isolation View、Diagnostic View；
 - FNV-1a-64 状态哈希；
+- 版本化 Face SDF、Bloom、Outline 与 Final Grade 设置；
 - 资产、GPU、分辨率、FPS、动画和原有 Capture 信息。
 
 状态哈希用于发现配置变化，不代替文件哈希。批量脚本的 `qa_index.json` 会额外保存资产、可执行文件和每个已编译 SPIR-V Shader 的 SHA-256。
@@ -58,6 +59,9 @@ Face SDF 与 Overlay 已在 CQ-3 接入同一 Harness。Overlay 为 authored Bas
 透明层，不参与 Shadow Map、toon、specular、Matcap；两者均支持 enabled/disabled/isolation。
 Material ID 已在 CQ-1 接入，CQ-2 增加 Style Mask、Ambient、Direct Diffuse 与 Shadow
 Tint 分层视图，并把 Ramp Profile/Atlas Hash 写入 Manifest 与 QA Index。
+CQ-6 将 Outline 强度、深度/法线阈值、颜色以及 Exposure、Tone Mapping、Saturation、
+Contrast、Tint 写入 Manifest 和状态哈希。Outline enabled/disabled/isolation 继续复用
+既有固定 QA Case，不另造不可比较的测试名称。
 
 ## 5. 单次 Capture
 

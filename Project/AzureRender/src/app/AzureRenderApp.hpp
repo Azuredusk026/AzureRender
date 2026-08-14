@@ -127,10 +127,13 @@ private:
         float diagnosticView = 0.0F;
         float exposureEv = 0.0F;
         float toneMappingEnabled = 1.0F;
-        float bloomEnabled = 1.0F;
+        float bloomStrength = 0.16F;
         float bloomIsolation = 0.0F;
+        std::array<float, 4> outlineColor{0.008F, 0.013F, 0.022F, 1.0F};
+        std::array<float, 4> gradeParameters{1.0F, 1.0F, 1.05F, 0.0F};
+        std::array<float, 4> gradeTint{1.0F, 1.0F, 1.0F, 0.0F};
     };
-    static_assert(sizeof(PostProcessPushConstants) == 32);
+    static_assert(sizeof(PostProcessPushConstants) == 80);
 
     struct GpuTimingAccumulator {
         std::uint64_t samples = 0;

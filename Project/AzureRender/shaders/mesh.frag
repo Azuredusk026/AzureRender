@@ -429,7 +429,7 @@ void main() {
     }
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
     vec3 emissive =
-        specularEmissive.rgb * material.emissiveStrength * 3.0
+        specularEmissive.rgb * material.emissiveStrength * 6.0
         * material.featureParameters.z
         * materialFeatureEnabled(8U);
     if (qaEffectMode == 6 && qaEffectDisabled) {

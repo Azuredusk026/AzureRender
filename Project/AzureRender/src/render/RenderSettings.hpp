@@ -25,8 +25,27 @@ struct BloomSettings {
     float strength = 0.16F;
 };
 
-struct RenderSettings {
+struct OutlineSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
+
+    float strength = 0.40F;
+    float depthThreshold = 0.18F;
+    float normalThreshold = 0.20F;
+    std::array<float, 3> color{0.008F, 0.013F, 0.022F};
+};
+
+struct GradeSettings {
+    static constexpr std::uint32_t kSchemaVersion = 1;
+
+    float exposureEv = 0.0F;
+    float saturation = 1.0F;
+    float contrast = 1.0F;
+    std::array<float, 3> tint{1.0F, 1.0F, 1.0F};
+    bool toneMappingEnabled = true;
+};
+
+struct RenderSettings {
+    static constexpr std::uint32_t kSchemaVersion = 2;
 
     bool stylizedLightingEnabled = true;
     float styleMaskStrength = 1.0F;
@@ -37,6 +56,8 @@ struct RenderSettings {
     std::uint32_t diagnosticView = 0;
     FaceSdfSettings faceSdf;
     BloomSettings bloom;
+    OutlineSettings outline;
+    GradeSettings grade;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

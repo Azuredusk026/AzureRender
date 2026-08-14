@@ -49,6 +49,26 @@ void validateRenderSettings(const RenderSettings& settings) {
     }
     requireRange(settings.bloom.threshold, 0.0F, 8.0F, "bloom.threshold");
     requireRange(settings.bloom.strength, 0.0F, 2.0F, "bloom.strength");
+    requireRange(settings.outline.strength, 0.0F, 2.0F, "outline.strength");
+    requireRange(
+        settings.outline.depthThreshold,
+        0.001F,
+        2.0F,
+        "outline.depthThreshold");
+    requireRange(
+        settings.outline.normalThreshold,
+        0.001F,
+        1.0F,
+        "outline.normalThreshold");
+    for (const float channel : settings.outline.color) {
+        requireRange(channel, 0.0F, 8.0F, "outline.color channel");
+    }
+    requireRange(settings.grade.exposureEv, -8.0F, 8.0F, "grade.exposureEv");
+    requireRange(settings.grade.saturation, 0.0F, 2.0F, "grade.saturation");
+    requireRange(settings.grade.contrast, 0.0F, 2.0F, "grade.contrast");
+    for (const float channel : settings.grade.tint) {
+        requireRange(channel, 0.0F, 2.0F, "grade.tint channel");
+    }
 }
 
 }  // namespace azurerender
