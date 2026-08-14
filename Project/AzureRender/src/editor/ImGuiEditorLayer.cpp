@@ -253,10 +253,7 @@ void ImGuiEditorLayer::setViewportImages(
     if (!initialized_) {
         return;
     }
-    for (const VkDescriptorSet texture : viewportTextures_) {
-        ImGui_ImplVulkan_RemoveTexture(texture);
-    }
-    viewportTextures_.clear();
+    clearViewportImages();
     viewportTextures_.reserve(imageViews.size());
     for (const VkImageView imageView : imageViews) {
         viewportTextures_.push_back(ImGui_ImplVulkan_AddTexture(
@@ -266,6 +263,18 @@ void ImGuiEditorLayer::setViewportImages(
     }
     viewportWidth_ = std::max(width, 1U);
     viewportHeight_ = std::max(height, 1U);
+    viewportImageIndex_ = 0;
+}
+
+void ImGuiEditorLayer::clearViewportImages() {
+    if (!initialized_) {
+        viewportTextures_.clear();
+        return;
+    }
+    for (const VkDescriptorSet texture : viewportTextures_) {
+        ImGui_ImplVulkan_RemoveTexture(texture);
+    }
+    viewportTextures_.clear();
     viewportImageIndex_ = 0;
 }
 
@@ -441,6 +450,7 @@ void ImGuiEditorLayer::drawPanels() {}
 void ImGuiEditorLayer::render(VkCommandBuffer) {}
 void ImGuiEditorLayer::setViewportImages(
     VkSampler, const std::vector<VkImageView>&, std::uint32_t, std::uint32_t) {}
+void ImGuiEditorLayer::clearViewportImages() {}
 void ImGuiEditorLayer::setViewportImageIndex(std::uint32_t) {}
 EditorViewportInput ImGuiEditorLayer::consumeViewportInput() noexcept {
     return {};

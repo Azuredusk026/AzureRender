@@ -150,20 +150,64 @@ void AzureRenderApp::recreateSwapchain() {
     initEditorUi();
 }
 
-void AzureRenderApp::cleanupSwapchain() {
-    if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorPool(
+void AzureRenderApp::recreateEditorViewportResources() {
+    if (!editorUiEnabled_
+        || requestedEditorViewportExtent_.width == 0
+        || requestedEditorViewportExtent_.height == 0) {
+        return;
+    }
+
+    const VkExtent2D newExtent{
+        std::clamp(
+            requestedEditorViewportExtent_.width,
+            std::min(64U, swapchainExtent_.width),
+            swapchainExtent_.width),
+        std::clamp(
+            requestedEditorViewportExtent_.height,
+            std::min(64U, swapchainExtent_.height),
+            swapchainExtent_.height),
+    };
+    if (newExtent.width == renderExtent_.width
+        && newExtent.height == renderExtent_.height) {
+        return;
+    }
+
+    vkCheck(
+        vkWaitForFences(
             device_,
-            postProcessDescriptorPool_,
-            nullptr);
+            static_cast<std::uint32_t>(inFlightFences_.size()),
+            inFlightFences_.data(),
+            VK_TRUE,
+            UINT64_MAX),
+        "vkWaitForFences(editor viewport resize)");
+    if (editorLayer_ != nullptr) {
+        editorLayer_->clearViewportImages();
+    }
+    cleanupEditorViewportResources(false);
+    renderExtent_ = newExtent;
+    createEditorViewportResources();
+    createSceneColorResources();
+    createDepthResources();
+    createNormalResources();
+    createFramebuffers();
+    createPostProcessFramebuffers();
+    createPostProcessDescriptorSets();
+    editorLayer_->setViewportImages(
+        editorViewportSampler_,
+        editorViewportImageViews_,
+        renderExtent_.width,
+        renderExtent_.height);
+    std::cout << "Editor viewport resources rebuilt: "
+              << renderExtent_.width << 'x' << renderExtent_.height << '\n';
+}
+
+void AzureRenderApp::cleanupEditorViewportResources(
+    const bool destroySampler) {
+    if (postProcessDescriptorPool_ != VK_NULL_HANDLE) {
+        vkDestroyDescriptorPool(device_, postProcessDescriptorPool_, nullptr);
         postProcessDescriptorPool_ = VK_NULL_HANDLE;
     }
     postProcessDescriptorSets_.clear();
-
-    for (const auto semaphore : renderFinishedSemaphores_) {
-        vkDestroySemaphore(device_, semaphore, nullptr);
-    }
-    renderFinishedSemaphores_.clear();
 
     for (const auto framebuffer : swapchainFramebuffers_) {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
@@ -173,66 +217,52 @@ void AzureRenderApp::cleanupSwapchain() {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
     }
     postProcessFramebuffers_.clear();
+
+    const auto destroyImages = [this](
+                                   auto& views,
+                                   auto& images,
+                                   auto& memories) {
+        for (const auto view : views) {
+            vkDestroyImageView(device_, view, nullptr);
+        }
+        for (const auto image : images) {
+            vkDestroyImage(device_, image, nullptr);
+        }
+        for (const auto memory : memories) {
+            vkFreeMemory(device_, memory, nullptr);
+        }
+        views.clear();
+        images.clear();
+        memories.clear();
+    };
+    destroyImages(
+        editorViewportImageViews_,
+        editorViewportImages_,
+        editorViewportImageMemories_);
+    destroyImages(
+        sceneColorImageViews_,
+        sceneColorImages_,
+        sceneColorImageMemories_);
+    destroyImages(depthImageViews_, depthImages_, depthImageMemories_);
+    destroyImages(normalImageViews_, normalImages_, normalImageMemories_);
+
+    if (destroySampler && editorViewportSampler_ != VK_NULL_HANDLE) {
+        vkDestroySampler(device_, editorViewportSampler_, nullptr);
+        editorViewportSampler_ = VK_NULL_HANDLE;
+    }
+}
+
+void AzureRenderApp::cleanupSwapchain() {
+    for (const auto semaphore : renderFinishedSemaphores_) {
+        vkDestroySemaphore(device_, semaphore, nullptr);
+    }
+    renderFinishedSemaphores_.clear();
+
+    cleanupEditorViewportResources(true);
     for (const auto framebuffer : editorUiFramebuffers_) {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
     }
     editorUiFramebuffers_.clear();
-
-    for (const auto imageView : editorViewportImageViews_) {
-        vkDestroyImageView(device_, imageView, nullptr);
-    }
-    for (const auto image : editorViewportImages_) {
-        vkDestroyImage(device_, image, nullptr);
-    }
-    for (const auto memory : editorViewportImageMemories_) {
-        vkFreeMemory(device_, memory, nullptr);
-    }
-    editorViewportImageViews_.clear();
-    editorViewportImages_.clear();
-    editorViewportImageMemories_.clear();
-    if (editorViewportSampler_ != VK_NULL_HANDLE) {
-        vkDestroySampler(device_, editorViewportSampler_, nullptr);
-        editorViewportSampler_ = VK_NULL_HANDLE;
-    }
-
-    for (const auto imageView : sceneColorImageViews_) {
-        vkDestroyImageView(device_, imageView, nullptr);
-    }
-    for (const auto image : sceneColorImages_) {
-        vkDestroyImage(device_, image, nullptr);
-    }
-    for (const auto memory : sceneColorImageMemories_) {
-        vkFreeMemory(device_, memory, nullptr);
-    }
-    sceneColorImageViews_.clear();
-    sceneColorImages_.clear();
-    sceneColorImageMemories_.clear();
-
-    for (const auto imageView : depthImageViews_) {
-        vkDestroyImageView(device_, imageView, nullptr);
-    }
-    for (const auto image : depthImages_) {
-        vkDestroyImage(device_, image, nullptr);
-    }
-    for (const auto memory : depthImageMemories_) {
-        vkFreeMemory(device_, memory, nullptr);
-    }
-    depthImageViews_.clear();
-    depthImages_.clear();
-    depthImageMemories_.clear();
-
-    for (const auto imageView : normalImageViews_) {
-        vkDestroyImageView(device_, imageView, nullptr);
-    }
-    for (const auto image : normalImages_) {
-        vkDestroyImage(device_, image, nullptr);
-    }
-    for (const auto memory : normalImageMemories_) {
-        vkFreeMemory(device_, memory, nullptr);
-    }
-    normalImageViews_.clear();
-    normalImages_.clear();
-    normalImageMemories_.clear();
 
     for (VkPipeline* pipeline : {
              &opaquePipeline_,

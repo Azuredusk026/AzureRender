@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-14 v1
-> 当前节点：AR-3.6 Ready
+> 当前节点：AR-3.7 Ready
 > 适用范围：Renderer 模块化、编辑器基础设施、Release Candidate 加固
 
 ## 1. 计划治理
@@ -35,6 +35,7 @@
 | AR-3.3 | Complete | 独立离屏 Viewport 与 UI RenderPass |
 | AR-3.4 | Complete | 轨道相机、平移、缩放和输入焦点隔离 |
 | AR-3.5 | Complete | Viewport 尺寸驱动颜色/深度/法线/后处理目标 |
+| AR-3.6 | Complete | Viewport 资源独立重建，不重建 swapchain/ImGui Context |
 | M3 / SC | Deferred | 按当前决策暂不执行场景与工业场景工作包 |
 
 这里的 AR-1 `Complete` 指 v1 契约边界完成，不代表 Vulkan 资源所有权已经完全移出
@@ -44,8 +45,8 @@
 
 | 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
 |---:|---|---|---|---|---|
-| 1 | AR-3.6 | Ready | Viewport RenderTarget 独立重建，不再重建交换链或 ImGui Context | AR-3.5 | `完成 AR-3.6 视口资源独立重建` |
-| 2 | AR-3.7 | Backlog | 编辑器 Session 与命令层：保存、脏状态、布局重置、错误反馈 | AR-3.6 | `完成 AR-3.7 编辑器会话闭环` |
+| 1 | AR-3.6 | Complete | Viewport RenderTarget 独立重建，不再重建交换链或 ImGui Context | AR-3.5 | `完成 AR-3.6 视口资源独立重建` |
+| 2 | AR-3.7 | Ready | 编辑器 Session 与命令层：保存、脏状态、布局重置、错误反馈 | AR-3.6 | `完成 AR-3.7 编辑器会话闭环` |
 | 3 | AR-4.0 | Backlog | 冻结 RC0 行为基线、测试矩阵和支持平台 | AR-3.7 | `完成 AR-4.0 RC0 基线冻结` |
 | 4 | AR-4.1 | Backlog | 结构化日志、GPU 能力报告、错误分类与退出码 | AR-4.0 | `完成 AR-4.1 运行诊断基础` |
 | 5 | AR-4.2 | Backlog | `ResourceLocator` 与安装目录，移除运行时源码绝对路径依赖 | AR-4.1 | `完成 AR-4.2 运行资源定位` |

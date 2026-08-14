@@ -1,5 +1,13 @@
 # 开发日志
 
+## 2026-08-14：AR-3.6 Viewport 资源独立重建
+
+- Dock 尺寸变化不再调用 `recreateSwapchain()`；新增只重建 Scene Color、Depth、Normal、Viewport Color、相关 framebuffer 和 post-process descriptor 的路径。
+- 重建只等待现有 in-flight frame fences，保留平台窗口、swapchain、ImGui Context/Backend、RenderPass、Pipeline 和 Viewport sampler。
+- ImGui 在销毁旧 image view 前移除旧纹理 descriptor，重建后重新注册，避免 descriptor 泄漏和陈旧 image view。
+- Linux Debug、Release、ImGui 三套构建通过，三套 CTest 均 1/1 通过；当前容器无可用窗口服务器，GLFW Vulkan surface 运行探针未能启动，需在带 X11/Wayland 的环境补 120 帧 Validation。
+- AR-3.6 Complete，下一节点固定为 AR-3.7。
+
 ## 2026-08-14：AR-1.1 与 AR-3.1～AR-3.5 编辑器基础设施
 
 - AR-1.1 新增 `GlfwFrontend`，将窗口、输入回调和 framebuffer 查询从 Renderer 核心边界拆出。

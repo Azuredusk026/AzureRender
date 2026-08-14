@@ -37,7 +37,6 @@ void AzureRenderApp::drawFrame() {
 
     if (acquireResult == VK_ERROR_OUT_OF_DATE_KHR) {
         framebufferResized_ = false;
-        editorViewportResizeRequested_ = false;
         recreateSwapchain();
         return;
     }
@@ -172,13 +171,15 @@ void AzureRenderApp::drawFrame() {
     const VkResult presentResult = vkQueuePresentKHR(presentQueue_, &presentInfo);
     if (presentResult == VK_ERROR_OUT_OF_DATE_KHR
         || presentResult == VK_SUBOPTIMAL_KHR
-        || framebufferResized_
-        || editorViewportResizeRequested_) {
+        || framebufferResized_) {
         framebufferResized_ = false;
-        editorViewportResizeRequested_ = false;
         recreateSwapchain();
     } else if (presentResult != VK_SUCCESS) {
         vkCheck(presentResult, "vkQueuePresentKHR");
+    }
+    if (editorViewportResizeRequested_) {
+        editorViewportResizeRequested_ = false;
+        recreateEditorViewportResources();
     }
 
     currentFrame_ = (currentFrame_ + 1) % kMaxFramesInFlight;

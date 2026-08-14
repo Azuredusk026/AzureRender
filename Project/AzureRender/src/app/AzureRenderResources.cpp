@@ -58,18 +58,20 @@ void AzureRenderApp::createEditorViewportResources() {
             VK_IMAGE_ASPECT_COLOR_BIT);
     }
 
-    VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    samplerInfo.magFilter = VK_FILTER_LINEAR;
-    samplerInfo.minFilter = VK_FILTER_LINEAR;
-    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
-    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.maxLod = 1.0F;
-    vkCheck(
-        vkCreateSampler(
-            device_, &samplerInfo, nullptr, &editorViewportSampler_),
-        "vkCreateSampler(editor viewport)");
+    if (editorViewportSampler_ == VK_NULL_HANDLE) {
+        VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
+        samplerInfo.magFilter = VK_FILTER_LINEAR;
+        samplerInfo.minFilter = VK_FILTER_LINEAR;
+        samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
+        samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        samplerInfo.maxLod = 1.0F;
+        vkCheck(
+            vkCreateSampler(
+                device_, &samplerInfo, nullptr, &editorViewportSampler_),
+            "vkCreateSampler(editor viewport)");
+    }
 }
 
 void AzureRenderApp::createSceneColorResources() {

@@ -359,6 +359,8 @@ private:
         std::uint32_t height,
         const std::string& outputPath = {}) const;
     void recreateSwapchain();
+    void recreateEditorViewportResources();
+    void cleanupEditorViewportResources(bool destroySampler);
     void cleanupSwapchain();
 
     [[nodiscard]] QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) const;

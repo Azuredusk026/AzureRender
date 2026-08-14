@@ -38,6 +38,7 @@ public:
         const std::vector<VkImageView>& imageViews,
         std::uint32_t width,
         std::uint32_t height);
+    void clearViewportImages();
     void setViewportImageIndex(std::uint32_t imageIndex);
     [[nodiscard]] EditorViewportInput consumeViewportInput() noexcept;
     bool consumeViewportResizeRequest(
