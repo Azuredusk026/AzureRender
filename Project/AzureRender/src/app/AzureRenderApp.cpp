@@ -236,7 +236,7 @@ void AzureRenderApp::run(
         runOptions_.renderSettings.stylizedLightingEnabled;
     renderSettings_.innerOutlineEnabled =
         runOptions_.renderSettings.innerOutlineEnabled;
-    hudEnabled_ = runOptions_.hudEnabled;
+    hudEnabled_ = runOptions_.hudEnabled || runOptions_.editorMode;
     configureQaHarness();
     constexpr std::array<const char*, 5> kDiagnosticNames = {
         "Beauty",
@@ -269,7 +269,9 @@ void AzureRenderApp::initWindow() {
     window_ = glfwCreateWindow(
         static_cast<int>(runOptions_.width),
         static_cast<int>(runOptions_.height),
-        "AzureRender - Stylized Vulkan Renderer",
+        runOptions_.editorMode
+            ? "AzureRender Editor Preview"
+            : "AzureRender - Stylized Vulkan Renderer",
         nullptr,
         nullptr);
 
@@ -1275,6 +1277,34 @@ void AzureRenderApp::keyCallback(
                 << "Diffuse band threshold: "
                 << application->renderSettings_.diffuseBandThreshold
                 << '\n';
+        } else if (application->runOptions_.editorMode
+                   && key == GLFW_KEY_LEFT_BRACKET) {
+            application->renderSettings_.outline.strength = std::max(
+                application->renderSettings_.outline.strength - 0.05F,
+                0.0F);
+            std::cout << "Editor outline strength: "
+                      << application->renderSettings_.outline.strength << '\n';
+        } else if (application->runOptions_.editorMode
+                   && key == GLFW_KEY_RIGHT_BRACKET) {
+            application->renderSettings_.outline.strength = std::min(
+                application->renderSettings_.outline.strength + 0.05F,
+                2.0F);
+            std::cout << "Editor outline strength: "
+                      << application->renderSettings_.outline.strength << '\n';
+        } else if (application->runOptions_.editorMode
+                   && key == GLFW_KEY_MINUS) {
+            application->renderSettings_.grade.exposureEv = std::max(
+                application->renderSettings_.grade.exposureEv - 0.25F,
+                -8.0F);
+            std::cout << "Editor exposure EV: "
+                      << application->renderSettings_.grade.exposureEv << '\n';
+        } else if (application->runOptions_.editorMode
+                   && key == GLFW_KEY_EQUAL) {
+            application->renderSettings_.grade.exposureEv = std::min(
+                application->renderSettings_.grade.exposureEv + 0.25F,
+                8.0F);
+            std::cout << "Editor exposure EV: "
+                      << application->renderSettings_.grade.exposureEv << '\n';
         }
     }
 }

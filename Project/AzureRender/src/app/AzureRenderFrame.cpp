@@ -596,6 +596,33 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
              << " S" << hairProfile->styleParameters[2]
              << " R" << hairProfile->styleParameters[3] << '\n';
     }
+    if (runOptions_.editorMode) {
+        text << "EDITOR PREVIEW V1 | VIEWPORT: LIVE VULKAN\n"
+             << "SCENE OUTLINER: ";
+        if (runOptions_.editorNodeNames.empty()) {
+            text << "<EMPTY>";
+        } else {
+            for (std::size_t index = 0;
+                 index < runOptions_.editorNodeNames.size(); ++index) {
+                if (index > 0) text << " | ";
+                text << printable(runOptions_.editorNodeNames[index], 20);
+            }
+        }
+        text << "\nINSPECTOR: OUTLINE " << renderSettings_.outline.strength
+             << "  EXPOSURE " << renderSettings_.grade.exposureEv
+             << "  PRESET " << renderSettings_.showcasePreset << '\n'
+             << "ASSET BROWSER: ";
+        if (runOptions_.editorResourcePaths.empty()) {
+            text << "<EMPTY>";
+        } else {
+            for (std::size_t index = 0;
+                 index < runOptions_.editorResourcePaths.size(); ++index) {
+                if (index > 0) text << " | ";
+                text << printable(runOptions_.editorResourcePaths[index], 38);
+            }
+        }
+        text << "\nCONSOLE: [/] OUTLINE  -/= EXPOSURE  F1-F3 LIGHT  CLOSE=SAVES\n";
+    }
     if (gpuTiming_.samples > 0) {
         const double count = static_cast<double>(gpuTiming_.samples);
         text << "GPU MS: SHADOW "

@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <exception>
 #include <iostream>
+#include <optional>
 #include <stdexcept>
 #include <string>
 
@@ -14,6 +15,7 @@ int main(const int argumentCount, char** argumentValues) {
         AzureRenderOptions options;
         std::string scenePath;
         std::string createScenePath;
+        std::string editorScenePath;
         for (int index = 1; index < argumentCount; ++index) {
             const std::string argument = argumentValues[index];
             if (argument == "--smoke-frames" && index + 1 < argumentCount) {
@@ -28,6 +30,8 @@ int main(const int argumentCount, char** argumentValues) {
             } else if (argument == "--create-scene"
                        && index + 1 < argumentCount) {
                 createScenePath = argumentValues[++index];
+            } else if (argument == "--editor" && index + 1 < argumentCount) {
+                editorScenePath = argumentValues[++index];
             } else if (argument == "--capture-dir"
                        && index + 1 < argumentCount) {
                 options.captureDirectory = argumentValues[++index];
@@ -110,6 +114,7 @@ int main(const int argumentCount, char** argumentValues) {
                     "Usage: AzureRender.exe [--asset <gltf/glb path>] "
                     "[--scene <azscene path>] "
                     "[--create-scene <azscene path>] "
+                    "[--editor <azscene path>] "
                     "[--smoke-frames <positive integer>] "
                     "[--portfolio] [--width <pixels>] [--height <pixels>] "
                     "[--gpu-timing] [--gpu-timing-output <json path>] "
@@ -180,9 +185,15 @@ int main(const int argumentCount, char** argumentValues) {
             std::cout << "Scene created: " << createScenePath << '\n';
             return EXIT_SUCCESS;
         }
+        if (!editorScenePath.empty()) {
+            scenePath = editorScenePath;
+            options.editorMode = true;
+            options.editorScenePath = editorScenePath;
+        }
+        std::optional<azurerender::SceneDocument> sceneDocument;
         if (!scenePath.empty()) {
-            const azurerender::SceneDocument scene =
-                azurerender::SceneDocument::load(scenePath);
+            sceneDocument = azurerender::SceneDocument::load(scenePath);
+            const azurerender::SceneDocument& scene = *sceneDocument;
             const auto asset = std::find_if(
                 scene.resources.begin(), scene.resources.end(),
                 [](const azurerender::SceneResource& resource) {
@@ -194,10 +205,26 @@ int main(const int argumentCount, char** argumentValues) {
             }
             options.assetPath = asset->path.string();
             options.renderSettings = scene.renderSettings;
+            if (options.editorMode) {
+                options.editorSceneName = scene.sceneId;
+                for (const azurerender::SceneNode& node : scene.nodes) {
+                    options.editorNodeNames.push_back(node.name);
+                }
+                for (const azurerender::SceneResource& resource
+                     : scene.resources) {
+                    options.editorResourcePaths.push_back(
+                        resource.path.string());
+                }
+            }
         }
 
         AzureRenderApp application;
         application.run(options);
+        if (options.editorMode && sceneDocument.has_value()) {
+            sceneDocument->renderSettings = application.currentRenderSettings();
+            sceneDocument->save(editorScenePath);
+            std::cout << "Editor scene saved: " << editorScenePath << '\n';
+        }
     } catch (const std::exception& exception) {
         std::cerr << "Fatal error: " << exception.what() << '\n';
         return EXIT_FAILURE;

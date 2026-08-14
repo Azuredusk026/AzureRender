@@ -31,6 +31,11 @@ struct AzureRenderOptions {
     std::string qaEffect;
     std::string qaEffectState;
     std::string qaIsolation;
+    bool editorMode = false;
+    std::string editorScenePath;
+    std::string editorSceneName;
+    std::vector<std::string> editorNodeNames;
+    std::vector<std::string> editorResourcePaths;
 };
 
 class AzureRenderApp final {
@@ -41,6 +46,8 @@ public:
     ~AzureRenderApp();
 
     void run(const AzureRenderOptions& options = {});
+    [[nodiscard]] const azurerender::RenderSettings& currentRenderSettings()
+        const { return renderSettings_; }
 
 private:
     static constexpr std::uint32_t kShadowMapSize = 2048;
