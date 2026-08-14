@@ -1101,9 +1101,10 @@ void AzureRenderApp::keyCallback(
     if (application == nullptr) {
         return;
     }
-    if (application->editorLayer_ != nullptr
-        && application->editorLayer_->wantsKeyboardCapture()) {
-        return;
+    if (application->editorLayer_ != nullptr) {
+        if (!application->editorLayer_->acceptsViewportShortcuts()) {
+            return;
+        }
     }
 
     constexpr float kPi = 3.14159265358979323846F;

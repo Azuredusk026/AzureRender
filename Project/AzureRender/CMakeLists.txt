@@ -7,6 +7,8 @@ project(
     LANGUAGES CXX
 )
 
+include(CTest)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -83,6 +85,8 @@ add_executable(
     src/app/AzureRenderSupport.cpp
     src/assets/GltfLoader.cpp
     src/assets/GltfLoader.hpp
+    src/editor/EditorCameraController.cpp
+    src/editor/EditorCameraController.hpp
     src/editor/EditorContext.cpp
     src/editor/EditorContext.hpp
     src/editor/IEditorPanel.hpp
@@ -99,6 +103,20 @@ add_executable(
 )
 
 add_dependencies(AzureRender AzureRenderShaders)
+
+if(BUILD_TESTING)
+    add_executable(
+        AzureRenderEditorCameraTests
+        tests/EditorCameraControllerTests.cpp
+        src/editor/EditorCameraController.cpp
+        src/editor/EditorCameraController.hpp
+    )
+    target_include_directories(
+        AzureRenderEditorCameraTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.EditorCameraController
+        COMMAND AzureRenderEditorCameraTests)
+endif()
 
 target_link_libraries(
     AzureRender

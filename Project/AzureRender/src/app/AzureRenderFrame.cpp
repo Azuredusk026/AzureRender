@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "editor/EditorCameraController.hpp"
 #include "editor/EditorContext.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
@@ -71,6 +72,12 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
+        if (azurerender::EditorCameraController::apply(
+                editorLayer_->consumeViewportInput(),
+                cameraPosition_,
+                cameraTarget_)) {
+            autoRotate_ = false;
+        }
     }
     updateUniformBuffer(currentFrame_);
     updateHudBuffer(currentFrame_);

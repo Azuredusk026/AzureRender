@@ -275,8 +275,10 @@ void ImGuiEditorLayer::setViewportImageIndex(
     }
 }
 
-bool ImGuiEditorLayer::wantsKeyboardCapture() const noexcept {
-    return initialized_ && ImGui::GetIO().WantCaptureKeyboard;
+EditorViewportInput ImGuiEditorLayer::consumeViewportInput() noexcept {
+    EditorViewportInput input = viewportInput_;
+    viewportInput_ = {};
+    return input;
 }
 
 void ImGuiEditorLayer::drawViewportPanel() {
@@ -284,6 +286,8 @@ void ImGuiEditorLayer::drawViewportPanel() {
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
     ImGui::Begin("Viewport");
+    viewportFocused_ = ImGui::IsWindowFocused(
+        ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const float aspect = static_cast<float>(viewportWidth_)
@@ -302,7 +306,22 @@ void ImGuiEditorLayer::drawViewportPanel() {
             reinterpret_cast<ImTextureID>(
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
+        if (ImGui::IsItemHovered()) {
+            const ImGuiIO& io = ImGui::GetIO();
+            viewportInput_.zoomSteps += io.MouseWheel;
+            if (ImGui::IsMouseDown(ImGuiMouseButton_Right)) {
+                viewportInput_.orbitDeltaX += io.MouseDelta.x;
+                viewportInput_.orbitDeltaY += io.MouseDelta.y;
+            }
+            if (ImGui::IsMouseDown(ImGuiMouseButton_Middle)) {
+                viewportInput_.panDeltaX += io.MouseDelta.x;
+                viewportInput_.panDeltaY += io.MouseDelta.y;
+            }
+        }
     }
+    viewportAcceptsShortcuts_ = viewportFocused_
+        && !ImGui::GetIO().WantTextInput
+        && !ImGui::IsAnyItemActive();
     ImGui::End();
 }
 
@@ -390,7 +409,9 @@ void ImGuiEditorLayer::render(VkCommandBuffer) {}
 void ImGuiEditorLayer::setViewportImages(
     VkSampler, const std::vector<VkImageView>&, std::uint32_t, std::uint32_t) {}
 void ImGuiEditorLayer::setViewportImageIndex(std::uint32_t) {}
-bool ImGuiEditorLayer::wantsKeyboardCapture() const noexcept { return false; }
+EditorViewportInput ImGuiEditorLayer::consumeViewportInput() noexcept {
+    return {};
+}
 
 }  // namespace azurerender
 #endif

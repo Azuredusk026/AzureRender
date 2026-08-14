@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "EditorCameraController.hpp"
 #include "IEditorPanel.hpp"
 
 #include <vulkan/vulkan.h>
@@ -38,7 +39,10 @@ public:
         std::uint32_t width,
         std::uint32_t height);
     void setViewportImageIndex(std::uint32_t imageIndex);
-    [[nodiscard]] bool wantsKeyboardCapture() const noexcept;
+    [[nodiscard]] EditorViewportInput consumeViewportInput() noexcept;
+    [[nodiscard]] bool acceptsViewportShortcuts() const noexcept {
+        return viewportAcceptsShortcuts_;
+    }
 
 private:
     void drawViewportPanel();
@@ -55,6 +59,9 @@ private:
     std::uint32_t viewportImageIndex_ = 0;
     std::uint32_t viewportWidth_ = 1;
     std::uint32_t viewportHeight_ = 1;
+    EditorViewportInput viewportInput_;
+    bool viewportFocused_ = false;
+    bool viewportAcceptsShortcuts_ = false;
     bool initialized_ = false;
     bool dockingLayoutInitialized_ = false;
 };
