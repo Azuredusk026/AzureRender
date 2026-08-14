@@ -1,5 +1,22 @@
 # 开发日志
 
+## 2026-08-14：AR-1.1 与 AR-3.1～AR-3.5 编辑器基础设施
+
+- AR-1.1 新增 `GlfwFrontend`，将窗口、输入回调和 framebuffer 查询从 Renderer 核心边界拆出。
+- AR-3.1 新增 `EditorContext` 与 `IEditorPanel`，建立编辑器状态和面板的显式接口。
+- AR-3.2 接入 Dear ImGui GLFW/Vulkan Backend 与 Docking，形成 Outliner、Inspector、Assets、Console 和 Viewport 布局。
+- AR-3.3 将场景渲染迁入独立离屏 Viewport，UI 使用单独 RenderPass 合成到 swapchain。
+- AR-3.4 新增 Viewport 内右键轨道旋转、中键平移、滚轮缩放及输入焦点隔离，并加入相机控制器测试。
+- AR-3.5 由 ImGui 可用区域驱动 Viewport 颜色、深度、法线和后处理目标尺寸，消除固定 framebuffer 尺寸耦合。
+- 各节点完成 Linux Debug/Release 构建、CTest、公共资产 Renderer/Editor smoke 与 Vulkan Validation；AR-3.5 后普通渲染和确定性 Capture 路径保持可用。
+
+## 2026-08-14：近期执行计划冻结
+
+- 新增 `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`，作为近期任务顺序、退出条件、验收门禁和 Commit 标题的唯一事实来源。
+- 固定队列为 `AR-3.6 -> AR-3.7 -> AR-4.0 -> AR-4.1 -> AR-4.2 -> AR-4.3 -> AR-4.4 -> AR-4.5`，当前节点为 AR-3.6 Ready。
+- M3、SC、对象拾取、Gizmo、完整 Scene Graph/ECS、资源导入管理、动态插件、Android 和论文三路径明确 Deferred。
+- 后续不得在实现过程中临时发明下一任务；新需求先进入候选池，改序必须先更新计划并独立提交。
+
 ## 2026-08-14：CQ-6 Outline / Lighting / Final Grade
 
 - `RenderSettings` 升级为 v2，新增版本化 Outline/Grade v1；最终合成参数 ABI 从 32 bytes 扩展为 80 bytes，覆盖轮廓强度、阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint。

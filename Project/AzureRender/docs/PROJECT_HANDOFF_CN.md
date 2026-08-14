@@ -3,19 +3,19 @@
 > 最后核对：2026-08-14（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前长期节点：**AR-3 Editor Preview v1 Complete / M3 Ready**
+> 当前近期节点：**AR-3.5 Complete / AR-3.6 Ready**
 
 ## 0. 长期路线入口
 
-项目方向现由仓库根目录的 `MASTER_DEVELOPMENT_PLAN_CN.md` 统一管理，对应正式版为
-`FYP_Master_Development_Plan_v2.0.docx`。该计划覆盖作品集、美术质量、Renderer 架构、
-Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级高于本文中的历史
-“下一节点”记录。
+近期执行顺序由 [`docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](ACTIVE_DEVELOPMENT_PLAN_CN.md)
+统一管理。本文只记录当前事实，阶段目标见
+`docs/RENDERER_MODULARIZATION_PLAN_CN.md`，已完成事项见
+`docs/DEVELOPMENT_LOG_CN.md`；历史“下一节点”记录不再作为执行依据。
 
-CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2～CQ-5 已于 2026-08-13 完成。
-CQ-6 Outline/Grade 实现于 2026-08-14 完成，M2 Hero 技术与视觉门禁已于同日通过，当前执行顺序为：
-
-`CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
+CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2～CQ-6 已于 2026-08-14 完成。
+M2 Hero 技术与视觉门禁已通过；AR-1、AR-2、AR-3.1～AR-3.5 已完成，当前固定执行队列从
+`AR-3.6 -> AR-3.7 -> AR-4.0 -> AR-4.1 -> AR-4.2 -> AR-4.3 -> AR-4.4 -> AR-4.5`
+开始，详情以 Active Plan 为准。
 
 CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3～CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。CQ-6 新增 `RenderSettings v2`、Outline/Grade v1 和最终合成参数闭环；M2 已冻结四张 Hero 基准。AR-1/AR-2/AR-3 已分别完成 Core Boundary、`.azscene` 和 Editor Preview v1。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
 
@@ -28,8 +28,8 @@ CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、�
 - `S`（Stage / Historical Sequence）：早期 S1-S36.2 的历史实现阶段；用于追溯，不代表当前优先级。
 - `D`（Decision / Design Record）：设计决策与风险记录，例如 `D12` Tone Mapping；不是可执行功能节点。
 
-M2 已通过；当前可进入 M3 工业场景或 AR-4 发布加固，但论文三路径与 Android 仍按
-Master Plan 的依赖顺序保持 Pending/Deferred。
+M2 已通过；按当前用户决策，M3、SC 和工业场景暂缓，先执行 AR-3.6 至 AR-4.5 发布加固。
+论文三路径与 Android 仍保持 Pending/Deferred。
 
 ## 1. 项目信息
 
@@ -44,6 +44,7 @@ Master Plan 的依赖顺序保持 Pending/Deferred。
 - Windows 10/11、C++17、Vulkan 1.3、GLFW、CMake/Ninja；
 - glTF 2.0 资产加载，依赖 tinygltf 与 stb；
 - GLSL 由 Vulkan SDK 的 `glslc` 编译为 SPIR-V；
+- Dear ImGui GLFW/Vulkan Backend，启用 Docking，用于编辑器面板与离屏 Viewport；
 - 当前验证设备为 NVIDIA GeForce RTX 4060 Laptop GPU。
 
 `AfterglowRender/` 是 MIT 许可的学习与架构参考，不是主工程，也不应被整体合并进 FYP 主代码。
@@ -66,6 +67,9 @@ Master Plan 的依赖顺序保持 Pending/Deferred。
 - 深度/法线内部描边、诊断视图、GPU Timestamp 与 Renderer 原生 HUD；
 - 固定时间步 PNG 捕获、Manifest、20 秒 Beauty/Technical H.264 视频；
 - 公共自有测试资产与私有莱万汀动态角色均可运行。
+- AR-1.1 已将 GLFW 平台前端从 Renderer 核心边界拆出；
+- AR-3.1～AR-3.5 已完成 `EditorContext`/Panel 契约、Dear ImGui Docking、离屏
+  Viewport、轨道相机交互和 Viewport 尺寸驱动 RenderTarget。
 
 S34 的作品集交付包已经可用，S35 已完成第一阶段 AzureRender 命名迁移。
 当前私有角色运行时统计为 **81,487 vertices、284,673 indices、14 primitives、
@@ -89,14 +93,14 @@ DRLR feature probe、正式实验 CSV 或 Android 端。现有 GPU Timestamp JSO
 ### 已知限制
 
 - 环境贴图是程序生成的 LDR equirectangular texture，不是 HDR IBL；
-- 没有 HDR framebuffer、tone mapping、bloom、mipmap/prefiltered specular；
+- HDR Scene Color、ACES fitted tone mapping 和轻量 Bloom 已接入；尚无完整 IBL、mipmap/prefiltered specular；
 - 已支持 GPU Skinning 和骨骼动画，但没有 morph target；
 - BLEND 只按 primitive 排序，没有 per-triangle sorting/OIT；
 - Unreal Hair `_HN` 的 RG/BA 语义是基于资产证据的兼容还原，不是母材质逐节点复刻；
 - 私有莱万汀资产不能提交或公开分发，授权未确认前只可本地验证；
 - `Afterglow PNG sequence v1`、`afterglow*` glTF extras 和旧动画名属于暂时
   保留的 Legacy Schema，不应在普通品牌替换中破坏；
-- 工作树包含连续开发产生的未提交修改，禁止用 reset/checkout 丢弃。
+- 编辑器 Viewport 已支持独立尺寸驱动与相机交互；Viewport 资源独立重建和会话命令层尚待 AR-3.6/3.7 收口。
 
 ## 3. 目录与事实来源
 
@@ -160,38 +164,33 @@ cmake --build build/ninja-release
 
 交互键位见 `README.md`。最常用的是 `1` 全身、`5` 脸部近景、`F9` 风格开关、`F12` 截图。
 
-## 5. 接下来建议按此顺序继续
+## 5. 固定近期执行队列
 
-1. **仓库与文档收口**
-   - 确认 Git 仓库应放在 workspace root 还是 `Project/`，修复/初始化后再开发；
-   - 更新 README 的当前节点为 S21，并保留公共/私有资产边界；
-   - 不修改 `AfterglowRender/`，除非任务明确要求查阅参考实现。
+近期任务不得根据运行过程临时追加或重排，唯一详细定义与退出条件见
+[`ACTIVE_DEVELOPMENT_PLAN_CN.md`](ACTIVE_DEVELOPMENT_PLAN_CN.md)。当前顺序为：
 
-2. **S22：有边界地完成展示预设**
-   - 增加可重复的灯光/背景预设和一个终末地风格构图；
-   - 使用固定热键切换，避免破坏 `1`、`5`、`F9` 和现有截图流程；
-   - 同时用公共资产 Debug Validation 与私有角色 Release 各跑 120 帧；
-   - 记录全身、近景、F9 对照图，然后停止继续无上限视觉调校。
+1. `AR-3.6`：Viewport RenderTarget 独立重建；
+2. `AR-3.7`：编辑器 Session/Command、保存、脏状态和错误反馈；
+3. `AR-4.0`：冻结 RC0 行为、支持平台与统一测试门禁；
+4. `AR-4.1`：结构化日志、GPU 能力报告、错误码；
+5. `AR-4.2`：`ResourceLocator`、安装树和可移动运行资源；
+6. `AR-4.3`：Feature、Importer、Panel 进程内注册中心；
+7. `AR-4.4`：Windows/Linux 持续集成；
+8. `AR-4.5`：可移动 RC 发布包与干净环境验收。
 
-3. **冻结作品集里程碑 D0**
-   - 补 renderer 架构图、pass 图、公开截图/视频和第三方资产声明；
-   - 把 S21/S22 作为可展示的 forward NPR 基线，不宣称已完成论文 benchmark。
-
-4. **进入 FYP 研究主线**
-   - 先做设备/扩展 feature probe，确认桌面与目标 Android 设备的 DRLR 支持；
-   - 定义三路径共享的场景、shader 公式、attachment 格式、分辨率和测量协议；
-   - 实现真正的 G-buffer Traditional Multi-pass 基线；
-   - 再实现 Subpass 和 DRLR 路径；
-   - 加入 GPU timestamps、metadata、CSV/JSON 输出与公平性回归测试。
+M3、SC、对象拾取、Gizmo、完整 Scene Graph/ECS、资源导入管理、动态插件、Android
+和论文三路径均不在本轮队列中。新增需求先进入 Active Plan 候选池；如需改序，先单独
+修改计划文档并提交，再开始实现。
 
 ## 6. 给接手 Agent 的工作规则
 
-- 开始任务前先读本文件、README、开发日志最后一个节点和对应源码；
+- 开始任务前先读 Active Plan 中当前任务的范围、依赖、退出条件，再读本文件、README、开发日志和对应源码；
 - 只把源码和实际运行结果当作完成依据，不把旧计划中的未来项当作已实现；
 - 每个节点保持小改动：构建 Debug/Release，跑公共资产 Validation，再跑私有资产回归；
 - 新功能必须有公共资产 fallback，不能让公开版本依赖 `assets_private/`；
 - 不提交私有 GLB、纹理、截图或 Unreal 派生资源；
-- 完成节点后同步更新 `README.md`、`DEVELOPMENT_LOG_CN.md` 和本交接摘要。
+- 每个任务完成后使用 Active Plan 预定的中文标题独立 Commit；
+- 完成节点后同步 Active Plan 状态、`README.md`、`DEVELOPMENT_LOG_CN.md` 和本交接摘要。
 
 ## 7. S35.3 最新结构与验证
 

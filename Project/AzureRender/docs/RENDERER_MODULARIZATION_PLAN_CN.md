@@ -1,6 +1,9 @@
 # AzureRender 发布化与模块化路线
 
-> 状态：AR-0～AR-3 v1 Complete；AR-4 Release Candidate 加固 Ready。
+> 状态：AR-0～AR-3.5 Complete；AR-3.6 Ready；AR-4 Release Candidate 加固已排期。
+>
+> 具体执行顺序、退出条件和预定 Commit 标题以
+> `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md` 为唯一近期事实来源。
 
 ## 1. 目标
 
@@ -68,17 +71,18 @@ Renderer Core
 
 ### AR-3 Editor Preview
 
-**状态：Complete（2026-08-14，Renderer-native Preview v1）。** `--editor` 打开实时
-Vulkan Viewport，并显示 Scene Outliner、Inspector、Asset Browser 和 Console；Tab
-选择节点，`[`/`]` 编辑 Outline，`-`/`=` 编辑 Exposure，关闭窗口自动保存并可重新加载。
-AR-3.1 可替换为 Dear ImGui Docking，不改变现有 `RenderSettings`/`SceneDocument` 契约。
+**状态：AR-3.1～AR-3.5 Complete（2026-08-14）。** `--editor` 已使用 Dear ImGui
+GLFW/Vulkan Backend，提供 Docking、离屏 Vulkan Viewport、Scene Outliner、Inspector、
+Asset Browser 和 Console。Viewport 支持轨道旋转、平移、缩放，并以面板内容区尺寸驱动
+颜色、深度、法线和后处理目标。关闭窗口仍自动保存 `.azscene`。
 
 - 使用 Dear ImGui Docking；
 - 首版只包含 Viewport、Scene Outliner、Inspector、Asset Browser、Console；
 - 支持模型加载、节点选择、相机查看、灯光与材质参数编辑、Capture；
 - GUI 状态不复制 Renderer 状态。
 
-退出条件：用户可在 GUI 中打开场景、选择对象、修改参数、保存并重新打开。
+剩余 AR-3.6/AR-3.7 只收口 Viewport 资源独立重建和编辑器会话，不增加对象拾取、
+Gizmo 或场景功能。退出条件：调整 Dock 不重建交换链，保存失败不丢失脏状态。
 
 ### AR-4 Feature Registry 与发布加固
 
@@ -89,7 +93,7 @@ AR-3.1 可替换为 Dear ImGui Docking，不改变现有 `RenderSettings`/`Scene
 
 退出条件：新面板或导入器无需修改主循环；Windows/Linux 干净环境可运行发布包。
 
-## 4. 与画质主线的执行顺序
+## 4. 当前执行顺序
 
 ```text
 CQ-3 Face SDF + AR-0
@@ -100,8 +104,10 @@ CQ-3 Face SDF + AR-0
 -> AR-3 Editor Preview
 -> CQ-6 Final Grade
 -> M2 Gate
--> M3 Industrial Scene
--> AR-4 Feature Registry / Release Candidate
+-> AR-3.1～AR-3.5 Editor Infrastructure
+-> AR-3.6 Viewport Resource Lifetime
+-> AR-3.7 Editor Session
+-> AR-4.0～AR-4.5 Release Candidate
 ```
 
-AR 工作包只允许实现当前画质节点确实需要的接口，不提前扩张为通用游戏引擎。
+M3/SC 当前为 Deferred。AR 工作包不提前扩张为通用游戏引擎；完整队列见近期执行计划。

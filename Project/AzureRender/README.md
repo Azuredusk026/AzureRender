@@ -7,7 +7,8 @@ M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
 style-mask routing have independent QA views. CQ-3 through CQ-6 and the M2 Hero
-quality gate are complete; AR-1 through AR-3 Editor Preview v1 are now available.
+quality gate are complete. AR-1 through AR-3.5 Editor Preview v1 are complete;
+AR-3.6 is the next implementation task.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
@@ -19,7 +20,9 @@ python3 tools/audit_face_sdf_compatibility.py path/to/character.glb
 ```
 
 The staged renderer/editor architecture is documented in
-`docs/RENDERER_MODULARIZATION_PLAN_CN.md`.
+`docs/RENDERER_MODULARIZATION_PLAN_CN.md`. The fixed near-term execution queue
+is in [`docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](docs/ACTIVE_DEVELOPMENT_PLAN_CN.md);
+that document is the only source for the next task order.
 
 The current `S1-S36.2` baseline creates a resizable Windows GLFW surface, selects a
 Vulkan GPU, enables the Khronos validation layer in Debug builds, manages a
@@ -206,6 +209,7 @@ Beauty baseline is `captures/s36_hdr_beauty_v1/frame_000000.png` with SHA-256
 - Vulkan SDK with `glslc`
 - GLFW available through vcpkg
 - tinygltf and stb available through vcpkg
+- Dear ImGui with GLFW/Vulkan backends and Docking enabled
 - FFmpeg with `libx264` (optional, only for MP4 encoding)
 
 ## Configure and build
@@ -288,14 +292,16 @@ Open the document in the renderer-native editor preview:
 ./build/linux-release/AzureRender --editor ./captures/test.azscene
 ```
 
-The preview provides a live Vulkan viewport, scene outliner, inspector, asset
-browser and console overlay. `Tab` selects nodes, `[`/`]` changes outline
-strength, `-`/`=` changes exposure, and closing the window saves the scene.
+The preview uses Dear ImGui Docking with an offscreen Vulkan Viewport, scene
+outliner, inspector, asset browser and console panel. The Viewport is resized
+independently from the swapchain and supports right-drag orbit, middle-drag
+pan, and wheel zoom. `Tab` selects nodes, `[`/`]` changes outline strength,
+`-`/`=` changes exposure, and closing the window saves the scene.
 
 CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, CQ-3 Face SDF/Overlay
 v1, CQ-4 Hair KK v1, CQ-5 Rim/Specular/Emissive/Bloom v1, and the CQ-6
-Outline/Final Grade implementation are complete. M2 release-gate review is
-next. CQ-0 evidence is
+Outline/Final Grade implementation are complete. M2 is complete and the next
+fixed task is AR-3.6 Viewport resource isolation. CQ-0 evidence is
 kept under `captures/cq0_laevat_baseline_v2`, `cq0_laevat_isolation_v2`,
 `cq0_laevat_ab_v1`, and `cq0_review_v1`. These private-asset captures are not
 part of a public source package.

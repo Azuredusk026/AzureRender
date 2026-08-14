@@ -4,11 +4,15 @@ AzureRender is a C++17/Vulkan stylized character renderer and the implementation
 
 > Comparative Evaluation of Vulkan Subpasses and Dynamic Rendering Local Read for Real-Time NPR Rendering
 
-The active application is in [`Project/AzureRender`](Project/AzureRender). The current engineering baseline is S36.2 plus M1/CQ-2 Toon Ramp/Shadow v1; CQ-0, CQ-1 and CQ-2 are complete, and the active work package is M1/CQ-3 Face SDF/Overlays. The deferred Multi-pass/Subpass/DRLR benchmark begins only after the portfolio release gate.
+The active application is in [`Project/AzureRender`](Project/AzureRender). M2 and
+AR-1 through AR-3.5 are complete; the active work package is AR-3.6 Viewport
+resource isolation. M3/SC and the Multi-pass/Subpass/DRLR benchmark are deferred
+while the renderer/editor release path advances toward AR-4.5.
 
 Start here:
 
-- [`MASTER_DEVELOPMENT_PLAN_CN.md`](MASTER_DEVELOPMENT_PLAN_CN.md) — authoritative long-term roadmap, dependencies and exit gates;
+- [`Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md) — authoritative near-term queue, task exits and commit titles;
+- [`MASTER_DEVELOPMENT_PLAN_CN.md`](MASTER_DEVELOPMENT_PLAN_CN.md) — long-term research roadmap and dependencies;
 - [`Project/AzureRender/README.md`](Project/AzureRender/README.md) — build, run and controls;
 - [`Project/AzureRender/docs/PROJECT_HANDOFF_CN.md`](Project/AzureRender/docs/PROJECT_HANDOFF_CN.md) — actual engineering state and recovery entry;
 - [`DEVELOPMENT_ENVIRONMENT_CN.md`](DEVELOPMENT_ENVIRONMENT_CN.md) — pinned tools, dependencies and regression commands.
