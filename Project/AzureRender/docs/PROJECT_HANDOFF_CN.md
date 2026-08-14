@@ -3,7 +3,7 @@
 > 最后核对：2026-08-14（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前长期节点：**M2 Gate Review**
+> 当前长期节点：**AR-3 Editor Preview v1 Complete / M3 Ready**
 
 ## 0. 长期路线入口
 
@@ -13,11 +13,11 @@ Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级�
 “下一节点”记录。
 
 CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2～CQ-5 已于 2026-08-13 完成。
-CQ-6 Outline/Grade 实现于 2026-08-14 完成，M2 技术门禁已于同日通过，当前执行顺序为：
+CQ-6 Outline/Grade 实现于 2026-08-14 完成，M2 Hero 技术与视觉门禁已于同日通过，当前执行顺序为：
 
 `CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
 
-CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3～CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。CQ-6 新增 `RenderSettings v2`、Outline/Grade v1 和最终合成参数闭环；M2 技术门禁已完成，当前只需用户视觉确认。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3～CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。CQ-6 新增 `RenderSettings v2`、Outline/Grade v1 和最终合成参数闭环；M2 已冻结四张 Hero 基准。AR-1/AR-2/AR-3 已分别完成 Core Boundary、`.azscene` 和 Editor Preview v1。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
 
 ## 0.1 任务前缀词典
 
@@ -28,8 +28,8 @@ CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、�
 - `S`（Stage / Historical Sequence）：早期 S1-S36.2 的历史实现阶段；用于追溯，不代表当前优先级。
 - `D`（Decision / Design Record）：设计决策与风险记录，例如 `D12` Tone Mapping；不是可执行功能节点。
 
-在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
-Pending/Deferred，不能成为主要开发节点。
+M2 已通过；当前可进入 M3 工业场景或 AR-4 发布加固，但论文三路径与 Android 仍按
+Master Plan 的依赖顺序保持 Pending/Deferred。
 
 ## 1. 项目信息
 

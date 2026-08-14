@@ -245,7 +245,7 @@ AR-0 RenderSettings/Asset Contract
 |---|---|---|---|---|
 | M0 | Master Plan 与质量治理 | Complete | 长期路线、质量门槛、决策和证据规则冻结。 | 无 |
 | M1 | Character Rendering Quality Foundation | Active | 可独立调试的材质分类、Ramp、Face、Hair、Rim 基础。 | M0 |
-| M2 | Character Hero Quality | Pending | 莱万汀多机位达到作品集级角色画面。 | M1 |
+| M2 | Character Hero Quality | Complete | 四张 1920x1080 Hero 基准、Debug Validation、动画和 Resize 门禁完成。 | M1 |
 | M3 | Industrial Scene Integration | Pending | 模块化工业科幻场景、灯光、角色与环境统一。 | M2 |
 | M4 | Portfolio Release | Pending | Windows Release、20s+ 视频、Case Study、公开仓库包。 | M3 |
 | M5 | Benchmark Workload Freeze | Pending | Deferred NPR Workload、RenderPath 接口、Golden Images、Protocol v1.0。 | M4 |
@@ -371,7 +371,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.7 CQ-6 Outline 与最终 Lighting/Grade
 
-**状态：Review（2026-08-14）。** `RenderSettings v2` 已建立 Outline/Grade v1 参数所有权，最终合成从设置读取轮廓强度、深度/法线阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint；Bloom strength/threshold 上传映射已修正。Debug/Release 构建、公共/私有 Debug Validation、动画 300 帧、Resize/最大化/恢复生命周期和 Release 代表捕获均通过；等待 M2 Gate 的用户视觉确认。
+**状态：Complete（2026-08-14）。** `RenderSettings v2` 已建立 Outline/Grade v1 参数所有权，最终合成从设置读取轮廓强度、深度/法线阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint；Bloom strength/threshold 上传映射已修正。Debug/Release 构建、公共/私有 Debug Validation、动画 300 帧、Resize/最大化/恢复生命周期、Release 代表捕获和四张 1920x1080 Hero 基准均通过。
 
 **任务：**
 

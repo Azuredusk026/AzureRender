@@ -18,6 +18,13 @@
 - 窗口完成 `856x511 -> 1280x720 -> 最大化 -> 恢复`，随后通过窗口关闭事件正常退出；期间无 Validation 输出，最终记录 3033 帧。
 - M2 技术门禁通过；剩余事项为用户视觉确认、Hero 基准冻结和发布包整理。
 
+## 2026-08-14：M2 Hero 基准冻结与 AR-1～AR-3
+
+- 冻结四张 1920x1080 私有角色 Hero 基准：`captures/m2_hero_baseline_v1/hero_front`、`face_three_quarter`、`back_detail`、`full_scene`，Alpha 全不透明。
+- 四张代表帧 SHA-256：`BA8103CF96E38AAE237869F9CAE4E4A25CF792C434FABB1729EE49428DB4AB98`、`6FAE2C8845D7161CE0358B3B134C279A4C477248D7746B56AED6D44259322BCC`、`2BE7E38285E2A6EF5C9DC9E2C00AEB8556632C319B8BFEF1590693C96B402468`、`1677D7A04E383802A9BD1C6E3F7D75C0C4EF74A8D6514E161AE015ACDA54F2`。
+- AR-1 新增 `RendererCoreBoundary`；AR-2 新增 `.azscene v1`、资源 Registry 和 Scene Node；AR-3 新增 Renderer-native Editor Preview v1。
+- 编辑器交互回归运行 2492 帧：Outline `0.40 -> 0.50`、Exposure `0.00 -> 0.25`，窗口关闭自动保存，重新加载后 120 帧 Debug Validation 通过。
+
 ## 2026-08-13：CQ-3 Face SDF 运行验收
 
 - 修复 Face SDF GLB 注入器未同步 `buffers[0].byteLength` 的 bug；重新生成后 Loader 可正常解码 PNG。

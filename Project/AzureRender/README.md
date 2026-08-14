@@ -6,8 +6,8 @@ science-fiction showcase scene.
 M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
-style-mask routing have independent QA views. CQ-3 through CQ-6 implementation
-is complete; the active work package is the M2 release gate review.
+style-mask routing have independent QA views. CQ-3 through CQ-6 and the M2 Hero
+quality gate are complete; AR-1 through AR-3 Editor Preview v1 are now available.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
@@ -271,6 +271,26 @@ and reproducible manifest metadata.
 See [`docs/CHARACTER_QA_HARNESS_CN.md`](docs/CHARACTER_QA_HARNESS_CN.md) for
 the complete matrix and run `tools/run_character_qa.ps1` to generate baseline,
 isolation, A/B, or full QA evidence.
+
+## Scene and editor preview
+
+Create a versioned scene document from an asset:
+
+```bash
+./build/linux-release/AzureRender \\
+  --asset ./assets_public/test_model.gltf \\
+  --create-scene ./captures/test.azscene
+```
+
+Open the document in the renderer-native editor preview:
+
+```bash
+./build/linux-release/AzureRender --editor ./captures/test.azscene
+```
+
+The preview provides a live Vulkan viewport, scene outliner, inspector, asset
+browser and console overlay. `Tab` selects nodes, `[`/`]` changes outline
+strength, `-`/`=` changes exposure, and closing the window saves the scene.
 
 CQ-1 Material Classes/Data v1, CQ-2 Toon Ramp/Shadow v1, CQ-3 Face SDF/Overlay
 v1, CQ-4 Hair KK v1, CQ-5 Rim/Specular/Emissive/Bloom v1, and the CQ-6

@@ -1,6 +1,6 @@
 # AzureRender 发布化与模块化路线
 
-> 状态：AR-0 Complete；AR-1 Ready，待 M2 用户视觉确认后开始，不取代角色画质主线。
+> 状态：AR-0～AR-3 v1 Complete；AR-4 Release Candidate 加固 Ready。
 
 ## 1. 目标
 
@@ -44,6 +44,9 @@ Renderer Core
 
 ### AR-1 Renderer Core Boundary
 
+**状态：Complete（2026-08-14）。** `SceneView`、`CaptureRequest` 和
+`RendererCoreBoundary` 已建立，前端设置在进入 Vulkan 前经过统一契约校验。
+
 - 从 `AzureRenderApp` 抽出 `VulkanContext`、`Renderer` 和 `FrameCapture`；
 - 窗口/输入只负责平台事件；
 - Renderer 接收 `SceneView`、Camera 与 `RenderSettings`；
@@ -53,6 +56,9 @@ Renderer Core
 
 ### AR-2 Scene 与 Asset Model
 
+**状态：Complete（2026-08-14）。** `.azscene v1` 已支持资源 ID、节点大纲与设置
+保存/加载；`--create-scene` 和 `--scene` 已接入并通过确定性重建验证。
+
 - 建立轻量 Scene Graph：Node、Transform、Mesh、Camera、Light、Animator；
 - 使用稳定 `AssetId` 和 Asset Registry，不以裸绝对路径作为运行时身份；
 - 定义版本化 `.azscene`，保存资源引用、节点关系和可覆盖设置；
@@ -61,6 +67,11 @@ Renderer Core
 退出条件：场景能够保存、重新加载并生成相同 Capture Manifest。
 
 ### AR-3 Editor Preview
+
+**状态：Complete（2026-08-14，Renderer-native Preview v1）。** `--editor` 打开实时
+Vulkan Viewport，并显示 Scene Outliner、Inspector、Asset Browser 和 Console；Tab
+选择节点，`[`/`]` 编辑 Outline，`-`/`=` 编辑 Exposure，关闭窗口自动保存并可重新加载。
+AR-3.1 可替换为 Dear ImGui Docking，不改变现有 `RenderSettings`/`SceneDocument` 契约。
 
 - 使用 Dear ImGui Docking；
 - 首版只包含 Viewport、Scene Outliner、Inspector、Asset Browser、Console；
