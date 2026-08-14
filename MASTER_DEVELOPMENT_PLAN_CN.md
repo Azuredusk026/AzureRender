@@ -16,7 +16,7 @@
 - `azureRenderMaterial.faceSdf` v1 契约、公共 PNG 资产和私有 CQ-3 GLB 已建立。
 - Loader 已将任意输入通道规范化为 `R=距离、A=参与遮罩`；descriptor binding 12、Head-local 光向量 UBO、Face Shader 分带和 `face-sdf` QA effect/isolation 已接入。
 - CQ-3 Face SDF/Overlay、CQ-4 双层 Hair KK、CQ-5 Rim/Specular/Emissive/Bloom v1 均已完成 Debug/Release 构建与 enabled/disabled/isolation 捕获。Bloom 当前为轻量 HDR Scene Color 后处理，不代表论文三路径 benchmark。
-- CQ-6 已完成版本化 Outline/Grade 参数、最终合成 ABI、Manifest/状态哈希闭环和 Release Vulkan 代表捕获，进入 M2 Gate Review；用户视觉确认与具备 Khronos Validation Layer 的环境复验仍是门槛。
+- CQ-6 已完成版本化 Outline/Grade 参数、最终合成 ABI、Manifest/状态哈希闭环和 Release Vulkan 代表捕获。M2 技术门禁已通过公共/私有 Debug Validation、动画长跑和 Resize 生命周期回归；当前只剩用户视觉确认。
 
 ### 0.1 文档层级
 
@@ -371,7 +371,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### 6.7 CQ-6 Outline 与最终 Lighting/Grade
 
-**状态：Review（2026-08-14）。** `RenderSettings v2` 已建立 Outline/Grade v1 参数所有权，最终合成从设置读取轮廓强度、深度/法线阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint；Bloom strength/threshold 上传映射已修正。Debug/Release 构建和 Release Vulkan 代表捕获通过，等待 M2 Gate 的用户视觉确认与 Validation 环境复验。
+**状态：Review（2026-08-14）。** `RenderSettings v2` 已建立 Outline/Grade v1 参数所有权，最终合成从设置读取轮廓强度、深度/法线阈值、颜色、曝光、ACES 开关、饱和度、对比度与 Tint；Bloom strength/threshold 上传映射已修正。Debug/Release 构建、公共/私有 Debug Validation、动画 300 帧、Resize/最大化/恢复生命周期和 Release 代表捕获均通过；等待 M2 Gate 的用户视觉确认。
 
 **任务：**
 

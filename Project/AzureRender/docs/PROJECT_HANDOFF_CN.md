@@ -13,11 +13,20 @@ Multi-pass/Subpass/DRLR、Android、实验、论文与最终提交，优先级�
 “下一节点”记录。
 
 CQ-0 与 CQ-1 已于 2026-08-02 通过，CQ-2～CQ-5 已于 2026-08-13 完成。
-CQ-6 Outline/Grade 实现于 2026-08-14 完成，当前执行顺序为：
+CQ-6 Outline/Grade 实现于 2026-08-14 完成，M2 技术门禁已于同日通过，当前执行顺序为：
 
 `CQ-3 Face SDF/Overlays -> CQ-4 Hair KK -> CQ-5 Rim/Specular/Emissive/Bloom -> CQ-6 Outline/Lighting/Grade -> M2 Gate`
 
-CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3～CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。CQ-6 新增 `RenderSettings v2`、Outline/Grade v1 和最终合成参数闭环；M2 Gate 仍需用户视觉确认及在具备 `VK_LAYER_KHRONOS_validation` 的环境复验。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
+CQ-0 的操作说明见 `docs/CHARACTER_QA_HARNESS_CN.md`，CQ-1 的 Schema、分类、参数 ABI、莱万汀审计和证据见 `docs/MATERIAL_SYSTEM_V1_CN.md`。CQ-2 使用 `assets_public/toon_ramp_profiles.json` 与生成的 `toon_ramp_atlas.ppm`。CQ-3～CQ-5 已完成 Face SDF、Overlay、双层 Hair KK、Rim、Specular、Emissive 和 Bloom enabled/disabled/isolation 验收。CQ-6 新增 `RenderSettings v2`、Outline/Grade v1 和最终合成参数闭环；M2 技术门禁已完成，当前只需用户视觉确认。发布化/编辑器支线见 `docs/RENDERER_MODULARIZATION_PLAN_CN.md`。
+
+## 0.1 任务前缀词典
+
+- `M`（Milestone）：里程碑门禁，例如 `M2` 角色作品集质量 Gate、`M3` 工业场景整合。
+- `CQ`（Character Quality）：角色画质垂直切片，例如 `CQ-3` Face SDF、`CQ-6` Outline/Grade。
+- `AR`（Architecture / Renderer）：渲染器发布化与模块化，例如 `AR-1` Renderer Core Boundary、`AR-3` Editor Preview。
+- `SC`（Scene）：工业科幻场景工作包，例如 `SC-0` Art Bible、`SC-5` 性能与裁剪。
+- `S`（Stage / Historical Sequence）：早期 S1-S36.2 的历史实现阶段；用于追溯，不代表当前优先级。
+- `D`（Decision / Design Record）：设计决策与风险记录，例如 `D12` Tone Mapping；不是可执行功能节点。
 
 在 M2 通过前，S36.3 Exposure/正式性能、Subpass、DRLR、Android 和大型场景均保持
 Pending/Deferred，不能成为主要开发节点。

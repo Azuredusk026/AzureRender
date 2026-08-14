@@ -8,7 +8,15 @@
 - Debug/Release 构建与 Shader 编译通过；llvmpipe Release 完成 Outline enabled/disabled/isolation、Face Front、Full Body Front 和 60 帧 Lighting Sweep 捕获，全部 Alpha 为 `255..255`。
 - Outline enabled/disabled 在 1280×720 下有 78,356 个变化像素，占 8.502170%；RGB 平均绝对差为 1.093655/1.507368/1.347554。
 - Bloom enabled/disabled 在 Rear Emissive 代表帧有 71 个变化像素，isolation 有 104 个非黑像素；确认轻量 Bloom 已真实接入，而不是由旧字段错位产生的伪通过。
-- 当前 Linux 环境缺少 `VK_LAYER_KHRONOS_validation`，Debug Validation 运行未执行；CQ-6 实现完成并进入 M2 Gate Review，仍需用户视觉确认和 Validation 环境复验。
+- 当时 Linux 环境尚未安装 `VK_LAYER_KHRONOS_validation`，Debug Validation 待补；CQ-6 实现完成并进入 M2 Gate Review。
+
+## 2026-08-14：M2 技术发布门禁回归
+
+- 临时解压 Khronos `vulkan-validationlayers 1.3.275.0`，Debug 运行确认 `VK_LAYER_KHRONOS_validation` 已启用。
+- 公共资产 `test_model.gltf` 和私有莱万汀角色各完成 120 帧 Debug Validation，均退出码 0；日志无 VUID、Validation warning/error。
+- `laevat_idle_material.glb` 完成 300 帧 Debug 动画长跑，1 个 `Afterglow_ProceduralIdle` 动画正常循环，退出码 0。
+- 窗口完成 `856x511 -> 1280x720 -> 最大化 -> 恢复`，随后通过窗口关闭事件正常退出；期间无 Validation 输出，最终记录 3033 帧。
+- M2 技术门禁通过；剩余事项为用户视觉确认、Hero 基准冻结和发布包整理。
 
 ## 2026-08-13：CQ-3 Face SDF 运行验收
 

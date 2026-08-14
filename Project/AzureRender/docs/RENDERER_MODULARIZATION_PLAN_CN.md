@@ -1,6 +1,6 @@
 # AzureRender 发布化与模块化路线
 
-> 状态：AR-0 Complete；AR-1 在 CQ-3 Face SDF 视觉闭环后开始，不取代角色画质主线。
+> 状态：AR-0 Complete；AR-1 Ready，待 M2 用户视觉确认后开始，不取代角色画质主线。
 
 ## 1. 目标
 
