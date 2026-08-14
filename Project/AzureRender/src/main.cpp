@@ -1,5 +1,7 @@
 #include "app/AzureRenderApp.hpp"
+#include "editor/SceneModel.hpp"
 
+#include <algorithm>
 #include <cstdlib>
 #include <cstdint>
 #include <exception>
@@ -10,6 +12,8 @@
 int main(const int argumentCount, char** argumentValues) {
     try {
         AzureRenderOptions options;
+        std::string scenePath;
+        std::string createScenePath;
         for (int index = 1; index < argumentCount; ++index) {
             const std::string argument = argumentValues[index];
             if (argument == "--smoke-frames" && index + 1 < argumentCount) {
@@ -19,6 +23,11 @@ int main(const int argumentCount, char** argumentValues) {
                 }
             } else if (argument == "--asset" && index + 1 < argumentCount) {
                 options.assetPath = argumentValues[++index];
+            } else if (argument == "--scene" && index + 1 < argumentCount) {
+                scenePath = argumentValues[++index];
+            } else if (argument == "--create-scene"
+                       && index + 1 < argumentCount) {
+                createScenePath = argumentValues[++index];
             } else if (argument == "--capture-dir"
                        && index + 1 < argumentCount) {
                 options.captureDirectory = argumentValues[++index];
@@ -99,6 +108,8 @@ int main(const int argumentCount, char** argumentValues) {
             } else {
                 throw std::invalid_argument(
                     "Usage: AzureRender.exe [--asset <gltf/glb path>] "
+                    "[--scene <azscene path>] "
+                    "[--create-scene <azscene path>] "
                     "[--smoke-frames <positive integer>] "
                     "[--portfolio] [--width <pixels>] [--height <pixels>] "
                     "[--gpu-timing] [--gpu-timing-output <json path>] "
@@ -156,6 +167,33 @@ int main(const int argumentCount, char** argumentValues) {
             throw std::invalid_argument(
                 "CQ-0 --qa-* options cannot be combined with "
                 "--technical-sequence");
+        }
+
+        if (!createScenePath.empty()) {
+            if (options.assetPath.empty()) {
+                throw std::invalid_argument(
+                    "--create-scene requires --asset");
+            }
+            const azurerender::SceneDocument scene =
+                azurerender::SceneDocument::fromAsset(options.assetPath);
+            scene.save(createScenePath);
+            std::cout << "Scene created: " << createScenePath << '\n';
+            return EXIT_SUCCESS;
+        }
+        if (!scenePath.empty()) {
+            const azurerender::SceneDocument scene =
+                azurerender::SceneDocument::load(scenePath);
+            const auto asset = std::find_if(
+                scene.resources.begin(), scene.resources.end(),
+                [](const azurerender::SceneResource& resource) {
+                    return resource.type == "gltf";
+                });
+            if (asset == scene.resources.end()) {
+                throw std::runtime_error(
+                    "Scene contains no gltf resource: " + scenePath);
+            }
+            options.assetPath = asset->path.string();
+            options.renderSettings = scene.renderSettings;
         }
 
         AzureRenderApp application;
