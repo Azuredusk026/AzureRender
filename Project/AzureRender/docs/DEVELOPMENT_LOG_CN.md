@@ -1,5 +1,13 @@
 # 开发日志
 
+## 2026-08-14：AR-4.3 扩展注册中心
+
+- 新增通用 `ExtensionRegistry`，以稳定 ID、API 版本、能力和依赖声明注册进程内 Factory。
+- 定义 `IRenderFeature`、`IAssetImporter`，并复用现有 `IEditorPanel` 形成三类 Registry；本阶段不加载动态库。
+- ImGui 五个内建面板改由 EditorPanel Registry 构造，新增面板无需修改主循环。
+- 单元测试覆盖成功实例化、重复 ID、版本不兼容和依赖缺失；Linux 三套构建和 5/5 CTest 通过。
+- AR-4.3 Complete，下一节点固定为 AR-4.4。
+
 ## 2026-08-14：AR-4.2 运行资源定位
 
 - 新增 `ResourceLocator`，统一解析 Shader、公共资产、Ramp Profile/Atlas、Capture 默认目录和显式资产路径。

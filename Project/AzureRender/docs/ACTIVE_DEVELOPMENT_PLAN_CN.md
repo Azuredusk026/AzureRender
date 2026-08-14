@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-14 v1
-> 当前节点：AR-4.3 Ready
+> 当前节点：AR-4.4 Ready
 > 适用范围：Renderer 模块化、编辑器基础设施、Release Candidate 加固
 
 ## 1. 计划治理
@@ -40,6 +40,7 @@
 | AR-4.0 | Complete | RC0 行为基线、支持平台、兼容策略和统一测试门禁 |
 | AR-4.1 | Complete | 结构化日志、GPU 能力报告、错误分类与退出码 |
 | AR-4.2 | Complete | `ResourceLocator`、开发/安装树和显式资源根覆盖 |
+| AR-4.3 | Complete | Feature、Importer、Panel 进程内扩展注册中心 |
 | M3 / SC | Deferred | 按当前决策暂不执行场景与工业场景工作包 |
 
 这里的 AR-1 `Complete` 指 v1 契约边界完成，不代表 Vulkan 资源所有权已经完全移出
@@ -54,8 +55,8 @@
 | 3 | AR-4.0 | Complete | 冻结 RC0 行为基线、测试矩阵和支持平台 | AR-3.7 | `完成 AR-4.0 RC0 基线冻结` |
 | 4 | AR-4.1 | Complete | 结构化日志、GPU 能力报告、错误分类与退出码 | AR-4.0 | `完成 AR-4.1 运行诊断基础` |
 | 5 | AR-4.2 | Complete | `ResourceLocator` 与安装目录，移除运行时源码绝对路径依赖 | AR-4.1 | `完成 AR-4.2 运行资源定位` |
-| 6 | AR-4.3 | Ready | `IRenderFeature`、`IAssetImporter`、`IEditorPanel` 进程内 Registry | AR-4.2 | `完成 AR-4.3 扩展注册中心` |
-| 7 | AR-4.4 | Backlog | Windows/Linux CI：构建、CTest、公共资产 smoke 与文档检查 | AR-4.3 | `完成 AR-4.4 跨平台持续集成` |
+| 6 | AR-4.3 | Complete | `IRenderFeature`、`IAssetImporter`、`IEditorPanel` 进程内 Registry | AR-4.2 | `完成 AR-4.3 扩展注册中心` |
+| 7 | AR-4.4 | Ready | Windows/Linux CI：构建、CTest、公共资产 smoke 与文档检查 | AR-4.3 | `完成 AR-4.4 跨平台持续集成` |
 | 8 | AR-4.5 | Backlog | 可安装 RC 包、公共 Demo、许可证与干净环境验收 | AR-4.4 | `完成 AR-4.5 RC 发布包` |
 
 ## 4. 任务退出条件

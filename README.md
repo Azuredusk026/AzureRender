@@ -5,8 +5,8 @@ AzureRender is a C++17/Vulkan stylized character renderer and the implementation
 > Comparative Evaluation of Vulkan Subpasses and Dynamic Rendering Local Read for Real-Time NPR Rendering
 
 The active application is in [`Project/AzureRender`](Project/AzureRender). M2 and
-AR-1 through AR-4.2 are complete; the active work package is AR-4.3 extension
-registries. M3/SC and the Multi-pass/Subpass/DRLR benchmark are deferred
+AR-1 through AR-4.3 are complete; the active work package is AR-4.4 cross-platform
+CI. M3/SC and the Multi-pass/Subpass/DRLR benchmark are deferred
 while the renderer/editor release path advances toward AR-4.5.
 
 Start here:

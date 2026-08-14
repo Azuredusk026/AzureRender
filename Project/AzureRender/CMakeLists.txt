@@ -102,6 +102,9 @@ add_executable(
     src/diagnostics/RuntimeDiagnostics.hpp
     src/resources/ResourceLocator.cpp
     src/resources/ResourceLocator.hpp
+    src/extensions/ExtensionRegistry.hpp
+    src/extensions/IAssetImporter.hpp
+    src/extensions/IRenderFeature.hpp
     src/platform/GlfwFrontend.cpp
     src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
@@ -167,6 +170,15 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.ResourceLocator
         COMMAND AzureRenderResourceLocatorTests)
+    add_executable(
+        AzureRenderExtensionRegistryTests
+        tests/ExtensionRegistryTests.cpp
+    )
+    target_include_directories(
+        AzureRenderExtensionRegistryTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.ExtensionRegistry
+        COMMAND AzureRenderExtensionRegistryTests)
 endif()
 
 target_link_libraries(

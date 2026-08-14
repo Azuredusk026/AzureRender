@@ -1,5 +1,6 @@
 #include "ImGuiEditorLayer.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "extensions/ExtensionRegistry.hpp"
 
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -69,16 +70,24 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         throw std::invalid_argument("ImGui editor requires an editor session");
     }
     context_ = &session_->context();
-    panels_.push_back(std::make_unique<CallbackEditorPanel>(
-        "viewport", "Viewport", [this] { drawViewportPanel(); }));
-    panels_.push_back(std::make_unique<CallbackEditorPanel>(
-        "outliner", "Scene Outliner", [this] { drawOutlinerPanel(); }));
-    panels_.push_back(std::make_unique<CallbackEditorPanel>(
-        "inspector", "Inspector", [this] { drawInspectorPanel(); }));
-    panels_.push_back(std::make_unique<CallbackEditorPanel>(
-        "assets", "Asset Browser", [this] { drawAssetBrowserPanel(); }));
-    panels_.push_back(std::make_unique<CallbackEditorPanel>(
-        "console", "Console", [this] { drawConsolePanel(); }));
+    EditorPanelRegistry registry;
+    const auto addPanel = [&registry](
+                              const char* id,
+                              const char* title,
+                              std::function<void()> draw) {
+        registry.registerFactory(
+            {std::string("panel.") + id, 1, {"editor.panel"}, {}},
+            [id, title, draw = std::move(draw)] {
+                return std::make_unique<CallbackEditorPanel>(
+                    id, title, draw);
+            });
+    };
+    addPanel("viewport", "Viewport", [this] { drawViewportPanel(); });
+    addPanel("outliner", "Scene Outliner", [this] { drawOutlinerPanel(); });
+    addPanel("inspector", "Inspector", [this] { drawInspectorPanel(); });
+    addPanel("assets", "Asset Browser", [this] { drawAssetBrowserPanel(); });
+    addPanel("console", "Console", [this] { drawConsolePanel(); });
+    panels_ = registry.createAll();
 }
 
 ImGuiEditorLayer::~ImGuiEditorLayer() {
