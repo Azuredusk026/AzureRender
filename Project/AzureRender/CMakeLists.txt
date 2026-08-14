@@ -180,6 +180,13 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.ExtensionRegistry
         COMMAND AzureRenderExtensionRegistryTests)
+    add_test(
+        NAME AzureRender.ReleaseGateMissingBuild
+        COMMAND "${CMAKE_COMMAND}"
+            -DBUILD_DIR=${CMAKE_CURRENT_BINARY_DIR}/missing-release-gate-build
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_release_gate.cmake)
+    set_tests_properties(
+        AzureRender.ReleaseGateMissingBuild PROPERTIES WILL_FAIL TRUE)
 endif()
 
 target_link_libraries(

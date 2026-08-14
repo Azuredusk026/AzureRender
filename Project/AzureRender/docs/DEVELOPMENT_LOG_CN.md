@@ -1,5 +1,14 @@
 # 开发日志
 
+## 2026-08-14：AR-5.0 发布门禁编排
+
+- 新增跨平台 `tools/run_release_gate.cmake`，单一入口执行 configure、build、CTest、install、移动目录版本/资源检查、CPack、隐私扫描和 manifest。
+- 每阶段写独立日志，成功生成 `release-gate/result.json`；失败写出具体阶段并返回非零。
+- Windows/Linux CI 改为复用同一门禁入口，图形 Renderer/Editor smoke 继续作为 Linux Xvfb/lavapipe 后续阶段。
+- 新增 `AzureRender.ReleaseGateMissingBuild` 负向 CTest；不存在的构建目录稳定返回 1。
+- Linux ImGui Release 门禁完整通过，6/6 CTest 通过，结果摘要包含全部 8 个阶段。
+- AR-5.0 Complete，下一节点固定为 AR-5.1。
+
 ## 2026-08-14：AR-4.5 RC 发布包
 
 - CMake install/CPack 现在安装可执行文件、编译 Shader、公共 Demo、RC 文档和第三方许可证声明；Linux 包携带 GLFW 并使用 `$ORIGIN` RPATH。

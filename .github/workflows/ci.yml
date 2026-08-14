@@ -25,10 +25,8 @@ jobs:
           vcpkgJsonGlob: Project/AzureRender/vcpkg.json
       - name: Configure
         run: cmake -S . -B build/ci -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-      - name: Build
-        run: cmake --build build/ci
-      - name: Test
-        run: ctest --test-dir build/ci --output-on-failure
+      - name: Release gate
+        run: cmake -DBUILD_DIR="$PWD/build/ci" -DCONFIG=Debug -P tools/run_release_gate.cmake
       - name: Public Renderer Validation smoke
         run: xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --smoke-frames 120
       - name: Public Editor Validation smoke
@@ -53,10 +51,9 @@ jobs:
       - name: Configure
         shell: pwsh
         run: cmake -S . -B build/ci -A x64 -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-      - name: Build
-        run: cmake --build build/ci --config Release
-      - name: Test
-        run: ctest --test-dir build/ci -C Release --output-on-failure
+      - name: Release gate
+        shell: pwsh
+        run: cmake -DBUILD_DIR="$PWD/build/ci" -DCONFIG=Release -P tools/run_release_gate.cmake
       - name: Public scene CLI smoke
         shell: pwsh
         run: build/ci/Release/AzureRender.exe --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
