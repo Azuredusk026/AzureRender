@@ -3,6 +3,7 @@
 /cmake-build-*/
 /out/
 /captures/
+/azurerender-editor.ini
 *.user
 *.suo
 *.VC.db

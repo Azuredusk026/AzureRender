@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "editor/EditorContext.hpp"
+#include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "AzureRenderInternal.hpp"
@@ -234,16 +235,14 @@ void AzureRenderApp::run(
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
-    renderSettings_.diagnosticView =
-        runOptions_.renderSettings.diagnosticView;
-    renderSettings_.stylizedLightingEnabled =
-        runOptions_.renderSettings.stylizedLightingEnabled;
-    renderSettings_.innerOutlineEnabled =
-        runOptions_.renderSettings.innerOutlineEnabled;
+    renderSettings_ = runOptions_.renderSettings;
     if (runOptions_.editorContext != nullptr) {
         runOptions_.editorContext->attachRenderSettings(renderSettings_);
     }
-    hudEnabled_ = runOptions_.hudEnabled || runOptions_.editorMode;
+    hudEnabled_ = runOptions_.hudEnabled;
+#if !defined(AZURERENDER_HAS_IMGUI)
+    hudEnabled_ = hudEnabled_ || runOptions_.editorMode;
+#endif
     configureQaHarness();
     constexpr std::array<const char*, 5> kDiagnosticNames = {
         "Beauty",
@@ -393,6 +392,26 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandBuffers();
     createSyncObjects();
     createTimestampQueryPools();
+    initEditorUi();
+}
+
+void AzureRenderApp::initEditorUi() {
+    if (runOptions_.editorContext == nullptr) {
+        return;
+    }
+    if (editorLayer_ == nullptr) {
+        editorLayer_ = std::make_unique<azurerender::ImGuiEditorLayer>(
+            runOptions_.editorContext);
+    }
+    editorLayer_->initialize(
+        frontend_->nativeHandle(),
+        instance_,
+        physicalDevice_,
+        device_,
+        graphicsQueueFamily_,
+        graphicsQueue_,
+        postProcessRenderPass_,
+        static_cast<std::uint32_t>(swapchainImages_.size()));
 }
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
@@ -648,6 +667,9 @@ void AzureRenderApp::updateTechnicalSequenceState(
 void AzureRenderApp::cleanup() {
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+        if (editorLayer_ != nullptr) {
+            editorLayer_->shutdownVulkan();
+        }
         cleanupSwapchain();
 
         for (const auto semaphore : imageAvailableSemaphores_) {
@@ -772,6 +794,7 @@ void AzureRenderApp::cleanup() {
         instance_ = VK_NULL_HANDLE;
     }
     frontend_.reset();
+    editorLayer_.reset();
 }
 
 void AzureRenderApp::createInstance() {
@@ -909,6 +932,7 @@ void AzureRenderApp::pickPhysicalDevice() {
 
 void AzureRenderApp::createLogicalDevice() {
     const QueueFamilyIndices indices = findQueueFamilies(physicalDevice_);
+    graphicsQueueFamily_ = *indices.graphics;
     const std::set uniqueFamilies = {*indices.graphics, *indices.present};
     const float priority = 1.0F;
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
@@ -1064,6 +1088,10 @@ void AzureRenderApp::keyCallback(
     auto* application = static_cast<AzureRenderApp*>(
         glfwGetWindowUserPointer(window));
     if (application == nullptr) {
+        return;
+    }
+    if (application->editorLayer_ != nullptr
+        && application->editorLayer_->wantsKeyboardCapture()) {
         return;
     }
 

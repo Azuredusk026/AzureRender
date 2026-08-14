@@ -5,7 +5,10 @@
   "dependencies": [
     "glfw3",
     "stb",
-    "tinygltf"
+    "tinygltf",
+    {
+      "name": "imgui",
+      "features": ["docking-experimental", "glfw-binding", "vulkan-binding"]
+    }
   ]
 }
-

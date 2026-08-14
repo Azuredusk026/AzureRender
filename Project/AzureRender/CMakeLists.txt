@@ -13,6 +13,26 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
+find_package(imgui CONFIG QUIET)
+if(NOT TARGET imgui::imgui)
+    find_path(IMGUI_INCLUDE_DIR imgui.h PATH_SUFFIXES imgui)
+    find_library(IMGUI_LIBRARY NAMES imgui)
+    if(IMGUI_INCLUDE_DIR AND IMGUI_LIBRARY)
+        add_library(imgui::imgui UNKNOWN IMPORTED)
+        find_library(IMGUI_STB_LIBRARY NAMES stb)
+        set_target_properties(
+            imgui::imgui
+            PROPERTIES
+                IMPORTED_LOCATION "${IMGUI_LIBRARY}"
+                INTERFACE_INCLUDE_DIRECTORIES "${IMGUI_INCLUDE_DIR}"
+        )
+        if(IMGUI_STB_LIBRARY)
+            set_property(
+                TARGET imgui::imgui APPEND PROPERTY
+                INTERFACE_LINK_LIBRARIES "${IMGUI_STB_LIBRARY}")
+        endif()
+    endif()
+endif()
 find_path(TINYGLTF_INCLUDE_DIR tiny_gltf.h REQUIRED)
 find_path(STB_INCLUDE_DIR stb_easy_font.h PATH_SUFFIXES stb REQUIRED)
 
@@ -66,6 +86,8 @@ add_executable(
     src/editor/EditorContext.cpp
     src/editor/EditorContext.hpp
     src/editor/IEditorPanel.hpp
+    src/editor/ImGuiEditorLayer.cpp
+    src/editor/ImGuiEditorLayer.hpp
     src/editor/SceneModel.cpp
     src/editor/SceneModel.hpp
     src/platform/GlfwFrontend.cpp
@@ -84,6 +106,15 @@ target_link_libraries(
         Vulkan::Vulkan
         glfw
 )
+
+if(TARGET imgui::imgui)
+    target_link_libraries(AzureRender PRIVATE imgui::imgui)
+    target_compile_definitions(AzureRender PRIVATE AZURERENDER_HAS_IMGUI=1)
+else()
+    message(WARNING
+        "Dear ImGui package not found; editor UI backend is disabled. "
+        "Use the vcpkg manifest for the Docking-enabled editor build.")
+endif()
 
 target_include_directories(
     AzureRender

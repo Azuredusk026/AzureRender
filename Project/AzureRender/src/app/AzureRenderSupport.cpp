@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "AzureRenderInternal.hpp"
 
@@ -127,6 +128,9 @@ void AzureRenderApp::recreateSwapchain() {
     }
 
     vkDeviceWaitIdle(device_);
+    if (editorLayer_ != nullptr) {
+        editorLayer_->shutdownVulkan();
+    }
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
@@ -140,6 +144,7 @@ void AzureRenderApp::recreateSwapchain() {
     createPostProcessFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
+    initEditorUi();
 }
 
 void AzureRenderApp::cleanupSwapchain() {

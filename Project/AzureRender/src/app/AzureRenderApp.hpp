@@ -16,6 +16,7 @@
 namespace azurerender {
 class EditorContext;
 class GlfwFrontend;
+class ImGuiEditorLayer;
 }
 
 struct AzureRenderOptions {
@@ -163,6 +164,7 @@ private:
     static_assert(sizeof(HudVertex) == 12);
 
     std::unique_ptr<azurerender::GlfwFrontend> frontend_;
+    std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
     bool framebufferResized_ = false;
 
     VkInstance instance_ = VK_NULL_HANDLE;
@@ -172,6 +174,7 @@ private:
     VkDevice device_ = VK_NULL_HANDLE;
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkQueue presentQueue_ = VK_NULL_HANDLE;
+    std::uint32_t graphicsQueueFamily_ = 0;
     double timestampPeriodNanoseconds_ = 0.0;
     std::uint32_t timestampValidBits_ = 0;
     bool hdrSceneColorFormatSupported_ = false;
@@ -286,6 +289,7 @@ private:
 
     void initWindow();
     void initVulkan(const std::string& assetPath);
+    void initEditorUi();
     void mainLoop(std::uint64_t smokeFrameLimit);
     void activatePortfolioOrbit();
     void configureQaHarness();

@@ -1,6 +1,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "editor/EditorContext.hpp"
+#include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
 
 #include <stb_easy_font.h>
@@ -65,6 +66,10 @@ void AzureRenderApp::drawFrame() {
 
     if (runOptions_.technicalSequence) {
         updateTechnicalSequenceState(capturedFrames_);
+    }
+    if (editorLayer_ != nullptr) {
+        editorLayer_->newFrame();
+        editorLayer_->drawPanels();
     }
     updateUniformBuffer(currentFrame_);
     updateHudBuffer(currentFrame_);
@@ -1059,6 +1064,9 @@ void AzureRenderApp::recordCommandBuffer(
             1,
             0,
             0);
+    }
+    if (editorLayer_ != nullptr) {
+        editorLayer_->render(commandBuffer);
     }
     vkCmdEndRenderPass(commandBuffer);
     if (runOptions_.gpuTimingEnabled) {
