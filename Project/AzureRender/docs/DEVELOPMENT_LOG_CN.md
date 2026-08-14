@@ -1,5 +1,13 @@
 # 开发日志
 
+## 2026-08-14：AR-4.4 跨平台持续集成
+
+- 新增 GitHub Actions Windows 2025 与 Ubuntu 24.04 流水线，使用 vcpkg manifest 干净配置、构建和 CTest。
+- Linux 使用 Xvfb、lavapipe 和 Khronos Validation Layer执行公共 Renderer/Editor 各 120 帧 smoke；Windows执行 Release 构建、CTest 和公共场景 CLI smoke。
+- 新增 `tools/check_active_plan.sh`，检查唯一计划入口、队列状态、关键文档和过时执行措辞。
+- 本地三套构建及 5/5 CTest 已在上一节点通过；工作流 YAML 已完成静态差异检查，远端双平台结果需由 GitHub Actions 首次运行确认。
+- AR-4.4 Complete，下一节点固定为 AR-4.5。
+
 ## 2026-08-14：AR-4.3 扩展注册中心
 
 - 新增通用 `ExtensionRegistry`，以稳定 ID、API 版本、能力和依赖声明注册进程内 Factory。

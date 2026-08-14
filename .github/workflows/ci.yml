@@ -1,0 +1,65 @@
+name: AzureRender CI
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: Project/AzureRender
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build xvfb libglfw3-dev libvulkan-dev vulkan-tools vulkan-validationlayers mesa-vulkan-drivers glslc
+      - uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgJsonGlob: Project/AzureRender/vcpkg.json
+      - name: Configure
+        run: cmake -S . -B build/ci -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+      - name: Build
+        run: cmake --build build/ci
+      - name: Test
+        run: ctest --test-dir build/ci --output-on-failure
+      - name: Public Renderer Validation smoke
+        run: xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --smoke-frames 120
+      - name: Public Editor Validation smoke
+        run: |
+          build/ci/AzureRender --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
+          xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --editor build/ci/public.azscene --smoke-frames 120
+      - name: Documentation checks
+        run: bash tools/check_active_plan.sh
+
+  windows:
+    runs-on: windows-2025
+    defaults:
+      run:
+        working-directory: Project/AzureRender
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgJsonGlob: Project/AzureRender/vcpkg.json
+      - name: Configure
+        shell: pwsh
+        run: cmake -S . -B build/ci -A x64 -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+      - name: Build
+        run: cmake --build build/ci --config Release
+      - name: Test
+        run: ctest --test-dir build/ci -C Release --output-on-failure
+      - name: Public scene CLI smoke
+        shell: pwsh
+        run: build/ci/Release/AzureRender.exe --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
+      - name: Documentation checks
+        shell: bash
+        run: bash tools/check_active_plan.sh
