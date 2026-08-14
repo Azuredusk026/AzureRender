@@ -1,6 +1,6 @@
 # AzureRender 发布化与模块化路线
 
-> 状态：AR-0～AR-4.4 Complete；AR-4.5 Ready；AR-4 Release Candidate 加固已排期。
+> 状态：AR-0～AR-4.5 Complete；RC0 发布化与模块化队列完成。
 >
 > 具体执行顺序、退出条件和预定 Commit 标题以
 > `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md` 为唯一近期事实来源。

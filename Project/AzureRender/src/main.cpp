@@ -2,6 +2,7 @@
 #include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "resources/ResourceLocator.hpp"
 #include "editor/SceneModel.hpp"
 
 #include <algorithm>
@@ -21,6 +22,8 @@ int main(const int argumentCount, char** argumentValues) {
         std::string scenePath;
         std::string createScenePath;
         std::string editorScenePath;
+        bool showVersion = false;
+        bool checkResources = false;
         for (int index = 1; index < argumentCount; ++index) {
             const std::string argument = argumentValues[index];
             if (argument == "--smoke-frames" && index + 1 < argumentCount) {
@@ -28,6 +31,10 @@ int main(const int argumentCount, char** argumentValues) {
                 if (options.smokeFrameLimit == 0) {
                     throw std::invalid_argument("--smoke-frames must be greater than zero");
                 }
+            } else if (argument == "--version") {
+                showVersion = true;
+            } else if (argument == "--check-resources") {
+                checkResources = true;
             } else if (argument == "--asset" && index + 1 < argumentCount) {
                 options.assetPath = argumentValues[++index];
             } else if (argument == "--resource-root"
@@ -120,6 +127,8 @@ int main(const int argumentCount, char** argumentValues) {
             } else {
                 throw std::invalid_argument(
                     "Usage: AzureRender.exe [--asset <gltf/glb path>] "
+                    "[--version] "
+                    "[--check-resources] "
                     "[--resource-root <directory>] "
                     "[--scene <azscene path>] "
                     "[--create-scene <azscene path>] "
@@ -145,6 +154,18 @@ int main(const int argumentCount, char** argumentValues) {
                     "--capture-frames <positive integer> "
                     "--capture-fps <1-240>]");
             }
+        }
+        if (showVersion) {
+            std::cout << "AzureRender " << AZURERENDER_VERSION << '\n';
+            return EXIT_SUCCESS;
+        }
+        if (checkResources) {
+            const azurerender::ResourceLocator locator(options.resourceRoot);
+            std::cout << "Shader directory: " << locator.shaderDirectory() << '\n'
+                      << "Public demo: " << locator.publicAsset("test_model.gltf") << '\n'
+                      << "Ramp profile: " << locator.rampProfile() << '\n'
+                      << "Ramp atlas: " << locator.rampAtlas() << '\n';
+            return EXIT_SUCCESS;
         }
         if (options.width < 64 || options.width > 7680
             || options.height < 64 || options.height > 4320) {

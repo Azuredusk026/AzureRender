@@ -57,9 +57,8 @@ ResourceLocator::ResourceLocator(std::filesystem::path explicitRoot) {
     const auto executable = executableDirectory();
     appendUnique(roots_, executable);
     appendUnique(roots_, executable / "../share/AzureRender");
-#ifdef AZURERENDER_ASSET_DIR
-    appendUnique(
-        roots_, std::filesystem::path(AZURERENDER_ASSET_DIR).parent_path());
+#ifdef AZURERENDER_DEVELOPMENT_ROOT
+    appendUnique(roots_, AZURERENDER_DEVELOPMENT_ROOT);
 #endif
     appendUnique(roots_, std::filesystem::current_path());
 }

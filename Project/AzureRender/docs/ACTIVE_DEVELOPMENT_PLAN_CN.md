@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-14 v1
-> 当前节点：AR-4.5 Ready
+> 当前节点：AR-4.5 Complete
 > 适用范围：Renderer 模块化、编辑器基础设施、Release Candidate 加固
 
 ## 1. 计划治理
@@ -42,6 +42,7 @@
 | AR-4.2 | Complete | `ResourceLocator`、开发/安装树和显式资源根覆盖 |
 | AR-4.3 | Complete | Feature、Importer、Panel 进程内扩展注册中心 |
 | AR-4.4 | Complete | Windows/Linux CI、CTest、公共 smoke 和文档检查 |
+| AR-4.5 | Complete | 可移动 RC 包、公共 Demo、许可证和干净目录验收 |
 | M3 / SC | Deferred | 按当前决策暂不执行场景与工业场景工作包 |
 
 这里的 AR-1 `Complete` 指 v1 契约边界完成，不代表 Vulkan 资源所有权已经完全移出
@@ -58,7 +59,9 @@
 | 5 | AR-4.2 | Complete | `ResourceLocator` 与安装目录，移除运行时源码绝对路径依赖 | AR-4.1 | `完成 AR-4.2 运行资源定位` |
 | 6 | AR-4.3 | Complete | `IRenderFeature`、`IAssetImporter`、`IEditorPanel` 进程内 Registry | AR-4.2 | `完成 AR-4.3 扩展注册中心` |
 | 7 | AR-4.4 | Complete | Windows/Linux CI：构建、CTest、公共资产 smoke 与文档检查 | AR-4.3 | `完成 AR-4.4 跨平台持续集成` |
-| 8 | AR-4.5 | Ready | 可安装 RC 包、公共 Demo、许可证与干净环境验收 | AR-4.4 | `完成 AR-4.5 RC 发布包` |
+| 8 | AR-4.5 | Complete | 可安装 RC 包、公共 Demo、许可证与干净环境验收 | AR-4.4 | `完成 AR-4.5 RC 发布包` |
+
+固定队列已全部完成。后续工作必须先建立新的版本化 Active Plan，不从候选池直接开工。
 
 ## 4. 任务退出条件
 

@@ -8,6 +8,7 @@ project(
 )
 
 include(CTest)
+include(GNUInstallDirs)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -209,11 +210,8 @@ target_compile_definitions(
     AzureRender
     PRIVATE
         GLFW_INCLUDE_VULKAN
-        AZURERENDER_SHADER_DIR="${SHADER_BINARY_DIR}"
-        AZURERENDER_ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets_public"
-        AZURERENDER_RAMP_PROFILE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/toon_ramp_profiles.json"
-        AZURERENDER_RAMP_ATLAS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/toon_ramp_atlas.ppm"
-        AZURERENDER_CAPTURE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/captures"
+        AZURERENDER_VERSION="${PROJECT_VERSION}-rc0"
+        AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}"
         $<$<CONFIG:Debug>:AZURERENDER_ENABLE_VALIDATION=1>
 )
 
@@ -258,3 +256,38 @@ if(MINGW)
 endif()
 
 set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT AzureRender)
+
+set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
+install(TARGETS AzureRender RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(
+    DIRECTORY "${SHADER_BINARY_DIR}/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/shaders"
+    FILES_MATCHING PATTERN "*.spv")
+install(
+    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")
+install(
+    FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC0_BASELINE_CN.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC_RELEASE_CN.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
+if(WIN32)
+    install(FILES "$<TARGET_FILE:glfw>" DESTINATION "${CMAKE_INSTALL_BINDIR}")
+elseif(UNIX)
+    install(
+        FILES "$<TARGET_FILE:glfw>"
+        DESTINATION "${CMAKE_INSTALL_BINDIR}"
+        RENAME "libglfw.so.3")
+endif()
+
+set(CPACK_PACKAGE_NAME "AzureRender")
+set(CPACK_PACKAGE_VENDOR "AzureRender Project")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-rc0")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Vulkan stylized renderer and editor RC")
+set(CPACK_PACKAGE_FILE_NAME
+    "AzureRender-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+set(CPACK_GENERATOR "ZIP;TGZ")
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
+include(CPack)

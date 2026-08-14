@@ -1,5 +1,15 @@
 # 开发日志
 
+## 2026-08-14：AR-4.5 RC 发布包
+
+- CMake install/CPack 现在安装可执行文件、编译 Shader、公共 Demo、RC 文档和第三方许可证声明；Linux 包携带 GLFW 并使用 `$ORIGIN` RPATH。
+- 新增 `--version` 与无窗口 `--check-resources`，可在干净目录验证版本和 Shader/公共资产/Ramp 定位。
+- 新增 `tools/write_rc_manifest.cmake`，为归档生成大小、SHA-256 和 UTC 时间的机器可读 manifest。
+- Release + ImGui 干净配置构建成功，5/5 CTest 通过；临时安装目录移动后 `--version` 与 `--check-resources` 均通过。
+- Linux RC 包为 `build/linux-imgui-release/AzureRender-0.1.0-rc0-Linux-x86_64.tar.gz`，大小 1,253,713 bytes，SHA-256 为 `c9beca650451b9afd73953d05d9a060e62f9b324dad0d59861af976301aa00ee`；归档不含私有资产或 captures。
+- 当前容器仍无窗口服务器，因此安装包 Renderer/Editor 图形 smoke 由 AR-4.4 Linux CI 的 Xvfb/lavapipe 门禁补齐；Windows 包需由 Windows CI 生成验证。
+- AR-4.5 Complete；本版固定队列全部完成。
+
 ## 2026-08-14：AR-4.4 跨平台持续集成
 
 - 新增 GitHub Actions Windows 2025 与 Ubuntu 24.04 流水线，使用 vcpkg manifest 干净配置、构建和 CTest。
