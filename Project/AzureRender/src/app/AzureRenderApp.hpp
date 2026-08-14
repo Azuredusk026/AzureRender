@@ -186,6 +186,9 @@ private:
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;
     VkFormat depthFormat_ = VK_FORMAT_UNDEFINED;
     VkExtent2D swapchainExtent_{};
+    VkExtent2D renderExtent_{};
+    VkExtent2D requestedEditorViewportExtent_{};
+    bool editorViewportResizeRequested_ = false;
     std::vector<VkImage> swapchainImages_;
     std::vector<VkImageView> swapchainImageViews_;
     std::vector<VkImage> editorViewportImages_;

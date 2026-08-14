@@ -46,8 +46,8 @@ void AzureRenderApp::createEditorViewportResources() {
     editorViewportImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         createImage(
-            swapchainExtent_.width,
-            swapchainExtent_.height,
+            renderExtent_.width,
+            renderExtent_.height,
             swapchainFormat_,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
             editorViewportImages_[index],
@@ -79,8 +79,8 @@ void AzureRenderApp::createSceneColorResources() {
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         createImage(
-            swapchainExtent_.width,
-            swapchainExtent_.height,
+            renderExtent_.width,
+            renderExtent_.height,
             kHdrSceneColorFormat,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
             sceneColorImages_[index],
@@ -100,8 +100,8 @@ void AzureRenderApp::createDepthResources() {
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         createImage(
-            swapchainExtent_.width,
-            swapchainExtent_.height,
+            renderExtent_.width,
+            renderExtent_.height,
             depthFormat_,
             VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
                 | VK_IMAGE_USAGE_SAMPLED_BIT,
@@ -118,8 +118,8 @@ void AzureRenderApp::createNormalResources() {
     normalImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         createImage(
-            swapchainExtent_.width,
-            swapchainExtent_.height,
+            renderExtent_.width,
+            renderExtent_.height,
             normalFormat_,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
                 | VK_IMAGE_USAGE_SAMPLED_BIT,

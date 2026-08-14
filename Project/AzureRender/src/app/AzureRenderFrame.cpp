@@ -36,6 +36,8 @@ void AzureRenderApp::drawFrame() {
         &imageIndex);
 
     if (acquireResult == VK_ERROR_OUT_OF_DATE_KHR) {
+        framebufferResized_ = false;
+        editorViewportResizeRequested_ = false;
         recreateSwapchain();
         return;
     }
@@ -77,6 +79,16 @@ void AzureRenderApp::drawFrame() {
                 cameraPosition_,
                 cameraTarget_)) {
             autoRotate_ = false;
+        }
+        std::uint32_t viewportWidth = 0;
+        std::uint32_t viewportHeight = 0;
+        if (editorLayer_->consumeViewportResizeRequest(
+                viewportWidth, viewportHeight)) {
+            requestedEditorViewportExtent_ = {
+                viewportWidth,
+                viewportHeight,
+            };
+            editorViewportResizeRequested_ = true;
         }
     }
     updateUniformBuffer(currentFrame_);
@@ -160,8 +172,10 @@ void AzureRenderApp::drawFrame() {
     const VkResult presentResult = vkQueuePresentKHR(presentQueue_, &presentInfo);
     if (presentResult == VK_ERROR_OUT_OF_DATE_KHR
         || presentResult == VK_SUBOPTIMAL_KHR
-        || framebufferResized_) {
+        || framebufferResized_
+        || editorViewportResizeRequested_) {
         framebufferResized_ = false;
+        editorViewportResizeRequested_ = false;
         recreateSwapchain();
     } else if (presentResult != VK_SUCCESS) {
         vkCheck(presentResult, "vkQueuePresentKHR");
@@ -221,8 +235,8 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
         cameraTarget_,
         {0.0F, 1.0F, 0.0F});
     const float aspect =
-        static_cast<float>(swapchainExtent_.width)
-        / static_cast<float>(swapchainExtent_.height);
+        static_cast<float>(renderExtent_.width)
+        / static_cast<float>(renderExtent_.height);
     constexpr float kPi = 3.14159265358979323846F;
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
     const Vector3 lightDirection = normalize({0.48F, 0.82F, 0.32F});
@@ -826,20 +840,20 @@ void AzureRenderApp::recordCommandBuffer(
     VkRenderPassBeginInfo renderPassInfo{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
     renderPassInfo.renderPass = renderPass_;
     renderPassInfo.framebuffer = swapchainFramebuffers_[imageIndex];
-    renderPassInfo.renderArea.extent = swapchainExtent_;
+    renderPassInfo.renderArea.extent = renderExtent_;
     renderPassInfo.clearValueCount = static_cast<std::uint32_t>(clearValues.size());
     renderPassInfo.pClearValues = clearValues.data();
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
     VkViewport viewport{};
-    viewport.width = static_cast<float>(swapchainExtent_.width);
-    viewport.height = static_cast<float>(swapchainExtent_.height);
+    viewport.width = static_cast<float>(renderExtent_.width);
+    viewport.height = static_cast<float>(renderExtent_.height);
     viewport.maxDepth = 1.0F;
     vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
 
     VkRect2D scissor{};
-    scissor.extent = swapchainExtent_;
+    scissor.extent = renderExtent_;
     vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
 
 
@@ -991,7 +1005,7 @@ void AzureRenderApp::recordCommandBuffer(
     postProcessPassInfo.framebuffer =
         postProcessFramebuffers_[imageIndex];
 
-    postProcessPassInfo.renderArea.extent = swapchainExtent_;
+    postProcessPassInfo.renderArea.extent = renderExtent_;
     vkCmdBeginRenderPass(
         commandBuffer,
         &postProcessPassInfo,
@@ -1089,8 +1103,14 @@ void AzureRenderApp::recordCommandBuffer(
         editorPassInfo.pClearValues = &editorClear;
         vkCmdBeginRenderPass(
             commandBuffer, &editorPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-        vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
-        vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
+        VkViewport editorViewport{};
+        editorViewport.width = static_cast<float>(swapchainExtent_.width);
+        editorViewport.height = static_cast<float>(swapchainExtent_.height);
+        editorViewport.maxDepth = 1.0F;
+        VkRect2D editorScissor{};
+        editorScissor.extent = swapchainExtent_;
+        vkCmdSetViewport(commandBuffer, 0, 1, &editorViewport);
+        vkCmdSetScissor(commandBuffer, 0, 1, &editorScissor);
         editorLayer_->render(commandBuffer);
         vkCmdEndRenderPass(commandBuffer);
     }

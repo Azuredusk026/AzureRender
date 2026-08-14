@@ -15,6 +15,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <functional>
 #include <stdexcept>
 #include <utility>
@@ -281,6 +282,19 @@ EditorViewportInput ImGuiEditorLayer::consumeViewportInput() noexcept {
     return input;
 }
 
+bool ImGuiEditorLayer::consumeViewportResizeRequest(
+    std::uint32_t& width,
+    std::uint32_t& height) noexcept {
+    if (!viewportResizePending_) {
+        return false;
+    }
+    width = resizeCandidateWidth_;
+    height = resizeCandidateHeight_;
+    viewportResizePending_ = false;
+    resizeStableFrames_ = 0;
+    return true;
+}
+
 void ImGuiEditorLayer::drawViewportPanel() {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
@@ -290,6 +304,25 @@ void ImGuiEditorLayer::drawViewportPanel() {
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
         const ImVec2 available = ImGui::GetContentRegionAvail();
+        const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
+        const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
+            std::max(std::floor(available.x * framebufferScale.x), 64.0F));
+        const std::uint32_t desiredHeight = static_cast<std::uint32_t>(
+            std::max(std::floor(available.y * framebufferScale.y), 64.0F));
+        if (desiredWidth == resizeCandidateWidth_
+            && desiredHeight == resizeCandidateHeight_) {
+            resizeStableFrames_ = std::min(resizeStableFrames_ + 1, 60U);
+        } else {
+            resizeCandidateWidth_ = desiredWidth;
+            resizeCandidateHeight_ = desiredHeight;
+            resizeStableFrames_ = 0;
+        }
+        if (resizeStableFrames_ >= 4
+            && (desiredWidth != viewportWidth_
+                || desiredHeight != viewportHeight_)
+            && !ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+            viewportResizePending_ = true;
+        }
         const float aspect = static_cast<float>(viewportWidth_)
             / static_cast<float>(viewportHeight_);
         ImVec2 imageSize{available.x, available.x / aspect};
@@ -411,6 +444,10 @@ void ImGuiEditorLayer::setViewportImages(
 void ImGuiEditorLayer::setViewportImageIndex(std::uint32_t) {}
 EditorViewportInput ImGuiEditorLayer::consumeViewportInput() noexcept {
     return {};
+}
+bool ImGuiEditorLayer::consumeViewportResizeRequest(
+    std::uint32_t&, std::uint32_t&) noexcept {
+    return false;
 }
 
 }  // namespace azurerender

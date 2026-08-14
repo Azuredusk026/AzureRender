@@ -421,8 +421,8 @@ void AzureRenderApp::initEditorUi() {
     editorLayer_->setViewportImages(
         editorViewportSampler_,
         editorViewportImageViews_,
-        swapchainExtent_.width,
-        swapchainExtent_.height);
+        renderExtent_.width,
+        renderExtent_.height);
 }
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
@@ -1022,6 +1022,25 @@ void AzureRenderApp::createSwapchain() {
 
     swapchainFormat_ = surfaceFormat.format;
     swapchainExtent_ = extent;
+    if (editorUiEnabled_
+        && requestedEditorViewportExtent_.width > 0
+        && requestedEditorViewportExtent_.height > 0) {
+        renderExtent_.width = std::clamp(
+            requestedEditorViewportExtent_.width,
+            std::min(64U, extent.width),
+            extent.width);
+        renderExtent_.height = std::clamp(
+            requestedEditorViewportExtent_.height,
+            std::min(64U, extent.height),
+            extent.height);
+    } else {
+        renderExtent_ = extent;
+    }
+    if (editorUiEnabled_) {
+        std::cout << "Editor viewport render extent: "
+                  << renderExtent_.width << 'x' << renderExtent_.height
+                  << '\n';
+    }
 }
 
 void AzureRenderApp::createSwapchainSemaphores() {

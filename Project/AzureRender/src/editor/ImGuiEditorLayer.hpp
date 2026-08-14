@@ -40,6 +40,9 @@ public:
         std::uint32_t height);
     void setViewportImageIndex(std::uint32_t imageIndex);
     [[nodiscard]] EditorViewportInput consumeViewportInput() noexcept;
+    bool consumeViewportResizeRequest(
+        std::uint32_t& width,
+        std::uint32_t& height) noexcept;
     [[nodiscard]] bool acceptsViewportShortcuts() const noexcept {
         return viewportAcceptsShortcuts_;
     }
@@ -59,6 +62,10 @@ private:
     std::uint32_t viewportImageIndex_ = 0;
     std::uint32_t viewportWidth_ = 1;
     std::uint32_t viewportHeight_ = 1;
+    std::uint32_t resizeCandidateWidth_ = 0;
+    std::uint32_t resizeCandidateHeight_ = 0;
+    std::uint32_t resizeStableFrames_ = 0;
+    bool viewportResizePending_ = false;
     EditorViewportInput viewportInput_;
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
