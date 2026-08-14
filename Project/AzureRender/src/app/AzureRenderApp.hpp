@@ -259,6 +259,7 @@ private:
     azurerender::RenderSettings renderSettings_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
     bool hudEnabled_ = false;
+    std::size_t editorSelectedNode_ = 0;
     bool qaHarnessEnabled_ = false;
     std::string qaCameraName_ = "none";
     std::string qaLightName_ = "current";

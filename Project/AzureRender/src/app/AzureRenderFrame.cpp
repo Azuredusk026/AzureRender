@@ -605,7 +605,8 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
             for (std::size_t index = 0;
                  index < runOptions_.editorNodeNames.size(); ++index) {
                 if (index > 0) text << " | ";
-                text << printable(runOptions_.editorNodeNames[index], 20);
+                text << (index == editorSelectedNode_ ? "*" : " ")
+                     << printable(runOptions_.editorNodeNames[index], 20);
             }
         }
         text << "\nINSPECTOR: OUTLINE " << renderSettings_.outline.strength

@@ -1126,7 +1126,17 @@ void AzureRenderApp::keyCallback(
         printAnimationStatus();
     };
     if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_SPACE) {
+        if (application->runOptions_.editorMode
+            && key == GLFW_KEY_TAB
+            && !application->runOptions_.editorNodeNames.empty()) {
+            application->editorSelectedNode_ =
+                (application->editorSelectedNode_ + 1)
+                % application->runOptions_.editorNodeNames.size();
+            std::cout << "Editor selected node: "
+                      << application->runOptions_.editorNodeNames[
+                             application->editorSelectedNode_]
+                      << '\n';
+        } else if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
             std::cout << "Auto rotate: "
                       << (application->autoRotate_ ? "on" : "paused")
