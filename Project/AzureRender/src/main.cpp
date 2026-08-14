@@ -1,4 +1,5 @@
 #include "app/AzureRenderApp.hpp"
+#include "editor/EditorContext.hpp"
 #include "editor/SceneModel.hpp"
 
 #include <algorithm>
@@ -6,7 +7,7 @@
 #include <cstdint>
 #include <exception>
 #include <iostream>
-#include <optional>
+#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -190,10 +191,9 @@ int main(const int argumentCount, char** argumentValues) {
             options.editorMode = true;
             options.editorScenePath = editorScenePath;
         }
-        std::optional<azurerender::SceneDocument> sceneDocument;
         if (!scenePath.empty()) {
-            sceneDocument = azurerender::SceneDocument::load(scenePath);
-            const azurerender::SceneDocument& scene = *sceneDocument;
+            azurerender::SceneDocument scene =
+                azurerender::SceneDocument::load(scenePath);
             const auto asset = std::find_if(
                 scene.resources.begin(), scene.resources.end(),
                 [](const azurerender::SceneResource& resource) {
@@ -206,23 +206,16 @@ int main(const int argumentCount, char** argumentValues) {
             options.assetPath = asset->path.string();
             options.renderSettings = scene.renderSettings;
             if (options.editorMode) {
-                options.editorSceneName = scene.sceneId;
-                for (const azurerender::SceneNode& node : scene.nodes) {
-                    options.editorNodeNames.push_back(node.name);
-                }
-                for (const azurerender::SceneResource& resource
-                     : scene.resources) {
-                    options.editorResourcePaths.push_back(
-                        resource.path.string());
-                }
+                options.editorContext =
+                    std::make_shared<azurerender::EditorContext>(
+                        std::move(scene), editorScenePath);
             }
         }
 
         AzureRenderApp application;
         application.run(options);
-        if (options.editorMode && sceneDocument.has_value()) {
-            sceneDocument->renderSettings = application.currentRenderSettings();
-            sceneDocument->save(editorScenePath);
+        if (options.editorContext != nullptr) {
+            options.editorContext->save();
             std::cout << "Editor scene saved: " << editorScenePath << '\n';
         }
     } catch (const std::exception& exception) {

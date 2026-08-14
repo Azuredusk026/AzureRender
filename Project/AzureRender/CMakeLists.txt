@@ -63,6 +63,9 @@ add_executable(
     src/app/AzureRenderSupport.cpp
     src/assets/GltfLoader.cpp
     src/assets/GltfLoader.hpp
+    src/editor/EditorContext.cpp
+    src/editor/EditorContext.hpp
+    src/editor/IEditorPanel.hpp
     src/editor/SceneModel.cpp
     src/editor/SceneModel.hpp
     src/platform/GlfwFrontend.cpp

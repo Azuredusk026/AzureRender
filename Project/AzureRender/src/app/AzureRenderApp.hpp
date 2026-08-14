@@ -13,6 +13,11 @@
 #include <string>
 #include <vector>
 
+namespace azurerender {
+class EditorContext;
+class GlfwFrontend;
+}
+
 struct AzureRenderOptions {
     std::string assetPath;
     std::uint64_t smokeFrameLimit = 0;
@@ -34,14 +39,8 @@ struct AzureRenderOptions {
     std::string qaIsolation;
     bool editorMode = false;
     std::string editorScenePath;
-    std::string editorSceneName;
-    std::vector<std::string> editorNodeNames;
-    std::vector<std::string> editorResourcePaths;
+    std::shared_ptr<azurerender::EditorContext> editorContext;
 };
-
-namespace azurerender {
-class GlfwFrontend;
-}
 
 class AzureRenderApp final {
 public:
@@ -263,7 +262,6 @@ private:
     azurerender::RenderSettings renderSettings_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
     bool hudEnabled_ = false;
-    std::size_t editorSelectedNode_ = 0;
     bool qaHarnessEnabled_ = false;
     std::string qaCameraName_ = "none";
     std::string qaLightName_ = "current";

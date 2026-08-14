@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "editor/EditorContext.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "AzureRenderInternal.hpp"
@@ -239,6 +240,9 @@ void AzureRenderApp::run(
         runOptions_.renderSettings.stylizedLightingEnabled;
     renderSettings_.innerOutlineEnabled =
         runOptions_.renderSettings.innerOutlineEnabled;
+    if (runOptions_.editorContext != nullptr) {
+        runOptions_.editorContext->attachRenderSettings(renderSettings_);
+    }
     hudEnabled_ = runOptions_.hudEnabled || runOptions_.editorMode;
     configureQaHarness();
     constexpr std::array<const char*, 5> kDiagnosticNames = {
@@ -257,6 +261,9 @@ void AzureRenderApp::run(
         << ", HUD: " << (hudEnabled_ ? "on" : "off")
         << '\n';
     mainLoop(runOptions_.smokeFrameLimit);
+    if (runOptions_.editorContext != nullptr) {
+        runOptions_.editorContext->detachRenderSettings();
+    }
 }
 
 void AzureRenderApp::initWindow() {
@@ -1106,15 +1113,13 @@ void AzureRenderApp::keyCallback(
         printAnimationStatus();
     };
     if (action == GLFW_PRESS) {
-        if (application->runOptions_.editorMode
+        if (application->runOptions_.editorContext != nullptr
             && key == GLFW_KEY_TAB
-            && !application->runOptions_.editorNodeNames.empty()) {
-            application->editorSelectedNode_ =
-                (application->editorSelectedNode_ + 1)
-                % application->runOptions_.editorNodeNames.size();
+            && application->runOptions_.editorContext->selectedNode() != nullptr) {
+            application->runOptions_.editorContext->selectNextNode();
             std::cout << "Editor selected node: "
-                      << application->runOptions_.editorNodeNames[
-                             application->editorSelectedNode_]
+                      << application->runOptions_.editorContext
+                             ->selectedNode()->name
                       << '\n';
         } else if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
@@ -1274,6 +1279,7 @@ void AzureRenderApp::keyCallback(
                 0.0F);
             std::cout << "Editor outline strength: "
                       << application->renderSettings_.outline.strength << '\n';
+            application->runOptions_.editorContext->markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_RIGHT_BRACKET) {
             application->renderSettings_.outline.strength = std::min(
@@ -1281,6 +1287,7 @@ void AzureRenderApp::keyCallback(
                 2.0F);
             std::cout << "Editor outline strength: "
                       << application->renderSettings_.outline.strength << '\n';
+            application->runOptions_.editorContext->markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_MINUS) {
             application->renderSettings_.grade.exposureEv = std::max(
@@ -1288,6 +1295,7 @@ void AzureRenderApp::keyCallback(
                 -8.0F);
             std::cout << "Editor exposure EV: "
                       << application->renderSettings_.grade.exposureEv << '\n';
+            application->runOptions_.editorContext->markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_EQUAL) {
             application->renderSettings_.grade.exposureEv = std::min(
@@ -1295,6 +1303,7 @@ void AzureRenderApp::keyCallback(
                 8.0F);
             std::cout << "Editor exposure EV: "
                       << application->renderSettings_.grade.exposureEv << '\n';
+            application->runOptions_.editorContext->markDirty();
         }
     }
 }

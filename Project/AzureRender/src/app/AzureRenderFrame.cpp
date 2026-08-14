@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "editor/EditorContext.hpp"
 #include "platform/GlfwFrontend.hpp"
 
 #include <stb_easy_font.h>
@@ -598,29 +599,33 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
              << " R" << hairProfile->styleParameters[3] << '\n';
     }
     if (runOptions_.editorMode) {
+        const azurerender::SceneDocument& editorScene =
+            runOptions_.editorContext->scene();
         text << "EDITOR PREVIEW V1 | VIEWPORT: LIVE VULKAN\n"
              << "SCENE OUTLINER: ";
-        if (runOptions_.editorNodeNames.empty()) {
+        if (editorScene.nodes.empty()) {
             text << "<EMPTY>";
         } else {
             for (std::size_t index = 0;
-                 index < runOptions_.editorNodeNames.size(); ++index) {
+                 index < editorScene.nodes.size(); ++index) {
                 if (index > 0) text << " | ";
-                text << (index == editorSelectedNode_ ? "*" : " ")
-                     << printable(runOptions_.editorNodeNames[index], 20);
+                text << (index == runOptions_.editorContext->selectedNodeIndex()
+                             ? "*" : " ")
+                     << printable(editorScene.nodes[index].name, 20);
             }
         }
         text << "\nINSPECTOR: OUTLINE " << renderSettings_.outline.strength
              << "  EXPOSURE " << renderSettings_.grade.exposureEv
              << "  PRESET " << renderSettings_.showcasePreset << '\n'
              << "ASSET BROWSER: ";
-        if (runOptions_.editorResourcePaths.empty()) {
+        if (editorScene.resources.empty()) {
             text << "<EMPTY>";
         } else {
             for (std::size_t index = 0;
-                 index < runOptions_.editorResourcePaths.size(); ++index) {
+                 index < editorScene.resources.size(); ++index) {
                 if (index > 0) text << " | ";
-                text << printable(runOptions_.editorResourcePaths[index], 38);
+                text << printable(
+                    editorScene.resources[index].path.string(), 38);
             }
         }
         text << "\nCONSOLE: [/] OUTLINE  -/= EXPOSURE  F1-F3 LIGHT  CLOSE=SAVES\n";
