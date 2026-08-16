@@ -13,9 +13,21 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfShadowColor;
 } camera;
 
+// Shared environment map (binding 4). The background samples the equirect
+// environment so external HDR assets are visible in the backdrop.
+layout(binding = 4) uniform sampler2D environmentTexture;
+
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
+
+vec2 directionToEquirectangular(vec3 direction) {
+    const float pi = 3.14159265358979323846;
+    vec3 normalizedDirection = normalize(direction);
+    float u = atan(normalizedDirection.z, normalizedDirection.x) * 0.5 / pi + 0.5;
+    float v = acos(clamp(normalizedDirection.y, -1.0, 1.0)) / pi;
+    return vec2(u, v);
+}
 
 float gridLines(vec2 coordinate) {
     vec2 cell = fract(coordinate);
@@ -75,6 +87,17 @@ void main() {
     if (camera.qaParameters.x > 0.5) {
         color = vec3(0.018, 0.024, 0.040);
     }
+
+    // Sample the shared HDR environment (equirect) as the backdrop. The
+    // procedural gradient above remains as a subtle tint fallback so the
+    // environment stays visible without overpowering the subject.
+    vec2 envUv = directionToEquirectangular(
+        normalize(vec3(
+            uv.x * 2.0 - 1.0,
+            uv.y * 2.0 - 1.0,
+            1.0)));
+    vec3 environmentColor = texture(environmentTexture, envUv).rgb;
+    color = mix(color, environmentColor, 0.85);
 
     vec2 vignetteOffset = uv - vec2(0.5);
     float vignette = smoothstep(0.20, 0.78, dot(vignetteOffset, vignetteOffset));
