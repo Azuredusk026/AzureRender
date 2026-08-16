@@ -2862,3 +2862,16 @@ Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 
 公共资产 120 帧 Validation 通过。提交:`08ffb78 完成 AR-5.6 RC1 发布审计`。
 
 v2 固定执行队列至此全部完成。
+
+## 2026-08-16 v3 执行计划冻结
+
+用户授权新一阶段执行范围,Active Plan 更新为 v5:
+
+- **维护类**:MAINT-1 git 仓库健康修复(fsck 清零、对象补全、`.workbuddy/` 版本控制决策);
+- **中等优先渲染**:AR-6.1 HDR IBL(HDR equirectangular + mipmap + prefiltered specular)、
+  AR-6.2 Morph Target、AR-6.3 per-triangle OIT;
+- **编辑器增强**:AR-7.1 视口对象拾取、AR-7.2 Transform Gizmo、AR-7.3 完整 Scene Graph 编辑。
+
+同步更新 `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`(v3 队列+退出条件)、
+`docs/PROJECT_HANDOFF_CN.md`、`README.md`。候选池移除已授权项;
+M3/SC、论文三路径、动态插件、完整 ECS 继续 Deferred。

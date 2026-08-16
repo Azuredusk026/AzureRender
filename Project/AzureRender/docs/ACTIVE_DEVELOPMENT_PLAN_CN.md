@@ -1,8 +1,8 @@
 # AzureRender 近期开发执行计划
 
-> 计划版本：2026-08-16 v4
-> 当前节点：v2 固定队列全部完成（AR-5.2 ~ AR-5.6）
-> 适用范围：RC1 发布验证、错误契约、持久化与诊断收口
+> 计划版本：2026-08-16 v5
+> 当前节点：v3 队列 Ready（MAINT-1 为首个执行任务）
+> 适用范围：渲染特性升级、编辑器增强与仓库维护
 
 ## 1. 计划治理
 
@@ -18,7 +18,9 @@
 4. 只有构建、测试、Validation 和必要的视觉检查全部通过后才能标记 `Complete`；
 5. 新需求先进入“候选池”，不得插入当前任务；改变顺序时先单独更新本文并提交；
 6. 紧急回归修复可以中断队列，但必须记录原因、复现、验证和 Commit；
-7. 未经用户重新授权，不执行 M3、SC、对象拾取或工业场景内容。
+7. v3 队列是用户 2026-08-16 明确授权的执行范围：HDR IBL/mipmap、Morph Target/OIT、
+   对象拾取/Gizmo/Scene Graph、git 仓库健康修复与 `.workbuddy` 版本控制决策。
+   M3/SC 工业场景、论文三路径、动态插件仍 Deferred。
 
 状态只使用：`Backlog`、`Ready`、`Active`、`Complete`、`Deferred`、`Blocked`。
 
@@ -117,7 +119,96 @@ Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
 - 消除直接 `std::cout` 输出，ImGui Console 与文件日志消费同一事件流；
 - 日志路径、级别与错误码沿用既有 Schema，不新增格式。
 
+## 3.2 v3 固定执行队列
+
+> 用户授权范围：渲染特性升级、编辑器增强与仓库维护（2026-08-16）。
+
+| 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
+|---:|---|---|---|---|---|
+| 1 | MAINT-1 | Ready | git 对象库健康修复：fetch 补全缺失对象、gc 清理、`git fsck` 清零；`.workbuddy/` 纳入版本控制决策 | 无 | `完成 MAINT-1 仓库健康修复` |
+| 2 | AR-6.1 | Backlog | HDR IBL：equirectangular HDR 环境 + mipmap 生成 + prefiltered specular 反射 | MAINT-1 | `完成 AR-6.1 HDR IBL 环境` |
+| 3 | AR-6.2 | Backlog | Morph Target：glTF morph targets 加载与 GPU 混合 | AR-6.1 | `完成 AR-6.2 形态目标` |
+| 4 | AR-6.3 | Backlog | OIT：per-triangle 透明度排序（替代 primitive 级排序） | AR-6.2 | `完成 AR-6.3 逐三角形透明排序` |
+| 5 | AR-7.1 | Backlog | 对象拾取：Viewport 射线拾取 + 选中高亮 | AR-6.3 | `完成 AR-7.1 视口对象拾取` |
+| 6 | AR-7.2 | Backlog | Transform Gizmo：平移/旋转/缩放手柄与编辑 | AR-7.1 | `完成 AR-7.2 变换 Gizmo` |
+| 7 | AR-7.3 | Backlog | 完整 Scene Graph：层级浏览、节点属性编辑、保存/加载 | AR-7.2 | `完成 AR-7.3 场景图编辑` |
+
+### v3 统一退出规则
+
+- 每个节点必须新增或强化自动化测试，不能只更新文档；
+- Debug、Release 构建与全量 CTest 必须通过；
+- 渲染/画面变化任务执行 1280×720 截图检查与 120 帧 Debug Validation；
+- 每节点独立提交并更新本文状态；未完成当前节点不得开始下一节点；
+- M3/SC、论文三路径、动态插件、Android 继续 Deferred。
+
 ## 4. 任务退出条件
+
+### MAINT-1 仓库健康修复
+
+- 诊断并修复 `.git/refs/` 稳定性问题（此前发生过 refs 目录丢失）；
+- 网络可用时 `git fetch` 补全缺失对象，`git gc` 整理仓库，`git fsck --full`
+  无 missing/invalid 输出；
+- 决定 `.workbuddy/` 是否纳入版本控制：若纳入则补充 `.gitignore` 规则与文档说明；
+- 记录修复前后 fsck 差异与仓库状态。
+
+验收：`git fsck --full` 干净；`git log`/`git status` 正常；提交链路无异常；
+`.workbuddy/` 决策写入文档。
+
+### AR-6.1 HDR IBL 环境
+
+- 环境贴图从 LDR 程序生成升级为 HDR equirectangular 源（`.hdr`/`.exr` 加载或程序生成）；
+- 生成 irradiance 漫反射卷积与 prefiltered specular 的 mip 链；
+- PBR 反射路径使用 prefiltered 采样替代现有粗糙度模糊近似；
+- 保留现有诊断视图与确定性 Capture 不变。
+
+验收：Debug/Release 构建；CTest；1280×720 截图对比确认反射质量提升；
+120 帧 Validation 无 VUID；环境资源由 ResourceLocator 定位。
+
+### AR-6.2 Morph Target
+
+- glTF morph targets（POSITION/NORMAL 权重混合）加载；
+- GPU 端按权重混合基础网格与 morph 目标；
+- 权重通过 RenderSettings/动画或编辑器参数驱动，支持 0~1 连续调节；
+- 公共测试资产提供至少一个 morph 用例。
+
+验收：加载/混合测试；动画或参数驱动的权重变化截图；Validation 无 VUID。
+
+### AR-6.3 逐三角形透明排序
+
+- BLEND 材质从 primitive 级排序升级为 per-triangle 视空间深度排序；
+- 深度写入策略与混合顺序在排序后保持正确；
+- 与现有 HDR Scene Color、内部描边和后处理合成路径兼容；
+- 保持确定性 Capture 输出可复现。
+
+验收：透明物体排列正确性截图；排序单元测试（构造三角形深度序列验证）；
+Validation 无 VUID。
+
+### AR-7.1 视口对象拾取
+
+- Viewport 点击生成射线，与场景节点/primitive 求交；
+- 拾取结果显示在 Inspector，选中节点高亮；
+- 与编辑器 Session 脏状态、相机交互和离屏 Viewport 路径共存；
+- 新增拾取单元测试（射线-包围盒/三角形求交）。
+
+验收：求交测试；交互拾取 Validation；1280×720 截图确认高亮。
+
+### AR-7.2 变换 Gizmo
+
+- 平移/旋转/缩放三模式 Gizmo 手柄渲染与拖拽编辑；
+- Gizmo 操作更新节点 TRS 并标记脏状态；
+- 支持局部/世界坐标系切换（可选）与撤销基本操作；
+- 新增 Gizmo 数学测试（手柄命中、拖拽增量）。
+
+验收：Gizmo 命中/拖拽测试；编辑后保存/重载一致；Validation 无 VUID。
+
+### AR-7.3 场景图编辑
+
+- Outliner 支持层级树浏览、多选与节点重命名；
+- Inspector 支持节点变换、可见性、父子关系编辑；
+- Scene Graph 变更可保存到 `.azscene v1`（或提升 schema 版本）并重载一致；
+- 完整 Scene Graph 编辑闭环不依赖未授权功能。
+
+验收：层级编辑测试；保存/重载一致；1280×720 截图；Validation 无 VUID。
 
 ### AR-3.6 Viewport 资源独立重建
 
@@ -210,11 +301,11 @@ Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
 
 以下内容不在固定执行队列中：
 
-- M3 与全部 SC 工业场景任务；
-- 对象拾取、Transform Gizmo、完整 Scene Graph/ECS；
+- M3 与全部 SC 工业场景任务（用户 2026-08-16 授权中未包含）；
 - 文件导入、缩略图生成、资源依赖图和资源热重载；
 - 动态库插件、跨 DLL C++ ABI、脚本系统；
 - Android、Traditional Multi-pass/Subpass/DRLR 三路径和论文实验；
-- HDR IBL、OIT、Morph Target 等新渲染特性。
+- 完整 ECS 架构、撤销/重做系统（AR-7 只做最小编辑闭环）。
 
-候选项只有在 AR-4.5 完成或用户明确调整优先级后，才能进入新的版本化执行计划。
+候选池中的项目只有进入新的版本化执行计划（经用户授权）后才能执行。
+

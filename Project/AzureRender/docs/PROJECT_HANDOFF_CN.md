@@ -3,7 +3,7 @@
 > 最后核对：2026-08-16（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前近期节点：**AR-5.2 ~ AR-5.6 全部 Complete / RC1 已审计**
+> 当前近期节点：**v3 队列 Ready（MAINT-1 首个执行）**
 
 ## 0. 长期路线入口
 
@@ -175,20 +175,19 @@ cmake --build build/ninja-release
 ## 5. 固定近期执行队列
 
 近期任务不得根据运行过程临时追加或重排，唯一详细定义与退出条件见
-[`ACTIVE_DEVELOPMENT_PLAN_CN.md`](ACTIVE_DEVELOPMENT_PLAN_CN.md)。当前顺序为：
+[`ACTIVE_DEVELOPMENT_PLAN_CN.md`](ACTIVE_DEVELOPMENT_PLAN_CN.md)。v1（AR-3.6~AR-4.5）
+与 v2（AR-5.0~AR-5.6）队列均已全部完成，当前为 **v3 队列**（2026-08-16 用户授权）：
 
-1. `AR-3.6`：Viewport RenderTarget 独立重建；
-2. `AR-3.7`：编辑器 Session/Command、保存、脏状态和错误反馈；
-3. `AR-4.0`：冻结 RC0 行为、支持平台与统一测试门禁；
-4. `AR-4.1`：结构化日志、GPU 能力报告、错误码；
-5. `AR-4.2`：`ResourceLocator`、安装树和可移动运行资源；
-6. `AR-4.3`：Feature、Importer、Panel 进程内注册中心；
-7. `AR-4.4`：Windows/Linux 持续集成；
-8. `AR-4.5`：可移动 RC 发布包与干净环境验收。
+1. `MAINT-1`：git 仓库健康修复（fsck 清零、对象补全、`.workbuddy/` 决策）；
+2. `AR-6.1`：HDR IBL 环境（HDR equirectangular + mipmap + prefiltered specular）；
+3. `AR-6.2`：Morph Target（glTF morph 加载与 GPU 混合）；
+4. `AR-6.3`：OIT 逐三角形透明排序；
+5. `AR-7.1`：视口对象拾取；
+6. `AR-7.2`：Transform Gizmo；
+7. `AR-7.3`：完整 Scene Graph 编辑闭环。
 
-M3、SC、对象拾取、Gizmo、完整 Scene Graph/ECS、资源导入管理、动态插件、Android
-和论文三路径均不在本轮队列中。新增需求先进入 Active Plan 候选池；如需改序，先单独
-修改计划文档并提交，再开始实现。
+M3/SC 工业场景、论文三路径、动态插件、Android 和完整 ECS 仍不在本轮队列中。
+新增需求先进入 Active Plan 候选池；如需改序，先单独修改计划文档并提交，再开始实现。
 
 ## 5.1 AR-5.2 场景原子保存（2026-08-16 完成）
 

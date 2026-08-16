@@ -12,6 +12,11 @@ contracts, atomic `.azscene` save, unified runtime logging, GPU report
 contract, release compliance manifest, and the RC1 audit
 (`docs/RC1_AUDIT_CN.md`).
 
+The v3 execution queue is Ready (see
+[`docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)):
+MAINT-1 repository health first, then HDR IBL, Morph Target, per-triangle OIT,
+viewport picking, transform gizmos, and full scene-graph editing.
+
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
 explicit glTF material contract rather than inferred texture semantics. Audit an
