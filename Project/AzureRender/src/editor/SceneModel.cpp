@@ -1,8 +1,12 @@
 #include "SceneModel.hpp"
 
+#include <chrono>
+#include <cstdio>
 #include <fstream>
 #include <iomanip>
+#include <random>
 #include <stdexcept>
+#include <system_error>
 
 namespace azurerender {
 
@@ -24,6 +28,35 @@ bool readBool(std::istream& input, const char* name) {
         throw std::runtime_error(std::string("Missing .azscene field: ") + name);
     }
     return value;
+}
+
+// Writes the document payload through the supplied stream. Shared by the
+// normal save path and the atomic-save path so both produce identical bytes.
+void writeDocument(std::ostream& output, const SceneDocument& document) {
+    output << "AzureRender Scene v1\n"
+           << "schemaVersion " << SceneDocument::kSchemaVersion << '\n'
+           << "sceneId " << std::quoted(document.sceneId) << '\n'
+           << "resourceCount " << document.resources.size() << '\n';
+    for (const SceneResource& resource : document.resources) {
+        output << "resource " << std::quoted(resource.id) << ' '
+               << std::quoted(resource.type) << ' '
+               << std::quoted(resource.path.string()) << '\n';
+    }
+    output << "nodeCount " << document.nodes.size() << '\n';
+    for (const SceneNode& node : document.nodes) {
+        output << "node " << std::quoted(node.id) << ' '
+               << std::quoted(node.name) << ' '
+               << std::quoted(node.parentId) << ' '
+               << std::quoted(node.resourceId) << '\n'
+               << "visible " << std::boolalpha << node.visible << '\n';
+    }
+    output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
+           << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
+           << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
+           << "innerOutlineEnabled " << std::boolalpha
+           << document.renderSettings.innerOutlineEnabled << '\n'
+           << "outlineStrength " << document.renderSettings.outline.strength << '\n'
+           << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n';
 }
 
 }  // namespace
@@ -116,34 +149,57 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
 
 void SceneDocument::save(const std::filesystem::path& path) const {
     validateRenderSettings(renderSettings);
-    std::ofstream output(path);
-    if (!output) {
-        throw std::runtime_error("Unable to write scene: " + path.string());
+    if (path.empty()) {
+        throw std::invalid_argument("Scene save path must not be empty");
     }
-    output << "AzureRender Scene v1\n"
-           << "schemaVersion " << kSchemaVersion << '\n'
-           << "sceneId " << std::quoted(sceneId) << '\n'
-           << "resourceCount " << resources.size() << '\n';
-    for (const SceneResource& resource : resources) {
-        output << "resource " << std::quoted(resource.id) << ' '
-               << std::quoted(resource.type) << ' '
-               << std::quoted(resource.path.string()) << '\n';
+    const std::filesystem::path directory =
+        path.parent_path().empty() ? std::filesystem::path(".")
+                                   : path.parent_path();
+    std::error_code directoryError;
+    if (!std::filesystem::is_directory(directory, directoryError)
+        || directoryError) {
+        throw std::runtime_error(
+            "Scene save directory does not exist: " + directory.string());
     }
-    output << "nodeCount " << nodes.size() << '\n';
-    for (const SceneNode& node : nodes) {
-        output << "node " << std::quoted(node.id) << ' '
-               << std::quoted(node.name) << ' '
-               << std::quoted(node.parentId) << ' '
-               << std::quoted(node.resourceId) << '\n'
-               << "visible " << std::boolalpha << node.visible << '\n';
+
+    // Atomic save: write a unique temporary file in the same directory, flush
+    // and close it, then rename over the target. A failure at any stage leaves
+    // the original target untouched and removes the temporary file.
+    static std::mt19937_64 generator{
+        static_cast<std::uint64_t>(std::chrono::steady_clock::now()
+                                      .time_since_epoch().count())};
+    const std::string suffix =
+        ".tmp." + std::to_string(generator());
+    const std::filesystem::path temporary =
+        directory / (path.filename().string() + suffix);
+
+    try {
+        {
+            std::ofstream output(temporary,
+                std::ios::binary | std::ios::trunc);
+            if (!output) {
+                throw std::runtime_error(
+                    "Unable to write scene: " + temporary.string());
+            }
+            writeDocument(output, *this);
+            output.flush();
+            if (!output) {
+                throw std::runtime_error(
+                    "Failed to flush scene: " + temporary.string());
+            }
+        }
+        std::error_code renameError;
+        std::filesystem::rename(temporary, path, renameError);
+        if (renameError) {
+            throw std::runtime_error(
+                "Unable to replace scene: " + path.string()
+                + " (" + renameError.message() + ")");
+        }
+    } catch (...) {
+        std::error_code ignored;
+        std::filesystem::remove(temporary, ignored);
+        throw;
     }
-    output << "showcasePreset " << renderSettings.showcasePreset << '\n'
-           << "styleMaskStrength " << renderSettings.styleMaskStrength << '\n'
-           << "diffuseBandThreshold " << renderSettings.diffuseBandThreshold << '\n'
-           << "innerOutlineEnabled " << std::boolalpha
-           << renderSettings.innerOutlineEnabled << '\n'
-           << "outlineStrength " << renderSettings.outline.strength << '\n'
-           << "gradeExposureEv " << renderSettings.grade.exposureEv << '\n';
 }
 
 }  // namespace azurerender

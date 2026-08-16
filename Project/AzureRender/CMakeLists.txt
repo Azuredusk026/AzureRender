@@ -192,6 +192,19 @@ if(BUILD_TESTING)
         NAME AzureRender.EditorSession
         COMMAND AzureRenderEditorSessionTests)
     add_executable(
+        AzureRenderSceneModelTests
+        tests/SceneModelTests.cpp
+        src/editor/SceneModel.cpp
+        src/editor/SceneModel.hpp
+        src/render/RenderSettings.cpp
+        src/render/RenderSettings.hpp
+    )
+    target_include_directories(
+        AzureRenderSceneModelTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.SceneModel
+        COMMAND AzureRenderSceneModelTests)
+    add_executable(
         AzureRenderRuntimeDiagnosticsTests
         tests/RuntimeDiagnosticsTests.cpp
         src/diagnostics/RuntimeDiagnostics.cpp
