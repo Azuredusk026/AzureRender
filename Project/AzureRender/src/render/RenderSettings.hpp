@@ -45,8 +45,18 @@ struct GradeSettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 2;
+    static constexpr std::uint32_t kSchemaVersion = 3;
 
+    // FYP benchmark: render path under evaluation. Traditional = separate
+    // render passes; Subpasses / DynamicRendering select the alternative
+    // execution model (subpass-local reads / VK_KHR_dynamic_rendering).
+    enum class RenderPath : std::uint32_t {
+        Traditional = 0,
+        Subpasses = 1,
+        DynamicRendering = 2,
+    };
+
+    RenderPath renderPath = RenderPath::Traditional;
     bool stylizedLightingEnabled = true;
     float styleMaskStrength = 1.0F;
     float diffuseBandThreshold = 0.40F;

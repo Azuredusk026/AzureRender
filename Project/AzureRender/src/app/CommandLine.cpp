@@ -25,7 +25,7 @@ constexpr const char* kUsage =
     "[--technical-sequence] "
     "[--qa-camera <preset>] [--qa-light <preset>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
-    "[--qa-isolation <view>] "
+    "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
     "[--capture-dir <empty directory> "
     "--capture-frames <positive integer> --capture-fps <1-240>]";
 
@@ -130,6 +130,12 @@ void validate(const ParsedCommandLine& parsed) {
             "back-detail", "lighting-sweep"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-camera",
              "Unknown --qa-camera: " + options.qaCamera);
+    }
+    if (!options.renderPathName.empty()
+        && !isOneOf(options.renderPathName, {
+            "traditional", "subpasses", "dynamic"})) {
+        fail(CommandLineErrorCode::InvalidValue, "--render-path",
+             "Unknown --render-path: " + options.renderPathName);
     }
     if (!options.qaLight.empty()
         && !isOneOf(options.qaLight, {
@@ -300,6 +306,9 @@ ParsedCommandLine parseCommandLine(
             parsed.options.qaEffect = requireValue(arguments, index, argument);
         } else if (argument == "--qa-effect-state") {
             parsed.options.qaEffectState =
+                requireValue(arguments, index, argument);
+        } else if (argument == "--render-path") {
+            parsed.options.renderPathName =
                 requireValue(arguments, index, argument);
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);

@@ -501,6 +501,23 @@ void AzureRenderApp::configureQaHarness() {
         || !runOptions_.qaEffect.empty()
         || !runOptions_.qaEffectState.empty()
         || !runOptions_.qaIsolation.empty();
+    // FYP render-path selection: map the CLI name to the settings enum.
+    // Runs before the QA early-return so --render-path works standalone.
+    if (!runOptions_.renderPathName.empty()) {
+        if (runOptions_.renderPathName == "subpasses") {
+            renderSettings_.renderPath =
+                azurerender::RenderSettings::RenderPath::Subpasses;
+        } else if (runOptions_.renderPathName == "dynamic") {
+            renderSettings_.renderPath =
+                azurerender::RenderSettings::RenderPath::DynamicRendering;
+        } else {
+            renderSettings_.renderPath =
+                azurerender::RenderSettings::RenderPath::Traditional;
+        }
+        azurerender::RuntimeDiagnostics::instance().print(
+            "render",
+            "Render path: " + runOptions_.renderPathName);
+    }
     if (!qaHarnessEnabled_) {
         return;
     }
@@ -586,6 +603,7 @@ void AzureRenderApp::configureQaHarness() {
     qaIsolationName_ = runOptions_.qaIsolation.empty()
         ? "beauty"
         : runOptions_.qaIsolation;
+
     constexpr std::array<const char*, 20> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",

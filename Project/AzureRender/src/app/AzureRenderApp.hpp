@@ -306,7 +306,13 @@ private:
     void writeCaptureManifest(std::uint64_t renderedFrames) const;
     void createTimestampQueryPools();
     void collectGpuTiming(std::size_t frameIndex);
+    void appendFrameTimingCsv(
+        double shadowMs,
+        double sceneMs,
+        double postProcessMs,
+        double frameMs) const;
     void printGpuTimingSummary() const;
+    [[nodiscard]] std::string renderPathName() const;
     void cleanup();
 
     void createInstance();

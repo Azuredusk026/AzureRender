@@ -443,6 +443,38 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
         gpuTiming_.frameMaxMs =
             std::max(gpuTiming_.frameMaxMs, frameMs);
     }
+    appendFrameTimingCsv(shadowMs, sceneMs, postProcessMs, frameMs);
+}
+
+void AzureRenderApp::appendFrameTimingCsv(
+    const double shadowMs,
+    const double sceneMs,
+    const double postProcessMs,
+    const double frameMs) const {
+    if (runOptions_.gpuTimingOutput.empty()) {
+        return;
+    }
+    std::filesystem::path outputPath = runOptions_.gpuTimingOutput;
+    outputPath.replace_extension(".csv");
+    const bool firstFrame = gpuTiming_.samples == 1;
+    std::ofstream output(
+        outputPath,
+        std::ios::binary | (firstFrame ? std::ios::trunc : std::ios::app));
+    if (!output) {
+        return;
+    }
+    if (firstFrame) {
+        output
+            << "frame,renderPath,shadowMs,sceneMs,postProcessMs,frameMs\n";
+    }
+    output
+        << std::fixed << std::setprecision(6)
+        << gpuTiming_.samples << ','
+        << renderPathName() << ','
+        << shadowMs << ','
+        << sceneMs << ','
+        << postProcessMs << ','
+        << frameMs << '\n';
 }
 
 void AzureRenderApp::printGpuTimingSummary() const {
@@ -506,7 +538,9 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"internalOutlineAverageMs\": " << postAverage << ",\n"
         << "  \"totalAverageMs\": " << frameAverage << ",\n"
         << "  \"totalMinMs\": " << gpuTiming_.frameMinMs << ",\n"
-        << "  \"totalMaxMs\": " << gpuTiming_.frameMaxMs << "\n"
+        << "  \"totalMaxMs\": " << gpuTiming_.frameMaxMs << ",\n"
+        << "  \"renderPath\": " << std::quoted(
+               renderPathName()) << "\n"
         << "}\n";
     if (!output) {
         throw std::runtime_error(
@@ -515,6 +549,17 @@ void AzureRenderApp::printGpuTimingSummary() const {
     }
     azurerender::RuntimeDiagnostics::instance().print(
         "gpu", "GPU timing report: " + outputPath.string());
+}
+
+std::string AzureRenderApp::renderPathName() const {
+    switch (renderSettings_.renderPath) {
+    case azurerender::RenderSettings::RenderPath::Subpasses:
+        return "subpasses";
+    case azurerender::RenderSettings::RenderPath::DynamicRendering:
+        return "dynamic";
+    default:
+        return "traditional";
+    }
 }
 
 void AzureRenderApp::saveScreenshot(

@@ -31,6 +31,7 @@ struct AzureRenderOptions {
     std::string qaEffect;
     std::string qaEffectState;
     std::string qaIsolation;
+    std::string renderPathName;
     bool editorMode = false;
     std::string editorScenePath;
     std::shared_ptr<azurerender::EditorSession> editorSession;
