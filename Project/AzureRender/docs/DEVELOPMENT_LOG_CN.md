@@ -3043,3 +3043,12 @@ appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,�
   比纯契约描述让新场景开发者入门更快;BlackholeSceneRenderer 是"非几何"模板
   (无顶点缓冲、无场景状态),CharacterSceneRenderer 是"几何+资产"模板,
   两个覆盖了主要场景形态。
+
+- **AR-10.2 多场景收口**:新增 docs/SCENE_RENDERER_COOKBOOK_CN.md(场景渲染器协议
+  完整契约 + 新增 Mandelbulb 等示例的 5 步流程 + 契约应当/不应当 + shader 与
+  colorBlend attachment 注意事项 + 测试方法);全量回归(角色/黑洞/编辑器
+  120+120+60 帧 0 VUID;BH capture manifest 含 blackhole 区块;12/12 CTest)
+经验:Cookbook 写作比接口文档更适合推广——给出"5 步走"和具体代码骨架,
+  比纯契约描述让新场景开发者入门更快;BlackholeSceneRenderer 是"非几何"模板
+  (无顶点缓冲、无场景状态),CharacterSceneRenderer 是"几何+资产"模板,
+  两个覆盖了主要场景形态。
