@@ -55,7 +55,8 @@ Project/AzureRender/
 │   │   ├── RenderContext.hpp           # 引擎→渲染器只读上下文与帧数据
 │   │   └── VulkanHelpers.{hpp,cpp}     # 共享 Vulkan 基础操作(AR-10.1)
 │   ├── scenes/                 # 可插拔场景渲染器实现(AR-10.1)
-│   │   └── CharacterSceneRenderer.{hpp,cpp}  # 角色管线(首个 ISceneRenderer)
+│   │   ├── CharacterSceneRenderer.{hpp,cpp}  # 角色管线(首个 ISceneRenderer)
+│   │   └── BlackholeSceneRenderer.{hpp,cpp}  # 黑洞测地线追踪(BH-1)
 │   └── resources/              # 资源定位(AR-4.2)
 │       └── ResourceLocator.{hpp,cpp}
 │
@@ -64,7 +65,8 @@ Project/AzureRender/
 │   ├── background.{vert,frag}  # 背景(环境)
 │   ├── shadow.vert + shadow.frag       # 阴影 pass
 │   ├── outline.{vert,frag} + inner_outline.{vert,frag}  # 描边
-│   └── hud.{vert,frag}         # HUD/文本
+│   ├── hud.{vert,frag}         # HUD/文本
+│   └── blackhole.{vert,frag}   # 黑洞测地线追踪(BH-1)
 │
 ├── tests/                      # 9 个独立测试程序(11 个 CTest)
 │   ├── CommandLineTests.cpp           # CLI 契约(AR-5.1)

@@ -100,6 +100,8 @@ compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/hud.vert")
 compile_shader("${SHADER_SOURCE_DIR}/hud.frag")
+compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
+compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 
 add_executable(
@@ -152,6 +154,8 @@ add_executable(
     src/render/VulkanHelpers.hpp
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/CharacterSceneRenderer.hpp
+    src/scenes/BlackholeSceneRenderer.cpp
+    src/scenes/BlackholeSceneRenderer.hpp
 )
 
 add_dependencies(AzureRender AzureRenderShaders)

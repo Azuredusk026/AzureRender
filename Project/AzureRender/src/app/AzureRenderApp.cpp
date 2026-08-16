@@ -7,6 +7,7 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "render/RenderContext.hpp"
+#include "scenes/BlackholeSceneRenderer.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "AzureRenderInternal.hpp"
 
@@ -272,7 +273,17 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 void AzureRenderApp::createSceneRenderer() {
     azurerender::RenderContext context;
     buildRenderContext(context);
-    sceneRenderer_ = std::make_unique<azurerender::CharacterSceneRenderer>();
+    switch (renderSettings_.sceneType) {
+    case azurerender::SceneType::Blackhole:
+        sceneRenderer_ =
+            std::make_unique<azurerender::BlackholeSceneRenderer>();
+        break;
+    case azurerender::SceneType::Character:
+    default:
+        sceneRenderer_ =
+            std::make_unique<azurerender::CharacterSceneRenderer>();
+        break;
+    }
     sceneRenderer_->onLoad(context);
     azurerender::RuntimeDiagnostics::instance().print(
         "render",
@@ -848,6 +859,9 @@ void AzureRenderApp::createLogicalDevice() {
     }
 
     VkPhysicalDeviceFeatures deviceFeatures{};
+    // Required so scene renderers (e.g. the blackhole tracer) can use a
+    // zero-write World Normal attachment next to a written Scene Color.
+    deviceFeatures.independentBlend = VK_TRUE;
     VkDeviceCreateInfo createInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());
     createInfo.pQueueCreateInfos = queueCreateInfos.data();

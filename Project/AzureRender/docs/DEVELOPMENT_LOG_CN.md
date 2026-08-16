@@ -2994,3 +2994,18 @@ shadow 0.05ms/main 0.15ms/outline 0.06ms/total 0.26ms;Release 构建同基线
 经验:迁移以"shadow 资源留引擎公共设施"大幅降低风险(post-process 诊断视图需要采样
 shadow map);角色 renderer 自包含 GPU 资源,pick/gizmo/HUD 通过 sceneState/
 appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,前向声明必须对齐。
+
+- **BH-1 黑洞基础追踪**:新增 shaders/blackhole.{vert,frag}(全屏三角形 +
+  RK4 积分施瓦西零测地线 a=-(3/2)(rs/r²)(1-rs/r)(n·v)²n,终止三分支:视界/
+  逃逸/最大步数;程序生成星空与银河淡带);
+  新增 src/scenes/BlackholeSceneRenderer.{hpp,cpp}(per-frame UBO、描述符集、
+  pipeline、empty shadow pass 满足布局依赖);
+  引擎启用 independentBlend 设备特性(允许 color blend attachment 0/1 独立);
+  createSceneRenderer 按 sceneType 分发到 BlackholeSceneRenderer
+- 验证:--scene-type blackhole 120 帧 Validation 0 VUID;capture 1 帧 +
+  manifest 正常;1080p 图像清晰显示引力透镜弯曲星空与视界遮挡(光子环雏形);
+  --scene-type character 30 帧回归 0 VUID;CTest 12/12
+- 修复:pColorBlendState->attachmentCount 需 2(scene render pass 有
+  Scene Color + World Normal 两个 color attachment,黑洞只写第一个);
+  empty shadow pass 让 shadow map 布局就绪供 post-process 诊断采样;
+  引擎设备特性启用 independentBlend 以允许两个 attachment 的 blend state 不同
