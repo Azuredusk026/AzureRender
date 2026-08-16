@@ -529,6 +529,52 @@ void copySkinAttributes(
     }
 }
 
+void copyMorphTargets(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    std::vector<AssetVertex>& vertices,
+    std::uint32_t& morphCount) {
+    morphCount = 0;
+    if (primitive.targets.empty()) {
+        return;
+    }
+    const std::size_t targetCount =
+        std::min<std::size_t>(primitive.targets.size(), 2);
+    for (std::size_t targetIndex = 0; targetIndex < targetCount;
+         ++targetIndex) {
+        const auto& target = primitive.targets[targetIndex];
+        const auto positionIt = target.find("POSITION");
+        if (positionIt == target.end()) {
+            continue;
+        }
+        const auto& accessor =
+            model.accessors.at(static_cast<std::size_t>(positionIt->second));
+        if (accessor.type != TINYGLTF_TYPE_VEC3
+            || accessor.count != vertices.size()) {
+            continue;
+        }
+        const unsigned char* source = accessorData(model, accessor);
+        const std::size_t stride = accessorStride(model, accessor);
+        constexpr std::size_t kComponents = 3;
+        for (std::size_t vertexIndex = 0;
+             vertexIndex < vertices.size();
+             ++vertexIndex) {
+            const float* delta3 = reinterpret_cast<const float*>(
+                source + vertexIndex * stride);
+            for (std::size_t component = 0; component < kComponents;
+                 ++component) {
+                const float delta = delta3[component];
+                if (targetIndex == 0) {
+                    vertices[vertexIndex].morph0[component] = delta;
+                } else {
+                    vertices[vertexIndex].morph1[component] = delta;
+                }
+            }
+        }
+        ++morphCount;
+    }
+}
+
 void generateTangents(
     std::vector<AssetVertex>& vertices,
     const std::vector<std::uint32_t>& indices) {
@@ -1418,6 +1464,11 @@ void appendPrimitive(
     copyFloatAttribute(model, primitive, "TANGENT", 4, vertices);
     copyFloatAttribute(model, primitive, "TEXCOORD_0", 2, vertices);
     copySkinAttributes(model, primitive, vertices);
+    std::uint32_t morphCount = 0;
+    copyMorphTargets(model, primitive, vertices, morphCount);
+    if (morphCount > asset.morphTargetCount) {
+        asset.morphTargetCount = morphCount;
+    }
     std::vector<std::uint32_t> indices = readIndices(model, primitive, vertices.size());
     if (primitive.attributes.find("TANGENT") == primitive.attributes.end()) {
         generateTangents(vertices, indices);

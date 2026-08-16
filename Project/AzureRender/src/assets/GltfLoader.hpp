@@ -13,6 +13,8 @@ struct AssetVertex {
     std::array<float, 2> texcoord{};
     std::array<std::uint32_t, 4> joints{};
     std::array<float, 4> weights{1.0F, 0.0F, 0.0F, 0.0F};
+    std::array<float, 3> morph0{};
+    std::array<float, 3> morph1{};
 };
 
 enum class AssetAlphaMode : std::uint32_t {
@@ -171,6 +173,7 @@ struct LoadedAsset {
     std::vector<AssetAnimation> animations;
     std::vector<std::array<float, 16>> nodeWorldMatrices;
     bool hasSkin = false;
+    std::uint32_t morphTargetCount = 0;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);

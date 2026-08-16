@@ -331,7 +331,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         bindingDescription.binding = 0;
         bindingDescription.stride = sizeof(AssetVertex);
         bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-        std::array<VkVertexInputAttributeDescription, 6> attributeDescriptions{};
+        std::array<VkVertexInputAttributeDescription, 8> attributeDescriptions{};
         attributeDescriptions[0] = {
             0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, position)};
         attributeDescriptions[1] = {
@@ -344,6 +344,10 @@ void AzureRenderApp::createGraphicsPipeline() {
             4, 0, VK_FORMAT_R32G32B32A32_UINT, offsetof(AssetVertex, joints)};
         attributeDescriptions[5] = {
             5, 0, VK_FORMAT_R32G32B32A32_SFLOAT, offsetof(AssetVertex, weights)};
+        attributeDescriptions[6] = {
+            6, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph0)};
+        attributeDescriptions[7] = {
+            7, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph1)};
         const std::array shadowAttributeDescriptions = {
             attributeDescriptions[0],
             attributeDescriptions[3],
@@ -418,8 +422,13 @@ void AzureRenderApp::createGraphicsPipeline() {
         VkPushConstantRange materialPushRange{};
         materialPushRange.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
         materialPushRange.size = sizeof(MaterialPushConstants);
-        layoutInfo.pushConstantRangeCount = 1;
-        layoutInfo.pPushConstantRanges = &materialPushRange;
+        VkPushConstantRange morphPushRange{};
+        morphPushRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        morphPushRange.size = sizeof(MorphPushConstants);
+        const VkPushConstantRange pushConstantRanges[] = {
+            materialPushRange, morphPushRange};
+        layoutInfo.pushConstantRangeCount = 2;
+        layoutInfo.pPushConstantRanges = pushConstantRanges;
         vkCheck(
             vkCreatePipelineLayout(device_, &layoutInfo, nullptr, &pipelineLayout_),
             "vkCreatePipelineLayout");

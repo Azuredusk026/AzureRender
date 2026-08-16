@@ -54,6 +54,7 @@ struct RenderSettings {
     bool innerOutlineEnabled = true;
     bool silhouetteOutlineEnabled = true;
     std::uint32_t diagnosticView = 0;
+    std::array<float, 2> morphWeights{{0.0F, 0.0F}};
     FaceSdfSettings faceSdf;
     BloomSettings bloom;
     OutlineSettings outline;

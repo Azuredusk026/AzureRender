@@ -815,6 +815,16 @@ void AzureRenderApp::recordCommandBuffer(
             0,
             sizeof(materialConstants),
             &materialConstants);
+        const MorphPushConstants morphConstants{
+            renderSettings_.morphWeights,
+        };
+        vkCmdPushConstants(
+            commandBuffer,
+            pipelineLayout_,
+            VK_SHADER_STAGE_VERTEX_BIT,
+            sizeof(MaterialPushConstants),
+            sizeof(morphConstants),
+            &morphConstants);
         vkCmdDrawIndexed(
             commandBuffer,
             primitive.indexCount,
@@ -954,6 +964,16 @@ void AzureRenderApp::recordCommandBuffer(
             0,
             sizeof(materialConstants),
             &materialConstants);
+        const MorphPushConstants morphConstants{
+            renderSettings_.morphWeights,
+        };
+        vkCmdPushConstants(
+            commandBuffer,
+            pipelineLayout_,
+            VK_SHADER_STAGE_VERTEX_BIT,
+            sizeof(MaterialPushConstants),
+            sizeof(morphConstants),
+            &morphConstants);
         vkCmdDrawIndexed(
             commandBuffer,
             primitive.indexCount,

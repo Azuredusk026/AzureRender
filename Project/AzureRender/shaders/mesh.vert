@@ -23,11 +23,18 @@ layout(location = 2) in vec4 tangent;
 layout(location = 3) in vec2 texcoord;
 layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
+layout(location = 6) in vec3 morph0;
+layout(location = 7) in vec3 morph1;
 layout(location = 0) out vec3 worldNormal;
 layout(location = 1) out vec4 worldTangent;
 layout(location = 2) out vec2 textureCoordinate;
 layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPosition;
+
+// Morph target blend weights (driven by push constant from RenderSettings).
+layout(push_constant) uniform MorphWeights {
+    vec2 weights;
+} morphWeights;
 
 void main() {
     mat4 skinMatrix =
@@ -35,7 +42,9 @@ void main() {
         + jointWeights.y * jointData.matrices[jointIndices.y]
         + jointWeights.z * jointData.matrices[jointIndices.z]
         + jointWeights.w * jointData.matrices[jointIndices.w];
-    vec4 skinnedPosition = skinMatrix * vec4(position, 1.0);
+    vec3 morphedPosition = position + morph0 * morphWeights.weights.x
+        + morph1 * morphWeights.weights.y;
+    vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
     gl_Position = camera.modelViewProjection * skinnedPosition;

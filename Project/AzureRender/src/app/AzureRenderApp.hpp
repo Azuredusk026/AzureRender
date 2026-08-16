@@ -236,6 +236,9 @@ private:
     std::vector<VkBuffer> jointBuffers_;
     std::vector<VkDeviceMemory> jointBufferMemories_;
     std::vector<void*> jointBufferMapped_;
+    struct MorphPushConstants {
+        std::array<float, 2> weights{{0.0F, 0.0F}};
+    };
     std::vector<VkBuffer> hudVertexBuffers_;
     std::vector<VkDeviceMemory> hudVertexBufferMemories_;
     std::vector<void*> hudVertexBufferMapped_;
