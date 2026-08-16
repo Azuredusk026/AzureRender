@@ -15,6 +15,7 @@ namespace {
 constexpr const char* kUsage =
     "Usage: AzureRender.exe [--asset <gltf/glb path>] [--version] "
     "[--check-resources] [--resource-root <directory>] "
+    "[--environment <hdr/png/jpg path>] "
     "[--scene <azscene path>] [--create-scene <azscene path>] "
     "[--editor <azscene path>] [--smoke-frames <positive integer>] "
     "[--portfolio] [--width <pixels>] [--height <pixels>] "
@@ -220,6 +221,9 @@ ParsedCommandLine parseCommandLine(
             parsed.checkResources = true;
         } else if (argument == "--asset") {
             parsed.options.assetPath = requireValue(arguments, index, argument);
+        } else if (argument == "--environment") {
+            parsed.options.environmentPath =
+                requireValue(arguments, index, argument);
         } else if (argument == "--resource-root") {
             parsed.options.resourceRoot =
                 requireValue(arguments, index, argument);

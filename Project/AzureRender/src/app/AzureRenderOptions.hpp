@@ -13,6 +13,7 @@ class EditorSession;
 struct AzureRenderOptions {
     std::string assetPath;
     std::string resourceRoot;
+    std::string environmentPath;
     std::uint64_t smokeFrameLimit = 0;
     std::string captureDirectory;
     std::uint64_t captureFrameLimit = 0;

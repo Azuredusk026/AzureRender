@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 
 #include <algorithm>
 #include <array>
@@ -11,6 +12,10 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+// stb_image declarations only; the implementation is emitted by
+// GltfLoader.cpp (STB_IMAGE_IMPLEMENTATION), symbols link at program level.
+#include <stb_image.h>
 
 using namespace azurerender::internal;
 
@@ -38,6 +43,54 @@ std::uint16_t floatToHalf(const float value) {
     return static_cast<std::uint16_t>(
         sign | (static_cast<std::uint32_t>(exponent) << 10)
             | (mantissa >> 13));
+}
+
+// Decodes an equirectangular environment asset into RGBA float16 pixels.
+// .hdr files use stb_image float decoding (RGBE); LDR images are decoded as
+// 8-bit and normalized into the same HDR pipeline.
+std::vector<std::uint16_t> loadEnvironmentAsset(
+    const std::string& path,
+    std::uint32_t& outWidth,
+    std::uint32_t& outHeight) {
+    int width = 0;
+    int height = 0;
+    int channels = 0;
+    std::vector<std::uint16_t> halfPixels;
+    if (path.size() > 4
+        && (path.compare(path.size() - 4, 4, ".hdr") == 0
+            || path.compare(path.size() - 4, 4, ".HDR") == 0)) {
+        float* data = stbi_loadf(path.c_str(), &width, &height, &channels, 4);
+        if (data == nullptr) {
+            throw std::runtime_error(
+                "Failed to decode HDR environment: " + path);
+        }
+        halfPixels.resize(
+            static_cast<std::size_t>(width) * static_cast<std::size_t>(height) * 4);
+        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
+        for (std::size_t index = 0; index < count; ++index) {
+            halfPixels[index] = floatToHalf(std::clamp(data[index], 0.0F, 64.0F));
+        }
+        stbi_image_free(data);
+    } else {
+        unsigned char* data =
+            stbi_load(path.c_str(), &width, &height, &channels, 4);
+        if (data == nullptr) {
+            throw std::runtime_error(
+                "Failed to decode environment image: " + path);
+        }
+        halfPixels.resize(
+            static_cast<std::size_t>(width) * static_cast<std::size_t>(height) * 4);
+        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
+        for (std::size_t index = 0; index < count; ++index) {
+            // LDR 0..255 -> HDR 0..~1; keep some headroom for emissive parts.
+            halfPixels[index] = floatToHalf(
+                static_cast<float>(data[index]) * (1.0F / 255.0F));
+        }
+        stbi_image_free(data);
+    }
+    outWidth = static_cast<std::uint32_t>(width);
+    outHeight = static_cast<std::uint32_t>(height);
+    return halfPixels;
 }
 
 }  // namespace
@@ -502,63 +555,83 @@ void AzureRenderApp::createTexture() {
     constexpr std::uint32_t kEnvironmentMipLevels = 7;
     constexpr float kPi = 3.14159265358979323846F;
     // HDR environment: one float16 RGBA per pixel (values may exceed 1.0).
-    std::vector<std::uint16_t> environmentPixels(
-        static_cast<std::size_t>(kEnvironmentWidth)
-        * kEnvironmentHeight
-        * 4);
-    const Vector3 sunDirection = {0.45F, 0.85F, 0.35F};
-    const float sunLength = std::sqrt(dot(sunDirection, sunDirection));
-    const Vector3 normalizedSun = {
-        sunDirection[0] / sunLength,
-        sunDirection[1] / sunLength,
-        sunDirection[2] / sunLength,
-    };
-    for (std::uint32_t y = 0; y < kEnvironmentHeight; ++y) {
-        const float v =
-            (static_cast<float>(y) + 0.5F)
-            / static_cast<float>(kEnvironmentHeight);
-        const float theta = v * kPi;
-        const float directionY = std::cos(theta);
-        const float ringRadius = std::sin(theta);
-        for (std::uint32_t x = 0; x < kEnvironmentWidth; ++x) {
-            const float u =
-                (static_cast<float>(x) + 0.5F)
-                / static_cast<float>(kEnvironmentWidth);
-            const float phi = (u - 0.5F) * 2.0F * kPi;
-            const Vector3 direction = {
-                ringRadius * std::cos(phi),
-                directionY,
-                ringRadius * std::sin(phi),
-            };
-            const float skyAmount = std::clamp(directionY * 0.5F + 0.5F, 0.0F, 1.0F);
-            const float horizon = std::exp(-std::abs(directionY) * 9.0F);
-            const float sun = std::pow(
-                std::max(dot(direction, normalizedSun), 0.0F),
-                320.0F);
-            // HDR sky values: bright sun disc well above 1.0, cool ambient.
-            const std::array<float, 3> ground = {0.055F, 0.075F, 0.090F};
-            const std::array<float, 3> zenith = {0.20F, 0.34F, 0.46F};
-            const std::array<float, 3> horizonColor = {0.38F, 0.43F, 0.46F};
-            const float sunIntensity = 24.0F * sun;
-            const std::size_t pixel =
-                (static_cast<std::size_t>(y) * kEnvironmentWidth + x) * 4;
-            for (std::size_t channel = 0; channel < 3; ++channel) {
-                float color =
-                    ground[channel] * (1.0F - skyAmount)
-                    + zenith[channel] * skyAmount;
-                color = color * (1.0F - horizon * 0.55F)
-                    + horizonColor[channel] * horizon * 0.55F;
-                color += sunIntensity * (channel == 2 ? 0.70F : 1.0F);
-                environmentPixels[pixel + channel] =
-                    floatToHalf(std::clamp(color, 0.0F, 32.0F));
+    std::vector<std::uint16_t> environmentPixels;
+    std::uint32_t environmentWidth = kEnvironmentWidth;
+    std::uint32_t environmentHeight = kEnvironmentHeight;
+    if (!runOptions_.environmentPath.empty()) {
+        // Import a real equirectangular environment asset (.hdr uses stb_image
+        // float decoding; .png/.jpg are decoded as LDR and scaled to HDR).
+        environmentPixels = loadEnvironmentAsset(
+            runOptions_.environmentPath,
+            environmentWidth,
+            environmentHeight);
+        azurerender::RuntimeDiagnostics::instance().print(
+            "asset",
+            "Environment: " + runOptions_.environmentPath + " ("
+                + std::to_string(environmentWidth) + "x"
+                + std::to_string(environmentHeight) + ")");
+    } else {
+        environmentPixels.resize(
+            static_cast<std::size_t>(kEnvironmentWidth)
+            * kEnvironmentHeight
+            * 4);
+        environmentWidth = kEnvironmentWidth;
+        environmentHeight = kEnvironmentHeight;
+        const Vector3 sunDirection = {0.45F, 0.85F, 0.35F};
+        const float sunLength = std::sqrt(dot(sunDirection, sunDirection));
+        const Vector3 normalizedSun = {
+            sunDirection[0] / sunLength,
+            sunDirection[1] / sunLength,
+            sunDirection[2] / sunLength,
+        };
+        for (std::uint32_t y = 0; y < kEnvironmentHeight; ++y) {
+            const float v =
+                (static_cast<float>(y) + 0.5F)
+                / static_cast<float>(kEnvironmentHeight);
+            const float theta = v * kPi;
+            const float directionY = std::cos(theta);
+            const float ringRadius = std::sin(theta);
+            for (std::uint32_t x = 0; x < kEnvironmentWidth; ++x) {
+                const float u =
+                    (static_cast<float>(x) + 0.5F)
+                    / static_cast<float>(kEnvironmentWidth);
+                const float phi = (u - 0.5F) * 2.0F * kPi;
+                const Vector3 direction = {
+                    ringRadius * std::cos(phi),
+                    directionY,
+                    ringRadius * std::sin(phi),
+                };
+                const float skyAmount =
+                    std::clamp(directionY * 0.5F + 0.5F, 0.0F, 1.0F);
+                const float horizon = std::exp(-std::abs(directionY) * 9.0F);
+                const float sun = std::pow(
+                    std::max(dot(direction, normalizedSun), 0.0F),
+                    320.0F);
+                // HDR sky values: bright sun disc well above 1.0, cool ambient.
+                const std::array<float, 3> ground = {0.055F, 0.075F, 0.090F};
+                const std::array<float, 3> zenith = {0.20F, 0.34F, 0.46F};
+                const std::array<float, 3> horizonColor = {0.38F, 0.43F, 0.46F};
+                const float sunIntensity = 24.0F * sun;
+                const std::size_t pixel =
+                    (static_cast<std::size_t>(y) * kEnvironmentWidth + x) * 4;
+                for (std::size_t channel = 0; channel < 3; ++channel) {
+                    float color =
+                        ground[channel] * (1.0F - skyAmount)
+                        + zenith[channel] * skyAmount;
+                    color = color * (1.0F - horizon * 0.55F)
+                        + horizonColor[channel] * horizon * 0.55F;
+                    color += sunIntensity * (channel == 2 ? 0.70F : 1.0F);
+                    environmentPixels[pixel + channel] =
+                        floatToHalf(std::clamp(color, 0.0F, 32.0F));
+                }
+                environmentPixels[pixel + 3] = floatToHalf(1.0F);
             }
-            environmentPixels[pixel + 3] = floatToHalf(1.0F);
         }
     }
     uploadTexture(
         environmentPixels,
-        kEnvironmentWidth,
-        kEnvironmentHeight,
+        environmentWidth,
+        environmentHeight,
         VK_FORMAT_R16G16B16A16_SFLOAT,
         true,
         environmentTexture_,
