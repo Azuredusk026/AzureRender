@@ -2,6 +2,7 @@
 
 #include "render/RenderContext.hpp"
 
+#include <ostream>
 #include <sstream>
 #include <string>
 #include <string_view>
@@ -48,6 +49,34 @@ public:
     // Optional hook: appends scene-specific lines to the engine HUD panel.
     virtual void appendHudText(std::ostringstream& text) const {
         (void)text;
+    }
+
+    // Optional hook: standardized scene state for editor picking/gizmos.
+    [[nodiscard]] virtual const RendererSceneState* sceneState()
+        const noexcept {
+        return nullptr;
+    }
+
+    // Optional hook: forwards host-level animation keys (F4/F11/7/8/9) to the
+    // renderer when it owns animation state.
+    virtual void onAnimationKey(const int key, const int action) {
+        (void)key;
+        (void)action;
+    }
+
+    // Optional hook: restarts scene playback (used by the portfolio orbit).
+    virtual void restartPlayback() {}
+
+    // Optional hook: forces playback paused/playing (used by the QA harness).
+    virtual void setPlaybackPlaying(const bool playing) {
+        (void)playing;
+    }
+
+    // Optional hook: appends scene-specific JSON fields (e.g. animation
+    // index/name) to the capture manifest. Called while the manifest stream
+    // is open; the renderer writes complete `"key": value,` lines.
+    virtual void appendCaptureManifestFields(std::ostream& json) const {
+        (void)json;
     }
 
     // Optional hook: maps a renderer-local diagnostic index to a display name.

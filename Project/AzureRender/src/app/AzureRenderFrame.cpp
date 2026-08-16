@@ -5,7 +5,9 @@
 #include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
+#include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
+#include "render/RenderContext.hpp"
 
 #include <stb_easy_font.h>
 
@@ -99,7 +101,11 @@ void AzureRenderApp::drawFrame() {
             editorViewportResizeRequested_ = true;
         }
     }
-    updateUniformBuffer(currentFrame_);
+    azurerender::SceneFrameData frameData;
+    buildSceneFrameData(frameData);
+    if (sceneRenderer_ != nullptr) {
+        sceneRenderer_->updateFrame(frameData);
+    }
     updateGizmoScreenData();
     if (pendingPickRequested_) {
         pendingPickRequested_ = false;
@@ -201,155 +207,6 @@ void AzureRenderApp::drawFrame() {
     currentFrame_ = (currentFrame_ + 1) % kMaxFramesInFlight;
 }
 
-void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
-    const double currentTime = frontend_->timeSeconds();
-    const float deltaSeconds = fixedSimulation_
-        ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
-        : static_cast<float>(
-              std::max(currentTime - lastRotationTime_, 0.0));
-    fixedSimulationStarted_ = true;
-    lastRotationTime_ = currentTime;
-    if (autoRotate_) {
-        rotationAngle_ += deltaSeconds * rotationSpeed_;
-    }
-    if (!asset_.animations.empty()) {
-        if (animationPlaying_) {
-            animationTime_ += deltaSeconds;
-        }
-        sampleAnimation(
-            asset_,
-            animationIndex_,
-            animationTime_,
-            asset_.jointMatrices);
-        const std::size_t jointBytes =
-            sizeof(asset_.jointMatrices.front())
-            * asset_.jointMatrices.size();
-        std::memcpy(
-            jointBufferMapped_[frameIndex],
-            asset_.jointMatrices.data(),
-            jointBytes);
-    }
-
-    const Vector3 center = {
-        (asset_.boundsMin[0] + asset_.boundsMax[0]) * 0.5F,
-        (asset_.boundsMin[1] + asset_.boundsMax[1]) * 0.5F,
-        (asset_.boundsMin[2] + asset_.boundsMax[2]) * 0.5F,
-    };
-    const float largestExtent = std::max({
-        asset_.boundsMax[0] - asset_.boundsMin[0],
-        asset_.boundsMax[1] - asset_.boundsMin[1],
-        asset_.boundsMax[2] - asset_.boundsMin[2],
-    });
-    const float fitScale = largestExtent > 0.0F ? 2.5F / largestExtent : 1.0F;
-    const Matrix4 model = multiply(
-        rotationY(rotationAngle_),
-        multiply(
-            uniformScale(fitScale),
-            translation(-center[0], -center[1], -center[2])));
-    currentModel_ = model;
-    const Matrix4 view = lookAt(
-        cameraPosition_,
-        cameraTarget_,
-        {0.0F, 1.0F, 0.0F});
-    const float aspect =
-        static_cast<float>(renderExtent_.width)
-        / static_cast<float>(renderExtent_.height);
-    constexpr float kPi = 3.14159265358979323846F;
-    const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
-    const Vector3 lightDirection = normalize({0.48F, 0.82F, 0.32F});
-    const Vector3 lightTarget = {0.0F, -0.10F, 0.0F};
-    const Vector3 lightPosition = {
-        lightTarget[0] + lightDirection[0] * 4.5F,
-        lightTarget[1] + lightDirection[1] * 4.5F,
-        lightTarget[2] + lightDirection[2] * 4.5F,
-    };
-    const Matrix4 lightView = lookAt(
-        lightPosition,
-        lightTarget,
-        {0.0F, 1.0F, 0.0F});
-    const Matrix4 lightProjection = orthographic(
-        -1.90F,
-        1.90F,
-        -1.90F,
-        1.90F,
-        0.10F,
-        8.0F);
-
-    UniformBufferObject uniform{};
-    uniform.model = model;
-    uniform.modelViewProjection = multiply(projection, multiply(view, model));
-    uniform.lightModelViewProjection =
-        multiply(lightProjection, multiply(lightView, model));
-    uniform.cameraPosition = {
-        cameraPosition_[0],
-        cameraPosition_[1],
-        cameraPosition_[2],
-        1.0F,
-    };
-    uniform.renderingParameters = {
-        largestExtent * 0.004F,
-        renderSettings_.stylizedLightingEnabled
-            ? renderSettings_.styleMaskStrength
-            : 0.0F,
-        renderSettings_.stylizedLightingEnabled
-            ? renderSettings_.diffuseBandThreshold
-            : -1.0F,
-        0.12F,
-    };
-    constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
-        {0.0F, 1.00F, 0.13F, 0.12F},
-        {1.0F, 0.92F, 0.16F, 0.16F},
-        {2.0F, 0.95F, 0.08F, 0.05F},
-        {3.0F, 0.48F, 0.04F, 0.85F},
-        {4.0F, 0.18F, 0.02F, 0.08F},
-    }};
-    uniform.showcaseParameters =
-        kShowcasePresets[std::min<std::size_t>(
-            renderSettings_.showcasePreset,
-            kShowcasePresets.size() - 1)];
-    uniform.qaParameters = {
-        static_cast<float>(qaIsolationMode_),
-        static_cast<float>(qaEffectMode_),
-        qaEffectEnabled_ ? 1.0F : 0.0F,
-        qaHarnessEnabled_ ? 1.0F : 0.0F,
-    };
-    Vector3 faceLight = {0.0F, 0.0F, -1.0F};
-    bool hasFaceSdf = false;
-    if (faceSdfHeadNode_.has_value()
-        && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
-        const float cosine = std::cos(rotationAngle_);
-        const float sine = std::sin(rotationAngle_);
-        const Vector3 objectLight = normalize({
-            cosine * lightDirection[0] - sine * lightDirection[2],
-            lightDirection[1],
-            sine * lightDirection[0] + cosine * lightDirection[2],
-        });
-        const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
-        const Vector3 headX = normalize({head[0], head[1], head[2]});
-        const Vector3 headY = normalize({head[4], head[5], head[6]});
-        const Vector3 headZ = normalize({head[8], head[9], head[10]});
-        faceLight = normalize({
-            dot(objectLight, headX),
-            dot(objectLight, headY),
-            dot(objectLight, headZ),
-        });
-        hasFaceSdf = true;
-    }
-    uniform.faceLightDirection = {
-        faceLight[0], faceLight[1], faceLight[2], hasFaceSdf ? 1.0F : 0.0F,
-    };
-    uniform.faceSdfParameters = {
-        renderSettings_.faceSdf.enabled ? 1.0F : 0.0F,
-        renderSettings_.faceSdf.threshold,
-        renderSettings_.faceSdf.softness,
-        renderSettings_.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,
-    };
-    uniform.faceSdfShadowColor = renderSettings_.faceSdf.shadowColor;
-    std::memcpy(
-        uniformBufferMapped_[frameIndex],
-        &uniform,
-        sizeof(uniform));
-}
 
 void AzureRenderApp::updateGizmoScreenData() {
     if (runOptions_.editorSession == nullptr) {
@@ -365,11 +222,20 @@ void AzureRenderApp::updateGizmoScreenData() {
         ecsRenderableLogged_ = true;
     }
     editorContext.setGizmoScreen({});
-    if (selectedPrimitiveIndex_ < 0
-        || static_cast<std::size_t>(selectedPrimitiveIndex_)
-            >= asset_.primitives.size()) {
+    const azurerender::RendererSceneState* sceneState =
+        sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
+    if (sceneState == nullptr || sceneState->asset == nullptr
+        || sceneState->modelMatrix == nullptr) {
         return;
     }
+    const LoadedAsset& asset = *sceneState->asset;
+    if (selectedPrimitiveIndex_ < 0
+        || static_cast<std::size_t>(selectedPrimitiveIndex_)
+            >= asset.primitives.size()) {
+        return;
+    }
+    Matrix4 currentModel{};
+    std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
     constexpr float kPi = 3.14159265358979323846F;
     const float aspect =
         static_cast<float>(renderExtent_.width)
@@ -382,8 +248,8 @@ void AzureRenderApp::updateGizmoScreenData() {
     const std::array<float, 3>& translation =
         editorContext.gizmoTranslation();
     const Vector3 primitiveCenter =
-        transformPosition(currentModel_,
-            asset_.primitives[selectedPrimitiveIndex_].center);
+        transformPosition(currentModel,
+            asset.primitives[selectedPrimitiveIndex_].center);
     const Vector3 gizmoCenter = {
         primitiveCenter[0] + translation[0],
         primitiveCenter[1] + translation[1],
@@ -453,9 +319,18 @@ void AzureRenderApp::pickPrimitive(
     const float viewportX,
     const float viewportY) {
     selectedPrimitiveIndex_ = -1;
-    if (asset_.indices.empty() || asset_.vertices.empty()) {
+    const azurerender::RendererSceneState* sceneState =
+        sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
+    if (sceneState == nullptr || sceneState->asset == nullptr
+        || sceneState->modelMatrix == nullptr) {
         return;
     }
+    const LoadedAsset& asset = *sceneState->asset;
+    if (asset.indices.empty() || asset.vertices.empty()) {
+        return;
+    }
+    Matrix4 currentModel{};
+    std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
     // 从相机构建拾取射线(与 updateUniformBuffer 相同的 fov/aspect)。
     const float aspect =
         static_cast<float>(renderExtent_.width)
@@ -468,23 +343,23 @@ void AzureRenderApp::pickPrimitive(
         aspect);
     float bestDistance = std::numeric_limits<float>::max();
     for (std::size_t primitiveIndex = 0;
-         primitiveIndex < asset_.primitives.size();
+         primitiveIndex < asset.primitives.size();
          ++primitiveIndex) {
-        const AssetPrimitive& primitive = asset_.primitives[primitiveIndex];
+        const AssetPrimitive& primitive = asset.primitives[primitiveIndex];
         for (std::uint32_t offset = 0; offset + 2 < primitive.indexCount;
              offset += 3) {
             const std::uint32_t i0 =
-                asset_.indices[primitive.firstIndex + offset];
+                asset.indices[primitive.firstIndex + offset];
             const std::uint32_t i1 =
-                asset_.indices[primitive.firstIndex + offset + 1];
+                asset.indices[primitive.firstIndex + offset + 1];
             const std::uint32_t i2 =
-                asset_.indices[primitive.firstIndex + offset + 2];
+                asset.indices[primitive.firstIndex + offset + 2];
             const Vector3 v0 = transformPosition(
-                currentModel_, asset_.vertices[i0].position);
+                currentModel, asset.vertices[i0].position);
             const Vector3 v1 = transformPosition(
-                currentModel_, asset_.vertices[i1].position);
+                currentModel, asset.vertices[i1].position);
             const Vector3 v2 = transformPosition(
-                currentModel_, asset_.vertices[i2].position);
+                currentModel, asset.vertices[i2].position);
             // Möller–Trumbore 求交(纯函数,可单测)。
             const float distance = rayTriangleDistance(
                 cameraPosition_, direction, v0, v1, v2);
@@ -502,7 +377,7 @@ void AzureRenderApp::pickPrimitive(
             "Pick: primitive "
                 + std::to_string(selectedPrimitiveIndex_)
                 + " / "
-                + std::to_string(asset_.primitives.size()));
+                + std::to_string(sceneState->primitiveCount));
     }
 }
 
@@ -733,40 +608,8 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
         "SHADOW MAP",
         "DEPTH",
     };
-    std::string animationName = "NONE";
-    float animationDuration = 0.0F;
-    float animationPlayhead = 0.0F;
-    if (!asset_.animations.empty()) {
-        const AssetAnimation& animation =
-            asset_.animations[animationIndex_];
-        animationName = printable(
-            animation.name.empty() ? "UNNAMED" : animation.name,
-            30);
-        animationDuration =
-            std::max(animation.endTime - animation.startTime, 0.0F);
-        if (animationDuration > 1.0e-8F) {
-            animationPlayhead = std::fmod(
-                std::max(animationTime_, 0.0F),
-                animationDuration);
-        }
-    }
 
     std::ostringstream text;
-    std::array<std::size_t, 10> materialClassCounts{};
-    const AssetMaterial* faceProfile = nullptr;
-    const AssetMaterial* hairProfile = nullptr;
-    for (const AssetMaterial& material : asset_.materials) {
-        const std::size_t classIndex = static_cast<std::size_t>(
-            material.materialClass);
-        if (classIndex < materialClassCounts.size()) {
-            ++materialClassCounts[classIndex];
-        }
-        if (material.materialClass == AssetMaterialClass::Face) {
-            faceProfile = &material;
-        } else if (material.materialClass == AssetMaterialClass::Hair) {
-            hairProfile = &material;
-        }
-    }
     text << "AZURERENDER VULKAN RENDERER\n"
          << "GPU  : " << printable(selectedGpuName_, 46) << '\n'
          << "FRAME: " << swapchainExtent_.width << 'X'
@@ -774,29 +617,13 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << "  VIEW: " << kDiagnosticNames[renderSettings_.diagnosticView]
          << "  STYLE: " << (renderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
          << "  OUTLINE: " << (renderSettings_.innerOutlineEnabled ? "ON" : "OFF")
-         << '\n'
-         << "ANIM : " << animationName << "  "
-         << std::fixed << std::setprecision(2)
-         << animationPlayhead << '/' << animationDuration << " S  "
-         << (animationPlaying_ ? "PLAYING" : "PAUSED") << '\n';
-    text << "MAT V1: SKIN " << materialClassCounts[1]
-         << " FACE " << materialClassCounts[2]
-         << " HAIR " << materialClassCounts[3]
-         << " FABRIC " << materialClassCounts[4]
-         << " METAL " << materialClassCounts[5]
-         << " EYE " << materialClassCounts[6]
-         << " OVERLAY " << materialClassCounts[7] << '\n'
-         << "TOON : RAMP V1 / 10 CLASSES  MASK "
+         << '\n';
+    if (sceneRenderer_ != nullptr) {
+        sceneRenderer_->appendHudText(text);
+    }
+    text << "TOON : RAMP V1 / 10 CLASSES  MASK "
          << std::fixed << std::setprecision(2) << renderSettings_.styleMaskStrength
          << "  LEGACY THRESHOLD " << renderSettings_.diffuseBandThreshold << '\n';
-    if (faceProfile != nullptr && hairProfile != nullptr) {
-        text << "MAT PARAM: FACE T" << faceProfile->styleParameters[0]
-             << " S" << faceProfile->styleParameters[2]
-             << " R" << faceProfile->styleParameters[3]
-             << " | HAIR T" << hairProfile->styleParameters[0]
-             << " S" << hairProfile->styleParameters[2]
-             << " R" << hairProfile->styleParameters[3] << '\n';
-    }
     if (runOptions_.editorMode) {
         const azurerender::EditorContext& editorContext =
             runOptions_.editorSession->context();
@@ -900,406 +727,20 @@ void AzureRenderApp::recordCommandBuffer(
             0);
     }
 
-    VkClearValue shadowClear{};
-    shadowClear.depthStencil = {1.0F, 0};
-    VkRenderPassBeginInfo shadowPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    shadowPassInfo.renderPass = shadowRenderPass_;
-    shadowPassInfo.framebuffer = shadowFramebuffer_;
-    shadowPassInfo.renderArea.extent = {
-        kShadowMapSize,
-        kShadowMapSize,
-    };
-    shadowPassInfo.clearValueCount = 1;
-    shadowPassInfo.pClearValues = &shadowClear;
-    vkCmdBeginRenderPass(
-        commandBuffer,
-        &shadowPassInfo,
-        VK_SUBPASS_CONTENTS_INLINE);
-
-    VkViewport shadowViewport{};
-    shadowViewport.width = static_cast<float>(kShadowMapSize);
-    shadowViewport.height = static_cast<float>(kShadowMapSize);
-    shadowViewport.maxDepth = 1.0F;
-    vkCmdSetViewport(commandBuffer, 0, 1, &shadowViewport);
-    VkRect2D shadowScissor{};
-    shadowScissor.extent = {kShadowMapSize, kShadowMapSize};
-    vkCmdSetScissor(commandBuffer, 0, 1, &shadowScissor);
-    const VkDeviceSize shadowOffsets[] = {0};
-    vkCmdBindVertexBuffers(
-        commandBuffer,
-        0,
-        1,
-        &vertexBuffer_,
-        shadowOffsets);
-    vkCmdBindIndexBuffer(
-        commandBuffer,
-        indexBuffer_,
-        0,
-        VK_INDEX_TYPE_UINT32);
-    vkCmdBindPipeline(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        shadowPipeline_);
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        const AssetMaterial& material =
-            asset_.materials[primitive.materialIndex];
-        if (material.showcasePlatform > 0.5F
-            || material.materialClass == AssetMaterialClass::Overlay) {
-            continue;
-        }
-        const std::size_t descriptorIndex =
-            currentFrame_ * asset_.materials.size()
-            + primitive.materialIndex;
-        vkCmdBindDescriptorSets(
-            commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[descriptorIndex],
-            0,
-            nullptr);
-        const MaterialPushConstants materialConstants{
-            material.alphaCutoff,
-            static_cast<std::uint32_t>(material.alphaMode),
-            material.emissiveStrength,
-            material.showcasePlatform,
-            material.aoColor,
-            material.lamShadowColor,
-            material.matcapColor,
-            material.hairParameters,
-            material.styleParameters,
-            material.featureParameters,
-            static_cast<std::uint32_t>(material.materialClass),
-            material.materialFeatures,
-            material.materialProfileVersion,
-            0,
-        };
-        vkCmdPushConstants(
-            commandBuffer,
-            pipelineLayout_,
-            VK_SHADER_STAGE_FRAGMENT_BIT,
-            0,
-            sizeof(materialConstants),
-            &materialConstants);
-        const MorphPushConstants morphConstants{
-            renderSettings_.morphWeights,
-        };
-        vkCmdPushConstants(
-            commandBuffer,
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT,
-            sizeof(MaterialPushConstants),
-            sizeof(morphConstants),
-            &morphConstants);
-        vkCmdDrawIndexed(
-            commandBuffer,
-            primitive.indexCount,
-            1,
-            primitive.firstIndex,
-            0,
-            0);
+    azurerender::RenderContext sceneContext;
+    buildRenderContext(sceneContext);
+    sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
+    sceneContext.imageIndex = imageIndex;
+    sceneContext.commandBuffer = commandBuffer;
+    sceneContext.sceneFramebuffer = swapchainFramebuffers_[imageIndex];
+    if (runOptions_.gpuTimingEnabled && !timestampQueryPools_.empty()) {
+        sceneContext.timestampQueryPool =
+            timestampQueryPools_[currentFrame_];
     }
-    vkCmdEndRenderPass(commandBuffer);
-    if (runOptions_.gpuTimingEnabled) {
-        vkCmdWriteTimestamp(
-            commandBuffer,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-            timestampQueryPools_[currentFrame_],
-            1);
-    }
-
-    std::array<VkClearValue, 3> clearValues{};
-    clearValues[0].color.float32[0] = 0.035F;
-    clearValues[0].color.float32[1] = 0.055F;
-    clearValues[0].color.float32[2] = 0.075F;
-    clearValues[0].color.float32[3] = 1.0F;
-    clearValues[1].depthStencil = {1.0F, 0};
-    clearValues[2].color.float32[0] = 0.5F;
-    clearValues[2].color.float32[1] = 0.5F;
-    clearValues[2].color.float32[2] = 1.0F;
-    clearValues[2].color.float32[3] = 0.0F;
-    VkRenderPassBeginInfo renderPassInfo{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    renderPassInfo.renderPass = renderPass_;
-    renderPassInfo.framebuffer = swapchainFramebuffers_[imageIndex];
-    renderPassInfo.renderArea.extent = renderExtent_;
-    renderPassInfo.clearValueCount = static_cast<std::uint32_t>(clearValues.size());
-    renderPassInfo.pClearValues = clearValues.data();
-
-    vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-    VkViewport viewport{};
-    viewport.width = static_cast<float>(renderExtent_.width);
-    viewport.height = static_cast<float>(renderExtent_.height);
-    viewport.maxDepth = 1.0F;
-    vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
-
-    VkRect2D scissor{};
-    scissor.extent = renderExtent_;
-    vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
-
-
-    vkCmdBindPipeline(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        backgroundPipeline_);
-    const std::size_t backgroundDescriptorIndex =
-        currentFrame_ * asset_.materials.size();
-    vkCmdBindDescriptorSets(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        pipelineLayout_,
-        0,
-        1,
-        &descriptorSets_[backgroundDescriptorIndex],
-        0,
-        nullptr);
-    vkCmdDraw(commandBuffer, 3, 1, 0, 0);
-
-    const VkDeviceSize offsets[] = {0};
-    vkCmdBindVertexBuffers(commandBuffer, 0, 1, &vertexBuffer_, offsets);
-    vkCmdBindIndexBuffer(commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
-    if (renderSettings_.silhouetteOutlineEnabled) {
-        vkCmdBindPipeline(
-            commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            outlinePipeline_);
-        for (const AssetPrimitive& primitive : asset_.primitives) {
-            if (asset_.materials[primitive.materialIndex].alphaMode
-                == AssetAlphaMode::Blend) {
-                continue;
-            }
-            const std::size_t descriptorIndex =
-                currentFrame_ * asset_.materials.size()
-                + primitive.materialIndex;
-            vkCmdBindDescriptorSets(
-                commandBuffer,
-                VK_PIPELINE_BIND_POINT_GRAPHICS,
-                pipelineLayout_,
-                0,
-                1,
-                &descriptorSets_[descriptorIndex],
-                0,
-                nullptr);
-            vkCmdDrawIndexed(
-                commandBuffer,
-                primitive.indexCount,
-                1,
-                primitive.firstIndex,
-                0,
-                0);
-        }
-    }
-    const auto drawPrimitive = [&](
-        const AssetPrimitive& primitive,
-        const std::uint32_t firstIndexOffset) {
-        const AssetMaterial& material = asset_.materials[primitive.materialIndex];
-        const bool blend = material.alphaMode == AssetAlphaMode::Blend;
-        const VkPipeline pipeline = blend
-            ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)
-            : (material.doubleSided ? opaqueDoubleSidedPipeline_ : opaquePipeline_);
-        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-        const std::size_t descriptorIndex =
-            currentFrame_ * asset_.materials.size() + primitive.materialIndex;
-        vkCmdBindDescriptorSets(
-            commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[descriptorIndex],
-            0,
-            nullptr);
-        const MaterialPushConstants materialConstants{
-            material.alphaCutoff,
-            static_cast<std::uint32_t>(material.alphaMode),
-            material.emissiveStrength,
-            material.showcasePlatform,
-            material.aoColor,
-            material.lamShadowColor,
-            material.matcapColor,
-            material.hairParameters,
-            material.styleParameters,
-            material.featureParameters,
-            static_cast<std::uint32_t>(material.materialClass),
-            material.materialFeatures,
-            material.materialProfileVersion,
-            selectedPrimitiveIndex_
-                    == static_cast<std::int32_t>(
-                           &primitive - asset_.primitives.data())
-                ? 1U
-                : 0U,
-        };
-        vkCmdPushConstants(
-            commandBuffer,
-            pipelineLayout_,
-            VK_SHADER_STAGE_FRAGMENT_BIT,
-            0,
-            sizeof(materialConstants),
-            &materialConstants);
-        const MorphPushConstants morphConstants{
-            renderSettings_.morphWeights,
-            {0.0F, 0.0F},
-            [&]() -> std::array<float, 16> {
-                if (selectedPrimitiveIndex_
-                    != static_cast<std::int32_t>(
-                           &primitive - asset_.primitives.data())) {
-                    return {1.0F, 0.0F, 0.0F, 0.0F,
-                            0.0F, 1.0F, 0.0F, 0.0F,
-                            0.0F, 0.0F, 1.0F, 0.0F,
-                            0.0F, 0.0F, 0.0F, 1.0F};
-                }
-                constexpr float kPi = 3.14159265358979323846F;
-                std::array<float, 3> gizmoTranslation{0.0F, 0.0F, 0.0F};
-                std::array<float, 3> gizmoRotation{0.0F, 0.0F, 0.0F};
-                std::array<float, 3> gizmoScale{1.0F, 1.0F, 1.0F};
-                if (runOptions_.editorSession != nullptr) {
-                    const auto& editorContext =
-                        runOptions_.editorSession->context();
-                    gizmoTranslation = editorContext.gizmoTranslation();
-                    gizmoRotation = editorContext.gizmoRotation();
-                    gizmoScale = editorContext.gizmoScale();
-                }
-                const Matrix4 gizmoTransform = multiply(
-                    translation(
-                        gizmoTranslation[0],
-                        gizmoTranslation[1],
-                        gizmoTranslation[2]),
-                    multiply(
-                        multiply(
-                            rotationX(
-                                gizmoRotation[0] * kPi / 180.0F),
-                            rotationY(
-                                gizmoRotation[1] * kPi / 180.0F)),
-                        multiply(
-                            rotationZ(
-                                gizmoRotation[2] * kPi / 180.0F),
-                            scale(
-                                gizmoScale[0],
-                                gizmoScale[1],
-                                gizmoScale[2]))));
-                return {
-                    gizmoTransform[0], gizmoTransform[1],
-                    gizmoTransform[2], gizmoTransform[3],
-                    gizmoTransform[4], gizmoTransform[5],
-                    gizmoTransform[6], gizmoTransform[7],
-                    gizmoTransform[8], gizmoTransform[9],
-                    gizmoTransform[10], gizmoTransform[11],
-                    gizmoTransform[12], gizmoTransform[13],
-                    gizmoTransform[14], gizmoTransform[15],
-                };
-            }(),
-        };
-        vkCmdPushConstants(
-            commandBuffer,
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT,
-            sizeof(MaterialPushConstants),
-            sizeof(morphConstants),
-            &morphConstants);
-        vkCmdDrawIndexed(
-            commandBuffer,
-            primitive.indexCount,
-            1,
-            firstIndexOffset,
-            0,
-            0);
-    };
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        if (asset_.materials[primitive.materialIndex].alphaMode != AssetAlphaMode::Blend) {
-            drawPrimitive(primitive, primitive.firstIndex);
-        }
-    }
-    std::vector<const AssetPrimitive*> transparentPrimitives;
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        if (asset_.materials[primitive.materialIndex].alphaMode
-            == AssetAlphaMode::Blend) {
-            transparentPrimitives.push_back(&primitive);
-        }
-    }
-    const Vector3 cameraForward = normalize({
-        -cameraPosition_[0],
-        -cameraPosition_[1],
-        -cameraPosition_[2],
-    });
-    // Per-triangle OIT:对每个透明 primitive,按三角形质心视深从远到近
-    // 重排其索引,写入每帧 HOST_VISIBLE 索引缓冲后按序绘制。
-    std::size_t oitWriteIndex = 0;
-    if (!transparentPrimitives.empty() && !oitIndexBufferMapped_.empty()) {
-        std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-            oitIndexBufferMapped_[currentFrame_]);
-        for (const AssetPrimitive* primitive : transparentPrimitives) {
-            const std::uint32_t triangleCount = primitive->indexCount / 3;
-            std::vector<std::uint32_t> triangleOrder(triangleCount);
-            std::vector<float> triangleDepth(triangleCount);
-            for (std::uint32_t triangle = 0; triangle < triangleCount;
-                 ++triangle) {
-                triangleOrder[triangle] = triangle;
-                const std::uint32_t base =
-                    primitive->firstIndex + triangle * 3;
-                const std::uint32_t i0 = asset_.indices[base];
-                const std::uint32_t i1 = asset_.indices[base + 1];
-                const std::uint32_t i2 = asset_.indices[base + 2];
-                const Vector3 v0 = transformPosition(
-                    currentModel_, asset_.vertices[i0].position);
-                const Vector3 v1 = transformPosition(
-                    currentModel_, asset_.vertices[i1].position);
-                const Vector3 v2 = transformPosition(
-                    currentModel_, asset_.vertices[i2].position);
-                const Vector3 centroid = {
-                    (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
-                    (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
-                    (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
-                };
-                const Vector3 cameraOffset =
-                    subtract(centroid, cameraPosition_);
-                triangleDepth[triangle] =
-                    dot(cameraOffset, cameraForward);
-            }
-            std::stable_sort(
-                triangleOrder.begin(),
-                triangleOrder.end(),
-                [&](const std::uint32_t left, const std::uint32_t right) {
-                    return triangleDepth[left] > triangleDepth[right];
-                });
-            for (std::uint32_t triangle = 0; triangle < triangleCount;
-                 ++triangle) {
-                const std::uint32_t ordered = triangleOrder[triangle];
-                const std::uint32_t base =
-                    primitive->firstIndex + ordered * 3;
-                oitMapped[oitWriteIndex + triangle * 3] =
-                    asset_.indices[base] - primitive->firstIndex;
-                oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                    asset_.indices[base + 1] - primitive->firstIndex;
-                oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                    asset_.indices[base + 2] - primitive->firstIndex;
-            }
-            oitWriteIndex += primitive->indexCount;
-        }
-    }
-    std::size_t oitReadIndex = 0;
-    for (const AssetPrimitive* primitive : transparentPrimitives) {
-        if (!oitIndexBufferMapped_.empty()) {
-            const VkDeviceSize offsetBytes =
-                static_cast<VkDeviceSize>(oitReadIndex)
-                * sizeof(std::uint32_t);
-            vkCmdBindIndexBuffer(
-                commandBuffer,
-                oitIndexBuffers_[currentFrame_],
-                offsetBytes,
-                VK_INDEX_TYPE_UINT32);
-        }
-        drawPrimitive(*primitive, 0);
-        oitReadIndex += primitive->indexCount;
-    }
-    vkCmdEndRenderPass(commandBuffer);
-    if (runOptions_.gpuTimingEnabled) {
-        vkCmdWriteTimestamp(
-            commandBuffer,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-            timestampQueryPools_[currentFrame_],
-            2);
+    sceneContext.timestampQueryCount = kTimestampQueryCount;
+    sceneContext.gpuTimingEnabled = runOptions_.gpuTimingEnabled;
+    if (sceneRenderer_ != nullptr) {
+        sceneRenderer_->recordScene(sceneContext);
     }
 
     VkRenderPassBeginInfo postProcessPassInfo{
@@ -1313,6 +754,12 @@ void AzureRenderApp::recordCommandBuffer(
         commandBuffer,
         &postProcessPassInfo,
         VK_SUBPASS_CONTENTS_INLINE);
+    VkViewport viewport{};
+    viewport.width = static_cast<float>(renderExtent_.width);
+    viewport.height = static_cast<float>(renderExtent_.height);
+    viewport.maxDepth = 1.0F;
+    VkRect2D scissor{};
+    scissor.extent = renderExtent_;
     vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
     vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
     vkCmdBindPipeline(

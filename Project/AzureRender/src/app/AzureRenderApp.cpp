@@ -3,8 +3,11 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "diagnostics/GpuCapabilityReport.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
+#include "render/RenderContext.hpp"
+#include "scenes/CharacterSceneRenderer.hpp"
 #include "AzureRenderInternal.hpp"
 
 #include <stb_easy_font.h>
@@ -37,147 +40,6 @@ constexpr std::array<const char*, 1> kDeviceExtensions = {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME,
 };
 
-void appendShowcasePlatform(LoadedAsset& asset) {
-    constexpr std::uint32_t kSegments = 96;
-    const Vector3 boundsCenter = {
-        (asset.boundsMin[0] + asset.boundsMax[0]) * 0.5F,
-        (asset.boundsMin[1] + asset.boundsMax[1]) * 0.5F,
-        (asset.boundsMin[2] + asset.boundsMax[2]) * 0.5F,
-    };
-    const float largestExtent = std::max({
-        asset.boundsMax[0] - asset.boundsMin[0],
-        asset.boundsMax[1] - asset.boundsMin[1],
-        asset.boundsMax[2] - asset.boundsMin[2],
-    });
-    const float radius = largestExtent * 0.40F;
-    const float topY = asset.boundsMin[1] - largestExtent * 0.004F;
-    const float bottomY = topY - largestExtent * 0.050F;
-
-    AssetMaterial platformMaterial;
-    platformMaterial.name = "AzureRender_ShowcasePlatform";
-    platformMaterial.materialClass = AssetMaterialClass::Showcase;
-    platformMaterial.materialFeatures = 0;
-    platformMaterial.materialProfileVersion = 1;
-    platformMaterial.materialProfileExplicit = true;
-    platformMaterial.baseColorWidth = 2;
-    platformMaterial.baseColorHeight = 2;
-    platformMaterial.baseColorPixels = {
-        38, 50, 66, 255, 38, 50, 66, 255,
-        38, 50, 66, 255, 38, 50, 66, 255,
-    };
-    platformMaterial.normalWidth = 2;
-    platformMaterial.normalHeight = 2;
-    platformMaterial.normalPixels = {
-        128, 128, 255, 255, 128, 128, 255, 255,
-        128, 128, 255, 255, 128, 128, 255, 255,
-    };
-    platformMaterial.metallicRoughnessWidth = 2;
-    platformMaterial.metallicRoughnessHeight = 2;
-    platformMaterial.metallicRoughnessPixels = {
-        255, 210, 28, 255, 255, 210, 28, 255,
-        255, 210, 28, 255, 255, 210, 28, 255,
-    };
-    platformMaterial.specularEmissiveWidth = 2;
-    platformMaterial.specularEmissiveHeight = 2;
-    platformMaterial.specularEmissivePixels = {
-        0, 0, 0, 96, 0, 0, 0, 96,
-        0, 0, 0, 96, 0, 0, 0, 96,
-    };
-    platformMaterial.styleMaskWidth = 2;
-    platformMaterial.styleMaskHeight = 2;
-    platformMaterial.styleMaskPixels.assign(16, 0);
-    for (std::size_t alpha = 3; alpha < 16; alpha += 4) {
-        platformMaterial.styleMaskPixels[alpha] = 255;
-    }
-    platformMaterial.matcapWidth = 2;
-    platformMaterial.matcapHeight = 2;
-    platformMaterial.matcapPixels = platformMaterial.styleMaskPixels;
-    platformMaterial.hairDataWidth = 2;
-    platformMaterial.hairDataHeight = 2;
-    platformMaterial.hairDataPixels.assign(16, 128);
-    platformMaterial.showcasePlatform = 1.0F;
-    platformMaterial.doubleSided = true;
-
-    const std::uint32_t materialIndex =
-        static_cast<std::uint32_t>(asset.materials.size());
-    asset.materials.push_back(std::move(platformMaterial));
-    const std::uint32_t firstVertex =
-        static_cast<std::uint32_t>(asset.vertices.size());
-    const std::uint32_t firstIndex =
-        static_cast<std::uint32_t>(asset.indices.size());
-
-    asset.vertices.push_back({
-        {boundsCenter[0], topY, boundsCenter[2]},
-        {0.0F, 1.0F, 0.0F},
-        {1.0F, 0.0F, 0.0F, 1.0F},
-        {0.5F, 0.5F},
-    });
-    constexpr float kTwoPi = 6.28318530717958647692F;
-    for (std::uint32_t segment = 0; segment < kSegments; ++segment) {
-        const float angle =
-            kTwoPi * static_cast<float>(segment)
-            / static_cast<float>(kSegments);
-        const float cosine = std::cos(angle);
-        const float sine = std::sin(angle);
-        asset.vertices.push_back({
-            {
-                boundsCenter[0] + cosine * radius,
-                topY,
-                boundsCenter[2] + sine * radius,
-            },
-            {0.0F, 1.0F, 0.0F},
-            {1.0F, 0.0F, 0.0F, 1.0F},
-            {cosine * 0.5F + 0.5F, sine * 0.5F + 0.5F},
-        });
-    }
-    for (std::uint32_t segment = 0; segment < kSegments; ++segment) {
-        const std::uint32_t next = (segment + 1) % kSegments;
-        asset.indices.push_back(firstVertex);
-        asset.indices.push_back(firstVertex + 1 + next);
-        asset.indices.push_back(firstVertex + 1 + segment);
-    }
-
-    const std::uint32_t sideFirst =
-        static_cast<std::uint32_t>(asset.vertices.size());
-    for (std::uint32_t segment = 0; segment < kSegments; ++segment) {
-        const float angle =
-            kTwoPi * static_cast<float>(segment)
-            / static_cast<float>(kSegments);
-        const float cosine = std::cos(angle);
-        const float sine = std::sin(angle);
-        const float u =
-            static_cast<float>(segment) / static_cast<float>(kSegments);
-        for (const float y : {topY, bottomY}) {
-            asset.vertices.push_back({
-                {
-                    boundsCenter[0] + cosine * radius,
-                    y,
-                    boundsCenter[2] + sine * radius,
-                },
-                {cosine, 0.0F, sine},
-                {-sine, 0.0F, cosine, 1.0F},
-                {u, y == topY ? 0.0F : 1.0F},
-            });
-        }
-    }
-    for (std::uint32_t segment = 0; segment < kSegments; ++segment) {
-        const std::uint32_t next = (segment + 1) % kSegments;
-        const std::uint32_t top = sideFirst + segment * 2;
-        const std::uint32_t bottom = top + 1;
-        const std::uint32_t nextTop = sideFirst + next * 2;
-        const std::uint32_t nextBottom = nextTop + 1;
-        asset.indices.insert(
-            asset.indices.end(),
-            {top, nextTop, bottom, bottom, nextTop, nextBottom});
-    }
-
-    asset.primitives.push_back({
-        firstIndex,
-        static_cast<std::uint32_t>(asset.indices.size()) - firstIndex,
-        materialIndex,
-        {boundsCenter[0], (topY + bottomY) * 0.5F, boundsCenter[2]},
-    });
-}
 
 VkResult createDebugUtilsMessenger(
     const VkInstance instance,
@@ -310,81 +172,10 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     pickPhysicalDevice();
     createLogicalDevice();
     createCommandPool();
-    createDescriptorSetLayout();
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
-    asset_ = loadGltfAsset(resolvedAssetPath_);
-    for (const AssetMaterial& material : asset_.materials) {
-        if (!material.faceSdf.present) {
-            continue;
-        }
-        if (faceSdfHeadNode_.has_value()
-            && *faceSdfHeadNode_ != material.faceSdf.headNode) {
-            throw std::runtime_error(
-                "Face SDF materials must share one headNode");
-        }
-        faceSdfHeadNode_ = material.faceSdf.headNode;
-        azurerender::RuntimeDiagnostics::instance().print(
-            "asset",
-            "Face SDF: material=" + material.name
-                + ", texture=" + std::to_string(material.faceSdf.width) + 'x'
-                + std::to_string(material.faceSdf.height)
-                + ", headNode=" + material.faceSdf.headNodeName);
-    }
-    appendShowcasePlatform(asset_);
-    azurerender::RuntimeDiagnostics::instance().print(
-        "asset", "Asset path: " + resolvedAssetPath_);
-    azurerender::RuntimeDiagnostics::instance().print(
-        "asset",
-        "Loaded asset: " + std::to_string(asset_.vertices.size())
-            + " vertices, " + std::to_string(asset_.indices.size())
-            + " indices, " + std::to_string(asset_.primitives.size())
-            + " primitives, " + std::to_string(asset_.materials.size())
-            + " materials");
-    azurerender::RuntimeDiagnostics::instance().print(
-        "asset", "Material Class v1 inventory:");
-    for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
-        const AssetMaterial& material = asset_.materials[index];
-        std::stringstream inventory;
-        inventory << "  [" << index << "] " << material.name
-                  << " -> " << assetMaterialClassName(material.materialClass)
-                  << ", flags=0x" << std::hex << material.materialFeatures
-                  << std::dec
-                  << (material.materialProfileExplicit
-                      ? ", source=asset-extras"
-                      : ", source=fallback/inferred");
-        azurerender::RuntimeDiagnostics::instance().print(
-            "asset", inventory.str());
-    }
-    std::stringstream skinning;
-    skinning << "Skinning: "
-             << (asset_.hasSkin ? "enabled" : "static fallback")
-             << ", " << asset_.jointMatrices.size() << " joint matrices";
-    azurerender::RuntimeDiagnostics::instance().print("asset", skinning.str());
-    std::string animationLine = "Animations: "
-        + std::to_string(asset_.animations.size());
-    if (!asset_.animations.empty()) {
-        const auto& animation = asset_.animations.front();
-        animationLine += " (playing \"" + animation.name + "\", "
-            + std::to_string(animation.endTime - animation.startTime)
-            + " s loop)";
-    }
-    azurerender::RuntimeDiagnostics::instance().print(
-        "asset", animationLine);
-    animationIndex_ = 0;
-    animationTime_ = 0.0F;
-    animationPlaying_ = true;
-    lastRotationTime_ = frontend_->timeSeconds();
-    createVertexBuffer();
-    createIndexBuffer();
-    createTexture();
-    createUniformBuffers();
-    createJointBuffers();
-    createOitIndexBuffers();
     createHudBuffers();
     createShadowResources();
-    createDescriptorPool();
-    createDescriptorSets();
     createSwapchain();
     if (fixedSimulation_
         && (swapchainExtent_.width != runOptions_.width
@@ -413,6 +204,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandBuffers();
     createSyncObjects();
     createTimestampQueryPools();
+    createSceneRenderer();
     initEditorUi();
 }
 
@@ -477,6 +269,106 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     }
 }
 
+void AzureRenderApp::createSceneRenderer() {
+    azurerender::RenderContext context;
+    buildRenderContext(context);
+    sceneRenderer_ = std::make_unique<azurerender::CharacterSceneRenderer>();
+    sceneRenderer_->onLoad(context);
+    azurerender::RuntimeDiagnostics::instance().print(
+        "render",
+        "Scene renderer: " + std::string(sceneRenderer_->name())
+            + " (sceneType=" + azurerender::sceneTypeName(
+                                   renderSettings_.sceneType) + ")");
+}
+
+void AzureRenderApp::buildRenderContext(
+    azurerender::RenderContext& context) {
+    context.device = device_;
+    context.physicalDevice = physicalDevice_;
+    context.graphicsQueue = graphicsQueue_;
+    context.graphicsQueueFamily = graphicsQueueFamily_;
+    context.commandPool = commandPool_;
+    context.maxFramesInFlight = kMaxFramesInFlight;
+    context.renderExtent = renderExtent_;
+    context.swapchainExtent = swapchainExtent_;
+    context.sceneColorFormat = kHdrSceneColorFormat;
+    context.depthFormat = depthFormat_;
+    context.normalFormat = normalFormat_;
+    context.sceneRenderPass = renderPass_;
+    context.postProcessRenderPass = postProcessRenderPass_;
+    context.postProcessPipelineLayout = postProcessPipelineLayout_;
+    context.postProcessDescriptorSetLayout = postProcessDescriptorSetLayout_;
+    context.screenAttachmentSampler = screenAttachmentSampler_;
+    context.shadowFormat = shadowFormat_;
+    context.shadowRenderPass = shadowRenderPass_;
+    context.shadowFramebuffer = shadowFramebuffer_;
+    context.shadowImageView = shadowImageView_;
+    context.shadowSampler = shadowSampler_;
+    context.shadowMapSize = kShadowMapSize;
+    context.assetPath = resolvedAssetPath_;
+    context.shaderDirectory = resourceLocator_.shaderDirectory().string();
+    context.environmentPath = runOptions_.environmentPath;
+    context.rampAtlasPath = resourceLocator_.rampAtlas().string();
+    context.renderSettings = &renderSettings_;
+}
+
+void AzureRenderApp::buildSceneFrameData(
+    azurerender::SceneFrameData& frame) {
+    const double currentTime = frontend_->timeSeconds();
+    const float deltaSeconds = fixedSimulation_
+        ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
+        : static_cast<float>(
+              std::max(currentTime - lastRotationTime_, 0.0));
+    fixedSimulationStarted_ = true;
+    lastRotationTime_ = currentTime;
+    if (autoRotate_) {
+        rotationAngle_ += deltaSeconds * rotationSpeed_;
+    }
+    frame.deltaSeconds = deltaSeconds;
+    frame.timeSeconds = currentTime;
+    frame.renderSettings = &renderSettings_;
+    frame.cameraPosition[0] = cameraPosition_[0];
+    frame.cameraPosition[1] = cameraPosition_[1];
+    frame.cameraPosition[2] = cameraPosition_[2];
+    frame.cameraTarget[0] = cameraTarget_[0];
+    frame.cameraTarget[1] = cameraTarget_[1];
+    frame.cameraTarget[2] = cameraTarget_[2];
+    frame.rotationAngle = rotationAngle_;
+    frame.qaIsolationMode = qaIsolationMode_;
+    frame.qaEffectMode = qaEffectMode_;
+    frame.qaEffectEnabled = qaEffectEnabled_;
+    frame.qaHarnessEnabled = qaHarnessEnabled_;
+    frame.capturedFrames = capturedFrames_;
+    frame.captureFps = runOptions_.captureFps;
+    frame.technicalSequence = runOptions_.technicalSequence;
+    frame.technicalSequenceChapter = technicalSequenceChapter_;
+    frame.currentFrame = static_cast<std::uint32_t>(currentFrame_);
+    frame.selectedPrimitiveIndex = selectedPrimitiveIndex_;
+    frame.gizmoActive =
+        selectedPrimitiveIndex_ >= 0
+        && runOptions_.editorSession != nullptr;
+    if (runOptions_.editorSession != nullptr) {
+        const azurerender::EditorContext& editorContext =
+            runOptions_.editorSession->context();
+        const std::array<float, 3> translation =
+            editorContext.gizmoTranslation();
+        const std::array<float, 3> rotation =
+            editorContext.gizmoRotation();
+        const std::array<float, 3> scale = editorContext.gizmoScale();
+        frame.gizmoTranslation[0] = translation[0];
+        frame.gizmoTranslation[1] = translation[1];
+        frame.gizmoTranslation[2] = translation[2];
+        frame.gizmoRotation[0] = rotation[0];
+        frame.gizmoRotation[1] = rotation[1];
+        frame.gizmoRotation[2] = rotation[2];
+        frame.gizmoScale[0] = scale[0];
+        frame.gizmoScale[1] = scale[1];
+        frame.gizmoScale[2] = scale[2];
+    }
+    frame.swapchainWidth = swapchainExtent_.width;
+    frame.swapchainHeight = swapchainExtent_.height;
+}
+
 void AzureRenderApp::activatePortfolioOrbit() {
     constexpr float kPi = 3.14159265358979323846F;
     rotationAngle_ = kPi * 0.25F;
@@ -487,9 +379,8 @@ void AzureRenderApp::activatePortfolioOrbit() {
     renderSettings_.stylizedLightingEnabled = true;
     renderSettings_.innerOutlineEnabled = true;
     autoRotate_ = true;
-    if (!asset_.animations.empty()) {
-        animationTime_ = 0.0F;
-        animationPlaying_ = true;
+    if (sceneRenderer_ != nullptr) {
+        sceneRenderer_->restartPlayback();
     }
     azurerender::RuntimeDiagnostics::instance().print(
         "input", "View preset: 6 (portfolio orbit, Endfield Industrial)");
@@ -649,9 +540,8 @@ void AzureRenderApp::configureQaHarness() {
         renderSettings_.innerOutlineEnabled = qaEffectEnabled_;
         renderSettings_.silhouetteOutlineEnabled = qaEffectEnabled_;
     }
-    if (!asset_.animations.empty() && qaCameraName_ != "lighting-sweep") {
-        animationTime_ = 0.0F;
-        animationPlaying_ = false;
+    if (sceneRenderer_ != nullptr && qaCameraName_ != "lighting-sweep") {
+        sceneRenderer_->setPlaybackPlaying(false);
     }
     azurerender::RuntimeDiagnostics::instance().print(
         "qa",
@@ -719,6 +609,12 @@ void AzureRenderApp::cleanup() {
             editorLayer_->shutdownVulkan();
         }
         cleanupSwapchain();
+        if (sceneRenderer_ != nullptr) {
+            azurerender::RenderContext unloadContext;
+            buildRenderContext(unloadContext);
+            sceneRenderer_->onUnload(unloadContext);
+            sceneRenderer_.reset();
+        }
 
         for (const auto semaphore : imageAvailableSemaphores_) {
             vkDestroySemaphore(device_, semaphore, nullptr);
@@ -731,9 +627,6 @@ void AzureRenderApp::cleanup() {
         }
         timestampQueryPools_.clear();
 
-        if (descriptorPool_ != VK_NULL_HANDLE) {
-            vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
-        }
         if (screenAttachmentSampler_ != VK_NULL_HANDLE) {
             vkDestroySampler(device_, screenAttachmentSampler_, nullptr);
         }
@@ -742,20 +635,6 @@ void AzureRenderApp::cleanup() {
                 device_,
                 postProcessDescriptorSetLayout_,
                 nullptr);
-        }
-        for (std::size_t index = 0; index < uniformBuffers_.size(); ++index) {
-            if (uniformBufferMapped_[index] != nullptr) {
-                vkUnmapMemory(device_, uniformBufferMemories_[index]);
-            }
-            vkDestroyBuffer(device_, uniformBuffers_[index], nullptr);
-            vkFreeMemory(device_, uniformBufferMemories_[index], nullptr);
-        }
-        for (std::size_t index = 0; index < jointBuffers_.size(); ++index) {
-            if (jointBufferMapped_[index] != nullptr) {
-                vkUnmapMemory(device_, jointBufferMemories_[index]);
-            }
-            vkDestroyBuffer(device_, jointBuffers_[index], nullptr);
-            vkFreeMemory(device_, jointBufferMemories_[index], nullptr);
         }
         for (std::size_t index = 0; index < hudVertexBuffers_.size(); ++index) {
             if (hudVertexBufferMapped_[index] != nullptr) {
@@ -769,50 +648,6 @@ void AzureRenderApp::cleanup() {
                 hudVertexBufferMemories_[index],
                 nullptr);
         }
-        for (std::size_t index = 0; index < oitIndexBuffers_.size(); ++index) {
-            if (oitIndexBufferMapped_[index] != nullptr) {
-                vkUnmapMemory(
-                    device_,
-                    oitIndexBufferMemories_[index]);
-            }
-            vkDestroyBuffer(device_, oitIndexBuffers_[index], nullptr);
-            vkFreeMemory(
-                device_,
-                oitIndexBufferMemories_[index],
-                nullptr);
-        }
-        if (indexBuffer_ != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device_, indexBuffer_, nullptr);
-            vkFreeMemory(device_, indexBufferMemory_, nullptr);
-        }
-        if (vertexBuffer_ != VK_NULL_HANDLE) {
-            vkDestroyBuffer(device_, vertexBuffer_, nullptr);
-            vkFreeMemory(device_, vertexBufferMemory_, nullptr);
-        }
-        for (const auto& material : gpuMaterials_) {
-            for (const GpuTexture* texture : {
-                     &material.baseColor,
-                     &material.normal,
-                     &material.metallicRoughness,
-                     &material.specularEmissive,
-                     &material.styleMask,
-                     &material.matcap,
-                     &material.hairData,
-                     &material.faceSdf}) {
-                vkDestroySampler(device_, texture->sampler, nullptr);
-                vkDestroyImageView(device_, texture->view, nullptr);
-                vkDestroyImage(device_, texture->image, nullptr);
-                vkFreeMemory(device_, texture->memory, nullptr);
-            }
-        }
-        vkDestroySampler(device_, environmentTexture_.sampler, nullptr);
-        vkDestroyImageView(device_, environmentTexture_.view, nullptr);
-        vkDestroyImage(device_, environmentTexture_.image, nullptr);
-        vkFreeMemory(device_, environmentTexture_.memory, nullptr);
-        vkDestroySampler(device_, toonRampTexture_.sampler, nullptr);
-        vkDestroyImageView(device_, toonRampTexture_.view, nullptr);
-        vkDestroyImage(device_, toonRampTexture_.image, nullptr);
-        vkFreeMemory(device_, toonRampTexture_.memory, nullptr);
         if (shadowFramebuffer_ != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, shadowFramebuffer_, nullptr);
         }
@@ -830,9 +665,6 @@ void AzureRenderApp::cleanup() {
         }
         if (shadowImageMemory_ != VK_NULL_HANDLE) {
             vkFreeMemory(device_, shadowImageMemory_, nullptr);
-        }
-        if (descriptorSetLayout_ != VK_NULL_HANDLE) {
-            vkDestroyDescriptorSetLayout(device_, descriptorSetLayout_, nullptr);
         }
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
@@ -1188,50 +1020,6 @@ void AzureRenderApp::keyCallback(
 
     constexpr float kPi = 3.14159265358979323846F;
     constexpr float kFineStep = kPi / 36.0F;
-    const auto printAnimationStatus = [application]() {
-        if (application->asset_.animations.empty()) {
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input", "Animation: unavailable for this asset");
-            return;
-        }
-        const AssetAnimation& animation =
-            application->asset_.animations[application->animationIndex_];
-        const float duration =
-            std::max(animation.endTime - animation.startTime, 0.0F);
-        const float playhead = duration > 1.0e-8F
-            ? std::fmod(
-                  std::max(application->animationTime_, 0.0F),
-                  duration)
-            : 0.0F;
-        const std::string displayName = animation.name.empty()
-            ? "<unnamed>"
-            : animation.name;
-        azurerender::RuntimeDiagnostics::instance().print(
-            "input",
-            "Animation [" + std::to_string(application->animationIndex_ + 1)
-                + '/' + std::to_string(application->asset_.animations.size())
-                + "]: \"" + displayName + "\", " + std::to_string(playhead)
-                + " / " + std::to_string(duration) + " s, "
-                + (application->animationPlaying_ ? "playing" : "paused"));
-    };
-    const auto selectAnimation =
-        [application, &printAnimationStatus](const int direction) {
-        const std::size_t count = application->asset_.animations.size();
-        if (count == 0) {
-            printAnimationStatus();
-            return;
-        }
-        if (direction < 0) {
-            application->animationIndex_ =
-                (application->animationIndex_ + count - 1) % count;
-        } else {
-            application->animationIndex_ =
-                (application->animationIndex_ + 1) % count;
-        }
-        application->animationTime_ = 0.0F;
-        application->animationPlaying_ = true;
-        printAnimationStatus();
-    };
     if (action == GLFW_PRESS) {
         if (application->runOptions_.editorSession != nullptr
             && key == GLFW_KEY_TAB
@@ -1274,13 +1062,11 @@ void AzureRenderApp::keyCallback(
                 "input", "View preset: 5 (face close-up)");
         } else if (key == GLFW_KEY_6) {
             application->activatePortfolioOrbit();
-            printAnimationStatus();
-        } else if (key == GLFW_KEY_7) {
-            selectAnimation(-1);
-        } else if (key == GLFW_KEY_8) {
-            selectAnimation(1);
-        } else if (key == GLFW_KEY_9) {
-            printAnimationStatus();
+        } else if (key == GLFW_KEY_7 || key == GLFW_KEY_8
+                   || key == GLFW_KEY_9) {
+            if (application->sceneRenderer_ != nullptr) {
+                application->sceneRenderer_->onAnimationKey(key, action);
+            }
         } else if (key == GLFW_KEY_0) {
             application->renderSettings_.diagnosticView =
                 (application->renderSettings_.diagnosticView + 1) % 5;
@@ -1325,27 +1111,9 @@ void AzureRenderApp::keyCallback(
                     + std::to_string(key - GLFW_KEY_F1 + 1) + " ("
                     + kPresetNames[application->renderSettings_.showcasePreset]
                     + ")");
-        } else if (key == GLFW_KEY_F4) {
-            if (application->asset_.animations.empty()) {
-                azurerender::RuntimeDiagnostics::instance().print(
-                    "input", "Animation: unavailable for this asset");
-            } else {
-                application->animationPlaying_ =
-                    !application->animationPlaying_;
-                azurerender::RuntimeDiagnostics::instance().print(
-                    "input",
-                    "Animation: "
-                        + std::string(application->animationPlaying_ ? "playing" : "paused"));
-            }
-        } else if (key == GLFW_KEY_F11) {
-            if (application->asset_.animations.empty()) {
-                azurerender::RuntimeDiagnostics::instance().print(
-                    "input", "Animation: unavailable for this asset");
-            } else {
-                application->animationTime_ = 0.0F;
-                application->animationPlaying_ = true;
-                azurerender::RuntimeDiagnostics::instance().print(
-                    "input", "Animation: restarted");
+        } else if (key == GLFW_KEY_F4 || key == GLFW_KEY_F11) {
+            if (application->sceneRenderer_ != nullptr) {
+                application->sceneRenderer_->onAnimationKey(key, action);
             }
         } else if (key == GLFW_KEY_F10) {
             application->renderSettings_.innerOutlineEnabled =

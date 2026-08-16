@@ -1,7 +1,9 @@
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
+#include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
+#include "render/RenderContext.hpp"
 #include "AzureRenderInternal.hpp"
 
 #include <algorithm>
@@ -148,6 +150,11 @@ void AzureRenderApp::recreateSwapchain() {
     createEditorUiFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
+    if (sceneRenderer_ != nullptr) {
+        azurerender::RenderContext sceneContext;
+        buildRenderContext(sceneContext);
+        sceneRenderer_->onSwapchainRecreate(sceneContext);
+    }
     initEditorUi();
 }
 
@@ -267,19 +274,6 @@ void AzureRenderApp::cleanupSwapchain() {
     }
     editorUiFramebuffers_.clear();
 
-    for (VkPipeline* pipeline : {
-             &opaquePipeline_,
-             &opaqueDoubleSidedPipeline_,
-             &blendPipeline_,
-             &blendDoubleSidedPipeline_,
-             &outlinePipeline_,
-             &backgroundPipeline_,
-             &shadowPipeline_}) {
-        if (*pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device_, *pipeline, nullptr);
-            *pipeline = VK_NULL_HANDLE;
-        }
-    }
     if (innerOutlinePipeline_ != VK_NULL_HANDLE) {
         vkDestroyPipeline(device_, innerOutlinePipeline_, nullptr);
         innerOutlinePipeline_ = VK_NULL_HANDLE;
@@ -287,10 +281,6 @@ void AzureRenderApp::cleanupSwapchain() {
     if (hudPipeline_ != VK_NULL_HANDLE) {
         vkDestroyPipeline(device_, hudPipeline_, nullptr);
         hudPipeline_ = VK_NULL_HANDLE;
-    }
-    if (pipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, pipelineLayout_, nullptr);
-        pipelineLayout_ = VK_NULL_HANDLE;
     }
     if (postProcessPipelineLayout_ != VK_NULL_HANDLE) {
         vkDestroyPipelineLayout(

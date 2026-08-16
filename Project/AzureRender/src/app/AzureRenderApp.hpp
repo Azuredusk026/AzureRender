@@ -19,6 +19,9 @@ namespace azurerender {
 class EditorSession;
 class GlfwFrontend;
 class ImGuiEditorLayer;
+class ISceneRenderer;
+struct RenderContext;
+struct SceneFrameData;
 }
 
 class AzureRenderApp final {
@@ -60,55 +63,6 @@ private:
         std::vector<VkSurfaceFormatKHR> formats;
         std::vector<VkPresentModeKHR> presentModes;
     };
-
-    struct UniformBufferObject {
-        std::array<float, 16> model{};
-        std::array<float, 16> modelViewProjection{};
-        std::array<float, 16> lightModelViewProjection{};
-        std::array<float, 4> cameraPosition{};
-        std::array<float, 4> renderingParameters{};
-        std::array<float, 4> showcaseParameters{};
-        std::array<float, 4> qaParameters{};
-        std::array<float, 4> faceLightDirection{};
-        std::array<float, 4> faceSdfParameters{};
-        std::array<float, 4> faceSdfShadowColor{};
-    };
-
-    struct GpuTexture {
-        VkImage image = VK_NULL_HANDLE;
-        VkDeviceMemory memory = VK_NULL_HANDLE;
-        VkImageView view = VK_NULL_HANDLE;
-        VkSampler sampler = VK_NULL_HANDLE;
-    };
-
-    struct GpuMaterial {
-        GpuTexture baseColor;
-        GpuTexture normal;
-        GpuTexture metallicRoughness;
-        GpuTexture specularEmissive;
-        GpuTexture styleMask;
-        GpuTexture matcap;
-        GpuTexture hairData;
-        GpuTexture faceSdf;
-    };
-
-    struct MaterialPushConstants {
-        float alphaCutoff = 0.5F;
-        std::uint32_t alphaMode = 0;
-        float emissiveStrength = 0.0F;
-        float showcasePlatform = 0.0F;
-        std::array<float, 4> aoColor{1.0F, 1.0F, 1.0F, 0.0F};
-        std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};
-        std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
-        std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
-        std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
-        std::array<float, 4> featureParameters{1.0F, 1.0F, 1.0F, 1.0F};
-        std::uint32_t materialClass = 0;
-        std::uint32_t materialFeatures = 0;
-        std::uint32_t materialProfileVersion = 1;
-        std::uint32_t padding = 0;
-    };
-    static_assert(sizeof(MaterialPushConstants) == 128);
 
     struct PostProcessPushConstants {
         float strength = 0.40F;
@@ -197,21 +151,10 @@ private:
     VkRenderPass renderPass_ = VK_NULL_HANDLE;
     VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
     VkRenderPass editorUiRenderPass_ = VK_NULL_HANDLE;
-    VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;
-    VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
     VkDescriptorPool postProcessDescriptorPool_ = VK_NULL_HANDLE;
-    std::vector<VkDescriptorSet> descriptorSets_;
     std::vector<VkDescriptorSet> postProcessDescriptorSets_;
-    VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
     VkPipelineLayout postProcessPipelineLayout_ = VK_NULL_HANDLE;
-    VkPipeline opaquePipeline_ = VK_NULL_HANDLE;
-    VkPipeline opaqueDoubleSidedPipeline_ = VK_NULL_HANDLE;
-    VkPipeline blendPipeline_ = VK_NULL_HANDLE;
-    VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
-    VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
-    VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
-    VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
     VkPipeline innerOutlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline hudPipeline_ = VK_NULL_HANDLE;
     VkPipelineLayout hudPipelineLayout_ = VK_NULL_HANDLE;
@@ -222,40 +165,10 @@ private:
     azurerender::ResourceLocator resourceLocator_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
-    LoadedAsset asset_;
-    VkBuffer vertexBuffer_ = VK_NULL_HANDLE;
-    VkDeviceMemory vertexBufferMemory_ = VK_NULL_HANDLE;
-    VkBuffer indexBuffer_ = VK_NULL_HANDLE;
-    VkDeviceMemory indexBufferMemory_ = VK_NULL_HANDLE;
-    std::vector<GpuMaterial> gpuMaterials_;
-    GpuTexture environmentTexture_;
-    GpuTexture toonRampTexture_;
-    std::vector<VkBuffer> uniformBuffers_;
-    std::vector<VkDeviceMemory> uniformBufferMemories_;
-    std::vector<void*> uniformBufferMapped_;
-    std::vector<VkBuffer> jointBuffers_;
-    std::vector<VkDeviceMemory> jointBufferMemories_;
-    std::vector<void*> jointBufferMapped_;
-    std::vector<VkBuffer> oitIndexBuffers_;
-    std::vector<VkDeviceMemory> oitIndexBufferMemories_;
-    std::vector<void*> oitIndexBufferMapped_;
-    std::size_t oitIndexBufferSize_ = 0;
-    struct MorphPushConstants {
-        std::array<float, 2> weights{{0.0F, 0.0F}};
-        std::array<float, 2> padding{{0.0F, 0.0F}};
-        std::array<float, 16> gizmoTransform{
-            1.0F, 0.0F, 0.0F, 0.0F,
-            0.0F, 1.0F, 0.0F, 0.0F,
-            0.0F, 0.0F, 1.0F, 0.0F,
-            0.0F, 0.0F, 0.0F, 1.0F,
-        };
-    };
-    static_assert(sizeof(MorphPushConstants) == 80);
     std::vector<VkBuffer> hudVertexBuffers_;
     std::vector<VkDeviceMemory> hudVertexBufferMemories_;
     std::vector<void*> hudVertexBufferMapped_;
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
-    std::array<float, 16> currentModel_{};
     std::int32_t selectedPrimitiveIndex_ = -1;
     bool ecsRenderableLogged_ = false;
     float pendingPickX_ = 0.0F;
@@ -267,11 +180,8 @@ private:
     float rotationSpeed_ = 0.65F;
     double lastRotationTime_ = 0.0;
     bool autoRotate_ = true;
-    std::size_t animationIndex_ = 0;
-    float animationTime_ = 0.0F;
-    bool animationPlaying_ = true;
     azurerender::RenderSettings renderSettings_;
-    std::optional<std::uint32_t> faceSdfHeadNode_;
+    std::unique_ptr<azurerender::ISceneRenderer> sceneRenderer_;
     bool hudEnabled_ = false;
     bool editorUiEnabled_ = false;
     bool qaHarnessEnabled_ = false;
@@ -331,7 +241,6 @@ private:
     void createRenderPass();
     void createPostProcessRenderPass();
     void createEditorUiRenderPass();
-    void createDescriptorSetLayout();
     void createPostProcessDescriptorSetLayout();
     void createGraphicsPipeline();
     void createFramebuffers();
@@ -339,21 +248,16 @@ private:
     void createEditorUiFramebuffers();
     void createSwapchainSemaphores();
     void createCommandPool();
-    void createVertexBuffer();
-    void createIndexBuffer();
-    void createTexture();
-    void createUniformBuffers();
-    void createJointBuffers();
-    void createOitIndexBuffers();
     void createHudBuffers();
-    void createDescriptorPool();
-    void createDescriptorSets();
     void createPostProcessDescriptorSets();
     void createCommandBuffers();
     void createSyncObjects();
 
+    void createSceneRenderer();
+    void buildRenderContext(azurerender::RenderContext& context);
+    void buildSceneFrameData(azurerender::SceneFrameData& frame);
+
     void drawFrame();
-    void updateUniformBuffer(std::size_t frameIndex);
     void pickPrimitive(float viewportX, float viewportY);
     void updateGizmoScreenData();
     void updateHudBuffer(std::size_t frameIndex);

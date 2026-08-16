@@ -2970,3 +2970,27 @@ GPU timing CSV 用 gpuTimingOutput.replace_extension(".csv") 自动派生路径�
 经验:SceneDocument 不设独立 sceneRenderer 字段,直接序列化
 renderSettings.sceneType,避免双源不一致;新接口文件挂在 extensions/ 与 render/,
 纯 C++ 契约(SceneType)与 Vulkan 依赖(RenderContext)分离,测试无需全部链接 Vulkan。
+
+- **AR-10.1 角色路径迁移**:新增 src/render/VulkanHelpers.{hpp,cpp}(createBuffer/
+  createImage/createImageView/createShaderModule/findMemoryType/findDepthFormat/
+  copyBuffer/transitionImageLayout/copyBufferToImage/generateMipmaps/readBinaryFile
+  提取为 azurerender::vk 自由函数);新增 src/scenes/CharacterSceneRenderer.{hpp,cpp}
+  (资产加载、全部角色 GPU 资源、13-binding 描述符、7 条角色管线、动画状态、UBO、
+  shadow+main pass 录制、appendHudText、sceneState、capture manifest 钩子)
+- 引擎瘦身:AzureRenderApp 删除资产/缓冲/纹理/描述符/角色管线成员,保留 swapchain/
+  同步/HDR 附件/post-process/HUD/editor/capture/timing/screenshot;recordCommandBuffer
+  场景段替换为 sceneRenderer_->recordScene(RenderContext);键盘动画键转发
+  onAnimationKey;QA/portfolio 播放控制走 restartPlayback/setPlaybackPlaying;
+  pick/gizmo 改读 RendererSceneState(asset+modelMatrix);shadow map 作为引擎公共
+  设施经 RenderContext 注入(角色管线引用引擎 shadow render pass/image)
+- ISceneRenderer 扩展:sceneState()/onAnimationKey()/restartPlayback()/
+  setPlaybackPlaying()/appendCaptureManifestFields() 可选钩子
+- 修复:LoadedAsset 前向声明需在全局命名空间(原误置于 azurerender);timestampQueryPools
+  在 gpuTiming 关闭时为空,recordCommandBuffer 需条件访问(修复首次段错误)
+
+验证:Debug 构建 0 错误 0 警告;CTest 12/12;公共资产 120 帧 Debug Validation 0 VUID;
+编辑器 60 帧 smoke 0 VUID;capture 2 帧+manifest 正常;GPU timing 输出
+shadow 0.05ms/main 0.15ms/outline 0.06ms/total 0.26ms;Release 构建同基线
+经验:迁移以"shadow 资源留引擎公共设施"大幅降低风险(post-process 诊断视图需要采样
+shadow map);角色 renderer 自包含 GPU 资源,pick/gizmo/HUD 通过 sceneState/
+appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,前向声明必须对齐。

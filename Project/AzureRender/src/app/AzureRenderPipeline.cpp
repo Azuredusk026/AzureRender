@@ -224,20 +224,6 @@ void AzureRenderApp::createEditorUiRenderPass() {
 
 void AzureRenderApp::createGraphicsPipeline() {
     const std::string shaderDirectory = resourceLocator_.shaderDirectory().string();
-    const auto vertexCode = readBinaryFile(shaderDirectory + "/mesh.vert.spv");
-    const auto fragmentCode = readBinaryFile(shaderDirectory + "/mesh.frag.spv");
-    const auto outlineVertexCode =
-        readBinaryFile(shaderDirectory + "/outline.vert.spv");
-    const auto outlineFragmentCode =
-        readBinaryFile(shaderDirectory + "/outline.frag.spv");
-    const auto backgroundVertexCode =
-        readBinaryFile(shaderDirectory + "/background.vert.spv");
-    const auto backgroundFragmentCode =
-        readBinaryFile(shaderDirectory + "/background.frag.spv");
-    const auto shadowVertexCode =
-        readBinaryFile(shaderDirectory + "/shadow.vert.spv");
-    const auto shadowFragmentCode =
-        readBinaryFile(shaderDirectory + "/shadow.frag.spv");
     const auto innerOutlineVertexCode =
         readBinaryFile(shaderDirectory + "/inner_outline.vert.spv");
     const auto innerOutlineFragmentCode =
@@ -246,20 +232,6 @@ void AzureRenderApp::createGraphicsPipeline() {
         readBinaryFile(shaderDirectory + "/hud.vert.spv");
     const auto hudFragmentCode =
         readBinaryFile(shaderDirectory + "/hud.frag.spv");
-    const VkShaderModule vertexModule = createShaderModule(vertexCode);
-    const VkShaderModule fragmentModule = createShaderModule(fragmentCode);
-    const VkShaderModule outlineVertexModule =
-        createShaderModule(outlineVertexCode);
-    const VkShaderModule outlineFragmentModule =
-        createShaderModule(outlineFragmentCode);
-    const VkShaderModule backgroundVertexModule =
-        createShaderModule(backgroundVertexCode);
-    const VkShaderModule backgroundFragmentModule =
-        createShaderModule(backgroundFragmentCode);
-    const VkShaderModule shadowVertexModule =
-        createShaderModule(shadowVertexCode);
-    const VkShaderModule shadowFragmentModule =
-        createShaderModule(shadowFragmentCode);
     const VkShaderModule innerOutlineVertexModule =
         createShaderModule(innerOutlineVertexCode);
     const VkShaderModule innerOutlineFragmentModule =
@@ -273,48 +245,16 @@ void AzureRenderApp::createGraphicsPipeline() {
         VkPipelineShaderStageCreateInfo vertexStage{
             VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
         vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertexStage.module = vertexModule;
+        vertexStage.module = innerOutlineVertexModule;
         vertexStage.pName = "main";
-
         VkPipelineShaderStageCreateInfo fragmentStage{
             VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
         fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragmentStage.module = fragmentModule;
+        fragmentStage.module = innerOutlineFragmentModule;
         fragmentStage.pName = "main";
-        const std::array shaderStages = {vertexStage, fragmentStage};
-        VkPipelineShaderStageCreateInfo outlineVertexStage = vertexStage;
-        outlineVertexStage.module = outlineVertexModule;
-        VkPipelineShaderStageCreateInfo outlineFragmentStage = fragmentStage;
-        outlineFragmentStage.module = outlineFragmentModule;
-        const std::array outlineShaderStages = {
-            outlineVertexStage,
-            outlineFragmentStage,
-        };
-        VkPipelineShaderStageCreateInfo backgroundVertexStage = vertexStage;
-        backgroundVertexStage.module = backgroundVertexModule;
-        VkPipelineShaderStageCreateInfo backgroundFragmentStage = fragmentStage;
-        backgroundFragmentStage.module = backgroundFragmentModule;
-        const std::array backgroundShaderStages = {
-            backgroundVertexStage,
-            backgroundFragmentStage,
-        };
-        VkPipelineShaderStageCreateInfo shadowVertexStage = vertexStage;
-        shadowVertexStage.module = shadowVertexModule;
-        VkPipelineShaderStageCreateInfo shadowFragmentStage = fragmentStage;
-        shadowFragmentStage.module = shadowFragmentModule;
-        const std::array shadowShaderStages = {
-            shadowVertexStage,
-            shadowFragmentStage,
-        };
-        VkPipelineShaderStageCreateInfo innerOutlineVertexStage =
-            vertexStage;
-        innerOutlineVertexStage.module = innerOutlineVertexModule;
-        VkPipelineShaderStageCreateInfo innerOutlineFragmentStage =
-            fragmentStage;
-        innerOutlineFragmentStage.module = innerOutlineFragmentModule;
         const std::array innerOutlineShaderStages = {
-            innerOutlineVertexStage,
-            innerOutlineFragmentStage,
+            vertexStage,
+            fragmentStage,
         };
         VkPipelineShaderStageCreateInfo hudVertexStage = vertexStage;
         hudVertexStage.module = hudVertexModule;
@@ -325,114 +265,56 @@ void AzureRenderApp::createGraphicsPipeline() {
             hudFragmentStage,
         };
 
-        VkPipelineVertexInputStateCreateInfo vertexInput{
+        VkPipelineVertexInputStateCreateInfo emptyVertexInput{
             VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        VkVertexInputBindingDescription bindingDescription{};
-        bindingDescription.binding = 0;
-        bindingDescription.stride = sizeof(AssetVertex);
-        bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-        std::array<VkVertexInputAttributeDescription, 8> attributeDescriptions{};
-        attributeDescriptions[0] = {
-            0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, position)};
-        attributeDescriptions[1] = {
-            1, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, normal)};
-        attributeDescriptions[2] = {
-            2, 0, VK_FORMAT_R32G32B32A32_SFLOAT, offsetof(AssetVertex, tangent)};
-        attributeDescriptions[3] = {
-            3, 0, VK_FORMAT_R32G32_SFLOAT, offsetof(AssetVertex, texcoord)};
-        attributeDescriptions[4] = {
-            4, 0, VK_FORMAT_R32G32B32A32_UINT, offsetof(AssetVertex, joints)};
-        attributeDescriptions[5] = {
-            5, 0, VK_FORMAT_R32G32B32A32_SFLOAT, offsetof(AssetVertex, weights)};
-        attributeDescriptions[6] = {
-            6, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph0)};
-        attributeDescriptions[7] = {
-            7, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph1)};
-        const std::array shadowAttributeDescriptions = {
-            attributeDescriptions[0],
-            attributeDescriptions[3],
-            attributeDescriptions[4],
-            attributeDescriptions[5],
-        };
-        const std::array outlineAttributeDescriptions = {
-            attributeDescriptions[0],
-            attributeDescriptions[1],
-            attributeDescriptions[4],
-            attributeDescriptions[5],
-        };
-        vertexInput.vertexBindingDescriptionCount = 1;
-        vertexInput.pVertexBindingDescriptions = &bindingDescription;
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(attributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions = attributeDescriptions.data();
-
         VkPipelineInputAssemblyStateCreateInfo inputAssembly{
             VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
         inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-
         VkPipelineViewportStateCreateInfo viewportState{
             VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
         viewportState.viewportCount = 1;
         viewportState.scissorCount = 1;
-
         VkPipelineRasterizationStateCreateInfo rasterizer{
             VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
         rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-        rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+        rasterizer.cullMode = VK_CULL_MODE_NONE;
         rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
         rasterizer.lineWidth = 1.0F;
-
         VkPipelineMultisampleStateCreateInfo multisampling{
             VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
         multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-
         VkPipelineDepthStencilStateCreateInfo depthStencil{
             VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
-        depthStencil.depthTestEnable = VK_TRUE;
-        depthStencil.depthWriteEnable = VK_TRUE;
-        depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
-
-        std::array<VkPipelineColorBlendAttachmentState, 2>
-            colorBlendAttachments{};
-        for (auto& attachment : colorBlendAttachments) {
-            attachment.colorWriteMask =
-                VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-                | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        }
-
+        depthStencil.depthTestEnable = VK_FALSE;
+        depthStencil.depthWriteEnable = VK_FALSE;
+        VkPipelineColorBlendAttachmentState postBlendAttachment{};
+        postBlendAttachment.blendEnable = VK_FALSE;
+        postBlendAttachment.srcColorBlendFactor =
+            VK_BLEND_FACTOR_SRC_ALPHA;
+        postBlendAttachment.dstColorBlendFactor =
+            VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+        postBlendAttachment.colorBlendOp = VK_BLEND_OP_ADD;
+        postBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
+        postBlendAttachment.dstAlphaBlendFactor =
+            VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+        postBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
+        postBlendAttachment.colorWriteMask =
+            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
+            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
         VkPipelineColorBlendStateCreateInfo colorBlending{
             VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO};
-        colorBlending.attachmentCount =
-            static_cast<std::uint32_t>(colorBlendAttachments.size());
-        colorBlending.pAttachments = colorBlendAttachments.data();
-
+        colorBlending.attachmentCount = 1;
+        colorBlending.pAttachments = &postBlendAttachment;
         const std::array dynamicStates = {
             VK_DYNAMIC_STATE_VIEWPORT,
             VK_DYNAMIC_STATE_SCISSOR,
         };
         VkPipelineDynamicStateCreateInfo dynamicState{
             VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
-        dynamicState.dynamicStateCount = static_cast<std::uint32_t>(dynamicStates.size());
+        dynamicState.dynamicStateCount =
+            static_cast<std::uint32_t>(dynamicStates.size());
         dynamicState.pDynamicStates = dynamicStates.data();
 
-        VkPipelineLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
-        layoutInfo.setLayoutCount = 1;
-        layoutInfo.pSetLayouts = &descriptorSetLayout_;
-        VkPushConstantRange materialPushRange{};
-        materialPushRange.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-        materialPushRange.size = sizeof(MaterialPushConstants);
-        VkPushConstantRange morphPushRange{};
-        morphPushRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-        morphPushRange.offset = sizeof(MaterialPushConstants);
-        morphPushRange.size = sizeof(MorphPushConstants);
-        const VkPushConstantRange pushConstantRanges[] = {
-            materialPushRange, morphPushRange};
-        layoutInfo.pushConstantRangeCount = 2;
-        layoutInfo.pPushConstantRanges = pushConstantRanges;
-        vkCheck(
-            vkCreatePipelineLayout(device_, &layoutInfo, nullptr, &pipelineLayout_),
-            "vkCreatePipelineLayout");
         VkPushConstantRange postProcessPushRange{};
         postProcessPushRange.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
         postProcessPushRange.size = sizeof(PostProcessPushConstants);
@@ -463,9 +345,10 @@ void AzureRenderApp::createGraphicsPipeline() {
 
         VkGraphicsPipelineCreateInfo pipelineInfo{
             VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-        pipelineInfo.stageCount = static_cast<std::uint32_t>(shaderStages.size());
-        pipelineInfo.pStages = shaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
+        pipelineInfo.stageCount = static_cast<std::uint32_t>(
+            innerOutlineShaderStages.size());
+        pipelineInfo.pStages = innerOutlineShaderStages.data();
+        pipelineInfo.pVertexInputState = &emptyVertexInput;
         pipelineInfo.pInputAssemblyState = &inputAssembly;
         pipelineInfo.pViewportState = &viewportState;
         pipelineInfo.pRasterizationState = &rasterizer;
@@ -473,123 +356,9 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pDepthStencilState = &depthStencil;
         pipelineInfo.pColorBlendState = &colorBlending;
         pipelineInfo.pDynamicState = &dynamicState;
-        pipelineInfo.layout = pipelineLayout_;
-        pipelineInfo.renderPass = renderPass_;
-        pipelineInfo.subpass = 0;
-
-        const auto createVariant = [&](
-            const VkCullModeFlags cullMode,
-            const bool blend,
-            VkPipeline& pipeline) {
-            rasterizer.cullMode = cullMode;
-            depthStencil.depthWriteEnable = blend ? VK_FALSE : VK_TRUE;
-            auto& colorAttachment = colorBlendAttachments[0];
-            colorAttachment.blendEnable = blend ? VK_TRUE : VK_FALSE;
-            colorAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
-            colorAttachment.dstColorBlendFactor =
-                VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            colorAttachment.colorBlendOp = VK_BLEND_OP_ADD;
-            colorAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
-            colorAttachment.dstAlphaBlendFactor =
-                VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            colorAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
-            colorBlendAttachments[1] = colorAttachment;
-            vkCheck(
-                vkCreateGraphicsPipelines(
-                    device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
-                "vkCreateGraphicsPipelines(material variant)");
-        };
-        createVariant(VK_CULL_MODE_BACK_BIT, false, opaquePipeline_);
-        createVariant(VK_CULL_MODE_NONE, false, opaqueDoubleSidedPipeline_);
-        createVariant(VK_CULL_MODE_BACK_BIT, true, blendPipeline_);
-        createVariant(VK_CULL_MODE_NONE, true, blendDoubleSidedPipeline_);
-        pipelineInfo.pStages = outlineShaderStages.data();
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(
-                outlineAttributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions =
-            outlineAttributeDescriptions.data();
-        rasterizer.cullMode = VK_CULL_MODE_FRONT_BIT;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        colorBlendAttachments[0].blendEnable = VK_FALSE;
-
-        colorBlendAttachments[1].blendEnable = VK_FALSE;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &outlinePipeline_),
-            "vkCreateGraphicsPipelines(outline)");
-
-        VkPipelineVertexInputStateCreateInfo emptyVertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        pipelineInfo.pStages = backgroundShaderStages.data();
-        pipelineInfo.pVertexInputState = &emptyVertexInput;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &backgroundPipeline_),
-            "vkCreateGraphicsPipelines(background)");
-
-        pipelineInfo.pStages = shadowShaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(shadowAttributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions =
-            shadowAttributeDescriptions.data();
-        pipelineInfo.renderPass = shadowRenderPass_;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        rasterizer.depthBiasEnable = VK_TRUE;
-        rasterizer.depthBiasConstantFactor = 1.25F;
-        rasterizer.depthBiasSlopeFactor = 1.75F;
-        depthStencil.depthTestEnable = VK_TRUE;
-        depthStencil.depthWriteEnable = VK_TRUE;
-        colorBlending.attachmentCount = 0;
-        colorBlending.pAttachments = nullptr;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &shadowPipeline_),
-            "vkCreateGraphicsPipelines(shadow)");
-
-        VkPipelineColorBlendAttachmentState postBlendAttachment{};
-        postBlendAttachment.blendEnable = VK_FALSE;
-        postBlendAttachment.srcColorBlendFactor =
-            VK_BLEND_FACTOR_SRC_ALPHA;
-        postBlendAttachment.dstColorBlendFactor =
-            VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-        postBlendAttachment.colorBlendOp = VK_BLEND_OP_ADD;
-        postBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
-        postBlendAttachment.dstAlphaBlendFactor =
-            VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-        postBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
-        postBlendAttachment.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        colorBlending.attachmentCount = 1;
-        colorBlending.pAttachments = &postBlendAttachment;
-        pipelineInfo.pStages = innerOutlineShaderStages.data();
-        pipelineInfo.pVertexInputState = &emptyVertexInput;
         pipelineInfo.layout = postProcessPipelineLayout_;
         pipelineInfo.renderPass = postProcessRenderPass_;
-        rasterizer.depthBiasEnable = VK_FALSE;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
+        pipelineInfo.subpass = 0;
         vkCheck(
             vkCreateGraphicsPipelines(
                 device_,
@@ -651,18 +420,8 @@ void AzureRenderApp::createGraphicsPipeline() {
             device_,
             innerOutlineVertexModule,
             nullptr);
-        vkDestroyShaderModule(device_, shadowFragmentModule, nullptr);
-        vkDestroyShaderModule(device_, shadowVertexModule, nullptr);
-        vkDestroyShaderModule(device_, backgroundFragmentModule, nullptr);
-
-        vkDestroyShaderModule(device_, backgroundVertexModule, nullptr);
-        vkDestroyShaderModule(device_, outlineFragmentModule, nullptr);
-        vkDestroyShaderModule(device_, outlineVertexModule, nullptr);
-        vkDestroyShaderModule(device_, fragmentModule, nullptr);
-        vkDestroyShaderModule(device_, vertexModule, nullptr);
         throw;
     }
-
     vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
     vkDestroyShaderModule(device_, hudVertexModule, nullptr);
     vkDestroyShaderModule(
@@ -673,14 +432,6 @@ void AzureRenderApp::createGraphicsPipeline() {
         device_,
         innerOutlineVertexModule,
         nullptr);
-    vkDestroyShaderModule(device_, shadowFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, shadowVertexModule, nullptr);
-    vkDestroyShaderModule(device_, backgroundFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, backgroundVertexModule, nullptr);
-    vkDestroyShaderModule(device_, outlineFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, outlineVertexModule, nullptr);
-    vkDestroyShaderModule(device_, fragmentModule, nullptr);
-    vkDestroyShaderModule(device_, vertexModule, nullptr);
 }
 
 void AzureRenderApp::createFramebuffers() {

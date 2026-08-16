@@ -1,6 +1,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "extensions/ISceneRenderer.hpp"
 
 #include <stb_image_write.h>
 
@@ -85,10 +86,6 @@ void AzureRenderApp::writeCaptureManifest(
             "Failed to create capture manifest: "
             + outputPath.string());
     }
-    const std::string animationName =
-        asset_.animations.empty()
-        ? std::string()
-        : asset_.animations[animationIndex_].name;
     constexpr std::array<const char*, 5> kDiagnosticNames = {
         "beauty",
         "world-normal",
@@ -157,19 +154,25 @@ void AzureRenderApp::writeCaptureManifest(
         << '|'
         << rampProfileHash << '|'
         << rampAtlasHash;
-    for (const AssetMaterial& material : asset_.materials) {
-        qaState
-            << '|' << material.name
-            << ':' << static_cast<std::uint32_t>(material.materialClass)
-            << ':' << material.materialFeatures
-            << ':' << material.materialProfileVersion
-            << ':' << material.materialProfileExplicit
-            << ':' << material.emissiveStrength;
-        for (const float parameter : material.styleParameters) {
+    const azurerender::RendererSceneState* sceneState =
+        sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
+    const LoadedAsset* sceneAsset =
+        sceneState != nullptr ? sceneState->asset : nullptr;
+    if (sceneAsset != nullptr) {
+        for (const AssetMaterial& material : sceneAsset->materials) {
+            qaState
+                << '|' << material.name
+                << ':' << static_cast<std::uint32_t>(material.materialClass)
+                << ':' << material.materialFeatures
+                << ':' << material.materialProfileVersion
+                << ':' << material.materialProfileExplicit
+                << ':' << material.emissiveStrength;
+            for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
         }
         for (const float parameter : material.featureParameters) {
             qaState << ':' << parameter;
+        }
         }
     }
     const std::string qaStateHash = fnv1a64Hex(qaState.str());
@@ -290,42 +293,45 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"qaShowcasePreset\": " << renderSettings_.showcasePreset << ",\n"
         << "  \"materialProfileSchemaVersion\": 1,\n"
         << "  \"materialInventory\": [\n";
-    for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
-        const AssetMaterial& material = asset_.materials[index];
-        std::size_t primitiveCount = 0;
-        for (const AssetPrimitive& primitive : asset_.primitives) {
-            if (primitive.materialIndex == index) {
-                ++primitiveCount;
+    if (sceneAsset != nullptr) {
+        for (std::size_t index = 0; index < sceneAsset->materials.size();
+             ++index) {
+            const AssetMaterial& material = sceneAsset->materials[index];
+            std::size_t primitiveCount = 0;
+            for (const AssetPrimitive& primitive : sceneAsset->primitives) {
+                if (primitive.materialIndex == index) {
+                    ++primitiveCount;
+                }
             }
+            output
+                << "    {\"index\": " << index
+                << ", \"name\": " << std::quoted(material.name)
+                << ", \"class\": "
+                << std::quoted(assetMaterialClassName(material.materialClass))
+                << ", \"features\": " << material.materialFeatures
+                << ", \"profileVersion\": "
+                << material.materialProfileVersion
+                << ", \"emissiveStrength\": "
+                << material.emissiveStrength
+                << ", \"styleParameters\": ["
+                << material.styleParameters[0] << ", "
+                << material.styleParameters[1] << ", "
+                << material.styleParameters[2] << ", "
+                << material.styleParameters[3] << "]"
+                << ", \"featureParameters\": ["
+                << material.featureParameters[0] << ", "
+                << material.featureParameters[1] << ", "
+                << material.featureParameters[2] << ", "
+                << material.featureParameters[3] << "]"
+                << ", \"profileSource\": "
+                << std::quoted(
+                    material.materialProfileExplicit
+                        ? "asset-extras"
+                        : "fallback/inferred")
+                << ", \"primitiveCount\": " << primitiveCount << "}"
+                << (index + 1 < sceneAsset->materials.size() ? "," : "")
+                << '\n';
         }
-        output
-            << "    {\"index\": " << index
-            << ", \"name\": " << std::quoted(material.name)
-            << ", \"class\": "
-            << std::quoted(assetMaterialClassName(material.materialClass))
-            << ", \"features\": " << material.materialFeatures
-            << ", \"profileVersion\": "
-            << material.materialProfileVersion
-            << ", \"emissiveStrength\": "
-            << material.emissiveStrength
-            << ", \"styleParameters\": ["
-            << material.styleParameters[0] << ", "
-            << material.styleParameters[1] << ", "
-            << material.styleParameters[2] << ", "
-            << material.styleParameters[3] << "]"
-            << ", \"featureParameters\": ["
-            << material.featureParameters[0] << ", "
-            << material.featureParameters[1] << ", "
-            << material.featureParameters[2] << ", "
-            << material.featureParameters[3] << "]"
-            << ", \"profileSource\": "
-            << std::quoted(
-                material.materialProfileExplicit
-                    ? "asset-extras"
-                    : "fallback/inferred")
-            << ", \"primitiveCount\": " << primitiveCount << "}"
-            << (index + 1 < asset_.materials.size() ? "," : "")
-            << '\n';
     }
     output
         << "  ],\n"
@@ -377,9 +383,14 @@ void AzureRenderApp::writeCaptureManifest(
     } else {
         output << ",\n";
     }
+    if (sceneRenderer_ != nullptr) {
+        sceneRenderer_->appendCaptureManifestFields(output);
+    } else {
+        output
+            << "  \"animationIndex\": 0,\n"
+            << "  \"animation\": \"\",\n";
+    }
     output
-        << "  \"animationIndex\": " << animationIndex_ << ",\n"
-        << "  \"animation\": " << std::quoted(animationName) << ",\n"
         << "  \"framePattern\": \"frame_%06d.png\"\n"
         << "}\n";
     if (!output) {

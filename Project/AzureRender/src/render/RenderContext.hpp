@@ -7,9 +7,22 @@
 #include <string>
 #include <vector>
 
+// Defined in assets/GltfLoader.hpp (global namespace).
+struct LoadedAsset;
+
 namespace azurerender {
 
 struct RenderSettings;
+
+// Standardized scene state the engine can read from a scene renderer for
+// editor integration (picking, gizmos, HUD). A renderer without pickable
+// geometry (e.g. the blackhole renderer) leaves the pointer null.
+struct RendererSceneState {
+    const LoadedAsset* asset = nullptr;
+    const float* modelMatrix = nullptr;  // 16 floats, column-major
+    std::int32_t selectedPrimitiveIndex = -1;
+    std::size_t primitiveCount = 0;
+};
 
 // Declares what a scene renderer needs from the engine-owned frame.
 // The engine uses this to decide which attachments/passes exist before the
@@ -49,6 +62,14 @@ struct SceneFrameData {
     bool technicalSequence = false;
     std::uint32_t technicalSequenceChapter =
         std::numeric_limits<std::uint32_t>::max();
+    std::uint32_t currentFrame = 0;
+
+    // Editor interaction state the engine forwards for highlight/gizmo use.
+    std::int32_t selectedPrimitiveIndex = -1;
+    float gizmoTranslation[3]{0.0F, 0.0F, 0.0F};
+    float gizmoRotation[3]{0.0F, 0.0F, 0.0F};
+    float gizmoScale[3]{1.0F, 1.0F, 1.0F};
+    bool gizmoActive = false;
 
     std::uint32_t swapchainWidth = 0;
     std::uint32_t swapchainHeight = 0;
@@ -75,8 +96,6 @@ struct RenderContext {
     VkFormat sceneColorFormat = VK_FORMAT_UNDEFINED;
     VkFormat depthFormat = VK_FORMAT_UNDEFINED;
     VkFormat normalFormat = VK_FORMAT_R8G8B8A8_UNORM;
-    VkFormat shadowFormat = VK_FORMAT_UNDEFINED;
-    std::uint32_t shadowMapSize = 2048;
 
     VkRenderPass sceneRenderPass = VK_NULL_HANDLE;
     VkRenderPass postProcessRenderPass = VK_NULL_HANDLE;
@@ -84,8 +103,34 @@ struct RenderContext {
     VkDescriptorSetLayout postProcessDescriptorSetLayout = VK_NULL_HANDLE;
     VkSampler screenAttachmentSampler = VK_NULL_HANDLE;
 
+    // Engine-owned shadow map (fixed resolution, engine-sampled by the
+    // post-process Shadow Map diagnostic). A scene renderer records into it
+    // through its own shadow pipeline; renderers without a shadow pass may
+    // leave the map unrendered (contents undefined until cleared).
+    VkFormat shadowFormat = VK_FORMAT_UNDEFINED;
+    VkRenderPass shadowRenderPass = VK_NULL_HANDLE;
+    VkFramebuffer shadowFramebuffer = VK_NULL_HANDLE;
+    VkImageView shadowImageView = VK_NULL_HANDLE;
+    VkSampler shadowSampler = VK_NULL_HANDLE;
+    std::uint32_t shadowMapSize = 2048;
+
     // Current in-flight scene framebuffer the renderer records into.
     VkFramebuffer sceneFramebuffer = VK_NULL_HANDLE;
+
+    // Asset the renderer loads on onLoad (resolved absolute path).
+    std::string assetPath;
+    // Directory holding compiled .spv shaders for renderer pipelines.
+    std::string shaderDirectory;
+    // Optional equirect environment (HDR) and toon-ramp atlas used by the
+    // character renderer; empty string means renderer defaults.
+    std::string environmentPath;
+    std::string rampAtlasPath;
+
+    // GPU timing hooks: the renderer writes timestamps 0..2 around its scene
+    // passes when gpuTimingEnabled is true; the engine writes the final one.
+    VkQueryPool timestampQueryPool = VK_NULL_HANDLE;
+    std::uint32_t timestampQueryCount = 0;
+    bool gpuTimingEnabled = false;
 
     const RenderSettings* renderSettings = nullptr;
 };

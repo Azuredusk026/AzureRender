@@ -52,7 +52,10 @@ Project/AzureRender/
 │   ├── render/                 # 渲染设置契约(AR-0)与场景渲染上下文(AR-10.0)
 │   │   ├── RendererCore.{hpp,cpp}
 │   │   ├── RenderSettings.{hpp,cpp}    # 版本化设置(含 sceneType/morphWeights)
-│   │   └── RenderContext.hpp           # 引擎→渲染器只读上下文与帧数据
+│   │   ├── RenderContext.hpp           # 引擎→渲染器只读上下文与帧数据
+│   │   └── VulkanHelpers.{hpp,cpp}     # 共享 Vulkan 基础操作(AR-10.1)
+│   ├── scenes/                 # 可插拔场景渲染器实现(AR-10.1)
+│   │   └── CharacterSceneRenderer.{hpp,cpp}  # 角色管线(首个 ISceneRenderer)
 │   └── resources/              # 资源定位(AR-4.2)
 │       └── ResourceLocator.{hpp,cpp}
 │
