@@ -42,6 +42,9 @@ layout(push_constant) uniform MaterialData {
     uint materialPadding;
 } material;
 
+// materialPadding 复用为选中标志(1 = 视口拾取高亮)。
+#define AZURE_SELECTED_PADDING 1U
+
 layout(location = 0) in vec3 worldNormal;
 layout(location = 1) in vec4 worldTangent;
 layout(location = 2) in vec2 textureCoordinate;
@@ -517,6 +520,10 @@ void main() {
         qaColor = overlayMaterial ? baseColor.rgb : vec3(0.0);
     }
     outputColor = vec4(qaColor, outputAlpha);
+    if (material.materialPadding == AZURE_SELECTED_PADDING) {
+        outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
+        outputColor.a = 1.0;
+    }
     float innerOutlineParticipation =
         (1.0 - platformMask)
         * material.featureParameters.x

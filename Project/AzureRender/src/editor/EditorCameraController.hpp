@@ -10,6 +10,9 @@ struct EditorViewportInput {
     float panDeltaX = 0.0F;
     float panDeltaY = 0.0F;
     float zoomSteps = 0.0F;
+    float pickX = -1.0F;
+    float pickY = -1.0F;
+    bool pickRequested = false;
 
     [[nodiscard]] bool active() const noexcept;
 };

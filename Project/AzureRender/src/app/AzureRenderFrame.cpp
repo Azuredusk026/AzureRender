@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -74,11 +75,17 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
+        const azurerender::EditorViewportInput viewportInput =
+            editorLayer_->consumeViewportInput();
         if (azurerender::EditorCameraController::apply(
-                editorLayer_->consumeViewportInput(),
+                viewportInput,
                 cameraPosition_,
                 cameraTarget_)) {
             autoRotate_ = false;
+        }
+        if (viewportInput.pickRequested) {
+            pendingPickX_ = viewportInput.pickX;
+            pendingPickY_ = viewportInput.pickY;
         }
         std::uint32_t viewportWidth = 0;
         std::uint32_t viewportHeight = 0;
@@ -92,6 +99,10 @@ void AzureRenderApp::drawFrame() {
         }
     }
     updateUniformBuffer(currentFrame_);
+    if (pendingPickRequested_) {
+        pendingPickRequested_ = false;
+        pickPrimitive(pendingPickX_, pendingPickY_);
+    }
     updateHudBuffer(currentFrame_);
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
@@ -336,6 +347,91 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
         uniformBufferMapped_[frameIndex],
         &uniform,
         sizeof(uniform));
+}
+
+void AzureRenderApp::pickPrimitive(
+    const float viewportX,
+    const float viewportY) {
+    selectedPrimitiveIndex_ = -1;
+    if (asset_.indices.empty() || asset_.vertices.empty()) {
+        return;
+    }
+    // 从相机构建拾取射线(与 updateUniformBuffer 相同的 fov/aspect)。
+    constexpr float kPi = 3.14159265358979323846F;
+    const Vector3 forward = normalize(subtract(cameraTarget_, cameraPosition_));
+    const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
+    const Vector3 right = normalize(cross(forward, worldUp));
+    const Vector3 up = cross(right, forward);
+    const float aspect =
+        static_cast<float>(renderExtent_.width)
+        / static_cast<float>(renderExtent_.height);
+    const float tanHalfFov = std::tan(kPi / 6.0F);
+    const float ndcX = viewportX * 2.0F - 1.0F;
+    const float ndcY = 1.0F - viewportY * 2.0F;
+    const Vector3 direction = normalize({
+        forward[0] + right[0] * ndcX * tanHalfFov * aspect
+            + up[0] * ndcY * tanHalfFov,
+        forward[1] + right[1] * ndcX * tanHalfFov * aspect
+            + up[1] * ndcY * tanHalfFov,
+        forward[2] + right[2] * ndcX * tanHalfFov * aspect
+            + up[2] * ndcY * tanHalfFov,
+    });
+    float bestDistance = std::numeric_limits<float>::max();
+    for (std::size_t primitiveIndex = 0;
+         primitiveIndex < asset_.primitives.size();
+         ++primitiveIndex) {
+        const AssetPrimitive& primitive = asset_.primitives[primitiveIndex];
+        for (std::uint32_t offset = 0; offset + 2 < primitive.indexCount;
+             offset += 3) {
+            const std::uint32_t i0 =
+                asset_.indices[primitive.firstIndex + offset];
+            const std::uint32_t i1 =
+                asset_.indices[primitive.firstIndex + offset + 1];
+            const std::uint32_t i2 =
+                asset_.indices[primitive.firstIndex + offset + 2];
+            const Vector3 v0 = transformPosition(
+                currentModel_, asset_.vertices[i0].position);
+            const Vector3 v1 = transformPosition(
+                currentModel_, asset_.vertices[i1].position);
+            const Vector3 v2 = transformPosition(
+                currentModel_, asset_.vertices[i2].position);
+            // Möller–Trumbore 求交。
+            const Vector3 edge1 = subtract(v1, v0);
+            const Vector3 edge2 = subtract(v2, v0);
+            const Vector3 pvec = cross(direction, edge2);
+            const float determinant = dot(edge1, pvec);
+            if (std::abs(determinant) < 1.0e-7F) {
+                continue;
+            }
+            const float inverseDeterminant = 1.0F / determinant;
+            const Vector3 tvec = subtract(cameraPosition_, v0);
+            const float u = dot(tvec, pvec) * inverseDeterminant;
+            if (u < 0.0F || u > 1.0F) {
+                continue;
+            }
+            const Vector3 qvec = cross(tvec, edge1);
+            const float v = dot(direction, qvec) * inverseDeterminant;
+            if (v < 0.0F || u + v > 1.0F) {
+                continue;
+            }
+            const float distance =
+                dot(edge2, qvec) * inverseDeterminant;
+            if (distance > 0.0F && distance < bestDistance) {
+                bestDistance = distance;
+                selectedPrimitiveIndex_ =
+                    static_cast<std::int32_t>(primitiveIndex);
+            }
+        }
+    }
+    if (selectedPrimitiveIndex_ >= 0
+        && runOptions_.editorSession != nullptr) {
+        azurerender::RuntimeDiagnostics::instance().print(
+            "editor",
+            "Pick: primitive "
+                + std::to_string(selectedPrimitiveIndex_)
+                + " / "
+                + std::to_string(asset_.primitives.size()));
+    }
 }
 
 void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
@@ -957,7 +1053,11 @@ void AzureRenderApp::recordCommandBuffer(
             static_cast<std::uint32_t>(material.materialClass),
             material.materialFeatures,
             material.materialProfileVersion,
-            0,
+            selectedPrimitiveIndex_
+                    == static_cast<std::int32_t>(
+                           &primitive - asset_.primitives.data())
+                ? 1U
+                : 0U,
         };
         vkCmdPushConstants(
             commandBuffer,

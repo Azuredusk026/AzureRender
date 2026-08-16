@@ -399,6 +399,21 @@ void ImGuiEditorLayer::drawViewportPanel() {
                 viewportInput_.panDeltaX += io.MouseDelta.x;
                 viewportInput_.panDeltaY += io.MouseDelta.y;
             }
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                const ImVec2 mousePosition = io.MousePos;
+                const ImVec2 itemMin = ImGui::GetItemRectMin();
+                if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
+                    viewportInput_.pickX = std::clamp(
+                        (mousePosition.x - itemMin.x) / imageSize.x,
+                        0.0F,
+                        1.0F);
+                    viewportInput_.pickY = std::clamp(
+                        (mousePosition.y - itemMin.y) / imageSize.y,
+                        0.0F,
+                        1.0F);
+                    viewportInput_.pickRequested = true;
+                }
+            }
         }
     }
     viewportAcceptsShortcuts_ = viewportFocused_

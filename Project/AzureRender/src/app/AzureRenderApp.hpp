@@ -248,6 +248,10 @@ private:
     std::vector<void*> hudVertexBufferMapped_;
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
     std::array<float, 16> currentModel_{};
+    std::int32_t selectedPrimitiveIndex_ = -1;
+    float pendingPickX_ = 0.0F;
+    float pendingPickY_ = 0.0F;
+    bool pendingPickRequested_ = false;
     std::array<float, 3> cameraPosition_{2.8F, 2.1F, 3.2F};
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
@@ -335,6 +339,7 @@ private:
 
     void drawFrame();
     void updateUniformBuffer(std::size_t frameIndex);
+    void pickPrimitive(float viewportX, float viewportY);
     void updateHudBuffer(std::size_t frameIndex);
     void recordCommandBuffer(
         VkCommandBuffer commandBuffer,
