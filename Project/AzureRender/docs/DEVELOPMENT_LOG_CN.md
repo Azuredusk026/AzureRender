@@ -2913,3 +2913,14 @@ Release `--version` 输出 `AzureRender 0.1.0-rc1`。
 
 同步更新 `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`(v4 队列+退出条件)、
 `docs/PROJECT_HANDOFF_CN.md`、`README.md`。
+
+
+## 2026-08-16 v4 队列全部完成(AR-8.1~8.3)
+
+用户二次授权打磨范围,Active Plan v6 队列收官:
+
+- **AR-8.1 HDR IBL 精化**(82ad432):CLI --environment <hdr/png>; loadEnvironmentAsset 用 stb_image 解码→RGBA16F;新增 assets_public/test_env.hdr 测试资产。
+- **AR-8.2 视口 Gizmo 手柄**(04c7050):EditorContext::GizmoScreenData 存屏幕投影;App 每帧投影;ImGui DrawList 画三色轴 + 端点,拖拽把 MouseDelta 投影到屏幕轴方向→worldDelta→写回 translation。
+- **AR-8.3 ECS 基础**(58e76d9):src/ecs/* 实现 EntityID + ComponentArray + System 循环 + 复用 free list;tests/EcsTests.cpp 验证;EditorContext 桥接 SceneNode;CTest 11/11。
+
+验证:Debug + Release 构建;CTest 11/11;smoke + 截图正常;--version 0.1.0-rc1。

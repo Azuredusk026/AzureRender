@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-16 v6
-> 当前节点：v4 队列 Ready（AR-8.1 为首个执行任务）
+> 当前节点：v4 队列全部 Complete（AR-8.1 + AR-8.2 + AR-8.3）
 > 适用范围：HDR IBL 精化、Gizmo 视口手柄、ECS 基础
 
 ## 1. 计划治理
@@ -139,9 +139,9 @@ Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
 
 | 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
 |---:|---|---|---|---|---|
-| 1 | AR-8.1 | Ready | HDR IBL 精化：外部 equirect 资产导入（.hdr/.png）+ specular IBL 卷积（重要性采样 prefilter） | AR-7.3 | `完成 AR-8.1 HDR IBL 精化` |
-| 2 | AR-8.2 | Backlog | Gizmo 3D 视口内手柄：屏幕空间轴投影、拖拽平移/旋转/缩放 | AR-8.1 | `完成 AR-8.2 视口 Gizmo 手柄` |
-| 3 | AR-8.3 | Backlog | 完整 ECS：Entity/Component 存储、System 更新循环、场景桥接 | AR-8.2 | `完成 AR-8.3 ECS 基础` |
+| 1 | AR-8.1 | Complete | HDR IBL 精化：外部 equirect 资产导入（.hdr/.png）+ specular IBL 卷积（重要性采样 prefilter） | AR-7.3 | `完成 AR-8.1 HDR IBL 精化` |
+| 2 | AR-8.2 | Complete | Gizmo 3D 视口内手柄：屏幕空间轴投影、拖拽平移/旋转/缩放 | AR-8.1 | `完成 AR-8.2 视口 Gizmo 手柄` |
+| 3 | AR-8.3 | Complete | 完整 ECS：Entity/Component 存储、System 更新循环、场景桥接 | AR-8.2 | `完成 AR-8.3 ECS 基础` |
 
 ### v3 统一退出规则
 

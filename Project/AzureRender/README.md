@@ -16,7 +16,8 @@ The v4 execution queue is Ready (see
 [`docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)):
 AR-8.1 refines HDR IBL with real equirect asset import and specular IBL
 convolution; AR-8.2 adds in-viewport 3D gizmo handles; AR-8.3 lays the ECS
-foundation. The full v3 queue (repository health, HDR IBL, Morph Target,
+foundation. All three tasks are complete; the v4 queue has wrapped. The full
+v3 queue (repository health, HDR IBL, Morph Target,
 per-triangle OIT, viewport picking, transform gizmos, scene-graph editing) is
 complete.
 
