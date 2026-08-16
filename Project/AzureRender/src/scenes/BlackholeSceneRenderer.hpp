@@ -40,7 +40,7 @@ private:
         std::array<float, 4> cameraForward{};
         std::array<float, 4> physics{1.0F, 40.0F, 900.0F, 1.0F};
         std::array<float, 4> cameraFov{0.9F, 1.7777F, 0.0F, 0.0F};
-        std::array<float, 4> diskParameters{3.0F, 12.0F, 1.0F, 1.0F};
+        std::array<float, 4> diskParameters{3.0F, 12.0F, 6.0F, 1.0F};
     };
 
     // Engine context snapshot taken on onLoad.
@@ -61,7 +61,7 @@ private:
     std::vector<void*> uniformBufferMapped_;
 
     std::size_t currentFrame_ = 0;
-    std::array<float, 3> cameraPosition_{0.0F, 1.0F, 9.0F};
+    std::array<float, 3> cameraPosition_{0.0F, 0.4F, 12.0F};
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
     float aspect_ = 1.0F;

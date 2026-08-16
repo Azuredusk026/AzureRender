@@ -109,16 +109,9 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
 
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     currentFrame_ = frame.currentFrame;
-    cameraPosition_ = {
-        frame.cameraPosition[0],
-        frame.cameraPosition[1],
-        frame.cameraPosition[2],
-    };
-    cameraTarget_ = {
-        frame.cameraTarget[0],
-        frame.cameraTarget[1],
-        frame.cameraTarget[2],
-    };
+    // The black hole owns its own framing: the host camera/portfolio orbit
+    // would place the eye too close or off-axis for the accretion disk to
+    // be sampled. We only borrow the swapchain aspect ratio.
     rotationAngle_ = frame.rotationAngle;
     aspect_ = static_cast<float>(frame.swapchainWidth)
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
@@ -436,7 +429,7 @@ void BlackholeSceneRenderer::updateUniformBuffer() {
     uniform.cameraForward = {forward[0], forward[1], forward[2], 0.0F};
     uniform.physics = {1.0F, 40.0F, 900.0F, 1.0F};
     uniform.cameraFov = {fov, aspect_, 0.0F, 0.0F};
-    uniform.diskParameters = {3.0F, 12.0F, 1.0F, 1.0F};
+    uniform.diskParameters = {3.0F, 12.0F, 40.0F, 1.0F};
     std::memcpy(
         uniformBufferMapped_[currentFrame_],
         &uniform,

@@ -3009,3 +3009,22 @@ appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,�
   Scene Color + World Normal 两个 color attachment,黑洞只写第一个);
   empty shadow pass 让 shadow map 布局就绪供 post-process 诊断采样;
   引擎设备特性启用 independentBlend 以允许两个 attachment 的 blend state 不同
+
+- **BH-2 吸积盘与相对论效应**:扩展 shaders/blackhole.frag 加入赤道面穿越检测
+  (y 异号触发)、sampleDisk 函数(开普勒速度 v=sqrt(rs/(2r))、多普勒因子
+  δ=1/(γ(1-β·n̂))、引力红移 sqrt(1-rs/r)、黑体色温 T∝r^(-0.75)、射束 I∝δ³、
+  envelope=step(diskInner,r)*(1-step(r,diskOuter));
+  BH-2 累积穿越采样按 exp(-order*0.6) 衰减构成光子环次级图像;
+  BlackholeSceneRenderer updateFrame 忽略引擎相机(黑洞自管框定,
+  相机 (0, 0.4, 12) 接近盘平面斜视,引导光线在到达视界前穿过赤道面),
+  updateUniformBuffer intensity=40
+- 修复:BlackholeSceneRenderer updateFrame 被 frame.cameraPosition 覆盖导致
+  黑洞相机始终为引擎默认 (2.8,2.1,3.2),盘检测不到(光线直冲视界未穿过盘);
+  envelope 改为硬 step;intensity 从 180 调到 40 让 ACES tonemap 不爆白
+
+验证:--scene-type blackhole 1 帧 capture 显示黑洞视界+引力透镜弯曲盘弧+
+  透镜扭曲星空;公共资产 30 帧角色回归 0 VUID;CTest 12/12
+经验:黑洞渲染器不应消费引擎相机(各场景有自己的最佳观测点),
+  需为每类场景抽象"是否使用 host camera";envelope 用 smoothstep 边缘太软导致
+  盘采样整体偏暗,改 hard step 后立刻明亮;ACES tonemap 对 HDR 高动态盘场景非常合适,
+  通过 intensity 系数控制亮度即可,无需改 tone curve。
