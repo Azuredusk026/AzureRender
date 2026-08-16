@@ -3,7 +3,7 @@
 > 最后核对：2026-08-16（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前近期节点：**v4 队列全部 Complete（AR-8.1 HDR IBL 精化、AR-8.2 视口 Gizmo 手柄、AR-8.3 ECS 基础）**
+> 当前近期节点：**v5 队列全部 Complete（AR-9.0~9.3：编辑器闭环验证/背景采样/三路径基准/完整 ECS）**
 
 ## 0. 长期路线入口
 

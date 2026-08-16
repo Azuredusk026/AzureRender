@@ -2924,3 +2924,28 @@ Release `--version` 输出 `AzureRender 0.1.0-rc1`。
 - **AR-8.3 ECS 基础**(58e76d9):src/ecs/* 实现 EntityID + ComponentArray + System 循环 + 复用 free list;tests/EcsTests.cpp 验证;EditorContext 桥接 SceneNode;CTest 11/11。
 
 验证:Debug + Release 构建;CTest 11/11;smoke + 截图正常;--version 0.1.0-rc1。
+
+
+## 2026-08-16 v5 队列全部完成(AR-9.0~9.3)
+
+用户授权执行"下一步可做的事"4 项:
+
+- **AR-9.0 编辑器闭环验证**(d8a9e1f 前序):新增 PickMathTests(射线求交/射线方向纯函数);
+  编辑器 smoke 揪出 2 个真实 Validation bug 并修复:
+  a) mesh.vert push constant 未显式 offset(默认 0,与 layout [128,208] 不匹配)→ 加 layout(offset=128/144);
+  b) transitionImageLayout 只转 baseMipLevel 0,环境贴图 mip 1..6 保持 UNDEFINED → 加 mipLevels 参数
+  修复后编辑器 30 帧 smoke 0 VUID
+- **AR-9.1 背景采样环境贴图**(bbc696e):background.frag 声明 binding=4 环境贴图并
+  directionToEquirectangular 采样;三环境截图字节数显著不同(111K/24K/108K)→ HDR 反射可直观对比
+- **AR-9.2 论文三路径基准**:RenderSettings::RenderPath 枚举 + CLI --render-path
+  (traditional|subpasses|dynamic)+ GPU timing JSON 加 renderPath 字段 +
+  每帧明细 CSV(appendFrameTimingCsv,列=frame/renderPath/shadowMs/sceneMs/postProcessMs/frameMs);
+  docs/RENDER_PATH_BENCHMARK_CN.md 实验设计(测量协议/分析指标/状态表)
+- **AR-9.3 完整 ECS**:src/ecs/Components.hpp(Transform/Renderable/Name 组件);
+  World::each<T> 单/双组件遍历;EditorContext::syncComponents + visibleRenderableCount;
+  Frame 每帧同步并查询渲染实体(日志 "ECS visible renderables: N");EcsTests 扩展
+
+验证:Debug/Release 构建;CTest 12/12;编辑器 smoke 0 VUID;
+--render-path dynamic 生效并写入 JSON/CSV;Release --version 0.1.0-rc1
+经验:configureQaHarness 的 early-return 会吞掉无关 CLI 配置——独立配置块应放在 return 之前;
+GPU timing CSV 用 gpuTimingOutput.replace_extension(".csv") 自动派生路径。

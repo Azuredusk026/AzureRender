@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-16 v6
-> 当前节点：v4 队列全部 Complete（AR-8.1 + AR-8.2 + AR-8.3）
+> 当前节点：v5 队列全部 Complete（AR-9.0 编辑器闭环验证 + AR-9.1 背景采样 + AR-9.2 三路径基准 + AR-9.3 完整 ECS）
 > 适用范围：HDR IBL 精化、Gizmo 视口手柄、ECS 基础
 
 ## 1. 计划治理
