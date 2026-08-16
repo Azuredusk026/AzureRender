@@ -48,6 +48,18 @@ run_gate_stage(install
     --prefix "${INSTALL_DIR}")
 file(RENAME "${INSTALL_DIR}" "${MOVED_DIR}")
 
+# AR-5.5: reproducible content manifest for the staged install tree, then
+# verify the tree against it (license texts + file hashes).
+set(INSTALL_MANIFEST "${MOVED_DIR}/install_manifest.json")
+run_gate_stage(write-install-manifest
+    "${CMAKE_COMMAND}" -DINSTALL_DIR=${MOVED_DIR}
+    -DOUTPUT_FILE=${INSTALL_MANIFEST}
+    -P "${SOURCE_DIR}/tools/write_install_manifest.cmake")
+run_gate_stage(verify-install-manifest
+    "${CMAKE_COMMAND}" -DINSTALL_DIR=${MOVED_DIR}
+    -DMANIFEST_FILE=${INSTALL_MANIFEST}
+    -P "${SOURCE_DIR}/tools/verify_install_manifest.cmake")
+
 if(WIN32)
     set(INSTALLED_EXECUTABLE "${MOVED_DIR}/bin/AzureRender.exe")
 else()

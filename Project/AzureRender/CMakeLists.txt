@@ -263,6 +263,11 @@ if(BUILD_TESTING)
             -P ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_release_gate.cmake)
     set_tests_properties(
         AzureRender.ReleaseGateMissingBuild PROPERTIES WILL_FAIL TRUE)
+    add_test(
+        NAME AzureRender.InstallManifestRoundTrip
+        COMMAND "${CMAKE_COMMAND}"
+            -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
+            -P ${CMAKE_CURRENT_SOURCE_DIR}/tools/test_install_manifest_roundtrip.cmake)
 endif()
 
 target_link_libraries(
@@ -358,6 +363,21 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC0_BASELINE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RC_RELEASE_CN.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
+install(
+    FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
+    RENAME "imgui-LICENSE.txt")
+foreach(_pkg glfw3 tinygltf stb nlohmann-json)
+    if(EXISTS
+        "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
+        install(
+            FILES
+                "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright"
+            DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
+            RENAME "${_pkg}-LICENSE.txt")
+    endif()
+endforeach()
 if(WIN32)
     install(FILES "$<TARGET_FILE:glfw>" DESTINATION "${CMAKE_INSTALL_BINDIR}")
 elseif(UNIX)
