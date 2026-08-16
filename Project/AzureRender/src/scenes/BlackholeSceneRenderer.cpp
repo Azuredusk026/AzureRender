@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cstring>
 #include <iomanip>
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -220,6 +221,18 @@ void BlackholeSceneRenderer::appendHudText(std::ostringstream& text) const {
          << cameraPosition_[1] << ", " << cameraPosition_[2] << "]  "
          << "ANGLE " << std::fixed << std::setprecision(1)
          << rotationAngle_ * 180.0F / 3.14159265358979323846F << " DEG\n";
+}
+
+void BlackholeSceneRenderer::appendCaptureManifestFields(
+    std::ostream& json) const {
+    json
+        << "  \"blackhole\": {\n"
+        << "    \"rs\": 1.0,\n"
+        << "    \"camera\": ["
+        << cameraPosition_[0] << ", "
+        << cameraPosition_[1] << ", "
+        << cameraPosition_[2] << "]\n"
+        << "  },\n";
 }
 
 // ---------------------------------------------------------------------------

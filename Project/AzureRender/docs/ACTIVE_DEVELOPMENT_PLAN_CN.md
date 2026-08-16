@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-16 v7
-> 当前节点：v6 队列进行中（AR-10.0/10.1 Complete；BH-1 黑洞基础追踪 Complete；BH-2 Active）
+> 当前节点：v6 队列进行中（AR-10.0/10.1 Complete；BH-1 黑洞基础追踪 Complete；BH-2 吸积盘 Complete；BH-3 黑洞交付链 Complete；AR-10.2 多场景收口 Active）
 > 适用范围：可插拔场景渲染器架构 + 施瓦西黑洞渲染 Demo
 
 ## 1. 计划治理
@@ -335,9 +335,9 @@ Validation 无 VUID；Debug/Release 构建与 CTest 全绿。
 | 1 | AR-10.0 | Complete | 冻结 `ISceneRenderer`/`RenderContext`/`SceneFrameData` 契约，`SceneRendererRegistry` 挂入 `ExtensionRegistry`，`RenderSettings.sceneType` + `.azscene sceneRenderer` + `--scene-type` 契约 | AR-9.3 | `feat(ar10): 冻结可插拔场景渲染器接口` |
 | 2 | AR-10.1 | Complete | 角色路径迁移为 `CharacterSceneRenderer`，引擎核心瘦身为调度者，S36 Beauty 哈希不变 | AR-10.0 | `feat(ar10): 迁移角色路径为场景渲染器` |
 | 3 | BH-1 | Complete | `BlackholeSceneRenderer`：全屏追踪 pass + 星空背景 + 纯黑洞，`--scene-type blackhole` 可用 | AR-10.1 | `feat(bh): 黑洞渲染器基础追踪` |
-| 4 | BH-2 | Active | 吸积盘、多普勒/引力红移/射束、光子环累积、HDR 峰值，冻结新 Beauty 基准 | BH-1 | `feat(bh): 吸积盘与相对论效应` |
-| 5 | BH-3 | Backlog | 黑洞诊断视图、确定性 capture、GPU timing、manifest 扩展、技术序列 | BH-2 | `feat(bh): 黑洞交付链` |
-| 6 | AR-10.2 | Backlog | 编辑器场景类型切换、SceneRenderer Cookbook、tone mapper 可替换接口、全量回归 | BH-3 | `feat(ar10): 多场景收口与文档` |
+| 4 | BH-2 | Complete | 吸积盘、多普勒/引力红移/射束、光子环累积、HDR 峰值，冻结新 Beauty 基准 | BH-1 | `feat(bh): 吸积盘与相对论效应` |
+| 5 | BH-3 | Complete | 黑洞诊断视图、确定性 capture、GPU timing、manifest 扩展、技术序列 | BH-2 | `feat(bh): 黑洞交付链` |
+| 6 | AR-10.2 | Active | 编辑器场景类型切换、SceneRenderer Cookbook、tone mapper 可替换接口、全量回归 | BH-3 | `feat(ar10): 多场景收口与文档` |
 
 v6 退出规则：每节点独立提交（本表中文标题）；Debug/Release 构建与全量 CTest 通过；
 角色场景在 AR-10.1 之后必须以 `CharacterSceneRenderer` 渲染且与 S30/S36 基线逐字节

@@ -29,6 +29,7 @@ public:
     void recordScene(const RenderContext& context) override;
     void onUnload(const RenderContext& context) override;
     void appendHudText(std::ostringstream& text) const override;
+    void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
     static constexpr std::size_t kMaxFramesInFlight = 2;

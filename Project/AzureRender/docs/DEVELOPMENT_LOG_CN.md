@@ -3028,3 +3028,9 @@ appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,�
   需为每类场景抽象"是否使用 host camera";envelope 用 smoothstep 边缘太软导致
   盘采样整体偏暗,改 hard step 后立刻明亮;ACES tonemap 对 HDR 高动态盘场景非常合适,
   通过 intensity 系数控制亮度即可,无需改 tone curve。
+
+- **BH-3 黑洞交付链**:BlackholeSceneRenderer::appendCaptureManifestFields 输出
+  blackhole 区块(rs + camera);recordScene 已写 ts1+ts2 时间戳;
+  验证:1 帧 capture manifest 含 "blackhole": {"rs":1.0,"camera":[0,0.4,12]};
+  GPU timing 输出 shadow=0.012ms(empty pass)/mainScene=3.57ms(黑洞追踪)/
+  outline=0.015ms/total=3.6ms。诊断视图(光子环着色、引力透镜可视化)留 AR-10.2/P2
