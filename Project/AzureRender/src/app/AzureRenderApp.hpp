@@ -382,11 +382,19 @@ private:
         VkFormat format,
         VkImageUsageFlags usage,
         VkImage& image,
-        VkDeviceMemory& memory) const;
+        VkDeviceMemory& memory,
+        std::uint32_t mipLevels = 1) const;
+    void generateMipmaps(
+        VkImage image,
+        VkFormat format,
+        std::uint32_t width,
+        std::uint32_t height,
+        std::uint32_t mipLevels) const;
     [[nodiscard]] VkImageView createImageView(
         VkImage image,
         VkFormat format,
-        VkImageAspectFlags aspect) const;
+        VkImageAspectFlags aspect,
+        std::uint32_t mipLevels = 1) const;
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
     static void keyCallback(

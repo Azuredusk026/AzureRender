@@ -220,20 +220,14 @@ void main() {
     vec3 environmentDiffuse = texture(
         environmentTexture,
         directionToEquirectangular(shadedNormal)).rgb;
-    vec3 roughReflection = normalize(mix(
-        reflectionDirection,
-        shadedNormal,
-        roughness * roughness * 0.8));
-    vec3 sharpEnvironment = texture(
+    // Prefiltered specular: sample the HDR environment mip chain by
+    // roughness (mip 0 is the sharp sun, higher mips are prefiltered).
+    float envMipCount = 7.0;
+    float specularMip = clamp(roughness * (envMipCount - 1.0), 0.0, envMipCount - 1.0);
+    vec3 environmentSpecular = textureLod(
         environmentTexture,
-        directionToEquirectangular(reflectionDirection)).rgb;
-    vec3 roughEnvironment = texture(
-        environmentTexture,
-        directionToEquirectangular(roughReflection)).rgb;
-    vec3 environmentSpecular = mix(
-        sharpEnvironment,
-        roughEnvironment,
-        roughness);
+        directionToEquirectangular(reflectionDirection),
+        specularMip).rgb;
     environmentSpecular = mix(
         environmentSpecular,
         vec3(0.18, 0.22, 0.26),

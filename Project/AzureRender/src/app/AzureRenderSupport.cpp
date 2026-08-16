@@ -541,6 +541,146 @@ void AzureRenderApp::transitionImageLayout(
     vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
 }
 
+void AzureRenderApp::generateMipmaps(
+    const VkImage image,
+    const VkFormat format,
+    const std::uint32_t width,
+    const std::uint32_t height,
+    const std::uint32_t mipLevels) const {
+    VkFormatProperties formatProperties{};
+    vkGetPhysicalDeviceFormatProperties(physicalDevice_, format, &formatProperties);
+    if (!(formatProperties.optimalTilingFeatures
+          & VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT)) {
+        throw std::runtime_error(
+            "Texture image format does not support linear blitting");
+    }
+
+    VkCommandBufferAllocateInfo allocateInfo{
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    allocateInfo.commandPool = commandPool_;
+    allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocateInfo.commandBufferCount = 1;
+    VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+    vkCheck(
+        vkAllocateCommandBuffers(device_, &allocateInfo, &commandBuffer),
+        "vkAllocateCommandBuffers(mipmap)");
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+    vkCheck(
+        vkBeginCommandBuffer(commandBuffer, &beginInfo),
+        "vkBeginCommandBuffer(mipmap)");
+
+    std::int32_t mipWidth = static_cast<std::int32_t>(width);
+    std::int32_t mipHeight = static_cast<std::int32_t>(height);
+    for (std::uint32_t level = 1; level < mipLevels; ++level) {
+        VkImageMemoryBarrier barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+        barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.image = image;
+        barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        barrier.subresourceRange.baseMipLevel = level - 1;
+        barrier.subresourceRange.levelCount = 1;
+        barrier.subresourceRange.layerCount = 1;
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+        vkCmdPipelineBarrier(
+            commandBuffer,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            0,
+            0,
+            nullptr,
+            0,
+            nullptr,
+            1,
+            &barrier);
+
+        VkImageBlit blit{};
+        blit.srcOffsets[0] = {0, 0, 0};
+        blit.srcOffsets[1] = {mipWidth, mipHeight, 1};
+        blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.srcSubresource.mipLevel = level - 1;
+        blit.srcSubresource.baseArrayLayer = 0;
+        blit.srcSubresource.layerCount = 1;
+        blit.dstOffsets[0] = {0, 0, 0};
+        blit.dstOffsets[1] = {
+            mipWidth > 1 ? mipWidth / 2 : 1,
+            mipHeight > 1 ? mipHeight / 2 : 1,
+            1};
+        blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.dstSubresource.mipLevel = level;
+        blit.dstSubresource.baseArrayLayer = 0;
+        blit.dstSubresource.layerCount = 1;
+        vkCmdBlitImage(
+            commandBuffer,
+            image,
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+            image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            1,
+            &blit,
+            VK_FILTER_LINEAR);
+
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+        barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+        barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        vkCmdPipelineBarrier(
+            commandBuffer,
+            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            0,
+            0,
+            nullptr,
+            0,
+            nullptr,
+            1,
+            &barrier);
+        if (mipWidth > 1) {
+            mipWidth /= 2;
+        }
+        if (mipHeight > 1) {
+            mipHeight /= 2;
+        }
+    }
+
+    VkImageMemoryBarrier lastBarrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+    lastBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    lastBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    lastBarrier.image = image;
+    lastBarrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    lastBarrier.subresourceRange.baseMipLevel = mipLevels - 1;
+    lastBarrier.subresourceRange.levelCount = 1;
+    lastBarrier.subresourceRange.layerCount = 1;
+    lastBarrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    lastBarrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    lastBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    lastBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    vkCmdPipelineBarrier(
+        commandBuffer,
+        VK_PIPELINE_STAGE_TRANSFER_BIT,
+        VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+        0,
+        0,
+        nullptr,
+        0,
+        nullptr,
+        1,
+        &lastBarrier);
+
+    vkCheck(vkEndCommandBuffer(commandBuffer), "vkEndCommandBuffer(mipmap)");
+    VkSubmitInfo submitInfo{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submitInfo.commandBufferCount = 1;
+    submitInfo.pCommandBuffers = &commandBuffer;
+    vkCheck(
+        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, VK_NULL_HANDLE),
+        "vkQueueSubmit(mipmap)");
+    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(mipmap)");
+    vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
+}
+
 void AzureRenderApp::copyBufferToImage(
     const VkBuffer source,
     const VkImage destination,
@@ -587,11 +727,12 @@ void AzureRenderApp::createImage(
     const VkFormat format,
     const VkImageUsageFlags usage,
     VkImage& image,
-    VkDeviceMemory& memory) const {
+    VkDeviceMemory& memory,
+    const std::uint32_t mipLevels) const {
     VkImageCreateInfo imageInfo{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};
     imageInfo.imageType = VK_IMAGE_TYPE_2D;
     imageInfo.extent = {width, height, 1};
-    imageInfo.mipLevels = 1;
+    imageInfo.mipLevels = std::max(mipLevels, 1U);
     imageInfo.arrayLayers = 1;
     imageInfo.format = format;
     imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
@@ -614,13 +755,14 @@ void AzureRenderApp::createImage(
 VkImageView AzureRenderApp::createImageView(
     const VkImage image,
     const VkFormat format,
-    const VkImageAspectFlags aspect) const {
+    const VkImageAspectFlags aspect,
+    const std::uint32_t mipLevels) const {
     VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
     createInfo.image = image;
     createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
     createInfo.format = format;
     createInfo.subresourceRange.aspectMask = aspect;
-    createInfo.subresourceRange.levelCount = 1;
+    createInfo.subresourceRange.levelCount = std::max(mipLevels, 1U);
     createInfo.subresourceRange.layerCount = 1;
 
     VkImageView imageView = VK_NULL_HANDLE;

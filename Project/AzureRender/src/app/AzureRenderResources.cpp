@@ -14,6 +14,34 @@
 
 using namespace azurerender::internal;
 
+namespace {
+
+// IEEE 754 half-precision encode for the HDR environment texture.
+std::uint16_t floatToHalf(const float value) {
+    const std::uint32_t bits = *reinterpret_cast<const std::uint32_t*>(&value);
+    const std::uint32_t sign = (bits >> 16) & 0x8000U;
+    const std::int32_t exponent =
+        static_cast<std::int32_t>((bits >> 23) & 0xFFU) - 127 + 15;
+    const std::uint32_t mantissa = bits & 0x7FFFFFU;
+    if (exponent <= 0) {
+        if (exponent < -10) {
+            return static_cast<std::uint16_t>(sign);
+        }
+        const std::uint32_t shifted =
+            (mantissa | 0x800000U) >> (1 - exponent);
+        return static_cast<std::uint16_t>(
+            sign | (shifted + 0x0FFFU + ((shifted >> 13) & 1U)) >> 13);
+    }
+    if (exponent >= 31) {
+        return static_cast<std::uint16_t>(sign | 0x7C00U);
+    }
+    return static_cast<std::uint16_t>(
+        sign | (static_cast<std::uint32_t>(exponent) << 10)
+            | (mantissa >> 13));
+}
+
+}  // namespace
+
 void AzureRenderApp::createImageViews() {
     swapchainImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
@@ -296,13 +324,15 @@ void AzureRenderApp::createIndexBuffer() {
 
 void AzureRenderApp::createTexture() {
     const auto uploadTexture = [this](
-        const std::vector<std::uint8_t>& pixels,
+        const auto& pixels,
         const std::uint32_t width,
         const std::uint32_t height,
         const VkFormat format,
         const bool clampVertical,
-        GpuTexture& texture) {
-        const VkDeviceSize size = pixels.size();
+        GpuTexture& texture,
+        const std::uint32_t mipLevels = 1) {
+        const VkDeviceSize size = static_cast<VkDeviceSize>(pixels.size())
+            * sizeof(typename std::decay_t<decltype(pixels)>::value_type);
         VkBuffer stagingBuffer = VK_NULL_HANDLE;
         VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
         createBuffer(
@@ -321,22 +351,28 @@ void AzureRenderApp::createTexture() {
             width,
             height,
             format,
-            VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
+            VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT
+                | (mipLevels > 1 ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0),
             texture.image,
-            texture.memory);
+            texture.memory,
+            mipLevels);
         transitionImageLayout(
             texture.image,
             VK_IMAGE_LAYOUT_UNDEFINED,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
         copyBufferToImage(stagingBuffer, texture.image, width, height);
-        transitionImageLayout(
-            texture.image,
-            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        if (mipLevels > 1) {
+            generateMipmaps(texture.image, format, width, height, mipLevels);
+        } else {
+            transitionImageLayout(
+                texture.image,
+                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        }
         vkDestroyBuffer(device_, stagingBuffer, nullptr);
         vkFreeMemory(device_, stagingMemory, nullptr);
         texture.view = createImageView(
-            texture.image, format, VK_IMAGE_ASPECT_COLOR_BIT);
+            texture.image, format, VK_IMAGE_ASPECT_COLOR_BIT, mipLevels);
         VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
         samplerInfo.magFilter = VK_FILTER_LINEAR;
         samplerInfo.minFilter = VK_FILTER_LINEAR;
@@ -346,7 +382,7 @@ void AzureRenderApp::createTexture() {
             : VK_SAMPLER_ADDRESS_MODE_REPEAT;
         samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
         samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
-        samplerInfo.maxLod = 0.0F;
+        samplerInfo.maxLod = static_cast<float>(mipLevels - 1);
         vkCheck(
             vkCreateSampler(device_, &samplerInfo, nullptr, &texture.sampler),
             "vkCreateSampler");
@@ -463,8 +499,10 @@ void AzureRenderApp::createTexture() {
 
     constexpr std::uint32_t kEnvironmentWidth = 512;
     constexpr std::uint32_t kEnvironmentHeight = 256;
+    constexpr std::uint32_t kEnvironmentMipLevels = 7;
     constexpr float kPi = 3.14159265358979323846F;
-    std::vector<std::uint8_t> environmentPixels(
+    // HDR environment: one float16 RGBA per pixel (values may exceed 1.0).
+    std::vector<std::uint16_t> environmentPixels(
         static_cast<std::size_t>(kEnvironmentWidth)
         * kEnvironmentHeight
         * 4);
@@ -497,9 +535,11 @@ void AzureRenderApp::createTexture() {
             const float sun = std::pow(
                 std::max(dot(direction, normalizedSun), 0.0F),
                 320.0F);
+            // HDR sky values: bright sun disc well above 1.0, cool ambient.
             const std::array<float, 3> ground = {0.055F, 0.075F, 0.090F};
             const std::array<float, 3> zenith = {0.20F, 0.34F, 0.46F};
             const std::array<float, 3> horizonColor = {0.38F, 0.43F, 0.46F};
+            const float sunIntensity = 24.0F * sun;
             const std::size_t pixel =
                 (static_cast<std::size_t>(y) * kEnvironmentWidth + x) * 4;
             for (std::size_t channel = 0; channel < 3; ++channel) {
@@ -508,21 +548,21 @@ void AzureRenderApp::createTexture() {
                     + zenith[channel] * skyAmount;
                 color = color * (1.0F - horizon * 0.55F)
                     + horizonColor[channel] * horizon * 0.55F;
-                color += sun * (channel == 2 ? 0.70F : 1.0F);
+                color += sunIntensity * (channel == 2 ? 0.70F : 1.0F);
                 environmentPixels[pixel + channel] =
-                    static_cast<std::uint8_t>(
-                        std::clamp(color, 0.0F, 1.0F) * 255.0F);
+                    floatToHalf(std::clamp(color, 0.0F, 32.0F));
             }
-            environmentPixels[pixel + 3] = 255;
+            environmentPixels[pixel + 3] = floatToHalf(1.0F);
         }
     }
     uploadTexture(
         environmentPixels,
         kEnvironmentWidth,
         kEnvironmentHeight,
-        VK_FORMAT_R8G8B8A8_UNORM,
+        VK_FORMAT_R16G16B16A16_SFLOAT,
         true,
-        environmentTexture_);
+        environmentTexture_,
+        kEnvironmentMipLevels);
 
     const auto toonRamp = loadPpmTexture(resourceLocator_.rampAtlas().string());
     uploadTexture(
