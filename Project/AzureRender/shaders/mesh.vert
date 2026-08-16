@@ -31,9 +31,12 @@ layout(location = 2) out vec2 textureCoordinate;
 layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPosition;
 
-// Morph target blend weights (driven by push constant from RenderSettings).
+// Morph blend weights + per-primitive gizmo transform (driven by push
+// constants from RenderSettings). weights occupies bytes 0..7; the gizmo
+// transform is a std140 mat4 starting at byte 16.
 layout(push_constant) uniform MorphWeights {
     vec2 weights;
+    mat4 gizmoTransform;
 } morphWeights;
 
 void main() {
@@ -45,15 +48,17 @@ void main() {
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
+    vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
-    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
-    gl_Position = camera.modelViewProjection * skinnedPosition;
+    vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
+    vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * tangent.xyz);
+    gl_Position = camera.modelViewProjection * gizmoPosition;
     gl_Position.xy *= 1.6;
-    worldNormal = normalize(mat3(camera.model) * skinnedNormal);
+    worldNormal = normalize(mat3(camera.model) * gizmoNormal);
     worldTangent = vec4(
-        normalize(mat3(camera.model) * skinnedTangent),
+        normalize(mat3(camera.model) * gizmoTangent),
         tangent.w);
     textureCoordinate = texcoord;
-    worldPosition = (camera.model * skinnedPosition).xyz;
-    shadowPosition = camera.lightModelViewProjection * skinnedPosition;
+    worldPosition = (camera.model * gizmoPosition).xyz;
+    shadowPosition = camera.lightModelViewProjection * gizmoPosition;
 }

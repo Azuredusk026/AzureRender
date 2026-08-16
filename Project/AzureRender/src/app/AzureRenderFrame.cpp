@@ -1068,6 +1068,56 @@ void AzureRenderApp::recordCommandBuffer(
             &materialConstants);
         const MorphPushConstants morphConstants{
             renderSettings_.morphWeights,
+            {0.0F, 0.0F},
+            [&]() -> std::array<float, 16> {
+                if (selectedPrimitiveIndex_
+                    != static_cast<std::int32_t>(
+                           &primitive - asset_.primitives.data())) {
+                    return {1.0F, 0.0F, 0.0F, 0.0F,
+                            0.0F, 1.0F, 0.0F, 0.0F,
+                            0.0F, 0.0F, 1.0F, 0.0F,
+                            0.0F, 0.0F, 0.0F, 1.0F};
+                }
+                constexpr float kPi = 3.14159265358979323846F;
+                std::array<float, 3> gizmoTranslation{0.0F, 0.0F, 0.0F};
+                std::array<float, 3> gizmoRotation{0.0F, 0.0F, 0.0F};
+                std::array<float, 3> gizmoScale{1.0F, 1.0F, 1.0F};
+                if (runOptions_.editorSession != nullptr) {
+                    const auto& editorContext =
+                        runOptions_.editorSession->context();
+                    gizmoTranslation = editorContext.gizmoTranslation();
+                    gizmoRotation = editorContext.gizmoRotation();
+                    gizmoScale = editorContext.gizmoScale();
+                }
+                const Matrix4 gizmoTransform = multiply(
+                    translation(
+                        gizmoTranslation[0],
+                        gizmoTranslation[1],
+                        gizmoTranslation[2]),
+                    multiply(
+                        multiply(
+                            rotationX(
+                                gizmoRotation[0] * kPi / 180.0F),
+                            rotationY(
+                                gizmoRotation[1] * kPi / 180.0F)),
+                        multiply(
+                            rotationZ(
+                                gizmoRotation[2] * kPi / 180.0F),
+                            scale(
+                                gizmoScale[0],
+                                gizmoScale[1],
+                                gizmoScale[2]))));
+                return {
+                    gizmoTransform[0], gizmoTransform[1],
+                    gizmoTransform[2], gizmoTransform[3],
+                    gizmoTransform[4], gizmoTransform[5],
+                    gizmoTransform[6], gizmoTransform[7],
+                    gizmoTransform[8], gizmoTransform[9],
+                    gizmoTransform[10], gizmoTransform[11],
+                    gizmoTransform[12], gizmoTransform[13],
+                    gizmoTransform[14], gizmoTransform[15],
+                };
+            }(),
         };
         vkCmdPushConstants(
             commandBuffer,

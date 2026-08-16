@@ -242,7 +242,15 @@ private:
     std::size_t oitIndexBufferSize_ = 0;
     struct MorphPushConstants {
         std::array<float, 2> weights{{0.0F, 0.0F}};
+        std::array<float, 2> padding{{0.0F, 0.0F}};
+        std::array<float, 16> gizmoTransform{
+            1.0F, 0.0F, 0.0F, 0.0F,
+            0.0F, 1.0F, 0.0F, 0.0F,
+            0.0F, 0.0F, 1.0F, 0.0F,
+            0.0F, 0.0F, 0.0F, 1.0F,
+        };
     };
+    static_assert(sizeof(MorphPushConstants) == 80);
     std::vector<VkBuffer> hudVertexBuffers_;
     std::vector<VkDeviceMemory> hudVertexBufferMemories_;
     std::vector<void*> hudVertexBufferMapped_;

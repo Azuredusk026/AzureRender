@@ -59,6 +59,17 @@ inline Vector3 normalize(const Vector3& value) {
     return {value[0] / length, value[1] / length, value[2] / length};
 }
 
+inline Matrix4 rotationX(const float radians) {
+    const float cosine = std::cos(radians);
+    const float sine = std::sin(radians);
+    return {
+        1.0F, 0.0F, 0.0F, 0.0F,
+        0.0F, cosine, -sine, 0.0F,
+        0.0F, sine, cosine, 0.0F,
+        0.0F, 0.0F, 0.0F, 1.0F,
+    };
+}
+
 inline Matrix4 rotationY(const float radians) {
     const float cosine = std::cos(radians);
     const float sine = std::sin(radians);
@@ -66,6 +77,26 @@ inline Matrix4 rotationY(const float radians) {
         cosine, 0.0F, -sine, 0.0F,
         0.0F, 1.0F, 0.0F, 0.0F,
         sine, 0.0F, cosine, 0.0F,
+        0.0F, 0.0F, 0.0F, 1.0F,
+    };
+}
+
+inline Matrix4 rotationZ(const float radians) {
+    const float cosine = std::cos(radians);
+    const float sine = std::sin(radians);
+    return {
+        cosine, -sine, 0.0F, 0.0F,
+        sine, cosine, 0.0F, 0.0F,
+        0.0F, 0.0F, 1.0F, 0.0F,
+        0.0F, 0.0F, 0.0F, 1.0F,
+    };
+}
+
+inline Matrix4 scale(const float x, const float y, const float z) {
+    return {
+        x, 0.0F, 0.0F, 0.0F,
+        0.0F, y, 0.0F, 0.0F,
+        0.0F, 0.0F, z, 0.0F,
         0.0F, 0.0F, 0.0F, 1.0F,
     };
 }

@@ -450,6 +450,20 @@ void ImGuiEditorLayer::drawInspectorPanel() {
             context_->markDirty();
         }
     }
+    ImGui::Separator();
+    ImGui::Text("Transform Gizmo");
+    std::array<float, 3> translation = context_->gizmoTranslation();
+    if (ImGui::DragFloat3("Translate", translation.data(), 0.01F)) {
+        context_->setGizmoTranslation(translation);
+    }
+    std::array<float, 3> rotation = context_->gizmoRotation();
+    if (ImGui::DragFloat3("Rotate (deg)", rotation.data(), 0.5F)) {
+        context_->setGizmoRotation(rotation);
+    }
+    std::array<float, 3> scale = context_->gizmoScale();
+    if (ImGui::DragFloat3("Scale", scale.data(), 0.01F, 0.01F, 100.0F)) {
+        context_->setGizmoScale(scale);
+    }
     RenderSettings& settings = context_->renderSettings();
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {

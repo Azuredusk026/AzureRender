@@ -424,6 +424,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         materialPushRange.size = sizeof(MaterialPushConstants);
         VkPushConstantRange morphPushRange{};
         morphPushRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        morphPushRange.offset = sizeof(MaterialPushConstants);
         morphPushRange.size = sizeof(MorphPushConstants);
         const VkPushConstantRange pushConstantRanges[] = {
             materialPushRange, morphPushRange};

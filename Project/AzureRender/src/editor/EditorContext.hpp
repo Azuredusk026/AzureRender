@@ -2,6 +2,7 @@
 
 #include "SceneModel.hpp"
 
+#include <array>
 #include <cstddef>
 #include <filesystem>
 #include <string>
@@ -32,6 +33,28 @@ public:
     void selectNode(std::size_t index);
     void selectNextNode();
 
+    [[nodiscard]] const std::array<float, 3>& gizmoTranslation() const noexcept {
+        return gizmoTranslation_;
+    }
+    [[nodiscard]] const std::array<float, 3>& gizmoRotation() const noexcept {
+        return gizmoRotation_;
+    }
+    [[nodiscard]] const std::array<float, 3>& gizmoScale() const noexcept {
+        return gizmoScale_;
+    }
+    void setGizmoTranslation(std::array<float, 3> value) {
+        gizmoTranslation_ = value;
+        markDirty();
+    }
+    void setGizmoRotation(std::array<float, 3> value) {
+        gizmoRotation_ = value;
+        markDirty();
+    }
+    void setGizmoScale(std::array<float, 3> value) {
+        gizmoScale_ = value;
+        markDirty();
+    }
+
     void markDirty() noexcept { dirty_ = true; }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
     void save();
@@ -46,6 +69,9 @@ private:
     std::filesystem::path scenePath_;
     RenderSettings* attachedRenderSettings_ = nullptr;
     std::size_t selectedNodeIndex_ = 0;
+    std::array<float, 3> gizmoTranslation_{0.0F, 0.0F, 0.0F};
+    std::array<float, 3> gizmoRotation_{0.0F, 0.0F, 0.0F};
+    std::array<float, 3> gizmoScale_{1.0F, 1.0F, 1.0F};
     bool dirty_ = false;
     std::vector<std::string> consoleMessages_;
 };
