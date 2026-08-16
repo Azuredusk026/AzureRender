@@ -2795,3 +2795,36 @@ Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 
 - 保留 `_HN` RG/BA 主/副发束方向语义，新增 Shift 派生的第二层 Kajiya-Kay lobe 与独立冷色 tint。
 - Hair KK isolation 同时显示主层和次层；enabled/disabled/isolation 三态、Face 3/4 机位和 60 帧 lighting sweep 均通过。
 - Debug/Release Shader 构建通过；CQ-4 Hair KK v1 完成，下一节点为 CQ-5 Rim/Specular/Emissive/Bloom。
+
+## 2026-08-16 AR-5.2 场景原子保存
+
+- `SceneDocument::save` 改为原子写入：同目录唯一临时文件（`<目标>.tmp.<随机>`）
+  写入 → `flush()` 校验 → `std::filesystem::rename` 原子替换；
+- 任一阶段失败都会清理临时文件并保持原目标不变；父目录不存在时写前即失败；
+- `.azscene v1` 文本格式与既有错误语义（失败保留脏状态）不变；
+- 新增 `tests/SceneModelTests.cpp` 并注册 `AzureRender.SceneModel`，覆盖
+  正常保存、覆盖保存、父目录缺失、不可写路径与无临时文件残留。
+
+验证：
+
+- Ninja Debug/Release 构建成功；
+- 全量 CTest 8/8 通过（含新增 SceneModel 测试）；
+- 公共资产 120 帧 Debug Validation 通过，退出码 0，无 VUID；
+- 提交：`c14cc9e 完成 AR-5.2 场景原子保存`。
+
+## 2026-08-16 接手环境修复：Windows MinGW imgui ABI
+
+- 接手时 Windows 构建无法链接 vcpkg imgui：`x64-windows` triplet 是 MSVC
+  编译的 C++ 静态库，与 MinGW name mangling 不兼容（Linux 验证不受影响）；
+- 将 Dear ImGui docking v1.92.8 源码 vendored 到 `third_party/imgui`，
+  CMake 以项目编译器直接编译（`azure_imgui` target）；
+- `ImGuiEditorLayer.cpp` 适配 imgui 1.92.8 新 API（`PipelineInfoMain`、
+  移除 `CreateFontsTexture`、`DockSpaceOverViewport` 新签名）；
+- 从 `vcpkg.json` 移除 imgui 依赖，`THIRD_PARTY_NOTICES.md` 注明 vendored 来源。
+
+验证：
+
+- Ninja Debug/Release 构建成功；
+- 全量 CTest 8/8 通过；
+- 公共资产 120 帧 Debug Validation 通过；
+- 提交：`1c985e9 修复 Windows MinGW imgui ABI 兼容并适配 1.92.8 API`。

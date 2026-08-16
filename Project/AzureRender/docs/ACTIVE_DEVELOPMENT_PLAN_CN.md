@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
-> 计划版本：2026-08-14 v2
-> 当前节点：AR-5.2 Ready
+> 计划版本：2026-08-16 v3
+> 当前节点：AR-5.3 Ready
 > 适用范围：RC1 发布验证、错误契约、持久化与诊断收口
 
 ## 1. 计划治理
@@ -69,8 +69,8 @@ v1 固定队列已全部完成。
 |---:|---|---|---|---|---|
 | 1 | AR-5.0 | Complete | 可重复的本地/CI 发布门禁编排与结果摘要 | AR-4.5 | `完成 AR-5.0 发布门禁编排` |
 | 2 | AR-5.1 | Complete | 类型化 CLI 解析、稳定错误类型与参数契约测试 | AR-5.0 | `完成 AR-5.1 命令行契约` |
-| 3 | AR-5.2 | Ready | `.azscene` 原子保存、临时文件清理和恢复测试 | AR-5.1 | `完成 AR-5.2 场景原子保存` |
-| 4 | AR-5.3 | Backlog | Renderer/Loader/Validation 日志汇入统一诊断源 | AR-5.2 | `完成 AR-5.3 统一运行日志` |
+| 3 | AR-5.2 | Complete | `.azscene` 原子保存、临时文件清理和恢复测试 | AR-5.1 | `完成 AR-5.2 场景原子保存` |
+| 4 | AR-5.3 | Ready | Renderer/Loader/Validation 日志汇入统一诊断源 | AR-5.2 | `完成 AR-5.3 统一运行日志` |
 | 5 | AR-5.4 | Backlog | GPU 能力报告 JSON 安全、Schema 与格式能力测试 | AR-5.3 | `完成 AR-5.4 GPU 报告契约` |
 | 6 | AR-5.5 | Backlog | 第三方许可证正文、包内容清单与可复现归档校验 | AR-5.4 | `完成 AR-5.5 发布合规清单` |
 | 7 | AR-5.6 | Backlog | RC1 版本冻结、双平台证据汇总与发布审计 | AR-5.5 | `完成 AR-5.6 RC1 发布审计` |
@@ -100,6 +100,22 @@ v1 固定队列已全部完成。
 
 验收：独立表驱动契约测试；真实进程负向退出码测试；Debug、Release、ImGui
 Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
+
+### AR-5.2 场景原子保存
+
+- `SceneDocument::save` 改为原子写入：同目录唯一临时文件 → flush 校验 → `rename` 替换目标；
+- 写入、flush 或 rename 失败时清理临时文件并保持原目标不变；
+- 保存目标目录不存在时在写临时文件前失败，无副作用；
+- 新增 `tests/SceneModelTests.cpp`，覆盖正常保存、覆盖保存、失败恢复和无残留验证。
+
+验收：Debug/Release 构建；`AzureRender.SceneModel` 等全量 CTest 通过；公共资产
+120 帧 Debug Validation 无 VUID；每节点独立提交并更新本文、README 与开发日志。
+
+### AR-5.3 统一运行日志
+
+- Renderer、Loader、Validation 日志汇入 AR-4.1 建立的 RuntimeDiagnostics 统一源；
+- 消除直接 `std::cout` 输出，ImGui Console 与文件日志消费同一事件流；
+- 日志路径、级别与错误码沿用既有 Schema，不新增格式。
 
 ## 4. 任务退出条件
 

@@ -1,9 +1,9 @@
 # 项目开发交接摘要
 
-> 最后核对：2026-08-14（Asia/Shanghai）
+> 最后核对：2026-08-16（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前近期节点：**AR-5.1 Complete / AR-5.2 Ready**
+> 当前近期节点：**AR-5.2 Complete / AR-5.3 Ready**
 
 ## 0. 长期路线入口
 
@@ -129,6 +129,8 @@ DRLR feature probe、正式实验 CSV 或 Android 端。现有 GPU Timestamp JSO
 - `docs/CLI_CONTRACT_CN.md`：CLI 默认值、范围、组合规则和退出码契约；
 - `src/resources/ResourceLocator.*`：开发树、安装树及显式覆盖的运行资源定位；
 - `src/extensions/ExtensionRegistry.hpp`：Feature、Importer、Panel 进程内注册中心；
+- `third_party/imgui/`：vendored Dear ImGui（docking v1.92.8）源码，Windows MinGW
+  构建以此源码编译，避免 vcpkg MSVC 静态库的 ABI 不兼容；
 - 根目录 `FYP_Development_Plan_v1.3.docx`：完整研究路线；其中早期“starter app”描述已过时，实际代码状态以本文件、源码和最新开发日志为准。
 
 ## 4. 构建、运行与本次验证
@@ -187,6 +189,39 @@ cmake --build build/ninja-release
 M3、SC、对象拾取、Gizmo、完整 Scene Graph/ECS、资源导入管理、动态插件、Android
 和论文三路径均不在本轮队列中。新增需求先进入 Active Plan 候选池；如需改序，先单独
 修改计划文档并提交，再开始实现。
+
+## 5.1 AR-5.2 场景原子保存（2026-08-16 完成）
+
+`SceneDocument::save` 已从直接 `ofstream` 覆盖改为原子写入：
+
+- 同目录唯一临时文件（`<目标>.tmp.<随机数>`）写入 → `flush()` 校验 → `rename` 原子替换；
+- 写入、flush 或 rename 任一失败都会清理临时文件并保持原目标不变；
+- 目标父目录不存在时在写临时文件前即失败，不产生任何副作用；
+- 保留 `.azscene v1` 文本格式与既有错误语义（失败保留脏状态）。
+
+新增 `tests/SceneModelTests.cpp` 并通过 CTest 注册 `AzureRender.SceneModel`，
+覆盖正常保存、覆盖保存、父目录缺失失败、不可写路径失败和无临时文件残留等场景。
+
+验证：Ninja Debug/Release 构建成功；全量 CTest 8/8 通过；公共资产 120 帧
+Debug Validation 无 VUID。提交：`c14cc9e 完成 AR-5.2 场景原子保存`。
+
+## 5.2 接手环境修复：Windows MinGW imgui ABI（2026-08-16）
+
+接手时发现 Windows 本地构建无法链接 vcpkg 的 imgui：vcpkg `x64-windows`
+triplet 是 MSVC 编译的 C++ 静态库，与 MinGW 链接器的 name mangling 不兼容
+（此前 AR-3.x~AR-5.x 的验证主要在 Linux 完成，Windows ImGui 路径从未真正构建过）。
+
+处理：
+
+- 将 Dear ImGui docking v1.92.8 源码 vendored 到 `third_party/imgui`，CMake
+  直接以项目编译器编译（`azure_imgui` target），ABI 与项目一致；
+- `ImGuiEditorLayer.cpp` 适配 imgui 1.92.8 新 API（`PipelineInfoMain`、
+  移除 `CreateFontsTexture` 调用、`DockSpaceOverViewport` 新签名）；
+- 从 `vcpkg.json` 移除 imgui 依赖；`THIRD_PARTY_NOTICES.md` 说明 vendored 来源。
+
+验证：Ninja Debug/Release 构建成功；全量 CTest 8/8 通过；公共资产 120 帧
+Debug Validation 通过。提交：`1c985e9 修复 Windows MinGW imgui ABI 兼容并适配
+1.92.8 API`。
 
 ## 6. 给接手 Agent 的工作规则
 

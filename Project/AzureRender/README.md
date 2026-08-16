@@ -7,8 +7,9 @@ M1/CQ-2 Toon Ramp/Shadow v1 is complete. A renderer-owned, versioned 10-row
 Ramp Atlas now gives Skin/Face soft ramps and Hair/Fabric/Metal/Eye stepped
 ramps. Direct diffuse, ambient, shadow visibility, AO, material shadow tint and
 style-mask routing have independent QA views. CQ-3 through CQ-6 and the M2 Hero
-quality gate are complete. AR-1 through AR-5.1 typed CLI contracts are
-complete; AR-5.2 atomic scene saving is the next fixed task.
+quality gate are complete. AR-1 through AR-5.2 typed CLI contracts and the
+atomic `.azscene` save are complete; AR-5.3 unified runtime logging is the next
+fixed task.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
@@ -211,6 +212,16 @@ Beauty baseline is `captures/s36_hdr_beauty_v1/frame_000000.png` with SHA-256
 - tinygltf and stb available through vcpkg
 - Dear ImGui with GLFW/Vulkan backends and Docking enabled
 - FFmpeg with `libx264` (optional, only for MP4 encoding)
+
+## Dear ImGui integration
+
+Dear ImGui is vendored under `third_party/imgui` (docking branch, v1.92.8) and
+compiled from source with the project toolchain. Windows MinGW builds cannot
+link the vcpkg `x64-windows` (MSVC) imgui static library because the C++ name
+mangling schemes are incompatible, so the vendored sources keep the library ABI
+aligned with the project compiler. When `third_party/imgui` is absent, CMake
+falls back to the vcpkg imgui package. The upstream MIT license is preserved at
+`third_party/imgui/LICENSE.txt`.
 
 ## Configure and build
 
