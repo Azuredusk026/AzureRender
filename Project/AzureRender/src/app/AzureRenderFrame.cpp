@@ -2,6 +2,7 @@
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/EditorCameraController.hpp"
+#include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
@@ -99,6 +100,7 @@ void AzureRenderApp::drawFrame() {
         }
     }
     updateUniformBuffer(currentFrame_);
+    updateGizmoScreenData();
     if (pendingPickRequested_) {
         pendingPickRequested_ = false;
         pickPrimitive(pendingPickX_, pendingPickY_);
@@ -347,6 +349,96 @@ void AzureRenderApp::updateUniformBuffer(const std::size_t frameIndex) {
         uniformBufferMapped_[frameIndex],
         &uniform,
         sizeof(uniform));
+}
+
+void AzureRenderApp::updateGizmoScreenData() {
+    if (runOptions_.editorSession == nullptr) {
+        return;
+    }
+    auto& editorContext = runOptions_.editorSession->context();
+    editorContext.setGizmoScreen({});
+    if (selectedPrimitiveIndex_ < 0
+        || static_cast<std::size_t>(selectedPrimitiveIndex_)
+            >= asset_.primitives.size()) {
+        return;
+    }
+    constexpr float kPi = 3.14159265358979323846F;
+    const float aspect =
+        static_cast<float>(renderExtent_.width)
+        / static_cast<float>(renderExtent_.height);
+    const Matrix4 view = lookAt(
+        cameraPosition_, cameraTarget_, {0.0F, 1.0F, 0.0F});
+    const Matrix4 projection =
+        perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    const Matrix4 viewProj = multiply(projection, view);
+    const std::array<float, 3>& translation =
+        editorContext.gizmoTranslation();
+    const Vector3 primitiveCenter =
+        transformPosition(currentModel_,
+            asset_.primitives[selectedPrimitiveIndex_].center);
+    const Vector3 gizmoCenter = {
+        primitiveCenter[0] + translation[0],
+        primitiveCenter[1] + translation[1],
+        primitiveCenter[2] + translation[2],
+    };
+    const auto projectToScreen = [&viewProj](const Vector3& world) {
+        const float clipX = viewProj[0] * world[0]
+            + viewProj[4] * world[1]
+            + viewProj[8] * world[2]
+            + viewProj[12];
+        const float clipY = viewProj[1] * world[0]
+            + viewProj[5] * world[1]
+            + viewProj[9] * world[2]
+            + viewProj[13];
+        const float clipW = viewProj[3] * world[0]
+            + viewProj[7] * world[1]
+            + viewProj[11] * world[2]
+            + viewProj[15];
+        if (std::abs(clipW) < 1.0e-6F) {
+            return std::array<float, 2>{0.0F, 0.0F};
+        }
+        return std::array<float, 2>{clipX / clipW, clipY / clipW};
+    };
+    const std::array<float, 2> centerNdc = projectToScreen(gizmoCenter);
+    if (centerNdc[0] < -1.2F || centerNdc[0] > 1.2F
+        || centerNdc[1] < -1.2F || centerNdc[1] > 1.2F) {
+        return;
+    }
+    constexpr float kAxisLen = 0.3F;
+    const std::array<float, 2> endX =
+        projectToScreen({gizmoCenter[0] + kAxisLen, gizmoCenter[1], gizmoCenter[2]});
+    const std::array<float, 2> endY =
+        projectToScreen({gizmoCenter[0], gizmoCenter[1] + kAxisLen, gizmoCenter[2]});
+    const std::array<float, 2> endZ =
+        projectToScreen({gizmoCenter[0], gizmoCenter[1], gizmoCenter[2] + kAxisLen});
+    azurerender::EditorContext::GizmoScreenData data{};
+    data.valid = true;
+    data.centerX = (centerNdc[0] + 1.0F) * 0.5F;
+    data.centerY = (1.0F - centerNdc[1]) * 0.5F;
+    const auto normalize2D = [](float inX, float inY) {
+        const float length = std::sqrt(inX * inX + inY * inY);
+        if (length < 1.0e-6F) {
+            return std::array<float, 2>{0.0F, 0.0F};
+        }
+        return std::array<float, 2>{inX / length, inY / length};
+    };
+    const std::array<float, 2> axisXScreen = normalize2D(
+        (endX[0] - centerNdc[0]) * 0.5F,
+        -(endX[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisYScreen = normalize2D(
+        (endY[0] - centerNdc[0]) * 0.5F,
+        -(endY[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisZScreen = normalize2D(
+        (endZ[0] - centerNdc[0]) * 0.5F,
+        -(endZ[1] - centerNdc[1]) * 0.5F);
+    data.axisXScreenX = axisXScreen[0];
+    data.axisXScreenY = axisXScreen[1];
+    data.axisYScreenX = axisYScreen[0];
+    data.axisYScreenY = axisYScreen[1];
+    data.axisZScreenX = axisZScreen[0];
+    data.axisZScreenY = axisZScreen[1];
+    data.pixelToWorld = 0.005F;
+    editorContext.setGizmoScreen(data);
 }
 
 void AzureRenderApp::pickPrimitive(

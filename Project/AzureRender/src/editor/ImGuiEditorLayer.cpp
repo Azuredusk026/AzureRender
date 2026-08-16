@@ -392,6 +392,40 @@ void ImGuiEditorLayer::drawViewportPanel() {
             reinterpret_cast<ImTextureID>(
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
+        // Draw the viewport gizmo handles (if any selected primitive has a
+        // valid screen projection). We compute endpoints here so the click
+        // and drag logic can hit-test against them.
+        const auto& gizmoScreen = context_->gizmoScreen();
+        const ImVec2 itemMin = ImGui::GetItemRectMin();
+        ImVec2 gizmoCenter{0.0F, 0.0F};
+        ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
+        bool gizmoDrawn = false;
+        if (gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
+            gizmoCenter = ImVec2(
+                itemMin.x + gizmoScreen.centerX * imageSize.x,
+                itemMin.y + gizmoScreen.centerY * imageSize.y);
+            const float axes[3][2] = {
+                {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
+                {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
+                {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
+            };
+            const ImU32 colors[3] = {
+                IM_COL32(230, 80, 80, 255),
+                IM_COL32(80, 220, 110, 255),
+                IM_COL32(90, 140, 230, 255),
+            };
+            ImDrawList* drawList = ImGui::GetWindowDrawList();
+            for (int axis = 0; axis < 3; ++axis) {
+                gizmoAxisEnds[axis] = ImVec2(
+                    gizmoCenter.x + axes[axis][0] * 40.0F,
+                    gizmoCenter.y + axes[axis][1] * 40.0F);
+                drawList->AddLine(
+                    gizmoCenter, gizmoAxisEnds[axis], colors[axis], 3.0F);
+                drawList->AddCircleFilled(
+                    gizmoAxisEnds[axis], 5.0F, colors[axis]);
+            }
+            gizmoDrawn = true;
+        }
         if (ImGui::IsItemHovered()) {
             const ImGuiIO& io = ImGui::GetIO();
             viewportInput_.zoomSteps += io.MouseWheel;
@@ -403,9 +437,32 @@ void ImGuiEditorLayer::drawViewportPanel() {
                 viewportInput_.panDeltaX += io.MouseDelta.x;
                 viewportInput_.panDeltaY += io.MouseDelta.y;
             }
-            if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+            bool pickThisClick = true;
+            if (gizmoDrawn
+                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
-                const ImVec2 itemMin = ImGui::GetItemRectMin();
+                float bestDistance = 12.0F;
+                std::int32_t bestAxis = -1;
+                for (int axis = 0; axis < 3; ++axis) {
+                    const float distance = std::hypot(
+                        mousePosition.x - gizmoAxisEnds[axis].x,
+                        mousePosition.y - gizmoAxisEnds[axis].y);
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestAxis = axis;
+                    }
+                }
+                if (bestAxis >= 0) {
+                    gizmoDragAxis_ = bestAxis;
+                    gizmoDragStartMouse_ = mousePosition;
+                    gizmoDragStartTranslation_ = context_->gizmoTranslation();
+                    viewportGizmoDragActive_ = true;
+                    pickThisClick = false;
+                }
+            }
+            if (pickThisClick
+                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                const ImVec2 mousePosition = io.MousePos;
                 if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
                     viewportInput_.pickX = std::clamp(
                         (mousePosition.x - itemMin.x) / imageSize.x,
@@ -417,6 +474,28 @@ void ImGuiEditorLayer::drawViewportPanel() {
                         1.0F);
                     viewportInput_.pickRequested = true;
                 }
+            }
+            if (viewportGizmoDragActive_
+                && gizmoDragAxis_ >= 0
+                && gizmoScreen.valid
+                && ImGui::IsMouseDragging(ImGuiMouseButton_Left)) {
+                const float axes[3][2] = {
+                    {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
+                    {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
+                    {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
+                };
+                const float projection =
+                    io.MouseDelta.x * axes[gizmoDragAxis_][0]
+                    + io.MouseDelta.y * axes[gizmoDragAxis_][1];
+                const float worldDelta = projection * gizmoScreen.pixelToWorld;
+                std::array<float, 3> translation =
+                    gizmoDragStartTranslation_;
+                translation[gizmoDragAxis_] += worldDelta;
+                context_->setGizmoTranslation(translation);
+            }
+            if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+                viewportGizmoDragActive_ = false;
+                gizmoDragAxis_ = -1;
             }
         }
     }

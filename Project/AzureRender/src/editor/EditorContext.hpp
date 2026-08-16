@@ -62,6 +62,31 @@ public:
     void addChildNode(std::size_t parentIndex);
     void removeNode(std::size_t index);
 
+    enum class GizmoMode { Translate, Rotate, Scale };
+
+    struct GizmoScreenData {
+        bool valid = false;
+        float centerX = 0.0F;
+        float centerY = 0.0F;
+        float axisXScreenX = 1.0F;
+        float axisXScreenY = 0.0F;
+        float axisYScreenX = 0.0F;
+        float axisYScreenY = -1.0F;
+        float axisZScreenX = 0.7F;
+        float axisZScreenY = 0.7F;
+        float pixelToWorld = 0.005F;
+    };
+    [[nodiscard]] const GizmoScreenData& gizmoScreen() const noexcept {
+        return gizmoScreen_;
+    }
+    void setGizmoScreen(const GizmoScreenData& value) {
+        gizmoScreen_ = value;
+    }
+    [[nodiscard]] GizmoMode gizmoMode() const noexcept { return gizmoMode_; }
+    void setGizmoMode(const GizmoMode value) noexcept {
+        gizmoMode_ = value;
+    }
+
     void log(std::string message);
     [[nodiscard]] const std::vector<std::string>& consoleMessages() const noexcept {
         return consoleMessages_;
@@ -75,6 +100,8 @@ private:
     std::array<float, 3> gizmoTranslation_{0.0F, 0.0F, 0.0F};
     std::array<float, 3> gizmoRotation_{0.0F, 0.0F, 0.0F};
     std::array<float, 3> gizmoScale_{1.0F, 1.0F, 1.0F};
+    GizmoMode gizmoMode_ = GizmoMode::Translate;
+    GizmoScreenData gizmoScreen_;
     bool dirty_ = false;
     std::vector<std::string> consoleMessages_;
 };

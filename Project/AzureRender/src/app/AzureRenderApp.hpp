@@ -348,6 +348,7 @@ private:
     void drawFrame();
     void updateUniformBuffer(std::size_t frameIndex);
     void pickPrimitive(float viewportX, float viewportY);
+    void updateGizmoScreenData();
     void updateHudBuffer(std::size_t frameIndex);
     void recordCommandBuffer(
         VkCommandBuffer commandBuffer,

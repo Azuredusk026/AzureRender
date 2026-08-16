@@ -6,6 +6,11 @@
 
 #include <vulkan/vulkan.h>
 
+#ifdef AZURERENDER_HAS_IMGUI
+#include <imgui.h>
+#endif
+
+#include <array>
 #include <memory>
 #include <vector>
 
@@ -69,6 +74,10 @@ private:
     std::uint32_t resizeStableFrames_ = 0;
     bool viewportResizePending_ = false;
     EditorViewportInput viewportInput_;
+    std::int32_t gizmoDragAxis_ = -1;
+    ImVec2 gizmoDragStartMouse_{0.0F, 0.0F};
+    std::array<float, 3> gizmoDragStartTranslation_{0.0F, 0.0F, 0.0F};
+    bool viewportGizmoDragActive_ = false;
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
     bool initialized_ = false;
