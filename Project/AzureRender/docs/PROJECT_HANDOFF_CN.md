@@ -3,7 +3,7 @@
 > 最后核对：2026-08-16（Asia/Shanghai）
 > 主工程：`Project/AzureRender`
 > 当前工程基线：**S36.2 HDR Scene Color + ACES fitted 已完成**
-> 当前近期节点：**v3 队列 Ready（MAINT-1 首个执行）**
+> 当前近期节点：**v3 队列全部 Complete（MAINT-1 + AR-6.1~6.3 + AR-7.1~7.3）**
 
 ## 0. 长期路线入口
 

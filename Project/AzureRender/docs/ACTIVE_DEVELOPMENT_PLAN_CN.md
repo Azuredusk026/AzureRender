@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
 > 计划版本：2026-08-16 v5
-> 当前节点：v3 队列 Ready（MAINT-1 为首个执行任务）
+> 当前节点：v3 队列全部 Complete（MAINT-1 + AR-6.1~6.3 + AR-7.1~7.3）
 > 适用范围：渲染特性升级、编辑器增强与仓库维护
 
 ## 1. 计划治理
@@ -125,13 +125,13 @@ Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
 
 | 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
 |---:|---|---|---|---|---|
-| 1 | MAINT-1 | Ready | git 对象库健康修复：fetch 补全缺失对象、gc 清理、`git fsck` 清零；`.workbuddy/` 纳入版本控制决策 | 无 | `完成 MAINT-1 仓库健康修复` |
-| 2 | AR-6.1 | Backlog | HDR IBL：equirectangular HDR 环境 + mipmap 生成 + prefiltered specular 反射 | MAINT-1 | `完成 AR-6.1 HDR IBL 环境` |
-| 3 | AR-6.2 | Backlog | Morph Target：glTF morph targets 加载与 GPU 混合 | AR-6.1 | `完成 AR-6.2 形态目标` |
-| 4 | AR-6.3 | Backlog | OIT：per-triangle 透明度排序（替代 primitive 级排序） | AR-6.2 | `完成 AR-6.3 逐三角形透明排序` |
-| 5 | AR-7.1 | Backlog | 对象拾取：Viewport 射线拾取 + 选中高亮 | AR-6.3 | `完成 AR-7.1 视口对象拾取` |
-| 6 | AR-7.2 | Backlog | Transform Gizmo：平移/旋转/缩放手柄与编辑 | AR-7.1 | `完成 AR-7.2 变换 Gizmo` |
-| 7 | AR-7.3 | Backlog | 完整 Scene Graph：层级浏览、节点属性编辑、保存/加载 | AR-7.2 | `完成 AR-7.3 场景图编辑` |
+| 1 | MAINT-1 | Complete | git 对象库健康修复：fetch 补全缺失对象、gc 清理、`git fsck` 清零；`.workbuddy/` 纳入版本控制决策 | 无 | `完成 MAINT-1 仓库健康修复` |
+| 2 | AR-6.1 | Complete | HDR IBL：equirectangular HDR 环境 + mipmap 生成 + prefiltered specular 反射 | MAINT-1 | `完成 AR-6.1 HDR IBL 环境` |
+| 3 | AR-6.2 | Complete | Morph Target：glTF morph targets 加载与 GPU 混合 | AR-6.1 | `完成 AR-6.2 形态目标` |
+| 4 | AR-6.3 | Complete | OIT：per-triangle 透明度排序（替代 primitive 级排序） | AR-6.2 | `完成 AR-6.3 逐三角形透明排序` |
+| 5 | AR-7.1 | Complete | 对象拾取：Viewport 射线拾取 + 选中高亮 | AR-6.3 | `完成 AR-7.1 视口对象拾取` |
+| 6 | AR-7.2 | Complete | Transform Gizmo：平移/旋转/缩放手柄与编辑 | AR-7.1 | `完成 AR-7.2 变换 Gizmo` |
+| 7 | AR-7.3 | Complete | 完整 Scene Graph：层级浏览、节点属性编辑、保存/加载 | AR-7.2 | `完成 AR-7.3 场景图编辑` |
 
 ### v3 统一退出规则
 

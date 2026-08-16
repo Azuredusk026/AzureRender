@@ -2875,3 +2875,29 @@ v2 固定执行队列至此全部完成。
 同步更新 `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`(v3 队列+退出条件)、
 `docs/PROJECT_HANDOFF_CN.md`、`README.md`。候选池移除已授权项;
 M3/SC、论文三路径、动态插件、完整 ECS 继续 Deferred。
+
+## 2026-08-16 v3 队列全部完成(MAINT-1 + AR-6.x + AR-7.x)
+
+用户授权"一次性完成 7 个任务",v3 固定队列收官:
+
+- **MAINT-1 仓库健康修复**(f87ad76 重建 + c740ba8 + 8b0dc00 恢复):本地 .git 损坏
+  (refs/remotes 反复丢失、pack 内 dangling 损坏对象、HEAD tree 缺子树)导致 fsck 报错
+  208+ 项;最终方案:临时目录干净 clone 远程 → 用其 .git 替换本地 → 工作区文件
+  保留 → 重新提交领先内容 → fsck 清零;决策 `.workbuddy/` 加入 .gitignore
+- **AR-6.1 HDR IBL**(d84adaf):createImage/createImageView 支持 mipLevels;
+  程序化 HDR equirectangular(RGBA16F)+ 逐级 blit mip 链(近似 prefiltered);
+  mesh.frag 按 roughness 用 textureLod 采样 mip
+- **AR-6.2 Morph Target**(310149a):AssetVertex 增 morph0/morph1 增量;GltfLoader
+  解析 POSITION targets;mesh.vert 按 push constant weights 混合;RenderSettings.morphWeights
+- **AR-6.3 逐三角形透明排序**(5942db9):每帧 CPU 端按三角形质心视深重排透明
+  primitive 索引,写入 HOST_VISIBLE 索引缓冲;firstIndex 偏移修正
+- **AR-7.1 视口对象拾取**(5593273):EditorViewportInput 增 pick;ImGui 捕获左键
+  UV;Möller–Trumbore 射线求交;mesh.frag 复用 materialPadding 做选中高亮
+- **AR-7.2 变换 Gizmo**(b6a902b):MorphPushConstants 扩展 mat4 gizmoTransform;
+  EditorContext 持有 translation/rotation/scale;Inspector DragFloat3 编辑;
+  mesh.vert 对选中 primitive 应用 TRS
+- **AR-7.3 场景图编辑**(e6876ab):Outliner 层级树(递归 parentId)+ Add Child/Delete;
+  Inspector 名称编辑;EditorCommand::Reload;EditorSessionTests 增节点/重载断言
+
+验证:Debug/Release 构建通过;CTest 10/10;smoke + 截图正常;
+Release `--version` 输出 `AzureRender 0.1.0-rc1`。
