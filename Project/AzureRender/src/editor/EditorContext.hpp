@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SceneModel.hpp"
+#include "ecs/World.hpp"
+#include <vector>
 
 #include <array>
 #include <cstddef>
@@ -82,6 +84,9 @@ public:
     void setGizmoScreen(const GizmoScreenData& value) {
         gizmoScreen_ = value;
     }
+    [[nodiscard]] azurerender::ecs::World& ecs() noexcept { return ecsWorld_; }
+    [[nodiscard]] const azurerender::ecs::World& ecs() const noexcept { return ecsWorld_; }
+    [[nodiscard]] azurerender::ecs::Entity entityForNode(std::size_t index) const noexcept;
     [[nodiscard]] GizmoMode gizmoMode() const noexcept { return gizmoMode_; }
     void setGizmoMode(const GizmoMode value) noexcept {
         gizmoMode_ = value;
@@ -93,6 +98,8 @@ public:
     }
 
 private:
+    mutable azurerender::ecs::World ecsWorld_;
+    std::vector<azurerender::ecs::Entity> nodeEntities_;
     SceneDocument scene_;
     std::filesystem::path scenePath_;
     RenderSettings* attachedRenderSettings_ = nullptr;

@@ -1,6 +1,12 @@
+namespace {
+struct VisibilityComponent {
+    bool visible = true;
+};
+}
 #include "EditorContext.hpp"
 
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "ecs/Entity.hpp"
 
 #include <algorithm>
 #include <stdexcept>
@@ -16,6 +22,12 @@ EditorContext::EditorContext(
         throw std::invalid_argument("Editor scene path cannot be empty");
     }
     log("Opened scene: " + scene_.sceneId);
+    for (std::size_t index = 0; index < scene_.nodes.size(); ++index) {
+        const azurerender::ecs::Entity entity = ecsWorld_.createEntity();
+        ecsWorld_.addComponent(entity,
+            VisibilityComponent{scene_.nodes[index].visible});
+        nodeEntities_.push_back(entity);
+    }
 }
 
 RenderSettings& EditorContext::renderSettings() noexcept {
@@ -74,9 +86,26 @@ void EditorContext::reload() {
     detachRenderSettings();
     SceneDocument document = SceneDocument::load(scenePath_);
     scene_ = std::move(document);
+    for (const azurerender::ecs::Entity entity : nodeEntities_) {
+        ecsWorld_.destroyEntity(entity);
+    }
+    nodeEntities_.clear();
+    for (std::size_t index = 0; index < scene_.nodes.size(); ++index) {
+        const azurerender::ecs::Entity entity = ecsWorld_.createEntity();
+        ecsWorld_.addComponent(entity,
+            VisibilityComponent{scene_.nodes[index].visible});
+        nodeEntities_.push_back(entity);
+    }
     selectedNodeIndex_ = 0;
     dirty_ = false;
     log("Reloaded scene: " + scene_.sceneId);
+}
+
+azurerender::ecs::Entity EditorContext::entityForNode(
+    const std::size_t index) const noexcept {
+    return index < nodeEntities_.size()
+        ? nodeEntities_[index]
+        : azurerender::ecs::kInvalidEntity;
 }
 
 void EditorContext::addChildNode(const std::size_t parentIndex) {
@@ -90,6 +119,10 @@ void EditorContext::addChildNode(const std::size_t parentIndex) {
     node.parentId = scene_.nodes[parentIndex].id;
     node.resourceId = scene_.nodes[parentIndex].resourceId;
     scene_.nodes.push_back(std::move(node));
+    const azurerender::ecs::Entity entity = ecsWorld_.createEntity();
+    ecsWorld_.addComponent(entity,
+        VisibilityComponent{scene_.nodes.back().visible});
+    nodeEntities_.push_back(entity);
     markDirty();
     log("Added node under: " + scene_.nodes[parentIndex].name);
 }
@@ -131,6 +164,12 @@ void EditorContext::removeNode(const std::size_t index) {
     for (const std::size_t removedIndex : removed) {
         scene_.nodes.erase(
             scene_.nodes.begin() + static_cast<std::ptrdiff_t>(removedIndex));
+        if (removedIndex < nodeEntities_.size()) {
+            ecsWorld_.destroyEntity(nodeEntities_[removedIndex]);
+            nodeEntities_.erase(
+                nodeEntities_.begin()
+                    + static_cast<std::ptrdiff_t>(removedIndex));
+        }
     }
     if (selectedNodeIndex_ >= scene_.nodes.size()) {
         selectedNodeIndex_ = scene_.nodes.empty() ? 0 : scene_.nodes.size() - 1;
