@@ -31,6 +31,31 @@ int main() {
     assert(session.consumeLayoutResetRequest());
     assert(!session.consumeLayoutResetRequest());
 
+    // Node graph editing: add children, remove a subtree, reload.
+    assert(context->scene().nodes.size() == 1);
+    assert(context->scene().nodes[0].parentId.empty());
+    context->addChildNode(0);
+    assert(context->scene().nodes.size() == 2);
+    assert(context->scene().nodes[1].parentId
+        == context->scene().nodes[0].id);
+    context->addChildNode(1);
+    context->addChildNode(1);
+    assert(context->scene().nodes.size() == 4);
+    context->removeNode(1);
+    assert(context->scene().nodes.size() == 1);
+    context->removeNode(0);  // root removal is a no-op
+    assert(context->scene().nodes.size() == 1);
+
+    context->markDirty();
+    assert(session.execute(azurerender::EditorCommand::Save));
+    assert(!context->dirty());
+    assert(std::filesystem::exists(scenePath));
+
+    // Reload restores the persisted single-node document.
+    assert(session.execute(azurerender::EditorCommand::Reload));
+    assert(context->scene().nodes.size() == 1);
+    assert(!context->dirty());
+
     const auto invalidPath = uniquePath("/missing/scene.azscene");
     auto invalidContext = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset("test.gltf"), invalidPath);

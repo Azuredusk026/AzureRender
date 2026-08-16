@@ -7,7 +7,7 @@
 
 namespace azurerender {
 
-enum class EditorCommand { Save, ResetLayout };
+enum class EditorCommand { Save, ResetLayout, Reload };
 
 class EditorSession final {
 public:

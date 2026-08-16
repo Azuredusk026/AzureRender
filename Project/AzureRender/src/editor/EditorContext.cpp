@@ -2,6 +2,7 @@
 
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
+#include <algorithm>
 #include <stdexcept>
 #include <utility>
 
@@ -67,6 +68,75 @@ void EditorContext::save() {
     scene_.save(scenePath_);
     dirty_ = false;
     log("Saved scene: " + scenePath_.string());
+}
+
+void EditorContext::reload() {
+    detachRenderSettings();
+    SceneDocument document = SceneDocument::load(scenePath_);
+    scene_ = std::move(document);
+    selectedNodeIndex_ = 0;
+    dirty_ = false;
+    log("Reloaded scene: " + scene_.sceneId);
+}
+
+void EditorContext::addChildNode(const std::size_t parentIndex) {
+    if (parentIndex >= scene_.nodes.size()) {
+        throw std::out_of_range("Editor parent node is out of range");
+    }
+    SceneNode node;
+    node.id = scene_.nodes[parentIndex].id + ".child."
+        + std::to_string(scene_.nodes.size());
+    node.name = "New Node " + std::to_string(scene_.nodes.size());
+    node.parentId = scene_.nodes[parentIndex].id;
+    node.resourceId = scene_.nodes[parentIndex].resourceId;
+    scene_.nodes.push_back(std::move(node));
+    markDirty();
+    log("Added node under: " + scene_.nodes[parentIndex].name);
+}
+
+void EditorContext::removeNode(const std::size_t index) {
+    if (index >= scene_.nodes.size()) {
+        throw std::out_of_range("Editor node removal is out of range");
+    }
+    if (scene_.nodes[index].parentId.empty()) {
+        log("Cannot remove the root node");
+        return;
+    }
+    // Remove the node and all descendants (matched by parent chain).
+    std::vector<std::size_t> removed;
+    removed.push_back(index);
+    bool grew = true;
+    while (grew) {
+        grew = false;
+        for (std::size_t candidate = 0; candidate < scene_.nodes.size();
+             ++candidate) {
+            if (std::find(removed.begin(), removed.end(), candidate)
+                != removed.end()) {
+                continue;
+            }
+            const std::string& parentId =
+                scene_.nodes[candidate].parentId;
+            const bool parentRemoved = std::any_of(
+                removed.begin(), removed.end(),
+                [&](const std::size_t removedIndex) {
+                    return scene_.nodes[removedIndex].id == parentId;
+                });
+            if (parentRemoved) {
+                removed.push_back(candidate);
+                grew = true;
+            }
+        }
+    }
+    std::sort(removed.begin(), removed.end(), std::greater<std::size_t>());
+    for (const std::size_t removedIndex : removed) {
+        scene_.nodes.erase(
+            scene_.nodes.begin() + static_cast<std::ptrdiff_t>(removedIndex));
+    }
+    if (selectedNodeIndex_ >= scene_.nodes.size()) {
+        selectedNodeIndex_ = scene_.nodes.empty() ? 0 : scene_.nodes.size() - 1;
+    }
+    markDirty();
+    log("Removed node (and descendants)");
 }
 
 void EditorContext::log(std::string message) {

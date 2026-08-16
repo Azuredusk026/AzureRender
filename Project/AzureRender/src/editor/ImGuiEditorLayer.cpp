@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstring>
 #include <functional>
 #include <stdexcept>
 #include <utility>
@@ -252,6 +253,9 @@ void ImGuiEditorLayer::drawPanels() {
             if (ImGui::MenuItem("Save", "Ctrl+S")) {
                 static_cast<void>(session_->execute(EditorCommand::Save));
             }
+            if (ImGui::MenuItem("Reload")) {
+                static_cast<void>(session_->execute(EditorCommand::Reload));
+            }
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("View")) {
@@ -428,12 +432,69 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
 #endif
     ImGui::Begin("Scene Outliner");
     const auto& nodes = context_->scene().nodes;
-    for (std::size_t index = 0; index < nodes.size(); ++index) {
-        const bool selected = index == context_->selectedNodeIndex();
-        if (ImGui::Selectable(nodes[index].name.c_str(), selected)) {
-            context_->selectNode(index);
+    if (ImGui::Button("Add Child")) {
+        if (!nodes.empty()) {
+            try {
+                context_->addChildNode(context_->selectedNodeIndex());
+            } catch (const std::exception& exception) {
+                context_->log(std::string("ERROR: ") + exception.what());
+            }
         }
     }
+    ImGui::SameLine();
+    if (ImGui::Button("Delete") && !nodes.empty()) {
+        context_->removeNode(context_->selectedNodeIndex());
+    }
+    ImGui::Separator();
+    if (nodes.empty()) {
+        ImGui::TextUnformatted("(empty scene)");
+        ImGui::End();
+        return;
+    }
+    // Recursive tree draw: children are nodes whose parentId equals the
+    // current node id. Use an index-based recursion to avoid iterator
+    // invalidation while nodes stay stable during a frame.
+    const auto drawNode = [&](const auto& self,
+                              const std::string& parentId,
+                              const int depth) -> void {
+        for (std::size_t index = 0; index < nodes.size(); ++index) {
+            if (nodes[index].parentId != parentId) {
+                continue;
+            }
+            const bool selected = index == context_->selectedNodeIndex();
+            bool hasChildren = false;
+            for (const SceneNode& candidate : nodes) {
+                if (candidate.parentId == nodes[index].id) {
+                    hasChildren = true;
+                    break;
+                }
+            }
+            ImGui::PushID(static_cast<int>(index));
+            bool open = false;
+            if (hasChildren) {
+                const bool clicked = ImGui::TreeNodeEx(
+                    nodes[index].name.c_str(),
+                    ImGuiTreeNodeFlags_OpenOnArrow
+                        | ImGuiTreeNodeFlags_SpanAvailWidth
+                        | (selected ? ImGuiTreeNodeFlags_Selected : 0));
+                open = clicked;
+            } else {
+                ImGui::Selectable(
+                    nodes[index].name.c_str(),
+                    selected,
+                    ImGuiSelectableFlags_SpanAvailWidth);
+            }
+            if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
+                context_->selectNode(index);
+            }
+            if (open) {
+                self(self, nodes[index].id, depth + 1);
+                ImGui::TreePop();
+            }
+            ImGui::PopID();
+        }
+    };
+    drawNode(drawNode, "", 0);
     ImGui::End();
 }
 
@@ -444,9 +505,21 @@ void ImGuiEditorLayer::drawInspectorPanel() {
     ImGui::Begin("Inspector");
     if (const SceneNode* node = context_->selectedNode(); node != nullptr) {
         ImGui::Text("Node: %s", node->name.c_str());
+        ImGui::Text("Id: %s", node->id.c_str());
         bool visible = node->visible;
         if (ImGui::Checkbox("Visible", &visible)) {
             context_->scene().nodes[context_->selectedNodeIndex()].visible = visible;
+            context_->markDirty();
+        }
+        ImGui::TextUnformatted("Name");
+        std::array<char, 128> nameBuffer{};
+        const std::size_t copyLength = std::min(
+            node->name.size(), nameBuffer.size() - 1);
+        std::memcpy(
+            nameBuffer.data(), node->name.data(), copyLength);
+        if (ImGui::InputText("##name", nameBuffer.data(), nameBuffer.size())) {
+            context_->scene().nodes[context_->selectedNodeIndex()].name =
+                nameBuffer.data();
             context_->markDirty();
         }
     }

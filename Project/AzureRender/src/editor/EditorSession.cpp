@@ -21,6 +21,10 @@ bool EditorSession::execute(const EditorCommand command) noexcept {
         return true;
     }
     try {
+        if (command == EditorCommand::Reload) {
+            context_->reload();
+            return true;
+        }
         context_->save();
         return true;
     } catch (const std::exception& exception) {

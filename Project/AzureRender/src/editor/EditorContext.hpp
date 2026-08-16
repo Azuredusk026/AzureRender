@@ -58,6 +58,9 @@ public:
     void markDirty() noexcept { dirty_ = true; }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
     void save();
+    void reload();
+    void addChildNode(std::size_t parentIndex);
+    void removeNode(std::size_t index);
 
     void log(std::string message);
     [[nodiscard]] const std::vector<std::string>& consoleMessages() const noexcept {
