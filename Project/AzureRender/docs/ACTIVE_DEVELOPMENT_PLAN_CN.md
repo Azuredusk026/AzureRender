@@ -1,8 +1,8 @@
 # AzureRender 近期开发执行计划
 
-> 计划版本：2026-08-16 v6
-> 当前节点：v5 队列全部 Complete（AR-9.0 编辑器闭环验证 + AR-9.1 背景采样 + AR-9.2 三路径基准 + AR-9.3 完整 ECS）
-> 适用范围：HDR IBL 精化、Gizmo 视口手柄、ECS 基础
+> 计划版本：2026-08-16 v7
+> 当前节点：v6 队列进行中（AR-10.0 接口冻结 Complete；AR-10.1 角色路径迁移 Active）
+> 适用范围：可插拔场景渲染器架构 + 施瓦西黑洞渲染 Demo
 
 ## 1. 计划治理
 
@@ -23,6 +23,12 @@
    M3/SC 工业场景、论文三路径、动态插件仍 Deferred。
 8. v4 队列是用户 2026-08-16 二次授权的打磨范围：HDR IBL 精化（真实 equirect 资产
    导入 + specular IBL 卷积）、Gizmo 3D 视口内手柄、完整 ECS 基础。
+9. v5 队列（AR-9.0～AR-9.3）已完成：编辑器闭环验证、背景采样环境贴图、论文三路径
+   基准、完整 ECS 系统。
+10. v6 队列是用户 2026-08-16 授权的一次性自主执行范围：将 AzureRender 演进为可插拔
+    场景渲染器（`ISceneRenderer` + 注册中心 + `sceneType` 选择），并把现有角色路径
+    迁移为第一个场景渲染器实现（哈希回归锚定），随后以施瓦西黑洞渲染器作为第二个
+    实现验证架构，最后收口多场景切换、文档与全量回归。
 
 状态只使用：`Backlog`、`Ready`、`Active`、`Complete`、`Deferred`、`Blocked`。
 
@@ -321,6 +327,21 @@ Validation 无 VUID；Debug/Release 构建与 CTest 全绿。
 - 发布包生成 SHA-256 与机器可读 manifest。
 
 验收：干净环境安装验收通过，形成 RC 发布报告；之后才允许规划 M3/SC 或动态插件。
+
+## 4.1 v6 固定执行队列（可插拔场景渲染器 + 黑洞 Demo）
+
+| 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
+|---:|---|---|---|---|---|
+| 1 | AR-10.0 | Complete | 冻结 `ISceneRenderer`/`RenderContext`/`SceneFrameData` 契约，`SceneRendererRegistry` 挂入 `ExtensionRegistry`，`RenderSettings.sceneType` + `.azscene sceneRenderer` + `--scene-type` 契约 | AR-9.3 | `feat(ar10): 冻结可插拔场景渲染器接口` |
+| 2 | AR-10.1 | Active | 角色路径迁移为 `CharacterSceneRenderer`，引擎核心瘦身为调度者，S36 Beauty 哈希不变 | AR-10.0 | `feat(ar10): 迁移角色路径为场景渲染器` |
+| 3 | BH-1 | Backlog | `BlackholeSceneRenderer`：全屏追踪 pass + 星空背景 + 纯黑洞，`--scene-type blackhole` 可用 | AR-10.1 | `feat(bh): 黑洞渲染器基础追踪` |
+| 4 | BH-2 | Backlog | 吸积盘、多普勒/引力红移/射束、光子环累积、HDR 峰值，冻结新 Beauty 基准 | BH-1 | `feat(bh): 吸积盘与相对论效应` |
+| 5 | BH-3 | Backlog | 黑洞诊断视图、确定性 capture、GPU timing、manifest 扩展、技术序列 | BH-2 | `feat(bh): 黑洞交付链` |
+| 6 | AR-10.2 | Backlog | 编辑器场景类型切换、SceneRenderer Cookbook、tone mapper 可替换接口、全量回归 | BH-3 | `feat(ar10): 多场景收口与文档` |
+
+v6 退出规则：每节点独立提交（本表中文标题）；Debug/Release 构建与全量 CTest 通过；
+角色场景在 AR-10.1 之后必须以 `CharacterSceneRenderer` 渲染且与 S30/S36 基线逐字节
+一致；黑洞场景只新增内容，不触碰角色路径。
 
 ## 5. 每任务固定门禁
 

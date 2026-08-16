@@ -2949,3 +2949,24 @@ Release `--version` 输出 `AzureRender 0.1.0-rc1`。
 --render-path dynamic 生效并写入 JSON/CSV;Release --version 0.1.0-rc1
 经验:configureQaHarness 的 early-return 会吞掉无关 CLI 配置——独立配置块应放在 return 之前;
 GPU timing CSV 用 gpuTimingOutput.replace_extension(".csv") 自动派生路径。
+
+## 2026-08-16 v6 队列：可插拔场景渲染器架构
+
+- **AR-10.0 接口冻结**:新增 src/extensions/SceneType.hpp(Character/Blackhole 枚举与
+  CLI/文档双向转换);src/render/RenderContext.hpp(SceneRendererCapabilities、
+  SceneFrameData、RenderContext 只读上下文);src/extensions/ISceneRenderer.hpp
+  (name/capabilities/onLoad/onSwapchainRecreate/updateFrame/recordScene/onUnload/
+  appendHudText/diagnosticViewName);SceneRendererRegistry 挂入 ExtensionRegistry
+  (复用 ID 唯一性 + API 版本 + 依赖检查)
+- RenderSettings.kSchemaVersion 3→4 并新增 sceneType 字段;.azscene 新增
+  sceneRenderer 字段(schema v1 旧文件缺省 Character,向后兼容);
+  CLI 新增 --scene-type <character|blackhole>(未知值拒绝,退出码 2)
+- 测试:CommandLineTests 覆盖 --scene-type 解析与非法值;SceneModelTests 覆盖
+  sceneRenderer 往返与 v1 旧文件缺省;ExtensionRegistryTests 覆盖 SceneRendererRegistry
+  注册与默认诊断视图名查找(ExtensionRegistry 测试新增 Vulkan 链接)
+
+验证:Debug/Release 构建;CTest 12/12 全过;--scene-type blackhole smoke 5 帧正常;
+--scene-type galaxy 拒绝(退出码 2);既有 S36 Beauty 无行为变化
+经验:SceneDocument 不设独立 sceneRenderer 字段,直接序列化
+renderSettings.sceneType,避免双源不一致;新接口文件挂在 extensions/ 与 render/,
+纯 C++ 契约(SceneType)与 Vulkan 依赖(RenderContext)分离,测试无需全部链接 Vulkan。

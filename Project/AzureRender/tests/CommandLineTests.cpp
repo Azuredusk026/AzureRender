@@ -47,6 +47,7 @@ int main() {
         "--capture-frames", "10",
         "--capture-fps", "30",
         "--diagnostic-view", "normal",
+        "--scene-type", "blackhole",
         "--hud"});
     require(
         valid.options.assetPath == "demo.gltf",
@@ -63,8 +64,23 @@ int main() {
     require(
         valid.options.renderSettings.diagnosticView == 1,
         "Diagnostic view was not parsed");
+    require(
+        valid.options.renderSettings.sceneType
+            == azurerender::SceneType::Blackhole,
+        "Scene type was not parsed");
     require(valid.options.hudEnabled, "HUD flag was not parsed");
     require(valid.options.gpuTimingEnabled, "GPU timing was not implied by HUD");
+
+    // 2. Scene type defaults to Character and rejects unknown values.
+    const auto characterDefault = azurerender::parseCommandLine({});
+    require(
+        characterDefault.options.renderSettings.sceneType
+            == azurerender::SceneType::Character,
+        "Default scene type must be Character");
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--scene-type",
+        {"--scene-type", "galaxy"});
 
     expectError(
         CommandLineErrorCode::UnknownOption,

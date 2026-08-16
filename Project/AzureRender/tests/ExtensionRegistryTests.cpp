@@ -14,6 +14,24 @@ public:
     }
 };
 
+class TestSceneRenderer final : public azurerender::ISceneRenderer {
+public:
+    [[nodiscard]] std::string_view name() const noexcept override {
+        return "test-scene";
+    }
+    [[nodiscard]] azurerender::SceneRendererCapabilities capabilities()
+        const override {
+        azurerender::SceneRendererCapabilities caps;
+        caps.diagnosticViewNames = {"Beauty", "Photon Ring"};
+        return caps;
+    }
+    void onLoad(const azurerender::RenderContext&) override {}
+    void onSwapchainRecreate(const azurerender::RenderContext&) override {}
+    void updateFrame(const azurerender::SceneFrameData&) override {}
+    void recordScene(const azurerender::RenderContext&) override {}
+    void onUnload(const azurerender::RenderContext&) override {}
+};
+
 }  // namespace
 
 int main() {
@@ -57,5 +75,19 @@ int main() {
         dependencyFailed = true;
     }
     assert(dependencyFailed);
+
+    // Scene renderer registry reuses the same dependency/version contract and
+    // the default diagnostic view lookup comes from capabilities.
+    azurerender::SceneRendererRegistry sceneRegistry;
+    sceneRegistry.registerFactory(
+        {"scene.character", 1, {"render"}, {}},
+        [] { return std::make_unique<TestSceneRenderer>(); });
+    assert(sceneRegistry.contains("scene.character"));
+    const auto scenes = sceneRegistry.createAll();
+    assert(scenes.size() == 1);
+    assert(scenes[0]->name() == "test-scene");
+    assert(scenes[0]->diagnosticViewName(0) == "Beauty");
+    assert(scenes[0]->diagnosticViewName(1) == "Photon Ring");
+    assert(scenes[0]->diagnosticViewName(99) == "Unknown");
     return 0;
 }

@@ -26,6 +26,7 @@ constexpr const char* kUsage =
     "[--qa-camera <preset>] [--qa-light <preset>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
     "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
+    "[--scene-type <character|blackhole>] "
     "[--capture-dir <empty directory> "
     "--capture-frames <positive integer> --capture-fps <1-240>]";
 
@@ -310,6 +311,18 @@ ParsedCommandLine parseCommandLine(
         } else if (argument == "--render-path") {
             parsed.options.renderPathName =
                 requireValue(arguments, index, argument);
+        } else if (argument == "--scene-type") {
+            const std::string& sceneTypeName =
+                requireValue(arguments, index, argument);
+            try {
+                parsed.options.renderSettings.sceneType =
+                    azurerender::sceneTypeFromString(sceneTypeName);
+            } catch (const std::invalid_argument&) {
+                fail(
+                    CommandLineErrorCode::InvalidValue,
+                    argument,
+                    "--scene-type must be character or blackhole");
+            }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);
         } else {

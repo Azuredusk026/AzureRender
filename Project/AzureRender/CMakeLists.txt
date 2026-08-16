@@ -139,12 +139,15 @@ add_executable(
     src/extensions/ExtensionRegistry.hpp
     src/extensions/IAssetImporter.hpp
     src/extensions/IRenderFeature.hpp
+    src/extensions/ISceneRenderer.hpp
+    src/extensions/SceneType.hpp
     src/platform/GlfwFrontend.cpp
     src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
     src/render/RendererCore.hpp
     src/render/RenderSettings.cpp
     src/render/RenderSettings.hpp
+    src/render/RenderContext.hpp
 )
 
 add_dependencies(AzureRender AzureRenderShaders)
@@ -272,6 +275,8 @@ if(BUILD_TESTING)
     )
     target_include_directories(
         AzureRenderExtensionRegistryTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderExtensionRegistryTests PRIVATE Vulkan::Vulkan)
     add_test(
         NAME AzureRender.ExtensionRegistry
         COMMAND AzureRenderExtensionRegistryTests)

@@ -2,6 +2,7 @@
 
 #include "IAssetImporter.hpp"
 #include "IRenderFeature.hpp"
+#include "ISceneRenderer.hpp"
 #include "editor/IEditorPanel.hpp"
 
 #include <cstdint>
@@ -91,5 +92,6 @@ private:
 using RenderFeatureRegistry = ExtensionRegistry<IRenderFeature>;
 using AssetImporterRegistry = ExtensionRegistry<IAssetImporter>;
 using EditorPanelRegistry = ExtensionRegistry<IEditorPanel>;
+using SceneRendererRegistry = ExtensionRegistry<ISceneRenderer>;
 
 }  // namespace azurerender

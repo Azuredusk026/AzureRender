@@ -37,6 +37,7 @@
 | `--capture-frames` | 0（关闭） | 提供时必须大于 0 |
 | `--capture-fps` | 60 | 1～240 |
 | `--diagnostic-view` | `beauty` | `beauty`、`normal`、`outline`、`shadow` |
+| `--scene-type` | `character` | `character`、`blackhole`（可插拔场景渲染器选择） |
 
 - `--capture-dir` 与 `--capture-frames` 必须同时使用；
 - `--technical-sequence` 要求至少 5 帧，且帧数必须能被 5 整除；

@@ -41,15 +41,18 @@ Project/AzureRender/
 │   │   ├── ImGuiEditorLayer.{hpp,cpp}  # Viewport/Outliner/Inspector/菜单
 │   │   ├── SceneModel.{hpp,cpp}        # .azscene v1 模型 + 原子保存
 │   │   └── IEditorPanel.hpp            # 面板抽象
-│   ├── extensions/             # 进程内扩展注册(AR-4.3)
+│   ├── extensions/             # 进程内扩展注册(AR-4.3)与场景渲染器契约(AR-10.0)
 │   │   ├── ExtensionRegistry.hpp
 │   │   ├── IAssetImporter.hpp
-│   │   └── IRenderFeature.hpp
+│   │   ├── IRenderFeature.hpp
+│   │   ├── ISceneRenderer.hpp  # 可插拔场景渲染器接口(AR-10.0)
+│   │   └── SceneType.hpp       # Character/Blackhole 场景类型(AR-10.0)
 │   ├── platform/               # GLFW 平台前端(AR-1.1)
 │   │   └── GlfwFrontend.{hpp,cpp}
-│   ├── render/                 # 渲染设置契约(AR-0)
+│   ├── render/                 # 渲染设置契约(AR-0)与场景渲染上下文(AR-10.0)
 │   │   ├── RendererCore.{hpp,cpp}
-│   │   └── RenderSettings.{hpp,cpp}    # 版本化设置(含 morphWeights)
+│   │   ├── RenderSettings.{hpp,cpp}    # 版本化设置(含 sceneType/morphWeights)
+│   │   └── RenderContext.hpp           # 引擎→渲染器只读上下文与帧数据
 │   └── resources/              # 资源定位(AR-4.2)
 │       └── ResourceLocator.{hpp,cpp}
 │

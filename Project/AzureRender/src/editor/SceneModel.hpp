@@ -29,6 +29,7 @@ struct SceneDocument {
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;
     std::vector<SceneNode> nodes;
+    // Scene renderer selector persisted through renderSettings.sceneType.
     RenderSettings renderSettings;
 
     static SceneDocument fromAsset(

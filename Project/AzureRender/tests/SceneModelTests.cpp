@@ -143,5 +143,49 @@ int main() {
         std::filesystem::remove_all(directory);
     }
 
+    // 6. Scene renderer selector survives a save-then-load round trip.
+    {
+        const auto directory = uniqueDirectory();
+        const auto scenePath = directory / "renderer.azscene";
+        auto document = azurerender::SceneDocument::fromAsset("hero.glb");
+        document.renderSettings.sceneType =
+            azurerender::SceneType::Blackhole;
+        document.save(scenePath);
+        const auto loaded = azurerender::SceneDocument::load(scenePath);
+        assert(loaded.renderSettings.sceneType
+            == azurerender::SceneType::Blackhole);
+        assert(countTemporaryFiles(directory) == 0);
+        std::filesystem::remove_all(directory);
+    }
+
+    // 7. Schema v1 documents without a sceneRenderer field default to
+    //    Character instead of failing.
+    {
+        const auto directory = uniqueDirectory();
+        const auto scenePath = directory / "legacy.azscene";
+        {
+            std::ofstream legacy(scenePath);
+            legacy << "AzureRender Scene v1\n"
+                   << "schemaVersion 1\n"
+                   << "sceneId \"legacy\"\n"
+                   << "resourceCount 1\n"
+                   << "resource \"asset-0\" \"gltf\" \"hero.glb\"\n"
+                   << "nodeCount 1\n"
+                   << "node \"root\" \"legacy\" \"\" \"asset-0\"\n"
+                   << "visible true\n"
+                   << "showcasePreset 0\n"
+                   << "styleMaskStrength 1\n"
+                   << "diffuseBandThreshold 0.4\n"
+                   << "innerOutlineEnabled true\n"
+                   << "outlineStrength 0.4\n"
+                   << "gradeExposureEv 0\n";
+        }
+        const auto loaded = azurerender::SceneDocument::load(scenePath);
+        assert(loaded.renderSettings.sceneType
+            == azurerender::SceneType::Character);
+        assert(countTemporaryFiles(directory) == 0);
+        std::filesystem::remove_all(directory);
+    }
+
     return 0;
 }

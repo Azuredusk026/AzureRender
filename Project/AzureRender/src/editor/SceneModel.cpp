@@ -56,7 +56,9 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
-           << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n';
+           << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n'
+           << "sceneRenderer "
+           << sceneTypeName(document.renderSettings.sceneType) << '\n';
 }
 
 }  // namespace
@@ -142,6 +144,27 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     if (!(input >> key >> document.renderSettings.grade.exposureEv)
         || key != "gradeExposureEv") {
         throw std::runtime_error("Missing .azscene gradeExposureEv");
+    }
+    // sceneRenderer is optional for backward compatibility with schema v1
+    // documents that predate the pluggable scene renderer.
+    if (!(input >> key)) {
+        // Reached end of file: keep the default Character renderer.
+        document.renderSettings.sceneType = SceneType::Character;
+    } else if (key == "sceneRenderer") {
+        std::string sceneTypeValue;
+        if (!(input >> sceneTypeValue)) {
+            throw std::runtime_error("Invalid .azscene sceneRenderer");
+        }
+        try {
+            document.renderSettings.sceneType =
+                sceneTypeFromString(sceneTypeValue);
+        } catch (const std::invalid_argument&) {
+            throw std::runtime_error(
+                "Unsupported .azscene sceneRenderer: " + sceneTypeValue);
+        }
+    } else {
+        throw std::runtime_error(
+            "Invalid .azscene trailing field: " + key);
     }
     validateRenderSettings(document.renderSettings);
     return document;

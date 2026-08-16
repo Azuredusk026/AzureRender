@@ -1,5 +1,7 @@
 #pragma once
 
+#include "extensions/SceneType.hpp"
+
 #include <array>
 #include <cstdint>
 
@@ -45,7 +47,13 @@ struct GradeSettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 3;
+    static constexpr std::uint32_t kSchemaVersion = 4;
+
+    // Selects the pluggable scene renderer that draws the current frame.
+    // Character is the default stylized character pipeline; Blackhole is the
+    // Schwarzschild geodesic-tracing renderer. New scene types register an
+    // ISceneRenderer and extend SceneType.
+    SceneType sceneType = SceneType::Character;
 
     // FYP benchmark: render path under evaluation. Traditional = separate
     // render passes; Subpasses / DynamicRendering select the alternative

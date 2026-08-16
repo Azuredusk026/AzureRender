@@ -211,6 +211,14 @@ titles, and fades remain post-tone-map overlays. The new 1080p private-asset
 Beauty baseline is `captures/s36_hdr_beauty_v1/frame_000000.png` with SHA-256
 `5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357`.
 
+The renderer core is scene-agnostic: it owns the swapchain, HDR Scene Color,
+ACES composite, deterministic capture, GPU timing, HUD and technical sequence.
+What is drawn is decided by a pluggable `ISceneRenderer` selected through
+`RenderSettings::sceneType` (`--scene-type`). `CharacterSceneRenderer` is the
+stylized character pipeline; `BlackholeSceneRenderer` traces Schwarzschild
+null geodesics per pixel. A new scene renderer registers through
+`SceneRendererRegistry` (see `docs/RENDERER_PLUGIN_ARCHITECTURE_CN.md`).
+
 ## Requirements
 
 - Windows 10/11
@@ -370,6 +378,8 @@ BT.709 metadata, and Fast Start. It refuses to replace an existing MP4.
 
 Capture CLI:
 
+- `--scene-type <character|blackhole>`: select the pluggable scene renderer
+  (character stylized pipeline by default; blackhole geodesic-tracing renderer)
 - `--width` / `--height`: requested framebuffer size, from 64×64 to 7680×4320
 - `--capture-fps`: fixed simulation and output rate, from 1 to 240
 - `--capture-frames`: exact number of successful frames to write
