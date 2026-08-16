@@ -32,11 +32,12 @@ layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPosition;
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
-// constants from RenderSettings). weights occupies bytes 0..7; the gizmo
-// transform is a std140 mat4 starting at byte 16.
+// constants from RenderSettings). The vertex push range starts at byte 128
+// (after MaterialPushConstants); weights occupies 128..135, the std140 mat4
+// gizmoTransform starts at byte 144 (16-byte aligned).
 layout(push_constant) uniform MorphWeights {
-    vec2 weights;
-    mat4 gizmoTransform;
+    layout(offset = 128) vec2 weights;
+    layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 
 void main() {

@@ -472,7 +472,8 @@ void AzureRenderApp::copyBuffer(
 void AzureRenderApp::transitionImageLayout(
     const VkImage image,
     const VkImageLayout oldLayout,
-    const VkImageLayout newLayout) const {
+    const VkImageLayout newLayout,
+    const std::uint32_t mipLevels) const {
     VkCommandBufferAllocateInfo allocateInfo{
         VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
     allocateInfo.commandPool = commandPool_;
@@ -496,7 +497,7 @@ void AzureRenderApp::transitionImageLayout(
     barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
     barrier.image = image;
     barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-    barrier.subresourceRange.levelCount = 1;
+    barrier.subresourceRange.levelCount = mipLevels;
     barrier.subresourceRange.layerCount = 1;
 
     VkPipelineStageFlags sourceStage = 0;

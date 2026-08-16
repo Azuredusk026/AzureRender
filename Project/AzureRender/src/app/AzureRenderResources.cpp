@@ -412,7 +412,8 @@ void AzureRenderApp::createTexture() {
         transitionImageLayout(
             texture.image,
             VK_IMAGE_LAYOUT_UNDEFINED,
-            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            mipLevels);
         copyBufferToImage(stagingBuffer, texture.image, width, height);
         if (mipLevels > 1) {
             generateMipmaps(texture.image, format, width, height, mipLevels);
@@ -420,7 +421,8 @@ void AzureRenderApp::createTexture() {
             transitionImageLayout(
                 texture.image,
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+                mipLevels);
         }
         vkDestroyBuffer(device_, stagingBuffer, nullptr);
         vkFreeMemory(device_, stagingMemory, nullptr);

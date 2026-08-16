@@ -201,6 +201,17 @@ if(BUILD_TESTING)
         NAME AzureRender.Ecs
         COMMAND AzureRenderEcsTests)
     add_executable(
+        AzureRenderPickMathTests
+        tests/PickMathTests.cpp)
+    target_include_directories(
+        AzureRenderPickMathTests PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderPickMathTests PRIVATE Vulkan::Vulkan)
+    add_test(
+        NAME AzureRender.PickMath
+        COMMAND AzureRenderPickMathTests)
+    add_executable(
         AzureRenderSceneModelTests
         tests/SceneModelTests.cpp
         src/editor/SceneModel.cpp

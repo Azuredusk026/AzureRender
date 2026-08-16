@@ -392,7 +392,8 @@ private:
     void transitionImageLayout(
         VkImage image,
         VkImageLayout oldLayout,
-        VkImageLayout newLayout) const;
+        VkImageLayout newLayout,
+        std::uint32_t mipLevels = 1) const;
     void copyBufferToImage(
         VkBuffer source,
         VkImage destination,

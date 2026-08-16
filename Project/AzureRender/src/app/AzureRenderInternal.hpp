@@ -166,6 +166,63 @@ inline Matrix4 orthographic(
     };
 }
 
+// Builds a world-space picking ray direction from a viewport UV coordinate.
+// viewportU/v: 0..1 normalized. Uses the same fov/aspect as the renderer.
+inline Vector3 pickRayDirection(
+    const Vector3& cameraPosition,
+    const Vector3& cameraTarget,
+    const float viewportU,
+    const float viewportV,
+    const float aspect) {
+    constexpr float kPi = 3.14159265358979323846F;
+    const Vector3 forward = normalize(subtract(cameraTarget, cameraPosition));
+    const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
+    const Vector3 right = normalize(cross(forward, worldUp));
+    const Vector3 up = cross(right, forward);
+    const float tanHalfFov = std::tan(kPi / 6.0F);
+    const float ndcX = viewportU * 2.0F - 1.0F;
+    const float ndcY = 1.0F - viewportV * 2.0F;
+    return normalize({
+        forward[0] + right[0] * ndcX * tanHalfFov * aspect
+            + up[0] * ndcY * tanHalfFov,
+        forward[1] + right[1] * ndcX * tanHalfFov * aspect
+            + up[1] * ndcY * tanHalfFov,
+        forward[2] + right[2] * ndcX * tanHalfFov * aspect
+            + up[2] * ndcY * tanHalfFov,
+    });
+}
+
+// Möller–Trumbore ray/triangle intersection. Returns the hit distance along
+// the ray, or -1.0 when the ray misses the triangle (including backface
+// culling for clockwise winding).
+inline float rayTriangleDistance(
+    const Vector3& rayOrigin,
+    const Vector3& rayDirection,
+    const Vector3& v0,
+    const Vector3& v1,
+    const Vector3& v2) {
+    const Vector3 edge1 = subtract(v1, v0);
+    const Vector3 edge2 = subtract(v2, v0);
+    const Vector3 pvec = cross(rayDirection, edge2);
+    const float determinant = dot(edge1, pvec);
+    if (std::abs(determinant) < 1.0e-7F) {
+        return -1.0F;
+    }
+    const float inverseDeterminant = 1.0F / determinant;
+    const Vector3 tvec = subtract(rayOrigin, v0);
+    const float u = dot(tvec, pvec) * inverseDeterminant;
+    if (u < 0.0F || u > 1.0F) {
+        return -1.0F;
+    }
+    const Vector3 qvec = cross(tvec, edge1);
+    const float v = dot(rayDirection, qvec) * inverseDeterminant;
+    if (v < 0.0F || u + v > 1.0F) {
+        return -1.0F;
+    }
+    const float distance = dot(edge2, qvec) * inverseDeterminant;
+    return distance > 0.0F ? distance : -1.0F;
+}
+
 inline void vkCheck(const VkResult result, const char* operation) {
     if (result != VK_SUCCESS) {
         throw std::runtime_error(
