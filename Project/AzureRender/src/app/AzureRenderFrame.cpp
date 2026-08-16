@@ -923,7 +923,9 @@ void AzureRenderApp::recordCommandBuffer(
                 0);
         }
     }
-    const auto drawPrimitive = [&](const AssetPrimitive& primitive) {
+    const auto drawPrimitive = [&](
+        const AssetPrimitive& primitive,
+        const std::uint32_t firstIndexOffset) {
         const AssetMaterial& material = asset_.materials[primitive.materialIndex];
         const bool blend = material.alphaMode == AssetAlphaMode::Blend;
         const VkPipeline pipeline = blend
@@ -978,13 +980,13 @@ void AzureRenderApp::recordCommandBuffer(
             commandBuffer,
             primitive.indexCount,
             1,
-            primitive.firstIndex,
+            firstIndexOffset,
             0,
             0);
     };
     for (const AssetPrimitive& primitive : asset_.primitives) {
         if (asset_.materials[primitive.materialIndex].alphaMode != AssetAlphaMode::Blend) {
-            drawPrimitive(primitive);
+            drawPrimitive(primitive, primitive.firstIndex);
         }
     }
     std::vector<const AssetPrimitive*> transparentPrimitives;
@@ -999,21 +1001,75 @@ void AzureRenderApp::recordCommandBuffer(
         -cameraPosition_[1],
         -cameraPosition_[2],
     });
-    const auto viewDepth = [&](const AssetPrimitive& primitive) {
-        const Vector3 worldCenter = transformPosition(
-            currentModel_,
-            primitive.center);
-        const Vector3 cameraOffset = subtract(worldCenter, cameraPosition_);
-        return dot(cameraOffset, cameraForward);
-    };
-    std::stable_sort(
-        transparentPrimitives.begin(),
-        transparentPrimitives.end(),
-        [&](const AssetPrimitive* left, const AssetPrimitive* right) {
-            return viewDepth(*left) > viewDepth(*right);
-        });
+    // Per-triangle OIT:对每个透明 primitive,按三角形质心视深从远到近
+    // 重排其索引,写入每帧 HOST_VISIBLE 索引缓冲后按序绘制。
+    std::size_t oitWriteIndex = 0;
+    if (!transparentPrimitives.empty() && !oitIndexBufferMapped_.empty()) {
+        std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
+            oitIndexBufferMapped_[currentFrame_]);
+        for (const AssetPrimitive* primitive : transparentPrimitives) {
+            const std::uint32_t triangleCount = primitive->indexCount / 3;
+            std::vector<std::uint32_t> triangleOrder(triangleCount);
+            std::vector<float> triangleDepth(triangleCount);
+            for (std::uint32_t triangle = 0; triangle < triangleCount;
+                 ++triangle) {
+                triangleOrder[triangle] = triangle;
+                const std::uint32_t base =
+                    primitive->firstIndex + triangle * 3;
+                const std::uint32_t i0 = asset_.indices[base];
+                const std::uint32_t i1 = asset_.indices[base + 1];
+                const std::uint32_t i2 = asset_.indices[base + 2];
+                const Vector3 v0 = transformPosition(
+                    currentModel_, asset_.vertices[i0].position);
+                const Vector3 v1 = transformPosition(
+                    currentModel_, asset_.vertices[i1].position);
+                const Vector3 v2 = transformPosition(
+                    currentModel_, asset_.vertices[i2].position);
+                const Vector3 centroid = {
+                    (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
+                    (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
+                    (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
+                };
+                const Vector3 cameraOffset =
+                    subtract(centroid, cameraPosition_);
+                triangleDepth[triangle] =
+                    dot(cameraOffset, cameraForward);
+            }
+            std::stable_sort(
+                triangleOrder.begin(),
+                triangleOrder.end(),
+                [&](const std::uint32_t left, const std::uint32_t right) {
+                    return triangleDepth[left] > triangleDepth[right];
+                });
+            for (std::uint32_t triangle = 0; triangle < triangleCount;
+                 ++triangle) {
+                const std::uint32_t ordered = triangleOrder[triangle];
+                const std::uint32_t base =
+                    primitive->firstIndex + ordered * 3;
+                oitMapped[oitWriteIndex + triangle * 3] =
+                    asset_.indices[base] - primitive->firstIndex;
+                oitMapped[oitWriteIndex + triangle * 3 + 1] =
+                    asset_.indices[base + 1] - primitive->firstIndex;
+                oitMapped[oitWriteIndex + triangle * 3 + 2] =
+                    asset_.indices[base + 2] - primitive->firstIndex;
+            }
+            oitWriteIndex += primitive->indexCount;
+        }
+    }
+    std::size_t oitReadIndex = 0;
     for (const AssetPrimitive* primitive : transparentPrimitives) {
-        drawPrimitive(*primitive);
+        if (!oitIndexBufferMapped_.empty()) {
+            const VkDeviceSize offsetBytes =
+                static_cast<VkDeviceSize>(oitReadIndex)
+                * sizeof(std::uint32_t);
+            vkCmdBindIndexBuffer(
+                commandBuffer,
+                oitIndexBuffers_[currentFrame_],
+                offsetBytes,
+                VK_INDEX_TYPE_UINT32);
+        }
+        drawPrimitive(*primitive, 0);
+        oitReadIndex += primitive->indexCount;
     }
     vkCmdEndRenderPass(commandBuffer);
     if (runOptions_.gpuTimingEnabled) {

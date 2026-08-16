@@ -380,6 +380,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createTexture();
     createUniformBuffers();
     createJointBuffers();
+    createOitIndexBuffers();
     createHudBuffers();
     createShadowResources();
     createDescriptorPool();
@@ -748,6 +749,18 @@ void AzureRenderApp::cleanup() {
             vkFreeMemory(
                 device_,
                 hudVertexBufferMemories_[index],
+                nullptr);
+        }
+        for (std::size_t index = 0; index < oitIndexBuffers_.size(); ++index) {
+            if (oitIndexBufferMapped_[index] != nullptr) {
+                vkUnmapMemory(
+                    device_,
+                    oitIndexBufferMemories_[index]);
+            }
+            vkDestroyBuffer(device_, oitIndexBuffers_[index], nullptr);
+            vkFreeMemory(
+                device_,
+                oitIndexBufferMemories_[index],
                 nullptr);
         }
         if (indexBuffer_ != VK_NULL_HANDLE) {

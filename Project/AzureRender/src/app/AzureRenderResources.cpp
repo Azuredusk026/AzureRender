@@ -634,6 +634,41 @@ void AzureRenderApp::createJointBuffers() {
     }
 }
 
+void AzureRenderApp::createOitIndexBuffers() {
+    std::size_t totalIndices = 0;
+    for (const AssetPrimitive& primitive : asset_.primitives) {
+        if (asset_.materials[primitive.materialIndex].alphaMode
+            == AssetAlphaMode::Blend) {
+            totalIndices += primitive.indexCount;
+        }
+    }
+    oitIndexBufferSize_ = totalIndices * sizeof(std::uint32_t);
+    if (oitIndexBufferSize_ == 0) {
+        return;
+    }
+    oitIndexBuffers_.resize(kMaxFramesInFlight);
+    oitIndexBufferMemories_.resize(kMaxFramesInFlight);
+    oitIndexBufferMapped_.resize(kMaxFramesInFlight);
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        createBuffer(
+            oitIndexBufferSize_,
+            VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            oitIndexBuffers_[index],
+            oitIndexBufferMemories_[index]);
+        vkCheck(
+            vkMapMemory(
+                device_,
+                oitIndexBufferMemories_[index],
+                0,
+                oitIndexBufferSize_,
+                0,
+                &oitIndexBufferMapped_[index]),
+            "vkMapMemory(oit)");
+    }
+}
+
 void AzureRenderApp::createHudBuffers() {
     const VkDeviceSize size =
         sizeof(HudVertex) * kMaxHudVertices;

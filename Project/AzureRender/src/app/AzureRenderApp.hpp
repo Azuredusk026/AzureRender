@@ -236,6 +236,10 @@ private:
     std::vector<VkBuffer> jointBuffers_;
     std::vector<VkDeviceMemory> jointBufferMemories_;
     std::vector<void*> jointBufferMapped_;
+    std::vector<VkBuffer> oitIndexBuffers_;
+    std::vector<VkDeviceMemory> oitIndexBufferMemories_;
+    std::vector<void*> oitIndexBufferMapped_;
+    std::size_t oitIndexBufferSize_ = 0;
     struct MorphPushConstants {
         std::array<float, 2> weights{{0.0F, 0.0F}};
     };
@@ -321,6 +325,7 @@ private:
     void createTexture();
     void createUniformBuffers();
     void createJointBuffers();
+    void createOitIndexBuffers();
     void createHudBuffers();
     void createDescriptorPool();
     void createDescriptorSets();
