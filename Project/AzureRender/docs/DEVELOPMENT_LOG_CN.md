@@ -2901,3 +2901,15 @@ M3/SC、论文三路径、动态插件、完整 ECS 继续 Deferred。
 
 验证:Debug/Release 构建通过;CTest 10/10;smoke + 截图正常;
 Release `--version` 输出 `AzureRender 0.1.0-rc1`。
+
+## 2026-08-16 v4 执行计划冻结
+
+用户二次授权打磨范围,Active Plan 更新为 v6:
+
+- **AR-8.1 HDR IBL 精化**:外部 equirect 资产导入(.hdr 用 stb_image float 解码)+
+  specular IBL 卷积(prefiltered),CLI `--environment <path>`;
+- **AR-8.2 视口 Gizmo 手柄**:Viewport 内 3D 轴投影手柄,平移/旋转/缩放拖拽;
+- **AR-8.3 ECS 基础**:Entity/Component 存储 + System 循环 + 场景桥接。
+
+同步更新 `docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`(v4 队列+退出条件)、
+`docs/PROJECT_HANDOFF_CN.md`、`README.md`。

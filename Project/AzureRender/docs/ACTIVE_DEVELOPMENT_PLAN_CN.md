@@ -1,8 +1,8 @@
 # AzureRender 近期开发执行计划
 
-> 计划版本：2026-08-16 v5
-> 当前节点：v3 队列全部 Complete（MAINT-1 + AR-6.1~6.3 + AR-7.1~7.3）
-> 适用范围：渲染特性升级、编辑器增强与仓库维护
+> 计划版本：2026-08-16 v6
+> 当前节点：v4 队列 Ready（AR-8.1 为首个执行任务）
+> 适用范围：HDR IBL 精化、Gizmo 视口手柄、ECS 基础
 
 ## 1. 计划治理
 
@@ -21,6 +21,8 @@
 7. v3 队列是用户 2026-08-16 明确授权的执行范围：HDR IBL/mipmap、Morph Target/OIT、
    对象拾取/Gizmo/Scene Graph、git 仓库健康修复与 `.workbuddy` 版本控制决策。
    M3/SC 工业场景、论文三路径、动态插件仍 Deferred。
+8. v4 队列是用户 2026-08-16 二次授权的打磨范围：HDR IBL 精化（真实 equirect 资产
+   导入 + specular IBL 卷积）、Gizmo 3D 视口内手柄、完整 ECS 基础。
 
 状态只使用：`Backlog`、`Ready`、`Active`、`Complete`、`Deferred`、`Blocked`。
 
@@ -133,6 +135,14 @@ Release 全量 CTest；契约同步至 `docs/CLI_CONTRACT_CN.md`。
 | 6 | AR-7.2 | Complete | Transform Gizmo：平移/旋转/缩放手柄与编辑 | AR-7.1 | `完成 AR-7.2 变换 Gizmo` |
 | 7 | AR-7.3 | Complete | 完整 Scene Graph：层级浏览、节点属性编辑、保存/加载 | AR-7.2 | `完成 AR-7.3 场景图编辑` |
 
+### v4 固定执行队列
+
+| 顺序 | 任务 | 状态 | 目标 | 依赖 | 预定 Commit 标题 |
+|---:|---|---|---|---|---|
+| 1 | AR-8.1 | Ready | HDR IBL 精化：外部 equirect 资产导入（.hdr/.png）+ specular IBL 卷积（重要性采样 prefilter） | AR-7.3 | `完成 AR-8.1 HDR IBL 精化` |
+| 2 | AR-8.2 | Backlog | Gizmo 3D 视口内手柄：屏幕空间轴投影、拖拽平移/旋转/缩放 | AR-8.1 | `完成 AR-8.2 视口 Gizmo 手柄` |
+| 3 | AR-8.3 | Backlog | 完整 ECS：Entity/Component 存储、System 更新循环、场景桥接 | AR-8.2 | `完成 AR-8.3 ECS 基础` |
+
 ### v3 统一退出规则
 
 - 每个节点必须新增或强化自动化测试，不能只更新文档；
@@ -209,6 +219,36 @@ Validation 无 VUID。
 - 完整 Scene Graph 编辑闭环不依赖未授权功能。
 
 验收：层级编辑测试；保存/重载一致；1280×720 截图；Validation 无 VUID。
+
+### AR-8.1 HDR IBL 精化
+
+- 支持从文件导入真实 equirectangular 环境（.hdr 使用 stb_image float 解码，
+  .png/.jpg 常规解码），替代或叠加程序化环境；
+- 环境贴图按 RGBA16F/RGBA32F 上传并生成 mip 链；
+- 用 GPU 卷积（compute 或逐 mip blit + 权重采样）生成 prefiltered specular
+  环境，替代当前"blit 即近似"；
+- CLI 参数 `--environment <path>` 与文档示例资产。
+
+验收：环境导入单元测试（.hdr 解码往返）；截图对比程序化/外部环境；
+Validation 无 VUID；Debug/Release 构建与 CTest 全绿。
+
+### AR-8.2 视口 Gizmo 手柄
+
+- 选中对象后在 Viewport 内投影渲染 3D 轴手柄（平移/旋转/缩放三模式可切换）；
+- 鼠标悬停高亮、点击拖拽沿轴/面更新节点 TRS；
+- 手柄命中与拖拽数学有单元测试（投影、逆变换、增量）；
+- 保留 Inspector 数值编辑作为补充入口。
+
+验收：手柄命中/拖拽测试；编辑后保存/重载一致；1280×720 截图；Validation 无 VUID。
+
+### AR-8.3 ECS 基础
+
+- 引入 Entity/Component 存储（稀疏集或 SoA 组件池）与 System 注册/更新循环；
+- 场景节点桥接 ECS：Outliner/Inspector 与渲染路径至少一条通过 ECS 查询工作；
+- ECS 变更不破坏 `.azscene` 保存/重载与既有测试；
+- 新增 ECS 单元测试（创建/销毁实体、组件读写、系统执行顺序）。
+
+验收：ECS 测试；Debug/Release 构建与 CTest 全绿；编辑器编辑闭环正常。
 
 ### AR-3.6 Viewport 资源独立重建
 

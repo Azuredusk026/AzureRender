@@ -12,16 +12,13 @@ contracts, atomic `.azscene` save, unified runtime logging, GPU report
 contract, release compliance manifest, and the RC1 audit
 (`docs/RC1_AUDIT_CN.md`).
 
-The v3 execution queue is fully complete (see
+The v4 execution queue is Ready (see
 [`docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)):
-MAINT-1 restored a healthy git object store (fsck-clean, `.workbuddy/` ignored
-from version control); AR-6.1 upgraded the environment to HDR equirectangular
-with a generated mip chain for prefiltered specular; AR-6.2 added glTF morph
-target loading with GPU blending; AR-6.3 replaced primitive-level transparency
-sorting with per-triangle view-space sorting; AR-7.1 added viewport ray picking
-with selection highlight; AR-7.2 added a transform gizmo (translate/rotate/
-scale driven from the Inspector); AR-7.3 turned the Outliner into a hierarchy
-tree with node create/delete, Inspector editing, and scene reload.
+AR-8.1 refines HDR IBL with real equirect asset import and specular IBL
+convolution; AR-8.2 adds in-viewport 3D gizmo handles; AR-8.3 lays the ECS
+foundation. The full v3 queue (repository health, HDR IBL, Morph Target,
+per-triangle OIT, viewport picking, transform gizmos, scene-graph editing) is
+complete.
 
 AR-0 now provides a versioned `RenderSettings` boundary shared by CLI input,
 runtime controls, frame uniforms and capture manifests. Face SDF assets use an
