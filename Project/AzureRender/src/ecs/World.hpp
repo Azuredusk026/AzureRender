@@ -88,6 +88,28 @@ public:
         return iterator->second->contains(entity);
     }
 
+    // Iterate every entity that carries component T, invoking the callable
+    // with (Entity, T&). The component may be mutated in place.
+    template <typename T, typename Callable>
+    void each(Callable&& callable) {
+        ComponentArray<T>& array = componentArray<T>();
+        for (auto& entry : array.components()) {
+            callable(entry.first, entry.second);
+        }
+    }
+
+    // Iterate entities carrying both T1 and T2.
+    template <typename T1, typename T2, typename Callable>
+    void each(Callable&& callable) {
+        ComponentArray<T1>& primary = componentArray<T1>();
+        ComponentArray<T2>& secondary = componentArray<T2>();
+        for (auto& entry : primary.components()) {
+            if (T2* second = secondary.tryGet(entry.first); second != nullptr) {
+                callable(entry.first, entry.second, *second);
+            }
+        }
+    }
+
     void addSystem(System system) {
         systems_.push_back(std::move(system));
     }

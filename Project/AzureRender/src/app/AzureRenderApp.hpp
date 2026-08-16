@@ -257,6 +257,7 @@ private:
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
     std::array<float, 16> currentModel_{};
     std::int32_t selectedPrimitiveIndex_ = -1;
+    bool ecsRenderableLogged_ = false;
     float pendingPickX_ = 0.0F;
     float pendingPickY_ = 0.0F;
     bool pendingPickRequested_ = false;

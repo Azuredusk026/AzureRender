@@ -356,6 +356,14 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     auto& editorContext = runOptions_.editorSession->context();
+    editorContext.syncComponents();
+    if (!ecsRenderableLogged_) {
+        azurerender::RuntimeDiagnostics::instance().print(
+            "ecs",
+            "ECS visible renderables: "
+                + std::to_string(editorContext.visibleRenderableCount()));
+        ecsRenderableLogged_ = true;
+    }
     editorContext.setGizmoScreen({});
     if (selectedPrimitiveIndex_ < 0
         || static_cast<std::size_t>(selectedPrimitiveIndex_)

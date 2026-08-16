@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SceneModel.hpp"
+#include "ecs/Components.hpp"
 #include "ecs/World.hpp"
 #include <vector>
 
@@ -87,6 +88,8 @@ public:
     [[nodiscard]] azurerender::ecs::World& ecs() noexcept { return ecsWorld_; }
     [[nodiscard]] const azurerender::ecs::World& ecs() const noexcept { return ecsWorld_; }
     [[nodiscard]] azurerender::ecs::Entity entityForNode(std::size_t index) const noexcept;
+    void syncComponents();
+    [[nodiscard]] std::size_t visibleRenderableCount() const noexcept;
     [[nodiscard]] GizmoMode gizmoMode() const noexcept { return gizmoMode_; }
     void setGizmoMode(const GizmoMode value) noexcept {
         gizmoMode_ = value;

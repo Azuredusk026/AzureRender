@@ -1,4 +1,5 @@
 #include "ecs/ComponentArray.hpp"
+#include "ecs/Components.hpp"
 #include "ecs/Entity.hpp"
 #include "ecs/World.hpp"
 
@@ -76,6 +77,42 @@ int main() {
     const Entity e4 = world.createEntity();
     assert(e4 == e2);
     assert(world.has<TagComponent>(e4) == false);
+
+    // TransformComponent / RenderableComponent + each() traversal.
+    world.addComponent(e1, azurerender::ecs::TransformComponent{
+        {1.0F, 2.0F, 3.0F}, {0.0F, 0.0F, 0.0F}, {1.0F, 1.0F, 1.0F}});
+    world.addComponent(e1, azurerender::ecs::RenderableComponent{0, true});
+    world.addComponent(e3, azurerender::ecs::RenderableComponent{1, false});
+    int transformCount = 0;
+    int visibleCount = 0;
+    world.each<azurerender::ecs::RenderableComponent>(
+        [&](const azurerender::ecs::Entity,
+            azurerender::ecs::RenderableComponent& component) {
+            if (component.visible) {
+                ++visibleCount;
+            }
+        });
+    world.each<azurerender::ecs::TransformComponent>(
+        [&](const azurerender::ecs::Entity,
+            azurerender::ecs::TransformComponent&) {
+            ++transformCount;
+        });
+    assert(visibleCount == 1);
+    assert(transformCount == 1);
+    auto* transform = world.tryGet<azurerender::ecs::TransformComponent>(e1);
+    assert(transform != nullptr);
+    assert(transform->translation[0] == 1.0F);
+
+    // Two-component each traversal.
+    int paired = 0;
+    world.each<azurerender::ecs::TransformComponent,
+        azurerender::ecs::RenderableComponent>(
+        [&](const azurerender::ecs::Entity,
+            azurerender::ecs::TransformComponent&,
+            azurerender::ecs::RenderableComponent&) {
+            ++paired;
+        });
+    assert(paired == 1);
 
     return 0;
 }
