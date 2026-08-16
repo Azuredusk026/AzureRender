@@ -2828,3 +2828,37 @@ Isolation。之后再开始 AR-1 Renderer Core Boundary，不提前进入完整 
 - 全量 CTest 8/8 通过；
 - 公共资产 120 帧 Debug Validation 通过；
 - 提交：`1c985e9 修复 Windows MinGW imgui ABI 兼容并适配 1.92.8 API`。
+
+## 2026-08-16 AR-5.4 GPU 报告契约
+
+- `writeGpuCapabilityReport` 改用 nlohmann::json 序列化,设备/扩展名自动 JSON 转义,
+  修复原手写拼接在特殊字符下的 JSON 安全缺口;
+- 新增 `schemas/gpu_capability_report.schema.json`(Schema v1)与
+  `tests/GpuCapabilityReportTests.cpp`,覆盖字段/类型/转义往返断言;
+- CMake 引入 `nlohmann_json`(tinygltf 既有传递依赖),测试注册
+  `AzureRender.GpuCapabilityReport`。
+
+验证:Debug/Release 构建;CTest 9/9;RTX 4060 实机 GPU 报告 JSON 符合 Schema。
+提交:`9521a83 完成 AR-5.4 GPU 报告契约`。
+
+## 2026-08-16 AR-5.5 发布合规清单
+
+- CMake install 补充 vendored imgui 与 vcpkg 依赖(glfw3/tinygltf/stb/nlohmann-json)
+  的许可证正文到 `share/AzureRender/licenses/`;
+- 新增 `tools/write_install_manifest.cmake`(文件级 SHA-256 内容清单)与
+  `tools/verify_install_manifest.cmake`(可复现性+许可证完整性校验);
+- release gate 在 install 后追加 write/verify 两个阶段;
+- 新增 `tools/test_install_manifest_roundtrip.cmake` CTest,覆盖正向往返与篡改负向。
+
+验证:CTest 10/10;安装树清单生成与校验通过。提交:`7090f64 完成 AR-5.5 发布合规清单`。
+
+## 2026-08-16 AR-5.6 RC1 发布审计
+
+- 版本冻结 `0.1.0-rc1`(`AZURERENDER_VERSION` 与 CPack 包名同步);
+- 新增 `docs/RC1_AUDIT_CN.md`:固定队列完成矩阵、双平台证据、合规清单与审计结论;
+- `docs/RC_RELEASE_CN.md` 更新为 RC1 并引用审计报告。
+
+验证:Release `--version` 输出 `AzureRender 0.1.0-rc1`;CTest 10/10;
+公共资产 120 帧 Validation 通过。提交:`08ffb78 完成 AR-5.6 RC1 发布审计`。
+
+v2 固定执行队列至此全部完成。
