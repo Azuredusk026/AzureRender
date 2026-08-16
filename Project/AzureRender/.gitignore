@@ -1,4 +1,5 @@
 /.idea/
+/.workbuddy/
 /build/
 /cmake-build-*/
 /out/
