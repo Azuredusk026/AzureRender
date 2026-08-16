@@ -2,11 +2,36 @@
 
 #include "RuntimeDiagnostics.hpp"
 
+#include <nlohmann/json.hpp>
+
 #include <fstream>
 #include <string>
 #include <vector>
 
 namespace azurerender {
+
+std::string formatGpuCapabilityReport(
+    const VkPhysicalDeviceProperties& properties,
+    const VkPhysicalDeviceFeatures& features,
+    const std::vector<VkExtensionProperties>& extensions) {
+    nlohmann::json extensionsJson = nlohmann::json::array();
+    for (const VkExtensionProperties& extension : extensions) {
+        extensionsJson.push_back(extension.extensionName);
+    }
+    nlohmann::json report = {
+        {"schema_version", 1},
+        {"device_name", properties.deviceName},
+        {"vendor_id", properties.vendorID},
+        {"device_id", properties.deviceID},
+        {"api_version", properties.apiVersion},
+        {"driver_version", properties.driverVersion},
+        {"features",
+         {{"sampler_anisotropy", features.samplerAnisotropy == VK_TRUE},
+          {"shader_int64", features.shaderInt64 == VK_TRUE}}},
+        {"extensions", extensionsJson},
+    };
+    return report.dump(2) + "\n";
+}
 
 bool writeGpuCapabilityReport(
     const VkPhysicalDevice device,
@@ -33,25 +58,13 @@ bool writeGpuCapabilityReport(
                 "Unable to write GPU capability report: " + path.string());
             return false;
         }
-        output << "{\n"
-               << "  \"schema_version\": 1,\n"
-               << "  \"device_name\": \"" << properties.deviceName << "\",\n"
-               << "  \"vendor_id\": " << properties.vendorID << ",\n"
-               << "  \"device_id\": " << properties.deviceID << ",\n"
-               << "  \"api_version\": " << properties.apiVersion << ",\n"
-               << "  \"driver_version\": " << properties.driverVersion << ",\n"
-               << "  \"features\": {\n"
-               << "    \"sampler_anisotropy\": "
-               << (features.samplerAnisotropy ? "true" : "false") << ",\n"
-               << "    \"shader_int64\": "
-               << (features.shaderInt64 ? "true" : "false") << "\n"
-               << "  },\n"
-               << "  \"extensions\": [\n";
-        for (std::size_t index = 0; index < extensions.size(); ++index) {
-            output << "    \"" << extensions[index].extensionName << "\""
-                   << (index + 1 < extensions.size() ? "," : "") << '\n';
+        output << formatGpuCapabilityReport(properties, features, extensions);
+        if (!output) {
+            RuntimeDiagnostics::instance().error(
+                "gpu", DiagnosticCode::Runtime,
+                "Failed to flush GPU capability report: " + path.string());
+            return false;
         }
-        output << "  ]\n}\n";
         RuntimeDiagnostics::instance().info(
             "gpu", "GPU capability report: " + path.string());
         return true;

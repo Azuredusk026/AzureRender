@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/gpu-capability-report-v1.json",
+  "title": "AzureRender GPU Capability Report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "device_name",
+    "vendor_id",
+    "device_id",
+    "api_version",
+    "driver_version",
+    "features",
+    "extensions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "device_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vendor_id": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "device_id": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "api_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "driver_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sampler_anisotropy", "shader_int64"],
+      "properties": {
+        "sampler_anisotropy": {
+          "type": "boolean"
+        },
+        "shader_int64": {
+          "type": "boolean"
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

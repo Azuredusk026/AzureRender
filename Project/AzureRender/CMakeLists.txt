@@ -16,6 +16,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
 # Dear ImGui integration.
 #
@@ -216,6 +217,24 @@ if(BUILD_TESTING)
         NAME AzureRender.RuntimeDiagnostics
         COMMAND AzureRenderRuntimeDiagnosticsTests)
     add_executable(
+        AzureRenderGpuCapabilityReportTests
+        tests/GpuCapabilityReportTests.cpp
+        src/diagnostics/GpuCapabilityReport.cpp
+        src/diagnostics/GpuCapabilityReport.hpp
+        src/diagnostics/RuntimeDiagnostics.cpp
+        src/diagnostics/RuntimeDiagnostics.hpp
+    )
+    target_include_directories(
+        AzureRenderGpuCapabilityReportTests PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderGpuCapabilityReportTests PRIVATE
+            Vulkan::Vulkan
+            nlohmann_json::nlohmann_json)
+    add_test(
+        NAME AzureRender.GpuCapabilityReport
+        COMMAND AzureRenderGpuCapabilityReportTests)
+    add_executable(
         AzureRenderResourceLocatorTests
         tests/ResourceLocatorTests.cpp
         src/resources/ResourceLocator.cpp
@@ -251,6 +270,7 @@ target_link_libraries(
     PRIVATE
         Vulkan::Vulkan
         glfw
+        nlohmann_json::nlohmann_json
 )
 
 if(TARGET imgui::imgui)
