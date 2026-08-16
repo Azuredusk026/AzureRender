@@ -16,23 +16,52 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
-find_package(imgui CONFIG QUIET)
-if(NOT TARGET imgui::imgui)
-    find_path(IMGUI_INCLUDE_DIR imgui.h PATH_SUFFIXES imgui)
-    find_library(IMGUI_LIBRARY NAMES imgui)
-    if(IMGUI_INCLUDE_DIR AND IMGUI_LIBRARY)
-        add_library(imgui::imgui UNKNOWN IMPORTED)
-        find_library(IMGUI_STB_LIBRARY NAMES stb)
-        set_target_properties(
-            imgui::imgui
-            PROPERTIES
-                IMPORTED_LOCATION "${IMGUI_LIBRARY}"
-                INTERFACE_INCLUDE_DIRECTORIES "${IMGUI_INCLUDE_DIR}"
-        )
-        if(IMGUI_STB_LIBRARY)
-            set_property(
-                TARGET imgui::imgui APPEND PROPERTY
-                INTERFACE_LINK_LIBRARIES "${IMGUI_STB_LIBRARY}")
+
+# Dear ImGui integration.
+#
+# Windows MinGW builds cannot link the vcpkg `x64-windows` (MSVC) imgui static
+# library because the C++ name mangling schemes are incompatible. The project
+# therefore compiles the vendored imgui sources under `third_party/imgui` so the
+# library always uses the same ABI as the project compiler. When the vendored
+# sources are absent, the vcpkg imgui package is used as a fallback.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/imgui.cpp")
+    add_library(azure_imgui STATIC
+        third_party/imgui/imgui.cpp
+        third_party/imgui/imgui_draw.cpp
+        third_party/imgui/imgui_tables.cpp
+        third_party/imgui/imgui_widgets.cpp
+        third_party/imgui/backends/imgui_impl_glfw.cpp
+        third_party/imgui/backends/imgui_impl_vulkan.cpp
+    )
+    target_include_directories(
+        azure_imgui
+        PUBLIC
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui"
+            "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/backends"
+    )
+    target_compile_features(azure_imgui PUBLIC cxx_std_17)
+    target_compile_definitions(azure_imgui PUBLIC GLFW_INCLUDE_VULKAN)
+    target_link_libraries(azure_imgui PUBLIC Vulkan::Vulkan glfw)
+    add_library(imgui::imgui ALIAS azure_imgui)
+else()
+    find_package(imgui CONFIG QUIET)
+    if(NOT TARGET imgui::imgui)
+        find_path(IMGUI_INCLUDE_DIR imgui.h PATH_SUFFIXES imgui)
+        find_library(IMGUI_LIBRARY NAMES imgui)
+        if(IMGUI_INCLUDE_DIR AND IMGUI_LIBRARY)
+            add_library(imgui::imgui UNKNOWN IMPORTED)
+            find_library(IMGUI_STB_LIBRARY NAMES stb)
+            set_target_properties(
+                imgui::imgui
+                PROPERTIES
+                    IMPORTED_LOCATION "${IMGUI_LIBRARY}"
+                    INTERFACE_INCLUDE_DIRECTORIES "${IMGUI_INCLUDE_DIR}"
+            )
+            if(IMGUI_STB_LIBRARY)
+                set_property(
+                    TARGET imgui::imgui APPEND PROPERTY
+                    INTERFACE_LINK_LIBRARIES "${IMGUI_STB_LIBRARY}")
+            endif()
         endif()
     endif()
 endif()

@@ -153,6 +153,7 @@ void ImGuiEditorLayer::initialize(
     }
 
     ImGui_ImplVulkan_InitInfo initInfo{};
+    initInfo.ApiVersion = VK_API_VERSION_1_3;
     initInfo.Instance = instance;
     initInfo.PhysicalDevice = physicalDevice;
     initInfo.Device = device;
@@ -161,21 +162,14 @@ void ImGuiEditorLayer::initialize(
     initInfo.DescriptorPool = descriptorPool_;
     initInfo.MinImageCount = 2;
     initInfo.ImageCount = imageCount;
-    initInfo.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
-    if (!ImGui_ImplVulkan_Init(&initInfo, renderPass)) {
+    initInfo.PipelineInfoMain.RenderPass = renderPass;
+    initInfo.PipelineInfoMain.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+    if (!ImGui_ImplVulkan_Init(&initInfo)) {
         vkDestroyDescriptorPool(device, descriptorPool_, nullptr);
         descriptorPool_ = VK_NULL_HANDLE;
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
         throw std::runtime_error("ImGui Vulkan backend initialization failed");
-    }
-    if (!ImGui_ImplVulkan_CreateFontsTexture()) {
-        ImGui_ImplVulkan_Shutdown();
-        vkDestroyDescriptorPool(device, descriptorPool_, nullptr);
-        descriptorPool_ = VK_NULL_HANDLE;
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-        throw std::runtime_error("ImGui font texture creation failed");
     }
     initialized_ = true;
 }
@@ -214,6 +208,7 @@ void ImGuiEditorLayer::drawPanels() {
     }
 #ifdef IMGUI_HAS_DOCK
     const ImGuiID dockspace = ImGui::DockSpaceOverViewport(
+        0,
         ImGui::GetMainViewport(),
         ImGuiDockNodeFlags_PassthruCentralNode);
     const bool resetLayout = session_->consumeLayoutResetRequest();
