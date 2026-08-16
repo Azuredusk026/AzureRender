@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/EditorCameraController.hpp"
 #include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
@@ -147,9 +148,11 @@ void AzureRenderApp::drawFrame() {
                 if (capturedFrames_ == 1
                     || capturedFrames_ == runOptions_.captureFrameLimit
                     || capturedFrames_ % runOptions_.captureFps == 0) {
-                    std::cout
-                        << "Capture progress: " << capturedFrames_ << " / "
-                        << runOptions_.captureFrameLimit << '\n';
+                    azurerender::RuntimeDiagnostics::instance().info(
+                        "capture",
+                        "Capture progress: " + std::to_string(capturedFrames_)
+                            + " / "
+                            + std::to_string(runOptions_.captureFrameLimit));
                 }
             }
         } catch (...) {

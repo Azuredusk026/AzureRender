@@ -255,14 +255,15 @@ void AzureRenderApp::run(
         "Shadow Map",
         "Depth",
     };
-    std::cout
-        << "Diagnostic view: " << kDiagnosticNames[renderSettings_.diagnosticView]
-        << ", stylized lighting: "
-        << (renderSettings_.stylizedLightingEnabled ? "on" : "off")
-        << ", internal outline: "
-        << (renderSettings_.innerOutlineEnabled ? "on" : "off")
-        << ", HUD: " << (hudEnabled_ ? "on" : "off")
-        << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "render",
+        std::string("Diagnostic view: ")
+            + kDiagnosticNames[renderSettings_.diagnosticView]
+            + ", stylized lighting: "
+            + (renderSettings_.stylizedLightingEnabled ? "on" : "off")
+            + ", internal outline: "
+            + (renderSettings_.innerOutlineEnabled ? "on" : "off")
+            + ", HUD: " + (hudEnabled_ ? "on" : "off"));
     mainLoop(runOptions_.smokeFrameLimit);
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().detachRenderSettings();
@@ -282,24 +283,27 @@ void AzureRenderApp::initWindow() {
     config.keyCallback = keyCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
     lastRotationTime_ = frontend_->timeSeconds();
-    std::cout
-        << "Controls: Space pause/resume, R auto rotate, "
-        << "1/2/3/4 full-body angles, 5 face close-up, "
-        << "6 portfolio orbit, "
-        << "Left/Right fine rotate, "
-        << "F1/F2/F3 showcase presets, "
-        << "F4 animation pause/resume, F11 animation restart, "
-        << "7/8 previous/next animation, 9 timeline status, "
-        << "0 diagnostic view, "
-        << "H HUD, "
-        << "F10 inner outlines, "
-        << "F9 style toggle, F7/F8 mask strength, "
-        << "F5/F6 band threshold, "
-        << "F12 screenshot\n";
+    azurerender::RuntimeDiagnostics::instance().print(
+        "input",
+        "Controls: Space pause/resume, R auto rotate, "
+        "1/2/3/4 full-body angles, 5 face close-up, "
+        "6 portfolio orbit, "
+        "Left/Right fine rotate, "
+        "F1/F2/F3 showcase presets, "
+        "F4 animation pause/resume, F11 animation restart, "
+        "7/8 previous/next animation, 9 timeline status, "
+        "0 diagnostic view, "
+        "H HUD, "
+        "F10 inner outlines, "
+        "F9 style toggle, F7/F8 mask strength, "
+        "F5/F6 band threshold, "
+        "F12 screenshot");
 }
 
 void AzureRenderApp::initVulkan(const std::string& assetPath) {
-    std::cout << "Validation layer: " << (kEnableValidation ? "enabled" : "disabled") << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "gpu", "Validation layer: "
+            + std::string(kEnableValidation ? "enabled" : "disabled"));
     createInstance();
     setupDebugMessenger();
     createSurface();
@@ -320,42 +324,53 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
                 "Face SDF materials must share one headNode");
         }
         faceSdfHeadNode_ = material.faceSdf.headNode;
-        std::cout
-            << "Face SDF: material=" << material.name
-            << ", texture=" << material.faceSdf.width << 'x'
-            << material.faceSdf.height
-            << ", headNode=" << material.faceSdf.headNodeName << '\n';
+        azurerender::RuntimeDiagnostics::instance().print(
+            "asset",
+            "Face SDF: material=" + material.name
+                + ", texture=" + std::to_string(material.faceSdf.width) + 'x'
+                + std::to_string(material.faceSdf.height)
+                + ", headNode=" + material.faceSdf.headNodeName);
     }
     appendShowcasePlatform(asset_);
-    std::cout << "Asset path: " << resolvedAssetPath_ << '\n';
-    std::cout << "Loaded asset: " << asset_.vertices.size() << " vertices, "
-              << asset_.indices.size() << " indices, "
-              << asset_.primitives.size() << " primitives, "
-              << asset_.materials.size() << " materials\n";
-    std::cout << "Material Class v1 inventory:\n";
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset", "Asset path: " + resolvedAssetPath_);
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset",
+        "Loaded asset: " + std::to_string(asset_.vertices.size())
+            + " vertices, " + std::to_string(asset_.indices.size())
+            + " indices, " + std::to_string(asset_.primitives.size())
+            + " primitives, " + std::to_string(asset_.materials.size())
+            + " materials");
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset", "Material Class v1 inventory:");
     for (std::size_t index = 0; index < asset_.materials.size(); ++index) {
         const AssetMaterial& material = asset_.materials[index];
-        std::cout
-            << "  [" << index << "] " << material.name
-            << " -> " << assetMaterialClassName(material.materialClass)
-            << ", flags=0x" << std::hex << material.materialFeatures
-            << std::dec
-            << (material.materialProfileExplicit
-                ? ", source=asset-extras"
-                : ", source=fallback/inferred")
-            << '\n';
+        std::stringstream inventory;
+        inventory << "  [" << index << "] " << material.name
+                  << " -> " << assetMaterialClassName(material.materialClass)
+                  << ", flags=0x" << std::hex << material.materialFeatures
+                  << std::dec
+                  << (material.materialProfileExplicit
+                      ? ", source=asset-extras"
+                      : ", source=fallback/inferred");
+        azurerender::RuntimeDiagnostics::instance().print(
+            "asset", inventory.str());
     }
-    std::cout << "Skinning: "
-              << (asset_.hasSkin ? "enabled" : "static fallback")
-              << ", " << asset_.jointMatrices.size() << " joint matrices\n";
-    std::cout << "Animations: " << asset_.animations.size();
+    std::stringstream skinning;
+    skinning << "Skinning: "
+             << (asset_.hasSkin ? "enabled" : "static fallback")
+             << ", " << asset_.jointMatrices.size() << " joint matrices";
+    azurerender::RuntimeDiagnostics::instance().print("asset", skinning.str());
+    std::string animationLine = "Animations: "
+        + std::to_string(asset_.animations.size());
     if (!asset_.animations.empty()) {
         const auto& animation = asset_.animations.front();
-        std::cout << " (playing \"" << animation.name << "\", "
-                  << animation.endTime - animation.startTime
-                  << " s loop)";
+        animationLine += " (playing \"" + animation.name + "\", "
+            + std::to_string(animation.endTime - animation.startTime)
+            + " s loop)";
     }
-    std::cout << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset", animationLine);
     animationIndex_ = 0;
     animationTime_ = 0.0F;
     animationPlaying_ = true;
@@ -450,12 +465,14 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
         printGpuTimingSummary();
     }
-    std::cout << "Rendered frames: " << renderedFrames << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "render", "Rendered frames: " + std::to_string(renderedFrames));
     if (fixedSimulation_) {
         writeCaptureManifest(renderedFrames);
-        std::cout
-            << "Captured frames: " << capturedFrames_ << " at "
-            << runOptions_.captureFps << " fps\n";
+        azurerender::RuntimeDiagnostics::instance().print(
+            "capture",
+            "Captured frames: " + std::to_string(capturedFrames_) + " at "
+                + std::to_string(runOptions_.captureFps) + " fps");
     }
 }
 
@@ -473,8 +490,8 @@ void AzureRenderApp::activatePortfolioOrbit() {
         animationTime_ = 0.0F;
         animationPlaying_ = true;
     }
-    std::cout
-        << "View preset: 6 (portfolio orbit, Endfield Industrial)\n";
+    azurerender::RuntimeDiagnostics::instance().print(
+        "input", "View preset: 6 (portfolio orbit, Endfield Industrial)");
 }
 
 void AzureRenderApp::configureQaHarness() {
@@ -617,13 +634,13 @@ void AzureRenderApp::configureQaHarness() {
         animationTime_ = 0.0F;
         animationPlaying_ = false;
     }
-    std::cout
-        << "CQ-0 QA: camera=" << qaCameraName_
-        << ", light=" << qaLightName_
-        << ", effect=" << qaEffectName_
-        << ", state=" << qaEffectStateName_
-        << ", isolation=" << qaIsolationName_
-        << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "qa",
+        std::string("CQ-0 QA: camera=") + qaCameraName_
+            + ", light=" + qaLightName_
+            + ", effect=" + qaEffectName_
+            + ", state=" + qaEffectStateName_
+            + ", isolation=" + qaIsolationName_);
 }
 
 void AzureRenderApp::updateTechnicalSequenceState(
@@ -667,10 +684,12 @@ void AzureRenderApp::updateTechnicalSequenceState(
         const double chapterTime =
             static_cast<double>(frameIndex)
             / static_cast<double>(runOptions_.captureFps);
-        std::cout
-            << "Technical chapter " << chapter + 1 << "/5: "
-            << kChapterNames[chapter] << " at frame "
-            << frameIndex << " (" << chapterTime << " s)\n";
+        azurerender::RuntimeDiagnostics::instance().print(
+            "capture",
+            "Technical chapter " + std::to_string(chapter + 1) + "/5: "
+                + kChapterNames[chapter] + " at frame "
+                + std::to_string(frameIndex) + " ("
+                + std::to_string(chapterTime) + " s)");
     }
 }
 
@@ -928,21 +947,24 @@ void AzureRenderApp::pickPhysicalDevice() {
         throw std::runtime_error(
             "Selected graphics queue does not support timestamp queries");
     }
-    std::cout << "Selected GPU: " << selectedGpuName_ << '\n';
-    std::cout
-        << "HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT ("
-        << (hdrSceneColorFormatSupported_ ? "supported" : "unsupported")
-        << ")\n";
+    azurerender::RuntimeDiagnostics::instance().print(
+        "gpu", "Selected GPU: " + selectedGpuName_);
+    azurerender::RuntimeDiagnostics::instance().print(
+        "gpu",
+        "HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT ("
+            + std::string(hdrSceneColorFormatSupported_ ? "supported" : "unsupported")
+            + ")");
     if (!hdrSceneColorFormatSupported_) {
         throw std::runtime_error(
             "Selected GPU does not support the required RGBA16F sampled, "
             "color-attachment, and color-blend features");
     }
     if (runOptions_.gpuTimingEnabled) {
-        std::cout
-            << "GPU timing: enabled, timestamp period "
-            << timestampPeriodNanoseconds_ << " ns, "
-            << timestampValidBits_ << " valid bits\n";
+        azurerender::RuntimeDiagnostics::instance().print(
+            "gpu",
+            "GPU timing: enabled, timestamp period "
+                + std::to_string(timestampPeriodNanoseconds_) + " ns, "
+                + std::to_string(timestampValidBits_) + " valid bits");
     }
 }
 
@@ -1042,9 +1064,11 @@ void AzureRenderApp::createSwapchain() {
         renderExtent_ = extent;
     }
     if (editorUiEnabled_) {
-        std::cout << "Editor viewport render extent: "
-                  << renderExtent_.width << 'x' << renderExtent_.height
-                  << '\n';
+        azurerender::RuntimeDiagnostics::instance().print(
+            "editor",
+            "Editor viewport render extent: "
+                + std::to_string(renderExtent_.width) + 'x'
+                + std::to_string(renderExtent_.height));
     }
 }
 
@@ -1135,7 +1159,8 @@ void AzureRenderApp::keyCallback(
     constexpr float kFineStep = kPi / 36.0F;
     const auto printAnimationStatus = [application]() {
         if (application->asset_.animations.empty()) {
-            std::cout << "Animation: unavailable for this asset\n";
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input", "Animation: unavailable for this asset");
             return;
         }
         const AssetAnimation& animation =
@@ -1150,13 +1175,13 @@ void AzureRenderApp::keyCallback(
         const std::string displayName = animation.name.empty()
             ? "<unnamed>"
             : animation.name;
-        std::cout
-            << "Animation [" << application->animationIndex_ + 1
-            << '/' << application->asset_.animations.size() << "]: \""
-            << displayName << "\", " << playhead << " / " << duration
-            << " s, "
-            << (application->animationPlaying_ ? "playing" : "paused")
-            << '\n';
+        azurerender::RuntimeDiagnostics::instance().print(
+            "input",
+            "Animation [" + std::to_string(application->animationIndex_ + 1)
+                + '/' + std::to_string(application->asset_.animations.size())
+                + "]: \"" + displayName + "\", " + std::to_string(playhead)
+                + " / " + std::to_string(duration) + " s, "
+                + (application->animationPlaying_ ? "playing" : "paused"));
     };
     const auto selectAnimation =
         [application, &printAnimationStatus](const int direction) {
@@ -1181,19 +1206,22 @@ void AzureRenderApp::keyCallback(
             && key == GLFW_KEY_TAB
             && application->runOptions_.editorSession->context().selectedNode() != nullptr) {
             application->runOptions_.editorSession->context().selectNextNode();
-            std::cout << "Editor selected node: "
-                      << application->runOptions_.editorSession->context()
-                             .selectedNode()->name
-                      << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Editor selected node: "
+                    + application->runOptions_.editorSession->context()
+                          .selectedNode()->name);
         } else if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
-            std::cout << "Auto rotate: "
-                      << (application->autoRotate_ ? "on" : "paused")
-                      << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Auto rotate: "
+                    + std::string(application->autoRotate_ ? "on" : "paused"));
         } else if (key == GLFW_KEY_R) {
             application->autoRotate_ = true;
             application->rotationSpeed_ = 0.65F;
-            std::cout << "Auto rotate: on (standard speed)\n";
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input", "Auto rotate: on (standard speed)");
         } else if (key >= GLFW_KEY_1 && key <= GLFW_KEY_4) {
             application->rotationAngle_ =
                 kPi * 0.25F
@@ -1202,14 +1230,17 @@ void AzureRenderApp::keyCallback(
             application->cameraTarget_ = {0.0F, 0.0F, 0.0F};
             application->autoRotate_ = false;
             application->rotationSpeed_ = 0.65F;
-            std::cout << "Angle preset: " << key - GLFW_KEY_0 << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Angle preset: " + std::to_string(key - GLFW_KEY_0));
         } else if (key == GLFW_KEY_5) {
             application->rotationAngle_ = kPi * 0.25F;
             application->cameraPosition_ = {0.915F, 1.507F, 1.046F};
             application->cameraTarget_ = {0.0F, 0.82F, 0.0F};
             application->autoRotate_ = false;
             application->rotationSpeed_ = 0.65F;
-            std::cout << "View preset: 5 (face close-up)\n";
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input", "View preset: 5 (face close-up)");
         } else if (key == GLFW_KEY_6) {
             application->activatePortfolioOrbit();
             printAnimationStatus();
@@ -1229,25 +1260,26 @@ void AzureRenderApp::keyCallback(
                 "Shadow Map",
                 "Depth",
             };
-            std::cout
-                << "Diagnostic view: "
-                << kDiagnosticNames[application->renderSettings_.diagnosticView]
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                std::string("Diagnostic view: ")
+                    + kDiagnosticNames[application->renderSettings_.diagnosticView]);
         } else if (key == GLFW_KEY_H) {
             application->hudEnabled_ = !application->hudEnabled_;
-            std::cout
-                << "HUD: "
-                << (application->hudEnabled_ ? "on" : "off")
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "HUD: " + std::string(application->hudEnabled_ ? "on" : "off"));
             if (application->hudEnabled_
                 && !application->runOptions_.gpuTimingEnabled) {
-                std::cout
-                    << "HUD GPU pass timing is disabled; restart with "
-                    << "--hud or --gpu-timing to enable it\n";
+                azurerender::RuntimeDiagnostics::instance().print(
+                    "input",
+                    "HUD GPU pass timing is disabled; restart with "
+                    "--hud or --gpu-timing to enable it");
             }
         } else if (key == GLFW_KEY_F12) {
             application->screenshotRequested_ = true;
-            std::cout << "Screenshot requested\n";
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input", "Screenshot requested");
         } else if (key >= GLFW_KEY_F1 && key <= GLFW_KEY_F3) {
             application->renderSettings_.showcasePreset =
                 static_cast<std::uint32_t>(key - GLFW_KEY_F1);
@@ -1256,45 +1288,50 @@ void AzureRenderApp::keyCallback(
                 "Endfield Industrial",
                 "Neutral Material Check",
             };
-            std::cout
-                << "Showcase preset: "
-                << key - GLFW_KEY_F1 + 1
-                << " ("
-                << kPresetNames[application->renderSettings_.showcasePreset]
-                << ")\n";
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Showcase preset: "
+                    + std::to_string(key - GLFW_KEY_F1 + 1) + " ("
+                    + kPresetNames[application->renderSettings_.showcasePreset]
+                    + ")");
         } else if (key == GLFW_KEY_F4) {
             if (application->asset_.animations.empty()) {
-                std::cout << "Animation: unavailable for this asset\n";
+                azurerender::RuntimeDiagnostics::instance().print(
+                    "input", "Animation: unavailable for this asset");
             } else {
                 application->animationPlaying_ =
                     !application->animationPlaying_;
-                std::cout
-                    << "Animation: "
-                    << (application->animationPlaying_ ? "playing" : "paused")
-                    << '\n';
+                azurerender::RuntimeDiagnostics::instance().print(
+                    "input",
+                    "Animation: "
+                        + std::string(application->animationPlaying_ ? "playing" : "paused"));
             }
         } else if (key == GLFW_KEY_F11) {
             if (application->asset_.animations.empty()) {
-                std::cout << "Animation: unavailable for this asset\n";
+                azurerender::RuntimeDiagnostics::instance().print(
+                    "input", "Animation: unavailable for this asset");
             } else {
                 application->animationTime_ = 0.0F;
                 application->animationPlaying_ = true;
-                std::cout << "Animation: restarted\n";
+                azurerender::RuntimeDiagnostics::instance().print(
+                    "input", "Animation: restarted");
             }
         } else if (key == GLFW_KEY_F10) {
             application->renderSettings_.innerOutlineEnabled =
                 !application->renderSettings_.innerOutlineEnabled;
-            std::cout
-                << "Inner outlines: "
-                << (application->renderSettings_.innerOutlineEnabled ? "on" : "off")
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Inner outlines: "
+                    + std::string(
+                        application->renderSettings_.innerOutlineEnabled ? "on" : "off"));
         } else if (key == GLFW_KEY_F9) {
             application->renderSettings_.stylizedLightingEnabled =
                 !application->renderSettings_.stylizedLightingEnabled;
-            std::cout
-                << "Stylized lighting: "
-                << (application->renderSettings_.stylizedLightingEnabled ? "on" : "off")
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Stylized lighting: "
+                    + std::string(
+                        application->renderSettings_.stylizedLightingEnabled ? "on" : "off"));
         }
     }
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
@@ -1308,65 +1345,81 @@ void AzureRenderApp::keyCallback(
             application->renderSettings_.styleMaskStrength = std::max(
                 application->renderSettings_.styleMaskStrength - 0.10F,
                 0.0F);
-            std::cout
-                << "Style mask strength: "
-                << application->renderSettings_.styleMaskStrength
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Style mask strength: "
+                    + std::to_string(
+                        application->renderSettings_.styleMaskStrength));
         } else if (key == GLFW_KEY_F8) {
             application->renderSettings_.styleMaskStrength = std::min(
                 application->renderSettings_.styleMaskStrength + 0.10F,
                 2.0F);
-            std::cout
-                << "Style mask strength: "
-                << application->renderSettings_.styleMaskStrength
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Style mask strength: "
+                    + std::to_string(
+                        application->renderSettings_.styleMaskStrength));
         } else if (key == GLFW_KEY_F5) {
             application->renderSettings_.diffuseBandThreshold = std::max(
                 application->renderSettings_.diffuseBandThreshold - 0.05F,
                 0.05F);
-            std::cout
-                << "Diffuse band threshold: "
-                << application->renderSettings_.diffuseBandThreshold
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Diffuse band threshold: "
+                    + std::to_string(
+                        application->renderSettings_.diffuseBandThreshold));
         } else if (key == GLFW_KEY_F6) {
             application->renderSettings_.diffuseBandThreshold = std::min(
                 application->renderSettings_.diffuseBandThreshold + 0.05F,
                 0.95F);
-            std::cout
-                << "Diffuse band threshold: "
-                << application->renderSettings_.diffuseBandThreshold
-                << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Diffuse band threshold: "
+                    + std::to_string(
+                        application->renderSettings_.diffuseBandThreshold));
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_LEFT_BRACKET) {
             application->renderSettings_.outline.strength = std::max(
                 application->renderSettings_.outline.strength - 0.05F,
                 0.0F);
-            std::cout << "Editor outline strength: "
-                      << application->renderSettings_.outline.strength << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Editor outline strength: "
+                    + std::to_string(
+                        application->renderSettings_.outline.strength));
             application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_RIGHT_BRACKET) {
             application->renderSettings_.outline.strength = std::min(
                 application->renderSettings_.outline.strength + 0.05F,
                 2.0F);
-            std::cout << "Editor outline strength: "
-                      << application->renderSettings_.outline.strength << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Editor outline strength: "
+                    + std::to_string(
+                        application->renderSettings_.outline.strength));
             application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_MINUS) {
             application->renderSettings_.grade.exposureEv = std::max(
                 application->renderSettings_.grade.exposureEv - 0.25F,
                 -8.0F);
-            std::cout << "Editor exposure EV: "
-                      << application->renderSettings_.grade.exposureEv << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Editor exposure EV: "
+                    + std::to_string(
+                        application->renderSettings_.grade.exposureEv));
             application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_EQUAL) {
             application->renderSettings_.grade.exposureEv = std::min(
                 application->renderSettings_.grade.exposureEv + 0.25F,
                 8.0F);
-            std::cout << "Editor exposure EV: "
-                      << application->renderSettings_.grade.exposureEv << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "input",
+                "Editor exposure EV: "
+                    + std::to_string(
+                        application->renderSettings_.grade.exposureEv));
             application->runOptions_.editorSession->context().markDirty();
         }
     }

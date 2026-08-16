@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 
 #include <stb_image_write.h>
 
@@ -386,7 +387,8 @@ void AzureRenderApp::writeCaptureManifest(
             "Failed to write capture manifest: "
             + outputPath.string());
     }
-    std::cout << "Capture manifest: " << outputPath.string() << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "capture", "Capture manifest: " + outputPath.string());
 }
 
 
@@ -457,7 +459,8 @@ void AzureRenderApp::printGpuTimingSummary() const {
             ? value * 100.0 / frameAverage
             : 0.0;
     };
-    std::cout
+    std::stringstream summary;
+    summary
         << std::fixed << std::setprecision(3)
         << "GPU timing samples: " << gpuTiming_.samples << '\n'
         << "  Shadow: " << shadowAverage << " ms ("
@@ -468,7 +471,9 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << percentage(postAverage) << "%)\n"
         << "  Total render: " << frameAverage << " ms avg, "
         << gpuTiming_.frameMinMs << " ms min, "
-        << gpuTiming_.frameMaxMs << " ms max\n";
+        << gpuTiming_.frameMaxMs << " ms max";
+    azurerender::RuntimeDiagnostics::instance().print(
+        "gpu", summary.str());
 
     if (runOptions_.gpuTimingOutput.empty()) {
         return;
@@ -508,7 +513,8 @@ void AzureRenderApp::printGpuTimingSummary() const {
             "Failed to write GPU timing report: "
             + outputPath.string());
     }
-    std::cout << "GPU timing report: " << outputPath.string() << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "gpu", "GPU timing report: " + outputPath.string());
 }
 
 void AzureRenderApp::saveScreenshot(
@@ -573,6 +579,7 @@ void AzureRenderApp::saveScreenshot(
             "Failed to write screenshot: " + outputPath.string());
     }
     if (requestedOutputPath.empty()) {
-        std::cout << "Screenshot saved: " << outputPath.string() << '\n';
+        azurerender::RuntimeDiagnostics::instance().print(
+            "capture", "Screenshot saved: " + outputPath.string());
     }
 }

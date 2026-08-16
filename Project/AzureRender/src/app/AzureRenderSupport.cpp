@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "AzureRenderInternal.hpp"
@@ -197,8 +198,10 @@ void AzureRenderApp::recreateEditorViewportResources() {
         editorViewportImageViews_,
         renderExtent_.width,
         renderExtent_.height);
-    std::cout << "Editor viewport resources rebuilt: "
-              << renderExtent_.width << 'x' << renderExtent_.height << '\n';
+    azurerender::RuntimeDiagnostics::instance().print(
+        "editor", "Editor viewport resources rebuilt: "
+            + std::to_string(renderExtent_.width) + 'x'
+            + std::to_string(renderExtent_.height));
 }
 
 void AzureRenderApp::cleanupEditorViewportResources(
@@ -661,7 +664,13 @@ VKAPI_ATTR VkBool32 VKAPI_CALL AzureRenderApp::debugCallback(
     const char* prefix = severity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
         ? "validation error"
         : "validation warning";
-    std::cerr << '[' << prefix << "] " << callbackData->pMessage << '\n';
+    azurerender::RuntimeDiagnostics::instance().log(
+        severity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+            ? azurerender::DiagnosticLevel::Error
+            : azurerender::DiagnosticLevel::Warning,
+        "validation",
+        azurerender::DiagnosticCode::VulkanInitialization,
+        std::string("[") + prefix + "] " + callbackData->pMessage);
     return VK_FALSE;
 }
 

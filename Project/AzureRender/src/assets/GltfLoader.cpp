@@ -1,4 +1,5 @@
 #include "GltfLoader.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
@@ -1646,7 +1647,8 @@ LoadedAsset loadGltfAsset(const std::string& path) {
         ? loader.LoadBinaryFromFile(&model, &error, &warning, path)
         : loader.LoadASCIIFromFile(&model, &error, &warning, path);
     if (!warning.empty()) {
-        std::cerr << "[glTF warning] " << warning << '\n';
+        azurerender::RuntimeDiagnostics::instance().warning(
+            "asset", "[glTF] " + warning);
     }
     if (!loaded) {
         throw std::runtime_error("Unable to load glTF asset: " + error);

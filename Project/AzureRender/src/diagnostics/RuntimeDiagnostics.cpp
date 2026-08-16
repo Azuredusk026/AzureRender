@@ -83,6 +83,34 @@ void RuntimeDiagnostics::log(
     }
 }
 
+void RuntimeDiagnostics::print(
+    std::string subsystem,
+    std::string message) {
+    const auto now = std::chrono::system_clock::now().time_since_epoch();
+    const auto milliseconds = std::chrono::duration_cast<
+        std::chrono::milliseconds>(now).count();
+    const std::string line = message;
+    constexpr std::size_t kCapacity = 512;
+    if (messages_.size() == kCapacity) {
+        messages_.erase(messages_.begin());
+    }
+    messages_.push_back(line);
+    std::cout << line << '\n';
+    if (fileWritable_) {
+        std::ofstream output(logPath_, std::ios::app);
+        if (output) {
+            output << "{\"timestamp_ms\":" << milliseconds
+                   << ",\"level\":\"print"
+                   << "\",\"subsystem\":\"" << jsonEscape(subsystem)
+                   << "\",\"code\":0"
+                   << ",\"message\":\"" << jsonEscape(message)
+                   << "\"}\n";
+        } else {
+            fileWritable_ = false;
+        }
+    }
+}
+
 int diagnosticExitCode(const std::string& message) noexcept {
     if (message.rfind("Usage:", 0) == 0
         || message.find("--") != std::string::npos) {

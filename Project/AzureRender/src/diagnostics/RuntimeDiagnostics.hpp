@@ -31,6 +31,14 @@ public:
         log(DiagnosticLevel::Info, std::move(subsystem), DiagnosticCode::None,
             std::move(message));
     }
+    void warning(std::string subsystem, std::string message) {
+        log(DiagnosticLevel::Warning, std::move(subsystem),
+            DiagnosticCode::None, std::move(message));
+    }
+    // Writes a user-facing line to stdout while still recording it in the
+    // in-memory event stream and the JSON file, so CLI query output and the
+    // editor console stay consistent.
+    void print(std::string subsystem, std::string message);
     void error(
         std::string subsystem,
         DiagnosticCode code,

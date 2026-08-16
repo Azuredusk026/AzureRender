@@ -31,22 +31,26 @@ int main(const int argumentCount, char** argumentValues) {
         AzureRenderOptions& options = commandLine.options;
         std::string& scenePath = commandLine.scenePath;
         if (commandLine.showVersion) {
-            std::cout << "AzureRender " << AZURERENDER_VERSION << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "cli", "AzureRender " AZURERENDER_VERSION);
             return EXIT_SUCCESS;
         }
         if (commandLine.checkResources) {
             const azurerender::ResourceLocator locator(options.resourceRoot);
-            std::cout << "Shader directory: " << locator.shaderDirectory() << '\n'
-                      << "Public demo: " << locator.publicAsset("test_model.gltf") << '\n'
-                      << "Ramp profile: " << locator.rampProfile() << '\n'
-                      << "Ramp atlas: " << locator.rampAtlas() << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "cli",
+                "Shader directory: " + locator.shaderDirectory().string() + '\n'
+                + "Public demo: " + locator.publicAsset("test_model.gltf").string() + '\n'
+                + "Ramp profile: " + locator.rampProfile().string() + '\n'
+                + "Ramp atlas: " + locator.rampAtlas().string());
             return EXIT_SUCCESS;
         }
         if (!commandLine.createScenePath.empty()) {
             const azurerender::SceneDocument scene =
                 azurerender::SceneDocument::fromAsset(options.assetPath);
             scene.save(commandLine.createScenePath);
-            std::cout << "Scene created: " << commandLine.createScenePath << '\n';
+            azurerender::RuntimeDiagnostics::instance().print(
+                "cli", "Scene created: " + commandLine.createScenePath);
             return EXIT_SUCCESS;
         }
         if (!commandLine.editorScenePath.empty()) {
@@ -88,7 +92,6 @@ int main(const int argumentCount, char** argumentValues) {
         constexpr auto code = azurerender::DiagnosticCode::InvalidArguments;
         azurerender::RuntimeDiagnostics::instance().error(
             "cli", code, exception.what());
-        std::cerr << "Fatal error: " << exception.what() << '\n';
         return static_cast<int>(code);
     } catch (const std::exception& exception) {
         azurerender::RuntimeDiagnostics::instance().error(
@@ -96,7 +99,6 @@ int main(const int argumentCount, char** argumentValues) {
             static_cast<azurerender::DiagnosticCode>(
                 azurerender::diagnosticExitCode(exception.what())),
             exception.what());
-        std::cerr << "Fatal error: " << exception.what() << '\n';
         return azurerender::diagnosticExitCode(exception.what());
     }
 
