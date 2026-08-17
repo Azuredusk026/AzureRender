@@ -1,7 +1,7 @@
 # AzureRender 近期开发执行计划
 
-> 计划版本：2026-08-16 v7
-> 当前节点：v6 队列进行中（AR-10.0/10.1 Complete；BH-1 黑洞基础追踪 Complete；BH-2 吸积盘 Complete；BH-3 黑洞交付链 Complete；AR-10.2 多场景收口 Active）
+> 计划版本：2026-08-17 v7.1
+> 当前节点：v6 队列进行中（BH-1/2/3、AR-10.0/10.1/10.2、BH-2.1 Complete；BH-2.2 收尾——TAA 资源已建未激活(渲染私有纹理时 trace 输出异常，回退至直渲 scene framebuffer)，lensing 修正与 bloom 待启用）
 > 适用范围：可插拔场景渲染器架构 + 施瓦西黑洞渲染 Demo
 
 ## 1. 计划治理
@@ -337,8 +337,9 @@ Validation 无 VUID；Debug/Release 构建与 CTest 全绿。
 | 3 | BH-1 | Complete | `BlackholeSceneRenderer`：全屏追踪 pass + 星空背景 + 纯黑洞，`--scene-type blackhole` 可用 | AR-10.1 | `feat(bh): 黑洞渲染器基础追踪` |
 | 4 | BH-2 | Complete | 吸积盘、多普勒/引力红移/射束、光子环累积、HDR 峰值，冻结新 Beauty 基准 | BH-1 | `feat(bh): 吸积盘与相对论效应` |
 | 5 | BH-3 | Complete | 黑洞诊断视图、确定性 capture、GPU timing、manifest 扩展、技术序列 | BH-2 | `feat(bh): 黑洞交付链` |
-| 6 | AR-10.2 | Active | 编辑器场景类型切换、SceneRenderer Cookbook、tone mapper 可替换接口、全量回归 | BH-3 | `feat(ar10): 多场景收口与文档` |
-
+| 6 | AR-10.2 | Complete | 编辑器场景类型切换、SceneRenderer Cookbook、tone mapper 可替换接口、全量回归 | BH-3 | `feat(ar10): 多场景收口与文档` |
+| 7 | BH-2.1 | Complete | 吸积盘视觉重构：移植知乎实现——欧拉测地线+球对称连续步长、首步随机抖动+2x2 supersampling、体积吸积盘(Perlin 分形云/Shape 密度/温度 T⁴/多普勒/红移/黑体色/alpha 累积)、maxSteps=1800 | BH-3 | `feat(bh): 吸积盘视觉重构` |
+| 8 | BH-2.2 | Backlog | TAA 激活(私有 ping-pong 纹理+blackhole_taa.frag 已建，修复 trace 写私有纹理异常后启用)+单 pass bloom+引力透镜 lensing 修正+星空蓝移 | BH-2.1 | `feat(bh): TAA 泛光与 lensing` |
 v6 退出规则：每节点独立提交（本表中文标题）；Debug/Release 构建与全量 CTest 通过；
 角色场景在 AR-10.1 之后必须以 `CharacterSceneRenderer` 渲染且与 S30/S36 基线逐字节
 一致；黑洞场景只新增内容，不触碰角色路径。

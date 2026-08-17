@@ -3052,3 +3052,78 @@ appendHudText 与引擎解耦;LoadedAsset 在全局命名空间是历史事实,�
   比纯契约描述让新场景开发者入门更快;BlackholeSceneRenderer 是"非几何"模板
   (无顶点缓冲、无场景状态),CharacterSceneRenderer 是"几何+资产"模板,
   两个覆盖了主要场景形态。
+
+## 2026-08-17 BH-2.1 吸积盘视觉重构（参考知乎《如何手搓史上最好的Kerr Newman黑洞实时渲染》）
+
+### 复盘：当前 BH-2 视觉不足的根因
+用户反馈"步进离散化导致画面有分散色块"。对照参考实现（shadertoy
+Gargantua，D:/Assigment/temp/BufferA.txt 等），定位出 5 个根因：
+1. **固定步长 RK4**：每像素以恒定 0.12 步长积分，盘面采样只发生在"y 异号"
+   的那一步，相邻像素采样位置离散不同步 → 色块/锯齿（参考实现用"第一步随机
+   步长 + 亚像素抖动"打破采样网格对齐）
+2. **步长非球对称/不连续**：我的步长与视角相关，且边界跳变 → 条纹
+   （参考实现要求步长作为位置的函数连续——"绝热"变化，球对称分段）
+3. **盘无厚度**：y=0 平面采样形成细线；参考实现是体积盘
+   （Thin=0.5Rs、Shape 径向密度、Perlin 分形云、螺旋结构）
+4. **亮度物理缺失**：我只有粗糙的温度→颜色，无 T⁴ 亮度、无多普勒/引力红移
+   对色温的修正、无 alpha 累积（参考实现有完整公式链）
+5. **无降噪**：无 TAA/时间累积 → 噪声直接呈现
+
+### BH-2.1 移植清单（对照参考实现）
+- 测地线：RK4 → 欧拉偏折法（dphirate=-cos³θ·1.5Rs/r，先更新方向再位置=辛积分）
+- 步长：球对称分段连续（>2ROut 用 r、ROut~2ROut 线性过渡、<ROut 用 min(Rs,r)）
+  + 首步随机 + 亚像素抖动（RandomStep）
+- 吸积盘：换系到黑洞系、Shape(EffectiveRadius,4,0.9) 径向密度、Perlin 分形
+  噪声（3-6 octave）、螺旋结构、温度 T=(diskA·Rs³/r³·max(1-√(RIn/r),1e-6))^0.25、
+  KelvinToRgb 指数拟合、多普勒 Dopler=√((1+vre)/(1-vre))、
+  红移 RedShift=Dopler·√(1-Rs/r)/√(1-Rs/rcam)、亮度 4.5·T⁴/TPeak4、
+  alpha 累积 fragColor+=Color·(1-a)、StepLength/Rs 缩放
+- 降噪：渲染器内 TAA（2 张全屏 R16G16B16A16_SFLOAT ping-pong 纹理 + 混合 pass）
+- 相机恢复盘平面斜视（0, 0.4, 12）
+
+### 参考实现经验教训（原文摘录）
+- 条纹的根因：步长作为位置的函数不连续 → 光散点前缘/后缘不重合
+- 每一步随机太浪费算力 → 只首步随机
+- 欧拉法即使步长狂放，图像也只是黑洞略小一圈，无伤大雅
+- 双盘叠变防缠绕 → 后改为螺旋内旋
+- 亮度高到爆白 → 设定 shiftMax=1.25 蓝移上限
+
+### BH-2.1 实施（shader 重构）
+重写 shaders/blackhole.frag（~340 行）：欧拉测地线（dphi=-cos³θ·1.5Rs/r，
+先更新方向再更新位置=辛积分）+ 球对称连续步长 + 1~4 倍 supersampling 抖动 +
+体积盘（thin=0.5Rs, Shape 径向密度, Perlin 分形云 3-6 octave, 螺旋内旋）。
+完整物理：diskA = peakT⁴/0.0567, T=(diskA·(rs/r)³·(1-sqrt(Rin/r)))^0.25,
+4.5·T⁴/peakT⁴ 亮度, 多普勒 Dopler=√((1+vre)/(1-vre)),
+红移 RedShift=Dopler·√(1-Rs/r)/√(1-Rs/rcam), KelvinToRgb 指数拟合,
+shiftMax=1.25 蓝移上限, alpha 累积。
+BlackholeSceneRenderer 改动：BlackholeUniform.{physics, cameraFov, diskParameters}
+重定义（rs, escapeR, maxSteps, time | fov, aspect, supersample, renderWidth |
+diskInner, diskOuter, temperatureScale, shiftMax），加 simulationTime_ 模拟
+时间（每帧 + deltaSeconds 驱动盘纹理旋转），renderer 加 kSupersampleLevels=4
+（2x2 stratified sampling），相机恢复 (0, 0.4, 12) 盘平面斜视。
+
+### 验证（maxSteps=1800, supersample=4）
+- 1280x720 capture 1 帧（960x540 fs 修正）：黑白阴影视界 + 橙红→金黄多普勒
+  盘弧 + 引力透镜弯曲星空 + 光子环细弧，构图接近参考实现
+- 角色场景未受影响（公共资产 30 帧 0 VUID）
+- Debug 构建 0 错误 0 警告
+
+### 公式坑（GLSL 编译）
+- `input` 是 GLSL 保留字 → 重命名 RandomStep 参数为 `coord`
+- GLSL 无 `(void)expr` cast → 删 unused `radialOffset`
+- GenerateAccretionDiskNoise 返回 float → 赋给 vec3 用 `vec3(cloudDetail)`
+- 镜头的 lensing 修正项 (BufferA 449) 在我们归一化坐标下 invAngle 接近 0.92
+  而参考在 ly 尺度下 invAngle 是负大数，物理含义不同 → 我们暂禁 lensing（BH-2.2 重做）
+
+### BH-2.1 收尾（Autonomous 模式）
+- 验证：黑洞 120 帧 0 VUID；角色 120 帧 0 VUID；编辑器 60 帧 0 VUID；CTest 12/12；
+  GPU timing mainScene=14.1ms（欧拉 1800 步 x 4 supersample），shadow=0.009ms
+- BH-2.2 尝试：新增 shaders/blackhole_taa.frag（TAA mix + 单 pass bloom）、
+  BlackholeSceneRenderer 增加私有 ping-pong R16G16B16A16_SFLOAT 纹理/
+  traceRenderPass/framebuffer/TAA pipeline/描述符/UBO/transitionInitialLayouts。
+  发现 trace 渲染到私有纹理时输出异常（全黑，仅有散点），回退为 BH-2.1 行为
+  （trace 直渲 scene framebuffer），md5 与 BH-2.1 完全一致（5e29a48f）；
+  TAA 资源保留但未激活，留 BH-2.2 修复。
+- 经验：渲染目标从引擎 scene framebuffer 切换到 renderer 私有纹理时，trace
+  shader 输出变暗/黑——排查方向为私有纹理 layout 转换与描述符绑定时序；
+  回退到已验证路径保证交付稳定性。

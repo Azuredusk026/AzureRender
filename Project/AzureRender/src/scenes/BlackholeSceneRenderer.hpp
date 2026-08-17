@@ -33,15 +33,27 @@ public:
 
 private:
     static constexpr std::size_t kMaxFramesInFlight = 2;
+    // 2x2 stratified supersampling per pixel (denoise without TAA buffers).
+    static constexpr int kSupersampleLevels = 4;
 
     struct BlackholeUniform {
         std::array<float, 4> cameraPosition{};
         std::array<float, 4> cameraRight{};
         std::array<float, 4> cameraUp{};
         std::array<float, 4> cameraForward{};
-        std::array<float, 4> physics{1.0F, 40.0F, 900.0F, 1.0F};
-        std::array<float, 4> cameraFov{0.9F, 1.7777F, 0.0F, 0.0F};
-        std::array<float, 4> diskParameters{3.0F, 12.0F, 6.0F, 1.0F};
+        // rs, escapeRadius, maxSteps, simulationTime
+        std::array<float, 4> physics{1.0F, 40.0F, 900.0F, 0.0F};
+        // fovRadians, aspect, supersampleLevels, renderWidth
+        std::array<float, 4> cameraFov{0.9F, 1.7777F, 4.0F, 1280.0F};
+        // diskInner, diskOuter, temperatureScale, shiftMax
+        std::array<float, 4> diskParameters{2.1F, 12.0F, 1.0F, 1.25F};
+    };
+
+    struct TaaUniform {
+        float blendWeight = 0.35F;
+        float bloomThreshold = 1.2F;
+        float bloomIntensity = 0.55F;
+        float renderWidth = 1280.0F;
     };
 
     // Engine context snapshot taken on onLoad.
@@ -52,6 +64,7 @@ private:
     std::string shaderDirectory_;
     const RenderSettings* renderSettings_ = nullptr;
 
+    // Trace pass (writes the private ping-pong HDR texture).
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> descriptorSets_;
@@ -61,16 +74,43 @@ private:
     std::vector<VkDeviceMemory> uniformBufferMemories_;
     std::vector<void*> uniformBufferMapped_;
 
+    // Private full-screen HDR ping-pong textures for the tracer.
+    VkRenderPass traceRenderPass_ = VK_NULL_HANDLE;
+    std::array<VkFramebuffer, 2> traceFramebuffers_{};
+    std::array<VkImage, 2> traceImages_{};
+    std::array<VkDeviceMemory, 2> traceImageMemories_{};
+    std::array<VkImageView, 2> traceImageViews_{};
+    VkSampler traceSampler_ = VK_NULL_HANDLE;
+    std::size_t tracePing_ = 0;
+
+    // TAA + bloom pass (reads the ping-pong textures, writes Scene Color).
+    VkDescriptorSetLayout taaDescriptorSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool taaDescriptorPool_ = VK_NULL_HANDLE;
+    VkDescriptorSet taaDescriptorSet_ = VK_NULL_HANDLE;
+    VkPipelineLayout taaPipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline taaPipeline_ = VK_NULL_HANDLE;
+    std::vector<VkBuffer> taaUniformBuffers_;
+    std::vector<VkDeviceMemory> taaUniformBufferMemories_;
+    std::vector<void*> taaUniformBufferMapped_;
+
     std::size_t currentFrame_ = 0;
     std::array<float, 3> cameraPosition_{0.0F, 0.4F, 12.0F};
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
     float aspect_ = 1.0F;
+    float simulationTime_ = 0.0F;
+    std::uint32_t renderWidth_ = 1280;
+    std::uint32_t renderHeight_ = 720;
+    float blendWeight_ = 0.35F;
 
     void createUniformBuffers();
+    void createTraceResources(const RenderContext& context);
+    void transitionInitialLayouts();
+    void createTaaPipeline(const RenderContext& context);
     void createGraphicsPipeline(const RenderContext& context);
     void destroyResources();
     void updateUniformBuffer();
+    void updateTaaUniform();
 };
 
 }  // namespace azurerender
