@@ -3127,3 +3127,10 @@ diskInner, diskOuter, temperatureScale, shiftMax），加 simulationTime_ 模拟
 - 经验：渲染目标从引擎 scene framebuffer 切换到 renderer 私有纹理时，trace
   shader 输出变暗/黑——排查方向为私有纹理 layout 转换与描述符绑定时序；
   回退到已验证路径保证交付稳定性。
+
+### BH-2.1 调优（1280x720 渲染问题）
+- 1280x720 capture 出现多边形碎片（星点 hash 在球面退化 + 多次成像）→ 降星空
+  亮度（starColor 1.5→0.18→0.04、brightness 0.06→0.005→0.001、galaxy 0.012-0.024
+  →0.0015-0.003）效果有限，**最终保留降级星空系数（starColor 1.5
+  + brightness 0.06 + galaxy 0.012-0.024）+ supersample=4 + maxSteps=1800
+  960x540 验证**；1280x720 留作 BH-2.2（TAA 时间累积）任务。

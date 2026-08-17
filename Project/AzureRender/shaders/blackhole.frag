@@ -131,7 +131,7 @@ float hash13(const vec3 position) {
 vec3 starfieldColor(const vec3 direction) {
     const float grid = 120.0;
     const vec3 cellId = floor(direction * grid);
-    const float starThreshold = 0.988;
+    const float starThreshold = 0.997;
     float brightness = 0.0;
     vec3 starColor = vec3(0.0);
     for (int dx = -1; dx <= 1; ++dx) {
@@ -148,7 +148,7 @@ vec3 starfieldColor(const vec3 direction) {
                     hash13(cell + 29.17)) - 0.5;
                 const vec3 starDirection = normalize(cell + offset);
                 const float alignment = max(dot(direction, starDirection), 0.0);
-                const float spike = pow(alignment, 2500.0);
+                const float spike = pow(alignment, 4500.0);
                 const float temperature = hash13(cell + 3.7);
                 const vec3 tint = mix(
                     vec3(0.65, 0.78, 1.0),
