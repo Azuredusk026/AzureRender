@@ -88,6 +88,20 @@ int main() {
     require(
         sample.options.renderSettings.sceneType == azurerender::SceneType::Sample,
         "Sample renderer must be selectable through the public CLI");
+    const auto blackholeProfile = azurerender::parseCommandLine({
+        "--scene-type", "blackhole",
+        "--blackhole-quality", "balanced",
+        "--blackhole-camera", "high"});
+    require(
+        blackholeProfile.options.renderSettings.blackhole.quality
+            == azurerender::BlackholeQuality::Balanced,
+        "Blackhole quality profile was not parsed");
+    require(
+        blackholeProfile.options.renderSettings.blackhole.camera
+            == azurerender::BlackholeCamera::High,
+        "Blackhole camera preset was not parsed");
+    expectError(CommandLineErrorCode::InvalidValue, "--blackhole-quality",
+        {"--blackhole-quality", "ultra"});
     expectError(
         CommandLineErrorCode::InvalidValue,
         "--scene-type",

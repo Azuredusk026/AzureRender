@@ -16,6 +16,7 @@
 |---|---|
 | [开发指南](DEVELOPMENT_GUIDE_CN.md) | 工具链、构建、测试和贡献循环 |
 | [Renderer SDK](RENDERER_SDK_CN.md) | 新场景接入、生命周期、所有权和 catalog 契约 |
+| [Blackhole 质量](BLACKHOLE_QUALITY_CN.md) | 质量档位、相机、history reset、图像回归和 timing |
 | [资产与视觉 QA](ASSET_AND_VISUAL_QA_CN.md) | 资产许可、截图命名和视觉基准 |
 | [发布与验收](RELEASE_AND_ACCEPTANCE_CN.md) | 安装包内容、发布门禁和证据 |
 | [应用 README](../README.md) | 最短构建和运行入口 |

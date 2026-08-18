@@ -58,6 +58,10 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
            << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n'
+           << "blackholeQuality "
+           << blackholeQualityName(document.renderSettings.blackhole.quality) << '\n'
+           << "blackholeCamera "
+           << blackholeCameraName(document.renderSettings.blackhole.camera) << '\n'
            << "sceneRenderer "
            << sceneTypeName(document.renderSettings.sceneType) << '\n';
 }
@@ -156,12 +160,50 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         || key != "gradeExposureEv") {
         throw std::runtime_error("Missing .azscene gradeExposureEv");
     }
-    // sceneRenderer is optional for backward compatibility with schema v1
+    // Blackhole settings and sceneRenderer are optional for backward
+    // compatibility with schema v1 documents.
     // documents that predate the pluggable scene renderer.
     if (!(input >> key)) {
         // Reached end of file: keep the default Character renderer.
         document.renderSettings.sceneType = SceneType::Character;
-    } else if (key == "sceneRenderer") {
+    } else {
+        if (key == "blackholeQuality") {
+            std::string value;
+            if (!(input >> value)) {
+                throw std::runtime_error("Invalid .azscene blackholeQuality");
+            }
+            if (value == "performance") {
+                document.renderSettings.blackhole.quality = BlackholeQuality::Performance;
+            } else if (value == "balanced") {
+                document.renderSettings.blackhole.quality = BlackholeQuality::Balanced;
+            } else if (value != "cinematic") {
+                throw std::runtime_error("Unsupported .azscene blackholeQuality: " + value);
+            }
+            if (!(input >> key)) {
+                throw std::runtime_error("Missing .azscene blackholeCamera");
+            }
+        }
+        if (key == "blackholeCamera") {
+            std::string value;
+            if (!(input >> value)) {
+                throw std::runtime_error("Invalid .azscene blackholeCamera");
+            }
+            if (value == "orbit-left") {
+                document.renderSettings.blackhole.camera = BlackholeCamera::OrbitLeft;
+            } else if (value == "high") {
+                document.renderSettings.blackhole.camera = BlackholeCamera::High;
+            } else if (value == "close") {
+                document.renderSettings.blackhole.camera = BlackholeCamera::Close;
+            } else if (value != "front") {
+                throw std::runtime_error("Unsupported .azscene blackholeCamera: " + value);
+            }
+            if (!(input >> key)) {
+                throw std::runtime_error("Missing .azscene sceneRenderer");
+            }
+        }
+        if (key != "sceneRenderer") {
+            throw std::runtime_error("Invalid .azscene trailing field: " + key);
+        }
         std::string sceneTypeValue;
         if (!(input >> sceneTypeValue)) {
             throw std::runtime_error("Invalid .azscene sceneRenderer");
@@ -173,9 +215,6 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             throw std::runtime_error(
                 "Unsupported .azscene sceneRenderer: " + sceneTypeValue);
         }
-    } else {
-        throw std::runtime_error(
-            "Invalid .azscene trailing field: " + key);
     }
     document.renderSettings = migrateRenderSettings(
         document.renderSettings, renderSettingsVersion);

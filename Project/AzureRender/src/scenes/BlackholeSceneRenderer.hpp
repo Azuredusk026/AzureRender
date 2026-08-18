@@ -1,6 +1,7 @@
 #pragma once
 
 #include "extensions/ISceneRenderer.hpp"
+#include "render/RenderSettings.hpp"
 
 #include <array>
 #include <cstdint>
@@ -33,8 +34,6 @@ public:
 private:
     static constexpr std::size_t kMaxFramesInFlight = 2;
     // 2x2 stratified supersampling per pixel (denoise without TAA buffers).
-    static constexpr int kSupersampleLevels = 4;
-
     struct BlackholeUniform {
         std::array<float, 4> cameraPosition{};
         std::array<float, 4> cameraRight{};
@@ -46,6 +45,8 @@ private:
         std::array<float, 4> cameraFov{0.9F, 1.7777F, 4.0F, 1280.0F};
         // diskInner, diskOuter, temperatureScale, shiftMax
         std::array<float, 4> diskParameters{2.1F, 12.0F, 1.0F, 1.25F};
+        // nearStepScale, reserved...
+        std::array<float, 4> quality{0.48F, 0.0F, 0.0F, 0.0F};
     };
 
     struct TaaUniform {
@@ -117,6 +118,11 @@ private:
     std::uint32_t renderWidth_ = 1280;
     std::uint32_t renderHeight_ = 720;
     float blendWeight_ = 0.35F;
+    BlackholeQuality quality_ = BlackholeQuality::Cinematic;
+    BlackholeCamera camera_ = BlackholeCamera::Front;
+    std::uint32_t maxTraceSteps_ = 1800;
+    std::uint32_t samplesPerPixel_ = 4;
+    float nearStepScale_ = 0.48F;
 
     void createUniformBuffers();
     void createTraceResources(const RenderContext& context);

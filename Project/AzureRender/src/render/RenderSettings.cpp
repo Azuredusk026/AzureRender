@@ -6,6 +6,42 @@
 
 namespace azurerender {
 
+std::string_view blackholeQualityName(const BlackholeQuality quality) {
+    switch (quality) {
+    case BlackholeQuality::Performance: return "performance";
+    case BlackholeQuality::Balanced: return "balanced";
+    case BlackholeQuality::Cinematic: return "cinematic";
+    }
+    return "unknown";
+}
+
+std::string_view blackholeCameraName(const BlackholeCamera camera) {
+    switch (camera) {
+    case BlackholeCamera::Front: return "front";
+    case BlackholeCamera::OrbitLeft: return "orbit-left";
+    case BlackholeCamera::High: return "high";
+    case BlackholeCamera::Close: return "close";
+    }
+    return "unknown";
+}
+
+BlackholeQualityParameters blackholeQualityParameters(
+    const BlackholeQuality quality) {
+    switch (quality) {
+    case BlackholeQuality::Performance: return {600, 1, 0.85F};
+    case BlackholeQuality::Balanced: return {1100, 1, 0.65F};
+    case BlackholeQuality::Cinematic: return {1800, 4, 0.48F};
+    }
+    throw std::invalid_argument("Unknown blackhole quality profile");
+}
+
+bool blackholeHistoryNeedsReset(
+    const BlackholeSettings& previous,
+    const BlackholeSettings& current) noexcept {
+    return previous.quality != current.quality
+        || previous.camera != current.camera;
+}
+
 RenderSettings migrateRenderSettings(
     RenderSettings settings,
     const std::uint32_t sourceSchemaVersion) {
@@ -15,6 +51,9 @@ RenderSettings migrateRenderSettings(
     }
     if (sourceSchemaVersion < 4) {
         settings.sceneType = SceneType::Character;
+    }
+    if (sourceSchemaVersion < 5) {
+        settings.blackhole = {};
     }
     validateRenderSettings(settings);
     return settings;
@@ -112,6 +151,12 @@ void validateRenderSettings(const RenderSettings& settings) {
                 + std::to_string(maximum));
         }
     };
+    if (blackholeQualityName(settings.blackhole.quality) == "unknown") {
+        throw std::invalid_argument("Unknown blackhole quality profile");
+    }
+    if (blackholeCameraName(settings.blackhole.camera) == "unknown") {
+        throw std::invalid_argument("Unknown blackhole camera preset");
+    }
 
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
     requireRange(

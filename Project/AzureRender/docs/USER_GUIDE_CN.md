@@ -36,8 +36,12 @@
 
 ```powershell
 .\build\ninja-release\AzureRender.exe `
-  --scene-type blackhole
+  --scene-type blackhole `
+  --blackhole-quality cinematic `
+  --blackhole-camera front
 ```
+
+黑洞质量可选 `performance`、`balanced`、`cinematic`；相机可选 `front`、`orbit-left`、`high`、`close`。
 
 ## 3. 角色控制
 

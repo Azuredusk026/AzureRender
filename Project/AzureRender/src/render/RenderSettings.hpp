@@ -49,8 +49,33 @@ struct GradeSettings {
     bool toneMappingEnabled = true;
 };
 
+enum class BlackholeQuality : std::uint32_t {
+    Performance = 0,
+    Balanced = 1,
+    Cinematic = 2,
+};
+
+enum class BlackholeCamera : std::uint32_t {
+    Front = 0,
+    OrbitLeft = 1,
+    High = 2,
+    Close = 3,
+};
+
+struct BlackholeSettings {
+    static constexpr std::uint32_t kSchemaVersion = 1;
+    BlackholeQuality quality = BlackholeQuality::Cinematic;
+    BlackholeCamera camera = BlackholeCamera::Front;
+};
+
+struct BlackholeQualityParameters {
+    std::uint32_t maxTraceSteps;
+    std::uint32_t samplesPerPixel;
+    float nearStepScale;
+};
+
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 4;
+    static constexpr std::uint32_t kSchemaVersion = 5;
 
     // Selects the pluggable scene renderer that draws the current frame.
     // Character is the default stylized character pipeline; Blackhole is the
@@ -80,6 +105,7 @@ struct RenderSettings {
     BloomSettings bloom;
     OutlineSettings outline;
     GradeSettings grade;
+    BlackholeSettings blackhole;
 };
 
 void validateRenderSettings(const RenderSettings& settings);
@@ -88,6 +114,13 @@ void validateRenderSettings(const RenderSettings& settings);
     std::uint32_t sourceSchemaVersion);
 
 [[nodiscard]] std::string_view showcasePresetName(std::uint32_t preset);
+[[nodiscard]] std::string_view blackholeQualityName(BlackholeQuality quality);
+[[nodiscard]] std::string_view blackholeCameraName(BlackholeCamera camera);
+[[nodiscard]] BlackholeQualityParameters blackholeQualityParameters(
+    BlackholeQuality quality);
+[[nodiscard]] bool blackholeHistoryNeedsReset(
+    const BlackholeSettings& previous,
+    const BlackholeSettings& current) noexcept;
 void applyShowcasePresetLook(
     RenderSettings& settings,
     std::uint32_t preset);

@@ -78,7 +78,7 @@ int main() {
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 4")
+            assert(contents.find("renderSettingsVersion 5")
                 != std::string::npos);
         }
         assert(std::filesystem::exists(scenePath));
@@ -102,6 +102,23 @@ int main() {
             rejected = true;
         }
         assert(rejected);
+    }
+
+    // 9. Quality profiles are stable and temporal history resets exactly when
+    //    a sampling or camera contract changes.
+    {
+        const auto cinematic = azurerender::blackholeQualityParameters(
+            azurerender::BlackholeQuality::Cinematic);
+        assert(cinematic.maxTraceSteps == 1800);
+        assert(cinematic.samplesPerPixel == 4);
+        azurerender::BlackholeSettings previous;
+        azurerender::BlackholeSettings current = previous;
+        assert(!azurerender::blackholeHistoryNeedsReset(previous, current));
+        current.camera = azurerender::BlackholeCamera::High;
+        assert(azurerender::blackholeHistoryNeedsReset(previous, current));
+        current = previous;
+        current.quality = azurerender::BlackholeQuality::Balanced;
+        assert(azurerender::blackholeHistoryNeedsReset(previous, current));
     }
 
     // 2. Re-saving over an existing file replaces it atomically and cleanly.
@@ -191,10 +208,18 @@ int main() {
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.renderSettings.sceneType =
             azurerender::SceneType::Blackhole;
+        document.renderSettings.blackhole.quality =
+            azurerender::BlackholeQuality::Balanced;
+        document.renderSettings.blackhole.camera =
+            azurerender::BlackholeCamera::High;
         document.save(scenePath);
         const auto loaded = azurerender::SceneDocument::load(scenePath);
         assert(loaded.renderSettings.sceneType
             == azurerender::SceneType::Blackhole);
+        assert(loaded.renderSettings.blackhole.quality
+            == azurerender::BlackholeQuality::Balanced);
+        assert(loaded.renderSettings.blackhole.camera
+            == azurerender::BlackholeCamera::High);
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
     }

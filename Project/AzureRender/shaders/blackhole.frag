@@ -25,6 +25,7 @@ layout(binding = 0) uniform BlackholeUniform {
     vec4 physics;          // rs, escapeRadius, maxSteps, unused
     vec4 cameraFov;        // fovRadians, aspect, supersample, unused
     vec4 diskParameters;   // diskInner, diskOuter, temperatureScale, shiftMax
+    vec4 quality;          // nearStepScale, reserved...
 } ubo;
 
 layout(location = 0) in vec2 screenUv;
@@ -341,6 +342,13 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
         } else {
             rayStep *= min(rs, distance);
         }
+        // Curvature-aware refinement. Near the photon sphere the direction
+        // changes fastest, so higher quality profiles reduce the continuous
+        // step without introducing radius bands.
+        rayStep *= mix(
+            ubo.quality.x,
+            1.0,
+            smoothstep(1.5 * rs, 8.0 * rs, distance));
 
         const float deltaPhi = rayStep / distance * deflectionRate;
         // Update direction FIRST (symplectic), then position.

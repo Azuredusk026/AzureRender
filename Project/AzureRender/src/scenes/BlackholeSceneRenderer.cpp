@@ -331,6 +331,38 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
 
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     currentFrame_ = frame.currentFrame;
+    if (frame.renderSettings != nullptr) {
+        const BlackholeQuality nextQuality =
+            frame.renderSettings->blackhole.quality;
+        const BlackholeCamera nextCamera =
+            frame.renderSettings->blackhole.camera;
+        const BlackholeSettings previous{quality_, camera_};
+        const BlackholeSettings next{nextQuality, nextCamera};
+        if (frameSeen_ && blackholeHistoryNeedsReset(previous, next)) {
+            invalidateHistory();
+        }
+        quality_ = nextQuality;
+        camera_ = nextCamera;
+    }
+    const BlackholeQualityParameters qualityParameters =
+        blackholeQualityParameters(quality_);
+    maxTraceSteps_ = qualityParameters.maxTraceSteps;
+    samplesPerPixel_ = qualityParameters.samplesPerPixel;
+    nearStepScale_ = qualityParameters.nearStepScale;
+    switch (camera_) {
+    case BlackholeCamera::Front:
+        cameraPosition_ = {0.0F, 4.0F, 24.0F};
+        break;
+    case BlackholeCamera::OrbitLeft:
+        cameraPosition_ = {-9.0F, 5.0F, 22.0F};
+        break;
+    case BlackholeCamera::High:
+        cameraPosition_ = {0.0F, 11.0F, 22.0F};
+        break;
+    case BlackholeCamera::Close:
+        cameraPosition_ = {0.0F, 2.0F, 15.0F};
+        break;
+    }
     // The black hole owns its own framing: the host camera/portfolio orbit
     // would place the eye too close or off-axis for the accretion disk to
     // be sampled. We only borrow the swapchain aspect ratio and size.
@@ -530,7 +562,9 @@ void BlackholeSceneRenderer::appendHudText(std::ostringstream& text) const {
          << "TEMP : TAA ON  HISTORY "
          << (historyValid_ ? "VALID" : "RESET")
          << "  BLOOM 0.30  RESET " << historyResetCount_ << "\n"
-         << "TRACE: 4 SPP  MAX 1800 STEPS\n";
+         << "TRACE: " << samplesPerPixel_ << " SPP  MAX "
+         << maxTraceSteps_ << " STEPS  "
+         << blackholeQualityName(quality_) << "\n";
 }
 
 void BlackholeSceneRenderer::appendCaptureManifestFields(
@@ -546,8 +580,11 @@ void BlackholeSceneRenderer::appendCaptureManifestFields(
         << "    \"historyValid\": "
         << (historyValid_ ? "true" : "false") << ",\n"
         << "    \"historyResets\": " << historyResetCount_ << ",\n"
-        << "    \"traceSamplesPerPixel\": 4,\n"
-        << "    \"maxTraceSteps\": 1800,\n"
+        << "    \"quality\": \"" << blackholeQualityName(quality_) << "\",\n"
+        << "    \"cameraPreset\": \"" << blackholeCameraName(camera_) << "\",\n"
+        << "    \"traceSamplesPerPixel\": " << samplesPerPixel_ << ",\n"
+        << "    \"maxTraceSteps\": " << maxTraceSteps_ << ",\n"
+        << "    \"nearStepScale\": " << nearStepScale_ << ",\n"
         << "    \"bloom\": {\"mode\": \"single-pass\", "
         << "\"threshold\": 1.2, \"intensity\": 0.30},\n"
         << "    \"lensingCorrection\": true,\n"
@@ -1219,12 +1256,14 @@ void BlackholeSceneRenderer::updateUniformBuffer() {
     uniform.cameraRight = {right[0], right[1], right[2], 0.0F};
     uniform.cameraUp = {up[0], up[1], up[2], 0.0F};
     uniform.cameraForward = {forward[0], forward[1], forward[2], 0.0F};
-    uniform.physics = {1.0F, 80.0F, 1800.0F, simulationTime_};
+    uniform.physics = {
+        1.0F, 80.0F, static_cast<float>(maxTraceSteps_), simulationTime_};
     uniform.cameraFov = {
-        fov, aspect_, static_cast<float>(kSupersampleLevels),
+        fov, aspect_, static_cast<float>(samplesPerPixel_),
         static_cast<float>(renderWidth_),
     };
     uniform.diskParameters = {2.1F, 12.0F, 1.0F, 1.25F};
+    uniform.quality = {nearStepScale_, 0.0F, 0.0F, 0.0F};
     std::memcpy(
         uniformBufferMapped_[currentFrame_],
         &uniform,

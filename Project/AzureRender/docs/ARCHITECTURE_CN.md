@@ -122,6 +122,8 @@ blackhole trace pass
 
 每个 in-flight frame/history-write 组合拥有不可变 descriptor set。首帧、resize、capture 开始和相机非连续变化会使 history 失效。静态 1280x720 基准在两次 36 帧捕获中逐帧一致。
 
+`performance`、`balanced`、`cinematic` 三档通过最大积分步数、trace 数和连续近场步长细化控制成本；`front`、`orbit-left`、`high`、`close` 四个相机档位可由 CLI 和场景设置持久化。详细协议见 [Blackhole 质量与视觉回归](BLACKHOLE_QUALITY_CN.md)。
+
 ## 8. 数据契约
 
 - `RenderSettings`：版本化运行配置，包含 renderer、材质表现、grade、bloom 和 outline。

@@ -27,6 +27,8 @@ constexpr const char* kUsage =
     "[--qa-effect <effect> --qa-effect-state <state>] "
     "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
+    "[--blackhole-quality <performance|balanced|cinematic>] "
+    "[--blackhole-camera <front|orbit-left|high|close>] "
     "[--capture-dir <empty directory> "
     "--capture-frames <positive integer> --capture-fps <1-240>]";
 
@@ -45,6 +47,8 @@ constexpr const char* kHelp =
     "  --gpu-timing-output <json>          GPU pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --blackhole-quality performance|balanced|cinematic\n"
+    "  --blackhole-camera front|orbit-left|high|close\n"
     "  --diagnostic-view beauty|normal|outline|shadow\n"
     "  --hud --no-stylized --no-inner-outline\n\n"
     "Utility:\n"
@@ -351,6 +355,39 @@ ParsedCommandLine parseCommandLine(
                     CommandLineErrorCode::InvalidValue,
                     argument,
                     "--scene-type must be character, blackhole or sample");
+            }
+        } else if (argument == "--blackhole-quality") {
+            const std::string& value = requireValue(arguments, index, argument);
+            if (value == "performance") {
+                parsed.options.renderSettings.blackhole.quality =
+                    BlackholeQuality::Performance;
+            } else if (value == "balanced") {
+                parsed.options.renderSettings.blackhole.quality =
+                    BlackholeQuality::Balanced;
+            } else if (value == "cinematic") {
+                parsed.options.renderSettings.blackhole.quality =
+                    BlackholeQuality::Cinematic;
+            } else {
+                fail(CommandLineErrorCode::InvalidValue, argument,
+                    "--blackhole-quality must be performance, balanced or cinematic");
+            }
+        } else if (argument == "--blackhole-camera") {
+            const std::string& value = requireValue(arguments, index, argument);
+            if (value == "front") {
+                parsed.options.renderSettings.blackhole.camera =
+                    BlackholeCamera::Front;
+            } else if (value == "orbit-left") {
+                parsed.options.renderSettings.blackhole.camera =
+                    BlackholeCamera::OrbitLeft;
+            } else if (value == "high") {
+                parsed.options.renderSettings.blackhole.camera =
+                    BlackholeCamera::High;
+            } else if (value == "close") {
+                parsed.options.renderSettings.blackhole.camera =
+                    BlackholeCamera::Close;
+            } else {
+                fail(CommandLineErrorCode::InvalidValue, argument,
+                    "--blackhole-camera must be front, orbit-left, high or close");
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);
