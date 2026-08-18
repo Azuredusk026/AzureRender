@@ -45,6 +45,18 @@ cmake --build --preset ninja-release
 .\build\ninja-debug\AzureRender.exe --scene-type blackhole --smoke-frames 120
 ```
 
+P2 角色展示预设：
+
+```powershell
+.\build\ninja-debug\AzureRender.exe `
+  --asset .\assets_public\test_model.gltf `
+  --qa-camera full-body-front `
+  --qa-light stylized-key `
+  --smoke-frames 120
+```
+
+`stylized-key` 对应稳定预设 `Endfield Industrial`，会成套应用灯光、grade、Bloom 和描边设置；Capture manifest 同时记录数值 ID 与预设名称。
+
 创建并打开编辑器场景：
 
 ```powershell

@@ -52,22 +52,35 @@ void main() {
         float halo = exp(-dot(haloOffset, haloOffset) * 5.6);
         color += vec3(0.010, 0.018, 0.030) * halo;
     } else if (preset == 1.0) {
-        vec3 bottomColor = vec3(0.006, 0.015, 0.020);
-        vec3 topColor = vec3(0.016, 0.042, 0.049);
+        vec3 bottomColor = vec3(0.012, 0.016, 0.019);
+        vec3 topColor = vec3(0.040, 0.047, 0.052);
         color = mix(bottomColor, topColor, vertical);
-        vec2 haloOffset = (uv - vec2(0.50, 0.56)) * vec2(1.0, 0.78);
-        float halo = exp(-dot(haloOffset, haloOffset) * 5.8);
-        color += vec3(0.006, 0.040, 0.046) * halo;
-        float grid = gridLines(uv * vec2(30.0, 17.0));
-        color += vec3(0.0025, 0.0070, 0.0075) * grid;
-        float stripeDistance =
-            abs(fract((uv.x + uv.y * 0.34) * 8.0) - 0.5);
-        float stripes = 1.0 - smoothstep(0.035, 0.075, stripeDistance);
-        float stripeMask =
-            smoothstep(0.80, 0.93, uv.x)
-            * smoothstep(0.06, 0.18, uv.y)
-            * (1.0 - smoothstep(0.82, 0.96, uv.y));
-        color += vec3(0.026, 0.013, 0.002) * stripes * stripeMask;
+        vec2 haloOffset = (uv - vec2(0.50, 0.54)) * vec2(1.0, 0.80);
+        float halo = exp(-dot(haloOffset, haloOffset) * 6.2);
+        color += vec3(0.018, 0.025, 0.028) * halo;
+
+        float horizon = 1.0 - smoothstep(0.002, 0.010, abs(uv.y - 0.365));
+        color += vec3(0.055, 0.066, 0.070) * horizon;
+        float lowerGridMask = 1.0 - smoothstep(0.34, 0.52, uv.y);
+        float grid = gridLines(uv * vec2(24.0, 13.5));
+        color += vec3(0.010, 0.014, 0.015) * grid * lowerGridMask;
+
+        float panelLines = 1.0 - smoothstep(
+            0.002, 0.008, abs(fract(uv.x * 8.0) - 0.5));
+        float panelMask = smoothstep(0.40, 0.50, uv.y)
+            * (1.0 - smoothstep(0.88, 0.96, uv.y));
+        color += vec3(0.018, 0.022, 0.024) * panelLines * panelMask;
+
+        float sideRail = smoothstep(0.77, 0.80, uv.x)
+            * (1.0 - smoothstep(0.805, 0.835, uv.x))
+            * smoothstep(0.16, 0.22, uv.y)
+            * (1.0 - smoothstep(0.72, 0.80, uv.y));
+        color += vec3(0.10, 0.115, 0.116) * sideRail;
+        float signal = smoothstep(0.785, 0.792, uv.x)
+            * (1.0 - smoothstep(0.802, 0.809, uv.x))
+            * smoothstep(0.43, 0.445, uv.y)
+            * (1.0 - smoothstep(0.52, 0.535, uv.y));
+        color += vec3(0.52, 0.20, 0.035) * signal;
     } else if (preset == 2.0) {
         vec3 bottomColor = vec3(0.030, 0.034, 0.040);
         vec3 topColor = vec3(0.080, 0.086, 0.092);
@@ -97,7 +110,8 @@ void main() {
             uv.y * 2.0 - 1.0,
             1.0)));
     vec3 environmentColor = texture(environmentTexture, envUv).rgb;
-    color = mix(color, environmentColor, 0.85);
+    float environmentMix = preset == 1.0 ? 0.20 : 0.85;
+    color = mix(color, environmentColor, environmentMix);
 
     vec2 vignetteOffset = uv - vec2(0.5);
     float vignette = smoothstep(0.20, 0.78, dot(vignetteOffset, vignetteOffset));

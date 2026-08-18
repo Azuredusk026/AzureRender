@@ -76,6 +76,15 @@
 5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357
 ```
 
+当前 P2 `Endfield Industrial` 公共资产 1280x720 基准：
+
+```text
+full-body: 71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5
+close-up:  7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF
+```
+
+对应 manifest 必须包含 `qaShowcasePreset: 1`、`showcasePresetVersion: 1`、`showcasePresetName: "Endfield Industrial"` 及 grade/bloom/outline 完整参数。S36 仅保留为 P2 前的历史角色基准，不作为 P2 预设的期望哈希。
+
 当前黑洞 P1 1280x720 首帧 SHA-256（36 帧、60 fps 固定捕获）：
 
 ```text

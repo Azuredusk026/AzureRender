@@ -2,7 +2,7 @@
 
 > 计划版本：2026-08-18 P0-P2
 > 执行模式：Autonomous Implementation Mode
-> 当前阶段：P2 Active
+> 当前阶段：P0-P2 Complete
 > 本文件是任务顺序、范围和完成状态的唯一事实来源。
 
 ## 1. 产品方向
@@ -31,7 +31,7 @@ AzureRender 是面向多项目复用的可插拔 Vulkan 渲染器，而不是只
 |---:|---|---|---|
 | 1 | P0 | Complete | 目录与文档规范化；应用实际通过 `SceneRendererRegistry` 创建场景；固定 P1/P2 验收 |
 | 2 | P1 | Complete | 黑洞私有 trace/history、TAA、单 pass bloom、lensing、星空蓝移、确定性 Capture |
-| 3 | P2 | Active | 终末地式角色展示预设、分层灯光/背景/地台/grade、公共资产与私有角色 QA |
+| 3 | P2 | Complete | 终末地式角色展示预设、分层灯光/背景/地台/grade、公共资产与私有角色 QA |
 
 ## 4. P0：架构与计划收口
 
@@ -107,6 +107,15 @@ P2 的目标是让现有角色展示具有安静、克制、工业感明确的�
 - 黑洞 P1 输出不受角色美术改动影响。
 - Capture manifest 能识别 P2 preset 和 grade 状态。
 - Commit：`feat(p2): refine endfield-inspired character presentation`
+
+### 完成证据（2026-08-18）
+
+- `RenderSettings` 提供 v1 稳定预设名称与整套 look 应用入口；F1-F3、Portfolio 和 QA 不再分别维护零散参数。
+- `Endfield Industrial` 使用冷灰结构背景、受控环境混合、暖色信号、石墨地台及分离的暖 Key/冷 Fill/青色 Rim。
+- Grade 固定为 exposure `-0.15 EV`、saturation `0.88`、contrast `1.10`；Bloom threshold/strength 为 `1.15/0.10`，outline strength 为 `0.46`。
+- 公共资产 1280x720 全身与近景 SHA-256 分别为 `71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5`、`7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF`。
+- 公共 back-detail、stylized A/B、neutral material 捕获完成；私有角色全身和近景仅作本地 QA，未进入仓库。
+- P2 后黑洞基准首帧仍为 `E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C`，与 P1 逐字节一致。
 
 ## 7. 每阶段固定门禁
 

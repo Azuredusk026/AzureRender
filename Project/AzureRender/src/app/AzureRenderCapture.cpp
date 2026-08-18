@@ -291,6 +291,11 @@ void AzureRenderApp::writeCaptureManifest(
         << cameraTarget_[2] << "],\n"
         << "  \"qaModelRotationRadians\": " << rotationAngle_ << ",\n"
         << "  \"qaShowcasePreset\": " << renderSettings_.showcasePreset << ",\n"
+        << "  \"showcasePresetVersion\": "
+        << azurerender::kShowcasePresetVersion << ",\n"
+        << "  \"showcasePresetName\": "
+        << std::quoted(std::string(azurerender::showcasePresetName(
+               renderSettings_.showcasePreset))) << ",\n"
         << "  \"materialProfileSchemaVersion\": 1,\n"
         << "  \"materialInventory\": [\n";
     if (sceneAsset != nullptr) {

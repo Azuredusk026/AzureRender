@@ -135,16 +135,26 @@ void main() {
     float showcasePreset = floor(camera.showcaseParameters.x + 0.5);
     vec3 platformPresetTint = vec3(1.0);
     if (showcasePreset == 1.0) {
-        platformPresetTint = vec3(0.62, 1.02, 1.08);
+        platformPresetTint = vec3(0.72, 0.76, 0.77);
     } else if (showcasePreset == 2.0) {
         platformPresetTint = vec3(1.16, 1.14, 1.10);
     }
     baseColor.rgb *= mix(
         vec3(1.0),
-        mix(vec3(0.58), vec3(1.12), platformRing)
-            * mix(vec3(1.0), vec3(0.72), contactShadow)
+        mix(vec3(0.52), vec3(1.08), platformRing)
+            * mix(vec3(1.0), vec3(0.60), contactShadow)
             * platformPresetTint,
         platformMask);
+    if (showcasePreset == 1.0 && platformMask > 0.0) {
+        float signalRing = smoothstep(0.72, 0.75, platformRadius)
+            * (1.0 - smoothstep(0.78, 0.81, platformRadius));
+        float tickAngle = atan(
+            textureCoordinate.y - 0.5,
+            textureCoordinate.x - 0.5);
+        float ticks = smoothstep(0.78, 0.94, abs(cos(tickAngle * 12.0)));
+        baseColor.rgb += vec3(0.34, 0.105, 0.012)
+            * signalRing * ticks * platformMask;
+    }
     if (material.alphaMode == 1 && baseColor.a < material.alphaCutoff) {
         discard;
     }
@@ -203,9 +213,9 @@ void main() {
     vec3 fillColor = vec3(0.58, 0.76, 1.0);
     vec3 rimColor = vec3(0.20, 0.34, 0.52);
     if (showcasePreset == 1.0) {
-        keyColor = vec3(0.90, 1.00, 1.02);
-        fillColor = vec3(0.24, 0.82, 0.88);
-        rimColor = vec3(0.16, 0.62, 0.72);
+        keyColor = vec3(1.04, 0.98, 0.90);
+        fillColor = vec3(0.38, 0.53, 0.61);
+        rimColor = vec3(0.20, 0.55, 0.64);
     } else if (showcasePreset == 2.0) {
         keyColor = vec3(1.0);
         fillColor = vec3(0.72, 0.78, 0.85);

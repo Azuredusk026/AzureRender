@@ -4,8 +4,11 @@
 
 #include <array>
 #include <cstdint>
+#include <string_view>
 
 namespace azurerender {
+
+inline constexpr std::uint32_t kShowcasePresetVersion = 1;
 
 struct FaceSdfSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
@@ -80,5 +83,10 @@ struct RenderSettings {
 };
 
 void validateRenderSettings(const RenderSettings& settings);
+
+[[nodiscard]] std::string_view showcasePresetName(std::uint32_t preset);
+void applyShowcasePresetLook(
+    RenderSettings& settings,
+    std::uint32_t preset);
 
 }  // namespace azurerender

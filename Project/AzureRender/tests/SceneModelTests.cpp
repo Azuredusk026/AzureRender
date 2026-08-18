@@ -4,6 +4,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <cmath>
 #include <stdexcept>
 #include <string>
 
@@ -50,6 +51,21 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
 }  // namespace
 
 int main() {
+    // Showcase presets are stable names and complete visual configurations.
+    {
+        azurerender::RenderSettings settings;
+        azurerender::applyShowcasePresetLook(settings, 1);
+        static_assert(azurerender::kShowcasePresetVersion == 1);
+        assert(azurerender::showcasePresetName(1) == "Endfield Industrial");
+        assert(settings.showcasePreset == 1);
+        assert(std::abs(settings.grade.exposureEv + 0.15F) < 0.0001F);
+        assert(std::abs(settings.grade.saturation - 0.88F) < 0.0001F);
+        assert(std::abs(settings.grade.contrast - 1.10F) < 0.0001F);
+        assert(std::abs(settings.bloom.strength - 0.10F) < 0.0001F);
+        assert(std::abs(settings.outline.strength - 0.46F) < 0.0001F);
+        azurerender::validateRenderSettings(settings);
+    }
+
     // 1. A normal save produces a loadable file and leaves no temporary file.
     {
         const auto directory = uniqueDirectory();

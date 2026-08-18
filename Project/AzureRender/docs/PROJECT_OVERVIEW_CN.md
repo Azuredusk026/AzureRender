@@ -39,6 +39,8 @@ AzureRender 同时承担两个目标：
 - Toon ramp、材质阴影色、Hair KK、Shadow Map、倒壳与屏幕空间描边。
 - HDR environment、specular prefilter、逐三角形透明排序。
 - 固定机位、展示灯光、技术 HUD 和作品集捕获。
+- 版本化展示 look：稳定预设名、成套 grade/bloom/outline 参数和 capture manifest 标识。
+- `Endfield Industrial` 终末地式表现：冷灰结构背景、暖色信号、石墨地台和暖 Key/冷 Fill/青色 Rim。
 
 ### 编辑器与工程化
 
@@ -123,6 +125,8 @@ CharacterSceneRenderer  BlackholeSceneRenderer
 
 - 角色 HDR Beauty：`captures/s36_hdr_beauty_v1/frame_000000.png`
 - SHA-256：`5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357`
+- P2 公共全身 SHA-256：`71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5`
+- P2 公共近景 SHA-256：`7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF`
 - BH-2.1 记录性能：约 14.1 ms main scene，配置为 1800 steps、4 samples。
 - P1 记录性能：12.885 ms main scene、12.932 ms total（Debug、180 samples、RTX 4060 Laptop GPU）。
 

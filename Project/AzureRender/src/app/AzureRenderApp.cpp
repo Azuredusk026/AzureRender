@@ -100,10 +100,10 @@ void AzureRenderApp::run(
     }
     initWindow();
     initVulkan(runOptions_.assetPath);
+    renderSettings_ = runOptions_.renderSettings;
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
-    renderSettings_ = runOptions_.renderSettings;
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().attachRenderSettings(renderSettings_);
     }
@@ -387,9 +387,7 @@ void AzureRenderApp::activatePortfolioOrbit() {
     rotationSpeed_ = 0.16F;
     cameraPosition_ = {2.32F, 1.80F, 2.66F};
     cameraTarget_ = {0.0F, 0.05F, 0.0F};
-    renderSettings_.showcasePreset = 1;
-    renderSettings_.stylizedLightingEnabled = true;
-    renderSettings_.innerOutlineEnabled = true;
+    azurerender::applyShowcasePresetLook(renderSettings_, 1);
     autoRotate_ = true;
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->restartPlayback();
@@ -464,13 +462,13 @@ void AzureRenderApp::configureQaHarness() {
         ? "stylized-key"
         : runOptions_.qaLight;
     if (qaLightName_ == "neutral-material") {
-        renderSettings_.showcasePreset = 2;
+        azurerender::applyShowcasePresetLook(renderSettings_, 2);
     } else if (qaLightName_ == "stylized-key") {
-        renderSettings_.showcasePreset = 1;
+        azurerender::applyShowcasePresetLook(renderSettings_, 1);
     } else if (qaLightName_ == "specular-rim") {
-        renderSettings_.showcasePreset = 3;
+        azurerender::applyShowcasePresetLook(renderSettings_, 3);
     } else if (qaLightName_ == "rear-emissive") {
-        renderSettings_.showcasePreset = 4;
+        azurerender::applyShowcasePresetLook(renderSettings_, 4);
     } else {
         throw std::invalid_argument(
             "Unknown --qa-light: " + qaLightName_);
@@ -1113,18 +1111,15 @@ void AzureRenderApp::keyCallback(
             azurerender::RuntimeDiagnostics::instance().print(
                 "input", "Screenshot requested");
         } else if (key >= GLFW_KEY_F1 && key <= GLFW_KEY_F3) {
-            application->renderSettings_.showcasePreset =
-                static_cast<std::uint32_t>(key - GLFW_KEY_F1);
-            constexpr std::array<const char*, 3> kPresetNames = {
-                "Azure Gallery",
-                "Endfield Industrial",
-                "Neutral Material Check",
-            };
+            azurerender::applyShowcasePresetLook(
+                application->renderSettings_,
+                static_cast<std::uint32_t>(key - GLFW_KEY_F1));
             azurerender::RuntimeDiagnostics::instance().print(
                 "input",
                 "Showcase preset: "
                     + std::to_string(key - GLFW_KEY_F1 + 1) + " ("
-                    + kPresetNames[application->renderSettings_.showcasePreset]
+                    + std::string(azurerender::showcasePresetName(
+                        application->renderSettings_.showcasePreset))
                     + ")");
         } else if (key == GLFW_KEY_F4 || key == GLFW_KEY_F11) {
             if (application->sceneRenderer_ != nullptr) {

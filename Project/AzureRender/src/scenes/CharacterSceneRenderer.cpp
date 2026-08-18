@@ -1667,7 +1667,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
-    const Vector3 lightDirection = normalize({0.48F, 0.82F, 0.32F});
+    const RenderSettings& settings = *renderSettings_;
+    const Vector3 lightDirection = settings.showcasePreset == 1
+        ? normalize({0.36F, 0.86F, 0.36F})
+        : normalize({0.48F, 0.82F, 0.32F});
     const Vector3 lightTarget = {0.0F, -0.10F, 0.0F};
     const Vector3 lightPosition = {
         lightTarget[0] + lightDirection[0] * 4.5F,
@@ -1689,7 +1692,6 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };
-    const RenderSettings& settings = *renderSettings_;
     uniform.renderingParameters = {
         largestExtent * 0.004F,
         settings.stylizedLightingEnabled
@@ -1702,7 +1704,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.00F, 0.13F, 0.12F},
-        {1.0F, 0.92F, 0.16F, 0.16F},
+        {1.0F, 0.98F, 0.12F, 0.28F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},
