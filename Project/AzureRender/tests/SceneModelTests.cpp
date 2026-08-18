@@ -78,11 +78,11 @@ int main() {
         static_assert(azurerender::kShowcasePresetVersion == 1);
         assert(azurerender::showcasePresetName(1) == "Endfield Industrial");
         assert(settings.showcasePreset == 1);
-        assert(std::abs(settings.grade.exposureEv + 0.15F) < 0.0001F);
-        assert(std::abs(settings.grade.saturation - 0.88F) < 0.0001F);
-        assert(std::abs(settings.grade.contrast - 1.10F) < 0.0001F);
+        assert(std::abs(settings.grade.exposureEv - 0.12F) < 0.0001F);
+        assert(std::abs(settings.grade.saturation - 0.96F) < 0.0001F);
+        assert(std::abs(settings.grade.contrast - 1.04F) < 0.0001F);
         assert(std::abs(settings.bloom.strength - 0.10F) < 0.0001F);
-        assert(std::abs(settings.outline.strength - 0.46F) < 0.0001F);
+        assert(std::abs(settings.outline.strength - 0.42F) < 0.0001F);
         azurerender::validateRenderSettings(settings);
     }
 

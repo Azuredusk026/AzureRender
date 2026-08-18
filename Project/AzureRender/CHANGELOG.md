@@ -1,5 +1,11 @@
 # Changelog
 
+## Character sky lighting - 2026-08-18
+
+- Made the Evening Sky environment visible in the Endfield backdrop instead of suppressing it to eight percent.
+- Increased directional environment irradiance and the toon-shadow ambient floor without flattening AO or key-light contrast.
+- Rebalanced the Endfield grade from a dark negative exposure to a neutral presentation exposure.
+
 ## Character hair readability - 2026-08-18
 
 - Bounded hair environment specular and base-normal influence to remove the grey-white crown.

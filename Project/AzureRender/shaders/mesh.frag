@@ -271,12 +271,15 @@ void main() {
         environmentSpecular,
         vec3(0.18, 0.22, 0.26),
         roughness * roughness * 0.65);
+    // Directional environment irradiance: upward and horizon-facing normals
+    // receive the authored sky color while occluded/downward surfaces retain
+    // a controlled floor instead of collapsing to black.
     vec3 ambientDiffuse =
-        diffuseColor * (vec3(0.28) + environmentDiffuse * 0.54);
+        diffuseColor * (vec3(0.32) + environmentDiffuse * 0.82);
     float environmentLuminance = dot(
         environmentDiffuse, vec3(0.2126, 0.7152, 0.0722));
     vec3 hairAmbientDiffuse = diffuseColor
-        * (0.36 + min(environmentLuminance, 0.80) * 0.16);
+        * (0.42 + min(environmentLuminance, 0.80) * 0.26);
     ambientDiffuse = mix(ambientDiffuse, hairAmbientDiffuse, hairActive);
     float platformAmbientVisibility = mix(
         1.0,
@@ -335,7 +338,7 @@ void main() {
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
     float ambientRampVisibility = mix(
         1.0,
-        mix(0.48, 0.96, rampLuminance),
+        mix(0.64, 0.98, rampLuminance),
         toonWeight);
     ambientDiffuse *= ambientRampVisibility;
     float diffuseScale = mix(0.62, 0.68, toonWeight);

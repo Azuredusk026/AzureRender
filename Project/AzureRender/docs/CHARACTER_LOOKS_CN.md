@@ -18,6 +18,10 @@
 
 固定验收至少包含 `face-front` Beauty、`full-body-front` Beauty、Albedo 和 Hair KK。Albedo 用于排除底色错误，Hair KK 用于防止“公式存在但输出全黑”的回归。
 
+## Evening Sky 环境照明修正
+
+此前 Environment 资源虽然成功加载，但 `Endfield Industrial` 背景只混合 8% Skybox，同时负曝光、高对比和较低环境漫反射共同让画面看起来仍是暗色程序背景。现在该 Look 使用 82% Evening Sky 背景，环境纹理按世界法线提供有方向性的漫反射，Toon 阴影区保留 64%–98% 的环境可见度。Look 调色改为 `+0.12 EV / 0.96 saturation / 1.04 contrast`，用于恢复暗色服装细节；这不是全局无差别提亮，主光、环境方向、AO 和阴影染色仍负责明暗关系。
+
 角色材质采用分类稳定规则：Skin/Face/Hair/Fabric/Eye 为 dielectric，packed 纹理中的异常 metallic 值会被分类上限钳制；只有 Metal 类保留完整金属响应。Skin 与 Face 另有 roughness 下限和镜面能量限制，避免肩部、胸口和面部出现白色塑料反光。Face SDF 使用头部局部 X 轴判断左右光照，并以柔和辅助权重参与 ramp；Hair KK 继续由 Hair class、`hair-anisotropy` 特征位、Hair Data 和参数强度共同启用；AO 由材质 `aoColor`、阴影区和 style mask 驱动，Face/Skin 使用较低权重，服装与头发保留完整权重。
 
 人工验收必须同时查看 beauty、albedo、hair-kk、shadow-tint 和 face-sdf 隔离图。beauty 中皮肤高光异常不能用修改 Base Color 掩盖，albedo 用于区分纹理亮斑与照明镜面。

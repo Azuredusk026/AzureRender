@@ -82,13 +82,15 @@ void main() {
             uv.x * 2.0 - 1.0,
             uv.y * 2.0 - 1.0,
             1.0)));
-    vec3 environmentColor = texture(environmentTexture, envUv).rgb;
-    float environmentMix = preset == 1.0 ? 0.08 : 0.85;
+    vec3 environmentColor = texture(environmentTexture, envUv).rgb * 1.15;
+    // Endfield previously suppressed the loaded sky to 8%, making the
+    // environment indistinguishable from its procedural fallback.
+    float environmentMix = preset == 1.0 ? 0.82 : 0.88;
     color = mix(color, environmentColor, environmentMix);
 
     vec2 vignetteOffset = uv - vec2(0.5);
     float vignette = smoothstep(0.20, 0.78, dot(vignetteOffset, vignetteOffset));
-    float vignetteFloor = preset == 1.0 ? 0.82 : (preset == 2.0 ? 0.78 : 0.60);
+    float vignetteFloor = preset == 1.0 ? 0.92 : (preset == 2.0 ? 0.82 : 0.68);
     color *= mix(1.0, vignetteFloor, vignette);
     outputColor = vec4(color, 1.0);
     outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
