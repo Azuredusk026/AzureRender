@@ -173,12 +173,16 @@ void main() {
     vec4 hairData = texture(hairDataTexture, textureCoordinate);
     float hairActive = clamp(material.hairParameters.w, 0.0, 1.0)
         * materialFeatureEnabled(2U);
+    float hairBasePeak = max(
+        max(baseColor.r, baseColor.g),
+        max(baseColor.b, 0.001));
+    vec3 hairBaseHue = baseColor.rgb / hairBasePeak;
     vec3 hairBaseNormal = normalize(
         tangentToWorld * decodePackedHairNormal(hairData.rg));
     shadedNormal = normalize(mix(
         shadedNormal,
         hairBaseNormal,
-        hairActive * 0.45));
+        hairActive * 0.14));
 
     vec4 packedMaterial = texture(metallicRoughnessTexture, textureCoordinate);
     vec4 specularEmissive = texture(
@@ -269,6 +273,11 @@ void main() {
         roughness * roughness * 0.65);
     vec3 ambientDiffuse =
         diffuseColor * (vec3(0.28) + environmentDiffuse * 0.54);
+    float environmentLuminance = dot(
+        environmentDiffuse, vec3(0.2126, 0.7152, 0.0722));
+    vec3 hairAmbientDiffuse = diffuseColor
+        * (0.36 + min(environmentLuminance, 0.80) * 0.16);
+    ambientDiffuse = mix(ambientDiffuse, hairAmbientDiffuse, hairActive);
     float platformAmbientVisibility = mix(
         1.0,
         mix(0.44, 1.0, shadowVisibility),
@@ -337,6 +346,7 @@ void main() {
                 * camera.showcaseParameters.y
                 * keyVisibility
             + fillDiffuse * camera.showcaseParameters.z * fillColor);
+    directDiffuse *= mix(1.0, 0.72, hairActive);
     float shadowRegion = 1.0 - smoothstep(0.38, 0.66, rampLuminance);
     float shadowSystemWeight = clamp(
         bandEnabled * material.styleParameters.x,
@@ -363,8 +373,35 @@ void main() {
             * (0.10 + clamp(shadowWeight + styleMask * 0.42, 0.0, 1.0)
                 * 0.38)
             * aoClassWeight);
+    // Hair AO is a stable stylized volume layer, not merely a multiplier in
+    // already shadowed pixels. Several source instances author AO alpha as
+    // zero, so Hair uses the authored RGB with a conservative class fallback.
+    vec3 hairAoColor = material.aoColor.a > 0.01
+        ? material.aoColor.rgb
+        : vec3(0.255);
+    float hairCavity = clamp(
+        styleMask * 0.62
+            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.22,
+        0.0,
+        1.0);
+    vec3 hairAoTint = mix(
+        vec3(1.0),
+        hairAoColor,
+        hairActive * (0.10 + hairCavity * 0.32));
+    aoShadowTint *= hairAoTint;
     vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
         + directDiffuse * lamShadowTint * aoShadowTint;
+    // Toon/environment energy may raise the hair value but must not erase its
+    // authored red hue. Reproject only the diffuse hair layer onto the base
+    // hue; specular and KK remain independent highlights.
+    float hairDiffusePeak = max(
+        max(tintedDiffuse.r, tintedDiffuse.g),
+        tintedDiffuse.b);
+    vec3 huePreservedHair = hairBaseHue * hairDiffusePeak;
+    tintedDiffuse = mix(
+        tintedDiffuse,
+        huePreservedHair,
+        hairActive * 0.68);
     tintedDiffuse *= mix(
         vec3(1.0),
         camera.faceSdfShadowColor.rgb,
@@ -378,9 +415,17 @@ void main() {
     ambientSpecular *= material.styleParameters.z;
     float dielectricSpecularWeight = material.materialClass == 1U
         ? 0.05
-        : (material.materialClass == 2U ? 0.03 : 1.0);
+        : (material.materialClass == 2U
+            ? 0.03
+            : (material.materialClass == 3U ? 0.14 : 1.0));
     ambientSpecular *= dielectricSpecularWeight;
     directSpecular *= dielectricSpecularWeight;
+    // Prevent a bright sky texel from bleaching red hair to grey. Hair uses
+    // its base hue as the energy-preserving environment response.
+    ambientSpecular = mix(
+        ambientSpecular,
+        ambientSpecular * mix(baseColor.rgb, vec3(1.0), 0.18),
+        hairActive);
     directSpecular *= mix(1.0, 1.30, styleMask * toonWeight);
     ambientSpecular *= mix(1.0, 1.12, styleMask * toonWeight);
     if (qaEffectMode == 5 && qaEffectDisabled) {
@@ -396,6 +441,11 @@ void main() {
         * bandEnabled
         * material.styleParameters.w
         * (1.0 - platformMask);
+    rimLighting *= mix(1.0, 0.22, hairActive);
+    rimLighting = mix(
+        rimLighting,
+        rimLighting * hairBaseHue,
+        hairActive * 0.75);
     if (qaEffectMode == 4 && qaEffectDisabled) {
         rimLighting = vec3(0.0);
     }
@@ -415,26 +465,19 @@ void main() {
     float secondaryKkSine = sqrt(max(
         1.0 - secondaryTangentDotHalf * secondaryTangentDotHalf,
         0.0));
-    float kkPower = clamp(material.hairParameters.x * 0.15, 24.0, 96.0);
-    float secondaryKkPower = clamp(kkPower * 0.56, 14.0, 56.0);
+    float kkPower = clamp(material.hairParameters.x * 0.40, 80.0, 220.0);
+    float secondaryKkPower = clamp(kkPower * 0.42, 38.0, 96.0);
     float kkLobe = pow(kkSine, kkPower);
     float secondaryKkLobe = pow(secondaryKkSine, secondaryKkPower);
-    float kkRampSoftness = mix(
-        0.09,
-        0.025,
-        clamp(material.hairParameters.z / 8.0, 0.0, 1.0));
-    float kkBand = smoothstep(
-        0.34 - kkRampSoftness,
-        0.34 + kkRampSoftness,
-        kkLobe);
-    float secondaryKkBand = smoothstep(
-        0.29 - kkRampSoftness * 1.35,
-        0.29 + kkRampSoftness * 1.35,
-        secondaryKkLobe);
-    float highlightFacing = smoothstep(
-        0.22,
-        0.78,
-        max(dot(hairHighlightNormal, halfDirection), 0.0));
+    // Direct lobe-to-ramp mapping preserves a narrow anti-aliased band. The
+    // previous high threshold discarded the complete lobe at normal camera
+    // distances and made Hair KK effectively black in its QA isolation.
+    float kkBand = smoothstep(0.28, 0.72, kkLobe);
+    float secondaryKkBand = smoothstep(0.22, 0.64, secondaryKkLobe);
+    float hairViewVisibility = smoothstep(
+        -0.20,
+        0.45,
+        dot(geometricNormal, viewDirection));
     vec3 kkTint = mix(
         baseColor.rgb,
         vec3(1.0, 0.68, 0.74),
@@ -442,11 +485,9 @@ void main() {
     vec3 kkSpecular =
         kkTint
         * kkBand
-        * mix(0.35, 1.0, highlightFacing)
-        * max(diffuse, 0.18)
-        * material.hairParameters.y
-        * 0.66
-        * keyVisibility
+        * mix(0.58, 1.0, hairViewVisibility)
+        * max(material.hairParameters.y, 0.16)
+        * 0.82
         * hairActive
         * material.featureParameters.y
         * bandEnabled;
@@ -457,11 +498,9 @@ void main() {
     vec3 secondaryKkSpecular =
         secondaryKkTint
         * secondaryKkBand
-        * mix(0.24, 0.70, highlightFacing)
-        * max(diffuse, 0.12)
-        * material.hairParameters.y
-        * 0.30
-        * keyVisibility
+        * mix(0.35, 0.72, hairViewVisibility)
+        * max(material.hairParameters.y, 0.16)
+        * 0.34
         * hairActive
         * material.featureParameters.y
         * bandEnabled;

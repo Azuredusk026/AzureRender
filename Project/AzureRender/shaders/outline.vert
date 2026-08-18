@@ -34,8 +34,7 @@ void main() {
         normalize(mat3(skinMatrix) * normal);
     vec3 expandedPosition =
         skinnedPosition
-        + skinnedNormal * camera.renderingParameters.x;
+        + skinnedNormal * camera.renderingParameters.x * 0.58;
     gl_Position =
         camera.modelViewProjection * vec4(expandedPosition, 1.0);
-    gl_Position.xy *= 1.6;
 }

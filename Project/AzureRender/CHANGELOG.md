@@ -1,5 +1,12 @@
 # Changelog
 
+## Character hair readability - 2026-08-18
+
+- Bounded hair environment specular and base-normal influence to remove the grey-white crown.
+- Reworked dual-lobe Kajiya-Kay ramping so highlights survive normal viewing distances independently of direct-light visibility.
+- Added stable class-specific hair AO when source AO alpha is absent.
+- Removed erroneous clip-space outline enlargement and reduced geometric outline width.
+
 ## Scene environments - 2026-08-18
 
 - Added a shared environment-source contract for pluggable scene renderers.

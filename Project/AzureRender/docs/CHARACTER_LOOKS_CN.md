@@ -4,6 +4,20 @@
 
 `Endfield Industrial` 背景已移除双层网格、粗横向分界和右侧灯柱，只保留中性渐变、主体 halo 与弱地面分界。该 preset 的角色补光和环境漫反射同步提高，暗色服装仍保持层次，但不得再压成无细节黑块。
 
+## 头发视觉基线（2026-08-18）
+
+本轮对照参考图和 `Endfield角色渲染复刻技术文档.md` 后，确认旧画面的头顶灰白不是 Base Color 错误：Albedo 隔离图保持红色，Beauty 中朝上发束才变灰，来源是 Hair HN 对环境镜面与直接光的过强响应。Hair KK 隔离图同时几乎全黑，说明旧公式的 ramp 阈值、Diffuse 和 Shadow Visibility 连乘在远景丢失了完整高光。
+
+当前约束如下：
+
+- Hair 是非金属介质，环境镜面能量限制为普通材质的 14%，并以 Base Color 保持色相，顶部不得再被天空洗成整片灰白。
+- `_HN` 的 RG 基础法线只以 14% 混入常规 Normal；BA 继续驱动双层 Kajiya-Kay 高光。
+- KK Power 映射到 80–220，主/次高光直接经过窄 ramp，且不再乘直接光强度或 Shadow Visibility；远景仍需保留一条可读高光。
+- Hair AO 是独立风格化体积层。即使 Unreal 实例的 `AO_Color.a` 为 0，也使用其 RGB 和 Style Mask/掠射关系提供保守的发束遮蔽。
+- Silhouette outline 只做法线外扩。旧 shader 的裁剪空间 `xy *= 1.6` 已删除，几何宽度降为原值的 58%；禁止再次用整体裁剪空间缩放制造描边。
+
+固定验收至少包含 `face-front` Beauty、`full-body-front` Beauty、Albedo 和 Hair KK。Albedo 用于排除底色错误，Hair KK 用于防止“公式存在但输出全黑”的回归。
+
 角色材质采用分类稳定规则：Skin/Face/Hair/Fabric/Eye 为 dielectric，packed 纹理中的异常 metallic 值会被分类上限钳制；只有 Metal 类保留完整金属响应。Skin 与 Face 另有 roughness 下限和镜面能量限制，避免肩部、胸口和面部出现白色塑料反光。Face SDF 使用头部局部 X 轴判断左右光照，并以柔和辅助权重参与 ramp；Hair KK 继续由 Hair class、`hair-anisotropy` 特征位、Hair Data 和参数强度共同启用；AO 由材质 `aoColor`、阴影区和 style mask 驱动，Face/Skin 使用较低权重，服装与头发保留完整权重。
 
 人工验收必须同时查看 beauty、albedo、hair-kk、shadow-tint 和 face-sdf 隔离图。beauty 中皮肤高光异常不能用修改 Base Color 掩盖，albedo 用于区分纹理亮斑与照明镜面。
