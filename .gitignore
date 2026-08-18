@@ -13,6 +13,9 @@ Thumbs.db
 **/build/
 **/cmake-build-*/
 **/captures/
+/AzureRender-*-Windows-AMD64/
+/AzureRender-*-Windows-AMD64.zip
+/AzureRender-*-Windows-AMD64.tar.gz
 *.dll
 *.exe
 *.pdb
