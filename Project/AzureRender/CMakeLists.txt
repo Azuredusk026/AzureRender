@@ -339,7 +339,7 @@ target_compile_definitions(
 )
 
 if(MSVC)
-    target_compile_options(AzureRender PRIVATE /W4 /permissive-)
+    target_compile_options(AzureRender PRIVATE /W4 /WX /permissive-)
 else()
     target_compile_options(
         AzureRender
@@ -347,6 +347,7 @@ else()
             -Wall
             -Wextra
             -Wpedantic
+            -Werror
             -Wno-missing-field-initializers
     )
 endif()
@@ -364,8 +365,11 @@ endif()
 
 if(MINGW)
     get_filename_component(MINGW_RUNTIME_DIR "${CMAKE_CXX_COMPILER}" DIRECTORY)
+    set(AZURERENDER_MINGW_RUNTIME_FILES "")
     foreach(runtime_dll libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll)
         if(EXISTS "${MINGW_RUNTIME_DIR}/${runtime_dll}")
+            list(APPEND AZURERENDER_MINGW_RUNTIME_FILES
+                "${MINGW_RUNTIME_DIR}/${runtime_dll}")
             add_custom_command(
                 TARGET AzureRender
                 POST_BUILD
@@ -382,6 +386,14 @@ set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
 install(TARGETS AzureRender RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+if(MINGW)
+    if(NOT AZURERENDER_MINGW_RUNTIME_FILES)
+        message(FATAL_ERROR "MinGW runtime DLLs were not found")
+    endif()
+    install(
+        FILES ${AZURERENDER_MINGW_RUNTIME_FILES}
+        DESTINATION "${CMAKE_INSTALL_BINDIR}")
+endif()
 install(
     DIRECTORY "${SHADER_BINARY_DIR}/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/shaders"
@@ -392,6 +404,7 @@ install(
 install(
     FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/CHANGELOG.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/README_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/ARCHITECTURE_CN.md"

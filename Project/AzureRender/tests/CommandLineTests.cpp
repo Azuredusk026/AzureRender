@@ -37,6 +37,12 @@ int main() {
     require(defaults.options.width == 1280, "Unexpected default width");
     require(defaults.options.height == 720, "Unexpected default height");
     require(defaults.options.captureFps == 60, "Unexpected default capture FPS");
+    const auto help = azurerender::parseCommandLine({"--help"});
+    require(help.showHelp, "--help was not parsed");
+    require(
+        std::string(azurerender::commandLineHelp()).find("Scenes:")
+            != std::string::npos,
+        "Detailed help is missing scene options");
 
     const auto valid = azurerender::parseCommandLine({
         "--asset", "demo.gltf",

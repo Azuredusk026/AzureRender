@@ -26,11 +26,20 @@
 ## 3. 构建与打包
 
 ```powershell
-cmake --preset ninja-release
-cmake --build --preset ninja-release
+.\tools\configure_windows.ps1 -Config Debug
+.\tools\configure_windows.ps1 -Config Release
 ctest --test-dir build\ninja-release --output-on-failure
-cmake --install build\ninja-release --prefix build\install-test
+cmake --install build\ninja-release --prefix build\install-release
 cpack --config build\ninja-release\CPackConfig.cmake
+```
+
+Windows MinGW 使用 `x64-mingw-dynamic` vcpkg triplet。安装目录 `bin/` 必须同时包含 `AzureRender.exe`、`glfw3.dll` 和三项 MinGW runtime DLL；只分发 EXE 不受支持。
+
+隔离运行验证：
+
+```powershell
+.\tools\verify_windows_runtime.ps1 `
+  -Executable .\build\install-release\bin\AzureRender.exe
 ```
 
 通过门禁后的本地交付物统一复制到 `dist/`；该目录不进入 Git。文件名由 CPack 版本、系统和架构生成，不手工改成 `final` 或日期任务名。
@@ -53,6 +62,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 | 公共 editor smoke | 必须 | 必须 |
 | Debug Validation | 必须 | 必须 |
 | 安装树资源检查 | 必须 | 必须 |
+| 隔离 PATH 运行时检查 | 必须 | 不适用 |
 | 私有角色 smoke | 可选补充 | 不执行 |
 | 视觉截图 | 视觉变更必须 | 可选 |
 

@@ -2,98 +2,16 @@
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
-#include <algorithm>
 #include <array>
 #include <cstddef>
 #include <cstdint>
-#include <cstring>
 #include <fstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
 
-// stb_image declarations only; the implementation is emitted by
-// GltfLoader.cpp (STB_IMAGE_IMPLEMENTATION), symbols link at program level.
-#include <stb_image.h>
-
 using namespace azurerender::internal;
-
-namespace {
-
-// IEEE 754 half-precision encode for the HDR environment texture.
-std::uint16_t floatToHalf(const float value) {
-    const std::uint32_t bits = *reinterpret_cast<const std::uint32_t*>(&value);
-    const std::uint32_t sign = (bits >> 16) & 0x8000U;
-    const std::int32_t exponent =
-        static_cast<std::int32_t>((bits >> 23) & 0xFFU) - 127 + 15;
-    const std::uint32_t mantissa = bits & 0x7FFFFFU;
-    if (exponent <= 0) {
-        if (exponent < -10) {
-            return static_cast<std::uint16_t>(sign);
-        }
-        const std::uint32_t shifted =
-            (mantissa | 0x800000U) >> (1 - exponent);
-        return static_cast<std::uint16_t>(
-            sign | (shifted + 0x0FFFU + ((shifted >> 13) & 1U)) >> 13);
-    }
-    if (exponent >= 31) {
-        return static_cast<std::uint16_t>(sign | 0x7C00U);
-    }
-    return static_cast<std::uint16_t>(
-        sign | (static_cast<std::uint32_t>(exponent) << 10)
-            | (mantissa >> 13));
-}
-
-// Decodes an equirectangular environment asset into RGBA float16 pixels.
-// .hdr files use stb_image float decoding (RGBE); LDR images are decoded as
-// 8-bit and normalized into the same HDR pipeline.
-std::vector<std::uint16_t> loadEnvironmentAsset(
-    const std::string& path,
-    std::uint32_t& outWidth,
-    std::uint32_t& outHeight) {
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    std::vector<std::uint16_t> halfPixels;
-    if (path.size() > 4
-        && (path.compare(path.size() - 4, 4, ".hdr") == 0
-            || path.compare(path.size() - 4, 4, ".HDR") == 0)) {
-        float* data = stbi_loadf(path.c_str(), &width, &height, &channels, 4);
-        if (data == nullptr) {
-            throw std::runtime_error(
-                "Failed to decode HDR environment: " + path);
-        }
-        halfPixels.resize(
-            static_cast<std::size_t>(width) * static_cast<std::size_t>(height) * 4);
-        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
-        for (std::size_t index = 0; index < count; ++index) {
-            halfPixels[index] = floatToHalf(std::clamp(data[index], 0.0F, 64.0F));
-        }
-        stbi_image_free(data);
-    } else {
-        unsigned char* data =
-            stbi_load(path.c_str(), &width, &height, &channels, 4);
-        if (data == nullptr) {
-            throw std::runtime_error(
-                "Failed to decode environment image: " + path);
-        }
-        halfPixels.resize(
-            static_cast<std::size_t>(width) * static_cast<std::size_t>(height) * 4);
-        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
-        for (std::size_t index = 0; index < count; ++index) {
-            // LDR 0..255 -> HDR 0..~1; keep some headroom for emissive parts.
-            halfPixels[index] = floatToHalf(
-                static_cast<float>(data[index]) * (1.0F / 255.0F));
-        }
-        stbi_image_free(data);
-    }
-    outWidth = static_cast<std::uint32_t>(width);
-    outHeight = static_cast<std::uint32_t>(height);
-    return halfPixels;
-}
-
-}  // namespace
 
 void AzureRenderApp::createImageViews() {
     swapchainImageViews_.resize(swapchainImages_.size());

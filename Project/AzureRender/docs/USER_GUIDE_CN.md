@@ -4,10 +4,11 @@
 
 ## 1. 运行方式
 
-发布包用户直接运行 `bin/AzureRender.exe`。源码工作区用户使用：
+发布包用户直接运行 `bin/AzureRender.exe`。源码工作区完成安装后，使用下面两个自包含入口：
 
 ```powershell
-.\build\ninja-release\AzureRender.exe
+.\build\install-debug\bin\AzureRender.exe
+.\build\install-release\bin\AzureRender.exe
 ```
 
 无参数时启动公共 `character` 场景和 `assets_public/test_model.gltf`，不依赖私有资产。
@@ -144,8 +145,11 @@ Timing 只表示被 timestamp 包围的 GPU pass，不等同于包含 CPU、pres
 | `--resource-root <path>` | 指定安装资源根 |
 | `--smoke-frames <N>` | 固定帧数后退出 |
 | `--version` | 输出版本 |
+| `--help` | 输出完整命令行参考 |
 
-程序当前没有独立 `--help`；非法参数会打印完整 usage 并返回退出码 2。
+`--help` 返回退出码 0；非法参数打印 usage 并返回退出码 2。
+
+若 Windows 报告缺少 `libgcc_s_seh-1.dll`、`libstdc++-6.dll`、`libwinpthread-1.dll` 或 `glfw3.dll`，说明运行的是旧包或只复制了 EXE。请运行完整安装树的 `bin/AzureRender.exe`，不要单独移动 EXE。
 
 ## 9. 资产边界
 

@@ -37,11 +37,13 @@ struct ParsedCommandLine {
     std::string createScenePath;
     std::string editorScenePath;
     bool showVersion = false;
+    bool showHelp = false;
     bool checkResources = false;
 };
 
 [[nodiscard]] ParsedCommandLine parseCommandLine(
     const std::vector<std::string>& arguments);
 [[nodiscard]] const char* commandLineUsage() noexcept;
+[[nodiscard]] const char* commandLineHelp() noexcept;
 
 }  // namespace azurerender

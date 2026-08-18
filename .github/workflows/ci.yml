@@ -33,6 +33,10 @@ jobs:
           xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --editor build/ci/public.azscene --smoke-frames 120
       - name: Documentation checks
         run: bash tools/check_docs.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AzureRender-Linux
+          path: Project/AzureRender/build/ci/AzureRender-*.tar.gz*
 
   windows:
     runs-on: windows-2025
@@ -59,3 +63,7 @@ jobs:
       - name: Portfolio evidence checks
         shell: pwsh
         run: .\tools\verify_portfolio.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AzureRender-Windows
+          path: Project/AzureRender/build/ci/AzureRender-*.tar.gz*

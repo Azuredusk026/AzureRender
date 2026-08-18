@@ -28,7 +28,8 @@ namespace {
 
 // IEEE 754 half-precision encode for the HDR environment texture.
 std::uint16_t floatToHalf(const float value) {
-    const std::uint32_t bits = *reinterpret_cast<const std::uint32_t*>(&value);
+    std::uint32_t bits = 0;
+    std::memcpy(&bits, &value, sizeof(bits));
     const std::uint32_t sign = (bits >> 16) & 0x8000U;
     const std::int32_t exponent =
         static_cast<std::int32_t>((bits >> 23) & 0xFFU) - 127 + 15;

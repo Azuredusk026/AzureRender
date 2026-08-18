@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-08-18
-> 当前状态：P0/P1/P2 已完成；没有自动启动的下一阶段。
+> 当前状态：P0/P1/P2、R1 已完成；R2 为当前阶段。
 
 本文是未来开发的唯一队列。它描述优先级和准入条件，不把尚未实现的内容写成当前能力。
 
@@ -17,7 +17,7 @@
 
 ### R1：发布工程硬化
 
-状态：`Ready`。建议作为下一阶段。
+状态：`Complete`（2026-08-18）。
 
 - 增加 `--help` 和稳定 CLI reference 输出。
 - 修复现有 strict-aliasing 与空字符编译警告，启用更严格的 warning gate。
@@ -27,9 +27,11 @@
 
 验收：干净 clone 能通过配置、构建、测试、安装、打包、资源检查和公共 renderer smoke；包内无私有资产、本机路径或缓存。
 
+结果：Windows Debug/Release 均完成 12/12 CTest；两个安装树在仅保留 Windows 系统 PATH 时通过 `--version` 与 `--check-resources`，并从安装目录实际运行 Character/Blackhole 各 120 帧。Release Gate 的构建、测试、安装、移动、哈希、隔离运行和 TGZ 打包全部通过。
+
 ### R2：Renderer SDK 可用性
 
-状态：`Candidate`。
+状态：`Active`。
 
 - 提取内置 renderer 注册表和示例模板。
 - 为 `RenderContext`、capabilities、生命周期和资源所有权增加契约测试。

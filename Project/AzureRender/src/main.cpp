@@ -30,6 +30,10 @@ int main(const int argumentCount, char** argumentValues) {
             azurerender::parseCommandLine(arguments);
         AzureRenderOptions& options = commandLine.options;
         std::string& scenePath = commandLine.scenePath;
+        if (commandLine.showHelp) {
+            std::cout << azurerender::commandLineHelp();
+            return EXIT_SUCCESS;
+        }
         if (commandLine.showVersion) {
             azurerender::RuntimeDiagnostics::instance().print(
                 "cli", "AzureRender " AZURERENDER_VERSION);

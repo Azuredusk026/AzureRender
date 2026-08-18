@@ -67,6 +67,12 @@ else()
 endif()
 run_gate_stage(version "${INSTALLED_EXECUTABLE}" --version)
 run_gate_stage(resources "${INSTALLED_EXECUTABLE}" --check-resources)
+if(WIN32)
+    run_gate_stage(isolated-runtime
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_windows_runtime.ps1"
+        -Executable "${INSTALLED_EXECUTABLE}")
+endif()
 
 run_gate_stage(package
     "${CMAKE_CPACK_COMMAND}" -G TGZ -C "${CONFIG}"
@@ -103,6 +109,6 @@ file(WRITE "${RESULT_FILE}"
     "  \"package\": \"${PACKAGE_JSON_PATH}\",\n"
     "  \"size_bytes\": ${PACKAGE_SIZE},\n"
     "  \"sha256\": \"${PACKAGE_SHA256}\",\n"
-    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"package\", \"manifest\"]\n"
+    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"package\", \"manifest\"]\n"
     "}\n")
 message(STATUS "Release gate passed: ${RESULT_FILE}")

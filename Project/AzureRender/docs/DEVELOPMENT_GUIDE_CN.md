@@ -23,19 +23,19 @@ cd AzureRender\Project\AzureRender
 
 $env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
 $env:VCPKG_ROOT = "C:\path\to\vcpkg"
-& "$env:VCPKG_ROOT\vcpkg.exe" install --triplet x64-windows
+& "$env:VCPKG_ROOT\vcpkg.exe" install --triplet x64-mingw-dynamic
 ```
 
 ## 3. 配置与构建
 
-优先使用 presets：
+Windows 优先使用环境探测脚本；它固定 Ninja、MinGW、vcpkg toolchain 和 `x64-mingw-dynamic` ABI：
 
 ```powershell
-cmake --preset ninja-debug
-cmake --build --preset ninja-debug
-cmake --preset ninja-release
-cmake --build --preset ninja-release
+.\tools\configure_windows.ps1 -Config Debug
+.\tools\configure_windows.ps1 -Config Release
 ```
+
+若 Ninja/MinGW 来自 CLion 且不在 `PATH`，设置 `AZURERENDER_TOOLCHAIN_ROOT` 为包含 `ninja/` 和 `mingw/` 的 CLion 工具目录，或传入同名 `-ToolchainRoot` 参数。脚本不保存本机绝对路径。
 
 如环境变量无法被 preset 识别：
 
@@ -43,7 +43,8 @@ cmake --build --preset ninja-release
 cmake -S . -B build/ninja-debug -G Ninja `
   -DCMAKE_BUILD_TYPE=Debug `
   -DCMAKE_CXX_COMPILER=g++ `
-  -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+  -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
+  -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
 cmake --build build/ninja-debug
 ```
 

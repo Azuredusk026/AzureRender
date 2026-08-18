@@ -21,10 +21,10 @@ Windows 已验证基线：Vulkan SDK 1.4.350.0、GCC/MinGW 13.1、Ninja 1.13.2�
 $env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
 $env:VCPKG_ROOT = "C:\path\to\vcpkg"
 
-cmake --preset ninja-debug
-cmake --build --preset ninja-debug
-cmake --preset ninja-release
-cmake --build --preset ninja-release
+.\tools\configure_windows.ps1 -Config Debug
+.\tools\configure_windows.ps1 -Config Release
+cmake --install build\ninja-debug --prefix build\install-debug
+cmake --install build\ninja-release --prefix build\install-release
 ```
 
 如果本机 preset 无法找到工具链，参考 [开发指南](docs/DEVELOPMENT_GUIDE_CN.md) 使用显式 `cmake -S/-B` 配置。
@@ -90,7 +90,7 @@ GPU timing：
 
 ## 命令行入口
 
-程序当前没有独立 `--help` 选项；传入非法选项时会打印完整 usage。常用参数如下：
+运行 `AzureRender.exe --help` 可查看稳定的命令行参考。常用参数如下：
 
 | 参数 | 用途 |
 |---|---|
@@ -108,6 +108,7 @@ GPU timing：
 | `--render-path traditional|subpasses|dynamic` | 论文三路径基准选择 |
 | `--check-resources` | 检查安装/开发树资源 |
 | `--version` | 输出版本 |
+| `--help` | 输出命令行参考 |
 
 参数范围和错误行为由 `src/app/CommandLine.cpp` 及自动化测试定义，不再另行维护一份容易漂移的参数手册。
 

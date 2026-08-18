@@ -13,7 +13,7 @@ namespace azurerender {
 namespace {
 
 constexpr const char* kUsage =
-    "Usage: AzureRender.exe [--asset <gltf/glb path>] [--version] "
+    "Usage: AzureRender.exe [--help] [--asset <gltf/glb path>] [--version] "
     "[--check-resources] [--resource-root <directory>] "
     "[--environment <hdr/png/jpg path>] "
     "[--scene <azscene path>] [--create-scene <azscene path>] "
@@ -29,6 +29,28 @@ constexpr const char* kUsage =
     "[--scene-type <character|blackhole>] "
     "[--capture-dir <empty directory> "
     "--capture-frames <positive integer> --capture-fps <1-240>]";
+
+constexpr const char* kHelp =
+    "AzureRender 0.1 command-line reference\n\n"
+    "Scenes:\n"
+    "  --scene-type character|blackhole   Select the renderer\n"
+    "  --asset <gltf/glb>                  Character asset\n"
+    "  --scene <azscene>                   Load a saved scene\n"
+    "  --editor <azscene>                  Open the editor\n\n"
+    "Output:\n"
+    "  --width <pixels> --height <pixels>  Output size\n"
+    "  --capture-dir <empty-dir>           Deterministic PNG output\n"
+    "  --capture-frames <N> --capture-fps <1-240>\n"
+    "  --gpu-timing-output <json>          GPU pass timing\n\n"
+    "Quality and QA:\n"
+    "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --diagnostic-view beauty|normal|outline|shadow\n"
+    "  --hud --no-stylized --no-inner-outline\n\n"
+    "Utility:\n"
+    "  --check-resources  Validate the installed resource tree\n"
+    "  --smoke-frames <N> Exit after N rendered frames\n"
+    "  --version          Print the version\n"
+    "  --help             Print this reference\n";
 
 [[noreturn]] void fail(
     const CommandLineErrorCode code,
@@ -210,12 +232,18 @@ const char* commandLineUsage() noexcept {
     return kUsage;
 }
 
+const char* commandLineHelp() noexcept {
+    return kHelp;
+}
+
 ParsedCommandLine parseCommandLine(
     const std::vector<std::string>& arguments) {
     ParsedCommandLine parsed;
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const std::string& argument = arguments[index];
-        if (argument == "--smoke-frames") {
+        if (argument == "--help") {
+            parsed.showHelp = true;
+        } else if (argument == "--smoke-frames") {
             parsed.options.smokeFrameLimit = parseUnsigned(
                 requireValue(arguments, index, argument), argument);
             if (parsed.options.smokeFrameLimit == 0) {
