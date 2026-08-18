@@ -1,5 +1,17 @@
 # AzureRender 发布与验收
 
+## 2026-08-18 视觉修复候选版验收
+
+- 提交：`8f94080`（角色材质与展示光照）、`cb4e004`（吸积盘多普勒、云噪声与越肩机位）。
+- Debug/Release：均完成构建并通过 12/12 CTest；Debug 开启 Validation，Release 关闭 Validation。
+- 安装树：`build/install-debug/bin/AzureRender.exe` 与 `build/install-release/bin/AzureRender.exe` 均在隔离 PATH 下通过 `--version`、`--check-resources`，`bin/` 包含 `glfw3.dll`、`libgcc_s_seh-1.dll`、`libstdc++-6.dll`、`libwinpthread-1.dll`。
+- 实际运行：Debug 安装树 Character 公共资产 120 帧，Release 安装树 Blackhole/Cinematic/over-shoulder 120 帧，退出码均为 0。
+- Release Gate：configure、build、test、install、manifest、version、resources、isolated-runtime、package 全部通过。
+- TGZ：`dist/AzureRender-0.1.0-rc1-Windows-AMD64.tar.gz`，9,809,353 bytes，SHA-256 `F2AB4ECB85CFF764C9A7DD2B6EA549A5A9E2E45EACC228B5082D713E1AE2876F`。
+- ZIP：`dist/AzureRender-0.1.0-rc1-Windows-AMD64.zip`，9,832,988 bytes，SHA-256 `FC67005D3E882E9B73E79C189716212C3596EE89F2E9CE2D58BDDA429BCE7292`。
+- 黑洞媒体：三个机位各 300 帧/5.0 秒，总览 900 帧/15.0 秒；四个 MP4 均完成全文件解码。
+- 角色媒体：五张 1920×1080 截图和 300 帧/5.0 秒环绕视频，私有资产媒体仅保留本机 `showcase/`。
+
 ## 1. 发布目标
 
 当前版本为 `0.1.0-rc1`。发布包必须在没有源码目录的环境中找到可执行文件、shader、公共资产、许可和必要文档。
