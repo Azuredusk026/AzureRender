@@ -7,8 +7,8 @@
 | `assets_public/` | 自有测试模型、HDR、Ramp、Face SDF | 允许进入发布包 |
 | `assets_private/` | 第三方角色和派生纹理 | 禁止公开分发 |
 | `assets_placeholder/` | 不可分发资产的说明或占位 | 允许 |
-| `captures/` | 本地生成截图、manifest、timing | 默认不提交 |
-| `portfolio/` | 筛选后的公开作品集交付 | 按 manifest 审核 |
+| `captures/` | 本地临时帧、manifest、timing | 不提交，可随时删除 |
+| `portfolio/` | 语义化命名的公共代表图和证据 | 按 manifest 审核 |
 
 公共 smoke、CI 和发布验收不得依赖 `assets_private/`。
 
@@ -69,21 +69,19 @@
 - 只有有意视觉变更才能更新基准。
 - 更新前后都保留对比图或 contact sheet。
 - 私有资产基准可以本地保存，但公共合并门禁必须有可重复的公共证据。
+- 本地目录使用 `captures/<scene>/<scene>_<view>_<look>_vNN_<resolution>_<date>/`。
+- 正式图片使用 `<scene>_<view-or-purpose>_<look-or-technique>_vNN_<width>x<height>.png`。
+- 禁止用阶段号、任务号、裸时间戳或 `final_final` 命名正式证据。
+- 正式图片进入 `portfolio/images/<scene>/`，参数摘要进入 `portfolio/evidence/<scene>/`。
 
-当前角色 S36 HDR Beauty SHA-256：
-
-```text
-5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357
-```
-
-当前 P2 `Endfield Industrial` 公共资产 1280x720 基准：
+当前 `Endfield Industrial` v1 公共资产 1280x720 基准：
 
 ```text
 full-body: 71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5
 close-up:  7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF
 ```
 
-对应 manifest 必须包含 `qaShowcasePreset: 1`、`showcasePresetVersion: 1`、`showcasePresetName: "Endfield Industrial"` 及 grade/bloom/outline 完整参数。S36 仅保留为 P2 前的历史角色基准，不作为 P2 预设的期望哈希。
+对应证据必须包含 preset ID/version/name 及 grade/bloom/outline 参数。旧 S36 哈希只保留在归档，不再引用已删除的本地 capture 路径。
 
 当前黑洞 P1 1280x720 首帧 SHA-256（36 帧、60 fps 固定捕获）：
 
@@ -91,7 +89,7 @@ close-up:  7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF
 E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C
 ```
 
-两次完整运行必须逐帧一致；单次中断或未生成 manifest 的目录不作为基准。
+正式图片和参数位于 `portfolio/`。两次完整运行必须逐帧一致；单次中断或未生成 manifest 的目录不作为基准。
 
 ## 7. 历史资料
 

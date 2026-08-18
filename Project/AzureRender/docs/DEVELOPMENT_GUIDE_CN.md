@@ -18,18 +18,12 @@ Linux CI：Ubuntu 24.04、GCC、Ninja、Vulkan Validation、Mesa lavapipe/Xvfb�
 ## 2. 获取和依赖
 
 ```powershell
-git clone --recurse-submodules https://github.com/Azuredusk026/AzureRender.git
+git clone https://github.com/Azuredusk026/AzureRender.git
 cd AzureRender\Project\AzureRender
 
 $env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
 $env:VCPKG_ROOT = "C:\path\to\vcpkg"
 & "$env:VCPKG_ROOT\vcpkg.exe" install --triplet x64-windows
-```
-
-已有 clone 缺少子模块时：
-
-```powershell
-git submodule update --init --recursive
 ```
 
 ## 3. 配置与构建
@@ -94,7 +88,7 @@ ctest --test-dir build\ninja-release --output-on-failure
 .\build\ninja-release\AzureRender.exe `
   --scene-type blackhole `
   --width 1280 --height 720 `
-  --capture-dir .\captures\qa_blackhole `
+  --capture-dir .\captures\blackhole\blackhole_beauty_temporal_v1_1280x720_20260818 `
   --capture-frames 1 --capture-fps 60
 ```
 
@@ -112,19 +106,19 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
 
 ## 6. 开发循环
 
-1. 阅读 `ACTIVE_DEVELOPMENT_PLAN_CN.md`，确认唯一 `Ready/Active` 任务。
+1. 阅读 `DEVELOPMENT_ROADMAP_CN.md`，确认唯一 `Ready/Active` 阶段。
 2. 检查 `git status --short --branch`，保留用户已有修改。
 3. 先复现基线，再进行局部修改。
 4. 添加与风险相称的自动化测试。
 5. 执行 Debug、Release、CTest、Validation 和视觉门禁。
-6. 更新当前计划、项目概览和受影响专题文档。
+6. 更新路线状态、架构事实和受影响专题文档。
 7. 执行 `git diff --check`，确认没有无关文件。
 8. 使用计划中冻结的标题独立提交。
 
 ## 7. 文档工作流
 
-- 当前状态只写入 `PROJECT_OVERVIEW_CN.md`。
-- 当前/下一任务只写入 `ACTIVE_DEVELOPMENT_PLAN_CN.md`。
+- 当前实现只写入 `ARCHITECTURE_CN.md`。
+- 当前/下一阶段只写入 `DEVELOPMENT_ROADMAP_CN.md`。
 - 命令变化更新本文件和应用 README。
 - 公共接口变化更新 `ARCHITECTURE_CN.md`。
 - 资产和画面验收变化更新 `ASSET_AND_VISUAL_QA_CN.md`。
@@ -157,7 +151,3 @@ $env:PATH = "D:\path\to\mingw\bin;$env:PATH"
 ```
 
 必要时使用 `--resource-root <directory>`；不要在源码中加入本机绝对路径。
-
-### 子模块 ownership 警告
-
-Windows 不同账户运行 Git 时可能触发 safe-directory 检查。只对明确的项目子模块路径添加例外，不要配置通配的全局信任。

@@ -1,0 +1,29 @@
+{
+  "format": "AzureRender visual evidence v1",
+  "scene": "character",
+  "renderer": "character",
+  "asset": "assets_public/test_model.gltf",
+  "preset": {
+    "id": 1,
+    "version": 1,
+    "name": "Endfield Industrial",
+    "exposureEv": -0.15,
+    "saturation": 0.88,
+    "contrast": 1.10,
+    "bloomThreshold": 1.15,
+    "bloomStrength": 0.10,
+    "outlineStrength": 0.46
+  },
+  "images": [
+    {
+      "view": "full-body-front",
+      "path": "portfolio/images/character/character_endfield_public_fullbody_v1_1280x720.png",
+      "sha256": "71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5"
+    },
+    {
+      "view": "face-three-quarter",
+      "path": "portfolio/images/character/character_endfield_public_closeup_v1_1280x720.png",
+      "sha256": "7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF"
+    }
+  ]
+}

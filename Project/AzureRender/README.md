@@ -2,7 +2,7 @@
 
 AzureRender 是 C++17/Vulkan 桌面渲染器和编辑器。项目当前支持 `character` 与 `blackhole` 两种场景渲染器、HDR Scene Color、风格化角色材质、编辑器、确定性捕获和 GPU timing。
 
-完整状态见 [项目概览](docs/PROJECT_OVERVIEW_CN.md)，开发任务见 [当前开发计划](docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)。本文件只负责“如何运行”。
+完整说明见[当前架构](docs/ARCHITECTURE_CN.md)、[使用手册](docs/USER_GUIDE_CN.md)和[未来开发路线](docs/DEVELOPMENT_ROADMAP_CN.md)。本文件只保留最短构建与运行入口。
 
 ## 环境要求
 
@@ -74,7 +74,7 @@ P2 角色展示预设：
 .\build\ninja-release\AzureRender.exe `
   --scene-type blackhole `
   --width 1280 --height 720 `
-  --capture-dir .\captures\blackhole `
+  --capture-dir .\captures\blackhole\blackhole_beauty_temporal_v1_1280x720_20260818 `
   --capture-frames 1 --capture-fps 60
 ```
 
@@ -84,7 +84,7 @@ GPU timing：
 .\build\ninja-release\AzureRender.exe `
   --scene-type blackhole `
   --gpu-timing `
-  --gpu-timing-output .\captures\blackhole_timing.json `
+  --gpu-timing-output .\captures\blackhole\blackhole_timing_rtx4060_1280x720.json `
   --smoke-frames 300
 ```
 
@@ -139,6 +139,6 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" -DCONFIG=Debug -P tools/run_release_g
 
 - `assets_public/`：公共测试和发布资产。
 - `assets_private/`：受限测试资产，不得进入公开发布包。
-- `portfolio/`：作品集索引与可公开交付物。
+- `portfolio/`：按场景整理的公共代表图、证据 JSON 和 SHA-256 manifest。
 - `captures/`、`build/`：可再生成内容，不进入版本控制。
 - 第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

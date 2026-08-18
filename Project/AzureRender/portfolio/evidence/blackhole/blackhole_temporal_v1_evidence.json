@@ -1,0 +1,31 @@
+{
+  "format": "AzureRender visual evidence v1",
+  "scene": "blackhole",
+  "renderer": "blackhole",
+  "image": "portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png",
+  "sha256": "E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C",
+  "capture": {
+    "width": 1280,
+    "height": 720,
+    "fps": 60,
+    "determinismCheck": "36 of 36 frame hashes matched across two runs"
+  },
+  "rendering": {
+    "rawTraceFormat": "RGBA16F",
+    "historyImages": 2,
+    "taa": true,
+    "historyClamp": true,
+    "bloomMode": "single-pass HDR",
+    "lensingCorrection": true,
+    "starfieldBlueShift": true
+  },
+  "timing": {
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "build": "Debug",
+    "samples": 180,
+    "mainSceneAverageMs": 12.885322,
+    "totalAverageMs": 12.932407,
+    "totalMinMs": 11.378944,
+    "totalMaxMs": 15.986400
+  }
+}

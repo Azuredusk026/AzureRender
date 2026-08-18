@@ -1,7 +1,4 @@
-# Private assets are intentionally tracked in the private AzureRender repository.
-# Do not make the remote public or redistribute these files without verifying
-# the original asset license.
-
-# Reproducible CQ material-profile probes; regenerate with
-# tools/inject_gltf_textures.js instead of committing duplicate 64 MiB GLBs.
-/laevat_skinned/laevat_skinned_material_cq*.glb
+# Keep local QA assets available without publishing third-party content.
+*
+!.gitignore
+!README.md

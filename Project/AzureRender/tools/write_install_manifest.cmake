@@ -19,7 +19,7 @@ file(GLOB_RECURSE INSTALLED_FILES
     RELATIVE "${INSTALL_DIR}"
     "${INSTALL_DIR}/*")
 
-set(MANIFEST_LINES
+string(CONCAT MANIFEST_LINES
     "{\n"
     "  \"schema_version\": 1,\n"
     "  \"files\": [\n")
@@ -29,8 +29,10 @@ foreach(FILE_PATH IN LISTS INSTALLED_FILES)
     if(IS_DIRECTORY "${FULL_PATH}")
         continue()
     endif()
-    # Never list the manifest document itself.
-    if(FULL_PATH STREQUAL OUTPUT_FILE_CMAKE)
+    # Never list the staged manifest itself. Verification regenerates its
+    # comparison file outside INSTALL_DIR, so compare the relative path too.
+    if(FULL_PATH STREQUAL OUTPUT_FILE_CMAKE
+        OR FILE_PATH STREQUAL "install_manifest.json")
         continue()
     endif()
     file(SHA256 "${FULL_PATH}" FILE_SHA256)

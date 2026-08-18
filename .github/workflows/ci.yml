@@ -14,8 +14,6 @@ jobs:
         working-directory: Project/AzureRender
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -34,7 +32,7 @@ jobs:
           build/ci/AzureRender --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
           xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --editor build/ci/public.azscene --smoke-frames 120
       - name: Documentation checks
-        run: bash tools/check_active_plan.sh
+        run: bash tools/check_docs.sh
 
   windows:
     runs-on: windows-2025
@@ -43,8 +41,6 @@ jobs:
         working-directory: Project/AzureRender
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - uses: lukka/run-vcpkg@v11
         with:
           vcpkgJsonGlob: Project/AzureRender/vcpkg.json
@@ -59,4 +55,7 @@ jobs:
         run: build/ci/Release/AzureRender.exe --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
       - name: Documentation checks
         shell: bash
-        run: bash tools/check_active_plan.sh
+        run: bash tools/check_docs.sh
+      - name: Portfolio evidence checks
+        shell: pwsh
+        run: .\tools\verify_portfolio.ps1

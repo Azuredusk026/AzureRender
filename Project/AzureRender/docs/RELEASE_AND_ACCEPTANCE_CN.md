@@ -12,12 +12,16 @@
 - 快速使用、开发/验收说明
 - `THIRD_PARTY_NOTICES.md` 和依赖许可证
 - 文件级 SHA-256 install manifest
+- 随源码发布时可包含 `portfolio/` 公共视觉证据；二进制安装包不需要包含它
 
 禁止包含：
 
 - `assets_private/`
 - build cache、IDE 文件、captures
+- 私有角色派生截图、旧阶段视频和 probe 输出
 - 本机绝对路径、凭据或临时日志
+
+当前版本已停止跟踪 `assets_private/` 内容，但旧 Git 提交可能仍保存历史对象。若将仓库改为公开，必须发布经过审计的干净历史（新仓库或受控历史重写），不能仅依赖当前 `.gitignore`。
 
 ## 3. 构建与打包
 
@@ -28,6 +32,8 @@ ctest --test-dir build\ninja-release --output-on-failure
 cmake --install build\ninja-release --prefix build\install-test
 cpack --config build\ninja-release\CPackConfig.cmake
 ```
+
+通过门禁后的本地交付物统一复制到 `dist/`；该目录不进入 Git。文件名由 CPack 版本、系统和架构生成，不手工改成 `final` 或日期任务名。
 
 也可以使用统一门禁：
 
@@ -61,6 +67,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 - Validation smoke 命令和退出码
 - 安装 manifest 校验
 - 视觉基准哈希及有意变化说明
+- `portfolio_manifest.json` 校验结果
 - 已知限制和私有资产排除确认
 
 证据优先使用 CI artifact、capture manifest 和机器可读 JSON，不在活动文档粘贴整段终端日志。

@@ -1,93 +1,39 @@
-﻿{
-    "format":  "AzureRender portfolio package v1",
-    "milestone":  "S34",
-    "generatedUtc":  "2026-08-01T15:35:40.1519202Z",
-    "project":  "AzureRender - Stylized Vulkan Character Renderer",
-    "author":  "Wu Chenfeng",
-    "rendererHighlights":  [
-                               "Vulkan stylized forward rendering",
-                               "GPU skinning and deterministic animation",
-                               "2048x2048 alpha-aware shadow map with 3x3 PCF",
-                               "Depth-normal screen-space internal outlines",
-                               "Renderer-native HUD and GPU timestamp queries",
-                               "Deterministic 1080p60 PNG and H.264 capture"
-                           ],
-    "primaryArtifacts":  [
-                             {
-                                 "role":  "clean-beauty-video",
-                                 "path":  "captures/Afterglow_S28_Portfolio_1080p60_20s.mp4",
-                                 "bytes":  16485087,
-                                 "sha256":  "5305A559FDC425FB2E2A3CD65C947291A6B251CC1CDB68FA015B28268BC40F29"
-                             },
-                             {
-                                 "role":  "technical-breakdown-video",
-                                 "path":  "captures/Afterglow_S33_TechnicalTitles_1080p60_20s.mp4",
-                                 "bytes":  16007831,
-                                 "sha256":  "9915F887B0B70350711E6243AD357DB076FEB302A76CBA8D53D43AC4207B0DCB"
-                             },
-                             {
-                                 "role":  "portfolio-cover",
-                                 "path":  "portfolio/images/azurerender_cover_1920x1080.png",
-                                 "bytes":  642851,
-                                 "sha256":  "90D1041D124C6C9A3D7F5860FEEEE70FFAC8D3089DE7D44AC46D0D05442F85EF"
-                             },
-                             {
-                                 "role":  "technical-contact-sheet",
-                                 "path":  "portfolio/images/technical_contact_sheet_1920x1080.png",
-                                 "bytes":  476696,
-                                 "sha256":  "66BB472CB6F301D7CA7C2EABD5D05E885D2E799F2AA7DCCBA31E5A955F628DA7"
-                             },
-                             {
-                                 "role":  "release-gpu-timing-report",
-                                 "path":  "captures/s29_gpu_timing_release_1080p.json",
-                                 "bytes":  445,
-                                 "sha256":  "3473D2F4938E0EEAAB9056BF5DE2C58A2A1907271D6B8A1EB7E38229A0A5ABD6"
-                             }
-                         ],
-    "technicalVideo":  {
-                           "width":  1920,
-                           "height":  1080,
-                           "fps":  60,
-                           "frames":  1200,
-                           "durationSeconds":  20,
-                           "chapters":  [
-                                            {
-                                                "name":  "beauty",
-                                                "startFrame":  0,
-                                                "endFrameExclusive":  240
-                                            },
-                                            {
-                                                "name":  "world-normal",
-                                                "startFrame":  240,
-                                                "endFrameExclusive":  480
-                                            },
-                                            {
-                                                "name":  "internal-outline",
-                                                "startFrame":  480,
-                                                "endFrameExclusive":  720
-                                            },
-                                            {
-                                                "name":  "shadow-map",
-                                                "startFrame":  720,
-                                                "endFrameExclusive":  960
-                                            },
-                                            {
-                                                "name":  "beauty-hud",
-                                                "startFrame":  960,
-                                                "endFrameExclusive":  1200
-                                            }
-                                        ],
-                           "fadeFrames":  21,
-                           "titleFrames":  120
-                       },
-    "gpuTiming1080p":  {
-                           "gpu":  "NVIDIA GeForce RTX 4060 Laptop GPU",
-                           "samples":  600,
-                           "shadowAverageMs":  0.189631,
-                           "mainSceneAverageMs":  0.620023,
-                           "internalOutlineAverageMs":  0.071526,
-                           "totalAverageMs":  0.881180,
-                           "scope":  "GPU render passes only; excludes CPU, presentation, and PNG encoding"
-                       },
-    "assetNotice":  "Character assets are referenced for a non-commercial technical portfolio demonstration and are not included in the public source package."
+{
+  "format": "AzureRender portfolio evidence v2",
+  "generatedDate": "2026-08-18",
+  "publicAssetsOnly": true,
+  "artifacts": [
+    {
+      "scene": "blackhole",
+      "role": "temporal-beauty",
+      "path": "portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 341371,
+      "sha256": "E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C"
+    },
+    {
+      "scene": "character",
+      "role": "endfield-public-fullbody",
+      "path": "portfolio/images/character/character_endfield_public_fullbody_v1_1280x720.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 681829,
+      "sha256": "71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5"
+    },
+    {
+      "scene": "character",
+      "role": "endfield-public-closeup",
+      "path": "portfolio/images/character/character_endfield_public_closeup_v1_1280x720.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 619607,
+      "sha256": "7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF"
+    }
+  ],
+  "evidence": [
+    "portfolio/evidence/blackhole/blackhole_temporal_v1_evidence.json",
+    "portfolio/evidence/character/character_endfield_public_v1_evidence.json"
+  ],
+  "assetNotice": "All tracked screenshots use public project assets. Private character assets and derived captures are excluded."
 }

@@ -1,9 +1,11 @@
 # Private assets
 
-This directory is intentionally excluded from version control.
+This directory is excluded from version control except for this notice and its
+`.gitignore`. Local files remain available for optional QA but are absent from
+fresh clones, source archives, CI, install trees, and release packages.
 
-The first private test character is Laevat (莱万汀), exported from the local
-Unreal project at `D:\Epic\UE Project\ZMDRender\Content\ZMD\莱万汀`.
+The first private test character is Laevat (莱万汀), exported from a local
+Unreal project. Machine-specific source paths are intentionally undocumented.
 
 Do not commit third-party character meshes, textures, derived exports, or
 redistributable archives unless their license has been verified explicitly.
