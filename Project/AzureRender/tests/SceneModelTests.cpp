@@ -234,6 +234,17 @@ int main() {
             azurerender::BlackholeCamera::High;
         document.renderSettings.characterPresentation.backgroundEnabled = false;
         document.renderSettings.characterPresentation.platformEnabled = false;
+        azurerender::SceneNode instance;
+        instance.id = "hero-instance";
+        instance.name = "Hero Instance";
+        instance.parentId = "root";
+        instance.resourceId = "asset-0";
+        instance.translation = {1.0F, 2.0F, 3.0F};
+        instance.rotation = {0.0F, 45.0F, 0.0F};
+        instance.scale = {0.5F, 0.5F, 0.5F};
+        instance.prefabSource = "prefabs/hero.azprefab";
+        instance.instanceOf = "hero-template";
+        document.nodes.push_back(instance);
         document.save(scenePath);
         const auto loaded = azurerender::SceneDocument::load(scenePath);
         assert(loaded.renderSettings.sceneType
@@ -244,6 +255,10 @@ int main() {
             == azurerender::BlackholeCamera::High);
         assert(!loaded.renderSettings.characterPresentation.backgroundEnabled);
         assert(!loaded.renderSettings.characterPresentation.platformEnabled);
+        assert(loaded.nodes.size() == 2);
+        assert(loaded.nodes[1].translation == instance.translation);
+        assert(loaded.nodes[1].prefabSource == instance.prefabSource);
+        assert(loaded.nodes[1].instanceOf == instance.instanceOf);
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
     }

@@ -1,5 +1,12 @@
 # Changelog
 
+## R5 - 2026-08-18
+
+- Added snapshot-based editor Undo/Redo with a bounded command history.
+- Added explicit safe-frame asset reload and resource dependency/status views.
+- Added `.azscene v2` node transforms and prefab/instance references with v1 migration.
+- Added semantic viewport capture requests and an editor Capture panel.
+
 ## R4 - 2026-08-18
 
 - Moved five character showcase looks from C++ constants to a validated, versioned JSON catalog.

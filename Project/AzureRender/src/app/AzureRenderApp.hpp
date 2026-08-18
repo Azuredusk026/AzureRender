@@ -194,6 +194,7 @@ private:
     std::uint32_t qaEffectMode_ = 0;
     bool qaEffectEnabled_ = true;
     bool screenshotRequested_ = false;
+    std::string pendingScreenshotLabel_;
     bool fixedSimulation_ = false;
     bool fixedSimulationStarted_ = false;
     float fixedDeltaSeconds_ = 0.0F;

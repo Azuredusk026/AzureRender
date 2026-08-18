@@ -49,7 +49,15 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << std::quoted(node.name) << ' '
                << std::quoted(node.parentId) << ' '
                << std::quoted(node.resourceId) << '\n'
-               << "visible " << std::boolalpha << node.visible << '\n';
+               << "visible " << std::boolalpha << node.visible << '\n'
+               << "transform "
+               << node.translation[0] << ' ' << node.translation[1] << ' '
+               << node.translation[2] << ' ' << node.rotation[0] << ' '
+               << node.rotation[1] << ' ' << node.rotation[2] << ' '
+               << node.scale[0] << ' ' << node.scale[1] << ' '
+               << node.scale[2] << '\n'
+               << "prefab " << std::quoted(node.prefabSource) << ' '
+               << std::quoted(node.instanceOf) << '\n';
     }
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
@@ -80,7 +88,11 @@ SceneDocument SceneDocument::fromAsset(
     SceneDocument document;
     document.sceneId = assetPath.stem().string();
     document.resources.push_back({"asset-0", "gltf", assetPath});
-    document.nodes.push_back({"root", document.sceneId, "", "asset-0", true});
+    SceneNode root;
+    root.id = "root";
+    root.name = document.sceneId;
+    root.resourceId = "asset-0";
+    document.nodes.push_back(std::move(root));
     return document;
 }
 
@@ -96,7 +108,7 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     std::size_t nodeCount = 0;
     std::string key;
     if (!(input >> key >> schemaVersion) || key != "schemaVersion"
-        || schemaVersion != kSchemaVersion) {
+        || schemaVersion < 1 || schemaVersion > kSchemaVersion) {
         throw std::runtime_error("Unsupported .azscene schemaVersion");
     }
     std::uint32_t renderSettingsVersion = 1;
@@ -137,6 +149,20 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             throw std::runtime_error("Invalid .azscene node");
         }
         node.visible = readBool(input, "visible");
+        if (schemaVersion >= 2) {
+            if (!(input >> key
+                  >> node.translation[0] >> node.translation[1]
+                  >> node.translation[2] >> node.rotation[0]
+                  >> node.rotation[1] >> node.rotation[2]
+                  >> node.scale[0] >> node.scale[1] >> node.scale[2])
+                || key != "transform") {
+                throw std::runtime_error("Invalid .azscene node transform");
+            }
+            if (!(input >> key >> std::quoted(node.prefabSource)
+                  >> std::quoted(node.instanceOf)) || key != "prefab") {
+                throw std::runtime_error("Invalid .azscene prefab instance");
+            }
+        }
         document.nodes.push_back(std::move(node));
     }
     if (!(input >> key >> document.renderSettings.showcasePreset)

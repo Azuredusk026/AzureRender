@@ -31,6 +31,26 @@ void AzureRenderApp::drawFrame() {
         "vkWaitForFences");
     collectGpuTiming(currentFrame_);
 
+    if (runOptions_.editorSession != nullptr) {
+        if (runOptions_.editorSession->consumeAssetReloadRequest()) {
+            vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
+            if (sceneRenderer_ != nullptr) {
+                azurerender::RenderContext unloadContext;
+                buildRenderContext(unloadContext);
+                sceneRenderer_->onUnload(unloadContext);
+                sceneRenderer_.reset();
+            }
+            createSceneRenderer();
+            azurerender::RuntimeDiagnostics::instance().info(
+                "editor", "Renderer resources reloaded");
+        }
+        std::string captureLabel;
+        if (runOptions_.editorSession->consumeCaptureRequest(captureLabel)) {
+            pendingScreenshotLabel_ = std::move(captureLabel);
+            screenshotRequested_ = true;
+        }
+    }
+
     std::uint32_t imageIndex = 0;
     const VkResult acquireResult = vkAcquireNextImageKHR(
         device_,
@@ -156,6 +176,12 @@ void AzureRenderApp::drawFrame() {
                 outputPath =
                     (std::filesystem::path(runOptions_.captureDirectory)
                      / filename.str()).string();
+            } else if (!pendingScreenshotLabel_.empty()) {
+                const std::filesystem::path captureDirectory =
+                    resourceLocator_.captureDirectory();
+                std::filesystem::create_directories(captureDirectory);
+                outputPath = (captureDirectory
+                    / (pendingScreenshotLabel_ + ".png")).string();
             }
             saveScreenshot(
                 screenshotMemory,
@@ -174,6 +200,7 @@ void AzureRenderApp::drawFrame() {
                             + std::to_string(runOptions_.captureFrameLimit));
                 }
             }
+            pendingScreenshotLabel_.clear();
         } catch (...) {
             vkDestroyBuffer(device_, screenshotBuffer, nullptr);
             vkFreeMemory(device_, screenshotMemory, nullptr);

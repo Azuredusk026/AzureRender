@@ -84,7 +84,7 @@
   --editor .\scenes\public_character.azscene
 ```
 
-`.azscene` 保存 renderer 类型、资源引用、节点和渲染设置。加载场景后，只有显式按键或 QA 命令才会应用整套展示预设，因此场景内自定义 grade 不会被启动流程覆盖。
+`.azscene v2` 保存 renderer 类型、资源引用、多节点 transform、prefab/instance 引用和渲染设置，并兼容读取 v1。编辑器支持 `Ctrl+Z`/`Ctrl+Y`、Asset Browser 显式热重载和带语义标签的 Capture 面板。加载场景后，只有显式按键或 QA 命令才会应用整套展示预设，因此场景内自定义 grade 不会被启动流程覆盖。完整工作流见 [编辑器生产工作流](EDITOR_WORKFLOW_CN.md)。
 
 ## 5. 确定性截图
 

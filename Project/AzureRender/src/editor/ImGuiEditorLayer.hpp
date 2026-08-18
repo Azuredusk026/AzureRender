@@ -58,6 +58,7 @@ private:
     void drawOutlinerPanel();
     void drawInspectorPanel();
     void drawAssetBrowserPanel();
+    void drawCapturePanel();
     void drawConsolePanel();
 
     std::shared_ptr<EditorSession> session_;

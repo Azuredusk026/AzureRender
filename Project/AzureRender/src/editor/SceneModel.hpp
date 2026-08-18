@@ -3,6 +3,7 @@
 #include "render/RenderSettings.hpp"
 
 #include <cstdint>
+#include <array>
 #include <filesystem>
 #include <string>
 #include <vector>
@@ -21,10 +22,15 @@ struct SceneNode {
     std::string parentId;
     std::string resourceId;
     bool visible = true;
+    std::array<float, 3> translation{0.0F, 0.0F, 0.0F};
+    std::array<float, 3> rotation{0.0F, 0.0F, 0.0F};
+    std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
+    std::string prefabSource;
+    std::string instanceOf;
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 1;
+    static constexpr std::uint32_t kSchemaVersion = 2;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;

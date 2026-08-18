@@ -87,6 +87,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("outliner", "Scene Outliner", [this] { drawOutlinerPanel(); });
     addPanel("inspector", "Inspector", [this] { drawInspectorPanel(); });
     addPanel("assets", "Asset Browser", [this] { drawAssetBrowserPanel(); });
+    addPanel("capture", "Capture", [this] { drawCapturePanel(); });
     addPanel("console", "Console", [this] { drawConsolePanel(); });
     panels_ = registry.createAll();
 }
@@ -237,6 +238,7 @@ void ImGuiEditorLayer::drawPanels() {
             ImGui::DockBuilderDockWindow("Scene Outliner", left);
             ImGui::DockBuilderDockWindow("Inspector", right);
             ImGui::DockBuilderDockWindow("Asset Browser", bottom);
+            ImGui::DockBuilderDockWindow("Capture", bottom);
             ImGui::DockBuilderDockWindow("Console", bottom);
             ImGui::DockBuilderDockWindow("Viewport", center);
             ImGui::DockBuilderFinish(dockspace);
@@ -248,6 +250,12 @@ void ImGuiEditorLayer::drawPanels() {
     if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
         static_cast<void>(session_->execute(EditorCommand::Save));
     }
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Z, false)) {
+        static_cast<void>(session_->execute(EditorCommand::Undo));
+    }
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Y, false)) {
+        static_cast<void>(session_->execute(EditorCommand::Redo));
+    }
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("Save", "Ctrl+S")) {
@@ -255,6 +263,18 @@ void ImGuiEditorLayer::drawPanels() {
             }
             if (ImGui::MenuItem("Reload")) {
                 static_cast<void>(session_->execute(EditorCommand::Reload));
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Edit")) {
+            if (ImGui::MenuItem("Undo", "Ctrl+Z", false, context_->canUndo())) {
+                static_cast<void>(session_->execute(EditorCommand::Undo));
+            }
+            if (ImGui::MenuItem("Redo", "Ctrl+Y", false, context_->canRedo())) {
+                static_cast<void>(session_->execute(EditorCommand::Redo));
+            }
+            if (ImGui::MenuItem("Reload Assets")) {
+                static_cast<void>(session_->execute(EditorCommand::ReloadAssets));
             }
             ImGui::EndMenu();
         }
@@ -587,8 +607,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         ImGui::Text("Id: %s", node->id.c_str());
         bool visible = node->visible;
         if (ImGui::Checkbox("Visible", &visible)) {
-            context_->scene().nodes[context_->selectedNodeIndex()].visible = visible;
-            context_->markDirty();
+            context_->setSelectedNodeVisible(visible);
         }
         ImGui::TextUnformatted("Name");
         std::array<char, 128> nameBuffer{};
@@ -597,9 +616,21 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         std::memcpy(
             nameBuffer.data(), node->name.data(), copyLength);
         if (ImGui::InputText("##name", nameBuffer.data(), nameBuffer.size())) {
-            context_->scene().nodes[context_->selectedNodeIndex()].name =
-                nameBuffer.data();
-            context_->markDirty();
+            context_->setSelectedNodeName(nameBuffer.data());
+        }
+        ImGui::TextUnformatted("Prefab Source");
+        std::array<char, 256> prefabBuffer{};
+        std::memcpy(prefabBuffer.data(), node->prefabSource.data(),
+            std::min(node->prefabSource.size(), prefabBuffer.size() - 1));
+        if (ImGui::InputText("##prefab", prefabBuffer.data(), prefabBuffer.size())) {
+            context_->setSelectedNodePrefab(prefabBuffer.data());
+        }
+        ImGui::TextUnformatted("Instance Of");
+        std::array<char, 128> instanceBuffer{};
+        std::memcpy(instanceBuffer.data(), node->instanceOf.data(),
+            std::min(node->instanceOf.size(), instanceBuffer.size() - 1));
+        if (ImGui::InputText("##instance", instanceBuffer.data(), instanceBuffer.size())) {
+            context_->setSelectedNodeInstance(instanceBuffer.data());
         }
     }
     ImGui::Separator();
@@ -624,43 +655,47 @@ void ImGuiEditorLayer::drawInspectorPanel() {
             const bool selected = settings.showcasePreset == preset;
             const std::string name(showcasePresetName(preset));
             if (ImGui::Selectable(name.c_str(), selected)) {
+                context_->beginEdit();
                 applyShowcasePresetLook(settings, preset);
-                context_->markDirty();
             }
             if (selected) ImGui::SetItemDefaultFocus();
         }
         ImGui::EndCombo();
     }
-    if (ImGui::Checkbox(
-            "Background",
-            &settings.characterPresentation.backgroundEnabled)) {
-        context_->markDirty();
+    bool background = settings.characterPresentation.backgroundEnabled;
+    if (ImGui::Checkbox("Background", &background)) {
+        context_->beginEdit();
+        settings.characterPresentation.backgroundEnabled = background;
     }
-    if (ImGui::Checkbox(
-            "Showcase Platform",
-            &settings.characterPresentation.platformEnabled)) {
-        context_->markDirty();
+    bool platform = settings.characterPresentation.platformEnabled;
+    if (ImGui::Checkbox("Showcase Platform", &platform)) {
+        context_->beginEdit();
+        settings.characterPresentation.platformEnabled = platform;
     }
-    if (ImGui::Checkbox("Face SDF", &settings.faceSdf.enabled)) {
-        context_->markDirty();
+    bool faceSdf = settings.faceSdf.enabled;
+    if (ImGui::Checkbox("Face SDF", &faceSdf)) {
+        context_->beginEdit();
+        settings.faceSdf.enabled = faceSdf;
     }
-    if (ImGui::SliderFloat(
-            "Face SDF Threshold", &settings.faceSdf.threshold, 0.0F, 1.0F)) {
-        context_->markDirty();
+    float threshold = settings.faceSdf.threshold;
+    if (ImGui::SliderFloat("Face SDF Threshold", &threshold, 0.0F, 1.0F)) {
+        context_->beginEdit();
+        settings.faceSdf.threshold = threshold;
     }
-    if (ImGui::SliderFloat(
-            "Face SDF Softness", &settings.faceSdf.softness, 0.001F, 0.5F)) {
-        context_->markDirty();
+    float softness = settings.faceSdf.softness;
+    if (ImGui::SliderFloat("Face SDF Softness", &softness, 0.001F, 0.5F)) {
+        context_->beginEdit();
+        settings.faceSdf.softness = softness;
     }
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
+        context_->beginEdit();
         settings.outline.strength = outline;
-        context_->markDirty();
     }
     float exposure = settings.grade.exposureEv;
     if (ImGui::SliderFloat("Exposure EV", &exposure, -8.0F, 8.0F)) {
+        context_->beginEdit();
         settings.grade.exposureEv = exposure;
-        context_->markDirty();
     }
     ImGui::End();
 }
@@ -670,10 +705,47 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
     setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
 #endif
     ImGui::Begin("Asset Browser");
-    for (const SceneResource& resource : context_->scene().resources) {
-        ImGui::BulletText("%s: %s", resource.type.c_str(),
-                          resource.path.generic_string().c_str());
+    if (ImGui::Button("Reload Assets")) {
+        static_cast<void>(session_->execute(EditorCommand::ReloadAssets));
     }
+    if (ImGui::BeginTable(
+            "assets", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
+        ImGui::TableSetupColumn("Id");
+        ImGui::TableSetupColumn("Path");
+        ImGui::TableSetupColumn("State");
+        ImGui::TableSetupColumn("Users");
+        ImGui::TableHeadersRow();
+        for (const EditorContext::ResourceStatus& resource
+             : context_->resourceStatuses()) {
+            ImGui::TableNextRow();
+            ImGui::TableSetColumnIndex(0);
+            ImGui::TextUnformatted(resource.id.c_str());
+            ImGui::TableSetColumnIndex(1);
+            ImGui::TextUnformatted(resource.path.generic_string().c_str());
+            ImGui::TableSetColumnIndex(2);
+            ImGui::TextUnformatted(resource.exists ? "Ready" : "Missing");
+            ImGui::TableSetColumnIndex(3);
+            ImGui::Text("%zu", resource.dependentNodeCount);
+        }
+        ImGui::EndTable();
+    }
+    ImGui::End();
+}
+
+void ImGuiEditorLayer::drawCapturePanel() {
+    ImGui::Begin("Capture");
+    std::array<char, 128> label{};
+    const std::string& current = session_->captureLabel();
+    std::memcpy(label.data(), current.data(),
+        std::min(current.size(), label.size() - 1));
+    if (ImGui::InputText("Label", label.data(), label.size())) {
+        session_->setCaptureLabel(label.data());
+    }
+    if (ImGui::Button("Capture Viewport")) {
+        static_cast<void>(session_->execute(EditorCommand::Capture));
+    }
+    ImGui::SameLine();
+    ImGui::TextUnformatted("PNG + semantic label");
     ImGui::End();
 }
 

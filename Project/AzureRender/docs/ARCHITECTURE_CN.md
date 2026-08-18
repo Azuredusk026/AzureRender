@@ -127,7 +127,7 @@ blackhole trace pass
 ## 8. 数据契约
 
 - `RenderSettings`：版本化运行配置，包含 renderer、材质表现、角色展示模块、grade、bloom 和 outline；当前 schema 为 v6。
-- `.azscene`：资源引用、节点树、renderer 类型和可序列化设置。
+- `.azscene v2`：资源引用、多节点树、transform、prefab/instance 引用、renderer 类型和可序列化设置；读取器兼容 v1。
 - capture manifest：固定时间步、设备、设置、场景状态和输出模式。
 - `portfolio_manifest.json`：经过筛选的公共图片、字节数和 SHA-256。
 - `gpu_capability_report.schema.json`：设备能力报告契约。
@@ -148,6 +148,6 @@ blackhole trace pass
 
 - 当前插件是进程内 C++ factory，不保证二进制 ABI。
 - 黑洞画面仍缺少离屏 GPU 图像自动化测试。
-- 编辑器没有完整 Undo/Redo、资产热重载和依赖图。
+- prefab 当前是持久化引用与实例覆盖契约，尚不包含跨文件展开器。
 - Traditional/Subpasses/Dynamic Rendering 的论文实验代码不是已完成研究结论。
 - 私有角色只用于本地 QA，发布和 CI 必须完全依赖公共资产。

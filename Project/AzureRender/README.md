@@ -68,6 +68,8 @@ P2 角色展示预设：
   --editor .\build\ninja-debug\public.azscene
 ```
 
+编辑器提供 `Ctrl+Z`/`Ctrl+Y` 历史、资源状态与显式热重载、`.azscene v2` prefab/instance 引用和语义化 Viewport Capture。详见 `docs/EDITOR_WORKFLOW_CN.md`。
+
 确定性截图：
 
 ```powershell

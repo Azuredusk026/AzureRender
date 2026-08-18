@@ -8,6 +8,7 @@
 #include <array>
 #include <cstddef>
 #include <filesystem>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -15,6 +16,13 @@ namespace azurerender {
 
 class EditorContext final {
 public:
+    struct ResourceStatus {
+        std::string id;
+        std::filesystem::path path;
+        bool exists = false;
+        std::uintmax_t byteSize = 0;
+        std::size_t dependentNodeCount = 0;
+    };
     EditorContext(SceneDocument document, std::filesystem::path scenePath);
 
     [[nodiscard]] SceneDocument& scene() noexcept { return scene_; }
@@ -45,18 +53,9 @@ public:
     [[nodiscard]] const std::array<float, 3>& gizmoScale() const noexcept {
         return gizmoScale_;
     }
-    void setGizmoTranslation(std::array<float, 3> value) {
-        gizmoTranslation_ = value;
-        markDirty();
-    }
-    void setGizmoRotation(std::array<float, 3> value) {
-        gizmoRotation_ = value;
-        markDirty();
-    }
-    void setGizmoScale(std::array<float, 3> value) {
-        gizmoScale_ = value;
-        markDirty();
-    }
+    void setGizmoTranslation(std::array<float, 3> value);
+    void setGizmoRotation(std::array<float, 3> value);
+    void setGizmoScale(std::array<float, 3> value);
 
     void markDirty() noexcept { dirty_ = true; }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
@@ -64,6 +63,18 @@ public:
     void reload();
     void addChildNode(std::size_t parentIndex);
     void removeNode(std::size_t index);
+    void setSelectedNodeName(std::string name);
+    void setSelectedNodeVisible(bool visible);
+    void setSelectedNodePrefab(std::string prefabSource);
+    void setSelectedNodeInstance(std::string instanceOf);
+
+    void beginEdit();
+    [[nodiscard]] bool canUndo() const noexcept { return !undoStack_.empty(); }
+    [[nodiscard]] bool canRedo() const noexcept { return !redoStack_.empty(); }
+    bool undo();
+    bool redo();
+    [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
+    std::size_t reloadChangedAssets();
 
     enum class GizmoMode { Translate, Rotate, Scale };
 
@@ -101,6 +112,17 @@ public:
     }
 
 private:
+    struct Snapshot {
+        SceneDocument scene;
+        std::size_t selectedNodeIndex = 0;
+    };
+    [[nodiscard]] Snapshot snapshot() const;
+    void restore(Snapshot snapshot);
+    void rebuildEntities();
+    void refreshSelectedTransform();
+    [[nodiscard]] std::filesystem::path resolvedResourcePath(
+        const SceneResource& resource) const;
+    void updateResourceWriteTimes();
     mutable azurerender::ecs::World ecsWorld_;
     std::vector<azurerender::ecs::Entity> nodeEntities_;
     SceneDocument scene_;
@@ -114,6 +136,10 @@ private:
     GizmoScreenData gizmoScreen_;
     bool dirty_ = false;
     std::vector<std::string> consoleMessages_;
+    std::vector<Snapshot> undoStack_;
+    std::vector<Snapshot> redoStack_;
+    std::vector<std::pair<std::string, std::filesystem::file_time_type>>
+        resourceWriteTimes_;
 };
 
 }  // namespace azurerender

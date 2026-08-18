@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-08-18
-> 当前状态：P0/P1/P2、R1/R2/R3/R4 已完成；R5 为当前阶段。
+> 当前状态：P0/P1/P2 与 R1-R5 全部完成；当前没有 Active 阶段。
 
 本文是未来开发的唯一队列。它描述优先级和准入条件，不把尚未实现的内容写成当前能力。
 
@@ -73,7 +73,7 @@
 
 ### R5：编辑器生产力
 
-状态：`Active`。
+状态：`Complete`（2026-08-18）。
 
 - Command pattern Undo/Redo。
 - 资产热重载、依赖图和缩略图。
@@ -81,6 +81,8 @@
 - 捕获与视觉基准管理 UI。
 
 验收：编辑器操作有 session/scene round-trip 测试，失败保存不破坏已有文件。
+
+结果：命令式 Undo/Redo、显式资产热重载、资源依赖/状态视图、`.azscene v2` 多节点 transform 与 prefab/instance 引用、语义化 Capture 面板均已落地。Session 和 SceneModel 测试覆盖历史、请求消费、v1 迁移、v2 round-trip 与失败保存。
 
 ## 3. 无限期 Deferred
 

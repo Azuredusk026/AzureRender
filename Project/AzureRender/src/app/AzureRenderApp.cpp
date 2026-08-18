@@ -1193,6 +1193,7 @@ void AzureRenderApp::keyCallback(
                         application->renderSettings_.diffuseBandThreshold));
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_LEFT_BRACKET) {
+            application->runOptions_.editorSession->context().beginEdit();
             application->renderSettings_.outline.strength = std::max(
                 application->renderSettings_.outline.strength - 0.05F,
                 0.0F);
@@ -1201,9 +1202,9 @@ void AzureRenderApp::keyCallback(
                 "Editor outline strength: "
                     + std::to_string(
                         application->renderSettings_.outline.strength));
-            application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_RIGHT_BRACKET) {
+            application->runOptions_.editorSession->context().beginEdit();
             application->renderSettings_.outline.strength = std::min(
                 application->renderSettings_.outline.strength + 0.05F,
                 2.0F);
@@ -1212,9 +1213,9 @@ void AzureRenderApp::keyCallback(
                 "Editor outline strength: "
                     + std::to_string(
                         application->renderSettings_.outline.strength));
-            application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_MINUS) {
+            application->runOptions_.editorSession->context().beginEdit();
             application->renderSettings_.grade.exposureEv = std::max(
                 application->renderSettings_.grade.exposureEv - 0.25F,
                 -8.0F);
@@ -1223,9 +1224,9 @@ void AzureRenderApp::keyCallback(
                 "Editor exposure EV: "
                     + std::to_string(
                         application->renderSettings_.grade.exposureEv));
-            application->runOptions_.editorSession->context().markDirty();
         } else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_EQUAL) {
+            application->runOptions_.editorSession->context().beginEdit();
             application->renderSettings_.grade.exposureEv = std::min(
                 application->renderSettings_.grade.exposureEv + 0.25F,
                 8.0F);
@@ -1234,7 +1235,6 @@ void AzureRenderApp::keyCallback(
                 "Editor exposure EV: "
                     + std::to_string(
                         application->renderSettings_.grade.exposureEv));
-            application->runOptions_.editorSession->context().markDirty();
         }
     }
 }
