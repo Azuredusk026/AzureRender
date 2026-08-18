@@ -58,6 +58,10 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
            << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n'
+           << "characterBackgroundEnabled " << std::boolalpha
+           << document.renderSettings.characterPresentation.backgroundEnabled << '\n'
+           << "characterPlatformEnabled " << std::boolalpha
+           << document.renderSettings.characterPresentation.platformEnabled << '\n'
            << "blackholeQuality "
            << blackholeQualityName(document.renderSettings.blackhole.quality) << '\n'
            << "blackholeCamera "
@@ -167,6 +171,22 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         // Reached end of file: keep the default Character renderer.
         document.renderSettings.sceneType = SceneType::Character;
     } else {
+        if (key == "characterBackgroundEnabled") {
+            if (!(input >> std::boolalpha
+                  >> document.renderSettings.characterPresentation.backgroundEnabled
+                  >> key)) {
+                throw std::runtime_error(
+                    "Invalid .azscene characterBackgroundEnabled");
+            }
+        }
+        if (key == "characterPlatformEnabled") {
+            if (!(input >> std::boolalpha
+                  >> document.renderSettings.characterPresentation.platformEnabled
+                  >> key)) {
+                throw std::runtime_error(
+                    "Invalid .azscene characterPlatformEnabled");
+            }
+        }
         if (key == "blackholeQuality") {
             std::string value;
             if (!(input >> value)) {

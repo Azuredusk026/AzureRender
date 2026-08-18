@@ -27,6 +27,8 @@
 
 ## 3. 私有角色导入原则
 
+私有角色及其派生截图、视频始终属于本机 QA 数据：不得提交 Git、进入 CI artifact、安装包或公共 portfolio。公开自动化以带显式 Material Profile v1 的 `assets_public/test_model.gltf` 为准。
+
 历史 Unreal 导出脚本位于 `tools/unreal_*.py`，纹理转换和 glTF 注入工具位于 `tools/`。脚本必须从自身路径或 `AZURERENDER_PROJECT_ROOT` 定位工程，不得写死本机目录。
 
 导入检查：

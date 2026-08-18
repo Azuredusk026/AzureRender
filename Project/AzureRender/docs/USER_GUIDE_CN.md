@@ -45,6 +45,8 @@
 
 ## 3. 角色控制
 
+编辑器 Inspector 的 `Showcase Look` 读取 `assets_public/showcase_looks.json`，可独立开关 `Background`、`Showcase Platform` 和 `Face SDF`，并调整 Face SDF 阈值/柔度、轮廓和曝光。完整的 Look 语义与固定验收视角见 [Character Look 与美术验收](CHARACTER_LOOKS_CN.md)。
+
 | 按键 | 行为 |
 |---|---|
 | `1`-`4` | 全身方向机位 |

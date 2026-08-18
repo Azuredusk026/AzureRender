@@ -1892,33 +1892,40 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     scissor.extent = context.renderExtent;
     vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
 
-    vkCmdBindPipeline(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        backgroundPipeline_);
-    const std::size_t backgroundDescriptorIndex =
-        context.currentFrame * asset_.materials.size();
-    vkCmdBindDescriptorSets(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        pipelineLayout_,
-        0,
-        1,
-        &descriptorSets_[backgroundDescriptorIndex],
-        0,
-        nullptr);
-    vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
+    const RenderSettings& settings = *renderSettings_;
+    if (settings.characterPresentation.backgroundEnabled) {
+        vkCmdBindPipeline(
+            context.commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            backgroundPipeline_);
+        const std::size_t backgroundDescriptorIndex =
+            context.currentFrame * asset_.materials.size();
+        vkCmdBindDescriptorSets(
+            context.commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            pipelineLayout_,
+            0,
+            1,
+            &descriptorSets_[backgroundDescriptorIndex],
+            0,
+            nullptr);
+        vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
+    }
 
     const VkDeviceSize offsets[] = {0};
     vkCmdBindVertexBuffers(context.commandBuffer, 0, 1, &vertexBuffer_, offsets);
     vkCmdBindIndexBuffer(context.commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
-    const RenderSettings& settings = *renderSettings_;
     if (settings.silhouetteOutlineEnabled) {
         vkCmdBindPipeline(
             context.commandBuffer,
             VK_PIPELINE_BIND_POINT_GRAPHICS,
             outlinePipeline_);
         for (const AssetPrimitive& primitive : asset_.primitives) {
+            if (!settings.characterPresentation.platformEnabled
+                && asset_.materials[primitive.materialIndex].showcasePlatform
+                    > 0.5F) {
+                continue;
+            }
             if (asset_.materials[primitive.materialIndex].alphaMode
                 == AssetAlphaMode::Blend) {
                 continue;
@@ -2045,6 +2052,10 @@ void CharacterSceneRenderer::drawPrimitive(
     const AssetPrimitive& primitive,
     const std::uint32_t firstIndexOffset) {
     const AssetMaterial& material = asset_.materials[primitive.materialIndex];
+    if (material.showcasePlatform > 0.5F
+        && !renderSettings_->characterPresentation.platformEnabled) {
+        return;
+    }
     const bool blend = material.alphaMode == AssetAlphaMode::Blend;
     const VkPipeline pipeline = blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)

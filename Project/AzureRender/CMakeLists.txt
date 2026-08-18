@@ -206,6 +206,8 @@ if(BUILD_TESTING)
     )
     target_include_directories(
         AzureRenderEditorSessionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderEditorSessionTests PRIVATE nlohmann_json::nlohmann_json)
     add_test(
         NAME AzureRender.EditorSession
         COMMAND AzureRenderEditorSessionTests)
@@ -238,6 +240,11 @@ if(BUILD_TESTING)
     )
     target_include_directories(
         AzureRenderSceneModelTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderSceneModelTests PRIVATE nlohmann_json::nlohmann_json)
+    target_compile_definitions(
+        AzureRenderSceneModelTests PRIVATE
+        AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
     add_test(
         NAME AzureRender.SceneModel
         COMMAND AzureRenderSceneModelTests)
@@ -414,6 +421,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/ARCHITECTURE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RENDERER_SDK_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/BLACKHOLE_QUALITY_CN.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/CHARACTER_LOOKS_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/USER_GUIDE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_ROADMAP_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_GUIDE_CN.md"

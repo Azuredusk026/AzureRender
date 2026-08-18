@@ -15,6 +15,7 @@ public:
         const std::filesystem::path& relative) const;
     [[nodiscard]] std::filesystem::path rampProfile() const;
     [[nodiscard]] std::filesystem::path rampAtlas() const;
+    [[nodiscard]] std::filesystem::path showcaseLooks() const;
     [[nodiscard]] std::filesystem::path captureDirectory() const;
     [[nodiscard]] std::filesystem::path resolveAsset(
         const std::filesystem::path& requested) const;

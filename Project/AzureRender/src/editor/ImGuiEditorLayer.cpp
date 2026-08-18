@@ -617,6 +617,41 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         context_->setGizmoScale(scale);
     }
     RenderSettings& settings = context_->renderSettings();
+    if (ImGui::BeginCombo(
+            "Showcase Look",
+            std::string(showcasePresetName(settings.showcasePreset)).c_str())) {
+        for (std::uint32_t preset = 0; preset < 5; ++preset) {
+            const bool selected = settings.showcasePreset == preset;
+            const std::string name(showcasePresetName(preset));
+            if (ImGui::Selectable(name.c_str(), selected)) {
+                applyShowcasePresetLook(settings, preset);
+                context_->markDirty();
+            }
+            if (selected) ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+    if (ImGui::Checkbox(
+            "Background",
+            &settings.characterPresentation.backgroundEnabled)) {
+        context_->markDirty();
+    }
+    if (ImGui::Checkbox(
+            "Showcase Platform",
+            &settings.characterPresentation.platformEnabled)) {
+        context_->markDirty();
+    }
+    if (ImGui::Checkbox("Face SDF", &settings.faceSdf.enabled)) {
+        context_->markDirty();
+    }
+    if (ImGui::SliderFloat(
+            "Face SDF Threshold", &settings.faceSdf.threshold, 0.0F, 1.0F)) {
+        context_->markDirty();
+    }
+    if (ImGui::SliderFloat(
+            "Face SDF Softness", &settings.faceSdf.softness, 0.001F, 0.5F)) {
+        context_->markDirty();
+    }
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
         settings.outline.strength = outline;

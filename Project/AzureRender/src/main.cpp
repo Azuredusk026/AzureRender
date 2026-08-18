@@ -46,7 +46,8 @@ int main(const int argumentCount, char** argumentValues) {
                 "Shader directory: " + locator.shaderDirectory().string() + '\n'
                 + "Public demo: " + locator.publicAsset("test_model.gltf").string() + '\n'
                 + "Ramp profile: " + locator.rampProfile().string() + '\n'
-                + "Ramp atlas: " + locator.rampAtlas().string());
+                + "Ramp atlas: " + locator.rampAtlas().string() + '\n'
+                + "Showcase looks: " + locator.showcaseLooks().string());
             return EXIT_SUCCESS;
         }
         if (!commandLine.createScenePath.empty()) {

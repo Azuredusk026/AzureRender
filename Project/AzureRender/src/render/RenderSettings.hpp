@@ -4,6 +4,7 @@
 
 #include <array>
 #include <cstdint>
+#include <filesystem>
 #include <string_view>
 
 namespace azurerender {
@@ -74,8 +75,13 @@ struct BlackholeQualityParameters {
     float nearStepScale;
 };
 
+struct CharacterPresentationSettings {
+    bool backgroundEnabled = true;
+    bool platformEnabled = true;
+};
+
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 5;
+    static constexpr std::uint32_t kSchemaVersion = 6;
 
     // Selects the pluggable scene renderer that draws the current frame.
     // Character is the default stylized character pipeline; Blackhole is the
@@ -106,6 +112,7 @@ struct RenderSettings {
     OutlineSettings outline;
     GradeSettings grade;
     BlackholeSettings blackhole;
+    CharacterPresentationSettings characterPresentation;
 };
 
 void validateRenderSettings(const RenderSettings& settings);
@@ -124,5 +131,6 @@ void validateRenderSettings(const RenderSettings& settings);
 void applyShowcasePresetLook(
     RenderSettings& settings,
     std::uint32_t preset);
+void loadShowcasePresetCatalog(const std::filesystem::path& path);
 
 }  // namespace azurerender

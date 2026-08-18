@@ -1,5 +1,12 @@
 # Changelog
 
+## R4 - 2026-08-18
+
+- Moved five character showcase looks from C++ constants to a validated, versioned JSON catalog.
+- Added editor controls for showcase look, background, platform, Face SDF, outline, and exposure.
+- Added modular character background/platform switches and explicit public material profiles.
+- Advanced RenderSettings to schema v6 while preserving legacy scene migration.
+
 All notable public changes are recorded here. Versions follow Semantic Versioning.
 
 ## 0.1.0-rc1 - 2026-08-18

@@ -106,7 +106,7 @@ glTF/GLB
 
 当前支持 Base Color、Normal、Metallic-Roughness、Emissive、Style Mask、Matcap、Hair Data、Toon Ramp、Face SDF、GPU skinning、morph target 和透明排序。
 
-展示 look 由 `RenderSettings` 集中管理。`Endfield Industrial` v1 同时配置灯光、grade、bloom 与 outline；F 键、Portfolio 和 QA 显式切换都走同一入口。加载 `.azscene` 时不会无条件覆盖用户保存的调色。
+展示 look 的结构由 `RenderSettings` 管理，数值来自版本化的 `assets_public/showcase_looks.json`。启动时由 `ResourceLocator` 解析并校验 catalog；编辑器、F 键、Portfolio 和 QA 显式切换都走同一应用入口。背景与展示地台是 Character renderer 内的独立模块，加载 `.azscene` 时不会无条件覆盖用户保存的开关或调色。
 
 ## 7. Blackhole 渲染路径
 
@@ -126,7 +126,7 @@ blackhole trace pass
 
 ## 8. 数据契约
 
-- `RenderSettings`：版本化运行配置，包含 renderer、材质表现、grade、bloom 和 outline。
+- `RenderSettings`：版本化运行配置，包含 renderer、材质表现、角色展示模块、grade、bloom 和 outline；当前 schema 为 v6。
 - `.azscene`：资源引用、节点树、renderer 类型和可序列化设置。
 - capture manifest：固定时间步、设备、设置、场景状态和输出模式。
 - `portfolio_manifest.json`：经过筛选的公共图片、字节数和 SHA-256。

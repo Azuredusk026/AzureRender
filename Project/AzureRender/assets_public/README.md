@@ -11,3 +11,7 @@ created for this project and may be redistributed with the renderer.
 `toon_ramp_profiles.json` is the versioned, renderer-owned CQ-2 ramp source.
 `toon_ramp_atlas.ppm` is its generated linear RGB sampling atlas. Regenerate or
 validate it with `python tools/build_toon_ramp_atlas.py [--check]`.
+
+`showcase_looks.json` is the versioned source for character grade, bloom and
+outline presets. The renderer refuses invalid schemas instead of compiling
+look values into C++.

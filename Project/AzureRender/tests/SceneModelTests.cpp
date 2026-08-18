@@ -51,6 +51,26 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
 }  // namespace
 
 int main() {
+    // The data-driven look catalog rejects incompatible schemas before any
+    // renderer state is changed.
+    {
+        const auto invalidCatalog = uniquePath("-looks.json");
+        {
+            std::ofstream output(invalidCatalog);
+            output << R"({"schemaVersion":999,"looks":[]})";
+        }
+        bool rejected = false;
+        try {
+            azurerender::loadShowcasePresetCatalog(invalidCatalog);
+        } catch (const std::runtime_error&) {
+            rejected = true;
+        }
+        assert(rejected);
+        std::filesystem::remove(invalidCatalog);
+    }
+    azurerender::loadShowcasePresetCatalog(
+        std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
+        / "assets_public/showcase_looks.json");
     // Showcase presets are stable names and complete visual configurations.
     {
         azurerender::RenderSettings settings;
@@ -78,7 +98,7 @@ int main() {
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 5")
+            assert(contents.find("renderSettingsVersion 6")
                 != std::string::npos);
         }
         assert(std::filesystem::exists(scenePath));
@@ -212,6 +232,8 @@ int main() {
             azurerender::BlackholeQuality::Balanced;
         document.renderSettings.blackhole.camera =
             azurerender::BlackholeCamera::High;
+        document.renderSettings.characterPresentation.backgroundEnabled = false;
+        document.renderSettings.characterPresentation.platformEnabled = false;
         document.save(scenePath);
         const auto loaded = azurerender::SceneDocument::load(scenePath);
         assert(loaded.renderSettings.sceneType
@@ -220,6 +242,8 @@ int main() {
             == azurerender::BlackholeQuality::Balanced);
         assert(loaded.renderSettings.blackhole.camera
             == azurerender::BlackholeCamera::High);
+        assert(!loaded.renderSettings.characterPresentation.backgroundEnabled);
+        assert(!loaded.renderSettings.characterPresentation.platformEnabled);
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
     }

@@ -98,6 +98,10 @@ std::filesystem::path ResourceLocator::rampAtlas() const {
     return publicAsset("toon_ramp_atlas.ppm");
 }
 
+std::filesystem::path ResourceLocator::showcaseLooks() const {
+    return publicAsset("showcase_looks.json");
+}
+
 std::filesystem::path ResourceLocator::captureDirectory() const {
     for (const auto& root : roots_) {
         const auto candidate = root / "captures";

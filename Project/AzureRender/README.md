@@ -114,6 +114,8 @@ GPU timing：
 
 ## 角色展示控制
 
+五套角色 Look 由版本化的 `assets_public/showcase_looks.json` 驱动，编辑器可独立控制背景、地台与 Face SDF。详细约束见 `docs/CHARACTER_LOOKS_CN.md`。
+
 | 按键 | 行为 |
 |---|---|
 | `1`-`5` | 固定全身、方向和脸部机位 |

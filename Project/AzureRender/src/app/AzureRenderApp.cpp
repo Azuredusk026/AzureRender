@@ -75,6 +75,7 @@ void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
+    azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
     sceneView.assetPath = resourceLocator_.resolveAsset(options.assetPath).string();
     sceneView.renderSettings = options.renderSettings;
@@ -468,6 +469,14 @@ void AzureRenderApp::configureQaHarness() {
     } else {
         throw std::invalid_argument(
             "Unknown --qa-light: " + qaLightName_);
+    }
+    // Explicit CLI feature disables remain authoritative when a QA camera or
+    // light selects a complete look preset.
+    if (!runOptions_.renderSettings.stylizedLightingEnabled) {
+        renderSettings_.stylizedLightingEnabled = false;
+    }
+    if (!runOptions_.renderSettings.innerOutlineEnabled) {
+        renderSettings_.innerOutlineEnabled = false;
     }
 
     qaEffectName_ = runOptions_.qaEffect.empty()

@@ -1,10 +1,77 @@
 #include "RenderSettings.hpp"
 
+#include <algorithm>
 #include <cmath>
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include <stdexcept>
 #include <string>
+#include <utility>
+#include <vector>
 
 namespace azurerender {
+
+namespace {
+
+struct ShowcaseLook {
+    std::string name;
+    GradeSettings grade;
+    BloomSettings bloom;
+    OutlineSettings outline;
+};
+
+std::vector<ShowcaseLook>& showcaseLooks() {
+    static std::vector<ShowcaseLook> looks;
+    return looks;
+}
+
+template <std::size_t Size>
+std::array<float, Size> readFloatArray(
+    const nlohmann::json& json,
+    const char* field) {
+    const auto values = json.at(field).get<std::vector<float>>();
+    if (values.size() != Size) {
+        throw std::runtime_error(std::string(field) + " has invalid length");
+    }
+    std::array<float, Size> result{};
+    std::copy(values.begin(), values.end(), result.begin());
+    return result;
+}
+
+}  // namespace
+
+void loadShowcasePresetCatalog(const std::filesystem::path& path) {
+    std::ifstream input(path);
+    if (!input) {
+        throw std::runtime_error("Unable to open showcase look catalog: " + path.string());
+    }
+    const nlohmann::json root = nlohmann::json::parse(input);
+    if (root.at("schemaVersion").get<std::uint32_t>()
+            != kShowcasePresetVersion) {
+        throw std::runtime_error("Unsupported showcase look catalog schema");
+    }
+    std::vector<ShowcaseLook> loaded;
+    for (const auto& item : root.at("looks")) {
+        ShowcaseLook look;
+        look.name = item.at("name").get<std::string>();
+        const auto& grade = item.at("grade");
+        look.grade.exposureEv = grade.at("exposureEv").get<float>();
+        look.grade.saturation = grade.at("saturation").get<float>();
+        look.grade.contrast = grade.at("contrast").get<float>();
+        look.grade.tint = readFloatArray<3>(grade, "tint");
+        const auto& bloom = item.at("bloom");
+        look.bloom.threshold = bloom.at("threshold").get<float>();
+        look.bloom.strength = bloom.at("strength").get<float>();
+        const auto& outline = item.at("outline");
+        look.outline.strength = outline.at("strength").get<float>();
+        look.outline.color = readFloatArray<3>(outline, "color");
+        loaded.push_back(std::move(look));
+    }
+    if (loaded.size() != 5) {
+        throw std::runtime_error("Showcase look catalog must define five looks");
+    }
+    showcaseLooks() = std::move(loaded);
+}
 
 std::string_view blackholeQualityName(const BlackholeQuality quality) {
     switch (quality) {
@@ -55,25 +122,24 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 5) {
         settings.blackhole = {};
     }
+    if (sourceSchemaVersion < 6) {
+        settings.characterPresentation = {};
+    }
     validateRenderSettings(settings);
     return settings;
 }
 
 std::string_view showcasePresetName(const std::uint32_t preset) {
-    constexpr std::array<std::string_view, 5> kNames = {
-        "Azure Gallery",
-        "Endfield Industrial",
-        "Neutral Material Check",
-        "Specular Rim",
-        "Rear Emissive",
-    };
-    return preset < kNames.size() ? kNames[preset] : "Unknown";
+    const auto& looks = showcaseLooks();
+    return preset < looks.size() ? std::string_view(looks[preset].name)
+                                 : std::string_view("Unknown");
 }
 
 void applyShowcasePresetLook(
     RenderSettings& settings,
     const std::uint32_t preset) {
-    if (preset > 4) {
+    const auto& looks = showcaseLooks();
+    if (preset >= looks.size()) {
         throw std::invalid_argument("showcasePreset must be within 0 and 4");
     }
 
@@ -84,58 +150,9 @@ void applyShowcasePresetLook(
     settings.grade.toneMappingEnabled = true;
     settings.bloom.enabled = true;
 
-    switch (preset) {
-    case 0:
-        settings.grade.exposureEv = 0.0F;
-        settings.grade.saturation = 1.0F;
-        settings.grade.contrast = 1.0F;
-        settings.grade.tint = {1.0F, 1.0F, 1.0F};
-        settings.bloom.threshold = 1.05F;
-        settings.bloom.strength = 0.16F;
-        settings.outline.strength = 0.40F;
-        settings.outline.color = {0.008F, 0.013F, 0.022F};
-        break;
-    case 1:
-        settings.grade.exposureEv = -0.15F;
-        settings.grade.saturation = 0.88F;
-        settings.grade.contrast = 1.10F;
-        settings.grade.tint = {0.96F, 1.00F, 1.03F};
-        settings.bloom.threshold = 1.15F;
-        settings.bloom.strength = 0.10F;
-        settings.outline.strength = 0.46F;
-        settings.outline.color = {0.010F, 0.018F, 0.024F};
-        break;
-    case 2:
-        settings.grade.exposureEv = 0.0F;
-        settings.grade.saturation = 0.92F;
-        settings.grade.contrast = 1.0F;
-        settings.grade.tint = {1.0F, 1.0F, 1.0F};
-        settings.bloom.threshold = 1.35F;
-        settings.bloom.strength = 0.04F;
-        settings.outline.strength = 0.32F;
-        settings.outline.color = {0.012F, 0.014F, 0.018F};
-        break;
-    case 3:
-        settings.grade.exposureEv = -0.08F;
-        settings.grade.saturation = 0.94F;
-        settings.grade.contrast = 1.06F;
-        settings.grade.tint = {0.96F, 0.99F, 1.05F};
-        settings.bloom.threshold = 1.0F;
-        settings.bloom.strength = 0.13F;
-        settings.outline.strength = 0.38F;
-        settings.outline.color = {0.008F, 0.012F, 0.022F};
-        break;
-    case 4:
-        settings.grade.exposureEv = -0.28F;
-        settings.grade.saturation = 0.90F;
-        settings.grade.contrast = 1.12F;
-        settings.grade.tint = {1.04F, 0.98F, 0.94F};
-        settings.bloom.threshold = 0.85F;
-        settings.bloom.strength = 0.18F;
-        settings.outline.strength = 0.48F;
-        settings.outline.color = {0.006F, 0.008F, 0.012F};
-        break;
-    }
+    settings.grade = looks[preset].grade;
+    settings.bloom = looks[preset].bloom;
+    settings.outline = looks[preset].outline;
 }
 
 void validateRenderSettings(const RenderSettings& settings) {

@@ -16,12 +16,14 @@ int main() {
     std::ofstream(root / "assets_public/test_model.gltf") << "test";
     std::ofstream(root / "assets_public/toon_ramp_profiles.json") << "{}";
     std::ofstream(root / "assets_public/toon_ramp_atlas.ppm") << "P6";
+    std::ofstream(root / "assets_public/showcase_looks.json") << "{}";
 
     const azurerender::ResourceLocator locator(root);
     assert(locator.shaderDirectory() == std::filesystem::weakly_canonical(root / "shaders"));
     assert(locator.publicAsset("test_model.gltf")
            == std::filesystem::weakly_canonical(root / "assets_public/test_model.gltf"));
     assert(locator.rampProfile().filename() == "toon_ramp_profiles.json");
+    assert(locator.showcaseLooks().filename() == "showcase_looks.json");
     assert(locator.rampAtlas().filename() == "toon_ramp_atlas.ppm");
 
     bool missingReported = false;

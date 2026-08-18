@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "looks": [
+    {"name":"Azure Gallery","grade":{"exposureEv":0.0,"saturation":1.0,"contrast":1.0,"tint":[1.0,1.0,1.0]},"bloom":{"threshold":1.05,"strength":0.16},"outline":{"strength":0.40,"color":[0.008,0.013,0.022]}},
+    {"name":"Endfield Industrial","grade":{"exposureEv":-0.15,"saturation":0.88,"contrast":1.10,"tint":[0.96,1.0,1.03]},"bloom":{"threshold":1.15,"strength":0.10},"outline":{"strength":0.46,"color":[0.010,0.018,0.024]}},
+    {"name":"Neutral Material Check","grade":{"exposureEv":0.0,"saturation":0.92,"contrast":1.0,"tint":[1.0,1.0,1.0]},"bloom":{"threshold":1.35,"strength":0.04},"outline":{"strength":0.32,"color":[0.012,0.014,0.018]}},
+    {"name":"Specular Rim","grade":{"exposureEv":-0.08,"saturation":0.94,"contrast":1.06,"tint":[0.96,0.99,1.05]},"bloom":{"threshold":1.0,"strength":0.13},"outline":{"strength":0.38,"color":[0.008,0.012,0.022]}},
+    {"name":"Rear Emissive","grade":{"exposureEv":-0.28,"saturation":0.90,"contrast":1.12,"tint":[1.04,0.98,0.94]},"bloom":{"threshold":0.85,"strength":0.18},"outline":{"strength":0.48,"color":[0.006,0.008,0.012]}}
+  ]
+}

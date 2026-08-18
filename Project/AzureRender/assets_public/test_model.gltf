@@ -62,7 +62,16 @@
         "index": 2
       },
       "alphaMode": "MASK",
-      "alphaCutoff": 0.2
+      "alphaCutoff": 0.2,
+      "extras": {
+        "azureRenderMaterial": {
+          "schemaVersion": 1,
+          "class": "generic",
+          "features": ["neutral-fallback"],
+          "styleParameters": [1.0, 1.0, 1.0, 1.0],
+          "featureParameters": [1.0, 1.0, 1.0, 1.0]
+        }
+      }
     },
     {
       "name": "PublicTestMaterialB",
@@ -77,7 +86,16 @@
         "index": 2
       },
       "alphaMode": "BLEND",
-      "doubleSided": true
+      "doubleSided": true,
+      "extras": {
+        "azureRenderMaterial": {
+          "schemaVersion": 1,
+          "class": "generic",
+          "features": ["neutral-fallback"],
+          "styleParameters": [1.0, 1.0, 1.0, 1.0],
+          "featureParameters": [1.0, 1.0, 1.0, 1.0]
+        }
+      }
     }
   ],
   "textures": [
