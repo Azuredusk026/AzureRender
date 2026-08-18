@@ -8,8 +8,7 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "render/RenderContext.hpp"
-#include "scenes/BlackholeSceneRenderer.hpp"
-#include "scenes/CharacterSceneRenderer.hpp"
+#include "scenes/BuiltinRendererCatalog.hpp"
 #include "AzureRenderInternal.hpp"
 
 #include <stb_easy_font.h>
@@ -276,14 +275,11 @@ void AzureRenderApp::createSceneRenderer() {
     buildRenderContext(context);
     const std::string rendererId =
         azurerender::sceneTypeName(renderSettings_.sceneType);
-    azurerender::SceneRendererRegistry registry;
-    registry.registerFactory(
-        {"character", 1, {"geometry", "editor", "capture"}, {}},
-        [] { return std::make_unique<azurerender::CharacterSceneRenderer>(); });
-    registry.registerFactory(
-        {"blackhole", 1, {"fullscreen", "capture"}, {}},
-        [] { return std::make_unique<azurerender::BlackholeSceneRenderer>(); });
+    azurerender::SceneRendererRegistry registry =
+        azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);
+    azurerender::validateSceneRendererCapabilities(
+        sceneRenderer_->capabilities());
     sceneRenderer_->onLoad(context);
     azurerender::RuntimeDiagnostics::instance().print(
         "render",

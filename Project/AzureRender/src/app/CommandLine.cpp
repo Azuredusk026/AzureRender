@@ -33,7 +33,8 @@ constexpr const char* kUsage =
 constexpr const char* kHelp =
     "AzureRender 0.1 command-line reference\n\n"
     "Scenes:\n"
-    "  --scene-type character|blackhole   Select the renderer\n"
+    "  --scene-type character|blackhole|sample\n"
+    "                                      Select the renderer\n"
     "  --asset <gltf/glb>                  Character asset\n"
     "  --scene <azscene>                   Load a saved scene\n"
     "  --editor <azscene>                  Open the editor\n\n"
@@ -349,7 +350,7 @@ ParsedCommandLine parseCommandLine(
                 fail(
                     CommandLineErrorCode::InvalidValue,
                     argument,
-                    "--scene-type must be character or blackhole");
+                    "--scene-type must be character, blackhole or sample");
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);

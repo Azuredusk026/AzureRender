@@ -83,6 +83,11 @@ int main() {
         characterDefault.options.renderSettings.sceneType
             == azurerender::SceneType::Character,
         "Default scene type must be Character");
+    const auto sample = azurerender::parseCommandLine(
+        {"--scene-type", "sample", "--smoke-frames", "1"});
+    require(
+        sample.options.renderSettings.sceneType == azurerender::SceneType::Sample,
+        "Sample renderer must be selectable through the public CLI");
     expectError(
         CommandLineErrorCode::InvalidValue,
         "--scene-type",

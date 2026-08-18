@@ -4,6 +4,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -37,6 +38,15 @@ struct SceneRendererCapabilities {
     // Index 0 must be the Beauty (final composite) name.
     std::vector<std::string> diagnosticViewNames;
 };
+
+inline void validateSceneRendererCapabilities(
+    const SceneRendererCapabilities& capabilities) {
+    if (capabilities.diagnosticViewNames.empty()
+        || capabilities.diagnosticViewNames.front() != "Beauty") {
+        throw std::invalid_argument(
+            "Scene renderer diagnostic view 0 must be Beauty");
+    }
+}
 
 // Per-frame state the engine hands to every scene renderer. Scene-specific
 // simulation state (camera, animation, QA flags) is forwarded here so the

@@ -73,10 +73,35 @@ int main() {
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.sceneId = "atomic-save-test";
         document.save(scenePath);
+        {
+            std::ifstream saved(scenePath);
+            const std::string contents(
+                (std::istreambuf_iterator<char>(saved)),
+                std::istreambuf_iterator<char>());
+            assert(contents.find("renderSettingsVersion 4")
+                != std::string::npos);
+        }
         assert(std::filesystem::exists(scenePath));
         assert(loadedDocumentMatches(scenePath, document));
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
+    }
+
+    // 8. Settings migration rejects future schemas and defaults legacy
+    //    renderer selection without weakening current validation.
+    {
+        azurerender::RenderSettings settings;
+        settings.sceneType = azurerender::SceneType::Blackhole;
+        const auto migrated = azurerender::migrateRenderSettings(settings, 3);
+        assert(migrated.sceneType == azurerender::SceneType::Character);
+        bool rejected = false;
+        try {
+            (void)azurerender::migrateRenderSettings(
+                settings, azurerender::RenderSettings::kSchemaVersion + 1);
+        } catch (const std::invalid_argument&) {
+            rejected = true;
+        }
+        assert(rejected);
     }
 
     // 2. Re-saving over an existing file replaces it atomically and cleanly.

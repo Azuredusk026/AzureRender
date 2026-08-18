@@ -5,10 +5,11 @@
 
 ## 1. 系统定位
 
-AzureRender 是 C++17/Vulkan 1.3 桌面渲染器。公共核心提供 Vulkan 生命周期、HDR 合成、编辑器、诊断和确定性捕获；场景通过进程内 `ISceneRenderer` 插件边界接入。目前内置两个稳定场景 ID：
+AzureRender 是 C++17/Vulkan 1.3 桌面渲染器。公共核心提供 Vulkan 生命周期、HDR 合成、编辑器、诊断和确定性捕获；场景通过进程内 `ISceneRenderer` 插件边界接入。目前内置三个稳定场景 ID：
 
 - `character`：glTF 风格化角色渲染、材质、动画和展示预设。
 - `blackhole`：Schwarzschild 黑洞测地线追踪、时序累积和 HDR bloom。
+- `sample`：无私有 GPU 资源的最小 SDK 场景，用于验证扩展契约。
 
 正式论文实验、Android 和跨 DLL 插件 ABI 不属于当前产品能力。
 
@@ -32,7 +33,7 @@ Project/AzureRender/
     platform/          GLFW 前端
     render/            公共设置、context 与 Vulkan helper
     resources/         开发树/安装树资源定位
-    scenes/            Character 与 Blackhole 实现
+    scenes/            内置 catalog 与场景实现
   tests/               CPU 单元和契约测试
   tools/               发布、捕获、资产和验证工具
 ```
@@ -56,10 +57,10 @@ SceneRendererRegistry -- factory(stable scene id)
   |
   +--------------------------+
   |                          |
-CharacterSceneRenderer   BlackholeSceneRenderer
+CharacterSceneRenderer   BlackholeSceneRenderer   SampleSceneRenderer
 ```
 
-`AzureRenderApp` 只按稳定 ID 向注册表请求 renderer，不使用场景构造 `switch`。场景 renderer 可以有完全不同的 GPU 资源与 pass，但不能接管 swapchain 或 queue 生命周期。
+`BuiltinRendererCatalog` 集中登记内置 factory 与 shader feature；`AzureRenderApp` 只按稳定 ID 请求 renderer，不使用场景构造 `switch`。场景 renderer 可以有完全不同的 GPU 资源与 pass，但不能接管 swapchain 或 queue 生命周期。
 
 ## 4. 公共核心所有权
 

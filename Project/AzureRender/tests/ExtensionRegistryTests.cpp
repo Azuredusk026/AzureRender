@@ -25,11 +25,36 @@ public:
         caps.diagnosticViewNames = {"Beauty", "Photon Ring"};
         return caps;
     }
-    void onLoad(const azurerender::RenderContext&) override {}
-    void onSwapchainRecreate(const azurerender::RenderContext&) override {}
-    void updateFrame(const azurerender::SceneFrameData&) override {}
-    void recordScene(const azurerender::RenderContext&) override {}
-    void onUnload(const azurerender::RenderContext&) override {}
+    void onLoad(const azurerender::RenderContext&) override {
+        assert(!loaded_);
+        loaded_ = true;
+    }
+    void onSwapchainRecreate(const azurerender::RenderContext&) override {
+        assert(loaded_);
+        ++recreateCount_;
+    }
+    void updateFrame(const azurerender::SceneFrameData&) override {
+        assert(loaded_);
+        ++updateCount_;
+    }
+    void recordScene(const azurerender::RenderContext&) override {
+        assert(loaded_);
+        ++recordCount_;
+    }
+    void onUnload(const azurerender::RenderContext&) override {
+        assert(loaded_);
+        loaded_ = false;
+    }
+    [[nodiscard]] bool loaded() const noexcept { return loaded_; }
+    [[nodiscard]] int calls() const noexcept {
+        return recreateCount_ + updateCount_ + recordCount_;
+    }
+
+private:
+    bool loaded_ = false;
+    int recreateCount_ = 0;
+    int updateCount_ = 0;
+    int recordCount_ = 0;
 };
 
 }  // namespace
@@ -91,6 +116,30 @@ int main() {
     assert(scenes[0]->diagnosticViewName(0) == "Beauty");
     assert(scenes[0]->diagnosticViewName(1) == "Photon Ring");
     assert(scenes[0]->diagnosticViewName(99) == "Unknown");
+    azurerender::validateSceneRendererCapabilities(
+        scenes[0]->capabilities());
+    bool invalidCapabilitiesFailed = false;
+    try {
+        azurerender::SceneRendererCapabilities invalid;
+        invalid.diagnosticViewNames = {"Normals"};
+        azurerender::validateSceneRendererCapabilities(invalid);
+    } catch (const std::invalid_argument&) {
+        invalidCapabilitiesFailed = true;
+    }
+    assert(invalidCapabilitiesFailed);
+    auto lifecycle = sceneRegistry.create("scene.character");
+    auto* lifecycleScene = dynamic_cast<TestSceneRenderer*>(lifecycle.get());
+    assert(lifecycleScene != nullptr);
+    azurerender::RenderContext context;
+    azurerender::SceneFrameData frame;
+    lifecycle->onLoad(context);
+    lifecycle->onSwapchainRecreate(context);
+    lifecycle->updateFrame(frame);
+    lifecycle->recordScene(context);
+    assert(lifecycleScene->loaded());
+    assert(lifecycleScene->calls() == 3);
+    lifecycle->onUnload(context);
+    assert(!lifecycleScene->loaded());
     bool missingSceneFailed = false;
     try {
         (void)sceneRegistry.create("scene.missing");

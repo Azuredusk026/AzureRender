@@ -35,6 +35,7 @@ bool readBool(std::istream& input, const char* name) {
 void writeDocument(std::ostream& output, const SceneDocument& document) {
     output << "AzureRender Scene v1\n"
            << "schemaVersion " << SceneDocument::kSchemaVersion << '\n'
+           << "renderSettingsVersion " << RenderSettings::kSchemaVersion << '\n'
            << "sceneId " << std::quoted(document.sceneId) << '\n'
            << "resourceCount " << document.resources.size() << '\n';
     for (const SceneResource& resource : document.resources) {
@@ -90,7 +91,17 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         || schemaVersion != kSchemaVersion) {
         throw std::runtime_error("Unsupported .azscene schemaVersion");
     }
-    if (!(input >> key >> std::quoted(document.sceneId)) || key != "sceneId") {
+    std::uint32_t renderSettingsVersion = 1;
+    if (!(input >> key)) {
+        throw std::runtime_error("Missing .azscene sceneId");
+    }
+    if (key == "renderSettingsVersion") {
+        if (!(input >> renderSettingsVersion >> key)) {
+            throw std::runtime_error(
+                "Invalid .azscene renderSettingsVersion");
+        }
+    }
+    if (key != "sceneId" || !(input >> std::quoted(document.sceneId))) {
         throw std::runtime_error("Missing .azscene sceneId");
     }
     if (!(input >> key >> resourceCount) || key != "resourceCount") {
@@ -166,7 +177,8 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         throw std::runtime_error(
             "Invalid .azscene trailing field: " + key);
     }
-    validateRenderSettings(document.renderSettings);
+    document.renderSettings = migrateRenderSettings(
+        document.renderSettings, renderSettingsVersion);
     return document;
 }
 

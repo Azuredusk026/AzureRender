@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-08-18
-> 当前状态：P0/P1/P2、R1 已完成；R2 为当前阶段。
+> 当前状态：P0/P1/P2、R1/R2 已完成；R3 为当前阶段。
 
 本文是未来开发的唯一队列。它描述优先级和准入条件，不把尚未实现的内容写成当前能力。
 
@@ -31,7 +31,7 @@
 
 ### R2：Renderer SDK 可用性
 
-状态：`Active`。
+状态：`Complete`（2026-08-18）。
 
 - 提取内置 renderer 注册表和示例模板。
 - 为 `RenderContext`、capabilities、生命周期和资源所有权增加契约测试。
@@ -41,9 +41,11 @@
 
 验收：新增示例场景不修改公共帧主循环；卸载、resize、capture 和另两个场景回归全部通过。
 
+结果：内置 factory 与 shader feature 已集中到 catalog；新增无工业美术含义的 `sample` renderer；capabilities/lifecycle/registry/settings migration 契约已自动化。Debug/Release 12/12 CTest 通过，三个 renderer 各完成 120 帧实机回归。
+
 ### R3：黑洞质量与自动化
 
-状态：`Candidate`。
+状态：`Active`。
 
 - 评估自适应积分或更高阶积分器，控制性能与轨迹误差。
 - 增加可配置相机、黑洞质量/自旋扩展研究和质量档位。

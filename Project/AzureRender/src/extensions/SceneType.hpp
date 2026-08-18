@@ -14,7 +14,8 @@ namespace azurerender {
 enum class SceneType : std::uint32_t {
     Character = 0,
     Blackhole = 1,
-    Count = 2,
+    Sample = 2,
+    Count = 3,
 };
 
 // Converts a CLI/scene document scene-type name into the enum. Unknown names
@@ -27,9 +28,12 @@ enum class SceneType : std::uint32_t {
     if (name == "blackhole") {
         return SceneType::Blackhole;
     }
+    if (name == "sample") {
+        return SceneType::Sample;
+    }
     throw std::invalid_argument(
         "Unknown scene type: " + name
-        + " (accepted: character, blackhole)");
+        + " (accepted: character, blackhole, sample)");
 }
 
 [[nodiscard]] inline const char* sceneTypeName(const SceneType type) noexcept {
@@ -38,6 +42,8 @@ enum class SceneType : std::uint32_t {
         return "character";
     case SceneType::Blackhole:
         return "blackhole";
+    case SceneType::Sample:
+        return "sample";
     default:
         return "unknown";
     }

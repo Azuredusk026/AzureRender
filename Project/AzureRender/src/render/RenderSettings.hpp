@@ -83,6 +83,9 @@ struct RenderSettings {
 };
 
 void validateRenderSettings(const RenderSettings& settings);
+[[nodiscard]] RenderSettings migrateRenderSettings(
+    RenderSettings settings,
+    std::uint32_t sourceSchemaVersion);
 
 [[nodiscard]] std::string_view showcasePresetName(std::uint32_t preset);
 void applyShowcasePresetLook(

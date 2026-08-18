@@ -6,6 +6,20 @@
 
 namespace azurerender {
 
+RenderSettings migrateRenderSettings(
+    RenderSettings settings,
+    const std::uint32_t sourceSchemaVersion) {
+    if (sourceSchemaVersion == 0
+        || sourceSchemaVersion > RenderSettings::kSchemaVersion) {
+        throw std::invalid_argument("Unsupported RenderSettings schema version");
+    }
+    if (sourceSchemaVersion < 4) {
+        settings.sceneType = SceneType::Character;
+    }
+    validateRenderSettings(settings);
+    return settings;
+}
+
 std::string_view showcasePresetName(const std::uint32_t preset) {
     constexpr std::array<std::string_view, 5> kNames = {
         "Azure Gallery",

@@ -158,6 +158,10 @@ add_executable(
     src/scenes/CharacterSceneRenderer.hpp
     src/scenes/BlackholeSceneRenderer.cpp
     src/scenes/BlackholeSceneRenderer.hpp
+    src/scenes/BuiltinRendererCatalog.cpp
+    src/scenes/BuiltinRendererCatalog.hpp
+    src/scenes/SampleSceneRenderer.cpp
+    src/scenes/SampleSceneRenderer.hpp
 )
 
 add_dependencies(AzureRender AzureRenderShaders)
@@ -408,6 +412,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/README_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/ARCHITECTURE_CN.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/RENDERER_SDK_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/USER_GUIDE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_ROADMAP_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_GUIDE_CN.md"
