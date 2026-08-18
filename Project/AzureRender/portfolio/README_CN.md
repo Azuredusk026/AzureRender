@@ -1,85 +1,48 @@
-# AzureRender 作品集交付索引
+# AzureRender 作品集交付
 
-项目：AzureRender - Stylized Vulkan Character Renderer  
-作者：Wu Chenfeng  
-当前里程碑：S34
+本目录保存可公开展示的封面、技术联系表和机器可读清单。大型视频与本地 capture 不纳入版本控制；发布前应由 `portfolio_manifest.json` 校验实际交付文件。
 
-这是投递和面试展示的统一入口。交付包不重复复制大型视频，而是引用
-`captures/` 中经过验证的最终文件；`portfolio_manifest.json` 记录路径、
-文件大小、SHA-256、技术视频章节和 Release GPU Timing 摘要。
+## 展示顺序
 
-## 建议展示顺序
+1. `images/azurerender_cover_1920x1080.png`：项目名称与角色 Beauty。
+2. 角色 Beauty 视频：展示材质、GPU skinning、动画和固定环绕镜头。
+3. 技术拆解视频：依次说明 World Normal、Internal Outline、Shadow Map 与 GPU HUD。
+4. `images/technical_contact_sheet_1920x1080.png`：静态技术总览。
+5. 黑洞场景：展示可插拔 `ISceneRenderer` 架构和 GPU 测地线追踪。
+6. GPU timing JSON：说明测量范围，不把 pass 合计误称为完整帧时间。
 
-1. 先展示 `images/azurerender_cover_1920x1080.png`，用一句话说明这是自主
-   开发的 Vulkan 风格化角色渲染器。
-2. 播放纯 Beauty 视频
-   `../captures/Afterglow_S28_Portfolio_1080p60_20s.mp4`，重点展示最终画面、
-   GPU 蒙皮、Idle 动画和确定性环绕镜头。
-3. 播放技术拆解视频
-   `../captures/Afterglow_S33_TechnicalTitles_1080p60_20s.mp4`，依次解释
-   World Normal、Internal Outline、Shadow Map 与实时 GPU HUD。
-4. 展示 `images/technical_contact_sheet_1920x1080.png`，用于静态项目页或
-   面试中快速回顾五个渲染视图。
-5. 最后引用 `../captures/s29_gpu_timing_release_1080p.json`，说明 GPU
-   Timestamp 的测量边界和 1080p Release 数据。
+## 项目说明
 
-## 一句话项目说明
+AzureRender 是自主开发的 C++17/Vulkan 实时渲染器。角色路径支持 glTF、多材质、GPU skinning、动画、HDR IBL、风格化光照、Shadow Map、几何与屏幕空间描边，以及确定性捕获。公共 renderer core 还可以挂载独立场景渲染器；黑洞场景以 fullscreen shader 实现测地线追踪和体积吸积盘。
 
-AzureRender 是一个面向风格化角色展示的 Vulkan Renderer，支持 glTF
-材质、GPU 蒙皮与动画、方向光 Shadow Map、倒壳外轮廓、深度/法线内部描边、
-分层风格化光照、运行时 GPU Timing HUD，以及确定性的 1080p60 视频捕获。
+## 可讲述的技术点
 
-## 技术亮点
+- Vulkan 显式资源生命周期、同步和多 pass 架构。
+- `ISceneRenderer` 把公共渲染设施与场景专属 pipeline 分离。
+- glTF 材质、skin、animation、morph 和透明排序。
+- HDR Scene Color、IBL、ACES fitted tone mapping。
+- Shadow、Main Scene、Post-process 和 HUD 的 GPU timestamp。
+- 固定时间步 PNG/capture manifest/视频编码交付链。
+- 编辑器 Viewport、拾取、Gizmo、Scene Graph 和 ECS 桥接。
 
-- Vulkan 多 Pass 渲染与显式同步；
-- glTF 多材质、法线、金属度/粗糙度、透明模式与双面材质；
-- Storage Buffer 驱动的 GPU Skinning；
-- 四秒循环 Idle Animation 与连续 Portfolio Orbit；
-- 2048×2048、Alpha-aware、3×3 PCF Directional Shadow Map；
-- 采样 Scene Depth 与 World Normal 的屏幕空间内部描边；
-- Renderer 原生文字 HUD、章节标题和淡入淡出；
-- Vulkan Timestamp Query 分别统计 Shadow、Main Scene 和 Outline；
-- 固定时间步 PNG 序列和 BT.709 H.264 输出。
+## 性能陈述规则
 
-## 已验证性能
+历史角色基准设备为 NVIDIA RTX 4060 Laptop GPU、1920x1080 Release。历史记录中的 Shadow/Main/Outline 合计只覆盖 GPU command buffer 内被 timestamp 包围的 pass，不包含 CPU、present、readback 或编码。
 
-测试设备：NVIDIA GeForce RTX 4060 Laptop GPU，1920×1080，Release，
-600 个 GPU Timestamp 样本。
+黑洞 BH-2.1 在 1800 steps、4 samples 配置下记录的 main scene 约为 14.1 ms。BH-2.2 完成后必须重新测量，不能沿用旧数字。
 
-- Shadow：0.189631 ms
-- Main Scene：0.620023 ms
-- Internal Outline：0.071526 ms
-- 三个 GPU Pass 合计：0.881180 ms
+## 资产声明
 
-这里的合计仅表示命令缓冲中的三个 GPU 渲染阶段，不包含 CPU 更新、
-Swapchain Present、截图 Readback 或 PNG/MP4 编码，不应描述为完整帧耗时。
-
-## 最终媒体
-
-- 纯 Beauty：`../captures/Afterglow_S28_Portfolio_1080p60_20s.mp4`
-- 技术拆解：`../captures/Afterglow_S33_TechnicalTitles_1080p60_20s.mp4`
-- 封面：`images/azurerender_cover_1920x1080.png`
-- 五章联系表：`images/technical_contact_sheet_1920x1080.png`
-- GPU Timing：`../captures/s29_gpu_timing_release_1080p.json`
-- 机器可读清单：`portfolio_manifest.json`
-
-## 资产与公开说明
-
-Renderer 源码、着色器、工具和程序化 Idle Animation 是本项目开发内容。
-角色模型和原始贴图用于非商业技术展示与学习，不应随公开源码仓库重新分发。
-公开仓库应保留 `assets_public/test_model.gltf` 作为可运行测试资产，并让私有
-角色 GLB、原始贴图和大型捕获序列继续由 `.gitignore` 排除。
+渲染器源码、shader、工具、公共测试资产和程序化动画属于本项目。`assets_private/` 中的角色模型与派生纹理只用于受控技术验证，不得随公开仓库或交付包重新分发。公开演示应明确区分自研渲染技术与第三方美术资产。
 
 ## 重新生成
-
-在项目根目录运行：
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass `
   -File .\tools\build_portfolio_package.ps1 `
-  -FfmpegExecutable `
-  "C:\tmp\afterglow_ffmpeg_812\ffmpeg-8.1.2-essentials_build\bin\ffmpeg.exe"
+  -FfmpegExecutable "C:\path\to\ffmpeg.exe"
 ```
 
-脚本会验证所有源文件、重新生成封面和联系表，并刷新包含 SHA-256 的
-`portfolio_manifest.json`。
+脚本验证源文件并刷新 `portfolio_manifest.json`。生成前先检查 manifest 中引用的 capture 文件确实存在，并确认输出不包含私有资产。
+
+当前工程状态和发布规则分别见 `../docs/PROJECT_OVERVIEW_CN.md` 与 `../docs/RELEASE_AND_ACCEPTANCE_CN.md`。

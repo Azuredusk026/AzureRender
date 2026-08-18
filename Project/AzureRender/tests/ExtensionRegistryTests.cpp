@@ -83,11 +83,20 @@ int main() {
         {"scene.character", 1, {"render"}, {}},
         [] { return std::make_unique<TestSceneRenderer>(); });
     assert(sceneRegistry.contains("scene.character"));
+    const auto selectedScene = sceneRegistry.create("scene.character");
+    assert(selectedScene->name() == "test-scene");
     const auto scenes = sceneRegistry.createAll();
     assert(scenes.size() == 1);
     assert(scenes[0]->name() == "test-scene");
     assert(scenes[0]->diagnosticViewName(0) == "Beauty");
     assert(scenes[0]->diagnosticViewName(1) == "Photon Ring");
     assert(scenes[0]->diagnosticViewName(99) == "Unknown");
+    bool missingSceneFailed = false;
+    try {
+        (void)sceneRegistry.create("scene.missing");
+    } catch (const std::runtime_error&) {
+        missingSceneFailed = true;
+    }
+    assert(missingSceneFailed);
     return 0;
 }

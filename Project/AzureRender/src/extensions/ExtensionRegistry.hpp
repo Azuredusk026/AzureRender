@@ -58,6 +58,21 @@ public:
     [[nodiscard]] bool contains(const std::string& id) const noexcept {
         return ids_.find(id) != ids_.end();
     }
+    [[nodiscard]] std::unique_ptr<Interface> create(
+        const std::string& id) const {
+        for (const auto& entry : entries_) {
+            if (entry.descriptor.id != id) {
+                continue;
+            }
+            auto instance = entry.factory();
+            if (instance == nullptr) {
+                throw std::runtime_error(
+                    "Extension factory returned null: " + id);
+            }
+            return instance;
+        }
+        throw std::runtime_error("Unknown extension ID: " + id);
+    }
     [[nodiscard]] std::vector<std::unique_ptr<Interface>> createAll() const {
         std::vector<std::unique_ptr<Interface>> instances;
         instances.reserve(entries_.size());

@@ -2,7 +2,7 @@
 """Build the detailed FYP development plan as a polished DOCX.
 
 The document is derived from:
-  - ../DMT2309242-WuChenfeng-Proposal.docx
+  - AzureRender/docs/archive/source-documents/DMT2309242-WuChenfeng-Proposal.docx
   - ../AfterglowRender (local source snapshot)
   - current Khronos Vulkan documentation
 """
@@ -29,7 +29,10 @@ from docx.shared import Inches, Pt, RGBColor, Twips
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "FYP_Development_Plan_v1.3.docx"
+SOURCE_DOCUMENTS = (
+    ROOT / "Project" / "AzureRender" / "docs" / "archive" / "source-documents"
+)
+OUTPUT = SOURCE_DOCUMENTS / "FYP_Development_Plan_v1.3.docx"
 QA_DIR = ROOT / "Project" / ".docx_qa"
 ARCHITECTURE_IMAGE = QA_DIR / "fyp_architecture.png"
 
@@ -781,7 +784,7 @@ def build_document():
     add_heading(doc, "2. 工作区与 AfterglowRender 评估", 1)
     add_heading(doc, "2.1 当前工作区基线", 2)
     baseline_rows = [
-        ("Proposal", "DMT2309242-WuChenfeng-Proposal.docx", "研究范围已明确；三路径、双平台、1000-frame 采样和核心指标已定义。"),
+        ("Proposal", "docs/archive/source-documents/DMT2309242-WuChenfeng-Proposal.docx", "研究范围已明确；三路径、双平台、1000-frame 采样和核心指标已定义。"),
         ("Starter app", "Project/MyVulkanApp", "仅有 GLFW window skeleton；Vulkan 初始化尚未实现。"),
         ("Learning source", "Project/Vulkan-Tutorial", "含 desktop、Android、profile、multi-object 等教程，可作为 API 查证与小样本来源。"),
         ("Reference renderer", "AfterglowRender", "MIT；约 438 cpp、438 headers、136 shader files；已有 render pass/subpass/input attachment 抽象。"),
@@ -1596,7 +1599,7 @@ def build_document():
     sources = [
         (
             "Project proposal",
-            "DMT2309242-WuChenfeng-Proposal.docx（workspace source of truth for research scope）",
+            "docs/archive/source-documents/DMT2309242-WuChenfeng-Proposal.docx（research scope archive）",
             None,
         ),
         (

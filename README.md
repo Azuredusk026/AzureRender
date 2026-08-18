@@ -1,30 +1,33 @@
 # AzureRender
 
-AzureRender is a C++17/Vulkan stylized character renderer and the implementation workspace for the FYP:
+AzureRender 是一个 C++17/Vulkan 实时渲染器，也是 FYP 研究项目的实现仓库。当前产品包含风格化角色渲染、编辑器、确定性捕获、GPU 诊断，以及可插拔场景渲染器和黑洞演示。
 
-> Comparative Evaluation of Vulkan Subpasses and Dynamic Rendering Local Read for Real-Time NPR Rendering
+## 从这里开始
 
-The active application is in [`Project/AzureRender`](Project/AzureRender). M2 and
-AR-1 through AR-5.1 are complete; AR-5.2 atomic scene saving is next in the RC1
-hardening queue. M3/SC and the Multi-pass/Subpass/DRLR benchmark remain
-deferred.
+1. [文档导航](Project/AzureRender/docs/README_CN.md)：先判断应该读哪一份文档。
+2. [项目概览](Project/AzureRender/docs/PROJECT_OVERVIEW_CN.md)：了解当前真实状态、架构和限制。
+3. [当前开发计划](Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)：唯一任务队列和验收标准。
+4. [开发指南](Project/AzureRender/docs/DEVELOPMENT_GUIDE_CN.md)：配置环境、构建和运行测试。
+5. [应用快速使用](Project/AzureRender/README.md)：运行命令、场景选择和常用控制。
 
-Start here:
+不要从归档日志中的“下一步”恢复开发。归档内容只用于追溯，当前任务始终以 `ACTIVE_DEVELOPMENT_PLAN_CN.md` 为准。
 
-- [`Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md`](Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md) — authoritative near-term queue, task exits and commit titles;
-- [`MASTER_DEVELOPMENT_PLAN_CN.md`](MASTER_DEVELOPMENT_PLAN_CN.md) — long-term research roadmap and dependencies;
-- [`Project/AzureRender/README.md`](Project/AzureRender/README.md) — build, run and controls;
-- [`Project/AzureRender/docs/PROJECT_HANDOFF_CN.md`](Project/AzureRender/docs/PROJECT_HANDOFF_CN.md) — actual engineering state and recovery entry;
-- [`DEVELOPMENT_ENVIRONMENT_CN.md`](DEVELOPMENT_ENVIRONMENT_CN.md) — pinned tools, dependencies and regression commands.
+## 仓库结构
 
-## Private asset notice
+```text
+Project/AzureRender/       主工程
+Project/Vulkan-Tutorial/   固定版本的上游参考子模块
+AfterglowRender/           可选本地参考，不属于主工程
+Project/AzureRender/docs/archive/source-documents/
+                          提案和早期规划原始材料
+```
 
-This private repository intentionally contains third-party test assets under `Project/AzureRender/assets_private`. Access must only be granted to trusted collaborators. Repository privacy does not replace the original asset license; do not publish, redistribute or change the repository to public without a separate license review.
-
-`Project/Vulkan-Tutorial` is a fixed-version Git submodule. `AfterglowRender/`
-is an optional local reference directory and is intentionally ignored by this
-repository. Clone the tracked workspace with:
+克隆时初始化子模块：
 
 ```powershell
 git clone --recurse-submodules https://github.com/Azuredusk026/AzureRender.git
 ```
+
+## 资产边界
+
+`Project/AzureRender/assets_private/` 包含不得公开分发的第三方测试资产。仓库保持私有并不替代原始许可；公开代码、发布包或作品集前必须单独检查资产授权。公共回归必须能够只依赖 `assets_public/` 完成。

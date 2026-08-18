@@ -3,6 +3,7 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "diagnostics/GpuCapabilityReport.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "extensions/ExtensionRegistry.hpp"
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
@@ -273,17 +274,16 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 void AzureRenderApp::createSceneRenderer() {
     azurerender::RenderContext context;
     buildRenderContext(context);
-    switch (renderSettings_.sceneType) {
-    case azurerender::SceneType::Blackhole:
-        sceneRenderer_ =
-            std::make_unique<azurerender::BlackholeSceneRenderer>();
-        break;
-    case azurerender::SceneType::Character:
-    default:
-        sceneRenderer_ =
-            std::make_unique<azurerender::CharacterSceneRenderer>();
-        break;
-    }
+    const std::string rendererId =
+        azurerender::sceneTypeName(renderSettings_.sceneType);
+    azurerender::SceneRendererRegistry registry;
+    registry.registerFactory(
+        {"character", 1, {"geometry", "editor", "capture"}, {}},
+        [] { return std::make_unique<azurerender::CharacterSceneRenderer>(); });
+    registry.registerFactory(
+        {"blackhole", 1, {"fullscreen", "capture"}, {}},
+        [] { return std::make_unique<azurerender::BlackholeSceneRenderer>(); });
+    sceneRenderer_ = registry.create(rendererId);
     sceneRenderer_->onLoad(context);
     azurerender::RuntimeDiagnostics::instance().print(
         "render",
