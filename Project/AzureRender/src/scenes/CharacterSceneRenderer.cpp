@@ -1704,8 +1704,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         0.12F,
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
-        {0.0F, 1.00F, 0.13F, 0.12F},
-        {1.0F, 0.98F, 0.12F, 0.28F},
+        {0.0F, 1.08F, 0.24F, 0.18F},
+        {1.0F, 1.12F, 0.30F, 0.32F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},

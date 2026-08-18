@@ -1,5 +1,13 @@
 # Character Look 与美术验收
 
+## 2026-08-18 视觉修正基线
+
+`Endfield Industrial` 背景已移除双层网格、粗横向分界和右侧灯柱，只保留中性渐变、主体 halo 与弱地面分界。该 preset 的角色补光和环境漫反射同步提高，暗色服装仍保持层次，但不得再压成无细节黑块。
+
+角色材质采用分类稳定规则：Skin/Face/Hair/Fabric/Eye 为 dielectric，packed 纹理中的异常 metallic 值会被分类上限钳制；只有 Metal 类保留完整金属响应。Skin 与 Face 另有 roughness 下限和镜面能量限制，避免肩部、胸口和面部出现白色塑料反光。Face SDF 使用头部局部 X 轴判断左右光照，并以柔和辅助权重参与 ramp；Hair KK 继续由 Hair class、`hair-anisotropy` 特征位、Hair Data 和参数强度共同启用；AO 由材质 `aoColor`、阴影区和 style mask 驱动，Face/Skin 使用较低权重，服装与头发保留完整权重。
+
+人工验收必须同时查看 beauty、albedo、hair-kk、shadow-tint 和 face-sdf 隔离图。beauty 中皮肤高光异常不能用修改 Base Color 掩盖，albedo 用于区分纹理亮斑与照明镜面。
+
 > 适用版本：RenderSettings v6 / Showcase Look v1
 
 ## 数据边界

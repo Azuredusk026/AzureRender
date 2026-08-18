@@ -1,5 +1,11 @@
 # Changelog
 
+## Character visual correction - 2026-08-18
+
+- Simplified the Endfield character backdrop by removing competing grids, the horizon bar, and the right-side light rail.
+- Added class-aware dielectric limits so skin, face, hair, fabric, and eye materials cannot inherit metallic values from incompatible packed textures.
+- Corrected Face SDF lateral lighting, raised the toon shadow floor, and made authored AO and dual-lobe hair KK highlights reliably visible.
+
 ## R5 - 2026-08-18
 
 - Added snapshot-based editor Undo/Redo with a bounded command history.

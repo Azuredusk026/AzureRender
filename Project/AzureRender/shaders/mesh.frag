@@ -195,6 +195,23 @@ void main() {
     float roughness = clamp(packedMaterial.g, 0.08, 1.0);
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
     float specularLevel = clamp(specularEmissive.a, 0.0, 1.0);
+    // Character surface classes use authored packed maps from several source
+    // conventions. Keep dielectric surfaces physically bounded while leaving
+    // the dedicated Metal class untouched.
+    if (material.materialClass == 1U || material.materialClass == 2U) {
+        metallic = min(metallic, 0.015);
+        roughness = max(roughness, material.materialClass == 2U ? 0.58 : 0.52);
+        specularLevel = min(specularLevel, material.materialClass == 2U ? 0.22 : 0.32);
+    } else if (material.materialClass == 3U) {
+        metallic = min(metallic, 0.04);
+        roughness = max(roughness, 0.32);
+        specularLevel = min(specularLevel, 0.46);
+    } else if (material.materialClass == 4U) {
+        metallic = min(metallic, 0.06);
+        roughness = max(roughness, 0.42);
+    } else if (material.materialClass == 6U) {
+        metallic = 0.0;
+    }
     vec3 lightDirection = normalize(vec3(0.48, 0.82, 0.32));
     vec3 fillDirection = normalize(vec3(-0.62, 0.34, -0.48));
     vec3 viewDirection = normalize(camera.cameraPosition.xyz - worldPosition);
@@ -209,6 +226,11 @@ void main() {
         shadowVisibility = 1.0;
     }
     float keyVisibility = mix(1.0, shadowVisibility, 0.72);
+    if (material.materialClass == 2U) {
+        keyVisibility = max(keyVisibility, 0.84);
+    } else if (material.materialClass == 1U) {
+        keyVisibility = max(keyVisibility, 0.58);
+    }
     vec3 keyColor = vec3(1.04, 0.98, 0.94);
     vec3 fillColor = vec3(0.58, 0.76, 1.0);
     vec3 rimColor = vec3(0.20, 0.34, 0.52);
@@ -246,7 +268,7 @@ void main() {
         vec3(0.18, 0.22, 0.26),
         roughness * roughness * 0.65);
     vec3 ambientDiffuse =
-        diffuseColor * (vec3(0.20) + environmentDiffuse * 0.48);
+        diffuseColor * (vec3(0.28) + environmentDiffuse * 0.54);
     float platformAmbientVisibility = mix(
         1.0,
         mix(0.44, 1.0, shadowVisibility),
@@ -279,7 +301,7 @@ void main() {
     float faceCoordinate = camera.faceSdfParameters.w > 0.5
         ? 1.0 - faceSdfSample.r
         : faceSdfSample.r;
-    float lateralLight = camera.faceLightDirection.y;
+    float lateralLight = camera.faceLightDirection.x;
     float frontLight = max(-camera.faceLightDirection.z, 0.0);
     float orientedCoordinate = lateralLight >= 0.0
         ? faceCoordinate
@@ -294,20 +316,20 @@ void main() {
         faceThreshold - camera.faceSdfParameters.z,
         faceThreshold + camera.faceSdfParameters.z,
         orientedCoordinate);
-    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a;
+    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.62;
     rampCoordinate = mix(
         rampCoordinate,
-        mix(0.20, 0.88, faceIllumination),
+        mix(0.74, 0.98, faceIllumination),
         faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
     float ambientRampVisibility = mix(
         1.0,
-        mix(0.30, 0.92, rampLuminance),
+        mix(0.48, 0.96, rampLuminance),
         toonWeight);
     ambientDiffuse *= ambientRampVisibility;
-    float diffuseScale = mix(0.55, 0.58, toonWeight);
+    float diffuseScale = mix(0.62, 0.68, toonWeight);
     vec3 directDiffuse =
         diffuseColor
         * (
@@ -324,16 +346,23 @@ void main() {
         max(shadowRegion, (1.0 - shadowVisibility) * 0.72)
         * shadowSystemWeight * material.styleParameters.y
         * materialFeatureEnabled(1U);
+    shadowWeight *= material.materialClass == 2U
+        ? 0.18
+        : (material.materialClass == 1U ? 0.48 : 1.0);
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
         material.lamShadowColor.a * shadowWeight * 0.58);
+    float aoClassWeight = material.materialClass == 2U
+        ? 0.10
+        : (material.materialClass == 1U ? 0.28 : 1.0);
     vec3 aoShadowTint = mix(
         vec3(1.0),
         material.aoColor.rgb,
         material.aoColor.a
-            * clamp(shadowWeight + styleMask * 0.34, 0.0, 1.0)
-            * 0.32);
+            * (0.10 + clamp(shadowWeight + styleMask * 0.42, 0.0, 1.0)
+                * 0.38)
+            * aoClassWeight);
     vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
         + directDiffuse * lamShadowTint * aoShadowTint;
     tintedDiffuse *= mix(
@@ -341,11 +370,17 @@ void main() {
         camera.faceSdfShadowColor.rgb,
         (1.0 - faceIllumination)
             * faceSdfWeight
-            * camera.faceSdfShadowColor.a);
+            * camera.faceSdfShadowColor.a
+            * 0.20);
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
         * keyVisibility * material.styleParameters.z;
     ambientSpecular *= material.styleParameters.z;
+    float dielectricSpecularWeight = material.materialClass == 1U
+        ? 0.05
+        : (material.materialClass == 2U ? 0.03 : 1.0);
+    ambientSpecular *= dielectricSpecularWeight;
+    directSpecular *= dielectricSpecularWeight;
     directSpecular *= mix(1.0, 1.30, styleMask * toonWeight);
     ambientSpecular *= mix(1.0, 1.12, styleMask * toonWeight);
     if (qaEffectMode == 5 && qaEffectDisabled) {
@@ -410,7 +445,7 @@ void main() {
         * mix(0.35, 1.0, highlightFacing)
         * max(diffuse, 0.18)
         * material.hairParameters.y
-        * 0.48
+        * 0.66
         * keyVisibility
         * hairActive
         * material.featureParameters.y
@@ -425,7 +460,7 @@ void main() {
         * mix(0.24, 0.70, highlightFacing)
         * max(diffuse, 0.12)
         * material.hairParameters.y
-        * 0.22
+        * 0.30
         * keyVisibility
         * hairActive
         * material.featureParameters.y

@@ -1,5 +1,19 @@
 # Character 场景本机展示
 
+## v2 视觉修正版
+
+本版修复背景双网格、右侧白色灯柱、整体曝光不足、皮肤错误金属反光、Face SDF 灰色面罩感，并保持 Toon Ramp、AO 与双带 Hair KK 高光稳定。截图来自 Debug Validation 捕获，用于本机私有资产视觉验收；发布构建使用相同 SPIR-V 与 RenderSettings。
+
+| 文件 | 机位 / 灯光 | SHA-256 |
+| --- | --- | --- |
+| `images/character_fullbody_endfield_v2_1920x1080.png` | full-body-front / stylized-key | `9EBFFDD5C8E6199D516E82D9DD95907E746D0D8756DE3390BF6479B948448DB7` |
+| `images/character_threequarter_endfield_v2_1920x1080.png` | face-three-quarter / stylized-key | `99E21F9C62A45628969C8177FE3B7611CD1EAF5CBA9B3001245EA7305334A8EF` |
+| `images/character_closeup_endfield_v2_1920x1080.png` | face-front / stylized-key | `EE2AD9F5D7D3B8F744D9DFBE4E96E1BE10476668CDE9B102D4D42C4A72F7D08D` |
+| `images/character_back_endfield_v2_1920x1080.png` | back-detail / rear-emissive | `B08267EFB5955B9BE64A62F934CDEB401BDCA9EFB7935544F439431E49462345` |
+| `images/character_material_neutral_v2_1920x1080.png` | face-three-quarter / neutral-material | `8F449CB582A52A8619F072FE52A4096A42B2C13BD97D1522C1FDB20534976026` |
+
+视频 `video/character_portfolio_orbit_endfield_v2_1280x720_60fps.mp4` 为 300 帧、60 fps、5.0 秒、H.264/yuv420p/BT.709，SHA-256 为 `422740FCFE9DE9BF3DDDA08F195B066FB789F938B4F5F637529385943F310886`。
+
 > 生成日期：2026-08-18
 > GPU：NVIDIA GeForce RTX 4060 Laptop GPU
 
