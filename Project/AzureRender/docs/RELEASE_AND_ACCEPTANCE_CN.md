@@ -84,7 +84,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 
 ## 6. 当前已知限制
 
-- 黑洞视觉输出依赖 GPU 截图验收，尚无离屏图像单元测试。
+- 黑洞已有确定性双 capture 像素比较；1920x1080 Cinematic High 的长 PNG readback 曾在 53/60 帧后停止推进，短捕获与正常渲染不受影响。
 - 正式 Android 支持尚未建立。
 - 动态插件 ABI 不属于 RC1。
 - 私有角色只能用于受控本地验证。

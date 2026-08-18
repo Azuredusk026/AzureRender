@@ -107,7 +107,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
 
 ## 6. 开发循环
 
-1. 阅读 `DEVELOPMENT_ROADMAP_CN.md`，确认唯一 `Ready/Active` 阶段。
+1. 阅读 `DEVELOPMENT_ROADMAP_CN.md`；若存在 `Ready/Active` 阶段，确认最多一个。当前 R1-R5 已完成，新增阶段必须先更新路线。
 2. 检查 `git status --short --branch`，保留用户已有修改。
 3. 先复现基线，再进行局部修改。
 4. 添加与风险相称的自动化测试。

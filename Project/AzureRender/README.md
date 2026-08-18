@@ -1,6 +1,6 @@
 # AzureRender 快速使用
 
-AzureRender 是 C++17/Vulkan 桌面渲染器和编辑器。项目当前支持 `character` 与 `blackhole` 两种场景渲染器、HDR Scene Color、风格化角色材质、编辑器、确定性捕获和 GPU timing。
+AzureRender 是 C++17/Vulkan 桌面渲染器和编辑器。项目当前内置 `character`、`blackhole` 与 SDK 验证用 `sample` 三种场景渲染器，并提供 HDR Scene Color、风格化角色材质、编辑器、确定性捕获和 GPU timing。
 
 完整说明见[当前架构](docs/ARCHITECTURE_CN.md)、[使用手册](docs/USER_GUIDE_CN.md)和[未来开发路线](docs/DEVELOPMENT_ROADMAP_CN.md)。本文件只保留最短构建与运行入口。
 

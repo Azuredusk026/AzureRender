@@ -16,7 +16,7 @@ test ! -f docs/ACTIVE_DEVELOPMENT_PLAN_CN.md
 test ! -f docs/PROJECT_OVERVIEW_CN.md
 
 rg -q 'R1：发布工程硬化' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q '状态：`Ready`' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'R1-R5 全部完成；当前没有 Active 阶段' docs/DEVELOPMENT_ROADMAP_CN.md
 rg -q '无限期 Deferred' docs/DEVELOPMENT_ROADMAP_CN.md
 rg -q 'SceneRendererRegistry' docs/ARCHITECTURE_CN.md
 rg -q 'captures/<scene>/' docs/USER_GUIDE_CN.md
