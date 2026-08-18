@@ -109,7 +109,7 @@ private:
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     std::string rampAtlasPath_;
-    std::string environmentPath_;
+    SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
     // Engine-owned shadow map sampled by the material descriptor sets.
     VkImageView shadowImageView_ = VK_NULL_HANDLE;

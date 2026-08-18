@@ -152,6 +152,8 @@ add_executable(
     src/render/RenderSettings.cpp
     src/render/RenderSettings.hpp
     src/render/RenderContext.hpp
+    src/render/EnvironmentAsset.cpp
+    src/render/EnvironmentAsset.hpp
     src/render/VulkanHelpers.cpp
     src/render/VulkanHelpers.hpp
     src/scenes/CharacterSceneRenderer.cpp

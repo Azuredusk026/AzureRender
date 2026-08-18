@@ -159,6 +159,19 @@ Timing 只表示被 timestamp 包围的 GPU pass，不等同于包含 CPU、pres
 
 ## 9. 资产边界
 
+## 场景环境
+
+`--environment` 可接收单张 `.hdr/.png/.jpg` 等距柱状图，也可接收一个六面目录。六面文件名必须以 `_Right`、`_Left`、`_Up`、`_Down`、`_Front`、`_Back` 结尾，扩展名可不同。示例：
+
+```powershell
+.\build\ninja-debug\AzureRender.exe `
+  --scene-type blackhole `
+  --environment D:\Assigment\temp\Space_Skybox `
+  --smoke-frames 120
+```
+
+本开发机未显式传参时，Character 自动选择 `EveningSkyHDRI007B_2K_TONEMAPPED.jpg`，Blackhole 自动选择 `Space_Skybox`。这些绝对路径只作为本机私有 QA 默认值，不属于发布契约。当前版本不能直接读取 EXR；需要保留动态范围时，应离线转换为 Radiance `.hdr` 后通过 `--environment` 指定。
+
 - `assets_public/` 可以用于 CI、发布和公开截图。
 - `assets_private/` 不得进入安装包、压缩包或 `portfolio/`。
 - `portfolio/` 只包含 manifest 列出的公共证据。

@@ -15,7 +15,7 @@ namespace {
 constexpr const char* kUsage =
     "Usage: AzureRender.exe [--help] [--asset <gltf/glb path>] [--version] "
     "[--check-resources] [--resource-root <directory>] "
-    "[--environment <hdr/png/jpg path>] "
+    "[--environment <hdr/png/jpg path or cubemap directory>] "
     "[--scene <azscene path>] [--create-scene <azscene path>] "
     "[--editor <azscene path>] [--smoke-frames <positive integer>] "
     "[--portfolio] [--width <pixels>] [--height <pixels>] "

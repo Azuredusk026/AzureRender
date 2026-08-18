@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include "render/EnvironmentAsset.hpp"
+
 // Defined in assets/GltfLoader.hpp (global namespace).
 struct LoadedAsset;
 
@@ -132,9 +134,9 @@ struct RenderContext {
     std::string assetPath;
     // Directory holding compiled .spv shaders for renderer pipelines.
     std::string shaderDirectory;
-    // Optional equirect environment (HDR) and toon-ramp atlas used by the
-    // character renderer; empty string means renderer defaults.
-    std::string environmentPath;
+    // Scene-independent environment source. Renderers may sample the shared
+    // equirectangular representation or provide their own GPU convolution.
+    SceneEnvironmentSource environment;
     std::string rampAtlasPath;
 
     // GPU timing hooks: the renderer writes timestamps 0..2 around its scene

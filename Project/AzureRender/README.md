@@ -98,7 +98,7 @@ GPU timing：
 |---|---|
 | `--scene-type character|blackhole` | 选择场景渲染器 |
 | `--asset <gltf/glb>` | 指定角色资产 |
-| `--environment <hdr/png/jpg>` | 指定环境贴图 |
+| `--environment <hdr/png/jpg/六面目录>` | 指定经纬环境贴图，或包含 `_Right/_Left/_Up/_Down/_Front/_Back` 的六面目录 |
 | `--scene <azscene>` | 加载场景 |
 | `--create-scene <azscene>` | 创建场景文件 |
 | `--editor <azscene>` | 启动编辑器 |

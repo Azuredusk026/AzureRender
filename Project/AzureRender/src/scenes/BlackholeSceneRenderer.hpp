@@ -2,6 +2,7 @@
 
 #include "extensions/ISceneRenderer.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/EnvironmentAsset.hpp"
 
 #include <array>
 #include <cstdint>
@@ -62,7 +63,15 @@ private:
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     std::string shaderDirectory_;
+    SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
+
+    struct GpuEnvironment {
+        VkImage image = VK_NULL_HANDLE;
+        VkDeviceMemory memory = VK_NULL_HANDLE;
+        VkImageView view = VK_NULL_HANDLE;
+        VkSampler sampler = VK_NULL_HANDLE;
+    } environment_;
 
     // Trace pass (writes the private ping-pong HDR texture).
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
@@ -125,6 +134,7 @@ private:
     float nearStepScale_ = 0.48F;
 
     void createUniformBuffers();
+    void createEnvironmentTexture();
     void createTraceResources(const RenderContext& context);
     void transitionInitialLayouts();
     void updateTemporalDescriptorSets();

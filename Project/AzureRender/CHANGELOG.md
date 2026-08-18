@@ -1,5 +1,12 @@
 # Changelog
 
+## Scene environments - 2026-08-18
+
+- Added a shared environment-source contract for pluggable scene renderers.
+- Added six-face cubemap directory decoding and bounded RGBA16F equirectangular conversion.
+- Connected the black-hole escape ray to the Space Skybox and the character renderer to the Evening Sky environment.
+- Kept private environment assets outside Git and release packages; no package was generated.
+
 ## Blackhole visual correction - 2026-08-18
 
 - Ported multiplicative cloud noise, spiral coordinates, dynamic thickness, and dust gaps from the local reference implementation.

@@ -28,6 +28,8 @@ layout(binding = 0) uniform BlackholeUniform {
     vec4 quality;          // nearStepScale, reserved...
 } ubo;
 
+layout(binding = 1) uniform sampler2D environmentTexture;
+
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 
@@ -165,9 +167,13 @@ vec3 starfieldColor(const vec3 direction, const float blueShift) {
         10.0);
     const vec3 galaxy = vec3(0.006, 0.009, 0.016)
         + vec3(0.012, 0.016, 0.026) * galacticBand;
+    const vec2 environmentUv = vec2(
+        atan(direction.z, direction.x) / (2.0 * kPi) + 0.5,
+        acos(clamp(direction.y, -1.0, 1.0)) / kPi);
+    const vec3 environment = texture(environmentTexture, environmentUv).rgb;
     const vec3 frequencyTint = mix(
         vec3(1.0), vec3(0.72, 0.88, 1.28), clamp(blueShift, 0.0, 1.0));
-    return (galaxy + starColor)
+    return (environment + galaxy * 0.35 + starColor * 0.20)
         * frequencyTint * (1.0 + 0.18 * clamp(blueShift, 0.0, 1.0));
 }
 

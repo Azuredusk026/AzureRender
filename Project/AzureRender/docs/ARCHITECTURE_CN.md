@@ -146,6 +146,14 @@ blackhole trace pass
 
 ## 10. 已知架构边界
 
+## 场景环境资源
+
+`RenderContext::environment` 只传递场景无关的 `SceneEnvironmentSource`。`render/EnvironmentAsset` 负责解码 HDR/PNG/JPG，以及识别包含 `_Right/_Left/_Up/_Down/_Front/_Back` 六张图的目录；六面资源在 CPU 侧转换成最大 2048×1024 的线性 RGBA16F 等距柱状图。Character 与 Blackhole 分别拥有自己的 Vulkan image、sampler 和 descriptor 生命周期，不共享或互相销毁 GPU handle。
+
+Blackhole 使用逃逸光线方向采样环境，因此天空也参与引力透镜偏折；Character 使用同一方向约定进行背景、漫反射和粗糙度 mip 采样。外部私有环境只用于本机视觉 QA，不进入 Git 和发布包；环境为空时两种 renderer 均保留程序 fallback。
+
+当前构建依赖 `stb_image`，支持 Radiance HDR、PNG 和 JPG，但不支持 OpenEXR。传入 `.exr` 会明确失败，不会按 LDR 静默读取。
+
 - 当前插件是进程内 C++ factory，不保证二进制 ABI。
 - 黑洞画面仍缺少离屏 GPU 图像自动化测试。
 - prefab 当前是持久化引用与实例覆盖契约，尚不包含跨文件展开器。

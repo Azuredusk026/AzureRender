@@ -315,7 +315,26 @@ void AzureRenderApp::buildRenderContext(
     context.shadowMapSize = kShadowMapSize;
     context.assetPath = resolvedAssetPath_;
     context.shaderDirectory = resourceLocator_.shaderDirectory().string();
-    context.environmentPath = runOptions_.environmentPath;
+    context.environment.path = runOptions_.environmentPath;
+    if (context.environment.path.empty()) {
+        const std::filesystem::path privateRoot("D:/Assigment/temp");
+        if (renderSettings_.sceneType == azurerender::SceneType::Blackhole) {
+            const auto candidate = privateRoot / "Space_Skybox";
+            if (std::filesystem::is_directory(candidate)) {
+                context.environment.path = candidate.string();
+                context.environment.projection =
+                    azurerender::EnvironmentProjection::CubeFaces;
+            }
+        } else if (renderSettings_.sceneType == azurerender::SceneType::Character) {
+            const auto candidate = privateRoot / "EveningSkyHDRI007B_2K"
+                / "EveningSkyHDRI007B_2K_TONEMAPPED.jpg";
+            if (std::filesystem::is_regular_file(candidate)) {
+                context.environment.path = candidate.string();
+                context.environment.projection =
+                    azurerender::EnvironmentProjection::Equirectangular;
+            }
+        }
+    }
     context.rampAtlasPath = resourceLocator_.rampAtlas().string();
     context.renderSettings = &renderSettings_;
 }
