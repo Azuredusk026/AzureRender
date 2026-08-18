@@ -9,9 +9,8 @@
 namespace azurerender {
 
 // The Schwarzschild black hole scene renderer: a per-pixel null-geodesic
-// tracer implemented as a fullscreen pass. It writes the engine HDR Scene
-// Color directly; the depth/normal attachments stay cleared (the renderer
-// has no geometry to depth-test against).
+// tracer implemented as fullscreen passes. A raw trace is accumulated into
+// ping-pong HDR history before being composited into engine Scene Color.
 class BlackholeSceneRenderer final : public ISceneRenderer {
 public:
     BlackholeSceneRenderer() = default;
@@ -52,7 +51,7 @@ private:
     struct TaaUniform {
         float blendWeight = 0.35F;
         float bloomThreshold = 1.2F;
-        float bloomIntensity = 0.55F;
+        float bloomIntensity = 0.30F;
         float renderWidth = 1280.0F;
     };
 
@@ -74,27 +73,43 @@ private:
     std::vector<VkDeviceMemory> uniformBufferMemories_;
     std::vector<void*> uniformBufferMapped_;
 
-    // Private full-screen HDR ping-pong textures for the tracer.
+    // Private full-screen HDR raw trace and accumulated history textures.
     VkRenderPass traceRenderPass_ = VK_NULL_HANDLE;
-    std::array<VkFramebuffer, 2> traceFramebuffers_{};
-    std::array<VkImage, 2> traceImages_{};
-    std::array<VkDeviceMemory, 2> traceImageMemories_{};
-    std::array<VkImageView, 2> traceImageViews_{};
+    VkFramebuffer traceFramebuffer_ = VK_NULL_HANDLE;
+    VkImage traceImage_ = VK_NULL_HANDLE;
+    VkDeviceMemory traceImageMemory_ = VK_NULL_HANDLE;
+    VkImageView traceImageView_ = VK_NULL_HANDLE;
+    std::array<VkFramebuffer, 2> historyFramebuffers_{};
+    std::array<VkImage, 2> historyImages_{};
+    std::array<VkDeviceMemory, 2> historyImageMemories_{};
+    std::array<VkImageView, 2> historyImageViews_{};
     VkSampler traceSampler_ = VK_NULL_HANDLE;
-    std::size_t tracePing_ = 0;
+    std::size_t historyWriteIndex_ = 0;
+    bool historyValid_ = false;
+    bool frameSeen_ = false;
+    bool captureActive_ = false;
+    std::uint64_t historyResetCount_ = 0;
+    float previousRotationAngle_ = 0.0F;
 
-    // TAA + bloom pass (reads the ping-pong textures, writes Scene Color).
+    // TAA + bloom pass (raw trace + previous history -> next history).
     VkDescriptorSetLayout taaDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool taaDescriptorPool_ = VK_NULL_HANDLE;
-    VkDescriptorSet taaDescriptorSet_ = VK_NULL_HANDLE;
+    std::array<VkDescriptorSet, kMaxFramesInFlight * 2> taaDescriptorSets_{};
     VkPipelineLayout taaPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline taaPipeline_ = VK_NULL_HANDLE;
     std::vector<VkBuffer> taaUniformBuffers_;
     std::vector<VkDeviceMemory> taaUniformBufferMemories_;
     std::vector<void*> taaUniformBufferMapped_;
 
+    // Final copy from accumulated history into engine Scene Color.
+    VkDescriptorSetLayout compositeDescriptorSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool compositeDescriptorPool_ = VK_NULL_HANDLE;
+    std::array<VkDescriptorSet, 2> compositeDescriptorSets_{};
+    VkPipelineLayout compositePipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline compositePipeline_ = VK_NULL_HANDLE;
+
     std::size_t currentFrame_ = 0;
-    std::array<float, 3> cameraPosition_{0.0F, 0.4F, 12.0F};
+    std::array<float, 3> cameraPosition_{0.0F, 4.0F, 24.0F};
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
     float aspect_ = 1.0F;
@@ -106,9 +121,13 @@ private:
     void createUniformBuffers();
     void createTraceResources(const RenderContext& context);
     void transitionInitialLayouts();
+    void updateTemporalDescriptorSets();
     void createTaaPipeline(const RenderContext& context);
+    void createCompositePipeline(const RenderContext& context);
     void createGraphicsPipeline(const RenderContext& context);
+    void destroySizeDependentResources();
     void destroyResources();
+    void invalidateHistory();
     void updateUniformBuffer();
     void updateTaaUniform();
 };

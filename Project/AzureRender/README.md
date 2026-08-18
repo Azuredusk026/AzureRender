@@ -39,6 +39,8 @@ cmake --build --preset ninja-release
 
 黑洞场景：
 
+该路径使用私有 raw trace、双 history TAA、受控 HDR bloom 和最终 Scene Color composite。
+
 ```powershell
 .\build\ninja-debug\AzureRender.exe --scene-type blackhole --smoke-frames 120
 ```

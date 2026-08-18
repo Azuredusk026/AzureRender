@@ -2,7 +2,7 @@
 
 > 计划版本：2026-08-18 P0-P2
 > 执行模式：Autonomous Implementation Mode
-> 当前阶段：P1 Active
+> 当前阶段：P2 Active
 > 本文件是任务顺序、范围和完成状态的唯一事实来源。
 
 ## 1. 产品方向
@@ -30,8 +30,8 @@ AzureRender 是面向多项目复用的可插拔 Vulkan 渲染器，而不是只
 | 顺序 | 阶段 | 状态 | 交付 |
 |---:|---|---|---|
 | 1 | P0 | Complete | 目录与文档规范化；应用实际通过 `SceneRendererRegistry` 创建场景；固定 P1/P2 验收 |
-| 2 | P1 | Active | 黑洞私有 trace/history、TAA、单 pass bloom、lensing、星空蓝移、确定性 Capture |
-| 3 | P2 | Ready | 终末地式角色展示预设、分层灯光/背景/地台/grade、公共资产与私有角色 QA |
+| 2 | P1 | Complete | 黑洞私有 trace/history、TAA、单 pass bloom、lensing、星空蓝移、确定性 Capture |
+| 3 | P2 | Active | 终末地式角色展示预设、分层灯光/背景/地台/grade、公共资产与私有角色 QA |
 
 ## 4. P0：架构与计划收口
 
@@ -58,7 +58,7 @@ AzureRender 是面向多项目复用的可插拔 Vulkan 渲染器，而不是只
 ### 必须完成
 
 1. 将 trace pipeline 绑定到私有单颜色附件 render pass。
-2. 两张 RGBA16F 图像分别承担 current trace 与 previous history，并按帧交换。
+2. 一张 RGBA16F raw trace 与两张 ping-pong history 分离职责，避免把原始上一帧误当累积历史。
 3. 每个 in-flight frame 使用独立 TAA descriptor set 和 UBO。
 4. 通过 subpass dependency/barrier 保证 color write -> fragment sample。
 5. 首帧、resize、场景加载和 capture 开始时清除或旁路无效 history。
@@ -77,6 +77,14 @@ AzureRender 是面向多项目复用的可插拔 Vulkan 渲染器，而不是只
 - 角色 S36 Beauty 哈希不变。
 - 记录相对 BH-2.1 约 14.1 ms main scene 基线的 GPU 成本。
 - Commit：`feat(p1): complete blackhole temporal rendering`
+
+### 完成证据（2026-08-18）
+
+- 修复全屏三角形 UV 重复缩放；公开 1280x720 输出不再出现离散四边形星块。
+- 两组 36 帧、60 fps 固定捕获逐帧 SHA-256 `36/36` 一致。
+- Debug Validation 180 帧无 VUID/warning/error；Debug/Release CTest 均为 `12/12`。
+- RTX 4060 Laptop GPU Debug timing：Main scene `12.885 ms`，Total `12.932 ms`；未回退于 BH-2.1 约 `14.1 ms` 基线。
+- 公共证据首帧 SHA-256：`E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C`。
 
 ## 6. P2：终末地式角色渲染美术
 

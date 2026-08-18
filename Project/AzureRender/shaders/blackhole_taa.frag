@@ -20,13 +20,28 @@ layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 
 void main() {
-    const float texel = 1.0 / max(ubo.renderWidth, 1.0);
-    const float aspect = textureSize(currentFrame, 0).x
-        / max(textureSize(currentFrame, 0).y, 1);
+    const ivec2 size = textureSize(currentFrame, 0);
+    const vec2 texelSize = 1.0 / max(vec2(size), vec2(1.0));
+    const float texel = texelSize.x;
+    const float aspect = float(size.x) / max(float(size.y), 1.0);
 
     const vec3 current = texture(currentFrame, screenUv).rgb;
-    const vec3 previous = texture(previousFrame, screenUv).rgb;
-    vec3 color = mix(previous, current, ubo.blendWeight);
+    vec3 neighborhoodMin = current;
+    vec3 neighborhoodMax = current;
+    const vec2 neighborhoodOffsets[4] = vec2[](
+        vec2(texelSize.x, 0.0), vec2(-texelSize.x, 0.0),
+        vec2(0.0, texelSize.y), vec2(0.0, -texelSize.y));
+    for (int index = 0; index < 4; ++index) {
+        const vec3 sampleColor = texture(
+            currentFrame, screenUv + neighborhoodOffsets[index]).rgb;
+        neighborhoodMin = min(neighborhoodMin, sampleColor);
+        neighborhoodMax = max(neighborhoodMax, sampleColor);
+    }
+    const vec3 previous = clamp(
+        texture(previousFrame, screenUv).rgb,
+        neighborhoodMin,
+        neighborhoodMax);
+    vec3 color = mix(previous, current, clamp(ubo.blendWeight, 0.0, 1.0));
 
     // Single-pass gaussian bloom: three rings around the bright core.
     const float threshold = max(ubo.bloomThreshold, 0.0);

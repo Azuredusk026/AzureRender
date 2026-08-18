@@ -15,9 +15,7 @@
 //  4. Volumetric accretion disk: Shape() radial density, Perlin fractal
 //     clouds, spiral inflow, temperature T^4, Doppler + gravitational
 //     redshift, blackbody color, alpha accumulation, step-length scaling.
-//  5. In-shader 2x supersampling (two jittered traces per pixel) as a
-//     cheap temporal-style denoise (TAA buffering lives in the renderer
-//     in later iterations).
+//  5. In-shader 2x2 supersampling plus renderer-owned temporal accumulation.
 
 layout(binding = 0) uniform BlackholeUniform {
     vec4 cameraPosition;   // xyz = camera position, w unused
@@ -122,46 +120,54 @@ float GetKeplerianAngularVelocity(const float radius, const float rs) {
 // Starfield (procedural background, sampled along the escaping ray)
 // ---------------------------------------------------------------------------
 
-float hash13(const vec3 position) {
-    vec3 value = fract(position * 0.1031);
-    value += dot(value, value.zyx + 31.32);
+float hash21(const vec2 position) {
+    vec3 value = fract(vec3(position.xyx) * vec3(0.1031, 0.1030, 0.0973));
+    value += dot(value, value.yzx + 33.33);
     return fract((value.x + value.y) * value.z);
 }
 
-vec3 starfieldColor(const vec3 direction) {
-    const float grid = 120.0;
-    const vec3 cellId = floor(direction * grid);
-    const float starThreshold = 0.997;
-    float brightness = 0.0;
+vec3 starfieldColor(const vec3 direction, const float blueShift) {
+    const vec2 grid = vec2(480.0, 240.0);
+    const vec2 sphericalUv = vec2(
+        atan(direction.z, direction.x) / (2.0 * kPi) + 0.5,
+        asin(clamp(direction.y, -1.0, 1.0)) / kPi + 0.5);
+    const vec2 gridPosition = sphericalUv * grid;
+    const vec2 baseCell = floor(gridPosition);
+    const vec2 cellFraction = fract(gridPosition);
     vec3 starColor = vec3(0.0);
-    for (int dx = -1; dx <= 1; ++dx) {
-        for (int dy = -1; dy <= 1; ++dy) {
-            for (int dz = -1; dz <= 1; ++dz) {
-                const vec3 cell = cellId + vec3(dx, dy, dz);
-                const float seed = hash13(cell);
-                if (seed < starThreshold) {
-                    continue;
-                }
-                const vec3 offset = vec3(
-                    hash13(cell + 7.31),
-                    hash13(cell + 13.73),
-                    hash13(cell + 29.17)) - 0.5;
-                const vec3 starDirection = normalize(cell + offset);
-                const float alignment = max(dot(direction, starDirection), 0.0);
-                const float spike = pow(alignment, 4500.0);
-                const float temperature = hash13(cell + 3.7);
-                const vec3 tint = mix(
-                    vec3(0.65, 0.78, 1.0),
-                    vec3(1.0, 0.92, 0.74),
-                    temperature);
-                const float magnitude = 0.6 + 1.2 * hash13(cell + 17.9);
-                brightness += spike * magnitude;
-                starColor += tint * spike * magnitude;
+    for (int y = -1; y <= 1; ++y) {
+        for (int x = -1; x <= 1; ++x) {
+            const vec2 neighbor = vec2(x, y);
+            vec2 cell = baseCell + neighbor;
+            cell.x = mod(cell.x + grid.x, grid.x);
+            cell.y = clamp(cell.y, 0.0, grid.y - 1.0);
+            const float seed = hash21(cell);
+            if (seed < 0.978) {
+                continue;
             }
+            const vec2 point = vec2(
+                hash21(cell + vec2(7.31, 13.73)),
+                hash21(cell + vec2(29.17, 3.70)));
+            const vec2 delta = neighbor + point - cellFraction;
+            const float core = exp(-110.0 * dot(delta, delta));
+            const float temperature = hash21(cell + vec2(17.9, 5.3));
+            const vec3 tint = mix(
+                vec3(0.62, 0.78, 1.0),
+                vec3(1.0, 0.88, 0.68),
+                temperature);
+            const float magnitude = 0.8 + 2.2 * seed;
+            starColor += tint * core * magnitude;
         }
     }
-    const vec3 galaxy = vec3(0.012, 0.016, 0.024);
-    return galaxy + starColor * 1.5 + vec3(brightness) * 0.06;
+    const float galacticBand = pow(
+        max(0.0, 1.0 - abs(dot(direction, normalize(vec3(0.2, 0.9, 0.38))))),
+        10.0);
+    const vec3 galaxy = vec3(0.006, 0.009, 0.016)
+        + vec3(0.012, 0.016, 0.026) * galacticBand;
+    const vec3 frequencyTint = mix(
+        vec3(1.0), vec3(0.72, 0.88, 1.28), clamp(blueShift, 0.0, 1.0));
+    return (galaxy + starColor)
+        * frequencyTint * (1.0 + 0.18 * clamp(blueShift, 0.0, 1.0));
 }
 
 // ---------------------------------------------------------------------------
@@ -182,90 +188,58 @@ vec4 sampleDisk(
     const float peakT4,
     const float shiftMax,
     const float time) {
-    const vec3 posOnDisk = rayPosition;
-    const float posR = length(posOnDisk.xz);
-    const float posY = posOnDisk.y;
-    const float lastY = lastRayPosition.y;
-
-    // Interpolate the exact equatorial crossing point.
-    if (lastY * posY >= 0.0) {
+    const float radius = length(rayPosition.xz);
+    if (radius <= diskInner || radius >= diskOuter) {
         return vec4(0.0);
     }
-    vec3 hitPosition = (-posOnDisk * lastY + lastRayPosition * posY) / (posY - lastY);
-    hitPosition += min(thin, length(hitPosition - lastRayPosition)) * rayDirection *
-                   (-1.0 + 2.0 * RandomStep(1.0e10 * posOnDisk.zx, time));
-
-    const float hitR = length(hitPosition.xz);
-    const float hitY = hitPosition.y;
-    if (abs(hitY) >= thin || hitR >= diskOuter || hitR <= diskInner) {
+    const float radialPosition =
+        (radius - diskInner) / max(diskOuter - diskInner, 1.0e-4);
+    const float diskThickness = thin * mix(0.3, 1.2, radialPosition);
+    if (abs(rayPosition.y) >= diskThickness) {
         return vec4(0.0);
     }
-
-    // Effective radial coordinate (density peaks near inner edge).
-    float effectiveRadius = 1.0 - ((hitR - diskInner) / (diskOuter - diskInner) * 0.5);
-    if ((diskOuter - diskInner) > 9.0 * rs) {
-        if (hitR < 5.0 * rs + diskInner) {
-            effectiveRadius = 1.0 - ((hitR - diskInner) / (9.0 * rs) * 0.5);
-        } else {
-            effectiveRadius = 1.0 - (0.5 / 0.9 * 0.5 + ((hitR - diskInner) / (diskOuter - diskInner) -
-                              5.0 * rs / (diskOuter - diskInner)) / (1.0 - 5.0 * rs / (diskOuter - diskInner)) * 0.5);
-        }
-    }
-
-    const float density = Shape(effectiveRadius, 4.0, 0.9);
-    if (abs(hitY) >= thin * density) {
-        return vec4(0.0);
-    }
-
-    // Keplerian velocity of the disk material at the hit point.
-    const float angularVelocity = GetKeplerianAngularVelocity(hitR, rs);
-    const vec3 cloudVelocity =
-        angularVelocity * cross(vec3(0.0, 1.0, 0.0), hitPosition);
-    const float relativeVelocity = dot(-rayDirection, cloudVelocity);
-    const float doppler = sqrt(max((1.0 + relativeVelocity) / (1.0 - relativeVelocity), 1.0e-6));
+    const float innerFade = smoothstep(0.0, 0.06, radialPosition);
+    const float outerFade = 1.0 - smoothstep(0.88, 1.0, radialPosition);
+    const float verticalDensity = exp(
+        -1.5 * rayPosition.y * rayPosition.y
+        / max(diskThickness * diskThickness, 1.0e-5));
+    const float theta = atan(rayPosition.z, rayPosition.x);
+    const vec3 noisePosition = vec3(
+        radius * 0.55,
+        theta * 1.8 - time * 0.18,
+        rayPosition.y * 3.0);
+    const float cloudNoise = clamp(
+        0.62
+        + 0.25 * PerlinNoise(noisePosition)
+        + 0.13 * PerlinNoise(noisePosition * 2.7 + vec3(4.7)),
+        0.12,
+        1.0);
+    const float spiral = 0.78 + 0.22 * sin(
+        theta * 6.0 - time * 0.55 + radius * 2.1
+        + 1.5 * PerlinNoise(noisePosition * 0.7));
+    const float density = innerFade * outerFade * verticalDensity
+        * cloudNoise * spiral;
+    const float angularVelocity = GetKeplerianAngularVelocity(radius, rs);
+    const vec3 cloudVelocity = angularVelocity
+        * cross(vec3(0.0, 1.0, 0.0), rayPosition);
+    const float relativeVelocity = clamp(
+        dot(-rayDirection, cloudVelocity), -0.72, 0.72);
+    const float doppler = sqrt(
+        max((1.0 + relativeVelocity) / (1.0 - relativeVelocity), 1.0e-5));
     const float cameraR = length(ubo.cameraPosition.xyz);
-    const float redshift =
-        doppler * sqrt(max(1.0 - rs / hitR, 1.0e-6)) /
+    const float redshift = sqrt(max(1.0 - rs / radius, 1.0e-6)) /
         sqrt(max(1.0 - rs / max(cameraR, 1.001 * rs), 1.0e-6));
-
-    // Disk temperature (standard thin disk, T^4 ~ Mdot/r^3).
-    float diskTemperature = pow(
-        diskA * pow(max(rs / hitR, 0.10), 3.0) * max(1.0 - sqrt(diskInner / hitR), 1.0e-6),
-        0.25);
-    // Redshift shifts the blackbody temperature.
-    if (diskTemperature > 1000.0) {
-        diskTemperature = max(1000.0, diskTemperature * redshift * doppler * doppler);
-    }
-    diskTemperature = min(100000.0, diskTemperature);
-
-    // Spiral-in angle of the disk material at this radius.
-    const float spiralTheta =
-        12.0 * 2.0 / sqrt(3.0) * atan(sqrt(max(0.6666666 * (hitR / rs) - 1.0, 0.0)));
-    const float theta = Vec2ToTheta(hitPosition.zx, vec2(cos(spiralTheta), sin(spiralTheta)));
-    // Rotating radius coordinate drives the cloud texture over time.
-    const float rotPosR = hitR / rs + time * 0.05;
-    const float thick = thin * density * (0.4 + 0.6 * SoftSaturate(
-        GenerateAccretionDiskNoise(vec3(1.5 * theta, rotPosR, 1.0), 1, 3, 80.0)));
-    const float verticalMix = max(0.0, 1.0 - abs(hitY) / max(thick, 1.0e-4));
-
-    const float cloudDetail = GenerateAccretionDiskNoise(
-        vec3(1.0 * rotPosR, 1.0 * hitY / min(rs, thin / 0.1), 0.5 * theta), 3, 6, 80.0);
-    vec3 cloudColor = vec3(cloudDetail) * density * 1.4 * (0.2 + 0.8 * verticalMix +
-        (0.8 - 0.8 * verticalMix) * GenerateAccretionDiskNoise(
-            vec3(rotPosR, 1.5 * theta, hitY / min(rs, thin / 0.1)), 1, 3, 80.0));
-    float alpha = density * (1.0 - verticalMix * 0.5);
-
-    // Inner-edge density boost + outer-edge fade.
-    cloudColor *= 1.0 + 20.0 * exp(-10.0 * (hitR - diskInner) / (diskOuter - diskInner));
-    const float outerFade = min(1.0, 1.8 * (diskOuter - hitR) / (diskOuter - diskInner));
-    const float brightWithoutRedshift = 4.5 * diskTemperature * diskTemperature * diskTemperature * diskTemperature / peakT4;
-    const vec3 rgb = KelvinToRgb(
-        diskTemperature / exp((hitR - diskInner) / (0.6 * (diskOuter - diskInner))));
-
-    vec3 diskRgb = cloudColor * brightWithoutRedshift * outerFade *
-                   min(shiftMax, redshift) * min(shiftMax, doppler) * rgb;
-    const float stepFactor = stepLength / rs;
-    return vec4(diskRgb * stepFactor, alpha * stepFactor);
+    float diskTemperature = mix(
+        10500.0, 2200.0, pow(radialPosition, 0.42));
+    diskTemperature *= clamp(redshift * doppler, 0.55, 1.8);
+    const vec3 emissionColor = KelvinToRgb(diskTemperature);
+    const float opticalDepth = density * stepLength / max(rs, 1.0e-4) * 1.8;
+    const float alpha = 1.0 - exp(-opticalDepth);
+    const float innerEmission = 0.7 + 2.6 * exp(-4.0 * radialPosition);
+    const vec3 emission = emissionColor * innerEmission
+        * mix(0.72, 1.18, cloudNoise)
+        * min(shiftMax, doppler) * min(shiftMax, redshift);
+    return vec4(emission * alpha, alpha);
 }
 
 // ---------------------------------------------------------------------------
@@ -300,21 +274,32 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
     vec3 rayPos = ubo.cameraPosition.xyz;
     vec3 lastRayPos = rayPos;
 
-    // (Wide-angle gravitational lensing correction is currently disabled:
-    //  it requires much larger per-pixel step budgets than ours. Will be
-    //  re-enabled under BH-2.2 with adaptive subpixel jitter.)
-
-    // Wide-angle gravitational lensing correction: a ray that *originates*
+    // Re-derived BufferA initial angular correction for a world-space camera
+    // looking at an origin-centred hole. It removes a bounded part of the
+    // radial component before integration, improving wide-angle lens coverage
+    // without destabilising near-axis rays.
+    const float cameraDistance = length(rayPos);
+    const vec3 cameraRadial = rayPos / max(cameraDistance, 1.0e-6);
+    const float lensWindow = clamp(
+        1.0 - (0.01 * cameraDistance / rs - 1.0) / 4.0, 0.0, 1.0);
+    const float lensCurve = lensWindow * lensWindow * (3.0 - 2.0 * lensWindow);
+    const float lensStrength = clamp(
+        0.15 * (1.0 - sqrt(max(
+            1.0 - rs * lensCurve / cameraDistance, 1.0e-8))),
+        0.0, 0.02);
+    rayDir = normalize(
+        rayDir - cameraRadial * dot(cameraRadial, rayDir) * lensStrength);
 
     vec4 accumulated = vec4(0.0);
     float lastR = length(rayPos);
+    float minimumRadius = lastR;
     bool escaped = false;
     bool fellIn = false;
     float stepLength = 0.0;
     int count = 0;
-
     for (int step = 0; step < maxSteps; ++step) {
         const float distance = length(rayPos);
+        minimumRadius = min(minimumRadius, distance);
 
         if (distance > escapeRadius && distance > lastR && count > 40) {
             escaped = true;
@@ -329,7 +314,7 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
         const vec4 diskSample = sampleDisk(
             rayPos, lastRayPos, rayDir, stepLength,
             rs, diskInner, diskOuter, thin, diskA, peakT4, shiftMax,
-            timeSeed);
+            ubo.physics.w);
         accumulated.rgb += diskSample.rgb * (1.0 - accumulated.a);
         accumulated.a += diskSample.a * (1.0 - accumulated.a);
         if (accumulated.a > 0.99) {
@@ -342,7 +327,8 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
         // Deflection angle per unit length (Schwarzschild, Euler).
         const vec3 radial = rayPos / max(distance, 1.0e-6);
         const float cosTheta = length(cross(radial, rayDir));
-        const float deflectionRate = -1.0 * cosTheta * cosTheta * cosTheta * (1.5 * rs / distance);
+        const float deflectionRate =
+            -cosTheta * cosTheta * cosTheta * (1.5 * rs / distance);
 
         // Continuous, spherically symmetric step size.
         float rayStep = (step == 0 ? RandomStep(fragUv, timeSeed) : 1.0);
@@ -367,7 +353,9 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
 
     vec3 color = accumulated.rgb;
     if (escaped) {
-        color += starfieldColor(normalize(rayDir));
+        const float blueShift = clamp(
+            exp(-1.6 * max(minimumRadius / rs - 1.5, 0.0)), 0.0, 1.0);
+        color += starfieldColor(normalize(rayDir), blueShift);
     }
     return vec4(color, 1.0);
 }

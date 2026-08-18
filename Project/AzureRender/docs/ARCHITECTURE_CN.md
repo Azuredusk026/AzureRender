@@ -63,7 +63,7 @@
 
 ### BlackholeSceneRenderer
 
-使用 fullscreen triangle 执行每像素测地线追踪。它不需要几何 depth/normal，但仍需让公共 shadow diagnostic 获得有效布局。BH-2.2 将引入场景私有 trace/history 资源，然后把结果写回公共 Scene Color。
+使用 fullscreen triangle 执行每像素测地线追踪。它不需要几何 depth/normal，但仍需让公共 shadow diagnostic 获得有效布局。场景私有 raw trace 先写入单颜色附件 render pass，TAA/bloom 将它与双缓冲 history 累积，最后由 composite pass 写回公共 Scene Color。按 in-flight frame 与 history 写入索引预分配的 descriptor 始终保持不可变。
 
 ## 5. Vulkan 资源规则
 

@@ -351,6 +351,7 @@ void AzureRenderApp::buildSceneFrameData(
     frame.qaHarnessEnabled = qaHarnessEnabled_;
     frame.capturedFrames = capturedFrames_;
     frame.captureFps = runOptions_.captureFps;
+    frame.captureActive = fixedSimulation_;
     frame.technicalSequence = runOptions_.technicalSequence;
     frame.technicalSequenceChapter = technicalSequenceChapter_;
     frame.currentFrame = static_cast<std::uint32_t>(currentFrame_);

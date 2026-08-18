@@ -20,7 +20,7 @@ AzureRender 同时承担两个目标：
 - UI：vendored Dear ImGui Docking。
 - 资产：glTF/GLB、tinygltf、stb。
 - 平台：Windows 为正式发布基线；Linux CI 使用 Ubuntu 24.04。
-- 测试：12 个 CTest；2026-08-18 Debug 记录为 12/12 通过。
+- 测试：12 个 CTest；2026-08-18 Debug/Release 均为 12/12 通过。
 - P0 整理前的实现基线为 `fefbac4`。
 
 ## 3. 已交付能力
@@ -52,8 +52,9 @@ AzureRender 同时承担两个目标：
 
 - Schwarzschild 黑洞全屏追踪。
 - 连续球对称步长、欧拉偏折、体积吸积盘、温度和相对论颜色变化。
-- 4x stratified supersampling、诊断视图、capture manifest 和 GPU timing。
-- TAA/bloom 私有资源已经创建但尚未接入稳定渲染路径，属于当前 BH-2.2 工作。
+- 4x stratified supersampling、初始角向修正、连续球面星场和受控蓝移。
+- 独立 raw trace、双 history ping-pong、时间半衰期 TAA、邻域 history clamp 和单 pass HDR bloom。
+- 首帧/resize/capture history 失效、确定性 capture manifest、HUD 和 GPU timing。
 
 ## 4. 架构总览
 
@@ -110,7 +111,7 @@ CharacterSceneRenderer  BlackholeSceneRenderer
 
 ## 6. 已知限制
 
-- 黑洞 TAA/bloom 尚未启用，当前以 4x supersampling 抑制噪声。
+- 黑洞 shader 输出仍以 Validation、截图和确定性序列人工验收，尚无离屏 GPU 图像单元测试。
 - 私有 Laevat 资产许可不允许公开分发。
 - 动态插件只存在进程内注册抽象，没有跨 DLL ABI。
 - Android 和正式论文实验无限期 Deferred，只有用户主动启用后才恢复。
@@ -123,5 +124,6 @@ CharacterSceneRenderer  BlackholeSceneRenderer
 - 角色 HDR Beauty：`captures/s36_hdr_beauty_v1/frame_000000.png`
 - SHA-256：`5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357`
 - BH-2.1 记录性能：约 14.1 ms main scene，配置为 1800 steps、4 samples。
+- P1 记录性能：12.885 ms main scene、12.932 ms total（Debug、180 samples、RTX 4060 Laptop GPU）。
 
 生成目录通常不进入版本控制；基准哈希和复现参数必须同时记录，不能只引用本机绝对路径。

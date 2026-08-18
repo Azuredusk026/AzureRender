@@ -76,6 +76,14 @@
 5E8BF8B507FE07F385EAADF563DF40CD3C23FA6A2433156DEFD1BFD6AB829357
 ```
 
+当前黑洞 P1 1280x720 首帧 SHA-256（36 帧、60 fps 固定捕获）：
+
+```text
+E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C
+```
+
+两次完整运行必须逐帧一致；单次中断或未生成 manifest 的目录不作为基准。
+
 ## 7. 历史资料
 
 详细的 Laevat 导入流水、CQ 阶段记录和 tone-mapping 设计快照已移入 `archive/`。它们可用于理解历史决策，但其中的路径、状态和下一任务不再有效。

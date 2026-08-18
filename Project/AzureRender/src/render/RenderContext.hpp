@@ -59,6 +59,7 @@ struct SceneFrameData {
 
     std::uint64_t capturedFrames = 0;
     std::uint32_t captureFps = 60;
+    bool captureActive = false;
     bool technicalSequence = false;
     std::uint32_t technicalSequenceChapter =
         std::numeric_limits<std::uint32_t>::max();

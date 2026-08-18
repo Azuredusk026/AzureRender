@@ -67,7 +67,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 
 ## 6. 当前已知限制
 
-- 黑洞 TAA/bloom 仍在 BH-2.2 阶段。
+- 黑洞视觉输出依赖 GPU 截图验收，尚无离屏图像单元测试。
 - 正式 Android 支持尚未建立。
 - 动态插件 ABI 不属于 RC1。
 - 私有角色只能用于受控本地验证。

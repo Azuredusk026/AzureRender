@@ -8,6 +8,8 @@ void main() {
     vec2 position = vec2(
         float((gl_VertexIndex << 1) & 2),
         float(gl_VertexIndex & 2));
-    screenUv = position * 0.5;
+    // `position` interpolates from 0 to 1 over the visible viewport even
+    // though the oversized fullscreen triangle has vertices at 0 and 2.
+    screenUv = position;
     gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0);
 }
