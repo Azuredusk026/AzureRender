@@ -41,7 +41,7 @@
   --blackhole-camera front
 ```
 
-黑洞质量可选 `performance`、`balanced`、`cinematic`；相机可选 `front`、`orbit-left`、`high`、`close`。
+黑洞质量可选 `performance`、`balanced`、`cinematic`；相机可选 `front`、`orbit-left`、`high`、`close`、`over-shoulder`。`over-shoulder` 用于右下主体、左上星空的展示构图。
 
 ## 3. 角色控制
 

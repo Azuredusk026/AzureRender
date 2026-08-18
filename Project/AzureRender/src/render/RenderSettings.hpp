@@ -61,6 +61,7 @@ enum class BlackholeCamera : std::uint32_t {
     OrbitLeft = 1,
     High = 2,
     Close = 3,
+    OverShoulder = 4,
 };
 
 struct BlackholeSettings {

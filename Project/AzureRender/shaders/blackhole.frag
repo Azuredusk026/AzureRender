@@ -195,31 +195,46 @@ vec4 sampleDisk(
     }
     const float radialPosition =
         (radius - diskInner) / max(diskOuter - diskInner, 1.0e-4);
-    const float diskThickness = thin * mix(0.3, 1.2, radialPosition);
+    const float effectiveRadius = 1.0 - 0.5 * radialPosition;
+    const float radialShape = Shape(effectiveRadius, 4.0, 0.9);
+    const float theta = atan(rayPosition.z, rayPosition.x);
+    const float spiralTheta = 24.0 / sqrt(3.0)
+        * atan(sqrt(max(0.6666667 * radius / rs - 1.0, 0.0)));
+    const float spiralAngle = theta + spiralTheta;
+    const float rotatingRadius = radius / rs + time * 0.42;
+    const float thicknessNoise = SoftSaturate(GenerateAccretionDiskNoise(
+        vec3(1.5 * spiralAngle, rotatingRadius, 1.0), 1, 3, 40.0));
+    const float diskThickness = thin * radialShape
+        * mix(0.38, 1.0, thicknessNoise);
     if (abs(rayPosition.y) >= diskThickness) {
         return vec4(0.0);
     }
-    const float innerFade = smoothstep(0.0, 0.06, radialPosition);
+    const float innerFade = smoothstep(0.0, 0.035, radialPosition);
     const float outerFade = 1.0 - smoothstep(0.88, 1.0, radialPosition);
-    const float verticalDensity = exp(
-        -1.5 * rayPosition.y * rayPosition.y
-        / max(diskThickness * diskThickness, 1.0e-5));
-    const float theta = atan(rayPosition.z, rayPosition.x);
-    const vec3 noisePosition = vec3(
-        radius * 0.55,
-        theta * 1.8 - time * 0.18,
-        rayPosition.y * 3.0);
-    const float cloudNoise = clamp(
-        0.62
-        + 0.25 * PerlinNoise(noisePosition)
-        + 0.13 * PerlinNoise(noisePosition * 2.7 + vec3(4.7)),
-        0.12,
-        1.0);
-    const float spiral = 0.78 + 0.22 * sin(
-        theta * 6.0 - time * 0.55 + radius * 2.1
-        + 1.5 * PerlinNoise(noisePosition * 0.7));
-    const float density = innerFade * outerFade * verticalDensity
-        * cloudNoise * spiral;
+    const float verticalDensity = max(
+        1.0 - abs(rayPosition.y) / max(diskThickness, 1.0e-5), 0.0);
+    const float cloudNoise = SoftSaturate(GenerateAccretionDiskNoise(
+        vec3(
+            rotatingRadius,
+            rayPosition.y / max(min(rs, thin / 0.1), 1.0e-4),
+            0.5 * spiralAngle),
+        2, 6, 52.0));
+    const float cloudMask = smoothstep(0.025, 0.48, cloudNoise);
+    const float spiralWave = sin(
+        5.0 * spiralAngle - time * 0.72
+        + 1.7 * PerlinNoise(vec3(rotatingRadius * 0.32, spiralAngle, 2.1)));
+    const float spiralMask = smoothstep(-0.32, 0.58, spiralWave);
+    const float dustNoise = SoftSaturate(GenerateAccretionDiskNoise(
+        vec3(1.7 * spiralAngle, radius / rs, rayPosition.y / thin),
+        0, 5, 34.0));
+    const float clumpedDensity = mix(
+        cloudMask * spiralMask,
+        max(cloudMask, dustNoise * 0.42),
+        0.22);
+    const float density = innerFade * outerFade
+        * radialShape * radialShape
+        * verticalDensity * verticalDensity
+        * clumpedDensity;
     const float angularVelocity = GetKeplerianAngularVelocity(radius, rs);
     const vec3 cloudVelocity = angularVelocity
         * cross(vec3(0.0, 1.0, 0.0), rayPosition);
@@ -228,18 +243,31 @@ vec4 sampleDisk(
     const float doppler = sqrt(
         max((1.0 + relativeVelocity) / (1.0 - relativeVelocity), 1.0e-5));
     const float cameraR = length(ubo.cameraPosition.xyz);
-    const float redshift = sqrt(max(1.0 - rs / radius, 1.0e-6)) /
+    const float gravitationalShift = sqrt(max(1.0 - rs / radius, 1.0e-6)) /
         sqrt(max(1.0 - rs / max(cameraR, 1.001 * rs), 1.0e-6));
-    float diskTemperature = mix(
-        10500.0, 2200.0, pow(radialPosition, 0.42));
-    diskTemperature *= clamp(redshift * doppler, 0.55, 1.8);
-    const vec3 emissionColor = KelvinToRgb(diskTemperature);
-    const float opticalDepth = density * stepLength / max(rs, 1.0e-4) * 1.8;
+    const float spectralShift = gravitationalShift * doppler;
+    const float diskT4 = diskA
+        * pow(max(rs / radius, 0.10), 3.0)
+        * max(1.0 - sqrt(diskInner / radius), 1.0e-6);
+    float diskTemperature = pow(max(diskT4, 1.0), 0.25);
+    diskTemperature *= clamp(
+        gravitationalShift * doppler * doppler, 0.42, 2.8);
+    diskTemperature = clamp(diskTemperature, 1000.0, 100000.0);
+    vec3 emissionColor = KelvinToRgb(
+        diskTemperature / exp(radialPosition / 0.62));
+    const float approach = smoothstep(-0.08, 0.58, relativeVelocity);
+    const float recession = smoothstep(0.08, 0.58, -relativeVelocity);
+    emissionColor *= mix(vec3(1.0), vec3(0.68, 0.86, 1.30), approach * 0.58);
+    emissionColor *= mix(vec3(1.0), vec3(1.24, 0.68, 0.42), recession * 0.52);
+    const float opticalDepth = density * stepLength / max(rs, 1.0e-4) * 2.15;
     const float alpha = 1.0 - exp(-opticalDepth);
-    const float innerEmission = 0.7 + 2.6 * exp(-4.0 * radialPosition);
+    const float innerEmission = 0.62 + 3.2 * exp(-5.2 * radialPosition);
+    const float relativisticBeaming = clamp(pow(doppler, 3.0), 0.16, 4.8);
+    const float redshiftAttenuation = pow(
+        clamp(spectralShift, 0.34, shiftMax), 1.35);
     const vec3 emission = emissionColor * innerEmission
-        * mix(0.72, 1.18, cloudNoise)
-        * min(shiftMax, doppler) * min(shiftMax, redshift);
+        * mix(0.42, 1.45, cloudMask)
+        * relativisticBeaming * redshiftAttenuation;
     return vec4(emission * alpha, alpha);
 }
 

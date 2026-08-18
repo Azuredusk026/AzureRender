@@ -352,15 +352,23 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     switch (camera_) {
     case BlackholeCamera::Front:
         cameraPosition_ = {0.0F, 4.0F, 24.0F};
+        cameraTarget_ = {0.0F, 0.0F, 0.0F};
         break;
     case BlackholeCamera::OrbitLeft:
         cameraPosition_ = {-9.0F, 5.0F, 22.0F};
+        cameraTarget_ = {0.0F, 0.0F, 0.0F};
         break;
     case BlackholeCamera::High:
         cameraPosition_ = {0.0F, 11.0F, 22.0F};
+        cameraTarget_ = {0.0F, 0.0F, 0.0F};
         break;
     case BlackholeCamera::Close:
         cameraPosition_ = {0.0F, 2.0F, 15.0F};
+        cameraTarget_ = {0.0F, 0.0F, 0.0F};
+        break;
+    case BlackholeCamera::OverShoulder:
+        cameraPosition_ = {-12.0F, 8.0F, 23.0F};
+        cameraTarget_ = {-7.0F, 4.5F, 0.0F};
         break;
     }
     // The black hole owns its own framing: the host camera/portfolio orbit
@@ -386,7 +394,7 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     renderHeight_ = frame.swapchainHeight;
     // Temporal blend weight: fast decay (~90ms) keeps the disk detail sharp
     // while smoothing the per-frame jitter noise.
-    const float halfLife = 0.09F;
+    const float halfLife = 0.055F;
     blendWeight_ = 1.0F - std::pow(
         0.5F,
         std::clamp(frame.deltaSeconds / halfLife, 0.0F, 1.0F));
@@ -1262,7 +1270,7 @@ void BlackholeSceneRenderer::updateUniformBuffer() {
         fov, aspect_, static_cast<float>(samplesPerPixel_),
         static_cast<float>(renderWidth_),
     };
-    uniform.diskParameters = {2.1F, 12.0F, 1.0F, 1.25F};
+    uniform.diskParameters = {2.1F, 12.0F, 1.0F, 2.4F};
     uniform.quality = {nearStepScale_, 0.0F, 0.0F, 0.0F};
     std::memcpy(
         uniformBufferMapped_[currentFrame_],

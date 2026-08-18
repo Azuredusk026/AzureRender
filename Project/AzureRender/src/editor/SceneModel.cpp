@@ -240,6 +240,8 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                 document.renderSettings.blackhole.camera = BlackholeCamera::High;
             } else if (value == "close") {
                 document.renderSettings.blackhole.camera = BlackholeCamera::Close;
+            } else if (value == "over-shoulder") {
+                document.renderSettings.blackhole.camera = BlackholeCamera::OverShoulder;
             } else if (value != "front") {
                 throw std::runtime_error("Unsupported .azscene blackholeCamera: " + value);
             }

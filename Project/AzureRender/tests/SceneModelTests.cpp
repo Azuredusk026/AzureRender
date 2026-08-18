@@ -134,7 +134,7 @@ int main() {
         azurerender::BlackholeSettings previous;
         azurerender::BlackholeSettings current = previous;
         assert(!azurerender::blackholeHistoryNeedsReset(previous, current));
-        current.camera = azurerender::BlackholeCamera::High;
+        current.camera = azurerender::BlackholeCamera::OverShoulder;
         assert(azurerender::blackholeHistoryNeedsReset(previous, current));
         current = previous;
         current.quality = azurerender::BlackholeQuality::Balanced;
@@ -231,7 +231,7 @@ int main() {
         document.renderSettings.blackhole.quality =
             azurerender::BlackholeQuality::Balanced;
         document.renderSettings.blackhole.camera =
-            azurerender::BlackholeCamera::High;
+            azurerender::BlackholeCamera::OverShoulder;
         document.renderSettings.characterPresentation.backgroundEnabled = false;
         document.renderSettings.characterPresentation.platformEnabled = false;
         azurerender::SceneNode instance;
@@ -252,7 +252,7 @@ int main() {
         assert(loaded.renderSettings.blackhole.quality
             == azurerender::BlackholeQuality::Balanced);
         assert(loaded.renderSettings.blackhole.camera
-            == azurerender::BlackholeCamera::High);
+            == azurerender::BlackholeCamera::OverShoulder);
         assert(!loaded.renderSettings.characterPresentation.backgroundEnabled);
         assert(!loaded.renderSettings.characterPresentation.platformEnabled);
         assert(loaded.nodes.size() == 2);

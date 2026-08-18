@@ -1,5 +1,13 @@
 # Blackhole 质量与视觉回归
 
+## 2026-08-18 吸积盘视觉基线 v2
+
+吸积盘密度参考 `D:\Assigment\temp\BufferA.txt` 的 `GenerateAccretionDiskNoise`、`Shape`、SpiralTheta 和 Keplerian velocity。实现使用物体空间乘法 octave、旋转径向坐标、动态厚度、旋臂遮罩和 dust cloud，不再为噪声设置非零密度保底，因此盘面允许形成真实稀疏间隙。噪声随盘连续旋转而不是逐帧随机生成，TAA 半衰期缩短为 55 ms，以保留细节并避免闪烁。
+
+多普勒效果同时驱动色温、接近/远离侧 RGB 偏色和 `doppler^3` 相对论 beaming。接近侧必须明显偏蓝白且更亮，远离侧必须偏红且更暗；引力红移继续按观测者与采样半径修正。`shiftMax` 从 1.25 提高到 2.4，只限制极端峰值，不再抹平主要不对称。
+
+正式视频契约为三个独立机位各 300 帧、60 fps、完整 5.0 秒：`front`、`high`、`over-shoulder`。其中 `over-shoulder` 必须让黑洞中心位于画面右下区域，并让左上主要保留星空。三段按该顺序拼接为 900 帧、15.0 秒总览。
+
 ## 1. 质量档位
 
 | 档位 | 最大积分步数 | 每像素 trace | 近光子球步长比例 | 用途 |
@@ -17,7 +25,7 @@
   --blackhole-camera orbit-left
 ```
 
-相机档位为 `front`、`orbit-left`、`high`、`close`。质量或相机变化、resize、capture 开始及非连续旋转都会自动使 TAA history 失效；capture manifest 记录档位、视角、步数、采样数、近场步长和 reset 次数。
+相机档位为 `front`、`orbit-left`、`high`、`close`、`over-shoulder`。质量或相机变化、resize、capture 开始及非连续旋转都会自动使 TAA history 失效；capture manifest 记录档位、视角、步数、采样数、近场步长和 reset 次数。
 
 ## 2. 图像回归
 

@@ -100,6 +100,13 @@ int main() {
         blackholeProfile.options.renderSettings.blackhole.camera
             == azurerender::BlackholeCamera::High,
         "Blackhole camera preset was not parsed");
+    const auto overShoulder = azurerender::parseCommandLine({
+        "--scene-type", "blackhole",
+        "--blackhole-camera", "over-shoulder"});
+    require(
+        overShoulder.options.renderSettings.blackhole.camera
+            == azurerender::BlackholeCamera::OverShoulder,
+        "Over-shoulder blackhole camera was not parsed");
     expectError(CommandLineErrorCode::InvalidValue, "--blackhole-quality",
         {"--blackhole-quality", "ultra"});
     expectError(

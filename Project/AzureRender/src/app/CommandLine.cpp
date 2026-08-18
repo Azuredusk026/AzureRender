@@ -28,7 +28,7 @@ constexpr const char* kUsage =
     "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
     "[--blackhole-quality <performance|balanced|cinematic>] "
-    "[--blackhole-camera <front|orbit-left|high|close>] "
+    "[--blackhole-camera <front|orbit-left|high|close|over-shoulder>] "
     "[--capture-dir <empty directory> "
     "--capture-frames <positive integer> --capture-fps <1-240>]";
 
@@ -48,7 +48,7 @@ constexpr const char* kHelp =
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
     "  --blackhole-quality performance|balanced|cinematic\n"
-    "  --blackhole-camera front|orbit-left|high|close\n"
+    "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
     "  --diagnostic-view beauty|normal|outline|shadow\n"
     "  --hud --no-stylized --no-inner-outline\n\n"
     "Utility:\n"
@@ -385,9 +385,12 @@ ParsedCommandLine parseCommandLine(
             } else if (value == "close") {
                 parsed.options.renderSettings.blackhole.camera =
                     BlackholeCamera::Close;
+            } else if (value == "over-shoulder") {
+                parsed.options.renderSettings.blackhole.camera =
+                    BlackholeCamera::OverShoulder;
             } else {
                 fail(CommandLineErrorCode::InvalidValue, argument,
-                    "--blackhole-camera must be front, orbit-left, high or close");
+                    "--blackhole-camera must be front, orbit-left, high, close or over-shoulder");
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);

@@ -1,5 +1,11 @@
 # Changelog
 
+## Blackhole visual correction - 2026-08-18
+
+- Ported multiplicative cloud noise, spiral coordinates, dynamic thickness, and dust gaps from the local reference implementation.
+- Strengthened Doppler temperature shift, directional color tint, and relativistic beaming so the rotating disk is visibly asymmetric.
+- Added a persistent `over-shoulder` camera preset for lower-right subject framing and upper-left sky coverage.
+
 ## Character visual correction - 2026-08-18
 
 - Simplified the Endfield character backdrop by removing competing grids, the horizon bar, and the right-side light rail.

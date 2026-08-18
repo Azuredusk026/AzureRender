@@ -88,6 +88,7 @@ std::string_view blackholeCameraName(const BlackholeCamera camera) {
     case BlackholeCamera::OrbitLeft: return "orbit-left";
     case BlackholeCamera::High: return "high";
     case BlackholeCamera::Close: return "close";
+    case BlackholeCamera::OverShoulder: return "over-shoulder";
     }
     return "unknown";
 }
