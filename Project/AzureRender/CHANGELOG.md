@@ -1,5 +1,9 @@
 # Changelog
 
+## Black-hole final archive - 2026-08-19
+
+- Froze the approved P1 shader, quality settings, two-camera media, reproduction commands, and SHA-256 records as the final black-hole baseline.
+
 ## Release-prep workspace - 2026-08-19
 
 - Reduced the active build tree to Debug/Release build and self-contained install directories.
