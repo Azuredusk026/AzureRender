@@ -32,6 +32,8 @@
 
 阴影验收必须同时检查 Beauty 转台、`shadow-visibility` 隔离图和地台投影：亮面不能靠全局曝光抬平，暗面仍需保留布料、皮肤和头发纹理，地台阴影必须随角色轮廓清晰变化。
 
+Portfolio 与 QA isolation 可以组合使用：isolation 隐式选择 `full-body-front` 时必须保留 Portfolio 自动旋转，保证 Beauty、Albedo、World Normal、Shadow Visibility 与 Material ID 使用同一条 16 秒整圈轨迹。显式的脸部或背部 QA 相机仍保持静止。
+
 头发数据链路已逐项核对：`T_actor_laevat_hair_01_D` 进入 Base Color；`T_actor_laevat_hair_01_HN` 通过 `afterglowHairDataTexture` 独立绑定，RG 驱动基础发束法线、BA 驱动双层 Kajiya-Kay 方向；`T_actor_laevat_hair_01_P` 是 Hair Master 的 `_P` packed texture。旧注入器只识别布料命名 `T_RGBA_P`，因此 Hair `_P` 未进入 metallic/roughness/specular 数据链路；现在两种键均受支持，重新生成的私有 GLB 会嵌入 `_P` 派生纹理。原始贴图保持不修改。
 
 ## Evening Sky 环境照明修正

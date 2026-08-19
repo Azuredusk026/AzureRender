@@ -452,7 +452,10 @@ void AzureRenderApp::configureQaHarness() {
         rotationAngle_ = 0.0F;
         cameraPosition_ = {0.0F, 1.18F, 3.55F};
         cameraTarget_ = {0.0F, 0.12F, 0.0F};
-        autoRotate_ = false;
+        // An isolation pass implicitly selects this QA camera. Preserve the
+        // portfolio turntable in that combined mode so diagnostic segments
+        // follow the same orbit as Beauty instead of silently becoming still.
+        autoRotate_ = runOptions_.portfolioMode;
     } else if (qaCameraName_ == "face-front") {
         rotationAngle_ = kPi * 0.25F;
         cameraPosition_ = {0.915F, 1.507F, 1.046F};
