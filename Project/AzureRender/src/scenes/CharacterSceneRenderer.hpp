@@ -164,6 +164,9 @@ private:
     bool qaEffectEnabled_ = true;
     bool qaHarnessEnabled_ = false;
     std::array<float, 16> currentModel_{};
+    // Bind-pose contact pivot estimated from the lowest character vertices.
+    // X/Z define both the turntable axis and showcase-platform centre.
+    std::array<float, 3> footPivot_{0.0F, 0.0F, 0.0F};
     RendererSceneState state_;
 
     // Resource creation.

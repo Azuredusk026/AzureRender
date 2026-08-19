@@ -1,5 +1,13 @@
 # Changelog
 
+## Showcase framing and turntable - 2026-08-19
+
+- Centered the character turntable and showcase platform on a robust bind-pose foot pivot.
+- Changed the character portfolio camera to a fixed front view while preserving world-space lighting and real-time shadow variation during rotation.
+- Excluded the showcase platform and blended overlay geometry from the silhouette pass.
+- Added a right-side close black-hole composition for the fourth eight-second showcase segment.
+- Replaced version-suffixed showcase-media naming with timestamp plus short Chinese descriptions.
+
 ## Character sky lighting - 2026-08-18
 
 - Made the Evening Sky environment visible in the Endfield backdrop instead of suppressing it to eight percent.

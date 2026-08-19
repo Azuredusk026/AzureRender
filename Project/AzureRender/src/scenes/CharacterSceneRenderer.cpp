@@ -27,12 +27,40 @@ namespace azurerender {
 
 namespace {
 
-void appendShowcasePlatform(LoadedAsset& asset) {
+Vector3 estimateFootPivot(const LoadedAsset& asset) {
+    const float height = asset.boundsMax[1] - asset.boundsMin[1];
+    const float footBand = asset.boundsMin[1] + height * 0.12F;
+    std::vector<float> xCoordinates;
+    std::vector<float> zCoordinates;
+    xCoordinates.reserve(asset.vertices.size() / 16);
+    zCoordinates.reserve(asset.vertices.size() / 16);
+    for (const AssetVertex& vertex : asset.vertices) {
+        if (vertex.position[1] <= footBand) {
+            xCoordinates.push_back(vertex.position[0]);
+            zCoordinates.push_back(vertex.position[2]);
+        }
+    }
+    if (xCoordinates.empty()) {
+        return {
+            (asset.boundsMin[0] + asset.boundsMax[0]) * 0.5F,
+            asset.boundsMin[1],
+            (asset.boundsMin[2] + asset.boundsMax[2]) * 0.5F,
+        };
+    }
+    const auto median = [](std::vector<float>& values) {
+        const std::size_t middle = values.size() / 2;
+        std::nth_element(values.begin(), values.begin() + middle, values.end());
+        return values[middle];
+    };
+    return {median(xCoordinates), asset.boundsMin[1], median(zCoordinates)};
+}
+
+void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
     constexpr std::uint32_t kSegments = 96;
     const Vector3 boundsCenter = {
-        (asset.boundsMin[0] + asset.boundsMax[0]) * 0.5F,
+        footPivot[0],
         (asset.boundsMin[1] + asset.boundsMax[1]) * 0.5F,
-        (asset.boundsMin[2] + asset.boundsMax[2]) * 0.5F,
+        footPivot[2],
     };
     const float largestExtent = std::max({
         asset.boundsMax[0] - asset.boundsMin[0],
@@ -221,7 +249,13 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
                 + std::to_string(material.faceSdf.height)
                 + ", headNode=" + material.faceSdf.headNodeName);
     }
-    appendShowcasePlatform(asset_);
+    footPivot_ = estimateFootPivot(asset_);
+    appendShowcasePlatform(asset_, footPivot_);
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset",
+        "Turntable foot pivot: [" + std::to_string(footPivot_[0]) + ", "
+            + std::to_string(footPivot_[1]) + ", "
+            + std::to_string(footPivot_[2]) + "]");
     azurerender::RuntimeDiagnostics::instance().print(
         "asset", "Asset path: " + resolvedAssetPath);
     azurerender::RuntimeDiagnostics::instance().print(
@@ -1575,9 +1609,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
 
     const Vector3 center = {
-        (asset_.boundsMin[0] + asset_.boundsMax[0]) * 0.5F,
+        footPivot_[0],
         (asset_.boundsMin[1] + asset_.boundsMax[1]) * 0.5F,
-        (asset_.boundsMin[2] + asset_.boundsMax[2]) * 0.5F,
+        footPivot_[2],
     };
     const float largestExtent = std::max({
         asset_.boundsMax[0] - asset_.boundsMin[0],
@@ -1853,13 +1887,17 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
             VK_PIPELINE_BIND_POINT_GRAPHICS,
             outlinePipeline_);
         for (const AssetPrimitive& primitive : asset_.primitives) {
+            const AssetMaterial& outlineMaterial =
+                asset_.materials[primitive.materialIndex];
             if (!settings.characterPresentation.platformEnabled
-                && asset_.materials[primitive.materialIndex].showcasePlatform
-                    > 0.5F) {
+                && outlineMaterial.showcasePlatform > 0.5F) {
                 continue;
             }
-            if (asset_.materials[primitive.materialIndex].alphaMode
-                == AssetAlphaMode::Blend) {
+            // The turntable is a receiver, not character silhouette geometry;
+            // overlay cards likewise produce oversized black shells.
+            if (outlineMaterial.showcasePlatform > 0.5F
+                || outlineMaterial.materialClass == AssetMaterialClass::Overlay
+                || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
                 continue;
             }
             const std::size_t descriptorIndex =

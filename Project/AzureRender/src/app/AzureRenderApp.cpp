@@ -398,11 +398,10 @@ void AzureRenderApp::buildSceneFrameData(
 }
 
 void AzureRenderApp::activatePortfolioOrbit() {
-    constexpr float kPi = 3.14159265358979323846F;
-    rotationAngle_ = kPi * 0.25F;
-    rotationSpeed_ = 0.16F;
-    cameraPosition_ = {2.32F, 1.80F, 2.66F};
-    cameraTarget_ = {0.0F, 0.05F, 0.0F};
+    rotationAngle_ = 0.0F;
+    rotationSpeed_ = 0.20F;
+    cameraPosition_ = {0.0F, 1.18F, 3.55F};
+    cameraTarget_ = {0.0F, 0.12F, 0.0F};
     azurerender::applyShowcasePresetLook(renderSettings_, 1);
     autoRotate_ = true;
     if (sceneRenderer_ != nullptr) {
@@ -444,9 +443,9 @@ void AzureRenderApp::configureQaHarness() {
         ? "full-body-front"
         : runOptions_.qaCamera;
     if (qaCameraName_ == "full-body-front") {
-        rotationAngle_ = kPi * 0.25F;
-        cameraPosition_ = {2.25F, 1.75F, 2.55F};
-        cameraTarget_ = {0.0F, 0.10F, 0.0F};
+        rotationAngle_ = 0.0F;
+        cameraPosition_ = {0.0F, 1.18F, 3.55F};
+        cameraTarget_ = {0.0F, 0.12F, 0.0F};
         autoRotate_ = false;
     } else if (qaCameraName_ == "face-front") {
         rotationAngle_ = kPi * 0.25F;
@@ -464,9 +463,9 @@ void AzureRenderApp::configureQaHarness() {
         cameraTarget_ = {0.0F, 0.38F, 0.0F};
         autoRotate_ = false;
     } else if (qaCameraName_ == "lighting-sweep") {
-        rotationAngle_ = kPi * 0.25F;
-        cameraPosition_ = {2.25F, 1.75F, 2.55F};
-        cameraTarget_ = {0.0F, 0.10F, 0.0F};
+        rotationAngle_ = 0.0F;
+        cameraPosition_ = {0.0F, 1.18F, 3.55F};
+        cameraTarget_ = {0.0F, 0.12F, 0.0F};
         rotationSpeed_ = 0.60F;
         autoRotate_ = true;
     } else {

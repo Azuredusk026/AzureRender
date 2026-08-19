@@ -389,8 +389,10 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
         cameraTarget_ = {0.0F, 0.0F, 0.0F};
         break;
     case BlackholeCamera::Close:
-        cameraPosition_ = {0.0F, 2.0F, 15.0F};
-        cameraTarget_ = {0.0F, 0.0F, 0.0F};
+        // Reference-close composition: the hole sits on the right while the
+        // near disk sweeps diagonally across the frame.
+        cameraPosition_ = {0.0F, 2.2F, 10.5F};
+        cameraTarget_ = {-3.4F, -0.3F, 0.0F};
         break;
     case BlackholeCamera::OverShoulder:
         cameraPosition_ = {-12.0F, 8.0F, 23.0F};
