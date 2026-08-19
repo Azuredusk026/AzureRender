@@ -47,6 +47,7 @@ $framePattern = Join-Path $capturePath "frame_%06d.png"
     -i $framePattern `
     -frames:v ([string]$manifest.capturedFrames) `
     -an `
+    -vf "setsar=1" `
     -c:v libx264 `
     -preset slow `
     -crf 15 `
