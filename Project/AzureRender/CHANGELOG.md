@@ -1,5 +1,11 @@
 # Changelog
 
+## Character final showcase archive - 2026-08-19
+
+- Re-recorded the 36-second character technical showcase after the final brow-card lift and Endfield lighting rebalance.
+- Added close-up red-brow evidence plus front, side, and back Beauty stills documenting material light variation and real-time platform shadows.
+- Archived the superseded local character media, verified all 864 H.264 frames by full decode, and left the frozen black-hole delivery unchanged.
+
 ## Character brow and lighting finalization - 2026-08-19
 
 - Lifted the data-driven brow card above the upper eyelid and preserved a visible deep-red Face-D response through HDR composition.
