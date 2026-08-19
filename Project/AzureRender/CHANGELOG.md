@@ -1,5 +1,11 @@
 # Changelog
 
+## Two-scene technical showcase - 2026-08-19
+
+- Replaced the black-hole four-view cut with two eight-second segments: front and moving close-up.
+- Replaced the character turntable-only cut with an eight-second Beauty segment followed by seven four-second diagnostic views.
+- Archived the previous local media and verified 1600x900, 24 fps, square-pixel BT.709 output by full-frame decoding.
+
 ## Disk seam and brow overlay - 2026-08-19
 
 - Removed the accretion-disk radial seam by embedding angular noise coordinates on a continuous circle.
