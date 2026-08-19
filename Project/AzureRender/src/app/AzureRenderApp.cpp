@@ -398,9 +398,11 @@ void AzureRenderApp::buildSceneFrameData(
 }
 
 void AzureRenderApp::activatePortfolioOrbit() {
-    rotationAngle_ = 0.0F;
     constexpr float kTwoPi = 6.28318530717958647692F;
     constexpr float kCharacterTurntablePeriodSeconds = 16.0F;
+    rotationAngle_ = renderSettings_.sceneType == azurerender::SceneType::Character
+        ? kTwoPi * 0.75F
+        : 0.0F;
     // Every character showcase segment completes one deterministic turn in
     // sixteen seconds. Keep the approved black-hole motion unchanged.
     rotationSpeed_ = renderSettings_.sceneType == azurerender::SceneType::Character
@@ -449,7 +451,9 @@ void AzureRenderApp::configureQaHarness() {
         ? "full-body-front"
         : runOptions_.qaCamera;
     if (qaCameraName_ == "full-body-front") {
-        rotationAngle_ = 0.0F;
+        if (!runOptions_.portfolioMode) {
+            rotationAngle_ = 0.0F;
+        }
         cameraPosition_ = {0.0F, 1.18F, 3.55F};
         cameraTarget_ = {0.0F, 0.12F, 0.0F};
         // An isolation pass implicitly selects this QA camera. Preserve the

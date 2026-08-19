@@ -45,7 +45,7 @@
       }
     },
     "styleParameters": {
-      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim; brow-overlay uses local vertical lift, bind-space vertical scale, vertical pivot and reserved.",
+      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim; brow-overlay uses local vertical lift, Face-D ink expansion radius in texels and two reserved values.",
       "$ref": "#/$defs/parameterVector"
     },
     "featureParameters": {

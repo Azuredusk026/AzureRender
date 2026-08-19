@@ -53,15 +53,6 @@ void main() {
         + jointWeights.w * jointData.matrices[jointIndices.w];
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
-    if (browOverlay) {
-        // Enlarge the authored card about its bind-space vertical centre.
-        // This increases the actual screen-space stroke coverage instead of
-        // merely darkening the same sub-pixel geometry.
-        float verticalScale = max(morphWeights.styleParameters.y, 1.0);
-        float verticalPivot = morphWeights.styleParameters.z;
-        morphedPosition.y = verticalPivot
-            + (morphedPosition.y - verticalPivot) * verticalScale;
-    }
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     if (browOverlay) {

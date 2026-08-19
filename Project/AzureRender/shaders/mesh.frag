@@ -89,6 +89,33 @@ float materialFeatureEnabled(uint feature) {
     return (material.materialFeatures & feature) != 0U ? 1.0 : 0.0;
 }
 
+float browInkScore(vec3 color) {
+    float redChroma = max(color.r - max(color.g, color.b), 0.0);
+    float darkness = 1.0 - dot(color, vec3(0.2126, 0.7152, 0.0722));
+    return redChroma * mix(0.35, 1.0, clamp(darkness, 0.0, 1.0));
+}
+
+vec4 sampleExpandedBrow(vec2 uv, float radiusInTexels) {
+    vec4 bestSample = texture(baseColorTexture, uv);
+    float bestScore = browInkScore(bestSample.rgb);
+    vec2 texelSize = 1.0 / vec2(textureSize(baseColorTexture, 0));
+    int radius = int(clamp(floor(radiusInTexels + 0.5), 0.0, 3.0));
+    for (int step = 1; step <= 3; ++step) {
+        if (step > radius) break;
+        for (int direction = -1; direction <= 1; direction += 2) {
+            vec4 candidate = texture(
+                baseColorTexture,
+                uv + vec2(0.0, float(direction * step) * texelSize.y));
+            float candidateScore = browInkScore(candidate.rgb);
+            if (candidateScore > bestScore) {
+                bestSample = candidate;
+                bestScore = candidateScore;
+            }
+        }
+    }
+    return bestSample;
+}
+
 vec3 sampleToonRamp(float coordinate) {
     vec2 atlasSize = vec2(textureSize(toonRampTexture, 0));
     float minimumU = 0.5 / atlasSize.x;
@@ -131,6 +158,12 @@ void main() {
     bool browOverlay = overlayMaterial
         && materialFeatureEnabled(64U) > 0.5;
     if (browOverlay) {
+        // The exported primitive contains separate brow and eyelash islands
+        // driven by different facial joints. Expand only the authored red
+        // Face-D ink in UV space; moving/scaling vertices would tear islands.
+        baseColor = sampleExpandedBrow(
+            textureCoordinate,
+            material.styleParameters.y);
         float basePower = max(material.featureParameters.w, 0.001);
         baseColor.rgb = clamp(
             pow(max(baseColor.rgb, vec3(0.0)), vec3(basePower)),
