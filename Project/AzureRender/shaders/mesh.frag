@@ -128,6 +128,15 @@ void main() {
     vec4 baseColor = texture(baseColorTexture, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
         && materialFeatureEnabled(16U) > 0.5;
+    bool browOverlay = overlayMaterial
+        && materialFeatureEnabled(64U) > 0.5;
+    if (browOverlay) {
+        float basePower = max(material.featureParameters.w, 0.001);
+        baseColor.rgb = clamp(
+            pow(max(baseColor.rgb, vec3(0.0)), vec3(basePower)),
+            vec3(0.0),
+            vec3(1.0));
+    }
     float platformMask = clamp(material.showcasePlatform, 0.0, 1.0);
     float platformRadius = length(textureCoordinate - vec2(0.5)) * 2.0;
     float contactShadow = 1.0 - smoothstep(0.10, 0.62, platformRadius);
@@ -512,6 +521,11 @@ void main() {
         secondaryKkSpecular = vec3(0.0);
     }
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
+    if (browOverlay) {
+        // M_Common_Brow uses a constant Opaccity parameter; the face texture
+        // alpha is not the brow mask and is intentionally ignored here.
+        outputAlpha = material.featureParameters.y;
+    }
     vec3 emissive =
         specularEmissive.rgb * material.emissiveStrength * 6.0
         * material.featureParameters.z

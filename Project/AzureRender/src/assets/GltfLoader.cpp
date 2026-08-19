@@ -70,6 +70,18 @@ std::uint32_t defaultMaterialFeatures(const AssetMaterialClass value) {
     }
 }
 
+bool isBrowMaterialName(const std::string& name) {
+    std::string normalized = name;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    return normalized.find("brow") != std::string::npos;
+}
+
 std::array<float, 4> defaultStyleParameters(
     const AssetMaterialClass value) {
     switch (value) {
@@ -143,6 +155,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "emissive-mask") return MaterialFeatureEmissiveMask;
     if (value == "overlay") return MaterialFeatureOverlay;
     if (value == "neutral-fallback") return MaterialFeatureNeutralFallback;
+    if (value == "brow-overlay") return MaterialFeatureBrowOverlay;
     return 0;
 }
 
@@ -152,6 +165,12 @@ void loadMaterialProfile(
     result.name = material.name.empty() ? "UnnamedMaterial" : material.name;
     result.materialClass = inferLegacyMaterialClass(result.name);
     result.materialFeatures = defaultMaterialFeatures(result.materialClass);
+    if (isBrowMaterialName(result.name)) {
+        result.materialFeatures |= MaterialFeatureBrowOverlay;
+        // Unreal centimetres converted to glTF metres, then opacity,
+        // fade distance and base power.
+        result.featureParameters = {0.04679F, 0.95F, 0.02F, 1.0F};
+    }
     if (!material.extras.IsObject()
         || !material.extras.Has("azureRenderMaterial")) {
         return;

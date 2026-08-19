@@ -1,5 +1,11 @@
 # Changelog
 
+## Disk seam and brow overlay - 2026-08-19
+
+- Removed the accretion-disk radial seam by embedding angular noise coordinates on a continuous circle.
+- Added an explicit brow-overlay material feature using Face D RGB, unlit output, constant 0.95 opacity, and view-directed vertex offset.
+- Converted the authored Unreal brow offset from 4.679 centimetres to 0.04679 glTF metres and unified the Vulkan material push-constant stage range.
+
 ## Showcase media delivery - 2026-08-19
 
 - Re-recorded the character turntable at 1600x900/24 fps with fixed front framing, foot-centred rotation, corrected eyebrows, directional lighting, and real-time shadows.

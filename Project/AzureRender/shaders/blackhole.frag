@@ -86,6 +86,19 @@ float Shape(const float x, const float alpha, const float beta) {
     return k * pow(x, alpha) * pow(1.0 - x, beta);
 }
 
+// atan jumps from +PI to -PI on one radial half-line. Feeding that raw angle
+// into non-periodic Cartesian noise creates a visible disk seam. Embed the
+// angle on a circle so values and derivatives agree at the wrap boundary.
+vec3 PeriodicDiskNoiseCoordinate(
+    const float angle,
+    const float angularScale,
+    const float radialLayer) {
+    return vec3(
+        cos(angle) * angularScale,
+        sin(angle) * angularScale,
+        radialLayer);
+}
+
 float Vec2ToTheta(const vec2 v1, const vec2 v2) {
     if (dot(v1, v2) > 0.0) {
         return asin(0.999999 * (v1.x * v2.y - v1.y * v2.x) / length(v1) / length(v2));
@@ -209,7 +222,9 @@ vec4 sampleDisk(
     const float spiralAngle = theta + spiralTheta;
     const float rotatingRadius = radius / rs + time * 0.42;
     const float thicknessNoise = SoftSaturate(GenerateAccretionDiskNoise(
-        vec3(1.5 * spiralAngle, rotatingRadius, 1.0), 1, 3, 40.0));
+        PeriodicDiskNoiseCoordinate(
+            spiralAngle, 1.5, rotatingRadius),
+        1, 3, 40.0));
     const float diskThickness = thin * radialShape
         * mix(0.38, 1.0, thicknessNoise);
     if (abs(rayPosition.y) >= diskThickness) {
@@ -219,19 +234,25 @@ vec4 sampleDisk(
     const float outerFade = 1.0 - smoothstep(0.88, 1.0, radialPosition);
     const float verticalDensity = max(
         1.0 - abs(rayPosition.y) / max(diskThickness, 1.0e-5), 0.0);
+    const float verticalLayer = rayPosition.y
+        / max(min(rs, thin / 0.1), 1.0e-4);
     const float cloudNoise = SoftSaturate(GenerateAccretionDiskNoise(
-        vec3(
-            rotatingRadius,
-            rayPosition.y / max(min(rs, thin / 0.1), 1.0e-4),
-            0.5 * spiralAngle),
+        PeriodicDiskNoiseCoordinate(
+            spiralAngle,
+            0.72 + 0.16 * verticalLayer,
+            rotatingRadius + 0.31 * verticalLayer),
         2, 6, 52.0));
     const float cloudMask = smoothstep(0.025, 0.48, cloudNoise);
     const float spiralWave = sin(
         5.0 * spiralAngle - time * 0.72
-        + 1.7 * PerlinNoise(vec3(rotatingRadius * 0.32, spiralAngle, 2.1)));
+        + 1.7 * PerlinNoise(PeriodicDiskNoiseCoordinate(
+            spiralAngle, 1.0, rotatingRadius * 0.32)));
     const float spiralMask = smoothstep(-0.32, 0.58, spiralWave);
     const float dustNoise = SoftSaturate(GenerateAccretionDiskNoise(
-        vec3(1.7 * spiralAngle, radius / rs, rayPosition.y / thin),
+        PeriodicDiskNoiseCoordinate(
+            spiralAngle,
+            1.7,
+            radius / rs + 0.28 * rayPosition.y / thin),
         0, 5, 34.0));
     const float clumpedDensity = mix(
         cloudMask * spiralMask,

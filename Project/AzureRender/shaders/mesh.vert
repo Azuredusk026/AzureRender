@@ -36,6 +36,8 @@ layout(location = 4) out vec4 shadowPosition;
 // (after MaterialPushConstants); weights occupies 128..135, the std140 mat4
 // gizmoTransform starts at byte 144 (16-byte aligned).
 layout(push_constant) uniform MorphWeights {
+    layout(offset = 96) vec4 featureParameters;
+    layout(offset = 116) uint materialFeatures;
     layout(offset = 128) vec2 weights;
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
@@ -50,6 +52,17 @@ void main() {
         + morph1 * morphWeights.weights.y;
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
+    if ((morphWeights.materialFeatures & 64U) != 0U) {
+        vec3 initialWorldPosition = (camera.model * gizmoPosition).xyz;
+        vec3 worldViewDirection = normalize(
+            camera.cameraPosition.xyz - initialWorldPosition);
+        vec3 localViewDirection = normalize(
+            transpose(mat3(camera.model)) * worldViewDirection);
+        // M_Common_Brow Offset, converted from Unreal cm to glTF metres by
+        // the asset profile.
+        gizmoPosition.xyz += localViewDirection
+            * morphWeights.featureParameters.x;
+    }
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * tangent.xyz);

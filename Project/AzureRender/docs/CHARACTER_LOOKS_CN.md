@@ -22,6 +22,8 @@
 
 眉毛是独立的 `M_actor_laevat_brow_01` 透明 Overlay，颜色来自 `T_actor_laevat_face_01_D` 对应 UV 区域。旧透明三角排序缓冲错误地用 index-buffer 偏移修正全局 vertex index，导致眉毛等 Overlay 读取到错误顶点；当前保持全局索引，不再做该减法。
 
+眉毛材质另有独立的 `brow-overlay` 特征位（`0x40`），不能按普通透明材质解释 Face D 的 alpha。顶点阶段沿顶点到相机的视线方向推出 `0.04679 m`；这是 Unreal 配置 `4.679 cm` 转换到 glTF 米制后的数值，禁止直接写成 `4.679`。片元阶段对 Face D RGB 执行 `pow(BasePower=1.0)` 和饱和处理，走 Unlit 输出，并使用材质配置的常量不透明度 `0.95`。当前通过视线偏移解决眉毛薄片被脸部遮挡及 z-fighting；`FadeDistance=0.02 m` 保留在 profile 中供后续 scene-depth fade 使用，现阶段不得声称已经实现深度纹理采样。
+
 头发数据链路已逐项核对：`T_actor_laevat_hair_01_D` 进入 Base Color；`T_actor_laevat_hair_01_HN` 通过 `afterglowHairDataTexture` 独立绑定，RG 驱动基础发束法线、BA 驱动双层 Kajiya-Kay 方向；`T_actor_laevat_hair_01_P` 是 Hair Master 的 `_P` packed texture。旧注入器只识别布料命名 `T_RGBA_P`，因此 Hair `_P` 未进入 metallic/roughness/specular 数据链路；现在两种键均受支持，重新生成的私有 GLB 会嵌入 `_P` 派生纹理。原始贴图保持不修改。
 
 ## Evening Sky 环境照明修正

@@ -39,7 +39,8 @@
           "face-sdf-eligible",
           "emissive-mask",
           "overlay",
-          "neutral-fallback"
+          "neutral-fallback",
+          "brow-overlay"
         ]
       }
     },

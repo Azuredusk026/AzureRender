@@ -1321,17 +1321,13 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
         layoutInfo.setLayoutCount = 1;
         layoutInfo.pSetLayouts = &descriptorSetLayout_;
-        VkPushConstantRange materialPushRange{};
-        materialPushRange.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-        materialPushRange.size = sizeof(MaterialPushConstants);
-        VkPushConstantRange morphPushRange{};
-        morphPushRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-        morphPushRange.offset = sizeof(MaterialPushConstants);
-        morphPushRange.size = sizeof(MorphPushConstants);
-        const VkPushConstantRange pushConstantRanges[] = {
-            materialPushRange, morphPushRange};
-        layoutInfo.pushConstantRangeCount = 2;
-        layoutInfo.pPushConstantRanges = pushConstantRanges;
+        VkPushConstantRange pushConstantRange{};
+        pushConstantRange.stageFlags =
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
+        pushConstantRange.size =
+            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants);
+        layoutInfo.pushConstantRangeCount = 1;
+        layoutInfo.pPushConstantRanges = &pushConstantRange;
         vkCheck(
             vkCreatePipelineLayout(
                 device_, &layoutInfo, nullptr, &pipelineLayout_),
@@ -1794,7 +1790,7 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
         vkCmdPushConstants(
             context.commandBuffer,
             pipelineLayout_,
-            VK_SHADER_STAGE_FRAGMENT_BIT,
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             0,
             sizeof(materialConstants),
             &materialConstants);
@@ -1804,7 +1800,7 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
         vkCmdPushConstants(
             context.commandBuffer,
             pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT,
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             sizeof(MaterialPushConstants),
             sizeof(morphConstants),
             &morphConstants);
@@ -2065,7 +2061,7 @@ void CharacterSceneRenderer::drawPrimitive(
     vkCmdPushConstants(
         commandBuffer,
         pipelineLayout_,
-        VK_SHADER_STAGE_FRAGMENT_BIT,
+        VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
         0,
         sizeof(materialConstants),
         &materialConstants);
@@ -2120,7 +2116,7 @@ void CharacterSceneRenderer::drawPrimitive(
     vkCmdPushConstants(
         commandBuffer,
         pipelineLayout_,
-        VK_SHADER_STAGE_VERTEX_BIT,
+        VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
         sizeof(MaterialPushConstants),
         sizeof(morphConstants),
         &morphConstants);
