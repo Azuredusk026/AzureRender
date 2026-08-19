@@ -1,5 +1,11 @@
 # Changelog
 
+## Release-prep workspace - 2026-08-19
+
+- Reduced the active build tree to Debug/Release build and self-contained install directories.
+- Moved obsolete captures, prior package output, encoding caches, and validation scratch data into a local ignored archive.
+- Rebuilt and reinstalled both configurations, passed 12/12 Debug tests, verified isolated Windows runtimes, and intentionally generated no package.
+
 ## Two-scene technical showcase - 2026-08-19
 
 - Replaced the black-hole four-view cut with two eight-second segments: front and moving close-up.

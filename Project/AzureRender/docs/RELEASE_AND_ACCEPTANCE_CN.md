@@ -1,5 +1,14 @@
 # AzureRender 发布与验收
 
+## 2026-08-19 发布准备（未打包）
+
+- 当前候选提交包含吸积盘周期噪声接缝修复、角色眉毛专用 Overlay 通路以及双场景技术展示更新。
+- Debug 与 Release 均已从当前源码构建；Debug 12/12 CTest 通过。
+- `build/install-debug/bin/AzureRender.exe` 与 `build/install-release/bin/AzureRender.exe` 已重新安装，二者均在隔离系统 PATH 下通过版本、资源和运行库检查，不会出现 MinGW 或 GLFW DLL 缺失。
+- Debug 安装树已实际运行 Character 3 帧，Release 安装树已实际运行 Blackhole/Cinematic 3 帧，退出码均为 0；Debug Validation 无错误。
+- 活动 `build/` 只保留 `ninja-debug`、`ninja-release`、`install-debug` 和 `install-release`。旧 capture、旧 `dist` 包、媒体编码缓存及视觉验证临时目录已移入本地忽略归档 `showcase/archive_legacy/20260819-发布前临时归档/`，可恢复但不属于发布内容。
+- 本轮遵循用户要求没有运行 CPack，也没有生成新的 ZIP、TGZ 或安装包。最终打包必须等待明确指令。
+
 ## 2026-08-18 视觉修复候选版验收
 
 - 提交：`8f94080`（角色材质与展示光照）、`cb4e004`（吸积盘多普勒、云噪声与越肩机位）。
