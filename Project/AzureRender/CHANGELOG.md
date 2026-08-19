@@ -1,5 +1,11 @@
 # Changelog
 
+## Character brow and lighting finalization - 2026-08-19
+
+- Lifted the data-driven brow card above the upper eyelid and preserved a visible deep-red Face-D response through HDR composition.
+- Rebalanced the Endfield look around a fixed lateral world-space key, lower environment/fill energy, stronger real-time shadow and Lam tint.
+- Doubled only the character portfolio turntable speed so the eight-second Beauty segment exposes front, side, and back lighting changes without altering the frozen black-hole motion.
+
 ## Black-hole final archive - 2026-08-19
 
 - Froze the approved P1 shader, quality settings, two-camera media, reproduction commands, and SHA-256 records as the final black-hole baseline.

@@ -36,6 +36,7 @@ layout(location = 4) out vec4 shadowPosition;
 // (after MaterialPushConstants); weights occupies 128..135, the std140 mat4
 // gizmoTransform starts at byte 144 (16-byte aligned).
 layout(push_constant) uniform MorphWeights {
+    layout(offset = 80) vec4 styleParameters;
     layout(offset = 96) vec4 featureParameters;
     layout(offset = 116) uint materialFeatures;
     layout(offset = 128) vec2 weights;
@@ -62,6 +63,10 @@ void main() {
         // the asset profile.
         gizmoPosition.xyz += localViewDirection
             * morphWeights.featureParameters.x;
+        // Brow cards exported through the skeletal glTF path sit on the
+        // upper-eyelid edge. A profile-authored local lift restores the
+        // intended separation without changing the shared face mesh.
+        gizmoPosition.y += morphWeights.styleParameters.x;
     }
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);

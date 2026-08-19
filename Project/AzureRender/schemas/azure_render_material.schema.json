@@ -45,11 +45,11 @@
       }
     },
     "styleParameters": {
-      "description": "toon, shadow tint, specular, rim",
+      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim; brow-overlay uses x as local vertical card lift in metres.",
       "$ref": "#/$defs/parameterVector"
     },
     "featureParameters": {
-      "description": "outline, hair highlight, emissive, face overlay",
+      "description": "Class-dependent feature vector. Brow-overlay uses view offset, opacity, fade distance and base power.",
       "$ref": "#/$defs/parameterVector"
     },
     "faceSdf": {

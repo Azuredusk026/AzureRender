@@ -24,6 +24,14 @@
 
 眉毛材质另有独立的 `brow-overlay` 特征位（`0x40`），不能按普通透明材质解释 Face D 的 alpha。顶点阶段沿顶点到相机的视线方向推出 `0.04679 m`；这是 Unreal 配置 `4.679 cm` 转换到 glTF 米制后的数值，禁止直接写成 `4.679`。片元阶段对 Face D RGB 执行 `pow(BasePower=1.0)` 和饱和处理，走 Unlit 输出，并使用材质配置的常量不透明度 `0.95`。当前通过视线偏移解决眉毛薄片被脸部遮挡及 z-fighting；`FadeDistance=0.02 m` 保留在 profile 中供后续 scene-depth fade 使用，现阶段不得声称已经实现深度纹理采样。
 
+最终可见性排查确认 Brow primitive、Face D、UV、透明排序和 WPO 均已生效；真正问题是骨骼 glTF 导出的卡片落在上眼睑边缘，同时原始 Face D 红色经过 HDR 合成后与肤色对比不足。`brow-overlay` 现使用 `styleParameters.x=0.01 m` 做数据化局部上移，并在保留 Face D 纹理细节的前提下压低绿色/蓝色响应，使眉毛成为眼睛上方独立、稳定的深红细线。固定验收图必须使用 `face-front`，不能只凭全身远景判断眉毛是否存在。
+
+## 最终主光与阴影基线（2026-08-19）
+
+旧 Endfield Beauty 的 HDRI 漫反射占比过高、填充光为 0.30，主光又接近顶光；转台八秒只旋转约 92°，因此材质数值虽变化，观看时仍接近均匀照明。当前主光改为固定世界空间侧上方方向 `(0.62, 0.68, 0.38)`，环境漫反射在 Endfield Look 中降为原来的 58%，填充降为 0.10，主光提高为 1.38，并加强实时 shadow-map 与 Lam 阴影染色。Beauty 八秒转速由 0.20 提高到 0.40 rad/s，完整覆盖正面、侧面和背面；黑洞 Portfolio 速度保持不变。
+
+阴影验收必须同时检查 Beauty 转台、`shadow-visibility` 隔离图和地台投影：亮面不能靠全局曝光抬平，暗面仍需保留布料、皮肤和头发纹理，地台阴影必须随角色轮廓清晰变化。
+
 头发数据链路已逐项核对：`T_actor_laevat_hair_01_D` 进入 Base Color；`T_actor_laevat_hair_01_HN` 通过 `afterglowHairDataTexture` 独立绑定，RG 驱动基础发束法线、BA 驱动双层 Kajiya-Kay 方向；`T_actor_laevat_hair_01_P` 是 Hair Master 的 `_P` packed texture。旧注入器只识别布料命名 `T_RGBA_P`，因此 Hair `_P` 未进入 metallic/roughness/specular 数据链路；现在两种键均受支持，重新生成的私有 GLB 会嵌入 `_P` 派生纹理。原始贴图保持不修改。
 
 ## Evening Sky 环境照明修正

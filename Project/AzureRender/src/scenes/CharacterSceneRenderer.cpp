@@ -1632,7 +1632,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
     const RenderSettings& settings = *renderSettings_;
     const Vector3 lightDirection = settings.showcasePreset == 1
-        ? normalize({0.36F, 0.86F, 0.36F})
+        ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
     const Vector3 lightTarget = {0.0F, -0.10F, 0.0F};
     const Vector3 lightPosition = {
@@ -1667,7 +1667,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.08F, 0.24F, 0.18F},
-        {1.0F, 1.12F, 0.30F, 0.32F},
+        {1.0F, 1.38F, 0.10F, 0.24F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},

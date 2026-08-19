@@ -160,7 +160,7 @@ function buildMaterialProfile(materialName, parameters = {}) {
   if (parameters._E && !features.includes("emissive-mask")) {
     features.push("emissive-mask");
   }
-  const styleParameters = {
+  const styleParameters = isBrow ? [0.01, 0.0, 0.0, 0.0] : ({
     generic: [1.0, 1.0, 1.0, 1.0],
     skin: [0.9, 0.8, 0.35, 0.35],
     face: [0.85, 0.75, 0.15, 0.25],
@@ -171,7 +171,7 @@ function buildMaterialProfile(materialName, parameters = {}) {
     overlay: [0.0, 0.0, 0.0, 0.0],
     emissive: [0.5, 0.0, 0.0, 0.0],
     showcase: [1.0, 1.0, 1.0, 1.0],
-  }[materialClass];
+  }[materialClass]);
   // Unreal material distances are centimetres; glTF geometry is metres.
   const featureParameters = isBrow ? [0.04679, 0.95, 0.02, 1.0] : ({
     generic: [1.0, 0.0, 1.0, 0.0],

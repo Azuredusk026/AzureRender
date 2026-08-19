@@ -399,7 +399,12 @@ void AzureRenderApp::buildSceneFrameData(
 
 void AzureRenderApp::activatePortfolioOrbit() {
     rotationAngle_ = 0.0F;
-    rotationSpeed_ = 0.20F;
+    // The character Beauty segment must traverse front -> side -> back in
+    // eight seconds so the fixed world-space key and shadow map are visible.
+    // Keep the already-approved black-hole camera motion unchanged.
+    rotationSpeed_ = renderSettings_.sceneType == azurerender::SceneType::Character
+        ? 0.40F
+        : 0.20F;
     cameraPosition_ = {0.0F, 1.18F, 3.55F};
     cameraTarget_ = {0.0F, 0.12F, 0.0F};
     azurerender::applyShowcasePresetLook(renderSettings_, 1);

@@ -136,6 +136,10 @@ void main() {
             pow(max(baseColor.rgb, vec3(0.0)), vec3(basePower)),
             vec3(0.0),
             vec3(1.0));
+        // The authored brow card is only a few screen pixels high. Preserve
+        // the Face-D sample, but compensate for HDR/display blending so its
+        // red chroma does not collapse into the surrounding skin tone.
+        baseColor.rgb *= vec3(0.72, 0.30, 0.34);
     }
     float platformMask = clamp(material.showcasePlatform, 0.0, 1.0);
     float platformRadius = length(textureCoordinate - vec2(0.5)) * 2.0;
@@ -225,8 +229,12 @@ void main() {
     } else if (material.materialClass == 6U) {
         metallic = 0.0;
     }
-    vec3 lightDirection = normalize(vec3(0.48, 0.82, 0.32));
-    vec3 fillDirection = normalize(vec3(-0.62, 0.34, -0.48));
+    vec3 lightDirection = showcasePreset == 1.0
+        ? normalize(vec3(0.62, 0.68, 0.38))
+        : normalize(vec3(0.48, 0.82, 0.32));
+    vec3 fillDirection = showcasePreset == 1.0
+        ? normalize(vec3(-0.48, 0.24, -0.64))
+        : normalize(vec3(-0.62, 0.34, -0.48));
     vec3 viewDirection = normalize(camera.cameraPosition.xyz - worldPosition);
     vec3 halfDirection = normalize(lightDirection + viewDirection);
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
@@ -238,7 +246,10 @@ void main() {
     if (qaEffectMode == 2 && qaEffectDisabled) {
         shadowVisibility = 1.0;
     }
-    float keyVisibility = mix(1.0, shadowVisibility, 0.72);
+    float keyVisibility = mix(
+        1.0,
+        shadowVisibility,
+        showcasePreset == 1.0 ? 0.88 : 0.72);
     if (material.materialClass == 2U) {
         keyVisibility = max(keyVisibility, 0.84);
     } else if (material.materialClass == 1U) {
@@ -290,6 +301,10 @@ void main() {
     vec3 hairAmbientDiffuse = diffuseColor
         * (0.42 + min(environmentLuminance, 0.80) * 0.26);
     ambientDiffuse = mix(ambientDiffuse, hairAmbientDiffuse, hairActive);
+    // Endfield is a key-light presentation, not a flat HDRI preview. Keep
+    // the sky directional, but leave enough energy headroom for the fixed
+    // world-space key and real-time shadow map to create readable turns.
+    ambientDiffuse *= showcasePreset == 1.0 ? 0.58 : 1.0;
     float platformAmbientVisibility = mix(
         1.0,
         mix(0.44, 1.0, shadowVisibility),
@@ -347,7 +362,10 @@ void main() {
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
     float ambientRampVisibility = mix(
         1.0,
-        mix(0.64, 0.98, rampLuminance),
+        mix(
+            showcasePreset == 1.0 ? 0.46 : 0.64,
+            0.98,
+            rampLuminance),
         toonWeight);
     ambientDiffuse *= ambientRampVisibility;
     float diffuseScale = mix(0.62, 0.68, toonWeight);
@@ -374,7 +392,8 @@ void main() {
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
-        material.lamShadowColor.a * shadowWeight * 0.58);
+        material.lamShadowColor.a * shadowWeight
+            * (showcasePreset == 1.0 ? 0.76 : 0.58));
     float aoClassWeight = material.materialClass == 2U
         ? 0.10
         : (material.materialClass == 1U ? 0.28 : 1.0);
