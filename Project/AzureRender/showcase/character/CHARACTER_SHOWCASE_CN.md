@@ -2,32 +2,33 @@
 
 ## 当前交付
 
-技术展示先播放 8 秒 Beauty 正常渲染，随后依次播放描边、世界法线、深度、底色、材质 ID、Hair KK 和阴影可见度，每个诊断视图 4 秒。Beauty 使用固定正前方相机和脚部中心转台，以 `0.40 rad/s` 覆盖正面、侧面和背面，使世界空间主光与实时阴影的变化可直接观察；诊断段统一固定全身正面机位，便于逐项比较。画面原生输出 1600×900，编码强制 SAR 1:1，不做非等比拉伸。
+技术展示由五个 16 秒段落组成，依次为最终渲染、原始模型（Albedo）、世界法线、阴影可见度和材质 ID 分区。每段使用同一固定相机、脚部中心转台和 `2π/16 rad/s` 角速度，从正面开始精确旋转一整圈。旧视频的描边、深度和仅剩黑底发丝的 Hair KK 段已移除。画面原生输出 1600×900，编码强制 SAR 1:1，不做非等比拉伸。
 
 | 文件 | 内容 | SHA-256 |
 | --- | --- | --- |
-| `images/20260819-183550_角色红色眉毛近景.png` | Face D 驱动的独立深红眉毛近景证据 | `A9B28E5086E08A39DBEB6E173DF5DBE0437E33E06D7D11ABDE581DC09AFC2E92` |
-| `images/20260819-183550_角色正面动态光照.png` | Beauty 正面受光与地台投影 | `A4C06EE42235E065AF31815812413980AFA052A0B03D32C37BA9431E5D0D6A37` |
-| `images/20260819-183550_角色侧面明暗变化.png` | 转台侧面材质明暗变化 | `7051DE5BF85B8E8C21DFE58C4855CD4D8676FDCA0F6EF0208A2231E103E8A97D` |
-| `images/20260819-183550_角色背面实时阴影.png` | 背面受光、衣料层次与实时阴影 | `CE60177CE426FEC198510D72BCB161755E85C53CA75E18AF2E68E778CECA2AF6` |
-| `images/20260819-183550_角色描边诊断.png` | 内部与轮廓边缘响应 | `47854D07A35641B2731499430CA927F28464AAEC7F455F97FC8421CBFF8857A1` |
-| `images/20260819-183550_角色法线诊断.png` | 世界空间法线 | `C4D2345544CA57D48A7FA1A35C2667820CED922D7E2D232107CDED0519C8EEF3` |
-| `images/20260819-183550_角色深度诊断.png` | 线性深度层次 | `1DBAC09803581226EE798E0CBA9021E863E8506FCFCF9DAF996C87551DB8020E` |
-| `video/20260819-183550_角色最终技术展示.mp4` | 864 帧、36.00 秒、8 个有序段落 | `A6C8FDE7D48E7FB3715390C9932622CAC7DA96F91125351C3901F2C8FDC77BAE` |
+| `images/20260819-200656_角色加宽眉毛近景.png` | 2 倍纵向卡片几何的深红眉毛近景 | `E4128AB1C2E305EB9EF1588CFF69E9AB50D9B6E6F755166B8FD5147909A15439` |
+| `images/20260819-200656_角色正面最终渲染.png` | 最终渲染正面与远景眉毛 | `D982820EEF6ABBBBBA0EE10A55F51EDB8DA4A7605A65E74E3E63A846F94DFF9F` |
+| `images/20260819-200656_角色侧面最终渲染.png` | 四分之一圈后的侧面明暗 | `444EA17CB05A7513EED5DE6FB066FF6C8053335D21C1DB506CCADF34D7FD32C6` |
+| `images/20260819-200656_角色原始模型.png` | Albedo 原始贴图与材质底色 | `3A9186461581654484AD68C1F0DC37A6B5C30D6569F23A03A1B512999D198065` |
+| `images/20260819-200656_角色法线分布.png` | 世界空间法线 | `3F5A111AD87F801AFD62802A099BCF0509032A5D94E9D63FF00244811B5BEB59` |
+| `images/20260819-200656_角色阴影分布.png` | 主光和 shadow-map 可见度 | `355B700E60039234F1F6A065FCB7A180C54B25B60C1905E37F1247F43E7A21B0` |
+| `images/20260819-200656_角色材质分区.png` | Skin/Hair/Fabric/Overlay/Platform 分类 | `F4BD457A36580119634EAFE56B1F41E26BAEFD2BE91996E5976B6EC5C97F020B` |
+| `video/20260819-200656_角色五模式整圈展示.mp4` | 1920 帧、80.00 秒、5 个完整转台段落 | `334206DFEE5BDBDDC8B40B742030E57BFD16B2FEC64567286998CFA478B7DE35` |
 
-生成环境：Debug Validation、NVIDIA GeForce RTX 4060 Laptop GPU、Evening Sky 环境、Endfield Industrial Look。视频已完整解码 864 帧，格式为 H.264 High、yuv420p/BT.709、1600×900、24 fps、SAR 1:1、DAR 16:9。
+生成环境：Debug Validation、NVIDIA GeForce RTX 4060 Laptop GPU、Evening Sky 环境、Endfield Industrial Look。视频已完整解码 1920 帧，格式为 H.264 High、yuv420p/BT.709、1600×900、24 fps、SAR 1:1、DAR 16:9。
 
 ## 眉毛与头发数据
 
 - `M_actor_laevat_brow_01` 使用 `brow-overlay` 专用 Unlit 通路：Face D RGB、0.95 不透明度，以及沿视线方向 `0.04679 m` 的顶点偏移；该数值对应原资产的 `4.679 cm`。
 - 针对导出后贴近上眼睑的眉毛卡片，材质数据额外提供 `0.01 m` 局部上移；Face D 结果乘深红显示补偿，保证眉毛在 HDR 合成后仍与眼线分离且可见。
+- 为增加全身正面画面的实际像素覆盖，眉毛卡片围绕导出中心 `1.2536046 m` 做 2 倍纵向几何放大；放大仅作用于 Brow primitive，不改变脸部或眼线。
 - `T_actor_laevat_hair_01_D`：头发 Base Color。
 - `T_actor_laevat_hair_01_HN`：独立 Hair Data；RG 参与基础发束法线，BA 驱动双层 Kajiya-Kay 高光方向。
 - `T_actor_laevat_hair_01_P`：Hair Master 的 `_P` packed 材质数据；注入器同时支持 `_P` 与布料使用的 `T_RGBA_P`。
 
 ## 复现
 
-Beauty 使用 192 帧；其余段把 `--qa-isolation` 依次设为 `outline`、`world-normal`、`depth`、`albedo`、`material-id`、`hair-kk`、`shadow-visibility`，每段捕获 96 帧。
+五个段落均捕获 384 帧。把 `--qa-isolation` 依次设为 `beauty`、`albedo`、`world-normal`、`shadow-visibility` 和 `material-id`；`--portfolio` 与 isolation 组合时保留自动转台。
 
 ```powershell
 .\build\ninja-debug\AzureRender.exe `
@@ -35,7 +36,8 @@ Beauty 使用 192 帧；其余段把 `--qa-isolation` 依次设为 `outline`、`
   --asset .\assets_private\laevat_skinned\laevat_idle_material.glb `
   --portfolio --width 1600 --height 900 `
   --capture-dir .\build\character_beauty `
-  --capture-frames 192 --capture-fps 24
+  --qa-isolation beauty `
+  --capture-frames 384 --capture-fps 24
 ```
 
 私有角色模型、派生 GLB、纹理、截图和视频仅供本机视觉检查，不得提交 Git、进入 CI/安装包或公开 portfolio。公共自动化回归继续使用 `assets_public/test_model.gltf`。

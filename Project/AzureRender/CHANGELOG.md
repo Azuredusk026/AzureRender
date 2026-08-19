@@ -1,5 +1,12 @@
 # Changelog
 
+## Five-pass full-turn character showcase - 2026-08-19
+
+- Doubled the brow card's bind-space vertical geometry around its measured export pivot so the red eyebrow keeps stable full-body pixel coverage.
+- Preserved Portfolio rotation when combined with QA isolation and fixed the character period at exactly one turn per 16 seconds.
+- Replaced the eight-part 36-second cut with five 16-second full turns: Beauty, Albedo, World Normal, Shadow Visibility, and Material ID.
+- Removed the obsolete Hair KK black-background segment and fully decoded all 1920 frames of the new 80-second H.264 delivery.
+
 ## Character final showcase archive - 2026-08-19
 
 - Re-recorded the 36-second character technical showcase after the final brow-card lift and Endfield lighting rebalance.
