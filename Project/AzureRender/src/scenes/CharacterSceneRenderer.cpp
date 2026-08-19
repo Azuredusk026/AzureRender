@@ -1983,11 +1983,11 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 const std::uint32_t base =
                     primitive->firstIndex + ordered * 3;
                 oitMapped[oitWriteIndex + triangle * 3] =
-                    asset_.indices[base] - primitive->firstIndex;
+                    asset_.indices[base];
                 oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                    asset_.indices[base + 1] - primitive->firstIndex;
+                    asset_.indices[base + 1];
                 oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                    asset_.indices[base + 2] - primitive->firstIndex;
+                    asset_.indices[base + 2];
             }
             oitWriteIndex += primitive->indexCount;
         }

@@ -18,6 +18,12 @@
 
 固定验收至少包含 `face-front` Beauty、`full-body-front` Beauty、Albedo 和 Hair KK。Albedo 用于排除底色错误，Hair KK 用于防止“公式存在但输出全黑”的回归。
 
+## 眉毛与头发贴图核对（2026-08-19）
+
+眉毛是独立的 `M_actor_laevat_brow_01` 透明 Overlay，颜色来自 `T_actor_laevat_face_01_D` 对应 UV 区域。旧透明三角排序缓冲错误地用 index-buffer 偏移修正全局 vertex index，导致眉毛等 Overlay 读取到错误顶点；当前保持全局索引，不再做该减法。
+
+头发数据链路已逐项核对：`T_actor_laevat_hair_01_D` 进入 Base Color；`T_actor_laevat_hair_01_HN` 通过 `afterglowHairDataTexture` 独立绑定，RG 驱动基础发束法线、BA 驱动双层 Kajiya-Kay 方向；`T_actor_laevat_hair_01_P` 是 Hair Master 的 `_P` packed texture。旧注入器只识别布料命名 `T_RGBA_P`，因此 Hair `_P` 未进入 metallic/roughness/specular 数据链路；现在两种键均受支持，重新生成的私有 GLB 会嵌入 `_P` 派生纹理。原始贴图保持不修改。
+
 ## Evening Sky 环境照明修正
 
 此前 Environment 资源虽然成功加载，但 `Endfield Industrial` 背景只混合 8% Skybox，同时负曝光、高对比和较低环境漫反射共同让画面看起来仍是暗色程序背景。现在该 Look 使用 82% Evening Sky 背景，环境纹理按世界法线提供有方向性的漫反射，Toon 阴影区保留 64%–98% 的环境可见度。Look 调色改为 `+0.12 EV / 0.96 saturation / 1.04 contrast`，用于恢复暗色服装细节；这不是全局无差别提亮，主光、环境方向、AO 和阴影染色仍负责明暗关系。

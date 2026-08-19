@@ -1,5 +1,11 @@
 # Changelog
 
+## Character overlay and hair data - 2026-08-19
+
+- Corrected transparent triangle sorting to preserve global vertex indices, restoring eyebrow and facial overlay geometry.
+- Bound the hair master material's `_P` packed texture in addition to the cloth-style `T_RGBA_P` key.
+- Documented the distinct Base Color, HN strand-data, and P packed-material texture paths.
+
 ## Showcase framing and turntable - 2026-08-19
 
 - Centered the character turntable and showcase platform on a robust bind-pose foot pivot.

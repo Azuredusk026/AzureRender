@@ -115,7 +115,9 @@ function addTexture(filename, imageData = undefined, cacheName = filename) {
 
 const baseColorKeys = ["BaseTex", "T_BaseColor", "BaseColor"];
 const normalKeys = ["NormalTex", "Normal"];
-const packedMaterialKeys = ["T_RGBA_P"];
+// Cloth instances expose the packed material texture as T_RGBA_P, while the
+// hair master material uses _P for the same authored data role.
+const packedMaterialKeys = ["T_RGBA_P", "_P"];
 let boundMaterials = 0;
 let boundNormals = 0;
 let boundMetallicRoughness = 0;
