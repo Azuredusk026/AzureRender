@@ -2,46 +2,51 @@
 
 ## 当前交付
 
-技术展示由五个 16 秒段落组成，依次为最终渲染、原始模型（Albedo）、世界法线、阴影可见度和材质 ID 分区。每段使用同一固定相机、脚部中心转台和 `2π/16 rad/s` 角速度，从正面开始精确旋转一整圈。旧视频的描边、深度和仅剩黑底发丝的 Hair KK 段已移除。画面原生输出 1600×900，编码强制 SAR 1:1，不做非等比拉伸。
+当前视频由五个 16 秒段落组成，顺序为最终渲染、原始模型（Albedo）、世界法线、阴影可见度和材质 ID 分区。每段均使用同一固定相机、脚部中心转台与 `2π/16 rad/s` 匀速角速度：角色从朝左开始，完成 360° 旋转并回到朝左。画面为 1600×900、24 fps、SAR 1:1，不做非等比拉伸。
 
 | 文件 | 内容 | SHA-256 |
 | --- | --- | --- |
-| `images/20260819-200656_角色加宽眉毛近景.png` | 2 倍纵向卡片几何的深红眉毛近景 | `E4128AB1C2E305EB9EF1588CFF69E9AB50D9B6E6F755166B8FD5147909A15439` |
-| `images/20260819-200656_角色正面最终渲染.png` | 最终渲染正面与远景眉毛 | `D982820EEF6ABBBBBA0EE10A55F51EDB8DA4A7605A65E74E3E63A846F94DFF9F` |
-| `images/20260819-200656_角色侧面最终渲染.png` | 四分之一圈后的侧面明暗 | `444EA17CB05A7513EED5DE6FB066FF6C8053335D21C1DB506CCADF34D7FD32C6` |
-| `images/20260819-200656_角色原始模型.png` | Albedo 原始贴图与材质底色 | `3A9186461581654484AD68C1F0DC37A6B5C30D6569F23A03A1B512999D198065` |
-| `images/20260819-200656_角色法线分布.png` | 世界空间法线 | `3F5A111AD87F801AFD62802A099BCF0509032A5D94E9D63FF00244811B5BEB59` |
-| `images/20260819-200656_角色阴影分布.png` | 主光和 shadow-map 可见度 | `355B700E60039234F1F6A065FCB7A180C54B25B60C1905E37F1247F43E7A21B0` |
-| `images/20260819-200656_角色材质分区.png` | Skin/Hair/Fabric/Overlay/Platform 分类 | `F4BD457A36580119634EAFE56B1F41E26BAEFD2BE91996E5976B6EC5C97F020B` |
-| `video/20260819-200656_角色五模式整圈展示.mp4` | 1920 帧、80.00 秒、5 个完整转台段落 | `334206DFEE5BDBDDC8B40B742030E57BFD16B2FEC64567286998CFA478B7DE35` |
+| `images/20260819-223233_角色眉毛蒙皮修复近景.png` | 原始拓扑与蒙皮下的连续红色眉毛近景 | `575EB6CD2175DD292738897BF47BBB8028F2CB90E2BE1A042A1BE5B77DCAC75A` |
+| `images/20260819-223233_角色朝左起始.png` | 转台首帧，角色朝左 | `9C3648C172664C8B640DF3F3C150BA8B3A52F74114B5550065370AD844D3D1BF` |
+| `images/20260819-223233_角色正面眉毛连续.png` | 四分之一圈后的正面眉毛与最终渲染 | `EC5F0C90F369275ECD38771B17D991449948037C5A13B428768897010D3824FF` |
+| `images/20260819-223233_角色原始模型.png` | Albedo 原始贴图与材质底色 | `E34FFF7472EBF25800F77AE0DE1A5091264B2689EF9A1BDC12C9B604B5E307FE` |
+| `images/20260819-223233_角色法线分布.png` | 世界空间法线 | `320C746A33F5B4221B34E5638A19EB41B1DBFD76C4B059BE9A77EA222513C892` |
+| `images/20260819-223233_角色阴影分布.png` | 主光与 shadow-map 可见度 | `2AE6B6B37AABEE24A9E93412BB0726A626BD20789D1ED5C0A95D5863309D39AD` |
+| `images/20260819-223233_角色材质分区.png` | Skin/Hair/Fabric/Overlay/Platform 分类 | `05562663CBC6168C79542337A9CCD2A0D3553DCC3634902B8F8F995F2080BEAF` |
+| `video/20260819-223233_角色左向起转五模式展示.mp4` | 1920 帧、80.00 秒、5 个完整转台段落 | `C758421EDA688C9CCA98149E4EF88E74C1D60B5754957481A8C54C88F641709D` |
 
-生成环境：Debug Validation、NVIDIA GeForce RTX 4060 Laptop GPU、Evening Sky 环境、Endfield Industrial Look。视频已完整解码 1920 帧，格式为 H.264 High、yuv420p/BT.709、1600×900、24 fps、SAR 1:1、DAR 16:9。
+视频已完整解码 1920 帧。格式为 H.264 High、yuv420p/BT.709、1600×900、24 fps、SAR 1:1、DAR 16:9。
 
-## 眉毛与头发数据
+## 眉毛网格与蒙皮审计
 
-- `M_actor_laevat_brow_01` 使用 `brow-overlay` 专用 Unlit 通路：Face D RGB、0.95 不透明度，以及沿视线方向 `0.04679 m` 的顶点偏移；该数值对应原资产的 `4.679 cm`。
-- 针对导出后贴近上眼睑的眉毛卡片，材质数据额外提供 `0.01 m` 局部上移；Face D 结果乘深红显示补偿，保证眉毛在 HDR 合成后仍与眼线分离且可见。
-- 为增加全身正面画面的实际像素覆盖，眉毛卡片围绕导出中心 `1.2536046 m` 做 2 倍纵向几何放大；放大仅作用于 Brow primitive，不改变脸部或眼线。
+- `M_actor_laevat_brow_01` 所在 primitive 共 578 顶点、1878 个索引和 626 个三角形。
+- 网格包含 34 个独立拓扑小岛，是眉毛与睫毛卡片的合集；它并非一张应当整体连续的眉毛网格。
+- 审计未发现退化三角形、非流形边、零权重顶点或权重和异常；左右权重分布对称。
+- 使用骨骼仅属于 `eye*`、`eyelash*` 和 `brow*`，没有身体等无关额外骨骼导致位移。
+- 旧方案围绕单一全局 pivot 放大整个 primitive，会把分别蒙皮的小岛拉开并产生断裂尖角，现已完全撤销。
+- 当前仅在片元阶段对 Face D 的深红眉毛笔画做纵向 2 texel UV 膨胀；原始顶点、拓扑和权重不变。
+- 保留 `0.01 m` 局部上移与沿视线 `0.04679 m` 的 WPO，避免与脸部重叠和 z-fighting。
+- 审计工具：`tools/audit_brow_mesh.js`。
+
+## 头发数据
+
 - `T_actor_laevat_hair_01_D`：头发 Base Color。
-- `T_actor_laevat_hair_01_HN`：独立 Hair Data；RG 参与基础发束法线，BA 驱动双层 Kajiya-Kay 高光方向。
-- `T_actor_laevat_hair_01_P`：Hair Master 的 `_P` packed 材质数据；注入器同时支持 `_P` 与布料使用的 `T_RGBA_P`。
+- `T_actor_laevat_hair_01_HN`：Hair Data；RG 参与基础发束法线，BA 驱动双层 Kajiya-Kay 高光方向。
+- `T_actor_laevat_hair_01_P`：Hair Master 的 packed 材质数据；注入器同时支持 `_P` 与布料使用的 `T_RGBA_P`。
 
 ## 复现
 
-五个段落均捕获 384 帧。把 `--qa-isolation` 依次设为 `beauty`、`albedo`、`world-normal`、`shadow-visibility` 和 `material-id`；`--portfolio` 与 isolation 组合时保留自动转台。
+每种模式均捕获 384 帧。`--qa-isolation` 依次使用 `beauty`、`albedo`、`world-normal`、`shadow-visibility` 和 `material-id`。
 
 ```powershell
 .\build\ninja-debug\AzureRender.exe `
   --scene-type character `
   --asset .\assets_private\laevat_skinned\laevat_idle_material.glb `
-  --portfolio --width 1600 --height 900 `
-  --capture-dir .\build\character_beauty `
+  --portfolio --qa-light stylized-key `
   --qa-isolation beauty `
+  --width 1600 --height 900 `
+  --capture-dir .\build\character_beauty `
   --capture-frames 384 --capture-fps 24
 ```
 
-私有角色模型、派生 GLB、纹理、截图和视频仅供本机视觉检查，不得提交 Git、进入 CI/安装包或公开 portfolio。公共自动化回归继续使用 `assets_public/test_model.gltf`。
-
-## 最终光照基线
-
-角色使用 Evening Sky 环境与固定世界空间侧前方主光。当前 Endfield Look 将环境漫反射缩放为原基线的 58%，Key/Fill/Rim 分别为 1.38/0.10/0.24，shadow-map 可见度权重为 0.88，Lam 阴影色为 0.76。该组合保留环境可读性，同时避免填充光抹平角色与地台的实时阴影。
+私有角色模型、派生 GLB、纹理、截图和视频只用于本机视觉验收，不进入 Git、CI、安装树或公开作品集。公共自动化回归继续使用 `assets_public/test_model.gltf`。
