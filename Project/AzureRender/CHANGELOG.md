@@ -1,5 +1,12 @@
 # Changelog
 
+## Showcase media delivery - 2026-08-19
+
+- Re-recorded the character turntable at 1600x900/24 fps with fixed front framing, foot-centred rotation, corrected eyebrows, directional lighting, and real-time shadows.
+- Re-recorded the black hole as four ordered eight-second Cinematic segments: front, high, moving orbit, and reference close-up.
+- Encoded both videos as square-pixel BT.709 H.264 and verified full-frame decoding.
+- Archived legacy version-suffixed local media and adopted timestamp plus short Chinese filenames.
+
 ## Character overlay and hair data - 2026-08-19
 
 - Corrected transparent triangle sorting to preserve global vertex indices, restoring eyebrow and facial overlay geometry.

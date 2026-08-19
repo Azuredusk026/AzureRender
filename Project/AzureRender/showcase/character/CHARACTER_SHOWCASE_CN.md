@@ -1,48 +1,34 @@
-# Character 场景本机展示
+# 角色场景展示
 
-## v2 视觉修正版
+## 当前交付
 
-本版修复背景双网格、右侧白色灯柱、整体曝光不足、皮肤错误金属反光、Face SDF 灰色面罩感，并保持 Toon Ramp、AO 与双带 Hair KK 高光稳定。截图来自 Debug Validation 捕获，用于本机私有资产视觉验收；发布构建使用相同 SPIR-V 与 RenderSettings。
+本次使用固定正前方相机，角色围绕 Bind Pose 双脚中心旋转，展示底盘使用同一中心。世界空间主光保持不动，因此转台过程中可以观察到头发、皮肤、布料和金属部件的明暗变化以及底盘上的实时阴影。画面原生输出 1600×900，编码强制 SAR 1:1，不做非等比拉伸。
 
-| 文件 | 机位 / 灯光 | SHA-256 |
+| 文件 | 内容 | SHA-256 |
 | --- | --- | --- |
-| `images/character_fullbody_endfield_v2_1920x1080.png` | full-body-front / stylized-key | `9EBFFDD5C8E6199D516E82D9DD95907E746D0D8756DE3390BF6479B948448DB7` |
-| `images/character_threequarter_endfield_v2_1920x1080.png` | face-three-quarter / stylized-key | `99E21F9C62A45628969C8177FE3B7611CD1EAF5CBA9B3001245EA7305334A8EF` |
-| `images/character_closeup_endfield_v2_1920x1080.png` | face-front / stylized-key | `EE2AD9F5D7D3B8F744D9DFBE4E96E1BE10476668CDE9B102D4D42C4A72F7D08D` |
-| `images/character_back_endfield_v2_1920x1080.png` | back-detail / rear-emissive | `B08267EFB5955B9BE64A62F934CDEB401BDCA9EFB7935544F439431E49462345` |
-| `images/character_material_neutral_v2_1920x1080.png` | face-three-quarter / neutral-material | `8F449CB582A52A8619F072FE52A4096A42B2C13BD97D1522C1FDB20534976026` |
+| `images/20260819-151945_角色正面全身.png` | 正面、双脚居中、红色眉毛 | `F08D1CC9553203A28667298C06190BB8CFE99C9041EF68C89CDA1EB73B193EDE` |
+| `images/20260819-151946_角色四分之三光照.png` | 转台四分之三、材质明暗变化 | `40325B106D28929596273461322D6FDD79463E21F5C77029101EC78B20502D36` |
+| `images/20260819-151947_角色背面阴影.png` | 背面材质与平台投影 | `C9E2B9A866A4915F07261B72B0866F841377D47F019BEF527B47C29D47512FEF` |
+| `video/20260819-151950_角色正面转台展示.mp4` | 384 帧、16.00 秒、正面固定相机转台 | `5BF63F19B1FA45117FED36B529DB91127CEF560928B4BB587469533FF818D1A4` |
 
-视频 `video/character_portfolio_orbit_endfield_v2_1280x720_60fps.mp4` 为 300 帧、60 fps、5.0 秒、H.264/yuv420p/BT.709，SHA-256 为 `422740FCFE9DE9BF3DDDA08F195B066FB789F938B4F5F637529385943F310886`。
+生成环境：Debug Validation、NVIDIA GeForce RTX 4060 Laptop GPU、Evening Sky 环境、Endfield Industrial Look。
 
-> 生成日期：2026-08-18
-> GPU：NVIDIA GeForce RTX 4060 Laptop GPU
+## 眉毛与头发数据
 
-## 范围与授权
-
-本组媒体使用本机 `assets_private/laevat_skinned/laevat_skinned_material_cq1_v2.glb`，只用于用户本机检查终末地式角色渲染。模型、纹理、截图和视频不得提交 Git、进入 CI、安装包或公开 portfolio。公共回归仍使用 `assets_public/test_model.gltf`。
-
-## 截图
-
-所有截图为 Release、1920x1080、Beauty 输出。
-
-| 文件 | 机位 / 灯光 | SHA-256 |
-| --- | --- | --- |
-| `images/character_fullbody_endfield_v1_1920x1080.png` | full-body-front / stylized-key | `DED6A49F59B50F98F6A278235555036F175E106CB203CDA37CD02565EF85D17B` |
-| `images/character_threequarter_endfield_v1_1920x1080.png` | face-three-quarter / stylized-key | `93DC1E81C1618B446373B834080A78F99FE503A26D589933CDF61CE8575AFCC7` |
-| `images/character_closeup_endfield_v1_1920x1080.png` | face-front / stylized-key | `DD680F2127FA9AB91EF5B92C6C4F4CB098008BC451658AD52A1EB7F91ED1CBAD` |
-| `images/character_back_endfield_v1_1920x1080.png` | back-detail / rear-emissive | `36910D4DAABB897CFDC1E130619249E9A75019EA534C96F1516A5A1514E6F940` |
-| `images/character_material_endfield_v1_1920x1080.png` | full-body-front / neutral-material | `4ED1168F2D57FEB913B0562530D9C9C7F590EDD5243E811CB1325ADCE552C015` |
-
-## 视频
-
-`video/character_portfolio_orbit_endfield_v1_1280x720_60fps.mp4`：Release 固定 60 fps、180 帧、3.0 秒、H.264/yuv420p/BT.709，使用 portfolio orbit 连续展示多个方位。SHA-256：`6995A29E10EFEA872602CD18196D42A794F56B705949CC72A057B3A3F55AFA05`。
+- `M_actor_laevat_brow_01` 是透明 Overlay，使用 `T_actor_laevat_face_01_D` 的红色眉毛区域。透明三角索引修复后已在正面近景和正式视频中确认可见。
+- `T_actor_laevat_hair_01_D`：头发 Base Color。
+- `T_actor_laevat_hair_01_HN`：独立 Hair Data；RG 参与基础发束法线，BA 驱动双层 Kajiya-Kay 高光方向。
+- `T_actor_laevat_hair_01_P`：Hair Master 的 `_P` packed 材质数据；注入器现同时支持 `_P` 与布料使用的 `T_RGBA_P`。
 
 ## 复现
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
-  --asset .\assets_private\laevat_skinned\laevat_skinned_material_cq1_v2.glb `
-  --portfolio --width 1280 --height 720 `
-  --capture-dir .\build\showcase-captures\character-video-beauty `
-  --capture-frames 180 --capture-fps 60
+.\build\ninja-debug\AzureRender.exe `
+  --scene-type character `
+  --asset .\assets_private\laevat_skinned\laevat_idle_material.glb `
+  --portfolio --width 1600 --height 900 `
+  --capture-dir .\build\character_capture `
+  --capture-frames 384 --capture-fps 24
 ```
+
+私有角色模型、派生 GLB、纹理、截图和视频仅供本机视觉检查，不得提交 Git、进入 CI/安装包或公开 portfolio。公共自动化回归继续使用 `assets_public/test_model.gltf`。
