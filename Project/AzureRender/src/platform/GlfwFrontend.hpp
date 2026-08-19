@@ -14,6 +14,8 @@ struct GlfwFrontendConfig {
     std::uint32_t height = 720;
     std::string title;
     bool resizable = true;
+    bool visible = true;
+    bool decorated = true;
     void* userPointer = nullptr;
     GLFWframebuffersizefun framebufferSizeCallback = nullptr;
     GLFWkeyfun keyCallback = nullptr;

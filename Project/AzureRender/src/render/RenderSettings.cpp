@@ -126,6 +126,9 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 6) {
         settings.characterPresentation = {};
     }
+    if (sourceSchemaVersion < 7) {
+        settings.shadow = {};
+    }
     validateRenderSettings(settings);
     return settings;
 }
@@ -206,6 +209,11 @@ void validateRenderSettings(const RenderSettings& settings) {
     requireRange(settings.bloom.threshold, 0.0F, 8.0F, "bloom.threshold");
     requireRange(settings.bloom.strength, 0.0F, 2.0F, "bloom.strength");
     requireRange(settings.outline.strength, 0.0F, 2.0F, "outline.strength");
+    requireRange(
+        settings.shadow.maximumFilterRadiusTexels,
+        1.0F,
+        16.0F,
+        "shadow.maximumFilterRadiusTexels");
     requireRange(
         settings.outline.depthThreshold,
         0.001F,

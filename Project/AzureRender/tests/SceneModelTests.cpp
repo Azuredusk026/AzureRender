@@ -45,7 +45,9 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
         && loaded.resources.size() == expected.resources.size()
         && loaded.nodes.size() == expected.nodes.size()
         && loaded.renderSettings.showcasePreset
-            == expected.renderSettings.showcasePreset;
+            == expected.renderSettings.showcasePreset
+        && loaded.renderSettings.shadow.maximumFilterRadiusTexels
+            == expected.renderSettings.shadow.maximumFilterRadiusTexels;
 }
 
 }  // namespace
@@ -98,7 +100,9 @@ int main() {
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 6")
+            assert(contents.find("renderSettingsVersion 7")
+                != std::string::npos);
+            assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
         }
         assert(std::filesystem::exists(scenePath));

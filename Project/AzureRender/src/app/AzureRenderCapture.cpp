@@ -118,6 +118,8 @@ void AzureRenderApp::writeCaptureManifest(
         << renderSettings_.stylizedLightingEnabled << '|'
         << renderSettings_.innerOutlineEnabled << '|'
         << azurerender::RenderSettings::kSchemaVersion << '|'
+        << azurerender::ShadowSettings::kSchemaVersion << '|'
+        << renderSettings_.shadow.maximumFilterRadiusTexels << '|'
         << azurerender::FaceSdfSettings::kSchemaVersion << '|'
         << renderSettings_.faceSdf.enabled << '|'
         << renderSettings_.faceSdf.mirrorHorizontal << '|'
@@ -200,6 +202,12 @@ void AzureRenderApp::writeCaptureManifest(
         << (renderSettings_.innerOutlineEnabled ? "true" : "false") << ",\n"
         << "  \"renderSettingsVersion\": "
         << azurerender::RenderSettings::kSchemaVersion << ",\n"
+        << "  \"shadowSettings\": {\n"
+        << "    \"schemaVersion\": "
+        << azurerender::ShadowSettings::kSchemaVersion << ",\n"
+        << "    \"maximumFilterRadiusTexels\": "
+        << renderSettings_.shadow.maximumFilterRadiusTexels << "\n"
+        << "  },\n"
         << "  \"faceSdfSettings\": {\n"
         << "    \"schemaVersion\": "
         << azurerender::FaceSdfSettings::kSchemaVersion << ",\n"

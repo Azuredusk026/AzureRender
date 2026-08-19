@@ -32,6 +32,8 @@
 
 阴影验收必须同时检查 Beauty 转台、`shadow-visibility` 隔离图和地台投影：亮面不能靠全局曝光抬平，暗面仍需保留布料、皮肤和头发纹理，地台阴影必须随角色轮廓清晰变化。
 
+实时投影现使用 PCSS 软阴影，而非旧版视觉上接近硬边的固定 3×3 PCF。默认最大滤波半径为 8 个 shadow-map texel；近距离接触阴影保持收紧，接收面与遮挡面距离增大时半影逐渐扩张。编辑器的 `Shadow Softness` 可在 1–16 texel 范围调节，QA 捕获会把该值写入状态哈希与 manifest。
+
 Portfolio 与 QA isolation 可以组合使用：isolation 隐式选择 `full-body-front` 时必须保留 Portfolio 自动旋转，保证 Beauty、Albedo、World Normal、Shadow Visibility 与 Material ID 使用同一条 16 秒整圈轨迹。显式的脸部或背部 QA 相机仍保持静止。
 
 头发数据链路已逐项核对：`T_actor_laevat_hair_01_D` 进入 Base Color；`T_actor_laevat_hair_01_HN` 通过 `afterglowHairDataTexture` 独立绑定，RG 驱动基础发束法线、BA 驱动双层 Kajiya-Kay 方向；`T_actor_laevat_hair_01_P` 是 Hair Master 的 `_P` packed texture。旧注入器只识别布料命名 `T_RGBA_P`，因此 Hair `_P` 未进入 metallic/roughness/specular 数据链路；现在两种键均受支持，重新生成的私有 GLB 会嵌入 `_P` 派生纹理。原始贴图保持不修改。
@@ -44,7 +46,7 @@ Portfolio 与 QA isolation 可以组合使用：isolation 隐式选择 `full-bod
 
 人工验收必须同时查看 beauty、albedo、hair-kk、shadow-tint 和 face-sdf 隔离图。beauty 中皮肤高光异常不能用修改 Base Color 掩盖，albedo 用于区分纹理亮斑与照明镜面。
 
-> 适用版本：RenderSettings v6 / Showcase Look v1
+> 适用版本：RenderSettings v7 / Showcase Look v1
 
 ## 数据边界
 

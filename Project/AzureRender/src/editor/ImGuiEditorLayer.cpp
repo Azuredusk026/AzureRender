@@ -692,6 +692,12 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         context_->beginEdit();
         settings.outline.strength = outline;
     }
+    float shadowRadius = settings.shadow.maximumFilterRadiusTexels;
+    if (ImGui::SliderFloat(
+            "Shadow Softness", &shadowRadius, 1.0F, 16.0F, "%.1f texels")) {
+        context_->beginEdit();
+        settings.shadow.maximumFilterRadiusTexels = shadowRadius;
+    }
     float exposure = settings.grade.exposureEv;
     if (ImGui::SliderFloat("Exposure EV", &exposure, -8.0F, 8.0F)) {
         context_->beginEdit();

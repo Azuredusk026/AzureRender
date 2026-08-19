@@ -50,6 +50,13 @@ struct GradeSettings {
     bool toneMappingEnabled = true;
 };
 
+struct ShadowSettings {
+    static constexpr std::uint32_t kSchemaVersion = 1;
+
+    // Maximum PCSS penumbra radius measured in shadow-map texels.
+    float maximumFilterRadiusTexels = 8.0F;
+};
+
 enum class BlackholeQuality : std::uint32_t {
     Performance = 0,
     Balanced = 1,
@@ -82,7 +89,7 @@ struct CharacterPresentationSettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 6;
+    static constexpr std::uint32_t kSchemaVersion = 7;
 
     // Selects the pluggable scene renderer that draws the current frame.
     // Character is the default stylized character pipeline; Blackhole is the
@@ -111,6 +118,7 @@ struct RenderSettings {
     FaceSdfSettings faceSdf;
     BloomSettings bloom;
     OutlineSettings outline;
+    ShadowSettings shadow;
     GradeSettings grade;
     BlackholeSettings blackhole;
     CharacterPresentationSettings characterPresentation;

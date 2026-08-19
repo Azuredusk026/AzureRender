@@ -10,6 +10,8 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
     }
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, config.resizable ? GLFW_TRUE : GLFW_FALSE);
+    glfwWindowHint(GLFW_VISIBLE, config.visible ? GLFW_TRUE : GLFW_FALSE);
+    glfwWindowHint(GLFW_DECORATED, config.decorated ? GLFW_TRUE : GLFW_FALSE);
     window_ = glfwCreateWindow(
         static_cast<int>(config.width),
         static_cast<int>(config.height),

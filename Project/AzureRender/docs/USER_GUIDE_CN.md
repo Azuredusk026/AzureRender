@@ -106,6 +106,8 @@ captures/<scene>/<scene>_<view-or-purpose>_<look-or-technique>_v<NN>_<width>x<he
 
 `captures/` 可随时删除且不进入 Git。只有通过人工检查和哈希确认的单张代表图才能复制到 `portfolio/images/<scene>/`；正式文件名不带日期和任务编号。证据参数写入 `portfolio/evidence/<scene>/`。
 
+正式角色视频使用 2K QHD（2560×1440）、24 fps。确定性捕获会自动创建隐藏、无边框的 Vulkan surface，避免 Windows 工作区和标题栏把 1440 高度压缩；manifest 中的 `width`/`height` 必须精确等于请求值，否则捕获直接失败。
+
 ## 6. GPU Timing
 
 ```powershell

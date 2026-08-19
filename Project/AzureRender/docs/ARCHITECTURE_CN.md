@@ -104,6 +104,8 @@ glTF/GLB
   -> swapchain or deterministic capture
 ```
 
+角色场景的引擎级 2048×2048 方向光 Shadow Map 由场景渲染器写入、材质通路采样。阴影过滤使用两阶段 PCSS：12 点 Poisson blocker search 估计平均遮挡深度，16 点 Poisson PCF 按接收面与遮挡面距离扩大半影。最大半影半径来自 `RenderSettings.shadow.maximumFilterRadiusTexels`，场景序列化、编辑器和捕获 manifest 使用同一参数源；黑洞渲染器仍只清空公共阴影资源，不受角色过滤策略影响。
+
 当前支持 Base Color、Normal、Metallic-Roughness、Emissive、Style Mask、Matcap、Hair Data、Toon Ramp、Face SDF、GPU skinning、morph target 和透明排序。
 
 展示 look 的结构由 `RenderSettings` 管理，数值来自版本化的 `assets_public/showcase_looks.json`。启动时由 `ResourceLocator` 解析并校验 catalog；编辑器、F 键、Portfolio 和 QA 显式切换都走同一应用入口。背景与展示地台是 Character renderer 内的独立模块，加载 `.azscene` 时不会无条件覆盖用户保存的开关或调色。

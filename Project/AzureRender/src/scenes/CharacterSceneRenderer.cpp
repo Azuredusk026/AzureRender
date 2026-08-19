@@ -1663,7 +1663,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         settings.stylizedLightingEnabled
             ? settings.diffuseBandThreshold
             : -1.0F,
-        0.12F,
+        settings.shadow.maximumFilterRadiusTexels,
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.08F, 0.24F, 0.18F},

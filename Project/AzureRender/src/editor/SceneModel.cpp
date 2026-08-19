@@ -62,6 +62,8 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
+           << "shadowMaximumFilterRadiusTexels "
+           << document.renderSettings.shadow.maximumFilterRadiusTexels << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -176,6 +178,14 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     if (!(input >> key >> document.renderSettings.diffuseBandThreshold)
         || key != "diffuseBandThreshold") {
         throw std::runtime_error("Missing .azscene diffuseBandThreshold");
+    }
+    if (renderSettingsVersion >= 7) {
+        if (!(input >> key
+              >> document.renderSettings.shadow.maximumFilterRadiusTexels)
+            || key != "shadowMaximumFilterRadiusTexels") {
+            throw std::runtime_error(
+                "Missing .azscene shadowMaximumFilterRadiusTexels");
+        }
     }
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)

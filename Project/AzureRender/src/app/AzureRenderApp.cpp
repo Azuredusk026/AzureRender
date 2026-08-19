@@ -142,6 +142,10 @@ void AzureRenderApp::initWindow() {
         ? "AzureRender Editor Preview"
         : "AzureRender - Stylized Vulkan Renderer";
     config.resizable = !fixedSimulation_;
+    // Deterministic capture uses a hidden surface so framebuffer dimensions
+    // are not clamped by the Windows work area (required for native 2K/4K).
+    config.visible = !fixedSimulation_;
+    config.decorated = !fixedSimulation_;
     config.userPointer = this;
     config.framebufferSizeCallback = framebufferResizeCallback;
     config.keyCallback = keyCallback;
