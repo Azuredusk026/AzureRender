@@ -1,11 +1,12 @@
 # Changelog
 
-## PCSS soft shadows and native 2K capture - 2026-08-19
+## PCSS soft shadows and native 2K capture - 2026-08-20
 
 - Replaced the visually hard fixed 3x3 shadow filter with a bounded Poisson PCSS blocker search and receiver-distance penumbra.
 - Added a versioned, validated and scene-serialized maximum shadow filter radius plus an editor softness control.
 - Made deterministic capture windows hidden and borderless so Windows does not clamp native 2560x1440 framebuffers to the desktop work area.
 - Added shadow settings to deterministic capture state hashes and manifests.
+- Re-recorded and fully decoded the five-pass character showcase at native 2560x1440/24 fps: 1920 frames and 80.00 seconds.
 
 ## Brow skinning audit and left-start showcase - 2026-08-19
 
