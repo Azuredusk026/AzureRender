@@ -44,6 +44,8 @@ layout(push_constant) uniform MorphWeights {
 } morphWeights;
 
 void main() {
+    bool browOverlay =
+        (morphWeights.materialFeatures & 64U) != 0U;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointIndices.x]
         + jointWeights.y * jointData.matrices[jointIndices.y]
@@ -51,9 +53,18 @@ void main() {
         + jointWeights.w * jointData.matrices[jointIndices.w];
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
+    if (browOverlay) {
+        // Enlarge the authored card about its bind-space vertical centre.
+        // This increases the actual screen-space stroke coverage instead of
+        // merely darkening the same sub-pixel geometry.
+        float verticalScale = max(morphWeights.styleParameters.y, 1.0);
+        float verticalPivot = morphWeights.styleParameters.z;
+        morphedPosition.y = verticalPivot
+            + (morphedPosition.y - verticalPivot) * verticalScale;
+    }
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
-    if ((morphWeights.materialFeatures & 64U) != 0U) {
+    if (browOverlay) {
         vec3 initialWorldPosition = (camera.model * gizmoPosition).xyz;
         vec3 worldViewDirection = normalize(
             camera.cameraPosition.xyz - initialWorldPosition);

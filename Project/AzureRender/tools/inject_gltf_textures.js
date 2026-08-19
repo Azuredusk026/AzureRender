@@ -160,7 +160,10 @@ function buildMaterialProfile(materialName, parameters = {}) {
   if (parameters._E && !features.includes("emissive-mask")) {
     features.push("emissive-mask");
   }
-  const styleParameters = isBrow ? [0.01, 0.0, 0.0, 0.0] : ({
+  // Brow cards use local lift, bind-space vertical scale and the measured
+  // centre of the exported card bounds. Doubling the card height gives the
+  // authored red stroke stable full-body pixel coverage.
+  const styleParameters = isBrow ? [0.01, 2.0, 1.2536046, 0.0] : ({
     generic: [1.0, 1.0, 1.0, 1.0],
     skin: [0.9, 0.8, 0.35, 0.35],
     face: [0.85, 0.75, 0.15, 0.25],
