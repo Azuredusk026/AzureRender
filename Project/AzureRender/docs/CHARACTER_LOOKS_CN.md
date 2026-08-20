@@ -46,6 +46,20 @@ Portfolio 与 QA isolation 可以组合使用：isolation 隐式选择 `full-bod
 
 人工验收必须同时查看 beauty、albedo、hair-kk、shadow-tint 和 face-sdf 隔离图。beauty 中皮肤高光异常不能用修改 Base Color 掩盖，albedo 用于区分纹理亮斑与照明镜面。
 
+## Face SDF 资产绑定（2026-08-20）
+
+`face-sdf-eligible` 只表示 Face 材质允许使用该效果，不能证明资产已经提供有效数据。旧的最终动画 GLB 只有该特征位，没有 `azureRenderMaterial.faceSdf`，运行时因此绑定 2x2 回退纹理；全局开关和 Shader 分支虽已开启，画面仍不具备真实的 SDF 分界。
+
+当前 `tools/inject_gltf_textures.js` 会在生成蒙皮材质 GLB 时自动嵌入 `assets_public/face_sdf_v1.png`，写入距离通道 R、参与遮罩 A、从低值开始阴影、从左到右的水平轴，并绑定唯一的 `Bip001_Head`；旧静态资产没有头骨节点，继续保持无 SDF 的兼容路径。`inject_gltf_idle_animation.js` 在蒙皮材质资产基础上追加动画，不重建材质，因此 profile 会保留到最终 `laevat_idle_material_face_sdf.glb`。正式捕获前必须执行：
+
+```powershell
+python tools\audit_face_sdf_compatibility.py `
+  assets_private\laevat_skinned\laevat_idle_material_face_sdf.glb `
+  --require-compatible
+```
+
+运行日志还必须出现 `Face SDF: material=..., texture=1024x1024, headNode=Bip001_Head`。仅检查 manifest 中 `faceSdfSettings.enabled=true` 不足以验收。
+
 > 适用版本：RenderSettings v7 / Showcase Look v1
 
 ## 数据边界

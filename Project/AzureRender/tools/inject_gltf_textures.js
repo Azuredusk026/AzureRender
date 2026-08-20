@@ -16,6 +16,8 @@ const outputPath = process.argv[3]
   : path.join(assetRoot, "laevat_static_material.glb");
 const manifestPath = path.join(assetRoot, "unreal_material_textures.json");
 const textureRoot = path.join(assetRoot, "textures");
+const faceSdfPath = path.join(root, "assets_public", "face_sdf_v1.png");
+const faceSdfHeadNode = "Bip001_Head";
 
 function align4(value) {
   return (value + 3) & ~3;
@@ -129,6 +131,21 @@ let boundLamShadowColors = 0;
 let boundMatcaps = 0;
 let boundHairData = 0;
 let boundMaterialProfiles = 0;
+let boundFaceSdf = 0;
+
+const faceSdfHeadNodes = (json.nodes ?? []).filter(
+  (node) => node.name === faceSdfHeadNode
+);
+const requiresFaceSdf = (json.skins ?? []).length > 0;
+if (requiresFaceSdf && faceSdfHeadNodes.length !== 1) {
+  throw new Error(
+    `Skinned Face SDF requires exactly one ${faceSdfHeadNode} node; found ` +
+      faceSdfHeadNodes.length
+  );
+}
+if (!fs.existsSync(faceSdfPath)) {
+  throw new Error(`Face SDF texture was not found: ${faceSdfPath}`);
+}
 
 function buildMaterialProfile(materialName, parameters = {}) {
   const name = materialName.toLowerCase();
@@ -204,6 +221,26 @@ for (const material of json.materials ?? []) {
     material.name,
     parameters
   );
+  if (
+    material.extras.azureRenderMaterial.class === "face" &&
+    faceSdfHeadNodes.length === 1
+  ) {
+    material.extras.azureRenderMaterial.faceSdf = {
+      schemaVersion: 1,
+      texture: addTexture(
+        path.basename(faceSdfPath),
+        fs.readFileSync(faceSdfPath),
+        "azure-face-sdf-v1"
+      ),
+      texCoord: 0,
+      channel: "r",
+      maskChannel: "a",
+      shadowOnLowValues: true,
+      horizontalAxis: "left-to-right",
+      headNode: faceSdfHeadNode,
+    };
+    boundFaceSdf += 1;
+  }
   boundMaterialProfiles += 1;
   if (!parameters) {
     continue;
@@ -448,6 +485,7 @@ console.log(
     `${boundStyleMasks} style-mask materials, ` +
     `${boundAoColors} AO colors, ${boundLamShadowColors} Lam shadow colors, ` +
     `${boundMatcaps} matcaps, ${boundHairData} hair-data materials, ` +
+    `${boundFaceSdf} face-SDF materials, ` +
     `${boundMaterialProfiles} material profiles, ` +
     `${textureIndices.size} unique embedded textures)`
 );
