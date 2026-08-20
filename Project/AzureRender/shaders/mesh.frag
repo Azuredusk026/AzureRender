@@ -414,9 +414,13 @@ void main() {
         : faceSdfSample.r;
     float lateralLight = camera.faceLightDirection.x;
     float frontLight = max(-camera.faceLightDirection.z, 0.0);
-    float orientedCoordinate = lateralLight >= 0.0
-        ? faceCoordinate
-        : 1.0 - faceCoordinate;
+    // Crossing the head-local lateral axis must not switch the mirrored SDF
+    // in one frame. Blend both orientations across a narrow angular window.
+    float faceSideBlend = smoothstep(-0.18, 0.18, lateralLight);
+    float orientedCoordinate = mix(
+        1.0 - faceCoordinate,
+        faceCoordinate,
+        faceSideBlend);
     float faceThreshold = clamp(
         camera.faceSdfParameters.y
             - frontLight * 0.34
@@ -485,15 +489,20 @@ void main() {
     vec3 hairAoColor = material.aoColor.a > 0.01
         ? material.aoColor.rgb
         : vec3(0.255);
+    float hairNormalCavity = smoothstep(
+        0.04,
+        0.30,
+        1.0 - max(dot(shadedNormal, geometricNormal), 0.0));
     float hairCavity = clamp(
-        styleMask * 0.62
-            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.22,
+        styleMask * 0.74
+            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.30
+            + hairNormalCavity * 0.38,
         0.0,
         1.0);
     vec3 hairAoTint = mix(
         vec3(1.0),
         hairAoColor,
-        hairActive * (0.10 + hairCavity * 0.32));
+        hairActive * (0.16 + hairCavity * 0.48));
     aoShadowTint *= hairAoTint;
     vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
         + directDiffuse * lamShadowTint * aoShadowTint;
@@ -728,9 +737,13 @@ void main() {
         * material.featureParameters.x
         * mix(
             1.0,
-            0.22,
+            0.55,
             max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
+    vec3 innerOutlineNormal = normalize(mix(
+        geometricNormal,
+        shadedNormal,
+        hairActive * 0.72));
     outputNormal = vec4(
-        geometricNormal * 0.5 + 0.5,
+        innerOutlineNormal * 0.5 + 0.5,
         innerOutlineParticipation);
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## Continuous Face SDF and hair-volume contours - 2026-08-20
+
+- Replaced the frame-discontinuous Face SDF mirror branch with a smooth head-local lateral-axis blend, removing the pure-bright face pop during the 6-7 second turntable interval.
+- Strengthened Hair AO with style-mask, grazing-angle and HN-to-geometric-normal cavity signals while preserving the existing red diffuse floor and independent KK lobes.
+- Fed Hair HN detail into the internal-outline normal buffer and raised only Hair participation, revealing layered strand boundaries without widening the silhouette shell.
+- Verified the 130-179 frame continuity window with a maximum consecutive face-region luma change of 0.204/255, plus Beauty, shadow-tint and outline isolation probes.
+
 ## Character key-shadow contrast and hair-color protection - 2026-08-20
 
 - Increased the Endfield world-space key while reducing fill and the toon ambient shadow floor, restoring visible lit/back-lit separation without global exposure changes.

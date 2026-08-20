@@ -72,6 +72,12 @@ Face SDF 仅把亮端由 `0.84` 收到 `0.78`，暗端和暖色校正保持不�
 
 验收时必须成组检查 `face-front` Beauty、`full-body-front` Beauty、`hair-kk` 和 `shadow-visibility`：脸与身体同侧肤色应连续，背光服装不能被环境托平，Hair 的 R 通道必须持续明显高于 G/B，同时 KK 条带不能消失。
 
+## Face SDF 连续性与 Hair 内部轮廓（2026-08-20）
+
+旧 Face SDF 在 `lateralLight >= 0` 两侧直接切换原始与镜像坐标；角色旋转跨过头部局部横轴零点时，两套结果会在相邻帧交换，表现为 6-7 秒附近整脸突然纯亮。当前使用 `smoothstep(-0.18, 0.18, lateralLight)` 混合两种方向，SDF 阈值、软度和 Face 暖色阴影保持不变。720p 连续性探针的第 130-179 帧中，脸部区域最大相邻帧平均亮度变化为 `0.204/255`，不得重新引入基于符号的硬分支。
+
+Hair AO 由 Style Mask、掠射角以及 HN 发束法线相对几何法线的偏差共同构成，混合范围提高到 `0.16 + cavity * 0.48`。内部轮廓缓冲对 Hair 使用 72% shaded normal，并将 Hair participation 从 `0.22` 提高到 `0.55`；这只增强发片之间的 normal edge，不修改 silhouette shell 的顶点外扩或宽度。验收必须同时看 Beauty、`shadow-tint` 和 `outline`：AO 要形成内层体积，描边要分开发束，但不能出现满头噪点、黑块或加粗外轮廓。
+
 > 适用版本：RenderSettings v7 / Showcase Look v1
 
 ## 数据边界
