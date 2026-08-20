@@ -1,5 +1,12 @@
 # Changelog
 
+## Character key-shadow contrast and hair-color protection - 2026-08-20
+
+- Increased the Endfield world-space key while reducing fill and the toon ambient shadow floor, restoring visible lit/back-lit separation without global exposure changes.
+- Increased Face and Skin participation in the authored Lam/shadow system, while narrowing only the bright end of the Face SDF ramp so the face remains close to body skin under matching illumination.
+- Added a ramp-aware red diffuse floor and stronger base-hue reprojection for Hair; specular and Kajiya-Kay highlights remain independent and the crown no longer needs grey ambient energy to stay readable.
+- Verified Debug/Release builds, all 12 Debug tests, Face/Body Beauty frames, Hair KK and Shadow Visibility isolation captures.
+
 ## Face SDF light frame and skin-tone correction - 2026-08-20
 
 - Replaced direct imported-head-axis lighting with bind-relative head rotation so arbitrary glTF joint orientation no longer pins Face SDF illumination near white.

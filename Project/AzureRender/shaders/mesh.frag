@@ -430,7 +430,7 @@ void main() {
     float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.86;
     rampCoordinate = mix(
         rampCoordinate,
-        mix(0.42, 0.84, faceIllumination),
+        mix(0.42, 0.78, faceIllumination),
         faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
@@ -438,7 +438,7 @@ void main() {
     float ambientRampVisibility = mix(
         1.0,
         mix(
-            showcasePreset == 1.0 ? 0.46 : 0.64,
+            showcasePreset == 1.0 ? 0.36 : 0.64,
             0.98,
             rampLuminance),
         toonWeight);
@@ -462,8 +462,8 @@ void main() {
         * shadowSystemWeight * material.styleParameters.y
         * materialFeatureEnabled(1U);
     shadowWeight *= material.materialClass == 2U
-        ? 0.18
-        : (material.materialClass == 1U ? 0.48 : 1.0);
+        ? 0.28
+        : (material.materialClass == 1U ? 0.62 : 1.0);
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
@@ -503,11 +503,13 @@ void main() {
     float hairDiffusePeak = max(
         max(tintedDiffuse.r, tintedDiffuse.g),
         tintedDiffuse.b);
+    float hairDiffuseFloor = hairBasePeak * mix(0.24, 0.42, rampLuminance);
+    hairDiffusePeak = max(hairDiffusePeak, hairDiffuseFloor);
     vec3 huePreservedHair = hairBaseHue * hairDiffusePeak;
     tintedDiffuse = mix(
         tintedDiffuse,
         huePreservedHair,
-        hairActive * 0.68);
+        hairActive * 0.80);
     float faceActive = material.materialClass == 2U ? 1.0 : 0.0;
     tintedDiffuse *= mix(vec3(1.0), vec3(0.86, 0.77, 0.74), faceActive);
     tintedDiffuse *= mix(
