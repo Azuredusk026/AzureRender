@@ -5,6 +5,7 @@
 - Fixed the skinned Laevat material pipeline so every generated face material embeds `face_sdf_v1.png` and a complete Face SDF v1 profile instead of only advertising eligibility.
 - Bound the profile to the unique `Bip001_Head` node and preserved it through idle-animation injection.
 - Verified the final private animation GLB with the Face SDF compatibility audit, material-profile validation, brow-mesh audit, runtime load diagnostics and enabled/disabled visual captures.
+- Re-recorded separate 16-second Beauty and Shadow Visibility turntables at native 2560x1440/24 fps and fully decoded all 384 frames of each delivery.
 
 ## PCSS soft shadows and native 2K capture - 2026-08-20
 

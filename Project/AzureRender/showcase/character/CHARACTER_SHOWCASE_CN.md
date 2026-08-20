@@ -2,9 +2,18 @@
 
 ## 当前交付
 
-当前视频由五个 16 秒段落组成，顺序为最终渲染、原始模型（Albedo）、世界法线、PCSS 阴影可见度和材质 ID 分区。每段使用同一固定相机、脚部中心转台与 `2π/16 rad/s` 匀速角速度，从朝左开始完成 360° 旋转并回到朝左。
+本轮重点交付为两个独立的 16 秒视频：最终渲染和 PCSS 阴影可见度。两段使用同一固定相机、脚部中心转台与 `2π/16 rad/s` 匀速角速度，从朝左开始完成 360° 旋转并回到朝左。最终渲染使用新生成的 `laevat_idle_material_face_sdf.glb`，其中 Face 材质已嵌入 1024x1024 SDF 并绑定 `Bip001_Head`；运行日志确认没有使用 2x2 回退纹理。
 
-本轮原生输出升级为 2K QHD：2560×1440、24 fps、SAR 1:1，不做插值放大或非等比拉伸。视频完整解码结果为 1920 帧、80.00 秒，编码格式为 H.264 High、yuv420p、BT.709、DAR 16:9。
+输出为原生 2K QHD：2560×1440、24 fps、SAR 1:1，不做插值放大或非等比拉伸。两个视频均完整解码 384 帧、16.00 秒，编码格式为 H.264 High、yuv420p、BT.709、DAR 16:9。旧五模式 80 秒视频继续保留为综合技术展示，不再作为本轮 Face SDF 修复证据。
+
+| 文件 | 内容 | SHA-256 |
+| --- | --- | --- |
+| `images/20260820-170550_角色SDF正面最终渲染.png` | 四分之一圈后的正面最终渲染 | `49F6C79338BA2B324E4D69874F1D1144CA98098855196C8FA420B2999C953DBD` |
+| `images/20260820-170550_角色PCSS正面阴影展示.png` | 同帧 PCSS 阴影可见度 | `304A945CEA5F2880977E121953C4CE57237888625228ED3EEB6388C4F16C7072` |
+| `video/20260820-170550_角色SDF最终渲染2K.mp4` | Face SDF 最终渲染完整转台 | `122AC9A0EF00BA36C9847717C5B09164F65E9E4325D3420E814DD3DA37AACE88` |
+| `video/20260820-170550_角色SDF阴影展示2K.mp4` | PCSS 阴影可见度完整转台 | `93E7EF3D8926360E3E6D734FB8C993FC0DE15642EF8ED6ADA3C28C694C071A13` |
+
+## 历史综合展示
 
 | 文件 | 内容 | SHA-256 |
 | --- | --- | --- |
@@ -34,17 +43,19 @@
 
 ## 复现
 
-每种模式均捕获 384 帧，`--qa-isolation` 依次使用 `beauty`、`albedo`、`world-normal`、`shadow-visibility` 和 `material-id`：
+两个重点视频均捕获 384 帧，`--qa-isolation` 分别使用 `beauty` 和 `shadow-visibility`：
 
 ```powershell
 .\build\ninja-debug\AzureRender.exe `
   --scene-type character `
-  --asset .\assets_private\laevat_skinned\laevat_idle_material.glb `
+  --asset .\assets_private\laevat_skinned\laevat_idle_material_face_sdf.glb `
   --portfolio --qa-light stylized-key `
   --qa-isolation beauty `
   --width 2560 --height 1440 `
   --capture-dir .\build\character_pcss_2k_beauty `
   --capture-frames 384 --capture-fps 24
 ```
+
+将 `--qa-isolation beauty` 改为 `--qa-isolation shadow-visibility` 即可复现阴影展示。捕获前必须运行 `tools/audit_face_sdf_compatibility.py ... --require-compatible`，并确认运行日志包含 `texture=1024x1024, headNode=Bip001_Head`。
 
 确定性捕获使用隐藏、无边框 surface，避免 Windows 工作区把 1440 高度压缩。私有角色模型、派生 GLB、纹理、截图和视频只用于本机验收，不进入 Git、CI、安装树或公开作品集。
