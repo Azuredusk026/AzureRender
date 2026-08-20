@@ -1,5 +1,11 @@
 # Changelog
 
+## Face SDF light frame and skin-tone correction - 2026-08-20
+
+- Replaced direct imported-head-axis lighting with bind-relative head rotation so arbitrary glTF joint orientation no longer pins Face SDF illumination near white.
+- Increased the visible SDF ramp range and warm shadow tint while reducing Face-only diffuse energy to match the body skin under the same key light.
+- Verified a clear left/right transition in Face SDF isolation, stable movement across the turntable, and representative cheek values close to the shoulder-skin range.
+
 ## Character Face SDF asset binding - 2026-08-20
 
 - Fixed the skinned Laevat material pipeline so every generated face material embeds `face_sdf_v1.png` and a complete Face SDF v1 profile instead of only advertising eligibility.

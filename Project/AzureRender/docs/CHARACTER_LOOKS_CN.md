@@ -60,6 +60,10 @@ python tools\audit_face_sdf_compatibility.py `
 
 运行日志还必须出现 `Face SDF: material=..., texture=1024x1024, headNode=Bip001_Head`。仅检查 manifest 中 `faceSdfSettings.enabled=true` 不足以验收。
 
+导入骨骼的局部 X/Y/Z 轴不等同于模型语义上的左/上/前。旧实现直接把当前 `Bip001_Head` 矩阵列当作脸部语义轴，导致有效光方向长期落在接近全亮区；再叠加 Face ramp 的 `0.74-0.98` 高亮范围，最终表现为整张脸偏白且转台中几乎没有 SDF 变化。当前先保存绑定姿态头骨基底，再用 `currentHead * inverse(bindHead)` 的相对旋转把世界主光转换到脸部语义坐标。Face ramp 调整为 `0.42-0.84`，参与权重为 `0.86`，暗部暖色权重同步增强；Face diffuse 另乘暖色能量校正 `(0.86, 0.77, 0.74)`，不修改原始 Face D。
+
+正面 Beauty 验收不再要求整脸同亮：本机代表帧中暗侧脸颊约为 `(186-190,145-155,129-138)`，肩部皮肤约为 `(184-186,153-156,142-145)`；亮侧可以因主光保持更高值，但必须有连续软过渡。`face-sdf` 隔离图必须出现可辨识的左右灰阶分界，并在三分之四视角和转台中改变位置。
+
 > 适用版本：RenderSettings v7 / Showcase Look v1
 
 ## 数据边界

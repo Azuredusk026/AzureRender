@@ -427,10 +427,10 @@ void main() {
         faceThreshold - camera.faceSdfParameters.z,
         faceThreshold + camera.faceSdfParameters.z,
         orientedCoordinate);
-    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.62;
+    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.86;
     rampCoordinate = mix(
         rampCoordinate,
-        mix(0.74, 0.98, faceIllumination),
+        mix(0.42, 0.84, faceIllumination),
         faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
@@ -508,13 +508,15 @@ void main() {
         tintedDiffuse,
         huePreservedHair,
         hairActive * 0.68);
+    float faceActive = material.materialClass == 2U ? 1.0 : 0.0;
+    tintedDiffuse *= mix(vec3(1.0), vec3(0.86, 0.77, 0.74), faceActive);
     tintedDiffuse *= mix(
         vec3(1.0),
         camera.faceSdfShadowColor.rgb,
         (1.0 - faceIllumination)
             * faceSdfWeight
             * camera.faceSdfShadowColor.a
-            * 0.20);
+            * 0.55);
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
         * keyVisibility * material.styleParameters.z;
