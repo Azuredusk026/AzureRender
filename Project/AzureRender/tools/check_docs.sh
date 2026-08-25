@@ -18,10 +18,17 @@ test -f mkdocs.yml
 test -f requirements-docs.txt
 
 rg -q 'SceneRendererRegistry' docs/architecture.md
+rg -q 'vkAcquireNextImageKHR' docs/architecture.md
+rg -q 'vkQueueSubmit' docs/architecture.md
 rg -q 'Face SDF' docs/character-rendering.md
 rg -q 'Schwarzschild' docs/blackhole-rendering.md
 rg -q 'assets_private/' docs/assets-and-editor.md
-rg -q '无限期' docs/development-and-release.md
+rg -q '直到项目所有者主动恢复' docs/development-and-release.md
+
+if rg -n '\\\[|\\\]|\\\(|\\\)' docs/*.md; then
+    echo 'Non-portable LaTeX delimiter found; use $ or $$ for GitHub and MkDocs' >&2
+    exit 1
+fi
 
 if rg -n \
     'ARCHITECTURE_CN|USER_GUIDE_CN|DEVELOPMENT_ROADMAP_CN|ACTIVE_DEVELOPMENT_PLAN_CN|PROJECT_OVERVIEW_CN' \

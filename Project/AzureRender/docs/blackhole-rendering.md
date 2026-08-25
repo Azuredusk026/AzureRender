@@ -26,11 +26,11 @@ Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline�
 
 每个像素先从 UV 转为归一化设备坐标，根据相机 Forward、Right、Up 和纵横比得到初始方向：
 
-\[
+$$
 \mathbf{d}_0=\operatorname{normalize}(\mathbf{f}+x\,a\,\mathbf{r}+y\,\mathbf{u})
-\]
+$$
 
-其中 \(a\) 是 Aspect Ratio。相机预设不修改最终图片比例，只改变位置、目标和运动路径。
+其中 $a$ 是 Aspect Ratio。相机预设不修改最终图片比例，只改变位置、目标和运动路径。
 
 | 预设 | 用途 |
 | --- | --- |
@@ -44,7 +44,7 @@ Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline�
 
 ## Schwarzschild 近似与光线弯曲
 
-系统使用以 Schwarzschild Radius \(R_s\) 归一化的黑洞空间。重要区域：
+系统使用以 Schwarzschild Radius $R_s$ 归一化的黑洞空间。重要区域：
 
 - **Event Horizon**：射线进入后终止并输出黑色。
 - **Photon Sphere 邻域**：曲率变化最强，需要更细步长。
@@ -52,15 +52,15 @@ Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline�
 
 实时实现不对完整四维测地线做高精度通用求解，而是迭代更新射线位置和方向，用指向中心的曲率项近似空间弯曲：
 
-\[
+$$
 \mathbf{p}_{i+1}=\mathbf{p}_i+\mathbf{d}_i\,\Delta s_i
-\]
+$$
 
-\[
+$$
 \mathbf{d}_{i+1}=\operatorname{normalize}(\mathbf{d}_i+\mathbf{g}(\mathbf{p}_i)\,\Delta s_i)
-\]
+$$
 
-\(\mathbf{g}\) 随半径减小而增强，并投影到适合改变方向的分量。射线可能：
+$\mathbf{g}$ 随半径减小而增强，并投影到适合改变方向的分量。射线可能：
 
 1. 进入 Event Horizon。
 2. 穿过吸积盘体积并累计辐射。
@@ -73,9 +73,9 @@ Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline�
 
 固定小步长成本过高，固定大步长又会漏掉薄盘和高曲率细节。步长根据半径、盘面距离和质量档位连续变化：
 
-\[
+$$
 \Delta s=\Delta s_{base}\,q_{quality}\,f_{radius}(r)\,f_{disk}(h)
-\]
+$$
 
 在 Photon Sphere 和吸积盘附近收紧，远离中心时放大。关键是使用连续函数，而不是按距离划分离散档位；离散档位会在画面上产生同心色块和采样边界。
 
@@ -93,15 +93,15 @@ Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline�
 
 吸积盘不是无限薄平面，而是围绕赤道面的发光体密度。采样点转换为柱坐标：
 
-\[
+$$
 r=\sqrt{x^2+z^2},\qquad \theta=\operatorname{atan2}(z,x),\qquad h=|y|
-\]
+$$
 
 基础密度由径向包络、垂直厚度、旋臂、云层和尘埃共同决定：
 
-\[
+$$
 \rho=E_r(r)\,E_h(h,r)\,S(r,\theta,t)\,N(r,\theta,h,t)
-\]
+$$
 
 - `E_r` 限制内外半径并形成靠近内缘的高能区。
 - `E_h` 产生随半径变化的动态厚度。
@@ -110,25 +110,25 @@ r=\sqrt{x^2+z^2},\qquad \theta=\operatorname{atan2}(z,x),\qquad h=|y|
 
 体积分使用前向辐射累积。每个样本按密度和步长贡献颜色与不透明度，达到饱和或离开盘体后可提前退出：
 
-\[
+$$
 C\leftarrow C+(1-\alpha)\,C_s\,\alpha_s
-\]
+$$
 
-\[
+$$
 \alpha\leftarrow\alpha+(1-\alpha)\,\alpha_s
-\]
+$$
 
 这比单次平面交点更能表达厚度、遮挡和稀疏云团。
 
 ## 周期噪声与接缝
 
-`atan2` 的角度在 \(+\pi\) 与 \(-\pi\) 处跳变。若直接把 \(\theta\) 作为普通 Perlin/Simplex 坐标，噪声在这一条径向线上不连续，吸积盘旋转时会出现固定接缝。
+`atan2` 的角度在 $+\pi$ 与 $-\pi$ 处跳变。若直接把 $\theta$ 作为普通 Perlin/Simplex 坐标，噪声在这一条径向线上不连续，吸积盘旋转时会出现固定接缝。
 
 实现将角度嵌入圆周：
 
-\[
+$$
 \mathbf{q}_{angular}=(\cos\theta\,k,\sin\theta\,k,r\,k_r+h\,k_h)
-\]
+$$
 
 噪声输入在圆周边界具有相同数值和变化方向。厚度、云层、旋臂扰动和尘埃必须共用这一周期约定；只修复其中一个分支仍会留下较弱接缝。
 
@@ -138,11 +138,11 @@ C\leftarrow C+(1-\alpha)\,C_s\,\alpha_s
 
 盘面角速度随半径下降，视觉上近似 Keplerian：
 
-\[
+$$
 \omega(r)\propto r^{-3/2}
-\]
+$$
 
-噪声坐标使用 \(\theta+\omega(r)t\) 推进，因此内盘旋转更快，外盘更慢。时间只移动连续噪声场，不逐帧生成完全独立的随机密度；后者会产生无法被合理 TAA 稳定的闪烁。
+噪声坐标使用 $\theta+\omega(r)t$ 推进，因此内盘旋转更快，外盘更慢。时间只移动连续噪声场，不逐帧生成完全独立的随机密度；后者会产生无法被合理 TAA 稳定的闪烁。
 
 旋转方向同时决定局部速度，用于多普勒效应。改变盘面旋转但不更新速度符号，会使视觉运动和颜色不对称互相矛盾。
 
@@ -150,24 +150,24 @@ C\leftarrow C+(1-\alpha)\,C_s\,\alpha_s
 
 盘面局部切向速度：
 
-\[
+$$
 \mathbf{v}=v(r)\,(-\sin\theta,0,\cos\theta)
-\]
+$$
 
 观察方向与速度的点积决定接近或远离：
 
-\[
+$$
 \beta_{los}=\frac{\mathbf{v}\cdot\mathbf{d}_{observer}}{c}
-\]
+$$
 
 使用受控相对论 Doppler Factor：
 
-\[
-D=\frac{1}{\gamma(1-eta_{los})},\qquad
+$$
+D=\frac{1}{\gamma(1-\beta_{los})},\qquad
 \gamma=\frac{1}{\sqrt{1-\beta^2}}
-\]
+$$
 
-颜色温度随 \(D\) 改变，接近侧偏蓝白，远离侧偏红；亮度近似乘 \(D^3\) 表达 Relativistic Beaming。实现对极端值设上限以保持 HDR 稳定，但上限不能低到抹平主要不对称。
+颜色温度随 $D$ 改变，接近侧偏蓝白，远离侧偏红；亮度近似乘 $D^3$ 表达 Relativistic Beaming。实现对极端值设上限以保持 HDR 稳定，但上限不能低到抹平主要不对称。
 
 验收时正面盘面必须明显不对称。如果画面左右几乎相同，应检查相机方向、速度切线、点积符号、Doppler Clamp 和 Tone Mapping，而不是只提高色彩饱和度。
 
@@ -175,15 +175,15 @@ D=\frac{1}{\gamma(1-eta_{los})},\qquad
 
 靠近 Event Horizon 的辐射到达远处观察者时发生红移和能量降低。实时近似根据发射半径构造 Redshift Factor，并与 Doppler 共同作用：
 
-\[
+$$
 g_{grav}\approx\sqrt{1-\frac{R_s}{r}}
-\]
+$$
 
 最终辐射的概念组合为：
 
-\[
+$$
 C_s=C_{temperature}(D\,g_{grav})\,D^3\,E(r)\,\rho
-\]
+$$
 
 靠近内缘的基础发射更强，但引力红移和 Event Horizon 吸收限制其最终显示。所有值在线性 HDR 中计算，不能在 Trace 阶段过早 Clamp 到 0-1。
 
@@ -197,9 +197,9 @@ C_s=C_{temperature}(D\,g_{grav})\,D^3\,E(r)\,\rho
 
 Raw Trace 在高曲率与稀疏密度区域具有空间噪声。Temporal Pass 把当前帧与上一 History 混合：
 
-\[
+$$
 H_t=(1-w)H_{t-1}+wC_t
-\]
+$$
 
 `w=1` 表示完全丢弃 History。正常连续帧根据目标半衰期、帧间隔和质量档位计算权重；Capture 使用固定时间步长保证重复运行一致。
 

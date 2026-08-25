@@ -1,5 +1,11 @@
 # Changelog
 
+## Vulkan beginner documentation and portable formulas - 2026-08-26
+
+- Replaced non-portable LaTeX delimiters in active documents with GitHub- and MkDocs-compatible math blocks and corrected a corrupted Doppler `beta` expression.
+- Expanded the existing architecture document for C++ developers new to Vulkan, mapping object ownership, initialization, frame submission, resource upload, descriptors, pipelines and synchronization to concrete AzureRender API calls.
+- Added documentation checks that reject the unreadable delimiter form and require the frame API walkthrough to remain present.
+
 ## Documentation system - 2026-08-25
 
 - Replaced the fragmented active-document set with eight topic-oriented GitHub Pages documents covering operation, Vulkan architecture, Character, Blackhole, assets/editor, development/release and centralized reference data.

@@ -68,23 +68,23 @@ Skin、Face、Hair、Fabric 和 Eye 默认按介电质处理。Packed 纹理中�
 
 传统 Lambert 项为：
 
-\[
+$$
 N\!L = \max(\mathbf{n}\cdot\mathbf{l}, 0)
-\]
+$$
 
 AzureRender 不直接把它作为最终亮度，而是生成 Ramp 坐标：
 
-\[
+$$
 u_r = \operatorname{clamp}(N\!L + \Delta_{threshold} + \Delta_{style}, 0, 1)
-\]
+$$
 
 材质类别选择 `toon_ramp_atlas.ppm` 的一行，`u_r` 沿横向采样。Skin/Face 使用连续暖色过渡；Hair/Fabric/Metal 使用更明确的分区。Ramp 数据源是版本化 JSON，生成 Atlas 后由运行时加载；参数校验失败不会静默退回编译期常量。
 
 最终漫反射不是单一乘法：
 
-\[
+$$
 C_{diffuse}=C_{ambient}\,V_{ambient}+C_{direct}\,R(u_r)\,V_{shadow}
-\]
+$$
 
 其中 `V_shadow` 来自实时 Shadow Map，`R` 是分类 Ramp，环境可见度也随暗部分区调整。这样环境光能够解释体积，但不能把背光面托成和受光面一样亮。
 
@@ -102,18 +102,18 @@ Shadow Pass 从固定主光记录角色与地台深度，分辨率为 2048。Mai
 
 PCSS 分两步：
 
-1. 在接收点周围用 Poisson Disk 搜索 Blocker，计算平均遮挡深度 \(z_b\)。
+1. 在接收点周围用 Poisson Disk 搜索 Blocker，计算平均遮挡深度 $z_b$。
 2. 根据接收面与遮挡面的距离估计 Penumbra，再用扩大后的 Poisson Kernel 计算可见度。
 
 概念公式：
 
-\[
+$$
 r_p \propto \frac{z_r-z_b}{z_b}\,R_{light}
-\]
+$$
 
-其中 \(z_r\) 是 Receiver 深度，\(R_{light}\) 对应设置中的最大过滤尺度。实现将半影限制在 `maximumFilterRadiusTexels` 内，默认 8 texel，可在编辑器的 Shadow Softness 中调节。
+其中 $z_r$ 是 Receiver 深度，$R_{light}$ 对应设置中的最大过滤尺度。实现将半影限制在 `maximumFilterRadiusTexels` 内，默认 8 texel，可在编辑器的 Shadow Softness 中调节。
 
-接触阴影因为 \(z_r\approx z_b\) 而保持收紧，远离遮挡物时自然变软。深度 Bias 同时考虑基础偏移和表面朝向，减少 Acne，但不能用过大的 Bias 隐藏 Peter Panning。
+接触阴影因为 $z_r\approx z_b$ 而保持收紧，远离遮挡物时自然变软。深度 Bias 同时考虑基础偏移和表面朝向，减少 Acne，但不能用过大的 Bias 隐藏 Peter Panning。
 
 `shadow-visibility` 隔离图用于检查滤波本身；Beauty 用于检查阴影与 Ramp/AO 的合成。两者缺一不可。
 
@@ -135,13 +135,13 @@ Material Profile 指定：
 
 导入骨骼矩阵的列向量不一定等于模型语义上的左、上、前。实现保存 Bind Pose 的头部基底，再使用当前头部相对 Bind Pose 的旋转，把世界主光转换到稳定的脸部语义坐标：
 
-\[
+$$
 R_{relative}=M_{head,current}\,M_{head,bind}^{-1}
-\]
+$$
 
-\[
+$$
 \mathbf{l}_{face}=R_{relative}^{-1}\mathbf{l}_{world}
-\]
+$$
 
 横向分量决定左右采样权重，正面分量参与阈值调整。这样角色转动、骨骼动画和模型坐标约定不会把脸长期锁在全亮状态。
 
@@ -149,19 +149,19 @@ R_{relative}=M_{head,current}\,M_{head,bind}^{-1}
 
 左右脸需要在原始 UV 与镜像 UV 之间切换。直接使用 `lateralLight >= 0` 的硬分支会在光线跨过零点时整脸突变。当前用连续权重混合两个方向：
 
-\[
+$$
 w_{side}=\operatorname{smoothstep}(-\epsilon,\epsilon,l_x)
-\]
+$$
 
-\[
+$$
 d=\operatorname{mix}(d_{mirror},d_{original},w_{side})
-\]
+$$
 
 随后用阈值和 Softness 得到 Face Illumination：
 
-\[
+$$
 I_{face}=\operatorname{smoothstep}(t-s,t+s,d)
-\]
+$$
 
 结果按遮罩和参与权重混入 Ramp 坐标，并使用暖色 `faceSdfShadowColor` 染色。SDF 负责脸部设计阴影，实时 Shadow Map 仍可表达头发、附件或环境对脸的遮挡。
 
@@ -187,11 +187,11 @@ Face SDF 的正确性不能只看全局开关：
 
 HN 必须通过独立 `hairDataTexture` Binding 上传。Hair P 的命名与布料 Packed Map 不同，资产注入器必须同时识别；缺失时使用回退值并在 QA 中暴露，不能让公式存在但数据从未绑定。
 
-Kajiya-Kay 使用发束方向 \(\mathbf{t}\) 与 Half Vector \(\mathbf{h}\)：
+Kajiya-Kay 使用发束方向 $\mathbf{t}$ 与 Half Vector $\mathbf{h}$：
 
-\[
+$$
 S=\sqrt{1-(\mathbf{t}\cdot\mathbf{h})^2}
-\]
+$$
 
 通过 HN 的 BA、材质 Shift 和法线方向构造两条略微错开的发束方向，分别计算窄主高光和较宽次高光。Lobe 经平滑阈值变成稳定条带，并乘主光、Ramp、视角可见度、材质强度和 Style Mask。
 
@@ -243,9 +243,9 @@ Hair AO 是独立的风格化体积层，由以下信号组合：
 
 最终 Composite 在屏幕空间采样 Depth 和 Normal 邻域：
 
-\[
+$$
 E=\max(E_{depth},E_{normal})\,S_{outline}
-\]
+$$
 
 Depth Threshold 控制几何前后边界，Normal Threshold 控制同一深度附近的朝向变化。Hair 使用更高的 Shaded Normal 参与以保留内部发束。该 Pass 还负责诊断显示、Bloom、曝光和 Tone Mapping，因此任何 Binding 或颜色空间变更都必须成组测试。
 

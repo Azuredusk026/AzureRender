@@ -112,9 +112,9 @@ python .\tools\audit_face_sdf_compatibility.py `
 
 Skin 包含 Joint Node 和 Inverse Bind Matrix。每帧最终矩阵概念为：
 
-\[
+$$
 M_{joint}=M_{node,current}\,M_{inverseBind}
-\]
+$$
 
 顶点按最多支持的 Joint/Weight 组合混合。导入审计应确认每个顶点权重和接近 1、Joint Index 合法、左右语义骨骼没有误配、Bind Pose 不产生突跳。
 

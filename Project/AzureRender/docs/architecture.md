@@ -13,6 +13,171 @@ AzureRender 把 Vulkan 宿主与场景算法分开：宿主拥有设备、Swapch
 
 项目不是通用商业引擎，也没有承诺动态 DLL 插件 ABI。当前 SDK 是稳定版本号约束下的进程内 C++ 接口。
 
+## 给 C++ 开发者的 Vulkan 入门
+
+如果已经理解 C++ 的对象生命周期、指针和并发，但没有接触过 Vulkan，可以先把 Vulkan 看成一套“由程序显式填写工作订单”的 GPU API。OpenGL 常通过全局状态推断接下来怎样渲染；Vulkan 则要求程序提前声明对象、资源格式、访问方式和同步关系。驱动少做猜测，应用需要承担更多正确性责任。
+
+### 先建立五个概念
+
+1. **Handle 不是资源本体。** `VkImage`、`VkBuffer`、`VkPipeline` 等类型是不透明 Handle。它们类似外部系统对象的 ID，不能复制其数值来复制 GPU 资源，也不能在仍被 GPU 使用时销毁。
+2. **CreateInfo 是显式构造参数。** Vulkan 通常先零初始化 `Vk...CreateInfo`，填写 `sType` 和字段，再调用 `vkCreate...`。结构体让 API 能通过 `pNext` 扩展，而不频繁破坏函数签名。
+3. **记录不等于执行。** `vkCmdDraw` 只把命令写进 `VkCommandBuffer`。直到 `vkQueueSubmit`，GPU 才得到可执行工作；提交也不表示工作已经完成。
+4. **资源和显存是两个对象。** `vkCreateBuffer` 或 `vkCreateImage` 只定义资源，仍需查询内存需求、`vkAllocateMemory`，再用 `vkBindBufferMemory` 或 `vkBindImageMemory` 绑定。
+5. **同步和布局是数据契约。** GPU 不会自动推断一张图刚作为颜色目标写完、下一步就要被 Fragment Shader 读取。程序必须建立执行和内存依赖，并把 Image 转到适合下一种用途的 Layout。
+
+最典型的 Vulkan 创建模式在项目中表现为：
+
+```cpp
+VkApplicationInfo appInfo{VK_STRUCTURE_TYPE_APPLICATION_INFO};
+appInfo.pApplicationName = "AzureRender";
+appInfo.apiVersion = VK_API_VERSION_1_3;
+
+VkInstanceCreateInfo createInfo{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
+createInfo.pApplicationInfo = &appInfo;
+
+VkInstance instance = VK_NULL_HANDLE;
+vkCheck(vkCreateInstance(&createInfo, nullptr, &instance),
+        "vkCreateInstance");
+
+// 所有依赖 instance 的对象都销毁后，才能销毁 instance。
+vkDestroyInstance(instance, nullptr);
+```
+
+`vkCheck` 是 AzureRender 的错误包装，不是 Vulkan API。Vulkan 函数通常返回 `VkResult`；包装器把非成功结果和调用名称转成可读异常。第二个参数 `nullptr` 是自定义 Host Allocator，项目使用默认分配器。
+
+### 核心对象分别做什么
+
+| Vulkan 对象 | 零基础理解 | AzureRender 中的用途 |
+| --- | --- | --- |
+| `VkInstance` | 应用与 Vulkan Loader 的会话根对象 | 声明 Vulkan 1.3，启用实例扩展和 Debug Validation |
+| `VkPhysicalDevice` | 枚举到的真实 GPU 及其能力 | 检查 Queue、Swapchain、RGBA16F 和 Timestamp 支持 |
+| `VkDevice` | 针对一个 GPU 建立的逻辑设备 | 创建绝大多数 GPU 资源和 Pipeline |
+| `VkQueue` | GPU 工作提交入口 | Graphics Queue 执行命令，Present Queue 显示图像 |
+| `VkSurfaceKHR` | 窗口系统可显示表面 | GLFW 只帮助创建此对象 |
+| `VkSwapchainKHR` | 可轮换显示图像的队列 | Acquire 一张图，渲染后 Present |
+| `VkCommandPool` | Command Buffer 的分配与重置域 | 属于 Graphics Queue Family |
+| `VkCommandBuffer` | CPU 记录的 GPU 命令列表 | 每个 in-flight frame 一份 Primary Command Buffer |
+| `VkBuffer` / `VkImage` | 线性数据或有格式的图像资源 | 顶点、Uniform、纹理、深度、HDR 和 History |
+| `VkDeviceMemory` | 实际显存分配 | 当前由项目直接选择 Memory Type、分配并绑定 |
+| `VkImageView` | 解释 Image 的格式和子资源范围 | Attachment 与采样器通过 View 使用图像 |
+| `VkSampler` | 过滤、寻址和 LOD 规则 | 纹理、Cubemap、Shadow 和屏幕 Attachment 采样 |
+| `VkRenderPass` | Attachment 使用阶段和基本依赖合同 | Shadow、Scene、Composite 和 Editor UI Pass |
+| `VkFramebuffer` | Render Pass 使用的具体 Image View 集合 | 按 Swapchain Image/离屏目标创建 |
+| `VkPipeline` | 已编译的 Shader 与固定功能状态组合 | Character、Blackhole、Composite 等互相独立 |
+| `VkDescriptorSet` | Shader 本帧实际访问的资源表 | 绑定 UBO、材质纹理、Shadow Map 和 History |
+| `VkSemaphore` | GPU 工作之间的执行依赖 | Acquire 到 Submit、Submit 到 Present |
+| `VkFence` | GPU 向 CPU 报告提交完成 | 防止 CPU 复用仍在飞行的帧资源 |
+
+### 从启动函数认识实际 API
+
+AzureRender 的初始化不是一个黑箱，主要顺序可以直接映射到 Vulkan API：
+
+| 阶段 | 关键 API | 为什么必须按此顺序 |
+| --- | --- | --- |
+| 创建实例 | `vkCreateInstance` | 其他 Vulkan 对象都从 Instance 或 Device 派生 |
+| 安装调试回调 | `vkCreateDebugUtilsMessengerEXT` | Debug 构建接收 Validation 的错误和警告 |
+| 创建窗口表面 | `glfwCreateWindowSurface` | Device 选择前需要确认 GPU 能否向该表面 Present |
+| 枚举 GPU | `vkEnumeratePhysicalDevices`、`vkGetPhysicalDeviceProperties` | 先查询能力，再选择满足合同的 GPU |
+| 查找 Queue Family | `vkGetPhysicalDeviceQueueFamilyProperties`、`vkGetPhysicalDeviceSurfaceSupportKHR` | Graphics 能力与窗口 Present 能力不一定属于同一 Family |
+| 创建逻辑设备 | `vkCreateDevice`、`vkGetDeviceQueue` | 启用所需 Feature/Extension 并取得 Queue Handle |
+| 查询 Surface | `vkGetPhysicalDeviceSurfaceCapabilitiesKHR` 等 | 决定图像数量、格式、显示模式和尺寸 |
+| 创建交换链 | `vkCreateSwapchainKHR`、`vkGetSwapchainImagesKHR` | 获得由显示系统管理的 Color Image |
+| 创建命令资源 | `vkCreateCommandPool`、`vkAllocateCommandBuffers` | CPU 才能开始记录 GPU 命令 |
+| 创建同步对象 | `vkCreateSemaphore`、`vkCreateFence` | 帧循环开始前就要有可追踪的完成条件 |
+
+对应实现集中在 `src/app/AzureRenderApp.cpp`。阅读时先找 `createInstance()`、`pickPhysicalDevice()`、`createLogicalDevice()`、`createSwapchain()`、`createCommandPool()`、`createCommandBuffers()` 和 `createSyncObjects()`，可以得到一条完整的 Vulkan 启动链。
+
+### 一帧到底发生了什么
+
+项目的 `src/app/AzureRenderFrame.cpp::drawFrame()` 是理解 Vulkan 最重要的入口。一次普通帧按以下顺序运行：
+
+```text
+vkWaitForFences                 CPU 等待当前帧槽上一次提交结束
+vkAcquireNextImageKHR           从 Swapchain 取得本次可渲染图像编号
+vkResetFences                   把 Fence 恢复为未完成状态
+vkResetCommandBuffer            清空上次记录的命令
+vkBeginCommandBuffer            开始记录
+  vkCmdBeginRenderPass          开始一个使用具体 Attachment 的 Pass
+  vkCmdBindPipeline             选择 Shader 和固定功能状态
+  vkCmdBindDescriptorSets       绑定 Shader 将访问的 Buffer/Image
+  vkCmdBindVertexBuffers        绑定网格顶点（全屏三角形不需要）
+  vkCmdBindIndexBuffer          绑定网格索引（全屏三角形不需要）
+  vkCmdDraw / vkCmdDrawIndexed  记录绘制
+  vkCmdEndRenderPass            结束 Pass
+vkEndCommandBuffer              结束记录
+vkQueueSubmit                   将命令提交给 Graphics Queue
+vkQueuePresentKHR               等待渲染完成后显示 Swapchain Image
+```
+
+这里存在三个容易混淆的编号：`currentFrame_` 是 CPU/GPU 并行使用的帧槽，范围是 `0..kMaxFramesInFlight-1`；`imageIndex` 是本次 Acquire 得到的 Swapchain Image 编号；Command Buffer 属于帧槽，而最终 Framebuffer 通常按 `imageIndex` 选择。二者不能假设相等。
+
+`vkAcquireNextImageKHR` 会让 Image Available Semaphore 在图像可用时被 GPU 信号；`vkQueueSubmit` 等待它，并在渲染结束后信号 Render Finished Semaphore；`vkQueuePresentKHR` 再等待 Render Finished。Fence 则属于 CPU 可等待的提交完成标志：它保护按帧分配的 Uniform、Command Buffer 和 Capture 资源不被过早复用。
+
+### 为什么 Buffer 上传需要这么多调用
+
+离散 GPU 的快速显存通常不能由 CPU 直接写入，因此静态资源采用 Staging：
+
+1. `vkCreateBuffer` 创建 Host Visible 的 Staging Buffer。
+2. `vkGetBufferMemoryRequirements` 查询尺寸和 Memory Type Bits。
+3. `vkAllocateMemory` 分配匹配 `HOST_VISIBLE | HOST_COHERENT` 的内存。
+4. `vkBindBufferMemory` 把 Buffer 与内存绑定。
+5. `vkMapMemory` 得到 CPU 指针，用 `memcpy` 写入数据，再 `vkUnmapMemory`。
+6. 创建带 `TRANSFER_DST` 用途的 Device Local Buffer。
+7. 在一次性 Command Buffer 中记录 `vkCmdCopyBuffer`。
+8. 提交并等复制完成，然后销毁 Staging Buffer 和它的内存。
+
+纹理还需要 `vkCmdCopyBufferToImage`。复制前后通过 Pipeline Barrier 转换 Image Layout，例如从 `VK_IMAGE_LAYOUT_UNDEFINED` 到 `VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL`，再到 `VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL`。Layout 不只是标签，它描述后续访问类型，并允许驱动采用适合该用途的内部存储方式。
+
+这些操作由 `src/render/VulkanHelpers.cpp` 和宿主资源实现集中封装。封装减少重复代码，但不隐藏所有权：调用者仍负责保存 `VkBuffer`/`VkImage` 与 `VkDeviceMemory`，并按正确顺序释放。
+
+### Descriptor、Pipeline 和 Draw 的关系
+
+可以把一次 Draw 理解为三类输入的组合：
+
+- **Pipeline** 决定“怎样执行”：Vertex/Fragment Shader、顶点布局、深度测试、混合、剔除和 Render Pass 兼容性。
+- **Descriptor Set** 决定“读取什么”：相机 UBO、材质纹理、环境 Cubemap、Shadow Map 等。
+- **Push Constant** 提供少量高频值：当前 Draw 的材质标记或参数；它受设备上限约束，不能当作无限 Uniform 区使用。
+
+创建 Descriptor 通常分三层：`vkCreateDescriptorSetLayout` 定义 Binding 合同，`vkCreateDescriptorPool` 提供分配容量，`vkAllocateDescriptorSets` 得到实例，再用 `vkUpdateDescriptorSets` 填入具体 Buffer/Image。GLSL 中的 `layout(set = ..., binding = ...)` 必须与 C++ 的 `VkDescriptorSetLayoutBinding` 完全一致；类型、数量或 Shader Stage 不一致都会产生 Validation 错误或错误画面。
+
+Pipeline 通过 `vkCreateShaderModule` 读取 CMake 生成的 SPIR-V，再由 `vkCreateGraphicsPipelines` 把 Shader Stage、Vertex Input、Rasterization、Depth/Stencil、Blend、Viewport 和 Pipeline Layout 固化。Vulkan Pipeline 创建成本较高，所以 AzureRender 在加载或配置边界创建，帧内只用 `vkCmdBindPipeline` 选择，不逐 Draw 重新编译。
+
+### 同步错误为什么难调
+
+Vulkan 同步同时回答两个问题：
+
+1. **执行依赖**：后一个操作什么时候可以开始？Semaphore、Fence 和 Pipeline Stage 参与回答。
+2. **内存依赖**：前一个写入什么时候对后一个读取可见？Access Mask、Stage Mask 和 Image Layout Transition 参与回答。
+
+只解决执行先后却没有建立正确的内存可见性，仍可能读到旧数据。反过来，随处使用 `vkDeviceWaitIdle` 虽可能掩盖问题，却会清空并行度。AzureRender 只在退出、Swapchain 重建和明确的安全热重载边界等待 Device Idle；普通帧依赖每帧 Fence 和 Semaphore。
+
+常见症状与检查方向：
+
+| 症状 | 优先检查 |
+| --- | --- |
+| 偶发闪烁或只在部分 GPU 出错 | Barrier 的 Source/Destination Stage 与 Access Mask |
+| Resize 后黑屏或 Validation 报旧对象 | Swapchain 依赖对象是否全部重建，旧资源是否仍被引用 |
+| CPU 写入后 GPU 偶尔读到上一帧 | 是否按 in-flight frame 分配数据，Fence 是否保护复用 |
+| Descriptor 报 Invalid Handle | Descriptor 指向的 Image View/Buffer 是否先被销毁 |
+| Pipeline 创建失败 | Shader 接口、Attachment Format、Pipeline Layout 是否一致 |
+| 画面方向上下颠倒或深度异常 | Vulkan NDC、Viewport Y 和 Depth Range 约定 |
+
+Debug 构建开启 `VK_LAYER_KHRONOS_validation`，它能发现很多生命周期、绑定和同步错误，但不能证明画面在美术上正确，也不能自动发现所有跨帧数据语义错误。因此项目还使用固定 Capture、诊断视图和 RenderDoc 进行验证。
+
+### 推荐阅读顺序
+
+零基础读者不需要先通读 Vulkan 规范。按项目中的实际数据流阅读更容易建立上下文：
+
+1. `src/app/AzureRenderApp.cpp`：Instance、Device、Swapchain、Command 与同步对象的创建和销毁。
+2. `src/app/AzureRenderFrame.cpp::drawFrame()`：Acquire、记录、Submit、Present 和 Resize 分支。
+3. `src/render/VulkanHelpers.cpp`：Buffer、Image、显存、上传和 Layout Transition。
+4. `src/app/AzureRenderDescriptors.cpp`：Layout、Pool、Set 和 `vkUpdateDescriptorSets`。
+5. `src/app/AzureRenderPipeline.cpp`：SPIR-V 到 Graphics Pipeline，以及固定功能状态。
+6. `src/scenes/CharacterSceneRenderer.cpp`：网格、多材质、Shadow/Main Pass 如何落入公共宿主。
+7. `src/scenes/BlackholeSceneRenderer.cpp`：全屏 Trace 与时间 History 如何复用同一宿主。
+
+阅读每个 Vulkan Handle 时始终问四个问题：谁创建、谁拥有、GPU 何时不再使用、由谁销毁。能回答这四项，就已经抓住了本项目 Vulkan 工程工作的核心。
+
 ## 模块划分
 
 | 目录 | 职责 |
@@ -55,7 +220,7 @@ sequenceDiagram
     App->>VK: destroy in reverse dependency order
 ```
 
-命令行在创建窗口前完成值域和组合校验。资源根、场景和资产随后解析为绝对路径。应用创建 Registry 并根据 `RenderSettings::sceneType` 实例化 Renderer；Renderer 的能力声明必须在 `onLoad` 前通过验证，且诊断视图第 0 项必须是 `Beauty`。
+命令行在创建窗口前完成值域和组合校验。资源根、场景和资产随后解析为绝对路径。应用创建 `SceneRendererRegistry` 并根据 `RenderSettings::sceneType` 实例化 Renderer；Renderer 的能力声明必须在 `onLoad` 前通过验证，且诊断视图第 0 项必须是 `Beauty`。
 
 ## Vulkan Instance、Surface 与 Validation
 
