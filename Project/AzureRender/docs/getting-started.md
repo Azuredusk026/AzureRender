@@ -6,13 +6,13 @@
 
 | 组件 | 要求 |
 | --- | --- |
-| 操作系统 | Windows 10/11；Linux CI 使用 Ubuntu 24.04 |
+| 操作系统 | Windows 10/11。Linux CI 使用 Ubuntu 24.04 |
 | Vulkan | Vulkan SDK，目标 API 1.3，需包含 `glslc` |
 | 构建 | CMake 3.20+、Ninja |
 | 编译器 | MinGW/GCC 13+ 或项目 CI 支持的 MSVC/GCC |
 | 依赖 | vcpkg manifest mode |
 
-Windows 已验证基线为 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。版本不是硬编码要求，但偏离基线后应重新执行 Debug Validation 和完整 CTest。
+Windows 已验证的版本是 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。这些版本不是硬性要求。更换版本后，请重新运行 Debug Validation 和完整 CTest。
 
 ## 配置与构建
 
@@ -76,11 +76,11 @@ cmake --build build/ninja-debug
   --blackhole-camera front
 ```
 
-质量档位是 `performance`、`balanced` 和 `cinematic`；相机预设是 `front`、`orbit-left`、`high`、`close` 和 `over-shoulder`。相机或质量变化会使时间 History 失效，避免旧采样污染新视图。
+质量档位有 `performance`、`balanced` 和 `cinematic`。相机预设有 `front`、`orbit-left`、`high`、`close` 和 `over-shoulder`。更换相机或质量后，渲染器会清空时间 History。这样旧采样不会混入新视图。
 
 ## 环境贴图
 
-`--environment` 接受单张等距柱状 `.hdr/.png/.jpg`，也接受含六个面的目录。六面文件名以 `_Right`、`_Left`、`_Up`、`_Down`、`_Front`、`_Back` 结尾，加载器会统一转换为内部等距柱状表示。
+`--environment` 可以读取单张等距柱状 `.hdr/.png/.jpg`，也可以读取包含六个面的目录。六个文件名分别以 `_Right`、`_Left`、`_Up`、`_Down`、`_Front` 和 `_Back` 结尾。加载器会把六面图转换成内部使用的等距柱状图。
 
 ```powershell
 .\build\ninja-debug\AzureRender.exe `
@@ -88,7 +88,7 @@ cmake --build build/ninja-debug
   --environment D:\Assets\StudioEvening.hdr
 ```
 
-发布契约不包含开发机绝对路径。EXR 目前不能直接加载；需要保留动态范围时，先离线转换为 Radiance HDR。
+发布配置中不能包含开发机的绝对路径。程序目前不能直接加载 EXR。需要保留动态范围时，请先把文件离线转换为 Radiance HDR。
 
 ## 创建和打开编辑器场景
 
@@ -101,7 +101,7 @@ cmake --build build/ninja-debug
   --editor .\build\ninja-debug\public.azscene
 ```
 
-编辑器支持 Scene Outliner、Inspector、Asset Browser、Renderer 选择、Undo/Redo、显式资产重载和语义化 Capture。详细数据契约见[资产、场景与编辑器](assets-and-editor.md)。
+编辑器包含 Scene Outliner、Inspector 和 Asset Browser。它也支持 Renderer 选择、Undo/Redo、手动重载资产和语义化 Capture。详细数据格式见[资产、场景与编辑器](assets-and-editor.md)。
 
 ## 确定性截图
 
@@ -115,7 +115,7 @@ cmake --build build/ninja-debug
   --capture-frames 1 --capture-fps 24
 ```
 
-捕获使用固定时间步长，并写出 PNG、状态 manifest 和相关性能信息。尺寸范围为 64x64 到 7680x4320，帧率为 1 到 240。`--capture-dir` 与 `--capture-frames` 必须同时出现。
+捕获使用固定时间步长。输出包含 PNG、状态 manifest 和性能信息。尺寸范围是 64x64 到 7680x4320，帧率范围是 1 到 240。`--capture-dir` 与 `--capture-frames` 必须同时使用。
 
 五章技术序列：
 
@@ -139,7 +139,7 @@ cmake --build build/ninja-debug
   --smoke-frames 300
 ```
 
-Timing 由 Vulkan Timestamp Query 产生，只表示被 Query 包围的 GPU Pass，不包含 CPU 更新、Present 等待、PNG Readback 或视频编码。比较数据时必须保持 GPU、驱动、分辨率、场景、质量和构建类型一致。
+Timing 来自 Vulkan Timestamp Query。它只统计 Query 包围的 GPU Pass，不包含 CPU 更新、Present 等待、PNG Readback 和视频编码。比较结果时，请使用相同的 GPU、驱动、分辨率、场景、质量和构建类型。
 
 ## 诊断与 QA
 
@@ -171,7 +171,7 @@ cmake --install .\build\ninja-release --prefix .\build\install-release
 .\build\install-release\bin\AzureRender.exe --smoke-frames 120
 ```
 
-Windows MinGW 安装树的 `bin/` 应同时包含 `AzureRender.exe`、`glfw3.dll`、`libgcc_s_seh-1.dll`、`libstdc++-6.dll` 和 `libwinpthread-1.dll`。只移动 EXE 不属于受支持的发布方式。
+Windows MinGW 安装树的 `bin/` 必须包含 `AzureRender.exe` 和 `glfw3.dll`。它还需要 `libgcc_s_seh-1.dll`、`libstdc++-6.dll` 和 `libwinpthread-1.dll`。不要单独移动 EXE。
 
 ## 常见问题
 
@@ -194,7 +194,7 @@ Windows MinGW 安装树的 `bin/` 应同时包含 `AzureRender.exe`、`glfw3.dll
 
 ### Vulkan Validation 不可用
 
-确认 SDK 安装完整、`VK_LAYER_KHRONOS_validation` 可见，并使用 Debug 构建。`AZURERENDER_ENABLE_VALIDATION` 只在 Debug 配置启用。
+确认 SDK 安装完整，并检查 `VK_LAYER_KHRONOS_validation` 是否可见。Validation 需要 Debug 构建。`AZURERENDER_ENABLE_VALIDATION` 只在 Debug 配置中启用。
 
 ### MinGW 编译器无诊断退出
 
@@ -202,4 +202,4 @@ Windows MinGW 安装树的 `bin/` 应同时包含 `AzureRender.exe`、`glfw3.dll
 
 ### 捕获尺寸不正确
 
-确定性捕获会请求隐藏无边框 Surface。Manifest 中的宽高必须与命令一致；不允许后期非等比拉伸。若目录非空或 Surface 无法满足尺寸，捕获应失败而不是生成不可信证据。
+确定性捕获会创建隐藏的无边框 Surface。Manifest 中的宽高必须和命令一致。视频或图片不能在后期做非等比拉伸。如果目录非空，或者 Surface 无法满足请求尺寸，捕获会直接失败。

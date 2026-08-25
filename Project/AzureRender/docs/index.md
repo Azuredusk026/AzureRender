@@ -1,8 +1,10 @@
 # AzureRender
 
-AzureRender 是一个原生 Vulkan 可扩展实时渲染器。项目的目标不是包装单个 Shader Demo，而是建立一套能够承载不同场景、不同 Shader 组合和不同资源契约的长期渲染宿主。
+AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo 的包装。项目提供一个公共宿主，让不同场景和不同 Shader 组合可以共用底层渲染资源。
 
-当前两个主要场景代表了相反的工作负载：Character 是由大量网格、材质、透明层和阴影组成的传统光栅路径；Blackhole 是以全屏数值积分、时间累积和 HDR 合成为主的程序化路径。二者共享窗口、设备、Swapchain、公共 Attachment、最终合成、Capture、GPU Timing 和编辑器基础设施，但各自拥有 Pipeline、Descriptor 和算法状态。
+项目目前有两个主要场景。Character 使用传统光栅路径，包含网格、材质、透明层和阴影。Blackhole 使用全屏数值积分、时间累积和 HDR 合成。
+
+两个场景共用窗口、设备、Swapchain 和公共 Attachment，也共用最终合成、Capture、GPU Timing 和编辑器。各场景单独管理自己的 Pipeline、Descriptor 和算法状态。
 
 ![AzureRender 黑洞场景](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
 
@@ -19,7 +21,9 @@ AzureRender 是一个原生 Vulkan 可扩展实时渲染器。项目的目标不
 
 ## 原生 Vulkan 的边界
 
-AzureRender 直接调用 Vulkan API 管理渲染资源和帧执行，不依赖 Unreal、Unity、bgfx 或现成渲染框架。第三方库只负责外围基础能力：GLFW 创建窗口和 Surface，Dear ImGui 提供编辑器控件，tinygltf/stb 解析资产，nlohmann/json 处理数据文件。Shader 使用 GLSL 编写，由 Vulkan SDK 的 `glslc` 编译为 SPIR-V。
+AzureRender 直接调用 Vulkan API 来管理资源和每一帧的执行。项目不依赖 Unreal、Unity、bgfx 或其他渲染框架。GLFW 只创建窗口和 Surface。Dear ImGui 提供编辑器控件。
+
+tinygltf 和 stb 解析资产，nlohmann/json 读取数据文件。Shader 使用 GLSL 编写，再由 Vulkan SDK 的 `glslc` 编译为 SPIR-V。
 
 因此，“原生 Vulkan 自研”描述的是渲染后端、场景架构和算法实现，而不是声称项目没有任何第三方依赖。
 
@@ -41,19 +45,23 @@ flowchart TB
     App --> QA[QA + GPU Timing + Manifest]
 ```
 
-宿主只选择一个活动 Scene Renderer。新增场景通过 Registry 注册，不要求在帧循环中持续增加场景特判；场景通过只读 `RenderContext` 使用宿主提供的 Vulkan 对象，并负责释放自己创建的资源。
+宿主一次只运行一个 Scene Renderer。新场景通过 Registry 注册，不需要修改主帧循环。场景从只读 `RenderContext` 取得宿主提供的 Vulkan 对象。它只释放自己创建的资源。
 
 ## 两个场景
 
 ### 风格化角色
 
-角色路径重点处理非写实材质的可控性，而不是简单套用 PBR。材质分类决定 Ramp、AO、镜面和轮廓行为；Face SDF 提供稳定的脸部明暗形状；Hair HN/P 数据驱动发束法线与双层 Kajiya-Kay 高光；2048 阴影贴图通过 PCSS 产生随遮挡距离变化的软阴影。
+角色路径不直接套用统一的 PBR 材质。材质分类决定 Ramp、AO、镜面和轮廓。Face SDF 控制脸部阴影形状。
+
+Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配合 PCSS 生成软阴影。
 
 [阅读角色渲染原理](character-rendering.md)
 
 ### 黑洞模拟
 
-黑洞路径在 Fragment Shader 中积分光线路径，采样程序化吸积盘和环境背景。吸积盘包含旋转体密度、周期噪声和稀疏结构，并利用多普勒频移、相对论增亮和引力红移建立明显不对称。当前帧通过双 History 时间累积稳定高成本采样。
+黑洞路径在 Fragment Shader 中积分光线路径。射线会采样程序化吸积盘和环境背景。吸积盘包含旋转体密度、周期噪声和稀疏结构。
+
+多普勒频移、相对论增亮和引力红移让盘面两侧呈现明显差异。双 History 时间累积负责稳定采样噪声。
 
 [阅读黑洞模拟原理](blackhole-rendering.md)
 

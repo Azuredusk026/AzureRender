@@ -16,6 +16,7 @@ done
 
 test -f mkdocs.yml
 test -f requirements-docs.txt
+test -f tools/check_doc_style.py
 
 rg -q 'SceneRendererRegistry' docs/architecture.md
 rg -q 'vkAcquireNextImageKHR' docs/architecture.md
@@ -23,12 +24,24 @@ rg -q 'vkQueueSubmit' docs/architecture.md
 rg -q 'Face SDF' docs/character-rendering.md
 rg -q 'Schwarzschild' docs/blackhole-rendering.md
 rg -q 'assets_private/' docs/assets-and-editor.md
-rg -q '直到项目所有者主动恢复' docs/development-and-release.md
+rg -q '等待项目所有者主动恢复' docs/development-and-release.md
 
 if rg -n '\\\[|\\\]|\\\(|\\\)' docs/*.md; then
     echo 'Non-portable LaTeX delimiter found; use $ or $$ for GitHub and MkDocs' >&2
     exit 1
 fi
+
+style_documents=(README.md docs/*.md)
+if test -f ../../README.md; then
+    style_documents+=(../../README.md)
+fi
+
+if rg -n '；|—|–' "${style_documents[@]}"; then
+    echo 'Dense punctuation found in active documentation; use short sentences' >&2
+    exit 1
+fi
+
+python tools/check_doc_style.py "${style_documents[@]}"
 
 if rg -n \
     'ARCHITECTURE_CN|USER_GUIDE_CN|DEVELOPMENT_ROADMAP_CN|ACTIVE_DEVELOPMENT_PLAN_CN|PROJECT_OVERVIEW_CN' \

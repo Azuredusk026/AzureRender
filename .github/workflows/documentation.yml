@@ -4,15 +4,24 @@ on:
   push:
     branches: [main]
     paths:
+      - "README.md"
+      - "Project/AzureRender/README.md"
       - "Project/AzureRender/docs/**"
       - "Project/AzureRender/mkdocs.yml"
       - "Project/AzureRender/requirements-docs.txt"
+      - "Project/AzureRender/tools/check_docs.sh"
+      - "Project/AzureRender/tools/check_doc_style.py"
       - ".github/workflows/documentation.yml"
   pull_request:
     paths:
+      - "README.md"
+      - "Project/AzureRender/README.md"
       - "Project/AzureRender/docs/**"
       - "Project/AzureRender/mkdocs.yml"
       - "Project/AzureRender/requirements-docs.txt"
+      - "Project/AzureRender/tools/check_docs.sh"
+      - "Project/AzureRender/tools/check_doc_style.py"
+      - ".github/workflows/documentation.yml"
   workflow_dispatch:
 
 permissions:
@@ -38,6 +47,7 @@ jobs:
           cache: pip
           cache-dependency-path: Project/AzureRender/requirements-docs.txt
       - run: pip install -r requirements-docs.txt
+      - run: bash tools/check_docs.sh
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'

@@ -1,12 +1,14 @@
 # AzureRender
 
-AzureRender 是一个基于原生 Vulkan API 和 C++17 构建的可扩展实时渲染器。统一宿主目前承载两条差异显著的渲染路径：风格化角色渲染，以及带相对论视觉效应的黑洞模拟。项目同时提供 ImGui 编辑器、确定性截图、诊断视图、GPU Pass Timing、视觉回归工具和进程内 Renderer SDK。
+AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。风格化角色和黑洞模拟共用同一个宿主。项目还提供 ImGui 编辑器、确定性截图、诊断视图、GPU 计时和视觉回归工具。新场景可以通过进程内 Renderer SDK 接入。
 
-> **English summary:** AzureRender is an extensible real-time renderer built directly on Vulkan. It combines a stylized character pipeline and a relativistic black-hole renderer under one host, with deterministic capture, diagnostics, GPU timing and an in-process scene-renderer interface.
+> **English summary:** AzureRender is a real-time renderer written with C++17 and the native Vulkan API. One host runs both the stylized character renderer and the relativistic black-hole simulation. It also includes deterministic capture, diagnostics, GPU timing and an in-process renderer interface.
 
 ## 项目定位
 
-Vulkan 核心由项目直接实现，包括设备与交换链、Render Pass、Pipeline、Descriptor、Buffer/Image、资源上传、帧同步、GPU Query 和资源生命周期。GLFW、Dear ImGui、tinygltf、stb 和 nlohmann/json 分别承担窗口界面、模型图片解析和 JSON 支持；它们不替代渲染架构或 Vulkan 资源管理。
+项目直接实现 Vulkan 核心。这里包括设备、交换链、Render Pass、Pipeline、Descriptor 和 Buffer/Image，也包括资源上传、帧同步、GPU Query 和资源生命周期。
+
+GLFW 与 Dear ImGui 负责窗口和界面。tinygltf、stb 和 nlohmann/json 负责解析模型、图片和 JSON。它们不接管渲染架构或 Vulkan 资源管理。
 
 | 场景 | 主要技术 |
 | --- | --- |
@@ -16,7 +18,7 @@ Vulkan 核心由项目直接实现，包括设备与交换链、Render Pass、Pi
 
 ## 快速开始
 
-要求 Windows 10/11 或 Ubuntu 24.04、Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 已验证 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 与 Ninja 1.13.2。
+项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 已验证的版本是 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。
 
 ```powershell
 $env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
@@ -35,7 +37,7 @@ cmake --build .\build\ninja-debug
   --blackhole-quality cinematic
 ```
 
-构建安装树后应从 `build/install-<config>/bin/AzureRender.exe` 运行；不要只复制 EXE，否则 Windows 会缺少 GLFW 或 MinGW Runtime DLL。
+构建安装树后，请运行 `build/install-<config>/bin/AzureRender.exe`。不要单独复制 EXE。这样做会漏掉 GLFW 或 MinGW Runtime DLL。
 
 ## 文档
 
@@ -58,7 +60,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
   -P .\tools\run_release_gate.cmake
 ```
 
-自动化覆盖 CLI、ECS、编辑器历史、场景序列化、资源定位、扩展注册和 GPU 能力报告。视觉变更还必须通过公共资产捕获、图像比较和 Debug Validation；单元测试不能替代 GPU 实机验收。
+自动化测试覆盖 CLI、ECS、编辑器历史和场景序列化。它也检查资源定位、扩展注册和 GPU 能力报告。视觉变更还要运行公共资产捕获、图像比较和 Debug Validation。单元测试不能代替真实 GPU 验收。
 
 ## 资产与许可
 

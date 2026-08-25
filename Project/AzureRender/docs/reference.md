@@ -1,6 +1,6 @@
 # 参数与接口参考
 
-本页集中保存需要查表的稳定契约。叙述性设计见其他主题文档；发生冲突时以 `CommandLine.cpp`、`RenderSettings.hpp`、Schema、Shader 和自动化测试为准。
+本页集中保存适合查表的稳定契约。设计说明放在其他主题文档中。如果两处内容冲突，以 `CommandLine.cpp`、`RenderSettings.hpp`、Schema、Shader 和自动化测试为准。
 
 ## 命令行
 
@@ -12,7 +12,7 @@
 | `--version` | 无 | 输出版本并以 0 退出 |
 | `--check-resources` | 无 | 检查安装/开发资源树 |
 | `--resource-root` | 目录 | 显式资源根 |
-| `--asset` | `.gltf/.glb` | Character 资产；创建场景时必需 |
+| `--asset` | `.gltf/.glb` | Character 资产。创建场景时必需 |
 | `--environment` | 图片或目录 | 等距柱状图或六面 Cubemap 目录 |
 | `--smoke-frames` | 正整数 | 渲染固定帧数后退出 |
 
@@ -44,7 +44,7 @@
 | `--gpu-timing-output` | JSON 路径 | 启用 Timing 并写 JSON |
 | `--hud` | 无 | 显示 HUD，同时启用 Timing |
 
-`--capture-dir` 与 `--capture-frames` 必须成对出现。Technical Sequence 要求至少 5 帧且帧数能被 5 整除，不能与 `--qa-*` 组合。
+`--capture-dir` 与 `--capture-frames` 必须一起使用。Technical Sequence 至少需要 5 帧，总帧数还要能被 5 整除。它不能与 `--qa-*` 组合。
 
 ### Character QA
 
@@ -167,7 +167,7 @@ overlay            bloom
 | `grade.tint` | `[1,1,1]` | 每通道 0-2 |
 | `grade.toneMappingEnabled` | true | Boolean |
 
-`characterPresentation` 还包含 Background 和 Platform 开关；`blackhole` 保存 Quality 和 Camera。
+`characterPresentation` 还包含 Background 和 Platform 开关。`blackhole` 保存 Quality 和 Camera。
 
 ## Showcase Look Catalog v1
 
@@ -220,7 +220,7 @@ Catalog 文件只拥有 Grade、Bloom 和 Outline 数据。
 
 ### Face SDF Profile
 
-必需字段：`schemaVersion`、`texture`、`texCoord=0`、`channel`、`maskChannel`、`shadowOnLowValues`、`horizontalAxis` 和 `headNode`。通道接受 `r/g/b/a`，水平方向接受 `left-to-right/right-to-left`。
+必需字段包括 `schemaVersion`、`texture`、`texCoord=0`、`channel` 和 `maskChannel`。还需要 `shadowOnLowValues`、`horizontalAxis` 和 `headNode`。通道可以是 `r/g/b/a`。水平方向可以是 `left-to-right` 或 `right-to-left`。
 
 ## Character Descriptor Set 0
 
@@ -240,7 +240,7 @@ Catalog 文件只拥有 Grade、Bloom 和 Outline 数据。
 | 11 | Combined Image Sampler | Toon Ramp Atlas |
 | 12 | Combined Image Sampler | Face SDF |
 
-Material Push Constant 包含 Alpha、Emissive、AO、Lam Shadow、Matcap、Hair/Style/Feature Parameters、Class、Feature Bit 和 Profile Version。Vertex Push Range 还包含 Morph Weight 与 Gizmo Transform。
+Material Push Constant 保存 Alpha、Emissive、AO、Lam Shadow 和 Matcap。它还保存 Hair、Style、Feature Parameters、Class、Feature Bit 和 Profile Version。Vertex Push Range 另有 Morph Weight 与 Gizmo Transform。
 
 ## 最终 Composite Descriptor
 
@@ -287,7 +287,7 @@ capabilities -> onLoad -> (updateFrame -> recordScene)*
 
 `SceneFrameData` 提供时间、RenderSettings、相机、旋转、QA、Capture、编辑器选择/Gizmo 和 Swapchain 尺寸。
 
-`RenderContext` 提供 Device、Physical Device、Graphics Queue/Family、Command Pool、当帧 Command Buffer、格式/Extent、公共 Render Pass/Framebuffer、Shadow Map、环境、Shader 目录、Ramp 和 Timing Query。所有对象只读借用，Renderer 不得销毁。
+`RenderContext` 提供 Device、Physical Device、Graphics Queue/Family 和 Command Pool。它也提供当前 Command Buffer、格式、Extent、公共 Render Pass 和 Framebuffer。其他字段包括 Shadow Map、环境、Shader 目录、Ramp 和 Timing Query。Renderer 只借用这些对象，不能销毁它们。
 
 内置 Renderer：
 
@@ -307,7 +307,7 @@ translation[3], rotation[3], scale[3]
 prefabSource, instanceOf
 ```
 
-保存使用同目录临时文件与原子替换。v1 可迁移；未知未来版本拒绝。
+保存时先写入同目录临时文件，再原子替换目标。v1 可以迁移。程序会拒绝未知的未来版本。
 
 ## 版本索引
 

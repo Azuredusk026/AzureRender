@@ -1,5 +1,11 @@
 # Changelog
 
+## Plain-language documentation - 2026-08-26
+
+- Rewrote the active Chinese documentation with shorter sentences and a more direct technical voice while preserving API names, formulas and contracts.
+- Split dense explanations of Vulkan synchronization, resource ownership, character shading and black-hole rendering into smaller steps for C++ readers new to Vulkan.
+- Added a prose-length and punctuation check to the documentation workflow so future pages do not return to long compound sentences.
+
 ## Vulkan beginner documentation and portable formulas - 2026-08-26
 
 - Replaced non-portable LaTeX delimiters in active documents with GitHub- and MkDocs-compatible math blocks and corrected a corrupted Doppler `beta` expression.

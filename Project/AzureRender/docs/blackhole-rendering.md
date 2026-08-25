@@ -1,6 +1,6 @@
 # 黑洞模拟
 
-Blackhole Renderer 是一条全屏程序化渲染路径。它不加载黑洞网格，而是在 Fragment Shader 中从相机生成射线，沿弯曲路径积分，采样吸积盘体密度和环境背景，再经过时间累积、Bloom 与 HDR 合成得到最终画面。
+Blackhole Renderer 使用全屏程序化渲染，不加载黑洞网格。Fragment Shader 从相机生成射线，再沿弯曲路径向前积分。射线会采样吸积盘体密度和环境背景。结果经过时间累积、Bloom 和 HDR 合成后成为最终画面。
 
 本实现以视觉可控和实时稳定为目标，参考 Schwarzschild 黑洞的关键现象，但不是科研级时空求解器。文档中的“物理”描述应理解为实时渲染近似。
 
@@ -20,7 +20,7 @@ flowchart LR
     Scene --> Final[Tone mapping / swapchain / capture]
 ```
 
-Renderer 拥有 Raw Trace Image、两个 History Image、Framebuffer、Pipeline、Descriptor 和时间状态。宿主只看到标准 HDR 场景输出。Ping-Pong History 避免同一图像在单帧中同时作为读取和写入目标。
+Renderer 管理 Raw Trace Image、两个 History Image 和时间状态。它也管理自己的 Framebuffer、Pipeline 和 Descriptor。宿主只接收标准 HDR 场景输出。两个 History 轮流读写，避免同一张图在一帧内既作为输入又作为输出。
 
 ## 相机与初始射线
 
@@ -40,7 +40,7 @@ $$
 | `close` | 近距离构图，观察噪声、光子环和遮挡 |
 | `over-shoulder` | 黑洞位于画面右下、左上保留天空的移动展示 |
 
-切换相机或 resize 会清除 History；否则旧相机样本会在新视图中形成拖影。
+切换相机或 resize 时，渲染器会清除 History。否则旧相机的样本会在新视图中形成拖影。
 
 ## Schwarzschild 近似与光线弯曲
 
@@ -50,7 +50,7 @@ $$
 - **Photon Sphere 邻域**：曲率变化最强，需要更细步长。
 - **远场**：引力影响减弱，可以扩大步长。
 
-实时实现不对完整四维测地线做高精度通用求解，而是迭代更新射线位置和方向，用指向中心的曲率项近似空间弯曲：
+实时版本不会求解完整的四维测地线。Shader 会逐步更新射线位置和方向，并用指向中心的曲率项近似空间弯曲：
 
 $$
 \mathbf{p}_{i+1}=\mathbf{p}_i+\mathbf{d}_i\,\Delta s_i
@@ -77,7 +77,7 @@ $$
 \Delta s=\Delta s_{base}\,q_{quality}\,f_{radius}(r)\,f_{disk}(h)
 $$
 
-在 Photon Sphere 和吸积盘附近收紧，远离中心时放大。关键是使用连续函数，而不是按距离划分离散档位；离散档位会在画面上产生同心色块和采样边界。
+步长在 Photon Sphere 和吸积盘附近变小，远离中心后再逐渐变大。这里必须使用连续函数。按距离切成几个固定档位会产生同心色块和采样边界。
 
 质量档位：
 
@@ -122,7 +122,7 @@ $$
 
 ## 周期噪声与接缝
 
-`atan2` 的角度在 $+\pi$ 与 $-\pi$ 处跳变。若直接把 $\theta$ 作为普通 Perlin/Simplex 坐标，噪声在这一条径向线上不连续，吸积盘旋转时会出现固定接缝。
+`atan2` 的角度会在 $+\pi$ 与 $-\pi$ 之间跳变。如果直接把 $\theta$ 传给普通 Perlin 或 Simplex 噪声，圆周两端就无法连续。吸积盘旋转时，画面会出现一条固定的径向接缝。
 
 实现将角度嵌入圆周：
 
@@ -130,7 +130,7 @@ $$
 \mathbf{q}_{angular}=(\cos\theta\,k,\sin\theta\,k,r\,k_r+h\,k_h)
 $$
 
-噪声输入在圆周边界具有相同数值和变化方向。厚度、云层、旋臂扰动和尘埃必须共用这一周期约定；只修复其中一个分支仍会留下较弱接缝。
+噪声输入在圆周两端具有相同的数值和变化方向。厚度、云层、旋臂扰动和尘埃都要使用这一周期坐标。只修复其中一个分支，画面上仍会留下较弱的接缝。
 
 接缝回归至少检查正面静态图和近距离移动序列。不能通过模糊、降低对比度或把接缝转到镜头背面规避。
 
@@ -142,7 +142,7 @@ $$
 \omega(r)\propto r^{-3/2}
 $$
 
-噪声坐标使用 $\theta+\omega(r)t$ 推进，因此内盘旋转更快，外盘更慢。时间只移动连续噪声场，不逐帧生成完全独立的随机密度；后者会产生无法被合理 TAA 稳定的闪烁。
+噪声坐标按 $\theta+\omega(r)t$ 推进，所以内盘旋转更快，外盘更慢。时间只移动同一个连续噪声场。Shader 不会每帧生成完全独立的随机密度，因为这种做法会造成 TAA 难以稳定的闪烁。
 
 旋转方向同时决定局部速度，用于多普勒效应。改变盘面旋转但不更新速度符号，会使视觉运动和颜色不对称互相矛盾。
 
@@ -167,7 +167,9 @@ D=\frac{1}{\gamma(1-\beta_{los})},\qquad
 \gamma=\frac{1}{\sqrt{1-\beta^2}}
 $$
 
-颜色温度随 $D$ 改变，接近侧偏蓝白，远离侧偏红；亮度近似乘 $D^3$ 表达 Relativistic Beaming。实现对极端值设上限以保持 HDR 稳定，但上限不能低到抹平主要不对称。
+$D$ 会改变颜色温度。接近观察者的一侧偏蓝白，远离的一侧偏红。亮度近似乘 $D^3$，用来表现 Relativistic Beaming。
+
+Shader 会限制极端值，避免 HDR 能量失控。这个上限不能太低，否则盘面两侧会重新变得对称。
 
 验收时正面盘面必须明显不对称。如果画面左右几乎相同，应检查相机方向、速度切线、点积符号、Doppler Clamp 和 Tone Mapping，而不是只提高色彩饱和度。
 
@@ -189,7 +191,7 @@ $$
 
 ## 环境与引力透镜
 
-未进入 Event Horizon 的射线在退出积分后使用最终方向采样环境贴图，因此背景星空会被弯曲。环境既可以是等距柱状 HDR，也可以来自六面 Cubemap 目录；加载器统一为共享表示。
+没有进入 Event Horizon 的射线会在积分结束后采样环境贴图。采样使用射线弯曲后的最终方向，所以背景星空也会弯曲。环境可以是等距柱状 HDR，也可以来自六面 Cubemap。加载器会把两种输入转换成同一种内部表示。
 
 黑洞本身不需要传统环境光照，但背景图是判断透镜方向、相机运动和 Photon Ring 的关键参照。纯黑或低信息背景会隐藏算法错误，不适合作为唯一验收环境。
 
@@ -201,7 +203,7 @@ $$
 H_t=(1-w)H_{t-1}+wC_t
 $$
 
-`w=1` 表示完全丢弃 History。正常连续帧根据目标半衰期、帧间隔和质量档位计算权重；Capture 使用固定时间步长保证重复运行一致。
+`w=1` 表示完全丢弃 History。普通连续帧会根据目标半衰期、帧间隔和质量档位计算权重。Capture 使用固定时间步长，保证重复运行得到一致结果。
 
 History 必须在以下情况重置：
 
@@ -212,15 +214,15 @@ History 必须在以下情况重置：
 - Renderer 重新加载。
 - History 尺寸或格式变化。
 
-若不重置，旧画面会残留为拖影；若每帧重置，TAA 完全失效。时间半衰期需要在稳定噪声和保留旋转细节之间平衡。
+不重置 History 会留下旧画面的拖影。每帧重置又会让 TAA 完全失效。时间半衰期需要在降噪和保留旋转细节之间取得平衡。
 
 当前 Temporal Shader 同时从 HDR 高亮提取小范围 Gaussian Bloom。它是黑洞内部稳定高亮的一部分，最终仍通过宿主 Tone Mapping 输出。
 
 ## HDR 合成
 
-Trace 输出保持 HDR：内盘、Photon Ring 和 Beaming 可以超过 1。Temporal/Bloom 后写入宿主 HDR Scene Color，最终公共 Pass 执行 Exposure 和 Tone Mapping。
+Trace 输出保持在线性 HDR 中。内盘、Photon Ring 和 Beaming 的数值都可以超过 1。Temporal 和 Bloom 处理后，结果写入宿主的 HDR Scene Color。公共最终 Pass 再应用 Exposure 和 Tone Mapping。
 
-过早 Clamp 会把高亮变成无层次色块；只降低曝光又会压暗外盘。正确检查顺序是：
+过早 Clamp 会把高亮变成没有层次的色块。只降低曝光又会压暗外盘。可以按下面的顺序检查：
 
 1. Raw Trace 密度是否连续。
 2. Doppler 两侧相对能量是否合理。
@@ -230,7 +232,7 @@ Trace 输出保持 HDR：内盘、Photon Ring 和 Beaming 可以超过 1。Tempo
 
 ## 性能特征
 
-Blackhole 的主成本由实际积分步数、每像素 Trace 数、输出分辨率和盘面命中率决定。最大步骤是上限，不代表每个像素都执行满；Event Horizon、远场和 Alpha 饱和可提前退出。
+Blackhole 的成本主要来自实际积分步数和每像素 Trace 数。输出分辨率和盘面命中率也会影响耗时。最大步数只是上限，并非每个像素都会执行满。射线进入 Event Horizon、到达远场或 Alpha 饱和后都可以提前退出。
 
 GPU Timing 使用 Timestamp Query 分离 Shadow（黑洞仅做兼容清理）、Main Scene 和 Post Process。报告数据时必须注明：
 
@@ -290,7 +292,7 @@ python .\tools\compare_images.py `
 
 ### 回归边界
 
-Blackhole 已作为 P1 完成场景冻结。角色或宿主改动不得无意修改其 Shader、质量参数、相机语义和 History Reset。公共 Attachment 或后处理发生变化时，必须重跑 Blackhole 正面和近距离回归。
+Blackhole 已作为 P1 完成场景冻结。角色或宿主改动不能意外改变它的 Shader、质量参数、相机语义和 History Reset。公共 Attachment 或后处理发生变化后，要重跑黑洞正面和近距离回归。
 
 ## 已知近似与限制
 

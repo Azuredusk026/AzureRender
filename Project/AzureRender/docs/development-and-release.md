@@ -1,6 +1,8 @@
 # 开发、测试与发布
 
-AzureRender 的开发门禁按风险分层：纯数据或 CLI 变更可以由单元测试覆盖；Vulkan 生命周期变更需要 Debug Validation；视觉算法变更还需要固定 Capture 和人工对照；发布候选必须验证安装树及隔离运行时。
+AzureRender 按修改风险选择测试。纯数据或 CLI 变更通常可以用单元测试覆盖。Vulkan 生命周期变更需要运行 Debug Validation。
+
+视觉算法变更还要生成固定 Capture，并进行人工对照。发布候选必须检查安装树和隔离运行时。
 
 ## 开发环境
 
@@ -12,7 +14,7 @@ Windows 基线：
 - MinGW GCC 13.1、C++17。
 - vcpkg manifest 和 `x64-mingw-dynamic`。
 
-Linux CI 使用 Ubuntu 24.04、GCC、Ninja、Mesa Lavapipe/Xvfb 和 Vulkan Validation。依赖版本由 `vcpkg.json` 固定；功能开发不应顺便升级 SDK 或依赖基线。
+Linux CI 使用 Ubuntu 24.04、GCC、Ninja、Mesa Lavapipe/Xvfb 和 Vulkan Validation。`vcpkg.json` 固定依赖版本。功能开发不要顺便升级 SDK 或依赖基线。
 
 ## 构建配置
 
@@ -28,7 +30,7 @@ Release：
 - 用于 GPU Timing、正式 Capture 和发布安装树。
 - Release 通过不代表 Debug Validation 可以跳过。
 
-配置命令见[构建与使用](getting-started.md)。所有编译器均启用严格警告并视为错误；不要为绕过单个警告全局降低等级。
+配置命令见[构建与使用](getting-started.md)。所有编译器都启用严格警告，并把警告视为错误。不要为了绕过一个警告而全局降低等级。
 
 ## 代码边界
 
@@ -46,7 +48,7 @@ Release：
 
 ### 修改场景 Renderer
 
-场景拥有自己的 Pipeline、Descriptor、Buffer/Image 和算法状态，不应把私有资源塞回 `AzureRenderApp`。若需要新的公共 Attachment，先扩展 `SceneRendererCapabilities` 和 `RenderContext` 契约，再由宿主集中创建。
+每个场景管理自己的 Pipeline、Descriptor、Buffer/Image 和算法状态。不要把场景私有资源放回 `AzureRenderApp`。如果多个场景都需要新的 Attachment，先扩展 `SceneRendererCapabilities` 和 `RenderContext`。公共资源由宿主统一创建。
 
 ### 修改 Shader Binding
 
@@ -149,7 +151,7 @@ python .\tools\compare_images.py reference.png candidate.png `
 
 ### GPU 性能
 
-性能数据使用 Release 和 Timestamp Query。报告至少包含 GPU、驱动、分辨率、Renderer、质量/Look、Render Path、帧数、Warm-up 和平均/最小/最大值。不要把 GPU Pass Timing 描述为完整 Frame Time。
+性能测试使用 Release 和 Timestamp Query。报告要写明 GPU、驱动、分辨率、Renderer、质量或 Look，以及 Render Path。还要记录帧数、Warm-up 和平均、最小、最大值。GPU Pass Timing 不是完整的 Frame Time。
 
 ## Release Gate
 
@@ -161,7 +163,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
   -P .\tools\run_release_gate.cmake
 ```
 
-门禁覆盖配置、Shader、目标构建、CTest、安装、Manifest、版本、资源和运行时检查。GPU 或视觉修改还需要在真实 GPU 上额外运行 Validation 与 Capture。
+发布门禁会检查配置、Shader、目标构建和 CTest。它也检查安装、Manifest、版本、资源和运行时。修改 GPU 路径或视觉效果后，还要在真实 GPU 上运行 Validation 和 Capture。
 
 ## 安装树
 
@@ -203,7 +205,9 @@ Windows 使用：
 cpack --config .\build\ninja-release\CPackConfig.cmake
 ```
 
-包名由版本、系统和架构生成，不手工添加 `final`、任务号或日期。生成后记录文件大小、SHA-256、Commit、构建环境和门禁摘要。二进制包不需要携带 `portfolio/`，源码仓库可以保留公共视觉证据。
+包名由版本、系统和架构生成。不要手工添加 `final`、任务号或日期。生成后要记录文件大小、SHA-256、Commit 和构建环境，也要附上门禁摘要。
+
+二进制包不包含 `portfolio/`。源码仓库可以保留公共视觉证据。
 
 ## 发布验收矩阵
 
@@ -252,7 +256,7 @@ GitHub Actions 在 Pull Request 中执行严格构建，在 `main` 分支构建�
 
 ## Changelog 与历史
 
-`CHANGELOG.md` 只记录面向用户或开发者的版本级变化，不继续追加每次参数微调。长期有效的实现原理写入主题文档；已完成阶段、旧验收和过程日志留在 Git 历史或 `docs/archive/`，不进入网站主导航。
+`CHANGELOG.md` 只记录用户或开发者能观察到的版本变化。不要把每次参数微调都写进去。长期有效的实现原理放在主题文档中。已完成阶段、旧验收和过程日志保留在 Git 历史或 `docs/archive/`，不进入网站主导航。
 
 判断信息冲突时遵循：
 
@@ -272,4 +276,4 @@ GitHub Actions 在 Pull Request 中执行严格构建，在 `main` 分支构建�
 - 使用公开授权角色资产建立可发布的高质量 Character 基线。
 - Renderer 动态插件仅在 ABI、版本和卸载隔离方案完成后再启用。
 
-论文相关 Render Path 扩展保持非当前优先级，直到项目所有者主动恢复；工业科幻场景不作为当前需求。Blackhole P1 已冻结，Character P2 继续以材质正确性、光照稳定和公开证据为核心。
+论文相关的 Render Path 扩展目前暂停，等待项目所有者主动恢复。工业科幻场景不在当前需求中。Blackhole P1 已冻结。Character P2 继续处理材质正确性、光照稳定和公开证据。
