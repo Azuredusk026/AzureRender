@@ -1,5 +1,11 @@
 # Changelog
 
+## Documentation system - 2026-08-25
+
+- Replaced the fragmented active-document set with eight topic-oriented GitHub Pages documents covering operation, Vulkan architecture, Character, Blackhole, assets/editor, development/release and centralized reference data.
+- Added strict MkDocs Material builds and GitHub Pages deployment while keeping the Markdown directly readable in the repository and install tree.
+- Removed duplicated dated implementation narratives from active documentation; historical plans and audits remain under `docs/archive/` or Git history.
+
 ## Continuous Face SDF and hair-volume contours - 2026-08-20
 
 - Replaced the frame-discontinuous Face SDF mirror branch with a smooth head-local lateral-axis blend, removing the pure-bright face pop during the 6-7 second turntable interval.

@@ -1,33 +1,51 @@
 # AzureRender
 
-AzureRender 是一个 C++17/Vulkan 实时渲染器，也是 FYP 研究项目的实现仓库。当前产品包含风格化角色渲染、编辑器、确定性捕获、GPU 诊断，以及可插拔场景渲染器和黑洞演示。
+AzureRender 是一个基于 C++17 和原生 Vulkan API 构建的可扩展实时渲染器。项目以统一宿主承载风格化角色渲染和相对论黑洞模拟，同时提供 ImGui 编辑器、确定性捕获、诊断视图、GPU Pass Timing、视觉回归工具和进程内 Renderer SDK。
 
-## 从这里开始
+> **English summary:** AzureRender is an extensible real-time renderer built directly on Vulkan. Its shared host supports a stylized character pipeline and a relativistic black-hole renderer, together with deterministic capture, diagnostics, GPU timing and an editor workflow.
 
-1. [文档导航](Project/AzureRender/docs/README_CN.md)：先判断应该读哪一份文档。
-2. [项目概览](Project/AzureRender/docs/PROJECT_OVERVIEW_CN.md)：了解当前真实状态、架构和限制。
-3. [当前开发计划](Project/AzureRender/docs/ACTIVE_DEVELOPMENT_PLAN_CN.md)：唯一任务队列和验收标准。
-4. [开发指南](Project/AzureRender/docs/DEVELOPMENT_GUIDE_CN.md)：配置环境、构建和运行测试。
-5. [应用快速使用](Project/AzureRender/README.md)：运行命令、场景选择和常用控制。
+![AzureRender black-hole scene](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
 
-不要从归档日志中的“下一步”恢复开发。归档内容只用于追溯，当前任务始终以 `ACTIVE_DEVELOPMENT_PLAN_CN.md` 为准。
+## 文档
+
+完整技术文档发布在 [AzureRender GitHub Pages](https://azuredusk026.github.io/AzureRender/)。仓库内入口：
+
+1. [项目总览](Project/AzureRender/docs/index.md)
+2. [构建与使用](Project/AzureRender/docs/getting-started.md)
+3. [渲染器架构与 Vulkan 实现](Project/AzureRender/docs/architecture.md)
+4. [风格化角色渲染](Project/AzureRender/docs/character-rendering.md)
+5. [黑洞模拟](Project/AzureRender/docs/blackhole-rendering.md)
+6. [资产、场景与编辑器](Project/AzureRender/docs/assets-and-editor.md)
+7. [开发、测试与发布](Project/AzureRender/docs/development-and-release.md)
+8. [参数与接口参考](Project/AzureRender/docs/reference.md)
+
+历史计划、阶段验收和原始 DOCX 位于 `Project/AzureRender/docs/archive/`，不作为当前实现依据。
 
 ## 仓库结构
 
 ```text
-Project/AzureRender/       主工程
-Project/Vulkan-Tutorial/   固定版本的上游参考子模块
-AfterglowRender/           可选本地参考，不属于主工程
-Project/AzureRender/docs/archive/source-documents/
-                          提案和早期规划原始材料
+Project/AzureRender/        主工程、Shader、测试、工具和活动文档
+Project/AzureRender/docs/   GitHub Pages 文档源
+Project/AzureRender/portfolio/
+                            公共视觉证据和机器可读 Manifest
+AfterglowRender/            早期参考代码，仅保留为历史输入
 ```
 
-克隆时初始化子模块：
+## 快速构建
 
 ```powershell
-git clone --recurse-submodules https://github.com/Azuredusk026/AzureRender.git
+cd Project\AzureRender
+
+$env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
+$env:VCPKG_ROOT = "C:\path\to\vcpkg"
+
+.\tools\configure_windows.ps1 -Config Debug
+cmake --build .\build\ninja-debug
+.\build\ninja-debug\AzureRender.exe --smoke-frames 120
 ```
+
+Vulkan 后端、场景架构和 Shader 算法由项目实现。GLFW、Dear ImGui、tinygltf、stb 和 nlohmann/json 分别提供窗口界面、资产解析和 JSON 基础能力，不替代渲染核心。
 
 ## 资产边界
 
-`Project/AzureRender/assets_private/` 包含不得公开分发的第三方测试资产。仓库保持私有并不替代原始许可；公开代码、发布包或作品集前必须单独检查资产授权。公共回归必须能够只依赖 `assets_public/` 完成。
+`Project/AzureRender/assets_public/` 可以进入 CI 和发布包。`assets_private/` 中的模型、纹理及其派生媒体不得提交、公开或进入安装包；公开回归和作品集必须只依赖许可明确的公共资产。
