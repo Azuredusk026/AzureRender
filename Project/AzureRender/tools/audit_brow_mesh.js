@@ -94,6 +94,34 @@ function connectedComponentCount(vertexCount, edges) {
   return new Set(parent.map((_, index) => find(index))).size;
 }
 
+function connectedComponents(vertexCount, edges) {
+  const adjacency = Array.from({ length: vertexCount }, () => []);
+  for (const [left, right] of edges) {
+    adjacency[left].push(right);
+    adjacency[right].push(left);
+  }
+  const visited = new Set();
+  const components = [];
+  for (let root = 0; root < vertexCount; root += 1) {
+    if (visited.has(root)) continue;
+    const vertices = [];
+    const pending = [root];
+    visited.add(root);
+    while (pending.length > 0) {
+      const vertex = pending.pop();
+      vertices.push(vertex);
+      for (const neighbour of adjacency[vertex]) {
+        if (!visited.has(neighbour)) {
+          visited.add(neighbour);
+          pending.push(neighbour);
+        }
+      }
+    }
+    components.push(vertices);
+  }
+  return components;
+}
+
 const { json, binary } = parseGlb(fs.readFileSync(inputPath));
 const findings = [];
 
@@ -106,6 +134,7 @@ for (const [meshIndex, mesh] of (json.meshes ?? []).entries()) {
     }
 
     const positions = readAccessor(json, binary, primitive.attributes.POSITION);
+    const texcoords = readAccessor(json, binary, primitive.attributes.TEXCOORD_0);
     const joints = readAccessor(json, binary, primitive.attributes.JOINTS_0);
     const weights = readAccessor(json, binary, primitive.attributes.WEIGHTS_0);
     const indices = readAccessor(json, binary, primitive.indices).flat();
@@ -175,6 +204,35 @@ for (const [meshIndex, mesh] of (json.meshes ?? []).entries()) {
     const duplicatePositionGroups = [...positionGroups.values()].filter(
       (group) => group.length > 1,
     );
+    const islands = connectedComponents(positions.length, edges)
+      .map((vertices) => {
+        const dominantJoints = new Map();
+        for (const vertex of vertices) {
+          for (let slot = 0; slot < weights[vertex].length; slot += 1) {
+            if (weights[vertex][slot] <= 1e-5) continue;
+            const joint = joints[vertex][slot];
+            dominantJoints.set(
+              joint,
+              (dominantJoints.get(joint) ?? 0) + weights[vertex][slot],
+            );
+          }
+        }
+        return {
+          vertices: vertices.length,
+          positionMin: [0, 1, 2].map((axis) =>
+            Math.min(...vertices.map((vertex) => positions[vertex][axis]))),
+          positionMax: [0, 1, 2].map((axis) =>
+            Math.max(...vertices.map((vertex) => positions[vertex][axis]))),
+          uvMin: [0, 1].map((axis) =>
+            Math.min(...vertices.map((vertex) => texcoords[vertex][axis]))),
+          uvMax: [0, 1].map((axis) =>
+            Math.max(...vertices.map((vertex) => texcoords[vertex][axis]))),
+          joints: [...dominantJoints.entries()]
+            .sort((left, right) => right[1] - left[1])
+            .slice(0, 3),
+        };
+      })
+      .sort((left, right) => right.positionMin[1] - left.positionMin[1]);
 
     const result = {
       asset: inputPath,
@@ -196,6 +254,7 @@ for (const [meshIndex, mesh] of (json.meshes ?? []).entries()) {
           (total, group) => total + group.length,
           0,
         ),
+        islands,
         bounds: {
           min: [0, 1, 2].map((axis) =>
             Math.min(...positions.map((position) => position[axis])),

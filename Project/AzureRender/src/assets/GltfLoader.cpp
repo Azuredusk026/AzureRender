@@ -167,8 +167,8 @@ void loadMaterialProfile(
     result.materialFeatures = defaultMaterialFeatures(result.materialClass);
     if (isBrowMaterialName(result.name)) {
         result.materialFeatures |= MaterialFeatureBrowOverlay;
-        // Local lift and Face-D brow-ink expansion radius in texels.
-        result.styleParameters = {0.01F, 2.0F, 0.0F, 0.0F};
+        // Brow-only card expansion in metres and Face-D reconstruction radius.
+        result.styleParameters = {0.0012F, 0.0F, 0.0F, 0.0F};
         // Unreal centimetres converted to glTF metres, then opacity,
         // fade distance and base power.
         result.featureParameters = {0.04679F, 0.95F, 0.02F, 1.0F};

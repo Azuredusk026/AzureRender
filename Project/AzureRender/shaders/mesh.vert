@@ -46,6 +46,15 @@ layout(push_constant) uniform MorphWeights {
 void main() {
     bool browOverlay =
         (morphWeights.materialFeatures & 64U) != 0U;
+    bool eyebrowVertex = browOverlay && (
+        (jointWeights.x > 0.001
+            && jointIndices.x >= 112U && jointIndices.x <= 154U)
+        || (jointWeights.y > 0.001
+            && jointIndices.y >= 112U && jointIndices.y <= 154U)
+        || (jointWeights.z > 0.001
+            && jointIndices.z >= 112U && jointIndices.z <= 154U)
+        || (jointWeights.w > 0.001
+            && jointIndices.w >= 112U && jointIndices.w <= 154U));
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointIndices.x]
         + jointWeights.y * jointData.matrices[jointIndices.y]
@@ -53,6 +62,17 @@ void main() {
         + jointWeights.w * jointData.matrices[jointIndices.w];
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
+    if (eyebrowVertex) {
+        // This exported primitive combines four brow islands with thirty eye
+        // and eyelash islands. Brow joints occupy 112..154, so compensate for
+        // the sub-pixel card height without altering the eyelashes.
+        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
+        float islandCenterY = position.y > 1.2617 ? 1.26704 : 1.25846;
+        float islandCenterX = sign(position.x) * 0.0365;
+        morphedPosition.y += sign(position.y - islandCenterY) * browThickness;
+        morphedPosition.x += sign(position.x - islandCenterX)
+            * browThickness * 0.45;
+    }
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     if (browOverlay) {
@@ -65,10 +85,6 @@ void main() {
         // the asset profile.
         gizmoPosition.xyz += localViewDirection
             * morphWeights.featureParameters.x;
-        // Brow cards exported through the skeletal glTF path sit on the
-        // upper-eyelid edge. A profile-authored local lift restores the
-        // intended separation without changing the shared face mesh.
-        gizmoPosition.y += morphWeights.styleParameters.x;
     }
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
