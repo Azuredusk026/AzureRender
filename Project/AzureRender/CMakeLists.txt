@@ -14,6 +14,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# MSVC does not enable C++ unwind semantics by default. Without /EHsc every
+# try/catch in the codebase and in the test executables is inert, so a thrown
+# exception terminates the process instead of being caught. This must apply to
+# all targets, not just the renderer, because the tests assert on error paths.
+if(MSVC)
+    add_compile_options(/EHsc /utf-8)
+endif()
+
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
@@ -352,7 +360,20 @@ target_compile_definitions(
 )
 
 if(MSVC)
-    target_compile_options(AzureRender PRIVATE /W4 /WX /permissive-)
+    # The strict warning gate is tuned for the GCC/MinGW baseline. MSVC reports
+    # two additional diagnostic classes that are not defects on this codebase:
+    # C4456 (local shadowing of reused Vulkan *Info structs) and C4996 (getenv).
+    # They are demoted so the MSVC toolchain stays buildable without weakening
+    # the GCC gate that CI enforces.
+    target_compile_options(
+        AzureRender
+        PRIVATE
+            /W4
+            /WX
+            /permissive-
+            /wd4456
+            /wd4996
+    )
 else()
     target_compile_options(
         AzureRender
@@ -428,6 +449,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/USER_GUIDE_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_ROADMAP_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/DEVELOPMENT_GUIDE_CN.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/ENGINE_EVOLUTION_PLAN_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/ASSET_AND_VISUAL_QA_CN.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/RELEASE_AND_ACCEPTANCE_CN.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")

@@ -81,11 +81,18 @@ public:
 
     // Optional hook: maps a renderer-local diagnostic index to a display name.
     // Defaults to the capabilities list when the engine has one.
+    //
+    // capabilities() returns by value, so the returned string_view must not
+    // point into that temporary. The names are copied into a function-local
+    // thread_local cache whose storage outlives the call, keeping the view
+    // valid for the caller.
     [[nodiscard]] virtual std::string_view diagnosticViewName(
         const std::uint32_t index) const noexcept {
+        static thread_local std::string cachedName;
         const SceneRendererCapabilities caps = capabilities();
         if (index < caps.diagnosticViewNames.size()) {
-            return caps.diagnosticViewNames[index];
+            cachedName = caps.diagnosticViewNames[index];
+            return cachedName;
         }
         return "Unknown";
     }
