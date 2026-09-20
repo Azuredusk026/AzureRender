@@ -177,6 +177,10 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createSurface();
     pickPhysicalDevice();
     createLogicalDevice();
+    // The allocator must outlive every GPU resource, so it is created directly
+    // after the device and torn down just before it.
+    gpuAllocator_.initialize(
+        instance_, physicalDevice_, device_, VK_API_VERSION_1_3);
     createCommandPool();
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
@@ -719,6 +723,7 @@ void AzureRenderApp::cleanup() {
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }
+        gpuAllocator_.shutdown();
         vkDestroyDevice(device_, nullptr);
         device_ = VK_NULL_HANDLE;
     }

@@ -42,6 +42,7 @@ endif()
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(VulkanMemoryAllocator CONFIG REQUIRED)
 
 # Dear ImGui integration.
 #
@@ -181,6 +182,9 @@ add_executable(
     src/render/EnvironmentAsset.hpp
     src/render/VulkanHelpers.cpp
     src/render/VulkanHelpers.hpp
+    src/rhi/GpuAllocator.cpp
+    src/rhi/GpuAllocator.hpp
+    src/rhi/VulkanMemoryAllocatorImpl.cpp
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/CharacterSceneRenderer.hpp
     src/scenes/BlackholeSceneRenderer.cpp
@@ -371,7 +375,20 @@ target_link_libraries(
         Vulkan::Vulkan
         glfw
         nlohmann_json::nlohmann_json
+        GPUOpen::VulkanMemoryAllocator
 )
+
+# The VMA implementation unit is third-party code and does not satisfy the
+# project warning gate; exempt only that file.
+if(MSVC)
+    set_source_files_properties(
+        src/rhi/VulkanMemoryAllocatorImpl.cpp
+        PROPERTIES COMPILE_OPTIONS "/W0")
+else()
+    set_source_files_properties(
+        src/rhi/VulkanMemoryAllocatorImpl.cpp
+        PROPERTIES COMPILE_OPTIONS "-w")
+endif()
 
 if(TARGET imgui::imgui)
     target_link_libraries(AzureRender PRIVATE imgui::imgui)

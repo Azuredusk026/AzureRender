@@ -4,6 +4,7 @@
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "resources/ResourceLocator.hpp"
+#include "rhi/GpuAllocator.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -129,6 +130,9 @@ private:
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;
     SubmissionCounters submissionCounters_;
+    // Owns all GPU memory for the process. Initialized right after the logical
+    // device and destroyed before it.
+    azurerender::rhi::GpuAllocator gpuAllocator_;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;
