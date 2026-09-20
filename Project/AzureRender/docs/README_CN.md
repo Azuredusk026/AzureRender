@@ -15,6 +15,7 @@
 | 文档 | 职责 |
 |---|---|
 | [开发指南](DEVELOPMENT_GUIDE_CN.md) | 工具链、构建、测试和贡献循环 |
+| [引擎化实施计划](ENGINE_EVOLUTION_PLAN_CN.md) | E0-E7 的改动面、实施步骤与风险 |
 | [Renderer SDK](RENDERER_SDK_CN.md) | 新场景接入、生命周期、所有权和 catalog 契约 |
 | [Blackhole 质量](BLACKHOLE_QUALITY_CN.md) | 质量档位、相机、history reset、图像回归和 timing |
 | [资产与视觉 QA](ASSET_AND_VISUAL_QA_CN.md) | 资产许可、截图命名和视觉基准 |

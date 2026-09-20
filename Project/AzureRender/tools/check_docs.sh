@@ -7,6 +7,7 @@ for document in \
     docs/USER_GUIDE_CN.md \
     docs/DEVELOPMENT_ROADMAP_CN.md \
     docs/DEVELOPMENT_GUIDE_CN.md \
+    docs/ENGINE_EVOLUTION_PLAN_CN.md \
     docs/ASSET_AND_VISUAL_QA_CN.md \
     docs/RELEASE_AND_ACCEPTANCE_CN.md; do
     test -f "$document"
@@ -16,8 +17,14 @@ test ! -f docs/ACTIVE_DEVELOPMENT_PLAN_CN.md
 test ! -f docs/PROJECT_OVERVIEW_CN.md
 
 rg -q 'R1：发布工程硬化' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q 'R1-R5 全部完成；当前没有 Active 阶段' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'E0-E7 为 `Ready` 队列，当前没有 Active 阶段' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'E0-E7 引擎化队列' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'E1 RHI 与内存层' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'E7 复杂场景验证' docs/DEVELOPMENT_ROADMAP_CN.md
 rg -q '无限期 Deferred' docs/DEVELOPMENT_ROADMAP_CN.md
+
+rg -q 'E0：视觉与性能基线' docs/ENGINE_EVOLUTION_PLAN_CN.md
+rg -q 'E7：复杂场景验证' docs/ENGINE_EVOLUTION_PLAN_CN.md
 rg -q 'SceneRendererRegistry' docs/ARCHITECTURE_CN.md
 rg -q 'captures/<scene>/' docs/USER_GUIDE_CN.md
 

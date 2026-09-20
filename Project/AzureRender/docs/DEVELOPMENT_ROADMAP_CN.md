@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
-> 路线版本：2026-08-18
-> 当前状态：P0/P1/P2 与 R1-R5 全部完成；当前没有 Active 阶段。
+> 路线版本：2026-09-20
+> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E7 为 `Ready` 队列，当前没有 Active 阶段。
 
 黑洞 P1 已于 2026-08-19 进入 `Final / Frozen`，最终基线为 16 秒双机位展示及周期噪声无接缝实现。只有用户主动重新启用后才能继续变更；当前角色收尾不得触碰黑洞渲染路径。
 
@@ -14,6 +14,28 @@
 - 所有正式功能必须有公共资产路径、自动化测试和可重复视觉证据。
 - 私有角色可以补充本地 QA，但不能成为 CI 或发布依赖。
 - 不为短期画面修改在 `AzureRenderApp` 增加资产或场景专属分支。
+
+## 1.1 引擎化方向
+
+AzureRender 在保持多场景可插拔 renderer 定位的同时，向可扩展的渲染器-引擎架构演进。演进先替换承重结构，再在新结构上叠加功能与性能：结构阶段不产出画面但解开能力上限，功能阶段验证结构的实际承载力。
+
+引擎化的参考实现是同级目录的 Piccolo（GAMES104 教学引擎），技术栈为 C++17/Vulkan/GLFW/ImGui/VMA，与本项目一致。采用其中已验证的分层方式，不照搬其游戏引擎特有的关卡、物理、脚本和反射代码生成。
+
+| 参考点 | Piccolo 做法 | AzureRender 采纳形式 |
+|---|---|---|
+| 显存分配 | VMA 统一分配，`VMA_DYNAMIC_VULKAN_FUNCTIONS` 动态加载 | E1 全部显存分配迁入 RHI 分配器 |
+| API 抽象 | `RHI` 纯虚接口 + `VulkanRHI` 实现，pass 只依赖接口 | E1 窄接口加 RAII 句柄，并提供可 mock 实现 |
+| 上传缓冲 | global upload ring buffer，按 in-flight frame 复位偏移 | E1 统一上传路径与对齐处理 |
+| 场景与资源分离 | `RenderScene` 持可见性，`RenderResource` 持 GPU 缓存 | E2 可见性集合与资源缓存分层 |
+| 剔除 | frustum plane 提取、`BoundingBox` 变换、tiled frustum 相交 | E2 视锥剔除与包围体数学 |
+| Pass 组织 | `RenderPassBase` / `RenderPipelineBase`，pass 独立文件 | E3 render graph，pass 声明资源读写 |
+| Compute | `particle_kickoff/emit/simulate` 三段 compute + indirect dispatch | E4 compute 通路，E6 间接绘制 |
+| IBL | irradiance/specular cubemap + BRDF LUT + mipmap sampler | E4 改为运行期 GPU 生成 |
+| Shader 构建 | 递归 glob 含 `.comp`，统一 include 目录 | E4 扩展编译列表与 include |
+| 级联阴影 | 由 frustum 角点计算级联包围体 | E5 级联阴影 |
+| 逻辑/渲染解耦 | `RenderSwapContext` 双缓冲 swap data | E6 多线程录制的前置结构 |
+
+不采纳：`render_type.h` 单文件 108 KB 的集中类型定义、`main_camera_pass.cpp` 175 KB 的单 pass 体量、裸指针 `RHI*` 资源所有权、约 120 个虚函数的全覆盖式 RHI、硬编码 pass 顺序与手写 barrier、以及缺失自动化测试（其 `source/test` 为空）。本项目以窄接口加 RAII、render graph、密集 ECS 存储与可 mock 后端替代这些取舍。
 
 ## 2. 下一优先级候选
 
@@ -97,6 +119,38 @@
 - 独立工业科幻场景。
 
 Deferred 不表示取消已有原型代码，但不得作为默认下一任务，也不得在产品文档中宣称完成。
+
+## 3.1 E0-E7 引擎化队列
+
+目标是可扩展的渲染器-引擎架构，判据为三条：新增场景、材质、光源、pass 时不需要改公共核心；绘制成本随对象数量亚线性增长；渲染后端可替换。
+
+当前架构有四个结构性约束写在接口前提里，补丁式改良无法绕过：`RenderContext` 的单资产单场景假设、绘制路径无批次概念、ECS 未驱动渲染、Vulkan 调用散布各层。因此队列先替换承重结构，再在新结构上加功能。
+
+E0-E3 为结构替换，产生大幅 diff 且不直接产出画面；E4-E7 在新结构上做功能与性能。顺序不可颠倒：在旧结构上叠加 compute 与多光源，会把错误前提固化进更多代码。
+
+| 阶段 | 性质 | 产出 | 依赖 |
+|---|---|---|---|
+| E0 视觉与性能基线 | 安全网 | 像素回归与性能基准 | — |
+| E1 RHI 与内存层 | 结构替换 | 后端可替换、VMA、bindless | E0 |
+| E2 场景图与渲染数据流 | 结构替换 | 统一场景表示、多对象、批次 | E0 |
+| E3 Render Graph 与 pass 库 | 结构替换 | 声明式 pass、自动 barrier | E1、E2 |
+| E4 Compute 与着色质量 | 功能 | compute 通路、GPU IBL、新 bloom | E3 |
+| E5 光照与阴影体系 | 功能 | 多光源、CSM、聚簇光照 | E3 |
+| E6 并行与 GPU 驱动提交 | 性能 | 多线程录制、间接绘制 | E3 |
+| E7 复杂场景验证 | 验收 | 压测全部子系统 | E4、E5、E6 |
+
+### 准入与验收要点
+
+- **E0**：五个隔离视图有公共基线并接入 CTest 与 CI；性能基准工具产出固定格式 JSON；故意引入的 shader 改动能被检出。
+- **E1**：Vulkan 调用全部收拢到 RHI，后端为纯虚接口且提供可 mock 实现使 pass 逻辑无 GPU 可测；VMA 替换全部显存分配；bindless 描述符使绑定次数显著下降。E0 五视图像素零差异。
+- **E2**：ECS 成为唯一运行期场景表示，组件改为密集存储；场景支持多对象与实例化；批次使同网格多实例的 draw call 不随实例数线性增长。单对象场景 E0 零差异。
+- **E3**：pass 声明读写资源，图负责排序、瞬态资源分配与 barrier；新增 pass 不需修改公共帧代码；三个场景全部经由图渲染。
+- **E4**：compute 通路建立；bloom 改为多级下采样上采样；IBL 改为 GPU 端运行期生成；skinning 与 morph 迁入 compute；支持 OpenEXR。
+- **E5**：光源成为场景实体；采用聚簇或分块光照使成本与屏幕分块相关而非光源总数；级联阴影落地且保留现有 PCSS 半影特征。
+- **E6**：逻辑与渲染数据双缓冲；多线程录制 secondary command buffer；剔除与绘制参数由 compute 写入间接缓冲。画面与单线程像素一致，确定性捕获仍逐帧一致。
+- **E7**：对象与光源数量明显超过当前角色场景的压测场景，不改公共核心完成接入，规模化性能曲线符合亚线性预期。
+
+每阶段必须产出与 E0 同格式的性能数据；没有数据支撑的性能主张不予接受。各阶段的改动面、逐步实施顺序、风险与提交标题见 [引擎化实施计划](ENGINE_EVOLUTION_PLAN_CN.md)。
 
 ## 4. 阶段执行规则
 
