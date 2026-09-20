@@ -87,6 +87,21 @@ private:
         double frameTotalMs = 0.0;
         double frameMinMs = 0.0;
         double frameMaxMs = 0.0;
+        // Retained per-frame totals so the report can publish percentiles
+        // instead of averages alone. Percentiles are the meaningful signal for
+        // frame-time regressions because a single stall moves max but not mean.
+        std::vector<double> frameSamplesMs;
+    };
+
+    // Per-frame draw submission counters. These are the primary evidence that
+    // a structural change actually reduced CPU-side submission cost, so they
+    // are collected whenever GPU timing is enabled.
+    struct SubmissionCounters {
+        std::uint64_t frames = 0;
+        std::uint64_t drawCalls = 0;
+        std::uint64_t descriptorSetBinds = 0;
+        std::uint64_t pipelineBinds = 0;
+        std::uint64_t pushConstantUpdates = 0;
     };
 
     struct HudVertex {
@@ -113,6 +128,7 @@ private:
     std::vector<VkQueryPool> timestampQueryPools_;
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;
+    SubmissionCounters submissionCounters_;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;

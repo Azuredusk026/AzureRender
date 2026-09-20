@@ -44,6 +44,14 @@
 
 角色视觉检查至少包含：
 
+### 自动化像素基线
+
+`assets_public/baselines/character/` 保存参与自动比较的公共基线图，用例定义在 `tools/visual_regression_cases.json`，由 `tools/run_visual_regression.py` 执行。当前覆盖 `beauty`、`albedo`、`world-normal`、`material-id`、`outline`、`direct-diffuse` 六个全身视角和 `face-sdf` 面部近景。
+
+用例要求在公共资产上产出可区分的图像。`hair-kk`、`shadow-tint` 与 `style-mask` 在 `test_model.gltf` 上输出彼此相同的画面，因为该资产没有头发材质与阴影染色数据，因此不纳入自动基线，仍由人工检查覆盖。
+
+有意改变画面时用 `--update-baseline` 重写基线，并在提交说明中记录变化原因；新基线的 SHA-256 随之更新。
+
 - 全身正面
 - 左右/背面结构
 - 脸部近景

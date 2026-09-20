@@ -92,6 +92,8 @@ CharacterSceneRenderer   BlackholeSceneRenderer   SampleSceneRenderer
 
 场景不得销毁宿主 handle、跨 recreate 缓存 framebuffer、在普通帧内 `vkQueueWaitIdle`，也不得依赖 `assets_private/` 才能启动。
 
+`RenderContext::submissionCounters` 是可选的每帧提交计数器，宿主在启用 GPU timing 时提供。场景渲染器在录制时累加 draw、descriptor 绑定、pipeline 绑定和 push constant 次数；指针为空时不得写入。计数进入 GPU timing 报告，作为性能对比的依据。
+
 ## 6. Character 渲染路径
 
 ```text

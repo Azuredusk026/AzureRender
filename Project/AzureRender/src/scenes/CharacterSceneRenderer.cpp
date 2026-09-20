@@ -342,6 +342,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
+    submissionCounters_ = context.submissionCounters;
     recordShadowPass(context);
     recordMainPass(context);
 }
@@ -1752,6 +1753,9 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
         context.commandBuffer,
         VK_PIPELINE_BIND_POINT_GRAPHICS,
         shadowPipeline_);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->pipelineBinds;
+    }
     for (const AssetPrimitive& primitive : asset_.primitives) {
         const AssetMaterial& material =
             asset_.materials[primitive.materialIndex];
@@ -1811,6 +1815,11 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             primitive.firstIndex,
             0,
             0);
+        if (context.submissionCounters != nullptr) {
+            ++context.submissionCounters->drawCalls;
+            ++context.submissionCounters->descriptorSetBinds;
+            context.submissionCounters->pushConstantUpdates += 2;
+        }
     }
     vkCmdEndRenderPass(context.commandBuffer);
     if (context.gpuTimingEnabled) {
@@ -1915,6 +1924,10 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 primitive.firstIndex,
                 0,
                 0);
+            if (context.submissionCounters != nullptr) {
+                ++context.submissionCounters->drawCalls;
+                ++context.submissionCounters->descriptorSetBinds;
+            }
         }
     }
     for (const AssetPrimitive& primitive : asset_.primitives) {
@@ -2127,6 +2140,12 @@ void CharacterSceneRenderer::drawPrimitive(
         firstIndexOffset,
         0,
         0);
+    if (submissionCounters_ != nullptr) {
+        ++submissionCounters_->drawCalls;
+        ++submissionCounters_->descriptorSetBinds;
+        ++submissionCounters_->pipelineBinds;
+        submissionCounters_->pushConstantUpdates += 2;
+    }
 }
 
 void CharacterSceneRenderer::buildSceneState() {

@@ -22,6 +22,23 @@ if(MSVC)
     add_compile_options(/EHsc /utf-8)
 endif()
 
+# Ninja tracks header dependencies on MSVC by parsing the localized
+# "/showIncludes" prefix. On a non-English toolchain that prefix can round-trip
+# through the wrong code page, leaving `msvc_deps_prefix` unable to match the
+# compiler output. Header edits then silently fail to trigger a rebuild, and a
+# stale object compiled against a different struct layout crashes at runtime.
+# Configure with VSLANG=1033 (see tools/msvc_env.bat) so the prefix stays
+# parseable; this check fails fast when that has not happened.
+if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja"
+   AND NOT "$ENV{VSLANG}" STREQUAL "1033")
+    message(
+        WARNING
+        "MSVC + Ninja without VSLANG=1033: header dependency tracking may be "
+        "unreliable because the localized /showIncludes prefix cannot be "
+        "parsed. Configure through tools/msvc_env.bat, or expect to need "
+        "'cmake --build <dir> --clean-first' after editing headers.")
+endif()
+
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
@@ -311,6 +328,29 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.ExtensionRegistry
         COMMAND AzureRenderExtensionRegistryTests)
+
+    # GPU visual regression. This needs a working Vulkan device, so it is
+    # registered only when Python and the tooling are present and it reports
+    # "skipped" rather than failing on machines without a usable GPU.
+    find_package(Python3 COMPONENTS Interpreter QUIET)
+    if(Python3_Interpreter_FOUND)
+        add_test(
+            NAME AzureRender.VisualRegression
+            COMMAND
+                "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --tolerance strict
+                --summary
+                    "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-summary.json")
+        set_tests_properties(
+            AzureRender.VisualRegression
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 900
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+    endif()
     add_test(
         NAME AzureRender.ReleaseGateMissingBuild
         COMMAND "${CMAKE_COMMAND}"
@@ -361,16 +401,18 @@ target_compile_definitions(
 
 if(MSVC)
     # The strict warning gate is tuned for the GCC/MinGW baseline. MSVC reports
-    # two additional diagnostic classes that are not defects on this codebase:
-    # C4456 (local shadowing of reused Vulkan *Info structs) and C4996 (getenv).
-    # They are demoted so the MSVC toolchain stays buildable without weakening
-    # the GCC gate that CI enforces.
+    # additional diagnostic classes that are not defects on this codebase:
+    # C4456 (local shadowing of reused Vulkan *Info structs), C4996 (getenv),
+    # and C4127 (conditions on compile-time constants such as kEnableValidation,
+    # which is false in Release). They are demoted so the MSVC toolchain stays
+    # buildable without weakening the GCC gate that CI enforces.
     target_compile_options(
         AzureRender
         PRIVATE
             /W4
             /WX
             /permissive-
+            /wd4127
             /wd4456
             /wd4996
     )

@@ -766,8 +766,23 @@ void AzureRenderApp::recordCommandBuffer(
     }
     sceneContext.timestampQueryCount = kTimestampQueryCount;
     sceneContext.gpuTimingEnabled = runOptions_.gpuTimingEnabled;
+    // Submission counters ride along with GPU timing so a performance baseline
+    // run also reports CPU-side submission cost without a separate flag.
+    azurerender::SceneSubmissionCounters frameCounters;
+    if (runOptions_.gpuTimingEnabled) {
+        sceneContext.submissionCounters = &frameCounters;
+    }
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->recordScene(sceneContext);
+    }
+    if (runOptions_.gpuTimingEnabled) {
+        ++submissionCounters_.frames;
+        submissionCounters_.drawCalls += frameCounters.drawCalls;
+        submissionCounters_.descriptorSetBinds +=
+            frameCounters.descriptorSetBinds;
+        submissionCounters_.pipelineBinds += frameCounters.pipelineBinds;
+        submissionCounters_.pushConstantUpdates +=
+            frameCounters.pushConstantUpdates;
     }
 
     VkRenderPassBeginInfo postProcessPassInfo{

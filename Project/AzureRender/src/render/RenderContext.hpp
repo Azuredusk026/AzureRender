@@ -17,6 +17,18 @@ namespace azurerender {
 
 struct RenderSettings;
 
+// Opt-in per-frame submission counters. The engine owns the storage and passes
+// a pointer through RenderContext; a scene renderer increments the fields while
+// recording so the performance baseline can report CPU-side submission cost.
+// The pointer is null unless counter collection is active, so every call site
+// must check before use.
+struct SceneSubmissionCounters {
+    std::uint64_t drawCalls = 0;
+    std::uint64_t descriptorSetBinds = 0;
+    std::uint64_t pipelineBinds = 0;
+    std::uint64_t pushConstantUpdates = 0;
+};
+
 // Standardized scene state the engine can read from a scene renderer for
 // editor integration (picking, gizmos, HUD). A renderer without pickable
 // geometry (e.g. the blackhole renderer) leaves the pointer null.
@@ -144,6 +156,9 @@ struct RenderContext {
     VkQueryPool timestampQueryPool = VK_NULL_HANDLE;
     std::uint32_t timestampQueryCount = 0;
     bool gpuTimingEnabled = false;
+
+    // Non-owning; null when submission counters are not being collected.
+    SceneSubmissionCounters* submissionCounters = nullptr;
 
     const RenderSettings* renderSettings = nullptr;
 };

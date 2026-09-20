@@ -27,6 +27,24 @@ jobs:
         run: cmake -DBUILD_DIR="$PWD/build/ci" -DCONFIG=Debug -P tools/run_release_gate.cmake
       - name: Public Renderer Validation smoke
         run: xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json build/ci/AzureRender --smoke-frames 120
+      - name: Visual regression (lavapipe, relaxed tolerance)
+        run: |
+          python3 -m pip install --quiet --break-system-packages numpy pillow
+          xvfb-run -a env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.x86_64.json \
+            python3 tools/run_visual_regression.py \
+              --executable build/ci/AzureRender \
+              --tolerance relaxed \
+              --ci-only \
+              --summary build/ci/visual-regression-summary.json
+      - name: Upload visual regression summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AzureRender-VisualRegression-Linux
+          path: |
+            Project/AzureRender/build/ci/visual-regression-summary.json
+            Project/AzureRender/captures/visual-regression/**/*_diff.png
+          if-no-files-found: ignore
       - name: Public Editor Validation smoke
         run: |
           build/ci/AzureRender --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene

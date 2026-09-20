@@ -458,6 +458,7 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
     gpuTiming_.sceneTotalMs += sceneMs;
     gpuTiming_.postProcessTotalMs += postProcessMs;
     gpuTiming_.frameTotalMs += frameMs;
+    gpuTiming_.frameSamplesMs.push_back(frameMs);
     if (gpuTiming_.samples == 1) {
         gpuTiming_.frameMinMs = frameMs;
         gpuTiming_.frameMaxMs = frameMs;
@@ -510,6 +511,22 @@ void AzureRenderApp::printGpuTimingSummary() const {
     const double sceneAverage = gpuTiming_.sceneTotalMs / count;
     const double postAverage = gpuTiming_.postProcessTotalMs / count;
     const double frameAverage = gpuTiming_.frameTotalMs / count;
+    // Percentiles describe the frames a user actually notices; a single stall
+    // moves max without moving the mean, so both are reported.
+    std::vector<double> sortedFrames = gpuTiming_.frameSamplesMs;
+    std::sort(sortedFrames.begin(), sortedFrames.end());
+    const auto framePercentile = [&sortedFrames](const double percent) {
+        if (sortedFrames.empty()) {
+            return 0.0;
+        }
+        const double rank =
+            percent / 100.0 * static_cast<double>(sortedFrames.size() - 1);
+        const std::size_t low = static_cast<std::size_t>(rank);
+        const std::size_t high =
+            std::min(low + 1, sortedFrames.size() - 1);
+        const double weight = rank - static_cast<double>(low);
+        return sortedFrames[low] * (1.0 - weight) + sortedFrames[high] * weight;
+    };
     const auto percentage = [frameAverage](const double value) {
         return frameAverage > 0.0
             ? value * 100.0 / frameAverage
@@ -527,7 +544,21 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << percentage(postAverage) << "%)\n"
         << "  Total render: " << frameAverage << " ms avg, "
         << gpuTiming_.frameMinMs << " ms min, "
-        << gpuTiming_.frameMaxMs << " ms max";
+        << gpuTiming_.frameMaxMs << " ms max\n"
+        << "  Percentiles: p50 " << framePercentile(50.0)
+        << " ms, p95 " << framePercentile(95.0)
+        << " ms, p99 " << framePercentile(99.0) << " ms\n"
+        << "  Submission per frame: "
+        << (submissionCounters_.frames > 0
+                ? static_cast<double>(submissionCounters_.drawCalls)
+                    / static_cast<double>(submissionCounters_.frames)
+                : 0.0)
+        << " draws, "
+        << (submissionCounters_.frames > 0
+                ? static_cast<double>(submissionCounters_.descriptorSetBinds)
+                    / static_cast<double>(submissionCounters_.frames)
+                : 0.0)
+        << " descriptor binds";
     azurerender::RuntimeDiagnostics::instance().print(
         "gpu", summary.str());
 
@@ -563,6 +594,29 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"totalAverageMs\": " << frameAverage << ",\n"
         << "  \"totalMinMs\": " << gpuTiming_.frameMinMs << ",\n"
         << "  \"totalMaxMs\": " << gpuTiming_.frameMaxMs << ",\n"
+        << "  \"totalP50Ms\": " << framePercentile(50.0) << ",\n"
+        << "  \"totalP95Ms\": " << framePercentile(95.0) << ",\n"
+        << "  \"totalP99Ms\": " << framePercentile(99.0) << ",\n"
+        << "  \"submission\": {\n"
+        << "    \"frames\": " << submissionCounters_.frames << ",\n"
+        << "    \"drawCalls\": " << submissionCounters_.drawCalls << ",\n"
+        << "    \"descriptorSetBinds\": "
+        << submissionCounters_.descriptorSetBinds << ",\n"
+        << "    \"pipelineBinds\": "
+        << submissionCounters_.pipelineBinds << ",\n"
+        << "    \"pushConstantUpdates\": "
+        << submissionCounters_.pushConstantUpdates << ",\n"
+        << "    \"drawCallsPerFrame\": "
+        << (submissionCounters_.frames > 0
+                ? static_cast<double>(submissionCounters_.drawCalls)
+                    / static_cast<double>(submissionCounters_.frames)
+                : 0.0) << ",\n"
+        << "    \"descriptorSetBindsPerFrame\": "
+        << (submissionCounters_.frames > 0
+                ? static_cast<double>(submissionCounters_.descriptorSetBinds)
+                    / static_cast<double>(submissionCounters_.frames)
+                : 0.0) << "\n"
+        << "  },\n"
         << "  \"renderPath\": " << std::quoted(
                renderPathName()) << "\n"
         << "}\n";

@@ -57,6 +57,25 @@ ctest --test-dir build\ninja-debug --output-on-failure
 ctest --test-dir build\ninja-release --output-on-failure
 ```
 
+视觉回归（需要可用 Vulkan 设备）：
+
+```powershell
+python tools\run_visual_regression.py `
+  --executable .\build\ninja-release\AzureRender.exe
+```
+
+用例与容差定义在 `tools/visual_regression_cases.json`。基线位于 `assets_public/baselines/character/`；有意改变画面时用 `--update-baseline` 重写并在提交中说明原因。CTest 中对应 `AzureRender.VisualRegression`，无可用设备时跳过。
+
+性能基准：
+
+```powershell
+python tools\run_performance_baseline.py `
+  --executable .\build\ninja-release\AzureRender.exe `
+  --stage <阶段标签>
+```
+
+输出为固定 schema 的 JSON，包含 GPU pass 时间的 p50/p95/p99、每帧 draw 数与 descriptor 绑定次数。引擎化阶段以同格式数据作为性能主张的依据。
+
 公共角色 Validation：
 
 ```powershell
@@ -130,6 +149,19 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
 ### MinGW 与 ImGui ABI
 
 Windows MinGW 使用 `third_party/imgui/` vendored 源码构建，避免链接 vcpkg 的 MSVC 静态库。不要重新引入不匹配的预编译 ImGui ABI。
+
+### MSVC 与 Ninja 的头文件依赖
+
+使用 MSVC 工具链时通过 `tools\msvc_env.bat` 配置和构建：
+
+```powershell
+cmd /c "tools\msvc_env.bat cmake -S . -B build\msvc-debug -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows"
+cmd /c "tools\msvc_env.bat cmake --build build\msvc-debug"
+```
+
+该脚本设置 `VSLANG=1033`。Ninja 依靠解析 `/showIncludes` 的本地化前缀来追踪头文件依赖；本地化输出会使 CMake 生成的 `msvc_deps_prefix` 无法匹配，此时修改头文件不会触发重建，陈旧目标文件与新的结构体布局不一致会在运行期崩溃。若 CMake 配置阶段出现相关警告，改用该脚本重新配置到干净目录，或在改动头文件后执行 `cmake --build <dir> --clean-first`。
+
+MSVC 目标使用与 GCC 基线不同的诊断集合：`/EHsc` 对全部目标生效（缺少它会使 `try/catch` 失效），渲染器目标降级 C4456 与 C4996。CI 的严格门禁仍以 GCC 为准。
 
 如果 `g++.exe` 能输出版本、但编译无诊断地以代码 1 退出，直接运行
 `cc1plus.exe --version` 并检查是否返回 `0xC0000135`。这表示编译后端找不到

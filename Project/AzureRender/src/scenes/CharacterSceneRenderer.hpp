@@ -111,6 +111,9 @@ private:
     std::string rampAtlasPath_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
+    // Non-owning per-frame submission counters, refreshed from RenderContext at
+    // the start of every recordScene call. Null when collection is disabled.
+    SceneSubmissionCounters* submissionCounters_ = nullptr;
     // Engine-owned shadow map sampled by the material descriptor sets.
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;

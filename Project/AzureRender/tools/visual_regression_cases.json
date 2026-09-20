@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "description": "Public visual-regression cases for the character renderer. Every case must render a distinguishable image from assets_public only.",
+  "defaults": {
+    "asset": "assets_public/test_model.gltf",
+    "width": 1280,
+    "height": 720,
+    "captureFrames": 1,
+    "captureFps": 60,
+    "qaLight": "stylized-key"
+  },
+  "tolerances": {
+    "strict": {
+      "maxMeanError": 0.0,
+      "maxChangedRatio": 0.0,
+      "pixelThreshold": 0.0
+    },
+    "relaxed": {
+      "maxMeanError": 0.006,
+      "maxChangedRatio": 0.02,
+      "pixelThreshold": 0.0078431373
+    }
+  },
+  "cases": [
+    {
+      "name": "character_beauty_fullbody",
+      "isolation": "beauty",
+      "qaCamera": "full-body-front",
+      "ciEnabled": true
+    },
+    {
+      "name": "character_albedo_fullbody",
+      "isolation": "albedo",
+      "qaCamera": "full-body-front",
+      "ciEnabled": true
+    },
+    {
+      "name": "character_world_normal_fullbody",
+      "isolation": "world-normal",
+      "qaCamera": "full-body-front",
+      "ciEnabled": false
+    },
+    {
+      "name": "character_material_id_fullbody",
+      "isolation": "material-id",
+      "qaCamera": "full-body-front",
+      "ciEnabled": false
+    },
+    {
+      "name": "character_outline_fullbody",
+      "isolation": "outline",
+      "qaCamera": "full-body-front",
+      "ciEnabled": false
+    },
+    {
+      "name": "character_direct_diffuse_fullbody",
+      "isolation": "direct-diffuse",
+      "qaCamera": "full-body-front",
+      "ciEnabled": false
+    },
+    {
+      "name": "character_face_sdf_closeup",
+      "isolation": "face-sdf",
+      "qaCamera": "face-front",
+      "ciEnabled": false
+    }
+  ]
+}
