@@ -1,7 +1,7 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://azurerender.local/schema/gpu-capability-report-v1.json",
-  "title": "AzureRender GPU Capability Report v1",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/gpu-capability-report-v2.json",
+  "title": "AzureRender GPU Capability Report v2",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,11 +12,12 @@
     "api_version",
     "driver_version",
     "features",
+    "descriptor_indexing",
     "extensions"
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "device_name": {
       "type": "string",
@@ -47,6 +48,30 @@
           "type": "boolean"
         },
         "shader_int64": {
+          "type": "boolean"
+        }
+      }
+    },
+    "descriptor_indexing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_descriptor_array",
+        "shader_sampled_image_array_non_uniform_indexing",
+        "descriptor_binding_partially_bound",
+        "descriptor_binding_variable_descriptor_count"
+      ],
+      "properties": {
+        "runtime_descriptor_array": {
+          "type": "boolean"
+        },
+        "shader_sampled_image_array_non_uniform_indexing": {
+          "type": "boolean"
+        },
+        "descriptor_binding_partially_bound": {
+          "type": "boolean"
+        },
+        "descriptor_binding_variable_descriptor_count": {
           "type": "boolean"
         }
       }

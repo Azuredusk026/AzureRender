@@ -50,7 +50,8 @@ constexpr const char* kHelp =
     "  --blackhole-quality performance|balanced|cinematic\n"
     "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
     "  --diagnostic-view beauty|normal|outline|shadow\n"
-    "  --hud --no-stylized --no-inner-outline\n\n"
+    "  --hud --no-stylized --no-inner-outline\n"
+    "  --disable-bindless                Force legacy per-material descriptors\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
@@ -301,6 +302,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.portfolioMode = true;
         } else if (argument == "--gpu-timing") {
             parsed.options.gpuTimingEnabled = true;
+        } else if (argument == "--disable-bindless") {
+            parsed.options.bindlessDisabled = true;
         } else if (argument == "--gpu-timing-output") {
             parsed.options.gpuTimingEnabled = true;
             parsed.options.gpuTimingOutput =

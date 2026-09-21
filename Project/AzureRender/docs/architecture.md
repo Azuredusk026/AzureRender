@@ -413,6 +413,8 @@ capabilities
 
 全部 GPU 显存由宿主持有的 `rhi::GpuAllocator` 统一分配，基于 VMA，在逻辑设备创建后初始化、销毁前关闭。Renderer 通过 `RenderContext::allocator` 借用，不创建私有分配器。Host Visible 分配保持持久映射并保证 Coherent，调用方不需要配对 `vkMapMemory` 与 `vkUnmapMemory`。每帧的 CPU 到 GPU 上传从 `rhi::UploadRingBuffer` 切分，按 In-Flight Frame 分段复用。
 
+`RenderContext::bindlessTextures` 为真时，Renderer 可以使用全局纹理数组代替逐材质 Descriptor Set。Character 在该模式下每帧只绑定一次全局 Set，通过 Push Constant 传递材质槽位起点。设备不支持 Descriptor Indexing 时回退到逐材质固定表，两条路径共用同一份 Shader 源码的条件编译变体。
+
 内置 Catalog：
 
 | ID | 能力 |

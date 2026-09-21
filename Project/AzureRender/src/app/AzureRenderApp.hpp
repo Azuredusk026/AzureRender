@@ -130,6 +130,10 @@ private:
     // device; every upload ring slice honors it.
     VkDeviceSize uploadRingAlignment_ = 1;
     bool hdrSceneColorFormatSupported_ = false;
+    // Device supports the descriptor-indexing pair the character renderer's
+    // bindless texture array needs (runtimeDescriptorArray plus
+    // shaderSampledImageArrayNonUniformIndexing).
+    bool bindlessTexturesSupported_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;

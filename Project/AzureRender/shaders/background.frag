@@ -13,9 +13,15 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfShadowColor;
 } camera;
 
-// Shared environment map (binding 4). The background samples the equirect
-// environment so external HDR assets are visible in the backdrop.
+// The background samples the equirect environment so external HDR assets are
+// visible in the backdrop. Bindless layout: slot 0 of the global array.
+#if defined(AZURE_BINDLESS)
+layout(binding = 1) uniform sampler2D textureArray[];
+#define AZ_TEX_ENVIRONMENT textureArray[0u]
+#else
 layout(binding = 4) uniform sampler2D environmentTexture;
+#define AZ_TEX_ENVIRONMENT environmentTexture
+#endif
 
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
@@ -82,7 +88,7 @@ void main() {
             uv.x * 2.0 - 1.0,
             uv.y * 2.0 - 1.0,
             1.0)));
-    vec3 environmentColor = texture(environmentTexture, envUv).rgb * 1.15;
+    vec3 environmentColor = texture(AZ_TEX_ENVIRONMENT, envUv).rgb * 1.15;
     // Endfield previously suppressed the loaded sky to 8%, making the
     // environment indistinguishable from its procedural fallback.
     float environmentMix = preset == 1.0 ? 0.82 : 0.88;

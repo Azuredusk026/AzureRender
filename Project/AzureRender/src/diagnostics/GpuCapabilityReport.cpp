@@ -13,13 +13,14 @@ namespace azurerender {
 std::string formatGpuCapabilityReport(
     const VkPhysicalDeviceProperties& properties,
     const VkPhysicalDeviceFeatures& features,
+    const VkPhysicalDeviceVulkan12Features& vulkan12Features,
     const std::vector<VkExtensionProperties>& extensions) {
     nlohmann::json extensionsJson = nlohmann::json::array();
     for (const VkExtensionProperties& extension : extensions) {
         extensionsJson.push_back(extension.extensionName);
     }
     nlohmann::json report = {
-        {"schema_version", 1},
+        {"schema_version", 2},
         {"device_name", properties.deviceName},
         {"vendor_id", properties.vendorID},
         {"device_id", properties.deviceID},
@@ -28,6 +29,17 @@ std::string formatGpuCapabilityReport(
         {"features",
          {{"sampler_anisotropy", features.samplerAnisotropy == VK_TRUE},
           {"shader_int64", features.shaderInt64 == VK_TRUE}}},
+        {"descriptor_indexing",
+         {{"runtime_descriptor_array",
+           vulkan12Features.runtimeDescriptorArray == VK_TRUE},
+          {"shader_sampled_image_array_non_uniform_indexing",
+           vulkan12Features.shaderSampledImageArrayNonUniformIndexing
+               == VK_TRUE},
+          {"descriptor_binding_partially_bound",
+           vulkan12Features.descriptorBindingPartiallyBound == VK_TRUE},
+          {"descriptor_binding_variable_descriptor_count",
+           vulkan12Features.descriptorBindingVariableDescriptorCount
+               == VK_TRUE}}},
         {"extensions", extensionsJson},
     };
     return report.dump(2) + "\n";
@@ -40,7 +52,13 @@ bool writeGpuCapabilityReport(
         VkPhysicalDeviceProperties properties{};
         VkPhysicalDeviceFeatures features{};
         vkGetPhysicalDeviceProperties(device, &properties);
-        vkGetPhysicalDeviceFeatures(device, &features);
+        VkPhysicalDeviceVulkan12Features vulkan12Features{
+            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+        VkPhysicalDeviceFeatures2 features2{
+            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+        features2.pNext = &vulkan12Features;
+        vkGetPhysicalDeviceFeatures2(device, &features2);
+        features = features2.features;
         std::uint32_t extensionCount = 0;
         vkEnumerateDeviceExtensionProperties(
             device, nullptr, &extensionCount, nullptr);
@@ -58,7 +76,8 @@ bool writeGpuCapabilityReport(
                 "Unable to write GPU capability report: " + path.string());
             return false;
         }
-        output << formatGpuCapabilityReport(properties, features, extensions);
+        output << formatGpuCapabilityReport(
+            properties, features, vulkan12Features, extensions);
         if (!output) {
             RuntimeDiagnostics::instance().error(
                 "gpu", DiagnosticCode::Runtime,

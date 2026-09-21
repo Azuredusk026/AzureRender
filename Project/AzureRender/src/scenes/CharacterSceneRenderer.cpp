@@ -228,6 +228,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
         throw std::runtime_error(
             "RenderContext must carry the engine GPU allocator");
     }
+    bindlessTextures_ = context.bindlessTextures;
     renderSettings_ = context.renderSettings;
     rampAtlasPath_ = context.rampAtlasPath;
     environmentSource_ = context.environment;
@@ -838,6 +839,31 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 }
 
 void CharacterSceneRenderer::createDescriptorPool() {
+    if (bindlessTextures_) {
+        const std::uint32_t frameCount =
+            static_cast<std::uint32_t>(kMaxFramesInFlight);
+        const std::uint32_t textureSlots =
+            kSharedTextureSlots
+            + kMaterialTextureSlots
+                * static_cast<std::uint32_t>(asset_.materials.size());
+        const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
+            {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
+            {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+             frameCount * textureSlots},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount},
+        }};
+        VkDescriptorPoolCreateInfo createInfo{
+            VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
+        createInfo.poolSizeCount =
+            static_cast<std::uint32_t>(poolSizes.size());
+        createInfo.pPoolSizes = poolSizes.data();
+        createInfo.maxSets = frameCount;
+        vkCheck(
+            vkCreateDescriptorPool(
+                device_, &createInfo, nullptr, &descriptorPool_),
+            "vkCreateDescriptorPool(bindless)");
+        return;
+    }
     const std::uint32_t descriptorCount =
         static_cast<std::uint32_t>(kMaxFramesInFlight * asset_.materials.size());
     const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
@@ -856,6 +882,47 @@ void CharacterSceneRenderer::createDescriptorPool() {
 }
 
 void CharacterSceneRenderer::createDescriptorSetLayout() {
+    if (bindlessTextures_) {
+        VkDescriptorSetLayoutBinding uniformBinding{};
+        uniformBinding.binding = 0;
+        uniformBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        uniformBinding.descriptorCount = 1;
+        uniformBinding.stageFlags =
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
+
+        const std::uint32_t textureSlots =
+            kSharedTextureSlots
+            + kMaterialTextureSlots
+                * static_cast<std::uint32_t>(asset_.materials.size());
+        VkDescriptorSetLayoutBinding textureArrayBinding{};
+        textureArrayBinding.binding = 1;
+        textureArrayBinding.descriptorType =
+            VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        textureArrayBinding.descriptorCount = textureSlots;
+        textureArrayBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+
+        VkDescriptorSetLayoutBinding jointBinding{};
+        jointBinding.binding = 10;
+        jointBinding.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+        jointBinding.descriptorCount = 1;
+        jointBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+
+        const std::array bindings = {
+            uniformBinding,
+            textureArrayBinding,
+            jointBinding,
+        };
+        VkDescriptorSetLayoutCreateInfo createInfo{
+            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
+        createInfo.bindingCount =
+            static_cast<std::uint32_t>(bindings.size());
+        createInfo.pBindings = bindings.data();
+        vkCheck(
+            vkCreateDescriptorSetLayout(
+                device_, &createInfo, nullptr, &descriptorSetLayout_),
+            "vkCreateDescriptorSetLayout(bindless)");
+        return;
+    }
     VkDescriptorSetLayoutBinding uniformBinding{};
     uniformBinding.binding = 0;
     uniformBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -921,6 +988,95 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
+    if (bindlessTextures_) {
+        const std::vector<VkDescriptorSetLayout> layouts(
+            kMaxFramesInFlight, descriptorSetLayout_);
+        VkDescriptorSetAllocateInfo allocateInfo{
+            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
+        allocateInfo.descriptorPool = descriptorPool_;
+        allocateInfo.descriptorSetCount =
+            static_cast<std::uint32_t>(layouts.size());
+        allocateInfo.pSetLayouts = layouts.data();
+        descriptorSets_.resize(kMaxFramesInFlight);
+        vkCheck(
+            vkAllocateDescriptorSets(
+                device_, &allocateInfo, descriptorSets_.data()),
+            "vkAllocateDescriptorSets(bindless)");
+
+        // One array write per frame set: shared slots first, then the
+        // per-material blocks in shader-visible order.
+        std::vector<VkDescriptorImageInfo> images;
+        images.reserve(
+            kSharedTextureSlots
+            + kMaterialTextureSlots * asset_.materials.size());
+        const auto appendTexture = [&images](const GpuTexture& texture) {
+            VkDescriptorImageInfo info{};
+            info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            info.imageView = texture.view;
+            info.sampler = texture.sampler;
+            images.push_back(info);
+        };
+        appendTexture(environmentTexture_);
+        {
+            VkDescriptorImageInfo shadowInfo{};
+            shadowInfo.imageLayout =
+                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+            shadowInfo.imageView = shadowImageView_;
+            shadowInfo.sampler = shadowSampler_;
+            images.push_back(shadowInfo);
+        }
+        appendTexture(toonRampTexture_);
+        for (const GpuMaterial& material : gpuMaterials_) {
+            appendTexture(material.baseColor);
+            appendTexture(material.normal);
+            appendTexture(material.metallicRoughness);
+            appendTexture(material.specularEmissive);
+            appendTexture(material.styleMask);
+            appendTexture(material.matcap);
+            appendTexture(material.hairData);
+            appendTexture(material.faceSdf);
+        }
+
+        for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
+            VkDescriptorBufferInfo bufferInfo{};
+            bufferInfo.buffer = uniformBuffers_[frame].buffer;
+            bufferInfo.range = sizeof(UniformBufferObject);
+            VkDescriptorBufferInfo jointBufferInfo{};
+            jointBufferInfo.buffer = jointBuffers_[frame].buffer;
+            jointBufferInfo.range =
+                sizeof(asset_.jointMatrices.front())
+                * asset_.jointMatrices.size();
+
+            std::array<VkWriteDescriptorSet, 3> writes{};
+            writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+            writes[0].dstSet = descriptorSets_[frame];
+            writes[0].dstBinding = 0;
+            writes[0].descriptorCount = 1;
+            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            writes[0].pBufferInfo = &bufferInfo;
+            writes[1] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+            writes[1].dstSet = descriptorSets_[frame];
+            writes[1].dstBinding = 1;
+            writes[1].descriptorCount =
+                static_cast<std::uint32_t>(images.size());
+            writes[1].descriptorType =
+                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            writes[1].pImageInfo = images.data();
+            writes[2] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+            writes[2].dstSet = descriptorSets_[frame];
+            writes[2].dstBinding = 10;
+            writes[2].descriptorCount = 1;
+            writes[2].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            writes[2].pBufferInfo = &jointBufferInfo;
+            vkUpdateDescriptorSets(
+                device_,
+                static_cast<std::uint32_t>(writes.size()),
+                writes.data(),
+                0,
+                nullptr);
+        }
+        return;
+    }
     const std::size_t descriptorCount = kMaxFramesInFlight * asset_.materials.size();
     const std::vector<VkDescriptorSetLayout> layouts(
         descriptorCount, descriptorSetLayout_);
@@ -1105,7 +1261,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const auto vertexCode =
         vk::readBinaryFile(shaderDirectory + "/mesh.vert.spv");
     const auto fragmentCode =
-        vk::readBinaryFile(shaderDirectory + "/mesh.frag.spv");
+        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+            ? "/mesh_bindless.frag.spv"
+            : "/mesh.frag.spv"));
     const auto outlineVertexCode =
         vk::readBinaryFile(shaderDirectory + "/outline.vert.spv");
     const auto outlineFragmentCode =
@@ -1113,11 +1271,15 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const auto backgroundVertexCode =
         vk::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
-        vk::readBinaryFile(shaderDirectory + "/background.frag.spv");
+        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+            ? "/background_bindless.frag.spv"
+            : "/background.frag.spv"));
     const auto shadowVertexCode =
         vk::readBinaryFile(shaderDirectory + "/shadow.vert.spv");
     const auto shadowFragmentCode =
-        vk::readBinaryFile(shaderDirectory + "/shadow.frag.spv");
+        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+            ? "/shadow_bindless.frag.spv"
+            : "/shadow.frag.spv"));
     const VkShaderModule vertexModule = vk::createShaderModule(device_, vertexCode);
     const VkShaderModule fragmentModule = vk::createShaderModule(device_, fragmentCode);
     const VkShaderModule outlineVertexModule = vk::createShaderModule(device_, outlineVertexCode);
@@ -1683,6 +1845,20 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
     }
+    if (bindlessTextures_) {
+        vkCmdBindDescriptorSets(
+            context.commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            pipelineLayout_,
+            0,
+            1,
+            &descriptorSets_[context.currentFrame],
+            0,
+            nullptr);
+        if (context.submissionCounters != nullptr) {
+            ++context.submissionCounters->descriptorSetBinds;
+        }
+    }
     for (const AssetPrimitive& primitive : asset_.primitives) {
         const AssetMaterial& material =
             asset_.materials[primitive.materialIndex];
@@ -1690,18 +1866,23 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             || material.materialClass == AssetMaterialClass::Overlay) {
             continue;
         }
-        const std::size_t descriptorIndex =
-            context.currentFrame * asset_.materials.size()
-            + primitive.materialIndex;
-        vkCmdBindDescriptorSets(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[descriptorIndex],
-            0,
-            nullptr);
+        if (!bindlessTextures_) {
+            const std::size_t descriptorIndex =
+                context.currentFrame * asset_.materials.size()
+                + primitive.materialIndex;
+            vkCmdBindDescriptorSets(
+                context.commandBuffer,
+                VK_PIPELINE_BIND_POINT_GRAPHICS,
+                pipelineLayout_,
+                0,
+                1,
+                &descriptorSets_[descriptorIndex],
+                0,
+                nullptr);
+            if (context.submissionCounters != nullptr) {
+                ++context.submissionCounters->descriptorSetBinds;
+            }
+        }
         const MaterialPushConstants materialConstants{
             material.alphaCutoff,
             static_cast<std::uint32_t>(material.alphaMode),
@@ -1725,9 +1906,13 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             0,
             sizeof(materialConstants),
             &materialConstants);
-        const MorphPushConstants morphConstants{
-            renderSettings_->morphWeights,
-        };
+        MorphPushConstants morphConstants{};
+        morphConstants.weights = renderSettings_->morphWeights;
+        if (bindlessTextures_) {
+            morphConstants.textureBaseIndex =
+                kSharedTextureSlots
+                + primitive.materialIndex * kMaterialTextureSlots;
+        }
         vkCmdPushConstants(
             context.commandBuffer,
             pipelineLayout_,
@@ -1744,7 +1929,6 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             0);
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->drawCalls;
-            ++context.submissionCounters->descriptorSetBinds;
             context.submissionCounters->pushConstantUpdates += 2;
         }
     }
@@ -1790,23 +1974,45 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     scissor.extent = context.renderExtent;
     vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
 
-    const RenderSettings& settings = *renderSettings_;
-    if (settings.characterPresentation.backgroundEnabled) {
-        vkCmdBindPipeline(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            backgroundPipeline_);
-        const std::size_t backgroundDescriptorIndex =
-            context.currentFrame * asset_.materials.size();
+    // The global texture array serves every pipeline in this pass, so one
+    // bind at the top replaces the per-primitive table switches.
+    if (bindlessTextures_) {
         vkCmdBindDescriptorSets(
             context.commandBuffer,
             VK_PIPELINE_BIND_POINT_GRAPHICS,
             pipelineLayout_,
             0,
             1,
-            &descriptorSets_[backgroundDescriptorIndex],
+            &descriptorSets_[context.currentFrame],
             0,
             nullptr);
+        if (context.submissionCounters != nullptr) {
+            ++context.submissionCounters->descriptorSetBinds;
+        }
+    }
+
+    const RenderSettings& settings = *renderSettings_;
+    if (settings.characterPresentation.backgroundEnabled) {
+        vkCmdBindPipeline(
+            context.commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            backgroundPipeline_);
+        if (!bindlessTextures_) {
+            const std::size_t backgroundDescriptorIndex =
+                context.currentFrame * asset_.materials.size();
+            vkCmdBindDescriptorSets(
+                context.commandBuffer,
+                VK_PIPELINE_BIND_POINT_GRAPHICS,
+                pipelineLayout_,
+                0,
+                1,
+                &descriptorSets_[backgroundDescriptorIndex],
+                0,
+                nullptr);
+            if (context.submissionCounters != nullptr) {
+                ++context.submissionCounters->descriptorSetBinds;
+            }
+        }
         vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
     }
 
@@ -1834,18 +2040,23 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
                 continue;
             }
-            const std::size_t descriptorIndex =
-                context.currentFrame * asset_.materials.size()
-                + primitive.materialIndex;
-            vkCmdBindDescriptorSets(
-                context.commandBuffer,
-                VK_PIPELINE_BIND_POINT_GRAPHICS,
-                pipelineLayout_,
-                0,
-                1,
-                &descriptorSets_[descriptorIndex],
-                0,
-                nullptr);
+            if (!bindlessTextures_) {
+                const std::size_t descriptorIndex =
+                    context.currentFrame * asset_.materials.size()
+                    + primitive.materialIndex;
+                vkCmdBindDescriptorSets(
+                    context.commandBuffer,
+                    VK_PIPELINE_BIND_POINT_GRAPHICS,
+                    pipelineLayout_,
+                    0,
+                    1,
+                    &descriptorSets_[descriptorIndex],
+                    0,
+                    nullptr);
+                if (context.submissionCounters != nullptr) {
+                    ++context.submissionCounters->descriptorSetBinds;
+                }
+            }
             vkCmdDrawIndexed(
                 context.commandBuffer,
                 primitive.indexCount,
@@ -1855,7 +2066,6 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 0);
             if (context.submissionCounters != nullptr) {
                 ++context.submissionCounters->drawCalls;
-                ++context.submissionCounters->descriptorSetBinds;
             }
         }
     }
@@ -1969,17 +2179,22 @@ void CharacterSceneRenderer::drawPrimitive(
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)
         : (material.doubleSided ? opaqueDoubleSidedPipeline_ : opaquePipeline_);
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-    const std::size_t descriptorIndex =
-        currentFrame_ * asset_.materials.size() + primitive.materialIndex;
-    vkCmdBindDescriptorSets(
-        commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        pipelineLayout_,
-        0,
-        1,
-        &descriptorSets_[descriptorIndex],
-        0,
-        nullptr);
+    if (!bindlessTextures_) {
+        const std::size_t descriptorIndex =
+            currentFrame_ * asset_.materials.size() + primitive.materialIndex;
+        vkCmdBindDescriptorSets(
+            commandBuffer,
+            VK_PIPELINE_BIND_POINT_GRAPHICS,
+            pipelineLayout_,
+            0,
+            1,
+            &descriptorSets_[descriptorIndex],
+            0,
+            nullptr);
+        if (submissionCounters_ != nullptr) {
+            ++submissionCounters_->descriptorSetBinds;
+        }
+    }
     const MaterialPushConstants materialConstants{
         material.alphaCutoff,
         static_cast<std::uint32_t>(material.alphaMode),
@@ -2007,9 +2222,14 @@ void CharacterSceneRenderer::drawPrimitive(
         0,
         sizeof(materialConstants),
         &materialConstants);
-    const MorphPushConstants morphConstants{
-        renderSettings_->morphWeights,
-        {0.0F, 0.0F},
+    MorphPushConstants morphConstants{};
+    morphConstants.weights = renderSettings_->morphWeights;
+    if (bindlessTextures_) {
+        morphConstants.textureBaseIndex =
+            kSharedTextureSlots
+            + primitive.materialIndex * kMaterialTextureSlots;
+    }
+    morphConstants.gizmoTransform =
         [&]() -> std::array<float, 16> {
             if (selectedPrimitiveIndex_
                 != static_cast<std::int32_t>(
@@ -2053,8 +2273,7 @@ void CharacterSceneRenderer::drawPrimitive(
                 gizmoTransform[12], gizmoTransform[13],
                 gizmoTransform[14], gizmoTransform[15],
             };
-        }(),
-    };
+        }();
     vkCmdPushConstants(
         commandBuffer,
         pipelineLayout_,
@@ -2071,7 +2290,6 @@ void CharacterSceneRenderer::drawPrimitive(
         0);
     if (submissionCounters_ != nullptr) {
         ++submissionCounters_->drawCalls;
-        ++submissionCounters_->descriptorSetBinds;
         ++submissionCounters_->pipelineBinds;
         submissionCounters_->pushConstantUpdates += 2;
     }

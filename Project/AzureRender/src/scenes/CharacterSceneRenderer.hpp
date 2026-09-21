@@ -42,6 +42,10 @@ public:
 
 private:
     static constexpr std::size_t kMaxFramesInFlight = 2;
+    // Bindless texture array layout: shared slots come first (environment,
+    // shadow map, toon ramp), then per-material blocks of eight textures.
+    static constexpr std::uint32_t kSharedTextureSlots = 3;
+    static constexpr std::uint32_t kMaterialTextureSlots = 8;
 
     struct GpuTexture {
         rhi::GpuImage image;
@@ -80,7 +84,10 @@ private:
 
     struct MorphPushConstants {
         std::array<float, 2> weights{{0.0F, 0.0F}};
-        std::array<float, 2> padding{{0.0F, 0.0F}};
+        // Bindless mode: the draw's first material slot in the global texture
+        // array. Ignored by the fixed-table shaders.
+        std::uint32_t textureBaseIndex = 0;
+        std::uint32_t padding = 0;
         std::array<float, 16> gizmoTransform{
             1.0F, 0.0F, 0.0F, 0.0F,
             0.0F, 1.0F, 0.0F, 0.0F,
@@ -110,6 +117,9 @@ private:
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     // Engine-owned allocator borrowed for the renderer's lifetime.
     rhi::GpuAllocator* allocator_ = nullptr;
+    // Global texture array path, enabled when the device offers descriptor
+    // indexing. False keeps the per-material fixed descriptor tables.
+    bool bindlessTextures_ = false;
     std::string rampAtlasPath_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;

@@ -311,6 +311,8 @@ void AzureRenderApp::buildRenderContext(
     context.graphicsQueueFamily = graphicsQueueFamily_;
     context.commandPool = commandPool_;
     context.allocator = &gpuAllocator_;
+    context.bindlessTextures =
+        bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
     context.swapchainExtent = swapchainExtent_;
@@ -823,6 +825,16 @@ void AzureRenderApp::pickPhysicalDevice() {
     uploadRingAlignment_ = std::max<VkDeviceSize>(
         properties.limits.minUniformBufferOffsetAlignment,
         properties.limits.nonCoherentAtomSize);
+    VkPhysicalDeviceVulkan12Features vulkan12Features{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+    VkPhysicalDeviceFeatures2 features2{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+    features2.pNext = &vulkan12Features;
+    vkGetPhysicalDeviceFeatures2(physicalDevice_, &features2);
+    bindlessTexturesSupported_ =
+        vulkan12Features.runtimeDescriptorArray == VK_TRUE
+        && vulkan12Features.shaderSampledImageArrayNonUniformIndexing
+            == VK_TRUE;
     const std::filesystem::path capabilityDirectory =
         runOptions_.captureDirectory.empty()
         ? std::filesystem::path("captures")
@@ -903,7 +915,14 @@ void AzureRenderApp::createLogicalDevice() {
     // Required so scene renderers (e.g. the blackhole tracer) can use a
     // zero-write World Normal attachment next to a written Scene Color.
     deviceFeatures.independentBlend = VK_TRUE;
+    VkPhysicalDeviceVulkan12Features vulkan12Features{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+    if (bindlessTexturesSupported_ && !runOptions_.bindlessDisabled) {
+        vulkan12Features.runtimeDescriptorArray = VK_TRUE;
+        vulkan12Features.shaderSampledImageArrayNonUniformIndexing = VK_TRUE;
+    }
     VkDeviceCreateInfo createInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+    createInfo.pNext = &vulkan12Features;
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());
     createInfo.pQueueCreateInfos = queueCreateInfos.data();
     createInfo.pEnabledFeatures = &deviceFeatures;

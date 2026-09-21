@@ -126,12 +126,22 @@ set(SHADER_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 
 function(compile_shader source_file)
     get_filename_component(shader_name "${source_file}" NAME)
+    set(oneValueArgs OUTPUT_NAME)
+    set(multiValueArgs DEFINES)
+    cmake_parse_arguments(SHADER "" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    if(SHADER_OUTPUT_NAME)
+        set(shader_name "${SHADER_OUTPUT_NAME}")
+    endif()
     set(shader_output "${SHADER_BINARY_DIR}/${shader_name}.spv")
+    set(shader_define_args)
+    foreach(shader_define IN LISTS SHADER_DEFINES)
+        list(APPEND shader_define_args "-D${shader_define}")
+    endforeach()
 
     add_custom_command(
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
-        COMMAND Vulkan::glslc "${source_file}" -o "${shader_output}"
+        COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
         DEPENDS "${source_file}"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
@@ -142,12 +152,24 @@ endfunction()
 
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert")
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/mesh.frag"
+    DEFINES AZURE_BINDLESS=1
+    OUTPUT_NAME mesh_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/background.vert")
 compile_shader("${SHADER_SOURCE_DIR}/background.frag")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/background.frag"
+    DEFINES AZURE_BINDLESS=1
+    OUTPUT_NAME background_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/shadow.vert")
 compile_shader("${SHADER_SOURCE_DIR}/shadow.frag")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/shadow.frag"
+    DEFINES AZURE_BINDLESS=1
+    OUTPUT_NAME shadow_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/hud.vert")

@@ -77,6 +77,17 @@ int main() {
     require(valid.options.hudEnabled, "HUD flag was not parsed");
     require(valid.options.gpuTimingEnabled, "GPU timing was not implied by HUD");
 
+    const auto bindlessDefault = azurerender::parseCommandLine(
+        {"--smoke-frames", "1"});
+    require(
+        !bindlessDefault.options.bindlessDisabled,
+        "Bindless descriptors default to enabled");
+    const auto legacyDescriptors = azurerender::parseCommandLine(
+        {"--disable-bindless", "--smoke-frames", "1"});
+    require(
+        legacyDescriptors.options.bindlessDisabled,
+        "--disable-bindless was not parsed");
+
     // 2. Scene type defaults to Character and rejects unknown values.
     const auto characterDefault = azurerender::parseCommandLine({});
     require(

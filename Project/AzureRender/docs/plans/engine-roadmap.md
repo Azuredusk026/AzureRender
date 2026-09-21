@@ -144,7 +144,7 @@ E0-E3 为结构替换，产生大幅 diff 且不直接产出画面；E4-E7 在�
 ### 准入与验收要点
 
 - **E0**：`Complete`（2026-09-20）。七个隔离视图有公共基线并接入 CTest 与 CI；性能基准工具产出固定格式 JSON；故意引入的 shader 改动能被检出。基线 `character` 每帧 6 次 draw 与 6 次 descriptor 绑定，作为 E1、E2 的对比起点。
-- **E1**：Vulkan 调用全部收拢到 RHI，后端为纯虚接口且提供可 mock 实现使 pass 逻辑无 GPU 可测；VMA 替换全部显存分配；bindless 描述符使绑定次数显著下降。E0 五视图像素零差异。当前进度：VMA 分配器已接管全部显存分配（引擎与两个 GPU 场景渲染器），上传环形缓冲与常驻回读缓冲已接入，bindless 描述符与 RHI 接口收敛进行中。
+- **E1**：Vulkan 调用全部收拢到 RHI，后端为纯虚接口且提供可 mock 实现使 pass 逻辑无 GPU 可测；VMA 替换全部显存分配；bindless 描述符使绑定次数显著下降。E0 五视图像素零差异。当前进度：VMA 分配器已接管全部显存分配；上传环形缓冲与常驻回读缓冲已接入；角色场景 bindless 纹理数组落地，每帧 descriptor 绑定从 6.0 降到 2.0，`--disable-bindless` 可回退固定表路径，两路径视觉回归均零差异。RHI 接口与 NullRHI、逐场景迁移与旧 helper 清理进行中。
 - **E2**：ECS 成为唯一运行期场景表示，组件改为密集存储；场景支持多对象与实例化；批次使同网格多实例的 draw call 不随实例数线性增长。单对象场景 E0 零差异。
 - **E3**：pass 声明读写资源，图负责排序、瞬态资源分配与 barrier；新增 pass 不需修改公共帧代码；三个场景全部经由图渲染。
 - **E4**：compute 通路建立；bloom 改为多级下采样上采样；IBL 改为 GPU 端运行期生成；skinning 与 morph 迁入 compute；支持 OpenEXR。

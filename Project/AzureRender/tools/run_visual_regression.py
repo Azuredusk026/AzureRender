@@ -40,6 +40,7 @@ def render_case(
     case: dict,
     defaults: dict,
     output_dir: Path,
+    extra_args: list[str],
 ) -> Path:
     """Renders one case into output_dir and returns the captured frame path."""
     if output_dir.exists():
@@ -57,6 +58,7 @@ def render_case(
         "--capture-dir", str(output_dir),
         "--capture-frames", str(defaults["captureFrames"]),
         "--capture-fps", str(defaults["captureFps"]),
+        *extra_args,
     ]
     completed = subprocess.run(
         command,
@@ -136,6 +138,12 @@ def main() -> int:
     parser.add_argument("--ci-only", action="store_true")
     parser.add_argument("--update-baseline", action="store_true")
     parser.add_argument("--summary", type=Path)
+    parser.add_argument(
+        "--renderer-arg",
+        action="append",
+        default=[],
+        help="extra argument forwarded to the renderer, repeatable",
+    )
     args = parser.parse_args()
 
     if not args.executable.is_file():
@@ -156,7 +164,8 @@ def main() -> int:
         name = case["name"]
         work_dir = args.output_dir / name
         try:
-            frame = render_case(args.executable, case, defaults, work_dir)
+            frame = render_case(
+                args.executable, case, defaults, work_dir, args.renderer_arg)
         except RuntimeError as error:
             print(f"[FAIL] {name}: {error}")
             results.append(

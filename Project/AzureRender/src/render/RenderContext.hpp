@@ -119,6 +119,11 @@ struct RenderContext {
     // image allocation through it and never create a private allocator.
     rhi::GpuAllocator* allocator = nullptr;
 
+    // Descriptor indexing is enabled on the device and renderers may build a
+    // global texture array instead of per-material descriptor sets. False
+    // selects the fixed-table path.
+    bool bindlessTextures = false;
+
     std::uint32_t maxFramesInFlight = 2;
     std::uint32_t currentFrame = 0;
     std::uint32_t imageIndex = 0;

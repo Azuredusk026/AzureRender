@@ -14,6 +14,7 @@ namespace azurerender {
 [[nodiscard]] std::string formatGpuCapabilityReport(
     const VkPhysicalDeviceProperties& properties,
     const VkPhysicalDeviceFeatures& features,
+    const VkPhysicalDeviceVulkan12Features& vulkan12Features,
     const std::vector<VkExtensionProperties>& extensions);
 
 bool writeGpuCapabilityReport(

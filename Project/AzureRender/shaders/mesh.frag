@@ -1,5 +1,9 @@
 #version 450
 
+#if defined(AZURE_BINDLESS)
+#extension GL_EXT_nonuniform_qualifier : require
+#endif
+
 layout(binding = 0) uniform CameraData {
     mat4 model;
     mat4 modelViewProjection;
@@ -13,6 +17,11 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfShadowColor;
 } camera;
 
+#if defined(AZURE_BINDLESS)
+// One global array: slots 0..2 are the shared environment, shadow map and
+// toon ramp; per-material blocks of 8 follow at 3 + materialIndex * 8.
+layout(binding = 1) uniform sampler2D textureArray[];
+#else
 layout(binding = 1) uniform sampler2D baseColorTexture;
 layout(binding = 2) uniform sampler2D normalTexture;
 layout(binding = 3) uniform sampler2D metallicRoughnessTexture;
@@ -24,6 +33,7 @@ layout(binding = 8) uniform sampler2D hairDataTexture;
 layout(binding = 9) uniform sampler2D shadowMap;
 layout(binding = 11) uniform sampler2D toonRampTexture;
 layout(binding = 12) uniform sampler2D faceSdfTexture;
+#endif
 
 layout(push_constant) uniform MaterialData {
     float alphaCutoff;
@@ -40,7 +50,36 @@ layout(push_constant) uniform MaterialData {
     uint materialFeatures;
     uint materialProfileVersion;
     uint materialPadding;
+#if defined(AZURE_BINDLESS)
+    layout(offset = 136) uint textureBase;
+#endif
 } material;
+
+#if defined(AZURE_BINDLESS)
+#define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase + 0u)]
+#define AZ_TEX_NORMAL textureArray[nonuniformEXT(material.textureBase + 1u)]
+#define AZ_TEX_METALLIC_ROUGHNESS textureArray[nonuniformEXT(material.textureBase + 2u)]
+#define AZ_TEX_SPECULAR_EMISSIVE textureArray[nonuniformEXT(material.textureBase + 3u)]
+#define AZ_TEX_STYLE_MASK textureArray[nonuniformEXT(material.textureBase + 4u)]
+#define AZ_TEX_MATCAP textureArray[nonuniformEXT(material.textureBase + 5u)]
+#define AZ_TEX_HAIR_DATA textureArray[nonuniformEXT(material.textureBase + 6u)]
+#define AZ_TEX_FACE_SDF textureArray[nonuniformEXT(material.textureBase + 7u)]
+#define AZ_TEX_ENVIRONMENT textureArray[0u]
+#define AZ_TEX_SHADOW textureArray[1u]
+#define AZ_TEX_TOON_RAMP textureArray[2u]
+#else
+#define AZ_TEX_BASE_COLOR baseColorTexture
+#define AZ_TEX_NORMAL normalTexture
+#define AZ_TEX_METALLIC_ROUGHNESS metallicRoughnessTexture
+#define AZ_TEX_SPECULAR_EMISSIVE specularEmissiveTexture
+#define AZ_TEX_STYLE_MASK styleMaskTexture
+#define AZ_TEX_MATCAP matcapTexture
+#define AZ_TEX_HAIR_DATA hairDataTexture
+#define AZ_TEX_FACE_SDF faceSdfTexture
+#define AZ_TEX_ENVIRONMENT environmentTexture
+#define AZ_TEX_SHADOW shadowMap
+#define AZ_TEX_TOON_RAMP toonRampTexture
+#endif
 
 // materialPadding 复用为选中标志(1 = 视口拾取高亮)。
 #define AZURE_SELECTED_PADDING 1U
@@ -90,14 +129,14 @@ float materialFeatureEnabled(uint feature) {
 }
 
 vec3 sampleToonRamp(float coordinate) {
-    vec2 atlasSize = vec2(textureSize(toonRampTexture, 0));
+    vec2 atlasSize = vec2(textureSize(AZ_TEX_TOON_RAMP, 0));
     float minimumU = 0.5 / atlasSize.x;
     float maximumU = 1.0 - minimumU;
     float row = float(min(material.materialClass, 9U));
     vec2 uv = vec2(
         mix(minimumU, maximumU, clamp(coordinate, 0.0, 1.0)),
         (row + 0.5) / atlasSize.y);
-    return texture(toonRampTexture, uv).rgb;
+    return texture(AZ_TEX_TOON_RAMP, uv).rgb;
 }
 
 float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
@@ -127,7 +166,7 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
         vec2( 0.19984126,  0.78641367),
         vec2( 0.14383161, -0.14100790));
 
-    vec2 texelSize = 1.0 / vec2(textureSize(shadowMap, 0));
+    vec2 texelSize = 1.0 / vec2(textureSize(AZ_TEX_SHADOW, 0));
     float bias = max(0.0011 * (1.0 - normalDotLight), 0.00025);
     float receiverDepth = projected.z - bias;
     float maximumRadius = clamp(camera.renderingParameters.w, 1.0, 16.0);
@@ -138,8 +177,7 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
     float blockerCount = 0.0;
     float searchRadius = max(2.0, maximumRadius * 0.55);
     for (int sampleIndex = 0; sampleIndex < 12; ++sampleIndex) {
-        float storedDepth = texture(
-            shadowMap,
+        float storedDepth = texture(AZ_TEX_SHADOW,
             shadowUv + poissonDisk[sampleIndex] * texelSize * searchRadius).r;
         if (storedDepth < receiverDepth) {
             blockerDepthSum += storedDepth;
@@ -158,8 +196,7 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
         maximumRadius);
     float visibility = 0.0;
     for (int sampleIndex = 0; sampleIndex < 16; ++sampleIndex) {
-        float storedDepth = texture(
-            shadowMap,
+        float storedDepth = texture(AZ_TEX_SHADOW,
             shadowUv + poissonDisk[sampleIndex] * texelSize * filterRadius).r;
         visibility += receiverDepth <= storedDepth ? 1.0 : 0.0;
     }
@@ -167,7 +204,7 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
 }
 
 void main() {
-    vec4 baseColor = texture(baseColorTexture, textureCoordinate);
+    vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
         && materialFeatureEnabled(16U) > 0.5;
     bool browOverlay = overlayMaterial
@@ -221,9 +258,9 @@ void main() {
         - geometricNormal * dot(geometricNormal, worldTangent.xyz));
     vec3 bitangent = normalize(cross(geometricNormal, tangent)) * worldTangent.w;
     mat3 tangentToWorld = mat3(tangent, bitangent, geometricNormal);
-    vec3 sampledNormal = texture(normalTexture, textureCoordinate).xyz * 2.0 - 1.0;
+    vec3 sampledNormal = texture(AZ_TEX_NORMAL, textureCoordinate).xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
-    vec4 hairData = texture(hairDataTexture, textureCoordinate);
+    vec4 hairData = texture(AZ_TEX_HAIR_DATA, textureCoordinate);
     float hairActive = clamp(material.hairParameters.w, 0.0, 1.0)
         * materialFeatureEnabled(2U);
     float hairBasePeak = max(
@@ -237,9 +274,8 @@ void main() {
         hairBaseNormal,
         hairActive * 0.14));
 
-    vec4 packedMaterial = texture(metallicRoughnessTexture, textureCoordinate);
-    vec4 specularEmissive = texture(
-        specularEmissiveTexture,
+    vec4 packedMaterial = texture(AZ_TEX_METALLIC_ROUGHNESS, textureCoordinate);
+    vec4 specularEmissive = texture(AZ_TEX_SPECULAR_EMISSIVE,
         textureCoordinate);
     float styleStrength = camera.renderingParameters.y;
     float diffuseBandThreshold = camera.renderingParameters.z;
@@ -247,7 +283,7 @@ void main() {
     float styleMask = smoothstep(
         0.08,
         0.62,
-        texture(styleMaskTexture, textureCoordinate).r)
+        texture(AZ_TEX_STYLE_MASK, textureCoordinate).r)
         * styleStrength;
     float roughness = clamp(packedMaterial.g, 0.08, 1.0);
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
@@ -316,15 +352,13 @@ void main() {
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     vec3 diffuseColor = baseColor.rgb * (1.0 - metallic);
-    vec3 environmentDiffuse = texture(
-        environmentTexture,
+    vec3 environmentDiffuse = texture(AZ_TEX_ENVIRONMENT,
         directionToEquirectangular(shadedNormal)).rgb;
     // Prefiltered specular: sample the HDR environment mip chain by
     // roughness (mip 0 is the sharp sun, higher mips are prefiltered).
     float envMipCount = 7.0;
     float specularMip = clamp(roughness * (envMipCount - 1.0), 0.0, envMipCount - 1.0);
-    vec3 environmentSpecular = textureLod(
-        environmentTexture,
+    vec3 environmentSpecular = textureLod(AZ_TEX_ENVIRONMENT,
         directionToEquirectangular(reflectionDirection),
         specularMip).rgb;
     environmentSpecular = mix(
@@ -364,7 +398,7 @@ void main() {
             - styleMask * mix(0.04, 0.13, material.styleParameters.y),
         0.0,
         1.0);
-    vec4 faceSdfSample = texture(faceSdfTexture, textureCoordinate);
+    vec4 faceSdfSample = texture(AZ_TEX_FACE_SDF, textureCoordinate);
     float faceSdfEligible = material.materialClass == 2U
         ? materialFeatureEnabled(4U)
         : 0.0;
@@ -618,20 +652,18 @@ void main() {
             0.5 - dot(shadedNormal, cameraUp) * 0.5),
         vec2(0.002),
         vec2(0.998));
-    vec2 matcapTexel = 5.0 / vec2(textureSize(matcapTexture, 0));
+    vec2 matcapTexel = 5.0 / vec2(textureSize(AZ_TEX_MATCAP, 0));
     float matcapMask =
-        texture(matcapTexture, matcapUv).r * 0.20
-        + texture(matcapTexture, matcapUv + vec2(matcapTexel.x, 0.0)).r * 0.125
-        + texture(matcapTexture, matcapUv - vec2(matcapTexel.x, 0.0)).r * 0.125
-        + texture(matcapTexture, matcapUv + vec2(0.0, matcapTexel.y)).r * 0.125
-        + texture(matcapTexture, matcapUv - vec2(0.0, matcapTexel.y)).r * 0.125
-        + texture(matcapTexture, matcapUv + matcapTexel).r * 0.075
-        + texture(matcapTexture, matcapUv - matcapTexel).r * 0.075
-        + texture(
-            matcapTexture,
+        texture(AZ_TEX_MATCAP, matcapUv).r * 0.20
+        + texture(AZ_TEX_MATCAP, matcapUv + vec2(matcapTexel.x, 0.0)).r * 0.125
+        + texture(AZ_TEX_MATCAP, matcapUv - vec2(matcapTexel.x, 0.0)).r * 0.125
+        + texture(AZ_TEX_MATCAP, matcapUv + vec2(0.0, matcapTexel.y)).r * 0.125
+        + texture(AZ_TEX_MATCAP, matcapUv - vec2(0.0, matcapTexel.y)).r * 0.125
+        + texture(AZ_TEX_MATCAP, matcapUv + matcapTexel).r * 0.075
+        + texture(AZ_TEX_MATCAP, matcapUv - matcapTexel).r * 0.075
+        + texture(AZ_TEX_MATCAP,
             matcapUv + vec2(matcapTexel.x, -matcapTexel.y)).r * 0.075
-        + texture(
-            matcapTexture,
+        + texture(AZ_TEX_MATCAP,
             matcapUv + vec2(-matcapTexel.x, matcapTexel.y)).r * 0.075;
     vec3 matcapTint = mix(
         baseColor.rgb,

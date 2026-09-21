@@ -23,6 +23,10 @@ struct AzureRenderOptions {
     bool portfolioMode = false;
     bool gpuTimingEnabled = false;
     std::string gpuTimingOutput;
+    // Force the fixed per-material descriptor path even when the device
+    // supports descriptor indexing. Exists so the fallback path stays
+    // testable on capable hardware.
+    bool bindlessDisabled = false;
     azurerender::RenderSettings renderSettings;
     bool hudEnabled = false;
     bool technicalSequence = false;

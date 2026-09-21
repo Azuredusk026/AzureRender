@@ -32,6 +32,13 @@ int main() {
     features.samplerAnisotropy = VK_TRUE;
     features.shaderInt64 = VK_FALSE;
 
+    VkPhysicalDeviceVulkan12Features vulkan12Features{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+    vulkan12Features.runtimeDescriptorArray = VK_TRUE;
+    vulkan12Features.shaderSampledImageArrayNonUniformIndexing = VK_TRUE;
+    vulkan12Features.descriptorBindingPartiallyBound = VK_FALSE;
+    vulkan12Features.descriptorBindingVariableDescriptorCount = VK_FALSE;
+
     std::vector<VkExtensionProperties> extensions(2);
     std::strncpy(
         extensions[0].extensionName,
@@ -43,12 +50,12 @@ int main() {
         VK_MAX_EXTENSION_NAME_SIZE - 1);
 
     const std::string text = formatGpuCapabilityReport(
-        properties, features, extensions);
+        properties, features, vulkan12Features, extensions);
     const nlohmann::json report = parseReport(text);
 
     // Schema contract: top-level fields exist with the expected types.
     assert(report.contains("schema_version"));
-    assert(report["schema_version"] == 1);
+    assert(report["schema_version"] == 2);
     assert(report.contains("device_name"));
     assert(report["device_name"] == properties.deviceName);
     assert(report.contains("vendor_id"));
@@ -65,6 +72,21 @@ int main() {
     assert(report["features"]["sampler_anisotropy"] == true);
     assert(report["features"]["shader_int64"] == false);
 
+    // Descriptor indexing contract.
+    assert(report.contains("descriptor_indexing"));
+    assert(report["descriptor_indexing"]["runtime_descriptor_array"] == true);
+    assert(
+        report["descriptor_indexing"]
+              ["shader_sampled_image_array_non_uniform_indexing"]
+        == true);
+    assert(
+        report["descriptor_indexing"]["descriptor_binding_partially_bound"]
+        == false);
+    assert(
+        report["descriptor_indexing"]
+              ["descriptor_binding_variable_descriptor_count"]
+        == false);
+
     // Extension array contract.
     assert(report.contains("extensions"));
     assert(report["extensions"].is_array());
@@ -80,7 +102,10 @@ int main() {
         "GPU \"quoted\" \\ backslash \n newline",
         VK_MAX_PHYSICAL_DEVICE_NAME_SIZE - 1);
     const std::string hostileText = formatGpuCapabilityReport(
-        hostileProperties, VkPhysicalDeviceFeatures{}, {});
+        hostileProperties,
+        VkPhysicalDeviceFeatures{},
+        VkPhysicalDeviceVulkan12Features{},
+        {});
     const nlohmann::json hostile = parseReport(hostileText);
     assert(hostile["device_name"] == hostileProperties.deviceName);
 
