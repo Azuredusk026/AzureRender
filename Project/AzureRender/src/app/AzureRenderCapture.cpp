@@ -641,25 +641,14 @@ std::string AzureRenderApp::renderPathName() const {
 }
 
 void AzureRenderApp::saveScreenshot(
-    const VkDeviceMemory screenshotMemory,
+    const void* pixelData,
     const std::uint32_t width,
     const std::uint32_t height,
     const std::string& requestedOutputPath) const {
     const std::size_t byteCount =
         static_cast<std::size_t>(width) * height * 4;
-    void* mapped = nullptr;
-    vkCheck(
-        vkMapMemory(
-            device_,
-            screenshotMemory,
-            0,
-            static_cast<VkDeviceSize>(byteCount),
-            0,
-            &mapped),
-        "vkMapMemory(screenshot)");
     std::vector<std::uint8_t> rgba(byteCount);
-    std::memcpy(rgba.data(), mapped, byteCount);
-    vkUnmapMemory(device_, screenshotMemory);
+    std::memcpy(rgba.data(), pixelData, byteCount);
 
     const bool bgra =
         swapchainFormat_ == VK_FORMAT_B8G8R8A8_SRGB

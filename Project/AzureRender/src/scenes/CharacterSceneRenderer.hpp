@@ -2,6 +2,7 @@
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
+#include "rhi/GpuAllocator.hpp"
 
 #include <array>
 #include <cstdint>
@@ -43,8 +44,7 @@ private:
     static constexpr std::size_t kMaxFramesInFlight = 2;
 
     struct GpuTexture {
-        VkImage image = VK_NULL_HANDLE;
-        VkDeviceMemory memory = VK_NULL_HANDLE;
+        rhi::GpuImage image;
         VkImageView view = VK_NULL_HANDLE;
         VkSampler sampler = VK_NULL_HANDLE;
     };
@@ -108,6 +108,8 @@ private:
     VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
+    // Engine-owned allocator borrowed for the renderer's lifetime.
+    rhi::GpuAllocator* allocator_ = nullptr;
     std::string rampAtlasPath_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
@@ -120,22 +122,14 @@ private:
 
     LoadedAsset asset_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
-    VkBuffer vertexBuffer_ = VK_NULL_HANDLE;
-    VkDeviceMemory vertexBufferMemory_ = VK_NULL_HANDLE;
-    VkBuffer indexBuffer_ = VK_NULL_HANDLE;
-    VkDeviceMemory indexBufferMemory_ = VK_NULL_HANDLE;
+    rhi::GpuBuffer vertexBuffer_;
+    rhi::GpuBuffer indexBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
     GpuTexture environmentTexture_;
     GpuTexture toonRampTexture_;
-    std::vector<VkBuffer> uniformBuffers_;
-    std::vector<VkDeviceMemory> uniformBufferMemories_;
-    std::vector<void*> uniformBufferMapped_;
-    std::vector<VkBuffer> jointBuffers_;
-    std::vector<VkDeviceMemory> jointBufferMemories_;
-    std::vector<void*> jointBufferMapped_;
-    std::vector<VkBuffer> oitIndexBuffers_;
-    std::vector<VkDeviceMemory> oitIndexBufferMemories_;
-    std::vector<void*> oitIndexBufferMapped_;
+    std::vector<rhi::GpuBuffer> uniformBuffers_;
+    std::vector<rhi::GpuBuffer> jointBuffers_;
+    std::vector<rhi::GpuBuffer> oitIndexBuffers_;
     std::size_t oitIndexBufferSize_ = 0;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;

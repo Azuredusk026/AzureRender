@@ -33,6 +33,7 @@ Project/AzureRender/
     platform/          GLFW 前端
     render/            公共设置、context 与 Vulkan helper
     resources/         开发树/安装树资源定位
+    rhi/               GPU 内存分配与后端抽象
     scenes/            内置 catalog 与场景实现
   tests/               CPU 单元和契约测试
   tools/               发布、捕获、资产和验证工具
@@ -91,6 +92,8 @@ CharacterSceneRenderer   BlackholeSceneRenderer   SampleSceneRenderer
 | HUD/manifest hooks | 追加场景专属诊断字段 |
 
 场景不得销毁宿主 handle、跨 recreate 缓存 framebuffer、在普通帧内 `vkQueueWaitIdle`，也不得依赖 `assets_private/` 才能启动。
+
+全部 GPU 显存经引擎持有的 `rhi::GpuAllocator`（VMA）分配，场景渲染器通过 `RenderContext::allocator` 借用。host-visible 分配由分配器持久映射且保证 coherent，调用方不再需要 `vkMapMemory`/`vkUnmapMemory` 配对或显式 flush。分配器在逻辑设备创建后立即初始化、销毁前最后关闭，VMA 会在泄漏时报错。
 
 `RenderContext::submissionCounters` 是可选的每帧提交计数器，宿主在启用 GPU timing 时提供。场景渲染器在录制时累加 draw、descriptor 绑定、pipeline 绑定和 push constant 次数；指针为空时不得写入。计数进入 GPU timing 报告，作为性能对比的依据。
 

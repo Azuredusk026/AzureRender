@@ -3,6 +3,7 @@
 #include "extensions/ISceneRenderer.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
+#include "rhi/GpuAllocator.hpp"
 
 #include <array>
 #include <cstdint>
@@ -59,16 +60,16 @@ private:
 
     // Engine context snapshot taken on onLoad.
     VkDevice device_ = VK_NULL_HANDLE;
-    VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
+    // Engine-owned allocator borrowed for the renderer's lifetime.
+    rhi::GpuAllocator* allocator_ = nullptr;
     std::string shaderDirectory_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
 
     struct GpuEnvironment {
-        VkImage image = VK_NULL_HANDLE;
-        VkDeviceMemory memory = VK_NULL_HANDLE;
+        rhi::GpuImage image;
         VkImageView view = VK_NULL_HANDLE;
         VkSampler sampler = VK_NULL_HANDLE;
     } environment_;
@@ -79,19 +80,15 @@ private:
     std::vector<VkDescriptorSet> descriptorSets_;
     VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline pipeline_ = VK_NULL_HANDLE;
-    std::vector<VkBuffer> uniformBuffers_;
-    std::vector<VkDeviceMemory> uniformBufferMemories_;
-    std::vector<void*> uniformBufferMapped_;
+    std::vector<rhi::GpuBuffer> uniformBuffers_;
 
     // Private full-screen HDR raw trace and accumulated history textures.
     VkRenderPass traceRenderPass_ = VK_NULL_HANDLE;
     VkFramebuffer traceFramebuffer_ = VK_NULL_HANDLE;
-    VkImage traceImage_ = VK_NULL_HANDLE;
-    VkDeviceMemory traceImageMemory_ = VK_NULL_HANDLE;
+    rhi::GpuImage traceImage_;
     VkImageView traceImageView_ = VK_NULL_HANDLE;
     std::array<VkFramebuffer, 2> historyFramebuffers_{};
-    std::array<VkImage, 2> historyImages_{};
-    std::array<VkDeviceMemory, 2> historyImageMemories_{};
+    std::array<rhi::GpuImage, 2> historyImages_{};
     std::array<VkImageView, 2> historyImageViews_{};
     VkSampler traceSampler_ = VK_NULL_HANDLE;
     std::size_t historyWriteIndex_ = 0;
@@ -107,9 +104,7 @@ private:
     std::array<VkDescriptorSet, kMaxFramesInFlight * 2> taaDescriptorSets_{};
     VkPipelineLayout taaPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline taaPipeline_ = VK_NULL_HANDLE;
-    std::vector<VkBuffer> taaUniformBuffers_;
-    std::vector<VkDeviceMemory> taaUniformBufferMemories_;
-    std::vector<void*> taaUniformBufferMapped_;
+    std::vector<rhi::GpuBuffer> taaUniformBuffers_;
 
     // Final copy from accumulated history into engine Scene Color.
     VkDescriptorSetLayout compositeDescriptorSetLayout_ = VK_NULL_HANDLE;

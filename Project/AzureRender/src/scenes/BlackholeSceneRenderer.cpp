@@ -33,9 +33,13 @@ SceneRendererCapabilities BlackholeSceneRenderer::capabilities() const {
 
 void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
     device_ = context.device;
-    physicalDevice_ = context.physicalDevice;
     graphicsQueue_ = context.graphicsQueue;
     commandPool_ = context.commandPool;
+    allocator_ = context.allocator;
+    if (allocator_ == nullptr) {
+        throw std::runtime_error(
+            "RenderContext must carry the engine GPU allocator");
+    }
     shaderDirectory_ = context.shaderDirectory;
     environmentSource_ = context.environment;
     renderSettings_ = context.renderSettings;
@@ -181,27 +185,11 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
 
     // TAA per-frame uniform buffers.
     taaUniformBuffers_.resize(kMaxFramesInFlight);
-    taaUniformBufferMemories_.resize(kMaxFramesInFlight);
-    taaUniformBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        taaUniformBuffers_[frame] = allocator_->createBuffer(
             sizeof(TaaUniform),
             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            taaUniformBuffers_[frame],
-            taaUniformBufferMemories_[frame]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                taaUniformBufferMemories_[frame],
-                0,
-                sizeof(TaaUniform),
-                0,
-                &taaUniformBufferMapped_[frame]),
-            "vkMapMemory(blackhole TAA uniform)");
+            true);
     }
     updateTaaUniform();
 
@@ -213,7 +201,7 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
     // Bind one per-frame uniform buffer per per-frame descriptor set.
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
         VkDescriptorBufferInfo bufferInfo{};
-        bufferInfo.buffer = uniformBuffers_[frame];
+        bufferInfo.buffer = uniformBuffers_[frame].buffer;
         bufferInfo.range = sizeof(BlackholeUniform);
         VkDescriptorImageInfo environmentInfo{};
         environmentInfo.sampler = environment_.sampler;
@@ -256,7 +244,7 @@ void BlackholeSceneRenderer::transitionInitialLayouts() {
     vkCheck(
         vkBeginCommandBuffer(cmd, &beginInfo), "vkBeginCommandBuffer(transition)");
     const std::array<VkImage, 3> images{
-        traceImage_, historyImages_[0], historyImages_[1]};
+        traceImage_.image, historyImages_[0].image, historyImages_[1].image};
     VkImageMemoryBarrier barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
     barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
     barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
@@ -635,27 +623,11 @@ void BlackholeSceneRenderer::appendCaptureManifestFields(
 void BlackholeSceneRenderer::createUniformBuffers() {
     const VkDeviceSize size = sizeof(BlackholeUniform);
     uniformBuffers_.resize(kMaxFramesInFlight);
-    uniformBufferMemories_.resize(kMaxFramesInFlight);
-    uniformBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        uniformBuffers_[index] = allocator_->createBuffer(
             size,
             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            uniformBuffers_[index],
-            uniformBufferMemories_[index]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                uniformBufferMemories_[index],
-                0,
-                size,
-                0,
-                &uniformBufferMapped_[index]),
-            "vkMapMemory(blackhole uniform)");
+            true);
     }
 }
 
@@ -682,37 +654,27 @@ void BlackholeSceneRenderer::createEnvironmentTexture() {
     }
     const VkDeviceSize size = static_cast<VkDeviceSize>(image.rgba16f.size())
         * sizeof(std::uint16_t);
-    VkBuffer stagingBuffer = VK_NULL_HANDLE;
-    VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
-    vk::createBuffer(
-        device_, physicalDevice_, size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-        stagingBuffer, stagingMemory);
-    void* mapped = nullptr;
-    vkCheck(
-        vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped),
-        "vkMapMemory(blackhole environment)");
-    std::memcpy(mapped, image.rgba16f.data(), static_cast<std::size_t>(size));
-    vkUnmapMemory(device_, stagingMemory);
-    vk::createImage(
-        device_, physicalDevice_, image.width, image.height,
+    rhi::GpuBuffer staging = allocator_->createBuffer(
+        size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, true);
+    std::memcpy(
+        staging.mapped, image.rgba16f.data(), static_cast<std::size_t>(size));
+    environment_.image = allocator_->createImage2D(
+        image.width, image.height,
         VK_FORMAT_R16G16B16A16_SFLOAT,
-        VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-        environment_.image, environment_.memory, 1);
+        VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
     vk::transitionImageLayout(
-        device_, graphicsQueue_, commandPool_, environment_.image,
+        device_, graphicsQueue_, commandPool_, environment_.image.image,
         VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1);
     vk::copyBufferToImage(
-        device_, graphicsQueue_, commandPool_, stagingBuffer,
-        environment_.image, image.width, image.height);
+        device_, graphicsQueue_, commandPool_, staging.buffer,
+        environment_.image.image, image.width, image.height);
     vk::transitionImageLayout(
-        device_, graphicsQueue_, commandPool_, environment_.image,
+        device_, graphicsQueue_, commandPool_, environment_.image.image,
         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, 1);
-    vkDestroyBuffer(device_, stagingBuffer, nullptr);
-    vkFreeMemory(device_, stagingMemory, nullptr);
+    allocator_->destroyBuffer(staging);
     environment_.view = vk::createImageView(
-        device_, environment_.image, VK_FORMAT_R16G16B16A16_SFLOAT,
+        device_, environment_.image.image, VK_FORMAT_R16G16B16A16_SFLOAT,
         VK_IMAGE_ASPECT_COLOR_BIT, 1);
     VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
     samplerInfo.magFilter = VK_FILTER_LINEAR;
@@ -888,11 +850,10 @@ void BlackholeSceneRenderer::createTraceResources(
     const VkExtent2D extent = context.renderExtent;
     const VkImageUsageFlags usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
         | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-    vk::createImage(
-        device_, physicalDevice_, extent.width, extent.height,
-        context.sceneColorFormat, usage, traceImage_, traceImageMemory_, 1);
+    traceImage_ = allocator_->createImage2D(
+        extent.width, extent.height, context.sceneColorFormat, usage);
     traceImageView_ = vk::createImageView(
-        device_, traceImage_, context.sceneColorFormat,
+        device_, traceImage_.image, context.sceneColorFormat,
         VK_IMAGE_ASPECT_COLOR_BIT, 1);
     VkFramebufferCreateInfo framebufferInfo{
         VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
@@ -908,12 +869,10 @@ void BlackholeSceneRenderer::createTraceResources(
         "vkCreateFramebuffer(blackhole raw trace)");
 
     for (std::size_t index = 0; index < historyImages_.size(); ++index) {
-        vk::createImage(
-            device_, physicalDevice_, extent.width, extent.height,
-            context.sceneColorFormat, usage, historyImages_[index],
-            historyImageMemories_[index], 1);
+        historyImages_[index] = allocator_->createImage2D(
+            extent.width, extent.height, context.sceneColorFormat, usage);
         historyImageViews_[index] = vk::createImageView(
-            device_, historyImages_[index], context.sceneColorFormat,
+            device_, historyImages_[index].image, context.sceneColorFormat,
             VK_IMAGE_ASPECT_COLOR_BIT, 1);
         VkFramebufferCreateInfo framebufferInfo{
             VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
@@ -947,7 +906,7 @@ void BlackholeSceneRenderer::updateTemporalDescriptorSets() {
         for (std::size_t writeIndex = 0; writeIndex < 2; ++writeIndex) {
             const std::size_t setIndex = frame * 2 + writeIndex;
             VkDescriptorBufferInfo uniformInfo{};
-            uniformInfo.buffer = taaUniformBuffers_[frame];
+            uniformInfo.buffer = taaUniformBuffers_[frame].buffer;
             uniformInfo.range = sizeof(TaaUniform);
             VkDescriptorImageInfo traceInfo{};
             traceInfo.sampler = traceSampler_;
@@ -1217,12 +1176,7 @@ void BlackholeSceneRenderer::destroySizeDependentResources() {
         vkDestroyImageView(device_, traceImageView_, nullptr);
         traceImageView_ = VK_NULL_HANDLE;
     }
-    if (traceImage_ != VK_NULL_HANDLE) {
-        vkDestroyImage(device_, traceImage_, nullptr);
-        vkFreeMemory(device_, traceImageMemory_, nullptr);
-        traceImage_ = VK_NULL_HANDLE;
-        traceImageMemory_ = VK_NULL_HANDLE;
-    }
+    allocator_->destroyImage(traceImage_);
     for (std::size_t index = 0; index < historyImages_.size(); ++index) {
         if (historyFramebuffers_[index] != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, historyFramebuffers_[index], nullptr);
@@ -1232,12 +1186,7 @@ void BlackholeSceneRenderer::destroySizeDependentResources() {
             vkDestroyImageView(device_, historyImageViews_[index], nullptr);
             historyImageViews_[index] = VK_NULL_HANDLE;
         }
-        if (historyImages_[index] != VK_NULL_HANDLE) {
-            vkDestroyImage(device_, historyImages_[index], nullptr);
-            vkFreeMemory(device_, historyImageMemories_[index], nullptr);
-            historyImages_[index] = VK_NULL_HANDLE;
-            historyImageMemories_[index] = VK_NULL_HANDLE;
-        }
+        allocator_->destroyImage(historyImages_[index]);
     }
     if (traceRenderPass_ != VK_NULL_HANDLE) {
         vkDestroyRenderPass(device_, traceRenderPass_, nullptr);
@@ -1282,16 +1231,10 @@ void BlackholeSceneRenderer::destroyResources() {
         vkDestroyDescriptorSetLayout(device_, taaDescriptorSetLayout_, nullptr);
         taaDescriptorSetLayout_ = VK_NULL_HANDLE;
     }
-    for (std::size_t index = 0; index < taaUniformBuffers_.size(); ++index) {
-        if (taaUniformBufferMapped_[index] != nullptr) {
-            vkUnmapMemory(device_, taaUniformBufferMemories_[index]);
-        }
-        vkDestroyBuffer(device_, taaUniformBuffers_[index], nullptr);
-        vkFreeMemory(device_, taaUniformBufferMemories_[index], nullptr);
+    for (auto& buffer : taaUniformBuffers_) {
+        allocator_->destroyBuffer(buffer);
     }
     taaUniformBuffers_.clear();
-    taaUniformBufferMemories_.clear();
-    taaUniformBufferMapped_.clear();
 
     destroySizeDependentResources();
 
@@ -1311,16 +1254,10 @@ void BlackholeSceneRenderer::destroyResources() {
         vkDestroyDescriptorSetLayout(device_, descriptorSetLayout_, nullptr);
         descriptorSetLayout_ = VK_NULL_HANDLE;
     }
-    for (std::size_t index = 0; index < uniformBuffers_.size(); ++index) {
-        if (uniformBufferMapped_[index] != nullptr) {
-            vkUnmapMemory(device_, uniformBufferMemories_[index]);
-        }
-        vkDestroyBuffer(device_, uniformBuffers_[index], nullptr);
-        vkFreeMemory(device_, uniformBufferMemories_[index], nullptr);
+    for (auto& buffer : uniformBuffers_) {
+        allocator_->destroyBuffer(buffer);
     }
     uniformBuffers_.clear();
-    uniformBufferMemories_.clear();
-    uniformBufferMapped_.clear();
     if (environment_.sampler != VK_NULL_HANDLE) {
         vkDestroySampler(device_, environment_.sampler, nullptr);
         environment_.sampler = VK_NULL_HANDLE;
@@ -1329,14 +1266,7 @@ void BlackholeSceneRenderer::destroyResources() {
         vkDestroyImageView(device_, environment_.view, nullptr);
         environment_.view = VK_NULL_HANDLE;
     }
-    if (environment_.image != VK_NULL_HANDLE) {
-        vkDestroyImage(device_, environment_.image, nullptr);
-        environment_.image = VK_NULL_HANDLE;
-    }
-    if (environment_.memory != VK_NULL_HANDLE) {
-        vkFreeMemory(device_, environment_.memory, nullptr);
-        environment_.memory = VK_NULL_HANDLE;
-    }
+    allocator_->destroyImage(environment_.image);
 }
 
 // ---------------------------------------------------------------------------
@@ -1383,14 +1313,13 @@ void BlackholeSceneRenderer::updateUniformBuffer() {
     uniform.diskParameters = {2.1F, 12.0F, 1.0F, 2.4F};
     uniform.quality = {nearStepScale_, 0.0F, 0.0F, 0.0F};
     std::memcpy(
-        uniformBufferMapped_[currentFrame_],
+        uniformBuffers_[currentFrame_].mapped,
         &uniform,
         sizeof(uniform));
 }
 
 void BlackholeSceneRenderer::updateTaaUniform() {
-    if (taaUniformBufferMapped_.empty()
-        || taaUniformBufferMapped_[currentFrame_] == nullptr) {
+    if (taaUniformBuffers_.empty()) {
         return;
     }
     TaaUniform uniform{};
@@ -1399,7 +1328,7 @@ void BlackholeSceneRenderer::updateTaaUniform() {
     uniform.bloomIntensity = 0.30F;
     uniform.renderWidth = static_cast<float>(renderWidth_);
     std::memcpy(
-        taaUniformBufferMapped_[currentFrame_],
+        taaUniformBuffers_[currentFrame_].mapped,
         &uniform,
         sizeof(uniform));
 }

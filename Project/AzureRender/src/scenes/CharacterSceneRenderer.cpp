@@ -223,6 +223,11 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     physicalDevice_ = context.physicalDevice;
     graphicsQueue_ = context.graphicsQueue;
     commandPool_ = context.commandPool;
+    allocator_ = context.allocator;
+    if (allocator_ == nullptr) {
+        throw std::runtime_error(
+            "RenderContext must carry the engine GPU allocator");
+    }
     renderSettings_ = context.renderSettings;
     rampAtlasPath_ = context.rampAtlasPath;
     environmentSource_ = context.environment;
@@ -467,66 +472,38 @@ void CharacterSceneRenderer::onAnimationKey(
 
 void CharacterSceneRenderer::createVertexBuffer() {
     const VkDeviceSize size = sizeof(AssetVertex) * asset_.vertices.size();
-    VkBuffer stagingBuffer = VK_NULL_HANDLE;
-    VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
-    vk::createBuffer(
-        device_,
-        physicalDevice_,
+    rhi::GpuBuffer staging = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-        stagingBuffer,
-        stagingMemory);
-    void* mapped = nullptr;
-    vkCheck(
-        vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped),
-        "vkMapMemory(vertex)");
-    std::memcpy(mapped, asset_.vertices.data(), static_cast<std::size_t>(size));
-    vkUnmapMemory(device_, stagingMemory);
-    vk::createBuffer(
-        device_,
-        physicalDevice_,
+        true);
+    std::memcpy(
+        staging.mapped, asset_.vertices.data(), static_cast<std::size_t>(size));
+    vertexBuffer_ = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-        vertexBuffer_,
-        vertexBufferMemory_);
+        false);
     vk::copyBuffer(
-        device_, graphicsQueue_, commandPool_, stagingBuffer, vertexBuffer_, size);
-    vkDestroyBuffer(device_, stagingBuffer, nullptr);
-    vkFreeMemory(device_, stagingMemory, nullptr);
+        device_, graphicsQueue_, commandPool_, staging.buffer,
+        vertexBuffer_.buffer, size);
+    allocator_->destroyBuffer(staging);
 }
 
 void CharacterSceneRenderer::createIndexBuffer() {
     const VkDeviceSize size = sizeof(std::uint32_t) * asset_.indices.size();
-    VkBuffer stagingBuffer = VK_NULL_HANDLE;
-    VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
-    vk::createBuffer(
-        device_,
-        physicalDevice_,
+    rhi::GpuBuffer staging = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-        stagingBuffer,
-        stagingMemory);
-    void* mapped = nullptr;
-    vkCheck(
-        vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped),
-        "vkMapMemory(index)");
-    std::memcpy(mapped, asset_.indices.data(), static_cast<std::size_t>(size));
-    vkUnmapMemory(device_, stagingMemory);
-    vk::createBuffer(
-        device_,
-        physicalDevice_,
+        true);
+    std::memcpy(
+        staging.mapped, asset_.indices.data(), static_cast<std::size_t>(size));
+    indexBuffer_ = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-        indexBuffer_,
-        indexBufferMemory_);
+        false);
     vk::copyBuffer(
-        device_, graphicsQueue_, commandPool_, stagingBuffer, indexBuffer_, size);
-    vkDestroyBuffer(device_, stagingBuffer, nullptr);
-    vkFreeMemory(device_, stagingMemory, nullptr);
+        device_, graphicsQueue_, commandPool_, staging.buffer,
+        indexBuffer_.buffer, size);
+    allocator_->destroyBuffer(staging);
 }
 
 void CharacterSceneRenderer::createTexture() {
@@ -540,58 +517,44 @@ void CharacterSceneRenderer::createTexture() {
         const std::uint32_t mipLevels = 1) {
         const VkDeviceSize size = static_cast<VkDeviceSize>(pixels.size())
             * sizeof(typename std::decay_t<decltype(pixels)>::value_type);
-        VkBuffer stagingBuffer = VK_NULL_HANDLE;
-        VkDeviceMemory stagingMemory = VK_NULL_HANDLE;
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        rhi::GpuBuffer staging = allocator_->createBuffer(
             size,
             VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            stagingBuffer,
-            stagingMemory);
-        void* mapped = nullptr;
-        vkCheck(
-            vkMapMemory(device_, stagingMemory, 0, size, 0, &mapped),
-            "vkMapMemory(texture)");
-        std::memcpy(mapped, pixels.data(), static_cast<std::size_t>(size));
-        vkUnmapMemory(device_, stagingMemory);
-        vk::createImage(
-            device_,
-            physicalDevice_,
+            true);
+        std::memcpy(
+            staging.mapped, pixels.data(), static_cast<std::size_t>(size));
+        texture.image = allocator_->createImage2D(
             width,
             height,
             format,
             VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT
                 | (mipLevels > 1 ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0),
-            texture.image,
-            texture.memory,
             mipLevels);
         vk::transitionImageLayout(
             device_, graphicsQueue_, commandPool_,
-            texture.image,
+            texture.image.image,
             VK_IMAGE_LAYOUT_UNDEFINED,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
             mipLevels);
         vk::copyBufferToImage(
             device_, graphicsQueue_, commandPool_,
-            stagingBuffer, texture.image, width, height);
+            staging.buffer, texture.image.image, width, height);
         if (mipLevels > 1) {
             vk::generateMipmaps(
                 device_, physicalDevice_, graphicsQueue_, commandPool_,
-                texture.image, format, width, height, mipLevels);
+                texture.image.image, format, width, height, mipLevels);
         } else {
             vk::transitionImageLayout(
                 device_, graphicsQueue_, commandPool_,
-                texture.image,
+                texture.image.image,
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
                 mipLevels);
         }
-        vkDestroyBuffer(device_, stagingBuffer, nullptr);
-        vkFreeMemory(device_, stagingMemory, nullptr);
+        allocator_->destroyBuffer(staging);
         texture.view = vk::createImageView(
-            device_, texture.image, format, VK_IMAGE_ASPECT_COLOR_BIT, mipLevels);
+            device_, texture.image.image, format, VK_IMAGE_ASPECT_COLOR_BIT,
+            mipLevels);
         VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
         samplerInfo.magFilter = VK_FILTER_LINEAR;
         samplerInfo.minFilter = VK_FILTER_LINEAR;
@@ -812,26 +775,11 @@ void CharacterSceneRenderer::createTexture() {
 void CharacterSceneRenderer::createUniformBuffers() {
     const VkDeviceSize size = sizeof(UniformBufferObject);
     uniformBuffers_.resize(kMaxFramesInFlight);
-    uniformBufferMemories_.resize(kMaxFramesInFlight);
-    uniformBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        uniformBuffers_[index] = allocator_->createBuffer(
             size,
             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            uniformBuffers_[index],
-            uniformBufferMemories_[index]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                uniformBufferMemories_[index],
-                0,
-                size,
-                0,
-                &uniformBufferMapped_[index]),
-            "vkMapMemory(uniform)");
+            true);
     }
 }
 
@@ -842,29 +790,13 @@ void CharacterSceneRenderer::createJointBuffers() {
     const VkDeviceSize size =
         sizeof(asset_.jointMatrices.front()) * asset_.jointMatrices.size();
     jointBuffers_.resize(kMaxFramesInFlight);
-    jointBufferMemories_.resize(kMaxFramesInFlight);
-    jointBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        jointBuffers_[index] = allocator_->createBuffer(
             size,
             VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            jointBuffers_[index],
-            jointBufferMemories_[index]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                jointBufferMemories_[index],
-                0,
-                size,
-                0,
-                &jointBufferMapped_[index]),
-            "vkMapMemory(joints)");
+            true);
         std::memcpy(
-            jointBufferMapped_[index],
+            jointBuffers_[index].mapped,
             asset_.jointMatrices.data(),
             static_cast<std::size_t>(size));
     }
@@ -883,27 +815,11 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
         return;
     }
     oitIndexBuffers_.resize(kMaxFramesInFlight);
-    oitIndexBufferMemories_.resize(kMaxFramesInFlight);
-    oitIndexBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        vk::createBuffer(
-            device_,
-            physicalDevice_,
+        oitIndexBuffers_[index] = allocator_->createBuffer(
             oitIndexBufferSize_,
             VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            oitIndexBuffers_[index],
-            oitIndexBufferMemories_[index]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                oitIndexBufferMemories_[index],
-                0,
-                oitIndexBufferSize_,
-                0,
-                &oitIndexBufferMapped_[index]),
-            "vkMapMemory(oit)");
+            true);
     }
 }
 
@@ -1006,10 +922,10 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
         VkDescriptorBufferInfo bufferInfo{};
-        bufferInfo.buffer = uniformBuffers_[frame];
+        bufferInfo.buffer = uniformBuffers_[frame].buffer;
         bufferInfo.range = sizeof(UniformBufferObject);
         VkDescriptorBufferInfo jointBufferInfo{};
-        jointBufferInfo.buffer = jointBuffers_[frame];
+        jointBufferInfo.buffer = jointBuffers_[frame].buffer;
         jointBufferInfo.range =
             sizeof(asset_.jointMatrices.front())
             * asset_.jointMatrices.size();
@@ -1493,48 +1409,22 @@ void CharacterSceneRenderer::destroyResources() {
         vkDestroyDescriptorSetLayout(device_, descriptorSetLayout_, nullptr);
         descriptorSetLayout_ = VK_NULL_HANDLE;
     }
-    for (std::size_t index = 0; index < uniformBuffers_.size(); ++index) {
-        if (uniformBufferMapped_[index] != nullptr) {
-            vkUnmapMemory(device_, uniformBufferMemories_[index]);
-        }
-        vkDestroyBuffer(device_, uniformBuffers_[index], nullptr);
-        vkFreeMemory(device_, uniformBufferMemories_[index], nullptr);
+    for (auto& buffer : uniformBuffers_) {
+        allocator_->destroyBuffer(buffer);
     }
     uniformBuffers_.clear();
-    uniformBufferMemories_.clear();
-    uniformBufferMapped_.clear();
-    for (std::size_t index = 0; index < jointBuffers_.size(); ++index) {
-        if (jointBufferMapped_[index] != nullptr) {
-            vkUnmapMemory(device_, jointBufferMemories_[index]);
-        }
-        vkDestroyBuffer(device_, jointBuffers_[index], nullptr);
-        vkFreeMemory(device_, jointBufferMemories_[index], nullptr);
+    for (auto& buffer : jointBuffers_) {
+        allocator_->destroyBuffer(buffer);
     }
     jointBuffers_.clear();
-    jointBufferMemories_.clear();
-    jointBufferMapped_.clear();
-    for (std::size_t index = 0; index < oitIndexBuffers_.size(); ++index) {
-        if (oitIndexBufferMapped_[index] != nullptr) {
-            vkUnmapMemory(device_, oitIndexBufferMemories_[index]);
-        }
-        vkDestroyBuffer(device_, oitIndexBuffers_[index], nullptr);
-        vkFreeMemory(device_, oitIndexBufferMemories_[index], nullptr);
+    for (auto& buffer : oitIndexBuffers_) {
+        allocator_->destroyBuffer(buffer);
     }
     oitIndexBuffers_.clear();
-    oitIndexBufferMemories_.clear();
-    oitIndexBufferMapped_.clear();
-    if (indexBuffer_ != VK_NULL_HANDLE) {
-        vkDestroyBuffer(device_, indexBuffer_, nullptr);
-        vkFreeMemory(device_, indexBufferMemory_, nullptr);
-        indexBuffer_ = VK_NULL_HANDLE;
-    }
-    if (vertexBuffer_ != VK_NULL_HANDLE) {
-        vkDestroyBuffer(device_, vertexBuffer_, nullptr);
-        vkFreeMemory(device_, vertexBufferMemory_, nullptr);
-        vertexBuffer_ = VK_NULL_HANDLE;
-    }
-    for (const auto& material : gpuMaterials_) {
-        for (const GpuTexture* texture : {
+    allocator_->destroyBuffer(indexBuffer_);
+    allocator_->destroyBuffer(vertexBuffer_);
+    for (auto& material : gpuMaterials_) {
+        for (GpuTexture* texture : {
                  &material.baseColor,
                  &material.normal,
                  &material.metallicRoughness,
@@ -1542,22 +1432,19 @@ void CharacterSceneRenderer::destroyResources() {
                  &material.styleMask,
                  &material.matcap,
                  &material.hairData,
-                 &material.faceSdf}) {
+            &material.faceSdf}) {
             vkDestroySampler(device_, texture->sampler, nullptr);
             vkDestroyImageView(device_, texture->view, nullptr);
-            vkDestroyImage(device_, texture->image, nullptr);
-            vkFreeMemory(device_, texture->memory, nullptr);
+            allocator_->destroyImage(texture->image);
         }
     }
     gpuMaterials_.clear();
     vkDestroySampler(device_, environmentTexture_.sampler, nullptr);
     vkDestroyImageView(device_, environmentTexture_.view, nullptr);
-    vkDestroyImage(device_, environmentTexture_.image, nullptr);
-    vkFreeMemory(device_, environmentTexture_.memory, nullptr);
+    allocator_->destroyImage(environmentTexture_.image);
     vkDestroySampler(device_, toonRampTexture_.sampler, nullptr);
     vkDestroyImageView(device_, toonRampTexture_.view, nullptr);
-    vkDestroyImage(device_, toonRampTexture_.image, nullptr);
-    vkFreeMemory(device_, toonRampTexture_.memory, nullptr);
+    allocator_->destroyImage(toonRampTexture_.image);
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
@@ -1600,7 +1487,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
             sizeof(asset_.jointMatrices.front())
             * asset_.jointMatrices.size();
         std::memcpy(
-            jointBufferMapped_[currentFrame_],
+            jointBuffers_[currentFrame_].mapped,
             asset_.jointMatrices.data(),
             jointBytes);
     }
@@ -1716,7 +1603,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
     std::memcpy(
-        uniformBufferMapped_[currentFrame_],
+        uniformBuffers_[currentFrame_].mapped,
         &uniform,
         sizeof(uniform));
 }
@@ -1746,9 +1633,9 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     vkCmdSetScissor(context.commandBuffer, 0, 1, &shadowScissor);
     const VkDeviceSize shadowOffsets[] = {0};
     vkCmdBindVertexBuffers(
-        context.commandBuffer, 0, 1, &vertexBuffer_, shadowOffsets);
+        context.commandBuffer, 0, 1, &vertexBuffer_.buffer, shadowOffsets);
     vkCmdBindIndexBuffer(
-        context.commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
+        context.commandBuffer, indexBuffer_.buffer, 0, VK_INDEX_TYPE_UINT32);
     vkCmdBindPipeline(
         context.commandBuffer,
         VK_PIPELINE_BIND_POINT_GRAPHICS,
@@ -1884,8 +1771,10 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     }
 
     const VkDeviceSize offsets[] = {0};
-    vkCmdBindVertexBuffers(context.commandBuffer, 0, 1, &vertexBuffer_, offsets);
-    vkCmdBindIndexBuffer(context.commandBuffer, indexBuffer_, 0, VK_INDEX_TYPE_UINT32);
+    vkCmdBindVertexBuffers(
+        context.commandBuffer, 0, 1, &vertexBuffer_.buffer, offsets);
+    vkCmdBindIndexBuffer(
+        context.commandBuffer, indexBuffer_.buffer, 0, VK_INDEX_TYPE_UINT32);
     if (settings.silhouetteOutlineEnabled) {
         vkCmdBindPipeline(
             context.commandBuffer,
@@ -1949,9 +1838,9 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
         -cameraPosition_[2],
     });
     std::size_t oitWriteIndex = 0;
-    if (!transparentPrimitives.empty() && !oitIndexBufferMapped_.empty()) {
+    if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
         std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-            oitIndexBufferMapped_[context.currentFrame]);
+            oitIndexBuffers_[context.currentFrame].mapped);
         for (const AssetPrimitive* primitive : transparentPrimitives) {
             const std::uint32_t triangleCount = primitive->indexCount / 3;
             std::vector<std::uint32_t> triangleOrder(triangleCount);
@@ -2003,13 +1892,13 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     }
     std::size_t oitReadIndex = 0;
     for (const AssetPrimitive* primitive : transparentPrimitives) {
-        if (!oitIndexBufferMapped_.empty()) {
+        if (!oitIndexBuffers_.empty()) {
             const VkDeviceSize offsetBytes =
                 static_cast<VkDeviceSize>(oitReadIndex)
                 * sizeof(std::uint32_t);
             vkCmdBindIndexBuffer(
                 context.commandBuffer,
-                oitIndexBuffers_[context.currentFrame],
+                oitIndexBuffers_[context.currentFrame].buffer,
                 offsetBytes,
                 VK_INDEX_TYPE_UINT32);
         }

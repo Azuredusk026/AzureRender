@@ -77,6 +77,16 @@ public:
         bool hostVisible);
     void destroyImage(GpuImage& image) noexcept;
 
+    // Standard 2D optimal-tiling image; the common shape for textures and
+    // offscreen targets.
+    [[nodiscard]] GpuImage createImage2D(
+        std::uint32_t width,
+        std::uint32_t height,
+        VkFormat format,
+        VkImageUsageFlags usage,
+        std::uint32_t mipLevels = 1,
+        bool hostVisible = false);
+
     // Flushes a persistently mapped range on a non-coherent memory type. Safe
     // to call unconditionally; it is a no-op when the memory is coherent.
     void flush(const GpuBuffer& buffer, VkDeviceSize offset, VkDeviceSize size);

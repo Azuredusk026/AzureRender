@@ -143,26 +143,21 @@ private:
     bool editorViewportResizeRequested_ = false;
     std::vector<VkImage> swapchainImages_;
     std::vector<VkImageView> swapchainImageViews_;
-    std::vector<VkImage> editorViewportImages_;
-    std::vector<VkDeviceMemory> editorViewportImageMemories_;
+    std::vector<azurerender::rhi::GpuImage> editorViewportImages_;
     std::vector<VkImageView> editorViewportImageViews_;
     VkSampler editorViewportSampler_ = VK_NULL_HANDLE;
-    std::vector<VkImage> sceneColorImages_;
-    std::vector<VkDeviceMemory> sceneColorImageMemories_;
+    std::vector<azurerender::rhi::GpuImage> sceneColorImages_;
     std::vector<VkImageView> sceneColorImageViews_;
     std::vector<VkFramebuffer> swapchainFramebuffers_;
     std::vector<VkFramebuffer> postProcessFramebuffers_;
     std::vector<VkFramebuffer> editorUiFramebuffers_;
-    std::vector<VkImage> depthImages_;
-    std::vector<VkDeviceMemory> depthImageMemories_;
+    std::vector<azurerender::rhi::GpuImage> depthImages_;
     std::vector<VkImageView> depthImageViews_;
     VkFormat normalFormat_ = VK_FORMAT_R8G8B8A8_UNORM;
-    std::vector<VkImage> normalImages_;
-    std::vector<VkDeviceMemory> normalImageMemories_;
+    std::vector<azurerender::rhi::GpuImage> normalImages_;
     std::vector<VkImageView> normalImageViews_;
     VkFormat shadowFormat_ = VK_FORMAT_UNDEFINED;
-    VkImage shadowImage_ = VK_NULL_HANDLE;
-    VkDeviceMemory shadowImageMemory_ = VK_NULL_HANDLE;
+    azurerender::rhi::GpuImage shadowImage_;
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
     VkRenderPass shadowRenderPass_ = VK_NULL_HANDLE;
@@ -185,9 +180,7 @@ private:
     azurerender::ResourceLocator resourceLocator_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
-    std::vector<VkBuffer> hudVertexBuffers_;
-    std::vector<VkDeviceMemory> hudVertexBufferMemories_;
-    std::vector<void*> hudVertexBufferMapped_;
+    std::vector<azurerender::rhi::GpuBuffer> hudVertexBuffers_;
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
     std::int32_t selectedPrimitiveIndex_ = -1;
     bool ecsRenderableLogged_ = false;
@@ -287,7 +280,7 @@ private:
         std::uint32_t imageIndex,
         VkBuffer screenshotBuffer);
     void saveScreenshot(
-        VkDeviceMemory screenshotMemory,
+        const void* pixelData,
         std::uint32_t width,
         std::uint32_t height,
         const std::string& outputPath = {}) const;
@@ -310,16 +303,7 @@ private:
     [[nodiscard]] VkExtent2D chooseExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
     [[nodiscard]] static std::vector<char> readBinaryFile(const std::string& path);
     [[nodiscard]] VkShaderModule createShaderModule(const std::vector<char>& code) const;
-    [[nodiscard]] std::uint32_t findMemoryType(
-        std::uint32_t typeFilter,
-        VkMemoryPropertyFlags properties) const;
     [[nodiscard]] VkFormat findDepthFormat() const;
-    void createBuffer(
-        VkDeviceSize size,
-        VkBufferUsageFlags usage,
-        VkMemoryPropertyFlags properties,
-        VkBuffer& buffer,
-        VkDeviceMemory& memory) const;
     void copyBuffer(VkBuffer source, VkBuffer destination, VkDeviceSize size) const;
     void transitionImageLayout(
         VkImage image,
@@ -331,14 +315,6 @@ private:
         VkImage destination,
         std::uint32_t width,
         std::uint32_t height) const;
-    void createImage(
-        std::uint32_t width,
-        std::uint32_t height,
-        VkFormat format,
-        VkImageUsageFlags usage,
-        VkImage& image,
-        VkDeviceMemory& memory,
-        std::uint32_t mipLevels = 1) const;
     void generateMipmaps(
         VkImage image,
         VkFormat format,

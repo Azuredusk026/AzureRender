@@ -230,31 +230,24 @@ void AzureRenderApp::cleanupEditorViewportResources(
 
     const auto destroyImages = [this](
                                    auto& views,
-                                   auto& images,
-                                   auto& memories) {
+                                   auto& images) {
         for (const auto view : views) {
             vkDestroyImageView(device_, view, nullptr);
         }
-        for (const auto image : images) {
-            vkDestroyImage(device_, image, nullptr);
-        }
-        for (const auto memory : memories) {
-            vkFreeMemory(device_, memory, nullptr);
+        for (auto& image : images) {
+            gpuAllocator_.destroyImage(image);
         }
         views.clear();
         images.clear();
-        memories.clear();
     };
     destroyImages(
         editorViewportImageViews_,
-        editorViewportImages_,
-        editorViewportImageMemories_);
+        editorViewportImages_);
     destroyImages(
         sceneColorImageViews_,
-        sceneColorImages_,
-        sceneColorImageMemories_);
-    destroyImages(depthImageViews_, depthImages_, depthImageMemories_);
-    destroyImages(normalImageViews_, normalImages_, normalImageMemories_);
+        sceneColorImages_);
+    destroyImages(depthImageViews_, depthImages_);
+    destroyImages(normalImageViews_, normalImages_);
 
     if (destroySampler && editorViewportSampler_ != VK_NULL_HANDLE) {
         vkDestroySampler(device_, editorViewportSampler_, nullptr);
@@ -374,20 +367,6 @@ VkExtent2D AzureRenderApp::chooseExtent(
     return extent;
 }
 
-std::uint32_t AzureRenderApp::findMemoryType(
-    const std::uint32_t typeFilter,
-    const VkMemoryPropertyFlags properties) const {
-    VkPhysicalDeviceMemoryProperties memoryProperties{};
-    vkGetPhysicalDeviceMemoryProperties(physicalDevice_, &memoryProperties);
-    for (std::uint32_t index = 0; index < memoryProperties.memoryTypeCount; ++index) {
-        if ((typeFilter & (1U << index)) != 0U
-            && (memoryProperties.memoryTypes[index].propertyFlags & properties) == properties) {
-            return index;
-        }
-    }
-    throw std::runtime_error("No suitable Vulkan memory type was found");
-}
-
 VkFormat AzureRenderApp::findDepthFormat() const {
     constexpr std::array candidates = {
         VK_FORMAT_D32_SFLOAT,
@@ -406,27 +385,6 @@ VkFormat AzureRenderApp::findDepthFormat() const {
         }
     }
     throw std::runtime_error("No supported depth buffer format was found");
-}
-
-void AzureRenderApp::createBuffer(
-    const VkDeviceSize size,
-    const VkBufferUsageFlags usage,
-    const VkMemoryPropertyFlags properties,
-    VkBuffer& buffer,
-    VkDeviceMemory& memory) const {
-    VkBufferCreateInfo bufferInfo{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
-    bufferInfo.size = size;
-    bufferInfo.usage = usage;
-    bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    vkCheck(vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer), "vkCreateBuffer");
-
-    VkMemoryRequirements requirements{};
-    vkGetBufferMemoryRequirements(device_, buffer, &requirements);
-    VkMemoryAllocateInfo allocateInfo{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    allocateInfo.allocationSize = requirements.size;
-    allocateInfo.memoryTypeIndex = findMemoryType(requirements.memoryTypeBits, properties);
-    vkCheck(vkAllocateMemory(device_, &allocateInfo, nullptr, &memory), "vkAllocateMemory(buffer)");
-    vkCheck(vkBindBufferMemory(device_, buffer, memory, 0), "vkBindBufferMemory");
 }
 
 void AzureRenderApp::copyBuffer(
@@ -710,37 +668,6 @@ void AzureRenderApp::copyBufferToImage(
         "vkQueueSubmit(image copy)");
     vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(image copy)");
     vkFreeCommandBuffers(device_, commandPool_, 1, &commandBuffer);
-}
-
-void AzureRenderApp::createImage(
-    const std::uint32_t width,
-    const std::uint32_t height,
-    const VkFormat format,
-    const VkImageUsageFlags usage,
-    VkImage& image,
-    VkDeviceMemory& memory,
-    const std::uint32_t mipLevels) const {
-    VkImageCreateInfo imageInfo{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};
-    imageInfo.imageType = VK_IMAGE_TYPE_2D;
-    imageInfo.extent = {width, height, 1};
-    imageInfo.mipLevels = std::max(mipLevels, 1U);
-    imageInfo.arrayLayers = 1;
-    imageInfo.format = format;
-    imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    imageInfo.usage = usage;
-    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
-    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    vkCheck(vkCreateImage(device_, &imageInfo, nullptr, &image), "vkCreateImage");
-
-    VkMemoryRequirements requirements{};
-    vkGetImageMemoryRequirements(device_, image, &requirements);
-    VkMemoryAllocateInfo allocateInfo{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    allocateInfo.allocationSize = requirements.size;
-    allocateInfo.memoryTypeIndex =
-        findMemoryType(requirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-    vkCheck(vkAllocateMemory(device_, &allocateInfo, nullptr, &memory), "vkAllocateMemory(image)");
-    vkCheck(vkBindImageMemory(device_, image, memory, 0), "vkBindImageMemory");
 }
 
 VkImageView AzureRenderApp::createImageView(

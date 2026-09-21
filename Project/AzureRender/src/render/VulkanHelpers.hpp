@@ -19,21 +19,7 @@ VkShaderModule createShaderModule(
     VkDevice device,
     const std::vector<char>& code);
 
-std::uint32_t findMemoryType(
-    VkPhysicalDevice physicalDevice,
-    std::uint32_t typeFilter,
-    VkMemoryPropertyFlags properties);
-
 VkFormat findDepthFormat(VkPhysicalDevice physicalDevice);
-
-void createBuffer(
-    VkDevice device,
-    VkPhysicalDevice physicalDevice,
-    VkDeviceSize size,
-    VkBufferUsageFlags usage,
-    VkMemoryPropertyFlags properties,
-    VkBuffer& buffer,
-    VkDeviceMemory& memory);
 
 void copyBuffer(
     VkDevice device,
@@ -60,17 +46,6 @@ void copyBufferToImage(
     VkImage destination,
     std::uint32_t width,
     std::uint32_t height);
-
-void createImage(
-    VkDevice device,
-    VkPhysicalDevice physicalDevice,
-    std::uint32_t width,
-    std::uint32_t height,
-    VkFormat format,
-    VkImageUsageFlags usage,
-    VkImage& image,
-    VkDeviceMemory& memory,
-    std::uint32_t mipLevels);
 
 void generateMipmaps(
     VkDevice device,

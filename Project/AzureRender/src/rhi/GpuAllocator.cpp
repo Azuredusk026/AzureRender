@@ -2,6 +2,7 @@
 
 #include <vk_mem_alloc.h>
 
+#include <algorithm>
 #include <stdexcept>
 #include <string>
 
@@ -82,8 +83,14 @@ GpuBuffer GpuAllocator::createBuffer(
         allocationInfo.flags =
             VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
             | VMA_ALLOCATION_CREATE_MAPPED_BIT;
+        // Mapped allocations always come from coherent memory so callers
+        // never reason about non-coherent ranges; flush() exists for future
+        // paths that deliberately drop the requirement.
+        allocationInfo.requiredFlags = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+            | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
     } else {
         allocationInfo.usage = VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE;
+        allocationInfo.requiredFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
     }
 
     GpuBuffer result;
@@ -130,8 +137,11 @@ GpuImage GpuAllocator::createImage(
         allocationInfo.flags =
             VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
             | VMA_ALLOCATION_CREATE_MAPPED_BIT;
+        allocationInfo.requiredFlags = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+            | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
     } else {
         allocationInfo.usage = VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE;
+        allocationInfo.requiredFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
     }
 
     GpuImage result;
@@ -161,6 +171,27 @@ void GpuAllocator::destroyImage(GpuImage& image) noexcept {
         --statistics_.liveImages;
     }
     image = GpuImage{};
+}
+
+GpuImage GpuAllocator::createImage2D(
+    const std::uint32_t width,
+    const std::uint32_t height,
+    const VkFormat format,
+    const VkImageUsageFlags usage,
+    const std::uint32_t mipLevels,
+    const bool hostVisible) {
+    VkImageCreateInfo imageInfo{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};
+    imageInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageInfo.extent = {width, height, 1};
+    imageInfo.mipLevels = std::max(mipLevels, 1U);
+    imageInfo.arrayLayers = 1;
+    imageInfo.format = format;
+    imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    imageInfo.usage = usage;
+    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    return createImage(imageInfo, hostVisible);
 }
 
 void GpuAllocator::flush(

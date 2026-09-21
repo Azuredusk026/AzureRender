@@ -35,23 +35,6 @@ VkShaderModule createShaderModule(
     return shaderModule;
 }
 
-std::uint32_t findMemoryType(
-    const VkPhysicalDevice physicalDevice,
-    const std::uint32_t typeFilter,
-    const VkMemoryPropertyFlags properties) {
-    VkPhysicalDeviceMemoryProperties memoryProperties{};
-    vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memoryProperties);
-    for (std::uint32_t index = 0; index < memoryProperties.memoryTypeCount;
-         ++index) {
-        if ((typeFilter & (1U << index)) != 0U
-            && (memoryProperties.memoryTypes[index].propertyFlags & properties)
-                == properties) {
-            return index;
-        }
-    }
-    throw std::runtime_error("No suitable Vulkan memory type was found");
-}
-
 VkFormat findDepthFormat(const VkPhysicalDevice physicalDevice) {
     constexpr std::array candidates = {
         VK_FORMAT_D32_SFLOAT,
@@ -71,32 +54,6 @@ VkFormat findDepthFormat(const VkPhysicalDevice physicalDevice) {
         }
     }
     throw std::runtime_error("No supported depth buffer format was found");
-}
-
-void createBuffer(
-    const VkDevice device,
-    const VkPhysicalDevice physicalDevice,
-    const VkDeviceSize size,
-    const VkBufferUsageFlags usage,
-    const VkMemoryPropertyFlags properties,
-    VkBuffer& buffer,
-    VkDeviceMemory& memory) {
-    VkBufferCreateInfo bufferInfo{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
-    bufferInfo.size = size;
-    bufferInfo.usage = usage;
-    bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    vkCheck(vkCreateBuffer(device, &bufferInfo, nullptr, &buffer), "vkCreateBuffer");
-
-    VkMemoryRequirements requirements{};
-    vkGetBufferMemoryRequirements(device, buffer, &requirements);
-    VkMemoryAllocateInfo allocateInfo{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    allocateInfo.allocationSize = requirements.size;
-    allocateInfo.memoryTypeIndex =
-        findMemoryType(physicalDevice, requirements.memoryTypeBits, properties);
-    vkCheck(
-        vkAllocateMemory(device, &allocateInfo, nullptr, &memory),
-        "vkAllocateMemory(buffer)");
-    vkCheck(vkBindBufferMemory(device, buffer, memory, 0), "vkBindBufferMemory");
 }
 
 void copyBuffer(
@@ -258,43 +215,6 @@ void copyBufferToImage(
         "vkQueueSubmit(image copy)");
     vkCheck(vkQueueWaitIdle(queue), "vkQueueWaitIdle(image copy)");
     vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-}
-
-void createImage(
-    const VkDevice device,
-    const VkPhysicalDevice physicalDevice,
-    const std::uint32_t width,
-    const std::uint32_t height,
-    const VkFormat format,
-    const VkImageUsageFlags usage,
-    VkImage& image,
-    VkDeviceMemory& memory,
-    const std::uint32_t mipLevels) {
-    VkImageCreateInfo imageInfo{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};
-    imageInfo.imageType = VK_IMAGE_TYPE_2D;
-    imageInfo.extent = {width, height, 1};
-    imageInfo.mipLevels = std::max(mipLevels, 1U);
-    imageInfo.arrayLayers = 1;
-    imageInfo.format = format;
-    imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    imageInfo.usage = usage;
-    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
-    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    vkCheck(vkCreateImage(device, &imageInfo, nullptr, &image), "vkCreateImage");
-
-    VkMemoryRequirements requirements{};
-    vkGetImageMemoryRequirements(device, image, &requirements);
-    VkMemoryAllocateInfo allocateInfo{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    allocateInfo.allocationSize = requirements.size;
-    allocateInfo.memoryTypeIndex = findMemoryType(
-        physicalDevice,
-        requirements.memoryTypeBits,
-        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-    vkCheck(
-        vkAllocateMemory(device, &allocateInfo, nullptr, &memory),
-        "vkAllocateMemory(image)");
-    vkCheck(vkBindImageMemory(device, image, memory, 0), "vkBindImageMemory");
 }
 
 void generateMipmaps(

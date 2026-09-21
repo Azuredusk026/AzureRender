@@ -304,6 +304,7 @@ void AzureRenderApp::buildRenderContext(
     context.graphicsQueue = graphicsQueue_;
     context.graphicsQueueFamily = graphicsQueueFamily_;
     context.commandPool = commandPool_;
+    context.allocator = &gpuAllocator_;
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
     context.swapchainExtent = swapchainExtent_;
@@ -690,17 +691,8 @@ void AzureRenderApp::cleanup() {
                 postProcessDescriptorSetLayout_,
                 nullptr);
         }
-        for (std::size_t index = 0; index < hudVertexBuffers_.size(); ++index) {
-            if (hudVertexBufferMapped_[index] != nullptr) {
-                vkUnmapMemory(
-                    device_,
-                    hudVertexBufferMemories_[index]);
-            }
-            vkDestroyBuffer(device_, hudVertexBuffers_[index], nullptr);
-            vkFreeMemory(
-                device_,
-                hudVertexBufferMemories_[index],
-                nullptr);
+        for (auto& buffer : hudVertexBuffers_) {
+            gpuAllocator_.destroyBuffer(buffer);
         }
         if (shadowFramebuffer_ != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, shadowFramebuffer_, nullptr);
@@ -714,12 +706,7 @@ void AzureRenderApp::cleanup() {
         if (shadowImageView_ != VK_NULL_HANDLE) {
             vkDestroyImageView(device_, shadowImageView_, nullptr);
         }
-        if (shadowImage_ != VK_NULL_HANDLE) {
-            vkDestroyImage(device_, shadowImage_, nullptr);
-        }
-        if (shadowImageMemory_ != VK_NULL_HANDLE) {
-            vkFreeMemory(device_, shadowImageMemory_, nullptr);
-        }
+        gpuAllocator_.destroyImage(shadowImage_);
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }

@@ -41,18 +41,15 @@ void AzureRenderApp::createEditorViewportResources() {
         return;
     }
     editorViewportImages_.resize(swapchainImages_.size());
-    editorViewportImageMemories_.resize(swapchainImages_.size());
     editorViewportImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
-        createImage(
+        editorViewportImages_[index] = gpuAllocator_.createImage2D(
             renderExtent_.width,
             renderExtent_.height,
             swapchainFormat_,
-            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-            editorViewportImages_[index],
-            editorViewportImageMemories_[index]);
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
         editorViewportImageViews_[index] = createImageView(
-            editorViewportImages_[index],
+            editorViewportImages_[index].image,
             swapchainFormat_,
             VK_IMAGE_ASPECT_COLOR_BIT);
     }
@@ -75,19 +72,16 @@ void AzureRenderApp::createEditorViewportResources() {
 
 void AzureRenderApp::createSceneColorResources() {
     sceneColorImages_.resize(swapchainImages_.size());
-    sceneColorImageMemories_.resize(swapchainImages_.size());
     sceneColorImageViews_.resize(swapchainImages_.size());
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
-        createImage(
+        sceneColorImages_[index] = gpuAllocator_.createImage2D(
             renderExtent_.width,
             renderExtent_.height,
             kHdrSceneColorFormat,
-            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-            sceneColorImages_[index],
-            sceneColorImageMemories_[index]);
+            VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
         sceneColorImageViews_[index] = createImageView(
-            sceneColorImages_[index],
+            sceneColorImages_[index].image,
             kHdrSceneColorFormat,
             VK_IMAGE_ASPECT_COLOR_BIT);
     }
@@ -96,38 +90,32 @@ void AzureRenderApp::createSceneColorResources() {
 void AzureRenderApp::createDepthResources() {
     depthFormat_ = findDepthFormat();
     depthImages_.resize(swapchainImages_.size());
-    depthImageMemories_.resize(swapchainImages_.size());
     depthImageViews_.resize(swapchainImages_.size());
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
-        createImage(
+        depthImages_[index] = gpuAllocator_.createImage2D(
             renderExtent_.width,
             renderExtent_.height,
             depthFormat_,
             VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
-                | VK_IMAGE_USAGE_SAMPLED_BIT,
-            depthImages_[index],
-            depthImageMemories_[index]);
+                | VK_IMAGE_USAGE_SAMPLED_BIT);
         depthImageViews_[index] = createImageView(
-            depthImages_[index], depthFormat_, VK_IMAGE_ASPECT_DEPTH_BIT);
+            depthImages_[index].image, depthFormat_, VK_IMAGE_ASPECT_DEPTH_BIT);
     }
 }
 
 void AzureRenderApp::createNormalResources() {
     normalImages_.resize(swapchainImages_.size());
-    normalImageMemories_.resize(swapchainImages_.size());
     normalImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
-        createImage(
+        normalImages_[index] = gpuAllocator_.createImage2D(
             renderExtent_.width,
             renderExtent_.height,
             normalFormat_,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
-                | VK_IMAGE_USAGE_SAMPLED_BIT,
-            normalImages_[index],
-            normalImageMemories_[index]);
+                | VK_IMAGE_USAGE_SAMPLED_BIT);
         normalImageViews_[index] = createImageView(
-            normalImages_[index],
+            normalImages_[index].image,
             normalFormat_,
             VK_IMAGE_ASPECT_COLOR_BIT);
     }
@@ -135,16 +123,14 @@ void AzureRenderApp::createNormalResources() {
 
 void AzureRenderApp::createShadowResources() {
     shadowFormat_ = findDepthFormat();
-    createImage(
+    shadowImage_ = gpuAllocator_.createImage2D(
         kShadowMapSize,
         kShadowMapSize,
         shadowFormat_,
         VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
-            | VK_IMAGE_USAGE_SAMPLED_BIT,
-        shadowImage_,
-        shadowImageMemory_);
+            | VK_IMAGE_USAGE_SAMPLED_BIT);
     shadowImageView_ = createImageView(
-        shadowImage_,
+        shadowImage_.image,
         shadowFormat_,
         VK_IMAGE_ASPECT_DEPTH_BIT);
 
@@ -241,24 +227,10 @@ void AzureRenderApp::createHudBuffers() {
     const VkDeviceSize size =
         sizeof(HudVertex) * kMaxHudVertices;
     hudVertexBuffers_.resize(kMaxFramesInFlight);
-    hudVertexBufferMemories_.resize(kMaxFramesInFlight);
-    hudVertexBufferMapped_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        createBuffer(
+        hudVertexBuffers_[index] = gpuAllocator_.createBuffer(
             size,
             VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            hudVertexBuffers_[index],
-            hudVertexBufferMemories_[index]);
-        vkCheck(
-            vkMapMemory(
-                device_,
-                hudVertexBufferMemories_[index],
-                0,
-                size,
-                0,
-                &hudVertexBufferMapped_[index]),
-            "vkMapMemory(HUD)");
+            true);
     }
 }

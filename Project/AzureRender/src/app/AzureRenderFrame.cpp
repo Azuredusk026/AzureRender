@@ -75,20 +75,16 @@ void AzureRenderApp::drawFrame() {
     const bool captureThisFrame =
         screenshotRequested_ || captureSequenceFrame;
     screenshotRequested_ = false;
-    VkBuffer screenshotBuffer = VK_NULL_HANDLE;
-    VkDeviceMemory screenshotMemory = VK_NULL_HANDLE;
+    azurerender::rhi::GpuBuffer screenshotBuffer;
     if (captureThisFrame) {
         const VkDeviceSize screenshotSize =
             static_cast<VkDeviceSize>(swapchainExtent_.width)
             * swapchainExtent_.height
             * 4;
-        createBuffer(
+        screenshotBuffer = gpuAllocator_.createBuffer(
             screenshotSize,
             VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
-                | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            screenshotBuffer,
-            screenshotMemory);
+            true);
     }
 
     if (runOptions_.technicalSequence) {
@@ -137,7 +133,7 @@ void AzureRenderApp::drawFrame() {
     recordCommandBuffer(
         commandBuffers_[currentFrame_],
         imageIndex,
-        screenshotBuffer);
+        screenshotBuffer.buffer);
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
     const VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
@@ -184,7 +180,7 @@ void AzureRenderApp::drawFrame() {
                     / (pendingScreenshotLabel_ + ".png")).string();
             }
             saveScreenshot(
-                screenshotMemory,
+                screenshotBuffer.mapped,
                 swapchainExtent_.width,
                 swapchainExtent_.height,
                 outputPath);
@@ -202,12 +198,10 @@ void AzureRenderApp::drawFrame() {
             }
             pendingScreenshotLabel_.clear();
         } catch (...) {
-            vkDestroyBuffer(device_, screenshotBuffer, nullptr);
-            vkFreeMemory(device_, screenshotMemory, nullptr);
+            gpuAllocator_.destroyBuffer(screenshotBuffer);
             throw;
         }
-        vkDestroyBuffer(device_, screenshotBuffer, nullptr);
-        vkFreeMemory(device_, screenshotMemory, nullptr);
+        gpuAllocator_.destroyBuffer(screenshotBuffer);
     }
 
     VkPresentInfoKHR presentInfo{VK_STRUCTURE_TYPE_PRESENT_INFO_KHR};
@@ -422,7 +416,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
     };
     static_assert(sizeof(EasyFontVertex) == 16);
     auto* destination =
-        static_cast<HudVertex*>(hudVertexBufferMapped_[frameIndex]);
+        static_cast<HudVertex*>(hudVertexBuffers_[frameIndex].mapped);
     std::uint32_t vertexCount = 0;
     const float width = static_cast<float>(swapchainExtent_.width);
     const float height = static_cast<float>(swapchainExtent_.height);
@@ -870,7 +864,7 @@ void AzureRenderApp::recordCommandBuffer(
             commandBuffer,
             0,
             1,
-            &hudVertexBuffers_[currentFrame_],
+            &hudVertexBuffers_[currentFrame_].buffer,
             &hudOffset);
         vkCmdDraw(
             commandBuffer,

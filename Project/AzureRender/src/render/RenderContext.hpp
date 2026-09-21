@@ -15,6 +15,10 @@ struct LoadedAsset;
 
 namespace azurerender {
 
+namespace rhi {
+class GpuAllocator;
+}
+
 struct RenderSettings;
 
 // Opt-in per-frame submission counters. The engine owns the storage and passes
@@ -110,6 +114,10 @@ struct RenderContext {
     VkQueue graphicsQueue = VK_NULL_HANDLE;
     std::uint32_t graphicsQueueFamily = 0;
     VkCommandPool commandPool = VK_NULL_HANDLE;
+
+    // Engine-owned GPU allocator. Scene renderers route every buffer and
+    // image allocation through it and never create a private allocator.
+    rhi::GpuAllocator* allocator = nullptr;
 
     std::uint32_t maxFramesInFlight = 2;
     std::uint32_t currentFrame = 0;
