@@ -118,6 +118,20 @@ E0 性能基线（RTX 2060、1280×720、150 帧）：
 
 把 Vulkan 调用收拢到单一后端层，同时替换显存与描述符模型。合并为一个阶段，因为分开做会导致 RHI 接口先按旧内存模型定型、随后再改一遍。
 
+### 落地结果
+
+结构替换已完成：
+
+| 产出 | 位置 |
+|---|---|
+| 分配器接口与 VMA 实现 | `src/rhi/IGpuAllocator.hpp`、`src/rhi/GpuAllocator.cpp` |
+| 上传环形缓冲 | `src/rhi/UploadRingBuffer.cpp`，纯数学部分 `src/rhi/RingFrameAllocator.hpp` |
+| RHI 窄接口 | `src/rhi/Rhi.hpp`（资源创建、一次性传输、命令录制） |
+| 生产后端 | `src/rhi/VulkanRhi.cpp` |
+| 记录后端 | `src/rhi/NullRhi.cpp`，宿主内存假分配器 |
+
+三个场景渲染器的 Vulkan 调用全部经 `RenderContext::allocator / rhi / commands` 三个通道，`VulkanHelpers` 已删除。角色场景在设备支持 descriptor indexing 时使用全局纹理数组，每帧 descriptor 绑定实测从 6.0 降至 2.0；`--disable-bindless` 回退逐材质固定表路径。NullRHI 下的 pass 录制单测覆盖两条路径的绑定差异。GPU 能力报告 schema 升至 v2，记录 descriptor indexing 特性。
+
 ### 改动面
 
 - `src/rhi/`（新增）：设备、队列、分配器、命令、描述符、管线抽象。

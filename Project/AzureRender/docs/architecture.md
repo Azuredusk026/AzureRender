@@ -415,6 +415,8 @@ capabilities
 
 `RenderContext::bindlessTextures` 为真时，Renderer 可以使用全局纹理数组代替逐材质 Descriptor Set。Character 在该模式下每帧只绑定一次全局 Set，通过 Push Constant 传递材质槽位起点。设备不支持 Descriptor Indexing 时回退到逐材质固定表，两条路径共用同一份 Shader 源码的条件编译变体。
 
+Renderer 的资源创建与命令录制都经过 `RenderContext::rhi` 与 `RenderContext::commands`。`rhi::IRhi` 覆盖 Descriptor、Pipeline、Sampler、ImageView、Render Pass 和一次性上传，`rhi::ICommandRecorder` 覆盖每帧录制。生产后端是 `rhi::VulkanRhi`，测试后端 `rhi::NullRhi` 在无 GPU 环境记录调用序列。Pass 录制逻辑由单元测试直接断言。
+
 内置 Catalog：
 
 | ID | 能力 |
