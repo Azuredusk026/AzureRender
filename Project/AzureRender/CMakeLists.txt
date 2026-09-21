@@ -408,6 +408,31 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.NullRhi
         COMMAND AzureRenderNullRhiTests)
+    add_executable(
+        AzureRenderNullRhiPassTests
+        tests/NullRhiPassTests.cpp
+        src/scenes/CharacterSceneRenderer.cpp
+        src/assets/GltfLoader.cpp
+        src/render/EnvironmentAsset.cpp
+        src/render/RenderSettings.cpp
+        src/diagnostics/RuntimeDiagnostics.cpp
+        src/rhi/NullRhi.cpp
+    )
+    target_include_directories(
+        AzureRenderNullRhiPassTests PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/src"
+            "${TINYGLTF_INCLUDE_DIR}"
+            "${STB_INCLUDE_DIR}")
+    target_link_libraries(
+        AzureRenderNullRhiPassTests PRIVATE
+            Vulkan::Vulkan
+            nlohmann_json::nlohmann_json)
+    target_compile_definitions(
+        AzureRenderNullRhiPassTests PRIVATE
+        AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+    add_test(
+        NAME AzureRender.NullRhiPass
+        COMMAND AzureRenderNullRhiPassTests)
 
     # GPU visual regression. This needs a working Vulkan device, so it is
     # registered only when Python and the tooling are present and it reports
