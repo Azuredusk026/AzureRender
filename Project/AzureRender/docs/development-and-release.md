@@ -34,7 +34,7 @@ Release：
 
 ### MSVC 头文件依赖追踪
 
-MSVC 构建通过 `tools/msvc_env.bat` 配置和编译。Ninja 用 cl 的 `/showIncludes` 输出追踪头文件依赖。CMake 记录的匹配前缀一旦与编译器实际输出失配，改动头文件就不会触发重建。配置阶段会自动验证这个匹配。出现前缀警告时，运行 `python tools/fix_msvc_deps_prefix.py <build 目录>` 再重新配置。
+MSVC 构建通过 `tools/msvc_env.bat` 配置和编译。Ninja 用 cl 的 `/showIncludes` 输出追踪头文件依赖，CMake 记录的匹配前缀一旦与编译器实际输出失配，改动头文件就不会触发重建。配置阶段会自动验证这个匹配。出现前缀警告时，运行 `python tools/fix_msvc_deps_prefix.py <build 目录>` 再重新配置。
 
 ## 代码边界
 

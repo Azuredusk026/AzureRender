@@ -411,7 +411,7 @@ capabilities
 
 可选 Hook 可以提供 HUD、Editor Picking、动画控制和 Capture Manifest 扩展。`RenderContext` 中的对象都属于宿主。Renderer 不能销毁其中的 Device、Queue、Command Pool、Render Pass、Framebuffer、Sampler 或 Query Pool。
 
-全部 GPU 显存由宿主持有的 `rhi::GpuAllocator` 统一分配。它基于 VMA，在逻辑设备创建后初始化，在设备销毁前关闭。Renderer 通过 `RenderContext::allocator` 借用，不创建私有分配器。Host Visible 分配保持持久映射并保证 Coherent，调用方不需要配对 `vkMapMemory` 与 `vkUnmapMemory`。每帧的 CPU 到 GPU 上传从 `rhi::UploadRingBuffer` 切分，按 In-Flight Frame 分段复用。
+全部 GPU 显存由宿主持有的 `rhi::GpuAllocator` 统一分配，基于 VMA，在逻辑设备创建后初始化、销毁前关闭。Renderer 通过 `RenderContext::allocator` 借用，不创建私有分配器。Host Visible 分配保持持久映射并保证 Coherent，调用方不需要配对 `vkMapMemory` 与 `vkUnmapMemory`。每帧的 CPU 到 GPU 上传从 `rhi::UploadRingBuffer` 切分，按 In-Flight Frame 分段复用。
 
 内置 Catalog：
 

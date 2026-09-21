@@ -1,7 +1,7 @@
 # AzureRender 引擎化实施计划
 
 > 计划版本：2026-09-20
-> 覆盖范围：`DEVELOPMENT_ROADMAP_CN.md` 中 E0-E7 的具体实施步骤
+> 覆盖范围：`engine-roadmap.md` 中 E0-E7 的具体实施步骤
 
 本文把路线中的引擎化阶段展开为可执行步骤。路线定义优先级与准入条件，本文定义改哪些文件、按什么顺序改、每步如何验证。阶段状态以路线为准。
 
@@ -38,7 +38,7 @@
 - 每步完成后运行 Debug 与 Release 的 `ctest`，两者必须全绿。
 - 每阶段结束运行 `tools/run_release_gate.cmake`，Debug 开启 Validation。
 - 每阶段结束三个场景各运行 120 帧 smoke，退出码必须为 0。
-- 公共接口变更必须更新 `ARCHITECTURE_CN.md`；阶段状态变更必须同步 `tools/check_docs.sh`。
+- 公共接口变更必须更新 `docs/architecture.md`；阶段状态变更必须同步 `tools/check_docs.sh`。
 - 结构替换阶段以「旧路径与新路径并存、逐场景迁移、删除旧路径」三步推进，禁止长期保留双实现。
 - 每个阶段结束必须有性能数据，格式见 E0 第 5 步。
 
@@ -101,7 +101,7 @@ E0 性能基线（RTX 2060、1280×720、150 帧）：
 ### 实施步骤
 
 1. **修复长捕获停滞并统一 readback 路径。** 当前每个捕获帧在 `drawFrame()` 内新建 host-visible buffer、等 fence、立即销毁（`AzureRenderFrame.cpp` 第 80-92 行与第 205-210 行）。1920×1080×4 约 8.3 MB/帧。先加 `VkResult` 与分配失败诊断确认失败点，再改为按 in-flight frame 复用常驻 staging buffer，尺寸变化时重建。这一步同时是 E1 ring buffer 的前置。
-2. **建立五视图公共基线。** 全部基于 `assets_public/test_model.gltf`，固定相机与光照，单帧捕获。命名遵循 `ASSET_AND_VISUAL_QA_CN.md`。同时写 evidence JSON 记录设备、驱动、Vulkan 版本、CLI 参数与 SHA-256。
+2. **建立五视图公共基线。** 全部基于 `assets_public/test_model.gltf`，固定相机与光照，单帧捕获。命名遵循 `docs/assets-and-editor.md` 的视觉检查约定。同时写 evidence JSON 记录设备、驱动、Vulkan 版本、CLI 参数与 SHA-256。
 3. **建立性能基准工具。** 新增 `tools/run_performance_baseline.py`：固定场景、分辨率、帧数，输出 CPU 帧时间与 GPU pass 时间的 p50/p95/max、draw call 数、descriptor 绑定次数、分配次数与显存占用。计数类指标需在代码中加轻量计数器，它们是后续阶段的主要判据。
 4. **单入口与分层容差。** 新增 `tools/run_visual_regression.py` 执行捕获、比较、汇总。严格档用于本机同设备，宽松档用于 CI 的 lavapipe。阈值写入配置文件而非脚本常量。CI 只跑 `beauty` 与 `albedo`。
 5. **固定性能报告格式。** 每阶段结束产出同格式 JSON，字段为设备、分辨率、场景、帧数、上述全部指标。跨阶段可直接对比。这是"性能优先"的落地方式：没有数据的性能主张不予接受。
