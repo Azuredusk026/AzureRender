@@ -414,6 +414,25 @@ if(BUILD_TESTING)
                 TIMEOUT 900
                 LABELS "gpu"
                 RUN_SERIAL TRUE)
+        # The fixed per-material descriptor path must stay pixel-identical;
+        # it is the fallback on devices without descriptor indexing.
+        add_test(
+            NAME AzureRender.VisualRegressionLegacyDescriptors
+            COMMAND
+                "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --tolerance strict
+                "--renderer-arg=--disable-bindless"
+                --summary
+                    "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-summary.json")
+        set_tests_properties(
+            AzureRender.VisualRegressionLegacyDescriptors
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 900
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
     endif()
     add_test(
         NAME AzureRender.ReleaseGateMissingBuild

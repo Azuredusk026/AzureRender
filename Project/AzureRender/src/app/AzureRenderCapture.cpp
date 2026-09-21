@@ -617,6 +617,20 @@ void AzureRenderApp::printGpuTimingSummary() const {
                     / static_cast<double>(submissionCounters_.frames)
                 : 0.0) << "\n"
         << "  },\n"
+        << "  \"allocator\": {\n"
+        << "    \"bufferAllocations\": "
+        << gpuAllocator_.statistics().bufferAllocations << ",\n"
+        << "    \"imageAllocations\": "
+        << gpuAllocator_.statistics().imageAllocations << ",\n"
+        << "    \"liveBuffers\": "
+        << gpuAllocator_.statistics().liveBuffers << ",\n"
+        << "    \"liveImages\": "
+        << gpuAllocator_.statistics().liveImages << ",\n"
+        << "    \"bufferBytes\": "
+        << gpuAllocator_.statistics().bufferBytes << ",\n"
+        << "    \"imageBytes\": "
+        << gpuAllocator_.statistics().imageBytes << "\n"
+        << "  },\n"
         << "  \"renderPath\": " << std::quoted(
                renderPathName()) << "\n"
         << "}\n";
