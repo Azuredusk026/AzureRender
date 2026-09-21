@@ -1,5 +1,7 @@
 #include "SampleSceneRenderer.hpp"
 
+#include "rhi/Rhi.hpp"
+
 #include <array>
 #include <stdexcept>
 
@@ -35,7 +37,7 @@ void SampleSceneRenderer::updateFrame(const SceneFrameData&) {
 }
 
 void SampleSceneRenderer::recordScene(const RenderContext& context) {
-    if (!loaded_ || context.commandBuffer == VK_NULL_HANDLE
+    if (!loaded_ || context.commands == nullptr
         || context.sceneFramebuffer == VK_NULL_HANDLE) {
         throw std::logic_error("Sample renderer record outside valid frame");
     }
@@ -43,31 +45,27 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
         && context.shadowFramebuffer != VK_NULL_HANDLE) {
         VkClearValue shadowClear{};
         shadowClear.depthStencil = {1.0F, 0};
-        VkRenderPassBeginInfo shadowPass{
-            VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+        rhi::RenderPassBeginDesc shadowPass{};
         shadowPass.renderPass = context.shadowRenderPass;
         shadowPass.framebuffer = context.shadowFramebuffer;
-        shadowPass.renderArea.extent = {
-            context.shadowMapSize, context.shadowMapSize};
-        shadowPass.clearValueCount = 1;
-        shadowPass.pClearValues = &shadowClear;
-        vkCmdBeginRenderPass(
-            context.commandBuffer, &shadowPass, VK_SUBPASS_CONTENTS_INLINE);
-        vkCmdEndRenderPass(context.commandBuffer);
+        shadowPass.extent = {context.shadowMapSize, context.shadowMapSize};
+        shadowPass.clearValues = {shadowClear};
+        context.commands->beginRenderPass(shadowPass);
+        context.commands->endRenderPass();
     }
-    std::array<VkClearValue, 3> clears{};
-    clears[0].color = {{0.025F, 0.045F, 0.065F, 1.0F}};
-    clears[1].depthStencil = {1.0F, 0};
-    clears[2].color = {{0.5F, 0.5F, 1.0F, 0.0F}};
-    VkRenderPassBeginInfo pass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+    rhi::RenderPassBeginDesc pass{};
     pass.renderPass = context.sceneRenderPass;
     pass.framebuffer = context.sceneFramebuffer;
-    pass.renderArea.extent = context.renderExtent;
-    pass.clearValueCount = static_cast<std::uint32_t>(clears.size());
-    pass.pClearValues = clears.data();
-    vkCmdBeginRenderPass(
-        context.commandBuffer, &pass, VK_SUBPASS_CONTENTS_INLINE);
-    vkCmdEndRenderPass(context.commandBuffer);
+    pass.extent = context.renderExtent;
+    VkClearValue clearColor{};
+    clearColor.color = {{0.025F, 0.045F, 0.065F, 1.0F}};
+    VkClearValue clearDepth{};
+    clearDepth.depthStencil = {1.0F, 0};
+    VkClearValue clearNormal{};
+    clearNormal.color = {{0.5F, 0.5F, 1.0F, 0.0F}};
+    pass.clearValues = {clearColor, clearDepth, clearNormal};
+    context.commands->beginRenderPass(pass);
+    context.commands->endRenderPass();
 }
 
 void SampleSceneRenderer::onUnload(const RenderContext&) {

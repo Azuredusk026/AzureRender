@@ -1,9 +1,9 @@
 #include "scenes/BlackholeSceneRenderer.hpp"
 
 #include "app/AzureRenderInternal.hpp"
+#include "platform/BinaryFile.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
-#include "render/VulkanHelpers.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
 #include <algorithm>
@@ -32,65 +32,37 @@ SceneRendererCapabilities BlackholeSceneRenderer::capabilities() const {
 }
 
 void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
-    device_ = context.device;
-    graphicsQueue_ = context.graphicsQueue;
-    commandPool_ = context.commandPool;
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
         throw std::runtime_error(
             "RenderContext must carry the engine GPU allocator");
     }
+    rhi_ = context.rhi;
+    if (rhi_ == nullptr) {
+        throw std::runtime_error("RenderContext must carry the engine RHI");
+    }
     shaderDirectory_ = context.shaderDirectory;
     environmentSource_ = context.environment;
     renderSettings_ = context.renderSettings;
 
-    VkDescriptorSetLayoutBinding uniformBinding{};
-    uniformBinding.binding = 0;
-    uniformBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    uniformBinding.descriptorCount = 1;
-    uniformBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-    VkDescriptorSetLayoutBinding environmentBinding{};
-    environmentBinding.binding = 1;
-    environmentBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    environmentBinding.descriptorCount = 1;
-    environmentBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-    const std::array traceBindings{uniformBinding, environmentBinding};
-    VkDescriptorSetLayoutCreateInfo layoutInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-    layoutInfo.bindingCount = static_cast<std::uint32_t>(traceBindings.size());
-    layoutInfo.pBindings = traceBindings.data();
-    vkCheck(
-        vkCreateDescriptorSetLayout(
-            device_, &layoutInfo, nullptr, &descriptorSetLayout_),
-        "vkCreateDescriptorSetLayout(blackhole)");
-
-    const std::array<VkDescriptorPoolSize, 2> tracePoolSizes{{
+    constexpr VkShaderStageFlags kFragment = VK_SHADER_STAGE_FRAGMENT_BIT;
+    descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        {0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1, kFragment},
+        {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+    });
+    rhi::DescriptorPoolDesc tracePool{};
+    tracePool.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
          static_cast<std::uint32_t>(kMaxFramesInFlight)},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
          static_cast<std::uint32_t>(kMaxFramesInFlight)},
-    }};
-    VkDescriptorPoolCreateInfo poolInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-    poolInfo.poolSizeCount = static_cast<std::uint32_t>(tracePoolSizes.size());
-    poolInfo.pPoolSizes = tracePoolSizes.data();
-    poolInfo.maxSets = static_cast<std::uint32_t>(kMaxFramesInFlight);
-    vkCheck(
-        vkCreateDescriptorPool(device_, &poolInfo, nullptr, &descriptorPool_),
-        "vkCreateDescriptorPool(blackhole)");
-
-    const std::vector<VkDescriptorSetLayout> layouts(
-        kMaxFramesInFlight, descriptorSetLayout_);
-    VkDescriptorSetAllocateInfo allocateInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
-    allocateInfo.descriptorPool = descriptorPool_;
-    allocateInfo.descriptorSetCount =
-        static_cast<std::uint32_t>(layouts.size());
-    allocateInfo.pSetLayouts = layouts.data();
-    descriptorSets_.resize(kMaxFramesInFlight);
-    vkCheck(
-        vkAllocateDescriptorSets(device_, &allocateInfo, descriptorSets_.data()),
-        "vkAllocateDescriptorSets(blackhole)");
+    };
+    tracePool.maxSets = static_cast<std::uint32_t>(kMaxFramesInFlight);
+    descriptorPool_ = rhi_->createDescriptorPool(tracePool);
+    descriptorSets_ = rhi_->allocateDescriptorSets(
+        descriptorPool_,
+        descriptorSetLayout_,
+        static_cast<std::uint32_t>(kMaxFramesInFlight));
 
     createUniformBuffers();
     createEnvironmentTexture();
@@ -99,88 +71,43 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
     // TAA descriptors are immutable for every frame/ping combination. This
     // avoids updating descriptors that may still be referenced in flight.
     {
-        const std::array<VkDescriptorSetLayoutBinding, 3> taaBindings = {{
-            {0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1, VK_SHADER_STAGE_FRAGMENT_BIT, nullptr},
-            {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT, nullptr},
-            {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT, nullptr},
-        }};
-        VkDescriptorSetLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-        layoutInfo.bindingCount = static_cast<std::uint32_t>(taaBindings.size());
-        layoutInfo.pBindings = taaBindings.data();
-        vkCheck(
-            vkCreateDescriptorSetLayout(
-                device_, &layoutInfo, nullptr, &taaDescriptorSetLayout_),
-            "vkCreateDescriptorSetLayout(blackhole TAA)");
+        taaDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+            {0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1, kFragment},
+            {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+            {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        });
 
-        const std::array<VkDescriptorPoolSize, 2> poolSizes = {{
+        rhi::DescriptorPoolDesc taaPool{};
+        taaPool.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
              static_cast<std::uint32_t>(taaDescriptorSets_.size())},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              static_cast<std::uint32_t>(taaDescriptorSets_.size() * 2)},
-        }};
-        VkDescriptorPoolCreateInfo poolInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-        poolInfo.poolSizeCount = static_cast<std::uint32_t>(poolSizes.size());
-        poolInfo.pPoolSizes = poolSizes.data();
-        poolInfo.maxSets =
+        };
+        taaPool.maxSets =
             static_cast<std::uint32_t>(taaDescriptorSets_.size());
-        vkCheck(
-            vkCreateDescriptorPool(device_, &poolInfo, nullptr, &taaDescriptorPool_),
-            "vkCreateDescriptorPool(blackhole TAA)");
-        const std::array<VkDescriptorSetLayout, kMaxFramesInFlight * 2>
-            taaLayouts{taaDescriptorSetLayout_, taaDescriptorSetLayout_,
-                       taaDescriptorSetLayout_, taaDescriptorSetLayout_};
-        VkDescriptorSetAllocateInfo allocateInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
-        allocateInfo.descriptorPool = taaDescriptorPool_;
-        allocateInfo.descriptorSetCount =
-            static_cast<std::uint32_t>(taaLayouts.size());
-        allocateInfo.pSetLayouts = taaLayouts.data();
-        vkCheck(
-            vkAllocateDescriptorSets(
-                device_, &allocateInfo, taaDescriptorSets_.data()),
-            "vkAllocateDescriptorSets(blackhole TAA)");
+        taaDescriptorPool_ = rhi_->createDescriptorPool(taaPool);
+        const auto allocated = rhi_->allocateDescriptorSets(
+            taaDescriptorPool_,
+            taaDescriptorSetLayout_,
+            static_cast<std::uint32_t>(taaDescriptorSets_.size()));
+        std::copy(allocated.begin(), allocated.end(), taaDescriptorSets_.begin());
     }
 
     {
-        VkDescriptorSetLayoutBinding binding{};
-        binding.binding = 0;
-        binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        binding.descriptorCount = 1;
-        binding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-        VkDescriptorSetLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-        layoutInfo.bindingCount = 1;
-        layoutInfo.pBindings = &binding;
-        vkCheck(
-            vkCreateDescriptorSetLayout(
-                device_, &layoutInfo, nullptr, &compositeDescriptorSetLayout_),
-            "vkCreateDescriptorSetLayout(blackhole composite)");
+        compositeDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+            {0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        });
 
-        VkDescriptorPoolSize poolSize{};
-        poolSize.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        poolSize.descriptorCount = 2;
-        VkDescriptorPoolCreateInfo poolInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-        poolInfo.poolSizeCount = 1;
-        poolInfo.pPoolSizes = &poolSize;
-        poolInfo.maxSets = 2;
-        vkCheck(
-            vkCreateDescriptorPool(
-                device_, &poolInfo, nullptr, &compositeDescriptorPool_),
-            "vkCreateDescriptorPool(blackhole composite)");
-        const std::array<VkDescriptorSetLayout, 2> layouts{
-            compositeDescriptorSetLayout_, compositeDescriptorSetLayout_};
-        VkDescriptorSetAllocateInfo allocateInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
-        allocateInfo.descriptorPool = compositeDescriptorPool_;
-        allocateInfo.descriptorSetCount = 2;
-        allocateInfo.pSetLayouts = layouts.data();
-        vkCheck(
-            vkAllocateDescriptorSets(
-                device_, &allocateInfo, compositeDescriptorSets_.data()),
-            "vkAllocateDescriptorSets(blackhole composite)");
+        rhi::DescriptorPoolDesc compositePool{};
+        compositePool.sizes = {{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 2}};
+        compositePool.maxSets = 2;
+        compositeDescriptorPool_ = rhi_->createDescriptorPool(compositePool);
+        const auto allocated = rhi_->allocateDescriptorSets(
+            compositeDescriptorPool_, compositeDescriptorSetLayout_, 2);
+        std::copy(
+            allocated.begin(), allocated.end(),
+            compositeDescriptorSets_.begin());
     }
 
     // TAA per-frame uniform buffers.
@@ -200,137 +127,70 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
 
     // Bind one per-frame uniform buffer per per-frame descriptor set.
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
-        VkDescriptorBufferInfo bufferInfo{};
-        bufferInfo.buffer = uniformBuffers_[frame].buffer;
-        bufferInfo.range = sizeof(BlackholeUniform);
-        VkDescriptorImageInfo environmentInfo{};
-        environmentInfo.sampler = environment_.sampler;
-        environmentInfo.imageView = environment_.view;
-        environmentInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-        std::array<VkWriteDescriptorSet, 2> writes{};
-        writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-        writes[0].dstSet = descriptorSets_[frame];
-        writes[0].dstBinding = 0;
-        writes[0].descriptorCount = 1;
-        writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        writes[0].pBufferInfo = &bufferInfo;
-        writes[1] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-        writes[1].dstSet = descriptorSets_[frame];
-        writes[1].dstBinding = 1;
-        writes[1].descriptorCount = 1;
-        writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        writes[1].pImageInfo = &environmentInfo;
-        vkUpdateDescriptorSets(
-            device_, static_cast<std::uint32_t>(writes.size()),
-            writes.data(), 0, nullptr);
+        rhi::DescriptorBufferWrite uniformWrite{};
+        uniformWrite.set = descriptorSets_[frame];
+        uniformWrite.binding = 0;
+        uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        uniformWrite.buffer = uniformBuffers_[frame].buffer;
+        uniformWrite.range = sizeof(BlackholeUniform);
+        rhi_->writeDescriptorBuffer(uniformWrite);
+
+        rhi::DescriptorImageWrite environmentWrite{};
+        environmentWrite.set = descriptorSets_[frame];
+        environmentWrite.binding = 1;
+        environmentWrite.view = environment_.view;
+        environmentWrite.sampler = environment_.sampler;
+        environmentWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        rhi_->writeDescriptorImage(environmentWrite);
     }
     updateTemporalDescriptorSets();
     invalidateHistory();
 }
 
 void BlackholeSceneRenderer::transitionInitialLayouts() {
-    VkCommandBufferAllocateInfo allocInfo{
-        VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
-    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    allocInfo.commandPool = commandPool_;
-    allocInfo.commandBufferCount = 1;
-    VkCommandBuffer cmd = VK_NULL_HANDLE;
-    vkCheck(
-        vkAllocateCommandBuffers(device_, &allocInfo, &cmd),
-        "vkAllocateCommandBuffers(transition)");
-    VkCommandBufferBeginInfo beginInfo{
-        VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
-    beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-    vkCheck(
-        vkBeginCommandBuffer(cmd, &beginInfo), "vkBeginCommandBuffer(transition)");
-    const std::array<VkImage, 3> images{
-        traceImage_.image, historyImages_[0].image, historyImages_[1].image};
-    VkImageMemoryBarrier barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-    barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-    barrier.subresourceRange.levelCount = 1;
-    barrier.subresourceRange.layerCount = 1;
-    barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-    barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-    for (const VkImage image : images) {
-        barrier.image = image;
-        vkCmdPipelineBarrier(
-            cmd,
-            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-            VK_PIPELINE_STAGE_TRANSFER_BIT,
-            0,
-            0,
-            nullptr,
-            0,
-            nullptr,
-            1,
-            &barrier);
-        const VkClearColorValue clear{{0.0F, 0.0F, 0.0F, 1.0F}};
-        vkCmdClearColorImage(
-            cmd,
-            image,
+    for (const rhi::GpuImage* image : {
+             &traceImage_,
+             &historyImages_[0],
+             &historyImages_[1]}) {
+        rhi_->transitionImageLayout(
+            *image,
+            VK_IMAGE_LAYOUT_UNDEFINED,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-            &clear,
-            1,
-            &barrier.subresourceRange);
-        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-        barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-        barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-        vkCmdPipelineBarrier(
-            cmd,
-            VK_PIPELINE_STAGE_TRANSFER_BIT,
-            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-            0,
-            0,
-            nullptr,
-            0,
-            nullptr,
-            1,
-            &barrier);
-        barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-        barrier.srcAccessMask = 0;
-        barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+            1);
+        rhi_->clearImage(*image);
+        rhi_->transitionImageLayout(
+            *image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            1);
     }
-    vkCheck(vkEndCommandBuffer(cmd), "vkEndCommandBuffer(transition)");
-    VkSubmitInfo submit{VK_STRUCTURE_TYPE_SUBMIT_INFO};
-    submit.commandBufferCount = 1;
-    submit.pCommandBuffers = &cmd;
-    vkCheck(
-        vkQueueSubmit(graphicsQueue_, 1, &submit, VK_NULL_HANDLE),
-        "vkQueueSubmit(transition)");
-    vkCheck(vkQueueWaitIdle(graphicsQueue_), "vkQueueWaitIdle(transition)");
-    vkFreeCommandBuffers(device_, commandPool_, 1, &cmd);
 }
 
 void BlackholeSceneRenderer::onSwapchainRecreate(
     const RenderContext& context) {
     renderSettings_ = context.renderSettings;
     if (pipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, pipeline_, nullptr);
+        rhi_->destroyPipeline(pipeline_);
         pipeline_ = VK_NULL_HANDLE;
     }
     if (pipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, pipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
     if (taaPipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, taaPipeline_, nullptr);
+        rhi_->destroyPipeline(taaPipeline_);
         taaPipeline_ = VK_NULL_HANDLE;
     }
     if (taaPipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, taaPipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(taaPipelineLayout_);
         taaPipelineLayout_ = VK_NULL_HANDLE;
     }
     if (compositePipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, compositePipeline_, nullptr);
+        rhi_->destroyPipeline(compositePipeline_);
         compositePipeline_ = VK_NULL_HANDLE;
     }
     if (compositePipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, compositePipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(compositePipelineLayout_);
         compositePipelineLayout_ = VK_NULL_HANDLE;
     }
     destroySizeDependentResources();
@@ -428,96 +288,62 @@ void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
         && context.shadowFramebuffer != VK_NULL_HANDLE) {
         VkClearValue shadowClear{};
         shadowClear.depthStencil = {1.0F, 0};
-        VkRenderPassBeginInfo shadowPassInfo{
-            VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-        shadowPassInfo.renderPass = context.shadowRenderPass;
-        shadowPassInfo.framebuffer = context.shadowFramebuffer;
-        shadowPassInfo.renderArea.extent = {
-            context.shadowMapSize,
-            context.shadowMapSize,
-        };
-        shadowPassInfo.clearValueCount = 1;
-        shadowPassInfo.pClearValues = &shadowClear;
-        vkCmdBeginRenderPass(
-            context.commandBuffer,
-            &shadowPassInfo,
-            VK_SUBPASS_CONTENTS_INLINE);
-        vkCmdEndRenderPass(context.commandBuffer);
+        rhi::RenderPassBeginDesc shadowPass{};
+        shadowPass.renderPass = context.shadowRenderPass;
+        shadowPass.framebuffer = context.shadowFramebuffer;
+        shadowPass.extent = {context.shadowMapSize, context.shadowMapSize};
+        shadowPass.clearValues = {shadowClear};
+        context.commands->beginRenderPass(shadowPass);
+        context.commands->endRenderPass();
     }
 
     if (context.gpuTimingEnabled && context.timestampQueryPool != VK_NULL_HANDLE) {
-        vkCmdWriteTimestamp(
-            context.commandBuffer,
-            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+        context.commands->writeTimestamp(
             context.timestampQueryPool,
-            1);
+            1,
+            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT);
     }
 
-    VkViewport viewport{};
-    viewport.width = static_cast<float>(context.renderExtent.width);
-    viewport.height = static_cast<float>(context.renderExtent.height);
-    viewport.maxDepth = 1.0F;
-    VkRect2D scissor{};
-    scissor.extent = context.renderExtent;
+    rhi::ICommandRecorder& commands = *context.commands;
 
     // 1. Trace the current jittered sample into a private raw HDR image.
     VkClearValue traceClear{};
     traceClear.color.float32[3] = 1.0F;
-    VkRenderPassBeginInfo tracePassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    tracePassInfo.renderPass = traceRenderPass_;
-    tracePassInfo.framebuffer = traceFramebuffer_;
-    tracePassInfo.renderArea.extent = context.renderExtent;
-    tracePassInfo.clearValueCount = 1;
-    tracePassInfo.pClearValues = &traceClear;
-    vkCmdBeginRenderPass(
-        context.commandBuffer, &tracePassInfo, VK_SUBPASS_CONTENTS_INLINE);
-    vkCmdSetViewport(context.commandBuffer, 0, 1, &viewport);
-    vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
-    vkCmdBindPipeline(
-        context.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_);
+    rhi::RenderPassBeginDesc tracePass{};
+    tracePass.renderPass = traceRenderPass_;
+    tracePass.framebuffer = traceFramebuffer_;
+    tracePass.extent = context.renderExtent;
+    tracePass.clearValues = {traceClear};
+    commands.beginRenderPass(tracePass);
+    commands.setViewport(
+        static_cast<float>(context.renderExtent.width),
+        static_cast<float>(context.renderExtent.height));
+    commands.setScissor(context.renderExtent);
+    commands.bindPipeline(pipeline_);
     const VkDescriptorSet traceSet =
         descriptorSets_[context.currentFrame % kMaxFramesInFlight];
-    vkCmdBindDescriptorSets(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        pipelineLayout_,
-        0,
-        1,
-        &traceSet,
-        0,
-        nullptr);
-    vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
-    vkCmdEndRenderPass(context.commandBuffer);
+    commands.bindDescriptorSet(pipelineLayout_, traceSet);
+    commands.draw(3);
+    commands.endRenderPass();
 
     // 2. Accumulate raw trace + previous history and apply compact HDR bloom.
-    VkRenderPassBeginInfo historyPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    historyPassInfo.renderPass = traceRenderPass_;
-    historyPassInfo.framebuffer = historyFramebuffers_[historyWriteIndex_];
-    historyPassInfo.renderArea.extent = context.renderExtent;
-    historyPassInfo.clearValueCount = 1;
-    historyPassInfo.pClearValues = &traceClear;
-    vkCmdBeginRenderPass(
-        context.commandBuffer, &historyPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-    vkCmdSetViewport(context.commandBuffer, 0, 1, &viewport);
-    vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
-    vkCmdBindPipeline(
-        context.commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, taaPipeline_);
+    rhi::RenderPassBeginDesc historyPass{};
+    historyPass.renderPass = traceRenderPass_;
+    historyPass.framebuffer = historyFramebuffers_[historyWriteIndex_];
+    historyPass.extent = context.renderExtent;
+    historyPass.clearValues = {traceClear};
+    commands.beginRenderPass(historyPass);
+    commands.setViewport(
+        static_cast<float>(context.renderExtent.width),
+        static_cast<float>(context.renderExtent.height));
+    commands.setScissor(context.renderExtent);
+    commands.bindPipeline(taaPipeline_);
     const std::size_t taaSetIndex =
         (context.currentFrame % kMaxFramesInFlight) * 2 + historyWriteIndex_;
     const VkDescriptorSet taaSet = taaDescriptorSets_[taaSetIndex];
-    vkCmdBindDescriptorSets(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        taaPipelineLayout_,
-        0,
-        1,
-        &taaSet,
-        0,
-        nullptr);
-    vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
-    vkCmdEndRenderPass(context.commandBuffer);
+    commands.bindDescriptorSet(taaPipelineLayout_, taaSet);
+    commands.draw(3);
+    commands.endRenderPass();
 
     // 3. Copy the newly accumulated history into engine Scene Color.
     std::array<VkClearValue, 3> clearValues{};
@@ -530,42 +356,31 @@ void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
     clearValues[2].color.float32[1] = 0.5F;
     clearValues[2].color.float32[2] = 1.0F;
     clearValues[2].color.float32[3] = 0.0F;
-    VkRenderPassBeginInfo passInfo{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    passInfo.renderPass = context.sceneRenderPass;
-    passInfo.framebuffer = context.sceneFramebuffer;
-    passInfo.renderArea.extent = context.renderExtent;
-    passInfo.clearValueCount = static_cast<std::uint32_t>(clearValues.size());
-    passInfo.pClearValues = clearValues.data();
-    vkCmdBeginRenderPass(
-        context.commandBuffer, &passInfo, VK_SUBPASS_CONTENTS_INLINE);
-    vkCmdSetViewport(context.commandBuffer, 0, 1, &viewport);
-    vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
-    vkCmdBindPipeline(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        compositePipeline_);
+    rhi::RenderPassBeginDesc compositePass{};
+    compositePass.renderPass = context.sceneRenderPass;
+    compositePass.framebuffer = context.sceneFramebuffer;
+    compositePass.extent = context.renderExtent;
+    compositePass.clearValues.assign(
+        clearValues.begin(), clearValues.end());
+    commands.beginRenderPass(compositePass);
+    commands.setViewport(
+        static_cast<float>(context.renderExtent.width),
+        static_cast<float>(context.renderExtent.height));
+    commands.setScissor(context.renderExtent);
+    commands.bindPipeline(compositePipeline_);
     const VkDescriptorSet compositeSet =
         compositeDescriptorSets_[historyWriteIndex_];
-    vkCmdBindDescriptorSets(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        compositePipelineLayout_,
-        0,
-        1,
-        &compositeSet,
-        0,
-        nullptr);
-    vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
-    vkCmdEndRenderPass(context.commandBuffer);
+    commands.bindDescriptorSet(compositePipelineLayout_, compositeSet);
+    commands.draw(3);
+    commands.endRenderPass();
     historyValid_ = true;
     historyWriteIndex_ ^= 1U;
 
     if (context.gpuTimingEnabled && context.timestampQueryPool != VK_NULL_HANDLE) {
-        vkCmdWriteTimestamp(
-            context.commandBuffer,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+        commands.writeTimestamp(
             context.timestampQueryPool,
-            2);
+            2,
+            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
 }
 
@@ -662,242 +477,124 @@ void BlackholeSceneRenderer::createEnvironmentTexture() {
         image.width, image.height,
         VK_FORMAT_R16G16B16A16_SFLOAT,
         VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
-    vk::transitionImageLayout(
-        device_, graphicsQueue_, commandPool_, environment_.image.image,
-        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1);
-    vk::copyBufferToImage(
-        device_, graphicsQueue_, commandPool_, staging.buffer,
-        environment_.image.image, image.width, image.height);
-    vk::transitionImageLayout(
-        device_, graphicsQueue_, commandPool_, environment_.image.image,
+    rhi_->transitionImageLayout(
+        environment_.image,
+        VK_IMAGE_LAYOUT_UNDEFINED,
         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, 1);
+        1);
+    rhi_->copyBufferToImage(
+        staging, environment_.image, image.width, image.height);
+    rhi_->transitionImageLayout(
+        environment_.image,
+        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+        1);
     allocator_->destroyBuffer(staging);
-    environment_.view = vk::createImageView(
-        device_, environment_.image.image, VK_FORMAT_R16G16B16A16_SFLOAT,
-        VK_IMAGE_ASPECT_COLOR_BIT, 1);
-    VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    samplerInfo.magFilter = VK_FILTER_LINEAR;
-    samplerInfo.minFilter = VK_FILTER_LINEAR;
-    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-    vkCheck(
-        vkCreateSampler(device_, &samplerInfo, nullptr, &environment_.sampler),
-        "vkCreateSampler(blackhole environment)");
+    environment_.view = rhi_->createImageView(
+        environment_.image.image,
+        VK_FORMAT_R16G16B16A16_SFLOAT,
+        VK_IMAGE_ASPECT_COLOR_BIT,
+        1);
+    rhi::SamplerDesc samplerDesc{};
+    samplerDesc.addressU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+    samplerDesc.addressV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+    samplerDesc.mipmapLinear = false;
+    environment_.sampler = rhi_->createSampler(samplerDesc);
+}
+
+VkPipeline BlackholeSceneRenderer::createFullscreenPipeline(
+    const std::string& fragmentShader,
+    const VkPipelineLayout layout,
+    const VkRenderPass renderPass) {
+    const auto vertexCode =
+        azurerender::readBinaryFile(shaderDirectory_ + "/blackhole.vert.spv");
+    const auto fragmentCode =
+        azurerender::readBinaryFile(shaderDirectory_ + "/" + fragmentShader + ".spv");
+    const VkShaderModule vertexModule = rhi_->createShaderModule(vertexCode);
+    const VkShaderModule fragmentModule = rhi_->createShaderModule(fragmentCode);
+    rhi::GraphicsPipelineDesc desc{};
+    desc.vertexShader = vertexModule;
+    desc.fragmentShader = fragmentModule;
+    desc.cullMode = VK_CULL_MODE_NONE;
+    desc.depthTest = false;
+    desc.depthWrite = false;
+    desc.colorAttachmentCount = 1;
+    desc.renderPass = renderPass;
+    desc.layout = layout;
+    VkPipeline pipeline = VK_NULL_HANDLE;
+    try {
+        pipeline = rhi_->createGraphicsPipeline(desc);
+    } catch (...) {
+        rhi_->destroyShaderModule(fragmentModule);
+        rhi_->destroyShaderModule(vertexModule);
+        throw;
+    }
+    rhi_->destroyShaderModule(fragmentModule);
+    rhi_->destroyShaderModule(vertexModule);
+    return pipeline;
 }
 
 void BlackholeSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     (void)context;
-    const auto vertexCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole.vert.spv");
-    const auto fragmentCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole.frag.spv");
-    const VkShaderModule vertexModule =
-        vk::createShaderModule(device_, vertexCode);
-    const VkShaderModule fragmentModule =
-        vk::createShaderModule(device_, fragmentCode);
-
-    try {
-        VkPipelineShaderStageCreateInfo vertexStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertexStage.module = vertexModule;
-        vertexStage.pName = "main";
-        VkPipelineShaderStageCreateInfo fragmentStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragmentStage.module = fragmentModule;
-        fragmentStage.pName = "main";
-        const std::array shaderStages = {vertexStage, fragmentStage};
-
-        VkPipelineVertexInputStateCreateInfo vertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        VkPipelineInputAssemblyStateCreateInfo inputAssembly{
-            VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
-        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-        VkPipelineViewportStateCreateInfo viewportState{
-            VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
-        viewportState.viewportCount = 1;
-        viewportState.scissorCount = 1;
-        VkPipelineRasterizationStateCreateInfo rasterizer{
-            VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
-        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        rasterizer.lineWidth = 1.0F;
-        VkPipelineMultisampleStateCreateInfo multisampling{
-            VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-        VkPipelineDepthStencilStateCreateInfo depthStencil{
-            VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        VkPipelineColorBlendAttachmentState colorAttachment{};
-        colorAttachment.blendEnable = VK_FALSE;
-        colorAttachment.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        VkPipelineColorBlendStateCreateInfo colorBlending{
-            VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO};
-        colorBlending.attachmentCount = 1;
-        colorBlending.pAttachments = &colorAttachment;
-        const std::array dynamicStates = {
-            VK_DYNAMIC_STATE_VIEWPORT,
-            VK_DYNAMIC_STATE_SCISSOR,
-        };
-        VkPipelineDynamicStateCreateInfo dynamicState{
-            VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
-        dynamicState.dynamicStateCount =
-            static_cast<std::uint32_t>(dynamicStates.size());
-        dynamicState.pDynamicStates = dynamicStates.data();
-
-        VkPipelineLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
-        layoutInfo.setLayoutCount = 1;
-        layoutInfo.pSetLayouts = &descriptorSetLayout_;
-        vkCheck(
-            vkCreatePipelineLayout(
-                device_, &layoutInfo, nullptr, &pipelineLayout_),
-            "vkCreatePipelineLayout(blackhole)");
-
-        VkGraphicsPipelineCreateInfo pipelineInfo{
-            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-        pipelineInfo.stageCount = static_cast<std::uint32_t>(shaderStages.size());
-        pipelineInfo.pStages = shaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        pipelineInfo.pInputAssemblyState = &inputAssembly;
-        pipelineInfo.pViewportState = &viewportState;
-        pipelineInfo.pRasterizationState = &rasterizer;
-        pipelineInfo.pMultisampleState = &multisampling;
-        pipelineInfo.pDepthStencilState = &depthStencil;
-        pipelineInfo.pColorBlendState = &colorBlending;
-        pipelineInfo.pDynamicState = &dynamicState;
-        pipelineInfo.layout = pipelineLayout_;
-        pipelineInfo.renderPass = traceRenderPass_;
-        pipelineInfo.subpass = 0;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &pipeline_),
-            "vkCreateGraphicsPipelines(blackhole)");
-    } catch (...) {
-        vkDestroyShaderModule(device_, fragmentModule, nullptr);
-        vkDestroyShaderModule(device_, vertexModule, nullptr);
-        throw;
-    }
-    vkDestroyShaderModule(device_, fragmentModule, nullptr);
-    vkDestroyShaderModule(device_, vertexModule, nullptr);
+    pipelineLayout_ = rhi_->createPipelineLayout(descriptorSetLayout_, nullptr);
+    pipeline_ = createFullscreenPipeline(
+        "blackhole.frag",
+        pipelineLayout_,
+        traceRenderPass_);
 }
 
 void BlackholeSceneRenderer::createTraceResources(
     const RenderContext& context) {
     // All private images stay shader-readable between passes. The explicit
     // dependencies cover history sampling -> color write -> later sampling.
-    VkAttachmentDescription attachment{};
-    attachment.format = context.sceneColorFormat;
-    attachment.samples = VK_SAMPLE_COUNT_1_BIT;
-    attachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-    attachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-    attachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-    attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-    attachment.initialLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-    attachment.finalLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-    VkAttachmentReference colorRef{};
-    colorRef.attachment = 0;
-    colorRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-    VkSubpassDescription subpass{};
-    subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
-    subpass.colorAttachmentCount = 1;
-    subpass.pColorAttachments = &colorRef;
-    const std::array<VkSubpassDependency, 2> dependencies{{
-        {
-            VK_SUBPASS_EXTERNAL,
-            0,
-            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-            VK_ACCESS_SHADER_READ_BIT,
-            VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-            VK_DEPENDENCY_BY_REGION_BIT,
-        },
-        {
-            0,
-            VK_SUBPASS_EXTERNAL,
-            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-            VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-            VK_ACCESS_SHADER_READ_BIT,
-            VK_DEPENDENCY_BY_REGION_BIT,
-        },
+    rhi::RenderPassDesc passDesc{};
+    passDesc.attachments = {{
+        context.sceneColorFormat,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+        true,
+        true,
+        false,
     }};
-    VkRenderPassCreateInfo passInfo{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
-    passInfo.attachmentCount = 1;
-    passInfo.pAttachments = &attachment;
-    passInfo.subpassCount = 1;
-    passInfo.pSubpasses = &subpass;
-    passInfo.dependencyCount =
-        static_cast<std::uint32_t>(dependencies.size());
-    passInfo.pDependencies = dependencies.data();
-    vkCheck(
-        vkCreateRenderPass(device_, &passInfo, nullptr, &traceRenderPass_),
-        "vkCreateRenderPass(blackhole trace)");
+    passDesc.externalReadDependency = true;
+    traceRenderPass_ = rhi_->createRenderPass(passDesc);
 
     const VkExtent2D extent = context.renderExtent;
     const VkImageUsageFlags usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
         | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT;
     traceImage_ = allocator_->createImage2D(
         extent.width, extent.height, context.sceneColorFormat, usage);
-    traceImageView_ = vk::createImageView(
-        device_, traceImage_.image, context.sceneColorFormat,
-        VK_IMAGE_ASPECT_COLOR_BIT, 1);
-    VkFramebufferCreateInfo framebufferInfo{
-        VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
-    framebufferInfo.renderPass = traceRenderPass_;
-    framebufferInfo.attachmentCount = 1;
-    framebufferInfo.pAttachments = &traceImageView_;
-    framebufferInfo.width = extent.width;
-    framebufferInfo.height = extent.height;
-    framebufferInfo.layers = 1;
-    vkCheck(
-        vkCreateFramebuffer(
-            device_, &framebufferInfo, nullptr, &traceFramebuffer_),
-        "vkCreateFramebuffer(blackhole raw trace)");
+    traceImageView_ = rhi_->createImageView(
+        traceImage_.image,
+        context.sceneColorFormat,
+        VK_IMAGE_ASPECT_COLOR_BIT,
+        1);
+    rhi::FramebufferDesc framebufferDesc{};
+    framebufferDesc.renderPass = traceRenderPass_;
+    framebufferDesc.attachments = {traceImageView_};
+    framebufferDesc.width = extent.width;
+    framebufferDesc.height = extent.height;
+    traceFramebuffer_ = rhi_->createFramebuffer(framebufferDesc);
 
     for (std::size_t index = 0; index < historyImages_.size(); ++index) {
         historyImages_[index] = allocator_->createImage2D(
             extent.width, extent.height, context.sceneColorFormat, usage);
-        historyImageViews_[index] = vk::createImageView(
-            device_, historyImages_[index].image, context.sceneColorFormat,
-            VK_IMAGE_ASPECT_COLOR_BIT, 1);
-        VkFramebufferCreateInfo framebufferInfo{
-            VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
-        framebufferInfo.renderPass = traceRenderPass_;
-        framebufferInfo.attachmentCount = 1;
-        framebufferInfo.pAttachments = &historyImageViews_[index];
-        framebufferInfo.width = extent.width;
-        framebufferInfo.height = extent.height;
-        framebufferInfo.layers = 1;
-        vkCheck(
-            vkCreateFramebuffer(
-                device_, &framebufferInfo, nullptr,
-                &historyFramebuffers_[index]),
-            "vkCreateFramebuffer(blackhole history)");
+        historyImageViews_[index] = rhi_->createImageView(
+            historyImages_[index].image,
+            context.sceneColorFormat,
+            VK_IMAGE_ASPECT_COLOR_BIT,
+            1);
+        framebufferDesc.attachments = {historyImageViews_[index]};
+        historyFramebuffers_[index] = rhi_->createFramebuffer(framebufferDesc);
     }
-    VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    samplerInfo.magFilter = VK_FILTER_LINEAR;
-    samplerInfo.minFilter = VK_FILTER_LINEAR;
-    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
-    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-    vkCheck(
-        vkCreateSampler(device_, &samplerInfo, nullptr, &traceSampler_),
-        "vkCreateSampler(blackhole trace)");
+    rhi::SamplerDesc samplerDesc{};
+    samplerDesc.addressU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerDesc.addressV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+    samplerDesc.mipmapLinear = false;
+    traceSampler_ = rhi_->createSampler(samplerDesc);
     historyWriteIndex_ = 0;
 }
 
@@ -905,330 +602,128 @@ void BlackholeSceneRenderer::updateTemporalDescriptorSets() {
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
         for (std::size_t writeIndex = 0; writeIndex < 2; ++writeIndex) {
             const std::size_t setIndex = frame * 2 + writeIndex;
-            VkDescriptorBufferInfo uniformInfo{};
-            uniformInfo.buffer = taaUniformBuffers_[frame].buffer;
-            uniformInfo.range = sizeof(TaaUniform);
-            VkDescriptorImageInfo traceInfo{};
-            traceInfo.sampler = traceSampler_;
-            traceInfo.imageView = traceImageView_;
-            traceInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            VkDescriptorImageInfo previousInfo{};
-            previousInfo.sampler = traceSampler_;
-            previousInfo.imageView = historyImageViews_[writeIndex ^ 1U];
-            previousInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            std::array<VkWriteDescriptorSet, 3> writes{};
-            writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[0].dstSet = taaDescriptorSets_[setIndex];
-            writes[0].dstBinding = 0;
-            writes[0].descriptorCount = 1;
-            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-            writes[0].pBufferInfo = &uniformInfo;
-            writes[1] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[1].dstSet = taaDescriptorSets_[setIndex];
-            writes[1].dstBinding = 1;
-            writes[1].descriptorCount = 1;
-            writes[1].descriptorType =
-                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[1].pImageInfo = &traceInfo;
-            writes[2] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[2].dstSet = taaDescriptorSets_[setIndex];
-            writes[2].dstBinding = 2;
-            writes[2].descriptorCount = 1;
-            writes[2].descriptorType =
-                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[2].pImageInfo = &previousInfo;
-            vkUpdateDescriptorSets(
-                device_, static_cast<std::uint32_t>(writes.size()),
-                writes.data(), 0, nullptr);
+            rhi::DescriptorBufferWrite uniformWrite{};
+            uniformWrite.set = taaDescriptorSets_[setIndex];
+            uniformWrite.binding = 0;
+            uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            uniformWrite.buffer = taaUniformBuffers_[frame].buffer;
+            uniformWrite.range = sizeof(TaaUniform);
+            rhi_->writeDescriptorBuffer(uniformWrite);
+
+            rhi::DescriptorImageWrite traceWrite{};
+            traceWrite.set = taaDescriptorSets_[setIndex];
+            traceWrite.binding = 1;
+            traceWrite.view = traceImageView_;
+            traceWrite.sampler = traceSampler_;
+            traceWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            rhi_->writeDescriptorImage(traceWrite);
+
+            rhi::DescriptorImageWrite previousWrite{};
+            previousWrite.set = taaDescriptorSets_[setIndex];
+            previousWrite.binding = 2;
+            previousWrite.view = historyImageViews_[writeIndex ^ 1U];
+            previousWrite.sampler = traceSampler_;
+            previousWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            rhi_->writeDescriptorImage(previousWrite);
         }
     }
-
-    for (std::size_t index = 0; index < 2; ++index) {
-        VkDescriptorImageInfo imageInfo{};
-        imageInfo.sampler = traceSampler_;
-        imageInfo.imageView = historyImageViews_[index];
-        imageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-        VkWriteDescriptorSet write{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-        write.dstSet = compositeDescriptorSets_[index];
-        write.dstBinding = 0;
-        write.descriptorCount = 1;
-        write.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        write.pImageInfo = &imageInfo;
-        vkUpdateDescriptorSets(device_, 1, &write, 0, nullptr);
+    for (std::size_t index = 0; index < compositeDescriptorSets_.size();
+         ++index) {
+        rhi::DescriptorImageWrite compositeWrite{};
+        compositeWrite.set = compositeDescriptorSets_[index];
+        compositeWrite.binding = 0;
+        compositeWrite.view = historyImageViews_[index];
+        compositeWrite.sampler = traceSampler_;
+        compositeWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        rhi_->writeDescriptorImage(compositeWrite);
     }
 }
 
 void BlackholeSceneRenderer::createTaaPipeline(const RenderContext& context) {
     (void)context;
-    const auto vertexCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole.vert.spv");
-    const auto fragmentCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole_taa.frag.spv");
-    const VkShaderModule vertexModule =
-        vk::createShaderModule(device_, vertexCode);
-    const VkShaderModule fragmentModule =
-        vk::createShaderModule(device_, fragmentCode);
-
-    try {
-        VkPipelineShaderStageCreateInfo vertexStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertexStage.module = vertexModule;
-        vertexStage.pName = "main";
-        VkPipelineShaderStageCreateInfo fragmentStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragmentStage.module = fragmentModule;
-        fragmentStage.pName = "main";
-        const std::array shaderStages = {vertexStage, fragmentStage};
-
-        VkPipelineVertexInputStateCreateInfo vertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        VkPipelineInputAssemblyStateCreateInfo inputAssembly{
-            VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
-        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-        VkPipelineViewportStateCreateInfo viewportState{
-            VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
-        viewportState.viewportCount = 1;
-        viewportState.scissorCount = 1;
-        VkPipelineRasterizationStateCreateInfo rasterizer{
-            VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
-        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        rasterizer.lineWidth = 1.0F;
-        VkPipelineMultisampleStateCreateInfo multisampling{
-            VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-        VkPipelineDepthStencilStateCreateInfo depthStencil{
-            VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        VkPipelineColorBlendAttachmentState colorAttachment{};
-        colorAttachment.blendEnable = VK_FALSE;
-        colorAttachment.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        VkPipelineColorBlendStateCreateInfo colorBlending{
-            VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO};
-        colorBlending.attachmentCount = 1;
-        colorBlending.pAttachments = &colorAttachment;
-        const std::array dynamicStates = {
-            VK_DYNAMIC_STATE_VIEWPORT,
-            VK_DYNAMIC_STATE_SCISSOR,
-        };
-        VkPipelineDynamicStateCreateInfo dynamicState{
-            VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
-        dynamicState.dynamicStateCount =
-            static_cast<std::uint32_t>(dynamicStates.size());
-        dynamicState.pDynamicStates = dynamicStates.data();
-
-        VkPipelineLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
-        layoutInfo.setLayoutCount = 1;
-        layoutInfo.pSetLayouts = &taaDescriptorSetLayout_;
-        vkCheck(
-            vkCreatePipelineLayout(
-                device_, &layoutInfo, nullptr, &taaPipelineLayout_),
-            "vkCreatePipelineLayout(blackhole TAA)");
-
-        VkGraphicsPipelineCreateInfo pipelineInfo{
-            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-        pipelineInfo.stageCount = static_cast<std::uint32_t>(shaderStages.size());
-        pipelineInfo.pStages = shaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        pipelineInfo.pInputAssemblyState = &inputAssembly;
-        pipelineInfo.pViewportState = &viewportState;
-        pipelineInfo.pRasterizationState = &rasterizer;
-        pipelineInfo.pMultisampleState = &multisampling;
-        pipelineInfo.pDepthStencilState = &depthStencil;
-        pipelineInfo.pColorBlendState = &colorBlending;
-        pipelineInfo.pDynamicState = &dynamicState;
-        pipelineInfo.layout = taaPipelineLayout_;
-        pipelineInfo.renderPass = traceRenderPass_;
-        pipelineInfo.subpass = 0;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &taaPipeline_),
-            "vkCreateGraphicsPipelines(blackhole TAA)");
-    } catch (...) {
-        vkDestroyShaderModule(device_, fragmentModule, nullptr);
-        vkDestroyShaderModule(device_, vertexModule, nullptr);
-        throw;
-    }
-    vkDestroyShaderModule(device_, fragmentModule, nullptr);
-    vkDestroyShaderModule(device_, vertexModule, nullptr);
+    taaPipelineLayout_ =
+        rhi_->createPipelineLayout(taaDescriptorSetLayout_, nullptr);
+    taaPipeline_ = createFullscreenPipeline(
+        "blackhole_taa.frag",
+        taaPipelineLayout_,
+        traceRenderPass_);
 }
 
 void BlackholeSceneRenderer::createCompositePipeline(
     const RenderContext& context) {
-    const auto vertexCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole.vert.spv");
-    const auto fragmentCode =
-        vk::readBinaryFile(shaderDirectory_ + "/blackhole_composite.frag.spv");
-    const VkShaderModule vertexModule =
-        vk::createShaderModule(device_, vertexCode);
-    const VkShaderModule fragmentModule =
-        vk::createShaderModule(device_, fragmentCode);
-    try {
-        VkPipelineShaderStageCreateInfo vertexStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertexStage.module = vertexModule;
-        vertexStage.pName = "main";
-        VkPipelineShaderStageCreateInfo fragmentStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragmentStage.module = fragmentModule;
-        fragmentStage.pName = "main";
-        const std::array stages{vertexStage, fragmentStage};
-        VkPipelineVertexInputStateCreateInfo vertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        VkPipelineInputAssemblyStateCreateInfo inputAssembly{
-            VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
-        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-        VkPipelineViewportStateCreateInfo viewportState{
-            VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
-        viewportState.viewportCount = 1;
-        viewportState.scissorCount = 1;
-        VkPipelineRasterizationStateCreateInfo rasterizer{
-            VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
-        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        rasterizer.lineWidth = 1.0F;
-        VkPipelineMultisampleStateCreateInfo multisampling{
-            VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-        VkPipelineDepthStencilStateCreateInfo depthStencil{
-            VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        std::array<VkPipelineColorBlendAttachmentState, 2> colorAttachments{};
-        colorAttachments[0].colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        colorAttachments[1].colorWriteMask = 0;
-        VkPipelineColorBlendStateCreateInfo colorBlending{
-            VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO};
-        colorBlending.attachmentCount =
-            static_cast<std::uint32_t>(colorAttachments.size());
-        colorBlending.pAttachments = colorAttachments.data();
-        const std::array dynamicStates{
-            VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR};
-        VkPipelineDynamicStateCreateInfo dynamicState{
-            VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
-        dynamicState.dynamicStateCount =
-            static_cast<std::uint32_t>(dynamicStates.size());
-        dynamicState.pDynamicStates = dynamicStates.data();
-        VkPipelineLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
-        layoutInfo.setLayoutCount = 1;
-        layoutInfo.pSetLayouts = &compositeDescriptorSetLayout_;
-        vkCheck(
-            vkCreatePipelineLayout(
-                device_, &layoutInfo, nullptr, &compositePipelineLayout_),
-            "vkCreatePipelineLayout(blackhole composite)");
-        VkGraphicsPipelineCreateInfo pipelineInfo{
-            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-        pipelineInfo.stageCount = static_cast<std::uint32_t>(stages.size());
-        pipelineInfo.pStages = stages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        pipelineInfo.pInputAssemblyState = &inputAssembly;
-        pipelineInfo.pViewportState = &viewportState;
-        pipelineInfo.pRasterizationState = &rasterizer;
-        pipelineInfo.pMultisampleState = &multisampling;
-        pipelineInfo.pDepthStencilState = &depthStencil;
-        pipelineInfo.pColorBlendState = &colorBlending;
-        pipelineInfo.pDynamicState = &dynamicState;
-        pipelineInfo.layout = compositePipelineLayout_;
-        pipelineInfo.renderPass = context.sceneRenderPass;
-        pipelineInfo.subpass = 0;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr,
-                &compositePipeline_),
-            "vkCreateGraphicsPipelines(blackhole composite)");
-    } catch (...) {
-        vkDestroyShaderModule(device_, fragmentModule, nullptr);
-        vkDestroyShaderModule(device_, vertexModule, nullptr);
-        throw;
-    }
-    vkDestroyShaderModule(device_, fragmentModule, nullptr);
-    vkDestroyShaderModule(device_, vertexModule, nullptr);
+    compositePipelineLayout_ =
+        rhi_->createPipelineLayout(compositeDescriptorSetLayout_, nullptr);
+    compositePipeline_ = createFullscreenPipeline(
+        "blackhole_composite.frag",
+        compositePipelineLayout_,
+        context.sceneRenderPass);
 }
 
 void BlackholeSceneRenderer::destroySizeDependentResources() {
     if (traceSampler_ != VK_NULL_HANDLE) {
-        vkDestroySampler(device_, traceSampler_, nullptr);
+        rhi_->destroySampler(traceSampler_);
         traceSampler_ = VK_NULL_HANDLE;
     }
     if (traceFramebuffer_ != VK_NULL_HANDLE) {
-        vkDestroyFramebuffer(device_, traceFramebuffer_, nullptr);
+        rhi_->destroyFramebuffer(traceFramebuffer_);
         traceFramebuffer_ = VK_NULL_HANDLE;
     }
     if (traceImageView_ != VK_NULL_HANDLE) {
-        vkDestroyImageView(device_, traceImageView_, nullptr);
+        rhi_->destroyImageView(traceImageView_);
         traceImageView_ = VK_NULL_HANDLE;
     }
     allocator_->destroyImage(traceImage_);
     for (std::size_t index = 0; index < historyImages_.size(); ++index) {
         if (historyFramebuffers_[index] != VK_NULL_HANDLE) {
-            vkDestroyFramebuffer(device_, historyFramebuffers_[index], nullptr);
+            rhi_->destroyFramebuffer(historyFramebuffers_[index]);
             historyFramebuffers_[index] = VK_NULL_HANDLE;
         }
         if (historyImageViews_[index] != VK_NULL_HANDLE) {
-            vkDestroyImageView(device_, historyImageViews_[index], nullptr);
+            rhi_->destroyImageView(historyImageViews_[index]);
             historyImageViews_[index] = VK_NULL_HANDLE;
         }
         allocator_->destroyImage(historyImages_[index]);
     }
     if (traceRenderPass_ != VK_NULL_HANDLE) {
-        vkDestroyRenderPass(device_, traceRenderPass_, nullptr);
+        rhi_->destroyRenderPass(traceRenderPass_);
         traceRenderPass_ = VK_NULL_HANDLE;
     }
 }
 
 void BlackholeSceneRenderer::destroyResources() {
-    if (device_ == VK_NULL_HANDLE) {
+    if (rhi_ == nullptr) {
         return;
     }
     if (compositePipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, compositePipeline_, nullptr);
+        rhi_->destroyPipeline(compositePipeline_);
         compositePipeline_ = VK_NULL_HANDLE;
     }
     if (compositePipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, compositePipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(compositePipelineLayout_);
         compositePipelineLayout_ = VK_NULL_HANDLE;
     }
     if (compositeDescriptorPool_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorPool(device_, compositeDescriptorPool_, nullptr);
+        rhi_->destroyDescriptorPool(compositeDescriptorPool_);
         compositeDescriptorPool_ = VK_NULL_HANDLE;
     }
     if (compositeDescriptorSetLayout_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(
-            device_, compositeDescriptorSetLayout_, nullptr);
+        rhi_->destroyDescriptorSetLayout(compositeDescriptorSetLayout_);
         compositeDescriptorSetLayout_ = VK_NULL_HANDLE;
     }
     if (taaPipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, taaPipeline_, nullptr);
+        rhi_->destroyPipeline(taaPipeline_);
         taaPipeline_ = VK_NULL_HANDLE;
     }
     if (taaPipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, taaPipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(taaPipelineLayout_);
         taaPipelineLayout_ = VK_NULL_HANDLE;
     }
     if (taaDescriptorPool_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorPool(device_, taaDescriptorPool_, nullptr);
+        rhi_->destroyDescriptorPool(taaDescriptorPool_);
         taaDescriptorPool_ = VK_NULL_HANDLE;
     }
     if (taaDescriptorSetLayout_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device_, taaDescriptorSetLayout_, nullptr);
+        rhi_->destroyDescriptorSetLayout(taaDescriptorSetLayout_);
         taaDescriptorSetLayout_ = VK_NULL_HANDLE;
     }
     for (auto& buffer : taaUniformBuffers_) {
@@ -1239,19 +734,19 @@ void BlackholeSceneRenderer::destroyResources() {
     destroySizeDependentResources();
 
     if (pipeline_ != VK_NULL_HANDLE) {
-        vkDestroyPipeline(device_, pipeline_, nullptr);
+        rhi_->destroyPipeline(pipeline_);
         pipeline_ = VK_NULL_HANDLE;
     }
     if (pipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, pipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
     if (descriptorPool_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
+        rhi_->destroyDescriptorPool(descriptorPool_);
         descriptorPool_ = VK_NULL_HANDLE;
     }
     if (descriptorSetLayout_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device_, descriptorSetLayout_, nullptr);
+        rhi_->destroyDescriptorSetLayout(descriptorSetLayout_);
         descriptorSetLayout_ = VK_NULL_HANDLE;
     }
     for (auto& buffer : uniformBuffers_) {
@@ -1259,11 +754,11 @@ void BlackholeSceneRenderer::destroyResources() {
     }
     uniformBuffers_.clear();
     if (environment_.sampler != VK_NULL_HANDLE) {
-        vkDestroySampler(device_, environment_.sampler, nullptr);
+        rhi_->destroySampler(environment_.sampler);
         environment_.sampler = VK_NULL_HANDLE;
     }
     if (environment_.view != VK_NULL_HANDLE) {
-        vkDestroyImageView(device_, environment_.view, nullptr);
+        rhi_->destroyImageView(environment_.view);
         environment_.view = VK_NULL_HANDLE;
     }
     allocator_->destroyImage(environment_.image);

@@ -157,6 +157,10 @@ void NullRhi::copyBufferToImage(
              + std::to_string(height)});
 }
 
+void NullRhi::clearImage(const GpuImage& image) {
+    calls.push_back({"clearImage", hexHandle(image.image)});
+}
+
 void NullRhi::generateMipmaps(
     const GpuImage& image,
     const VkFormat format,
@@ -417,10 +421,13 @@ void NullCommandRecorder::copyImageToBuffer(
 
 void NullCommandRecorder::writeTimestamp(
     const VkQueryPool pool,
-    const std::uint32_t query) {
+    const std::uint32_t query,
+    const VkPipelineStageFlagBits stage) {
     (void)pool;
     calls.push_back(
-        {"writeTimestamp", "query=" + std::to_string(query)});
+        {"writeTimestamp",
+         "query=" + std::to_string(query)
+             + " stage=" + std::to_string(stage)});
 }
 
 }  // namespace azurerender::rhi

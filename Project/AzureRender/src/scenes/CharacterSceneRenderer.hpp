@@ -3,6 +3,7 @@
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
 #include "rhi/IGpuAllocator.hpp"
+#include "rhi/Rhi.hpp"
 
 #include <array>
 #include <cstdint>
@@ -110,13 +111,10 @@ private:
         std::array<float, 4> faceSdfShadowColor{};
     };
 
-    // Engine context snapshot taken on onLoad.
-    VkDevice device_ = VK_NULL_HANDLE;
-    VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
-    VkQueue graphicsQueue_ = VK_NULL_HANDLE;
-    VkCommandPool commandPool_ = VK_NULL_HANDLE;
     // Engine-owned allocator borrowed for the renderer's lifetime.
     rhi::IGpuAllocator* allocator_ = nullptr;
+    // Resource creation and recording backend borrowed for the lifetime.
+    rhi::IRhi* rhi_ = nullptr;
     // Global texture array path, enabled when the device offers descriptor
     // indexing. False keeps the per-material fixed descriptor tables.
     bool bindlessTextures_ = false;
@@ -202,7 +200,7 @@ private:
     void recordShadowPass(const RenderContext& context);
     void recordMainPass(const RenderContext& context);
     void drawPrimitive(
-        const VkCommandBuffer commandBuffer,
+        rhi::ICommandRecorder& commands,
         const AssetPrimitive& primitive,
         const std::uint32_t firstIndexOffset);
     void buildSceneState();

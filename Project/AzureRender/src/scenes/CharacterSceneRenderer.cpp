@@ -1,10 +1,10 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 
 #include "app/AzureRenderInternal.hpp"
+#include "platform/BinaryFile.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
-#include "render/VulkanHelpers.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -219,14 +219,14 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
 }
 
 void CharacterSceneRenderer::onLoad(const RenderContext& context) {
-    device_ = context.device;
-    physicalDevice_ = context.physicalDevice;
-    graphicsQueue_ = context.graphicsQueue;
-    commandPool_ = context.commandPool;
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
         throw std::runtime_error(
             "RenderContext must carry the engine GPU allocator");
+    }
+    rhi_ = context.rhi;
+    if (rhi_ == nullptr) {
+        throw std::runtime_error("RenderContext must carry the engine RHI");
     }
     bindlessTextures_ = context.bindlessTextures;
     renderSettings_ = context.renderSettings;
@@ -497,9 +497,7 @@ void CharacterSceneRenderer::createVertexBuffer() {
         size,
         VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
         false);
-    vk::copyBuffer(
-        device_, graphicsQueue_, commandPool_, staging.buffer,
-        vertexBuffer_.buffer, size);
+    rhi_->copyBuffer(staging, vertexBuffer_, size);
     allocator_->destroyBuffer(staging);
 }
 
@@ -515,9 +513,7 @@ void CharacterSceneRenderer::createIndexBuffer() {
         size,
         VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
         false);
-    vk::copyBuffer(
-        device_, graphicsQueue_, commandPool_, staging.buffer,
-        indexBuffer_.buffer, size);
+    rhi_->copyBuffer(staging, indexBuffer_, size);
     allocator_->destroyBuffer(staging);
 }
 
@@ -545,44 +541,33 @@ void CharacterSceneRenderer::createTexture() {
             VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT
                 | (mipLevels > 1 ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0),
             mipLevels);
-        vk::transitionImageLayout(
-            device_, graphicsQueue_, commandPool_,
-            texture.image.image,
+        rhi_->transitionImageLayout(
+            texture.image,
             VK_IMAGE_LAYOUT_UNDEFINED,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
             mipLevels);
-        vk::copyBufferToImage(
-            device_, graphicsQueue_, commandPool_,
-            staging.buffer, texture.image.image, width, height);
+        rhi_->copyBufferToImage(staging, texture.image, width, height);
         if (mipLevels > 1) {
-            vk::generateMipmaps(
-                device_, physicalDevice_, graphicsQueue_, commandPool_,
-                texture.image.image, format, width, height, mipLevels);
+            rhi_->generateMipmaps(
+                texture.image, format, width, height, mipLevels);
         } else {
-            vk::transitionImageLayout(
-                device_, graphicsQueue_, commandPool_,
-                texture.image.image,
+            rhi_->transitionImageLayout(
+                texture.image,
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
                 mipLevels);
         }
         allocator_->destroyBuffer(staging);
-        texture.view = vk::createImageView(
-            device_, texture.image.image, format, VK_IMAGE_ASPECT_COLOR_BIT,
-            mipLevels);
-        VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-        samplerInfo.magFilter = VK_FILTER_LINEAR;
-        samplerInfo.minFilter = VK_FILTER_LINEAR;
-        samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-        samplerInfo.addressModeV = clampVertical
+        texture.view = rhi_->createImageView(
+            texture.image.image, format, VK_IMAGE_ASPECT_COLOR_BIT, mipLevels);
+        rhi::SamplerDesc samplerDesc{};
+        samplerDesc.addressU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        samplerDesc.addressV = clampVertical
             ? VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE
             : VK_SAMPLER_ADDRESS_MODE_REPEAT;
-        samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-        samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
-        samplerInfo.maxLod = static_cast<float>(mipLevels - 1);
-        vkCheck(
-            vkCreateSampler(device_, &samplerInfo, nullptr, &texture.sampler),
-            "vkCreateSampler");
+        samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        samplerDesc.maxLod = static_cast<float>(mipLevels - 1);
+        texture.sampler = rhi_->createSampler(samplerDesc);
     };
 
     const auto loadPpmTexture = [](const std::string& path) {
@@ -839,6 +824,7 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 }
 
 void CharacterSceneRenderer::createDescriptorPool() {
+    rhi::DescriptorPoolDesc poolDesc{};
     if (bindlessTextures_) {
         const std::uint32_t frameCount =
             static_cast<std::uint32_t>(kMaxFramesInFlight);
@@ -846,162 +832,76 @@ void CharacterSceneRenderer::createDescriptorPool() {
             kSharedTextureSlots
             + kMaterialTextureSlots
                 * static_cast<std::uint32_t>(asset_.materials.size());
-        const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
+        poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * textureSlots},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount},
-        }};
-        VkDescriptorPoolCreateInfo createInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-        createInfo.poolSizeCount =
-            static_cast<std::uint32_t>(poolSizes.size());
-        createInfo.pPoolSizes = poolSizes.data();
-        createInfo.maxSets = frameCount;
-        vkCheck(
-            vkCreateDescriptorPool(
-                device_, &createInfo, nullptr, &descriptorPool_),
-            "vkCreateDescriptorPool(bindless)");
+        };
+        poolDesc.maxSets = frameCount;
+        descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
         return;
     }
     const std::uint32_t descriptorCount =
         static_cast<std::uint32_t>(kMaxFramesInFlight * asset_.materials.size());
-    const std::array<VkDescriptorPoolSize, 3> poolSizes = {{
+    poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount},
-    }};
-    VkDescriptorPoolCreateInfo createInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-    createInfo.poolSizeCount = static_cast<std::uint32_t>(poolSizes.size());
-    createInfo.pPoolSizes = poolSizes.data();
-    createInfo.maxSets = descriptorCount;
-    vkCheck(
-        vkCreateDescriptorPool(device_, &createInfo, nullptr, &descriptorPool_),
-        "vkCreateDescriptorPool");
+    };
+    poolDesc.maxSets = descriptorCount;
+    descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
 }
 
 void CharacterSceneRenderer::createDescriptorSetLayout() {
     if (bindlessTextures_) {
-        VkDescriptorSetLayoutBinding uniformBinding{};
-        uniformBinding.binding = 0;
-        uniformBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        uniformBinding.descriptorCount = 1;
-        uniformBinding.stageFlags =
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
-
         const std::uint32_t textureSlots =
             kSharedTextureSlots
             + kMaterialTextureSlots
                 * static_cast<std::uint32_t>(asset_.materials.size());
-        VkDescriptorSetLayoutBinding textureArrayBinding{};
-        textureArrayBinding.binding = 1;
-        textureArrayBinding.descriptorType =
-            VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        textureArrayBinding.descriptorCount = textureSlots;
-        textureArrayBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-
-        VkDescriptorSetLayoutBinding jointBinding{};
-        jointBinding.binding = 10;
-        jointBinding.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-        jointBinding.descriptorCount = 1;
-        jointBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-
-        const std::array bindings = {
-            uniformBinding,
-            textureArrayBinding,
-            jointBinding,
-        };
-        VkDescriptorSetLayoutCreateInfo createInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-        createInfo.bindingCount =
-            static_cast<std::uint32_t>(bindings.size());
-        createInfo.pBindings = bindings.data();
-        vkCheck(
-            vkCreateDescriptorSetLayout(
-                device_, &createInfo, nullptr, &descriptorSetLayout_),
-            "vkCreateDescriptorSetLayout(bindless)");
+        descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+            {0,
+             VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+             1,
+             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT},
+            {1,
+             VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+             textureSlots,
+             VK_SHADER_STAGE_FRAGMENT_BIT},
+            {10,
+             VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             1,
+             VK_SHADER_STAGE_VERTEX_BIT},
+        });
         return;
     }
-    VkDescriptorSetLayoutBinding uniformBinding{};
-    uniformBinding.binding = 0;
-    uniformBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    uniformBinding.descriptorCount = 1;
-    uniformBinding.stageFlags =
-        VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
-
-    VkDescriptorSetLayoutBinding textureBinding{};
-    textureBinding.binding = 1;
-    textureBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    textureBinding.descriptorCount = 1;
-    textureBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-
-    VkDescriptorSetLayoutBinding normalBinding = textureBinding;
-    normalBinding.binding = 2;
-    VkDescriptorSetLayoutBinding metallicRoughnessBinding = textureBinding;
-    metallicRoughnessBinding.binding = 3;
-    VkDescriptorSetLayoutBinding environmentBinding = textureBinding;
-    environmentBinding.binding = 4;
-    VkDescriptorSetLayoutBinding specularEmissiveBinding = textureBinding;
-    specularEmissiveBinding.binding = 5;
-    VkDescriptorSetLayoutBinding styleMaskBinding = textureBinding;
-    styleMaskBinding.binding = 6;
-    VkDescriptorSetLayoutBinding matcapBinding = textureBinding;
-    matcapBinding.binding = 7;
-    VkDescriptorSetLayoutBinding hairDataBinding = textureBinding;
-    hairDataBinding.binding = 8;
-    VkDescriptorSetLayoutBinding shadowBinding = textureBinding;
-    shadowBinding.binding = 9;
-    VkDescriptorSetLayoutBinding jointBinding{};
-    jointBinding.binding = 10;
-    jointBinding.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-    jointBinding.descriptorCount = 1;
-    jointBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-    VkDescriptorSetLayoutBinding toonRampBinding = textureBinding;
-    toonRampBinding.binding = 11;
-    VkDescriptorSetLayoutBinding faceSdfBinding = textureBinding;
-    faceSdfBinding.binding = 12;
-
-    const std::array bindings = {
-        uniformBinding,
-        textureBinding,
-        normalBinding,
-        metallicRoughnessBinding,
-        environmentBinding,
-        specularEmissiveBinding,
-        styleMaskBinding,
-        matcapBinding,
-        hairDataBinding,
-        shadowBinding,
-        jointBinding,
-        toonRampBinding,
-        faceSdfBinding,
-    };
-    VkDescriptorSetLayoutCreateInfo createInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
-    createInfo.bindingCount = static_cast<std::uint32_t>(bindings.size());
-    createInfo.pBindings = bindings.data();
-    vkCheck(
-        vkCreateDescriptorSetLayout(
-            device_, &createInfo, nullptr, &descriptorSetLayout_),
-        "vkCreateDescriptorSetLayout");
+    constexpr VkShaderStageFlags kFragment = VK_SHADER_STAGE_FRAGMENT_BIT;
+    descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        {0,
+         VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+         1,
+         VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT},
+        {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {4, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {5, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {6, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {7, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {8, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {9, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {10, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+        {11, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {12, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+    });
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
     if (bindlessTextures_) {
-        const std::vector<VkDescriptorSetLayout> layouts(
-            kMaxFramesInFlight, descriptorSetLayout_);
-        VkDescriptorSetAllocateInfo allocateInfo{
-            VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
-        allocateInfo.descriptorPool = descriptorPool_;
-        allocateInfo.descriptorSetCount =
-            static_cast<std::uint32_t>(layouts.size());
-        allocateInfo.pSetLayouts = layouts.data();
-        descriptorSets_.resize(kMaxFramesInFlight);
-        vkCheck(
-            vkAllocateDescriptorSets(
-                device_, &allocateInfo, descriptorSets_.data()),
-            "vkAllocateDescriptorSets(bindless)");
+        descriptorSets_ = rhi_->allocateDescriptorSets(
+            descriptorPool_,
+            descriptorSetLayout_,
+            static_cast<std::uint32_t>(kMaxFramesInFlight));
 
         // One array write per frame set: shared slots first, then the
         // per-material blocks in shader-visible order.
@@ -1038,526 +938,316 @@ void CharacterSceneRenderer::createDescriptorSets() {
         }
 
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
-            VkDescriptorBufferInfo bufferInfo{};
-            bufferInfo.buffer = uniformBuffers_[frame].buffer;
-            bufferInfo.range = sizeof(UniformBufferObject);
-            VkDescriptorBufferInfo jointBufferInfo{};
-            jointBufferInfo.buffer = jointBuffers_[frame].buffer;
-            jointBufferInfo.range =
-                sizeof(asset_.jointMatrices.front())
-                * asset_.jointMatrices.size();
+            rhi::DescriptorBufferWrite uniformWrite{};
+            uniformWrite.set = descriptorSets_[frame];
+            uniformWrite.binding = 0;
+            uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            uniformWrite.buffer = uniformBuffers_[frame].buffer;
+            uniformWrite.range = sizeof(UniformBufferObject);
+            rhi_->writeDescriptorBuffer(uniformWrite);
 
-            std::array<VkWriteDescriptorSet, 3> writes{};
-            writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[0].dstSet = descriptorSets_[frame];
-            writes[0].dstBinding = 0;
-            writes[0].descriptorCount = 1;
-            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-            writes[0].pBufferInfo = &bufferInfo;
-            writes[1] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[1].dstSet = descriptorSets_[frame];
-            writes[1].dstBinding = 1;
-            writes[1].descriptorCount =
-                static_cast<std::uint32_t>(images.size());
-            writes[1].descriptorType =
-                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[1].pImageInfo = images.data();
-            writes[2] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[2].dstSet = descriptorSets_[frame];
-            writes[2].dstBinding = 10;
-            writes[2].descriptorCount = 1;
-            writes[2].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            writes[2].pBufferInfo = &jointBufferInfo;
-            vkUpdateDescriptorSets(
-                device_,
-                static_cast<std::uint32_t>(writes.size()),
-                writes.data(),
-                0,
-                nullptr);
+            rhi::DescriptorImageArrayWrite arrayWrite{};
+            arrayWrite.set = descriptorSets_[frame];
+            arrayWrite.binding = 1;
+            arrayWrite.elements = images;
+            rhi_->writeDescriptorImageArray(arrayWrite);
+
+            rhi::DescriptorBufferWrite jointWrite{};
+            jointWrite.set = descriptorSets_[frame];
+            jointWrite.binding = 10;
+            jointWrite.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            jointWrite.buffer = jointBuffers_[frame].buffer;
+            jointWrite.range = sizeof(asset_.jointMatrices.front())
+                * asset_.jointMatrices.size();
+            rhi_->writeDescriptorBuffer(jointWrite);
         }
         return;
     }
-    const std::size_t descriptorCount = kMaxFramesInFlight * asset_.materials.size();
-    const std::vector<VkDescriptorSetLayout> layouts(
-        descriptorCount, descriptorSetLayout_);
-    VkDescriptorSetAllocateInfo allocateInfo{
-        VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO};
-    allocateInfo.descriptorPool = descriptorPool_;
-    allocateInfo.descriptorSetCount = static_cast<std::uint32_t>(layouts.size());
-    allocateInfo.pSetLayouts = layouts.data();
-    descriptorSets_.resize(descriptorCount);
-    vkCheck(
-        vkAllocateDescriptorSets(device_, &allocateInfo, descriptorSets_.data()),
-        "vkAllocateDescriptorSets");
+    const std::size_t descriptorCount =
+        kMaxFramesInFlight * asset_.materials.size();
+    descriptorSets_ = rhi_->allocateDescriptorSets(
+        descriptorPool_,
+        descriptorSetLayout_,
+        static_cast<std::uint32_t>(descriptorCount));
 
+    const auto writeImage = [this](
+        const std::size_t descriptorIndex,
+        const std::uint32_t binding,
+        const VkImageView view,
+        const VkSampler sampler,
+        const VkImageLayout layout) {
+        rhi::DescriptorImageWrite write{};
+        write.set = descriptorSets_[descriptorIndex];
+        write.binding = binding;
+        write.view = view;
+        write.sampler = sampler;
+        write.layout = layout;
+        rhi_->writeDescriptorImage(write);
+    };
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
-        VkDescriptorBufferInfo bufferInfo{};
-        bufferInfo.buffer = uniformBuffers_[frame].buffer;
-        bufferInfo.range = sizeof(UniformBufferObject);
-        VkDescriptorBufferInfo jointBufferInfo{};
-        jointBufferInfo.buffer = jointBuffers_[frame].buffer;
-        jointBufferInfo.range =
-            sizeof(asset_.jointMatrices.front())
-            * asset_.jointMatrices.size();
-
         for (std::size_t material = 0; material < asset_.materials.size();
              ++material) {
             const std::size_t descriptorIndex =
                 frame * asset_.materials.size() + material;
-            VkDescriptorImageInfo baseColorInfo{};
-            baseColorInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            baseColorInfo.imageView = gpuMaterials_[material].baseColor.view;
-            baseColorInfo.sampler = gpuMaterials_[material].baseColor.sampler;
-            VkDescriptorImageInfo normalInfo{};
-            normalInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            normalInfo.imageView = gpuMaterials_[material].normal.view;
-            normalInfo.sampler = gpuMaterials_[material].normal.sampler;
-            VkDescriptorImageInfo metallicRoughnessInfo{};
-            metallicRoughnessInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            metallicRoughnessInfo.imageView =
-                gpuMaterials_[material].metallicRoughness.view;
-            metallicRoughnessInfo.sampler =
-                gpuMaterials_[material].metallicRoughness.sampler;
-            VkDescriptorImageInfo environmentInfo{};
-            environmentInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            environmentInfo.imageView = environmentTexture_.view;
-            environmentInfo.sampler = environmentTexture_.sampler;
-            VkDescriptorImageInfo specularEmissiveInfo{};
-            specularEmissiveInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            specularEmissiveInfo.imageView =
-                gpuMaterials_[material].specularEmissive.view;
-            specularEmissiveInfo.sampler =
-                gpuMaterials_[material].specularEmissive.sampler;
-            VkDescriptorImageInfo styleMaskInfo{};
-            styleMaskInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            styleMaskInfo.imageView =
-                gpuMaterials_[material].styleMask.view;
-            styleMaskInfo.sampler =
-                gpuMaterials_[material].styleMask.sampler;
-            VkDescriptorImageInfo matcapInfo{};
-            matcapInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            matcapInfo.imageView =
-                gpuMaterials_[material].matcap.view;
-            matcapInfo.sampler =
-                gpuMaterials_[material].matcap.sampler;
-            VkDescriptorImageInfo hairDataInfo{};
-            hairDataInfo.imageLayout =
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            hairDataInfo.imageView =
-                gpuMaterials_[material].hairData.view;
-            hairDataInfo.sampler =
-                gpuMaterials_[material].hairData.sampler;
-            VkDescriptorImageInfo shadowInfo{};
-            shadowInfo.imageLayout =
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
-            shadowInfo.imageView = shadowImageView_;
-            shadowInfo.sampler = shadowSampler_;
-            VkDescriptorImageInfo toonRampInfo{};
-            toonRampInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            toonRampInfo.imageView = toonRampTexture_.view;
-            toonRampInfo.sampler = toonRampTexture_.sampler;
-            VkDescriptorImageInfo faceSdfInfo{};
-            faceSdfInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            faceSdfInfo.imageView = gpuMaterials_[material].faceSdf.view;
-            faceSdfInfo.sampler = gpuMaterials_[material].faceSdf.sampler;
+            const GpuMaterial& gpuMaterial = gpuMaterials_[material];
 
-            std::array<VkWriteDescriptorSet, 13> writes{};
-            writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[0].dstSet = descriptorSets_[descriptorIndex];
-            writes[0].dstBinding = 0;
-            writes[0].descriptorCount = 1;
-            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-            writes[0].pBufferInfo = &bufferInfo;
-            writes[1] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[1].dstSet = descriptorSets_[descriptorIndex];
-            writes[1].dstBinding = 1;
-            writes[1].descriptorCount = 1;
-            writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[1].pImageInfo = &baseColorInfo;
-            writes[2] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[2].dstSet = descriptorSets_[descriptorIndex];
-            writes[2].dstBinding = 2;
-            writes[2].descriptorCount = 1;
-            writes[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[2].pImageInfo = &normalInfo;
-            writes[3] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[3].dstSet = descriptorSets_[descriptorIndex];
-            writes[3].dstBinding = 3;
-            writes[3].descriptorCount = 1;
-            writes[3].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[3].pImageInfo = &metallicRoughnessInfo;
-            writes[4] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[4].dstSet = descriptorSets_[descriptorIndex];
-            writes[4].dstBinding = 4;
-            writes[4].descriptorCount = 1;
-            writes[4].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[4].pImageInfo = &environmentInfo;
-            writes[5] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[5].dstSet = descriptorSets_[descriptorIndex];
-            writes[5].dstBinding = 5;
-            writes[5].descriptorCount = 1;
-            writes[5].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[5].pImageInfo = &specularEmissiveInfo;
-            writes[6] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[6].dstSet = descriptorSets_[descriptorIndex];
-            writes[6].dstBinding = 6;
-            writes[6].descriptorCount = 1;
-            writes[6].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[6].pImageInfo = &styleMaskInfo;
-            writes[7] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[7].dstSet = descriptorSets_[descriptorIndex];
-            writes[7].dstBinding = 7;
-            writes[7].descriptorCount = 1;
-            writes[7].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[7].pImageInfo = &matcapInfo;
-            writes[8] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[8].dstSet = descriptorSets_[descriptorIndex];
-            writes[8].dstBinding = 8;
-            writes[8].descriptorCount = 1;
-            writes[8].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[8].pImageInfo = &hairDataInfo;
-            writes[9] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[9].dstSet = descriptorSets_[descriptorIndex];
-            writes[9].dstBinding = 9;
-            writes[9].descriptorCount = 1;
-            writes[9].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[9].pImageInfo = &shadowInfo;
-            writes[10] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[10].dstSet = descriptorSets_[descriptorIndex];
-            writes[10].dstBinding = 10;
-            writes[10].descriptorCount = 1;
-            writes[10].descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            writes[10].pBufferInfo = &jointBufferInfo;
-            writes[11] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[11].dstSet = descriptorSets_[descriptorIndex];
-            writes[11].dstBinding = 11;
-            writes[11].descriptorCount = 1;
-            writes[11].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[11].pImageInfo = &toonRampInfo;
-            writes[12] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
-            writes[12].dstSet = descriptorSets_[descriptorIndex];
-            writes[12].dstBinding = 12;
-            writes[12].descriptorCount = 1;
-            writes[12].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-            writes[12].pImageInfo = &faceSdfInfo;
-            vkUpdateDescriptorSets(
-                device_,
-                static_cast<std::uint32_t>(writes.size()),
-                writes.data(),
-                0,
-                nullptr);
+            rhi::DescriptorBufferWrite uniformWrite{};
+            uniformWrite.set = descriptorSets_[descriptorIndex];
+            uniformWrite.binding = 0;
+            uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            uniformWrite.buffer = uniformBuffers_[frame].buffer;
+            uniformWrite.range = sizeof(UniformBufferObject);
+            rhi_->writeDescriptorBuffer(uniformWrite);
+
+            writeImage(
+                descriptorIndex,
+                1,
+                gpuMaterial.baseColor.view,
+                gpuMaterial.baseColor.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                2,
+                gpuMaterial.normal.view,
+                gpuMaterial.normal.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                3,
+                gpuMaterial.metallicRoughness.view,
+                gpuMaterial.metallicRoughness.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                4,
+                environmentTexture_.view,
+                environmentTexture_.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                5,
+                gpuMaterial.specularEmissive.view,
+                gpuMaterial.specularEmissive.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                6,
+                gpuMaterial.styleMask.view,
+                gpuMaterial.styleMask.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                7,
+                gpuMaterial.matcap.view,
+                gpuMaterial.matcap.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                8,
+                gpuMaterial.hairData.view,
+                gpuMaterial.hairData.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                9,
+                shadowImageView_,
+                shadowSampler_,
+                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                11,
+                toonRampTexture_.view,
+                toonRampTexture_.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            writeImage(
+                descriptorIndex,
+                12,
+                gpuMaterial.faceSdf.view,
+                gpuMaterial.faceSdf.sampler,
+                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
+            rhi::DescriptorBufferWrite jointWrite{};
+            jointWrite.set = descriptorSets_[descriptorIndex];
+            jointWrite.binding = 10;
+            jointWrite.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            jointWrite.buffer = jointBuffers_[frame].buffer;
+            jointWrite.range = sizeof(asset_.jointMatrices.front())
+                * asset_.jointMatrices.size();
+            rhi_->writeDescriptorBuffer(jointWrite);
         }
     }
 }
+
 
 void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     const std::string shaderDirectory = context.shaderDirectory;
     const auto vertexCode =
-        vk::readBinaryFile(shaderDirectory + "/mesh.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + "/mesh.vert.spv");
     const auto fragmentCode =
-        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
             ? "/mesh_bindless.frag.spv"
             : "/mesh.frag.spv"));
     const auto outlineVertexCode =
-        vk::readBinaryFile(shaderDirectory + "/outline.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + "/outline.vert.spv");
     const auto outlineFragmentCode =
-        vk::readBinaryFile(shaderDirectory + "/outline.frag.spv");
+        azurerender::readBinaryFile(shaderDirectory + "/outline.frag.spv");
     const auto backgroundVertexCode =
-        vk::readBinaryFile(shaderDirectory + "/background.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
-        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
             ? "/background_bindless.frag.spv"
             : "/background.frag.spv"));
     const auto shadowVertexCode =
-        vk::readBinaryFile(shaderDirectory + "/shadow.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + "/shadow.vert.spv");
     const auto shadowFragmentCode =
-        vk::readBinaryFile(shaderDirectory + (bindlessTextures_
+        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
             ? "/shadow_bindless.frag.spv"
             : "/shadow.frag.spv"));
-    const VkShaderModule vertexModule = vk::createShaderModule(device_, vertexCode);
-    const VkShaderModule fragmentModule = vk::createShaderModule(device_, fragmentCode);
-    const VkShaderModule outlineVertexModule = vk::createShaderModule(device_, outlineVertexCode);
-    const VkShaderModule outlineFragmentModule = vk::createShaderModule(device_, outlineFragmentCode);
-    const VkShaderModule backgroundVertexModule = vk::createShaderModule(device_, backgroundVertexCode);
-    const VkShaderModule backgroundFragmentModule = vk::createShaderModule(device_, backgroundFragmentCode);
-    const VkShaderModule shadowVertexModule = vk::createShaderModule(device_, shadowVertexCode);
-    const VkShaderModule shadowFragmentModule = vk::createShaderModule(device_, shadowFragmentCode);
+    const VkShaderModule vertexModule = rhi_->createShaderModule(vertexCode);
+    const VkShaderModule fragmentModule =
+        rhi_->createShaderModule(fragmentCode);
+    const VkShaderModule outlineVertexModule =
+        rhi_->createShaderModule(outlineVertexCode);
+    const VkShaderModule outlineFragmentModule =
+        rhi_->createShaderModule(outlineFragmentCode);
+    const VkShaderModule backgroundVertexModule =
+        rhi_->createShaderModule(backgroundVertexCode);
+    const VkShaderModule backgroundFragmentModule =
+        rhi_->createShaderModule(backgroundFragmentCode);
+    const VkShaderModule shadowVertexModule =
+        rhi_->createShaderModule(shadowVertexCode);
+    const VkShaderModule shadowFragmentModule =
+        rhi_->createShaderModule(shadowFragmentCode);
 
     try {
-        VkPipelineShaderStageCreateInfo vertexStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertexStage.module = vertexModule;
-        vertexStage.pName = "main";
-        VkPipelineShaderStageCreateInfo fragmentStage{
-            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
-        fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragmentStage.module = fragmentModule;
-        fragmentStage.pName = "main";
-        const std::array shaderStages = {vertexStage, fragmentStage};
-        VkPipelineShaderStageCreateInfo outlineVertexStage = vertexStage;
-        outlineVertexStage.module = outlineVertexModule;
-        VkPipelineShaderStageCreateInfo outlineFragmentStage = fragmentStage;
-        outlineFragmentStage.module = outlineFragmentModule;
-        const std::array outlineShaderStages = {
-            outlineVertexStage,
-            outlineFragmentStage,
+        const rhi::PushConstantRangeDesc pushConstants{
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants),
         };
-        VkPipelineShaderStageCreateInfo backgroundVertexStage = vertexStage;
-        backgroundVertexStage.module = backgroundVertexModule;
-        VkPipelineShaderStageCreateInfo backgroundFragmentStage = fragmentStage;
-        backgroundFragmentStage.module = backgroundFragmentModule;
-        const std::array backgroundShaderStages = {
-            backgroundVertexStage,
-            backgroundFragmentStage,
+        pipelineLayout_ =
+            rhi_->createPipelineLayout(descriptorSetLayout_, &pushConstants);
+
+        // Full material vertex layout shared by the main-pass pipelines.
+        const std::vector<rhi::VertexAttributeDesc> materialAttributes = {
+            {0,
+             VK_FORMAT_R32G32B32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, position))},
+            {1,
+             VK_FORMAT_R32G32B32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, normal))},
+            {2,
+             VK_FORMAT_R32G32B32A32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, tangent))},
+            {3,
+             VK_FORMAT_R32G32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, texcoord))},
+            {4,
+             VK_FORMAT_R32G32B32A32_UINT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, joints))},
+            {5,
+             VK_FORMAT_R32G32B32A32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, weights))},
+            {6,
+             VK_FORMAT_R32G32B32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, morph0))},
+            {7,
+             VK_FORMAT_R32G32B32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, morph1))},
         };
-        VkPipelineShaderStageCreateInfo shadowVertexStage = vertexStage;
-        shadowVertexStage.module = shadowVertexModule;
-        VkPipelineShaderStageCreateInfo shadowFragmentStage = fragmentStage;
-        shadowFragmentStage.module = shadowFragmentModule;
-        const std::array shadowShaderStages = {
-            shadowVertexStage,
-            shadowFragmentStage,
+        const std::vector<rhi::VertexAttributeDesc> shadowAttributes = {
+            materialAttributes[0],
+            materialAttributes[3],
+            materialAttributes[4],
+            materialAttributes[5],
+        };
+        const std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
+            materialAttributes[0],
+            materialAttributes[1],
+            materialAttributes[4],
+            materialAttributes[5],
         };
 
-        VkPipelineVertexInputStateCreateInfo vertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        VkVertexInputBindingDescription bindingDescription{};
-        bindingDescription.binding = 0;
-        bindingDescription.stride = sizeof(AssetVertex);
-        bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-        std::array<VkVertexInputAttributeDescription, 8> attributeDescriptions{};
-        attributeDescriptions[0] = {
-            0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, position)};
-        attributeDescriptions[1] = {
-            1, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, normal)};
-        attributeDescriptions[2] = {
-            2, 0, VK_FORMAT_R32G32B32A32_SFLOAT, offsetof(AssetVertex, tangent)};
-        attributeDescriptions[3] = {
-            3, 0, VK_FORMAT_R32G32_SFLOAT, offsetof(AssetVertex, texcoord)};
-        attributeDescriptions[4] = {
-            4, 0, VK_FORMAT_R32G32B32A32_UINT, offsetof(AssetVertex, joints)};
-        attributeDescriptions[5] = {
-            5, 0, VK_FORMAT_R32G32B32A32_SFLOAT, offsetof(AssetVertex, weights)};
-        attributeDescriptions[6] = {
-            6, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph0)};
-        attributeDescriptions[7] = {
-            7, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(AssetVertex, morph1)};
-        const std::array shadowAttributeDescriptions = {
-            attributeDescriptions[0],
-            attributeDescriptions[3],
-            attributeDescriptions[4],
-            attributeDescriptions[5],
-        };
-        const std::array outlineAttributeDescriptions = {
-            attributeDescriptions[0],
-            attributeDescriptions[1],
-            attributeDescriptions[4],
-            attributeDescriptions[5],
-        };
-        vertexInput.vertexBindingDescriptionCount = 1;
-        vertexInput.pVertexBindingDescriptions = &bindingDescription;
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(attributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions = attributeDescriptions.data();
+        rhi::GraphicsPipelineDesc materialDesc{};
+        materialDesc.vertexShader = vertexModule;
+        materialDesc.fragmentShader = fragmentModule;
+        materialDesc.vertexStride =
+            static_cast<std::uint32_t>(sizeof(AssetVertex));
+        materialDesc.vertexAttributes = materialAttributes;
+        materialDesc.colorAttachmentCount = 2;
+        materialDesc.renderPass = context.sceneRenderPass;
+        materialDesc.layout = pipelineLayout_;
 
-        VkPipelineInputAssemblyStateCreateInfo inputAssembly{
-            VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};
-        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
-        VkPipelineViewportStateCreateInfo viewportState{
-            VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO};
-        viewportState.viewportCount = 1;
-        viewportState.scissorCount = 1;
-        VkPipelineRasterizationStateCreateInfo rasterizer{
-            VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
-        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-        rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
-        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        rasterizer.lineWidth = 1.0F;
-        VkPipelineMultisampleStateCreateInfo multisampling{
-            VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
-        VkPipelineDepthStencilStateCreateInfo depthStencil{
-            VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
-        depthStencil.depthTestEnable = VK_TRUE;
-        depthStencil.depthWriteEnable = VK_TRUE;
-        depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
-        std::array<VkPipelineColorBlendAttachmentState, 2>
-            colorBlendAttachments{};
-        for (auto& attachment : colorBlendAttachments) {
-            attachment.colorWriteMask =
-                VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-                | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
-        }
-        VkPipelineColorBlendStateCreateInfo colorBlending{
-            VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO};
-        colorBlending.attachmentCount =
-            static_cast<std::uint32_t>(colorBlendAttachments.size());
-        colorBlending.pAttachments = colorBlendAttachments.data();
-        const std::array dynamicStates = {
-            VK_DYNAMIC_STATE_VIEWPORT,
-            VK_DYNAMIC_STATE_SCISSOR,
-        };
-        VkPipelineDynamicStateCreateInfo dynamicState{
-            VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO};
-        dynamicState.dynamicStateCount =
-            static_cast<std::uint32_t>(dynamicStates.size());
-        dynamicState.pDynamicStates = dynamicStates.data();
+        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        materialDesc.alphaBlend = false;
+        materialDesc.depthWrite = true;
+        opaquePipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.cullMode = VK_CULL_MODE_NONE;
+        opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        materialDesc.alphaBlend = true;
+        materialDesc.depthWrite = false;
+        blendPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.cullMode = VK_CULL_MODE_NONE;
+        blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
 
-        VkPipelineLayoutCreateInfo layoutInfo{
-            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO};
-        layoutInfo.setLayoutCount = 1;
-        layoutInfo.pSetLayouts = &descriptorSetLayout_;
-        VkPushConstantRange pushConstantRange{};
-        pushConstantRange.stageFlags =
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
-        pushConstantRange.size =
-            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants);
-        layoutInfo.pushConstantRangeCount = 1;
-        layoutInfo.pPushConstantRanges = &pushConstantRange;
-        vkCheck(
-            vkCreatePipelineLayout(
-                device_, &layoutInfo, nullptr, &pipelineLayout_),
-            "vkCreatePipelineLayout");
+        rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
+        outlineDesc.vertexShader = outlineVertexModule;
+        outlineDesc.fragmentShader = outlineFragmentModule;
+        outlineDesc.vertexAttributes = outlineAttributes;
+        outlineDesc.cullMode = VK_CULL_MODE_FRONT_BIT;
+        outlineDesc.alphaBlend = false;
+        outlineDesc.depthWrite = false;
+        outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
 
-        VkGraphicsPipelineCreateInfo pipelineInfo{
-            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-        pipelineInfo.stageCount =
-            static_cast<std::uint32_t>(shaderStages.size());
-        pipelineInfo.pStages = shaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        pipelineInfo.pInputAssemblyState = &inputAssembly;
-        pipelineInfo.pViewportState = &viewportState;
-        pipelineInfo.pRasterizationState = &rasterizer;
-        pipelineInfo.pMultisampleState = &multisampling;
-        pipelineInfo.pDepthStencilState = &depthStencil;
-        pipelineInfo.pColorBlendState = &colorBlending;
-        pipelineInfo.pDynamicState = &dynamicState;
-        pipelineInfo.layout = pipelineLayout_;
-        pipelineInfo.renderPass = context.sceneRenderPass;
-        pipelineInfo.subpass = 0;
+        rhi::GraphicsPipelineDesc backgroundDesc = materialDesc;
+        backgroundDesc.vertexShader = backgroundVertexModule;
+        backgroundDesc.fragmentShader = backgroundFragmentModule;
+        backgroundDesc.vertexStride = 0;
+        backgroundDesc.vertexAttributes.clear();
+        backgroundDesc.cullMode = VK_CULL_MODE_NONE;
+        backgroundDesc.depthTest = false;
+        backgroundDesc.depthWrite = false;
+        backgroundPipeline_ = rhi_->createGraphicsPipeline(backgroundDesc);
 
-        const auto createVariant = [&](
-            const VkCullModeFlags cullMode,
-            const bool blend,
-            VkPipeline& pipeline) {
-            rasterizer.cullMode = cullMode;
-            depthStencil.depthWriteEnable = blend ? VK_FALSE : VK_TRUE;
-            auto& colorAttachment = colorBlendAttachments[0];
-            colorAttachment.blendEnable = blend ? VK_TRUE : VK_FALSE;
-            colorAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
-            colorAttachment.dstColorBlendFactor =
-                VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            colorAttachment.colorBlendOp = VK_BLEND_OP_ADD;
-            colorAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
-            colorAttachment.dstAlphaBlendFactor =
-                VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            colorAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
-            colorBlendAttachments[1] = colorAttachment;
-            vkCheck(
-                vkCreateGraphicsPipelines(
-                    device_,
-                    VK_NULL_HANDLE,
-                    1,
-                    &pipelineInfo,
-                    nullptr,
-                    &pipeline),
-                "vkCreateGraphicsPipelines(material variant)");
-        };
-        createVariant(VK_CULL_MODE_BACK_BIT, false, opaquePipeline_);
-        createVariant(VK_CULL_MODE_NONE, false, opaqueDoubleSidedPipeline_);
-        createVariant(VK_CULL_MODE_BACK_BIT, true, blendPipeline_);
-        createVariant(VK_CULL_MODE_NONE, true, blendDoubleSidedPipeline_);
-        pipelineInfo.pStages = outlineShaderStages.data();
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(
-                outlineAttributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions =
-            outlineAttributeDescriptions.data();
-        rasterizer.cullMode = VK_CULL_MODE_FRONT_BIT;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        colorBlendAttachments[0].blendEnable = VK_FALSE;
-        colorBlendAttachments[1].blendEnable = VK_FALSE;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &outlinePipeline_),
-            "vkCreateGraphicsPipelines(outline)");
-
-        VkPipelineVertexInputStateCreateInfo emptyVertexInput{
-            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-        pipelineInfo.pStages = backgroundShaderStages.data();
-        pipelineInfo.pVertexInputState = &emptyVertexInput;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        depthStencil.depthTestEnable = VK_FALSE;
-        depthStencil.depthWriteEnable = VK_FALSE;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &backgroundPipeline_),
-            "vkCreateGraphicsPipelines(background)");
-
-        pipelineInfo.pStages = shadowShaderStages.data();
-        pipelineInfo.pVertexInputState = &vertexInput;
-        vertexInput.vertexAttributeDescriptionCount =
-            static_cast<std::uint32_t>(shadowAttributeDescriptions.size());
-        vertexInput.pVertexAttributeDescriptions =
-            shadowAttributeDescriptions.data();
-        pipelineInfo.renderPass = context.shadowRenderPass;
-        rasterizer.cullMode = VK_CULL_MODE_NONE;
-        rasterizer.depthBiasEnable = VK_TRUE;
-        rasterizer.depthBiasConstantFactor = 1.25F;
-        rasterizer.depthBiasSlopeFactor = 1.75F;
-        depthStencil.depthTestEnable = VK_TRUE;
-        depthStencil.depthWriteEnable = VK_TRUE;
-        colorBlending.attachmentCount = 0;
-        colorBlending.pAttachments = nullptr;
-        vkCheck(
-            vkCreateGraphicsPipelines(
-                device_,
-                VK_NULL_HANDLE,
-                1,
-                &pipelineInfo,
-                nullptr,
-                &shadowPipeline_),
-            "vkCreateGraphicsPipelines(shadow)");
+        rhi::GraphicsPipelineDesc shadowDesc = materialDesc;
+        shadowDesc.vertexShader = shadowVertexModule;
+        shadowDesc.fragmentShader = shadowFragmentModule;
+        shadowDesc.vertexAttributes = shadowAttributes;
+        shadowDesc.cullMode = VK_CULL_MODE_NONE;
+        shadowDesc.depthBias = true;
+        shadowDesc.depthBiasConstant = 1.25F;
+        shadowDesc.depthBiasSlope = 1.75F;
+        shadowDesc.depthTest = true;
+        shadowDesc.depthWrite = true;
+        shadowDesc.alphaBlend = false;
+        shadowDesc.colorAttachmentCount = 0;
+        shadowDesc.renderPass = context.shadowRenderPass;
+        shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
     } catch (...) {
-        vkDestroyShaderModule(device_, shadowFragmentModule, nullptr);
-        vkDestroyShaderModule(device_, shadowVertexModule, nullptr);
-        vkDestroyShaderModule(device_, backgroundFragmentModule, nullptr);
-        vkDestroyShaderModule(device_, backgroundVertexModule, nullptr);
-        vkDestroyShaderModule(device_, outlineFragmentModule, nullptr);
-        vkDestroyShaderModule(device_, outlineVertexModule, nullptr);
-        vkDestroyShaderModule(device_, fragmentModule, nullptr);
-        vkDestroyShaderModule(device_, vertexModule, nullptr);
+        rhi_->destroyShaderModule(shadowFragmentModule);
+        rhi_->destroyShaderModule(shadowVertexModule);
+        rhi_->destroyShaderModule(backgroundFragmentModule);
+        rhi_->destroyShaderModule(backgroundVertexModule);
+        rhi_->destroyShaderModule(outlineFragmentModule);
+        rhi_->destroyShaderModule(outlineVertexModule);
+        rhi_->destroyShaderModule(fragmentModule);
+        rhi_->destroyShaderModule(vertexModule);
         throw;
     }
-    vkDestroyShaderModule(device_, shadowFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, shadowVertexModule, nullptr);
-    vkDestroyShaderModule(device_, backgroundFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, backgroundVertexModule, nullptr);
-    vkDestroyShaderModule(device_, outlineFragmentModule, nullptr);
-    vkDestroyShaderModule(device_, outlineVertexModule, nullptr);
-    vkDestroyShaderModule(device_, fragmentModule, nullptr);
-    vkDestroyShaderModule(device_, vertexModule, nullptr);
+    rhi_->destroyShaderModule(shadowFragmentModule);
+    rhi_->destroyShaderModule(shadowVertexModule);
+    rhi_->destroyShaderModule(backgroundFragmentModule);
+    rhi_->destroyShaderModule(backgroundVertexModule);
+    rhi_->destroyShaderModule(outlineFragmentModule);
+    rhi_->destroyShaderModule(outlineVertexModule);
+    rhi_->destroyShaderModule(fragmentModule);
+    rhi_->destroyShaderModule(vertexModule);
 }
 
+
 void CharacterSceneRenderer::destroyResources() {
-    if (device_ == VK_NULL_HANDLE) {
+    if (rhi_ == nullptr) {
         return;
     }
     for (VkPipeline* pipeline : {
@@ -1569,20 +1259,20 @@ void CharacterSceneRenderer::destroyResources() {
              &backgroundPipeline_,
              &shadowPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device_, *pipeline, nullptr);
+            rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
         }
     }
     if (pipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, pipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
     if (descriptorPool_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
+        rhi_->destroyDescriptorPool(descriptorPool_);
         descriptorPool_ = VK_NULL_HANDLE;
     }
     if (descriptorSetLayout_ != VK_NULL_HANDLE) {
-        vkDestroyDescriptorSetLayout(device_, descriptorSetLayout_, nullptr);
+        rhi_->destroyDescriptorSetLayout(descriptorSetLayout_);
         descriptorSetLayout_ = VK_NULL_HANDLE;
     }
     for (auto& buffer : uniformBuffers_) {
@@ -1609,17 +1299,17 @@ void CharacterSceneRenderer::destroyResources() {
                  &material.matcap,
                  &material.hairData,
             &material.faceSdf}) {
-            vkDestroySampler(device_, texture->sampler, nullptr);
-            vkDestroyImageView(device_, texture->view, nullptr);
+            rhi_->destroySampler(texture->sampler);
+            rhi_->destroyImageView(texture->view);
             allocator_->destroyImage(texture->image);
         }
     }
     gpuMaterials_.clear();
-    vkDestroySampler(device_, environmentTexture_.sampler, nullptr);
-    vkDestroyImageView(device_, environmentTexture_.view, nullptr);
+    rhi_->destroySampler(environmentTexture_.sampler);
+    rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
-    vkDestroySampler(device_, toonRampTexture_.sampler, nullptr);
-    vkDestroyImageView(device_, toonRampTexture_.view, nullptr);
+    rhi_->destroySampler(toonRampTexture_.sampler);
+    rhi_->destroyImageView(toonRampTexture_.view);
     allocator_->destroyImage(toonRampTexture_.image);
 }
 
@@ -1633,12 +1323,12 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &backgroundPipeline_,
              &shadowPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
-            vkDestroyPipeline(device_, *pipeline, nullptr);
+            rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
         }
     }
     if (pipelineLayout_ != VK_NULL_HANDLE) {
-        vkDestroyPipelineLayout(device_, pipelineLayout_, nullptr);
+        rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
 }
@@ -1811,50 +1501,28 @@ void CharacterSceneRenderer::updateUniformBuffer(
 }
 
 void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
+    rhi::ICommandRecorder& commands = *context.commands;
+    rhi::RenderPassBeginDesc shadowPass{};
+    shadowPass.renderPass = context.shadowRenderPass;
+    shadowPass.framebuffer = context.shadowFramebuffer;
+    shadowPass.extent = {context.shadowMapSize, context.shadowMapSize};
     VkClearValue shadowClear{};
     shadowClear.depthStencil = {1.0F, 0};
-    VkRenderPassBeginInfo shadowPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    shadowPassInfo.renderPass = context.shadowRenderPass;
-    shadowPassInfo.framebuffer = context.shadowFramebuffer;
-    shadowPassInfo.renderArea.extent = {context.shadowMapSize, context.shadowMapSize};
-    shadowPassInfo.clearValueCount = 1;
-    shadowPassInfo.pClearValues = &shadowClear;
-    vkCmdBeginRenderPass(
-        context.commandBuffer,
-        &shadowPassInfo,
-        VK_SUBPASS_CONTENTS_INLINE);
+    shadowPass.clearValues = {shadowClear};
+    commands.beginRenderPass(shadowPass);
 
-    VkViewport shadowViewport{};
-    shadowViewport.width = static_cast<float>(context.shadowMapSize);
-    shadowViewport.height = static_cast<float>(context.shadowMapSize);
-    shadowViewport.maxDepth = 1.0F;
-    vkCmdSetViewport(context.commandBuffer, 0, 1, &shadowViewport);
-    VkRect2D shadowScissor{};
-    shadowScissor.extent = {context.shadowMapSize, context.shadowMapSize};
-    vkCmdSetScissor(context.commandBuffer, 0, 1, &shadowScissor);
-    const VkDeviceSize shadowOffsets[] = {0};
-    vkCmdBindVertexBuffers(
-        context.commandBuffer, 0, 1, &vertexBuffer_.buffer, shadowOffsets);
-    vkCmdBindIndexBuffer(
-        context.commandBuffer, indexBuffer_.buffer, 0, VK_INDEX_TYPE_UINT32);
-    vkCmdBindPipeline(
-        context.commandBuffer,
-        VK_PIPELINE_BIND_POINT_GRAPHICS,
-        shadowPipeline_);
+    const float shadowSize = static_cast<float>(context.shadowMapSize);
+    commands.setViewport(shadowSize, shadowSize);
+    commands.setScissor({context.shadowMapSize, context.shadowMapSize});
+    commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
+    commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+    commands.bindPipeline(shadowPipeline_);
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
     }
     if (bindlessTextures_) {
-        vkCmdBindDescriptorSets(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[context.currentFrame],
-            0,
-            nullptr);
+        commands.bindDescriptorSet(
+            pipelineLayout_, descriptorSets_[context.currentFrame]);
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->descriptorSetBinds;
         }
@@ -1870,15 +1538,8 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             const std::size_t descriptorIndex =
                 context.currentFrame * asset_.materials.size()
                 + primitive.materialIndex;
-            vkCmdBindDescriptorSets(
-                context.commandBuffer,
-                VK_PIPELINE_BIND_POINT_GRAPHICS,
-                pipelineLayout_,
-                0,
-                1,
-                &descriptorSets_[descriptorIndex],
-                0,
-                nullptr);
+            commands.bindDescriptorSet(
+                pipelineLayout_, descriptorSets_[descriptorIndex]);
             if (context.submissionCounters != nullptr) {
                 ++context.submissionCounters->descriptorSetBinds;
             }
@@ -1899,13 +1560,12 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             material.materialProfileVersion,
             0,
         };
-        vkCmdPushConstants(
-            context.commandBuffer,
+        commands.pushConstants(
             pipelineLayout_,
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             0,
-            sizeof(materialConstants),
-            &materialConstants);
+            &materialConstants,
+            sizeof(materialConstants));
         MorphPushConstants morphConstants{};
         morphConstants.weights = renderSettings_->morphWeights;
         if (bindlessTextures_) {
@@ -1913,36 +1573,26 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
                 kSharedTextureSlots
                 + primitive.materialIndex * kMaterialTextureSlots;
         }
-        vkCmdPushConstants(
-            context.commandBuffer,
+        commands.pushConstants(
             pipelineLayout_,
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             sizeof(MaterialPushConstants),
-            sizeof(morphConstants),
-            &morphConstants);
-        vkCmdDrawIndexed(
-            context.commandBuffer,
-            primitive.indexCount,
-            1,
-            primitive.firstIndex,
-            0,
-            0);
+            &morphConstants,
+            sizeof(morphConstants));
+        commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->drawCalls;
             context.submissionCounters->pushConstantUpdates += 2;
         }
     }
-    vkCmdEndRenderPass(context.commandBuffer);
+    commands.endRenderPass();
     if (context.gpuTimingEnabled) {
-        vkCmdWriteTimestamp(
-            context.commandBuffer,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-            context.timestampQueryPool,
-            1);
+        commands.writeTimestamp(context.timestampQueryPool, 1, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
 }
 
 void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
+    rhi::ICommandRecorder& commands = *context.commands;
     std::array<VkClearValue, 3> clearValues{};
     clearValues[0].color.float32[0] = 0.035F;
     clearValues[0].color.float32[1] = 0.055F;
@@ -1953,39 +1603,24 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     clearValues[2].color.float32[1] = 0.5F;
     clearValues[2].color.float32[2] = 1.0F;
     clearValues[2].color.float32[3] = 0.0F;
-    VkRenderPassBeginInfo renderPassInfo{
-        VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+    rhi::RenderPassBeginDesc renderPassInfo{};
     renderPassInfo.renderPass = context.sceneRenderPass;
     renderPassInfo.framebuffer = context.sceneFramebuffer;
-    renderPassInfo.renderArea.extent = context.renderExtent;
-    renderPassInfo.clearValueCount =
-        static_cast<std::uint32_t>(clearValues.size());
-    renderPassInfo.pClearValues = clearValues.data();
+    renderPassInfo.extent = context.renderExtent;
+    renderPassInfo.clearValues.assign(
+        clearValues.begin(), clearValues.end());
+    commands.beginRenderPass(renderPassInfo);
 
-    vkCmdBeginRenderPass(
-        context.commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-    VkViewport viewport{};
-    viewport.width = static_cast<float>(context.renderExtent.width);
-    viewport.height = static_cast<float>(context.renderExtent.height);
-    viewport.maxDepth = 1.0F;
-    vkCmdSetViewport(context.commandBuffer, 0, 1, &viewport);
-    VkRect2D scissor{};
-    scissor.extent = context.renderExtent;
-    vkCmdSetScissor(context.commandBuffer, 0, 1, &scissor);
+    commands.setViewport(
+        static_cast<float>(context.renderExtent.width),
+        static_cast<float>(context.renderExtent.height));
+    commands.setScissor(context.renderExtent);
 
     // The global texture array serves every pipeline in this pass, so one
     // bind at the top replaces the per-primitive table switches.
     if (bindlessTextures_) {
-        vkCmdBindDescriptorSets(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[context.currentFrame],
-            0,
-            nullptr);
+        commands.bindDescriptorSet(
+            pipelineLayout_, descriptorSets_[context.currentFrame]);
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->descriptorSetBinds;
         }
@@ -1993,39 +1628,23 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
 
     const RenderSettings& settings = *renderSettings_;
     if (settings.characterPresentation.backgroundEnabled) {
-        vkCmdBindPipeline(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            backgroundPipeline_);
+        commands.bindPipeline(backgroundPipeline_);
         if (!bindlessTextures_) {
             const std::size_t backgroundDescriptorIndex =
                 context.currentFrame * asset_.materials.size();
-            vkCmdBindDescriptorSets(
-                context.commandBuffer,
-                VK_PIPELINE_BIND_POINT_GRAPHICS,
-                pipelineLayout_,
-                0,
-                1,
-                &descriptorSets_[backgroundDescriptorIndex],
-                0,
-                nullptr);
+            commands.bindDescriptorSet(
+                pipelineLayout_, descriptorSets_[backgroundDescriptorIndex]);
             if (context.submissionCounters != nullptr) {
                 ++context.submissionCounters->descriptorSetBinds;
             }
         }
-        vkCmdDraw(context.commandBuffer, 3, 1, 0, 0);
+        commands.draw(3);
     }
 
-    const VkDeviceSize offsets[] = {0};
-    vkCmdBindVertexBuffers(
-        context.commandBuffer, 0, 1, &vertexBuffer_.buffer, offsets);
-    vkCmdBindIndexBuffer(
-        context.commandBuffer, indexBuffer_.buffer, 0, VK_INDEX_TYPE_UINT32);
+    commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
+    commands.bindIndexBuffer(indexBuffer_.buffer, 0);
     if (settings.silhouetteOutlineEnabled) {
-        vkCmdBindPipeline(
-            context.commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            outlinePipeline_);
+        commands.bindPipeline(outlinePipeline_);
         for (const AssetPrimitive& primitive : asset_.primitives) {
             const AssetMaterial& outlineMaterial =
                 asset_.materials[primitive.materialIndex];
@@ -2044,26 +1663,13 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 const std::size_t descriptorIndex =
                     context.currentFrame * asset_.materials.size()
                     + primitive.materialIndex;
-                vkCmdBindDescriptorSets(
-                    context.commandBuffer,
-                    VK_PIPELINE_BIND_POINT_GRAPHICS,
-                    pipelineLayout_,
-                    0,
-                    1,
-                    &descriptorSets_[descriptorIndex],
-                    0,
-                    nullptr);
+                commands.bindDescriptorSet(
+                    pipelineLayout_, descriptorSets_[descriptorIndex]);
                 if (context.submissionCounters != nullptr) {
                     ++context.submissionCounters->descriptorSetBinds;
                 }
             }
-            vkCmdDrawIndexed(
-                context.commandBuffer,
-                primitive.indexCount,
-                1,
-                primitive.firstIndex,
-                0,
-                0);
+            commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
             if (context.submissionCounters != nullptr) {
                 ++context.submissionCounters->drawCalls;
             }
@@ -2072,7 +1678,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     for (const AssetPrimitive& primitive : asset_.primitives) {
         if (asset_.materials[primitive.materialIndex].alphaMode
             != AssetAlphaMode::Blend) {
-            drawPrimitive(context.commandBuffer, primitive, primitive.firstIndex);
+            drawPrimitive(commands, primitive, primitive.firstIndex);
         }
     }
     std::vector<const AssetPrimitive*> transparentPrimitives;
@@ -2146,27 +1752,21 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
             const VkDeviceSize offsetBytes =
                 static_cast<VkDeviceSize>(oitReadIndex)
                 * sizeof(std::uint32_t);
-            vkCmdBindIndexBuffer(
-                context.commandBuffer,
+            commands.bindIndexBuffer(
                 oitIndexBuffers_[context.currentFrame].buffer,
-                offsetBytes,
-                VK_INDEX_TYPE_UINT32);
+                offsetBytes);
         }
-        drawPrimitive(context.commandBuffer, *primitive, 0);
+        drawPrimitive(commands, *primitive, 0);
         oitReadIndex += primitive->indexCount;
     }
-    vkCmdEndRenderPass(context.commandBuffer);
+    commands.endRenderPass();
     if (context.gpuTimingEnabled) {
-        vkCmdWriteTimestamp(
-            context.commandBuffer,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-            context.timestampQueryPool,
-            2);
+        commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
 }
 
 void CharacterSceneRenderer::drawPrimitive(
-    const VkCommandBuffer commandBuffer,
+    rhi::ICommandRecorder& commands,
     const AssetPrimitive& primitive,
     const std::uint32_t firstIndexOffset) {
     const AssetMaterial& material = asset_.materials[primitive.materialIndex];
@@ -2178,19 +1778,12 @@ void CharacterSceneRenderer::drawPrimitive(
     const VkPipeline pipeline = blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)
         : (material.doubleSided ? opaqueDoubleSidedPipeline_ : opaquePipeline_);
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+    commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
             currentFrame_ * asset_.materials.size() + primitive.materialIndex;
-        vkCmdBindDescriptorSets(
-            commandBuffer,
-            VK_PIPELINE_BIND_POINT_GRAPHICS,
-            pipelineLayout_,
-            0,
-            1,
-            &descriptorSets_[descriptorIndex],
-            0,
-            nullptr);
+        commands.bindDescriptorSet(
+            pipelineLayout_, descriptorSets_[descriptorIndex]);
         if (submissionCounters_ != nullptr) {
             ++submissionCounters_->descriptorSetBinds;
         }
@@ -2215,13 +1808,12 @@ void CharacterSceneRenderer::drawPrimitive(
             ? 1U
             : 0U,
     };
-    vkCmdPushConstants(
-        commandBuffer,
+    commands.pushConstants(
         pipelineLayout_,
         VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
         0,
-        sizeof(materialConstants),
-        &materialConstants);
+        &materialConstants,
+        sizeof(materialConstants));
     MorphPushConstants morphConstants{};
     morphConstants.weights = renderSettings_->morphWeights;
     if (bindlessTextures_) {
@@ -2274,20 +1866,13 @@ void CharacterSceneRenderer::drawPrimitive(
                 gizmoTransform[14], gizmoTransform[15],
             };
         }();
-    vkCmdPushConstants(
-        commandBuffer,
+    commands.pushConstants(
         pipelineLayout_,
         VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
         sizeof(MaterialPushConstants),
-        sizeof(morphConstants),
-        &morphConstants);
-    vkCmdDrawIndexed(
-        commandBuffer,
-        primitive.indexCount,
-        1,
-        firstIndexOffset,
-        0,
-        0);
+        &morphConstants,
+        sizeof(morphConstants));
+    commands.drawIndexed(primitive.indexCount, firstIndexOffset);
     if (submissionCounters_ != nullptr) {
         ++submissionCounters_->drawCalls;
         ++submissionCounters_->pipelineBinds;

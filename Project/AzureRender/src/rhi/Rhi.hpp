@@ -33,8 +33,13 @@ struct DescriptorBindingDesc {
     VkShaderStageFlags stages = 0;
 };
 
+struct DescriptorPoolSizeDesc {
+    VkDescriptorType type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    std::uint32_t count = 1;
+};
+
 struct DescriptorPoolDesc {
-    std::vector<DescriptorBindingDesc> sizes;
+    std::vector<DescriptorPoolSizeDesc> sizes;
     std::uint32_t maxSets = 1;
 };
 
@@ -176,7 +181,8 @@ public:
         VkExtent2D extent) = 0;
     virtual void writeTimestamp(
         VkQueryPool pool,
-        std::uint32_t query) = 0;
+        std::uint32_t query,
+        VkPipelineStageFlagBits stage) = 0;
 };
 
 // Device-level resource operations. Scene renderers create all GPU objects
@@ -203,6 +209,7 @@ public:
         const GpuImage& destination,
         std::uint32_t width,
         std::uint32_t height) = 0;
+    virtual void clearImage(const GpuImage& image) = 0;
     virtual void generateMipmaps(
         const GpuImage& image,
         VkFormat format,

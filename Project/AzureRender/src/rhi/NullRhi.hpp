@@ -74,6 +74,7 @@ public:
         const GpuImage& destination,
         std::uint32_t width,
         std::uint32_t height) override;
+    void clearImage(const GpuImage& image) override;
     void generateMipmaps(
         const GpuImage& image,
         VkFormat format,
@@ -163,7 +164,10 @@ public:
         VkImage image,
         VkBuffer buffer,
         VkExtent2D extent) override;
-    void writeTimestamp(VkQueryPool pool, std::uint32_t query) override;
+    void writeTimestamp(
+        VkQueryPool pool,
+        std::uint32_t query,
+        VkPipelineStageFlagBits stage) override;
 };
 
 }  // namespace azurerender::rhi

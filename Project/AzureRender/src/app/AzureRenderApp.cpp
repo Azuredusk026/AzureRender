@@ -189,6 +189,9 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         kMaxFramesInFlight,
         uploadRingAlignment_);
     createCommandPool();
+    rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
+        device_, physicalDevice_, graphicsQueue_, commandPool_,
+        gpuAllocator_);
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
     createShadowResources();
@@ -311,6 +314,7 @@ void AzureRenderApp::buildRenderContext(
     context.graphicsQueueFamily = graphicsQueueFamily_;
     context.commandPool = commandPool_;
     context.allocator = &gpuAllocator_;
+    context.rhi = rhi_.get();
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
     context.maxFramesInFlight = kMaxFramesInFlight;
@@ -719,6 +723,7 @@ void AzureRenderApp::cleanup() {
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }
+        rhi_.reset();
         gpuAllocator_.shutdown();
         vkDestroyDevice(device_, nullptr);
         device_ = VK_NULL_HANDLE;

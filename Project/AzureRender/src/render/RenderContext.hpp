@@ -17,6 +17,8 @@ namespace azurerender {
 
 namespace rhi {
 class IGpuAllocator;
+class IRhi;
+class ICommandRecorder;
 }
 
 struct RenderSettings;
@@ -118,6 +120,12 @@ struct RenderContext {
     // Engine-owned GPU allocator. Scene renderers route every buffer and
     // image allocation through it and never create a private allocator.
     rhi::IGpuAllocator* allocator = nullptr;
+
+    // Resource creation backend for everything except memory (descriptors,
+    // pipelines, samplers, views, render passes, one-shot uploads).
+    rhi::IRhi* rhi = nullptr;
+    // Recording backend for the current frame; valid only inside recordScene.
+    rhi::ICommandRecorder* commands = nullptr;
 
     // Descriptor indexing is enabled on the device and renderers may build a
     // global texture array instead of per-material descriptor sets. False

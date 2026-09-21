@@ -4,6 +4,7 @@
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
 #include "rhi/IGpuAllocator.hpp"
+#include "rhi/Rhi.hpp"
 
 #include <array>
 #include <cstdint>
@@ -58,12 +59,10 @@ private:
         float renderWidth = 1280.0F;
     };
 
-    // Engine context snapshot taken on onLoad.
-    VkDevice device_ = VK_NULL_HANDLE;
-    VkQueue graphicsQueue_ = VK_NULL_HANDLE;
-    VkCommandPool commandPool_ = VK_NULL_HANDLE;
     // Engine-owned allocator borrowed for the renderer's lifetime.
     rhi::IGpuAllocator* allocator_ = nullptr;
+    // Resource creation and recording backend borrowed for the lifetime.
+    rhi::IRhi* rhi_ = nullptr;
     std::string shaderDirectory_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
@@ -141,6 +140,11 @@ private:
     void invalidateHistory();
     void updateUniformBuffer();
     void updateTaaUniform();
+
+    VkPipeline createFullscreenPipeline(
+        const std::string& fragmentShader,
+        VkPipelineLayout layout,
+        VkRenderPass renderPass);
 };
 
 }  // namespace azurerender

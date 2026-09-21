@@ -775,6 +775,8 @@ void AzureRenderApp::recordCommandBuffer(
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
     sceneContext.imageIndex = imageIndex;
     sceneContext.commandBuffer = commandBuffer;
+    azurerender::rhi::VulkanCommandRecorder commandRecorder(commandBuffer);
+    sceneContext.commands = &commandRecorder;
     sceneContext.sceneFramebuffer = swapchainFramebuffers_[imageIndex];
     if (runOptions_.gpuTimingEnabled && !timestampQueryPools_.empty()) {
         sceneContext.timestampQueryPool =

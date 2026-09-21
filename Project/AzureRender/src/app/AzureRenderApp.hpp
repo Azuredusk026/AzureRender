@@ -6,6 +6,7 @@
 #include "resources/ResourceLocator.hpp"
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/UploadRingBuffer.hpp"
+#include "rhi/VulkanRhi.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -143,6 +144,8 @@ private:
     azurerender::rhi::GpuAllocator gpuAllocator_;
     // All per-frame CPU-to-GPU uploads are slices of this ring.
     azurerender::rhi::UploadRingBuffer uploadRing_;
+    // Resource creation backend handed to scene renderers.
+    std::unique_ptr<azurerender::rhi::VulkanRhi> rhi_;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;

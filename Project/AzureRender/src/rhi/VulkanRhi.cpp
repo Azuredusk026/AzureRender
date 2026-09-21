@@ -120,6 +120,23 @@ void VulkanRhi::copyBufferToImage(
     });
 }
 
+void VulkanRhi::clearImage(const GpuImage& image) {
+    runOneShot("clearImage", [&](VkCommandBuffer commandBuffer) {
+        const VkClearColorValue clear{{0.0F, 0.0F, 0.0F, 1.0F}};
+        VkImageSubresourceRange range{};
+        range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        range.levelCount = 1;
+        range.layerCount = 1;
+        vkCmdClearColorImage(
+            commandBuffer,
+            image.image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            &clear,
+            1,
+            &range);
+    });
+}
+
 void VulkanRhi::generateMipmaps(
     const GpuImage& image,
     const VkFormat format,
@@ -609,6 +626,7 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
         externalToPass.srcAccessMask = VK_ACCESS_SHADER_READ_BIT;
         externalToPass.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+        externalToPass.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(externalToPass);
 
         VkSubpassDependency passToExternal{};
@@ -620,6 +638,7 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         passToExternal.srcAccessMask =
             VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
         passToExternal.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        passToExternal.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(passToExternal);
     }
 
@@ -826,9 +845,9 @@ void VulkanCommandRecorder::copyImageToBuffer(
 
 void VulkanCommandRecorder::writeTimestamp(
     const VkQueryPool pool,
-    const std::uint32_t query) {
-    vkCmdWriteTimestamp(
-        commandBuffer_, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, pool, query);
+    const std::uint32_t query,
+    const VkPipelineStageFlagBits stage) {
+    vkCmdWriteTimestamp(commandBuffer_, stage, pool, query);
 }
 
 }  // namespace azurerender::rhi
