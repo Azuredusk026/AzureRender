@@ -159,7 +159,7 @@ cmd /c "tools\msvc_env.bat cmake -S . -B build\msvc-debug -G Ninja -DCMAKE_BUILD
 cmd /c "tools\msvc_env.bat cmake --build build\msvc-debug"
 ```
 
-该脚本设置 `VSLANG=1033`。Ninja 依靠解析 `/showIncludes` 的本地化前缀来追踪头文件依赖；本地化输出会使 CMake 生成的 `msvc_deps_prefix` 无法匹配，此时修改头文件不会触发重建，陈旧目标文件与新的结构体布局不一致会在运行期崩溃。若 CMake 配置阶段出现相关警告，改用该脚本重新配置到干净目录，或在改动头文件后执行 `cmake --build <dir> --clean-first`。
+Ninja 的头文件依赖追踪依赖 CMake 在编译器探测时记录的 `/showIncludes` 前缀与 cl 实际输出逐字节匹配。本地化工具链在错误代码页下配置会使两者失配，症状是改头文件不触发重建，陈旧目标文件与新的结构体布局不一致会在运行期崩溃。CMake 配置阶段会用一次真实探测编译验证该匹配；若出现前缀警告，执行 `python tools\fix_msvc_deps_prefix.py <build 目录>` 再重新配置即可，该工具用编译器实测输出字节重写记录值。验证生效的方法：改动任一公共头文件后构建，依赖它的全部翻译单元应当重新编译。
 
 MSVC 目标使用与 GCC 基线不同的诊断集合：`/EHsc` 对全部目标生效（缺少它会使 `try/catch` 失效），渲染器目标降级 C4456 与 C4996。CI 的严格门禁仍以 GCC 为准。
 

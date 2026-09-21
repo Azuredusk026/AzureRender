@@ -92,7 +92,7 @@ E0 性能基线（RTX 2060、1280×720、150 帧）：
 
 - `ISceneRenderer::diagnosticViewName` 返回指向 `capabilities()` 临时对象内部字符串的 `string_view`，调用方读到已析构存储。
 - MSVC 目标缺少 `/EHsc`，全部 `try/catch` 失效，抛出的异常直接终止进程。
-- MSVC 与 Ninja 组合下 `msvc_deps_prefix` 因本地化输出无法匹配，头文件改动不触发重建，陈旧目标文件与新结构体布局不一致而崩溃。`tools/msvc_env.bat` 设置 `VSLANG=1033` 修正该问题，CMake 在缺少该设置时给出警告。
+- MSVC 与 Ninja 组合下 `msvc_deps_prefix` 因本地化输出无法匹配，头文件改动不触发重建，陈旧目标文件与新结构体布局不一致而崩溃。`tools/fix_msvc_deps_prefix.py` 用编译器实测输出字节重写探测记录值，CMake 配置阶段对前缀失配给出警告。
 
 ### 已知限制
 

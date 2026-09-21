@@ -22,21 +22,47 @@ if(MSVC)
     add_compile_options(/EHsc /utf-8)
 endif()
 
-# Ninja tracks header dependencies on MSVC by parsing the localized
-# "/showIncludes" prefix. On a non-English toolchain that prefix can round-trip
-# through the wrong code page, leaving `msvc_deps_prefix` unable to match the
-# compiler output. Header edits then silently fail to trigger a rebuild, and a
-# stale object compiled against a different struct layout crashes at runtime.
-# Configure with VSLANG=1033 (see tools/msvc_env.bat) so the prefix stays
-# parseable; this check fails fast when that has not happened.
-if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja"
-   AND NOT "$ENV{VSLANG}" STREQUAL "1033")
-    message(
-        WARNING
-        "MSVC + Ninja without VSLANG=1033: header dependency tracking may be "
-        "unreliable because the localized /showIncludes prefix cannot be "
-        "parsed. Configure through tools/msvc_env.bat, or expect to need "
-        "'cmake --build <dir> --clean-first' after editing headers.")
+# Ninja tracks header dependencies on MSVC by matching the /showIncludes
+# prefix recorded at compiler-detection time against the compiler's actual
+# output bytes. On a localized toolchain the recorded prefix can diverge from
+# reality (wrong code page during the probe), and then every header edit
+# silently fails to trigger a rebuild; stale objects crash against new struct
+# layouts at runtime. Probe the compiler here and compare byte-exactly so the
+# misconfiguration is loud instead of corrupting objects.
+if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja")
+    set(_azr_probe_dir
+        "${CMAKE_BINARY_DIR}/CMakeFiles/AzureRenderShowIncludesProbe")
+    file(WRITE "${_azr_probe_dir}/foo.h" "\n")
+    file(WRITE "${_azr_probe_dir}/main.c" "#include \"foo.h\"\n")
+    execute_process(
+        COMMAND "${CMAKE_CXX_COMPILER}" /nologo /showIncludes /c main.c
+        WORKING_DIRECTORY "${_azr_probe_dir}"
+        OUTPUT_VARIABLE _azr_probe_out
+        ERROR_VARIABLE _azr_probe_out
+        RESULT_VARIABLE _azr_probe_result
+        ENCODING NONE
+    )
+    string(FIND "${_azr_probe_out}" "foo.h" _azr_probe_has_include)
+    string(FIND
+        "${_azr_probe_out}"
+        "${CMAKE_CXX_CL_SHOWINCLUDES_PREFIX}"
+        _azr_prefix_pos)
+    if(_azr_probe_result EQUAL 0 AND _azr_probe_has_include GREATER_EQUAL 0
+       AND ("${CMAKE_CXX_CL_SHOWINCLUDES_PREFIX}" STREQUAL ""
+            OR _azr_prefix_pos LESS 0))
+        message(
+            WARNING
+            "Ninja header-dependency tracking is broken in this build tree: "
+            "the recorded /showIncludes prefix does not match the compiler's "
+            "output. Run 'python tools/fix_msvc_deps_prefix.py "
+            "${CMAKE_BINARY_DIR}' and configure again, or expect stale "
+            "objects after header edits.")
+    endif()
+    unset(_azr_probe_dir)
+    unset(_azr_probe_out)
+    unset(_azr_probe_result)
+    unset(_azr_probe_has_include)
+    unset(_azr_prefix_pos)
 endif()
 
 find_package(Vulkan REQUIRED COMPONENTS glslc)
