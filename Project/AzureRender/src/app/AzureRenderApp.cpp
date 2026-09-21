@@ -181,10 +181,16 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     // after the device and torn down just before it.
     gpuAllocator_.initialize(
         instance_, physicalDevice_, device_, VK_API_VERSION_1_3);
+    // 1 MiB per in-flight frame comfortably covers HUD vertices (288 KiB at
+    // the vertex cap) and leaves headroom for upcoming uniform ring slices.
+    uploadRing_.initialize(
+        gpuAllocator_,
+        1024 * 1024,
+        kMaxFramesInFlight,
+        uploadRingAlignment_);
     createCommandPool();
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
-    createHudBuffers();
     createShadowResources();
     createSwapchain();
     if (fixedSimulation_
@@ -691,9 +697,10 @@ void AzureRenderApp::cleanup() {
                 postProcessDescriptorSetLayout_,
                 nullptr);
         }
-        for (auto& buffer : hudVertexBuffers_) {
+        for (auto& buffer : readbackBuffers_) {
             gpuAllocator_.destroyBuffer(buffer);
         }
+        uploadRing_.shutdown();
         if (shadowFramebuffer_ != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, shadowFramebuffer_, nullptr);
         }
@@ -813,6 +820,9 @@ void AzureRenderApp::pickPhysicalDevice() {
     VkPhysicalDeviceProperties properties{};
     vkGetPhysicalDeviceProperties(physicalDevice_, &properties);
     selectedGpuName_ = properties.deviceName;
+    uploadRingAlignment_ = std::max<VkDeviceSize>(
+        properties.limits.minUniformBufferOffsetAlignment,
+        properties.limits.nonCoherentAtomSize);
     const std::filesystem::path capabilityDirectory =
         runOptions_.captureDirectory.empty()
         ? std::filesystem::path("captures")

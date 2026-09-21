@@ -221,16 +221,3 @@ void AzureRenderApp::createShadowResources() {
         "vkCreateFramebuffer(shadow)");
 }
 
-
-
-void AzureRenderApp::createHudBuffers() {
-    const VkDeviceSize size =
-        sizeof(HudVertex) * kMaxHudVertices;
-    hudVertexBuffers_.resize(kMaxFramesInFlight);
-    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        hudVertexBuffers_[index] = gpuAllocator_.createBuffer(
-            size,
-            VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-            true);
-    }
-}

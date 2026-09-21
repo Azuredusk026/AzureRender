@@ -75,16 +75,23 @@ void AzureRenderApp::drawFrame() {
     const bool captureThisFrame =
         screenshotRequested_ || captureSequenceFrame;
     screenshotRequested_ = false;
-    azurerender::rhi::GpuBuffer screenshotBuffer;
     if (captureThisFrame) {
         const VkDeviceSize screenshotSize =
             static_cast<VkDeviceSize>(swapchainExtent_.width)
             * swapchainExtent_.height
             * 4;
-        screenshotBuffer = gpuAllocator_.createBuffer(
-            screenshotSize,
-            VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-            true);
+        if (readbackBufferSize_ != screenshotSize) {
+            for (auto& buffer : readbackBuffers_) {
+                gpuAllocator_.destroyBuffer(buffer);
+            }
+            readbackBufferSize_ = screenshotSize;
+        }
+        if (readbackBuffers_[currentFrame_].buffer == VK_NULL_HANDLE) {
+            readbackBuffers_[currentFrame_] = gpuAllocator_.createBuffer(
+                screenshotSize,
+                VK_BUFFER_USAGE_TRANSFER_DST_BIT,
+                true);
+        }
     }
 
     if (runOptions_.technicalSequence) {
@@ -127,13 +134,18 @@ void AzureRenderApp::drawFrame() {
         pendingPickRequested_ = false;
         pickPrimitive(pendingPickX_, pendingPickY_);
     }
+    // The frame fence retired this window's previous contents, so the ring
+    // cursor restarts at the window base before any upload allocates.
+    uploadRing_.beginFrame(static_cast<std::uint32_t>(currentFrame_));
     updateHudBuffer(currentFrame_);
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
     recordCommandBuffer(
         commandBuffers_[currentFrame_],
         imageIndex,
-        screenshotBuffer.buffer);
+        captureThisFrame
+            ? readbackBuffers_[currentFrame_].buffer
+            : VK_NULL_HANDLE);
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
     const VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
@@ -180,7 +192,7 @@ void AzureRenderApp::drawFrame() {
                     / (pendingScreenshotLabel_ + ".png")).string();
             }
             saveScreenshot(
-                screenshotBuffer.mapped,
+                readbackBuffers_[currentFrame_].mapped,
                 swapchainExtent_.width,
                 swapchainExtent_.height,
                 outputPath);
@@ -198,10 +210,8 @@ void AzureRenderApp::drawFrame() {
             }
             pendingScreenshotLabel_.clear();
         } catch (...) {
-            gpuAllocator_.destroyBuffer(screenshotBuffer);
             throw;
         }
-        gpuAllocator_.destroyBuffer(screenshotBuffer);
     }
 
     VkPresentInfoKHR presentInfo{VK_STRUCTURE_TYPE_PRESENT_INFO_KHR};
@@ -415,9 +425,21 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
         std::array<std::uint8_t, 4> color;
     };
     static_assert(sizeof(EasyFontVertex) == 16);
-    auto* destination =
-        static_cast<HudVertex*>(hudVertexBuffers_[frameIndex].mapped);
+    // Vertices are composed in scratch and uploaded as one ring slice so the
+    // allocation carries the exact byte count of this frame's HUD.
+    hudScratch_.resize(kMaxHudVertices);
+    auto* destination = hudScratch_.data();
     std::uint32_t vertexCount = 0;
+    const auto uploadHud = [&]() {
+        hudVertexCounts_[frameIndex] = vertexCount;
+        if (vertexCount == 0) {
+            return;
+        }
+        const VkDeviceSize bytes = sizeof(HudVertex) * vertexCount;
+        const auto slice = uploadRing_.allocate(bytes);
+        std::memcpy(slice.mapped, hudScratch_.data(), bytes);
+        hudVertexOffsets_[frameIndex] = slice.offset;
+    };
     const float width = static_cast<float>(swapchainExtent_.width);
     const float height = static_cast<float>(swapchainExtent_.height);
     const auto toNdc = [width, height](const float x, const float y) {
@@ -605,7 +627,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
             && localChapterFrame >= fadeFrames;
     }
     if (!showHud) {
-        hudVertexCounts_[frameIndex] = vertexCount;
+        uploadHud();
         return;
     }
 
@@ -724,7 +746,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
         textY,
         scale,
         {218, 241, 248, 255});
-    hudVertexCounts_[frameIndex] = vertexCount;
+    uploadHud();
 }
 
 
@@ -859,13 +881,13 @@ void AzureRenderApp::recordCommandBuffer(
             commandBuffer,
             VK_PIPELINE_BIND_POINT_GRAPHICS,
             hudPipeline_);
-        const VkDeviceSize hudOffset = 0;
+        const VkBuffer hudBuffer = uploadRing_.buffer();
         vkCmdBindVertexBuffers(
             commandBuffer,
             0,
             1,
-            &hudVertexBuffers_[currentFrame_].buffer,
-            &hudOffset);
+            &hudBuffer,
+            &hudVertexOffsets_[currentFrame_]);
         vkCmdDraw(
             commandBuffer,
             hudVertexCounts_[currentFrame_],

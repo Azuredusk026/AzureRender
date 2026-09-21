@@ -184,6 +184,9 @@ add_executable(
     src/render/VulkanHelpers.hpp
     src/rhi/GpuAllocator.cpp
     src/rhi/GpuAllocator.hpp
+    src/rhi/RingFrameAllocator.hpp
+    src/rhi/UploadRingBuffer.cpp
+    src/rhi/UploadRingBuffer.hpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/CharacterSceneRenderer.hpp
@@ -332,6 +335,15 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.ExtensionRegistry
         COMMAND AzureRenderExtensionRegistryTests)
+    add_executable(
+        AzureRenderUploadRingTests
+        tests/UploadRingTests.cpp
+    )
+    target_include_directories(
+        AzureRenderUploadRingTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(
+        NAME AzureRender.UploadRing
+        COMMAND AzureRenderUploadRingTests)
 
     # GPU visual regression. This needs a working Vulkan device, so it is
     # registered only when Python and the tooling are present and it reports

@@ -5,6 +5,7 @@
 #include "render/RenderSettings.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "rhi/GpuAllocator.hpp"
+#include "rhi/UploadRingBuffer.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -125,6 +126,9 @@ private:
     std::uint32_t graphicsQueueFamily_ = 0;
     double timestampPeriodNanoseconds_ = 0.0;
     std::uint32_t timestampValidBits_ = 0;
+    // max(minUniformBufferOffsetAlignment, nonCoherentAtomSize) of the picked
+    // device; every upload ring slice honors it.
+    VkDeviceSize uploadRingAlignment_ = 1;
     bool hdrSceneColorFormatSupported_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
@@ -133,6 +137,8 @@ private:
     // Owns all GPU memory for the process. Initialized right after the logical
     // device and destroyed before it.
     azurerender::rhi::GpuAllocator gpuAllocator_;
+    // All per-frame CPU-to-GPU uploads are slices of this ring.
+    azurerender::rhi::UploadRingBuffer uploadRing_;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;
@@ -180,7 +186,14 @@ private:
     azurerender::ResourceLocator resourceLocator_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
-    std::vector<azurerender::rhi::GpuBuffer> hudVertexBuffers_;
+    // Byte offsets of this frame's HUD vertex slice inside uploadRing_.
+    std::array<VkDeviceSize, kMaxFramesInFlight> hudVertexOffsets_{};
+    std::vector<HudVertex> hudScratch_;
+    // Persistent readback staging, one per in-flight frame, sized to the
+    // swapchain and rebuilt when the extent changes.
+    std::array<azurerender::rhi::GpuBuffer, kMaxFramesInFlight>
+        readbackBuffers_{};
+    VkDeviceSize readbackBufferSize_ = 0;
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
     std::int32_t selectedPrimitiveIndex_ = -1;
     bool ecsRenderableLogged_ = false;
@@ -262,7 +275,6 @@ private:
     void createEditorUiFramebuffers();
     void createSwapchainSemaphores();
     void createCommandPool();
-    void createHudBuffers();
     void createPostProcessDescriptorSets();
     void createCommandBuffers();
     void createSyncObjects();
