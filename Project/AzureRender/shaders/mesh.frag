@@ -89,33 +89,6 @@ float materialFeatureEnabled(uint feature) {
     return (material.materialFeatures & feature) != 0U ? 1.0 : 0.0;
 }
 
-float browInkScore(vec3 color) {
-    float redChroma = max(color.r - max(color.g, color.b), 0.0);
-    float darkness = 1.0 - dot(color, vec3(0.2126, 0.7152, 0.0722));
-    return redChroma * mix(0.35, 1.0, clamp(darkness, 0.0, 1.0));
-}
-
-vec4 sampleExpandedBrow(vec2 uv, float radiusInTexels) {
-    vec4 bestSample = texture(baseColorTexture, uv);
-    float bestScore = browInkScore(bestSample.rgb);
-    vec2 texelSize = 1.0 / vec2(textureSize(baseColorTexture, 0));
-    int radius = int(clamp(floor(radiusInTexels + 0.5), 0.0, 3.0));
-    for (int step = 1; step <= 3; ++step) {
-        if (step > radius) break;
-        for (int direction = -1; direction <= 1; direction += 2) {
-            vec4 candidate = texture(
-                baseColorTexture,
-                uv + vec2(0.0, float(direction * step) * texelSize.y));
-            float candidateScore = browInkScore(candidate.rgb);
-            if (candidateScore > bestScore) {
-                bestSample = candidate;
-                bestScore = candidateScore;
-            }
-        }
-    }
-    return bestSample;
-}
-
 vec3 sampleToonRamp(float coordinate) {
     vec2 atlasSize = vec2(textureSize(toonRampTexture, 0));
     float minimumU = 0.5 / atlasSize.x;
@@ -200,21 +173,13 @@ void main() {
     bool browOverlay = overlayMaterial
         && materialFeatureEnabled(64U) > 0.5;
     if (browOverlay) {
-        // The exported primitive contains separate brow and eyelash islands
-        // driven by different facial joints. Expand only the authored red
-        // Face-D ink in UV space; moving/scaling vertices would tear islands.
-        baseColor = sampleExpandedBrow(
-            textureCoordinate,
-            material.styleParameters.y);
+        // M_Common_Brow samples Face-D directly; the card geometry and its
+        // authored UVs provide the shape without a separate brow mask.
         float basePower = max(material.featureParameters.w, 0.001);
         baseColor.rgb = clamp(
             pow(max(baseColor.rgb, vec3(0.0)), vec3(basePower)),
             vec3(0.0),
             vec3(1.0));
-        // The authored brow card is only a few screen pixels high. Preserve
-        // the Face-D sample, but compensate for HDR/display blending so its
-        // red chroma does not collapse into the surrounding skin tone.
-        baseColor.rgb *= vec3(0.72, 0.30, 0.34);
     }
     float platformMask = clamp(material.showcasePlatform, 0.0, 1.0);
     float platformRadius = length(textureCoordinate - vec2(0.5)) * 2.0;
@@ -296,8 +261,8 @@ void main() {
         specularLevel = min(specularLevel, material.materialClass == 2U ? 0.22 : 0.32);
     } else if (material.materialClass == 3U) {
         metallic = min(metallic, 0.04);
-        roughness = max(roughness, 0.32);
-        specularLevel = min(specularLevel, 0.46);
+        roughness = max(roughness, 0.44);
+        specularLevel = min(specularLevel, 0.30);
     } else if (material.materialClass == 4U) {
         metallic = min(metallic, 0.06);
         roughness = max(roughness, 0.42);
@@ -414,23 +379,29 @@ void main() {
         : faceSdfSample.r;
     float lateralLight = camera.faceLightDirection.x;
     float frontLight = max(-camera.faceLightDirection.z, 0.0);
-    float orientedCoordinate = lateralLight >= 0.0
-        ? faceCoordinate
-        : 1.0 - faceCoordinate;
+    // Crossing the head-local lateral axis must not switch the mirrored SDF
+    // in one frame. Use a broad angular window so the lit-side transition
+    // remains continuous at normal turntable speed.
+    float faceSideBlend = smoothstep(-0.28, 0.28, lateralLight);
+    float orientedCoordinate = mix(
+        1.0 - faceCoordinate,
+        faceCoordinate,
+        faceSideBlend);
     float faceThreshold = clamp(
         camera.faceSdfParameters.y
             - frontLight * 0.34
             + (1.0 - abs(lateralLight)) * 0.04,
         0.08,
         0.92);
+    float faceSoftness = max(camera.faceSdfParameters.z, 0.11);
     float faceIllumination = smoothstep(
-        faceThreshold - camera.faceSdfParameters.z,
-        faceThreshold + camera.faceSdfParameters.z,
+        faceThreshold - faceSoftness,
+        faceThreshold + faceSoftness,
         orientedCoordinate);
-    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.62;
+    float faceSdfWeight = faceSdfEnabled * faceSdfSample.a * 0.82;
     rampCoordinate = mix(
         rampCoordinate,
-        mix(0.74, 0.98, faceIllumination),
+        mix(0.44, 0.74, faceIllumination),
         faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
@@ -438,7 +409,7 @@ void main() {
     float ambientRampVisibility = mix(
         1.0,
         mix(
-            showcasePreset == 1.0 ? 0.46 : 0.64,
+            showcasePreset == 1.0 ? 0.36 : 0.64,
             0.98,
             rampLuminance),
         toonWeight);
@@ -462,8 +433,8 @@ void main() {
         * shadowSystemWeight * material.styleParameters.y
         * materialFeatureEnabled(1U);
     shadowWeight *= material.materialClass == 2U
-        ? 0.18
-        : (material.materialClass == 1U ? 0.48 : 1.0);
+        ? 0.28
+        : (material.materialClass == 1U ? 0.62 : 1.0);
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
@@ -485,15 +456,20 @@ void main() {
     vec3 hairAoColor = material.aoColor.a > 0.01
         ? material.aoColor.rgb
         : vec3(0.255);
+    float hairNormalCavity = smoothstep(
+        0.04,
+        0.30,
+        1.0 - max(dot(shadedNormal, geometricNormal), 0.0));
     float hairCavity = clamp(
-        styleMask * 0.62
-            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.22,
+        styleMask * 0.74
+            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.30
+            + hairNormalCavity * 0.38,
         0.0,
         1.0);
     vec3 hairAoTint = mix(
         vec3(1.0),
         hairAoColor,
-        hairActive * (0.10 + hairCavity * 0.32));
+        hairActive * (0.20 + hairCavity * 0.54));
     aoShadowTint *= hairAoTint;
     vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
         + directDiffuse * lamShadowTint * aoShadowTint;
@@ -503,18 +479,22 @@ void main() {
     float hairDiffusePeak = max(
         max(tintedDiffuse.r, tintedDiffuse.g),
         tintedDiffuse.b);
+    float hairDiffuseFloor = hairBasePeak * mix(0.24, 0.42, rampLuminance);
+    hairDiffusePeak = max(hairDiffusePeak, hairDiffuseFloor);
     vec3 huePreservedHair = hairBaseHue * hairDiffusePeak;
     tintedDiffuse = mix(
         tintedDiffuse,
         huePreservedHair,
-        hairActive * 0.68);
+        hairActive * 0.80);
+    float faceActive = material.materialClass == 2U ? 1.0 : 0.0;
+    tintedDiffuse *= mix(vec3(1.0), vec3(0.86, 0.77, 0.74), faceActive);
     tintedDiffuse *= mix(
         vec3(1.0),
         camera.faceSdfShadowColor.rgb,
         (1.0 - faceIllumination)
             * faceSdfWeight
             * camera.faceSdfShadowColor.a
-            * 0.20);
+            * 0.55);
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
         * keyVisibility * material.styleParameters.z;
@@ -523,7 +503,7 @@ void main() {
         ? 0.05
         : (material.materialClass == 2U
             ? 0.03
-            : (material.materialClass == 3U ? 0.14 : 1.0));
+            : (material.materialClass == 3U ? 0.08 : 1.0));
     ambientSpecular *= dielectricSpecularWeight;
     directSpecular *= dielectricSpecularWeight;
     // Prevent a bright sky texel from bleaching red hair to grey. Hair uses
@@ -532,8 +512,10 @@ void main() {
         ambientSpecular,
         ambientSpecular * mix(baseColor.rgb, vec3(1.0), 0.18),
         hairActive);
-    directSpecular *= mix(1.0, 1.30, styleMask * toonWeight);
-    ambientSpecular *= mix(1.0, 1.12, styleMask * toonWeight);
+    directSpecular *= mix(1.0, 1.30, styleMask * toonWeight)
+        * mix(1.0, 0.72, hairActive);
+    ambientSpecular *= mix(1.0, 1.12, styleMask * toonWeight)
+        * mix(1.0, 0.68, hairActive);
     if (qaEffectMode == 5 && qaEffectDisabled) {
         ambientSpecular = vec3(0.0);
         directSpecular = vec3(0.0);
@@ -593,7 +575,7 @@ void main() {
         * kkBand
         * mix(0.58, 1.0, hairViewVisibility)
         * max(material.hairParameters.y, 0.16)
-        * 0.82
+        * 0.58
         * hairActive
         * material.featureParameters.y
         * bandEnabled;
@@ -606,7 +588,7 @@ void main() {
         * secondaryKkBand
         * mix(0.35, 0.72, hairViewVisibility)
         * max(material.hairParameters.y, 0.16)
-        * 0.34
+        * 0.22
         * hairActive
         * material.featureParameters.y
         * bandEnabled;
@@ -724,9 +706,13 @@ void main() {
         * material.featureParameters.x
         * mix(
             1.0,
-            0.22,
+            0.68,
             max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
+    vec3 innerOutlineNormal = normalize(mix(
+        geometricNormal,
+        shadedNormal,
+        hairActive * 0.80));
     outputNormal = vec4(
-        geometricNormal * 0.5 + 0.5,
+        innerOutlineNormal * 0.5 + 0.5,
         innerOutlineParticipation);
 }

@@ -13,7 +13,7 @@ redistributable archives unless their license has been verified explicitly.
 First private character export target:
 `assets_private/laevat_static/laevat_static.glb`.
 
-See `docs/ASSET_AND_VISUAL_QA_CN.md` for the current export and validation rules.
+See `docs/assets-and-editor.md` for the current export and validation rules.
 
 CQ-1 Material Class/Data v1 validation uses the generated private asset
 `laevat_skinned/laevat_skinned_material_cq1_v2.glb`. It embeds versioned

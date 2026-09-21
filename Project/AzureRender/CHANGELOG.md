@@ -1,11 +1,57 @@
 # Changelog
 
-## PCSS soft shadows and native 2K capture - 2026-08-19
+## Plain-language documentation - 2026-08-26
+
+- Rewrote the active Chinese documentation with shorter sentences and a more direct technical voice while preserving API names, formulas and contracts.
+- Split dense explanations of Vulkan synchronization, resource ownership, character shading and black-hole rendering into smaller steps for C++ readers new to Vulkan.
+- Added a prose-length and punctuation check to the documentation workflow so future pages do not return to long compound sentences.
+
+## Vulkan beginner documentation and portable formulas - 2026-08-26
+
+- Replaced non-portable LaTeX delimiters in active documents with GitHub- and MkDocs-compatible math blocks and corrected a corrupted Doppler `beta` expression.
+- Expanded the existing architecture document for C++ developers new to Vulkan, mapping object ownership, initialization, frame submission, resource upload, descriptors, pipelines and synchronization to concrete AzureRender API calls.
+- Added documentation checks that reject the unreadable delimiter form and require the frame API walkthrough to remain present.
+
+## Documentation system - 2026-08-25
+
+- Replaced the fragmented active-document set with eight topic-oriented GitHub Pages documents covering operation, Vulkan architecture, Character, Blackhole, assets/editor, development/release and centralized reference data.
+- Added strict MkDocs Material builds and GitHub Pages deployment while keeping the Markdown directly readable in the repository and install tree.
+- Removed duplicated dated implementation narratives from active documentation; historical plans and audits remain under `docs/archive/` or Git history.
+
+## Continuous Face SDF and hair-volume contours - 2026-08-20
+
+- Replaced the frame-discontinuous Face SDF mirror branch with a smooth head-local lateral-axis blend, removing the pure-bright face pop during the 6-7 second turntable interval.
+- Strengthened Hair AO with style-mask, grazing-angle and HN-to-geometric-normal cavity signals while preserving the existing red diffuse floor and independent KK lobes.
+- Fed Hair HN detail into the internal-outline normal buffer and raised only Hair participation, revealing layered strand boundaries without widening the silhouette shell.
+- Verified the 130-179 frame continuity window with a maximum consecutive face-region luma change of 0.204/255, plus Beauty, shadow-tint and outline isolation probes.
+
+## Character key-shadow contrast and hair-color protection - 2026-08-20
+
+- Increased the Endfield world-space key while reducing fill and the toon ambient shadow floor, restoring visible lit/back-lit separation without global exposure changes.
+- Increased Face and Skin participation in the authored Lam/shadow system, while narrowing only the bright end of the Face SDF ramp so the face remains close to body skin under matching illumination.
+- Added a ramp-aware red diffuse floor and stronger base-hue reprojection for Hair; specular and Kajiya-Kay highlights remain independent and the crown no longer needs grey ambient energy to stay readable.
+- Verified Debug/Release builds, all 12 Debug tests, Face/Body Beauty frames, Hair KK and Shadow Visibility isolation captures.
+
+## Face SDF light frame and skin-tone correction - 2026-08-20
+
+- Replaced direct imported-head-axis lighting with bind-relative head rotation so arbitrary glTF joint orientation no longer pins Face SDF illumination near white.
+- Increased the visible SDF ramp range and warm shadow tint while reducing Face-only diffuse energy to match the body skin under the same key light.
+- Verified a clear left/right transition in Face SDF isolation, stable movement across the turntable, and representative cheek values close to the shoulder-skin range.
+
+## Character Face SDF asset binding - 2026-08-20
+
+- Fixed the skinned Laevat material pipeline so every generated face material embeds `face_sdf_v1.png` and a complete Face SDF v1 profile instead of only advertising eligibility.
+- Bound the profile to the unique `Bip001_Head` node and preserved it through idle-animation injection.
+- Verified the final private animation GLB with the Face SDF compatibility audit, material-profile validation, brow-mesh audit, runtime load diagnostics and enabled/disabled visual captures.
+- Re-recorded separate 16-second Beauty and Shadow Visibility turntables at native 2560x1440/24 fps and fully decoded all 384 frames of each delivery.
+
+## PCSS soft shadows and native 2K capture - 2026-08-20
 
 - Replaced the visually hard fixed 3x3 shadow filter with a bounded Poisson PCSS blocker search and receiver-distance penumbra.
 - Added a versioned, validated and scene-serialized maximum shadow filter radius plus an editor softness control.
 - Made deterministic capture windows hidden and borderless so Windows does not clamp native 2560x1440 framebuffers to the desktop work area.
 - Added shadow settings to deterministic capture state hashes and manifests.
+- Re-recorded and fully decoded the five-pass character showcase at native 2560x1440/24 fps: 1920 frames and 80.00 seconds.
 
 ## Brow skinning audit and left-start showcase - 2026-08-19
 

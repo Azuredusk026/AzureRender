@@ -5,6 +5,7 @@
 /out/
 /captures/
 /dist/
+/site/
 /azurerender-editor.ini
 *.user
 *.suo

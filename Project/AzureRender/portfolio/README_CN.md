@@ -42,4 +42,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass `
   -File .\tools\verify_portfolio.ps1
 ```
 
-架构、运行方法和未来路线分别见 `../docs/ARCHITECTURE_CN.md`、`../docs/USER_GUIDE_CN.md` 和 `../docs/DEVELOPMENT_ROADMAP_CN.md`。
+渲染架构、运行方法和开发发布流程分别见 `../docs/architecture.md`、`../docs/getting-started.md` 和 `../docs/development-and-release.md`。

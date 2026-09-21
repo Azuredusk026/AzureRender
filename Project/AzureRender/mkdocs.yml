@@ -1,0 +1,74 @@
+site_name: AzureRender
+site_description: 原生 Vulkan 可扩展实时渲染器技术文档
+site_url: https://azuredusk026.github.io/AzureRender/
+repo_url: https://github.com/Azuredusk026/AzureRender
+repo_name: Azuredusk026/AzureRender
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+nav:
+  - 项目总览: index.md
+  - 构建与使用: getting-started.md
+  - 渲染器架构: architecture.md
+  - 角色渲染: character-rendering.md
+  - 黑洞模拟: blackhole-rendering.md
+  - 资产与编辑器: assets-and-editor.md
+  - 开发、测试与发布: development-and-release.md
+  - 参数与接口参考: reference.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search
+
+exclude_docs: |
+  archive/
+  **/*_CN.md
+
+copyright: Copyright &copy; 2026 AzureRender contributors

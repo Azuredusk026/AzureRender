@@ -2,45 +2,72 @@
 set -euo pipefail
 
 for document in \
-    docs/README_CN.md \
-    docs/ARCHITECTURE_CN.md \
-    docs/USER_GUIDE_CN.md \
-    docs/DEVELOPMENT_ROADMAP_CN.md \
-    docs/DEVELOPMENT_GUIDE_CN.md \
-    docs/ENGINE_EVOLUTION_PLAN_CN.md \
-    docs/ASSET_AND_VISUAL_QA_CN.md \
-    docs/RELEASE_AND_ACCEPTANCE_CN.md; do
+    README.md \
+    docs/index.md \
+    docs/getting-started.md \
+    docs/architecture.md \
+    docs/character-rendering.md \
+    docs/blackhole-rendering.md \
+    docs/assets-and-editor.md \
+    docs/development-and-release.md \
+    docs/reference.md; do
     test -f "$document"
 done
 
-test ! -f docs/ACTIVE_DEVELOPMENT_PLAN_CN.md
-test ! -f docs/PROJECT_OVERVIEW_CN.md
+test -f mkdocs.yml
+test -f requirements-docs.txt
+test -f tools/check_doc_style.py
 
-rg -q 'R1：发布工程硬化' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q 'E1-E7 为 `Ready` 队列，当前没有 Active 阶段' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q 'E0-E7 引擎化队列' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q 'E1 RHI 与内存层' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q 'E7 复杂场景验证' docs/DEVELOPMENT_ROADMAP_CN.md
-rg -q '无限期 Deferred' docs/DEVELOPMENT_ROADMAP_CN.md
+rg -q 'SceneRendererRegistry' docs/architecture.md
+rg -q 'vkAcquireNextImageKHR' docs/architecture.md
+rg -q 'vkQueueSubmit' docs/architecture.md
+rg -q 'GpuAllocator' docs/architecture.md
+rg -q 'Face SDF' docs/character-rendering.md
+rg -q 'Schwarzschild' docs/blackhole-rendering.md
+rg -q 'assets_private/' docs/assets-and-editor.md
+rg -q 'baselines/character' docs/assets-and-editor.md
+rg -q '等待项目所有者主动恢复' docs/development-and-release.md
 
-rg -q 'E0：视觉与性能基线' docs/ENGINE_EVOLUTION_PLAN_CN.md
-rg -q 'E7：复杂场景验证' docs/ENGINE_EVOLUTION_PLAN_CN.md
+# Engine stage tracking stays in the repository as working documents.
+test -f docs/plans/engine-roadmap.md
+test -f docs/plans/engine-evolution-plan.md
+rg -q 'E1 RHI 与内存层' docs/plans/engine-roadmap.md
+rg -q 'E7 复杂场景验证' docs/plans/engine-roadmap.md
+rg -q 'E0：视觉与性能基线' docs/plans/engine-evolution-plan.md
+rg -q 'E7：复杂场景验证' docs/plans/engine-evolution-plan.md
 
 # E0 deliverables must stay present once the stage is complete.
 test -f tools/run_visual_regression.py
 test -f tools/run_performance_baseline.py
 test -f tools/visual_regression_cases.json
 test -d assets_public/baselines/character
-rg -q 'SceneRendererRegistry' docs/ARCHITECTURE_CN.md
-rg -q 'captures/<scene>/' docs/USER_GUIDE_CN.md
 
-if rg -n 'ACTIVE_DEVELOPMENT_PLAN_CN|PROJECT_OVERVIEW_CN|check_active_plan.sh' \
+if rg -n '\\\[|\\\]|\\\(|\\\)' docs/*.md; then
+    echo 'Non-portable LaTeX delimiter found; use $ or $$ for GitHub and MkDocs' >&2
+    exit 1
+fi
+
+style_documents=(README.md docs/*.md)
+if test -f ../../README.md; then
+    style_documents+=(../../README.md)
+fi
+
+if rg -n '；|—|–' "${style_documents[@]}"; then
+    echo 'Dense punctuation found in active documentation; use short sentences' >&2
+    exit 1
+fi
+
+python tools/check_doc_style.py "${style_documents[@]}"
+
+if rg -n \
+    'ARCHITECTURE_CN|USER_GUIDE_CN|DEVELOPMENT_ROADMAP_CN|ACTIVE_DEVELOPMENT_PLAN_CN|PROJECT_OVERVIEW_CN' \
     README.md docs/*.md portfolio/*.md CMakeLists.txt; then
     echo 'Stale documentation entry found' >&2
     exit 1
 fi
 
-if find portfolio/images -type f | rg '/(P[0-9]+|S[0-9]+|CQ[0-9]+|final_final|capture_[0-9]+)'; then
+if find portfolio/images -type f | \
+    rg '/(P[0-9]+|S[0-9]+|CQ[0-9]+|final_final|capture_[0-9]+)'; then
     echo 'Task-oriented screenshot name found in portfolio' >&2
     exit 1
 fi

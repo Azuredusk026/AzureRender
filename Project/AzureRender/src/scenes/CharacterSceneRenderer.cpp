@@ -254,6 +254,20 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
                 + std::to_string(material.faceSdf.height)
                 + ", headNode=" + material.faceSdf.headNodeName);
     }
+    if (faceSdfHeadNode_.has_value()
+        && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
+        const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
+        const Vector3 bindX = normalize({head[0], head[1], head[2]});
+        const Vector3 bindY = normalize({head[4], head[5], head[6]});
+        const Vector3 bindZ = normalize({head[8], head[9], head[10]});
+        faceSdfBindBasis_ = {
+            bindX[0], bindX[1], bindX[2],
+            bindY[0], bindY[1], bindY[2],
+            bindZ[0], bindZ[1], bindZ[2],
+        };
+        azurerender::RuntimeDiagnostics::instance().print(
+            "asset", "Face SDF light frame: bind-relative head rotation");
+    }
     footPivot_ = estimateFootPivot(asset_);
     appendShowcasePlatform(asset_, footPivot_);
     azurerender::RuntimeDiagnostics::instance().print(
@@ -1555,7 +1569,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.08F, 0.24F, 0.18F},
-        {1.0F, 1.38F, 0.10F, 0.24F},
+        {1.0F, 1.52F, 0.06F, 0.24F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},
@@ -1582,13 +1596,39 @@ void CharacterSceneRenderer::updateUniformBuffer(
             sine * lightDirection[0] + cosine * lightDirection[2],
         });
         const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
-        const Vector3 headX = normalize({head[0], head[1], head[2]});
-        const Vector3 headY = normalize({head[4], head[5], head[6]});
-        const Vector3 headZ = normalize({head[8], head[9], head[10]});
+        const Vector3 currentX = normalize({head[0], head[1], head[2]});
+        const Vector3 currentY = normalize({head[4], head[5], head[6]});
+        const Vector3 currentZ = normalize({head[8], head[9], head[10]});
+        const Vector3 jointLocalLight = {
+            dot(objectLight, currentX),
+            dot(objectLight, currentY),
+            dot(objectLight, currentZ),
+        };
+        const Vector3 bindX = {
+            faceSdfBindBasis_[0],
+            faceSdfBindBasis_[1],
+            faceSdfBindBasis_[2],
+        };
+        const Vector3 bindY = {
+            faceSdfBindBasis_[3],
+            faceSdfBindBasis_[4],
+            faceSdfBindBasis_[5],
+        };
+        const Vector3 bindZ = {
+            faceSdfBindBasis_[6],
+            faceSdfBindBasis_[7],
+            faceSdfBindBasis_[8],
+        };
         faceLight = normalize({
-            dot(objectLight, headX),
-            dot(objectLight, headY),
-            dot(objectLight, headZ),
+            bindX[0] * jointLocalLight[0]
+                + bindY[0] * jointLocalLight[1]
+                + bindZ[0] * jointLocalLight[2],
+            bindX[1] * jointLocalLight[0]
+                + bindY[1] * jointLocalLight[1]
+                + bindZ[1] * jointLocalLight[2],
+            bindX[2] * jointLocalLight[0]
+                + bindY[2] * jointLocalLight[1]
+                + bindZ[2] * jointLocalLight[2],
         });
         hasFaceSdf = true;
     }

@@ -1,149 +1,72 @@
-# AzureRender 快速使用
+# AzureRender
 
-AzureRender 是 C++17/Vulkan 桌面渲染器和编辑器。项目当前内置 `character`、`blackhole` 与 SDK 验证用 `sample` 三种场景渲染器，并提供 HDR Scene Color、风格化角色材质、编辑器、确定性捕获和 GPU timing。
+AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。风格化角色和黑洞模拟共用同一个宿主。项目还提供 ImGui 编辑器、确定性截图、诊断视图、GPU 计时和视觉回归工具。新场景可以通过进程内 Renderer SDK 接入。
 
-完整说明见[当前架构](docs/ARCHITECTURE_CN.md)、[使用手册](docs/USER_GUIDE_CN.md)和[未来开发路线](docs/DEVELOPMENT_ROADMAP_CN.md)。本文件只保留最短构建与运行入口。
+> **English summary:** AzureRender is a real-time renderer written with C++17 and the native Vulkan API. One host runs both the stylized character renderer and the relativistic black-hole simulation. It also includes deterministic capture, diagnostics, GPU timing and an in-process renderer interface.
 
-## 环境要求
+## 项目定位
 
-- Windows 10/11 或 Ubuntu 24.04
-- Vulkan SDK，项目目标 Vulkan 1.3
-- CMake 3.20+
-- Ninja
-- GCC/MinGW 13+ 或受 CI 支持的 MSVC
-- vcpkg，依赖基线由 `vcpkg.json` 锁定
+项目直接实现 Vulkan 核心。这里包括设备、交换链、Render Pass、Pipeline、Descriptor 和 Buffer/Image，也包括资源上传、帧同步、GPU Query 和资源生命周期。
 
-Windows 已验证基线：Vulkan SDK 1.4.350.0、GCC/MinGW 13.1、Ninja 1.13.2。
+GLFW 与 Dear ImGui 负责窗口和界面。tinygltf、stb 和 nlohmann/json 负责解析模型、图片和 JSON。它们不接管渲染架构或 Vulkan 资源管理。
 
-## 构建
+| 场景 | 主要技术 |
+| --- | --- |
+| Character | glTF 蒙皮动画、分类 Toon Ramp、Face SDF、Hair HN/P、双层 Kajiya-Kay、PCSS、AO、几何与屏幕空间描边、HDR 环境光 |
+| Blackhole | Schwarzschild 近似光线积分、吸积盘体密度、周期噪声、多普勒与相对论增亮、引力红移、双 History TAA、HDR 合成 |
+| Shared host | Vulkan 1.3、HDR Scene Color、Depth/Normal、Swapchain 合成、GPU Timing、Capture、HUD、编辑器与 Renderer Registry |
+
+## 快速开始
+
+项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 已验证的版本是 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。
 
 ```powershell
 $env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
 $env:VCPKG_ROOT = "C:\path\to\vcpkg"
 
 .\tools\configure_windows.ps1 -Config Debug
-.\tools\configure_windows.ps1 -Config Release
-cmake --install build\ninja-debug --prefix build\install-debug
-cmake --install build\ninja-release --prefix build\install-release
-```
-
-如果本机 preset 无法找到工具链，参考 [开发指南](docs/DEVELOPMENT_GUIDE_CN.md) 使用显式 `cmake -S/-B` 配置。
-
-## 最短运行路径
-
-公共角色 smoke：
-
-```powershell
+cmake --build .\build\ninja-debug
 .\build\ninja-debug\AzureRender.exe --smoke-frames 120
 ```
 
-黑洞场景：
-
-该路径使用私有 raw trace、双 history TAA、受控 HDR bloom 和最终 Scene Color composite。
-
-```powershell
-.\build\ninja-debug\AzureRender.exe --scene-type blackhole --smoke-frames 120
-```
-
-P2 角色展示预设：
-
-```powershell
-.\build\ninja-debug\AzureRender.exe `
-  --asset .\assets_public\test_model.gltf `
-  --qa-camera full-body-front `
-  --qa-light stylized-key `
-  --smoke-frames 120
-```
-
-`stylized-key` 对应稳定预设 `Endfield Industrial`，会成套应用灯光、grade、Bloom 和描边设置；Capture manifest 同时记录数值 ID 与预设名称。
-
-创建并打开编辑器场景：
-
-```powershell
-.\build\ninja-debug\AzureRender.exe `
-  --asset .\assets_public\test_model.gltf `
-  --create-scene .\build\ninja-debug\public.azscene
-
-.\build\ninja-debug\AzureRender.exe `
-  --editor .\build\ninja-debug\public.azscene
-```
-
-编辑器提供 `Ctrl+Z`/`Ctrl+Y` 历史、资源状态与显式热重载、`.azscene v2` prefab/instance 引用和语义化 Viewport Capture。详见 `docs/EDITOR_WORKFLOW_CN.md`。
-
-确定性截图：
+运行黑洞：
 
 ```powershell
 .\build\ninja-release\AzureRender.exe `
   --scene-type blackhole `
-  --width 1280 --height 720 `
-  --capture-dir .\captures\blackhole\blackhole_beauty_temporal_v1_1280x720_20260818 `
-  --capture-frames 1 --capture-fps 60
+  --blackhole-quality cinematic
 ```
 
-GPU timing：
+构建安装树后，请运行 `build/install-<config>/bin/AzureRender.exe`。不要单独复制 EXE。这样做会漏掉 GLFW 或 MinGW Runtime DLL。
+
+## 文档
+
+完整文档发布在 [AzureRender GitHub Pages](https://azuredusk026.github.io/AzureRender/)，仓库内也可直接阅读：
+
+- [构建与使用](docs/getting-started.md)
+- [渲染器架构与 Vulkan 实现](docs/architecture.md)
+- [风格化角色渲染](docs/character-rendering.md)
+- [黑洞模拟](docs/blackhole-rendering.md)
+- [资产、场景与编辑器](docs/assets-and-editor.md)
+- [开发、测试与发布](docs/development-and-release.md)
+- [参数与接口参考](docs/reference.md)
+
+## 验证
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
-  --scene-type blackhole `
-  --gpu-timing `
-  --gpu-timing-output .\captures\blackhole\blackhole_timing_rtx4060_1280x720.json `
-  --smoke-frames 300
+ctest --test-dir .\build\ninja-debug --output-on-failure
+cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
+  -DCONFIG=Debug `
+  -P .\tools\run_release_gate.cmake
 ```
 
-## 命令行入口
+自动化测试覆盖 CLI、ECS、编辑器历史和场景序列化。它也检查资源定位、扩展注册和 GPU 能力报告。视觉变更还要运行公共资产捕获、图像比较和 Debug Validation。单元测试不能代替真实 GPU 验收。
 
-运行 `AzureRender.exe --help` 可查看稳定的命令行参考。常用参数如下：
+## 资产与许可
 
-| 参数 | 用途 |
-|---|---|
-| `--scene-type character|blackhole` | 选择场景渲染器 |
-| `--asset <gltf/glb>` | 指定角色资产 |
-| `--environment <hdr/png/jpg/六面目录>` | 指定经纬环境贴图，或包含 `_Right/_Left/_Up/_Down/_Front/_Back` 的六面目录 |
-| `--scene <azscene>` | 加载场景 |
-| `--create-scene <azscene>` | 创建场景文件 |
-| `--editor <azscene>` | 启动编辑器 |
-| `--smoke-frames <N>` | 运行固定帧数后退出 |
-| `--width/--height` | 固定输出尺寸 |
-| `--capture-dir/--capture-frames/--capture-fps` | 确定性捕获 |
-| `--gpu-timing` | 启用 GPU pass timing |
-| `--diagnostic-view beauty|normal|outline|shadow` | 诊断视图 |
-| `--render-path traditional|subpasses|dynamic` | 论文三路径基准选择 |
-| `--check-resources` | 检查安装/开发树资源 |
-| `--version` | 输出版本 |
-| `--help` | 输出命令行参考 |
-
-参数范围和错误行为由 `src/app/CommandLine.cpp` 及自动化测试定义，不再另行维护一份容易漂移的参数手册。
-
-## 角色展示控制
-
-五套角色 Look 由版本化的 `assets_public/showcase_looks.json` 驱动，编辑器可独立控制背景、地台与 Face SDF。详细约束见 `docs/CHARACTER_LOOKS_CN.md`。
-
-| 按键 | 行为 |
-|---|---|
-| `1`-`5` | 固定全身、方向和脸部机位 |
-| `F1`-`F3` | 展示预设 |
-| `F4` | 暂停/继续动画 |
-| `F5`/`F6` | 调整 diffuse band |
-| `F7`/`F8` | 调整 style mask |
-| `F9` | 切换风格化光照 |
-| `F10` | 切换内部描边 |
-| `F11` | 重启动画 |
-| `F12` | 保存 PNG |
-| `H` | 显示/隐藏 HUD |
-
-## 质量门禁
-
-```powershell
-ctest --test-dir build\ninja-debug --output-on-failure
-cmake -DBUILD_DIR="$PWD/build/ninja-debug" -DCONFIG=Debug -P tools/run_release_gate.cmake
-```
-
-完整的 Debug、Release、Validation、视觉检查和提交规则见 [开发指南](docs/DEVELOPMENT_GUIDE_CN.md)。
-
-## 资产与发布
-
-- `assets_public/`：公共测试和发布资产。
-- `assets_private/`：受限测试资产，不得进入公开发布包。
-- `portfolio/`：按场景整理的公共代表图、证据 JSON 和 SHA-256 manifest。
-- `captures/`、`build/`：可再生成内容，不进入版本控制。
+- `assets_public/` 可用于 CI、发布和公开截图。
+- `assets_private/` 仅供本机授权范围内的视觉检查，不进入公开仓库、安装包或作品集。
+- `portfolio/` 只保存经过选择的公共视觉证据与机器可读 manifest。
 - 第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+项目当前版本为 `0.1.0-rc1`。功能状态和兼容性以源码、Schema、测试及 [CHANGELOG.md](CHANGELOG.md) 为准。

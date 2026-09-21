@@ -122,6 +122,14 @@ private:
 
     LoadedAsset asset_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
+    // Normalized bind-pose head basis. Imported joint axes are not guaranteed
+    // to match the model's semantic left/up/forward axes, so runtime lighting
+    // uses the current head rotation relative to this reference basis.
+    std::array<float, 9> faceSdfBindBasis_{
+        1.0F, 0.0F, 0.0F,
+        0.0F, 1.0F, 0.0F,
+        0.0F, 0.0F, 1.0F,
+    };
     rhi::GpuBuffer vertexBuffer_;
     rhi::GpuBuffer indexBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
