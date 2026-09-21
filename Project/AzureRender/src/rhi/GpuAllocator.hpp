@@ -1,50 +1,18 @@
 #pragma once
 
+#include "rhi/IGpuAllocator.hpp"
+
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
 #include <string>
 
-// Forward declarations keep the VMA header out of this interface so translation
-// units that only allocate do not need to see the implementation details.
-struct VmaAllocator_T;
-struct VmaAllocation_T;
-using VmaAllocator = VmaAllocator_T*;
-using VmaAllocation = VmaAllocation_T*;
-
 namespace azurerender::rhi {
-
-// A buffer or image allocation owned by GpuAllocator. The allocation handle is
-// opaque here; callers pass the whole struct back to the matching destroy call
-// so the allocator stays the single owner of the backing memory.
-struct GpuBuffer {
-    VkBuffer buffer = VK_NULL_HANDLE;
-    VmaAllocation allocation = nullptr;
-    // Persistently mapped pointer for host-visible allocations, else null.
-    void* mapped = nullptr;
-    VkDeviceSize size = 0;
-};
-
-struct GpuImage {
-    VkImage image = VK_NULL_HANDLE;
-    VmaAllocation allocation = nullptr;
-};
-
-// Running totals used by the performance baseline to show that a structural
-// change reduced allocation pressure.
-struct GpuAllocatorStatistics {
-    std::uint64_t bufferAllocations = 0;
-    std::uint64_t imageAllocations = 0;
-    std::uint64_t liveBuffers = 0;
-    std::uint64_t liveImages = 0;
-    VkDeviceSize bufferBytes = 0;
-    VkDeviceSize imageBytes = 0;
-};
 
 // Owns the VMA allocator for a device. Constructed once by the engine and
 // handed to subsystems that need GPU memory; scene renderers never create their
 // own allocator.
-class GpuAllocator final {
+class GpuAllocator final : public IGpuAllocator {
 public:
     GpuAllocator() = default;
     ~GpuAllocator();
@@ -69,13 +37,13 @@ public:
     [[nodiscard]] GpuBuffer createBuffer(
         VkDeviceSize size,
         VkBufferUsageFlags usage,
-        bool hostVisible);
-    void destroyBuffer(GpuBuffer& buffer) noexcept;
+        bool hostVisible) override;
+    void destroyBuffer(GpuBuffer& buffer) noexcept override;
 
     [[nodiscard]] GpuImage createImage(
         const VkImageCreateInfo& createInfo,
-        bool hostVisible);
-    void destroyImage(GpuImage& image) noexcept;
+        bool hostVisible) override;
+    void destroyImage(GpuImage& image) noexcept override;
 
     // Standard 2D optimal-tiling image; the common shape for textures and
     // offscreen targets.
@@ -85,13 +53,17 @@ public:
         VkFormat format,
         VkImageUsageFlags usage,
         std::uint32_t mipLevels = 1,
-        bool hostVisible = false);
+        bool hostVisible = false) override;
 
     // Flushes a persistently mapped range on a non-coherent memory type. Safe
     // to call unconditionally; it is a no-op when the memory is coherent.
-    void flush(const GpuBuffer& buffer, VkDeviceSize offset, VkDeviceSize size);
+    void flush(
+        const GpuBuffer& buffer,
+        VkDeviceSize offset,
+        VkDeviceSize size) override;
 
-    [[nodiscard]] const GpuAllocatorStatistics& statistics() const noexcept {
+    [[nodiscard]] const GpuAllocatorStatistics& statistics()
+        const noexcept override {
         return statistics_;
     }
 

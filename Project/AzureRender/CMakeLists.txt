@@ -232,9 +232,15 @@ add_executable(
     src/render/VulkanHelpers.hpp
     src/rhi/GpuAllocator.cpp
     src/rhi/GpuAllocator.hpp
+    src/rhi/IGpuAllocator.hpp
+    src/rhi/NullRhi.cpp
+    src/rhi/NullRhi.hpp
+    src/rhi/Rhi.hpp
     src/rhi/RingFrameAllocator.hpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/UploadRingBuffer.hpp
+    src/rhi/VulkanRhi.cpp
+    src/rhi/VulkanRhi.hpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/CharacterSceneRenderer.hpp
@@ -392,6 +398,18 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.UploadRing
         COMMAND AzureRenderUploadRingTests)
+    add_executable(
+        AzureRenderNullRhiTests
+        tests/NullRhiTests.cpp
+        src/rhi/NullRhi.cpp
+    )
+    target_include_directories(
+        AzureRenderNullRhiTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderNullRhiTests PRIVATE Vulkan::Vulkan)
+    add_test(
+        NAME AzureRender.NullRhi
+        COMMAND AzureRenderNullRhiTests)
 
     # GPU visual regression. This needs a working Vulkan device, so it is
     # registered only when Python and the tooling are present and it reports

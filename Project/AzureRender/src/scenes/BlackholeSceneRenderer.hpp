@@ -3,7 +3,7 @@
 #include "extensions/ISceneRenderer.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
-#include "rhi/GpuAllocator.hpp"
+#include "rhi/IGpuAllocator.hpp"
 
 #include <array>
 #include <cstdint>
@@ -63,7 +63,7 @@ private:
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     // Engine-owned allocator borrowed for the renderer's lifetime.
-    rhi::GpuAllocator* allocator_ = nullptr;
+    rhi::IGpuAllocator* allocator_ = nullptr;
     std::string shaderDirectory_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;

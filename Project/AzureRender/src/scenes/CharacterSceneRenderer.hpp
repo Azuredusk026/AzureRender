@@ -2,7 +2,7 @@
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
-#include "rhi/GpuAllocator.hpp"
+#include "rhi/IGpuAllocator.hpp"
 
 #include <array>
 #include <cstdint>
@@ -116,7 +116,7 @@ private:
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     // Engine-owned allocator borrowed for the renderer's lifetime.
-    rhi::GpuAllocator* allocator_ = nullptr;
+    rhi::IGpuAllocator* allocator_ = nullptr;
     // Global texture array path, enabled when the device offers descriptor
     // indexing. False keeps the per-material fixed descriptor tables.
     bool bindlessTextures_ = false;

@@ -16,7 +16,7 @@ struct LoadedAsset;
 namespace azurerender {
 
 namespace rhi {
-class GpuAllocator;
+class IGpuAllocator;
 }
 
 struct RenderSettings;
@@ -117,7 +117,7 @@ struct RenderContext {
 
     // Engine-owned GPU allocator. Scene renderers route every buffer and
     // image allocation through it and never create a private allocator.
-    rhi::GpuAllocator* allocator = nullptr;
+    rhi::IGpuAllocator* allocator = nullptr;
 
     // Descriptor indexing is enabled on the device and renderers may build a
     // global texture array instead of per-material descriptor sets. False
