@@ -93,8 +93,8 @@ public:
     template <typename T, typename Callable>
     void each(Callable&& callable) {
         ComponentArray<T>& array = componentArray<T>();
-        for (auto& entry : array.components()) {
-            callable(entry.first, entry.second);
+        for (std::size_t index = 0; index < array.dense().size(); ++index) {
+            callable(array.entities()[index], array.dense()[index]);
         }
     }
 
@@ -103,9 +103,10 @@ public:
     void each(Callable&& callable) {
         ComponentArray<T1>& primary = componentArray<T1>();
         ComponentArray<T2>& secondary = componentArray<T2>();
-        for (auto& entry : primary.components()) {
-            if (T2* second = secondary.tryGet(entry.first); second != nullptr) {
-                callable(entry.first, entry.second, *second);
+        for (std::size_t index = 0; index < primary.dense().size(); ++index) {
+            const Entity entity = primary.entities()[index];
+            if (T2* second = secondary.tryGet(entity); second != nullptr) {
+                callable(entity, primary.dense()[index], *second);
             }
         }
     }

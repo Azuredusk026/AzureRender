@@ -26,8 +26,8 @@ void countTaggedEntities(azurerender::ecs::World& world) {
     ++g_updateCount;
     g_lastTaggedCount = 0;
     auto& tags = world.componentArray<TagComponent>();
-    for (const auto& entry : tags.components()) {
-        if (!entry.second.label.empty()) {
+    for (const TagComponent& tag : tags.dense()) {
+        if (!tag.label.empty()) {
             ++g_lastTaggedCount;
         }
     }
@@ -113,6 +113,43 @@ int main() {
             ++paired;
         });
     assert(paired == 1);
+
+    // Dense storage: components and their owning entities are parallel
+    // contiguous arrays, and erase swap-fills the freed slot.
+    World denseWorld;
+    const Entity d1 = denseWorld.createEntity();
+    const Entity d2 = denseWorld.createEntity();
+    const Entity d3 = denseWorld.createEntity();
+    denseWorld.addComponent(d1, TransformComponent{10.0F, 0.0F, 0.0F});
+    denseWorld.addComponent(d2, TransformComponent{20.0F, 0.0F, 0.0F});
+    denseWorld.addComponent(d3, TransformComponent{30.0F, 0.0F, 0.0F});
+    auto& denseTransforms = denseWorld.componentArray<TransformComponent>();
+    assert(denseTransforms.dense().size() == 3);
+    assert(denseTransforms.entities().size() == 3);
+    assert(denseTransforms.dense()[1].x == 20.0F);
+    assert(denseTransforms.entities()[1] == d2);
+
+    // Inserting the same entity twice updates in place.
+    denseWorld.addComponent(d2, TransformComponent{21.0F, 0.0F, 0.0F});
+    assert(denseTransforms.dense().size() == 3);
+    assert(denseWorld.tryGet<TransformComponent>(d2)->x == 21.0F);
+
+    // Erase d1: d3's component moves into the freed slot and stays findable.
+    denseTransforms.erase(d1);
+    assert(denseTransforms.dense().size() == 2);
+    assert(!denseTransforms.contains(d1));
+    const TransformComponent* d3After =
+        denseWorld.tryGet<TransformComponent>(d3);
+    assert(d3After != nullptr);
+    assert(d3After->x == 30.0F);
+    for (std::size_t index = 0; index < denseTransforms.dense().size();
+         ++index) {
+        const azurerender::ecs::Entity owner =
+            denseTransforms.entities()[index];
+        assert(
+            denseWorld.tryGet<TransformComponent>(owner)
+            == &denseTransforms.dense()[index]);
+    }
 
     return 0;
 }
