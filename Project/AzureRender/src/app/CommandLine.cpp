@@ -51,8 +51,9 @@ constexpr const char* kHelp =
     "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
     "  --diagnostic-view beauty|normal|outline|shadow\n"
     "  --hud --no-stylized --no-inner-outline\n"
-    "  --disable-bindless                Force legacy per-material descriptors\n\n"
-    "  --disable-culling                 Submit all instances without culling\n\n"
+    "  --disable-bindless                Force legacy per-material descriptors\n"
+    "  --disable-culling                 Submit all instances without culling\n"
+    "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
@@ -307,6 +308,15 @@ ParsedCommandLine parseCommandLine(
             parsed.options.bindlessDisabled = true;
         } else if (argument == "--disable-culling") {
             parsed.options.cullingDisabled = true;
+        } else if (argument == "--instances") {
+            parsed.options.instanceCount = parseUint32(
+                requireValue(arguments, index, argument), argument);
+            if (parsed.options.instanceCount == 0) {
+                fail(
+                    CommandLineErrorCode::InvalidValue,
+                    argument,
+                    "--instances must be greater than zero");
+            }
         } else if (argument == "--gpu-timing-output") {
             parsed.options.gpuTimingEnabled = true;
             parsed.options.gpuTimingOutput =

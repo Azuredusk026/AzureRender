@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <cstring>
 #include <fstream>
 #include <iomanip>
@@ -230,6 +231,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     }
     bindlessTextures_ = context.bindlessTextures;
     cullingEnabled_ = context.cullingEnabled;
+    qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
     rampAtlasPath_ = context.rampAtlasPath;
     environmentSource_ = context.environment;
@@ -364,16 +366,27 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
 }
 
 void CharacterSceneRenderer::rebuildSceneInstances() {
-    // The default asset scene contributes one instance; scene-driven
-    // multi-object scenes append here as the scene graph lands.
+    // The default asset scene contributes one instance; the QA stress knob
+    // clones it onto a grid to prove draw counts stay flat as instances grow.
     sceneInstances_.clear();
-    scene::SceneInstance instance{};
-    instance.model = currentModel_;
-    instance.worldBounds = scene::transformBounds(
-        {asset_.boundsMin, asset_.boundsMax}, currentModel_);
-    instance.sourceIndex = 0;
-    instance.meshKey = 0;
-    sceneInstances_.push_back(instance);
+    sceneInstances_.reserve(qaInstanceCount_);
+    const std::uint32_t gridSide = static_cast<std::uint32_t>(
+        std::ceil(std::sqrt(static_cast<double>(qaInstanceCount_))));
+    constexpr float kGridSpacing = 2.2F;
+    for (std::uint32_t index = 0; index < qaInstanceCount_; ++index) {
+        const float offsetX =
+            static_cast<float>(index % gridSide) * kGridSpacing;
+        const float offsetZ =
+            static_cast<float>(index / gridSide) * kGridSpacing;
+        scene::SceneInstance instance{};
+        instance.model = multiply(
+            translation(offsetX, 0.0F, offsetZ), currentModel_);
+        instance.worldBounds = scene::transformBounds(
+            {asset_.boundsMin, asset_.boundsMax}, instance.model);
+        instance.sourceIndex = index;
+        instance.meshKey = 0;
+        sceneInstances_.push_back(instance);
+    }
 
     visibleInstances_.clear();
     if (cullingEnabled_) {
@@ -383,6 +396,23 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         for (const scene::SceneInstance& entry : sceneInstances_) {
             visibleInstances_.push_back(&entry);
         }
+    }
+
+    if (visibleInstances_.empty() || instanceBuffers_.empty()) {
+        return;
+    }
+    auto* destination = static_cast<InstanceGpuData*>(
+        instanceBuffers_[currentFrame_].mapped);
+    const std::size_t visibleCount = visibleInstances_.size();
+    for (std::size_t slot = 0; slot < visibleCount; ++slot) {
+        const Matrix4& model = visibleInstances_[slot]->model;
+        destination[slot].model = model;
+        // The same association as the per-frame uniform path so a single
+        // instance reproduces the original values exactly.
+        destination[slot].modelViewProjection =
+            multiply(projectionMatrix_, multiply(viewMatrix_, model));
+        destination[slot].lightModelViewProjection = multiply(
+            lightProjectionMatrix_, multiply(lightViewMatrix_, model));
     }
 }
 
@@ -806,6 +836,15 @@ void CharacterSceneRenderer::createUniformBuffers() {
             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
             true);
     }
+    instanceCapacity_ = std::max(qaInstanceCount_, 1U);
+    instanceBuffers_.resize(kMaxFramesInFlight);
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        instanceBuffers_[index] = allocator_->createBuffer(
+            static_cast<VkDeviceSize>(instanceCapacity_)
+                * sizeof(InstanceGpuData),
+            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+            true);
+    }
 }
 
 void CharacterSceneRenderer::createJointBuffers() {
@@ -861,7 +900,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * textureSlots},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 2},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -872,7 +911,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 2},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -897,6 +936,10 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
              VK_SHADER_STAGE_VERTEX_BIT},
+            {13,
+             VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             1,
+             VK_SHADER_STAGE_VERTEX_BIT},
         });
         return;
     }
@@ -918,6 +961,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {10, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         {11, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {12, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {13, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
     });
 }
 
@@ -985,6 +1029,15 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.range = sizeof(asset_.jointMatrices.front())
                 * asset_.jointMatrices.size();
             rhi_->writeDescriptorBuffer(jointWrite);
+
+            rhi::DescriptorBufferWrite instanceWrite{};
+            instanceWrite.set = descriptorSets_[frame];
+            instanceWrite.binding = 13;
+            instanceWrite.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            instanceWrite.buffer = instanceBuffers_[frame].buffer;
+            instanceWrite.range = static_cast<VkDeviceSize>(instanceCapacity_)
+                * sizeof(InstanceGpuData);
+            rhi_->writeDescriptorBuffer(instanceWrite);
         }
         return;
     }
@@ -1099,6 +1152,15 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.range = sizeof(asset_.jointMatrices.front())
                 * asset_.jointMatrices.size();
             rhi_->writeDescriptorBuffer(jointWrite);
+
+            rhi::DescriptorBufferWrite instanceWrite{};
+            instanceWrite.set = descriptorSets_[descriptorIndex];
+            instanceWrite.binding = 13;
+            instanceWrite.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            instanceWrite.buffer = instanceBuffers_[frame].buffer;
+            instanceWrite.range = static_cast<VkDeviceSize>(instanceCapacity_)
+                * sizeof(InstanceGpuData);
+            rhi_->writeDescriptorBuffer(instanceWrite);
         }
     }
 }
@@ -1312,6 +1374,10 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     oitIndexBuffers_.clear();
+    for (auto& buffer : instanceBuffers_) {
+        allocator_->destroyBuffer(buffer);
+    }
+    instanceBuffers_.clear();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
     for (auto& material : gpuMaterials_) {
@@ -1404,11 +1470,13 @@ void CharacterSceneRenderer::updateUniformBuffer(
         cameraPosition_,
         cameraTarget_,
         {0.0F, 1.0F, 0.0F});
+    viewMatrix_ = view;
     const float aspect =
         static_cast<float>(frame.swapchainWidth)
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    projectionMatrix_ = projection;
     viewFrustum_ =
         scene::extractFrustumPlanes(multiply(projection, view));
     const RenderSettings& settings = *renderSettings_;
@@ -1427,12 +1495,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
         {0.0F, 1.0F, 0.0F});
     const Matrix4 lightProjection = orthographic(
         -1.90F, 1.90F, -1.90F, 1.90F, 0.10F, 8.0F);
+    lightViewMatrix_ = lightView;
+    lightProjectionMatrix_ = lightProjection;
 
     UniformBufferObject uniform{};
-    uniform.model = model;
-    uniform.modelViewProjection = multiply(projection, multiply(view, model));
-    uniform.lightModelViewProjection =
-        multiply(lightProjection, multiply(lightView, model));
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };
@@ -1554,8 +1620,9 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             ++context.submissionCounters->descriptorSetBinds;
         }
     }
-    for (const scene::SceneInstance* instance : visibleInstances_) {
-        (void)instance;
+    const std::uint32_t visibleCount =
+        static_cast<std::uint32_t>(visibleInstances_.size());
+    if (visibleCount > 0) {
         for (const AssetPrimitive& primitive : asset_.primitives) {
             const AssetMaterial& material =
                 asset_.materials[primitive.materialIndex];
@@ -1608,7 +1675,8 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
                 sizeof(MaterialPushConstants),
                 &morphConstants,
                 sizeof(morphConstants));
-            commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
+            commands.drawIndexed(
+                primitive.indexCount, primitive.firstIndex, visibleCount);
             if (context.submissionCounters != nullptr) {
                 ++context.submissionCounters->drawCalls;
                 context.submissionCounters->pushConstantUpdates += 2;
@@ -1675,8 +1743,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     commands.bindIndexBuffer(indexBuffer_.buffer, 0);
     if (settings.silhouetteOutlineEnabled) {
         commands.bindPipeline(outlinePipeline_);
-        for (const scene::SceneInstance* instance : visibleInstances_) {
-            (void)instance;
+        if (!visibleInstances_.empty()) {
             for (const AssetPrimitive& primitive : asset_.primitives) {
                 const AssetMaterial& outlineMaterial =
                     asset_.materials[primitive.materialIndex];
@@ -1701,19 +1768,26 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                         ++context.submissionCounters->descriptorSetBinds;
                     }
                 }
-                commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
+                commands.drawIndexed(
+                    primitive.indexCount,
+                    primitive.firstIndex,
+                    static_cast<std::uint32_t>(visibleInstances_.size()));
                 if (context.submissionCounters != nullptr) {
                     ++context.submissionCounters->drawCalls;
                 }
             }
         }
     }
-    for (const scene::SceneInstance* instance : visibleInstances_) {
-        (void)instance;
+    if (!visibleInstances_.empty()) {
         for (const AssetPrimitive& primitive : asset_.primitives) {
             if (asset_.materials[primitive.materialIndex].alphaMode
                 != AssetAlphaMode::Blend) {
-                drawPrimitive(commands, primitive, primitive.firstIndex);
+                drawPrimitive(
+                    commands,
+                    primitive,
+                    primitive.firstIndex,
+                    static_cast<std::uint32_t>(visibleInstances_.size()),
+                    0);
             }
         }
     }
@@ -1729,7 +1803,10 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
         -cameraPosition_[1],
         -cameraPosition_[2],
     });
-    for (const scene::SceneInstance* instance : visibleInstances_) {
+    for (std::size_t slot = 0; slot < visibleInstances_.size(); ++slot) {
+        const scene::SceneInstance* instance = visibleInstances_[slot];
+        const std::uint32_t firstInstance =
+            static_cast<std::uint32_t>(slot);
         std::size_t oitWriteIndex = 0;
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
             std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
@@ -1793,7 +1870,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                     oitIndexBuffers_[context.currentFrame].buffer,
                     offsetBytes);
             }
-            drawPrimitive(commands, *primitive, 0);
+            drawPrimitive(commands, *primitive, 0, 1, firstInstance);
             oitReadIndex += primitive->indexCount;
         }
     }
@@ -1806,7 +1883,9 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
 void CharacterSceneRenderer::drawPrimitive(
     rhi::ICommandRecorder& commands,
     const AssetPrimitive& primitive,
-    const std::uint32_t firstIndexOffset) {
+    const std::uint32_t firstIndexOffset,
+    const std::uint32_t instanceCount,
+    const std::uint32_t firstInstance) {
     const AssetMaterial& material = asset_.materials[primitive.materialIndex];
     if (material.showcasePlatform > 0.5F
         && !renderSettings_->characterPresentation.platformEnabled) {
@@ -1910,7 +1989,8 @@ void CharacterSceneRenderer::drawPrimitive(
         sizeof(MaterialPushConstants),
         &morphConstants,
         sizeof(morphConstants));
-    commands.drawIndexed(primitive.indexCount, firstIndexOffset);
+    commands.drawIndexed(
+        primitive.indexCount, firstIndexOffset, instanceCount, firstInstance);
     if (submissionCounters_ != nullptr) {
         ++submissionCounters_->drawCalls;
         ++submissionCounters_->pipelineBinds;

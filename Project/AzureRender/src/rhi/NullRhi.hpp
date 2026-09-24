@@ -154,7 +154,9 @@ public:
     void draw(std::uint32_t vertexCount) override;
     void drawIndexed(
         std::uint32_t indexCount,
-        std::uint32_t firstIndex) override;
+        std::uint32_t firstIndex,
+        std::uint32_t instanceCount = 1,
+        std::uint32_t firstInstance = 0) override;
     void imageBarrier(const ImageBarrierDesc& barrier) override;
     void clearColorImage(
         VkImage image,

@@ -30,6 +30,9 @@ struct AzureRenderOptions {
     // Disable frustum culling so every instance is submitted. The QA
     // toggle that proves both sides render identical frames.
     bool cullingDisabled = false;
+    // QA stress knob: clone the default asset entity N times onto a grid to
+    // measure submission cost scaling with instance count.
+    std::uint32_t instanceCount = 1;
     azurerender::RenderSettings renderSettings;
     bool hudEnabled = false;
     bool technicalSequence = false;

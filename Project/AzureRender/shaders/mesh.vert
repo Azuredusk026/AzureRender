@@ -1,9 +1,6 @@
 #version 450
 
 layout(binding = 0) uniform CameraData {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 lightModelViewProjection;
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
@@ -16,6 +13,17 @@ layout(binding = 0) uniform CameraData {
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
 } jointData;
+
+// Per-instance transforms, written by the host in the same order as the
+// visible instance list; gl_InstanceIndex selects the slot.
+struct InstanceTransforms {
+    mat4 model;
+    mat4 modelViewProjection;
+    mat4 lightModelViewProjection;
+};
+layout(std430, binding = 13) readonly buffer InstanceData {
+    InstanceTransforms instances[];
+} instanceData;
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
@@ -76,11 +84,11 @@ void main() {
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     if (browOverlay) {
-        vec3 initialWorldPosition = (camera.model * gizmoPosition).xyz;
+        vec3 initialWorldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
         vec3 worldViewDirection = normalize(
             camera.cameraPosition.xyz - initialWorldPosition);
         vec3 localViewDirection = normalize(
-            transpose(mat3(camera.model)) * worldViewDirection);
+            transpose(mat3(instanceData.instances[gl_InstanceIndex].model)) * worldViewDirection);
         // M_Common_Brow Offset, converted from Unreal cm to glTF metres by
         // the asset profile.
         gizmoPosition.xyz += localViewDirection
@@ -89,13 +97,13 @@ void main() {
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * tangent.xyz);
-    gl_Position = camera.modelViewProjection * gizmoPosition;
+    gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
     gl_Position.xy *= 1.6;
-    worldNormal = normalize(mat3(camera.model) * gizmoNormal);
+    worldNormal = normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoNormal);
     worldTangent = vec4(
-        normalize(mat3(camera.model) * gizmoTangent),
+        normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoTangent),
         tangent.w);
     textureCoordinate = texcoord;
-    worldPosition = (camera.model * gizmoPosition).xyz;
-    shadowPosition = camera.lightModelViewProjection * gizmoPosition;
+    worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
+    shadowPosition = instanceData.instances[gl_InstanceIndex].lightModelViewProjection * gizmoPosition;
 }

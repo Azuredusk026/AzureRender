@@ -1,9 +1,6 @@
 #version 450
 
 layout(binding = 0) uniform CameraData {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 lightModelViewProjection;
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
@@ -16,6 +13,15 @@ layout(binding = 0) uniform CameraData {
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
 } jointData;
+
+struct InstanceTransforms {
+    mat4 model;
+    mat4 modelViewProjection;
+    mat4 lightModelViewProjection;
+};
+layout(std430, binding = 13) readonly buffer InstanceData {
+    InstanceTransforms instances[];
+} instanceData;
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
@@ -36,5 +42,6 @@ void main() {
         skinnedPosition
         + skinnedNormal * camera.renderingParameters.x * 0.58;
     gl_Position =
-        camera.modelViewProjection * vec4(expandedPosition, 1.0);
+        instanceData.instances[gl_InstanceIndex].modelViewProjection
+        * vec4(expandedPosition, 1.0);
 }

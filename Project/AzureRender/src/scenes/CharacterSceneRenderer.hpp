@@ -101,9 +101,6 @@ private:
     static_assert(sizeof(MorphPushConstants) == 80);
 
     struct UniformBufferObject {
-        std::array<float, 16> model{};
-        std::array<float, 16> modelViewProjection{};
-        std::array<float, 16> lightModelViewProjection{};
         std::array<float, 4> cameraPosition{};
         std::array<float, 4> renderingParameters{};
         std::array<float, 4> showcaseParameters{};
@@ -111,6 +108,15 @@ private:
         std::array<float, 4> faceLightDirection{};
         std::array<float, 4> faceSdfParameters{};
         std::array<float, 4> faceSdfShadowColor{};
+    };
+
+    // Per-instance transforms uploaded to the instance storage buffer. The
+    // host computes them with the same matrix helpers as the single-model
+    // path, so one instance reproduces the original values bit for bit.
+    struct InstanceGpuData {
+        std::array<float, 16> model{};
+        std::array<float, 16> modelViewProjection{};
+        std::array<float, 16> lightModelViewProjection{};
     };
 
     // Engine-owned allocator borrowed for the renderer's lifetime.
@@ -148,6 +154,9 @@ private:
     std::vector<rhi::GpuBuffer> uniformBuffers_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
     std::vector<rhi::GpuBuffer> oitIndexBuffers_;
+    std::vector<rhi::GpuBuffer> instanceBuffers_;
+    std::uint32_t instanceCapacity_ = 0;
+    std::uint32_t qaInstanceCount_ = 1;
     std::size_t oitIndexBufferSize_ = 0;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
@@ -179,6 +188,12 @@ private:
     bool qaEffectEnabled_ = true;
     bool qaHarnessEnabled_ = false;
     std::array<float, 16> currentModel_{};
+    // Frame camera and light matrices, kept so rebuildSceneInstances can
+    // compose per-instance matrices with identical operation order.
+    std::array<float, 16> viewMatrix_{};
+    std::array<float, 16> projectionMatrix_{};
+    std::array<float, 16> lightViewMatrix_{};
+    std::array<float, 16> lightProjectionMatrix_{};
     // Bind-pose contact pivot estimated from the lowest character vertices.
     // X/Z define both the turntable axis and showcase-platform centre.
     std::array<float, 3> footPivot_{0.0F, 0.0F, 0.0F};
@@ -212,7 +227,9 @@ private:
     void drawPrimitive(
         rhi::ICommandRecorder& commands,
         const AssetPrimitive& primitive,
-        const std::uint32_t firstIndexOffset);
+        const std::uint32_t firstIndexOffset,
+        std::uint32_t instanceCount = 1,
+        std::uint32_t firstInstance = 0);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

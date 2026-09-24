@@ -168,7 +168,9 @@ public:
     virtual void draw(std::uint32_t vertexCount) = 0;
     virtual void drawIndexed(
         std::uint32_t indexCount,
-        std::uint32_t firstIndex) = 0;
+        std::uint32_t firstIndex,
+        std::uint32_t instanceCount = 1,
+        std::uint32_t firstInstance = 0) = 0;
 
     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
     virtual void clearColorImage(

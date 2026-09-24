@@ -386,11 +386,15 @@ void NullCommandRecorder::draw(const std::uint32_t vertexCount) {
 
 void NullCommandRecorder::drawIndexed(
     const std::uint32_t indexCount,
-    const std::uint32_t firstIndex) {
+    const std::uint32_t firstIndex,
+    const std::uint32_t instanceCount,
+    const std::uint32_t firstInstance) {
     calls.push_back(
         {"drawIndexed",
          std::to_string(indexCount) + " from "
-             + std::to_string(firstIndex)});
+             + std::to_string(firstIndex) + " x"
+             + std::to_string(instanceCount) + " @"
+             + std::to_string(firstInstance)});
 }
 
 void NullCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {

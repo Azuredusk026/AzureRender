@@ -768,8 +768,12 @@ void VulkanCommandRecorder::draw(const std::uint32_t vertexCount) {
 
 void VulkanCommandRecorder::drawIndexed(
     const std::uint32_t indexCount,
-    const std::uint32_t firstIndex) {
-    vkCmdDrawIndexed(commandBuffer_, indexCount, 1, firstIndex, 0, 0);
+    const std::uint32_t firstIndex,
+    const std::uint32_t instanceCount,
+    const std::uint32_t firstInstance) {
+    vkCmdDrawIndexed(
+        commandBuffer_, indexCount, instanceCount, firstIndex, 0,
+        firstInstance);
 }
 
 void VulkanCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {

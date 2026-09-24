@@ -318,6 +318,7 @@ void AzureRenderApp::buildRenderContext(
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;
+    context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
     context.swapchainExtent = swapchainExtent_;

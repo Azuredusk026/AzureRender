@@ -1,9 +1,6 @@
 #version 450
 
 layout(binding = 0) uniform CameraData {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 lightModelViewProjection;
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;

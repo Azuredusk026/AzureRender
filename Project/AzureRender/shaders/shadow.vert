@@ -1,9 +1,6 @@
 #version 450
 
 layout(binding = 0) uniform CameraData {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 lightModelViewProjection;
     vec4 cameraPosition;
     vec4 renderingParameters;
     vec4 showcaseParameters;
@@ -16,6 +13,15 @@ layout(binding = 0) uniform CameraData {
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
 } jointData;
+
+struct InstanceTransforms {
+    mat4 model;
+    mat4 modelViewProjection;
+    mat4 lightModelViewProjection;
+};
+layout(std430, binding = 13) readonly buffer InstanceData {
+    InstanceTransforms instances[];
+} instanceData;
 
 layout(location = 0) in vec3 position;
 layout(location = 3) in vec2 texcoord;
@@ -30,7 +36,7 @@ void main() {
         + jointWeights.z * jointData.matrices[jointIndices.z]
         + jointWeights.w * jointData.matrices[jointIndices.w];
     gl_Position =
-        camera.lightModelViewProjection
+        instanceData.instances[gl_InstanceIndex].lightModelViewProjection
         * skinMatrix
         * vec4(position, 1.0);
     textureCoordinate = texcoord;
