@@ -164,6 +164,20 @@ MinGW 下 VMA 与 bindless 的实际可用性需尽早实测；若 lavapipe 不�
 
 替换单资产假设，建立统一场景表示。这是最大的一次结构改动，也是"可扩展"的核心。
 
+### 落地结果
+
+结构替换已完成：
+
+| 产出 | 位置 |
+|---|---|
+| 密集 ECS 存储 | `src/ecs/ComponentArray.hpp`（稀疏索引加密集向量） |
+| 场景数学 | `src/scene/TransformMath.hpp`、`Frustum.hpp`、`TransformSystem.hpp` |
+| 场景表示 | `src/scene/SceneDescription.hpp`，`RenderContext::scene` 取代单 `assetPath` |
+| 实例与剔除 | `src/scene/RenderBatching.hpp`，角色渲染器逐帧实例化与按资源分组 |
+| 资源缓存 | 角色渲染器主资源加附加资源，joint 与材质纹理并入共享缓冲 |
+
+验收证据：单对象场景 E0 七视图逐像素零差异；剔除开关两侧零差异且锥外实例 draw 归零（NullRHI 断言）；`--instances 64` 每帧 draw 6.0 增至 16.62，增长全部来自透明路径；多对象 `.azscene` 既有 v2 格式直接承载多资源与多节点，无需 schema 迁移；编辑器会话渲染多对象通过；多资源 round-trip 测试通过。附加资源按绑定姿势渲染是当前边界，逐实例动画状态属于后续阶段。
+
 ### 改动面
 
 - `src/scene/`（新增）：场景图、变换层级、可见性、批次。

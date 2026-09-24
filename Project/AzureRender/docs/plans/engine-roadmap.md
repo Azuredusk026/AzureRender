@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-09-20
-> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0、E1 完成，E2-E7 为 `Ready` 队列，当前没有 Active 阶段。
+> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E2 完成，E3-E7 为 `Ready` 队列，当前没有 Active 阶段。
 >
 > 本文与 engine-evolution-plan.md 是引擎化阶段的内部工作文档，不进入发布文档站导航。
 
@@ -134,7 +134,7 @@ E0-E3 为结构替换，产生大幅 diff 且不直接产出画面；E4-E7 在�
 |---|---|---|---|
 | E0 视觉与性能基线 | 安全网 | 像素回归与性能基准（`Complete` 2026-09-20） | — |
 | E1 RHI 与内存层 | 结构替换 | 后端可替换、VMA、bindless（`Complete` 2026-09-21） | E0 |
-| E2 场景图与渲染数据流 | 结构替换 | 统一场景表示、多对象、批次 | E0 |
+| E2 场景图与渲染数据流 | 结构替换 | 统一场景表示、多对象、批次（`Complete` 2026-09-24） | E0 |
 | E3 Render Graph 与 pass 库 | 结构替换 | 声明式 pass、自动 barrier | E1、E2 |
 | E4 Compute 与着色质量 | 功能 | compute 通路、GPU IBL、新 bloom | E3 |
 | E5 光照与阴影体系 | 功能 | 多光源、CSM、聚簇光照 | E3 |
@@ -145,7 +145,7 @@ E0-E3 为结构替换，产生大幅 diff 且不直接产出画面；E4-E7 在�
 
 - **E0**：`Complete`（2026-09-20）。七个隔离视图有公共基线并接入 CTest 与 CI；性能基准工具产出固定格式 JSON；故意引入的 shader 改动能被检出。基线 `character` 每帧 6 次 draw 与 6 次 descriptor 绑定，作为 E1、E2 的对比起点。
 - **E1**：`Complete`（2026-09-21）。`rhi::IRhi` 与 `rhi::ICommandRecorder` 收拢场景渲染器的全部 Vulkan 调用，NullRHI 记录后端支撑无 GPU 的 pass 录制单测；VMA 接管全部显存分配；上传环形缓冲与常驻回读缓冲替代逐帧建删；角色场景 bindless 纹理数组使每帧 descriptor 绑定从 6.0 降至 2.0（RTX 2060、1280×720、300 帧实测），`--disable-bindless` 固定表降级路径与主路径像素一致且都有 CTest 覆盖。
-- **E2**：ECS 成为唯一运行期场景表示，组件改为密集存储；场景支持多对象与实例化；批次使同网格多实例的 draw call 不随实例数线性增长。单对象场景 E0 零差异。
+- **E2**：`Complete`（2026-09-24）。运行期渲染数据改为单链路：场景文档经 SceneDescription 驱动逐帧实例，不再有两套并行的渲染表示；ECS 组件存储改为密集稀疏集；视锥剔除默认开启且开关两侧像素一致（锥外实例 draw 归零有 NullRHI 直接断言）；同网格实例化合并，`--instances 64` 实测 draw 仅从 6.0 增至 16.62/帧且增长全部来自按实例深度排序的透明路径；多对象 .azscene（v2 既有格式，无需迁移）渲染、编辑器会话渲染与多资源 round-trip 全部通过。单对象场景 E0 七视图零差异。
 - **E3**：pass 声明读写资源，图负责排序、瞬态资源分配与 barrier；新增 pass 不需修改公共帧代码；三个场景全部经由图渲染。
 - **E4**：compute 通路建立；bloom 改为多级下采样上采样；IBL 改为 GPU 端运行期生成；skinning 与 morph 迁入 compute；支持 OpenEXR。
 - **E5**：光源成为场景实体；采用聚簇或分块光照使成本与屏幕分块相关而非光源总数；级联阴影落地且保留现有 PCSS 半影特征。

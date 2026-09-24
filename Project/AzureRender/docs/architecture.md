@@ -417,6 +417,10 @@ capabilities
 
 Renderer 的资源创建与命令录制都经过 `RenderContext::rhi` 与 `RenderContext::commands`。`rhi::IRhi` 覆盖 Descriptor、Pipeline、Sampler、ImageView、Render Pass 和一次性上传，`rhi::ICommandRecorder` 覆盖每帧录制。生产后端是 `rhi::VulkanRhi`，测试后端 `rhi::NullRhi` 在无 GPU 环境记录调用序列。Pass 录制逻辑由单元测试直接断言。
 
+## 场景表示
+
+渲染器每帧消费 `RenderContext::scene` 给出的资源列表与节点列表。单资产运行退化为单节点场景，`.azscene` 承载多资源与多节点。首个资源是主角资产并保留完整蒙皮与动画，其余资源按绑定姿势渲染。实例按资源分组进入实例存储缓冲，顶点 Shader 经 `gl_InstanceIndex` 取变换与 Joint 偏移，视锥剔除默认开启且开关两侧画面要求像素一致。
+
 内置 Catalog：
 
 | ID | 能力 |
