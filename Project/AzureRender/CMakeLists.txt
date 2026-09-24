@@ -433,6 +433,17 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.NullRhiPass
         COMMAND AzureRenderNullRhiPassTests)
+    add_executable(
+        AzureRenderSceneGraphTests
+        tests/SceneGraphTests.cpp
+    )
+    target_include_directories(
+        AzureRenderSceneGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(
+        AzureRenderSceneGraphTests PRIVATE Vulkan::Vulkan)
+    add_test(
+        NAME AzureRender.SceneGraph
+        COMMAND AzureRenderSceneGraphTests)
 
     # GPU visual regression. This needs a working Vulkan device, so it is
     # registered only when Python and the tooling are present and it reports
