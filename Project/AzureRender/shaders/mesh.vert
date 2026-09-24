@@ -20,6 +20,7 @@ struct InstanceTransforms {
     mat4 model;
     mat4 modelViewProjection;
     mat4 lightModelViewProjection;
+    uvec4 meta;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -63,11 +64,12 @@ void main() {
             && jointIndices.z >= 112U && jointIndices.z <= 154U)
         || (jointWeights.w > 0.001
             && jointIndices.w >= 112U && jointIndices.w <= 154U));
+    const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
-        jointWeights.x * jointData.matrices[jointIndices.x]
-        + jointWeights.y * jointData.matrices[jointIndices.y]
-        + jointWeights.z * jointData.matrices[jointIndices.z]
-        + jointWeights.w * jointData.matrices[jointIndices.w];
+        jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
+        + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
+        + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
+        + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
     if (eyebrowVertex) {

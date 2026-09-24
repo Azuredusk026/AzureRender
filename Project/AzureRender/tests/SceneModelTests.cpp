@@ -111,6 +111,47 @@ int main() {
         std::filesystem::remove_all(directory);
     }
 
+    // 1b. A multi-resource scene round-trips resources, nodes and their
+    //     transforms exactly.
+    {
+        const auto directory = uniqueDirectory();
+        const auto scenePath = directory / "multi.azscene";
+        azurerender::SceneDocument document;
+        document.sceneId = "multi-resource-test";
+        document.resources.push_back({"asset-0", "gltf", "hero.glb"});
+        document.resources.push_back({"prop-1", "gltf", "prop.glb"});
+        azurerender::SceneNode root;
+        root.id = "root";
+        root.name = "hero";
+        root.resourceId = "asset-0";
+        document.nodes.push_back(root);
+        azurerender::SceneNode prop;
+        prop.id = "prop";
+        prop.name = "prop";
+        prop.parentId = "root";
+        prop.resourceId = "prop-1";
+        prop.translation = {2.0F, 0.5F, -1.0F};
+        prop.rotation = {0.0F, 45.0F, 0.0F};
+        prop.scale = {0.5F, 0.5F, 0.5F};
+        prop.visible = false;
+        document.nodes.push_back(prop);
+        document.save(scenePath);
+
+        const auto loaded = azurerender::SceneDocument::load(scenePath);
+        assert(loaded.resources.size() == 2);
+        assert(loaded.resources[1].id == "prop-1");
+        assert(loaded.resources[1].path == "prop.glb");
+        assert(loaded.nodes.size() == 2);
+        const azurerender::SceneNode& loadedProp = loaded.nodes[1];
+        assert(loadedProp.parentId == "root");
+        assert(loadedProp.resourceId == "prop-1");
+        assert(std::abs(loadedProp.translation[0] - 2.0F) < 0.0001F);
+        assert(std::abs(loadedProp.rotation[1] - 45.0F) < 0.0001F);
+        assert(std::abs(loadedProp.scale[0] - 0.5F) < 0.0001F);
+        assert(!loadedProp.visible);
+        std::filesystem::remove_all(directory);
+    }
+
     // 8. Settings migration rejects future schemas and defaults legacy
     //    renderer selection without weakening current validation.
     {

@@ -6,9 +6,11 @@
 #include "rhi/Rhi.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
+#include "scene/SceneDescription.hpp"
 
 #include <array>
 #include <cstdint>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
@@ -117,6 +119,22 @@ private:
         std::array<float, 16> model{};
         std::array<float, 16> modelViewProjection{};
         std::array<float, 16> lightModelViewProjection{};
+        std::array<std::uint32_t, 4> meta{};
+    };
+    static_assert(sizeof(InstanceGpuData) == 208);
+
+    // A scene-referenced asset beyond the hero. Renders at bind pose in the
+    // current stage; its joints and material textures append after the hero
+    // data in the shared buffers.
+    struct AdditionalResource {
+        std::string path;
+        LoadedAsset asset;
+        rhi::GpuBuffer vertexBuffer;
+        rhi::GpuBuffer indexBuffer;
+        std::vector<GpuMaterial> gpuMaterials;
+        std::uint32_t jointBase = 0;
+        std::uint32_t textureBase = 0;
+        std::size_t globalMaterialBase = 0;
     };
 
     // Engine-owned allocator borrowed for the renderer's lifetime.
@@ -138,6 +156,9 @@ private:
 
     LoadedAsset asset_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
+    // Scene content snapshot from onLoad; nodes drive instance building.
+    scene::SceneDescription scene_;
+    std::vector<std::unique_ptr<AdditionalResource>> additionalResources_;
     // Normalized bind-pose head basis. Imported joint axes are not guaranteed
     // to match the model's semantic left/up/forward axes, so runtime lighting
     // uses the current head rotation relative to this reference basis.
@@ -202,6 +223,9 @@ private:
     // the visible list.
     std::vector<scene::SceneInstance> sceneInstances_;
     std::vector<const scene::SceneInstance*> visibleInstances_;
+    // Per-resource visible span: (meshKey, firstSlot, count) in the
+    // instance buffer's visible order.
+    std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;
     scene::FrustumPlanes viewFrustum_;
     bool cullingEnabled_ = true;
     RendererSceneState state_;
@@ -210,12 +234,36 @@ private:
     void createVertexBuffer();
     void createIndexBuffer();
     void createTexture();
+    void createAdditionalResources();
+    void createMeshBuffers(
+        LoadedAsset& asset,
+        rhi::GpuBuffer& vertexBuffer,
+        rhi::GpuBuffer& indexBuffer);
+    template <typename Pixels>
+    void uploadTextureData(
+        const Pixels& pixels,
+        std::uint32_t width,
+        std::uint32_t height,
+        VkFormat format,
+        bool clampVertical,
+        GpuTexture& texture,
+        std::uint32_t mipLevels = 1);
+    void uploadMaterialTextures(
+        const LoadedAsset& asset,
+        std::vector<GpuMaterial>& gpuMaterials);
     void createUniformBuffers();
     void createJointBuffers();
     void createOitIndexBuffers();
     void createDescriptorSetLayout();
     void createDescriptorPool();
     void createDescriptorSets();
+    [[nodiscard]] std::size_t totalMaterialCount() const noexcept {
+        std::size_t total = asset_.materials.size();
+        for (const auto& resource : additionalResources_) {
+            total += resource->asset.materials.size();
+        }
+        return total;
+    }
     void createGraphicsPipeline(const RenderContext& context);
     void destroyResources();
 
@@ -226,10 +274,13 @@ private:
     void recordMainPass(const RenderContext& context);
     void drawPrimitive(
         rhi::ICommandRecorder& commands,
+        const LoadedAsset& mesh,
         const AssetPrimitive& primitive,
         const std::uint32_t firstIndexOffset,
         std::uint32_t instanceCount = 1,
-        std::uint32_t firstInstance = 0);
+        std::uint32_t firstInstance = 0,
+        std::uint32_t textureBase = 0,
+        std::size_t globalMaterialBase = 0);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

@@ -1,9 +1,11 @@
 #pragma once
 
 #include "render/RenderSettings.hpp"
+#include "editor/SceneModel.hpp"
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 
 namespace azurerender {
@@ -45,4 +47,8 @@ struct AzureRenderOptions {
     bool editorMode = false;
     std::string editorScenePath;
     std::shared_ptr<azurerender::EditorSession> editorSession;
+    // Full scene document when the run was started from an .azscene file.
+    // Single-asset runs leave this empty and the app builds a one-node scene
+    // from assetPath.
+    std::optional<azurerender::SceneDocument> sceneDocument;
 };

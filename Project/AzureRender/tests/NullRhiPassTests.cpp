@@ -41,7 +41,8 @@ std::vector<RecordedCall> runFrame(
     const bool bindless,
     const std::filesystem::path& shaderDirectory,
     const bool cullingEnabled = true,
-    const bool cameraLooksAway = false) {
+    const bool cameraLooksAway = false,
+    const bool withPropResource = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -49,10 +50,23 @@ std::vector<RecordedCall> runFrame(
     context.allocator = &rhi.allocator();
     context.rhi = &rhi;
     context.bindlessTextures = bindless;
-    context.assetPath =
+    const std::string assetPath =
         (std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
          / "assets_public" / "test_model.gltf")
             .string();
+    context.scene.resources.push_back({"asset-0", assetPath});
+    if (withPropResource) {
+        context.scene.resources.push_back({"prop-1", assetPath});
+    }
+    azurerender::scene::SceneNodeDesc heroNode{};
+    heroNode.resourceId = "asset-0";
+    context.scene.nodes.push_back(heroNode);
+    if (withPropResource) {
+        azurerender::scene::SceneNodeDesc propNode{};
+        propNode.resourceId = "prop-1";
+        propNode.translation = {5.0F, 0.0F, 0.0F};
+        context.scene.nodes.push_back(propNode);
+    }
     context.shaderDirectory = shaderDirectory.string();
     context.rampAtlasPath =
         (std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
@@ -142,5 +156,12 @@ int main() {
     const std::vector<RecordedCall> unculled =
         runFrame(true, shaderDirectory, false, true);
     assert(countCalls(unculled, "drawIndexed") == legacyDraws);
+
+    // A second scene resource adds its own buffer binds and instanced draws
+    // without changing the hero section's structure.
+    const std::vector<RecordedCall> multi =
+        runFrame(true, shaderDirectory, true, false, true);
+    assert(countCalls(multi, "drawIndexed") > legacyDraws);
+    assert(countCalls(multi, "bindVertexBuffer") >= 2);
     return 0;
 }

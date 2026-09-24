@@ -336,7 +336,38 @@ void AzureRenderApp::buildRenderContext(
     context.shadowImageView = shadowImageView_;
     context.shadowSampler = shadowSampler_;
     context.shadowMapSize = kShadowMapSize;
-    context.assetPath = resolvedAssetPath_;
+    {
+        const azurerender::SceneDocument* document = nullptr;
+        if (runOptions_.editorSession != nullptr) {
+            document = &runOptions_.editorSession->context().scene();
+        } else if (runOptions_.sceneDocument.has_value()) {
+            document = &*runOptions_.sceneDocument;
+        }
+        if (document != nullptr) {
+            context.scene.resources.reserve(document->resources.size());
+            for (const azurerender::SceneResource& resource :
+                 document->resources) {
+                context.scene.resources.push_back(
+                    {resource.id, resource.path.string()});
+            }
+            context.scene.nodes.reserve(document->nodes.size());
+            for (const azurerender::SceneNode& node : document->nodes) {
+                azurerender::scene::SceneNodeDesc desc{};
+                desc.resourceId = node.resourceId;
+                desc.parentId = node.parentId;
+                desc.translation = node.translation;
+                desc.rotation = node.rotation;
+                desc.scale = node.scale;
+                desc.visible = node.visible;
+                context.scene.nodes.push_back(std::move(desc));
+            }
+        } else {
+            context.scene.resources.push_back({"asset-0", resolvedAssetPath_});
+            azurerender::scene::SceneNodeDesc root{};
+            root.resourceId = "asset-0";
+            context.scene.nodes.push_back(std::move(root));
+        }
+    }
     context.shaderDirectory = resourceLocator_.shaderDirectory().string();
     context.environment.path = runOptions_.environmentPath;
     if (context.environment.path.empty()) {

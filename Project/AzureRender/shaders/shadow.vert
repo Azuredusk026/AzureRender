@@ -18,6 +18,7 @@ struct InstanceTransforms {
     mat4 model;
     mat4 modelViewProjection;
     mat4 lightModelViewProjection;
+    uvec4 meta;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -30,11 +31,12 @@ layout(location = 5) in vec4 jointWeights;
 layout(location = 0) out vec2 textureCoordinate;
 
 void main() {
+    const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
-        jointWeights.x * jointData.matrices[jointIndices.x]
-        + jointWeights.y * jointData.matrices[jointIndices.y]
-        + jointWeights.z * jointData.matrices[jointIndices.z]
-        + jointWeights.w * jointData.matrices[jointIndices.w];
+        jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
+        + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
+        + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
+        + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     gl_Position =
         instanceData.instances[gl_InstanceIndex].lightModelViewProjection
         * skinMatrix

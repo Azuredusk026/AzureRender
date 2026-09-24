@@ -18,6 +18,7 @@ struct InstanceTransforms {
     mat4 model;
     mat4 modelViewProjection;
     mat4 lightModelViewProjection;
+    uvec4 meta;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -29,11 +30,12 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 
 void main() {
+    const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
-        jointWeights.x * jointData.matrices[jointIndices.x]
-        + jointWeights.y * jointData.matrices[jointIndices.y]
-        + jointWeights.z * jointData.matrices[jointIndices.z]
-        + jointWeights.w * jointData.matrices[jointIndices.w];
+        jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
+        + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
+        + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
+        + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec3 skinnedPosition =
         (skinMatrix * vec4(position, 1.0)).xyz;
     vec3 skinnedNormal =

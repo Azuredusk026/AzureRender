@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "render/EnvironmentAsset.hpp"
+#include "scene/SceneDescription.hpp"
 
 // Defined in assets/GltfLoader.hpp (global namespace).
 struct LoadedAsset;
@@ -171,8 +172,10 @@ struct RenderContext {
     // Current in-flight scene framebuffer the renderer records into.
     VkFramebuffer sceneFramebuffer = VK_NULL_HANDLE;
 
-    // Asset the renderer loads on onLoad (resolved absolute path).
-    std::string assetPath;
+    // Scene content the renderer instantiates on onLoad: referenced assets
+    // and placed nodes. Single-asset scenes carry exactly one resource and
+    // one node.
+    scene::SceneDescription scene;
     // Directory holding compiled .spv shaders for renderer pipelines.
     std::string shaderDirectory;
     // Scene-independent environment source. Renderers may sample the shared

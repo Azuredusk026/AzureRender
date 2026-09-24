@@ -78,10 +78,13 @@ int main(const int argumentCount, char** argumentValues) {
             options.assetPath = asset->path.string();
             options.renderSettings = scene.renderSettings;
             if (options.editorMode) {
+                options.sceneDocument = scene;
                 options.editorSession =
                     std::make_shared<azurerender::EditorSession>(
                         std::make_shared<azurerender::EditorContext>(
                             std::move(scene), commandLine.editorScenePath));
+            } else {
+                options.sceneDocument = std::move(scene);
             }
         }
 
