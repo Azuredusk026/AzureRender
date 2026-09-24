@@ -52,6 +52,7 @@ constexpr const char* kHelp =
     "  --diagnostic-view beauty|normal|outline|shadow\n"
     "  --hud --no-stylized --no-inner-outline\n"
     "  --disable-bindless                Force legacy per-material descriptors\n\n"
+    "  --disable-culling                 Submit all instances without culling\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
@@ -304,6 +305,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.gpuTimingEnabled = true;
         } else if (argument == "--disable-bindless") {
             parsed.options.bindlessDisabled = true;
+        } else if (argument == "--disable-culling") {
+            parsed.options.cullingDisabled = true;
         } else if (argument == "--gpu-timing-output") {
             parsed.options.gpuTimingEnabled = true;
             parsed.options.gpuTimingOutput =

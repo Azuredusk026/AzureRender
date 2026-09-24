@@ -14,21 +14,22 @@ struct FrustumPlanes {
 };
 
 // Gribb/Hartmann plane extraction from a column-major view-projection
-// matrix (OpenGL clip volume: -w <= x,y,z <= w).
+// matrix. Vulkan clip volume: -w <= x,y <= w, 0 <= z <= w, so the near
+// plane is the third matrix row and the far plane is row3 - row2.
 [[nodiscard]] inline FrustumPlanes extractFrustumPlanes(
     const azurerender::internal::Matrix4& viewProjection) {
-    const auto column = [&viewProjection](const std::size_t index) {
+    const auto row = [&viewProjection](const std::size_t index) {
         return std::array<float, 4>{
-            viewProjection[index * 4 + 0],
-            viewProjection[index * 4 + 1],
-            viewProjection[index * 4 + 2],
-            viewProjection[index * 4 + 3],
+            viewProjection[index + 0],
+            viewProjection[index + 4],
+            viewProjection[index + 8],
+            viewProjection[index + 12],
         };
     };
-    const std::array<float, 4> c0 = column(0);
-    const std::array<float, 4> c1 = column(1);
-    const std::array<float, 4> c2 = column(2);
-    const std::array<float, 4> c3 = column(3);
+    const std::array<float, 4> c0 = row(0);
+    const std::array<float, 4> c1 = row(1);
+    const std::array<float, 4> c2 = row(2);
+    const std::array<float, 4> c3 = row(3);
     FrustumPlanes frustum;
     const auto make = [&frustum](
         const std::size_t index,
@@ -45,7 +46,7 @@ struct FrustumPlanes {
     make(1, c3[0] - c0[0], c3[1] - c0[1], c3[2] - c0[2], c3[3] - c0[3]);
     make(2, c3[0] + c1[0], c3[1] + c1[1], c3[2] + c1[2], c3[3] + c1[3]);
     make(3, c3[0] - c1[0], c3[1] - c1[1], c3[2] - c1[2], c3[3] - c1[3]);
-    make(4, c3[0] + c2[0], c3[1] + c2[1], c3[2] + c2[2], c3[3] + c2[3]);
+    make(4, c2[0], c2[1], c2[2], c2[3]);
     make(5, c3[0] - c2[0], c3[1] - c2[1], c3[2] - c2[2], c3[3] - c2[3]);
     return frustum;
 }

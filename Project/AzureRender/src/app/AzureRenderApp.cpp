@@ -317,6 +317,7 @@ void AzureRenderApp::buildRenderContext(
     context.rhi = rhi_.get();
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
+    context.cullingEnabled = !runOptions_.cullingDisabled;
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
     context.swapchainExtent = swapchainExtent_;

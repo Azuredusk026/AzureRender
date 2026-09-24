@@ -88,6 +88,15 @@ int main() {
         legacyDescriptors.options.bindlessDisabled,
         "--disable-bindless was not parsed");
 
+    require(
+        !valid.options.cullingDisabled,
+        "Frustum culling defaults to enabled");
+    const auto noCulling = azurerender::parseCommandLine(
+        {"--disable-culling", "--smoke-frames", "1"});
+    require(
+        noCulling.options.cullingDisabled,
+        "--disable-culling was not parsed");
+
     // 2. Scene type defaults to Character and rejects unknown values.
     const auto characterDefault = azurerender::parseCommandLine({});
     require(

@@ -229,6 +229,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
         throw std::runtime_error("RenderContext must carry the engine RHI");
     }
     bindlessTextures_ = context.bindlessTextures;
+    cullingEnabled_ = context.cullingEnabled;
     renderSettings_ = context.renderSettings;
     rampAtlasPath_ = context.rampAtlasPath;
     environmentSource_ = context.environment;
@@ -358,7 +359,31 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     qaEffectEnabled_ = frame.qaEffectEnabled;
     qaHarnessEnabled_ = frame.qaHarnessEnabled;
     updateUniformBuffer(frame);
+    rebuildSceneInstances();
     buildSceneState();
+}
+
+void CharacterSceneRenderer::rebuildSceneInstances() {
+    // The default asset scene contributes one instance; scene-driven
+    // multi-object scenes append here as the scene graph lands.
+    sceneInstances_.clear();
+    scene::SceneInstance instance{};
+    instance.model = currentModel_;
+    instance.worldBounds = scene::transformBounds(
+        {asset_.boundsMin, asset_.boundsMax}, currentModel_);
+    instance.sourceIndex = 0;
+    instance.meshKey = 0;
+    sceneInstances_.push_back(instance);
+
+    visibleInstances_.clear();
+    if (cullingEnabled_) {
+        static_cast<void>(scene::appendVisibleInstances(
+            sceneInstances_, viewFrustum_, visibleInstances_));
+    } else {
+        for (const scene::SceneInstance& entry : sceneInstances_) {
+            visibleInstances_.push_back(&entry);
+        }
+    }
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
@@ -1384,6 +1409,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    viewFrustum_ =
+        scene::extractFrustumPlanes(multiply(projection, view));
     const RenderSettings& settings = *renderSettings_;
     const Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
@@ -1527,62 +1554,65 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             ++context.submissionCounters->descriptorSetBinds;
         }
     }
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        const AssetMaterial& material =
-            asset_.materials[primitive.materialIndex];
-        if (material.showcasePlatform > 0.5F
-            || material.materialClass == AssetMaterialClass::Overlay) {
-            continue;
-        }
-        if (!bindlessTextures_) {
-            const std::size_t descriptorIndex =
-                context.currentFrame * asset_.materials.size()
-                + primitive.materialIndex;
-            commands.bindDescriptorSet(
-                pipelineLayout_, descriptorSets_[descriptorIndex]);
-            if (context.submissionCounters != nullptr) {
-                ++context.submissionCounters->descriptorSetBinds;
+    for (const scene::SceneInstance* instance : visibleInstances_) {
+        (void)instance;
+        for (const AssetPrimitive& primitive : asset_.primitives) {
+            const AssetMaterial& material =
+                asset_.materials[primitive.materialIndex];
+            if (material.showcasePlatform > 0.5F
+                || material.materialClass == AssetMaterialClass::Overlay) {
+                continue;
             }
-        }
-        const MaterialPushConstants materialConstants{
-            material.alphaCutoff,
-            static_cast<std::uint32_t>(material.alphaMode),
-            material.emissiveStrength,
-            material.showcasePlatform,
-            material.aoColor,
-            material.lamShadowColor,
-            material.matcapColor,
-            material.hairParameters,
-            material.styleParameters,
-            material.featureParameters,
-            static_cast<std::uint32_t>(material.materialClass),
-            material.materialFeatures,
-            material.materialProfileVersion,
-            0,
-        };
-        commands.pushConstants(
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-            0,
-            &materialConstants,
-            sizeof(materialConstants));
-        MorphPushConstants morphConstants{};
-        morphConstants.weights = renderSettings_->morphWeights;
-        if (bindlessTextures_) {
-            morphConstants.textureBaseIndex =
-                kSharedTextureSlots
-                + primitive.materialIndex * kMaterialTextureSlots;
-        }
-        commands.pushConstants(
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-            sizeof(MaterialPushConstants),
-            &morphConstants,
-            sizeof(morphConstants));
-        commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
-        if (context.submissionCounters != nullptr) {
-            ++context.submissionCounters->drawCalls;
-            context.submissionCounters->pushConstantUpdates += 2;
+            if (!bindlessTextures_) {
+                const std::size_t descriptorIndex =
+                    context.currentFrame * asset_.materials.size()
+                    + primitive.materialIndex;
+                commands.bindDescriptorSet(
+                    pipelineLayout_, descriptorSets_[descriptorIndex]);
+                if (context.submissionCounters != nullptr) {
+                    ++context.submissionCounters->descriptorSetBinds;
+                }
+            }
+            const MaterialPushConstants materialConstants{
+                material.alphaCutoff,
+                static_cast<std::uint32_t>(material.alphaMode),
+                material.emissiveStrength,
+                material.showcasePlatform,
+                material.aoColor,
+                material.lamShadowColor,
+                material.matcapColor,
+                material.hairParameters,
+                material.styleParameters,
+                material.featureParameters,
+                static_cast<std::uint32_t>(material.materialClass),
+                material.materialFeatures,
+                material.materialProfileVersion,
+                0,
+            };
+            commands.pushConstants(
+                pipelineLayout_,
+                VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+                0,
+                &materialConstants,
+                sizeof(materialConstants));
+            MorphPushConstants morphConstants{};
+            morphConstants.weights = renderSettings_->morphWeights;
+            if (bindlessTextures_) {
+                morphConstants.textureBaseIndex =
+                    kSharedTextureSlots
+                    + primitive.materialIndex * kMaterialTextureSlots;
+            }
+            commands.pushConstants(
+                pipelineLayout_,
+                VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+                sizeof(MaterialPushConstants),
+                &morphConstants,
+                sizeof(morphConstants));
+            commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
+            if (context.submissionCounters != nullptr) {
+                ++context.submissionCounters->drawCalls;
+                context.submissionCounters->pushConstantUpdates += 2;
+            }
         }
     }
     commands.endRenderPass();
@@ -1645,40 +1675,46 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     commands.bindIndexBuffer(indexBuffer_.buffer, 0);
     if (settings.silhouetteOutlineEnabled) {
         commands.bindPipeline(outlinePipeline_);
-        for (const AssetPrimitive& primitive : asset_.primitives) {
-            const AssetMaterial& outlineMaterial =
-                asset_.materials[primitive.materialIndex];
-            if (!settings.characterPresentation.platformEnabled
-                && outlineMaterial.showcasePlatform > 0.5F) {
-                continue;
-            }
-            // The turntable is a receiver, not character silhouette geometry;
-            // overlay cards likewise produce oversized black shells.
-            if (outlineMaterial.showcasePlatform > 0.5F
-                || outlineMaterial.materialClass == AssetMaterialClass::Overlay
-                || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
-                continue;
-            }
-            if (!bindlessTextures_) {
-                const std::size_t descriptorIndex =
-                    context.currentFrame * asset_.materials.size()
-                    + primitive.materialIndex;
-                commands.bindDescriptorSet(
-                    pipelineLayout_, descriptorSets_[descriptorIndex]);
-                if (context.submissionCounters != nullptr) {
-                    ++context.submissionCounters->descriptorSetBinds;
+        for (const scene::SceneInstance* instance : visibleInstances_) {
+            (void)instance;
+            for (const AssetPrimitive& primitive : asset_.primitives) {
+                const AssetMaterial& outlineMaterial =
+                    asset_.materials[primitive.materialIndex];
+                if (!settings.characterPresentation.platformEnabled
+                    && outlineMaterial.showcasePlatform > 0.5F) {
+                    continue;
                 }
-            }
-            commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
-            if (context.submissionCounters != nullptr) {
-                ++context.submissionCounters->drawCalls;
+                // The turntable is a receiver, not character silhouette geometry;
+                // overlay cards likewise produce oversized black shells.
+                if (outlineMaterial.showcasePlatform > 0.5F
+                    || outlineMaterial.materialClass == AssetMaterialClass::Overlay
+                    || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
+                    continue;
+                }
+                if (!bindlessTextures_) {
+                    const std::size_t descriptorIndex =
+                        context.currentFrame * asset_.materials.size()
+                        + primitive.materialIndex;
+                    commands.bindDescriptorSet(
+                        pipelineLayout_, descriptorSets_[descriptorIndex]);
+                    if (context.submissionCounters != nullptr) {
+                        ++context.submissionCounters->descriptorSetBinds;
+                    }
+                }
+                commands.drawIndexed(primitive.indexCount, primitive.firstIndex);
+                if (context.submissionCounters != nullptr) {
+                    ++context.submissionCounters->drawCalls;
+                }
             }
         }
     }
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        if (asset_.materials[primitive.materialIndex].alphaMode
-            != AssetAlphaMode::Blend) {
-            drawPrimitive(commands, primitive, primitive.firstIndex);
+    for (const scene::SceneInstance* instance : visibleInstances_) {
+        (void)instance;
+        for (const AssetPrimitive& primitive : asset_.primitives) {
+            if (asset_.materials[primitive.materialIndex].alphaMode
+                != AssetAlphaMode::Blend) {
+                drawPrimitive(commands, primitive, primitive.firstIndex);
+            }
         }
     }
     std::vector<const AssetPrimitive*> transparentPrimitives;
@@ -1693,71 +1729,73 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
         -cameraPosition_[1],
         -cameraPosition_[2],
     });
-    std::size_t oitWriteIndex = 0;
-    if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
-        std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-            oitIndexBuffers_[context.currentFrame].mapped);
+    for (const scene::SceneInstance* instance : visibleInstances_) {
+        std::size_t oitWriteIndex = 0;
+        if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
+            std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
+                oitIndexBuffers_[context.currentFrame].mapped);
+            for (const AssetPrimitive* primitive : transparentPrimitives) {
+                const std::uint32_t triangleCount = primitive->indexCount / 3;
+                std::vector<std::uint32_t> triangleOrder(triangleCount);
+                std::vector<float> triangleDepth(triangleCount);
+                for (std::uint32_t triangle = 0; triangle < triangleCount;
+                     ++triangle) {
+                    triangleOrder[triangle] = triangle;
+                    const std::uint32_t base =
+                        primitive->firstIndex + triangle * 3;
+                    const std::uint32_t i0 = asset_.indices[base];
+                    const std::uint32_t i1 = asset_.indices[base + 1];
+                    const std::uint32_t i2 = asset_.indices[base + 2];
+                    const Vector3 v0 = transformPosition(
+                        instance->model, asset_.vertices[i0].position);
+                    const Vector3 v1 = transformPosition(
+                        instance->model, asset_.vertices[i1].position);
+                    const Vector3 v2 = transformPosition(
+                        instance->model, asset_.vertices[i2].position);
+                    const Vector3 centroid = {
+                        (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
+                        (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
+                        (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
+                    };
+                    const Vector3 cameraOffset =
+                        subtract(centroid, cameraPosition_);
+                    triangleDepth[triangle] =
+                        dot(cameraOffset, cameraForward);
+                }
+                std::stable_sort(
+                    triangleOrder.begin(),
+                    triangleOrder.end(),
+                    [&](const std::uint32_t left, const std::uint32_t right) {
+                        return triangleDepth[left] > triangleDepth[right];
+                    });
+                for (std::uint32_t triangle = 0; triangle < triangleCount;
+                     ++triangle) {
+                    const std::uint32_t ordered = triangleOrder[triangle];
+                    const std::uint32_t base =
+                        primitive->firstIndex + ordered * 3;
+                    oitMapped[oitWriteIndex + triangle * 3] =
+                        asset_.indices[base];
+                    oitMapped[oitWriteIndex + triangle * 3 + 1] =
+                        asset_.indices[base + 1];
+                    oitMapped[oitWriteIndex + triangle * 3 + 2] =
+                        asset_.indices[base + 2];
+                }
+                oitWriteIndex += primitive->indexCount;
+            }
+        }
+        std::size_t oitReadIndex = 0;
         for (const AssetPrimitive* primitive : transparentPrimitives) {
-            const std::uint32_t triangleCount = primitive->indexCount / 3;
-            std::vector<std::uint32_t> triangleOrder(triangleCount);
-            std::vector<float> triangleDepth(triangleCount);
-            for (std::uint32_t triangle = 0; triangle < triangleCount;
-                 ++triangle) {
-                triangleOrder[triangle] = triangle;
-                const std::uint32_t base =
-                    primitive->firstIndex + triangle * 3;
-                const std::uint32_t i0 = asset_.indices[base];
-                const std::uint32_t i1 = asset_.indices[base + 1];
-                const std::uint32_t i2 = asset_.indices[base + 2];
-                const Vector3 v0 = transformPosition(
-                    currentModel_, asset_.vertices[i0].position);
-                const Vector3 v1 = transformPosition(
-                    currentModel_, asset_.vertices[i1].position);
-                const Vector3 v2 = transformPosition(
-                    currentModel_, asset_.vertices[i2].position);
-                const Vector3 centroid = {
-                    (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
-                    (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
-                    (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
-                };
-                const Vector3 cameraOffset =
-                    subtract(centroid, cameraPosition_);
-                triangleDepth[triangle] =
-                    dot(cameraOffset, cameraForward);
+            if (!oitIndexBuffers_.empty()) {
+                const VkDeviceSize offsetBytes =
+                    static_cast<VkDeviceSize>(oitReadIndex)
+                    * sizeof(std::uint32_t);
+                commands.bindIndexBuffer(
+                    oitIndexBuffers_[context.currentFrame].buffer,
+                    offsetBytes);
             }
-            std::stable_sort(
-                triangleOrder.begin(),
-                triangleOrder.end(),
-                [&](const std::uint32_t left, const std::uint32_t right) {
-                    return triangleDepth[left] > triangleDepth[right];
-                });
-            for (std::uint32_t triangle = 0; triangle < triangleCount;
-                 ++triangle) {
-                const std::uint32_t ordered = triangleOrder[triangle];
-                const std::uint32_t base =
-                    primitive->firstIndex + ordered * 3;
-                oitMapped[oitWriteIndex + triangle * 3] =
-                    asset_.indices[base];
-                oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                    asset_.indices[base + 1];
-                oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                    asset_.indices[base + 2];
-            }
-            oitWriteIndex += primitive->indexCount;
+            drawPrimitive(commands, *primitive, 0);
+            oitReadIndex += primitive->indexCount;
         }
-    }
-    std::size_t oitReadIndex = 0;
-    for (const AssetPrimitive* primitive : transparentPrimitives) {
-        if (!oitIndexBuffers_.empty()) {
-            const VkDeviceSize offsetBytes =
-                static_cast<VkDeviceSize>(oitReadIndex)
-                * sizeof(std::uint32_t);
-            commands.bindIndexBuffer(
-                oitIndexBuffers_[context.currentFrame].buffer,
-                offsetBytes);
-        }
-        drawPrimitive(commands, *primitive, 0);
-        oitReadIndex += primitive->indexCount;
     }
     commands.endRenderPass();
     if (context.gpuTimingEnabled) {

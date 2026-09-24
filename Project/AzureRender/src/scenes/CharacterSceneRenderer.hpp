@@ -4,6 +4,8 @@
 #include "assets/GltfLoader.hpp"
 #include "rhi/IGpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
+#include "scene/Frustum.hpp"
+#include "scene/RenderBatching.hpp"
 
 #include <array>
 #include <cstdint>
@@ -180,6 +182,13 @@ private:
     // Bind-pose contact pivot estimated from the lowest character vertices.
     // X/Z define both the turntable axis and showcase-platform centre.
     std::array<float, 3> footPivot_{0.0F, 0.0F, 0.0F};
+    // Per-frame scene instances and the frustum-culled visible subset. The
+    // default asset scene contributes one instance; the draw loops consume
+    // the visible list.
+    std::vector<scene::SceneInstance> sceneInstances_;
+    std::vector<const scene::SceneInstance*> visibleInstances_;
+    scene::FrustumPlanes viewFrustum_;
+    bool cullingEnabled_ = true;
     RendererSceneState state_;
 
     // Resource creation.
@@ -197,6 +206,7 @@ private:
 
     // Frame recording.
     void updateUniformBuffer(const SceneFrameData& frame);
+    void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
     void recordMainPass(const RenderContext& context);
     void drawPrimitive(

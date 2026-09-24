@@ -39,7 +39,9 @@ std::size_t countCalls(
 // Returns the recorded command sequence.
 std::vector<RecordedCall> runFrame(
     const bool bindless,
-    const std::filesystem::path& shaderDirectory) {
+    const std::filesystem::path& shaderDirectory,
+    const bool cullingEnabled = true,
+    const bool cameraLooksAway = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -58,9 +60,19 @@ std::vector<RecordedCall> runFrame(
             .string();
     RenderSettings settings{};
     context.renderSettings = &settings;
+    context.cullingEnabled = cullingEnabled;
 
     renderer.onLoad(context);
-    renderer.updateFrame(SceneFrameData{});
+    SceneFrameData frame{};
+    frame.renderSettings = &settings;
+    frame.swapchainWidth = 1280;
+    frame.swapchainHeight = 720;
+    if (cameraLooksAway) {
+        frame.cameraPosition[0] = 10000.0F;
+        frame.cameraPosition[1] = 100.0F;
+        frame.cameraTarget[0] = 20000.0F;
+    }
+    renderer.updateFrame(frame);
 
     NullCommandRecorder recorder;
     context.commands = &recorder;
@@ -120,5 +132,15 @@ int main() {
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
     assert(bindlessBinds == 2);
     assert(legacyBinds > bindlessBinds);
+
+    // Culling: the instance behind the camera drops all geometry draws;
+    // disabling culling submits it again. Passes still begin and end.
+    const std::vector<RecordedCall> culled =
+        runFrame(true, shaderDirectory, true, true);
+    assert(countCalls(culled, "drawIndexed") == 0);
+    assert(countCalls(culled, "beginRenderPass") == 2);
+    const std::vector<RecordedCall> unculled =
+        runFrame(true, shaderDirectory, false, true);
+    assert(countCalls(unculled, "drawIndexed") == legacyDraws);
     return 0;
 }

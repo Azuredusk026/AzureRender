@@ -132,6 +132,10 @@ struct RenderContext {
     // selects the fixed-table path.
     bool bindlessTextures = false;
 
+    // Frustum culling by instance bounds. Renderers may skip instances
+    // outside the view frustum; when false every instance is submitted.
+    bool cullingEnabled = true;
+
     std::uint32_t maxFramesInFlight = 2;
     std::uint32_t currentFrame = 0;
     std::uint32_t imageIndex = 0;

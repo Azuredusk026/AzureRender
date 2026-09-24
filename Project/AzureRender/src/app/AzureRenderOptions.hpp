@@ -27,6 +27,9 @@ struct AzureRenderOptions {
     // supports descriptor indexing. Exists so the fallback path stays
     // testable on capable hardware.
     bool bindlessDisabled = false;
+    // Disable frustum culling so every instance is submitted. The QA
+    // toggle that proves both sides render identical frames.
+    bool cullingDisabled = false;
     azurerender::RenderSettings renderSettings;
     bool hudEnabled = false;
     bool technicalSequence = false;
