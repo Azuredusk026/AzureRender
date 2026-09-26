@@ -277,6 +277,9 @@ if(BUILD_TESTING)
     add_executable(AzureRenderCascadedShadowTests tests/CascadedShadowTests.cpp)
     target_include_directories(AzureRenderCascadedShadowTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.CascadedShadow COMMAND AzureRenderCascadedShadowTests)
+    add_executable(AzureRenderClusteredLightGridTests tests/ClusteredLightGridTests.cpp)
+    target_include_directories(AzureRenderClusteredLightGridTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.ClusteredLightGrid COMMAND AzureRenderClusteredLightGridTests)
     add_executable(
         AzureRenderComputePassTests
         tests/ComputePassTests.cpp
@@ -688,6 +691,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/render-core-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/compute-passes.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/environment-assets.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/clustered-lighting.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/render-graph.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
