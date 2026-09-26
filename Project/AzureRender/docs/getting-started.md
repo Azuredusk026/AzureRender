@@ -97,7 +97,7 @@ MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设继续使用 `x64-mi
   --environment D:\Assets\StudioEvening.hdr
 ```
 
-发布配置中不能包含开发机的绝对路径。程序目前不能直接加载 EXR。需要保留动态范围时，请先把文件离线转换为 Radiance HDR。
+发布配置中不能包含开发机的绝对路径。环境资源支持 Radiance HDR 和线性 OpenEXR；损坏的 OpenEXR 文件会报告文件路径与解码错误。
 
 ## 创建和打开编辑器场景
 

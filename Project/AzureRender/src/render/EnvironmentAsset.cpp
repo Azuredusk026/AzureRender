@@ -1,6 +1,8 @@
 #include "render/EnvironmentAsset.hpp"
 
 #include <stb_image.h>
+#include <OpenEXR/ImfInputFile.h>
+#include <OpenEXR/ImfFrameBuffer.h>
 
 #include <algorithm>
 #include <array>
@@ -191,6 +193,7 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
         throw std::invalid_argument("Environment source path is empty");
     }
     const std::filesystem::path path(source.path);
+    EnvironmentImage output;
     const bool cube = source.projection == EnvironmentProjection::CubeFaces
         || (source.projection == EnvironmentProjection::Auto
             && std::filesystem::is_directory(path));
@@ -198,12 +201,45 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
         return loadCubeDirectory(path);
     }
     if (lowerExtension(path) == ".exr") {
-        throw std::runtime_error(
-            "OpenEXR is not supported by this build; use Radiance .hdr or a "
-            "tonemapped PNG/JPG environment: " + path.string());
+        try {
+            Imf::InputFile file(path.string().c_str());
+            const Imath::Box2i window = file.header().dataWindow();
+            const int width = window.max.x - window.min.x + 1;
+            const int height = window.max.y - window.min.y + 1;
+            if (width <= 0 || height <= 0) {
+                throw std::runtime_error("OpenEXR has an empty data window");
+            }
+            std::vector<float> red(static_cast<std::size_t>(width) * height);
+            std::vector<float> green(red.size());
+            std::vector<float> blue(red.size());
+            Imf::FrameBuffer frame;
+            const auto makeSlice = [window, width](std::vector<float>& values) {
+                return Imf::Slice::Make(
+                    Imf::FLOAT,
+                    values.data(), window, sizeof(float), sizeof(float) * width);
+            };
+            frame.insert("R", makeSlice(red));
+            frame.insert("G", makeSlice(green));
+            frame.insert("B", makeSlice(blue));
+            file.setFrameBuffer(frame);
+            file.readPixels(window.min.y, window.max.y);
+            output.width = static_cast<std::uint32_t>(width);
+            output.height = static_cast<std::uint32_t>(height);
+            output.rgba16f.resize(red.size() * 4);
+            for (std::size_t index = 0; index < red.size(); ++index) {
+                output.rgba16f[index * 4] = environmentFloatToHalf(red[index]);
+                output.rgba16f[index * 4 + 1] = environmentFloatToHalf(green[index]);
+                output.rgba16f[index * 4 + 2] = environmentFloatToHalf(blue[index]);
+                output.rgba16f[index * 4 + 3] = environmentFloatToHalf(1.0F);
+            }
+            output.description = path.string() + " (OpenEXR linear HDR)";
+            return output;
+        } catch (const std::exception& error) {
+            throw std::runtime_error(
+                "Failed to decode OpenEXR environment " + path.string() + ": " + error.what());
+        }
     }
 
-    EnvironmentImage output;
     int width = 0;
     int height = 0;
     int channels = 0;

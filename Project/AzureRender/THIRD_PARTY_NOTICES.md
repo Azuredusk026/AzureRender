@@ -7,6 +7,9 @@ AzureRender links or includes the following dependencies. Release builds must pr
 - Dear ImGui: MIT License
 - tinygltf: MIT License
 - stb libraries: MIT License or public-domain dual option
+- OpenEXR and Imath: BSD-3-Clause
+- libdeflate: MIT License
+- OpenJPH: BSD-2-Clause
 
 Dear ImGui is vendored under `third_party/imgui` (docking branch, version 1.92.8) and
 compiled from source with the project toolchain so the library ABI always matches the

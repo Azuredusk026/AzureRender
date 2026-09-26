@@ -68,6 +68,7 @@ endif()
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(OpenEXR CONFIG REQUIRED)
 find_package(VulkanMemoryAllocator CONFIG REQUIRED)
 
 # Dear ImGui integration.
@@ -258,6 +259,10 @@ add_executable(
 add_dependencies(AzureRender AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp)
+    target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
+    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE OpenEXR::OpenEXR)
+    add_test(NAME AzureRender.EnvironmentAsset COMMAND AzureRenderEnvironmentAssetTests)
     add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureRenderRenderGraphTests PRIVATE Vulkan::Vulkan)
@@ -464,7 +469,8 @@ if(BUILD_TESTING)
     target_link_libraries(
         AzureRenderNullRhiPassTests PRIVATE
             Vulkan::Vulkan
-            nlohmann_json::nlohmann_json)
+            nlohmann_json::nlohmann_json
+            OpenEXR::OpenEXR)
     target_compile_definitions(
         AzureRenderNullRhiPassTests PRIVATE
         AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
@@ -545,6 +551,7 @@ target_link_libraries(
         glfw
         nlohmann_json::nlohmann_json
         GPUOpen::VulkanMemoryAllocator
+        OpenEXR::OpenEXR
 )
 
 # The VMA implementation unit is third-party code and does not satisfy the
@@ -680,17 +687,19 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/azure-engine-plan.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/render-core-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/compute-passes.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/environment-assets.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/render-graph.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 install(
     FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg glfw3 tinygltf stb nlohmann-json)
+foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -702,6 +711,10 @@ foreach(_pkg glfw3 tinygltf stb nlohmann-json)
 endforeach()
 if(WIN32)
     install(FILES "$<TARGET_FILE:glfw>" DESTINATION "${CMAKE_INSTALL_BINDIR}")
+    file(GLOB AZURE_RUNTIME_DLLS
+        "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin/*.dll")
+    install(FILES ${AZURE_RUNTIME_DLLS}
+        DESTINATION "${CMAKE_INSTALL_BINDIR}")
 elseif(UNIX)
     install(
         FILES "$<TARGET_FILE:glfw>"

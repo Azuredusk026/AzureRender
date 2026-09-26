@@ -5,6 +5,7 @@
   "dependencies": [
     "glfw3",
     "stb",
+    "openexr",
     "tinygltf",
     "vulkan-memory-allocator"
   ]

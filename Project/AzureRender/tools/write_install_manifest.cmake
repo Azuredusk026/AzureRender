@@ -61,6 +61,10 @@ set(EXPECTED_LICENSES
     imgui-LICENSE.txt
     glfw3-LICENSE.txt
     tinygltf-LICENSE.txt
+    openexr-LICENSE.txt
+    imath-LICENSE.txt
+    libdeflate-LICENSE.txt
+    openjph-LICENSE.txt
     stb-LICENSE.txt
     nlohmann-json-LICENSE.txt)
 set(LICENSE_COUNT 0)

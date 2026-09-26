@@ -48,9 +48,11 @@ nav:
       - RHI 同步: runtime/rhi-synchronization.md
       - 场景数据: runtime/scene-data.md
       - Compute Pass: runtime/compute-passes.md
+      - 环境资源: runtime/environment-assets.md
   - 阶段验收:
       - 桌面同步: acceptance/r1/2026-09-26.md
       - R2 验收: acceptance/r2/2026-09-26.md
+      - G0 起始记录: acceptance/r0/2026-09-26.md
 
 markdown_extensions:
   - admonition

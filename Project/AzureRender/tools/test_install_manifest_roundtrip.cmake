@@ -36,6 +36,11 @@ file(WRITE
 file(WRITE
     "${WORK_DIR}/share/AzureRender/licenses/nlohmann-json-LICENSE.txt"
     "MIT License\n")
+foreach(_license openexr imath libdeflate openjph)
+    file(WRITE
+        "${WORK_DIR}/share/AzureRender/licenses/${_license}-LICENSE.txt"
+        "BSD or MIT license\n")
+endforeach()
 
 set(MANIFEST_FILE "${CMAKE_CURRENT_BINARY_DIR}/install-manifest-test-manifest.json")
 
