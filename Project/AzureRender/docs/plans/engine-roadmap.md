@@ -7,7 +7,7 @@
 
 黑洞 P1 已于 2026-08-19 进入 `Final / Frozen`，最终基线为 16 秒双机位展示及周期噪声无接缝实现。只有用户主动重新启用后才能继续变更；当前角色收尾不得触碰黑洞渲染路径。
 
-本文是未来开发的唯一队列。它描述优先级和准入条件，不把尚未实现的内容写成当前能力。
+本文维护 Render Core 的 E 系列队列。产品范围和阶段优先级以 [Azure Engine 开发总计划](azure-engine-plan.md) 为准，文档编写遵循 [开发与运行时文档规范](../documentation-standard.md)。
 
 ## 1. 产品原则
 
@@ -21,7 +21,7 @@
 
 AzureRender 在保持多场景可插拔 renderer 定位的同时，向可扩展的渲染器-引擎架构演进。演进先替换承重结构，再在新结构上叠加功能与性能：结构阶段不产出画面但解开能力上限，功能阶段验证结构的实际承载力。
 
-引擎化的参考实现是同级目录的 Piccolo（GAMES104 教学引擎），技术栈为 C++17/Vulkan/GLFW/ImGui/VMA，与本项目一致。采用其中已验证的分层方式，不照搬其游戏引擎特有的关卡、物理、脚本和反射代码生成。
+引擎化的参考实现是同级目录的 Piccolo（GAMES104 教学引擎），技术栈为 C++17/Vulkan/GLFW/ImGui/VMA，与本项目一致。渲染核心参考其分层方式；关卡、物理、脚本与反射代码生成按 Azure Engine 总计划分阶段建设。
 
 | 参考点 | Piccolo 做法 | AzureRender 采纳形式 |
 |---|---|---|
@@ -115,7 +115,7 @@ AzureRender 在保持多场景可插拔 renderer 定位的同时，向可扩展�
 以下内容只有用户主动启用后才能进入 `Ready`：
 
 - Traditional/Subpasses/Dynamic Rendering Local Read 正式论文实验。
-- Android、移动端功耗和热稳定性实验。
+- 面向研究论文的移动端专项对照实验。Windows 与 Android 产品支持及持续负载验收按 Azure Engine 总计划执行。
 - 统计分析、论文写作和学校交付物。
 - 跨 DLL 稳定插件 ABI 或脚本运行时。
 - 独立工业科幻场景。

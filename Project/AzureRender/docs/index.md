@@ -67,6 +67,12 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 
 ## 阅读路线
 
+引擎化开发：
+
+1. [Azure Engine 开发总计划](plans/azure-engine-plan.md)
+2. [开发与运行时文档规范](documentation-standard.md)
+3. [渲染核心路线](plans/engine-roadmap.md)
+
 第一次运行项目：
 
 1. [构建与使用](getting-started.md)

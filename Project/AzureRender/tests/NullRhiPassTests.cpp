@@ -147,11 +147,14 @@ int main() {
     assert(bindlessBinds == 2);
     assert(legacyBinds > bindlessBinds);
 
-    // Culling: the instance behind the camera drops all geometry draws;
-    // disabling culling submits it again. Passes still begin and end.
+    // Culling: the instance behind the camera drops main-pass geometry while
+    // the independent shadow frustum may still submit its shadow caster;
+    // disabling culling submits both passes again.
     const std::vector<RecordedCall> culled =
         runFrame(true, shaderDirectory, true, true);
-    assert(countCalls(culled, "drawIndexed") == 0);
+    const std::size_t culledDraws = countCalls(culled, "drawIndexed");
+    assert(culledDraws > 0);
+    assert(culledDraws < legacyDraws);
     assert(countCalls(culled, "beginRenderPass") == 2);
     const std::vector<RecordedCall> unculled =
         runFrame(true, shaderDirectory, false, true);

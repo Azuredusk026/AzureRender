@@ -395,6 +395,8 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             sceneInstances_.push_back(instance);
         }
     } else {
+        const std::vector<Matrix4> nodeWorldTransforms =
+            scene::resolveNodeWorldTransforms(scene_);
         const auto meshKeyOf = [this](const scene::SceneNodeDesc& node) {
             for (std::size_t resourceIndex = 0;
                  resourceIndex < scene_.resources.size();
@@ -409,7 +411,9 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         // contiguous span in the instance buffer.
         for (std::size_t meshKey = 0; meshKey < scene_.resources.size();
              ++meshKey) {
-            for (const scene::SceneNodeDesc& node : scene_.nodes) {
+            for (std::size_t nodeIndex = 0; nodeIndex < scene_.nodes.size();
+                 ++nodeIndex) {
+                const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
                 if (!node.visible || meshKeyOf(node) != meshKey) {
                     continue;
                 }
@@ -419,8 +423,11 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                     : scene::AxisAlignedBounds{
                         additionalResources_[meshKey - 1]->asset.boundsMin,
                         additionalResources_[meshKey - 1]->asset.boundsMax};
-                const Matrix4 nodeTransform = scene::composeTrs(
-                    node.translation, node.rotation, node.scale);
+                const Matrix4 nodeTransform = nodeIndex
+                    < nodeWorldTransforms.size()
+                    ? nodeWorldTransforms[nodeIndex]
+                    : scene::composeTrs(
+                        node.translation, node.rotation, node.scale);
                 scene::SceneInstance instance{};
                 instance.model = meshKey == 0
                     ? multiply(nodeTransform, currentModel_)
@@ -448,25 +455,51 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     visibleSpansByMeshKey_.clear();
     for (std::size_t slot = 0; slot < visibleInstances_.size(); ++slot) {
         const std::uint32_t meshKey = visibleInstances_[slot]->meshKey;
+        const std::uint32_t sourceIndex =
+            visibleInstances_[slot]->sourceIndex;
         if (!visibleSpansByMeshKey_.empty()
-            && visibleSpansByMeshKey_.back()[0] == meshKey) {
+            && visibleSpansByMeshKey_.back()[0] == meshKey
+            && visibleSpansByMeshKey_.back()[1]
+                    + visibleSpansByMeshKey_.back()[2]
+                == sourceIndex) {
             ++visibleSpansByMeshKey_.back()[2];
         } else {
             visibleSpansByMeshKey_.push_back(
-                {meshKey, static_cast<std::uint32_t>(slot), 1U});
+                {meshKey, sourceIndex, 1U});
+        }
+    }
+    visibleShadowSpansByMeshKey_.clear();
+    for (std::size_t slot = 0; slot < sceneInstances_.size(); ++slot) {
+        const scene::SceneInstance* instance = &sceneInstances_[slot];
+        if (!scene::boundsInsideFrustum(
+                shadowFrustum_,
+                instance->worldBounds.minimum,
+                instance->worldBounds.maximum)) {
+            continue;
+        }
+        const std::uint32_t meshKey = instance->meshKey;
+        if (!visibleShadowSpansByMeshKey_.empty()
+            && visibleShadowSpansByMeshKey_.back()[0] == meshKey
+            && visibleShadowSpansByMeshKey_.back()[1]
+                    + visibleShadowSpansByMeshKey_.back()[2]
+                == instance->sourceIndex) {
+            ++visibleShadowSpansByMeshKey_.back()[2];
+        } else {
+            visibleShadowSpansByMeshKey_.push_back(
+                {meshKey, instance->sourceIndex, 1U});
         }
     }
 
-    if (visibleInstances_.empty() || instanceBuffers_.empty()) {
+    if (sceneInstances_.empty() || instanceBuffers_.empty()) {
         return;
     }
     auto* destination = static_cast<InstanceGpuData*>(
         instanceBuffers_[currentFrame_].mapped);
-    const std::size_t visibleCount = visibleInstances_.size();
-    for (std::size_t slot = 0; slot < visibleCount; ++slot) {
-        const Matrix4& model = visibleInstances_[slot]->model;
+    const std::size_t instanceCount = sceneInstances_.size();
+    for (std::size_t slot = 0; slot < instanceCount; ++slot) {
+        const Matrix4& model = sceneInstances_[slot].model;
         destination[slot].model = model;
-        const std::uint32_t meshKey = visibleInstances_[slot]->meshKey;
+        const std::uint32_t meshKey = sceneInstances_[slot].meshKey;
         destination[slot].meta = {
             meshKey == 0
                 ? 0U
@@ -1679,6 +1712,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         -1.90F, 1.90F, -1.90F, 1.90F, 0.10F, 8.0F);
     lightViewMatrix_ = lightView;
     lightProjectionMatrix_ = lightProjection;
+    shadowFrustum_ = scene::extractFrustumPlanes(
+        multiply(lightProjection, lightView));
 
     UniformBufferObject uniform{};
     uniform.cameraPosition = {
@@ -1802,7 +1837,8 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             ++context.submissionCounters->descriptorSetBinds;
         }
     }
-    for (const std::array<std::uint32_t, 3>& span : visibleSpansByMeshKey_) {
+    for (const std::array<std::uint32_t, 3>& span :
+         visibleShadowSpansByMeshKey_) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -2058,8 +2094,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     });
     for (std::size_t slot = 0; slot < visibleInstances_.size(); ++slot) {
         const scene::SceneInstance* instance = visibleInstances_[slot];
-        const std::uint32_t firstInstance =
-            static_cast<std::uint32_t>(slot);
+        const std::uint32_t firstInstance = instance->sourceIndex;
         const std::uint32_t meshKey = instance->meshKey;
         const LoadedAsset& mesh = meshKey == 0
             ? asset_

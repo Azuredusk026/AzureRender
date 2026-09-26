@@ -1,6 +1,7 @@
 #include "ecs/World.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/TransformSystem.hpp"
+#include "scene/SceneDescription.hpp"
 
 #include <cassert>
 #include <cmath>
@@ -126,5 +127,29 @@ int main() {
     cyclic.addComponent(a, azurerender::scene::WorldTransformComponent{});
     cyclic.addComponent(b, azurerender::scene::WorldTransformComponent{});
     assert(azurerender::scene::updateTransforms(cyclic) == 0);
+
+    // SceneDescription keeps stable node ids and resolves the same parent
+    // chain used by the runtime renderer.
+    azurerender::scene::SceneDescription description;
+    description.nodes = {
+        {"root", "mesh", "", {10.0F, 0.0F, 0.0F},
+         {0.0F, 0.0F, 0.0F}, {1.0F, 1.0F, 1.0F}, true},
+        {"child", "mesh", "root", {1.0F, 2.0F, 0.0F},
+         {0.0F, 0.0F, 0.0F}, {1.0F, 1.0F, 1.0F}, true},
+    };
+    std::size_t sceneCycles = 0;
+    const auto sceneWorld = azurerender::scene::resolveNodeWorldTransforms(
+        description, &sceneCycles);
+    assert(sceneCycles == 0 && sceneWorld.size() == 2);
+    assert(near3(
+        azurerender::internal::transformPosition(
+            sceneWorld[1], {0.0F, 0.0F, 0.0F}),
+        {11.0F, 2.0F, 0.0F}));
+    description.nodes[0].parentId = "child";
+    description.nodes[1].parentId = "root";
+    sceneCycles = 0;
+    static_cast<void>(azurerender::scene::resolveNodeWorldTransforms(
+        description, &sceneCycles));
+    assert(sceneCycles > 0);
     return 0;
 }

@@ -1,6 +1,7 @@
 /.idea/
 /.workbuddy/
 /build/
+/vcpkg_installed/
 /cmake-build-*/
 /out/
 /captures/

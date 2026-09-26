@@ -353,6 +353,7 @@ void AzureRenderApp::buildRenderContext(
             context.scene.nodes.reserve(document->nodes.size());
             for (const azurerender::SceneNode& node : document->nodes) {
                 azurerender::scene::SceneNodeDesc desc{};
+                desc.id = node.id;
                 desc.resourceId = node.resourceId;
                 desc.parentId = node.parentId;
                 desc.translation = node.translation;

@@ -226,7 +226,9 @@ private:
     // Per-resource visible span: (meshKey, firstSlot, count) in the
     // instance buffer's visible order.
     std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;
+    std::vector<std::array<std::uint32_t, 3>> visibleShadowSpansByMeshKey_;
     scene::FrustumPlanes viewFrustum_;
+    scene::FrustumPlanes shadowFrustum_;
     bool cullingEnabled_ = true;
     RendererSceneState state_;
 

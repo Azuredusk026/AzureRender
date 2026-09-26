@@ -37,6 +37,15 @@ cmake -S . -B build/ninja-debug -G Ninja `
 cmake --build build/ninja-debug
 ```
 
+Visual Studio 2022 用户可以在 Developer PowerShell 或 Developer Command Prompt 中使用 MSVC 预设：
+
+```powershell
+cmake --preset msvc-debug
+cmake --build .\build\ninja-msvc-debug
+```
+
+MSVC 预设使用 `x64-windows` vcpkg triplet；MinGW 预设继续使用 `x64-mingw-dynamic`。
+
 构建过程调用 `glslc`，把 GLSL 编译到构建目录的 `shaders/`。Shader 是主目标的显式依赖，编译失败会终止构建。
 
 ## 运行公共角色场景
