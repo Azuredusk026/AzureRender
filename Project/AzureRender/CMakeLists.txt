@@ -253,6 +253,9 @@ add_executable(
 add_dependencies(AzureRender AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp)
+    target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.RenderGraph COMMAND AzureRenderRenderGraphTests)
     add_executable(AzureRenderSurfaceLifecycleTests tests/SurfaceLifecycleTests.cpp)
     target_include_directories(AzureRenderSurfaceLifecycleTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.SurfaceLifecycle COMMAND AzureRenderSurfaceLifecycleTests)
