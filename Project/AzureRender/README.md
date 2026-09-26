@@ -73,4 +73,4 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
 
 - [Azure Engine 开发总计划](docs/plans/azure-engine-plan.md)
 - [RHI 同步与窗口生命周期](docs/runtime/rhi-synchronization.md)
-- [R1 验收记录](docs/acceptance/r1/2026-09-26.md)
+- [桌面同步验收记录](docs/acceptance/r1/2026-09-26.md)

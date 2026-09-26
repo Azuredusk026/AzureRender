@@ -1,13 +1,13 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-09-20
-> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E2 完成，E3-E7 为 `Ready` 队列，当前没有 Active 阶段。Azure Engine 的 R0/R1 已完成，后续优先级以 [产品总计划](azure-engine-plan.md) 为准。
+> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E2 完成，E3-E7 为 `Ready` 队列，当前没有 Active 阶段。Azure Engine 的 R0/R1 已完成，后续优先级以 [产品总计划](../../plans/azure-engine-plan.md) 为准。
 >
 > 本文与 engine-evolution-plan.md 是引擎化阶段的内部工作文档，不进入发布文档站导航。
 
 黑洞 P1 已于 2026-08-19 进入 `Final / Frozen`，最终基线为 16 秒双机位展示及周期噪声无接缝实现。只有用户主动重新启用后才能继续变更；当前角色收尾不得触碰黑洞渲染路径。
 
-本文维护 Render Core 的 E 系列队列。产品范围和阶段优先级以 [Azure Engine 开发总计划](azure-engine-plan.md) 为准，文档编写遵循 [开发与运行时文档规范](../documentation-standard.md)。
+本文维护 Render Core 的 E 系列队列。产品范围和阶段优先级以 [Azure Engine 开发总计划](../../plans/azure-engine-plan.md) 为准，文档编写遵循 [开发与运行时文档规范](../../documentation-standard.md)。
 
 ## 1. 产品原则
 
@@ -163,4 +163,4 @@ E0-E3 为结构替换，产生大幅 diff 且不直接产出画面；E4-E7 在�
 5. Debug/Release、CTest、Validation、安装包资源检查和既有场景回归不可跳过。
 6. 不通过降低验收标准或删除测试来完成阶段。
 
-当前架构边界见 [渲染器架构](../architecture.md)，具体开发命令见 [开发、测试与发布](../development-and-release.md)。
+当前架构边界见 [渲染器架构](../../architecture.md)，具体开发命令见 [开发、测试与发布](../../development-and-release.md)。

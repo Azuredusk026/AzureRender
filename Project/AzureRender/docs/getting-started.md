@@ -44,7 +44,7 @@ cmake --preset msvc-debug
 cmake --build .\build\ninja-msvc-debug
 ```
 
-MSVC 预设使用 `x64-windows` vcpkg triplet；MinGW 预设继续使用 `x64-mingw-dynamic`。
+MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设继续使用 `x64-mingw-dynamic`。
 
 构建过程调用 `glslc`，把 GLSL 编译到构建目录的 `shaders/`。Shader 是主目标的显式依赖，编译失败会终止构建。
 
