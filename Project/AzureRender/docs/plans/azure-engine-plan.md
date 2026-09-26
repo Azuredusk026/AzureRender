@@ -18,7 +18,7 @@ Azure Engine 面向小型第三人称游戏，提供渲染、关卡、物理、�
 
 ## 文档入口与状态管理
 
-本文是产品范围、阶段优先级、依赖和执行状态的唯一入口。[渲染路线](engine-roadmap.md)与[渲染实施计划](engine-evolution-plan.md)只保留历史技术记录，不定义新的执行阶段。[文档规范](../documentation-standard.md)约束全部新增计划和运行时说明。
+本文是产品范围、阶段优先级、依赖和执行状态的唯一入口。历史技术路线位于 `docs/archive/plans/`，不参与当前阶段判断。[文档规范](../documentation-standard.md)约束全部新增计划和运行时说明。
 
 阶段使用 Planned、Ready、Active、Complete、Blocked、Deferred 六种状态。一次一个 Active 阶段。Complete 必须附带提交、测试命令、环境和证据路径。已有 E0–E2 完成记录保留，R0 专门验证其运行期集成缺口。
 

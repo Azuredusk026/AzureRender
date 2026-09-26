@@ -8,7 +8,7 @@
 
 **Tech Stack:** C++17, Vulkan 1.3, GLFW, VMA, CMake/Ninja, MSVC, NullRHI, Python validation tools.
 
-**Spec:** `docs/plans/azure-engine-plan.md`, `docs/plans/engine-evolution-plan.md`
+**Spec:** `docs/plans/azure-engine-plan.md`
 
 ## Global Constraints
 
@@ -91,4 +91,3 @@
 - [ ] Record machine-readable performance, visual, and environment evidence.
 - [ ] Mark R2-R6/E7 Complete only after all evidence is present.
 - [ ] Commit `feat(r6): 完成 Windows 渲染核心验收`.
-
