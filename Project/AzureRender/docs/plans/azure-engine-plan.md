@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：R1 Active
+> 状态：R2 Active
 > 更新日期：2026-09-26
 > 适用范围：Windows 编辑器与 Windows 运行时；Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -52,8 +52,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | --- | --- | --- | --- |
 | F0 基础设施与质量基线 | — | 构建、测试、文档、资源和发布门禁 | Debug/Release、CTest、文档检查、安装清单通过 |
 | R0 Render Core 基础 | F0 | RHI、场景数据、同步、实例化和平台生命周期 | 三场景视觉回归、窗口恢复、NullRHI 和性能基线通过 |
-| R1 Render Graph 与帧流程 | R0 | Render Graph、资源状态、瞬态资源、真实公共帧 Pass | 三场景接入同一图编译流程，历史帧和捕获通过 |
-| R2 材质、Compute、光照与阴影 | R1 | IBL、Bloom、Compute 蒙皮、Morph、多光源和阴影 | 固定表/Bindless、一致视觉、多光源和性能报告通过 |
+| R1 Render Graph 与帧流程 | R0，Complete（2026-09-26） | Render Graph、资源状态、瞬态资源、真实公共帧 Pass | 三场景接入同一图编译流程，历史帧和捕获通过 |
+| R2 材质、Compute、光照与阴影 | R1，Active | IBL、Bloom、Compute 蒙皮、Morph、多光源和阴影 | 固定表/Bindless、一致视觉、多光源和性能报告通过 |
 | R3 并行提交与 GPU 驱动 | R2 | 帧快照、并行录制、间接绘制和能力降级 | 单线程/并行确定性一致，CPU/GPU 指标达标 |
 | R4 Windows Render Core 验收 | R3 | 复杂场景、质量档位、安装、长跑和窗口恢复 | Debug/Release、Validation、安装包、长跑和恢复全部通过 |
 | G0 引擎基础 | R4 | Foundation、Platform、Runtime、Player 的库边界和项目配置 | 新建项目、独立 Player、资源挂载和 Windows 发布通过 |
@@ -64,7 +64,7 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | U0 编辑器与游戏界面 | G4 | 层级、Inspector、资源浏览、操作历史、RmlUi 和焦点 | 导入—放置—编辑—运行—停止闭环通过 |
 | P0 Windows 游戏发布 | U0 | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
 
-当前 Active 阶段为 `R1`。R1 内部任务包括旧 R2 的 Render Graph、资源状态、瞬态资源和公共帧接入；这些任务不再单独创建阶段编号。
+当前 Active 阶段为 `R2`。R1 已完成公共帧 Render Graph 接入，验收记录位于 `docs/acceptance/r1/2026-09-26.md`。R2 统一覆盖材质、Compute、光照和阴影；内部任务不再单独创建阶段编号。
 
 ## 历史技术追踪
 
