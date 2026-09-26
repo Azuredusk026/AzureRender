@@ -777,6 +777,7 @@ void VulkanCommandRecorder::drawIndexed(
 }
 
 void VulkanCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
+    validateImageBarrier(barrier);
     VkImageMemoryBarrier imageBarrier{
         VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
     imageBarrier.oldLayout = barrier.oldLayout;
@@ -784,27 +785,35 @@ void VulkanCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
     imageBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
     imageBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
     imageBarrier.image = barrier.image;
-    imageBarrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    imageBarrier.subresourceRange.aspectMask = barrier.aspectMask;
+    imageBarrier.subresourceRange.baseMipLevel = barrier.baseMipLevel;
     imageBarrier.subresourceRange.levelCount = barrier.mipLevels;
     imageBarrier.subresourceRange.layerCount = 1;
 
-    VkPipelineStageFlags sourceStage = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
-    VkPipelineStageFlags destinationStage =
-        VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
-    if (barrier.newLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) {
-        imageBarrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-        destinationStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
-    } else if (barrier.newLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL) {
-        imageBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-        destinationStage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
-    }
-    if (barrier.oldLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) {
-        imageBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-        sourceStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
-    } else if (
-        barrier.oldLayout == VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL) {
-        imageBarrier.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-        sourceStage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    VkPipelineStageFlags sourceStage = barrier.srcStageMask;
+    VkPipelineStageFlags destinationStage = barrier.dstStageMask;
+    imageBarrier.srcAccessMask = barrier.srcAccessMask;
+    imageBarrier.dstAccessMask = barrier.dstAccessMask;
+    if (sourceStage == 0 && destinationStage == 0) {
+        sourceStage = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+        destinationStage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
+        if (barrier.newLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) {
+            imageBarrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+            destinationStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        } else if (
+            barrier.newLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL) {
+            imageBarrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+            destinationStage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        }
+        if (barrier.oldLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) {
+            imageBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+            sourceStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        } else if (
+            barrier.oldLayout == VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL) {
+            imageBarrier.srcAccessMask =
+                VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+            sourceStage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+        }
     }
     vkCmdPipelineBarrier(
         commandBuffer_,
@@ -817,6 +826,27 @@ void VulkanCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
         nullptr,
         1,
         &imageBarrier);
+}
+
+void VulkanCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
+    VkBufferMemoryBarrier bufferBarrier{
+        VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};
+    bufferBarrier.srcAccessMask = barrier.srcAccessMask;
+    bufferBarrier.dstAccessMask = barrier.dstAccessMask;
+    bufferBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufferBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    bufferBarrier.buffer = barrier.buffer;
+    bufferBarrier.offset = barrier.offset;
+    bufferBarrier.size = barrier.size;
+    const VkPipelineStageFlags sourceStage = barrier.srcStageMask == 0
+        ? VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT
+        : barrier.srcStageMask;
+    const VkPipelineStageFlags destinationStage = barrier.dstStageMask == 0
+        ? VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT
+        : barrier.dstStageMask;
+    vkCmdPipelineBarrier(
+        commandBuffer_, sourceStage, destinationStage, 0, 0, nullptr, 1,
+        &bufferBarrier, 0, nullptr);
 }
 
 void VulkanCommandRecorder::clearColorImage(

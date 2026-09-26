@@ -1,7 +1,7 @@
 # AzureRender 未来开发路线
 
 > 路线版本：2026-09-20
-> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E2 完成，E3-E7 为 `Ready` 队列，当前没有 Active 阶段。
+> 当前状态：P0/P1/P2 与 R1-R5 全部完成；E0-E2 完成，E3-E7 为 `Ready` 队列，当前没有 Active 阶段。Azure Engine 的 R0/R1 已完成，后续优先级以 [产品总计划](azure-engine-plan.md) 为准。
 >
 > 本文与 engine-evolution-plan.md 是引擎化阶段的内部工作文档，不进入发布文档站导航。
 

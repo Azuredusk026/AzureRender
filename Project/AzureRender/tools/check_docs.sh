@@ -31,6 +31,9 @@ rg -q '等待项目所有者主动恢复' docs/development-and-release.md
 # Engine stage tracking stays in the repository as working documents.
 test -f docs/plans/engine-roadmap.md
 test -f docs/plans/engine-evolution-plan.md
+test -f docs/runtime/rhi-synchronization.md
+test -f docs/acceptance/r1/2026-09-26.md
+rg -q 'Deferred' docs/plans/azure-engine-plan.md
 rg -q 'E1 RHI 与内存层' docs/plans/engine-roadmap.md
 rg -q 'E7 复杂场景验证' docs/plans/engine-roadmap.md
 rg -q 'E0：视觉与性能基线' docs/plans/engine-evolution-plan.md

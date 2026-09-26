@@ -3,6 +3,7 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
+#include "platform/SurfaceLifecycle.hpp"
 #include "render/RenderContext.hpp"
 #include "AzureRenderInternal.hpp"
 
@@ -121,16 +122,9 @@ bool AzureRenderApp::checkValidationLayerSupport() const {
 }
 
 void AzureRenderApp::recreateSwapchain() {
-    int width = 0;
-    int height = 0;
-    while (width == 0 || height == 0) {
-        const auto size = frontend_->framebufferSize();
-        width = size.first;
-        height = size.second;
-        frontend_->waitEvents();
-    }
+    if (!azurerender::waitForDrawableSurface(*frontend_)) return;
 
-    vkDeviceWaitIdle(device_);
+    vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
     if (editorLayer_ != nullptr) {
         editorLayer_->shutdownVulkan();
     }

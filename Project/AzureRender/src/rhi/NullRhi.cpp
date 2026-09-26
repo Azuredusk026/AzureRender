@@ -398,10 +398,30 @@ void NullCommandRecorder::drawIndexed(
 }
 
 void NullCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
+    validateImageBarrier(barrier);
     calls.push_back(
         {"imageBarrier",
          hexHandle(barrier.image) + " " + std::to_string(barrier.oldLayout)
-             + " -> " + std::to_string(barrier.newLayout)});
+             + " -> " + std::to_string(barrier.newLayout)
+             + " srcStage=" + std::to_string(barrier.srcStageMask)
+             + " dstStage=" + std::to_string(barrier.dstStageMask)
+             + " srcAccess=" + std::to_string(barrier.srcAccessMask)
+             + " dstAccess=" + std::to_string(barrier.dstAccessMask)
+             + " aspect=" + std::to_string(barrier.aspectMask)
+             + " baseMip=" + std::to_string(barrier.baseMipLevel)
+             + " mipLevels=" + std::to_string(barrier.mipLevels)});
+}
+
+void NullCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
+    calls.push_back(
+        {"bufferBarrier",
+         hexHandle(barrier.buffer) + " offset="
+             + std::to_string(barrier.offset) + " size="
+             + std::to_string(barrier.size) + " srcAccess="
+             + std::to_string(barrier.srcAccessMask) + " dstAccess="
+             + std::to_string(barrier.dstAccessMask)
+             + " srcStage=" + std::to_string(barrier.srcStageMask)
+             + " dstStage=" + std::to_string(barrier.dstStageMask)});
 }
 
 void NullCommandRecorder::clearColorImage(

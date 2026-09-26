@@ -11,8 +11,6 @@
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "AzureRenderInternal.hpp"
 
-#include <stb_easy_font.h>
-#include <stb_image_write.h>
 
 #include <algorithm>
 #include <array>

@@ -70,3 +70,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
 - 第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 项目当前版本为 `0.1.0-rc1`。功能状态和兼容性以源码、Schema、测试及 [CHANGELOG.md](CHANGELOG.md) 为准。
+
+- [Azure Engine 开发总计划](docs/plans/azure-engine-plan.md)
+- [RHI 同步与窗口生命周期](docs/runtime/rhi-synchronization.md)
+- [R1 验收记录](docs/acceptance/r1/2026-09-26.md)

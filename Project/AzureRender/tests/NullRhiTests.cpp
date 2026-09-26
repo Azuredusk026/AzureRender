@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstring>
 #include <string>
+#include <stdexcept>
 
 #ifdef _WIN32
 #include <crtdbg.h>
@@ -39,6 +40,12 @@ int main() {
 #endif
     // Recording order is the contract: a pass test reads the sequence.
     NullCommandRecorder recorder;
+    azurerender::rhi::ImageBarrierDesc invalid{};
+    invalid.srcStageMask = VK_PIPELINE_STAGE_TRANSFER_BIT;
+    bool rejected = false;
+    try { recorder.imageBarrier(invalid); }
+    catch (const std::invalid_argument&) { rejected = true; }
+    if (!rejected || !recorder.calls.empty()) return 10;
     RenderPassBeginDesc begin{};
     begin.extent = {1280, 720};
     recorder.beginRenderPass(begin);
@@ -46,14 +53,39 @@ int main() {
     recorder.bindDescriptorSet(nullptr, nullptr);
     recorder.drawIndexed(36, 0);
     recorder.endRenderPass();
+    recorder.bufferBarrier({
+        VK_NULL_HANDLE,
+        16,
+        64,
+        VK_PIPELINE_STAGE_TRANSFER_BIT,
+        VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
+        VK_ACCESS_TRANSFER_WRITE_BIT,
+        VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT});
 
-    assert(recorder.calls.size() == 5);
+    assert(recorder.calls.size() == 6);
     assert(recorder.calls[0].name == "beginRenderPass");
     assert(recorder.calls[0].detail.find("1280x720") != std::string::npos);
     assert(recorder.calls[1].name == "bindPipeline");
     assert(recorder.calls[2].name == "bindDescriptorSet");
     assert(recorder.calls[3].name == "drawIndexed");
     assert(recorder.calls[4].name == "endRenderPass");
+    assert(recorder.calls[5].name == "bufferBarrier");
+    if (recorder.calls[5].detail.find("offset=16 size=64") == std::string::npos
+        || recorder.calls[5].detail.find("dstAccess=4") == std::string::npos)
+        return 11;
+    azurerender::rhi::ImageBarrierDesc depth{};
+    depth.oldLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+    depth.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    depth.srcStageMask = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+    depth.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    depth.srcAccessMask = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    depth.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+    depth.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
+    depth.baseMipLevel = 2;
+    depth.mipLevels = 3;
+    recorder.imageBarrier(depth);
+    if (recorder.calls.back().detail.find("aspect=2 baseMip=2 mipLevels=3")
+        == std::string::npos) return 12;
 
     // The fake allocator keeps mapped writes working and tracks statistics.
     NullGpuAllocator allocator;

@@ -158,6 +158,7 @@ public:
         std::uint32_t instanceCount = 1,
         std::uint32_t firstInstance = 0) override;
     void imageBarrier(const ImageBarrierDesc& barrier) override;
+    void bufferBarrier(const BufferBarrierDesc& barrier) override;
     void clearColorImage(
         VkImage image,
         VkImageLayout layout,

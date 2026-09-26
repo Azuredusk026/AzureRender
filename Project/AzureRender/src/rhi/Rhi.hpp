@@ -5,6 +5,7 @@
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <stdexcept>
 #include <vector>
 
 // Narrow RHI boundary for the renderer. The interface deliberately mirrors
@@ -138,7 +139,33 @@ struct ImageBarrierDesc {
     VkImageLayout oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     VkImageLayout newLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     std::uint32_t mipLevels = 1;
+    VkPipelineStageFlags srcStageMask = 0;
+    VkPipelineStageFlags dstStageMask = 0;
+    VkAccessFlags srcAccessMask = 0;
+    VkAccessFlags dstAccessMask = 0;
+    VkImageAspectFlags aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    std::uint32_t baseMipLevel = 0;
 };
+
+struct BufferBarrierDesc {
+    VkBuffer buffer = VK_NULL_HANDLE;
+    VkDeviceSize offset = 0;
+    VkDeviceSize size = VK_WHOLE_SIZE;
+    VkPipelineStageFlags srcStageMask = 0;
+    VkPipelineStageFlags dstStageMask = 0;
+    VkAccessFlags srcAccessMask = 0;
+    VkAccessFlags dstAccessMask = 0;
+};
+
+inline void validateImageBarrier(const ImageBarrierDesc& barrier) {
+    if ((barrier.srcStageMask == 0) != (barrier.dstStageMask == 0))
+        throw std::invalid_argument("Image barrier requires both pipeline stages");
+    if (barrier.mipLevels == 0 || barrier.aspectMask == 0)
+        throw std::invalid_argument("Image barrier requires a nonempty subresource range");
+    if (barrier.srcStageMask == 0
+        && (barrier.srcAccessMask != 0 || barrier.dstAccessMask != 0))
+        throw std::invalid_argument("Explicit image access requires pipeline stages");
+}
 
 // Per-frame command recording. The engine hands a recorder to scene
 // renderers for the duration of one command buffer; renderers never see the
@@ -173,6 +200,7 @@ public:
         std::uint32_t firstInstance = 0) = 0;
 
     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
+    virtual void bufferBarrier(const BufferBarrierDesc& barrier) = 0;
     virtual void clearColorImage(
         VkImage image,
         VkImageLayout layout,

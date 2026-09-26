@@ -1,5 +1,13 @@
 # Changelog
 
+## R1 桌面同步契约 — 2026-09-26
+
+- 增加图像阶段、访问和子资源描述，以及缓冲区屏障。
+- 修复有效窗口尺寸下的额外事件等待及最小化期间关闭问题。
+- Android 适配无限期延后，恢复时间由用户安排。
+- 同步运行时说明、生命周期测试和阶段验收记录。
+
+
 ## Plain-language documentation - 2026-08-26
 
 - Rewrote the active Chinese documentation with shorter sentences and a more direct technical voice while preserving API names, formulas and contracts.

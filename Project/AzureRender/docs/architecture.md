@@ -484,3 +484,9 @@ flowchart TB
 - RenderDoc GPU Marker/Object Name 尚应进一步系统化，外部帧分析的可读性仍有提升空间。
 
 这些边界是后续演进方向，不影响当前 Character、Blackhole、Capture 和发布树的既有契约。
+
+## R1 同步与窗口生命周期
+
+图像和缓冲区屏障使用 `ICommandRecorder`，阶段与访问掩码的规则见[同步契约](runtime/rhi-synchronization.md)。单图形队列内的资源依赖由命令录制顺序与屏障共同表达。
+
+Windows 交换链重建通过 `waitForDrawableSurface` 等待有效尺寸。最小化时等待事件，恢复后先检查设备空闲，再重建附件和场景资源。等待期间关闭窗口会终止重建。
