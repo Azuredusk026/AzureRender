@@ -224,6 +224,8 @@ add_executable(
     src/platform/GlfwFrontend.hpp
     src/render/RendererCore.cpp
     src/render/RendererCore.hpp
+    src/render/RenderGraph.cpp
+    src/render/RenderGraph.hpp
     src/render/RenderSettings.cpp
     src/render/RenderSettings.hpp
     src/render/RenderContext.hpp

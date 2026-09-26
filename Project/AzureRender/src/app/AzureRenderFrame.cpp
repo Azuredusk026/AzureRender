@@ -8,6 +8,7 @@
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RenderContext.hpp"
+#include "render/RenderGraph.hpp"
 
 #include <stb_easy_font.h>
 
@@ -164,6 +165,29 @@ void AzureRenderApp::drawFrame() {
         "vkQueueSubmit");
     if (runOptions_.gpuTimingEnabled) {
         timestampQuerySubmitted_[currentFrame_] = true;
+    }
+
+    // The public frame order is compiled through RenderGraph before command
+    // recording. The graph owns pass ordering and resource declarations; the
+    // Vulkan render-pass calls below remain the backend execution for this
+    // migration step.
+    azurerender::RenderGraph frameGraph;
+    const auto sceneColor = frameGraph.addResource("scene-color");
+    const auto depth = frameGraph.addResource("scene-depth");
+    const auto swapchain = frameGraph.addResource("swapchain");
+    const auto shadow = frameGraph.addPass("shadow");
+    const auto scene = frameGraph.addPass("scene");
+    const auto postProcess = frameGraph.addPass("post-process");
+    const auto editorUi = frameGraph.addPass("editor-ui");
+    frameGraph.use(shadow, depth, azurerender::RenderGraphUsage::DepthAttachment, true);
+    frameGraph.use(scene, sceneColor, azurerender::RenderGraphUsage::ColorAttachment, true);
+    frameGraph.use(scene, depth, azurerender::RenderGraphUsage::DepthAttachment, true);
+    frameGraph.use(postProcess, sceneColor, azurerender::RenderGraphUsage::Sampled, false);
+    frameGraph.use(postProcess, swapchain, azurerender::RenderGraphUsage::ColorAttachment, true);
+    frameGraph.use(editorUi, swapchain, azurerender::RenderGraphUsage::ColorAttachment, true);
+    std::string frameGraphError;
+    if (!frameGraph.compile(frameGraphError)) {
+        throw std::runtime_error("RenderGraph compile failed: " + frameGraphError);
     }
     if (captureThisFrame) {
         vkCheck(
