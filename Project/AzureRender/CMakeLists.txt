@@ -226,6 +226,8 @@ add_executable(
     src/render/RendererCore.hpp
     src/render/RenderGraph.cpp
     src/render/RenderGraph.hpp
+    src/render/TransientResourcePool.cpp
+    src/render/TransientResourcePool.hpp
     src/render/RenderSettings.cpp
     src/render/RenderSettings.hpp
     src/render/RenderContext.hpp
@@ -256,12 +258,13 @@ add_executable(
 add_dependencies(AzureRender AzureRenderShaders)
 
 if(BUILD_TESTING)
-    add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp)
+    add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureRenderRenderGraphTests PRIVATE Vulkan::Vulkan)
     add_test(NAME AzureRender.RenderGraph COMMAND AzureRenderRenderGraphTests)
-    add_executable(AzureRenderTransientResourcePoolTests tests/TransientResourcePoolTests.cpp src/render/TransientResourcePool.cpp)
+    add_executable(AzureRenderTransientResourcePoolTests tests/TransientResourcePoolTests.cpp src/render/TransientResourcePool.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderTransientResourcePoolTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderTransientResourcePoolTests PRIVATE Vulkan::Vulkan)
     add_test(NAME AzureRender.TransientResourcePool COMMAND AzureRenderTransientResourcePoolTests)
     add_executable(AzureRenderLightBufferTests tests/LightBufferTests.cpp)
     target_include_directories(AzureRenderLightBufferTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -398,6 +401,7 @@ if(BUILD_TESTING)
     add_executable(
         AzureRenderExtensionRegistryTests
         tests/ExtensionRegistryTests.cpp
+        src/render/RenderGraph.cpp
     )
     target_include_directories(
         AzureRenderExtensionRegistryTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -430,6 +434,8 @@ if(BUILD_TESTING)
     add_executable(
         AzureRenderNullRhiPassTests
         tests/NullRhiPassTests.cpp
+        src/scenes/BlackholeSceneRenderer.cpp
+        src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
         src/assets/GltfLoader.cpp
         src/render/EnvironmentAsset.cpp
@@ -657,6 +663,14 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/assets-and-editor.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/development-and-release.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/documentation-standard.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/azure-engine-plan.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/render-core-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/compute-passes.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/render-graph.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 install(
     FILES

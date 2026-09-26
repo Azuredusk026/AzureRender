@@ -280,7 +280,39 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     updateTaaUniform();
 }
 
+void BlackholeSceneRenderer::registerPasses(
+    RenderGraph& graph, const SceneGraphResources& resources, const RenderContext& context) {
+    const auto raw = graph.addResource("blackhole-trace");
+    const auto previous = graph.addResource("blackhole-history-read");
+    const auto history = graph.addResource("blackhole-history-write");
+    const auto shadow = graph.addPass("blackhole-shadow-clear", [this, &context] { recordShadowClear(context); });
+    graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    const auto trace = graph.addPass("blackhole-trace", [this, &context] { recordTrace(context); });
+    graph.write(trace, raw);
+    graph.dependsOn(trace, shadow);
+    const auto temporal = graph.addPass("blackhole-temporal", [this, &context] { recordTemporal(context); });
+    graph.read(temporal, raw);
+    graph.read(temporal, previous);
+    graph.write(temporal, history);
+    const auto composite = graph.addPass("blackhole-composite", [this, &context] { recordComposite(context); });
+    graph.read(composite, history);
+    graph.attachment(composite, resources.color, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    graph.attachment(composite, resources.depth, RenderGraphUsage::DepthAttachment,
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    graph.attachment(composite, resources.normal, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+}
+
 void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
+    recordShadowClear(context);
+    recordTrace(context);
+    recordTemporal(context);
+    recordComposite(context);
+}
+
+void BlackholeSceneRenderer::recordShadowClear(const RenderContext& context) {
     // Clear the engine shadow map with an empty depth pass so the image ends
     // in DEPTH_STENCIL_READ_ONLY_OPTIMAL (the post-process Shadow Map
     // diagnostic samples it) even though this renderer casts no shadows.
@@ -297,6 +329,9 @@ void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
         context.commands->endRenderPass();
     }
 
+}
+
+void BlackholeSceneRenderer::recordTrace(const RenderContext& context) {
     if (context.gpuTimingEnabled && context.timestampQueryPool != VK_NULL_HANDLE) {
         context.commands->writeTimestamp(
             context.timestampQueryPool,
@@ -326,6 +361,12 @@ void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
     commands.draw(3);
     commands.endRenderPass();
 
+}
+
+void BlackholeSceneRenderer::recordTemporal(const RenderContext& context) {
+    rhi::ICommandRecorder& commands = *context.commands;
+    VkClearValue traceClear{};
+    traceClear.color.float32[3] = 1.0F;
     // 2. Accumulate raw trace + previous history and apply compact HDR bloom.
     rhi::RenderPassBeginDesc historyPass{};
     historyPass.renderPass = traceRenderPass_;
@@ -345,6 +386,10 @@ void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
     commands.draw(3);
     commands.endRenderPass();
 
+}
+
+void BlackholeSceneRenderer::recordComposite(const RenderContext& context) {
+    rhi::ICommandRecorder& commands = *context.commands;
     // 3. Copy the newly accumulated history into engine Scene Color.
     std::array<VkClearValue, 3> clearValues{};
     clearValues[0].color.float32[0] = 0.0F;

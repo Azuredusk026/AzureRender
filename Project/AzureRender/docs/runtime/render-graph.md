@@ -9,7 +9,7 @@
 
 ## 职责与使用场景
 
-`RenderGraph` 保存帧内资源和 pass 的读写声明，并生成满足写入依赖的执行顺序。公共帧已登记 shadow、scene、post-process 和 editor-ui 四类 Pass；Vulkan 录制仍由现有后端执行，图编译负责统一验证顺序和资源声明。
+`RenderGraph` 保存帧内资源和 pass 的读写声明，并生成满足写入依赖的执行顺序。公共帧已登记 shadow、scene、post-process 和 editor-ui 四类 Pass；Vulkan 录制仍由现有后端执行，图编译负责统一验证顺序、资源声明和资源状态转换。
 
 ## 数据与所有权
 
@@ -25,7 +25,7 @@
 
 ## 线程与同步
 
-图对象只在帧编译线程修改。编译完成后，录制线程只读取执行顺序和声明。GPU 屏障生成尚未接入，当前由既有 RHI 和 render pass 契约负责同步。
+图对象只在帧编译线程修改。编译完成后，录制线程只读取执行顺序、声明和屏障批次。当前屏障批次提供旧布局、新布局、阶段和访问掩码，RHI 接入仍属于 R2 的后续任务。
 
 ## 序列化与兼容
 
@@ -52,7 +52,7 @@ if (!graph.compile(error)) throw std::runtime_error(error);
 
 ## 验收与证据
 
-`AzureRender.RenderGraph` 验证写入者先于读取者，且非法 ID 被拒绝。完整 R2 验收将在资源状态、瞬态资源和三个场景 pass 接入后记录。
+`AzureRender.RenderGraph` 验证写入者先于读取者、状态转换按执行顺序生成、同一 Pass 的冲突状态声明被拒绝，且非法 ID 被拒绝。完整 R2 验收将在资源池和三个场景 pass 接入后记录。
 
 ## 参考来源
 

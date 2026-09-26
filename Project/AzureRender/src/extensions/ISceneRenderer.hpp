@@ -1,6 +1,7 @@
 #pragma once
 
 #include "render/RenderContext.hpp"
+#include "render/RenderGraph.hpp"
 
 #include <ostream>
 #include <sstream>
@@ -8,6 +9,13 @@
 #include <string_view>
 
 namespace azurerender {
+
+struct SceneGraphResources {
+    RenderGraph::ResourceId color;
+    RenderGraph::ResourceId depth;
+    RenderGraph::ResourceId normal;
+    RenderGraph::ResourceId shadow;
+};
 
 // A pluggable scene renderer: the unit that draws a scene into the engine's
 // HDR Scene Color attachment. The engine owns the swapchain, HDR composite,
@@ -42,6 +50,18 @@ public:
     // Records the scene passes into context.commandBuffer, writing the engine
     // Scene Color / depth / normal attachments through context.sceneFramebuffer.
     virtual void recordScene(const RenderContext& context) = 0;
+
+    // Register callbacks only. The context must outlive graph execution.
+    virtual void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
+                                const RenderContext& context) {
+        const auto pass = graph.addPass(std::string(name()), [this, &context] { recordScene(context); });
+        graph.attachment(pass, resources.color, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(pass, resources.depth, RenderGraphUsage::DepthAttachment,
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        graph.attachment(pass, resources.normal, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
 
     // Destroys every resource created in onLoad. The context remains valid.
     virtual void onUnload(const RenderContext& context) = 0;

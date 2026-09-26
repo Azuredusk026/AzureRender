@@ -735,9 +735,7 @@ void AzureRenderApp::cleanup() {
                 postProcessDescriptorSetLayout_,
                 nullptr);
         }
-        for (auto& buffer : readbackBuffers_) {
-            gpuAllocator_.destroyBuffer(buffer);
-        }
+        capturePool_.reset();
         uploadRing_.shutdown();
         if (shadowFramebuffer_ != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(device_, shadowFramebuffer_, nullptr);

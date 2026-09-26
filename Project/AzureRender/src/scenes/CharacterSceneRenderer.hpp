@@ -37,6 +37,8 @@ public:
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
     void recordScene(const RenderContext& context) override;
+    void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
+                        const RenderContext& context) override;
     void onUnload(const RenderContext& context) override;
     void appendHudText(std::ostringstream& text) const override;
     [[nodiscard]] const RendererSceneState* sceneState() const noexcept override;

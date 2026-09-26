@@ -30,11 +30,17 @@ public:
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
     void recordScene(const RenderContext& context) override;
+    void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
+                        const RenderContext& context) override;
     void onUnload(const RenderContext& context) override;
     void appendHudText(std::ostringstream& text) const override;
     void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
+    void recordShadowClear(const RenderContext& context);
+    void recordTrace(const RenderContext& context);
+    void recordTemporal(const RenderContext& context);
+    void recordComposite(const RenderContext& context);
     static constexpr std::size_t kMaxFramesInFlight = 2;
     // 2x2 stratified supersampling per pixel (denoise without TAA buffers).
     struct BlackholeUniform {

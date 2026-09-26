@@ -76,23 +76,19 @@ void AzureRenderApp::drawFrame() {
     const bool captureThisFrame =
         screenshotRequested_ || captureSequenceFrame;
     screenshotRequested_ = false;
+    azurerender::TransientResourceLease readback{};
     if (captureThisFrame) {
+        if (!capturePool_) capturePool_ = std::make_unique<azurerender::TransientResourcePool>(gpuAllocator_);
         const VkDeviceSize screenshotSize =
             static_cast<VkDeviceSize>(swapchainExtent_.width)
             * swapchainExtent_.height
             * 4;
         if (readbackBufferSize_ != screenshotSize) {
-            for (auto& buffer : readbackBuffers_) {
-                gpuAllocator_.destroyBuffer(buffer);
-            }
+            capturePool_->trim();
             readbackBufferSize_ = screenshotSize;
         }
-        if (readbackBuffers_[currentFrame_].buffer == VK_NULL_HANDLE) {
-            readbackBuffers_[currentFrame_] = gpuAllocator_.createBuffer(
-                screenshotSize,
-                VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-                true);
-        }
+        readback = capturePool_->acquireBuffer(
+            screenshotSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT, true, ++captureSerial_);
     }
 
     if (runOptions_.technicalSequence) {
@@ -145,7 +141,7 @@ void AzureRenderApp::drawFrame() {
         commandBuffers_[currentFrame_],
         imageIndex,
         captureThisFrame
-            ? readbackBuffers_[currentFrame_].buffer
+            ? readback.buffer.buffer
             : VK_NULL_HANDLE);
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
@@ -167,28 +163,6 @@ void AzureRenderApp::drawFrame() {
         timestampQuerySubmitted_[currentFrame_] = true;
     }
 
-    // The public frame order is compiled through RenderGraph before command
-    // recording. The graph owns pass ordering and resource declarations; the
-    // Vulkan render-pass calls below remain the backend execution for this
-    // migration step.
-    azurerender::RenderGraph frameGraph;
-    const auto sceneColor = frameGraph.addResource("scene-color");
-    const auto depth = frameGraph.addResource("scene-depth");
-    const auto swapchain = frameGraph.addResource("swapchain");
-    const auto shadow = frameGraph.addPass("shadow");
-    const auto scene = frameGraph.addPass("scene");
-    const auto postProcess = frameGraph.addPass("post-process");
-    const auto editorUi = frameGraph.addPass("editor-ui");
-    frameGraph.use(shadow, depth, azurerender::RenderGraphUsage::DepthAttachment, true);
-    frameGraph.use(scene, sceneColor, azurerender::RenderGraphUsage::ColorAttachment, true);
-    frameGraph.use(scene, depth, azurerender::RenderGraphUsage::DepthAttachment, true);
-    frameGraph.use(postProcess, sceneColor, azurerender::RenderGraphUsage::Sampled, false);
-    frameGraph.use(postProcess, swapchain, azurerender::RenderGraphUsage::ColorAttachment, true);
-    frameGraph.use(editorUi, swapchain, azurerender::RenderGraphUsage::ColorAttachment, true);
-    std::string frameGraphError;
-    if (!frameGraph.compile(frameGraphError)) {
-        throw std::runtime_error("RenderGraph compile failed: " + frameGraphError);
-    }
     if (captureThisFrame) {
         vkCheck(
             vkWaitForFences(
@@ -216,7 +190,7 @@ void AzureRenderApp::drawFrame() {
                     / (pendingScreenshotLabel_ + ".png")).string();
             }
             saveScreenshot(
-                readbackBuffers_[currentFrame_].mapped,
+                readback.buffer.mapped,
                 swapchainExtent_.width,
                 swapchainExtent_.height,
                 outputPath);
@@ -232,6 +206,7 @@ void AzureRenderApp::drawFrame() {
                             + std::to_string(runOptions_.captureFrameLimit));
                 }
             }
+            capturePool_->retireFrame(readback.frame);
             pendingScreenshotLabel_.clear();
         } catch (...) {
             throw;
@@ -779,21 +754,6 @@ void AzureRenderApp::recordCommandBuffer(
     const VkCommandBuffer commandBuffer,
     const std::uint32_t imageIndex,
     const VkBuffer screenshotBuffer) {
-    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
-    vkCheck(vkBeginCommandBuffer(commandBuffer, &beginInfo), "vkBeginCommandBuffer");
-    if (runOptions_.gpuTimingEnabled) {
-        vkCmdResetQueryPool(
-            commandBuffer,
-            timestampQueryPools_[currentFrame_],
-            0,
-            kTimestampQueryCount);
-        vkCmdWriteTimestamp(
-            commandBuffer,
-            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-            timestampQueryPools_[currentFrame_],
-            0);
-    }
-
     azurerender::RenderContext sceneContext;
     buildRenderContext(sceneContext);
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
@@ -814,19 +774,27 @@ void AzureRenderApp::recordCommandBuffer(
     if (runOptions_.gpuTimingEnabled) {
         sceneContext.submissionCounters = &frameCounters;
     }
-    if (sceneRenderer_ != nullptr) {
-        sceneRenderer_->recordScene(sceneContext);
-    }
-    if (runOptions_.gpuTimingEnabled) {
-        ++submissionCounters_.frames;
-        submissionCounters_.drawCalls += frameCounters.drawCalls;
-        submissionCounters_.descriptorSetBinds +=
-            frameCounters.descriptorSetBinds;
-        submissionCounters_.pipelineBinds += frameCounters.pipelineBinds;
-        submissionCounters_.pushConstantUpdates +=
-            frameCounters.pushConstantUpdates;
-    }
-
+    azurerender::RenderGraph graph;
+    const auto importAttachment = [&](const char* name, VkImage image, VkImageAspectFlags aspect) {
+        azurerender::rhi::ImageBarrierDesc state{};
+        state.image = image;
+        state.aspectMask = aspect;
+        return graph.importImage(name, state);
+    };
+    const azurerender::SceneGraphResources resources{
+        importAttachment("scene-color", sceneColorImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
+        importAttachment("scene-depth", depthImages_[imageIndex].image, VK_IMAGE_ASPECT_DEPTH_BIT),
+        importAttachment("scene-normal", normalImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
+        importAttachment("shadow-map", shadowImage_.image, VK_IMAGE_ASPECT_DEPTH_BIT)};
+    azurerender::rhi::ImageBarrierDesc outputState{};
+    outputState.image = swapchainImages_[imageIndex];
+    // The attachment passes finish in PRESENT before graph capture starts.
+    outputState.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+    outputState.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    outputState.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    const auto output = graph.importImage("output", outputState);
+    if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+    const auto composite = graph.addPass("post-process-hud", [&] {
     VkRenderPassBeginInfo postProcessPassInfo{
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
     postProcessPassInfo.renderPass = postProcessRenderPass_;
@@ -922,6 +890,13 @@ void AzureRenderApp::recordCommandBuffer(
             0);
     }
     vkCmdEndRenderPass(commandBuffer);
+    });
+    graph.use(composite, resources.color, azurerender::RenderGraphUsage::Sampled, false);
+    graph.use(composite, resources.depth, azurerender::RenderGraphUsage::Sampled, false);
+    graph.use(composite, resources.normal, azurerender::RenderGraphUsage::Sampled, false);
+    graph.use(composite, resources.shadow, azurerender::RenderGraphUsage::Sampled, false);
+    graph.write(composite, output);
+    const auto editor = graph.addPass("editor-ui", [&] {
     if (editorUiEnabled_ && editorLayer_ != nullptr) {
         VkClearValue editorClear{};
         editorClear.color.float32[0] = 0.035F;
@@ -948,6 +923,9 @@ void AzureRenderApp::recordCommandBuffer(
         editorLayer_->render(commandBuffer);
         vkCmdEndRenderPass(commandBuffer);
     }
+    });
+    graph.write(editor, output);
+    const auto capture = graph.addPass("capture", [&] {
     if (runOptions_.gpuTimingEnabled) {
         vkCmdWriteTimestamp(
             commandBuffer,
@@ -957,62 +935,43 @@ void AzureRenderApp::recordCommandBuffer(
     }
 
     if (screenshotBuffer != VK_NULL_HANDLE) {
-        VkImageMemoryBarrier toTransfer{
-            VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-        toTransfer.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-        toTransfer.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-        toTransfer.oldLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-        toTransfer.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
-        toTransfer.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-        toTransfer.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-        toTransfer.image = swapchainImages_[imageIndex];
-        toTransfer.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        toTransfer.subresourceRange.levelCount = 1;
-        toTransfer.subresourceRange.layerCount = 1;
-        vkCmdPipelineBarrier(
+        commandRecorder.copyImageToBuffer(swapchainImages_[imageIndex], screenshotBuffer, swapchainExtent_);
+    }
+    });
+    if (screenshotBuffer != VK_NULL_HANDLE) {
+        graph.use(capture, output, azurerender::RenderGraphUsage::TransferSrc, false);
+        const auto present = graph.addPass("present");
+        graph.use(present, output, azurerender::RenderGraphUsage::Present, false);
+        graph.dependsOn(present, capture);
+    } else {
+        graph.read(capture, output);
+    }
+    std::string graphError;
+    if (!graph.compile(graphError)) throw std::runtime_error(graphError);
+    VkCommandBufferBeginInfo beginInfo{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    vkCheck(vkBeginCommandBuffer(commandBuffer, &beginInfo), "vkBeginCommandBuffer");
+    if (runOptions_.gpuTimingEnabled) {
+        vkCmdResetQueryPool(
             commandBuffer,
-            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-            VK_PIPELINE_STAGE_TRANSFER_BIT,
+            timestampQueryPools_[currentFrame_],
             0,
-            0,
-            nullptr,
-            0,
-            nullptr,
-            1,
-            &toTransfer);
+            kTimestampQueryCount);
+        vkCmdWriteTimestamp(
+            commandBuffer,
+            VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+            timestampQueryPools_[currentFrame_],
+            0);
+    }
 
-        VkBufferImageCopy copy{};
-        copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        copy.imageSubresource.layerCount = 1;
-        copy.imageExtent = {
-            swapchainExtent_.width,
-            swapchainExtent_.height,
-            1,
-        };
-        vkCmdCopyImageToBuffer(
-            commandBuffer,
-            swapchainImages_[imageIndex],
-            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
-            screenshotBuffer,
-            1,
-            &copy);
-
-        VkImageMemoryBarrier toPresent = toTransfer;
-        toPresent.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-        toPresent.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
-        toPresent.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
-        toPresent.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-        vkCmdPipelineBarrier(
-            commandBuffer,
-            VK_PIPELINE_STAGE_TRANSFER_BIT,
-            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-            0,
-            0,
-            nullptr,
-            0,
-            nullptr,
-            1,
-            &toPresent);
+    graph.execute(&commandRecorder);
+    if (runOptions_.gpuTimingEnabled) {
+        ++submissionCounters_.frames;
+        submissionCounters_.drawCalls += frameCounters.drawCalls;
+        submissionCounters_.descriptorSetBinds +=
+            frameCounters.descriptorSetBinds;
+        submissionCounters_.pipelineBinds += frameCounters.pipelineBinds;
+        submissionCounters_.pushConstantUpdates +=
+            frameCounters.pushConstantUpdates;
     }
 
     vkCheck(vkEndCommandBuffer(commandBuffer), "vkEndCommandBuffer");

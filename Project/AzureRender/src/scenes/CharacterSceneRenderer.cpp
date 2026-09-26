@@ -517,6 +517,27 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     }
 }
 
+void CharacterSceneRenderer::registerPasses(
+    RenderGraph& graph, const SceneGraphResources& resources, const RenderContext& context) {
+    const auto shadow = graph.addPass("character-shadow", [this, &context] {
+        submissionCounters_ = context.submissionCounters;
+        recordShadowPass(context);
+    });
+    graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    const auto main = graph.addPass("character-main", [this, &context] {
+        submissionCounters_ = context.submissionCounters;
+        recordMainPass(context);
+    });
+    graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
+    graph.attachment(main, resources.color, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    graph.attachment(main, resources.depth, RenderGraphUsage::DepthAttachment,
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    graph.attachment(main, resources.normal, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+}
+
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     submissionCounters_ = context.submissionCounters;
     recordShadowPass(context);

@@ -2,6 +2,7 @@
 #include "render/RenderContext.hpp"
 #include "render/RenderSettings.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "scenes/BlackholeSceneRenderer.hpp"
 
 #include <cassert>
 #include <filesystem>
@@ -90,7 +91,16 @@ std::vector<RecordedCall> runFrame(
 
     NullCommandRecorder recorder;
     context.commands = &recorder;
-    renderer.recordScene(context);
+    azurerender::RenderGraph graph;
+    azurerender::SceneGraphResources resources{
+        graph.addResource("scene-color"), graph.addResource("depth"),
+        graph.addResource("normal"), graph.addResource("shadow")};
+    renderer.registerPasses(graph, resources, context);
+    std::string error;
+    if (!graph.compile(error)) throw std::runtime_error(error);
+    if (graph.passes().size() != 2) throw std::runtime_error("Character must contribute shadow and main passes");
+    if (!recorder.calls.empty()) throw std::runtime_error("Registration must not record commands");
+    graph.execute(&recorder);
     renderer.onUnload(context);
     return recorder.calls;
 }
@@ -110,6 +120,10 @@ int main() {
     std::filesystem::create_directories(shaderDirectory);
     const std::vector<char> dummySpv = {'\x03', '\x02', '\x23', '\x07'};
     for (const char* name : {
+             "blackhole.vert.spv",
+             "blackhole.frag.spv",
+             "blackhole_taa.frag.spv",
+             "blackhole_composite.frag.spv",
              "mesh.vert.spv",
              "mesh.frag.spv",
              "mesh_bindless.frag.spv",
@@ -124,6 +138,32 @@ int main() {
          }) {
         std::ofstream(shaderDirectory / name, std::ios::binary)
             .write(dummySpv.data(), 4);
+    }
+
+    {
+        NullRhi rhi;
+        NullCommandRecorder recorder;
+        RenderContext context{};
+        RenderSettings settings{};
+        context.rhi = &rhi;
+        context.allocator = &rhi.allocator();
+        context.commands = &recorder;
+        context.renderSettings = &settings;
+        context.shaderDirectory = shaderDirectory.string();
+        context.renderExtent = {1280,720};
+        azurerender::BlackholeSceneRenderer renderer;
+        renderer.onLoad(context);
+        azurerender::RenderGraph graph;
+        const azurerender::SceneGraphResources resources{
+            graph.addResource("color"), graph.addResource("depth"),
+            graph.addResource("normal"), graph.addResource("shadow")};
+        renderer.registerPasses(graph, resources, context);
+        if (graph.passes().size() != 4) return 2;
+        std::string error;
+        if (!graph.compile(error)) return 3;
+        graph.execute(&recorder);
+        if (countCalls(recorder.calls, "draw") != 3) return 4;
+        renderer.onUnload(context);
     }
 
     const std::vector<RecordedCall> legacy = runFrame(false, shaderDirectory);

@@ -3,6 +3,7 @@
 #include "AzureRenderOptions.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/TransientResourcePool.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/UploadRingBuffer.hpp"
@@ -196,10 +197,8 @@ private:
     // Byte offsets of this frame's HUD vertex slice inside uploadRing_.
     std::array<VkDeviceSize, kMaxFramesInFlight> hudVertexOffsets_{};
     std::vector<HudVertex> hudScratch_;
-    // Persistent readback staging, one per in-flight frame, sized to the
-    // swapchain and rebuilt when the extent changes.
-    std::array<azurerender::rhi::GpuBuffer, kMaxFramesInFlight>
-        readbackBuffers_{};
+    std::unique_ptr<azurerender::TransientResourcePool> capturePool_;
+    std::uint64_t captureSerial_ = 0;
     VkDeviceSize readbackBufferSize_ = 0;
     std::array<std::uint32_t, kMaxFramesInFlight> hudVertexCounts_{};
     std::int32_t selectedPrimitiveIndex_ = -1;

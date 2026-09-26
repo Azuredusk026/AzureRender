@@ -39,6 +39,17 @@ nav:
   - 资产与编辑器: assets-and-editor.md
   - 开发、测试与发布: development-and-release.md
   - 参数与接口参考: reference.md
+  - 开发规范: documentation-standard.md
+  - 计划:
+      - Azure Engine 总计划: plans/azure-engine-plan.md
+      - 渲染核心实施计划: plans/render-core-implementation.md
+  - 运行时:
+      - 渲染图: runtime/render-graph.md
+      - RHI 同步: runtime/rhi-synchronization.md
+      - 场景数据: runtime/scene-data.md
+      - Compute Pass: runtime/compute-passes.md
+  - 阶段验收:
+      - 桌面同步: acceptance/r1/2026-09-26.md
 
 markdown_extensions:
   - admonition
