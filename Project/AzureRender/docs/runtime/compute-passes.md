@@ -3,9 +3,9 @@
 > 文档类型：运行时说明
 > 状态：生效
 > 更新日期：2026-09-26
-> 适用范围：R3 Compute 与材质质量基础接口
-> 源码入口：`src/rhi/Rhi.hpp`、`src/rhi/VulkanRhi.cpp`、`shaders/clear.comp`
-> 关联测试：`tests/NullRhiTests.cpp`
+> 适用范围：R2 Compute 与材质质量基础接口
+> 源码入口：`src/render/ComputePass.hpp`、`src/rhi/Rhi.hpp`、`src/rhi/VulkanRhi.cpp`、`shaders/clear.comp`
+> 关联测试：`tests/ComputePassTests.cpp`、`tests/NullRhiTests.cpp`
 
 ## 职责与使用场景
 
@@ -13,19 +13,19 @@
 
 ## 数据与所有权
 
-计算 Pass 通过 RHI 借用当前命令缓冲区和已绑定的计算管线。资源所有权由 Render Graph 声明，计算着色器不直接管理图像或缓冲区生命周期。
+计算 Pass 通过 RHI 借用当前命令缓冲区和已绑定的计算管线。资源所有权由 Render Graph 声明，计算着色器不直接管理图像或缓冲区生命周期。`ComputePass` 根据输出尺寸和本地工作组尺寸计算向上取整的工作组数量，尺寸为空或 Pass 被禁用时保持空录制。
 
 ## 生命周期与时序
 
-计算管线在资源加载期间创建，Pass 执行前绑定管线和描述符，再调用 `dispatch`。输入和输出资源的状态由 Render Graph 屏障声明；当前阶段提供基础计算入口和可编译的 `clear.comp` 示例。
+计算管线在资源加载期间创建，Pass 执行前绑定管线和描述符，再调用 `dispatch`。输入和输出资源的状态由 Render Graph 屏障声明；Vulkan 后端执行真实 `vkCmdDispatch`，NullRHI 记录同样的绑定顺序和工作组尺寸。
 
 ## 接口契约
 
-`dispatch(x, y, z)` 要求三个工作组计数均为非零有效 Vulkan 范围。NullRHI 记录 `x`、`y`、`z`，Vulkan 后端原样转发到 `vkCmdDispatch`。
+`dispatch(x, y, z)` 要求三个工作组计数均为非零有效 Vulkan 范围。`ComputePass` 使用 `(extent + localSize - 1) / localSize` 计算数量；NullRHI 记录 `x`、`y`、`z`，Vulkan 后端原样转发到 `vkCmdDispatch`。
 
 ## 线程与同步
 
-命令录制器只能在所属录制线程使用。并行录制和间接计算提交属于 R5；R3 保持单命令缓冲区顺序。
+命令录制器只能在所属录制线程使用。并行录制和间接计算提交属于后续阶段；R2 保持单命令缓冲区顺序。
 
 ## 序列化与兼容
 
@@ -49,7 +49,7 @@ NullRHI 中检查工作组尺寸是否符合 Pass 预期。Vulkan 验证层报�
 
 ## 验收与证据
 
-`clear.comp` 在 Debug 构建中成功编译，NullRHI 的 `dispatch(8, 4, 1)` 记录测试通过。完整 IBL、Compute 蒙皮和 Morph 质量验收仍在 R3 后续任务中。
+`ComputePass`、NullRHI 和 Vulkan Compute Pipeline 契约在 Debug 构建中通过。`clear.comp` 作为首个可编译的 Compute 着色器入口，后续材质、Bloom、蒙皮和 Morph Pass 复用同一契约。
 
 ## 参考来源
 

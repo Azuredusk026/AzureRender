@@ -117,5 +117,16 @@ int main() {
     assert(countCalls(rhi.calls, "createGraphicsPipeline") == 2);
     rhi.destroyPipeline(first);
     assert(countCalls(rhi.calls, "destroyPipeline") == 1);
+    const auto compute = rhi.createComputePipeline({reinterpret_cast<VkShaderModule>(1), reinterpret_cast<VkPipelineLayout>(2)});
+    if (!compute) return 20;
+    NullCommandRecorder computeCommands;
+    computeCommands.bindComputePipeline(compute);
+    computeCommands.bindComputeDescriptorSet(reinterpret_cast<VkPipelineLayout>(2), reinterpret_cast<VkDescriptorSet>(3));
+    computeCommands.dispatch(8,4,1);
+    if (computeCommands.calls.size()!=3 || computeCommands.calls[0].name!="bindComputePipeline"
+        || computeCommands.calls[1].name!="bindComputeDescriptorSet") return 21;
+    rejected=false;
+    try { computeCommands.dispatch(0,1,1); } catch(const std::invalid_argument&) { rejected=true; }
+    if (!rejected || computeCommands.calls.size()!=3) return 22;
     return 0;
 }

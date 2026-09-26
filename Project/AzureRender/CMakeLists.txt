@@ -269,6 +269,19 @@ if(BUILD_TESTING)
     add_executable(AzureRenderLightBufferTests tests/LightBufferTests.cpp)
     target_include_directories(AzureRenderLightBufferTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.LightBuffer COMMAND AzureRenderLightBufferTests)
+    add_executable(AzureRenderCascadedShadowTests tests/CascadedShadowTests.cpp)
+    target_include_directories(AzureRenderCascadedShadowTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.CascadedShadow COMMAND AzureRenderCascadedShadowTests)
+    add_executable(
+        AzureRenderComputePassTests
+        tests/ComputePassTests.cpp
+        src/render/ComputePass.cpp
+        src/render/ComputePass.hpp
+        src/rhi/NullRhi.cpp
+        src/rhi/NullRhi.hpp)
+    target_include_directories(AzureRenderComputePassTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderComputePassTests PRIVATE Vulkan::Vulkan)
+    add_test(NAME AzureRender.ComputePass COMMAND AzureRenderComputePassTests)
     add_executable(AzureRenderFrameTaskSchedulerTests tests/FrameTaskSchedulerTests.cpp)
     target_include_directories(AzureRenderFrameTaskSchedulerTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.FrameTaskScheduler COMMAND AzureRenderFrameTaskSchedulerTests)

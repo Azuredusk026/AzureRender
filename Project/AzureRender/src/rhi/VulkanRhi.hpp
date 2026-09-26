@@ -63,6 +63,7 @@ public:
         VkDescriptorSetLayout setLayout,
         const PushConstantRangeDesc* pushConstants) override;
     void destroyPipelineLayout(VkPipelineLayout layout) override;
+    VkPipeline createComputePipeline(const ComputePipelineDesc& desc) override;
     VkPipeline createGraphicsPipeline(
         const GraphicsPipelineDesc& desc) override;
     void destroyPipeline(VkPipeline pipeline) override;
@@ -110,6 +111,8 @@ public:
     void endRenderPass() override;
     void setViewport(float width, float height) override;
     void setScissor(VkExtent2D extent) override;
+    void bindComputePipeline(VkPipeline pipeline) override;
+    void bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) override;
     void bindPipeline(VkPipeline pipeline) override;
     void bindDescriptorSet(
         VkPipelineLayout layout,

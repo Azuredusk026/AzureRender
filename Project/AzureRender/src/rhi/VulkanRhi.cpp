@@ -344,6 +344,25 @@ void VulkanRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
     vkDestroyPipelineLayout(device_, layout, nullptr);
 }
 
+VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
+    VkComputePipelineCreateInfo info{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};
+    info.stage = {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
+    info.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
+    info.stage.module = desc.shader;
+    info.stage.pName = "main";
+    info.layout = desc.layout;
+    VkPipeline pipeline = VK_NULL_HANDLE;
+    vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    return pipeline;
+}
+void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
+    vkCmdBindPipeline(commandBuffer_, VK_PIPELINE_BIND_POINT_COMPUTE, pipeline);
+}
+void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) {
+    vkCmdBindDescriptorSets(commandBuffer_, VK_PIPELINE_BIND_POINT_COMPUTE, layout, 0, 1, &set, 0, nullptr);
+}
+
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
     VkPipelineShaderStageCreateInfo vertexStage{
@@ -832,6 +851,7 @@ void VulkanCommandRecorder::dispatch(
     const std::uint32_t groupCountX,
     const std::uint32_t groupCountY,
     const std::uint32_t groupCountZ) {
+    if (!groupCountX || !groupCountY || !groupCountZ) throw std::invalid_argument("Empty compute dispatch");
     vkCmdDispatch(commandBuffer_, groupCountX, groupCountY, groupCountZ);
 }
 

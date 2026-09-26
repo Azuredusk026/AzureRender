@@ -18,6 +18,11 @@
 
 namespace azurerender::rhi {
 
+struct ComputePipelineDesc {
+    VkShaderModule shader = VK_NULL_HANDLE;
+    VkPipelineLayout layout = VK_NULL_HANDLE;
+};
+
 struct SamplerDesc {
     VkFilter filter = VK_FILTER_LINEAR;
     VkSamplerAddressMode addressU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
@@ -179,6 +184,8 @@ public:
     virtual void setViewport(float width, float height) = 0;
     virtual void setScissor(VkExtent2D extent) = 0;
 
+    virtual void bindComputePipeline(VkPipeline pipeline) = 0;
+    virtual void bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) = 0;
     virtual void bindPipeline(VkPipeline pipeline) = 0;
     virtual void bindDescriptorSet(
         VkPipelineLayout layout,
@@ -267,6 +274,7 @@ public:
         VkDescriptorSetLayout setLayout,
         const PushConstantRangeDesc* pushConstants) = 0;
     virtual void destroyPipelineLayout(VkPipelineLayout layout) = 0;
+    virtual VkPipeline createComputePipeline(const ComputePipelineDesc& desc) = 0;
     virtual VkPipeline createGraphicsPipeline(
         const GraphicsPipelineDesc& desc) = 0;
     virtual void destroyPipeline(VkPipeline pipeline) = 0;

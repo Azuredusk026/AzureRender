@@ -12,6 +12,7 @@
     "api_version",
     "driver_version",
     "features",
+    "compute",
     "descriptor_indexing",
     "extensions"
   ],
@@ -50,6 +51,15 @@
         "shader_int64": {
           "type": "boolean"
         }
+      }
+    },
+    "compute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shader", "storage_image_write_without_format"],
+      "properties": {
+        "shader": {"type": "boolean"},
+        "storage_image_write_without_format": {"type": "boolean"}
       }
     },
     "descriptor_indexing": {

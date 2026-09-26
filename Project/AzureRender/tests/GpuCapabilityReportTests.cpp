@@ -71,6 +71,8 @@ int main() {
     assert(report.contains("features"));
     assert(report["features"]["sampler_anisotropy"] == true);
     assert(report["features"]["shader_int64"] == false);
+    assert(report["compute"]["shader"] == true);
+    assert(report["compute"]["storage_image_write_without_format"] == false);
 
     // Descriptor indexing contract.
     assert(report.contains("descriptor_indexing"));

@@ -221,6 +221,18 @@ void NullRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
     calls.push_back({"destroyPipelineLayout", hexHandle(layout)});
 }
 
+VkPipeline NullRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
+    return mint<VkPipeline>("createComputePipeline");
+}
+void NullCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
+    calls.push_back({"bindComputePipeline", hexHandle(pipeline)});
+}
+void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) {
+    (void)layout;
+    calls.push_back({"bindComputeDescriptorSet", hexHandle(set)});
+}
+
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
     const VkPipeline pipeline = mint<VkPipeline>("createGraphicsPipeline");
     calls.back().detail +=
@@ -416,6 +428,7 @@ void NullCommandRecorder::dispatch(
     const std::uint32_t groupCountX,
     const std::uint32_t groupCountY,
     const std::uint32_t groupCountZ) {
+    if (!groupCountX || !groupCountY || !groupCountZ) throw std::invalid_argument("Empty compute dispatch");
     calls.push_back({"dispatch", std::to_string(groupCountX) + "x"
         + std::to_string(groupCountY) + "x" + std::to_string(groupCountZ)});
 }
