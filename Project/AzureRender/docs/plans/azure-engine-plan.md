@@ -45,7 +45,7 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | R0 场景数据收口 | P0，Complete（2026-09-26） | 稳定实体标识、运行期 ECS 接入、父子变换、资源共享、相机与阴影独立剔除 | 父节点移动带动子节点；保存重载保持结果；视野外投射体产生正确阴影；七视图回归 |
 | R1 平台与同步契约 | P0，R0，Complete（2026-09-26） | Windows 能力探测、图像与缓冲区屏障描述、暂停与交换链重建契约 | Windows Debug/Release 构建；NullRHI 屏障记录；桌面暂停与表面重建路径通过；[验收记录](../acceptance/r1/2026-09-26.md) |
 | R2 渲染图 | P0，R1，Active，对应 E3 | 声明读写、图编译、持久与瞬态资源、资源池、三个场景贡献 pass | 排序与错误诊断单测；新增 pass 完整接入无需修改公共帧流程；历史帧与捕获正确 |
-| R3 Compute 与材质质量 | P0，R2，对应 E4 | GPU IBL、分级 bloom、compute 蒙皮与 morph、资产转换中的 OpenEXR | 公共资产回归；固定表与 bindless 能力档位均运行；Windows 性能预算报告 |
+| R3 Compute 与材质质量 | P0，R2，Active，对应 E4 | GPU IBL、分级 bloom、compute 蒙皮与 morph、资产转换中的 OpenEXR | 公共资产回归；固定表与 bindless 能力档位均运行；Windows 性能预算报告 |
 | R4 光照与阴影 | P0，R3，对应 E5 | 光源数据、级联阴影、聚簇或分块光照 | 多光源与遮挡场景正确；阴影稳定性与性能曲线可复现 |
 | R5 并行与 GPU 提交 | P0，R4，对应 E6 | 帧快照、任务调度、间接绘制、能力降级 | 单线程与并行路径确定性一致；记录 CPU/GPU 时间、draw 次数和显存 |
 | R6 渲染平台验收 | P0，R5，对应 E7 | Windows 复杂公开场景与质量档位 | Windows 运行与安装；持续运行、窗口调整和恢复通过 |

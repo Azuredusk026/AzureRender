@@ -412,6 +412,14 @@ void NullCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
              + " mipLevels=" + std::to_string(barrier.mipLevels)});
 }
 
+void NullCommandRecorder::dispatch(
+    const std::uint32_t groupCountX,
+    const std::uint32_t groupCountY,
+    const std::uint32_t groupCountZ) {
+    calls.push_back({"dispatch", std::to_string(groupCountX) + "x"
+        + std::to_string(groupCountY) + "x" + std::to_string(groupCountZ)});
+}
+
 void NullCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
     calls.push_back(
         {"bufferBarrier",

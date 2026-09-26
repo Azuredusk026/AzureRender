@@ -198,6 +198,10 @@ public:
         std::uint32_t firstIndex,
         std::uint32_t instanceCount = 1,
         std::uint32_t firstInstance = 0) = 0;
+    virtual void dispatch(
+        std::uint32_t groupCountX,
+        std::uint32_t groupCountY,
+        std::uint32_t groupCountZ) = 0;
 
     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
     virtual void bufferBarrier(const BufferBarrierDesc& barrier) = 0;

@@ -828,6 +828,13 @@ void VulkanCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
         &imageBarrier);
 }
 
+void VulkanCommandRecorder::dispatch(
+    const std::uint32_t groupCountX,
+    const std::uint32_t groupCountY,
+    const std::uint32_t groupCountZ) {
+    vkCmdDispatch(commandBuffer_, groupCountX, groupCountY, groupCountZ);
+}
+
 void VulkanCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
     VkBufferMemoryBarrier bufferBarrier{
         VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};

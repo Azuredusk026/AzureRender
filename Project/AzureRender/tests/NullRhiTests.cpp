@@ -52,6 +52,7 @@ int main() {
     recorder.bindPipeline(nullptr);
     recorder.bindDescriptorSet(nullptr, nullptr);
     recorder.drawIndexed(36, 0);
+    recorder.dispatch(8, 4, 1);
     recorder.endRenderPass();
     recorder.bufferBarrier({
         VK_NULL_HANDLE,
@@ -62,16 +63,17 @@ int main() {
         VK_ACCESS_TRANSFER_WRITE_BIT,
         VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT});
 
-    assert(recorder.calls.size() == 6);
+    assert(recorder.calls.size() == 7);
     assert(recorder.calls[0].name == "beginRenderPass");
     assert(recorder.calls[0].detail.find("1280x720") != std::string::npos);
     assert(recorder.calls[1].name == "bindPipeline");
     assert(recorder.calls[2].name == "bindDescriptorSet");
     assert(recorder.calls[3].name == "drawIndexed");
-    assert(recorder.calls[4].name == "endRenderPass");
-    assert(recorder.calls[5].name == "bufferBarrier");
-    if (recorder.calls[5].detail.find("offset=16 size=64") == std::string::npos
-        || recorder.calls[5].detail.find("dstAccess=4") == std::string::npos)
+    assert(recorder.calls[4].name == "dispatch");
+    assert(recorder.calls[5].name == "endRenderPass");
+    assert(recorder.calls[6].name == "bufferBarrier");
+    if (recorder.calls[6].detail.find("offset=16 size=64") == std::string::npos
+        || recorder.calls[6].detail.find("dstAccess=4") == std::string::npos)
         return 11;
     azurerender::rhi::ImageBarrierDesc depth{};
     depth.oldLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;

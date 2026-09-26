@@ -178,6 +178,7 @@ compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_taa.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_composite.frag")
+compile_shader("${SHADER_SOURCE_DIR}/clear.comp")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 
 add_executable(
