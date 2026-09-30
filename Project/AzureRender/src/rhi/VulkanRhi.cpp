@@ -259,12 +259,14 @@ VkImageView VulkanRhi::createImageView(
     const VkImage image,
     const VkFormat format,
     const VkImageAspectFlags aspect,
-    const std::uint32_t mipLevels) {
+    const std::uint32_t mipLevels,
+    const std::uint32_t baseMipLevel) {
     VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
     createInfo.image = image;
     createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
     createInfo.format = format;
     createInfo.subresourceRange.aspectMask = aspect;
+    createInfo.subresourceRange.baseMipLevel = baseMipLevel;
     createInfo.subresourceRange.levelCount = std::max(mipLevels, 1U);
     createInfo.subresourceRange.layerCount = 1;
 
@@ -299,6 +301,14 @@ VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
 
 void VulkanRhi::destroySampler(const VkSampler sampler) {
     vkDestroySampler(device_, sampler, nullptr);
+}
+
+void VulkanRhi::executeOneShot(
+    const std::function<void(ICommandRecorder&)>& record) {
+    runOneShot("executeOneShot", [&](VkCommandBuffer commandBuffer) {
+        VulkanCommandRecorder recorder(commandBuffer);
+        record(recorder);
+    });
 }
 
 VkShaderModule VulkanRhi::createShaderModule(
@@ -565,7 +575,7 @@ void VulkanRhi::writeDescriptorImage(const DescriptorImageWrite& write) {
     descriptorWrite.dstSet = write.set;
     descriptorWrite.dstBinding = write.binding;
     descriptorWrite.descriptorCount = 1;
-    descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+    descriptorWrite.descriptorType = write.type;
     descriptorWrite.pImageInfo = &imageInfo;
     vkUpdateDescriptorSets(device_, 1, &descriptorWrite, 0, nullptr);
 }
@@ -726,16 +736,22 @@ void VulkanCommandRecorder::endRenderPass() {
 
 void VulkanCommandRecorder::setViewport(
     const float width,
-    const float height) {
+    const float height,
+    const float x,
+    const float y) {
     VkViewport viewport{};
+    viewport.x = x;
+    viewport.y = y;
     viewport.width = width;
     viewport.height = height;
     viewport.maxDepth = 1.0F;
     vkCmdSetViewport(commandBuffer_, 0, 1, &viewport);
 }
 
-void VulkanCommandRecorder::setScissor(const VkExtent2D extent) {
-    const VkRect2D scissor{{0, 0}, extent};
+void VulkanCommandRecorder::setScissor(
+    const VkExtent2D extent,
+    const VkOffset2D offset) {
+    const VkRect2D scissor{offset, extent};
     vkCmdSetScissor(commandBuffer_, 0, 1, &scissor);
 }
 

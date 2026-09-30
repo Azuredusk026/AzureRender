@@ -11,6 +11,7 @@ namespace azurerender {
 struct RenderLight {
     std::uint64_t stableId = 0;
     float position[3]{};
+    float clusterPosition[3]{};
     float color[3]{1.0F, 1.0F, 1.0F};
     float intensity = 1.0F;
     float radius = 1.0F;

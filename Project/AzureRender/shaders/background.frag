@@ -2,6 +2,11 @@
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
+    vec4 cameraForward;
+    vec4 clusterGrid;
+    vec4 clusterDepth;
+    vec4 clusterLighting;
+    vec4 cascadeSplits;
     vec4 renderingParameters;
     vec4 showcaseParameters;
     vec4 qaParameters;

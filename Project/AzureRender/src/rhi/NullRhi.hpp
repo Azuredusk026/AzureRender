@@ -86,10 +86,13 @@ public:
         VkImage image,
         VkFormat format,
         VkImageAspectFlags aspect,
-        std::uint32_t mipLevels) override;
+        std::uint32_t mipLevels,
+        std::uint32_t baseMipLevel = 0) override;
     void destroyImageView(VkImageView view) override;
     VkSampler createSampler(const SamplerDesc& desc) override;
     void destroySampler(VkSampler sampler) override;
+    void executeOneShot(
+        const std::function<void(ICommandRecorder&)>& record) override;
 
     VkShaderModule createShaderModule(
         const std::vector<char>& code) override;
@@ -138,8 +141,9 @@ public:
 
     void beginRenderPass(const RenderPassBeginDesc& desc) override;
     void endRenderPass() override;
-    void setViewport(float width, float height) override;
-    void setScissor(VkExtent2D extent) override;
+    void setViewport(
+        float width, float height, float x = 0.0F, float y = 0.0F) override;
+    void setScissor(VkExtent2D extent, VkOffset2D offset = {}) override;
     void bindComputePipeline(VkPipeline pipeline) override;
     void bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) override;
     void bindPipeline(VkPipeline pipeline) override;

@@ -29,6 +29,14 @@ inline Vector3 subtract(const Vector3& left, const Vector3& right) {
     return {left[0] - right[0], left[1] - right[1], left[2] - right[2]};
 }
 
+inline Vector3 addVectors(const Vector3& left, const Vector3& right) {
+    return {left[0] + right[0], left[1] + right[1], left[2] + right[2]};
+}
+
+inline Vector3 scaleVector(const Vector3& value, const float scalar) {
+    return {value[0] * scalar, value[1] * scalar, value[2] * scalar};
+}
+
 inline float dot(const Vector3& left, const Vector3& right) {
     return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
 }
@@ -57,6 +65,10 @@ inline Vector3 transformPosition(
 inline Vector3 normalize(const Vector3& value) {
     const float length = std::sqrt(dot(value, value));
     return {value[0] / length, value[1] / length, value[2] / length};
+}
+
+inline float vectorLength(const Vector3& value) {
+    return std::sqrt(dot(value, value));
 }
 
 inline Matrix4 rotationX(const float radians) {

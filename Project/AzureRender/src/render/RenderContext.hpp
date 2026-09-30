@@ -133,6 +133,13 @@ struct RenderContext {
     // selects the fixed-table path.
     bool bindlessTextures = false;
 
+    // R16G16B16A16_SFLOAT supports storage-image writes on this device.
+    bool rgba16fStorageImage = false;
+
+    // Compute skinning/morph is available on the active queue and enabled
+    // for this run. False selects vertex-shader skinning/morph.
+    bool computeSkinning = false;
+
     // Frustum culling by instance bounds. Renderers may skip instances
     // outside the view frustum; when false every instance is submitted.
     bool cullingEnabled = true;

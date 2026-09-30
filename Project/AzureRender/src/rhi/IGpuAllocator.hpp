@@ -27,6 +27,9 @@ struct GpuBuffer {
 struct GpuImage {
     VkImage image = VK_NULL_HANDLE;
     VmaAllocation allocation = nullptr;
+    std::uint32_t width = 0;
+    std::uint32_t height = 0;
+    std::uint32_t mipLevels = 1;
 };
 
 // Running totals used by the performance baseline to show that a structural

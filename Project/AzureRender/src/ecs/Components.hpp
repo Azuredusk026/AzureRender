@@ -28,4 +28,13 @@ struct NameComponent {
     std::array<char, 64> name{};
 };
 
+// Point light attached to a scene node entity. Position comes from that
+// entity's TransformComponent; color, intensity and radius are light data.
+struct LightComponent {
+    std::array<float, 3> color{1.0F, 1.0F, 1.0F};
+    float intensity = 1.0F;
+    float radius = 5.0F;
+    bool enabled = true;
+};
+
 }  // namespace azurerender::ecs

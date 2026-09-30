@@ -8,6 +8,7 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "render/RenderContext.hpp"
+#include "scene/TransformMath.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "AzureRenderInternal.hpp"
 
@@ -19,6 +20,7 @@
 #include <cstring>
 #include <fstream>
 #include <filesystem>
+#include <functional>
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -26,6 +28,7 @@
 #include <set>
 #include <stdexcept>
 #include <utility>
+#include <unordered_map>
 
 using namespace azurerender::internal;
 
@@ -315,6 +318,9 @@ void AzureRenderApp::buildRenderContext(
     context.rhi = rhi_.get();
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
+    context.rgba16fStorageImage = rgba16fStorageImageSupported_;
+    context.computeSkinning =
+        computeShaderSupported_ && !runOptions_.computeSkinningDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
@@ -359,6 +365,58 @@ void AzureRenderApp::buildRenderContext(
                 desc.scale = node.scale;
                 desc.visible = node.visible;
                 context.scene.nodes.push_back(std::move(desc));
+            }
+            std::unordered_map<std::string, std::size_t> nodeIndices;
+            nodeIndices.reserve(document->nodes.size());
+            for (std::size_t index = 0; index < document->nodes.size(); ++index) {
+                nodeIndices.emplace(document->nodes[index].id, index);
+            }
+            std::vector<azurerender::internal::Matrix4> nodeWorld(
+                document->nodes.size());
+            std::vector<std::uint8_t> nodeState(document->nodes.size(), 0);
+            const auto resolveNodeWorld = [&](const std::size_t index,
+                auto&& self) -> const azurerender::internal::Matrix4& {
+                if (nodeState[index] == 2) {
+                    return nodeWorld[index];
+                }
+                if (nodeState[index] == 1) {
+                    throw std::runtime_error(
+                        "Scene transform hierarchy contains a cycle");
+                }
+                nodeState[index] = 1;
+                const azurerender::SceneNode& node = document->nodes[index];
+                const azurerender::internal::Matrix4 local =
+                    azurerender::scene::composeTrs(
+                        node.translation, node.rotation, node.scale);
+                const auto parent = nodeIndices.find(node.parentId);
+                if (!node.parentId.empty() && parent != nodeIndices.end()) {
+                    nodeWorld[index] = azurerender::internal::multiply(
+                        self(parent->second, self), local);
+                } else {
+                    nodeWorld[index] = local;
+                }
+                nodeState[index] = 2;
+                return nodeWorld[index];
+            };
+            context.scene.lights.reserve(document->lights.size());
+            for (const azurerender::SceneLight& light : document->lights) {
+                const auto node = nodeIndices.find(light.nodeId);
+                if (node == nodeIndices.end()) {
+                    throw std::runtime_error(
+                        "Scene light references missing node: " + light.nodeId);
+                }
+                const auto& world = resolveNodeWorld(node->second, resolveNodeWorld);
+                const auto position = azurerender::internal::transformPosition(
+                    world, {0.0F, 0.0F, 0.0F});
+                context.scene.lights.push_back({
+                    light.id,
+                    light.nodeId,
+                    position,
+                    light.color,
+                    light.intensity,
+                    light.radius,
+                    light.enabled,
+                });
             }
         } else {
             context.scene.resources.push_back({"asset-0", resolvedAssetPath_});
@@ -866,6 +924,7 @@ void AzureRenderApp::pickPhysicalDevice() {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
     features2.pNext = &vulkan12Features;
     vkGetPhysicalDeviceFeatures2(physicalDevice_, &features2);
+    computeShaderSupported_ = false;
     bindlessTexturesSupported_ =
         vulkan12Features.runtimeDescriptorArray == VK_TRUE
         && vulkan12Features.shaderSampledImageArrayNonUniformIndexing
@@ -892,6 +951,9 @@ void AzureRenderApp::pickPhysicalDevice() {
         queueProperties.data());
     timestampValidBits_ =
         queueProperties.at(*queueIndices.graphics).timestampValidBits;
+    computeShaderSupported_ =
+        (queueProperties.at(*queueIndices.graphics).queueFlags
+         & VK_QUEUE_COMPUTE_BIT) != 0;
     VkFormatProperties hdrSceneColorProperties{};
     vkGetPhysicalDeviceFormatProperties(
         physicalDevice_,
@@ -905,6 +967,10 @@ void AzureRenderApp::pickPhysicalDevice() {
         (hdrSceneColorProperties.optimalTilingFeatures
          & kRequiredHdrSceneColorFeatures)
         == kRequiredHdrSceneColorFeatures;
+    rgba16fStorageImageSupported_ =
+        (hdrSceneColorProperties.optimalTilingFeatures
+         & VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT)
+        == VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT;
     if (runOptions_.gpuTimingEnabled && timestampValidBits_ == 0) {
         throw std::runtime_error(
             "Selected graphics queue does not support timestamp queries");

@@ -152,12 +152,20 @@ function(compile_shader source_file)
 endfunction()
 
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/mesh.vert"
+    DEFINES AZURE_COMPUTE_SKINNING=1
+    OUTPUT_NAME mesh_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.frag"
     DEFINES AZURE_BINDLESS=1
     OUTPUT_NAME mesh_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/outline.vert")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/outline.vert"
+    DEFINES AZURE_COMPUTE_SKINNING=1
+    OUTPUT_NAME outline_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/background.vert")
 compile_shader("${SHADER_SOURCE_DIR}/background.frag")
@@ -166,6 +174,10 @@ compile_shader(
     DEFINES AZURE_BINDLESS=1
     OUTPUT_NAME background_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/shadow.vert")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/shadow.vert"
+    DEFINES AZURE_COMPUTE_SKINNING=1
+    OUTPUT_NAME shadow_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/shadow.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/shadow.frag"
@@ -178,8 +190,16 @@ compile_shader("${SHADER_SOURCE_DIR}/hud.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_taa.frag")
+compile_shader(
+    "${SHADER_SOURCE_DIR}/blackhole_taa.frag"
+    DEFINES AZURE_COMPUTE_BLOOM=1
+    OUTPUT_NAME blackhole_taa_compute.frag)
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_composite.frag")
 compile_shader("${SHADER_SOURCE_DIR}/clear.comp")
+compile_shader("${SHADER_SOURCE_DIR}/bloom_downsample.comp")
+compile_shader("${SHADER_SOURCE_DIR}/bloom_composite.comp")
+compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
+compile_shader("${SHADER_SOURCE_DIR}/skin.comp")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 
 add_executable(
@@ -234,6 +254,8 @@ add_executable(
     src/render/RenderContext.hpp
     src/render/EnvironmentAsset.cpp
     src/render/EnvironmentAsset.hpp
+    src/render/ComputePass.cpp
+    src/render/ComputePass.hpp
     src/rhi/GpuAllocator.cpp
     src/rhi/GpuAllocator.hpp
     src/rhi/IGpuAllocator.hpp
@@ -456,6 +478,7 @@ if(BUILD_TESTING)
         AzureRenderNullRhiPassTests
         tests/NullRhiPassTests.cpp
         src/scenes/BlackholeSceneRenderer.cpp
+        src/render/ComputePass.cpp
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
         src/assets/GltfLoader.cpp
@@ -530,6 +553,96 @@ if(BUILD_TESTING)
             PROPERTIES
                 SKIP_RETURN_CODE 2
                 TIMEOUT 900
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+    endif()
+    if(WIN32)
+        add_test(
+            NAME AzureRender.BlackholeComputeGpu
+            COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+                -File "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_blackhole_compute_smoke.ps1"
+                -Executable "$<TARGET_FILE:AzureRender>"
+                -OutputDirectory "${CMAKE_CURRENT_BINARY_DIR}/blackhole-compute-smoke")
+        set_tests_properties(
+            AzureRender.BlackholeComputeGpu
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 180
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+        add_test(
+            NAME AzureRender.CharacterIblComputeGpu
+            COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+                -File "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_character_ibl_smoke.ps1"
+                -Executable "$<TARGET_FILE:AzureRender>"
+                -OutputDirectory "${CMAKE_CURRENT_BINARY_DIR}/character-ibl-smoke")
+        set_tests_properties(
+            AzureRender.CharacterIblComputeGpu
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 180
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+        add_test(
+            NAME AzureRender.CharacterSkinningComputeGpu
+            COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+                -File "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_character_skinning_smoke.ps1"
+                -Executable "$<TARGET_FILE:AzureRender>"
+                -OutputDirectory "${CMAKE_CURRENT_BINARY_DIR}/character-skinning-smoke")
+        set_tests_properties(
+            AzureRender.CharacterSkinningComputeGpu
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 180
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+    endif()
+    if(WIN32 AND Python3_Interpreter_FOUND)
+        add_test(
+            NAME AzureRender.VisualRegressionLegacySkinning
+            COMMAND
+                "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --tolerance strict
+                "--renderer-arg=--disable-compute-skinning"
+                --summary
+                    "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-skinning-summary.json")
+        set_tests_properties(
+            AzureRender.VisualRegressionLegacySkinning
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 900
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+        add_test(
+            NAME AzureRender.CharacterMorphComputeGpu
+            COMMAND
+                "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_morph_compute_regression.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --output-dir
+                    "${CMAKE_CURRENT_BINARY_DIR}/morph-compute-regression")
+        set_tests_properties(
+            AzureRender.CharacterMorphComputeGpu
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 180
+                LABELS "gpu"
+                RUN_SERIAL TRUE)
+        add_test(
+            NAME AzureRender.ClusteredLightingGpu
+            COMMAND
+                "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_clustered_lighting_smoke.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --output-dir
+                    "${CMAKE_CURRENT_BINARY_DIR}/clustered-lighting-smoke")
+        set_tests_properties(
+            AzureRender.ClusteredLightingGpu
+            PROPERTIES
+                SKIP_RETURN_CODE 2
+                TIMEOUT 180
                 LABELS "gpu"
                 RUN_SERIAL TRUE)
     endif()

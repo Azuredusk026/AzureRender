@@ -68,6 +68,9 @@ GpuImage NullGpuAllocator::createImage(
     (void)hostVisible;
     GpuImage result;
     result.image = fakeHandle<VkImage>(nextHandle_++);
+    result.width = createInfo.extent.width;
+    result.height = createInfo.extent.height;
+    result.mipLevels = createInfo.mipLevels;
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
     statistics_.imageBytes += static_cast<VkDeviceSize>(createInfo.extent.width)
@@ -179,11 +182,13 @@ VkImageView NullRhi::createImageView(
     const VkImage image,
     const VkFormat format,
     const VkImageAspectFlags aspect,
-    const std::uint32_t mipLevels) {
+    const std::uint32_t mipLevels,
+    const std::uint32_t baseMipLevel) {
     (void)image;
     (void)format;
     (void)aspect;
     (void)mipLevels;
+    (void)baseMipLevel;
     return mint<VkImageView>("createImageView");
 }
 
@@ -198,6 +203,14 @@ VkSampler NullRhi::createSampler(const SamplerDesc& desc) {
 
 void NullRhi::destroySampler(const VkSampler sampler) {
     calls.push_back({"destroySampler", hexHandle(sampler)});
+}
+
+void NullRhi::executeOneShot(
+    const std::function<void(ICommandRecorder&)>& record) {
+    NullCommandRecorder recorder;
+    record(recorder);
+    calls.push_back({"executeOneShot", std::to_string(recorder.calls.size())});
+    calls.insert(calls.end(), recorder.calls.begin(), recorder.calls.end());
 }
 
 VkShaderModule NullRhi::createShaderModule(const std::vector<char>& code) {
@@ -339,16 +352,23 @@ void NullCommandRecorder::endRenderPass() {
 
 void NullCommandRecorder::setViewport(
     const float width,
-    const float height) {
+    const float height,
+    const float x,
+    const float y) {
     calls.push_back(
         {"setViewport",
-         std::to_string(width) + "x" + std::to_string(height)});
+         std::to_string(width) + "x" + std::to_string(height) + "@"
+             + std::to_string(x) + "," + std::to_string(y)});
 }
 
-void NullCommandRecorder::setScissor(const VkExtent2D extent) {
+void NullCommandRecorder::setScissor(
+    const VkExtent2D extent,
+    const VkOffset2D offset) {
     calls.push_back(
         {"setScissor",
-         std::to_string(extent.width) + "x" + std::to_string(extent.height)});
+         std::to_string(extent.width) + "x" + std::to_string(extent.height)
+             + "@" + std::to_string(offset.x) + ","
+             + std::to_string(offset.y)});
 }
 
 void NullCommandRecorder::bindPipeline(const VkPipeline pipeline) {

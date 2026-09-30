@@ -2,6 +2,7 @@
 
 #include "app/AzureRenderInternal.hpp"
 #include "platform/BinaryFile.hpp"
+#include "render/ComputePass.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
@@ -44,6 +45,12 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     environmentSource_ = context.environment;
     renderSettings_ = context.renderSettings;
+    computeBloomEnabled_ = context.rgba16fStorageImage;
+    RuntimeDiagnostics::instance().info(
+        "render",
+        computeBloomEnabled_
+            ? "Blackhole bloom: four-level Vulkan compute path"
+            : "Blackhole bloom: fragment fallback path");
 
     constexpr VkShaderStageFlags kFragment = VK_SHADER_STAGE_FRAGMENT_BIT;
     descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
@@ -67,22 +74,35 @@ void BlackholeSceneRenderer::onLoad(const RenderContext& context) {
     createUniformBuffers();
     createEnvironmentTexture();
     createTraceResources(context);
+    if (computeBloomEnabled_) {
+        createBloomResources(context);
+        createBloomDescriptors();
+        createBloomPipelines();
+    }
 
     // TAA descriptors are immutable for every frame/ping combination. This
     // avoids updating descriptors that may still be referenced in flight.
     {
-        taaDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        std::vector<rhi::DescriptorBindingDesc> taaBindings = {
             {0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1, kFragment},
             {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
             {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
-        });
+        };
+        if (computeBloomEnabled_) {
+            taaBindings.push_back(
+                {3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment});
+        }
+        taaDescriptorSetLayout_ =
+            rhi_->createDescriptorSetLayout(taaBindings);
 
         rhi::DescriptorPoolDesc taaPool{};
         taaPool.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
              static_cast<std::uint32_t>(taaDescriptorSets_.size())},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             static_cast<std::uint32_t>(taaDescriptorSets_.size() * 2)},
+             static_cast<std::uint32_t>(
+                 taaDescriptorSets_.size()
+                 * (computeBloomEnabled_ ? 3 : 2))},
         };
         taaPool.maxSets =
             static_cast<std::uint32_t>(taaDescriptorSets_.size());
@@ -195,6 +215,10 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
     }
     destroySizeDependentResources();
     createTraceResources(context);
+    if (computeBloomEnabled_) {
+        createBloomResources(context);
+        createBloomDescriptors();
+    }
     transitionInitialLayouts();
     updateTemporalDescriptorSets();
     createGraphicsPipeline(context);
@@ -282,21 +306,116 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
 
 void BlackholeSceneRenderer::registerPasses(
     RenderGraph& graph, const SceneGraphResources& resources, const RenderContext& context) {
-    const auto raw = graph.addResource("blackhole-trace");
-    const auto previous = graph.addResource("blackhole-history-read");
-    const auto history = graph.addResource("blackhole-history-write");
+    const auto importColor = [&graph](
+        const std::string& name,
+        const VkImage image) {
+        rhi::ImageBarrierDesc initial{};
+        initial.image = image;
+        initial.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        initial.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        return graph.importImage(name, initial);
+    };
+    const auto raw = importColor("blackhole-trace", traceImage_.image);
+    const std::size_t previousIndex = historyWriteIndex_ ^ 1U;
+    const auto previous = importColor(
+        "blackhole-history-read", historyImages_[previousIndex].image);
+    const auto history = importColor(
+        "blackhole-history-write", historyImages_[historyWriteIndex_].image);
     const auto shadow = graph.addPass("blackhole-shadow-clear", [this, &context] { recordShadowClear(context); });
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     const auto trace = graph.addPass("blackhole-trace", [this, &context] { recordTrace(context); });
-    graph.write(trace, raw);
+    graph.attachment(
+        trace, raw, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.dependsOn(trace, shadow);
+
+    std::uint32_t bloomOutput = 0;
+    if (computeBloomEnabled_) {
+        std::vector<RenderGraph::ResourceId> bloomResources;
+        bloomResources.reserve(kBloomLevelCount);
+        for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+            bloomResources.push_back(importColor(
+                "blackhole-bloom-level-" + std::to_string(level),
+                bloomLevels_[level].image));
+        }
+        const auto compositeBloom = importColor(
+            "blackhole-bloom-composite", bloomCompositeImage_.image);
+
+        for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+            const auto downsample = graph.addPass(
+                "blackhole-bloom-downsample-" + std::to_string(level),
+                [this, &context, level] {
+                    rhi::ICommandRecorder& commands = *context.commands;
+                    const BloomPushConstants parameters{
+                        1.2F,
+                        level == 0 ? 1U : 0U,
+                    };
+                    commands.pushConstants(
+                        bloomDownsamplePipelineLayout_,
+                        VK_SHADER_STAGE_COMPUTE_BIT,
+                        0,
+                        &parameters,
+                        sizeof(parameters));
+                    const VkExtent2D extent = bloomLevelExtents_[level];
+                    ComputePass dispatch(
+                        {extent.width, extent.height, 8, 8, 1, true});
+                    dispatch.record(
+                        commands,
+                        bloomDownsamplePipeline_,
+                        bloomDownsamplePipelineLayout_,
+                        bloomDownsampleSets_[level]);
+                });
+            graph.use(
+                downsample,
+                level == 0 ? raw : bloomResources[level - 1],
+                RenderGraphUsage::ComputeSampled,
+                false);
+            graph.use(
+                downsample,
+                bloomResources[level],
+                RenderGraphUsage::Storage,
+                true);
+        }
+
+        const auto combineBloom = graph.addPass(
+            "blackhole-bloom-combine",
+            [this, &context] {
+                const VkExtent2D extent = bloomLevelExtents_[0];
+                ComputePass dispatch(
+                    {extent.width, extent.height, 8, 8, 1, true});
+                dispatch.record(
+                    *context.commands,
+                    bloomCompositePipeline_,
+                    bloomCompositePipelineLayout_,
+                    bloomCompositeSet_);
+            });
+        for (const RenderGraph::ResourceId resource : bloomResources) {
+            graph.use(
+                combineBloom,
+                resource,
+                RenderGraphUsage::ComputeSampled,
+                false);
+        }
+        graph.use(
+            combineBloom,
+            compositeBloom,
+            RenderGraphUsage::Storage,
+            true);
+        bloomOutput = compositeBloom;
+    }
+
     const auto temporal = graph.addPass("blackhole-temporal", [this, &context] { recordTemporal(context); });
-    graph.read(temporal, raw);
-    graph.read(temporal, previous);
-    graph.write(temporal, history);
+    graph.use(temporal, raw, RenderGraphUsage::Sampled, false);
+    graph.use(temporal, previous, RenderGraphUsage::Sampled, false);
+    if (computeBloomEnabled_) {
+        graph.use(temporal, bloomOutput, RenderGraphUsage::Sampled, false);
+    }
+    graph.attachment(
+        temporal, history, RenderGraphUsage::ColorAttachment,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     const auto composite = graph.addPass("blackhole-composite", [this, &context] { recordComposite(context); });
-    graph.read(composite, history);
+    graph.use(composite, history, RenderGraphUsage::Sampled, false);
     graph.attachment(composite, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.attachment(composite, resources.depth, RenderGraphUsage::DepthAttachment,
@@ -308,6 +427,9 @@ void BlackholeSceneRenderer::registerPasses(
 void BlackholeSceneRenderer::recordScene(const RenderContext& context) {
     recordShadowClear(context);
     recordTrace(context);
+    if (computeBloomEnabled_) {
+        recordBloom(context);
+    }
     recordTemporal(context);
     recordComposite(context);
 }
@@ -469,8 +591,11 @@ void BlackholeSceneRenderer::appendCaptureManifestFields(
         << "    \"traceSamplesPerPixel\": " << samplesPerPixel_ << ",\n"
         << "    \"maxTraceSteps\": " << maxTraceSteps_ << ",\n"
         << "    \"nearStepScale\": " << nearStepScale_ << ",\n"
-        << "    \"bloom\": {\"mode\": \"single-pass\", "
-        << "\"threshold\": 1.2, \"intensity\": 0.30},\n"
+        << "    \"bloom\": {\"mode\": \""
+        << (computeBloomEnabled_ ? "four-level-compute" : "single-pass")
+        << "\", "
+        << "\"threshold\": 1.2, \"intensity\": 0.30, \"compute\": "
+        << (computeBloomEnabled_ ? "true" : "false") << "},\n"
         << "    \"lensingCorrection\": true,\n"
         << "    \"starfieldBlueShift\": true\n"
         << "  },\n";
@@ -551,7 +676,8 @@ void BlackholeSceneRenderer::createEnvironmentTexture() {
 VkPipeline BlackholeSceneRenderer::createFullscreenPipeline(
     const std::string& fragmentShader,
     const VkPipelineLayout layout,
-    const VkRenderPass renderPass) {
+    const VkRenderPass renderPass,
+    const std::uint32_t colorAttachmentCount) {
     const auto vertexCode =
         azurerender::readBinaryFile(shaderDirectory_ + "/blackhole.vert.spv");
     const auto fragmentCode =
@@ -564,7 +690,7 @@ VkPipeline BlackholeSceneRenderer::createFullscreenPipeline(
     desc.cullMode = VK_CULL_MODE_NONE;
     desc.depthTest = false;
     desc.depthWrite = false;
-    desc.colorAttachmentCount = 1;
+    desc.colorAttachmentCount = colorAttachmentCount;
     desc.renderPass = renderPass;
     desc.layout = layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
@@ -643,6 +769,209 @@ void BlackholeSceneRenderer::createTraceResources(
     historyWriteIndex_ = 0;
 }
 
+void BlackholeSceneRenderer::createBloomResources(
+    const RenderContext& context) {
+    const VkImageUsageFlags usage = VK_IMAGE_USAGE_STORAGE_BIT
+        | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+    VkExtent2D extent{
+        std::max(context.renderExtent.width / 2, 1U),
+        std::max(context.renderExtent.height / 2, 1U),
+    };
+    bloomLevels_.resize(kBloomLevelCount);
+    bloomLevelViews_.resize(kBloomLevelCount, VK_NULL_HANDLE);
+    bloomLevelExtents_.resize(kBloomLevelCount);
+    for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+        bloomLevelExtents_[level] = extent;
+        bloomLevels_[level] = allocator_->createImage2D(
+            extent.width,
+            extent.height,
+            VK_FORMAT_R16G16B16A16_SFLOAT,
+            usage);
+        bloomLevelViews_[level] = rhi_->createImageView(
+            bloomLevels_[level].image,
+            VK_FORMAT_R16G16B16A16_SFLOAT,
+            VK_IMAGE_ASPECT_COLOR_BIT,
+            1);
+        rhi_->transitionImageLayout(
+            bloomLevels_[level],
+            VK_IMAGE_LAYOUT_UNDEFINED,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            1);
+        rhi_->clearImage(bloomLevels_[level]);
+        rhi_->transitionImageLayout(
+            bloomLevels_[level],
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+            1);
+        extent = {
+            std::max(extent.width / 2, 1U),
+            std::max(extent.height / 2, 1U),
+        };
+    }
+
+    bloomCompositeImage_ = allocator_->createImage2D(
+        bloomLevelExtents_[0].width,
+        bloomLevelExtents_[0].height,
+        VK_FORMAT_R16G16B16A16_SFLOAT,
+        usage);
+    bloomCompositeView_ = rhi_->createImageView(
+        bloomCompositeImage_.image,
+        VK_FORMAT_R16G16B16A16_SFLOAT,
+        VK_IMAGE_ASPECT_COLOR_BIT,
+        1);
+    rhi_->transitionImageLayout(
+        bloomCompositeImage_,
+        VK_IMAGE_LAYOUT_UNDEFINED,
+        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        1);
+    rhi_->clearImage(bloomCompositeImage_);
+    rhi_->transitionImageLayout(
+        bloomCompositeImage_,
+        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+        1);
+}
+
+void BlackholeSceneRenderer::createBloomDescriptors() {
+    constexpr VkShaderStageFlags kCompute = VK_SHADER_STAGE_COMPUTE_BIT;
+    if (bloomDownsampleSetLayout_ == VK_NULL_HANDLE) {
+        bloomDownsampleSetLayout_ = rhi_->createDescriptorSetLayout({
+            {0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+            {1, VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1, kCompute},
+        });
+        rhi::DescriptorPoolDesc downsamplePool{};
+        downsamplePool.sizes = {
+            {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+             static_cast<std::uint32_t>(kBloomLevelCount)},
+            {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
+             static_cast<std::uint32_t>(kBloomLevelCount)},
+        };
+        downsamplePool.maxSets = static_cast<std::uint32_t>(kBloomLevelCount);
+        bloomDownsamplePool_ = rhi_->createDescriptorPool(downsamplePool);
+        bloomDownsampleSets_ = rhi_->allocateDescriptorSets(
+            bloomDownsamplePool_,
+            bloomDownsampleSetLayout_,
+            static_cast<std::uint32_t>(kBloomLevelCount));
+
+        bloomCompositeSetLayout_ = rhi_->createDescriptorSetLayout({
+            {0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+            {1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+            {2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+            {3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+            {4, VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1, kCompute},
+        });
+        rhi::DescriptorPoolDesc compositePool{};
+        compositePool.sizes = {
+            {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 4},
+            {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1},
+        };
+        compositePool.maxSets = 1;
+        bloomCompositePool_ = rhi_->createDescriptorPool(compositePool);
+        bloomCompositeSet_ = rhi_->allocateDescriptorSets(
+            bloomCompositePool_, bloomCompositeSetLayout_, 1)[0];
+    }
+
+    for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+        rhi::DescriptorImageWrite source{};
+        source.set = bloomDownsampleSets_[level];
+        source.binding = 0;
+        source.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        source.view = level == 0 ? traceImageView_ : bloomLevelViews_[level - 1];
+        source.sampler = traceSampler_;
+        source.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        rhi_->writeDescriptorImage(source);
+
+        rhi::DescriptorImageWrite destination{};
+        destination.set = bloomDownsampleSets_[level];
+        destination.binding = 1;
+        destination.type = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+        destination.view = bloomLevelViews_[level];
+        destination.layout = VK_IMAGE_LAYOUT_GENERAL;
+        rhi_->writeDescriptorImage(destination);
+    }
+    for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+        rhi::DescriptorImageWrite input{};
+        input.set = bloomCompositeSet_;
+        input.binding = static_cast<std::uint32_t>(level);
+        input.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        input.view = bloomLevelViews_[level];
+        input.sampler = traceSampler_;
+        input.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        rhi_->writeDescriptorImage(input);
+    }
+    rhi::DescriptorImageWrite output{};
+    output.set = bloomCompositeSet_;
+    output.binding = 4;
+    output.type = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+    output.view = bloomCompositeView_;
+    output.layout = VK_IMAGE_LAYOUT_GENERAL;
+    rhi_->writeDescriptorImage(output);
+}
+
+void BlackholeSceneRenderer::createBloomPipelines() {
+    if (bloomDownsamplePipeline_ != VK_NULL_HANDLE) {
+        return;
+    }
+    const auto downsampleCode = azurerender::readBinaryFile(
+        shaderDirectory_ + "/bloom_downsample.comp.spv");
+    const VkShaderModule downsampleShader =
+        rhi_->createShaderModule(downsampleCode);
+    const rhi::PushConstantRangeDesc pushRange{
+        VK_SHADER_STAGE_COMPUTE_BIT,
+        sizeof(BloomPushConstants),
+    };
+    bloomDownsamplePipelineLayout_ = rhi_->createPipelineLayout(
+        bloomDownsampleSetLayout_, &pushRange);
+    bloomDownsamplePipeline_ = rhi_->createComputePipeline(
+        {downsampleShader, bloomDownsamplePipelineLayout_});
+    rhi_->destroyShaderModule(downsampleShader);
+
+    const auto compositeCode = azurerender::readBinaryFile(
+        shaderDirectory_ + "/bloom_composite.comp.spv");
+    const VkShaderModule compositeShader = rhi_->createShaderModule(compositeCode);
+    bloomCompositePipelineLayout_ = rhi_->createPipelineLayout(
+        bloomCompositeSetLayout_, nullptr);
+    bloomCompositePipeline_ = rhi_->createComputePipeline(
+        {compositeShader, bloomCompositePipelineLayout_});
+    rhi_->destroyShaderModule(compositeShader);
+}
+
+void BlackholeSceneRenderer::recordBloom(const RenderContext& context) {
+    rhi::ICommandRecorder& commands = *context.commands;
+    for (std::size_t level = 0; level < kBloomLevelCount; ++level) {
+        commands.bindComputePipeline(bloomDownsamplePipeline_);
+        commands.bindComputeDescriptorSet(
+            bloomDownsamplePipelineLayout_, bloomDownsampleSets_[level]);
+        const BloomPushConstants parameters{
+            1.2F,
+            level == 0 ? 1U : 0U,
+        };
+        commands.pushConstants(
+            bloomDownsamplePipelineLayout_,
+            VK_SHADER_STAGE_COMPUTE_BIT,
+            0,
+            &parameters,
+            sizeof(parameters));
+        const VkExtent2D extent = bloomLevelExtents_[level];
+        ComputePass dispatch({extent.width, extent.height, 8, 8, 1, true});
+        dispatch.record(
+            commands,
+            bloomDownsamplePipeline_,
+            bloomDownsamplePipelineLayout_,
+            bloomDownsampleSets_[level]);
+    }
+    commands.bindComputePipeline(bloomCompositePipeline_);
+    commands.bindComputeDescriptorSet(
+        bloomCompositePipelineLayout_, bloomCompositeSet_);
+    const VkExtent2D extent = bloomLevelExtents_[0];
+    ComputePass dispatch({extent.width, extent.height, 8, 8, 1, true});
+    dispatch.record(
+        commands,
+        bloomCompositePipeline_,
+        bloomCompositePipelineLayout_,
+        bloomCompositeSet_);
+}
+
 void BlackholeSceneRenderer::updateTemporalDescriptorSets() {
     for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
         for (std::size_t writeIndex = 0; writeIndex < 2; ++writeIndex) {
@@ -670,6 +999,16 @@ void BlackholeSceneRenderer::updateTemporalDescriptorSets() {
             previousWrite.sampler = traceSampler_;
             previousWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             rhi_->writeDescriptorImage(previousWrite);
+
+            if (computeBloomEnabled_) {
+                rhi::DescriptorImageWrite bloomWrite{};
+                bloomWrite.set = taaDescriptorSets_[setIndex];
+                bloomWrite.binding = 3;
+                bloomWrite.view = bloomCompositeView_;
+                bloomWrite.sampler = traceSampler_;
+                bloomWrite.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+                rhi_->writeDescriptorImage(bloomWrite);
+            }
         }
     }
     for (std::size_t index = 0; index < compositeDescriptorSets_.size();
@@ -689,7 +1028,9 @@ void BlackholeSceneRenderer::createTaaPipeline(const RenderContext& context) {
     taaPipelineLayout_ =
         rhi_->createPipelineLayout(taaDescriptorSetLayout_, nullptr);
     taaPipeline_ = createFullscreenPipeline(
-        "blackhole_taa.frag",
+        computeBloomEnabled_
+            ? "blackhole_taa_compute.frag"
+            : "blackhole_taa.frag",
         taaPipelineLayout_,
         traceRenderPass_);
 }
@@ -701,10 +1042,27 @@ void BlackholeSceneRenderer::createCompositePipeline(
     compositePipeline_ = createFullscreenPipeline(
         "blackhole_composite.frag",
         compositePipelineLayout_,
-        context.sceneRenderPass);
+        context.sceneRenderPass,
+        2);
 }
 
 void BlackholeSceneRenderer::destroySizeDependentResources() {
+    if (bloomCompositeView_ != VK_NULL_HANDLE) {
+        rhi_->destroyImageView(bloomCompositeView_);
+        bloomCompositeView_ = VK_NULL_HANDLE;
+    }
+    allocator_->destroyImage(bloomCompositeImage_);
+    for (std::size_t index = 0; index < bloomLevelViews_.size(); ++index) {
+        if (bloomLevelViews_[index] != VK_NULL_HANDLE) {
+            rhi_->destroyImageView(bloomLevelViews_[index]);
+            bloomLevelViews_[index] = VK_NULL_HANDLE;
+        }
+        allocator_->destroyImage(bloomLevels_[index]);
+    }
+    bloomLevels_.clear();
+    bloomLevelViews_.clear();
+    bloomLevelExtents_.clear();
+
     if (traceSampler_ != VK_NULL_HANDLE) {
         rhi_->destroySampler(traceSampler_);
         traceSampler_ = VK_NULL_HANDLE;
@@ -775,6 +1133,40 @@ void BlackholeSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     taaUniformBuffers_.clear();
+
+    if (bloomCompositePipeline_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipeline(bloomCompositePipeline_);
+        bloomCompositePipeline_ = VK_NULL_HANDLE;
+    }
+    if (bloomCompositePipelineLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipelineLayout(bloomCompositePipelineLayout_);
+        bloomCompositePipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (bloomDownsamplePipeline_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipeline(bloomDownsamplePipeline_);
+        bloomDownsamplePipeline_ = VK_NULL_HANDLE;
+    }
+    if (bloomDownsamplePipelineLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipelineLayout(bloomDownsamplePipelineLayout_);
+        bloomDownsamplePipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (bloomCompositePool_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorPool(bloomCompositePool_);
+        bloomCompositePool_ = VK_NULL_HANDLE;
+    }
+    if (bloomDownsamplePool_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorPool(bloomDownsamplePool_);
+        bloomDownsamplePool_ = VK_NULL_HANDLE;
+    }
+    if (bloomCompositeSetLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorSetLayout(bloomCompositeSetLayout_);
+        bloomCompositeSetLayout_ = VK_NULL_HANDLE;
+    }
+    if (bloomDownsampleSetLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorSetLayout(bloomDownsampleSetLayout_);
+        bloomDownsampleSetLayout_ = VK_NULL_HANDLE;
+    }
+    bloomDownsampleSets_.clear();
 
     destroySizeDependentResources();
 

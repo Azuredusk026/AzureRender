@@ -2,6 +2,11 @@
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
+    vec4 cameraForward;
+    vec4 clusterGrid;
+    vec4 clusterDepth;
+    vec4 clusterLighting;
+    vec4 cascadeSplits;
     vec4 renderingParameters;
     vec4 showcaseParameters;
     vec4 qaParameters;
@@ -19,7 +24,7 @@ layout(std430, binding = 10) readonly buffer JointData {
 struct InstanceTransforms {
     mat4 model;
     mat4 modelViewProjection;
-    mat4 lightModelViewProjection;
+    mat4 cascadeLightModelViewProjection[4];
     uvec4 meta;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
@@ -38,7 +43,7 @@ layout(location = 0) out vec3 worldNormal;
 layout(location = 1) out vec4 worldTangent;
 layout(location = 2) out vec2 textureCoordinate;
 layout(location = 3) out vec3 worldPosition;
-layout(location = 4) out vec4 shadowPosition;
+layout(location = 4) out vec4 shadowPositions[4];
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -64,6 +69,19 @@ void main() {
             && jointIndices.z >= 112U && jointIndices.z <= 154U)
         || (jointWeights.w > 0.001
             && jointIndices.w >= 112U && jointIndices.w <= 154U));
+#if defined(AZURE_COMPUTE_SKINNING)
+    vec4 skinnedPosition = vec4(position, 1.0);
+    vec3 skinnedNormal = normalize(normal);
+    vec3 skinnedTangent = normalize(tangent.xyz);
+    if (eyebrowVertex) {
+        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
+        float islandCenterY = morph0.y > 1.2617 ? 1.26704 : 1.25846;
+        float islandCenterX = sign(morph0.x) * 0.0365;
+        skinnedPosition.y += sign(morph0.y - islandCenterY) * browThickness;
+        skinnedPosition.x += sign(morph0.x - islandCenterX)
+            * browThickness * 0.45;
+    }
+#else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
@@ -84,6 +102,9 @@ void main() {
             * browThickness * 0.45;
     }
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
+    vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+#endif
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     if (browOverlay) {
         vec3 initialWorldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
@@ -96,9 +117,8 @@ void main() {
         gizmoPosition.xyz += localViewDirection
             * morphWeights.featureParameters.x;
     }
-    vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
-    vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * tangent.xyz);
+    vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * skinnedTangent);
     gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
     gl_Position.xy *= 1.6;
     worldNormal = normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoNormal);
@@ -107,5 +127,9 @@ void main() {
         tangent.w);
     textureCoordinate = texcoord;
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
-    shadowPosition = instanceData.instances[gl_InstanceIndex].lightModelViewProjection * gizmoPosition;
+    for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {
+        shadowPositions[cascadeIndex] =
+            instanceData.instances[gl_InstanceIndex]
+                .cascadeLightModelViewProjection[cascadeIndex] * gizmoPosition;
+    }
 }

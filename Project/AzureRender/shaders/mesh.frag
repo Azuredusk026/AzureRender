@@ -6,6 +6,11 @@
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
+    vec4 cameraForward;
+    vec4 clusterGrid;
+    vec4 clusterDepth;
+    vec4 clusterLighting;
+    vec4 cascadeSplits;
     vec4 renderingParameters;
     vec4 showcaseParameters;
     vec4 qaParameters;
@@ -31,6 +36,20 @@ layout(binding = 9) uniform sampler2D shadowMap;
 layout(binding = 11) uniform sampler2D toonRampTexture;
 layout(binding = 12) uniform sampler2D faceSdfTexture;
 #endif
+
+struct ClusterLight {
+    vec4 positionRadius;
+    vec4 colorIntensity;
+};
+layout(std430, binding = 14) readonly buffer SceneLightBuffer {
+    ClusterLight lights[];
+} sceneLightData;
+layout(std430, binding = 15) readonly buffer ClusterHeaderBuffer {
+    uvec2 clusters[];
+} clusterHeaderData;
+layout(std430, binding = 16) readonly buffer ClusterIndexBuffer {
+    uint indices[];
+} clusterIndexData;
 
 layout(push_constant) uniform MaterialData {
     float alphaCutoff;
@@ -85,7 +104,7 @@ layout(location = 0) in vec3 worldNormal;
 layout(location = 1) in vec4 worldTangent;
 layout(location = 2) in vec2 textureCoordinate;
 layout(location = 3) in vec3 worldPosition;
-layout(location = 4) in vec4 shadowPosition;
+layout(location = 4) in vec4 shadowPositions[4];
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -136,14 +155,23 @@ vec3 sampleToonRamp(float coordinate) {
     return texture(AZ_TEX_TOON_RAMP, uv).rgb;
 }
 
-float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
+float sampleShadowMap(float normalDotLight) {
+    float viewDepth = dot(
+        worldPosition - camera.cameraPosition.xyz,
+        camera.cameraForward.xyz);
+    int cascadeIndex = viewDepth <= camera.cascadeSplits.x ? 0
+        : (viewDepth <= camera.cascadeSplits.y ? 1
+            : (viewDepth <= camera.cascadeSplits.z ? 2 : 3));
+    vec4 lightClipPosition = shadowPositions[cascadeIndex];
     vec3 projected = lightClipPosition.xyz / lightClipPosition.w;
-    vec2 shadowUv = projected.xy * 0.5 + 0.5;
+    vec2 localShadowUv = projected.xy * 0.5 + 0.5;
     if (projected.z <= 0.0 || projected.z >= 1.0
-        || any(lessThan(shadowUv, vec2(0.0)))
-        || any(greaterThan(shadowUv, vec2(1.0)))) {
+        || any(lessThan(localShadowUv, vec2(0.0)))
+        || any(greaterThan(localShadowUv, vec2(1.0)))) {
         return 1.0;
     }
+    vec2 atlasTile = vec2(float(cascadeIndex % 2), float(cascadeIndex / 2));
+    vec2 shadowUv = atlasTile * 0.5 + localShadowUv * 0.5;
 
     const vec2 poissonDisk[16] = vec2[16](
         vec2(-0.94201624, -0.39906216),
@@ -164,9 +192,12 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
         vec2( 0.14383161, -0.14100790));
 
     vec2 texelSize = 1.0 / vec2(textureSize(AZ_TEX_SHADOW, 0));
+    float maximumRadius = clamp(camera.renderingParameters.w, 1.0, 16.0);
+    vec2 tileMargin = texelSize * (maximumRadius + 1.0);
+    vec2 tileMinimum = atlasTile * 0.5 + tileMargin;
+    vec2 tileMaximum = (atlasTile + vec2(1.0)) * 0.5 - tileMargin;
     float bias = max(0.0011 * (1.0 - normalDotLight), 0.00025);
     float receiverDepth = projected.z - bias;
-    float maximumRadius = clamp(camera.renderingParameters.w, 1.0, 16.0);
 
     // PCSS blocker search. The directional area-light penumbra grows with
     // receiver/blocker separation while remaining bounded in shadow texels.
@@ -174,8 +205,11 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
     float blockerCount = 0.0;
     float searchRadius = max(2.0, maximumRadius * 0.55);
     for (int sampleIndex = 0; sampleIndex < 12; ++sampleIndex) {
-        float storedDepth = texture(AZ_TEX_SHADOW,
-            shadowUv + poissonDisk[sampleIndex] * texelSize * searchRadius).r;
+        vec2 sampleUv = clamp(
+            shadowUv + poissonDisk[sampleIndex] * texelSize * searchRadius,
+            tileMinimum,
+            tileMaximum);
+        float storedDepth = texture(AZ_TEX_SHADOW, sampleUv).r;
         if (storedDepth < receiverDepth) {
             blockerDepthSum += storedDepth;
             blockerCount += 1.0;
@@ -193,8 +227,11 @@ float sampleShadowMap(vec4 lightClipPosition, float normalDotLight) {
         maximumRadius);
     float visibility = 0.0;
     for (int sampleIndex = 0; sampleIndex < 16; ++sampleIndex) {
-        float storedDepth = texture(AZ_TEX_SHADOW,
-            shadowUv + poissonDisk[sampleIndex] * texelSize * filterRadius).r;
+        vec2 sampleUv = clamp(
+            shadowUv + poissonDisk[sampleIndex] * texelSize * filterRadius,
+            tileMinimum,
+            tileMaximum);
+        float storedDepth = texture(AZ_TEX_SHADOW, sampleUv).r;
         visibility += receiverDepth <= storedDepth ? 1.0 : 0.0;
     }
     return visibility / 16.0;
@@ -313,7 +350,7 @@ void main() {
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
-    float shadowVisibility = sampleShadowMap(shadowPosition, diffuse);
+    float shadowVisibility = sampleShadowMap(diffuse);
     int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
     bool qaEffectDisabled = camera.qaParameters.z < 0.5;
     if (qaEffectMode == 2 && qaEffectDisabled) {
@@ -349,8 +386,10 @@ void main() {
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     vec3 diffuseColor = baseColor.rgb * (1.0 - metallic);
-    vec3 environmentDiffuse = texture(AZ_TEX_ENVIRONMENT,
-        directionToEquirectangular(shadedNormal)).rgb;
+    vec3 environmentDiffuse = textureLod(
+        AZ_TEX_ENVIRONMENT,
+        directionToEquirectangular(shadedNormal),
+        6.0).rgb;
     // Prefiltered specular: sample the HDR environment mip chain by
     // roughness (mip 0 is the sharp sun, higher mips are prefiltered).
     float envMipCount = 7.0;
@@ -454,6 +493,52 @@ void main() {
                 * keyVisibility
             + fillDiffuse * camera.showcaseParameters.z * fillColor);
     directDiffuse *= mix(1.0, 0.72, hairActive);
+    uint gridX = max(uint(camera.clusterGrid.x), 1U);
+    uint gridY = max(uint(camera.clusterGrid.y), 1U);
+    uint gridZ = max(uint(camera.clusterGrid.z), 1U);
+    vec2 screenUv = gl_FragCoord.xy / max(camera.clusterDepth.zw, vec2(1.0));
+    uint clusterX = min(uint(clamp(screenUv.x, 0.0, 0.999999) * float(gridX)), gridX - 1U);
+    uint clusterY = min(uint(clamp(screenUv.y, 0.0, 0.999999) * float(gridY)), gridY - 1U);
+    float nearDepth = max(camera.clusterDepth.x, 0.001);
+    float farDepth = max(camera.clusterDepth.y, nearDepth + 0.001);
+    float viewDepth = max(
+        dot(worldPosition - camera.cameraPosition.xyz, camera.cameraForward.xyz),
+        nearDepth);
+    float logarithmicDepth = log(viewDepth / nearDepth)
+        / log(farDepth / nearDepth);
+    uint clusterZ = min(
+        uint(clamp(logarithmicDepth, 0.0, 0.999999) * float(gridZ)),
+        gridZ - 1U);
+    uint clusterIndex = (clusterZ * gridY + clusterY) * gridX + clusterX;
+    uvec2 lightRange = clusterHeaderData.clusters[clusterIndex];
+    vec3 clusteredDiffuse = vec3(0.0);
+    vec3 clusteredSpecular = vec3(0.0);
+    uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
+    for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
+        uint lightIndex = clusterIndexData.indices[lightRange.x + lightOffset];
+        if (lightIndex >= sceneLightCount) {
+            continue;
+        }
+        ClusterLight light = sceneLightData.lights[lightIndex];
+        vec3 toLight = light.positionRadius.xyz - worldPosition;
+        float distanceSquared = dot(toLight, toLight);
+        float distanceToLight = sqrt(distanceSquared);
+        float lightRadius = max(light.positionRadius.w, 0.001);
+        float rangeFalloff = clamp(1.0 - distanceToLight / lightRadius, 0.0, 1.0);
+        float attenuation = rangeFalloff * rangeFalloff
+            / (1.0 + distanceSquared * 0.12);
+        vec3 pointDirection = toLight / max(distanceToLight, 0.001);
+        float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
+        vec3 radiance = light.colorIntensity.rgb
+            * light.colorIntensity.w * attenuation;
+        clusteredDiffuse += diffuseColor * radiance * pointDiffuse * diffuseScale;
+        vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
+        float pointSpecular = pow(
+            max(dot(shadedNormal, pointHalfDirection), 0.0), specularPower);
+        clusteredSpecular += f0 * radiance * pointSpecular * pointDiffuse
+            * mix(0.7, 0.12, roughness);
+    }
+    directDiffuse += clusteredDiffuse * mix(1.0, 0.72, hairActive);
     float shadowRegion = 1.0 - smoothstep(0.38, 0.66, rampLuminance);
     float shadowSystemWeight = clamp(
         bandEnabled * material.styleParameters.x,
@@ -529,6 +614,7 @@ void main() {
     vec3 directSpecular =
         f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
         * keyVisibility * material.styleParameters.z;
+    directSpecular += clusteredSpecular * material.styleParameters.z;
     ambientSpecular *= material.styleParameters.z;
     float dielectricSpecularWeight = material.materialClass == 1U
         ? 0.05

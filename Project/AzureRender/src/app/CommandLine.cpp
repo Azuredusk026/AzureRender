@@ -1,6 +1,9 @@
 #include "CommandLine.hpp"
 
 #include <charconv>
+#include <cerrno>
+#include <cmath>
+#include <cstdlib>
 #include <cstdint>
 #include <initializer_list>
 #include <limits>
@@ -24,6 +27,7 @@ constexpr const char* kUsage =
     "[--no-stylized] [--no-inner-outline] [--hud] "
     "[--technical-sequence] "
     "[--qa-camera <preset>] [--qa-light <preset>] "
+    "[--qa-morph-weights <w0> <w1>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
     "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
@@ -47,12 +51,14 @@ constexpr const char* kHelp =
     "  --gpu-timing-output <json>          GPU pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --qa-morph-weights <w0> <w1>      Set Morph target weights\n"
     "  --blackhole-quality performance|balanced|cinematic\n"
     "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
     "  --diagnostic-view beauty|normal|outline|shadow\n"
     "  --hud --no-stylized --no-inner-outline\n"
     "  --disable-bindless                Force legacy per-material descriptors\n"
     "  --disable-culling                 Submit all instances without culling\n"
+    "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
     "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
@@ -118,6 +124,22 @@ std::uint32_t parseUint32(
             option + " is outside the supported range");
     }
     return static_cast<std::uint32_t>(parsed);
+}
+
+float parseFiniteFloat(
+    const std::string& value,
+    const std::string& option) {
+    char* end = nullptr;
+    errno = 0;
+    const float parsed = std::strtof(value.c_str(), &end);
+    if (value.empty() || errno == ERANGE
+        || end != value.c_str() + value.size() || !std::isfinite(parsed)) {
+        fail(
+            CommandLineErrorCode::InvalidValue,
+            option,
+            option + " requires a finite number");
+    }
+    return parsed;
 }
 
 void validate(const ParsedCommandLine& parsed) {
@@ -202,7 +224,9 @@ void validate(const ParsedCommandLine& parsed) {
         || !options.qaLight.empty()
         || !options.qaEffect.empty()
         || !options.qaEffectState.empty()
-        || !options.qaIsolation.empty();
+        || !options.qaIsolation.empty()
+        || options.renderSettings.morphWeights[0] != 0.0F
+        || options.renderSettings.morphWeights[1] != 0.0F;
     if (qaRequested && options.technicalSequence) {
         fail(
             CommandLineErrorCode::InvalidCombination,
@@ -308,6 +332,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.bindlessDisabled = true;
         } else if (argument == "--disable-culling") {
             parsed.options.cullingDisabled = true;
+        } else if (argument == "--disable-compute-skinning") {
+            parsed.options.computeSkinningDisabled = true;
         } else if (argument == "--instances") {
             parsed.options.instanceCount = parseUint32(
                 requireValue(arguments, index, argument), argument);
@@ -348,6 +374,11 @@ ParsedCommandLine parseCommandLine(
             parsed.options.technicalSequence = true;
             parsed.options.portfolioMode = true;
             parsed.options.gpuTimingEnabled = true;
+        } else if (argument == "--qa-morph-weights") {
+            parsed.options.renderSettings.morphWeights[0] = parseFiniteFloat(
+                requireValue(arguments, index, argument), argument);
+            parsed.options.renderSettings.morphWeights[1] = parseFiniteFloat(
+                requireValue(arguments, index, argument), argument);
         } else if (argument == "--qa-camera") {
             parsed.options.qaCamera = requireValue(arguments, index, argument);
         } else if (argument == "--qa-light") {

@@ -65,6 +65,13 @@ private:
         float renderWidth = 1280.0F;
     };
 
+    struct BloomPushConstants {
+        float threshold = 1.2F;
+        std::uint32_t extractBright = 0;
+    };
+    static_assert(sizeof(BloomPushConstants) == 8);
+    static constexpr std::size_t kBloomLevelCount = 4;
+
     // Engine-owned allocator borrowed for the renderer's lifetime.
     rhi::IGpuAllocator* allocator_ = nullptr;
     // Resource creation and recording backend borrowed for the lifetime.
@@ -72,6 +79,7 @@ private:
     std::string shaderDirectory_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
+    bool computeBloomEnabled_ = false;
 
     struct GpuEnvironment {
         rhi::GpuImage image;
@@ -111,6 +119,24 @@ private:
     VkPipeline taaPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> taaUniformBuffers_;
 
+    // Compute bloom pyramid: four downsample levels plus a half-resolution
+    // composite image sampled by the temporal accumulation fragment pass.
+    std::vector<rhi::GpuImage> bloomLevels_;
+    std::vector<VkImageView> bloomLevelViews_;
+    std::vector<VkExtent2D> bloomLevelExtents_;
+    rhi::GpuImage bloomCompositeImage_;
+    VkImageView bloomCompositeView_ = VK_NULL_HANDLE;
+    VkDescriptorSetLayout bloomDownsampleSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool bloomDownsamplePool_ = VK_NULL_HANDLE;
+    std::vector<VkDescriptorSet> bloomDownsampleSets_;
+    VkPipelineLayout bloomDownsamplePipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline bloomDownsamplePipeline_ = VK_NULL_HANDLE;
+    VkDescriptorSetLayout bloomCompositeSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool bloomCompositePool_ = VK_NULL_HANDLE;
+    VkDescriptorSet bloomCompositeSet_ = VK_NULL_HANDLE;
+    VkPipelineLayout bloomCompositePipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline bloomCompositePipeline_ = VK_NULL_HANDLE;
+
     // Final copy from accumulated history into engine Scene Color.
     VkDescriptorSetLayout compositeDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool compositeDescriptorPool_ = VK_NULL_HANDLE;
@@ -136,6 +162,10 @@ private:
     void createUniformBuffers();
     void createEnvironmentTexture();
     void createTraceResources(const RenderContext& context);
+    void createBloomResources(const RenderContext& context);
+    void createBloomDescriptors();
+    void createBloomPipelines();
+    void recordBloom(const RenderContext& context);
     void transitionInitialLayouts();
     void updateTemporalDescriptorSets();
     void createTaaPipeline(const RenderContext& context);
@@ -150,7 +180,8 @@ private:
     VkPipeline createFullscreenPipeline(
         const std::string& fragmentShader,
         VkPipelineLayout layout,
-        VkRenderPass renderPass);
+        VkRenderPass renderPass,
+        std::uint32_t colorAttachmentCount = 1);
 };
 
 }  // namespace azurerender

@@ -230,8 +230,23 @@ bool RenderGraph::compile(std::string& error) {
             state.access = VK_ACCESS_SHADER_READ_BIT;
             state.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             break;
+        case RenderGraphUsage::ComputeSampled:
+            state.stage = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            state.access = VK_ACCESS_SHADER_READ_BIT;
+            state.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            break;
         case RenderGraphUsage::Storage:
             state.stage = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            state.access = write ? VK_ACCESS_SHADER_WRITE_BIT : VK_ACCESS_SHADER_READ_BIT;
+            state.layout = VK_IMAGE_LAYOUT_GENERAL;
+            break;
+        case RenderGraphUsage::VertexStorage:
+            state.stage = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;
+            state.access = write ? VK_ACCESS_SHADER_WRITE_BIT : VK_ACCESS_SHADER_READ_BIT;
+            state.layout = VK_IMAGE_LAYOUT_GENERAL;
+            break;
+        case RenderGraphUsage::FragmentStorage:
+            state.stage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
             state.access = write ? VK_ACCESS_SHADER_WRITE_BIT : VK_ACCESS_SHADER_READ_BIT;
             state.layout = VK_IMAGE_LAYOUT_GENERAL;
             break;
@@ -246,7 +261,8 @@ bool RenderGraph::compile(std::string& error) {
                 states[use.resource] = next;
                 continue;
             }
-            if (use.usage == RenderGraphUsage::Sampled
+            if ((use.usage == RenderGraphUsage::Sampled
+                    || use.usage == RenderGraphUsage::ComputeSampled)
                 && (resources_[use.resource].initial.aspectMask & VK_IMAGE_ASPECT_DEPTH_BIT))
                 next.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             const ResourceState previous = states[use.resource];

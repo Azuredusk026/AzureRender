@@ -1,0 +1,65 @@
+#version 450
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) uniform sampler2D environmentMap;
+layout(set = 0, binding = 1, rgba16f) writeonly uniform image2D filteredMip;
+
+layout(push_constant) uniform PrefilterParameters {
+    float roughness;
+    uint sampleCount;
+} parameters;
+
+const float pi = 3.14159265358979323846;
+const float goldenAngle = 2.39996322972865332;
+
+vec3 equirectangularDirection(vec2 uv) {
+    float phi = (uv.x - 0.5) * (2.0 * pi);
+    float theta = uv.y * pi;
+    float sinTheta = sin(theta);
+    return normalize(vec3(cos(phi) * sinTheta, cos(theta), sin(phi) * sinTheta));
+}
+
+vec2 directionToEquirectangular(vec3 direction) {
+    vec3 d = normalize(direction);
+    return vec2(
+        atan(d.z, d.x) / (2.0 * pi) + 0.5,
+        acos(clamp(d.y, -1.0, 1.0)) / pi);
+}
+
+void main() {
+    ivec2 size = imageSize(filteredMip);
+    ivec2 pixel = ivec2(gl_GlobalInvocationID.xy);
+    if (any(greaterThanEqual(pixel, size))) {
+        return;
+    }
+
+    vec2 uv = (vec2(pixel) + vec2(0.5)) / vec2(size);
+    vec3 normal = equirectangularDirection(uv);
+    vec3 up = abs(normal.y) > 0.98 ? vec3(1.0, 0.0, 0.0) : vec3(0.0, 1.0, 0.0);
+    vec3 tangent = normalize(cross(up, normal));
+    vec3 bitangent = cross(normal, tangent);
+    float alpha = max(parameters.roughness * parameters.roughness, 0.001);
+    vec3 sum = vec3(0.0);
+    float totalWeight = 0.0;
+    uint count = max(parameters.sampleCount, 1u);
+    for (uint index = 0u; index < count; ++index) {
+        float xi = (float(index) + 0.5) / float(count);
+        float phi = goldenAngle * float(index);
+        float cosTheta = sqrt((1.0 - xi) / (1.0 + (alpha * alpha - 1.0) * xi));
+        float sinTheta = sqrt(max(1.0 - cosTheta * cosTheta, 0.0));
+        vec3 localDirection = vec3(cos(phi) * sinTheta, sin(phi) * sinTheta, cosTheta);
+        vec3 sampleDirection = normalize(
+            tangent * localDirection.x
+            + bitangent * localDirection.y
+            + normal * localDirection.z);
+        float weight = max(dot(normal, sampleDirection), 0.0);
+        sum += textureLod(
+            environmentMap,
+            directionToEquirectangular(sampleDirection),
+            0.0).rgb * weight;
+        totalWeight += weight;
+    }
+    vec3 filtered = totalWeight > 0.0 ? sum / totalWeight : vec3(0.0);
+    imageStore(filteredMip, pixel, vec4(filtered, 1.0));
+}

@@ -31,12 +31,23 @@ struct SceneNodeDesc {
     bool visible = true;
 };
 
+struct SceneLightDesc {
+    std::string id;
+    std::string nodeId;
+    std::array<float, 3> position{0.0F, 0.0F, 0.0F};
+    std::array<float, 3> color{1.0F, 1.0F, 1.0F};
+    float intensity = 1.0F;
+    float radius = 5.0F;
+    bool enabled = true;
+};
+
 // Engine-provided scene content for renderers. Replaces the single-asset
 // assumption: a scene is a set of assets and placed nodes, and renderers
 // build instances from it.
 struct SceneDescription {
     std::vector<SceneResourceDesc> resources;
     std::vector<SceneNodeDesc> nodes;
+    std::vector<SceneLightDesc> lights;
 };
 
 // Resolves editor node links into deterministic world transforms. The

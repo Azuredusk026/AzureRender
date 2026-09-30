@@ -43,6 +43,14 @@ commands->bindDescriptorSet(layout, descriptorSet);
 commands->dispatch((width + 7) / 8, (height + 7) / 8, 1);
 ```
 
+## 已接入的 GPU Pass
+
+Blackhole 使用四级亮部金字塔。第一级从 Trace 图提取超过阈值的 HDR 亮部，后续级逐级降采样，合成 Pass 把各级结果写入半分辨率图像，再由 TAA/历史累积 Pass 采样。Render Graph 按级声明 Compute 采样与存储写入，并在 TAA 采样前转换状态。
+
+Character 环境图的粗糙度 Mip 由 `ibl_prefilter.comp` 生成。Compute 对方向采样环境并按粗糙度扩散，顶层用于漫反射环境照明，其余层用于镜面反射。每次创建环境资源时执行初始化计算。
+
+Character 的 `skin.comp` 对每个顶点混合 Morph 目标、读取关节矩阵并写出逐帧顶点缓冲。阴影、轮廓和主材质 Pass 共用该输出。设备能力或运行参数禁用 Compute 时，顶点着色器执行对应蒙皮与 Morph 运算。公共验证网格带有一个线性关节动画和一个位置 Morph 目标；`AzureRender.CharacterMorphComputeGpu` 比较动画末帧的 Compute 与顶点回退捕获。
+
 ## 诊断与排错
 
 NullRHI 中检查工作组尺寸是否符合 Pass 预期。Vulkan 验证层报告资源访问错误时，检查计算 Pass 前后的 Render Graph 状态和屏障。

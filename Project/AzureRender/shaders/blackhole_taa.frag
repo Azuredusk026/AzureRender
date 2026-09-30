@@ -15,6 +15,9 @@ layout(binding = 0) uniform TaaUniform {
 
 layout(binding = 1) uniform sampler2D currentFrame;
 layout(binding = 2) uniform sampler2D previousFrame;
+#if defined(AZURE_COMPUTE_BLOOM)
+layout(binding = 3) uniform sampler2D computedBloom;
+#endif
 
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
@@ -43,7 +46,11 @@ void main() {
         neighborhoodMax);
     vec3 color = mix(previous, current, clamp(ubo.blendWeight, 0.0, 1.0));
 
-    // Single-pass gaussian bloom: three rings around the bright core.
+#if defined(AZURE_COMPUTE_BLOOM)
+    color += texture(computedBloom, screenUv).rgb
+        * max(ubo.bloomIntensity, 0.0);
+#else
+    // Legacy bloom fallback for devices without RGBA16F storage-image support.
     const float threshold = max(ubo.bloomThreshold, 0.0);
     vec3 bloom = vec3(0.0);
     // Ring 1 (tight, 1.5 px)
@@ -68,5 +75,6 @@ void main() {
     bloom += max(texture(currentFrame, screenUv - w2).rgb - threshold, vec3(0.0)) * 0.12;
 
     color += bloom * max(ubo.bloomIntensity, 0.0);
+#endif
     outputColor = vec4(color, 1.0);
 }

@@ -5,6 +5,7 @@
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <functional>
 #include <stdexcept>
 #include <vector>
 
@@ -52,6 +53,7 @@ struct DescriptorPoolDesc {
 struct DescriptorImageWrite {
     VkDescriptorSet set = VK_NULL_HANDLE;
     std::uint32_t binding = 0;
+    VkDescriptorType type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
     VkImageView view = VK_NULL_HANDLE;
     VkSampler sampler = VK_NULL_HANDLE;
     VkImageLayout layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
@@ -181,8 +183,10 @@ public:
 
     virtual void beginRenderPass(const RenderPassBeginDesc& desc) = 0;
     virtual void endRenderPass() = 0;
-    virtual void setViewport(float width, float height) = 0;
-    virtual void setScissor(VkExtent2D extent) = 0;
+    virtual void setViewport(
+        float width, float height, float x = 0.0F, float y = 0.0F) = 0;
+    virtual void setScissor(
+        VkExtent2D extent, VkOffset2D offset = {}) = 0;
 
     virtual void bindComputePipeline(VkPipeline pipeline) = 0;
     virtual void bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) = 0;
@@ -262,10 +266,13 @@ public:
         VkImage image,
         VkFormat format,
         VkImageAspectFlags aspect,
-        std::uint32_t mipLevels) = 0;
+        std::uint32_t mipLevels,
+        std::uint32_t baseMipLevel = 0) = 0;
     virtual void destroyImageView(VkImageView view) = 0;
     virtual VkSampler createSampler(const SamplerDesc& desc) = 0;
     virtual void destroySampler(VkSampler sampler) = 0;
+    virtual void executeOneShot(
+        const std::function<void(ICommandRecorder&)>& record) = 0;
 
     virtual VkShaderModule createShaderModule(
         const std::vector<char>& code) = 0;

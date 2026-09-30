@@ -155,6 +155,9 @@ GpuImage GpuAllocator::createImage(
             &result.allocation,
             &info),
         "vmaCreateImage");
+    result.width = createInfo.extent.width;
+    result.height = createInfo.extent.height;
+    result.mipLevels = createInfo.mipLevels;
 
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;

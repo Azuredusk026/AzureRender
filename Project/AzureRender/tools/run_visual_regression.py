@@ -17,9 +17,11 @@ entry directly.
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -29,6 +31,75 @@ from PIL import Image
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CASES = Path(__file__).resolve().parent / "visual_regression_cases.json"
 DEFAULT_BASELINE_DIR = PROJECT_ROOT / "assets_public" / "baselines" / "character"
+
+
+def run_renderer(command: list[str]) -> subprocess.CompletedProcess:
+    if os.name != "nt":
+        return subprocess.run(
+            command,
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+        )
+
+    with tempfile.TemporaryDirectory(prefix="azurerender-visual-") as directory:
+        working_dir = Path(directory)
+        launcher = working_dir / "run_minimized.ps1"
+        standard_output = working_dir / "stdout.log"
+        standard_error = working_dir / "stderr.log"
+        launcher.write_text(
+            "param(\n"
+            "    [Parameter(Mandatory = $true)][string]$Executable,\n"
+            "    [Parameter(Mandatory = $true)][string]$Arguments,\n"
+            "    [Parameter(Mandatory = $true)][string]$StandardOutput,\n"
+            "    [Parameter(Mandatory = $true)][string]$StandardError\n"
+            ")\n"
+            "$process = Start-Process -FilePath $Executable -ArgumentList $Arguments `\n"
+            "    -WindowStyle Minimized -Wait -PassThru `\n"
+            "    -RedirectStandardOutput $StandardOutput `\n"
+            "    -RedirectStandardError $StandardError\n"
+            "exit $process.ExitCode\n",
+            encoding="utf-8",
+        )
+        launcher_result = subprocess.run(
+            [
+                "powershell.exe",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(launcher),
+                "-Executable",
+                command[0],
+                "-Arguments",
+                subprocess.list2cmdline(command[1:]),
+                "-StandardOutput",
+                str(standard_output),
+                "-StandardError",
+                str(standard_error),
+            ],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+        )
+        stdout = (
+            standard_output.read_text(encoding="utf-8", errors="replace")
+            if standard_output.is_file()
+            else ""
+        )
+        stderr = (
+            standard_error.read_text(encoding="utf-8", errors="replace")
+            if standard_error.is_file()
+            else ""
+        )
+        if launcher_result.returncode != 0 and not stderr:
+            stderr = launcher_result.stderr.strip() or launcher_result.stdout.strip()
+        return subprocess.CompletedProcess(
+            command,
+            launcher_result.returncode,
+            stdout,
+            stderr,
+        )
 
 
 def sha256_of(path: Path) -> str:
@@ -60,12 +131,7 @@ def render_case(
         "--capture-fps", str(defaults["captureFps"]),
         *extra_args,
     ]
-    completed = subprocess.run(
-        command,
-        cwd=PROJECT_ROOT,
-        capture_output=True,
-        text=True,
-    )
+    completed = run_renderer(command)
     if completed.returncode != 0:
         raise RuntimeError(
             f"render failed for {case['name']} (exit {completed.returncode}): "

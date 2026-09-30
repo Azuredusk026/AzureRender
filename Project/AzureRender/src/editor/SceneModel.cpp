@@ -59,6 +59,15 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << "prefab " << std::quoted(node.prefabSource) << ' '
                << std::quoted(node.instanceOf) << '\n';
     }
+    output << "lightCount " << document.lights.size() << '\n';
+    for (const SceneLight& light : document.lights) {
+        output << "light " << std::quoted(light.id) << ' '
+               << std::quoted(light.nodeId) << ' '
+               << light.color[0] << ' ' << light.color[1] << ' '
+               << light.color[2] << ' ' << light.intensity << ' '
+               << light.radius << ' ' << std::boolalpha << light.enabled
+               << '\n';
+    }
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
@@ -166,6 +175,29 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             }
         }
         document.nodes.push_back(std::move(node));
+    }
+    if (schemaVersion >= 3) {
+        std::size_t lightCount = 0;
+        if (!(input >> key >> lightCount) || key != "lightCount") {
+            throw std::runtime_error("Missing .azscene lightCount");
+        }
+        document.lights.reserve(lightCount);
+        for (std::size_t index = 0; index < lightCount; ++index) {
+            SceneLight light;
+            if (!(input >> key >> std::quoted(light.id)
+                  >> std::quoted(light.nodeId)
+                  >> light.color[0] >> light.color[1] >> light.color[2]
+                  >> light.intensity >> light.radius >> std::boolalpha
+                  >> light.enabled)
+                || key != "light") {
+                throw std::runtime_error("Invalid .azscene light");
+            }
+            if (light.id.empty() || light.nodeId.empty()
+                || !(light.radius > 0.0F) || !(light.intensity >= 0.0F)) {
+                throw std::runtime_error("Invalid .azscene light values");
+            }
+            document.lights.push_back(std::move(light));
+        }
     }
     if (!(input >> key >> document.renderSettings.showcasePreset)
         || key != "showcasePreset") {

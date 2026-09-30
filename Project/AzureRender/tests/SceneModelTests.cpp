@@ -41,13 +41,31 @@ std::size_t countTemporaryFiles(const std::filesystem::path& directory) {
 bool loadedDocumentMatches(const std::filesystem::path& path,
                            const azurerender::SceneDocument& expected) {
     const auto loaded = azurerender::SceneDocument::load(path);
-    return loaded.sceneId == expected.sceneId
-        && loaded.resources.size() == expected.resources.size()
-        && loaded.nodes.size() == expected.nodes.size()
-        && loaded.renderSettings.showcasePreset
-            == expected.renderSettings.showcasePreset
-        && loaded.renderSettings.shadow.maximumFilterRadiusTexels
-            == expected.renderSettings.shadow.maximumFilterRadiusTexels;
+    if (loaded.sceneId != expected.sceneId) {
+        return false;
+    }
+    if (loaded.resources.size() != expected.resources.size()
+        || loaded.nodes.size() != expected.nodes.size()
+        || loaded.lights.size() != expected.lights.size()
+        || loaded.renderSettings.showcasePreset
+            != expected.renderSettings.showcasePreset
+        || loaded.renderSettings.shadow.maximumFilterRadiusTexels
+            != expected.renderSettings.shadow.maximumFilterRadiusTexels) {
+        return false;
+    }
+    for (std::size_t index = 0; index < expected.lights.size(); ++index) {
+        const azurerender::SceneLight& loadedLight = loaded.lights[index];
+        const azurerender::SceneLight& expectedLight = expected.lights[index];
+        if (loadedLight.id != expectedLight.id
+            || loadedLight.nodeId != expectedLight.nodeId
+            || loadedLight.color != expectedLight.color
+            || loadedLight.intensity != expectedLight.intensity
+            || loadedLight.radius != expectedLight.radius
+            || loadedLight.enabled != expectedLight.enabled) {
+            return false;
+        }
+    }
+    return true;
 }
 
 }  // namespace
@@ -94,6 +112,8 @@ int main() {
         const auto scenePath = directory / "scene.azscene";
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.sceneId = "atomic-save-test";
+        document.lights.push_back({
+            "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
         document.save(scenePath);
         {
             std::ifstream saved(scenePath);
@@ -102,6 +122,8 @@ int main() {
                 std::istreambuf_iterator<char>());
             assert(contents.find("renderSettingsVersion 7")
                 != std::string::npos);
+            assert(contents.find("schemaVersion 3") != std::string::npos);
+            assert(contents.find("lightCount 1") != std::string::npos);
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
         }
@@ -333,7 +355,38 @@ int main() {
         const auto loaded = azurerender::SceneDocument::load(scenePath);
         assert(loaded.renderSettings.sceneType
             == azurerender::SceneType::Character);
+        assert(loaded.lights.empty());
         assert(countTemporaryFiles(directory) == 0);
+        std::filesystem::remove_all(directory);
+    }
+
+    {
+        const auto directory = uniqueDirectory();
+        const auto scenePath = directory / "legacy-v2.azscene";
+        {
+            std::ofstream legacy(scenePath);
+            legacy << "AzureRender Scene v1\n"
+                   << "schemaVersion 2\n"
+                   << "renderSettingsVersion 7\n"
+                   << "sceneId \"legacy-v2\"\n"
+                   << "resourceCount 0\n"
+                   << "nodeCount 0\n"
+                   << "showcasePreset 0\n"
+                   << "styleMaskStrength 1\n"
+                   << "diffuseBandThreshold 0.4\n"
+                   << "shadowMaximumFilterRadiusTexels 8\n"
+                   << "innerOutlineEnabled true\n"
+                   << "outlineStrength 0.4\n"
+                   << "gradeExposureEv 0\n"
+                   << "characterBackgroundEnabled true\n"
+                   << "characterPlatformEnabled true\n"
+                   << "blackholeQuality cinematic\n"
+                   << "blackholeCamera front\n"
+                   << "sceneRenderer character\n";
+        }
+        const auto loaded = azurerender::SceneDocument::load(scenePath);
+        assert(loaded.sceneId == "legacy-v2");
+        assert(loaded.lights.empty());
         std::filesystem::remove_all(directory);
     }
 

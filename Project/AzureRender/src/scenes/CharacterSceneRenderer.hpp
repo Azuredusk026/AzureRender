@@ -4,6 +4,8 @@
 #include "assets/GltfLoader.hpp"
 #include "rhi/IGpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
+#include "render/ClusteredLightGrid.hpp"
+#include "render/LightBuffer.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
@@ -49,16 +51,33 @@ public:
 
 private:
     static constexpr std::size_t kMaxFramesInFlight = 2;
+    static constexpr std::uint32_t kClusterGridX = 16;
+    static constexpr std::uint32_t kClusterGridY = 9;
+    static constexpr std::uint32_t kClusterGridZ = 24;
+    static constexpr std::uint32_t kMaxSceneLights = 128;
+    static constexpr std::uint32_t kShadowCascadeCount = 4;
+    static constexpr VkDeviceSize kMaxClusterLightIndices =
+        static_cast<VkDeviceSize>(kClusterGridX)
+        * kClusterGridY * kClusterGridZ * kMaxSceneLights;
+    static constexpr std::uint32_t kEnvironmentMipLevels = 7;
+    static constexpr std::uint32_t kIblPrefilterSamples = 32;
     // Bindless texture array layout: shared slots come first (environment,
     // shadow map, toon ramp), then per-material blocks of eight textures.
     static constexpr std::uint32_t kSharedTextureSlots = 3;
     static constexpr std::uint32_t kMaterialTextureSlots = 8;
+    static constexpr std::uint32_t kAssetVertexWordCount = 26;
 
     struct GpuTexture {
         rhi::GpuImage image;
         VkImageView view = VK_NULL_HANDLE;
         VkSampler sampler = VK_NULL_HANDLE;
     };
+
+    struct IblPrefilterPushConstants {
+        float roughness = 0.0F;
+        std::uint32_t sampleCount = kIblPrefilterSamples;
+    };
+    static_assert(sizeof(IblPrefilterPushConstants) == 8);
 
     struct GpuMaterial {
         GpuTexture baseColor;
@@ -106,6 +125,11 @@ private:
 
     struct UniformBufferObject {
         std::array<float, 4> cameraPosition{};
+        std::array<float, 4> cameraForward{};
+        std::array<float, 4> clusterGrid{};
+        std::array<float, 4> clusterDepth{};
+        std::array<float, 4> clusterLighting{};
+        std::array<float, 4> cascadeSplits{};
         std::array<float, 4> renderingParameters{};
         std::array<float, 4> showcaseParameters{};
         std::array<float, 4> qaParameters{};
@@ -120,10 +144,18 @@ private:
     struct InstanceGpuData {
         std::array<float, 16> model{};
         std::array<float, 16> modelViewProjection{};
-        std::array<float, 16> lightModelViewProjection{};
+        std::array<std::array<float, 16>, kShadowCascadeCount>
+            cascadeLightModelViewProjection{};
         std::array<std::uint32_t, 4> meta{};
     };
-    static_assert(sizeof(InstanceGpuData) == 208);
+    static_assert(sizeof(InstanceGpuData) == 400);
+
+    struct SkinningPushConstants {
+        std::uint32_t vertexCount = 0;
+        std::uint32_t jointBase = 0;
+        std::array<float, 2> morphWeights{};
+    };
+    static_assert(sizeof(SkinningPushConstants) == 16);
 
     // A scene-referenced asset beyond the hero. Renders at bind pose in the
     // current stage; its joints and material textures append after the hero
@@ -134,6 +166,7 @@ private:
         rhi::GpuBuffer vertexBuffer;
         rhi::GpuBuffer indexBuffer;
         std::vector<GpuMaterial> gpuMaterials;
+        std::vector<rhi::GpuBuffer> skinnedVertexBuffers;
         std::uint32_t jointBase = 0;
         std::uint32_t textureBase = 0;
         std::size_t globalMaterialBase = 0;
@@ -146,6 +179,9 @@ private:
     // Global texture array path, enabled when the device offers descriptor
     // indexing. False keeps the per-material fixed descriptor tables.
     bool bindlessTextures_ = false;
+    bool computeIblEnabled_ = false;
+    bool computeSkinningEnabled_ = false;
+    std::string shaderDirectory_;
     std::string rampAtlasPath_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
@@ -174,12 +210,34 @@ private:
     std::vector<GpuMaterial> gpuMaterials_;
     GpuTexture environmentTexture_;
     GpuTexture toonRampTexture_;
+    VkImageView environmentBaseMipView_ = VK_NULL_HANDLE;
+    std::vector<VkImageView> environmentPrefilterViews_;
+    VkDescriptorSetLayout iblPrefilterSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool iblPrefilterPool_ = VK_NULL_HANDLE;
+    std::vector<VkDescriptorSet> iblPrefilterSets_;
+    VkPipelineLayout iblPrefilterPipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline iblPrefilterPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> uniformBuffers_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
     std::vector<rhi::GpuBuffer> oitIndexBuffers_;
     std::vector<rhi::GpuBuffer> instanceBuffers_;
+    std::vector<rhi::GpuBuffer> lightBuffers_;
+    std::vector<rhi::GpuBuffer> clusterHeaderBuffers_;
+    std::vector<rhi::GpuBuffer> clusterIndexBuffers_;
+    LightBuffer frameLights_;
+    std::vector<RenderLightGpu> packedLights_;
+    std::vector<std::array<std::uint32_t, 2>> packedClusterHeaders_;
+    std::vector<std::uint32_t> packedClusterIndices_;
+    bool clusteredLightingReported_ = false;
     std::uint32_t instanceCapacity_ = 0;
     std::uint32_t qaInstanceCount_ = 1;
+    std::vector<rhi::GpuBuffer> skinnedVertexBuffers_;
+    VkDescriptorSetLayout skinningDescriptorSetLayout_ = VK_NULL_HANDLE;
+    VkDescriptorPool skinningDescriptorPool_ = VK_NULL_HANDLE;
+    VkPipelineLayout skinningPipelineLayout_ = VK_NULL_HANDLE;
+    VkPipeline skinningPipeline_ = VK_NULL_HANDLE;
+    std::vector<VkDescriptorSet> skinningDescriptorSets_;
+    std::uint32_t meshResourceCount_ = 0;
     std::size_t oitIndexBufferSize_ = 0;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
@@ -215,8 +273,9 @@ private:
     // compose per-instance matrices with identical operation order.
     std::array<float, 16> viewMatrix_{};
     std::array<float, 16> projectionMatrix_{};
-    std::array<float, 16> lightViewMatrix_{};
-    std::array<float, 16> lightProjectionMatrix_{};
+    std::array<std::array<float, 16>, kShadowCascadeCount>
+        cascadeLightViewProjections_{};
+    std::array<float, kShadowCascadeCount> cascadeSplits_{};
     // Bind-pose contact pivot estimated from the lowest character vertices.
     // X/Z define both the turntable axis and showcase-platform centre.
     std::array<float, 3> footPivot_{0.0F, 0.0F, 0.0F};
@@ -238,7 +297,18 @@ private:
     void createVertexBuffer();
     void createIndexBuffer();
     void createTexture();
+    void createEnvironmentPrefilter();
     void createAdditionalResources();
+    void createComputeSkinningResources();
+    void recordComputeSkinning(const RenderContext& context);
+    void recordComputeSkinningMesh(
+        const RenderContext& context,
+        std::uint32_t meshKey);
+    [[nodiscard]] const rhi::GpuBuffer& renderVertexBuffer(
+        std::uint32_t meshKey,
+        std::uint32_t frameIndex) const;
+    [[nodiscard]] const rhi::GpuBuffer& renderIndexBuffer(
+        std::uint32_t meshKey) const;
     void createMeshBuffers(
         LoadedAsset& asset,
         rhi::GpuBuffer& vertexBuffer,
@@ -273,6 +343,11 @@ private:
 
     // Frame recording.
     void updateUniformBuffer(const SceneFrameData& frame);
+    void updateClusteredLighting(
+        const azurerender::internal::Matrix4& view,
+        const azurerender::internal::Matrix4& projection,
+        std::uint32_t width,
+        std::uint32_t height);
     void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
     void recordMainPass(const RenderContext& context);

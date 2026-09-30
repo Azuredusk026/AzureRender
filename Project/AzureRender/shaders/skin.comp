@@ -1,0 +1,96 @@
+#version 450
+
+layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+
+layout(std430, set = 0, binding = 0) readonly buffer SourceVertices {
+    uint words[];
+} sourceVertices;
+
+layout(std430, set = 0, binding = 1) readonly buffer JointData {
+    mat4 matrices[];
+} jointData;
+
+layout(std430, set = 0, binding = 2) writeonly buffer SkinnedVertices {
+    uint words[];
+} skinnedVertices;
+
+layout(push_constant) uniform SkinningParameters {
+    uint vertexCount;
+    uint jointBase;
+    vec2 morphWeights;
+} parameters;
+
+const uint vertexWordCount = 26u;
+
+float readFloat(uint wordIndex) {
+    return uintBitsToFloat(sourceVertices.words[wordIndex]);
+}
+
+void main() {
+    uint vertexIndex = gl_GlobalInvocationID.x;
+    if (vertexIndex >= parameters.vertexCount) {
+        return;
+    }
+    uint base = vertexIndex * vertexWordCount;
+    for (uint word = 0u; word < vertexWordCount; ++word) {
+        skinnedVertices.words[base + word] = sourceVertices.words[base + word];
+    }
+
+    vec3 position = vec3(
+        readFloat(base + 0u),
+        readFloat(base + 1u),
+        readFloat(base + 2u));
+    vec3 normal = vec3(
+        readFloat(base + 3u),
+        readFloat(base + 4u),
+        readFloat(base + 5u));
+    vec4 tangent = vec4(
+        readFloat(base + 6u),
+        readFloat(base + 7u),
+        readFloat(base + 8u),
+        readFloat(base + 9u));
+    uvec4 joints = uvec4(
+        sourceVertices.words[base + 12u],
+        sourceVertices.words[base + 13u],
+        sourceVertices.words[base + 14u],
+        sourceVertices.words[base + 15u]);
+    vec4 weights = vec4(
+        readFloat(base + 16u),
+        readFloat(base + 17u),
+        readFloat(base + 18u),
+        readFloat(base + 19u));
+    vec3 morph0 = vec3(
+        readFloat(base + 20u),
+        readFloat(base + 21u),
+        readFloat(base + 22u));
+    vec3 morph1 = vec3(
+        readFloat(base + 23u),
+        readFloat(base + 24u),
+        readFloat(base + 25u));
+    vec3 morphedPosition = position
+        + morph0 * parameters.morphWeights.x
+        + morph1 * parameters.morphWeights.y;
+
+    mat4 skinMatrix =
+        weights.x * jointData.matrices[parameters.jointBase + joints.x]
+        + weights.y * jointData.matrices[parameters.jointBase + joints.y]
+        + weights.z * jointData.matrices[parameters.jointBase + joints.z]
+        + weights.w * jointData.matrices[parameters.jointBase + joints.w];
+    vec3 skinnedPosition =
+        (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
+    vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+
+    skinnedVertices.words[base + 0u] = floatBitsToUint(skinnedPosition.x);
+    skinnedVertices.words[base + 1u] = floatBitsToUint(skinnedPosition.y);
+    skinnedVertices.words[base + 2u] = floatBitsToUint(skinnedPosition.z);
+    skinnedVertices.words[base + 3u] = floatBitsToUint(skinnedNormal.x);
+    skinnedVertices.words[base + 4u] = floatBitsToUint(skinnedNormal.y);
+    skinnedVertices.words[base + 5u] = floatBitsToUint(skinnedNormal.z);
+    skinnedVertices.words[base + 6u] = floatBitsToUint(skinnedTangent.x);
+    skinnedVertices.words[base + 7u] = floatBitsToUint(skinnedTangent.y);
+    skinnedVertices.words[base + 8u] = floatBitsToUint(skinnedTangent.z);
+    skinnedVertices.words[base + 20u] = floatBitsToUint(position.x);
+    skinnedVertices.words[base + 21u] = floatBitsToUint(position.y);
+    skinnedVertices.words[base + 22u] = floatBitsToUint(position.z);
+}

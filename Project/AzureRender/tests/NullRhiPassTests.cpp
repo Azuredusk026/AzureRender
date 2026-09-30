@@ -7,6 +7,8 @@
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -43,7 +45,8 @@ std::vector<RecordedCall> runFrame(
     const std::filesystem::path& shaderDirectory,
     const bool cullingEnabled = true,
     const bool cameraLooksAway = false,
-    const bool withPropResource = false) {
+    const bool withPropResource = false,
+    const bool computeSkinning = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -76,6 +79,11 @@ std::vector<RecordedCall> runFrame(
     RenderSettings settings{};
     context.renderSettings = &settings;
     context.cullingEnabled = cullingEnabled;
+    context.computeSkinning = computeSkinning;
+    if (computeSkinning) {
+        std::cerr << "computeSkinning test context enabled, nodes="
+                  << context.scene.nodes.size() << '\n';
+    }
 
     renderer.onLoad(context);
     SceneFrameData frame{};
@@ -98,7 +106,11 @@ std::vector<RecordedCall> runFrame(
     renderer.registerPasses(graph, resources, context);
     std::string error;
     if (!graph.compile(error)) throw std::runtime_error(error);
-    if (graph.passes().size() != 2) throw std::runtime_error("Character must contribute shadow and main passes");
+    const std::size_t expectedPasses =
+        2 + (computeSkinning ? context.scene.resources.size() : 0);
+    if (graph.passes().size() != expectedPasses) {
+        throw std::runtime_error("Character registered an unexpected pass count");
+    }
     if (!recorder.calls.empty()) throw std::runtime_error("Registration must not record commands");
     graph.execute(&recorder);
     renderer.onUnload(context);
@@ -109,7 +121,7 @@ std::vector<RecordedCall> runFrame(
 
 int main() {
 #ifdef _WIN32
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
+    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
     _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
 #endif
 
@@ -133,6 +145,10 @@ int main() {
              "background.frag.spv",
              "background_bindless.frag.spv",
              "shadow.vert.spv",
+             "mesh_compute.vert.spv",
+             "outline_compute.vert.spv",
+             "shadow_compute.vert.spv",
+             "skin.comp.spv",
              "shadow.frag.spv",
              "shadow_bindless.frag.spv",
          }) {
@@ -168,6 +184,15 @@ int main() {
 
     const std::vector<RecordedCall> legacy = runFrame(false, shaderDirectory);
     const std::vector<RecordedCall> bindless = runFrame(true, shaderDirectory);
+    std::set<std::string> cascadeViewports;
+    for (const RecordedCall& recordedCall : legacy) {
+        if (recordedCall.name == "setViewport"
+            && recordedCall.detail.find("1024.000000x1024.000000@") == 0) {
+            cascadeViewports.insert(recordedCall.detail);
+        }
+    }
+    assert(cascadeViewports.size() == 4);
+    assert(countCalls(legacy, "setScissor") == 5);
 
     // Both modes record shadow pass + main pass.
     assert(countCalls(legacy, "beginRenderPass") == 2);
@@ -202,9 +227,47 @@ int main() {
 
     // A second scene resource adds its own buffer binds and instanced draws
     // without changing the hero section's structure.
-    const std::vector<RecordedCall> multi =
-        runFrame(true, shaderDirectory, true, false, true);
-    assert(countCalls(multi, "drawIndexed") > legacyDraws);
-    assert(countCalls(multi, "bindVertexBuffer") >= 2);
+    std::cerr << "Starting multi-resource pass contract\n";
+    std::vector<RecordedCall> multi;
+    try {
+        multi = runFrame(true, shaderDirectory, true, false, true);
+    } catch (const std::exception& error) {
+        std::cerr << "NullRHI multi-resource test failed: "
+                  << error.what() << '\n';
+        return 6;
+    }
+    if (countCalls(multi, "drawIndexed") <= legacyDraws) {
+        std::cerr << "Multi-resource draw count did not increase\n";
+        return 4;
+    }
+    if (countCalls(multi, "bindVertexBuffer") < 2) {
+        std::cerr << "Multi-resource vertex buffers were not bound\n";
+        return 5;
+    }
+    std::cerr << "Multi-resource pass contract passed\n";
+    std::vector<RecordedCall> computeSkinning;
+    try {
+        std::cerr << "Starting compute skinning pass contract\n";
+        computeSkinning =
+            runFrame(true, shaderDirectory, true, false, true, true);
+    } catch (const std::exception& error) {
+        std::cerr << "NullRHI compute skinning test failed: "
+                  << error.what() << '\n';
+        return 1;
+    }
+    const std::size_t skinDispatches = countCalls(computeSkinning, "dispatch");
+    if (skinDispatches != 2) {
+        std::cerr << "Expected two skinning dispatches, got "
+                  << skinDispatches << '\n';
+        return 2;
+    }
+    const std::size_t computeDraws =
+        countCalls(computeSkinning, "drawIndexed");
+    const std::size_t multiDraws = countCalls(multi, "drawIndexed");
+    if (computeDraws != multiDraws) {
+        std::cerr << "Compute skinning draw count " << computeDraws
+                  << " differs from vertex fallback " << multiDraws << '\n';
+        return 3;
+    }
     return 0;
 }

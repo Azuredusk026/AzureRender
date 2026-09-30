@@ -14,7 +14,7 @@ struct RenderGraphResource {
     rhi::BufferBarrierDesc initialBuffer{};
 };
 
-enum class RenderGraphUsage { Sampled, ColorAttachment, DepthAttachment, Storage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer };
+enum class RenderGraphUsage { Sampled, ComputeSampled, ColorAttachment, DepthAttachment, Storage, VertexStorage, FragmentStorage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer };
 
 struct RenderGraphUse {
     std::uint32_t resource = 0;

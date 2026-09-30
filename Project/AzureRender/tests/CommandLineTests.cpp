@@ -76,6 +76,12 @@ int main() {
         "Scene type was not parsed");
     require(valid.options.hudEnabled, "HUD flag was not parsed");
     require(valid.options.gpuTimingEnabled, "GPU timing was not implied by HUD");
+    const auto morphWeights = azurerender::parseCommandLine({
+        "--qa-morph-weights", "0.75", "-0.25"});
+    require(
+        morphWeights.options.renderSettings.morphWeights[0] == 0.75F
+            && morphWeights.options.renderSettings.morphWeights[1] == -0.25F,
+        "Morph target weights were not parsed");
 
     const auto bindlessDefault = azurerender::parseCommandLine(
         {"--smoke-frames", "1"});
@@ -158,6 +164,10 @@ int main() {
         CommandLineErrorCode::InvalidValue,
         "--width",
         {"--width", "4294967296"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--qa-morph-weights",
+        {"--qa-morph-weights", "nan", "0"});
     expectError(
         CommandLineErrorCode::InvalidValue,
         "--smoke-frames",

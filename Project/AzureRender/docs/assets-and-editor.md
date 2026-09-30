@@ -149,7 +149,7 @@ python .\tools\build_toon_ramp_atlas.py --check
 
 ## `.azscene` 场景文档
 
-当前 Scene Schema 为 v2。`SceneDocument` 保存：
+当前 Scene Schema 为 v3。`SceneDocument` 保存：
 
 ```text
 sceneId
@@ -161,9 +161,11 @@ nodes[]
   translation, rotation, scale
   prefabSource, instanceOf
 renderSettings
+lights[]
+  id, nodeId, color, intensity, radius, enabled
 ```
 
-`renderSettings.sceneType` 用来选择 Renderer。Character 或 Blackhole 是场景数据的一部分，不是编辑器中的隐藏开关。v1 文件可以迁移到 v2。程序会拒绝未知的未来版本。
+`renderSettings.sceneType` 选择场景渲染器。点光源通过 `nodeId` 关联场景节点，节点变换提供世界位置。v1 与 v2 文档读取后使用空光源列表；v3 保存完整光源数据。程序会拒绝未知的未来版本。
 
 保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。即使进程中断，原文件也不会只剩一半。`prefabSource` 和 `instanceOf` 目前只保存引用与 Transform 覆盖。项目还没有实现独立的 Prefab 文件展开系统。
 
@@ -178,6 +180,8 @@ Dear ImGui 层提供：
 - Diagnostics/HUD：资源、动画、Renderer、GPU Timing 和错误。
 
 编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Panel 不直接持有 Vulkan Handle。Renderer 使用统一的 `RendererSceneState` 向编辑器提供可选资产、模型矩阵、Primitive 数量和选择状态。
+
+`EditorContext` 将场景节点同步到 ECS，并把关联光源同步为 `LightComponent`。保存时，节点变换与光源参数一同写回 `.azscene`。
 
 ## Undo 与 Redo
 

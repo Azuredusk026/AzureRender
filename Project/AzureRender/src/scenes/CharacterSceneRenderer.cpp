@@ -5,6 +5,8 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
+#include "render/ComputePass.hpp"
+#include "render/CascadedShadow.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -27,6 +29,8 @@ using namespace azurerender::internal;
 namespace azurerender {
 
 namespace {
+
+static_assert(sizeof(AssetVertex) == 26 * sizeof(std::uint32_t));
 
 Vector3 estimateFootPivot(const LoadedAsset& asset) {
     const float height = asset.boundsMax[1] - asset.boundsMin[1];
@@ -231,6 +235,9 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     }
     bindlessTextures_ = context.bindlessTextures;
     cullingEnabled_ = context.cullingEnabled;
+    computeIblEnabled_ = context.rgba16fStorageImage;
+    computeSkinningEnabled_ = context.computeSkinning;
+    shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
     rampAtlasPath_ = context.rampAtlasPath;
@@ -310,8 +317,14 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     std::stringstream skinning;
     skinning << "Skinning: "
              << (asset_.hasSkin ? "enabled" : "static fallback")
-             << ", " << asset_.jointMatrices.size() << " joint matrices";
+             << ", " << asset_.jointMatrices.size() << " joint matrices"
+             << ", " << asset_.morphTargetCount << " Morph targets";
     azurerender::RuntimeDiagnostics::instance().print("asset", skinning.str());
+    azurerender::RuntimeDiagnostics::instance().print(
+        "asset",
+        "Morph weights: "
+            + std::to_string(renderSettings_->morphWeights[0]) + ", "
+            + std::to_string(renderSettings_->morphWeights[1]));
     std::string animationLine = "Animations: "
         + std::to_string(asset_.animations.size());
     if (!asset_.animations.empty()) {
@@ -333,6 +346,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     createAdditionalResources();
     createUniformBuffers();
     createJointBuffers();
+    createComputeSkinningResources();
     createOitIndexBuffers();
     createDescriptorSetLayout();
     createDescriptorPool();
@@ -512,17 +526,138 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         // instance reproduces the original values exactly.
         destination[slot].modelViewProjection =
             multiply(projectionMatrix_, multiply(viewMatrix_, model));
-        destination[slot].lightModelViewProjection = multiply(
-            lightProjectionMatrix_, multiply(lightViewMatrix_, model));
+        for (std::size_t cascade = 0;
+             cascade < kShadowCascadeCount;
+             ++cascade) {
+            destination[slot].cascadeLightModelViewProjection[cascade] =
+                multiply(cascadeLightViewProjections_[cascade], model);
+        }
     }
+}
+
+const rhi::GpuBuffer& CharacterSceneRenderer::renderVertexBuffer(
+    const std::uint32_t meshKey,
+    const std::uint32_t frameIndex) const {
+    if (!computeSkinningEnabled_) {
+        return meshKey == 0
+            ? vertexBuffer_
+            : additionalResources_[meshKey - 1]->vertexBuffer;
+    }
+    return meshKey == 0
+        ? skinnedVertexBuffers_[frameIndex]
+        : additionalResources_[meshKey - 1]->skinnedVertexBuffers[frameIndex];
+}
+
+const rhi::GpuBuffer& CharacterSceneRenderer::renderIndexBuffer(
+    const std::uint32_t meshKey) const {
+    return meshKey == 0
+        ? indexBuffer_
+        : additionalResources_[meshKey - 1]->indexBuffer;
 }
 
 void CharacterSceneRenderer::registerPasses(
     RenderGraph& graph, const SceneGraphResources& resources, const RenderContext& context) {
+    std::vector<RenderGraph::ResourceId> vertexResources(meshResourceCount_);
+    std::vector<RenderGraph::ResourceId> indexResources(meshResourceCount_);
+    const auto sourceVertexBuffer = [this](const std::uint32_t meshKey)
+        -> const rhi::GpuBuffer& {
+        return meshKey == 0
+            ? vertexBuffer_
+            : additionalResources_[meshKey - 1]->vertexBuffer;
+    };
+    const auto drawVertexBuffer = [this, &sourceVertexBuffer, &context](
+        const std::uint32_t meshKey) -> const rhi::GpuBuffer& {
+        return computeSkinningEnabled_
+            ? (meshKey == 0
+                ? skinnedVertexBuffers_[context.currentFrame]
+                : additionalResources_[meshKey - 1]
+                      ->skinnedVertexBuffers[context.currentFrame])
+            : sourceVertexBuffer(meshKey);
+    };
+    const auto meshIndexBuffer = [this](const std::uint32_t meshKey)
+        -> const rhi::GpuBuffer& {
+        return meshKey == 0
+            ? indexBuffer_
+            : additionalResources_[meshKey - 1]->indexBuffer;
+    };
+
+    rhi::BufferBarrierDesc jointInitial{};
+    jointInitial.buffer = jointBuffers_[context.currentFrame].buffer;
+    jointInitial.size = jointBuffers_[context.currentFrame].size;
+    jointInitial.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
+    jointInitial.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+    const auto jointResource = graph.importBuffer(
+        "character-joints", jointInitial);
+    const auto importHostStorage = [&graph](
+        const std::string& name,
+        const rhi::GpuBuffer& buffer) {
+        rhi::BufferBarrierDesc initial{};
+        initial.buffer = buffer.buffer;
+        initial.size = buffer.size;
+        initial.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
+        initial.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+        return graph.importBuffer(name, initial);
+    };
+    const auto lightResource = importHostStorage(
+        "character-lights", lightBuffers_[context.currentFrame]);
+    const auto clusterHeaderResource = importHostStorage(
+        "character-cluster-headers",
+        clusterHeaderBuffers_[context.currentFrame]);
+    const auto clusterIndexResource = importHostStorage(
+        "character-cluster-indices",
+        clusterIndexBuffers_[context.currentFrame]);
+
+    for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
+        const rhi::GpuBuffer& input = sourceVertexBuffer(meshKey);
+        rhi::BufferBarrierDesc vertexInitial{};
+        vertexInitial.buffer = input.buffer;
+        vertexInitial.size = input.size;
+        vertexInitial.dstStageMask = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        vertexInitial.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        const auto inputResource = graph.importBuffer(
+            "character-vertex-source-" + std::to_string(meshKey),
+            vertexInitial);
+
+        const rhi::GpuBuffer& output = drawVertexBuffer(meshKey);
+        rhi::BufferBarrierDesc outputInitial{};
+        outputInitial.buffer = output.buffer;
+        outputInitial.size = output.size;
+        outputInitial.dstStageMask = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
+        outputInitial.dstAccessMask = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT;
+        vertexResources[meshKey] = graph.importBuffer(
+            "character-vertex-output-" + std::to_string(meshKey),
+            outputInitial);
+
+        const rhi::GpuBuffer& indices = meshIndexBuffer(meshKey);
+        rhi::BufferBarrierDesc indexInitial{};
+        indexInitial.buffer = indices.buffer;
+        indexInitial.size = indices.size;
+        indexInitial.dstStageMask = VK_PIPELINE_STAGE_TRANSFER_BIT;
+        indexInitial.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        indexResources[meshKey] = graph.importBuffer(
+            "character-index-" + std::to_string(meshKey), indexInitial);
+
+        if (computeSkinningEnabled_) {
+            const auto skin = graph.addPass(
+                "character-skinning-" + std::to_string(meshKey),
+                [this, &context, meshKey] {
+                    recordComputeSkinningMesh(context, meshKey);
+                });
+            graph.use(skin, inputResource, RenderGraphUsage::Storage, false);
+            graph.use(skin, jointResource, RenderGraphUsage::Storage, false);
+            graph.use(skin, vertexResources[meshKey], RenderGraphUsage::Storage, true);
+        }
+    }
+
     const auto shadow = graph.addPass("character-shadow", [this, &context] {
         submissionCounters_ = context.submissionCounters;
         recordShadowPass(context);
     });
+    for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
+        graph.use(shadow, vertexResources[meshKey], RenderGraphUsage::VertexBuffer, false);
+        graph.use(shadow, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
+    }
+    graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     const auto main = graph.addPass("character-main", [this, &context] {
@@ -530,6 +665,14 @@ void CharacterSceneRenderer::registerPasses(
         recordMainPass(context);
     });
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
+    graph.use(main, lightResource, RenderGraphUsage::FragmentStorage, false);
+    graph.use(main, clusterHeaderResource, RenderGraphUsage::FragmentStorage, false);
+    graph.use(main, clusterIndexResource, RenderGraphUsage::FragmentStorage, false);
+    for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
+        graph.use(main, vertexResources[meshKey], RenderGraphUsage::VertexBuffer, false);
+        graph.use(main, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
+    }
+    graph.use(main, jointResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(main, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.depth, RenderGraphUsage::DepthAttachment,
@@ -540,6 +683,7 @@ void CharacterSceneRenderer::registerPasses(
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     submissionCounters_ = context.submissionCounters;
+    recordComputeSkinning(context);
     recordShadowPass(context);
     recordMainPass(context);
 }
@@ -678,7 +822,8 @@ void CharacterSceneRenderer::createMeshBuffers(
         static_cast<std::size_t>(vertexSize));
     vertexBuffer = allocator_->createBuffer(
         vertexSize,
-        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
+            | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
         false);
     rhi_->copyBuffer(vertexStaging, vertexBuffer, vertexSize);
     allocator_->destroyBuffer(vertexStaging);
@@ -730,7 +875,12 @@ void CharacterSceneRenderer::uploadTextureData(
         height,
         format,
         VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT
-            | (mipLevels > 1 ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0),
+            | (mipLevels > 1 ? VK_IMAGE_USAGE_TRANSFER_SRC_BIT : 0)
+            | (computeIblEnabled_
+                   && mipLevels > 1
+                   && format == VK_FORMAT_R16G16B16A16_SFLOAT
+                ? VK_IMAGE_USAGE_STORAGE_BIT
+                : 0),
         mipLevels);
     rhi_->transitionImageLayout(
         texture.image,
@@ -879,7 +1029,6 @@ void CharacterSceneRenderer::createTexture() {
 
     constexpr std::uint32_t kEnvironmentWidth = 512;
     constexpr std::uint32_t kEnvironmentHeight = 256;
-    constexpr std::uint32_t kEnvironmentMipLevels = 7;
     constexpr float kPi = 3.14159265358979323846F;
     std::vector<std::uint16_t> environmentPixels;
     std::uint32_t environmentWidth = kEnvironmentWidth;
@@ -960,6 +1109,12 @@ void CharacterSceneRenderer::createTexture() {
         true,
         environmentTexture_,
         kEnvironmentMipLevels);
+    if (computeIblEnabled_) {
+        createEnvironmentPrefilter();
+    } else {
+        azurerender::RuntimeDiagnostics::instance().info(
+            "render", "Character IBL: hardware mip fallback path");
+    }
 
     const auto toonRamp = loadPpmTexture(rampAtlasPath_);
     uploadTextureData(
@@ -969,6 +1124,134 @@ void CharacterSceneRenderer::createTexture() {
         VK_FORMAT_R8G8B8A8_UNORM,
         true,
         toonRampTexture_);
+}
+
+void CharacterSceneRenderer::createEnvironmentPrefilter() {
+    if (environmentTexture_.image.image == VK_NULL_HANDLE
+        || environmentTexture_.view == VK_NULL_HANDLE
+        || kEnvironmentMipLevels < 2) {
+        return;
+    }
+    constexpr VkShaderStageFlags kCompute = VK_SHADER_STAGE_COMPUTE_BIT;
+    iblPrefilterSetLayout_ = rhi_->createDescriptorSetLayout({
+        {0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kCompute},
+        {1, VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1, kCompute},
+    });
+    const std::uint32_t prefilterCount = kEnvironmentMipLevels - 1;
+    rhi::DescriptorPoolDesc pool{};
+    pool.sizes = {
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, prefilterCount},
+        {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, prefilterCount},
+    };
+    pool.maxSets = prefilterCount;
+    iblPrefilterPool_ = rhi_->createDescriptorPool(pool);
+    iblPrefilterSets_ = rhi_->allocateDescriptorSets(
+        iblPrefilterPool_, iblPrefilterSetLayout_, prefilterCount);
+
+    environmentBaseMipView_ = rhi_->createImageView(
+        environmentTexture_.image.image,
+        VK_FORMAT_R16G16B16A16_SFLOAT,
+        VK_IMAGE_ASPECT_COLOR_BIT,
+        1,
+        0);
+    environmentPrefilterViews_.reserve(prefilterCount);
+    for (std::uint32_t level = 1; level < kEnvironmentMipLevels; ++level) {
+        const VkImageView destinationView = rhi_->createImageView(
+            environmentTexture_.image.image,
+            VK_FORMAT_R16G16B16A16_SFLOAT,
+            VK_IMAGE_ASPECT_COLOR_BIT,
+            1,
+            level);
+        environmentPrefilterViews_.push_back(destinationView);
+        const std::size_t setIndex = level - 1;
+
+        rhi::DescriptorImageWrite source{};
+        source.set = iblPrefilterSets_[setIndex];
+        source.binding = 0;
+        source.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        source.view = environmentBaseMipView_;
+        source.sampler = environmentTexture_.sampler;
+        source.layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        rhi_->writeDescriptorImage(source);
+
+        rhi::DescriptorImageWrite destination{};
+        destination.set = iblPrefilterSets_[setIndex];
+        destination.binding = 1;
+        destination.type = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+        destination.view = destinationView;
+        destination.layout = VK_IMAGE_LAYOUT_GENERAL;
+        rhi_->writeDescriptorImage(destination);
+    }
+
+    const auto code = azurerender::readBinaryFile(
+        shaderDirectory_ + "/ibl_prefilter.comp.spv");
+    const VkShaderModule shader = rhi_->createShaderModule(code);
+    const rhi::PushConstantRangeDesc pushRange{
+        VK_SHADER_STAGE_COMPUTE_BIT,
+        sizeof(IblPrefilterPushConstants),
+    };
+    iblPrefilterPipelineLayout_ =
+        rhi_->createPipelineLayout(iblPrefilterSetLayout_, &pushRange);
+    iblPrefilterPipeline_ = rhi_->createComputePipeline(
+        {shader, iblPrefilterPipelineLayout_});
+    rhi_->destroyShaderModule(shader);
+
+    rhi_->executeOneShot([this](rhi::ICommandRecorder& commands) {
+        for (std::uint32_t level = 1;
+             level < kEnvironmentMipLevels;
+             ++level) {
+            rhi::ImageBarrierDesc toStorage{};
+            toStorage.image = environmentTexture_.image.image;
+            toStorage.oldLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            toStorage.newLayout = VK_IMAGE_LAYOUT_GENERAL;
+            toStorage.mipLevels = 1;
+            toStorage.baseMipLevel = level;
+            toStorage.srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            toStorage.dstStageMask = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            toStorage.srcAccessMask = VK_ACCESS_SHADER_READ_BIT;
+            toStorage.dstAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
+            commands.imageBarrier(toStorage);
+
+            commands.bindComputePipeline(iblPrefilterPipeline_);
+            commands.bindComputeDescriptorSet(
+                iblPrefilterPipelineLayout_,
+                iblPrefilterSets_[level - 1]);
+            const IblPrefilterPushConstants parameters{
+                static_cast<float>(level)
+                    / static_cast<float>(kEnvironmentMipLevels - 1),
+                kIblPrefilterSamples,
+            };
+            commands.pushConstants(
+                iblPrefilterPipelineLayout_,
+                VK_SHADER_STAGE_COMPUTE_BIT,
+                0,
+                &parameters,
+                sizeof(parameters));
+            const VkExtent3D extent = {
+                std::max(environmentTexture_.image.width >> level, 1U),
+                std::max(environmentTexture_.image.height >> level, 1U),
+                1,
+            };
+            commands.dispatch(
+                (extent.width + 7) / 8,
+                (extent.height + 7) / 8,
+                1);
+
+            rhi::ImageBarrierDesc toSampled{};
+            toSampled.image = environmentTexture_.image.image;
+            toSampled.oldLayout = VK_IMAGE_LAYOUT_GENERAL;
+            toSampled.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            toSampled.mipLevels = 1;
+            toSampled.baseMipLevel = level;
+            toSampled.srcStageMask = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            toSampled.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            toSampled.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
+            toSampled.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+            commands.imageBarrier(toSampled);
+        }
+    });
+    azurerender::RuntimeDiagnostics::instance().info(
+        "render", "Character IBL: GPU-prefiltered environment mip chain");
 }
 
 void CharacterSceneRenderer::createAdditionalResources() {
@@ -1006,6 +1289,143 @@ void CharacterSceneRenderer::createAdditionalResources() {
             + ", total joints " + std::to_string(jointBase));
 }
 
+void CharacterSceneRenderer::createComputeSkinningResources() {
+    meshResourceCount_ =
+        static_cast<std::uint32_t>(additionalResources_.size() + 1);
+    if (!computeSkinningEnabled_) {
+        azurerender::RuntimeDiagnostics::instance().info(
+            "render", "Character skinning and morph: vertex-shader fallback path");
+        return;
+    }
+    const auto createOutputBuffers = [this](
+        const VkDeviceSize byteSize,
+        std::vector<rhi::GpuBuffer>& buffers) {
+        buffers.resize(kMaxFramesInFlight);
+        for (rhi::GpuBuffer& buffer : buffers) {
+            buffer = allocator_->createBuffer(
+                byteSize,
+                VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+                    | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                false);
+        }
+    };
+    createOutputBuffers(vertexBuffer_.size, skinnedVertexBuffers_);
+    for (auto& resource : additionalResources_) {
+        createOutputBuffers(
+            resource->vertexBuffer.size, resource->skinnedVertexBuffers);
+    }
+
+    skinningDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+    });
+    const std::uint32_t descriptorSetCount =
+        static_cast<std::uint32_t>(kMaxFramesInFlight) * meshResourceCount_;
+    rhi::DescriptorPoolDesc descriptorPool{};
+    descriptorPool.sizes = {{
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+        descriptorSetCount * 3,
+    }};
+    descriptorPool.maxSets = descriptorSetCount;
+    skinningDescriptorPool_ = rhi_->createDescriptorPool(descriptorPool);
+    skinningDescriptorSets_ = rhi_->allocateDescriptorSets(
+        skinningDescriptorPool_, skinningDescriptorSetLayout_, descriptorSetCount);
+
+    const auto shaderCode = azurerender::readBinaryFile(
+        shaderDirectory_ + "/skin.comp.spv");
+    const VkShaderModule shader = rhi_->createShaderModule(shaderCode);
+    const rhi::PushConstantRangeDesc pushRange{
+        VK_SHADER_STAGE_COMPUTE_BIT,
+        sizeof(SkinningPushConstants),
+    };
+    skinningPipelineLayout_ =
+        rhi_->createPipelineLayout(skinningDescriptorSetLayout_, &pushRange);
+    skinningPipeline_ = rhi_->createComputePipeline(
+        {shader, skinningPipelineLayout_});
+    rhi_->destroyShaderModule(shader);
+
+    const auto writeSet = [this](const std::size_t frame,
+        const std::uint32_t meshKey,
+        const rhi::GpuBuffer& source,
+        const rhi::GpuBuffer& destination) {
+        const std::size_t setIndex =
+            frame * meshResourceCount_ + meshKey;
+        const VkDescriptorSet set = skinningDescriptorSets_[setIndex];
+        const std::array<rhi::DescriptorBufferWrite, 3> writes = {{
+            {set, 0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             source.buffer, source.size},
+            {set, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             jointBuffers_[frame].buffer, jointBuffers_[frame].size},
+            {set, 2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             destination.buffer, destination.size},
+        }};
+        for (const rhi::DescriptorBufferWrite& write : writes) {
+            rhi_->writeDescriptorBuffer(write);
+        }
+    };
+    for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
+        writeSet(frame, 0, vertexBuffer_, skinnedVertexBuffers_[frame]);
+        for (std::size_t index = 0; index < additionalResources_.size(); ++index) {
+            AdditionalResource& resource = *additionalResources_[index];
+            writeSet(
+                frame,
+                static_cast<std::uint32_t>(index + 1),
+                resource.vertexBuffer,
+                resource.skinnedVertexBuffers[frame]);
+        }
+    }
+    azurerender::RuntimeDiagnostics::instance().info(
+        "render", "Character skinning and morph: Vulkan compute path");
+}
+
+void CharacterSceneRenderer::recordComputeSkinningMesh(
+    const RenderContext& context,
+    const std::uint32_t meshKey) {
+    const LoadedAsset& mesh = meshKey == 0
+        ? asset_
+        : additionalResources_[meshKey - 1]->asset;
+    const std::uint32_t jointBase = meshKey == 0
+        ? 0
+        : additionalResources_[meshKey - 1]->jointBase;
+    const std::size_t setIndex =
+        context.currentFrame * meshResourceCount_ + meshKey;
+    const SkinningPushConstants parameters{
+        static_cast<std::uint32_t>(mesh.vertices.size()),
+        jointBase,
+        renderSettings_->morphWeights,
+    };
+    context.commands->pushConstants(
+        skinningPipelineLayout_,
+        VK_SHADER_STAGE_COMPUTE_BIT,
+        0,
+        &parameters,
+        sizeof(parameters));
+    ComputePass dispatch({
+        static_cast<std::uint32_t>(mesh.vertices.size()),
+        1,
+        64,
+        1,
+        1,
+        true,
+    });
+    dispatch.record(
+        *context.commands,
+        skinningPipeline_,
+        skinningPipelineLayout_,
+        skinningDescriptorSets_[setIndex]);
+}
+
+void CharacterSceneRenderer::recordComputeSkinning(
+    const RenderContext& context) {
+    if (!computeSkinningEnabled_) {
+        return;
+    }
+    for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
+        recordComputeSkinningMesh(context, meshKey);
+    }
+}
+
 void CharacterSceneRenderer::createUniformBuffers() {
     const VkDeviceSize size = sizeof(UniformBufferObject);
     uniformBuffers_.resize(kMaxFramesInFlight);
@@ -1014,6 +1434,24 @@ void CharacterSceneRenderer::createUniformBuffers() {
             size,
             VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
             true);
+    }
+    const VkDeviceSize lightBytes =
+        sizeof(RenderLightGpu) * kMaxSceneLights;
+    const VkDeviceSize clusterHeaderBytes =
+        sizeof(std::array<std::uint32_t, 2>)
+        * kClusterGridX * kClusterGridY * kClusterGridZ;
+    const VkDeviceSize clusterIndexBytes =
+        sizeof(std::uint32_t) * kMaxClusterLightIndices;
+    lightBuffers_.resize(kMaxFramesInFlight);
+    clusterHeaderBuffers_.resize(kMaxFramesInFlight);
+    clusterIndexBuffers_.resize(kMaxFramesInFlight);
+    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
+        lightBuffers_[index] = allocator_->createBuffer(
+            lightBytes, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
+        clusterHeaderBuffers_[index] = allocator_->createBuffer(
+            clusterHeaderBytes, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
+        clusterIndexBuffers_[index] = allocator_->createBuffer(
+            clusterIndexBytes, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
     }
     instanceCapacity_ = static_cast<std::uint32_t>(
         std::max<std::size_t>(qaInstanceCount_, scene_.nodes.size()));
@@ -1097,7 +1535,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * textureSlots},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 2},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 5},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1108,7 +1546,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 2},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 5},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1137,6 +1575,18 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
              VK_SHADER_STAGE_VERTEX_BIT},
+            {14,
+             VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             1,
+             VK_SHADER_STAGE_FRAGMENT_BIT},
+            {15,
+             VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             1,
+             VK_SHADER_STAGE_FRAGMENT_BIT},
+            {16,
+             VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+             1,
+             VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -1159,6 +1609,9 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {11, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {12, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {13, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+        {14, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
+        {15, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
+        {16, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
     });
 }
 
@@ -1246,6 +1699,23 @@ void CharacterSceneRenderer::createDescriptorSets() {
             instanceWrite.range = static_cast<VkDeviceSize>(instanceCapacity_)
                 * sizeof(InstanceGpuData);
             rhi_->writeDescriptorBuffer(instanceWrite);
+
+            const std::array<const rhi::GpuBuffer*, 3> frameBuffers = {
+                &lightBuffers_[frame],
+                &clusterHeaderBuffers_[frame],
+                &clusterIndexBuffers_[frame],
+            };
+            for (std::size_t bufferIndex = 0;
+                 bufferIndex < frameBuffers.size();
+                 ++bufferIndex) {
+                rhi::DescriptorBufferWrite write{};
+                write.set = descriptorSets_[frame];
+                write.binding = 14 + static_cast<std::uint32_t>(bufferIndex);
+                write.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                write.buffer = frameBuffers[bufferIndex]->buffer;
+                write.range = frameBuffers[bufferIndex]->size;
+                rhi_->writeDescriptorBuffer(write);
+            }
         }
         return;
     }
@@ -1368,6 +1838,23 @@ void CharacterSceneRenderer::createDescriptorSets() {
             instanceWrite.range = static_cast<VkDeviceSize>(instanceCapacity_)
                 * sizeof(InstanceGpuData);
             rhi_->writeDescriptorBuffer(instanceWrite);
+
+            const std::array<const rhi::GpuBuffer*, 3> frameBuffers = {
+                &lightBuffers_[frame],
+                &clusterHeaderBuffers_[frame],
+                &clusterIndexBuffers_[frame],
+            };
+            for (std::size_t bufferIndex = 0;
+                 bufferIndex < frameBuffers.size();
+                 ++bufferIndex) {
+                rhi::DescriptorBufferWrite write{};
+                write.set = descriptorSets_[descriptorIndex];
+                write.binding = 14 + static_cast<std::uint32_t>(bufferIndex);
+                write.type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+                write.buffer = frameBuffers[bufferIndex]->buffer;
+                write.range = frameBuffers[bufferIndex]->size;
+                rhi_->writeDescriptorBuffer(write);
+            }
         };
         for (const GpuMaterial& gpuMaterial : gpuMaterials_) {
             writeMaterialSet(gpuMaterial);
@@ -1385,13 +1872,17 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     const std::string shaderDirectory = context.shaderDirectory;
     const auto vertexCode =
-        azurerender::readBinaryFile(shaderDirectory + "/mesh.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
+            ? "/mesh_compute.vert.spv"
+            : "/mesh.vert.spv"));
     const auto fragmentCode =
         azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
             ? "/mesh_bindless.frag.spv"
             : "/mesh.frag.spv"));
     const auto outlineVertexCode =
-        azurerender::readBinaryFile(shaderDirectory + "/outline.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
+            ? "/outline_compute.vert.spv"
+            : "/outline.vert.spv"));
     const auto outlineFragmentCode =
         azurerender::readBinaryFile(shaderDirectory + "/outline.frag.spv");
     const auto backgroundVertexCode =
@@ -1401,7 +1892,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ? "/background_bindless.frag.spv"
             : "/background.frag.spv"));
     const auto shadowVertexCode =
-        azurerender::readBinaryFile(shaderDirectory + "/shadow.vert.spv");
+        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
+            ? "/shadow_compute.vert.spv"
+            : "/shadow.vert.spv"));
     const auto shadowFragmentCode =
         azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
             ? "/shadow_bindless.frag.spv"
@@ -1425,7 +1918,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     try {
         const rhi::PushConstantRangeDesc pushConstants{
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants),
+            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants)
+                + sizeof(std::uint32_t),
         };
         pipelineLayout_ =
             rhi_->createPipelineLayout(descriptorSetLayout_, &pushConstants);
@@ -1462,12 +1956,16 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             materialAttributes[3],
             materialAttributes[4],
             materialAttributes[5],
+            materialAttributes[6],
+            materialAttributes[7],
         };
         const std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
             materialAttributes[0],
             materialAttributes[1],
             materialAttributes[4],
             materialAttributes[5],
+            materialAttributes[6],
+            materialAttributes[7],
         };
 
         rhi::GraphicsPipelineDesc materialDesc{};
@@ -1577,6 +2075,23 @@ void CharacterSceneRenderer::destroyResources() {
         rhi_->destroyDescriptorSetLayout(descriptorSetLayout_);
         descriptorSetLayout_ = VK_NULL_HANDLE;
     }
+    if (skinningPipeline_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipeline(skinningPipeline_);
+        skinningPipeline_ = VK_NULL_HANDLE;
+    }
+    if (skinningPipelineLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipelineLayout(skinningPipelineLayout_);
+        skinningPipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (skinningDescriptorPool_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorPool(skinningDescriptorPool_);
+        skinningDescriptorPool_ = VK_NULL_HANDLE;
+    }
+    if (skinningDescriptorSetLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorSetLayout(skinningDescriptorSetLayout_);
+        skinningDescriptorSetLayout_ = VK_NULL_HANDLE;
+    }
+    skinningDescriptorSets_.clear();
     for (auto& buffer : uniformBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -1593,6 +2108,22 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     instanceBuffers_.clear();
+    for (auto& buffer : lightBuffers_) {
+        allocator_->destroyBuffer(buffer);
+    }
+    lightBuffers_.clear();
+    for (auto& buffer : clusterHeaderBuffers_) {
+        allocator_->destroyBuffer(buffer);
+    }
+    clusterHeaderBuffers_.clear();
+    for (auto& buffer : clusterIndexBuffers_) {
+        allocator_->destroyBuffer(buffer);
+    }
+    clusterIndexBuffers_.clear();
+    for (auto& buffer : skinnedVertexBuffers_) {
+        allocator_->destroyBuffer(buffer);
+    }
+    skinnedVertexBuffers_.clear();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
     for (auto& material : gpuMaterials_) {
@@ -1614,6 +2145,10 @@ void CharacterSceneRenderer::destroyResources() {
     for (auto& resource : additionalResources_) {
         allocator_->destroyBuffer(resource->indexBuffer);
         allocator_->destroyBuffer(resource->vertexBuffer);
+        for (auto& buffer : resource->skinnedVertexBuffers) {
+            allocator_->destroyBuffer(buffer);
+        }
+        resource->skinnedVertexBuffers.clear();
         for (auto& material : resource->gpuMaterials) {
             for (GpuTexture* texture : {
                      &material.baseColor,
@@ -1632,6 +2167,30 @@ void CharacterSceneRenderer::destroyResources() {
         resource->gpuMaterials.clear();
     }
     additionalResources_.clear();
+    if (iblPrefilterPipeline_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipeline(iblPrefilterPipeline_);
+        iblPrefilterPipeline_ = VK_NULL_HANDLE;
+    }
+    if (iblPrefilterPipelineLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyPipelineLayout(iblPrefilterPipelineLayout_);
+        iblPrefilterPipelineLayout_ = VK_NULL_HANDLE;
+    }
+    if (iblPrefilterPool_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorPool(iblPrefilterPool_);
+        iblPrefilterPool_ = VK_NULL_HANDLE;
+    }
+    if (iblPrefilterSetLayout_ != VK_NULL_HANDLE) {
+        rhi_->destroyDescriptorSetLayout(iblPrefilterSetLayout_);
+        iblPrefilterSetLayout_ = VK_NULL_HANDLE;
+    }
+    for (VkImageView view : environmentPrefilterViews_) {
+        rhi_->destroyImageView(view);
+    }
+    environmentPrefilterViews_.clear();
+    if (environmentBaseMipView_ != VK_NULL_HANDLE) {
+        rhi_->destroyImageView(environmentBaseMipView_);
+        environmentBaseMipView_ = VK_NULL_HANDLE;
+    }
     rhi_->destroySampler(environmentTexture_.sampler);
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
@@ -1713,32 +2272,109 @@ void CharacterSceneRenderer::updateUniformBuffer(
     constexpr float kPi = 3.14159265358979323846F;
     const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
     projectionMatrix_ = projection;
+    updateClusteredLighting(
+        view,
+        projection,
+        std::max(frame.swapchainWidth, 1U),
+        std::max(frame.swapchainHeight, 1U));
     viewFrustum_ =
         scene::extractFrustumPlanes(multiply(projection, view));
     const RenderSettings& settings = *renderSettings_;
     const Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
+    cascadeSplits_ = {};
+    const std::vector<float> splits = computeCascadeSplits(
+        0.1F, 100.0F, kShadowCascadeCount, 0.65F);
+    std::copy(splits.begin(), splits.end(), cascadeSplits_.begin());
+    const Vector3 cameraForward = normalize(
+        subtract(cameraTarget_, cameraPosition_));
+    const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
+    const Vector3 cameraRight = normalize(cross(cameraForward, worldUp));
+    const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
+    const float halfFovTangent = std::tan(kPi / 6.0F);
+    float cascadeNear = 0.1F;
+    for (std::size_t cascade = 0;
+         cascade < kShadowCascadeCount;
+         ++cascade) {
+        const float cascadeFar = cascadeSplits_[cascade];
+        std::array<Vector3, 8> corners{};
+        std::size_t cornerIndex = 0;
+        Vector3 center{};
+        for (const float depth : {cascadeNear, cascadeFar}) {
+            const float halfHeight = depth * halfFovTangent;
+            const float halfWidth = halfHeight * aspect;
+            const Vector3 sliceCenter = addVectors(
+                cameraPosition_, scaleVector(cameraForward, depth));
+            for (const float vertical : {-1.0F, 1.0F}) {
+                for (const float horizontal : {-1.0F, 1.0F}) {
+                    const Vector3 corner = addVectors(
+                        sliceCenter,
+                        addVectors(
+                            scaleVector(cameraRight, horizontal * halfWidth),
+                            scaleVector(cameraUp, vertical * halfHeight)));
+                    corners[cornerIndex++] = corner;
+                    center = addVectors(center, corner);
+                }
+            }
+        }
+        center = scaleVector(
+            center, 1.0F / static_cast<float>(corners.size()));
+        float radius = 0.0F;
+        for (const Vector3& corner : corners) {
+            radius = std::max(
+                radius, vectorLength(subtract(corner, center)));
+        }
+        radius = std::max(std::ceil(radius * 16.0F) / 16.0F, 0.25F);
+        const Vector3 lightEye = addVectors(
+            center, scaleVector(lightDirection, radius * 2.0F + 0.1F));
+        const Vector3 lightUp = std::abs(dot(lightDirection, worldUp)) > 0.97F
+            ? Vector3{0.0F, 0.0F, 1.0F}
+            : worldUp;
+        const Matrix4 lightView = lookAt(lightEye, center, lightUp);
+        const Matrix4 lightProjection = orthographic(
+            -radius, radius, -radius, radius, 0.1F, radius * 4.1F);
+        cascadeLightViewProjections_[cascade] =
+            multiply(lightProjection, lightView);
+        cascadeNear = cascadeFar;
+    }
     const Vector3 lightTarget = {0.0F, -0.10F, 0.0F};
-    const Vector3 lightPosition = {
+    const Vector3 cullingLightPosition = {
         lightTarget[0] + lightDirection[0] * 4.5F,
         lightTarget[1] + lightDirection[1] * 4.5F,
         lightTarget[2] + lightDirection[2] * 4.5F,
     };
-    const Matrix4 lightView = lookAt(
-        lightPosition,
-        lightTarget,
-        {0.0F, 1.0F, 0.0F});
-    const Matrix4 lightProjection = orthographic(
+    const Matrix4 cullingLightView = lookAt(
+        cullingLightPosition, lightTarget, worldUp);
+    const Matrix4 cullingLightProjection = orthographic(
         -1.90F, 1.90F, -1.90F, 1.90F, 0.10F, 8.0F);
-    lightViewMatrix_ = lightView;
-    lightProjectionMatrix_ = lightProjection;
     shadowFrustum_ = scene::extractFrustumPlanes(
-        multiply(lightProjection, lightView));
+        multiply(cullingLightProjection, cullingLightView));
 
     UniformBufferObject uniform{};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
+    };
+    uniform.cameraForward = {
+        cameraForward[0], cameraForward[1], cameraForward[2], 0.0F,
+    };
+    uniform.clusterGrid = {
+        static_cast<float>(kClusterGridX),
+        static_cast<float>(kClusterGridY),
+        static_cast<float>(kClusterGridZ),
+        static_cast<float>(frameLights_.lights().size()),
+    };
+    uniform.clusterDepth = {
+        0.1F,
+        100.0F,
+        static_cast<float>(std::max(frame.swapchainWidth, 1U)),
+        static_cast<float>(std::max(frame.swapchainHeight, 1U)),
+    };
+    uniform.cascadeSplits = {
+        cascadeSplits_[0],
+        cascadeSplits_[1],
+        cascadeSplits_[2],
+        cascadeSplits_[3],
     };
     uniform.renderingParameters = {
         largestExtent * 0.004F,
@@ -1831,6 +2467,111 @@ void CharacterSceneRenderer::updateUniformBuffer(
         sizeof(uniform));
 }
 
+void CharacterSceneRenderer::updateClusteredLighting(
+    const Matrix4& view,
+    const Matrix4& projection,
+    const std::uint32_t width,
+    const std::uint32_t height) {
+    (void)width;
+    (void)height;
+    std::vector<RenderLight> lights;
+    lights.reserve(scene_.lights.size());
+    for (const scene::SceneLightDesc& source : scene_.lights) {
+        if (!source.enabled) {
+            continue;
+        }
+        const Vector3 viewPosition = transformPosition(view, source.position);
+        const float depth = -viewPosition[2];
+        if (!(depth > 0.0F) || source.radius <= 0.0F) {
+            continue;
+        }
+        const float clipX = projection[0] * viewPosition[0]
+            + projection[4] * viewPosition[1]
+            + projection[8] * viewPosition[2] + projection[12];
+        const float clipY = projection[1] * viewPosition[0]
+            + projection[5] * viewPosition[1]
+            + projection[9] * viewPosition[2] + projection[13];
+        const float clipW = projection[3] * viewPosition[0]
+            + projection[7] * viewPosition[1]
+            + projection[11] * viewPosition[2] + projection[15];
+        if (!(std::abs(clipW) > 1.0e-6F)) {
+            continue;
+        }
+        RenderLight light{};
+        std::uint64_t stableId = 1469598103934665603ULL;
+        for (const unsigned char value : source.id) {
+            stableId ^= value;
+            stableId *= 1099511628211ULL;
+        }
+        light.stableId = stableId;
+        light.position[0] = source.position[0];
+        light.position[1] = source.position[1];
+        light.position[2] = source.position[2];
+        light.clusterPosition[0] = clipX / clipW;
+        light.clusterPosition[1] = clipY / clipW;
+        light.clusterPosition[2] = depth;
+        for (std::size_t channel = 0; channel < 3; ++channel) {
+            light.color[channel] = source.color[channel];
+        }
+        light.intensity = source.intensity;
+        light.radius = source.radius;
+        lights.push_back(light);
+    }
+    frameLights_.setLights(std::move(lights), kMaxSceneLights);
+    ClusteredLightGrid grid({
+        kClusterGridX,
+        kClusterGridY,
+        kClusterGridZ,
+        0.1F,
+        100.0F,
+        std::abs(projection[0]),
+        std::abs(projection[5]),
+    });
+    grid.assign(frameLights_.lights());
+    packedLights_ = frameLights_.gpuData();
+    packedClusterHeaders_ = grid.gpuHeaderData();
+    packedClusterIndices_ = grid.gpuIndexData();
+    if (!clusteredLightingReported_) {
+        azurerender::RuntimeDiagnostics::instance().print(
+            "render",
+            "Clustered lighting: "
+                + std::to_string(frameLights_.lights().size()) + " lights, "
+                + std::to_string(packedClusterIndices_.size())
+                + " cluster references");
+        clusteredLightingReported_ = true;
+    }
+
+    rhi::GpuBuffer& lightBuffer = lightBuffers_[currentFrame_];
+    std::memset(
+        lightBuffer.mapped, 0, static_cast<std::size_t>(lightBuffer.size));
+    if (!packedLights_.empty()) {
+        std::memcpy(
+            lightBuffer.mapped,
+            packedLights_.data(),
+            packedLights_.size() * sizeof(RenderLightGpu));
+    }
+    rhi::GpuBuffer& headerBuffer = clusterHeaderBuffers_[currentFrame_];
+    std::memcpy(
+        headerBuffer.mapped,
+        packedClusterHeaders_.data(),
+        packedClusterHeaders_.size()
+            * sizeof(std::array<std::uint32_t, 2>));
+    rhi::GpuBuffer& indexBuffer = clusterIndexBuffers_[currentFrame_];
+    std::memset(
+        indexBuffer.mapped, 0, static_cast<std::size_t>(indexBuffer.size));
+    if (!packedClusterIndices_.empty()) {
+        if (packedClusterIndices_.size()
+            > indexBuffer.size / sizeof(std::uint32_t)) {
+            throw std::runtime_error(
+                "Cluster light index buffer capacity exceeded");
+        }
+        std::memcpy(
+            indexBuffer.mapped,
+            packedClusterIndices_.data(),
+            packedClusterIndices_.size() * sizeof(std::uint32_t));
+    }
+}
+
 void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     rhi::ICommandRecorder& commands = *context.commands;
     rhi::RenderPassBeginDesc shadowPass{};
@@ -1842,11 +2583,7 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     shadowPass.clearValues = {shadowClear};
     commands.beginRenderPass(shadowPass);
 
-    const float shadowSize = static_cast<float>(context.shadowMapSize);
-    commands.setViewport(shadowSize, shadowSize);
-    commands.setScissor({context.shadowMapSize, context.shadowMapSize});
-    commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-    commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+    const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
     commands.bindPipeline(shadowPipeline_);
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
@@ -1858,8 +2595,31 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             ++context.submissionCounters->descriptorSetBinds;
         }
     }
-    for (const std::array<std::uint32_t, 3>& span :
-         visibleShadowSpansByMeshKey_) {
+    for (std::uint32_t cascade = 0;
+         cascade < kShadowCascadeCount;
+         ++cascade) {
+        const VkOffset2D cascadeOffset{
+            static_cast<std::int32_t>((cascade % 2) * cascadeResolution),
+            static_cast<std::int32_t>((cascade / 2) * cascadeResolution),
+        };
+        const float resolution = static_cast<float>(cascadeResolution);
+        commands.setViewport(
+            resolution, resolution,
+            static_cast<float>(cascadeOffset.x),
+            static_cast<float>(cascadeOffset.y));
+        commands.setScissor(
+            {cascadeResolution, cascadeResolution}, cascadeOffset);
+        commands.pushConstants(
+            pipelineLayout_,
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+            sizeof(MaterialPushConstants) + sizeof(MorphPushConstants),
+            &cascade,
+            sizeof(cascade));
+        if (context.submissionCounters != nullptr) {
+            ++context.submissionCounters->pushConstantUpdates;
+        }
+        for (const std::array<std::uint32_t, 3>& span :
+             visibleShadowSpansByMeshKey_) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -1931,18 +2691,21 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             }
         };
         if (meshKey == 0) {
-            commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-            commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
             recordShadowPrimitives(asset_, kSharedTextureSlots, 0);
         } else {
             const AdditionalResource& resource =
                 *additionalResources_[meshKey - 1];
-            commands.bindVertexBuffer(resource.vertexBuffer.buffer, 0);
-            commands.bindIndexBuffer(resource.indexBuffer.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
             recordShadowPrimitives(
                 resource.asset,
                 resource.textureBase,
                 resource.globalMaterialBase);
+        }
         }
     }
     commands.endRenderPass();
@@ -2001,10 +2764,22 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
         commands.draw(3);
     }
 
-    commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-    commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+    commands.bindVertexBuffer(
+        renderVertexBuffer(0, context.currentFrame).buffer, 0);
+    commands.bindIndexBuffer(renderIndexBuffer(0).buffer, 0);
     if (settings.silhouetteOutlineEnabled) {
         commands.bindPipeline(outlinePipeline_);
+        MorphPushConstants outlineMorphConstants{};
+        outlineMorphConstants.weights = settings.morphWeights;
+        commands.pushConstants(
+            pipelineLayout_,
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+            sizeof(MaterialPushConstants),
+            &outlineMorphConstants,
+            sizeof(outlineMorphConstants));
+        if (context.submissionCounters != nullptr) {
+            ++context.submissionCounters->pushConstantUpdates;
+        }
         for (const std::array<std::uint32_t, 3>& span :
              visibleSpansByMeshKey_) {
             const std::uint32_t meshKey = span[0];
@@ -2050,14 +2825,16 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 }
             };
             if (meshKey == 0) {
-                commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-                commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+                commands.bindVertexBuffer(
+                    renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+                commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
                 recordOutlinePrimitives(asset_, 0);
             } else {
                 const AdditionalResource& resource =
                     *additionalResources_[meshKey - 1];
-                commands.bindVertexBuffer(resource.vertexBuffer.buffer, 0);
-                commands.bindIndexBuffer(resource.indexBuffer.buffer, 0);
+                commands.bindVertexBuffer(
+                    renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+                commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
                 recordOutlinePrimitives(
                     resource.asset, resource.globalMaterialBase);
             }
@@ -2087,14 +2864,16 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
             }
         };
         if (meshKey == 0) {
-            commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-            commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
             recordOpaquePrimitives(asset_, kSharedTextureSlots, 0);
         } else {
             const AdditionalResource& resource =
                 *additionalResources_[meshKey - 1];
-            commands.bindVertexBuffer(resource.vertexBuffer.buffer, 0);
-            commands.bindIndexBuffer(resource.indexBuffer.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
             recordOpaquePrimitives(
                 resource.asset,
                 resource.textureBase,
@@ -2134,13 +2913,13 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
             }
         }
         if (meshKey == 0) {
-            commands.bindVertexBuffer(vertexBuffer_.buffer, 0);
-            commands.bindIndexBuffer(indexBuffer_.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
         } else {
-            const AdditionalResource& resource =
-                *additionalResources_[meshKey - 1];
-            commands.bindVertexBuffer(resource.vertexBuffer.buffer, 0);
-            commands.bindIndexBuffer(resource.indexBuffer.buffer, 0);
+            commands.bindVertexBuffer(
+                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
+            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
         }
         std::size_t oitWriteIndex = 0;
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {

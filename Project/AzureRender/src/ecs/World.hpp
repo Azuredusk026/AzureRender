@@ -70,6 +70,14 @@ public:
     }
 
     template <typename T>
+    void removeComponent(const Entity entity) noexcept {
+        const auto iterator = componentArrays_.find(std::type_index(typeid(T)));
+        if (iterator != componentArrays_.end()) {
+            iterator->second->erase(entity);
+        }
+    }
+
+    template <typename T>
     [[nodiscard]] T* tryGet(const Entity entity) noexcept {
         auto iterator = componentArrays_.find(std::type_index(typeid(T)));
         if (iterator == componentArrays_.end()) {

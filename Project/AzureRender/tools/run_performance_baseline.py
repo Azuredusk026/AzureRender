@@ -14,15 +14,26 @@ CPU-side submission cost.
 import argparse
 import json
 import platform
-import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+from run_visual_regression import run_renderer
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 SCENES = [
     {"name": "character", "args": []},
+    {
+        "name": "character_lights_0",
+        "sceneType": "character",
+        "args": ["--scene", "assets_public/scenes/clustered_lights_empty.azscene"],
+    },
+    {
+        "name": "character_lights_16",
+        "sceneType": "character",
+        "args": ["--scene", "assets_public/scenes/clustered_lights_16.azscene"],
+    },
     {"name": "blackhole", "args": ["--blackhole-quality", "balanced"]},
 ]
 
@@ -49,7 +60,7 @@ def run_scene(
             stale.unlink()
     command = [
         str(executable),
-        "--scene-type", scene["name"],
+        "--scene-type", scene.get("sceneType", scene["name"]),
         "--width", str(width),
         "--height", str(height),
         "--smoke-frames", str(frames),
@@ -57,8 +68,7 @@ def run_scene(
         "--gpu-timing-output", str(report_path),
         *scene["args"],
     ]
-    completed = subprocess.run(
-        command, cwd=PROJECT_ROOT, capture_output=True, text=True)
+    completed = run_renderer(command)
     if completed.returncode != 0:
         return {
             "scene": scene["name"],

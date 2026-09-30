@@ -13,12 +13,44 @@
     {
       "name": "TestRoot",
       "translation": [0.0, 0.1, 0.0],
-      "children": [1]
+      "children": [1, 2]
     },
     {
       "mesh": 0,
       "name": "TexturedCube",
-      "scale": [0.9, 0.9, 0.9]
+      "scale": [0.9, 0.9, 0.9],
+      "skin": 0
+    },
+    {
+      "name": "AnimatedJoint"
+    }
+  ],
+  "skins": [
+    {
+      "inverseBindMatrices": 7,
+      "joints": [2],
+      "skeleton": 2
+    }
+  ],
+  "animations": [
+    {
+      "name": "MorphJointPulse",
+      "samplers": [
+        {
+          "input": 8,
+          "output": 9,
+          "interpolation": "LINEAR"
+        }
+      ],
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 2,
+            "path": "translation"
+          }
+        }
+      ]
     }
   ],
   "meshes": [
@@ -29,20 +61,34 @@
           "attributes": {
             "POSITION": 0,
             "NORMAL": 1,
-            "TEXCOORD_0": 2
+            "TEXCOORD_0": 2,
+            "JOINTS_0": 5,
+            "WEIGHTS_0": 6
           },
           "indices": 3,
           "material": 0,
+          "targets": [
+            {
+              "POSITION": 1
+            }
+          ],
           "mode": 4
         },
         {
           "attributes": {
             "POSITION": 0,
             "NORMAL": 1,
-            "TEXCOORD_0": 2
+            "TEXCOORD_0": 2,
+            "JOINTS_0": 5,
+            "WEIGHTS_0": 6
           },
           "indices": 4,
           "material": 1,
+          "targets": [
+            {
+              "POSITION": 1
+            }
+          ],
           "mode": 4
         }
       ]
@@ -141,6 +187,10 @@
     {
       "byteLength": 840,
       "uri": "data:application/octet-stream;base64,AACAvwAAgL8AAIA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AACAvwAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAACAvwAAgD8AAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAvwAAgL8AAAAAAAAAAAAAgL8AAAAAAACAPwAAgL8AAIC/AACAvwAAAAAAAAAAAACAvwAAgD8AAIA/AACAvwAAgD8AAIC/AAAAAAAAAAAAAIC/AACAPwAAAAAAAIA/AACAPwAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgD8AAIC/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgL8AAIC/AACAPwAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgL8AAIA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAACAvwAAgL8AAIC/AACAvwAAAAAAAAAAAAAAAAAAgD8AAIC/AACAvwAAgD8AAIC/AAAAAAAAAAAAAIA/AACAPwAAgL8AAIA/AACAPwAAgL8AAAAAAAAAAAAAgD8AAAAAAACAvwAAgD8AAIC/AACAvwAAAAAAAAAAAAAAAAAAAAAAAIC/AACAPwAAgD8AAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAgD8AAIA/AACAPwAAgD8AAIC/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIC/AACAPwAAgL8AAAAAAACAPwAAAAAAAAAAAAAAAAAAgL8AAIC/AACAvwAAAAAAAIC/AAAAAAAAAAAAAIA/AACAPwAAgL8AAIC/AAAAAAAAgL8AAAAAAACAPwAAgD8AAIA/AACAvwAAgD8AAAAAAACAvwAAAAAAAIA/AAAAAAAAgL8AAIC/AACAPwAAAAAAAIC/AAAAAAAAAAAAAAAAAAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"
+    },
+    {
+      "byteLength": 576,
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAM3MzL0AAAAAAACAPwAAAAAAAIA+AAAAAAAAAAAAAAAAzcxMPgAAAAAAAAAA"
     }
   ],
   "bufferViews": [
@@ -156,6 +206,33 @@
       "byteOffset": 768,
       "byteLength": 72,
       "target": 34963
+    },
+    {
+      "buffer": 1,
+      "byteOffset": 0,
+      "byteLength": 96,
+      "target": 34962
+    },
+    {
+      "buffer": 1,
+      "byteOffset": 96,
+      "byteLength": 384,
+      "target": 34962
+    },
+    {
+      "buffer": 1,
+      "byteOffset": 480,
+      "byteLength": 64
+    },
+    {
+      "buffer": 1,
+      "byteOffset": 544,
+      "byteLength": 8
+    },
+    {
+      "buffer": 1,
+      "byteOffset": 552,
+      "byteLength": 24
     }
   ],
   "accessors": [
@@ -195,6 +272,38 @@
       "componentType": 5123,
       "count": 18,
       "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5121,
+      "count": 24,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 1,
+      "type": "MAT4"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 2,
+      "type": "SCALAR",
+      "min": [0.0],
+      "max": [0.25]
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 2,
+      "type": "VEC3"
     }
   ]
 }

@@ -132,6 +132,8 @@ private:
     // device; every upload ring slice honors it.
     VkDeviceSize uploadRingAlignment_ = 1;
     bool hdrSceneColorFormatSupported_ = false;
+    bool rgba16fStorageImageSupported_ = false;
+    bool computeShaderSupported_ = false;
     // Device supports the descriptor-indexing pair the character renderer's
     // bindless texture array needs (runtimeDescriptorArray plus
     // shaderSampledImageArrayNonUniformIndexing).
