@@ -9,6 +9,7 @@
 #include "render/RenderSettings.hpp"
 #include "render/GpuCullingResources.hpp"
 #include "render/DeformedBounds.hpp"
+#include "render/SceneInstanceSnapshot.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
@@ -196,6 +197,7 @@ private:
     std::vector<std::size_t> transparentIndexOffsets_;
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
+    std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     void prepareTransparentIndices();
     bool gpuCullingEnabled_ = false;
     bool multiDrawIndirect_ = false;
@@ -318,7 +320,8 @@ private:
     void recordComputeSkinning(const RenderContext& context);
     void recordComputeSkinningMesh(
         const RenderContext& context,
-        std::uint32_t meshKey, rhi::ICommandRecorder* recorder = nullptr);
+        std::uint32_t meshKey, rhi::ICommandRecorder* recorder = nullptr,
+        const std::array<float, 2>* morphWeights = nullptr);
     [[nodiscard]] const rhi::GpuBuffer& renderVertexBuffer(
         std::uint32_t meshKey,
         std::uint32_t frameIndex) const;
@@ -366,9 +369,11 @@ private:
     void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
     void recordShadowDraws(const RenderContext& context,
-        std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount);
+        std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount,
+        const SceneInstanceSnapshot* snapshot = nullptr);
     void recordMainPass(const RenderContext& context);
-    void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0);
+    void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0,
+        const SceneInstanceSnapshot* snapshot = nullptr);
     rhi::RenderPassBeginDesc mainPassDescription(const RenderContext& context) const;
     void drawPrimitive(
         rhi::ICommandRecorder& commands,
@@ -379,7 +384,8 @@ private:
         std::uint32_t firstInstance = 0,
         std::uint32_t textureBase = 0,
         std::size_t globalMaterialBase = 0,
-        SceneSubmissionCounters* counters = nullptr);
+        SceneSubmissionCounters* counters = nullptr,
+        const SceneInstanceSnapshot* snapshot = nullptr);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

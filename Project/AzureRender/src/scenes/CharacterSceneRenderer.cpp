@@ -357,6 +357,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     createGraphicsPipeline(context);
 
     buildSceneState();
+
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
@@ -402,6 +403,31 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         opaqueRecordingSpans_ = visibleSpansByMeshKey_;
     }
     buildSceneState();
+    std::vector<std::uint32_t> visibleIndices;
+    visibleIndices.reserve(visibleInstances_.size());
+    for (const auto* instance : visibleInstances_) visibleIndices.push_back(instance->sourceIndex);
+    RecordingBufferSet recordingBuffers;
+    recordingBuffers.vertices.reserve(meshResourceCount_);
+    recordingBuffers.indices.reserve(meshResourceCount_);
+    recordingBuffers.multiDrawIndirect = multiDrawIndirect_;
+    recordingBuffers.maxDrawIndirectCount = maxDrawIndirectCount_;
+    recordingBuffers.transparentPrimitives.resize(transparentPrimitivesByMesh_.size());
+    for (std::size_t key = 0; key < transparentPrimitivesByMesh_.size(); ++key) {
+        const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
+        for (const auto* primitive : transparentPrimitivesByMesh_[key])
+            recordingBuffers.transparentPrimitives[key].push_back(static_cast<std::size_t>(primitive - mesh.primitives.data()));
+    }
+    for (std::uint32_t key = 0; key < meshResourceCount_; ++key) {
+        recordingBuffers.vertices.push_back(renderVertexBuffer(key, static_cast<std::uint32_t>(currentFrame_)).buffer);
+        recordingBuffers.indices.push_back(renderIndexBuffer(key).buffer);
+    }
+    if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
+    instanceSnapshot_ = std::make_shared<const SceneInstanceSnapshot>(
+        std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
+        std::move(visibleShadowSpansByMeshKey_), std::move(indirectInstanceOffsets_), std::move(transparentIndexOffsets_), std::move(visibleSpansByMeshKey_), *renderSettings_,
+        gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
+        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers));
+    visibleInstances_.clear();
 }
 
 void CharacterSceneRenderer::rebuildSceneInstances() {
@@ -710,9 +736,9 @@ void CharacterSceneRenderer::registerPasses(
         if (computeSkinningEnabled_) {
             const auto skin = graph.addCommandPass(
                 "character-skinning-" + std::to_string(meshKey),
-                [this, frozenContext, meshKey](rhi::ICommandRecorder& commands) {
+                [this, frozenContext, meshKey, weights = instanceSnapshot_->settings.morphWeights](rhi::ICommandRecorder& commands) {
                     const auto& context = *frozenContext;
-                    recordComputeSkinningMesh(context, meshKey, &commands);
+                    recordComputeSkinningMesh(context, meshKey, &commands, &weights);
                 }, true);
             graph.use(skin, inputResource, RenderGraphUsage::Storage, false);
             graph.use(skin, jointResource, RenderGraphUsage::Storage, false);
@@ -727,11 +753,22 @@ void CharacterSceneRenderer::registerPasses(
     VkClearValue shadowClear{};
     shadowClear.depthStencil = {1.0F, 0};
     shadowBegin.clearValues = {shadowClear};
-    const auto shadow = graph.addGraphicsPass("character-shadow", shadowBegin, [this, frozenContext](rhi::ICommandRecorder& commands) {
+    const auto frozenInstances = instanceSnapshot_;
+    if (!frozenInstances) throw std::logic_error("Scene passes require a prepared instance snapshot");
+    frozenInstances->validateForRecording();
+    if (frozenInstances->buffers.transparentPrimitives.size() != meshResourceCount_)
+        throw std::logic_error("Snapshot transparent mesh mapping incomplete");
+    for (std::size_t key = 0; key < meshResourceCount_; ++key) {
+        const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
+        for (const auto index : frozenInstances->buffers.transparentPrimitives[key])
+            if (index >= mesh.primitives.size())
+                throw std::out_of_range("Snapshot transparent primitive mapping");
+    }
+    const auto shadow = graph.addGraphicsPass("character-shadow", shadowBegin, [this, frozenContext, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         auto recordingContext = context;
         recordingContext.commands = &commands;
-        recordShadowDraws(recordingContext);
+        recordShadowDraws(recordingContext, 0, kShadowCascadeCount, frozenInstances.get());
     }, [frozenContext](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         if (context.gpuTimingEnabled)
@@ -745,8 +782,8 @@ void CharacterSceneRenderer::registerPasses(
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
-    mainCounters->instances = sceneInstances_.size();
-    mainCounters->visibleInstances = visibleInstances_.size();
+    mainCounters->instances = frozenInstances->instances.size();
+    mainCounters->visibleInstances = frozenInstances->visibleIndices.size();
     const auto stageCounters = std::make_shared<std::array<SceneSubmissionCounters, 3>>();
     std::optional<RenderGraph::ResourceId> indirectResource;
     if (gpuCullingFrames_[context.currentFrame]) {
@@ -774,12 +811,12 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(cull, source, RenderGraphUsage::Storage, false);
         graph.use(cull, *indirectResource, RenderGraphUsage::Storage, true);
     }
-    const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters](rhi::ICommandRecorder& commands) {
+    const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         auto recordingContext = context;
         recordingContext.commands = &commands;
         recordingContext.submissionCounters = context.submissionCounters != nullptr ? mainCounters.get() : nullptr;
-        recordMainDraws(recordingContext);
+        recordMainDraws(recordingContext, 0, frozenInstances.get());
     }, [frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         for (const auto& counters : *stageCounters) {
@@ -804,12 +841,12 @@ void CharacterSceneRenderer::registerPasses(
     std::vector<std::function<void(rhi::ICommandRecorder&)>> mainChunks;
     for (const std::uint32_t stage : {4U, 3U}) {
         if (stage == 3 && !transparentDrawsPrepared_) continue;
-        mainChunks.push_back([this, frozenContext, stageCounters, stage](rhi::ICommandRecorder& commands) {
+        mainChunks.push_back([this, frozenContext, stageCounters, stage, frozenInstances](rhi::ICommandRecorder& commands) {
             auto recordingContext = *frozenContext;
             recordingContext.commands = &commands;
             recordingContext.submissionCounters = frozenContext->submissionCounters != nullptr
                 ? &(*stageCounters)[stage == 4 ? 0 : 2] : nullptr;
-            recordMainDraws(recordingContext, stage);
+            recordMainDraws(recordingContext, stage, frozenInstances.get());
         });
     }
     graph.setRecordingChunks(main, std::move(mainChunks));
@@ -842,6 +879,8 @@ void CharacterSceneRenderer::registerPasses(
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
+    if (!instanceSnapshot_) throw std::logic_error("Direct recording requires a prepared snapshot");
+    instanceSnapshot_->validateForRecording();
     recordComputeSkinning(context);
     recordShadowPass(context);
     recordMainPass(context);
@@ -1540,7 +1579,8 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
 
 void CharacterSceneRenderer::recordComputeSkinningMesh(
     const RenderContext& context,
-    const std::uint32_t meshKey, rhi::ICommandRecorder* recorder) {
+    const std::uint32_t meshKey, rhi::ICommandRecorder* recorder,
+    const std::array<float, 2>* morphWeights) {
     auto& commands = recorder != nullptr ? *recorder : *context.commands;
     const LoadedAsset& mesh = meshKey == 0
         ? asset_
@@ -1553,7 +1593,7 @@ void CharacterSceneRenderer::recordComputeSkinningMesh(
     const SkinningPushConstants parameters{
         static_cast<std::uint32_t>(mesh.vertices.size()),
         jointBase,
-        renderSettings_->morphWeights,
+        morphWeights != nullptr ? *morphWeights : renderSettings_->morphWeights,
     };
     commands.pushConstants(
         skinningPipelineLayout_,
@@ -2734,7 +2774,7 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     shadowClear.depthStencil = {1.0F, 0};
     shadowPass.clearValues = {shadowClear};
     commands.beginRenderPass(shadowPass);
-    recordShadowDraws(context);
+    recordShadowDraws(context, 0, kShadowCascadeCount, instanceSnapshot_.get());
     commands.endRenderPass();
     if (context.gpuTimingEnabled) {
         commands.writeTimestamp(context.timestampQueryPool, 1, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
@@ -2742,7 +2782,9 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
 }
 
 void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
-    std::uint32_t firstCascade, std::uint32_t cascadeCount) {
+    std::uint32_t firstCascade, std::uint32_t cascadeCount,
+    const SceneInstanceSnapshot* snapshot) {
+    if (snapshot == nullptr) throw std::logic_error("Shadow recording requires an instance snapshot");
     rhi::ICommandRecorder& commands = *context.commands;
 
     const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
@@ -2781,7 +2823,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             ++context.submissionCounters->pushConstantUpdates;
         }
         for (const std::array<std::uint32_t, 3>& span :
-             visibleShadowSpansByMeshKey_) {
+             snapshot->shadowSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -2829,7 +2871,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                     &materialConstants,
                     sizeof(materialConstants));
                 MorphPushConstants morphConstants{};
-                morphConstants.weights = renderSettings_->morphWeights;
+                morphConstants.weights = snapshot->settings.morphWeights;
                 if (bindlessTextures_) {
                     morphConstants.textureBaseIndex =
                         textureBase
@@ -2854,15 +2896,15 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
         };
         if (meshKey == 0) {
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                snapshot->buffers.vertices.at(meshKey), 0);
+            commands.bindIndexBuffer(snapshot->buffers.indices.at(meshKey), 0);
             recordShadowPrimitives(asset_, kSharedTextureSlots, 0);
         } else {
             const AdditionalResource& resource =
                 *additionalResources_[meshKey - 1];
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                snapshot->buffers.vertices.at(meshKey), 0);
+            commands.bindIndexBuffer(snapshot->buffers.indices.at(meshKey), 0);
             recordShadowPrimitives(
                 resource.asset,
                 resource.textureBase,
@@ -2875,7 +2917,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
 void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     rhi::ICommandRecorder& commands = *context.commands;
     commands.beginRenderPass(mainPassDescription(context));
-    recordMainDraws(context);
+    recordMainDraws(context, 0, instanceSnapshot_.get());
     commands.endRenderPass();
     if (context.gpuTimingEnabled) {
         commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
@@ -2986,7 +3028,9 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
     }
 }
 
-void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::uint32_t stage) {
+void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::uint32_t stage,
+    const SceneInstanceSnapshot* snapshot) {
+    if (snapshot == nullptr) throw std::logic_error("Main recording requires an instance snapshot");
     rhi::ICommandRecorder& commands = *context.commands;
 
     commands.setViewport(
@@ -3004,7 +3048,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
         }
     }
 
-    const RenderSettings& settings = *renderSettings_;
+    const RenderSettings& settings = snapshot->settings;
     if (stage == 0 || stage == 1 || stage == 4) {
     if (settings.characterPresentation.backgroundEnabled) {
         commands.bindPipeline(backgroundPipeline_);
@@ -3021,8 +3065,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
 
     commands.bindVertexBuffer(
-        renderVertexBuffer(0, context.currentFrame).buffer, 0);
-    commands.bindIndexBuffer(renderIndexBuffer(0).buffer, 0);
+        (snapshot != nullptr ? snapshot->buffers.vertices.at(0) : renderVertexBuffer(0, context.currentFrame).buffer), 0);
+    commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(0) : renderIndexBuffer(0).buffer), 0);
     if (settings.silhouetteOutlineEnabled) {
         commands.bindPipeline(outlinePipeline_);
         MorphPushConstants outlineMorphConstants{};
@@ -3037,7 +3081,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             ++context.submissionCounters->pushConstantUpdates;
         }
         for (const std::array<std::uint32_t, 3>& span :
-             visibleSpansByMeshKey_) {
+             snapshot->visibleSpans) {
             const std::uint32_t meshKey = span[0];
             const std::uint32_t firstInstance = span[1];
             const std::uint32_t instanceCount = span[2];
@@ -3082,15 +3126,15 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             };
             if (meshKey == 0) {
                 commands.bindVertexBuffer(
-                    renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-                commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
                 recordOutlinePrimitives(asset_, 0);
             } else {
                 const AdditionalResource& resource =
                     *additionalResources_[meshKey - 1];
                 commands.bindVertexBuffer(
-                    renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-                commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
                 recordOutlinePrimitives(
                     resource.asset, resource.globalMaterialBase);
             }
@@ -3098,7 +3142,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
     }
     if (stage == 0 || stage == 2 || stage == 4) {
-    for (const std::array<std::uint32_t, 3>& span : opaqueRecordingSpans_) {
+    for (const std::array<std::uint32_t, 3>& span : snapshot->opaqueSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -3117,21 +3161,21 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         instanceCount,
                         firstInstance,
                         textureBase,
-                        globalMaterialBase, context.submissionCounters);
+                        globalMaterialBase, context.submissionCounters, snapshot);
                 }
             }
         };
         if (meshKey == 0) {
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+            commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
             recordOpaquePrimitives(asset_, kSharedTextureSlots, 0);
         } else {
             const AdditionalResource& resource =
                 *additionalResources_[meshKey - 1];
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+            commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
             recordOpaquePrimitives(
                 resource.asset,
                 resource.textureBase,
@@ -3140,8 +3184,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
     }
     if (stage == 0 || stage == 3) {
-    for (std::size_t slot = 0; slot < visibleInstances_.size(); ++slot) {
-        const scene::SceneInstance* instance = visibleInstances_[slot];
+    for (std::size_t slot = 0; slot < snapshot->visibleIndices.size(); ++slot) {
+        const scene::SceneInstance* instance = &snapshot->instances.at(snapshot->visibleIndices[slot]);
         const std::uint32_t firstInstance = instance->sourceIndex;
         const std::uint32_t meshKey = instance->meshKey;
         const LoadedAsset& mesh = meshKey == 0
@@ -3153,24 +3197,28 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
         const std::size_t globalMaterialBase = meshKey == 0
             ? 0
             : additionalResources_[meshKey - 1]->globalMaterialBase;
-        const auto& transparentPrimitives = transparentPrimitivesByMesh_[meshKey];
         if (meshKey == 0) {
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+            commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
         } else {
             commands.bindVertexBuffer(
-                renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
-            commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
+                (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
+            commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
         }
-        std::size_t oitReadIndex = transparentIndexOffsets_.at(instance->sourceIndex);
-        for (const AssetPrimitive* primitive : transparentPrimitives) {
+        std::size_t oitReadIndex = snapshot->transparentOffsets.at(instance->sourceIndex);
+        const auto primitiveCount = snapshot != nullptr
+            ? snapshot->buffers.transparentPrimitives.at(meshKey).size() : transparentPrimitivesByMesh_[meshKey].size();
+        for (std::size_t primitiveSlot = 0; primitiveSlot < primitiveCount; ++primitiveSlot) {
+            const auto* primitive = snapshot != nullptr
+                ? &mesh.primitives.at(snapshot->buffers.transparentPrimitives[meshKey][primitiveSlot])
+                : transparentPrimitivesByMesh_[meshKey][primitiveSlot];
             if (!oitIndexBuffers_.empty()) {
                 const VkDeviceSize offsetBytes =
                     static_cast<VkDeviceSize>(oitReadIndex)
                     * sizeof(std::uint32_t);
                 commands.bindIndexBuffer(
-                    oitIndexBuffers_[context.currentFrame].buffer,
+                    (snapshot != nullptr ? snapshot->buffers.transparentIndices : oitIndexBuffers_[context.currentFrame].buffer),
                     offsetBytes);
             }
             drawPrimitive(
@@ -3181,7 +3229,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                 1,
                 firstInstance,
                 textureBase,
-                globalMaterialBase, context.submissionCounters);
+                globalMaterialBase, context.submissionCounters, snapshot);
             oitReadIndex += primitive->indexCount;
         }
     }
@@ -3197,10 +3245,13 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
     const std::size_t globalMaterialBase,
-    SceneSubmissionCounters* counters) {
+    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot) {
+    const auto frameIndex = snapshot != nullptr ? snapshot->frameIndex : currentFrame_;
+    const auto indirectBuffer = snapshot != nullptr ? snapshot->indirectBuffer
+        : (gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE);
     const AssetMaterial& material = mesh.materials[primitive.materialIndex];
     if (material.showcasePlatform > 0.5F
-        && !renderSettings_->characterPresentation.platformEnabled) {
+        && !(snapshot != nullptr ? snapshot->settings : *renderSettings_).characterPresentation.platformEnabled) {
         return;
     }
     const bool blend = material.alphaMode == AssetAlphaMode::Blend;
@@ -3210,7 +3261,7 @@ void CharacterSceneRenderer::drawPrimitive(
     commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
-            currentFrame_ * totalMaterialCount()
+            frameIndex * totalMaterialCount()
             + globalMaterialBase + primitive.materialIndex;
         commands.bindDescriptorSet(
             pipelineLayout_, descriptorSets_[descriptorIndex]);
@@ -3232,7 +3283,7 @@ void CharacterSceneRenderer::drawPrimitive(
             static_cast<std::uint32_t>(material.materialClass),
             material.materialFeatures,
             material.materialProfileVersion,
-            selectedPrimitiveIndex_
+            (snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
                 == static_cast<std::int32_t>(
                        &primitive - mesh.primitives.data())
             ? 1U
@@ -3245,7 +3296,7 @@ void CharacterSceneRenderer::drawPrimitive(
         &materialConstants,
         sizeof(materialConstants));
     MorphPushConstants morphConstants{};
-    morphConstants.weights = renderSettings_->morphWeights;
+    morphConstants.weights = (snapshot != nullptr ? snapshot->settings : *renderSettings_).morphWeights;
     if (bindlessTextures_) {
         morphConstants.textureBaseIndex =
             textureBase
@@ -3253,7 +3304,7 @@ void CharacterSceneRenderer::drawPrimitive(
     }
     morphConstants.gizmoTransform =
         [&]() -> std::array<float, 16> {
-            if (selectedPrimitiveIndex_
+            if ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
                 != static_cast<std::int32_t>(
                        &primitive - mesh.primitives.data())) {
                 return {1.0F, 0.0F, 0.0F, 0.0F,
@@ -3265,10 +3316,10 @@ void CharacterSceneRenderer::drawPrimitive(
             std::array<float, 3> gizmoTranslation{0.0F, 0.0F, 0.0F};
             std::array<float, 3> gizmoRotation{0.0F, 0.0F, 0.0F};
             std::array<float, 3> gizmoScale{1.0F, 1.0F, 1.0F};
-            if (gizmoActive_) {
-                gizmoTranslation = gizmoTranslation_;
-                gizmoRotation = gizmoRotation_;
-                gizmoScale = gizmoScale_;
+            if (snapshot != nullptr ? snapshot->gizmo.active : gizmoActive_) {
+                gizmoTranslation = snapshot != nullptr ? snapshot->gizmo.translation : gizmoTranslation_;
+                gizmoRotation = snapshot != nullptr ? snapshot->gizmo.rotation : gizmoRotation_;
+                gizmoScale = snapshot != nullptr ? snapshot->gizmo.scale : gizmoScale_;
             }
             const Matrix4 gizmoTransform = multiply(
                 translation(
@@ -3303,22 +3354,22 @@ void CharacterSceneRenderer::drawPrimitive(
         &morphConstants,
         sizeof(morphConstants));
     std::uint32_t recordedDrawCalls = 0;
-    if (!blend && gpuCullingFrames_[currentFrame_]
+    if (!blend && indirectBuffer != VK_NULL_HANDLE
         && firstIndexOffset == primitive.firstIndex) {
         const auto primitiveIndex = static_cast<std::size_t>(&primitive - mesh.primitives.data());
-        if (multiDrawIndirect_) {
+        if (snapshot != nullptr ? snapshot->buffers.multiDrawIndirect : multiDrawIndirect_) {
             for (std::uint32_t i = 0; i < instanceCount;) {
-                const auto count = std::min(maxDrawIndirectCount_, instanceCount - i);
-                const auto slot = indirectInstanceOffsets_.at(firstInstance + i) + primitiveIndex;
-                commands.drawIndexedIndirect(gpuCullingFrames_[currentFrame_]->output().buffer,
+                const auto count = std::min(snapshot != nullptr ? snapshot->buffers.maxDrawIndirectCount : maxDrawIndirectCount_, instanceCount - i);
+                const auto slot = (snapshot != nullptr ? snapshot->indirectOffsets : indirectInstanceOffsets_).at(firstInstance + i) + primitiveIndex;
+                commands.drawIndexedIndirect(indirectBuffer,
                     slot * sizeof(VkDrawIndexedIndirectCommand), count,
                     static_cast<std::uint32_t>(mesh.primitives.size() * sizeof(VkDrawIndexedIndirectCommand)));
                 i += count;
                 ++recordedDrawCalls;
             }
         } else for (std::uint32_t i = 0; i < instanceCount; ++i) {
-            const auto slot = indirectInstanceOffsets_.at(firstInstance + i) + primitiveIndex;
-            commands.drawIndexedIndirect(gpuCullingFrames_[currentFrame_]->output().buffer,
+            const auto slot = (snapshot != nullptr ? snapshot->indirectOffsets : indirectInstanceOffsets_).at(firstInstance + i) + primitiveIndex;
+            commands.drawIndexedIndirect(indirectBuffer,
                 slot * sizeof(VkDrawIndexedIndirectCommand), 1,
                 sizeof(VkDrawIndexedIndirectCommand));
             ++recordedDrawCalls;
@@ -3330,7 +3381,7 @@ void CharacterSceneRenderer::drawPrimitive(
     }
     if (counters != nullptr) {
         counters->drawCalls += recordedDrawCalls;
-        if (!blend && gpuCullingFrames_[currentFrame_]
+        if (!blend && indirectBuffer != VK_NULL_HANDLE
             && firstIndexOffset == primitive.firstIndex)
             counters->indirectDrawCalls += recordedDrawCalls;
         ++counters->pipelineBinds;

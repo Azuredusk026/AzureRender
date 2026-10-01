@@ -4,6 +4,7 @@
 #include "render/GpuCulling.hpp"
 #include "render/RecordingWorkerPool.hpp"
 #include "render/DeformedBounds.hpp"
+#include "render/SceneInstanceSnapshot.hpp"
 #include <atomic>
 #include <array>
 #include <thread>
@@ -16,6 +17,34 @@ static_assert(!std::is_copy_constructible_v<azurerender::RenderFrameSnapshot>);
 static_assert(!std::is_move_constructible_v<azurerender::RenderFrameSnapshot>);
 
 int main() {
+    std::vector<azurerender::scene::SceneInstance> sourceInstances(1);
+    sourceInstances[0].meshKey = 7;
+    const azurerender::SceneInstanceSnapshot instances(sourceInstances, {0}, {{7,0,1}}, {}, {0}, {0});
+    sourceInstances[0].meshKey = 9;
+    if (instances.instances[0].meshKey != 7 || instances.visibleIndices[0] != 0) return 1;
+    bool invalidSnapshotRejected = false;
+    try { instances.validateForRecording(); }
+    catch (const std::logic_error&) { invalidSnapshotRejected = true; }
+    if (!invalidSnapshotRejected) return 1;
+    azurerender::RecordingBufferSet validBuffers;
+    validBuffers.vertices.resize(8);
+    validBuffers.indices.resize(8);
+    sourceInstances[0].meshKey = 7;
+    const azurerender::SceneInstanceSnapshot validInstances(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers);
+    validInstances.validateForRecording();
+    bool invalidSpanRejected = false;
+    try {
+        const azurerender::SceneInstanceSnapshot invalidSpan(sourceInstances, {0}, {{7,0,2}}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers);
+        invalidSpan.validateForRecording();
+    } catch (const std::out_of_range&) { invalidSpanRejected = true; }
+    if (!invalidSpanRejected) return 1;
+    azurerender::RecordingGizmoState sourceGizmo;
+    sourceGizmo.selectedPrimitive = 3;
+    sourceGizmo.translation = {20, 0, 0};
+    const azurerender::SceneInstanceSnapshot gizmoSnapshot({}, {}, {}, {}, {}, {}, {}, {}, VK_NULL_HANDLE, 1, sourceGizmo);
+    sourceGizmo.selectedPrimitive = 9;
+    sourceGizmo.translation[0] = 0;
+    if (gizmoSnapshot.gizmo.selectedPrimitive != 3 || gizmoSnapshot.gizmo.translation[0] != 20) return 1;
     constexpr std::uint32_t limit = 65535U * 64U;
     if (azurerender::cullingDispatchBatchSize(limit) != limit
         || azurerender::cullingDispatchBatchSize(limit + 1) != limit

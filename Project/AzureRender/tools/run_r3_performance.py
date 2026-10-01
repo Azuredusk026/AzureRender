@@ -97,6 +97,11 @@ def main():
         "cpuMaximumMs": max(row["cpuRecordingMs"] for row in rows),
         "gpuMinimumMs": min(row["gpuMs"] for row in rows),
         "gpuMaximumMs": max(row["gpuMs"] for row in rows)} for name, rows in results.items()}
+    document["pairedRatios"] = [{
+        "repeat": i,
+        "cpuRatio": results["parallel_gpu"][i]["cpuRecordingMs"] / results["serial_gpu"][i]["cpuRecordingMs"],
+        "gpuRatio": results["parallel_gpu"][i]["gpuMs"] / results["serial_gpu"][i]["gpuMs"]}
+        for i in range(args.repeats)]
     if args.check_recording_budget:
         if args.generate_resources != 32 or args.frames != 300 or args.repeats < 3:
             raise RuntimeError("Recording budget requires 32 generated resources, 300 frames and at least three repeats")
