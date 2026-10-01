@@ -527,6 +527,7 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_visual_regression.py"
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
+                --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression"
                 --summary
                     "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-summary.json")
         set_tests_properties(
@@ -546,6 +547,7 @@ if(BUILD_TESTING)
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
                 "--renderer-arg=--disable-bindless"
+                --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy"
                 --summary
                     "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-summary.json")
         set_tests_properties(
@@ -598,6 +600,12 @@ if(BUILD_TESTING)
                 RUN_SERIAL TRUE)
     endif()
     if(WIN32 AND Python3_Interpreter_FOUND)
+        add_test(NAME AzureRender.AuditRegressions
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_audit_regressions.py"
+                --executable "$<TARGET_FILE:AzureRender>")
+        set_tests_properties(AzureRender.AuditRegressions PROPERTIES
+            TIMEOUT 90 LABELS "gpu" RUN_SERIAL TRUE)
         add_test(
             NAME AzureRender.VisualRegressionLegacySkinning
             COMMAND
@@ -606,6 +614,7 @@ if(BUILD_TESTING)
                 --executable "$<TARGET_FILE:AzureRender>"
                 --tolerance strict
                 "--renderer-arg=--disable-compute-skinning"
+                --output-dir "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-skinning"
                 --summary
                     "${CMAKE_CURRENT_BINARY_DIR}/visual-regression-legacy-skinning-summary.json")
         set_tests_properties(
@@ -843,8 +852,26 @@ set(CPACK_PACKAGE_NAME "AzureRender")
 set(CPACK_PACKAGE_VENDOR "AzureRender Project")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}-rc1")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Vulkan stylized renderer and editor RC")
+if(WIN32)
+    if(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]64$"
+        OR CMAKE_CXX_COMPILER_ARCHITECTURE_ID MATCHES "^[Aa][Rr][Mm]64$")
+        set(AZURERENDER_PACKAGE_ARCH "arm64")
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(AZURERENDER_PACKAGE_ARCH "x64")
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        set(AZURERENDER_PACKAGE_ARCH "x86")
+    else()
+        message(FATAL_ERROR
+            "Cannot determine Windows package architecture from the configured target")
+    endif()
+else()
+    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" AZURERENDER_PACKAGE_ARCH)
+    if(AZURERENDER_PACKAGE_ARCH STREQUAL "")
+        message(FATAL_ERROR "CMAKE_SYSTEM_PROCESSOR is required for package naming")
+    endif()
+endif()
 set(CPACK_PACKAGE_FILE_NAME
-    "AzureRender-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+    "AzureRender-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${AZURERENDER_PACKAGE_ARCH}")
 set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)

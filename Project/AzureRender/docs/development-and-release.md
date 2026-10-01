@@ -169,6 +169,8 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 
 发布门禁会检查配置、Shader、目标构建和 CTest。它也检查安装、Manifest、版本、资源和运行时。修改 GPU 路径或视觉效果后，还要在真实 GPU 上运行 Validation 和 Capture。
 
+Windows Release 构建会生成可分发的压缩包，并完成隔离运行检查。Windows Debug 构建仅用于开发；Debug 门禁验证配置、构建、CTest 和安装清单，并在结果中标记 `development-only`。调试运行库依赖本机 Visual Studio 工具链。
+
 ## 安装树
 
 ```powershell

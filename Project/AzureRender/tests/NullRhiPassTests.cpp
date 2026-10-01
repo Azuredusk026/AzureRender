@@ -46,7 +46,8 @@ std::vector<RecordedCall> runFrame(
     const bool cullingEnabled = true,
     const bool cameraLooksAway = false,
     const bool withPropResource = false,
-    const bool computeSkinning = false) {
+    const bool computeSkinning = false,
+    const float sceneOffset = 0.0F) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -64,6 +65,7 @@ std::vector<RecordedCall> runFrame(
     }
     azurerender::scene::SceneNodeDesc heroNode{};
     heroNode.resourceId = "asset-0";
+    heroNode.translation = {sceneOffset, 0.0F, 0.0F};
     context.scene.nodes.push_back(heroNode);
     if (withPropResource) {
         azurerender::scene::SceneNodeDesc propNode{};
@@ -90,6 +92,8 @@ std::vector<RecordedCall> runFrame(
     frame.renderSettings = &settings;
     frame.swapchainWidth = 1280;
     frame.swapchainHeight = 720;
+    frame.cameraPosition[0] += sceneOffset;
+    frame.cameraTarget[0] += sceneOffset;
     if (cameraLooksAway) {
         frame.cameraPosition[0] = 10000.0F;
         frame.cameraPosition[1] = 100.0F;
@@ -120,6 +124,8 @@ std::vector<RecordedCall> runFrame(
 }  // namespace
 
 int main() {
+#undef assert
+#define assert(condition) do { if (!(condition)) { std::cerr << "Check failed: " << #condition << '\n'; return 1; } } while (false)
 #ifdef _WIN32
     _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
     _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
@@ -206,19 +212,35 @@ int main() {
     assert(legacyDraws > 0);
     assert(legacyDraws == bindlessDraws);
 
+    // Moving both camera and model must preserve shadow caster submission.
+    // This location lies outside the former fixed origin-centered frustum.
+    const auto offsetCalls = runFrame(true, shaderDirectory, true, false,
+                                     false, false, 20.0F);
+    const auto shadowDrawCount = [](const std::vector<RecordedCall>& calls) {
+        std::size_t passes = 0;
+        std::size_t draws = 0;
+        for (const auto& call : calls) {
+            if (call.name == "beginRenderPass") ++passes;
+            if (passes == 1 && call.name == "drawIndexed") ++draws;
+        }
+        return draws;
+    };
+    if (shadowDrawCount(bindless) == 0
+        || shadowDrawCount(offsetCalls) != shadowDrawCount(bindless)) return 5;
+
     // Bindless binds once per pass; the fixed tables bind per primitive.
     const std::size_t legacyBinds = countCalls(legacy, "bindDescriptorSet");
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
     assert(bindlessBinds == 2);
     assert(legacyBinds > bindlessBinds);
 
-    // Culling: the instance behind the camera drops main-pass geometry while
-    // the independent shadow frustum may still submit its shadow caster;
-    // disabling culling submits both passes again.
+    // A distant camera looking away excludes the model from both its main
+    // frustum and the camera-relative shadow cascades. Disabling culling
+    // submits geometry again.
     const std::vector<RecordedCall> culled =
         runFrame(true, shaderDirectory, true, true);
     const std::size_t culledDraws = countCalls(culled, "drawIndexed");
-    assert(culledDraws > 0);
+    assert(culledDraws == 0);
     assert(culledDraws < legacyDraws);
     assert(countCalls(culled, "beginRenderPass") == 2);
     const std::vector<RecordedCall> unculled =

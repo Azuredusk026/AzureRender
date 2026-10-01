@@ -18,11 +18,11 @@ GLFW 与 Dear ImGui 负责窗口和界面。tinygltf、stb 和 nlohmann/json 负
 
 ## 快速开始
 
-项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 已验证的版本是 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。
+项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 验证环境使用 Vulkan SDK 1.4、MinGW GCC 13 和 Ninja 1.13。
 
 ```powershell
-$env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
-$env:VCPKG_ROOT = "C:\path\to\vcpkg"
+# 将该路径替换为本机 vcpkg 工作目录
+$env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
 
 .\tools\configure_windows.ps1 -Config Debug
 cmake --build .\build\ninja-debug
@@ -54,9 +54,11 @@ cmake --build .\build\ninja-debug
 ## 验证
 
 ```powershell
+.\tools\configure_windows.ps1 -Config Release
+cmake --build .\build\ninja-release
 ctest --test-dir .\build\ninja-debug --output-on-failure
-cmake -DBUILD_DIR="$PWD/build/ninja-debug" `
-  -DCONFIG=Debug `
+cmake -DBUILD_DIR="$PWD/build/ninja-release" `
+  -DCONFIG=Release `
   -P .\tools\run_release_gate.cmake
 ```
 

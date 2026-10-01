@@ -64,7 +64,7 @@ vkDestroyInstance(instance, nullptr);
 | `VkCommandPool` | Command Buffer 的分配与重置域 | 属于 Graphics Queue Family |
 | `VkCommandBuffer` | CPU 记录的 GPU 命令列表 | 每个 in-flight frame 一份 Primary Command Buffer |
 | `VkBuffer` / `VkImage` | 线性数据或有格式的图像资源 | 顶点、Uniform、纹理、深度、HDR 和 History |
-| `VkDeviceMemory` | 实际显存分配 | 当前由项目直接选择 Memory Type、分配并绑定 |
+| `VkDeviceMemory` | Vulkan 的显存对象 | `rhi::GpuAllocator` 通过 Vulkan Memory Allocator 统一创建和释放 Buffer/Image 分配 |
 | `VkImageView` | 解释 Image 的格式和子资源范围 | Attachment 与采样器通过 View 使用图像 |
 | `VkSampler` | 过滤、寻址和 LOD 规则 | 纹理、Cubemap、Shadow 和屏幕 Attachment 采样 |
 | `VkRenderPass` | Attachment 使用阶段和基本依赖合同 | Shadow、Scene、Composite 和 Editor UI Pass |
@@ -342,7 +342,7 @@ CPU bytes
 
 Uniform、Joint Matrix 和透明排序 Index 每帧都会更新。项目按 `maxFramesInFlight` 为它们分配空间，并保持内存映射。
 
-创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。项目目前没有使用 VMA。内存类型选择、分配和释放都由项目代码完成。
+创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。`rhi::GpuAllocator` 通过 VMA 处理 Buffer/Image 的内存需求、分配、绑定和释放；上传流程由项目的 RHI 与宿主负责。
 
 ## 帧同步与 Command Buffer
 

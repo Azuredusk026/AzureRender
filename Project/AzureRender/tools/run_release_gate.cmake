@@ -60,6 +60,23 @@ run_gate_stage(verify-install-manifest
     -DMANIFEST_FILE=${INSTALL_MANIFEST}
     -P "${SOURCE_DIR}/tools/verify_install_manifest.cmake")
 
+string(TOUPPER "${CONFIG}" CONFIG_UPPER)
+if(WIN32 AND CONFIG_UPPER STREQUAL "DEBUG")
+    file(TO_CMAKE_PATH "${MOVED_DIR}" INSTALL_TREE_PATH)
+    file(WRITE "${RESULT_FILE}"
+        "{\n"
+        "  \"schema_version\": 1,\n"
+        "  \"status\": \"development-only\",\n"
+        "  \"configuration\": \"Debug\",\n"
+        "  \"install_tree\": \"${INSTALL_TREE_PATH}\",\n"
+        "  \"reason\": \"Windows Debug CRT and dependency runtimes require the development toolchain\",\n"
+        "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"write-install-manifest\", \"verify-install-manifest\"]\n"
+        "}\n")
+    message(STATUS
+        "Windows Debug install validated for development use: ${RESULT_FILE}")
+    return()
+endif()
+
 if(WIN32)
     set(INSTALLED_EXECUTABLE "${MOVED_DIR}/bin/AzureRender.exe")
 else()

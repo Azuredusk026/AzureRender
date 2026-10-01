@@ -1472,6 +1472,14 @@ void appendPrimitive(
     if (primitive.mode != TINYGLTF_MODE_TRIANGLES) {
         throw std::runtime_error("Only triangle-list glTF primitives are supported");
     }
+    constexpr std::size_t kSupportedMorphTargetCount = 2;
+    if (primitive.targets.size() > kSupportedMorphTargetCount) {
+        throw std::runtime_error(
+            "glTF primitive has "
+            + std::to_string(primitive.targets.size())
+            + " Morph targets; this renderer supports at most "
+            + std::to_string(kSupportedMorphTargetCount));
+    }
     const auto position = primitive.attributes.find("POSITION");
     if (position == primitive.attributes.end()) {
         throw std::runtime_error("glTF primitive has no POSITION attribute");

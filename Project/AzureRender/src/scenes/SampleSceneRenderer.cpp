@@ -53,6 +53,13 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
         context.commands->beginRenderPass(shadowPass);
         context.commands->endRenderPass();
     }
+    if (context.gpuTimingEnabled
+        && context.timestampQueryPool != VK_NULL_HANDLE) {
+        context.commands->writeTimestamp(
+            context.timestampQueryPool,
+            1,
+            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
     rhi::RenderPassBeginDesc pass{};
     pass.renderPass = context.sceneRenderPass;
     pass.framebuffer = context.sceneFramebuffer;
@@ -66,6 +73,13 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
     pass.clearValues = {clearColor, clearDepth, clearNormal};
     context.commands->beginRenderPass(pass);
     context.commands->endRenderPass();
+    if (context.gpuTimingEnabled
+        && context.timestampQueryPool != VK_NULL_HANDLE) {
+        context.commands->writeTimestamp(
+            context.timestampQueryPool,
+            2,
+            VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
 }
 
 void SampleSceneRenderer::onUnload(const RenderContext&) {

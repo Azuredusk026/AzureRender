@@ -37,10 +37,8 @@ SCENES = [
     {"name": "blackhole", "args": ["--blackhole-quality", "balanced"]},
 ]
 
-# `sample` is intentionally excluded. It records no scene timestamps, and the
-# host reads the timestamp pool with VK_QUERY_RESULT_WAIT_BIT, so requesting GPU
-# timing for it blocks indefinitely. The scene is still covered by the smoke
-# and visual gates; only this timing baseline skips it.
+# `sample` is excluded because it only clears attachments and does not provide
+# a representative workload for the published performance baseline.
 
 
 def run_scene(

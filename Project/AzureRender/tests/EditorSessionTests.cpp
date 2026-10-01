@@ -1,4 +1,5 @@
 #include "editor/EditorSession.hpp"
+#include "ecs/Components.hpp"
 
 #include <cassert>
 #include <chrono>
@@ -19,6 +20,32 @@ std::filesystem::path uniquePath(const std::string& suffix) {
 }  // namespace
 
 int main() {
+    // Several independently identified emitters may share one scene node.
+    {
+        const auto path = uniquePath("-multiple-lights.azscene");
+        auto document = azurerender::SceneDocument::fromAsset("test.gltf");
+        const auto nodeId = document.nodes.front().id;
+        document.lights.push_back({"first", nodeId, {1.0F, 0.0F, 0.0F}, 2.0F, 3.0F, true});
+        document.lights.push_back({"second", nodeId, {0.0F, 1.0F, 0.0F}, 4.0F, 5.0F, false});
+        azurerender::EditorContext lightContext(std::move(document), path);
+        const auto* component = lightContext.ecs().tryGet<azurerender::ecs::LightComponent>(
+            lightContext.entityForNode(0));
+        if (component == nullptr || component->emitters.size() != 2
+            || component->emitters[1].id != "second"
+            || component->emitters[1].enabled) {
+            return 1;
+        }
+        lightContext.save();
+        const auto loaded = azurerender::SceneDocument::load(path);
+        if (loaded.lights.size() != 2
+            || loaded.lights[0].id != "first"
+            || loaded.lights[1].id != "second"
+            || loaded.lights[1].enabled
+            || loaded.lights[1].intensity != 4.0F) {
+            return 1;
+        }
+        std::filesystem::remove(path);
+    }
     const auto scenePath = uniquePath(".azscene");
     const auto assetPath = uniquePath(".gltf");
     {

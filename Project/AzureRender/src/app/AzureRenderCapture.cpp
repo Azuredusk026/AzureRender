@@ -421,19 +421,30 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
         || !timestampQuerySubmitted_[frameIndex]) {
         return;
     }
-    std::array<std::uint64_t, kTimestampQueryCount> timestamps{};
-    vkCheck(
-        vkGetQueryPoolResults(
-            device_,
-            timestampQueryPools_[frameIndex],
-            0,
-            kTimestampQueryCount,
-            sizeof(timestamps),
-            timestamps.data(),
-            sizeof(std::uint64_t),
-            VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT),
-        "vkGetQueryPoolResults(timestamp)");
+    std::array<std::uint64_t, kTimestampQueryCount * 2> queryResults{};
+    const VkResult queryResult = vkGetQueryPoolResults(
+        device_,
+        timestampQueryPools_[frameIndex],
+        0,
+        kTimestampQueryCount,
+        sizeof(queryResults),
+        queryResults.data(),
+        sizeof(std::uint64_t) * 2,
+        VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WITH_AVAILABILITY_BIT);
     timestampQuerySubmitted_[frameIndex] = false;
+    if (queryResult == VK_NOT_READY) {
+        return;
+    }
+    vkCheck(queryResult, "vkGetQueryPoolResults(timestamp)");
+
+    std::array<std::uint64_t, kTimestampQueryCount> timestamps{};
+    for (std::size_t index = 0; index < kTimestampQueryCount; ++index) {
+        const std::size_t resultIndex = index * 2;
+        if (queryResults[resultIndex + 1] == 0) {
+            return;
+        }
+        timestamps[index] = queryResults[resultIndex];
+    }
 
     const std::uint64_t mask = timestampValidBits_ >= 64
         ? std::numeric_limits<std::uint64_t>::max()

@@ -485,10 +485,16 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     visibleShadowSpansByMeshKey_.clear();
     for (std::size_t slot = 0; slot < sceneInstances_.size(); ++slot) {
         const scene::SceneInstance* instance = &sceneInstances_[slot];
-        if (!scene::boundsInsideFrustum(
-                shadowFrustum_,
-                instance->worldBounds.minimum,
-                instance->worldBounds.maximum)) {
+        const bool intersectsShadowCascade = std::any_of(
+            shadowCascadeFrusta_.begin(),
+            shadowCascadeFrusta_.end(),
+            [instance](const scene::FrustumPlanes& frustum) {
+                return scene::boundsInsideFrustum(
+                    frustum,
+                    instance->worldBounds.minimum,
+                    instance->worldBounds.maximum);
+            });
+        if (cullingEnabled_ && !intersectsShadowCascade) {
             continue;
         }
         const std::uint32_t meshKey = instance->meshKey;
@@ -2336,20 +2342,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
             -radius, radius, -radius, radius, 0.1F, radius * 4.1F);
         cascadeLightViewProjections_[cascade] =
             multiply(lightProjection, lightView);
+        shadowCascadeFrusta_[cascade] = scene::extractFrustumPlanes(
+            cascadeLightViewProjections_[cascade]);
         cascadeNear = cascadeFar;
     }
-    const Vector3 lightTarget = {0.0F, -0.10F, 0.0F};
-    const Vector3 cullingLightPosition = {
-        lightTarget[0] + lightDirection[0] * 4.5F,
-        lightTarget[1] + lightDirection[1] * 4.5F,
-        lightTarget[2] + lightDirection[2] * 4.5F,
-    };
-    const Matrix4 cullingLightView = lookAt(
-        cullingLightPosition, lightTarget, worldUp);
-    const Matrix4 cullingLightProjection = orthographic(
-        -1.90F, 1.90F, -1.90F, 1.90F, 0.10F, 8.0F);
-    shadowFrustum_ = scene::extractFrustumPlanes(
-        multiply(cullingLightProjection, cullingLightView));
 
     UniformBufferObject uniform{};
     uniform.cameraPosition = {

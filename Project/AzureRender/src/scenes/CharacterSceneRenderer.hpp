@@ -289,7 +289,8 @@ private:
     std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;
     std::vector<std::array<std::uint32_t, 3>> visibleShadowSpansByMeshKey_;
     scene::FrustumPlanes viewFrustum_;
-    scene::FrustumPlanes shadowFrustum_;
+    std::array<scene::FrustumPlanes, kShadowCascadeCount>
+        shadowCascadeFrusta_{};
     bool cullingEnabled_ = true;
     RendererSceneState state_;
 

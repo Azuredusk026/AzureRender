@@ -138,14 +138,21 @@ void EditorContext::syncComponents() {
         // Transform mirrors the gizmo state for ECS-driven editing.
         ecsWorld_.addComponent(entity, azurerender::ecs::TransformComponent{
             node.translation, node.rotation, node.scale});
-        const auto light = std::find_if(
-            scene_.lights.begin(), scene_.lights.end(),
-            [&node](const SceneLight& candidate) {
-                return candidate.nodeId == node.id;
-            });
-        if (light != scene_.lights.end()) {
-            ecsWorld_.addComponent(entity, azurerender::ecs::LightComponent{
-                light->color, light->intensity, light->radius, light->enabled});
+        std::vector<azurerender::ecs::LightEmitterComponent> emitters;
+        for (const SceneLight& light : scene_.lights) {
+            if (light.nodeId == node.id) {
+                emitters.push_back({
+                    light.id,
+                    light.color,
+                    light.intensity,
+                    light.radius,
+                    light.enabled});
+            }
+        }
+        if (!emitters.empty()) {
+            ecsWorld_.addComponent(
+                entity,
+                azurerender::ecs::LightComponent{std::move(emitters)});
         } else {
             ecsWorld_.removeComponent<azurerender::ecs::LightComponent>(entity);
         }
@@ -342,6 +349,7 @@ void EditorContext::rebuildEntities() {
         ecsWorld_.addComponent(entity, VisibilityComponent{node.visible});
         nodeEntities_.push_back(entity);
     }
+    syncComponents();
 }
 
 void EditorContext::refreshSelectedTransform() {

@@ -4,6 +4,8 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
+#include <vector>
 
 namespace azurerender::ecs {
 
@@ -30,11 +32,17 @@ struct NameComponent {
 
 // Point light attached to a scene node entity. Position comes from that
 // entity's TransformComponent; color, intensity and radius are light data.
-struct LightComponent {
+struct LightEmitterComponent {
+    std::string id;
     std::array<float, 3> color{1.0F, 1.0F, 1.0F};
     float intensity = 1.0F;
     float radius = 5.0F;
     bool enabled = true;
+};
+
+// A node may own several independently identified point-light emitters.
+struct LightComponent {
+    std::vector<LightEmitterComponent> emitters;
 };
 
 }  // namespace azurerender::ecs

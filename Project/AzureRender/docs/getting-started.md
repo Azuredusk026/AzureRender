@@ -12,14 +12,13 @@
 | 编译器 | MinGW/GCC 13+ 或项目 CI 支持的 MSVC/GCC |
 | 依赖 | vcpkg manifest mode |
 
-Windows 已验证的版本是 Vulkan SDK 1.4.350.0、MinGW GCC 13.1 和 Ninja 1.13.2。这些版本不是硬性要求。更换版本后，请重新运行 Debug Validation 和完整 CTest。
+Windows 验证环境使用 Vulkan SDK 1.4、MinGW GCC 13 和 Ninja 1.13。Vulkan SDK 安装程序提供 `VULKAN_SDK`；使用 vcpkg 前需将 `VCPKG_ROOT` 指向本机 vcpkg 目录。
 
 ## 配置与构建
 
 ```powershell
-$env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
-$env:VCPKG_ROOT = "C:\path\to\vcpkg"
-
+# 将该路径替换为本机 vcpkg 工作目录
+$env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
 .\tools\configure_windows.ps1 -Config Debug
 .\tools\configure_windows.ps1 -Config Release
 cmake --build .\build\ninja-debug
@@ -37,14 +36,22 @@ cmake -S . -B build/ninja-debug -G Ninja `
 cmake --build build/ninja-debug
 ```
 
-Visual Studio 2022 用户可以在 Developer PowerShell 或 Developer Command Prompt 中使用 MSVC 预设：
+Visual Studio 2022 用户可以在 Developer PowerShell 或 Developer Command Prompt 中使用 MSVC 预设。先设置本机 vcpkg 目录：
 
 ```powershell
+$env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
 cmake --preset msvc-debug
 cmake --build .\build\ninja-msvc-debug
 ```
 
-MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设继续使用 `x64-mingw-dynamic`。
+预设从当前开发环境发现 MSVC、Ninja 和 CMake。`tools/msvc_env.bat` 可以从普通命令提示符发现 Visual Studio 工具，并执行单条构建命令：
+
+```powershell
+.\tools\msvc_env.bat cmake --preset msvc-release
+.\tools\msvc_env.bat cmake --build --preset msvc-release
+```
+
+MSVC 预设使用 `x64-windows` vcpkg triplet。MinGW 预设使用 `x64-mingw-dynamic`。
 
 构建过程调用 `glslc`，把 GLSL 编译到构建目录的 `shaders/`。Shader 是主目标的显式依赖，编译失败会终止构建。
 

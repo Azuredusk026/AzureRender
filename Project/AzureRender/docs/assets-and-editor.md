@@ -40,6 +40,8 @@ Loader 支持 `.gltf` 和 `.glb`，读取 Buffer、Accessor、Primitive、Node�
 
 错误信息要包含资产、Material 或 Primitive 上下文。可选数据可以使用明确的回退值。结构损坏和未知的未来 Schema 必须拒绝。
 
+每个 glTF Primitive 最多支持两个 Morph Target。超过上限时，Loader 会报告目标数量并拒绝导入。
+
 ## Material Profile v1
 
 Profile 位于 glTF Material 的 `extras.azureRenderMaterial`。简化示例：
@@ -181,7 +183,7 @@ Dear ImGui 层提供：
 
 编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Panel 不直接持有 Vulkan Handle。Renderer 使用统一的 `RendererSceneState` 向编辑器提供可选资产、模型矩阵、Primitive 数量和选择状态。
 
-`EditorContext` 将场景节点同步到 ECS，并把关联光源同步为 `LightComponent`。保存时，节点变换与光源参数一同写回 `.azscene`。
+`EditorContext` 将场景节点同步到 ECS，并把每个节点关联的全部点光源同步到 `LightComponent::emitters`。场景文档保存完整的光源列表及其节点关联。
 
 ## Undo 与 Redo
 
