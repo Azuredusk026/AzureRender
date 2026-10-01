@@ -799,7 +799,10 @@ void AzureRenderApp::recordCommandBuffer(
     outputState.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
     outputState.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
     const auto output = graph.importImage("output", outputState);
+    azurerender::rhi::VulkanCommandRecorder serialSceneRecorder(commandBuffer, true);
+    if (runOptions_.parallelRecordingDisabled) sceneContext.commands = &serialSceneRecorder;
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+    const auto scenePassCount = graph.passes().size();
     const auto composite = graph.addPass("post-process-hud", [&] {
     VkRenderPassBeginInfo postProcessPassInfo{
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
@@ -1006,7 +1009,7 @@ void AzureRenderApp::recordCommandBuffer(
                 secondaryBegin.flags |= VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT;
             secondaryBegin.pInheritanceInfo = &inheritance;
             vkCheck(vkBeginCommandBuffer(secondary, &secondaryBegin), "vkBeginCommandBuffer(worker)");
-            azurerender::rhi::VulkanCommandRecorder workerRecorder(secondary);
+            azurerender::rhi::VulkanCommandRecorder workerRecorder(secondary, true);
             if (graph.passes()[pass].recordingChunks.empty()) graph.passes()[pass].recordCommands(workerRecorder);
             else graph.passes()[pass].recordingChunks[chunk](workerRecorder);
             vkCheck(vkEndCommandBuffer(secondary), "vkEndCommandBuffer(worker)");
@@ -1018,7 +1021,17 @@ void AzureRenderApp::recordCommandBuffer(
     recordingWorkers_.run(std::move(recordingTasks));
     const auto executionStart = std::chrono::steady_clock::now();
     graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
-        if (recordedPasses[pass].empty()) return false;
+        if (recordedPasses[pass].empty()) {
+            if (runOptions_.parallelRecordingDisabled && pass < scenePassCount
+                && graph.passes()[pass].recordCommands) {
+                const auto& scenePass = graph.passes()[pass];
+                if (scenePass.graphicsPass) serialSceneRecorder.beginRenderPass(scenePass.renderPass);
+                scenePass.recordCommands(serialSceneRecorder);
+                if (scenePass.graphicsPass) serialSceneRecorder.endRenderPass();
+                return true;
+            }
+            return false;
+        }
         const auto& graphics = graph.passes()[pass].renderPass;
         if (graphics.renderPass != VK_NULL_HANDLE) {
             VkRenderPassBeginInfo renderBegin{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
@@ -1030,6 +1043,7 @@ void AzureRenderApp::recordCommandBuffer(
             vkCmdBeginRenderPass(commandBuffer, &renderBegin, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
         }
         vkCmdExecuteCommands(commandBuffer, static_cast<std::uint32_t>(recordedPasses[pass].size()), recordedPasses[pass].data());
+        serialSceneRecorder.invalidatePipelineBindings();
         if (graphics.renderPass != VK_NULL_HANDLE) vkCmdEndRenderPass(commandBuffer);
         return true;
     }, runOptions_.parallelRecordingDisabled);

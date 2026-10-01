@@ -159,6 +159,20 @@ bool RenderGraph::compile(std::string& error) {
     bufferBarriers_.clear();
     error.clear();
     const std::size_t count = passes_.size();
+    executionOrder_.reserve(count);
+    std::size_t imageUses = 0;
+    std::size_t bufferUses = 0;
+    for (const auto& pass : passes_)
+        for (const auto& use : pass.uses) {
+            if (use.resource >= resources_.size()) {
+                error = "Render graph resource ID out of range";
+                return false;
+            }
+            if (resources_[use.resource].initialBuffer.buffer != VK_NULL_HANDLE) ++bufferUses;
+            else ++imageUses;
+        }
+    barriers_.reserve(imageUses);
+    bufferBarriers_.reserve(bufferUses);
     std::vector<std::vector<PassId>> outgoing(count);
     std::vector<std::size_t> indegree(count, 0);
     const auto edge = [&](PassId before, PassId after) {

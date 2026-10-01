@@ -107,8 +107,16 @@ private:
 // Records onto a live VkCommandBuffer. Created per frame by the engine.
 class VulkanCommandRecorder final : public ICommandRecorder {
 public:
-    explicit VulkanCommandRecorder(VkCommandBuffer commandBuffer)
-        : commandBuffer_(commandBuffer) {}
+    explicit VulkanCommandRecorder(VkCommandBuffer commandBuffer, bool exclusiveRecording = false)
+        : commandBuffer_(commandBuffer), exclusiveRecording_(exclusiveRecording) {}
+    void invalidatePipelineBindings() noexcept {
+        boundGraphicsPipeline_ = VK_NULL_HANDLE;
+        boundComputePipeline_ = VK_NULL_HANDLE;
+        boundGraphicsSet_ = VK_NULL_HANDLE;
+        boundComputeSet_ = VK_NULL_HANDLE;
+        boundGraphicsLayout_ = VK_NULL_HANDLE;
+        boundComputeLayout_ = VK_NULL_HANDLE;
+    }
 
     void beginRenderPass(const RenderPassBeginDesc& desc) override;
     void endRenderPass() override;
@@ -158,6 +166,13 @@ public:
 
 private:
     VkCommandBuffer commandBuffer_ = VK_NULL_HANDLE;
+    bool exclusiveRecording_ = false;
+    VkPipeline boundGraphicsPipeline_ = VK_NULL_HANDLE;
+    VkPipeline boundComputePipeline_ = VK_NULL_HANDLE;
+    VkDescriptorSet boundGraphicsSet_ = VK_NULL_HANDLE;
+    VkDescriptorSet boundComputeSet_ = VK_NULL_HANDLE;
+    VkPipelineLayout boundGraphicsLayout_ = VK_NULL_HANDLE;
+    VkPipelineLayout boundComputeLayout_ = VK_NULL_HANDLE;
 };
 
 }  // namespace azurerender::rhi

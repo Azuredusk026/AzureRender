@@ -367,10 +367,15 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     return pipeline;
 }
 void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
+    if (exclusiveRecording_ && boundComputePipeline_ == pipeline) return;
     vkCmdBindPipeline(commandBuffer_, VK_PIPELINE_BIND_POINT_COMPUTE, pipeline);
+    boundComputePipeline_ = pipeline;
 }
 void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDescriptorSet set) {
+    if (exclusiveRecording_ && boundComputeLayout_ == layout && boundComputeSet_ == set) return;
     vkCmdBindDescriptorSets(commandBuffer_, VK_PIPELINE_BIND_POINT_COMPUTE, layout, 0, 1, &set, 0, nullptr);
+    boundComputeLayout_ = layout;
+    boundComputeSet_ = set;
 }
 
 VkPipeline VulkanRhi::createGraphicsPipeline(
@@ -756,13 +761,16 @@ void VulkanCommandRecorder::setScissor(
 }
 
 void VulkanCommandRecorder::bindPipeline(const VkPipeline pipeline) {
+    if (exclusiveRecording_ && boundGraphicsPipeline_ == pipeline) return;
     vkCmdBindPipeline(
         commandBuffer_, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+    boundGraphicsPipeline_ = pipeline;
 }
 
 void VulkanCommandRecorder::bindDescriptorSet(
     const VkPipelineLayout layout,
     const VkDescriptorSet set) {
+    if (exclusiveRecording_ && boundGraphicsLayout_ == layout && boundGraphicsSet_ == set) return;
     vkCmdBindDescriptorSets(
         commandBuffer_,
         VK_PIPELINE_BIND_POINT_GRAPHICS,
@@ -772,6 +780,8 @@ void VulkanCommandRecorder::bindDescriptorSet(
         &set,
         0,
         nullptr);
+    boundGraphicsLayout_ = layout;
+    boundGraphicsSet_ = set;
 }
 
 void VulkanCommandRecorder::pushConstants(
