@@ -45,16 +45,24 @@ public:
     virtual void onSwapchainRecreate(const RenderContext& context) = 0;
 
     // CPU-side per-frame update (animation, camera-relative uniforms, ...).
+    // The owner completes this before registering/recording passes. No update,
+    // unload or recreation may overlap graph recording or execution. Frame
+    // inputs copied into renderer storage remain frozen until workers join.
     virtual void updateFrame(const SceneFrameData& frame) = 0;
 
     // Records the scene passes into context.commandBuffer, writing the engine
     // Scene Color / depth / normal attachments through context.sceneFramebuffer.
     virtual void recordScene(const RenderContext& context) = 0;
 
-    // Register callbacks only. The context must outlive graph execution.
+    // Register callbacks only. Borrowed handles and renderer storage must
+    // outlive graph execution; GPU resources also outlive submission fences.
     virtual void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
                                 const RenderContext& context) {
-        const auto pass = graph.addPass(std::string(name()), [this, &context] { recordScene(context); });
+        const auto pass = graph.addCommandPass(std::string(name()), [this, context](rhi::ICommandRecorder& commands) {
+            auto recordingContext = context;
+            recordingContext.commands = &commands;
+            recordScene(recordingContext);
+        });
         graph.attachment(pass, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(pass, resources.depth, RenderGraphUsage::DepthAttachment,

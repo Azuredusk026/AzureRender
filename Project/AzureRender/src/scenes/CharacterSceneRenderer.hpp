@@ -6,6 +6,9 @@
 #include "rhi/Rhi.hpp"
 #include "render/ClusteredLightGrid.hpp"
 #include "render/LightBuffer.hpp"
+#include "render/RenderSettings.hpp"
+#include "render/GpuCullingResources.hpp"
+#include "render/DeformedBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
@@ -185,9 +188,20 @@ private:
     std::string rampAtlasPath_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
+    RenderSettings frameRenderSettings_;
+    std::array<std::unique_ptr<GpuCullingResources>, kMaxFramesInFlight> gpuCullingFrames_;
+    std::array<std::size_t, kMaxFramesInFlight> gpuCullingCapacities_{};
+    std::vector<std::size_t> indirectInstanceOffsets_;
+    std::vector<std::array<std::uint32_t, 3>> opaqueRecordingSpans_;
+    std::vector<std::size_t> transparentIndexOffsets_;
+    bool transparentDrawsPrepared_ = false;
+    std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
+    void prepareTransparentIndices();
+    bool gpuCullingEnabled_ = false;
+    bool multiDrawIndirect_ = false;
+    std::uint32_t maxDrawIndirectCount_ = 1;
     // Non-owning per-frame submission counters, refreshed from RenderContext at
     // the start of every recordScene call. Null when collection is disabled.
-    SceneSubmissionCounters* submissionCounters_ = nullptr;
     // Engine-owned shadow map sampled by the material descriptor sets.
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
@@ -304,7 +318,7 @@ private:
     void recordComputeSkinning(const RenderContext& context);
     void recordComputeSkinningMesh(
         const RenderContext& context,
-        std::uint32_t meshKey);
+        std::uint32_t meshKey, rhi::ICommandRecorder* recorder = nullptr);
     [[nodiscard]] const rhi::GpuBuffer& renderVertexBuffer(
         std::uint32_t meshKey,
         std::uint32_t frameIndex) const;
@@ -351,7 +365,11 @@ private:
         std::uint32_t height);
     void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
+    void recordShadowDraws(const RenderContext& context,
+        std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount);
     void recordMainPass(const RenderContext& context);
+    void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0);
+    rhi::RenderPassBeginDesc mainPassDescription(const RenderContext& context) const;
     void drawPrimitive(
         rhi::ICommandRecorder& commands,
         const LoadedAsset& mesh,
@@ -360,7 +378,8 @@ private:
         std::uint32_t instanceCount = 1,
         std::uint32_t firstInstance = 0,
         std::uint32_t textureBase = 0,
-        std::size_t globalMaterialBase = 0);
+        std::size_t globalMaterialBase = 0,
+        SceneSubmissionCounters* counters = nullptr);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

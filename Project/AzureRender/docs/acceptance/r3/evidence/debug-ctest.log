@@ -1,0 +1,738 @@
+Start testing: Oct 01 16:52 中国标准时间
+----------------------------------------------------------
+1/36 Testing: AzureRender.EnvironmentAsset
+1/36 Test: AzureRender.EnvironmentAsset
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderEnvironmentAssetTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.EnvironmentAsset" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EnvironmentAsset" end time: Oct 01 16:52 中国标准时间
+"AzureRender.EnvironmentAsset" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/36 Testing: AzureRender.RenderGraph
+2/36 Test: AzureRender.RenderGraph
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderRenderGraphTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.RenderGraph" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.RenderGraph" end time: Oct 01 16:52 中国标准时间
+"AzureRender.RenderGraph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/36 Testing: AzureRender.TransientResourcePool
+3/36 Test: AzureRender.TransientResourcePool
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderTransientResourcePoolTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.TransientResourcePool" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.TransientResourcePool" end time: Oct 01 16:52 中国标准时间
+"AzureRender.TransientResourcePool" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/36 Testing: AzureRender.LightBuffer
+4/36 Test: AzureRender.LightBuffer
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderLightBufferTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.LightBuffer" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.LightBuffer" end time: Oct 01 16:52 中国标准时间
+"AzureRender.LightBuffer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/36 Testing: AzureRender.CascadedShadow
+5/36 Test: AzureRender.CascadedShadow
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderCascadedShadowTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.CascadedShadow" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CascadedShadow" end time: Oct 01 16:52 中国标准时间
+"AzureRender.CascadedShadow" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/36 Testing: AzureRender.ClusteredLightGrid
+6/36 Test: AzureRender.ClusteredLightGrid
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderClusteredLightGridTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ClusteredLightGrid" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ClusteredLightGrid" end time: Oct 01 16:52 中国标准时间
+"AzureRender.ClusteredLightGrid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/36 Testing: AzureRender.ComputePass
+7/36 Test: AzureRender.ComputePass
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderComputePassTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ComputePass" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ComputePass" end time: Oct 01 16:52 中国标准时间
+"AzureRender.ComputePass" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/36 Testing: AzureRender.FrameTaskScheduler
+8/36 Test: AzureRender.FrameTaskScheduler
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderFrameTaskSchedulerTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.FrameTaskScheduler" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.FrameTaskScheduler" end time: Oct 01 16:52 中国标准时间
+"AzureRender.FrameTaskScheduler" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/36 Testing: AzureRender.SurfaceLifecycle
+9/36 Test: AzureRender.SurfaceLifecycle
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderSurfaceLifecycleTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.SurfaceLifecycle" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SurfaceLifecycle" end time: Oct 01 16:52 中国标准时间
+"AzureRender.SurfaceLifecycle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/36 Testing: AzureRender.CommandLine
+10/36 Test: AzureRender.CommandLine
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderCommandLineTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.CommandLine" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CommandLine" end time: Oct 01 16:52 中国标准时间
+"AzureRender.CommandLine" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/36 Testing: AzureRender.EditorCameraController
+11/36 Test: AzureRender.EditorCameraController
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderEditorCameraTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.EditorCameraController" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorCameraController" end time: Oct 01 16:52 中国标准时间
+"AzureRender.EditorCameraController" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/36 Testing: AzureRender.EditorSession
+12/36 Test: AzureRender.EditorSession
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderEditorSessionTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.EditorSession" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+[1790844760238][info][editor][code=0] Opened scene: test
+[1790844760241][info][editor][code=0] Saved scene: C:\Users\WUCHEN~1\AppData\Local\Temp\azurerender-session-524695795442200-multiple-lights.azscene
+[1790844760248][info][editor][code=0] Opened scene: azurerender-session-524695805008000
+[1790844760250][info][editor][code=0] Saved scene: C:\Users\WUCHEN~1\AppData\Local\Temp\azurerender-session-524695804850800.azscene
+[1790844760255][info][editor][code=0] Reloaded scene: azurerender-session-524695805008000
+[1790844760255][info][editor][code=0] Default editor layout requested
+[1790844760255][info][editor][code=0] Added node under: azurerender-session-524695805008000
+[1790844760255][info][editor][code=0] Selected node: New Node 1
+[1790844760255][info][editor][code=0] Undo
+[1790844760255][info][editor][code=0] Redo
+[1790844760256][info][editor][code=0] Added node under: Prefab Instance
+[1790844760256][info][editor][code=0] Added node under: Prefab Instance
+[1790844760256][info][editor][code=0] Removed node (and descendants)
+[1790844760256][info][editor][code=0] Cannot remove the root node
+[1790844760257][info][editor][code=0] Saved scene: C:\Users\WUCHEN~1\AppData\Local\Temp\azurerender-session-524695804850800.azscene
+[1790844760259][info][editor][code=0] Asset reload requested; changed files: 1
+[1790844760259][info][editor][code=0] Viewport capture requested: Hero_Front_01_png
+[1790844760259][info][editor][code=0] Reloaded scene: azurerender-session-524695805008000
+[1790844760260][info][editor][code=0] Opened scene: test
+[1790844760260][info][editor][code=0] ERROR: Scene save directory does not exist: C:\Users\WUCHEN~1\AppData\Local\Temp\azurerender-session-524695817248300/missing
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.EditorSession" end time: Oct 01 16:52 中国标准时间
+"AzureRender.EditorSession" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/36 Testing: AzureRender.Ecs
+13/36 Test: AzureRender.Ecs
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderEcsTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.Ecs" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.Ecs" end time: Oct 01 16:52 中国标准时间
+"AzureRender.Ecs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/36 Testing: AzureRender.PickMath
+14/36 Test: AzureRender.PickMath
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderPickMathTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.PickMath" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.PickMath" end time: Oct 01 16:52 中国标准时间
+"AzureRender.PickMath" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/36 Testing: AzureRender.SceneModel
+15/36 Test: AzureRender.SceneModel
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderSceneModelTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.SceneModel" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SceneModel" end time: Oct 01 16:52 中国标准时间
+"AzureRender.SceneModel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/36 Testing: AzureRender.RuntimeDiagnostics
+16/36 Test: AzureRender.RuntimeDiagnostics
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderRuntimeDiagnosticsTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.RuntimeDiagnostics" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+[1790844760585][info][test][code=0] hello
+[1790844760585][warning][test][code=0] soft warning
+[1790844760585][error][test][code=3] missing asset
+user-facing line
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.RuntimeDiagnostics" end time: Oct 01 16:52 中国标准时间
+"AzureRender.RuntimeDiagnostics" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/36 Testing: AzureRender.GpuCapabilityReport
+17/36 Test: AzureRender.GpuCapabilityReport
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderGpuCapabilityReportTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.GpuCapabilityReport" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.GpuCapabilityReport" end time: Oct 01 16:52 中国标准时间
+"AzureRender.GpuCapabilityReport" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/36 Testing: AzureRender.ResourceLocator
+18/36 Test: AzureRender.ResourceLocator
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderResourceLocatorTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ResourceLocator" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ResourceLocator" end time: Oct 01 16:52 中国标准时间
+"AzureRender.ResourceLocator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/36 Testing: AzureRender.ExtensionRegistry
+19/36 Test: AzureRender.ExtensionRegistry
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderExtensionRegistryTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ExtensionRegistry" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ExtensionRegistry" end time: Oct 01 16:52 中国标准时间
+"AzureRender.ExtensionRegistry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/36 Testing: AzureRender.UploadRing
+20/36 Test: AzureRender.UploadRing
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderUploadRingTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.UploadRing" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.UploadRing" end time: Oct 01 16:52 中国标准时间
+"AzureRender.UploadRing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/36 Testing: AzureRender.NullRhi
+21/36 Test: AzureRender.NullRhi
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderNullRhiTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.NullRhi" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.NullRhi" end time: Oct 01 16:52 中国标准时间
+"AzureRender.NullRhi" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/36 Testing: AzureRender.NullRhiPass
+22/36 Test: AzureRender.NullRhiPass
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderNullRhiPassTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.NullRhiPass" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+[1790844760979][info][render][code=0] Blackhole bloom: fragment fallback path
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761015][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761020][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761060][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761065][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761102][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761106][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761143][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761147][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761183][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761187][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761222][info][render][code=0] Character IBL: hardware mip fallback path
+[1790844761226][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Starting multi-resource pass contract
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761263][info][render][code=0] Character IBL: hardware mip fallback path
+Additional scene resources: 1, total joints 2
+[1790844761272][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+Clustered lighting: 0 lights, 0 cluster references
+Multi-resource pass contract passed
+Starting compute skinning pass contract
+computeSkinning test context enabled, nodes=2
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: E:/docs/projects/AzureRender/Project/AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1790844761308][info][render][code=0] Character IBL: hardware mip fallback path
+Additional scene resources: 1, total joints 2
+[1790844761317][info][render][code=0] Character skinning and morph: Vulkan compute path
+Clustered lighting: 0 lights, 0 cluster references
+<end of output>
+Test time =   0.41 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.NullRhiPass" end time: Oct 01 16:52 中国标准时间
+"AzureRender.NullRhiPass" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/36 Testing: AzureRender.SceneGraph
+23/36 Test: AzureRender.SceneGraph
+Command: "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRenderSceneGraphTests.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.SceneGraph" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.SceneGraph" end time: Oct 01 16:52 中国标准时间
+"AzureRender.SceneGraph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/36 Testing: AzureRender.VisualRegression
+24/36 Test: AzureRender.VisualRegression
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_visual_regression.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--tolerance" "strict" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression" "--summary" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression-summary.json"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.VisualRegression" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =  13.75 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegression" end time: Oct 01 16:52 中国标准时间
+"AzureRender.VisualRegression" time elapsed: 00:00:13
+----------------------------------------------------------
+
+25/36 Testing: AzureRender.VisualRegressionLegacyDescriptors
+25/36 Test: AzureRender.VisualRegressionLegacyDescriptors
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_visual_regression.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--tolerance" "strict" "--renderer-arg=--disable-bindless" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression-legacy" "--summary" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression-legacy-summary.json"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.VisualRegressionLegacyDescriptors" start time: Oct 01 16:52 中国标准时间
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =  11.53 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegressionLegacyDescriptors" end time: Oct 01 16:53 中国标准时间
+"AzureRender.VisualRegressionLegacyDescriptors" time elapsed: 00:00:11
+----------------------------------------------------------
+
+26/36 Testing: AzureRender.BlackholeComputeGpu
+26/36 Test: AzureRender.BlackholeComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_blackhole_compute_smoke.ps1" "-Executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "-OutputDirectory" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/blackhole-compute-smoke"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.BlackholeComputeGpu" start time: Oct 01 16:53 中国标准时间
+Output:
+----------------------------------------------------------
+Blackhole four-level compute smoke passed.
+<end of output>
+Test time =   3.77 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.BlackholeComputeGpu" end time: Oct 01 16:53 中国标准时间
+"AzureRender.BlackholeComputeGpu" time elapsed: 00:00:03
+----------------------------------------------------------
+
+27/36 Testing: AzureRender.CharacterIblComputeGpu
+27/36 Test: AzureRender.CharacterIblComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_character_ibl_smoke.ps1" "-Executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "-OutputDirectory" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/character-ibl-smoke"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.CharacterIblComputeGpu" start time: Oct 01 16:53 中国标准时间
+Output:
+----------------------------------------------------------
+Character GPU IBL smoke passed.
+<end of output>
+Test time =   3.12 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterIblComputeGpu" end time: Oct 01 16:53 中国标准时间
+"AzureRender.CharacterIblComputeGpu" time elapsed: 00:00:03
+----------------------------------------------------------
+
+28/36 Testing: AzureRender.CharacterSkinningComputeGpu
+28/36 Test: AzureRender.CharacterSkinningComputeGpu
+Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_character_skinning_smoke.ps1" "-Executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "-OutputDirectory" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/character-skinning-smoke"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.CharacterSkinningComputeGpu" start time: Oct 01 16:53 中国标准时间
+Output:
+----------------------------------------------------------
+Character Compute skinning smoke passed.
+<end of output>
+Test time =   3.10 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterSkinningComputeGpu" end time: Oct 01 16:53 中国标准时间
+"AzureRender.CharacterSkinningComputeGpu" time elapsed: 00:00:03
+----------------------------------------------------------
+
+29/36 Testing: AzureRender.R3Comparison
+29/36 Test: AzureRender.R3Comparison
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_r3_comparison.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/r3-comparison" "--frames" "10" "--instances" "64"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.R3Comparison" start time: Oct 01 16:53 中国标准时间
+Output:
+----------------------------------------------------------
+R3 four-path deterministic comparison passed
+<end of output>
+Test time =  32.19 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.R3Comparison" end time: Oct 01 16:53 中国标准时间
+"AzureRender.R3Comparison" time elapsed: 00:00:32
+----------------------------------------------------------
+
+30/36 Testing: AzureRender.R3TransparentComparison
+30/36 Test: AzureRender.R3TransparentComparison
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_r3_comparison.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/r3-transparent-comparison" "--frames" "10" "--instances" "16" "--transparent-fixture"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.R3TransparentComparison" start time: Oct 01 16:53 中国标准时间
+Output:
+----------------------------------------------------------
+R3 four-path deterministic comparison passed
+<end of output>
+Test time =  24.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.R3TransparentComparison" end time: Oct 01 16:54 中国标准时间
+"AzureRender.R3TransparentComparison" time elapsed: 00:00:24
+----------------------------------------------------------
+
+31/36 Testing: AzureRender.AuditRegressions
+31/36 Test: AzureRender.AuditRegressions
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_audit_regressions.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.AuditRegressions" start time: Oct 01 16:54 中国标准时间
+Output:
+----------------------------------------------------------
+Sample timing and Morph limit regressions passed
+<end of output>
+Test time =   1.23 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.AuditRegressions" end time: Oct 01 16:54 中国标准时间
+"AzureRender.AuditRegressions" time elapsed: 00:00:01
+----------------------------------------------------------
+
+32/36 Testing: AzureRender.VisualRegressionLegacySkinning
+32/36 Test: AzureRender.VisualRegressionLegacySkinning
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_visual_regression.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--tolerance" "strict" "--renderer-arg=--disable-compute-skinning" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression-legacy-skinning" "--summary" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/visual-regression-legacy-skinning-summary.json"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.VisualRegressionLegacySkinning" start time: Oct 01 16:54 中国标准时间
+Output:
+----------------------------------------------------------
+[ OK ] character_beauty_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=0
+<end of output>
+Test time =  16.83 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.VisualRegressionLegacySkinning" end time: Oct 01 16:54 中国标准时间
+"AzureRender.VisualRegressionLegacySkinning" time elapsed: 00:00:16
+----------------------------------------------------------
+
+33/36 Testing: AzureRender.CharacterMorphComputeGpu
+33/36 Test: AzureRender.CharacterMorphComputeGpu
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_morph_compute_regression.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/morph-compute-regression"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.CharacterMorphComputeGpu" start time: Oct 01 16:54 中国标准时间
+Output:
+----------------------------------------------------------
+Morph change: mean=0.122428 changed=0.523045; Compute/fallback: mean=0.000000 changed=0.000000
+<end of output>
+Test time =  31.10 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.CharacterMorphComputeGpu" end time: Oct 01 16:55 中国标准时间
+"AzureRender.CharacterMorphComputeGpu" time elapsed: 00:00:31
+----------------------------------------------------------
+
+34/36 Testing: AzureRender.ClusteredLightingGpu
+34/36 Test: AzureRender.ClusteredLightingGpu
+Command: "C:/Users/wuchenfeng/AppData/Local/Programs/Python/Python312/python.exe" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_clustered_lighting_smoke.py" "--executable" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/AzureRender.exe" "--output-dir" "E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/clustered-lighting-smoke"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ClusteredLightingGpu" start time: Oct 01 16:55 中国标准时间
+Output:
+----------------------------------------------------------
+16 clustered lights: mean=0.001293 changed=0.036572
+<end of output>
+Test time =   3.14 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ClusteredLightingGpu" end time: Oct 01 16:55 中国标准时间
+"AzureRender.ClusteredLightingGpu" time elapsed: 00:00:03
+----------------------------------------------------------
+
+35/36 Testing: AzureRender.ReleaseGateMissingBuild
+35/36 Test: AzureRender.ReleaseGateMissingBuild
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DBUILD_DIR=E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/missing-release-gate-build" "-P" "E:/docs/projects/AzureRender/Project/AzureRender/tools/run_release_gate.cmake"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.ReleaseGateMissingBuild" start time: Oct 01 16:55 中国标准时间
+Output:
+----------------------------------------------------------
+CMake Error at E:/docs/projects/AzureRender/Project/AzureRender/tools/run_release_gate.cmake:11 (message):
+  Release gate requires a configured build directory:
+  E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/missing-release-gate-build
+
+
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.ReleaseGateMissingBuild" end time: Oct 01 16:55 中国标准时间
+"AzureRender.ReleaseGateMissingBuild" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/36 Testing: AzureRender.InstallManifestRoundTrip
+36/36 Test: AzureRender.InstallManifestRoundTrip
+Command: "C:/Program Files/CMake/bin/cmake.exe" "-DSOURCE_DIR=E:/docs/projects/AzureRender/Project/AzureRender" "-P" "E:/docs/projects/AzureRender/Project/AzureRender/tools/test_install_manifest_roundtrip.cmake"
+Directory: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug
+"AzureRender.InstallManifestRoundTrip" start time: Oct 01 16:55 中国标准时间
+Output:
+----------------------------------------------------------
+-- Install manifest: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/install-manifest-test-manifest.json (11 files, 9 licenses)
+-- Install manifest: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/verify-install-manifest/manifest.regenerated (11 files, 9 licenses)
+-- Install tree verified against manifest
+-- Install manifest: E:/docs/projects/AzureRender/Project/AzureRender/build/msvc-debug/verify-install-manifest/manifest.regenerated (11 files, 9 licenses)
+CMake Error at E:/docs/projects/AzureRender/Project/AzureRender/tools/verify_install_manifest.cmake:66 (message):
+  Install tree verification failed:
+
+  tree contents differ from the recorded manifest (added/missing files or
+  hash/size changes)
+
+
+
+-- Install manifest round-trip test passed
+<end of output>
+Test time =   0.38 sec
+----------------------------------------------------------
+Test Passed.
+"AzureRender.InstallManifestRoundTrip" end time: Oct 01 16:55 中国标准时间
+"AzureRender.InstallManifestRoundTrip" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 01 16:55 中国标准时间
+
+gpu = 143.83 sec*proc

@@ -569,7 +569,10 @@ void AzureRenderApp::printGpuTimingSummary() const {
                 ? static_cast<double>(submissionCounters_.descriptorSetBinds)
                     / static_cast<double>(submissionCounters_.frames)
                 : 0.0)
-        << " descriptor binds";
+        << " descriptor binds\n  CPU recording: "
+        << (submissionCounters_.frames > 0
+            ? submissionCounters_.recordingMilliseconds / submissionCounters_.frames : 0.0)
+        << " ms per frame, worker passes: " << submissionCounters_.workerRecordedPasses;
     azurerender::RuntimeDiagnostics::instance().print(
         "gpu", summary.str());
 
@@ -610,6 +613,17 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"totalP99Ms\": " << framePercentile(99.0) << ",\n"
         << "  \"submission\": {\n"
         << "    \"frames\": " << submissionCounters_.frames << ",\n"
+        << "    \"instances\": " << submissionCounters_.instances << ",\n"
+        << "    \"indirectDrawCalls\": " << submissionCounters_.indirectDrawCalls << ",\n"
+        << "    \"visibleInstances\": " << submissionCounters_.visibleInstances << ",\n"
+        << "    \"visibleRatio\": " << (submissionCounters_.instances > 0
+            ? static_cast<double>(submissionCounters_.visibleInstances) / submissionCounters_.instances : 0.0) << ",\n"
+        << "    \"recordingMilliseconds\": " << submissionCounters_.recordingMilliseconds << ",\n"
+        << "    \"graphPreparationMilliseconds\": " << submissionCounters_.graphPreparationMilliseconds << ",\n"
+        << "    \"workerWaitMilliseconds\": " << submissionCounters_.workerWaitMilliseconds << ",\n"
+        << "    \"graphExecutionMilliseconds\": " << submissionCounters_.graphExecutionMilliseconds << ",\n"
+        << "    \"workerRecordedPasses\": " << submissionCounters_.workerRecordedPasses << ",\n"
+        << "    \"workerRecordedChunks\": " << submissionCounters_.workerRecordedChunks << ",\n"
         << "    \"drawCalls\": " << submissionCounters_.drawCalls << ",\n"
         << "    \"descriptorSetBinds\": "
         << submissionCounters_.descriptorSetBinds << ",\n"

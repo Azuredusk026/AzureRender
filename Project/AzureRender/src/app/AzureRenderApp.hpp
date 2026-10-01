@@ -8,6 +8,8 @@
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/UploadRingBuffer.hpp"
 #include "rhi/VulkanRhi.hpp"
+#include "rhi/WorkerCommandPools.hpp"
+#include "render/RecordingWorkerPool.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -101,6 +103,15 @@ private:
     // a structural change actually reduced CPU-side submission cost, so they
     // are collected whenever GPU timing is enabled.
     struct SubmissionCounters {
+        std::uint64_t indirectDrawCalls = 0;
+        std::uint64_t instances = 0;
+        std::uint64_t visibleInstances = 0;
+        double recordingMilliseconds = 0.0;
+        double graphPreparationMilliseconds = 0.0;
+        double workerWaitMilliseconds = 0.0;
+        double graphExecutionMilliseconds = 0.0;
+        std::uint64_t workerRecordedPasses = 0;
+        std::uint64_t workerRecordedChunks = 0;
         std::uint64_t frames = 0;
         std::uint64_t drawCalls = 0;
         std::uint64_t descriptorSetBinds = 0;
@@ -134,6 +145,8 @@ private:
     bool hdrSceneColorFormatSupported_ = false;
     bool rgba16fStorageImageSupported_ = false;
     bool computeShaderSupported_ = false;
+    bool indirectFirstInstanceSupported_ = false;
+    bool multiDrawIndirectSupported_ = false;
     // Device supports the descriptor-indexing pair the character renderer's
     // bindless texture array needs (runtimeDescriptorArray plus
     // shaderSampledImageArrayNonUniformIndexing).
@@ -192,6 +205,8 @@ private:
     VkSampler screenAttachmentSampler_ = VK_NULL_HANDLE;
 
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
+    std::unique_ptr<azurerender::rhi::WorkerCommandPools> workerCommandPools_;
+    azurerender::RecordingWorkerPool recordingWorkers_{4};
     AzureRenderOptions runOptions_;
     azurerender::ResourceLocator resourceLocator_;
     std::string resolvedAssetPath_;
@@ -232,6 +247,7 @@ private:
     bool fixedSimulation_ = false;
     bool fixedSimulationStarted_ = false;
     float fixedDeltaSeconds_ = 0.0F;
+    double fixedSimulationTime_ = 0.0;
     std::uint64_t capturedFrames_ = 0;
     std::uint32_t technicalSequenceChapter_ =
         std::numeric_limits<std::uint32_t>::max();

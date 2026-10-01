@@ -152,6 +152,7 @@ function(compile_shader source_file)
 endfunction()
 
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert")
+compile_shader("${SHADER_SOURCE_DIR}/cull_indirect.comp")
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.vert"
     DEFINES AZURE_COMPUTE_SKINNING=1
@@ -314,6 +315,7 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ComputePass COMMAND AzureRenderComputePassTests)
     add_executable(AzureRenderFrameTaskSchedulerTests tests/FrameTaskSchedulerTests.cpp)
     target_include_directories(AzureRenderFrameTaskSchedulerTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderFrameTaskSchedulerTests PRIVATE Vulkan::Vulkan)
     add_test(NAME AzureRender.FrameTaskScheduler COMMAND AzureRenderFrameTaskSchedulerTests)
     add_executable(AzureRenderSurfaceLifecycleTests tests/SurfaceLifecycleTests.cpp)
     target_include_directories(AzureRenderSurfaceLifecycleTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -600,6 +602,22 @@ if(BUILD_TESTING)
                 RUN_SERIAL TRUE)
     endif()
     if(WIN32 AND Python3_Interpreter_FOUND)
+        add_test(NAME AzureRender.R3Comparison
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_r3_comparison.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --output-dir "${CMAKE_CURRENT_BINARY_DIR}/r3-comparison"
+                --frames 10 --instances 64)
+        set_tests_properties(AzureRender.R3Comparison PROPERTIES
+            TIMEOUT 900 LABELS "gpu" RUN_SERIAL TRUE)
+        add_test(NAME AzureRender.R3TransparentComparison
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_r3_comparison.py"
+                --executable "$<TARGET_FILE:AzureRender>"
+                --output-dir "${CMAKE_CURRENT_BINARY_DIR}/r3-transparent-comparison"
+                --frames 10 --instances 16 --transparent-fixture)
+        set_tests_properties(AzureRender.R3TransparentComparison PROPERTIES
+            TIMEOUT 900 LABELS "gpu" RUN_SERIAL TRUE)
         add_test(NAME AzureRender.AuditRegressions
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_audit_regressions.py"

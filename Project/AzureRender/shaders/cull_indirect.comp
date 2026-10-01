@@ -1,0 +1,41 @@
+#version 450
+
+layout(local_size_x = 64) in;
+struct Bounds { vec4 minimum; vec4 maximum; };
+struct DrawCommand {
+    uint indexCount;
+    uint instanceCount;
+    uint firstIndex;
+    int vertexOffset;
+    uint firstInstance;
+};
+layout(std430, binding = 0) readonly buffer BoundsInput { Bounds bounds[]; };
+layout(std430, binding = 1) readonly buffer DrawInput { DrawCommand source[]; };
+layout(std430, binding = 2) writeonly buffer DrawOutput { DrawCommand outputCommands[]; };
+layout(push_constant) uniform Parameters {
+    vec4 planes[6];
+    uint drawCount;
+    uint cullingEnabled;
+    uint firstCommand;
+} parameters;
+
+void main() {
+    uint slot = parameters.firstCommand + gl_GlobalInvocationID.x;
+    if (slot >= parameters.drawCount) return;
+    DrawCommand command = source[slot];
+    bool visible = true;
+    if (parameters.cullingEnabled != 0) {
+        Bounds box = bounds[command.firstInstance];
+        for (uint i = 0; i < 6; ++i) {
+            vec4 plane = parameters.planes[i];
+            vec3 positive = mix(box.minimum.xyz, box.maximum.xyz,
+                                greaterThanEqual(plane.xyz, vec3(0.0)));
+            if (dot(plane.xyz, positive) + plane.w < 0.0) {
+                visible = false;
+                break;
+            }
+        }
+    }
+    command.instanceCount = visible ? command.instanceCount : 0;
+    outputCommands[slot] = command;
+}

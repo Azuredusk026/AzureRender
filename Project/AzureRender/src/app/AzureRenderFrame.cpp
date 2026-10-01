@@ -9,12 +9,15 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RenderContext.hpp"
 #include "render/RenderGraph.hpp"
+#include "render/RenderFrameSnapshot.hpp"
+#include "render/FrameTaskScheduler.hpp"
 
 #include <stb_easy_font.h>
 
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <chrono>
 #include <cstring>
 #include <filesystem>
 #include <iomanip>
@@ -31,6 +34,7 @@ void AzureRenderApp::drawFrame() {
         vkWaitForFences(device_, 1, &inFlightFences_[currentFrame_], VK_TRUE, UINT64_MAX),
         "vkWaitForFences");
     collectGpuTiming(currentFrame_);
+    workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
     if (runOptions_.editorSession != nullptr) {
         if (runOptions_.editorSession->consumeAssetReloadRequest()) {
@@ -123,8 +127,9 @@ void AzureRenderApp::drawFrame() {
     }
     azurerender::SceneFrameData frameData;
     buildSceneFrameData(frameData);
+    const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
     if (sceneRenderer_ != nullptr) {
-        sceneRenderer_->updateFrame(frameData);
+        sceneRenderer_->updateFrame(frameSnapshot.frame());
     }
     updateGizmoScreenData();
     if (pendingPickRequested_) {
@@ -754,6 +759,7 @@ void AzureRenderApp::recordCommandBuffer(
     const VkCommandBuffer commandBuffer,
     const std::uint32_t imageIndex,
     const VkBuffer screenshotBuffer) {
+    const auto recordingStart = std::chrono::steady_clock::now();
     azurerender::RenderContext sceneContext;
     buildRenderContext(sceneContext);
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
@@ -963,9 +969,90 @@ void AzureRenderApp::recordCommandBuffer(
             0);
     }
 
-    graph.execute(&commandRecorder);
+    std::vector<std::vector<VkCommandBuffer>> recordedPasses(graph.passes().size());
+    std::vector<azurerender::RecordingWorkerPool::Task> recordingTasks;
+    std::size_t recordingTaskCount = 0;
+    if (!runOptions_.parallelRecordingDisabled) {
+        for (const auto& pass : graph.passes())
+            if (pass.parallelRecording)
+                recordingTaskCount += std::max<std::size_t>(1, pass.recordingChunks.size());
+    }
+    recordingTasks.reserve(recordingTaskCount);
+    std::vector<azurerender::RenderGraph::PassId> recordingOrder;
+    if (!runOptions_.parallelRecordingDisabled) {
+        recordingOrder.reserve(graph.executionOrder().size());
+        for (const auto pass : graph.executionOrder())
+            if (graph.passes()[pass].parallelRecording && graph.passes()[pass].graphicsPass)
+                recordingOrder.push_back(pass);
+        for (const auto pass : graph.executionOrder())
+            if (graph.passes()[pass].parallelRecording && !graph.passes()[pass].graphicsPass)
+                recordingOrder.push_back(pass);
+    }
+    for (const auto pass : recordingOrder) {
+        if (runOptions_.parallelRecordingDisabled
+            || !graph.passes()[pass].parallelRecording) continue;
+        const auto chunkCount = std::max<std::size_t>(1, graph.passes()[pass].recordingChunks.size());
+        recordedPasses[pass].resize(chunkCount, VK_NULL_HANDLE);
+        for (std::size_t chunk = 0; chunk < chunkCount; ++chunk) {
+        recordingTasks.push_back([&, pass, chunk](std::size_t worker) {
+            const auto secondary = workerCommandPools_->allocate(currentFrame_, worker);
+            VkCommandBufferInheritanceInfo inheritance{
+                VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO};
+            inheritance.renderPass = graph.passes()[pass].renderPass.renderPass;
+            inheritance.framebuffer = graph.passes()[pass].renderPass.framebuffer;
+            VkCommandBufferBeginInfo secondaryBegin{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+            secondaryBegin.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+            if (inheritance.renderPass != VK_NULL_HANDLE)
+                secondaryBegin.flags |= VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT;
+            secondaryBegin.pInheritanceInfo = &inheritance;
+            vkCheck(vkBeginCommandBuffer(secondary, &secondaryBegin), "vkBeginCommandBuffer(worker)");
+            azurerender::rhi::VulkanCommandRecorder workerRecorder(secondary);
+            if (graph.passes()[pass].recordingChunks.empty()) graph.passes()[pass].recordCommands(workerRecorder);
+            else graph.passes()[pass].recordingChunks[chunk](workerRecorder);
+            vkCheck(vkEndCommandBuffer(secondary), "vkEndCommandBuffer(worker)");
+            recordedPasses[pass][chunk] = secondary;
+        });
+        }
+    }
+    const auto workerStart = std::chrono::steady_clock::now();
+    recordingWorkers_.run(std::move(recordingTasks));
+    const auto executionStart = std::chrono::steady_clock::now();
+    graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
+        if (recordedPasses[pass].empty()) return false;
+        const auto& graphics = graph.passes()[pass].renderPass;
+        if (graphics.renderPass != VK_NULL_HANDLE) {
+            VkRenderPassBeginInfo renderBegin{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+            renderBegin.renderPass = graphics.renderPass;
+            renderBegin.framebuffer = graphics.framebuffer;
+            renderBegin.renderArea.extent = graphics.extent;
+            renderBegin.clearValueCount = static_cast<std::uint32_t>(graphics.clearValues.size());
+            renderBegin.pClearValues = graphics.clearValues.data();
+            vkCmdBeginRenderPass(commandBuffer, &renderBegin, VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
+        }
+        vkCmdExecuteCommands(commandBuffer, static_cast<std::uint32_t>(recordedPasses[pass].size()), recordedPasses[pass].data());
+        if (graphics.renderPass != VK_NULL_HANDLE) vkCmdEndRenderPass(commandBuffer);
+        return true;
+    }, runOptions_.parallelRecordingDisabled);
     if (runOptions_.gpuTimingEnabled) {
+        const auto executionEnd = std::chrono::steady_clock::now();
+        submissionCounters_.graphPreparationMilliseconds +=
+            std::chrono::duration<double, std::milli>(workerStart - recordingStart).count();
+        submissionCounters_.workerWaitMilliseconds +=
+            std::chrono::duration<double, std::milli>(executionStart - workerStart).count();
+        submissionCounters_.graphExecutionMilliseconds +=
+            std::chrono::duration<double, std::milli>(executionEnd - executionStart).count();
         ++submissionCounters_.frames;
+        submissionCounters_.instances += frameCounters.instances;
+        submissionCounters_.indirectDrawCalls += frameCounters.indirectDrawCalls;
+        submissionCounters_.visibleInstances += frameCounters.visibleInstances;
+        submissionCounters_.recordingMilliseconds +=
+            std::chrono::duration<double, std::milli>(
+                std::chrono::steady_clock::now() - recordingStart).count();
+        submissionCounters_.workerRecordedPasses += static_cast<std::uint64_t>(
+            std::count_if(recordedPasses.begin(), recordedPasses.end(),
+                [](const auto& buffers) { return !buffers.empty(); }));
+        for (const auto& buffers : recordedPasses)
+            submissionCounters_.workerRecordedChunks += buffers.size();
         submissionCounters_.drawCalls += frameCounters.drawCalls;
         submissionCounters_.descriptorSetBinds +=
             frameCounters.descriptorSetBinds;

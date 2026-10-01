@@ -164,6 +164,8 @@ public:
         std::uint32_t firstIndex,
         std::uint32_t instanceCount = 1,
         std::uint32_t firstInstance = 0) override;
+    void drawIndexedIndirect(VkBuffer buffer, VkDeviceSize offset,
+                             std::uint32_t drawCount, std::uint32_t stride) override;
     void dispatch(
         std::uint32_t groupCountX,
         std::uint32_t groupCountY,

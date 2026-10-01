@@ -444,6 +444,17 @@ void NullCommandRecorder::imageBarrier(const ImageBarrierDesc& barrier) {
              + " mipLevels=" + std::to_string(barrier.mipLevels)});
 }
 
+void NullCommandRecorder::drawIndexedIndirect(
+    VkBuffer buffer, VkDeviceSize offset, std::uint32_t drawCount,
+    std::uint32_t stride) {
+    if (drawCount == 0) return;
+    if (buffer == VK_NULL_HANDLE || offset % 4 != 0
+        || stride < sizeof(VkDrawIndexedIndirectCommand) || stride % 4 != 0)
+        throw std::invalid_argument("Invalid indexed indirect draw parameters");
+    calls.push_back({"drawIndexedIndirect", std::to_string(drawCount)
+        + " @" + std::to_string(offset) + " stride " + std::to_string(stride)});
+}
+
 void NullCommandRecorder::dispatch(
     const std::uint32_t groupCountX,
     const std::uint32_t groupCountY,

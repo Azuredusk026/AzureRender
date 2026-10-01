@@ -209,6 +209,11 @@ public:
         std::uint32_t firstIndex,
         std::uint32_t instanceCount = 1,
         std::uint32_t firstInstance = 0) = 0;
+    // Buffer must carry INDIRECT_BUFFER usage and be synchronized to
+    // DRAW_INDIRECT / INDIRECT_COMMAND_READ before recording this command.
+    virtual void drawIndexedIndirect(VkBuffer buffer, VkDeviceSize offset,
+                                     std::uint32_t drawCount,
+                                     std::uint32_t stride) = 0;
     virtual void dispatch(
         std::uint32_t groupCountX,
         std::uint32_t groupCountY,

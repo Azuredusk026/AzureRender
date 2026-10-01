@@ -30,6 +30,9 @@ struct RenderSettings;
 // The pointer is null unless counter collection is active, so every call site
 // must check before use.
 struct SceneSubmissionCounters {
+    std::uint64_t indirectDrawCalls = 0;
+    std::uint64_t instances = 0;
+    std::uint64_t visibleInstances = 0;
     std::uint64_t drawCalls = 0;
     std::uint64_t descriptorSetBinds = 0;
     std::uint64_t pipelineBinds = 0;
@@ -139,6 +142,9 @@ struct RenderContext {
     // Compute skinning/morph is available on the active queue and enabled
     // for this run. False selects vertex-shader skinning/morph.
     bool computeSkinning = false;
+    bool gpuCulling = false;
+    bool multiDrawIndirect = false;
+    std::uint32_t maxDrawIndirectCount = 1;
 
     // Frustum culling by instance bounds. Renderers may skip instances
     // outside the view frustum; when false every instance is submitted.

@@ -79,6 +79,7 @@ private:
     std::string shaderDirectory_;
     SceneEnvironmentSource environmentSource_;
     const RenderSettings* renderSettings_ = nullptr;
+    RenderSettings frameRenderSettings_;
     bool computeBloomEnabled_ = false;
 
     struct GpuEnvironment {

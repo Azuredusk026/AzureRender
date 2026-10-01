@@ -14,7 +14,7 @@ struct RenderGraphResource {
     rhi::BufferBarrierDesc initialBuffer{};
 };
 
-enum class RenderGraphUsage { Sampled, ComputeSampled, ColorAttachment, DepthAttachment, Storage, VertexStorage, FragmentStorage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer };
+enum class RenderGraphUsage { Sampled, ComputeSampled, ColorAttachment, DepthAttachment, Storage, VertexStorage, FragmentStorage, TransferSrc, TransferDst, Present, VertexBuffer, IndexBuffer, IndirectBuffer };
 
 struct RenderGraphUse {
     std::uint32_t resource = 0;
@@ -30,6 +30,12 @@ struct RenderGraphPass {
     std::vector<RenderGraphUse> uses;
     std::vector<std::uint32_t> dependencies;
     std::function<void()> record;
+    std::function<void(rhi::ICommandRecorder&)> recordCommands;
+    bool parallelRecording = false;
+    rhi::RenderPassBeginDesc renderPass;
+    bool graphicsPass = false;
+    std::vector<std::function<void(rhi::ICommandRecorder&)>> recordingChunks;
+    std::function<void(rhi::ICommandRecorder&)> afterRenderPass;
 };
 
 struct RenderGraphBarrier {
@@ -53,8 +59,18 @@ public:
     ResourceId importBuffer(std::string name, const rhi::BufferBarrierDesc& initial);
     ResourceId importImage(std::string name, const rhi::ImageBarrierDesc& initial);
     PassId addPass(std::string name, std::function<void()> record = {});
+    PassId addCommandPass(std::string name,
+        std::function<void(rhi::ICommandRecorder&)> record,
+        bool parallelRecording = false);
+    PassId addGraphicsPass(std::string name, rhi::RenderPassBeginDesc renderPass,
+        std::function<void(rhi::ICommandRecorder&)> draws,
+        std::function<void(rhi::ICommandRecorder&)> after = {});
+    void setRecordingChunks(PassId pass,
+        std::vector<std::function<void(rhi::ICommandRecorder&)>> chunks);
     void dependsOn(PassId pass, PassId prerequisite);
-    void execute(rhi::ICommandRecorder* recorder = nullptr) const;
+    void execute(rhi::ICommandRecorder* recorder = nullptr,
+        const std::function<bool(PassId)>& executeRecorded = {},
+        bool useFullInlineCallback = false) const;
     void read(PassId pass, ResourceId resource);
     void write(PassId pass, ResourceId resource);
     void attachment(PassId pass, ResourceId resource, RenderGraphUsage usage, VkImageLayout finalLayout);
@@ -85,6 +101,8 @@ private:
     std::vector<PassId> executionOrder_;
     std::vector<RenderGraphBarrier> barriers_;
     std::vector<RenderGraphBufferBarrier> bufferBarriers_;
+    std::vector<std::vector<std::size_t>> imageBarrierIndices_;
+    std::vector<std::vector<std::size_t>> bufferBarrierIndices_;
 };
 
 }  // namespace azurerender

@@ -33,6 +33,10 @@ struct AzureRenderOptions {
     // toggle that proves both sides render identical frames.
     bool cullingDisabled = false;
     bool computeSkinningDisabled = false;
+    bool parallelRecordingDisabled = false;
+    bool gpuCullingDisabled = false;
+    bool multiDrawIndirectDisabled = false;
+    bool fixedFrameStep = false;
     // QA stress knob: clone the default asset entity N times onto a grid to
     // measure submission cost scaling with instance count.
     std::uint32_t instanceCount = 1;

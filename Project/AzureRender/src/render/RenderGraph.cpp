@@ -31,7 +31,10 @@ RenderGraph::ResourceId RenderGraph::importImage(
 
 RenderGraph::PassId RenderGraph::addPass(std::string name, std::function<void()> record) {
     compiled_ = false;
-    passes_.push_back({std::move(name), {}, {}, {}, {}, std::move(record)});
+    RenderGraphPass pass{};
+    pass.name = std::move(name);
+    pass.record = std::move(record);
+    passes_.push_back(std::move(pass));
     return static_cast<PassId>(passes_.size() - 1);
 }
 
@@ -93,20 +96,59 @@ void RenderGraph::dependsOn(PassId pass, PassId prerequisite) {
     passes_[pass].dependencies.push_back(prerequisite);
 }
 
-void RenderGraph::execute(rhi::ICommandRecorder* recorder) const {
+RenderGraph::PassId RenderGraph::addCommandPass(std::string name,
+    std::function<void(rhi::ICommandRecorder&)> record, bool parallelRecording) {
+    const auto pass = addPass(std::move(name));
+    passes_[pass].recordCommands = std::move(record);
+    passes_[pass].parallelRecording = parallelRecording;
+    return pass;
+}
+
+RenderGraph::PassId RenderGraph::addGraphicsPass(std::string name,
+    rhi::RenderPassBeginDesc renderPass,
+    std::function<void(rhi::ICommandRecorder&)> draws,
+    std::function<void(rhi::ICommandRecorder&)> after) {
+    const auto pass = addCommandPass(std::move(name), std::move(draws), true);
+    passes_[pass].renderPass = std::move(renderPass);
+    passes_[pass].graphicsPass = true;
+    passes_[pass].afterRenderPass = std::move(after);
+    return pass;
+}
+
+void RenderGraph::setRecordingChunks(PassId pass,
+    std::vector<std::function<void(rhi::ICommandRecorder&)>> chunks) {
+    if (pass >= passes_.size() || !passes_[pass].graphicsPass)
+        throw std::invalid_argument("Recording chunks require a graphics pass");
+    passes_[pass].recordingChunks = std::move(chunks);
+}
+
+void RenderGraph::execute(rhi::ICommandRecorder* recorder,
+    const std::function<bool(PassId)>& executeRecorded, bool useFullInlineCallback) const {
     if (!compiled_) throw std::logic_error("Render graph must compile before execution");
     for (const auto& barrier : barriers_)
         if (barrier.image.image != VK_NULL_HANDLE && recorder == nullptr)
             throw std::logic_error("Bound image requires command recorder");
     if (!bufferBarriers_.empty() && recorder == nullptr)
         throw std::logic_error("Bound buffer requires command recorder");
+    for (const auto& pass : passes_)
+        if (pass.recordCommands && recorder == nullptr)
+            throw std::logic_error("Command pass requires command recorder");
     for (const auto pass : executionOrder_) {
-        for (const auto& barrier : bufferBarriers_)
-            if (barrier.pass == pass) recorder->bufferBarrier(barrier.buffer);
-        for (const auto& barrier : barriers_)
-            if (barrier.pass == pass && barrier.image.image != VK_NULL_HANDLE)
-                recorder->imageBarrier(barrier.image);
+        for (const auto index : bufferBarrierIndices_[pass])
+            recorder->bufferBarrier(bufferBarriers_[index].buffer);
+        for (const auto index : imageBarrierIndices_[pass])
+            recorder->imageBarrier(barriers_[index].image);
         if (passes_[pass].record) passes_[pass].record();
+        if (passes_[pass].recordCommands) {
+            if (!(executeRecorded && executeRecorded(pass))) {
+                const bool graphics = passes_[pass].graphicsPass;
+                if (graphics) recorder->beginRenderPass(passes_[pass].renderPass);
+                if (useFullInlineCallback || passes_[pass].recordingChunks.empty()) passes_[pass].recordCommands(*recorder);
+                else for (const auto& chunk : passes_[pass].recordingChunks) chunk(*recorder);
+                if (graphics) recorder->endRenderPass();
+            }
+            if (passes_[pass].afterRenderPass) passes_[pass].afterRenderPass(*recorder);
+        }
     }
 }
 
@@ -129,12 +171,13 @@ bool RenderGraph::compile(std::string& error) {
     };
     std::vector<PassId> writers(resources_.size(), static_cast<PassId>(count));
     std::vector<std::vector<PassId>> readers(resources_.size());
+    std::vector<bool> declared(resources_.size(), false);
     for (PassId pass = 0; pass < count; ++pass) {
         for (const auto prerequisite : passes_[pass].dependencies) {
             if (prerequisite == pass) { error = "Self dependency: " + passes_[pass].name; return false; }
             edge(prerequisite, pass);
         }
-        std::vector<bool> declared(resources_.size(), false);
+        std::fill(declared.begin(), declared.end(), false);
         for (const auto& use : passes_[pass].uses) {
             if (declared[use.resource]) {
                 error = "duplicate state declaration in pass " + passes_[pass].name
@@ -225,6 +268,11 @@ bool RenderGraph::compile(std::string& error) {
             state.access = VK_ACCESS_INDEX_READ_BIT;
             state.layout = VK_IMAGE_LAYOUT_GENERAL;
             break;
+        case RenderGraphUsage::IndirectBuffer:
+            state.stage = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT;
+            state.access = VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+            state.layout = VK_IMAGE_LAYOUT_GENERAL;
+            break;
         case RenderGraphUsage::Sampled:
             state.stage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
             state.access = VK_ACCESS_SHADER_READ_BIT;
@@ -293,6 +341,13 @@ bool RenderGraph::compile(std::string& error) {
             states[use.resource] = next;
         }
     }
+    imageBarrierIndices_.assign(passes_.size(), {});
+    bufferBarrierIndices_.assign(passes_.size(), {});
+    for (std::size_t i = 0; i < barriers_.size(); ++i)
+        if (barriers_[i].image.image != VK_NULL_HANDLE)
+            imageBarrierIndices_[barriers_[i].pass].push_back(i);
+    for (std::size_t i = 0; i < bufferBarriers_.size(); ++i)
+        bufferBarrierIndices_[bufferBarriers_[i].pass].push_back(i);
     compiled_ = true;
     return true;
 }

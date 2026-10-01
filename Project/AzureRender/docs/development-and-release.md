@@ -2,6 +2,16 @@
 
 AzureRender 按修改风险选择测试。纯数据或 CLI 变更通常可以用单元测试覆盖。Vulkan 生命周期变更需要运行 Debug Validation。
 
+R3 工作线程录制可用 `--disable-parallel-recording` 切换回主线程录制，用于同条件视觉和性能比较。当前工作线程路径覆盖 Character 蒙皮、GPU 剔除、阴影和主场景。主线程按图顺序执行这些命令缓冲。
+
+Character 不透明绘制使用 GPU 剔除与间接参数。`--disable-gpu-culling` 切回 CPU 可见性和直接绘制；缺少 Compute 或 drawIndirectFirstInstance 能力时自动使用该路径。透明排序和轮廓仍使用 CPU 可见列表。
+
+`--disable-multi-draw-indirect` 强制每次提交一个间接命令，用于验证不支持批量间接的设备路径。
+
+性能对照使用 `--fixed-frame-step` 固定模拟步长为 `1/capture-fps`，并给出相同相机、实例数和帧数。该开关不生成截图，适合独占运行的吞吐采样。
+
+固定步长与 Capture 模式同时使用累计模拟时间作为 SceneFrameData.timeSeconds，首帧为零。普通交互运行继续使用平台时钟。
+
 视觉算法变更还要生成固定 Capture，并进行人工对照。发布候选必须检查安装树和隔离运行时。
 
 ## 开发环境

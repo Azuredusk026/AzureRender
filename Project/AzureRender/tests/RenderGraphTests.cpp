@@ -12,6 +12,44 @@ static void check(bool value, const char* message) {
 int main() {
     try {
         using namespace azurerender;
+        {
+            RenderGraph chunks;
+            rhi::RenderPassBeginDesc description{};
+            std::vector<int> order;
+            const auto pass = chunks.addGraphicsPass("chunks", description,
+                [&](rhi::ICommandRecorder&) { order.push_back(99); });
+            chunks.setRecordingChunks(pass, {
+                [&](rhi::ICommandRecorder&) { order.push_back(1); },
+                [&](rhi::ICommandRecorder&) { order.push_back(2); }});
+            std::string error;
+            check(chunks.compile(error), "chunk graph compiles");
+            rhi::NullCommandRecorder recorder;
+            chunks.execute(&recorder);
+            check(order == std::vector<int>{1, 2}, "chunks replace full callback in stable order");
+        }
+        {
+            RenderGraph commands;
+            rhi::NullCommandRecorder recorder;
+            commands.addCommandPass("draw", [](rhi::ICommandRecorder& output) {
+                output.draw(3);
+            });
+            std::string diagnostic;
+            check(commands.compile(diagnostic), "command graph compiles");
+            bool rejected = false;
+            try { commands.execute(); }
+            catch (const std::logic_error&) { rejected = true; }
+            check(rejected, "command graph requires recorder");
+            commands.execute(&recorder);
+            check(recorder.calls.size() == 1 && recorder.calls[0].name == "draw",
+                  "command callback uses supplied recorder");
+            bool executedRecorded = false;
+            commands.execute(&recorder, [&](RenderGraph::PassId) {
+                executedRecorded = true;
+                return true;
+            });
+            check(executedRecorded && recorder.calls.size() == 1,
+                  "recorded pass replaces inline recording exactly once");
+        }
         RenderGraph graph;
         const auto source = graph.addResource("source");
         const auto trace = graph.addPass("trace");
@@ -116,6 +154,30 @@ int main() {
         buffers.execute(&bufferRecorder);
         check(bufferRecorder.calls.size() == 2 && bufferRecorder.calls[1].name == "bufferBarrier",
             "buffer barriers reach backend");
+        RenderGraph indirect;
+        const auto parameters = indirect.importBuffer("indirect-parameters", bufferState);
+        const auto cull = indirect.addPass("gpu-culling");
+        const auto indirectDraw = indirect.addPass("indirect-draw");
+        indirect.use(cull, parameters, RenderGraphUsage::Storage, true);
+        indirect.use(indirectDraw, parameters, RenderGraphUsage::IndirectBuffer, false);
+        check(indirect.compile(error), "compute to indirect graph compiles");
+        RenderGraph sortedIndices;
+        auto hostState = bufferState;
+        hostState.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
+        hostState.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+        const auto sorted = sortedIndices.importBuffer("sorted-indices", hostState);
+        const auto transparent = sortedIndices.addPass("transparent");
+        sortedIndices.use(transparent, sorted, RenderGraphUsage::IndexBuffer, false);
+        check(sortedIndices.compile(error), "host sorted index graph compiles");
+        check(sortedIndices.bufferBarriers()[0].buffer.srcAccessMask == VK_ACCESS_HOST_WRITE_BIT
+            && sortedIndices.bufferBarriers()[0].buffer.dstAccessMask == VK_ACCESS_INDEX_READ_BIT,
+            "host sorting writes visible to index fetch");
+        const auto& indirectBarrier = indirect.bufferBarriers().back().buffer;
+        check(indirectBarrier.srcStageMask == VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT
+            && indirectBarrier.srcAccessMask == VK_ACCESS_SHADER_WRITE_BIT
+            && indirectBarrier.dstStageMask == VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT
+            && indirectBarrier.dstAccessMask == VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
+            "compute parameters visible to indirect command fetch");
         RenderGraph attachments;
         const auto hdr = attachments.importImage("hdr", initial);
         const auto opaque = attachments.addPass("opaque");

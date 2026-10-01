@@ -3,6 +3,7 @@
 #include "render/RenderSettings.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "scenes/BlackholeSceneRenderer.hpp"
+#include "render/GpuCullingResources.hpp"
 
 #include <cassert>
 #include <filesystem>
@@ -47,7 +48,8 @@ std::vector<RecordedCall> runFrame(
     const bool cameraLooksAway = false,
     const bool withPropResource = false,
     const bool computeSkinning = false,
-    const float sceneOffset = 0.0F) {
+    const float sceneOffset = 0.0F,
+    const bool gizmoTranslated = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -82,6 +84,9 @@ std::vector<RecordedCall> runFrame(
     context.renderSettings = &settings;
     context.cullingEnabled = cullingEnabled;
     context.computeSkinning = computeSkinning;
+    context.gpuCulling = computeSkinning;
+    context.multiDrawIndirect = computeSkinning;
+    context.maxDrawIndirectCount = 2;
     if (computeSkinning) {
         std::cerr << "computeSkinning test context enabled, nodes="
                   << context.scene.nodes.size() << '\n';
@@ -94,6 +99,13 @@ std::vector<RecordedCall> runFrame(
     frame.swapchainHeight = 720;
     frame.cameraPosition[0] += sceneOffset;
     frame.cameraTarget[0] += sceneOffset;
+    if (gizmoTranslated) {
+        frame.gizmoActive = true;
+        frame.selectedPrimitiveIndex = 0;
+        frame.gizmoTranslation[0] = 20.0F;
+        frame.gizmoRotation[1] = 45.0F;
+        frame.gizmoScale[0] = 2.0F;
+    }
     if (cameraLooksAway) {
         frame.cameraPosition[0] = 10000.0F;
         frame.cameraPosition[1] = 100.0F;
@@ -111,7 +123,7 @@ std::vector<RecordedCall> runFrame(
     std::string error;
     if (!graph.compile(error)) throw std::runtime_error(error);
     const std::size_t expectedPasses =
-        2 + (computeSkinning ? context.scene.resources.size() : 0);
+        2 + (computeSkinning ? context.scene.resources.size() + 1 : 0);
     if (graph.passes().size() != expectedPasses) {
         throw std::runtime_error("Character registered an unexpected pass count");
     }
@@ -155,6 +167,7 @@ int main() {
              "outline_compute.vert.spv",
              "shadow_compute.vert.spv",
              "skin.comp.spv",
+             "cull_indirect.comp.spv",
              "shadow.frag.spv",
              "shadow_bindless.frag.spv",
          }) {
@@ -165,6 +178,34 @@ int main() {
     {
         NullRhi rhi;
         NullCommandRecorder recorder;
+        {
+            azurerender::GpuCullingResources culling(rhi);
+            bool uploadRejected = false;
+            try { culling.upload({}, {}); }
+            catch (const std::logic_error&) { uploadRejected = true; }
+            if (!uploadRejected) return 9;
+            culling.initialize({'\x03', '\x02', '\x23', '\x07'}, 2);
+            bool invalidInstanceRejected = false;
+            try { culling.upload({}, {{3, 1, 0, 0, 1}}); }
+            catch (const std::invalid_argument&) { invalidInstanceRejected = true; }
+            if (!invalidInstanceRejected) return 10;
+            culling.upload({{{-1, -1, -1, 0}, {1, 1, 1, 0}}},
+                           {{3, 1, 0, 0, 0}});
+            culling.record(recorder, {});
+            if (countCalls(recorder.calls, "dispatch") != 1) return 8;
+            recorder.calls.clear();
+        }
+        recorder.drawIndexedIndirect(VK_NULL_HANDLE, 0, 0,
+                                     sizeof(VkDrawIndexedIndirectCommand));
+        if (!recorder.calls.empty()) return 6;
+        bool invalidIndirectRejected = false;
+        try {
+            recorder.drawIndexedIndirect(VK_NULL_HANDLE, 0, 1,
+                                         sizeof(VkDrawIndexedIndirectCommand));
+        } catch (const std::invalid_argument&) {
+            invalidIndirectRejected = true;
+        }
+        if (!invalidIndirectRejected) return 7;
         RenderContext context{};
         RenderSettings settings{};
         context.rhi = &rhi;
@@ -198,7 +239,7 @@ int main() {
         }
     }
     assert(cascadeViewports.size() == 4);
-    assert(countCalls(legacy, "setScissor") == 5);
+    assert(countCalls(legacy, "setScissor") == 6);
 
     // Both modes record shadow pass + main pass.
     assert(countCalls(legacy, "beginRenderPass") == 2);
@@ -227,11 +268,14 @@ int main() {
     };
     if (shadowDrawCount(bindless) == 0
         || shadowDrawCount(offsetCalls) != shadowDrawCount(bindless)) return 5;
+    const auto gizmoCalls = runFrame(true, shaderDirectory, true, false,
+                                     false, false, 0.0F, true);
+    if (countCalls(gizmoCalls, "drawIndexed") == 0) return 11;
 
     // Bindless binds once per pass; the fixed tables bind per primitive.
     const std::size_t legacyBinds = countCalls(legacy, "bindDescriptorSet");
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
-    assert(bindlessBinds == 2);
+    assert(bindlessBinds == 3);
     assert(legacyBinds > bindlessBinds);
 
     // A distant camera looking away excludes the model from both its main
@@ -278,13 +322,14 @@ int main() {
         return 1;
     }
     const std::size_t skinDispatches = countCalls(computeSkinning, "dispatch");
-    if (skinDispatches != 2) {
-        std::cerr << "Expected two skinning dispatches, got "
+    if (skinDispatches != 3) {
+        std::cerr << "Expected two skinning and one culling dispatch, got "
                   << skinDispatches << '\n';
         return 2;
     }
     const std::size_t computeDraws =
-        countCalls(computeSkinning, "drawIndexed");
+        countCalls(computeSkinning, "drawIndexed")
+        + countCalls(computeSkinning, "drawIndexedIndirect");
     const std::size_t multiDraws = countCalls(multi, "drawIndexed");
     if (computeDraws != multiDraws) {
         std::cerr << "Compute skinning draw count " << computeDraws

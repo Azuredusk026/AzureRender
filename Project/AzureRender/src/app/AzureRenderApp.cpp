@@ -88,6 +88,7 @@ void AzureRenderApp::run(
 #endif
     fixedSimulation_ = runOptions_.captureFrameLimit > 0;
     fixedSimulationStarted_ = false;
+    fixedSimulationTime_ = 0.0;
     fixedDeltaSeconds_ = 1.0F / static_cast<float>(runOptions_.captureFps);
     capturedFrames_ = 0;
     if (fixedSimulation_) {
@@ -322,6 +323,12 @@ void AzureRenderApp::buildRenderContext(
     context.computeSkinning =
         computeShaderSupported_ && !runOptions_.computeSkinningDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;
+    context.gpuCulling = computeShaderSupported_ && indirectFirstInstanceSupported_
+        && !runOptions_.gpuCullingDisabled;
+    context.multiDrawIndirect = multiDrawIndirectSupported_ && !runOptions_.multiDrawIndirectDisabled;
+    VkPhysicalDeviceProperties indirectProperties{};
+    vkGetPhysicalDeviceProperties(physicalDevice_, &indirectProperties);
+    context.maxDrawIndirectCount = indirectProperties.limits.maxDrawIndirectCount;
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
@@ -453,7 +460,7 @@ void AzureRenderApp::buildRenderContext(
 void AzureRenderApp::buildSceneFrameData(
     azurerender::SceneFrameData& frame) {
     const double currentTime = frontend_->timeSeconds();
-    const float deltaSeconds = fixedSimulation_
+    const float deltaSeconds = (fixedSimulation_ || runOptions_.fixedFrameStep)
         ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
@@ -463,7 +470,12 @@ void AzureRenderApp::buildSceneFrameData(
         rotationAngle_ += deltaSeconds * rotationSpeed_;
     }
     frame.deltaSeconds = deltaSeconds;
-    frame.timeSeconds = currentTime;
+    if (fixedSimulation_ || runOptions_.fixedFrameStep) {
+        fixedSimulationTime_ += deltaSeconds;
+        frame.timeSeconds = fixedSimulationTime_;
+    } else {
+        frame.timeSeconds = currentTime;
+    }
     frame.renderSettings = &renderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
     frame.cameraPosition[1] = cameraPosition_[1];
@@ -762,6 +774,7 @@ void AzureRenderApp::updateTechnicalSequenceState(
 void AzureRenderApp::cleanup() {
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+        workerCommandPools_.reset();
         if (editorLayer_ != nullptr) {
             editorLayer_->shutdownVulkan();
         }
@@ -924,6 +937,8 @@ void AzureRenderApp::pickPhysicalDevice() {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
     features2.pNext = &vulkan12Features;
     vkGetPhysicalDeviceFeatures2(physicalDevice_, &features2);
+    indirectFirstInstanceSupported_ = features2.features.drawIndirectFirstInstance == VK_TRUE;
+    multiDrawIndirectSupported_ = features2.features.multiDrawIndirect == VK_TRUE;
     computeShaderSupported_ = false;
     bindlessTexturesSupported_ =
         vulkan12Features.runtimeDescriptorArray == VK_TRUE
@@ -1016,6 +1031,8 @@ void AzureRenderApp::createLogicalDevice() {
     // Required so scene renderers (e.g. the blackhole tracer) can use a
     // zero-write World Normal attachment next to a written Scene Color.
     deviceFeatures.independentBlend = VK_TRUE;
+    deviceFeatures.drawIndirectFirstInstance = indirectFirstInstanceSupported_ ? VK_TRUE : VK_FALSE;
+    deviceFeatures.multiDrawIndirect = multiDrawIndirectSupported_ ? VK_TRUE : VK_FALSE;
     VkPhysicalDeviceVulkan12Features vulkan12Features{
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
     if (bindlessTexturesSupported_ && !runOptions_.bindlessDisabled) {
@@ -1126,6 +1143,8 @@ void AzureRenderApp::createCommandPool() {
     createInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
     createInfo.queueFamilyIndex = *indices.graphics;
     vkCheck(vkCreateCommandPool(device_, &createInfo, nullptr, &commandPool_), "vkCreateCommandPool");
+    workerCommandPools_ = std::make_unique<azurerender::rhi::WorkerCommandPools>(
+        device_, *indices.graphics, kMaxFramesInFlight, 4);
 }
 
 void AzureRenderApp::createCommandBuffers() {

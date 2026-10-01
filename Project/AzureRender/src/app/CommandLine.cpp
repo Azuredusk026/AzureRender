@@ -59,6 +59,10 @@ constexpr const char* kHelp =
     "  --disable-bindless                Force legacy per-material descriptors\n"
     "  --disable-culling                 Submit all instances without culling\n"
     "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
+    "  --disable-parallel-recording      Record every pass on the main thread\n"
+    "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
+    "  --disable-multi-draw-indirect     Use one indirect command per call\n"
+    "  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps\n"
     "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
@@ -334,6 +338,14 @@ ParsedCommandLine parseCommandLine(
             parsed.options.cullingDisabled = true;
         } else if (argument == "--disable-compute-skinning") {
             parsed.options.computeSkinningDisabled = true;
+        } else if (argument == "--disable-parallel-recording") {
+            parsed.options.parallelRecordingDisabled = true;
+        } else if (argument == "--disable-gpu-culling") {
+            parsed.options.gpuCullingDisabled = true;
+        } else if (argument == "--disable-multi-draw-indirect") {
+            parsed.options.multiDrawIndirectDisabled = true;
+        } else if (argument == "--fixed-frame-step") {
+            parsed.options.fixedFrameStep = true;
         } else if (argument == "--instances") {
             parsed.options.instanceCount = parseUint32(
                 requireValue(arguments, index, argument), argument);

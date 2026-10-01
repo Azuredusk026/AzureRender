@@ -34,6 +34,18 @@ void expectError(
 
 int main() {
     const auto defaults = azurerender::parseCommandLine({});
+    require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,
+            "Single indirect command fallback was not parsed");
+    require(azurerender::parseCommandLine({"--fixed-frame-step"}).options.fixedFrameStep,
+            "Fixed simulation step was not parsed");
+    require(!defaults.options.parallelRecordingDisabled,
+            "Parallel recording should be enabled by default");
+    require(!defaults.options.gpuCullingDisabled, "GPU culling should default to enabled");
+    require(azurerender::parseCommandLine({"--disable-gpu-culling"}).options.gpuCullingDisabled,
+            "GPU culling fallback option was not parsed");
+    const auto serialRecording = azurerender::parseCommandLine({"--disable-parallel-recording"});
+    require(serialRecording.options.parallelRecordingDisabled,
+            "Single-thread recording option was not parsed");
     require(defaults.options.width == 1280, "Unexpected default width");
     require(defaults.options.height == 720, "Unexpected default height");
     require(defaults.options.captureFps == 60, "Unexpected default capture FPS");

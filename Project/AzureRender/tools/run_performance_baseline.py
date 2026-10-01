@@ -100,6 +100,8 @@ def run_scene(
         },
         "submission": {
             "frames": submission.get("frames"),
+            "recordingMilliseconds": submission.get("recordingMilliseconds"),
+            "workerRecordedPasses": submission.get("workerRecordedPasses"),
             "drawCalls": submission.get("drawCalls"),
             "descriptorSetBinds": submission.get("descriptorSetBinds"),
             "pipelineBinds": submission.get("pipelineBinds"),

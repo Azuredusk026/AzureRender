@@ -240,6 +240,9 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
+    gpuCullingEnabled_ = context.gpuCulling;
+    multiDrawIndirect_ = context.multiDrawIndirect;
+    maxDrawIndirectCount_ = std::max(1U, context.maxDrawIndirectCount);
     rampAtlasPath_ = context.rampAtlasPath;
     environmentSource_ = context.environment;
     shadowImageView_ = context.shadowImageView;
@@ -366,6 +369,10 @@ void CharacterSceneRenderer::onSwapchainRecreate(
 }
 
 void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
+    if (frame.renderSettings != nullptr) {
+        frameRenderSettings_ = *frame.renderSettings;
+        renderSettings_ = &frameRenderSettings_;
+    }
     currentFrame_ = frame.currentFrame;
     cameraPosition_ = {frame.cameraPosition[0], frame.cameraPosition[1], frame.cameraPosition[2]};
     cameraTarget_ = {frame.cameraTarget[0], frame.cameraTarget[1], frame.cameraTarget[2]};
@@ -381,10 +388,46 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     qaHarnessEnabled_ = frame.qaHarnessEnabled;
     updateUniformBuffer(frame);
     rebuildSceneInstances();
+    prepareTransparentIndices();
+    opaqueRecordingSpans_.clear();
+    if (gpuCullingFrames_[currentFrame_]) {
+        for (const auto& instance : sceneInstances_) {
+            if (!opaqueRecordingSpans_.empty()
+                && opaqueRecordingSpans_.back()[0] == instance.meshKey
+                && opaqueRecordingSpans_.back()[1] + opaqueRecordingSpans_.back()[2] == instance.sourceIndex)
+                ++opaqueRecordingSpans_.back()[2];
+            else opaqueRecordingSpans_.push_back({instance.meshKey, instance.sourceIndex, 1});
+        }
+    } else {
+        opaqueRecordingSpans_ = visibleSpansByMeshKey_;
+    }
     buildSceneState();
 }
 
 void CharacterSceneRenderer::rebuildSceneInstances() {
+    const auto primaryBounds = morphBounds(asset_, renderSettings_->morphWeights);
+    std::vector<scene::AxisAlignedBounds> meshBounds{primaryBounds};
+    for (const auto& resource : additionalResources_)
+        meshBounds.push_back(morphBounds(resource->asset, renderSettings_->morphWeights));
+    for (std::size_t meshKey = 0; meshKey < meshBounds.size(); ++meshKey) {
+        const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey - 1]->asset;
+        meshBounds[meshKey] = expandBounds(meshBounds[meshKey], materialDisplacementMargin(mesh));
+    }
+    if (gizmoActive_) {
+        constexpr float kPi = 3.14159265358979323846F;
+        const Matrix4 gizmo = multiply(translation(gizmoTranslation_[0], gizmoTranslation_[1], gizmoTranslation_[2]),
+            multiply(multiply(rotationX(gizmoRotation_[0] * kPi / 180.0F), rotationY(gizmoRotation_[1] * kPi / 180.0F)),
+                multiply(rotationZ(gizmoRotation_[2] * kPi / 180.0F), scale(gizmoScale_[0], gizmoScale_[1], gizmoScale_[2]))));
+        for (auto& bounds : meshBounds) {
+            bounds = includeTransformedBounds(bounds, gizmo);
+        }
+        // View-direction material offset is applied after the gizmo matrix;
+        // preserve its unscaled margin even when the gizmo shrinks geometry.
+        for (std::size_t meshKey = 0; meshKey < meshBounds.size(); ++meshKey) {
+            const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey - 1]->asset;
+            meshBounds[meshKey] = expandBounds(meshBounds[meshKey], materialDisplacementMargin(mesh));
+        }
+    }
     // Instances come from scene nodes; the QA stress knob clones a
     // single-node scene onto a grid to prove draw counts stay flat as
     // instances grow.
@@ -403,7 +446,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             instance.model = multiply(
                 translation(offsetX, 0.0F, offsetZ), currentModel_);
             instance.worldBounds = scene::transformBounds(
-                {asset_.boundsMin, asset_.boundsMax}, instance.model);
+                meshBounds.front(), instance.model);
             instance.sourceIndex = index;
             instance.meshKey = 0;
             sceneInstances_.push_back(instance);
@@ -431,12 +474,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 if (!node.visible || meshKeyOf(node) != meshKey) {
                     continue;
                 }
-                const scene::AxisAlignedBounds localBounds = meshKey == 0
-                    ? scene::AxisAlignedBounds{
-                        asset_.boundsMin, asset_.boundsMax}
-                    : scene::AxisAlignedBounds{
-                        additionalResources_[meshKey - 1]->asset.boundsMin,
-                        additionalResources_[meshKey - 1]->asset.boundsMax};
+                const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
                 const Matrix4 nodeTransform = nodeIndex
                     < nodeWorldTransforms.size()
                     ? nodeWorldTransforms[nodeIndex]
@@ -456,6 +494,29 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         }
     }
 
+    if (gpuCullingEnabled_ && !sceneInstances_.empty()) {
+        std::vector<GpuCullBounds> bounds;
+        std::vector<VkDrawIndexedIndirectCommand> commands;
+        indirectInstanceOffsets_.clear();
+        for (const auto& instance : sceneInstances_) {
+            indirectInstanceOffsets_.push_back(commands.size());
+            bounds.push_back({
+                {instance.worldBounds.minimum[0], instance.worldBounds.minimum[1], instance.worldBounds.minimum[2], 0},
+                {instance.worldBounds.maximum[0], instance.worldBounds.maximum[1], instance.worldBounds.maximum[2], 0}});
+            const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
+            for (const auto& primitive : mesh.primitives)
+                commands.push_back({primitive.indexCount, 1, primitive.firstIndex, 0, instance.sourceIndex});
+        }
+        const auto capacity = std::max(bounds.size(), commands.size());
+        if (gpuCullingCapacities_[currentFrame_] < capacity) {
+            auto resources = std::make_unique<GpuCullingResources>(*rhi_);
+            resources->initialize(azurerender::readBinaryFile(shaderDirectory_ + "/cull_indirect.comp.spv"),
+                                  static_cast<std::uint32_t>(capacity));
+            gpuCullingFrames_[currentFrame_] = std::move(resources);
+            gpuCullingCapacities_[currentFrame_] = capacity;
+        }
+        gpuCullingFrames_[currentFrame_]->upload(bounds, commands);
+    }
     visibleInstances_.clear();
     if (cullingEnabled_) {
         static_cast<void>(scene::appendVisibleInstances(
@@ -563,6 +624,9 @@ const rhi::GpuBuffer& CharacterSceneRenderer::renderIndexBuffer(
 
 void CharacterSceneRenderer::registerPasses(
     RenderGraph& graph, const SceneGraphResources& resources, const RenderContext& context) {
+    auto commandContext = context;
+    commandContext.scene = {};
+    const auto frozenContext = std::make_shared<const RenderContext>(std::move(commandContext));
     std::vector<RenderGraph::ResourceId> vertexResources(meshResourceCount_);
     std::vector<RenderGraph::ResourceId> indexResources(meshResourceCount_);
     const auto sourceVertexBuffer = [this](const std::uint32_t meshKey)
@@ -644,20 +708,34 @@ void CharacterSceneRenderer::registerPasses(
             "character-index-" + std::to_string(meshKey), indexInitial);
 
         if (computeSkinningEnabled_) {
-            const auto skin = graph.addPass(
+            const auto skin = graph.addCommandPass(
                 "character-skinning-" + std::to_string(meshKey),
-                [this, &context, meshKey] {
-                    recordComputeSkinningMesh(context, meshKey);
-                });
+                [this, frozenContext, meshKey](rhi::ICommandRecorder& commands) {
+                    const auto& context = *frozenContext;
+                    recordComputeSkinningMesh(context, meshKey, &commands);
+                }, true);
             graph.use(skin, inputResource, RenderGraphUsage::Storage, false);
             graph.use(skin, jointResource, RenderGraphUsage::Storage, false);
             graph.use(skin, vertexResources[meshKey], RenderGraphUsage::Storage, true);
         }
     }
 
-    const auto shadow = graph.addPass("character-shadow", [this, &context] {
-        submissionCounters_ = context.submissionCounters;
-        recordShadowPass(context);
+    rhi::RenderPassBeginDesc shadowBegin{};
+    shadowBegin.renderPass = context.shadowRenderPass;
+    shadowBegin.framebuffer = context.shadowFramebuffer;
+    shadowBegin.extent = {context.shadowMapSize, context.shadowMapSize};
+    VkClearValue shadowClear{};
+    shadowClear.depthStencil = {1.0F, 0};
+    shadowBegin.clearValues = {shadowClear};
+    const auto shadow = graph.addGraphicsPass("character-shadow", shadowBegin, [this, frozenContext](rhi::ICommandRecorder& commands) {
+        const auto& context = *frozenContext;
+        auto recordingContext = context;
+        recordingContext.commands = &commands;
+        recordShadowDraws(recordingContext);
+    }, [frozenContext](rhi::ICommandRecorder& commands) {
+        const auto& context = *frozenContext;
+        if (context.gpuTimingEnabled)
+            commands.writeTimestamp(context.timestampQueryPool, 1, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
         graph.use(shadow, vertexResources[meshKey], RenderGraphUsage::VertexBuffer, false);
@@ -666,11 +744,87 @@ void CharacterSceneRenderer::registerPasses(
     graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
-    const auto main = graph.addPass("character-main", [this, &context] {
-        submissionCounters_ = context.submissionCounters;
-        recordMainPass(context);
+    const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
+    mainCounters->instances = sceneInstances_.size();
+    mainCounters->visibleInstances = visibleInstances_.size();
+    const auto stageCounters = std::make_shared<std::array<SceneSubmissionCounters, 3>>();
+    std::optional<RenderGraph::ResourceId> indirectResource;
+    if (gpuCullingFrames_[context.currentFrame]) {
+        auto* culling = gpuCullingFrames_[context.currentFrame].get();
+        const auto importHostBuffer = [&graph](const char* name, const rhi::GpuBuffer& buffer) {
+            rhi::BufferBarrierDesc initial{};
+            initial.buffer = buffer.buffer;
+            initial.size = buffer.size;
+            initial.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
+            initial.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+            return graph.importBuffer(name, initial);
+        };
+        const auto bounds = importHostBuffer("cull-bounds", culling->bounds());
+        const auto source = importHostBuffer("cull-source", culling->source());
+        rhi::BufferBarrierDesc outputInitial{};
+        outputInitial.buffer = culling->output().buffer;
+        outputInitial.size = culling->output().size;
+        outputInitial.dstStageMask = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT;
+        outputInitial.dstAccessMask = VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+        indirectResource = graph.importBuffer("cull-output", outputInitial);
+        GpuCullParameters parameters{viewFrustum_.planes, 0, cullingEnabled_ ? 1U : 0U};
+        const auto cull = graph.addCommandPass("character-gpu-culling",
+            [culling, parameters](rhi::ICommandRecorder& commands) { culling->record(commands, parameters); }, true);
+        graph.use(cull, bounds, RenderGraphUsage::Storage, false);
+        graph.use(cull, source, RenderGraphUsage::Storage, false);
+        graph.use(cull, *indirectResource, RenderGraphUsage::Storage, true);
+    }
+    const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters](rhi::ICommandRecorder& commands) {
+        const auto& context = *frozenContext;
+        auto recordingContext = context;
+        recordingContext.commands = &commands;
+        recordingContext.submissionCounters = context.submissionCounters != nullptr ? mainCounters.get() : nullptr;
+        recordMainDraws(recordingContext);
+    }, [frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
+        const auto& context = *frozenContext;
+        for (const auto& counters : *stageCounters) {
+            mainCounters->drawCalls += counters.drawCalls;
+            mainCounters->indirectDrawCalls += counters.indirectDrawCalls;
+            mainCounters->descriptorSetBinds += counters.descriptorSetBinds;
+            mainCounters->pipelineBinds += counters.pipelineBinds;
+            mainCounters->pushConstantUpdates += counters.pushConstantUpdates;
+        }
+        if (context.submissionCounters != nullptr) {
+            context.submissionCounters->instances += mainCounters->instances;
+            context.submissionCounters->visibleInstances += mainCounters->visibleInstances;
+            context.submissionCounters->drawCalls += mainCounters->drawCalls;
+            context.submissionCounters->indirectDrawCalls += mainCounters->indirectDrawCalls;
+            context.submissionCounters->descriptorSetBinds += mainCounters->descriptorSetBinds;
+            context.submissionCounters->pipelineBinds += mainCounters->pipelineBinds;
+            context.submissionCounters->pushConstantUpdates += mainCounters->pushConstantUpdates;
+        }
+        if (context.gpuTimingEnabled)
+            commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
+    std::vector<std::function<void(rhi::ICommandRecorder&)>> mainChunks;
+    for (const std::uint32_t stage : {4U, 3U}) {
+        if (stage == 3 && !transparentDrawsPrepared_) continue;
+        mainChunks.push_back([this, frozenContext, stageCounters, stage](rhi::ICommandRecorder& commands) {
+            auto recordingContext = *frozenContext;
+            recordingContext.commands = &commands;
+            recordingContext.submissionCounters = frozenContext->submissionCounters != nullptr
+                ? &(*stageCounters)[stage == 4 ? 0 : 2] : nullptr;
+            recordMainDraws(recordingContext, stage);
+        });
+    }
+    graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
+    if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
+        const auto& buffer = oitIndexBuffers_[context.currentFrame];
+        rhi::BufferBarrierDesc initial{};
+        initial.buffer = buffer.buffer;
+        initial.size = buffer.size;
+        initial.dstStageMask = VK_PIPELINE_STAGE_HOST_BIT;
+        initial.dstAccessMask = VK_ACCESS_HOST_WRITE_BIT;
+        const auto transparentIndices = graph.importBuffer("transparent-sorted-indices", initial);
+        graph.use(main, transparentIndices, RenderGraphUsage::IndexBuffer, false);
+    }
+    if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
     graph.use(main, lightResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterHeaderResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterIndexResource, RenderGraphUsage::FragmentStorage, false);
@@ -688,7 +842,6 @@ void CharacterSceneRenderer::registerPasses(
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
-    submissionCounters_ = context.submissionCounters;
     recordComputeSkinning(context);
     recordShadowPass(context);
     recordMainPass(context);
@@ -1387,7 +1540,8 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
 
 void CharacterSceneRenderer::recordComputeSkinningMesh(
     const RenderContext& context,
-    const std::uint32_t meshKey) {
+    const std::uint32_t meshKey, rhi::ICommandRecorder* recorder) {
+    auto& commands = recorder != nullptr ? *recorder : *context.commands;
     const LoadedAsset& mesh = meshKey == 0
         ? asset_
         : additionalResources_[meshKey - 1]->asset;
@@ -1401,7 +1555,7 @@ void CharacterSceneRenderer::recordComputeSkinningMesh(
         jointBase,
         renderSettings_->morphWeights,
     };
-    context.commands->pushConstants(
+    commands.pushConstants(
         skinningPipelineLayout_,
         VK_SHADER_STAGE_COMPUTE_BIT,
         0,
@@ -1416,7 +1570,7 @@ void CharacterSceneRenderer::recordComputeSkinningMesh(
         true,
     });
     dispatch.record(
-        *context.commands,
+        commands,
         skinningPipeline_,
         skinningPipelineLayout_,
         skinningDescriptorSets_[setIndex]);
@@ -2053,6 +2207,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    for (auto& resources : gpuCullingFrames_) resources.reset();
+    gpuCullingCapacities_.fill(0);
     if (rhi_ == nullptr) {
         return;
     }
@@ -2578,6 +2734,16 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     shadowClear.depthStencil = {1.0F, 0};
     shadowPass.clearValues = {shadowClear};
     commands.beginRenderPass(shadowPass);
+    recordShadowDraws(context);
+    commands.endRenderPass();
+    if (context.gpuTimingEnabled) {
+        commands.writeTimestamp(context.timestampQueryPool, 1, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
+}
+
+void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
+    std::uint32_t firstCascade, std::uint32_t cascadeCount) {
+    rhi::ICommandRecorder& commands = *context.commands;
 
     const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
     commands.bindPipeline(shadowPipeline_);
@@ -2591,8 +2757,8 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
             ++context.submissionCounters->descriptorSetBinds;
         }
     }
-    for (std::uint32_t cascade = 0;
-         cascade < kShadowCascadeCount;
+    for (std::uint32_t cascade = firstCascade;
+         cascade < firstCascade + cascadeCount;
          ++cascade) {
         const VkOffset2D cascadeOffset{
             static_cast<std::int32_t>((cascade % 2) * cascadeResolution),
@@ -2704,14 +2870,19 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
         }
         }
     }
-    commands.endRenderPass();
-    if (context.gpuTimingEnabled) {
-        commands.writeTimestamp(context.timestampQueryPool, 1, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
-    }
 }
 
 void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     rhi::ICommandRecorder& commands = *context.commands;
+    commands.beginRenderPass(mainPassDescription(context));
+    recordMainDraws(context);
+    commands.endRenderPass();
+    if (context.gpuTimingEnabled) {
+        commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+    }
+}
+
+rhi::RenderPassBeginDesc CharacterSceneRenderer::mainPassDescription(const RenderContext& context) const {
     std::array<VkClearValue, 3> clearValues{};
     clearValues[0].color.float32[0] = 0.035F;
     clearValues[0].color.float32[1] = 0.055F;
@@ -2728,7 +2899,95 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     renderPassInfo.extent = context.renderExtent;
     renderPassInfo.clearValues.assign(
         clearValues.begin(), clearValues.end());
-    commands.beginRenderPass(renderPassInfo);
+    return renderPassInfo;
+}
+
+void CharacterSceneRenderer::prepareTransparentIndices() {
+    transparentPrimitivesByMesh_.assign(additionalResources_.size() + 1, {});
+    for (std::size_t key = 0; key < transparentPrimitivesByMesh_.size(); ++key) {
+        const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
+        for (const auto& primitive : mesh.primitives)
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend)
+                transparentPrimitivesByMesh_[key].push_back(&primitive);
+    }
+    transparentIndexOffsets_.assign(sceneInstances_.size(), 0);
+    std::size_t total = 0;
+    for (const auto& instance : sceneInstances_) {
+        transparentIndexOffsets_[instance.sourceIndex] = total;
+        const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
+        for (const auto& primitive : mesh.primitives)
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend) total += primitive.indexCount;
+    }
+    transparentDrawsPrepared_ = total != 0;
+    if (total == 0) return;
+    oitIndexBuffers_.resize(kMaxFramesInFlight);
+    auto& buffer = oitIndexBuffers_[currentFrame_];
+    if (buffer.size < total * sizeof(std::uint32_t)) {
+        allocator_->destroyBuffer(buffer);
+        buffer = allocator_->createBuffer(total * sizeof(std::uint32_t), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, true);
+    }
+    const Vector3 cameraForward = normalize({-cameraPosition_[0], -cameraPosition_[1], -cameraPosition_[2]});
+    for (const auto& instance : sceneInstances_) {
+        const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
+        const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
+        std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
+        if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
+            std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
+                oitIndexBuffers_[currentFrame_].mapped);
+            for (const AssetPrimitive* primitive : transparentPrimitives) {
+                const std::uint32_t triangleCount = primitive->indexCount / 3;
+                std::vector<std::uint32_t> triangleOrder(triangleCount);
+                std::vector<float> triangleDepth(triangleCount);
+                for (std::uint32_t triangle = 0; triangle < triangleCount;
+                     ++triangle) {
+                    triangleOrder[triangle] = triangle;
+                    const std::uint32_t base =
+                        primitive->firstIndex + triangle * 3;
+                    const std::uint32_t i0 = mesh.indices[base];
+                    const std::uint32_t i1 = mesh.indices[base + 1];
+                    const std::uint32_t i2 = mesh.indices[base + 2];
+                    const Vector3 v0 = transformPosition(
+                        instance.model, mesh.vertices[i0].position);
+                    const Vector3 v1 = transformPosition(
+                        instance.model, mesh.vertices[i1].position);
+                    const Vector3 v2 = transformPosition(
+                        instance.model, mesh.vertices[i2].position);
+                    const Vector3 centroid = {
+                        (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
+                        (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
+                        (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
+                    };
+                    const Vector3 cameraOffset =
+                        subtract(centroid, cameraPosition_);
+                    triangleDepth[triangle] =
+                        dot(cameraOffset, cameraForward);
+                }
+                std::stable_sort(
+                    triangleOrder.begin(),
+                    triangleOrder.end(),
+                    [&](const std::uint32_t left, const std::uint32_t right) {
+                        return triangleDepth[left] > triangleDepth[right];
+                    });
+                for (std::uint32_t triangle = 0; triangle < triangleCount;
+                     ++triangle) {
+                    const std::uint32_t ordered = triangleOrder[triangle];
+                    const std::uint32_t base =
+                        primitive->firstIndex + ordered * 3;
+                    oitMapped[oitWriteIndex + triangle * 3] =
+                        mesh.indices[base];
+                    oitMapped[oitWriteIndex + triangle * 3 + 1] =
+                        mesh.indices[base + 1];
+                    oitMapped[oitWriteIndex + triangle * 3 + 2] =
+                        mesh.indices[base + 2];
+                }
+                oitWriteIndex += primitive->indexCount;
+            }
+        }
+    }
+}
+
+void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::uint32_t stage) {
+    rhi::ICommandRecorder& commands = *context.commands;
 
     commands.setViewport(
         static_cast<float>(context.renderExtent.width),
@@ -2746,6 +3005,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     }
 
     const RenderSettings& settings = *renderSettings_;
+    if (stage == 0 || stage == 1 || stage == 4) {
     if (settings.characterPresentation.backgroundEnabled) {
         commands.bindPipeline(backgroundPipeline_);
         if (!bindlessTextures_) {
@@ -2836,7 +3096,9 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
             }
         }
     }
-    for (const std::array<std::uint32_t, 3>& span : visibleSpansByMeshKey_) {
+    }
+    if (stage == 0 || stage == 2 || stage == 4) {
+    for (const std::array<std::uint32_t, 3>& span : opaqueRecordingSpans_) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];
@@ -2855,7 +3117,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                         instanceCount,
                         firstInstance,
                         textureBase,
-                        globalMaterialBase);
+                        globalMaterialBase, context.submissionCounters);
                 }
             }
         };
@@ -2876,18 +3138,8 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 resource.globalMaterialBase);
         }
     }
-    std::vector<const AssetPrimitive*> transparentPrimitives;
-    for (const AssetPrimitive& primitive : asset_.primitives) {
-        if (asset_.materials[primitive.materialIndex].alphaMode
-            == AssetAlphaMode::Blend) {
-            transparentPrimitives.push_back(&primitive);
-        }
     }
-    const Vector3 cameraForward = normalize({
-        -cameraPosition_[0],
-        -cameraPosition_[1],
-        -cameraPosition_[2],
-    });
+    if (stage == 0 || stage == 3) {
     for (std::size_t slot = 0; slot < visibleInstances_.size(); ++slot) {
         const scene::SceneInstance* instance = visibleInstances_[slot];
         const std::uint32_t firstInstance = instance->sourceIndex;
@@ -2901,13 +3153,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
         const std::size_t globalMaterialBase = meshKey == 0
             ? 0
             : additionalResources_[meshKey - 1]->globalMaterialBase;
-        transparentPrimitives.clear();
-        for (const AssetPrimitive& primitive : mesh.primitives) {
-            if (mesh.materials[primitive.materialIndex].alphaMode
-                == AssetAlphaMode::Blend) {
-                transparentPrimitives.push_back(&primitive);
-            }
-        }
+        const auto& transparentPrimitives = transparentPrimitivesByMesh_[meshKey];
         if (meshKey == 0) {
             commands.bindVertexBuffer(
                 renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
@@ -2917,60 +3163,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 renderVertexBuffer(meshKey, context.currentFrame).buffer, 0);
             commands.bindIndexBuffer(renderIndexBuffer(meshKey).buffer, 0);
         }
-        std::size_t oitWriteIndex = 0;
-        if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
-            std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-                oitIndexBuffers_[context.currentFrame].mapped);
-            for (const AssetPrimitive* primitive : transparentPrimitives) {
-                const std::uint32_t triangleCount = primitive->indexCount / 3;
-                std::vector<std::uint32_t> triangleOrder(triangleCount);
-                std::vector<float> triangleDepth(triangleCount);
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    triangleOrder[triangle] = triangle;
-                    const std::uint32_t base =
-                        primitive->firstIndex + triangle * 3;
-                    const std::uint32_t i0 = mesh.indices[base];
-                    const std::uint32_t i1 = mesh.indices[base + 1];
-                    const std::uint32_t i2 = mesh.indices[base + 2];
-                    const Vector3 v0 = transformPosition(
-                        instance->model, mesh.vertices[i0].position);
-                    const Vector3 v1 = transformPosition(
-                        instance->model, mesh.vertices[i1].position);
-                    const Vector3 v2 = transformPosition(
-                        instance->model, mesh.vertices[i2].position);
-                    const Vector3 centroid = {
-                        (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
-                        (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
-                        (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
-                    };
-                    const Vector3 cameraOffset =
-                        subtract(centroid, cameraPosition_);
-                    triangleDepth[triangle] =
-                        dot(cameraOffset, cameraForward);
-                }
-                std::stable_sort(
-                    triangleOrder.begin(),
-                    triangleOrder.end(),
-                    [&](const std::uint32_t left, const std::uint32_t right) {
-                        return triangleDepth[left] > triangleDepth[right];
-                    });
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    const std::uint32_t ordered = triangleOrder[triangle];
-                    const std::uint32_t base =
-                        primitive->firstIndex + ordered * 3;
-                    oitMapped[oitWriteIndex + triangle * 3] =
-                        mesh.indices[base];
-                    oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                        mesh.indices[base + 1];
-                    oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                        mesh.indices[base + 2];
-                }
-                oitWriteIndex += primitive->indexCount;
-            }
-        }
-        std::size_t oitReadIndex = 0;
+        std::size_t oitReadIndex = transparentIndexOffsets_.at(instance->sourceIndex);
         for (const AssetPrimitive* primitive : transparentPrimitives) {
             if (!oitIndexBuffers_.empty()) {
                 const VkDeviceSize offsetBytes =
@@ -2988,13 +3181,10 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
                 1,
                 firstInstance,
                 textureBase,
-                globalMaterialBase);
+                globalMaterialBase, context.submissionCounters);
             oitReadIndex += primitive->indexCount;
         }
     }
-    commands.endRenderPass();
-    if (context.gpuTimingEnabled) {
-        commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
 }
 
@@ -3006,7 +3196,8 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t instanceCount,
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
-    const std::size_t globalMaterialBase) {
+    const std::size_t globalMaterialBase,
+    SceneSubmissionCounters* counters) {
     const AssetMaterial& material = mesh.materials[primitive.materialIndex];
     if (material.showcasePlatform > 0.5F
         && !renderSettings_->characterPresentation.platformEnabled) {
@@ -3023,8 +3214,8 @@ void CharacterSceneRenderer::drawPrimitive(
             + globalMaterialBase + primitive.materialIndex;
         commands.bindDescriptorSet(
             pipelineLayout_, descriptorSets_[descriptorIndex]);
-        if (submissionCounters_ != nullptr) {
-            ++submissionCounters_->descriptorSetBinds;
+        if (counters != nullptr) {
+            ++counters->descriptorSetBinds;
         }
     }
     const MaterialPushConstants materialConstants{
@@ -3111,12 +3302,39 @@ void CharacterSceneRenderer::drawPrimitive(
         sizeof(MaterialPushConstants),
         &morphConstants,
         sizeof(morphConstants));
-    commands.drawIndexed(
-        primitive.indexCount, firstIndexOffset, instanceCount, firstInstance);
-    if (submissionCounters_ != nullptr) {
-        ++submissionCounters_->drawCalls;
-        ++submissionCounters_->pipelineBinds;
-        submissionCounters_->pushConstantUpdates += 2;
+    std::uint32_t recordedDrawCalls = 0;
+    if (!blend && gpuCullingFrames_[currentFrame_]
+        && firstIndexOffset == primitive.firstIndex) {
+        const auto primitiveIndex = static_cast<std::size_t>(&primitive - mesh.primitives.data());
+        if (multiDrawIndirect_) {
+            for (std::uint32_t i = 0; i < instanceCount;) {
+                const auto count = std::min(maxDrawIndirectCount_, instanceCount - i);
+                const auto slot = indirectInstanceOffsets_.at(firstInstance + i) + primitiveIndex;
+                commands.drawIndexedIndirect(gpuCullingFrames_[currentFrame_]->output().buffer,
+                    slot * sizeof(VkDrawIndexedIndirectCommand), count,
+                    static_cast<std::uint32_t>(mesh.primitives.size() * sizeof(VkDrawIndexedIndirectCommand)));
+                i += count;
+                ++recordedDrawCalls;
+            }
+        } else for (std::uint32_t i = 0; i < instanceCount; ++i) {
+            const auto slot = indirectInstanceOffsets_.at(firstInstance + i) + primitiveIndex;
+            commands.drawIndexedIndirect(gpuCullingFrames_[currentFrame_]->output().buffer,
+                slot * sizeof(VkDrawIndexedIndirectCommand), 1,
+                sizeof(VkDrawIndexedIndirectCommand));
+            ++recordedDrawCalls;
+        }
+    } else {
+        commands.drawIndexed(
+            primitive.indexCount, firstIndexOffset, instanceCount, firstInstance);
+        ++recordedDrawCalls;
+    }
+    if (counters != nullptr) {
+        counters->drawCalls += recordedDrawCalls;
+        if (!blend && gpuCullingFrames_[currentFrame_]
+            && firstIndexOffset == primitive.firstIndex)
+            counters->indirectDrawCalls += recordedDrawCalls;
+        ++counters->pipelineBinds;
+        counters->pushConstantUpdates += 2;
     }
 }
 

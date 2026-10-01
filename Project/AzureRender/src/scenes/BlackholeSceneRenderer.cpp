@@ -230,6 +230,10 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
     currentFrame_ = frame.currentFrame;
     if (frame.renderSettings != nullptr) {
+        frameRenderSettings_ = *frame.renderSettings;
+        renderSettings_ = &frameRenderSettings_;
+    }
+    if (frame.renderSettings != nullptr) {
         const BlackholeQuality nextQuality =
             frame.renderSettings->blackhole.quality;
         const BlackholeCamera nextCamera =
