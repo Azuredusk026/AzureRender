@@ -77,4 +77,4 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 - [RHI 同步与窗口生命周期](docs/runtime/rhi-synchronization.md)
 - [桌面同步验收记录](docs/acceptance/r1/2026-09-26.md)
 
-R3 具备只读实例快照、并行录制和 GPU 间接提交。阶段保持 Active，当前性能与功能门禁见 [R3 阶段验收](docs/acceptance/r3/2026-10-03.md)。
+R3 具备只读实例快照、并行录制和 GPU 间接提交。阶段保持 Active，本机验收与现行性能门禁见 [R3 阶段验收](docs/acceptance/r3/2026-10-03.md)。

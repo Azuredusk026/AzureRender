@@ -85,7 +85,9 @@ workerRecordedPasses 为零时确认开关和场景。Validation 报错时检查
 
 ## 验收与证据
 
-Debug 64 实例十帧与 Release 256 实例三十帧的四路径哈希一致。证据见审计修复跟踪。R3 阶段为 Active，多资源 CPU 性能预算尚待满足。当前结果见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
+Debug 64 实例十帧与 Release 256 实例三十帧的四路径哈希一致。证据见审计修复跟踪。R3 阶段为 Active，现有性能采样按 `r3-budget-v2` 达标。自动判定与阶段证据收尾按执行清单完成。
+
+当前结果见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
 
 透明变体由公共资产临时生成，材质设为 Blend 并使用十六个实例。Debug 十帧四路径哈希一致，Validation 无错误。夹具和日志保存在测试输出目录。
 

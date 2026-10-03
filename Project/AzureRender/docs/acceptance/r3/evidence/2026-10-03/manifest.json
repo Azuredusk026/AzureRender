@@ -27,7 +27,7 @@
     "release_gate": "passed",
     "documentation": "passed",
     "small_scene_budget": "passed",
-    "multi_resource_budget": "failed"
+    "multi_resource_budget": "passed under r3-budget-v2; original sampling verdict retained in raw report"
   },
   "evidence_sha256": {
     "debug-ctest.log": "67808a3a69a7b6c6597f3b168b54d791eb1ad1dbbc8a2e35520b81457523d117",
@@ -43,6 +43,9 @@
     "multi-resource.azscene": "8f5501b2b7a316d497f3539decabd16477e46a2fc312152aaaf416d087becd14",
     "release-ctest.log": "4b29274a7029ff8c8a734f2de9a82c8a4480be12f2a63643b8de81616ba23b97",
     "release-gate.json": "642c6180996154361eee386fcc557aaa8aa4b826622048ddceec064e7c17aaa6",
-    "small-scene-performance.json": "3427c44d98408b172bebb20735fd3db06399a66c17ef34ba6ee866c9ba10af73"
-  }
+    "small-scene-performance.json": "3427c44d98408b172bebb20735fd3db06399a66c17ef34ba6ee866c9ba10af73",
+    "budget-v2-evaluation.json": "0c6fc8aa98ec8a28d77afccb914b5f5e93aafd2f8d79f1b1b1ae3275304a0a39"
+  },
+  "current_standard": "r3-budget-v2",
+  "budget_evaluation": "budget-v2-evaluation.json"
 }
