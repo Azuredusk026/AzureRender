@@ -9,3 +9,5 @@
 `showcase_looks.json` 保存角色色调、Bloom 和轮廓预设。加载器按配置结构与字段范围校验预设。
 
 `scenes/clustered_lights_empty.azscene` 与 `scenes/clustered_lights_16.azscene` 使用同一角色模型，分别提供零光源参考和 16 个点光源场景。光源实体挂接在隐藏的场景变换节点上。
+
+`scenes/r4_stress.azscene` 包含 32 个独立公共网格资源、32 个可见对象和 16 个点光源，供复杂负载与生命周期验收使用。全部资源引用项目自制的 `test_model.gltf`。

@@ -1,0 +1,31 @@
+{
+  "stage": "R4",
+  "status": "passed",
+  "resolution": [
+    1280,
+    720
+  ],
+  "objects": 32,
+  "lights": 16,
+  "executable": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+  "lifecycle": {
+    "character": {
+      "seconds": 120.01599999999962,
+      "cycles": 6,
+      "recreations": 26,
+      "historyResets": 0,
+      "samples": 5978,
+      "gpuMs": 17.18469,
+      "cleanUnload": true
+    },
+    "blackhole": {
+      "seconds": 120.125,
+      "cycles": 6,
+      "recreations": 27,
+      "historyResets": 27,
+      "samples": 5436,
+      "gpuMs": 21.230053,
+      "cleanUnload": true
+    }
+  }
+}

@@ -825,6 +825,10 @@ void AzureRenderApp::cleanup() {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }
         rhi_.reset();
+        const auto& unloaded = gpuAllocator_.statistics();
+        azurerender::RuntimeDiagnostics::instance().print(
+            "render", "Allocator after unload: buffers=" + std::to_string(unloaded.liveBuffers)
+                + " images=" + std::to_string(unloaded.liveImages));
         gpuAllocator_.shutdown();
         vkDestroyDevice(device_, nullptr);
         device_ = VK_NULL_HANDLE;

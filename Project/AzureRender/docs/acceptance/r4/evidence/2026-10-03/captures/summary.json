@@ -1,0 +1,11 @@
+{
+  "stage": "R4",
+  "status": "passed",
+  "resolution": [
+    1280,
+    720
+  ],
+  "objects": 32,
+  "lights": 16,
+  "executable": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe"
+}

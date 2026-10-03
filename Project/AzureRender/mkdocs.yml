@@ -49,12 +49,15 @@ nav:
       - 场景数据: runtime/scene-data.md
       - Compute Pass: runtime/compute-passes.md
       - 并行录制与 GPU 提交: runtime/parallel-submission.md
+      - Windows 渲染核心验收: runtime/windows-acceptance.md
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
       - 桌面同步: acceptance/r1/2026-09-26.md
       - R2 验收: acceptance/r2/2026-09-26.md
-      - R3 验收审查: acceptance/r3/2026-10-01.md
+      - R3 验收: acceptance/r3/2026-10-03.md
+      - R3 历史审查: acceptance/r3/2026-10-01.md
+      - R4 验收: acceptance/r4/2026-10-03.md
       - 审计修复跟踪: audits/2026-10-01-follow-up.md
       - G0 起始记录: acceptance/r0/2026-09-26.md
 

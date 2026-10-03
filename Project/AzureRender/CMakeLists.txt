@@ -602,6 +602,9 @@ if(BUILD_TESTING)
                 RUN_SERIAL TRUE)
     endif()
     if(WIN32 AND Python3_Interpreter_FOUND)
+        add_test(NAME AzureRender.R4AcceptanceRules
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_r4_acceptance.py")
         add_test(NAME AzureRender.R3Comparison
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_r3_comparison.py"
@@ -836,9 +839,11 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r4/2026-10-03.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 install(
     FILES

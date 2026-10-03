@@ -225,6 +225,9 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
     createTaaPipeline(context);
     createCompositePipeline(context);
     invalidateHistory();
+    RuntimeDiagnostics::instance().print(
+        "blackhole", "Blackhole history reset after recreate: "
+            + std::to_string(historyResetCount_));
 }
 
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {

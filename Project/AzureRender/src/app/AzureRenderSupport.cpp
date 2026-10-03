@@ -150,6 +150,9 @@ void AzureRenderApp::recreateSwapchain() {
         sceneRenderer_->onSwapchainRecreate(sceneContext);
     }
     initEditorUi();
+    azurerender::RuntimeDiagnostics::instance().print(
+        "surface", "Swapchain recreated: " + std::to_string(swapchainExtent_.width)
+            + "x" + std::to_string(swapchainExtent_.height));
 }
 
 void AzureRenderApp::recreateEditorViewportResources() {
