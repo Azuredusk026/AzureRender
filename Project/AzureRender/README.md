@@ -82,3 +82,7 @@ R3 具备只读实例快照、并行录制和 GPU 间接提交。阶段为 Compl
 Windows 渲染核心的压力场景、质量档位、长跑与窗口恢复结果见 [R4 阶段验收](docs/acceptance/r4/2026-10-03.md)。复现命令见 [Windows 验收说明](docs/runtime/windows-acceptance.md)。
 
 黑洞电影档的 20 ms 预算、图像一致性及引擎开销核验见 [黑洞优化验收](docs/acceptance/blackhole/2026-10-03.md)。复现命令见 [黑洞性能预算](docs/runtime/blackhole-performance.md)。
+
+## 引擎基础与 Player
+
+独立 AzurePlayer 支持创建和加载版本化项目，资源通过虚拟挂载访问。使用与模块契约见 [引擎基础](docs/runtime/engine-foundation.md)，实施任务见 [G0 计划](docs/plans/g0-implementation.md)。

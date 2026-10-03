@@ -1,10 +1,18 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/EditorContext.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "render/RenderContext.hpp"
@@ -30,12 +38,18 @@
 using namespace azurerender::internal;
 
 void AzureRenderApp::drawFrame() {
+    const auto frameStart = std::chrono::steady_clock::now();
+    if (runOptions_.gpuTimingEnabled) ++submissionCounters_.frameAttempts;
     vkCheck(
         vkWaitForFences(device_, 1, &inFlightFences_[currentFrame_], VK_TRUE, UINT64_MAX),
         "vkWaitForFences");
+    const auto fenceEnd = std::chrono::steady_clock::now();
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.frameSlotWaitMilliseconds += std::chrono::duration<double, std::milli>(fenceEnd - frameStart).count();
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         if (runOptions_.editorSession->consumeAssetReloadRequest()) {
             vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
@@ -55,8 +69,10 @@ void AzureRenderApp::drawFrame() {
             screenshotRequested_ = true;
         }
     }
+#endif
 
     std::uint32_t imageIndex = 0;
+    const auto acquireStart = std::chrono::steady_clock::now();
     const VkResult acquireResult = vkAcquireNextImageKHR(
         device_,
         swapchain_,
@@ -65,6 +81,8 @@ void AzureRenderApp::drawFrame() {
         VK_NULL_HANDLE,
         &imageIndex);
 
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.acquireMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - acquireStart).count();
     if (acquireResult == VK_ERROR_OUT_OF_DATE_KHR) {
         framebufferResized_ = false;
         recreateSwapchain();
@@ -98,6 +116,7 @@ void AzureRenderApp::drawFrame() {
     if (runOptions_.technicalSequence) {
         updateTechnicalSequenceState(capturedFrames_);
     }
+#if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->newFrame();
@@ -125,6 +144,7 @@ void AzureRenderApp::drawFrame() {
             editorViewportResizeRequested_ = true;
         }
     }
+#endif
     azurerender::SceneFrameData frameData;
     buildSceneFrameData(frameData);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
@@ -161,9 +181,12 @@ void AzureRenderApp::drawFrame() {
     submitInfo.pCommandBuffers = &commandBuffers_[currentFrame_];
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
+    const auto submitStart = std::chrono::steady_clock::now();
     vkCheck(
         vkQueueSubmit(graphicsQueue_, 1, &submitInfo, inFlightFences_[currentFrame_]),
         "vkQueueSubmit");
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.submitMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - submitStart).count();
     if (runOptions_.gpuTimingEnabled) {
         timestampQuerySubmitted_[currentFrame_] = true;
     }
@@ -225,7 +248,10 @@ void AzureRenderApp::drawFrame() {
     presentInfo.pSwapchains = &swapchain_;
     presentInfo.pImageIndices = &imageIndex;
 
+    const auto presentStart = std::chrono::steady_clock::now();
     const VkResult presentResult = vkQueuePresentKHR(presentQueue_, &presentInfo);
+    if (runOptions_.gpuTimingEnabled)
+        submissionCounters_.presentMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - presentStart).count();
     if (presentResult == VK_ERROR_OUT_OF_DATE_KHR
         || presentResult == VK_SUBOPTIMAL_KHR
         || framebufferResized_) {
@@ -239,11 +265,17 @@ void AzureRenderApp::drawFrame() {
         recreateEditorViewportResources();
     }
 
+    if (runOptions_.gpuTimingEnabled) {
+        ++submissionCounters_.completedCpuFrames;
+        submissionCounters_.cpuFrameMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - frameStart).count();
+    }
     currentFrame_ = (currentFrame_ + 1) % kMaxFramesInFlight;
 }
 
 
 void AzureRenderApp::updateGizmoScreenData() {
+#if AZURE_WITH_EDITOR
+
     if (runOptions_.editorSession == nullptr) {
         return;
     }
@@ -348,6 +380,8 @@ void AzureRenderApp::updateGizmoScreenData() {
     data.axisZScreenY = axisZScreen[1];
     data.pixelToWorld = 0.005F;
     editorContext.setGizmoScreen(data);
+
+#endif
 }
 
 void AzureRenderApp::pickPrimitive(
@@ -671,6 +705,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
     text << "TOON : RAMP V1 / 10 CLASSES  MASK "
          << std::fixed << std::setprecision(2) << renderSettings_.styleMaskStrength
          << "  LEGACY THRESHOLD " << renderSettings_.diffuseBandThreshold << '\n';
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorMode) {
         const azurerender::EditorContext& editorContext =
             runOptions_.editorSession->context();
@@ -704,6 +739,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
         }
         text << "\nCONSOLE: [/] OUTLINE  -/= EXPOSURE  F1-F3 LIGHT  CLOSE=SAVES\n";
     }
+#endif
     if (gpuTiming_.samples > 0) {
         const double count = static_cast<double>(gpuTiming_.samples);
         text << "GPU MS: SHADOW "
@@ -906,6 +942,7 @@ void AzureRenderApp::recordCommandBuffer(
     graph.use(composite, resources.shadow, azurerender::RenderGraphUsage::Sampled, false);
     graph.write(composite, output);
     const auto editor = graph.addPass("editor-ui", [&] {
+#if AZURE_WITH_EDITOR
     if (editorUiEnabled_ && editorLayer_ != nullptr) {
         VkClearValue editorClear{};
         editorClear.color.float32[0] = 0.035F;
@@ -932,6 +969,7 @@ void AzureRenderApp::recordCommandBuffer(
         editorLayer_->render(commandBuffer);
         vkCmdEndRenderPass(commandBuffer);
     }
+#endif
     });
     graph.write(editor, output);
     const auto capture = graph.addPass("capture", [&] {
@@ -1015,7 +1053,7 @@ void AzureRenderApp::recordCommandBuffer(
         }
     }
     const auto workerStart = std::chrono::steady_clock::now();
-    recordingWorkers_.runWithCaller(std::move(recordingTasks));
+    recordingWorkers_.runAdaptive(std::move(recordingTasks));
     const auto executionStart = std::chrono::steady_clock::now();
     graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
         if (recordedPasses[pass].empty()) {

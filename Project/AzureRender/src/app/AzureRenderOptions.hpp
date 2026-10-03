@@ -1,7 +1,7 @@
 #pragma once
 
 #include "render/RenderSettings.hpp"
-#include "editor/SceneModel.hpp"
+#include "runtime/SceneDocument.hpp"
 
 #include <cstdint>
 #include <memory>

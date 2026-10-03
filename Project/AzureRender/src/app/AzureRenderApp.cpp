@@ -1,6 +1,10 @@
 #include "AzureRenderApp.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
+#endif
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#endif
 #include "diagnostics/GpuCapabilityReport.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
@@ -75,6 +79,8 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
+    runtime_.start();
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
@@ -106,9 +112,11 @@ void AzureRenderApp::run(
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().attachRenderSettings(renderSettings_);
     }
+#endif
     hudEnabled_ = runOptions_.hudEnabled;
 #if !defined(AZURERENDER_HAS_IMGUI)
     hudEnabled_ = hudEnabled_ || runOptions_.editorMode;
@@ -131,9 +139,11 @@ void AzureRenderApp::run(
             + (renderSettings_.innerOutlineEnabled ? "on" : "off")
             + ", HUD: " + (hudEnabled_ ? "on" : "off"));
     mainLoop(runOptions_.smokeFrameLimit);
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().detachRenderSettings();
     }
+#endif
 }
 
 void AzureRenderApp::initWindow() {
@@ -230,6 +240,8 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
 }
 
 void AzureRenderApp::initEditorUi() {
+#if AZURE_WITH_EDITOR
+
     if (!editorUiEnabled_) {
         return;
     }
@@ -251,6 +263,8 @@ void AzureRenderApp::initEditorUi() {
         editorViewportImageViews_,
         renderExtent_.width,
         renderExtent_.height);
+
+#endif
 }
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
@@ -279,6 +293,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
         printGpuTimingSummary();
     }
+    runtime_.stop();
     azurerender::RuntimeDiagnostics::instance().print(
         "render", "Rendered frames: " + std::to_string(renderedFrames));
     if (fixedSimulation_) {
@@ -349,82 +364,16 @@ void AzureRenderApp::buildRenderContext(
     context.shadowMapSize = kShadowMapSize;
     {
         const azurerender::SceneDocument* document = nullptr;
+#if AZURE_WITH_EDITOR
         if (runOptions_.editorSession != nullptr) {
             document = &runOptions_.editorSession->context().scene();
-        } else if (runOptions_.sceneDocument.has_value()) {
+        } else
+#endif
+        if (runOptions_.sceneDocument.has_value()) {
             document = &*runOptions_.sceneDocument;
         }
         if (document != nullptr) {
-            context.scene.resources.reserve(document->resources.size());
-            for (const azurerender::SceneResource& resource :
-                 document->resources) {
-                context.scene.resources.push_back(
-                    {resource.id, resource.path.string()});
-            }
-            context.scene.nodes.reserve(document->nodes.size());
-            for (const azurerender::SceneNode& node : document->nodes) {
-                azurerender::scene::SceneNodeDesc desc{};
-                desc.id = node.id;
-                desc.resourceId = node.resourceId;
-                desc.parentId = node.parentId;
-                desc.translation = node.translation;
-                desc.rotation = node.rotation;
-                desc.scale = node.scale;
-                desc.visible = node.visible;
-                context.scene.nodes.push_back(std::move(desc));
-            }
-            std::unordered_map<std::string, std::size_t> nodeIndices;
-            nodeIndices.reserve(document->nodes.size());
-            for (std::size_t index = 0; index < document->nodes.size(); ++index) {
-                nodeIndices.emplace(document->nodes[index].id, index);
-            }
-            std::vector<azurerender::internal::Matrix4> nodeWorld(
-                document->nodes.size());
-            std::vector<std::uint8_t> nodeState(document->nodes.size(), 0);
-            const auto resolveNodeWorld = [&](const std::size_t index,
-                auto&& self) -> const azurerender::internal::Matrix4& {
-                if (nodeState[index] == 2) {
-                    return nodeWorld[index];
-                }
-                if (nodeState[index] == 1) {
-                    throw std::runtime_error(
-                        "Scene transform hierarchy contains a cycle");
-                }
-                nodeState[index] = 1;
-                const azurerender::SceneNode& node = document->nodes[index];
-                const azurerender::internal::Matrix4 local =
-                    azurerender::scene::composeTrs(
-                        node.translation, node.rotation, node.scale);
-                const auto parent = nodeIndices.find(node.parentId);
-                if (!node.parentId.empty() && parent != nodeIndices.end()) {
-                    nodeWorld[index] = azurerender::internal::multiply(
-                        self(parent->second, self), local);
-                } else {
-                    nodeWorld[index] = local;
-                }
-                nodeState[index] = 2;
-                return nodeWorld[index];
-            };
-            context.scene.lights.reserve(document->lights.size());
-            for (const azurerender::SceneLight& light : document->lights) {
-                const auto node = nodeIndices.find(light.nodeId);
-                if (node == nodeIndices.end()) {
-                    throw std::runtime_error(
-                        "Scene light references missing node: " + light.nodeId);
-                }
-                const auto& world = resolveNodeWorld(node->second, resolveNodeWorld);
-                const auto position = azurerender::internal::transformPosition(
-                    world, {0.0F, 0.0F, 0.0F});
-                context.scene.lights.push_back({
-                    light.id,
-                    light.nodeId,
-                    position,
-                    light.color,
-                    light.intensity,
-                    light.radius,
-                    light.enabled,
-                });
-            }
+            context.scene = document->renderDescription();
         } else {
             context.scene.resources.push_back({"asset-0", resolvedAssetPath_});
             azurerender::scene::SceneNodeDesc root{};
@@ -460,10 +409,17 @@ void AzureRenderApp::buildRenderContext(
 void AzureRenderApp::buildSceneFrameData(
     azurerender::SceneFrameData& frame) {
     const double currentTime = frontend_->timeSeconds();
-    const float deltaSeconds = (fixedSimulation_ || runOptions_.fixedFrameStep)
+    const float rawDeltaSeconds = (fixedSimulation_ || runOptions_.fixedFrameStep)
         ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
+    const float deltaSeconds = static_cast<float>(runtime_.beginFrame(rawDeltaSeconds));
+    pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
+    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
+        runOptions_.sceneDocument = runtime_.snapshotScene();
+    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
+        frame.sceneSnapshot = std::make_shared<const azurerender::scene::SceneDescription>(
+            runOptions_.sceneDocument->renderDescription());
     fixedSimulationStarted_ = true;
     lastRotationTime_ = currentTime;
     if (autoRotate_) {
@@ -474,7 +430,7 @@ void AzureRenderApp::buildSceneFrameData(
         fixedSimulationTime_ += deltaSeconds;
         frame.timeSeconds = fixedSimulationTime_;
     } else {
-        frame.timeSeconds = currentTime;
+        frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
     frame.renderSettings = &renderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
@@ -498,6 +454,7 @@ void AzureRenderApp::buildSceneFrameData(
     frame.gizmoActive =
         selectedPrimitiveIndex_ >= 0
         && runOptions_.editorSession != nullptr;
+#if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         const azurerender::EditorContext& editorContext =
             runOptions_.editorSession->context();
@@ -516,6 +473,7 @@ void AzureRenderApp::buildSceneFrameData(
         frame.gizmoScale[1] = scale[1];
         frame.gizmoScale[2] = scale[2];
     }
+#endif
     frame.swapchainWidth = swapchainExtent_.width;
     frame.swapchainHeight = swapchainExtent_.height;
 }
@@ -772,12 +730,15 @@ void AzureRenderApp::updateTechnicalSequenceState(
 }
 
 void AzureRenderApp::cleanup() {
+    runtime_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
         workerCommandPools_.reset();
+#if AZURE_WITH_EDITOR
         if (editorLayer_ != nullptr) {
             editorLayer_->shutdownVulkan();
         }
+#endif
         cleanupSwapchain();
         if (sceneRenderer_ != nullptr) {
             azurerender::RenderContext unloadContext;
@@ -847,7 +808,9 @@ void AzureRenderApp::cleanup() {
         instance_ = VK_NULL_HANDLE;
     }
     frontend_.reset();
+#if AZURE_WITH_EDITOR
     editorLayer_.reset();
+#endif
 }
 
 void AzureRenderApp::createInstance() {
@@ -1210,15 +1173,29 @@ void AzureRenderApp::keyCallback(
     if (application == nullptr) {
         return;
     }
+#if AZURE_WITH_EDITOR
     if (application->editorLayer_ != nullptr) {
         if (!application->editorLayer_->acceptsViewportShortcuts()) {
             return;
         }
     }
+#endif
 
+#if !AZURE_WITH_EDITOR
+    if (action == GLFW_PRESS && key == GLFW_KEY_P) {
+        if (application->runtime_.state() == azurerender::RuntimeLifecycle::State::Running) application->runtime_.pause();
+        else if (application->runtime_.state() == azurerender::RuntimeLifecycle::State::Paused) application->runtime_.resume();
+        return;
+    }
+    if (action == GLFW_PRESS && key == GLFW_KEY_O) {
+        if (application->runtime_.state() == azurerender::RuntimeLifecycle::State::Paused) application->runtime_.step();
+        return;
+    }
+#endif
     constexpr float kPi = 3.14159265358979323846F;
     constexpr float kFineStep = kPi / 36.0F;
     if (action == GLFW_PRESS) {
+#if AZURE_WITH_EDITOR
         if (application->runOptions_.editorSession != nullptr
             && key == GLFW_KEY_TAB
             && application->runOptions_.editorSession->context().selectedNode() != nullptr) {
@@ -1228,7 +1205,9 @@ void AzureRenderApp::keyCallback(
                 "Editor selected node: "
                     + application->runOptions_.editorSession->context()
                           .selectedNode()->name);
-        } else if (key == GLFW_KEY_SPACE) {
+        } else
+#endif
+        if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
             azurerender::RuntimeDiagnostics::instance().print(
                 "input",
@@ -1371,7 +1350,9 @@ void AzureRenderApp::keyCallback(
                 "Diffuse band threshold: "
                     + std::to_string(
                         application->renderSettings_.diffuseBandThreshold));
-        } else if (application->runOptions_.editorMode
+        }
+#if AZURE_WITH_EDITOR
+        else if (application->runOptions_.editorMode
                    && key == GLFW_KEY_LEFT_BRACKET) {
             application->runOptions_.editorSession->context().beginEdit();
             application->renderSettings_.outline.strength = std::max(
@@ -1416,5 +1397,6 @@ void AzureRenderApp::keyCallback(
                     + std::to_string(
                         application->renderSettings_.grade.exposureEv));
         }
+#endif
     }
 }

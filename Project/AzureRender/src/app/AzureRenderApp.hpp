@@ -1,6 +1,10 @@
 #pragma once
 
+#ifndef AZURE_WITH_EDITOR
+#define AZURE_WITH_EDITOR 1
+#endif
 #include "AzureRenderOptions.hpp"
+#include "runtime/RuntimeLifecycle.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/TransientResourcePool.hpp"
@@ -110,6 +114,13 @@ private:
         double graphPreparationMilliseconds = 0.0;
         double workerWaitMilliseconds = 0.0;
         double graphExecutionMilliseconds = 0.0;
+        std::uint64_t frameAttempts = 0;
+        std::uint64_t completedCpuFrames = 0;
+        double frameSlotWaitMilliseconds = 0.0;
+        double acquireMilliseconds = 0.0;
+        double submitMilliseconds = 0.0;
+        double presentMilliseconds = 0.0;
+        double cpuFrameMilliseconds = 0.0;
         std::uint64_t workerRecordedPasses = 0;
         std::uint64_t workerRecordedChunks = 0;
         std::uint64_t frames = 0;
@@ -126,7 +137,11 @@ private:
     static_assert(sizeof(HudVertex) == 12);
 
     std::unique_ptr<azurerender::GlfwFrontend> frontend_;
+#if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
+#endif
+    azurerender::RuntimeLifecycle runtime_;
+    double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 
     VkInstance instance_ = VK_NULL_HANDLE;

@@ -1,0 +1,22 @@
+{
+  "baseline": {
+    "averagesMs": [
+      18.681779,
+      19.26339,
+      19.982309
+    ],
+    "medianMs": 19.26339,
+    "limitExclusiveMs": 20.0,
+    "passed": true
+  },
+  "candidate": {
+    "averagesMs": [
+      20.482877,
+      20.45724,
+      20.236342
+    ],
+    "medianMs": 20.45724,
+    "limitExclusiveMs": 20.0,
+    "passed": false
+  }
+}

@@ -273,8 +273,9 @@ const char* commandLineHelp() noexcept {
 }
 
 ParsedCommandLine parseCommandLine(
-    const std::vector<std::string>& arguments) {
+    const std::vector<std::string>& arguments, AzureRenderOptions initialOptions) {
     ParsedCommandLine parsed;
+    parsed.options = std::move(initialOptions);
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const std::string& argument = arguments[index];
         if (argument == "--help") {

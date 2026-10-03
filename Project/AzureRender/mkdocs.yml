@@ -42,9 +42,11 @@ nav:
   - 开发规范: documentation-standard.md
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
+      - G0 引擎基础计划: plans/g0-implementation.md
       - 渲染核心实施计划: plans/render-core-implementation.md
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
+      - 引擎基础与 Player: runtime/engine-foundation.md
       - 渲染图: runtime/render-graph.md
       - RHI 同步: runtime/rhi-synchronization.md
       - 场景数据: runtime/scene-data.md
@@ -62,7 +64,8 @@ nav:
       - R4 验收: acceptance/r4/2026-10-03.md
       - 黑洞优化准入: acceptance/blackhole/2026-10-03.md
       - 审计修复跟踪: audits/2026-10-01-follow-up.md
-      - G0 起始记录: acceptance/r0/2026-09-26.md
+      - G0 引擎基础验收: acceptance/g0/2026-10-03.md
+      - R0 准入记录: acceptance/r0/2026-09-26.md
 
 markdown_extensions:
   - admonition

@@ -1,6 +1,6 @@
 #include "scenes/BlackholeSceneRenderer.hpp"
 
-#include "app/AzureRenderInternal.hpp"
+#include "render/RenderMath.hpp"
 #include "platform/BinaryFile.hpp"
 #include "render/ComputePass.hpp"
 #include "render/RenderSettings.hpp"
@@ -488,6 +488,11 @@ void BlackholeSceneRenderer::recordTrace(const RenderContext& context) {
         descriptorSets_[context.currentFrame % kMaxFramesInFlight];
     commands.bindDescriptorSet(pipelineLayout_, traceSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
 
 }
@@ -513,6 +518,11 @@ void BlackholeSceneRenderer::recordTemporal(const RenderContext& context) {
     const VkDescriptorSet taaSet = taaDescriptorSets_[taaSetIndex];
     commands.bindDescriptorSet(taaPipelineLayout_, taaSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
 
 }
@@ -546,6 +556,11 @@ void BlackholeSceneRenderer::recordComposite(const RenderContext& context) {
         compositeDescriptorSets_[historyWriteIndex_];
     commands.bindDescriptorSet(compositePipelineLayout_, compositeSet);
     commands.draw(3);
+    if (context.submissionCounters != nullptr) {
+        ++context.submissionCounters->drawCalls;
+        ++context.submissionCounters->pipelineBinds;
+        ++context.submissionCounters->descriptorSetBinds;
+    }
     commands.endRenderPass();
     historyValid_ = true;
     historyWriteIndex_ ^= 1U;

@@ -42,7 +42,8 @@ struct ParsedCommandLine {
 };
 
 [[nodiscard]] ParsedCommandLine parseCommandLine(
-    const std::vector<std::string>& arguments);
+    const std::vector<std::string>& arguments,
+    AzureRenderOptions initialOptions = {});
 [[nodiscard]] const char* commandLineUsage() noexcept;
 [[nodiscard]] const char* commandLineHelp() noexcept;
 

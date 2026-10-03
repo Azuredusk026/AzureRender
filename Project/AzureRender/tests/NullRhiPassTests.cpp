@@ -50,7 +50,8 @@ std::vector<RecordedCall> runFrame(
     const bool computeSkinning = false,
     const float sceneOffset = 0.0F,
     const bool gizmoTranslated = false,
-    const bool partitionedTransparency = false) {
+    const bool partitionedTransparency = false,
+    const int runtimeMutation = 0) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -114,8 +115,19 @@ std::vector<RecordedCall> runFrame(
         frame.cameraPosition[1] = 100.0F;
         frame.cameraTarget[0] = 20000.0F;
     }
+    if (runtimeMutation != 0) frame.cameraPosition[2] = 5.0F;
     renderer.updateFrame(frame);
 
+    if (runtimeMutation != 0) {
+        auto snapshot = std::make_shared<azurerender::scene::SceneDescription>(context.scene);
+        if (runtimeMutation == 1) snapshot->nodes[0].translation[0] = 10000.0F;
+        if (runtimeMutation == 2) snapshot->nodes[0].visible = false;
+        if (runtimeMutation == 3) snapshot->nodes.clear();
+        frame.sceneSnapshot = snapshot;
+        renderer.updateFrame(frame);
+    }
+    azurerender::SceneSubmissionCounters counters;
+    context.submissionCounters = &counters;
     NullCommandRecorder recorder;
     context.commands = &recorder;
     azurerender::RenderGraph graph;
@@ -138,6 +150,8 @@ std::vector<RecordedCall> runFrame(
     }
     if (!recorder.calls.empty()) throw std::runtime_error("Registration must not record commands");
     graph.execute(&recorder);
+    if (runtimeMutation != 0 && counters.visibleInstances != 0)
+        throw std::runtime_error("Runtime snapshot did not update rendered instances: " + std::to_string(runtimeMutation));
     if (partitionedTransparency) {
         const auto main = std::find_if(graph.passes().begin(), graph.passes().end(),
             [](const auto& pass) { return pass.name == "character-main"; });
@@ -241,6 +255,8 @@ int main() {
         context.renderSettings = &settings;
         context.shaderDirectory = shaderDirectory.string();
         context.renderExtent = {1280,720};
+        azurerender::SceneSubmissionCounters blackholeCounters;
+        context.submissionCounters = &blackholeCounters;
         azurerender::BlackholeSceneRenderer renderer;
         renderer.onLoad(context);
         azurerender::RenderGraph graph;
@@ -253,6 +269,8 @@ int main() {
         if (!graph.compile(error)) return 3;
         graph.execute(&recorder);
         if (countCalls(recorder.calls, "draw") != 3) return 4;
+        if (blackholeCounters.drawCalls != 3 || blackholeCounters.pipelineBinds != 3
+            || blackholeCounters.descriptorSetBinds != 3) return 5;
         renderer.onUnload(context);
     }
 
@@ -364,6 +382,10 @@ int main() {
         std::cerr << "Compute skinning draw count " << computeDraws
                   << " differs from vertex fallback " << multiDraws << '\n';
         return 3;
+    }
+    for (int mutation = 1; mutation <= 3; ++mutation) {
+        try { runFrame(true, shaderDirectory, true, false, false, false, 0.0F, false, false, mutation); }
+        catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 10; }
     }
     return 0;
 }

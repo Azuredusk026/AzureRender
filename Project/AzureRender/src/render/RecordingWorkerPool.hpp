@@ -35,9 +35,24 @@ public:
     void runWithCaller(std::vector<Task> tasks) {
         dispatch(std::move(tasks), true);
     }
+    // Small batches keep secondary-buffer recording on the caller, avoiding
+    // worker wakeup cost. Larger batches retain caller/worker overlap.
+    void runAdaptive(std::vector<Task> tasks) {
+        if (tasks.size() > 5) { runWithCaller(std::move(tasks)); return; }
+        if (tasks.empty()) { runWithCaller({}); return; }
+        runWithCaller({[tasks = std::move(tasks)](std::size_t caller) {
+            std::exception_ptr failure;
+            for (const auto& task : tasks) {
+                try { task(caller); }
+                catch (...) { if (!failure) failure = std::current_exception(); }
+            }
+            if (failure) std::rethrow_exception(failure);
+        }});
+    }
     [[nodiscard]] std::size_t recordingThreadCount() const noexcept {
         return workers_.size() + 1;
     }
+    [[nodiscard]] std::size_t workerWakeBatches() const noexcept { return generation_; }
 private:
     struct Batch {
         explicit Batch(std::vector<Task> work, bool participate)
@@ -54,6 +69,16 @@ private:
         std::unique_lock<std::mutex> lock(mutex_);
         if (dispatching_) throw std::logic_error("Recording dispatch cannot be nested");
         if (tasks.empty()) return;
+        if (participate && tasks.size() == 1) {
+            dispatching_ = true;
+            lock.unlock();
+            try { tasks.front()(workers_.size()); }
+            catch (...) {
+                lock.lock(); dispatching_ = false; throw;
+            }
+            lock.lock(); dispatching_ = false;
+            return;
+        }
         const auto batch = std::make_shared<Batch>(std::move(tasks), participate);
         dispatching_ = true;
         active_ = batch;

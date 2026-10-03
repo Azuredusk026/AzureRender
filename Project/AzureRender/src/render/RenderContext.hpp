@@ -4,6 +4,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -81,6 +82,7 @@ struct SceneFrameData {
     double timeSeconds = 0.0;
 
     const RenderSettings* renderSettings = nullptr;
+    std::shared_ptr<const scene::SceneDescription> sceneSnapshot;
 
     float cameraPosition[3]{0.0F, 0.0F, 0.0F};
     float cameraTarget[3]{0.0F, 0.0F, 0.0F};

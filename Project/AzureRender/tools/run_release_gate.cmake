@@ -91,6 +91,18 @@ if(WIN32)
         -Executable "${INSTALLED_EXECUTABLE}")
 endif()
 
+if(WIN32)
+    run_gate_stage(isolated-player
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_windows_runtime.ps1"
+        -Executable "${MOVED_DIR}/bin/AzurePlayer.exe")
+    run_gate_stage(player-project-runtime
+        powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${SOURCE_DIR}/tools/verify_player_runtime.ps1"
+        -Executable "${MOVED_DIR}/bin/AzurePlayer.exe"
+        -OutputDirectory "${GATE_DIR}/player-runtime")
+endif()
+
 run_gate_stage(package
     "${CMAKE_CPACK_COMMAND}" -G TGZ -C "${CONFIG}"
     -B "${BUILD_DIR}" --config "${BUILD_DIR}/CPackConfig.cmake")
@@ -126,6 +138,6 @@ file(WRITE "${RESULT_FILE}"
     "  \"package\": \"${PACKAGE_JSON_PATH}\",\n"
     "  \"size_bytes\": ${PACKAGE_SIZE},\n"
     "  \"sha256\": \"${PACKAGE_SHA256}\",\n"
-    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"package\", \"manifest\"]\n"
+    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"isolated-player\", \"player-project-runtime\", \"package\", \"manifest\"]\n"
     "}\n")
 message(STATUS "Release gate passed: ${RESULT_FILE}")

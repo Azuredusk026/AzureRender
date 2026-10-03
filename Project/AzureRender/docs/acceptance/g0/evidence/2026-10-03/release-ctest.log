@@ -1,0 +1,91 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start  1: AzureEngine.Project
+ 1/41 Test  #1: AzureEngine.Project .............................   Passed    0.09 sec
+      Start  2: AzureEngine.RuntimeLifecycle
+ 2/41 Test  #2: AzureEngine.RuntimeLifecycle ....................   Passed    0.09 sec
+      Start  3: AzureRender.EnvironmentAsset
+ 3/41 Test  #3: AzureRender.EnvironmentAsset ....................   Passed    0.11 sec
+      Start  4: AzureRender.RenderGraph
+ 4/41 Test  #4: AzureRender.RenderGraph .........................   Passed    0.05 sec
+      Start  5: AzureRender.TransientResourcePool
+ 5/41 Test  #5: AzureRender.TransientResourcePool ...............   Passed    0.05 sec
+      Start  6: AzureRender.LightBuffer
+ 6/41 Test  #6: AzureRender.LightBuffer .........................   Passed    0.04 sec
+      Start  7: AzureRender.CascadedShadow
+ 7/41 Test  #7: AzureRender.CascadedShadow ......................   Passed    0.05 sec
+      Start  8: AzureRender.ClusteredLightGrid
+ 8/41 Test  #8: AzureRender.ClusteredLightGrid ..................   Passed    0.09 sec
+      Start  9: AzureRender.ComputePass
+ 9/41 Test  #9: AzureRender.ComputePass .........................   Passed    0.08 sec
+      Start 10: AzureRender.FrameTaskScheduler
+10/41 Test #10: AzureRender.FrameTaskScheduler ..................   Passed    0.09 sec
+      Start 11: AzureRender.SurfaceLifecycle
+11/41 Test #11: AzureRender.SurfaceLifecycle ....................   Passed    0.08 sec
+      Start 12: AzureRender.CommandLine
+12/41 Test #12: AzureRender.CommandLine .........................   Passed    0.11 sec
+      Start 13: AzureRender.EditorCameraController
+13/41 Test #13: AzureRender.EditorCameraController ..............   Passed    0.05 sec
+      Start 14: AzureRender.EditorSession
+14/41 Test #14: AzureRender.EditorSession .......................   Passed    0.08 sec
+      Start 15: AzureRender.Ecs
+15/41 Test #15: AzureRender.Ecs .................................   Passed    0.03 sec
+      Start 16: AzureRender.PickMath
+16/41 Test #16: AzureRender.PickMath ............................   Passed    0.03 sec
+      Start 17: AzureRender.SceneModel
+17/41 Test #17: AzureRender.SceneModel ..........................   Passed    0.09 sec
+      Start 18: AzureRender.RuntimeDiagnostics
+18/41 Test #18: AzureRender.RuntimeDiagnostics ..................   Passed    0.09 sec
+      Start 19: AzureRender.GpuCapabilityReport
+19/41 Test #19: AzureRender.GpuCapabilityReport .................   Passed    0.06 sec
+      Start 20: AzureRender.ResourceLocator
+20/41 Test #20: AzureRender.ResourceLocator .....................   Passed    0.05 sec
+      Start 21: AzureRender.ExtensionRegistry
+21/41 Test #21: AzureRender.ExtensionRegistry ...................   Passed    0.09 sec
+      Start 22: AzureRender.UploadRing
+22/41 Test #22: AzureRender.UploadRing ..........................   Passed    0.04 sec
+      Start 23: AzureRender.NullRhi
+23/41 Test #23: AzureRender.NullRhi .............................   Passed    0.01 sec
+      Start 24: AzureRender.NullRhiPass
+24/41 Test #24: AzureRender.NullRhiPass .........................   Passed    0.18 sec
+      Start 25: AzureRender.SceneGraph
+25/41 Test #25: AzureRender.SceneGraph ..........................   Passed    0.05 sec
+      Start 26: AzureRender.VisualRegression
+26/41 Test #26: AzureRender.VisualRegression ....................   Passed   11.98 sec
+      Start 27: AzureRender.VisualRegressionLegacyDescriptors
+27/41 Test #27: AzureRender.VisualRegressionLegacyDescriptors ...   Passed   11.81 sec
+      Start 28: AzureRender.BlackholeComputeGpu
+28/41 Test #28: AzureRender.BlackholeComputeGpu .................   Passed    2.33 sec
+      Start 29: AzureRender.CharacterIblComputeGpu
+29/41 Test #29: AzureRender.CharacterIblComputeGpu ..............   Passed    1.32 sec
+      Start 30: AzureRender.CharacterSkinningComputeGpu
+30/41 Test #30: AzureRender.CharacterSkinningComputeGpu .........   Passed    1.30 sec
+      Start 31: AzureRender.R4AcceptanceRules
+31/41 Test #31: AzureRender.R4AcceptanceRules ...................   Passed    0.63 sec
+      Start 32: AzureEngine.PlayerCli
+32/41 Test #32: AzureEngine.PlayerCli ...........................   Passed    0.64 sec
+      Start 33: AzureRender.BlackholeOptimizationRules
+33/41 Test #33: AzureRender.BlackholeOptimizationRules ..........   Passed    0.66 sec
+      Start 34: AzureRender.R3Comparison
+34/41 Test #34: AzureRender.R3Comparison ........................   Passed    9.22 sec
+      Start 35: AzureRender.R3TransparentComparison
+35/41 Test #35: AzureRender.R3TransparentComparison .............   Passed   10.38 sec
+      Start 36: AzureRender.AuditRegressions
+36/41 Test #36: AzureRender.AuditRegressions ....................   Passed    2.08 sec
+      Start 37: AzureRender.VisualRegressionLegacySkinning
+37/41 Test #37: AzureRender.VisualRegressionLegacySkinning ......   Passed   12.88 sec
+      Start 38: AzureRender.CharacterMorphComputeGpu
+38/41 Test #38: AzureRender.CharacterMorphComputeGpu ............   Passed   10.62 sec
+      Start 39: AzureRender.ClusteredLightingGpu
+39/41 Test #39: AzureRender.ClusteredLightingGpu ................   Passed    4.29 sec
+      Start 40: AzureRender.ReleaseGateMissingBuild
+40/41 Test #40: AzureRender.ReleaseGateMissingBuild .............   Passed    0.03 sec
+      Start 41: AzureRender.InstallManifestRoundTrip
+41/41 Test #41: AzureRender.InstallManifestRoundTrip ............   Passed    0.17 sec
+
+100% tests passed, 0 tests failed out of 41
+
+Label Time Summary:
+gpu    =  78.21 sec*proc (11 tests)
+
+Total Test time (real) =  82.16 sec

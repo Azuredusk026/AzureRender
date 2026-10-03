@@ -203,85 +203,103 @@ compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/skin.comp")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 
-add_executable(
-    AzureRender
-    src/main.cpp
-    src/app/AzureRenderOptions.hpp
+# Engine targets expose explicit ownership and dependency boundaries.
+add_library(AzureBuildOptions INTERFACE)
+target_include_directories(AzureBuildOptions INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_compile_definitions(AzureBuildOptions INTERFACE GLFW_INCLUDE_VULKAN
+    AZURERENDER_VERSION="${PROJECT_VERSION}-rc1"
+    $<$<CONFIG:Debug>:AZURERENDER_ENABLE_VALIDATION=1>)
+if(MSVC)
+    target_compile_options(AzureBuildOptions INTERFACE /W4 /WX /permissive- /wd4127 /wd4456 /wd4996)
+else()
+    target_compile_options(AzureBuildOptions INTERFACE -Wall -Wextra -Wpedantic -Werror -Wno-missing-field-initializers)
+endif()
+add_library(AzureFoundation STATIC
+    src/diagnostics/RuntimeDiagnostics.cpp
+    src/resources/ResourceLocator.cpp
+)
+add_library(AzurePlatform STATIC
+    src/platform/GlfwFrontend.cpp
+)
+add_library(AzureRenderCore STATIC
+    src/assets/GltfLoader.cpp
+    src/diagnostics/GpuCapabilityReport.cpp
+    src/render/RendererCore.cpp
+    src/render/RenderGraph.cpp
+    src/render/TransientResourcePool.cpp
+    src/render/RenderSettings.cpp
+    src/render/EnvironmentAsset.cpp
+    src/render/ComputePass.cpp
+    src/rhi/GpuAllocator.cpp
+    src/rhi/NullRhi.cpp
+    src/rhi/UploadRingBuffer.cpp
+    src/rhi/VulkanRhi.cpp
+    src/rhi/VulkanMemoryAllocatorImpl.cpp
+    src/scenes/CharacterSceneRenderer.cpp
+    src/scenes/BlackholeSceneRenderer.cpp
+    src/scenes/BuiltinRendererCatalog.cpp
+    src/scenes/SampleSceneRenderer.cpp
+)
+add_library(AzureRuntime STATIC
     src/app/CommandLine.cpp
-    src/app/CommandLine.hpp
+    src/runtime/SceneDocument.cpp
+    src/runtime/SceneRenderSnapshot.cpp
+    src/runtime/Project.cpp
+)
+add_library(AzureEditor STATIC
+    src/editor/EditorCameraController.cpp
+    src/editor/EditorContext.cpp
+    src/editor/EditorSession.cpp
+    src/editor/ImGuiEditorLayer.cpp
+)
+set(AZURE_HOST_SOURCES
     src/app/AzureRenderApp.cpp
-    src/app/AzureRenderApp.hpp
-    src/app/AzureRenderInternal.hpp
     src/app/AzureRenderCapture.cpp
     src/app/AzureRenderDescriptors.cpp
     src/app/AzureRenderFrame.cpp
     src/app/AzureRenderPipeline.cpp
     src/app/AzureRenderResources.cpp
     src/app/AzureRenderSupport.cpp
-    src/assets/GltfLoader.cpp
-    src/assets/GltfLoader.hpp
-    src/editor/EditorCameraController.cpp
-    src/editor/EditorCameraController.hpp
-    src/editor/EditorContext.cpp
-    src/editor/EditorContext.hpp
-    src/editor/EditorSession.cpp
-    src/editor/EditorSession.hpp
-    src/editor/IEditorPanel.hpp
-    src/editor/ImGuiEditorLayer.cpp
-    src/editor/ImGuiEditorLayer.hpp
-    src/editor/SceneModel.cpp
-    src/editor/SceneModel.hpp
-    src/diagnostics/GpuCapabilityReport.cpp
-    src/diagnostics/GpuCapabilityReport.hpp
-    src/diagnostics/RuntimeDiagnostics.cpp
-    src/diagnostics/RuntimeDiagnostics.hpp
-    src/resources/ResourceLocator.cpp
-    src/resources/ResourceLocator.hpp
-    src/extensions/ExtensionRegistry.hpp
-    src/extensions/IAssetImporter.hpp
-    src/extensions/IRenderFeature.hpp
-    src/extensions/ISceneRenderer.hpp
-    src/extensions/SceneType.hpp
-    src/platform/GlfwFrontend.cpp
-    src/platform/GlfwFrontend.hpp
-    src/render/RendererCore.cpp
-    src/render/RendererCore.hpp
-    src/render/RenderGraph.cpp
-    src/render/RenderGraph.hpp
-    src/render/TransientResourcePool.cpp
-    src/render/TransientResourcePool.hpp
-    src/render/RenderSettings.cpp
-    src/render/RenderSettings.hpp
-    src/render/RenderContext.hpp
-    src/render/EnvironmentAsset.cpp
-    src/render/EnvironmentAsset.hpp
-    src/render/ComputePass.cpp
-    src/render/ComputePass.hpp
-    src/rhi/GpuAllocator.cpp
-    src/rhi/GpuAllocator.hpp
-    src/rhi/IGpuAllocator.hpp
-    src/rhi/NullRhi.cpp
-    src/rhi/NullRhi.hpp
-    src/rhi/Rhi.hpp
-    src/rhi/RingFrameAllocator.hpp
-    src/rhi/UploadRingBuffer.cpp
-    src/rhi/UploadRingBuffer.hpp
-    src/rhi/VulkanRhi.cpp
-    src/rhi/VulkanRhi.hpp
-    src/rhi/VulkanMemoryAllocatorImpl.cpp
-    src/scenes/CharacterSceneRenderer.cpp
-    src/scenes/CharacterSceneRenderer.hpp
-    src/scenes/BlackholeSceneRenderer.cpp
-    src/scenes/BlackholeSceneRenderer.hpp
-    src/scenes/BuiltinRendererCatalog.cpp
-    src/scenes/BuiltinRendererCatalog.hpp
-    src/scenes/SampleSceneRenderer.cpp
-    src/scenes/SampleSceneRenderer.hpp
 )
 
+target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions)
+target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
+target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
+target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json
+    GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
+target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
+target_link_libraries(AzureRuntime PUBLIC AzureRenderCore)
+target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform)
+if(TARGET imgui::imgui)
+    target_link_libraries(AzureEditor PUBLIC imgui::imgui)
+    target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
+endif()
+add_library(AzureRenderHost STATIC ${AZURE_HOST_SOURCES})
+target_link_libraries(AzureRenderHost PUBLIC AzureRuntime AzurePlatform AzureEditor)
+target_compile_definitions(AzureRenderHost PUBLIC AZURE_WITH_EDITOR=1)
+if(TARGET imgui::imgui)
+    target_compile_definitions(AzureRenderHost PRIVATE AZURERENDER_HAS_IMGUI=1)
+endif()
+add_library(AzurePlayerHost STATIC ${AZURE_HOST_SOURCES})
+target_link_libraries(AzurePlayerHost PUBLIC AzureRuntime AzurePlatform)
+target_compile_definitions(AzurePlayerHost PUBLIC AZURE_WITH_EDITOR=0)
+foreach(AZURE_HOST_TARGET AzureRenderHost AzurePlayerHost)
+    target_include_directories(${AZURE_HOST_TARGET} PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
+endforeach()
+add_executable(AzureRender src/main.cpp)
+target_link_libraries(AzureRender PRIVATE AzureRenderHost)
+add_executable(AzurePlayer src/player/main.cpp)
+target_link_libraries(AzurePlayer PRIVATE AzurePlayerHost)
 add_dependencies(AzureRender AzureRenderShaders)
+add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureProjectTests tests/ProjectTests.cpp)
+    target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
+    add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
+    target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
     add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
     target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE OpenEXR::OpenEXR)
@@ -350,7 +368,7 @@ if(BUILD_TESTING)
         src/editor/EditorContext.hpp
         src/editor/EditorSession.cpp
         src/editor/EditorSession.hpp
-        src/editor/SceneModel.cpp
+        src/runtime/SceneDocument.cpp
         src/editor/SceneModel.hpp
         src/render/RenderSettings.cpp
         src/render/RenderSettings.hpp
@@ -386,7 +404,7 @@ if(BUILD_TESTING)
     add_executable(
         AzureRenderSceneModelTests
         tests/SceneModelTests.cpp
-        src/editor/SceneModel.cpp
+        src/runtime/SceneDocument.cpp
         src/editor/SceneModel.hpp
         src/render/RenderSettings.cpp
         src/render/RenderSettings.hpp
@@ -605,6 +623,9 @@ if(BUILD_TESTING)
         add_test(NAME AzureRender.R4AcceptanceRules
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_r4_acceptance.py")
+        add_test(NAME AzureEngine.PlayerCli
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_player_cli.py"
+                --executable "$<TARGET_FILE:AzurePlayer>")
         add_test(NAME AzureRender.BlackholeOptimizationRules
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_blackhole_optimization.py")
@@ -715,14 +736,6 @@ else()
         PROPERTIES COMPILE_OPTIONS "-w")
 endif()
 
-if(TARGET imgui::imgui)
-    target_link_libraries(AzureRender PRIVATE imgui::imgui)
-    target_compile_definitions(AzureRender PRIVATE AZURERENDER_HAS_IMGUI=1)
-else()
-    message(WARNING
-        "Dear ImGui package not found; editor UI backend is disabled. "
-        "Use the vcpkg manifest for the Docking-enabled editor build.")
-endif()
 
 target_include_directories(
     AzureRender
@@ -803,7 +816,7 @@ endif()
 set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT AzureRender)
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
-install(TARGETS AzureRender RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(TARGETS AzureRender AzurePlayer RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 if(MINGW)
     if(NOT AZURERENDER_MINGW_RUNTIME_FILES)
         message(FATAL_ERROR "MinGW runtime DLLs were not found")
@@ -841,7 +854,9 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md")
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-foundation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md")
 install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
@@ -864,6 +879,8 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/blackhole-performance.md
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-03-blackhole-optimization.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g0/2026-10-03.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/g0")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/blackhole/2026-10-03.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/blackhole")
 install(

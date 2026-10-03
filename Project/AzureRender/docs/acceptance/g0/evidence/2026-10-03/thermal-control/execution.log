@@ -1,0 +1,6 @@
+candidate round 0, start 50C: 18.306007 ms
+baseline round 0, start 53C: 18.679903 ms
+baseline round 1, start 54C: 18.998631 ms
+candidate round 1, start 55C: 18.945068 ms
+candidate round 2, start 55C: 18.79461 ms
+baseline round 2, start 55C: 18.953908 ms

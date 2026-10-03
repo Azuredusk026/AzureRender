@@ -1,0 +1,191 @@
+{
+  "status": "failed",
+  "mode": "performance",
+  "runs": [
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008806,
+        "mainSceneAverageMs": 19.451119,
+        "internalOutlineAverageMs": 0.037977,
+        "totalAverageMs": 19.497902,
+        "totalMinMs": 15.141664,
+        "totalMaxMs": 24.413024,
+        "totalP50Ms": 19.420496,
+        "totalP95Ms": 22.168061,
+        "totalP99Ms": 23.812105,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5533.1615,
+          "acquireMilliseconds": 57.9507,
+          "submitMilliseconds": 16.6196,
+          "presentMilliseconds": 14.589,
+          "cpuFrameMilliseconds": 5799.424
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 71.4902,
+          "graphPreparationMilliseconds": 41.5184,
+          "workerWaitMilliseconds": 0.3042,
+          "graphExecutionMilliseconds": 29.6507,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.531000000000859
+    },
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008891,
+        "mainSceneAverageMs": 20.590967,
+        "internalOutlineAverageMs": 0.039223,
+        "totalAverageMs": 20.639081,
+        "totalMinMs": 15.83824,
+        "totalMaxMs": 26.144224,
+        "totalP50Ms": 20.672016,
+        "totalP95Ms": 24.120741,
+        "totalP99Ms": 25.024095,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5849.7983,
+          "acquireMilliseconds": 83.6578,
+          "submitMilliseconds": 17.2358,
+          "presentMilliseconds": 15.2077,
+          "cpuFrameMilliseconds": 6142.4518
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 72.6006,
+          "graphPreparationMilliseconds": 41.8169,
+          "workerWaitMilliseconds": 0.3372,
+          "graphExecutionMilliseconds": 30.4239,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.875
+    },
+    {
+      "report": {
+        "format": "Afterglow GPU timing v1",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\test_model.gltf",
+        "width": 1280,
+        "height": 720,
+        "samples": 300,
+        "timestampPeriodNanoseconds": 1.0,
+        "shadowAverageMs": 0.008976,
+        "mainSceneAverageMs": 20.613786,
+        "internalOutlineAverageMs": 0.039004,
+        "totalAverageMs": 20.661766,
+        "totalMinMs": 15.084992,
+        "totalMaxMs": 26.77728,
+        "totalP50Ms": 20.833488,
+        "totalP95Ms": 24.26317,
+        "totalP99Ms": 25.55902,
+        "cpuFrame": {
+          "attempts": 300,
+          "completedFrames": 300,
+          "frameSlotWaitMilliseconds": 5822.7541,
+          "acquireMilliseconds": 110.7441,
+          "submitMilliseconds": 19.352,
+          "presentMilliseconds": 16.9856,
+          "cpuFrameMilliseconds": 6152.7107
+        },
+        "submission": {
+          "frames": 300,
+          "instances": 0,
+          "indirectDrawCalls": 0,
+          "visibleInstances": 0,
+          "visibleRatio": 0.0,
+          "recordingMilliseconds": 73.7145,
+          "graphPreparationMilliseconds": 42.6516,
+          "workerWaitMilliseconds": 0.2999,
+          "graphExecutionMilliseconds": 30.7172,
+          "workerRecordedPasses": 0,
+          "workerRecordedChunks": 0,
+          "drawCalls": 900,
+          "descriptorSetBinds": 900,
+          "pipelineBinds": 900,
+          "pushConstantUpdates": 0,
+          "drawCallsPerFrame": 3.0,
+          "descriptorSetBindsPerFrame": 3.0
+        },
+        "allocator": {
+          "bufferAllocations": 6,
+          "imageAllocations": 19,
+          "liveBuffers": 5,
+          "liveImages": 19,
+          "bufferBytes": 2097552,
+          "imageBytes": 92348928
+        },
+        "renderPath": "traditional"
+      },
+      "processSecondsIncludingStartup": 6.906999999999243
+    }
+  ],
+  "budget": {
+    "averagesMs": [
+      19.497902,
+      20.639081,
+      20.661766
+    ],
+    "medianMs": 20.639081,
+    "limitExclusiveMs": 20.0,
+    "passed": false
+  },
+  "error": "Cinematic GPU budget exceeds 20 ms"
+}

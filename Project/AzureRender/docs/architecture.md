@@ -4,6 +4,8 @@ AzureRender 把 Vulkan 宿主和场景算法分开。宿主管理设备、Swapch
 
 当前的 `ISceneRenderer` 只把场景写入 HDR Scene Color、Depth 和 Normal。Character、Blackhole 和 Sample Renderer 因此可以共用一个应用。主帧循环不需要为每个场景增加特殊分支。
 
+模块库、项目配置与独立 Player 的依赖和生命周期见 [引擎基础](runtime/engine-foundation.md)。
+
 ## 设计目标
 
 架构由四个约束驱动：
@@ -216,7 +218,7 @@ Debug 构建会开启 `VK_LAYER_KHRONOS_validation`。它能发现许多生命�
 | `tests` | 不依赖可见窗口的契约与逻辑测试 |
 | `tools` | 配置、资产处理、视觉 QA、安装验证和发布门禁 |
 
-`AzureRenderApp` 直接拥有许多 Vulkan Handle，所以实现被拆到多个 `.cpp` 文件中。资源、Pipeline、Descriptor、帧循环、Capture 和辅助代码各有一个文件。这些文件仍然实现同一个应用对象，没有改变资源所有权。
+`AzureRenderApp` 持有 GPU 宿主资源。资源、Pipeline、Descriptor、帧循环、Capture 和辅助代码分别实现同一应用对象的职责。源码以编辑与运行时变体编译到 AzureRenderHost 和 AzurePlayerHost，公共渲染库由两个宿主共享。
 
 ## 启动过程
 
@@ -456,7 +458,7 @@ flowchart TB
 | --- | ---: |
 | `ISceneRenderer` API | 1 |
 | `RenderSettings` | 7 |
-| `.azscene` | 2 |
+| `.azscene` | 3 |
 | glTF Material Profile | 1 |
 | Face SDF Profile | 1 |
 | Showcase Look Catalog | 1 |
@@ -477,8 +479,8 @@ flowchart TB
 ## 已知架构边界
 
 - 进程内 Renderer Registry 已稳定，动态二进制插件尚未建立 ABI、版本协商和卸载隔离。
-- Vulkan 内存由项目直接分配，尚无通用子分配器、预算追踪和碎片治理。
-- 公共环境光是实用型直接采样，不是完整预过滤 IBL 烘焙系统。
+- GPU 显存由 VMA 分配器管理。预算追踪与碎片分析按实测需求扩展。
+- 公共环境光包含 GPU 预过滤 IBL，环境资源格式与降级规则见 [环境资源](runtime/environment-assets.md)。
 - 编辑器热重载会在安全边界等待 GPU idle，正确但不适合高频自动监听。
 - Scene Renderer 能力目前主要描述 Depth/Normal，未来更复杂 Render Graph 需要更细的资源声明。
 - RenderDoc GPU Marker/Object Name 尚应进一步系统化，外部帧分析的可读性仍有提升空间。

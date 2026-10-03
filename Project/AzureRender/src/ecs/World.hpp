@@ -25,6 +25,10 @@ public:
     World(const World&) = delete;
     World& operator=(const World&) = delete;
 
+    void clear() noexcept {
+        systems_.clear();componentArrays_.clear();freeList_.clear();nextId_=0;
+    }
+
     // Allocate a new entity. Uses a simple free list; ids start at 1.
     Entity createEntity() {
         if (!freeList_.empty()) {
@@ -36,7 +40,7 @@ public:
     }
 
     void destroyEntity(const Entity entity) {
-        if (entity == kInvalidEntity || entity > nextId_) {
+        if (!valid(entity)) {
             return;
         }
         for (auto& entry : componentArrays_) {

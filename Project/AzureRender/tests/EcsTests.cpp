@@ -39,6 +39,12 @@ int main() {
     using azurerender::ecs::Entity;
     using azurerender::ecs::World;
 
+    {
+        World lifecycle;
+        auto removed=lifecycle.createEntity();lifecycle.destroyEntity(removed);lifecycle.destroyEntity(removed);
+        auto first=lifecycle.createEntity();auto second=lifecycle.createEntity();
+        if(first==second||lifecycle.entityCount()!=2)return 1;
+    }
     World world;
     const Entity e1 = world.createEntity();
     const Entity e2 = world.createEntity();

@@ -106,8 +106,25 @@ int main() {
             [&](std::size_t) { ++callerTasks; }}); }
         catch (const std::runtime_error&) { callerFailure = true; }
         if (!callerFailure || callerTasks != 6501) return 1;
-        workers.runWithCaller({[&](std::size_t) { ++callerTasks; }});
+        const auto wakeBatches = workers.workerWakeBatches();
+        workers.runWithCaller({[&](std::size_t index) {
+            if (index != 4 || std::this_thread::get_id() != owner) throw std::runtime_error("Single task left caller");
+            ++callerTasks;
+        }});
+        if (workers.workerWakeBatches() != wakeBatches) return 1;
         if (callerTasks != 6502) return 1;
+        const auto adaptiveWakes = workers.workerWakeBatches();
+        int adaptiveTasks = 0;
+        workers.runAdaptive({[&](std::size_t index) { if (index != 4 || std::this_thread::get_id() != owner) throw std::runtime_error("Adaptive task left caller"); ++adaptiveTasks; },
+            [&](std::size_t index) { if (index != 4 || std::this_thread::get_id() != owner) throw std::runtime_error("Adaptive task left caller"); ++adaptiveTasks; }});
+        if (adaptiveTasks != 2 || workers.workerWakeBatches() != adaptiveWakes) return 1;
+        std::vector<azurerender::RecordingWorkerPool::Task> smallBatch;
+        for (int i = 0; i < 5; ++i) smallBatch.push_back([&](std::size_t index) {
+            if (index != 4 || std::this_thread::get_id() != owner) invalidParticipant = true;
+            ++adaptiveTasks;
+        });
+        workers.runAdaptive(std::move(smallBatch));
+        if (adaptiveTasks != 7 || workers.workerWakeBatches() != adaptiveWakes) return 1;
         bool callerNestedRejected = false;
         workers.runWithCaller({[&](std::size_t) {
             try { workers.runWithCaller({}); }

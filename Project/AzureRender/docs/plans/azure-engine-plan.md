@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：R4 Complete，G0 Ready
+> 状态：G0 Complete，G1 Ready
 > 更新日期：2026-10-03
 > 适用范围：Windows 编辑器与 Windows 运行时；Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -60,8 +60,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | R2 材质、Compute、光照与阴影 | R1，Complete（2026-09-30） | GPU IBL、多级 Bloom、Compute 蒙皮与 Morph、OpenEXR、多光源、聚簇光照、级联阴影和 PCSS | 固定表/Bindless、一致视觉、多光源和性能报告通过 |
 | R3 并行提交与 GPU 驱动 | R2，Complete | 帧快照、并行录制、间接绘制和能力降级 | 单线程/并行确定性一致，CPU/GPU 指标达标 |
 | R4 Windows Render Core 验收 | R3，Complete | 复杂场景、质量档位、安装、长跑和窗口恢复 | Debug/Release、Validation、安装包、长跑和恢复全部通过 |
-| G0 引擎基础 | R4，Ready | Foundation、Platform、Runtime、Player 的库边界和项目配置 | 新建项目、独立 Player、资源挂载和 Windows 发布通过 |
-| G1 反射与序列化 | G0 | 代码生成、稳定类型标识、Inspector 元数据和版本迁移 | 增量生成、错误定位、序列化往返通过 |
+| G0 引擎基础 | R4，Complete | Foundation、Platform、Runtime、Player 的库边界和项目配置 | 新建项目、独立 Player、资源挂载和 Windows 发布通过 |
+| G1 反射与序列化 | G0，Ready | 代码生成、稳定类型标识、Inspector 元数据和版本迁移 | 增量生成、错误定位、序列化往返通过 |
 | G2 资产、关卡与 Prefab | G1 | AssetDatabase、Level、Prefab、依赖和热重载 | 资产移动、关卡切换和实例覆盖往返通过 |
 | G3 物理与输入 | G2 | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
 | G4 脚本与玩法 | G3 | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
@@ -70,13 +70,19 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 
 `R2` 已完成，端到端证据见 [R2 阶段验收记录](../acceptance/r2/2026-09-26.md)。`R3` 当前为 Complete，具备帧快照、并行录制和 GPU 驱动提交。阶段门禁与当前证据见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
 
-`R4` 为 Complete，复杂场景、质量档位、长跑与发布验收通过。证据见 [R4 阶段验收](../acceptance/r4/2026-10-03.md)。`G0` 为 Ready，黑洞优化准入任务为 Complete。
+`R4` 为 Complete，复杂场景、质量档位、长跑与发布验收通过。证据见 [R4 阶段验收](../acceptance/r4/2026-10-03.md)。`G0` 为 Complete，黑洞优化准入任务为 Complete。
 
 ## G0 前置任务
 
 [黑洞性能优化](2026-10-03-blackhole-optimization.md)为 Complete。电影档在本机 Release、1280×720、正面相机下，三轮整帧 GPU 平均值的中位数为 18.071215 ms，满足 20 ms 门禁。
 
-任务保留四射线与现行视觉流程，图像、引擎开销和发布验收通过。下一工作项为 G0 基础库拆分。
+任务保留四射线与现行视觉流程，图像、引擎开销和发布验收通过。G0 的交付与验收依据为 [引擎基础实施计划](g0-implementation.md)。
+
+## G0 完成结果
+
+G0 模块库、项目配置、独立 Player、运行时生命周期和性能观测通过验收。Debug 与 Release 各 41 项回归通过，三场景输出与冻结参考一致。结果见 [G0 验收](../acceptance/g0/2026-10-03.md)，模块使用见 [引擎基础](../runtime/engine-foundation.md)。
+
+G1 为 Ready，下一工作项为反射与序列化准入原型。
 
 ## 验收环境与性能口径
 
@@ -84,7 +90,7 @@ Windows 验收使用当前本机环境，记录设备、驱动和工具链。设
 
 ## 阶段执行规则
 
-阶段状态以当前执行路线表为准。文件级工作清单位于 [渲染核心实施计划](render-core-implementation.md)。每阶段完成实现、测试、性能采集、文档同步与提交。
+阶段状态以当前执行路线表为准。文件级工作清单位于 [渲染核心实施计划](render-core-implementation.md)。G0 文件级任务位于 [引擎基础实施计划](g0-implementation.md)。每阶段完成实现、测试、性能采集、文档同步与提交。
 
 提交标题使用 `feat(<phase>): <中文摘要>`。验收覆盖 Windows Debug/Release、CTest、Validation、安装资源、三场景与固定描述符路径。
 

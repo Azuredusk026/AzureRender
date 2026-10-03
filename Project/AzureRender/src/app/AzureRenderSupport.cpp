@@ -1,6 +1,8 @@
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "platform/SurfaceLifecycle.hpp"
@@ -125,9 +127,11 @@ void AzureRenderApp::recreateSwapchain() {
     if (!azurerender::waitForDrawableSurface(*frontend_)) return;
 
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
+#if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->shutdownVulkan();
     }
+#endif
     cleanupSwapchain();
     createSwapchain();
     createImageViews();
@@ -185,9 +189,11 @@ void AzureRenderApp::recreateEditorViewportResources() {
             VK_TRUE,
             UINT64_MAX),
         "vkWaitForFences(editor viewport resize)");
+#if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->clearViewportImages();
     }
+#endif
     cleanupEditorViewportResources(false);
     renderExtent_ = newExtent;
     createEditorViewportResources();
@@ -197,11 +203,13 @@ void AzureRenderApp::recreateEditorViewportResources() {
     createFramebuffers();
     createPostProcessFramebuffers();
     createPostProcessDescriptorSets();
+#if AZURE_WITH_EDITOR
     editorLayer_->setViewportImages(
         editorViewportSampler_,
         editorViewportImageViews_,
         renderExtent_.width,
         renderExtent_.height);
+#endif
     azurerender::RuntimeDiagnostics::instance().print(
         "editor", "Editor viewport resources rebuilt: "
             + std::to_string(renderExtent_.width) + 'x'

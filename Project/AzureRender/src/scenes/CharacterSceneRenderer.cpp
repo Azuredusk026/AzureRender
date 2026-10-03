@@ -1,6 +1,6 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 
-#include "app/AzureRenderInternal.hpp"
+#include "render/RenderMath.hpp"
 #include "platform/BinaryFile.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "render/RenderSettings.hpp"
@@ -370,6 +370,12 @@ void CharacterSceneRenderer::onSwapchainRecreate(
 }
 
 void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
+    if (frame.sceneSnapshot != nullptr) {
+        // GPU resources retain their load-time ordering; runtime nodes and
+        // lights are refreshed before uniforms, culling and draw snapshots.
+        scene_.nodes = frame.sceneSnapshot->nodes;
+        scene_.lights = frame.sceneSnapshot->lights;
+    }
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
         renderSettings_ = &frameRenderSettings_;
@@ -458,7 +464,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     // single-node scene onto a grid to prove draw counts stay flat as
     // instances grow.
     sceneInstances_.clear();
-    if (scene_.nodes.size() <= 1 && qaInstanceCount_ > 1) {
+    if (scene_.nodes.size() == 1 && scene_.nodes.front().visible && qaInstanceCount_ > 1) {
         sceneInstances_.reserve(qaInstanceCount_);
         const std::uint32_t gridSide = static_cast<std::uint32_t>(
             std::ceil(std::sqrt(static_cast<double>(qaInstanceCount_))));
