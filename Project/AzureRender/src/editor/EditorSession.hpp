@@ -1,6 +1,10 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "runtime/GameRuntime.hpp"
+#include "runtime/LevelSession.hpp"
+#include "runtime/ScriptRuntime.hpp"
+#include "runtime/PresentationRuntime.hpp"
 
 #include <memory>
 #include <string>
@@ -15,11 +19,26 @@ enum class EditorCommand {
     Redo,
     ReloadAssets,
     Capture,
+    Play,
+    Pause,
+    Resume,
+    Step,
+    Stop,
 };
 
 class EditorSession final {
 public:
     explicit EditorSession(std::shared_ptr<EditorContext> context);
+    ~EditorSession();
+    bool playing() const noexcept;
+    GameRuntime* game() noexcept;
+    RuntimeLifecycle* runtime() noexcept;
+    LevelSession* levels() noexcept;
+    ScriptRuntime* scripts() noexcept;
+    PresentationRuntime* presentation() noexcept;
+    double advance(double delta);
+    SceneDocument viewScene();
+    bool consumeRuntimeReset() noexcept;
 
     [[nodiscard]] EditorContext& context() noexcept { return *context_; }
     [[nodiscard]] const EditorContext& context() const noexcept {
@@ -45,6 +64,9 @@ private:
     bool assetReloadRequested_ = false;
     bool captureRequested_ = false;
     std::string captureLabel_ = "editor_capture";
+    struct PlayState;
+    std::unique_ptr<PlayState> play_;
+    bool runtimeReset_ = false;
 };
 
 }  // namespace azurerender

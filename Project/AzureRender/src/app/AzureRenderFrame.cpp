@@ -39,6 +39,7 @@ using namespace azurerender::internal;
 
 void AzureRenderApp::drawFrame() {
     const auto frameStart = std::chrono::steady_clock::now();
+    ++gameplayFrame_;
     if (runOptions_.gpuTimingEnabled) ++submissionCounters_.frameAttempts;
     vkCheck(
         vkWaitForFences(device_, 1, &inFlightFences_[currentFrame_], VK_TRUE, UINT64_MAX),
@@ -46,6 +47,8 @@ void AzureRenderApp::drawFrame() {
     const auto fenceEnd = std::chrono::steady_clock::now();
     if (runOptions_.gpuTimingEnabled)
         submissionCounters_.frameSlotWaitMilliseconds += std::chrono::duration<double, std::milli>(fenceEnd - frameStart).count();
+    synchronizeEditorRuntime();
+    synchronizeGameUi();
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
@@ -128,7 +131,7 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->drawPanels();
         const azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();
-        if (azurerender::EditorCameraController::apply(
+        if (!runOptions_.editorSession->playing() && azurerender::EditorCameraController::apply(
                 viewportInput,
                 cameraPosition_,
                 cameraTarget_)) {
@@ -150,6 +153,7 @@ void AzureRenderApp::drawFrame() {
         }
     }
 #endif
+    synchronizeEditorRuntime();synchronizeGameUi();
     azurerender::SceneFrameData frameData;
     buildSceneFrameData(frameData);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
@@ -165,6 +169,7 @@ void AzureRenderApp::drawFrame() {
     // cursor restarts at the window base before any upload allocates.
     uploadRing_.beginFrame(static_cast<std::uint32_t>(currentFrame_));
     updateHudBuffer(currentFrame_);
+    updateGameUi(frameData.deltaSeconds);
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
     recordCommandBuffer(
@@ -939,6 +944,7 @@ void AzureRenderApp::recordCommandBuffer(
             0,
             0);
     }
+    if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
     graph.use(composite, resources.color, azurerender::RenderGraphUsage::Sampled, false);

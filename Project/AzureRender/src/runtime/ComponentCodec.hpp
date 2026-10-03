@@ -11,6 +11,9 @@ void visitComponentType(const std::string& type, Callback&& callback) {
     else if (type == "azure.rigid-body") callback(game::RigidBody{});
     else if (type == "azure.character") callback(game::Character{});
     else if (type == "azure.script") callback(game::Script{});
+    else if (type == "azure.animator") callback(game::Animator{});
+    else if (type == "azure.audio-source") callback(game::AudioSource{});
+    else if (type == "azure.game-ui") callback(game::GameUiDocument{});
     else throw std::invalid_argument("Unsupported ECS component: " + type);
 }
 inline void validateComponents(const nlohmann::json& components) {

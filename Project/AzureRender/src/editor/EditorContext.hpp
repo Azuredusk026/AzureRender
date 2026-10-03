@@ -3,6 +3,9 @@
 #include "SceneModel.hpp"
 #include "ecs/Components.hpp"
 #include "ecs/World.hpp"
+#include "runtime/AssetDatabase.hpp"
+#include "runtime/Level.hpp"
+#include <memory>
 #include <vector>
 
 #include <array>
@@ -13,6 +16,7 @@
 #include <vector>
 
 namespace azurerender {
+class AssetImportJob;
 
 class EditorContext final {
 public:
@@ -24,6 +28,26 @@ public:
         std::size_t dependentNodeCount = 0;
     };
     EditorContext(SceneDocument document, std::filesystem::path scenePath);
+    static std::shared_ptr<EditorContext> openProject(const std::filesystem::path& path);
+    bool isProject() const noexcept { return assets_ != nullptr; }
+    const Project& project() const { return *project_; }
+    AssetDatabase& assets() { return *assets_; }
+    std::string importAsset(const std::filesystem::path& path);
+    void startImport(const std::filesystem::path& path);
+    void cancelImport();
+    bool importing() const noexcept { return importJob_!=nullptr; }
+    float importProgress() const;
+    std::optional<std::string> pollImport();
+    void placeResource(const std::string& resource);
+    void selectNodes(std::vector<std::size_t> indices);
+    const std::vector<std::size_t>& selectedNodes() const noexcept { return selectedNodes_; }
+    void duplicateSelection();
+    void deleteSelection();
+    nlohmann::json componentData(const std::string& node, const std::string& type) const;
+    void setComponentField(const std::string& type, const std::string& field, const nlohmann::json& value);
+    void addGameplayComponent(const std::string& type);
+    std::map<std::string,nlohmann::json> runtimeComponents() const;
+    nlohmann::json levelDocument() const;
 
     [[nodiscard]] SceneDocument& scene() noexcept { return scene_; }
     [[nodiscard]] const SceneDocument& scene() const noexcept { return scene_; }
@@ -115,6 +139,8 @@ private:
     struct Snapshot {
         SceneDocument scene;
         std::size_t selectedNodeIndex = 0;
+        std::map<std::string,nlohmann::json> components;
+        std::vector<std::size_t> selectedNodes;
     };
     [[nodiscard]] Snapshot snapshot() const;
     void restore(Snapshot snapshot);
@@ -138,6 +164,14 @@ private:
     std::vector<std::string> consoleMessages_;
     std::vector<Snapshot> undoStack_;
     std::vector<Snapshot> redoStack_;
+    std::vector<std::size_t> selectedNodes_{0};
+    std::unique_ptr<Project> project_;
+    std::unique_ptr<AssetDatabase> assets_;
+    nlohmann::json sourceLevel_;
+    std::map<std::filesystem::path,std::string> resourceReferences_;
+    std::shared_ptr<AssetImportJob> importJob_;
+    std::string commitImport(AssetImportJob& job);
+    std::map<std::string,nlohmann::json> components_;
     std::vector<std::pair<std::string, std::filesystem::file_time_type>>
         resourceWriteTimes_;
 };

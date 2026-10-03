@@ -6,6 +6,36 @@
 
 namespace azurerender {
 
+struct EditorSession::PlayState {
+    RuntimeLifecycle runtime;
+    std::unique_ptr<LevelSession> levels;
+    std::unique_ptr<GameRuntime> game;
+    std::unique_ptr<PresentationRuntime> presentation;
+    std::unique_ptr<ScriptRuntime> scripts;
+    explicit PlayState(EditorContext& context) {
+        if (context.isProject()) levels = std::make_unique<LevelSession>(context.project(), runtime);
+        runtime.replaceScene(context.scene(), [&](auto& target) {
+            for (const auto& node : context.runtimeComponents()) installComponents(target.world(), target.entity(node.first), node.second);
+        });
+        runtime.start();game=std::make_unique<GameRuntime>(runtime);
+        if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=std::make_unique<ScriptRuntime>(runtime,*game,levels->assets());
+            scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
+            scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
+            game->setBeforeStep([this](double delta){scripts->update(delta);});
+            game->setEventHandler([this](const auto& event){scripts->dispatch(event);});}
+    }
+};
+EditorSession::~EditorSession()=default;
+bool EditorSession::playing() const noexcept{return play_!=nullptr;}
+GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
+RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
+LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
+ScriptRuntime* EditorSession::scripts() noexcept{return play_?play_->scripts.get():nullptr;}
+PresentationRuntime* EditorSession::presentation() noexcept{return play_?play_->presentation.get():nullptr;}
+double EditorSession::advance(double delta){if(!play_)return 0;if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);return elapsed;}
+SceneDocument EditorSession::viewScene(){return play_?play_->runtime.snapshotScene():context_->scene();}
+bool EditorSession::consumeRuntimeReset() noexcept{const bool result=runtimeReset_;runtimeReset_=false;return result;}
+
 EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     : context_(std::move(context)) {
     if (context_ == nullptr) {
@@ -15,6 +45,15 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
 
 bool EditorSession::execute(const EditorCommand command) noexcept {
     lastError_.clear();
+    if(command==EditorCommand::Play || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
+        try{
+            if(command==EditorCommand::Play){if(play_)return false;context_->detachRenderSettings();play_=std::make_unique<PlayState>(*context_);runtimeReset_=true;context_->log("Play started");}
+            else if(command==EditorCommand::Stop){if(!play_)return false;play_.reset();runtimeReset_=true;context_->log("Play stopped; edit state restored");}
+            else{if(!play_)return false;if(command==EditorCommand::Pause)play_->runtime.pause();else if(command==EditorCommand::Resume)play_->runtime.resume();else play_->runtime.step();}
+            return true;
+        }catch(const std::exception& exception){lastError_=exception.what();context_->log("ERROR: "+lastError_);return false;}
+    }
+    if(play_ && (command==EditorCommand::Save || command==EditorCommand::Reload || command==EditorCommand::Undo || command==EditorCommand::Redo))return false;
     if (command == EditorCommand::ResetLayout) {
         layoutResetRequested_ = true;
         context_->log("Default editor layout requested");
@@ -55,6 +94,7 @@ bool EditorSession::execute(const EditorCommand command) noexcept {
 }
 
 bool EditorSession::saveOnClose() noexcept {
+    if(play_)static_cast<void>(execute(EditorCommand::Stop));
     return !context_->dirty() || execute(EditorCommand::Save);
 }
 

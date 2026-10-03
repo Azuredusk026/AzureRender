@@ -101,6 +101,7 @@ struct GraphicsPipelineDesc {
     bool depthWrite = true;
 
     bool alphaBlend = false;
+    bool premultipliedAlpha = false;
     // 0 for depth-only passes.
     std::uint32_t colorAttachmentCount = 0;
 

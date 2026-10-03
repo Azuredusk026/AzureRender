@@ -68,6 +68,8 @@ endif()
 find_package(Jolt CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(Lua 5.4 EXACT REQUIRED)
+find_package(RmlUi CONFIG REQUIRED)
+find_path(MINIAUDIO_INCLUDE_DIR miniaudio.h REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
@@ -191,6 +193,8 @@ compile_shader("${SHADER_SOURCE_DIR}/inner_outline.vert")
 compile_shader("${SHADER_SOURCE_DIR}/inner_outline.frag")
 compile_shader("${SHADER_SOURCE_DIR}/hud.vert")
 compile_shader("${SHADER_SOURCE_DIR}/hud.frag")
+compile_shader("${SHADER_SOURCE_DIR}/game-ui.vert")
+compile_shader("${SHADER_SOURCE_DIR}/game-ui.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_taa.frag")
@@ -228,6 +232,7 @@ add_library(AzureRenderCore STATIC
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/RendererCore.cpp
+    src/render/GameUiRenderer.cpp
     src/render/RenderGraph.cpp
     src/render/TransientResourcePool.cpp
     src/render/RenderSettings.cpp
@@ -266,15 +271,24 @@ add_library(AzureRuntime STATIC
     src/runtime/PhysicsWorld.cpp
     src/runtime/GameRuntime.cpp
     src/runtime/ScriptRuntime.cpp
+    src/runtime/GameUi.cpp
+    src/runtime/AnimationStateMachine.cpp
+    src/runtime/PresentationRuntime.cpp
+    src/runtime/AudioRuntime.cpp
+    src/runtime/MiniaudioImpl.cpp
 )
 add_library(AzureEditor STATIC
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
+    src/editor/EditorProjectEditing.cpp
+    src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
+    src/editor/EditorAutomation.cpp
     src/editor/ImGuiEditorLayer.cpp
 )
 set(AZURE_HOST_SOURCES
     src/app/AzureRenderApp.cpp
+    src/app/AzureRenderGameplay.cpp
     src/app/AzureRenderCapture.cpp
     src/app/AzureRenderDescriptors.cpp
     src/app/AzureRenderFrame.cpp
@@ -286,11 +300,15 @@ set(AZURE_HOST_SOURCES
 target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
-target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json
+target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
-target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt PRIVATE sol2::sol2 ${LUA_LIBRARIES})
+target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi PRIVATE sol2::sol2 ${LUA_LIBRARIES})
 target_include_directories(AzureRuntime PRIVATE ${LUA_INCLUDE_DIR})
+target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
+if(WIN32)
+    target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
+endif()
 target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform)
 if(TARGET imgui::imgui)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
@@ -316,6 +334,22 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureGameUiRendererTests tests/GameUiRendererTests.cpp)
+    target_link_libraries(AzureGameUiRendererTests PRIVATE AzureRenderCore RmlUi::RmlUi)
+    add_dependencies(AzureGameUiRendererTests AzureRenderShaders)
+    add_test(NAME AzureEngine.GameUiRenderer COMMAND AzureGameUiRendererTests "${SHADER_BINARY_DIR}")
+    add_executable(AzureGameUiTests tests/GameUiTests.cpp)
+    target_link_libraries(AzureGameUiTests PRIVATE AzureRuntime RmlUi::RmlUi)
+    add_test(NAME AzureEngine.GameUi COMMAND AzureGameUiTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/hud.rml" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/LatoLatin-Regular.ttf")
+    add_executable(AzureEditorWorkflowTests tests/EditorWorkflowTests.cpp)
+    target_link_libraries(AzureEditorWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEngine.EditorWorkflow COMMAND AzureEditorWorkflowTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay")
+    add_executable(AzurePresentationRuntimeTests tests/PresentationRuntimeTests.cpp)
+    target_link_libraries(AzurePresentationRuntimeTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.PresentationRuntime COMMAND AzurePresentationRuntimeTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
+    add_executable(AzureGameplayPresentationTests tests/GameplayPresentationTests.cpp)
+    target_link_libraries(AzureGameplayPresentationTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.GameplayPresentation COMMAND AzureGameplayPresentationTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/portal.wav")
     add_executable(AzureScriptRuntimeTests tests/ScriptRuntimeTests.cpp)
     target_link_libraries(AzureScriptRuntimeTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.ScriptRuntime COMMAND AzureScriptRuntimeTests)
@@ -329,6 +363,10 @@ if(BUILD_TESTING)
     target_link_libraries(AzureReflectionTests PRIVATE AzureReflection)
     add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
+    set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+    add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
+    set_tests_properties(AzureEngine.EditorHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_test(NAME AzureEngine.MetaGenerator COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_metagen.py" $<TARGET_FILE:AzureMetaGen>)
     add_test(NAME AzureEngine.LevelPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_level_player.py" $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.LevelPlayer PROPERTIES LABELS gpu)
@@ -403,24 +441,8 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.EditorCameraController
         COMMAND AzureRenderEditorCameraTests)
-    add_executable(
-        AzureRenderEditorSessionTests
-        tests/EditorSessionTests.cpp
-        src/editor/EditorContext.cpp
-        src/editor/EditorContext.hpp
-        src/editor/EditorSession.cpp
-        src/editor/EditorSession.hpp
-        src/runtime/SceneDocument.cpp
-        src/editor/SceneModel.hpp
-        src/render/RenderSettings.cpp
-        src/render/RenderSettings.hpp
-        src/diagnostics/RuntimeDiagnostics.cpp
-        src/diagnostics/RuntimeDiagnostics.hpp
-    )
-    target_include_directories(
-        AzureRenderEditorSessionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
-    target_link_libraries(
-        AzureRenderEditorSessionTests PRIVATE nlohmann_json::nlohmann_json)
+    add_executable(AzureRenderEditorSessionTests tests/EditorSessionTests.cpp)
+    target_link_libraries(AzureRenderEditorSessionTests PRIVATE AzureEditor)
     add_test(
         NAME AzureRender.EditorSession
         COMMAND AzureRenderEditorSessionTests)
@@ -873,7 +895,9 @@ install(
     FILES_MATCHING PATTERN "*.spv")
 install(
     DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/"
-    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public"
+    PATTERN ".azure" EXCLUDE
+    PATTERN "*.tmp" EXCLUDE)
 set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/CHANGELOG.md"
@@ -938,7 +962,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2)
+foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -989,9 +1013,13 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE g1 g2 g3 g4)
+foreach(AZURE_PHASE g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
     endif()
 endforeach()
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "LatoLatin-LICENSE.txt")
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/editor-game-ui.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")

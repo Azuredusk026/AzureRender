@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 3: AzureEngine.EditorWorkflow
+1/1 Test #3: AzureEngine.EditorWorkflow .......***Failed    0.24 sec
+[1791051630531][info][editor][code=0] Opened scene: courtyard
+[1791051630576][info][editor][code=0] Imported asset: test_model.gltf
+[1791051630576][info][editor][code=0] Selected node: Placed Object
+[1791051630577][info][editor][code=0] Undo
+[1791051630577][info][editor][code=0] Redo
+[1791051630578][info][editor][code=0] Undo
+[1791051630578][info][editor][code=0] Selected node: hero
+[1791051630615][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791051630647][info][editor][code=0] Opened scene: courtyard
+Project rendering edits must survive save
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.25 sec
+
+The following tests FAILED:
+	  3 - AzureEngine.EditorWorkflow (Failed)
+Errors while running CTest

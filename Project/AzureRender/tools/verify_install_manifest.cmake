@@ -31,7 +31,15 @@ set(EXPECTED_LICENSES
     nlohmann-json-LICENSE.txt
     joltphysics-LICENSE.txt
     lua-LICENSE.txt
-    sol2-LICENSE.txt)
+    sol2-LICENSE.txt
+    rmlui-LICENSE.txt
+    miniaudio-LICENSE.txt
+    freetype-LICENSE.txt
+    libpng-LICENSE.txt
+    zlib-LICENSE.txt
+    bzip2-LICENSE.txt
+    brotli-LICENSE.txt
+    LatoLatin-LICENSE.txt)
 foreach(LICENSE IN LISTS EXPECTED_LICENSES)
     if(NOT EXISTS "${LICENSE_DIR}/${LICENSE}")
         string(APPEND VIOLATIONS

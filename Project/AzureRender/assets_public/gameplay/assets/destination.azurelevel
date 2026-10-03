@@ -2,16 +2,91 @@
   "schemaVersion": 1,
   "id": "destination",
   "sceneType": "character",
-  "resources": [{"id": "mesh", "asset": "engine:/assets_public/test_model.gltf"}],
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/hero.gltf"
+    }
+  ],
   "nodes": [
-    {"id": "floor", "components": {
-      "azure.transform": {"type": "azure.transform", "version": 1, "data": {"translation": [0, -1, 0]}},
-      "azure.rigid-body": {"type": "azure.rigid-body", "version": 1, "data": {"halfExtent": [20, 1, 20]}}
-    }},
-    {"id": "hero", "resourceId": "mesh", "components": {
-      "azure.transform": {"type": "azure.transform", "version": 1, "data": {"translation": [0, 1, 0]}},
-      "azure.character": {"type": "azure.character", "version": 1, "data": {}},
-      "azure.script": {"type": "azure.script", "version": 1, "data": {"asset": "assets:/player.lua"}}
-    }}
+    {
+      "id": "floor",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -1,
+              0
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              20,
+              1,
+              20
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "hero",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "azure.character": {
+          "type": "azure.character",
+          "version": 1,
+          "data": {}
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/player.lua"
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 1,
+          "data": {
+            "asset": "assets:/motion.json"
+          }
+        },
+        "azure.game-ui": {
+          "type": "azure.game-ui",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hud.rml"
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/portal.wav",
+            "autoplay": true,
+            "volume": 0.4
+          }
+        }
+      }
+    }
   ]
 }

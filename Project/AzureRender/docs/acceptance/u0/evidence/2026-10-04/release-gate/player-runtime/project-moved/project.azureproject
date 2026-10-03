@@ -1,0 +1,12 @@
+{
+  "id": "53fcf846-2541-49ac-acc6-438b8971e7c9",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "name": "project",
+  "schemaVersion": 1,
+  "startupScene": "assets:/startup.azscene"
+}

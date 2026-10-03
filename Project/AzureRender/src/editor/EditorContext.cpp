@@ -11,6 +11,7 @@ struct VisibilityComponent {
 
 #include <algorithm>
 #include <cstring>
+#include <fstream>
 #include <system_error>
 #include <stdexcept>
 #include <utility>
@@ -66,6 +67,7 @@ void EditorContext::selectNode(const std::size_t index) {
         throw std::out_of_range("Editor node selection is out of range");
     }
     selectedNodeIndex_ = index;
+    selectedNodes_ = {index};
     refreshSelectedTransform();
     log("Selected node: " + scene_.nodes[index].name);
 }
@@ -80,19 +82,28 @@ void EditorContext::save() {
     if (attachedRenderSettings_ != nullptr) {
         scene_.renderSettings = *attachedRenderSettings_;
     }
-    scene_.save(scenePath_);
+    if (assets_ && scenePath_.extension()==".azurelevel") {
+        auto document = levelDocument();
+        auto level = Level::parse(document, *assets_);level.save(scenePath_);
+        sourceLevel_ = std::move(document);assets_->refresh();
+    } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources)resource.path=resourceReferences_.at(resource.path);portable.save(scenePath_);}else scene_.save(scenePath_);
     dirty_ = false;
     log("Saved scene: " + scenePath_.string());
 }
 
 void EditorContext::reload() {
-    SceneDocument document = SceneDocument::load(scenePath_);
+    SceneDocument document;
+    if (assets_ && scenePath_.extension()==".azurelevel") {
+        assets_->refresh();auto level=Level::load(scenePath_,*assets_);document=level.scene;components_=level.components;
+        std::ifstream file(scenePath_);file>>sourceLevel_;
+    } else document = assets_?project_->loadStartupScene():SceneDocument::load(scenePath_);
     scene_ = std::move(document);
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;
     }
     rebuildEntities();
     selectedNodeIndex_ = 0;
+    selectedNodes_ = scene_.nodes.empty()?std::vector<std::size_t>{}:std::vector<std::size_t>{0};
     refreshSelectedTransform();
     undoStack_.clear();
     redoStack_.clear();
@@ -128,7 +139,7 @@ void EditorContext::syncComponents() {
         // Renderable maps the node to the asset primitive it drives. The
         // public test asset uses primitive 0 for the root node; nodes
         // without a mesh simply stay non-renderable.
-        if (node.resourceId == "asset-0" && index == 0) {
+        if ((assets_ && !node.resourceId.empty()) || (node.resourceId == "asset-0" && index == 0)) {
             ecsWorld_.addComponent(
                 entity, azurerender::ecs::RenderableComponent{0, node.visible});
         } else {
@@ -292,7 +303,7 @@ void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
 }
 
 EditorContext::Snapshot EditorContext::snapshot() const {
-    Snapshot result{scene_, selectedNodeIndex_};
+    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_};
     result.scene.renderSettings = renderSettings();
     return result;
 }
@@ -309,6 +320,8 @@ void EditorContext::beginEdit() {
 
 void EditorContext::restore(Snapshot restored) {
     scene_ = std::move(restored.scene);
+    components_ = std::move(restored.components);
+    selectedNodes_ = std::move(restored.selectedNodes);
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;
     }

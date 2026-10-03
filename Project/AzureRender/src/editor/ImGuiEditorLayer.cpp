@@ -249,6 +249,11 @@ void ImGuiEditorLayer::drawPanels() {
     }
 #endif
     const ImGuiIO& io = ImGui::GetIO();
+    if(!io.WantTextInput && !session_->playing()){
+        if(io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_D,false))context_->duplicateSelection();
+        if(ImGui::IsKeyPressed(ImGuiKey_Delete,false))context_->deleteSelection();
+    }
+    if(!io.WantTextInput && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_P,false))static_cast<void>(session_->execute(session_->playing()?EditorCommand::Stop:EditorCommand::Play));
     if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
         static_cast<void>(session_->execute(EditorCommand::Save));
     }
@@ -259,6 +264,14 @@ void ImGuiEditorLayer::drawPanels() {
         static_cast<void>(session_->execute(EditorCommand::Redo));
     }
     if (ImGui::BeginMainMenuBar()) {
+        if (ImGui::BeginMenu("Run")) {
+            for(const auto& entry:std::vector<std::pair<const char*,EditorCommand>>{{"Play",EditorCommand::Play},{"Pause",EditorCommand::Pause},{"Resume",EditorCommand::Resume},{"Step",EditorCommand::Step},{"Stop",EditorCommand::Stop}}){
+                const auto* runtime=session_->runtime();bool enabled=entry.second==EditorCommand::Play?!session_->playing():session_->playing();
+                if(entry.second==EditorCommand::Pause)enabled=runtime && runtime->state()==RuntimeLifecycle::State::Running;
+                if(entry.second==EditorCommand::Resume || entry.second==EditorCommand::Step)enabled=runtime && runtime->state()==RuntimeLifecycle::State::Paused;
+                if(ImGui::MenuItem(entry.first,nullptr,false,enabled))static_cast<void>(session_->execute(entry.second));
+            }ImGui::EndMenu();
+        }
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("Save", "Ctrl+S")) {
                 static_cast<void>(session_->execute(EditorCommand::Save));
@@ -296,10 +309,13 @@ void ImGuiEditorLayer::drawPanels() {
                 "%s",
                 session_->lastError().c_str());
         }
+        if(ImGui::Button(session_->playing()?"Stop":"Play"))static_cast<void>(session_->execute(session_->playing()?EditorCommand::Stop:EditorCommand::Play));
+        if(session_->runtime()){const bool paused=session_->runtime()->state()==RuntimeLifecycle::State::Paused;ImGui::SameLine();if(ImGui::Button(paused?"Resume":"Pause"))static_cast<void>(session_->execute(paused?EditorCommand::Resume:EditorCommand::Pause));ImGui::SameLine();ImGui::BeginDisabled(!paused);if(ImGui::Button("Step"))static_cast<void>(session_->execute(EditorCommand::Step));ImGui::EndDisabled();}
         ImGui::EndMainMenuBar();
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
-        panel->draw(*context_);
+        const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
+        ImGui::BeginDisabled(session_->playing() && !editable);panel->draw(*context_);ImGui::EndDisabled();
     }
 }
 
@@ -414,15 +430,23 @@ void ImGuiEditorLayer::drawViewportPanel() {
             reinterpret_cast<ImTextureID>(
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
+        if(!session_->playing() && ImGui::BeginDragDropTarget()){
+            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))try{context_->placeResource(static_cast<const char*>(payload->Data));}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+            ImGui::EndDragDropTarget();
+        }
         // Draw the viewport gizmo handles (if any selected primitive has a
         // valid screen projection). We compute endpoints here so the click
         // and drag logic can hit-test against them.
         const auto& gizmoScreen = context_->gizmoScreen();
         const ImVec2 itemMin = ImGui::GetItemRectMin();
+        if(session_->playing() && gameUi_ && imageSize.x>0 && imageSize.y>0){
+            const auto mouse=ImGui::GetMousePos();gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
+            if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
+        }
         ImVec2 gizmoCenter{0.0F, 0.0F};
         ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
         bool gizmoDrawn = false;
-        if (gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
+        if (!session_->playing() && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
             gizmoCenter = ImVec2(
                 itemMin.x + gizmoScreen.centerX * imageSize.x,
                 itemMin.y + gizmoScreen.centerY * imageSize.y);
@@ -482,7 +506,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
                     pickThisClick = false;
                 }
             }
-            if (pickThisClick
+            if (!session_->playing() && pickThisClick
                 && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
                 if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
@@ -544,8 +568,9 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
     }
     ImGui::SameLine();
     if (ImGui::Button("Delete") && !nodes.empty()) {
-        context_->removeNode(context_->selectedNodeIndex());
+        context_->deleteSelection();
     }
+    ImGui::SameLine();if(ImGui::Button("Duplicate"))context_->duplicateSelection();
     ImGui::Separator();
     if (nodes.empty()) {
         ImGui::TextUnformatted("(empty scene)");
@@ -562,7 +587,7 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
             if (nodes[index].parentId != parentId) {
                 continue;
             }
-            const bool selected = index == context_->selectedNodeIndex();
+            const bool selected = std::find(context_->selectedNodes().begin(),context_->selectedNodes().end(),index)!=context_->selectedNodes().end();
             bool hasChildren = false;
             for (const SceneNode& candidate : nodes) {
                 if (candidate.parentId == nodes[index].id) {
@@ -586,7 +611,7 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
                     ImGuiSelectableFlags_SpanAvailWidth);
             }
             if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
-                context_->selectNode(index);
+                if(ImGui::GetIO().KeyCtrl){auto selection=context_->selectedNodes();auto found=std::find(selection.begin(),selection.end(),index);if(found==selection.end())selection.push_back(index);else selection.erase(found);context_->selectNodes(std::move(selection));}else context_->selectNode(index);
             }
             if (open) {
                 self(self, nodes[index].id, depth + 1);
@@ -633,6 +658,21 @@ void ImGuiEditorLayer::drawInspectorPanel() {
             std::min(node->instanceOf.size(), instanceBuffer.size() - 1));
         if (ImGui::InputText("##instance", instanceBuffer.data(), instanceBuffer.size())) {
             context_->setSelectedNodeInstance(instanceBuffer.data());
+        }
+    }
+    if(context_->isProject() && context_->selectedNode()){
+        const std::vector<std::string> types={"azure.rigid-body","azure.character","azure.script","azure.animator","azure.audio-source","azure.game-ui"};
+        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))context_->addGameplayComponent(type);ImGui::EndCombo();}
+        const auto componentRegistry=reflection::makeRuntimeRegistry();
+        for(const auto& type:types){auto data=context_->componentData(context_->selectedNode()->id,type);if(data.is_null())continue;
+            ImGui::PushID(type.c_str());if(ImGui::CollapsingHeader(type.c_str()))for(const auto& field:componentRegistry.type(type).properties){
+                auto value=data.at(field.name);bool changed=false;
+                if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox(field.label.c_str(),&v);value=v;}
+                else if(value.is_number()){float v=value.get<float>();changed=ImGui::DragFloat(field.label.c_str(),&v,0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
+                else if(value.is_array() && value.size()==3){auto v=value.get<std::array<float,3>>();changed=ImGui::DragFloat3(field.label.c_str(),v.data(),0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
+                else if(value.is_string()){std::array<char,512> v{};const auto text=value.get<std::string>();std::memcpy(v.data(),text.data(),std::min(text.size(),v.size()-1));changed=ImGui::InputText(field.label.c_str(),v.data(),v.size());value=v.data();}
+                if(changed)try{context_->setComponentField(type,field.name,value);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+            }ImGui::PopID();
         }
     }
     ImGui::Separator();
@@ -713,6 +753,13 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
     setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
 #endif
     ImGui::Begin("Asset Browser");
+    if(context_->isProject()){
+        static std::array<char,1024> source{};ImGui::InputText("glTF / GLB path",source.data(),source.size());
+        ImGui::BeginDisabled(context_->importing());if(ImGui::Button("Import"))try{context_->startImport(source.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndDisabled();
+        if(context_->importing()){ImGui::ProgressBar(context_->importProgress());if(ImGui::Button("Cancel Import"))context_->cancelImport();}
+        try{if(auto imported=context_->pollImport())context_->log("Import ready: "+*imported);}catch(const std::exception& error){context_->log(std::string("Import: ")+error.what());}
+    }
+
     if (ImGui::Button("Reload Assets")) {
         static_cast<void>(session_->execute(EditorCommand::ReloadAssets));
     }
@@ -727,7 +774,8 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
              : context_->resourceStatuses()) {
             ImGui::TableNextRow();
             ImGui::TableSetColumnIndex(0);
-            ImGui::TextUnformatted(resource.id.c_str());
+            if(ImGui::Selectable(resource.id.c_str(),false,ImGuiSelectableFlags_AllowDoubleClick) && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))context_->placeResource(resource.id);
+            if(ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",resource.id.c_str(),resource.id.size()+1);ImGui::TextUnformatted(resource.id.c_str());ImGui::EndDragDropSource();}
             ImGui::TableSetColumnIndex(1);
             ImGui::TextUnformatted(resource.path.generic_string().c_str());
             ImGui::TableSetColumnIndex(2);
@@ -762,6 +810,9 @@ void ImGuiEditorLayer::drawConsolePanel() {
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
     ImGui::Begin("Console");
+    if(auto* scripts=session_->scripts())for(const auto& error:scripts->errors())ImGui::TextWrapped("Script: %s",error.c_str());
+    if(auto* levels=session_->levels())if(!levels->lastError().empty())ImGui::TextWrapped("Level: %s",levels->lastError().c_str());
+    if(auto* presentation=session_->presentation())for(const auto& error:presentation->errors())ImGui::TextWrapped("Presentation: %s",error.c_str());
     for (const std::string& message :
          azurerender::RuntimeDiagnostics::instance().messages()) {
         ImGui::TextUnformatted(message.c_str());

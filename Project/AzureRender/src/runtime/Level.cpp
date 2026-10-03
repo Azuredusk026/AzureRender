@@ -1,4 +1,5 @@
 #include "runtime/Level.hpp"
+#include "runtime/LevelRenderSettings.hpp"
 #include "runtime/Prefab.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include <fstream>
@@ -19,6 +20,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
     else if (sceneType == "sample") level.scene.renderSettings.sceneType = SceneType::Sample;
     else if (sceneType == "blackhole") level.scene.renderSettings.sceneType = SceneType::Blackhole;
     else throw std::runtime_error("Unknown level sceneType");
+    if(expanded.contains("renderSettings"))decodeLevelRenderSettings(level.scene.renderSettings,expanded.at("renderSettings"));
     std::set<std::string> resources;
     for (const auto& source : expanded.at("resources")) {
         SceneResource resource{source.at("id").get<std::string>(), "gltf", assets.resolveReference(source.at("asset").get<std::string>())};

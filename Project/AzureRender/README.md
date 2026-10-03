@@ -18,7 +18,7 @@ GLFW 与 Dear ImGui 负责窗口和界面。tinygltf、stb 和 nlohmann/json 负
 
 ## 快速开始
 
-项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 验证环境使用 Vulkan SDK 1.4、MinGW GCC 13 和 Ninja 1.13。
+项目需要 Windows 10/11 或 Ubuntu 24.04，并需要 Vulkan SDK、CMake 3.20+、Ninja 和 vcpkg。Windows 当前验收使用 MSVC 14.44、Vulkan SDK 1.4.350 和 Ninja。
 
 ```powershell
 # 将该路径替换为本机 vcpkg 工作目录
@@ -48,6 +48,7 @@ cmake --build .\build\ninja-debug
 - [风格化角色渲染](docs/character-rendering.md)
 - [黑洞模拟](docs/blackhole-rendering.md)
 - [资产、场景与编辑器](docs/assets-and-editor.md)
+- [项目编辑、运行控制与游戏界面](docs/runtime/editor-game-ui.md)
 - [开发、测试与发布](docs/development-and-release.md)
 - [参数与接口参考](docs/reference.md)
 

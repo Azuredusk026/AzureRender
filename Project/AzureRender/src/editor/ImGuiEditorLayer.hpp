@@ -2,6 +2,7 @@
 
 #include "EditorCameraController.hpp"
 #include "EditorSession.hpp"
+#include "runtime/GameUi.hpp"
 #include "IEditorPanel.hpp"
 
 #include <vulkan/vulkan.h>
@@ -37,6 +38,7 @@ public:
     void shutdownVulkan();
     void newFrame();
     void drawPanels();
+    void setGameUi(GameUi* ui) { gameUi_=ui; }
     void render(VkCommandBuffer commandBuffer);
     void setViewportImages(
         VkSampler sampler,
@@ -63,6 +65,7 @@ private:
 
     std::shared_ptr<EditorSession> session_;
     EditorContext* context_ = nullptr;
+    GameUi* gameUi_=nullptr;
     std::vector<std::unique_ptr<IEditorPanel>> panels_;
     VkDevice device_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;

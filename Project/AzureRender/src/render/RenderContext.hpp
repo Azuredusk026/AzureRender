@@ -77,12 +77,19 @@ inline void validateSceneRendererCapabilities(
 // simulation state (camera, animation, QA flags) is forwarded here so the
 // engine stays the single owner of host-level input while the renderer owns
 // the scene rendering itself.
+struct NodeAnimationFrame {
+    std::string node;
+    std::uint32_t clip = 0;
+    double time = 0;
+    bool loop = true;
+};
 struct SceneFrameData {
     float deltaSeconds = 0.0F;
     double timeSeconds = 0.0;
 
     const RenderSettings* renderSettings = nullptr;
     std::shared_ptr<const scene::SceneDescription> sceneSnapshot;
+    std::vector<NodeAnimationFrame> animations;
 
     float cameraPosition[3]{0.0F, 0.0F, 0.0F};
     float cameraTarget[3]{0.0F, 0.0F, 0.0F};

@@ -1,0 +1,126 @@
+#include "editor/EditorContext.hpp"
+#include "editor/AssetImportJob.hpp"
+#include "runtime/Prefab.hpp"
+#include "runtime/LevelRenderSettings.hpp"
+#include "resources/ResourceLocator.hpp"
+#include "assets/GltfLoader.hpp"
+#include "runtime/ComponentCodec.hpp"
+#include <chrono>
+#include <fstream>
+#include <set>
+namespace azurerender {
+namespace {
+std::string identity(const char* prefix){static std::uint64_t count=0;return std::string(prefix)+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+"-"+std::to_string(++count);}
+}
+std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem::path& path){
+    auto project=std::make_unique<Project>(Project::load(path));auto assets=std::make_unique<AssetDatabase>(*project);assets->refresh();
+    const auto scenePath=project->resolve(project->startupScene);
+    Level level; if(scenePath.extension()==".azurelevel")level=Level::load(scenePath,*assets);else level.scene=project->loadStartupScene();
+    auto context=std::make_shared<EditorContext>(level.scene,scenePath);
+    context->project_=std::move(project);context->assets_=std::move(assets);context->components_=std::move(level.components);
+    if(scenePath.extension()==".azurelevel"){
+        std::ifstream file(scenePath);file>>context->sourceLevel_;
+        const auto expanded=expandPrefabs(context->sourceLevel_,*context->assets_);
+        for(const auto& resource:expanded.at("resources"))context->resourceReferences_[context->assets_->resolveReference(resource.at("asset").get<std::string>())]=resource.at("asset").get<std::string>();
+    }else for(const auto& resource:context->scene_.resources){
+        for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_string();}
+        if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_string();}
+    }
+    context->syncComponents();return context;
+}
+std::string EditorContext::commitImport(AssetImportJob& job){
+    const auto path=job.finish();
+    try{assets_->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_string();
+        const auto id=assets_->idForPath(reference);beginEdit();scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;log("Imported asset: "+path.filename().string());return id;
+    }catch(...){std::filesystem::remove_all(job.destination);throw;}
+}
+std::string EditorContext::importAsset(const std::filesystem::path& path){
+    if(!assets_)throw std::logic_error("Asset import requires a project");const auto id=identity("asset-");
+    AssetImportJob job(path,project_->file.parent_path()/".azure/imports"/id,project_->mounts.begin()->second/"imports"/id);return commitImport(job);
+}
+void EditorContext::startImport(const std::filesystem::path& path){
+    if(!assets_||importJob_)throw std::logic_error("Import requires an idle project");const auto id=identity("asset-");
+    importJob_=std::make_shared<AssetImportJob>(path,project_->file.parent_path()/".azure/imports"/id,project_->mounts.begin()->second/"imports"/id);
+}
+void EditorContext::cancelImport(){if(importJob_)importJob_->cancel();}
+float EditorContext::importProgress() const{return importJob_?importJob_->progress():0;}
+std::optional<std::string> EditorContext::pollImport(){if(!importJob_||!importJob_->ready())return {};auto job=std::move(importJob_);return commitImport(*job);}
+void EditorContext::placeResource(const std::string& resource){
+    if(std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==resource;}))throw std::invalid_argument("Unknown resource");
+    beginEdit();SceneNode node;node.id=identity("node-");node.name="Placed Object";node.resourceId=resource;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+}
+void EditorContext::selectNodes(std::vector<std::size_t> indices){
+    for(auto index:indices)if(index>=scene_.nodes.size())throw std::out_of_range("Editor node selection is out of range");
+    std::sort(indices.begin(),indices.end());indices.erase(std::unique(indices.begin(),indices.end()),indices.end());
+    selectedNodes_=std::move(indices);if(!selectedNodes_.empty())selectedNodeIndex_=selectedNodes_.back();refreshSelectedTransform();
+}
+void EditorContext::duplicateSelection(){
+    if(selectedNodes_.empty())return;beginEdit();const auto selected=selectedNodes_;std::map<std::string,std::string> ids;std::vector<std::size_t> created;
+    for(auto index:selected)ids[scene_.nodes.at(index).id]=identity("node-");
+    for(auto index:selected){auto node=scene_.nodes.at(index);const auto original=node.id;node.id=ids.at(original);node.name+=" Copy";
+        if(ids.count(node.parentId))node.parentId=ids.at(node.parentId);
+        node.prefabSource.clear();node.instanceOf.clear();components_[node.id]=components_.count(original)?components_.at(original):nlohmann::json::object();
+        if(node.resourceId.find(':')!=std::string::npos){const auto found=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==node.resourceId;});
+            if(found!=scene_.resources.end()){auto resource=*found;resource.id=identity("resource-");node.resourceId=resource.id;scene_.resources.push_back(resource);}}
+        created.push_back(scene_.nodes.size());scene_.nodes.push_back(std::move(node));
+    }
+    rebuildEntities();selectNodes(std::move(created));
+}
+void EditorContext::deleteSelection(){
+    if(selectedNodes_.empty())return;beginEdit();std::set<std::string> removed;
+    for(auto index:selectedNodes_){const auto& node=scene_.nodes.at(index);removed.insert(node.id);
+        if(!node.prefabSource.empty()){const auto prefix=node.id.substr(0,node.id.find(':'))+":";for(const auto& candidate:scene_.nodes)if(candidate.id.rfind(prefix,0)==0)removed.insert(candidate.id);}}
+    bool grew=true;while(grew){grew=false;for(const auto& node:scene_.nodes)if(removed.count(node.parentId)&&removed.insert(node.id).second)grew=true;}
+    scene_.nodes.erase(std::remove_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return removed.count(node.id)!=0;}),scene_.nodes.end());
+    scene_.lights.erase(std::remove_if(scene_.lights.begin(),scene_.lights.end(),[&](const auto& light){return removed.count(light.nodeId)!=0;}),scene_.lights.end());
+    for(const auto& id:removed)components_.erase(id);
+    selectedNodeIndex_=0;selectedNodes_=scene_.nodes.empty()?std::vector<std::size_t>{}:std::vector<std::size_t>{0};rebuildEntities();refreshSelectedTransform();
+}
+std::map<std::string,nlohmann::json> EditorContext::runtimeComponents() const {
+    auto result=components_;const auto registry=reflection::makeRuntimeRegistry();
+    for(const auto& node:scene_.nodes){auto& data=result[node.id];if(data.is_null())data=nlohmann::json::object();
+        ecs::TransformComponent transform{node.translation,node.rotation,node.scale};ecs::RenderableComponent renderable{0,node.visible};
+        data["azure.transform"]=registry.encode("azure.transform",&transform);data["azure.renderable"]=registry.encode("azure.renderable",&renderable);}
+    return result;
+}
+nlohmann::json EditorContext::componentData(const std::string& node,const std::string& type)const{
+    const auto data=runtimeComponents();if(!data.count(node)||!data.at(node).contains(type))return nlohmann::json();return data.at(node).at(type).at("data");
+}
+void EditorContext::addGameplayComponent(const std::string& type){if(!selectedNode())return;const auto registry=reflection::makeRuntimeRegistry();visitComponentType(type,[&](auto component){const auto envelope=registry.encode(type,&component);beginEdit();components_[selectedNode()->id][type]=envelope;});}
+void EditorContext::setComponentField(const std::string& type,const std::string& field,const nlohmann::json& value){
+    if(!selectedNode())throw std::logic_error("Component editing requires selection");
+    auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component");data[type]["data"][field]=value;validateComponents(data);
+    beginEdit();components_[selectedNode()->id]=data;
+    if(type=="azure.transform"){ecs::TransformComponent transform;reflection::makeRuntimeRegistry().decode(type,&transform,data[type]);auto* node=selectedNode();node->translation=transform.translation;node->rotation=transform.rotation;node->scale=transform.scale;refreshSelectedTransform();}
+    if(type=="azure.renderable")selectedNode()->visible=data[type]["data"].at("visible").get<bool>();
+    syncComponents();
+}
+nlohmann::json EditorContext::levelDocument()const{
+    if(!assets_)throw std::logic_error("Level serialization requires a project");
+    auto document=sourceLevel_;document["id"]=scene_.sceneId;document["nodes"]=nlohmann::json::array();document["resources"]=nlohmann::json::array();document["lights"]=nlohmann::json::array();
+    document["renderSettings"]=encodeLevelRenderSettings(renderSettings());
+    const auto data=runtimeComponents();std::set<std::string> prefabResources,liveInstances;
+    for(const auto& node:scene_.nodes){
+        nlohmann::json encoded={{"id",node.id},{"name",node.name},{"parentId",node.parentId},{"resourceId",node.resourceId},{"components",data.at(node.id)}};
+        if(!node.prefabSource.empty()&&!node.instanceOf.empty()){
+            const auto prefix=node.id.substr(0,node.id.find(':'));liveInstances.insert(prefix);prefabResources.insert(node.resourceId);
+            bool found=false;for(auto& instance:document["prefabs"])if(instance.at("instance")==prefix){
+                auto local=encoded;local.erase("id");for(const char* link:{"parentId","resourceId"}){const auto text=local[link].get<std::string>();if(!text.empty())local[link]=text.substr(prefix.size()+1);}
+                instance["overrides"][node.instanceOf].merge_patch(local);found=true;break;}
+            if(!found)throw std::runtime_error("Prefab node lacks serialized instance");
+        }else document["nodes"].push_back(std::move(encoded));
+    }
+    if(document.contains("prefabs")){auto& instances=document["prefabs"];instances.erase(std::remove_if(instances.begin(),instances.end(),[&](const auto& instance){return !liveInstances.count(instance.at("instance").template get<std::string>());}),instances.end());}
+    for(const auto& resource:scene_.resources){if(prefabResources.count(resource.id))continue;
+        if(resource.id.find(':')!=std::string::npos && std::none_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.resourceId==resource.id;}))continue;
+        std::string reference=resourceReferences_.count(resource.path)?resourceReferences_.at(resource.path):std::string();
+        for(const auto& original:sourceLevel_.value("resources",nlohmann::json::array()))if(original.at("id")==resource.id)reference=original.at("asset").get<std::string>();
+        if(reference.empty())for(const auto& record:assets_->records())if(record.second.path==resource.path){reference=record.first;break;}
+        if(reference.empty())throw std::runtime_error("Resource lacks project asset identity: "+resource.id);
+        document["resources"].push_back({{"id",resource.id},{"asset",reference}});
+    }
+    for(const auto& light:scene_.lights){if(light.nodeId.find(':')!=std::string::npos && liveInstances.count(light.nodeId.substr(0,light.nodeId.find(':'))))continue;
+        document["lights"].push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},{"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});}
+    return document;
+}
+}

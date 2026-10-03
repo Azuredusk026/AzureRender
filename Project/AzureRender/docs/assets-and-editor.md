@@ -1,5 +1,7 @@
 # 资产、场景与编辑器
 
+项目编辑入口为 `AzureRender.exe --editor-project <project.azureproject>`。导入、组件编辑、运行控制和游戏界面见 [项目编辑与游戏表现](runtime/editor-game-ui.md)。
+
 AzureRender 会分开检查两件事：文件能否解析，以及其中的数据能否正确渲染。glTF 提供几何、动画和标准材质字段。AzureRender Material Profile 补充风格化类别、Feature、Face SDF 和类别参数。`.azscene` 保存场景节点、资源引用和 RenderSettings。
 
 ## 资产边界

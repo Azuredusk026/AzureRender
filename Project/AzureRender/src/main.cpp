@@ -88,6 +88,12 @@ int main(const int argumentCount, char** argumentValues) {
             }
         }
 
+        if(options.editorMode && !options.projectFile.empty()){
+            auto context=azurerender::EditorContext::openProject(options.projectFile);
+            options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
+            if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.string();
+            options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));
+        }
         AzureRenderApp application;
         application.run(options);
         if (options.editorSession != nullptr

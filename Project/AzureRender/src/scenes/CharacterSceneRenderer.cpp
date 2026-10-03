@@ -2436,9 +2436,12 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const SceneFrameData& frame) {
     const float deltaSeconds = frame.deltaSeconds;
     if (!asset_.animations.empty()) {
-        if (animationPlaying_) {
-            animationTime_ += deltaSeconds;
+        bool controlled=false;
+        for(const auto& animation:frame.animations){
+            const auto node=std::find_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& entry){return entry.id==animation.node;});
+            if(node!=scene_.nodes.end() && !scene_.resources.empty() && node->resourceId==scene_.resources.front().id){if(animation.clip>=asset_.animations.size())throw std::runtime_error("Animation state clip exceeds asset clip count");animationIndex_=animation.clip;animationTime_=static_cast<float>(animation.time);if(!animation.loop)animationTime_=std::min(animationTime_,std::max(asset_.animations[animationIndex_].endTime-asset_.animations[animationIndex_].startTime-1e-6F,0.0F));controlled=true;break;}
         }
+        if (!controlled && animationPlaying_) animationTime_ += deltaSeconds;
         sampleAnimation(
             asset_,
             animationIndex_,

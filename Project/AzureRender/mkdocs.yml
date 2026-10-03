@@ -46,6 +46,7 @@ nav:
       - 渲染核心实施计划: plans/render-core-implementation.md
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
+      - 项目编辑与游戏表现: runtime/editor-game-ui.md
       - 脚本与玩法: runtime/scripts-gameplay.md
       - 物理与输入: runtime/physics-input.md
       - 资产、关卡与 Prefab: runtime/assets-levels.md
@@ -61,6 +62,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U0 编辑器与界面验收: acceptance/u0/2026-10-04.md
       - G4 脚本与玩法验收: acceptance/g4/2026-10-04.md
       - 桌面同步: acceptance/r1/2026-09-26.md
       - R2 验收: acceptance/r2/2026-09-26.md

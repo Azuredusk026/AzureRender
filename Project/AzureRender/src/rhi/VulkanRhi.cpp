@@ -451,7 +451,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
             | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
         if (desc.alphaBlend) {
             attachment.blendEnable = VK_TRUE;
-            attachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
+            attachment.srcColorBlendFactor = desc.premultipliedAlpha ? VK_BLEND_FACTOR_ONE : VK_BLEND_FACTOR_SRC_ALPHA;
             attachment.dstColorBlendFactor =
                 VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
             attachment.colorBlendOp = VK_BLEND_OP_ADD;

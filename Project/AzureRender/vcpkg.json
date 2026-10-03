@@ -16,7 +16,9 @@
       "name": "sol2",
       "version>=": "3.5.0"
     },
-    "lua"
+    "lua",
+    {"name": "rmlui", "version>=": "6.3"},
+    {"name": "miniaudio", "version>=": "0.11.25"}
   ],
   "overrides": [
     {

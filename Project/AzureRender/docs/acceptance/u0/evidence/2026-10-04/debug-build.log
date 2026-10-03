@@ -1,0 +1,19 @@
+[1/19] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[2/19] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[3/19] Linking CXX static library AzureRenderCore.lib
+[4/19] Linking CXX executable AzureAssetLevelTests.exe
+[5/19] Linking CXX executable AzureProjectTests.exe
+[6/19] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[7/19] Linking CXX executable AzureScriptRuntimeTests.exe
+[8/19] Linking CXX executable AzurePresentationRuntimeTests.exe
+[9/19] Linking CXX executable AzureGameplayPresentationTests.exe
+[10/19] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[11/19] Linking CXX executable AzureGameUiTests.exe
+[12/19] Linking CXX static library AzureEditor.lib
+[13/19] Linking CXX executable AzurePhysicsInputTests.exe
+[14/19] Linking CXX executable AzurePlayer.exe
+[15/19] Linking CXX executable AzureGameUiRendererTests.exe
+[16/19] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[17/19] Linking CXX executable AzureEditorWorkflowTests.exe
+[18/19] Linking CXX executable AzureRender.exe
+[19/19] Linking CXX executable AzureRenderEditorSessionTests.exe

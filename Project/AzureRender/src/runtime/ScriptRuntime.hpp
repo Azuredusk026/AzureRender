@@ -12,6 +12,8 @@ public:
     void dispatch(const PhysicsEvent& event);
     void reloadChanged();
     void setLevelHandler(std::function<void(std::string)> handler);
+    void setAudioHandler(std::function<void(ecs::Entity)> handler);
+    void setUiHandler(std::function<void(std::string,std::string)> handler);
     std::size_t activeCount() const;
     const std::vector<std::string>& errors() const;
 private:

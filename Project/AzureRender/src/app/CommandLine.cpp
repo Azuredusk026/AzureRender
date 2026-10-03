@@ -43,7 +43,10 @@ constexpr const char* kHelp =
     "                                      Select the renderer\n"
     "  --asset <gltf/glb>                  Character asset\n"
     "  --scene <azscene>                   Load a saved scene\n"
-    "  --editor <azscene>                  Open the editor\n\n"
+    "  --editor <azscene>                  Open the editor\n"
+    "  --editor-project <azureproject>     Open a game project\n"
+    "  --editor-actions <json>             Run editor task commands\n"
+    "  --runtime-report <json>             Write gameplay evidence\n\n"
     "Output:\n"
     "  --width <pixels> --height <pixels>  Output size\n"
     "  --capture-dir <empty-dir>           Deterministic PNG output\n"
@@ -148,6 +151,8 @@ float parseFiniteFloat(
 
 void validate(const ParsedCommandLine& parsed) {
     const auto& options = parsed.options;
+    if(!options.editorActionsPath.empty() && !options.editorMode)fail(CommandLineErrorCode::InvalidCombination,"--editor-actions","--editor-actions requires an editor project");
+    if(options.editorMode && !options.projectFile.empty() && (!parsed.scenePath.empty() || !parsed.editorScenePath.empty() || !parsed.createScenePath.empty()))fail(CommandLineErrorCode::InvalidCombination,"--editor-project","Editor project and scene entries are mutually exclusive");
     if (options.width < 64 || options.width > 7680
         || options.height < 64 || options.height > 4320) {
         fail(
@@ -280,6 +285,12 @@ ParsedCommandLine parseCommandLine(
         const std::string& argument = arguments[index];
         if (argument == "--help") {
             parsed.showHelp = true;
+        } else if (argument == "--editor-project") {
+            parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
+        } else if (argument == "--editor-actions") {
+            parsed.options.editorActionsPath = requireValue(arguments,index,argument);
+        } else if (argument == "--runtime-report") {
+            parsed.options.runtimeReportPath = requireValue(arguments,index,argument);
         } else if (argument == "--smoke-frames") {
             parsed.options.smokeFrameLimit = parseUnsigned(
                 requireValue(arguments, index, argument), argument);

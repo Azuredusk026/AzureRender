@@ -15,6 +15,11 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 | nlohmann/json | MIT |
 | Jolt Physics | MIT |
 | Lua 与 sol2 | MIT |
+| RmlUi | MIT |
+| miniaudio | MIT-0 |
+| FreeType | FreeType License |
+| libpng、zlib、bzip2、Brotli | 对应上游许可随安装树分发 |
+| LatoLatin | SIL Open Font License 1.1 |
 
 Dear ImGui 使用 docking 分支 1.92.8，源码位于 `third_party/imgui`。它由项目工具链编译，保证库与项目的 ABI 一致。许可证保存在 `third_party/imgui/LICENSE.txt`。
 
@@ -31,3 +36,13 @@ Dear ImGui 使用 docking 分支 1.92.8，源码位于 `third_party/imgui`。它
 许可证安装为 `licenses/lua-LICENSE.txt` 和 `licenses/sol2-LICENSE.txt`。本地绑定使用状态、环境、保护函数和指令钩子的公开 API。
 
 MSVC C5321 在包含 sol2 头时局部关闭，适用对象为 UTF-8 表情符号字面量。项目代码继续使用严格警告。上游版本与本地适配由 Debug、Release 和 Player 验证。
+
+## 游戏界面与音频
+
+[RmlUi 6.3](https://github.com/mikke89/RmlUi/tree/6.3) 提供文档布局与字体界面。本地 Vulkan 适配使用公开 RenderInterface，资源由项目 RHI 管理。
+
+[miniaudio 0.11.25](https://github.com/mackron/miniaudio/tree/0.11.25) 提供音频引擎和解码。本项目选择 MIT-0 许可。实现头在独立编译单元内处理上游警告。
+
+FreeType 与其压缩依赖经 vcpkg 安装。安装树保留 RmlUi、miniaudio、FreeType、libpng、zlib、bzip2 和 Brotli 的许可证。
+
+`assets_public/fonts/LatoLatin-Regular.ttf` 来自 RmlUi 6.3 示例。原始许可保存在同目录，并安装为 `licenses/LatoLatin-LICENSE.txt`。公开 WAV 为项目生成的衰减正弦音效。

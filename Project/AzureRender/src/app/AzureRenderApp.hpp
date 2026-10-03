@@ -8,6 +8,9 @@
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/ScriptRuntime.hpp"
+#include "runtime/PresentationRuntime.hpp"
+#include "runtime/GameUi.hpp"
+#include "render/GameUiRenderer.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/TransientResourcePool.hpp"
@@ -30,6 +33,7 @@
 
 namespace azurerender {
 class EditorSession;
+class EditorAutomation;
 class GlfwFrontend;
 class ImGuiEditorLayer;
 class ISceneRenderer;
@@ -147,6 +151,15 @@ private:
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
     std::unique_ptr<azurerender::ScriptRuntime> scriptRuntime_;
+    std::unique_ptr<azurerender::PresentationRuntime> presentationRuntime_;
+    std::unique_ptr<azurerender::GameUiRenderer> gameUiRenderer_;
+    std::unique_ptr<azurerender::GameUi> gameUi_;
+#if AZURE_WITH_EDITOR
+    std::unique_ptr<azurerender::EditorAutomation> editorAutomation_;
+#endif
+    std::string gameUiPath_,editorResourceSignature_;
+    std::uint64_t gameplayFrame_=0,uiSerial_=0,uiDrawCalls_=0,animationFrames_=0,audioStarts_=0;
+    std::vector<std::string> presentationErrors_;
     double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 
@@ -325,6 +338,15 @@ private:
     void createSyncObjects();
 
     void createSceneRenderer();
+    void prepareLevelRenderer(const azurerender::Level& level);
+    void synchronizeEditorRuntime();
+    void synchronizeGameUi();
+    void updateGameUi(double delta);
+    azurerender::PresentationRuntime* activePresentation();
+    azurerender::RuntimeLifecycle* activeRuntime();
+    azurerender::GameRuntime* activeGame();
+    azurerender::ScriptRuntime* activeScripts();
+    azurerender::AssetDatabase* activeAssets();
     void buildRenderContext(azurerender::RenderContext& context);
     void buildSceneFrameData(azurerender::SceneFrameData& frame);
 

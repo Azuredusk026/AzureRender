@@ -132,6 +132,7 @@ void AzureRenderApp::recreateSwapchain() {
         editorLayer_->shutdownVulkan();
     }
 #endif
+    gameUi_.reset();gameUiRenderer_.reset();gameUiPath_.clear();
     cleanupSwapchain();
     createSwapchain();
     createImageViews();

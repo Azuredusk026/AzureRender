@@ -67,6 +67,8 @@ struct ScriptRuntime::Impl {
     std::map<ecs::Entity, Entry> entries;
     std::vector<std::string> errors;
     std::function<void(std::string)> levelHandler;
+    std::function<void(ecs::Entity)> audioHandler;
+    std::function<void(std::string,std::string)> uiHandler;
     std::chrono::steady_clock::time_point nextPoll{};
     bool callbackActive = false;
     bool staging = false;
@@ -133,6 +135,14 @@ struct ScriptRuntime::Impl {
             if (!levelHandler) throw std::runtime_error("Level request handler unavailable");
             auto effect = [this, reference] { levelHandler(reference); };
             if (staging) stagedEffects.push_back(effect); else effect();
+        });
+        self.set_function("audio_play", [this,entity,node,revision](sol::table){
+            guard(entity,node,revision,true);if(!audioHandler)throw std::runtime_error("Audio handler unavailable");
+            auto effect=[this,entity]{audioHandler(entity);};if(staging)stagedEffects.push_back(effect);else effect();
+        });
+        self.set_function("ui_text", [this,entity,node,revision](sol::table,const std::string& id,const std::string& text){
+            guard(entity,node,revision,true);if(!uiHandler)throw std::runtime_error("UI handler unavailable");
+            auto effect=[this,id,text]{uiHandler(id,text);};if(staging)stagedEffects.push_back(effect);else effect();
         });
         self.set_function("get", [this, entity, node, revision](sol::table, const std::string& type, const std::string& field) {
             guard(entity, node, revision, false); Json result;
@@ -263,6 +273,8 @@ void ScriptRuntime::dispatch(const PhysicsEvent& event) {
 }
 void ScriptRuntime::reloadChanged() { impl_->reloadChanged(); }
 void ScriptRuntime::setLevelHandler(std::function<void(std::string)> handler) { impl_->levelHandler = std::move(handler); }
+void ScriptRuntime::setAudioHandler(std::function<void(ecs::Entity)> handler) { impl_->audioHandler = std::move(handler); }
+void ScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler) { impl_->uiHandler = std::move(handler); }
 std::size_t ScriptRuntime::activeCount() const {
     std::size_t count = 0; for (const auto& entry : impl_->entries) count += entry.second.active; return count;
 }
