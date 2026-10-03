@@ -256,6 +256,10 @@ add_library(AzureRuntime STATIC
     src/runtime/SceneDocument.cpp
     src/runtime/SceneRenderSnapshot.cpp
     src/runtime/Project.cpp
+    src/runtime/AssetDatabase.cpp
+    src/runtime/Level.cpp
+    src/runtime/Prefab.cpp
+    src/runtime/LevelSession.cpp
 )
 add_library(AzureEditor STATIC
     src/editor/EditorCameraController.cpp
@@ -305,11 +309,16 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureAssetLevelTests tests/AssetLevelTests.cpp)
+    target_link_libraries(AzureAssetLevelTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.AssetLevel COMMAND AzureAssetLevelTests)
     add_executable(AzureReflectionTests tests/ReflectionTests.cpp)
     target_link_libraries(AzureReflectionTests PRIVATE AzureReflection)
     add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_test(NAME AzureEngine.MetaGenerator COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_metagen.py" $<TARGET_FILE:AzureMetaGen>)
+    add_test(NAME AzureEngine.LevelPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_level_player.py" $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureEngine.LevelPlayer PROPERTIES LABELS gpu)
     add_executable(AzureProjectTests tests/ProjectTests.cpp)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
@@ -877,7 +886,8 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g2-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g3-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g4-implementation.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/reflection.md")
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/reflection.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/assets-levels.md")
 install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
@@ -961,8 +971,8 @@ set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
 foreach(AZURE_PHASE g1 g2 g3 g4)
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/2026-10-03.md")
-        install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/2026-10-03.md"
-            DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
+    file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
+    if(AZURE_PHASE_RECORDS)
+        install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
     endif()
 endforeach()

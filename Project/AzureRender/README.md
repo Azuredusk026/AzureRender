@@ -88,3 +88,5 @@ Windows 渲染核心的压力场景、质量档位、长跑与窗口恢复结果
 独立 AzurePlayer 支持创建和加载版本化项目，资源通过虚拟挂载访问。使用与模块契约见 [引擎基础](docs/runtime/engine-foundation.md)，实施任务见 [G0 计划](docs/plans/g0-implementation.md)。
 
 反射生成器、组件存档与属性元数据见 [反射与序列化](docs/runtime/reflection.md)。
+
+UUID 资产、JSON 关卡、Prefab 覆盖与热重载见 [资产与关卡](docs/runtime/assets-levels.md)。

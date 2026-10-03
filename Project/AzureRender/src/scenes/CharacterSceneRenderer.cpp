@@ -494,7 +494,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                     return resourceIndex;
                 }
             }
-            return std::size_t{0};
+            return scene_.resources.size();
         };
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.

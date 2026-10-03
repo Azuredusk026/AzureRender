@@ -15,6 +15,7 @@ int main(int argc, char** argv) {
         std::string projectPath, createPath;
         bool check = false;
         std::vector<std::string> args;
+        std::string runtimeReport;
         for (int i = 1; i < argc; ++i) {
             std::string arg = argv[i];
             if (arg == "--project" || arg == "--create-project") {
@@ -22,13 +23,16 @@ int main(int argc, char** argv) {
                 auto& path = arg == "--project" ? projectPath : createPath;
                 if (!path.empty()) throw std::runtime_error("Duplicate option: " + arg);
                 path = argv[i];
+            } else if (arg == "--runtime-report") {
+                if (++i >= argc || !runtimeReport.empty()) throw std::runtime_error("Expected one runtime report path");
+                runtimeReport = argv[i];
             } else if (arg == "--check-project") {
                 check = true;
             } else
                 args.push_back(arg);
         }
         if (!createPath.empty()) {
-            if (!projectPath.empty() || check || !args.empty())
+            if (!projectPath.empty() || check || !args.empty() || !runtimeReport.empty())
                 throw std::runtime_error("--create-project is a standalone command");
             azurerender::Project::create(createPath,
                                          std::filesystem::path(createPath).filename().string());
@@ -36,6 +40,8 @@ int main(int argc, char** argv) {
             return EXIT_SUCCESS;
         }
         AzureRenderOptions initial;
+        initial.projectFile = projectPath;
+        initial.runtimeReportPath = runtimeReport;
         if (!projectPath.empty()) {
             const auto project = azurerender::Project::load(projectPath);
             auto scene = project.loadStartupScene();
@@ -53,7 +59,8 @@ int main(int argc, char** argv) {
             std::cout << "AzurePlayer --project <project.azureproject> [runtime "
                          "options]\nAzurePlayer --create-project <empty-directory>\nAzurePlayer "
                          "--project <file> --check-project\n"
-                      << "P: pause/resume runtime, O: advance one paused frame\n";
+                      << "P: pause/resume runtime, O: advance one paused frame\n"
+                      << "--runtime-report <file>: write final World snapshot\n";
             std::istringstream help(azurerender::commandLineHelp());
             for (std::string line; std::getline(help, line);)
                 if (line.find("--editor") == std::string::npos &&

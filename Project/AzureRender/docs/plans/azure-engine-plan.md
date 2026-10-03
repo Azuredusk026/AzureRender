@@ -1,8 +1,8 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：G1 Complete，G2 Active
-> 更新日期：2026-10-03
+> 状态：G2 Complete，G3 Active
+> 更新日期：2026-10-04
 > 适用范围：Windows 编辑器与 Windows 运行时；Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
 
@@ -62,8 +62,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | R4 Windows Render Core 验收 | R3，Complete | 复杂场景、质量档位、安装、长跑和窗口恢复 | Debug/Release、Validation、安装包、长跑和恢复全部通过 |
 | G0 引擎基础 | R4，Complete | Foundation、Platform、Runtime、Player 的库边界和项目配置 | 新建项目、独立 Player、资源挂载和 Windows 发布通过 |
 | G1 反射与序列化 | G0，Complete | 代码生成、稳定类型标识、Inspector 元数据和版本迁移 | 增量生成、错误定位、序列化往返通过 |
-| G2 资产、关卡与 Prefab | G1，Active | AssetDatabase、Level、Prefab、依赖和热重载 | 资产移动、关卡切换和实例覆盖往返通过 |
-| G3 物理与输入 | G2 | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
+| G2 资产、关卡与 Prefab | G1，Complete | AssetDatabase、Level、Prefab、依赖和热重载 | 资产移动、关卡切换和实例覆盖往返通过 |
+| G3 物理与输入 | G2，Active | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
 | G4 脚本与玩法 | G3 | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
 | U0 编辑器与游戏界面 | G4 | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入—放置—编辑—运行—停止闭环通过 |
 | P0 Windows 游戏发布 | U0 | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
@@ -82,7 +82,7 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 
 G0 模块库、项目配置、独立 Player、运行时生命周期和性能观测通过验收。Debug 与 Release 各 41 项回归通过，三场景输出与冻结参考一致。结果见 [G0 验收](../acceptance/g0/2026-10-03.md)，模块使用见 [引擎基础](../runtime/engine-foundation.md)。
 
-G1 为 Complete，G2 为 Active。连续执行计划依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
+G1 与 G2 为 Complete，G3 为 Active。连续执行计划依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
 
 ## 验收环境与性能口径
 
@@ -132,4 +132,4 @@ R1 明确外部导入、跨帧持久、帧内瞬态三种资源类别。历史�
 
 Android 目标无限期 Deferred，不配置 Android SDK、NDK、真机或移动端性能预算。G1 使用 C++17 受限注解生成器，语法范围、增量输出和诊断由契约测试覆盖。
 
-G2 固定内部缓存和资源包格式，U0 选择音频库。以上选择在对应准入阶段解决，渲染核心按既定顺序推进。
+G2 使用 UUID 与指纹分版本缓存，以及版本化目录资源包。U0 选择音频库。以上选择在对应准入阶段解决，渲染核心按既定顺序推进。

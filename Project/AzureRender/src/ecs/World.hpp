@@ -25,6 +25,13 @@ public:
     World(const World&) = delete;
     World& operator=(const World&) = delete;
 
+    void swap(World& other) noexcept {
+        std::swap(nextId_, other.nextId_);
+        freeList_.swap(other.freeList_);
+        systems_.swap(other.systems_);
+        componentArrays_.swap(other.componentArrays_);
+    }
+
     void clear() noexcept {
         systems_.clear();componentArrays_.clear();freeList_.clear();nextId_=0;
     }

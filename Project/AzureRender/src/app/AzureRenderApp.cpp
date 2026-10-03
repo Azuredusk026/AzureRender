@@ -80,6 +80,8 @@ void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
     if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
+    if (!options.projectFile.empty() && !options.editorMode)
+        levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
     runtime_.start();
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
@@ -109,6 +111,24 @@ void AzureRenderApp::run(
     initWindow();
     initVulkan(runOptions_.assetPath);
     renderSettings_ = runOptions_.renderSettings;
+    if (levelSession_) levelSession_->setPrepareHandler([this](const azurerender::Level& level) {
+        vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(level preparation)");
+        const auto previousSettings = renderSettings_;
+        azurerender::RenderContext context; buildRenderContext(context);
+        context.scene = level.scene.renderDescription();
+        auto registry = azurerender::BuiltinRendererCatalog::createRegistry();
+        auto prepared = registry.create(azurerender::sceneTypeName(level.scene.renderSettings.sceneType));
+        try {
+            renderSettings_ = level.scene.renderSettings;
+            context.renderSettings = &renderSettings_;
+            azurerender::validateSceneRendererCapabilities(prepared->capabilities());
+            prepared->onLoad(context);
+        } catch (...) {
+            prepared->onUnload(context); renderSettings_ = previousSettings; throw;
+        }
+        if (sceneRenderer_) sceneRenderer_->onUnload(context);
+        sceneRenderer_ = std::move(prepared);
+    });
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
     }
@@ -292,6 +312,14 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
             collectGpuTiming(frame);
         }
         printGpuTimingSummary();
+    }
+    if (!runOptions_.runtimeReportPath.empty()) {
+        nlohmann::json nodes = nlohmann::json::array();
+        const auto scene = runtime_.snapshotScene();
+        for (const auto& node : scene.nodes) nodes.push_back({{"id", node.id}, {"translation", node.translation}, {"visible", node.visible}});
+        std::ofstream report(runOptions_.runtimeReportPath);
+        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}}.dump(2);
+        if (!report) throw std::runtime_error("Cannot write runtime report");
     }
     runtime_.stop();
     azurerender::RuntimeDiagnostics::instance().print(

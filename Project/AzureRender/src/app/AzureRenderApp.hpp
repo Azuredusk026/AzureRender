@@ -5,6 +5,7 @@
 #endif
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/LevelSession.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/TransientResourcePool.hpp"
@@ -141,6 +142,7 @@ private:
     std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
 #endif
     azurerender::RuntimeLifecycle runtime_;
+    std::unique_ptr<azurerender::LevelSession> levelSession_;
     double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 

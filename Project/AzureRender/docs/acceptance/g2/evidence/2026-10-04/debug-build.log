@@ -1,0 +1,7 @@
+[1/7] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[2/7] Linking CXX static library AzureRuntime.lib
+[3/7] Linking CXX executable AzureAssetLevelTests.exe
+[4/7] Linking CXX executable AzureProjectTests.exe
+[5/7] Linking CXX executable AzurePlayer.exe
+[6/7] Linking CXX executable AzureRender.exe
+[7/7] Linking CXX executable AzureRuntimeLifecycleTests.exe

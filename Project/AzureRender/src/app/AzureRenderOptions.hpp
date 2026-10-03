@@ -13,6 +13,8 @@ class EditorSession;
 }
 
 struct AzureRenderOptions {
+    std::string projectFile;
+    std::string runtimeReportPath;
     std::string assetPath;
     std::string resourceRoot;
     std::string environmentPath;

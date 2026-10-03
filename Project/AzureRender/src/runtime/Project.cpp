@@ -1,4 +1,5 @@
 #include "Project.hpp"
+#include "runtime/Level.hpp"
 
 #include <fstream>
 #include <iomanip>
@@ -101,6 +102,7 @@ Project Project::load(const std::filesystem::path& path) {
 }
 SceneDocument Project::loadStartupScene() const {
     const auto sceneFile = resolve(startupScene);
+    if (sceneFile.extension() == ".azurelevel") { AssetDatabase assets(*this); assets.refresh(); return Level::load(sceneFile, assets).scene; }
     auto scene = SceneDocument::load(sceneFile);
     for (auto& resource : scene.resources) {
         const auto path = resource.path.generic_string();

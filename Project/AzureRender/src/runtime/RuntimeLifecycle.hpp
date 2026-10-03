@@ -14,6 +14,23 @@ class RuntimeLifecycle final {
     enum class State { Created, Running, Paused, Stopped };
     ecs::World& world() noexcept { return world_; }
     State state() const noexcept { return state_; }
+    ecs::Entity entity(const std::string& nodeId) {
+        return nodeValid(nodeId) ? nodes_.at(nodeId) : ecs::kInvalidEntity;
+    }
+    std::string nodeId(ecs::Entity entityId) {
+        for (const auto& node : nodes_) if (node.second == entityId && nodeValid(node.first)) return node.first;
+        return {};
+    }
+    void replaceScene(const SceneDocument& scene, const std::function<void(RuntimeLifecycle&)>& configure = {}) {
+        if (state_ == State::Stopped) throw std::logic_error("Cannot replace a stopped runtime");
+        RuntimeLifecycle candidate;
+        candidate.loadScene(scene);
+        if (configure) configure(candidate);
+        world_.swap(candidate.world_);
+        nodes_.swap(candidate.nodes_);
+        std::swap(scene_, candidate.scene_);
+        pending_.clear();
+    }
     void start() {
         if (state_ != State::Created) throw std::logic_error("Runtime start requires Created");
         state_ = State::Running;

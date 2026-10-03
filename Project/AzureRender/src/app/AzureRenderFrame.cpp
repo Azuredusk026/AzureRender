@@ -71,6 +71,11 @@ void AzureRenderApp::drawFrame() {
     }
 #endif
 
+    if (levelSession_ && levelSession_->poll()) {
+        runOptions_.sceneDocument = runtime_.snapshotScene();
+        azurerender::RuntimeDiagnostics::instance().info("runtime", "Level committed: " + runOptions_.sceneDocument->sceneId);
+    }
+
     std::uint32_t imageIndex = 0;
     const auto acquireStart = std::chrono::steady_clock::now();
     const VkResult acquireResult = vkAcquireNextImageKHR(
