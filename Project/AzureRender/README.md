@@ -90,3 +90,5 @@ Windows 渲染核心的压力场景、质量档位、长跑与窗口恢复结果
 反射生成器、组件存档与属性元数据见 [反射与序列化](docs/runtime/reflection.md)。
 
 UUID 资产、JSON 关卡、Prefab 覆盖与热重载见 [资产与关卡](docs/runtime/assets-levels.md)。
+
+Jolt 物理、固定步长与动作输入见 [物理与输入](docs/runtime/physics-input.md)。

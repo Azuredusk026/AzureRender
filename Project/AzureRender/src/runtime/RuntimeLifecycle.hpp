@@ -14,6 +14,8 @@ class RuntimeLifecycle final {
     enum class State { Created, Running, Paused, Stopped };
     ecs::World& world() noexcept { return world_; }
     State state() const noexcept { return state_; }
+    std::uint64_t sceneRevision() const noexcept { return sceneRevision_; }
+    bool stepPending() const noexcept { return step_; }
     ecs::Entity entity(const std::string& nodeId) {
         return nodeValid(nodeId) ? nodes_.at(nodeId) : ecs::kInvalidEntity;
     }
@@ -30,6 +32,7 @@ class RuntimeLifecycle final {
         nodes_.swap(candidate.nodes_);
         std::swap(scene_, candidate.scene_);
         pending_.clear();
+        ++sceneRevision_;
     }
     void start() {
         if (state_ != State::Created) throw std::logic_error("Runtime start requires Created");
@@ -75,6 +78,7 @@ class RuntimeLifecycle final {
             }
         }
         scene_ = scene;
+        ++sceneRevision_;
         for (const auto& node : scene.nodes) {
             if (node.id.empty() || nodes_.count(node.id))
                 throw std::invalid_argument("Duplicate or empty runtime node id");
@@ -136,6 +140,7 @@ class RuntimeLifecycle final {
         const auto* identity = world_.tryGet<NodeIdentity>(found->second);
         return identity && identity->id == id;
     }
+    std::uint64_t sceneRevision_ = 0;
     SceneDocument scene_;
     std::map<std::string, ecs::Entity> nodes_;
     ecs::World world_;

@@ -65,6 +65,7 @@ if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja")
     unset(_azr_prefix_pos)
 endif()
 
+find_package(Jolt CONFIG REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
@@ -260,6 +261,8 @@ add_library(AzureRuntime STATIC
     src/runtime/Level.cpp
     src/runtime/Prefab.cpp
     src/runtime/LevelSession.cpp
+    src/runtime/PhysicsWorld.cpp
+    src/runtime/GameRuntime.cpp
 )
 add_library(AzureEditor STATIC
     src/editor/EditorCameraController.cpp
@@ -283,7 +286,7 @@ target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
-target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection)
+target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt)
 target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform)
 if(TARGET imgui::imgui)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
@@ -309,6 +312,9 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzurePhysicsInputTests tests/PhysicsInputTests.cpp)
+    target_link_libraries(AzurePhysicsInputTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.PhysicsInput COMMAND AzurePhysicsInputTests)
     add_executable(AzureAssetLevelTests tests/AssetLevelTests.cpp)
     target_link_libraries(AzureAssetLevelTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.AssetLevel COMMAND AzureAssetLevelTests)
@@ -319,6 +325,8 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.MetaGenerator COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_metagen.py" $<TARGET_FILE:AzureMetaGen>)
     add_test(NAME AzureEngine.LevelPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_level_player.py" $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.LevelPlayer PROPERTIES LABELS gpu)
+    add_test(NAME AzureEngine.PhysicsPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_physics_player.py" $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureEngine.PhysicsPlayer PROPERTIES LABELS gpu)
     add_executable(AzureProjectTests tests/ProjectTests.cpp)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
@@ -887,7 +895,8 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g3-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g4-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/reflection.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/assets-levels.md")
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/assets-levels.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/physics-input.md")
 install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
@@ -919,7 +928,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json)
+foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(

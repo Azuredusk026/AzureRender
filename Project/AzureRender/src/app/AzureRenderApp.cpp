@@ -82,6 +82,7 @@ void AzureRenderApp::run(
     if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
     if (!options.projectFile.empty() && !options.editorMode)
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
+    if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_);
     runtime_.start();
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
@@ -318,9 +319,10 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         const auto scene = runtime_.snapshotScene();
         for (const auto& node : scene.nodes) nodes.push_back({{"id", node.id}, {"translation", node.translation}, {"visible", node.visible}});
         std::ofstream report(runOptions_.runtimeReportPath);
-        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}}.dump(2);
+        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}}.dump(2);
         if (!report) throw std::runtime_error("Cannot write runtime report");
     }
+    gameRuntime_.reset();
     runtime_.stop();
     azurerender::RuntimeDiagnostics::instance().print(
         "render", "Rendered frames: " + std::to_string(renderedFrames));
@@ -441,7 +443,16 @@ void AzureRenderApp::buildSceneFrameData(
         ? (fixedSimulationStarted_ ? fixedDeltaSeconds_ : 0.0F)
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
-    const float deltaSeconds = static_cast<float>(runtime_.beginFrame(rawDeltaSeconds));
+    if (gameRuntime_) {
+        bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
+#if AZURE_WITH_EDITOR
+        if (editorLayer_) focused = focused && editorLayer_->acceptsViewportShortcuts();
+#endif
+        gameRuntime_->input().setFocused(focused);
+        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE})
+            gameRuntime_->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
+    }
+    const float deltaSeconds = static_cast<float>(gameRuntime_ ? gameRuntime_->advance(rawDeltaSeconds) : runtime_.beginFrame(rawDeltaSeconds));
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
         runOptions_.sceneDocument = runtime_.snapshotScene();
@@ -758,6 +769,7 @@ void AzureRenderApp::updateTechnicalSequenceState(
 }
 
 void AzureRenderApp::cleanup() {
+    gameRuntime_.reset();
     runtime_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
@@ -1210,6 +1222,10 @@ void AzureRenderApp::keyCallback(
 #endif
 
 #if !AZURE_WITH_EDITOR
+    if (application->gameRuntime_ && (key == GLFW_KEY_A || key == GLFW_KEY_D || key == GLFW_KEY_W || key == GLFW_KEY_S || key == GLFW_KEY_SPACE)) {
+        application->gameRuntime_->input().key(key, action != GLFW_RELEASE);
+        if (!application->runtime_.world().componentArray<azurerender::game::Character>().entities().empty()) return;
+    }
     if (action == GLFW_PRESS && key == GLFW_KEY_P) {
         if (application->runtime_.state() == azurerender::RuntimeLifecycle::State::Running) application->runtime_.pause();
         else if (application->runtime_.state() == azurerender::RuntimeLifecycle::State::Paused) application->runtime_.resume();

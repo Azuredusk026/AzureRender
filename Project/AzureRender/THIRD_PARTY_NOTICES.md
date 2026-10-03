@@ -20,3 +20,5 @@ static library is not linkable from the MinGW toolchain.
 The public demo under `assets_public/` is project-owned. Private character assets and derived captures are intentionally excluded from release packages.
 
 No license grant for the AzureRender project source itself is established by this notice.
+
+Jolt Physics 5.6.0 (https://github.com/jrouwe/JoltPhysics/tree/v5.6.0) is linked as a static library under the MIT License. The package copyright is installed as `licenses/joltphysics-LICENSE.txt`. Local wrappers use the public PhysicsSystem, CharacterVirtual, collision-filter and query APIs.

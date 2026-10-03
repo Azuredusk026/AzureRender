@@ -6,6 +6,7 @@
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/LevelSession.hpp"
+#include "runtime/GameRuntime.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/TransientResourcePool.hpp"
@@ -143,6 +144,7 @@ private:
 #endif
     azurerender::RuntimeLifecycle runtime_;
     std::unique_ptr<azurerender::LevelSession> levelSession_;
+    std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
     double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 
