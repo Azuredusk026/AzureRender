@@ -1,9 +1,11 @@
 #pragma once
 
 #include <condition_variable>
+#include <atomic>
 #include <exception>
 #include <functional>
 #include <mutex>
+#include <memory>
 #include <stdexcept>
 #include <thread>
 #include <vector>
@@ -27,22 +29,63 @@ public:
     RecordingWorkerPool& operator=(const RecordingWorkerPool&) = delete;
 
     void run(std::vector<Task> tasks) {
-        if (std::this_thread::get_id() != owner_)
-            throw std::logic_error("Recording dispatch must run on its owner thread");
-        if (tasks.empty()) return;
-        std::unique_lock<std::mutex> lock(mutex_);
-        tasks_ = std::move(tasks);
-        failures_.assign(tasks_.size(), {});
-        remaining_ = tasks_.size();
-        next_ = 0;
-        ++generation_;
-        ready_.notify_all();
-        done_.wait(lock, [this] { return remaining_ == 0; });
-        tasks_.clear();
-        for (const auto& failure : failures_)
-            if (failure) std::rethrow_exception(failure);
+        dispatch(std::move(tasks), false);
+    }
+    // The caller reserves the first task and uses its own command-pool slot.
+    void runWithCaller(std::vector<Task> tasks) {
+        dispatch(std::move(tasks), true);
+    }
+    [[nodiscard]] std::size_t recordingThreadCount() const noexcept {
+        return workers_.size() + 1;
     }
 private:
+    struct Batch {
+        explicit Batch(std::vector<Task> work, bool participate)
+            : tasks(std::move(work)), failures(tasks.size()),
+              remaining(tasks.size()), next(participate ? 1 : 0) {}
+        const std::vector<Task> tasks;
+        std::vector<std::exception_ptr> failures;
+        std::atomic<std::size_t> remaining;
+        std::atomic<std::size_t> next;
+    };
+    void dispatch(std::vector<Task> tasks, bool participate) {
+        if (std::this_thread::get_id() != owner_)
+            throw std::logic_error("Recording dispatch must run on its owner thread");
+        std::unique_lock<std::mutex> lock(mutex_);
+        if (dispatching_) throw std::logic_error("Recording dispatch cannot be nested");
+        if (tasks.empty()) return;
+        const auto batch = std::make_shared<Batch>(std::move(tasks), participate);
+        dispatching_ = true;
+        active_ = batch;
+        ++generation_;
+        lock.unlock();
+        ready_.notify_all();
+        if (participate) {
+            executeTask(batch, 0, workers_.size());
+            executeBatch(batch, workers_.size());
+        }
+        lock.lock();
+        done_.wait(lock, [&] { return batch->remaining.load(std::memory_order_acquire) == 0; });
+        active_.reset();
+        dispatching_ = false;
+        for (const auto& failure : batch->failures)
+            if (failure) std::rethrow_exception(failure);
+    }
+    void executeTask(const std::shared_ptr<Batch>& batch, std::size_t index, std::size_t worker) {
+        try { batch->tasks[index](worker); }
+        catch (...) { batch->failures[index] = std::current_exception(); }
+        if (batch->remaining.fetch_sub(1, std::memory_order_acq_rel) == 1) {
+            std::lock_guard<std::mutex> lock(mutex_);
+            done_.notify_one();
+        }
+    }
+    void executeBatch(const std::shared_ptr<Batch>& batch, std::size_t worker) {
+        for (;;) {
+            const auto index = batch->next.fetch_add(1, std::memory_order_relaxed);
+            if (index >= batch->tasks.size()) return;
+            executeTask(batch, index, worker);
+        }
+    }
     void work(std::size_t worker) {
         std::size_t seen = 0;
         std::unique_lock<std::mutex> lock(mutex_);
@@ -50,19 +93,12 @@ private:
             ready_.wait(lock, [&] { return stopping_ || generation_ != seen; });
             if (stopping_) return;
             seen = generation_;
-            for (;;) {
-                const auto index = next_++;
-                if (index >= tasks_.size()) break;
-                // Dispatch owns this array until every task has completed.
-                // Avoid copying the potentially large captured frame context.
-                const auto* task = &tasks_[index];
-                lock.unlock();
-                std::exception_ptr failure;
-                try { (*task)(worker); } catch (...) { failure = std::current_exception(); }
-                lock.lock();
-                failures_[index] = failure;
-                if (--remaining_ == 0) done_.notify_one();
-            }
+            // Late workers retain the previous batch while the caller publishes
+            // the next frame. Returning never invalidates their task storage.
+            const auto batch = active_;
+            lock.unlock();
+            if (batch) executeBatch(batch, worker);
+            lock.lock();
         }
     }
     void stop() noexcept {
@@ -71,13 +107,12 @@ private:
         for (auto& worker : workers_) if (worker.joinable()) worker.join();
     }
     std::vector<std::thread> workers_;
-    std::vector<Task> tasks_;
-    std::vector<std::exception_ptr> failures_;
+    std::shared_ptr<Batch> active_;
     std::mutex mutex_;
     std::condition_variable ready_, done_;
-    std::size_t remaining_ = 0, generation_ = 0;
+    std::size_t generation_ = 0;
     bool stopping_ = false;
-    std::size_t next_ = 0;
+    bool dispatching_ = false;
     const std::thread::id owner_;
 };
 

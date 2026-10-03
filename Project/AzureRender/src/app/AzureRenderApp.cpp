@@ -1144,7 +1144,7 @@ void AzureRenderApp::createCommandPool() {
     createInfo.queueFamilyIndex = *indices.graphics;
     vkCheck(vkCreateCommandPool(device_, &createInfo, nullptr, &commandPool_), "vkCreateCommandPool");
     workerCommandPools_ = std::make_unique<azurerender::rhi::WorkerCommandPools>(
-        device_, *indices.graphics, kMaxFramesInFlight, 4);
+        device_, *indices.graphics, kMaxFramesInFlight, recordingWorkers_.recordingThreadCount());
 }
 
 void AzureRenderApp::createCommandBuffers() {

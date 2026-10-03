@@ -835,8 +835,10 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/render-graph.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 install(
     FILES

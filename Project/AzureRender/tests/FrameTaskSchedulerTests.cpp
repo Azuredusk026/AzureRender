@@ -6,6 +6,7 @@
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
 #include <atomic>
+#include <chrono>
 #include <array>
 #include <thread>
 #include <stdexcept>
@@ -78,6 +79,53 @@ int main() {
     if (azurerender::morphBounds(morphAsset, {0.5F, 0}).maximum[0] != 13.0F) return 1;
     {
         azurerender::RecordingWorkerPool workers(4);
+        const auto owner = std::this_thread::get_id();
+        if (workers.recordingThreadCount() != 5) return 1;
+        std::array<std::atomic<int>, 5> participating{};
+        std::atomic<int> callerTasks{0};
+        std::atomic<bool> invalidParticipant{false};
+        for (int round = 0; round < 100; ++round) {
+            std::vector<azurerender::RecordingWorkerPool::Task> tasks;
+            tasks.push_back([&](std::size_t index) {
+                if (index != 4 || std::this_thread::get_id() != owner)
+                    invalidParticipant = true;
+                ++callerTasks;
+            });
+            for (int i = 0; i < 64; ++i) tasks.push_back([&](std::size_t index) {
+                if (index >= participating.size()) { invalidParticipant = true; return; }
+                if (participating[index].fetch_add(1) != 0) invalidParticipant = true;
+                std::this_thread::yield();
+                participating[index].fetch_sub(1);
+                ++callerTasks;
+            });
+            workers.runWithCaller(std::move(tasks));
+        }
+        if (invalidParticipant || callerTasks != 6500) return 1;
+        bool callerFailure = false;
+        try { workers.runWithCaller({[](std::size_t) { throw std::runtime_error("caller failure"); },
+            [&](std::size_t) { ++callerTasks; }}); }
+        catch (const std::runtime_error&) { callerFailure = true; }
+        if (!callerFailure || callerTasks != 6501) return 1;
+        workers.runWithCaller({[&](std::size_t) { ++callerTasks; }});
+        if (callerTasks != 6502) return 1;
+        bool callerNestedRejected = false;
+        workers.runWithCaller({[&](std::size_t) {
+            try { workers.runWithCaller({}); }
+            catch (const std::logic_error&) { callerNestedRejected = true; }
+        }});
+        if (!callerNestedRejected) return 1;
+        std::mutex overlapMutex;
+        std::condition_variable overlapReady;
+        bool backgroundRan = false;
+        workers.runWithCaller({[&](std::size_t) {
+            std::unique_lock<std::mutex> lock(overlapMutex);
+            if (!overlapReady.wait_for(lock, std::chrono::seconds(1), [&] { return backgroundRan; }))
+                throw std::runtime_error("Caller participation did not overlap a worker");
+        }, [&](std::size_t index) {
+            std::lock_guard<std::mutex> lock(overlapMutex);
+            backgroundRan = index < 4 && std::this_thread::get_id() != owner;
+            overlapReady.notify_one();
+        }});
         std::atomic<int> executed{0};
         for (int round = 0; round < 100; ++round) {
             std::vector<azurerender::RecordingWorkerPool::Task> tasks;

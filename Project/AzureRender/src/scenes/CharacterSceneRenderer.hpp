@@ -370,10 +370,13 @@ private:
     void recordShadowPass(const RenderContext& context);
     void recordShadowDraws(const RenderContext& context,
         std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount,
-        const SceneInstanceSnapshot* snapshot = nullptr);
+        const SceneInstanceSnapshot* snapshot = nullptr,
+        rhi::ICommandRecorder* recordingCommands = nullptr);
     void recordMainPass(const RenderContext& context);
     void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0,
-        const SceneInstanceSnapshot* snapshot = nullptr);
+        const SceneInstanceSnapshot* snapshot = nullptr,
+        std::size_t firstTransparent = 0, std::size_t transparentCount = static_cast<std::size_t>(-1),
+        rhi::ICommandRecorder* recordingCommands = nullptr, SceneSubmissionCounters* recordingCounters = nullptr);
     rhi::RenderPassBeginDesc mainPassDescription(const RenderContext& context) const;
     void drawPrimitive(
         rhi::ICommandRecorder& commands,

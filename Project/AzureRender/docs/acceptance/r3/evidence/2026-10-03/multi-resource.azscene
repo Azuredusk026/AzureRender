@@ -1,0 +1,179 @@
+AzureRender Scene v1
+schemaVersion 3
+renderSettingsVersion 7
+sceneId "test_model"
+resourceCount 32
+resource "asset-0" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-1" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-2" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-3" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-4" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-5" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-6" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-7" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-8" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-9" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-10" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-11" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-12" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-13" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-14" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-15" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-16" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-17" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-18" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-19" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-20" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-21" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-22" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-23" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-24" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-25" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-26" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-27" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-28" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-29" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-30" "gltf" "../../../../../assets_public/test_model.gltf"
+resource "asset-31" "gltf" "../../../../../assets_public/test_model.gltf"
+nodeCount 32
+node "node-0" "mesh-0" "" "asset-0"
+visible true
+transform 0.0 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-1" "mesh-1" "" "asset-1"
+visible true
+transform 0.15 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-2" "mesh-2" "" "asset-2"
+visible true
+transform 0.3 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-3" "mesh-3" "" "asset-3"
+visible true
+transform 0.44999999999999996 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-4" "mesh-4" "" "asset-4"
+visible true
+transform 0.6 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-5" "mesh-5" "" "asset-5"
+visible true
+transform 0.75 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-6" "mesh-6" "" "asset-6"
+visible true
+transform 0.8999999999999999 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-7" "mesh-7" "" "asset-7"
+visible true
+transform 1.05 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "node-8" "mesh-8" "" "asset-8"
+visible true
+transform 0.0 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-9" "mesh-9" "" "asset-9"
+visible true
+transform 0.15 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-10" "mesh-10" "" "asset-10"
+visible true
+transform 0.3 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-11" "mesh-11" "" "asset-11"
+visible true
+transform 0.44999999999999996 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-12" "mesh-12" "" "asset-12"
+visible true
+transform 0.6 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-13" "mesh-13" "" "asset-13"
+visible true
+transform 0.75 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-14" "mesh-14" "" "asset-14"
+visible true
+transform 0.8999999999999999 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-15" "mesh-15" "" "asset-15"
+visible true
+transform 1.05 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "node-16" "mesh-16" "" "asset-16"
+visible true
+transform 0.0 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-17" "mesh-17" "" "asset-17"
+visible true
+transform 0.15 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-18" "mesh-18" "" "asset-18"
+visible true
+transform 0.3 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-19" "mesh-19" "" "asset-19"
+visible true
+transform 0.44999999999999996 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-20" "mesh-20" "" "asset-20"
+visible true
+transform 0.6 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-21" "mesh-21" "" "asset-21"
+visible true
+transform 0.75 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-22" "mesh-22" "" "asset-22"
+visible true
+transform 0.8999999999999999 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-23" "mesh-23" "" "asset-23"
+visible true
+transform 1.05 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "node-24" "mesh-24" "" "asset-24"
+visible true
+transform 0.0 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-25" "mesh-25" "" "asset-25"
+visible true
+transform 0.15 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-26" "mesh-26" "" "asset-26"
+visible true
+transform 0.3 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-27" "mesh-27" "" "asset-27"
+visible true
+transform 0.44999999999999996 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-28" "mesh-28" "" "asset-28"
+visible true
+transform 0.6 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-29" "mesh-29" "" "asset-29"
+visible true
+transform 0.75 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-30" "mesh-30" "" "asset-30"
+visible true
+transform 0.8999999999999999 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "node-31" "mesh-31" "" "asset-31"
+visible true
+transform 1.05 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+lightCount 0
+showcasePreset 0
+styleMaskStrength 1
+diffuseBandThreshold 0.4
+shadowMaximumFilterRadiusTexels 8
+innerOutlineEnabled true
+outlineStrength 0.4
+gradeExposureEv 0
+characterBackgroundEnabled true
+characterPlatformEnabled true
+blackholeQuality cinematic
+blackholeCamera front
+sceneRenderer character

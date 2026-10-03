@@ -1,0 +1,258 @@
+{
+  "instances": 32,
+  "frames": 300,
+  "repeats": 3,
+  "scene": "multi-resource.azscene",
+  "samples": {
+    "parallel_gpu": [
+      {
+        "cpuRecordingMs": 0.402453,
+        "gpuMs": 4.220579,
+        "draws": 353.0,
+        "workerPasses": 1200,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 2400,
+        "graphPreparationMilliseconds": 0.17934266666666665,
+        "workerWaitMilliseconds": 0.135297,
+        "graphExecutionMilliseconds": 0.08776933333333334
+      },
+      {
+        "cpuRecordingMs": 0.44463733333333333,
+        "gpuMs": 4.384376,
+        "draws": 353.0,
+        "workerPasses": 1200,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 2400,
+        "graphPreparationMilliseconds": 0.20104466666666668,
+        "workerWaitMilliseconds": 0.14683033333333334,
+        "graphExecutionMilliseconds": 0.09670633333333334
+      },
+      {
+        "cpuRecordingMs": 0.48712,
+        "gpuMs": 4.53253,
+        "draws": 353.0,
+        "workerPasses": 1200,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 2400,
+        "graphPreparationMilliseconds": 0.21303166666666667,
+        "workerWaitMilliseconds": 0.17067600000000002,
+        "graphExecutionMilliseconds": 0.103351
+      }
+    ],
+    "serial_gpu": [
+      {
+        "cpuRecordingMs": 0.3249206666666667,
+        "gpuMs": 4.23344,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.16853533333333334,
+        "workerWaitMilliseconds": 0.0005883333333333333,
+        "graphExecutionMilliseconds": 0.155748
+      },
+      {
+        "cpuRecordingMs": 0.3675093333333333,
+        "gpuMs": 4.426747,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.19267966666666667,
+        "workerWaitMilliseconds": 0.0006373333333333334,
+        "graphExecutionMilliseconds": 0.17412866666666665
+      },
+      {
+        "cpuRecordingMs": 0.423318,
+        "gpuMs": 4.515818,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 9900,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.222166,
+        "workerWaitMilliseconds": 0.0007369999999999999,
+        "graphExecutionMilliseconds": 0.200343
+      }
+    ],
+    "parallel_cpu": [
+      {
+        "cpuRecordingMs": 0.37391966666666665,
+        "gpuMs": 4.387867,
+        "draws": 353.0,
+        "workerPasses": 900,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 2100,
+        "graphPreparationMilliseconds": 0.16316766666666666,
+        "workerWaitMilliseconds": 0.133605,
+        "graphExecutionMilliseconds": 0.07705166666666667
+      },
+      {
+        "cpuRecordingMs": 0.400644,
+        "gpuMs": 4.615923,
+        "draws": 353.0,
+        "workerPasses": 900,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 2100,
+        "graphPreparationMilliseconds": 0.17568133333333333,
+        "workerWaitMilliseconds": 0.14003366666666667,
+        "graphExecutionMilliseconds": 0.08487733333333333
+      },
+      {
+        "cpuRecordingMs": 0.40828133333333333,
+        "gpuMs": 4.648232,
+        "draws": 353.0,
+        "workerPasses": 900,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 2100,
+        "graphPreparationMilliseconds": 0.18754333333333334,
+        "workerWaitMilliseconds": 0.13058899999999998,
+        "graphExecutionMilliseconds": 0.09008566666666667
+      }
+    ],
+    "serial_cpu": [
+      {
+        "cpuRecordingMs": 0.28919533333333336,
+        "gpuMs": 4.426039,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.15299633333333332,
+        "workerWaitMilliseconds": 0.0004966666666666666,
+        "graphExecutionMilliseconds": 0.13555866666666666
+      },
+      {
+        "cpuRecordingMs": 0.3075853333333333,
+        "gpuMs": 4.501429,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.165859,
+        "workerWaitMilliseconds": 0.0005383333333333334,
+        "graphExecutionMilliseconds": 0.141138
+      },
+      {
+        "cpuRecordingMs": 0.42074233333333333,
+        "gpuMs": 4.679757,
+        "draws": 353.0,
+        "workerPasses": 0,
+        "visibleRatio": 1.0,
+        "indirectDrawCalls": 0,
+        "workerChunks": 0,
+        "graphPreparationMilliseconds": 0.22419466666666665,
+        "workerWaitMilliseconds": 0.0007970000000000001,
+        "graphExecutionMilliseconds": 0.19566633333333333
+      }
+    ]
+  },
+  "median": {
+    "parallel_gpu": {
+      "cpuRecordingMs": 0.44463733333333333,
+      "gpuMs": 4.384376,
+      "draws": 353.0,
+      "workerPasses": 1200,
+      "visibleRatio": 1.0,
+      "indirectDrawCalls": 9900,
+      "workerChunks": 2400,
+      "graphPreparationMilliseconds": 0.20104466666666668,
+      "workerWaitMilliseconds": 0.14683033333333334,
+      "graphExecutionMilliseconds": 0.09670633333333334
+    },
+    "serial_gpu": {
+      "cpuRecordingMs": 0.3675093333333333,
+      "gpuMs": 4.426747,
+      "draws": 353.0,
+      "workerPasses": 0,
+      "visibleRatio": 1.0,
+      "indirectDrawCalls": 9900,
+      "workerChunks": 0,
+      "graphPreparationMilliseconds": 0.19267966666666667,
+      "workerWaitMilliseconds": 0.0006373333333333334,
+      "graphExecutionMilliseconds": 0.17412866666666665
+    },
+    "parallel_cpu": {
+      "cpuRecordingMs": 0.400644,
+      "gpuMs": 4.615923,
+      "draws": 353.0,
+      "workerPasses": 900,
+      "visibleRatio": 1.0,
+      "indirectDrawCalls": 0,
+      "workerChunks": 2100,
+      "graphPreparationMilliseconds": 0.17568133333333333,
+      "workerWaitMilliseconds": 0.133605,
+      "graphExecutionMilliseconds": 0.08487733333333333
+    },
+    "serial_cpu": {
+      "cpuRecordingMs": 0.3075853333333333,
+      "gpuMs": 4.501429,
+      "draws": 353.0,
+      "workerPasses": 0,
+      "visibleRatio": 1.0,
+      "indirectDrawCalls": 0,
+      "workerChunks": 0,
+      "graphPreparationMilliseconds": 0.165859,
+      "workerWaitMilliseconds": 0.0005383333333333334,
+      "graphExecutionMilliseconds": 0.141138
+    }
+  },
+  "spread": {
+    "parallel_gpu": {
+      "cpuMinimumMs": 0.402453,
+      "cpuMaximumMs": 0.48712,
+      "gpuMinimumMs": 4.220579,
+      "gpuMaximumMs": 4.53253
+    },
+    "serial_gpu": {
+      "cpuMinimumMs": 0.3249206666666667,
+      "cpuMaximumMs": 0.423318,
+      "gpuMinimumMs": 4.23344,
+      "gpuMaximumMs": 4.515818
+    },
+    "parallel_cpu": {
+      "cpuMinimumMs": 0.37391966666666665,
+      "cpuMaximumMs": 0.40828133333333333,
+      "gpuMinimumMs": 4.387867,
+      "gpuMaximumMs": 4.648232
+    },
+    "serial_cpu": {
+      "cpuMinimumMs": 0.28919533333333336,
+      "cpuMaximumMs": 0.42074233333333333,
+      "gpuMinimumMs": 4.426039,
+      "gpuMaximumMs": 4.679757
+    }
+  },
+  "pairedRatios": [
+    {
+      "repeat": 0,
+      "cpuRatio": 1.2386192732174623,
+      "gpuRatio": 0.9969620450508334
+    },
+    {
+      "repeat": 1,
+      "cpuRatio": 1.2098667788935973,
+      "gpuRatio": 0.9904284116530716
+    },
+    {
+      "repeat": 2,
+      "cpuRatio": 1.150718844934541,
+      "gpuRatio": 1.0037007691629733
+    }
+  ],
+  "budget": {
+    "cpuRatio": 1.2098667788935973,
+    "gpuRatio": 0.9904284116530716,
+    "passed": false
+  }
+}

@@ -49,7 +49,8 @@ std::vector<RecordedCall> runFrame(
     const bool withPropResource = false,
     const bool computeSkinning = false,
     const float sceneOffset = 0.0F,
-    const bool gizmoTranslated = false) {
+    const bool gizmoTranslated = false,
+    const bool partitionedTransparency = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -69,6 +70,8 @@ std::vector<RecordedCall> runFrame(
     heroNode.resourceId = "asset-0";
     heroNode.translation = {sceneOffset, 0.0F, 0.0F};
     context.scene.nodes.push_back(heroNode);
+    if (partitionedTransparency)
+        for (int i = 1; i < 32; ++i) context.scene.nodes.push_back(heroNode);
     if (withPropResource) {
         azurerender::scene::SceneNodeDesc propNode{};
         propNode.resourceId = "prop-1";
@@ -123,12 +126,36 @@ std::vector<RecordedCall> runFrame(
     std::string error;
     if (!graph.compile(error)) throw std::runtime_error(error);
     const std::size_t expectedPasses =
-        2 + (computeSkinning ? context.scene.resources.size() + 1 : 0);
+        2 + (computeSkinning ? 2 : 0);
     if (graph.passes().size() != expectedPasses) {
         throw std::runtime_error("Character registered an unexpected pass count");
     }
+    if (computeSkinning) {
+        const auto& skin = graph.passes().front();
+        const auto meshCount = context.scene.resources.size();
+        if (skin.writes.size() != meshCount || skin.reads.size() != meshCount + 1)
+            throw std::runtime_error("Batched skinning must declare every mesh and shared joints");
+    }
     if (!recorder.calls.empty()) throw std::runtime_error("Registration must not record commands");
     graph.execute(&recorder);
+    if (partitionedTransparency) {
+        const auto main = std::find_if(graph.passes().begin(), graph.passes().end(),
+            [](const auto& pass) { return pass.name == "character-main"; });
+        if (main == graph.passes().end() || main->recordingChunks.size() <= 2)
+            throw std::runtime_error("Large transparent workload must be partitioned");
+        const auto draws = [](const auto& calls) {
+            std::vector<std::string> result;
+            for (const auto& call : calls)
+                if (call.name == "drawIndexed" || call.name == "drawIndexedIndirect")
+                    result.push_back(call.name + call.detail);
+            return result;
+        };
+        const auto partitionedDraws = draws(recorder.calls);
+        recorder.calls.clear();
+        graph.execute(&recorder, {}, true);
+        if (partitionedDraws != draws(recorder.calls))
+            throw std::runtime_error("Transparent partitions changed drawing order or coverage");
+    }
     renderer.onUnload(context);
     return recorder.calls;
 }
@@ -311,6 +338,8 @@ int main() {
         return 5;
     }
     std::cerr << "Multi-resource pass contract passed\n";
+    try { runFrame(true, shaderDirectory, false, false, false, false, 0.0F, false, true); }
+    catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 1; }
     std::vector<RecordedCall> computeSkinning;
     try {
         std::cerr << "Starting compute skinning pass contract\n";

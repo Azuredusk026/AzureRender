@@ -985,10 +985,7 @@ void AzureRenderApp::recordCommandBuffer(
     if (!runOptions_.parallelRecordingDisabled) {
         recordingOrder.reserve(graph.executionOrder().size());
         for (const auto pass : graph.executionOrder())
-            if (graph.passes()[pass].parallelRecording && graph.passes()[pass].graphicsPass)
-                recordingOrder.push_back(pass);
-        for (const auto pass : graph.executionOrder())
-            if (graph.passes()[pass].parallelRecording && !graph.passes()[pass].graphicsPass)
+            if (graph.passes()[pass].parallelRecording)
                 recordingOrder.push_back(pass);
     }
     for (const auto pass : recordingOrder) {
@@ -1018,7 +1015,7 @@ void AzureRenderApp::recordCommandBuffer(
         }
     }
     const auto workerStart = std::chrono::steady_clock::now();
-    recordingWorkers_.run(std::move(recordingTasks));
+    recordingWorkers_.runWithCaller(std::move(recordingTasks));
     const auto executionStart = std::chrono::steady_clock::now();
     graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
         if (recordedPasses[pass].empty()) {

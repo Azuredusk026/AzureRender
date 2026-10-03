@@ -703,6 +703,17 @@ void CharacterSceneRenderer::registerPasses(
         "character-cluster-indices",
         clusterIndexBuffers_[context.currentFrame]);
 
+    std::optional<RenderGraph::PassId> skinningPass;
+    if (computeSkinningEnabled_) {
+        skinningPass = graph.addCommandPass("character-skinning",
+            [this, frozenContext, weights = instanceSnapshot_->settings.morphWeights,
+             meshCount = meshResourceCount_](rhi::ICommandRecorder& commands) {
+                for (std::uint32_t meshKey = 0; meshKey < meshCount; ++meshKey)
+                    recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &weights);
+            }, true);
+        graph.use(*skinningPass, jointResource, RenderGraphUsage::Storage, false);
+    }
+
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
         const rhi::GpuBuffer& input = sourceVertexBuffer(meshKey);
         rhi::BufferBarrierDesc vertexInitial{};
@@ -733,16 +744,9 @@ void CharacterSceneRenderer::registerPasses(
         indexResources[meshKey] = graph.importBuffer(
             "character-index-" + std::to_string(meshKey), indexInitial);
 
-        if (computeSkinningEnabled_) {
-            const auto skin = graph.addCommandPass(
-                "character-skinning-" + std::to_string(meshKey),
-                [this, frozenContext, meshKey, weights = instanceSnapshot_->settings.morphWeights](rhi::ICommandRecorder& commands) {
-                    const auto& context = *frozenContext;
-                    recordComputeSkinningMesh(context, meshKey, &commands, &weights);
-                }, true);
-            graph.use(skin, inputResource, RenderGraphUsage::Storage, false);
-            graph.use(skin, jointResource, RenderGraphUsage::Storage, false);
-            graph.use(skin, vertexResources[meshKey], RenderGraphUsage::Storage, true);
+        if (skinningPass) {
+            graph.use(*skinningPass, inputResource, RenderGraphUsage::Storage, false);
+            graph.use(*skinningPass, vertexResources[meshKey], RenderGraphUsage::Storage, true);
         }
     }
 
@@ -766,9 +770,7 @@ void CharacterSceneRenderer::registerPasses(
     }
     const auto shadow = graph.addGraphicsPass("character-shadow", shadowBegin, [this, frozenContext, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
-        auto recordingContext = context;
-        recordingContext.commands = &commands;
-        recordShadowDraws(recordingContext, 0, kShadowCascadeCount, frozenInstances.get());
+        recordShadowDraws(context, 0, kShadowCascadeCount, frozenInstances.get(), &commands);
     }, [frozenContext](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         if (context.gpuTimingEnabled)
@@ -784,7 +786,9 @@ void CharacterSceneRenderer::registerPasses(
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
     mainCounters->instances = frozenInstances->instances.size();
     mainCounters->visibleInstances = frozenInstances->visibleIndices.size();
-    const auto stageCounters = std::make_shared<std::array<SceneSubmissionCounters, 3>>();
+    const auto transparentChunks = transparentDrawsPrepared_
+        ? std::min<std::size_t>(4, std::max<std::size_t>(1, (frozenInstances->visibleIndices.size() + 7) / 8)) : 0;
+    const auto stageCounters = std::make_shared<std::vector<SceneSubmissionCounters>>(1 + transparentChunks);
     std::optional<RenderGraph::ResourceId> indirectResource;
     if (gpuCullingFrames_[context.currentFrame]) {
         auto* culling = gpuCullingFrames_[context.currentFrame].get();
@@ -813,10 +817,8 @@ void CharacterSceneRenderer::registerPasses(
     }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
-        auto recordingContext = context;
-        recordingContext.commands = &commands;
-        recordingContext.submissionCounters = context.submissionCounters != nullptr ? mainCounters.get() : nullptr;
-        recordMainDraws(recordingContext, 0, frozenInstances.get());
+        recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
+            &commands, context.submissionCounters != nullptr ? mainCounters.get() : nullptr);
     }, [frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         for (const auto& counters : *stageCounters) {
@@ -839,14 +841,13 @@ void CharacterSceneRenderer::registerPasses(
             commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
     std::vector<std::function<void(rhi::ICommandRecorder&)>> mainChunks;
-    for (const std::uint32_t stage : {4U, 3U}) {
-        if (stage == 3 && !transparentDrawsPrepared_) continue;
-        mainChunks.push_back([this, frozenContext, stageCounters, stage, frozenInstances](rhi::ICommandRecorder& commands) {
-            auto recordingContext = *frozenContext;
-            recordingContext.commands = &commands;
-            recordingContext.submissionCounters = frozenContext->submissionCounters != nullptr
-                ? &(*stageCounters)[stage == 4 ? 0 : 2] : nullptr;
-            recordMainDraws(recordingContext, stage, frozenInstances.get());
+    for (std::size_t chunk = 0; chunk <= transparentChunks; ++chunk) {
+        const auto count = frozenInstances->visibleIndices.size();
+        const auto first = chunk == 0 ? 0 : count * (chunk - 1) / transparentChunks;
+        const auto end = chunk == 0 ? 0 : count * chunk / transparentChunks;
+        mainChunks.push_back([this, frozenContext, stageCounters, chunk, first, end, frozenInstances](rhi::ICommandRecorder& commands) {
+            recordMainDraws(*frozenContext, chunk == 0 ? 4U : 3U, frozenInstances.get(), first, end - first,
+                &commands, frozenContext->submissionCounters != nullptr ? &(*stageCounters)[chunk] : nullptr);
         });
     }
     graph.setRecordingChunks(main, std::move(mainChunks));
@@ -2783,9 +2784,9 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
 
 void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
     std::uint32_t firstCascade, std::uint32_t cascadeCount,
-    const SceneInstanceSnapshot* snapshot) {
+    const SceneInstanceSnapshot* snapshot, rhi::ICommandRecorder* recordingCommands) {
     if (snapshot == nullptr) throw std::logic_error("Shadow recording requires an instance snapshot");
-    rhi::ICommandRecorder& commands = *context.commands;
+    rhi::ICommandRecorder& commands = recordingCommands != nullptr ? *recordingCommands : *context.commands;
 
     const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
     commands.bindPipeline(shadowPipeline_);
@@ -3029,9 +3030,14 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
 }
 
 void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::uint32_t stage,
-    const SceneInstanceSnapshot* snapshot) {
+    const SceneInstanceSnapshot* snapshot, std::size_t firstTransparent, std::size_t transparentCount, rhi::ICommandRecorder* recordingCommands, SceneSubmissionCounters* recordingCounters) {
     if (snapshot == nullptr) throw std::logic_error("Main recording requires an instance snapshot");
-    rhi::ICommandRecorder& commands = *context.commands;
+    if (firstTransparent > snapshot->visibleIndices.size())
+        throw std::out_of_range("Transparent recording range");
+    const auto transparentEnd = firstTransparent
+        + std::min(transparentCount, snapshot->visibleIndices.size() - firstTransparent);
+    rhi::ICommandRecorder& commands = recordingCommands != nullptr ? *recordingCommands : *context.commands;
+    auto* counters = recordingCommands != nullptr ? recordingCounters : context.submissionCounters;
 
     commands.setViewport(
         static_cast<float>(context.renderExtent.width),
@@ -3043,8 +3049,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     if (bindlessTextures_) {
         commands.bindDescriptorSet(
             pipelineLayout_, descriptorSets_[context.currentFrame]);
-        if (context.submissionCounters != nullptr) {
-            ++context.submissionCounters->descriptorSetBinds;
+        if (counters != nullptr) {
+            ++counters->descriptorSetBinds;
         }
     }
 
@@ -3057,8 +3063,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                 context.currentFrame * asset_.materials.size();
             commands.bindDescriptorSet(
                 pipelineLayout_, descriptorSets_[backgroundDescriptorIndex]);
-            if (context.submissionCounters != nullptr) {
-                ++context.submissionCounters->descriptorSetBinds;
+            if (counters != nullptr) {
+                ++counters->descriptorSetBinds;
             }
         }
         commands.draw(3);
@@ -3077,8 +3083,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             sizeof(MaterialPushConstants),
             &outlineMorphConstants,
             sizeof(outlineMorphConstants));
-        if (context.submissionCounters != nullptr) {
-            ++context.submissionCounters->pushConstantUpdates;
+        if (counters != nullptr) {
+            ++counters->pushConstantUpdates;
         }
         for (const std::array<std::uint32_t, 3>& span :
              snapshot->visibleSpans) {
@@ -3110,8 +3116,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                             + globalMaterialBase + primitive.materialIndex;
                         commands.bindDescriptorSet(
                             pipelineLayout_, descriptorSets_[descriptorIndex]);
-                        if (context.submissionCounters != nullptr) {
-                            ++context.submissionCounters->descriptorSetBinds;
+                        if (counters != nullptr) {
+                            ++counters->descriptorSetBinds;
                         }
                     }
                     commands.drawIndexed(
@@ -3119,8 +3125,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         primitive.firstIndex,
                         instanceCount,
                         firstInstance);
-                    if (context.submissionCounters != nullptr) {
-                        ++context.submissionCounters->drawCalls;
+                    if (counters != nullptr) {
+                        ++counters->drawCalls;
                     }
                 }
             };
@@ -3161,7 +3167,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         instanceCount,
                         firstInstance,
                         textureBase,
-                        globalMaterialBase, context.submissionCounters, snapshot);
+                        globalMaterialBase, counters, snapshot);
                 }
             }
         };
@@ -3184,7 +3190,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
     }
     if (stage == 0 || stage == 3) {
-    for (std::size_t slot = 0; slot < snapshot->visibleIndices.size(); ++slot) {
+    for (std::size_t slot = firstTransparent; slot < transparentEnd; ++slot) {
         const scene::SceneInstance* instance = &snapshot->instances.at(snapshot->visibleIndices[slot]);
         const std::uint32_t firstInstance = instance->sourceIndex;
         const std::uint32_t meshKey = instance->meshKey;
@@ -3229,7 +3235,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                 1,
                 firstInstance,
                 textureBase,
-                globalMaterialBase, context.submissionCounters, snapshot);
+                globalMaterialBase, counters, snapshot);
             oitReadIndex += primitive->indexCount;
         }
     }
