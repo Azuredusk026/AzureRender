@@ -1,10 +1,31 @@
 """Run sequential fixed-input R3 performance comparisons."""
 import argparse
 import json
+import math
 from pathlib import Path
 import statistics
 import subprocess
 import tempfile
+
+
+def evaluate_budget(summary, small=False):
+    parallel, serial = summary["parallel_gpu"], summary["serial_gpu"]
+    values = [row[key] for row in (parallel, serial) for key in ("cpuRecordingMs", "gpuMs")]
+    if any(not math.isfinite(value) or value < 0 for value in values) or serial["gpuMs"] == 0:
+        raise ValueError("Budget samples must be finite, nonnegative and have positive serial GPU time")
+    cpu, gpu = parallel["cpuRecordingMs"], parallel["gpuMs"]
+    overhead = cpu - serial["cpuRecordingMs"]
+    ratio = gpu / serial["gpuMs"]
+    checks = {"cpuAbsolute": cpu < 0.5}
+    if small:
+        checks["gpuAbsolute"] = gpu < 3.0
+    else:
+        checks.update(cpuOverhead=overhead <= 0.1, gpuRatio=ratio <= 1.05)
+    return {"standard": "r3-budget-v2", "scenario": "small" if small else "multi-resource",
+            "cpuMs": cpu, "cpuOverheadMs": overhead, "gpuMs": gpu, "gpuRatio": ratio,
+            "limits": {"cpuMsExclusive": 0.5, **({"gpuMsExclusive": 3.0} if small else
+                       {"cpuOverheadMsInclusive": 0.1, "gpuRatioInclusive": 1.05})},
+            "checks": checks, "passed": all(checks.values())}
 
 
 def main():
@@ -17,9 +38,15 @@ def main():
     parser.add_argument("--scene", type=Path)
     parser.add_argument("--generate-resources", type=int, default=0)
     parser.add_argument("--check-recording-budget", action="store_true")
+    parser.add_argument("--check-small-scene-budget", action="store_true")
     args = parser.parse_args()
     if min(args.instances, args.frames, args.repeats) < 1:
         parser.error("instances, frames and repeats must be positive")
+    if args.check_recording_budget and (args.generate_resources != 32 or args.frames != 300 or args.repeats < 3):
+        parser.error("Recording budget requires 32 generated resources, 300 frames and at least three repeats")
+    if args.check_small_scene_budget and (args.check_recording_budget or args.generate_resources or args.scene
+                                         or args.instances != 256 or args.frames != 300 or args.repeats < 3):
+        parser.error("Small budget requires default scene, 256 instances, 300 frames and at least three repeats")
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output = Path(tempfile.mkdtemp(prefix="run-", dir=args.output_dir.resolve()))
     if args.generate_resources:
@@ -102,16 +129,11 @@ def main():
         "cpuRatio": results["parallel_gpu"][i]["cpuRecordingMs"] / results["serial_gpu"][i]["cpuRecordingMs"],
         "gpuRatio": results["parallel_gpu"][i]["gpuMs"] / results["serial_gpu"][i]["gpuMs"]}
         for i in range(args.repeats)]
-    if args.check_recording_budget:
-        if args.generate_resources != 32 or args.frames != 300 or args.repeats < 3:
-            raise RuntimeError("Recording budget requires 32 generated resources, 300 frames and at least three repeats")
-        cpu_ratio = summary["parallel_gpu"]["cpuRecordingMs"] / summary["serial_gpu"]["cpuRecordingMs"]
-        gpu_ratio = summary["parallel_gpu"]["gpuMs"] / summary["serial_gpu"]["gpuMs"]
-        document["budget"] = {"cpuRatio": cpu_ratio, "gpuRatio": gpu_ratio,
-            "passed": cpu_ratio <= 0.95 and gpu_ratio <= 1.05}
+    if args.check_recording_budget or args.check_small_scene_budget:
+        document["budget"] = evaluate_budget(summary, args.check_small_scene_budget)
     (output / "summary.json").write_text(json.dumps(document, indent=2), encoding="utf-8")
     print(json.dumps({"output": str(output), "median": summary}, indent=2))
-    if args.check_recording_budget and not document["budget"]["passed"]:
+    if "budget" in document and not document["budget"]["passed"]:
         raise RuntimeError("R3 recording performance budget failed; inspect summary.json")
 
 

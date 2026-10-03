@@ -1,24 +1,43 @@
 {
   "standard": "r3-budget-v2",
-  "date": "2026-10-03",
-  "method": "Re-evaluation of unchanged archived three-repeat medians",
-  "environment_policy": "current local Windows host; paired comparisons on the same device",
-  "multi_cpu_ms": 0.458901,
-  "multi_cpu_overhead_ms": 0.08591399999999999,
-  "multi_gpu_ratio": 1.012548934362864,
-  "small_cpu_ms": 0.26152733333333333,
-  "small_gpu_ms": 1.412688,
-  "checks": {
-    "multi_cpu_absolute": true,
-    "multi_cpu_overhead": true,
-    "multi_gpu_ratio": true,
-    "small_cpu_absolute": true,
-    "small_gpu_absolute": true
+  "method": "Production checker applied to unchanged archived medians",
+  "budgets": {
+    "multi-resource": {
+      "standard": "r3-budget-v2",
+      "scenario": "multi-resource",
+      "cpuMs": 0.458901,
+      "cpuOverheadMs": 0.08591399999999999,
+      "gpuMs": 4.546287,
+      "gpuRatio": 1.012548934362864,
+      "limits": {
+        "cpuMsExclusive": 0.5,
+        "cpuOverheadMsInclusive": 0.1,
+        "gpuRatioInclusive": 1.05
+      },
+      "checks": {
+        "cpuAbsolute": true,
+        "cpuOverhead": true,
+        "gpuRatio": true
+      },
+      "passed": true
+    },
+    "small-scene": {
+      "standard": "r3-budget-v2",
+      "scenario": "small",
+      "cpuMs": 0.26152733333333333,
+      "cpuOverheadMs": 0.06532633333333332,
+      "gpuMs": 1.412688,
+      "gpuRatio": 1.0082850372569732,
+      "limits": {
+        "cpuMsExclusive": 0.5,
+        "gpuMsExclusive": 3.0
+      },
+      "checks": {
+        "cpuAbsolute": true,
+        "gpuAbsolute": true
+      },
+      "passed": true
+    }
   },
-  "passed": true,
-  "phase_status": "active",
-  "pending": [
-    "Update automatic performance budget checker",
-    "Finalize stage evidence and completion commit"
-  ]
+  "passed": true
 }

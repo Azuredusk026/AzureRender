@@ -74,7 +74,7 @@ python tools/run_r3_comparison.py --executable build/msvc-debug/AzureRender.exe 
 对照还运行强制单命令间接路径。--disable-multi-draw-indirect 验证无批量间接能力时的行为，GPU 剔除仍启用。
 
 ```powershell
-python tools/run_r3_performance.py --executable build/msvc-release/AzureRender.exe --output-dir build/perf/R3 --generate-resources 32 --frames 300 --repeats 3
+python tools/run_r3_performance.py --executable build/msvc-release/AzureRender.exe --output-dir build/perf/R3 --generate-resources 32 --frames 300 --repeats 3 --check-recording-budget
 ```
 
 工具生成多资源公共场景，顺序采样四组合并保存中位数。小场景的调度开销和多资源场景的录制收益分别报告。
@@ -85,7 +85,7 @@ workerRecordedPasses 为零时确认开关和场景。Validation 报错时检查
 
 ## 验收与证据
 
-Debug 64 实例十帧与 Release 256 实例三十帧的四路径哈希一致。证据见审计修复跟踪。R3 阶段为 Active，现有性能采样按 `r3-budget-v2` 达标。自动判定与阶段证据收尾按执行清单完成。
+Debug 64 实例十帧与 Release 256 实例三十帧的四路径哈希一致。证据见审计修复跟踪。R3 阶段为 Complete，性能采样与自动判定按 `r3-budget-v2` 达标。功能回归和发布门禁通过。
 
 当前结果见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
 

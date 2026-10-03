@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "stage": "R3",
-  "status": "active",
+  "status": "complete",
   "date": "2026-10-03",
   "base_commit": "be4536994501779e8091b99f10c3ead4761f13e2",
   "source_sha256": {
@@ -12,7 +12,10 @@
     "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp": "ed321776cc894a425bf8fd105e0d7f1d7e6e0bdd62c0f12448df8ca0b6d2ac71",
     "Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp": "994ec9c9941078eb27217f77c9a704068a9f28ee99f6b8399014cf98058c8400",
     "Project/AzureRender/tests/FrameTaskSchedulerTests.cpp": "347cb17e2959ae74d72dc45a2d47d6308da41d89a41a00c0868ee638e49143cd",
-    "Project/AzureRender/tests/NullRhiPassTests.cpp": "d43a1a136229ddbd0045c06d205f016c5d26bbff9f0dbe509555b6fee2cecae7"
+    "Project/AzureRender/tests/NullRhiPassTests.cpp": "d43a1a136229ddbd0045c06d205f016c5d26bbff9f0dbe509555b6fee2cecae7",
+    "Project/AzureRender/tools/run_r3_performance.py": "38fafdcb62ec40e723e97d77c5d3c08da13cb71feab5bef2fceb7c8a414723b2",
+    "Project/AzureRender/tools/check_r3_archived_budget.py": "7e343ce57a4119b71d93f9bcee4896b7592417a401b704a97e99b6f265168d9c",
+    "Project/AzureRender/tools/test_r3_performance.py": "5009577f732f189ec7189b31b1c31c01e21ffcaf56a34d932b7197c481350d8f"
   },
   "environment": {
     "cpu": "Intel Core i9-13900HX",
@@ -27,11 +30,16 @@
     "release_gate": "passed",
     "documentation": "passed",
     "small_scene_budget": "passed",
-    "multi_resource_budget": "passed under r3-budget-v2; original sampling verdict retained in raw report"
+    "multi_resource_budget": "passed under r3-budget-v2; original sampling verdict retained in raw report",
+    "budget_behavior_tests": "3/3 passed",
+    "source_identity": "All archived renderer source hashes match",
+    "automatic_budget_evaluation": "passed for both archived three-repeat workloads"
   },
   "evidence_sha256": {
-    "debug-ctest.log": "67808a3a69a7b6c6597f3b168b54d791eb1ad1dbbc8a2e35520b81457523d117",
-    "documentation.log": "3c3dbc8b3d570f1d8612122d772856f7f3c3d0addf685dd9aa8136861a793162",
+    "budget-tests.log": "8ee4669655aaed29bbc70e28a8ef25f73d1ebe2b002448e637699b5a2cbcaa41",
+    "budget-v2-evaluation.json": "76b0d7dd42d6284ca54879bc0dfc7a9e88cd0e22bb9b7475909470b74a7e5ddc",
+    "debug-ctest.log": "63508785048b031487c76335e93228bbd04168e782ebf90010427306a8f8d5dc",
+    "documentation.log": "75a4b466df820aa7429eec3614eaebe88f8b9f363c876b80b609f434b48d68b3",
     "failed-run-e6vkuxxv.json": "2fb8bbff9a0d941e4cbeb066348dd05ff30187256b6c6c41035700611c6ee998",
     "failed-run-jvt7rv8c.json": "175e48948fa23157840667c5df4b3894798a03cd8a5d9f0e8682f0d83bd9fe50",
     "failed-run-mbc9ra89.json": "2448474765d704d1689096510796cde91b8fa66cb8f0a0b6d930220c87333a45",
@@ -41,11 +49,13 @@
     "gpu-capabilities.json": "e67e0ec9b893c8039cc9a4204bf4e69fdba2936268ada38b6db0e83315debbd0",
     "multi-resource-performance.json": "70e5a34ee37fb7bb73980d6787fe10b49cbf50090a09d4873e0b8ab60a7a679e",
     "multi-resource.azscene": "8f5501b2b7a316d497f3539decabd16477e46a2fc312152aaaf416d087becd14",
-    "release-ctest.log": "4b29274a7029ff8c8a734f2de9a82c8a4480be12f2a63643b8de81616ba23b97",
-    "release-gate.json": "642c6180996154361eee386fcc557aaa8aa4b826622048ddceec064e7c17aaa6",
-    "small-scene-performance.json": "3427c44d98408b172bebb20735fd3db06399a66c17ef34ba6ee866c9ba10af73",
-    "budget-v2-evaluation.json": "0c6fc8aa98ec8a28d77afccb914b5f5e93aafd2f8d79f1b1b1ae3275304a0a39"
+    "release-ctest.log": "69bf75f8f82c1df05dcbb455fdcdf05c9b9150fe02c8ac6a29a41047409623e7",
+    "release-gate.json": "01ad1b6fad4e7a1aa9e9571fc8b31918ef91871a5269881429595d1d6783c673",
+    "small-scene-performance.json": "3427c44d98408b172bebb20735fd3db06399a66c17ef34ba6ee866c9ba10af73"
   },
   "current_standard": "r3-budget-v2",
-  "budget_evaluation": "budget-v2-evaluation.json"
+  "budget_evaluation": "budget-v2-evaluation.json",
+  "renderer_commit": "4cf0e63",
+  "criteria_commit": "625040f",
+  "completion_commit_title": "feat(r3): 完成并行提交与GPU驱动验收"
 }
