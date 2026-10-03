@@ -1,4 +1,6 @@
 #include "ImGuiEditorLayer.hpp"
+#include "reflection/Registry.hpp"
+#include "ecs/Components.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
 
@@ -635,17 +637,17 @@ void ImGuiEditorLayer::drawInspectorPanel() {
     }
     ImGui::Separator();
     ImGui::Text("Transform Gizmo");
-    std::array<float, 3> translation = context_->gizmoTranslation();
-    if (ImGui::DragFloat3("Translate", translation.data(), 0.01F)) {
-        context_->setGizmoTranslation(translation);
-    }
-    std::array<float, 3> rotation = context_->gizmoRotation();
-    if (ImGui::DragFloat3("Rotate (deg)", rotation.data(), 0.5F)) {
-        context_->setGizmoRotation(rotation);
-    }
-    std::array<float, 3> scale = context_->gizmoScale();
-    if (ImGui::DragFloat3("Scale", scale.data(), 0.01F, 0.01F, 100.0F)) {
-        context_->setGizmoScale(scale);
+    static const auto registry = reflection::makeRuntimeRegistry();
+    ecs::TransformComponent transform{context_->gizmoTranslation(), context_->gizmoRotation(), context_->gizmoScale()};
+    for (const auto& property : registry.type("azure.transform").properties) {
+        auto value = property.read(&transform).get<std::array<float, 3>>();
+        if (ImGui::DragFloat3(property.label.c_str(), value.data(), 0.01F,
+                static_cast<float>(property.minimum), static_cast<float>(property.maximum))) {
+            property.write(&transform, value);
+            context_->setGizmoTranslation(transform.translation);
+            context_->setGizmoRotation(transform.rotation);
+            context_->setGizmoScale(transform.scale);
+        }
     }
     RenderSettings& settings = context_->renderSettings();
     if (ImGui::BeginCombo(

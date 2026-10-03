@@ -240,6 +240,17 @@ add_library(AzureRenderCore STATIC
     src/scenes/BuiltinRendererCatalog.cpp
     src/scenes/SampleSceneRenderer.cpp
 )
+add_executable(AzureMetaGen tools/metagen/main.cpp)
+set(AZURE_GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
+set(AZURE_REFLECTION_OUTPUT "${AZURE_GENERATED_DIR}/reflection/GeneratedRegistry.hpp")
+add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}"
+    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp runtime/GameComponents.hpp
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    DEPENDS AzureMetaGen src/ecs/Components.hpp src/runtime/GameComponents.hpp
+    VERBATIM)
+add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTION_OUTPUT}")
+target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
+target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
     src/app/CommandLine.cpp
     src/runtime/SceneDocument.cpp
@@ -268,7 +279,7 @@ target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
-target_link_libraries(AzureRuntime PUBLIC AzureRenderCore)
+target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection)
 target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform)
 if(TARGET imgui::imgui)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
@@ -294,6 +305,11 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureReflectionTests tests/ReflectionTests.cpp)
+    target_link_libraries(AzureReflectionTests PRIVATE AzureReflection)
+    add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME AzureEngine.MetaGenerator COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_metagen.py" $<TARGET_FILE:AzureMetaGen>)
     add_executable(AzureProjectTests tests/ProjectTests.cpp)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
@@ -816,7 +832,7 @@ endif()
 set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT AzureRender)
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
-install(TARGETS AzureRender AzurePlayer RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(TARGETS AzureRender AzurePlayer AzureMetaGen RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 if(MINGW)
     if(NOT AZURERENDER_MINGW_RUNTIME_FILES)
         message(FATAL_ERROR "MinGW runtime DLLs were not found")
@@ -856,7 +872,12 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-foundation.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md")
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g2-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g3-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g4-implementation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/reflection.md")
 install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
 foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
@@ -938,3 +959,10 @@ set(CPACK_PACKAGE_FILE_NAME
 set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
+
+foreach(AZURE_PHASE g1 g2 g3 g4)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/2026-10-03.md")
+        install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/2026-10-03.md"
+            DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
+    endif()
+endforeach()

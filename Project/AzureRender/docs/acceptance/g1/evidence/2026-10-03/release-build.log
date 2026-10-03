@@ -1,0 +1,117 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 684 us
+-- Running vcpkg install - done
+-- Found Python3: C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe (found version "3.11.9") found components: Interpreter
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+[1/50] Building CXX object CMakeFiles\AzureRenderEcsTests.dir\tests\EcsTests.cpp.obj
+[2/50] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\src\editor\EditorSession.cpp.obj
+[3/50] Building CXX object CMakeFiles\AzureRenderSceneGraphTests.dir\tests\SceneGraphTests.cpp.obj
+[4/50] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[5/50] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\src\editor\EditorContext.cpp.obj
+[6/50] Building CXX object CMakeFiles\AzureMetaGen.dir\tools\metagen\main.cpp.obj
+[7/50] Linking CXX executable AzureRenderEcsTests.exe
+[8/50] Linking CXX executable AzureRenderSceneGraphTests.exe
+[9/50] Linking CXX executable AzureRenderEditorSessionTests.exe
+[10/50] Linking CXX executable AzureMetaGen.exe
+[11/50] Generating generated/reflection/GeneratedRegistry.hpp
+[12/50] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorCameraController.cpp.obj
+[13/50] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[14/50] Building CXX object CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[15/50] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[16/50] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[17/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[18/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[19/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[20/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[21/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[22/50] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[23/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[24/50] Building CXX object CMakeFiles\AzureRuntimeLifecycleTests.dir\tests\RuntimeLifecycleTests.cpp.obj
+[25/50] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[26/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[27/50] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[28/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[29/50] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[30/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[31/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[32/50] Building CXX object CMakeFiles\AzureReflection.dir\src\reflection\Registry.cpp.obj
+[33/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[34/50] Linking CXX static library AzureReflection.lib
+[35/50] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[36/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[37/50] Building CXX object CMakeFiles\AzureReflectionTests.dir\tests\ReflectionTests.cpp.obj
+[38/50] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[39/50] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[40/50] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[41/50] Linking CXX static library AzureRuntime.lib
+[42/50] Linking CXX static library AzureEditor.lib
+[43/50] Linking CXX static library AzurePlayerHost.lib
+[44/50] Linking CXX static library AzureRenderHost.lib
+[45/50] Linking CXX executable AzureReflectionTests.exe
+[46/50] Linking CXX executable AzureProjectTests.exe
+[47/50] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[48/50] Linking CXX executable AzurePlayer.exe
+[49/50] Linking CXX executable AzureRender.exe

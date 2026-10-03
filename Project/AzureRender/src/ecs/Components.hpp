@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.hpp"
+#include "reflection/Annotations.hpp"
 
 #include <array>
 #include <cstdint>
@@ -11,16 +12,23 @@ namespace azurerender::ecs {
 
 // Per-entity world-space transform. Mirrors the editor gizmo TRS so an
 // entity can be positioned/rotated/scaled through ECS queries.
+AZURE_TYPE("azure.transform", 1)
 struct TransformComponent {
+    AZURE_FIELD("Translation", -100000, 100000)
     std::array<float, 3> translation{0.0F, 0.0F, 0.0F};
+    AZURE_FIELD("Rotation", -100000, 100000)
     std::array<float, 3> rotation{0.0F, 0.0F, 0.0F};  // degrees
+    AZURE_FIELD("Scale", 0.001, 100000)
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
 };
 
 // Marks an entity as drawable. primitiveIndex refers to
 // LoadedAsset::primitives. Used by the ECS-driven render path.
+AZURE_TYPE("azure.renderable", 1)
 struct RenderableComponent {
+    AZURE_FIELD("Primitive", 0, 4294967295)
     std::uint32_t primitiveIndex = 0;
+    AZURE_FIELD("Visible", 0, 1)
     bool visible = true;
 };
 
