@@ -62,6 +62,7 @@ private:
     void drawAssetBrowserPanel();
     void drawCapturePanel();
     void drawConsolePanel();
+    void drawBuildPanel();
 
     std::shared_ptr<EditorSession> session_;
     EditorContext* context_ = nullptr;

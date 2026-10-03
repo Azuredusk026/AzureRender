@@ -43,9 +43,12 @@ nav:
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
       - G0 引擎基础计划: plans/g0-implementation.md
+      - U0 编辑器与界面计划: plans/u0-implementation.md
+      - P0 Windows 游戏发布计划: plans/p0-implementation.md
       - 渲染核心实施计划: plans/render-core-implementation.md
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
+      - Windows 游戏发布: runtime/game-publishing.md
       - 项目编辑与游戏表现: runtime/editor-game-ui.md
       - 脚本与玩法: runtime/scripts-gameplay.md
       - 物理与输入: runtime/physics-input.md
@@ -62,6 +65,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - P0 Windows 游戏发布验收: acceptance/p0/2026-10-04.md
       - U0 编辑器与界面验收: acceptance/u0/2026-10-04.md
       - G4 脚本与玩法验收: acceptance/g4/2026-10-04.md
       - 桌面同步: acceptance/r1/2026-09-26.md

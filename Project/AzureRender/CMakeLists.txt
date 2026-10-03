@@ -283,6 +283,7 @@ add_library(AzureEditor STATIC
     src/editor/EditorProjectEditing.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
+    src/editor/GameBuildJob.cpp
     src/editor/EditorAutomation.cpp
     src/editor/ImGuiEditorLayer.cpp
 )
@@ -363,6 +364,14 @@ if(BUILD_TESTING)
     target_link_libraries(AzureReflectionTests PRIVATE AzureReflection)
     add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME AzureEngine.GamePackageRules COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package_rules.py")
+    if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
+        add_test(NAME AzureEngine.GamePackage COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package.py"
+            --build-dir "${CMAKE_CURRENT_BINARY_DIR}" --editor $<TARGET_FILE:AzureRender>
+            --output "${CMAKE_CURRENT_SOURCE_DIR}/build/p0/Windows Game"
+            --evidence "${CMAKE_CURRENT_SOURCE_DIR}/build/p0/game-package-evidence")
+        set_tests_properties(AzureEngine.GamePackage PROPERTIES LABELS "gpu;release" RUN_SERIAL TRUE TIMEOUT 240)
+    endif()
     add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
     add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
@@ -881,6 +890,28 @@ set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
 install(TARGETS AzureRender AzurePlayer AzureMetaGen RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+if(MSVC)
+    if(MSVC_VERSION GREATER_EQUAL 1930)
+        # CMake 3.20's runtime module recognizes VC142; VS2022 ships VC143.
+        set(AZURE_MSVC_REDIST_ROOT "$ENV{VCToolsRedistDir}" CACHE PATH "MSVC redistributable root")
+        get_filename_component(AZURE_MSVC_BIN "${CMAKE_CXX_COMPILER}" DIRECTORY)
+        get_filename_component(AZURE_MSVC_VC "${AZURE_MSVC_BIN}/../../../../../.." ABSOLUTE)
+        file(GLOB AZURE_MSVC_CRT_CANDIDATES
+            "${AZURE_MSVC_REDIST_ROOT}/x64/Microsoft.VC143.CRT/msvcp140.dll"
+            "${AZURE_MSVC_VC}/Redist/MSVC/*/x64/Microsoft.VC143.CRT/msvcp140.dll")
+        list(SORT AZURE_MSVC_CRT_CANDIDATES COMPARE NATURAL ORDER DESCENDING)
+        if(NOT AZURE_MSVC_CRT_CANDIDATES)
+            message(FATAL_ERROR "VC143 runtime missing; set AZURE_MSVC_REDIST_ROOT to its redistributable root")
+        endif()
+        list(GET AZURE_MSVC_CRT_CANDIDATES 0 AZURE_MSVC_CRT_FILE)
+        get_filename_component(AZURE_MSVC_CRT_DIR "${AZURE_MSVC_CRT_FILE}" DIRECTORY)
+        file(GLOB AZURE_MSVC_CRT_DLLS "${AZURE_MSVC_CRT_DIR}/*.dll")
+        install(FILES ${AZURE_MSVC_CRT_DLLS} DESTINATION "${CMAKE_INSTALL_BINDIR}")
+    else()
+        set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION "${CMAKE_INSTALL_BINDIR}")
+        include(InstallRequiredSystemLibraries)
+    endif()
+endif()
 if(MINGW)
     if(NOT AZURERENDER_MINGW_RUNTIME_FILES)
         message(FATAL_ERROR "MinGW runtime DLLs were not found")
@@ -1009,6 +1040,12 @@ else()
 endif()
 set(CPACK_PACKAGE_FILE_NAME
     "AzureRender-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${AZURERENDER_PACKAGE_ARCH}")
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/runtime-build-$<CONFIG>.json"
+    CONTENT "{\n  \"schemaVersion\": 1,\n  \"engineVersion\": \"${PROJECT_VERSION}\",\n  \"configuration\": \"$<CONFIG>\",\n  \"architecture\": \"${AZURERENDER_PACKAGE_ARCH}\",\n  \"platform\": \"${CMAKE_SYSTEM_NAME}\"\n}\n")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/runtime-build-$<CONFIG>.json"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender" RENAME "runtime-build.json")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/tools/build_game.py"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/tools")
 set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
@@ -1023,3 +1060,5 @@ endforeach()
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "LatoLatin-LICENSE.txt")
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/editor-game-ui.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/game-publishing.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/u0-implementation.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/p0-implementation.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")

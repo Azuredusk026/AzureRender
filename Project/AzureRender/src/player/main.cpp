@@ -9,16 +9,20 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "runtime/Project.hpp"
+#include "runtime/AssetDatabase.hpp"
+#include "runtime/Level.hpp"
+#include "assets/GltfLoader.hpp"
 #include "runtime/SceneDocument.hpp"
 int main(int argc, char** argv) {
     try {
         std::string projectPath, createPath;
-        bool check = false;
+        bool check = false, gameTemplate = false;
         std::vector<std::string> args;
         std::string runtimeReport;
         for (int i = 1; i < argc; ++i) {
             std::string arg = argv[i];
-            if (arg == "--project" || arg == "--create-project") {
+            if (arg == "--project" || arg == "--create-project" || arg == "--create-game") {
+                if (arg == "--create-game") gameTemplate = true;
                 if (++i == argc) throw std::runtime_error("Missing value for " + arg);
                 auto& path = arg == "--project" ? projectPath : createPath;
                 if (!path.empty()) throw std::runtime_error("Duplicate option: " + arg);
@@ -34,7 +38,7 @@ int main(int argc, char** argv) {
         if (!createPath.empty()) {
             if (!projectPath.empty() || check || !args.empty() || !runtimeReport.empty())
                 throw std::runtime_error("--create-project is a standalone command");
-            azurerender::Project::create(createPath,
+            (gameTemplate ? azurerender::Project::createGame : azurerender::Project::create)(createPath,
                                          std::filesystem::path(createPath).filename().string());
             std::cout << "Project created: " << createPath << '\n';
             return EXIT_SUCCESS;
@@ -57,7 +61,7 @@ int main(int argc, char** argv) {
                 "Player accepts runtime scene options; editor commands belong to AzureRender");
         if (cli.showHelp) {
             std::cout << "AzurePlayer --project <project.azureproject> [runtime "
-                         "options]\nAzurePlayer --create-project <empty-directory>\nAzurePlayer "
+                         "options]\nAzurePlayer --create-project <empty-directory>\nAzurePlayer --create-game <empty-directory>\nAzurePlayer "
                          "--project <file> --check-project\n"
                       << "P: pause/resume runtime, O: advance one paused frame\n"
                       << "--runtime-report <file>: write final World snapshot\n";
@@ -74,6 +78,12 @@ int main(int argc, char** argv) {
         }
         if (check) {
             if (projectPath.empty()) throw std::runtime_error("--check-project requires --project");
+            azurerender::AssetDatabase assets(azurerender::Project::load(projectPath)); assets.refresh();
+            for (const auto& item : assets.records()) {
+                const auto& path = item.second.path;
+                if(path.extension()==".azurelevel")static_cast<void>(azurerender::Level::load(path,assets));
+                if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.string()));
+            }
             std::cout << "Project validation passed\n";
             return EXIT_SUCCESS;
         }

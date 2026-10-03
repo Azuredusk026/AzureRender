@@ -26,6 +26,21 @@ struct EditorSession::PlayState {
     }
 };
 EditorSession::~EditorSession()=default;
+bool EditorSession::startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace) noexcept {
+    try {
+        if (playing() || building() || !context_->isProject()) throw std::runtime_error("Build requires an idle game project in edit mode");
+        context_->save();
+        buildResult_ = {}; lastError_.clear();
+        build_ = std::make_unique<GameBuildJob>(context_->project().file, install, output, replace);
+        context_->log("Game build started"); return true;
+    } catch (const std::exception& error) { lastError_ = error.what(); context_->log("ERROR: " + lastError_); return false; }
+}
+void EditorSession::pollBuild() {
+    if (!build_ || !build_->ready()) return;
+    buildResult_ = build_->finish(); build_.reset();
+    context_->log((buildResult_.passed ? "Game build completed: " : "ERROR: Game build failed: ") + buildResult_.message);
+    if (!buildResult_.passed) lastError_ = buildResult_.message;
+}
 bool EditorSession::playing() const noexcept{return play_!=nullptr;}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
 RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
@@ -45,6 +60,9 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
 
 bool EditorSession::execute(const EditorCommand command) noexcept {
     lastError_.clear();
+    if(building() && (command==EditorCommand::Save || command==EditorCommand::Reload || command==EditorCommand::Play || command==EditorCommand::Undo || command==EditorCommand::Redo)) {
+        lastError_="Wait for game build to finish"; return false;
+    }
     if(command==EditorCommand::Play || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
         try{
             if(command==EditorCommand::Play){if(play_)return false;context_->detachRenderSettings();play_=std::make_unique<PlayState>(*context_);runtimeReset_=true;context_->log("Play started");}

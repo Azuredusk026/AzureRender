@@ -45,6 +45,7 @@ constexpr const char* kHelp =
     "  --scene <azscene>                   Load a saved scene\n"
     "  --editor <azscene>                  Open the editor\n"
     "  --editor-project <azureproject>     Open a game project\n"
+    "  --create-game <empty-directory>     Create a playable game template\n"
     "  --editor-actions <json>             Run editor task commands\n"
     "  --runtime-report <json>             Write gameplay evidence\n\n"
     "Output:\n"
@@ -285,6 +286,9 @@ ParsedCommandLine parseCommandLine(
         const std::string& argument = arguments[index];
         if (argument == "--help") {
             parsed.showHelp = true;
+        } else if (argument == "--create-game") {
+            parsed.createGamePath = requireValue(arguments,index,argument);
+            if(arguments.size()!=2)fail(CommandLineErrorCode::InvalidCombination,argument,"--create-game is a standalone command");
         } else if (argument == "--editor-project") {
             parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
         } else if (argument == "--editor-actions") {

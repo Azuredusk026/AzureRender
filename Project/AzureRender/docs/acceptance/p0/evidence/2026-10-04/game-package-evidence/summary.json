@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p0\\Windows Game",
+  "files": 143,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "movedDirectory": true,
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "dependencyFailureRollback": true,
+  "tamperRejected": true,
+  "scene": "destination",
+  "fixedSteps": 179,
+  "hero": [
+    7.350009918212891,
+    0.8999999761581421,
+    0.0
+  ],
+  "audioStarts": 2,
+  "uiDrawCalls": 900,
+  "animationFrames": 180
+}

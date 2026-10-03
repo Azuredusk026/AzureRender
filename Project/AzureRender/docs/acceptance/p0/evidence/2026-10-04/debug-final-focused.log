@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  3: AzureEngine.EditorWorkflow
+1/5 Test  #3: AzureEngine.EditorWorkflow ...........   Passed    1.80 sec
+    Start 10: AzureEngine.GamePackageRules
+2/5 Test #10: AzureEngine.GamePackageRules .........   Passed    1.00 sec
+    Start 12: AzureEngine.EditorHost
+3/5 Test #12: AzureEngine.EditorHost ...............   Passed    2.86 sec
+    Start 29: AzureRender.EditorCameraController
+4/5 Test #29: AzureRender.EditorCameraController ...   Passed    0.03 sec
+    Start 30: AzureRender.EditorSession
+5/5 Test #30: AzureRender.EditorSession ............   Passed    0.09 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+gpu    =   2.86 sec*proc (1 test)
+
+Total Test time (real) =   5.78 sec

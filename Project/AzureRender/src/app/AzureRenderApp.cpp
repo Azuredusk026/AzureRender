@@ -293,6 +293,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         drawFrame();
         ++renderedFrames;
         if (smokeFrameLimit > 0 && renderedFrames >= smokeFrameLimit) {
+#if AZURE_WITH_EDITOR
+            if(editorAutomation_ && !editorAutomation_->complete())continue;
+#endif
             frontend_->requestClose();
         }
         if (fixedSimulation_
@@ -326,6 +329,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
 #if AZURE_WITH_EDITOR
         data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
+        if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
 #endif
         std::ofstream extended(runOptions_.runtimeReportPath);extended<<data.dump(2);
         if (!extended) throw std::runtime_error("Cannot write runtime report");

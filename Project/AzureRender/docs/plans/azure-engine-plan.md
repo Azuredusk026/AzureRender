@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：U0 Complete，P0 Ready
+> 状态：Windows 计划全部 Complete，Android Deferred
 > 更新日期：2026-10-04
 > 适用范围：Windows 编辑器与 Windows 运行时；Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -66,7 +66,7 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | G3 物理与输入 | G2，Complete | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
 | G4 脚本与玩法 | G3，Complete | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
 | U0 编辑器与游戏界面 | G4，Complete | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入—放置—编辑—运行—停止闭环通过 |
-| P0 Windows 游戏发布 | U0 | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
+| P0 Windows 游戏发布 | U0，Complete | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
 
 `R2` 已完成，端到端证据见 [R2 阶段验收记录](../acceptance/r2/2026-09-26.md)。`R3` 当前为 Complete，具备帧快照、并行录制和 GPU 驱动提交。阶段门禁与当前证据见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
 
@@ -82,7 +82,9 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 
 G0 模块库、项目配置、独立 Player、运行时生命周期和性能观测通过验收。Debug 与 Release 各 41 项回归通过，三场景输出与冻结参考一致。结果见 [G0 验收](../acceptance/g0/2026-10-03.md)，模块使用见 [引擎基础](../runtime/engine-foundation.md)。
 
-G1 至 U0 为 Complete，P0 为 Ready。U0 证据见 [编辑器与界面验收](../acceptance/u0/2026-10-04.md)。实施记录依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
+G1 至 P0 为 Complete。U0 提交为 `0248e54`，证据见 [编辑器与界面验收](../acceptance/u0/2026-10-04.md)。实施记录依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
+
+P0 交付公开游戏模板、编辑器构建入口和可移动 Windows 游戏包。Debug 57 项与 Release 58 项完整回归通过，证据见 [P0 验收](../acceptance/p0/2026-10-04.md)。阶段提交为 `feat(p0): 完成游戏模板与Windows独立发布闭环`。
 
 G4 的双关卡脚本玩法闭环与发布门禁通过，Debug 和 Release 各 49 项回归通过。黑洞电影档 GPU 中位数为 18.851835 ms。证据见 [G4 验收](../acceptance/g4/2026-10-04.md)。
 
@@ -134,4 +136,4 @@ R1 明确外部导入、跨帧持久、帧内瞬态三种资源类别。历史�
 
 Android 目标无限期 Deferred，不配置 Android SDK、NDK、真机或移动端性能预算。G1 使用 C++17 受限注解生成器，语法范围、增量输出和诊断由契约测试覆盖。
 
-G2 使用 UUID 与指纹分版本缓存，以及版本化目录资源包。U0 选择音频库。以上选择在对应准入阶段解决，渲染核心按既定顺序推进。
+G2 使用 UUID 与指纹分版本缓存，以及版本化目录资源包。U0 使用 miniaudio 与 RmlUi。P0 使用 Python 标准库生成 Windows 游戏目录。

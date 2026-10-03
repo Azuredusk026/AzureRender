@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/ScriptRuntime.hpp"
@@ -39,6 +40,10 @@ public:
     double advance(double delta);
     SceneDocument viewScene();
     bool consumeRuntimeReset() noexcept;
+    bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
+    void pollBuild();
+    bool building() const noexcept { return build_ != nullptr; }
+    const GameBuildResult& buildResult() const noexcept { return buildResult_; }
 
     [[nodiscard]] EditorContext& context() noexcept { return *context_; }
     [[nodiscard]] const EditorContext& context() const noexcept {
@@ -67,6 +72,8 @@ private:
     struct PlayState;
     std::unique_ptr<PlayState> play_;
     bool runtimeReset_ = false;
+    std::unique_ptr<GameBuildJob> build_;
+    GameBuildResult buildResult_;
 };
 
 }  // namespace azurerender

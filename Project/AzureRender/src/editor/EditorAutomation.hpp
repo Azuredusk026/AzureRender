@@ -6,6 +6,7 @@ public:
     explicit EditorAutomation(const std::filesystem::path& file);
     void advance(std::uint64_t frame,EditorSession& session);
     nlohmann::json report() const;
+    bool complete() const noexcept { return cursor_ == actions_.size(); }
 private:
     nlohmann::json actions_,results_=nlohmann::json::array(),editBefore_;
     std::size_t cursor_=0;

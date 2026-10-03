@@ -46,3 +46,9 @@ MSVC C5321 在包含 sol2 头时局部关闭，适用对象为 UTF-8 表情符�
 FreeType 与其压缩依赖经 vcpkg 安装。安装树保留 RmlUi、miniaudio、FreeType、libpng、zlib、bzip2 和 Brotli 的许可证。
 
 `assets_public/fonts/LatoLatin-Regular.ttf` 来自 RmlUi 6.3 示例。原始许可保存在同目录，并安装为 `licenses/LatoLatin-LICENSE.txt`。公开 WAV 为项目生成的衰减正弦音效。
+
+Windows 游戏包随 Player 分发运行库、着色器、字体与第三方许可。`game_manifest.json` 为每份许可记录文件大小与 SHA-256。模板使用项目公开模型、脚本和音效，Python 发布工具由项目自行实现。
+
+## Windows 编译器运行库
+
+MSVC 构建随安装树分发 Visual C++ 可再分发运行库。CMake 从当前工具链确定 DLL，VS2022 使用 VC143 目录。使用范围遵循 [Visual Studio 可分发代码条款](https://learn.microsoft.com/visualstudio/releases/2022/redistribution)，本机验收工具链为 MSVC 14.44。

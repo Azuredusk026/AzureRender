@@ -59,6 +59,8 @@ python tools/test_game_presentation.py --executable build/ninja-msvc-debug/Azure
 
 编辑任务验证导入、编辑、历史、保存、运行、脚本修复、切关和停止。图像任务比较实际状态动画与界面合成。单元验证覆盖导入取消、Prefab、基础项目兼容、混音与资源退休。
 
+`build` 命令接收 `install`、`output` 和可选 `replace`。`wait-build` 按帧等待异步构建，并检查发布结果。自动化任务完成后结束烟雾运行，完整流程见 [Windows 游戏发布](game-publishing.md)。
+
 ## 来源与许可
 
 [RmlUi 6.3](https://github.com/mikke89/RmlUi/tree/6.3) 使用 MIT 许可。[miniaudio 0.11.25](https://github.com/mackron/miniaudio/tree/0.11.25) 采用 MIT-0 许可。字体来自 RmlUi 6.3 示例，LatoLatin 使用 SIL OFL 1.1。

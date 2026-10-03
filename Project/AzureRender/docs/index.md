@@ -19,6 +19,7 @@ AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo
 | Blackhole | 光线积分、吸积盘噪声、多普勒、Beaming、引力红移、双 History TAA |
 | 工具 | 编辑器、命令行 QA、确定性 PNG、GPU Timing JSON、图像比较、发布门禁 |
 | 游戏运行时 | UUID 资产、版本化关卡、Prefab、Jolt 物理、Lua 脚本与独立 Player |
+| 游戏表现与发布 | RmlUi、动画状态机、miniaudio、公开游戏模板与 Windows 游戏包 |
 
 ## 原生 Vulkan 的边界
 

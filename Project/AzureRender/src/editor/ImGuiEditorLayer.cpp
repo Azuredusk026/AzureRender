@@ -91,6 +91,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("assets", "Asset Browser", [this] { drawAssetBrowserPanel(); });
     addPanel("capture", "Capture", [this] { drawCapturePanel(); });
     addPanel("console", "Console", [this] { drawConsolePanel(); });
+    addPanel("build", "Build Game", [this] { drawBuildPanel(); });
     panels_ = registry.createAll();
 }
 
@@ -249,7 +250,7 @@ void ImGuiEditorLayer::drawPanels() {
     }
 #endif
     const ImGuiIO& io = ImGui::GetIO();
-    if(!io.WantTextInput && !session_->playing()){
+    if(!io.WantTextInput && !session_->playing() && !session_->building()){
         if(io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_D,false))context_->duplicateSelection();
         if(ImGui::IsKeyPressed(ImGuiKey_Delete,false))context_->deleteSelection();
     }
@@ -315,7 +316,7 @@ void ImGuiEditorLayer::drawPanels() {
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
         const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
-        ImGui::BeginDisabled(session_->playing() && !editable);panel->draw(*context_);ImGui::EndDisabled();
+        ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build");panel->draw(*context_);ImGui::EndDisabled();
     }
 }
 
@@ -430,7 +431,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
             reinterpret_cast<ImTextureID>(
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
-        if(!session_->playing() && ImGui::BeginDragDropTarget()){
+        if(!session_->playing() && !session_->building() && ImGui::BeginDragDropTarget()){
             if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))try{context_->placeResource(static_cast<const char*>(payload->Data));}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             ImGui::EndDragDropTarget();
         }
@@ -446,7 +447,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
         ImVec2 gizmoCenter{0.0F, 0.0F};
         ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
         bool gizmoDrawn = false;
-        if (!session_->playing() && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
+        if (!session_->playing() && !session_->building() && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
             gizmoCenter = ImVec2(
                 itemMin.x + gizmoScreen.centerX * imageSize.x,
                 itemMin.y + gizmoScreen.centerY * imageSize.y);
@@ -506,7 +507,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
                     pickThisClick = false;
                 }
             }
-            if (!session_->playing() && pickThisClick
+            if (!session_->playing() && !session_->building() && pickThisClick
                 && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
                 if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
@@ -805,6 +806,28 @@ void ImGuiEditorLayer::drawCapturePanel() {
     ImGui::End();
 }
 
+void ImGuiEditorLayer::drawBuildPanel() {
+    session_->pollBuild();
+    ImGui::Begin("Build Game");
+    static std::array<char,1024> install{}, output{}, project{};
+    static bool replace = false;
+    ImGui::InputText("New game directory", project.data(), project.size());
+    ImGui::BeginDisabled(session_->building());
+    if(ImGui::Button("Create game template")) {
+        try { const std::filesystem::path path(project.data()); Project::createGame(path,path.filename().string()); context_->log("Game template created: "+path.string()); }
+        catch(const std::exception& error) { context_->log("ERROR: "+std::string(error.what())); }
+    }
+    ImGui::EndDisabled();
+    ImGui::InputText("Release engine directory", install.data(), install.size());
+    ImGui::InputText("Game output directory", output.data(), output.size());
+    ImGui::Checkbox("Replace existing game package", &replace);
+    ImGui::BeginDisabled(!context_->isProject() || session_->building() || session_->playing());
+    if(ImGui::Button("Build Windows game"))static_cast<void>(session_->startBuild(install.data(),output.data(),replace));
+    ImGui::EndDisabled();
+    if(session_->building())ImGui::TextUnformatted("Building...");
+    else if(!session_->buildResult().message.empty())ImGui::TextWrapped("%s (%.0f ms)",session_->buildResult().message.c_str(),session_->buildResult().milliseconds);
+    ImGui::End();
+}
 void ImGuiEditorLayer::drawConsolePanel() {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);

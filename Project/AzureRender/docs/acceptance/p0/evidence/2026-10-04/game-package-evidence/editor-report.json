@@ -1,0 +1,63 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "audioStarts": 0,
+  "editStateRestored": true,
+  "editorActions": [
+    {
+      "command": "build",
+      "error": "",
+      "milliseconds": 14.4449,
+      "passed": true
+    },
+    {
+      "command": "wait-build",
+      "error": "{\"status\": \"passed\", \"name\": \"New game\", \"files\": 143}\n",
+      "milliseconds": 0.0017,
+      "passed": true
+    }
+  ],
+  "editorLevelRevision": 0,
+  "editorPlaySteps": 0,
+  "editorPlaying": false,
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 2773.879,
+  "gameBuildPassed": true,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "floor",
+      "translation": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hero",
+      "translation": [
+        -2.0,
+        1.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "portal",
+      "translation": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "visible": true
+    }
+  ],
+  "observedScriptErrors": 0,
+  "presentationErrors": [],
+  "recoveredScripts": 0,
+  "scene": "courtyard",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

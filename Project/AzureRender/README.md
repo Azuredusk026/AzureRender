@@ -2,6 +2,8 @@
 
 AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。风格化角色和黑洞模拟共用同一个宿主。项目还提供 ImGui 编辑器、确定性截图、诊断视图、GPU 计时和视觉回归工具。新场景可以通过进程内 Renderer SDK 接入。
 
+游戏项目支持反射组件、关卡与 Prefab、Jolt 物理、Lua、动画、声音和 RmlUi。公开模板贯通创建、编辑、运行和 Windows 独立游戏发布。
+
 > **English summary:** AzureRender is a real-time renderer written with C++17 and the native Vulkan API. One host runs both the stylized character renderer and the relativistic black-hole simulation. It also includes deterministic capture, diagnostics, GPU timing and an in-process renderer interface.
 
 ## 项目定位
@@ -49,6 +51,7 @@ cmake --build .\build\ninja-debug
 - [黑洞模拟](docs/blackhole-rendering.md)
 - [资产、场景与编辑器](docs/assets-and-editor.md)
 - [项目编辑、运行控制与游戏界面](docs/runtime/editor-game-ui.md)
+- [游戏模板、编辑器构建与 Windows 发布](docs/runtime/game-publishing.md)
 - [开发、测试与发布](docs/development-and-release.md)
 - [参数与接口参考](docs/reference.md)
 

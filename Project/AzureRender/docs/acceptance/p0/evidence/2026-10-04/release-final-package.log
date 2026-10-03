@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 10: AzureEngine.GamePackageRules
+1/2 Test #10: AzureEngine.GamePackageRules .....   Passed    0.97 sec
+    Start 11: AzureEngine.GamePackage
+2/2 Test #11: AzureEngine.GamePackage ..........   Passed   11.97 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+gpu        =  11.97 sec*proc (1 test)
+release    =  11.97 sec*proc (1 test)
+
+Total Test time (real) =  12.95 sec

@@ -281,6 +281,12 @@ GitHub Actions 在 Pull Request 中执行严格构建，在 `main` 分支构建�
 3. `CHANGELOG.md`。
 4. Archive 和旧 Git 历史。
 
+## Windows 游戏发布
+
+游戏项目通过 Build Game 面板或安装树内的 `tools/build_game.py` 构建。发布输入使用 Release x64 安装树，构建机需要 Python 3.11+。运行包包含 Player、DLL、项目资源、字体、着色器、许可证和哈希清单。
+
+Release 门禁的 `AzureEngine.GamePackage` 完成编辑器构建、目录移动和系统 PATH 隔离运行。任务覆盖角色运动、切关、界面、动画、音效及正常退出。使用方式见 [Windows 游戏发布](runtime/game-publishing.md)。
+
 ## 后续路线
 
 项目当前优先级是巩固可发布渲染器，而不是扩张无关场景。合理的后续候选包括：

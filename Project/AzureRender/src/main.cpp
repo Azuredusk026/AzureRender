@@ -50,6 +50,12 @@ int main(const int argumentCount, char** argumentValues) {
                 + "Showcase looks: " + locator.showcaseLooks().string());
             return EXIT_SUCCESS;
         }
+        if (!commandLine.createGamePath.empty()) {
+            const std::filesystem::path directory(commandLine.createGamePath);
+            azurerender::Project::createGame(directory, directory.filename().string());
+            std::cout << "Game project created: " << directory << '\n';
+            return EXIT_SUCCESS;
+        }
         if (!commandLine.createScenePath.empty()) {
             const azurerender::SceneDocument scene =
                 azurerender::SceneDocument::fromAsset(options.assetPath);

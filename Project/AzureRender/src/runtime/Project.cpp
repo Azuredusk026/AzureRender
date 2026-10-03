@@ -63,6 +63,34 @@ void Project::create(const std::filesystem::path& directory, const std::string& 
     output.flush();
     if (!output) throw std::runtime_error("Cannot write project: " + directory.string());
 }
+void Project::createGame(const std::filesystem::path& directory, const std::string& projectName) {
+    if (projectName.empty()) throw std::runtime_error("Project name must be nonempty");
+    const auto target = std::filesystem::absolute(directory).lexically_normal();
+    if (std::filesystem::exists(target) && !std::filesystem::is_empty(target))
+        throw std::runtime_error("Project directory must be empty: " + target.string());
+    const auto candidate = target.parent_path() / (".azure-template-" + uuid());
+    try {
+        const auto source = ResourceLocator().publicAsset("gameplay");
+        std::filesystem::create_directories(candidate / "assets");
+        for (auto it = std::filesystem::recursive_directory_iterator(source / "assets");
+             it != std::filesystem::recursive_directory_iterator(); ++it) {
+            if (it->path().filename() == ".azure") { it.disable_recursion_pending(); continue; }
+            if (!it->is_regular_file() || it->path().extension() == ".azmeta" || it->path().extension() == ".tmp") continue;
+            const auto output = candidate / "assets" / it->path().lexically_relative(source / "assets");
+            std::filesystem::create_directories(output.parent_path());
+            std::filesystem::copy_file(it->path(), output);
+        }
+        std::ifstream input(source / "project.azureproject");
+        nlohmann::json document; input >> document;
+        document["id"] = uuid(); document["name"] = projectName;
+        { std::ofstream output(candidate / "project.azureproject"); output << document.dump(2) << '\n';
+          output.flush(); if (!output) throw std::runtime_error("Cannot write game project"); }
+        static_cast<void>(Project::load(candidate / "project.azureproject").loadStartupScene());
+        std::filesystem::remove_all(candidate / ".azure");
+        if (std::filesystem::exists(target)) std::filesystem::remove(target);
+        std::filesystem::rename(candidate, target);
+    } catch (...) { std::filesystem::remove_all(candidate); throw; }
+}
 Project Project::load(const std::filesystem::path& path) {
     try {
         std::ifstream input(path);

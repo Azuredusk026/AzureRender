@@ -321,6 +321,8 @@ prefabSource, instanceOf
 | Face SDF Profile | 1 |
 | Showcase Look Catalog | 1 |
 | Toon Ramp Profiles | 1 |
+| `.azureproject` / `.azurelevel` / `.azureprefab` | 1 |
+| `game_manifest.json`（AzureGame） | 1 |
 
 ## 权威代码位置
 

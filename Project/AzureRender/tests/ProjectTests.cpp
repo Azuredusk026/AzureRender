@@ -57,6 +57,12 @@ int main() {
         edit("broken json");
         rejects([&] { Project::load(project.file); });
         std::filesystem::remove_all(moved);
+        const auto gameRoot=root.string()+"-game";
+        Project::createGame(gameRoot,"Game Template");auto game=Project::load(std::filesystem::path(gameRoot)/"project.azureproject");
+        require(game.startupScene=="assets:/courtyard.azurelevel" && game.name=="Game Template" && game.id!=project.id);
+        require(game.loadStartupScene().nodes.size()==3 && std::filesystem::is_regular_file(game.resolve("assets:/hud.rml")));
+        rejects([&]{Project::createGame(gameRoot,"Overwrite");});
+        std::filesystem::remove_all(gameRoot);
         std::cout << "Project contracts passed\n";
     } catch (const std::exception& error) {
         std::filesystem::remove_all(root);

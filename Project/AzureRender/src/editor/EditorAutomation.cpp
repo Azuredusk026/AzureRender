@@ -4,11 +4,15 @@
 namespace azurerender {
 EditorAutomation::EditorAutomation(const std::filesystem::path& file){std::ifstream input(file);input>>actions_;if(!actions_.is_array())throw std::invalid_argument("Editor actions must be an array");std::uint64_t previous=0;for(const auto& action:actions_){auto frame=action.at("frame").get<std::uint64_t>();if(frame<previous)throw std::invalid_argument("Editor actions must be ordered by frame");previous=frame;}}
 void EditorAutomation::advance(std::uint64_t frame,EditorSession& session){
+    session.pollBuild();
     if(auto* scripts=session.scripts()){scriptErrors_=std::max(scriptErrors_,scripts->errors().size());if(scriptErrors_)recovered_=std::max(recovered_,scripts->activeCount());}
     while(cursor_<actions_.size()&&actions_[cursor_].at("frame").get<std::uint64_t>()<=frame){
+        if(actions_[cursor_].at("command")=="wait-build" && session.building())return;
         const auto& action=actions_[cursor_++];const auto command=action.at("command").get<std::string>();auto start=std::chrono::steady_clock::now();bool passed=true;std::string error;
         try{auto& context=session.context();
-            if(command=="import")imported_=context.importAsset(action.at("path").get<std::string>());
+            if(command=="build") { passed=session.startBuild(action.at("install").get<std::string>(),action.at("output").get<std::string>(),action.value("replace",false));error=session.lastError(); }
+            else if(command=="wait-build") { passed=session.buildResult().passed;error=session.buildResult().message; }
+            else if(command=="import")imported_=context.importAsset(action.at("path").get<std::string>());
             else if(command=="place")context.placeResource(imported_);
             else if(command=="rename")context.setSelectedNodeName(action.at("value").get<std::string>());
             else if(command=="duplicate")context.duplicateSelection();
