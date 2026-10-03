@@ -1,0 +1,9 @@
+{
+  "seconds": 120.61000000000001,
+  "cycles": 6,
+  "recreations": 25,
+  "historyResets": 25,
+  "samples": 12343,
+  "gpuMs": 9.407722,
+  "cleanUnload": true
+}

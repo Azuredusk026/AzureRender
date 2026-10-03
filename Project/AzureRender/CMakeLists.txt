@@ -605,6 +605,9 @@ if(BUILD_TESTING)
         add_test(NAME AzureRender.R4AcceptanceRules
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_r4_acceptance.py")
+        add_test(NAME AzureRender.BlackholeOptimizationRules
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_blackhole_optimization.py")
         add_test(NAME AzureRender.R3Comparison
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/run_r3_comparison.py"
@@ -816,8 +819,7 @@ install(
 install(
     DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")
-install(
-    FILES
+set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/CHANGELOG.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
@@ -839,12 +841,31 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/rhi-synchronization.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-data.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r4/2026-10-03.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md")
+install(FILES ${AZURE_DOCUMENTATION_FILES}
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender")
+foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
+    file(RELATIVE_PATH AZURE_DOCUMENTATION_RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${AZURE_DOCUMENTATION_FILE}")
+    if(AZURE_DOCUMENTATION_RELATIVE MATCHES "^docs/")
+        get_filename_component(AZURE_DOCUMENTATION_DIRECTORY "${AZURE_DOCUMENTATION_RELATIVE}" DIRECTORY)
+        install(FILES "${AZURE_DOCUMENTATION_FILE}"
+            DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/${AZURE_DOCUMENTATION_DIRECTORY}")
+    endif()
+endforeach()
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r1")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r2")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r3")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r4/2026-10-03.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r4")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/blackhole-performance.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-03-blackhole-optimization.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/blackhole/2026-10-03.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/blackhole")
 install(
     FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"

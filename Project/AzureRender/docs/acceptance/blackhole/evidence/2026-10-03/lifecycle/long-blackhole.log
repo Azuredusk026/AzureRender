@@ -1,0 +1,72 @@
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+[1791020377887][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+[1791020378183][info][render][code=0] Blackhole bloom: four-level Vulkan compute path
+Scene renderer: blackhole (sceneType=blackhole)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Blackhole history reset after recreate: 2
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 3
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 4
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 6
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 7
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 8
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 9
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 11
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 12
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 13
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 14
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 15
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 17
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 18
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 19
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 20
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 22
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 23
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 24
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 25
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 27
+Swapchain recreated: 1328x919
+Blackhole history reset after recreate: 28
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 29
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 30
+Swapchain recreated: 1628x1069
+Blackhole history reset after recreate: 32
+Swapchain recreated: 1628x1069
+Screenshot requested
+Screenshot saved: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\captures\capture_1791020397524.png
+GPU timing samples: 12343
+  Shadow: 0.009 ms (0.095%)
+  Main scene: 9.328 ms (99.154%)
+  Internal outline: 0.071 ms (0.750%)
+  Total render: 9.408 ms avg, 3.978 ms min, 15.328 ms max
+  Percentiles: p50 9.613 ms, p95 11.281 ms, p99 12.611 ms
+  Submission per frame: 0.000 draws, 0.000 descriptor binds
+  CPU recording: 0.677 ms per frame, worker passes: 0
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\blackhole-optimization\lifecycle\long-blackhole.json
+Rendered frames: 12343
+Allocator after unload: buffers=0 images=0

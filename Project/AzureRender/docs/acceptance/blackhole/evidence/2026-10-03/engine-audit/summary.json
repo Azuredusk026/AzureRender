@@ -1,0 +1,68 @@
+{
+  "character_parallel": {
+    "gpuMs": 7.504029,
+    "gpuP95Ms": 8.703077,
+    "cpuRecordingMs": 0.44967466666666667,
+    "graphPreparationMs": 0.17698833333333333,
+    "workerWaitMs": 0.17927366666666666,
+    "graphExecutionMs": 0.09335933333333334,
+    "frames": 300,
+    "draws": 353.0,
+    "visibleRatio": 1.0
+  },
+  "character_serial": {
+    "gpuMs": 7.839221,
+    "gpuP95Ms": 10.556461,
+    "cpuRecordingMs": 0.3380166666666667,
+    "graphPreparationMs": 0.16859633333333332,
+    "workerWaitMs": 0.0006336666666666666,
+    "graphExecutionMs": 0.168741,
+    "frames": 300,
+    "draws": 353.0,
+    "visibleRatio": 1.0
+  },
+  "orbit-left": {
+    "gpuMs": 17.927481,
+    "gpuP95Ms": 19.832934,
+    "cpuRecordingMs": 0.19557933333333333,
+    "graphPreparationMs": 0.105556,
+    "workerWaitMs": 0.0006393333333333333,
+    "graphExecutionMs": 0.08929866666666667,
+    "frames": 150,
+    "draws": 0.0,
+    "visibleRatio": 0.0
+  },
+  "high": {
+    "gpuMs": 17.504365,
+    "gpuP95Ms": 19.358307,
+    "cpuRecordingMs": 0.192798,
+    "graphPreparationMs": 0.10622133333333333,
+    "workerWaitMs": 0.001038,
+    "graphExecutionMs": 0.085498,
+    "frames": 150,
+    "draws": 0.0,
+    "visibleRatio": 0.0
+  },
+  "close": {
+    "gpuMs": 39.350431,
+    "gpuP95Ms": 43.262238,
+    "cpuRecordingMs": 0.271154,
+    "graphPreparationMs": 0.157262,
+    "workerWaitMs": 0.000726,
+    "graphExecutionMs": 0.11307466666666667,
+    "frames": 150,
+    "draws": 0.0,
+    "visibleRatio": 0.0
+  },
+  "over-shoulder": {
+    "gpuMs": 15.993964,
+    "gpuP95Ms": 17.703579,
+    "cpuRecordingMs": 0.23496399999999998,
+    "graphPreparationMs": 0.13656866666666667,
+    "workerWaitMs": 0.0008613333333333334,
+    "graphExecutionMs": 0.097264,
+    "frames": 150,
+    "draws": 0.0,
+    "visibleRatio": 0.0
+  }
+}

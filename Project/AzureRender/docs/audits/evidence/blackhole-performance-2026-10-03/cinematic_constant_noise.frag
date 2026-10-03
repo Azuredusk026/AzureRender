@@ -48,6 +48,7 @@ float CubicInterpolate(const float x) {
 }
 
 float PerlinNoise(const vec3 position) {
+    return 0.0;
     const vec3 intPart = floor(position);
     const vec3 fracPart = fract(position);
     float v000 = 2.0 * fract(sin(dot(vec3(intPart.x, intPart.y, intPart.z), vec3(12.9898, 78.233, 213.765))) * 43758.5453) - 1.0;
@@ -210,12 +211,6 @@ vec4 sampleDisk(
     const float time) {
     const float radius = length(rayPosition.xz);
     if (radius <= diskInner || radius >= diskOuter) {
-        return vec4(0.0);
-    }
-    // The normalized radial shape and thickness noise factor are at most one.
-    // Reject points beyond the disk envelope before evaluating procedural noise.
-    // A small margin keeps the bound conservative under floating-point rounding.
-    if (abs(rayPosition.y) >= thin * 1.0001) {
         return vec4(0.0);
     }
     const float radialPosition =

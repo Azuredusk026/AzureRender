@@ -1,0 +1,82 @@
+{
+  "cinematic_baseline": {
+    "gpuAverageMs": 38.035964,
+    "warmGpuMedianMs": 38.956720000000004,
+    "warmSceneMedianMs": 38.895104,
+    "cpuRecordingMs": 0.21322933333333333,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_one_ray": {
+    "gpuAverageMs": 9.826854,
+    "warmGpuMedianMs": 10.088048,
+    "warmSceneMedianMs": 10.041344,
+    "cpuRecordingMs": 0.141334,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_empty_disk": {
+    "gpuAverageMs": 9.872074,
+    "warmGpuMedianMs": 10.174112000000001,
+    "warmSceneMedianMs": 10.11456,
+    "cpuRecordingMs": 0.13618933333333333,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_constant_noise": {
+    "gpuAverageMs": 17.330985,
+    "warmGpuMedianMs": 17.774224,
+    "warmSceneMedianMs": 17.723392,
+    "cpuRecordingMs": 0.17126333333333332,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_coarse_disk_bounds": {
+    "gpuAverageMs": 19.021693,
+    "warmGpuMedianMs": 19.332224,
+    "warmSceneMedianMs": 19.286528,
+    "cpuRecordingMs": 0.18207333333333334,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_no_tracing": {
+    "gpuAverageMs": 0.16783,
+    "warmGpuMedianMs": 0.165504,
+    "warmSceneMedianMs": 0.124928,
+    "cpuRecordingMs": 0.12754666666666667,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "cinematic_half_pixels": {
+    "gpuAverageMs": 20.157065,
+    "warmGpuMedianMs": 20.189968,
+    "warmSceneMedianMs": 20.160511999999997,
+    "cpuRecordingMs": 0.163532,
+    "resolution": [
+      904,
+      508
+    ]
+  },
+  "cinematic_baseline_end": {
+    "gpuAverageMs": 42.57128,
+    "warmGpuMedianMs": 43.128112,
+    "warmSceneMedianMs": 43.076608,
+    "cpuRecordingMs": 0.21365666666666663,
+    "resolution": [
+      1280,
+      720
+    ]
+  }
+}

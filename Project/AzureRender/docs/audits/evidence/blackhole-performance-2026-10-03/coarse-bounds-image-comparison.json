@@ -1,0 +1,22 @@
+[
+  {
+    "frame": "frame_000000.png",
+    "sha256Equal": true,
+    "maximumChannelDifference": 0
+  },
+  {
+    "frame": "frame_000001.png",
+    "sha256Equal": true,
+    "maximumChannelDifference": 0
+  },
+  {
+    "frame": "frame_000002.png",
+    "sha256Equal": true,
+    "maximumChannelDifference": 0
+  },
+  {
+    "frame": "frame_000003.png",
+    "sha256Equal": true,
+    "maximumChannelDifference": 0
+  }
+]

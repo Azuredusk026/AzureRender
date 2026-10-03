@@ -212,12 +212,6 @@ vec4 sampleDisk(
     if (radius <= diskInner || radius >= diskOuter) {
         return vec4(0.0);
     }
-    // The normalized radial shape and thickness noise factor are at most one.
-    // Reject points beyond the disk envelope before evaluating procedural noise.
-    // A small margin keeps the bound conservative under floating-point rounding.
-    if (abs(rayPosition.y) >= thin * 1.0001) {
-        return vec4(0.0);
-    }
     const float radialPosition =
         (radius - diskInner) / max(diskOuter - diskInner, 1.0e-4);
     const float effectiveRadius = 1.0 - 0.5 * radialPosition;
@@ -430,6 +424,7 @@ vec4 tracePixel(const vec2 fragUv, const float timeSeed) {
 }
 
 void main() {
+    outputColor = vec4(0.3, 0.2, 0.1, 1.0); return;
     const float supersample = ubo.cameraFov.z;
     const float resolution = max(ubo.cameraFov.w, 1.0);
     const float time = ubo.physics.w;

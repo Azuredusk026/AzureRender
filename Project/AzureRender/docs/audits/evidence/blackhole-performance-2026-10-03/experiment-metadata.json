@@ -1,0 +1,13 @@
+{
+  "base_commit": "7c5a7a0",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "driver": "32.0.15.9579",
+  "configuration": "Release",
+  "frames_per_case": 150,
+  "warmup_exclusion_for_medians": 30,
+  "simulation": "fixed 1/60 second step; same front camera",
+  "main_shader_sha256": "e2701f8f1bf8184fdc21e6569a5b3626f878d68f6146aad6db92dd5df6b1a645",
+  "source_modified": false,
+  "timing_note": "Initial and final baseline bracket GPU drift; ablations are diagnostic, not additive cost attribution",
+  "image_note": "Coarse disk bounds match all four captured front-camera frames byte for byte"
+}

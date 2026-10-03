@@ -208,14 +208,9 @@ vec4 sampleDisk(
     const float peakT4,
     const float shiftMax,
     const float time) {
+    return vec4(0.0);
     const float radius = length(rayPosition.xz);
     if (radius <= diskInner || radius >= diskOuter) {
-        return vec4(0.0);
-    }
-    // The normalized radial shape and thickness noise factor are at most one.
-    // Reject points beyond the disk envelope before evaluating procedural noise.
-    // A small margin keeps the bound conservative under floating-point rounding.
-    if (abs(rayPosition.y) >= thin * 1.0001) {
         return vec4(0.0);
     }
     const float radialPosition =

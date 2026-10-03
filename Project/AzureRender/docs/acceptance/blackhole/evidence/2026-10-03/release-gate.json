@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "configuration": "Release",
+  "package": "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender-0.1.0-rc1-Windows-x64.tar.gz",
+  "size_bytes": 3827247,
+  "sha256": "fde21d34c11f6732e93c06e54814336b4e2dd705408b3715b0f77124c3f800d4",
+  "stages": [
+    "configure",
+    "build",
+    "test",
+    "install",
+    "version",
+    "resources",
+    "isolated-runtime",
+    "package",
+    "manifest",
+    "final-documentation-package-refresh"
+  ],
+  "runtime_binary_unchanged": true,
+  "shader_binary_unchanged": true,
+  "documentation_paths_verified": true
+}
