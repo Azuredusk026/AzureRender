@@ -28,7 +28,10 @@ set(EXPECTED_LICENSES
     libdeflate-LICENSE.txt
     openjph-LICENSE.txt
     stb-LICENSE.txt
-    nlohmann-json-LICENSE.txt)
+    nlohmann-json-LICENSE.txt
+    joltphysics-LICENSE.txt
+    lua-LICENSE.txt
+    sol2-LICENSE.txt)
 foreach(LICENSE IN LISTS EXPECTED_LICENSES)
     if(NOT EXISTS "${LICENSE_DIR}/${LICENSE}")
         string(APPEND VIOLATIONS

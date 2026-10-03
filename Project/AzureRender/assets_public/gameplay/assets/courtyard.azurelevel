@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "courtyard",
+  "sceneType": "character",
+  "resources": [{"id": "mesh", "asset": "engine:/assets_public/test_model.gltf"}],
+  "nodes": [
+    {"id": "floor", "components": {
+      "azure.transform": {"type": "azure.transform", "version": 1, "data": {"translation": [0, -1, 0]}},
+      "azure.rigid-body": {"type": "azure.rigid-body", "version": 1, "data": {"halfExtent": [20, 1, 20]}}
+    }},
+    {"id": "hero", "resourceId": "mesh", "components": {
+      "azure.transform": {"type": "azure.transform", "version": 1, "data": {"translation": [-2, 1, 0]}},
+      "azure.character": {"type": "azure.character", "version": 1, "data": {}},
+      "azure.script": {"type": "azure.script", "version": 1, "data": {"asset": "assets:/player.lua"}}
+    }},
+    {"id": "portal", "resourceId": "mesh", "components": {
+      "azure.transform": {"type": "azure.transform", "version": 1, "data": {"translation": [0, 1, 0], "scale": [0.35, 1, 0.35]}},
+      "azure.rigid-body": {"type": "azure.rigid-body", "version": 1, "data": {"halfExtent": [0.35, 1, 1], "trigger": true}},
+      "azure.script": {"type": "azure.script", "version": 1, "data": {"asset": "assets:/portal.lua"}}
+    }}
+  ]
+}

@@ -18,6 +18,7 @@ AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo
 | Character | glTF、蒙皮动画、材质分类、Toon Ramp、Face SDF、Hair KK/AO、PCSS、眉毛 Overlay |
 | Blackhole | 光线积分、吸积盘噪声、多普勒、Beaming、引力红移、双 History TAA |
 | 工具 | 编辑器、命令行 QA、确定性 PNG、GPU Timing JSON、图像比较、发布门禁 |
+| 游戏运行时 | UUID 资产、版本化关卡、Prefab、Jolt 物理、Lua 脚本与独立 Player |
 
 ## 原生 Vulkan 的边界
 
@@ -72,6 +73,7 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 1. [Azure Engine 开发总计划](plans/azure-engine-plan.md)
 2. [开发与运行时文档规范](documentation-standard.md)
 3. [运行时渲染图](runtime/render-graph.md)
+4. [脚本与玩法](runtime/scripts-gameplay.md)
 
 第一次运行项目：
 

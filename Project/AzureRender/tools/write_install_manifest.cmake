@@ -66,7 +66,10 @@ set(EXPECTED_LICENSES
     libdeflate-LICENSE.txt
     openjph-LICENSE.txt
     stb-LICENSE.txt
-    nlohmann-json-LICENSE.txt)
+    nlohmann-json-LICENSE.txt
+    joltphysics-LICENSE.txt
+    lua-LICENSE.txt
+    sol2-LICENSE.txt)
 set(LICENSE_COUNT 0)
 foreach(LICENSE IN LISTS EXPECTED_LICENSES)
     if(EXISTS "${LICENSE_DIR}/${LICENSE}")

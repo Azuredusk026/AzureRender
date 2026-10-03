@@ -7,6 +7,7 @@
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
+#include "runtime/ScriptRuntime.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/TransientResourcePool.hpp"
@@ -145,6 +146,7 @@ private:
     azurerender::RuntimeLifecycle runtime_;
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
+    std::unique_ptr<azurerender::ScriptRuntime> scriptRuntime_;
     double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;
 

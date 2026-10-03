@@ -64,8 +64,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | G1 反射与序列化 | G0，Complete | 代码生成、稳定类型标识、Inspector 元数据和版本迁移 | 增量生成、错误定位、序列化往返通过 |
 | G2 资产、关卡与 Prefab | G1，Complete | AssetDatabase、Level、Prefab、依赖和热重载 | 资产移动、关卡切换和实例覆盖往返通过 |
 | G3 物理与输入 | G2，Complete | Jolt、固定步长、碰撞查询、触发器和输入动作 | 角色、碰撞、触发器和实体删除回归通过 |
-| G4 脚本与玩法 | G3，Active | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
-| U0 编辑器与游戏界面 | G4 | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入—放置—编辑—运行—停止闭环通过 |
+| G4 脚本与玩法 | G3，Complete | Lua、事件、反射绑定、错误隔离和受控重载 | 脚本角色控制、触发器和关卡切换通过 |
+| U0 编辑器与游戏界面 | G4，Ready | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入—放置—编辑—运行—停止闭环通过 |
 | P0 Windows 游戏发布 | U0 | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
 
 `R2` 已完成，端到端证据见 [R2 阶段验收记录](../acceptance/r2/2026-09-26.md)。`R3` 当前为 Complete，具备帧快照、并行录制和 GPU 驱动提交。阶段门禁与当前证据见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
@@ -82,7 +82,9 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 
 G0 模块库、项目配置、独立 Player、运行时生命周期和性能观测通过验收。Debug 与 Release 各 41 项回归通过，三场景输出与冻结参考一致。结果见 [G0 验收](../acceptance/g0/2026-10-03.md)，模块使用见 [引擎基础](../runtime/engine-foundation.md)。
 
-G1、G2 与 G3 为 Complete，G4 为 Active。连续执行计划依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
+G1 至 G4 为 Complete，U0 为 Ready。实施记录依次为 [G1](g1-implementation.md)、[G2](g2-implementation.md)、[G3](g3-implementation.md)和 [G4](g4-implementation.md)。
+
+G4 的双关卡脚本玩法闭环与发布门禁通过，Debug 和 Release 各 49 项回归通过。黑洞电影档 GPU 中位数为 18.851835 ms。证据见 [G4 验收](../acceptance/g4/2026-10-04.md)。
 
 ## 验收环境与性能口径
 

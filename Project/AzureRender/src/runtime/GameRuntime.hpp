@@ -14,7 +14,9 @@ public:
     void setEventHandler(std::function<void(const PhysicsEvent&)> handler) { eventHandler_ = std::move(handler); }
     void setBeforeStep(std::function<void(double)> handler) { beforeStep_ = std::move(handler); }
     double advance(double delta);
+    void move(ecs::Entity entity, CharacterMotion motion) { motions_[entity] = motion; }
 private:
+    std::map<ecs::Entity, CharacterMotion> motions_;
     RuntimeLifecycle& runtime_;
     InputActions input_;
     PhysicsWorld physics_;

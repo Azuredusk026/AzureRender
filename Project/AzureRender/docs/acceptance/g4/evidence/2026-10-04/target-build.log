@@ -1,0 +1,5 @@
+[1/5] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[2/5] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+[3/5] Linking CXX static library AzureRuntime.lib
+[4/5] Linking CXX executable AzureScriptRuntimeTests.exe
+[5/5] Linking CXX executable AzurePlayer.exe

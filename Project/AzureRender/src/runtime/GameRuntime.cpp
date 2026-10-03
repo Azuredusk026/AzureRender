@@ -17,12 +17,14 @@ double GameRuntime::advance(double delta) {
         const auto start = std::chrono::steady_clock::now();
         const auto elapsed = runtime_.beginFrame(fixed);
         if (!elapsed) break;
+        motions_.clear();
         if (beforeStep_) beforeStep_(fixed);
         std::map<ecs::Entity, CharacterMotion> motions;
         runtime_.world().each<game::Character>([&](auto entity, auto&) {
             motions[entity] = {static_cast<float>(input_.down("move-right")) - static_cast<float>(input_.down("move-left")),
                 static_cast<float>(input_.down("move-back")) - static_cast<float>(input_.down("move-forward")), input_.pressed("jump")};
         });
+        for (const auto& motion : motions_) motions[motion.first] = motion.second;
         const auto events = physics_.step(runtime_, static_cast<float>(fixed), motions);
         for (const auto& event : events) if (eventHandler_) eventHandler_(event);
         input_.endStep(); accumulator_ -= fixed; simulated += fixed; ++steps_;

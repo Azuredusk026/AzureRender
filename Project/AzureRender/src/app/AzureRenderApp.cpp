@@ -83,6 +83,12 @@ void AzureRenderApp::run(
     if (!options.projectFile.empty() && !options.editorMode)
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_);
+    if (gameRuntime_) {
+        scriptRuntime_ = std::make_unique<azurerender::ScriptRuntime>(runtime_, *gameRuntime_, levelSession_->assets());
+        scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
+        gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->update(delta); });
+        gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
+    }
     runtime_.start();
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
@@ -319,9 +325,10 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         const auto scene = runtime_.snapshotScene();
         for (const auto& node : scene.nodes) nodes.push_back({{"id", node.id}, {"translation", node.translation}, {"visible", node.visible}});
         std::ofstream report(runOptions_.runtimeReportPath);
-        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}}.dump(2);
+        report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}, {"activeScripts", scriptRuntime_ ? scriptRuntime_->activeCount() : 0}, {"scriptErrors", scriptRuntime_ ? scriptRuntime_->errors() : std::vector<std::string>{}}}.dump(2);
         if (!report) throw std::runtime_error("Cannot write runtime report");
     }
+    scriptRuntime_.reset();
     gameRuntime_.reset();
     runtime_.stop();
     azurerender::RuntimeDiagnostics::instance().print(
@@ -769,6 +776,7 @@ void AzureRenderApp::updateTechnicalSequenceState(
 }
 
 void AzureRenderApp::cleanup() {
+    scriptRuntime_.reset();
     gameRuntime_.reset();
     runtime_.stop();
     if (device_ != VK_NULL_HANDLE) {

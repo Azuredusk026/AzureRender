@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-03
+> 更新日期：2026-10-04
 > 适用范围：Windows 项目、运行时与 Player
 > 源码入口：`CMakeLists.txt`、`src/runtime/`、`src/player/main.cpp`
 > 关联测试：`ProjectTests.cpp`、`RuntimeLifecycleTests.cpp`、`test_player_cli.py`
@@ -16,7 +16,7 @@ G0 提供模块库、项目创建、版本化配置、资源挂载和独立 Play
 | AzureFoundation | 诊断、资源定位和公共构建约束 | AzureBuildOptions |
 | AzurePlatform | GLFW 窗口和表面生命周期 | AzureFoundation |
 | AzureRenderCore | RHI、帧图、着色、资产解析和场景渲染器 | AzureFoundation |
-| AzureRuntime | 场景文档、项目与运行时状态 | AzureRenderCore |
+| AzureRuntime | 项目、关卡、资产、物理、输入和脚本 | AzureRenderCore、AzureReflection |
 | AzureEditor | 编辑会话、相机控制和 Dear ImGui 界面 | AzureRuntime、AzurePlatform |
 | AzureRenderHost | 编辑预览的 GPU 宿主 | AzureRuntime、AzurePlatform、AzureEditor |
 | AzurePlayerHost | Player 的 GPU 宿主 | AzureRuntime、AzurePlatform |
@@ -39,7 +39,7 @@ GPU 宿主持有设备、交换链、帧槽、任务池和分配器。场景渲�
 
 `stop()` 清空运行期数据，允许重复调用。
 
-每帧先消费延迟操作，再执行 World 系统。暂停保持系统与模拟时间，单步使用当前帧的时间增量。固定物理步长由 G3 接入。
+项目运行使用 60 Hz 固定步，每步先消费延迟操作，再执行 World、脚本和物理。暂停保持模拟时间，单步执行一个固定步。接口见 [物理与输入](physics-input.md)和 [脚本与玩法](scripts-gameplay.md)。
 
 Player 的 P 键切换暂停，O 键推进一个暂停帧。
 
@@ -77,9 +77,9 @@ GPU 时间报告的 `cpuFrame` 分别记录帧槽等待、取图、提交、呈�
 
 ## 序列化与兼容
 
-项目使用 JSON，整数版本 1 为当前契约。读取拒绝未知版本。启动场景使用现有 `.azscene` 格式及 RenderSettings 迁移规则，文件实现位于 `src/runtime/SceneDocument.cpp`。
+项目使用 JSON，整数版本 1 为当前契约。读取拒绝未知版本。启动资源支持 `.azscene` 场景和 `.azurelevel` 关卡，组件由反射注册表校验。
 
-反射、通用组件存档与版本迁移按 G1 建设，资产数据库和关卡替换按 G2 建设。
+格式与兼容规则见 [反射与序列化](reflection.md)和 [资产与关卡](assets-levels.md)。
 
 ## 平台行为
 

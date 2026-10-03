@@ -31,7 +31,9 @@ bool LevelSession::poll() {
         if (refresh && !changed.empty()) {
             const auto id = reference_.find(":/") == std::string::npos ? reference_ : assets_.idForPath(reference_);
             if (std::find(changed.begin(), changed.end(), id) != changed.end()) {
-                auto candidate = load(reference_); commit(std::move(candidate), reference_); error_.clear(); return true;
+                auto candidate = load(reference_);
+                if (!candidate.reloadKey().empty() && candidate.reloadKey() == level_.reloadKey()) { error_.clear(); return false; }
+                commit(std::move(candidate), reference_); error_.clear(); return true;
             }
         }
     } catch (const std::exception& error) {

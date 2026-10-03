@@ -92,3 +92,5 @@ Windows 渲染核心的压力场景、质量档位、长跑与窗口恢复结果
 UUID 资产、JSON 关卡、Prefab 覆盖与热重载见 [资产与关卡](docs/runtime/assets-levels.md)。
 
 Jolt 物理、固定步长与动作输入见 [物理与输入](docs/runtime/physics-input.md)。
+
+Lua 角色控制、反射访问、触发器和关卡切换见 [脚本与玩法](docs/runtime/scripts-gameplay.md)。公开双关卡项目位于 `assets_public/gameplay/`，复制到可写目录后用 Player 加载。

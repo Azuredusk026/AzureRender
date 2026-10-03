@@ -11,6 +11,7 @@ Level Level::load(const std::filesystem::path& path, const AssetDatabase& assets
 Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) {
     const auto expanded = expandPrefabs(document, assets);
     Level level; level.document_ = document;
+    level.reloadKey_ = expanded.dump();
     level.scene.sceneId = expanded.at("id").get<std::string>();
     if (level.scene.sceneId.empty()) throw std::runtime_error("Level id must be nonempty");
     const auto sceneType = expanded.value("sceneType", "character");
@@ -23,6 +24,9 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
         SceneResource resource{source.at("id").get<std::string>(), "gltf", assets.resolveReference(source.at("asset").get<std::string>())};
         if (resource.id.empty() || !resources.insert(resource.id).second) throw std::runtime_error("Duplicate level resource");
         level.scene.resources.push_back(std::move(resource));
+        for (const auto& record : assets.records())
+            if (record.second.path == level.scene.resources.back().path)
+                level.reloadKey_ += ":" + std::to_string(record.second.fingerprint);
     }
     const auto registry = reflection::makeRuntimeRegistry();
     for (const auto& source : expanded.at("nodes")) {

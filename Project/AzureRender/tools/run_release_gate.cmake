@@ -101,6 +101,11 @@ if(WIN32)
         -File "${SOURCE_DIR}/tools/verify_player_runtime.ps1"
         -Executable "${MOVED_DIR}/bin/AzurePlayer.exe"
         -OutputDirectory "${GATE_DIR}/player-runtime")
+    find_program(AZURE_GATE_PYTHON NAMES python python3 REQUIRED)
+    run_gate_stage(player-script-runtime
+        "${AZURE_GATE_PYTHON}" "${SOURCE_DIR}/tools/test_script_player.py"
+        "${MOVED_DIR}/bin/AzurePlayer.exe"
+        "${MOVED_DIR}/share/AzureRender/assets_public/gameplay")
 endif()
 
 run_gate_stage(package
@@ -138,6 +143,6 @@ file(WRITE "${RESULT_FILE}"
     "  \"package\": \"${PACKAGE_JSON_PATH}\",\n"
     "  \"size_bytes\": ${PACKAGE_SIZE},\n"
     "  \"sha256\": \"${PACKAGE_SHA256}\",\n"
-    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"isolated-player\", \"player-project-runtime\", \"package\", \"manifest\"]\n"
+    "  \"stages\": [\"configure\", \"build\", \"test\", \"install\", \"version\", \"resources\", \"isolated-runtime\", \"isolated-player\", \"player-project-runtime\", \"player-script-runtime\", \"package\", \"manifest\"]\n"
     "}\n")
 message(STATUS "Release gate passed: ${RESULT_FILE}")

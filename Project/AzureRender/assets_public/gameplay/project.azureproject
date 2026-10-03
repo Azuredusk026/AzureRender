@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "id": "bd728fab-326a-43b1-b3bb-734a7df1c7bb",
+  "name": "脚本与传送门",
+  "mounts": [{"name": "assets", "path": "assets"}],
+  "startupScene": "assets:/courtyard.azurelevel"
+}
