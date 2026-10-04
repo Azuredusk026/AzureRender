@@ -18,6 +18,10 @@ AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。�
 6. [资产、场景与编辑器](Project/AzureRender/docs/assets-and-editor.md)
 7. [开发、测试与发布](Project/AzureRender/docs/development-and-release.md)
 8. [参数与接口参考](Project/AzureRender/docs/reference.md)
+9. [开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)
+10. [第三人称角色与可玩关卡计划](Project/AzureRender/docs/plans/third-person-playable-plan.md)
+
+当前开发路线覆盖莱万汀外观、真实 idle/walk、基础 3C 与交互关卡。F1 为 Ready，R5、G5、G6、U1、F2 和 P1 为 Planned。
 
 历史计划、阶段验收和原始 DOCX 位于 `Project/AzureRender/docs/archive/`，不作为当前实现依据。
 

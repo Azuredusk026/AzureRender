@@ -78,6 +78,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 项目当前版本为 `0.1.0-rc1`。功能状态和兼容性以源码、Schema、测试及 [CHANGELOG.md](CHANGELOG.md) 为准。
 
 - [Azure Engine 开发总计划](docs/plans/azure-engine-plan.md)
+- [第三人称角色与可玩关卡计划](docs/plans/third-person-playable-plan.md)
 - [RHI 同步与窗口生命周期](docs/runtime/rhi-synchronization.md)
 - [桌面同步验收记录](docs/acceptance/r1/2026-09-26.md)
 
@@ -98,3 +99,7 @@ UUID 资产、JSON 关卡、Prefab 覆盖与热重载见 [资产与关卡](docs/
 Jolt 物理、固定步长与动作输入见 [物理与输入](docs/runtime/physics-input.md)。
 
 Lua 角色控制、反射访问、触发器和关卡切换见 [脚本与玩法](docs/runtime/scripts-gameplay.md)。公开双关卡项目位于 `assets_public/gameplay/`，复制到可写目录后用 Player 加载。
+
+## 开发路线
+
+F1 为 Ready，R5、G5、G6、U1、F2 和 P1 为 Planned。路线覆盖莱万汀外观、真实 idle/walk、基础 3C 与交互关卡。构建复现、独立动画实例、资产加载、性能和发布随阶段验收。

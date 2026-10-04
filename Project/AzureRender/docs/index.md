@@ -21,6 +21,10 @@ AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo
 | 游戏运行时 | UUID 资产、版本化关卡、Prefab、Jolt 物理、Lua 脚本与独立 Player |
 | 游戏表现与发布 | RmlUi、动画状态机、miniaudio、公开游戏模板与 Windows 游戏包 |
 
+## 开发路线
+
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 为 Ready，其余第三人称阶段为 Planned。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+
 ## 原生 Vulkan 的边界
 
 AzureRender 直接调用 Vulkan API 来管理资源和每一帧的执行。项目不依赖 Unreal、Unity、bgfx 或其他渲染框架。GLFW 只创建窗口和 Surface。Dear ImGui 提供编辑器控件。

@@ -42,6 +42,7 @@ nav:
   - 开发规范: documentation-standard.md
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
+      - 第三人称角色与可玩关卡计划: plans/third-person-playable-plan.md
       - G0 引擎基础计划: plans/g0-implementation.md
       - U0 编辑器与界面计划: plans/u0-implementation.md
       - P0 Windows 游戏发布计划: plans/p0-implementation.md
