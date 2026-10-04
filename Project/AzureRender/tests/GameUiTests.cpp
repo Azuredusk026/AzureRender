@@ -21,6 +21,7 @@ int main(int argc,char** argv){
   std::string action;ui.setActionHandler([&](std::string value){action=value;});
   const auto button=ui.bounds("pause");std::cout<<"button: "<<button[0]<<","<<button[1]<<","<<button[2]<<","<<button[3]<<'\n';
   const auto x=static_cast<int>(button[0]+button[2]/2),y=static_cast<int>(button[1]+button[3]/2);
+  if(!ui.wantsPointer(x,y)||ui.wantsPointer(630,350))throw std::runtime_error("UI pointer focus must be limited to interactive controls");
   ui.pointer(x,y,true);ui.pointer(x,y,false);ui.update(1.0/60.0);
   if(action!="pause")throw std::runtime_error("UI button action failed");
   ui.resize(1280,720,2);ui.update(1.0/60.0);ui.render();

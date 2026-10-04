@@ -46,11 +46,29 @@ void Registry::decode(const std::string& name, void* object, const Json& envelop
         for (const auto& field : t.properties) found |= field.name == entry.key();
         if (!found) throw std::invalid_argument("Unknown component field: " + entry.key());
     }
+    if (name == "azure.third-person-camera") {
+        auto candidate = encode(name, object).at("data");
+        candidate.update(data);
+        const auto numeric = [&](const char* field) {
+            const auto& value = candidate.at(field);
+            if (!value.is_number()) throw std::invalid_argument("Expected numeric camera property");
+            return value.get<double>();
+        };
+        const auto distance = numeric("distance");
+        if (numeric("minimumDistance") > distance || distance > numeric("maximumDistance")
+            || numeric("minimumPitch") > numeric("maximumPitch"))
+            throw std::invalid_argument("Incompatible third-person camera ranges");
+    }
     t.assign(object, data);
 }
 void Registry::addMigration(const std::string& name, unsigned version, std::function<Json(Json)> migration) {
     if (version >= type(name).version || !migration || !migrations_.emplace(std::make_pair(name, version), std::move(migration)).second)
         throw std::invalid_argument("Invalid or duplicate migration");
 }
-Registry makeRuntimeRegistry() { Registry registry; registerGeneratedTypes(registry); return registry; }
+Registry makeRuntimeRegistry() {
+    Registry registry; registerGeneratedTypes(registry);
+    registry.addMigration("azure.character", 1, [](Json data) { return data; });
+    registry.addMigration("azure.animator", 1, [](Json data) { return data; });
+    return registry;
+}
 } // namespace azurerender::reflection

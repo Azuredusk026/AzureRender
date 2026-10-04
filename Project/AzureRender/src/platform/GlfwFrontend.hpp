@@ -19,6 +19,7 @@ struct GlfwFrontendConfig {
     void* userPointer = nullptr;
     GLFWframebuffersizefun framebufferSizeCallback = nullptr;
     GLFWkeyfun keyCallback = nullptr;
+    GLFWscrollfun scrollCallback = nullptr;
 };
 
 class GlfwFrontend final {

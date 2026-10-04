@@ -13,7 +13,7 @@ struct RigidBody {
     AZURE_FIELD("Trigger", 0, 1)
     bool trigger = false;
 };
-AZURE_TYPE("azure.character", 1)
+AZURE_TYPE("azure.character", 2)
 struct Character {
     AZURE_FIELD("Speed", 0, 100)
     float speed = 4.0F;
@@ -23,6 +23,47 @@ struct Character {
     float radius = 0.3F;
     AZURE_FIELD("Half height", 0.01, 10)
     float halfHeight = 0.6F;
+    AZURE_FIELD("Acceleration", 0.01, 1000)
+    float acceleration = 24;
+    AZURE_FIELD("Braking", 0.01, 1000)
+    float braking = 32;
+    AZURE_FIELD("Turn speed degrees", 0.01, 2000)
+    float turnSpeed = 540;
+    AZURE_FIELD("Maximum slope degrees", 1, 85)
+    float maximumSlope = 45;
+    AZURE_FIELD("Step height", 0, 2)
+    float stepHeight = .3F;
+    AZURE_FIELD("Capsule center offset", -10, 10)
+    float centerOffset = 0;
+    AZURE_FIELD("Model forward yaw degrees", -180, 180)
+    float forwardYaw = 0;
+    AZURE_FIELD("Player controlled", 0, 1)
+    bool controlled = true;
+};
+AZURE_TYPE("azure.third-person-camera", 1)
+struct ThirdPersonCamera {
+    AZURE_FIELD("Follow target", 0, 0)
+    std::string target = "hero";
+    AZURE_FIELD("Distance", 0.5, 30)
+    float distance = 4;
+    AZURE_FIELD("Minimum distance", 0.2, 30)
+    float minimumDistance = 1;
+    AZURE_FIELD("Maximum distance", 0.5, 50)
+    float maximumDistance = 8;
+    AZURE_FIELD("Shoulder offset", -3, 3)
+    float shoulder = .25F;
+    AZURE_FIELD("Target height", -3, 10)
+    float targetHeight = 1;
+    AZURE_FIELD("Minimum pitch degrees", -85, 85)
+    float minimumPitch = -15;
+    AZURE_FIELD("Maximum pitch degrees", -85, 85)
+    float maximumPitch = 65;
+    AZURE_FIELD("Sensitivity degrees per pixel", .001, 5)
+    float sensitivity = .15F;
+    AZURE_FIELD("Collision radius", .01, 2)
+    float collisionRadius = .2F;
+    AZURE_FIELD("Follow response", .01, 100)
+    float response = 12;
 };
 AZURE_TYPE("azure.script", 1)
 struct Script {
@@ -31,7 +72,7 @@ struct Script {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
 };
-AZURE_TYPE("azure.animator", 1)
+AZURE_TYPE("azure.animator", 2)
 struct Animator {
     AZURE_FIELD("Graph asset", 0, 0)
     std::string asset;
@@ -39,6 +80,19 @@ struct Animator {
     std::string state = "idle";
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
+    AZURE_FIELD("Locomotion driven", 0, 1)
+    bool locomotion = false;
+    AZURE_FIELD("Crossfade seconds", 0, 10)
+    float crossfade = .18F;
+    AZURE_FIELD("Walk reference speed", 0.01, 100)
+    float referenceSpeed = 2;
+    AZURE_FIELD("Initial clip time", 0, 600)
+    float startTime = 0;
+    AZURE_FIELD("Morph weight zero", 0, 1)
+    float morph0 = 0;
+    AZURE_FIELD("Morph weight one", 0, 1)
+    float morph1 = 0;
+    float playbackRate = 1;
 };
 AZURE_TYPE("azure.audio-source", 1)
 struct AudioSource {

@@ -4,6 +4,8 @@ AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。�
 
 游戏项目支持反射组件、关卡与 Prefab、Jolt 物理、Lua、动画、声音和 RmlUi。公开模板贯通创建、编辑、运行和 Windows 独立游戏发布。
 
+第三人称项目提供独立动画实例、真实动作导入、速度驱动和跟随相机。公共制作入口与主角验收流程见[独立动画与第三人称控制](docs/runtime/third-person-animation.md)。
+
 角色材质验收提供七视角、眉毛遮罩、主光扫描及公共混合场景。派生素材、固定输入和标注流程见[角色材质定稿与验收](docs/runtime/character-finish.md)。
 
 > **English summary:** AzureRender is a real-time renderer written with C++17 and the native Vulkan API. One host runs both the stylized character renderer and the relativistic black-hole simulation. It also includes deterministic capture, diagnostics, GPU timing and an in-process renderer interface.

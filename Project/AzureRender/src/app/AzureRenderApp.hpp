@@ -7,6 +7,7 @@
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
+#include "runtime/GameInputReplay.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "runtime/GameUi.hpp"
@@ -150,6 +151,8 @@ private:
     azurerender::RuntimeLifecycle runtime_;
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
+    std::optional<azurerender::GameInputReplay> gameInputReplay_;
+    nlohmann::json gameRouteFrames_=nlohmann::json::array();
     std::unique_ptr<azurerender::ScriptRuntime> scriptRuntime_;
     std::unique_ptr<azurerender::PresentationRuntime> presentationRuntime_;
     std::unique_ptr<azurerender::GameUiRenderer> gameUiRenderer_;
@@ -258,6 +261,9 @@ private:
     float pendingPickY_ = 0.0F;
     bool pendingPickRequested_ = false;
     std::array<float, 3> cameraPosition_{2.8F, 2.1F, 3.2F};
+    bool gameViewportFocus_ = true, gameCursorPrimed_ = false;
+    double gameCursorX_ = 0, gameCursorY_ = 0;
+    static void scrollCallback(GLFWwindow* window, double x, double y);
     std::array<float, 3> cameraTarget_{0.0F, 0.0F, 0.0F};
     float rotationAngle_ = 0.0F;
     float rotationSpeed_ = 0.65F;

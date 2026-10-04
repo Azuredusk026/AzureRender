@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 7: AzureEngine.ThirdPerson
+1/1 Test #7: AzureEngine.ThirdPerson ..........***Failed    0.11 sec
+Camera component must reject incompatible ranges atomically
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	  7 - AzureEngine.ThirdPerson (Failed)
+Errors while running CTest

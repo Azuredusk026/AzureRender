@@ -8,6 +8,8 @@
 #include <Jolt/Physics/Character/CharacterVirtual.h>
 #include <Jolt/Physics/Collision/Shape/BoxShape.h>
 #include <Jolt/Physics/Collision/Shape/CapsuleShape.h>
+#include <Jolt/Physics/Collision/Shape/SphereShape.h>
+#include <Jolt/Physics/Collision/ShapeCast.h>
 #include <Jolt/Physics/Collision/RayCast.h>
 #include <Jolt/Physics/Collision/CastResult.h>
 #include <Jolt/Physics/Collision/CollideShape.h>
@@ -42,7 +44,7 @@ struct PhysicsWorld::Impl {
     JPH::TempAllocatorImpl allocator{16 * 1024 * 1024};
     JPH::JobSystemSingleThreaded jobs{1024};
     struct Body { JPH::BodyID id; std::string node; game::RigidBody settings; std::array<float, 3> scale; };
-    struct Character { JPH::Ref<JPH::CharacterVirtual> value; std::string node; game::Character settings; };
+    struct Character { JPH::Ref<JPH::CharacterVirtual> value; std::string node; game::Character settings; float groundAge = 1, jumpBuffer = 0; bool jumping = false; };
     std::map<ecs::Entity, Body> bodies;
     std::map<ecs::Entity, Character> characters;
     std::set<std::pair<ecs::Entity, ecs::Entity>> contacts;
@@ -93,7 +95,8 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
     world.each<ecs::TransformComponent, game::Character>([&](auto entity, auto& transform, const auto& settings) {
         if (!(settings.radius > 0 && settings.halfHeight > 0)) throw std::invalid_argument("Invalid character shape");
         auto found = p.characters.find(entity);
-        if (found != p.characters.end() && (found->second.settings.radius != settings.radius || found->second.settings.halfHeight != settings.halfHeight)) {
+        if (found != p.characters.end() && (found->second.settings.radius != settings.radius || found->second.settings.halfHeight != settings.halfHeight
+            || found->second.settings.centerOffset != settings.centerOffset || found->second.settings.maximumSlope != settings.maximumSlope)) {
             p.characters.erase(found); found = p.characters.end();
         }
         if (found == p.characters.end()) {
@@ -101,22 +104,36 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
             create.mShape = new JPH::CapsuleShape(settings.halfHeight, settings.radius);
             create.mInnerBodyShape = create.mShape; create.mInnerBodyLayer = 1;
             create.mSupportingVolume = JPH::Plane(JPH::Vec3::sAxisY(), -settings.radius);
-            JPH::Ref<JPH::CharacterVirtual> character = new JPH::CharacterVirtual(&create, JPH::RVec3(vec(transform.translation)), JPH::Quat::sIdentity(), entity, &p.system);
+            create.mMaxSlopeAngle = JPH::DegreesToRadians(settings.maximumSlope);
+            auto center = transform.translation; center[1] += settings.centerOffset;
+            JPH::Ref<JPH::CharacterVirtual> character = new JPH::CharacterVirtual(&create, JPH::RVec3(vec(center)), JPH::Quat::sIdentity(), entity, &p.system);
             found = p.characters.emplace(entity, Impl::Character{character, runtime.nodeId(entity), settings}).first;
         }
         auto& character = *found->second.value;
-        const auto difference = JPH::Vec3(character.GetPosition()) - vec(transform.translation);
-        if (difference.LengthSq() > 0.000001F) character.SetPosition(JPH::RVec3(vec(transform.translation)));
+        auto center = transform.translation; center[1] += settings.centerOffset;
+        const auto difference = JPH::Vec3(character.GetPosition()) - vec(center);
+        if (difference.LengthSq() > 0.000001F) character.SetPosition(JPH::RVec3(vec(center)));
         const auto requested = motions.find(entity); const CharacterMotion move = requested == motions.end() ? CharacterMotion{} : requested->second;
         const float length = std::sqrt(move.x * move.x + move.z * move.z), denominator = std::max(1.0F, length);
         float vertical = character.GetLinearVelocity().GetY();
         const bool onGround = character.GetGroundState() == JPH::CharacterBase::EGroundState::OnGround;
+        auto& state = found->second;
+        state.groundAge = onGround ? 0 : state.groundAge + dt;
+        if (onGround && vertical <= 0) state.jumping = false;
+        state.jumpBuffer = move.jump ? .1F : std::max(0.0F,state.jumpBuffer-dt);
         if (onGround && vertical < 0) vertical = 0;
-        if (onGround && move.jump) vertical = settings.jumpSpeed;
+        if (!state.jumping && state.groundAge <= .1F && state.jumpBuffer > 0) {
+            vertical = settings.jumpSpeed; state.jumpBuffer = 0; state.groundAge = 1; state.jumping = true;
+        }
         vertical -= 9.81F * dt;
-        character.SetLinearVelocity({move.x / denominator * settings.speed, vertical, move.z / denominator * settings.speed});
-        character.ExtendedUpdate(dt, p.system.GetGravity(), {}, p.system.GetDefaultBroadPhaseLayerFilter(1), p.system.GetDefaultLayerFilter(1), {}, {}, p.allocator);
+        const float speed = move.velocity ? 1 : settings.speed / denominator;
+        character.SetLinearVelocity({move.x * speed, vertical, move.z * speed});
+        JPH::CharacterVirtual::ExtendedUpdateSettings update;
+        update.mWalkStairsStepUp = {0,settings.stepHeight,0};
+        if (vertical > 0) update.mStickToFloorStepDown = JPH::Vec3::sZero();
+        character.ExtendedUpdate(dt, p.system.GetGravity(), update, p.system.GetDefaultBroadPhaseLayerFilter(1), p.system.GetDefaultLayerFilter(1), {}, {}, p.allocator);
         transform.translation = array(JPH::Vec3(character.GetPosition()));
+        transform.translation[1] -= settings.centerOffset;
     });
     const auto result = p.system.Update(dt, 1, &p.allocator, &p.jobs);
     if (result != JPH::EPhysicsUpdateError::None) throw std::runtime_error("Jolt update capacity exceeded");
@@ -151,5 +168,26 @@ std::optional<RayHit> PhysicsWorld::raycast(const std::array<float, 3>& origin, 
     JPH::RayCastResult result;
     if (!impl_->system.GetNarrowPhaseQuery().CastRay(JPH::RRayCast(JPH::RVec3(vec(origin)), vec(displacement)), result)) return {};
     return RayHit{static_cast<ecs::Entity>(impl_->system.GetBodyInterface().GetUserData(result.mBodyID)), result.mFraction};
+}
+std::array<float,3> PhysicsWorld::velocity(ecs::Entity entity) const {
+    const auto found=impl_->characters.find(entity);
+    return found==impl_->characters.end()?std::array<float,3>{}:array(found->second.value->GetLinearVelocity());
+}
+std::optional<RayHit> PhysicsWorld::sphereSweep(const std::array<float,3>& origin,
+    const std::array<float,3>& displacement, float radius, ecs::Entity ignore) const {
+    if (!std::isfinite(radius)||radius<=0) throw std::invalid_argument("Sphere radius must be positive");
+    struct Filter final : JPH::BodyFilter {
+        ecs::Entity ignored;
+        explicit Filter(ecs::Entity value):ignored(value){}
+        bool ShouldCollideLocked(const JPH::Body& body) const override {
+            return !body.IsSensor() && body.GetUserData()!=ignored;
+        }
+    } filter(ignore);
+    JPH::Ref<JPH::SphereShape> sphere = new JPH::SphereShape(radius);
+    JPH::ClosestHitCollisionCollector<JPH::CastShapeCollector> hits;
+    impl_->system.GetNarrowPhaseQuery().CastShape(JPH::RShapeCast(sphere,JPH::Vec3::sReplicate(1),
+        JPH::RMat44::sTranslation(JPH::RVec3(vec(origin))),vec(displacement)), {}, JPH::RVec3::sZero(), hits, {}, {}, filter);
+    if(!hits.HadHit()) return {};
+    return RayHit{static_cast<ecs::Entity>(impl_->system.GetBodyInterface().GetUserData(hits.mHit.mBodyID2)), hits.mHit.mFraction};
 }
 } // namespace azurerender

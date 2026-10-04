@@ -1,0 +1,235 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start  1: AzureEngine.GameUiRenderer
+ 1/69 Test  #1: AzureEngine.GameUiRenderer ......................   Passed    0.02 sec
+      Start  2: AzureEngine.GameUi
+ 2/69 Test  #2: AzureEngine.GameUi ..............................   Passed    0.03 sec
+      Start  3: AzureEngine.EditorWorkflow
+ 3/69 Test  #3: AzureEngine.EditorWorkflow ......................   Passed    1.69 sec
+      Start  4: AzureEngine.PresentationRuntime
+ 4/69 Test  #4: AzureEngine.PresentationRuntime .................   Passed    0.07 sec
+      Start  5: AzureEngine.GameplayPresentation
+ 5/69 Test  #5: AzureEngine.GameplayPresentation ................   Passed    0.03 sec
+      Start  6: AzureEngine.ScriptRuntime
+ 6/69 Test  #6: AzureEngine.ScriptRuntime .......................   Passed    0.70 sec
+      Start  7: AzureEngine.ThirdPerson
+ 7/69 Test  #7: AzureEngine.ThirdPerson .........................   Passed    0.20 sec
+      Start  8: AzureRender.AnimationPose
+ 8/69 Test  #8: AzureRender.AnimationPose .......................   Passed    0.01 sec
+      Start  9: AzureRender.BrowRegions
+ 9/69 Test  #9: AzureRender.BrowRegions .........................   Passed    0.02 sec
+      Start 10: AzureEngine.PhysicsInput
+10/69 Test #10: AzureEngine.PhysicsInput ........................   Passed    0.11 sec
+      Start 11: AzureEngine.AssetLevel
+11/69 Test #11: AzureEngine.AssetLevel ..........................   Passed    0.23 sec
+      Start 12: AzureEngine.Reflection
+12/69 Test #12: AzureEngine.Reflection ..........................   Passed    0.01 sec
+      Start 13: AzureEngine.AnimationRetarget
+13/69 Test #13: AzureEngine.AnimationRetarget ...................   Passed    0.82 sec
+      Start 14: AzureEngine.SourceSkinRestore
+14/69 Test #14: AzureEngine.SourceSkinRestore ...................   Passed    0.63 sec
+      Start 15: AzureEngine.GamePackageRules
+15/69 Test #15: AzureEngine.GamePackageRules ....................   Passed    1.15 sec
+      Start 16: AzureEngine.BuildConfiguration
+16/69 Test #16: AzureEngine.BuildConfiguration ..................   Passed    5.25 sec
+      Start 17: AzureEngine.BuildProvenance
+17/69 Test #17: AzureEngine.BuildProvenance .....................   Passed    0.67 sec
+      Start 18: AzureEngine.CharacterIntake
+18/69 Test #18: AzureEngine.CharacterIntake .....................   Passed    0.52 sec
+      Start 19: AzureEngine.CharacterPreparation
+19/69 Test #19: AzureEngine.CharacterPreparation ................   Passed    0.50 sec
+      Start 20: AzureEngine.MaterialFixtureGpu
+20/69 Test #20: AzureEngine.MaterialFixtureGpu ..................   Passed   14.65 sec
+      Start 21: AzureEngine.IndependentAnimationGpu
+21/69 Test #21: AzureEngine.IndependentAnimationGpu .............   Passed    9.57 sec
+      Start 22: AzureEngine.ThirdPersonPlayer
+22/69 Test #22: AzureEngine.ThirdPersonPlayer ...................   Passed    4.62 sec
+      Start 23: AzureEngine.PresentationGpu
+23/69 Test #23: AzureEngine.PresentationGpu .....................   Passed    6.91 sec
+      Start 24: AzureEngine.EditorHost
+24/69 Test #24: AzureEngine.EditorHost ..........................***Failed    2.02 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 61, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workflow.py", line 45, in main
+    raise AssertionError(process.stdout + process.stderr)
+AssertionError: Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1280x720
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_4ubihfav\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Additional scene resources: 1, total joints 2
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\23587\AppData\Local\Temp\azure_editor_4ubihfav\game\assets\hero.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "MorphJointPulse", 0.250000 s loop)
+Additional scene resources: 2, total joints 3
+Scene renderer: character (sceneType=character)
+Clustered lighting: 0 lights, 0 cluster references
+ECS visible renderables: 2
+Allocator after unload: buffers=0 images=0
+[1791127392552][info][editor][code=0] Opened scene: courtyard
+[1791127392793][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791127393132][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791127393147][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791127393529][info][editor][code=0] Imported asset: test_model.gltf
+[1791127393530][info][editor][code=0] Asset reload requested; changed files: 1
+[1791127393581][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791127393617][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791127393920][info][editor][code=0] Renderer resources reloaded
+[1791127393933][info][editor][code=0] Selected node: Placed Object
+[1791127394050][error][main][code=3] Scene instance pose capacity exceeded; reload scene resources
+
+
+      Start 25: AzureEngine.MetaGenerator
+25/69 Test #25: AzureEngine.MetaGenerator .......................   Passed    0.39 sec
+      Start 26: AzureEngine.LevelPlayer
+26/69 Test #26: AzureEngine.LevelPlayer .........................   Passed   12.87 sec
+      Start 27: AzureEngine.PhysicsPlayer
+27/69 Test #27: AzureEngine.PhysicsPlayer .......................   Passed    2.42 sec
+      Start 28: AzureEngine.ScriptPlayer
+28/69 Test #28: AzureEngine.ScriptPlayer ........................   Passed    2.77 sec
+      Start 29: AzureEngine.Project
+29/69 Test #29: AzureEngine.Project .............................   Passed    0.26 sec
+      Start 30: AzureEngine.RuntimeLifecycle
+30/69 Test #30: AzureEngine.RuntimeLifecycle ....................   Passed    0.02 sec
+      Start 31: AzureRender.EnvironmentAsset
+31/69 Test #31: AzureRender.EnvironmentAsset ....................   Passed    0.04 sec
+      Start 32: AzureRender.RenderGraph
+32/69 Test #32: AzureRender.RenderGraph .........................   Passed    0.03 sec
+      Start 33: AzureRender.TransientResourcePool
+33/69 Test #33: AzureRender.TransientResourcePool ...............   Passed    0.02 sec
+      Start 34: AzureRender.LightBuffer
+34/69 Test #34: AzureRender.LightBuffer .........................   Passed    0.03 sec
+      Start 35: AzureRender.CascadedShadow
+35/69 Test #35: AzureRender.CascadedShadow ......................   Passed    0.02 sec
+      Start 36: AzureRender.ClusteredLightGrid
+36/69 Test #36: AzureRender.ClusteredLightGrid ..................   Passed    0.03 sec
+      Start 37: AzureRender.ComputePass
+37/69 Test #37: AzureRender.ComputePass .........................   Passed    0.03 sec
+      Start 38: AzureRender.FrameTaskScheduler
+38/69 Test #38: AzureRender.FrameTaskScheduler ..................   Passed    0.03 sec
+      Start 39: AzureRender.SurfaceLifecycle
+39/69 Test #39: AzureRender.SurfaceLifecycle ....................   Passed    0.03 sec
+      Start 40: AzureRender.CommandLine
+40/69 Test #40: AzureRender.CommandLine .........................   Passed    0.03 sec
+      Start 41: AzureRender.EditorCameraController
+41/69 Test #41: AzureRender.EditorCameraController ..............   Passed    0.03 sec
+      Start 42: AzureRender.EditorSession
+42/69 Test #42: AzureRender.EditorSession .......................   Passed    0.04 sec
+      Start 43: AzureRender.Ecs
+43/69 Test #43: AzureRender.Ecs .................................   Passed    0.01 sec
+      Start 44: AzureRender.PickMath
+44/69 Test #44: AzureRender.PickMath ............................   Passed    0.02 sec
+      Start 45: AzureRender.SceneModel
+45/69 Test #45: AzureRender.SceneModel ..........................   Passed    0.07 sec
+      Start 46: AzureRender.RuntimeDiagnostics
+46/69 Test #46: AzureRender.RuntimeDiagnostics ..................   Passed    0.04 sec
+      Start 47: AzureRender.GpuCapabilityReport
+47/69 Test #47: AzureRender.GpuCapabilityReport .................   Passed    0.03 sec
+      Start 48: AzureRender.ResourceLocator
+48/69 Test #48: AzureRender.ResourceLocator .....................   Passed    0.03 sec
+      Start 49: AzureRender.ExtensionRegistry
+49/69 Test #49: AzureRender.ExtensionRegistry ...................   Passed    0.03 sec
+      Start 50: AzureRender.UploadRing
+50/69 Test #50: AzureRender.UploadRing ..........................   Passed    0.02 sec
+      Start 51: AzureRender.NullRhi
+51/69 Test #51: AzureRender.NullRhi .............................   Passed    0.02 sec
+      Start 52: AzureRender.NullRhiPass
+52/69 Test #52: AzureRender.NullRhiPass .........................   Passed    0.41 sec
+      Start 53: AzureRender.SceneGraph
+53/69 Test #53: AzureRender.SceneGraph ..........................   Passed    0.03 sec
+      Start 54: AzureRender.VisualRegression
+54/69 Test #54: AzureRender.VisualRegression ....................***Failed   14.90 sec
+[FAIL] character_beauty_fullbody: mean=0.043501 changed=0.224422
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[FAIL] character_direct_diffuse_fullbody: mean=0.002249 changed=0.068797
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=2
+
+      Start 55: AzureRender.VisualRegressionLegacyDescriptors
+55/69 Test #55: AzureRender.VisualRegressionLegacyDescriptors ...***Failed   13.56 sec
+[FAIL] character_beauty_fullbody: mean=0.043501 changed=0.224422
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[FAIL] character_direct_diffuse_fullbody: mean=0.002249 changed=0.068797
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=2
+
+      Start 56: AzureRender.BlackholeComputeGpu
+56/69 Test #56: AzureRender.BlackholeComputeGpu .................   Passed    2.40 sec
+      Start 57: AzureRender.CharacterIblComputeGpu
+57/69 Test #57: AzureRender.CharacterIblComputeGpu ..............   Passed    1.31 sec
+      Start 58: AzureRender.CharacterSkinningComputeGpu
+58/69 Test #58: AzureRender.CharacterSkinningComputeGpu .........   Passed    2.31 sec
+      Start 59: AzureRender.R4AcceptanceRules
+59/69 Test #59: AzureRender.R4AcceptanceRules ...................   Passed    0.50 sec
+      Start 60: AzureEngine.PlayerCli
+60/69 Test #60: AzureEngine.PlayerCli ...........................   Passed    0.53 sec
+      Start 61: AzureRender.BlackholeOptimizationRules
+61/69 Test #61: AzureRender.BlackholeOptimizationRules ..........   Passed    0.53 sec
+      Start 62: AzureRender.R3Comparison
+62/69 Test #62: AzureRender.R3Comparison ........................   Passed   15.45 sec
+      Start 63: AzureRender.R3TransparentComparison
+63/69 Test #63: AzureRender.R3TransparentComparison .............   Passed   17.04 sec
+      Start 64: AzureRender.AuditRegressions
+64/69 Test #64: AzureRender.AuditRegressions ....................   Passed    2.09 sec
+      Start 65: AzureRender.VisualRegressionLegacySkinning
+65/69 Test #65: AzureRender.VisualRegressionLegacySkinning ......***Failed   14.56 sec
+[FAIL] character_beauty_fullbody: mean=0.043501 changed=0.224422
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[FAIL] character_direct_diffuse_fullbody: mean=0.002249 changed=0.068797
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=2
+
+      Start 66: AzureRender.CharacterMorphComputeGpu
+66/69 Test #66: AzureRender.CharacterMorphComputeGpu ............   Passed   17.53 sec
+      Start 67: AzureRender.ClusteredLightingGpu
+67/69 Test #67: AzureRender.ClusteredLightingGpu ................   Passed    5.16 sec
+      Start 68: AzureRender.ReleaseGateMissingBuild
+68/69 Test #68: AzureRender.ReleaseGateMissingBuild .............   Passed    0.03 sec
+      Start 69: AzureRender.InstallManifestRoundTrip
+69/69 Test #69: AzureRender.InstallManifestRoundTrip ............   Passed    0.23 sec
+
+94% tests passed, 4 tests failed out of 69
+
+Label Time Summary:
+GPU    =  14.19 sec*proc (2 tests)
+gpu    = 147.94 sec*proc (17 tests)
+
+Total Test time (real) = 178.44 sec
+
+The following tests FAILED:
+	 24 - AzureEngine.EditorHost (Failed)
+	 54 - AzureRender.VisualRegression (Failed)
+	 55 - AzureRender.VisualRegressionLegacyDescriptors (Failed)
+	 65 - AzureRender.VisualRegressionLegacySkinning (Failed)
+Errors while running CTest

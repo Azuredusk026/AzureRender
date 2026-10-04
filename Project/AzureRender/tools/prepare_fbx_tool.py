@@ -22,6 +22,7 @@ for name, expected in FILES.items():
 license_path = vendor / "LICENSE"
 if not license_path.is_file():
     urllib.request.urlretrieve("https://raw.githubusercontent.com/ufbx/ufbx/v0.17.1/LICENSE", license_path)
-source = Path(__file__).with_name("fbx_sample.c").resolve()
-subprocess.run(["cl", "/nologo", "/O2", "/TC", "/I" + str(vendor), str(source), str(vendor / "ufbx.c"),
-    "/Fe:" + str(root / "azure_fbx_sample.exe"), "/Fo:" + str(root) + "\\"], cwd=root, check=True)
+for tool in ("sample", "skin"):
+    source = Path(__file__).with_name("fbx_" + tool + ".c").resolve()
+    subprocess.run(["cl", "/nologo", "/O2", "/TC", "/I" + str(vendor), str(source), str(vendor / "ufbx.c"),
+        "/Fe:" + str(root / ("azure_fbx_" + tool + ".exe")), "/Fo:" + str(root) + "\\"], cwd=root, check=True)

@@ -24,6 +24,8 @@ struct InstanceTransforms {
     mat4 modelViewProjection;
     mat4 cascadeLightModelViewProjection[4];
     uvec4 meta;
+    vec4 faceLight;
+    vec4 morph;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -42,14 +44,19 @@ layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
 layout(location = 0) out vec2 textureCoordinate;
 
+#if defined(AZURE_COMPUTE_SKINNING)
+layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
+float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*27u+offset]); }
+vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
+#endif
 void main() {
 #if defined(AZURE_COMPUTE_SKINNING)
-    vec4 skinnedPosition = vec4(position, 1.0);
+    vec4 skinnedPosition = vec4(posedVector(0u), 1.0);
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     vec3 morphedPosition = position
-        + morph0 * shadowParameters.morphWeights.x
-        + morph1 * shadowParameters.morphWeights.y;
+        + morph0 * instanceData.instances[gl_InstanceIndex].morph.x
+        + morph1 * instanceData.instances[gl_InstanceIndex].morph.y;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]

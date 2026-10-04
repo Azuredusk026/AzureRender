@@ -16,6 +16,7 @@ public:
     std::array<float,4> bounds(const std::string& id) const;
     void setActionHandler(std::function<void(std::string)> handler);
     bool pointer(int x, int y, bool down);
+    bool wantsPointer(int x,int y) const;
     void update(double delta);
     void render();
     bool wantsKeyboard() const;

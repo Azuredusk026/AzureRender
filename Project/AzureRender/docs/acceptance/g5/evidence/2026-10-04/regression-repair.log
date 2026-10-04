@@ -1,0 +1,52 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  7: AzureEngine.ThirdPerson
+1/5 Test  #7: AzureEngine.ThirdPerson .........................   Passed    0.25 sec
+    Start 24: AzureEngine.EditorHost
+2/5 Test #24: AzureEngine.EditorHost ..........................   Passed    3.55 sec
+    Start 54: AzureRender.VisualRegression
+3/5 Test #54: AzureRender.VisualRegression ....................***Failed   12.53 sec
+[FAIL] character_beauty_fullbody: mean=0.042464 changed=0.184995
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=1
+
+    Start 55: AzureRender.VisualRegressionLegacyDescriptors
+4/5 Test #55: AzureRender.VisualRegressionLegacyDescriptors ...***Failed   13.50 sec
+[FAIL] character_beauty_fullbody: mean=0.042464 changed=0.184995
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=1
+
+    Start 65: AzureRender.VisualRegressionLegacySkinning
+5/5 Test #65: AzureRender.VisualRegressionLegacySkinning ......***Failed   13.47 sec
+[FAIL] character_beauty_fullbody: mean=0.042464 changed=0.184995
+[ OK ] character_albedo_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_world_normal_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_material_id_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_outline_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_direct_diffuse_fullbody: mean=0.000000 changed=0.000000
+[ OK ] character_face_sdf_closeup: mean=0.000000 changed=0.000000
+cases=7 failures=1
+
+
+40% tests passed, 3 tests failed out of 5
+
+Label Time Summary:
+gpu    =  43.05 sec*proc (4 tests)
+
+Total Test time (real) =  43.32 sec
+
+The following tests FAILED:
+	 54 - AzureRender.VisualRegression (Failed)
+	 55 - AzureRender.VisualRegressionLegacyDescriptors (Failed)
+	 65 - AzureRender.VisualRegressionLegacySkinning (Failed)
+Errors while running CTest

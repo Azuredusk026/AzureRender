@@ -27,6 +27,8 @@ struct InstanceTransforms {
     mat4 modelViewProjection;
     mat4 cascadeLightModelViewProjection[4];
     uvec4 meta;
+    vec4 faceLight;
+    vec4 morph;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -47,6 +49,7 @@ layout(location = 2) out vec2 textureCoordinate;
 layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPositions[4];
 layout(location = 8) out float eyebrowRegion;
+layout(location = 9) flat out vec4 instanceFaceDirection;
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -60,14 +63,20 @@ layout(push_constant) uniform MorphWeights {
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 
+#if defined(AZURE_COMPUTE_SKINNING)
+layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
+float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*27u+offset]); }
+vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
+#endif
 void main() {
     eyebrowRegion = browMask;
+    instanceFaceDirection = instanceData.instances[gl_InstanceIndex].faceLight;
     bool browOverlay =
         (morphWeights.materialFeatures & 64U) != 0U;
 #if defined(AZURE_COMPUTE_SKINNING)
-    vec4 skinnedPosition = vec4(position, 1.0);
-    vec3 skinnedNormal = normalize(normal);
-    vec3 skinnedTangent = normalize(tangent.xyz);
+    vec4 skinnedPosition = vec4(posedVector(0u), 1.0);
+    vec3 skinnedNormal = normalize(posedVector(3u));
+    vec3 skinnedTangent = normalize(posedVector(6u));
 
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
@@ -76,8 +85,8 @@ void main() {
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
         + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
-    vec3 morphedPosition = position + morph0 * morphWeights.weights.x
-        + morph1 * morphWeights.weights.y;
+    vec3 morphedPosition = position + morph0 * instanceData.instances[gl_InstanceIndex].morph.x
+        + morph1 * instanceData.instances[gl_InstanceIndex].morph.y;
 
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
@@ -98,7 +107,6 @@ void main() {
     vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * skinnedTangent);
     gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
-    gl_Position.xy *= 1.6;
     worldNormal = normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoNormal);
     worldTangent = vec4(
         normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoTangent),

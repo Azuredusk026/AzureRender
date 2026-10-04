@@ -10,6 +10,7 @@ void visitComponentType(const std::string& type, Callback&& callback) {
     else if (type == "azure.renderable") callback(ecs::RenderableComponent{});
     else if (type == "azure.rigid-body") callback(game::RigidBody{});
     else if (type == "azure.character") callback(game::Character{});
+    else if (type == "azure.third-person-camera") callback(game::ThirdPersonCamera{});
     else if (type == "azure.script") callback(game::Script{});
     else if (type == "azure.animator") callback(game::Animator{});
     else if (type == "azure.audio-source") callback(game::AudioSource{});

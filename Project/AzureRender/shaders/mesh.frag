@@ -107,6 +107,7 @@ layout(location = 2) in vec2 textureCoordinate;
 layout(location = 3) in vec3 worldPosition;
 layout(location = 4) in vec4 shadowPositions[4];
 layout(location = 8) in float eyebrowRegion;
+layout(location = 9) flat in vec4 instanceFaceDirection;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -442,7 +443,7 @@ void main() {
         ? materialFeatureEnabled(4U)
         : 0.0;
     float faceSdfEnabled = camera.faceSdfParameters.x
-        * camera.faceLightDirection.w
+        * instanceFaceDirection.w
         * faceSdfEligible;
     if (qaEffectMode == 8 && qaEffectDisabled) {
         faceSdfEnabled = 0.0;
@@ -450,8 +451,8 @@ void main() {
     float faceCoordinate = camera.faceSdfParameters.w > 0.5
         ? 1.0 - faceSdfSample.r
         : faceSdfSample.r;
-    float lateralLight = camera.faceLightDirection.x;
-    float frontLight = max(-camera.faceLightDirection.z, 0.0);
+    float lateralLight = instanceFaceDirection.x;
+    float frontLight = max(-instanceFaceDirection.z, 0.0);
     // Crossing the head-local lateral axis must not switch the mirrored SDF
     // in one frame. Use a broad angular window so the lit-side transition
     // remains continuous at normal turntable speed.

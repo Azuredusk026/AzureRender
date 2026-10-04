@@ -69,7 +69,7 @@ private:
     // shadow map, toon ramp), then per-material blocks of eight textures.
     static constexpr std::uint32_t kSharedTextureSlots = 3;
     static constexpr std::uint32_t kMaterialTextureSlots = 8;
-    static constexpr std::uint32_t kAssetVertexWordCount = 26;
+    static constexpr std::uint32_t kAssetVertexWordCount = 27;
 
     struct GpuTexture {
         rhi::GpuImage image;
@@ -152,15 +152,18 @@ private:
         std::array<std::array<float, 16>, kShadowCascadeCount>
             cascadeLightModelViewProjection{};
         std::array<std::uint32_t, 4> meta{};
+        std::array<float, 4> faceLight{};
+        std::array<float, 4> morph{};
     };
-    static_assert(sizeof(InstanceGpuData) == 400);
+    static_assert(sizeof(InstanceGpuData) == 432);
 
     struct SkinningPushConstants {
         std::uint32_t vertexCount = 0;
         std::uint32_t jointBase = 0;
         std::array<float, 2> morphWeights{};
+        std::uint32_t outputBase = 0;
     };
-    static_assert(sizeof(SkinningPushConstants) == 16);
+    static_assert(sizeof(SkinningPushConstants) == 20);
 
     // A scene-referenced asset beyond the hero. Renders at bind pose in the
     // current stage; its joints and material textures append after the hero
@@ -302,6 +305,19 @@ private:
     // the visible list.
     std::vector<scene::SceneInstance> sceneInstances_;
     std::vector<const scene::SceneInstance*> visibleInstances_;
+    struct InstancePose {
+        AssetPose pose;
+        std::uint32_t meshKey = 0, jointBase = 0, vertexBase = 0;
+        std::array<float, 2> morph{};
+    };
+    std::vector<InstancePose> instancePoses_;
+    struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };
+    std::vector<SkinningDispatch> skinningDispatches_;
+    std::vector<NodeAnimationFrame> animationFrames_;
+    std::uint32_t jointCapacity_ = 0, vertexCapacity_ = 0;
+    internal::Vector3 frameMainLight_{0,1,0};
+    void prepareInstancePoses();
+    std::array<float,4> instanceFaceLight(const LoadedAsset& mesh, const AssetPose& pose, const internal::Matrix4& model) const;
     // Per-resource visible span: (meshKey, firstSlot, count) in the
     // instance buffer's visible order.
     std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;
@@ -323,7 +339,7 @@ private:
     void recordComputeSkinningMesh(
         const RenderContext& context,
         std::uint32_t meshKey, rhi::ICommandRecorder* recorder = nullptr,
-        const std::array<float, 2>* morphWeights = nullptr);
+        const std::vector<SkinningDispatch>* dispatches = nullptr);
     [[nodiscard]] const rhi::GpuBuffer& renderVertexBuffer(
         std::uint32_t meshKey,
         std::uint32_t frameIndex) const;

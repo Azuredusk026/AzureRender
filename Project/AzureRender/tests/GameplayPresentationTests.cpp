@@ -13,6 +13,15 @@ int main(int argc,char** argv){
   machine.set("moving",true);machine.advance(0.125);
   check(machine.state()=="run" && machine.clip()==1 && machine.time()==0.125,"Transition must switch clip and reset time");
   machine.set("moving",false);machine.advance(0.1);check(machine.state()=="idle","Reverse transition must apply");
+  auto blended=AnimationStateMachine::parse(nlohmann::json::parse(R"({"schemaVersion":1,"initial":"idle","states":[{"name":"idle","clip":0},{"name":"walk","clip":1}],"transitions":[{"from":"idle","to":"walk","parameter":"moving","value":true,"blendSeconds":0.2}]})"));
+  blended.advance(.4);blended.set("moving",true);blended.advance(.05);
+  check(blended.previousClip()==0 && std::abs(blended.previousTime()-.45)<1e-9,"Crossfade must advance the outgoing clip");
+  check(std::abs(blended.blend()-.25)<1e-6,"Crossfade must retain both poses during transition");
+  blended.advance(.15);check(blended.blend()==1,"Crossfade must finish at configured duration");
+  blended.select("idle",.2);blended.advance(.05,2);blended.select("walk",.2);
+  check(blended.state()=="idle"&&std::abs(blended.blend()-.25)<1e-6,"Interrupted fades must preserve the current mixed pose");
+  blended.advance(.15,2);
+  check(blended.state()=="walk"&&blended.previousClip()==0&&blended.blend()==0,"Queued transition must begin from the completed outgoing pose");
   bool invalid=false;try{auto bad=AnimationStateMachine::parse(nlohmann::json::parse(R"({"schemaVersion":1,"initial":"missing","states":[],"transitions":[]})"));(void)bad;}catch(const std::exception&){invalid=true;}check(invalid,"Invalid state graph must be rejected");
   AudioRuntime audio(false);auto sound=audio.load(argv[1],false,0.5F);audio.play(sound);
   auto samples=audio.mix(480);double energy=0;for(float sample:samples)energy+=sample*sample;

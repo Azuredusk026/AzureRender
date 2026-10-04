@@ -22,6 +22,7 @@ void PresentationRuntime::synchronize(){
         if(!value.enabled||value.asset.empty()||animations_.count(entity)||failed_.count(key))return;
         try{std::ifstream file(assets_.resolveReference(value.asset));nlohmann::json graph;file>>graph;
             auto machine=AnimationStateMachine::parse(graph);machine.select(value.state);
+            machine.advance(value.startTime);
             animations_.emplace(entity,Animation{value.asset,value.state,runtime_.nodeId(entity),std::move(machine)});
         }catch(const std::exception& error){failure(key,error);}
     });
@@ -38,8 +39,9 @@ void PresentationRuntime::update(double delta){
     if(!std::isfinite(delta)||delta<0)throw std::invalid_argument("Invalid presentation delta");
     synchronize();audio_.pauseAll(runtime_.state()==RuntimeLifecycle::State::Paused);frames_.clear();
     for(auto& item:animations_){auto& value=*runtime_.world().tryGet<game::Animator>(item.first);auto& animation=item.second;
-        try{if(value.state!=animation.state){animation.machine.select(value.state);animation.state=value.state;}animation.machine.advance(delta);
-            frames_.push_back({animation.node,animation.machine.clip(),animation.machine.time(),animation.machine.loop()});
+        try{if(value.state!=animation.state){animation.machine.select(value.state,value.locomotion?value.crossfade:0);animation.state=value.state;}animation.machine.advance(delta,value.playbackRate);
+            frames_.push_back({animation.node,animation.machine.clip(),animation.machine.time(),animation.machine.loop(),
+                animation.machine.previousClip(),animation.machine.previousTime(),animation.machine.blend(),animation.machine.previousLoop(),{value.morph0,value.morph1}});
         }catch(const std::exception& error){const auto key=animation.node+value.state;if(failed_.insert(key).second)errors_.push_back(error.what());}
     }
     if(!audio_.hasDevice()&&delta>0){const auto samples=audio_.mix(static_cast<std::uint32_t>(std::min(delta,0.25)*48000));for(float sample:samples)energy_+=sample*sample;}

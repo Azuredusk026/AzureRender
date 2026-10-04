@@ -437,6 +437,64 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     visibleInstances_.clear();
 }
 
+void CharacterSceneRenderer::prepareInstancePoses() {
+    constexpr float kPi = 3.14159265358979323846F;
+    instancePoses_.clear();
+    skinningDispatches_.clear();
+    std::uint32_t jointBase = 0, vertexBase = 0;
+    for (auto& instance : sceneInstances_) {
+        const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
+        const auto animation = std::find_if(animationFrames_.begin(), animationFrames_.end(),
+            [&](const auto& value) { return value.node == instance.nodeId; });
+        auto pose = bindAnimationPose(mesh);
+        auto morph = renderSettings_->morphWeights;
+        if (animation != animationFrames_.end()) {
+            pose = sampleAnimationPose(mesh, animation->clip, static_cast<float>(animation->time), animation->loop);
+            if (animation->blend < 1) pose = blendAnimationPoses(mesh,
+                sampleAnimationPose(mesh, animation->previousClip, static_cast<float>(animation->previousTime), animation->previousLoop),
+                pose, animation->blend);
+            morph = animation->morph;
+            if (instance.meshKey == 0) { animationIndex_ = animation->clip; }
+        } else if (!mesh.animations.empty()) {
+            pose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
+                animationTime_);
+        }
+        if (jointBase + pose.jointMatrices.size() > jointCapacity_ || vertexBase + mesh.vertices.size() > vertexCapacity_)
+            throw std::runtime_error("Scene instance pose capacity exceeded; reload scene resources");
+        std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
+            pose.jointMatrices.data(), pose.jointMatrices.size()*sizeof(std::array<float,16>));
+        auto bounds = morphBounds(mesh, morph, &pose.jointMatrices);
+        bounds = expandBounds(bounds, materialDisplacementMargin(mesh));
+        if (gizmoActive_) {
+            const auto gizmo = multiply(translation(gizmoTranslation_[0],gizmoTranslation_[1],gizmoTranslation_[2]),
+                multiply(multiply(rotationX(gizmoRotation_[0]*kPi/180),rotationY(gizmoRotation_[1]*kPi/180)),
+                    multiply(rotationZ(gizmoRotation_[2]*kPi/180),scale(gizmoScale_[0],gizmoScale_[1],gizmoScale_[2]))));
+            bounds = includeTransformedBounds(bounds, gizmo);
+        }
+        instance.worldBounds = scene::transformBounds(bounds, instance.model);
+        instancePoses_.push_back({std::move(pose), instance.meshKey, jointBase, vertexBase, morph});
+        skinningDispatches_.push_back({instance.meshKey,{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,vertexBase}});
+        jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size());
+        vertexBase += static_cast<std::uint32_t>(mesh.vertices.size());
+    }
+}
+std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
+    const LoadedAsset& mesh, const AssetPose& pose, const Matrix4& model) const {
+    const AssetFaceSdfProfile* profile = nullptr;
+    for (const auto& material : mesh.materials) if (material.faceSdf.present) { profile = &material.faceSdf; break; }
+    if (!profile || profile->headNode >= pose.nodeWorldMatrices.size()) return {0,0,-1,0};
+    const auto head = multiply(model, pose.nodeWorldMatrices[profile->headNode]);
+    const auto& bind = mesh.nodeWorldMatrices.at(profile->headNode);
+    const Vector3 local{dot(frameMainLight_,normalize({head[0],head[1],head[2]})),
+        dot(frameMainLight_,normalize({head[4],head[5],head[6]})), dot(frameMainLight_,normalize({head[8],head[9],head[10]}))};
+    const auto x = normalize({bind[0],bind[1],bind[2]});
+    const auto y = normalize({bind[4],bind[5],bind[6]});
+    const auto z = normalize({bind[8],bind[9],bind[10]});
+    const auto light = normalize({x[0]*local[0]+y[0]*local[1]+z[0]*local[2],
+        x[1]*local[0]+y[1]*local[1]+z[1]*local[2], x[2]*local[0]+y[2]*local[1]+z[2]*local[2]});
+    return {light[0],light[1],light[2],1};
+}
+
 void CharacterSceneRenderer::rebuildSceneInstances() {
     const auto primaryBounds = morphBounds(asset_, renderSettings_->morphWeights);
     std::vector<scene::AxisAlignedBounds> meshBounds{primaryBounds};
@@ -481,6 +539,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             instance.worldBounds = scene::transformBounds(
                 meshBounds.front(), instance.model);
             instance.sourceIndex = index;
+            instance.nodeId = scene_.nodes.front().id;
             instance.meshKey = 0;
             sceneInstances_.push_back(instance);
         }
@@ -522,11 +581,13 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 instance.sourceIndex =
                     static_cast<std::uint32_t>(sceneInstances_.size());
                 instance.meshKey = static_cast<std::uint32_t>(meshKey);
+                instance.nodeId = node.id;
                 sceneInstances_.push_back(instance);
             }
         }
     }
 
+    prepareInstancePoses();
     if (gpuCullingEnabled_ && !sceneInstances_.empty()) {
         std::vector<GpuCullBounds> bounds;
         std::vector<VkDrawIndexedIndirectCommand> commands;
@@ -614,14 +675,11 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const Matrix4& model = sceneInstances_[slot].model;
         destination[slot].model = model;
         const std::uint32_t meshKey = sceneInstances_[slot].meshKey;
-        destination[slot].meta = {
-            meshKey == 0
-                ? 0U
-                : additionalResources_[meshKey - 1]->jointBase,
-            0U,
-            0U,
-            0U,
-        };
+        const auto& pose = instancePoses_.at(slot);
+        const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey-1]->asset;
+        destination[slot].meta = {pose.jointBase, pose.vertexBase, 0, 0};
+        destination[slot].faceLight = instanceFaceLight(mesh, pose.pose, model);
+        destination[slot].morph = {pose.morph[0], pose.morph[1], 0, 0};
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
         destination[slot].modelViewProjection =
@@ -638,14 +696,8 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
 const rhi::GpuBuffer& CharacterSceneRenderer::renderVertexBuffer(
     const std::uint32_t meshKey,
     const std::uint32_t frameIndex) const {
-    if (!computeSkinningEnabled_) {
-        return meshKey == 0
-            ? vertexBuffer_
-            : additionalResources_[meshKey - 1]->vertexBuffer;
-    }
-    return meshKey == 0
-        ? skinnedVertexBuffers_[frameIndex]
-        : additionalResources_[meshKey - 1]->skinnedVertexBuffers[frameIndex];
+    (void)frameIndex;
+    return meshKey == 0 ? vertexBuffer_ : additionalResources_[meshKey - 1]->vertexBuffer;
 }
 
 const rhi::GpuBuffer& CharacterSceneRenderer::renderIndexBuffer(
@@ -667,15 +719,6 @@ void CharacterSceneRenderer::registerPasses(
         return meshKey == 0
             ? vertexBuffer_
             : additionalResources_[meshKey - 1]->vertexBuffer;
-    };
-    const auto drawVertexBuffer = [this, &sourceVertexBuffer, &context](
-        const std::uint32_t meshKey) -> const rhi::GpuBuffer& {
-        return computeSkinningEnabled_
-            ? (meshKey == 0
-                ? skinnedVertexBuffers_[context.currentFrame]
-                : additionalResources_[meshKey - 1]
-                      ->skinnedVertexBuffers[context.currentFrame])
-            : sourceVertexBuffer(meshKey);
     };
     const auto meshIndexBuffer = [this](const std::uint32_t meshKey)
         -> const rhi::GpuBuffer& {
@@ -713,12 +756,23 @@ void CharacterSceneRenderer::registerPasses(
     std::optional<RenderGraph::PassId> skinningPass;
     if (computeSkinningEnabled_) {
         skinningPass = graph.addCommandPass("character-skinning",
-            [this, frozenContext, weights = instanceSnapshot_->settings.morphWeights,
+            [this, frozenContext, dispatches = skinningDispatches_,
              meshCount = meshResourceCount_](rhi::ICommandRecorder& commands) {
                 for (std::uint32_t meshKey = 0; meshKey < meshCount; ++meshKey)
-                    recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &weights);
+                    recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &dispatches);
             }, true);
         graph.use(*skinningPass, jointResource, RenderGraphUsage::Storage, false);
+    }
+
+    std::optional<RenderGraph::ResourceId> skinnedResource;
+    if (skinningPass) {
+        rhi::BufferBarrierDesc initial{};
+        initial.buffer = skinnedVertexBuffers_[context.currentFrame].buffer;
+        initial.size = skinnedVertexBuffers_[context.currentFrame].size;
+        initial.dstStageMask = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;
+        initial.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+        skinnedResource = graph.importBuffer("character-instance-skinned", initial);
+        graph.use(*skinningPass, *skinnedResource, RenderGraphUsage::Storage, true);
     }
 
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
@@ -732,15 +786,7 @@ void CharacterSceneRenderer::registerPasses(
             "character-vertex-source-" + std::to_string(meshKey),
             vertexInitial);
 
-        const rhi::GpuBuffer& output = drawVertexBuffer(meshKey);
-        rhi::BufferBarrierDesc outputInitial{};
-        outputInitial.buffer = output.buffer;
-        outputInitial.size = output.size;
-        outputInitial.dstStageMask = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
-        outputInitial.dstAccessMask = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT;
-        vertexResources[meshKey] = graph.importBuffer(
-            "character-vertex-output-" + std::to_string(meshKey),
-            outputInitial);
+        vertexResources[meshKey] = inputResource;
 
         const rhi::GpuBuffer& indices = meshIndexBuffer(meshKey);
         rhi::BufferBarrierDesc indexInitial{};
@@ -753,7 +799,6 @@ void CharacterSceneRenderer::registerPasses(
 
         if (skinningPass) {
             graph.use(*skinningPass, inputResource, RenderGraphUsage::Storage, false);
-            graph.use(*skinningPass, vertexResources[meshKey], RenderGraphUsage::Storage, true);
         }
     }
 
@@ -788,6 +833,7 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(shadow, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
+    if (skinnedResource) graph.use(shadow, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
@@ -878,6 +924,7 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(main, jointResource, RenderGraphUsage::VertexStorage, false);
+    if (skinnedResource) graph.use(main, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(main, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.depth, RenderGraphUsage::DepthAttachment,
@@ -1515,11 +1562,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
                 false);
         }
     };
-    createOutputBuffers(vertexBuffer_.size, skinnedVertexBuffers_);
-    for (auto& resource : additionalResources_) {
-        createOutputBuffers(
-            resource->vertexBuffer.size, resource->skinnedVertexBuffers);
-    }
+    createOutputBuffers(static_cast<VkDeviceSize>(vertexCapacity_) * sizeof(AssetVertex), skinnedVertexBuffers_);
 
     skinningDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
         {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
@@ -1578,7 +1621,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
                 frame,
                 static_cast<std::uint32_t>(index + 1),
                 resource.vertexBuffer,
-                resource.skinnedVertexBuffers[frame]);
+                skinnedVertexBuffers_[frame]);
         }
     }
     azurerender::RuntimeDiagnostics::instance().info(
@@ -1588,40 +1631,20 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
 void CharacterSceneRenderer::recordComputeSkinningMesh(
     const RenderContext& context,
     const std::uint32_t meshKey, rhi::ICommandRecorder* recorder,
-    const std::array<float, 2>* morphWeights) {
+    const std::vector<SkinningDispatch>* dispatches) {
     auto& commands = recorder != nullptr ? *recorder : *context.commands;
     const LoadedAsset& mesh = meshKey == 0
         ? asset_
         : additionalResources_[meshKey - 1]->asset;
-    const std::uint32_t jointBase = meshKey == 0
-        ? 0
-        : additionalResources_[meshKey - 1]->jointBase;
-    const std::size_t setIndex =
-        context.currentFrame * meshResourceCount_ + meshKey;
-    const SkinningPushConstants parameters{
-        static_cast<std::uint32_t>(mesh.vertices.size()),
-        jointBase,
-        morphWeights != nullptr ? *morphWeights : renderSettings_->morphWeights,
-    };
-    commands.pushConstants(
-        skinningPipelineLayout_,
-        VK_SHADER_STAGE_COMPUTE_BIT,
-        0,
-        &parameters,
-        sizeof(parameters));
-    ComputePass dispatch({
-        static_cast<std::uint32_t>(mesh.vertices.size()),
-        1,
-        64,
-        1,
-        1,
-        true,
-    });
-    dispatch.record(
-        commands,
-        skinningPipeline_,
-        skinningPipelineLayout_,
-        skinningDescriptorSets_[setIndex]);
+    const std::size_t setIndex = context.currentFrame * meshResourceCount_ + meshKey;
+    for (const auto& dispatchItem : dispatches ? *dispatches : skinningDispatches_) {
+        if (dispatchItem.meshKey != meshKey) continue;
+        const auto& parameters=dispatchItem.parameters;
+        commands.pushConstants(skinningPipelineLayout_, VK_SHADER_STAGE_COMPUTE_BIT, 0, &parameters, sizeof(parameters));
+        ComputePass dispatch({static_cast<std::uint32_t>(mesh.vertices.size()), 1, 64, 1, 1, true});
+        dispatch.record(commands, skinningPipeline_, skinningPipelineLayout_, skinningDescriptorSets_[setIndex]);
+    }
+
 }
 
 void CharacterSceneRenderer::recordComputeSkinning(
@@ -1677,36 +1700,19 @@ void CharacterSceneRenderer::createJointBuffers() {
     if (asset_.jointMatrices.empty()) {
         throw std::runtime_error("Asset has no joint-matrix fallback");
     }
-    std::size_t totalJoints = asset_.jointMatrices.size();
-    for (const auto& resource : additionalResources_) {
-        totalJoints += resource->asset.jointMatrices.size();
+    jointCapacity_ = 0;
+    vertexCapacity_ = 0;
+    for (std::size_t key = 0; key <= additionalResources_.size(); ++key) {
+        const auto& mesh = key == 0 ? asset_ : additionalResources_[key-1]->asset;
+        const auto count = scene_.nodes.size() == 1 ? qaInstanceCount_ : static_cast<std::uint32_t>(std::count_if(
+            scene_.nodes.begin(), scene_.nodes.end(), [&](const auto& node) { return node.resourceId == scene_.resources[key].id; }));
+        jointCapacity_ += static_cast<std::uint32_t>(mesh.jointMatrices.size()) * std::max(count, 1U);
+        vertexCapacity_ += static_cast<std::uint32_t>(mesh.vertices.size()) * std::max(count, 1U);
     }
-    const VkDeviceSize size = sizeof(asset_.jointMatrices.front()) * totalJoints;
     jointBuffers_.resize(kMaxFramesInFlight);
-    for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
-        jointBuffers_[index] = allocator_->createBuffer(
-            size,
-            VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-            true);
-        std::byte* destination =
-            static_cast<std::byte*>(jointBuffers_[index].mapped);
-        const VkDeviceSize heroBytes =
-            sizeof(asset_.jointMatrices.front()) * asset_.jointMatrices.size();
-        std::memcpy(
-            destination,
-            asset_.jointMatrices.data(),
-            static_cast<std::size_t>(heroBytes));
-        for (const auto& resource : additionalResources_) {
-            const VkDeviceSize resourceBytes =
-                sizeof(asset_.jointMatrices.front())
-                * resource->asset.jointMatrices.size();
-            std::memcpy(
-                destination + resource->jointBase
-                    * sizeof(asset_.jointMatrices.front()),
-                resource->asset.jointMatrices.data(),
-                static_cast<std::size_t>(resourceBytes));
-        }
-    }
+    for (auto& buffer : jointBuffers_) buffer = allocator_->createBuffer(
+        sizeof(std::array<float,16>) * static_cast<VkDeviceSize>(jointCapacity_), VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
+
 }
 
 void CharacterSceneRenderer::createOitIndexBuffers() {
@@ -1743,7 +1749,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * textureSlots},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 5},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 6},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1754,7 +1760,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 5},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 6},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1795,6 +1801,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
              VK_SHADER_STAGE_FRAGMENT_BIT},
+            {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         });
         return;
     }
@@ -1820,6 +1827,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {14, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {15, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {16, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
+        {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
     });
 }
 
@@ -1898,6 +1906,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.buffer = jointBuffers_[frame].buffer;
             jointWrite.range = jointBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(jointWrite);
+            const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
+            rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[frame];
@@ -1928,7 +1938,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         return;
     }
     const std::size_t descriptorCount =
-        kMaxFramesInFlight * asset_.materials.size();
+        kMaxFramesInFlight * totalMaterialCount();
     descriptorSets_ = rhi_->allocateDescriptorSets(
         descriptorPool_,
         descriptorSetLayout_,
@@ -2037,6 +2047,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             jointWrite.buffer = jointBuffers_[frame].buffer;
             jointWrite.range = jointBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(jointWrite);
+            const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
+            rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[descriptorIndex];
@@ -2438,26 +2450,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
 void CharacterSceneRenderer::updateUniformBuffer(
     const SceneFrameData& frame) {
     const float deltaSeconds = frame.deltaSeconds;
-    if (!asset_.animations.empty()) {
-        bool controlled=false;
-        for(const auto& animation:frame.animations){
-            const auto node=std::find_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& entry){return entry.id==animation.node;});
-            if(node!=scene_.nodes.end() && !scene_.resources.empty() && node->resourceId==scene_.resources.front().id){if(animation.clip>=asset_.animations.size())throw std::runtime_error("Animation state clip exceeds asset clip count");animationIndex_=animation.clip;animationTime_=static_cast<float>(animation.time);if(!animation.loop)animationTime_=std::min(animationTime_,std::max(asset_.animations[animationIndex_].endTime-asset_.animations[animationIndex_].startTime-1e-6F,0.0F));controlled=true;break;}
-        }
-        if (!controlled && animationPlaying_) animationTime_ += deltaSeconds;
-        sampleAnimation(
-            asset_,
-            animationIndex_,
-            animationTime_,
-            asset_.jointMatrices);
-        const std::size_t jointBytes =
-            sizeof(asset_.jointMatrices.front())
-            * asset_.jointMatrices.size();
-        std::memcpy(
-            jointBuffers_[currentFrame_].mapped,
-            asset_.jointMatrices.data(),
-            jointBytes);
-    }
+    animationFrames_ = frame.animations;
+    if (animationPlaying_) animationTime_ += deltaSeconds;
 
     const Vector3 center = {
         footPivot_[0],
@@ -2485,7 +2479,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
         static_cast<float>(frame.swapchainWidth)
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
-    const Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+    // Every geometry pass uses the same lens, including the silhouette shell.
+    constexpr float lensScale=1.6F;
+    projection[0]*=lensScale;projection[5]*=lensScale;
     projectionMatrix_ = projection;
     updateClusteredLighting(
         view,
@@ -2513,6 +2510,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
     const Vector3 cameraRight = normalize(cross(cameraForward, worldUp));
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
+    // Keep conservative shadow coverage around the shared geometry projection.
     const float halfFovTangent = std::tan(kPi / 6.0F);
     float cascadeNear = 0.1F;
     for (std::size_t cascade = 0;
@@ -2614,57 +2612,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         qaEffectEnabled_ ? 1.0F : 0.0F,
         qaHarnessEnabled_ ? 1.0F : 0.0F,
     };
-    Vector3 faceLight = {0.0F, 0.0F, -1.0F};
-    bool hasFaceSdf = false;
-    if (faceSdfHeadNode_.has_value()
-        && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
-        const float cosine = std::cos(rotationAngle_);
-        const float sine = std::sin(rotationAngle_);
-        const Vector3 objectLight = normalize({
-            cosine * lightDirection[0] - sine * lightDirection[2],
-            lightDirection[1],
-            sine * lightDirection[0] + cosine * lightDirection[2],
-        });
-        const auto& head = asset_.nodeWorldMatrices[*faceSdfHeadNode_];
-        const Vector3 currentX = normalize({head[0], head[1], head[2]});
-        const Vector3 currentY = normalize({head[4], head[5], head[6]});
-        const Vector3 currentZ = normalize({head[8], head[9], head[10]});
-        const Vector3 jointLocalLight = {
-            dot(objectLight, currentX),
-            dot(objectLight, currentY),
-            dot(objectLight, currentZ),
-        };
-        const Vector3 bindX = {
-            faceSdfBindBasis_[0],
-            faceSdfBindBasis_[1],
-            faceSdfBindBasis_[2],
-        };
-        const Vector3 bindY = {
-            faceSdfBindBasis_[3],
-            faceSdfBindBasis_[4],
-            faceSdfBindBasis_[5],
-        };
-        const Vector3 bindZ = {
-            faceSdfBindBasis_[6],
-            faceSdfBindBasis_[7],
-            faceSdfBindBasis_[8],
-        };
-        faceLight = normalize({
-            bindX[0] * jointLocalLight[0]
-                + bindY[0] * jointLocalLight[1]
-                + bindZ[0] * jointLocalLight[2],
-            bindX[1] * jointLocalLight[0]
-                + bindY[1] * jointLocalLight[1]
-                + bindZ[1] * jointLocalLight[2],
-            bindX[2] * jointLocalLight[0]
-                + bindY[2] * jointLocalLight[1]
-                + bindZ[2] * jointLocalLight[2],
-        });
-        hasFaceSdf = true;
-    }
-    uniform.faceLightDirection = {
-        faceLight[0], faceLight[1], faceLight[2], hasFaceSdf ? 1.0F : 0.0F,
-    };
+    frameMainLight_ = lightDirection;
+    uniform.faceLightDirection = {0, 0, -1, 0};
     uniform.faceSdfParameters = {
         settings.faceSdf.enabled ? 1.0F : 0.0F,
         settings.faceSdf.threshold,
@@ -2988,10 +2937,23 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         allocator_->destroyBuffer(buffer);
         buffer = allocator_->createBuffer(total * sizeof(std::uint32_t), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, true);
     }
-    const Vector3 cameraForward = normalize({-cameraPosition_[0], -cameraPosition_[1], -cameraPosition_[2]});
+    const Vector3 cameraForward = normalize(subtract(cameraTarget_, cameraPosition_));
     for (const auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
+        const auto& pose = instancePoses_.at(instance.sourceIndex);
+        const auto vertexPosition = [&](std::uint32_t index) {
+            const auto& vertex = mesh.vertices.at(index);
+            Vector3 position{};
+            for (unsigned axis = 0; axis < 3; ++axis) position[axis] = vertex.position[axis]
+                + vertex.morph0[axis]*pose.morph[0] + vertex.morph1[axis]*pose.morph[1];
+            Vector3 skinned{};
+            for (unsigned joint = 0; joint < 4; ++joint) {
+                const auto transformed = transformPosition(pose.pose.jointMatrices.at(vertex.joints[joint]), position);
+                for (unsigned axis = 0; axis < 3; ++axis) skinned[axis] += transformed[axis]*vertex.weights[joint];
+            }
+            return skinned;
+        };
         std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
             std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
@@ -3009,11 +2971,11 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                     const std::uint32_t i1 = mesh.indices[base + 1];
                     const std::uint32_t i2 = mesh.indices[base + 2];
                     const Vector3 v0 = transformPosition(
-                        instance.model, mesh.vertices[i0].position);
+                        instance.model, vertexPosition(i0));
                     const Vector3 v1 = transformPosition(
-                        instance.model, mesh.vertices[i1].position);
+                        instance.model, vertexPosition(i1));
                     const Vector3 v2 = transformPosition(
-                        instance.model, mesh.vertices[i2].position);
+                        instance.model, vertexPosition(i2));
                     const Vector3 centroid = {
                         (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
                         (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),

@@ -48,6 +48,7 @@ constexpr const char* kHelp =
     "  --create-game <empty-directory>     Create a playable game template\n"
     "  --editor-actions <json>             Run editor task commands\n"
     "  --runtime-report <json>             Write gameplay evidence\n\n"
+    "  --game-actions <json>               Replay fixed-route gameplay input\n"
     "Output:\n"
     "  --width <pixels> --height <pixels>  Output size\n"
     "  --capture-dir <empty-dir>           Deterministic PNG output\n"
@@ -420,6 +421,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.qaLightScan = true;
         } else if (argument == "--qa-animation") {
             parsed.options.qaAnimation = true;
+        } else if (argument == "--game-actions") {
+            parsed.options.gameActionsPath = requireValue(arguments,index,argument);
         } else if (argument == "--qa-effect") {
             parsed.options.qaEffect = requireValue(arguments, index, argument);
         } else if (argument == "--qa-effect-state") {

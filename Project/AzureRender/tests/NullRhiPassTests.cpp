@@ -118,7 +118,7 @@ std::vector<RecordedCall> runFrame(
     if (runtimeMutation != 0) frame.cameraPosition[2] = 5.0F;
     renderer.updateFrame(frame);
 
-    if (runtimeMutation != 0) {
+    if (runtimeMutation > 0 && runtimeMutation < 4) {
         auto snapshot = std::make_shared<azurerender::scene::SceneDescription>(context.scene);
         if (runtimeMutation == 1) snapshot->nodes[0].translation[0] = 10000.0F;
         if (runtimeMutation == 2) snapshot->nodes[0].visible = false;
@@ -145,12 +145,17 @@ std::vector<RecordedCall> runFrame(
     if (computeSkinning) {
         const auto& skin = graph.passes().front();
         const auto meshCount = context.scene.resources.size();
-        if (skin.writes.size() != meshCount || skin.reads.size() != meshCount + 1)
+        if (skin.writes.size() != 1 || skin.reads.size() != meshCount + 1
+            || graph.resources().at(skin.writes.front()).name != "character-instance-skinned")
             throw std::runtime_error("Batched skinning must declare every mesh and shared joints");
     }
     if (!recorder.calls.empty()) throw std::runtime_error("Registration must not record commands");
+    if(runtimeMutation==4){auto empty=std::make_shared<azurerender::scene::SceneDescription>(context.scene);
+        empty->nodes.clear();frame.sceneSnapshot=empty;renderer.updateFrame(frame);}
     graph.execute(&recorder);
-    if (runtimeMutation != 0 && counters.visibleInstances != 0)
+    if(runtimeMutation==4&&countCalls(recorder.calls,"dispatch")!=3)
+        throw std::runtime_error("Frozen skinning dispatches changed after preparing another frame");
+    if (runtimeMutation > 0 && runtimeMutation < 4 && counters.visibleInstances != 0)
         throw std::runtime_error("Runtime snapshot did not update rendered instances: " + std::to_string(runtimeMutation));
     if (partitionedTransparency) {
         const auto main = std::find_if(graph.passes().begin(), graph.passes().end(),
@@ -387,5 +392,7 @@ int main() {
         try { runFrame(true, shaderDirectory, true, false, false, false, 0.0F, false, false, mutation); }
         catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 10; }
     }
+    try {runFrame(true,shaderDirectory,true,false,true,true,0,false,false,4);}
+    catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 11;}
     return 0;
 }

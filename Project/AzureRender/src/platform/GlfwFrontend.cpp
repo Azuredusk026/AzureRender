@@ -25,6 +25,7 @@ GlfwFrontend::GlfwFrontend(const GlfwFrontendConfig& config) {
     glfwSetWindowUserPointer(window_, config.userPointer);
     glfwSetFramebufferSizeCallback(window_, config.framebufferSizeCallback);
     glfwSetKeyCallback(window_, config.keyCallback);
+    glfwSetScrollCallback(window_, config.scrollCallback);
 }
 
 GlfwFrontend::~GlfwFrontend() {

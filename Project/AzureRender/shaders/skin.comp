@@ -18,6 +18,7 @@ layout(push_constant) uniform SkinningParameters {
     uint vertexCount;
     uint jointBase;
     vec2 morphWeights;
+    uint outputBase;
 } parameters;
 
 const uint vertexWordCount = 27u;
@@ -32,8 +33,9 @@ void main() {
         return;
     }
     uint base = vertexIndex * vertexWordCount;
+    uint destination = (parameters.outputBase + vertexIndex)*vertexWordCount;
     for (uint word = 0u; word < vertexWordCount; ++word) {
-        skinnedVertices.words[base + word] = sourceVertices.words[base + word];
+        skinnedVertices.words[destination + word] = sourceVertices.words[base + word];
     }
 
     vec3 position = vec3(
@@ -81,16 +83,16 @@ void main() {
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
 
-    skinnedVertices.words[base + 0u] = floatBitsToUint(skinnedPosition.x);
-    skinnedVertices.words[base + 1u] = floatBitsToUint(skinnedPosition.y);
-    skinnedVertices.words[base + 2u] = floatBitsToUint(skinnedPosition.z);
-    skinnedVertices.words[base + 3u] = floatBitsToUint(skinnedNormal.x);
-    skinnedVertices.words[base + 4u] = floatBitsToUint(skinnedNormal.y);
-    skinnedVertices.words[base + 5u] = floatBitsToUint(skinnedNormal.z);
-    skinnedVertices.words[base + 6u] = floatBitsToUint(skinnedTangent.x);
-    skinnedVertices.words[base + 7u] = floatBitsToUint(skinnedTangent.y);
-    skinnedVertices.words[base + 8u] = floatBitsToUint(skinnedTangent.z);
-    skinnedVertices.words[base + 20u] = floatBitsToUint(position.x);
-    skinnedVertices.words[base + 21u] = floatBitsToUint(position.y);
-    skinnedVertices.words[base + 22u] = floatBitsToUint(position.z);
+    skinnedVertices.words[destination + 0u] = floatBitsToUint(skinnedPosition.x);
+    skinnedVertices.words[destination + 1u] = floatBitsToUint(skinnedPosition.y);
+    skinnedVertices.words[destination + 2u] = floatBitsToUint(skinnedPosition.z);
+    skinnedVertices.words[destination + 3u] = floatBitsToUint(skinnedNormal.x);
+    skinnedVertices.words[destination + 4u] = floatBitsToUint(skinnedNormal.y);
+    skinnedVertices.words[destination + 5u] = floatBitsToUint(skinnedNormal.z);
+    skinnedVertices.words[destination + 6u] = floatBitsToUint(skinnedTangent.x);
+    skinnedVertices.words[destination + 7u] = floatBitsToUint(skinnedTangent.y);
+    skinnedVertices.words[destination + 8u] = floatBitsToUint(skinnedTangent.z);
+    skinnedVertices.words[destination + 20u] = floatBitsToUint(position.x);
+    skinnedVertices.words[destination + 21u] = floatBitsToUint(position.y);
+    skinnedVertices.words[destination + 22u] = floatBitsToUint(position.z);
 }

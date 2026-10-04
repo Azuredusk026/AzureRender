@@ -441,7 +441,8 @@ void ImGuiEditorLayer::drawViewportPanel() {
         const auto& gizmoScreen = context_->gizmoScreen();
         const ImVec2 itemMin = ImGui::GetItemRectMin();
         if(session_->playing() && gameUi_ && imageSize.x>0 && imageSize.y>0){
-            const auto mouse=ImGui::GetMousePos();gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
+            const auto mouse=ImGui::GetMousePos();const bool consumed=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
+            if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
         }
         ImVec2 gizmoCenter{0.0F, 0.0F};

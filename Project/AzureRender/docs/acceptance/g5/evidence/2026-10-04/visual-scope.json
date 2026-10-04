@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "case": "character_beauty_fullbody",
+  "reason": "Shared geometry projection aligns the silhouette shell with the main material",
+  "referenceBeforeSha256": "5187bd9338707e61d3b1306acfd48a8fc0a6b504975f72f95cff782d9beabc2b",
+  "referenceSha256": "3493ef0c198db8651b1162c23f36ad078fa0a66b586ee4f0526a718c0412f5c4",
+  "unchangedDiagnosticCases": 6,
+  "maximumMeanError": 0,
+  "maximumChangedRatio": 0,
+  "pixelThreshold": 0,
+  "oldOutlineProbeMatchesBefore": true
+}

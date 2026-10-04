@@ -1,0 +1,22 @@
+[1/22] Compiling outline.vert
+[2/22] Compiling outline_compute.vert
+[3/22] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[4/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[5/22] Linking CXX static library AzureRenderCore.lib
+[6/22] Linking CXX executable AzureAssetLevelTests.exe
+[7/22] Linking CXX executable AzureProjectTests.exe
+[8/22] Linking CXX executable AzureScriptRuntimeTests.exe
+[9/22] Linking CXX executable AzurePresentationRuntimeTests.exe
+[10/22] Linking CXX executable AzureGameplayPresentationTests.exe
+[11/22] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[12/22] Linking CXX executable AzureGameUiTests.exe
+[13/22] Linking CXX executable AzurePlayer.exe
+[14/22] Linking CXX executable AzureBrowRegionTests.exe
+[15/22] Linking CXX executable AzurePhysicsInputTests.exe
+[16/22] Linking CXX executable AzureRender.exe
+[17/22] Linking CXX executable AzureAnimationPoseTests.exe
+[18/22] Linking CXX executable AzureGameUiRendererTests.exe
+[19/22] Linking CXX executable AzureEditorWorkflowTests.exe
+[20/22] Linking CXX executable AzureThirdPersonTests.exe
+[21/22] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[22/22] Linking CXX executable AzureRenderEditorSessionTests.exe

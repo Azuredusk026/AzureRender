@@ -180,6 +180,7 @@ void AzureRenderApp::initWindow() {
     config.userPointer = this;
     config.framebufferSizeCallback = framebufferResizeCallback;
     config.keyCallback = keyCallback;
+    config.scrollCallback = scrollCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
     lastRotationTime_ = frontend_->timeSeconds();
     azurerender::RuntimeDiagnostics::instance().print(
@@ -327,6 +328,12 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         report.close();
         std::ifstream saved(runOptions_.runtimeReportPath);nlohmann::json data;saved>>data;saved.close();
         data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
+        data["routeFrames"]=gameRouteFrames_;
+        data["replayedActions"]=gameInputReplay_?gameInputReplay_->consumed():0;
+        data["animations"]=nlohmann::json::array();
+        if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
+            data["animations"].push_back({{"node",animation.node},{"clip",animation.clip},{"time",animation.time},
+                {"previousClip",animation.previousClip},{"blend",animation.blend},{"morph",animation.morph}});
 #if AZURE_WITH_EDITOR
         data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
         if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
@@ -471,13 +478,35 @@ void AzureRenderApp::buildSceneFrameData(
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
     auto* game=activeGame();
-    if (game) {
+    if(game&&!runOptions_.gameActionsPath.empty()) {
+        if(!gameInputReplay_){std::ifstream input(runOptions_.gameActionsPath);nlohmann::json document;input>>document;
+            gameInputReplay_=azurerender::GameInputReplay::parse(document);}
+        gameInputReplay_->apply(gameplayFrame_,*game);
+    }
+    if (game&&!gameInputReplay_) {
         bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
 #if AZURE_WITH_EDITOR
         if (editorLayer_) focused = focused && editorLayer_->acceptsViewportShortcuts();
 #endif
-        game->input().setFocused(focused && !(gameUi_ && gameUi_->wantsKeyboard()));
-        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE})
+        double x=0,y=0;glfwGetCursorPos(frontend_->nativeHandle(),&x,&y);
+        bool uiPointer=false;
+#if AZURE_WITH_EDITOR
+        if(!editorLayer_)
+#endif
+        if(gameUi_&&glfwGetInputMode(frontend_->nativeHandle(),GLFW_CURSOR)!=GLFW_CURSOR_DISABLED){
+            int width=1,height=1;glfwGetWindowSize(frontend_->nativeHandle(),&width,&height);
+            uiPointer=gameUi_->wantsPointer(static_cast<int>(x*renderExtent_.width/std::max(width,1)),static_cast<int>(y*renderExtent_.height/std::max(height,1)));
+        }
+        if(focused&&glfwGetMouseButton(frontend_->nativeHandle(),GLFW_MOUSE_BUTTON_LEFT)==GLFW_PRESS&&!uiPointer) gameViewportFocus_=true;
+        focused=focused&&gameViewportFocus_&&!(gameUi_&&gameUi_->wantsKeyboard())&&!uiPointer;
+        game->input().setFocused(focused);
+        if(focused&&game->hasCamera()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running){
+            if(gameCursorPrimed_)game->cameraInput(static_cast<float>(x-gameCursorX_),static_cast<float>(y-gameCursorY_),0);
+            gameCursorPrimed_=true;
+            glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
+        }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
+        gameCursorX_=x;gameCursorY_=y;
+        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE, GLFW_KEY_E})
             game->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
     }
     double elapsed=0;
@@ -486,13 +515,26 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
     {elapsed=game?game->advance(rawDeltaSeconds):runtime_.beginFrame(rawDeltaSeconds);if(presentationRuntime_)presentationRuntime_->update(elapsed);}
     const float deltaSeconds=static_cast<float>(elapsed);
+    if(game&&game->hasCamera()&&!qaHarnessEnabled_){
+        cameraPosition_=game->renderCameraPosition();cameraTarget_=game->renderCameraTarget();autoRotate_=false;rotationAngle_=0;
+    }
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
+    if(gameInputReplay_&&gameRouteFrames_.size()<8192){nlohmann::json state;
+        state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
+        state["characters"]=nlohmann::json::array();
+        activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
+            const auto* transform=activeRuntime()->world().tryGet<azurerender::ecs::TransformComponent>(entity);
+            const auto* animator=activeRuntime()->world().tryGet<azurerender::game::Animator>(entity);
+            if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
+                {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
+                {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
+        });gameRouteFrames_.push_back(std::move(state));}
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(runOptions_.editorSession->viewScene()));
+    if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(game?game->renderScene():runOptions_.editorSession->viewScene()));
 #endif
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
-        runOptions_.sceneDocument = runtime_.snapshotScene();
+        runOptions_.sceneDocument = game?game->renderScene():runtime_.snapshotScene();
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
         frame.sceneSnapshot = std::make_shared<const azurerender::scene::SceneDescription>(
             resolveRenderDescription(*runOptions_.sceneDocument));
@@ -1275,6 +1317,11 @@ void AzureRenderApp::createTimestampQueryPools() {
     }
 }
 
+void AzureRenderApp::scrollCallback(GLFWwindow* window, double x, double y) {
+    (void)x;auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+    if(app)if(auto* game=app->activeGame())game->cameraInput(0,0,static_cast<float>(y));
+}
+
 void AzureRenderApp::keyCallback(
     GLFWwindow* window,
     const int key,
@@ -1298,7 +1345,8 @@ void AzureRenderApp::keyCallback(
 
     if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
     auto* game=application->activeGame();auto* runtime=application->activeRuntime();
-    if(game && (key==GLFW_KEY_A||key==GLFW_KEY_D||key==GLFW_KEY_W||key==GLFW_KEY_S||key==GLFW_KEY_SPACE)){game->input().key(key,action!=GLFW_RELEASE);return;}
+    if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
+    if(game && (key==GLFW_KEY_A||key==GLFW_KEY_D||key==GLFW_KEY_W||key==GLFW_KEY_S||key==GLFW_KEY_SPACE||key==GLFW_KEY_E)){game->input().key(key,action!=GLFW_RELEASE);return;}
     if(runtime && game){
         if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
         if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}

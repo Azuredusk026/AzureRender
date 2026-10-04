@@ -4,6 +4,7 @@
 #include "scene/TransformMath.hpp"
 
 #include <cstdint>
+#include <string>
 #include <vector>
 
 namespace azurerender::scene {
@@ -15,6 +16,7 @@ struct SceneInstance {
     AxisAlignedBounds worldBounds{};
     std::uint32_t sourceIndex = 0;
     std::uint32_t meshKey = 0;
+    std::string nodeId;
 };
 
 // Marks instances outside the frustum invisible. Returns the number of

@@ -180,8 +180,21 @@ struct LoadedAsset {
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
+struct AssetNodePose {
+    std::array<float, 3> translation{};
+    std::array<float, 4> rotation{0, 0, 0, 1};
+    std::array<float, 3> scale{1, 1, 1};
+};
+struct AssetPose {
+    std::vector<AssetNodePose> local;
+    std::vector<std::array<float, 16>> nodeWorldMatrices;
+    std::vector<std::array<float, 16>> jointMatrices;
+};
+[[nodiscard]] AssetPose bindAnimationPose(const LoadedAsset& asset);
+[[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true);
+[[nodiscard]] AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight);
 void sampleAnimation(
-    LoadedAsset& asset,
+    const LoadedAsset& asset,
     std::size_t animationIndex,
     float time,
     std::vector<std::array<float, 16>>& jointMatrices);

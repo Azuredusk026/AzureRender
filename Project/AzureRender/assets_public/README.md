@@ -15,3 +15,7 @@
 `third_person/material_fixture.gltf` 与 `fixture_hair_data.png` 为项目自制的 MIT 许可材质夹具。模型具有面部、曲面头发、眉毛和通用实体，三个关节用于头部跟随检查。生成入口为 `tools/create_material_fixture.py`。
 
 `scenes/material_mixed.azscene` 放置该角色、地面、墙体和物体。公共 GPU 测试检查材质贡献、混合渲染、动态眉毛以及两种蒙皮路径的一致性。
+
+`third_person/explorer.gltf` 与 `guide.gltf` 是自制角色，具有独立的待机、行走与头部 Morph。生成入口为 `tools/generate_third_person_assets.py`，许可见 `third_person/CHARACTER-LICENSE.txt`。
+
+`third_person/game/project.azureproject` 提供第三人称庭院。主角、第二角色、台阶、墙体与坡道用于控制器及相机验收。项目创建入口为 `tools/create_third_person_project.py`。

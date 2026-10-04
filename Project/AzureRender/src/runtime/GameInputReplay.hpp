@@ -1,0 +1,43 @@
+#pragma once
+#include "runtime/GameRuntime.hpp"
+#include <nlohmann/json.hpp>
+#include <vector>
+namespace azurerender {
+// Deterministic host input for Player route acceptance, using the normal actions.
+class GameInputReplay {
+public:
+    static GameInputReplay parse(const nlohmann::json& document) {
+        if(document.at("schemaVersion")!=1)throw std::invalid_argument("Unsupported game input replay");
+        GameInputReplay replay;std::uint64_t previous=0;
+        for(const auto& action:document.at("actions")) {
+            const auto frame=action.at("frame").get<std::int64_t>();
+            if(frame<0||static_cast<std::uint64_t>(frame)<previous)throw std::invalid_argument("Replay frames must increase");
+            previous=static_cast<std::uint64_t>(frame);
+            const auto kind=action.at("action").get<std::string>();
+            if(kind=="key") {
+                const int key=action.at("key").get<int>();
+                if(key!=32&&key!=65&&key!=68&&key!=69&&key!=83&&key!=87)throw std::invalid_argument("Unsupported replay key");
+                action.at("down").get<bool>();
+            }else if(kind=="focus")action.at("focused").get<bool>();
+            else if(kind=="camera") {
+                for(const char* field:{"x","y","scroll"})
+                    if(!std::isfinite(action.value(field,0.0F)))throw std::invalid_argument("Invalid replay camera input");
+            }
+            else throw std::invalid_argument("Unknown replay action");
+            replay.actions_.push_back(action);
+        }
+        return replay;
+    }
+    void apply(std::uint64_t frame,GameRuntime& game) {
+        while(cursor_<actions_.size()&&actions_[cursor_].at("frame").get<std::uint64_t>()<=frame) {
+            const auto& action=actions_[cursor_++];const auto kind=action.at("action").get<std::string>();
+            if(kind=="key")game.input().key(action.at("key").get<int>(),action.at("down").get<bool>());
+            else if(kind=="focus")game.input().setFocused(action.at("focused").get<bool>());
+            else game.cameraInput(action.value("x",0.0F),action.value("y",0.0F),action.value("scroll",0.0F));
+        }
+    }
+    std::size_t consumed() const {return cursor_;}
+private:
+    std::vector<nlohmann::json> actions_;std::size_t cursor_=0;
+};
+}

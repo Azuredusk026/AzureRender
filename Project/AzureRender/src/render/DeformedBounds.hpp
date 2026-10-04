@@ -38,18 +38,20 @@ inline scene::AxisAlignedBounds includeTransformedBounds(
     return bounds;
 }
 inline scene::AxisAlignedBounds morphBounds(const LoadedAsset& asset,
-                                            const std::array<float, 2>& weights) {
+                                            const std::array<float, 2>& weights,
+                                            const std::vector<std::array<float,16>>* pose = nullptr) {
+    const auto& matrices = pose ? *pose : asset.jointMatrices;
     scene::AxisAlignedBounds bounds{asset.boundsMin, asset.boundsMax};
     for (const auto& vertex : asset.vertices) {
         std::array<float, 3> position{};
         for (std::size_t i = 0; i < 3; ++i)
             position[i] = vertex.position[i] + vertex.morph0[i] * weights[0]
                 + vertex.morph1[i] * weights[1];
-        if (asset.hasSkin && !asset.jointMatrices.empty()) {
+        if (asset.hasSkin && !matrices.empty()) {
             const auto morphed = position;
             position = {};
             for (std::size_t joint = 0; joint < 4; ++joint) {
-                const auto& matrix = asset.jointMatrices.at(vertex.joints[joint]);
+                const auto& matrix = matrices.at(vertex.joints[joint]);
                 for (std::size_t i = 0; i < 3; ++i)
                     position[i] += vertex.weights[joint] * (matrix[i] * morphed[0]
                         + matrix[4 + i] * morphed[1] + matrix[8 + i] * morphed[2] + matrix[12 + i]);

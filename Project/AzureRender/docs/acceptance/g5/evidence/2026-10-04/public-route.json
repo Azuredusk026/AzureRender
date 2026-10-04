@@ -1,0 +1,16 @@
+{
+  "frames": 540,
+  "actions": 12,
+  "fixedSteps": 539,
+  "states": [
+    "idle",
+    "walk"
+  ],
+  "finalPosition": [
+    3.0299999713897705,
+    -5.960464477539063e-08,
+    -4.590451717376709
+  ],
+  "maximumJumpHeight": 1.2328745126724243,
+  "validationErrors": 0
+}

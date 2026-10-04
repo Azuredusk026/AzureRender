@@ -16,6 +16,7 @@ struct AzureRenderOptions {
     std::string projectFile;
     std::string editorActionsPath;
     std::string runtimeReportPath;
+    std::string gameActionsPath;
     std::string assetPath;
     std::string resourceRoot;
     std::string environmentPath;

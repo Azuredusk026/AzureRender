@@ -1793,53 +1793,8 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     return asset;
 }
 
-void sampleAnimation(
-    LoadedAsset& asset,
-    const std::size_t animationIndex,
-    const float time,
-    std::vector<std::array<float, 16>>& jointMatrices) {
-    if (animationIndex >= asset.animations.size()) {
-        throw std::runtime_error("Animation index is out of range");
-    }
-    if (!asset.hasSkin) {
-        return;
-    }
-    const AssetAnimation& animation = asset.animations[animationIndex];
-    const float duration = animation.endTime - animation.startTime;
-    const float sampleTime = duration > 1.0e-8F
-        ? animation.startTime + std::fmod(std::max(time, 0.0F), duration)
-        : animation.startTime;
-
-    std::vector<std::array<float, 3>> translations(asset.nodes.size());
-    std::vector<std::array<float, 4>> rotations(asset.nodes.size());
-    std::vector<std::array<float, 3>> scales(asset.nodes.size());
-    for (std::size_t index = 0; index < asset.nodes.size(); ++index) {
-        translations[index] = asset.nodes[index].translation;
-        rotations[index] = asset.nodes[index].rotation;
-        scales[index] = asset.nodes[index].scale;
-    }
-    for (const AssetAnimationChannel& channel : animation.channels) {
-        const AssetAnimationSampler& sampler =
-            animation.samplers.at(channel.samplerIndex);
-        const bool rotation =
-            channel.path == AssetAnimationPath::Rotation;
-        const std::array<float, 4> value =
-            sampleAnimationSampler(sampler, sampleTime, rotation);
-        if (channel.path == AssetAnimationPath::Translation) {
-            std::copy_n(
-                value.begin(),
-                3,
-                translations[channel.nodeIndex].begin());
-        } else if (channel.path == AssetAnimationPath::Rotation) {
-            rotations[channel.nodeIndex] = normalizeQuaternion(value);
-        } else {
-            std::copy_n(
-                value.begin(),
-                3,
-                scales[channel.nodeIndex].begin());
-        }
-    }
-
+namespace {
+void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
     std::vector<Matrix4> worldTransforms(
         asset.nodes.size(),
         identityMatrix());
@@ -1860,9 +1815,9 @@ void sampleAnimation(
                 });
         } else {
             local = composeTransform(
-                translations[index],
-                rotations[index],
-                scales[index]);
+                pose.local[index].translation,
+                pose.local[index].rotation,
+                pose.local[index].scale);
         }
         const std::int32_t parent = asset.nodes[index].parent;
         worldTransforms[index] = parent >= 0
@@ -1877,16 +1832,20 @@ void sampleAnimation(
         calculate(index);
     }
 
-    asset.nodeWorldMatrices.resize(worldTransforms.size());
+    pose.nodeWorldMatrices.resize(worldTransforms.size());
     for (std::size_t index = 0; index < worldTransforms.size(); ++index) {
         std::transform(
             worldTransforms[index].begin(),
             worldTransforms[index].end(),
-            asset.nodeWorldMatrices[index].begin(),
+            pose.nodeWorldMatrices[index].begin(),
             [](const double value) { return static_cast<float>(value); });
     }
 
-    jointMatrices.resize(asset.jointNodes.size());
+    if (!asset.hasSkin) {
+        pose.jointMatrices = asset.jointMatrices;
+        return;
+    }
+    pose.jointMatrices.resize(asset.jointNodes.size());
     for (std::size_t joint = 0;
          joint < asset.jointNodes.size();
          ++joint) {
@@ -1904,9 +1863,56 @@ void sampleAnimation(
         std::transform(
             matrix.begin(),
             matrix.end(),
-            jointMatrices[joint].begin(),
+            pose.jointMatrices[joint].begin(),
             [](const double value) {
                 return static_cast<float>(value);
             });
     }
+}
+}
+AssetPose bindAnimationPose(const LoadedAsset& asset) {
+    AssetPose pose;
+    for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale});
+    resolvePose(asset, pose);
+    return pose;
+}
+AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop) {
+    if (animationIndex >= asset.animations.size()) throw std::runtime_error("Animation index is out of range");
+    if (!std::isfinite(time)) throw std::invalid_argument("Animation time must be finite");
+    auto pose = bindAnimationPose(asset);
+    const auto& animation = asset.animations[animationIndex];
+    const float duration = animation.endTime - animation.startTime;
+    const float sampleTime = duration > 1e-8F
+        ? animation.startTime + (loop ? std::fmod(std::max(time, 0.0F), duration) : std::clamp(time, 0.0F, duration))
+        : animation.startTime;
+    for (const auto& channel : animation.channels) {
+        const auto& sampler = animation.samplers.at(channel.samplerIndex);
+        const auto value = sampleAnimationSampler(sampler, sampleTime, channel.path == AssetAnimationPath::Rotation);
+        auto& node = pose.local.at(channel.nodeIndex);
+        if (channel.path == AssetAnimationPath::Rotation) node.rotation = normalizeQuaternion(value);
+        else if (channel.path == AssetAnimationPath::Translation) std::copy_n(value.begin(), 3, node.translation.begin());
+        else std::copy_n(value.begin(), 3, node.scale.begin());
+    }
+    resolvePose(asset, pose);
+    return pose;
+}
+AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight) {
+    if (!std::isfinite(weight) || weight < 0 || weight > 1) throw std::invalid_argument("Pose blend weight must be in [0,1]");
+    if (from.local.size() != asset.nodes.size() || to.local.size() != asset.nodes.size()) throw std::invalid_argument("Pose skeleton mismatch");
+    AssetPose result;
+    result.local.resize(asset.nodes.size());
+    for (std::size_t i = 0; i < result.local.size(); ++i) {
+        auto& node = result.local[i];
+        for (unsigned axis = 0; axis < 3; ++axis) {
+            node.translation[axis] = from.local[i].translation[axis] * (1-weight) + to.local[i].translation[axis] * weight;
+            node.scale[axis] = from.local[i].scale[axis] * (1-weight) + to.local[i].scale[axis] * weight;
+        }
+        node.rotation = slerp(from.local[i].rotation, to.local[i].rotation, weight);
+    }
+    resolvePose(asset, result);
+    return result;
+}
+void sampleAnimation(const LoadedAsset& asset, std::size_t animationIndex, float time,
+                     std::vector<std::array<float,16>>& jointMatrices) {
+    jointMatrices = sampleAnimationPose(asset, animationIndex, time).jointMatrices;
 }

@@ -3,6 +3,7 @@
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <array>
 #include <limits>
 #include <memory>
 #include <stdexcept>
@@ -82,6 +83,11 @@ struct NodeAnimationFrame {
     std::uint32_t clip = 0;
     double time = 0;
     bool loop = true;
+    std::uint32_t previousClip = 0;
+    double previousTime = 0;
+    float blend = 1;
+    bool previousLoop = true;
+    std::array<float, 2> morph{};
 };
 struct SceneFrameData {
     float deltaSeconds = 0.0F;

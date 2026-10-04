@@ -48,10 +48,13 @@ void GameUi::setText(const std::string& id,const std::string& text){auto* elemen
 std::string GameUi::text(const std::string& id)const{return impl_->element(id)->GetInnerRML();}
 std::array<float,4> GameUi::bounds(const std::string& id)const{auto* element=impl_->element(id);const auto offset=element->GetAbsoluteOffset(Rml::BoxArea::Border);const auto size=element->GetBox().GetSize(Rml::BoxArea::Border);return {offset.x,offset.y,size.x,size.y};}
 void GameUi::setActionHandler(std::function<void(std::string)> handler){impl_->action=std::move(handler);}
-bool GameUi::pointer(int x,int y,bool down){impl_->context->ProcessMouseMove(x,y,0);if(down!=impl_->down){if(down)impl_->context->ProcessMouseButtonDown(0,0);else impl_->context->ProcessMouseButtonUp(0,0);impl_->down=down;}
-    for(auto* element=impl_->context->GetElementAtPoint({static_cast<float>(x),static_cast<float>(y)});element;element=element->GetParentNode())if(element->GetTagName()=="button"||element->GetTagName()=="input")return true;
+bool GameUi::wantsPointer(int x,int y)const{
+    for(auto* element=impl_->context->GetElementAtPoint({static_cast<float>(x),static_cast<float>(y)});element;element=element->GetParentNode())
+        if(element->GetTagName()=="button"||element->GetTagName()=="input"||element->GetTagName()=="textarea"
+            ||element->GetTagName()=="select"||element->HasAttribute("data-action"))return true;
     return false;
 }
+bool GameUi::pointer(int x,int y,bool down){impl_->context->ProcessMouseMove(x,y,0);if(down!=impl_->down){if(down)impl_->context->ProcessMouseButtonDown(0,0);else impl_->context->ProcessMouseButtonUp(0,0);impl_->down=down;}return wantsPointer(x,y);}
 void GameUi::update(double delta){if(!std::isfinite(delta)||delta<0)throw std::invalid_argument("Invalid game UI delta");systemInterface.time+=delta;impl_->context->Update();}
 void GameUi::render(){impl_->context->Render();}
 bool GameUi::wantsKeyboard()const{auto* element=impl_->context->GetFocusElement();return element&&(element->GetTagName()=="input"||element->GetTagName()=="textarea"||element->GetTagName()=="select");}

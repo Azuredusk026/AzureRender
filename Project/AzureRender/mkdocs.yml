@@ -55,6 +55,7 @@ nav:
       - 项目编辑与游戏表现: runtime/editor-game-ui.md
       - 脚本与玩法: runtime/scripts-gameplay.md
       - 物理与输入: runtime/physics-input.md
+      - 独立动画与第三人称控制: runtime/third-person-animation.md
       - 资产、关卡与 Prefab: runtime/assets-levels.md
       - 反射与序列化: runtime/reflection.md
       - 引擎基础与 Player: runtime/engine-foundation.md
@@ -68,6 +69,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - G5 独立动画与基础 3C: acceptance/g5/2026-10-04.md
       - R5 角色外观与混合场景: acceptance/r5/2026-10-04.md
       - F1 构建与素材准入: acceptance/f1/2026-10-04.md
       - P0 Windows 游戏发布验收: acceptance/p0/2026-10-04.md
