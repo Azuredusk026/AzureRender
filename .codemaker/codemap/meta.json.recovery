@@ -1,0 +1,15 @@
+{
+  "version": "be4536994501779e8091b99f10c3ead4761f13e2",
+  "branch": "main",
+  "repo_root": "E:\\docs\\projects\\AzureRender",
+  "timestamp": 1790849139,
+  "file_count": 159,
+  "sym_count": 7246,
+  "edge_count": 14634,
+  "large_files_skipped": 2,
+  "data_files_skipped": 0,
+  "max_file_size_kb": 512,
+  "merkle_root": "b71701b26dae1070",
+  "vcs_type": "git",
+  "embedding_kind": "lookup"
+}

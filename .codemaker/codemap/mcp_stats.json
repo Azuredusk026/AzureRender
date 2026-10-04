@@ -1,0 +1,54 @@
+{
+  "daily": {
+    "2026-10-01": [
+      {
+        "tool": "get_graph_stats",
+        "total": 5,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "search_code",
+        "total": 50,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "get_symbol_detail",
+        "total": 87,
+        "error": 2,
+        "empty": 0
+      },
+      {
+        "tool": "search_knowledge",
+        "total": 1,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "query_cypher",
+        "total": 2,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "get_call_chain",
+        "total": 1,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "find_symbol",
+        "total": 7,
+        "error": 0,
+        "empty": 0
+      },
+      {
+        "tool": "get_dependencies",
+        "total": 2,
+        "error": 0,
+        "empty": 0
+      }
+    ]
+  }
+}

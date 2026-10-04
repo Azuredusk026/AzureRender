@@ -1,0 +1,15 @@
+{
+  "mcp": {
+    "codemap": {
+      "command": [
+        "codemap",
+        "serve"
+      ],
+      "enabled": true,
+      "type": "local"
+    }
+  },
+  "plugin": [
+    ".codemaker/codemap/codemap-inject.mjs"
+  ]
+}
