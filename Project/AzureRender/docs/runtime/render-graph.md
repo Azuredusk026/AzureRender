@@ -9,7 +9,9 @@
 
 ## 职责与使用场景
 
-`RenderGraph` 保存帧内资源和 Pass 的读写声明，并生成满足依赖的执行顺序与 RHI 屏障。Character 注册蒙皮、阴影和主场景 Pass；Blackhole 注册阴影清理、光线追踪、Bloom、历史累积和场景合成 Pass。宿主再加入后处理、HUD、编辑器界面、捕获和 Present Pass。Pass 回调仍负责调用 RHI 记录具体绘制、计算和复制命令。
+`RenderGraph` 保存帧内资源和 Pass 的读写声明，并生成满足依赖的执行顺序与 RHI 屏障。Character 注册蒙皮、阴影和主场景 Pass。Blackhole 注册阴影清理、光线追踪、Bloom、历史累积和场景合成 Pass。
+
+宿主再加入后处理、HUD、编辑器界面、捕获和 Present Pass。Pass 回调仍负责调用 RHI 记录具体绘制、计算和复制命令。
 
 ## 数据与所有权
 
@@ -17,15 +19,15 @@
 
 ## 生命周期与时序
 
-每帧导入公共附件和场景缓冲区，注册 Pass，声明读写关系，调用 `compile`，再由 `execute` 按依赖顺序记录屏障并运行 Pass 回调。宿主的瞬态资源池管理捕获回读缓冲区，并在帧提交完成后复用；Blackhole 历史图像由场景 Renderer 管理其跨帧生命周期。
+每帧导入公共附件和场景缓冲区，注册 Pass，声明读写关系，调用 `compile`，再由 `execute` 按依赖顺序记录屏障并运行 Pass 回调。宿主的瞬态资源池管理捕获回读缓冲区，并在帧提交完成后复用。Blackhole 历史图像由场景 Renderer 管理其跨帧生命周期。
 
 ## 接口契约
 
-`addResource` 与 `addPass` 返回稳定的图内 ID。`read` 与 `write` 校验 ID，非法 ID 抛出 `std::out_of_range`。`compile` 成功时返回 `true` 并清空错误字符串；失败时返回 `false` 并保留诊断文本。
+`addResource` 与 `addPass` 返回稳定的图内 ID。`read` 与 `write` 校验 ID，非法 ID 抛出 `std::out_of_range`。`compile` 成功时返回 `true` 并清空错误字符串。失败时返回 `false` 并保留诊断文本。
 
 ## 线程与同步
 
-图对象只在帧编译线程修改。编译完成后，录制线程按执行顺序应用 RHI 图像与缓冲区屏障，再运行对应 Pass 回调。图像屏障包含旧布局、新布局、阶段和访问掩码；缓冲区屏障包含阶段和访问掩码。
+图对象只在帧编译线程修改。编译完成后，录制线程按执行顺序应用 RHI 图像与缓冲区屏障，再运行对应 Pass 回调。图像屏障包含旧布局、新布局、阶段和访问掩码。缓冲区屏障包含阶段和访问掩码。
 
 ## 序列化与兼容
 
@@ -56,4 +58,4 @@ if (!graph.compile(error)) throw std::runtime_error(error);
 
 ## 参考来源
 
-Piccolo RenderScene 的 pass 与资源组织方式用于概念校对；本实现保留 Azure Engine 自有 ID、测试和错误接口。
+Piccolo RenderScene 的 pass 与资源组织方式用于概念校对。本实现保留 Azure Engine 自有 ID、测试和错误接口。

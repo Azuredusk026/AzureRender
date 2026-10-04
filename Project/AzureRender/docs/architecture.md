@@ -344,7 +344,7 @@ CPU bytes
 
 Uniform、Joint Matrix 和透明排序 Index 每帧都会更新。项目按 `maxFramesInFlight` 为它们分配空间，并保持内存映射。
 
-创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。`rhi::GpuAllocator` 通过 VMA 处理 Buffer/Image 的内存需求、分配、绑定和释放；上传流程由项目的 RHI 与宿主负责。
+创建 Image 时要指定 Format、Usage、Aspect、Mip 和 Layout。Sampler 单独描述过滤与寻址规则。`rhi::GpuAllocator` 通过 VMA 处理 Buffer/Image 的内存需求、分配、绑定和释放。上传流程由项目的 RHI 与宿主负责。
 
 ## 帧同步与 Command Buffer
 

@@ -26,15 +26,15 @@ GLFW 与 Dear ImGui 负责窗口和界面。tinygltf、stb 和 nlohmann/json 负
 # 将该路径替换为本机 vcpkg 工作目录
 $env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
 
-.\tools\configure_windows.ps1 -Config Debug
-cmake --build .\build\ninja-debug
-.\build\ninja-debug\AzureRender.exe --smoke-frames 120
+.\tools\msvc_env.bat cmake --preset msvc-debug
+.\tools\msvc_env.bat cmake --build --preset msvc-debug
+.\build\ninja-msvc-debug\AzureRender.exe --smoke-frames 120
 ```
 
 运行黑洞：
 
 ```powershell
-.\build\ninja-release\AzureRender.exe `
+.\build\ninja-msvc-release\AzureRender.exe `
   --scene-type blackhole `
   --blackhole-quality cinematic
 ```
@@ -58,10 +58,10 @@ cmake --build .\build\ninja-debug
 ## 验证
 
 ```powershell
-.\tools\configure_windows.ps1 -Config Release
-cmake --build .\build\ninja-release
-ctest --test-dir .\build\ninja-debug --output-on-failure
-cmake -DBUILD_DIR="$PWD/build/ninja-release" `
+.\tools\msvc_env.bat cmake --preset msvc-release
+.\tools\msvc_env.bat cmake --build --preset msvc-release
+ctest --test-dir .\build\ninja-msvc-debug --output-on-failure
+cmake -DBUILD_DIR="$PWD/build/ninja-msvc-release" `
   -DCONFIG=Release `
   -P .\tools\run_release_gate.cmake
 ```
@@ -102,4 +102,6 @@ Lua 角色控制、反射访问、触发器和关卡切换见 [脚本与玩法](
 
 ## 开发路线
 
-F1 为 Ready，R5、G5、G6、U1、F2 和 P1 为 Planned。路线覆盖莱万汀外观、真实 idle/walk、基础 3C 与交互关卡。构建复现、独立动画实例、资产加载、性能和发布随阶段验收。
+Windows 主构建入口为 `msvc-debug` 与 `msvc-release`。源码和产物通过哈希记录关联，素材通过参数化报告准入，见[构建复现说明](docs/runtime/build-reproducibility.md)。
+
+F1 为 Complete，R5、G5、G6、U1、F2 和 P1 为 Planned。路线覆盖莱万汀外观、真实 idle/walk、基础 3C 与交互关卡。构建复现、独立动画实例、资产加载、性能和发布随阶段验收。

@@ -23,7 +23,7 @@ AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo
 
 ## 开发路线
 
-当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 为 Ready，其余第三人称阶段为 Planned。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 为 Complete，其余第三人称阶段为 Planned。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 
 ## 原生 Vulkan 的边界
 

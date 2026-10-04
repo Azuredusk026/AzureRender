@@ -38,7 +38,7 @@ ScriptRuntime 将 Lua 5.4.8 与 sol2 3.5.0 接入固定步运行时。脚本控�
 | `self:alive()` | 返回句柄是否有效 |
 | `self:action(name)` | 返回动作的持续按下状态 |
 | `self:pressed(name)` | 返回当前固定步的按下沿 |
-| `self:move(x, z, jump)` | 设置水平运动与跳跃请求；数值须有限 |
+| `self:move(x, z, jump)` | 设置水平运动与跳跃请求。数值须有限 |
 | `self:get(type, field)` | 返回反射字段值 |
 | `self:set(type, field, value)` | 按反射范围与类型事务校验字段 |
 | `self:destroy()` | 下一固定步删除当前实体 |

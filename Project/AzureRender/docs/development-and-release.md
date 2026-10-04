@@ -1,10 +1,12 @@
 # 开发、测试与发布
 
+Windows 源码、产物关联与素材准入使用[构建复现说明](runtime/build-reproducibility.md)。公共回归、本机 GPU 与发布门禁的入口在该页集中维护。
+
 AzureRender 按修改风险选择测试。纯数据或 CLI 变更通常可以用单元测试覆盖。Vulkan 生命周期变更需要运行 Debug Validation。
 
 R3 工作线程录制可用 `--disable-parallel-recording` 切换回主线程录制，用于同条件视觉和性能比较。当前工作线程路径覆盖 Character 蒙皮、GPU 剔除、阴影和主场景。主线程按图顺序执行这些命令缓冲。
 
-Character 不透明绘制使用 GPU 剔除与间接参数。`--disable-gpu-culling` 切回 CPU 可见性和直接绘制；缺少 Compute 或 drawIndirectFirstInstance 能力时自动使用该路径。透明排序和轮廓仍使用 CPU 可见列表。
+Character 不透明绘制使用 GPU 剔除与间接参数。`--disable-gpu-culling` 切回 CPU 可见性和直接绘制。缺少 Compute 或 drawIndirectFirstInstance 能力时自动使用该路径。透明排序和轮廓仍使用 CPU 可见列表。
 
 `--disable-multi-draw-indirect` 强制每次提交一个间接命令，用于验证不支持批量间接的设备路径。
 
@@ -179,7 +181,7 @@ cmake -DBUILD_DIR="$PWD/build/ninja-release" `
 
 发布门禁会检查配置、Shader、目标构建和 CTest。它也检查安装、Manifest、版本、资源和运行时。修改 GPU 路径或视觉效果后，还要在真实 GPU 上运行 Validation 和 Capture。
 
-Windows Release 构建会生成可分发的压缩包，并完成隔离运行检查。Windows Debug 构建仅用于开发；Debug 门禁验证配置、构建、CTest 和安装清单，并在结果中标记 `development-only`。调试运行库依赖本机 Visual Studio 工具链。
+Windows Release 构建会生成可分发的压缩包，并完成隔离运行检查。Windows Debug 构建仅用于开发。Debug 门禁验证配置、构建、CTest 和安装清单，并在结果中标记 `development-only`。调试运行库依赖本机 Visual Studio 工具链。
 
 ## 安装树
 

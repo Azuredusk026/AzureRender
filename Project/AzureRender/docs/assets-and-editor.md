@@ -169,7 +169,9 @@ lights[]
   id, nodeId, color, intensity, radius, enabled
 ```
 
-`renderSettings.sceneType` 选择场景渲染器。点光源通过 `nodeId` 关联场景节点，节点变换提供世界位置。v1 与 v2 文档读取后使用空光源列表；v3 保存完整光源数据。程序会拒绝未知的未来版本。
+`renderSettings.sceneType` 选择场景渲染器。点光源通过 `nodeId` 关联场景节点，节点变换提供世界位置。v1 与 v2 文档读取后使用空光源列表。
+
+v3 保存完整光源数据。程序会拒绝未知的未来版本。
 
 保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。即使进程中断，原文件也不会只剩一半。`prefabSource` 和 `instanceOf` 目前只保存引用与 Transform 覆盖。项目还没有实现独立的 Prefab 文件展开系统。
 

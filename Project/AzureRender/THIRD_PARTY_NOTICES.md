@@ -2,6 +2,8 @@
 
 AzureRender 使用以下第三方依赖。发布目录保留包管理器或上游分发提供的许可证文件。本文说明第三方依赖的版权与分发许可。
 
+离线动画采样工具使用 [ufbx](https://github.com/ufbx/ufbx/tree/v0.17.1) 0.17.1，许可证为 MIT。`prepare_fbx_tool.py` 校验源码 SHA-256，下载许可证并编译宿主工具。源码与许可证位于本机 `build/f1/ufbx/`。该工具用于素材准入与离线重定向，运行时读取 glTF 2.0。
+
 | 依赖 | 许可证 |
 | --- | --- |
 | Vulkan Headers 与 Loader | Apache License 2.0 |

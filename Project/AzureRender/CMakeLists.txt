@@ -365,13 +365,11 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_test(NAME AzureEngine.GamePackageRules COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package_rules.py")
-    if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
-        add_test(NAME AzureEngine.GamePackage COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package.py"
-            --build-dir "${CMAKE_CURRENT_BINARY_DIR}" --editor $<TARGET_FILE:AzureRender>
-            --output "${CMAKE_CURRENT_SOURCE_DIR}/build/p0/Windows Game"
-            --evidence "${CMAKE_CURRENT_SOURCE_DIR}/build/p0/game-package-evidence")
-        set_tests_properties(AzureEngine.GamePackage PROPERTIES LABELS "gpu;release" RUN_SERIAL TRUE TIMEOUT 240)
-    endif()
+    include("${CMAKE_CURRENT_SOURCE_DIR}/tools/register_game_package.cmake")
+    azure_register_game_package()
+    add_test(NAME AzureEngine.BuildConfiguration COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_configuration.py")
+    add_test(NAME AzureEngine.BuildProvenance COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_provenance.py")
+    add_test(NAME AzureEngine.CharacterIntake COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_intake.py")
     add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
     add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
@@ -1061,4 +1059,5 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/RmlUi-Sample-Font
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/editor-game-ui.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/game-publishing.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/build-reproducibility.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/u0-implementation.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/p0-implementation.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/third-person-playable-plan.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")

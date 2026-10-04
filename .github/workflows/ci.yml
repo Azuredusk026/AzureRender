@@ -18,6 +18,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ninja-build xvfb libglfw3-dev libvulkan-dev vulkan-tools vulkan-validationlayers mesa-vulkan-drivers glslc
+          python3 -m pip install --quiet --break-system-packages numpy pillow
       - uses: lukka/run-vcpkg@v11
         with:
           vcpkgJsonGlob: Project/AzureRender/vcpkg.json
@@ -58,23 +59,57 @@ jobs:
 
   windows:
     runs-on: windows-2025
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
     defaults:
       run:
         working-directory: Project/AzureRender
     steps:
       - uses: actions/checkout@v4
+      - name: Install Vulkan SDK
+        shell: pwsh
+        run: |
+          $sdkVersion = '1.4.350.0'
+          $installer = Join-Path $env:RUNNER_TEMP 'VulkanSDK.exe'
+          Invoke-WebRequest "https://sdk.lunarg.com/sdk/download/$sdkVersion/windows/VulkanSDK-$sdkVersion-Installer.exe" -OutFile $installer
+          $process = Start-Process -FilePath $installer -ArgumentList '--accept-licenses --default-answer --confirm-command install' -WindowStyle Hidden -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw 'Vulkan SDK installation failed' }
+          $sdkRoot = "C:\VulkanSDK\$sdkVersion"
+          if (!(Test-Path "$sdkRoot\Include\vulkan\vulkan.h")) { throw 'Vulkan SDK headers missing' }
+          "VULKAN_SDK=$sdkRoot" | Out-File $env:GITHUB_ENV -Append
+          "$sdkRoot\Bin" | Out-File $env:GITHUB_PATH -Append
+      - name: Install Python test dependencies
+        run: python -m pip install numpy pillow
       - uses: lukka/run-vcpkg@v11
         with:
           vcpkgJsonGlob: Project/AzureRender/vcpkg.json
       - name: Configure
         shell: pwsh
         run: cmake -S . -B build/ci -A x64 -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-      - name: Release gate
+      - name: Build and public regression
+        shell: pwsh
+        run: |
+          cmake --build build/ci --config ${{ matrix.configuration }}
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ctest --test-dir build/ci -C ${{ matrix.configuration }} --show-only=json-v1 | Out-File build/ci/test-discovery.json -Encoding utf8
+          $tests = Get-Content build/ci/test-discovery.json -Raw | ConvertFrom-Json
+          if ($tests.tests.name -notcontains 'AzureEngine.BuildProvenance') { throw 'Required public test missing' }
+          if ('${{ matrix.configuration }}' -eq 'Release' -and $tests.tests.name -notcontains 'AzureEngine.GamePackage') { throw 'Release game package test missing' }
+          ctest --test-dir build/ci -C ${{ matrix.configuration }} -LE gpu --output-on-failure
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --install build/ci --config ${{ matrix.configuration }} --prefix build/ci/install
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake -DINSTALL_DIR="$PWD/build/ci/install" -DOUTPUT_FILE="$PWD/build/ci/install/install_manifest.json" -P tools/write_install_manifest.cmake
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake -DINSTALL_DIR="$PWD/build/ci/install" -DMANIFEST_FILE="$PWD/build/ci/install/install_manifest.json" -P tools/verify_install_manifest.cmake
+      - name: Full Release gate
+        if: matrix.configuration == 'Release'
         shell: pwsh
         run: cmake -DBUILD_DIR="$PWD/build/ci" -DCONFIG=Release -P tools/run_release_gate.cmake
       - name: Public scene CLI smoke
         shell: pwsh
-        run: build/ci/Release/AzureRender.exe --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
+        run: build/ci/${{ matrix.configuration }}/AzureRender.exe --asset assets_public/test_model.gltf --create-scene build/ci/public.azscene
       - name: Documentation checks
         shell: bash
         run: bash tools/check_docs.sh
@@ -83,5 +118,7 @@ jobs:
         run: .\tools\verify_portfolio.ps1
       - uses: actions/upload-artifact@v4
         with:
-          name: AzureRender-Windows
-          path: Project/AzureRender/build/ci/AzureRender-*.tar.gz*
+          name: AzureRender-Windows-${{ matrix.configuration }}
+          path: |
+            Project/AzureRender/build/ci/install/**
+            Project/AzureRender/build/ci/test-discovery.json

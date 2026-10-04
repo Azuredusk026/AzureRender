@@ -1,0 +1,65 @@
+"""Build and associate runtime inputs with products, then reject stale results."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+INPUT_DIRS = ("src", "shaders", "tools", "schemas", "assets_public", "cmake")
+INPUT_FILES = ("CMakeLists.txt", "CMakePresets.json", "vcpkg.json", "vcpkg-configuration.json")
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def inputs(source):
+    paths = [source / name for name in INPUT_FILES if (source / name).is_file()]
+    for name in INPUT_DIRS:
+        paths.extend(p for p in (source / name).rglob("*") if p.is_file()
+            and not any(part in {"__pycache__", ".azure"} for part in p.parts))
+    return {p.relative_to(source).as_posix(): digest(p) for p in sorted(paths)}
+
+
+def describe(source, products):
+    commit = subprocess.run(["git", "-C", str(source), "rev-parse", "HEAD"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip()
+    status = subprocess.run(["git", "-C", str(source), "status", "--porcelain"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip()
+    return {"schemaVersion": 1, "commit": commit, "workingTreeDirty": bool(status),
+        "source": inputs(source), "products": {str(p.resolve()): digest(p) for p in products}}
+
+
+def verify(source, manifest):
+    if inputs(source) != manifest["source"]:
+        raise ValueError("Build source differs from recorded inputs")
+    for name, expected in manifest["products"].items():
+        if not Path(name).is_file() or digest(Path(name)) != expected:
+            raise ValueError("Build product differs: " + name)
+
+
+def main():
+    parser = argparse.ArgumentParser(__doc__)
+    parser.add_argument("mode", choices=["build", "verify"])
+    parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--build-dir", type=Path, required=True)
+    parser.add_argument("--config", choices=["Debug", "Release"], default="Release")
+    args = parser.parse_args()
+    manifest_path = args.build_dir / "build-provenance.json"
+    if args.mode == "build":
+        before = inputs(args.source)
+        subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
+        prefix = args.build_dir / args.config if (args.build_dir / args.config).is_dir() else args.build_dir
+        suffix = ".exe" if __import__("os").name == "nt" else ""
+        manifest = describe(args.source, [prefix / (n + suffix) for n in ["AzureRender", "AzurePlayer", "AzureMetaGen"]])
+        if before != manifest["source"]:
+            raise ValueError("Build source changed during compilation")
+        manifest["configuration"] = args.config
+        manifest["toolchain"] = (args.build_dir / "CMakeCache.txt").read_text(encoding="utf-8")
+        manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    verify(args.source, json.loads(manifest_path.read_text(encoding="utf-8")))
+    print(json.dumps({"status": "passed", "manifest": str(manifest_path)}))
+
+
+if __name__ == "__main__":
+    main()

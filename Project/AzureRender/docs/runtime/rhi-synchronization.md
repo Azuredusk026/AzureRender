@@ -13,17 +13,21 @@ RHI 同步契约把图像和缓冲区的布局、访问类型与流水线阶段�
 
 ## 数据与所有权
 
-`ImageBarrierDesc` 和 `BufferBarrierDesc` 只借用调用方提供的 Vulkan 句柄，不负责创建或销毁资源。图像屏障包含子资源范围；缓冲区屏障包含字节偏移和大小。资源所有权仍由分配器和 RHI 生命周期管理。
+`ImageBarrierDesc` 和 `BufferBarrierDesc` 只借用调用方提供的 Vulkan 句柄，不负责创建或销毁资源。图像屏障包含子资源范围。缓冲区屏障包含字节偏移和大小。资源所有权仍由分配器和 RHI 生命周期管理。
 
 ## 生命周期与时序
 
-资源首次使用前提交布局转换，写入完成后提交到读取阶段。屏障在同一命令缓冲区中按录制顺序生效。暂停、交换链重建和帧结束由平台帧流程负责，窗口尺寸为零时等待事件，尺寸有效时立即重建；等待期间收到关闭请求则退出。重建先等待设备空闲并检查返回值。
+资源首次使用前提交布局转换，写入完成后提交到读取阶段。屏障在同一命令缓冲区中按录制顺序生效。
+
+暂停、交换链重建和帧结束由平台帧流程负责。窗口尺寸为零时等待事件，尺寸有效时立即重建。等待期间收到关闭请求则退出。重建先等待设备空闲并检查返回值。
 
 ## 接口契约
 
-`imageBarrier()` 支持显式 `srcStageMask`、`dstStageMask`、`srcAccessMask`、`dstAccessMask`、`aspectMask`、`baseMipLevel` 和 `mipLevels`。两侧阶段均为零时保留按布局推导的兼容路径；显式指定阶段时，访问掩码按调用方提供的值提交。`mipLevels` 至少为 1。仅指定一侧阶段、空子资源范围、无阶段的显式访问掩码会抛出 `std::invalid_argument`，两个后端使用相同检查。
+`imageBarrier()` 支持显式 `srcStageMask`、`dstStageMask`、`srcAccessMask`、`dstAccessMask`、`aspectMask`、`baseMipLevel` 和 `mipLevels`。两侧阶段均为零时保留按布局推导的兼容路径。显式指定阶段时，访问掩码按调用方提供的值提交。
 
-`bufferBarrier()` 使用显式阶段和访问掩码；阶段为零时分别回退到 `TOP_OF_PIPE` 与 `BOTTOM_OF_PIPE`。`size` 可使用 `VK_WHOLE_SIZE`。队列族在当前单图形队列契约中固定为 `VK_QUEUE_FAMILY_IGNORED`。
+`mipLevels` 至少为 1。仅指定一侧阶段、空子资源范围、无阶段的显式访问掩码会抛出 `std::invalid_argument`，两个后端使用相同检查。
+
+`bufferBarrier()` 使用显式阶段和访问掩码。阶段为零时分别回退到 `TOP_OF_PIPE` 与 `BOTTOM_OF_PIPE`。`size` 可使用 `VK_WHOLE_SIZE`。队列族在当前单图形队列契约中固定为 `VK_QUEUE_FAMILY_IGNORED`。
 
 ## 线程与同步
 

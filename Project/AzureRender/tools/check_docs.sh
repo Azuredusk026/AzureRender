@@ -45,7 +45,7 @@ if rg -n '\\\[|\\\]|\\\(|\\\)' docs/*.md; then
     exit 1
 fi
 
-style_documents=(README.md docs/*.md)
+style_documents=(README.md docs/*.md docs/plans/*.md docs/runtime/*.md)
 if test -f ../../README.md; then
     style_documents+=(../../README.md)
 fi

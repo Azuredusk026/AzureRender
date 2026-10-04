@@ -1,0 +1,276 @@
+{
+  "tests": [
+    {
+      "name": "AzureEngine.GameUiRenderer",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.GameUi",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.EditorWorkflow",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.PresentationRuntime",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.GameplayPresentation",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.ScriptRuntime",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.PhysicsInput",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.AssetLevel",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.Reflection",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.GamePackageRules",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.BuildConfiguration",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.BuildProvenance",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.CharacterIntake",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.PresentationGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureEngine.EditorHost",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureEngine.MetaGenerator",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.LevelPlayer",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureEngine.PhysicsPlayer",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureEngine.ScriptPlayer",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureEngine.Project",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.RuntimeLifecycle",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.EnvironmentAsset",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.RenderGraph",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.TransientResourcePool",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.LightBuffer",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.CascadedShadow",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.ClusteredLightGrid",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.ComputePass",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.FrameTaskScheduler",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.SurfaceLifecycle",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.CommandLine",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.EditorCameraController",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.EditorSession",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.Ecs",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.PickMath",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.SceneModel",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.RuntimeDiagnostics",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.GpuCapabilityReport",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.ResourceLocator",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.ExtensionRegistry",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.UploadRing",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.NullRhi",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.NullRhiPass",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.SceneGraph",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.VisualRegression",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.VisualRegressionLegacyDescriptors",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.BlackholeComputeGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.CharacterIblComputeGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.CharacterSkinningComputeGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.R4AcceptanceRules",
+      "labels": []
+    },
+    {
+      "name": "AzureEngine.PlayerCli",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.BlackholeOptimizationRules",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.R3Comparison",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.R3TransparentComparison",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.AuditRegressions",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.VisualRegressionLegacySkinning",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.CharacterMorphComputeGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.ClusteredLightingGpu",
+      "labels": [
+        "gpu"
+      ]
+    },
+    {
+      "name": "AzureRender.ReleaseGateMissingBuild",
+      "labels": []
+    },
+    {
+      "name": "AzureRender.InstallManifestRoundTrip",
+      "labels": []
+    }
+  ]
+}
