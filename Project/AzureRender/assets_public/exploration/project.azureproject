@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "7f971748-131f-4764-9aac-221848014a37",
+  "name": "Azure Exploration",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/exploration.azurelevel"
+}

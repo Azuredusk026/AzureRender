@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "collectible",
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "body",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.45,
+              0
+            ],
+            "scale": [
+              0.3,
+              0.45,
+              0.3
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {}
+        },
+        "azure.interactable": {
+          "type": "azure.interactable",
+          "version": 1,
+          "data": {
+            "prompt": "Collect artifact [E]",
+            "range": 3,
+            "offset": [
+              0,
+              0.3,
+              0
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/collectible.lua"
+          }
+        }
+      }
+    }
+  ]
+}

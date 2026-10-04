@@ -1,7 +1,9 @@
 #pragma once
 #include <cmath>
 #include <functional>
+#include <iterator>
 #include <map>
+#include <set>
 #include <stdexcept>
 #include <vector>
 
@@ -32,6 +34,7 @@ class RuntimeLifecycle final {
         nodes_.swap(candidate.nodes_);
         std::swap(scene_, candidate.scene_);
         pending_.clear();
+        pendingSpawns_.clear();
         ++sceneRevision_;
     }
     void start() {
@@ -53,6 +56,7 @@ class RuntimeLifecycle final {
     }
     void stop() noexcept {
         pending_.clear();
+        pendingSpawns_.clear();
         world_.clear();
         nodes_.clear();
         step_ = false;
@@ -117,13 +121,50 @@ class RuntimeLifecycle final {
         if (!operation) throw std::invalid_argument("Empty deferred operation");
         pending_.push_back(std::move(operation));
     }
+    void validateSpawn(const SceneNode& node) {
+        if(node.id.empty()||node.id.size()>128||nodes_.count(node.id)||pendingSpawns_.count(node.id))
+            throw std::invalid_argument("Spawn identity is empty, too long or already reserved");
+        if(nodes_.size()+pendingSpawns_.size()>=4096)throw std::invalid_argument("Spawn node capacity exceeded");
+        if(!node.parentId.empty()&&!nodeValid(node.parentId))throw std::invalid_argument("Spawn parent is stale");
+        if(!node.resourceId.empty()&&std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& r){return r.id==node.resourceId;}))
+            throw std::invalid_argument("Spawn resource is unavailable");
+    }
+    void deferSpawn(SceneNode node,std::function<void(ecs::World&,ecs::Entity)> configure={}) {
+        validateSpawn(node);const auto id=node.id;
+        defer([this,node=std::move(node),configure=std::move(configure)](auto& world){
+            pendingSpawns_.erase(node.id);
+            if(nodes_.count(node.id))throw std::invalid_argument("Spawn identity already exists: "+node.id);
+            if(!node.parentId.empty()&&!nodeValid(node.parentId))throw std::invalid_argument("Spawn parent is stale");
+            if(!node.resourceId.empty()&&std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& r){return r.id==node.resourceId;}))
+                throw std::invalid_argument("Spawn resource is unavailable");
+            auto nodes=scene_.nodes;nodes.push_back(node);
+            const auto entity=world.createEntity();
+            try {
+                world.addComponent(entity,NodeIdentity{node.id});
+                world.addComponent(entity,ecs::TransformComponent{node.translation,node.rotation,node.scale});
+                world.addComponent(entity,ecs::RenderableComponent{0,node.visible});
+                if(configure)configure(world,entity);
+                nodes_.emplace(node.id,entity);scene_.nodes.swap(nodes);
+            }catch(...){world.destroyEntity(entity);throw;}
+        });
+        pendingSpawns_.insert(id);
+    }
     double beginFrame(double delta) {
         if (!std::isfinite(delta) || delta < 0)
             throw std::invalid_argument("Runtime delta must be finite and nonnegative");
         if (state_ == State::Created || state_ == State::Stopped) return 0;
         auto operations = std::move(pending_);
         pending_.clear();
-        for (auto& operation : operations) operation(world_);
+        const auto batchRevision=sceneRevision_;
+        for (std::size_t index=0;index<operations.size();++index) {
+            try{operations[index](world_);}
+            catch(...){
+                if(sceneRevision_==batchRevision&&state_!=State::Stopped)
+                    pending_.insert(pending_.begin(),std::make_move_iterator(operations.begin()+index+1),std::make_move_iterator(operations.end()));
+                throw;
+            }
+            if(sceneRevision_!=batchRevision||state_==State::Stopped)return 0;
+        }
         if (state_ == State::Paused && !step_) return 0;
         step_ = false;
         world_.update();
@@ -147,5 +188,6 @@ class RuntimeLifecycle final {
     State state_ = State::Created;
     bool step_ = false;
     std::vector<ecs::System> pending_;
+    std::set<std::string> pendingSpawns_;
 };
 }  // namespace azurerender

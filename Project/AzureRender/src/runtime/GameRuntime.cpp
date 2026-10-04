@@ -13,7 +13,7 @@ double GameRuntime::advance(double delta) {
     if (runtime_.state() != RuntimeLifecycle::State::Running && runtime_.state() != RuntimeLifecycle::State::Paused) return 0;
     if(sceneRevision_!=runtime_.sceneRevision()) { velocities_.clear(); previousTransforms_.clear();interpolationReady_=false;
         accumulator_=0; if(sceneRevision_!=0){input_.setFocused(false); input_.setFocused(true);}
-        hasCamera_=false; sceneRevision_=runtime_.sceneRevision();
+        hasCamera_=false; interactions_.reset(); sceneRevision_=runtime_.sceneRevision();
         runtime_.world().each<game::ThirdPersonCamera>([&](auto,const auto& settings){if(!hasCamera_){cameraSettings_=settings;
             const auto target=runtime_.entity(settings.target);const auto* transform=runtime_.world().tryGet<ecs::TransformComponent>(target);
             if(transform){camera_.reset(transform->translation,settings);hasCamera_=true;cameraYaw_=camera_.yaw();}}});
@@ -65,6 +65,12 @@ double GameRuntime::advance(double delta) {
                     animator->playbackRate=animator->state=="walk"?speed/animator->referenceSpeed:1;}
         });
         updateCamera(static_cast<float>(fixed));
+        ecs::Entity actor=ecs::kInvalidEntity;std::string actorNode;
+        runtime_.world().each<game::Character>([&](auto entity,const auto& settings){
+            const auto node=runtime_.nodeId(entity);
+            if(settings.controlled&&!node.empty()&&(actorNode.empty()||node<actorNode)){actor=entity;actorNode=node;}});
+        const auto target=interactions_.select(runtime_,physics_,actor);
+        if(target&&input_.pressed("interact")&&interactionHandler_)interactionHandler_(*target);
         for (const auto& event : events) if (eventHandler_) eventHandler_(event);
         input_.endStep(); accumulator_ -= fixed; simulated += fixed; ++steps_;
         simulationMilliseconds_ += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count();

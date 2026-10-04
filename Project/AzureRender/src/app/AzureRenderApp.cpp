@@ -89,6 +89,7 @@ void AzureRenderApp::run(
         scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->update(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
+        gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
     }
     if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioHandler([this](auto entity){presentationRuntime_->play(entity);});}
 #if AZURE_WITH_EDITOR
@@ -506,7 +507,7 @@ void AzureRenderApp::buildSceneFrameData(
             glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
         }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
         gameCursorX_=x;gameCursorY_=y;
-        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE, GLFW_KEY_E})
+        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE, GLFW_KEY_E, GLFW_KEY_R})
             game->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
     }
     double elapsed=0;
@@ -528,7 +529,20 @@ void AzureRenderApp::buildSceneFrameData(
             if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
                 {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
                 {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
-        });gameRouteFrames_.push_back(std::move(state));}
+        });
+        auto* runtime=activeRuntime();state["tasks"]=nlohmann::json::array();
+        runtime->world().each<azurerender::game::TaskState>([&](auto entity,const auto& task){
+            state["tasks"].push_back({{"node",runtime->nodeId(entity)},{"started",task.started},{"collected",task.collected},
+                {"doorOpened",task.doorOpened},{"completed",task.completed}});});
+        unsigned collectibles=0;bool doorOpen=false,checkpointActivated=false;
+        runtime->world().each<azurerender::game::Collectible>([&](auto,const auto& value){if(!value.collected)++collectibles;});
+        runtime->world().each<azurerender::game::Door>([&](auto,const auto& value){doorOpen|=value.open;});
+        runtime->world().each<azurerender::game::Checkpoint>([&](auto,const auto& value){checkpointActivated|=value.activated;});
+        state["collectibles"]=collectibles;state["doorOpen"]=doorOpen;state["checkpointActivated"]=checkpointActivated;
+        state["levelRevision"]=runtime->sceneRevision();
+        state["interactionTarget"]=game->interactionTarget()?game->interactionTarget()->node:std::string();
+        state["cameraObstructed"]=game->hasCamera()&&game->camera().actualDistance()<game->camera().distance()-.1F;
+        gameRouteFrames_.push_back(std::move(state));}
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(game?game->renderScene():runOptions_.editorSession->viewScene()));
 #endif
@@ -1346,7 +1360,7 @@ void AzureRenderApp::keyCallback(
     if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
     auto* game=application->activeGame();auto* runtime=application->activeRuntime();
     if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
-    if(game && (key==GLFW_KEY_A||key==GLFW_KEY_D||key==GLFW_KEY_W||key==GLFW_KEY_S||key==GLFW_KEY_SPACE||key==GLFW_KEY_E)){game->input().key(key,action!=GLFW_RELEASE);return;}
+    if(game && (key==GLFW_KEY_A||key==GLFW_KEY_D||key==GLFW_KEY_W||key==GLFW_KEY_S||key==GLFW_KEY_SPACE||key==GLFW_KEY_E||key==GLFW_KEY_R)){game->input().key(key,action!=GLFW_RELEASE);return;}
     if(runtime && game){
         if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
         if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}

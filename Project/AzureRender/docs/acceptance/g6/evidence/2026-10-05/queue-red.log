@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 8: AzureEngine.Interaction
+1/1 Test #8: AzureEngine.Interaction ..........***Failed    0.10 sec
+A failed deferred operation must preserve the remaining queue for recovery
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.10 sec
+
+The following tests FAILED:
+	  8 - AzureEngine.Interaction (Failed)
+Errors while running CTest

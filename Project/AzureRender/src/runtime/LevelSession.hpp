@@ -12,6 +12,7 @@ public:
     void setPrepareHandler(std::function<void(const Level&)> handler) { prepare_ = std::move(handler); }
     AssetDatabase& assets() noexcept { return assets_; }
     const Level& current() const noexcept { return level_; }
+    const std::string& currentReference() const noexcept { return reference_; }
     const std::string& lastError() const noexcept { return error_; }
     std::uint64_t revision() const noexcept { return revision_; }
 private:

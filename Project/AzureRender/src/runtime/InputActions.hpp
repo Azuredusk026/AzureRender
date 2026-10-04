@@ -7,7 +7,7 @@ class InputActions {
 public:
     InputActions() {
         bind("move-left", 65); bind("move-right", 68); bind("move-forward", 87);
-        bind("move-back", 83); bind("jump", 32); bind("interact", 69);
+        bind("move-back", 83); bind("jump", 32); bind("interact", 69); bind("restart", 82);
     }
     void bind(std::string action, int key) { bindings_[std::move(action)] = key; }
     void key(int key, bool down) {

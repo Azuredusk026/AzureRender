@@ -10,6 +10,7 @@ public:
     ~ScriptRuntime();
     void update(double delta);
     void dispatch(const PhysicsEvent& event);
+    void dispatchInteraction(const InteractionTarget& event);
     void reloadChanged();
     void setLevelHandler(std::function<void(std::string)> handler);
     void setAudioHandler(std::function<void(ecs::Entity)> handler);

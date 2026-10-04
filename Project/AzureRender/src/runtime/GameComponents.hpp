@@ -65,6 +65,49 @@ struct ThirdPersonCamera {
     AZURE_FIELD("Follow response", .01, 100)
     float response = 12;
 };
+AZURE_TYPE("azure.interactable", 1)
+struct Interactable {
+    AZURE_FIELD("Interaction range", .1, 20)
+    float range = 2;
+    AZURE_FIELD("Target offset", -10, 10)
+    std::array<float,3> offset{0,1,0};
+    AZURE_FIELD("Prompt", 0, 0)
+    std::string prompt = "Interact";
+    AZURE_FIELD("Enabled", 0, 1)
+    bool enabled = true;
+};
+AZURE_TYPE("azure.collectible", 1)
+struct Collectible {
+    AZURE_FIELD("Category", 0, 0)
+    std::string category = "artifact";
+    AZURE_FIELD("Collected", 0, 1)
+    bool collected = false;
+};
+AZURE_TYPE("azure.door", 1)
+struct Door {
+    AZURE_FIELD("Required count", 1, 99)
+    std::uint32_t requiredCount = 3;
+    AZURE_FIELD("Open", 0, 1)
+    bool open = false;
+};
+AZURE_TYPE("azure.checkpoint", 1)
+struct Checkpoint {
+    AZURE_FIELD("Activated", 0, 1)
+    bool activated = false;
+    AZURE_FIELD("Respawn position", -10000, 10000)
+    std::array<float,3> position{};
+};
+AZURE_TYPE("azure.task-state", 1)
+struct TaskState {
+    AZURE_FIELD("Started", 0, 1)
+    bool started = false;
+    AZURE_FIELD("Collected count", 0, 99)
+    std::uint32_t collected = 0;
+    AZURE_FIELD("Door opened", 0, 1)
+    bool doorOpened = false;
+    AZURE_FIELD("Completed", 0, 1)
+    bool completed = false;
+};
 AZURE_TYPE("azure.script", 1)
 struct Script {
     AZURE_FIELD("Asset", 0, 0)

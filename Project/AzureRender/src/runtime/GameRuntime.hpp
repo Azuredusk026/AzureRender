@@ -3,6 +3,7 @@
 #include "runtime/GameComponents.hpp"
 #include "runtime/PhysicsWorld.hpp"
 #include "runtime/ThirdPersonCamera.hpp"
+#include "runtime/InteractionRuntime.hpp"
 #include <functional>
 namespace azurerender {
 class GameRuntime {
@@ -14,6 +15,8 @@ public:
     std::uint64_t steps() const noexcept { return steps_; }
     void setEventHandler(std::function<void(const PhysicsEvent&)> handler) { eventHandler_ = std::move(handler); }
     void setBeforeStep(std::function<void(double)> handler) { beforeStep_ = std::move(handler); }
+    void setInteractionHandler(std::function<void(const InteractionTarget&)> handler){interactionHandler_=std::move(handler);}
+    const std::optional<InteractionTarget>& interactionTarget() const{return interactions_.target();}
     double advance(double delta);
     void move(ecs::Entity entity, CharacterMotion motion) { motions_[entity] = motion; }
     void setCameraYaw(float yaw) { cameraYaw_ = yaw; }
@@ -43,6 +46,8 @@ private:
     std::array<float,3> previousCameraPosition_{}, previousCameraTarget_{};
     bool interpolationReady_ = false;
     float renderAlpha() const;
+    InteractionRuntime interactions_;
+    std::function<void(const InteractionTarget&)> interactionHandler_;
     void updateCamera(float dt);
 };
 }

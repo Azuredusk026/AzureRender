@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 12: AzureEngine.PhysicsInput
+1/1 Test #12: AzureEngine.PhysicsInput .........***Failed    0.06 sec
+Physics/input contract failed
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.07 sec
+
+The following tests FAILED:
+	 12 - AzureEngine.PhysicsInput (Failed)
+Errors while running CTest

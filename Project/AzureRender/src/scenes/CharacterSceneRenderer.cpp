@@ -437,7 +437,47 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     visibleInstances_.clear();
 }
 
+void CharacterSceneRenderer::ensureInstanceCapacity() {
+    // The host has retired this frame slot's fence before updateFrame.
+    // Grow only its storage; the other slots keep their in-flight buffers.
+    VkDeviceSize joints=0,vertices=0;
+    for(const auto& instance:sceneInstances_){
+        const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
+        joints+=mesh.jointMatrices.size()*sizeof(std::array<float,16>);
+        vertices+=mesh.vertices.size()*sizeof(AssetVertex);
+    }
+    const std::array<VkDeviceSize,3> required{joints,vertices,sceneInstances_.size()*sizeof(InstanceGpuData)};
+    const std::array<rhi::GpuBuffer*,3> slots{&jointBuffers_[currentFrame_],
+        computeSkinningEnabled_?&skinnedVertexBuffers_[currentFrame_]:nullptr,&instanceBuffers_[currentFrame_]};
+    std::array<rhi::GpuBuffer,3> candidates{};
+    try{
+        for(unsigned i=0;i<slots.size();++i)if(slots[i]&&required[i]>slots[i]->size){
+            const auto bytes=std::max(required[i],slots[i]->size+slots[i]->size/2);
+            candidates[i]=allocator_->createBuffer(bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+                |(i==1?VK_BUFFER_USAGE_VERTEX_BUFFER_BIT:0),i!=1);
+        }
+    }catch(...){for(auto& candidate:candidates)allocator_->destroyBuffer(candidate);throw;}
+    bool changed=false;
+    for(unsigned i=0;i<slots.size();++i)if(candidates[i].buffer){
+        allocator_->destroyBuffer(*slots[i]);*slots[i]=candidates[i];changed=true;
+    }
+    if(!changed)return;
+    const auto count=bindlessTextures_?1:totalMaterialCount();
+    for(std::size_t material=0;material<count;++material){
+        const auto set=descriptorSets_[currentFrame_*count+material];
+        rhi_->writeDescriptorBuffer({set,10,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,13,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,instanceBuffers_[currentFrame_].buffer,instanceBuffers_[currentFrame_].size});
+        if(computeSkinningEnabled_)rhi_->writeDescriptorBuffer({set,17,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+            skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
+    }
+    if(computeSkinningEnabled_)for(std::uint32_t key=0;key<meshResourceCount_;++key){
+        const auto set=skinningDescriptorSets_[currentFrame_*meshResourceCount_+key];
+        rhi_->writeDescriptorBuffer({set,1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
+    }
+}
 void CharacterSceneRenderer::prepareInstancePoses() {
+    ensureInstanceCapacity();
     constexpr float kPi = 3.14159265358979323846F;
     instancePoses_.clear();
     skinningDispatches_.clear();
@@ -459,8 +499,6 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             pose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
                 animationTime_);
         }
-        if (jointBase + pose.jointMatrices.size() > jointCapacity_ || vertexBase + mesh.vertices.size() > vertexCapacity_)
-            throw std::runtime_error("Scene instance pose capacity exceeded; reload scene resources");
         std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
             pose.jointMatrices.data(), pose.jointMatrices.size()*sizeof(std::array<float,16>));
         auto bounds = morphBounds(mesh, morph, &pose.jointMatrices);
@@ -3041,7 +3079,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
         commands.bindPipeline(backgroundPipeline_);
         if (!bindlessTextures_) {
             const std::size_t backgroundDescriptorIndex =
-                context.currentFrame * asset_.materials.size();
+                context.currentFrame * totalMaterialCount();
             commands.bindDescriptorSet(
                 pipelineLayout_, descriptorSets_[backgroundDescriptorIndex]);
             if (counters != nullptr) {

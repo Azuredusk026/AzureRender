@@ -126,6 +126,13 @@ std::vector<RecordedCall> runFrame(
         frame.sceneSnapshot = snapshot;
         renderer.updateFrame(frame);
     }
+    if(runtimeMutation==5){
+        auto snapshot=std::make_shared<azurerender::scene::SceneDescription>(context.scene);
+        for(int i=1;i<32;++i){auto node=snapshot->nodes[0];node.id="spawn-"+std::to_string(i);snapshot->nodes.push_back(node);}
+        frame.sceneSnapshot=snapshot;
+        for(unsigned slot=0;slot<2;++slot){frame.currentFrame=slot;renderer.updateFrame(frame);}
+        context.currentFrame=frame.currentFrame;
+    }
     azurerender::SceneSubmissionCounters counters;
     context.submissionCounters = &counters;
     NullCommandRecorder recorder;
@@ -153,6 +160,8 @@ std::vector<RecordedCall> runFrame(
     if(runtimeMutation==4){auto empty=std::make_shared<azurerender::scene::SceneDescription>(context.scene);
         empty->nodes.clear();frame.sceneSnapshot=empty;renderer.updateFrame(frame);}
     graph.execute(&recorder);
+    if(runtimeMutation==5&&counters.visibleInstances!=32)
+        throw std::runtime_error("Spawned instances must grow every in-flight pose slice and remain visible");
     if(runtimeMutation==4&&countCalls(recorder.calls,"dispatch")!=3)
         throw std::runtime_error("Frozen skinning dispatches changed after preparing another frame");
     if (runtimeMutation > 0 && runtimeMutation < 4 && counters.visibleInstances != 0)
@@ -392,6 +401,9 @@ int main() {
         try { runFrame(true, shaderDirectory, true, false, false, false, 0.0F, false, false, mutation); }
         catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 10; }
     }
+    try {for(bool bindlessPath:{false,true})for(bool computePath:{false,true})
+        runFrame(bindlessPath,shaderDirectory,false,false,false,computePath,0,false,false,5);}
+    catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 18;}
     try {runFrame(true,shaderDirectory,true,false,true,true,0,false,false,4);}
     catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 11;}
     return 0;

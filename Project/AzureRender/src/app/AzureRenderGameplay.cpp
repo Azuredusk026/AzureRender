@@ -74,7 +74,20 @@ void AzureRenderApp::synchronizeGameUi(){
         if(!path.empty()){
             if(!gameUiRenderer_)gameUiRenderer_=std::make_unique<azurerender::GameUiRenderer>(*rhi_,postProcessRenderPass_,resourceLocator_.shaderDirectory());
             gameUi_=std::make_unique<azurerender::GameUi>(path,resourceLocator_.publicAsset("fonts/LatoLatin-Regular.ttf"),*gameUiRenderer_);gameUiPath_=path;
-            gameUi_->setActionHandler([this](std::string action){auto* runtime=activeRuntime();if(!runtime)return;if(action=="pause"){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();}});
+            gameUi_->setActionHandler([this](std::string action){
+                auto* runtime=activeRuntime();if(!runtime)return;
+                if(action=="pause"){
+                    if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();
+                    else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();
+                }else if(action=="restart"){
+                    auto* levels=levelSession_.get();
+#if AZURE_WITH_EDITOR
+                    if(runOptions_.editorSession)levels=runOptions_.editorSession->levels();
+#endif
+                    if(levels){levels->request(levels->currentReference());
+                        if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();}
+                }
+            });
         }
     }
     if(auto* scripts=activeScripts())scripts->setUiHandler([this](std::string id,std::string text){if(gameUi_)gameUi_->setText(id,text);});

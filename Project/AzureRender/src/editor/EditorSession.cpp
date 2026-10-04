@@ -22,7 +22,8 @@ struct EditorSession::PlayState {
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
             scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
             game->setBeforeStep([this](double delta){scripts->update(delta);});
-            game->setEventHandler([this](const auto& event){scripts->dispatch(event);});}
+            game->setEventHandler([this](const auto& event){scripts->dispatch(event);});
+            game->setInteractionHandler([this](const auto& event){scripts->dispatchInteraction(event);});}
     }
 };
 EditorSession::~EditorSession()=default;

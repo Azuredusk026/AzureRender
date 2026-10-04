@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "hero",
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/hero.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "body",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.character": {
+          "type": "azure.character",
+          "version": 2,
+          "data": {
+            "speed": 2,
+            "centerOffset": 0.9
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "locomotion": true,
+            "referenceSpeed": 2
+          }
+        },
+        "azure.task-state": {
+          "type": "azure.task-state",
+          "version": 1,
+          "data": {}
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hero.lua"
+          }
+        }
+      }
+    }
+  ]
+}

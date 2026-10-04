@@ -72,8 +72,9 @@ struct ScriptRuntime::Impl {
     std::chrono::steady_clock::time_point nextPoll{};
     bool callbackActive = false;
     bool staging = false;
-    std::map<std::string, Json> stagedComponents;
+    std::map<std::pair<ecs::Entity,std::string>, Json> stagedComponents;
     std::vector<std::function<void()>> stagedEffects;
+    std::set<std::string> stagedSpawns;
     std::uint64_t sceneRevision = 0;
     Impl(RuntimeLifecycle& r, GameRuntime& g, AssetDatabase& a) : runtime(r), game(g), assets(a) {
         lua.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string, sol::lib::table);
@@ -106,6 +107,40 @@ struct ScriptRuntime::Impl {
         }
         env["_G"] = env;
         auto self = lua.create_table(); self["id"] = node;
+        self.set_function("find",[this,entity,node,revision](sol::table,const std::string& id)->sol::object {
+            guard(entity,node,revision,false);
+            const auto target=runtime.entity(id);
+            if(target==ecs::kInvalidEntity)return sol::make_object(lua,sol::nil);
+            auto targetEnvironment=environment(target,id,revision);
+            return targetEnvironment["self"].get<sol::object>();
+        });
+        self.set_function("interaction_target",[this,entity,node,revision](sol::table){
+            guard(entity,node,revision,false);const auto& target=game.interactionTarget();
+            return target&&target->revision==revision&&target->actor==entity&&runtime.entity(target->node)==target->target?target->node:std::string();
+        });
+        self.set_function("has",[this,entity,node,revision](sol::table,const std::string& type){
+            guard(entity,node,revision,false);bool result=false;
+            visitComponentType(type,[&](auto component){result=runtime.world().has<decltype(component)>(entity);});return result;
+        });
+        self.set_function("remove_component",[this,entity,node,revision](sol::table,const std::string& type){
+            guard(entity,node,revision,true);
+            if(type=="azure.transform"||type=="azure.renderable")throw std::invalid_argument("Structural identity components are required");
+            visitComponentType(type,[&](auto component){using T=decltype(component);
+                auto effect=[this,entity,node,revision]{auto* lifecycle=&runtime;
+                    runtime.defer([lifecycle,entity,node,revision](auto& world){
+                        if(lifecycle->sceneRevision()==revision&&lifecycle->entity(node)==entity)world.template removeComponent<T>(entity);});};
+                if(staging)stagedEffects.push_back(effect);else effect();});
+        });
+        self.set_function("spawn",[this,entity,node,revision](sol::table,const std::string& id,const std::string& resource,sol::object position){
+            guard(entity,node,revision,true);SceneNode spawned;spawned.id=id;spawned.resourceId=resource;spawned.visible=!resource.empty();
+            ecs::TransformComponent defaults;auto data=registry.encode("azure.transform",&defaults);
+            data["data"]["translation"]=json(position);ecs::TransformComponent transform;registry.decode("azure.transform",&transform,data);
+            spawned.translation=transform.translation;
+            runtime.validateSpawn(spawned);
+            if(staging&&!stagedSpawns.insert(id).second)throw std::invalid_argument("Duplicate staged spawn identity");
+            auto effect=[this,spawned]{runtime.deferSpawn(spawned);};
+            if(staging)stagedEffects.push_back(effect);else effect();
+        });
         self.set_function("alive", [this, entity, node, revision](sol::table) { return alive(entity, node, revision); });
         self.set_function("action", [this, entity, node, revision](sol::table, const std::string& action) {
             guard(entity, node, revision, false); return game.input().down(action);
@@ -150,7 +185,8 @@ struct ScriptRuntime::Impl {
                 using T = decltype(component);
                 auto* value = runtime.world().tryGet<T>(entity);
                 if (!value) throw std::invalid_argument("Entity lacks component: " + type);
-                const auto data = staging && stagedComponents.count(type) ? stagedComponents.at(type) : registry.encode(type, value);
+                const auto key=std::make_pair(entity,type);
+                const auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key) : registry.encode(type, value);
                 result = data.at("data").at(field);
             });
             return luaValue(lua, result);
@@ -161,10 +197,11 @@ struct ScriptRuntime::Impl {
                 using T = decltype(component);
                 auto* value = runtime.world().tryGet<T>(entity);
                 if (!value) throw std::invalid_argument("Entity lacks component: " + type);
-                auto data = staging && stagedComponents.count(type) ? stagedComponents.at(type) : registry.encode(type, value);
+                const auto key=std::make_pair(entity,type);
+                auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key) : registry.encode(type, value);
                 data["data"][field] = json(input);
                 if (staging) {
-                    T candidate = *value; registry.decode(type, &candidate, data); stagedComponents[type] = data;
+                    T candidate = *value; registry.decode(type, &candidate, data); stagedComponents[key] = data;
                 } else registry.decode(type, value, data);
             });
         });
@@ -202,24 +239,24 @@ struct ScriptRuntime::Impl {
         lua_sethook(lua.lua_state(), instructionLimit, LUA_MASKCOUNT, 100000);
         const sol::protected_function_result result = chunk(); lua_sethook(lua.lua_state(), nullptr, 0, 0);
         if (!result.valid()) { const sol::error failure = result; error(asset + ": " + failure.what()); return false; }
-        for (const char* name : {"init", "update", "trigger", "shutdown"}) {
+        for (const char* name : {"init", "update", "trigger", "interact", "shutdown"}) {
             const sol::object callback = env[name];
             if (callback.get_type() != sol::type::nil && callback.get_type() != sol::type::function) {
                 error(asset + ": invalid callback: " + name); return false;
             }
         }
         Entry candidate{entity, node, asset, code, revision, std::move(env), true};
-        stagedComponents.clear(); stagedEffects.clear(); staging = true;
+        stagedComponents.clear(); stagedEffects.clear(); stagedSpawns.clear(); staging = true;
         const bool initialized = call(candidate, "init"); staging = false;
-        if (!initialized) { stagedComponents.clear(); stagedEffects.clear(); return false; }
+        if (!initialized) { stagedComponents.clear(); stagedEffects.clear(); stagedSpawns.clear(); return false; }
         if (existing != entries.end() && existing->second.active) call(existing->second, "shutdown");
-        for (const auto& component : stagedComponents) visitComponentType(component.first, [&](auto prototype) {
+        for (const auto& component : stagedComponents) visitComponentType(component.first.second, [&](auto prototype) {
             using T = decltype(prototype);
-            auto* value = runtime.world().tryGet<T>(entity);
-            if (value) registry.decode(component.first, value, component.second);
+            auto* value = runtime.world().tryGet<T>(component.first.first);
+            if (value) registry.decode(component.first.second, value, component.second);
         });
         for (const auto& effect : stagedEffects) effect();
-        stagedComponents.clear(); stagedEffects.clear();
+        stagedComponents.clear(); stagedEffects.clear(); stagedSpawns.clear();
         entries.insert_or_assign(entity, std::move(candidate));
         return true;
     }
@@ -272,6 +309,12 @@ void ScriptRuntime::dispatch(const PhysicsEvent& event) {
     }
 }
 void ScriptRuntime::reloadChanged() { impl_->reloadChanged(); }
+void ScriptRuntime::dispatchInteraction(const InteractionTarget& event) {
+    if(event.revision!=impl_->runtime.sceneRevision()||impl_->runtime.entity(event.node)!=event.target
+        ||impl_->runtime.entity(event.actorNode)!=event.actor)return;
+    const auto found=impl_->entries.find(event.target);
+    if(found!=impl_->entries.end()&&found->second.active)impl_->call(found->second,"interact",event.actorNode);
+}
 void ScriptRuntime::setLevelHandler(std::function<void(std::string)> handler) { impl_->levelHandler = std::move(handler); }
 void ScriptRuntime::setAudioHandler(std::function<void(ecs::Entity)> handler) { impl_->audioHandler = std::move(handler); }
 void ScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler) { impl_->uiHandler = std::move(handler); }

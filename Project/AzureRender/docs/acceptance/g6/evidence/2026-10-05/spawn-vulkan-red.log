@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_runtime_spawn_gpu.py", line 34, in <module>
+    with tempfile.TemporaryDirectory(prefix='azure_spawn_') as temporary:run(a.executable,a.output.resolve() if a.output else Path(temporary))
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_runtime_spawn_gpu.py", line 24, in run
+    assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr,result.stderr
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [1791130666707][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791130667076][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791130667107][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1791130667228][error][validation][code=4] [validation error] vkDestroyBuffer(): can't be called on VkBuffer 0x15d000000015d that is currently in use by VkDescriptorSet 0x1640000000164.
+The Vulkan spec states: All submitted commands that refer to buffer, either directly or via a VkBufferView, must have completed execution (https://docs.vulkan.org/spec/latest/chapters/resources.html#VUID-vkDestroyBuffer-buffer-00922)
