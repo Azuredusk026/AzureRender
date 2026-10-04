@@ -1,0 +1,9 @@
+Testing: AzureEngine.MaterialFixtureGpu
+16/63 Test: AzureEngine.MaterialFixtureGpu
+Command: "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe" "D:/Assigment/2609/FYP/Project/AzureRender/tools/test_material_fixture.py" "--executable" "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/AzureRender.exe" "--asset" "D:/Assigment/2609/FYP/Project/AzureRender/assets_public/third_person/material_fixture.gltf"
+Directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+"AzureEngine.MaterialFixtureGpu" start time: Oct 04 21:18 ?������?��??��?��o������?����??
+Output:
+----------------------------------------------------------
+{"assetSha256": "af33d262e6b23f1212d226ad9857760ded7c1ca66d745035da10f3b3ba557bbc", "classes": ["face", "generic", "hair", "overlay", "showcase"], "browPixels": 1026, "overlayContribution": 1.0, "hairHighlightPixels": 37, "faceSdfPixels": 10856, "validationErrors": 0, "mixedSceneChangedPixels": 430552, "headFollowMotionPixels": 11.454813359528544}
+<end of output>

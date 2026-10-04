@@ -55,6 +55,10 @@ constexpr const char* kHelp =
     "  --gpu-timing-output <json>          GPU pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --qa-light-scan                    Rotate the key light through 120 frames\n"
+    "  --qa-animation                     Play animation with a fixed QA camera\n"
+    "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
+    "  Face cameras: face-front, face-three-quarter-left/right, face-side-left/right\n"
     "  --qa-morph-weights <w0> <w1>      Set Morph target weights\n"
     "  --blackhole-quality performance|balanced|cinematic\n"
     "  --blackhole-camera front|orbit-left|high|close|over-shoulder\n"
@@ -190,7 +194,8 @@ void validate(const ParsedCommandLine& parsed) {
     if (!options.qaCamera.empty()
         && !isOneOf(options.qaCamera, {
             "full-body-front", "face-front", "face-three-quarter",
-            "back-detail", "lighting-sweep"})) {
+            "face-three-quarter-left", "face-three-quarter-right",
+            "face-side-left", "face-side-right", "back-detail", "lighting-sweep"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-camera",
              "Unknown --qa-camera: " + options.qaCamera);
     }
@@ -226,7 +231,7 @@ void validate(const ParsedCommandLine& parsed) {
             "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
             "outline", "shadow-map", "material-id", "style-mask", "ambient",
             "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
-            "bloom"})) {
+            "bloom", "brow-mask"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
     }
@@ -411,6 +416,10 @@ ParsedCommandLine parseCommandLine(
             parsed.options.qaCamera = requireValue(arguments, index, argument);
         } else if (argument == "--qa-light") {
             parsed.options.qaLight = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-light-scan") {
+            parsed.options.qaLightScan = true;
+        } else if (argument == "--qa-animation") {
+            parsed.options.qaAnimation = true;
         } else if (argument == "--qa-effect") {
             parsed.options.qaEffect = requireValue(arguments, index, argument);
         } else if (argument == "--qa-effect-state") {

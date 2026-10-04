@@ -1,0 +1,27 @@
+{
+  "scope": "local private images, hashes only",
+  "references": {
+    "build/r5/finish-accepted/back-detail_neutral-material_beauty/frame_000000.png": "4a32054f05c3e894ac76569fb21053bdc4eea8b8fb8b9690c31e809cb6dd3022",
+    "build/r5/finish-accepted/back-detail_specular-rim_beauty/frame_000000.png": "dea86ccaa44ddc2c47fc5e55ccdd0716b6d07cac2b8e2c34908d11a8b29c5775",
+    "build/r5/finish-accepted/back-detail_stylized-key_beauty/frame_000000.png": "d11ce38ef069ec1b6085e396ff61e50328a33b6c3d39fd081126553690bd55aa",
+    "build/r5/finish-accepted/face-front_neutral-material_beauty/frame_000000.png": "a0cfc7300b9de66325fd4c7b3a4794f8602b7dfd0a2f50da85501136f4c20905",
+    "build/r5/finish-accepted/face-front_specular-rim_beauty/frame_000000.png": "4d3abbc72b2bc085e2771917ea2edfb09c4b0cb19018130128c3e96a2e7f324b",
+    "build/r5/finish-accepted/face-front_stylized-key_beauty/frame_000000.png": "fc6d10f62faf4da369d190ffe023ccf0df96fd61281c01e1f5cd4f943954cb8a",
+    "build/r5/finish-accepted/face-side-left_neutral-material_beauty/frame_000000.png": "0fb6c603e38f38f5173097eed1c255bd9c0ab8be70dd3bcfdb93fee6fbba863a",
+    "build/r5/finish-accepted/face-side-left_specular-rim_beauty/frame_000000.png": "472acfc00c8a2cb3a98040759877eea98e97b87bfb7b90038c3b19491438c01c",
+    "build/r5/finish-accepted/face-side-left_stylized-key_beauty/frame_000000.png": "57e6845f5e6db0936bc7594eb7ab6f01d291e98239bd91b180ed29ca02e233dc",
+    "build/r5/finish-accepted/face-side-right_neutral-material_beauty/frame_000000.png": "5748cdd28d614577e1671c61c6421389c5ba5ca12cccbeea8cefd91317fbae38",
+    "build/r5/finish-accepted/face-side-right_specular-rim_beauty/frame_000000.png": "97644282a5b1b6ff3c7d941963e8ff075f65f494e6420fa4487f72c141d92c2d",
+    "build/r5/finish-accepted/face-side-right_stylized-key_beauty/frame_000000.png": "310834c6a1b89da501f9f36de4ee14f74fedfa71a114f4cc83e90efaa30993d0",
+    "build/r5/finish-accepted/face-three-quarter-left_neutral-material_beauty/frame_000000.png": "ae0a7c29b1c796b1d685034012b8a28eb554767b71e6557c0cd34826a1638749",
+    "build/r5/finish-accepted/face-three-quarter-left_specular-rim_beauty/frame_000000.png": "418cb24c746f20d8d564e1d3786fdadfb17ffdaa8f601db5163d5e0ba3af9d86",
+    "build/r5/finish-accepted/face-three-quarter-left_stylized-key_beauty/frame_000000.png": "0e67c1a81cb1830c0ced35a200d439e88dbf25642653728df0ec927fbb5334d0",
+    "build/r5/finish-accepted/face-three-quarter-right_neutral-material_beauty/frame_000000.png": "832d80cb6b6d8c46970ea9c93f9a10f495270e90d5327030754146a817555f61",
+    "build/r5/finish-accepted/face-three-quarter-right_specular-rim_beauty/frame_000000.png": "ea470c5c5e60fd10e2f26b818e9ca6a323f31c92c3f28ab1539ee7cd85d43259",
+    "build/r5/finish-accepted/face-three-quarter-right_stylized-key_beauty/frame_000000.png": "62e00ad2170d4742552e3a3eff1abb9eab080f76ba92e38367afccd68402283b",
+    "build/r5/finish-accepted/full-body-front_neutral-material_beauty/frame_000000.png": "37dcbc68b3b88ae23769523d06eab05f744a7ebe7b5d664b69c81b37ffa1ce0d",
+    "build/r5/finish-accepted/full-body-front_specular-rim_beauty/frame_000000.png": "59b54f207afd09a90e4c22487cde1f710ea475b863847cae5334cb73f1fc0ad8",
+    "build/r5/finish-accepted/full-body-front_stylized-key_beauty/frame_000000.png": "c43872d87f646eb3427f31bbfea34b29ed6c3b2e5f3eb90eefc1f4e0d0e61195",
+    "build/r5/private-mixed-final/mixed/frame_000000.png": "c21dd96297cff908a7189e24386a8c9816921cb9b60f64963fe2c893f83345e1"
+  }
+}

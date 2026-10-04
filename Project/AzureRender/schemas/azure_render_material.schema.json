@@ -45,7 +45,7 @@
       }
     },
     "styleParameters": {
-      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim; brow-overlay uses local vertical lift, Face-D ink expansion radius in texels and two reserved values.",
+      "description": "Class-dependent style vector. Lit materials use toon/shadow/specular/rim. Brow-overlay uses bind-space island expansion in metres (clamped to 0.0012), Face-D ink expansion radius in texels and two reserved values. Named brow joints select islands; eyelash geometry is preserved. Card culling uses the standard glTF material.doubleSided property.",
       "$ref": "#/$defs/parameterVector"
     },
     "featureParameters": {

@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：F1 Complete。R5、G5、G6、U1、F2、P1 Planned。Android Deferred
+> 状态：F1、R5 Complete。G5 Active。G6、U1、F2、P1 Planned。Android Deferred
 > 更新日期：2026-10-04
 > 适用范围：Windows 编辑器与 Windows 运行时。Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -72,8 +72,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | U0 编辑器与游戏界面 | G4，Complete | 层级、Inspector、资源浏览、操作历史、RmlUi、动画状态机与音频 | 导入 → 放置 → 编辑 → 运行 → 停止闭环通过 |
 | P0 Windows 游戏发布 | U0，Complete | 模板、打包、许可证清单和 Player 交付 | 安装、启动、游玩、关卡切换和退出通过 |
 | F1 构建复现与资产准入 | P0，Complete | 当前源码构建、发布基线与素材清单 | Debug/Release、产物一致性、CI 测试发现与素材记录通过 |
-| R5 角色外观与混合场景渲染 | F1、主角素材，Planned | 莱万汀面部、眉毛、头发与混合材质场景 | 主角七视角、光照、动画及实体共同渲染通过 |
-| G5 独立动画与基础 3C | R5、idle/walk 素材，Planned | 每实体动画、角色控制与第三人称相机 | 主角真实动作、多资源动画与固定 3C 路线通过 |
+| R5 角色外观与混合场景渲染 | F1、主角素材，Complete | 莱万汀面部、眉毛、头发与混合材质场景 | 主角七视角、光照、动画及实体共同渲染通过 |
+| G5 独立动画与基础 3C | R5、idle/walk 素材，Active | 每实体动画、角色控制与第三人称相机 | 主角真实动作、多资源动画与固定 3C 路线通过 |
 | G6 关卡实体与交互玩法 | G5，Planned | NPC、收集、开门、目标反馈与重新开始 | 实际关卡完整流程、状态与实体生命周期通过 |
 | U1 关卡制作与调试流程 | G6，Planned | 角色、动画、3C、碰撞与交互编辑 | 空项目制作、保存重开、运行调试与构建通过 |
 | F2 运行时性能与工程加固 | U1，Planned | 后台加载、资源复用、性能预算与诊断 | 标准、压力、预加载切关与资源恢复门禁通过 |
@@ -101,7 +101,9 @@ G4 的双关卡脚本玩法闭环与发布门禁通过，Debug 和 Release 各 4
 
 ## 第三人称可玩关卡路线
 
-F1 为 Complete，构建与素材准入见 [F1 验收](../acceptance/f1/2026-10-04.md)。R5 至 P1 按依赖依次进入，文件级任务见 [本轮实施计划](third-person-playable-plan.md)。
+F1 提交为 `9ce99e6`。R5 为 Complete，结果见 [R5 验收](../acceptance/r5/2026-10-04.md)。G5 为 Active，执行独立动画与基础 3C。
+
+构建与素材准入见 [F1 验收](../acceptance/f1/2026-10-04.md)。R5 至 P1 按依赖依次进入，文件级任务见 [本轮实施计划](third-person-playable-plan.md)。
 
 R5 以莱万汀实际画面验收眉毛、面部和头发。G5 以真实 idle/walk 验收角色表现，支持多个实体独立播放。基础 3C 包含相机相对移动、胶囊角色、跟随旋转与相机遮挡。
 

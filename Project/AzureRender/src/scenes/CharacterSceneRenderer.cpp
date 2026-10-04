@@ -30,7 +30,7 @@ namespace azurerender {
 
 namespace {
 
-static_assert(sizeof(AssetVertex) == 26 * sizeof(std::uint32_t));
+static_assert(sizeof(AssetVertex) == 27 * sizeof(std::uint32_t));
 
 Vector3 estimateFootPivot(const LoadedAsset& asset) {
     const float height = asset.boundsMax[1] - asset.boundsMin[1];
@@ -253,6 +253,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
         throw std::runtime_error("Scene must reference at least one asset");
     }
     scene_ = context.scene;
+    sceneWorldCoordinates_ = context.sceneWorldCoordinates;
     const std::string resolvedAssetPath = context.scene.resources[0].path;
     asset_ = loadGltfAsset(resolvedAssetPath);
     for (const AssetMaterial& material : asset_.materials) {
@@ -2157,6 +2158,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             {7,
              VK_FORMAT_R32G32B32_SFLOAT,
              static_cast<std::uint32_t>(offsetof(AssetVertex, morph1))},
+            {8, VK_FORMAT_R32_SFLOAT,
+             static_cast<std::uint32_t>(offsetof(AssetVertex, browMask))},
         };
         const std::vector<rhi::VertexAttributeDesc> shadowAttributes = {
             materialAttributes[0],
@@ -2472,7 +2475,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         multiply(
             uniformScale(fitScale),
             translation(-center[0], -center[1], -center[2])));
-    currentModel_ = model;
+    currentModel_ = sceneWorldCoordinates_ ? scene::identityMatrix() : model;
     const Matrix4 view = lookAt(
         cameraPosition_,
         cameraTarget_,
@@ -2492,9 +2495,15 @@ void CharacterSceneRenderer::updateUniformBuffer(
     viewFrustum_ =
         scene::extractFrustumPlanes(multiply(projection, view));
     const RenderSettings& settings = *renderSettings_;
-    const Vector3 lightDirection = settings.showcasePreset == 1
+    Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
+    if (frame.qaLightScan) {
+        const float angle = 2.0F * kPi * static_cast<float>(frame.capturedFrames % 120) / 119.0F;
+        const auto initial = lightDirection;
+        lightDirection = {std::cos(angle) * initial[0] - std::sin(angle) * initial[2],
+            initial[1], std::sin(angle) * initial[0] + std::cos(angle) * initial[2]};
+    }
     cascadeSplits_ = {};
     const std::vector<float> splits = computeCascadeSplits(
         0.1F, 100.0F, kShadowCascadeCount, 0.65F);
@@ -2663,6 +2672,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         settings.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
+    uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], frame.qaLightScan ? 1.0F : 0.0F};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,

@@ -11,3 +11,7 @@
 `scenes/clustered_lights_empty.azscene` 与 `scenes/clustered_lights_16.azscene` 使用同一角色模型，分别提供零光源参考和 16 个点光源场景。光源实体挂接在隐藏的场景变换节点上。
 
 `scenes/r4_stress.azscene` 包含 32 个独立公共网格资源、32 个可见对象和 16 个点光源，供复杂负载与生命周期验收使用。全部资源引用项目自制的 `test_model.gltf`。
+
+`third_person/material_fixture.gltf` 与 `fixture_hair_data.png` 为项目自制的 MIT 许可材质夹具。模型具有面部、曲面头发、眉毛和通用实体，三个关节用于头部跟随检查。生成入口为 `tools/create_material_fixture.py`。
+
+`scenes/material_mixed.azscene` 放置该角色、地面、墙体和物体。公共 GPU 测试检查材质贡献、混合渲染、动态眉毛以及两种蒙皮路径的一致性。

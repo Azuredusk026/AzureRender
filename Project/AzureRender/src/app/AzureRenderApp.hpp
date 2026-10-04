@@ -348,6 +348,8 @@ private:
     azurerender::ScriptRuntime* activeScripts();
     azurerender::AssetDatabase* activeAssets();
     void buildRenderContext(azurerender::RenderContext& context);
+    azurerender::scene::SceneDescription resolveRenderDescription(
+        const azurerender::SceneDocument& document) const;
     void buildSceneFrameData(azurerender::SceneFrameData& frame);
 
     void drawFrame();

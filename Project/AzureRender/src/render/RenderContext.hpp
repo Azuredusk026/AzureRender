@@ -99,6 +99,7 @@ struct SceneFrameData {
     std::uint32_t qaEffectMode = 0;
     bool qaEffectEnabled = true;
     bool qaHarnessEnabled = false;
+    bool qaLightScan = false;
 
     std::uint64_t capturedFrames = 0;
     std::uint32_t captureFps = 60;
@@ -198,6 +199,7 @@ struct RenderContext {
     // and placed nodes. Single-asset scenes carry exactly one resource and
     // one node.
     scene::SceneDescription scene;
+    bool sceneWorldCoordinates = false;
     // Directory holding compiled .spv shaders for renderer pipelines.
     std::string shaderDirectory;
     // Scene-independent environment source. Renderers may sample the shared

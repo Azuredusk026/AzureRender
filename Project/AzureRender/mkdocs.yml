@@ -35,6 +35,7 @@ nav:
   - 构建与使用: getting-started.md
   - 渲染器架构: architecture.md
   - 角色渲染: character-rendering.md
+  - 角色材质验收: runtime/character-finish.md
   - 黑洞模拟: blackhole-rendering.md
   - 资产与编辑器: assets-and-editor.md
   - 开发、测试与发布: development-and-release.md
@@ -67,6 +68,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - R5 角色外观与混合场景: acceptance/r5/2026-10-04.md
       - F1 构建与素材准入: acceptance/f1/2026-10-04.md
       - P0 Windows 游戏发布验收: acceptance/p0/2026-10-04.md
       - U0 编辑器与界面验收: acceptance/u0/2026-10-04.md

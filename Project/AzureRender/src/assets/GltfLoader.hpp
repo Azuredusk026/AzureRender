@@ -15,6 +15,7 @@ struct AssetVertex {
     std::array<float, 4> weights{1.0F, 0.0F, 0.0F, 0.0F};
     std::array<float, 3> morph0{};
     std::array<float, 3> morph1{};
+    float browMask = 0.0F;
 };
 
 enum class AssetAlphaMode : std::uint32_t {

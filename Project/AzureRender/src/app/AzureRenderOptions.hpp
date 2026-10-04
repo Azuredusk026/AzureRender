@@ -48,6 +48,8 @@ struct AzureRenderOptions {
     bool technicalSequence = false;
     std::string qaCamera;
     std::string qaLight;
+    bool qaLightScan = false;
+    bool qaAnimation = false;
     std::string qaEffect;
     std::string qaEffectState;
     std::string qaIsolation;

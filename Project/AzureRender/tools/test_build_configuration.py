@@ -10,6 +10,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class BuildConfigurationTests(unittest.TestCase):
+    @unittest.skipUnless(os.name == "nt", "Windows toolset contract")
+    def test_msvc_uses_latest_installed_toolset(self):
+        with tempfile.TemporaryDirectory() as temp:
+            probe = Path(temp) / "probe.py"
+            probe.write_text('import os,json; print(json.dumps({"vs":os.environ["VSINSTALLDIR"],"vc":os.environ["VCToolsInstallDir"]}))')
+            result = subprocess.run([str(ROOT / "tools/msvc_env.bat"), "python", str(probe)],
+                cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        data = json.loads(result.stdout)
+        toolsets = list((Path(data["vs"]) / "VC/Tools/MSVC").iterdir())
+        latest = max(toolsets, key=lambda p: tuple(map(int, p.name.split("."))))
+        self.assertEqual(Path(data["vc"]).resolve(), latest.resolve())
+
     @unittest.skipUnless(os.name == "nt", "Windows environment contract")
     def test_msvc_environment_preserves_requested_vcpkg(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -140,6 +140,7 @@ private:
         std::array<float, 4> faceLightDirection{};
         std::array<float, 4> faceSdfParameters{};
         std::array<float, 4> faceSdfShadowColor{};
+        std::array<float, 4> mainLightDirection{};
     };
 
     // Per-instance transforms uploaded to the instance storage buffer. The
@@ -212,6 +213,7 @@ private:
     std::optional<std::uint32_t> faceSdfHeadNode_;
     // Scene content snapshot from onLoad; nodes drive instance building.
     scene::SceneDescription scene_;
+    bool sceneWorldCoordinates_ = false;
     std::vector<std::unique_ptr<AdditionalResource>> additionalResources_;
     // Normalized bind-pose head basis. Imported joint axes are not guaranteed
     // to match the model's semantic left/up/forward axes, so runtime lighting

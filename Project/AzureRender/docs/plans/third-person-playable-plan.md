@@ -1,7 +1,7 @@
 # 第三人称角色与可玩关卡开发计划
 
 > 文档类型：实施计划
-> 状态：实施中，F1 为 Complete
+> 状态：实施中，G5 为 Active
 > 更新日期：2026-10-04
 > 适用范围：Windows 编辑器、独立 Player 与本机角色验收
 
@@ -20,8 +20,8 @@
 | 顺序 | 阶段 | 状态 | 依赖 | 交付目标 |
 | --- | --- | --- | --- | --- |
 | 1 | F1 构建复现与资产准入 | Complete | P0 | 当前源码的构建、发布基线与素材清单 |
-| 2 | R5 角色外观与混合场景渲染 | Planned | F1、主角素材 | 面部、眉毛、头发定稿与角色、实体共同渲染 |
-| 3 | G5 独立动画与基础 3C | Planned | R5、idle/walk 素材 | 多角色动画、角色控制与跟随相机 |
+| 2 | R5 角色外观与混合场景渲染 | Complete | F1、主角素材 | 面部、眉毛、头发定稿与角色、实体共同渲染 |
+| 3 | G5 独立动画与基础 3C | Active | R5、idle/walk 素材 | 多角色动画、角色控制与跟随相机 |
 | 4 | G6 关卡实体与交互玩法 | Planned | G5 | 可重复游玩的关卡与实体生命周期 |
 | 5 | U1 关卡制作与调试流程 | Planned | G6 | 角色、动画、相机和交互的编辑工作流 |
 | 6 | F2 运行时性能与工程加固 | Planned | U1 | 帧预算、异步加载、资源复用与诊断 |
@@ -112,16 +112,16 @@ Face SDF 使用头部绑定基底与有效贴图。Hair HN/P 按资源语义解�
 
 ### 文件级任务
 
-- [ ] 用 `tools/audit_brow_mesh.js` 核对眉毛、睫毛小岛和骨骼权重。
-- [ ] 扩展 `tools/audit_face_sdf_compatibility.py` 与材质校验报告。
-- [ ] 核对 `src/assets/GltfLoader.*` 的贴图、特征、通道和材质传递。
-- [ ] 在 `shaders/mesh.vert`、`mesh.frag` 与必要 Pass 中完成眉毛显示。
-- [ ] 在 `src/scenes/CharacterSceneRenderer.*` 校验透明排序和深度规则。
-- [ ] 完成面部明暗、肤色连续性、头发色相、发束高光与内部层次。
-- [ ] 扩展 `schemas/azure_render_material.schema.json` 的必要字段及兼容测试。
-- [ ] 制作公共眉毛、面部、头发和通用实体夹具，运行真实 GPU 回归。
-- [ ] 扩展 `tools/run_character_qa.ps1`，覆盖关键视角、光照和动画。
-- [ ] 保存角色近景、转台、隔离图和缺陷对应结果，维护角色主题文档。
+- [x] 用 `tools/audit_brow_mesh.js` 核对眉毛、睫毛小岛和骨骼权重。
+- [x] 扩展 `tools/audit_face_sdf_compatibility.py` 与材质校验报告。
+- [x] 核对 `src/assets/GltfLoader.*` 的贴图、特征、通道和材质传递。
+- [x] 在 `shaders/mesh.vert`、`mesh.frag` 与必要 Pass 中完成眉毛显示。
+- [x] 在 `src/scenes/CharacterSceneRenderer.*` 校验透明排序和深度规则。
+- [x] 完成面部明暗、肤色连续性、头发色相、发束高光与内部层次。
+- [x] 扩展 `schemas/azure_render_material.schema.json` 的必要字段及兼容测试。
+- [x] 制作公共眉毛、面部、头发和通用实体夹具，运行真实 GPU 回归。
+- [x] 扩展 `tools/run_character_qa.ps1`，覆盖关键视角、光照和动画。
+- [x] 保存角色近景、转台、隔离图和缺陷对应结果，维护角色主题文档。
 
 ### 完成条件
 

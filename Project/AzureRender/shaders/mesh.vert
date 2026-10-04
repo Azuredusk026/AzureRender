@@ -13,6 +13,7 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    vec4 mainLightDirection;
 } camera;
 
 layout(std430, binding = 10) readonly buffer JointData {
@@ -39,11 +40,13 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
+layout(location = 8) in float browMask;
 layout(location = 0) out vec3 worldNormal;
 layout(location = 1) out vec4 worldTangent;
 layout(location = 2) out vec2 textureCoordinate;
 layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPositions[4];
+layout(location = 8) out float eyebrowRegion;
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -58,29 +61,14 @@ layout(push_constant) uniform MorphWeights {
 } morphWeights;
 
 void main() {
+    eyebrowRegion = browMask;
     bool browOverlay =
         (morphWeights.materialFeatures & 64U) != 0U;
-    bool eyebrowVertex = browOverlay && (
-        (jointWeights.x > 0.001
-            && jointIndices.x >= 112U && jointIndices.x <= 154U)
-        || (jointWeights.y > 0.001
-            && jointIndices.y >= 112U && jointIndices.y <= 154U)
-        || (jointWeights.z > 0.001
-            && jointIndices.z >= 112U && jointIndices.z <= 154U)
-        || (jointWeights.w > 0.001
-            && jointIndices.w >= 112U && jointIndices.w <= 154U));
 #if defined(AZURE_COMPUTE_SKINNING)
     vec4 skinnedPosition = vec4(position, 1.0);
     vec3 skinnedNormal = normalize(normal);
     vec3 skinnedTangent = normalize(tangent.xyz);
-    if (eyebrowVertex) {
-        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
-        float islandCenterY = morph0.y > 1.2617 ? 1.26704 : 1.25846;
-        float islandCenterX = sign(morph0.x) * 0.0365;
-        skinnedPosition.y += sign(morph0.y - islandCenterY) * browThickness;
-        skinnedPosition.x += sign(morph0.x - islandCenterX)
-            * browThickness * 0.45;
-    }
+
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
     mat4 skinMatrix =
@@ -90,17 +78,7 @@ void main() {
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec3 morphedPosition = position + morph0 * morphWeights.weights.x
         + morph1 * morphWeights.weights.y;
-    if (eyebrowVertex) {
-        // This exported primitive combines four brow islands with thirty eye
-        // and eyelash islands. Brow joints occupy 112..154, so compensate for
-        // the sub-pixel card height without altering the eyelashes.
-        float browThickness = min(morphWeights.styleParameters.x, 0.0012);
-        float islandCenterY = position.y > 1.2617 ? 1.26704 : 1.25846;
-        float islandCenterX = sign(position.x) * 0.0365;
-        morphedPosition.y += sign(position.y - islandCenterY) * browThickness;
-        morphedPosition.x += sign(position.x - islandCenterX)
-            * browThickness * 0.45;
-    }
+
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);

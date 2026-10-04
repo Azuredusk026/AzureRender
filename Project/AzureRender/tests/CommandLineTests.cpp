@@ -1,6 +1,7 @@
 #include "app/CommandLine.hpp"
 
 #include <cstdint>
+#include <cstdio>
 #include <initializer_list>
 #include <stdexcept>
 #include <string>
@@ -32,7 +33,16 @@ void expectError(
 
 }  // namespace
 
-int main() {
+int main() try {
+    require(azurerender::parseCommandLine({"--qa-light-scan"}).options.qaLightScan,
+            "Fixed-camera light scanning must be accepted");
+    require(azurerender::parseCommandLine({"--qa-isolation", "brow-mask"}).options.qaIsolation == "brow-mask",
+            "Eyebrow region mask must be accepted");
+    for (const char* camera : {"face-three-quarter-left", "face-three-quarter-right",
+                              "face-side-left", "face-side-right"}) {
+        require(azurerender::parseCommandLine({"--qa-camera", camera}).options.qaCamera == camera,
+                "Character inspection camera must be accepted");
+    }
     const auto defaults = azurerender::parseCommandLine({});
     require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,
             "Single indirect command fallback was not parsed");
@@ -147,6 +157,8 @@ int main() {
         "Over-shoulder blackhole camera was not parsed");
     expectError(CommandLineErrorCode::InvalidValue, "--blackhole-quality",
         {"--blackhole-quality", "ultra"});
+    require(azurerender::parseCommandLine({"--qa-animation"}).options.qaAnimation,
+            "Fixed-camera animation playback must be accepted");
     expectError(
         CommandLineErrorCode::InvalidValue,
         "--scene-type",
@@ -225,4 +237,7 @@ int main() {
         std::string(azurerender::commandLineUsage()).find("Usage:") == 0,
         "Usage contract is missing");
     return 0;
+} catch (const std::exception& error) {
+    std::fprintf(stderr, "%s\n", error.what());
+    return 1;
 }

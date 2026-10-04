@@ -20,7 +20,7 @@ layout(push_constant) uniform SkinningParameters {
     vec2 morphWeights;
 } parameters;
 
-const uint vertexWordCount = 26u;
+const uint vertexWordCount = 27u;
 
 float readFloat(uint wordIndex) {
     return uintBitsToFloat(sourceVertices.words[wordIndex]);

@@ -102,6 +102,8 @@ void AzureRenderApp::writeCaptureManifest(
         << resolvedAssetPath_ << '|'
         << qaCameraName_ << '|'
         << qaLightName_ << '|'
+        << runOptions_.qaLightScan << '|'
+        << runOptions_.qaAnimation << '|'
         << qaEffectName_ << '|'
         << qaEffectStateName_ << '|'
         << qaIsolationName_ << '|'
@@ -168,6 +170,7 @@ void AzureRenderApp::writeCaptureManifest(
                 << ':' << material.materialFeatures
                 << ':' << material.materialProfileVersion
                 << ':' << material.materialProfileExplicit
+                << ':' << material.doubleSided
                 << ':' << material.emissiveStrength;
             for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
@@ -271,6 +274,9 @@ void AzureRenderApp::writeCaptureManifest(
         << (qaHarnessEnabled_ ? "true" : "false") << ",\n"
         << "  \"qaCamera\": " << std::quoted(qaCameraName_) << ",\n"
         << "  \"qaLight\": " << std::quoted(qaLightName_) << ",\n"
+        << "  \"qaLightScan\": " << (runOptions_.qaLightScan ? "true" : "false") << ",\n"
+        << "  \"qaAnimation\": " << (runOptions_.qaAnimation ? "true" : "false") << ",\n"
+        << "  \"sceneWorldCoordinates\": " << (runOptions_.sceneDocument.has_value() || runOptions_.editorSession != nullptr ? "true" : "false") << ",\n"
         << "  \"qaEffect\": " << std::quoted(qaEffectName_) << ",\n"
         << "  \"qaEffectState\": "
         << std::quoted(qaEffectStateName_) << ",\n"

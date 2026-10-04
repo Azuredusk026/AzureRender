@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "implementation": "feat(r5): 完成角色材质与混合场景验收",
+  "debugTests": 63,
+  "releaseTests": 64,
+  "files": {
+    "build-debug.json": "f694f911f1c466c45bf98925023148fca9eb80210ae5b54e8231213a983c8bf6",
+    "build-release.json": "3de53188c97955de81d84da255fd240dad98425b575e8a7cddaab5b1b373193f",
+    "character-finish.json": "ee6744d45f85e46d602c015da587d377313d20badb8f9e79a0d8037d67d71a35",
+    "ctest-debug.log": "ab6713147e4f5853fa7bb29b41d653a5094a58d4380943cee9123210cdb43dac",
+    "ctest-release.log": "a749e4aeae3bed863b3f974675da389d9e393cd17fac8bde433643568ff62cf5",
+    "delivery.json": "a72c2b051bd6e32e15e2a8425cae8e3fb1f2728cba0584f23105936233a973cf",
+    "final-install.log": "4da44829317156c8661cef026aa86f7b1f2010f3ee2cf65c3ae1210d3c9c9334",
+    "final-package.log": "01ff12392a7b2377924ac32dd3acbca9b008057620f305395f39fabe066d2263",
+    "head-follow.json": "2d4184a3ef9c9cc9392c601f79ea15f2fc2e43a2b31a22e31a4850698e46b3dd",
+    "isolated-player.log": "688d53eb49b1bb0c5bfc9de2c657ca2bb8c2c60536d1029367e19bbccb0d1aff",
+    "material-fixture-debug.log": "5d1fe4f993445cbf35c586a9c44741672f8f4b34ed172b942c71ba3cce972ea0",
+    "material-fixture-release.log": "913d1f23b86a81781b975e7386a93b8c4062b0b97b589c5435b83a7821ff9cf8",
+    "package-manifest.log": "1bb706e7573539210111838230a878b91bc209f8f93ae4aff8b2ce8afc503998",
+    "private-references.json": "2ba2e4cbf63fac78ee8e12e4d2606ef057d6792807ccf769a3785fc5f50adf96",
+    "release-gate.json": "902d7dded85bb6b8dd4c72580ed6de05950837763362f6a5425056ff6a517c3e",
+    "validation-private.log": "8df5a91a8973edc0136129a04e15879f08871e69bfb2912c06c9ac04901bbc8f",
+    "validation-public.log": "c877b3d9076ac6858d4c9911bca073325a8a6cde971582074ba3b56157054f76",
+    "verify-install-manifest.log": "a7e123d39f236b562c4260f0093f8d7739f09d079460495df08e2cd00f7b69f8",
+    "write-install-manifest.log": "c4cada3036240bc062e6d2916baf012c0bfe05b25351a347df4a7b13dd72c3fb"
+  }
+}

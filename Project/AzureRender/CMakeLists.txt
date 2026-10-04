@@ -355,6 +355,10 @@ if(BUILD_TESTING)
     target_link_libraries(AzureScriptRuntimeTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.ScriptRuntime COMMAND AzureScriptRuntimeTests)
     add_executable(AzurePhysicsInputTests tests/PhysicsInputTests.cpp)
+    add_executable(AzureBrowRegionTests tests/BrowRegionTests.cpp)
+    target_include_directories(AzureBrowRegionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureBrowRegionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.BrowRegions COMMAND AzureBrowRegionTests)
     target_link_libraries(AzurePhysicsInputTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.PhysicsInput COMMAND AzurePhysicsInputTests)
     add_executable(AzureAssetLevelTests tests/AssetLevelTests.cpp)
@@ -370,6 +374,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.BuildConfiguration COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_configuration.py")
     add_test(NAME AzureEngine.BuildProvenance COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_provenance.py")
     add_test(NAME AzureEngine.CharacterIntake COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_intake.py")
+    add_test(NAME AzureEngine.CharacterPreparation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_preparation.py")
+    add_test(NAME AzureEngine.MaterialFixtureGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_fixture.py" --executable $<TARGET_FILE:AzureRender> --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
+    set_tests_properties(AzureEngine.MaterialFixtureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_test(NAME AzureEngine.PresentationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_presentation.py" --executable $<TARGET_FILE:AzurePlayer> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
     set_tests_properties(AzureEngine.PresentationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
     add_test(NAME AzureEngine.EditorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workflow.py" --executable $<TARGET_FILE:AzureRender> --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
@@ -943,6 +950,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/azure-engine-plan.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/render-core-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/compute-passes.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/character-finish.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/environment-assets.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/clustered-lighting.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/render-graph.md"
@@ -1048,7 +1056,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")

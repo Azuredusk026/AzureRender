@@ -17,6 +17,7 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    vec4 mainLightDirection;
 } camera;
 
 #if defined(AZURE_BINDLESS)
@@ -105,6 +106,7 @@ layout(location = 1) in vec4 worldTangent;
 layout(location = 2) in vec2 textureCoordinate;
 layout(location = 3) in vec3 worldPosition;
 layout(location = 4) in vec4 shadowPositions[4];
+layout(location = 8) in float eyebrowRegion;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -342,6 +344,7 @@ void main() {
     vec3 lightDirection = showcasePreset == 1.0
         ? normalize(vec3(0.62, 0.68, 0.38))
         : normalize(vec3(0.48, 0.82, 0.32));
+    if (camera.mainLightDirection.w > 0.5) lightDirection = camera.mainLightDirection.xyz;
     vec3 fillDirection = showcasePreset == 1.0
         ? normalize(vec3(-0.48, 0.24, -0.64))
         : normalize(vec3(-0.62, 0.34, -0.48));
@@ -452,7 +455,7 @@ void main() {
     // Crossing the head-local lateral axis must not switch the mirrored SDF
     // in one frame. Use a broad angular window so the lit-side transition
     // remains continuous at normal turntable speed.
-    float faceSideBlend = smoothstep(-0.28, 0.28, lateralLight);
+    float faceSideBlend = smoothstep(-0.60, 0.60, lateralLight);
     float orientedCoordinate = mix(
         1.0 - faceCoordinate,
         faceCoordinate,
@@ -463,7 +466,7 @@ void main() {
             + (1.0 - abs(lateralLight)) * 0.04,
         0.08,
         0.92);
-    float faceSoftness = max(camera.faceSdfParameters.z, 0.11);
+    float faceSoftness = max(camera.faceSdfParameters.z, 0.18);
     float faceIllumination = smoothstep(
         faceThreshold - faceSoftness,
         faceThreshold + faceSoftness,
@@ -810,6 +813,9 @@ void main() {
             : vec3(0.0);
     } else if (qaIsolationMode == 14) {
         qaColor = overlayMaterial ? baseColor.rgb : vec3(0.0);
+    } else if (qaIsolationMode == 16) {
+        qaColor = vec3(eyebrowRegion > 0.5 ? 1.0 : 0.0);
+        if (overlayMaterial) outputAlpha = eyebrowRegion > 0.5 ? 1.0 : 0.0;
     }
     outputColor = vec4(qaColor, outputAlpha);
     if (material.materialPadding == AZURE_SELECTED_PADDING) {

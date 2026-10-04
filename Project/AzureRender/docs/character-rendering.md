@@ -45,7 +45,7 @@ Loader 在 CPU 侧生成 `LoadedAsset`。`CharacterSceneRenderer` 把网格和�
 
 缺少纹理时，Renderer 会绑定类型正确的回退资源。Descriptor 不会留下空 Binding。
 
-蒙皮在顶点阶段执行。CPU 根据当前动画计算节点世界矩阵与最终 Joint Matrix，写入当前 in-flight frame 的 Joint Buffer。静态模型走单位 Skin 兼容路径，不要求另外一套 Pipeline。
+CPU 根据动画计算节点世界矩阵与关节矩阵，写入当前帧槽的关节缓冲。Compute 蒙皮生成位置、法线和切线，顶点着色器提供兼容路径。静态模型使用单位蒙皮矩阵。
 
 ## 材质分类
 
@@ -171,6 +171,8 @@ $$
 I_{face}=\operatorname{smoothstep}(t-s,t+s,d)
 $$
 
+横向混合窗口采用 $\epsilon=0.60$，阈值柔化宽度 $s$ 至少为 0.18。固定相机的 120 帧主光扫描按标注脸部区域检查连续性。
+
 计算结果会按遮罩和权重混入 Ramp 坐标。暗部使用暖色 `faceSdfShadowColor`。SDF 控制设计好的脸部阴影形状。实时 Shadow Map 继续处理头发、附件和环境对脸部的遮挡。
 
 ### 验收
@@ -234,6 +236,8 @@ Hair AO 是独立的风格化体积层，由以下信号组合：
 3. 使用 Unlit 风格输出和材质常量透明度。
 4. 透明 Primitive 按视图更新排序索引。
 5. 对真正眉毛顶点做局部、拓扑感知的厚度补偿，保持远景可读。
+
+眉毛卡片的剔除规则由 glTF `doubleSided` 决定。区域选择依据骨骼名称、权重与三角形连接关系，绑定空间的扩展随角色蒙皮运动。`brow-mask` 隔离图保留头发和实体的真实深度遮挡。
 
 原始实例中的 `4.679` 使用厘米单位，glTF 米制路径应转换为 `0.04679 m`。直接使用 `4.679 m` 会把眉毛推离角色。
 
@@ -311,6 +315,7 @@ Bloom 只提取超过 Threshold 的能量。受光面应该清楚，但不能依
 | Shadow Tint | AO、Ramp 暗部和染色 |
 | Face SDF | SDF 遮罩、方向和连续性 |
 | Overlay | 眉毛等透明覆盖层 |
+| Brow Mask | 可见眉毛区域与真实遮挡 |
 | Bloom | HDR 高亮提取 |
 
 ## 固定验收方法
@@ -319,12 +324,14 @@ Bloom 只提取超过 Threshold 的能量。受光面应该清楚，但不能依
 
 1. 公共资产 Debug Validation 120 帧。
 2. `full-body-front` Beauty：构图、转轴、全身材质与地台投影。
-3. `face-front` 和 `face-three-quarter`：肤色、Face SDF、眉毛和头发前方高光。
+3. 脸部正面、左右三分之四与左右侧面：肤色、Face SDF、眉毛和头发前方高光。
 4. 完整 16 秒转台：插值连续、透明排序、阴影和背面细节。
 5. Albedo、World Normal、Shadow Visibility、Hair KK、Face SDF、Outline 隔离图。
 6. Stylized On/Off 对照，证明效果来自目标分支而不是曝光或资产变化。
 
 自动化可以验证参数、Schema、捕获状态和像素差，但“发丝是否有层次”“脸部阴影是否自然”仍需要人工视觉判断。人工判断也不能替代 Validation 和资源审计。
+
+固定输入、派生素材、标注格式与执行命令见[角色材质定稿与验收](runtime/character-finish.md)。
 
 ## 已知限制
 

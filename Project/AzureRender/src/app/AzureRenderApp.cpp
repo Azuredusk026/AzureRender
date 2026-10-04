@@ -367,6 +367,15 @@ void AzureRenderApp::createSceneRenderer() {
                                    renderSettings_.sceneType) + ")");
 }
 
+azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
+    const azurerender::SceneDocument& document) const {
+    auto description = document.renderDescription();
+    for (auto& resource : description.resources) {
+        resource.path = resourceLocator_.resolveAsset(resource.path).string();
+    }
+    return description;
+}
+
 void AzureRenderApp::buildRenderContext(
     azurerender::RenderContext& context) {
     context.device = device_;
@@ -420,7 +429,8 @@ void AzureRenderApp::buildRenderContext(
             document = &*runOptions_.sceneDocument;
         }
         if (document != nullptr) {
-            context.scene = document->renderDescription();
+            context.scene = resolveRenderDescription(*document);
+            context.sceneWorldCoordinates = true;
         } else {
             context.scene.resources.push_back({"asset-0", resolvedAssetPath_});
             azurerender::scene::SceneNodeDesc root{};
@@ -478,14 +488,14 @@ void AzureRenderApp::buildSceneFrameData(
     const float deltaSeconds=static_cast<float>(elapsed);
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(runOptions_.editorSession->viewScene().renderDescription());
+    if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(runOptions_.editorSession->viewScene()));
 #endif
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
         runOptions_.sceneDocument = runtime_.snapshotScene();
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
         frame.sceneSnapshot = std::make_shared<const azurerender::scene::SceneDescription>(
-            runOptions_.sceneDocument->renderDescription());
+            resolveRenderDescription(*runOptions_.sceneDocument));
     fixedSimulationStarted_ = true;
     lastRotationTime_ = currentTime;
     if (autoRotate_) {
@@ -510,6 +520,7 @@ void AzureRenderApp::buildSceneFrameData(
     frame.qaEffectMode = qaEffectMode_;
     frame.qaEffectEnabled = qaEffectEnabled_;
     frame.qaHarnessEnabled = qaHarnessEnabled_;
+    frame.qaLightScan = runOptions_.qaLightScan;
     frame.capturedFrames = capturedFrames_;
     frame.captureFps = runOptions_.captureFps;
     frame.captureActive = fixedSimulation_;
@@ -569,6 +580,8 @@ void AzureRenderApp::activatePortfolioOrbit() {
 
 void AzureRenderApp::configureQaHarness() {
     qaHarnessEnabled_ = !runOptions_.qaCamera.empty()
+        || runOptions_.qaLightScan
+        || runOptions_.qaAnimation
         || !runOptions_.qaLight.empty()
         || !runOptions_.qaEffect.empty()
         || !runOptions_.qaEffectState.empty()
@@ -604,6 +617,26 @@ void AzureRenderApp::configureQaHarness() {
         }
         cameraPosition_ = {0.0F, 1.18F, 3.55F};
         cameraTarget_ = {0.0F, 0.12F, 0.0F};
+        if (runOptions_.sceneDocument && sceneRenderer_ && sceneRenderer_->sceneState()
+            && sceneRenderer_->sceneState()->asset) {
+            const auto& asset = *sceneRenderer_->sceneState()->asset;
+            const auto scene = resolveRenderDescription(*runOptions_.sceneDocument);
+            const auto transforms = azurerender::scene::resolveNodeWorldTransforms(scene);
+            for (std::size_t index = 0; index < scene.nodes.size(); ++index) {
+                if (scene.resources.empty() || scene.nodes[index].resourceId != scene.resources.front().id
+                    || !scene.nodes[index].visible) continue;
+                const auto& matrix = transforms[index];
+                const std::array<float, 3> center{
+                    (asset.boundsMin[0] + asset.boundsMax[0]) * 0.5F,
+                    (asset.boundsMin[1] + asset.boundsMax[1]) * 0.5F,
+                    (asset.boundsMin[2] + asset.boundsMax[2]) * 0.5F};
+                for (unsigned axis = 0; axis < 3; ++axis)
+                    cameraTarget_[axis] = static_cast<float>(matrix[axis] * center[0]
+                        + matrix[4 + axis] * center[1] + matrix[8 + axis] * center[2] + matrix[12 + axis]);
+                cameraPosition_ = {cameraTarget_[0], cameraTarget_[1] + 1.06F, cameraTarget_[2] + 3.55F};
+                break;
+            }
+        }
         // An isolation pass implicitly selects this QA camera. Preserve the
         // portfolio turntable in that combined mode so diagnostic segments
         // follow the same orbit as Beauty instead of silently becoming still.
@@ -613,8 +646,15 @@ void AzureRenderApp::configureQaHarness() {
         cameraPosition_ = {0.915F, 1.507F, 1.046F};
         cameraTarget_ = {0.0F, 0.82F, 0.0F};
         autoRotate_ = false;
-    } else if (qaCameraName_ == "face-three-quarter") {
+    } else if (qaCameraName_ == "face-three-quarter" || qaCameraName_ == "face-three-quarter-left") {
         rotationAngle_ = kPi * 0.40F;
+        cameraPosition_ = {0.915F, 1.507F, 1.046F};
+        cameraTarget_ = {0.0F, 0.82F, 0.0F};
+        autoRotate_ = false;
+    } else if (qaCameraName_ == "face-three-quarter-right"
+               || qaCameraName_ == "face-side-left" || qaCameraName_ == "face-side-right") {
+        rotationAngle_ = kPi * (qaCameraName_ == "face-three-quarter-right" ? 0.10F
+            : qaCameraName_ == "face-side-left" ? 0.75F : -0.25F);
         cameraPosition_ = {0.915F, 1.507F, 1.046F};
         cameraTarget_ = {0.0F, 0.82F, 0.0F};
         autoRotate_ = false;
@@ -689,11 +729,12 @@ void AzureRenderApp::configureQaHarness() {
         ? "beauty"
         : runOptions_.qaIsolation;
 
-    constexpr std::array<const char*, 20> kIsolationNames = {
+    constexpr std::array<const char*, 21> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
         "direct-diffuse", "shadow-tint", "face-sdf", "overlay", "bloom",
+        "brow-mask",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -703,11 +744,11 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 20> kPostProcessViews = {
+    constexpr std::array<std::uint32_t, 21> kPostProcessViews = {
         0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 20> kShaderIsolationModes = {
-        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15,
+    constexpr std::array<std::uint32_t, 21> kShaderIsolationModes = {
+        0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15, 16,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
@@ -734,7 +775,7 @@ void AzureRenderApp::configureQaHarness() {
         renderSettings_.innerOutlineEnabled = qaEffectEnabled_;
         renderSettings_.silhouetteOutlineEnabled = qaEffectEnabled_;
     }
-    if (sceneRenderer_ != nullptr && qaCameraName_ != "lighting-sweep") {
+    if (sceneRenderer_ != nullptr && qaCameraName_ != "lighting-sweep" && !runOptions_.qaAnimation) {
         sceneRenderer_->setPlaybackPlaying(false);
     }
     azurerender::RuntimeDiagnostics::instance().print(

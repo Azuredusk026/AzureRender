@@ -1,4 +1,5 @@
 #include "GltfLoader.hpp"
+#include "BrowRegions.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
@@ -1778,6 +1779,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     if (asset.primitives.empty()) {
         throw std::runtime_error("glTF scene contains no triangle mesh primitive");
     }
+    azurerender::prepareBrowRegions(asset);
     asset.boundsMin.fill(std::numeric_limits<float>::max());
     asset.boundsMax.fill(std::numeric_limits<float>::lowest());
     for (const auto& vertex : asset.vertices) {
