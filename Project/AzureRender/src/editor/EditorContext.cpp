@@ -66,6 +66,7 @@ void EditorContext::selectNode(const std::size_t index) {
     if (index >= scene_.nodes.size()) {
         throw std::out_of_range("Editor node selection is out of range");
     }
+    if(index!=selectedNodeIndex_)clearAnimationPreview();
     selectedNodeIndex_ = index;
     selectedNodes_ = {index};
     refreshSelectedTransform();
@@ -98,6 +99,7 @@ void EditorContext::reload() {
         std::ifstream file(scenePath_);file>>sourceLevel_;
     } else document = assets_?project_->loadStartupScene():SceneDocument::load(scenePath_);
     scene_ = std::move(document);
+    clearAnimationPreview();
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;
     }
@@ -303,7 +305,7 @@ void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
 }
 
 EditorContext::Snapshot EditorContext::snapshot() const {
-    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_};
+    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_, sourceLevel_, resourceReferences_};
     result.scene.renderSettings = renderSettings();
     return result;
 }
@@ -321,6 +323,9 @@ void EditorContext::beginEdit() {
 void EditorContext::restore(Snapshot restored) {
     scene_ = std::move(restored.scene);
     components_ = std::move(restored.components);
+    sourceLevel_ = std::move(restored.sourceLevel);
+    resourceReferences_ = std::move(restored.resourceReferences);
+    clearAnimationPreview();
     selectedNodes_ = std::move(restored.selectedNodes);
     if (attachedRenderSettings_ != nullptr) {
         *attachedRenderSettings_ = scene_.renderSettings;

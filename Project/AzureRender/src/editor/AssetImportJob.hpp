@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <future>
 #include <string>
+#include <nlohmann/json.hpp>
 namespace azurerender {
 class AssetImportJob {
 public:
@@ -12,6 +13,7 @@ public:
     bool ready() const;
     float progress() const { return progress_.load(); }
     std::filesystem::path finish();
+    const nlohmann::json& summary() const noexcept { return summary_; }
     const std::filesystem::path destination;
 private:
     void prepare(const std::filesystem::path& source);
@@ -22,5 +24,6 @@ private:
     std::atomic<float> progress_{0};
     std::future<void> work_;
     std::string filename_;
+    nlohmann::json summary_;
 };
 }

@@ -5,6 +5,7 @@
 #include "resources/ResourceLocator.hpp"
 #include "assets/GltfLoader.hpp"
 #include "runtime/ComponentCodec.hpp"
+#include "runtime/AnimationStateMachine.hpp"
 #include <chrono>
 #include <fstream>
 #include <set>
@@ -31,7 +32,8 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
 std::string EditorContext::commitImport(AssetImportJob& job){
     const auto path=job.finish();
     try{assets_->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_string();
-        const auto id=assets_->idForPath(reference);beginEdit();scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;log("Imported asset: "+path.filename().string());return id;
+        const auto id=assets_->idForPath(reference);beginEdit();scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;
+        importSummary_=job.summary();log("Imported asset: "+path.filename().string()+" ("+std::to_string(importSummary_.at("vertices").get<std::size_t>())+" vertices)");return id;
     }catch(...){std::filesystem::remove_all(job.destination);throw;}
 }
 std::string EditorContext::importAsset(const std::filesystem::path& path){
@@ -45,9 +47,50 @@ void EditorContext::startImport(const std::filesystem::path& path){
 void EditorContext::cancelImport(){if(importJob_)importJob_->cancel();}
 float EditorContext::importProgress() const{return importJob_?importJob_->progress():0;}
 std::optional<std::string> EditorContext::pollImport(){if(!importJob_||!importJob_->ready())return {};auto job=std::move(importJob_);return commitImport(*job);}
-void EditorContext::placeResource(const std::string& resource){
+void EditorContext::placeResource(const std::string& resource,const std::string& nodeId){
     if(std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==resource;}))throw std::invalid_argument("Unknown resource");
-    beginEdit();SceneNode node;node.id=identity("node-");node.name="Placed Object";node.resourceId=resource;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+    const auto id=nodeId.empty()?identity("node-"):nodeId;
+    if(id.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==id;}))throw std::invalid_argument("Duplicate or invalid node identity: "+id);
+    beginEdit();SceneNode node;node.id=id;node.name="Placed Object";node.resourceId=resource;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+}
+void EditorContext::createNode(const std::string& nodeId){
+    if(nodeId.empty() || nodeId.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==nodeId;}))throw std::invalid_argument("Duplicate or invalid node identity: "+nodeId);
+    beginEdit();SceneNode node;node.id=nodeId;node.name=nodeId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+}
+void EditorContext::placePrefab(const std::string& asset,const std::string& instance){
+    if(!assets_)throw std::logic_error("Prefab placement requires a project");
+    if(assets_->resolveReference(asset).extension()!=".azureprefab")throw std::invalid_argument("Prefab placement expects .azureprefab");
+    auto document=levelDocument();if(!document.contains("schemaVersion"))document["schemaVersion"]=1;
+    if(!document.contains("prefabs"))document["prefabs"]=nlohmann::json::array();
+    document["prefabs"].push_back({{"instance",instance},{"asset",asset}});
+    auto candidate=Level::parse(document,*assets_);
+    for(const auto& node:candidate.scene.nodes)if(node.id.rfind(instance+":",0)==0)
+        validateComponentReferences(node,candidate.components.at(node.id),candidate.scene);
+    auto references=resourceReferences_;
+    const auto expanded=expandPrefabs(document,*assets_);
+    for(const auto& resource:expanded.at("resources")){
+        const auto reference=resource.at("asset").get<std::string>();references[assets_->resolveReference(reference)]=reference;
+    }
+    beginEdit();sourceLevel_=std::move(document);resourceReferences_=std::move(references);
+    scene_=std::move(candidate.scene);components_=std::move(candidate.components);rebuildEntities();
+    for(std::size_t i=0;i<scene_.nodes.size();++i)if(scene_.nodes[i].id.rfind(instance+":",0)==0){selectNode(i);break;}
+    log("Placed prefab: "+instance);
+}
+void EditorContext::previewAnimation(const std::string& state,double time,const std::string& previous,double crossfade){
+    if(!selectedNode() || !assets_)throw std::logic_error("Animation preview requires a project node");
+    const auto data=runtimeComponents().at(selectedNode()->id);
+    if(!data.contains("azure.animator"))throw std::invalid_argument("Selected node lacks animator");
+    auto candidate=data;candidate["azure.animator"]["data"]["state"]=state;
+    validateComponentReferences(*selectedNode(),candidate,scene_);
+    const auto fields=candidate.at("azure.animator").at("data");
+    std::ifstream input(assets_->resolveReference(fields.at("asset").get<std::string>()));nlohmann::json graph;input>>graph;
+    auto machine=AnimationStateMachine::parse(graph);
+    if(!previous.empty())machine.select(previous);
+    machine.select(state,previous.empty()?0:crossfade);machine.advance(time);
+    NodeAnimationFrame frame{selectedNode()->id,machine.clip(),machine.time(),machine.loop(),
+        machine.previousClip(),machine.previousTime(),machine.blend(),machine.previousLoop(),
+        {fields.value("morph0",0.0F),fields.value("morph1",0.0F)}};
+    animationPreview_=std::move(frame);
 }
 void EditorContext::selectNodes(std::vector<std::size_t> indices){
     for(auto index:indices)if(index>=scene_.nodes.size())throw std::out_of_range("Editor node selection is out of range");
@@ -86,10 +129,57 @@ std::map<std::string,nlohmann::json> EditorContext::runtimeComponents() const {
 nlohmann::json EditorContext::componentData(const std::string& node,const std::string& type)const{
     const auto data=runtimeComponents();if(!data.count(node)||!data.at(node).contains(type))return nlohmann::json();return data.at(node).at(type).at("data");
 }
-void EditorContext::addGameplayComponent(const std::string& type){if(!selectedNode())return;const auto registry=reflection::makeRuntimeRegistry();visitComponentType(type,[&](auto component){const auto envelope=registry.encode(type,&component);beginEdit();components_[selectedNode()->id][type]=envelope;});}
+void EditorContext::validateComponentReferences(const SceneNode& node,const nlohmann::json& data,const SceneDocument& scene)const {
+    validateComponents(data);
+    if(data.contains("azure.character") && data.contains("azure.rigid-body"))
+        throw std::invalid_argument("Node "+node.id+": character and rigid-body require separate nodes");
+    for(const char* type:{"azure.script","azure.animator","azure.audio-source","azure.game-ui"}){
+        if(!data.contains(type))continue;
+        const auto fields=data.at(type).at("data");const auto reference=fields.value("asset",std::string());
+        if(reference.empty())continue;
+        if(!assets_)throw std::logic_error("Asset references require a project");
+        const auto path=assets_->resolveReference(reference);
+        if(!std::filesystem::is_regular_file(path))throw std::invalid_argument("Node "+node.id+": missing asset "+reference);
+        const auto extension=path.extension().string();
+        if((std::string(type)=="azure.script" && extension!=".lua") ||
+           (std::string(type)=="azure.audio-source" && extension!=".wav") ||
+           (std::string(type)=="azure.game-ui" && extension!=".rml") ||
+           (std::string(type)=="azure.animator" && extension!=".json"))
+            throw std::invalid_argument("Node "+node.id+": incompatible asset "+reference);
+        if(std::string(type)=="azure.animator"){
+            std::ifstream input(path);nlohmann::json graph;input>>graph;
+            auto machine=AnimationStateMachine::parse(graph);machine.select(fields.value("state",std::string("idle")));
+            const auto resource=std::find_if(scene.resources.begin(),scene.resources.end(),[&](const auto& r){return r.id==node.resourceId;});
+            if(resource==scene.resources.end())throw std::invalid_argument("Node "+node.id+": animator requires a model");
+            const auto model=loadGltfAsset(resource->path.string());
+            for(const auto& state:graph.at("states"))if(state.at("clip").get<std::size_t>()>=model.animations.size())
+                throw std::invalid_argument("Node "+node.id+": animation clip exceeds model clips: "+state.at("name").get<std::string>());
+        }
+    }
+    if(data.contains("azure.third-person-camera")){
+        game::ThirdPersonCamera camera;reflection::makeRuntimeRegistry().decode("azure.third-person-camera",&camera,data.at("azure.third-person-camera"));
+        if(std::none_of(scene.nodes.begin(),scene.nodes.end(),[&](const auto& candidate){return candidate.id==camera.target;}))
+            throw std::invalid_argument("Node "+node.id+": unknown camera target "+camera.target);
+        if(camera.minimumDistance>camera.distance || camera.distance>camera.maximumDistance || camera.minimumPitch>camera.maximumPitch)
+            throw std::invalid_argument("Node "+node.id+": inconsistent camera limits");
+    }
+}
+void EditorContext::addGameplayComponent(const std::string& type){
+    if(!selectedNode())return;
+    if(!componentData(selectedNode()->id,type).is_null())return;
+    const auto registry=reflection::makeRuntimeRegistry();visitComponentType(type,[&](auto component){
+        auto data=runtimeComponents().at(selectedNode()->id);data[type]=registry.encode(type,&component);
+        // New camera components start with a valid, selected target.
+        if(type=="azure.third-person-camera")data[type]["data"]["target"]=selectedNode()->id;
+        validateComponentReferences(*selectedNode(),data,scene_);beginEdit();components_[selectedNode()->id]=std::move(data);syncComponents();
+    });
+}
 void EditorContext::setComponentField(const std::string& type,const std::string& field,const nlohmann::json& value){
     if(!selectedNode())throw std::logic_error("Component editing requires selection");
-    auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component");data[type]["data"][field]=value;validateComponents(data);
+    auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component");
+    const auto registry=reflection::makeRuntimeRegistry();const auto& fields=registry.type(type).properties;
+    if(std::none_of(fields.begin(),fields.end(),[&](const auto& property){return property.name==field;}))throw std::invalid_argument("Unknown component field: "+field);
+    data[type]["data"][field]=value;validateComponentReferences(*selectedNode(),data,scene_);
     beginEdit();components_[selectedNode()->id]=data;
     if(type=="azure.transform"){ecs::TransformComponent transform;reflection::makeRuntimeRegistry().decode(type,&transform,data[type]);auto* node=selectedNode();node->translation=transform.translation;node->rotation=transform.rotation;node->scale=transform.scale;refreshSelectedTransform();}
     if(type=="azure.renderable")selectedNode()->visible=data[type]["data"].at("visible").get<bool>();

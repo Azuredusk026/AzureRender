@@ -290,6 +290,8 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     auto& editorContext = runOptions_.editorSession->context();
+    editorContext.setDebugProjection(multiply(perspective(3.14159265358979323846F/3,
+        static_cast<float>(renderExtent_.width)/renderExtent_.height,.1F,1000),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
         azurerender::RuntimeDiagnostics::instance().print(

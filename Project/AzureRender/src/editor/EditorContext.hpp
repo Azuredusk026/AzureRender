@@ -5,6 +5,7 @@
 #include "ecs/World.hpp"
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
+#include "runtime/PresentationRuntime.hpp"
 #include <memory>
 #include <vector>
 
@@ -33,12 +34,18 @@ public:
     const Project& project() const { return *project_; }
     AssetDatabase& assets() { return *assets_; }
     std::string importAsset(const std::filesystem::path& path);
+    const nlohmann::json& importSummary() const noexcept { return importSummary_; }
     void startImport(const std::filesystem::path& path);
     void cancelImport();
     bool importing() const noexcept { return importJob_!=nullptr; }
     float importProgress() const;
     std::optional<std::string> pollImport();
-    void placeResource(const std::string& resource);
+    void placeResource(const std::string& resource, const std::string& nodeId = {});
+    void createNode(const std::string& nodeId);
+    void placePrefab(const std::string& asset, const std::string& instance);
+    void previewAnimation(const std::string& state, double time, const std::string& previous = {}, double crossfade = 0);
+    void clearAnimationPreview() noexcept { animationPreview_.reset(); }
+    const std::optional<NodeAnimationFrame>& animationPreview() const noexcept { return animationPreview_; }
     void selectNodes(std::vector<std::size_t> indices);
     const std::vector<std::size_t>& selectedNodes() const noexcept { return selectedNodes_; }
     void duplicateSelection();
@@ -120,6 +127,13 @@ public:
     void setGizmoScreen(const GizmoScreenData& value) {
         gizmoScreen_ = value;
     }
+    void setDebugProjection(std::array<float,16> value) { debugProjection_=value; }
+    std::optional<std::array<float,2>> projectDebugPoint(const std::array<float,3>& point) const {
+        const auto& m=debugProjection_;const float w=m[3]*point[0]+m[7]*point[1]+m[11]*point[2]+m[15];
+        if(w<=.001F)return {};
+        return std::array<float,2>{(.5F*(m[0]*point[0]+m[4]*point[1]+m[8]*point[2]+m[12])/w)+.5F,
+            (.5F*(m[1]*point[0]+m[5]*point[1]+m[9]*point[2]+m[13])/w)+.5F};
+    }
     [[nodiscard]] azurerender::ecs::World& ecs() noexcept { return ecsWorld_; }
     [[nodiscard]] const azurerender::ecs::World& ecs() const noexcept { return ecsWorld_; }
     [[nodiscard]] azurerender::ecs::Entity entityForNode(std::size_t index) const noexcept;
@@ -141,6 +155,8 @@ private:
         std::size_t selectedNodeIndex = 0;
         std::map<std::string,nlohmann::json> components;
         std::vector<std::size_t> selectedNodes;
+        nlohmann::json sourceLevel;
+        std::map<std::filesystem::path,std::string> resourceReferences;
     };
     [[nodiscard]] Snapshot snapshot() const;
     void restore(Snapshot snapshot);
@@ -160,6 +176,7 @@ private:
     std::array<float, 3> gizmoScale_{1.0F, 1.0F, 1.0F};
     GizmoMode gizmoMode_ = GizmoMode::Translate;
     GizmoScreenData gizmoScreen_;
+    std::array<float,16> debugProjection_{};
     bool dirty_ = false;
     std::vector<std::string> consoleMessages_;
     std::vector<Snapshot> undoStack_;
@@ -172,6 +189,10 @@ private:
     std::shared_ptr<AssetImportJob> importJob_;
     std::string commitImport(AssetImportJob& job);
     std::map<std::string,nlohmann::json> components_;
+    std::optional<NodeAnimationFrame> animationPreview_;
+    nlohmann::json importSummary_=nlohmann::json::object();
+    void validateComponentReferences(const SceneNode& node, const nlohmann::json& data,
+        const SceneDocument& scene) const;
     std::vector<std::pair<std::string, std::filesystem::file_time_type>>
         resourceWriteTimes_;
 };

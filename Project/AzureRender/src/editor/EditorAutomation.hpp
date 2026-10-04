@@ -11,6 +11,7 @@ private:
     nlohmann::json actions_,results_=nlohmann::json::array(),editBefore_;
     std::size_t cursor_=0;
     std::string imported_;
+    std::map<std::string,std::string> imports_;
     std::uint64_t steps_=0,revision_=0;
     std::size_t scriptErrors_=0,recovered_=0;
     bool restored_=true;

@@ -3,6 +3,7 @@
 #include "ecs/Components.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
+#include "editor/GameplayDebugGeometry.hpp"
 
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -22,6 +23,7 @@
 #include <cmath>
 #include <cstring>
 #include <functional>
+#include <fstream>
 #include <stdexcept>
 #include <utility>
 #endif
@@ -92,6 +94,8 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("capture", "Capture", [this] { drawCapturePanel(); });
     addPanel("console", "Console", [this] { drawConsolePanel(); });
     addPanel("build", "Build Game", [this] { drawBuildPanel(); });
+    addPanel("animation", "Animation Preview", [this] { drawAnimationPanel(); });
+    addPanel("gameplay-debug", "Gameplay Debug", [this] { drawGameplayDebugPanel(); });
     panels_ = registry.createAll();
 }
 
@@ -440,6 +444,23 @@ void ImGuiEditorLayer::drawViewportPanel() {
         // and drag logic can hit-test against them.
         const auto& gizmoScreen = context_->gizmoScreen();
         const ImVec2 itemMin = ImGui::GetItemRectMin();
+        if(session_->debugOverlay){
+            auto* draw=ImGui::GetWindowDrawList();draw->PushClipRect(itemMin,{itemMin.x+imageSize.x,itemMin.y+imageSize.y},true);
+            auto line=[&](const DebugLine& edge,ImU32 color){auto a=context_->projectDebugPoint(edge.from),b=context_->projectDebugPoint(edge.to);
+                if(a&&b){draw->AddLine({itemMin.x+(*a)[0]*imageSize.x,itemMin.y+(*a)[1]*imageSize.y},{itemMin.x+(*b)[0]*imageSize.x,itemMin.y+(*b)[1]*imageSize.y},color,1.5F);++debugLineCount_;}};
+            const auto scene=session_->viewScene();auto* runtime=session_->runtime();const auto registry=reflection::makeRuntimeRegistry();
+            for(const auto& node:scene.nodes){
+                ecs::TransformComponent transform{node.translation,node.rotation,node.scale};
+                game::RigidBody body;game::Character character;bool hasBody=false,hasCharacter=false;
+                if(runtime){const auto entity=runtime->entity(node.id);if(const auto* value=runtime->world().tryGet<game::RigidBody>(entity)){body=*value;hasBody=true;}if(const auto* value=runtime->world().tryGet<game::Character>(entity)){character=*value;hasCharacter=true;}}
+                else{auto data=context_->componentData(node.id,"azure.rigid-body");if(!data.is_null()){registry.decode("azure.rigid-body",&body,{{"type","azure.rigid-body"},{"version",1},{"data",data}});hasBody=true;}
+                    data=context_->componentData(node.id,"azure.character");if(!data.is_null()){registry.decode("azure.character",&character,{{"type","azure.character"},{"version",2},{"data",data}});hasCharacter=true;}}
+                if(hasBody)for(const auto& edge:debugBox(transform,body))line(edge,body.trigger?IM_COL32(255,210,60,220):IM_COL32(70,220,120,220));
+                if(hasCharacter)for(const auto& edge:debugCapsule(transform,character))line(edge,IM_COL32(80,180,255,230));
+            }
+            if(auto* game=session_->game();game && game->hasCamera())line({game->camera().target(),game->camera().position()},IM_COL32(255,80,170,255));
+            draw->PopClipRect();
+        }
         if(session_->playing() && gameUi_ && imageSize.x>0 && imageSize.y>0){
             const auto mouse=ImGui::GetMousePos();const bool consumed=gameUi_->pointer(static_cast<int>((mouse.x-itemMin.x)*viewportWidth_/imageSize.x),static_cast<int>((mouse.y-itemMin.y)*viewportHeight_/imageSize.y),ImGui::IsItemHovered() && ImGui::IsMouseDown(ImGuiMouseButton_Left));
             if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
@@ -631,6 +652,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
     setFallbackPanelRect(0.76F, 0.0F, 0.24F, 0.72F);
 #endif
     ImGui::Begin("Inspector");
+    ImGui::BeginDisabled(session_->playing() || session_->building());
     if (const SceneNode* node = context_->selectedNode(); node != nullptr) {
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());
@@ -663,19 +685,33 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         }
     }
     if(context_->isProject() && context_->selectedNode()){
-        const std::vector<std::string> types={"azure.rigid-body","azure.character","azure.script","azure.animator","azure.audio-source","azure.game-ui"};
-        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))context_->addGameplayComponent(type);ImGui::EndCombo();}
+        const std::vector<std::string> types={"azure.rigid-body","azure.character","azure.third-person-camera","azure.interactable","azure.collectible","azure.door","azure.checkpoint","azure.task-state","azure.script","azure.animator","azure.audio-source","azure.game-ui"};
+        ImGui::BeginDisabled(session_->playing() || session_->building());
+        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{context_->addGameplayComponent(type);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
         const auto componentRegistry=reflection::makeRuntimeRegistry();
         for(const auto& type:types){auto data=context_->componentData(context_->selectedNode()->id,type);if(data.is_null())continue;
             ImGui::PushID(type.c_str());if(ImGui::CollapsingHeader(type.c_str()))for(const auto& field:componentRegistry.type(type).properties){
                 auto value=data.at(field.name);bool changed=false;
                 if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox(field.label.c_str(),&v);value=v;}
+                else if(value.is_number_integer()){int v=value.get<int>();changed=ImGui::DragInt(field.label.c_str(),&v,1,static_cast<int>(field.minimum),static_cast<int>(field.maximum));value=v;}
                 else if(value.is_number()){float v=value.get<float>();changed=ImGui::DragFloat(field.label.c_str(),&v,0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
                 else if(value.is_array() && value.size()==3){auto v=value.get<std::array<float,3>>();changed=ImGui::DragFloat3(field.label.c_str(),v.data(),0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
-                else if(value.is_string()){std::array<char,512> v{};const auto text=value.get<std::string>();std::memcpy(v.data(),text.data(),std::min(text.size(),v.size()-1));changed=ImGui::InputText(field.label.c_str(),v.data(),v.size());value=v.data();}
+                else if(value.is_string()){
+                    const auto text=value.get<std::string>();
+                    if(field.name=="target"){
+                        if(ImGui::BeginCombo(field.label.c_str(),text.c_str())){for(const auto& node:context_->scene().nodes)if(ImGui::Selectable(node.id.c_str(),node.id==text)){value=node.id;changed=true;}ImGui::EndCombo();}
+                    }else if(field.name=="asset"){
+                        const std::string extension=type=="azure.script"?".lua":type=="azure.animator"?".json":type=="azure.audio-source"?".wav":".rml";
+                        if(ImGui::BeginCombo(field.label.c_str(),text.c_str())){for(const auto& [id,record]:context_->assets().records())if(record.path.extension()==extension && ImGui::Selectable(record.virtualPath.c_str(),id==text)){value=id;changed=true;}ImGui::EndCombo();}
+                    }else{
+                        std::array<char,512> v{};std::memcpy(v.data(),text.data(),std::min(text.size(),v.size()-1));
+                        changed=ImGui::InputText(field.label.c_str(),v.data(),v.size(),ImGuiInputTextFlags_EnterReturnsTrue);value=v.data();
+                    }
+                }
                 if(changed)try{context_->setComponentField(type,field.name,value);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             }ImGui::PopID();
         }
+        ImGui::EndDisabled();
     }
     ImGui::Separator();
     ImGui::Text("Transform Gizmo");
@@ -747,6 +783,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         context_->beginEdit();
         settings.grade.exposureEv = exposure;
     }
+    ImGui::EndDisabled();
     ImGui::End();
 }
 
@@ -760,6 +797,21 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
         ImGui::BeginDisabled(context_->importing());if(ImGui::Button("Import"))try{context_->startImport(source.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndDisabled();
         if(context_->importing()){ImGui::ProgressBar(context_->importProgress());if(ImGui::Button("Cancel Import"))context_->cancelImport();}
         try{if(auto imported=context_->pollImport())context_->log("Import ready: "+*imported);}catch(const std::exception& error){context_->log(std::string("Import: ")+error.what());}
+        const auto& summary=context_->importSummary();
+        if(summary.contains("vertices")){
+            ImGui::Text("Admission: %zu vertices, %zu joints, %zu materials",summary.at("vertices").get<std::size_t>(),summary.at("joints").get<std::size_t>(),summary.at("materials").get<std::size_t>());
+            for(const auto& clip:summary.at("clips"))ImGui::Text("Clip %u: %s (%.3f s)",clip.at("index").get<unsigned>(),clip.at("name").get<std::string>().c_str(),clip.at("duration").get<double>());
+        }
+        static std::array<char,128> instance{};
+        ImGui::InputText("Prefab instance",instance.data(),instance.size());
+        ImGui::BeginDisabled(session_->playing() || session_->building());
+        if(ImGui::Button("Create empty node"))try{context_->createNode(instance.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+        if(ImGui::BeginCombo("Place Prefab","Choose asset")){
+            for(const auto& [id,record]:context_->assets().records())if(record.path.extension()==".azureprefab" && ImGui::Selectable(record.virtualPath.c_str()))
+                try{context_->placePrefab(id,instance.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+            ImGui::EndCombo();
+        }
+        ImGui::EndDisabled();
     }
 
     if (ImGui::Button("Reload Assets")) {
@@ -804,6 +856,69 @@ void ImGuiEditorLayer::drawCapturePanel() {
     }
     ImGui::SameLine();
     ImGui::TextUnformatted("PNG + semantic label");
+    ImGui::End();
+}
+void ImGuiEditorLayer::drawAnimationPanel(){
+    ImGui::SetNextWindowSize({360,260},ImGuiCond_FirstUseEver);
+    ImGui::Begin("Animation Preview");
+    if(context_->isProject() && context_->selectedNode()){
+        try{
+            const auto data=context_->componentData(context_->selectedNode()->id,"azure.animator");
+            if(!data.is_null() && !data.at("asset").get<std::string>().empty()){
+                std::ifstream input(context_->assets().resolveReference(data.at("asset").get<std::string>()));nlohmann::json graph;input>>graph;
+                static std::string selected,previous,node;static float time=0,crossfade=.18F;
+                if(node!=context_->selectedNode()->id){node=context_->selectedNode()->id;selected=data.at("state").get<std::string>();previous=selected;time=0;}
+                ImGui::BeginDisabled(session_->playing() || session_->building());
+                bool changed=false;
+                if(ImGui::BeginCombo("Semantic state",selected.c_str())){
+                    for(const auto& state:graph.at("states")){
+                        const auto name=state.at("name").get<std::string>();
+                        if(ImGui::Selectable(name.c_str(),name==selected)){previous=selected;selected=name;time=0;changed=true;}
+                    }ImGui::EndCombo();
+                }
+                changed=ImGui::DragFloat("Time (seconds)",&time,.01F,0,600)||changed;
+                changed=ImGui::SliderFloat("Crossfade (seconds)",&crossfade,0,2)||changed;
+                if(ImGui::Button("Preview pose") || changed)context_->previewAnimation(selected,time,previous,crossfade);
+                ImGui::SameLine();if(ImGui::Button("Clear preview"))context_->clearAnimationPreview();
+                if(ImGui::Button("Set initial semantic"))context_->setComponentField("azure.animator","state",selected);
+                ImGui::EndDisabled();
+                for(const auto& state:graph.at("states"))ImGui::Text("%s: clip %u, %s",state.at("name").get<std::string>().c_str(),state.at("clip").get<unsigned>(),state.value("loop",true)?"loop":"once");
+                if(const auto& preview=context_->animationPreview();preview)ImGui::Text("Clip %u, time %.3f, blend %.3f",preview->clip,preview->time,preview->blend);
+            }else ImGui::TextUnformatted("Select a node with a configured animator.");
+        }catch(const std::exception& error){ImGui::TextWrapped("%s",error.what());}
+    }
+    ImGui::End();
+}
+void ImGuiEditorLayer::drawGameplayDebugPanel(){
+    ImGui::SetNextWindowSize({370,280},ImGuiCond_FirstUseEver);
+    ImGui::Begin("Gameplay Debug");
+    ImGui::Checkbox("Collision and camera overlay",&session_->debugOverlay);
+    const auto scene=session_->viewScene();auto* runtime=session_->runtime();auto* game=session_->game();
+    for(std::size_t index=0;index<scene.nodes.size();++index){const auto& node=scene.nodes[index];
+        const auto entity=runtime?runtime->entity(node.id):ecs::kInvalidEntity;
+        const bool character=runtime?runtime->world().has<game::Character>(entity):!context_->componentData(node.id,"azure.character").is_null();
+        const bool body=runtime?runtime->world().has<game::RigidBody>(entity):!context_->componentData(node.id,"azure.rigid-body").is_null();
+        if(!character&&!body)continue;
+        ImGui::PushID(node.id.c_str());
+        if(ImGui::Selectable(node.id.c_str(),context_->selectedNode() && context_->selectedNode()->id==node.id)){
+            for(std::size_t edit=0;edit<context_->scene().nodes.size();++edit)if(context_->scene().nodes[edit].id==node.id){context_->selectNode(edit);break;}
+        }
+        if(character && game){const auto v=game->physics().velocity(entity);ImGui::Text("Velocity %.2f %.2f %.2f, grounded %s",v[0],v[1],v[2],game->physics().grounded(entity)?"yes":"no");}
+        ImGui::PopID();
+    }
+    if(game && game->hasCamera()){
+        const auto& camera=game->camera();ImGui::Text("Camera distance %.2f / %.2f",camera.actualDistance(),camera.distance());
+        const auto target=camera.target();ImGui::Text("Camera target %.2f %.2f %.2f",target[0],target[1],target[2]);
+    }
+    if(game && game->interactionTarget()){
+        const auto& target=*game->interactionTarget();ImGui::Text("Interaction: %s",target.node.c_str());
+        if(ImGui::Button("Locate interaction"))for(std::size_t i=0;i<context_->scene().nodes.size();++i)if(context_->scene().nodes[i].id==target.node){context_->selectNode(i);break;}
+    }
+    if(auto* scripts=session_->scripts())for(const auto& error:scripts->errors()){
+        ImGui::TextWrapped("%s",error.c_str());
+        for(std::size_t i=0;i<context_->scene().nodes.size();++i){const auto& node=context_->scene().nodes[i];const auto script=context_->componentData(node.id,"azure.script");
+            if(!script.is_null() && error.find(script.at("asset").get<std::string>())!=std::string::npos){ImGui::PushID(node.id.c_str());if(ImGui::SmallButton(("Locate "+node.id).c_str()))context_->selectNode(i);ImGui::PopID();}}
+    }
     ImGui::End();
 }
 

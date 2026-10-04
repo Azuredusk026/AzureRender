@@ -26,6 +26,14 @@ def main():
             {"frame": 6, "command": "delete"},
             {"frame": 7, "command": "undo"},
             {"frame": 8, "command": "save"},
+            {"frame": 8, "command": "select", "indices": [1]},
+            {"frame": 8, "command": "component-add", "type": "azure.third-person-camera"},
+            {"frame": 8, "command": "component-field", "type": "azure.third-person-camera", "field": "target", "value": "hero"},
+            {"frame": 8, "command": "component-field", "type": "azure.animator", "field": "state", "value": "run"},
+            {"frame": 8, "command": "preview", "state": "run", "time": 0.25},
+            {"frame": 8, "command": "clear-preview"},
+            {"frame": 8, "command": "save"},
+            {"frame": 8, "command": "reload"},
             {"frame": 9, "command": "play"},
             {"frame": 11, "command": "write-script", "path": "assets:/player.lua", "value": "function update(dt) error('workflow script fault') end"},
             {"frame": 13, "command": "write-script", "path": "assets:/player.lua", "value": good_script},
@@ -54,6 +62,9 @@ def main():
         assert "Validation Error" not in process.stdout + process.stderr, process.stdout + process.stderr
         reopened = json.loads((root / "game/assets/courtyard.azurelevel").read_text(encoding="utf-8"))
         assert len(reopened["nodes"]) == 5, reopened
+        hero = next(node for node in reopened["nodes"] if node["id"] == "hero")
+        assert hero["components"]["azure.third-person-camera"]["data"]["target"] == "hero", hero
+        assert hero["components"]["azure.animator"]["data"]["state"] == "run", hero
         print(json.dumps(data, ensure_ascii=False))
 
 

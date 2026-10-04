@@ -1,0 +1,11 @@
+Documentation prose style passed for 45 files.
+warning: in the working copy of 'Project/AzureRender/src/editor/AssetImportJob.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/AssetImportJob.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorAutomation.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorAutomation.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorContext.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorSession.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/ImGuiEditorLayer.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/ImGuiEditorLayer.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/EditorWorkflowTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_playable_player.py', LF will be replaced by CRLF the next time Git touches it

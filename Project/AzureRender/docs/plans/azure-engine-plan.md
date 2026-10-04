@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：F1、R5、G5、G6 Complete。U1 Active。F2、P1 Planned。Android Deferred
+> 状态：F1、R5、G5、G6、U1 Complete。F2 Active。P1 Planned。Android Deferred
 > 更新日期：2026-10-05
 > 适用范围：Windows 编辑器与 Windows 运行时。Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -75,8 +75,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | R5 角色外观与混合场景渲染 | F1、主角素材，Complete | 莱万汀面部、眉毛、头发与混合材质场景 | 主角七视角、光照、动画及实体共同渲染通过 |
 | G5 独立动画与基础 3C | R5、idle/walk 素材，Complete | 每实体动画、角色控制与第三人称相机 | 主角真实动作、多资源动画与固定 3C 路线通过 |
 | G6 关卡实体与交互玩法 | G5，Complete | NPC、收集、开门、目标反馈与重新开始 | 实际关卡完整流程、状态与实体生命周期通过 |
-| U1 关卡制作与调试流程 | G6，Active | 角色、动画、3C、碰撞与交互编辑 | 空项目制作、保存重开、运行调试与构建通过 |
-| F2 运行时性能与工程加固 | U1，Planned | 后台加载、资源复用、性能预算与诊断 | 标准、压力、预加载切关与资源恢复门禁通过 |
+| U1 关卡制作与调试流程 | G6，Complete | 角色、动画、3C、碰撞与交互编辑 | 空项目制作、保存重开、运行调试与构建通过 |
+| F2 运行时性能与工程加固 | U1，Active | 后台加载、资源复用、性能预算与诊断 | 标准、压力、预加载切关与资源恢复门禁通过 |
 | P1 可玩关卡交付验收 | F2，Planned | 独立可玩包、本机主角与设备验证记录 | 移动包游玩、30 分钟长跑与完整回归通过 |
 
 `R2` 已完成，端到端证据见 [R2 阶段验收记录](../acceptance/r2/2026-09-26.md)。`R3` 当前为 Complete，具备帧快照、并行录制和 GPU 驱动提交。阶段门禁与当前证据见 [R3 阶段验收](../acceptance/r3/2026-10-03.md)。
@@ -103,7 +103,7 @@ G4 的双关卡脚本玩法闭环与发布门禁通过，Debug 和 Release 各 4
 
 F1 提交为 `9ce99e6`。R5 为 Complete，结果见 [R5 验收](../acceptance/r5/2026-10-04.md)。G5 为 Complete，结果见 [G5 验收](../acceptance/g5/2026-10-04.md)。
 
-G6 为 Complete，结果见 [G6 验收](../acceptance/g6/2026-10-05.md)。U1 为 Active，执行编辑工作流。
+U1 为 Complete，结果见 [U1 验收](../acceptance/u1/2026-10-05.md)。F2 为 Active，执行性能与加载加固。
 
 构建与素材准入见 [F1 验收](../acceptance/f1/2026-10-04.md)。R5 至 P1 按依赖依次进入，文件级任务见 [本轮实施计划](third-person-playable-plan.md)。
 

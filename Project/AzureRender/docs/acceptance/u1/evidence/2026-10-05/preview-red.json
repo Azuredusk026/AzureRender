@@ -1,0 +1,1424 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 60,
+  "animations": [],
+  "audioStarts": 0,
+  "editStateRestored": true,
+  "editorActions": [
+    {
+      "command": "import",
+      "error": "",
+      "milliseconds": 150.6299,
+      "passed": true
+    },
+    {
+      "command": "import",
+      "error": "",
+      "milliseconds": 65.1387,
+      "passed": true
+    },
+    {
+      "command": "import",
+      "error": "",
+      "milliseconds": 75.0632,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.4117,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.3307,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2329,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.4984,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.3146,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2679,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.8312,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.287,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2673,
+      "passed": true
+    },
+    {
+      "command": "node",
+      "error": "",
+      "milliseconds": 0.3472,
+      "passed": true
+    },
+    {
+      "command": "node",
+      "error": "",
+      "milliseconds": 0.6445,
+      "passed": true
+    },
+    {
+      "command": "node",
+      "error": "",
+      "milliseconds": 0.2338,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.3026,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2271,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2445,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.3363,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 1.0525,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2961,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2459,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2721,
+      "passed": true
+    },
+    {
+      "command": "place",
+      "error": "",
+      "milliseconds": 0.2404,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.367,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6883,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.1443,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.1941,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4025,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3198,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 4.2295,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.3944,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.2097,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8088,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.1827,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.3837,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.2241,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.245,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.7456,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.8169,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.1564,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.3697,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.1044,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.5644,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 1.9016,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3646,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8194,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 5.9579,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.7741,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 1.9623,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.342,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0518,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.523,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.2619,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.0426,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3706,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.9159,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.035,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.2146,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.057,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.358,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.5604,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 1.9103,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.7737,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.7355,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.302,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0425,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0794,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.5379,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4772,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3275,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.31,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.7673,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 12.5645,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.585,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4928,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0212,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.1531,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3106,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.2909,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6849,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.2724,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4354,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.2764,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0443,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.3847,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.6167,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8451,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.5656,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.9911,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6756,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3082,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.9867,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.2664,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.6758,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.673,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 11.7071,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3473,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.324,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8698,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.8167,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.4237,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 13.4646,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.2954,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0164,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.8014,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6801,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.9137,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.2501,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 32.5226,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.4364,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 11.9925,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 14.15,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 13.9106,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.2162,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3562,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.1766,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6514,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.8714,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.5379,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 13.0895,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 15.1243,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 13.6783,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.3232,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 14.0812,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 12.0747,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.2945,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.6044,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.7684,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 3.9503,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4321,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.3302,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.8009,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.5772,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.707,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.6141,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.5755,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.6821,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3326,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.8607,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.5081,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.0517,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.4889,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.1878,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.8369,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8227,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.8294,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.896,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.4232,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3535,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.7716,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.103,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.6701,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.4592,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0168,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0695,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.3448,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.0371,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.4208,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3529,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 4.0957,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8944,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.5803,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.5565,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.2265,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8275,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.8212,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.3462,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.369,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.295,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.546,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.8471,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 5.7924,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.5162,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.0181,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 2.605,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.4296,
+      "passed": true
+    },
+    {
+      "command": "component-add",
+      "error": "",
+      "milliseconds": 4.6906,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "",
+      "milliseconds": 3.1441,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.3058,
+      "passed": true
+    },
+    {
+      "command": "debug-overlay",
+      "error": "",
+      "milliseconds": 0.0172,
+      "passed": true
+    },
+    {
+      "command": "component-field",
+      "error": "Asset reference missing: assets:/absent.lua",
+      "milliseconds": 3.9768,
+      "passed": true
+    },
+    {
+      "command": "preview",
+      "error": "",
+      "milliseconds": 12.3078,
+      "passed": true
+    },
+    {
+      "command": "clear-preview",
+      "error": "",
+      "milliseconds": 0.027,
+      "passed": true
+    },
+    {
+      "command": "prefab",
+      "error": "",
+      "milliseconds": 18.0456,
+      "passed": true
+    },
+    {
+      "command": "undo",
+      "error": "",
+      "milliseconds": 1.6703,
+      "passed": true
+    },
+    {
+      "command": "redo",
+      "error": "",
+      "milliseconds": 1.4984,
+      "passed": true
+    },
+    {
+      "command": "delete",
+      "error": "",
+      "milliseconds": 1.0049,
+      "passed": true
+    },
+    {
+      "command": "save",
+      "error": "",
+      "milliseconds": 72.5991,
+      "passed": true
+    },
+    {
+      "command": "reload",
+      "error": "",
+      "milliseconds": 80.7979,
+      "passed": true
+    },
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.2894,
+      "passed": true
+    },
+    {
+      "command": "transform",
+      "error": "",
+      "milliseconds": 1.0179,
+      "passed": true
+    },
+    {
+      "command": "undo",
+      "error": "",
+      "milliseconds": 2.372,
+      "passed": true
+    },
+    {
+      "command": "play",
+      "error": "",
+      "milliseconds": 386.7617,
+      "passed": true
+    },
+    {
+      "command": "write-script",
+      "error": "",
+      "milliseconds": 3.6115,
+      "passed": true
+    },
+    {
+      "command": "write-script",
+      "error": "",
+      "milliseconds": 3.6924,
+      "passed": true
+    },
+    {
+      "command": "pause",
+      "error": "",
+      "milliseconds": 0.0453,
+      "passed": true
+    },
+    {
+      "command": "step",
+      "error": "",
+      "milliseconds": 0.0292,
+      "passed": true
+    },
+    {
+      "command": "resume",
+      "error": "",
+      "milliseconds": 0.0391,
+      "passed": true
+    },
+    {
+      "command": "stop",
+      "error": "",
+      "milliseconds": 45.2113,
+      "passed": true
+    },
+    {
+      "command": "save",
+      "error": "",
+      "milliseconds": 65.7084,
+      "passed": true
+    }
+  ],
+  "editorDebugLines": 6146,
+  "editorLevelRevision": 1,
+  "editorPlaySteps": 14,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "ground",
+      "translation": [
+        0.0,
+        -0.25,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-left",
+      "translation": [
+        -3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-right",
+      "translation": [
+        3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "ramp",
+      "translation": [
+        0.0,
+        0.17000000178813934,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-left",
+      "translation": [
+        -3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-right",
+      "translation": [
+        3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-roof",
+      "translation": [
+        0.0,
+        2.3499999046325684,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-left",
+      "translation": [
+        -13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-right",
+      "translation": [
+        13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hud",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "goal",
+      "translation": [
+        0.0,
+        1.0,
+        -330.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "companion-0",
+      "translation": [
+        -4.0,
+        0.0,
+        -32.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "companion-1",
+      "translation": [
+        4.0,
+        0.0,
+        -185.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "hero:body",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "guide:body",
+      "translation": [
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "door:body",
+      "translation": [
+        0.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "checkpoint:body",
+      "translation": [
+        0.0,
+        1.0,
+        -165.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "artifact-0:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -50.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-1:body",
+      "translation": [
+        14.0,
+        0.44999998807907104,
+        -130.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-2:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -210.0
+      ],
+      "visible": true
+    }
+  ],
+  "observedScriptErrors": 1,
+  "presentationErrors": [],
+  "recoveredScripts": 8,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "editor-exploration",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 179
+}

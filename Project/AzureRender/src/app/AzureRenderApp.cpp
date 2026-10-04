@@ -337,6 +337,8 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
                 {"previousClip",animation.previousClip},{"blend",animation.blend},{"morph",animation.morph}});
 #if AZURE_WITH_EDITOR
         data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
+        data["editorPreviewFrames"]=editorPreviewFrames_;
+        data["editorDebugLines"]=editorLayer_?editorLayer_->debugLineCount():0;
         if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
 #endif
         std::ofstream extended(runOptions_.runtimeReportPath);extended<<data.dump(2);
@@ -360,8 +362,11 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 void AzureRenderApp::createSceneRenderer() {
     azurerender::RenderContext context;
     buildRenderContext(context);
-    const std::string rendererId =
+    std::string rendererId =
         azurerender::sceneTypeName(renderSettings_.sceneType);
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && context.scene.resources.empty())rendererId="sample";
+#endif
     azurerender::SceneRendererRegistry registry =
         azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);
@@ -520,6 +525,12 @@ void AzureRenderApp::buildSceneFrameData(
         cameraPosition_=game->renderCameraPosition();cameraTarget_=game->renderCameraTarget();autoRotate_=false;rotationAngle_=0;
     }
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+        const auto& preview=runOptions_.editorSession->context().animationPreview();
+        if(preview){frame.animations.push_back(*preview);++editorPreviewFrames_;}
+    }
+#endif
     if(gameInputReplay_&&gameRouteFrames_.size()<8192){nlohmann::json state;
         state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
         state["characters"]=nlohmann::json::array();

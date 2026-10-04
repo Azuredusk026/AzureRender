@@ -162,6 +162,7 @@ private:
 #endif
     std::string gameUiPath_,editorResourceSignature_;
     std::uint64_t gameplayFrame_=0,uiSerial_=0,uiDrawCalls_=0,animationFrames_=0,audioStarts_=0;
+    std::uint64_t editorPreviewFrames_=0;
     std::vector<std::string> presentationErrors_;
     double pausedTimeOffset_ = 0.0;
     bool framebufferResized_ = false;

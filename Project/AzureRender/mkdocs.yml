@@ -70,6 +70,8 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U1 关卡制作与调试: acceptance/u1/2026-10-05.md
+      - G6 探索关卡与交互: acceptance/g6/2026-10-05.md
       - G5 独立动画与基础 3C: acceptance/g5/2026-10-04.md
       - R5 角色外观与混合场景: acceptance/r5/2026-10-04.md
       - F1 构建与素材准入: acceptance/f1/2026-10-04.md

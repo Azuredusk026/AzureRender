@@ -24,7 +24,12 @@ void AssetImportJob::prepare(const std::filesystem::path& source){
             copy(source.parent_path()/relative,staging_/relative);
         }
     }
-    progress_=0.65F;checkCancel();(void)loadGltfAsset((staging_/source.filename()).string());checkCancel();progress_=1;
+    progress_=0.65F;checkCancel();const auto asset=loadGltfAsset((staging_/source.filename()).string());
+    summary_={{"source",source.string()},{"vertices",asset.vertices.size()},{"indices",asset.indices.size()},
+        {"materials",asset.materials.size()},{"joints",asset.jointNodes.size()},{"skinned",asset.hasSkin},{"clips",nlohmann::json::array()}};
+    for(std::size_t index=0;index<asset.animations.size();++index){const auto& clip=asset.animations[index];
+        summary_["clips"].push_back({{"index",index},{"name",clip.name},{"duration",clip.endTime-clip.startTime},{"channels",clip.channels.size()}});}
+    checkCancel();progress_=1;
 }
 bool AssetImportJob::ready()const{return work_.valid()&&work_.wait_for(std::chrono::seconds(0))==std::future_status::ready;}
 std::filesystem::path AssetImportJob::finish(){work_.get();checkCancel();std::filesystem::create_directories(destination.parent_path());std::filesystem::rename(staging_,destination);return destination/filename_;}

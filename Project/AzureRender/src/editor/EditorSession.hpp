@@ -32,6 +32,7 @@ public:
     explicit EditorSession(std::shared_ptr<EditorContext> context);
     ~EditorSession();
     bool playing() const noexcept;
+    bool debugOverlay = false;
     GameRuntime* game() noexcept;
     RuntimeLifecycle* runtime() noexcept;
     LevelSession* levels() noexcept;

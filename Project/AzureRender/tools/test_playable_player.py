@@ -6,8 +6,11 @@ import subprocess
 import tempfile
 from create_playable_project import create
 
-def run(executable, root, character=None, capture=False, timeout=600, frames=940):
-    root.mkdir(parents=True,exist_ok=True);create(root/'game',character)
+def run(executable, root, character=None, capture=False, timeout=600, frames=940, project=None):
+    root.mkdir(parents=True,exist_ok=True)
+    if project is None:
+        create(root/'game',character)
+        project=root/'game/project.azureproject'
     events=[]
     def key(frame,value,down): events.append({'frame':frame,'action':'key','key':value,'down':down})
     def press(frame,value): key(frame,value,True);key(frame+1,value,False)
@@ -22,7 +25,7 @@ def run(executable, root, character=None, capture=False, timeout=600, frames=940
     events=[e for e in events if e['frame']<frames]
     inputs=root/'input.json';inputs.write_text(json.dumps({'schemaVersion':1,'actions':events},indent=2),encoding='utf-8')
     report=root/'runtime.json'
-    command=[str(executable.resolve()),'--project',str((root/'game/project.azureproject').resolve()),'--width','960','--height','540',
+    command=[str(executable.resolve()),'--project',str(project.resolve()),'--width','960','--height','540',
         '--runtime-report',str(report.resolve()),'--game-actions',str(inputs.resolve()),'--capture-fps','4']
     command+=['--capture-dir',str((root/'capture').resolve()),'--capture-frames',str(frames)] if capture else ['--fixed-frame-step','--smoke-frames',str(frames)]
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
@@ -55,6 +58,7 @@ def run(executable, root, character=None, capture=False, timeout=600, frames=940
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--character',type=Path)
     p.add_argument('--output',type=Path);p.add_argument('--capture',action='store_true');p.add_argument('--timeout',type=float,default=600);p.add_argument('--frames',type=int,default=940)
+    p.add_argument('--project',type=Path,help='Verify an already authored or packaged exploration project')
     a=p.parse_args()
     with tempfile.TemporaryDirectory(prefix='azure_quest_') as temporary:
-        run(a.executable,a.output.resolve() if a.output else Path(temporary),a.character,a.capture,a.timeout,a.frames)
+        run(a.executable,a.output.resolve() if a.output else Path(temporary),a.character,a.capture,a.timeout,a.frames,a.project)

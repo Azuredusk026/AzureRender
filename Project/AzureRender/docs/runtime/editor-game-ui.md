@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-04
+> 更新日期：2026-10-05
 > 适用范围：Windows 编辑器与 Player
 > 源码入口：`src/editor/`、`src/runtime/PresentationRuntime.*`、`src/render/GameUiRenderer.*`
 
@@ -12,9 +12,25 @@
 
 资源浏览器接受 glTF 或 GLB 文件路径。导入任务复制模型与相对依赖，验证候选资源后提交。进度与取消按钮显示当前状态。取消和失败保留有效场景。
 
+导入结果显示顶点、关节、材质和动画片段。片段列表包含名称、索引和时长。受损模型和缺失依赖通过 Console 定位。
+
 双击资源可放置对象，也可将资源拖入视口。层级中按 Ctrl 可多选。复制、删除、重命名和组件字段编辑进入操作历史。Ctrl+D 复制，Delete 删除，Ctrl+Z 撤销，Ctrl+Y 重做。
 
 Inspector 根据反射字段提供角色、刚体、脚本、动画、音频和界面属性。字段类型和数值范围在提交时校验。Ctrl+S 保存项目关卡。渲染参数、组件、原生节点和 Prefab 实例覆盖随关卡保存。
+
+相机、交互、收集物、门、检查点和任务状态均可配置。整数计数按整数提交。资源字段使用资产列表，相机目标使用节点列表。角色和刚体使用各自的物理节点。
+
+动画图的语义状态和片段索引须与模型匹配。相机距离和俯仰上下界须构成有效范围。引用和兼容性在候选提交前校验。失败候选保留场景与撤销历史。
+
+在资源浏览器填写实例身份，再选择 Prefab 放置。实例节点、资源和灯光使用稳定身份展开。撤销和重做同步恢复实例来源与覆盖。空节点用于相机、界面和触发区域。
+
+空关卡显示可编辑视口。导入并放置模型后显示关卡内容。实例身份应保持唯一，长度最多为 128 字节。
+
+## 动画预览与玩法调试
+
+Animation Preview 显示语义状态、循环和片段索引。选择状态后设置时间与淡化时长，点击 Preview pose。预览按运行时动画契约进入视口。Clear preview 释放预览，Set initial semantic 保存初始状态。
+
+Gameplay Debug 提供碰撞和相机叠加开关。盒体按旋转、缩放与半尺寸显示，角色显示胶囊。运行时列出速度、落地状态与相机遮挡距离。交互目标和脚本诊断提供节点定位入口。
 
 ## 运行与输入
 
@@ -63,6 +79,16 @@ python tools/test_game_presentation.py --executable build/ninja-msvc-debug/Azure
 编辑任务验证导入、编辑、历史、保存、运行、脚本修复、切关和停止。图像任务比较实际状态动画与界面合成。单元验证覆盖导入取消、Prefab、基础项目兼容、混音与资源退休。
 
 `build` 命令接收 `install`、`output` 和可选 `replace`。`wait-build` 按帧等待异步构建，并检查发布结果。自动化任务完成后结束烟雾运行，完整流程见 [Windows 游戏发布](game-publishing.md)。
+
+`component-add` 和 `component-field` 使用生产组件命令。`prefab` 接收 `asset` 与 `instance`。`node` 和 `place` 可指定稳定节点身份。`select` 接收 `id` 或 `indices`，`reload` 重开保存内容。
+
+`import` 的可选 `key` 为后续放置登记资源。`place` 的 `resource` 选择该资源键。`preview` 接收状态、时间、前一状态与淡化时长。`debug-overlay` 的 `enabled` 控制调试叠加。
+
+空关卡制作验收使用以下入口。输出目录应为空，构建时提供 Release 安装树。
+
+```powershell
+python tools/test_editor_playable.py --executable build/ninja-msvc-release/AzureRender.exe --output build/u1/authoring --install build/ninja-msvc-release/release-gate/install-moved
+```
 
 ## 来源与许可
 

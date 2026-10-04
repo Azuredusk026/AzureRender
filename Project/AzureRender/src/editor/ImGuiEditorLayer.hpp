@@ -39,6 +39,7 @@ public:
     void newFrame();
     void drawPanels();
     void setGameUi(GameUi* ui) { gameUi_=ui; }
+    std::uint64_t debugLineCount() const noexcept { return debugLineCount_; }
     void render(VkCommandBuffer commandBuffer);
     void setViewportImages(
         VkSampler sampler,
@@ -63,6 +64,8 @@ private:
     void drawCapturePanel();
     void drawConsolePanel();
     void drawBuildPanel();
+    void drawAnimationPanel();
+    void drawGameplayDebugPanel();
 
     std::shared_ptr<EditorSession> session_;
     EditorContext* context_ = nullptr;
@@ -86,6 +89,7 @@ private:
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
     bool initialized_ = false;
+    std::uint64_t debugLineCount_ = 0;
     bool dockingLayoutInitialized_ = false;
 };
 
