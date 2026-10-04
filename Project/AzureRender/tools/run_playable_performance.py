@@ -54,8 +54,11 @@ def fixture(root, stress=False, character=None):
         data['nodes'][0]['components']['azure.transform']['data']['translation']=[0,0,0]
         hero.write_text(json.dumps(data,indent=2),encoding='utf-8')
     path.write_text(json.dumps(scene,indent=2),encoding='utf-8')
-    return dict(entities=count, animatedCharacters=16 if stress else 4, pointLights=lights,
+    quality=dict(entities=count, animatedCharacters=16 if stress else 4, pointLights=lights,
                 shadowCascades=4, width=1920,height=1080, fullGameUi=True)
+    metadata=json.loads((root/'QUALITY.json').read_text(encoding='utf-8'));metadata.update(quality)
+    (root/'QUALITY.json').write_text(json.dumps(metadata,indent=2)+'\n',encoding='utf-8')
+    return quality
 
 
 def thermal():

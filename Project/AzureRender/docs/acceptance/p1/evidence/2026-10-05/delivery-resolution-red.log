@@ -1,0 +1,21 @@
+.FF......
+======================================================================
+FAIL: test_delivery_documents_are_immutable (__main__.GamePackageRules.test_delivery_documents_are_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 119, in test_delivery_documents_are_immutable
+    self.assertIn("--width 1920 --height 1080", (self.output / "start-game.cmd").read_text())
+AssertionError: '--width 1920 --height 1080' not found in '@echo off\ncd /d "%~dp0"\n"bin\\AzurePlayer.exe" --project "game\\project.azureproject" --resource-root "share\\AzureRender" %*\n'
+
+======================================================================
+FAIL: test_delivery_resolution_rejects_command_text (__main__.GamePackageRules.test_delivery_resolution_rejects_command_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 131, in test_delivery_resolution_rejects_command_text
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.677s
+
+FAILED (failures=2)

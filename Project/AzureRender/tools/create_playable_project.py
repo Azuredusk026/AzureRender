@@ -70,6 +70,19 @@ def create(root, primary=None):
     project=json.loads((root/'project.azureproject').read_text(encoding='utf-8'))
     project.update(name='Azure Exploration',startupScene='assets:/exploration.azurelevel')
     write(root/'project.azureproject',project)
+    (root/'GAME-GUIDE.md').write_text('''# Azure Exploration 操作说明
+
+运行环境为 Windows x64 与 Vulkan 1.3 驱动。解压整个目录后双击 `start-game.cmd`。窗口默认以 1920×1080 启动，可调整大小。
+
+使用 WASD 移动，鼠标旋转相机，滚轮调整距离。空格跳跃，E 触发界面提示的交互。Esc 释放鼠标，点击游戏区域恢复相机控制。R 或 Restart 按钮重新开始当前关卡。
+
+先与起点的引导角色交谈。按照界面路线提示收集三个物件，开启门。经过检查点、狭窄通道和坡道，进入室内目标区完成探索。参考游玩时间约为三至五分钟。
+
+Pause 与 Resume 按钮控制暂停和恢复。窗口关闭按钮正常退出游戏。质量参数见 `QUALITY.json`，素材许可位于 `game/assets/`。第三方许可位于 `share/AzureRender/licenses/`。
+''',encoding='utf-8')
+    write(root/'QUALITY.json',dict(schemaVersion=1,platform='Windows x64',vulkanApi='1.3',
+        width=1920,height=1080,targetHz=60,shadowMapSize=2048,shadowCascades=4,
+        entities=21,animatedCharacters=4,fullGameUi=True,materialQuality='full',privateCharacter=bool(primary)))
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--character',type=Path)

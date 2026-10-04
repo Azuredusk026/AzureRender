@@ -53,10 +53,12 @@ azure_register_game_package()
                 report = json.loads(subprocess.check_output(["ctest", "--test-dir", str(build),
                     "-C", "Release", "--show-only=json-v1"], text=True))
                 self.assertIn("AzureEngine.GamePackage", [t["name"] for t in report["tests"]])
+                self.assertIn("AzureEngine.PlayablePackage", [t["name"] for t in report["tests"]])
                 if generator == "Ninja Multi-Config":
                     debug = json.loads(subprocess.check_output(["ctest", "--test-dir", str(build),
                         "-C", "Debug", "--show-only=json-v1"], text=True))
                     self.assertNotIn("AzureEngine.GamePackage", [t["name"] for t in debug["tests"]])
+                    self.assertNotIn("AzureEngine.PlayablePackage", [t["name"] for t in debug["tests"]])
 
 
 if __name__ == "__main__":

@@ -110,6 +110,32 @@ class GamePackageRules(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.build()
 
+    def test_delivery_documents_are_immutable(self):
+        (self.project.parent / "GAME-GUIDE.md").write_text("Controls and quest")
+        (self.project.parent / "QUALITY.json").write_text('{"width":1920,"height":1080}')
+        self.build()
+        self.assertEqual((self.output / "GAME-GUIDE.md").read_text(), "Controls and quest")
+        self.assertEqual(json.loads((self.output / "QUALITY.json").read_text())["width"], 1920)
+        self.assertIn("--width 1920 --height 1080", (self.output / "start-game.cmd").read_text())
+        (self.output / "GAME-GUIDE.md").write_text("tamper")
+        with self.assertRaises(ValueError):
+            build_game.verify_package(self.output)
+
+    def test_delivery_document_directory_is_rejected(self):
+        (self.project.parent / "GAME-GUIDE.md").mkdir()
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_delivery_resolution_rejects_command_text(self):
+        (self.project.parent / "QUALITY.json").write_text('{"width":"1920 & echo injected","height":1080}')
+        with self.assertRaises(ValueError):
+            self.build()
+
+    def test_delivery_quality_requires_an_object(self):
+        (self.project.parent / "QUALITY.json").write_text('[]')
+        with self.assertRaises(ValueError):
+            self.build()
+
 
 if __name__ == "__main__":
     unittest.main()

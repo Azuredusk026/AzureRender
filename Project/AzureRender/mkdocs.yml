@@ -71,6 +71,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - P1 可玩关卡交付: acceptance/p1/2026-10-05.md
       - F2 性能与工程加固: acceptance/f2/2026-10-05.md
       - U1 关卡制作与调试: acceptance/u1/2026-10-05.md
       - G6 探索关卡与交互: acceptance/g6/2026-10-05.md

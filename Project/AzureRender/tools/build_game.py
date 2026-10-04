@@ -160,7 +160,22 @@ def build_game(project, install, output, replace=False, validator=None):
         for name in ["shaders", "assets_public", "licenses"]:
             copy_tree(share / name, candidate / "share/AzureRender" / name)
         shutil.copy2(share / "runtime-build.json", candidate / "share/AzureRender/runtime-build.json")
-        (candidate / "start-game.cmd").write_bytes(b'@echo off\r\ncd /d "%~dp0"\r\n"bin\\AzurePlayer.exe" --project "game\\project.azureproject" --resource-root "share\\AzureRender" %*\r\n')
+        for name in ("GAME-GUIDE.md", "QUALITY.json"):
+            document = project.parent / name
+            if document.exists() or document.is_symlink():
+                if not document.is_file() or is_reparse(document):
+                    raise ValueError(f"Delivery document must be a regular file: {document}")
+                shutil.copy2(document, candidate / name)
+        resolution = ""
+        if (candidate / "QUALITY.json").exists():
+            quality = read_json(candidate / "QUALITY.json")
+            if not isinstance(quality, dict):
+                raise ValueError("Delivery quality must be a JSON object")
+            width, height = quality.get("width"), quality.get("height")
+            if any(type(value) is not int or not 1 <= value <= 8192 for value in (width, height)):
+                raise ValueError("Delivery resolution must contain integer width and height from 1 to 8192")
+            resolution = f" --width {width} --height {height}"
+        (candidate / "start-game.cmd").write_bytes(('@echo off\r\ncd /d "%~dp0"\r\n"bin\\AzurePlayer.exe" --project "game\\project.azureproject" --resource-root "share\\AzureRender"'+resolution+' %*\r\n').encode('ascii'))
         validate(candidate / "bin/AzurePlayer.exe", game / "project.azureproject")
         if (game / ".azure").exists():
             shutil.rmtree(game / ".azure")

@@ -1,0 +1,19 @@
+..E.......
+======================================================================
+ERROR: test_delivery_quality_requires_an_object (__main__.GamePackageRules.test_delivery_quality_requires_an_object)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 137, in test_delivery_quality_requires_an_object
+    self.build()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 44, in build
+    return build_game.build_game(self.project, self.install, self.output, validator=self.validate, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_game.py", line 172, in build_game
+    width, height = quality.get("width"), quality.get("height")
+                    ^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.815s
+
+FAILED (errors=1)

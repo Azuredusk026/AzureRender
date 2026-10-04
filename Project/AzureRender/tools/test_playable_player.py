@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 from create_playable_project import create
 
-def run(executable, root, character=None, capture=False, timeout=600, frames=940, project=None):
+def run(executable, root, character=None, capture=False, timeout=600, frames=940, project=None, env=None, cwd=None):
     root.mkdir(parents=True,exist_ok=True)
     if project is None:
         create(root/'game',character)
@@ -29,7 +29,7 @@ def run(executable, root, character=None, capture=False, timeout=600, frames=940
         '--runtime-report',str(report.resolve()),'--game-actions',str(inputs.resolve()),'--capture-fps','4']
     command+=['--capture-dir',str((root/'capture').resolve()),'--capture-frames',str(frames)] if capture else ['--fixed-frame-step','--smoke-frames',str(frames)]
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
-    result=subprocess.run(command,capture_output=True,encoding='utf-8',errors='replace',timeout=timeout,startupinfo=info)
+    result=subprocess.run(command,capture_output=True,encoding='utf-8',errors='replace',timeout=timeout,startupinfo=info,env=env,cwd=cwd)
     (root/'stdout.log').write_text(result.stdout,encoding='utf-8');(root/'stderr.log').write_text(result.stderr,encoding='utf-8')
     assert result.returncode==0,result.stdout+result.stderr
     assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr,result.stderr

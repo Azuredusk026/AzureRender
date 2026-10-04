@@ -61,3 +61,5 @@ python tools/test_level_cycles.py `
 循环验收包含取消候选、预加载与资源身份变化。十轮各执行两次切关和两次重开。提交额外耗时 P99 至多为 8 ms。
 
 具体帧预算见[第三人称开发计划](../plans/third-person-playable-plan.md)。测量保存场景哈希、源码指纹、设备和质量配置。结果按每轮预算判定。
+
+完整独立包与真实长跑入口见[Windows 游戏发布](game-publishing.md)。长跑连续写入全部 GPU 帧，并记录每分钟预算。窗口恢复后，按固定分辨率比较稳定驻留和工作集。

@@ -1,0 +1,28 @@
+FE......
+======================================================================
+ERROR: test_delivery_documents_are_immutable (__main__.GamePackageRules.test_delivery_documents_are_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 117, in test_delivery_documents_are_immutable
+    self.assertEqual((self.output / "GAME-GUIDE.md").read_text(), "Controls and quest")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\23587\\AppData\\Local\\Temp\\azure_pack_rules_au0asby1\\published\\GAME-GUIDE.md'
+
+======================================================================
+FAIL: test_delivery_document_directory_is_rejected (__main__.GamePackageRules.test_delivery_document_directory_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_game_package_rules.py", line 125, in test_delivery_document_directory_is_rejected
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.686s
+
+FAILED (failures=1, errors=1)

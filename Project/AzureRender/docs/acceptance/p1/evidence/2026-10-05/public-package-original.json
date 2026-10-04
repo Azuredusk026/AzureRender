@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p1\\Delivery\\Azure Exploration",
+  "files": 207,
+  "licenses": 19,
+  "movedDirectory": true,
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "tamperRejected": true,
+  "completeQuest": true,
+  "quest": {
+    "frames": 940,
+    "actions": 38,
+    "completionSeconds": 221.0,
+    "fixedSteps": 14085,
+    "restarts": 2,
+    "validationErrors": 0,
+    "released": true
+  },
+  "cycles": {
+    "commits": 40,
+    "switches": 20,
+    "restarts": 20,
+    "commitMilliseconds": {
+      "mean": 2.58785,
+      "p95": 3.2626,
+      "p99": 4.156016999999999
+    },
+    "commitFrameMilliseconds": {
+      "mean": 8.94609,
+      "p95": 9.875574999999998,
+      "p99": 13.872302999999997
+    },
+    "first": {
+      "bufferBytes": 7469424,
+      "buffers": 51,
+      "cachedCandidates": 2,
+      "commitMs": 2.2766,
+      "committed": false,
+      "frame": 1200,
+      "imageBytes": 124575232,
+      "images": 71,
+      "loadError": "",
+      "loading": false,
+      "physicsMaxMs": 0.2052,
+      "requestGeneration": 12,
+      "revision": 8,
+      "waitMs": 0.061500000000009436,
+      "workMs": 1.7358999999999907
+    },
+    "last": {
+      "bufferBytes": 7469424,
+      "buffers": 51,
+      "cachedCandidates": 2,
+      "commitMs": 2.5299,
+      "committed": false,
+      "frame": 6480,
+      "imageBytes": 124575232,
+      "images": 71,
+      "loadError": "",
+      "loading": false,
+      "physicsMaxMs": 0.2267,
+      "requestGeneration": 46,
+      "revision": 42,
+      "waitMs": 0.06319999999999482,
+      "workMs": 1.8218000000000052
+    },
+    "passed": true
+  },
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "packageManifestHash": "0dcedb54323dc4bcf2cc0747e9677fdd2ac03548a4b0030701218075dff4edfe"
+}

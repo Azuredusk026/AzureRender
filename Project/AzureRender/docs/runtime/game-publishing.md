@@ -2,7 +2,7 @@
 
 > 文档类型：使用说明
 > 适用范围：Windows x64、Release、项目 Schema v1
-> 更新日期：2026-10-04
+> 更新日期：2026-10-05
 
 ## 创建与编辑
 
@@ -54,6 +54,8 @@ python "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
 | `game/<挂载名>/` | 关卡、脚本、模型、侧车及其他项目资源 |
 | `share/AzureRender/` | 着色器、公开资源、字体、许可证与构建元数据 |
 | `game_manifest.json` | 项目标识、启动入口、版本与文件大小和 SHA-256 |
+| `GAME-GUIDE.md` | 项目提供的操作与任务说明 |
+| `QUALITY.json` | 项目提供的质量配置与启动分辨率 |
 
 分发整个游戏目录，双击 `start-game.cmd` 运行。目录可移动，也支持含空格的路径。运行时在可写目录生成缓存和诊断记录。
 
@@ -63,9 +65,37 @@ python "D:/AzureEngine/share/AzureRender/tools/build_game.py" --verify "D:/Deliv
 
 清单验证检查不可变文件，并允许 `game/.azure/` 缓存和 `captures/` 诊断输出。发布复制规则排除缓存、临时文件和版本控制目录。私有资产、捕获与作品集目录触发发布边界错误。游戏包只分发 Player 可执行文件。
 
+项目根目录可提供 `GAME-GUIDE.md` 与 `QUALITY.json`。构建复制这两份普通文件，并登记 SHA-256。质量说明的 `width` 与 `height` 为 1 至 8192 的整数。启动脚本使用该分辨率，命令行参数可覆盖它。
+
+探索项目的操作说明包含移动、相机、交互、任务和重开。质量说明包含四级 2048 阴影、完整材质与目标帧率。公开标准项目使用 100 实体、四角色与八灯。
+
 ## 验收与能力边界
 
 `AzureEngine.GamePackageRules` 覆盖目录事务、哈希、配置与发布边界。Release 的 `AzureEngine.GamePackage` 从实际编辑器构建包，移动目录并移走输入。它在隔离 PATH 下运行角色、切关、声音、界面和动画，并检查退出释放。
+
+`AzureEngine.PlayablePackage` 验证完整探索关卡。实际编辑器构建包后，测试移动目录并移走自建输入。隔离 PATH 下完成全部任务与两次重开。随后执行 20 次切关和 20 次重开，核验驻留与退出释放。
+
+长跑使用包内 Player 与真实时钟。工具正常关闭自有进程窗口，并检查完整运行时间。运行期间只执行一个 GPU 验收任务，源码保持固定。
+
+```powershell
+python tools/test_playable_package.py `
+  --build-dir build/ninja-msvc-release `
+  --editor build/ninja-msvc-release/AzureRender.exe `
+  --output "build/delivery/Azure Exploration" `
+  --evidence build/delivery/package-evidence
+
+python tools/run_playable_long_run.py `
+  --package "build/delivery/Azure Exploration" `
+  --output build/delivery/long-run --seconds 1800
+```
+
+长跑覆盖最小化、恢复、960×540 与 1920×1080 切换。预热 120 秒后比较稳定资源和工作集。全部 GPU CSV、周期资源记录与每分钟窗口进入报告。CPU 详细样本保存最后 8192 帧。
+
+常规 CPU 百分位使用每 240 帧的固定间隔记录。切关额外记录按提交门禁单独检查。主线程额外耗时 P99 至多为 8 ms，提交帧 P99 至多为 33.3 ms。GPU 百分位使用全部有效帧和每分钟窗口。
+
+原始采样与分析分别记录源码指纹。复核使用 `--reanalyse --provenance <构建关联清单>`。工具核验运行时源码、Player 和游戏包哈希。原始数据保持完整，复核报告记录其 SHA-256。
+
+短时探针使用 `--probe --seconds 60`，结果登记为探针。正式验收要求连续运行至少 1800 秒。完整预算与结果见[可玩关卡性能与加载](playable-performance.md)和 [P1 验收](../acceptance/p1/2026-10-05.md)。
 
 游戏表现遵循 [项目编辑与游戏界面](editor-game-ui.md)的动画和界面能力边界。模板使用公开测试模型展示玩法链路。Android 状态为 Deferred。
 
