@@ -1,11 +1,13 @@
 #pragma once
 
 #include <array>
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <filesystem>
 
 #include "scene/TransformMath.hpp"
 
@@ -48,6 +50,23 @@ struct SceneDescription {
     std::vector<SceneResourceDesc> resources;
     std::vector<SceneNodeDesc> nodes;
     std::vector<SceneLightDesc> lights;
+};
+
+struct ResourceLayout {
+    std::vector<std::string> paths;
+    std::unordered_map<std::string,std::size_t> identities;
+    explicit ResourceLayout(const SceneDescription& scene) {
+        for(const auto& resource:scene.resources){
+            const auto path=std::filesystem::path(resource.path).lexically_normal().generic_string();
+            auto found=std::find(paths.begin(),paths.end(),path);
+            const auto index=static_cast<std::size_t>(found-paths.begin());
+            if(found==paths.end())paths.push_back(path);
+            identities.emplace(resource.id,index);
+        }
+    }
+    std::size_t meshKey(const std::string& id) const {
+        const auto found=identities.find(id);return found==identities.end()?paths.size():found->second;
+    }
 };
 
 // Resolves editor node links into deterministic world transforms. The

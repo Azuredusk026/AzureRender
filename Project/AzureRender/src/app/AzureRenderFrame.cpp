@@ -39,6 +39,8 @@ using namespace azurerender::internal;
 
 void AzureRenderApp::drawFrame() {
     const auto frameStart = std::chrono::steady_clock::now();
+    const double previousWait=submissionCounters_.frameSlotWaitMilliseconds+submissionCounters_.acquireMilliseconds
+        +submissionCounters_.submitMilliseconds+submissionCounters_.presentMilliseconds;
     ++gameplayFrame_;
     if (runOptions_.gpuTimingEnabled) ++submissionCounters_.frameAttempts;
     vkCheck(
@@ -278,6 +280,35 @@ void AzureRenderApp::drawFrame() {
     if (runOptions_.gpuTimingEnabled) {
         ++submissionCounters_.completedCpuFrames;
         submissionCounters_.cpuFrameMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - frameStart).count();
+        const double total=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-frameStart).count();
+        const double wait=submissionCounters_.frameSlotWaitMilliseconds+submissionCounters_.acquireMilliseconds
+            +submissionCounters_.submitMilliseconds+submissionCounters_.presentMilliseconds-previousWait;
+        if(submissionCounters_.workSamplesMs.size()>=8192){
+            submissionCounters_.workSamplesMs.pop_front();submissionCounters_.totalSamplesMs.pop_front();submissionCounters_.waitSamplesMs.pop_front();
+            for(std::size_t count=0;count<submissionCounters_.physicsStepCounts.front();++count)submissionCounters_.physicsSamplesMs.pop_front();
+            submissionCounters_.physicsStepCounts.pop_front();
+        }
+        submissionCounters_.totalSamplesMs.push_back(total);submissionCounters_.waitSamplesMs.push_back(wait);
+        submissionCounters_.workSamplesMs.push_back(std::max(0.0,total-wait));
+        auto* game=activeGame();
+        submissionCounters_.physicsStepCounts.push_back(game?game->lastStepSamples().size():0);
+        if(game)for(double sample:game->lastStepSamples())submissionCounters_.physicsSamplesMs.push_back(sample);
+        const auto revision=activeRuntime()?activeRuntime()->sceneRevision():0;
+        if(gameplayFrame_%240==0 || revision!=sampledLevelRevision_){
+            if(resourceFrameSamples_.size()>=8192)resourceFrameSamples_.erase(resourceFrameSamples_.begin());
+            const auto& allocation=gpuAllocator_.statistics();
+            resourceFrameSamples_.push_back({{"frame",gameplayFrame_},{"revision",revision},
+                {"workMs",std::max(0.0,total-wait)},{"waitMs",wait},
+                {"physicsMaxMs",game && !game->lastStepSamples().empty()?*std::max_element(game->lastStepSamples().begin(),game->lastStepSamples().end()):0},
+                {"committed",revision!=sampledLevelRevision_},{"commitMs",levelSession_?levelSession_->lastCommitMilliseconds():0},
+                {"loading",levelSession_ && levelSession_->loading()},
+                {"cachedCandidates",levelSession_?levelSession_->cachedCandidates():0},
+                {"requestGeneration",levelSession_?levelSession_->requestGeneration():0},
+                {"loadError",levelSession_?levelSession_->lastError():std::string()},
+                {"buffers",allocation.liveBuffers},{"images",allocation.liveImages},
+                {"bufferBytes",allocation.liveBufferBytes},{"imageBytes",allocation.liveImageBytes}});
+            sampledLevelRevision_=revision;
+        }
     }
     currentFrame_ = (currentFrame_ + 1) % kMaxFramesInFlight;
 }

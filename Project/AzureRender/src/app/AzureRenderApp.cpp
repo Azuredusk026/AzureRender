@@ -127,7 +127,12 @@ void AzureRenderApp::run(
     glfwSetCharCallback(frontend_->nativeHandle(),[](GLFWwindow* window,unsigned int character){auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));if(app && app->gameUi_)app->gameUi_->character(character);});
 #endif
     renderSettings_ = runOptions_.renderSettings;
-    if(levelSession_)levelSession_->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
+    if(levelSession_){
+        rendererResourceKey_=levelSession_->current().resourceKey;
+        levelSession_->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
+        levelSession_->setPreloadHandler([this](const auto& level){return preloadLevelRenderer(level);});
+        levelSession_->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
+    }
     if(!runOptions_.projectFile.empty())autoRotate_=false;
     if (runOptions_.portfolioMode) {
         activatePortfolioOrbit();
@@ -487,7 +492,11 @@ void AzureRenderApp::buildSceneFrameData(
     if(game&&!runOptions_.gameActionsPath.empty()) {
         if(!gameInputReplay_){std::ifstream input(runOptions_.gameActionsPath);nlohmann::json document;input>>document;
             gameInputReplay_=azurerender::GameInputReplay::parse(document);}
-        gameInputReplay_->apply(gameplayFrame_,*game);
+        auto* levels=levelSession_.get();
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession)levels=runOptions_.editorSession->levels();
+#endif
+        gameInputReplay_->apply(gameplayFrame_,*game,levels);
     }
     if (game&&!gameInputReplay_) {
         bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
@@ -921,6 +930,7 @@ void AzureRenderApp::cleanup() {
             editorLayer_->shutdownVulkan();
         }
 #endif
+        if(preparedRenderer_){azurerender::RenderContext context;buildRenderContext(context);preparedRenderer_->onUnload(context);preparedRenderer_.reset();}
         cleanupSwapchain();
         if (sceneRenderer_ != nullptr) {
             azurerender::RenderContext unloadContext;

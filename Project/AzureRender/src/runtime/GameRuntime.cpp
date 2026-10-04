@@ -3,6 +3,7 @@
 #include <chrono>
 namespace azurerender {
 double GameRuntime::advance(double delta) {
+    lastStepSamples_.clear();
     if (!std::isfinite(delta) || delta < 0) throw std::invalid_argument("Invalid game frame delta");
     constexpr double fixed = 1.0 / 60.0;
     if (runtime_.state() == RuntimeLifecycle::State::Paused) {
@@ -73,7 +74,8 @@ double GameRuntime::advance(double delta) {
         if(target&&input_.pressed("interact")&&interactionHandler_)interactionHandler_(*target);
         for (const auto& event : events) if (eventHandler_) eventHandler_(event);
         input_.endStep(); accumulator_ -= fixed; simulated += fixed; ++steps_;
-        simulationMilliseconds_ += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count();
+        const double stepMilliseconds=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+        simulationMilliseconds_+=stepMilliseconds;lastStepSamples_.push_back(stepMilliseconds);
     }
     return simulated;
 }

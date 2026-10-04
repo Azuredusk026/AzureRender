@@ -41,6 +41,7 @@ struct GpuAllocatorStatistics {
     std::uint64_t liveImages = 0;
     VkDeviceSize bufferBytes = 0;
     VkDeviceSize imageBytes = 0;
+    VkDeviceSize liveBufferBytes=0,liveImageBytes=0,deviceLocalPeakBytes=0;
 };
 
 // Allocation interface. The production implementation is GpuAllocator (VMA);

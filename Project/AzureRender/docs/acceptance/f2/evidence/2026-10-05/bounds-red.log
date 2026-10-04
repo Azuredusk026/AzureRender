@@ -1,0 +1,9 @@
+[1/2] Building CXX object CMakeFiles\AzureAnimationPoseTests.dir\tests\AnimationPoseTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureAnimationPoseTests.dir/tests/AnimationPoseTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DOPENEXR_DLL -I..\..\src -IC:\VulkanSDK\1.4.350.0\Include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureAnimationPoseTests.dir\tests\AnimationPoseTests.cpp.obj /FdCMakeFiles\AzureAnimationPoseTests.dir\ /FS -c ..\..\tests\AnimationPoseTests.cpp
+..\..\tests\AnimationPoseTests.cpp(51): error C3083: “JointBounds”:“::”左侧的符号必须是一种类型
+..\..\tests\AnimationPoseTests.cpp(51): error C2039: "build": 不是 "azurerender" 的成员
+..\..\src\render/DeformedBounds.hpp(7): note: 参见“azurerender”的声明
+..\..\tests\AnimationPoseTests.cpp(51): error C3861: “build”: 找不到标识符
+..\..\tests\AnimationPoseTests.cpp(53): error C3536: “envelope”: 初始化之前无法使用
+ninja: build stopped: subcommand failed.

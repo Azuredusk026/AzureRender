@@ -1,0 +1,12 @@
+[1/2] Building CXX object CMakeFiles\AzureRenderNullRhiTests.dir\tests\NullRhiTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureRenderNullRhiTests.dir/tests/NullRhiTests.cpp.obj
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP  -I..\..\src -IC:\VulkanSDK\1.4.350.0\include -MDd /EHsc /utf-8 -std:c++17 /showIncludes /FoCMakeFiles\AzureRenderNullRhiTests.dir\tests\NullRhiTests.cpp.obj /FdCMakeFiles\AzureRenderNullRhiTests.dir\ /FS -c ..\..\tests\NullRhiTests.cpp
+..\..\tests\NullRhiTests.cpp(100): error C2039: "liveBufferBytes": 不是 "azurerender::rhi::GpuAllocatorStatistics" 的成员
+..\..\src\rhi/IGpuAllocator.hpp(37): note: 参见“azurerender::rhi::GpuAllocatorStatistics”的声明
+..\..\tests\NullRhiTests.cpp(104): error C2039: "liveBufferBytes": 不是 "azurerender::rhi::GpuAllocatorStatistics" 的成员
+..\..\src\rhi/IGpuAllocator.hpp(37): note: 参见“azurerender::rhi::GpuAllocatorStatistics”的声明
+..\..\tests\NullRhiTests.cpp(109): error C2039: "liveImageBytes": 不是 "azurerender::rhi::GpuAllocatorStatistics" 的成员
+..\..\src\rhi/IGpuAllocator.hpp(37): note: 参见“azurerender::rhi::GpuAllocatorStatistics”的声明
+..\..\tests\NullRhiTests.cpp(112): error C2039: "liveImageBytes": 不是 "azurerender::rhi::GpuAllocatorStatistics" 的成员
+..\..\src\rhi/IGpuAllocator.hpp(37): note: 参见“azurerender::rhi::GpuAllocatorStatistics”的声明
+ninja: build stopped: subcommand failed.

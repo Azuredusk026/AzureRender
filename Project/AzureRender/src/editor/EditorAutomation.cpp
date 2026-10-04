@@ -9,6 +9,9 @@ void EditorAutomation::advance(std::uint64_t frame,EditorSession& session){
     if(auto* scripts=session.scripts()){scriptErrors_=std::max(scriptErrors_,scripts->errors().size());if(scriptErrors_)recovered_=std::max(recovered_,scripts->activeCount());}
     while(cursor_<actions_.size()&&actions_[cursor_].at("frame").get<std::uint64_t>()<=frame){
         if(actions_[cursor_].at("command")=="wait-build" && session.building())return;
+        if(actions_[cursor_].at("command")=="wait-level" && session.levels()
+            && session.levels()->lastError().empty()
+            && session.levels()->currentReference()!=actions_[cursor_].at("value").get<std::string>())return;
         const auto& action=actions_[cursor_++];const auto command=action.at("command").get<std::string>();auto start=std::chrono::steady_clock::now();bool passed=true;std::string error;
         try{auto& context=session.context();
             const std::set<std::string> editing={"import","place","node","prefab","component-add","component-field","transform","rename","duplicate","delete","preview","clear-preview"};
@@ -37,6 +40,10 @@ void EditorAutomation::advance(std::uint64_t frame,EditorSession& session){
             }
             else if(command=="delete")context.deleteSelection();
             else if(command=="level"){if(!session.levels())throw std::logic_error("Level requires Play");session.levels()->request(action.at("value").get<std::string>());}
+            else if(command=="wait-level"){
+                if(!session.levels())throw std::logic_error("Level requires Play");
+                if(!session.levels()->lastError().empty())throw std::runtime_error(session.levels()->lastError());
+            }
             else if(command=="write-script"){
                 const auto path=context.project().resolve(action.at("path").get<std::string>());if(path.extension()!=".lua")throw std::invalid_argument("Script repair expects a Lua asset");
                 std::ofstream output(path);output<<action.at("value").get<std::string>();output.close();if(!output)throw std::runtime_error("Cannot save script repair");

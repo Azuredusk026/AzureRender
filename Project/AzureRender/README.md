@@ -56,6 +56,7 @@ $env:VCPKG_ROOT = (Resolve-Path "<vcpkg 目录>").Path
 - [资产、场景与编辑器](docs/assets-and-editor.md)
 - [项目编辑、运行控制与游戏界面](docs/runtime/editor-game-ui.md)
 - [游戏模板、编辑器构建与 Windows 发布](docs/runtime/game-publishing.md)
+- [可玩关卡性能与加载](docs/runtime/playable-performance.md)
 - [开发、测试与发布](docs/development-and-release.md)
 - [参数与接口参考](docs/reference.md)
 
@@ -108,6 +109,6 @@ Lua 角色控制、反射访问、触发器和关卡切换见 [脚本与玩法](
 
 Windows 主构建入口为 `msvc-debug` 与 `msvc-release`。源码和产物通过哈希记录关联，素材通过参数化报告准入，见[构建复现说明](docs/runtime/build-reproducibility.md)。
 
-F1、R5、G5、G6、U1 为 Complete，F2 为 Active。P1 为 Planned。路线覆盖外观、真实动作、3C、交互和编辑器制作。构建复现、资产加载、性能和发布随阶段验收。
+F1、R5、G5、G6、U1、F2 为 Complete。P1 为 Active。路线覆盖外观、真实动作、3C、交互和编辑器制作。构建复现、资产加载、性能和发布随阶段验收。
 
 公开探索项目位于 `assets_public/exploration/`。玩法和本机主角项目入口见[第三人称探索关卡](docs/runtime/exploration-gameplay.md)。任务包含领取目标、三件收集物、开门、完成与重开。

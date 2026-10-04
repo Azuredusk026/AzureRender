@@ -1,5 +1,6 @@
 #pragma once
 #include "runtime/GameRuntime.hpp"
+#include "runtime/LevelSession.hpp"
 #include <nlohmann/json.hpp>
 #include <vector>
 namespace azurerender {
@@ -23,17 +24,25 @@ public:
                 for(const char* field:{"x","y","scroll"})
                     if(!std::isfinite(action.value(field,0.0F)))throw std::invalid_argument("Invalid replay camera input");
             }
-            else throw std::invalid_argument("Unknown replay action");
+            else if(kind=="preload-level" || kind=="load-level"){
+                if(action.at("reference").get<std::string>().empty())throw std::invalid_argument("Empty replay level reference");
+            }else if(kind!="cancel-level")throw std::invalid_argument("Unknown replay action");
             replay.actions_.push_back(action);
         }
         return replay;
     }
-    void apply(std::uint64_t frame,GameRuntime& game) {
+    void apply(std::uint64_t frame,GameRuntime& game,LevelSession* levels=nullptr) {
         while(cursor_<actions_.size()&&actions_[cursor_].at("frame").get<std::uint64_t>()<=frame) {
             const auto& action=actions_[cursor_++];const auto kind=action.at("action").get<std::string>();
             if(kind=="key")game.input().key(action.at("key").get<int>(),action.at("down").get<bool>());
             else if(kind=="focus")game.input().setFocused(action.at("focused").get<bool>());
-            else game.cameraInput(action.value("x",0.0F),action.value("y",0.0F),action.value("scroll",0.0F));
+            else if(kind=="camera")game.cameraInput(action.value("x",0.0F),action.value("y",0.0F),action.value("scroll",0.0F));
+            else {
+                if(!levels)throw std::logic_error("Level replay requires a level session");
+                if(kind=="preload-level")levels->preload(action.at("reference").get<std::string>());
+                else if(kind=="load-level")levels->request(action.at("reference").get<std::string>());
+                else levels->cancelPending();
+            }
         }
     }
     std::size_t consumed() const {return cursor_;}

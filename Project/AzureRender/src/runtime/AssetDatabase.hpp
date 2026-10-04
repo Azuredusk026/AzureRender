@@ -1,6 +1,7 @@
 #pragma once
 #include "runtime/Project.hpp"
 #include <cstdint>
+#include <functional>
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>
@@ -15,7 +16,9 @@ struct AssetRecord {
 class AssetDatabase {
 public:
     explicit AssetDatabase(Project project) : project_(std::move(project)) {}
-    std::vector<std::string> refresh();
+    struct RefreshStatistics { std::uint64_t sourceBytesRead=0, filesRead=0, filesReused=0; };
+    const RefreshStatistics& refreshStatistics() const noexcept { return statistics_; }
+    std::vector<std::string> refresh(bool verifyAll=false, std::function<void()> check={});
     std::string idForPath(const std::string& virtualPath) const;
     std::filesystem::path resolve(const std::string& id) const;
     std::filesystem::path resolveReference(const std::string& reference) const;
@@ -27,5 +30,14 @@ public:
 private:
     Project project_;
     std::map<std::string, AssetRecord> records_;
+    RefreshStatistics statistics_;
+    struct SourceState {
+        std::filesystem::file_time_type sourceTime, metadataTime;
+        std::uintmax_t size=0;
+        std::string id;
+        nlohmann::json metadata, document;
+        std::uint64_t contentHash=0, baseFingerprint=0;
+    };
+    std::map<std::filesystem::path,SourceState> sources_;
 };
 } // namespace azurerender

@@ -68,6 +68,7 @@ public:
     }
 
 private:
+    void updateMemoryHighWater();
     VmaAllocator allocator_ = nullptr;
     GpuAllocatorStatistics statistics_;
 };

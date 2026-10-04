@@ -2,6 +2,7 @@
 #include "runtime/LevelSession.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <thread>
 using namespace azurerender;
 void check(bool condition,const char* message){if(!condition)throw std::runtime_error(message);}
 int main(int argc,char** argv){
@@ -20,7 +21,11 @@ int main(int argc,char** argv){
   check(presentation.animations().at(0).time==time,"Paused animation must stay frozen");
   const auto sounds=presentation.soundCount();runtime.resume();runtime.world().destroyEntity(entity);presentation.update(0.1);
   check(presentation.animations().empty() && presentation.soundCount()+1==sounds,"Destroyed entities must release their presentation");
-  levels.request("assets:/destination.azurelevel");check(levels.poll(),"Level must change");presentation.update(0.1);
+  levels.preload("assets:/destination.azurelevel");
+  const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
+  do{levels.poll();std::this_thread::yield();}while(levels.loading() && std::chrono::steady_clock::now()<deadline);
+  check(levels.preloaded("assets:/destination.azurelevel"),"Background candidate must become ready");
+  levels.request("assets:/destination.azurelevel");check(levels.poll(),"Prepared level must change at the boundary");presentation.update(0.1);
   check(presentation.errors().empty(),"Public presentation assets must be valid");
   std::cout<<"World animation, real audio, pause, entity destruction and level replacement passed\n";
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

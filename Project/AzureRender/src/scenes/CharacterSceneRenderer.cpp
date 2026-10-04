@@ -223,7 +223,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     return caps;
 }
 
-void CharacterSceneRenderer::onLoad(const RenderContext& context) {
+void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
         throw std::runtime_error(
@@ -255,7 +255,8 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     scene_ = context.scene;
     sceneWorldCoordinates_ = context.sceneWorldCoordinates;
     const std::string resolvedAssetPath = context.scene.resources[0].path;
-    asset_ = loadGltfAsset(resolvedAssetPath);
+    asset_ = context.preparedMeshes && context.preparedMeshes->count(std::filesystem::path(resolvedAssetPath).lexically_normal().generic_string())
+        ? *context.preparedMeshes->at(std::filesystem::path(resolvedAssetPath).lexically_normal().generic_string()) : loadGltfAsset(resolvedAssetPath);
     for (const AssetMaterial& material : asset_.materials) {
         if (!material.faceSdf.present) {
             continue;
@@ -343,22 +344,49 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context) {
     animationTime_ = 0.0F;
     animationPlaying_ = true;
 
-    // GPU resources (mirrors the former application init order).
-    createVertexBuffer();
-    createIndexBuffer();
-    createTexture();
-    createAdditionalResources();
-    createUniformBuffers();
-    createJointBuffers();
-    createComputeSkinningResources();
-    createOitIndexBuffers();
-    createDescriptorSetLayout();
-    createDescriptorPool();
-    createDescriptorSets();
-    createGraphicsPipeline(context);
+    const scene::ResourceLayout layout(scene_);
+    jointBounds_.clear();jointBounds_.push_back(JointBounds::build(asset_));
+    loadJobs_.push_back([this]{createVertexBuffer();});
+    const auto materials=[this](const LoadedAsset& mesh,std::vector<GpuMaterial>& gpu){
+        gpu.resize(mesh.materials.size());
+        for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<8;++slot)
+            loadJobs_.push_back([this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
+    };
+    materials(asset_,gpuMaterials_);
+    loadJobs_.push_back([this]{createTexture(false);});
+    std::uint32_t textureBase=kSharedTextureSlots+kMaterialTextureSlots*static_cast<std::uint32_t>(asset_.materials.size());
+    std::size_t materialBase=asset_.materials.size();
+    for(std::size_t key=1;key<layout.paths.size();++key){
+        auto resource=std::make_unique<AdditionalResource>();resource->path=layout.paths[key];
+        resource->asset=context.preparedMeshes && context.preparedMeshes->count(resource->path)
+            ? *context.preparedMeshes->at(resource->path):loadGltfAsset(resource->path);
+        resource->textureBase=textureBase;resource->globalMaterialBase=materialBase;
+        textureBase+=kMaterialTextureSlots*static_cast<std::uint32_t>(resource->asset.materials.size());materialBase+=resource->asset.materials.size();
+        auto* item=resource.get();jointBounds_.push_back(JointBounds::build(item->asset));
+        loadJobs_.push_back([this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer);});
+        materials(item->asset,item->gpuMaterials);additionalResources_.push_back(std::move(resource));
+    }
+    loadJobs_.push_back([this]{createUniformBuffers();createJointBuffers();});
+    loadJobs_.push_back([this]{createComputeSkinningResources();createOitIndexBuffers();});
+    loadJobs_.push_back([this]{createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
+    loadJobs_.push_back([this,context]{createGraphicsPipeline(context);buildSceneState();});
+}
 
-    buildSceneState();
-
+void CharacterSceneRenderer::onLoad(const RenderContext& context){
+    while(!prepareLoad(context,std::numeric_limits<double>::max())){}
+}
+bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double budgetMs){
+    const auto start=std::chrono::steady_clock::now();
+    if(!loadInitialized_){loadInitialized_=true;initializeLoad(context);}
+    do{
+        if(loadJobs_.empty())return true;
+        auto job=std::move(loadJobs_.front());loadJobs_.pop_front();job();
+    }while(std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count()<budgetMs);
+    return loadJobs_.empty();
+}
+bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(scene::ResourceLayout(scene_).paths!=scene::ResourceLayout(context.scene).paths)return false;
+    scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
@@ -501,7 +529,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         }
         std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
             pose.jointMatrices.data(), pose.jointMatrices.size()*sizeof(std::array<float,16>));
-        auto bounds = morphBounds(mesh, morph, &pose.jointMatrices);
+        auto bounds = jointBounds_.at(instance.meshKey).evaluate(mesh, morph, pose.jointMatrices);
         bounds = expandBounds(bounds, materialDisplacementMargin(mesh));
         if (gizmoActive_) {
             const auto gizmo = multiply(translation(gizmoTranslation_[0],gizmoTranslation_[1],gizmoTranslation_[2]),
@@ -534,10 +562,10 @@ std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
 }
 
 void CharacterSceneRenderer::rebuildSceneInstances() {
-    const auto primaryBounds = morphBounds(asset_, renderSettings_->morphWeights);
+    const auto primaryBounds = jointBounds_.at(0).evaluate(asset_, renderSettings_->morphWeights, asset_.jointMatrices);
     std::vector<scene::AxisAlignedBounds> meshBounds{primaryBounds};
     for (const auto& resource : additionalResources_)
-        meshBounds.push_back(morphBounds(resource->asset, renderSettings_->morphWeights));
+        meshBounds.push_back(jointBounds_.at(meshBounds.size()).evaluate(resource->asset, renderSettings_->morphWeights, resource->asset.jointMatrices));
     for (std::size_t meshKey = 0; meshKey < meshBounds.size(); ++meshKey) {
         const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey - 1]->asset;
         meshBounds[meshKey] = expandBounds(meshBounds[meshKey], materialDisplacementMargin(mesh));
@@ -584,19 +612,11 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     } else {
         const std::vector<Matrix4> nodeWorldTransforms =
             scene::resolveNodeWorldTransforms(scene_);
-        const auto meshKeyOf = [this](const scene::SceneNodeDesc& node) {
-            for (std::size_t resourceIndex = 0;
-                 resourceIndex < scene_.resources.size();
-                 ++resourceIndex) {
-                if (scene_.resources[resourceIndex].id == node.resourceId) {
-                    return resourceIndex;
-                }
-            }
-            return scene_.resources.size();
-        };
+        const scene::ResourceLayout layout(scene_);
+        const auto meshKeyOf = [&](const scene::SceneNodeDesc& node) { return layout.meshKey(node.resourceId); };
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.
-        for (std::size_t meshKey = 0; meshKey < scene_.resources.size();
+        for (std::size_t meshKey = 0; meshKey < meshBounds.size();
              ++meshKey) {
             for (std::size_t nodeIndex = 0; nodeIndex < scene_.nodes.size();
                  ++nodeIndex) {
@@ -981,7 +1001,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
     (void)context;
-    destroyResources();
+    loadJobs_.clear();loadInitialized_=false;destroyResources();
 }
 
 void CharacterSceneRenderer::appendHudText(std::ostringstream& text) const {
@@ -1056,6 +1076,19 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     const std::string animationName = asset_.animations.empty()
         ? std::string()
         : asset_.animations[animationIndex_].name;
+    std::size_t triangles=0,skinned=0,transparent=0;
+    const auto& instances=instanceSnapshot_?instanceSnapshot_->instances:sceneInstances_;
+    for(const auto& instance:instances){
+        const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
+        triangles+=mesh.indices.size()/3;if(mesh.hasSkin)skinned+=mesh.vertices.size();
+        for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
+    }
+    json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"sceneTriangles\": " << triangles << ",\n"
+         << "  \"skinnedVertices\": " << skinned << ",\n"
+         << "  \"transparentTriangles\": " << transparent << ",\n"
+         << "  \"jointCapacity\": " << jointCapacity_ << ",\n"
+         << "  \"vertexCapacity\": " << vertexCapacity_ << ",\n";
     json << "  \"animationIndex\": " << animationIndex_ << ",\n"
          << "  \"animation\": " << std::quoted(animationName) << ",\n";
 }
@@ -1201,80 +1234,26 @@ void CharacterSceneRenderer::uploadTextureData(
     texture.sampler = rhi_->createSampler(samplerDesc);
 }
 
-void CharacterSceneRenderer::uploadMaterialTextures(
-    const LoadedAsset& asset,
-    std::vector<GpuMaterial>& gpuMaterials) {
+void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std::vector<GpuMaterial>& gpuMaterials){
     gpuMaterials.resize(asset.materials.size());
-    for (std::size_t index = 0; index < asset.materials.size(); ++index) {
-        const AssetMaterial& material = asset.materials[index];
-        GpuMaterial& gpuMaterial = gpuMaterials[index];
-        uploadTextureData(
-            material.baseColorPixels,
-            material.baseColorWidth,
-            material.baseColorHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.baseColor);
-        uploadTextureData(
-            material.normalPixels,
-            material.normalWidth,
-            material.normalHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.normal);
-        uploadTextureData(
-            material.metallicRoughnessPixels,
-            material.metallicRoughnessWidth,
-            material.metallicRoughnessHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.metallicRoughness);
-        uploadTextureData(
-            material.specularEmissivePixels,
-            material.specularEmissiveWidth,
-            material.specularEmissiveHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.specularEmissive);
-        uploadTextureData(
-            material.styleMaskPixels,
-            material.styleMaskWidth,
-            material.styleMaskHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.styleMask);
-        uploadTextureData(
-            material.matcapPixels,
-            material.matcapWidth,
-            material.matcapHeight,
-            VK_FORMAT_R8G8B8A8_SRGB,
-            false,
-            gpuMaterial.matcap);
-        uploadTextureData(
-            material.hairDataPixels,
-            material.hairDataWidth,
-            material.hairDataHeight,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.hairData);
-        const std::vector<std::uint8_t> faceSdfPixels =
-            material.faceSdf.present
-            ? material.faceSdf.pixels
-            : std::vector<std::uint8_t>{
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-            };
-        uploadTextureData(
-            faceSdfPixels,
-            material.faceSdf.present ? material.faceSdf.width : 2,
-            material.faceSdf.present ? material.faceSdf.height : 2,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            false,
-            gpuMaterial.faceSdf);
+    for(std::size_t index=0;index<asset.materials.size();++index)for(unsigned slot=0;slot<8;++slot)uploadMaterialTexture(asset,gpuMaterials,index,slot);
+}
+void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
+    const auto& m=asset.materials.at(index);auto& g=materials.at(index);
+    switch(slot){
+    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.baseColor);break;
+    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.normal);break;
+    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.metallicRoughness);break;
+    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.specularEmissive);break;
+    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.styleMask);break;
+    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.matcap);break;
+    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.hairData);break;
+    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,VK_FORMAT_R8G8B8A8_UNORM,false,g.faceSdf);break;}
+    default:throw std::runtime_error("Invalid material upload slot");
     }
 }
 
-void CharacterSceneRenderer::createTexture() {
+void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
 
     const auto loadPpmTexture = [](const std::string& path) {
         std::ifstream stream(path);
@@ -1316,7 +1295,7 @@ void CharacterSceneRenderer::createTexture() {
         return LoadedPpm{std::move(pixels), width, height};
     };
 
-    uploadMaterialTextures(asset_, gpuMaterials_);
+    if(uploadMaterials)uploadMaterialTextures(asset_, gpuMaterials_);
 
     constexpr std::uint32_t kEnvironmentWidth = 512;
     constexpr std::uint32_t kEnvironmentHeight = 256;
@@ -1546,7 +1525,8 @@ void CharacterSceneRenderer::createEnvironmentPrefilter() {
 }
 
 void CharacterSceneRenderer::createAdditionalResources() {
-    if (scene_.resources.size() <= 1) {
+    const scene::ResourceLayout layout(scene_);
+    if (layout.paths.size() <= 1) {
         return;
     }
     std::uint32_t jointBase =
@@ -1556,9 +1536,9 @@ void CharacterSceneRenderer::createAdditionalResources() {
         + kMaterialTextureSlots
             * static_cast<std::uint32_t>(asset_.materials.size());
     std::size_t globalMaterialBase = asset_.materials.size();
-    for (std::size_t index = 1; index < scene_.resources.size(); ++index) {
+    for (std::size_t index = 1; index < layout.paths.size(); ++index) {
         auto resource = std::make_unique<AdditionalResource>();
-        resource->path = scene_.resources[index].path;
+        resource->path = layout.paths[index];
         resource->asset = loadGltfAsset(resource->path);
         createMeshBuffers(
             resource->asset, resource->vertexBuffer, resource->indexBuffer);
@@ -1743,7 +1723,7 @@ void CharacterSceneRenderer::createJointBuffers() {
     for (std::size_t key = 0; key <= additionalResources_.size(); ++key) {
         const auto& mesh = key == 0 ? asset_ : additionalResources_[key-1]->asset;
         const auto count = scene_.nodes.size() == 1 ? qaInstanceCount_ : static_cast<std::uint32_t>(std::count_if(
-            scene_.nodes.begin(), scene_.nodes.end(), [&](const auto& node) { return node.resourceId == scene_.resources[key].id; }));
+            scene_.nodes.begin(), scene_.nodes.end(), [&](const auto& node) { return scene::ResourceLayout(scene_).meshKey(node.resourceId) == key; }));
         jointCapacity_ += static_cast<std::uint32_t>(mesh.jointMatrices.size()) * std::max(count, 1U);
         vertexCapacity_ += static_cast<std::uint32_t>(mesh.vertices.size()) * std::max(count, 1U);
     }
@@ -2980,7 +2960,10 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
         const auto& pose = instancePoses_.at(instance.sourceIndex);
+        std::vector<Vector3> positions(mesh.vertices.size());
+        std::vector<bool> prepared(mesh.vertices.size(),false);
         const auto vertexPosition = [&](std::uint32_t index) {
+            if(prepared.at(index))return positions[index];
             const auto& vertex = mesh.vertices.at(index);
             Vector3 position{};
             for (unsigned axis = 0; axis < 3; ++axis) position[axis] = vertex.position[axis]
@@ -2990,7 +2973,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                 const auto transformed = transformPosition(pose.pose.jointMatrices.at(vertex.joints[joint]), position);
                 for (unsigned axis = 0; axis < 3; ++axis) skinned[axis] += transformed[axis]*vertex.weights[joint];
             }
-            return skinned;
+            positions[index]=skinned;prepared[index]=true;return skinned;
         };
         std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {

@@ -10,11 +10,16 @@
 namespace azurerender {
 namespace {
 using Json = nlohmann::json;
-std::string bytes(const std::filesystem::path& path) {
-    std::ifstream input(path, std::ios::binary);
+std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
+    std::ifstream input(path, std::ios::binary|std::ios::ate);
     if (!input) throw std::runtime_error("Cannot read asset: " + path.string());
-    std::string data{std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>()};
-    if (input.bad()) throw std::runtime_error("Asset read failed: " + path.string());
+    const auto size=input.tellg();if(size<0)throw std::runtime_error("Cannot size asset: "+path.string());
+    std::string data(static_cast<std::size_t>(size),'\0');input.seekg(0);
+    for(std::size_t offset=0;offset<data.size();){
+        if(check)check();const auto count=std::min<std::size_t>(1024*1024,data.size()-offset);
+        input.read(data.data()+offset,static_cast<std::streamsize>(count));offset+=count;
+    }
+    if (!input) throw std::runtime_error("Asset read failed: " + path.string());
     return data;
 }
 std::uint64_t hash(const std::string& data) {
@@ -57,16 +62,32 @@ void cache(const std::filesystem::path& path, const AssetRecord& record) {
     write(path, data);
 }
 }
-std::vector<std::string> AssetDatabase::refresh() {
+std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<void()> check) {
+    statistics_={};
     std::map<std::string, AssetRecord> candidate;
     std::map<std::string, Json> metadata;
-    std::map<std::string, std::string> contents, paths;
+    std::map<std::string, std::string> paths;
+    std::map<std::filesystem::path,SourceState> sources;
+    std::map<std::string,Json> documents;
     for (const auto& mount : project_.mounts) {
         for (const auto& entry : std::filesystem::recursive_directory_iterator(mount.second)) {
+            if(check)check();
             if (!entry.is_regular_file() || entry.path().extension() == ".azmeta" || entry.path().extension() == ".tmp") continue;
             const auto virtualPath = mount.first + ":/" + entry.path().lexically_relative(mount.second).generic_string();
             const auto path = project_.resolve(virtualPath);
             const auto sidecar = path.string() + ".azmeta";
+            const auto previous=sources_.find(path);
+            const auto time=std::filesystem::last_write_time(path);
+            const auto size=std::filesystem::file_size(path);
+            if(!verifyAll && previous!=sources_.end() && std::filesystem::exists(sidecar)
+                && previous->second.sourceTime==time && previous->second.size==size
+                && previous->second.metadataTime==std::filesystem::last_write_time(sidecar)){
+                const auto& state=previous->second;
+                if(!candidate.emplace(state.id,AssetRecord{state.id,virtualPath,path,state.baseFingerprint,state.contentHash,{}}).second)
+                    throw std::runtime_error("Duplicate asset UUID: "+state.id);
+                metadata[state.id]=state.metadata;documents[state.id]=state.document;paths[virtualPath]=state.id;
+                sources[path]=state;++statistics_.filesReused;continue;
+            }
             Json meta;
             if (std::filesystem::exists(sidecar)) meta = Json::parse(bytes(sidecar));
             else { meta = {{"schemaVersion", 1}, {"id", uuid()}, {"settings", Json::object()}, {"dependencies", Json::array()}}; write(sidecar, meta.dump(2)); }
@@ -74,13 +95,19 @@ std::vector<std::string> AssetDatabase::refresh() {
             const auto id = meta.at("id").get<std::string>();
             if (!std::regex_match(id, std::regex("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")))
                 throw std::runtime_error("Invalid asset UUID: " + sidecar);
-            const auto source = bytes(path);
+            const auto source = bytes(path,check);
+            statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
-            metadata[id] = meta; contents[id] = source; paths[virtualPath] = id;
+            const auto extension=path.extension().string();Json document;
+            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab")document=Json::parse(source);
+            const auto& record=candidate.at(id);
+            sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,meta,document,record.contentHash,record.fingerprint};
+            metadata[id] = meta; documents[id]=std::move(document); paths[virtualPath] = id;
         }
     }
     for (auto& entry : candidate) {
+        if(check)check();
         auto& record = entry.second;
         std::set<std::string> dependencies;
         const auto add = [&](const std::string& reference) {
@@ -97,7 +124,7 @@ std::vector<std::string> AssetDatabase::refresh() {
         for (const auto& dep : metadata.at(record.id).value("dependencies", Json::array())) add(dep.get<std::string>());
         const auto extension = record.path.extension().string();
         if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab") {
-            const Json document = Json::parse(contents.at(record.id));
+            const Json& document = documents.at(record.id);
             const auto walk = [&](const Json& value, auto&& self) -> void {
                 if (value.is_object()) for (const auto& field : value.items()) {
                     if ((field.key() == "asset" || field.key() == "prefab") && field.value().is_string()) add(field.value().get<std::string>());
@@ -137,7 +164,9 @@ std::vector<std::string> AssetDatabase::refresh() {
         }
     }
     for (const auto& old : records_) if (!candidate.count(old.first)) changed.push_back(old.first);
+    if(check)check();
     records_.swap(candidate);
+    sources_.swap(sources);
     return changed;
 }
 std::string AssetDatabase::idForPath(const std::string& path) const {

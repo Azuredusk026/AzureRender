@@ -120,5 +120,8 @@ int main() { try {
     auto replay=GameInputReplay::parse(nlohmann::json::parse(R"({"schemaVersion":1,"actions":[{"frame":0,"action":"key","key":87,"down":true},{"frame":2,"action":"focus","focused":false},{"frame":3,"action":"focus","focused":true}]})"));
     replay.apply(0,a);check(a.input().down("move-forward"),"Replay must use the normal input actions");
     replay.apply(3,a);check(!a.input().down("move-forward")&&replay.consumed()==3,"Replay focus loss must release held keys");
+    auto loadingReplay=GameInputReplay::parse(nlohmann::json::parse(R"({"schemaVersion":1,"actions":[{"frame":0,"action":"preload-level","reference":"assets:/next.azurelevel"},{"frame":1,"action":"cancel-level"}]})"));
+    bool missingSession=false;try{loadingReplay.apply(0,a);}catch(const std::exception&){missingSession=true;}
+    check(missingSession,"Level replay must reject a missing level session");
     std::cout<<"Third-person camera, obstruction, camera-relative motion, fixed-step, focus, sweep and migration passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;} }

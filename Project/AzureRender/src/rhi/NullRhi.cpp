@@ -52,12 +52,14 @@ GpuBuffer NullGpuAllocator::createBuffer(
     ++statistics_.bufferAllocations;
     ++statistics_.liveBuffers;
     statistics_.bufferBytes += size;
+    statistics_.liveBufferBytes+=size;
     return result;
 }
 
 void NullGpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
     if (buffer.buffer != VK_NULL_HANDLE && statistics_.liveBuffers > 0) {
         --statistics_.liveBuffers;
+        statistics_.liveBufferBytes-=buffer.size;
     }
     buffer = GpuBuffer{};
 }
@@ -75,12 +77,14 @@ GpuImage NullGpuAllocator::createImage(
     ++statistics_.liveImages;
     statistics_.imageBytes += static_cast<VkDeviceSize>(createInfo.extent.width)
         * createInfo.extent.height * 4;
+    statistics_.liveImageBytes+=static_cast<VkDeviceSize>(result.width)*result.height*4;
     return result;
 }
 
 void NullGpuAllocator::destroyImage(GpuImage& image) noexcept {
     if (image.image != VK_NULL_HANDLE && statistics_.liveImages > 0) {
         --statistics_.liveImages;
+        statistics_.liveImageBytes-=static_cast<VkDeviceSize>(image.width)*image.height*4;
     }
     image = GpuImage{};
 }

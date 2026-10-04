@@ -58,6 +58,10 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
             || !std::isfinite(light.radius) || light.radius <= 0) throw std::runtime_error("Invalid level light");
         level.scene.lights.push_back(std::move(light));
     }
+    for(const auto& resource:level.scene.resources){
+        level.resourceKey+=resource.path.generic_string()+":";
+        for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
+    }
     RuntimeLifecycle validation; validation.loadScene(level.scene);
     return level;
 }

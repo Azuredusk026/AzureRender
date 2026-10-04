@@ -151,7 +151,12 @@ std::vector<RecordedCall> runFrame(
     }
     if (computeSkinning) {
         const auto& skin = graph.passes().front();
-        const auto meshCount = context.scene.resources.size();
+        // Both identities above refer to one immutable source mesh. Each
+        // instance must still dispatch into its own pose/output slice.
+        std::set<std::string> meshPaths;
+        for (const auto& resource : context.scene.resources)
+            meshPaths.insert(std::filesystem::path(resource.path).lexically_normal().generic_string());
+        const auto meshCount = meshPaths.size();
         if (skin.writes.size() != 1 || skin.reads.size() != meshCount + 1
             || graph.resources().at(skin.writes.front()).name != "character-instance-skinned")
             throw std::runtime_error("Batched skinning must declare every mesh and shared joints");

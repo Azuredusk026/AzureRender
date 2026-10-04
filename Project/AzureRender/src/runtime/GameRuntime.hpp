@@ -12,6 +12,7 @@ public:
     InputActions& input() noexcept { return input_; }
     PhysicsWorld& physics() noexcept { return physics_; }
     double simulationMilliseconds() const noexcept { return simulationMilliseconds_; }
+    const std::vector<double>& lastStepSamples() const noexcept { return lastStepSamples_; }
     std::uint64_t steps() const noexcept { return steps_; }
     void setEventHandler(std::function<void(const PhysicsEvent&)> handler) { eventHandler_ = std::move(handler); }
     void setBeforeStep(std::function<void(double)> handler) { beforeStep_ = std::move(handler); }
@@ -32,6 +33,7 @@ private:
     InputActions input_;
     PhysicsWorld physics_;
     double simulationMilliseconds_ = 0;
+    std::vector<double> lastStepSamples_;
     double accumulator_ = 0;
     std::uint64_t steps_ = 0;
     std::function<void(const PhysicsEvent&)> eventHandler_;

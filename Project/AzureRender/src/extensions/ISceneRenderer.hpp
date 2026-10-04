@@ -40,6 +40,10 @@ public:
     // device/extents/formats/render passes are valid from this call until
     // onUnload.
     virtual void onLoad(const RenderContext& context) = 0;
+    virtual bool prepareLoad(const RenderContext& context,double budgetMs) {
+        (void)budgetMs;onLoad(context);return true;
+    }
+    virtual bool reuseScene(const RenderContext& context) { (void)context;return false; }
 
     // Rebuilds swapchain-dependent resources after a swapchain recreate.
     virtual void onSwapchainRecreate(const RenderContext& context) = 0;

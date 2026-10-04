@@ -39,13 +39,35 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
 #endif
     return levelSession_?&levelSession_->assets():nullptr;
 }
+bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
+    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character){
+        if(preparedRenderer_){azurerender::RenderContext context;buildRenderContext(context);preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();}
+        return true;
+    }
+    azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();context.preparedMeshes=&level.preparedMeshes;
+    if(!preparedRenderer_ || preparedResourceKey_!=level.resourceKey || preparedRenderSettings_.sceneType!=level.scene.renderSettings.sceneType){
+        if(preparedRenderer_)preparedRenderer_->onUnload(context);
+        auto registry=azurerender::BuiltinRendererCatalog::createRegistry();
+        preparedRenderer_=registry.create(azurerender::sceneTypeName(level.scene.renderSettings.sceneType));
+        preparedRenderSettings_=level.scene.renderSettings;preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
+    }
+    context.renderSettings=&preparedRenderSettings_;
+    try{preparedRendererReady_=preparedRenderer_->prepareLoad(context,4.0);return preparedRendererReady_;}
+    catch(...){preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();throw;}
+}
 void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
-    vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(level preparation)");
-    const auto previousSettings=renderSettings_;azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
-    auto registry=azurerender::BuiltinRendererCatalog::createRegistry();auto prepared=registry.create(azurerender::sceneTypeName(level.scene.renderSettings.sceneType));
-    try{renderSettings_=level.scene.renderSettings;context.renderSettings=&renderSettings_;azurerender::validateSceneRendererCapabilities(prepared->capabilities());prepared->onLoad(context);}
-    catch(...){prepared->onUnload(context);renderSettings_=previousSettings;throw;}
-    if(sceneRenderer_)sceneRenderer_->onUnload(context);sceneRenderer_=std::move(prepared);
+    azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
+    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::sceneTypeName(level.scene.renderSettings.sceneType) && sceneRenderer_->reuseScene(context)){
+        renderSettings_=level.scene.renderSettings;return;
+    }
+    if(preparedResourceKey_!=level.resourceKey || !preparedRendererReady_){
+        while(!preloadLevelRenderer(level)){}
+    }
+    vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(level commit)");
+    static_cast<void>(preparedRenderer_->reuseScene(context));
+    if(sceneRenderer_)sceneRenderer_->onUnload(context);
+    sceneRenderer_=std::move(preparedRenderer_);rendererResourceKey_=level.resourceKey;
+    renderSettings_=level.scene.renderSettings;preparedResourceKey_.clear();preparedRendererReady_=false;
 }
 void AzureRenderApp::synchronizeEditorRuntime(){
 #if AZURE_WITH_EDITOR
@@ -59,7 +81,12 @@ void AzureRenderApp::synchronizeEditorRuntime(){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}
         renderSettings_=session.viewScene().renderSettings;createSceneRenderer();
-        if(session.playing()){if(session.levels())session.levels()->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});}
+        if(session.playing()){if(session.levels()){
+                rendererResourceKey_=session.levels()->current().resourceKey;
+                session.levels()->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
+                session.levels()->setPreloadHandler([this](const auto& level){return preloadLevelRenderer(level);});
+                session.levels()->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
+            }}
         else session.context().attachRenderSettings(renderSettings_);
     }
     if(!session.playing())session.context().attachRenderSettings(renderSettings_);

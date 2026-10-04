@@ -41,6 +41,7 @@ def main():
             {"frame": 17, "command": "step"},
             {"frame": 19, "command": "resume"},
             {"frame": 22, "command": "level", "value": "assets:/destination.azurelevel"},
+            {"frame": 23, "command": "wait-level", "value": "assets:/destination.azurelevel"},
             {"frame": 27, "command": "stop"},
         ]
         task = root / "actions.json"

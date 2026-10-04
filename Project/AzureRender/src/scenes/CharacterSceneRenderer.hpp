@@ -20,6 +20,8 @@
 #include <optional>
 #include <string>
 #include <vector>
+#include <deque>
+#include <functional>
 
 namespace azurerender {
 
@@ -40,6 +42,8 @@ public:
     }
     [[nodiscard]] SceneRendererCapabilities capabilities() const override;
     void onLoad(const RenderContext& context) override;
+    bool prepareLoad(const RenderContext& context,double budgetMs) override;
+    bool reuseScene(const RenderContext& context) override;
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
     void recordScene(const RenderContext& context) override;
@@ -54,6 +58,11 @@ public:
     void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
+    struct GpuMaterial;
+    void initializeLoad(const RenderContext& context);
+    std::deque<std::function<void()>> loadJobs_;
+    bool loadInitialized_=false;
+    void uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot);
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kClusterGridX = 16;
     static constexpr std::uint32_t kClusterGridY = 9;
@@ -213,6 +222,7 @@ private:
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
 
     LoadedAsset asset_;
+    std::vector<JointBounds> jointBounds_;
     std::optional<std::uint32_t> faceSdfHeadNode_;
     // Scene content snapshot from onLoad; nodes drive instance building.
     scene::SceneDescription scene_;
@@ -332,7 +342,7 @@ private:
     // Resource creation.
     void createVertexBuffer();
     void createIndexBuffer();
-    void createTexture();
+    void createTexture(bool uploadMaterials=true);
     void createEnvironmentPrefilter();
     void createAdditionalResources();
     void createComputeSkinningResources();

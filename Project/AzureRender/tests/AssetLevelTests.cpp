@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <thread>
 using namespace azurerender;
 void check(bool value) { if (!value) throw std::runtime_error("Asset/level contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data) { std::ofstream(p) << data; }
@@ -13,6 +14,14 @@ int main() {
   Project::create(root,"Assets");auto project=Project::load(root/"project.azureproject");
   write(root/"assets/data.txt","first");AssetDatabase db(project);db.refresh();
   const auto id=db.idForPath("assets:/data.txt");check(!id.empty() && db.readSource(id)=="first");
+  check(db.refresh().empty() && db.refreshStatistics().sourceBytesRead==0);
+  const auto stamp=std::filesystem::last_write_time(root/"assets/data.txt");
+  write(root/"assets/data.txt","other");std::filesystem::last_write_time(root/"assets/data.txt",stamp);
+  check(!db.refresh(true).empty() && db.readSource(id)=="other");
+  write(root/"assets/data.txt","first");db.refresh(true);
+  const auto keptRecords=db.records().size();bool cancelledRefresh=false;
+  try{db.refresh(true,[]{throw std::runtime_error("cancelled scan");});}catch(const std::exception&){cancelledRefresh=true;}
+  check(cancelledRefresh && db.records().size()==keptRecords && db.readSource(id)=="first");
   std::filesystem::rename(root/"assets/data.txt",root/"assets/moved.txt");
   std::filesystem::rename(root/"assets/data.txt.azmeta",root/"assets/moved.txt.azmeta");
   db.refresh();check(db.idForPath("assets:/moved.txt")==id && db.resolve(id).filename()=="moved.txt");
@@ -36,11 +45,36 @@ int main() {
   db.writePack(root/"pack");check(AssetDatabase::resolvePack(root/"pack",id).filename()=="moved.txt");
   write(root/"pack/assets/moved.txt","damage");bool corrupt=false;try { AssetDatabase::resolvePack(root/"pack",id); } catch (const std::exception&) { corrupt=true; }check(corrupt);
   RuntimeLifecycle runtime;runtime.start();LevelSession session(project,runtime);session.request("assets:/start.azurelevel");
-  check(session.poll() && runtime.snapshotScene().nodes[0].translation[0]==7);
+  auto settle=[&]{const auto end=std::chrono::steady_clock::now()+std::chrono::seconds(5);bool committed=false;
+    do{committed=session.poll()||committed;std::this_thread::yield();}while(session.loading()&&std::chrono::steady_clock::now()<end);check(!session.loading());return committed;};
+  check(settle() && runtime.snapshotScene().nodes[0].translation[0]==7);
+  session.preload("assets:/startup.azscene");settle();
+  check(session.preloaded("assets:/startup.azscene"));
+  int uploadPolls=0;
+  std::filesystem::copy_file(root/"assets/startup.azscene",root/"assets/preload.azscene");
+  session.setPreloadHandler([&](const Level& candidate){
+    for(const auto& resource:candidate.scene.resources)
+      check(candidate.preparedMeshes.count(resource.path.lexically_normal().generic_string())!=0);
+    return ++uploadPolls>=3;});
+  session.preload("assets:/preload.azscene");settle();
+  check(uploadPolls==3 && session.preloaded("assets:/preload.azscene"));
+  session.setReadinessHandler([](const Level&){return false;});
+  check(!session.preloaded("assets:/preload.azscene"));
+  session.setReadinessHandler({});
+  session.setPreloadHandler({});
+  write(root/"assets/moved.txt","third");session.assets().refresh(true);
+  check(!session.preloaded("assets:/startup.azscene"));
+  write(root/"assets/moved.txt","second");session.assets().refresh(true);
+  const auto originalRevision=session.revision();session.request("assets:/startup.azscene");session.cancelPending();settle();
+  check(session.revision()==originalRevision && runtime.snapshotScene().sceneId=="level");
+  session.request("assets:/missing.azurelevel");session.poll();session.cancelPending();settle();
+  check(session.lastError().empty() && runtime.snapshotScene().sceneId=="level");
+  session.request("assets:/startup.azscene");session.request("assets:/start.azurelevel");settle();
+  check(runtime.snapshotScene().sceneId=="level");
   session.setPrepareHandler([](const Level&) { throw std::runtime_error("GPU preparation failed"); });
-  session.request("assets:/startup.azscene");check(!session.poll() && runtime.snapshotScene().sceneId=="level");
+  session.request("assets:/startup.azscene");check(!settle() && runtime.snapshotScene().sceneId=="level");
   session.setPrepareHandler({});
-  const auto before=runtime.world().entityCount();session.request("assets:/missing.azurelevel");check(!session.poll());
+  const auto before=runtime.world().entityCount();session.request("assets:/missing.azurelevel");check(!settle());
   check(!session.lastError().empty() && runtime.world().entityCount()==before);
   auto broken=level;broken["prefabs"][0]["overrides"]["unknown"]={{"name","bad"}};write(root/"bad.azurelevel",broken.dump());
   bool bad=false;try { Level::load(root/"bad.azurelevel",db); }catch(const std::exception&){bad=true;}check(bad);

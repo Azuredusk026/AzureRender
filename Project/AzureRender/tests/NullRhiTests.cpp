@@ -97,15 +97,19 @@ int main() {
     std::memset(buffer.mapped, 0xAB, 256);
     assert(static_cast<unsigned char*>(buffer.mapped)[255] == 0xAB);
     assert(allocator.statistics().liveBuffers == 1);
+    assert(allocator.statistics().liveBufferBytes == 256);
     allocator.destroyBuffer(buffer);
     assert(buffer.buffer == VK_NULL_HANDLE);
     assert(allocator.statistics().liveBuffers == 0);
+    assert(allocator.statistics().liveBufferBytes == 0);
 
     auto image = allocator.createImage2D(
         64, 64, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_USAGE_SAMPLED_BIT);
     assert(image.image != VK_NULL_HANDLE);
+    assert(allocator.statistics().liveImageBytes == 16384);
     allocator.destroyImage(image);
     assert(allocator.statistics().liveImages == 0);
+    assert(allocator.statistics().liveImageBytes == 0);
 
     // The device mock mints distinct handles and logs creation.
     NullRhi rhi;

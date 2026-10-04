@@ -80,6 +80,8 @@ python tools/test_game_presentation.py --executable build/ninja-msvc-debug/Azure
 
 `build` 命令接收 `install`、`output` 和可选 `replace`。`wait-build` 按帧等待异步构建，并检查发布结果。自动化任务完成后结束烟雾运行，完整流程见 [Windows 游戏发布](game-publishing.md)。
 
+`level` 请求切换至 `value` 指定的关卡。`wait-level` 按帧等待该关卡提交。加载失败使自动化命令报错，后续命令在就绪后执行。
+
 `component-add` 和 `component-field` 使用生产组件命令。`prefab` 接收 `asset` 与 `instance`。`node` 和 `place` 可指定稳定节点身份。`select` 接收 `id` 或 `indices`，`reload` 重开保存内容。
 
 `import` 的可选 `key` 为后续放置登记资源。`place` 的 `resource` 选择该资源键。`preview` 接收状态、时间、前一状态与淡化时长。`debug-overlay` 的 `enabled` 控制调试叠加。

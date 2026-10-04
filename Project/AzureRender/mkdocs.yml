@@ -58,6 +58,7 @@ nav:
       - 独立动画与第三人称控制: runtime/third-person-animation.md
       - 第三人称探索关卡: runtime/exploration-gameplay.md
       - 资产、关卡与 Prefab: runtime/assets-levels.md
+      - 可玩关卡性能与加载: runtime/playable-performance.md
       - 反射与序列化: runtime/reflection.md
       - 引擎基础与 Player: runtime/engine-foundation.md
       - 渲染图: runtime/render-graph.md
@@ -70,6 +71,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - F2 性能与工程加固: acceptance/f2/2026-10-05.md
       - U1 关卡制作与调试: acceptance/u1/2026-10-05.md
       - G6 探索关卡与交互: acceptance/g6/2026-10-05.md
       - G5 独立动画与基础 3C: acceptance/g5/2026-10-04.md

@@ -475,6 +475,7 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
     gpuTiming_.sceneTotalMs += sceneMs;
     gpuTiming_.postProcessTotalMs += postProcessMs;
     gpuTiming_.frameTotalMs += frameMs;
+    if(gpuTiming_.frameSamplesMs.size()>=8192)gpuTiming_.frameSamplesMs.pop_front();
     gpuTiming_.frameSamplesMs.push_back(frameMs);
     if (gpuTiming_.samples == 1) {
         gpuTiming_.frameMinMs = frameMs;
@@ -530,7 +531,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
     const double frameAverage = gpuTiming_.frameTotalMs / count;
     // Percentiles describe the frames a user actually notices; a single stall
     // moves max without moving the mean, so both are reported.
-    std::vector<double> sortedFrames = gpuTiming_.frameSamplesMs;
+    std::vector<double> sortedFrames(gpuTiming_.frameSamplesMs.begin(),gpuTiming_.frameSamplesMs.end());
     std::sort(sortedFrames.begin(), sortedFrames.end());
     const auto framePercentile = [&sortedFrames](const double percent) {
         if (sortedFrames.empty()) {
@@ -620,11 +621,17 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"cpuFrame\": {\n"
         << "    \"attempts\": " << submissionCounters_.frameAttempts << ",\n"
         << "    \"completedFrames\": " << submissionCounters_.completedCpuFrames << ",\n"
+        << "    \"sampleOffsetFrame\": " << submissionCounters_.completedCpuFrames-submissionCounters_.workSamplesMs.size() << ",\n"
         << "    \"frameSlotWaitMilliseconds\": " << submissionCounters_.frameSlotWaitMilliseconds << ",\n"
         << "    \"acquireMilliseconds\": " << submissionCounters_.acquireMilliseconds << ",\n"
         << "    \"submitMilliseconds\": " << submissionCounters_.submitMilliseconds << ",\n"
         << "    \"presentMilliseconds\": " << submissionCounters_.presentMilliseconds << ",\n"
-        << "    \"cpuFrameMilliseconds\": " << submissionCounters_.cpuFrameMilliseconds << "\n"
+        << "    \"cpuFrameMilliseconds\": " << submissionCounters_.cpuFrameMilliseconds << ",\n"
+        << "    \"workSamplesMs\": " << nlohmann::json(submissionCounters_.workSamplesMs).dump() << ",\n"
+        << "    \"totalSamplesMs\": " << nlohmann::json(submissionCounters_.totalSamplesMs).dump() << ",\n"
+        << "    \"waitSamplesMs\": " << nlohmann::json(submissionCounters_.waitSamplesMs).dump() << ",\n"
+        << "    \"physicsSamplesMs\": " << nlohmann::json(submissionCounters_.physicsSamplesMs).dump() << ",\n"
+        << "    \"physicsStepCounts\": " << nlohmann::json(submissionCounters_.physicsStepCounts).dump() << "\n"
         << "  },\n"
         << "  \"submission\": {\n"
         << "    \"frames\": " << submissionCounters_.frames << ",\n"
@@ -669,8 +676,16 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "    \"bufferBytes\": "
         << gpuAllocator_.statistics().bufferBytes << ",\n"
         << "    \"imageBytes\": "
-        << gpuAllocator_.statistics().imageBytes << "\n"
+        << gpuAllocator_.statistics().imageBytes << ",\n"
+        << "    \"liveBufferBytes\": " << gpuAllocator_.statistics().liveBufferBytes << ",\n"
+        << "    \"liveImageBytes\": " << gpuAllocator_.statistics().liveImageBytes << ",\n"
+        << "    \"deviceLocalPeakBytes\": " << gpuAllocator_.statistics().deviceLocalPeakBytes << "\n"
         << "  },\n"
+        << "  \"resourceFrames\": " << resourceFrameSamples_.dump() << ",\n";
+    output << "  \"sceneWidth\": " << renderExtent_.width << ",\n"
+           << "  \"sceneHeight\": " << renderExtent_.height << ",\n";
+    if(sceneRenderer_)sceneRenderer_->appendCaptureManifestFields(output);
+    output
         << "  \"renderPath\": " << std::quoted(
                renderPathName()) << "\n"
         << "}\n";

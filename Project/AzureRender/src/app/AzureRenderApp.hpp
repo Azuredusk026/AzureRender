@@ -1,4 +1,5 @@
 #pragma once
+#include <deque>
 
 #ifndef AZURE_WITH_EDITOR
 #define AZURE_WITH_EDITOR 1
@@ -108,7 +109,7 @@ private:
         // Retained per-frame totals so the report can publish percentiles
         // instead of averages alone. Percentiles are the meaningful signal for
         // frame-time regressions because a single stall moves max but not mean.
-        std::vector<double> frameSamplesMs;
+        std::deque<double> frameSamplesMs;
     };
 
     // Per-frame draw submission counters. These are the primary evidence that
@@ -129,6 +130,8 @@ private:
         double submitMilliseconds = 0.0;
         double presentMilliseconds = 0.0;
         double cpuFrameMilliseconds = 0.0;
+        std::deque<double> workSamplesMs, totalSamplesMs, waitSamplesMs, physicsSamplesMs;
+        std::deque<std::size_t> physicsStepCounts;
         std::uint64_t workerRecordedPasses = 0;
         std::uint64_t workerRecordedChunks = 0;
         std::uint64_t frames = 0;
@@ -152,6 +155,8 @@ private:
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
     std::optional<azurerender::GameInputReplay> gameInputReplay_;
+    nlohmann::json resourceFrameSamples_=nlohmann::json::array();
+    std::uint64_t sampledLevelRevision_=0;
     nlohmann::json gameRouteFrames_=nlohmann::json::array();
     std::unique_ptr<azurerender::ScriptRuntime> scriptRuntime_;
     std::unique_ptr<azurerender::PresentationRuntime> presentationRuntime_;
@@ -272,6 +277,10 @@ private:
     bool autoRotate_ = true;
     azurerender::RenderSettings renderSettings_;
     std::unique_ptr<azurerender::ISceneRenderer> sceneRenderer_;
+    std::unique_ptr<azurerender::ISceneRenderer> preparedRenderer_;
+    std::string rendererResourceKey_, preparedResourceKey_;
+    azurerender::RenderSettings preparedRenderSettings_;
+    bool preparedRendererReady_=false;
     bool hudEnabled_ = false;
     bool editorUiEnabled_ = false;
     bool qaHarnessEnabled_ = false;
@@ -345,6 +354,7 @@ private:
     void createSyncObjects();
 
     void createSceneRenderer();
+    bool preloadLevelRenderer(const azurerender::Level& level);
     void prepareLevelRenderer(const azurerender::Level& level);
     void synchronizeEditorRuntime();
     void synchronizeGameUi();

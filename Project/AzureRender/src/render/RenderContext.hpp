@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 
 #include <vulkan/vulkan.h>
 
@@ -131,6 +132,7 @@ struct SceneFrameData {
 // framebuffer are owned by the engine and outlive the renderer; the renderer
 // must never destroy them.
 struct RenderContext {
+    const std::map<std::string,std::shared_ptr<const LoadedAsset>>* preparedMeshes=nullptr;
     VkDevice device = VK_NULL_HANDLE;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkQueue graphicsQueue = VK_NULL_HANDLE;

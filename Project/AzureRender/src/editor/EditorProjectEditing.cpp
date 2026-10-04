@@ -127,7 +127,16 @@ std::map<std::string,nlohmann::json> EditorContext::runtimeComponents() const {
     return result;
 }
 nlohmann::json EditorContext::componentData(const std::string& node,const std::string& type)const{
-    const auto data=runtimeComponents();if(!data.count(node)||!data.at(node).contains(type))return nlohmann::json();return data.at(node).at(type).at("data");
+    if(type=="azure.transform" || type=="azure.renderable"){
+        const auto found=std::find_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& value){return value.id==node;});
+        if(found==scene_.nodes.end())return {};
+        static const auto registry=reflection::makeRuntimeRegistry();
+        if(type=="azure.transform"){ecs::TransformComponent value{found->translation,found->rotation,found->scale};return registry.encode(type,&value).at("data");}
+        ecs::RenderableComponent value{0,found->visible};return registry.encode(type,&value).at("data");
+    }
+    const auto found=components_.find(node);
+    if(found==components_.end() || !found->second.contains(type))return {};
+    return found->second.at(type).at("data");
 }
 void EditorContext::validateComponentReferences(const SceneNode& node,const nlohmann::json& data,const SceneDocument& scene)const {
     validateComponents(data);

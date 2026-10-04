@@ -61,6 +61,15 @@ void GpuAllocator::shutdown() {
     allocator_ = nullptr;
 }
 
+void GpuAllocator::updateMemoryHighWater(){
+    const VkPhysicalDeviceMemoryProperties* properties=nullptr;vmaGetMemoryProperties(allocator_,&properties);
+    VmaBudget budgets[VK_MAX_MEMORY_HEAPS]{};vmaGetHeapBudgets(allocator_,budgets);
+    VkDeviceSize bytes=0;
+    for(unsigned heap=0;heap<properties->memoryHeapCount;++heap)
+        if(properties->memoryHeaps[heap].flags & VK_MEMORY_HEAP_DEVICE_LOCAL_BIT)bytes+=budgets[heap].statistics.blockBytes;
+    statistics_.deviceLocalPeakBytes=std::max(statistics_.deviceLocalPeakBytes,bytes);
+}
+
 GpuBuffer GpuAllocator::createBuffer(
     const VkDeviceSize size,
     const VkBufferUsageFlags usage,
@@ -110,6 +119,7 @@ GpuBuffer GpuAllocator::createBuffer(
     ++statistics_.bufferAllocations;
     ++statistics_.liveBuffers;
     statistics_.bufferBytes += info.size;
+    statistics_.liveBufferBytes+=info.size;updateMemoryHighWater();
     return result;
 }
 
@@ -117,6 +127,8 @@ void GpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
     if (allocator_ == nullptr || buffer.buffer == VK_NULL_HANDLE) {
         return;
     }
+    VmaAllocationInfo info{};vmaGetAllocationInfo(allocator_,buffer.allocation,&info);
+    statistics_.liveBufferBytes-=info.size;
     vmaDestroyBuffer(allocator_, buffer.buffer, buffer.allocation);
     if (statistics_.liveBuffers > 0) {
         --statistics_.liveBuffers;
@@ -162,6 +174,7 @@ GpuImage GpuAllocator::createImage(
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
     statistics_.imageBytes += info.size;
+    statistics_.liveImageBytes+=info.size;updateMemoryHighWater();
     return result;
 }
 
@@ -169,6 +182,8 @@ void GpuAllocator::destroyImage(GpuImage& image) noexcept {
     if (allocator_ == nullptr || image.image == VK_NULL_HANDLE) {
         return;
     }
+    VmaAllocationInfo info{};vmaGetAllocationInfo(allocator_,image.allocation,&info);
+    statistics_.liveImageBytes-=info.size;
     vmaDestroyImage(allocator_, image.image, image.allocation);
     if (statistics_.liveImages > 0) {
         --statistics_.liveImages;
