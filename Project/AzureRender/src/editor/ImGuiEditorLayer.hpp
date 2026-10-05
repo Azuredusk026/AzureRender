@@ -40,6 +40,7 @@ public:
     void newFrame();
     void drawPanels();
     nlohmann::json workspaceSnapshot() const;
+    void queueInputEvent(nlohmann::json event);
     void setGameUi(GameUi* ui) { gameUi_=ui; }
     std::uint64_t debugLineCount() const noexcept { return debugLineCount_; }
     void render(VkCommandBuffer commandBuffer);

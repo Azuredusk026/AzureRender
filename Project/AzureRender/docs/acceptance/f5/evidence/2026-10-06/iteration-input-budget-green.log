@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 4: AzureAssets.GenerationManifest
+1/2 Test #4: AzureAssets.GenerationManifest ...   Passed    1.15 sec
+    Start 9: AzureEngine.SystemComposition
+2/2 Test #9: AzureEngine.SystemComposition ....   Passed    0.64 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   1.79 sec

@@ -47,6 +47,12 @@ constexpr const char* kHelp =
     "  --editor-project <azureproject>     Open a game project\n"
     "  --create-game <empty-directory>     Create a playable game template\n"
     "  --editor-actions <json>             Run editor task commands\n"
+    "  --validation-script <json>          Run versioned validation steps\n"
+    "  --validation-report <json>          Write validation step results\n"
+    "  --validation-token-env <name>       Enable control with an environment token\n"
+    "  --validation-endpoint <json>        Write control address and assigned port\n"
+    "  --validation-address <address>      IPv4 loopback address (127.0.0.1)\n"
+    "  --validation-port <port>            Control port; 0 assigns a free port\n"
     "  --runtime-report <json>             Write gameplay evidence\n\n"
     "  --game-actions <json>               Replay fixed-route gameplay input\n"
     "Output:\n"
@@ -158,6 +164,12 @@ float parseFiniteFloat(
 }
 
 void validate(const ParsedCommandLine& parsed) {
+    const auto& validation=parsed.options;
+    if(validation.validationAddress!="127.0.0.1")fail(CommandLineErrorCode::InvalidValue,"--validation-address","Control address requires IPv4 loopback");
+    if(validation.validationTokenEnvironment.empty()!=validation.validationEndpoint.empty())
+        fail(CommandLineErrorCode::InvalidCombination,"--validation-token-env","Control channel requires token environment and endpoint output");
+    if(!validation.validationScript.empty()&&validation.validationReport.empty())
+        fail(CommandLineErrorCode::InvalidCombination,"--validation-report","Script requires report output");
     const auto& options = parsed.options;
     if(!options.editorActionsPath.empty() && !options.editorMode)fail(CommandLineErrorCode::InvalidCombination,"--editor-actions","--editor-actions requires an editor project");
     if(options.editorMode && !options.projectFile.empty() && (!parsed.scenePath.empty() || !parsed.editorScenePath.empty() || !parsed.createScenePath.empty()))fail(CommandLineErrorCode::InvalidCombination,"--editor-project","Editor project and scene entries are mutually exclusive");
@@ -301,6 +313,20 @@ ParsedCommandLine parseCommandLine(
             parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
         } else if (argument == "--editor-actions") {
             parsed.options.editorActionsPath = requireValue(arguments,index,argument);
+        } else if (argument == "--validation-script") {
+            parsed.options.validationScript=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-report") {
+            parsed.options.validationReport=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-token-env") {
+            parsed.options.validationTokenEnvironment=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-endpoint") {
+            parsed.options.validationEndpoint=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-address") {
+            parsed.options.validationAddress=requireValue(arguments,index,argument);
+        } else if (argument == "--validation-port") {
+            const auto port=parseUint32(requireValue(arguments,index,argument),argument);
+            if(port>65535)fail(CommandLineErrorCode::InvalidValue,argument,"Port exceeds 65535");
+            parsed.options.validationPort=static_cast<std::uint16_t>(port);
         } else if (argument == "--runtime-report") {
             parsed.options.runtimeReportPath = requireValue(arguments,index,argument);
         } else if (argument == "--smoke-frames") {

@@ -1,0 +1,9 @@
+EditorObservationTests.cpp
+tests/EditorObservationTests.cpp(12): error C2039: "needsObservations": 不是 "azurerender::EditorAutomation" 的成员
+src\editor/EditorAutomation.hpp(4): note: 参见“azurerender::EditorAutomation”的声明
+tests/EditorObservationTests.cpp(13): error C2039: "setObservations": 不是 "azurerender::EditorAutomation" 的成员
+src\editor/EditorAutomation.hpp(4): note: 参见“azurerender::EditorAutomation”的声明
+tests/EditorObservationTests.cpp(17): error C2039: "setObservations": 不是 "azurerender::EditorAutomation" 的成员
+src\editor/EditorAutomation.hpp(4): note: 参见“azurerender::EditorAutomation”的声明
+tests/EditorObservationTests.cpp(21): error C2039: "setObservations": 不是 "azurerender::EditorAutomation" 的成员
+src\editor/EditorAutomation.hpp(4): note: 参见“azurerender::EditorAutomation”的声明

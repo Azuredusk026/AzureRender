@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\playable-package\\Azure Exploration",
+  "files": 222,
+  "licenses": 21,
+  "movedDirectory": true,
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "tamperRejected": true,
+  "completeQuest": true,
+  "quest": {
+    "frames": 940,
+    "actions": 38,
+    "completionSeconds": 221.0,
+    "fixedSteps": 14085,
+    "restarts": 2,
+    "validationErrors": 0,
+    "released": true
+  },
+  "cycles": {
+    "commits": 40,
+    "switches": 20,
+    "restarts": 20,
+    "commitMilliseconds": {
+      "mean": 1.21896,
+      "p95": 1.6523349999999999,
+      "p99": 1.8986839999999998
+    },
+    "commitFrameMilliseconds": {
+      "mean": 8.1750275,
+      "p95": 10.361155,
+      "p99": 10.76275
+    },
+    "first": {
+      "bufferBytes": 7470984,
+      "buffers": 51,
+      "cachedCandidates": 2,
+      "commitMs": 1.0214,
+      "committed": false,
+      "frame": 1200,
+      "imageBytes": 124575232,
+      "images": 71,
+      "loadError": "",
+      "loading": false,
+      "physicsMaxMs": 0.2476,
+      "requestGeneration": 12,
+      "revision": 8,
+      "waitMs": 0.3481999999999914,
+      "workMs": 2.1564000000000085
+    },
+    "last": {
+      "bufferBytes": 7470984,
+      "buffers": 51,
+      "cachedCandidates": 2,
+      "commitMs": 1.1792,
+      "committed": false,
+      "frame": 6480,
+      "imageBytes": 124575232,
+      "images": 71,
+      "loadError": "",
+      "loading": false,
+      "physicsMaxMs": 0.2538,
+      "requestGeneration": 46,
+      "revision": 42,
+      "waitMs": 0.09230000000002292,
+      "workMs": 1.9817999999999771
+    },
+    "passed": true
+  },
+  "quality": {
+    "schemaVersion": 1,
+    "platform": "Windows x64",
+    "vulkanApi": "1.3",
+    "width": 1920,
+    "height": 1080,
+    "targetHz": 60,
+    "shadowMapSize": 2048,
+    "shadowCascades": 4,
+    "entities": 100,
+    "animatedCharacters": 4,
+    "fullGameUi": true,
+    "materialQuality": "full",
+    "privateCharacter": false,
+    "pointLights": 8
+  },
+  "packageManifestHash": "d31d1403d94063cd1babcfdde04ebd522b8f73928f054c73d34080c5fd4dc679"
+}

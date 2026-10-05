@@ -7,6 +7,7 @@
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/ModuleAssembly.hpp"
+#include "validation/ValidationTransport.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/GameInputReplay.hpp"
@@ -56,6 +57,12 @@ public:
         const { return renderSettings_; }
 
 private:
+    std::unique_ptr<azurerender::ObservationRegistry> observations_;
+    std::unique_ptr<azurerender::ValidationService> validation_;
+    std::unique_ptr<azurerender::ValidationTransport> validationTransport_;
+    std::uint64_t validationScreenshots_=0;
+    void initializeValidation();
+    void finishValidation();
     static constexpr std::uint32_t kShadowMapSize = 2048;
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kTimestampQueryCount = 4;

@@ -95,6 +95,19 @@ EditRegistry editorOperations(EditorSession& session) {
             c.log("Game template created: "+a.at("path").get<std::string>());return nullptr;
         });
     registry.add({"asset.import",1,schema({{"path",text}},{"path"}),true,false,true},[](EditorContext& c,const Json& a)->Json { return c.importAsset(a.at("path").get<std::string>()); });
+    registry.add({"asset.generate",1,schema({{"generator",text},{"output",text},{"parameters",Json::object()},
+        {"inputs",{{"type","array"},{"maxItems",1024},{"items",text}}},{"dependencies",{{"type","array"},{"maxItems",1024},{"items",text}}},{"license",text}},
+        {"generator","output","parameters","license"}),true,false,true},[&session](EditorContext& c,const Json& a)->Json {
+            if(!c.isProject())throw EditRejection("Asset generation requires a project session");
+            const auto output=a.at("output").get<std::string>();const auto extension=std::filesystem::path(output).extension();
+            if(extension!=".azurelevel"&&extension!=".azureprefab"&&extension!=".json"&&extension!=".gltf"&&extension!=".glb")throw EditRejection("Generated content requires a registered engine format");
+            const auto validator=[extension](const std::string& source) {
+                if(extension!=".glb") { const auto data=Json::parse(source);if(!data.is_object())throw EditRejection("Generated text requires an object"); }
+            };
+            const auto id=c.assets().generateAsset(session.generators(),a.at("generator").get<std::string>(),output,a.at("parameters"),
+                a.value("inputs",std::vector<std::string>{}),a.value("dependencies",std::vector<std::string>{}),a.at("license").get<std::string>(),validator);
+            c.notifyAssetVersionChanged();session.assetReloadRequested_=true;c.log("Generated asset: "+output);return id;
+        });
     registry.add({"asset.import-start",1,schema({{"path",text}},{"path"}),false,false,true},[](EditorContext& c,const Json& a)->Json { c.startImport(a.at("path").get<std::string>());return nullptr; });
     registry.add({"asset.import-cancel",1,schema(),false,false,false},[](EditorContext& c,const Json&)->Json { c.cancelImport();return nullptr; });
     registry.add({"asset.import-poll",1,schema(),true,false,true},[](EditorContext& c,const Json&)->Json { const auto value=c.pollImport();return value?Json(*value):Json(nullptr); });

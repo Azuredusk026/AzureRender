@@ -233,6 +233,7 @@ add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
 )
 add_library(AzureRenderCore STATIC
+    src/assets/GeneratorRegistry.cpp
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/RendererCore.cpp
@@ -265,6 +266,7 @@ add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTI
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/runtime/ObservationRegistry.cpp
     src/runtime/ModuleAssembly.cpp
     src/runtime/ComponentRegistry.cpp
     src/runtime/SystemRegistry.cpp
@@ -274,6 +276,7 @@ add_library(AzureRuntime STATIC
     src/runtime/SceneRenderSnapshot.cpp
     src/runtime/Project.cpp
     src/runtime/AssetDatabase.cpp
+    src/runtime/AssetGeneration.cpp
     src/runtime/Level.cpp
     src/runtime/Prefab.cpp
     src/runtime/LevelSession.cpp
@@ -292,6 +295,11 @@ add_library(AzureGameplay STATIC
     src/gameplay/LocomotionSystem.cpp
     src/gameplay/SharedSystems.cpp)
 target_link_libraries(AzureGameplay PUBLIC AzureRuntime)
+add_library(AzureValidation STATIC src/validation/ValidationService.cpp src/validation/ValidationTransport.cpp)
+target_link_libraries(AzureValidation PUBLIC AzureRuntime)
+if(WIN32)
+    target_link_libraries(AzureValidation PRIVATE ws2_32)
+endif()
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
 target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
@@ -313,6 +321,7 @@ add_library(AzureEditor STATIC
     src/editor/ImGuiEditorLayer.cpp
 )
 set(AZURE_HOST_SOURCES
+    src/app/AzureRenderValidation.cpp
     src/app/AzureRenderApp.cpp
     src/app/AzureRenderGameplay.cpp
     src/app/AzureRenderCapture.cpp
@@ -341,13 +350,13 @@ if(TARGET imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
 add_library(AzureRenderHost STATIC ${AZURE_HOST_SOURCES})
-target_link_libraries(AzureRenderHost PUBLIC AzureRuntime AzurePlatform AzureEditor)
+target_link_libraries(AzureRenderHost PUBLIC AzureRuntime AzurePlatform AzureEditor AzureValidation)
 target_compile_definitions(AzureRenderHost PUBLIC AZURE_WITH_EDITOR=1)
 if(TARGET imgui::imgui)
     target_compile_definitions(AzureRenderHost PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
 add_library(AzurePlayerHost STATIC ${AZURE_HOST_SOURCES})
-target_link_libraries(AzurePlayerHost PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime)
+target_link_libraries(AzurePlayerHost PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime AzureValidation)
 target_compile_definitions(AzurePlayerHost PUBLIC AZURE_WITH_EDITOR=0)
 foreach(AZURE_HOST_TARGET AzureRenderHost AzurePlayerHost)
     target_include_directories(${AZURE_HOST_TARGET} PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
@@ -360,6 +369,22 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_executable(AzureEditorObservationTests tests/EditorObservationTests.cpp)
+    target_link_libraries(AzureEditorObservationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.Observation COMMAND AzureEditorObservationTests)
+    add_test(NAME AzureTools.Cli COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_azure_cli.py")
+    add_test(NAME AzureEditor.ObservationHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_observation_host.py" --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureEditor.ObservationHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_executable(AzureGenerationManifestTests tests/GenerationManifestTests.cpp)
+    target_link_libraries(AzureGenerationManifestTests PRIVATE AzureRuntime)
+    add_test(NAME AzureAssets.GenerationManifest COMMAND AzureGenerationManifestTests)
+    add_executable(AzureValidationProbe tests/ValidationProbe.cpp)
+    target_link_libraries(AzureValidationProbe PRIVATE AzureValidation)
+    add_test(NAME AzureTools.ValidationProtocol COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_validation_protocol.py" --probe "$<TARGET_FILE:AzureValidationProbe>")
+    add_executable(AzureObservationTests tests/ObservationTests.cpp)
+    target_link_libraries(AzureObservationTests PRIVATE AzureValidation)
+    add_test(NAME AzureEngine.Observation COMMAND AzureObservationTests)
     add_executable(AzureEditServiceTests tests/EditServiceTests.cpp)
     target_link_libraries(AzureEditServiceTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.EditService COMMAND AzureEditServiceTests)
@@ -1079,6 +1104,8 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-foundation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/system-composition.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/edit-operations.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/observations-generation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g2-implementation.md"

@@ -236,6 +236,7 @@ void AzureRenderApp::drawFrame() {
                 swapchainExtent_.width,
                 swapchainExtent_.height,
                 outputPath);
+            ++validationScreenshots_;
             if (captureSequenceFrame) {
                 ++capturedFrames_;
                 if (capturedFrames_ == 1
@@ -334,6 +335,7 @@ void AzureRenderApp::updateGizmoScreenData() {
         ecsRenderableLogged_ = true;
     }
     editorContext.setGizmoScreen({});
+    editorContext.setPickTargets({});
     const azurerender::RendererSceneState* sceneState =
         sceneRenderer_ != nullptr ? sceneRenderer_->sceneState() : nullptr;
     if (sceneState == nullptr || sceneState->asset == nullptr
@@ -341,6 +343,13 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     const LoadedAsset& asset = *sceneState->asset;
+    std::map<std::string,std::array<float,3>> pickTargets;
+    for(const auto& entry:sceneState->pickables)if(entry.asset) {
+        const auto& mesh=*entry.asset;
+        const Vector3 center={(mesh.boundsMin[0]+mesh.boundsMax[0])*.5F,(mesh.boundsMin[1]+mesh.boundsMax[1])*.5F,(mesh.boundsMin[2]+mesh.boundsMax[2])*.5F};
+        pickTargets[entry.node]=transformPosition(entry.model,center);
+    }
+    editorContext.setPickTargets(std::move(pickTargets));
     if (!editorContext.isProject() && (selectedPrimitiveIndex_ < 0
         || static_cast<std::size_t>(selectedPrimitiveIndex_)
             >= asset.primitives.size())) {

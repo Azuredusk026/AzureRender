@@ -26,6 +26,13 @@ int main(int argc, char** argv) {
         const auto resource = context->importAsset(std::filesystem::path(argv[1]).parent_path()/"test_model.gltf");
         check(context->importSummary().value("vertices",0)==48 && context->importSummary().at("clips").size()==1,
             "Import admission must expose real model complexity and animation clips");
+        check(context->assets().records().at(resource).importGeneration.has_value(),"Imported content retains a validated source manifest");
+        const auto importedPath=context->assets().resolve(resource),importedCache=context->assets().cacheFile(resource);
+        const auto importedSource=context->assets().readSource(resource);
+        std::ofstream(importedPath,std::ios::binary)<<importedSource<<" ";bool tamperedImport=false;
+        try { context->assets().refresh(true); }catch(const std::exception& e){tamperedImport=std::string(e.what()).find("Imported output hash is stale")!=std::string::npos;}
+        check(tamperedImport&&std::filesystem::exists(importedCache),"Imported output changes require a fresh source manifest");
+        std::ofstream(importedPath,std::ios::binary)<<importedSource;context->assets().refresh(true);
         context->placeResource(resource,"imported-actor");
         check(context->scene().nodes.back().id=="imported-actor","Placement must retain author-selected identity for gameplay references");
         context->createNode("configured-camera");
@@ -72,6 +79,11 @@ int main(int argc, char** argv) {
         check(reopened->scene().nodes.size()==original+2 && reopened->componentData("hero","azure.character").at("speed")==2.5, "Saved component and placement must reopen");
         check(reopened->renderSettings().grade.exposureEv==1.25F,"Project rendering edits must survive save");
         EditorSession session(reopened);
+        const auto beforeGeneration=session.edits().version();
+        const auto generated=session.edit("asset.generate",{{"generator","azure.text"},{"output","assets:/generated.azurelevel"},
+            {"parameters",{{"source",R"({"schemaVersion":1,"id":"generated","sceneType":"sample","resources":[],"nodes":[]})"}}},{"license","LicenseRef-Project"}});
+        check(static_cast<bool>(generated),"Generated text uses the production edit operation");
+        check(generated.version!=beforeGeneration,"Generated asset changes invalidate document proposals");
         reopened->setGizmoTranslation({0,2,0});
         const auto edited = reopened->scene().nodes[1].translation;
         check(session.execute(EditorCommand::Play), "Play must start a separate World");

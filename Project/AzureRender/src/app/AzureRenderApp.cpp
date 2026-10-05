@@ -174,7 +174,9 @@ void AzureRenderApp::run(
             + ", internal outline: "
             + (renderSettings_.innerOutlineEnabled ? "on" : "off")
             + ", HUD: " + (hudEnabled_ ? "on" : "off"));
+    initializeValidation();
     mainLoop(runOptions_.smokeFrameLimit);
+    finishValidation();
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().detachRenderSettings();
@@ -317,9 +319,11 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     std::uint64_t renderedFrames = 0;
     while (!frontend_->shouldClose()) {
         frontend_->pollEvents();
+        if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
         ++renderedFrames;
         if (smokeFrameLimit > 0 && renderedFrames >= smokeFrameLimit) {
+            if(validation_&&!validation_->complete())continue;
 #if AZURE_WITH_EDITOR
             if(editorAutomation_ && !editorAutomation_->complete())continue;
 #endif
@@ -509,7 +513,7 @@ void AzureRenderApp::buildSceneFrameData(
         : static_cast<float>(
               std::max(currentTime - lastRotationTime_, 0.0));
     auto* game=activeGame();
-    if(game&&!runOptions_.gameActionsPath.empty()) {
+    if(game&&(gameInputReplay_||!runOptions_.gameActionsPath.empty())) {
         if(!gameInputReplay_){std::ifstream input(runOptions_.gameActionsPath);nlohmann::json document;input>>document;
             gameInputReplay_=azurerender::GameInputReplay::parse(document);}
         auto* levels=levelSession_.get();
@@ -934,6 +938,8 @@ void AzureRenderApp::updateTechnicalSequenceState(
 }
 
 void AzureRenderApp::cleanup() {
+    if(validationTransport_)validationTransport_->stop();
+    if(validation_)validation_->stop();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
 #endif

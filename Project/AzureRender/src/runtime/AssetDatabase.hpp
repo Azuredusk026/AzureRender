@@ -1,5 +1,7 @@
 #pragma once
 #include "runtime/Project.hpp"
+#include "assets/GeneratorRegistry.hpp"
+#include <optional>
 #include <cstdint>
 #include <functional>
 #include <map>
@@ -12,6 +14,8 @@ struct AssetRecord {
     std::filesystem::path path;
     std::uint64_t fingerprint = 0, contentHash = 0;
     std::vector<std::string> dependencies;
+    std::optional<GenerationManifest> generation;
+    std::optional<GenerationManifest> importGeneration;
 };
 class AssetDatabase {
 public:
@@ -24,6 +28,9 @@ public:
     std::filesystem::path resolveReference(const std::string& reference) const;
     std::filesystem::path cacheFile(const std::string& id) const;
     std::string readSource(const std::string& id) const;
+    std::string generateAsset(const GeneratorRegistry& generators,const std::string& generator,const std::string& output,
+        const nlohmann::json& parameters,const std::vector<std::string>& inputs,const std::vector<std::string>& dependencies,
+        const std::string& license,std::function<void(const std::string&)> validate,std::function<void()> check={});
     const std::map<std::string, AssetRecord>& records() const noexcept { return records_; }
     void writePack(const std::filesystem::path& destination) const;
     static std::filesystem::path resolvePack(const std::filesystem::path& directory, const std::string& id);

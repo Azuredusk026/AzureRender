@@ -1,5 +1,6 @@
 #include "editor/AssetImportJob.hpp"
 #include "assets/GltfLoader.hpp"
+#include "assets/GenerationManifest.hpp"
 #include <array>
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -29,6 +30,15 @@ void AssetImportJob::prepare(const std::filesystem::path& source){
         {"materials",asset.materials.size()},{"joints",asset.jointNodes.size()},{"skinned",asset.hasSkin},{"clips",nlohmann::json::array()}};
     for(std::size_t index=0;index<asset.animations.size();++index){const auto& clip=asset.animations[index];
         summary_["clips"].push_back({{"index",index},{"name",clip.name},{"duration",clip.endTime-clip.startTime},{"channels",clip.channels.size()}});}
+    GenerationManifest manifest;manifest.generatorId="azure.gltf-import";manifest.generatorVersion=1;
+    manifest.parametersHash=generationHash(nlohmann::json{{"filename",source.filename().generic_string()},{"importerVersion",1}}.dump());
+    manifest.licenseSource="LicenseRef-External-Asset";
+    for(const auto& entry:std::filesystem::recursive_directory_iterator(staging_))if(entry.is_regular_file()) {
+        checkCancel();std::ifstream input(entry.path(),std::ios::binary);const std::string content{std::istreambuf_iterator<char>(input),{}};
+        const auto name=entry.path().lexically_relative(staging_).generic_string();
+        manifest.inputHashes[name]=generationHash(content);manifest.outputHashes[name]=manifest.inputHashes[name];
+    }
+    summary_["generation"]=GenerationManifest::fromJson(manifest.toJson()).toJson();
     checkCancel();progress_=1;
 }
 bool AssetImportJob::ready()const{return work_.valid()&&work_.wait_for(std::chrono::seconds(0))==std::future_status::ready;}

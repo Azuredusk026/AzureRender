@@ -77,6 +77,25 @@ void configuration() {
     bool unboundRejected=false;try { GameRuntime invalid(runtime,registry,bad); } catch(const std::exception&) { unboundRejected=true; }
     check(unboundRejected,"Unbound movement action must fail during assembly");
 }
+void dynamicInput() {
+    using Json=nlohmann::json;
+    RuntimeLifecycle runtime;runtime.start();auto registry=application::systems();
+    GameRuntime game(runtime,registry,application::explorationConfiguration());
+    auto replay=GameInputReplay::parse({{"schemaVersion",1},{"actions",Json::array({{{"frame",10},{"action","key"},{"key",87},{"down",false}}})}});
+    replay.enqueue({{"action","focus"},{"focused",true}},0);
+    replay.enqueue({{"action","key"},{"key",87},{"down",true}},1);
+    replay.apply(1,game);
+    check(game.input().down("move-forward")&&replay.consumed()==2,"Dynamic events must precede future script actions");
+    replay.apply(10,game);
+    check(!game.input().down("move-forward")&&replay.consumed()==3,"Script releases must survive queue insertion");
+    rejects([&]{replay.enqueue({{"action","key"},{"key",999},{"down",true}},11);});
+    rejects([&]{replay.enqueue({{"action","key"},{"key",87},{"down",1}},11);});
+    for(unsigned i=0;i<9000;++i){replay.enqueue({{"action","focus"},{"focused",true}},11+i);replay.apply(11+i,game);}
+    check(replay.consumed()==9003,"Queue compaction must preserve cumulative consumption");
+    for(unsigned i=0;i<8192;++i)replay.enqueue({{"action","focus"},{"focused",true}},20000);
+    rejects([&]{replay.enqueue({{"action","focus"},{"focused",true}},20000);});
+    rejects([&]{GameInputReplay::parse({{"schemaVersion",1.0},{"actions",Json::array()}});});
+}
 void inspectorProject() {
     const auto project=Project::load(std::filesystem::path(AZURE_INSPECTOR_PROJECT)/"project.azureproject");
     check(project.runtimeConfiguration.at("systems").size()==2,"Inspector must use two independent shared systems");
@@ -113,6 +132,6 @@ int main() { try {
     interactions.setPolicy([](const auto&,auto,auto) { return false; });
     check(!interactions.select(runtime,physics,runtime.entity("actor")),"Application policy must filter generic targets");
     interactions.setPolicy({});check(interactions.select(runtime,physics,runtime.entity("actor")).has_value(),"Missing policy must allow a valid target");
-    composition();configuration();inspectorProject();
+    composition();configuration();dynamicInput();inspectorProject();
     std::cout<<"Generic target selection passed\n";
 } catch(const std::exception& error) { std::cerr<<error.what()<<'\n'; return 1; } }

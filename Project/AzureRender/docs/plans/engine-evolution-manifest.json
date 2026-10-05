@@ -101,7 +101,13 @@
         "A5",
         "B5"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/f5/2026-10-06.md",
+        "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收"
+      }
     },
     {
       "id": "U4",

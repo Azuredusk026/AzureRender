@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 
 ALLOWED = {
+    'AzureValidation': {'AzureFoundation', 'AzureReflection', 'AzureRenderCore', 'AzureRuntime'},
     'AzureFoundation': set(),
     'AzurePlatform': {'AzureFoundation'},
     'AzureRenderCore': {'AzureFoundation'},
@@ -13,8 +14,8 @@ ALLOWED = {
     'AzureGameplay': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
     'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay'},
     'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime'},
-    'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime'},
-    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime'},
+    'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation'},
+    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation'},
 }
 
 def effective_includes(text, definitions):
@@ -57,6 +58,8 @@ def owner(path):
     if not tail:
         return None
     area = tail[0]
+    if area == 'validation':
+        return 'AzureValidation'
     if area == 'gameplay':
         return 'AzureGameplay'
     if area == 'app' and path.name.startswith('ProjectRuntimeAssembly'):

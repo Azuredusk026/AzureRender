@@ -1,4 +1,6 @@
 #include "runtime/AssetDatabase.hpp"
+#include "runtime/Level.hpp"
+#include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
@@ -144,6 +146,34 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 }
         }
         record.dependencies.assign(dependencies.begin(), dependencies.end());
+        const auto& meta=metadata.at(record.id);
+        if(meta.contains("importGeneration")) {
+            record.importGeneration=GenerationManifest::fromJson(meta.at("importGeneration"));
+            const auto& imported=*record.importGeneration;
+            if(imported.inputHashes!=imported.outputHashes||imported.outputHashes.empty())throw std::runtime_error("Import provenance requires immutable copied inputs");
+            const auto base=std::filesystem::weakly_canonical(record.path.parent_path());
+            for(const auto& output:imported.outputHashes) {
+                const std::filesystem::path relative(output.first);
+                const auto resolved=std::filesystem::weakly_canonical(base/relative);const auto inside=resolved.lexically_relative(base);
+                if(relative.is_absolute()||relative.has_root_name()||inside.empty()||*inside.begin()==".."||generationHash(bytes(resolved,check))!=output.second)
+                    throw std::runtime_error("Imported output hash is stale: "+output.first);
+            }
+            record.fingerprint=hash(std::to_string(record.fingerprint)+imported.fingerprint());
+        }
+        if(meta.contains("generation")) {
+            record.generation=GenerationManifest::fromJson(meta.at("generation"));
+            const auto& manifest=*record.generation;
+            if(manifest.outputHashes.size()!=1||!manifest.outputHashes.count(record.virtualPath)||manifest.outputHashes.at(record.virtualPath)!=generationHash(bytes(record.path,check)))
+                throw std::runtime_error("Generated output hash is stale: "+record.virtualPath);
+            const auto verify=[&](const auto& hashes) { for(const auto& input:hashes) {
+                add(input.first);const auto id=paths.count(input.first)?paths.at(input.first):input.first;
+                const auto& source=candidate.at(id);
+                if(generationHash(bytes(source.path,check))!=input.second)throw std::runtime_error("Generation input hash is stale: "+input.first);
+            } };
+            verify(manifest.inputHashes);verify(manifest.dependencyHashes);
+            record.dependencies.assign(dependencies.begin(), dependencies.end());
+            record.fingerprint=hash(std::to_string(record.fingerprint)+manifest.fingerprint());
+        }
     }
     std::map<std::string, unsigned> state;
     const auto fingerprint = [&](const std::string& id, auto&& self) -> std::uint64_t {
@@ -206,6 +236,8 @@ void AssetDatabase::writePack(const std::filesystem::path& destination) const {
         write(destination / relative, readSource(record.id));
         write((destination / relative).string() + ".azmeta", bytes(record.path.string() + ".azmeta"));
         entries.push_back({{"id", record.id}, {"path", relative}, {"contentHash", record.contentHash}, {"dependencies", record.dependencies}});
+        if(record.generation)entries.back()["generation"]=record.generation->toJson();
+        if(record.importGeneration)entries.back()["importGeneration"]=record.importGeneration->toJson();
     }
     write(destination / "manifest.azurepack", Json{{"schemaVersion", 1}, {"assets", entries}}.dump(2));
 }

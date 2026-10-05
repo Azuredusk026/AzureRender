@@ -1,0 +1,19 @@
+[1/4] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureSystemCompositionTests.dir/tests/SystemCompositionTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DAZURE_INSPECTOR_PROJECT=\"D:/Assigment/2609/FYP/Project/AzureRender/assets_public/scene_inspector\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DOPENEXR_DLL -I..\..\src -Igenerated -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj /FdCMakeFiles\AzureSystemCompositionTests.dir\ /FS -c ..\..\tests\SystemCompositionTests.cpp
+..\..\tests\SystemCompositionTests.cpp(85): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(86): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(91): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(92): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(93): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(95): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+..\..\tests\SystemCompositionTests.cpp(96): error C2039: "enqueue": 不是 "azurerender::GameInputReplay" 的成员
+..\..\src\runtime/GameInputReplay.hpp(9): note: 参见“azurerender::GameInputReplay”的声明
+[2/4] Building CXX object CMakeFiles\AzureGenerationManifestTests.dir\tests\GenerationManifestTests.cpp.obj
+ninja: build stopped: subcommand failed.

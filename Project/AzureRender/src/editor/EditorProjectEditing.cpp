@@ -32,8 +32,11 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
 }
 std::string EditorContext::commitImport(AssetImportJob& job){
     const auto path=job.finish();
-    try{assets_->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_string();
-        const auto id=assets_->idForPath(reference);beginEdit();scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;
+    try{auto candidate=std::make_unique<AssetDatabase>(*assets_);candidate->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_string();
+        const auto id=candidate->idForPath(reference);const auto sidecar=path.string()+".azmeta";
+        std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;input.close();metadata["importGeneration"]=job.summary().at("generation");
+        std::ofstream output(sidecar);output<<metadata.dump(2);output.close();if(!output)throw std::runtime_error("Cannot save import provenance");candidate->refresh(true);
+        beginEdit();assets_.swap(candidate);scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;
         importSummary_=job.summary();log("Imported asset: "+path.filename().string()+" ("+std::to_string(importSummary_.at("vertices").get<std::size_t>())+" vertices)");return id;
     }catch(...){std::filesystem::remove_all(job.destination);throw;}
 }

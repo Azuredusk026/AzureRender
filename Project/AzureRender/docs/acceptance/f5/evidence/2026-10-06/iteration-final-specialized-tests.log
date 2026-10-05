@@ -1,0 +1,24 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  1: AzureEditor.Observation
+1/9 Test  #1: AzureEditor.Observation ..........   Passed    0.11 sec
+    Start  2: AzureTools.Cli
+2/9 Test  #2: AzureTools.Cli ...................   Passed    2.00 sec
+    Start  3: AzureAssets.GenerationManifest
+3/9 Test  #3: AzureAssets.GenerationManifest ...   Passed    1.13 sec
+    Start  4: AzureTools.ValidationProtocol
+4/9 Test  #4: AzureTools.ValidationProtocol ....   Passed    1.86 sec
+    Start  5: AzureEngine.Observation
+5/9 Test  #5: AzureEngine.Observation ..........   Passed    0.03 sec
+    Start  6: AzureEditor.EditService
+6/9 Test  #6: AzureEditor.EditService ..........   Passed    0.27 sec
+    Start  7: AzureEditor.EditTransaction
+7/9 Test  #7: AzureEditor.EditTransaction ......   Passed    0.73 sec
+    Start 16: AzureEngine.ModuleBoundaries
+8/9 Test #16: AzureEngine.ModuleBoundaries .....   Passed    1.27 sec
+    Start 20: AzureEngine.EditorWorkflow
+9/9 Test #20: AzureEngine.EditorWorkflow .......   Passed    1.74 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =   9.18 sec

@@ -454,7 +454,10 @@ std::size_t EditorContext::reloadChangedAssets() {
             ++changed;
         }
     }
+    if(changed&&assets_)try { assets_->refresh(); }
+        catch(const std::exception& error) { updateResourceWriteTimes();log("Asset reload rejected: "+std::string(error.what()));return 0; }
     updateResourceWriteTimes();
+    if(changed)notifyAssetVersionChanged();
     return changed;
 }
 

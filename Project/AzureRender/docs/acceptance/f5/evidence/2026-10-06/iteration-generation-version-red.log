@@ -1,0 +1,28 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 20: AzureEngine.EditorWorkflow
+1/1 Test #20: AzureEngine.EditorWorkflow .......***Failed    0.46 sec
+[1791238699553][info][editor][code=0] Opened scene: courtyard
+[1791238699618][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791238699670][info][editor][code=0] Selected node: Placed Object
+[1791238699670][info][editor][code=0] Selected node: configured-camera
+[1791238699670][info][editor][code=0] Undo
+[1791238699670][info][editor][code=0] Selected node: Placed Object
+[1791238699672][info][editor][code=0] Undo
+[1791238699672][info][editor][code=0] Redo
+[1791238699673][info][editor][code=0] Undo
+[1791238699673][info][editor][code=0] Selected node: hero
+[1791238699714][info][editor][code=0] Undo
+[1791238699744][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1791238699787][info][editor][code=0] Opened scene: courtyard
+[1791238699853][info][editor][code=0] Generated asset: assets:/generated.azurelevel
+Generated asset changes invalidate document proposals
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.47 sec
+
+The following tests FAILED:
+	 20 - AzureEngine.EditorWorkflow (Failed)
+Errors while running CTest

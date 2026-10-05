@@ -5,8 +5,29 @@
 #include <algorithm>
 #include <cmath>
 #include <map>
+#include <set>
 #include <stdexcept>
 namespace azurerender {
+void ImGuiEditorLayer::queueInputEvent(nlohmann::json event) {
+    if(uiCursor_>=1024) { uiActions_.erase(uiActions_.begin(),uiActions_.begin()+static_cast<std::ptrdiff_t>(uiCursor_));uiCursor_=0; }
+    if(uiActions_.size()-uiCursor_>=1024||event.dump().size()>65536)throw std::invalid_argument("UI event queue exceeds budget");
+    const auto action=event.at("action").get<std::string>();
+    if(action=="mouse"||action=="click") {
+        const auto target=event.at("target").get<std::string>();
+        if(!widgets_.contains(target))throw std::invalid_argument("Unknown UI target: "+target);
+        for(const auto v:event.value("offset",std::array<float,2>{0,0}))if(!std::isfinite(v)||std::abs(v)>10000)throw std::invalid_argument("Invalid mouse offset");
+        event.value("down",true);
+    }else if(action=="text")event.at("text").get<std::string>();
+    else if(action=="key") {
+        const std::set<std::string> keys={"A","D","W","S","Z","Y","Delete","Enter","Escape","Shift"};
+        if(!keys.count(event.at("key").get<std::string>()))throw std::invalid_argument("Unsupported UI key");
+        event.value("down",true);event.value("ctrl",false);
+    }else if(action=="wheel") {
+        for(const char* axis:{"x","y"})if(!std::isfinite(event.value(axis,0.F)))throw std::invalid_argument("Invalid wheel input");
+    }else throw std::invalid_argument("Unknown UI event");
+    event["frame"]=uiFrame_+1;uiActions_.push_back(std::move(event));
+    std::stable_sort(uiActions_.begin()+static_cast<std::ptrdiff_t>(uiCursor_),uiActions_.end(),[](const auto& a,const auto& b){return a.at("frame")<b.at("frame");});
+}
 void ImGuiEditorLayer::observeWidget(const std::string& id) {
     const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();
     widgets_[id]={a.x,a.y,b.x-a.x,b.y-a.y};
@@ -27,6 +48,7 @@ void ImGuiEditorLayer::injectUiEvents() {
                 io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
                 io.AddMouseButtonEvent(0,action.value("down",true));injectedMouseDown_=kind=="click";
             }else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
+            else if(kind=="wheel")io.AddMouseWheelEvent(action.value("x",0.F),action.value("y",0.F));
             else if(kind=="key") {
                 static const std::map<std::string,ImGuiKey> keys={{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
                     {"S",ImGuiKey_S},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
@@ -116,6 +138,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const {
 namespace azurerender {
 void ImGuiEditorLayer::observeWidget(const std::string&){}
 void ImGuiEditorLayer::injectUiEvents(){}
+void ImGuiEditorLayer::queueInputEvent(nlohmann::json) { throw std::logic_error("UI input requires ImGui"); }
 void ImGuiEditorLayer::drawWorkspace(){}
 nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const{return {};}
 }

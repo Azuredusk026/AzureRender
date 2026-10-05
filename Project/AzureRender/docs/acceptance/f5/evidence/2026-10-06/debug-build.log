@@ -1,0 +1,38 @@
+[1/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[2/37] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[3/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[4/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[5/37] Building CXX object CMakeFiles\AzureEditTransactionTests.dir\tests\EditTransactionTests.cpp.obj
+[6/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[7/37] Building CXX object CMakeFiles\AzureEditServiceTests.dir\tests\EditServiceTests.cpp.obj
+[8/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[9/37] Building CXX object CMakeFiles\AzureEditorObservationTests.dir\tests\EditorObservationTests.cpp.obj
+[10/37] Building CXX object CMakeFiles\AzureRegisteredComponentWorkflowTests.dir\tests\RegisteredComponentWorkflowTests.cpp.obj
+[11/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[12/37] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\src\main.cpp.obj
+[13/37] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[14/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[15/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[16/37] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+[17/37] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[18/37] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[19/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[20/37] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[21/37] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[22/37] Linking CXX static library AzurePlayerHost.lib
+[23/37] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[24/37] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[25/37] Linking CXX static library AzureEditor.lib
+[26/37] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[27/37] Linking CXX executable AzureEditorWorkspaceTests.exe
+[28/37] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[29/37] Linking CXX executable AzurePlayer.exe
+[30/37] Linking CXX executable AzureEditServiceTests.exe
+[31/37] Linking CXX static library AzureRenderHost.lib
+[32/37] Linking CXX executable AzureEditorObservationTests.exe
+[33/37] Linking CXX executable AzureEditorWorkflowTests.exe
+[34/37] Linking CXX executable AzureEditTransactionTests.exe
+[35/37] Linking CXX executable AzureRenderEditorSessionTests.exe
+[36/37] Linking CXX executable AzureRegisteredComponentHost.exe
+[37/37] Linking CXX executable AzureRender.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

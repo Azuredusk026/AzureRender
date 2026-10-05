@@ -53,6 +53,7 @@ public:
     }
     [[nodiscard]] bool execute(EditorCommand command) noexcept;
     EditService& edits() noexcept { return *edits_; }
+    GeneratorRegistry& generators() noexcept { return generators_; }
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
     [[nodiscard]] bool saveOnClose() noexcept;
     [[nodiscard]] bool consumeLayoutResetRequest() noexcept;
@@ -71,6 +72,7 @@ private:
     bool executeInternal(EditorCommand command) noexcept;
     bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;
     std::shared_ptr<EditorContext> context_;
+    GeneratorRegistry generators_=GeneratorRegistry::builtins();
     std::unique_ptr<EditService> edits_;
     std::string lastError_;
     bool layoutResetRequested_ = false;

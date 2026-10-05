@@ -17,6 +17,9 @@ struct AzureRenderOptions {
     std::string editorActionsPath;
     std::string runtimeReportPath;
     std::string gameActionsPath;
+    std::string validationScript,validationReport,validationTokenEnvironment,validationEndpoint;
+    std::string validationAddress="127.0.0.1";
+    std::uint16_t validationPort=0;
     std::string assetPath;
     std::string resourceRoot;
     std::string environmentPath;

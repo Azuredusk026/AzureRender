@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <filesystem>
 #include <optional>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -33,7 +34,7 @@ public:
     static std::shared_ptr<EditorContext> openProject(const std::filesystem::path& path);
     bool isProject() const noexcept { return assets_ != nullptr; }
     const Project& project() const { return *project_; }
-    AssetDatabase& assets() { return *assets_; }
+    AssetDatabase& assets() { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
     std::string importAsset(const std::filesystem::path& path);
     const nlohmann::json& importSummary() const noexcept { return importSummary_; }
     void startImport(const std::filesystem::path& path);
@@ -110,6 +111,7 @@ public:
     std::size_t undoCount() const noexcept { return undoStack_.size(); }
     std::size_t redoCount() const noexcept { return redoStack_.size(); }
     void closeEditMerge() noexcept { mergeKey_.clear(); }
+    void notifyAssetVersionChanged() { ++revision_;closeEditMerge();clearAnimationPreview(); }
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();
 
@@ -134,6 +136,8 @@ public:
         gizmoScreen_ = value;
     }
     void setDebugProjection(std::array<float,16> value) { debugProjection_=value; }
+    void setPickTargets(std::map<std::string,std::array<float,3>> targets) { pickTargets_=std::move(targets); }
+    const std::map<std::string,std::array<float,3>>& pickTargets() const { return pickTargets_; }
     std::optional<std::array<float,2>> projectDebugPoint(const std::array<float,3>& point) const {
         const auto& m=debugProjection_;const float w=m[3]*point[0]+m[7]*point[1]+m[11]*point[2]+m[15];
         if(w<=.001F)return {};
@@ -189,6 +193,7 @@ private:
     GizmoMode gizmoMode_ = GizmoMode::Translate;
     GizmoScreenData gizmoScreen_;
     std::array<float,16> debugProjection_{};
+    std::map<std::string,std::array<float,3>> pickTargets_;
     bool dirty_ = false;
     std::vector<std::string> consoleMessages_;
     std::vector<Snapshot> undoStack_;

@@ -290,7 +290,7 @@ void ImGuiEditorLayer::drawPanels() {
         }
     }
 #endif
-    if(!uiActions_.empty())uiHistory_.push_back({{"frame",uiFrame_},{"playing",session_->playing()},
+    if(!uiActions_.empty()&&uiHistory_.size()<8192)uiHistory_.push_back({{"frame",uiFrame_},{"playing",session_->playing()},
         {"paused",session_->runtime()&&session_->runtime()->state()==RuntimeLifecycle::State::Paused},
         {"selected",context_->selectedNode()?context_->selectedNode()->id:""},{"dirty",context_->dirty()},
         {"nodeCount",context_->scene().nodes.size()},{"translation",context_->gizmoTranslation()},
@@ -425,14 +425,11 @@ void ImGuiEditorLayer::drawViewportPanel() {
         const ImVec2 itemMin = ImGui::GetItemRectMin();
         imageRect_={itemMin.x,itemMin.y,imageSize.x,imageSize.y};
         widgets_["viewport.image"]=imageRect_;
+        for(auto item=widgets_.begin();item!=widgets_.end();)if(item.key().rfind("pick.",0)==0)item=widgets_.erase(item);else ++item;
         if(context_->isProject()) {
-            const auto description=context_->scene().renderDescription();
-            const auto transforms=scene::resolveNodeWorldTransforms(description);
-            for(std::size_t index=0;index<description.nodes.size();++index) {
-                if(description.nodes[index].resourceId.empty())continue;
-                const auto& matrix=transforms[index];
-                const auto projected=context_->projectDebugPoint({matrix[12],matrix[13]+.8F,matrix[14]});
-                if(projected)widgets_["pick."+description.nodes[index].id]={itemMin.x+(*projected)[0]*imageSize.x-1,itemMin.y+(*projected)[1]*imageSize.y-1,2,2};
+            for(const auto& target:context_->pickTargets()) {
+                const auto projected=context_->projectDebugPoint(target.second);
+                if(projected)widgets_["pick."+target.first]={itemMin.x+(*projected)[0]*imageSize.x-1,itemMin.y+(*projected)[1]*imageSize.y-1,2,2};
             }
         }
         if(session_->debugOverlay){
