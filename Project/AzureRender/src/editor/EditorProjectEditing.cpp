@@ -96,6 +96,7 @@ void EditorContext::previewAnimation(const std::string& state,double time,const 
 void EditorContext::selectNodes(std::vector<std::size_t> indices){
     for(auto index:indices)if(index>=scene_.nodes.size())throw std::out_of_range("Editor node selection is out of range");
     std::sort(indices.begin(),indices.end());indices.erase(std::unique(indices.begin(),indices.end()),indices.end());
+    if(selectedNodes_!=indices) { ++revision_;closeEditMerge();clearAnimationPreview(); }
     selectedNodes_=std::move(indices);if(!selectedNodes_.empty())selectedNodeIndex_=selectedNodes_.back();refreshSelectedTransform();
 }
 void EditorContext::duplicateSelection(){

@@ -11,6 +11,8 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 能力总览
 
+编辑接口见[编辑操作与文档事务](runtime/edit-operations.md)。生产工具共享类型、版本与失败恢复规则。
+
 | 层级 | 当前实现 |
 | --- | --- |
 | Vulkan 宿主 | Instance、Validation、设备与 Queue、Swapchain、Render Pass、Pipeline、Descriptor、同步、查询池、资源销毁 |
@@ -34,7 +36,7 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 开发路线
 
-[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4、G8 已验收，当前执行阶段为 U3。
+[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4、G8、U3 已验收，当前执行阶段为 F5。
 
 当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7、U2 和 P2 已完成。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 

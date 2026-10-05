@@ -180,7 +180,7 @@ python tools/run_playable_performance.py --player build/ninja-msvc-release/Azure
 
 ## 执行准备清单
 
-- [ ] F4 开始前核对基线、依赖图和 18 项来源。
+- [x] F4 开始前核对基线、依赖图和 18 项来源。
 - [ ] 按子计划逐项完成失败用例、实现与回归。
 - [ ] 每阶段完成文档、清单、验收和独立提交。
 - [ ] P3 完成双工作流、完整门禁和真实长跑。

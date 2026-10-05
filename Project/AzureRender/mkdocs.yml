@@ -74,6 +74,7 @@ nav:
       - 反射与序列化: runtime/reflection.md
       - 引擎基础与 Player: runtime/engine-foundation.md
       - 运行系统装配: runtime/system-composition.md
+      - 编辑操作与文档事务: runtime/edit-operations.md
       - 渲染图: runtime/render-graph.md
       - RHI 同步: runtime/rhi-synchronization.md
       - 场景数据: runtime/scene-data.md
@@ -84,6 +85,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U3 编辑操作与文档事务: acceptance/u3/2026-10-06.md
       - G8 共享机制与应用分层: acceptance/g8/2026-10-06.md
       - F4 模块与类型契约: acceptance/f4/2026-10-06.md
       - P2 展示与独立交付: acceptance/p2/2026-10-05.md

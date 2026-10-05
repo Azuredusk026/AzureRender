@@ -1,0 +1,50 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/2 Test #1: AzureEditor.EditService ..........***Failed    0.16 sec
+[1791231978612][info][editor][code=0] Opened scene: test
+[1791231978613][info][editor][code=0] Opened scene: test
+[1791231978617][info][editor][code=0] Opened scene: test
+[1791231978634][info][editor][code=0] Opened scene: test
+[1791231978640][info][editor][code=0] Undo
+[1791231978644][info][editor][code=0] Undo
+[1791231978658][info][editor][code=0] Opened scene: test
+[1791231978669][info][editor][code=0] Play started
+[1791231978677][info][editor][code=0] Play stopped; edit state restored
+[1791231978681][info][editor][code=0] Opened scene: test
+[1791231978698][info][editor][code=0] Opened scene: test
+[1791231978707][info][editor][code=0] ERROR: Failure after mutation
+A failed single operation must retain document, version, dirty state and history
+
+    Start 2: AzureEditor.EditTransaction
+2/2 Test #2: AzureEditor.EditTransaction ......***Failed    0.15 sec
+[1791231978764][info][editor][code=0] Opened scene: test
+[1791231978771][info][editor][code=0] Opened scene: test
+[1791231978771][info][editor][code=0] Selected node: candidate
+[1791231978776][info][editor][code=0] Opened scene: test
+[1791231978776][info][editor][code=0] Selected node: first
+[1791231978783][info][editor][code=0] Undo
+[1791231978787][info][editor][code=0] Redo
+[1791231978794][info][editor][code=0] Undo
+[1791231978799][info][editor][code=0] Redo
+[1791231978809][info][editor][code=0] Opened scene: test
+[1791231978816][info][editor][code=0] Opened scene: test
+[1791231978823][info][editor][code=0] Opened scene: test
+[1791231978829][info][editor][code=0] Undo
+[1791231978835][info][editor][code=0] Redo
+[1791231978842][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-transaction.azscene
+[1791231978848][info][editor][code=0] Reloaded scene: test
+[1791231978851][info][editor][code=0] Opened scene: test
+[1791231978855][info][editor][code=0] Selected node: test
+[1791231978857][info][editor][code=0] Opened scene: test
+A target selection change must invalidate an implicit-target proposal
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.31 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+	  2 - AzureEditor.EditTransaction (Failed)
+Errors while running CTest

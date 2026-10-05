@@ -1,0 +1,27 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/1 Test #1: AzureEditor.EditService ..........***Failed    0.14 sec
+[1791232120072][info][editor][code=0] Opened scene: test
+[1791232120072][info][editor][code=0] Opened scene: test
+[1791232120077][info][editor][code=0] Opened scene: test
+[1791232120084][info][editor][code=0] Opened scene: test
+[1791232120093][info][editor][code=0] Undo
+[1791232120097][info][editor][code=0] Undo
+[1791232120110][info][editor][code=0] Opened scene: test
+[1791232120121][info][editor][code=0] Play started
+[1791232120130][info][editor][code=0] Play stopped; edit state restored
+[1791232120135][info][editor][code=0] Opened scene: test
+[1791232120142][info][editor][code=0] Opened scene: test
+[1791232120150][info][editor][code=0] ERROR: Failure after mutation
+[1791232120154][info][editor][code=0] Opened scene: test
+The content fingerprint must include all render settings
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.15 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+Errors while running CTest

@@ -72,6 +72,18 @@ Ctrl+D 复制选中对象，Delete 删除。Ctrl+Z 撤销，Ctrl+Y 重做。Ctrl
 
 ![停靠与恢复入口](images/workspace.png)
 
+## 批量编辑与恢复
+
+菜单、快捷键与自动工具共享编辑服务。
+连续拖动以一次撤销恢复起始值。
+批量文档操作整体校验并形成一个历史单元。
+失败保持文档、选择、脏状态与历史。
+
+自动提案持有文档基础版本。
+保存、重开或切换选择会使既有提案过期。
+过期结果要求按当前版本重新生成或校验。
+操作与错误定义见[编辑操作参考](../runtime/edit-operations.md)。
+
 ## 构建独立游戏
 
 停止运行后点击工具栏 Build。Release engine directory 填写安装树根目录。Game output directory 填写独立输出目录。点击 Build Windows game，查看结果与耗时。

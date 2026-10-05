@@ -295,6 +295,10 @@ target_link_libraries(AzureGameplay PUBLIC AzureRuntime)
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
 target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
+    src/editor/commands/EditRegistry.cpp
+    src/editor/commands/EditService.cpp
+    src/editor/commands/EditTransaction.cpp
+    src/editor/commands/EditorOperations.cpp
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
     src/editor/EditorProjectEditing.cpp
@@ -356,6 +360,12 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureEditServiceTests tests/EditServiceTests.cpp)
+    target_link_libraries(AzureEditServiceTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.EditService COMMAND AzureEditServiceTests)
+    add_executable(AzureEditTransactionTests tests/EditTransactionTests.cpp)
+    target_link_libraries(AzureEditTransactionTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.EditTransaction COMMAND AzureEditTransactionTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay")
     add_executable(AzureSystemCompositionTests tests/SystemCompositionTests.cpp)
     target_link_libraries(AzureSystemCompositionTests PRIVATE AzureProjectRuntime)
     target_compile_definitions(AzureSystemCompositionTests PRIVATE AZURE_INSPECTOR_PROJECT="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
@@ -1068,6 +1078,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-foundation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/system-composition.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/edit-operations.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g2-implementation.md"

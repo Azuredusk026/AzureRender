@@ -83,8 +83,8 @@ void ImGuiEditorLayer::drawWorkspace() {
         if(context_->isProject()){ImGui::TextWrapped("%s",context_->project().name.c_str());ImGui::TextDisabled("%s",context_->scene().sceneId.c_str());}
         ImGui::Separator();ImGui::TextUnformatted("Create objects");
         ImGui::BeginDisabled(session_->playing()||session_->building());
-        if(ImGui::Button("Empty Node",{-1,0}))context_->createNode("node-"+std::to_string(context_->scene().nodes.size()));observeWidget("create.empty");
-        if(ImGui::Button("Duplicate Selected",{-1,0}))context_->duplicateSelection();
+        if(ImGui::Button("Empty Node",{-1,0}))session_->edit("node.create",{{"id","node-"+std::to_string(context_->scene().nodes.size())}});observeWidget("create.empty");
+        if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
         ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
         for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console"}) {

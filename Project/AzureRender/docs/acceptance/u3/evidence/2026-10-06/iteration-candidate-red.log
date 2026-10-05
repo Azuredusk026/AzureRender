@@ -1,0 +1,55 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEditor.EditService
+1/2 Test #1: AzureEditor.EditService ..........***Failed    0.17 sec
+[1791232301681][info][editor][code=0] Opened scene: test
+[1791232301681][info][editor][code=0] Opened scene: test
+[1791232301687][info][editor][code=0] Opened scene: test
+[1791232301695][info][editor][code=0] Opened scene: test
+[1791232301702][info][editor][code=0] Undo
+[1791232301707][info][editor][code=0] Undo
+[1791232301726][info][editor][code=0] Opened scene: test
+[1791232301736][info][editor][code=0] Play started
+[1791232301745][info][editor][code=0] Play stopped; edit state restored
+[1791232301750][info][editor][code=0] Opened scene: test
+[1791232301757][info][editor][code=0] Opened scene: test
+[1791232301767][info][editor][code=0] ERROR: Failure after mutation
+[1791232301773][info][editor][code=0] Opened scene: test
+A registered handler must not commit a structurally invalid document
+
+    Start 2: AzureEditor.EditTransaction
+2/2 Test #2: AzureEditor.EditTransaction ......***Failed    0.29 sec
+[1791232301836][info][editor][code=0] Opened scene: test
+[1791232301842][info][editor][code=0] Opened scene: test
+[1791232301842][info][editor][code=0] Selected node: candidate
+[1791232301847][info][editor][code=0] Opened scene: test
+[1791232301848][info][editor][code=0] Selected node: first
+[1791232301856][info][editor][code=0] Undo
+[1791232301861][info][editor][code=0] Redo
+[1791232301867][info][editor][code=0] Undo
+[1791232301871][info][editor][code=0] Redo
+[1791232301882][info][editor][code=0] Opened scene: test
+[1791232301891][info][editor][code=0] Opened scene: test
+[1791232301898][info][editor][code=0] Opened scene: test
+[1791232301905][info][editor][code=0] Undo
+[1791232301910][info][editor][code=0] Redo
+[1791232301918][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-edit-transaction.azscene
+[1791232301936][info][editor][code=0] Reloaded scene: test
+[1791232301939][info][editor][code=0] Opened scene: test
+[1791232301943][info][editor][code=0] Selected node: Batch object
+[1791232302030][info][editor][code=0] Opened scene: courtyard
+[1791232302035][info][editor][code=0] Opened scene: courtyard
+[1791232302036][info][editor][code=0] Selected node: hero
+[1791232302058][info][editor][code=0] Opened scene: courtyard
+[1791232302059][info][editor][code=0] Selected node: floor
+Changing selection must release the old node's animation preview
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.48 sec
+
+The following tests FAILED:
+	  1 - AzureEditor.EditService (Failed)
+	  2 - AzureEditor.EditTransaction (Failed)
+Errors while running CTest

@@ -26,6 +26,7 @@ EditorContext::EditorContext(
         throw std::invalid_argument("Editor scene path cannot be empty");
     }
     log("Opened scene: " + scene_.sceneId);
+    if(scene_.nodes.empty())selectedNodes_.clear();
     rebuildEntities();
     refreshSelectedTransform();
     updateResourceWriteTimes();
@@ -55,17 +56,18 @@ void EditorContext::detachRenderSettings() noexcept {
 }
 
 SceneNode* EditorContext::selectedNode() noexcept {
-    return scene_.nodes.empty() ? nullptr : &scene_.nodes[selectedNodeIndex_];
+    return selectedNodes_.empty()||selectedNodeIndex_>=scene_.nodes.size() ? nullptr : &scene_.nodes[selectedNodeIndex_];
 }
 
 const SceneNode* EditorContext::selectedNode() const noexcept {
-    return scene_.nodes.empty() ? nullptr : &scene_.nodes[selectedNodeIndex_];
+    return selectedNodes_.empty()||selectedNodeIndex_>=scene_.nodes.size() ? nullptr : &scene_.nodes[selectedNodeIndex_];
 }
 
 void EditorContext::selectNode(const std::size_t index) {
     if (index >= scene_.nodes.size()) {
         throw std::out_of_range("Editor node selection is out of range");
     }
+    if(selectedNodes_!=std::vector<std::size_t>{index}) { ++revision_;closeEditMerge(); }
     if(index!=selectedNodeIndex_)clearAnimationPreview();
     selectedNodeIndex_ = index;
     selectedNodes_ = {index};
@@ -89,6 +91,7 @@ void EditorContext::save() {
         sourceLevel_ = std::move(document);assets_->refresh();
     } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources)resource.path=resourceReferences_.at(resource.path);portable.save(scenePath_);}else scene_.save(scenePath_);
     dirty_ = false;
+    ++revision_;closeEditMerge();
     log("Saved scene: " + scenePath_.string());
 }
 
@@ -111,6 +114,7 @@ void EditorContext::reload() {
     redoStack_.clear();
     updateResourceWriteTimes();
     dirty_ = false;
+    ++revision_;closeEditMerge();
     log("Reloaded scene: " + scene_.sceneId);
 }
 
@@ -213,6 +217,8 @@ void EditorContext::removeNode(const std::size_t index) {
     }
     beginEdit();
     // Remove the node and all descendants (matched by parent chain).
+    std::vector<std::string> selectionIds;
+    for(const auto selected:selectedNodes_)selectionIds.push_back(scene_.nodes.at(selected).id);
     std::vector<std::size_t> removed;
     removed.push_back(index);
     bool grew = true;
@@ -239,6 +245,10 @@ void EditorContext::removeNode(const std::size_t index) {
     }
     std::sort(removed.begin(), removed.end(), std::greater<std::size_t>());
     for (const std::size_t removedIndex : removed) {
+        const auto id=scene_.nodes[removedIndex].id;
+        components_.erase(id);
+        scene_.lights.erase(std::remove_if(scene_.lights.begin(),scene_.lights.end(),
+            [&](const SceneLight& light) { return light.nodeId==id; }),scene_.lights.end());
         scene_.nodes.erase(
             scene_.nodes.begin() + static_cast<std::ptrdiff_t>(removedIndex));
         if (removedIndex < nodeEntities_.size()) {
@@ -251,6 +261,12 @@ void EditorContext::removeNode(const std::size_t index) {
     if (selectedNodeIndex_ >= scene_.nodes.size()) {
         selectedNodeIndex_ = scene_.nodes.empty() ? 0 : scene_.nodes.size() - 1;
     }
+    selectedNodes_.clear();
+    for(std::size_t candidate=0;candidate<scene_.nodes.size();++candidate)
+        if(std::find(selectionIds.begin(),selectionIds.end(),scene_.nodes[candidate].id)!=selectionIds.end())selectedNodes_.push_back(candidate);
+    if(selectedNodes_.empty()&&!selectionIds.empty()&&!scene_.nodes.empty())selectedNodes_.push_back(selectedNodeIndex_);
+    if(!selectedNodes_.empty())selectedNodeIndex_=selectedNodes_.back();
+    clearAnimationPreview();
     refreshSelectedTransform();
     log("Removed node (and descendants)");
 }
@@ -311,13 +327,15 @@ EditorContext::Snapshot EditorContext::snapshot() const {
 }
 
 void EditorContext::beginEdit() {
+    auto checkpoint=snapshot();
     constexpr std::size_t kHistoryCapacity = 100;
     if (undoStack_.size() == kHistoryCapacity) {
         undoStack_.erase(undoStack_.begin());
     }
-    undoStack_.push_back(snapshot());
+    undoStack_.push_back(std::move(checkpoint));
     redoStack_.clear();
     dirty_ = true;
+    ++revision_;closeEditMerge();
 }
 
 void EditorContext::restore(Snapshot restored) {
@@ -339,6 +357,7 @@ void EditorContext::restore(Snapshot restored) {
 
 bool EditorContext::undo() {
     if (undoStack_.empty()) return false;
+    ++revision_;closeEditMerge();
     redoStack_.push_back(snapshot());
     Snapshot restored = std::move(undoStack_.back());
     undoStack_.pop_back();
@@ -349,6 +368,7 @@ bool EditorContext::undo() {
 
 bool EditorContext::redo() {
     if (redoStack_.empty()) return false;
+    ++revision_;closeEditMerge();
     undoStack_.push_back(snapshot());
     Snapshot restored = std::move(redoStack_.back());
     redoStack_.pop_back();

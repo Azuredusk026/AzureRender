@@ -1,0 +1,11 @@
+[1/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[2/10] Linking CXX static library AzureEditor.lib
+[3/10] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[4/10] Linking CXX executable AzureRegisteredComponentHost.exe
+[5/10] Linking CXX executable AzureEditorWorkspaceTests.exe
+[6/10] Linking CXX executable AzureEditServiceTests.exe
+[7/10] Linking CXX executable AzureRender.exe
+[8/10] Linking CXX executable AzureEditorWorkflowTests.exe
+[9/10] Linking CXX executable AzureEditTransactionTests.exe
+[10/10] Linking CXX executable AzureRenderEditorSessionTests.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

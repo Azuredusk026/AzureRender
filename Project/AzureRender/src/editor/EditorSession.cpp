@@ -36,7 +36,7 @@ struct EditorSession::PlayState {
     }
 };
 EditorSession::~EditorSession()=default;
-bool EditorSession::startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace) noexcept {
+bool EditorSession::startBuildInternal(const std::filesystem::path& install, const std::filesystem::path& output, bool replace) noexcept {
     try {
         if (playing() || building() || !context_->isProject()) throw std::runtime_error("Build requires an idle game project in edit mode");
         context_->save();
@@ -66,9 +66,33 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     if (context_ == nullptr) {
         throw std::invalid_argument("Editor session requires a context");
     }
+    edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
+        return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
+    });
 }
 
+EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
+    auto result=edits_->current(command,std::move(parameters),std::move(mergeKey));
+    if(!result) {
+        lastError_=result.diagnostics.empty()?"Edit failed":result.diagnostics.front().value("message",std::string("Edit rejected"));
+        context_->log("ERROR: "+lastError_);
+    }else lastError_.clear();
+    return result;
+}
+bool EditorSession::startBuild(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept {
+    try { return static_cast<bool>(edit("project.build",{{"install",install.string()},{"output",output.string()},{"replace",replace}})); }
+    catch(const std::exception& error) { lastError_=error.what();return false; }
+}
 bool EditorSession::execute(const EditorCommand command) noexcept {
+    static const std::map<EditorCommand,std::string> ids={{EditorCommand::Save,"document.save"},{EditorCommand::Reload,"document.reload"},
+        {EditorCommand::Undo,"history.undo"},{EditorCommand::Redo,"history.redo"},{EditorCommand::Play,"preview.play"},
+        {EditorCommand::Pause,"preview.pause"},{EditorCommand::Resume,"preview.resume"},{EditorCommand::Step,"preview.step"},
+        {EditorCommand::Stop,"preview.stop"},{EditorCommand::ResetLayout,"workspace.reset"},{EditorCommand::ReloadAssets,"assets.reload"},
+        {EditorCommand::Capture,"viewport.capture"}};
+    try { return static_cast<bool>(edit(ids.at(command))); }
+    catch(const std::exception& error) { lastError_=error.what();return false; }
+}
+bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     lastError_.clear();
     if(building() && (command==EditorCommand::Save || command==EditorCommand::Reload || command==EditorCommand::Play || command==EditorCommand::Undo || command==EditorCommand::Redo)) {
         lastError_="Wait for game build to finish"; return false;

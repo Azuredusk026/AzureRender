@@ -1,0 +1,705 @@
+{
+  "activeScripts": 2,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "fixedSteps": 29,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "observer",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "asset-a",
+      "translation": [
+        -0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "asset-b",
+      "translation": [
+        0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 3,
+  "routeFrames": [
+    {
+      "camera": [
+        0.25,
+        2.035276174545288,
+        2.8637032508850098
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 1,
+      "interactionTarget": "",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.25,
+        2.035276174545288,
+        2.8637032508850098
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 2,
+      "interactionTarget": "asset-a",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 3,
+      "interactionTarget": "asset-a",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 4,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 5,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812492728233337,
+        2.0275115966796875,
+        2.8347253799438477
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 6,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 7,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 8,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 9,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 10,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 11,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 12,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 13,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 14,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 15,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 16,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 17,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 18,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 19,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 20,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 21,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 22,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 23,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 24,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 25,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 26,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 27,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 28,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 29,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 30,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    }
+  ],
+  "scene": "inspection",
+  "scriptErrors": [],
+  "simulationMilliseconds": 1.5479000000000005,
+  "uiDrawCalls": 0
+}

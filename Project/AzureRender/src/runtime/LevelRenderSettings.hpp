@@ -10,7 +10,8 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
         {"saturation",settings.grade.saturation},{"contrast",settings.grade.contrast},{"tint",settings.grade.tint},{"toneMapping",settings.grade.toneMappingEnabled},
         {"bloomEnabled",settings.bloom.enabled},{"bloomThreshold",settings.bloom.threshold},{"bloomStrength",settings.bloom.strength},
         {"outlineDepth",settings.outline.depthThreshold},{"outlineNormal",settings.outline.normalThreshold},{"outlineColor",settings.outline.color},
-        {"stylized",settings.stylizedLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled}};
+        {"stylized",settings.stylizedLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled},
+        {"styleMaskStrength",settings.styleMaskStrength},{"diffuseBandThreshold",settings.diffuseBandThreshold},{"diagnosticView",settings.diagnosticView}};
 }
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
@@ -27,6 +28,9 @@ inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::jso
     settings.bloom.enabled=data.value("bloomEnabled",settings.bloom.enabled);settings.bloom.threshold=data.value("bloomThreshold",settings.bloom.threshold);settings.bloom.strength=data.value("bloomStrength",settings.bloom.strength);
     settings.outline.depthThreshold=data.value("outlineDepth",settings.outline.depthThreshold);settings.outline.normalThreshold=data.value("outlineNormal",settings.outline.normalThreshold);settings.outline.color=data.value("outlineColor",settings.outline.color);
     settings.stylizedLightingEnabled=data.value("stylized",settings.stylizedLightingEnabled);settings.innerOutlineEnabled=data.value("innerOutline",settings.innerOutlineEnabled);settings.silhouetteOutlineEnabled=data.value("silhouetteOutline",settings.silhouetteOutlineEnabled);
+    settings.styleMaskStrength=data.value("styleMaskStrength",settings.styleMaskStrength);
+    settings.diffuseBandThreshold=data.value("diffuseBandThreshold",settings.diffuseBandThreshold);
+    settings.diagnosticView=data.value("diagnosticView",settings.diagnosticView);
     validateRenderSettings(settings);
     target=settings;
 }

@@ -261,8 +261,8 @@ void ImGuiEditorLayer::drawPanels() {
     drawWorkspace();
     const ImGuiIO& io = ImGui::GetIO();
     if(!io.WantTextInput && !session_->playing() && !session_->building()){
-        if(io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_D,false))context_->duplicateSelection();
-        if(ImGui::IsKeyPressed(ImGuiKey_Delete,false))context_->deleteSelection();
+        if(io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_D,false))session_->edit("node.duplicate");
+        if(ImGui::IsKeyPressed(ImGuiKey_Delete,false))session_->edit("node.delete");
     }
     if(!io.WantTextInput && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_P,false))static_cast<void>(session_->execute(session_->playing()?EditorCommand::Stop:EditorCommand::Play));
     if (!io.WantTextInput && EditorToolbar::enabled(*session_,EditorCommand::Save) && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
@@ -279,6 +279,7 @@ void ImGuiEditorLayer::drawPanels() {
         const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build");panel->draw(*context_);ImGui::EndDisabled();
     }    EditorToolbar::status(*session_,dpi_);
+    if(!ImGui::IsAnyItemActive()&&!viewportGizmoDragActive_)context_->closeEditMerge();
 #ifdef IMGUI_HAS_DOCK
     for(const auto& panel:workspace_.panels())if(const auto* window=ImGui::FindWindowByName(panel.title.c_str())) {
         widgets_["panelrect."+panel.id]={window->Pos.x,window->Pos.y,window->Size.x,window->Size.y};
@@ -414,7 +415,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
         if(!session_->playing() && !session_->building() && ImGui::BeginDragDropTarget()){
-            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))try{context_->placeResource(static_cast<const char*>(payload->Data));}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))try{session_->edit("node.place",{{"resource",static_cast<const char*>(payload->Data)}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             ImGui::EndDragDropTarget();
         }
         // Draw the viewport gizmo handles (if any selected primitive has a
@@ -558,13 +559,13 @@ void ImGuiEditorLayer::drawViewportPanel() {
                 std::array<float, 3> translation =
                     gizmoDragStartTranslation_;
                 translation[gizmoDragAxis_] += worldDelta;
-                if(context_->gizmoMode()==EditorContext::GizmoMode::Translate)context_->setGizmoTranslation(translation);
+                if(context_->gizmoMode()==EditorContext::GizmoMode::Translate)session_->edit("node.transform",{{"translation",translation}},"viewport-translate");
                 else if(context_->gizmoMode()==EditorContext::GizmoMode::Rotate) {
-                    auto value=gizmoDragStartRotation_;value[gizmoDragAxis_]+=projection*.5F;context_->setGizmoRotation(value);
+                    auto value=gizmoDragStartRotation_;value[gizmoDragAxis_]+=projection*.5F;session_->edit("node.transform",{{"rotation",value}},"viewport-rotate");
                 }else {
                     auto value=gizmoDragStartScale_;value[gizmoDragAxis_]+=worldDelta;
                     if(std::abs(value[gizmoDragAxis_])<.001F)value[gizmoDragAxis_]=.001F;
-                    context_->setGizmoScale(value);
+                    session_->edit("node.transform",{{"scale",value}},"viewport-scale");
                 }
             }
             if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
@@ -589,7 +590,7 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
     if (ImGui::Button("Add Child")) {
         if (!nodes.empty()) {
             try {
-                context_->addChildNode(context_->selectedNodeIndex());
+                session_->edit("node.child",{{"parent",context_->selectedNodeIndex()}});
             } catch (const std::exception& exception) {
                 context_->log(std::string("ERROR: ") + exception.what());
             }
@@ -597,9 +598,9 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
     }
     ImGui::SameLine();
     if (ImGui::Button("Delete") && !nodes.empty()) {
-        context_->deleteSelection();
+        session_->edit("node.delete");
     }
-    ImGui::SameLine();if(ImGui::Button("Duplicate"))context_->duplicateSelection();
+    ImGui::SameLine();if(ImGui::Button("Duplicate"))session_->edit("node.duplicate");
     ImGui::Separator();
     if (nodes.empty()) {
         ImGui::TextUnformatted("(empty scene)");
@@ -641,7 +642,7 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
             }
             observeWidget("node."+nodes[index].id);
             if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
-                if(ImGui::GetIO().KeyCtrl){auto selection=context_->selectedNodes();auto found=std::find(selection.begin(),selection.end(),index);if(found==selection.end())selection.push_back(index);else selection.erase(found);context_->selectNodes(std::move(selection));}else context_->selectNode(index);
+                if(ImGui::GetIO().KeyCtrl){auto selection=context_->selectedNodes();auto found=std::find(selection.begin(),selection.end(),index);if(found==selection.end())selection.push_back(index);else selection.erase(found);session_->edit("node.select",{{"indices",selection}});}else session_->edit("node.select",{{"index",index}});
             }
             if (open) {
                 self(self, nodes[index].id, depth + 1);
@@ -653,7 +654,7 @@ void ImGuiEditorLayer::drawOutlinerPanel() {
     if(outlinerFilter_.IsActive()) {
         for(std::size_t i=0;i<nodes.size();++i)if(outlinerFilter_.PassFilter(nodes[i].name.c_str()) || outlinerFilter_.PassFilter(nodes[i].id.c_str())) {
             ImGui::PushID(nodes[i].id.c_str());
-            if(ImGui::Selectable(nodes[i].name.c_str(),context_->selectedNodeIndex()==i))context_->selectNode(i);
+            if(ImGui::Selectable(nodes[i].name.c_str(),context_->selectedNodeIndex()==i))session_->edit("node.select",{{"index",i}});
             observeWidget("node."+nodes[i].id);ImGui::SameLine();ImGui::TextDisabled("%s",nodes[i].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
     }else drawNode(drawNode, "", 0);
@@ -666,12 +667,14 @@ void ImGuiEditorLayer::drawInspectorPanel() {
 #endif
     if(!ImGui::Begin("Details###inspector",workspace_.open("inspector"))){ImGui::End();return;}
     ImGui::BeginDisabled(session_->playing() || session_->building());
-    if (const SceneNode* node = context_->selectedNode(); node != nullptr) {
+    const auto selected=context_->selectedNode()?std::optional<SceneNode>(*context_->selectedNode()):std::nullopt;
+    if (selected) {
+        const auto* node=&*selected;
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());
         bool visible = node->visible;
         if (ImGui::Checkbox("Visible", &visible)) {
-            context_->setSelectedNodeVisible(visible);
+            session_->edit("node.visible",{{"value",visible}});
         }
         ImGui::TextUnformatted("Name");
         std::array<char, 128> nameBuffer{};
@@ -680,7 +683,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         std::memcpy(
             nameBuffer.data(), node->name.data(), copyLength);
         if (ImGui::InputText("##name", nameBuffer.data(), nameBuffer.size())) {
-            context_->setSelectedNodeName(nameBuffer.data());
+            session_->edit("node.rename",{{"value",nameBuffer.data()}},"details-name");
         }
         observeWidget("name");
         ImGui::TextUnformatted("Prefab Source");
@@ -688,14 +691,14 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         std::memcpy(prefabBuffer.data(), node->prefabSource.data(),
             std::min(node->prefabSource.size(), prefabBuffer.size() - 1));
         if (ImGui::InputText("##prefab", prefabBuffer.data(), prefabBuffer.size())) {
-            context_->setSelectedNodePrefab(prefabBuffer.data());
+            session_->edit("node.prefab-source",{{"value",prefabBuffer.data()}},"details-prefab");
         }
         ImGui::TextUnformatted("Instance Of");
         std::array<char, 128> instanceBuffer{};
         std::memcpy(instanceBuffer.data(), node->instanceOf.data(),
             std::min(node->instanceOf.size(), instanceBuffer.size() - 1));
         if (ImGui::InputText("##instance", instanceBuffer.data(), instanceBuffer.size())) {
-            context_->setSelectedNodeInstance(instanceBuffer.data());
+            session_->edit("node.instance",{{"value",instanceBuffer.data()}},"details-instance");
         }
     }
     if(context_->isProject() && context_->selectedNode()){
@@ -703,7 +706,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         for(const auto& entry:runtimeComponentRegistry().metadata().types())
             if(entry.first!="azure.transform" && entry.first!="azure.renderable") types.push_back(entry.first);
         ImGui::BeginDisabled(session_->playing() || session_->building());
-        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{context_->addGameplayComponent(type);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
+        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{session_->edit("component.add",{{"type",type}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
         const auto& componentRegistry=runtimeComponentRegistry().metadata();
         for(const auto& type:types){auto data=context_->componentData(context_->selectedNode()->id,type);if(data.is_null())continue;
             ImGui::PushID(type.c_str());if(ImGui::CollapsingHeader(type.c_str()))for(const auto& field:componentRegistry.type(type).properties){
@@ -728,14 +731,14 @@ void ImGuiEditorLayer::drawInspectorPanel() {
                 }
                 ImGui::EndDisabled();
                 if(!field.tooltip.empty() && ImGui::IsItemHovered())ImGui::SetTooltip("%s",field.tooltip.c_str());
-                if(changed)try{context_->setComponentField(type,field.name,value);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+                if(changed)try{session_->edit("component.field",{{"type",type},{"field",field.name},{"value",value}},"component-"+type+":"+field.name);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             }ImGui::PopID();
         }
         ImGui::EndDisabled();
     }
     ImGui::Separator();
     ImGui::Text("Transform | Position (m), Rotation (deg), Scale");
-    if(ImGui::Button("Reset Transform")){context_->setGizmoTranslation({0,0,0});context_->setGizmoRotation({0,0,0});context_->setGizmoScale({1,1,1});}
+    if(ImGui::Button("Reset Transform")){session_->edit("node.transform",{{"translation",{0,0,0}},{"rotation",{0,0,0}},{"scale",{1,1,1}}});}
     ImGui::SetNextItemWidth(-110*dpi_);
     static const auto registry = reflection::makeRuntimeRegistry();
     ecs::TransformComponent transform{context_->gizmoTranslation(), context_->gizmoRotation(), context_->gizmoScale()};
@@ -745,9 +748,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         if (ImGui::DragFloat3(property.label.c_str(), value.data(), 0.01F,
                 static_cast<float>(property.minimum), static_cast<float>(property.maximum))) {
             property.write(&transform, value);
-            context_->setGizmoTranslation(transform.translation);
-            context_->setGizmoRotation(transform.rotation);
-            context_->setGizmoScale(transform.scale);
+            session_->edit("node.transform",{{property.name,value}},"details-"+property.name);
         }
     }
     RenderSettings& settings = context_->renderSettings();
@@ -758,8 +759,7 @@ void ImGuiEditorLayer::drawInspectorPanel() {
             const bool selected = settings.showcasePreset == preset;
             const std::string name(showcasePresetName(preset));
             if (ImGui::Selectable(name.c_str(), selected)) {
-                context_->beginEdit();
-                applyShowcasePresetLook(settings, preset);
+                session_->edit("render.preset",{{"value",preset}});
             }
             if (selected) ImGui::SetItemDefaultFocus();
         }
@@ -767,44 +767,36 @@ void ImGuiEditorLayer::drawInspectorPanel() {
     }
     bool background = settings.characterPresentation.backgroundEnabled;
     if (ImGui::Checkbox("Background", &background)) {
-        context_->beginEdit();
-        settings.characterPresentation.backgroundEnabled = background;
+        session_->edit("render.settings",{{"values",{{"background",background}}}},"render-background");
     }
     bool platform = settings.characterPresentation.platformEnabled;
     if (ImGui::Checkbox("Showcase Platform", &platform)) {
-        context_->beginEdit();
-        settings.characterPresentation.platformEnabled = platform;
+        session_->edit("render.settings",{{"values",{{"platform",platform}}}},"render-platform");
     }
     bool faceSdf = settings.faceSdf.enabled;
     if (ImGui::Checkbox("Face SDF", &faceSdf)) {
-        context_->beginEdit();
-        settings.faceSdf.enabled = faceSdf;
+        session_->edit("render.settings",{{"values",{{"faceSdf",faceSdf}}}},"render-faceSdf");
     }
     float threshold = settings.faceSdf.threshold;
     if (ImGui::SliderFloat("Face SDF Threshold", &threshold, 0.0F, 1.0F)) {
-        context_->beginEdit();
-        settings.faceSdf.threshold = threshold;
+        session_->edit("render.settings",{{"values",{{"faceThreshold",threshold}}}},"render-faceThreshold");
     }
     float softness = settings.faceSdf.softness;
     if (ImGui::SliderFloat("Face SDF Softness", &softness, 0.001F, 0.5F)) {
-        context_->beginEdit();
-        settings.faceSdf.softness = softness;
+        session_->edit("render.settings",{{"values",{{"faceSoftness",softness}}}},"render-faceSoftness");
     }
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
-        context_->beginEdit();
-        settings.outline.strength = outline;
+        session_->edit("render.settings",{{"values",{{"outline",outline}}}},"render-outline");
     }
     float shadowRadius = settings.shadow.maximumFilterRadiusTexels;
     if (ImGui::SliderFloat(
             "Shadow Softness", &shadowRadius, 1.0F, 16.0F, "%.1f texels")) {
-        context_->beginEdit();
-        settings.shadow.maximumFilterRadiusTexels = shadowRadius;
+        session_->edit("render.settings",{{"values",{{"shadowRadius",shadowRadius}}}},"render-shadowRadius");
     }
     float exposure = settings.grade.exposureEv;
     if (ImGui::SliderFloat("Exposure EV", &exposure, -8.0F, 8.0F)) {
-        context_->beginEdit();
-        settings.grade.exposureEv = exposure;
+        session_->edit("render.settings",{{"values",{{"exposure",exposure}}}},"render-exposure");
     }
     ImGui::EndDisabled();
     ImGui::End();
@@ -825,9 +817,9 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
     ImGui::Checkbox("Grid",&assetGrid_);
     if(context_->isProject() && ImGui::CollapsingHeader("Import / Create")){
         static std::array<char,1024> source{};ImGui::InputText("glTF / GLB path",source.data(),source.size());
-        ImGui::BeginDisabled(context_->importing());if(ImGui::Button("Import"))try{context_->startImport(source.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndDisabled();
-        if(context_->importing()){ImGui::ProgressBar(context_->importProgress());if(ImGui::Button("Cancel Import"))context_->cancelImport();}
-        try{if(auto imported=context_->pollImport())context_->log("Import ready: "+*imported);}catch(const std::exception& error){context_->log(std::string("Import: ")+error.what());}
+        ImGui::BeginDisabled(context_->importing());if(ImGui::Button("Import"))try{session_->edit("asset.import-start",{{"path",source.data()}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndDisabled();
+        if(context_->importing()){ImGui::ProgressBar(context_->importProgress());if(ImGui::Button("Cancel Import"))session_->edit("asset.import-cancel");}
+        if(context_->importing())try{if(auto imported=session_->edit("asset.import-poll").value;!imported.is_null())context_->log("Import ready: "+imported.get<std::string>());}catch(const std::exception& error){context_->log(std::string("Import: ")+error.what());}
         const auto& summary=context_->importSummary();
         if(summary.contains("vertices")){
             ImGui::Text("Admission: %zu vertices, %zu joints, %zu materials",summary.at("vertices").get<std::size_t>(),summary.at("joints").get<std::size_t>(),summary.at("materials").get<std::size_t>());
@@ -836,10 +828,10 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
         static std::array<char,128> instance{};
         ImGui::InputText("Prefab instance",instance.data(),instance.size());
         ImGui::BeginDisabled(session_->playing() || session_->building());
-        if(ImGui::Button("Create empty node"))try{context_->createNode(instance.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+        if(ImGui::Button("Create empty node"))try{session_->edit("node.create",{{"id",instance.data()}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
         if(ImGui::BeginCombo("Place Prefab","Choose asset")){
             for(const auto& [id,record]:context_->assets().records())if(record.path.extension()==".azureprefab" && ImGui::Selectable(record.virtualPath.c_str()))
-                try{context_->placePrefab(id,instance.data());}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+                try{session_->edit("prefab.place",{{"asset",id},{"instance",instance.data()}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             ImGui::EndCombo();
         }
         ImGui::EndDisabled();
@@ -871,11 +863,11 @@ void ImGuiEditorLayer::drawAssetBrowserPanel() {
         if(session_->playing() || session_->building())return;
         try{
             const auto extension=resource.path.extension();
-            if(extension==".azureprefab")context_->placePrefab(resource.id,"prefab-"+std::to_string(context_->scene().nodes.size()));
+            if(extension==".azureprefab")session_->edit("prefab.place",{{"asset",resource.id},{"instance","prefab-"+std::to_string(context_->scene().nodes.size())}});
             else if(extension==".gltf" || extension==".glb"){
                 auto id=resource.id;
-                if(std::none_of(context_->scene().resources.begin(),context_->scene().resources.end(),[&](const auto& entry){return entry.id==id;}))id=context_->importAsset(resource.path);
-                context_->placeResource(id);
+                if(std::none_of(context_->scene().resources.begin(),context_->scene().resources.end(),[&](const auto& entry){return entry.id==id;})){auto imported=session_->edit("asset.import",{{"path",resource.path.string()}});if(!imported)throw std::runtime_error(session_->lastError());id=imported.value.get<std::string>();};
+                session_->edit("node.place",{{"resource",id}});
             }
         }catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
     };
@@ -941,9 +933,9 @@ void ImGuiEditorLayer::drawAnimationPanel(){
                 }
                 changed=ImGui::DragFloat("Time (seconds)",&time,.01F,0,600)||changed;
                 changed=ImGui::SliderFloat("Crossfade (seconds)",&crossfade,0,2)||changed;
-                if(ImGui::Button("Preview pose") || changed)context_->previewAnimation(selected,time,previous,crossfade);
-                ImGui::SameLine();if(ImGui::Button("Clear preview"))context_->clearAnimationPreview();
-                if(ImGui::Button("Set initial semantic"))context_->setComponentField("azure.animator","state",selected);
+                if(ImGui::Button("Preview pose") || changed)session_->edit("animation.preview",{{"state",selected},{"time",time},{"previous",previous},{"crossfade",crossfade}});
+                ImGui::SameLine();if(ImGui::Button("Clear preview"))session_->edit("animation.clear-preview");
+                if(ImGui::Button("Set initial semantic"))session_->edit("component.field",{{"type","azure.animator"},{"field","state"},{"value",selected}});
                 ImGui::EndDisabled();
                 for(const auto& state:graph.at("states"))ImGui::Text("%s: clip %u, %s",state.at("name").get<std::string>().c_str(),state.at("clip").get<unsigned>(),state.value("loop",true)?"loop":"once");
                 if(const auto& preview=context_->animationPreview();preview)ImGui::Text("Clip %u, time %.3f, blend %.3f",preview->clip,preview->time,preview->blend);
@@ -955,7 +947,8 @@ void ImGuiEditorLayer::drawAnimationPanel(){
 void ImGuiEditorLayer::drawGameplayDebugPanel(){
     ImGui::SetNextWindowSize({370,280},ImGuiCond_FirstUseEver);
     if(!ImGui::Begin("Gameplay Debug###gameplay-debug",workspace_.open("gameplay-debug"))){ImGui::End();return;}
-    ImGui::Checkbox("Collision and camera overlay",&session_->debugOverlay);
+    auto overlay=session_->debugOverlay;
+    if(ImGui::Checkbox("Collision and camera overlay",&overlay))session_->edit("viewport.debug-overlay",{{"enabled",overlay}});
     const auto scene=session_->viewScene();auto* runtime=session_->runtime();auto* game=session_->game();
     for(std::size_t index=0;index<scene.nodes.size();++index){const auto& node=scene.nodes[index];
         const auto entity=runtime?runtime->entity(node.id):ecs::kInvalidEntity;
@@ -964,7 +957,7 @@ void ImGuiEditorLayer::drawGameplayDebugPanel(){
         if(!character&&!body)continue;
         ImGui::PushID(node.id.c_str());
         if(ImGui::Selectable(node.id.c_str(),context_->selectedNode() && context_->selectedNode()->id==node.id)){
-            for(std::size_t edit=0;edit<context_->scene().nodes.size();++edit)if(context_->scene().nodes[edit].id==node.id){context_->selectNode(edit);break;}
+            for(std::size_t edit=0;edit<context_->scene().nodes.size();++edit)if(context_->scene().nodes[edit].id==node.id){session_->edit("node.select",{{"index",edit}});break;}
         }
         if(character && game){const auto v=game->physics().velocity(entity);ImGui::Text("Velocity %.2f %.2f %.2f, grounded %s",v[0],v[1],v[2],game->physics().grounded(entity)?"yes":"no");}
         ImGui::PopID();
@@ -975,12 +968,12 @@ void ImGuiEditorLayer::drawGameplayDebugPanel(){
     }
     if(game && game->interactionTarget()){
         const auto& target=*game->interactionTarget();ImGui::Text("Interaction: %s",target.node.c_str());
-        if(ImGui::Button("Locate interaction"))for(std::size_t i=0;i<context_->scene().nodes.size();++i)if(context_->scene().nodes[i].id==target.node){context_->selectNode(i);break;}
+        if(ImGui::Button("Locate interaction"))for(std::size_t i=0;i<context_->scene().nodes.size();++i)if(context_->scene().nodes[i].id==target.node){session_->edit("node.select",{{"index",i}});break;}
     }
     if(auto* scripts=session_->scripts())for(const auto& error:scripts->errors()){
         ImGui::TextWrapped("%s",error.c_str());
         for(std::size_t i=0;i<context_->scene().nodes.size();++i){const auto& node=context_->scene().nodes[i];const auto script=context_->componentData(node.id,"azure.script");
-            if(!script.is_null() && error.find(script.at("asset").get<std::string>())!=std::string::npos){ImGui::PushID(node.id.c_str());if(ImGui::SmallButton(("Locate "+node.id).c_str()))context_->selectNode(i);ImGui::PopID();}}
+            if(!script.is_null() && error.find(script.at("asset").get<std::string>())!=std::string::npos){ImGui::PushID(node.id.c_str());if(ImGui::SmallButton(("Locate "+node.id).c_str()))session_->edit("node.select",{{"index",i}});ImGui::PopID();}}
     }
     ImGui::End();
 }
@@ -993,7 +986,7 @@ void ImGuiEditorLayer::drawBuildPanel() {
     ImGui::InputText("New game directory", project.data(), project.size());
     ImGui::BeginDisabled(session_->building());
     if(ImGui::Button("Create game template")) {
-        try { const std::filesystem::path path(project.data()); Project::createGame(path,path.filename().string()); context_->log("Game template created: "+path.string()); }
+        try { const std::filesystem::path path(project.data()); session_->edit("project.create",{{"path",path.string()},{"name",path.filename().string()}}); }
         catch(const std::exception& error) { context_->log("ERROR: "+std::string(error.what())); }
     }
     ImGui::EndDisabled();
@@ -1030,7 +1023,7 @@ void ImGuiEditorLayer::drawConsolePanel() {
         if(error)ImGui::PushStyleColor(ImGuiCol_Text,{1,.55F,.45F,1});
         ImGui::TextUnformatted(message.c_str());if(error)ImGui::PopStyleColor();
         if(ImGui::IsItemClicked())for(std::size_t i=0;i<context_->scene().nodes.size();++i)
-            if(message.find(context_->scene().nodes[i].id)!=std::string::npos){context_->selectNode(i);break;}
+            if(message.find(context_->scene().nodes[i].id)!=std::string::npos){session_->edit("node.select",{{"index",i}});break;}
     }
     ImGui::End();
 }

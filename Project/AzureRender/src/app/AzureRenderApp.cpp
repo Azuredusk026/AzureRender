@@ -288,7 +288,8 @@ void AzureRenderApp::initEditorUi() {
             const auto data=context.componentData(context.scene().nodes[i].id,"azure.character");
             if(!data.is_null()&&data.value("controlled",true)) {
                 azurerender::EditorViewportInput focus;focus.frameRequested=true;focus.frameTarget=context.scene().nodes[i].translation;
-                azurerender::EditorCameraController::apply(focus,cameraPosition_,cameraTarget_);context.selectNode(i);break;
+                azurerender::EditorCameraController::apply(focus,cameraPosition_,cameraTarget_);
+                runOptions_.editorSession->edit("node.select",{{"index",i}});break;
             }
         }
         editorLayer_ = std::make_unique<azurerender::ImGuiEditorLayer>(
@@ -1399,6 +1400,15 @@ void AzureRenderApp::keyCallback(
     if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
     if(game && game->input().bound(key)){game->input().key(key,action!=GLFW_RELEASE);return;}
     if(runtime && game){
+#if AZURE_WITH_EDITOR
+        if(auto session=application->runOptions_.editorSession;session&&session->playing()) {
+            if(action==GLFW_PRESS&&key==GLFW_KEY_P)
+                static_cast<void>(session->execute(runtime->state()==azurerender::RuntimeLifecycle::State::Running?azurerender::EditorCommand::Pause:azurerender::EditorCommand::Resume));
+            if(action==GLFW_PRESS&&key==GLFW_KEY_O&&runtime->state()==azurerender::RuntimeLifecycle::State::Paused)
+                static_cast<void>(session->execute(azurerender::EditorCommand::Step));
+            return;
+        }
+#endif
         if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
         if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}
 #if AZURE_WITH_EDITOR
@@ -1407,19 +1417,38 @@ void AzureRenderApp::keyCallback(
     }
     constexpr float kPi = 3.14159265358979323846F;
     constexpr float kFineStep = kPi / 36.0F;
-    if (action == GLFW_PRESS) {
 #if AZURE_WITH_EDITOR
-        if (application->runOptions_.editorSession != nullptr
-            && key == GLFW_KEY_TAB
-            && application->runOptions_.editorSession->context().selectedNode() != nullptr) {
-            application->runOptions_.editorSession->context().selectNextNode();
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor selected node: "
-                    + application->runOptions_.editorSession->context()
-                          .selectedNode()->name);
-        } else
+    if(auto session=application->runOptions_.editorSession) {
+        const auto& settings=session->context().renderSettings();
+        if(action==GLFW_PRESS&&key==GLFW_KEY_F12) {
+            static_cast<void>(session->execute(azurerender::EditorCommand::Capture));return;
+        }
+        if(action==GLFW_PRESS&&key==GLFW_KEY_TAB&&session->context().selectedNode()) {
+            session->edit("node.select",{{"index",(session->context().selectedNodeIndex()+1)%session->context().scene().nodes.size()}});return;
+        }
+        if(action==GLFW_PRESS&&key>=GLFW_KEY_F1&&key<=GLFW_KEY_F3) {
+            session->edit("render.preset",{{"value",key-GLFW_KEY_F1}});return;
+        }
+        auto values=nlohmann::json::object();
+        if(action==GLFW_PRESS) {
+            if(key==GLFW_KEY_F9)values["stylized"]=!settings.stylizedLightingEnabled;
+            if(key==GLFW_KEY_F10)values["innerOutline"]=!settings.innerOutlineEnabled;
+            if(key==GLFW_KEY_0)values["diagnosticView"]=(settings.diagnosticView+1)%5;
+        }
+        if(action==GLFW_PRESS||action==GLFW_REPEAT) {
+            if(key==GLFW_KEY_F7)values["styleMaskStrength"]=std::max(settings.styleMaskStrength-.1F,0.F);
+            if(key==GLFW_KEY_F8)values["styleMaskStrength"]=std::min(settings.styleMaskStrength+.1F,2.F);
+            if(key==GLFW_KEY_F5)values["diffuseBandThreshold"]=std::max(settings.diffuseBandThreshold-.05F,.05F);
+            if(key==GLFW_KEY_F6)values["diffuseBandThreshold"]=std::min(settings.diffuseBandThreshold+.05F,.95F);
+            if(key==GLFW_KEY_LEFT_BRACKET)values["outline"]=std::max(settings.outline.strength-.05F,0.F);
+            if(key==GLFW_KEY_RIGHT_BRACKET)values["outline"]=std::min(settings.outline.strength+.05F,2.F);
+            if(key==GLFW_KEY_MINUS)values["exposure"]=std::max(settings.grade.exposureEv-.25F,-8.F);
+            if(key==GLFW_KEY_EQUAL)values["exposure"]=std::min(settings.grade.exposureEv+.25F,8.F);
+        }
+        if(!values.empty()) { session->edit("render.settings",{{"values",values}});return; }
+    }
 #endif
+    if (action == GLFW_PRESS) {
         if (key == GLFW_KEY_SPACE) {
             application->autoRotate_ = !application->autoRotate_;
             azurerender::RuntimeDiagnostics::instance().print(
@@ -1564,52 +1593,6 @@ void AzureRenderApp::keyCallback(
                     + std::to_string(
                         application->renderSettings_.diffuseBandThreshold));
         }
-#if AZURE_WITH_EDITOR
-        else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_LEFT_BRACKET) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.outline.strength = std::max(
-                application->renderSettings_.outline.strength - 0.05F,
-                0.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor outline strength: "
-                    + std::to_string(
-                        application->renderSettings_.outline.strength));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_RIGHT_BRACKET) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.outline.strength = std::min(
-                application->renderSettings_.outline.strength + 0.05F,
-                2.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor outline strength: "
-                    + std::to_string(
-                        application->renderSettings_.outline.strength));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_MINUS) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.grade.exposureEv = std::max(
-                application->renderSettings_.grade.exposureEv - 0.25F,
-                -8.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor exposure EV: "
-                    + std::to_string(
-                        application->renderSettings_.grade.exposureEv));
-        } else if (application->runOptions_.editorMode
-                   && key == GLFW_KEY_EQUAL) {
-            application->runOptions_.editorSession->context().beginEdit();
-            application->renderSettings_.grade.exposureEv = std::min(
-                application->renderSettings_.grade.exposureEv + 0.25F,
-                8.0F);
-            azurerender::RuntimeDiagnostics::instance().print(
-                "input",
-                "Editor exposure EV: "
-                    + std::to_string(
-                        application->renderSettings_.grade.exposureEv));
-        }
-#endif
+
     }
 }

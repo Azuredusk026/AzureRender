@@ -465,7 +465,7 @@ void AzureRenderApp::pickPrimitive(
             }
         }
         if(!selected.empty())for(std::size_t index=0;index<context.scene().nodes.size();++index)
-            if(context.scene().nodes[index].id==selected){context.selectNode(index);break;}
+            if(context.scene().nodes[index].id==selected){runOptions_.editorSession->edit("node.select",{{"index",index}});break;}
         return;
     }
 #endif

@@ -6,6 +6,7 @@
 #include "runtime/LevelSession.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
+#include "editor/commands/EditService.hpp"
 
 #include <memory>
 #include <string>
@@ -51,6 +52,8 @@ public:
         return *context_;
     }
     [[nodiscard]] bool execute(EditorCommand command) noexcept;
+    EditService& edits() noexcept { return *edits_; }
+    EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
     [[nodiscard]] bool saveOnClose() noexcept;
     [[nodiscard]] bool consumeLayoutResetRequest() noexcept;
     [[nodiscard]] bool consumeAssetReloadRequest() noexcept;
@@ -64,7 +67,11 @@ public:
     }
 
 private:
+    friend EditRegistry editorOperations(EditorSession&);
+    bool executeInternal(EditorCommand command) noexcept;
+    bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;
     std::shared_ptr<EditorContext> context_;
+    std::unique_ptr<EditService> edits_;
     std::string lastError_;
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;

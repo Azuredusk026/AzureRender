@@ -6,6 +6,7 @@
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
 #include "runtime/PresentationRuntime.hpp"
+#include "editor/commands/DocumentVersion.hpp"
 #include <memory>
 #include <vector>
 
@@ -88,7 +89,7 @@ public:
     void setGizmoRotation(std::array<float, 3> value);
     void setGizmoScale(std::array<float, 3> value);
 
-    void markDirty() noexcept { dirty_ = true; }
+    void markDirty() noexcept { dirty_ = true; ++revision_; closeEditMerge(); }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
     void save();
     void reload();
@@ -104,6 +105,11 @@ public:
     [[nodiscard]] bool canRedo() const noexcept { return !redoStack_.empty(); }
     bool undo();
     bool redo();
+    nlohmann::json documentContent() const;
+    DocumentVersion documentVersion() const;
+    std::size_t undoCount() const noexcept { return undoStack_.size(); }
+    std::size_t redoCount() const noexcept { return redoStack_.size(); }
+    void closeEditMerge() noexcept { mergeKey_.clear(); }
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();
 
@@ -150,6 +156,12 @@ public:
     }
 
 private:
+    friend class EditTransaction;
+    friend class EditService;
+    std::string documentId_=newDocumentIdentity();
+    std::uint64_t revision_=1,mergeRevision_=0;
+    std::string mergeKey_;
+    std::vector<std::size_t> mergeSelection_;
     struct Snapshot {
         SceneDocument scene;
         std::size_t selectedNodeIndex = 0;

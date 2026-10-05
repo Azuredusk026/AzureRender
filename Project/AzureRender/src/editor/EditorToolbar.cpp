@@ -61,7 +61,7 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
     auto& context=s.context();
     for(const auto& entry:{std::pair<const char*,EditorContext::GizmoMode>{"Move",EditorContext::GizmoMode::Translate},{"Rotate",EditorContext::GizmoMode::Rotate},{"Scale",EditorContext::GizmoMode::Scale}}) {
         ImGui::BeginDisabled(s.playing()||s.building());
-        if(ImGui::Selectable(entry.first,context.gizmoMode()==entry.second,0,{55*dpi,0}))context.setGizmoMode(entry.second);
+        if(ImGui::Selectable(entry.first,context.gizmoMode()==entry.second,0,{55*dpi,0}))s.edit("viewport.gizmo-mode",{{"value",static_cast<unsigned>(entry.second)}});
         observe(std::string("mode.")+entry.first);ImGui::EndDisabled();ImGui::SameLine();
     }
     button("Play","play",EditorCommand::Play);
