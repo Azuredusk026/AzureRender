@@ -57,6 +57,7 @@ nav:
       - 构建复现与素材准入: runtime/build-reproducibility.md
       - Windows 游戏发布: runtime/game-publishing.md
       - 项目编辑与游戏表现: runtime/editor-game-ui.md
+      - 从空关卡制作并发布游戏: tutorials/editor-first-game.md
       - 脚本与玩法: runtime/scripts-gameplay.md
       - 物理与输入: runtime/physics-input.md
       - 独立动画与第三人称控制: runtime/third-person-animation.md
@@ -76,6 +77,10 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U2 编辑器工作区与教程: acceptance/u2/2026-10-05.md
+      - G7 角色方向与冲刺: acceptance/g7/2026-10-05.md
+      - R6 场景可见性与裁剪: acceptance/r6/2026-10-05.md
+      - F3 仓库与文档基础: acceptance/f3/2026-10-05.md
       - P1 可玩关卡交付: acceptance/p1/2026-10-05.md
       - F2 性能与工程加固: acceptance/f2/2026-10-05.md
       - U1 关卡制作与调试: acceptance/u1/2026-10-05.md

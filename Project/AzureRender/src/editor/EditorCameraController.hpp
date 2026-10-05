@@ -13,6 +13,8 @@ struct EditorViewportInput {
     float pickX = -1.0F;
     float pickY = -1.0F;
     bool pickRequested = false;
+    bool frameRequested = false;
+    std::array<float,3> frameTarget{};
 
     [[nodiscard]] bool active() const noexcept;
 };

@@ -156,6 +156,8 @@ function(compile_shader source_file)
     set(COMPILED_SHADERS ${COMPILED_SHADERS} "${shader_output}" PARENT_SCOPE)
 endfunction()
 
+compile_shader("${SHADER_SOURCE_DIR}/editor_ui.frag")
+compile_shader("${SHADER_SOURCE_DIR}/editor_ui.frag" DEFINES AZURE_EDITOR_SRGB=1 OUTPUT_NAME editor_ui_srgb.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert")
 compile_shader("${SHADER_SOURCE_DIR}/cull_indirect.comp")
 compile_shader(
@@ -285,6 +287,10 @@ add_library(AzureEditor STATIC
     src/editor/EditorSession.cpp
     src/editor/GameBuildJob.cpp
     src/editor/EditorAutomation.cpp
+    src/editor/EditorWorkspace.cpp
+    src/editor/EditorWorkspaceUI.cpp
+    src/editor/EditorTheme.cpp
+    src/editor/EditorToolbar.cpp
     src/editor/ImGuiEditorLayer.cpp
 )
 set(AZURE_HOST_SOURCES
@@ -342,6 +348,9 @@ if(BUILD_TESTING)
     add_executable(AzureGameUiTests tests/GameUiTests.cpp)
     target_link_libraries(AzureGameUiTests PRIVATE AzureRuntime RmlUi::RmlUi)
     add_test(NAME AzureEngine.GameUi COMMAND AzureGameUiTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/hud.rml" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/LatoLatin-Regular.ttf")
+    add_executable(AzureEditorWorkspaceTests tests/EditorWorkspaceTests.cpp)
+    target_link_libraries(AzureEditorWorkspaceTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.Workspace COMMAND AzureEditorWorkspaceTests)
     add_executable(AzureEditorWorkflowTests tests/EditorWorkflowTests.cpp)
     target_link_libraries(AzureEditorWorkflowTests PRIVATE AzureEditor)
     add_test(NAME AzureEngine.EditorWorkflow COMMAND AzureEditorWorkflowTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay")
@@ -410,6 +419,8 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.BuildProvenance COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_provenance.py")
     add_test(NAME AzureEngine.CharacterIntake COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_intake.py")
     add_test(NAME AzureEngine.CharacterPreparation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_preparation.py")
+    add_test(NAME AzureEditor.WorkspaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workspace.py" --executable $<TARGET_FILE:AzureRender>)
+    set_tests_properties(AzureEditor.WorkspaceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureEngine.MaterialFixtureGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_fixture.py" --executable $<TARGET_FILE:AzureRender> --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
     add_test(NAME AzureEngine.IndependentAnimationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_independent_animation_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureEngine.ThirdPersonPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_third_person_player.py" --executable $<TARGET_FILE:AzurePlayer>)
@@ -1024,6 +1035,8 @@ foreach(AZURE_DOCUMENTATION_FILE IN LISTS AZURE_DOCUMENTATION_FILES)
 endforeach()
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r1")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r2")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
@@ -1100,13 +1113,14 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
     endif()
 endforeach()
 
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/NotoSansCJK-LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "LatoLatin-LICENSE.txt")
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/editor-game-ui.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")

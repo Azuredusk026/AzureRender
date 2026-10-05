@@ -36,7 +36,7 @@ Vector3 normalize(const Vector3& value) {
 bool EditorViewportInput::active() const noexcept {
     return orbitDeltaX != 0.0F || orbitDeltaY != 0.0F
         || panDeltaX != 0.0F || panDeltaY != 0.0F
-        || zoomSteps != 0.0F;
+        || zoomSteps != 0.0F || frameRequested;
 }
 
 bool EditorCameraController::apply(
@@ -45,6 +45,11 @@ bool EditorCameraController::apply(
     std::array<float, 3>& target) {
     if (!input.active()) {
         return false;
+    }
+
+    if(input.frameRequested) {
+        target=input.frameTarget;target[1]+=.9F;
+        position={target[0]+3,target[1]+2,target[2]+5};return true;
     }
 
     Vector3 offset{

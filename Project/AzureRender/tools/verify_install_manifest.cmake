@@ -20,6 +20,7 @@ set(VIOLATIONS "")
 # --- License completeness ------------------------------------------------
 set(LICENSE_DIR "${INSTALL_DIR}/share/AzureRender/licenses")
 set(EXPECTED_LICENSES
+    NotoSansCJK-LICENSE.txt
     imgui-LICENSE.txt
     glfw3-LICENSE.txt
     tinygltf-LICENSE.txt

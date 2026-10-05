@@ -2,6 +2,8 @@
 
 项目编辑入口为 `AzureRender.exe --editor-project <project.azureproject>`。导入、组件编辑、运行控制和游戏界面见 [项目编辑与游戏表现](runtime/editor-game-ui.md)。
 
+完整制作流程见[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。工作区以视口、Scene Outliner、Details 和 Content Browser 组织场景编辑。View 菜单管理面板与布局恢复。
+
 AzureRender 会分开检查两件事：文件能否解析，以及其中的数据能否正确渲染。glTF 提供几何、动画和标准材质字段。AzureRender Material Profile 补充风格化类别、Feature、Face SDF 和类别参数。`.azscene` 保存场景节点、资源引用和 RenderSettings。
 
 ## 资产边界
@@ -173,19 +175,19 @@ lights[]
 
 v3 保存完整光源数据。程序会拒绝未知的未来版本。
 
-保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。即使进程中断，原文件也不会只剩一半。`prefabSource` 和 `instanceOf` 目前只保存引用与 Transform 覆盖。项目还没有实现独立的 Prefab 文件展开系统。
+保存场景时，程序先在同一目录写入临时文件，再原子替换目标文件。JSON 关卡支持 `.azureprefab` 实例展开与字段覆盖。`prefabSource` 和 `instanceOf` 保存来源与局部节点身份。保存重开恢复组件、资源、灯光和实例覆盖。
 
 ## 编辑器组成
 
 Dear ImGui 层提供：
 
 - Scene Outliner：节点层级、选择、可见性和增删。
-- Inspector：Transform、Renderer、Look、Face SDF、Shadow、Outline 等设置。
-- Asset Browser：资源 ID、路径、存在状态和依赖数。
+- Details：Transform、Renderer、Look、Face SDF、Shadow、Outline 等设置。
+- Content Browser：目录、搜索、类型、列表、网格、导入和放置。
 - Viewport：编辑器相机、Picking、Gizmo 和 Capture。
 - Diagnostics/HUD：资源、动画、Renderer、GPU Timing 和错误。
 
-编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Panel 不直接持有 Vulkan Handle。Renderer 使用统一的 `RendererSceneState` 向编辑器提供可选资产、模型矩阵、Primitive 数量和选择状态。
+编辑器通过 `EditorSession` 和 `EditorContext` 修改 `SceneDocument`。Vulkan 资源由宿主管理。Renderer 的 `RendererSceneState` 提供资产与模型矩阵。项目拾取使用各节点的网格、身份与世界变换。
 
 `EditorContext` 将场景节点同步到 ECS，并把每个节点关联的全部点光源同步到 `LightComponent::emitters`。场景文档保存完整的光源列表及其节点关联。
 

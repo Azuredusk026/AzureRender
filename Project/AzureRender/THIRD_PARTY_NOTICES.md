@@ -56,3 +56,9 @@ Windows 游戏包随 Player 分发运行库、着色器、字体与第三方许�
 `assets_public/third_person/material_fixture.gltf`、`fixture_hair_data.png` 和生成工具由本项目自行制作，采用项目 MIT 许可。Face SDF 使用项目已有公共纹理。私有主角与用户提供动作保存在本机输入范围。
 
 MSVC 构建随安装树分发 Visual C++ 可再分发运行库。CMake 从当前工具链确定 DLL，VS2022 使用 VC143 目录。使用范围遵循 [Visual Studio 可分发代码条款](https://learn.microsoft.com/visualstudio/releases/2022/redistribution)，本机验收工具链为 MSVC 14.44。
+
+## 编辑器字体
+
+`assets_public/fonts/NotoSansCJKsc-Regular.otf` 使用 Noto Sans CJK SC Regular。来源为 [Noto CJK 字体仓库](https://github.com/notofonts/noto-cjk)。该字体覆盖中文项目名、对象名与资源名。
+
+字体采用 SIL Open Font License 1.1。完整许可位于同目录的 `NotoSansCJK-LICENSE.txt`。安装树保留该字体与许可，并记录文件哈希。

@@ -2,9 +2,9 @@
 
 AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
 
-首次使用请阅读 [构建与使用](getting-started.md)。制作关卡请阅读 [编辑器操作指南](runtime/editor-game-ui.md)。运行和交付见 [探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。
+首次使用请阅读[构建与使用](getting-started.md)。制作关卡请阅读[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。运行和交付见[探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。
 
-![公开黑洞场景](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
+![编辑器工作区与公开探索关卡](tutorials/images/workspace.png)
 
 ## 能力总览
 
@@ -21,7 +21,7 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 开发路线
 
-当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6 和 G7 已完成，U2 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7 和 U2 已完成，P2 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 
 ## 原生 Vulkan 的边界
 

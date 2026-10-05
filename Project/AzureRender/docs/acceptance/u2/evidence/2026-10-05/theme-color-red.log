@@ -1,0 +1,4 @@
+Window background pixel (99, 104, 112) expected (32, 35, 41)
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+AssertionError

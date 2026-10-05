@@ -3428,6 +3428,11 @@ void CharacterSceneRenderer::drawPrimitive(
 }
 
 void CharacterSceneRenderer::buildSceneState() {
+    state_.pickables.clear();
+    for(const auto& instance:sceneInstances_) {
+        const auto* mesh=instance.meshKey==0?&asset_:&additionalResources_[instance.meshKey-1]->asset;
+        state_.pickables.push_back({instance.nodeId,mesh,instance.model});
+    }
     state_.asset = &asset_;
     state_.modelMatrix = currentModel_.data();
     state_.selectedPrimitiveIndex = selectedPrimitiveIndex_;

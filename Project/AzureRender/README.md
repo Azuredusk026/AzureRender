@@ -2,13 +2,17 @@
 
 AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Windows 编辑器、独立 Player、资产管线和第三人称玩法。公开探索项目贯通制作、运行与游戏发布。
 
+![编辑器工作区与公开探索关卡](docs/tutorials/images/workspace.png)
+
+截图展示公开探索项目。菜单、停靠面板和制作流程见[关卡制作教程](docs/tutorials/editor-first-game.md)。
+
 ## 使用入口
 
 | 目标 | 文档 |
 | --- | --- |
 | 构建和运行 | [构建与使用](docs/getting-started.md) |
 | 运行公开游戏 | [第三人称探索关卡](docs/runtime/exploration-gameplay.md) |
-| 制作关卡 | [编辑器操作指南](docs/runtime/editor-game-ui.md) |
+| 制作关卡 | [从空关卡制作并发布游戏](docs/tutorials/editor-first-game.md) |
 | 发布游戏 | [Windows 游戏发布](docs/runtime/game-publishing.md) |
 
 ## 构建编辑器
@@ -61,7 +65,7 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
-F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。当前执行 U2 编辑器工作区。后续 U2、P2 分别交付编辑器工作区和最终包。
+F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作区与教程已验收。当前执行 P2 展示与独立交付。
 
 [总计划](docs/plans/azure-engine-plan.md)管理状态。[本轮实施步骤](docs/plans/2026-10-05-quality-round.md)定义任务与门禁。[CHANGELOG.md](CHANGELOG.md)记录阶段交付。
 

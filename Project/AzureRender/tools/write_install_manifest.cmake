@@ -58,6 +58,7 @@ string(APPEND MANIFEST_LINES
 # Expected third-party license texts bundled with the install.
 set(LICENSE_DIR "${INSTALL_DIR}/share/AzureRender/licenses")
 set(EXPECTED_LICENSES
+    NotoSansCJK-LICENSE.txt
     imgui-LICENSE.txt
     glfw3-LICENSE.txt
     tinygltf-LICENSE.txt

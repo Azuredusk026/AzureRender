@@ -8,6 +8,14 @@
 
 ## 打开与编辑项目
 
+完整制作步骤见[从空关卡制作并发布游戏](../tutorials/editor-first-game.md)。顶部菜单为 File、Edit、View、Tools、Help。工具栏组织保存、变换、运行与构建。状态栏显示项目、关卡、未保存状态与进度。
+
+九个面板使用稳定标识停靠。View 显示面板与恢复默认布局。用户配置位于 `%LOCALAPPDATA%/AzureRender/editor`。`workspace.json` 保存版本、可见性与停靠文件完整性摘要。
+
+字体使用 Noto Sans CJK SC，正文为 14 逻辑像素。100%、150%、200% DPI 从基础样式计算尺寸。紧凑布局收起左侧创建区，中间视口保持至少 480×270。界面颜色按交换链格式保持正确的 sRGB 显示。
+
+Content Browser 以资产数据库和场景资源为数据来源。Directory、Search assets 和 Type 可组合筛选。Import / Create 展开制作操作，列表与 Grid 展示资源。Console 支持等级、搜索、复制与节点定位。
+
 使用 `AzureRender.exe --editor-project <project.azureproject>` 打开项目。公开示例位于 `assets_public/gameplay/project.azureproject`。基础 `.azscene` 项目与 JSON 关卡均可编辑。
 
 资源浏览器接受 glTF 或 GLB 文件路径。导入任务复制模型与相对依赖，验证候选资源后提交。进度与取消按钮显示当前状态。取消和失败保留有效场景。
@@ -16,7 +24,7 @@
 
 双击资源可放置对象，也可将资源拖入视口。层级中按 Ctrl 可多选。复制、删除、重命名和组件字段编辑进入操作历史。Ctrl+D 复制，Delete 删除，Ctrl+Z 撤销，Ctrl+Y 重做。
 
-Inspector 根据反射字段提供角色、刚体、脚本、动画、音频和界面属性。字段类型和数值范围在提交时校验。Ctrl+S 保存项目关卡。渲染参数、组件、原生节点和 Prefab 实例覆盖随关卡保存。
+Details 根据反射字段提供角色、刚体、脚本、动画、音频和界面属性。字段类型和数值范围在提交时校验。Ctrl+S 保存项目关卡。渲染参数、组件、原生节点和 Prefab 实例覆盖随关卡保存。
 
 相机、交互、收集物、门、检查点和任务状态均可配置。整数计数按整数提交。资源字段使用资产列表，相机目标使用节点列表。角色和刚体使用各自的物理节点。
 
@@ -34,11 +42,11 @@ Gameplay Debug 提供碰撞和相机叠加开关。盒体按旋转、缩放与�
 
 ## 运行与输入
 
-Run 菜单与主菜单工具栏提供 Play、Pause、Resume、Step 和 Stop。Ctrl+P 启动或停止运行。Play 从当前编辑内容创建独立 World。暂停时 Step 推进一次 60 Hz 固定步。
+主工具栏提供 Play、Pause、Resume、Step 和 Stop。Ctrl+P 启动或停止运行。Play 从当前编辑内容创建独立 World。暂停时 Step 推进一次 60 Hz 固定步。
 
 运行时组件和关卡使用运行 World。停止后显示编辑内容，编辑历史继续可用。运行期间编辑面板按启用条件锁定。
 
-视口获得焦点时接收 WASD、Space、E 与相机鼠标输入。Esc 释放视口输入与鼠标捕获，点击视口获取焦点。文本与交互控件由界面焦点处理。
+视口获得焦点时接收 WASD、Shift、Space、E 与相机鼠标输入。Esc 释放视口输入与鼠标捕获，点击视口获取焦点。文本与交互控件由界面焦点处理。
 
 Console 显示脚本、关卡和表现资源的错误。修改 Lua 文件后进行受控重载。失败重载保留有效脚本，运行错误隔离对应回调。Player 使用 P 暂停或恢复，O 推进一次暂停步。
 
@@ -93,6 +101,8 @@ python tools/test_editor_playable.py --executable build/ninja-msvc-release/Azure
 ```
 
 ## 来源与许可
+
+编辑器字体来自 [Noto CJK](https://github.com/notofonts/noto-cjk)，采用 SIL OFL 1.1。字体与许可进入安装树和安装清单。界面组织参考 UE 编辑器，项目使用 Dear ImGui 实现控件与布局。
 
 [RmlUi 6.3](https://github.com/mikke89/RmlUi/tree/6.3) 使用 MIT 许可。[miniaudio 0.11.25](https://github.com/mackron/miniaudio/tree/0.11.25) 采用 MIT-0 许可。字体来自 RmlUi 6.3 示例，LatoLatin 使用 SIL OFL 1.1。
 

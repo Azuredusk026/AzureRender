@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\u2\probe_ui.py", line 11, in <module>
+    data=launch(Path('build/ninja-msvc-debug/AzureRender.exe').resolve(),root,'gizmo',(1920,1080),1,actions)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 32, in launch
+    assert data['uiErrors']==[],data['uiErrors']
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'action': {'action': 'mouse', 'down': True, 'frame': 35, 'target': 'gizmo.0'}, 'error': "[json.exception.out_of_range.403] key 'gizmo.0' not found", 'frame': 35}, {'action': {'action': 'mouse', 'down': True, 'frame': 38, 'offset': [30, 0], 'target': 'gizmo.0'}, 'error': "[json.exception.out_of_range.403] key 'gizmo.0' not found", 'frame': 38}, {'action': {'action': 'mouse', 'down': False, 'frame': 41, 'offset': [30, 0], 'target': 'gizmo.0'}, 'error': "[json.exception.out_of_range.403] key 'gizmo.0' not found", 'frame': 41}]

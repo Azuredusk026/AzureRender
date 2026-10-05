@@ -1,0 +1,780 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "1d6eb84f1a2ce960aeb9e6a7850b8d150bf8b0bc",
+  "sourceHash": "0870bc9b76b2f28a31312dc41af677a4accad9c33bd0f93692703f895313ddb9",
+  "host": "Windows-10-10.0.26200-SP0",
+  "quality": {
+    "standard": {
+      "entities": 100,
+      "animatedCharacters": 4,
+      "pointLights": 8,
+      "shadowCascades": 4,
+      "width": 1920,
+      "height": 1080,
+      "fullGameUi": true
+    },
+    "editor": {
+      "entities": 100,
+      "animatedCharacters": 4,
+      "pointLights": 8,
+      "shadowCascades": 4,
+      "width": 1920,
+      "height": 1080,
+      "fullGameUi": true
+    },
+    "stress": {
+      "entities": 500,
+      "animatedCharacters": 16,
+      "pointLights": 16,
+      "shadowCascades": 4,
+      "width": 1920,
+      "height": 1080,
+      "fullGameUi": true
+    }
+  },
+  "sceneHashes": {
+    "standard": {
+      "assets\\CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+      "assets\\checkpoint.lua": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+      "assets\\collectible.lua": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+      "assets\\cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "assets\\door.lua": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+      "assets\\exploration.azurelevel": "122496addda6300b19219ed169fafce3aad84dd49766549eab0fb48daccffed1",
+      "assets\\goal.lua": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+      "assets\\guide.gltf": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+      "assets\\guide.lua": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+      "assets\\hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+      "assets\\hero.lua": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+      "assets\\hud.rml": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+      "assets\\locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "assets\\prefabs\\checkpoint.azureprefab": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543",
+      "assets\\prefabs\\collectible.azureprefab": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2",
+      "assets\\prefabs\\door.azureprefab": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa",
+      "assets\\prefabs\\guide.azureprefab": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4",
+      "assets\\prefabs\\hero.azureprefab": "ab2520a516fe2f63f3d475caef2fa19512530a78aa5eff1ced055610d01089e7"
+    },
+    "editor": {
+      "assets\\CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+      "assets\\checkpoint.lua": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+      "assets\\collectible.lua": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+      "assets\\cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "assets\\door.lua": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+      "assets\\exploration.azurelevel": "122496addda6300b19219ed169fafce3aad84dd49766549eab0fb48daccffed1",
+      "assets\\goal.lua": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+      "assets\\guide.gltf": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+      "assets\\guide.lua": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+      "assets\\hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+      "assets\\hero.lua": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+      "assets\\hud.rml": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+      "assets\\locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "assets\\prefabs\\checkpoint.azureprefab": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543",
+      "assets\\prefabs\\collectible.azureprefab": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2",
+      "assets\\prefabs\\door.azureprefab": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa",
+      "assets\\prefabs\\guide.azureprefab": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4",
+      "assets\\prefabs\\hero.azureprefab": "ab2520a516fe2f63f3d475caef2fa19512530a78aa5eff1ced055610d01089e7"
+    },
+    "stress": {
+      "assets\\CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+      "assets\\checkpoint.lua": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e",
+      "assets\\collectible.lua": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e",
+      "assets\\cube.gltf": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651",
+      "assets\\door.lua": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9",
+      "assets\\exploration.azurelevel": "773307cb9ab4363e7a26b0f4a936da99ebb36a3886ace903028f1c8402e3bb99",
+      "assets\\goal.lua": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f",
+      "assets\\guide.gltf": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696",
+      "assets\\guide.lua": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21",
+      "assets\\hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+      "assets\\hero.lua": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1",
+      "assets\\hud.rml": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72",
+      "assets\\locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "assets\\prefabs\\checkpoint.azureprefab": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543",
+      "assets\\prefabs\\collectible.azureprefab": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2",
+      "assets\\prefabs\\door.azureprefab": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa",
+      "assets\\prefabs\\guide.azureprefab": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4",
+      "assets\\prefabs\\hero.azureprefab": "ab2520a516fe2f63f3d475caef2fa19512530a78aa5eff1ced055610d01089e7"
+    }
+  },
+  "rounds": {
+    "standard": [
+      {
+        "gpu": {
+          "mean": 1.5900105955555555,
+          "p95": 1.9448191999999997,
+          "p99": 2.96504608
+        },
+        "cpu": {
+          "mean": 1.734324722222223,
+          "p95": 2.265849999999994,
+          "p99": 2.651203000000033
+        },
+        "wait": {
+          "mean": 0.3419886111111104,
+          "p95": 1.1473500000000278,
+          "p99": 1.6042629999999904
+        },
+        "physics": {
+          "mean": 0.22009727777777777,
+          "p95": 0.30024,
+          "p99": 0.437321
+        },
+        "initialDevice": {
+          "temperature": 54,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 250707968,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 8884256,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 505.1613,
+          "graphPreparationMilliseconds": 266.7676,
+          "workerWaitMilliseconds": 152.4676,
+          "graphExecutionMilliseconds": 85.8122,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 1.5516640355555555,
+          "p95": 1.8594,
+          "p99": 2.8609343999999997
+        },
+        "cpu": {
+          "mean": 1.7854753333333342,
+          "p95": 2.3747950000000015,
+          "p99": 2.7559230000000046
+        },
+        "wait": {
+          "mean": 0.2874131666666657,
+          "p95": 1.1322350000000099,
+          "p99": 1.5925549999999422
+        },
+        "physics": {
+          "mean": 0.2282778888888889,
+          "p95": 0.31343,
+          "p99": 0.448505
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 250310656,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 8884256,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 512.1876,
+          "graphPreparationMilliseconds": 270.1894,
+          "workerWaitMilliseconds": 153.9979,
+          "graphExecutionMilliseconds": 87.8958,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 1.5508315022222223,
+          "p95": 1.8264656,
+          "p99": 2.72159904
+        },
+        "cpu": {
+          "mean": 1.7404606111111118,
+          "p95": 2.2696499999999364,
+          "p99": 2.633765000000029
+        },
+        "wait": {
+          "mean": 0.31403083333333265,
+          "p95": 1.121069999999986,
+          "p99": 1.5221119999999666
+        },
+        "physics": {
+          "mean": 0.21794533333333332,
+          "p95": 0.29801,
+          "p99": 0.43822999999999995
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 249499648,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 8884256,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 501.5154,
+          "graphPreparationMilliseconds": 265.3649,
+          "workerWaitMilliseconds": 151.01,
+          "graphExecutionMilliseconds": 85.0287,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      }
+    ],
+    "editor": [
+      {
+        "gpu": {
+          "mean": 0.7228440533333333,
+          "p95": 0.7495408,
+          "p99": 0.76736896
+        },
+        "cpu": {
+          "mean": 2.695179,
+          "p95": 3.698974999999993,
+          "p99": 5.145327999999979
+        },
+        "wait": {
+          "mean": 0.07062672222222226,
+          "p95": 0.0933099999999996,
+          "p99": 0.14010500000000375
+        },
+        "physics": {
+          "mean": 0.22070933333333334,
+          "p95": 0.296905,
+          "p99": 0.416002
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 276877312,
+        "allocator": {
+          "bufferAllocations": 310,
+          "imageAllocations": 144,
+          "liveBuffers": 49,
+          "liveImages": 74,
+          "bufferBytes": 15373936,
+          "imageBytes": 209320448,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 75177472,
+          "deviceLocalPeakBytes": 183042048
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 581.7329,
+          "graphPreparationMilliseconds": 324.2652,
+          "workerWaitMilliseconds": 139.1743,
+          "graphExecutionMilliseconds": 118.1497,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1230,
+          759
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 0.7225402666666667,
+          "p95": 0.7463392,
+          "p99": 0.7655702400000001
+        },
+        "cpu": {
+          "mean": 2.690224222222222,
+          "p95": 3.614209999999996,
+          "p99": 5.076879000000004
+        },
+        "wait": {
+          "mean": 0.0701341666666666,
+          "p95": 0.09631499999999917,
+          "p99": 0.12790400000000038
+        },
+        "physics": {
+          "mean": 0.22330983333333335,
+          "p95": 0.29960499999999995,
+          "p99": 0.4351169999999998
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 278163456,
+        "allocator": {
+          "bufferAllocations": 310,
+          "imageAllocations": 144,
+          "liveBuffers": 49,
+          "liveImages": 74,
+          "bufferBytes": 15373936,
+          "imageBytes": 209320448,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 75177472,
+          "deviceLocalPeakBytes": 183042048
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 588.9897,
+          "graphPreparationMilliseconds": 328.9054,
+          "workerWaitMilliseconds": 138.4779,
+          "graphExecutionMilliseconds": 121.5109,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1230,
+          759
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 0.7224431644444445,
+          "p95": 0.7483536000000001,
+          "p99": 0.7643548800000001
+        },
+        "cpu": {
+          "mean": 2.7092206666666665,
+          "p95": 3.5664400000000205,
+          "p99": 5.186026000000002
+        },
+        "wait": {
+          "mean": 0.07103922222222225,
+          "p95": 0.0948099999999993,
+          "p99": 0.12603000000000472
+        },
+        "physics": {
+          "mean": 0.223226,
+          "p95": 0.296815,
+          "p99": 0.43286499999999994
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 278245376,
+        "allocator": {
+          "bufferAllocations": 310,
+          "imageAllocations": 144,
+          "liveBuffers": 49,
+          "liveImages": 74,
+          "bufferBytes": 15373936,
+          "imageBytes": 209320448,
+          "liveBufferBytes": 7468800,
+          "liveImageBytes": 75177472,
+          "deviceLocalPeakBytes": 183042048
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 201600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 184074,
+          "visibleRatio": 0.913065,
+          "recordingMilliseconds": 591.7662,
+          "graphPreparationMilliseconds": 330.4695,
+          "workerWaitMilliseconds": 142.1141,
+          "graphExecutionMilliseconds": 119.0759,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 99852,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 47.548571,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 2724,
+          "skinnedVertices": 2379,
+          "transparentTriangles": 0,
+          "jointCapacity": 153,
+          "vertexCapacity": 6843
+        },
+        "sceneExtent": [
+          1230,
+          759
+        ],
+        "passed": true
+      }
+    ],
+    "stress": [
+      {
+        "gpu": {
+          "mean": 1.8405638933333333,
+          "p95": 1.8963552000000001,
+          "p99": 1.95209952
+        },
+        "cpu": {
+          "mean": 3.6544448333333333,
+          "p95": 4.436094999999995,
+          "p99": 5.357507999999993
+        },
+        "wait": {
+          "mean": 0.08842255555555555,
+          "p95": 0.11722500000002396,
+          "p99": 0.15770899999999144
+        },
+        "physics": {
+          "mean": 0.8304794444444444,
+          "p95": 1.0303149999999999,
+          "p99": 1.451215
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 258818048,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 15184960,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 13769504,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 1041600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 1022577,
+          "visibleRatio": 0.981737,
+          "recordingMilliseconds": 976.5628,
+          "graphPreparationMilliseconds": 401.766,
+          "workerWaitMilliseconds": 476.1288,
+          "graphExecutionMilliseconds": 98.5468,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 102058,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 48.599048,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 13140,
+          "skinnedVertices": 10455,
+          "transparentTriangles": 0,
+          "jointCapacity": 721,
+          "vertexCapacity": 33543
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 1.83907104,
+          "p95": 1.890848,
+          "p99": 1.93616608
+        },
+        "cpu": {
+          "mean": 3.654992222222222,
+          "p95": 4.391059999999997,
+          "p99": 5.237288999999999
+        },
+        "wait": {
+          "mean": 0.08604755555555564,
+          "p95": 0.11212999999999834,
+          "p99": 0.14070799999998143
+        },
+        "physics": {
+          "mean": 0.8277731111111111,
+          "p95": 1.01419,
+          "p99": 1.3692389999999999
+        },
+        "initialDevice": {
+          "temperature": 54,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 258740224,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 15184960,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 13769504,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 1041600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 1022577,
+          "visibleRatio": 0.981737,
+          "recordingMilliseconds": 970.884,
+          "graphPreparationMilliseconds": 397.2598,
+          "workerWaitMilliseconds": 475.9679,
+          "graphExecutionMilliseconds": 97.5024,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 102058,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 48.599048,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 13140,
+          "skinnedVertices": 10455,
+          "transparentTriangles": 0,
+          "jointCapacity": 721,
+          "vertexCapacity": 33543
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      },
+      {
+        "gpu": {
+          "mean": 1.9763514666666666,
+          "p95": 2.7455151999999994,
+          "p99": 3.4411299200000003
+        },
+        "cpu": {
+          "mean": 3.278748888888889,
+          "p95": 3.9845799999999962,
+          "p99": 5.213578999999996
+        },
+        "wait": {
+          "mean": 0.08746849999999988,
+          "p95": 0.11351000000001504,
+          "p99": 0.5924869999999909
+        },
+        "physics": {
+          "mean": 0.7613987777777778,
+          "p95": 0.9432499999999999,
+          "p99": 1.248351
+        },
+        "initialDevice": {
+          "temperature": 55,
+          "driver": "595.79",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "peakWorkingSetBytes": 258654208,
+        "allocator": {
+          "bufferAllocations": 222,
+          "imageAllocations": 71,
+          "liveBuffers": 49,
+          "liveImages": 71,
+          "bufferBytes": 15184960,
+          "imageBytes": 124575232,
+          "liveBufferBytes": 13769504,
+          "liveImageBytes": 124575232,
+          "deviceLocalPeakBytes": 156499968
+        },
+        "submission": {
+          "frames": 2100,
+          "instances": 1041600,
+          "indirectDrawCalls": 8400,
+          "visibleInstances": 1022577,
+          "visibleRatio": 0.981737,
+          "recordingMilliseconds": 883.8459,
+          "graphPreparationMilliseconds": 360.3735,
+          "workerWaitMilliseconds": 437.7041,
+          "graphExecutionMilliseconds": 85.6866,
+          "workerRecordedPasses": 8400,
+          "workerRecordedChunks": 8400,
+          "drawCalls": 102058,
+          "descriptorSetBinds": 4200,
+          "pipelineBinds": 10500,
+          "pushConstantUpdates": 161700,
+          "drawCallsPerFrame": 48.599048,
+          "descriptorSetBindsPerFrame": 2.0
+        },
+        "samples": 1800,
+        "warmup": 300,
+        "complexity": {
+          "uniqueMeshes": 3,
+          "sceneTriangles": 13140,
+          "skinnedVertices": 10455,
+          "transparentTriangles": 0,
+          "jointCapacity": 721,
+          "vertexCapacity": 33543
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "median": {
+    "standard": {
+      "gpu": 1.8594,
+      "cpu": 2.2696499999999364,
+      "physics": 0.30024
+    },
+    "editor": {
+      "gpu": 0.7483536000000001,
+      "cpu": 3.614209999999996,
+      "physics": 0.296905
+    },
+    "stress": {
+      "gpu": 1.8963552000000001,
+      "cpu": 4.391059999999997,
+      "physics": 1.01419
+    }
+  },
+  "passed": true
+}

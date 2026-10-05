@@ -273,6 +273,14 @@ void AzureRenderApp::initEditorUi() {
         return;
     }
     if (editorLayer_ == nullptr) {
+        auto& context=runOptions_.editorSession->context();
+        if(context.isProject())for(std::size_t i=0;i<context.scene().nodes.size();++i) {
+            const auto data=context.componentData(context.scene().nodes[i].id,"azure.character");
+            if(!data.is_null()&&data.value("controlled",true)) {
+                azurerender::EditorViewportInput focus;focus.frameRequested=true;focus.frameTarget=context.scene().nodes[i].translation;
+                azurerender::EditorCameraController::apply(focus,cameraPosition_,cameraTarget_);context.selectNode(i);break;
+            }
+        }
         editorLayer_ = std::make_unique<azurerender::ImGuiEditorLayer>(
             runOptions_.editorSession);
     }
@@ -284,7 +292,7 @@ void AzureRenderApp::initEditorUi() {
         graphicsQueueFamily_,
         graphicsQueue_,
         editorUiRenderPass_,
-        static_cast<std::uint32_t>(swapchainImages_.size()));
+        static_cast<std::uint32_t>(swapchainImages_.size()),swapchainFormat_);
     editorLayer_->setViewportImages(
         editorViewportSampler_,
         editorViewportImageViews_,
@@ -345,6 +353,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
         data["editorPreviewFrames"]=editorPreviewFrames_;
         data["editorDebugLines"]=editorLayer_?editorLayer_->debugLineCount():0;
+        if(editorLayer_)data["editorWorkspace"]=editorLayer_->workspaceSnapshot();
         if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
 #endif
         std::ofstream extended(runOptions_.runtimeReportPath);extended<<data.dump(2);

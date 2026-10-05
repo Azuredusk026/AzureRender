@@ -1,0 +1,122 @@
+#include "ImGuiEditorLayer.hpp"
+#include "EditorTheme.hpp"
+#ifdef AZURERENDER_HAS_IMGUI
+#include <imgui_internal.h>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <stdexcept>
+namespace azurerender {
+void ImGuiEditorLayer::observeWidget(const std::string& id) {
+    const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();
+    widgets_[id]={a.x,a.y,b.x-a.x,b.y-a.y};
+}
+void ImGuiEditorLayer::injectUiEvents() {
+    if(uiActions_.empty())return;
+    auto& io=ImGui::GetIO();io.AddFocusEvent(true);io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
+    if(injectedMouseDown_){io.AddMouseButtonEvent(0,false);injectedMouseDown_=false;}
+    while(uiCursor_<uiActions_.size()&&uiActions_[uiCursor_].at("frame").get<std::uint64_t>()<=uiFrame_) {
+        const auto action=uiActions_[uiCursor_++];
+        try {
+            const auto kind=action.at("action").get<std::string>();
+            if(kind=="click" || kind=="mouse") {
+                const auto target=action.at("target").get<std::string>();
+                const auto rect=widgets_.at(target).get<std::array<float,4>>();
+                const auto offset=action.value("offset",std::array<float,2>{0,0});
+                uiMousePosition_={rect[0]+rect[2]/2+offset[0],rect[1]+rect[3]/2+offset[1]};
+                io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
+                io.AddMouseButtonEvent(0,action.value("down",true));injectedMouseDown_=kind=="click";
+            }else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
+            else if(kind=="key") {
+                static const std::map<std::string,ImGuiKey> keys={{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
+                    {"S",ImGuiKey_S},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
+                    {"Enter",ImGuiKey_Enter},{"Escape",ImGuiKey_Escape},{"Shift",ImGuiKey_LeftShift}};
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
+                io.AddKeyEvent(keys.at(action.at("key").get<std::string>()),action.value("down",true));
+            }else if(kind=="dpi") {
+                dpiOverride_=action.at("scale").get<float>();dpi_=dpiOverride_;
+                EditorTheme::apply(dpi_);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;
+            }else throw std::invalid_argument("Unknown UI event");
+        }catch(const std::exception& error){uiErrors_.push_back({{"frame",uiFrame_},{"action",action},{"error",error.what()}});}
+    }
+}
+void ImGuiEditorLayer::drawWorkspace() {
+    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi_);
+    const auto hostPos=ImVec2(vp->Pos.x+layout.left,vp->Pos.y+layout.menu+layout.toolbar);
+    const auto hostSize=ImVec2(vp->Size.x-layout.left,vp->Size.y-layout.menu-layout.toolbar-layout.status);
+    ImGui::SetNextWindowPos(hostPos);ImGui::SetNextWindowSize(hostSize);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize,0);
+    constexpr auto flags=ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove
+        |ImGuiWindowFlags_NoDocking|ImGuiWindowFlags_NoBringToFrontOnFocus|ImGuiWindowFlags_NoSavedSettings;
+    ImGui::Begin("Workspace###workspace-host",nullptr,flags);
+#ifdef IMGUI_HAS_DOCK
+    const auto dockspace=ImGui::GetID("AzureWorkspace");
+    const bool reset=session_->consumeLayoutResetRequest();
+    if(reset){workspace_.reset();dockingLayoutInitialized_=false;}
+    if(!dockingLayoutInitialized_) {
+        const auto* node=ImGui::DockBuilderGetNode(dockspace);
+        if(reset || workspaceRebuildRequested_ || node==nullptr || node->IsEmpty()) {
+            ImGui::DockBuilderRemoveNode(dockspace);
+            ImGui::DockBuilderAddNode(dockspace,ImGuiDockNodeFlags_DockSpace);
+            ImGui::DockBuilderSetNodePos(dockspace,hostPos);ImGui::DockBuilderSetNodeSize(dockspace,hostSize);
+            ImGuiID center=dockspace;
+            const auto right=ImGui::DockBuilderSplitNode(center,ImGuiDir_Right,layout.right/hostSize.x,nullptr,&center);
+            ImGuiID details=right;
+            const auto objects=ImGui::DockBuilderSplitNode(details,ImGuiDir_Up,.36F,nullptr,&details);
+            const auto bottom=ImGui::DockBuilderSplitNode(center,ImGuiDir_Down,layout.bottom/hostSize.y,nullptr,&center);
+            for(const auto& panel:workspace_.panels()) {
+                const auto target=panel.id=="viewport"?center:panel.id=="outliner"?objects:panel.id=="inspector"?details:bottom;
+                ImGui::DockBuilderDockWindow(panel.title.c_str(),target);
+            }
+            ImGui::DockBuilderFinish(dockspace);
+        }
+        dockingLayoutInitialized_=true;
+        workspaceRebuildRequested_=false;
+    }
+    ImGui::DockSpace(dockspace,{0,0},ImGuiDockNodeFlags_PassthruCentralNode);
+#endif
+    ImGui::End();ImGui::PopStyleVar(2);
+    if(layout.left>0) {
+        ImGui::SetNextWindowPos({vp->Pos.x,hostPos.y});ImGui::SetNextWindowSize({layout.left,hostSize.y});
+        ImGui::Begin("Create & Project###project",nullptr,flags);
+        ImGui::PushFont(nullptr,16);ImGui::TextUnformatted("PROJECT");ImGui::PopFont();
+        if(context_->isProject()){ImGui::TextWrapped("%s",context_->project().name.c_str());ImGui::TextDisabled("%s",context_->scene().sceneId.c_str());}
+        ImGui::Separator();ImGui::TextUnformatted("Create objects");
+        ImGui::BeginDisabled(session_->playing()||session_->building());
+        if(ImGui::Button("Empty Node",{-1,0}))context_->createNode("node-"+std::to_string(context_->scene().nodes.size()));observeWidget("create.empty");
+        if(ImGui::Button("Duplicate Selected",{-1,0}))context_->duplicateSelection();
+        ImGui::EndDisabled();
+        ImGui::Separator();ImGui::TextUnformatted("Tools");
+        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console"}) {
+            const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});
+            const auto title=panel.title.substr(0,panel.title.find("###"));
+            if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
+            observeWidget(std::string("tool.")+id);
+        }
+        ImGui::Separator();ImGui::TextWrapped("RMB: orbit camera\nMMB: pan\nWheel: zoom\nCtrl+S: save\nCtrl+P: play / stop");
+        ImGui::End();
+    }
+}
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const {
+    nlohmann::json data={{"version",EditorWorkspace::version},{"dpi",dpi_},{"panels",nlohmann::json::object()},
+        {"image",{{"x",imageRect_[0]},{"y",imageRect_[1]},{"width",imageRect_[2]},{"height",imageRect_[3]}}},
+        {"widgets",widgets_},{"uiErrors",uiErrors_},{"history",uiHistory_},{"diagnostic",workspace_.diagnostic},
+        {"selectedName",context_->selectedNode()?context_->selectedNode()->name:""},
+        {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
+        {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
+    for(const auto& panel:workspace_.panels()) {
+        const auto* window=ImGui::FindWindowByName(panel.title.c_str());
+        data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},
+            {"rect",window?nlohmann::json{window->Pos.x,window->Pos.y,window->Size.x,window->Size.y}:nlohmann::json::array()}};
+    }
+    return data;
+}
+}
+#else
+namespace azurerender {
+void ImGuiEditorLayer::observeWidget(const std::string&){}
+void ImGuiEditorLayer::injectUiEvents(){}
+void ImGuiEditorLayer::drawWorkspace(){}
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const{return {};}
+}
+#endif

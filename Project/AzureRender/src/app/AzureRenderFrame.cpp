@@ -141,6 +141,7 @@ void AzureRenderApp::drawFrame() {
             autoRotate_ = false;
         }
         if (viewportInput.pickRequested) {
+            pendingPickRequested_ = true;
             pendingPickX_ = viewportInput.pickX;
             pendingPickY_ = viewportInput.pickY;
         }
@@ -340,9 +341,9 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     const LoadedAsset& asset = *sceneState->asset;
-    if (selectedPrimitiveIndex_ < 0
+    if (!editorContext.isProject() && (selectedPrimitiveIndex_ < 0
         || static_cast<std::size_t>(selectedPrimitiveIndex_)
-            >= asset.primitives.size()) {
+            >= asset.primitives.size())) {
         return;
     }
     Matrix4 currentModel{};
@@ -357,14 +358,16 @@ void AzureRenderApp::updateGizmoScreenData() {
     const Matrix4 viewProj = multiply(projection, view);
     const std::array<float, 3>& translation =
         editorContext.gizmoTranslation();
-    const Vector3 primitiveCenter =
-        transformPosition(currentModel,
-            asset.primitives[selectedPrimitiveIndex_].center);
-    const Vector3 gizmoCenter = {
-        primitiveCenter[0] + translation[0],
-        primitiveCenter[1] + translation[1],
-        primitiveCenter[2] + translation[2],
-    };
+    Vector3 gizmoCenter=translation;
+    if(editorContext.isProject()) {
+        if(!editorContext.selectedNode())return;
+        const auto description=editorContext.scene().renderDescription();
+        const auto transforms=azurerender::scene::resolveNodeWorldTransforms(description);
+        gizmoCenter=transformPosition(transforms.at(editorContext.selectedNodeIndex()),{0,0,0});
+    } else {
+        const auto center=transformPosition(currentModel,asset.primitives[selectedPrimitiveIndex_].center);
+        for(unsigned axis=0;axis<3;++axis)gizmoCenter[axis]+=center[axis];
+    }
     const auto projectToScreen = [&viewProj](const Vector3& world) {
         const float clipX = viewProj[0] * world[0]
             + viewProj[4] * world[1]
@@ -397,24 +400,18 @@ void AzureRenderApp::updateGizmoScreenData() {
         projectToScreen({gizmoCenter[0], gizmoCenter[1], gizmoCenter[2] + kAxisLen});
     azurerender::EditorContext::GizmoScreenData data{};
     data.valid = true;
-    data.centerX = (centerNdc[0] + 1.0F) * 0.5F;
-    data.centerY = (1.0F - centerNdc[1]) * 0.5F;
-    const auto normalize2D = [](float inX, float inY) {
-        const float length = std::sqrt(inX * inX + inY * inY);
-        if (length < 1.0e-6F) {
-            return std::array<float, 2>{0.0F, 0.0F};
-        }
-        return std::array<float, 2>{inX / length, inY / length};
-    };
-    const std::array<float, 2> axisXScreen = normalize2D(
+    const auto screen=azurerender::EditorWorkspace::ndcToScreen(centerNdc[0],centerNdc[1]);
+    data.centerX=screen[0];data.centerY=screen[1];
+    const auto projectedAxis=[](float x,float y){return std::array<float,2>{x,y};};
+    const std::array<float, 2> axisXScreen = projectedAxis(
         (endX[0] - centerNdc[0]) * 0.5F,
-        -(endX[1] - centerNdc[1]) * 0.5F);
-    const std::array<float, 2> axisYScreen = normalize2D(
+        (endX[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisYScreen = projectedAxis(
         (endY[0] - centerNdc[0]) * 0.5F,
-        -(endY[1] - centerNdc[1]) * 0.5F);
-    const std::array<float, 2> axisZScreen = normalize2D(
+        (endY[1] - centerNdc[1]) * 0.5F);
+    const std::array<float, 2> axisZScreen = projectedAxis(
         (endZ[0] - centerNdc[0]) * 0.5F,
-        -(endZ[1] - centerNdc[1]) * 0.5F);
+        (endZ[1] - centerNdc[1]) * 0.5F);
     data.axisXScreenX = axisXScreen[0];
     data.axisXScreenY = axisXScreen[1];
     data.axisYScreenX = axisYScreen[0];
@@ -454,6 +451,24 @@ void AzureRenderApp::pickPrimitive(
         viewportY,
         aspect);
     float bestDistance = std::numeric_limits<float>::max();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && runOptions_.editorSession->context().isProject()) {
+        auto& context=runOptions_.editorSession->context();std::string selected;
+        for(const auto& entry:sceneState->pickables) {
+            const auto& mesh=*entry.asset;
+            for(std::size_t index=0;index+2<mesh.indices.size();index+=3) {
+                const auto a=transformPosition(entry.model,mesh.vertices[mesh.indices[index]].position);
+                const auto b=transformPosition(entry.model,mesh.vertices[mesh.indices[index+1]].position);
+                const auto c=transformPosition(entry.model,mesh.vertices[mesh.indices[index+2]].position);
+                const float distance=rayTriangleDistance(cameraPosition_,direction,a,b,c);
+                if(distance>0 && distance<bestDistance){bestDistance=distance;selected=entry.node;}
+            }
+        }
+        if(!selected.empty())for(std::size_t index=0;index<context.scene().nodes.size();++index)
+            if(context.scene().nodes[index].id==selected){context.selectNode(index);break;}
+        return;
+    }
+#endif
     for (std::size_t primitiveIndex = 0;
          primitiveIndex < asset.primitives.size();
          ++primitiveIndex) {

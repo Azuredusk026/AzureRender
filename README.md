@@ -2,9 +2,9 @@
 
 AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Windows 编辑器支持关卡制作、动画、物理、Lua 与游戏构建。独立 Player 运行公开探索关卡，完成任务、切关与重开。
 
-![公开黑洞场景](Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
+![编辑器工作区与公开探索关卡](Project/AzureRender/docs/tutorials/images/workspace.png)
 
-展示图使用公开资产，捕获来源见 [展示清单](Project/AzureRender/portfolio/portfolio_manifest.json)。
+工作区截图使用公开探索资产。操作说明见[关卡制作教程](Project/AzureRender/docs/tutorials/editor-first-game.md)。精选渲染展示的来源见[展示清单](Project/AzureRender/portfolio/portfolio_manifest.json)。
 
 ## 从这里开始
 
@@ -12,7 +12,7 @@ AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Window
 | --- | --- |
 | 运行公开演示 | [第三人称探索关卡](Project/AzureRender/docs/runtime/exploration-gameplay.md) |
 | 构建编辑器与 Player | [构建与使用](Project/AzureRender/docs/getting-started.md) |
-| 学习关卡制作 | [编辑器操作指南](Project/AzureRender/docs/runtime/editor-game-ui.md) |
+| 学习关卡制作 | [从空关卡制作并发布游戏](Project/AzureRender/docs/tutorials/editor-first-game.md) |
 | 构建独立游戏包 | [Windows 游戏发布](Project/AzureRender/docs/runtime/game-publishing.md) |
 
 ## 当前能力
@@ -66,7 +66,7 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。R6 场景可见性已验收。G7 方向与冲刺已验收。
 
-当前执行 U2 工作区，后续为 P2 最终交付。
+U2 工作区与教程已验收。当前执行 P2 最终交付。
 
 [开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)管理阶段状态。[优化实施计划](Project/AzureRender/docs/plans/2026-10-05-quality-round.md)列出任务和验收。[文档站](https://azuredusk026.github.io/AzureRender/)提供主题说明。
 

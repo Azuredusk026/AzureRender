@@ -36,7 +36,7 @@ file(WRITE
 file(WRITE
     "${WORK_DIR}/share/AzureRender/licenses/nlohmann-json-LICENSE.txt"
     "MIT License\n")
-foreach(_license openexr imath libdeflate openjph joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli LatoLatin)
+foreach(_license openexr imath libdeflate openjph joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli LatoLatin NotoSansCJK)
     file(WRITE
         "${WORK_DIR}/share/AzureRender/licenses/${_license}-LICENSE.txt"
         "BSD or MIT license\n")

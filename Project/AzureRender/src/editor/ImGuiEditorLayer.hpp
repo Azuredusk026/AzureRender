@@ -4,6 +4,7 @@
 #include "EditorSession.hpp"
 #include "runtime/GameUi.hpp"
 #include "IEditorPanel.hpp"
+#include "EditorWorkspace.hpp"
 
 #include <vulkan/vulkan.h>
 
@@ -34,10 +35,11 @@ public:
         std::uint32_t queueFamily,
         VkQueue queue,
         VkRenderPass renderPass,
-        std::uint32_t imageCount);
+        std::uint32_t imageCount, VkFormat colorFormat=VK_FORMAT_B8G8R8A8_SRGB);
     void shutdownVulkan();
     void newFrame();
     void drawPanels();
+    nlohmann::json workspaceSnapshot() const;
     void setGameUi(GameUi* ui) { gameUi_=ui; }
     std::uint64_t debugLineCount() const noexcept { return debugLineCount_; }
     void render(VkCommandBuffer commandBuffer);
@@ -66,6 +68,9 @@ private:
     void drawBuildPanel();
     void drawAnimationPanel();
     void drawGameplayDebugPanel();
+    void observeWidget(const std::string& id);
+    void injectUiEvents();
+    void drawWorkspace();
 
     std::shared_ptr<EditorSession> session_;
     EditorContext* context_ = nullptr;
@@ -91,6 +96,26 @@ private:
     bool initialized_ = false;
     std::uint64_t debugLineCount_ = 0;
     bool dockingLayoutInitialized_ = false;
+    bool workspaceRebuildRequested_ = false;
+    EditorWorkspace workspace_;
+    std::filesystem::path configDirectory_;
+    std::string iniPath_;
+    std::vector<std::uint32_t> uiFragmentCode_;
+    GLFWwindow* window_ = nullptr;
+    float dpi_ = 1, dpiOverride_ = 0;
+    std::uint64_t uiFrame_ = 0;
+    nlohmann::json uiActions_=nlohmann::json::array(),uiHistory_=nlohmann::json::array();
+    nlohmann::json uiErrors_=nlohmann::json::array(),widgets_=nlohmann::json::object();
+    std::size_t uiCursor_ = 0;
+    bool injectedMouseDown_ = false;
+    std::array<float,2> uiMousePosition_{0,0};
+    std::array<float,4> imageRect_{};
+    std::array<float,3> gizmoDragStartRotation_{},gizmoDragStartScale_{};
+    ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_;
+    int assetType_ = 0,consoleLevel_ = 0;
+    bool assetGrid_ = false;
+    std::string assetDirectory_;
+    nlohmann::json visibleAssets_=nlohmann::json::array();
 };
 
 }  // namespace azurerender

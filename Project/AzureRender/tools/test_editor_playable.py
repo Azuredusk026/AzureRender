@@ -6,30 +6,15 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+from create_editor_tutorial import prepare_empty
 
 SOURCE = Path(__file__).resolve().parents[1] / 'assets_public' / 'exploration'
 
 
 def run(executable, root, install=None):
     game = root / 'game'
+    prepare_empty(game)
     assets = game / 'assets'
-    assets.mkdir(parents=True)
-    project = json.loads((SOURCE / 'project.azureproject').read_text(encoding='utf-8'))
-    project['name'] = 'Editor Authored Exploration'
-    (game / 'project.azureproject').write_text(json.dumps(project, indent=2), encoding='utf-8')
-    empty = {'schemaVersion': 1, 'id': 'editor-exploration', 'sceneType': 'character',
-             'resources': [], 'nodes': [], 'renderSettings': {'platform': False}}
-    (assets / 'exploration.azurelevel').write_text(json.dumps(empty), encoding='utf-8')
-    # Scripts, animation graphs, UI and Prefabs form the reusable authoring library.
-    for path in (SOURCE / 'assets').iterdir():
-        if path.suffix in ('.lua', '.json', '.rml', '.txt'):
-            shutil.copy2(path, assets / path.name)
-    shutil.copytree(SOURCE / 'assets/prefabs', assets / 'prefabs')
-    for path in (assets / 'prefabs').glob('*.azureprefab'):
-        value = json.loads(path.read_text(encoding='utf-8'))
-        for resource in value['resources']:
-            resource['asset'] = 'engine:/assets_public/exploration/assets/' + resource['asset'].split(':/', 1)[1]
-        path.write_text(json.dumps(value), encoding='utf-8')
     original = json.loads((SOURCE / 'assets/exploration.azurelevel').read_text(encoding='utf-8'))
     nodes = list(original['nodes'])
     resources = {resource['id']: resource['asset'] for resource in original['resources']}
