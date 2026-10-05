@@ -8,12 +8,12 @@ double GameRuntime::advance(double delta) {
     constexpr double fixed = 1.0 / 60.0;
     if (runtime_.state() == RuntimeLifecycle::State::Paused) {
         accumulator_ = 0;
-        if (!runtime_.stepPending()) return 0;
+        if (!runtime_.stepPending()) { input_.release(); return 0; }
         delta = fixed;
     }
     if (runtime_.state() != RuntimeLifecycle::State::Running && runtime_.state() != RuntimeLifecycle::State::Paused) return 0;
     if(sceneRevision_!=runtime_.sceneRevision()) { velocities_.clear(); previousTransforms_.clear();interpolationReady_=false;
-        accumulator_=0; if(sceneRevision_!=0){input_.setFocused(false); input_.setFocused(true);}
+        accumulator_=0; if(sceneRevision_!=0)input_.release();
         hasCamera_=false; interactions_.reset(); sceneRevision_=runtime_.sceneRevision();
         runtime_.world().each<game::ThirdPersonCamera>([&](auto,const auto& settings){if(!hasCamera_){cameraSettings_=settings;
             const auto target=runtime_.entity(settings.target);const auto* transform=runtime_.world().tryGet<ecs::TransformComponent>(target);
@@ -38,8 +38,9 @@ double GameRuntime::advance(double delta) {
             const float z=settings.controlled?static_cast<float>(input_.down("move-back"))-static_cast<float>(input_.down("move-forward")):0;
             const float length=std::max(1.0F,std::sqrt(x*x+z*z));
             const float radians=cameraYaw_*.017453292519943295F;
-            const float targetX=(x*std::cos(radians)-z*std::sin(radians))/length*settings.speed;
-            const float targetZ=(x*std::sin(radians)+z*std::cos(radians))/length*settings.speed;
+            const float targetSpeed=settings.speed*(settings.controlled&&input_.down("sprint")?settings.sprintMultiplier:1.0F);
+            const float targetX=(x*std::cos(radians)-z*std::sin(radians))/length*targetSpeed;
+            const float targetZ=(x*std::sin(radians)+z*std::cos(radians))/length*targetSpeed;
             auto& velocity=velocities_[entity];
             const float dx=targetX-velocity[0],dz=targetZ-velocity[2],distance=std::sqrt(dx*dx+dz*dz);
             const float amount=(x==0&&z==0?settings.braking:settings.acceleration)*static_cast<float>(fixed);

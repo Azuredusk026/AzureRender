@@ -21,7 +21,7 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 开发路线
 
-当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3 和 R6 已完成，G7 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6 和 G7 已完成，U2 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 
 ## 原生 Vulkan 的边界
 

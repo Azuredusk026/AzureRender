@@ -26,7 +26,8 @@ def create(root,primary=None):
             'azure.rigid-body':component('azure.rigid-body',{'halfExtent':[1,1,1]})}}
     nodes=[{'id':'hero','resourceId':'hero','components':{
         'azure.transform':component('azure.transform',{'translation':[0,.34 if private else 0,0]}),
-        'azure.character':component('azure.character',{'speed':2,'centerOffset':.56 if private else .9},2),
+        'azure.character':component('azure.character',{'speed':2,'sprintMultiplier':2.5,'forwardYaw':0 if private else 180,
+            'centerOffset':.56 if private else .9},3),
         'azure.animator':component('azure.animator',{'asset':'assets:/locomotion.json','locomotion':True,'referenceSpeed':2},2)}},
         {'id':'guide','resourceId':'guide','components':{
             'azure.transform':component('azure.transform',{'translation':[-3,0,-4]}),

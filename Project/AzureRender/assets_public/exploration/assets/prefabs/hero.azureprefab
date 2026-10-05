@@ -25,10 +25,12 @@
         },
         "azure.character": {
           "type": "azure.character",
-          "version": 2,
+          "version": 3,
           "data": {
             "speed": 2,
-            "centerOffset": 0.9
+            "centerOffset": 0.9,
+            "sprintMultiplier": 2.5,
+            "forwardYaw": 180
           }
         },
         "azure.animator": {

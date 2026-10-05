@@ -1,7 +1,7 @@
 # R6 与 G7 可玩表现实施计划
 
 > 文档类型：阶段计划
-> 状态：R6 Complete，G7 Active
+> 状态：R6、G7 Complete
 > 更新日期：2026-10-05
 > 适用范围：公开角色、场景可见性、角色输入与独立 Player
 > 需求依据：[编辑器与可玩体验优化计划](2026-10-05-quality-round.md)
@@ -59,7 +59,7 @@
 
 先区分模型前轴、角色世界朝向与步态相位。捕获同一动作的正面、侧面和俯视视角。记录脚尖方向、实际位移、角色 yaw 与动画时间。
 
-公开生成器脚部沿局部 −Z 延伸。控制器使用 `atan2(vx,vz)-forwardYaw`。候选修复先验证公共角色 `forwardYaw=180` 的结果。私有主角根据实际前轴单独登记参数。
+公开生成器脚部沿局部 −Z 延伸。控制器使用 `atan2(vx,vz)-forwardYaw`。公共角色使用 `forwardYaw=180`。私有主角根据实际前轴单独登记参数。
 
 若前轴一致而步态仍反向，再检查生成器曲线与片段映射。前向动画需与位移一致，循环交界保持连续。真实 Idle、Walking 的来源与重定向证据保留。
 
@@ -77,7 +77,7 @@
 | 修改 | `tests/ThirdPersonTests.cpp`、`tests/PhysicsInputTests.cpp`、`tests/ReflectionTests.cpp` | 多键、速度、迁移与固定步断言 |
 | 新增 | `tools/test_locomotion_direction.py` | 真实输入、方向与侧面动作验收 |
 
-拟定接口 `InputActions::bindAdditional(const std::string& action, int key) -> void`。`bind` 使用替换绑定语义。左右 Shift 使用 GLFW 键值 340、344。任一键按住时冲刺有效，两键均释放后结束。
+接口 `InputActions::bindAdditional(const std::string& action, int key) -> void`。`bind` 使用替换绑定语义。左右 Shift 使用 GLFW 键值 340、344。任一键按住时冲刺有效，两键均释放后结束。
 
 `Character::sprintMultiplier` 默认 2.5，允许范围为 1 至 4。版本 1、2 迁移时补该默认值。正常目标速度为 `speed`，冲刺为 `speed*sprintMultiplier`。公开项目步行保持 2，冲刺为 5 米每秒。
 
@@ -85,12 +85,12 @@
 
 ## G7 实施步骤
 
-- [ ] 保存 W 前进的侧面失败证据，断言角色前轴与位移方向。
-- [ ] 增加左右 Shift、组合键、释放、失焦、暂停与重开失败测试。
-- [ ] 验证朝向假设，修复对应参数或已确认的步态曲线。
-- [ ] 实现冲刺、Character 迁移和编辑器字段，更新公开项目。
-- [ ] 对照实际键盘与输入回放，完成四方向、相机旋转及完整任务。
-- [ ] 同步第三人称、输入、教程操作表和 G7 证据，提交 G7。
+- [x] 保存 W 前进的侧面失败证据，断言角色前轴与位移方向。
+- [x] 增加左右 Shift、组合键、释放、失焦、暂停与重开失败测试。
+- [x] 验证朝向假设，修复对应参数或已确认的步态曲线。
+- [x] 实现冲刺、Character 迁移和编辑器字段，更新公开项目。
+- [x] 对照实际键盘与输入回放，完成四方向、相机旋转及完整任务。
+- [x] 同步第三人称、输入、教程操作表和 G7 证据，提交 G7。
 
 匀速阶段模型前轴与实际速度方向点积至少为 0.95。转向阶段按已有角速度收敛。步行与冲刺匀速误差至多为 2%，斜向速度等于目标速度。相同总时长的 30、60、144 Hz 输入结果保持固定步一致。
 
@@ -98,7 +98,7 @@
 
 ## 验收命令与提交
 
-R6 专项工具已验收。G7 专项工具随该阶段实施。
+R6 专项工具已验收。G7 专项工具已验收。
 
 ```powershell
 python tools/test_scene_visibility_gpu.py --executable build/ninja-msvc-release/AzureRender.exe --output build/r6/visibility

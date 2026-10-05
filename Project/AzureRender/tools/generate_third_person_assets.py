@@ -68,7 +68,7 @@ def character(name,robot=False):
                 phase=math.sin(time*2*math.pi)
                 if clip=='idle':angle=.018*phase*(1 if joint in (3,6) else .2)
                 elif joint in (9,12):angle=.58*phase*(1 if joint==9 else -1)
-                elif joint in (10,13):angle=max(0,phase*(1 if joint==10 else -1))*.7
+                elif joint in (10,13):angle=-max(0,phase*(1 if joint==10 else -1))*.7
                 elif joint in (3,6):angle=.4*phase*(-1 if joint==3 else 1)
                 else:angle=-.15
                 angles.append([math.sin(angle/2),0,0,math.cos(angle/2)])

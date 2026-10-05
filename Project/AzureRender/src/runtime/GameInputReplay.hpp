@@ -1,6 +1,7 @@
 #pragma once
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
+#include "runtime/GameplayKeys.hpp"
 #include <nlohmann/json.hpp>
 #include <vector>
 namespace azurerender {
@@ -17,7 +18,7 @@ public:
             const auto kind=action.at("action").get<std::string>();
             if(kind=="key") {
                 const int key=action.at("key").get<int>();
-                if(key!=32&&key!=65&&key!=68&&key!=69&&key!=82&&key!=83&&key!=87)throw std::invalid_argument("Unsupported replay key");
+                if(!isGameplayKey(key))throw std::invalid_argument("Unsupported replay key");
                 action.at("down").get<bool>();
             }else if(kind=="focus")action.at("focused").get<bool>();
             else if(kind=="camera") {

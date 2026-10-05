@@ -75,6 +75,7 @@ void Registry::addMigration(const std::string& name, unsigned version, std::func
 Registry makeRuntimeRegistry() {
     Registry registry; registerGeneratedTypes(registry);
     registry.addMigration("azure.character", 1, [](Json data) { return data; });
+    registry.addMigration("azure.character", 2, [](Json data) { data["sprintMultiplier"]=2.5F;return data; });
     registry.addMigration("azure.animator", 1, [](Json data) { return data; });
     return registry;
 }

@@ -454,7 +454,7 @@ void ImGuiEditorLayer::drawViewportPanel() {
                 game::RigidBody body;game::Character character;bool hasBody=false,hasCharacter=false;
                 if(runtime){const auto entity=runtime->entity(node.id);if(const auto* value=runtime->world().tryGet<game::RigidBody>(entity)){body=*value;hasBody=true;}if(const auto* value=runtime->world().tryGet<game::Character>(entity)){character=*value;hasCharacter=true;}}
                 else{auto data=context_->componentData(node.id,"azure.rigid-body");if(!data.is_null()){registry.decode("azure.rigid-body",&body,{{"type","azure.rigid-body"},{"version",1},{"data",data}});hasBody=true;}
-                    data=context_->componentData(node.id,"azure.character");if(!data.is_null()){registry.decode("azure.character",&character,{{"type","azure.character"},{"version",2},{"data",data}});hasCharacter=true;}}
+                    data=context_->componentData(node.id,"azure.character");if(!data.is_null()){registry.decode("azure.character",&character,{{"type","azure.character"},{"version",registry.type("azure.character").version},{"data",data}});hasCharacter=true;}}
                 if(hasBody)for(const auto& edge:debugBox(transform,body))line(edge,body.trigger?IM_COL32(255,210,60,220):IM_COL32(70,220,120,220));
                 if(hasCharacter)for(const auto& edge:debugCapsule(transform,character))line(edge,IM_COL32(80,180,255,230));
             }

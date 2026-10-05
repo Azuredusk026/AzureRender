@@ -1,0 +1,20 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 8: AzureEngine.Locomotion
+1/1 Test #8: AzureEngine.Locomotion ...........***Failed    0.19 sec
+FAIL both Shift keys and release: Left Shift must activate sprint
+FAIL Character migration and limits: Character must serialize version three
+FAIL walk sprint diagonal and idle: Sprint speed must be five meters per second
+FAIL pause releases held controls: Pause must release held movement and sprint
+FAIL restart preserves focus and clears controls: Restart must preserve lost focus
+FAIL 30 60 144 Hz fixed step: All frame rates must reach sprint speed
+FAIL replay accepts both Shift keys: Unsupported replay key
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.22 sec
+
+The following tests FAILED:
+	  8 - AzureEngine.Locomotion (Failed)
+Errors while running CTest

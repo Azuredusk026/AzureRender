@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "runtime/GameplayKeys.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "editor/EditorAutomation.hpp"
@@ -523,7 +524,7 @@ void AzureRenderApp::buildSceneFrameData(
             glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
         }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
         gameCursorX_=x;gameCursorY_=y;
-        for (int key : {GLFW_KEY_A, GLFW_KEY_D, GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_SPACE, GLFW_KEY_E, GLFW_KEY_R})
+        for (int key : azurerender::kGameplayKeys)
             game->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
     }
     double elapsed=0;
@@ -1383,7 +1384,7 @@ void AzureRenderApp::keyCallback(
     if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
     auto* game=application->activeGame();auto* runtime=application->activeRuntime();
     if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
-    if(game && (key==GLFW_KEY_A||key==GLFW_KEY_D||key==GLFW_KEY_W||key==GLFW_KEY_S||key==GLFW_KEY_SPACE||key==GLFW_KEY_E||key==GLFW_KEY_R)){game->input().key(key,action!=GLFW_RELEASE);return;}
+    if(game && azurerender::isGameplayKey(key)){game->input().key(key,action!=GLFW_RELEASE);return;}
     if(runtime && game){
         if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
         if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}

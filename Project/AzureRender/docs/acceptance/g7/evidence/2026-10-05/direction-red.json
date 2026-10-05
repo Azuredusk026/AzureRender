@@ -1,0 +1,9 @@
+{
+  "forwardDotMinimum": -1.0,
+  "meanSpeed": 1.9999982118606567,
+  "finalState": "idle",
+  "frames": 240,
+  "replayedActions": 2,
+  "validationErrors": 0,
+  "passed": false
+}

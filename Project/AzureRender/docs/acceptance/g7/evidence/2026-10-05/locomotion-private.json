@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "cases": {
+    "forward": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 1.9999982118606567,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 2,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "back": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 1.9999982118606567,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 2,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "left": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 1.9999982118606567,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 2,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "right": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 1.9999982118606567,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 2,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "diagonal": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 2.000002157407581,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "rotated": {
+      "forwardDotMinimum": 0.999999999999999,
+      "meanSpeed": 1.9999982118606574,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 3,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "sprint-left": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 5.000000476837158,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "sprint-right": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 5.000000476837158,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "sprint-diagonal": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 5.000005393518957,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 6,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "shift-alone": {
+      "forwardDotMinimum": 1,
+      "meanSpeed": 0.0,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 2,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "fps30": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 5.0,
+      "finalState": "idle",
+      "frames": 120,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 238,
+      "passed": true
+    },
+    "fps144": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 5.000000476837158,
+      "finalState": "idle",
+      "frames": 576,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    },
+    "both-release": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 4.980000972747803,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 6,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "heldSpeed": 5.000000953674316,
+      "releasedSpeed": 2.0000267028808594,
+      "passed": true
+    },
+    "focus": {
+      "forwardDotMinimum": 1.0,
+      "meanSpeed": 0.21000051498413086,
+      "finalState": "idle",
+      "frames": 240,
+      "replayedActions": 4,
+      "validationErrors": 0,
+      "fixedSteps": 239,
+      "passed": true
+    }
+  },
+  "fpsPositionDifference": 0.0,
+  "failures": [],
+  "validationErrors": 0
+}

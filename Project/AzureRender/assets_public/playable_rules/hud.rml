@@ -10,7 +10,7 @@ button:hover { background-color: #498c9e; }
 <p id="objective">Talk to the guide near the starting point [E].</p>
 <p id="progress">Artifacts: 0 / 3</p><p id="route">Follow the trail.</p>
 <p id="checkpoint"></p><p id="prompt"></p>
-<p>WASD Move | Mouse Camera | Space Jump | E Interact | R Restart</p>
+<p>WASD Move | Shift Sprint | Mouse Camera | Space Jump | E Interact | R Restart</p>
 <p>Esc releases the cursor. Click the world to resume camera control.</p>
 <button data-action="pause">Pause / Resume</button><button data-action="restart">Restart</button>
 </div></body></rml>

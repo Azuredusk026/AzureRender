@@ -13,10 +13,12 @@ struct RigidBody {
     AZURE_FIELD("Trigger", 0, 1)
     bool trigger = false;
 };
-AZURE_TYPE("azure.character", 2)
+AZURE_TYPE("azure.character", 3)
 struct Character {
     AZURE_FIELD("Speed", 0, 100)
     float speed = 4.0F;
+    AZURE_FIELD("Sprint multiplier", 1, 4)
+    float sprintMultiplier = 2.5F;
     AZURE_FIELD("Jump speed", 0, 100)
     float jumpSpeed = 5.0F;
     AZURE_FIELD("Radius", 0.01, 10)

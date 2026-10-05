@@ -16,6 +16,7 @@ build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/pro
 | 操作 | 行为 |
 | --- | --- |
 | WASD | 按相机方向移动 |
+| 左右 Shift | 按住冲刺，松开回到步行速度 |
 | 鼠标、滚轮 | 旋转相机、调整距离 |
 | Space | 跳跃 |
 | E | 触发当前提示目标 |

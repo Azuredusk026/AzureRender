@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_public_gait.py", line 32, in <module>
+    check(root/name)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_public_gait.py", line 24, in check
+    assert max(angles) <= 1e-6, (path,name,'knee hyperextension',max(angles))
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: (WindowsPath('D:/Assigment/2609/FYP/Project/AzureRender/assets_public/third_person/explorer.gltf'), 'left-calf', 'knee hyperextension', 0.6961653106904077)
