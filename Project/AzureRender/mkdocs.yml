@@ -41,8 +41,14 @@ nav:
   - 开发、测试与发布: development-and-release.md
   - 参数与接口参考: reference.md
   - 开发规范: documentation-standard.md
+  - 架构调研:
+      - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
+      - 引擎架构与 AI 原生实施计划: plans/2026-10-06-engine-evolution.md
+      - 引擎基础与操作契约: plans/2026-10-06-engine-foundation-steps.md
+      - AI 原生工具与编辑器: plans/2026-10-06-ai-native-editor-steps.md
+      - 引擎专项与交付: plans/2026-10-06-engine-specialized-steps.md
       - 编辑器与可玩体验优化: plans/2026-10-05-quality-round.md
       - F3 仓库与文档基础: plans/2026-10-05-repository-plan.md
       - R6 与 G7 可玩表现: plans/2026-10-05-playable-quality-plan.md

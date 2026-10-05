@@ -1,0 +1,881 @@
+{
+  "schemaVersion": 1,
+  "planDate": "2026-10-06",
+  "pathBase": "Project/AzureRender",
+  "scope": "accepted-plan; implementation results recorded only after verification",
+  "executionStatusSource": "docs/plans/azure-engine-plan.md",
+  "mainPlan": "docs/plans/2026-10-06-engine-evolution.md",
+  "sourceMap": "docs/research/gknextengine-source-map.json",
+  "referenceRepository": "D:/Project/gkNextEngine",
+  "referenceCommit": "4ba5b7cd106c282e7ed166ff853aeea87b392680",
+  "projectBaselineCommit": "fe9afda68e30539fd61048ba23d19b90217d81ce",
+  "adoptionOutcomes": [
+    "formal-adoption",
+    "adapted-adoption",
+    "verified-prototype-retained"
+  ],
+  "phases": [
+    {
+      "id": "F4",
+      "order": 1,
+      "priority": "P0",
+      "dependsOn": [
+        "P2"
+      ],
+      "tasks": [
+        "F4.1",
+        "F4.2"
+      ],
+      "items": [
+        "A1",
+        "A2"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "G8",
+      "order": 2,
+      "priority": "P0",
+      "dependsOn": [
+        "F4"
+      ],
+      "tasks": [
+        "G8.1",
+        "G8.2"
+      ],
+      "items": [
+        "A1",
+        "B8"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "U3",
+      "order": 3,
+      "priority": "P0",
+      "dependsOn": [
+        "G8"
+      ],
+      "tasks": [
+        "U3.1",
+        "U3.2"
+      ],
+      "items": [
+        "A3",
+        "A6"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "F5",
+      "order": 4,
+      "priority": "P0",
+      "dependsOn": [
+        "U3"
+      ],
+      "tasks": [
+        "F5.1",
+        "F5.2",
+        "F5.3"
+      ],
+      "items": [
+        "A4",
+        "A5",
+        "B5"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "U4",
+      "order": 5,
+      "priority": "P1",
+      "dependsOn": [
+        "F5"
+      ],
+      "tasks": [
+        "U4.1",
+        "U4.2",
+        "U4.3"
+      ],
+      "items": [
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "G9",
+      "order": 6,
+      "priority": "P1",
+      "dependsOn": [
+        "U4"
+      ],
+      "tasks": [
+        "G9.1",
+        "G9.2"
+      ],
+      "items": [
+        "A6",
+        "B4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "R7",
+      "order": 7,
+      "priority": "P1",
+      "dependsOn": [
+        "G9"
+      ],
+      "tasks": [
+        "R7.1",
+        "R7.2"
+      ],
+      "items": [
+        "B6",
+        "B7"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "G10",
+      "order": 8,
+      "priority": "P2",
+      "dependsOn": [
+        "R7"
+      ],
+      "tasks": [
+        "G10.1",
+        "G10.2"
+      ],
+      "items": [
+        "C1"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "R8",
+      "order": 9,
+      "priority": "P2",
+      "dependsOn": [
+        "G10"
+      ],
+      "tasks": [
+        "R8.1",
+        "R8.2"
+      ],
+      "items": [
+        "C2"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "R9",
+      "order": 10,
+      "priority": "P2",
+      "dependsOn": [
+        "R8"
+      ],
+      "tasks": [
+        "R9.1",
+        "R9.2"
+      ],
+      "items": [
+        "C3"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "G11",
+      "order": 11,
+      "priority": "P2",
+      "dependsOn": [
+        "R9"
+      ],
+      "tasks": [
+        "G11.1",
+        "G11.2"
+      ],
+      "items": [
+        "C4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "P3",
+      "order": 12,
+      "priority": "P2",
+      "dependsOn": [
+        "G11"
+      ],
+      "tasks": [
+        "P3.1"
+      ],
+      "items": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7",
+        "B8",
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "F4.1",
+      "heading": "单向依赖与服务生命周期",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "F4.2",
+      "heading": "组件注册与属性描述",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "G8.1",
+      "heading": "系统装配与可配置控制",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "G8.2",
+      "heading": "通用交互与应用任务策略",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "U3.1",
+      "heading": "统一操作描述与入口",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "U3.2",
+      "heading": "文档版本、批量修改与历史",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "F5.1",
+      "heading": "观察注册与自动验证",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "F5.2",
+      "heading": "文本内容与生成来源",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "F5.3",
+      "heading": "统一开发命令入口",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.1",
+      "heading": "语义样式、尺度与控件",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.2",
+      "heading": "面板、上下文和选择服务",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.3",
+      "heading": "类型化设置与来源优先级",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G9.1",
+      "heading": "模型客户端与进程协议",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G9.2",
+      "heading": "领域提案、校验与生产应用",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "R7.1",
+      "heading": "热重载服务与安全替换",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "R7.2",
+      "heading": "视图服务与资产缩略图",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G10.1",
+      "heading": "参数化几何与生成器适配",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G10.2",
+      "heading": "文本刚体骨骼与关键帧",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R8.1",
+      "heading": "工具链、共享类型与等价 Pass",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R8.2",
+      "heading": "策略组合与采用结论",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R9.1",
+      "heading": "资源访问与设备契约",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R9.2",
+      "heading": "可见性、表面数据与规模基准",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G11.1",
+      "heading": "Lua 服务与绑定描述",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G11.2",
+      "heading": "托管后端与生命周期原型",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "P3.1",
+      "heading": "双工作流与全部门禁",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    }
+  ],
+  "items": [
+    {
+      "id": "A1",
+      "name": "单向依赖与显式模块装配",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "单向依赖、服务所有权、显式装配和关闭",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "重复安装、反向依赖、销毁顺序",
+      "tasks": [
+        "F4.1",
+        "G8.1"
+      ],
+      "phases": [
+        "F4",
+        "G8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/cmake/TargetHelpers.cmake",
+        "src/Engine/Runtime/Interface/SceneContent.hpp",
+        "src/Modules/CMakeLists.txt"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "A2",
+      "name": "属性元数据与统一类型契约",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "稳定类型、范围、分类、权限和版本",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "字段漂移、非法输入、迁移",
+      "tasks": [
+        "F4.2"
+      ],
+      "phases": [
+        "F4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Reflection/PropertyMeta.hpp",
+        "src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "A3",
+      "name": "编辑命令、撤销与统一执行入口",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "同一操作入口、撤销、合并和分组",
+      "fitAndCost": "高，L",
+      "riskAndRequiredBehavior": "部分写入、入口差异、重做",
+      "tasks": [
+        "U3.1",
+        "U3.2"
+      ],
+      "phases": [
+        "U3"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Command/ICommand.hpp",
+        "src/Engine/Runtime/Command/CommandHistory.hpp",
+        "src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp",
+        "src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "A4",
+      "name": "状态查询、条件等待和自动验证",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "查询、条件等待、输入、截图与报告",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "超时、替身偏离、模式差异",
+      "tasks": [
+        "F5.1"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/AgentQueries.hpp",
+        "src/Modules/NextValidation/AgentControlServer.cpp",
+        "src/Modules/NextValidation/NextValidationModule.cpp",
+        "src/Modules/NextValidation/SyntheticInput.cpp",
+        "tools/gnb/internal/validate/validate.go",
+        "assets/agentscripts/ui-foundation-editor-normal.agentscript.json"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "A5",
+      "name": "文本内容与可追踪的资产生成",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "文本契约、输入、依赖、生成版本与输出",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "缓存失效、移动目录、重建失败",
+      "tasks": [
+        "F5.2"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/ScadLoader/FScadEvaluator.h",
+        "src/Modules/ScadLoader/FScadRig.h",
+        "assets/scad/proc/terrain_demo.scad"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "A6",
+      "name": "有界 AI 提案与领域验证",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "提案、基础版本、校验、取消与有限修复",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "过期写入、非法引用、预算耗尽",
+      "tasks": [
+        "U3.2",
+        "G9.2"
+      ],
+      "phases": [
+        "U3",
+        "G9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp",
+        "src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp",
+        "src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp",
+        "src/Tests/Test_ScadAIController.cpp",
+        "src/Tests/Test_ScadAIAdapters.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B1",
+      "name": "UI 语义样式与基础组件",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "语义颜色、尺度、控件状态与样式作用域",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "DPI、样式栈、禁用与焦点",
+      "tasks": [
+        "U4.1"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/NextUI/UI/UiTheme.hpp",
+        "src/Modules/NextUI/UI/UiTheme.cpp",
+        "src/Modules/NextUI/UI/UiContext.hpp",
+        "src/Modules/NextUI/UI/UiScopes.hpp",
+        "src/Modules/NextUI/UI/UiWidgets.hpp",
+        "src/Modules/NextUI/UI/AppChrome.hpp",
+        "src/Modules/NextUI/ImGuiScaling.cpp",
+        "src/Modules/NextUI/UI/DesktopUI.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B2",
+      "name": "编辑器上下文、面板和动作划分",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "面板、上下文、选择、动作与界面状态",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "上下文膨胀、拖放与布局恢复",
+      "tasks": [
+        "U4.2"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Application/Editor/gkNextEditor/EditorContext.hpp",
+        "src/Application/Editor/gkNextEditor/EditorUi.hpp",
+        "src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp",
+        "src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B3",
+      "name": "类型化控制变量与配置来源",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "类型化设置、来源、范围和持久化",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "优先级、线程、生效时机",
+      "tasks": [
+        "U4.3"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Config/CVarSystem.hpp",
+        "src/Modules/DevTools/CVarEditorPanel.cpp",
+        "src/Tests/Test_CVarSystem.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B4",
+      "name": "模型接入的独立进程与协议",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "可选模型客户端、进程协议与领域规则",
+      "fitAndCost": "中高，L",
+      "riskAndRequiredBehavior": "协议、服务缺失、取消与期限",
+      "tasks": [
+        "G9.1",
+        "G9.2"
+      ],
+      "phases": [
+        "G9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/NextAI/AIService.hpp",
+        "src/Modules/NextAI/GnbClient/GnbAIClient.hpp",
+        "tools/gnb/internal/ai/bridge/bridge.go",
+        "tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson",
+        "src/Tests/Test_GnbAIClient.cpp",
+        "docs/designs/nextai-product-focused-architecture.md",
+        "docs/designs/gnb-ai-bridge-protocol-v2.md"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B5",
+      "name": "可组合的构建与验证命令行",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "薄命令入口、目标选择、退出码与报告",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "配置漂移、并发构建、工具膨胀",
+      "tasks": [
+        "F5.3"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "tools/gnb/README.md",
+        "tools/gnb/internal/validate/validate.go",
+        "src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B6",
+      "name": "热重载的接口与模块边界",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "开发期热重载、状态与安全资源替换",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "在途资源、编译失败、退出释放",
+      "tasks": [
+        "R7.1"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/ShaderHotReload.hpp",
+        "src/Modules/LiveCoding/LiveCodingModule.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B7",
+      "name": "离屏视图、缩略图与按需更新",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "视图句柄、相机覆盖、缩略图与按需调度",
+      "fitAndCost": "中高，L",
+      "riskAndRequiredBehavior": "历史串扰、尺寸、驻留资源",
+      "tasks": [
+        "R7.2"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/RenderViews/OffscreenRenderViewController.hpp",
+        "src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "B8",
+      "name": "共享机制与应用玩法的分层",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "核心、共享机制与应用玩法的分层",
+      "fitAndCost": "高，L",
+      "riskAndRequiredBehavior": "任务兼容、动作绑定、系统装配",
+      "tasks": [
+        "G8.1",
+        "G8.2"
+      ],
+      "phases": [
+        "G8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Gameplay/CMakeLists.txt",
+        "src/Gameplay/Character/CharacterActor.h",
+        "src/Gameplay/AI/NavGrid.h"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ]
+    },
+    {
+      "id": "C1",
+      "name": "程序化几何与文本骨骼动画",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "参数化几何、刚体骨骼与文本动画",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "语义、坐标、CSG、复杂度",
+      "tasks": [
+        "G10.1",
+        "G10.2"
+      ],
+      "phases": [
+        "G10"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/ScadLoader/FScadCsg.cpp",
+        "src/Modules/ScadLoader/FScadRig.h",
+        "src/Tests/Test_ScadRig.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ]
+    },
+    {
+      "id": "C2",
+      "name": "Slang 模块与着色算法组合",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "着色模块、共享类型与算法组合",
+      "fitAndCost": "中，L 至 XL",
+      "riskAndRequiredBehavior": "编译、SPIR-V、布局与性能",
+      "tasks": [
+        "R8.1",
+        "R8.2"
+      ],
+      "phases": [
+        "R8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "assets/shaders/common/Interfaces.slang",
+        "assets/shaders/common/RayTracers.slang",
+        "assets/shaders/common/PathTracingRenderer.slang",
+        "assets/shaders/Core.PathTracing.comp.slang"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ]
+    },
+    {
+      "id": "C3",
+      "name": "Bindless 与 GPU 驱动可见性",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "资源索引、设备能力与 GPU 可见性数据流",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "同步、镜像、蒙皮、透明与拾取",
+      "tasks": [
+        "R9.1",
+        "R9.2"
+      ],
+      "phases": [
+        "R9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "assets/shaders/common/BasicTypes.slang",
+        "assets/shaders/common/BindlessTexture.slang",
+        "src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp",
+        "src/Engine/Rendering/VulkanBaseRenderer.cpp",
+        "src/Engine/Assets/GPU/Texture.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ]
+    },
+    {
+      "id": "C4",
+      "name": "可替换脚本后端与生成绑定",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "脚本服务、版本化绑定与可替换后端",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "ABI、句柄、异常、重载与恢复",
+      "tasks": [
+        "G11.1",
+        "G11.2"
+      ],
+      "phases": [
+        "G11"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/ScriptRuntime.hpp",
+        "src/Modules/NextDotNet/NextDotNetModule.cpp",
+        "src/Modules/NextDotNet/EngineApi.def.h",
+        "src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ]
+    }
+  ]
+}
