@@ -1,0 +1,778 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "editStateRestored": true,
+  "editorActions": [
+    {
+      "command": "select",
+      "error": "",
+      "milliseconds": 0.2333,
+      "passed": true
+    },
+    {
+      "command": "save",
+      "error": "",
+      "milliseconds": 5.9965,
+      "passed": true
+    },
+    {
+      "command": "reload",
+      "error": "",
+      "milliseconds": 1.9022,
+      "passed": true
+    },
+    {
+      "command": "play",
+      "error": "",
+      "milliseconds": 665.7001,
+      "passed": true
+    },
+    {
+      "command": "stop",
+      "error": "",
+      "milliseconds": 23.0703,
+      "passed": true
+    }
+  ],
+  "editorDebugLines": 0,
+  "editorLevelRevision": 1,
+  "editorPlaySteps": 14,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "diagnostic": "",
+    "dpi": 1.5,
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gizmoTranslation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "history": [],
+    "image": {
+      "height": 219.0,
+      "width": 600.0,
+      "x": 12.0,
+      "y": 180.0
+    },
+    "nodeCount": 3,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          414.0,
+          624.0,
+          90.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          627.0,
+          244.0,
+          333.0,
+          260.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          627.0,
+          96.0,
+          333.0,
+          145.0
+        ]
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          96.0,
+          624.0,
+          315.0
+        ]
+      }
+    },
+    "selectedName": "observer",
+    "uiErrors": [],
+    "version": 2,
+    "visibleAssets": [],
+    "widgets": {
+      "assets.search": [
+        12.0,
+        459.0,
+        473.0,
+        33.0
+      ],
+      "assets.type": [
+        497.0,
+        459.0,
+        220.0,
+        33.0
+      ],
+      "build": [
+        643.5,
+        48.0,
+        60.0,
+        33.0
+      ],
+      "focus": [
+        12.0,
+        141.0,
+        126.0,
+        33.0
+      ],
+      "menu.Edit": [
+        55.0,
+        3.0,
+        51.0,
+        27.0
+      ],
+      "menu.File": [
+        6.0,
+        3.0,
+        49.0,
+        27.0
+      ],
+      "menu.Help": [
+        224.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "menu.Tools": [
+        162.0,
+        3.0,
+        62.0,
+        27.0
+      ],
+      "menu.View": [
+        106.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "mode.Move": [
+        75.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Rotate": [
+        169.5,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Scale": [
+        264.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "name": [
+        639.0,
+        409.0,
+        216.0,
+        33.0
+      ],
+      "node.asset-a": [
+        633.0,
+        250.0,
+        300.0,
+        27.0
+      ],
+      "node.asset-b": [
+        633.0,
+        277.0,
+        300.0,
+        27.0
+      ],
+      "node.observer": [
+        633.0,
+        223.0,
+        300.0,
+        27.0
+      ],
+      "outliner.search": [
+        639.0,
+        141.0,
+        287.0,
+        33.0
+      ],
+      "panelrect.animation": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.assets": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.build": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.capture": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.console": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.gameplay-debug": [
+        0.0,
+        414.0,
+        624.0,
+        90.0
+      ],
+      "panelrect.inspector": [
+        627.0,
+        244.0,
+        333.0,
+        260.0
+      ],
+      "panelrect.outliner": [
+        627.0,
+        96.0,
+        333.0,
+        145.0
+      ],
+      "panelrect.viewport": [
+        0.0,
+        96.0,
+        624.0,
+        315.0
+      ],
+      "pause": [
+        430.5,
+        48.0,
+        65.0,
+        33.0
+      ],
+      "pick.asset-a": [
+        242.22027587890625,
+        305.13592529296875,
+        2,
+        2
+      ],
+      "pick.asset-b": [
+        379.6460876464844,
+        304.93780517578125,
+        2,
+        2
+      ],
+      "play": [
+        364.5,
+        48.0,
+        54.0,
+        33.0
+      ],
+      "save": [
+        12.0,
+        48.0,
+        57.0,
+        33.0
+      ],
+      "step": [
+        507.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "stop": [
+        575.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "tab.animation": [
+        515.0,
+        414.0,
+        120.0,
+        33.0
+      ],
+      "tab.assets": [
+        39.0,
+        414.0,
+        120.0,
+        33.0
+      ],
+      "tab.build": [
+        389.0,
+        414.0,
+        120.0,
+        33.0
+      ],
+      "tab.capture": [
+        165.0,
+        414.0,
+        106.0,
+        33.0
+      ],
+      "tab.console": [
+        277.0,
+        414.0,
+        106.0,
+        33.0
+      ],
+      "tab.gameplay-debug": [
+        641.0,
+        414.0,
+        120.0,
+        33.0
+      ],
+      "tab.inspector": [
+        666.0,
+        244.0,
+        98.0,
+        33.0
+      ],
+      "tab.outliner": [
+        666.0,
+        96.0,
+        151.0,
+        33.0
+      ],
+      "tab.viewport": [
+        39.0,
+        96.0,
+        112.0,
+        33.0
+      ],
+      "viewport.image": [
+        12.0,
+        180.0,
+        600.0,
+        219.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "observer",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "asset-a",
+      "translation": [
+        -0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "asset-b",
+      "translation": [
+        0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    }
+  ],
+  "observedScriptErrors": 0,
+  "presentationErrors": [],
+  "recoveredScripts": 0,
+  "replayedActions": 3,
+  "routeFrames": [
+    {
+      "camera": [
+        0.25,
+        2.035276174545288,
+        2.8637032508850098
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 4,
+      "interactionTarget": "asset-a",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 5,
+      "interactionTarget": "asset-a",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 6,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812500178813934,
+        2.0275115966796875,
+        2.8347256183624268
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 7,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        0.24812492728233337,
+        2.0275115966796875,
+        2.8347253799438477
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 8,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 9,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 10,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 11,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 12,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 13,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 14,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 15,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 16,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    },
+    {
+      "camera": [
+        -0.014938322827219963,
+        1.9418983459472656,
+        2.3488707542419434
+      ],
+      "cameraObstructed": false,
+      "characters": [],
+      "checkpointActivated": false,
+      "collectibles": 0,
+      "doorOpen": false,
+      "focused": true,
+      "frame": 17,
+      "interactionTarget": "asset-b",
+      "levelRevision": 2,
+      "target": [
+        0.0,
+        1.0,
+        -1.0
+      ],
+      "tasks": []
+    }
+  ],
+  "scene": "inspection",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

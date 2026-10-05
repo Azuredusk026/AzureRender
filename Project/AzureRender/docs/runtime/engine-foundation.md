@@ -17,11 +17,15 @@ G0 提供模块库、项目创建、版本化配置、资源挂载和独立 Play
 | AzurePlatform | GLFW 窗口和表面生命周期 | AzureFoundation |
 | AzureRenderCore | RHI、帧图、着色、资产解析和场景渲染器 | AzureFoundation |
 | AzureRuntime | 项目、关卡、资产、物理、输入和脚本 | AzureRenderCore、AzureReflection |
-| AzureEditor | 编辑会话、相机控制和 Dear ImGui 界面 | AzureRuntime、AzurePlatform |
+| AzureGameplay | 可装配角色、动画、相机与交互机制 | AzureRuntime |
+| AzureProjectRuntime | 应用默认配置与探索任务策略 | AzureGameplay |
+| AzureEditor | 编辑会话、相机控制和 Dear ImGui 界面 | AzureRuntime、AzurePlatform、AzureProjectRuntime |
 | AzureRenderHost | 编辑预览的 GPU 宿主 | AzureRuntime、AzurePlatform、AzureEditor |
-| AzurePlayerHost | Player 的 GPU 宿主 | AzureRuntime、AzurePlatform |
+| AzurePlayerHost | Player 的 GPU 宿主 | AzureRuntime、AzurePlatform、AzureProjectRuntime |
 
 宿主以 `AZURE_WITH_EDITOR` 编译变体隔离编辑器实现。公共渲染库由两个宿主共享。项目内新功能按所属模块加入显式源码清单，模块链接方向由 CMake 维护。
+
+项目配置选择运行系统与输入动作。应用模块提供兼容项目的默认组合。共享机制通过工厂注册，Runtime 消费公共系统接口。具体组合与顺序见[运行系统装配](system-composition.md)。
 
 ## 模块装配与依赖检查
 

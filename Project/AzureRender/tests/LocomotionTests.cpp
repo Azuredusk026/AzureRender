@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/GameInputReplay.hpp"
 #include "reflection/Registry.hpp"
@@ -43,7 +44,7 @@ int main() {
         catch(const std::exception& error) { ++failures;std::cerr<<"FAIL "<<name<<": "<<error.what()<<'\n'; }
     };
     test("both Shift keys and release",[] {
-        InputActions input;
+        InputActions input;input.configure(application::explorationConfiguration().at("input"));
         input.key(340,true);check(input.down("sprint"),"Left Shift must activate sprint");
         input.key(344,true);input.key(340,false);check(input.down("sprint"),"Right Shift must keep sprint held");
         input.key(344,false);check(!input.down("sprint"),"Both released must stop sprint");
@@ -57,7 +58,7 @@ int main() {
     test("Character migration and limits",[] {
         auto registry=reflection::makeRuntimeRegistry();game::Character value;
         const auto encoded=registry.encode("azure.character",&value);
-        check(encoded.at("version")==3,"Character must serialize version three");
+        check(encoded.at("version")==4,"Character must serialize version four");
         check(encoded.at("data").at("sprintMultiplier")==2.5F,"Sprint default must be 2.5");
         for(int version:{1,2}) {
             auto candidate=encoded;candidate["data"]["sprintMultiplier"]=3.5;
@@ -73,7 +74,7 @@ int main() {
         }
     });
     test("walk sprint diagonal and idle",[] {
-        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime);settle(game);
+        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
         game.input().key(340,true);settle(game);check(speed(game,runtime)<.001F,"Shift alone must stay still");
         game.input().key(87,true);settle(game);check(std::abs(speed(game,runtime)-5)<.1F,"Sprint speed must be five meters per second");
         game.input().key(68,true);settle(game);check(std::abs(speed(game,runtime)-5)<.1F,"Diagonal sprint must normalize speed");
@@ -81,14 +82,14 @@ int main() {
         game.input().setFocused(false);settle(game);check(speed(game,runtime)<.001F,"Focus loss must stop movement");
     });
     test("pause releases held controls",[] {
-        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime);settle(game);
+        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
         game.input().key(87,true);game.input().key(340,true);game.advance(1.0/60);
         runtime.pause();game.advance(1.0/60);
         check(!game.input().down("move-forward")&&!game.input().down("sprint"),"Pause must release held movement and sprint");
         runtime.resume();settle(game);check(speed(game,runtime)<.001F,"Resume must brake to rest");
     });
     test("restart preserves focus and clears controls",[] {
-        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime);settle(game);
+        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
         game.input().key(87,true);game.input().key(344,true);
         runtime.replaceScene(fixtureScene(),configure);game.advance(1.0/60);
         check(!game.input().down("move-forward")&&!game.input().down("sprint"),"Restart must clear held controls");
@@ -98,7 +99,7 @@ int main() {
     test("30 60 144 Hz fixed step",[] {
         std::array<float,3> baseline{};unsigned baselineSteps=0;
         for(int hz:{30,60,144}) {
-            RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime);settle(game);
+            RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
             game.input().key(87,true);game.input().key(344,true);
             for(int i=0;i<hz*2;++i)game.advance(1.0/hz);
             check(std::abs(speed(game,runtime)-5)<.1F,"All frame rates must reach sprint speed");
@@ -109,7 +110,7 @@ int main() {
     });
     test("replay accepts both Shift keys",[] {
         check(isGameplayKey(340)&&isGameplayKey(344)&&!isGameplayKey(999),"Physical keys must use the shared gameplay domain");
-        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime);
+        RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
         auto replay=GameInputReplay::parse({{"schemaVersion",1},{"actions",{
             {{"frame",0},{"action","key"},{"key",340},{"down",true}},
             {{"frame",1},{"action","key"},{"key",344},{"down",true}}}}});

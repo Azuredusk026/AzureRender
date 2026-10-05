@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <map>
 #include <string>
+#include <nlohmann/json.hpp>
 
 #include "SceneDocument.hpp"
 namespace azurerender {
@@ -10,6 +11,7 @@ class Project final {
     static constexpr unsigned kSchemaVersion = 1;
     std::filesystem::path file;
     std::string id, name, startupScene;
+    nlohmann::json runtimeConfiguration = nullptr;
     std::map<std::string, std::filesystem::path> mounts;
     static void create(const std::filesystem::path& directory, const std::string& name);
     static void createGame(const std::filesystem::path& directory, const std::string& name);

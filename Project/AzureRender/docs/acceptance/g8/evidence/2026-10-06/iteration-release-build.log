@@ -1,0 +1,233 @@
+[0/1] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+-- Automatically setting %HTTP(S)_PROXY% environment variables to "127.0.0.1:7897".
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0 -- git+https://github.com/microsoft/vcpkg@0fb79bb13588702a9e06057745b4aed95ce5c861
+  * bzip2[core,tool]:x64-windows@1.0.8#6 -- git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 -- git+https://github.com/microsoft/vcpkg@37a2b08e48b987c9b2a45a075fed1bc382e8de03
+    glfw3:x64-windows@3.5.1 -- git+https://github.com/microsoft/vcpkg@983a9c6ea042da294d61cb405600725dd7c22bbd
+  * imath:x64-windows@3.2.2 -- git+https://github.com/microsoft/vcpkg@b167f9479ce8752a2839c39ee8f52c11af4c0266
+  * itlib:x64-windows@1.12.2 -- git+https://github.com/microsoft/vcpkg@8a453b8f5e7fdbda2367527993839428ec50343f
+    joltphysics:x64-windows@5.6.0 -- git+https://github.com/microsoft/vcpkg@2eab0b6e73bfbe491fa0ffb297fd3ffdb6bf4ecf
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 -- git+https://github.com/microsoft/vcpkg@ceffc2e1864a1a1da49e655da03c323723a9816d
+  * libpng:x64-windows@1.6.58 -- git+https://github.com/microsoft/vcpkg@909d98e06046a0901fd11300b3d725d6a80d27bf
+    lua:x64-windows@5.4.8 -- git+https://github.com/microsoft/vcpkg@062ae235ae46d4bce8b00be2c74667e0763cc2c1
+    miniaudio:x64-windows@0.11.25 -- git+https://github.com/microsoft/vcpkg@f019711e3ca3673819cc9b8436af74b095dcb580
+  * nlohmann-json:x64-windows@3.12.0#2 -- git+https://github.com/microsoft/vcpkg@ac3b8821cf486e45dd543bef2a4ba1d1ba230258
+    openexr:x64-windows@3.4.13 -- git+https://github.com/microsoft/vcpkg@48521629e41c4a321b28dc3db54695be41c66e2f
+  * openjph:x64-windows@0.31.0 -- git+https://github.com/microsoft/vcpkg@ad25bd553f9d4644ed6a978f8a6fc5d6387a923b
+    rmlui[core,freetype]:x64-windows@6.3 -- git+https://github.com/microsoft/vcpkg@190d18bbd429a7eab3a01d54051362e47538bfb0
+  * robin-hood-hashing:x64-windows@3.11.5#2 -- git+https://github.com/microsoft/vcpkg@1a989171742275cc32060ed37157eeb0efcdc739
+    sol2:x64-windows@3.5.0#1 -- git+https://github.com/microsoft/vcpkg@b3089bcbf6e652b82348192c6289d0ba2d0d9fe7
+    stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    tinygltf:x64-windows@3.0.0#1 -- git+https://github.com/microsoft/vcpkg@9c983959bc083131a4f5ca06ea51178a3e5a04b1
+  * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+  * vcpkg-cmake-config:x64-windows@2026-07-21 -- git+https://github.com/microsoft/vcpkg@51befcb03097f8d19c1c59f9ec3625e69d85322a
+    vulkan-memory-allocator:x64-windows@3.4.0 -- git+https://github.com/microsoft/vcpkg@a5328a01836eccf4c520e20e58f4d45d36cd1035
+  * zlib:x64-windows@1.3.2#1 -- git+https://github.com/microsoft/vcpkg@f49b05c666425471a7f6dc8b6156e9b3675a3c90
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 947 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+[1/95] Generating generated/reflection/GeneratedRegistry.hpp, generated/runtime/GeneratedComponents.hpp
+[2/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[3/95] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[4/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[5/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[6/95] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[7/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[8/95] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[9/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[10/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[11/95] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[12/95] Building CXX object CMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzurePresentationRuntimeTests.dir/tests/PresentationRuntimeTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DJPH_FLOATING_POINT_EXCEPTIONS_ENABLED -DJPH_OBJECT_STREAM -DJPH_USE_CPU_COMPUTE -DNDEBUG -DOPENEXR_DLL -I..\..\src -Igenerated -IC:\VulkanSDK\1.4.350.0\Include -Ivcpkg_installed\x64-windows\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj /FdCMakeFiles\AzurePresentationRuntimeTests.dir\ /FS -c ..\..\tests\PresentationRuntimeTests.cpp
+..\..\tests\PresentationRuntimeTests.cpp(13): error C2440: “<function-style-cast>”: 无法从“initializer list”转换为“azurerender::game::Animator”
+..\..\tests\PresentationRuntimeTests.cpp(13): note: 无效的聚合初始化
+..\..\tests\PresentationRuntimeTests.cpp(13): note: “初始化”: 无法从“bool”转换为“std::string”
+..\..\tests\PresentationRuntimeTests.cpp(13): note: “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string”: 没有重载函数可以转换所有参数类型
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(768): note: 可能是“std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const )”
+        with
+        [
+            _Elem=char
+        ]
+..\..\tests\PresentationRuntimeTests.cpp(13): note: “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const )”: 无法将参数 1 从“bool”转换为“const _Elem *const ”
+        with
+        [
+            _Elem=char
+        ]
+..\..\tests\PresentationRuntimeTests.cpp(13): note: 从整型类型转换为指针类型需要 reinterpret_cast、C 样式转换或带圆括号的函数样式强制转换
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(1340): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(std::initializer_list<_Elem>,const _Alloc &)”
+        with
+        [
+            _Elem=char,
+            _Alloc=std::allocator<char>
+        ]
+..\..\tests\PresentationRuntimeTests.cpp(13): note: “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(std::initializer_list<_Elem>,const _Alloc &)”: 无法将参数 1 从“bool”转换为“std::initializer_list<_Elem>”
+        with
+        [
+            _Elem=char,
+            _Alloc=std::allocator<char>
+        ]
+        and
+        [
+            _Elem=char
+        ]
+..\..\tests\PresentationRuntimeTests.cpp(13): note: 转换要求第二个用户定义的转换运算符或构造函数
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(1157): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Ty &,const unsigned __int64,const unsigned __int64,const _Alloc &)”
+        with
+        [
+            _Alloc=std::allocator<char>
+        ]
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(798): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(_Iter,_Iter,const _Alloc &)”
+        with
+        [
+            _Alloc=std::allocator<char>
+        ]
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(792): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const unsigned __int64,const _Elem,const _Alloc &)”
+        with
+        [
+            _Elem=char,
+            _Alloc=std::allocator<char>
+        ]
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(775): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const ,const _Alloc &)”
+        with
+        [
+            _Elem=char,
+            _Alloc=std::allocator<char>
+        ]
+D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\include\xstring(762): note: 或    “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string(const _Elem *const ,const unsigned __int64,const _Alloc &)”
+        with
+        [
+            _Elem=char,
+            _Alloc=std::allocator<char>
+        ]
+..\..\tests\PresentationRuntimeTests.cpp(13): note: 尝试匹配参数列表“(bool)”时
+..\..\tests\PresentationRuntimeTests.cpp(13): error C2672: “azurerender::ecs::World::addComponent”: 未找到匹配的重载函数
+..\..\src\ecs/World.hpp(79): note: 可能是“void azurerender::ecs::World::addComponent(const azurerender::ecs::Entity,T)”
+..\..\tests\PresentationRuntimeTests.cpp(13): note: “void azurerender::ecs::World::addComponent(const azurerender::ecs::Entity,T)”: 应输入 2 个参数，却提供了 1 个
+[13/95] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[14/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[15/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[16/95] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[17/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[18/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[19/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[20/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[21/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[22/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[23/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[24/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[25/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[26/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[27/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[28/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[29/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[30/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[31/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[32/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[33/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[34/95] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[35/95] Building CXX object CMakeFiles\AzureRegisteredComponentWorkflowTests.dir\tests\RegisteredComponentWorkflowTests.cpp.obj
+[36/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[37/95] Building CXX object CMakeFiles\AzureReflection.dir\src\reflection\Registry.cpp.obj
+[38/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ComponentRegistry.cpp.obj
+[39/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[40/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[41/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[42/95] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[43/95] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[44/95] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntime.cpp.obj
+[45/95] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 65, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_provenance.py", line 51, in main
+    subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cmake', '--build', 'build\\ninja-msvc-release', '--config', 'Release']' returned non-zero exit status 2.

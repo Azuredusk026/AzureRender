@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/GameplayKeys.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
@@ -90,7 +91,7 @@ void AzureRenderApp::run(
     runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options](auto&) {
     if (!options.projectFile.empty() && !options.editorMode)
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
-    if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_);
+    if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
         scriptRuntime_ = std::make_unique<azurerender::ScriptRuntime>(runtime_, *gameRuntime_, levelSession_->assets());
         scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
@@ -539,7 +540,7 @@ void AzureRenderApp::buildSceneFrameData(
             glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
         }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
         gameCursorX_=x;gameCursorY_=y;
-        for (int key : azurerender::kGameplayKeys)
+        for (int key : game->input().keys())
             game->input().key(key, glfwGetKey(frontend_->nativeHandle(), key) == GLFW_PRESS);
     }
     double elapsed=0;
@@ -558,7 +559,7 @@ void AzureRenderApp::buildSceneFrameData(
         if(preview){frame.animations.push_back(*preview);++editorPreviewFrames_;}
     }
 #endif
-    if(gameInputReplay_&&gameRouteFrames_.size()<8192){nlohmann::json state;
+    if(game&&gameInputReplay_&&gameRouteFrames_.size()<8192){nlohmann::json state;
         state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
         state["characters"]=nlohmann::json::array();
         activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
@@ -1396,7 +1397,7 @@ void AzureRenderApp::keyCallback(
     if(application->gameUi_){application->gameUi_->key(key,action!=GLFW_RELEASE);if(application->gameUi_->wantsKeyboard())return;}
     auto* game=application->activeGame();auto* runtime=application->activeRuntime();
     if(game&&key==GLFW_KEY_ESCAPE&&action==GLFW_PRESS){application->gameViewportFocus_=false;application->gameCursorPrimed_=false;game->input().setFocused(false);glfwSetInputMode(window,GLFW_CURSOR,GLFW_CURSOR_NORMAL);return;}
-    if(game && azurerender::isGameplayKey(key)){game->input().key(key,action!=GLFW_RELEASE);return;}
+    if(game && game->input().bound(key)){game->input().key(key,action!=GLFW_RELEASE);return;}
     if(runtime && game){
         if(action==GLFW_PRESS&&key==GLFW_KEY_P){if(runtime->state()==azurerender::RuntimeLifecycle::State::Running)runtime->pause();else if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->resume();return;}
         if(action==GLFW_PRESS&&key==GLFW_KEY_O){if(runtime->state()==azurerender::RuntimeLifecycle::State::Paused)runtime->step();return;}

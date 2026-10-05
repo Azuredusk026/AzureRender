@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-05
+> 更新日期：2026-10-06
 > 适用范围：Windows Player 运行时
 > 源码入口：`src/runtime/PhysicsWorld.*`、`InputActions.hpp`、`GameRuntime.*`
 > 关联测试：`PhysicsInputTests.cpp`、`test_physics_player.py`
@@ -31,13 +31,13 @@ PhysicsWorld 持有独立 PhysicsSystem、临时分配器和任务系统，刚�
 
 触发器使用 Jolt 窄相位形状重叠查询，事件携带触发实体、另一实体和进入标记。离开或删除生成退出事件。
 
-动作默认绑定 W/A/S/D、Space、E、R 与左右 Shift。`bind()` 替换动作的全部绑定，`bindAdditional()` 增加按键。任一绑定按住时动作有效，两键均释放后结束。
+探索应用默认绑定 W/A/S/D、Space、E、R 与左右 Shift。`bind()` 替换动作的全部绑定，`bindAdditional()` 增加按键。任一绑定按住时动作有效，两键均释放后结束。
 
 `pressed()` 在首个固定步消费，重复按键保持一个按下沿。窗口失焦清除按键，编辑器按视口焦点采集输入。普通暂停清除按住状态，单步可消费新的按下沿。关卡重开清除按键并保留焦点状态。
 
 左右 Shift 使用键值 340、344，共用 `sprint` 动作。实体目标速度为 `speed*sprintMultiplier`。Shift 单独按住时角色保持静止，松开后按控制器参数回到步行速度。
 
-键盘轮询、窗口回调与回放读取 `GameplayKeys.hpp` 的同一按键表。角色实际物理速度驱动动画速率。
+键盘轮询与窗口回调读取项目配置的键集合。回放通过 `GameplayKeys.hpp` 校验合法物理键码。配置支持箭头键与其他合法按键。角色实际物理速度驱动动画速率。
 
 探索关卡使用 E 交互与 R 重开，规则见[第三人称探索关卡](exploration-gameplay.md)。
 
@@ -49,7 +49,9 @@ PhysicsWorld 持有独立 PhysicsSystem、临时分配器和任务系统，刚�
 
 ## 序列化与兼容
 
-刚体与变换使用版本 1 反射存档，角色使用版本 3。`sprintMultiplier` 默认 2.5，有效范围为 1 至 4。版本 1、2 角色存档通过迁移取得该默认值。关卡组件在加载时校验，Jolt 内部句柄属于当前运行。
+刚体与变换使用版本 1 反射存档，角色使用版本 4。`sprintMultiplier` 默认 2.5，有效范围为 1 至 4。版本 1、2 角色存档通过迁移取得该默认值。关卡组件在加载时校验，Jolt 内部句柄属于当前运行。
+
+`inputProfile` 选择项目配置中的动作映射。版本 3 存档迁移为 `default` 配置名。输入重绑定先校验完整候选，再释放按键状态。装配和检视项目见[运行系统装配](system-composition.md)。
 
 ## 平台行为
 

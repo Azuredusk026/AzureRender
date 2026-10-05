@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/LevelSession.hpp"
 #include <fstream>
@@ -16,7 +17,7 @@ function trigger(other, entered) if entered then self:load_level('assets:/startu
   write(root/"assets/loop.lua","function update(dt) while true do end end");
   AssetDatabase assets(project);assets.refresh();RuntimeLifecycle runtime;SceneDocument scene;
   for(const char* name:{"good","bad","loop"}) {SceneNode node;node.id=name;scene.nodes.push_back(node);}
-  runtime.loadScene(scene);runtime.start();GameRuntime game(runtime);
+  runtime.loadScene(scene);runtime.start();GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
   for(const char* name:{"good","bad","loop"})runtime.world().addComponent(runtime.entity(name),game::Script{"assets:/"+std::string(name)+".lua",true});
   ScriptRuntime scripts(runtime,game,assets);std::string requested;scripts.setLevelHandler([&](std::string path){requested=path;});
   scripts.update(1.0/60.0);check(scripts.activeCount()==1 && scripts.errors().size()==2);
@@ -54,7 +55,7 @@ function shutdown() self:set('azure.transform','translation',{11,12,13}) end)");
   auto level=nlohmann::json::parse(R"({"schemaVersion":1,"id":"hot","resources":[],"nodes":[{"id":"hero","components":{"azure.script":{"type":"azure.script","version":1,"data":{"asset":"assets:/good.lua"}}}}]})");
   write(root/"assets/hot.azurelevel",level.dump());project.startupScene="assets:/hot.azurelevel";
   write(root/"assets/good.lua","function update(dt) self:set('azure.transform','translation',{1,2,3}) end");
-  RuntimeLifecycle hot;hot.start();LevelSession session(project,hot);GameRuntime hotGame(hot);
+  RuntimeLifecycle hot;hot.start();LevelSession session(project,hot);GameRuntime hotGame(hot,application::systems(),application::explorationConfiguration());
   ScriptRuntime hotScripts(hot,hotGame,session.assets());hotScripts.update(1.0/60.0);
   auto hero=hot.entity("hero");const auto revision=hot.sceneRevision();
   write(root/"assets/good.lua","function update(dt) self:set('azure.transform','translation',{4,5,6}) end");

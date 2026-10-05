@@ -78,7 +78,9 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
-[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4 模块与类型契约已验收。下一阶段为 G8，后续按既定顺序推进。
+[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8 已验收。
+
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 U3。
 
 公共能力通过探索项目和独立工具验收。
 

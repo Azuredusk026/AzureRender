@@ -4,7 +4,9 @@
 #include <cmath>
 #include <optional>
 #include <limits>
+#include <functional>
 namespace azurerender {
+using InteractionPolicy = std::function<bool(const RuntimeLifecycle&, ecs::Entity, ecs::Entity)>;
 struct InteractionTarget {
     ecs::Entity actor=ecs::kInvalidEntity,target=ecs::kInvalidEntity;
     std::string actorNode,node,prompt;
@@ -12,6 +14,7 @@ struct InteractionTarget {
 };
 class InteractionRuntime {
 public:
+    void setPolicy(InteractionPolicy policy) { policy_=std::move(policy);reset(); }
     const std::optional<InteractionTarget>& select(RuntimeLifecycle& runtime,const PhysicsWorld& physics,ecs::Entity actor) {
         selected_.reset();
         const auto* origin=runtime.world().tryGet<ecs::TransformComponent>(actor);
@@ -21,8 +24,7 @@ public:
         runtime.world().each<ecs::TransformComponent,game::Interactable>([&](auto target,const auto& transform,const auto& settings){
             if(!settings.enabled||target==actor)return;
             const auto node=runtime.nodeId(target);if(node.empty())return;
-            if(const auto* collectible=runtime.world().tryGet<game::Collectible>(target))if(collectible->collected)return;
-            if(const auto* door=runtime.world().tryGet<game::Door>(target))if(door->open)return;
+            if(policy_ && !policy_(runtime,actor,target))return;
             std::array<float,3> eye=origin->translation,delta{};eye[1]+=1;
             float distance=0;
             for(unsigned axis=0;axis<3;++axis){const float d=transform.translation[axis]-origin->translation[axis];distance+=d*d;
@@ -38,6 +40,7 @@ public:
     const std::optional<InteractionTarget>& target() const{return selected_;}
     void reset(){selected_.reset();}
 private:
+    InteractionPolicy policy_;
     std::optional<InteractionTarget> selected_;
 };
 }

@@ -1,5 +1,6 @@
 #include "EditorSession.hpp"
 #include "runtime/ModuleAssembly.hpp"
+#include "app/ProjectRuntimeAssembly.hpp"
 
 #include <exception>
 #include <stdexcept>
@@ -22,8 +23,8 @@ struct EditorSession::PlayState {
         });
         }, [this] { levels.reset(); });
         modules.add({"preview.world",1,{}, {"preview.document"}}, [this](auto&) { runtime.start(); }, [this] { runtime.stop(); });
-        modules.add({"preview.game",1,{}, {"preview.world"}}, [this](auto&) {
-        game=std::make_unique<GameRuntime>(runtime);
+        modules.add({"preview.game",1,{}, {"preview.world"}}, [this,&context](auto&) {
+        game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=std::make_unique<ScriptRuntime>(runtime,*game,levels->assets());
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
             scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});

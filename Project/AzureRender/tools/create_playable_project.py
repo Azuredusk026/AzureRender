@@ -69,6 +69,7 @@ def create(root, primary=None):
     for path in (SOURCE/'playable_rules').iterdir(): shutil.copy2(path,assets/path.name)
     shutil.copy2(SOURCE/'third_person/CHARACTER-LICENSE.txt',assets/'CHARACTER-LICENSE.txt')
     project=json.loads((root/'project.azureproject').read_text(encoding='utf-8'))
+    project['runtime']=json.loads((SOURCE/'exploration/project.azureproject').read_text(encoding='utf-8'))['runtime']
     project.update(name='Azure Exploration',startupScene='assets:/exploration.azurelevel')
     write(root/'project.azureproject',project)
     (root/'GAME-GUIDE.md').write_text('''# Azure Exploration 操作说明

@@ -54,7 +54,7 @@ Console 显示脚本、关卡和表现资源的错误。修改 Lua 文件后进�
 
 | 组件 | 字段与行为 |
 | --- | --- |
-| `azure.animator` | 状态图、实体时钟、淡化、速度驱动与 Morph，使用版本 2 |
+| `azure.animator` | 状态图、实体时钟、淡化、配置驱动与 Morph，使用版本 3 |
 | `azure.third-person-camera` | 跟随目标、距离、俯仰、肩偏移与遮挡参数，使用版本 1 |
 | `azure.audio-source` | `asset`、`loop`、`autoplay`、`volume` 和 `enabled` 控制声音 |
 | `azure.game-ui` | `asset` 指向 RML 文档，`enabled` 控制界面 |

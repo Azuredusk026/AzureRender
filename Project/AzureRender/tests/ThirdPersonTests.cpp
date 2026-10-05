@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ThirdPersonCamera.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/GameInputReplay.hpp"
@@ -26,7 +27,7 @@ int main() { try {
     camera.update({0,1,0},settings,1.0F/60,[](auto,auto,float){return 1.0F;});
     check(camera.actualDistance()>compressed && camera.actualDistance()<settings.distance,"Released camera must recover smoothly");
     RuntimeLifecycle first,second,third;setup(first);setup(second);setup(third);
-    GameRuntime a(first),b(second),c(third);
+    GameRuntime a(first,application::systems(),application::explorationConfiguration()),b(second,application::systems(),application::explorationConfiguration()),c(third,application::systems(),application::explorationConfiguration());
     for(auto* game:{&a,&b,&c}){game->setCameraYaw(90);game->input().key(87,true);}
     for(int i=0;i<60;++i)a.advance(1.0/30);
     for(int i=0;i<120;++i)b.advance(1.0/60);
@@ -38,7 +39,7 @@ int main() { try {
     c.advance(1.0/120);const auto rendered=c.renderScene();
     const auto hero=std::find_if(rendered.nodes.begin(),rendered.nodes.end(),[](const auto& n){return n.id=="hero";});
     check(hero!=rendered.nodes.end()&&hero->translation[0]<position(third)[0],"Render pose must interpolate between fixed steps");
-    RuntimeLifecycle angles;setup(angles);GameRuntime angleGame(angles);angleGame.advance(1.0/60);
+    RuntimeLifecycle angles;setup(angles);GameRuntime angleGame(angles,application::systems(),application::explorationConfiguration());angleGame.advance(1.0/60);
     angles.world().tryGet<ecs::TransformComponent>(angles.entity("hero"))->rotation[1]=359;
     angleGame.advance(1.0/120);
     check(std::abs(angleGame.renderScene().nodes.at(1).rotation[1]+.5F)<1e-5F,"Render rotation must interpolate across angle wrap by the shortest arc");
@@ -63,7 +64,7 @@ int main() { try {
     check(rejected&&invalidCamera.minimumDistance==1,"Camera component must reject incompatible ranges atomically");
     RuntimeLifecycle cameraRuntime;setup(cameraRuntime);
     cameraRuntime.world().addComponent(cameraRuntime.entity("ground"),game::ThirdPersonCamera{});
-    GameRuntime following(cameraRuntime);following.advance(1.0/60);
+    GameRuntime following(cameraRuntime,application::systems(),application::explorationConfiguration());following.advance(1.0/60);
     check(following.hasCamera(),"Configured camera must resolve its target");
     following.cameraInput(200,50,2);
     cameraRuntime.world().destroyEntity(cameraRuntime.entity("hero"));following.advance(1.0/60);
@@ -73,7 +74,7 @@ int main() { try {
     following.advance(1.0/60);
     check(following.hasCamera()&&following.camera().yaw()==0&&following.renderCameraTarget()[0]==10,
           "Scene replacement must resolve the new target and reset camera interpolation");
-    RuntimeLifecycle route;setup(route);GameRuntime controller(route);
+    RuntimeLifecycle route;setup(route);GameRuntime controller(route,application::systems(),application::explorationConfiguration());
     for(int i=0;i<60;++i)controller.advance(1.0/60);
     auto addBox=[&](const char* id,std::array<float,3> p,std::array<float,3> extent,std::array<float,3> angles=std::array<float,3>{}){
         const auto entity=route.world().createEntity();route.world().addComponent(entity,ecs::TransformComponent{p,angles,{1,1,1}});
@@ -88,7 +89,7 @@ int main() { try {
     check(position(route)[0]<3.65F,"Character capsule must stop at a wall");
     controller.input().key(83,true);for(int i=0;i<80;++i)controller.advance(1.0/60);
     check(position(route)[2]<.75F,"Diagonal movement must preserve wall-corner collision");
-    RuntimeLifecycle slope;setup(slope);GameRuntime slopeGame(slope);
+    RuntimeLifecycle slope;setup(slope);GameRuntime slopeGame(slope,application::systems(),application::explorationConfiguration());
     slope.world().tryGet<ecs::TransformComponent>(slope.entity("hero"))->translation={0,1,2};
     auto ramp=slope.world().createEntity();slope.world().addComponent(ramp,ecs::TransformComponent{{0,.5F,0},{20,0,0},{1,1,1}});
     game::RigidBody rampBody;rampBody.halfExtent={1,.1F,1.5F};slope.world().addComponent(ramp,rampBody);
@@ -99,21 +100,21 @@ int main() { try {
     steep.world().tryGet<ecs::TransformComponent>(steep.entity("hero"))->translation={0,1,2};
     steep.world().tryGet<game::Character>(steep.entity("hero"))->maximumSlope=15;
     auto steepRamp=steep.world().createEntity();steep.world().addComponent(steepRamp,ecs::TransformComponent{{0,.5F,0},{20,0,0},{1,1,1}});
-    steep.world().addComponent(steepRamp,rampBody);GameRuntime steepGame(steep);
+    steep.world().addComponent(steepRamp,rampBody);GameRuntime steepGame(steep,application::systems(),application::explorationConfiguration());
     for(int i=0;i<60;++i)steepGame.advance(1.0/60);steepGame.input().key(87,true);
     for(int i=0;i<75;++i)steepGame.advance(1.0/60);
     check(position(steep)[2]>0,"Slope limit must block climbing the same ramp when configured below its angle");
     RuntimeLifecycle buffered;setup(buffered);buffered.world().tryGet<ecs::TransformComponent>(buffered.entity("hero"))->translation[1]=.935F;
-    GameRuntime bufferGame(buffered);bufferGame.input().key(32,true);float jumpPeak=0;
+    GameRuntime bufferGame(buffered,application::systems(),application::explorationConfiguration());bufferGame.input().key(32,true);float jumpPeak=0;
     for(int i=0;i<35;++i){bufferGame.advance(1.0/60);jumpPeak=std::max(jumpPeak,position(buffered)[1]);}
     check(jumpPeak>1.8F,"Jump buffered before landing must fire once on contact");
     for(int i=0;i<100;++i)bufferGame.advance(1.0/60);
     check(bufferGame.physics().grounded(buffered.entity("hero")),"Held jump must not retrigger after landing");
-    RuntimeLifecycle ledge;setup(ledge);GameRuntime ledgeGame(ledge);for(int i=0;i<60;++i)ledgeGame.advance(1.0/60);
+    RuntimeLifecycle ledge;setup(ledge);GameRuntime ledgeGame(ledge,application::systems(),application::explorationConfiguration());for(int i=0;i<60;++i)ledgeGame.advance(1.0/60);
     ledge.world().destroyEntity(ledge.entity("ground"));for(int i=0;i<3;++i)ledgeGame.advance(1.0/60);
     ledgeGame.input().key(32,true);ledgeGame.advance(1.0/60);
     check(ledgeGame.physics().velocity(ledge.entity("hero"))[1]>4,"Coyote jump must work within one hundred milliseconds");
-    RuntimeLifecycle expired;setup(expired);GameRuntime expiredGame(expired);for(int i=0;i<60;++i)expiredGame.advance(1.0/60);
+    RuntimeLifecycle expired;setup(expired);GameRuntime expiredGame(expired,application::systems(),application::explorationConfiguration());for(int i=0;i<60;++i)expiredGame.advance(1.0/60);
     expired.world().destroyEntity(expired.entity("ground"));for(int i=0;i<12;++i)expiredGame.advance(1.0/60);
     expiredGame.input().key(32,true);expiredGame.advance(1.0/60);
     check(expiredGame.physics().velocity(expired.entity("hero"))[1]<0,"Coyote jump must expire outside its window");

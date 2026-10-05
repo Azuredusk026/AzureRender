@@ -76,7 +76,9 @@ Registry makeRuntimeRegistry() {
     Registry registry; registerGeneratedTypes(registry);
     registry.addMigration("azure.character", 1, [](Json data) { return data; });
     registry.addMigration("azure.character", 2, [](Json data) { data["sprintMultiplier"]=2.5F;return data; });
+    registry.addMigration("azure.character", 3, [](Json data) { data["inputProfile"]="default";return data; });
     registry.addMigration("azure.animator", 1, [](Json data) { return data; });
+    registry.addMigration("azure.animator", 2, [](Json data) { data["locomotionProfile"]="default";return data; });
     return registry;
 }
 } // namespace azurerender::reflection

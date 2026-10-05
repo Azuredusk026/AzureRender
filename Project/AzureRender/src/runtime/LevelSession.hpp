@@ -27,6 +27,7 @@ public:
     void setPreloadHandler(std::function<bool(const Level&)> handler) { upload_=std::move(handler); }
     void setReadinessHandler(std::function<bool(const Level&)> handler) { ready_=std::move(handler); }
     AssetDatabase& assets() noexcept { return assets_; }
+    const Project& project() const noexcept { return project_; }
     const Level& current() const noexcept { return level_; }
     const std::string& currentReference() const noexcept { return reference_; }
     const std::string& lastError() const noexcept { return error_; }

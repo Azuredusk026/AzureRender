@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/ComponentCodec.hpp"
 #include <fstream>
@@ -14,7 +15,7 @@ try{
     AssetDatabase assets(project);assets.refresh();RuntimeLifecycle runtime;SceneDocument scene;
     for(const char* id:{"hero","target"}){SceneNode node;node.id=id;scene.nodes.push_back(node);}runtime.loadScene(scene);runtime.start();
     auto hero=runtime.entity("hero"),target=runtime.entity("target");
-    runtime.world().addComponent(hero,game::Script{"assets:/controller.lua",true});GameRuntime game(runtime);ScriptRuntime scripts(runtime,game,assets);
+    runtime.world().addComponent(hero,game::Script{"assets:/controller.lua",true});GameRuntime game(runtime,application::systems(),application::explorationConfiguration());ScriptRuntime scripts(runtime,game,assets);
     scripts.update(1.0/60);check(!scripts.errors().empty()&&scripts.errors().back().find("transaction rollback")!=std::string::npos,"Failed init must execute bounded entity lookup");
     check(runtime.world().tryGet<ecs::TransformComponent>(target)->translation[0]==0,"Failed init must roll back other entity properties");
     write("local target; function init() target=self:find('target'); target:set('azure.transform','translation',{2,3,4}); assert(self:find('missing')==nil) end function interact(actor) self:set('azure.transform','translation',{8,0,0}) end function update(dt) target:get('azure.transform','translation') end");

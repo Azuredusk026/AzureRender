@@ -267,6 +267,7 @@ target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nloh
 add_library(AzureRuntime STATIC
     src/runtime/ModuleAssembly.cpp
     src/runtime/ComponentRegistry.cpp
+    src/runtime/SystemRegistry.cpp
     "${AZURE_COMPONENT_OUTPUT}"
     src/app/CommandLine.cpp
     src/runtime/SceneDocument.cpp
@@ -285,6 +286,14 @@ add_library(AzureRuntime STATIC
     src/runtime/AudioRuntime.cpp
     src/runtime/MiniaudioImpl.cpp
 )
+add_library(AzureGameplay STATIC
+    src/gameplay/CharacterMovementSystem.cpp
+    src/gameplay/CameraFollowSystem.cpp
+    src/gameplay/LocomotionSystem.cpp
+    src/gameplay/SharedSystems.cpp)
+target_link_libraries(AzureGameplay PUBLIC AzureRuntime)
+add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
+target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
@@ -322,7 +331,7 @@ target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 if(WIN32)
     target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
 endif()
-target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform)
+target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime)
 if(TARGET imgui::imgui)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
@@ -334,7 +343,7 @@ if(TARGET imgui::imgui)
     target_compile_definitions(AzureRenderHost PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
 add_library(AzurePlayerHost STATIC ${AZURE_HOST_SOURCES})
-target_link_libraries(AzurePlayerHost PUBLIC AzureRuntime AzurePlatform)
+target_link_libraries(AzurePlayerHost PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime)
 target_compile_definitions(AzurePlayerHost PUBLIC AZURE_WITH_EDITOR=0)
 foreach(AZURE_HOST_TARGET AzureRenderHost AzurePlayerHost)
     target_include_directories(${AZURE_HOST_TARGET} PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
@@ -347,7 +356,15 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureSystemCompositionTests tests/SystemCompositionTests.cpp)
+    target_link_libraries(AzureSystemCompositionTests PRIVATE AzureProjectRuntime)
+    target_compile_definitions(AzureSystemCompositionTests PRIVATE AZURE_INSPECTOR_PROJECT="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
+    add_test(NAME AzureEngine.SystemComposition COMMAND AzureSystemCompositionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME AzureEngine.SceneInspectorHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_inspector_host.py"
+        --editor $<TARGET_FILE:AzureRender> --player $<TARGET_FILE:AzurePlayer>
+        --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector/project.azureproject")
+    set_tests_properties(AzureEngine.SceneInspectorHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
     add_executable(AzureModuleAssemblyTests tests/ModuleAssemblyTests.cpp)
     target_link_libraries(AzureModuleAssemblyTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.ModuleAssembly COMMAND AzureModuleAssemblyTests)
@@ -397,23 +414,23 @@ if(BUILD_TESTING)
     target_link_libraries(AzureGameplayPresentationTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.GameplayPresentation COMMAND AzureGameplayPresentationTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/portal.wav")
     add_executable(AzureScriptRuntimeTests tests/ScriptRuntimeTests.cpp)
-    target_link_libraries(AzureScriptRuntimeTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureScriptRuntimeTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.ScriptRuntime COMMAND AzureScriptRuntimeTests)
     add_executable(AzurePhysicsInputTests tests/PhysicsInputTests.cpp)
     add_executable(AzureThirdPersonTests tests/ThirdPersonTests.cpp)
-    target_link_libraries(AzureThirdPersonTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureThirdPersonTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.ThirdPerson COMMAND AzureThirdPersonTests)
     add_executable(AzureLocomotionTests tests/LocomotionTests.cpp)
-    target_link_libraries(AzureLocomotionTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureLocomotionTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.Locomotion COMMAND AzureLocomotionTests)
     add_executable(AzureInteractionTests tests/InteractionTests.cpp)
-    target_link_libraries(AzureInteractionTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureInteractionTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.Interaction COMMAND AzureInteractionTests)
     add_executable(AzureScriptEntityTests tests/ScriptEntityTests.cpp)
-    target_link_libraries(AzureScriptEntityTests PRIVATE AzureRuntime)
+    target_link_libraries(AzureScriptEntityTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.ScriptEntities COMMAND AzureScriptEntityTests)
     add_executable(AzurePlayableQuestTests tests/PlayableQuestTests.cpp)
-    target_link_libraries(AzurePlayableQuestTests PRIVATE AzureRuntime)
+    target_link_libraries(AzurePlayableQuestTests PRIVATE AzureProjectRuntime)
     target_compile_definitions(AzurePlayableQuestTests PRIVATE AZURE_QUEST_PROJECT="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/exploration")
     add_test(NAME AzureEngine.PlayableQuest COMMAND AzurePlayableQuestTests)
     add_executable(AzureBrowRegionTests tests/BrowRegionTests.cpp)
@@ -424,7 +441,7 @@ if(BUILD_TESTING)
     target_include_directories(AzureBrowRegionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureBrowRegionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.BrowRegions COMMAND AzureBrowRegionTests)
-    target_link_libraries(AzurePhysicsInputTests PRIVATE AzureRuntime)
+    target_link_libraries(AzurePhysicsInputTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.PhysicsInput COMMAND AzurePhysicsInputTests)
     add_executable(AzureAssetLevelTests tests/AssetLevelTests.cpp)
     target_link_libraries(AzureAssetLevelTests PRIVATE AzureRuntime)
@@ -1050,6 +1067,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/parallel-submission.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/windows-acceptance.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-foundation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/system-composition.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g2-implementation.md"

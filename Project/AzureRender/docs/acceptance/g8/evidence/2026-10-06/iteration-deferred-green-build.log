@@ -1,0 +1,4 @@
+[1/4] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[2/4] Linking CXX static library AzureRuntime.lib
+[3/4] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+[4/4] Linking CXX executable AzureSystemCompositionTests.exe

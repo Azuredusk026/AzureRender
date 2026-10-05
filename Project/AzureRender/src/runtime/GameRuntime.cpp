@@ -2,6 +2,38 @@
 #include "runtime/GameComponents.hpp"
 #include <chrono>
 namespace azurerender {
+RuntimeSystemContext GameRuntime::systemContext() { return {runtime_,input_,physics_,*this,1.0/60.0}; }
+GameRuntime::GameRuntime(RuntimeLifecycle& runtime):runtime_(runtime) {}
+GameRuntime::GameRuntime(RuntimeLifecycle& runtime,const SystemRegistry& registry,const nlohmann::json& config):runtime_(runtime) {
+    if(!config.is_object() || !config.contains("schemaVersion") || !config.at("schemaVersion").is_number_integer() || config.at("schemaVersion")!=1)
+        throw std::invalid_argument("Unsupported runtime configuration");
+    for(const auto& item:config.items())if(item.key()!="schemaVersion"&&item.key()!="input"&&item.key()!="systems")
+        throw std::invalid_argument("Unknown runtime configuration field: " + item.key());
+    input_.configure(config.at("input"));
+    const auto& descriptions=config.at("systems");
+    if(!descriptions.is_array() || descriptions.size()>128)throw std::invalid_argument("Invalid system list");
+    std::set<std::string> ids;
+    for(const auto& description:descriptions) {
+        if(!description.is_object())throw std::invalid_argument("Invalid system descriptor");
+        for(const auto& item:description.items())if(item.key()!="id"&&item.key()!="config")throw std::invalid_argument("Unknown system descriptor field");
+        const auto id=description.at("id").get<std::string>();
+        if(!ids.insert(id).second)throw std::invalid_argument("Duplicate system instance: " + id);
+        systems_.push_back(registry.create(id,description.value("config",nlohmann::json::object())));
+    }
+    auto context=systemContext();std::size_t initialized=0;
+    try { for(auto& system:systems_) { ++initialized; system->initialize(context); } }
+    catch(...) { while(initialized)systems_[--initialized]->shutdown(context);throw; }
+}
+GameRuntime::~GameRuntime() {
+    auto context=systemContext();for(auto it=systems_.rbegin();it!=systems_.rend();++it)(*it)->shutdown(context);
+}
+void GameRuntime::synchronizeSystemScene() {
+    previousTransforms_.clear();interpolationReady_=false;
+    if(sceneReady_)input_.release();
+    sceneReady_=true;hasCamera_=false;interactions_.reset();sceneRevision_=runtime_.sceneRevision();
+    auto context=systemContext();for(auto& system:systems_)system->sceneChanged(context);
+}
+
 double GameRuntime::advance(double delta) {
     lastStepSamples_.clear();
     if (!std::isfinite(delta) || delta < 0) throw std::invalid_argument("Invalid game frame delta");
@@ -12,68 +44,24 @@ double GameRuntime::advance(double delta) {
         delta = fixed;
     }
     if (runtime_.state() != RuntimeLifecycle::State::Running && runtime_.state() != RuntimeLifecycle::State::Paused) return 0;
-    if(sceneRevision_!=runtime_.sceneRevision()) { velocities_.clear(); previousTransforms_.clear();interpolationReady_=false;
-        accumulator_=0; if(sceneRevision_!=0)input_.release();
-        hasCamera_=false; interactions_.reset(); sceneRevision_=runtime_.sceneRevision();
-        runtime_.world().each<game::ThirdPersonCamera>([&](auto,const auto& settings){if(!hasCamera_){cameraSettings_=settings;
-            const auto target=runtime_.entity(settings.target);const auto* transform=runtime_.world().tryGet<ecs::TransformComponent>(target);
-            if(transform){camera_.reset(transform->translation,settings);hasCamera_=true;cameraYaw_=camera_.yaw();}}});
+    if(!sceneReady_ || sceneRevision_!=runtime_.sceneRevision()) {
+        accumulator_=0;synchronizeSystemScene();
     }
     accumulator_ += std::min(delta, 0.25);
     double simulated = 0;
     for (unsigned count = 0; accumulator_ + 1e-12 >= fixed && count < 15; ++count) {
         const auto start = std::chrono::steady_clock::now();
         const auto elapsed = runtime_.beginFrame(fixed);
-        if (!elapsed) break;
+        if(sceneRevision_!=runtime_.sceneRevision())synchronizeSystemScene();
+        if (!elapsed) { accumulator_=0; break; }
         previousTransforms_.clear();
         runtime_.world().each<ecs::TransformComponent>([&](auto entity,const auto& transform){previousTransforms_[runtime_.nodeId(entity)]=transform;});
         previousCameraPosition_=camera_.position();previousCameraTarget_=camera_.target();interpolationReady_=true;
         motions_.clear();
         if (beforeStep_) beforeStep_(fixed);
-        std::map<ecs::Entity, CharacterMotion> motions;
-        std::set<ecs::Entity> active;
-        runtime_.world().each<game::Character>([&](auto entity, const auto& settings) {
-            active.insert(entity);
-            const float x=settings.controlled?static_cast<float>(input_.down("move-right"))-static_cast<float>(input_.down("move-left")):0;
-            const float z=settings.controlled?static_cast<float>(input_.down("move-back"))-static_cast<float>(input_.down("move-forward")):0;
-            const float length=std::max(1.0F,std::sqrt(x*x+z*z));
-            const float radians=cameraYaw_*.017453292519943295F;
-            const float targetSpeed=settings.speed*(settings.controlled&&input_.down("sprint")?settings.sprintMultiplier:1.0F);
-            const float targetX=(x*std::cos(radians)-z*std::sin(radians))/length*targetSpeed;
-            const float targetZ=(x*std::sin(radians)+z*std::cos(radians))/length*targetSpeed;
-            auto& velocity=velocities_[entity];
-            const float dx=targetX-velocity[0],dz=targetZ-velocity[2],distance=std::sqrt(dx*dx+dz*dz);
-            const float amount=(x==0&&z==0?settings.braking:settings.acceleration)*static_cast<float>(fixed);
-            const float factor=distance>0?std::min(1.0F,amount/distance):0;
-            velocity[0]+=dx*factor;velocity[2]+=dz*factor;
-            motions[entity]={velocity[0],velocity[2],settings.controlled&&input_.pressed("jump"),true};
-            if(auto* transform=runtime_.world().tryGet<ecs::TransformComponent>(entity)) {
-                if(std::hypot(velocity[0],velocity[2])>.01F){
-                    const float desired=std::atan2(velocity[0],velocity[2])*57.295779513F-settings.forwardYaw;
-                    const float difference=std::remainder(desired-transform->rotation[1],360.0F);
-                    const float limit=settings.turnSpeed*static_cast<float>(fixed);
-                    transform->rotation[1]=std::remainder(transform->rotation[1]+std::clamp(difference,-limit,limit),360.0F);
-                }
-            }
-        });
-        for(auto it=velocities_.begin();it!=velocities_.end();)if(!active.count(it->first))it=velocities_.erase(it);else ++it;
-        for (const auto& motion : motions_) motions[motion.first] = motion.second;
-        const auto events = physics_.step(runtime_, static_cast<float>(fixed), motions);
-        runtime_.world().each<game::Character>([&](auto entity,const auto&) {
-            const auto velocity=physics_.velocity(entity); velocities_[entity]=velocity;
-            if(auto* animator=runtime_.world().tryGet<game::Animator>(entity))
-                if(animator->locomotion){const float speed=std::hypot(velocity[0],velocity[2]);
-                    animator->state=speed>.1F?"walk":"idle";
-                    animator->playbackRate=animator->state=="walk"?speed/animator->referenceSpeed:1;}
-        });
-        updateCamera(static_cast<float>(fixed));
-        ecs::Entity actor=ecs::kInvalidEntity;std::string actorNode;
-        runtime_.world().each<game::Character>([&](auto entity,const auto& settings){
-            const auto node=runtime_.nodeId(entity);
-            if(settings.controlled&&!node.empty()&&(actorNode.empty()||node<actorNode)){actor=entity;actorNode=node;}});
-        const auto target=interactions_.select(runtime_,physics_,actor);
-        if(target&&input_.pressed("interact")&&interactionHandler_)interactionHandler_(*target);
-        for (const auto& event : events) if (eventHandler_) eventHandler_(event);
+        events_.clear();
+        auto context=systemContext(); for(auto& system:systems_)system->fixedStep(context);
+        for (const auto& event : events_) if (eventHandler_) eventHandler_(event);
         input_.endStep(); accumulator_ -= fixed; simulated += fixed; ++steps_;
         const double stepMilliseconds=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
         simulationMilliseconds_+=stepMilliseconds;lastStepSamples_.push_back(stepMilliseconds);
@@ -84,13 +72,18 @@ void GameRuntime::cameraInput(float x,float y,float scroll) {
     if(!hasCamera_||!input_.focused()||runtime_.state()!=RuntimeLifecycle::State::Running)return;
     camera_.orbit(x,y,cameraSettings_);camera_.zoom(scroll,cameraSettings_);cameraYaw_=camera_.yaw();
 }
-void GameRuntime::updateCamera(float dt) {
+void GameRuntime::activateCamera(const game::ThirdPersonCamera& settings,std::array<float,3> target) {
+    cameraSettings_=settings;camera_.reset(target,settings);hasCamera_=true;cameraYaw_=camera_.yaw();
+}
+void GameRuntime::updateCamera(std::array<float,3> target,double dt,ecs::Entity ignored) {
     if(!hasCamera_)return;
-    const auto target=runtime_.entity(cameraSettings_.target);
-    const auto* transform=runtime_.world().tryGet<ecs::TransformComponent>(target);
-    if(!transform){hasCamera_=false;return;}
-    camera_.update(transform->translation,cameraSettings_,dt,[&](auto origin,auto displacement,float radius){
-        const auto hit=physics_.sphereSweep(origin,displacement,radius,target);return hit?hit->fraction:1.0F;});
+    camera_.update(target,cameraSettings_,static_cast<float>(dt),[&](auto origin,auto displacement,float radius) {
+        const auto hit=physics_.sphereSweep(origin,displacement,radius,ignored);return hit?hit->fraction:1.0F;
+    });
+}
+void GameRuntime::selectInteraction(ecs::Entity actor,const std::string& action) {
+    const auto target=interactions_.select(runtime_,physics_,actor);
+    if(target&&input_.pressed(action)&&interactionHandler_)interactionHandler_(*target);
 }
 float GameRuntime::renderAlpha() const {
     return runtime_.state()==RuntimeLifecycle::State::Running&&interpolationReady_

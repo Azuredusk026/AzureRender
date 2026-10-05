@@ -2,6 +2,90 @@
   "schemaVersion": 1,
   "id": "bd728fab-326a-43b1-b3bb-734a7df1c7bb",
   "name": "脚本与传送门",
-  "mounts": [{"name": "assets", "path": "assets"}],
-  "startupScene": "assets:/courtyard.azurelevel"
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/courtyard.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {
+      "move-left": [
+        65
+      ],
+      "move-right": [
+        68
+      ],
+      "move-forward": [
+        87
+      ],
+      "move-back": [
+        83
+      ],
+      "jump": [
+        32
+      ],
+      "sprint": [
+        340,
+        344
+      ],
+      "interact": [
+        69
+      ],
+      "restart": [
+        82
+      ]
+    },
+    "systems": [
+      {
+        "id": "character-movement",
+        "config": {
+          "profiles": {
+            "default": {
+              "left": "move-left",
+              "right": "move-right",
+              "forward": "move-forward",
+              "back": "move-back",
+              "jump": "jump",
+              "sprint": "sprint"
+            }
+          }
+        }
+      },
+      {
+        "id": "physics",
+        "config": {}
+      },
+      {
+        "id": "locomotion",
+        "config": {
+          "profiles": {
+            "default": {
+              "idle": "idle",
+              "moving": "walk",
+              "threshold": 0.1
+            }
+          }
+        }
+      },
+      {
+        "id": "camera",
+        "config": {
+          "mode": "follow"
+        }
+      },
+      {
+        "id": "exploration-policy",
+        "config": {}
+      },
+      {
+        "id": "interaction",
+        "config": {
+          "action": "interact"
+        }
+      }
+    ]
+  }
 }

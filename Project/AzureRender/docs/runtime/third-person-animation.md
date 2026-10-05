@@ -17,7 +17,7 @@
 
 ## 动画配置
 
-`azure.animator` 使用版本 2。版本 1 存档通过迁移获得新增字段的默认值。
+`azure.animator` 使用版本 3。版本 1、2 存档通过迁移获得配置默认值。`locomotionProfile` 选择动画驱动的状态映射。
 
 | 字段 | 作用 |
 | --- | --- |
@@ -41,7 +41,7 @@
 
 ## 角色与相机
 
-`azure.character` 使用版本 3，配置步行速度、冲刺倍率、加减速与转向。胶囊、中心偏移、坡度和台阶参数由角色组件保存。`controlled` 选择玩家输入驱动，`forwardYaw` 声明模型正向。
+`azure.character` 使用版本 4，配置步行速度、冲刺倍率、加减速与转向。胶囊、中心偏移、坡度和台阶参数由角色组件保存。`controlled` 选择玩家输入驱动，`forwardYaw` 声明模型正向。`inputProfile` 选择项目的动作映射。
 
 胶囊中心为实体位置加 `centerOffset`。公开角色的脚尖沿局部 −Z，`forwardYaw=180`。本机主角沿局部 +Z，`forwardYaw=0`。角色按模型脚底坐标放置。
 

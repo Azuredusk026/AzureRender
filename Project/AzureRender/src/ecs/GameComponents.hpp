@@ -13,7 +13,7 @@ struct RigidBody {
     AZURE_FIELD("Trigger", 0, 1)
     bool trigger = false;
 };
-AZURE_TYPE("azure.character", 3)
+AZURE_TYPE("azure.character", 4)
 struct Character {
     AZURE_FIELD("Speed", 0, 100)
     float speed = 4.0F;
@@ -41,6 +41,8 @@ struct Character {
     float forwardYaw = 0;
     AZURE_FIELD("Player controlled", 0, 1)
     bool controlled = true;
+    AZURE_FIELD("Input profile", 0, 0)
+    std::string inputProfile = "default";
 };
 AZURE_TYPE("azure.third-person-camera", 1)
 struct ThirdPersonCamera {
@@ -117,7 +119,7 @@ struct Script {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
 };
-AZURE_TYPE("azure.animator", 2)
+AZURE_TYPE("azure.animator", 3)
 struct Animator {
     AZURE_FIELD("Graph asset", 0, 0)
     std::string asset;
@@ -138,6 +140,8 @@ struct Animator {
     AZURE_FIELD("Morph weight one", 0, 1)
     float morph1 = 0;
     float playbackRate = 1;
+    AZURE_FIELD("Locomotion profile", 0, 0)
+    std::string locomotionProfile = "default";
 };
 AZURE_TYPE("azure.audio-source", 1)
 struct AudioSource {

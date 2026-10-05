@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureEngine.SystemComposition
+1/1 Test #1: AzureEngine.SystemComposition ....***Failed    0.07 sec
+Lifecycle and scene callbacks must execute in declared order
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.07 sec
+
+The following tests FAILED:
+	  1 - AzureEngine.SystemComposition (Failed)
+Errors while running CTest

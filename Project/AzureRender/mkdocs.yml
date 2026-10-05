@@ -73,6 +73,7 @@ nav:
       - 可玩关卡性能与加载: runtime/playable-performance.md
       - 反射与序列化: runtime/reflection.md
       - 引擎基础与 Player: runtime/engine-foundation.md
+      - 运行系统装配: runtime/system-composition.md
       - 渲染图: runtime/render-graph.md
       - RHI 同步: runtime/rhi-synchronization.md
       - 场景数据: runtime/scene-data.md
@@ -83,6 +84,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - G8 共享机制与应用分层: acceptance/g8/2026-10-06.md
       - F4 模块与类型契约: acceptance/f4/2026-10-06.md
       - P2 展示与独立交付: acceptance/p2/2026-10-05.md
       - U2 编辑器工作区与教程: acceptance/u2/2026-10-05.md

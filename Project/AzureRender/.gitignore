@@ -5,3 +5,6 @@
 
 # Editor workspace state
 /azurerender-editor.ini
+
+# 公共项目的本机生成缓存
+/assets_public/**/.azure/

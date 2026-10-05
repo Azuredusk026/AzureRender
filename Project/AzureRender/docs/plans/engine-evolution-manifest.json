@@ -53,7 +53,13 @@
         "A1",
         "B8"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g8/2026-10-06.md",
+        "evidence": "docs/acceptance/g8/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g8): 完成共享机制与应用玩法分层验收"
+      }
     },
     {
       "id": "U3",

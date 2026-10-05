@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/InteractionRuntime.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/ComponentCodec.hpp"
@@ -29,7 +30,7 @@ int main(){try{
     const auto reused=runtime.world().createEntity();runtime.world().addComponent(reused,ecs::TransformComponent{});
     runtime.world().addComponent(reused,game::Interactable{});
     check(interactions.select(runtime,physics,hero)->node=="beta","Reused numeric entities must not inherit stale target identity");
-    game::Character character;character.speed=0;runtime.world().addComponent(hero,character);GameRuntime game(runtime);
+    game::Character character;character.speed=0;runtime.world().addComponent(hero,character);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
     unsigned callbacks=0;game.setInteractionHandler([&](const auto& event){check(event.node=="beta","Interaction event must carry the selected target");++callbacks;});
     game.input().key(69,true);game.advance(1.0/30);game.advance(1.0/60);
     check(callbacks==1,"Held interaction must dispatch one press edge");

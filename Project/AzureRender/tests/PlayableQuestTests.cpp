@@ -1,3 +1,4 @@
+#include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/LevelSession.hpp"
 #include <filesystem>
@@ -11,7 +12,7 @@ try{
     std::filesystem::remove_all(root);
     std::filesystem::copy(AZURE_QUEST_PROJECT,root,std::filesystem::copy_options::recursive);
     RuntimeLifecycle runtime;LevelSession levels(Project::load(root/"project.azureproject"),runtime);runtime.start();
-    GameRuntime game(runtime);ScriptRuntime scripts(runtime,game,levels.assets());std::map<std::string,std::string> ui;
+    GameRuntime game(runtime,application::systems(),application::explorationConfiguration());ScriptRuntime scripts(runtime,game,levels.assets());std::map<std::string,std::string> ui;
     scripts.setUiHandler([&](auto id,auto text){ui[id]=text;});
     scripts.setLevelHandler([&](auto reference){levels.request(reference);});
     game.setBeforeStep([&](double dt){scripts.update(dt);});

@@ -10,9 +10,11 @@ ALLOWED = {
     'AzureRenderCore': {'AzureFoundation'},
     'AzureReflection': {'AzureFoundation'},
     'AzureRuntime': {'AzureFoundation', 'AzureReflection', 'AzureRenderCore'},
-    'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
-    'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
-    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor'},
+    'AzureGameplay': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
+    'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay'},
+    'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime'},
+    'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime'},
+    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime'},
 }
 
 def effective_includes(text, definitions):
@@ -55,6 +57,10 @@ def owner(path):
     if not tail:
         return None
     area = tail[0]
+    if area == 'gameplay':
+        return 'AzureGameplay'
+    if area == 'app' and path.name.startswith('ProjectRuntimeAssembly'):
+        return 'AzureProjectRuntime'
     if area == 'ecs' or (area == 'reflection' and path.name == 'Annotations.hpp'):
         return None  # Shared value contracts contain no runtime implementation.
     if area == 'extensions':

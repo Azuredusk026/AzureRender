@@ -2,14 +2,29 @@
 #include <map>
 #include <set>
 #include <string>
+#include <nlohmann/json.hpp>
+#include <stdexcept>
+#include "runtime/GameplayKeys.hpp"
 namespace azurerender {
 class InputActions {
 public:
-    InputActions() {
-        bind("move-left", 65); bind("move-right", 68); bind("move-forward", 87);
-        bind("move-back", 83); bind("jump", 32); bind("interact", 69); bind("restart", 82);
-        bind("sprint",340); bindAdditional("sprint",344);
+    void configure(const nlohmann::json& config) {
+        if(!config.is_object())throw std::invalid_argument("Input bindings must be an object");
+        std::map<std::string,std::set<int>> candidate;
+        for(const auto& item:config.items()) {
+            if(item.key().empty() || !item.value().is_array() || item.value().empty())
+                throw std::invalid_argument("Invalid action binding: " + item.key());
+            for(const auto& key:item.value()) {
+                if(!key.is_number_integer() || key.get<std::int64_t>()<32 || key.get<std::int64_t>()>348 || !isGameplayKey(key.get<int>()))
+                    throw std::invalid_argument("Invalid physical key: " + item.key());
+                candidate[item.key()].insert(key.get<int>());
+            }
+        }
+        bindings_=std::move(candidate); release();
     }
+    std::vector<int> keys() const { std::set<int> result;for(const auto& item:bindings_)result.insert(item.second.begin(),item.second.end());return {result.begin(),result.end()}; }
+    bool bound(int key) const { for(const auto& item:bindings_)if(item.second.count(key))return true;return false; }
+    bool hasAction(const std::string& action) const { return bindings_.count(action)!=0; }
     void bind(std::string action, int key) { bindings_[std::move(action)] = {key}; }
     void bindAdditional(const std::string& action,int key) { bindings_[action].insert(key); }
     void key(int key, bool down) {

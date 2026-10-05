@@ -101,6 +101,12 @@ Project Project::load(const std::filesystem::path& path) {
             document.at("schemaVersion") != kSchemaVersion)
             throw std::runtime_error("Unsupported project schemaVersion");
         Project project;
+        if(document.contains("runtime")) {
+            project.runtimeConfiguration=document.at("runtime");
+            if(!project.runtimeConfiguration.is_object()||!project.runtimeConfiguration.contains("schemaVersion")
+                ||!project.runtimeConfiguration.at("schemaVersion").is_number_integer()||project.runtimeConfiguration.at("schemaVersion")!=1)
+                throw std::invalid_argument("Unsupported runtime configuration");
+        }
         project.file = std::filesystem::weakly_canonical(path);
         project.id = document.at("id").get<std::string>();
         project.name = document.at("name").get<std::string>();

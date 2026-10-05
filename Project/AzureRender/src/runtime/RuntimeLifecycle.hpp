@@ -15,6 +15,7 @@ class RuntimeLifecycle final {
    public:
     enum class State { Created, Running, Paused, Stopped };
     ecs::World& world() noexcept { return world_; }
+    const ecs::World& world() const noexcept { return world_; }
     State state() const noexcept { return state_; }
     std::uint64_t sceneRevision() const noexcept { return sceneRevision_; }
     bool stepPending() const noexcept { return step_; }
