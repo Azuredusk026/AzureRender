@@ -1,0 +1,15 @@
+{
+  "layoutHash": 16340948458272806689,
+  "panels": {
+    "animation": true,
+    "assets": true,
+    "build": true,
+    "capture": true,
+    "console": true,
+    "gameplay-debug": true,
+    "inspector": true,
+    "outliner": true,
+    "viewport": true
+  },
+  "version": 2
+}

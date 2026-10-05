@@ -1,4 +1,5 @@
 #include "EditorSession.hpp"
+#include "runtime/ModuleAssembly.hpp"
 
 #include <exception>
 #include <stdexcept>
@@ -12,18 +13,25 @@ struct EditorSession::PlayState {
     std::unique_ptr<GameRuntime> game;
     std::unique_ptr<PresentationRuntime> presentation;
     std::unique_ptr<ScriptRuntime> scripts;
+    ModuleAssembly modules;
     explicit PlayState(EditorContext& context) {
+        modules.add({"preview.document",1,{},{}}, [this,&context](auto&) {
         if (context.isProject()) levels = std::make_unique<LevelSession>(context.project(), runtime);
         runtime.replaceScene(context.scene(), [&](auto& target) {
             for (const auto& node : context.runtimeComponents()) installComponents(target.world(), target.entity(node.first), node.second);
         });
-        runtime.start();game=std::make_unique<GameRuntime>(runtime);
+        }, [this] { levels.reset(); });
+        modules.add({"preview.world",1,{}, {"preview.document"}}, [this](auto&) { runtime.start(); }, [this] { runtime.stop(); });
+        modules.add({"preview.game",1,{}, {"preview.world"}}, [this](auto&) {
+        game=std::make_unique<GameRuntime>(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=std::make_unique<ScriptRuntime>(runtime,*game,levels->assets());
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
             scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
             game->setBeforeStep([this](double delta){scripts->update(delta);});
             game->setEventHandler([this](const auto& event){scripts->dispatch(event);});
             game->setInteractionHandler([this](const auto& event){scripts->dispatchInteraction(event);});}
+        }, [this] { scripts.reset(); game.reset(); presentation.reset(); });
+        modules.start(runtime);
     }
 };
 EditorSession::~EditorSession()=default;

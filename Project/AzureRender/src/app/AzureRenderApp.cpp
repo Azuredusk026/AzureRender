@@ -81,7 +81,13 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    azurerender::runtimeComponentRegistry().seal();
+    runtimeModules_.add({"runtime.world",1,{},{}}, [this,&options](auto&) {
     if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
+    runtime_.start();
+    }, [this] { runtime_.stop(); });
+    if(!options.projectFile.empty() && !options.editorMode)
+    runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options](auto&) {
     if (!options.projectFile.empty() && !options.editorMode)
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_);
@@ -93,10 +99,13 @@ void AzureRenderApp::run(
         gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
     }
     if(levelSession_){presentationRuntime_=std::make_unique<azurerender::PresentationRuntime>(runtime_,levelSession_->assets());scriptRuntime_->setAudioHandler([this](auto entity){presentationRuntime_->play(entity);});}
+    }, [this] {
+        scriptRuntime_.reset(); gameRuntime_.reset(); presentationRuntime_.reset(); levelSession_.reset();
+    });
+    runtimeModules_.start(runtime_);
 #if AZURE_WITH_EDITOR
     if(!options.editorActionsPath.empty())editorAutomation_=std::make_unique<azurerender::EditorAutomation>(options.editorActionsPath);
 #endif
-    runtime_.start();
     resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
@@ -359,10 +368,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         std::ofstream extended(runOptions_.runtimeReportPath);extended<<data.dump(2);
         if (!extended) throw std::runtime_error("Cannot write runtime report");
     }
-    scriptRuntime_.reset();
-    gameRuntime_.reset();
-    presentationRuntime_.reset();
-    runtime_.stop();
+    runtimeModules_.stop();
     azurerender::RuntimeDiagnostics::instance().print(
         "render", "Rendered frames: " + std::to_string(renderedFrames));
     if (fixedSimulation_) {
@@ -929,10 +935,7 @@ void AzureRenderApp::cleanup() {
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
 #endif
-    scriptRuntime_.reset();
-    gameRuntime_.reset();
-    presentationRuntime_.reset();
-    runtime_.stop();
+    runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
         gameUi_.reset();gameUiRenderer_.reset();

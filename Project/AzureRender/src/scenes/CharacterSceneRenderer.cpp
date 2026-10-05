@@ -1,7 +1,7 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 
 #include "render/RenderMath.hpp"
-#include "platform/BinaryFile.hpp"
+#include "resources/BinaryFile.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"

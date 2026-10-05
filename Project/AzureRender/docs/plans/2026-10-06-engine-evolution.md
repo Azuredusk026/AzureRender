@@ -156,10 +156,10 @@ $env:VULKAN_SDK = 'C:/VulkanSDK/1.4.350.0'
 $env:VCPKG_ROOT = 'C:/Users/23587/Tools/vcpkg'
 ./tools/msvc_env.bat cmake --preset msvc-debug
 ./tools/msvc_env.bat python tools/build_provenance.py build --build-dir build/ninja-msvc-debug --config Debug
-ctest --test-dir build/ninja-msvc-debug --output-on-failure
+ctest --test-dir build/ninja-msvc-debug -C Debug --output-on-failure
 ./tools/msvc_env.bat cmake --preset msvc-release
 ./tools/msvc_env.bat python tools/build_provenance.py build --build-dir build/ninja-msvc-release --config Release
-ctest --test-dir build/ninja-msvc-release --output-on-failure
+ctest --test-dir build/ninja-msvc-release -C Release --output-on-failure
 cmake -DBUILD_DIR=build/ninja-msvc-release -DCONFIG=Release -P tools/run_release_gate.cmake
 python tools/build_provenance.py verify --build-dir build/ninja-msvc-debug --config Debug
 python tools/build_provenance.py verify --build-dir build/ninja-msvc-release --config Release

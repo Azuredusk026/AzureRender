@@ -55,7 +55,7 @@ struct ScriptRuntime::Impl {
     RuntimeLifecycle& runtime;
     GameRuntime& game;
     AssetDatabase& assets;
-    reflection::Registry registry = reflection::makeRuntimeRegistry();
+    const reflection::Registry& registry = runtimeComponentRegistry().metadata();
     sol::state lua;
     struct Entry {
         ecs::Entity entity;
@@ -119,17 +119,19 @@ struct ScriptRuntime::Impl {
             return target&&target->revision==revision&&target->actor==entity&&runtime.entity(target->node)==target->target?target->node:std::string();
         });
         self.set_function("has",[this,entity,node,revision](sol::table,const std::string& type){
-            guard(entity,node,revision,false);bool result=false;
-            visitComponentType(type,[&](auto component){result=runtime.world().has<decltype(component)>(entity);});return result;
+            guard(entity,node,revision,false);
+            return runtimeComponentRegistry().contains(type, runtime.world(), entity);
         });
         self.set_function("remove_component",[this,entity,node,revision](sol::table,const std::string& type){
             guard(entity,node,revision,true);
             if(type=="azure.transform"||type=="azure.renderable")throw std::invalid_argument("Structural identity components are required");
-            visitComponentType(type,[&](auto component){using T=decltype(component);
-                auto effect=[this,entity,node,revision]{auto* lifecycle=&runtime;
-                    runtime.defer([lifecycle,entity,node,revision](auto& world){
-                        if(lifecycle->sceneRevision()==revision&&lifecycle->entity(node)==entity)world.template removeComponent<T>(entity);});};
-                if(staging)stagedEffects.push_back(effect);else effect();});
+            // Resolve registration before scheduling, so unknown types fail now.
+            static_cast<void>(runtimeComponentRegistry().describe(type));
+            auto effect=[this,entity,node,revision,type]{auto* lifecycle=&runtime;
+                runtime.defer([lifecycle,entity,node,revision,type](auto& world){
+                    if(lifecycle->sceneRevision()==revision&&lifecycle->entity(node)==entity)
+                        runtimeComponentRegistry().remove(type,world,entity);});};
+            if(staging)stagedEffects.push_back(effect);else effect();
         });
         self.set_function("spawn",[this,entity,node,revision](sol::table,const std::string& id,const std::string& resource,sol::object position){
             guard(entity,node,revision,true);SceneNode spawned;spawned.id=id;spawned.resourceId=resource;spawned.visible=!resource.empty();
@@ -180,30 +182,24 @@ struct ScriptRuntime::Impl {
             auto effect=[this,id,text]{uiHandler(id,text);};if(staging)stagedEffects.push_back(effect);else effect();
         });
         self.set_function("get", [this, entity, node, revision](sol::table, const std::string& type, const std::string& field) {
-            guard(entity, node, revision, false); Json result;
-            visitComponentType(type, [&](auto component) {
-                using T = decltype(component);
-                auto* value = runtime.world().tryGet<T>(entity);
-                if (!value) throw std::invalid_argument("Entity lacks component: " + type);
-                const auto key=std::make_pair(entity,type);
-                const auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key) : registry.encode(type, value);
-                result = data.at("data").at(field);
-            });
-            return luaValue(lua, result);
+            guard(entity, node, revision, false);
+            const auto key=std::make_pair(entity,type);
+            const auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key)
+                : runtimeComponentRegistry().encode(type,runtime.world(),entity);
+            return luaValue(lua, data.at("data").at(field));
         });
         self.set_function("set", [this, entity, node, revision](sol::table, const std::string& type, const std::string& field, sol::object input) {
             guard(entity, node, revision, true);
-            visitComponentType(type, [&](auto component) {
-                using T = decltype(component);
-                auto* value = runtime.world().tryGet<T>(entity);
-                if (!value) throw std::invalid_argument("Entity lacks component: " + type);
-                const auto key=std::make_pair(entity,type);
-                auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key) : registry.encode(type, value);
-                data["data"][field] = json(input);
-                if (staging) {
-                    T candidate = *value; registry.decode(type, &candidate, data); stagedComponents[key] = data;
-                } else registry.decode(type, value, data);
-            });
+            const auto value = json(input);
+            auto& components = runtimeComponentRegistry();
+            components.validateWrite(type,field,value,false);
+            const auto key=std::make_pair(entity,type);
+            auto data = staging && stagedComponents.count(key) ? stagedComponents.at(key)
+                : components.encode(type,runtime.world(),entity);
+            data["data"][field] = value;
+            components.validate(type,data);
+            if(staging)stagedComponents[key]=data;
+            else components.install(type,runtime.world(),entity,data);
         });
         env["self"] = self;
         return env;
@@ -250,11 +246,9 @@ struct ScriptRuntime::Impl {
         const bool initialized = call(candidate, "init"); staging = false;
         if (!initialized) { stagedComponents.clear(); stagedEffects.clear(); stagedSpawns.clear(); return false; }
         if (existing != entries.end() && existing->second.active) call(existing->second, "shutdown");
-        for (const auto& component : stagedComponents) visitComponentType(component.first.second, [&](auto prototype) {
-            using T = decltype(prototype);
-            auto* value = runtime.world().tryGet<T>(component.first.first);
-            if (value) registry.decode(component.first.second, value, component.second);
-        });
+        for (const auto& component : stagedComponents)
+            if(runtimeComponentRegistry().contains(component.first.second,runtime.world(),component.first.first))
+                runtimeComponentRegistry().install(component.first.second,runtime.world(),component.first.first,component.second);
         for (const auto& effect : stagedEffects) effect();
         stagedComponents.clear(); stagedEffects.clear(); stagedSpawns.clear();
         entries.insert_or_assign(entity, std::move(candidate));

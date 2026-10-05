@@ -1,7 +1,7 @@
 #include "scenes/BlackholeSceneRenderer.hpp"
 
 #include "render/RenderMath.hpp"
-#include "platform/BinaryFile.hpp"
+#include "resources/BinaryFile.hpp"
 #include "render/ComputePass.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"

@@ -48,11 +48,15 @@ def run(build_dir,editor,output,evidence):
             (evidence/'entry.log').write_text(entry,encoding='utf-8')
             assert 'Allocator after unload: buffers=0 images=0' in entry
             route=play(moved/'bin/AzurePlayer.exe',evidence/'quest',project=moved/'game/project.azureproject',env=env,cwd=moved)
-            timing=evidence/'cycles.json';runtime=evidence/'cycles.runtime.json'
+            # Each invocation owns fresh timing files; the Player's overwrite
+            # guard remains active while completed reports stay in evidence.
+            timing=root/'cycles.json';runtime=root/'cycles.runtime.json'
             log=execute([moved/'bin/AzurePlayer.exe','--project',moved/'game/project.azureproject',
                 '--width','1920','--height','1080','--game-actions',evidence/'cycles.input.json',
                 '--fixed-frame-step','--smoke-frames','6600','--gpu-timing','--gpu-timing-output',timing,'--runtime-report',runtime],moved,env)
             (evidence/'cycles.log').write_text(log,encoding='utf-8')
+            for source in (timing, timing.with_suffix('.csv'), runtime):
+                shutil.copy2(source,evidence/source.name)
             assert 'VUID-' not in log and 'Validation Error' not in log and 'Allocator after unload: buffers=0 images=0' in log
             cycle=verify(timing);(evidence/'cycles.summary.json').write_text(json.dumps(cycle,indent=2)+'\n',encoding='utf-8')
             actual=json.loads(timing.read_text(encoding='utf-8'));assert Path(actual['asset']).is_relative_to(moved)

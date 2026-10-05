@@ -30,6 +30,12 @@
         "A1",
         "A2"
       ],
+      "verification": {
+        "acceptance": "docs/acceptance/f4/2026-10-06.md",
+        "evidence": "docs/acceptance/f4/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(f4): 完成模块装配与类型契约验收"
+      },
       "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
     },
     {

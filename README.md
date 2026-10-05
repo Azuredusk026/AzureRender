@@ -69,7 +69,9 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 开发遵循 [引擎开发约束](AGENT.md)。[gkNextEngine 架构借鉴评估](Project/AzureRender/docs/research/2026-10-06-gknextengine.md)列出分级、源码依据与可行性。
 
-[引擎实施计划](Project/AzureRender/docs/plans/2026-10-06-engine-evolution.md)覆盖全部 18 项借鉴。12 个阶段按基础契约、编辑与 AI、专项和交付推进。下一阶段为 F4 模块与类型契约。任务文件、接口、依赖和验收由三个子计划定义。
+[引擎实施计划](Project/AzureRender/docs/plans/2026-10-06-engine-evolution.md)覆盖全部 18 项借鉴。12 个阶段按基础契约、编辑与 AI、专项和交付推进。F4 模块与类型契约已验收。下一阶段为 G8 共享机制与应用分层。
+
+任务文件、接口、依赖和验收由三个子计划定义。
 
 F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。R6 场景可见性已验收。G7 方向与冲刺已验收。
 

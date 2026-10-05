@@ -49,7 +49,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 ```powershell
 ./tools/msvc_env.bat cmake --preset msvc-debug
 ./tools/msvc_env.bat cmake --build --preset msvc-debug
-ctest --test-dir build/ninja-msvc-debug --output-on-failure
+ctest --test-dir build/ninja-msvc-debug -C Debug --output-on-failure
 cmake -DBUILD_DIR=build/ninja-msvc-release -DCONFIG=Release -P tools/run_release_gate.cmake
 python tools/audit_repository.py --source ../.. --output build/repository-audit.json
 ```
@@ -78,7 +78,9 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
-[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4 为下一执行阶段，随后按 12 阶段顺序推进。公共能力通过探索项目和独立工具验收。
+[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4 模块与类型契约已验收。下一阶段为 G8，后续按既定顺序推进。
+
+公共能力通过探索项目和独立工具验收。
 
 F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作区与教程、P2 展示与独立交付均已验收。
 

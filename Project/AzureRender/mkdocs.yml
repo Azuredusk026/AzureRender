@@ -83,6 +83,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - F4 模块与类型契约: acceptance/f4/2026-10-06.md
       - P2 展示与独立交付: acceptance/p2/2026-10-05.md
       - U2 编辑器工作区与教程: acceptance/u2/2026-10-05.md
       - G7 角色方向与冲刺: acceptance/g7/2026-10-05.md

@@ -6,6 +6,7 @@
 #endif
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/ModuleAssembly.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/GameInputReplay.hpp"
@@ -152,6 +153,7 @@ private:
     std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
 #endif
     azurerender::RuntimeLifecycle runtime_;
+    azurerender::ModuleAssembly runtimeModules_;
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
     std::optional<azurerender::GameInputReplay> gameInputReplay_;

@@ -1,4 +1,5 @@
 #pragma once
+#include "ExtensionDescriptor.hpp"
 
 #include "IAssetImporter.hpp"
 #include "IRenderFeature.hpp"
@@ -15,13 +16,6 @@
 #include <vector>
 
 namespace azurerender {
-
-struct ExtensionDescriptor {
-    std::string id;
-    std::uint32_t apiVersion = 1;
-    std::vector<std::string> capabilities;
-    std::vector<std::string> dependencies;
-};
 
 template <typename Interface>
 class ExtensionRegistry final {

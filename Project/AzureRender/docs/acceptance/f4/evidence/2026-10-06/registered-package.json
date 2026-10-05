@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "ordinaryPlayerRejectedUnknownType": true,
+  "registeredPlayerLoaded": true,
+  "editorLinked": false,
+  "movedDirectory": true,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "files": 186,
+  "packageManifestHash": "761998f0ff9f3192abee85f79bb9a244e7dbf1fa9aaf7ba5a2d1d22fd3c7ecd2",
+  "playerSha256": "245b2c7aee269b851b928dc94651697816f1d355f4800bec26ea529008203271",
+  "released": true
+}

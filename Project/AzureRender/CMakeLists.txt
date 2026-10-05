@@ -8,6 +8,8 @@ project(
 )
 
 include(CTest)
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/.cmake/api/v1/query")
+file(WRITE "${CMAKE_BINARY_DIR}/.cmake/api/v1/query/codemodel-v2" "")
 include(GNUInstallDirs)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -253,15 +255,19 @@ add_library(AzureRenderCore STATIC
 add_executable(AzureMetaGen tools/metagen/main.cpp)
 set(AZURE_GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(AZURE_REFLECTION_OUTPUT "${AZURE_GENERATED_DIR}/reflection/GeneratedRegistry.hpp")
-add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}"
-    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp runtime/GameComponents.hpp
+set(AZURE_COMPONENT_OUTPUT "${AZURE_GENERATED_DIR}/runtime/GeneratedComponents.hpp")
+add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}" "${AZURE_COMPONENT_OUTPUT}"
+    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    DEPENDS AzureMetaGen src/ecs/Components.hpp src/runtime/GameComponents.hpp
+    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp
     VERBATIM)
 add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTION_OUTPUT}")
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/runtime/ModuleAssembly.cpp
+    src/runtime/ComponentRegistry.cpp
+    "${AZURE_COMPONENT_OUTPUT}"
     src/app/CommandLine.cpp
     src/runtime/SceneDocument.cpp
     src/runtime/SceneRenderSnapshot.cpp
@@ -341,6 +347,36 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_executable(AzureModuleAssemblyTests tests/ModuleAssemblyTests.cpp)
+    target_link_libraries(AzureModuleAssemblyTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.ModuleAssembly COMMAND AzureModuleAssemblyTests)
+    add_executable(AzureComponentRegistryTests tests/ComponentRegistryTests.cpp)
+    target_link_libraries(AzureComponentRegistryTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.ComponentRegistry COMMAND AzureComponentRegistryTests)
+    set(AZURE_TOOL_METADATA "${AZURE_GENERATED_DIR}/fixtures/GeneratedToolRegistry.hpp")
+    add_custom_command(OUTPUT "${AZURE_TOOL_METADATA}"
+        COMMAND AzureMetaGen "${AZURE_TOOL_METADATA}" tests/MetadataFixture.hpp
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        DEPENDS AzureMetaGen tests/MetadataFixture.hpp VERBATIM)
+    add_executable(AzureMetadataGenerationTests tests/MetadataGenerationTests.cpp "${AZURE_TOOL_METADATA}")
+    target_include_directories(AzureMetadataGenerationTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+    target_link_libraries(AzureMetadataGenerationTests PRIVATE AzureReflection)
+    add_test(NAME AzureEngine.MetadataGeneration COMMAND AzureMetadataGenerationTests)
+    add_executable(AzureRegisteredComponentWorkflowTests tests/RegisteredComponentWorkflowTests.cpp)
+    target_link_libraries(AzureRegisteredComponentWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEngine.RegisteredComponentWorkflow COMMAND AzureRegisteredComponentWorkflowTests)
+    add_executable(AzureRegisteredComponentHost src/main.cpp tests/RegisterHostExtension.cpp)
+    target_link_libraries(AzureRegisteredComponentHost PRIVATE AzureRenderHost)
+    add_dependencies(AzureRegisteredComponentHost AzureRenderShaders)
+    add_test(NAME AzureEngine.RegisteredComponentHost COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_registered_component_host.py"
+        --executable $<TARGET_FILE:AzureRegisteredComponentHost>
+        --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/project.azureproject")
+    set_tests_properties(AzureEngine.RegisteredComponentHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_test(NAME AzureEngine.ModuleBoundaryFixtures COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_module_boundaries.py")
+    add_test(NAME AzureEngine.ModuleBoundaries COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_module_boundaries.py"
+        --source "${CMAKE_CURRENT_SOURCE_DIR}" --build-dir "${CMAKE_CURRENT_BINARY_DIR}")
     add_executable(AzureGameUiRendererTests tests/GameUiRendererTests.cpp)
     target_link_libraries(AzureGameUiRendererTests PRIVATE AzureRenderCore RmlUi::RmlUi)
     add_dependencies(AzureGameUiRendererTests AzureRenderShaders)
@@ -1115,7 +1151,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 f4 g8 u3 f5 u4 g9 r7 g10 r8 r9 g11 p3 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
@@ -1137,4 +1173,13 @@ install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-repository-plan.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-playable-quality-plan.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-editor-ui-plan.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-evolution.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-foundation-steps.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-ai-native-editor-steps.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-specialized-steps.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-06-gknextengine.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/gknextengine-source-map.json"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")

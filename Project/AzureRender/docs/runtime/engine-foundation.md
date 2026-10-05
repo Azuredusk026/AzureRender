@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-04
+> 更新日期：2026-10-06
 > 适用范围：Windows 项目、运行时与 Player
 > 源码入口：`CMakeLists.txt`、`src/runtime/`、`src/player/main.cpp`
 > 关联测试：`ProjectTests.cpp`、`RuntimeLifecycleTests.cpp`、`test_player_cli.py`
@@ -22,6 +22,34 @@ G0 提供模块库、项目创建、版本化配置、资源挂载和独立 Play
 | AzurePlayerHost | Player 的 GPU 宿主 | AzureRuntime、AzurePlatform |
 
 宿主以 `AZURE_WITH_EDITOR` 编译变体隔离编辑器实现。公共渲染库由两个宿主共享。项目内新功能按所属模块加入显式源码清单，模块链接方向由 CMake 维护。
+
+## 模块装配与依赖检查
+
+`ModuleAssembly` 管理服务描述和启动关闭回调。服务使用稳定 ID、API 版本和依赖 ID。主线程完成注册与启动。装配对象拥有回调与运行状态。
+
+`add(descriptor, start, stop)` 注册服务。`start(runtime)` 在启动前检查完整依赖图。缺失依赖、依赖环与版本错误得到拒绝。有效图按依赖顺序启动。
+
+启动异常触发本次服务的失败清理。已启动服务按逆序关闭，失败服务也执行清理回调。清理回调应能处理部分初始化状态。`stop()` 与析构执行相同关闭规则。
+
+关闭异常进入 `diagnostics()`，其余服务继续关闭。注册图在开始执行时封存，启动只执行一次。启动和注册要求装配对象的创建线程。回调捕获的服务与宿主必须存活到关闭结束。
+
+启动失败诊断包含失败模块的 ID。原始异常继续向宿主传播。关闭回调处理自身的部分初始化状态。启动、关闭与析构均由装配对象的创建线程执行。
+
+Player 装配运行世界与项目服务。编辑预览装配文档、运行世界和玩法服务。独立宿主夹具采用不同服务组合，验证同一生命周期。
+
+`tests/registered-player/CMakeLists.txt` 提供独立构建夹具。它链接 `AzurePlayerHost` 并登记扩展组件。宿主调用公开注册入口完成扩展。实际链接命令用于检查编辑器依赖隔离。
+
+依赖检查读取 CMake 文件 API 的真实目标图。检查还覆盖第一方头文件的传递引用。已知编译开关按目标定义求值。未知条件按两种分支检查。
+
+共享组件值定义位于 `src/ecs/`。二进制文件读取属于 `src/resources/`。它们分别服务类型描述与资源读取。窗口与运行调度仍由各自模块实现。
+
+从工程目录执行以下检查。首次创建文件 API 查询后需再配置一次。
+
+```powershell
+./tools/msvc_env.bat cmake --preset msvc-debug
+python tools/check_module_boundaries.py --source . --build-dir build/ninja-msvc-debug
+python tools/test_module_boundaries.py
+```
 
 ## 数据与所有权
 

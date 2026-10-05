@@ -14,6 +14,7 @@ namespace {
 std::string identity(const char* prefix){static std::uint64_t count=0;return std::string(prefix)+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+"-"+std::to_string(++count);}
 }
 std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem::path& path){
+    runtimeComponentRegistry().seal();
     auto project=std::make_unique<Project>(Project::load(path));auto assets=std::make_unique<AssetDatabase>(*project);assets->refresh();
     const auto scenePath=project->resolve(project->startupScene);
     Level level; if(scenePath.extension()==".azurelevel")level=Level::load(scenePath,*assets);else level.scene=project->loadStartupScene();
@@ -176,18 +177,15 @@ void EditorContext::validateComponentReferences(const SceneNode& node,const nloh
 void EditorContext::addGameplayComponent(const std::string& type){
     if(!selectedNode())return;
     if(!componentData(selectedNode()->id,type).is_null())return;
-    const auto registry=reflection::makeRuntimeRegistry();visitComponentType(type,[&](auto component){
-        auto data=runtimeComponents().at(selectedNode()->id);data[type]=registry.encode(type,&component);
+        auto data=runtimeComponents().at(selectedNode()->id);data[type]=runtimeComponentRegistry().defaults(type);
         // New camera components start with a valid, selected target.
         if(type=="azure.third-person-camera")data[type]["data"]["target"]=selectedNode()->id;
         validateComponentReferences(*selectedNode(),data,scene_);beginEdit();components_[selectedNode()->id]=std::move(data);syncComponents();
-    });
 }
 void EditorContext::setComponentField(const std::string& type,const std::string& field,const nlohmann::json& value){
     if(!selectedNode())throw std::logic_error("Component editing requires selection");
     auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component");
-    const auto registry=reflection::makeRuntimeRegistry();const auto& fields=registry.type(type).properties;
-    if(std::none_of(fields.begin(),fields.end(),[&](const auto& property){return property.name==field;}))throw std::invalid_argument("Unknown component field: "+field);
+    runtimeComponentRegistry().validateWrite(type,field,value);
     data[type]["data"][field]=value;validateComponentReferences(*selectedNode(),data,scene_);
     beginEdit();components_[selectedNode()->id]=data;
     if(type=="azure.transform"){ecs::TransformComponent transform;reflection::makeRuntimeRegistry().decode(type,&transform,data[type]);auto* node=selectedNode();node->translation=transform.translation;node->rotation=transform.rotation;node->scale=transform.scale;refreshSelectedTransform();}

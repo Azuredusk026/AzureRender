@@ -99,6 +99,13 @@ public:
     }
 
     template <typename T>
+    [[nodiscard]] const T* tryGet(const Entity entity) const noexcept {
+        const auto iterator = componentArrays_.find(std::type_index(typeid(T)));
+        if (iterator == componentArrays_.end()) return nullptr;
+        return static_cast<const ComponentArray<T>*>(iterator->second.get())->tryGet(entity);
+    }
+
+    template <typename T>
     [[nodiscard]] bool has(const Entity entity) const noexcept {
         const auto iterator = componentArrays_.find(std::type_index(typeid(T)));
         if (iterator == componentArrays_.end()) {

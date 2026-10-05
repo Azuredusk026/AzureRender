@@ -19,6 +19,9 @@ struct Property {
     double minimum, maximum;
     std::function<Json(const void*)> read;
     std::function<void(void*, const Json&)> write;
+    std::string category, tooltip;
+    bool readOnly = false, toolVisible = true;
+    std::function<void(const Json&)> validate;
 };
 struct Type {
     std::string name;
@@ -37,7 +40,7 @@ Property property(std::string name, std::string label, F T::* member, double min
     constexpr bool vector = std::is_same_v<F, std::array<float, 3>>;
     constexpr Kind kind = vector ? Kind::Vector3 : std::is_same_v<F, bool> ? Kind::Boolean
         : std::is_same_v<F, std::string> ? Kind::String : Kind::Number;
-    return {std::move(name), std::move(label), kind, minimum, maximum,
+    Property result{std::move(name), std::move(label), kind, minimum, maximum,
         [member](const void* object) { return Json(static_cast<const T*>(object)->*member); },
         [member, minimum, maximum](void* object, const Json& value) {
             const auto number = [&](const Json& v) {
@@ -59,7 +62,9 @@ Property property(std::string name, std::string label, F T::* member, double min
                     if (!value.is_number_integer()) throw std::invalid_argument("Expected integer property");
             }
             static_cast<T*>(object)->*member = value.get<F>();
-        }};
+        }, {}, {}, false, true, {}};
+    result.validate = [write = result.write](const Json& value) { T candidate{}; write(&candidate, value); };
+    return result;
 }
 template<class T>
 Type reflectedType(std::string name, unsigned version, std::vector<Property> properties) {
@@ -72,6 +77,10 @@ Type reflectedType(std::string name, unsigned version, std::vector<Property> pro
                 if (data.contains(field.name)) field.write(&candidate, data.at(field.name));
             *static_cast<T*>(object) = std::move(candidate);
         }};
+}
+inline Property withMetadata(Property value, std::string category, std::string tooltip, bool readOnly, bool toolVisible) {
+    value.category=std::move(category); value.tooltip=std::move(tooltip);
+    value.readOnly=readOnly; value.toolVisible=toolVisible; return value;
 }
 class Registry {
 public:

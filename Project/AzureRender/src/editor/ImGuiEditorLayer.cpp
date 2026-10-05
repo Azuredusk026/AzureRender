@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <cstdlib>
 #include "reflection/Registry.hpp"
+#include "runtime/ComponentRegistry.hpp"
 #include "ecs/Components.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ExtensionRegistry.hpp"
@@ -698,12 +699,16 @@ void ImGuiEditorLayer::drawInspectorPanel() {
         }
     }
     if(context_->isProject() && context_->selectedNode()){
-        const std::vector<std::string> types={"azure.rigid-body","azure.character","azure.third-person-camera","azure.interactable","azure.collectible","azure.door","azure.checkpoint","azure.task-state","azure.script","azure.animator","azure.audio-source","azure.game-ui"};
+        std::vector<std::string> types;
+        for(const auto& entry:runtimeComponentRegistry().metadata().types())
+            if(entry.first!="azure.transform" && entry.first!="azure.renderable") types.push_back(entry.first);
         ImGui::BeginDisabled(session_->playing() || session_->building());
         if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{context_->addGameplayComponent(type);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
-        const auto componentRegistry=reflection::makeRuntimeRegistry();
+        const auto& componentRegistry=runtimeComponentRegistry().metadata();
         for(const auto& type:types){auto data=context_->componentData(context_->selectedNode()->id,type);if(data.is_null())continue;
             ImGui::PushID(type.c_str());if(ImGui::CollapsingHeader(type.c_str()))for(const auto& field:componentRegistry.type(type).properties){
+                if(!field.toolVisible)continue;
+                ImGui::BeginDisabled(field.readOnly);
                 auto value=data.at(field.name);bool changed=false;
                 if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox(field.label.c_str(),&v);value=v;}
                 else if(value.is_number_integer()){int v=value.get<int>();changed=ImGui::DragInt(field.label.c_str(),&v,1,static_cast<int>(field.minimum),static_cast<int>(field.maximum));value=v;}
@@ -721,6 +726,8 @@ void ImGuiEditorLayer::drawInspectorPanel() {
                         changed=ImGui::InputText(field.label.c_str(),v.data(),v.size(),ImGuiInputTextFlags_EnterReturnsTrue);value=v.data();
                     }
                 }
+                ImGui::EndDisabled();
+                if(!field.tooltip.empty() && ImGui::IsItemHovered())ImGui::SetTooltip("%s",field.tooltip.c_str());
                 if(changed)try{context_->setComponentField(type,field.name,value);}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
             }ImGui::PopID();
         }
