@@ -275,10 +275,13 @@ private:
     std::vector<VkDescriptorSet> descriptorSets_;
     VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline opaquePipeline_ = VK_NULL_HANDLE;
+    VkPipeline opaqueMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline opaqueDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendPipeline_ = VK_NULL_HANDLE;
+    VkPipeline blendMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
+    VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
 

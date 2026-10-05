@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <cstdio>
 
 namespace {
 
@@ -71,6 +72,22 @@ int main() {
         camera, centerDirection, tri0, tri1, tri2);
     assert(centerHit > 0.0F);
     assert(nearEqual(centerHit, 4.0F));
+
+    // The authored character lens uses a 1.6 focal scale. Picking must hit
+    // the same world point as its positive-height Vulkan screen projection.
+    const Vector3 eye{0,0,3}, aim{0,0,0}, point{.4F,.2F,0};
+    auto lens=azurerender::internal::perspective(3.14159265358979323846F/3,16.0F/9,.1F,100);
+    lens[0]*=1.6F;lens[5]*=1.6F;
+    const auto vp=azurerender::internal::multiply(lens,azurerender::internal::lookAt(eye,aim,{0,1,0}));
+    const float w=vp[3]*point[0]+vp[7]*point[1]+vp[11]*point[2]+vp[15];
+    const float u=.5F+.5F*(vp[0]*point[0]+vp[4]*point[1]+vp[8]*point[2]+vp[12])/w;
+    const float v=.5F+.5F*(vp[1]*point[0]+vp[5]*point[1]+vp[9]*point[2]+vp[13])/w;
+    const auto actual=pickRayDirection(eye,aim,u,v,16.0F/9);
+    const auto expected=azurerender::internal::normalize(azurerender::internal::subtract(point,eye));
+    if (azurerender::internal::dot(actual,expected)<=.99999F) {
+        std::fprintf(stderr,"Picking ray differs from the rendered character lens\n");
+        return 1;
+    }
 
     return 0;
 }

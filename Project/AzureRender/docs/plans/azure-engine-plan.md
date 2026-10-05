@@ -1,7 +1,7 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：F3 Complete，R6 Active，G7、U2、P2 Planned。F1 至 P1 完成。Android Deferred
+> 状态：F3、R6 Complete，G7 Active，U2、P2 Planned。F1 至 P1 完成。Android Deferred
 > 更新日期：2026-10-05
 > 适用范围：Windows 编辑器与 Windows 运行时。Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
@@ -79,8 +79,8 @@ Windows 提供编辑器与 Player。Android 目标、原生窗口、生命周期
 | F2 运行时性能与工程加固 | U1，Complete | 后台加载、资源复用、性能预算与诊断 | 标准、压力、预加载切关与资源恢复门禁通过 |
 | P1 可玩关卡交付验收 | F2，Complete | 独立可玩包、本机主角与设备验证记录 | 移动包游玩、30 分钟长跑与完整回归通过 |
 | F3 仓库与文档基础 | P1，Complete | 目录、忽略规则、README 与 CI | 精确清单、活动回退、链接与两配置回归通过 |
-| R6 场景可见性与裁剪 | F3，Active | 剔除、深度、镜像与相机范围 | 默认路径、边界场景、GPU 图像与性能通过 |
-| G7 动画方向与冲刺 | R6，Planned | 前向动画、双 Shift 与输入恢复 | 方向、速度、迁移、焦点和任务路线通过 |
+| R6 场景可见性与裁剪 | F3，Complete | 剔除、深度、镜像与相机范围 | 默认路径、边界场景、GPU 图像与性能通过 |
+| G7 动画方向与冲刺 | R6，Active | 前向动画、双 Shift 与输入恢复 | 方向、速度、迁移、焦点和任务路线通过 |
 | U2 编辑器工作区 | G7，Planned | UE 风格组织、停靠、面板与教程 | DPI、小窗口、真实控件与制作流程通过 |
 | P2 展示与独立交付 | U2，Planned | 截图、README、游戏包与完整证据 | 完整回归、长跑、隔离包与清单通过 |
 
@@ -173,3 +173,5 @@ R1 明确外部导入、跨帧持久、帧内瞬态三种资源类别。历史�
 Android 目标无限期 Deferred，不配置 Android SDK、NDK、真机或移动端性能预算。G1 使用 C++17 受限注解生成器，语法范围、增量输出和诊断由契约测试覆盖。
 
 G2 使用 UUID 与指纹分版本缓存，以及版本化目录资源包。U0 使用 miniaudio 与 RmlUi。P0 使用 Python 标准库生成 Windows 游戏目录。
+
+R6 验收见[场景可见性与裁剪验收](../acceptance/r6/2026-10-05.md)。

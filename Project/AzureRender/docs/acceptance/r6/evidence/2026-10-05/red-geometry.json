@@ -1,0 +1,26 @@
+{
+  "status": "failed",
+  "surfacePixels": {
+    "positive": 0,
+    "baked-mirror": 39244,
+    "back": 39244,
+    "double-sided-back": 39244,
+    "far": 0,
+    "far-clipped": 0,
+    "depth": 0,
+    "mirror": 0,
+    "double-mirror": 0
+  },
+  "visibilityMeanDifference": [
+    0.0,
+    0.0
+  ],
+  "validationErrors": 0,
+  "failures": [
+    "mirror: AzurePlayer: Property outside declared range\n",
+    "double-mirror: AzurePlayer: Property outside declared range\n",
+    "positive front surface absent",
+    "single-sided rear face visible",
+    "far surface clipped inside authored 500m range"
+  ]
+}

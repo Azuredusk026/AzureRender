@@ -104,13 +104,14 @@ void main() {
         gizmoPosition.xyz += localViewDirection
             * morphWeights.featureParameters.x;
     }
-    vec3 gizmoNormal = normalize(mat3(morphWeights.gizmoTransform) * skinnedNormal);
+    vec3 gizmoNormal = normalize(transpose(inverse(mat3(morphWeights.gizmoTransform))) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * skinnedTangent);
     gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
-    worldNormal = normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoNormal);
+    mat3 modelLinear = mat3(instanceData.instances[gl_InstanceIndex].model);
+    worldNormal = normalize(transpose(inverse(modelLinear)) * gizmoNormal);
     worldTangent = vec4(
         normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoTangent),
-        tangent.w);
+        tangent.w * sign(determinant(modelLinear) * determinant(mat3(morphWeights.gizmoTransform))));
     textureCoordinate = texcoord;
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
     for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {

@@ -70,6 +70,8 @@ constexpr const char* kHelp =
     "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
     "  --disable-parallel-recording      Record every pass on the main thread\n"
     "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
+    "  --qa-disable-face-culling         Diagnose winding by rendering both faces\n"
+    "  --qa-disable-depth-test           Diagnose depth by showing submission order\n"
     "  --disable-multi-draw-indirect     Use one indirect command per call\n"
     "  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps\n"
     "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
@@ -358,6 +360,10 @@ ParsedCommandLine parseCommandLine(
             parsed.options.bindlessDisabled = true;
         } else if (argument == "--disable-culling") {
             parsed.options.cullingDisabled = true;
+        } else if (argument == "--qa-disable-face-culling") {
+            parsed.options.qaDisableFaceCulling = true;
+        } else if (argument == "--qa-disable-depth-test") {
+            parsed.options.qaDisableDepthTest = true;
         } else if (argument == "--disable-compute-skinning") {
             parsed.options.computeSkinningDisabled = true;
         } else if (argument == "--disable-parallel-recording") {

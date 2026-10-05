@@ -18,7 +18,7 @@ struct TransformComponent {
     std::array<float, 3> translation{0.0F, 0.0F, 0.0F};
     AZURE_FIELD("Rotation", -100000, 100000)
     std::array<float, 3> rotation{0.0F, 0.0F, 0.0F};  // degrees
-    AZURE_FIELD("Scale", 0.001, 100000)
+    AZURE_FIELD("Scale", -100000, 100000)
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
 };
 

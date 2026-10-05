@@ -36,6 +36,8 @@ struct AzureRenderOptions {
     // Disable frustum culling so every instance is submitted. The QA
     // toggle that proves both sides render identical frames.
     bool cullingDisabled = false;
+    bool qaDisableFaceCulling = false;
+    bool qaDisableDepthTest = false;
     bool computeSkinningDisabled = false;
     bool parallelRecordingDisabled = false;
     bool gpuCullingDisabled = false;

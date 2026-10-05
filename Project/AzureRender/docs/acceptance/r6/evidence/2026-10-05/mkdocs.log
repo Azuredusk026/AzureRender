@@ -1,0 +1,30 @@
+
+ ��  \u26a0  Warning from the Material for MkDocs team
+ ��
+ ��  MkDocs 2.0, the underlying framework of Material for MkDocs,
+ ��  will introduce backward-incompatible changes, including:
+ ��
+ ��  �� All plugins will stop working �C the plugin system has been removed
+ ��  �� All theme overrides will break �C the theming system has been rewritten
+ ��  �� No migration path exists �C existing projects cannot be upgraded
+ ��  �� Closed contribution model �C community members can't report bugs
+ ��  �� Currently unlicensed �C unsuitable for production use
+ ��
+ ��  Our full analysis:
+ ��
+ ��  https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: D:\Assigment\2609\FYP\Project\AzureRender\build\r6\site
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - acceptance\f3\2026-10-05.md
+  - acceptance\r6\2026-10-05.md
+  - audits\2026-10-03-blackhole-performance.md
+  - plans\2026-10-03-r3-completion.md
+  - plans\2026-10-03-r4-execution.md
+  - plans\2026-10-04-playable-execution.md
+  - plans\g1-implementation.md
+  - plans\g2-implementation.md
+  - plans\g3-implementation.md
+  - plans\g4-implementation.md
+INFO    -  Documentation built in 1.80 seconds

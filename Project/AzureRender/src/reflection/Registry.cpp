@@ -1,6 +1,7 @@
 #include "reflection/Registry.hpp"
 #include "reflection/GeneratedRegistry.hpp"
 #include <set>
+#include <cmath>
 namespace azurerender::reflection {
 void Registry::addType(Type value) {
     if (value.name.empty() || value.version == 0 || !value.assign) throw std::invalid_argument("Invalid reflected type");
@@ -45,6 +46,12 @@ void Registry::decode(const std::string& name, void* object, const Json& envelop
         bool found = false;
         for (const auto& field : t.properties) found |= field.name == entry.key();
         if (!found) throw std::invalid_argument("Unknown component field: " + entry.key());
+    }
+    if (name == "azure.transform" && data.contains("scale")) {
+        const auto scale = data.at("scale").get<std::array<float,3>>();
+        for (const auto value : scale)
+            if (!std::isfinite(value) || std::abs(value)<.001F)
+                throw std::invalid_argument("Transform scale must have absolute magnitude at least 0.001");
     }
     if (name == "azure.third-person-camera") {
         auto candidate = encode(name, object).at("data");

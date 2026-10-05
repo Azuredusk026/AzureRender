@@ -64,7 +64,7 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 ## 开发路线与文档
 
-F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。当前执行 R6 可见性，后续为 G7 方向与冲刺、U2 工作区、P2 最终交付。
+F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。R6 场景可见性已验收。当前执行 G7 方向与冲刺，后续为 U2 工作区、P2 最终交付。
 
 [开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)管理阶段状态。[优化实施计划](Project/AzureRender/docs/plans/2026-10-05-quality-round.md)列出任务和验收。[文档站](https://azuredusk026.github.io/AzureRender/)提供主题说明。
 

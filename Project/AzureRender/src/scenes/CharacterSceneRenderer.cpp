@@ -7,6 +7,8 @@
 #include "render/EnvironmentAsset.hpp"
 #include "render/ComputePass.hpp"
 #include "render/CascadedShadow.hpp"
+#include "scene/TransformParity.hpp"
+#include "render/CameraProjection.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -430,6 +432,8 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         for (const auto& instance : sceneInstances_) {
             if (!opaqueRecordingSpans_.empty()
                 && opaqueRecordingSpans_.back()[0] == instance.meshKey
+                && scene::mirroredTransform(sceneInstances_[opaqueRecordingSpans_.back()[1]].model)
+                    == scene::mirroredTransform(instance.model)
                 && opaqueRecordingSpans_.back()[1] + opaqueRecordingSpans_.back()[2] == instance.sourceIndex)
                 ++opaqueRecordingSpans_.back()[2];
             else opaqueRecordingSpans_.push_back({instance.meshKey, instance.sourceIndex, 1});
@@ -686,6 +690,8 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             visibleInstances_[slot]->sourceIndex;
         if (!visibleSpansByMeshKey_.empty()
             && visibleSpansByMeshKey_.back()[0] == meshKey
+            && scene::mirroredTransform(sceneInstances_[visibleSpansByMeshKey_.back()[1]].model)
+                == scene::mirroredTransform(visibleInstances_[slot]->model)
             && visibleSpansByMeshKey_.back()[1]
                     + visibleSpansByMeshKey_.back()[2]
                 == sourceIndex) {
@@ -2217,17 +2223,27 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.colorAttachmentCount = 2;
         materialDesc.renderPass = context.sceneRenderPass;
         materialDesc.layout = pipelineLayout_;
+        // The Vulkan lens flips Y and uses a positive-height viewport.
+        // glTF outward CCW faces remain CCW in framebuffer coordinates.
+        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        materialDesc.depthTest = context.depthTestEnabled;
 
-        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = false;
         materialDesc.depthWrite = true;
         opaquePipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.cullMode = VK_CULL_MODE_BACK_BIT;
+        materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = true;
         materialDesc.depthWrite = false;
         blendPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        blendMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
 
@@ -2239,6 +2255,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineDesc.alphaBlend = false;
         outlineDesc.depthWrite = false;
         outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        outlineMirroredPipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
 
         rhi::GraphicsPipelineDesc backgroundDesc = materialDesc;
         backgroundDesc.vertexShader = backgroundVertexModule;
@@ -2294,10 +2312,13 @@ void CharacterSceneRenderer::destroyResources() {
     }
     for (VkPipeline* pipeline : {
              &opaquePipeline_,
+             &opaqueMirroredPipeline_,
              &opaqueDoubleSidedPipeline_,
              &blendPipeline_,
+             &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
              &outlinePipeline_,
+             &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -2444,10 +2465,13 @@ void CharacterSceneRenderer::destroyResources() {
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
     for (VkPipeline* pipeline : {
              &opaquePipeline_,
+             &opaqueMirroredPipeline_,
              &opaqueDoubleSidedPipeline_,
              &blendPipeline_,
+             &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
              &outlinePipeline_,
+             &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -2497,10 +2521,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         static_cast<float>(frame.swapchainWidth)
         / static_cast<float>(std::max(frame.swapchainHeight, 1U));
     constexpr float kPi = 3.14159265358979323846F;
-    Matrix4 projection = perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
-    // Every geometry pass uses the same lens, including the silhouette shell.
-    constexpr float lensScale=1.6F;
-    projection[0]*=lensScale;projection[5]*=lensScale;
+    Matrix4 projection = characterProjection(*renderSettings_,aspect);
     projectionMatrix_ = projection;
     updateClusteredLighting(
         view,
@@ -2521,7 +2542,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
     cascadeSplits_ = {};
     const std::vector<float> splits = computeCascadeSplits(
-        0.1F, 100.0F, kShadowCascadeCount, 0.65F);
+        settings.cameraNear, settings.shadowDistance, kShadowCascadeCount, 0.65F);
     std::copy(splits.begin(), splits.end(), cascadeSplits_.begin());
     const Vector3 cameraForward = normalize(
         subtract(cameraTarget_, cameraPosition_));
@@ -2530,7 +2551,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
     // Keep conservative shadow coverage around the shared geometry projection.
     const float halfFovTangent = std::tan(kPi / 6.0F);
-    float cascadeNear = 0.1F;
+    float cascadeNear = settings.cameraNear;
     for (std::size_t cascade = 0;
          cascade < kShadowCascadeCount;
          ++cascade) {
@@ -2592,8 +2613,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         static_cast<float>(frameLights_.lights().size()),
     };
     uniform.clusterDepth = {
-        0.1F,
-        100.0F,
+        settings.cameraNear,
+        settings.cameraFar,
         static_cast<float>(std::max(frame.swapchainWidth, 1U)),
         static_cast<float>(std::max(frame.swapchainHeight, 1U)),
     };
@@ -2701,8 +2722,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         kClusterGridX,
         kClusterGridY,
         kClusterGridZ,
-        0.1F,
-        100.0F,
+        renderSettings_->cameraNear,
+        renderSettings_->cameraFar,
         std::abs(projection[0]),
         std::abs(projection[5]),
     });
@@ -3093,6 +3114,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             const std::uint32_t meshKey = span[0];
             const std::uint32_t firstInstance = span[1];
             const std::uint32_t instanceCount = span[2];
+            commands.bindPipeline(scene::mirroredTransform(snapshot->instances.at(firstInstance).model)
+                ? outlineMirroredPipeline_ : outlinePipeline_);
             const auto recordOutlinePrimitives = [&](
                 const LoadedAsset& mesh,
                 const std::size_t globalMaterialBase) {
@@ -3263,9 +3286,16 @@ void CharacterSceneRenderer::drawPrimitive(
         return;
     }
     const bool blend = material.alphaMode == AssetAlphaMode::Blend;
+    const auto& model = snapshot ? snapshot->instances.at(firstInstance).model : sceneInstances_.at(firstInstance).model;
+    bool mirrored = scene::mirroredTransform(model);
+    const auto selected = snapshot ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_;
+    const auto active = snapshot ? snapshot->gizmo.active : gizmoActive_;
+    const auto& gizmoScale = snapshot ? snapshot->gizmo.scale : gizmoScale_;
+    if (active && selected == static_cast<std::int32_t>(&primitive - mesh.primitives.data()))
+        mirrored ^= gizmoScale[0]*gizmoScale[1]*gizmoScale[2] < 0;
     const VkPipeline pipeline = blend
-        ? (material.doubleSided ? blendDoubleSidedPipeline_ : blendPipeline_)
-        : (material.doubleSided ? opaqueDoubleSidedPipeline_ : opaquePipeline_);
+        ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
+        : (material.doubleSided ? opaqueDoubleSidedPipeline_ : mirrored ? opaqueMirroredPipeline_ : opaquePipeline_);
     commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =

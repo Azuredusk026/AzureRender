@@ -1,5 +1,6 @@
 #include "GltfLoader.hpp"
 #include "BrowRegions.hpp"
+#include "scene/TransformParity.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
@@ -1506,6 +1507,10 @@ void appendPrimitive(
     if (!skinned) {
         for (auto& vertex : vertices) {
             transformVertex(vertex, transform);
+        }
+        if (azurerender::scene::mirroredTransform(transform)) {
+            for (std::size_t i=0; i+2<indices.size(); i+=3)
+                std::swap(indices[i+1],indices[i+2]);
         }
     } else {
         for (const AssetVertex& vertex : vertices) {

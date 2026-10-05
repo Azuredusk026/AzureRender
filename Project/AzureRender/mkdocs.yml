@@ -60,6 +60,7 @@ nav:
       - 脚本与玩法: runtime/scripts-gameplay.md
       - 物理与输入: runtime/physics-input.md
       - 独立动画与第三人称控制: runtime/third-person-animation.md
+      - 场景可见性与裁剪: runtime/scene-visibility.md
       - 第三人称探索关卡: runtime/exploration-gameplay.md
       - 资产、关卡与 Prefab: runtime/assets-levels.md
       - 可玩关卡性能与加载: runtime/playable-performance.md

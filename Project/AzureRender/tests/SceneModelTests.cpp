@@ -120,7 +120,7 @@ int main() {
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 7")
+            assert(contents.find("renderSettingsVersion 8")
                 != std::string::npos);
             assert(contents.find("schemaVersion 3") != std::string::npos);
             assert(contents.find("lightCount 1") != std::string::npos);

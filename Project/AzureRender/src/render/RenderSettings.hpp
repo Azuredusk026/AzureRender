@@ -89,7 +89,10 @@ struct CharacterPresentationSettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 7;
+    static constexpr std::uint32_t kSchemaVersion = 8;
+    float cameraNear = .1F;
+    float cameraFar = 100.0F;
+    float shadowDistance = 100.0F;
 
     // Selects the pluggable scene renderer that draws the current frame.
     // Character is the default stylized character pipeline; Blackhole is the

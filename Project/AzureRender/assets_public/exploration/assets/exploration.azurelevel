@@ -3,7 +3,10 @@
   "id": "exploration",
   "sceneType": "character",
   "renderSettings": {
-    "platform": false
+    "platform": false,
+    "cameraNear": 0.1,
+    "cameraFar": 500,
+    "shadowDistance": 100
   },
   "resources": [
     {

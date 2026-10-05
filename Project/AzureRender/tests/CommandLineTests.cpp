@@ -34,6 +34,9 @@ void expectError(
 }  // namespace
 
 int main() try {
+    const auto diagnostics=azurerender::parseCommandLine({"--qa-disable-face-culling", "--qa-disable-depth-test"});
+    require(diagnostics.options.qaDisableFaceCulling && diagnostics.options.qaDisableDepthTest,
+        "Independent material face and depth diagnostics must be accepted");
     require(azurerender::parseCommandLine({"--qa-light-scan"}).options.qaLightScan,
             "Fixed-camera light scanning must be accepted");
     require(azurerender::parseCommandLine({"--qa-isolation", "brow-mask"}).options.qaIsolation == "brow-mask",
@@ -44,6 +47,8 @@ int main() try {
                 "Character inspection camera must be accepted");
     }
     const auto defaults = azurerender::parseCommandLine({});
+    require(!defaults.options.qaDisableFaceCulling && !defaults.options.qaDisableDepthTest,
+        "Face culling and depth must be enabled by default");
     require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,
             "Single indirect command fallback was not parsed");
     require(azurerender::parseCommandLine({"--fixed-frame-step"}).options.fixedFrameStep,

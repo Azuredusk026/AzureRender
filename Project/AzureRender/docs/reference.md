@@ -122,12 +122,15 @@ overlay            bloom
 
 编辑器另使用 `Ctrl+Z`/`Ctrl+Y` 执行 Undo/Redo。
 
-## RenderSettings v7
+## RenderSettings v8
 
 | 字段 | 默认值 | 有效范围/语义 |
 | --- | --- | --- |
 | `sceneType` | Character | Character/Blackhole/Sample |
 | `renderPath` | Traditional | Traditional/Subpasses/Dynamic |
+| `cameraNear` | 0.1 | 0.01 至 10 米 |
+| `cameraFar` | 100 | 大于近裁剪距离，至多 5000 米 |
+| `shadowDistance` | 100 | 大于近裁剪距离，至多为远裁剪距离 |
 | `stylizedLightingEnabled` | true | Character 风格化总开关 |
 | `styleMaskStrength` | 1.0 | 0-2 |
 | `diffuseBandThreshold` | 0.40 | 0.05-0.95 |
@@ -315,7 +318,7 @@ prefabSource, instanceOf
 | --- | ---: |
 | 应用 | 0.1.0-rc1 |
 | Renderer SDK / Registry API | 1 |
-| RenderSettings | 7 |
+| RenderSettings | 8 |
 | `.azscene` | 2 |
 | Material Profile | 1 |
 | Face SDF Profile | 1 |

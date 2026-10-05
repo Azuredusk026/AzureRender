@@ -167,6 +167,8 @@ struct RenderContext {
     // Frustum culling by instance bounds. Renderers may skip instances
     // outside the view frustum; when false every instance is submitted.
     bool cullingEnabled = true;
+    bool faceCullingEnabled = true;
+    bool depthTestEnabled = true;
 
     // QA stress knob: how many clones of the default asset entity the
     // renderer submits per frame.

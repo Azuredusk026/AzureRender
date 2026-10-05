@@ -3,7 +3,8 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
+    return {{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+        {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
         {"saturation",settings.grade.saturation},{"contrast",settings.grade.contrast},{"tint",settings.grade.tint},{"toneMapping",settings.grade.toneMappingEnabled},
@@ -11,8 +12,12 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
         {"outlineDepth",settings.outline.depthThreshold},{"outlineNormal",settings.outline.normalThreshold},{"outlineColor",settings.outline.color},
         {"stylized",settings.stylizedLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled}};
 }
-inline void decodeLevelRenderSettings(RenderSettings& settings,const nlohmann::json& data){
+inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
+    auto settings=target;
+    settings.cameraNear=data.value("cameraNear",settings.cameraNear);
+    settings.cameraFar=data.value("cameraFar",settings.cameraFar);
+    settings.shadowDistance=data.value("shadowDistance",settings.shadowDistance);
     settings.showcasePreset=data.value("showcasePreset",settings.showcasePreset);
     settings.characterPresentation.backgroundEnabled=data.value("background",settings.characterPresentation.backgroundEnabled);
     settings.characterPresentation.platformEnabled=data.value("platform",settings.characterPresentation.platformEnabled);
@@ -23,5 +28,6 @@ inline void decodeLevelRenderSettings(RenderSettings& settings,const nlohmann::j
     settings.outline.depthThreshold=data.value("outlineDepth",settings.outline.depthThreshold);settings.outline.normalThreshold=data.value("outlineNormal",settings.outline.normalThreshold);settings.outline.color=data.value("outlineColor",settings.outline.color);
     settings.stylizedLightingEnabled=data.value("stylized",settings.stylizedLightingEnabled);settings.innerOutlineEnabled=data.value("innerOutline",settings.innerOutlineEnabled);settings.silhouetteOutlineEnabled=data.value("silhouetteOutline",settings.silhouetteOutlineEnabled);
     validateRenderSettings(settings);
+    target=settings;
 }
 }

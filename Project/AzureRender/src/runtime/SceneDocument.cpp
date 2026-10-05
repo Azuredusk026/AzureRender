@@ -73,6 +73,9 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
            << "shadowMaximumFilterRadiusTexels "
            << document.renderSettings.shadow.maximumFilterRadiusTexels << '\n'
+           << "cameraNear " << document.renderSettings.cameraNear << '\n'
+           << "cameraFar " << document.renderSettings.cameraFar << '\n'
+           << "shadowDistance " << document.renderSettings.shadowDistance << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -218,6 +221,12 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             throw std::runtime_error(
                 "Missing .azscene shadowMaximumFilterRadiusTexels");
         }
+    }
+    if (renderSettingsVersion >= 8) {
+        if (!(input >> key >> document.renderSettings.cameraNear) || key!="cameraNear"
+            || !(input >> key >> document.renderSettings.cameraFar) || key!="cameraFar"
+            || !(input >> key >> document.renderSettings.shadowDistance) || key!="shadowDistance")
+            throw std::runtime_error("Invalid .azscene camera or shadow range");
     }
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)

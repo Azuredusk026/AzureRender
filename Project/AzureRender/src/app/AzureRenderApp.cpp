@@ -409,6 +409,8 @@ void AzureRenderApp::buildRenderContext(
     context.computeSkinning =
         computeShaderSupported_ && !runOptions_.computeSkinningDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;
+    context.faceCullingEnabled = !runOptions_.qaDisableFaceCulling;
+    context.depthTestEnabled = !runOptions_.qaDisableDepthTest;
     context.gpuCulling = computeShaderSupported_ && indirectFirstInstanceSupported_
         && !runOptions_.gpuCullingDisabled;
     context.multiDrawIndirect = multiDrawIndirectSupported_ && !runOptions_.multiDrawIndirectDisabled;

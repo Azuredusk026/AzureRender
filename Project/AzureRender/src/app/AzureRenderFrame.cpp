@@ -1,6 +1,7 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "render/CameraProjection.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
 #endif
@@ -321,8 +322,8 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     auto& editorContext = runOptions_.editorSession->context();
-    editorContext.setDebugProjection(multiply(perspective(3.14159265358979323846F/3,
-        static_cast<float>(renderExtent_.width)/renderExtent_.height,.1F,1000),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
+    editorContext.setDebugProjection(multiply(azurerender::characterProjection(renderSettings_,
+        static_cast<float>(renderExtent_.width)/renderExtent_.height),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
         azurerender::RuntimeDiagnostics::instance().print(
@@ -346,14 +347,13 @@ void AzureRenderApp::updateGizmoScreenData() {
     }
     Matrix4 currentModel{};
     std::memcpy(currentModel.data(), sceneState->modelMatrix, sizeof(Matrix4));
-    constexpr float kPi = 3.14159265358979323846F;
     const float aspect =
         static_cast<float>(renderExtent_.width)
         / static_cast<float>(renderExtent_.height);
     const Matrix4 view = lookAt(
         cameraPosition_, cameraTarget_, {0.0F, 1.0F, 0.0F});
     const Matrix4 projection =
-        perspective(kPi / 3.0F, aspect, 0.1F, 100.0F);
+        azurerender::characterProjection(renderSettings_,aspect);
     const Matrix4 viewProj = multiply(projection, view);
     const std::array<float, 3>& translation =
         editorContext.gizmoTranslation();

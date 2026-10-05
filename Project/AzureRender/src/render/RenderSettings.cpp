@@ -129,6 +129,9 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 7) {
         settings.shadow = {};
     }
+    if (sourceSchemaVersion < 8) {
+        settings.cameraNear=.1F;settings.cameraFar=100;settings.shadowDistance=100;
+    }
     validateRenderSettings(settings);
     return settings;
 }
@@ -180,6 +183,12 @@ void validateRenderSettings(const RenderSettings& settings) {
     }
 
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
+    requireRange(settings.cameraNear,.01F,10,"cameraNear");
+    requireRange(settings.cameraFar,.01F,5000,"cameraFar");
+    requireRange(settings.shadowDistance,.01F,5000,"shadowDistance");
+    if (settings.cameraNear>=settings.cameraFar || settings.shadowDistance<=settings.cameraNear
+        || settings.shadowDistance>settings.cameraFar)
+        throw std::invalid_argument("Camera requires near < shadowDistance <= far");
     requireRange(
         settings.diffuseBandThreshold,
         0.05F,

@@ -108,6 +108,11 @@ void AzureRenderApp::writeCaptureManifest(
         << qaEffectStateName_ << '|'
         << qaIsolationName_ << '|'
         << renderSettings_.diagnosticView << '|'
+        << runOptions_.qaDisableFaceCulling << '|'
+        << runOptions_.qaDisableDepthTest << '|'
+        << renderSettings_.cameraNear << '|'
+        << renderSettings_.cameraFar << '|'
+        << renderSettings_.shadowDistance << '|'
         << qaIsolationMode_ << '|'
         << qaEffectMode_ << '|'
         << qaEffectEnabled_ << '|'
@@ -282,6 +287,11 @@ void AzureRenderApp::writeCaptureManifest(
         << std::quoted(qaEffectStateName_) << ",\n"
         << "  \"qaIsolation\": "
         << std::quoted(qaIsolationName_) << ",\n"
+        << "  \"qaDisableFaceCulling\": " << (runOptions_.qaDisableFaceCulling ? "true" : "false") << ",\n"
+        << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
+        << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"
+        << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
+        << "  \"shadowDistance\": " << renderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"

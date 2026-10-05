@@ -11,6 +11,7 @@ namespace azurerender::internal {
 
 using Matrix4 = std::array<float, 16>;
 using Vector3 = std::array<float, 3>;
+inline constexpr float kCharacterLensScale=1.6F;
 
 inline Matrix4 multiply(const Matrix4& left, const Matrix4& right) {
     Matrix4 result{};
@@ -191,7 +192,7 @@ inline Vector3 pickRayDirection(
     const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
     const Vector3 right = normalize(cross(forward, worldUp));
     const Vector3 up = cross(right, forward);
-    const float tanHalfFov = std::tan(kPi / 6.0F);
+    const float tanHalfFov = std::tan(kPi / 6.0F)/kCharacterLensScale;
     const float ndcX = viewportU * 2.0F - 1.0F;
     const float ndcY = 1.0F - viewportV * 2.0F;
     return normalize({

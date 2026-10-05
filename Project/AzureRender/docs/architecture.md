@@ -457,7 +457,7 @@ flowchart TB
 | 契约 | 当前版本 |
 | --- | ---: |
 | `ISceneRenderer` API | 1 |
-| `RenderSettings` | 7 |
+| `RenderSettings` | 8 |
 | `.azscene` | 3 |
 | glTF Material Profile | 1 |
 | Face SDF Profile | 1 |

@@ -427,7 +427,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO};
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
     rasterizer.cullMode = desc.cullMode;
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+    rasterizer.frontFace = desc.frontFace;
     rasterizer.lineWidth = 1.0F;
     if (desc.depthBias) {
         rasterizer.depthBiasEnable = VK_TRUE;

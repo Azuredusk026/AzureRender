@@ -62,7 +62,8 @@ def create(root, primary=None):
     for i,p in enumerate(([-14,.45,-50],[14,.45,-130],[-14,.45,-210])):
         instances.append({'instance':'artifact-'+str(i),'asset':'assets:/prefabs/collectible.azureprefab',
             'overrides':{'body':{'components':{'azure.transform':{'data':{'translation':p}}}}}})
-    level={'schemaVersion':1,'id':'exploration','sceneType':'character','renderSettings':{'platform':False},
+    level={'schemaVersion':1,'id':'exploration','sceneType':'character',
+        'renderSettings':{'platform':False,'cameraNear':.1,'cameraFar':500,'shadowDistance':100},
         'resources':base['resources'][1:],'nodes':nodes,'prefabs':instances}
     write(assets/'exploration.azurelevel',level)
     for path in (SOURCE/'playable_rules').iterdir(): shutil.copy2(path,assets/path.name)

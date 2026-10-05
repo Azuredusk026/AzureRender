@@ -22,11 +22,14 @@ int main() {
   registry.decode("azure.transform", &copy, {{"type","azure.transform"},{"version",0},{"data",{{"position",{4,5,6}}}}});
   check(copy.translation[0] == 4 && copy.translation[2] == 6);
   for (auto bad : {nlohmann::json{{"type","azure.transform"},{"version",2},{"data",{}}},
-                  nlohmann::json{{"type","azure.transform"},{"version",1},{"data",{{"translation",{10,20,30}},{"scale",{-1,1,1}}}}},
+                  nlohmann::json{{"type","azure.transform"},{"version",1},{"data",{{"translation",{10,20,30}},{"scale",{0,1,1}}}}},
                   nlohmann::json{{"type","azure.transform"},{"version",1},{"data",{{"typo",1}}}}}) {
    bool rejected=false;try { registry.decode("azure.transform",&copy,bad); } catch (const std::exception&) { rejected=true; }
    check(rejected && copy.translation[0] == 4);
   }
+  registry.decode("azure.transform", &copy, {{"type","azure.transform"},{"version",1},
+      {"data",{{"scale",{-1,2,3}}}}});
+  check(copy.scale[0]==-1 && copy.scale[1]==2);
   bool duplicate=false;try { registry.addType(type); } catch (const std::exception&) { duplicate=true; }check(duplicate);
   std::cout << "Reflection roundtrip, metadata, migration and transactional validation passed\n";
  } catch (const std::exception& e) { std::cerr << e.what() << '\n';return 1; }

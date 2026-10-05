@@ -1,0 +1,26 @@
+{
+  "status": "failed",
+  "surfacePixels": {
+    "positive": 39244,
+    "mirror": 39244,
+    "double-mirror": 39244,
+    "baked-mirror": 39244,
+    "back": 0,
+    "double-sided-back": 39244,
+    "far": 4696,
+    "far-clipped": 0,
+    "depth": 832,
+    "transparent": 15326,
+    "transparent-mirror": 15326
+  },
+  "visibilityMeanDifference": [
+    0.0,
+    0.0
+  ],
+  "normalMeanDifference": 0.0,
+  "tangentMeanDifference": 34.666666666666664,
+  "validationErrors": 0,
+  "failures": [
+    "runtime mirror tangent handedness differs from baked mirror: 34.666666666666664"
+  ]
+}

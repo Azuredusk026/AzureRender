@@ -1,0 +1,41 @@
+{
+  "reason": "Correct glTF CCW front-face winding changes visible cube surfaces and the silhouette shell.",
+  "strictToleranceUnchanged": true,
+  "cases": [
+    {
+      "name": "character_beauty_fullbody",
+      "oldSha256": "3493ef0c198db8651b1162c23f36ad078fa0a66b586ee4f0526a718c0412f5c4",
+      "newSha256": "86e1c437ec29aa1ece304daf8c17f978e9e0a37ddd6855585656800c3d3bd3f5"
+    },
+    {
+      "name": "character_albedo_fullbody",
+      "oldSha256": "70af1492c410062649e0bd6fdfd67791aa1d97a85cc2e60c7f664fc957ba2ca9",
+      "newSha256": "c7c3322828f7464e229576d92178aa69d7dfa3a30909a8bd9ba87e5b9ae691e3"
+    },
+    {
+      "name": "character_world_normal_fullbody",
+      "oldSha256": "6332b365217677be6696071ad85b6ef8972702d06fc6da93b89d6a0e0ddaeea8",
+      "newSha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+    },
+    {
+      "name": "character_material_id_fullbody",
+      "oldSha256": "c6207d84002cf55103f60d6dd2507cdb79fd444fbafe405ed5397c1453336375",
+      "newSha256": "96f95bf4511edbb8aea4b5ec9c8eea8f0853648dc314db5a5318bd7a71d590bf"
+    },
+    {
+      "name": "character_outline_fullbody",
+      "oldSha256": "f69ab63459eff88a5bf7f132e476f4563f4b4c810bf5d47707e96357a7afc917",
+      "newSha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+    },
+    {
+      "name": "character_direct_diffuse_fullbody",
+      "oldSha256": "58e526dac60ea35f536157c4261c43ef20548c9238f7cf680abe0b28963fbde4",
+      "newSha256": "feadd9f5ee66c08607fdc5a11f3ba35665d0230df61cb07c81f8f84c918a2acb"
+    },
+    {
+      "name": "character_face_sdf_closeup",
+      "oldSha256": "44050e7142cc118cf19be87fb2becba060c676c1e456b9d835fed2361f3887ff",
+      "newSha256": "eb58ceac8bbeb29e28ff2984188f9e31a54c45aadae2f8227dd55ac3e030c01c"
+    }
+  ]
+}

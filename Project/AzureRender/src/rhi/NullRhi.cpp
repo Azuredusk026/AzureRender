@@ -254,6 +254,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
     const VkPipeline pipeline = mint<VkPipeline>("createGraphicsPipeline");
     calls.back().detail +=
         " cull=" + std::to_string(desc.cullMode)
+        + " front=" + std::to_string(desc.frontFace)
         + " blend=" + std::to_string(desc.alphaBlend)
         + " depth=" + std::to_string(desc.depthTest)
         + "/" + std::to_string(desc.depthWrite);

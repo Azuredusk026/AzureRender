@@ -1,7 +1,7 @@
 # R6 与 G7 可玩表现实施计划
 
 > 文档类型：阶段计划
-> 状态：R6 Active，G7 Planned
+> 状态：R6 Complete，G7 Active
 > 更新日期：2026-10-05
 > 适用范围：公开角色、场景可见性、角色输入与独立 Player
 > 需求依据：[编辑器与可玩体验优化计划](2026-10-05-quality-round.md)
@@ -35,23 +35,23 @@
 | 新增 | `tools/create_visibility_fixture.py`、`tools/test_scene_visibility_gpu.py` | 公共最小场景与图像断言 |
 | 修改 | `tests/SceneGraphTests.cpp`、`tests/NullRhiPassTests.cpp`、`CMakeLists.txt` | CPU、管线与 GPU 回归登记 |
 
-拟增加 `GraphicsPipelineDesc::frontFace`，默认顺时针。运行期镜像变换选择对应正面绕序，材质保留其剔除语义。导入时烘焙的镜像变换单独核验索引。描边、阴影与透明排序使用同一变换契约。
+`GraphicsPipelineDesc::frontFace`，默认顺时针。运行期镜像变换选择对应正面绕序，材质保留其剔除语义。导入时烘焙的镜像变换单独核验索引。描边、阴影与透明排序使用同一变换契约。
 
-拟增加关卡字段 `cameraNear`、`cameraFar` 和 `shadowDistance`。默认值分别为 0.1、100 和 100。探索关卡候选值为 0.1、500 和 100。主视锥、聚簇灯光、编辑器拾取与 GPU 剔除读取一致的投影。
+关卡字段 `cameraNear`、`cameraFar` 和 `shadowDistance`。默认值分别为 0.1、100 和 100。探索关卡值为 0.1、500 和 100。主视锥、聚簇灯光、编辑器拾取与 GPU 剔除读取一致的投影。
 
 校验要求 0.01 ≤ near ≤ 10，near < far ≤ 5000。阴影距离满足 near < shadowDistance ≤ far。缺少字段的关卡使用默认值。无效候选保留活动场景与历史。
 
 ## R6 实施步骤
 
-- [ ] 保存用户场景与六组定点复现，登记对象及区域掩码。
-- [ ] 增加失败断言，覆盖负缩放、动画边界、近裁剪与远物体。
-- [ ] 逐项验证剔除、深度及变换假设，记录实际根因。
-- [ ] 实现对应修复与相机范围契约，复测默认通道。
-- [ ] 运行 CPU/GPU、透明、阴影、描边、固定描述符与性能回归。
-- [ ] 同步 `docs/runtime/scene-visibility.md`、渲染文档和 R6 证据。
-- [ ] 审核参考图、源码、清单与暂存范围，提交 R6。
+- [x] 保存用户场景与六组定点复现，登记对象及区域掩码。
+- [x] 增加失败断言，覆盖负缩放、动画边界、近裁剪与远物体。
+- [x] 逐项验证剔除、深度及变换假设，记录实际根因。
+- [x] 实现对应修复与相机范围契约，复测默认通道。
+- [x] 运行 CPU/GPU、透明、阴影、描边、固定描述符与性能回归。
+- [x] 同步 `docs/runtime/scene-visibility.md`、渲染文档和 R6 证据。
+- [x] 审核参考图、源码、清单与暂存范围，提交 R6。
 
-专项测试拟注册为 `AzureRender.SceneVisibilityGpu`，GPU 串行。公共夹具包含正缩放、单轴镜像、双轴镜像与非均匀缩放。另包含双面薄片、透明叠层、蒙皮角色和视锥边界对象。
+专项测试注册为 `AzureRender.SceneVisibilityGpu`，GPU 串行。公共夹具包含正缩放、单轴镜像、双轴镜像与非均匀缩放。另包含双面薄片、透明叠层、蒙皮角色和视锥边界对象。
 
 每个目标记录预期可见区域、可见面和深度顺序。无遮挡且相距足够的对象必须出现。比较 CPU 与 GPU 默认输出，报告物体身份与失败区域。诊断开关造成的预期差异单独登记。
 
@@ -98,7 +98,7 @@
 
 ## 验收命令与提交
 
-以下两个专项工具与对应测试属于待实施产物。
+R6 专项工具已验收。G7 专项工具随该阶段实施。
 
 ```powershell
 python tools/test_scene_visibility_gpu.py --executable build/ninja-msvc-release/AzureRender.exe --output build/r6/visibility
