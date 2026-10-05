@@ -71,3 +71,5 @@ if find portfolio/images -type f | \
 fi
 
 git diff --check
+
+python tools/audit_repository.py --source ../.. --output build/repository-audit.json

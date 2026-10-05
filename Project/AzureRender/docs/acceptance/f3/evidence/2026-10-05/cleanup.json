@@ -1,0 +1,86 @@
+[
+  {
+    "path": ".codemaker/codemap/crash.log",
+    "sha256": "1aae20b4bd346d09545833a2e2c5850fc6c095ef9f9c8d65f5b04cd91381ec5f",
+    "bytes": 6761,
+    "operation": "untrack-cache",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": ".codemaker/codemap/merkle.dat",
+    "sha256": "e185e8085b1b8512765775d700eca4c5de2304f9e0c0e126e2029fa77963c3c6",
+    "bytes": 49528,
+    "operation": "untrack-cache",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": ".codemaker/codemap/meta.json",
+    "sha256": "1ee0cf76eccb0352275e372e0979ecd8673eeebe0aad3efd3cd25556a03f7572",
+    "bytes": 321,
+    "operation": "untrack-cache",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": ".codemaker/codemap/serve.log",
+    "sha256": "9fe487a28c31d7be599e27138225c3acd035232d4d26624043f895a55ebd4c27",
+    "bytes": 6666148,
+    "operation": "untrack-cache",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": ".codemaker/codemap/writer.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "operation": "untrack-cache",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/DEVELOPMENT_ENVIRONMENT_CN.md",
+    "sha256": "936927eb21e89e08b30f04b7edfc20e46ccfb771d7dceec71ce1da139d138fcd",
+    "bytes": 2787,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/MASTER_DEVELOPMENT_PLAN_CN.md",
+    "sha256": "5442a3185ebfc3a1df760975e6676faf4eaab1f6831f103eabbb240f87420f37",
+    "bytes": 41457,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/PROJECT_HANDOFF_CN.md",
+    "sha256": "ee91b34268d4a33720161286fc9aafa182fbd57990febd23bba8f080058fcfc2",
+    "bytes": 28819,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/PROJECT_STRUCTURE_CN.md",
+    "sha256": "60c7eb93d879c85fe4d95333204e148972b07d5df6413d4d94eba54195693527",
+    "bytes": 8659,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/PROJECT_SUMMARY_CN.md",
+    "sha256": "91c5dd98c893da4a23d811453f4733ea8a39d0fb06fe352e1e97fec2f7f12e99",
+    "bytes": 5546,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/RENDERER_MODULARIZATION_PLAN_CN.md",
+    "sha256": "742ba49ab0bd844a880a7fbd1e1acd5164833f6c01936ce8fd54c88d6371250a",
+    "bytes": 4696,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  },
+  {
+    "path": "Project/AzureRender/docs/archive/legacy/SCENE_RENDERER_COOKBOOK_CN.md",
+    "sha256": "38e41abdd51b7ac0da3aba38b41b7808e5c9681c7238611aabca47959a959d4b",
+    "bytes": 10387,
+    "operation": "delete-obsolete-document",
+    "restoreCommit": "aa9e0f1"
+  }
+]

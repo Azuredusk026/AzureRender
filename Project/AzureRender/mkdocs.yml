@@ -43,6 +43,10 @@ nav:
   - 开发规范: documentation-standard.md
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
+      - 编辑器与可玩体验优化: plans/2026-10-05-quality-round.md
+      - F3 仓库与文档基础: plans/2026-10-05-repository-plan.md
+      - R6 与 G7 可玩表现: plans/2026-10-05-playable-quality-plan.md
+      - U2 编辑器工作区: plans/2026-10-05-editor-ui-plan.md
       - 第三人称角色与可玩关卡计划: plans/third-person-playable-plan.md
       - G0 引擎基础计划: plans/g0-implementation.md
       - U0 编辑器与界面计划: plans/u0-implementation.md

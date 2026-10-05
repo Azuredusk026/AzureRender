@@ -48,6 +48,14 @@ int main() {
   auto settle=[&]{const auto end=std::chrono::steady_clock::now()+std::chrono::seconds(5);bool committed=false;
     do{committed=session.poll()||committed;std::this_thread::yield();}while(session.loading()&&std::chrono::steady_clock::now()<end);check(!session.loading());return committed;};
   check(settle() && runtime.snapshotScene().nodes[0].translation[0]==7);
+  // A file edited after the active database snapshot must not prevent a
+  // freshly prepared destination from committing.
+  write(root/"assets/moved.txt","edited-before-switch");
+  session.request("assets:/startup.azscene");
+  check(settle() && session.currentReference()=="assets:/startup.azscene");
+  check(session.assets().readSource(id)=="edited-before-switch");
+  write(root/"assets/moved.txt","second");session.assets().refresh(true);
+  session.request("assets:/start.azurelevel");check(settle());
   session.preload("assets:/startup.azscene");settle();
   check(session.preloaded("assets:/startup.azscene"));
   int uploadPolls=0;

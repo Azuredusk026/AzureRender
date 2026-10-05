@@ -86,6 +86,14 @@ bool LevelSession::poll() {
         if(preparing_){
             if(!upload_ || upload_(preparing_->level)){
                 if(preparing_->refresh){auto candidate=std::move(*preparing_);preparing_.reset();return accept(std::move(candidate));}
+                // A freshly scanned request owns the current database snapshot.
+                // Comparing it with the active snapshot would reject legitimate
+                // edits made before switching and restart preparation forever.
+                if(pending_ && *pending_==preparing_->reference
+                    && (!ready_ || ready_(preparing_->level))){
+                    auto candidate=std::move(*preparing_);preparing_.reset();
+                    pending_.reset();return accept(std::move(candidate));
+                }
                 if(prepared_.size()>=2)prepared_.erase(prepared_.begin());
                 const auto reference=preparing_->reference;
                 prepared_.insert_or_assign(reference,std::move(*preparing_));preparing_.reset();

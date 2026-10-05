@@ -2,7 +2,7 @@ name: AzureRender CI
 
 on:
   push:
-    branches: [dev, main]
+    branches: [dev, engine-dev, main]
   pull_request:
   workflow_dispatch:
 
@@ -96,6 +96,7 @@ jobs:
           $tests = Get-Content build/ci/test-discovery.json -Raw | ConvertFrom-Json
           if ($tests.tests.name -notcontains 'AzureEngine.BuildProvenance') { throw 'Required public test missing' }
           if ('${{ matrix.configuration }}' -eq 'Release' -and $tests.tests.name -notcontains 'AzureEngine.GamePackage') { throw 'Release game package test missing' }
+          if ('${{ matrix.configuration }}' -eq 'Release' -and $tests.tests.name -notcontains 'AzureEngine.PlayablePackage') { throw 'Release playable package test missing' }
           ctest --test-dir build/ci -C ${{ matrix.configuration }} -LE gpu --output-on-failure
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cmake --install build/ci --config ${{ matrix.configuration }} --prefix build/ci/install

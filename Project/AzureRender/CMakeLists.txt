@@ -385,6 +385,7 @@ if(BUILD_TESTING)
     target_link_libraries(AzureReflectionTests PRIVATE AzureReflection)
     add_test(NAME AzureEngine.Reflection COMMAND AzureReflectionTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME AzureEngine.RepositoryAudit COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_repository_audit.py")
     add_test(NAME AzureEngine.AnimationRetarget COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_animation_retarget.py")
     add_test(NAME AzureEngine.SourceSkinRestore COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_skin_restore.py")
     add_test(NAME AzureEngine.GamePackageRules COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package_rules.py")
@@ -1085,7 +1086,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
@@ -1100,3 +1101,9 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/build-reproducibility.md
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/exploration-gameplay.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/playable-performance.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/u0-implementation.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/p0-implementation.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/third-person-playable-plan.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-quality-round.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-repository-plan.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-playable-quality-plan.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-05-editor-ui-plan.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")

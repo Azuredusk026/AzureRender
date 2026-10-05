@@ -1,16 +1,7 @@
-/.idea/
-/.workbuddy/
-/build/
+# Project-local generated directories
 /vcpkg_installed/
-/cmake-build-*/
-/out/
-/captures/
 /dist/
 /site/
+
+# Editor workspace state
 /azurerender-editor.ini
-*.user
-*.suo
-*.VC.db
-*.dll
-*.exe
-*.pdb

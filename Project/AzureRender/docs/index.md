@@ -1,12 +1,10 @@
 # AzureRender
 
-AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo 的包装。项目提供一个公共宿主，让不同场景和不同 Shader 组合可以共用底层渲染资源。
+AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
 
-项目目前有两个主要场景。Character 使用传统光栅路径，包含网格、材质、透明层和阴影。Blackhole 使用全屏数值积分、时间累积和 HDR 合成。
+首次使用请阅读 [构建与使用](getting-started.md)。制作关卡请阅读 [编辑器操作指南](runtime/editor-game-ui.md)。运行和交付见 [探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。
 
-两个场景共用窗口、设备、Swapchain 和公共 Attachment，也共用最终合成、Capture、GPU Timing 和编辑器。各场景单独管理自己的 Pipeline、Descriptor 和算法状态。
-
-![AzureRender 黑洞场景](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
+![公开黑洞场景](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
 
 ## 能力总览
 
@@ -23,7 +21,7 @@ AzureRender 是一个原生 Vulkan 实时渲染器。它不是单个 Shader Demo
 
 ## 开发路线
 
-当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 为 Complete，其余第三人称阶段为 Planned。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1 及 F3 已完成，R6 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 
 ## 原生 Vulkan 的边界
 

@@ -1,0 +1,13 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 14: AzureEngine.AssetLevel
+1/2 Test #14: AzureEngine.AssetLevel ...........   Passed    0.40 sec
+    Start 31: AzureEngine.EditorHost
+2/2 Test #31: AzureEngine.EditorHost ...........   Passed    3.38 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+gpu    =   3.38 sec*proc (1 test)
+
+Total Test time (real) =   3.79 sec

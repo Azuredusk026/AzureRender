@@ -1,55 +1,73 @@
 # AzureRender
 
-AzureRender 是一个用 C++17 和原生 Vulkan API 编写的实时渲染器。角色渲染和黑洞模拟共用同一个宿主。项目还提供 ImGui 编辑器、确定性捕获、诊断视图和 GPU 计时工具。场景可以通过进程内 Renderer SDK 接入。
+AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Windows 编辑器支持关卡制作、动画、物理、Lua 与游戏构建。独立 Player 运行公开探索关卡，完成任务、切关与重开。
 
-> **English summary:** AzureRender is a real-time renderer written with C++17 and the native Vulkan API. One host runs both the stylized character renderer and the relativistic black-hole simulation. The project also includes an editor, deterministic capture, diagnostics and GPU timing.
+![公开黑洞场景](Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
 
-![AzureRender black-hole scene](https://raw.githubusercontent.com/Azuredusk026/AzureRender/main/Project/AzureRender/portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png)
+展示图使用公开资产，捕获来源见 [展示清单](Project/AzureRender/portfolio/portfolio_manifest.json)。
 
-## 文档
+## 从这里开始
 
-完整技术文档发布在 [AzureRender GitHub Pages](https://azuredusk026.github.io/AzureRender/)。仓库内入口：
+| 目标 | 入口 |
+| --- | --- |
+| 运行公开演示 | [第三人称探索关卡](Project/AzureRender/docs/runtime/exploration-gameplay.md) |
+| 构建编辑器与 Player | [构建与使用](Project/AzureRender/docs/getting-started.md) |
+| 学习关卡制作 | [编辑器操作指南](Project/AzureRender/docs/runtime/editor-game-ui.md) |
+| 构建独立游戏包 | [Windows 游戏发布](Project/AzureRender/docs/runtime/game-publishing.md) |
 
-1. [项目总览](Project/AzureRender/docs/index.md)
-2. [构建与使用](Project/AzureRender/docs/getting-started.md)
-3. [渲染器架构与 Vulkan 实现](Project/AzureRender/docs/architecture.md)
-4. [风格化角色渲染](Project/AzureRender/docs/character-rendering.md)
-5. [黑洞模拟](Project/AzureRender/docs/blackhole-rendering.md)
-6. [资产、场景与编辑器](Project/AzureRender/docs/assets-and-editor.md)
-7. [开发、测试与发布](Project/AzureRender/docs/development-and-release.md)
-8. [参数与接口参考](Project/AzureRender/docs/reference.md)
-9. [开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)
-10. [第三人称角色与可玩关卡计划](Project/AzureRender/docs/plans/third-person-playable-plan.md)
+## 当前能力
 
-当前开发路线覆盖莱万汀外观、真实 idle/walk、基础 3C 与交互关卡。F1、R5、G5、G6、U1、F2、P1 全部完成。交付与实测范围见 [P1 验收](Project/AzureRender/docs/acceptance/p1/2026-10-05.md)。
+| 模块 | 已实现能力 |
+| --- | --- |
+| 渲染 | glTF 材质、独立蒙皮、光照、级联阴影、透明、描边与黑洞场景 |
+| 运行时 | ECS、反射、UUID 资产、关卡、Prefab、Jolt、Lua、声音与 RmlUi |
+| 编辑器 | 层级、属性、导入、撤销、预览、运行调试、保存与构建 |
+| 发布 | 可移动 Windows x64 Player、依赖、许可与 SHA-256 清单 |
 
-历史计划、阶段验收和原始 DOCX 位于 `Project/AzureRender/docs/archive/`，不作为当前实现依据。
+## 构建与运行
+
+在 Windows 安装 MSVC、CMake、Ninja、Vulkan SDK 与 vcpkg。设置工具链路径后，在工程目录执行以下命令。
+
+```powershell
+cd Project/AzureRender
+$env:VULKAN_SDK = "C:/VulkanSDK/1.4.350.0"
+$env:VCPKG_ROOT = "C:/path/to/vcpkg"
+./tools/msvc_env.bat cmake --preset msvc-release
+./tools/msvc_env.bat cmake --build --preset msvc-release
+./build/ninja-msvc-release/AzureRender.exe --editor-project assets_public/exploration/project.azureproject
+```
+
+将 vcpkg 路径替换为本机安装目录。制作项目时将公开示例复制到可写工作目录。完整参数和环境要求见 [构建与使用](Project/AzureRender/docs/getting-started.md)。
+
+## 验证范围
+
+| 环境 | 已验证范围 |
+| --- | --- |
+| Windows x64、RTX 4060 Laptop | 1080p 标准负载、完整任务、独立发布与长跑 |
+| Windows x64、Intel 核显 | 540p 完整任务、两次重开与退出释放 |
+| Ubuntu 24.04 CI | 构建、公共软件渲染回归与文档检查 |
+
+本机交付证据见 [P1 验收](Project/AzureRender/docs/acceptance/p1/2026-10-05.md)。设备与质量配置共同定义兼容范围。
 
 ## 仓库结构
 
 ```text
-Project/AzureRender/        主工程、Shader、测试、工具和活动文档
-Project/AzureRender/docs/   GitHub Pages 文档源
-Project/AzureRender/portfolio/
-                            公共视觉证据和机器可读 Manifest
-AfterglowRender/            早期参考代码，仅保留为历史输入
+Project/AzureRender/src/          引擎、编辑器与 Player
+Project/AzureRender/shaders/      Vulkan 着色器
+Project/AzureRender/assets_public/ 公共模型、示例和许可
+Project/AzureRender/tests/        契约与回归测试
+Project/AzureRender/tools/        构建、导入、审计与验收工具
+Project/AzureRender/docs/         文档站与阶段证据
+Project/AzureRender/portfolio/    精选公共展示及来源清单
+.github/workflows/               构建与文档工作流
 ```
 
-## 快速构建
+## 开发路线与文档
 
-```powershell
-cd Project\AzureRender
+F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。当前执行 R6 可见性，后续为 G7 方向与冲刺、U2 工作区、P2 最终交付。
 
-$env:VULKAN_SDK = "C:\VulkanSDK\1.4.350.0"
-$env:VCPKG_ROOT = "C:\path\to\vcpkg"
+[开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)管理阶段状态。[优化实施计划](Project/AzureRender/docs/plans/2026-10-05-quality-round.md)列出任务和验收。[文档站](https://azuredusk026.github.io/AzureRender/)提供主题说明。
 
-.\tools\msvc_env.bat cmake --preset msvc-debug
-.\tools\msvc_env.bat cmake --build --preset msvc-debug
-.\build\ninja-msvc-debug\AzureRender.exe --smoke-frames 120
-```
+## 资产与许可
 
-项目直接实现 Vulkan 后端、场景架构和 Shader 算法。GLFW 和 Dear ImGui 负责窗口与界面。tinygltf、stb 和 nlohmann/json 负责解析资产和 JSON。它们不接管渲染核心。
-
-## 资产边界
-
-`Project/AzureRender/assets_public/` 可以进入 CI 和发布包。`assets_private/` 中的模型、纹理和派生媒体不能提交或公开，也不能进入安装包。公开回归和作品集只能使用许可明确的公共资产。
+公开资产、示例和展示媒体使用其随附许可。私有主角及派生素材按本机授权范围保存。第三方许可见 [THIRD_PARTY_NOTICES.md](Project/AzureRender/THIRD_PARTY_NOTICES.md)。
