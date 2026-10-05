@@ -4,7 +4,10 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 首次使用请阅读[构建与使用](getting-started.md)。制作关卡请阅读[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。运行和交付见[探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。
 
-![编辑器工作区与公开探索关卡](tutorials/images/workspace.png)
+![编辑器工作区与公开探索关卡](media/editor-workspace.png)
+
+公开场景由 Release 构建捕获。设备为 RTX 4060 Laptop，分辨率为 1920×1080。编辑器与探索场景采用 100 实体负载。
+
 
 ## 能力总览
 
@@ -19,9 +22,19 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 | 游戏运行时 | UUID 资产、版本化关卡、Prefab、Jolt 物理、Lua 脚本与独立 Player |
 | 游戏表现与发布 | RmlUi、动画状态机、miniaudio、公开游戏模板与 Windows 游戏包 |
 
+## 公开探索项目
+
+![机器人侧面行走](media/robot-walk-side.png)
+
+公开机器人按角色速度驱动语义动画。WASD 控制方向，Shift 加速。
+
+![探索关卡与任务界面](media/exploration.png)
+
+探索关卡包含交互、收集、门、检查点和终点。运行入口见[探索关卡说明](runtime/exploration-gameplay.md)。
+
 ## 开发路线
 
-当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7 和 U2 已完成，P2 为 Active。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7、U2 和 P2 已完成。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 
 ## 原生 Vulkan 的边界
 

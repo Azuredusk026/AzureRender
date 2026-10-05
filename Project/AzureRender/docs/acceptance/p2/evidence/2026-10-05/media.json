@@ -1,35 +1,8 @@
 {
-  "format": "AzureRender portfolio evidence v2",
-  "generatedDate": "2026-10-05",
+  "passed": true,
   "publicAssetsOnly": true,
+  "sourceHash": "24e048cac46dbf56b7a6a223e013e70e8a93a0d607acf8d804b7517b5aeb238b",
   "artifacts": [
-    {
-      "scene": "blackhole",
-      "role": "temporal-beauty",
-      "path": "portfolio/images/blackhole/blackhole_temporal_beauty_v1_1280x720.png",
-      "width": 1280,
-      "height": 720,
-      "bytes": 341371,
-      "sha256": "E750F12A7D585CCBD0613ECC2D6A50BC95103E8F8F41B532FC444448F910DC0C"
-    },
-    {
-      "scene": "character",
-      "role": "endfield-public-fullbody",
-      "path": "portfolio/images/character/character_endfield_public_fullbody_v1_1280x720.png",
-      "width": 1280,
-      "height": 720,
-      "bytes": 681829,
-      "sha256": "71A76FA98B9E291BBF119700E4DCE58C9E643D02E3A27F2BC75FED004BC6FAB5"
-    },
-    {
-      "scene": "character",
-      "role": "endfield-public-closeup",
-      "path": "portfolio/images/character/character_endfield_public_closeup_v1_1280x720.png",
-      "width": 1280,
-      "height": 720,
-      "bytes": 619607,
-      "sha256": "7FB1D2C98BF87062E78CC7F92601B8616191CEC16A4AFAB13721DFB9CAC896AF"
-    },
     {
       "scene": "editor",
       "role": "editor-final",
@@ -204,12 +177,5 @@
       "inputSha256": "9c6c028168f135fb5a0f35bf334ed805f7041661ad9156661f31fc70d968da43",
       "inputEvidencePath": "docs/acceptance/p2/evidence/2026-10-05/capture-exploration-input.json"
     }
-  ],
-  "evidence": [
-    "portfolio/evidence/blackhole/blackhole_temporal_v1_evidence.json",
-    "portfolio/evidence/character/character_endfield_public_v1_evidence.json",
-    "docs/acceptance/p2/evidence/2026-10-05/manifest.json"
-  ],
-  "assetNotice": "All tracked screenshots use public project assets. Private character assets and derived captures are excluded.",
-  "sourceHash": "24e048cac46dbf56b7a6a223e013e70e8a93a0d607acf8d804b7517b5aeb238b"
+  ]
 }

@@ -2,7 +2,10 @@
 
 AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Windows 编辑器支持关卡制作、动画、物理、Lua 与游戏构建。独立 Player 运行公开探索关卡，完成任务、切关与重开。
 
-![编辑器工作区与公开探索关卡](Project/AzureRender/docs/tutorials/images/workspace.png)
+![编辑器工作区与公开探索关卡](Project/AzureRender/portfolio/images/editor/editor_workspace_1920x1080.png)
+
+公开场景由 Release 构建捕获。设备为 RTX 4060 Laptop，分辨率为 1920×1080。编辑器与探索场景采用 100 实体负载。
+
 
 工作区截图使用公开探索资产。操作说明见[关卡制作教程](Project/AzureRender/docs/tutorials/editor-first-game.md)。精选渲染展示的来源见[展示清单](Project/AzureRender/portfolio/portfolio_manifest.json)。
 
@@ -47,7 +50,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 | Windows x64、Intel 核显 | 540p 完整任务、两次重开与退出释放 |
 | Ubuntu 24.04 CI | 构建、公共软件渲染回归与文档检查 |
 
-本机交付证据见 [P1 验收](Project/AzureRender/docs/acceptance/p1/2026-10-05.md)。设备与质量配置共同定义兼容范围。
+本机交付证据见 [P2 验收](Project/AzureRender/docs/acceptance/p2/2026-10-05.md)。设备与质量配置共同定义兼容范围。
 
 ## 仓库结构
 
@@ -66,7 +69,7 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。R6 场景可见性已验收。G7 方向与冲刺已验收。
 
-U2 工作区与教程已验收。当前执行 P2 最终交付。
+U2 工作区与教程、P2 展示与独立交付均已验收。
 
 [开发总计划](Project/AzureRender/docs/plans/azure-engine-plan.md)管理阶段状态。[优化实施计划](Project/AzureRender/docs/plans/2026-10-05-quality-round.md)列出任务和验收。[文档站](https://azuredusk026.github.io/AzureRender/)提供主题说明。
 

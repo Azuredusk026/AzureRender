@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "window": [
+    1920,
+    1080
+  ],
+  "mode": "Play",
+  "sceneExtents": [
+    [
+      1230,
+      759
+    ],
+    [
+      1230,
+      759
+    ],
+    [
+      1230,
+      759
+    ]
+  ],
+  "panelVisibility": {
+    "animation": true,
+    "assets": true,
+    "build": true,
+    "capture": true,
+    "console": true,
+    "gameplay-debug": true,
+    "inspector": true,
+    "outliner": true,
+    "viewport": true
+  },
+  "workspaceHash": "0b9fbe04c2a72f5e6bf16e032f3bcc51e7b450c9d6d5eecf2d61cd4fbc8c9499",
+  "layoutHash": "aec540f9d9e3dc54027db1622ef1300d8acd99fd71798f0f642b31df723f827a"
+}

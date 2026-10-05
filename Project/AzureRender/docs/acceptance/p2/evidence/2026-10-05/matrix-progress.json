@@ -1,0 +1,68 @@
+[
+  {
+    "log": "provenance-debug.log",
+    "startedUtc": "2026-10-05T14:19:55.577097+00:00",
+    "seconds": 10.906999999999243,
+    "exitCode": 0
+  },
+  {
+    "log": "regression-debug.log",
+    "startedUtc": "2026-10-05T14:20:06.477970+00:00",
+    "seconds": 367.26500000000124,
+    "exitCode": 0
+  },
+  {
+    "log": "release-gate.log",
+    "startedUtc": "2026-10-05T14:26:13.752770+00:00",
+    "seconds": 323.3130000000001,
+    "exitCode": 0
+  },
+  {
+    "log": "provenance-release.log",
+    "startedUtc": "2026-10-05T14:31:37.054846+00:00",
+    "seconds": 2.625,
+    "exitCode": 0
+  },
+  {
+    "log": "media.log",
+    "startedUtc": "2026-10-05T14:31:39.680480+00:00",
+    "seconds": 37.9369999999999,
+    "exitCode": 0
+  },
+  {
+    "log": "authoring.log",
+    "startedUtc": "2026-10-05T14:32:17.626840+00:00",
+    "seconds": 5.265999999999622,
+    "exitCode": 0
+  },
+  {
+    "log": "authoring-quest.log",
+    "startedUtc": "2026-10-05T14:32:22.885047+00:00",
+    "seconds": 4.79700000000048,
+    "exitCode": 0
+  },
+  {
+    "log": "performance.log",
+    "startedUtc": "2026-10-05T14:32:27.680325+00:00",
+    "seconds": 196.45299999999952,
+    "exitCode": 0
+  },
+  {
+    "log": "intel.log",
+    "startedUtc": "2026-10-05T14:35:44.140295+00:00",
+    "seconds": 11.875,
+    "exitCode": 0
+  },
+  {
+    "log": "zip.log",
+    "startedUtc": "2026-10-05T14:35:56.011936+00:00",
+    "seconds": 11.593999999999141,
+    "exitCode": 0
+  },
+  {
+    "log": "long-run.log",
+    "startedUtc": "2026-10-05T14:36:07.605344+00:00",
+    "seconds": 1805.0470000000005,
+    "exitCode": 0
+  }
+]

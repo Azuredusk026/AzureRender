@@ -1037,6 +1037,8 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r1/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r1")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/media/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/media" OPTIONAL)
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r2/2026-09-26.md"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/r2")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/r3/2026-10-03.md"
@@ -1113,7 +1115,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")

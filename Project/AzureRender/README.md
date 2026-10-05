@@ -2,7 +2,10 @@
 
 AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Windows 编辑器、独立 Player、资产管线和第三人称玩法。公开探索项目贯通制作、运行与游戏发布。
 
-![编辑器工作区与公开探索关卡](docs/tutorials/images/workspace.png)
+![编辑器工作区与公开探索关卡](docs/media/editor-workspace.png)
+
+公开场景由 Release 构建捕获。设备为 RTX 4060 Laptop，分辨率为 1920×1080。编辑器与探索场景采用 100 实体负载。
+
 
 截图展示公开探索项目。菜单、停靠面板和制作流程见[关卡制作教程](docs/tutorials/editor-first-game.md)。
 
@@ -51,7 +54,7 @@ cmake -DBUILD_DIR=build/ninja-msvc-release -DCONFIG=Release -P tools/run_release
 python tools/audit_repository.py --source ../.. --output build/repository-audit.json
 ```
 
-GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、隔离运行和许可清单。视觉与性能结果见[可玩关卡性能](docs/runtime/playable-performance.md)和 [P1 验收](docs/acceptance/p1/2026-10-05.md)。
+GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、隔离运行和许可清单。视觉与性能结果见[可玩关卡性能](docs/runtime/playable-performance.md)和 [P2 验收](docs/acceptance/p2/2026-10-05.md)。
 
 | 平台与设备 | 范围 |
 | --- | --- |
@@ -59,13 +62,23 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 | Windows x64、Intel 核显 | 540p 完整任务、重开与释放 |
 | Ubuntu 24.04 CI | 公共构建、软件渲染与文档回归 |
 
+## 公开游戏画面
+
+![机器人侧面行走](docs/media/robot-walk-side.png)
+
+侧面视角展示公开机器人的行走姿态。输入事件、角色场景和捕获帧进入展示清单。
+
+![探索关卡与任务界面](docs/media/exploration.png)
+
+探索场景展示主角、同伴、关卡与任务界面。图片来源见[展示清单](portfolio/portfolio_manifest.json)。
+
 ## 工程结构
 
 `src/` 保存模块实现，`shaders/` 保存 GLSL。`tests/` 保存契约测试，`tools/` 保存构建与验收工具。`docs/` 保存活动说明和阶段证据。`portfolio/` 保存精选公共图像及 manifest。
 
 ## 当前开发
 
-F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作区与教程已验收。当前执行 P2 展示与独立交付。
+F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作区与教程、P2 展示与独立交付均已验收。
 
 [总计划](docs/plans/azure-engine-plan.md)管理状态。[本轮实施步骤](docs/plans/2026-10-05-quality-round.md)定义任务与门禁。[CHANGELOG.md](CHANGELOG.md)记录阶段交付。
 

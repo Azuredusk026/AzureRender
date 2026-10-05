@@ -1,45 +1,37 @@
 # AzureRender 公开视觉证据
 
-本目录只保存可公开、可校验的代表图与机器可读证据。临时帧序列、调试 probe、私有角色截图和视频不进入 Git。
+本目录保存公开图片、捕获来源和 SHA-256 清单。精选图用于 README 与文档站。完整帧序列保存在本机生成目录。
 
-## 目录
+## 目录与来源
 
-```text
-portfolio/
-  images/
-    blackhole/   黑洞最终画面
-    character/   公共测试资产的角色 renderer 画面
-  evidence/
-    blackhole/   黑洞配置、确定性与性能摘要
-    character/   角色预设和视角摘要
-  portfolio_manifest.json
-```
+| 目录 | 内容 |
+| --- | --- |
+| `images/editor/` | 编辑器工作区 |
+| `images/gameplay/` | 机器人侧面行走与探索关卡 |
+| `images/character/` | 公开角色全身与近景 |
+| `images/blackhole/` | 黑洞渲染 |
+| `evidence/` | 角色与黑洞捕获摘要 |
+| `portfolio_manifest.json` | 图片尺寸、字节数、来源与哈希 |
 
-## 文件命名
+工作区、动作和探索图由 Release 构建捕获。设备为 RTX 4060 Laptop，尺寸为 1920×1080。每张图记录源码、运行文件、场景、输入与捕获参数。
 
-正式图像统一使用：
+公开图片使用项目公开资源。私有角色、授权动画与派生媒体保存在本机范围。图片路径包含场景、视角或用途及分辨率。哈希清单核验文件身份。
 
-```text
-<scene>_<view-or-purpose>_<look-or-technique>_v<NN>_<width>x<height>.png
-```
+## 图片索引
 
-禁止使用 `P1`、`S36`、`CQ0`、时间戳或 `final_final` 一类任务过程名称。版本号只在有意改变画面基准时递增。
+- `editor_workspace_1920x1080.png` 展示菜单、工具栏与停靠面板。
+- `robot_walk_side_1920x1080.png` 展示公开机器人的侧面行走姿态。
+- `exploration_1920x1080.png` 展示公开关卡与任务界面。
+- `character_endfield_public_fullbody_v1_1280x720.png` 展示全身视角。
+- `character_endfield_public_closeup_v1_1280x720.png` 展示近景视角。
+- `blackhole_temporal_beauty_v1_1280x720.png` 展示黑洞渲染。
 
-## 当前证据
+## 验证与阅读
 
-- `blackhole_temporal_beauty_v1_1280x720.png`：黑洞 TAA/bloom 最终 Beauty。
-- `character_endfield_public_fullbody_v1_1280x720.png`：公共资产全身视角。
-- `character_endfield_public_closeup_v1_1280x720.png`：公共资产近景视角。
-
-图片来自项目公共资产，不含 `assets_private/` 内容。具体参数和 SHA-256 见 `evidence/` 与 `portfolio_manifest.json`。
-
-## 校验
-
-从项目根执行：
+在工程目录执行图片与证据清单验证。
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass `
-  -File .\tools\verify_portfolio.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/verify_portfolio.ps1
 ```
 
-渲染架构、运行方法和开发发布流程分别见 `../docs/architecture.md`、`../docs/getting-started.md` 和 `../docs/development-and-release.md`。
+完整交付结果见[P2 验收](../docs/acceptance/p2/2026-10-05.md)。关卡制作见[使用教程](../docs/tutorials/editor-first-game.md)。渲染说明见[架构文档](../docs/architecture.md)。

@@ -1,0 +1,50 @@
+{
+  "commits": 40,
+  "switches": 20,
+  "restarts": 20,
+  "commitMilliseconds": {
+    "mean": 2.6057575,
+    "p95": 3.25876,
+    "p99": 3.2922569999999998
+  },
+  "commitFrameMilliseconds": {
+    "mean": 9.0814375,
+    "p95": 10.040809999999999,
+    "p99": 11.269878
+  },
+  "first": {
+    "bufferBytes": 7470984,
+    "buffers": 51,
+    "cachedCandidates": 2,
+    "commitMs": 2.2374,
+    "committed": false,
+    "frame": 1200,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.3251,
+    "requestGeneration": 12,
+    "revision": 8,
+    "waitMs": 0.06450000000000955,
+    "workMs": 2.1095999999999906
+  },
+  "last": {
+    "bufferBytes": 7470984,
+    "buffers": 51,
+    "cachedCandidates": 2,
+    "commitMs": 3.108,
+    "committed": false,
+    "frame": 6480,
+    "imageBytes": 124575232,
+    "images": 71,
+    "loadError": "",
+    "loading": false,
+    "physicsMaxMs": 0.2472,
+    "requestGeneration": 46,
+    "revision": 42,
+    "waitMs": 0.09410000000002583,
+    "workMs": 1.7383999999999742
+  },
+  "passed": true
+}

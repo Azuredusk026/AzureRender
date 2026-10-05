@@ -77,6 +77,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - P2 展示与独立交付: acceptance/p2/2026-10-05.md
       - U2 编辑器工作区与教程: acceptance/u2/2026-10-05.md
       - G7 角色方向与冲刺: acceptance/g7/2026-10-05.md
       - R6 场景可见性与裁剪: acceptance/r6/2026-10-05.md

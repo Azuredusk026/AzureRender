@@ -1,7 +1,7 @@
 # 编辑器与可玩体验优化计划
 
 > 文档类型：开发计划
-> 状态：F3、R6、G7、U2 Complete，P2 Active
+> 状态：F3、R6、G7、U2、P2 Complete
 > 更新日期：2026-10-05
 > 适用范围：Windows 编辑器、公开探索关卡与独立 Player
 > 需求依据：仓库整理、README、UE 风格界面、动画方向、Shift 与显示异常
@@ -43,7 +43,7 @@
 | 2 | R6 场景可见性与裁剪 | Complete | P0 | 最小复现、默认渲染修复、镜像与边界 GPU 验收 |
 | 3 | G7 动画方向与冲刺 | Complete | P0 | 前向一致、双 Shift、组件兼容、真实操控验收 |
 | 4 | U2 编辑器工作区 | Complete | P1 | 停靠、样式、面板交互、DPI、教程与使用验收 |
-| 5 | P2 展示与独立交付 | Active | P1 | 最终截图、README、公开游戏 ZIP、完整回归与证据清单 |
+| 5 | P2 展示与独立交付 | Complete | P1 | 最终截图、README、公开游戏 ZIP、完整回归与证据清单 |
 
 阶段按表中顺序进入 Active。F3 先登记问题与复现输入。R6 提供稳定画面，供 G7 与 U2 验收。P2 使用最终界面与角色表现生成展示媒体。
 
@@ -65,16 +65,16 @@ Windows x64、C++17、Vulkan、Dear ImGui、Jolt、Lua 和 RmlUi 为实施基础
 
 ## P2 展示与交付步骤
 
-- [ ] 从空项目按 U2 教程制作公开关卡，记录实际步骤与耗时。
-- [ ] 在最终构建捕获编辑器工作区、机器人侧面动作与探索关卡。
-- [ ] 将三张精选图放入 `portfolio/images/editor/` 与 `portfolio/images/gameplay/`。
-- [ ] 更新根 README、工程 README、`docs/index.md` 与 `portfolio/portfolio_manifest.json`。
-- [ ] 完成全部 Debug、Release、视觉、性能、安装与公开包检查。
-- [ ] 用公开包执行 20 次切关、20 次重开与真实 30 分钟长跑。
-- [ ] 在 RTX 4060 Laptop 的 1080p 和 Intel 核显的 540p 验证既定范围。
-- [ ] 生成游戏 ZIP，解压至含空格路径，隔离 PATH 并完成全部任务。
-- [ ] 写入 `docs/acceptance/p2/<date>.md` 与证据 manifest。
-- [ ] 检查源码、图片、许可、包哈希、文档与暂存范围，提交 P2。
+- [x] 从空项目按 U2 教程制作公开关卡，记录实际步骤与耗时。
+- [x] 在最终构建捕获编辑器工作区、机器人侧面动作与探索关卡。
+- [x] 将三张精选图放入 `portfolio/images/editor/` 与 `portfolio/images/gameplay/`。
+- [x] 更新根 README、工程 README、`docs/index.md` 与 `portfolio/portfolio_manifest.json`。
+- [x] 完成全部 Debug、Release、视觉、性能、安装与公开包检查。
+- [x] 用公开包执行 20 次切关、20 次重开与真实 30 分钟长跑。
+- [x] 在 RTX 4060 Laptop 的 1080p 和 Intel 核显的 540p 验证既定范围。
+- [x] 生成游戏 ZIP，解压至含空格路径，隔离 PATH 并完成全部任务。
+- [x] 写入 `docs/acceptance/p2/<date>.md` 与证据 manifest。
+- [x] 检查源码、图片、许可、包哈希、文档与暂存范围，提交 P2。
 
 README 首屏包含项目定位、编辑器截图和三个入口。入口为运行演示、构建编辑器、阅读教程。后续章节依次为能力、验证范围、结构、开发路线和许可。根入口使用仓库相对图片路径。
 
