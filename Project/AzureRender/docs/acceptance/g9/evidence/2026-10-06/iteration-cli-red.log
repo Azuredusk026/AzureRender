@@ -1,0 +1,8 @@
+[1/2] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\tests\CommandLineTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureRenderCommandLineTests.dir/tests/CommandLineTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP  -I..\..\src -Ivcpkg_installed\x64-windows\include -MDd /EHsc /utf-8 -std:c++17 /showIncludes /FoCMakeFiles\AzureRenderCommandLineTests.dir\tests\CommandLineTests.cpp.obj /FdCMakeFiles\AzureRenderCommandLineTests.dir\ /FS -c ..\..\tests\CommandLineTests.cpp
+..\..\tests\CommandLineTests.cpp(38): error C2039: "aiPython": 不是 "AzureRenderOptions" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\app\AzureRenderOptions.hpp(16): note: 参见“AzureRenderOptions”的声明
+..\..\tests\CommandLineTests.cpp(38): error C2039: "aiConfig": 不是 "AzureRenderOptions" 的成员
+D:\Assigment\2609\FYP\Project\AzureRender\src\app\AzureRenderOptions.hpp(16): note: 参见“AzureRenderOptions”的声明
+ninja: build stopped: subcommand failed.

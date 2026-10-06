@@ -1,0 +1,1554 @@
+[
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 97.5938,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "describe",
+    "response": {
+      "elapsedMs": 2.6594,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "edits": [
+          {
+            "id": "ai.apply",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "ai.cancel",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "ai.describe",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "ai.generate",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "domain": {
+                  "type": "string"
+                },
+                "instruction": {
+                  "maxLength": 2097152,
+                  "type": "string"
+                },
+                "runId": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "runId",
+                "domain",
+                "target",
+                "instruction"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "ai.reject",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "animation.clear-preview",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "animation.preview",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "crossfade": {
+                  "type": "number"
+                },
+                "previous": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "asset.generate",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "dependencies": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 1024,
+                  "type": "array"
+                },
+                "generator": {
+                  "type": "string"
+                },
+                "inputs": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 1024,
+                  "type": "array"
+                },
+                "license": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "string"
+                },
+                "parameters": {}
+              },
+              "required": [
+                "generator",
+                "output",
+                "parameters",
+                "license"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "asset.import",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "asset.import-cancel",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "asset.import-poll",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "asset.import-start",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "assets.reload",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "component.add",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "component.field",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {}
+              },
+              "required": [
+                "type",
+                "field",
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "document.reload",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "document.save",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "history.redo",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "history.undo",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "node.child",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "parent": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "parent"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.create",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.delete",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.duplicate",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.instance",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.place",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "resource": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "resource"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.prefab-source",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.remove",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "index": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "index"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.rename",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.select",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "integer"
+                },
+                "indices": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.transform",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "rotation": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "type": "array"
+                },
+                "scale": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "type": "array"
+                },
+                "translation": {
+                  "items": {
+                    "type": "number"
+                  },
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "node.visible",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "prefab.place",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "asset": {
+                  "type": "string"
+                },
+                "instance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "asset",
+                "instance"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "preview.level",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "preview.pause",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "preview.play",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "preview.resume",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "preview.step",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "preview.stop",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "project.build",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "install": {
+                  "type": "string"
+                },
+                "output": {
+                  "type": "string"
+                },
+                "replace": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "install",
+                "output"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "project.create",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "name"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "render.preset",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "render.settings",
+            "modifiesDocument": true,
+            "parameters": {
+              "properties": {
+                "values": {}
+              },
+              "required": [
+                "values"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": true,
+            "version": 1
+          },
+          {
+            "id": "script.write",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "value": {
+                  "maxLength": 2097152,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "settings.describe",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "search": {
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "settings.reset",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "settings.set",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "value": {}
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "viewport.capture",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "viewport.debug-overlay",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "viewport.gizmo-mode",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {
+                "value": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "value"
+              ],
+              "type": "object"
+            },
+            "requiresIdle": true,
+            "transactional": false,
+            "version": 1
+          },
+          {
+            "id": "workspace.reset",
+            "modifiesDocument": false,
+            "parameters": {
+              "properties": {},
+              "required": [],
+              "type": "object"
+            },
+            "requiresIdle": false,
+            "transactional": false,
+            "version": 1
+          }
+        ],
+        "observations": [
+          "ai.available",
+          "ai.proposal",
+          "ai.state",
+          "document.contentHash",
+          "document.id",
+          "document.revision",
+          "document.version",
+          "editor.building",
+          "editor.playing",
+          "engine.frameCount",
+          "engine.gameInputSource",
+          "engine.screenshots",
+          "engine.status",
+          "render.diagnosticView",
+          "render.exposure",
+          "scene.nodeCount",
+          "selection.id",
+          "setting.ai.enabled",
+          "setting.ai.maxHistoryBytes",
+          "setting.ai.maxHistoryMessages",
+          "setting.ai.maxOperations",
+          "setting.ai.maxRepairs",
+          "setting.ai.maxSourceBytes",
+          "setting.ai.profile",
+          "setting.ai.timeoutMs",
+          "setting.diagnostics.verbose",
+          "setting.editor.compact",
+          "setting.editor.scale",
+          "setting.input.cameraSensitivity",
+          "setting.render.blackholeQuality",
+          "setting.render.diagnosticView",
+          "setting.render.exposure",
+          "setting.source.ai.enabled",
+          "setting.source.ai.maxHistoryBytes",
+          "setting.source.ai.maxHistoryMessages",
+          "setting.source.ai.maxOperations",
+          "setting.source.ai.maxRepairs",
+          "setting.source.ai.maxSourceBytes",
+          "setting.source.ai.profile",
+          "setting.source.ai.timeoutMs",
+          "setting.source.diagnostics.verbose",
+          "setting.source.editor.compact",
+          "setting.source.editor.scale",
+          "setting.source.input.cameraSensitivity",
+          "setting.source.render.blackholeQuality",
+          "setting.source.render.diagnosticView",
+          "setting.source.render.exposure"
+        ],
+        "operations": [
+          "describe",
+          "query",
+          "assert",
+          "wait-until",
+          "wait-frames",
+          "edit",
+          "input",
+          "screenshot"
+        ],
+        "schemaVersion": 1
+      }
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.2557,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 3
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 3.5017,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:992b3c20138d978b\",\"documentId\":\"17912949173210243-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 0.8302,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:992b3c20138d978b\",\"documentId\":\"17912949173210243-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 3.3637,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/observation-node",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": false
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "observation-node",
+              "instanceOf": "",
+              "name": "observation-node",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": false
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:c9e458fb5a128bf8",
+          "documentId": "17912949173210243-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 7.6077,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 4
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 2.2302,
+      "message": "[{\"code\":\"StaleVersion\",\"requestId\":\"host-7\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.6685,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:c9e458fb5a128bf8\",\"documentId\":\"17912949173210243-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 0.5915,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "remove",
+            "path": "/components/observation-node"
+          },
+          {
+            "op": "remove",
+            "path": "/nodes/3"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:992b3c20138d978b",
+          "documentId": "17912949173210243-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 10.9386,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 3
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 0.392,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:992b3c20138d978b\",\"documentId\":\"17912949173210243-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 0.8175,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:992b3c20138d978b",
+          "documentId": "17912949173210243-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 1.0868,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:992b3c20138d978b\",\"documentId\":\"17912949173210243-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 2.4346,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 4.5507,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 0.6044,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 6.9649,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 0.493,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 13.5731,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 2.2515,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 8.0185,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.736,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:1fc543c8c57bbe5b\",\"documentId\":\"17912949173210243-1\",\"revision\":10}"
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.9556,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:1fc543c8c57bbe5b\",\"documentId\":\"17912949173210243-1\",\"revision\":10}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 1.9704,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:1fc543c8c57bbe5b",
+          "documentId": "17912949173210243-1",
+          "revision": 11
+        }
+      }
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 2.8987,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 9.6109,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 0.9352,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "asset-a"
+    }
+  },
+  {
+    "op": "screenshot",
+    "response": {
+      "elapsedMs": 1.8954,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "observation-inspector",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "response": {
+      "elapsedMs": 71.1262,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.8979,
+      "message": "Unknown UI target: missing",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.1322,
+      "message": "Unknown observation: missing",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "assert",
+    "response": {
+      "code": "AssertionFailed",
+      "elapsedMs": 1.7706,
+      "message": "Observation differs from expected value",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.4467,
+      "message": "Unknown input domain",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.3863,
+      "message": "Input requires an active project",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 1.2214,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:1fc543c8c57bbe5b\",\"documentId\":\"17912949173210243-1\",\"revision\":12}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 0.4278,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:1fc543c8c57bbe5b",
+          "documentId": "17912949173210243-1",
+          "revision": 12
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "response": {
+      "elapsedMs": 14.1008,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": true
+    }
+  },
+  {
+    "op": "assert",
+    "response": {
+      "elapsedMs": 2.9635,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "window"
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 9.1373,
+      "message": "Unsupported replay key",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "assert",
+    "response": {
+      "elapsedMs": 12.6144,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "window"
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 4.3271,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "game",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.9771,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 308
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 3.2229,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "game",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 51.617,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 1.2595,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 352
+    }
+  },
+  {
+    "op": "input",
+    "response": {
+      "elapsedMs": 0.6481,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "game",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "response": {
+      "elapsedMs": 7.7419,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "response": {
+      "elapsedMs": 2.0065,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:1fc543c8c57bbe5b\",\"documentId\":\"17912949173210243-1\",\"revision\":12}"
+    }
+  },
+  {
+    "op": "edit",
+    "response": {
+      "elapsedMs": 2.7528,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:1fc543c8c57bbe5b",
+          "documentId": "17912949173210243-1",
+          "revision": 12
+        }
+      }
+    }
+  },
+  {
+    "op": "assert",
+    "response": {
+      "elapsedMs": 1.697,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": false
+    }
+  }
+]

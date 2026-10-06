@@ -1,0 +1,988 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "editorDebugLines": 0,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "diagnostic": "",
+    "dpi": 1.5,
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gizmoTranslation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "history": [],
+    "image": {
+      "height": 520.0,
+      "width": 1083.0,
+      "x": 342.0,
+      "y": 180.0
+    },
+    "nodeCount": 3,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1440.0,
+          439.0,
+          480.0,
+          605.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1440.0,
+          96.0,
+          480.0,
+          340.0
+        ]
+      },
+      "settings": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          96.0,
+          1107.0,
+          616.0
+        ]
+      }
+    },
+    "selectedName": "observer",
+    "settings": {
+      "ai.enabled": {
+        "default": false,
+        "description": "Enable optional content assistance",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": false,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "boolean",
+        "value": false
+      },
+      "ai.maxHistoryBytes": {
+        "default": 131072,
+        "description": "Maximum proposal history bytes",
+        "layers": {
+          "default": 131072
+        },
+        "maximum": 131072.0,
+        "minimum": 2.0,
+        "pending": 131072,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 131072
+      },
+      "ai.maxHistoryMessages": {
+        "default": 24,
+        "description": "Maximum proposal history messages",
+        "layers": {
+          "default": 24
+        },
+        "maximum": 24.0,
+        "minimum": 1.0,
+        "pending": 24,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 24
+      },
+      "ai.maxOperations": {
+        "default": 128,
+        "description": "Maximum proposal operations",
+        "layers": {
+          "default": 128
+        },
+        "maximum": 128.0,
+        "minimum": 1.0,
+        "pending": 128,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 128
+      },
+      "ai.maxRepairs": {
+        "default": 1,
+        "description": "Maximum proposal repairs",
+        "layers": {
+          "default": 1
+        },
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "pending": 1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 1
+      },
+      "ai.maxSourceBytes": {
+        "default": 2097152,
+        "description": "Maximum proposal source bytes",
+        "layers": {
+          "default": 2097152
+        },
+        "maximum": 2097152.0,
+        "minimum": 1.0,
+        "pending": 2097152,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2097152
+      },
+      "ai.profile": {
+        "default": "content",
+        "description": "Model tool profile",
+        "layers": {
+          "default": "content"
+        },
+        "pending": "content",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "content"
+      },
+      "ai.timeoutMs": {
+        "default": 300000,
+        "description": "Total proposal deadline",
+        "layers": {
+          "default": 300000
+        },
+        "maximum": 300000.0,
+        "minimum": 1.0,
+        "pending": 300000,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 300000
+      },
+      "diagnostics.verbose": {
+        "default": false,
+        "description": "Verbose development diagnostics",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.compact": {
+        "default": false,
+        "description": "Compact workspace",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.scale": {
+        "default": 1.0,
+        "description": "Interface scale multiplier",
+        "layers": {
+          "default": 1.0,
+          "user-file": 1.0
+        },
+        "maximum": 3.0,
+        "minimum": 0.75,
+        "pending": 1.0,
+        "pendingSource": "user-file",
+        "persistent": true,
+        "readOnly": false,
+        "source": "user-file",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "input.cameraSensitivity": {
+        "default": 1.0,
+        "description": "Mouse camera sensitivity multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 4.0,
+        "minimum": 0.1,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "render.blackholeQuality": {
+        "default": 2,
+        "description": "Blackhole quality: performance, balanced, cinematic",
+        "layers": {
+          "default": 2
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 2,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2
+      },
+      "render.diagnosticView": {
+        "default": 0,
+        "description": "Diagnostic view: beauty, normal, outline, shadow, depth",
+        "layers": {
+          "default": 0
+        },
+        "maximum": 4.0,
+        "minimum": 0.0,
+        "pending": 0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 0
+      },
+      "render.exposure": {
+        "default": 0.0,
+        "description": "Temporary exposure in EV",
+        "layers": {
+          "default": 0.0,
+          "user-file": 0.5
+        },
+        "maximum": 8.0,
+        "minimum": -8.0,
+        "pending": 0.5,
+        "pendingSource": "user-file",
+        "persistent": true,
+        "readOnly": false,
+        "source": "user-file",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.5
+      }
+    },
+    "uiErrors": [],
+    "version": 2,
+    "visibleAssets": [
+      {
+        "id": "cube",
+        "path": "assets:/cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "434218f0-b894-45d0-80f9-9a4c9956286d",
+        "path": "assets:/ASSET-LICENSE.txt",
+        "ready": true,
+        "type": ".txt"
+      },
+      {
+        "id": "793029cd-5847-4677-870c-c2c355551db6",
+        "path": "assets:/inspect.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "9b49bb9e-1c56-4564-a231-4b841adee9f8",
+        "path": "assets:/inspection.azurelevel",
+        "ready": true,
+        "type": ".azurelevel"
+      }
+    ],
+    "widgets": {
+      "build": [
+        643.5,
+        48.0,
+        60.0,
+        33.0
+      ],
+      "create.empty": [
+        12.0,
+        226.0,
+        305.0,
+        33.0
+      ],
+      "focus": [
+        342.0,
+        141.0,
+        126.0,
+        33.0
+      ],
+      "gizmo.0": [
+        934.4471435546875,
+        456.67755126953125,
+        10,
+        10
+      ],
+      "gizmo.1": [
+        878.5,
+        375.0,
+        10,
+        10
+      ],
+      "gizmo.2": [
+        824.9651489257813,
+        462.0927734375,
+        10,
+        10
+      ],
+      "gizmo.center": [
+        882.5,
+        439.0,
+        2,
+        2
+      ],
+      "menu.Edit": [
+        55.0,
+        3.0,
+        51.0,
+        27.0
+      ],
+      "menu.File": [
+        6.0,
+        3.0,
+        49.0,
+        27.0
+      ],
+      "menu.Help": [
+        224.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "menu.Tools": [
+        162.0,
+        3.0,
+        62.0,
+        27.0
+      ],
+      "menu.View": [
+        106.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "mode.Move": [
+        75.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Rotate": [
+        169.5,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Scale": [
+        264.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "name": [
+        1452.0,
+        604.0,
+        312.0,
+        33.0
+      ],
+      "node.asset-a": [
+        1446.0,
+        250.0,
+        468.0,
+        27.0
+      ],
+      "node.asset-b": [
+        1446.0,
+        277.0,
+        468.0,
+        27.0
+      ],
+      "node.observer": [
+        1446.0,
+        223.0,
+        468.0,
+        27.0
+      ],
+      "outliner.search": [
+        1452.0,
+        141.0,
+        455.0,
+        33.0
+      ],
+      "panelrect.animation": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.assets": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.build": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.capture": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.console": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.gameplay-debug": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.inspector": [
+        1440.0,
+        439.0,
+        480.0,
+        605.0
+      ],
+      "panelrect.outliner": [
+        1440.0,
+        96.0,
+        480.0,
+        340.0
+      ],
+      "panelrect.settings": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.viewport": [
+        330.0,
+        96.0,
+        1107.0,
+        616.0
+      ],
+      "pause": [
+        430.5,
+        48.0,
+        65.0,
+        33.0
+      ],
+      "pick.asset-a": [
+        889.4054565429688,
+        369.68902587890625,
+        2,
+        2
+      ],
+      "pick.asset-b": [
+        1066.18408203125,
+        424.4319152832031,
+        2,
+        2
+      ],
+      "play": [
+        364.5,
+        48.0,
+        54.0,
+        33.0
+      ],
+      "save": [
+        12.0,
+        48.0,
+        57.0,
+        33.0
+      ],
+      "setting.ai.enabled": [
+        495.0,
+        892.0,
+        33.0,
+        33.0
+      ],
+      "setting.ai.maxHistoryBytes": [
+        495.0,
+        1031.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.maxHistoryMessages": [
+        495.0,
+        1170.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.maxOperations": [
+        495.0,
+        1309.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.maxRepairs": [
+        495.0,
+        1448.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.maxSourceBytes": [
+        495.0,
+        1587.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.profile": [
+        495.0,
+        1726.0,
+        908.0,
+        33.0
+      ],
+      "setting.ai.timeoutMs": [
+        495.0,
+        1865.0,
+        908.0,
+        33.0
+      ],
+      "setting.diagnostics.verbose": [
+        495.0,
+        2004.0,
+        33.0,
+        33.0
+      ],
+      "setting.editor.compact": [
+        495.0,
+        2143.0,
+        33.0,
+        33.0
+      ],
+      "setting.editor.scale": [
+        495.0,
+        2282.0,
+        908.0,
+        33.0
+      ],
+      "setting.input.cameraSensitivity": [
+        495.0,
+        2421.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.blackholeQuality": [
+        495.0,
+        2560.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.diagnosticView": [
+        495.0,
+        2699.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.exposure": [
+        495.0,
+        2838.0,
+        908.0,
+        33.0
+      ],
+      "setting.reset.ai.enabled": [
+        342.0,
+        931.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.maxHistoryBytes": [
+        342.0,
+        1070.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.maxHistoryMessages": [
+        342.0,
+        1209.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.maxOperations": [
+        342.0,
+        1348.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.maxRepairs": [
+        342.0,
+        1487.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.maxSourceBytes": [
+        342.0,
+        1626.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.profile": [
+        342.0,
+        1765.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.ai.timeoutMs": [
+        342.0,
+        1904.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.diagnostics.verbose": [
+        342.0,
+        2043.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.editor.compact": [
+        342.0,
+        2182.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.editor.scale": [
+        342.0,
+        2321.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.input.cameraSensitivity": [
+        342.0,
+        2460.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.blackholeQuality": [
+        342.0,
+        2599.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.diagnosticView": [
+        342.0,
+        2738.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.exposure": [
+        342.0,
+        2877.0,
+        111.0,
+        33.0
+      ],
+      "settings.save": [
+        342.0,
+        2923.0,
+        173.0,
+        33.0
+      ],
+      "settings.search": [
+        342.0,
+        760.0,
+        1171.0,
+        33.0
+      ],
+      "settings.source": [
+        342.0,
+        799.0,
+        810.0,
+        33.0
+      ],
+      "step": [
+        507.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "stop": [
+        575.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "tab.animation": [
+        900.0,
+        715.0,
+        179.0,
+        33.0
+      ],
+      "tab.assets": [
+        369.0,
+        715.0,
+        165.0,
+        33.0
+      ],
+      "tab.build": [
+        764.0,
+        715.0,
+        130.0,
+        33.0
+      ],
+      "tab.capture": [
+        540.0,
+        715.0,
+        106.0,
+        33.0
+      ],
+      "tab.console": [
+        652.0,
+        715.0,
+        106.0,
+        33.0
+      ],
+      "tab.gameplay-debug": [
+        1085.0,
+        715.0,
+        167.0,
+        33.0
+      ],
+      "tab.inspector": [
+        1479.0,
+        439.0,
+        98.0,
+        33.0
+      ],
+      "tab.outliner": [
+        1479.0,
+        96.0,
+        151.0,
+        33.0
+      ],
+      "tab.settings": [
+        1258.0,
+        715.0,
+        107.0,
+        33.0
+      ],
+      "tab.viewport": [
+        369.0,
+        96.0,
+        112.0,
+        33.0
+      ],
+      "tool.animation": [
+        12.0,
+        377.0,
+        305.0,
+        33.0
+      ],
+      "tool.assets": [
+        12.0,
+        338.0,
+        305.0,
+        33.0
+      ],
+      "tool.build": [
+        12.0,
+        455.0,
+        305.0,
+        33.0
+      ],
+      "tool.capture": [
+        12.0,
+        494.0,
+        305.0,
+        33.0
+      ],
+      "tool.console": [
+        12.0,
+        533.0,
+        305.0,
+        33.0
+      ],
+      "tool.gameplay-debug": [
+        12.0,
+        416.0,
+        305.0,
+        33.0
+      ],
+      "tool.settings": [
+        12.0,
+        572.0,
+        305.0,
+        33.0
+      ],
+      "viewport.image": [
+        342.0,
+        180.0,
+        1083.0,
+        520.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "observer",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "asset-a",
+      "translation": [
+        -0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "asset-b",
+      "translation": [
+        0.800000011920929,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "inspection",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

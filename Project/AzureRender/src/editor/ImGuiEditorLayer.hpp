@@ -60,6 +60,9 @@ public:
     }
 
 private:
+    std::array<char,4096> proposalInstruction_{};
+    int proposalDomain_=0;
+    std::uint64_t proposalSequence_=0;
     void drawSettingsPanel(PanelContext& context);
     void drawViewportPanel(PanelContext& context);
     void drawOutlinerPanel(PanelContext& context);

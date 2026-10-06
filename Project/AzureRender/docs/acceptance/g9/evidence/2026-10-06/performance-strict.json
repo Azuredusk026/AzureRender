@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "gpuLimitMs": 16.6,
+  "playerCpuLimitMs": 8,
+  "editorCpuLimitMs": 10,
+  "memoryObservation": "positive peak growth from the first observation in the latter half of process observations",
+  "checks": [
+    {
+      "load": "standard",
+      "round": 1,
+      "passed": true,
+      "gpuP95": 1.8822639999999997,
+      "cpuP95": 2.397064999999996,
+      "physicsP95": 0.34033499999999994,
+      "workingSetGrowth": 0.02521121094273826
+    },
+    {
+      "load": "standard",
+      "round": 2,
+      "passed": true,
+      "gpuP95": 1.631296,
+      "cpuP95": 2.7852950000000294,
+      "physicsP95": 0.3818,
+      "workingSetGrowth": 0.02416518739324114
+    },
+    {
+      "load": "standard",
+      "round": 3,
+      "passed": true,
+      "gpuP95": 1.797512,
+      "cpuP95": 2.710735,
+      "physicsP95": 0.382505,
+      "workingSetGrowth": 0.02387645149416051
+    },
+    {
+      "load": "editor",
+      "round": 1,
+      "passed": true,
+      "gpuP95": 0.5695728,
+      "cpuP95": 3.6521500000000042,
+      "physicsP95": 0.33184499999999995,
+      "workingSetGrowth": 0.024560825483354032
+    },
+    {
+      "load": "editor",
+      "round": 2,
+      "passed": true,
+      "gpuP95": 0.5681968000000001,
+      "cpuP95": 3.5654400000000037,
+      "physicsP95": 0.32376999999999995,
+      "workingSetGrowth": 0.02442481573214761
+    },
+    {
+      "load": "editor",
+      "round": 3,
+      "passed": true,
+      "gpuP95": 0.5678096,
+      "cpuP95": 4.408590000000004,
+      "physicsP95": 0.37720499999999996,
+      "workingSetGrowth": 0.022588129631015752
+    },
+    {
+      "load": "stress",
+      "round": 1,
+      "passed": true,
+      "gpuP95": 1.9596352,
+      "cpuP95": 4.4896600000000175,
+      "physicsP95": 1.0192050000000001,
+      "workingSetGrowth": 0.0339562741375925
+    },
+    {
+      "load": "stress",
+      "round": 2,
+      "passed": true,
+      "gpuP95": 2.1055311999999997,
+      "cpuP95": 5.999995000000006,
+      "physicsP95": 1.30783,
+      "workingSetGrowth": 0.03335988684950664
+    },
+    {
+      "load": "stress",
+      "round": 3,
+      "passed": true,
+      "gpuP95": 2.1189696,
+      "cpuP95": 5.098015000000001,
+      "physicsP95": 1.17533,
+      "workingSetGrowth": 0.03890489913544659
+    }
+  ]
+}

@@ -27,6 +27,25 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
     if(!ImGui::Begin("Console###console",workspace_.open("console"))){ImGui::End();return;}
+    if(session_->modelAvailable()){
+        const auto report=session_->proposalReport();const auto state=report.at("state").get<std::string>();
+        ImGui::Text("Content assistance: %s",state.c_str());
+        ImGui::SetNextItemWidth(160*dpi_);ImGui::Combo("Domain",&proposalDomain_,"Scene assembly\0Asset parameters\0");observeWidget("ai.domain");
+        ImGui::SetNextItemWidth(-1);ImGui::InputText("Instruction",proposalInstruction_.data(),proposalInstruction_.size());observeWidget("ai.instruction");
+        ui::ButtonOptions generate;generate.disabled=state=="Generating"||session_->playing()||session_->building()||proposalInstruction_[0]=='\0';
+        if(ui::button("Generate",generate))session_->edit("ai.generate",{{"runId","editor-ai-"+std::to_string(++proposalSequence_)},
+            {"domain",proposalDomain_==0?"scene":"asset-parameters"},{"target","document"},{"instruction",proposalInstruction_.data()}});
+        observeWidget("ai.generate");ImGui::SameLine();
+        ui::ButtonOptions active;active.disabled=state!="Generating";
+        if(ui::button("Cancel",active))session_->edit("ai.cancel");observeWidget("ai.cancel");ImGui::SameLine();
+        ui::ButtonOptions ready;ready.disabled=state!="Ready";
+        if(ui::button("Reject",ready))session_->edit("ai.reject");observeWidget("ai.reject");ImGui::SameLine();
+        ready.disabled=ready.disabled||session_->playing()||session_->building();
+        if(ui::button("Apply",ready))session_->edit("ai.apply");observeWidget("ai.apply");
+        if(ImGui::CollapsingHeader("Proposal difference"))ImGui::TextWrapped("%s",report.value("diff",nlohmann::json::array()).dump(2).c_str());
+        if(report.contains("diagnostics"))for(const auto& diagnostic:report.at("diagnostics"))ImGui::TextWrapped("%s",diagnostic.dump().c_str());
+        ImGui::Separator();
+    }
     if(auto* scripts=session_->scripts())for(const auto& error:scripts->errors())ImGui::TextWrapped("Script: %s",error.c_str());
     if(auto* levels=session_->levels())if(!levels->lastError().empty())ImGui::TextWrapped("Level: %s",levels->lastError().c_str());
     if(auto* presentation=session_->presentation())for(const auto& error:presentation->errors())ImGui::TextWrapped("Presentation: %s",error.c_str());

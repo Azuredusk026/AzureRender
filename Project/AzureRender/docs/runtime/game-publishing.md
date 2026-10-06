@@ -71,6 +71,15 @@ python "D:/AzureEngine/share/AzureRender/tools/build_game.py" --verify "D:/Deliv
 
 ## 验收与能力边界
 
+引擎安装树提供 `tools/ai_bridge.py` 与 `tools/ai/`。
+编辑器按配置启用 Python 模型服务。
+Python 路径和凭据由部署环境提供。
+独立 Player 使用其运行模块装配。
+
+内容提案经制作流程应用后成为项目资产。
+生成资产的来源元数据进入发布核验。
+模型配置的具体接入见[内容提案](content-proposals.md)。
+
 `AzureEngine.GamePackageRules` 覆盖目录事务、哈希、配置与发布边界。Release 的 `AzureEngine.GamePackage` 从实际编辑器构建包，移动目录并移走输入。它在隔离 PATH 下运行角色、切关、声音、界面和动画，并检查退出释放。
 
 `AzureEngine.PlayablePackage` 验证完整探索关卡。实际编辑器构建包后，测试移动目录并移走自建输入。隔离 PATH 下完成全部任务与两次重开。随后执行 20 次切关和 20 次重开，核验驻留与退出释放。

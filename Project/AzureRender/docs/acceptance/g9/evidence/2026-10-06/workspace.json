@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "dpiCases": 8,
+  "realImGuiEvents": 16,
+  "chineseSaveReload": true,
+  "runControls": true,
+  "panelPersistence": true,
+  "corruptionRecovery": true,
+  "iniIntegrity": true,
+  "textFocusProtection": true,
+  "dynamicDpi": true,
+  "layoutReset": true,
+  "gizmoModes": 3,
+  "scriptAssets": true,
+  "viewportPicking": true,
+  "dockDragPersistence": true,
+  "hitErrors": [
+    {
+      "case": "1920x1080-1",
+      "projectionErrorPixels": 4.59162351944542e-05,
+      "rasterErrorPixels": 0.010543963110194454
+    },
+    {
+      "case": "1280x720-1",
+      "projectionErrorPixels": 2.457770699493267e-05,
+      "rasterErrorPixels": 0.21579573479300507
+    },
+    {
+      "case": "1920x1080-1.5",
+      "projectionErrorPixels": 7.151242266445479e-05,
+      "rasterErrorPixels": 0.5000409354684666
+    },
+    {
+      "case": "1280x720-1.5",
+      "projectionErrorPixels": 2.9753717740277352e-05,
+      "rasterErrorPixels": 0.3991401681572597
+    },
+    {
+      "case": "1920x1080-2",
+      "projectionErrorPixels": 1.7245766798623663e-05,
+      "rasterErrorPixels": 0.5150014887079777
+    },
+    {
+      "case": "1280x720-2",
+      "projectionErrorPixels": 1.527341214568878e-05,
+      "rasterErrorPixels": 0.3497466894784793
+    },
+    {
+      "case": "1280x720-0.75",
+      "projectionErrorPixels": 4.2297191384932376e-05,
+      "rasterErrorPixels": 0.29267535383200993
+    },
+    {
+      "case": "3840x2160-3",
+      "projectionErrorPixels": 0.00014302484532890958,
+      "rasterErrorPixels": 0.5001637217718982
+    }
+  ]
+}

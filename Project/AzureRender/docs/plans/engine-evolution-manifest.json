@@ -149,7 +149,13 @@
         "A6",
         "B4"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g9/2026-10-06.md",
+        "evidence": "docs/acceptance/g9/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g9): 完成有界内容提案与模型接入验收"
+      }
     },
     {
       "id": "R7",

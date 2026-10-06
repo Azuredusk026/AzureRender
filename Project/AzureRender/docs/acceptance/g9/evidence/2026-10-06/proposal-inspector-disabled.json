@@ -1,0 +1,179 @@
+[
+  {
+    "elapsedMs": 8.5502,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": false
+  },
+  {
+    "elapsedMs": 4.8284,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "Disabled"
+  },
+  {
+    "elapsedMs": 0.7447,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:40536679c1b38332\",\"documentId\":\"17912947986313988-1\",\"revision\":1}"
+  },
+  {
+    "elapsedMs": 3.0409,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [
+        {
+          "op": "add",
+          "path": "/components/manual-without-model",
+          "value": {
+            "azure.renderable": {
+              "data": {
+                "primitiveIndex": 0,
+                "visible": false
+              },
+              "type": "azure.renderable",
+              "version": 1
+            },
+            "azure.transform": {
+              "data": {
+                "rotation": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "translation": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "type": "azure.transform",
+              "version": 1
+            }
+          }
+        },
+        {
+          "op": "add",
+          "path": "/nodes/-",
+          "value": {
+            "id": "manual-without-model",
+            "instanceOf": "",
+            "name": "manual-without-model",
+            "parentId": "",
+            "prefabSource": "",
+            "resourceId": "",
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "visible": false
+          }
+        }
+      ],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:e52e0cbfdfe96bd7",
+        "documentId": "17912947986313988-1",
+        "revision": 2
+      }
+    }
+  },
+  {
+    "elapsedMs": 2.3079,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:e52e0cbfdfe96bd7\",\"documentId\":\"17912947986313988-1\",\"revision\":2}"
+  },
+  {
+    "elapsedMs": 1.9975,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [
+        {
+          "op": "remove",
+          "path": "/components/manual-without-model"
+        },
+        {
+          "op": "remove",
+          "path": "/nodes/4"
+        }
+      ],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:40536679c1b38332",
+        "documentId": "17912947986313988-1",
+        "revision": 3
+      }
+    }
+  },
+  {
+    "elapsedMs": 22.286,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:40536679c1b38332\",\"documentId\":\"17912947986313988-1\",\"revision\":3}"
+  },
+  {
+    "elapsedMs": 0.1232,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:40536679c1b38332",
+        "documentId": "17912947986313988-1",
+        "revision": 3
+      }
+    }
+  },
+  {
+    "elapsedMs": 1.219,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": true
+  },
+  {
+    "elapsedMs": 0.8244,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"contentHash\":\"fnv1a64:40536679c1b38332\",\"documentId\":\"17912947986313988-1\",\"revision\":3}"
+  },
+  {
+    "elapsedMs": 1.8794,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "diff": [],
+      "value": null,
+      "version": {
+        "contentHash": "fnv1a64:40536679c1b38332",
+        "documentId": "17912947986313988-1",
+        "revision": 3
+      }
+    }
+  },
+  {
+    "elapsedMs": 0.5255,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": false
+  }
+]

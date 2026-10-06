@@ -86,6 +86,9 @@ constexpr const char* kHelp =
     "  --settings-file <json>             User settings layer\n"
     "  --default-settings <json>           Default file layer\n"
     "  --project-settings <json>           Project settings layer\n\n"
+    "  --ai-python <executable>            Optional model tool interpreter\n"
+    "  --ai-config <json>                  Tool-owned provider configuration\n"
+    "  --ai-fixture <json>                 Fixed-response model service\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
@@ -176,6 +179,8 @@ void validate(const ParsedCommandLine& parsed) {
     if(!validation.validationScript.empty()&&validation.validationReport.empty())
         fail(CommandLineErrorCode::InvalidCombination,"--validation-report","Script requires report output");
     const auto& options = parsed.options;
+    if(!options.aiConfig.empty()&&!options.aiFixture.empty())fail(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture","Choose provider configuration or fixed responses");
+    if(!options.editorMode&&(!options.aiConfig.empty()||!options.aiFixture.empty()))fail(CommandLineErrorCode::InvalidCombination,"--ai-config","Model tooling requires an editor session");
     if(!options.editorActionsPath.empty() && !options.editorMode)fail(CommandLineErrorCode::InvalidCombination,"--editor-actions","--editor-actions requires an editor project");
     if(options.editorMode && !options.projectFile.empty() && (!parsed.scenePath.empty() || !parsed.editorScenePath.empty() || !parsed.createScenePath.empty()))fail(CommandLineErrorCode::InvalidCombination,"--editor-project","Editor project and scene entries are mutually exclusive");
     if (options.width < 64 || options.width > 7680
@@ -328,6 +333,12 @@ ParsedCommandLine parseCommandLine(
             }catch(const std::exception&){fail(CommandLineErrorCode::InvalidValue,argument,"Invalid setting JSON");}
         } else if (argument == "--settings-file") {
             parsed.options.settingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-python") {
+            parsed.options.aiPython=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-config") {
+            parsed.options.aiConfig=requireValue(arguments,index,argument);
+        } else if (argument == "--ai-fixture") {
+            parsed.options.aiFixture=requireValue(arguments,index,argument);
         } else if (argument == "--default-settings") {
             parsed.options.defaultSettingsFile=requireValue(arguments,index,argument);
         } else if (argument == "--project-settings") {

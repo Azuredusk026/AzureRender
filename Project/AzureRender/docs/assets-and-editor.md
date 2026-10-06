@@ -4,6 +4,11 @@
 
 完整制作流程见[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。工作区以视口、Scene Outliner、Details 和 Content Browser 组织场景编辑。View 菜单管理面板与布局恢复。
 
+可选[内容提案](runtime/content-proposals.md)支持场景与资产参数。
+候选生成后展示差异，并复核当前文档版本。
+场景应用与资产写入使用各自生产服务。
+生成资产保存输入、依赖、生成器版本和许可。
+
 AzureRender 会分开检查两件事：文件能否解析，以及其中的数据能否正确渲染。glTF 提供几何、动画和标准材质字段。AzureRender Material Profile 补充风格化类别、Feature、Face SDF 和类别参数。`.azscene` 保存场景节点、资源引用和 RenderSettings。
 
 ## 资产边界

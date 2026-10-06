@@ -34,6 +34,10 @@ void expectError(
 }  // namespace
 
 int main() try {
+    const auto ai=azurerender::parseCommandLine({"--editor-project","project.azureproject","--ai-python","Python with spaces/python.exe","--ai-config","model config.json"});
+    require(ai.options.aiPython=="Python with spaces/python.exe"&&ai.options.aiConfig=="model config.json","Model tool arguments must preserve paths");
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config",{"--ai-config","config.json"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture",{"--editor-project","project.azureproject","--ai-config","config.json","--ai-fixture","fixed.json"});
     const auto settings=azurerender::parseCommandLine({"--set","render.exposure=1.25","--settings-file","user settings.json","--default-settings","defaults.json","--project-settings","project.json"});
     require(settings.options.settingOverrides.at("render.exposure")==1.25,"Typed setting value parsed");
     require(settings.options.settingsFile=="user settings.json","Setting path preserved");

@@ -11,6 +11,8 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 能力总览
 
+[内容提案](runtime/content-proposals.md)提供可选模型接入。领域适配器校验预算、版本和引用。
+
 面板与用户偏好见[UI 与设置](runtime/ui-settings.md)。制作文档和生效渲染设置各自持有状态。
 
 验证入口见[观察与内容来源](runtime/observations-generation.md)。操作组合见[开发命令参考](reference/developer-cli.md)。
@@ -40,7 +42,7 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 开发路线
 
-[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4、G8、U3、F5、U4 已验收，当前执行阶段为 G9。
+[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4、G8、U3、F5、U4、G9 已验收，当前执行阶段为 R7。
 
 当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7、U2 和 P2 已完成。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 

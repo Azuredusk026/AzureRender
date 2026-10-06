@@ -49,6 +49,9 @@ void AzureRenderApp::initializeValidation() {
         observations_->add("selection.id",[session]{const auto* node=session->context().selectedNode();return ObservationValue(node?node->id:std::string());});
         observations_->add("editor.playing",[session]{return ObservationValue(session->playing());});
         observations_->add("editor.building",[session]{return ObservationValue(session->building());});
+        observations_->add("ai.state",[session]{return ObservationValue(session->proposalReport().at("state").get<std::string>());});
+        observations_->add("ai.available",[session]{return ObservationValue(session->modelAvailable());});
+        observations_->add("ai.proposal",[session]{return ObservationValue(session->proposalReport().dump());});
         callbacks.describe=[session](const auto&){return session->edits().describe();};
         callbacks.edit=[session](const nlohmann::json& request) {
             const auto& version=request.at("baseVersion");

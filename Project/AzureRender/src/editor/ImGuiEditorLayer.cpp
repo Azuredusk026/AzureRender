@@ -251,6 +251,7 @@ void ImGuiEditorLayer::newFrame() {
     if (!initialized_) {
         return;
     }
+    session_->pollModel();
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     float nextDpi=1,scaleY=1;glfwGetWindowContentScale(window_,&nextDpi,&scaleY);

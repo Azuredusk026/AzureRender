@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 139, in <module>
+    if args.output:main(args.executable,args.output)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 133, in main
+    workflows=[run(executable.resolve(),output.resolve(),name) for name in ('exploration','inspector')],physicalKeyboardMouse='not performed')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 133, in <listcomp>
+    workflows=[run(executable.resolve(),output.resolve(),name) for name in ('exploration','inspector')],physicalKeyboardMouse='not performed')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 84, in run
+    generate('asset-apply','asset-parameters');wait('Ready');edit('ai.apply');wait('Applied')
+                                               ^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 49, in wait
+    def wait(state):call('wait-until',name='ai.state',equals=state)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_proposal_host.py", line 41, in call
+    result=exchange(endpoint,token,dict(op=op,**fields));evidence.append(dict(op=op,fields=fields,response=result))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 20, in exchange
+    return json.loads(line)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\__init__.py", line 346, in loads
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 337, in decode
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\json\decoder.py", line 355, in raw_decode
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

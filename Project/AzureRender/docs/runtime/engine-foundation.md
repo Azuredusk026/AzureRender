@@ -14,12 +14,13 @@ G0 提供模块库、项目创建、版本化配置、资源挂载和独立 Play
 | 构建目标 | 职责 | 项目内依赖 |
 | --- | --- | --- |
 | AzureFoundation | 诊断、资源定位和公共构建约束 | AzureBuildOptions |
+| AzureAI | 可选模型请求、异步进程与版本协议 | AzureFoundation |
 | AzurePlatform | GLFW 窗口和表面生命周期 | AzureFoundation |
 | AzureRenderCore | RHI、帧图、着色、资产解析和场景渲染器 | AzureFoundation |
 | AzureRuntime | 项目、关卡、资产、物理、输入和脚本 | AzureRenderCore、AzureReflection |
 | AzureGameplay | 可装配角色、动画、相机与交互机制 | AzureRuntime |
 | AzureProjectRuntime | 应用默认配置与探索任务策略 | AzureGameplay |
-| AzureEditor | 编辑会话、相机控制和 Dear ImGui 界面 | AzureRuntime、AzurePlatform、AzureProjectRuntime |
+| AzureEditor | 编辑会话、相机控制和 Dear ImGui 界面 | AzureRuntime、AzurePlatform、AzureProjectRuntime、AzureAI |
 | AzureRenderHost | 编辑预览的 GPU 宿主 | AzureRuntime、AzurePlatform、AzureEditor |
 | AzurePlayerHost | Player 的 GPU 宿主 | AzureRuntime、AzurePlatform、AzureProjectRuntime |
 

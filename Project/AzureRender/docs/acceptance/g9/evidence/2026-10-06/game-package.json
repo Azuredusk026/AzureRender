@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\game-package\\Windows Game",
+  "files": 197,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "movedDirectory": true,
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "dependencyFailureRollback": true,
+  "tamperRejected": true,
+  "scene": "destination",
+  "fixedSteps": 179,
+  "hero": [
+    6.850008010864258,
+    0.9000000357627869,
+    0.0
+  ],
+  "audioStarts": 2,
+  "uiDrawCalls": 900,
+  "animationFrames": 180
+}

@@ -32,4 +32,16 @@ void AzureRenderApp::initializeSettings() {
     const auto result=engineSettings_->replaceLayer(runOptions_.settingOverrides,SettingSource::CommandLine);
     if(!result.passed)throw std::invalid_argument(result.diagnostic);
     engineSettings_->start();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession&&engineSettings_->get("ai.enabled").get<bool>()){
+        ModelProcessOptions process;
+        process.executable=std::filesystem::u8path(runOptions_.aiPython);
+        const auto tool=ResourceLocator().publicAsset("test_model.gltf").parent_path().parent_path()/"tools/ai_bridge.py";
+        process.arguments={tool.u8string()};
+        if(!runOptions_.aiConfig.empty()){process.arguments.push_back("--config");process.arguments.push_back(std::filesystem::absolute(std::filesystem::u8path(runOptions_.aiConfig)).u8string());}
+        if(!runOptions_.aiFixture.empty()){process.arguments.push_back("--fixture");process.arguments.push_back(std::filesystem::absolute(std::filesystem::u8path(runOptions_.aiFixture)).u8string());}
+        process.workingDirectory=tool.parent_path();
+        runOptions_.editorSession->configureModel(std::make_shared<ModelProcess>(std::move(process)));
+    }
+#endif
 }

@@ -71,10 +71,21 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
         return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
     });
     registerEngineSettings(settings_);
+    registerModelSettings(settings_);
     settings_.add({"editor.scale","Interface scale multiplier",1.0,.75,3.,false,true,false});
     settings_.add({"editor.compact","Compact workspace",false,{},{},false,true,false});
     selection_=std::make_unique<SelectionService>(*context_,*edits_);
 }
+void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
+    if(playing()||building()||(proposals_&&proposals_->state()==ProposalState::Generating))throw std::logic_error("Model assembly requires an idle session");
+    proposals_.reset();model_.reset();
+    if(!settings_.get("ai.enabled").get<bool>()||!transport)return;
+    model_=std::make_unique<ModelClient>(std::move(transport));
+    proposals_=std::make_unique<ProposalController>(*context_,*edits_,generators_,*model_);
+}
+void EditorSession::pollModel(){if(proposals_)proposals_->poll();}
+nlohmann::json EditorSession::proposalReport() const{return proposals_?proposals_->report():nlohmann::json{{"state","Disabled"},{"available",false}};}
+ProposalController& EditorSession::proposals(){if(!proposals_)throw EditRejection("Optional content assistance is disabled");return *proposals_;}
 
 EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
     auto result=edits_->current(command,std::move(parameters),std::move(mergeKey));

@@ -157,6 +157,7 @@ EditRegistry editorOperations(EditorSession& session) {
             if(!output)throw std::runtime_error("Cannot save script");
             if(session.scripts())session.scripts()->reloadChanged();return nullptr;
         });
+    registerProposalOperations(registry,session);
     return registry;
 }
 }

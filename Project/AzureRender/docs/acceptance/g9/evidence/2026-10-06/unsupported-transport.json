@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "hostPlatform": "Windows x64",
+  "compiler": "MSVC",
+  "implementationBranch": "non-Windows transport unavailable",
+  "compileCommand": "tools/msvc_env.bat cl /nologo /EHsc /std:c++17 /MDd /utf-8 /U_WIN32 /I src /I build/ninja-msvc-debug/vcpkg_installed/x64-windows/include src/ai/ModelProcess.cpp src/ai/ModelClient.cpp tests/ModelProtocolTests.cpp /Febuild/evolution/g9/unsupported/protocol.exe /Fobuild/evolution/g9/unsupported/ /link build/ninja-msvc-debug/AzureFoundation.lib",
+  "executionCommand": "build/evolution/g9/unsupported/protocol.exe tests/fixtures/ai/protocol.json C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe tools/ai_bridge.py",
+  "executableHash": "d0f03b5172f374c7235296af82c5efd94a3e96a612c59ad1cc43aa1b262de107",
+  "exitCode": 0,
+  "linuxRuntimeValidated": false,
+  "inputs": {
+    "src\\ai\\ModelProcess.cpp": "6f8b2918eab6b151ee5dcc1a05dcf7b22f5f464c76d9274dd41026c636e1fdaf",
+    "src\\ai\\ModelClient.cpp": "00517ad1b0c43c8bdda6167a2ebdfa44709663b16493a825cb52d011aad1fbfe",
+    "tests\\ModelProtocolTests.cpp": "7e8f2e344828f0a3e6e277f4890a649281a7916e8ab464ce9a15954bee4757bc",
+    "tests\\fixtures\\ai\\protocol.json": "64b9676e22a3fe7ab2e83e2b42af9bf81a3d042bf6ed31bc0e44359273f03c6a"
+  }
+}

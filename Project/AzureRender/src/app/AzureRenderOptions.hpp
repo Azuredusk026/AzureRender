@@ -19,6 +19,7 @@ struct AzureRenderOptions {
     std::string runtimeReportPath;
     std::string gameActionsPath;
     std::string settingsFile,defaultSettingsFile,projectSettingsFile;
+    std::string aiPython="python",aiConfig,aiFixture;
     nlohmann::json settingOverrides=nlohmann::json::object();
     std::string validationScript,validationReport,validationTokenEnvironment,validationEndpoint;
     std::string validationAddress="127.0.0.1";

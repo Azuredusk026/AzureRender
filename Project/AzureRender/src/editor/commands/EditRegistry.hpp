@@ -17,4 +17,5 @@ private:
     std::map<std::string,Entry> entries_;
 };
 EditRegistry editorOperations(EditorSession& session);
+void registerProposalOperations(EditRegistry& registry,EditorSession& session);
 }

@@ -10,6 +10,7 @@
 #include "editor/PanelContext.hpp"
 #include "foundation/SettingRegistry.hpp"
 #include "extensions/ExtensionRegistry.hpp"
+#include "editor/ai/ProposalController.hpp"
 
 #include <memory>
 #include <string>
@@ -64,6 +65,11 @@ public:
     EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
     SelectionService& selection() noexcept { return *selection_; }
     GeneratorRegistry& generators() noexcept { return generators_; }
+    void configureModel(std::shared_ptr<IModelTransport> transport);
+    bool modelAvailable() const noexcept {return model_&&model_->available();}
+    void pollModel();
+    nlohmann::json proposalReport() const;
+    ProposalController& proposals();
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
     [[nodiscard]] bool saveOnClose() noexcept;
     [[nodiscard]] bool consumeLayoutResetRequest() noexcept;
@@ -86,6 +92,8 @@ private:
     std::unique_ptr<EditService> edits_;
     std::unique_ptr<SelectionService> selection_;
     SettingRegistry settings_;
+    std::unique_ptr<ModelClient> model_;
+    std::unique_ptr<ProposalController> proposals_;
     EditorPanelRegistry panelRegistry_;
     std::filesystem::path userSettingsPath_;
     std::string lastError_;

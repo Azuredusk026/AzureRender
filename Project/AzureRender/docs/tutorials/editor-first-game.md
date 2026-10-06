@@ -103,6 +103,22 @@ Save user preferences 保存用户层。
 过期结果要求按当前版本重新生成或校验。
 操作与错误定义见[编辑操作参考](../runtime/edit-operations.md)。
 
+## 内容辅助与候选审阅
+
+按[模型接入说明](../runtime/content-proposals.md)启动可选服务。
+从左侧 Tools 打开 Console 面板。
+选择场景或资产参数领域，并填写指令。
+点击 Generate 后查看候选差异和诊断。
+
+Apply 经生产服务应用合法候选。
+Reject 保留当前制作内容，Cancel 结束请求。
+场景候选可用一次撤销恢复。
+文档版本变化后，按当前内容重新生成。
+
+模型服务关闭时可继续人工编辑与 Play/Stop。
+生成资产的来源随资产元数据保存。
+固定响应的验证范围见[G9 验收](../acceptance/g9/2026-10-06.md)。
+
 ## 构建独立游戏
 
 停止运行后点击工具栏 Build。Release engine directory 填写安装树根目录。Game output directory 填写独立输出目录。点击 Build Windows game，查看结果与耗时。

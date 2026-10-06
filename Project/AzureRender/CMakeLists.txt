@@ -233,6 +233,8 @@ add_library(AzureFoundation STATIC
 add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
 )
+add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
+target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
     src/assets/GltfLoader.cpp
@@ -305,6 +307,9 @@ endif()
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
 target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
+    src/editor/ai/ProposalController.cpp
+    src/editor/ai/ProposalOperations.cpp
+    src/editor/ai/adapters/ProposalAdapters.cpp
     src/editor/panels/SettingsPanel.cpp
     src/editor/panels/OutlinerPanel.cpp
     src/editor/panels/InspectorPanel.cpp
@@ -359,7 +364,7 @@ target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 if(WIN32)
     target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
 endif()
-target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime)
+target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime AzureAI)
 if(TARGET imgui::imgui)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
@@ -397,12 +402,30 @@ if(BUILD_TESTING)
     target_link_libraries(AzurePanelContextTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.PanelContext COMMAND AzurePanelContextTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_executable(AzureModelProtocolTests tests/ModelProtocolTests.cpp)
+    target_link_libraries(AzureModelProtocolTests PRIVATE AzureAI)
+    add_test(NAME AzureAI.ModelProtocol COMMAND AzureModelProtocolTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/ai/protocol.json" "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/ai_bridge.py")
+    add_test(NAME AzureAI.Bridge COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_ai_bridge.py")
+    if(WIN32)
+        add_test(NAME AzureEditor.ProposalHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_proposal_host.py" --executable "$<TARGET_FILE:AzureRender>")
+        set_tests_properties(AzureEditor.ProposalHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+    endif()
+    add_executable(AzureProposalControllerTests tests/ProposalControllerTests.cpp)
+    target_link_libraries(AzureProposalControllerTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ProposalController COMMAND AzureProposalControllerTests)
+    add_executable(AzureProposalAdapterTests tests/ProposalAdapterTests.cpp)
+    target_link_libraries(AzureProposalAdapterTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ProposalAdapter COMMAND AzureProposalAdapterTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
     add_executable(AzureEditorObservationTests tests/EditorObservationTests.cpp)
     target_link_libraries(AzureEditorObservationTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.Observation COMMAND AzureEditorObservationTests)
     add_test(NAME AzureTools.Cli COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_azure_cli.py")
-    add_test(NAME AzureEditor.SettingsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_settings_host.py" --executable "$<TARGET_FILE:AzureRender>")
-    set_tests_properties(AzureEditor.SettingsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
+    if(WIN32)
+        add_test(NAME AzureEditor.SettingsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_settings_host.py" --executable "$<TARGET_FILE:AzureRender>")
+        set_tests_properties(AzureEditor.SettingsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
+    endif()
     add_test(NAME AzureEditor.ObservationHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_observation_host.py" --executable "$<TARGET_FILE:AzureRender>")
     set_tests_properties(AzureEditor.ObservationHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_executable(AzureGenerationManifestTests tests/GenerationManifestTests.cpp)
@@ -536,8 +559,10 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.BuildProvenance COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_provenance.py")
     add_test(NAME AzureEngine.CharacterIntake COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_intake.py")
     add_test(NAME AzureEngine.CharacterPreparation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_preparation.py")
-    add_test(NAME AzureEditor.WorkspaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workspace.py" --executable $<TARGET_FILE:AzureRender>)
-    set_tests_properties(AzureEditor.WorkspaceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    if(WIN32)
+        add_test(NAME AzureEditor.WorkspaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_workspace.py" --executable $<TARGET_FILE:AzureRender>)
+        set_tests_properties(AzureEditor.WorkspaceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    endif()
     add_test(NAME AzureEngine.MaterialFixtureGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_fixture.py" --executable $<TARGET_FILE:AzureRender> --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
     add_test(NAME AzureEngine.IndependentAnimationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_independent_animation_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureEngine.ThirdPersonPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_third_person_player.py" --executable $<TARGET_FILE:AzurePlayer>)
@@ -1144,6 +1169,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/edit-operations.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/observations-generation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/ui-settings.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-proposals.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
@@ -1242,6 +1268,11 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/runtime-build-$<CONFIG>.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender" RENAME "runtime-build.json")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/tools/build_game.py"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/tools")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/tools/ai_bridge.py"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/tools")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools/ai/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/tools/ai"
+    FILES_MATCHING PATTERN "*.py" PATTERN "__pycache__" EXCLUDE)
 set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)

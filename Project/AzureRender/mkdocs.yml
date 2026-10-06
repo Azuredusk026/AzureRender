@@ -61,6 +61,7 @@ nav:
       - 渲染核心实施计划: plans/render-core-implementation.md
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
+      - 有界内容提案: runtime/content-proposals.md
       - UI 基础与设置: runtime/ui-settings.md
       - 观察验证与内容来源: runtime/observations-generation.md
       - 构建复现与素材准入: runtime/build-reproducibility.md
@@ -88,6 +89,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - G9 有界内容提案: acceptance/g9/2026-10-06.md
       - U4 UI 基础与设置: acceptance/u4/2026-10-06.md
       - F5 观察、内容与工具: acceptance/f5/2026-10-06.md
       - U3 编辑操作与文档事务: acceptance/u3/2026-10-06.md

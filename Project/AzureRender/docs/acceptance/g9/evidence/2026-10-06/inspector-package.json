@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\g9\\inspector-package\\Moved Scene Inspector",
+  "inputsHidden": true,
+  "isolatedEnvironment": true,
+  "manifestSha256": "1e0bbf35e30be8e84eaf8a942b364a90b35de329ff20dc034e18b0c3f80331bd",
+  "allocatorDuringRun": {
+    "bufferAllocations": 51,
+    "imageAllocations": 36,
+    "liveBuffers": 23,
+    "liveImages": 36,
+    "bufferBytes": 6980960,
+    "imageBytes": 47684608,
+    "liveBufferBytes": 5889440,
+    "liveImageBytes": 47684608,
+    "deviceLocalPeakBytes": 79822848
+  },
+  "released": true
+}
