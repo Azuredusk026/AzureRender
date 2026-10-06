@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 4: AzureRender.ResourceAccessProfile
+1/1 Test #4: AzureRender.ResourceAccessProfile ...***Failed    0.07 sec
+Update-after-bind layouts must use their separately queried limits
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.10 sec
+
+The following tests FAILED:
+	  4 - AzureRender.ResourceAccessProfile (Failed)
+Errors while running CTest

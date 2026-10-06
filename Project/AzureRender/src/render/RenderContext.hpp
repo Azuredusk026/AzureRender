@@ -167,6 +167,7 @@ struct RenderContext {
     // for this run. False selects vertex-shader skinning/morph.
     bool computeSkinning = false;
     bool gpuCulling = false;
+    bool visibilityPrototype = false;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
 

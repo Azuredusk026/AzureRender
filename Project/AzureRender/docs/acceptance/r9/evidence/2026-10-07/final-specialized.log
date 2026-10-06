@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start   1: AzureRender.VisibilityPrototype
+1/7 Test   #1: AzureRender.VisibilityPrototype .....   Passed    0.01 sec
+    Start   2: AzureTools.VisibilityBenchmark
+2/7 Test   #2: AzureTools.VisibilityBenchmark ......   Passed    0.56 sec
+    Start   3: AzureRender.VisibilityGpu
+3/7 Test   #3: AzureRender.VisibilityGpu ...........   Passed    0.45 sec
+    Start   4: AzureRender.ResourceAccessProfile
+4/7 Test   #4: AzureRender.ResourceAccessProfile ...   Passed    0.05 sec
+    Start 102: AzureRender.CommandLine
+5/7 Test #102: AzureRender.CommandLine .............   Passed    0.02 sec
+    Start 109: AzureRender.GpuCapabilityReport
+6/7 Test #109: AzureRender.GpuCapabilityReport .....   Passed    0.03 sec
+    Start 114: AzureRender.NullRhiPass
+7/7 Test #114: AzureRender.NullRhiPass .............   Passed    1.47 sec
+
+100% tests passed, 0 tests failed out of 7
+
+Label Time Summary:
+gpu    =   0.45 sec*proc (1 test)
+
+Total Test time (real) =   2.60 sec

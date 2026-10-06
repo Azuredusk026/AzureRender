@@ -37,4 +37,20 @@ struct SceneInstance {
     return visible.size();
 }
 
+// A view owns its filtered draw spans. Shadow cascades use independent
+// views so a caster submitted to one cascade does not enter every cascade.
+[[nodiscard]] inline std::vector<std::array<std::uint32_t,3>> visibleInstanceSpans(
+    const std::vector<SceneInstance>& instances, const FrustumPlanes& frustum, bool cullingEnabled) {
+    std::vector<std::array<std::uint32_t,3>> spans;
+    for(const auto& instance:instances) {
+        if(cullingEnabled && !boundsInsideFrustum(frustum,instance.worldBounds.minimum,instance.worldBounds.maximum))
+            continue;
+        if(!spans.empty() && spans.back()[0]==instance.meshKey
+            && std::uint64_t(spans.back()[1])+spans.back()[2]==instance.sourceIndex)
+            ++spans.back()[2];
+        else spans.push_back({instance.meshKey,instance.sourceIndex,1});
+    }
+    return spans;
+}
+
 }  // namespace azurerender::scene

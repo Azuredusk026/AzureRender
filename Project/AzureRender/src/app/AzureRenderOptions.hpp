@@ -49,6 +49,7 @@ struct AzureRenderOptions {
     bool computeSkinningDisabled = false;
     bool parallelRecordingDisabled = false;
     bool gpuCullingDisabled = false;
+    bool visibilityPrototype = false;
     bool multiDrawIndirectDisabled = false;
     bool fixedFrameStep = false;
     // QA stress knob: clone the default asset entity N times onto a grid to

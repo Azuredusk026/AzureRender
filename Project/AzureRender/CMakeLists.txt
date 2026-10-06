@@ -173,6 +173,8 @@ compile_shader("${SHADER_SOURCE_DIR}/editor_ui.frag")
 compile_shader("${SHADER_SOURCE_DIR}/editor_ui.frag" DEFINES AZURE_EDITOR_SRGB=1 OUTPUT_NAME editor_ui_srgb.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert")
 compile_shader("${SHADER_SOURCE_DIR}/cull_indirect.comp")
+compile_shader("${SHADER_SOURCE_DIR}/cull_indirect.comp"
+    DEFINES AZURE_SURFACE_IDENTITIES=1 OUTPUT_NAME visibility_prototype.comp)
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.vert"
     DEFINES AZURE_COMPUTE_SKINNING=1
@@ -263,6 +265,8 @@ add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
+    src/render/ResourceAccessProfile.cpp
+    src/render/VisibilityPrototype.cpp
     src/render/RendererCore.cpp
     src/render/GameUiRenderer.cpp
     src/render/RenderGraph.cpp
@@ -419,6 +423,31 @@ add_dependencies(AzureRender AzureGeometryCompiler)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureVisibilityPrototypeTests tests/VisibilityPrototypeTests.cpp)
+    target_link_libraries(AzureVisibilityPrototypeTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.VisibilityPrototype COMMAND AzureVisibilityPrototypeTests)
+    add_test(NAME AzureTools.VisibilityBenchmark COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_visibility_benchmark.py")
+    add_executable(AzureVisibilityGpuTests tests/VisibilityGpuTests.cpp)
+    target_link_libraries(AzureVisibilityGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureVisibilityGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.VisibilityGpu COMMAND AzureVisibilityGpuTests
+        "${SHADER_BINARY_DIR}/cull_indirect.comp.spv" "${SHADER_BINARY_DIR}/visibility_prototype.comp.spv"
+        "${CMAKE_CURRENT_BINARY_DIR}/visibility-gpu.json")
+    set_tests_properties(AzureRender.VisibilityGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureResourceAccessProfileTests tests/ResourceAccessProfileTests.cpp)
+    target_link_libraries(AzureResourceAccessProfileTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ResourceAccessProfile COMMAND AzureResourceAccessProfileTests)
+    add_executable(AzureSkinningBatchTests tests/SkinningBatchTests.cpp)
+    target_link_libraries(AzureSkinningBatchTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.SkinningBatch COMMAND AzureSkinningBatchTests)
+    add_executable(AzureViewBatchingTests tests/ViewBatchingTests.cpp)
+    target_link_libraries(AzureViewBatchingTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ViewBatching COMMAND AzureViewBatchingTests)
+    add_executable(AzureSkinningGpuTests tests/SkinningGpuTests.cpp)
+    target_link_libraries(AzureSkinningGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSkinningGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.SkinningGpu COMMAND AzureSkinningGpuTests "${SHADER_BINARY_DIR}/skin.comp.spv")
+    set_tests_properties(AzureRender.SkinningGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     if(AZURE_ENABLE_SHADER_MODULE_PROTOTYPE)
         add_executable(AzureShaderModuleTests tests/ShaderModuleTests.cpp)
         target_link_libraries(AzureShaderModuleTests PRIVATE AzureRenderCore)
@@ -865,6 +894,8 @@ if(BUILD_TESTING)
         src/render/ComputePass.cpp
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
+        src/render/ResourceAccessProfile.cpp
+        src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
         src/render/EnvironmentAsset.cpp
         src/render/RenderSettings.cpp
@@ -1257,6 +1288,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/development-previews.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/procedural-content.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/shader-modules.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/resource-visibility.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"

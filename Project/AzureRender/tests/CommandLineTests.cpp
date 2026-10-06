@@ -60,6 +60,9 @@ int main() try {
                 "Character inspection camera must be accepted");
     }
     const auto defaults = azurerender::parseCommandLine({});
+    require(!defaults.options.visibilityPrototype,"Visibility prototype must be optional");
+    require(azurerender::parseCommandLine({"--visibility-prototype"}).options.visibilityPrototype,
+            "Visibility prototype switch was not parsed");
     require(!defaults.options.qaDisableFaceCulling && !defaults.options.qaDisableDepthTest,
         "Face culling and depth must be enabled by default");
     require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,

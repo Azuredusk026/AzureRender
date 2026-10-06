@@ -1,0 +1,22 @@
+[0/2] Re-checking globbed directories...
+[1/22] Compiling visibility_prototype.comp
+[2/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\VisibilityPrototype.cpp.obj
+[3/22] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\render\VisibilityPrototype.cpp.obj
+[4/22] Building CXX object CMakeFiles\AzureVisibilityPrototypeTests.dir\tests\VisibilityPrototypeTests.cpp.obj
+[5/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\SampleSceneRenderer.cpp.obj
+[6/22] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[7/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[8/22] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\src\app\CommandLine.cpp.obj
+[9/22] Building CXX object CMakeFiles\AzureRenderCommandLineTests.dir\tests\CommandLineTests.cpp.obj
+[10/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[11/22] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+[12/22] Linking CXX executable AzureRenderCommandLineTests.exe
+[13/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderViewOutput.cpp.obj
+[14/22] Building CXX object CMakeFiles\AzureVisibilityGpuTests.dir\tests\VisibilityGpuTests.cpp.obj
+[15/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\RenderViewService.cpp.obj
+[16/22] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[17/22] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[18/22] Linking CXX static library AzureRenderCore.lib
+[19/22] Linking CXX executable AzureVisibilityPrototypeTests.exe
+[20/22] Linking CXX executable AzureVisibilityGpuTests.exe
+[21/22] Linking CXX executable AzureRenderNullRhiPassTests.exe

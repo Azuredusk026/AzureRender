@@ -12,6 +12,11 @@ struct DrawCommand {
 layout(std430, binding = 0) readonly buffer BoundsInput { Bounds bounds[]; };
 layout(std430, binding = 1) readonly buffer DrawInput { DrawCommand source[]; };
 layout(std430, binding = 2) writeonly buffer DrawOutput { DrawCommand outputCommands[]; };
+#ifdef AZURE_SURFACE_IDENTITIES
+struct Surface { uint instance; uint primitive; uint material; uint visible; };
+layout(std430,binding=3) readonly buffer SurfaceInput { Surface sourceSurfaces[]; };
+layout(std430,binding=4) writeonly buffer SurfaceOutput { Surface surfaces[]; };
+#endif
 layout(push_constant) uniform Parameters {
     vec4 planes[6];
     uint drawCount;
@@ -38,4 +43,9 @@ void main() {
     }
     command.instanceCount = visible ? command.instanceCount : 0;
     outputCommands[slot] = command;
+#ifdef AZURE_SURFACE_IDENTITIES
+    Surface surface=sourceSurfaces[slot];
+    surface.visible=command.instanceCount;
+    surfaces[slot]=surface;
+#endif
 }

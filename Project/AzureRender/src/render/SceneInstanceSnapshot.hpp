@@ -37,6 +37,7 @@ struct SceneInstanceSnapshot final {
     const std::vector<std::array<std::uint32_t, 3>> opaqueSpans;
     const std::vector<std::array<std::uint32_t, 3>> visibleSpans;
     const std::vector<std::array<std::uint32_t, 3>> shadowSpans;
+    const std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViewSpans;
     const std::vector<std::size_t> indirectOffsets;
     const std::vector<std::size_t> transparentOffsets;
 
@@ -48,10 +49,12 @@ struct SceneInstanceSnapshot final {
         std::vector<std::array<std::uint32_t, 3>> visibleBatches = {},
         RenderSettings renderSettings = {}, VkBuffer indirectHandle = VK_NULL_HANDLE,
         std::uint32_t frame = 0, RecordingGizmoState gizmoState = {},
-        RecordingBufferSet bufferSet = {})
+        RecordingBufferSet bufferSet = {},
+        std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews = {})
         : settings(std::move(renderSettings)), indirectBuffer(indirectHandle), frameIndex(frame),
           gizmo(std::move(gizmoState)), buffers(std::move(bufferSet)), instances(std::move(source)), visibleIndices(std::move(visible)),
           opaqueSpans(std::move(opaque)), visibleSpans(std::move(visibleBatches)), shadowSpans(std::move(shadow)),
+          shadowViewSpans(std::move(shadowViews)),
           indirectOffsets(std::move(indirect)), transparentOffsets(std::move(transparent)) {}
 
     void validateForRecording() const {
@@ -80,6 +83,7 @@ struct SceneInstanceSnapshot final {
         validateSpans(opaqueSpans);
         validateSpans(visibleSpans);
         validateSpans(shadowSpans);
+        for(const auto& spans:shadowViewSpans) validateSpans(spans);
     }
 };
 

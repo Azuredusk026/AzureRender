@@ -88,13 +88,15 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
-[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8 已验收。
+[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8、R9 已验收。
 
-系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 R9。
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 G11。
 
 程序化内容通过生成器与标准资产管线进入项目。
 几何与刚体契约见[程序化内容说明](docs/runtime/procedural-content.md)。
 制作步骤见[生成内容教程](docs/tutorials/procedural-content.md)。
+
+资源档位与稳定表面标识见[资源可见性说明](docs/runtime/resource-visibility.md)。
 
 共享参数与可选着色策略见[着色模块说明](docs/runtime/shader-modules.md)。
 

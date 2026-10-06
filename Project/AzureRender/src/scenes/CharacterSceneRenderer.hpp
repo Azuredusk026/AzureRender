@@ -10,6 +10,7 @@
 #include "render/GpuCullingResources.hpp"
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
+#include "render/SkinningBatch.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
@@ -166,13 +167,7 @@ private:
     };
     static_assert(sizeof(InstanceGpuData) == 432);
 
-    struct SkinningPushConstants {
-        std::uint32_t vertexCount = 0;
-        std::uint32_t jointBase = 0;
-        std::array<float, 2> morphWeights{};
-        std::uint32_t outputBase = 0;
-    };
-    static_assert(sizeof(SkinningPushConstants) == 20);
+    using SkinningPushConstants = SkinningBatch;
 
     // A scene-referenced asset beyond the hero. Renders at bind pose in the
     // current stage; its joints and material textures append after the hero
@@ -213,6 +208,7 @@ private:
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     void prepareTransparentIndices();
     bool gpuCullingEnabled_ = false;
+    bool visibilityPrototype_ = false;
     bool multiDrawIndirect_ = false;
     std::uint32_t maxDrawIndirectCount_ = 1;
     // Non-owning per-frame submission counters, refreshed from RenderContext at

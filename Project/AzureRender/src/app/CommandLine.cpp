@@ -76,6 +76,7 @@ constexpr const char* kHelp =
     "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
     "  --disable-parallel-recording      Record every pass on the main thread\n"
     "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
+    "  --visibility-prototype            Emit stable GPU surface identities\n"
     "  --qa-disable-face-culling         Diagnose winding by rendering both faces\n"
     "  --qa-disable-depth-test           Diagnose depth by showing submission order\n"
     "  --disable-multi-draw-indirect     Use one indirect command per call\n"
@@ -432,6 +433,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.parallelRecordingDisabled = true;
         } else if (argument == "--disable-gpu-culling") {
             parsed.options.gpuCullingDisabled = true;
+        } else if (argument == "--visibility-prototype") {
+            parsed.options.visibilityPrototype = true;
         } else if (argument == "--disable-multi-draw-indirect") {
             parsed.options.multiDrawIndirectDisabled = true;
         } else if (argument == "--fixed-frame-step") {

@@ -1,0 +1,7 @@
+[0/2] Re-checking globbed directories...
+[1/7] Building CXX object CMakeFiles\AzureRenderCore.dir\src\render\VisibilityPrototype.cpp.obj
+[2/7] Building CXX object CMakeFiles\AzureVisibilityPrototypeTests.dir\tests\VisibilityPrototypeTests.cpp.obj
+[3/7] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[4/7] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[5/7] Linking CXX static library AzureRenderCore.lib
+[6/7] Linking CXX executable AzureVisibilityPrototypeTests.exe

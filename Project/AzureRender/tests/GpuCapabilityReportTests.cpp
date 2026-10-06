@@ -6,16 +6,19 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 
 namespace {
 
 nlohmann::json parseReport(const std::string& text) {
     return nlohmann::json::parse(text);
 }
+void require(bool value) { if (!value) throw std::runtime_error("GPU capability report contract failed"); }
 
 }  // namespace
 
-int main() {
+int main() try {
     using namespace azurerender;
 
     VkPhysicalDeviceProperties properties{};
@@ -54,47 +57,52 @@ int main() {
     const nlohmann::json report = parseReport(text);
 
     // Schema contract: top-level fields exist with the expected types.
-    assert(report.contains("schema_version"));
-    assert(report["schema_version"] == 2);
-    assert(report.contains("device_name"));
-    assert(report["device_name"] == properties.deviceName);
-    assert(report.contains("vendor_id"));
-    assert(report["vendor_id"] == 0x10DE);
-    assert(report.contains("device_id"));
-    assert(report["device_id"] == 0x28A0);
-    assert(report.contains("api_version"));
-    assert(report["api_version"] == VK_API_VERSION_1_3);
-    assert(report.contains("driver_version"));
-    assert(report["driver_version"] == 0x123456);
+    require(report.contains("schema_version"));
+    require(report["schema_version"] == 3);
+    require(report.contains("resource_access"));
+    require(report["resource_access"]["enabled"]["descriptor_indexing"] == false);
+    require(report["resource_access"]["enabled"]["device_address"] == false);
+    require(report["resource_access"]["enabled"]["allocator_device_address"] == false);
+    require(report["resource_access"]["limits"]["max_per_stage_descriptor_samplers"] == 0);
+    require(report.contains("device_name"));
+    require(report["device_name"] == properties.deviceName);
+    require(report.contains("vendor_id"));
+    require(report["vendor_id"] == 0x10DE);
+    require(report.contains("device_id"));
+    require(report["device_id"] == 0x28A0);
+    require(report.contains("api_version"));
+    require(report["api_version"] == VK_API_VERSION_1_3);
+    require(report.contains("driver_version"));
+    require(report["driver_version"] == 0x123456);
 
     // Feature contract.
-    assert(report.contains("features"));
-    assert(report["features"]["sampler_anisotropy"] == true);
-    assert(report["features"]["shader_int64"] == false);
-    assert(report["compute"]["shader"] == true);
-    assert(report["compute"]["storage_image_write_without_format"] == false);
+    require(report.contains("features"));
+    require(report["features"]["sampler_anisotropy"] == true);
+    require(report["features"]["shader_int64"] == false);
+    require(report["compute"]["shader"] == true);
+    require(report["compute"]["storage_image_write_without_format"] == false);
 
     // Descriptor indexing contract.
-    assert(report.contains("descriptor_indexing"));
-    assert(report["descriptor_indexing"]["runtime_descriptor_array"] == true);
-    assert(
+    require(report.contains("descriptor_indexing"));
+    require(report["descriptor_indexing"]["runtime_descriptor_array"] == true);
+    require(
         report["descriptor_indexing"]
               ["shader_sampled_image_array_non_uniform_indexing"]
         == true);
-    assert(
+    require(
         report["descriptor_indexing"]["descriptor_binding_partially_bound"]
         == false);
-    assert(
+    require(
         report["descriptor_indexing"]
               ["descriptor_binding_variable_descriptor_count"]
         == false);
 
     // Extension array contract.
-    assert(report.contains("extensions"));
-    assert(report["extensions"].is_array());
-    assert(report["extensions"].size() == 2);
-    assert(report["extensions"][0] == "VK_KHR_swapchain");
-    assert(report["extensions"][1] == "VK_KHR_dynamic_rendering");
+    require(report.contains("extensions"));
+    require(report["extensions"].is_array());
+    require(report["extensions"].size() == 2);
+    require(report["extensions"][0] == "VK_KHR_swapchain");
+    require(report["extensions"][1] == "VK_KHR_dynamic_rendering");
 
     // JSON safety: embedded quotes and backslashes must be escaped so the
     // document still parses and round-trips exactly.
@@ -109,7 +117,7 @@ int main() {
         VkPhysicalDeviceVulkan12Features{},
         {});
     const nlohmann::json hostile = parseReport(hostileText);
-    assert(hostile["device_name"] == hostileProperties.deviceName);
+    require(hostile["device_name"] == hostileProperties.deviceName);
 
     return 0;
-}
+} catch (const std::exception& error) { std::cerr << error.what() << '\n'; return 1; }

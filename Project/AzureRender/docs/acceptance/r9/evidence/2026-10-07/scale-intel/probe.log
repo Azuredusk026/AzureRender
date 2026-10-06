@@ -1,0 +1,551 @@
+{
+  "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+  "runs": [
+    {
+      "cpuRecordMeanMs": 0.03120666666666666,
+      "cpuRecordSamplesMs": [
+        0.0233,
+        0.0207,
+        0.0185,
+        0.0183,
+        0.0184,
+        0.0341,
+        0.0439,
+        0.0341,
+        0.0172,
+        0.0223,
+        0.0168,
+        0.019,
+        0.0171,
+        0.0172,
+        0.017,
+        0.0367,
+        0.0249,
+        0.0372,
+        0.0175,
+        0.0176,
+        0.0666,
+        0.018,
+        0.0175,
+        0.1023,
+        0.0455,
+        0.0488,
+        0.0184,
+        0.0858,
+        0.0202,
+        0.0413
+      ],
+      "gpuMeanMs": 0.014321180205917357,
+      "gpuSamplesMs": [
+        0.014479166313171386,
+        0.014479166313171386,
+        0.012812499687194823,
+        0.012812499687194823,
+        0.014583332977294921,
+        0.016614582927703857,
+        0.014531249645233155,
+        0.014479166313171386,
+        0.017187499580383302,
+        0.01442708298110962,
+        0.014479166313171386,
+        0.012760416355133057,
+        0.012708333023071288,
+        0.012708333023071288,
+        0.012760416355133057,
+        0.014583332977294921,
+        0.01463541630935669,
+        0.01463541630935669,
+        0.012760416355133057,
+        0.014583332977294921,
+        0.014531249645233155,
+        0.012760416355133057,
+        0.014583332977294921,
+        0.016822916255950927,
+        0.014791666305541993,
+        0.014531249645233155,
+        0.014531249645233155,
+        0.014739582973480225,
+        0.014583332977294921,
+        0.014739582973480225
+      ],
+      "instances": 100,
+      "prototype": false,
+      "samples": 30,
+      "visible": 75
+    },
+    {
+      "cpuRecordMeanMs": 0.025013333333333335,
+      "cpuRecordSamplesMs": [
+        0.0311,
+        0.0238,
+        0.0562,
+        0.0356,
+        0.0429,
+        0.0267,
+        0.0246,
+        0.0231,
+        0.0229,
+        0.0231,
+        0.0233,
+        0.0242,
+        0.0246,
+        0.0227,
+        0.0212,
+        0.0227,
+        0.0216,
+        0.0211,
+        0.0209,
+        0.0209,
+        0.0211,
+        0.021,
+        0.0213,
+        0.0248,
+        0.0225,
+        0.021,
+        0.0208,
+        0.0212,
+        0.021,
+        0.0225
+      ],
+      "gpuMeanMs": 0.019406249526214597,
+      "gpuSamplesMs": [
+        0.06005208186721802,
+        0.0536458320236206,
+        0.04822916548919678,
+        0.045208332229614255,
+        0.013593749668121338,
+        0.013593749668121338,
+        0.01354166633605957,
+        0.013437499671936035,
+        0.013593749668121338,
+        0.013437499671936035,
+        0.01354166633605957,
+        0.013437499671936035,
+        0.013437499671936035,
+        0.014322916316986085,
+        0.014374999649047851,
+        0.013489583003997803,
+        0.015312499626159668,
+        0.014531249645233155,
+        0.014322916316986085,
+        0.014479166313171386,
+        0.014270832984924316,
+        0.01572916628265381,
+        0.014322916316986085,
+        0.022708332778930664,
+        0.014322916316986085,
+        0.014479166313171386,
+        0.014374999649047851,
+        0.014479166313171386,
+        0.014374999649047851,
+        0.01354166633605957
+      ],
+      "instances": 100,
+      "prototype": true,
+      "samples": 30,
+      "visible": 75
+    },
+    {
+      "cpuRecordMeanMs": 0.019870000000000002,
+      "cpuRecordSamplesMs": [
+        0.0185,
+        0.0178,
+        0.0167,
+        0.0164,
+        0.0165,
+        0.0167,
+        0.0165,
+        0.0175,
+        0.0345,
+        0.0221,
+        0.0178,
+        0.046,
+        0.0297,
+        0.0193,
+        0.0182,
+        0.0179,
+        0.0176,
+        0.0175,
+        0.0195,
+        0.0178,
+        0.0176,
+        0.0175,
+        0.0178,
+        0.0206,
+        0.0188,
+        0.018,
+        0.0179,
+        0.0175,
+        0.0178,
+        0.0181
+      ],
+      "gpuMeanMs": 0.01382986077346802,
+      "gpuSamplesMs": [
+        0.013020833015441895,
+        0.029322915950775148,
+        0.013958332992553711,
+        0.014062499656677246,
+        0.014010416324615478,
+        0.014062499656677246,
+        0.014010416324615478,
+        0.013177083011627197,
+        0.013177083011627197,
+        0.013177083011627197,
+        0.01312499967956543,
+        0.013697916332244873,
+        0.01312499967956543,
+        0.01312499967956543,
+        0.013072916347503662,
+        0.01312499967956543,
+        0.013072916347503662,
+        0.013177083011627197,
+        0.013072916347503662,
+        0.01312499967956543,
+        0.013072916347503662,
+        0.01312499967956543,
+        0.013072916347503662,
+        0.01312499967956543,
+        0.013072916347503662,
+        0.013229166343688965,
+        0.013072916347503662,
+        0.013177083011627197,
+        0.01312499967956543,
+        0.01312499967956543
+      ],
+      "instances": 500,
+      "prototype": false,
+      "samples": 30,
+      "visible": 375
+    },
+    {
+      "cpuRecordMeanMs": 0.023186666666666664,
+      "cpuRecordSamplesMs": [
+        0.0239,
+        0.0231,
+        0.0259,
+        0.0228,
+        0.0248,
+        0.0228,
+        0.0225,
+        0.0226,
+        0.0227,
+        0.0258,
+        0.0233,
+        0.0223,
+        0.0223,
+        0.0226,
+        0.0223,
+        0.0225,
+        0.0224,
+        0.0223,
+        0.0224,
+        0.0223,
+        0.0289,
+        0.0238,
+        0.023,
+        0.0229,
+        0.023,
+        0.0227,
+        0.0225,
+        0.0225,
+        0.0223,
+        0.0224
+      ],
+      "gpuMeanMs": 0.014539930200576784,
+      "gpuSamplesMs": [
+        0.01374999966430664,
+        0.013802082996368408,
+        0.01374999966430664,
+        0.03374999917602539,
+        0.013697916332244873,
+        0.013697916332244873,
+        0.01374999966430664,
+        0.013697916332244873,
+        0.01374999966430664,
+        0.01374999966430664,
+        0.013697916332244873,
+        0.013645833000183105,
+        0.013802082996368408,
+        0.013802082996368408,
+        0.01374999966430664,
+        0.013802082996368408,
+        0.013802082996368408,
+        0.013802082996368408,
+        0.013802082996368408,
+        0.013697916332244873,
+        0.015416666290283203,
+        0.013645833000183105,
+        0.01593749961090088,
+        0.013854166328430177,
+        0.01374999966430664,
+        0.013802082996368408,
+        0.013645833000183105,
+        0.01374999966430664,
+        0.013645833000183105,
+        0.01374999966430664
+      ],
+      "instances": 500,
+      "prototype": true,
+      "samples": 30,
+      "visible": 375
+    },
+    {
+      "cpuRecordMeanMs": 0.025189999999999997,
+      "cpuRecordSamplesMs": [
+        0.0251,
+        0.0197,
+        0.0214,
+        0.018,
+        0.1651,
+        0.0379,
+        0.023,
+        0.0184,
+        0.0208,
+        0.0192,
+        0.0192,
+        0.0212,
+        0.0198,
+        0.0176,
+        0.0381,
+        0.0179,
+        0.0177,
+        0.0179,
+        0.0176,
+        0.0177,
+        0.0174,
+        0.0174,
+        0.0178,
+        0.0178,
+        0.0177,
+        0.0216,
+        0.0201,
+        0.0176,
+        0.0175,
+        0.0175
+      ],
+      "gpuMeanMs": 0.028932290960311895,
+      "gpuSamplesMs": [
+        0.027968749317169188,
+        0.02817708264541626,
+        0.0285937493019104,
+        0.028489582637786864,
+        0.028958332626342773,
+        0.03249999920654297,
+        0.028124999313354493,
+        0.02984374927139282,
+        0.027760415988922118,
+        0.03703124909591675,
+        0.0285937493019104,
+        0.028020832649230956,
+        0.028124999313354493,
+        0.028281249309539794,
+        0.028749999298095703,
+        0.02838541597366333,
+        0.02817708264541626,
+        0.028281249309539794,
+        0.028333332641601563,
+        0.028489582637786864,
+        0.02817708264541626,
+        0.028541665969848633,
+        0.028489582637786864,
+        0.028072915981292725,
+        0.030208332595825196,
+        0.030885415912628174,
+        0.027916665985107423,
+        0.027968749317169188,
+        0.028281249309539794,
+        0.028541665969848633
+      ],
+      "instances": 10000,
+      "prototype": false,
+      "samples": 30,
+      "visible": 7500
+    },
+    {
+      "cpuRecordMeanMs": 0.024409999999999998,
+      "cpuRecordSamplesMs": [
+        0.0235,
+        0.0229,
+        0.0229,
+        0.023,
+        0.0235,
+        0.0239,
+        0.0236,
+        0.023,
+        0.025,
+        0.023,
+        0.023,
+        0.0226,
+        0.0231,
+        0.0224,
+        0.0225,
+        0.0264,
+        0.0224,
+        0.0224,
+        0.0226,
+        0.0226,
+        0.0222,
+        0.0231,
+        0.0247,
+        0.0227,
+        0.0225,
+        0.0223,
+        0.0224,
+        0.0226,
+        0.0228,
+        0.0627
+      ],
+      "gpuMeanMs": 0.03286631864204407,
+      "gpuSamplesMs": [
+        0.0322916658782959,
+        0.03223958254623413,
+        0.03213541588211059,
+        0.03255208253860473,
+        0.03234374921035767,
+        0.031979165885925295,
+        0.03187499922180176,
+        0.034427082492828366,
+        0.03249999920654297,
+        0.03192708255386353,
+        0.03213541588211059,
+        0.03187499922180176,
+        0.03182291588973999,
+        0.03223958254623413,
+        0.04052083234405517,
+        0.034791665817260745,
+        0.032447915874481204,
+        0.032395832542419435,
+        0.03234374921035767,
+        0.031666665893554685,
+        0.03223958254623413,
+        0.03255208253860473,
+        0.03276041586685181,
+        0.032083332550048825,
+        0.03276041586685181,
+        0.032083332550048825,
+        0.03312499919128418,
+        0.031666665893554685,
+        0.0326041658706665,
+        0.037604165748596194
+      ],
+      "instances": 10000,
+      "prototype": true,
+      "samples": 30,
+      "visible": 7500
+    }
+  ],
+  "schemaVersion": 1,
+  "status": "passed",
+  "validationErrors": 0
+}
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device ROOT\DISPLAY\0000
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_8086&DEV_A788&SUBSYS_8BAB103C&REV_04\3&11583659&0&10
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 3 - SWD\DRIVERENUM\IGCC&4&38D58666&0
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 4 - DISPLAY\BOE0B7D\4&38D58666&0&UID8388688
+[Vulkan Loader] DEBUG | LAYER:  windows_get_device_registry_files: GUID for 4 is not SoftwareComponent skipping
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_10DE&DEV_28E0&SUBSYS_8BAB103C&REV_A1\4&34cfc80f&0&0008
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] LAYER:          windows_get_device_registry_files: found no registry files
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_api_dump.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_gfxreconstruct.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_synchronization2.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_monitor.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_screenshot.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_profiles.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_shader_object.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_crash_diagnostic.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] WARNING | LAYER: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+[Vulkan Loader] WARNING | LAYER: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\VulkanSDK\1.4.350.0\Bin\.\VkLayer_khronos_validation.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\ProgramData\obs-studio-hook\.\graphics-hook64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_OBS_HOOK" (C:\ProgramData\obs-studio-hook\graphics-hook64.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\.\nvoglv64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_NV_present" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\.\nvoglv64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] LAYER:          vkCreateInstance layer callstack setup to:
+[Vulkan Loader] LAYER:             <Application>
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             <Loader>
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_optimus
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_OPTIMUS_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_present
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_PRESENT_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_OBS_HOOK
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_VULKAN_OBS_CAPTURE
+[Vulkan Loader] LAYER:                     Manifest: C:\ProgramData\obs-studio-hook\obs-vulkan64.json
+[Vulkan Loader] LAYER:                     Library:  C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_KHRONOS_validation
+[Vulkan Loader] LAYER:                     Type: Explicit
+[Vulkan Loader] LAYER:                     Enabled By: Environment Variable VK_INSTANCE_LAYERS
+[Vulkan Loader] LAYER:                     Manifest: C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json
+[Vulkan Loader] LAYER:                     Library:  C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             <Drivers>
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_OBS_HOOK" (C:\ProgramData\obs-studio-hook\graphics-hook64.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_NV_present" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] DRIVER:         vkCreateDevice layer callstack setup to:
+[Vulkan Loader] DRIVER:            <Application>
+[Vulkan Loader] DRIVER:              ||
+[Vulkan Loader] DRIVER:            <Loader>
+[Vulkan Loader] DRIVER:              ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_optimus
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_OPTIMUS_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_present
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_PRESENT_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_OBS_HOOK
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_VULKAN_OBS_CAPTURE
+[Vulkan Loader] LAYER:                     Manifest: C:\ProgramData\obs-studio-hook\obs-vulkan64.json
+[Vulkan Loader] LAYER:                     Library:  C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_KHRONOS_validation
+[Vulkan Loader] LAYER:                     Type: Explicit
+[Vulkan Loader] LAYER:                     Enabled By: Environment Variable VK_INSTANCE_LAYERS
+[Vulkan Loader] LAYER:                     Manifest: C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json
+[Vulkan Loader] LAYER:                     Library:  C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] DRIVER:            <Device>
+[Vulkan Loader] DRIVER:                Using "Intel(R) RaptorLake-S Mobile Graphics Controller" with driver: "C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_1ed7c95e585e0202\igvk64.dll"
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll

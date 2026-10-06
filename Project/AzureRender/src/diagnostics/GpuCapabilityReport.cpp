@@ -14,13 +14,15 @@ std::string formatGpuCapabilityReport(
     const VkPhysicalDeviceProperties& properties,
     const VkPhysicalDeviceFeatures& features,
     const VkPhysicalDeviceVulkan12Features& vulkan12Features,
-    const std::vector<VkExtensionProperties>& extensions) {
+    const std::vector<VkExtensionProperties>& extensions,
+    GpuEnabledCapabilities enabled,
+    const VkPhysicalDeviceDescriptorIndexingProperties& indexing) {
     nlohmann::json extensionsJson = nlohmann::json::array();
     for (const VkExtensionProperties& extension : extensions) {
         extensionsJson.push_back(extension.extensionName);
     }
     nlohmann::json report = {
-        {"schema_version", 2},
+        {"schema_version", 3},
         {"device_name", properties.deviceName},
         {"vendor_id", properties.vendorID},
         {"device_id", properties.deviceID},
@@ -44,6 +46,27 @@ std::string formatGpuCapabilityReport(
           {"descriptor_binding_variable_descriptor_count",
            vulkan12Features.descriptorBindingVariableDescriptorCount
                == VK_TRUE}}},
+        {"resource_access", {
+            {"supported", {
+                {"device_address", vulkan12Features.bufferDeviceAddress == VK_TRUE},
+                {"sampled_image_update_after_bind", vulkan12Features.descriptorBindingSampledImageUpdateAfterBind == VK_TRUE}}},
+            {"enabled", {{"descriptor_indexing",enabled.descriptorIndexing},
+                {"device_address",enabled.deviceAddress},
+                {"allocator_device_address",enabled.allocatorDeviceAddress},
+                {"update_after_bind",enabled.updateAfterBind}}},
+            {"limits", {
+                {"max_per_stage_descriptor_samplers", properties.limits.maxPerStageDescriptorSamplers},
+                {"max_descriptor_set_samplers", properties.limits.maxDescriptorSetSamplers},
+                {"max_per_stage_descriptor_sampled_images", properties.limits.maxPerStageDescriptorSampledImages},
+                {"max_descriptor_set_sampled_images", properties.limits.maxDescriptorSetSampledImages},
+                {"max_per_stage_resources", properties.limits.maxPerStageResources},
+                {"max_per_stage_update_after_bind_samplers", indexing.maxPerStageDescriptorUpdateAfterBindSamplers},
+                {"max_set_update_after_bind_samplers", indexing.maxDescriptorSetUpdateAfterBindSamplers},
+                {"max_per_stage_update_after_bind_sampled_images", indexing.maxPerStageDescriptorUpdateAfterBindSampledImages},
+                {"max_set_update_after_bind_sampled_images", indexing.maxDescriptorSetUpdateAfterBindSampledImages},
+                {"max_per_stage_update_after_bind_resources", indexing.maxPerStageUpdateAfterBindResources},
+                {"max_update_after_bind_descriptors_all_pools", indexing.maxUpdateAfterBindDescriptorsInAllPools}}}
+        }},
         {"extensions", extensionsJson},
     };
     return report.dump(2) + "\n";
@@ -51,11 +74,17 @@ std::string formatGpuCapabilityReport(
 
 bool writeGpuCapabilityReport(
     const VkPhysicalDevice device,
-    const std::filesystem::path& path) noexcept {
+    const std::filesystem::path& path,
+    GpuEnabledCapabilities enabled) noexcept {
     try {
         VkPhysicalDeviceProperties properties{};
         VkPhysicalDeviceFeatures features{};
-        vkGetPhysicalDeviceProperties(device, &properties);
+        VkPhysicalDeviceDescriptorIndexingProperties indexing{
+            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES};
+        VkPhysicalDeviceProperties2 properties2{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
+        properties2.pNext = &indexing;
+        vkGetPhysicalDeviceProperties2(device, &properties2);
+        properties = properties2.properties;
         VkPhysicalDeviceVulkan12Features vulkan12Features{
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
         VkPhysicalDeviceFeatures2 features2{
@@ -81,7 +110,7 @@ bool writeGpuCapabilityReport(
             return false;
         }
         output << formatGpuCapabilityReport(
-            properties, features, vulkan12Features, extensions);
+            properties, features, vulkan12Features, extensions, enabled, indexing);
         if (!output) {
             RuntimeDiagnostics::instance().error(
                 "gpu", DiagnosticCode::Runtime,

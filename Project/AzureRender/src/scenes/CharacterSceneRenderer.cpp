@@ -1,4 +1,6 @@
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "render/ResourceAccessProfile.hpp"
+#include "render/ResourceIndexTable.hpp"
 
 #include "render/RenderMath.hpp"
 #include "resources/BinaryFile.hpp"
@@ -243,6 +245,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
     gpuCullingEnabled_ = context.gpuCulling;
+    visibilityPrototype_ = context.visibilityPrototype && context.gpuCulling;
     multiDrawIndirect_ = context.multiDrawIndirect;
     maxDrawIndirectCount_ = std::max(1U, context.maxDrawIndirectCount);
     rampAtlasPath_ = context.rampAtlasPath;
@@ -374,12 +377,13 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     const std::uint64_t indexedSlots = kSharedTextureSlots
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     const auto& limits = context.descriptorLimits;
-    const bool indexedCapacity = indexedSlots <= limits.maxPerStageDescriptorSamplers
-        && indexedSlots <= limits.maxDescriptorSetSamplers
-        && indexedSlots <= limits.maxPerStageDescriptorSampledImages
-        && indexedSlots <= limits.maxDescriptorSetSampledImages
-        && indexedSlots + 4 <= limits.maxPerStageResources;
-    bindlessTextures_ = context.bindlessTextures && indexedCapacity;
+    DeviceCapabilities capabilities;
+    capabilities.descriptorIndexingSupported=context.bindlessTextures;
+    capabilities.descriptorIndexingEnabled=context.bindlessTextures;
+    capabilities.limits=limits;
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots,11,4});
+    if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
+    bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
         "render", "Character texture access: "
             + std::string(bindlessTextures_ ? "indexed" : "fixed")
@@ -445,20 +449,9 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     updateUniformBuffer(frame);
     rebuildSceneInstances();
     prepareTransparentIndices();
-    opaqueRecordingSpans_.clear();
-    if (gpuCullingFrames_[currentFrame_]) {
-        for (const auto& instance : sceneInstances_) {
-            if (!opaqueRecordingSpans_.empty()
-                && opaqueRecordingSpans_.back()[0] == instance.meshKey
-                && scene::mirroredTransform(sceneInstances_[opaqueRecordingSpans_.back()[1]].model)
-                    == scene::mirroredTransform(instance.model)
-                && opaqueRecordingSpans_.back()[1] + opaqueRecordingSpans_.back()[2] == instance.sourceIndex)
-                ++opaqueRecordingSpans_.back()[2];
-            else opaqueRecordingSpans_.push_back({instance.meshKey, instance.sourceIndex, 1});
-        }
-    } else {
-        opaqueRecordingSpans_ = visibleSpansByMeshKey_;
-    }
+    // CPU visibility already participates in this renderer. Preserve stable
+    // GPU command slots while omitting known-empty runs from main submission.
+    opaqueRecordingSpans_ = visibleSpansByMeshKey_;
     buildSceneState();
     std::vector<std::uint32_t> visibleIndices;
     visibleIndices.reserve(visibleInstances_.size());
@@ -479,11 +472,14 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         recordingBuffers.indices.push_back(renderIndexBuffer(key).buffer);
     }
     if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
+    std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews;
+    for(const auto& frustum:shadowCascadeFrusta_)
+        shadowViews.push_back(scene::visibleInstanceSpans(sceneInstances_,frustum,cullingEnabled_));
     instanceSnapshot_ = std::make_shared<const SceneInstanceSnapshot>(
         std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
         std::move(visibleShadowSpansByMeshKey_), std::move(indirectInstanceOffsets_), std::move(transparentIndexOffsets_), std::move(visibleSpansByMeshKey_), *renderSettings_,
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
-        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers));
+        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews));
     visibleInstances_.clear();
 }
 
@@ -561,7 +557,22 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         }
         instance.worldBounds = scene::transformBounds(bounds, instance.model);
         instancePoses_.push_back({std::move(pose), instance.meshKey, jointBase, vertexBase, morph});
-        skinningDispatches_.push_back({instance.meshKey,{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,vertexBase}});
+        // Preserve stable pose slices for every instance. Only views that
+        // consume deformed geometry require writing the GPU vertex slice.
+        const auto& worldBounds = instance.worldBounds;
+        const bool requiredByMain = scene::boundsInsideFrustum(viewFrustum_,
+            worldBounds.minimum, worldBounds.maximum);
+        const bool requiredByShadow = std::any_of(shadowCascadeFrusta_.begin(),
+            shadowCascadeFrusta_.end(), [&](const scene::FrustumPlanes& frustum) {
+                return scene::boundsInsideFrustum(frustum, worldBounds.minimum, worldBounds.maximum);
+            });
+        if (!cullingEnabled_ || requiredByMain || requiredByShadow) {
+            const SkinningBatch slice{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,
+                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size()),1};
+            if (skinningDispatches_.empty() || skinningDispatches_.back().meshKey!=instance.meshKey
+                || !appendSkinningSlice(skinningDispatches_.back().parameters,slice))
+                skinningDispatches_.push_back({instance.meshKey,slice});
+        }
         jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size());
         vertexBase += static_cast<std::uint32_t>(mesh.vertices.size());
     }
@@ -671,6 +682,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     if (gpuCullingEnabled_ && !sceneInstances_.empty()) {
         std::vector<GpuCullBounds> bounds;
         std::vector<VkDrawIndexedIndirectCommand> commands;
+        std::vector<GpuSurfaceIdentity> surfaces;
         indirectInstanceOffsets_.clear();
         for (const auto& instance : sceneInstances_) {
             indirectInstanceOffsets_.push_back(commands.size());
@@ -678,18 +690,28 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 {instance.worldBounds.minimum[0], instance.worldBounds.minimum[1], instance.worldBounds.minimum[2], 0},
                 {instance.worldBounds.maximum[0], instance.worldBounds.maximum[1], instance.worldBounds.maximum[2], 0}});
             const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
-            for (const auto& primitive : mesh.primitives)
+            std::uint32_t primitiveIndex=0;
+            const auto materialBase=instance.meshKey==0?0U:
+                static_cast<std::uint32_t>(additionalResources_[instance.meshKey-1]->globalMaterialBase);
+            for (const auto& primitive : mesh.primitives) {
                 commands.push_back({primitive.indexCount, 1, primitive.firstIndex, 0, instance.sourceIndex});
+                if(visibilityPrototype_)surfaces.push_back({instance.sourceIndex,primitiveIndex,materialBase+primitive.materialIndex,0});
+                ++primitiveIndex;
+            }
         }
         const auto capacity = std::max(bounds.size(), commands.size());
         if (gpuCullingCapacities_[currentFrame_] < capacity) {
             auto resources = std::make_unique<GpuCullingResources>(*rhi_);
-            resources->initialize(azurerender::readBinaryFile(shaderDirectory_ + "/cull_indirect.comp.spv"),
-                                  static_cast<std::uint32_t>(capacity));
+            resources->initialize(azurerender::readBinaryFile(shaderDirectory_ +
+                                  (visibilityPrototype_?"/visibility_prototype.comp.spv":"/cull_indirect.comp.spv")),
+                                  static_cast<std::uint32_t>(capacity),visibilityPrototype_);
             gpuCullingFrames_[currentFrame_] = std::move(resources);
             gpuCullingCapacities_[currentFrame_] = capacity;
         }
-        gpuCullingFrames_[currentFrame_]->upload(bounds, commands);
+        if(visibilityPrototype_) {
+            VisibilityPrototype::validateSources(bounds,commands,surfaces);
+            gpuCullingFrames_[currentFrame_]->upload(bounds,commands,surfaces);
+        } else gpuCullingFrames_[currentFrame_]->upload(bounds, commands);
     }
     visibleInstances_.clear();
     if (cullingEnabled_) {
@@ -949,6 +971,16 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(cull, bounds, RenderGraphUsage::Storage, false);
         graph.use(cull, source, RenderGraphUsage::Storage, false);
         graph.use(cull, *indirectResource, RenderGraphUsage::Storage, true);
+        if(visibilityPrototype_) {
+            const auto identities=importHostBuffer("visibility-surface-source",culling->surfaceSource());
+            rhi::BufferBarrierDesc initial{};
+            initial.buffer=culling->surfaceOutput().buffer;initial.size=culling->surfaceOutput().size;
+            initial.dstStageMask=VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
+            initial.dstAccessMask=VK_ACCESS_SHADER_WRITE_BIT;
+            const auto output=graph.importBuffer("visibility-surface-output",initial);
+            graph.use(cull,identities,RenderGraphUsage::Storage,false);
+            graph.use(cull,output,RenderGraphUsage::Storage,true);
+        }
     }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
@@ -1683,7 +1715,7 @@ void CharacterSceneRenderer::recordComputeSkinningMesh(
         if (dispatchItem.meshKey != meshKey) continue;
         const auto& parameters=dispatchItem.parameters;
         commands.pushConstants(skinningPipelineLayout_, VK_SHADER_STAGE_COMPUTE_BIT, 0, &parameters, sizeof(parameters));
-        ComputePass dispatch({static_cast<std::uint32_t>(mesh.vertices.size()), 1, 64, 1, 1, true});
+        ComputePass dispatch({static_cast<std::uint32_t>(mesh.vertices.size()), parameters.instanceCount, 64, 1, 1, true});
         dispatch.record(commands, skinningPipeline_, skinningPipelineLayout_, skinningDescriptorSets_[setIndex]);
     }
 
@@ -1883,15 +1915,22 @@ void CharacterSceneRenderer::createDescriptorSets() {
         // One array write per frame set: shared slots first, then the
         // per-material blocks in shader-visible order.
         std::vector<VkDescriptorImageInfo> images;
-        images.reserve(
-            kSharedTextureSlots
-            + kMaterialTextureSlots * asset_.materials.size());
-        const auto appendTexture = [&images](const GpuTexture& texture) {
+        const auto slots=static_cast<std::uint32_t>(kSharedTextureSlots + kMaterialTextureSlots * totalMaterialCount());
+        images.reserve(slots);
+        // Own descriptor values; the renderer retains native texture owners
+        // until its host has retired all frame fences.
+        ResourceIndexTable<VkDescriptorImageInfo> bindings(slots);
+        const auto appendInfo = [&images,&bindings](VkDescriptorImageInfo info) {
+            const auto handle=bindings.insert(std::make_shared<const VkDescriptorImageInfo>(info));
+            if(handle.slot!=images.size()) throw std::logic_error("Texture block slot order changed");
+            images.push_back(*bindings.acquire(handle,0).resource);
+        };
+        const auto appendTexture = [&appendInfo](const GpuTexture& texture) {
             VkDescriptorImageInfo info{};
             info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             info.imageView = texture.view;
             info.sampler = texture.sampler;
-            images.push_back(info);
+            appendInfo(info);
         };
         appendTexture(environmentTexture_);
         {
@@ -1900,7 +1939,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             shadowInfo.imageView = shadowImageView_;
             shadowInfo.sampler = shadowSampler_;
-            images.push_back(shadowInfo);
+            appendInfo(shadowInfo);
         }
         appendTexture(toonRampTexture_);
         for (const GpuMaterial& material : gpuMaterials_) {
@@ -2848,8 +2887,9 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->pushConstantUpdates;
         }
-        for (const std::array<std::uint32_t, 3>& span :
-             snapshot->shadowSpans) {
+        const auto& cascadeSpans = snapshot->shadowViewSpans.empty()
+            ? snapshot->shadowSpans : snapshot->shadowViewSpans.at(cascade);
+        for (const std::array<std::uint32_t, 3>& span : cascadeSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];
         const std::uint32_t instanceCount = span[2];

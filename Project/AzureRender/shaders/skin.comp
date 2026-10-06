@@ -19,6 +19,8 @@ layout(push_constant) uniform SkinningParameters {
     uint jointBase;
     vec2 morphWeights;
     uint outputBase;
+    uint jointStride;
+    uint instanceCount;
 } parameters;
 
 const uint vertexWordCount = 27u;
@@ -29,11 +31,12 @@ float readFloat(uint wordIndex) {
 
 void main() {
     uint vertexIndex = gl_GlobalInvocationID.x;
-    if (vertexIndex >= parameters.vertexCount) {
+    uint instanceIndex = gl_GlobalInvocationID.y;
+    if (vertexIndex >= parameters.vertexCount || instanceIndex >= parameters.instanceCount) {
         return;
     }
     uint base = vertexIndex * vertexWordCount;
-    uint destination = (parameters.outputBase + vertexIndex)*vertexWordCount;
+    uint destination = (parameters.outputBase + instanceIndex * parameters.vertexCount + vertexIndex)*vertexWordCount;
     for (uint word = 0u; word < vertexWordCount; ++word) {
         skinnedVertices.words[destination + word] = sourceVertices.words[base + word];
     }
@@ -73,11 +76,12 @@ void main() {
         + morph0 * parameters.morphWeights.x
         + morph1 * parameters.morphWeights.y;
 
+    uint jointBase = parameters.jointBase + instanceIndex * parameters.jointStride;
     mat4 skinMatrix =
-        weights.x * jointData.matrices[parameters.jointBase + joints.x]
-        + weights.y * jointData.matrices[parameters.jointBase + joints.y]
-        + weights.z * jointData.matrices[parameters.jointBase + joints.z]
-        + weights.w * jointData.matrices[parameters.jointBase + joints.w];
+        weights.x * jointData.matrices[jointBase + joints.x]
+        + weights.y * jointData.matrices[jointBase + joints.y]
+        + weights.z * jointData.matrices[jointBase + joints.z]
+        + weights.w * jointData.matrices[jointBase + joints.w];
     vec3 skinnedPosition =
         (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);

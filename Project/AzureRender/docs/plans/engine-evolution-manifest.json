@@ -238,7 +238,13 @@
       "items": [
         "C3"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/r9/2026-10-07.md",
+        "evidence": "docs/acceptance/r9/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(r9): 完成资源索引与可见性原型验收"
+      }
     },
     {
       "id": "G11",
@@ -943,7 +949,36 @@
         "runnable-prototype",
         "comparison-evidence",
         "adoption-decision"
-      ]
+      ],
+      "implementation": {
+        "interfaces": [
+          "DeviceCapabilities",
+          "ResourceAccessProfile",
+          "ResourceIndexTable",
+          "VisibilityPrototype",
+          "GpuSurfaceIdentity",
+          "SkinningBatch",
+          "visibleInstanceSpans"
+        ],
+        "tests": [
+          "AzureRender.ResourceAccessProfile",
+          "AzureRender.VisibilityPrototype",
+          "AzureRender.VisibilityGpu",
+          "AzureTools.VisibilityBenchmark",
+          "AzureRender.GpuCapabilityReport",
+          "AzureRender.NullRhiPass",
+          "AzureRender.SkinningBatch",
+          "AzureRender.SkinningGpu",
+          "AzureRender.ViewBatching"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/r9/2026-10-07.md",
+          "evidence": "docs/acceptance/r9/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(r9): 完成资源索引与可见性原型验收"
+        },
+        "scope": "queried resource capacity and fence generations adopted; optional frustum/surface prototype; CPU filtering retained; view-owned shadow spans and independent deformation batches; Hi-Z candidate"
+      }
     },
     {
       "id": "C4",

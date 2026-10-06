@@ -16,6 +16,7 @@
 #include "platform/GlfwFrontend.hpp"
 #include "render/RendererCore.hpp"
 #include "render/RenderContext.hpp"
+#include "render/VisibilityPrototype.hpp"
 #include "scene/TransformMath.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "AzureRenderInternal.hpp"
@@ -454,6 +455,8 @@ void AzureRenderApp::buildRenderContext(
     vkGetPhysicalDeviceProperties(physicalDevice_, &indirectProperties);
     context.maxDrawIndirectCount = indirectProperties.limits.maxDrawIndirectCount;
     context.descriptorLimits = indirectProperties.limits;
+    context.visibilityPrototype = context.gpuCulling && runOptions_.visibilityPrototype &&
+        azurerender::VisibilityPrototype::supported(indirectProperties.limits);
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;
@@ -1152,12 +1155,6 @@ void AzureRenderApp::pickPhysicalDevice() {
         vulkan12Features.runtimeDescriptorArray == VK_TRUE
         && vulkan12Features.shaderSampledImageArrayNonUniformIndexing
             == VK_TRUE;
-    const std::filesystem::path capabilityDirectory =
-        runOptions_.captureDirectory.empty()
-        ? std::filesystem::path("captures")
-        : std::filesystem::path(runOptions_.captureDirectory);
-    static_cast<void>(azurerender::writeGpuCapabilityReport(
-        physicalDevice_, capabilityDirectory / "gpu_capabilities.json"));
     timestampPeriodNanoseconds_ = properties.limits.timestampPeriod;
     const QueueFamilyIndices queueIndices =
         findQueueFamilies(physicalDevice_);
@@ -1258,6 +1255,11 @@ void AzureRenderApp::createLogicalDevice() {
     vkCheck(vkCreateDevice(physicalDevice_, &createInfo, nullptr, &device_), "vkCreateDevice");
     vkGetDeviceQueue(device_, *indices.graphics, 0, &graphicsQueue_);
     vkGetDeviceQueue(device_, *indices.present, 0, &presentQueue_);
+    const std::filesystem::path capabilityDirectory = runOptions_.captureDirectory.empty()
+        ? std::filesystem::path("captures") : std::filesystem::path(runOptions_.captureDirectory);
+    static_cast<void>(azurerender::writeGpuCapabilityReport(physicalDevice_,
+        capabilityDirectory / "gpu_capabilities.json",
+        {bindlessTexturesSupported_ && !runOptions_.bindlessDisabled, false, false, false}));
 }
 
 void AzureRenderApp::createSwapchain() {

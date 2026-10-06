@@ -52,7 +52,8 @@ std::vector<RecordedCall> runFrame(
     const bool gizmoTranslated = false,
     const bool partitionedTransparency = false,
     const int runtimeMutation = 0,
-    const VkPhysicalDeviceLimits* descriptorLimits = nullptr) {
+    const VkPhysicalDeviceLimits* descriptorLimits = nullptr,
+    const bool visibilityPrototype = false) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -60,6 +61,7 @@ std::vector<RecordedCall> runFrame(
     context.allocator = &rhi.allocator();
     context.rhi = &rhi;
     context.bindlessTextures = bindless;
+    context.visibilityPrototype = visibilityPrototype;
     context.descriptorLimits.maxPerStageDescriptorSamplers = 4096;
     context.descriptorLimits.maxDescriptorSetSamplers = 4096;
     context.descriptorLimits.maxPerStageDescriptorSampledImages = 4096;
@@ -174,7 +176,9 @@ std::vector<RecordedCall> runFrame(
     graph.execute(&recorder);
     if(runtimeMutation==5&&counters.visibleInstances!=32)
         throw std::runtime_error("Spawned instances must grow every in-flight pose slice and remain visible");
-    if(runtimeMutation==4&&countCalls(recorder.calls,"dispatch")!=3)
+    if(runtimeMutation==4&&(countCalls(recorder.calls,"dispatch")!=2
+        || std::none_of(recorder.calls.begin(),recorder.calls.end(),
+            [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})))
         throw std::runtime_error("Frozen skinning dispatches changed after preparing another frame");
     if (runtimeMutation > 0 && runtimeMutation < 4 && counters.visibleInstances != 0)
         throw std::runtime_error("Runtime snapshot did not update rendered instances: " + std::to_string(runtimeMutation));
@@ -235,6 +239,7 @@ int main() {
              "shadow_compute.vert.spv",
              "skin.comp.spv",
              "cull_indirect.comp.spv",
+             "visibility_prototype.comp.spv",
              "shadow.frag.spv",
              "shadow_bindless.frag.spv",
          }) {
@@ -389,6 +394,32 @@ int main() {
         runFrame(true, shaderDirectory, false, true);
     assert(countCalls(unculled, "drawIndexed") == legacyDraws);
 
+    // Deformation is required by the union of main and shadow views.
+    // Models outside every consuming view must not issue skinning work.
+    const auto hiddenDeformation = runFrame(true, shaderDirectory, true, true, true, true);
+    if (countCalls(hiddenDeformation, "dispatch") != 1) {
+        std::cerr << "Invisible non-casters still issue compute skinning work\n";
+        return 20;
+    }
+    if (countCalls(hiddenDeformation,"drawIndexedIndirect")!=0) {
+        std::cerr << "CPU-known invisible runs must not issue empty indirect main draws\n";
+        return 23;
+    }
+    const auto batchedDeformation = runFrame(true, shaderDirectory, true, false, false, true, 0, false, true);
+    const auto batch = std::find_if(batchedDeformation.begin(), batchedDeformation.end(),
+        [](const auto& call) { return call.name == "dispatch" && call.detail == "6x32x1"; });
+    if (batch == batchedDeformation.end() || countCalls(batchedDeformation, "dispatch") != 2) {
+        std::cerr << "Contiguous pose slices must share a two-dimensional skinning dispatch\n";
+        return 22;
+    }
+    const auto fullDeformation = runFrame(true, shaderDirectory, false, true, true, true);
+    if (countCalls(fullDeformation, "dispatch") != 2
+        || std::none_of(fullDeformation.begin(),fullDeformation.end(),
+            [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})) {
+        std::cerr << "Disabling culling must restore both deformation slices\n";
+        return 21;
+    }
+
     // A second scene resource adds its own buffer binds and instanced draws
     // without changing the hero section's structure.
     std::cerr << "Starting multi-resource pass contract\n";
@@ -422,8 +453,10 @@ int main() {
         return 1;
     }
     const std::size_t skinDispatches = countCalls(computeSkinning, "dispatch");
-    if (skinDispatches != 3) {
-        std::cerr << "Expected two skinning and one culling dispatch, got "
+    if (skinDispatches != 2
+        || std::none_of(computeSkinning.begin(),computeSkinning.end(),
+            [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})) {
+        std::cerr << "Expected one skinning batch with two slices and one culling dispatch, got "
                   << skinDispatches << '\n';
         return 2;
     }
@@ -445,5 +478,17 @@ int main() {
     catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 18;}
     try {runFrame(true,shaderDirectory,true,false,true,true,0,false,false,4);}
     catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 11;}
+    try {
+        for(bool indexed:{false,true}) for(int mutation:{0,1,2,3,4,5}) {
+            const bool multiple=mutation==0 || mutation==4;
+            const auto prototype=runFrame(indexed,shaderDirectory,true,false,multiple,true,0,false,false,mutation,nullptr,true);
+            const auto normal=runFrame(indexed,shaderDirectory,true,false,multiple,true,0,false,false,mutation);
+            if(mutation==0 && countCalls(prototype,"bufferBarrier")<countCalls(normal,"bufferBarrier")+2)
+                throw std::runtime_error("Visibility surface buffers were not scheduled through RenderGraph");
+            for(const char* operation:{"drawIndexed","drawIndexedIndirect","dispatch"})
+                if(countCalls(prototype,operation)!=countCalls(normal,operation))
+                    throw std::runtime_error("Visibility prototype changed draw or dispatch behavior");
+        }
+    } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 19;}
     return 0;
 }
