@@ -2,6 +2,7 @@
 #include "editor/EditorSession.hpp"
 #include <chrono>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
@@ -53,6 +54,34 @@ int main(int argc,char** argv){
             require(result.status==EditStatus::Applied&&std::filesystem::is_regular_file(generated),"Asset application must use the production generation service");
             const auto id=editor.context().assets().idForPath("assets:/generated-ai.json");
             require(editor.context().assets().records().at(id).generation.has_value(),"Generated asset must retain its source manifest");
+            projectContext.baseVersion=editor.edits().version();projectContext.runId="asset-model";
+            std::string modelSource;
+            for(const auto& entry:editor.context().assets().records())if(entry.second.path.extension()==".gltf"){
+                std::ifstream input(entry.second.path,std::ios::binary);modelSource.assign(std::istreambuf_iterator<char>(input),{});break;
+            }
+            require(!modelSource.empty(),"Project fixture requires an existing embedded model");
+            auto modelParameters=parameters;modelParameters["output"]="assets:/generated-ai.gltf";modelParameters["parameters"]["source"]=modelSource;
+            const auto modelPreview=assets->validate(artifact(Json::array({operation("asset.generate",modelParameters)})).dump(),projectContext);
+            require(!std::filesystem::exists(path/"assets/generated-ai.gltf"),"Model proposal validation must preserve the asset tree");
+            require(editor.edits().execute(modelPreview.operations.front()).status==EditStatus::Applied,"Validated model proposal uses production asset installation");
+            const auto modelId=editor.context().assets().idForPath("assets:/generated-ai.gltf");
+            const auto beforePlacement=editor.context().documentContent();
+            require(static_cast<bool>(editor.edit("node.place",{{"resource",modelId},{"id","generated-placement"}})),"Registered model identities must be placeable through the shared operation");
+            require(editor.context().selectedNode()->resourceId==modelId,"Placed content binds its existing asset identity");
+            require(static_cast<bool>(editor.edit("history.undo"))&&editor.context().documentContent()==beforePlacement,"Model attachment and node creation undo as one document operation");
+            require(!editor.edit("node.place",{{"resource",id},{"id","invalid-text-placement"}}),"Placement rejects registered text assets");
+            require(editor.context().documentContent()==beforePlacement,"Rejected asset attachment leaves the document intact");
+            require(static_cast<bool>(editor.edit("node.place",{{"resource",modelId},{"id","persistent-placement"}})),"Place persistent generated asset");
+            require(static_cast<bool>(editor.edit("component.add",{{"type","azure.animator"}})),"Add authored animation component");
+            require(static_cast<bool>(editor.edit("document.save")),"Save generated model document");
+            const auto savedContent=editor.context().documentContent();
+            require(static_cast<bool>(editor.edit("document.reload")),"Reload generated model document");
+            if(editor.context().documentContent()!=savedContent)std::cerr<<Json::diff(savedContent,editor.context().documentContent()).dump(2)<<'\n';
+            require(editor.context().documentContent()==savedContent,"Generated model document survives save and reload");
+            auto invalidModel=modelParameters;invalidModel["parameters"]["source"]="{}";
+            reject([&]{assets->validate(artifact(Json::array({operation("asset.generate",invalidModel)})).dump(),projectContext);});
+            auto external=Json::parse(modelSource);external["buffers"][0]["uri"]="outside.bin";invalidModel["parameters"]["source"]=external.dump();
+            reject([&]{assets->validate(artifact(Json::array({operation("asset.generate",invalidModel)})).dump(),projectContext);});
         }
         std::filesystem::remove_all(directory);std::cout<<"Two domain adapters, bounds, references, scope, preview and generation source passed\n";
     }catch(const std::exception& error){std::filesystem::remove_all(directory);std::cerr<<error.what()<<'\n';return 1;}

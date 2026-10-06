@@ -1,0 +1,27 @@
+Documentation prose style passed for 64 files.
+warning: in the working copy of 'Project/AzureRender/CMakeLists.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/THIRD_PARTY_NOTICES.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/architecture.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/assets-and-editor.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/reference.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/build-reproducibility.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/observations-generation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/mkdocs.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderApp.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/assets/GltfLoader.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/assets/GltfLoader.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorContext.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorProjectEditing.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/ai/adapters/ProposalAdapters.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/main.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/render/RenderContext.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/NullRhiPassTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/ProposalAdapterTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/build_provenance.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/check_module_boundaries.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/run_playable_long_run.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_build_provenance.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/vcpkg.json', LF will be replaced by CRLF the next time Git touches it
+{"schemaVersion": 1, "status": "passed", "trackedToolState": [], "danglingLinks": [], "ignoreProbes": [{"path": "Project/AzureRender/build/hygiene-probe.txt", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".codemaker/codemap/hygiene-probe.log", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".env", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": "Project/AzureRender/src/main.cpp", "expectedIgnored": false, "ignored": false, "passed": true}, {"path": "Project/AzureRender/assets_public/hygiene-probe.gltf", "expectedIgnored": false, "ignored": false, "passed": true}]}

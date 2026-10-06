@@ -5,6 +5,7 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "editor/SceneModel.hpp"
+#include "devtools/GeometryProcessCompiler.hpp"
 
 #include <algorithm>
 #include <cstdlib>
@@ -99,6 +100,21 @@ int main(const int argumentCount, char** argumentValues) {
             options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
             if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.string();
             options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));
+        }
+        if(options.editorSession){
+            const azurerender::ResourceLocator locator(options.resourceRoot);
+            const auto name=std::filesystem::path(
+#ifdef _WIN32
+                "AzureGeometryCompiler.exe"
+#else
+                "AzureGeometryCompiler"
+#endif
+            );
+            const auto& roots=locator.searchRoots();
+            const auto compiler=std::find_if(roots.begin(),roots.end(),[&](const auto& root){return std::filesystem::is_regular_file(root/name);});
+            if(compiler!=roots.end())azurerender::registerProceduralGenerators(options.editorSession->generators(),
+                std::make_shared<azurerender::GeometryProcessCompiler>(*compiler/name,std::filesystem::temp_directory_path()/"AzureRender-procedural"));
+            else options.editorSession->log("Procedural compiler service is unavailable");
         }
         AzureRenderApp application;
         application.run(options);

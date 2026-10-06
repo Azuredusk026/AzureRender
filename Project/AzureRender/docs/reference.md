@@ -339,6 +339,9 @@ prefabSource, instanceOf
 | Registry | `src/extensions/ExtensionRegistry.hpp`、`src/scenes/BuiltinRendererCatalog.cpp` |
 | Settings | `src/render/RenderSettings.*` |
 | glTF | `src/assets/GltfLoader.*` |
+| 程序化内容 | `src/assets/generators/ProceduralContracts.hpp` |
+| 刚体动作 | `src/assets/generators/RigTextContracts.hpp` |
+| 受控几何编译 | `src/devtools/GeometryProcessCompiler.*` |
 | Character | `src/scenes/CharacterSceneRenderer.*`、`shaders/mesh.*` |
 | Blackhole | `src/scenes/BlackholeSceneRenderer.*`、`shaders/blackhole*.frag` |
 | Composite | `shaders/inner_outline.frag` |

@@ -1,0 +1,33 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 18: AzureEditor.ProposalAdapter
+1/1 Test #18: AzureEditor.ProposalAdapter ......***Failed    0.34 sec
+[1791307448514][info][editor][code=0] Opened scene: test
+[1791307448519][info][editor][code=0] Opened scene: test
+[1791307448523][info][editor][code=0] Opened scene: test
+[1791307448524][info][editor][code=0] Selected node: candidate
+[1791307448533][info][editor][code=0] Opened scene: test
+[1791307448536][info][editor][code=0] Opened scene: test
+[1791307448538][info][editor][code=0] Opened scene: test
+[1791307448541][info][editor][code=0] Opened scene: test
+[1791307448544][info][editor][code=0] Opened scene: test
+[1791307448548][info][editor][code=0] Opened scene: test
+[1791307448549][info][editor][code=0] Selected node: duplicate
+[1791307448556][info][editor][code=0] Opened scene: test
+[1791307448559][info][editor][code=0] Opened scene: test
+[1791307448560][info][editor][code=0] Selected node: test
+[1791307448661][info][editor][code=0] Opened scene: courtyard
+[1791307448725][info][editor][code=0] Generated asset: assets:/generated-ai.json
+[1791307448785][info][editor][code=0] Generated asset: assets:/generated-ai.gltf
+[1791307448793][info][editor][code=0] Opened scene: courtyard
+[1791307448796][info][editor][code=0] ERROR: Unknown resource
+Registered model identities must be placeable through the shared operation
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.36 sec
+
+The following tests FAILED:
+	 18 - AzureEditor.ProposalAdapter (Failed)
+Errors while running CTest

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "coordinates": "scad",
+  "parameters": {"reach":{"default":1,"minimum":0.5,"maximum":4}},
+  "bones": [
+    {"name":"bone_root","translation":[0,0,0],"geometry":{"op":"cube","size":[0.8,0.8,0.25],"center":true},"material":{"color":[0.2,0.3,0.4,1]}},
+    {"name":"bone_arm","parent":"bone_root","translation":[0,0,0.25],"geometry":{"op":"cube","size":[0.2,0.2,{"parameter":"reach"}],"translate":[-0.1,-0.1,0]},"material":{"color":[0.9,0.5,0.2,1]}}
+  ],
+  "animations": [
+    {"name":"anim_sweep","loop":true,"channels":[{"bone":"bone_arm","path":"rot","keys":[[0,[0,-30,0]],[0.5,[0,30,0]],[1,[0,-30,0]]]}]},
+    {"name":"anim_extend","loop":false,"channels":[{"bone":"bone_arm","path":"scale","keys":[[0,[1,1,1]],[1,[1,1,1.5]]]},{"bone":"bone_root","path":"pos","keys":[[0,[0,0,0]],[1,[0,0,0.2]]]}]}
+  ]
+}

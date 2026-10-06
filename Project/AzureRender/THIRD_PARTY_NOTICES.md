@@ -22,6 +22,10 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 | FreeType | FreeType License |
 | libpng、zlib、bzip2、Brotli | 对应上游许可随安装树分发 |
 | LatoLatin | SIL Open Font License 1.1 |
+| Manifold 3.5.2 | Apache License 2.0 |
+| Clipper2 2.0.1 | Boost Software License 1.0 |
+| oneTBB 2023.1.0 | Apache License 2.0 |
+| hwloc 2.11.2 | BSD 类许可，以随包版权文本为准 |
 
 Dear ImGui 使用 docking 分支 1.92.8，源码位于 `third_party/imgui`。它由项目工具链编译，保证库与项目的 ABI 一致。许可证保存在 `third_party/imgui/LICENSE.txt`。
 
@@ -87,3 +91,19 @@ UI 作用域参考 gkNextEngine 的 `UiScopes.hpp`。
 本项目按 RHI、帧图与生产操作契约自行适配。
 着色编译器由当前 Vulkan SDK 提供。
 完整采用范围见[开发期资源服务](docs/runtime/development-previews.md)。
+
+## 程序化内容依赖
+
+Manifold 固定为 3.5.2，提供闭合体布尔运算。
+上游提交为 `11235e6b8ebea2dbed8aec4285685aafd3d95667`。
+安装树保留 Manifold 与传递依赖的完整许可。
+许可文件使用 `manifold-LICENSE.txt` 等包名。
+
+刚体文本契约参考 gkNextEngine 的 ScadRig。
+参考路径为 `src/Modules/ScadLoader/FScadRig.h`。
+动作说明来自 `docs/AGENT_GUIDE/ScadRig.md`。
+参考提交与版权见本页 gkNextEngine 条目。
+
+本项目按生成资产、动画图和服务契约自行适配。
+源文件为版本化 JSON，支持受限几何语义。
+采用范围见[程序化内容契约](docs/runtime/procedural-content.md)。

@@ -453,6 +453,7 @@ void AzureRenderApp::buildRenderContext(
     VkPhysicalDeviceProperties indirectProperties{};
     vkGetPhysicalDeviceProperties(physicalDevice_, &indirectProperties);
     context.maxDrawIndirectCount = indirectProperties.limits.maxDrawIndirectCount;
+    context.descriptorLimits = indirectProperties.limits;
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.renderExtent = renderExtent_;

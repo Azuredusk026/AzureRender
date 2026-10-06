@@ -51,7 +51,8 @@ std::vector<RecordedCall> runFrame(
     const float sceneOffset = 0.0F,
     const bool gizmoTranslated = false,
     const bool partitionedTransparency = false,
-    const int runtimeMutation = 0) {
+    const int runtimeMutation = 0,
+    const VkPhysicalDeviceLimits* descriptorLimits = nullptr) {
     NullRhi rhi;
     CharacterSceneRenderer renderer;
 
@@ -59,6 +60,12 @@ std::vector<RecordedCall> runFrame(
     context.allocator = &rhi.allocator();
     context.rhi = &rhi;
     context.bindlessTextures = bindless;
+    context.descriptorLimits.maxPerStageDescriptorSamplers = 4096;
+    context.descriptorLimits.maxDescriptorSetSamplers = 4096;
+    context.descriptorLimits.maxPerStageDescriptorSampledImages = 4096;
+    context.descriptorLimits.maxDescriptorSetSampledImages = 4096;
+    context.descriptorLimits.maxPerStageResources = 4096;
+    if (descriptorLimits) context.descriptorLimits = *descriptorLimits;
     const std::string assetPath =
         (std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
          / "assets_public" / "test_model.gltf")
@@ -341,6 +348,33 @@ int main() {
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
     assert(bindlessBinds == 3);
     assert(legacyBinds > bindlessBinds);
+
+    // Four loaded materials require 35 textures and four other fragment
+    // resources. Each independent Vulkan limit must select a legal path.
+    VkPhysicalDeviceLimits limits{};
+    limits.maxPerStageDescriptorSamplers = 35;
+    limits.maxDescriptorSetSamplers = 35;
+    limits.maxPerStageDescriptorSampledImages = 35;
+    limits.maxDescriptorSetSampledImages = 35;
+    limits.maxPerStageResources = 39;
+    const auto limitedFrame = [&](const VkPhysicalDeviceLimits& value) {
+        return runFrame(true, shaderDirectory, true, false, false, false,
+                        0, false, false, 0, &value);
+    };
+    assert(countCalls(limitedFrame(limits), "bindDescriptorSet") == bindlessBinds);
+    for (auto member : {&VkPhysicalDeviceLimits::maxPerStageDescriptorSamplers,
+                        &VkPhysicalDeviceLimits::maxDescriptorSetSamplers,
+                        &VkPhysicalDeviceLimits::maxPerStageDescriptorSampledImages,
+                        &VkPhysicalDeviceLimits::maxDescriptorSetSampledImages,
+                        &VkPhysicalDeviceLimits::maxPerStageResources}) {
+        auto reduced = limits;
+        --(reduced.*member);
+        const auto fallback = limitedFrame(reduced);
+        assert(countCalls(fallback, "bindDescriptorSet") == legacyBinds);
+        assert(countCalls(fallback, "drawIndexed") == legacyDraws);
+        assert(shadowDrawCount(fallback) == shadowDrawCount(legacy));
+    }
+    assert(countCalls(limitedFrame({}), "bindDescriptorSet") == legacyBinds);
 
     // A distant camera looking away excludes the model from both its main
     // frustum and the camera-relative shadow cascades. Disabling culling

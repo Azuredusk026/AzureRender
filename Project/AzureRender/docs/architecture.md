@@ -518,6 +518,15 @@ flowchart TB
 候选文档在结构、类型与引用校验后提交。
 版本与历史规则见[编辑操作参考](runtime/edit-operations.md)。
 
+## 程序化内容模块
+
+`AzureProcedural` 提供参数化几何与刚体文本契约。
+编辑宿主注入受控编译服务并注册生成器。
+几何库依赖由生成模块的实现持有。
+Player 通过标准资产与动画图运行生成内容。
+
+来源、预算与失败恢复见[程序化内容契约](runtime/procedural-content.md)。
+
 ## R1 同步与窗口生命周期
 
 图像和缓冲区屏障使用 `ICommandRecorder`，阶段与访问掩码的规则见[同步契约](runtime/rhi-synchronization.md)。单图形队列内的资源依赖由命令录制顺序与屏障共同表达。

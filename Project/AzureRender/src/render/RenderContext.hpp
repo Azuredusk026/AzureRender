@@ -156,6 +156,9 @@ struct RenderContext {
     // global texture array instead of per-material descriptor sets. False
     // selects the fixed-table path.
     bool bindlessTextures = false;
+    // Ordinary descriptor-layout limits queried from the active physical
+    // device. Zero denotes unknown capacity and prevents indexed selection.
+    VkPhysicalDeviceLimits descriptorLimits{};
 
     // R16G16B16A16_SFLOAT supports storage-image writes on this device.
     bool rgba16fStorageImage = false;

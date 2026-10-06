@@ -15,7 +15,12 @@
 python tools/build_provenance.py verify --build-dir build/ninja-msvc-release
 ```
 
-构建记录保存源码哈希、三个可执行文件哈希、Git 提交、工作树状态和 CMake 工具链。构建期间源码变化会导致记录失败。验证时源码或产物变化会返回非零退出码。
+构建记录保存源码与四个可执行文件的哈希。
+产品包含编辑宿主、Player、元数据与几何编译器。
+记录还包含 Git 状态和 CMake 工具链。
+构建期间源码变化会导致记录失败。
+
+验证时源码或产物变化会返回非零退出码。
 
 记录覆盖 `src`、`shaders`、`tools`、`schemas`、`assets_public`、`cmake` 和构建配置。私有素材通过单独的准入报告关联。构建复现验证同一输入与产物的身份关系。
 

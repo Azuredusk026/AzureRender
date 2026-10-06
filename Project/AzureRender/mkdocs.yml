@@ -62,6 +62,8 @@ nav:
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
       - 开发期重载与独立预览: runtime/development-previews.md
+      - 程序化内容契约: runtime/procedural-content.md
+      - 生成几何与刚体动作: tutorials/procedural-content.md
       - 有界内容提案: runtime/content-proposals.md
       - UI 基础与设置: runtime/ui-settings.md
       - 观察验证与内容来源: runtime/observations-generation.md
@@ -90,6 +92,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - G10 程序化内容与文本动画: acceptance/g10/2026-10-07.md
       - G9 有界内容提案: acceptance/g9/2026-10-06.md
       - U4 UI 基础与设置: acceptance/u4/2026-10-06.md
       - F5 观察、内容与工具: acceptance/f5/2026-10-06.md

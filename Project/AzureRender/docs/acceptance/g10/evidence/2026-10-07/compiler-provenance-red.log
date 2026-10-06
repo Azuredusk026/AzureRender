@@ -1,0 +1,14 @@
+E..
+======================================================================
+ERROR: test_geometry_compiler_product_tampering_is_rejected (__main__.ProvenanceTests.test_geometry_compiler_product_tampering_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_build_provenance.py", line 13, in test_geometry_compiler_product_tampering_is_rejected
+    products = build_provenance.product_paths(root, "Debug")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'build_provenance' has no attribute 'product_paths'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.208s
+
+FAILED (errors=1)

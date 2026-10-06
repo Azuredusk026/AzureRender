@@ -52,10 +52,25 @@ void EditorContext::cancelImport(){if(importJob_)importJob_->cancel();}
 float EditorContext::importProgress() const{return importJob_?importJob_->progress():0;}
 std::optional<std::string> EditorContext::pollImport(){if(!importJob_||!importJob_->ready())return {};auto job=std::move(importJob_);return commitImport(*job);}
 void EditorContext::placeResource(const std::string& resource,const std::string& nodeId){
-    if(std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==resource;}))throw std::invalid_argument("Unknown resource");
     const auto id=nodeId.empty()?identity("node-"):nodeId;
     if(id.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==id;}))throw std::invalid_argument("Duplicate or invalid node identity: "+id);
-    beginEdit();SceneNode node;node.id=id;node.name="Placed Object";node.resourceId=resource;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+    auto reference=resource;std::filesystem::path attach;
+    if(std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==resource;})){
+        if(!assets_)throw std::invalid_argument("Unknown resource");
+        const auto path=assets_->resolveReference(resource);
+        if(path.extension()!=".gltf"&&path.extension()!=".glb")throw std::invalid_argument("Placement requires a registered model asset");
+        const auto existing=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.path==path;});
+        if(existing!=scene_.resources.end())reference=existing->id;
+        else{
+            static_cast<void>(loadGltfAsset(path.string()));
+            const auto record=std::find_if(assets_->records().begin(),assets_->records().end(),[&](const auto& entry){return entry.second.path==path;});
+            if(record==assets_->records().end())throw std::invalid_argument("Model requires an asset database identity");
+            reference=record->first;attach=path;
+        }
+    }
+    beginEdit();
+    if(!attach.empty()){scene_.resources.push_back({reference,"gltf",attach});resourceReferences_[attach]=reference;}
+    SceneNode node;node.id=id;node.name="Placed Object";node.resourceId=reference;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }
 void EditorContext::createNode(const std::string& nodeId){
     if(nodeId.empty() || nodeId.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==nodeId;}))throw std::invalid_argument("Duplicate or invalid node identity: "+nodeId);

@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 182, in <module>
+    main()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 176, in main
+    rows = [run(args.executable.resolve(), args.output.resolve(), workflow) for workflow in ('exploration', 'inspector')]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 176, in <listcomp>
+    rows = [run(args.executable.resolve(), args.output.resolve(), workflow) for workflow in ('exploration', 'inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 90, in run
+    model = generate('azure.procedural', 'parameterized.gltf', source, **parameters)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 71, in generate
+    identity = edit('asset.generate', generator=generator, output='assets:/' + name,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 62, in edit
+    result = call('edit', passed=passed, requestId='procedural-' + str(len(evidence)),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_procedural_host.py", line 55, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 3.5382, 'message': '[{"code":"OperationFailed","message":"Unknown generator: azure.procedural"}]', 'passed': False, 'schemaVersion': 1}

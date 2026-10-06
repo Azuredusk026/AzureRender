@@ -1,0 +1,305 @@
+[1791310959651][info][editor][code=0] Opened scene: exploration
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device ROOT\DISPLAY\0000
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_8086&DEV_A788&SUBSYS_8BAB103C&REV_04\3&11583659&0&10
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 3 - SWD\DRIVERENUM\IGCC&4&38D58666&0
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 4 - DISPLAY\BOE0B7D\4&38D58666&0&UID8388688
+[Vulkan Loader] DEBUG | LAYER:  windows_get_device_registry_files: GUID for 4 is not SoftwareComponent skipping
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_10DE&DEV_28E0&SUBSYS_8BAB103C&REV_A1\4&34cfc80f&0&0008
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] LAYER:          windows_get_device_registry_files: found no registry files
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_api_dump.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_gfxreconstruct.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_synchronization2.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_monitor.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_screenshot.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_profiles.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_shader_object.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_crash_diagnostic.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device ROOT\DISPLAY\0000
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_8086&DEV_A788&SUBSYS_8BAB103C&REV_04\3&11583659&0&10
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 3 - SWD\DRIVERENUM\IGCC&4&38D58666&0
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 4 - DISPLAY\BOE0B7D\4&38D58666&0&UID8388688
+[Vulkan Loader] DEBUG | LAYER:  windows_get_device_registry_files: GUID for 4 is not SoftwareComponent skipping
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_10DE&DEV_28E0&SUBSYS_8BAB103C&REV_A1\4&34cfc80f&0&0008
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] LAYER:          windows_get_device_registry_files: found no registry files
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_api_dump.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_gfxreconstruct.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_synchronization2.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_monitor.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_screenshot.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_profiles.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_shader_object.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_crash_diagnostic.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files (x86)\Epic Games\Epic Online Services\managedArtifacts\98bc04bc842e4906993fd6d6644ffb8d\EOSOverlayVkLayer-Win64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\Program Files\RenderDoc\renderdoc.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamOverlayVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "D:\Steam\SteamFossilizeVulkanLayer64.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan64.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\ProgramData\obs-studio-hook\obs-vulkan32.json" from registry "HKEY_CURRENT_USER\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+[Vulkan Loader] LAYER:          Checking for Layer Manifest files in Registry at HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device ROOT\DISPLAY\0000
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_8086&DEV_A788&SUBSYS_8BAB103C&REV_04\3&11583659&0&10
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 3 - SWD\DRIVERENUM\IGCC&4&38D58666&0
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: Opening child device 4 - DISPLAY\BOE0B7D\4&38D58666&0&UID8388688
+[Vulkan Loader] DEBUG | LAYER:  windows_get_device_registry_files: GUID for 4 is not SoftwareComponent skipping
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: opening device PCI\VEN_10DE&DEV_28E0&SUBSYS_8BAB103C&REV_A1\4&34cfc80f&0&0008
+[Vulkan Loader] INFO | LAYER:   windows_get_device_registry_files: unable to open child-device error:13
+[Vulkan Loader] LAYER:          windows_get_device_registry_files: found no registry files
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_api_dump.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_gfxreconstruct.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_synchronization2.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_monitor.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_screenshot.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_profiles.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_shader_object.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] INFO | LAYER:   Located json file "C:\VulkanSDK\1.4.350.0\Bin\VkLayer_crash_diagnostic.json" from registry "HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ExplicitLayers"
+[Vulkan Loader] WARNING | LAYER: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+[Vulkan Loader] WARNING | LAYER: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\VulkanSDK\1.4.350.0\Bin\.\VkLayer_khronos_validation.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\ProgramData\obs-studio-hook\.\graphics-hook64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_OBS_HOOK" (C:\ProgramData\obs-studio-hook\graphics-hook64.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\.\nvoglv64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_NV_present" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] DEBUG | LAYER:  Loading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\.\nvoglv64.dll
+[Vulkan Loader] INFO | LAYER:   Insert instance layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] LAYER:          vkCreateInstance layer callstack setup to:
+[Vulkan Loader] LAYER:             <Application>
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             <Loader>
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_optimus
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_OPTIMUS_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_present
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_PRESENT_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_OBS_HOOK
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_VULKAN_OBS_CAPTURE
+[Vulkan Loader] LAYER:                     Manifest: C:\ProgramData\obs-studio-hook\obs-vulkan64.json
+[Vulkan Loader] LAYER:                     Library:  C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_KHRONOS_validation
+[Vulkan Loader] LAYER:                     Type: Explicit
+[Vulkan Loader] LAYER:                     Enabled By: Environment Variable VK_INSTANCE_LAYERS
+[Vulkan Loader] LAYER:                     Manifest: C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json
+[Vulkan Loader] LAYER:                     Library:  C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             <Drivers>
+[1791310959898][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_KHRONOS_validation" (C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_OBS_HOOK" (C:\ProgramData\obs-studio-hook\graphics-hook64.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_NV_present" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] INFO | LAYER:   Inserted device layer "VK_LAYER_NV_optimus" (C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll)
+[Vulkan Loader] DRIVER:         vkCreateDevice layer callstack setup to:
+[Vulkan Loader] DRIVER:            <Application>
+[Vulkan Loader] DRIVER:              ||
+[Vulkan Loader] DRIVER:            <Loader>
+[Vulkan Loader] DRIVER:              ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_optimus
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_OPTIMUS_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_NV_present
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_LAYER_NV_PRESENT_1
+[Vulkan Loader] LAYER:                     Manifest: C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nv-vk64.json
+[Vulkan Loader] LAYER:                     Library:  C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_OBS_HOOK
+[Vulkan Loader] LAYER:                     Type: Implicit
+[Vulkan Loader] LAYER:                     Enabled By: Implicit Layer
+[Vulkan Loader] LAYER:                         Disable Env Var:  DISABLE_VULKAN_OBS_CAPTURE
+[Vulkan Loader] LAYER:                     Manifest: C:\ProgramData\obs-studio-hook\obs-vulkan64.json
+[Vulkan Loader] LAYER:                     Library:  C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] LAYER:             VK_LAYER_KHRONOS_validation
+[Vulkan Loader] LAYER:                     Type: Explicit
+[Vulkan Loader] LAYER:                     Enabled By: Environment Variable VK_INSTANCE_LAYERS
+[Vulkan Loader] LAYER:                     Manifest: C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.json
+[Vulkan Loader] LAYER:                     Library:  C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll
+[Vulkan Loader] LAYER:               ||
+[Vulkan Loader] DRIVER:            <Device>
+[Vulkan Loader] DRIVER:                Using "NVIDIA GeForce RTX 4060 Laptop GPU" with driver: "C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll"
+[1791310960226][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791310960265][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310960344][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310960368][info][editor][code=0] Opened scene: exploration
+[1791310960374][info][editor][code=0] Selected node: hero:body
+[1791310960442][info][editor][code=0] Asset reload requested; changed files: 0
+[1791310960483][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791310960512][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310960538][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310960542][info][editor][code=0] Renderer resources reloaded
+[1791310960987][info][editor][code=0] Generated asset: assets:/parameterized.gltf
+[1791310961023][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791310961056][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310961083][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310961087][info][editor][code=0] Renderer resources reloaded
+[1791310961199][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791310961231][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310961236][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310961788][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791310961820][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310961824][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310962198][info][editor][code=0] Imported asset: direct-model.gltf (84 vertices)
+[1791310962252][info][editor][code=0] Asset reload requested; changed files: 1
+[1791310962292][info][render][code=0] Character texture access: indexed, requested slots=75, stage sampler limit=1048576
+[1791310962329][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310962368][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310962373][info][editor][code=0] Renderer resources reloaded
+[1791310962483][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791310962515][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310962519][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310962965][info][editor][code=0] Generated asset: assets:/articulated.gltf
+[1791310963007][info][render][code=0] Character texture access: indexed, requested slots=75, stage sampler limit=1048576
+[1791310963046][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310963090][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310963094][info][editor][code=0] Renderer resources reloaded
+[1791310963262][info][editor][code=0] Generated asset: assets:/articulated-graph.json
+[1791310963298][info][render][code=0] Character texture access: indexed, requested slots=75, stage sampler limit=1048576
+[1791310963336][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310963386][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310963389][info][editor][code=0] Renderer resources reloaded
+[1791310963519][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791310963557][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310963562][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310963874][info][editor][code=0] Opened scene: exploration
+[1791310963884][info][editor][code=0] Selected node: Placed Object
+[1791310963941][info][editor][code=0] Asset reload requested; changed files: 1
+[1791310963988][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310964027][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310964090][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310964094][info][editor][code=0] Renderer resources reloaded
+[1791310964128][info][editor][code=0] Opened scene: exploration
+[1791310964205][info][editor][code=0] Opened scene: exploration
+[1791310964312][info][editor][code=0] Opened scene: exploration
+[1791310964428][info][editor][code=0] Opened scene: exploration
+[1791310964513][info][editor][code=0] Opened scene: exploration
+[1791310964582][info][editor][code=0] Opened scene: exploration
+[1791310964589][info][editor][code=0] Selected node: Placed Object
+[1791310964642][info][editor][code=0] Asset reload requested; changed files: 0
+[1791310964697][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310964738][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310964796][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310964800][info][editor][code=0] Renderer resources reloaded
+[1791310964839][info][editor][code=0] Opened scene: exploration
+[1791310964935][info][editor][code=0] Opened scene: exploration
+[1791310965016][info][editor][code=0] Opened scene: exploration
+[1791310965122][info][editor][code=0] Opened scene: exploration
+[1791310965213][info][editor][code=0] Opened scene: exploration
+[1791310965984][info][editor][code=0] Generated asset: assets:/model-proposal.gltf
+[1791310966056][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310966101][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310966185][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310966188][info][editor][code=0] Renderer resources reloaded
+[1791310966924][info][editor][code=0] Generated asset: assets:/rig-proposal.gltf
+[1791310966990][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310967036][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310967104][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310967108][info][editor][code=0] Renderer resources reloaded
+[1791310967226][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\procedural-host\run-1791310959436181300\exploration\Procedural Project with spaces\assets\exploration.azurelevel
+[1791310967359][info][editor][code=0] Reloaded scene: exploration
+[1791310967406][info][editor][code=0] Asset reload requested; changed files: 0
+[1791310967457][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310967499][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310967561][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310967564][info][editor][code=0] Renderer resources reloaded
+[1791310967669][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\procedural-host\run-1791310959436181300\exploration\Procedural Project with spaces\assets\exploration.azurelevel
+[1791310968987][info][editor][code=0] Play started
+[1791310969045][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310969118][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310969246][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310970517][info][editor][code=0] Play stopped; edit state restored
+[1791310970568][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310970607][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310970659][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310971478][info][editor][code=0] Play started
+[1791310971536][info][render][code=0] Character texture access: indexed, requested slots=99, stage sampler limit=1048576
+[1791310971575][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791310971638][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791310973006][info][editor][code=0] Play stopped; edit state restored
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\WINDOWS\System32\DriverStore\FileRepository\nvhmsi.inf_amd64_5ec4b201b8059b6f\nvoglv64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\ProgramData\obs-studio-hook\graphics-hook64.dll
+[Vulkan Loader] DEBUG | LAYER:  Unloading layer library C:\VulkanSDK\1.4.350.0\Bin\VkLayer_khronos_validation.dll

@@ -1,0 +1,264 @@
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages will be rebuilt:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+The following packages will be built and installed:
+  * clipper2:x64-windows@2.0.1
+  * hwloc:x64-windows@2.11.2
+    manifold:x64-windows@3.5.2
+  * tbb[core,hwloc]:x64-windows@2023.1.0
+Additional packages (*) will be modified to complete this operation.
+Restored 27 package(s) from C:\Users\23587\AppData\Local\vcpkg\archives in 2.8 s. Use --debug to see more details.
+Removing 1/50 rmlui:x64-windows
+Elapsed time to handle rmlui:x64-windows: 34.3 ms
+Removing 2/50 itlib:x64-windows
+Elapsed time to handle itlib:x64-windows: 13.9 ms
+Removing 3/50 robin-hood-hashing:x64-windows
+Elapsed time to handle robin-hood-hashing:x64-windows: 11.2 ms
+Removing 4/50 freetype:x64-windows
+Elapsed time to handle freetype:x64-windows: 27.6 ms
+Removing 5/50 brotli:x64-windows
+Elapsed time to handle brotli:x64-windows: 14.2 ms
+Removing 6/50 bzip2:x64-windows
+Elapsed time to handle bzip2:x64-windows: 10.6 ms
+Removing 7/50 libpng:x64-windows
+Elapsed time to handle libpng:x64-windows: 15.2 ms
+Removing 8/50 zlib:x64-windows
+Elapsed time to handle zlib:x64-windows: 11.7 ms
+Removing 9/50 miniaudio:x64-windows
+Elapsed time to handle miniaudio:x64-windows: 1.95 ms
+Removing 10/50 sol2:x64-windows
+Elapsed time to handle sol2:x64-windows: 22.7 ms
+Removing 11/50 lua:x64-windows
+Elapsed time to handle lua:x64-windows: 9.43 ms
+Removing 12/50 joltphysics:x64-windows
+Elapsed time to handle joltphysics:x64-windows: 45.5 ms
+Removing 13/50 openexr:x64-windows
+Elapsed time to handle openexr:x64-windows: 33.2 ms
+Removing 14/50 imath:x64-windows
+Elapsed time to handle imath:x64-windows: 13.3 ms
+Removing 15/50 libdeflate:x64-windows
+Elapsed time to handle libdeflate:x64-windows: 14.2 ms
+Removing 16/50 openjph:x64-windows
+Elapsed time to handle openjph:x64-windows: 15.8 ms
+Removing 17/50 vulkan-memory-allocator:x64-windows
+Elapsed time to handle vulkan-memory-allocator:x64-windows: 16 ms
+Removing 18/50 tinygltf:x64-windows
+Elapsed time to handle tinygltf:x64-windows: 4.48 ms
+Removing 19/50 nlohmann-json:x64-windows
+Elapsed time to handle nlohmann-json:x64-windows: 15.8 ms
+Removing 20/50 stb:x64-windows
+Elapsed time to handle stb:x64-windows: 12 ms
+Removing 21/50 glfw3:x64-windows
+Elapsed time to handle glfw3:x64-windows: 6.84 ms
+Removing 22/50 vcpkg-cmake:x64-windows
+Elapsed time to handle vcpkg-cmake:x64-windows: 26.6 ms
+Removing 23/50 vcpkg-cmake-config:x64-windows
+Elapsed time to handle vcpkg-cmake-config:x64-windows: 11.1 ms
+Installing 24/50 vcpkg-cmake-config:x64-windows@2026-07-21...
+vcpkg-cmake-config:x64-windows@2026-07-21 package ABI: 7dbbc732f18dfebbc46b86cf83b129bfcf982d067395e8287df8dff691fcaaa5
+Elapsed time to handle vcpkg-cmake-config:x64-windows: 4.35 ms
+Installing 25/50 vcpkg-cmake:x64-windows@2024-04-23...
+vcpkg-cmake:x64-windows@2024-04-23 package ABI: 80e0b1d453b3d86c5cd25a6815cb34566fc326f60bec62500e33228c66651c97
+Elapsed time to handle vcpkg-cmake:x64-windows: 9.81 ms
+Installing 26/50 glfw3:x64-windows@3.5.1...
+glfw3:x64-windows@3.5.1 package ABI: 6a2a6e5f1bf5981012ce8bc76250ca0176cec325c81eec2088e12b389fe091c4
+Elapsed time to handle glfw3:x64-windows: 13.3 ms
+Installing 27/50 joltphysics:x64-windows@5.6.0...
+joltphysics:x64-windows@5.6.0 package ABI: d332ff96bfe7b58cdc34a387a36f97080bbe21b777828469e330a97ce41af5b0
+Elapsed time to handle joltphysics:x64-windows: 202 ms
+Installing 28/50 lua:x64-windows@5.4.8...
+lua:x64-windows@5.4.8 package ABI: 860bbbc21bfa207d55d4b3d224c9902562552ef7b7b9a0256d05957aea2b70e8
+Elapsed time to handle lua:x64-windows: 26.6 ms
+Installing 29/50 hwloc:x64-windows@2.11.2...
+hwloc:x64-windows@2.11.2 package ABI: bb07583aab71775462043b6f264c7aec914f4cb85b19e2b9ed6422302cd1abb3
+Elapsed time to handle hwloc:x64-windows: 60.3 ms
+Installing 30/50 tbb[core,hwloc]:x64-windows@2023.1.0...
+tbb[core,hwloc]:x64-windows@2023.1.0 package ABI: fff8fc01b1bb95e4f3a4edb6c2f9b72d0a66b62001f279c305de307010b53d94
+Elapsed time to handle tbb:x64-windows: 131 ms
+Installing 31/50 clipper2:x64-windows@2.0.1...
+clipper2:x64-windows@2.0.1 package ABI: c9713c2cb05d33cf66162397f13dc6efa53c39a67d36f13b2a85a76c667a9c8e
+Elapsed time to handle clipper2:x64-windows: 31.4 ms
+Installing 32/50 manifold:x64-windows@3.5.2...
+manifold:x64-windows@3.5.2 package ABI: c1872b929b15c9a8e0bba3f7916a2ec3e52b9fb16786cdcd20d846bc7b6a71a8
+Elapsed time to handle manifold:x64-windows: 40.6 ms
+Installing 33/50 miniaudio:x64-windows@0.11.25...
+miniaudio:x64-windows@0.11.25 package ABI: 3c7f6483902b4b4289af9c39703d0ca1f900370a32383ef21e0c1d69e9dc813b
+Elapsed time to handle miniaudio:x64-windows: 25 ms
+Installing 34/50 openjph:x64-windows@0.31.0...
+openjph:x64-windows@0.31.0 package ABI: 3c96333fc2fabe1d2691123e74b9f5cf8c8fc0dee17ffbbf67751e732de351e9
+Elapsed time to handle openjph:x64-windows: 43.3 ms
+Installing 35/50 libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25...
+libdeflate[compression,core,decompression,gzip,zlib]:x64-windows@1.25 package ABI: 1ba0de300e0d80513eab243462c4d004a422c04ad54d249dbe4c213a72b089d3
+Elapsed time to handle libdeflate:x64-windows: 36.4 ms
+Installing 36/50 imath:x64-windows@3.2.2...
+imath:x64-windows@3.2.2 package ABI: c9f4d8cc8165b2093f6e01a3c97a30413de44577fe6975b3d1c23e4f120aa6cc
+Elapsed time to handle imath:x64-windows: 48 ms
+Installing 37/50 openexr:x64-windows@3.4.13...
+openexr:x64-windows@3.4.13 package ABI: a2a2a9114ebf80113b9c8c8f6f200e3bc76e3aba20d9c0a5d9a326962f833cf4
+Elapsed time to handle openexr:x64-windows: 200 ms
+Installing 38/50 zlib:x64-windows@1.3.2#1...
+zlib:x64-windows@1.3.2#1 package ABI: f7168ffc959275bf8eb1bef3431be32900b118176c8fbf25627c4ef11acc806d
+Elapsed time to handle zlib:x64-windows: 38.2 ms
+Installing 39/50 libpng:x64-windows@1.6.58...
+libpng:x64-windows@1.6.58 package ABI: 0d873164dc79134c70f771522112904f9ebe2053efa22686d2f5de8ceec37302
+Elapsed time to handle libpng:x64-windows: 32.7 ms
+Installing 40/50 bzip2[core,tool]:x64-windows@1.0.8#6...
+bzip2[core,tool]:x64-windows@1.0.8#6 package ABI: e471703af655f3d375605c102513cbb851ef3bf9c2577651d61aa3d69be229b4
+Elapsed time to handle bzip2:x64-windows: 29.5 ms
+Installing 41/50 brotli:x64-windows@1.2.0...
+brotli:x64-windows@1.2.0 package ABI: 938ac341d779b43ffa739aed2ac8728d3407d25f43b46f627187224a9018cebd
+Elapsed time to handle brotli:x64-windows: 61.5 ms
+Installing 42/50 freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3...
+freetype[brotli,bzip2,core,png,zlib]:x64-windows@2.14.3 package ABI: a00add19821fca5c43fa9f8e4e3ce0945ef7cc1a137893a5f4a89705f38cfdfe
+Elapsed time to handle freetype:x64-windows: 104 ms
+Installing 43/50 robin-hood-hashing:x64-windows@3.11.5#2...
+robin-hood-hashing:x64-windows@3.11.5#2 package ABI: 3b96f37d64603f6fed9899de6b6538b9a0ea4dea468802474b8fb5cf389ca9c0
+Elapsed time to handle robin-hood-hashing:x64-windows: 20.3 ms
+Installing 44/50 itlib:x64-windows@1.12.2...
+itlib:x64-windows@1.12.2 package ABI: 3c255ee620072b8be8458c04e5d28eb1d8bd682e0bffa36eb991f2be584d2931
+Elapsed time to handle itlib:x64-windows: 75 ms
+Installing 45/50 rmlui[core,freetype]:x64-windows@6.3...
+rmlui[core,freetype]:x64-windows@6.3 package ABI: 0c730615f93faf93e662718c9f2bb654c3ed1fd9c54092323daa8a4af636a907
+Elapsed time to handle rmlui:x64-windows: 162 ms
+Installing 46/50 sol2:x64-windows@3.5.0#1...
+sol2:x64-windows@3.5.0#1 package ABI: 4e58e4726f79c0276c76c0181d90354482271eac2c53547286cd3f6c39b91bc0
+Elapsed time to handle sol2:x64-windows: 175 ms
+Installing 47/50 stb:x64-windows@2024-07-29#1...
+stb:x64-windows@2024-07-29#1 package ABI: 69b69e6c7cb3992e86ae0038c4eb8281f6ca536eed713a95b77e7dce85b87d3d
+Elapsed time to handle stb:x64-windows: 50.7 ms
+Installing 48/50 nlohmann-json:x64-windows@3.12.0#2...
+nlohmann-json:x64-windows@3.12.0#2 package ABI: 2f69267d5f3baa5f0771c893f13a7732e871d445b8ec10bbc0eecdac51cf7a08
+Elapsed time to handle nlohmann-json:x64-windows: 44.7 ms
+Installing 49/50 tinygltf:x64-windows@3.0.0#1...
+tinygltf:x64-windows@3.0.0#1 package ABI: fc35121eb9ee02684fc6554fcf94c9b29a7cda36297783966f78e3e8b0acc7fa
+Elapsed time to handle tinygltf:x64-windows: 15.1 ms
+Installing 50/50 vulkan-memory-allocator:x64-windows@3.4.0...
+vulkan-memory-allocator:x64-windows@3.4.0 package ABI: 6b11cf89d9d342a2f6b42a4edf9651a577f8e0ef49449ea6b288526e71274d70
+Elapsed time to handle vulkan-memory-allocator:x64-windows: 25.2 ms
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Some packages did not declare an SPDX license. Check the `copyright` file for each package for more information about their licensing.
+Packages installed in this vcpkg installation declare the following licenses:
+(FTL OR GPL-2.0-or-later)
+(MIT OR CC-PDDC)
+(Unlicense OR MIT-0)
+Apache-2.0
+BSD-2-Clause
+BSD-3-Clause
+BSL-1.0
+MIT
+Zlib
+bzip2-1.0.6
+libpng-2.0
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+manifold provides CMake targets:
+
+  find_package(manifold CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE manifold::manifold)
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 2.1 s
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release

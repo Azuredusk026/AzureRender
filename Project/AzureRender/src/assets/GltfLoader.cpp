@@ -1723,6 +1723,7 @@ const char* assetMaterialClassName(const AssetMaterialClass value) {
     return "generic";
 }
 
+namespace { LoadedAsset importGltfModel(const tinygltf::Model&); }
 LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::TinyGLTF loader;
     tinygltf::Model model;
@@ -1739,7 +1740,27 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     if (!loaded) {
         throw std::runtime_error("Unable to load glTF asset: " + error);
     }
-
+    return importGltfModel(model);
+}
+LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
+    if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
+    tinygltf::TinyGLTF loader;tinygltf::Model model;std::string error,warning;bool external=false;
+    tinygltf::FsCallbacks fs;
+    fs.FileExists=[&](const std::string&,void*){external=true;return false;};
+    fs.ExpandFilePath=[](const std::string& path,void*){return path;};
+    fs.ReadWholeFile=[&](std::vector<unsigned char>*,std::string*,const std::string&,void*){external=true;return false;};
+    fs.WriteWholeFile=[&](std::string*,const std::string&,const std::vector<unsigned char>&,void*){external=true;return false;};
+    fs.GetFileSizeInBytes=[&](std::size_t*,std::string*,const std::string&,void*){external=true;return false;};fs.user_data=nullptr;
+    if(!loader.SetFsCallbacks(fs,&error))throw std::runtime_error("Cannot establish embedded asset filesystem boundary: "+error);
+    const auto size=static_cast<unsigned>(bytes.size());
+    const bool loaded=binary?loader.LoadBinaryFromMemory(&model,&error,&warning,reinterpret_cast<const unsigned char*>(bytes.data()),size)
+        :loader.LoadASCIIFromString(&model,&error,&warning,bytes.data(),size,"");
+    if(external)throw std::invalid_argument("Embedded model candidates require embedded buffers and images");
+    if(!loaded)throw std::invalid_argument("Invalid embedded model candidate: "+error);
+    return importGltfModel(model);
+}
+namespace {
+LoadedAsset importGltfModel(const tinygltf::Model& model){
     LoadedAsset asset;
     asset.materials.reserve(model.materials.size() + 1);
     for (const auto& material : model.materials) {
@@ -1796,6 +1817,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
         }
     }
     return asset;
+}
 }
 
 namespace {

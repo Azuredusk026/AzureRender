@@ -13,6 +13,13 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def product_paths(build_dir, configuration):
+    prefix = build_dir / configuration if (build_dir / configuration).is_dir() else build_dir
+    suffix = ".exe" if __import__("os").name == "nt" else ""
+    return [prefix / (name + suffix) for name in
+        ("AzureRender", "AzurePlayer", "AzureMetaGen", "AzureGeometryCompiler")]
+
+
 def inputs(source):
     paths = [source / name for name in INPUT_FILES if (source / name).is_file()]
     for name in INPUT_DIRS:
@@ -49,9 +56,7 @@ def main():
     if args.mode == "build":
         before = inputs(args.source)
         subprocess.run(["cmake", "--build", str(args.build_dir), "--config", args.config], check=True)
-        prefix = args.build_dir / args.config if (args.build_dir / args.config).is_dir() else args.build_dir
-        suffix = ".exe" if __import__("os").name == "nt" else ""
-        manifest = describe(args.source, [prefix / (n + suffix) for n in ["AzureRender", "AzurePlayer", "AzureMetaGen"]])
+        manifest = describe(args.source, product_paths(args.build_dir, args.config))
         if before != manifest["source"]:
             raise ValueError("Build source changed during compilation")
         manifest["configuration"] = args.config

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 1: AzureAssets.ProceduralGeometry
+1/1 Test #1: AzureAssets.ProceduralGeometry ...***Failed    0.08 sec
+Invalid procedural content must be rejected
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.09 sec
+
+The following tests FAILED:
+	  1 - AzureAssets.ProceduralGeometry (Failed)
+Errors while running CTest

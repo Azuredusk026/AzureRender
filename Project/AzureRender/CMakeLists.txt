@@ -68,6 +68,7 @@ if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja")
 endif()
 
 find_package(Jolt CONFIG REQUIRED)
+find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(Lua 5.4 EXACT REQUIRED)
 find_package(RmlUi CONFIG REQUIRED)
@@ -249,8 +250,12 @@ add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
     src/platform/ProcessRunner.cpp
 )
-add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp)
-target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform)
+add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp src/devtools/GeometryProcessCompiler.cpp)
+target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform AzureProcedural)
+add_library(AzureProcedural STATIC src/assets/generators/ScadGenerator.cpp src/assets/generators/GeometryCompilerAdapter.cpp src/assets/generators/ProceduralGltfWriter.cpp src/assets/generators/RigTextGenerator.cpp)
+target_link_libraries(AzureProcedural PUBLIC AzureRenderCore PRIVATE manifold::manifold)
+add_executable(AzureGeometryCompiler tools/procedural/main.cpp)
+target_link_libraries(AzureGeometryCompiler PRIVATE AzureProcedural)
 add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
@@ -409,9 +414,19 @@ target_link_libraries(AzureRender PRIVATE AzureRenderHost)
 add_executable(AzurePlayer src/player/main.cpp)
 target_link_libraries(AzurePlayer PRIVATE AzurePlayerHost)
 add_dependencies(AzureRender AzureRenderShaders)
+add_dependencies(AzureRender AzureGeometryCompiler)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureProceduralGeometryTests tests/ProceduralGeometryTests.cpp)
+    target_link_libraries(AzureProceduralGeometryTests PRIVATE AzureProcedural)
+    add_test(NAME AzureAssets.ProceduralGeometry COMMAND AzureProceduralGeometryTests "${CMAKE_CURRENT_BINARY_DIR}/procedural-tests")
+    add_executable(AzureRigTextTests tests/RigTextTests.cpp)
+    target_link_libraries(AzureRigTextTests PRIVATE AzureProcedural AzureRuntime)
+    add_test(NAME AzureAssets.RigText COMMAND AzureRigTextTests "${CMAKE_CURRENT_BINARY_DIR}/rig-text-tests")
+    add_executable(AzureProceduralProcessTests tests/ProceduralProcessTests.cpp)
+    target_link_libraries(AzureProceduralProcessTests PRIVATE AzureDevtools)
+    add_test(NAME AzureAssets.ProceduralProcess COMMAND AzureProceduralProcessTests "$<TARGET_FILE:AzureGeometryCompiler>" "${CMAKE_CURRENT_BINARY_DIR}/procedural-process-tests")
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
     target_link_libraries(AzureEngineSettingsTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.SettingsOverlay COMMAND AzureEngineSettingsTests)
@@ -468,6 +483,8 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.Observation COMMAND AzureEditorObservationTests)
     add_test(NAME AzureTools.Cli COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_azure_cli.py")
     if(WIN32)
+        add_test(NAME AzureAssets.ProceduralHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_procedural_host.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/procedural-host")
+        set_tests_properties(AzureAssets.ProceduralHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
         add_test(NAME AzureEditor.SettingsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_settings_host.py" --executable "$<TARGET_FILE:AzureRender>")
         set_tests_properties(AzureEditor.SettingsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
     endif()
@@ -602,6 +619,9 @@ if(BUILD_TESTING)
     azure_register_game_package()
     add_test(NAME AzureEngine.BuildConfiguration COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_configuration.py")
     add_test(NAME AzureEngine.BuildProvenance COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_build_provenance.py")
+    if(WIN32)
+        add_test(NAME AzureTools.NativeWindow COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_window.py")
+    endif()
     add_test(NAME AzureEngine.CharacterIntake COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_intake.py")
     add_test(NAME AzureEngine.CharacterPreparation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_preparation.py")
     if(WIN32)
@@ -1145,7 +1165,7 @@ endif()
 set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT AzureRender)
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
-install(TARGETS AzureRender AzurePlayer AzureMetaGen RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 if(MSVC)
     if(MSVC_VERSION GREATER_EQUAL 1930)
         # CMake 3.20's runtime module recognizes VC142; VS2022 ships VC143.
@@ -1216,6 +1236,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/ui-settings.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-proposals.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/development-previews.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/procedural-content.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
@@ -1261,7 +1282,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli)
+foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(

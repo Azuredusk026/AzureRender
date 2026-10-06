@@ -194,7 +194,13 @@
       "items": [
         "C1"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g10/2026-10-07.md",
+        "evidence": "docs/acceptance/g10/evidence/2026-10-07/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g10): 完成程序化内容与文本动画原型验收"
+      }
     },
     {
       "id": "R8",
@@ -829,7 +835,28 @@
         "runnable-prototype",
         "comparison-evidence",
         "adoption-decision"
-      ]
+      ],
+      "implementation": {
+        "interfaces": [
+          "ProceduralGeometryRequest",
+          "RigTextRequest",
+          "IGeometryCompiler"
+        ],
+        "tests": [
+          "AzureAssets.ProceduralGeometry",
+          "AzureAssets.RigText",
+          "AzureAssets.ProceduralProcess",
+          "AzureAssets.ProceduralHost",
+          "AzureEditor.ProposalAdapter"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/g10/2026-10-07.md",
+          "evidence": "docs/acceptance/g10/evidence/2026-10-07/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g10): 完成程序化内容与文本动画原型验收"
+        },
+        "scope": "versioned bounded JSON geometry, closed-solid booleans and rigid animation; standard glTF outputs"
+      }
     },
     {
       "id": "C2",

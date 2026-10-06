@@ -179,6 +179,8 @@ struct LoadedAsset {
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
+// Candidate validation consumes embedded data without filesystem access.
+[[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
 struct AssetNodePose {
     std::array<float, 3> translation{};

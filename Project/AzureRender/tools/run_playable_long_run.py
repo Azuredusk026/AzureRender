@@ -66,8 +66,10 @@ def inputs(path):
 
 
 class NativeWindow:
-    def __init__(self,pid):
+    def __init__(self,pid,title_prefix='AzureRender'):
         self.pid=pid;self.user=ctypes.WinDLL('user32',use_last_error=True)
+        self.title_prefix=title_prefix
+        self.user.GetWindowTextW.argtypes=[wintypes.HWND,wintypes.LPWSTR,ctypes.c_int]
         self.user.GetWindowThreadProcessId.argtypes=[wintypes.HWND,ctypes.POINTER(wintypes.DWORD)]
         self.user.GetClientRect.argtypes=[wintypes.HWND,ctypes.POINTER(wintypes.RECT)]
         self.user.GetWindowRect.argtypes=[wintypes.HWND,ctypes.POINTER(wintypes.RECT)]
@@ -80,10 +82,12 @@ class NativeWindow:
         self.handle=None
 
     def find(self):
+        self.handle=None
         def visit(handle,_):
             process=wintypes.DWORD();self.user.GetWindowThreadProcessId(handle,ctypes.byref(process))
             rect=wintypes.RECT()
-            if process.value==self.pid and self.user.GetClientRect(handle,ctypes.byref(rect)) and rect.right>200 and rect.bottom>100:
+            title=ctypes.create_unicode_buffer(512);self.user.GetWindowTextW(handle,title,512)
+            if process.value==self.pid and title.value.startswith(self.title_prefix) and self.user.GetClientRect(handle,ctypes.byref(rect)) and rect.right>200 and rect.bottom>100:
                 self.handle=handle;return False
             return True
         self.user.EnumWindows(self.callback(visit),0)

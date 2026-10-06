@@ -272,6 +272,11 @@ Asset Browser 通过 `last_write_time` 检测变化，但不会启动后台文�
 
 ## 导入新资产的检查表
 
+参数化几何与刚体动作经公共生成服务进入资产库。
+来源记录输入、生成器版本、许可与输出哈希。
+生成资产可直接预览、放置和随项目发布。
+制作流程见[生成内容教程](tutorials/procedural-content.md)。
+
 1. 确认许可证和公开范围。
 2. 检查模型单位、坐标、UV、法线、切线和拓扑。
 3. 检查 Skin、Weight、Animation 和 Bind Pose。

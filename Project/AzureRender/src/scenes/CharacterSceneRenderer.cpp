@@ -368,6 +368,24 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         loadJobs_.push_back([this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer);});
         materials(item->asset,item->gpuMaterials);additionalResources_.push_back(std::move(resource));
     }
+    // The full material inventory must fit an ordinary descriptor layout.
+    // Combined image samplers consume both sampler and sampled-image limits;
+    // the fragment stage also carries one uniform and three storage buffers.
+    const std::uint64_t indexedSlots = kSharedTextureSlots
+        + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
+    const auto& limits = context.descriptorLimits;
+    const bool indexedCapacity = indexedSlots <= limits.maxPerStageDescriptorSamplers
+        && indexedSlots <= limits.maxDescriptorSetSamplers
+        && indexedSlots <= limits.maxPerStageDescriptorSampledImages
+        && indexedSlots <= limits.maxDescriptorSetSampledImages
+        && indexedSlots + 4 <= limits.maxPerStageResources;
+    bindlessTextures_ = context.bindlessTextures && indexedCapacity;
+    azurerender::RuntimeDiagnostics::instance().info(
+        "render", "Character texture access: "
+            + std::string(bindlessTextures_ ? "indexed" : "fixed")
+            + ", requested slots=" + std::to_string(indexedSlots)
+            + ", stage sampler limit="
+            + std::to_string(limits.maxPerStageDescriptorSamplers));
     loadJobs_.push_back([this]{createUniformBuffers();createJointBuffers();});
     loadJobs_.push_back([this]{createComputeSkinningResources();createOitIndexBuffers();});
     loadJobs_.push_back([this]{createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});

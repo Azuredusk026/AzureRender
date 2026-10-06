@@ -3,6 +3,7 @@
 #include "editor/commands/EditTransaction.hpp"
 #include "runtime/Level.hpp"
 #include "runtime/AnimationStateMachine.hpp"
+#include "assets/GltfLoader.hpp"
 #include <cmath>
 #include <fstream>
 #include <set>
@@ -76,7 +77,7 @@ public:
         if(!context.document.isProject())throw std::invalid_argument("Asset parameters require a project session");
         auto references=Json::array();for(const auto& [id,record]:context.document.assets().records())references.push_back({{"id",id},{"path",record.virtualPath},{"hash",record.contentHash}});
         return {{"generators",context.generators.describe()},{"assets",references},{"operation",context.edits.registry().find("asset.generate")->descriptor.parameters},
-            {"outputFormats",{".json",".azurelevel",".azureprefab"}},{"effects","one generated asset with versioned source metadata"}};
+            {"outputFormats",{".json",".azurelevel",".azureprefab",".gltf",".glb"}},{"effects","one generated asset with versioned source metadata"}};
     }
     ProposalCandidate validate(const std::string& source,const ProposalValidationContext& context) const override{
         if(!context.document.isProject())throw std::invalid_argument("Asset parameters require a project session");
@@ -86,7 +87,7 @@ public:
         const auto output=parameters.at("output").get<std::string>();
         if(output.rfind("engine:/",0)==0||output.find(":/")==std::string::npos)throw std::invalid_argument("Generated asset requires a project virtual output");
         const auto path=context.document.project().resolve(output);const auto extension=path.extension();
-        if(extension!=".json"&&extension!=".azurelevel"&&extension!=".azureprefab")throw std::invalid_argument("Adapter requires a registered text asset format");
+        if(extension!=".json"&&extension!=".azurelevel"&&extension!=".azureprefab"&&extension!=".gltf"&&extension!=".glb")throw std::invalid_argument("Adapter requires a registered asset format");
         GenerationRequest request;request.outputReference=output;request.licenseSource=parameters.at("license").get<std::string>();request.parameters=parameters.at("parameters");
         const auto inputs=parameters.value("inputs",std::vector<std::string>{}),dependencies=parameters.value("dependencies",std::vector<std::string>{});
         std::size_t total=0;
@@ -102,9 +103,12 @@ public:
         collect(inputs,request.inputs);collect(dependencies,request.dependencies);
         const auto result=context.generators.generate(parameters.at("generator").get<std::string>(),request);
         if(result.bytes.size()>2*1024*1024)throw std::invalid_argument("Generated proposal exceeds source budget");
-        const auto data=Json::parse(result.bytes);if(!data.is_object())throw std::invalid_argument("Generated text asset requires an object");
-        if(extension==".azurelevel"||extension==".azureprefab")static_cast<void>(Level::parse(data,context.document.assets()));
-        else if(data.contains("states"))static_cast<void>(AnimationStateMachine::parse(data));
+        if(extension==".gltf"||extension==".glb")static_cast<void>(loadEmbeddedGltfAsset(result.bytes,extension==".glb"));
+        else{
+            const auto data=Json::parse(result.bytes);if(!data.is_object())throw std::invalid_argument("Generated text asset requires an object");
+            if(extension==".azurelevel"||extension==".azureprefab")static_cast<void>(Level::parse(data,context.document.assets()));
+            else if(data.contains("states"))static_cast<void>(AnimationStateMachine::parse(data));
+        }
         std::string previous;
         if(std::filesystem::is_regular_file(path)){
             if(std::filesystem::file_size(path)>2*1024*1024)throw std::invalid_argument("Existing asset exceeds proposal source budget");

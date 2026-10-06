@@ -85,9 +85,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             const auto extension=resource.path.extension();
             if(extension==".azureprefab")session_->edit("prefab.place",{{"asset",resource.id},{"instance","prefab-"+std::to_string(view.scene().nodes.size())}});
             else if(extension==".gltf" || extension==".glb"){
-                auto id=resource.id;
-                if(std::none_of(view.scene().resources.begin(),view.scene().resources.end(),[&](const auto& entry){return entry.id==id;})){auto imported=session_->edit("asset.import",{{"path",resource.path.string()}});if(!imported)throw std::runtime_error(session_->lastError());id=imported.value.get<std::string>();};
-                session_->edit("node.place",{{"resource",id}});
+                session_->edit("node.place",{{"resource",resource.id}});
             }
         }catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}
     };
@@ -118,7 +116,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s",label.c_str(),resource.exists?"Ready":"ERROR: Missing source");
             const bool model=extension==".gltf" || extension==".glb";
             const bool sceneResource=std::any_of(view.scene().resources.begin(),view.scene().resources.end(),[&](const auto& entry){return entry.id==resource.id;});
-            if(model && sceneResource && ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",resource.id.c_str(),resource.id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
+            if(model && (sceneResource || view.isProject()) && ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",resource.id.c_str(),resource.id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
             if(!assetGrid_){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(extension.c_str());ImGui::TableSetColumnIndex(2);ImGui::TextUnformatted(resource.exists?"Ready":"ERROR: Missing");ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",resource.dependentNodeCount);}
             ImGui::PopID();
         }ImGui::EndTable();

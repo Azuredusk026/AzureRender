@@ -7,6 +7,21 @@ import build_provenance
 
 
 class ProvenanceTests(unittest.TestCase):
+    def test_geometry_compiler_product_tampering_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            products = build_provenance.product_paths(root, "Debug")
+            self.assertEqual({p.stem for p in products},
+                {"AzureRender", "AzurePlayer", "AzureMetaGen", "AzureGeometryCompiler"})
+            for product in products:
+                product.write_bytes(b"verified executable")
+            manifest = build_provenance.describe(root, products)
+            build_provenance.verify(root, manifest)
+            compiler = next(p for p in products if p.stem == "AzureGeometryCompiler")
+            compiler.write_bytes(b"altered compiler")
+            with self.assertRaisesRegex(ValueError, "AzureGeometryCompiler"):
+                build_provenance.verify(root, manifest)
+
     def test_rejects_changed_source_and_binary(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
