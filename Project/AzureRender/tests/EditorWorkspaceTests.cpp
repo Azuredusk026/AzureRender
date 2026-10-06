@@ -12,7 +12,9 @@ int main(){try{
  check(EditorCameraController::apply(focus,camera,target),"Focus command must move camera");
  check(target[0]==4 && target[2]==-3 && camera[2]>target[2],"Focus selected world coordinates");
  EditorWorkspace workspace;
- check(workspace.panels().size()==9,"Nine panels registered");
+ check(workspace.panels().size()==10,"Nine standard panels and settings extension registered");
+ check(!workspace.visible("settings"),"Settings extension is closed by default");
+ workspace.setVisible("settings",true);
  for(float dpi:{1.F,1.5F,2.F})for(auto size:{std::array<float,2>{1920,1080},std::array<float,2>{1280,720}}){
   auto layout=EditorWorkspace::layout(size[0],size[1],dpi);
   check(layout.viewportWidth>=480 && layout.viewportHeight>=270,"Physical viewport budget");
@@ -20,7 +22,7 @@ int main(){try{
  auto path=std::filesystem::temp_directory_path()/"azure-workspace-unit";
  std::filesystem::create_directories(path);
  workspace.setVisible("console",false);workspace.save(path);
- EditorWorkspace restored;check(restored.load(path),"Valid workspace loads");check(!restored.visible("console"),"Panel closure persists");
+ EditorWorkspace restored;check(restored.load(path),"Valid workspace loads");check(!restored.visible("console"),"Panel closure persists");check(restored.visible("settings"),"Extension panel persists");
  restored.setVisible("console",true);check(restored.visible("console"),"Window menu restoration");
  std::ofstream(path/"layout.ini")<<"[Docking][Data]\nDockSpace ID=0x1234\n";
  workspace.save(path);check(restored.load(path),"Saved docking data loads");

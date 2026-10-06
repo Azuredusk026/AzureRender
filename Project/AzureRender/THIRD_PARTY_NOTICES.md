@@ -62,3 +62,19 @@ MSVC 构建随安装树分发 Visual C++ 可再分发运行库。CMake 从当前
 `assets_public/fonts/NotoSansCJKsc-Regular.otf` 使用 Noto Sans CJK SC Regular。来源为 [Noto CJK 字体仓库](https://github.com/notofonts/noto-cjk)。该字体覆盖中文项目名、对象名与资源名。
 
 字体采用 SIL Open Font License 1.1。完整许可位于同目录的 `NotoSansCJK-LICENSE.txt`。安装树保留该字体与许可，并记录文件哈希。
+
+## gkNextEngine
+
+UI 作用域参考 gkNextEngine 的 `UiScopes.hpp`。
+来源提交为 `4ba5b7cd106c282e7ed166ff853aeea87b392680`。
+版权所有为 2024 至 2026 年 gameknife。
+适配模式使用 MIT 许可。
+
+源码路径为 `src/Modules/NextUI/UI/UiScopes.hpp`。
+本地适配位于 `src/editor/ui/UiScopes.hpp`。
+许可保存于 `third_party/gknextengine/LICENSE.txt`。
+发布安装保留 `licenses/gkNextEngine-LICENSE.txt`。
+
+控件、面板与设置采用本项目的公共契约。
+参考设计包括类型、来源与帧边界应用。
+验收依据见[U4 实施步骤](docs/plans/2026-10-06-ai-native-editor-steps.md#u4-ui-基础与设置体系)。

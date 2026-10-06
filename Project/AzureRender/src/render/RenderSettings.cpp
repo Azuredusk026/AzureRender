@@ -245,3 +245,12 @@ void validateRenderSettings(const RenderSettings& settings) {
 }
 
 }  // namespace azurerender
+
+#include "foundation/SettingRegistry.hpp"
+namespace azurerender {
+void registerRenderSettings(SettingRegistry& r) {
+    r.add({"render.diagnosticView","Diagnostic view: beauty, normal, outline, shadow, depth",0,0.,4.,false,true,false});
+    r.add({"render.exposure","Temporary exposure in EV",0.0,-8.,8.,false,true,false});
+    r.add({"render.blackholeQuality","Blackhole quality: performance, balanced, cinematic",2,0.,2.,false,true,false});
+}
+}

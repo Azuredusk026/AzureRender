@@ -63,7 +63,7 @@ void ImGuiEditorLayer::injectUiEvents() {
     }
 }
 void ImGuiEditorLayer::drawWorkspace() {
-    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi_);
+    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi_,session_->settings().get("editor.compact").get<bool>());
     const auto hostPos=ImVec2(vp->Pos.x+layout.left,vp->Pos.y+layout.menu+layout.toolbar);
     const auto hostSize=ImVec2(vp->Size.x-layout.left,vp->Size.y-layout.menu-layout.toolbar-layout.status);
     ImGui::SetNextWindowPos(hostPos);ImGui::SetNextWindowSize(hostSize);
@@ -109,7 +109,7 @@ void ImGuiEditorLayer::drawWorkspace() {
         if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
         ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
-        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console"}) {
+        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console","settings"}) {
             const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});
             const auto title=panel.title.substr(0,panel.title.find("###"));
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
@@ -126,6 +126,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const {
         {"selectedName",context_->selectedNode()?context_->selectedNode()->name:""},
         {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
+    data["settings"]=session_->settings().describe();
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
         data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},

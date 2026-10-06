@@ -60,15 +60,16 @@ public:
     }
 
 private:
-    void drawViewportPanel();
-    void drawOutlinerPanel();
-    void drawInspectorPanel();
-    void drawAssetBrowserPanel();
-    void drawCapturePanel();
-    void drawConsolePanel();
-    void drawBuildPanel();
-    void drawAnimationPanel();
-    void drawGameplayDebugPanel();
+    void drawSettingsPanel(PanelContext& context);
+    void drawViewportPanel(PanelContext& context);
+    void drawOutlinerPanel(PanelContext& context);
+    void drawInspectorPanel(PanelContext& context);
+    void drawAssetBrowserPanel(PanelContext& context);
+    void drawCapturePanel(PanelContext& context);
+    void drawConsolePanel(PanelContext& context);
+    void drawBuildPanel(PanelContext& context);
+    void drawAnimationPanel(PanelContext& context);
+    void drawGameplayDebugPanel(PanelContext& context);
     void observeWidget(const std::string& id);
     void injectUiEvents();
     void drawWorkspace();
@@ -112,6 +113,10 @@ private:
     std::array<float,2> uiMousePosition_{0,0};
     std::array<float,4> imageRect_{};
     std::array<float,3> gizmoDragStartRotation_{},gizmoDragStartScale_{};
+    ImGuiTextFilter settingsFilter_;
+    int settingSourceIndex_=0;
+    std::string settingDiagnostic_;
+    bool settingsSaveRequested_=false,compactPreference_=false;
     ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_;
     int assetType_ = 0,consoleLevel_ = 0;
     bool assetGrid_ = false;

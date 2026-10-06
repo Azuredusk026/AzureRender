@@ -52,6 +52,12 @@ void AzureRenderApp::drawFrame() {
         submissionCounters_.frameSlotWaitMilliseconds += std::chrono::duration<double, std::milli>(fenceEnd - frameStart).count();
     synchronizeEditorRuntime();
     synchronizeGameUi();
+    engineSettings_->applyPending();effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+    if(settingsRevision_!=engineSettings_->revision()) {
+        settingsRevision_=engineSettings_->revision();
+        if(engineSettings_->get("diagnostics.verbose").get<bool>())
+            azurerender::RuntimeDiagnostics::instance().info("settings","Applied setting layers: "+engineSettings_->describe().dump());
+    }
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
@@ -324,7 +330,7 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     auto& editorContext = runOptions_.editorSession->context();
-    editorContext.setDebugProjection(multiply(azurerender::characterProjection(renderSettings_,
+    editorContext.setDebugProjection(multiply(azurerender::characterProjection(effectiveRenderSettings_,
         static_cast<float>(renderExtent_.width)/renderExtent_.height),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
@@ -363,7 +369,7 @@ void AzureRenderApp::updateGizmoScreenData() {
     const Matrix4 view = lookAt(
         cameraPosition_, cameraTarget_, {0.0F, 1.0F, 0.0F});
     const Matrix4 projection =
-        azurerender::characterProjection(renderSettings_,aspect);
+        azurerender::characterProjection(effectiveRenderSettings_,aspect);
     const Matrix4 viewProj = multiply(projection, view);
     const std::array<float, 3>& translation =
         editorContext.gizmoTranslation();
@@ -762,16 +768,16 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
          << "GPU  : " << printable(selectedGpuName_, 46) << '\n'
          << "FRAME: " << swapchainExtent_.width << 'X'
          << swapchainExtent_.height
-         << "  VIEW: " << kDiagnosticNames[renderSettings_.diagnosticView]
-         << "  STYLE: " << (renderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
-         << "  OUTLINE: " << (renderSettings_.innerOutlineEnabled ? "ON" : "OFF")
+         << "  VIEW: " << kDiagnosticNames[effectiveRenderSettings_.diagnosticView]
+         << "  STYLE: " << (effectiveRenderSettings_.stylizedLightingEnabled ? "ON" : "OFF")
+         << "  OUTLINE: " << (effectiveRenderSettings_.innerOutlineEnabled ? "ON" : "OFF")
          << '\n';
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->appendHudText(text);
     }
     text << "TOON : RAMP V1 / 10 CLASSES  MASK "
-         << std::fixed << std::setprecision(2) << renderSettings_.styleMaskStrength
-         << "  LEGACY THRESHOLD " << renderSettings_.diffuseBandThreshold << '\n';
+         << std::fixed << std::setprecision(2) << effectiveRenderSettings_.styleMaskStrength
+         << "  LEGACY THRESHOLD " << effectiveRenderSettings_.diffuseBandThreshold << '\n';
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorMode) {
         const azurerender::EditorContext& editorContext =
@@ -790,9 +796,9 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
                      << printable(editorScene.nodes[index].name, 20);
             }
         }
-        text << "\nINSPECTOR: OUTLINE " << renderSettings_.outline.strength
-             << "  EXPOSURE " << renderSettings_.grade.exposureEv
-             << "  PRESET " << renderSettings_.showcasePreset << '\n'
+        text << "\nINSPECTOR: OUTLINE " << effectiveRenderSettings_.outline.strength
+             << "  EXPOSURE " << effectiveRenderSettings_.grade.exposureEv
+             << "  PRESET " << effectiveRenderSettings_.showcasePreset << '\n'
              << "ASSET BROWSER: ";
         if (editorScene.resources.empty()) {
             text << "<EMPTY>";
@@ -940,36 +946,36 @@ void AzureRenderApp::recordCommandBuffer(
         0,
         nullptr);
     const PostProcessPushConstants postProcessConstants{
-        renderSettings_.diagnosticView == 2
+        effectiveRenderSettings_.diagnosticView == 2
             ? 1.0F
-            : (renderSettings_.innerOutlineEnabled
-                ? renderSettings_.outline.strength : 0.0F),
-        renderSettings_.outline.depthThreshold,
-        renderSettings_.outline.normalThreshold,
-        static_cast<float>(renderSettings_.diagnosticView),
-        renderSettings_.grade.exposureEv,
-        renderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
-        renderSettings_.bloom.enabled
+            : (effectiveRenderSettings_.innerOutlineEnabled
+                ? effectiveRenderSettings_.outline.strength : 0.0F),
+        effectiveRenderSettings_.outline.depthThreshold,
+        effectiveRenderSettings_.outline.normalThreshold,
+        static_cast<float>(effectiveRenderSettings_.diagnosticView),
+        effectiveRenderSettings_.grade.exposureEv,
+        effectiveRenderSettings_.grade.toneMappingEnabled ? 1.0F : 0.0F,
+        effectiveRenderSettings_.bloom.enabled
             && !(qaEffectName_ == "bloom" && !qaEffectEnabled_)
-            ? renderSettings_.bloom.strength : 0.0F,
+            ? effectiveRenderSettings_.bloom.strength : 0.0F,
         qaEffectName_ == "bloom" && qaEffectStateName_ == "isolation"
             ? 1.0F : 0.0F,
         {
-            renderSettings_.outline.color[0],
-            renderSettings_.outline.color[1],
-            renderSettings_.outline.color[2],
+            effectiveRenderSettings_.outline.color[0],
+            effectiveRenderSettings_.outline.color[1],
+            effectiveRenderSettings_.outline.color[2],
             1.0F,
         },
         {
-            renderSettings_.grade.saturation,
-            renderSettings_.grade.contrast,
-            renderSettings_.bloom.threshold,
+            effectiveRenderSettings_.grade.saturation,
+            effectiveRenderSettings_.grade.contrast,
+            effectiveRenderSettings_.bloom.threshold,
             0.0F,
         },
         {
-            renderSettings_.grade.tint[0],
-            renderSettings_.grade.tint[1],
-            renderSettings_.grade.tint[2],
+            effectiveRenderSettings_.grade.tint[0],
+            effectiveRenderSettings_.grade.tint[1],
+            effectiveRenderSettings_.grade.tint[2],
             0.0F,
         },
     };

@@ -2,7 +2,7 @@
 
 > 文档类型：使用教程
 > 状态：生效
-> 更新日期：2026-10-05
+> 更新日期：2026-10-06
 > 适用范围：Windows x64 编辑器、公开资源与独立 Player
 
 ## 准备环境与空项目
@@ -71,6 +71,25 @@ Ctrl+D 复制选中对象，Delete 删除。Ctrl+Z 撤销，Ctrl+Y 重做。Ctrl
 关闭面板后从 View 恢复。拖动标签改变停靠位置。用户配置位于 `%LOCALAPPDATA%/AzureRender/editor`。View → Reset Layout 恢复默认布局，损坏配置触发诊断与恢复。
 
 ![停靠与恢复入口](images/workspace.png)
+
+## 设置与界面偏好
+
+从 View 或左侧 Tools 打开 Settings。
+搜索名称后查看当前值与获胜来源。
+Write source 选择会话覆盖或用户偏好。
+修改值在下一帧边界生效。
+
+Reset source 恢复该来源以下的有效值。
+Save user preferences 保存用户层。
+临时渲染覆盖保持关卡文档与操作历史。
+默认布局的九个面板保持开启。
+
+`editor.scale` 设置系统 DPI 的倍率。
+`editor.compact` 控制紧凑布局。
+`input.cameraSensitivity` 设置相机鼠标灵敏度。
+完整类型与来源见[UI 和设置说明](../runtime/ui-settings.md)。
+
+![独立检视工具中的设置面板](images/settings.png)
 
 ## 批量编辑与恢复
 

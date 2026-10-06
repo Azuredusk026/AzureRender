@@ -226,6 +226,7 @@ else()
     target_compile_options(AzureBuildOptions INTERFACE -Wall -Wextra -Wpedantic -Werror -Wno-missing-field-initializers)
 endif()
 add_library(AzureFoundation STATIC
+    src/foundation/SettingRegistry.cpp
     src/diagnostics/RuntimeDiagnostics.cpp
     src/resources/ResourceLocator.cpp
 )
@@ -266,6 +267,7 @@ add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTI
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/runtime/EngineSettings.cpp
     src/runtime/ObservationRegistry.cpp
     src/runtime/ModuleAssembly.cpp
     src/runtime/ComponentRegistry.cpp
@@ -303,6 +305,18 @@ endif()
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
 target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
+    src/editor/panels/SettingsPanel.cpp
+    src/editor/panels/OutlinerPanel.cpp
+    src/editor/panels/InspectorPanel.cpp
+    src/editor/panels/AssetBrowserPanel.cpp
+    src/editor/panels/CapturePanel.cpp
+    src/editor/panels/AnimationPanel.cpp
+    src/editor/panels/GameplayDebugPanel.cpp
+    src/editor/panels/BuildPanel.cpp
+    src/editor/panels/ConsolePanel.cpp
+    src/editor/SelectionService.cpp
+    src/editor/ui/Widgets.cpp
+    src/editor/ui/AppChrome.cpp
     src/editor/commands/EditRegistry.cpp
     src/editor/commands/EditService.cpp
     src/editor/commands/EditTransaction.cpp
@@ -321,6 +335,7 @@ add_library(AzureEditor STATIC
     src/editor/ImGuiEditorLayer.cpp
 )
 set(AZURE_HOST_SOURCES
+    src/app/AzureRenderSettings.cpp
     src/app/AzureRenderValidation.cpp
     src/app/AzureRenderApp.cpp
     src/app/AzureRenderGameplay.cpp
@@ -332,7 +347,7 @@ set(AZURE_HOST_SOURCES
     src/app/AzureRenderSupport.cpp
 )
 
-target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions)
+target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions nlohmann_json::nlohmann_json)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
@@ -369,11 +384,25 @@ add_dependencies(AzureRender AzureRenderShaders)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
+    target_link_libraries(AzureEngineSettingsTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.SettingsOverlay COMMAND AzureEngineSettingsTests)
+    add_executable(AzureSettingRegistryTests tests/SettingRegistryTests.cpp)
+    target_link_libraries(AzureSettingRegistryTests PRIVATE AzureFoundation)
+    add_test(NAME AzureEngine.SettingRegistry COMMAND AzureSettingRegistryTests)
+    add_executable(AzureUiFoundationTests tests/UiFoundationTests.cpp)
+    target_link_libraries(AzureUiFoundationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.UiFoundation COMMAND AzureUiFoundationTests)
+    add_executable(AzurePanelContextTests tests/PanelContextTests.cpp)
+    target_link_libraries(AzurePanelContextTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.PanelContext COMMAND AzurePanelContextTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
     add_executable(AzureEditorObservationTests tests/EditorObservationTests.cpp)
     target_link_libraries(AzureEditorObservationTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.Observation COMMAND AzureEditorObservationTests)
     add_test(NAME AzureTools.Cli COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_azure_cli.py")
+    add_test(NAME AzureEditor.SettingsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_settings_host.py" --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureEditor.SettingsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
     add_test(NAME AzureEditor.ObservationHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_observation_host.py" --executable "$<TARGET_FILE:AzureRender>")
     set_tests_properties(AzureEditor.ObservationHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_executable(AzureGenerationManifestTests tests/GenerationManifestTests.cpp)
@@ -584,6 +613,7 @@ if(BUILD_TESTING)
     )
     target_include_directories(
         AzureRenderCommandLineTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderCommandLineTests PRIVATE nlohmann_json::nlohmann_json)
     add_test(
         NAME AzureRender.CommandLine
         COMMAND AzureRenderCommandLineTests)
@@ -633,7 +663,11 @@ if(BUILD_TESTING)
     target_include_directories(
         AzureRenderSceneModelTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(
-        AzureRenderSceneModelTests PRIVATE nlohmann_json::nlohmann_json)
+        AzureRenderSceneModelTests PRIVATE AzureFoundation nlohmann_json::nlohmann_json)
+    # These test executables use assert as their verification contract.
+    target_compile_options(AzureRenderSceneModelTests PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
     target_compile_definitions(
         AzureRenderSceneModelTests PRIVATE
         AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
@@ -735,9 +769,13 @@ if(BUILD_TESTING)
             "${STB_INCLUDE_DIR}")
     target_link_libraries(
         AzureRenderNullRhiPassTests PRIVATE
+            AzureFoundation
             Vulkan::Vulkan
             nlohmann_json::nlohmann_json
             OpenEXR::OpenEXR)
+    target_compile_options(AzureRenderNullRhiPassTests PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
     target_compile_definitions(
         AzureRenderNullRhiPassTests PRIVATE
         AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
@@ -1105,6 +1143,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/system-composition.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/edit-operations.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/observations-generation.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/ui-settings.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"
@@ -1239,3 +1278,5 @@ install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-06-gknextengine.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/gknextengine-source-map.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/gknextengine/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "gkNextEngine-LICENSE.txt")

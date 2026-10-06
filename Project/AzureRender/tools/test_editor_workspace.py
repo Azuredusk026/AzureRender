@@ -28,8 +28,9 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']
-    assert data['version']==2 and len(data['panels'])==9,data
+    assert data['version']==2 and set(data['panels'])=={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings'},data
     assert data['image']['width']>=480 and data['image']['height']>=270,data['image']
+    assert len(data['panels'])==10
     assert data['uiErrors']==[],data['uiErrors']
     return data
 
@@ -38,35 +39,36 @@ def main(executable,root):
     root.mkdir(parents=True,exist_ok=True);create(root/'game')
     results={}
     hitErrors=[]
-    for dpi in (1,1.5,2):
-        for size in ((1920,1080),(1280,720)):
-            name=f'{size[0]}x{size[1]}-{dpi}'
-            results[name]=launch(executable,root,name,size,dpi)
-            assert all(p['docked'] for p in results[name]['panels'].values())
-            # Independent pinhole calculation for the initial focused hero.
-            imageRect=results[name]['image'];distance=math.sqrt(38)
-            upY=math.sqrt(34)/distance
-            depth=distance+.9*2/distance
-            expected=(imageRect['x']+imageRect['width']/2,
-                imageRect['y']+imageRect['height']*(1+math.sqrt(3)*1.6*.9*upY/depth)/2)
-            rect=results[name]['widgets']['gizmo.center']
-            error=math.hypot(rect[0]+rect[2]/2-expected[0],rect[1]+rect[3]/2-expected[1])
-            assert error<=2,(name,error)
+    cases=[(dpi,size) for dpi in (1,1.5,2) for size in ((1920,1080),(1280,720))]
+    cases += [(.75,(1280,720)),(3,(3840,2160))]
+    for dpi,size in cases:
+        name=f'{size[0]}x{size[1]}-{dpi}'
+        results[name]=launch(executable,root,name,size,dpi)
+        assert all(p['docked'] for key,p in results[name]['panels'].items() if key!='settings')
+        # Independent pinhole calculation for the initial focused hero.
+        imageRect=results[name]['image'];distance=math.sqrt(38)
+        upY=math.sqrt(34)/distance
+        depth=distance+.9*2/distance
+        expected=(imageRect['x']+imageRect['width']/2,
+            imageRect['y']+imageRect['height']*(1+math.sqrt(3)*1.6*.9*upY/depth)/2)
+        rect=results[name]['widgets']['gizmo.center']
+        error=math.hypot(rect[0]+rect[2]/2-expected[0],rect[1]+rect[3]/2-expected[1])
+        assert error<=2,(name,error)
+        from PIL import Image
+        pixels=Image.open(root/name/'capture/frame_000015.png').convert('RGB')
+        green=(expected[0],expected[1]-40*dpi)
+        matches=[]
+        for y in range(round(green[1])-2,round(green[1])+3):
+            for x in range(round(green[0])-2,round(green[0])+3):
+                if max(abs(a-b) for a,b in zip(pixels.getpixel((x,y)),(80,220,110)))<=5:matches.append((x,y))
+        assert matches,(name,'Rendered Y handle missing at the projected mouse target')
+        rasterError=min(math.hypot(x-green[0],y-green[1]) for x,y in matches)
+        assert rasterError<=2,(name,rasterError)
+        hitErrors.append(dict(case=name,projectionErrorPixels=error,rasterErrorPixels=rasterError))
+        if dpi==1 and size[0]==1920:
             from PIL import Image
-            pixels=Image.open(root/name/'capture/frame_000015.png').convert('RGB')
-            green=(expected[0],expected[1]-40*dpi)
-            matches=[]
-            for y in range(round(green[1])-2,round(green[1])+3):
-                for x in range(round(green[0])-2,round(green[0])+3):
-                    if max(abs(a-b) for a,b in zip(pixels.getpixel((x,y)),(80,220,110)))<=5:matches.append((x,y))
-            assert matches,(name,'Rendered Y handle missing at the projected mouse target')
-            rasterError=min(math.hypot(x-green[0],y-green[1]) for x,y in matches)
-            assert rasterError<=2,(name,rasterError)
-            hitErrors.append(dict(case=name,projectionErrorPixels=error,rasterErrorPixels=rasterError))
-            if dpi==1 and size[0]==1920:
-                from PIL import Image
-                color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((110,700))
-                assert max(abs(a-b) for a,b in zip(color,(32,35,41)))<=2,color
+            color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((110,700))
+            assert max(abs(a-b) for a,b in zip(color,(32,35,41)))<=2,color
     actions=[]
     def click(frame,target):actions.append(dict(frame=frame,action='click',target=target))
     def key(frame,key,down=True,ctrl=False):actions.append(dict(frame=frame,action='key',key=key,down=down,ctrl=ctrl))
@@ -93,7 +95,7 @@ def main(executable,root):
     launch(executable,root,'ini-valid',(1920,1080),1,capture=False,config=iniConfig)
     with (iniConfig/'layout.ini').open('a',encoding='utf-8') as file:file.write('\n[Docking][Data]\nmalformed\n')
     iniRecovered=launch(executable,root,'ini-corrupt',(1920,1080),1,capture=False,config=iniConfig)
-    assert iniRecovered['diagnostic'] and all(p['docked'] for p in iniRecovered['panels'].values())
+    assert iniRecovered['diagnostic'] and all(p['docked'] for key,p in iniRecovered['panels'].items() if key!='settings')
     focus=[dict(frame=25,action='click',target='name')]
     for index,(value,ctrl) in enumerate((('W',False),('A',False),('S',False),('D',False),('Shift',False),('D',True),('Z',True),('Y',True),('S',True),('Delete',False))):
         frame=28+index*3
@@ -103,9 +105,9 @@ def main(executable,root):
     assert all(Path(path).read_bytes()==value for path,value in savedLevels.items()),'Text focus Ctrl+S must not save scene'
     states=focused['history'];assert all(state['nodeCount']==states[0]['nodeCount'] and state['translation']==states[0]['translation'] and not state['playing'] for state in states)
     dynamic=launch(executable,root,'dynamic-dpi',(1280,720),1,[dict(frame=25,action='dpi',scale=2),dict(frame=35,action='dpi',scale=1.5)])
-    assert dynamic['dpi']==1.5 and all(p['docked'] for p in dynamic['panels'].values())
+    assert dynamic['dpi']==1.5 and all(p['docked'] for key,p in dynamic['panels'].items() if key!='settings')
     reset=launch(executable,root,'reset',(1920,1080),1,[dict(frame=25,action='click',target='menu.View'),dict(frame=29,action='click',target='menu.Reset Layout')],capture=False,config=config)
-    assert all(p['open'] and p['docked'] for p in reset['panels'].values())
+    assert all(p['open'] and p['docked'] for key,p in reset['panels'].items() if key!='settings')
     for mode,field,baseline in (('Move','gizmoTranslation',0),('Rotate','gizmoRotation',0),('Scale','gizmoScale',1)):
         events=[dict(frame=25,action='click',target='node.hero:body'),dict(frame=28,action='click',target='focus'),dict(frame=30,action='click',target='mode.'+mode),
             dict(frame=35,action='mouse',target='gizmo.0',down=True),dict(frame=38,action='mouse',target='gizmo.0',down=True,offset=[30,0]),dict(frame=41,action='mouse',target='gizmo.0',down=False,offset=[30,0])]

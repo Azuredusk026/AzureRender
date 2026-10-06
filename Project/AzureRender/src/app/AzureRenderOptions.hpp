@@ -2,6 +2,7 @@
 
 #include "render/RenderSettings.hpp"
 #include "runtime/SceneDocument.hpp"
+#include <nlohmann/json.hpp>
 
 #include <cstdint>
 #include <memory>
@@ -17,6 +18,8 @@ struct AzureRenderOptions {
     std::string editorActionsPath;
     std::string runtimeReportPath;
     std::string gameActionsPath;
+    std::string settingsFile,defaultSettingsFile,projectSettingsFile;
+    nlohmann::json settingOverrides=nlohmann::json::object();
     std::string validationScript,validationReport,validationTokenEnvironment,validationEndpoint;
     std::string validationAddress="127.0.0.1";
     std::uint16_t validationPort=0;

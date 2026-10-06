@@ -11,6 +11,8 @@ AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Wind
 
 ## 使用入口
 
+界面基础、扩展面板与设置见[UI 与设置](docs/runtime/ui-settings.md)。用户偏好按来源分层，在帧边界生效。
+
 自动观察与生成来源见[运行时说明](docs/runtime/observations-generation.md)。统一工具见[开发命令参考](docs/reference/developer-cli.md)。查询、输入与编辑使用生产契约。
 
 编辑服务与文档版本见[编辑操作参考](docs/runtime/edit-operations.md)。批量失败保持文档与历史。菜单、快捷键与自动工具调用同一注册入口。
@@ -82,9 +84,9 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
-[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5 已验收。
+[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4 已验收。
 
-系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 U4。
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 G9。
 
 公共能力通过探索项目和独立工具验收。
 

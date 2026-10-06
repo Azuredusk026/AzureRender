@@ -1,4 +1,5 @@
 #include "EditorWorkspace.hpp"
+#include "ui/UiMetrics.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
@@ -20,7 +21,15 @@ void EditorWorkspace::reset() {
         {"inspector","Details###inspector"},{"assets","Content Browser###assets"},
         {"capture","Capture###capture"},{"console","Console###console"},
         {"build","Build Game###build"},{"animation","Animation Preview###animation"},
-        {"gameplay-debug","Gameplay Debug###gameplay-debug"}};
+        {"gameplay-debug","Gameplay Debug###gameplay-debug"},{"settings","Settings###settings",false}};
+    panels_.insert(panels_.end(),extraPanels_.begin(),extraPanels_.end());
+}
+void EditorWorkspace::registerPanel(std::string id,std::string title,bool visible) {
+    if(id.empty()||title.empty()||id.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.")!=std::string::npos
+        ||title.find("###")!=std::string::npos||panels_.size()>=64)throw std::invalid_argument("Invalid panel declaration");
+    for(const auto& panel:panels_)if(panel.id==id)throw std::invalid_argument("Duplicate panel identity");
+    EditorPanelState panel{std::move(id),{},visible};panel.title=std::move(title)+"###"+panel.id;
+    extraPanels_.push_back(panel);panels_.push_back(std::move(panel));
 }
 bool* EditorWorkspace::open(const std::string& id) {
     for(auto& panel:panels_)if(panel.id==id)return &panel.visible;
@@ -46,7 +55,11 @@ bool EditorWorkspace::load(const std::filesystem::path& directory) noexcept {
             state.at("layoutHash").get<std::uint64_t>()!=layoutHash(directory/"layout.ini"))
             throw std::runtime_error("docking data integrity");
         auto candidate=panels_;
-        for(auto& panel:candidate)panel.visible=state.at("panels").at(panel.id).get<bool>();
+        for(auto& panel:candidate) {
+            const bool extension=panel.id=="settings"||std::any_of(extraPanels_.begin(),extraPanels_.end(),[&](const auto& extra){return extra.id==panel.id;});
+            if(extension&&!state.at("panels").contains(panel.id))continue;
+            panel.visible=state.at("panels").at(panel.id).get<bool>();
+        }
         panels_=std::move(candidate);return true;
     }catch(...) { diagnostic="Invalid workspace configuration. Default layout loaded.";return false; }
 }
@@ -67,11 +80,12 @@ std::filesystem::path EditorWorkspace::configDirectory() {
     if(const char* value=std::getenv("HOME"))return std::filesystem::u8path(value)/".config/AzureRender/editor";
     return std::filesystem::temp_directory_path()/"AzureRender/editor";
 }
-EditorWorkspaceLayout EditorWorkspace::layout(float width,float height,float dpi) {
+EditorWorkspaceLayout EditorWorkspace::layout(float width,float height,float dpi,bool compact) {
     if(!std::isfinite(dpi)||dpi<=0)throw std::invalid_argument("Invalid DPI");
     dpi=std::clamp(dpi,.75F,3.F);
-    EditorWorkspaceLayout r;r.menu*=dpi;r.toolbar*=dpi;r.status*=dpi;
-    r.compact=width/dpi<1280 || height/dpi<720;
+    const auto metrics=ui::UiMetrics::fromScale(dpi);
+    EditorWorkspaceLayout r;r.menu=metrics.menuHeight;r.toolbar=metrics.toolbarHeight;r.status=metrics.statusHeight;
+    r.compact=compact || width/dpi<1280 || height/dpi<720;
     r.left=r.compact?0:220*dpi;r.right=std::min(320*dpi,width*.26F);
     r.bottom=r.compact?60*dpi:220*dpi;
     r.viewportWidth=width-r.left-r.right;

@@ -8,6 +8,8 @@
 #include <string_view>
 
 namespace azurerender {
+class SettingRegistry;
+void registerRenderSettings(SettingRegistry& registry);
 
 inline constexpr std::uint32_t kShowcasePresetVersion = 1;
 

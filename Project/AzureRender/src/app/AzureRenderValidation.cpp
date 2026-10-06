@@ -25,6 +25,20 @@ void AzureRenderApp::initializeValidation() {
 #endif
         return ObservationValue(static_cast<std::int64_t>(runtime_.snapshotScene().nodes.size()));
     });
+    const auto settingDescriptors=engineSettings_->describe();
+    for(const auto& field:settingDescriptors.items()) {
+        const auto name=field.key();
+        observations_->add("setting."+name,[this,name]{
+            const auto value=engineSettings_->get(name);
+            if(value.is_boolean())return ObservationValue(value.get<bool>());
+            if(value.is_number_integer())return ObservationValue(value.get<std::int64_t>());
+            if(value.is_number())return ObservationValue(value.get<double>());
+            return ObservationValue(value.get<std::string>());
+        });
+        observations_->add("setting.source."+name,[this,name]{return ObservationValue(std::string(settingSourceName(engineSettings_->source(name))));});
+    }
+    observations_->add("render.exposure",[this]{return ObservationValue(static_cast<double>(effectiveRenderSettings_.grade.exposureEv));});
+    observations_->add("render.diagnosticView",[this]{return ObservationValue(static_cast<std::int64_t>(effectiveRenderSettings_.diagnosticView));});
     ValidationCallbacks callbacks;
 #if AZURE_WITH_EDITOR
     if(auto session=runOptions_.editorSession) {
@@ -92,7 +106,7 @@ void AzureRenderApp::finishValidation() {
     if(!runOptions_.validationReport.empty()) {
         auto report=validation_->report();report["mode"]="production";report["fixedFrameStep"]=runOptions_.fixedFrameStep;
         report["fixedDescriptors"]=runOptions_.bindlessDisabled;report["cpuSkinning"]=runOptions_.computeSkinningDisabled;
-        report["renderSettings"]=encodeLevelRenderSettings(renderSettings_);
+        report["renderSettings"]=encodeLevelRenderSettings(effectiveRenderSettings_);
         report["window"]={{"width",swapchainExtent_.width},{"height",swapchainExtent_.height}};
         report["viewport"]={{"width",renderExtent_.width},{"height",renderExtent_.height}};
         std::ofstream file(runOptions_.validationReport);file<<report.dump(2);if(!file)throw std::runtime_error("Cannot write validation report");

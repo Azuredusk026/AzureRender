@@ -1,0 +1,1240 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "editorDebugLines": 0,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "diagnostic": "",
+    "dpi": 1.5,
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gizmoTranslation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "history": [],
+    "image": {
+      "height": 520.0,
+      "width": 1083.0,
+      "x": 342.0,
+      "y": 180.0
+    },
+    "nodeCount": 21,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1440.0,
+          439.0,
+          480.0,
+          605.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          1440.0,
+          96.0,
+          480.0,
+          340.0
+        ]
+      },
+      "settings": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          715.0,
+          1107.0,
+          329.0
+        ]
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          330.0,
+          96.0,
+          1107.0,
+          616.0
+        ]
+      }
+    },
+    "selectedName": "hero:body",
+    "settings": {
+      "diagnostics.verbose": {
+        "default": false,
+        "description": "Verbose development diagnostics",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.compact": {
+        "default": false,
+        "description": "Compact workspace",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.scale": {
+        "default": 1.0,
+        "description": "Interface scale multiplier",
+        "layers": {
+          "default": 1.0,
+          "user-file": 1.0
+        },
+        "maximum": 3.0,
+        "minimum": 0.75,
+        "pending": 1.0,
+        "pendingSource": "user-file",
+        "persistent": true,
+        "readOnly": false,
+        "source": "user-file",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "input.cameraSensitivity": {
+        "default": 1.0,
+        "description": "Mouse camera sensitivity multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 4.0,
+        "minimum": 0.1,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "render.blackholeQuality": {
+        "default": 2,
+        "description": "Blackhole quality: performance, balanced, cinematic",
+        "layers": {
+          "default": 2
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 2,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2
+      },
+      "render.diagnosticView": {
+        "default": 0,
+        "description": "Diagnostic view: beauty, normal, outline, shadow, depth",
+        "layers": {
+          "default": 0
+        },
+        "maximum": 4.0,
+        "minimum": 0.0,
+        "pending": 0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 0
+      },
+      "render.exposure": {
+        "default": 0.0,
+        "description": "Temporary exposure in EV",
+        "layers": {
+          "default": 0.0,
+          "user-file": 0.5
+        },
+        "maximum": 8.0,
+        "minimum": -8.0,
+        "pending": 0.5,
+        "pendingSource": "user-file",
+        "persistent": true,
+        "readOnly": false,
+        "source": "user-file",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.5
+      }
+    },
+    "uiErrors": [],
+    "version": 2,
+    "visibleAssets": [
+      {
+        "id": "guide",
+        "path": "assets:/guide.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "cube",
+        "path": "assets:/cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "hero:mesh",
+        "path": "assets:/hero.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "guide:mesh",
+        "path": "guide.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "door:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "checkpoint:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-0:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-1:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "artifact-2:mesh",
+        "path": "cube.gltf",
+        "ready": true,
+        "type": ".gltf"
+      },
+      {
+        "id": "269952f4-d343-4b86-ba17-a6c7220fd307",
+        "path": "assets:/locomotion.json",
+        "ready": true,
+        "type": ".json"
+      },
+      {
+        "id": "3eda7e1c-15bc-41b5-b26e-5118f1750926",
+        "path": "assets:/exploration.azurelevel",
+        "ready": true,
+        "type": ".azurelevel"
+      },
+      {
+        "id": "4db6da83-6509-4579-bf74-c3579e5a999e",
+        "path": "assets:/prefabs/door.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "5549ba6c-aaff-4ef0-80c9-0bc8d5befc15",
+        "path": "assets:/door.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "6413aa1c-b022-45c2-ab7d-48daf4dc6cf2",
+        "path": "assets:/hud.rml",
+        "ready": true,
+        "type": ".rml"
+      },
+      {
+        "id": "69c22e2d-51c2-44c7-976b-3edee19c70cd",
+        "path": "assets:/hero.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "852b6e55-029f-4e82-84cd-2d9f0b1842f9",
+        "path": "assets:/checkpoint.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "9b2947a9-636a-4d4f-9542-ba4af89f8229",
+        "path": "assets:/collectible.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "a2c17e9c-d57e-463d-a42c-e4d12ac5f1b0",
+        "path": "assets:/prefabs/guide.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "af75e886-33ef-4a8f-9712-39dffdf54f5b",
+        "path": "assets:/guide.lua",
+        "ready": true,
+        "type": ".lua"
+      },
+      {
+        "id": "b1aaeb4a-07c3-4e05-b098-47e86e369b56",
+        "path": "assets:/prefabs/collectible.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "d5501442-e261-4e55-8432-af81fd497b6b",
+        "path": "assets:/prefabs/checkpoint.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "d6def5e0-eea2-47a9-aee3-ae6fab162c24",
+        "path": "assets:/prefabs/hero.azureprefab",
+        "ready": true,
+        "type": ".azureprefab"
+      },
+      {
+        "id": "d8c9dde4-3de2-4235-92bc-214f54dfa8a4",
+        "path": "assets:/CHARACTER-LICENSE.txt",
+        "ready": true,
+        "type": ".txt"
+      },
+      {
+        "id": "ea2afeeb-a929-4011-9c1b-a7cb609885ab",
+        "path": "assets:/goal.lua",
+        "ready": true,
+        "type": ".lua"
+      }
+    ],
+    "widgets": {
+      "build": [
+        643.5,
+        48.0,
+        60.0,
+        33.0
+      ],
+      "create.empty": [
+        12.0,
+        226.0,
+        305.0,
+        33.0
+      ],
+      "focus": [
+        342.0,
+        141.0,
+        126.0,
+        33.0
+      ],
+      "gizmo.0": [
+        936.4330444335938,
+        545.619384765625,
+        10,
+        10
+      ],
+      "gizmo.1": [
+        878.5,
+        470.0064697265625,
+        10,
+        10
+      ],
+      "gizmo.2": [
+        830.4679565429688,
+        565.9636840820313,
+        10,
+        10
+      ],
+      "gizmo.center": [
+        882.5,
+        534.0064697265625,
+        2,
+        2
+      ],
+      "menu.Edit": [
+        55.0,
+        3.0,
+        51.0,
+        27.0
+      ],
+      "menu.File": [
+        6.0,
+        3.0,
+        49.0,
+        27.0
+      ],
+      "menu.Help": [
+        224.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "menu.Tools": [
+        162.0,
+        3.0,
+        62.0,
+        27.0
+      ],
+      "menu.View": [
+        106.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "mode.Move": [
+        75.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Rotate": [
+        169.5,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Scale": [
+        264.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "name": [
+        1452.0,
+        604.0,
+        312.0,
+        33.0
+      ],
+      "node.artifact-0:body": [
+        1446.0,
+        709.0,
+        447.0,
+        27.0
+      ],
+      "node.artifact-1:body": [
+        1446.0,
+        736.0,
+        447.0,
+        27.0
+      ],
+      "node.artifact-2:body": [
+        1446.0,
+        763.0,
+        447.0,
+        27.0
+      ],
+      "node.camera": [
+        1446.0,
+        466.0,
+        447.0,
+        27.0
+      ],
+      "node.checkpoint:body": [
+        1446.0,
+        682.0,
+        447.0,
+        27.0
+      ],
+      "node.companion-0": [
+        1446.0,
+        547.0,
+        447.0,
+        27.0
+      ],
+      "node.companion-1": [
+        1446.0,
+        574.0,
+        447.0,
+        27.0
+      ],
+      "node.door:body": [
+        1446.0,
+        655.0,
+        447.0,
+        27.0
+      ],
+      "node.gate-left": [
+        1446.0,
+        412.0,
+        447.0,
+        27.0
+      ],
+      "node.gate-right": [
+        1446.0,
+        439.0,
+        447.0,
+        27.0
+      ],
+      "node.goal": [
+        1446.0,
+        520.0,
+        447.0,
+        27.0
+      ],
+      "node.ground": [
+        1446.0,
+        223.0,
+        447.0,
+        27.0
+      ],
+      "node.guide:body": [
+        1446.0,
+        628.0,
+        447.0,
+        27.0
+      ],
+      "node.hero:body": [
+        1446.0,
+        601.0,
+        447.0,
+        27.0
+      ],
+      "node.hud": [
+        1446.0,
+        493.0,
+        447.0,
+        27.0
+      ],
+      "node.interior-left": [
+        1446.0,
+        331.0,
+        447.0,
+        27.0
+      ],
+      "node.interior-right": [
+        1446.0,
+        358.0,
+        447.0,
+        27.0
+      ],
+      "node.interior-roof": [
+        1446.0,
+        385.0,
+        447.0,
+        27.0
+      ],
+      "node.passage-left": [
+        1446.0,
+        250.0,
+        447.0,
+        27.0
+      ],
+      "node.passage-right": [
+        1446.0,
+        277.0,
+        447.0,
+        27.0
+      ],
+      "node.ramp": [
+        1446.0,
+        304.0,
+        447.0,
+        27.0
+      ],
+      "outliner.search": [
+        1452.0,
+        141.0,
+        434.0,
+        33.0
+      ],
+      "panelrect.animation": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.assets": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.build": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.capture": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.console": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.gameplay-debug": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.inspector": [
+        1440.0,
+        439.0,
+        480.0,
+        605.0
+      ],
+      "panelrect.outliner": [
+        1440.0,
+        96.0,
+        480.0,
+        340.0
+      ],
+      "panelrect.settings": [
+        330.0,
+        715.0,
+        1107.0,
+        329.0
+      ],
+      "panelrect.viewport": [
+        330.0,
+        96.0,
+        1107.0,
+        616.0
+      ],
+      "pause": [
+        430.5,
+        48.0,
+        65.0,
+        33.0
+      ],
+      "pick.artifact-0:body": [
+        1066.661865234375,
+        226.62620544433594,
+        2,
+        2
+      ],
+      "pick.artifact-1:body": [
+        1424.160400390625,
+        209.64306640625,
+        2,
+        2
+      ],
+      "pick.artifact-2:body": [
+        1259.69873046875,
+        202.03195190429688,
+        2,
+        2
+      ],
+      "pick.companion-0": [
+        1158.61962890625,
+        234.9818115234375,
+        2,
+        2
+      ],
+      "pick.companion-1": [
+        1343.1346435546875,
+        201.38717651367188,
+        2,
+        2
+      ],
+      "pick.door:body": [
+        1328.231201171875,
+        196.28070068359375,
+        2,
+        2
+      ],
+      "pick.gate-left": [
+        1284.3876953125,
+        196.1676788330078,
+        2,
+        2
+      ],
+      "pick.gate-right": [
+        1374.4368896484375,
+        196.39981079101563,
+        2,
+        2
+      ],
+      "pick.ground": [
+        1318.855224609375,
+        208.47312927246094,
+        2,
+        2
+      ],
+      "pick.guide:body": [
+        852.466064453125,
+        388.19049072265625,
+        2,
+        2
+      ],
+      "pick.hero:body": [
+        886.0791015625,
+        437.613037109375,
+        2,
+        2
+      ],
+      "pick.interior-left": [
+        1318.569580078125,
+        194.55029296875,
+        2,
+        2
+      ],
+      "pick.interior-right": [
+        1339.68115234375,
+        194.58358764648438,
+        2,
+        2
+      ],
+      "pick.interior-roof": [
+        1329.2607421875,
+        193.51458740234375,
+        2,
+        2
+      ],
+      "pick.passage-left": [
+        1276.1038818359375,
+        204.34765625,
+        2,
+        2
+      ],
+      "pick.passage-right": [
+        1339.06298828125,
+        204.82040405273438,
+        2,
+        2
+      ],
+      "pick.ramp": [
+        1319.267333984375,
+        206.27149963378906,
+        2,
+        2
+      ],
+      "play": [
+        364.5,
+        48.0,
+        54.0,
+        33.0
+      ],
+      "save": [
+        12.0,
+        48.0,
+        57.0,
+        33.0
+      ],
+      "setting.diagnostics.verbose": [
+        495.0,
+        892.0,
+        33.0,
+        33.0
+      ],
+      "setting.editor.compact": [
+        495.0,
+        1031.0,
+        33.0,
+        33.0
+      ],
+      "setting.editor.scale": [
+        495.0,
+        1170.0,
+        908.0,
+        33.0
+      ],
+      "setting.input.cameraSensitivity": [
+        495.0,
+        1309.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.blackholeQuality": [
+        495.0,
+        1448.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.diagnosticView": [
+        495.0,
+        1587.0,
+        908.0,
+        33.0
+      ],
+      "setting.render.exposure": [
+        495.0,
+        1726.0,
+        908.0,
+        33.0
+      ],
+      "setting.reset.diagnostics.verbose": [
+        342.0,
+        931.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.editor.compact": [
+        342.0,
+        1070.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.editor.scale": [
+        342.0,
+        1209.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.input.cameraSensitivity": [
+        342.0,
+        1348.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.blackholeQuality": [
+        342.0,
+        1487.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.diagnosticView": [
+        342.0,
+        1626.0,
+        111.0,
+        33.0
+      ],
+      "setting.reset.render.exposure": [
+        342.0,
+        1765.0,
+        111.0,
+        33.0
+      ],
+      "settings.save": [
+        342.0,
+        1811.0,
+        173.0,
+        33.0
+      ],
+      "settings.search": [
+        342.0,
+        760.0,
+        1171.0,
+        33.0
+      ],
+      "settings.source": [
+        342.0,
+        799.0,
+        810.0,
+        33.0
+      ],
+      "step": [
+        507.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "stop": [
+        575.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "tab.animation": [
+        900.0,
+        715.0,
+        179.0,
+        33.0
+      ],
+      "tab.assets": [
+        369.0,
+        715.0,
+        165.0,
+        33.0
+      ],
+      "tab.build": [
+        764.0,
+        715.0,
+        130.0,
+        33.0
+      ],
+      "tab.capture": [
+        540.0,
+        715.0,
+        106.0,
+        33.0
+      ],
+      "tab.console": [
+        652.0,
+        715.0,
+        106.0,
+        33.0
+      ],
+      "tab.gameplay-debug": [
+        1085.0,
+        715.0,
+        167.0,
+        33.0
+      ],
+      "tab.inspector": [
+        1479.0,
+        439.0,
+        98.0,
+        33.0
+      ],
+      "tab.outliner": [
+        1479.0,
+        96.0,
+        151.0,
+        33.0
+      ],
+      "tab.settings": [
+        1258.0,
+        715.0,
+        107.0,
+        33.0
+      ],
+      "tab.viewport": [
+        369.0,
+        96.0,
+        112.0,
+        33.0
+      ],
+      "tool.animation": [
+        12.0,
+        377.0,
+        305.0,
+        33.0
+      ],
+      "tool.assets": [
+        12.0,
+        338.0,
+        305.0,
+        33.0
+      ],
+      "tool.build": [
+        12.0,
+        455.0,
+        305.0,
+        33.0
+      ],
+      "tool.capture": [
+        12.0,
+        494.0,
+        305.0,
+        33.0
+      ],
+      "tool.console": [
+        12.0,
+        533.0,
+        305.0,
+        33.0
+      ],
+      "tool.gameplay-debug": [
+        12.0,
+        416.0,
+        305.0,
+        33.0
+      ],
+      "tool.settings": [
+        12.0,
+        572.0,
+        305.0,
+        33.0
+      ],
+      "viewport.image": [
+        342.0,
+        180.0,
+        1083.0,
+        520.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "ground",
+      "translation": [
+        0.0,
+        -0.25,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-left",
+      "translation": [
+        -3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "passage-right",
+      "translation": [
+        3.200000047683716,
+        1.5,
+        -96.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "ramp",
+      "translation": [
+        0.0,
+        0.17000000178813934,
+        -170.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-left",
+      "translation": [
+        -3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-right",
+      "translation": [
+        3.200000047683716,
+        2.0,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "interior-roof",
+      "translation": [
+        0.0,
+        2.3499999046325684,
+        -305.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-left",
+      "translation": [
+        -13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "gate-right",
+      "translation": [
+        13.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "hud",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "goal",
+      "translation": [
+        0.0,
+        1.0,
+        -330.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "companion-0",
+      "translation": [
+        -4.0,
+        0.0,
+        -32.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "companion-1",
+      "translation": [
+        4.0,
+        0.0,
+        -185.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "hero:body",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "guide:body",
+      "translation": [
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "door:body",
+      "translation": [
+        0.0,
+        1.5,
+        -290.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "checkpoint:body",
+      "translation": [
+        0.0,
+        1.0,
+        -165.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "artifact-0:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -50.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-1:body",
+      "translation": [
+        14.0,
+        0.44999998807907104,
+        -130.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "artifact-2:body",
+      "translation": [
+        -14.0,
+        0.44999998807907104,
+        -210.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "exploration",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

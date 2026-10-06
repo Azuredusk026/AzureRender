@@ -72,7 +72,7 @@ def owner(path):
         return 'AzureRenderCore'
     if area == 'diagnostics':
         return 'AzureRenderCore' if path.name.startswith('GpuCapability') else 'AzureFoundation'
-    return {'resources':'AzureFoundation', 'platform':'AzurePlatform', 'reflection':'AzureReflection',
+    return {'foundation':'AzureFoundation', 'resources':'AzureFoundation', 'platform':'AzurePlatform', 'reflection':'AzureReflection',
             'runtime':'AzureRuntime', 'editor':'AzureEditor', 'assets':'AzureRenderCore',
             'render':'AzureRenderCore', 'rhi':'AzureRenderCore', 'scene':'AzureRenderCore',
             'scenes':'AzureRenderCore'}.get(area)

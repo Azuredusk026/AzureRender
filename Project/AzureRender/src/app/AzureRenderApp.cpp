@@ -1,3 +1,4 @@
+#include "runtime/InputPreferences.hpp"
 #include "AzureRenderApp.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/GameplayKeys.hpp"
@@ -132,6 +133,7 @@ void AzureRenderApp::run(
             "GPU timing output already exists; refusing to overwrite: "
             + runOptions_.gpuTimingOutput);
     }
+    initializeSettings();
     initWindow();
     initVulkan(runOptions_.assetPath);
 #if !AZURE_WITH_EDITOR
@@ -502,7 +504,8 @@ void AzureRenderApp::buildRenderContext(
         }
     }
     context.rampAtlasPath = resourceLocator_.rampAtlas().string();
-    context.renderSettings = &renderSettings_;
+    effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
+    context.renderSettings = &effectiveRenderSettings_;
 }
 
 void AzureRenderApp::buildSceneFrameData(
@@ -540,7 +543,7 @@ void AzureRenderApp::buildSceneFrameData(
         focused=focused&&gameViewportFocus_&&!(gameUi_&&gameUi_->wantsKeyboard())&&!uiPointer;
         game->input().setFocused(focused);
         if(focused&&game->hasCamera()&&activeRuntime()->state()==azurerender::RuntimeLifecycle::State::Running){
-            if(gameCursorPrimed_)game->cameraInput(static_cast<float>(x-gameCursorX_),static_cast<float>(y-gameCursorY_),0);
+            if(gameCursorPrimed_)game->cameraInput(static_cast<float>(x-gameCursorX_)*azurerender::cameraSensitivity(*engineSettings_),static_cast<float>(y-gameCursorY_)*azurerender::cameraSensitivity(*engineSettings_),0);
             gameCursorPrimed_=true;
             glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
         }else{gameCursorPrimed_=false;glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);}
@@ -608,7 +611,8 @@ void AzureRenderApp::buildSceneFrameData(
     } else {
         frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
-    frame.renderSettings = &renderSettings_;
+    effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+    frame.renderSettings = &effectiveRenderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
     frame.cameraPosition[1] = cameraPosition_[1];
     frame.cameraPosition[2] = cameraPosition_[2];

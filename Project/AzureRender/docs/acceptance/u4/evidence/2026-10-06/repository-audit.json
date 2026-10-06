@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "trackedToolState": [],
+  "danglingLinks": [],
+  "ignoreProbes": [
+    {
+      "path": "Project/AzureRender/build/hygiene-probe.txt",
+      "expectedIgnored": true,
+      "ignored": true,
+      "passed": true
+    },
+    {
+      "path": ".codemaker/codemap/hygiene-probe.log",
+      "expectedIgnored": true,
+      "ignored": true,
+      "passed": true
+    },
+    {
+      "path": ".env",
+      "expectedIgnored": true,
+      "ignored": true,
+      "passed": true
+    },
+    {
+      "path": "Project/AzureRender/src/main.cpp",
+      "expectedIgnored": false,
+      "ignored": false,
+      "passed": true
+    },
+    {
+      "path": "Project/AzureRender/assets_public/hygiene-probe.gltf",
+      "expectedIgnored": false,
+      "ignored": false,
+      "passed": true
+    }
+  ]
+}

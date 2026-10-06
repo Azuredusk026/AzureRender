@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 141, in <module>
+    main(args.executable, args.output)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 129, in main
+    rows = [run(executable.resolve(), output.resolve(), name) for name in ('exploration', 'inspector')]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 129, in <listcomp>
+    rows = [run(executable.resolve(), output.resolve(), name) for name in ('exploration', 'inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 69, in run
+    assert call('query', name='document.version') == original, 'Temporary render override changed the authored document'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Temporary render override changed the authored document

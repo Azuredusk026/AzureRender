@@ -34,6 +34,12 @@ void expectError(
 }  // namespace
 
 int main() try {
+    const auto settings=azurerender::parseCommandLine({"--set","render.exposure=1.25","--settings-file","user settings.json","--default-settings","defaults.json","--project-settings","project.json"});
+    require(settings.options.settingOverrides.at("render.exposure")==1.25,"Typed setting value parsed");
+    require(settings.options.settingsFile=="user settings.json","Setting path preserved");
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","missing-equals"});
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","render.exposure=nan"});
+
     const auto diagnostics=azurerender::parseCommandLine({"--qa-disable-face-culling", "--qa-disable-depth-test"});
     require(diagnostics.options.qaDisableFaceCulling && diagnostics.options.qaDisableDepthTest,
         "Independent material face and depth diagnostics must be accepted");

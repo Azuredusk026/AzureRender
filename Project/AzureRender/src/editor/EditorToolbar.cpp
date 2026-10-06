@@ -1,4 +1,6 @@
 #include "EditorToolbar.hpp"
+#include "ui/Widgets.hpp"
+#include "ui/UiScopes.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
@@ -20,7 +22,7 @@ bool EditorToolbar::enabled(EditorSession& s,EditorCommand command) {
     }
 }
 void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,const Observer& observe) {
-    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi);
+    const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi,s.settings().get("editor.compact").get<bool>());
     ImGui::SetNextWindowPos(vp->Pos);ImGui::SetNextWindowSize({vp->Size.x,layout.menu});
     ImGui::Begin("Menu###editor-menu",nullptr,barFlags|ImGuiWindowFlags_MenuBar);
     if(ImGui::BeginMenuBar()) {
@@ -52,10 +54,10 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
     ImGui::SetNextWindowPos({vp->Pos.x,vp->Pos.y+layout.menu});ImGui::SetNextWindowSize({vp->Size.x,layout.toolbar});
     ImGui::Begin("Toolbar###editor-toolbar",nullptr,barFlags);
     auto button=[&](const char* title,const char* id,EditorCommand command){
-        ImGui::BeginDisabled(!enabled(s,command));
-        if(ImGui::Button(title))static_cast<void>(s.execute(command));observe(id);
+        ui::ButtonOptions options;options.variant=ui::ButtonVariant::Toolbar;options.disabled=!enabled(s,command);options.tooltip="Unavailable in the current run or build state.";
+        if(ui::button(title,options))static_cast<void>(s.execute(command));observe(id);
         if(!enabled(s,command)&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("Unavailable in the current run or build state.");
-        ImGui::EndDisabled();ImGui::SameLine();
+        ImGui::SameLine();
     };
     button("Save","save",EditorCommand::Save);
     auto& context=s.context();
@@ -81,7 +83,7 @@ void EditorToolbar::status(EditorSession& s,float dpi) {
     ImGui::Text("%s | %s%s",c.isProject()?c.project().name.c_str():"Scene",c.scene().sceneId.c_str(),c.dirty()?" * Unsaved":"");
     if(s.building()){ImGui::SameLine();ImGui::TextUnformatted("Building game...");}
     else if(c.importing()){ImGui::SameLine();ImGui::Text("Import %.0f%%",c.importProgress()*100);}
-    if(!s.lastError().empty()){ImGui::SameLine();ImGui::TextColored({1,.55F,.45F,1},"%s",s.lastError().c_str());}
+    if(!s.lastError().empty()){ImGui::SameLine();ui::resultMessage(s.lastError(),true);}
     ImGui::End();ImGui::PopStyleVar();
 }
 }

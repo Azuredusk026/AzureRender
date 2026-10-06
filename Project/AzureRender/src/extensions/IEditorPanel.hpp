@@ -4,7 +4,7 @@
 
 namespace azurerender {
 
-class EditorContext;
+class PanelContext;
 
 class IEditorPanel {
 public:
@@ -12,7 +12,7 @@ public:
 
     [[nodiscard]] virtual std::string_view id() const noexcept = 0;
     [[nodiscard]] virtual std::string_view title() const noexcept = 0;
-    virtual void draw(EditorContext& context) = 0;
+    virtual void draw(PanelContext& context) = 0;
 };
 
 }  // namespace azurerender

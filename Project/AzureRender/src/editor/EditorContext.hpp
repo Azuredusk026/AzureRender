@@ -35,6 +35,7 @@ public:
     bool isProject() const noexcept { return assets_ != nullptr; }
     const Project& project() const { return *project_; }
     AssetDatabase& assets() { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
+    const AssetDatabase& assets() const { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
     std::string importAsset(const std::filesystem::path& path);
     const nlohmann::json& importSummary() const noexcept { return importSummary_; }
     void startImport(const std::filesystem::path& path);

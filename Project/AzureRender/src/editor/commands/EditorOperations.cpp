@@ -71,6 +71,24 @@ EditRegistry editorOperations(EditorSession& session) {
             else c.selectNode(a.at("index").get<std::size_t>());
             return nullptr;
         });
+    const auto settingSource=[](const Json& a) {
+        const auto source=a.value("source",std::string("console"));
+        if(source=="console")return SettingSource::Console;
+        if(source=="user-file")return SettingSource::UserFile;
+        throw EditRejection("Editor writes require console or user-file source");
+    };
+    registry.add({"settings.set",1,schema({{"name",text},{"value",Json::object()},{"source",text}},{"name","value"}),false,false,false},
+        [&session,settingSource](EditorContext&,const Json& a)->Json {
+            const auto result=session.settings().set(a.at("name").get<std::string>(),a.at("value"),settingSource(a));
+            if(!result.passed)throw EditRejection(result.diagnostic);return {{"queued",true}};
+        });
+    registry.add({"settings.reset",1,schema({{"name",text},{"source",text}},{"name"}),false,false,false},
+        [&session,settingSource](EditorContext&,const Json& a)->Json {
+            const auto result=session.settings().reset(a.at("name").get<std::string>(),settingSource(a));
+            if(!result.passed)throw EditRejection(result.diagnostic);return {{"queued",true}};
+        });
+    registry.add({"settings.describe",1,schema({{"search",text}}),false,false,false},
+        [&session](EditorContext&,const Json& a)->Json{return session.settings().describe(a.value("search",std::string()));});
     for(const auto& item:std::vector<std::pair<std::string,EditorCommand>>{
             {"document.save",EditorCommand::Save},{"document.reload",EditorCommand::Reload},
             {"history.undo",EditorCommand::Undo},{"history.redo",EditorCommand::Redo},

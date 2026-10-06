@@ -81,6 +81,11 @@ constexpr const char* kHelp =
     "  --disable-multi-draw-indirect     Use one indirect command per call\n"
     "  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps\n"
     "  --instances <N>                   Clone the asset entity N times (QA)\n\n"
+    "Settings:\n"
+    "  --set <name=JSON>                  Typed command-line override\n"
+    "  --settings-file <json>             User settings layer\n"
+    "  --default-settings <json>           Default file layer\n"
+    "  --project-settings <json>           Project settings layer\n\n"
     "Utility:\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
@@ -313,6 +318,20 @@ ParsedCommandLine parseCommandLine(
             parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
         } else if (argument == "--editor-actions") {
             parsed.options.editorActionsPath = requireValue(arguments,index,argument);
+        } else if (argument == "--set") {
+            const auto expression=requireValue(arguments,index,argument);const auto separator=expression.find('=');
+            if(separator==std::string::npos||separator==0)fail(CommandLineErrorCode::InvalidValue,argument,"Use name=JSON for a setting");
+            try {
+                const auto value=nlohmann::json::parse(expression.substr(separator+1));
+                if(!(value.is_boolean()||value.is_string()||value.is_number()))throw std::invalid_argument("Setting must be scalar");
+                parsed.options.settingOverrides[expression.substr(0,separator)]=value;
+            }catch(const std::exception&){fail(CommandLineErrorCode::InvalidValue,argument,"Invalid setting JSON");}
+        } else if (argument == "--settings-file") {
+            parsed.options.settingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--default-settings") {
+            parsed.options.defaultSettingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--project-settings") {
+            parsed.options.projectSettingsFile=requireValue(arguments,index,argument);
         } else if (argument == "--validation-script") {
             parsed.options.validationScript=requireValue(arguments,index,argument);
         } else if (argument == "--validation-report") {

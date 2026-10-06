@@ -1,5 +1,6 @@
 #include "EditorSession.hpp"
 #include "runtime/ModuleAssembly.hpp"
+#include "runtime/EngineSettings.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 
 #include <exception>
@@ -69,6 +70,10 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
         return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
     });
+    registerEngineSettings(settings_);
+    settings_.add({"editor.scale","Interface scale multiplier",1.0,.75,3.,false,true,false});
+    settings_.add({"editor.compact","Compact workspace",false,{},{},false,true,false});
+    selection_=std::make_unique<SelectionService>(*context_,*edits_);
 }
 
 EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {

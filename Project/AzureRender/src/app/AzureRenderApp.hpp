@@ -10,6 +10,7 @@
 #include "validation/ValidationTransport.hpp"
 #include "runtime/LevelSession.hpp"
 #include "runtime/GameRuntime.hpp"
+#include "runtime/EngineSettings.hpp"
 #include "runtime/GameInputReplay.hpp"
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
@@ -54,9 +55,14 @@ public:
 
     void run(const AzureRenderOptions& options = {});
     [[nodiscard]] const azurerender::RenderSettings& currentRenderSettings()
-        const { return renderSettings_; }
+        const { return effectiveRenderSettings_; }
 
 private:
+    azurerender::SettingRegistry playerSettings_;
+    azurerender::SettingRegistry* engineSettings_=nullptr;
+    azurerender::RenderSettings effectiveRenderSettings_;
+    void initializeSettings();
+    std::uint64_t settingsRevision_=0;
     std::unique_ptr<azurerender::ObservationRegistry> observations_;
     std::unique_ptr<azurerender::ValidationService> validation_;
     std::unique_ptr<azurerender::ValidationTransport> validationTransport_;

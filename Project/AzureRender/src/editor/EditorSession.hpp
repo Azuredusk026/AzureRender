@@ -7,6 +7,9 @@
 #include "runtime/ScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "editor/commands/EditService.hpp"
+#include "editor/PanelContext.hpp"
+#include "foundation/SettingRegistry.hpp"
+#include "extensions/ExtensionRegistry.hpp"
 
 #include <memory>
 #include <string>
@@ -53,6 +56,13 @@ public:
     }
     [[nodiscard]] bool execute(EditorCommand command) noexcept;
     EditService& edits() noexcept { return *edits_; }
+    PanelContext panelContext() { return {*context_,*selection_,*edits_}; }
+    void log(std::string message) { context_->log(std::move(message)); }
+    void setUserSettingsPath(std::filesystem::path path) { userSettingsPath_=std::move(path); }
+    const std::filesystem::path& userSettingsPath() const {return userSettingsPath_;}
+    SettingRegistry& settings() noexcept { return settings_; }
+    EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
+    SelectionService& selection() noexcept { return *selection_; }
     GeneratorRegistry& generators() noexcept { return generators_; }
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
     [[nodiscard]] bool saveOnClose() noexcept;
@@ -74,6 +84,10 @@ private:
     std::shared_ptr<EditorContext> context_;
     GeneratorRegistry generators_=GeneratorRegistry::builtins();
     std::unique_ptr<EditService> edits_;
+    std::unique_ptr<SelectionService> selection_;
+    SettingRegistry settings_;
+    EditorPanelRegistry panelRegistry_;
+    std::filesystem::path userSettingsPath_;
     std::string lastError_;
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;

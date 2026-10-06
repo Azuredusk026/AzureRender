@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "configuration": "Release",
+  "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\u4\\packages\\final-AzureRender-0.1.0-rc1-Windows-x64.tar.gz",
+  "size_bytes": 25711029,
+  "sha256": "7201d7724614751e434bf36938f25cbc606635552f137c7bafddebfc44a2a15a",
+  "stages": [
+    "configure",
+    "build",
+    "test",
+    "install",
+    "version",
+    "resources",
+    "isolated-runtime",
+    "isolated-player",
+    "player-project-runtime",
+    "player-script-runtime",
+    "package",
+    "manifest"
+  ],
+  "originalGatePackage": {
+    "package": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\u4\\packages\\gate-AzureRender-0.1.0-rc1-Windows-x64.tar.gz",
+    "sha256": "feec9eab59af904f793aee864ed003969f414ea9d10c232b48ad92d0346f2590"
+  },
+  "documentationRefresh": "final phase documentation installed and packaged after source and GPU gates"
+}
