@@ -11,6 +11,7 @@
 #include "foundation/SettingRegistry.hpp"
 #include "extensions/ExtensionRegistry.hpp"
 #include "editor/ai/ProposalController.hpp"
+#include "editor/preview/DeveloperServices.hpp"
 
 #include <memory>
 #include <string>
@@ -65,6 +66,8 @@ public:
     EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
     SelectionService& selection() noexcept { return *selection_; }
     GeneratorRegistry& generators() noexcept { return generators_; }
+    void setDeveloperServices(DeveloperServices services){developerServices_=std::move(services);}
+    const DeveloperServices& developerServices() const{return developerServices_;}
     void configureModel(std::shared_ptr<IModelTransport> transport);
     bool modelAvailable() const noexcept {return model_&&model_->available();}
     void pollModel();
@@ -89,6 +92,7 @@ private:
     bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;
     std::shared_ptr<EditorContext> context_;
     GeneratorRegistry generators_=GeneratorRegistry::builtins();
+    DeveloperServices developerServices_;
     std::unique_ptr<EditService> edits_;
     std::unique_ptr<SelectionService> selection_;
     SettingRegistry settings_;

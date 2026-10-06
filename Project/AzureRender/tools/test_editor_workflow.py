@@ -17,6 +17,21 @@ def main():
         shutil.copytree(args.project.resolve().parent, root / "game")
         good_script=(root / "game/assets/player.lua").read_text(encoding="utf-8").replace("local autoplay = false","local autoplay = true")
         (root / "game/assets/player.lua").write_text(good_script,encoding="utf-8")
+        # Nine running frames must yield nine fixed steps, independent of views.
+        cadence_task = root / "cadence-actions.json"
+        cadence_task.write_text(json.dumps([
+            {"frame": 2, "command": "play"},
+            {"frame": 11, "command": "pause"},
+            {"frame": 12, "command": "stop"},
+        ]), encoding="utf-8")
+        cadence_report = root / "cadence-report.json"
+        cadence = subprocess.run([str(args.executable.resolve()), "--editor-project", str(root / "game/project.azureproject"),
+            "--editor-actions", str(cadence_task), "--runtime-report", str(cadence_report),
+            "--fixed-frame-step", "--smoke-frames", "13"], cwd=root, capture_output=True,
+            text=True, encoding="utf-8", errors="replace", timeout=90)
+        assert cadence.returncode == 0, cadence.stdout + cadence.stderr
+        cadence_data = json.loads(cadence_report.read_text(encoding="utf-8"))
+        assert cadence_data["editorPlaySteps"] == 9, cadence_data
         actions = [
             {"frame": 1, "command": "import", "path": str(args.project.resolve().parent.parent / "test_model.gltf")},
             {"frame": 2, "command": "place"},

@@ -236,6 +236,8 @@ void ImGuiEditorLayer::shutdownVulkan() {
         ImGui_ImplVulkan_RemoveTexture(texture);
     }
     viewportTextures_.clear();
+    for(const auto& entry:previewTextures_)ImGui_ImplVulkan_RemoveTexture(entry.second.texture);
+    previewTextures_.clear();
     ImGui_ImplVulkan_Shutdown();
     if (descriptorPool_ != VK_NULL_HANDLE) {
         vkDestroyDescriptorPool(device_, descriptorPool_, nullptr);
@@ -316,6 +318,18 @@ void ImGuiEditorLayer::drawPanels() {
         {"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},
         {"activeId",ImGui::GetCurrentContext()->ActiveId},
         {"movingWindow",ImGui::GetCurrentContext()->MovingWindow?ImGui::GetCurrentContext()->MovingWindow->Name:""}});
+}
+void ImGuiEditorLayer::completePreviewTextures(std::uint64_t completed){
+    for(auto it=previewTextures_.begin();it!=previewTextures_.end();){
+        if(it->second.lastUse<=completed){if(initialized_)ImGui_ImplVulkan_RemoveTexture(it->second.texture);it=previewTextures_.erase(it);}else ++it;
+    }
+}
+VkDescriptorSet ImGuiEditorLayer::previewTexture(std::uint64_t handle){
+    if(!session_->developerServices().image)return VK_NULL_HANDLE;
+    const auto image=session_->developerServices().image(handle);if(!image.image)return VK_NULL_HANDLE;
+    auto& texture=previewTextures_[handle];
+    if(!texture.texture)texture.texture=ImGui_ImplVulkan_AddTexture(image.sampler,image.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    texture.lastUse=previewSubmission_;return texture.texture;
 }
 
 void ImGuiEditorLayer::render(const VkCommandBuffer commandBuffer) {
@@ -614,6 +628,7 @@ void ImGuiEditorLayer::initialize(
 void ImGuiEditorLayer::shutdownVulkan() {}
 void ImGuiEditorLayer::newFrame() {}
 void ImGuiEditorLayer::drawPanels() {}
+void ImGuiEditorLayer::completePreviewTextures(std::uint64_t) {}
 void ImGuiEditorLayer::render(VkCommandBuffer) {}
 void ImGuiEditorLayer::setViewportImages(
     VkSampler, const std::vector<VkImageView>&, std::uint32_t, std::uint32_t) {}

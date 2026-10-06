@@ -102,6 +102,7 @@ struct SceneFrameData {
 
     float cameraPosition[3]{0.0F, 0.0F, 0.0F};
     float cameraTarget[3]{0.0F, 0.0F, 0.0F};
+    bool cameraOverride=false;
     float rotationAngle = 0.0F;
 
     std::uint32_t qaIsolationMode = 0;

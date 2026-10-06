@@ -1,0 +1,105 @@
+debug-build passed
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\run_gates.py", line 16, in <module>
+    if result.returncode: raise RuntimeError(name+': '+(work/(name+'.log')).read_text(encoding='utf-8',errors='replace')[-6000:])
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: debug-tests:  76/117 Test  #76: AzureEngine.ScriptPlayer ........................   Passed    2.83 sec
+        Start  77: AzureEngine.Project
+ 77/117 Test  #77: AzureEngine.Project .............................   Passed    0.27 sec
+        Start  78: AzureEngine.RuntimeLifecycle
+ 78/117 Test  #78: AzureEngine.RuntimeLifecycle ....................   Passed    0.03 sec
+        Start  79: AzureRender.EnvironmentAsset
+ 79/117 Test  #79: AzureRender.EnvironmentAsset ....................   Passed    0.04 sec
+        Start  80: AzureRender.RenderGraph
+ 80/117 Test  #80: AzureRender.RenderGraph .........................   Passed    0.02 sec
+        Start  81: AzureRender.TransientResourcePool
+ 81/117 Test  #81: AzureRender.TransientResourcePool ...............   Passed    0.02 sec
+        Start  82: AzureRender.LightBuffer
+ 82/117 Test  #82: AzureRender.LightBuffer .........................   Passed    0.02 sec
+        Start  83: AzureRender.CascadedShadow
+ 83/117 Test  #83: AzureRender.CascadedShadow ......................   Passed    0.03 sec
+        Start  84: AzureRender.ClusteredLightGrid
+ 84/117 Test  #84: AzureRender.ClusteredLightGrid ..................   Passed    0.02 sec
+        Start  85: AzureRender.ComputePass
+ 85/117 Test  #85: AzureRender.ComputePass .........................   Passed    0.03 sec
+        Start  86: AzureRender.FrameTaskScheduler
+ 86/117 Test  #86: AzureRender.FrameTaskScheduler ..................   Passed    0.04 sec
+        Start  87: AzureRender.SurfaceLifecycle
+ 87/117 Test  #87: AzureRender.SurfaceLifecycle ....................   Passed    0.03 sec
+        Start  88: AzureRender.CommandLine
+ 88/117 Test  #88: AzureRender.CommandLine .........................   Passed    0.03 sec
+        Start  89: AzureRender.EditorCameraController
+ 89/117 Test  #89: AzureRender.EditorCameraController ..............   Passed    0.02 sec
+        Start  90: AzureRender.EditorSession
+ 90/117 Test  #90: AzureRender.EditorSession .......................   Passed    0.15 sec
+        Start  91: AzureRender.Ecs
+ 91/117 Test  #91: AzureRender.Ecs .................................   Passed    0.02 sec
+        Start  92: AzureRender.PickMath
+ 92/117 Test  #92: AzureRender.PickMath ............................   Passed    0.01 sec
+        Start  93: AzureRender.SceneModel
+ 93/117 Test  #93: AzureRender.SceneModel ..........................   Passed    0.10 sec
+        Start  94: AzureRender.RuntimeDiagnostics
+ 94/117 Test  #94: AzureRender.RuntimeDiagnostics ..................   Passed    0.05 sec
+        Start  95: AzureRender.GpuCapabilityReport
+ 95/117 Test  #95: AzureRender.GpuCapabilityReport .................   Passed    0.03 sec
+        Start  96: AzureRender.ResourceLocator
+ 96/117 Test  #96: AzureRender.ResourceLocator .....................   Passed    0.03 sec
+        Start  97: AzureRender.ExtensionRegistry
+ 97/117 Test  #97: AzureRender.ExtensionRegistry ...................   Passed    0.03 sec
+        Start  98: AzureRender.UploadRing
+ 98/117 Test  #98: AzureRender.UploadRing ..........................   Passed    0.09 sec
+        Start  99: AzureRender.NullRhi
+ 99/117 Test  #99: AzureRender.NullRhi .............................   Passed    0.01 sec
+        Start 100: AzureRender.NullRhiPass
+100/117 Test #100: AzureRender.NullRhiPass .........................   Passed    0.53 sec
+        Start 101: AzureRender.SceneGraph
+101/117 Test #101: AzureRender.SceneGraph ..........................   Passed    0.03 sec
+        Start 102: AzureRender.VisualRegression
+102/117 Test #102: AzureRender.VisualRegression ....................   Passed   16.61 sec
+        Start 103: AzureRender.VisualRegressionLegacyDescriptors
+103/117 Test #103: AzureRender.VisualRegressionLegacyDescriptors ...   Passed   12.62 sec
+        Start 104: AzureRender.BlackholeComputeGpu
+104/117 Test #104: AzureRender.BlackholeComputeGpu .................   Passed    2.30 sec
+        Start 105: AzureRender.CharacterIblComputeGpu
+105/117 Test #105: AzureRender.CharacterIblComputeGpu ..............   Passed    1.30 sec
+        Start 106: AzureRender.CharacterSkinningComputeGpu
+106/117 Test #106: AzureRender.CharacterSkinningComputeGpu .........   Passed    1.30 sec
+        Start 107: AzureRender.R4AcceptanceRules
+107/117 Test #107: AzureRender.R4AcceptanceRules ...................   Passed    0.55 sec
+        Start 108: AzureEngine.PlayerCli
+108/117 Test #108: AzureEngine.PlayerCli ...........................   Passed    0.56 sec
+        Start 109: AzureRender.BlackholeOptimizationRules
+109/117 Test #109: AzureRender.BlackholeOptimizationRules ..........   Passed    0.55 sec
+        Start 110: AzureRender.R3Comparison
+110/117 Test #110: AzureRender.R3Comparison ........................   Passed   15.30 sec
+        Start 111: AzureRender.R3TransparentComparison
+111/117 Test #111: AzureRender.R3TransparentComparison .............   Passed   20.10 sec
+        Start 112: AzureRender.AuditRegressions
+112/117 Test #112: AzureRender.AuditRegressions ....................   Passed    1.83 sec
+        Start 113: AzureRender.VisualRegressionLegacySkinning
+113/117 Test #113: AzureRender.VisualRegressionLegacySkinning ......   Passed   12.54 sec
+        Start 114: AzureRender.CharacterMorphComputeGpu
+114/117 Test #114: AzureRender.CharacterMorphComputeGpu ............   Passed   16.48 sec
+        Start 115: AzureRender.ClusteredLightingGpu
+115/117 Test #115: AzureRender.ClusteredLightingGpu ................   Passed    5.15 sec
+        Start 116: AzureRender.ReleaseGateMissingBuild
+116/117 Test #116: AzureRender.ReleaseGateMissingBuild .............   Passed    0.03 sec
+        Start 117: AzureRender.InstallManifestRoundTrip
+117/117 Test #117: AzureRender.InstallManifestRoundTrip ............   Passed    0.24 sec
+
+99% tests passed, 1 tests failed out of 117
+
+Label Time Summary:
+gpu    = 612.84 sec*proc (32 tests)
+
+Total Test time (real) = 654.23 sec
+
+The following tests FAILED:
+	 71 - AzureEngine.EditorHost (Failed)
+Errors while running CTest
+
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\run_final.py", line 8, in <module>
+    if result.returncode:raise RuntimeError(name+' failed')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: run_gates.py failed

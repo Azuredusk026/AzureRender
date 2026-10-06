@@ -224,4 +224,8 @@ void GpuAllocator::flush(
         "vmaFlushAllocation");
 }
 
+void GpuAllocator::invalidate(const GpuBuffer& buffer,VkDeviceSize offset,VkDeviceSize size){
+    if(!allocator_ || !buffer.allocation)throw std::invalid_argument("Readback requires an allocated buffer");
+    check(vmaInvalidateAllocation(allocator_,buffer.allocation,offset,size),"vmaInvalidateAllocation");
+}
 }  // namespace azurerender::rhi

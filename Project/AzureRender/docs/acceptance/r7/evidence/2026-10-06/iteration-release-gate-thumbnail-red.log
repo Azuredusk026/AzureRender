@@ -1,0 +1,7 @@
+CMake Error at tools/run_release_gate.cmake:35 (message):
+  Release gate stage 'test' failed; see
+  D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/release-gate/test.log
+Call Stack (most recent call first):
+  tools/run_release_gate.cmake:43 (run_gate_stage)
+
+

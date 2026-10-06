@@ -27,6 +27,14 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
     if(!ImGui::Begin("Console###console",workspace_.open("console"))){ImGui::End();return;}
+    if(session_->developerServices().report){
+        const auto developer=session_->developerServices().report();
+        if(developer.at("shaderAvailable").get<bool>()){
+            ImGui::Text("Shader reload: %s",developer.at("shaderState").get<std::string>().c_str());
+            if(ui::button("Rebuild shaders"))session_->edit("developer.shader-rebuild");observeWidget("developer.shader-rebuild");
+            const auto diagnostic=developer.at("shaderDiagnostic").get<std::string>();if(!diagnostic.empty())ImGui::TextWrapped("%s",diagnostic.c_str());
+        }
+    }
     if(session_->modelAvailable()){
         const auto report=session_->proposalReport();const auto state=report.at("state").get<std::string>();
         ImGui::Text("Content assistance: %s",state.c_str());

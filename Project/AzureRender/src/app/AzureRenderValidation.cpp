@@ -39,6 +39,11 @@ void AzureRenderApp::initializeValidation() {
     }
     observations_->add("render.exposure",[this]{return ObservationValue(static_cast<double>(effectiveRenderSettings_.grade.exposureEv));});
     observations_->add("render.diagnosticView",[this]{return ObservationValue(static_cast<std::int64_t>(effectiveRenderSettings_.diagnosticView));});
+#if AZURE_WITH_EDITOR
+    observations_->add("developer.status",[this]{return ObservationValue(previewOperation("developer.describe",{}).dump());});
+    observations_->add("developer.shaderState",[this]{return ObservationValue(previewOperation("developer.describe",{}).at("shaderState").get<std::string>());});
+    observations_->add("developer.shaderGeneration",[this]{return ObservationValue(static_cast<std::int64_t>(previewOperation("developer.describe",{}).at("shaderGeneration").get<std::uint64_t>()));});
+#endif
     ValidationCallbacks callbacks;
 #if AZURE_WITH_EDITOR
     if(auto session=runOptions_.editorSession) {

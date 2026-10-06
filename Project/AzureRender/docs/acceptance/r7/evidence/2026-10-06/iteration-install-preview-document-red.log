@@ -1,0 +1,41 @@
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}
+{"status": "passed", "manifest": "build\\ninja-msvc-release\\build-provenance.json"}
+release-gate passed
+performance passed
+preview-comparison passed
+intel passed
+intel-preview passed
+intel-devtools passed
+devtools-framing passed
+inspector-package passed
+workspace passed
+installed-devtools passed
+module-boundaries passed
+debug-provenance passed
+release-provenance passed
+document-sync passed
+docs-check-final passed
+acceptance-style-final passed
+repository-audit-final passed
+site-final passed
+package-finalize passed
+evidence-collect passed
+site-final passed
+evidence-collect passed
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\close_phase.py", line 35, in <module>
+    assert (install/'share/AzureRender'/relative).read_bytes()==(root/relative).read_bytes(),relative
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\release-gate\\install-moved\\share\\AzureRender\\docs\\runtime\\development-previews.md'
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\resume_final.py", line 13, in <module>
+    subprocess.run([str(root/'tools/msvc_env.bat'),'python',str(work/name)],cwd=root,check=True)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat', 'python', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\close_phase.py']' returned non-zero exit status 1.

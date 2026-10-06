@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_render_preview_host.py", line 66, in <module>
+    if args.output:run(args.executable.resolve(),args.output.resolve())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_render_preview_host.py", line 57, in run
+    assert ImageChops.difference(images[0],images[1]).getbbox(),'Each view must consume its independent grade settings'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Each view must consume its independent grade settings

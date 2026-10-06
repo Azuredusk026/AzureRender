@@ -93,6 +93,7 @@ public:
 
     void markDirty() noexcept { dirty_ = true; ++revision_; closeEditMerge(); }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
+    [[nodiscard]] std::uint64_t revision() const noexcept { return revision_; }
     void save();
     void reload();
     void addChildNode(std::size_t parentIndex);

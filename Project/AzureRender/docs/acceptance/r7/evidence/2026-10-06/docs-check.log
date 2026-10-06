@@ -1,0 +1,37 @@
+Documentation prose style passed for 62 files.
+warning: in the working copy of 'Project/AzureRender/CMakeLists.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/THIRD_PARTY_NOTICES.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/engine-foundation.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/mkdocs.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderApp.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderApp.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderFrame.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderGameplay.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderOptions.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderSupport.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/AzureRenderValidation.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/app/CommandLine.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorContext.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorSession.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/EditorToolbar.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/ImGuiEditorLayer.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/ImGuiEditorLayer.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/commands/EditRegistry.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/commands/EditorOperations.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/panels/CapturePanel.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/panels/ConsolePanel.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/render/RenderContext.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/rhi/GpuAllocator.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/rhi/GpuAllocator.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/rhi/IGpuAllocator.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/rhi/NullRhi.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/rhi/VulkanRhi.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/runtime/EngineSettings.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/scenes/BlackholeSceneRenderer.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/CommandLineTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/EditorSessionTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/check_module_boundaries.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_editor_workflow.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_validation_protocol.py', LF will be replaced by CRLF the next time Git touches it
+{"schemaVersion": 1, "status": "passed", "trackedToolState": [], "danglingLinks": [], "ignoreProbes": [{"path": "Project/AzureRender/build/hygiene-probe.txt", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".codemaker/codemap/hygiene-probe.log", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".env", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": "Project/AzureRender/src/main.cpp", "expectedIgnored": false, "ignored": false, "passed": true}, {"path": "Project/AzureRender/assets_public/hygiene-probe.gltf", "expectedIgnored": false, "ignored": false, "passed": true}]}

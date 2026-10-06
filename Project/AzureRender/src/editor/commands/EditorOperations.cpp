@@ -158,6 +158,7 @@ EditRegistry editorOperations(EditorSession& session) {
             if(session.scripts())session.scripts()->reloadChanged();return nullptr;
         });
     registerProposalOperations(registry,session);
+    registerDeveloperOperations(registry,session);
     return registry;
 }
 }

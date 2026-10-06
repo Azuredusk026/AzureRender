@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <memory>
+#include <iostream>
 #include <string>
 
 namespace {
@@ -55,6 +56,33 @@ int main() {
     auto context = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset(assetPath), scenePath);
     azurerender::EditorSession session(context);
+    // Session-owned commands can be attached to successive host lifetimes.
+    if(!session.edits().registry().find("developer.describe")) {
+        std::cerr<<"Developer commands must belong to the session lifetime\n";return 1;
+    }
+    const auto developerVersion=session.edits().version();
+    if(session.edit("developer.describe")){std::cerr<<"Detached provider must be rejected\n";return 1;}
+    auto firstOwner=std::make_shared<int>(1);
+    std::weak_ptr<int> retiredOwner=firstOwner;
+    azurerender::DeveloperServices firstServices;
+    firstServices.operation=[firstOwner](const std::string& operation,const nlohmann::json&){
+        if(operation!="developer.describe")throw std::logic_error("Provider must receive the registered operation");
+        return nlohmann::json{{"generation",*firstOwner}};
+    };
+    session.setDeveloperServices(std::move(firstServices));firstOwner.reset();
+    if(session.edit("developer.describe").value.at("generation")!=1){std::cerr<<"First provider must be used\n";return 1;}
+    session.setDeveloperServices({});
+    if(!retiredOwner.expired()){std::cerr<<"Detaching must release provider ownership\n";return 1;}
+    if(session.edit("developer.describe")){std::cerr<<"Retired provider must be rejected\n";return 1;}
+    azurerender::DeveloperServices secondServices;
+    secondServices.operation=[](const std::string&,const nlohmann::json&){return nlohmann::json{{"generation",2}};};
+    session.setDeveloperServices(std::move(secondServices));
+    if(session.edit("developer.describe").value.at("generation")!=2){std::cerr<<"Second provider must replace the first\n";return 1;}
+    if(session.edit("preview.resize",{{"handle",1},{"extent",{0,128}}})){std::cerr<<"Provider parameters require schema validation\n";return 1;}
+    if(!session.edit("preview.resize",{{"handle",1},{"extent",{1,4096}}})){std::cerr<<"Declared range endpoints must be accepted\n";return 1;}
+    if(session.edit("preview.resize",{{"handle",1},{"extent",{4097,128}}})){std::cerr<<"Values above the declared maximum must be rejected\n";return 1;}
+    if(session.edits().version()!=developerVersion){std::cerr<<"Developer services must preserve document version\n";return 1;}
+    session.setDeveloperServices({});
     azurerender::RenderSettings liveSettings;
     context->attachRenderSettings(liveSettings);
     context->beginEdit();

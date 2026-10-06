@@ -83,6 +83,9 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+#if !AZURE_WITH_EDITOR
+    if(!options.shaderReloadConfig.empty() || !options.previewViews.empty())throw std::invalid_argument("Developer rendering tools require the AzureRender host");
+#endif
     azurerender::runtimeComponentRegistry().seal();
     runtimeModules_.add({"runtime.world",1,{},{}}, [this,&options](auto&) {
     if (options.sceneDocument.has_value() && !options.editorMode) runtime_.loadScene(*options.sceneDocument);
@@ -278,6 +281,9 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createTimestampQueryPools();
     createSceneRenderer();
     initEditorUi();
+#if AZURE_WITH_EDITOR
+    initializeDevtools();
+#endif
 }
 
 void AzureRenderApp::initEditorUi() {
@@ -348,6 +354,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         }
         printGpuTimingSummary();
     }
+#if AZURE_WITH_EDITOR
+    finishDevtools();
+#endif
     if (!runOptions_.runtimeReportPath.empty()) {
         nlohmann::json nodes = nlohmann::json::array();
         auto scene = runtime_.snapshotScene();
@@ -360,6 +369,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         report.close();
         std::ifstream saved(runOptions_.runtimeReportPath);nlohmann::json data;saved>>data;saved.close();
         data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
+#if AZURE_WITH_EDITOR
+        data["developer"]=devtoolsReport_;
+#endif
         data["routeFrames"]=gameRouteFrames_;
         data["replayedActions"]=gameInputReplay_?gameInputReplay_->consumed():0;
         data["animations"]=nlohmann::json::array();
@@ -483,6 +495,9 @@ void AzureRenderApp::buildRenderContext(
         }
     }
     context.shaderDirectory = resourceLocator_.shaderDirectory().string();
+#if AZURE_WITH_EDITOR
+    if(!activeShaderDirectory_.empty())context.shaderDirectory=activeShaderDirectory_;
+#endif
     context.environment.path = runOptions_.environmentPath;
     if (context.environment.path.empty() && runOptions_.projectFile.empty()) {
         const std::filesystem::path privateRoot("D:/Assigment/temp");
@@ -946,10 +961,16 @@ void AzureRenderApp::cleanup() {
     if(validation_)validation_->stop();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
+    if(shaderReloader_)shaderReloader_->cancel();
 #endif
     runtimeModules_.stop();
     if (device_ != VK_NULL_HANDLE) {
         vkDeviceWaitIdle(device_);
+#if AZURE_WITH_EDITOR
+        shaderReloader_.reset();
+        if(runOptions_.editorSession)runOptions_.editorSession->setDeveloperServices({});
+        thumbnails_.reset();renderViews_.reset();
+#endif
         gameUi_.reset();gameUiRenderer_.reset();
         workerCommandPools_.reset();
 #if AZURE_WITH_EDITOR

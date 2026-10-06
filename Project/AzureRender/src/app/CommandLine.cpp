@@ -90,6 +90,8 @@ constexpr const char* kHelp =
     "  --ai-config <json>                  Tool-owned provider configuration\n"
     "  --ai-fixture <json>                 Fixed-response model service\n\n"
     "Utility:\n"
+    "  --shader-reload <json>             Developer shader source configuration\n"
+    "  --preview-views <json>             Independent offscreen view descriptors\n"
     "  --check-resources  Validate the installed resource tree\n"
     "  --smoke-frames <N> Exit after N rendered frames\n"
     "  --version          Print the version\n"
@@ -333,6 +335,10 @@ ParsedCommandLine parseCommandLine(
             }catch(const std::exception&){fail(CommandLineErrorCode::InvalidValue,argument,"Invalid setting JSON");}
         } else if (argument == "--settings-file") {
             parsed.options.settingsFile=requireValue(arguments,index,argument);
+        } else if (argument == "--shader-reload") {
+            parsed.options.shaderReloadConfig=requireValue(arguments,index,argument);
+        } else if (argument == "--preview-views") {
+            parsed.options.previewViews=requireValue(arguments,index,argument);
         } else if (argument == "--ai-python") {
             parsed.options.aiPython=requireValue(arguments,index,argument);
         } else if (argument == "--ai-config") {

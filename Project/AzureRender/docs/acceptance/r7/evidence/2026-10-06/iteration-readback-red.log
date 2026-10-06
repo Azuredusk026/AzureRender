@@ -1,0 +1,8 @@
+[1/2] Building CXX object CMakeFiles\AzureRenderViewTests.dir\tests\RenderViewTests.cpp.obj
+FAILED: [code=2] CMakeFiles/AzureRenderViewTests.dir/tests/RenderViewTests.cpp.obj 
+"D:\Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe"  /nologo /TP -DAZURERENDER_ENABLE_VALIDATION=1 -DAZURERENDER_VERSION=\"0.1.0-rc1\" -DGLFW_INCLUDE_VULKAN -DIMATH_DLL -DOPENEXR_DLL -I..\..\src -Ivcpkg_installed\x64-windows\include -IC:\VulkanSDK\1.4.350.0\include -Ivcpkg_installed\x64-windows\include\vma -Ivcpkg_installed\x64-windows\include\OpenEXR -Ivcpkg_installed\x64-windows\include\Imath -MDd /EHsc /utf-8 /W4 /WX /permissive- /wd4127 /wd4456 /wd4996 -std:c++17 /showIncludes /FoCMakeFiles\AzureRenderViewTests.dir\tests\RenderViewTests.cpp.obj /FdCMakeFiles\AzureRenderViewTests.dir\ /FS -c ..\..\tests\RenderViewTests.cpp
+..\..\tests\RenderViewTests.cpp(30): error C2039: "readPixels": 不是 "azurerender::RenderViewService" 的成员
+..\..\src\render/RenderViewService.hpp(20): note: 参见“azurerender::RenderViewService”的声明
+..\..\tests\RenderViewTests.cpp(32): error C2039: "readPixels": 不是 "azurerender::RenderViewService" 的成员
+..\..\src\render/RenderViewService.hpp(20): note: 参见“azurerender::RenderViewService”的声明
+ninja: build stopped: subcommand failed.

@@ -34,6 +34,9 @@ void expectError(
 }  // namespace
 
 int main() try {
+    const auto development=azurerender::parseCommandLine({"--shader-reload","Shader config with spaces.json","--preview-views","Views with spaces.json"});
+    require(development.options.shaderReloadConfig=="Shader config with spaces.json" && development.options.previewViews=="Views with spaces.json",
+        "Developer configuration paths must preserve their bytes");
     const auto ai=azurerender::parseCommandLine({"--editor-project","project.azureproject","--ai-python","Python with spaces/python.exe","--ai-config","model config.json"});
     require(ai.options.aiPython=="Python with spaces/python.exe"&&ai.options.aiConfig=="model config.json","Model tool arguments must preserve paths");
     expectError(CommandLineErrorCode::InvalidCombination,"--ai-config",{"--ai-config","config.json"});

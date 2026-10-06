@@ -15,6 +15,7 @@
 #include <array>
 #include <memory>
 #include <vector>
+#include <map>
 
 struct GLFWwindow;
 
@@ -39,6 +40,8 @@ public:
     void shutdownVulkan();
     void newFrame();
     void drawPanels();
+    void completePreviewTextures(std::uint64_t completed);
+    void setPreviewSubmission(std::uint64_t submission){previewSubmission_=submission;}
     nlohmann::json workspaceSnapshot() const;
     void queueInputEvent(nlohmann::json event);
     void setGameUi(GameUi* ui) { gameUi_=ui; }
@@ -60,6 +63,11 @@ public:
     }
 
 private:
+    struct PreviewTexture {VkDescriptorSet texture=VK_NULL_HANDLE;std::uint64_t lastUse=0;};
+    std::map<std::uint64_t,PreviewTexture> previewTextures_;
+    std::uint64_t previewSubmission_=0;
+    VkDescriptorSet previewTexture(std::uint64_t handle);
+    bool cameraPreviewEnabled_=false;
     std::array<char,4096> proposalInstruction_{};
     int proposalDomain_=0;
     std::uint64_t proposalSequence_=0;
@@ -93,7 +101,9 @@ private:
     bool viewportResizePending_ = false;
     EditorViewportInput viewportInput_;
     std::int32_t gizmoDragAxis_ = -1;
+#ifdef AZURERENDER_HAS_IMGUI
     ImVec2 gizmoDragStartMouse_{0.0F, 0.0F};
+#endif
     std::array<float, 3> gizmoDragStartTranslation_{0.0F, 0.0F, 0.0F};
     bool viewportGizmoDragActive_ = false;
     bool viewportFocused_ = false;
@@ -116,11 +126,15 @@ private:
     std::array<float,2> uiMousePosition_{0,0};
     std::array<float,4> imageRect_{};
     std::array<float,3> gizmoDragStartRotation_{},gizmoDragStartScale_{};
+#ifdef AZURERENDER_HAS_IMGUI
     ImGuiTextFilter settingsFilter_;
+#endif
     int settingSourceIndex_=0;
     std::string settingDiagnostic_;
     bool settingsSaveRequested_=false,compactPreference_=false;
+#ifdef AZURERENDER_HAS_IMGUI
     ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_;
+#endif
     int assetType_ = 0,consoleLevel_ = 0;
     bool assetGrid_ = false;
     std::string assetDirectory_;

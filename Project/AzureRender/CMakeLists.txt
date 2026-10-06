@@ -156,6 +156,16 @@ function(compile_shader source_file)
     )
 
     set(COMPILED_SHADERS ${COMPILED_SHADERS} "${shader_output}" PARENT_SCOPE)
+    set(shader_defines_json "")
+    foreach(shader_define IN LISTS SHADER_DEFINES)
+        if(shader_defines_json)
+            string(APPEND shader_defines_json ",")
+        endif()
+        string(APPEND shader_defines_json "\"${shader_define}\"")
+    endforeach()
+    get_filename_component(shader_source_name "${source_file}" NAME)
+    set_property(GLOBAL APPEND PROPERTY AZURE_SHADER_DESCRIPTORS
+        "{\"source\":\"${shader_source_name}\",\"output\":\"${shader_name}.spv\",\"defines\":[${shader_defines_json}]}")
 endfunction()
 
 compile_shader("${SHADER_SOURCE_DIR}/editor_ui.frag")
@@ -208,11 +218,16 @@ compile_shader(
     OUTPUT_NAME blackhole_taa_compute.frag)
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_composite.frag")
 compile_shader("${SHADER_SOURCE_DIR}/clear.comp")
+compile_shader("${SHADER_SOURCE_DIR}/view_resolve.frag")
 compile_shader("${SHADER_SOURCE_DIR}/bloom_downsample.comp")
 compile_shader("${SHADER_SOURCE_DIR}/bloom_composite.comp")
 compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/skin.comp")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
+get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
+list(JOIN AZURE_SHADER_DESCRIPTORS ",\n" AZURE_SHADER_DESCRIPTORS_JSON)
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json" CONTENT
+    "{\"schemaVersion\":1,\"sourceRoot\":\"${SHADER_SOURCE_DIR}\",\"binaryRoot\":\"${SHADER_BINARY_DIR}\",\"scratchRoot\":\"${CMAKE_CURRENT_BINARY_DIR}/developer/shaders\",\"compiler\":\"$<TARGET_FILE:Vulkan::glslc>\",\"programs\":[${AZURE_SHADER_DESCRIPTORS_JSON}]}\n")
 
 # Engine targets expose explicit ownership and dependency boundaries.
 add_library(AzureBuildOptions INTERFACE)
@@ -232,7 +247,10 @@ add_library(AzureFoundation STATIC
 )
 add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
+    src/platform/ProcessRunner.cpp
 )
+add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp)
+target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform)
 add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
@@ -242,6 +260,8 @@ add_library(AzureRenderCore STATIC
     src/render/RendererCore.cpp
     src/render/GameUiRenderer.cpp
     src/render/RenderGraph.cpp
+    src/render/RenderViewService.cpp
+    src/render/RenderViewOutput.cpp
     src/render/TransientResourcePool.cpp
     src/render/RenderSettings.cpp
     src/render/EnvironmentAsset.cpp
@@ -307,6 +327,8 @@ endif()
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
 target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
 add_library(AzureEditor STATIC
+    src/editor/preview/AssetThumbnailService.cpp
+    src/editor/preview/DeveloperServices.cpp
     src/editor/ai/ProposalController.cpp
     src/editor/ai/ProposalOperations.cpp
     src/editor/ai/adapters/ProposalAdapters.cpp
@@ -340,6 +362,7 @@ add_library(AzureEditor STATIC
     src/editor/ImGuiEditorLayer.cpp
 )
 set(AZURE_HOST_SOURCES
+    src/app/AzureRenderDevtools.cpp
     src/app/AzureRenderSettings.cpp
     src/app/AzureRenderValidation.cpp
     src/app/AzureRenderApp.cpp
@@ -370,7 +393,7 @@ if(TARGET imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
 add_library(AzureRenderHost STATIC ${AZURE_HOST_SOURCES})
-target_link_libraries(AzureRenderHost PUBLIC AzureRuntime AzurePlatform AzureEditor AzureValidation)
+target_link_libraries(AzureRenderHost PUBLIC AzureRuntime AzurePlatform AzureEditor AzureValidation AzureDevtools)
 target_compile_definitions(AzureRenderHost PUBLIC AZURE_WITH_EDITOR=1)
 if(TARGET imgui::imgui)
     target_compile_definitions(AzureRenderHost PRIVATE AZURERENDER_HAS_IMGUI=1)
@@ -402,6 +425,28 @@ if(BUILD_TESTING)
     target_link_libraries(AzurePanelContextTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.PanelContext COMMAND AzurePanelContextTests)
     find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_executable(AzureRenderViewTests tests/RenderViewTests.cpp)
+    target_link_libraries(AzureRenderViewTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.RenderView COMMAND AzureRenderViewTests "${SHADER_BINARY_DIR}")
+    add_dependencies(AzureRenderViewTests AzureRenderShaders)
+    add_executable(AzureThumbnailTests tests/ThumbnailTests.cpp)
+    target_link_libraries(AzureThumbnailTests PRIVATE AzureEditor)
+    add_dependencies(AzureThumbnailTests AzureRenderShaders)
+    add_test(NAME AzureEditor.Thumbnail COMMAND AzureThumbnailTests "${SHADER_BINARY_DIR}")
+    add_executable(AzureHotReloadTests tests/HotReloadTests.cpp)
+    target_link_libraries(AzureHotReloadTests PRIVATE AzureDevtools)
+    if(WIN32)
+        add_test(NAME AzureRender.HotReload COMMAND AzureHotReloadTests
+            "$<TARGET_FILE:Vulkan::glslc>" "${CMAKE_CURRENT_BINARY_DIR}/hot-reload-tests")
+        add_executable(AzureProcessRunnerTests tests/ProcessRunnerTests.cpp)
+        target_link_libraries(AzureProcessRunnerTests PRIVATE AzurePlatform)
+        add_test(NAME AzurePlatform.ProcessRunner COMMAND AzureProcessRunnerTests)
+        add_test(NAME AzureRender.PreviewHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_preview_host.py" --executable "$<TARGET_FILE:AzureRender>")
+        set_tests_properties(AzureRender.PreviewHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+        add_test(NAME AzureEditor.DevtoolsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_devtools_host.py"
+            --executable "$<TARGET_FILE:AzureRender>" --shader-config "${CMAKE_BINARY_DIR}/shader-reload.json")
+        set_tests_properties(AzureEditor.DevtoolsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+    endif()
     add_executable(AzureModelProtocolTests tests/ModelProtocolTests.cpp)
     target_link_libraries(AzureModelProtocolTests PRIVATE AzureAI)
     add_test(NAME AzureAI.ModelProtocol COMMAND AzureModelProtocolTests
@@ -1170,6 +1215,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/observations-generation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/ui-settings.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-proposals.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/development-previews.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"

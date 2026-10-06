@@ -47,6 +47,11 @@ void AzureRenderApp::drawFrame() {
     vkCheck(
         vkWaitForFences(device_, 1, &inFlightFences_[currentFrame_], VK_TRUE, UINT64_MAX),
         "vkWaitForFences");
+    graphicsCompleted_=std::max(graphicsCompleted_,graphicsFrameSubmissions_[currentFrame_]);
+#if AZURE_WITH_EDITOR
+    pollDevtools();
+    if(editorLayer_)editorLayer_->completePreviewTextures(graphicsCompleted_);
+#endif
     const auto fenceEnd = std::chrono::steady_clock::now();
     if (runOptions_.gpuTimingEnabled)
         submissionCounters_.frameSlotWaitMilliseconds += std::chrono::duration<double, std::milli>(fenceEnd - frameStart).count();
@@ -65,6 +70,9 @@ void AzureRenderApp::drawFrame() {
     if (runOptions_.editorSession != nullptr) {
         if (runOptions_.editorSession->consumeAssetReloadRequest()) {
             vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
+#if AZURE_WITH_EDITOR
+            invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
+#endif
             if (sceneRenderer_ != nullptr) {
                 azurerender::RenderContext unloadContext;
                 buildRenderContext(unloadContext);
@@ -136,6 +144,7 @@ void AzureRenderApp::drawFrame() {
 #if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->setViewportImageIndex(imageIndex);
+        editorLayer_->setPreviewSubmission(graphicsSubmission_+1);
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
         const azurerender::EditorViewportInput viewportInput =
@@ -187,7 +196,8 @@ void AzureRenderApp::drawFrame() {
         imageIndex,
         captureThisFrame
             ? readback.buffer.buffer
-            : VK_NULL_HANDLE);
+            : VK_NULL_HANDLE,
+        frameSnapshot.frame());
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
     const VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
@@ -205,6 +215,7 @@ void AzureRenderApp::drawFrame() {
     vkCheck(
         vkQueueSubmit(graphicsQueue_, 1, &submitInfo, inFlightFences_[currentFrame_]),
         "vkQueueSubmit");
+    graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
     if (runOptions_.gpuTimingEnabled)
         submissionCounters_.submitMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - submitStart).count();
     if (runOptions_.gpuTimingEnabled) {
@@ -867,7 +878,8 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
 void AzureRenderApp::recordCommandBuffer(
     const VkCommandBuffer commandBuffer,
     const std::uint32_t imageIndex,
-    const VkBuffer screenshotBuffer) {
+    const VkBuffer screenshotBuffer,
+    [[maybe_unused]] const azurerender::SceneFrameData& frame) {
     const auto recordingStart = std::chrono::steady_clock::now();
     azurerender::RenderContext sceneContext;
     buildRenderContext(sceneContext);
@@ -911,6 +923,10 @@ void AzureRenderApp::recordCommandBuffer(
     azurerender::rhi::VulkanCommandRecorder serialSceneRecorder(commandBuffer, true);
     if (runOptions_.parallelRecordingDisabled) sceneContext.commands = &serialSceneRecorder;
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+#if AZURE_WITH_EDITOR
+    // All views consume the same snapshot after the host advances simulation.
+    if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
+#endif
     const auto scenePassCount = graph.passes().size();
     const auto composite = graph.addPass("post-process-hud", [&] {
     VkRenderPassBeginInfo postProcessPassInfo{

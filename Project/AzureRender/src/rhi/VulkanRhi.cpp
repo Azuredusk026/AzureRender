@@ -655,11 +655,15 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         VkSubpassDependency externalToPass{};
         externalToPass.srcSubpass = VK_SUBPASS_EXTERNAL;
         externalToPass.dstSubpass = 0;
-        externalToPass.srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        externalToPass.srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         externalToPass.dstStageMask =
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
         externalToPass.srcAccessMask = VK_ACCESS_SHADER_READ_BIT;
         externalToPass.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+        if(desc.depthAttachment>=0){
+            externalToPass.dstStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            externalToPass.dstAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+        }
         externalToPass.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(externalToPass);
 
@@ -668,9 +672,13 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         passToExternal.dstSubpass = VK_SUBPASS_EXTERNAL;
         passToExternal.srcStageMask =
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-        passToExternal.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        passToExternal.dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         passToExternal.srcAccessMask =
             VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+        if(desc.depthAttachment>=0){
+            passToExternal.srcStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            passToExternal.srcAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+        }
         passToExternal.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
         passToExternal.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(passToExternal);

@@ -1,0 +1,54 @@
+[1791302018252][info][editor][code=0] Opened scene: courtyard
+[1791302018519][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791302018889][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302018908][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302018918][info][editor][code=0] Opened scene: courtyard
+[1791302018920][info][editor][code=0] Selected node: hero
+[1791302019019][info][editor][code=0] Imported asset: test_model.gltf (48 vertices)
+[1791302019032][info][editor][code=0] Asset reload requested; changed files: 1
+[1791302019081][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302019106][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302019110][info][editor][code=0] Renderer resources reloaded
+[1791302019127][info][editor][code=0] Opened scene: courtyard
+[1791302019131][info][editor][code=0] Selected node: Placed Object
+[1791302019150][info][editor][code=0] Asset reload requested; changed files: 0
+[1791302019205][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302019231][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302019234][info][editor][code=0] Renderer resources reloaded
+[1791302019247][info][editor][code=0] Opened scene: courtyard
+[1791302019275][info][editor][code=0] Opened scene: courtyard
+[1791302019294][info][editor][code=0] Asset reload requested; changed files: 0
+[1791302019348][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302019378][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302019382][info][editor][code=0] Renderer resources reloaded
+[1791302019394][info][editor][code=0] Opened scene: courtyard
+[1791302019420][info][editor][code=0] Opened scene: courtyard
+[1791302019435][info][editor][code=0] Asset reload requested; changed files: 0
+[1791302019490][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302019517][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302019521][info][editor][code=0] Renderer resources reloaded
+[1791302019539][info][editor][code=0] Undo
+[1791302019549][info][editor][code=0] Asset reload requested; changed files: 0
+[1791302019598][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302019626][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302019630][info][editor][code=0] Renderer resources reloaded
+[1791302019667][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\editor-workflow-repro\game\assets\courtyard.azurelevel
+[1791302019679][info][editor][code=0] Opened scene: courtyard
+[1791302019696][info][editor][code=0] Opened scene: courtyard
+[1791302019724][info][editor][code=0] Opened scene: courtyard
+[1791302019748][info][editor][code=0] Opened scene: courtyard
+[1791302019836][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\r7\editor-workflow-repro\game\assets\courtyard.azurelevel
+[1791302019863][info][editor][code=0] Reloaded scene: courtyard
+[1791302021035][info][editor][code=0] Play started
+[1791302021099][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302021127][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302021206][warning][script][code=0] assets:/player.lua: ...volution/r7/editor-workflow-repro/game/assets/player.lua:1: workflow script fault
+stack traceback:
+	[C]: in function 'base.error'
+	...volution/r7/editor-workflow-repro/game/assets/player.lua:1: in function <...volution/r7/editor-workflow-repro/game/assets/player.lua:1>
+[1791302021445][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791302021453][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791302021472][error][validation][code=4] [validation error] vkCmdPushConstants(): layout Invalid VkPipelineLayout Object 0xdddddddddddddddd.
+The Vulkan spec states: layout must be a valid VkPipelineLayout handle (https://docs.vulkan.org/spec/latest/chapters/descriptorsets.html#VUID-vkCmdPushConstants-layout-parameter)
+[1791302021472][error][validation][code=4] [validation error] vkCmdPushConstants(): Couldn't find VkPipelineLayout Object 0xdddddddddddddddd. This should not happen and may indicate a bug in the application.
+[1791302021473][error][validation][code=4] [validation error] vkCmdPushConstants(): Couldn't find VkPipelineLayout Object 0xdddddddddddddddd. This should not happen and may indicate a bug in the application.

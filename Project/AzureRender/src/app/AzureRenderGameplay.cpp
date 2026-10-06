@@ -56,6 +56,9 @@ bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
     catch(...){preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();throw;}
 }
 void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
+#if AZURE_WITH_EDITOR
+    invalidatePreviews();
+#endif
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
     if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::sceneTypeName(level.scene.renderSettings.sceneType) && sceneRenderer_->reuseScene(context)){
         renderSettings_=level.scene.renderSettings;return;
@@ -79,6 +82,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     if(!session.playing() && resources!=editorResourceSignature_){editorResourceSignature_=resources;static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));}
     if(session.consumeRuntimeReset()){
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
+        invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}
         renderSettings_=session.viewScene().renderSettings;createSceneRenderer();
         if(session.playing()){if(session.levels()){

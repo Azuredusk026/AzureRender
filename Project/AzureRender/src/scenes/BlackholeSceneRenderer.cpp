@@ -231,6 +231,7 @@ void BlackholeSceneRenderer::onSwapchainRecreate(
 }
 
 void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
+    const auto previousPosition=cameraPosition_,previousTarget=cameraTarget_;
     currentFrame_ = frame.currentFrame;
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
@@ -277,6 +278,12 @@ void BlackholeSceneRenderer::updateFrame(const SceneFrameData& frame) {
         cameraPosition_ = {-12.0F, 8.0F, 23.0F};
         cameraTarget_ = {-7.0F, 4.5F, 0.0F};
         break;
+    }
+    if(frame.cameraOverride){
+        const std::array<float,3> position{frame.cameraPosition[0],frame.cameraPosition[1],frame.cameraPosition[2]};
+        const std::array<float,3> target{frame.cameraTarget[0],frame.cameraTarget[1],frame.cameraTarget[2]};
+        if(previousPosition!=position || previousTarget!=target)invalidateHistory();
+        cameraPosition_=position;cameraTarget_=target;
     }
     // The black hole owns its own framing: the host camera/portfolio orbit
     // would place the eye too close or off-axis for the accretion disk to

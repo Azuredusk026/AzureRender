@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  6: AzureEditor.Thumbnail
+1/2 Test  #6: AzureEditor.Thumbnail ............   Passed    0.05 sec
+    Start 85: AzureRender.CommandLine
+2/2 Test #85: AzureRender.CommandLine ..........   Passed    0.05 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.11 sec

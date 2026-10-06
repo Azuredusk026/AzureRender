@@ -26,6 +26,13 @@ void EditRegistry::validate(const nlohmann::json& value,const nlohmann::json& sc
        (type=="string"&&!value.is_string())||(type=="boolean"&&!value.is_boolean())||
        (type=="number"&&(!value.is_number()||!std::isfinite(value.get<double>())))||
        (type=="integer"&&!value.is_number_integer()))throw EditRejection("Parameter type mismatch: "+type);
+    if(value.is_number()) {
+        const auto number=value.get<double>();
+        if(!std::isfinite(number)
+            ||(schema.contains("minimum")&&number<schema.at("minimum").get<double>())
+            ||(schema.contains("maximum")&&number>schema.at("maximum").get<double>()))
+            throw EditRejection("Parameter number is outside its declared range");
+    }
     if(value.is_object()) {
         const auto fields=schema.value("properties",nlohmann::json::object());
         for(const auto& name:schema.value("required",nlohmann::json::array()))

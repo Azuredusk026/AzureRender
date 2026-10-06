@@ -34,7 +34,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         for(int type=0;type<4;++type){if(ImGui::Selectable(types[type],assetType_==type))assetType_=type;observeWidget(std::string("type.")+types[type]);}
         ImGui::EndCombo();
     }observeWidget("assets.type");ImGui::SameLine();
-    ImGui::Checkbox("Grid",&assetGrid_);
+    ImGui::Checkbox("Grid",&assetGrid_);observeWidget("assets.grid");
     if(view.isProject() && ImGui::CollapsingHeader("Import / Create")){
         static std::array<char,1024> source{};ImGui::InputText("glTF / GLB path",source.data(),source.size());
         ImGui::BeginDisabled(view.importing());if(ui::button("Import"))try{session_->edit("asset.import-start",{{"path",source.data()}});}catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}ImGui::EndDisabled();
@@ -92,6 +92,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         }catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}
     };
     ImGui::BeginChild("asset-list",{0,0});
+    std::size_t requestedPreviews=0;
     if(ImGui::BeginTable("assets",assetGrid_?std::max(1,static_cast<int>(ImGui::GetContentRegionAvail().x/(180*dpi_))):4,
         ImGuiTableFlags_RowBg|ImGuiTableFlags_Resizable|ImGuiTableFlags_ScrollY)){
         if(!assetGrid_){for(const auto* title:{"Asset","Type","State","Users"})ImGui::TableSetupColumn(title);ImGui::TableHeadersRow();}
@@ -103,6 +104,15 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             visibleAssets_.push_back({{"id",resource.id},{"path",label},{"type",extension},{"ready",resource.exists}});
             ImGui::PushID(resource.id.c_str());
             if(assetGrid_)ImGui::TableNextColumn();else{ImGui::TableNextRow();ImGui::TableSetColumnIndex(0);}
+            if(assetGrid_ && ImGui::IsRectVisible({96*dpi_,96*dpi_}) && requestedPreviews<2 && (extension==".gltf" || extension==".glb") && session_->developerServices().image){
+                ++requestedPreviews;
+                const auto result=session_->edit("preview.asset",{{"asset",resource.id}});
+                if(result && result.value.contains("handle"))try{
+                    if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>()))
+                        ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{96*dpi_,96*dpi_});
+                    else ImGui::TextDisabled("Preview pending");
+                }catch(const std::exception& error){session_->log(error.what());}
+            }
             if(ImGui::Selectable(label.c_str(),false,ImGuiSelectableFlags_AllowDoubleClick,assetGrid_?ImVec2{0,44*dpi_}:ImVec2{0,0}) && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))place(resource);
             observeWidget("asset."+resource.id);
             if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s",label.c_str(),resource.exists?"Ready":"ERROR: Missing source");

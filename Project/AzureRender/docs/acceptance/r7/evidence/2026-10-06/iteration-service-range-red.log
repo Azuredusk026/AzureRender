@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 90: AzureRender.EditorSession
+1/1 Test #90: AzureRender.EditorSession ........***Failed    0.11 sec
+[1791301113948][info][editor][code=0] Opened scene: test
+[1791301113949][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azurerender-session-14411101875000-multiple-lights.azscene
+[1791301113951][info][editor][code=0] Opened scene: azurerender-session-14411104583400
+[1791301113958][info][editor][code=0] ERROR: Developer services are unavailable
+[1791301113967][info][editor][code=0] ERROR: Developer services are unavailable
+Provider parameters require schema validation
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	 90 - AzureRender.EditorSession (Failed)
+Errors while running CTest

@@ -61,6 +61,7 @@ nav:
       - 渲染核心实施计划: plans/render-core-implementation.md
       - 黑洞优化准入计划: plans/2026-10-03-blackhole-optimization.md
   - 运行时:
+      - 开发期重载与独立预览: runtime/development-previews.md
       - 有界内容提案: runtime/content-proposals.md
       - UI 基础与设置: runtime/ui-settings.md
       - 观察验证与内容来源: runtime/observations-generation.md

@@ -128,6 +128,8 @@ void AzureRenderApp::recreateSwapchain() {
 
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
 #if AZURE_WITH_EDITOR
+    invalidatePreviews();graphicsCompleted_=graphicsSubmission_;
+    if(renderViews_)renderViews_->complete(graphicsCompleted_);
     if (editorLayer_ != nullptr) {
         editorLayer_->shutdownVulkan();
     }

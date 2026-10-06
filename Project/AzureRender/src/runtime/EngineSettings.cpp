@@ -4,6 +4,7 @@ namespace azurerender {
 void registerEngineSettings(SettingRegistry& r) {
     registerRenderSettings(r);registerInputPreferences(r);
     r.add({"diagnostics.verbose","Verbose development diagnostics",false,{},{},false,true,false});
+    r.add({"developer.maxViews","Maximum owned auxiliary render views",3,1,3,false,true,true});
 }
 void RenderSettingOverlay::apply(const SettingRegistry& registry,RenderSettings& settings) {
     using Json=nlohmann::json;

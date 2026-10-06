@@ -74,6 +74,7 @@ public:
         const GpuBuffer& buffer,
         VkDeviceSize offset,
         VkDeviceSize size) = 0;
+    virtual void invalidate(const GpuBuffer&,VkDeviceSize offset,VkDeviceSize size)=0;
 
     [[nodiscard]] virtual const GpuAllocatorStatistics& statistics()
         const noexcept = 0;

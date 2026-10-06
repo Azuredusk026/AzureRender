@@ -45,6 +45,7 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
                     workspace.setVisible(id,true);
                     for(const auto& panel:workspace.panels())if(panel.id==id)ImGui::SetWindowFocus(panel.title.c_str());
                 }
+                observe(std::string("tool.")+id);
             }
             ImGui::EndMenu();
         }observe("menu.Tools");

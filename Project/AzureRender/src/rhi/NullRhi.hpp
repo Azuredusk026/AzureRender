@@ -20,6 +20,7 @@ struct RecordedCall {
 // writes work; images carry no storage. Handles are minted from a counter.
 class NullGpuAllocator final : public IGpuAllocator {
 public:
+    void invalidate(const GpuBuffer&,VkDeviceSize,VkDeviceSize) override {}
     GpuBuffer createBuffer(
         VkDeviceSize size,
         VkBufferUsageFlags usage,

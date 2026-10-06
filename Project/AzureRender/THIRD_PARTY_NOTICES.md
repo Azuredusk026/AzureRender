@@ -78,3 +78,12 @@ UI 作用域参考 gkNextEngine 的 `UiScopes.hpp`。
 控件、面板与设置采用本项目的公共契约。
 参考设计包括类型、来源与帧边界应用。
 验收依据见[U4 实施步骤](docs/plans/2026-10-06-ai-native-editor-steps.md#u4-ui-基础与设置体系)。
+
+开发期资源服务参考相同提交的 B6 与 B7。
+参考路径为 `src/Modules/LiveCoding/ShaderHotReloader.cpp`。
+视图参考路径为 `src/Engine/Rendering/Preview/RenderViewServices.hpp`。
+缩略图参考位于 `src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp`。
+
+本项目按 RHI、帧图与生产操作契约自行适配。
+着色编译器由当前 Vulkan SDK 提供。
+完整采用范围见[开发期资源服务](docs/runtime/development-previews.md)。

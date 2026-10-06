@@ -1,0 +1,2756 @@
+[
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 184.6817,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.3873,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.2576,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-3",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "character",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 3.1843,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 4294967296
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.1902,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-5",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 12.0343,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 8589934593
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.6601,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-7",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "blackhole",
+        "extent": [
+          192,
+          128
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 7.9399,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 12884901890
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 77.3825,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 11.4198,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-10",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 8.3329,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009911489864,
+          "completedSubmission": 53,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 25,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2009911504664,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.6612,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-12",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 7.2714,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009911434504,
+          "completedSubmission": 57,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 34,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "sample",
+          "requested": false,
+          "resolvedImage": 2009933946904,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.2095,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-14",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 6.3253,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009933949864,
+          "completedSubmission": 62,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 40,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 2009933952824,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.1073,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-16",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 1.246,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Render view budget awaits GPU retirement\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.0478,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-18",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 4294967296,
+        "label": "independent-camera"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 5.6497,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\inspector\\captures\\independent-camera.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2009911489864,
+            "completedSubmission": 72,
+            "extent": [
+              192,
+              128
+            ],
+            "lastUseSubmission": 25,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2009911504664,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": true
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 13.357,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-20",
+      "commandId": "preview.resize",
+      "parameters": {
+        "handle": 4294967296,
+        "extent": [
+          320,
+          180
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 20.6251,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 88.6183,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.1306,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-23",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 6.2278,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009933991304,
+          "completedSubmission": 94,
+          "extent": [
+            320,
+            180
+          ],
+          "lastUseSubmission": 84,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 2,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2009934003144,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.4198,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-25",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 6.58,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 79.4898,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.6699,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-28",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 4.3097,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009933949864,
+          "completedSubmission": 113,
+          "extent": [
+            192,
+            128
+          ],
+          "lastUseSubmission": 101,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 2,
+          "renderer": "blackhole",
+          "requested": false,
+          "resolvedImage": 2009933952824,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.5702,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-30",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 3.8908,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.8888,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-32",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 13.3276,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 14.6976,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-34",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 2.0899,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.321,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-36",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 8589934593
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 4.1293,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.6555,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-38",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 7.6421,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.0367,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-40",
+      "commandId": "preview.request",
+      "parameters": {
+        "handle": 12884901890
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 9.09,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 72.8015,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "assets.grid"
+      }
+    },
+    "response": {
+      "elapsedMs": 8.4045,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 69.6073,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 208.4277,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 5.353,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":187,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[{\"asset\":\"02d463b5-8bb5-4c78-a306-d5e7c38f5b3b\",\"fingerprint\":\"14850552707534680045\",\"handle\":17179869184,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2009911478024,\"completedSubmission\":187,\"extent\":[128,128],\"lastUseSubmission\":189,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2009911507624,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}}],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.7452,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-47",
+      "commandId": "preview.asset",
+      "parameters": {
+        "asset": "02d463b5-8bb5-4c78-a306-d5e7c38f5b3b"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 1.1784,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 17179869184,
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\inspector\\Project with spaces\\assets\\cube.gltf",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2009911478024,
+            "completedSubmission": 193,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 195,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2009911507624,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.8468,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-49",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 0.6535,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"Release requires a view owned by preview.create; cached views use their owning service\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 189.1478,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.2914,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-52",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 5.5638,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009911478024,
+          "completedSubmission": 222,
+          "extent": [
+            128,
+            128
+          ],
+          "lastUseSubmission": 224,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 1,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2009911507624,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": false
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.6591,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":1}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-54",
+      "commandId": "preview.capture",
+      "parameters": {
+        "handle": 17179869184,
+        "label": "asset-thumbnail"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 1
+      }
+    },
+    "response": {
+      "elapsedMs": 0.8897,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\evolution\\r7\\intel-devtools\\inspector\\captures\\asset-thumbnail.png",
+          "view": {
+            "cameraPosition": [
+              2.799999952316284,
+              2.0999999046325684,
+              3.200000047683716
+            ],
+            "cameraTarget": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "capacity": 3,
+            "colorImage": 2009911478024,
+            "completedSubmission": 226,
+            "extent": [
+              128,
+              128
+            ],
+            "lastUseSubmission": 228,
+            "outputFormat": "rgba8-linear",
+            "renderCount": 1,
+            "renderer": "character",
+            "requested": false,
+            "resolvedImage": 2009911507624,
+            "retired": 0,
+            "schemaVersion": 1,
+            "worldCoordinates": false
+          }
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 1
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 25
+    },
+    "response": {
+      "elapsedMs": 382.4837,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 11.9276,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":253,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[{\"asset\":\"02d463b5-8bb5-4c78-a306-d5e7c38f5b3b\",\"fingerprint\":\"12345029274905825674\",\"handle\":25769803776,\"settings\":\"128x128-bounds-fit-camera\",\"view\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2009934122408,\"completedSubmission\":253,\"extent\":[128,128],\"lastUseSubmission\":255,\"outputFormat\":\"rgba8-linear\",\"renderCount\":1,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2009911714040,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":false}}],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.529,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-58",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 17179869184
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 8.6611,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "assets.grid"
+      }
+    },
+    "response": {
+      "elapsedMs": 7.0805,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 91.1547,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.6763,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-62",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.7483,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 79.39,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "tool.capture"
+      }
+    },
+    "response": {
+      "elapsedMs": 16.9427,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 73.378,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "preview.camera"
+      }
+    },
+    "response": {
+      "elapsedMs": 14.4976,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 92.8871,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 144.5306,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 8.3316,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2009909955832,\"completedSubmission\":335,\"extent\":[320,180],\"lastUseSubmission\":337,\"outputFormat\":\"rgba8-linear\",\"renderCount\":30,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2009909949912,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":335,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.5966,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-71",
+      "commandId": "preview.camera",
+      "parameters": {
+        "enabled": true
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 2.3874,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 30064771072
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.9863,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-73",
+      "commandId": "preview.release",
+      "parameters": {
+        "handle": 30064771072
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 1.828,
+      "message": "[{\"code\":\"RejectedOperation\",\"message\":\"Release requires a view owned by preview.create; cached views use their owning service\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.2427,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-75",
+      "commandId": "preview.resize",
+      "parameters": {
+        "handle": 30064771072,
+        "extent": [
+          400,
+          200
+        ]
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 3.8354,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 168.8973,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 9.6054,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-78",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 30064771072
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 0.75,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "cameraPosition": [
+            2.799999952316284,
+            2.0999999046325684,
+            3.200000047683716
+          ],
+          "cameraTarget": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "capacity": 3,
+          "colorImage": 2009934620648,
+          "completedSubmission": 369,
+          "extent": [
+            400,
+            200
+          ],
+          "lastUseSubmission": 371,
+          "outputFormat": "rgba8-linear",
+          "renderCount": 63,
+          "renderer": "character",
+          "requested": false,
+          "resolvedImage": 2009934632488,
+          "retired": 0,
+          "schemaVersion": 1,
+          "worldCoordinates": true
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "menu.View"
+      }
+    },
+    "response": {
+      "elapsedMs": 1.6772,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 81.2291,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "input",
+    "fields": {
+      "event": {
+        "action": "click",
+        "target": "panel.capture"
+      }
+    },
+    "response": {
+      "elapsedMs": 5.4681,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "domain": "editor",
+        "queued": true
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 83.6656,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 71.3043,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 1.1252,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2009934620648,\"completedSubmission\":408,\"extent\":[400,200],\"lastUseSubmission\":385,\"outputFormat\":\"rgba8-linear\",\"renderCount\":77,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2009934632488,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":408,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 184.757,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 7.0883,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":{\"cameraPosition\":[2.799999952316284,2.0999999046325684,3.200000047683716],\"cameraTarget\":[0.0,0.0,0.0],\"capacity\":3,\"colorImage\":2009934620648,\"completedSubmission\":432,\"extent\":[400,200],\"lastUseSubmission\":385,\"outputFormat\":\"rgba8-linear\",\"renderCount\":77,\"renderer\":\"character\",\"requested\":false,\"resolvedImage\":2009934632488,\"retired\":0,\"schemaVersion\":1,\"worldCoordinates\":true},\"completedSubmission\":432,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 10.3348,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-88",
+      "commandId": "preview.clear",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 4.5895,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 77.3345,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 0.4344,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 2.8576,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-92",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 7.0792,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 34359738368
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 2
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 70.6142,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.113,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":2}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-95",
+      "commandId": "node.create",
+      "parameters": {
+        "id": "preview-invalidation-fixture"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 2
+      }
+    },
+    "response": {
+      "elapsedMs": 8.1596,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "add",
+            "path": "/components/preview-invalidation-fixture",
+            "value": {
+              "azure.renderable": {
+                "data": {
+                  "primitiveIndex": 0,
+                  "visible": false
+                },
+                "type": "azure.renderable",
+                "version": 1
+              },
+              "azure.transform": {
+                "data": {
+                  "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                },
+                "type": "azure.transform",
+                "version": 1
+              }
+            }
+          },
+          {
+            "op": "add",
+            "path": "/nodes/-",
+            "value": {
+              "id": "preview-invalidation-fixture",
+              "instanceOf": "",
+              "name": "preview-invalidation-fixture",
+              "parentId": "",
+              "prefabSource": "",
+              "resourceId": "",
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "visible": false
+            }
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:5d04ab247e572d78",
+          "documentId": "17913056068198090-1",
+          "revision": 3
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 89.5518,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.3947,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:5d04ab247e572d78\",\"documentId\":\"17913056068198090-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-98",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 34359738368
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:5d04ab247e572d78",
+        "documentId": "17913056068198090-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 7.154,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.5311,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:5d04ab247e572d78\",\"documentId\":\"17913056068198090-1\",\"revision\":3}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-100",
+      "commandId": "history.undo",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:5d04ab247e572d78",
+        "documentId": "17913056068198090-1",
+        "revision": 3
+      }
+    },
+    "response": {
+      "elapsedMs": 8.7598,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [
+          {
+            "op": "remove",
+            "path": "/components/preview-invalidation-fixture"
+          },
+          {
+            "op": "remove",
+            "path": "/nodes/3"
+          }
+        ],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 70.4593,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 4.6956,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 8.2159,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":505,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Error",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 963.9019,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Error"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 10.02,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":610,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Process failed\\nD:\\\\Assigment\\\\2609\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\evolution\\\\r7\\\\intel-devtools\\\\inspector\\\\shader candidates\\\\1\\\\source\\\\mesh.frag:842: error: '' :  syntax error, unexpected IDENTIFIER\\r\\n1 error generated.\\r\\n\",\"shaderGeneration\":0,\"shaderReplacements\":0,\"shaderState\":\"Error\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Idle",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 5234.5245,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Idle"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 6.3596,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":1143,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Idle\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 5.7521,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-109",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 4294967296
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 7.2526,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 7.346,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-111",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 15.3695,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 1159,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 12.5624,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-113",
+      "commandId": "developer.shader-cancel",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 7.0682,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": true,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "developer.shaderState",
+      "equals": "Cancelled",
+      "timeoutMs": 60000
+    },
+    "response": {
+      "elapsedMs": 82.6342,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "Cancelled"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "developer.status"
+    },
+    "response": {
+      "elapsedMs": 18.0086,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"camera\":null,\"completedSubmission\":1173,\"diagnostic\":\"\",\"schemaVersion\":1,\"shaderAvailable\":true,\"shaderDiagnostic\":\"Shader compilation cancelled\",\"shaderGeneration\":2,\"shaderReplacements\":1,\"shaderState\":\"Cancelled\",\"thumbnails\":[],\"views\":[]}"
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 3.7416,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-117",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 3.3429,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 38654705664
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 82.6018,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 8.9278,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-120",
+      "commandId": "preview.play",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 10.8076,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 20
+    },
+    "response": {
+      "elapsedMs": 235.3104,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 1.9308,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-123",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 38654705664
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 4.9877,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.6296,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-125",
+      "commandId": "preview.stop",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 13.7859,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": null,
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 56.0301,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.7548,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-128",
+      "commandId": "preview.create",
+      "parameters": {
+        "renderer": "sample"
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 14.6966,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "handle": 42949672960
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 8
+    },
+    "response": {
+      "elapsedMs": 69.2745,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 238.3933,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 11.2334,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-132",
+      "commandId": "preview.inspect",
+      "parameters": {
+        "handle": 42949672960
+      },
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "code": "InvalidRequest",
+      "elapsedMs": 11.158,
+      "message": "[{\"code\":\"OperationFailed\",\"message\":\"Expired render view handle\"}]",
+      "passed": false,
+      "schemaVersion": 1
+    }
+  },
+  {
+    "op": "wait-frames",
+    "fields": {
+      "frames": 15
+    },
+    "response": {
+      "elapsedMs": 256.7626,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": null
+    }
+  },
+  {
+    "op": "screenshot",
+    "fields": {
+      "label": "r7-editor-inspector"
+    },
+    "response": {
+      "elapsedMs": 13.1756,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "label": "r7-editor-inspector",
+        "scheduled": true
+      }
+    }
+  },
+  {
+    "op": "wait-until",
+    "fields": {
+      "name": "engine.screenshots",
+      "equals": 1,
+      "timeoutMs": 10000
+    },
+    "response": {
+      "elapsedMs": 195.4795,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": 1
+    }
+  },
+  {
+    "op": "query",
+    "fields": {
+      "name": "document.version"
+    },
+    "response": {
+      "elapsedMs": 6.2069,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": "{\"contentHash\":\"fnv1a64:923dedb15397d3a3\",\"documentId\":\"17913056068198090-1\",\"revision\":4}"
+    }
+  },
+  {
+    "op": "edit",
+    "fields": {
+      "requestId": "devtools-137",
+      "commandId": "developer.shader-rebuild",
+      "parameters": {},
+      "baseVersion": {
+        "contentHash": "fnv1a64:923dedb15397d3a3",
+        "documentId": "17913056068198090-1",
+        "revision": 4
+      }
+    },
+    "response": {
+      "elapsedMs": 11.1025,
+      "passed": true,
+      "schemaVersion": 1,
+      "value": {
+        "diff": [],
+        "value": {
+          "camera": null,
+          "completedSubmission": 1299,
+          "diagnostic": "",
+          "schemaVersion": 1,
+          "shaderAvailable": true,
+          "shaderDiagnostic": "",
+          "shaderGeneration": 2,
+          "shaderReplacements": 1,
+          "shaderState": "Compiling",
+          "thumbnails": [],
+          "views": []
+        },
+        "version": {
+          "contentHash": "fnv1a64:923dedb15397d3a3",
+          "documentId": "17913056068198090-1",
+          "revision": 4
+        }
+      }
+    }
+  }
+]

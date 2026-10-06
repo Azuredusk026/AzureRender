@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 
 ALLOWED = {
+    'AzureDevtools': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore'},
     'AzureAI': {'AzureFoundation'},
     'AzureValidation': {'AzureFoundation', 'AzureReflection', 'AzureRenderCore', 'AzureRuntime'},
     'AzureFoundation': set(),
@@ -16,7 +17,7 @@ ALLOWED = {
     'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay'},
     'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureAI'},
     'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation'},
-    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation', 'AzureAI'},
+    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation', 'AzureAI', 'AzureDevtools'},
 }
 
 def effective_includes(text, definitions):
@@ -59,6 +60,8 @@ def owner(path):
     if not tail:
         return None
     area = tail[0]
+    if area == 'devtools':
+        return 'AzureDevtools'
     if area == 'ai':
         return 'AzureAI'
     if area == 'validation':

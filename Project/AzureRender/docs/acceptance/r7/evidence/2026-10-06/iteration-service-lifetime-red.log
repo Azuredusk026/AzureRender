@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 90: AzureRender.EditorSession
+1/1 Test #90: AzureRender.EditorSession ........***Failed    0.08 sec
+[1791300918773][info][editor][code=0] Opened scene: test
+[1791300918774][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azurerender-session-14215926629800-multiple-lights.azscene
+[1791300918776][info][editor][code=0] Opened scene: azurerender-session-14215929160000
+Developer commands must belong to the session lifetime
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.08 sec
+
+The following tests FAILED:
+	 90 - AzureRender.EditorSession (Failed)
+Errors while running CTest

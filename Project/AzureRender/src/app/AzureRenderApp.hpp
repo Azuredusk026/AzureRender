@@ -25,6 +25,11 @@
 #include "rhi/VulkanRhi.hpp"
 #include "rhi/WorkerCommandPools.hpp"
 #include "render/RecordingWorkerPool.hpp"
+#if AZURE_WITH_EDITOR
+#include "devtools/ShaderHotReloader.hpp"
+#include "render/RenderViewService.hpp"
+#include "editor/preview/AssetThumbnailService.hpp"
+#endif
 
 #include <GLFW/glfw3.h>
 
@@ -58,6 +63,25 @@ public:
         const { return effectiveRenderSettings_; }
 
 private:
+#if AZURE_WITH_EDITOR
+    std::unique_ptr<azurerender::ShaderHotReloader> shaderReloader_;
+    std::unique_ptr<azurerender::RenderViewService> renderViews_;
+    std::unique_ptr<azurerender::AssetThumbnailService> thumbnails_;
+    std::vector<azurerender::RenderViewHandle> toolViews_;
+    std::uint64_t cameraPreview_=0;
+    std::string activeShaderDirectory_,previewDiagnostic_;
+    std::uint64_t shaderReplacements_=0;
+    std::uint64_t previewDocumentRevision_=0;
+    nlohmann::json toolViewDescriptors_,devtoolsReport_=nlohmann::json::object();
+    void initializeDevtools();
+    void pollDevtools();
+    void finishDevtools();
+    void invalidatePreviews();
+    nlohmann::json previewOperation(const std::string&,const nlohmann::json&);
+    azurerender::RenderViewDescriptor previewDescriptor(const nlohmann::json&);
+#endif
+    std::uint64_t graphicsSubmission_=0,graphicsCompleted_=0;
+    std::array<std::uint64_t,2> graphicsFrameSubmissions_{};
     azurerender::SettingRegistry playerSettings_;
     azurerender::SettingRegistry* engineSettings_=nullptr;
     azurerender::RenderSettings effectiveRenderSettings_;
@@ -391,7 +415,8 @@ private:
     void recordCommandBuffer(
         VkCommandBuffer commandBuffer,
         std::uint32_t imageIndex,
-        VkBuffer screenshotBuffer);
+        VkBuffer screenshotBuffer,
+        const azurerender::SceneFrameData& frame);
     void saveScreenshot(
         const void* pixelData,
         std::uint32_t width,
