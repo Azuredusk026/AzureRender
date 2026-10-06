@@ -1,0 +1,6 @@
+Documentation prose style passed for 66 files.
+warning: in the working copy of 'Project/AzureRender/CMakeLists.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/THIRD_PARTY_NOTICES.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/mkdocs.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/scenes/BlackholeSceneRenderer.hpp', LF will be replaced by CRLF the next time Git touches it
+{"schemaVersion": 1, "status": "passed", "trackedToolState": [], "danglingLinks": [], "ignoreProbes": [{"path": "Project/AzureRender/build/hygiene-probe.txt", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".codemaker/codemap/hygiene-probe.log", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".env", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": "Project/AzureRender/src/main.cpp", "expectedIgnored": false, "ignored": false, "passed": true}, {"path": "Project/AzureRender/assets_public/hygiene-probe.gltf", "expectedIgnored": false, "ignored": false, "passed": true}]}

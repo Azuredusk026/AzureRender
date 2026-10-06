@@ -216,7 +216,13 @@
       "items": [
         "C2"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/r8/2026-10-07.md",
+        "evidence": "docs/acceptance/r8/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(r8): 完成着色模块与算法组合原型验收"
+      }
     },
     {
       "id": "R9",
@@ -885,7 +891,29 @@
         "runnable-prototype",
         "comparison-evidence",
         "adoption-decision"
-      ]
+      ],
+      "implementation": {
+        "interfaces": [
+          "ShaderCompileRequest",
+          "ShaderCompileResult",
+          "BloomParameters",
+          "IBlockSamples"
+        ],
+        "tests": [
+          "AzureRender.ShaderModule",
+          "AzureRender.ShaderComposition",
+          "AzureTools.ShaderModule",
+          "AzureTools.ShaderTypes",
+          "AzureTools.ShaderComposition"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/r8/2026-10-07.md",
+          "evidence": "docs/acceptance/r8/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(r8): 完成着色模块与算法组合原型验收"
+        },
+        "scope": "checked shared scalar types; optional two-strategy Bloom Slang module; default GLSL renderer"
+      }
     },
     {
       "id": "C3",

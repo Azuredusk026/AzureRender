@@ -76,14 +76,14 @@ ctest --test-dir build/ninja-msvc-debug -R '^AzureAssets.(ProceduralGeometry|Rig
 
 **输出：** `ShaderCompileRequest` 声明源、入口、目标和依赖。`ShaderCompileResult` 声明 SPIR-V、类型布局与诊断。共享类型声明由受校验描述生成或核对。
 
-- [ ] 选择一个现有 Compute Pass，冻结输入与输出基线。
-- [ ] 添加缺编译器、模块依赖、布局错位与非法入口用例。
-- [ ] 添加常量、成员偏移和缓冲跨度一致性用例。
-- [ ] 确认不一致布局被构建或契约测试拒绝。
-- [ ] 实现独立编译适配与等价 Pass。
-- [ ] 对照 GLSL 输出，检查设备 Validation。
-- [ ] 比较完整编译、增量编译与运行 CPU/GPU 时间。
-- [ ] 在 RTX 和 Intel 验证相同支持范围。
+- [x] 选择一个现有 Compute Pass，冻结输入与输出基线。
+- [x] 添加缺编译器、模块依赖、布局错位与非法入口用例。
+- [x] 添加常量、成员偏移和缓冲跨度一致性用例。
+- [x] 确认不一致布局被构建或契约测试拒绝。
+- [x] 实现独立编译适配与等价 Pass。
+- [x] 对照 GLSL 输出，检查设备 Validation。
+- [x] 比较完整编译、增量编译与运行 CPU/GPU 时间。
+- [x] 在 RTX 和 Intel 验证相同支持范围。
 
 ### R8.2 策略组合与采用结论
 
@@ -93,13 +93,13 @@ ctest --test-dir build/ninja-msvc-debug -R '^AzureAssets.(ProceduralGeometry|Rig
 
 **输出：** 公共算法通过满足同一契约的两种策略调用。入口只负责选择实现与调度。材质处理、资源访问和算法内部职责清楚。
 
-- [ ] 添加两种策略共享同一算法的输出夹具。
-- [ ] 添加接口不匹配、材质类型与无缓存策略用例。
-- [ ] 确认替换策略能通过同一调用契约。
-- [ ] 实现模块与策略组合，记录生成变体数量。
-- [ ] 测量维护入口、编译成本与性能回归。
-- [ ] 按完整证据记录正式采用、适配采用或原型保留。
-- [ ] 验证现有三场景和安装着色器清单。
+- [x] 添加两种策略共享同一算法的输出夹具。
+- [x] 添加接口不匹配、材质类型与无缓存策略用例。
+- [x] 确认替换策略能通过同一调用契约。
+- [x] 实现模块与策略组合，记录生成变体数量。
+- [x] 测量维护入口、编译成本与性能回归。
+- [x] 按完整证据记录正式采用、适配采用或原型保留。
+- [x] 验证现有三场景和安装着色器清单。
 
 ```powershell
 ctest --test-dir build/ninja-msvc-debug -R '^AzureRender.(ShaderModule|ShaderComposition|ComputePass|RenderGraph)$' --output-on-failure

@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_generate_check_and_detect_independent_tampering (__main__.SharedTypeTests.test_generate_check_and_detect_independent_tampering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_types.py", line 20, in test_generate_check_and_detect_independent_tampering
+    self.assertEqual(result.returncode,0,result.stderr)
+AssertionError: 2 != 0 : C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\generate_shader_types.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.073s
+
+FAILED (failures=1)

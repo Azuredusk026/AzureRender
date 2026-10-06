@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_compiler_library_change_invalidates_cache (__main__.ShaderModuleTests.test_compiler_library_change_invalidates_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_shader_module.py", line 179, in test_compiler_library_change_invalidates_cache
+    self.assertFalse(rebuilt['cacheHit'],'Compiler library identity must invalidate the cache')
+AssertionError: True is not false : Compiler library identity must invalidate the cache
+
+----------------------------------------------------------------------
+Ran 1 test in 2.726s
+
+FAILED (failures=1)

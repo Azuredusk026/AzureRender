@@ -42,6 +42,8 @@ nav:
   - 参数与接口参考: reference.md
   - 开发命令参考: reference/developer-cli.md
   - 开发规范: documentation-standard.md
+  - 着色模块与共享类型: runtime/shader-modules.md
+  - 着色模块对照教程: tutorials/shader-modules.md
   - 架构调研:
       - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
   - 计划:

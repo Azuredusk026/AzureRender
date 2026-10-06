@@ -225,6 +225,7 @@ compile_shader("${SHADER_SOURCE_DIR}/bloom_composite.comp")
 compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/skin.comp")
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
+include(cmake/AzureShaderModules.cmake)
 get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
 list(JOIN AZURE_SHADER_DESCRIPTORS ",\n" AZURE_SHADER_DESCRIPTORS_JSON)
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json" CONTENT
@@ -418,6 +419,24 @@ add_dependencies(AzureRender AzureGeometryCompiler)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    if(AZURE_ENABLE_SHADER_MODULE_PROTOTYPE)
+        add_executable(AzureShaderModuleTests tests/ShaderModuleTests.cpp)
+        target_link_libraries(AzureShaderModuleTests PRIVATE AzureRenderCore)
+        add_dependencies(AzureShaderModuleTests AzureShaderModulePrototypes)
+        add_test(NAME AzureRender.ShaderModule COMMAND AzureShaderModuleTests
+            "${AZURE_MODULE_BINARY}/bloom-direct.spv.json" "${AZURE_MODULE_BINARY}/bloom-cached.spv.json")
+        add_executable(AzureShaderCompositionTests tests/ShaderCompositionTests.cpp)
+        target_link_libraries(AzureShaderCompositionTests PRIVATE AzureRenderCore)
+        add_dependencies(AzureShaderCompositionTests AzureShaderModulePrototypes AzureRenderShaders)
+        add_test(NAME AzureRender.ShaderComposition COMMAND AzureShaderCompositionTests
+            "${SHADER_BINARY_DIR}/bloom_downsample.comp.spv" "${AZURE_MODULE_BINARY}/bloom-direct.spv"
+            "${AZURE_MODULE_BINARY}/bloom-cached.spv" "${CMAKE_CURRENT_BINARY_DIR}/shader-composition.json")
+        set_tests_properties(AzureRender.ShaderComposition PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+        add_test(NAME AzureTools.ShaderModule COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_module.py")
+        add_test(NAME AzureTools.ShaderTypes COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_types.py")
+        add_test(NAME AzureTools.ShaderComposition COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_composition.py")
+        set_tests_properties(AzureTools.ShaderModule AzureTools.ShaderComposition PROPERTIES ENVIRONMENT "AZURE_SLANG_COMPILER=${AZURE_SLANG_COMPILER}")
+    endif()
     add_executable(AzureProceduralGeometryTests tests/ProceduralGeometryTests.cpp)
     target_link_libraries(AzureProceduralGeometryTests PRIVATE AzureProcedural)
     add_test(NAME AzureAssets.ProceduralGeometry COMMAND AzureProceduralGeometryTests "${CMAKE_CURRENT_BINARY_DIR}/procedural-tests")
@@ -1237,6 +1256,7 @@ set(AZURE_DOCUMENTATION_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-proposals.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/development-previews.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/procedural-content.md"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/shader-modules.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/reference/developer-cli.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g0-implementation.md"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g1-implementation.md"

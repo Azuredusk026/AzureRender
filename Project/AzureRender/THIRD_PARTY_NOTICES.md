@@ -107,3 +107,20 @@ Manifold 固定为 3.5.2，提供闭合体布尔运算。
 本项目按生成资产、动画图和服务契约自行适配。
 源文件为版本化 JSON，支持受限几何语义。
 采用范围见[程序化内容契约](docs/runtime/procedural-content.md)。
+
+## 着色模块工具链
+
+Slang 2026.8 来自 Vulkan SDK 的宿主编译工具。
+上游许可为 Apache-2.0 WITH LLVM-exception。
+许可依据为[固定版本的原文](https://github.com/shader-slang/slang/blob/v2026.8/LICENSE)。
+引擎安装树包含编译后的 SPIR-V 和来源记录。
+
+工具链指纹包含可执行文件与 Slang 动态库。
+运行项目消费标准 Vulkan 着色产物。
+模块接口参考 gkNextEngine 的算法职责分解。
+Bloom 算法、采样策略和共享参数由本项目实现。
+
+参考文件为 `assets/shaders/common/Interfaces.slang`。
+组合依据位于 `assets/shaders/common/PathTracingRenderer.slang`。
+参考提交与版权见本页 gkNextEngine 条目。
+使用范围见[着色模块说明](docs/runtime/shader-modules.md)。

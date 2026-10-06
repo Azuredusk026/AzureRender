@@ -1,0 +1,3 @@
+[0/2] Re-checking globbed directories...
+[1/2] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

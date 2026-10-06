@@ -1,0 +1,186 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * clipper2:x64-windows@2.0.1
+  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * hwloc:x64-windows@2.11.2
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    manifold:x64-windows@3.5.2
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+  * tbb[core,hwloc]:x64-windows@2023.1.0
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+manifold provides CMake targets:
+
+  find_package(manifold CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE manifold::manifold)
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 420 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+[0/4] Re-checking globbed directories...
+[1/61] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[2/61] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+[3/61] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\src\scenes\BlackholeSceneRenderer.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[4/61] Compiling checked Bloom module (direct)
+{"status": "passed", "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shader-modules\\bloom-direct.spv", "cacheHit": false}
+[5/61] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\BuiltinRendererCatalog.cpp.obj
+[6/61] Compiling checked Bloom module (cached)
+{"status": "passed", "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shader-modules\\bloom-cached.spv", "cacheHit": false}
+[7/61] Linking CXX static library AzureRenderCore.lib
+[8/61] Linking CXX executable AzureGameplayPresentationTests.exe
+[9/61] Linking CXX executable AzureGeometryCompiler.exe
+[10/61] Linking CXX executable AzureHotReloadTests.exe
+[11/61] Linking CXX executable AzureThumbnailTests.exe
+[12/61] Linking CXX executable AzureEngineSettingsTests.exe
+[13/61] Linking CXX executable AzureRenderViewTests.exe
+[14/61] Linking CXX executable AzureUiFoundationTests.exe
+[15/61] Linking CXX executable AzureObservationTests.exe
+[16/61] Linking CXX executable AzureProceduralProcessTests.exe
+[17/61] Linking CXX executable AzureValidationProbe.exe
+[18/61] Linking CXX executable AzureProjectTests.exe
+[19/61] Linking CXX executable AzurePhysicsInputTests.exe
+[20/61] Linking CXX executable AzureProceduralGeometryTests.exe
+[21/61] Linking CXX executable AzureRigTextTests.exe
+[22/61] Linking CXX executable AzureModuleAssemblyTests.exe
+[23/61] Linking CXX executable AzureGameUiRendererTests.exe
+[24/61] Linking CXX executable AzureComponentRegistryTests.exe
+[25/61] Linking CXX executable AzurePresentationRuntimeTests.exe
+[26/61] Linking CXX executable AzureGameUiTests.exe
+[27/61] Linking CXX executable AzureGenerationManifestTests.exe
+[28/61] Linking CXX executable AzureEditorWorkspaceTests.exe
+[29/61] Linking CXX executable AzurePlayableQuestTests.exe
+[30/61] Linking CXX executable AzureLocomotionTests.exe
+[31/61] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[32/61] Linking CXX executable AzureAnimationPoseTests.exe
+[33/61] Linking CXX executable AzureBrowRegionTests.exe
+[34/61] Linking CXX executable AzureInteractionTests.exe
+[35/61] Linking CXX executable AzureSceneVisibilityTests.exe
+[36/61] Linking CXX executable AzureSystemCompositionTests.exe
+[37/61] Linking CXX executable AzurePlayer.exe
+[38/61] Linking CXX executable AzureThirdPersonTests.exe
+[39/61] Linking CXX executable AzureAssetLevelTests.exe
+[40/61] Linking CXX executable AzurePanelContextTests.exe
+[41/61] Linking CXX executable AzureProposalControllerTests.exe
+[42/61] Linking CXX executable AzureProposalAdapterTests.exe
+[43/61] Linking CXX executable AzureScriptEntityTests.exe
+[44/61] Linking CXX executable AzureEditorObservationTests.exe
+[45/61] Building CXX object CMakeFiles\AzureRenderNullRhiPassTests.dir\tests\NullRhiPassTests.cpp.obj
+cl: 命令行 warning D9025 :正在重写“/DNDEBUG”(用“/UNDEBUG”)
+[46/61] Linking CXX executable AzureEditTransactionTests.exe
+[47/61] Linking CXX executable AzureScriptRuntimeTests.exe
+[48/61] Linking CXX executable AzureEditServiceTests.exe
+[49/61] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[50/61] Linking CXX executable AzureEditorWorkflowTests.exe
+[51/61] Linking CXX executable AzureRegisteredComponentHost.exe
+[52/61] Linking CXX executable AzureRenderEditorSessionTests.exe
+[53/61] Linking CXX executable AzureRenderNullRhiPassTests.exe
+[54/61] Linking CXX executable AzureRender.exe
+[55/61] Building CXX object CMakeFiles\AzureShaderModuleTests.dir\tests\ShaderModuleTests.cpp.obj
+[56/61] Building CXX object CMakeFiles\AzureShaderCompositionTests.dir\tests\ShaderCompositionTests.cpp.obj
+[57/61] Linking CXX executable AzureShaderModuleTests.exe
+[58/61] Linking CXX executable AzureShaderCompositionTests.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-release\\build-provenance.json"}

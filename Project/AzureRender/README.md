@@ -84,17 +84,19 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 工程结构
 
-`src/` 保存模块实现，`shaders/` 保存 GLSL。`tests/` 保存契约测试，`tools/` 保存构建与验收工具。`docs/` 保存活动说明和阶段证据。`portfolio/` 保存精选公共图像及 manifest。
+`src/` 保存模块实现，`shaders/` 保存 GLSL 与 Slang 模块。`tests/` 保存契约测试，`tools/` 保存构建与验收工具。`docs/` 保存活动说明和阶段证据。`portfolio/` 保存精选公共图像及 manifest。
 
 ## 当前开发
 
-[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10 已验收。
+[引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8 已验收。
 
-系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 R8。
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 R9。
 
 程序化内容通过生成器与标准资产管线进入项目。
 几何与刚体契约见[程序化内容说明](docs/runtime/procedural-content.md)。
 制作步骤见[生成内容教程](docs/tutorials/procedural-content.md)。
+
+共享参数与可选着色策略见[着色模块说明](docs/runtime/shader-modules.md)。
 
 公共能力通过探索项目和独立工具验收。
 

@@ -3,6 +3,7 @@
 #include "extensions/ISceneRenderer.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/EnvironmentAsset.hpp"
+#include "render/ShaderSharedTypes.hpp"
 #include "rhi/IGpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
 
@@ -65,10 +66,7 @@ private:
         float renderWidth = 1280.0F;
     };
 
-    struct BloomPushConstants {
-        float threshold = 1.2F;
-        std::uint32_t extractBright = 0;
-    };
+    using BloomPushConstants = shader::BloomParameters;
     static_assert(sizeof(BloomPushConstants) == 8);
     static constexpr std::size_t kBloomLevelCount = 4;
 
