@@ -209,28 +209,34 @@ ctest --test-dir build/ninja-msvc-debug -R '^AzureEngine.(ScriptBackendContract|
 
 **输出：** 探索游戏包和场景检视工具包。二者可独立移动并运行。引擎安装包包含文档、许可、接口与来源清单。
 
-- [ ] 将每项借鉴关联实际接口、任务、测试、提交和结论。
-- [ ] 验证 18 项均有产物，所有风险均有测试或明确限制。
-- [ ] 核对测试发现列表，执行完整 Debug 与 Release。
-- [ ] 执行发布门禁、三场景视觉与九轮性能。
-- [ ] 在 RTX 与 Intel 验证正式范围与模块关闭组合。
-- [ ] 从空项目完成制作、撤销、保存重开和独立构建。
-- [ ] 将两个包移到含空格路径，隔离 PATH 并隐藏源项目。
-- [ ] 验证完整任务、20 次切关、20 次重开与篡改拒绝。
-- [ ] 运行真实 1800 秒长跑，验证窗口恢复和正常释放。
-- [ ] 核对源码、媒体、原始记录、许可与包哈希。
-- [ ] 记录实体键鼠复核的实际执行范围。
-- [ ] 完成差异、暂存和文档检查后提交阶段。
+- [x] 将每项借鉴关联实际接口、任务、测试、提交和结论。
+- [x] 验证 18 项均有产物，所有风险均有测试或明确限制。
+- [x] 核对测试发现列表，执行完整 Debug 与 Release。
+- [x] 执行发布门禁、三场景视觉与九轮性能。
+- [x] 在 RTX 与 Intel 验证正式范围与模块关闭组合。
+- [x] 从空项目完成制作、撤销、保存重开和独立构建。
+- [x] 将两个包移到含空格路径，隔离 PATH 并隐藏源项目。
+- [x] 验证完整任务、20 次切关、20 次重开与篡改拒绝。
+- [x] 运行真实 1800 秒长跑，验证窗口恢复和正常释放。
+- [x] 核对源码、媒体、原始记录、许可与包哈希。
+- [x] 记录实体键鼠复核的实际执行范围。
+- [x] 完成差异、暂存和文档检查后提交阶段。
 
 **计划测试：** 覆盖检查要求所有源项都有证据。完整回归中任一失败均阻止交付。冻结源码后采集最终性能和长跑。
 
 ```powershell
-python tools/verify_evolution_coverage.py --manifest docs/plans/engine-evolution-manifest.json --evidence docs/acceptance/p3
+python tools/verify_evolution_coverage.py --manifest docs/plans/engine-evolution-manifest.json --evidence build/evolution/p3/strict-history --build-dir build/ninja-msvc-release --configuration Release
+python tools/verify_evolution_coverage.py --manifest docs/plans/engine-evolution-manifest.json --evidence build/evolution/p3/coverage --build-dir build/ninja-msvc-release --configuration Release --historical-policy committed-content
 ctest --test-dir build/ninja-msvc-debug --output-on-failure
-ctest --test-dir build/ninja-msvc-release --output-on-failure
+ctest --test-dir build/ninja-msvc-release -C Release --output-on-failure
 cmake -DBUILD_DIR=build/ninja-msvc-release -DCONFIG=Release -P tools/run_release_gate.cmake
 ```
 
 性能与长跑沿用现有脚本的实际参数。执行前核对帮助、包路径和隔离环境。记录真实耗时和切换次数。采样失败完成原因定位与同条件复测。
+
+历史原始字节的严格核验单独保存结果。
+覆盖核查关联已提交内容、实际接口和原始证据。
+无法还原的历史输入列入明确限制。
+本次源码交付按原始字节与冻结构建输入核对。
 
 **P3 完成门禁：** 全部借鉴项与阶段闭环。两种独立工作流证明公共能力可复用。完整回归、设备、预算和交付证据通过。提交 `feat(p3): 完成引擎复用与独立交付验收`。

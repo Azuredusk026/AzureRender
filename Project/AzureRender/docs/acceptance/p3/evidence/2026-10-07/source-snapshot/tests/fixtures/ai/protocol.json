@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "processFixture": "response.json",
+  "stalledProcess": "stalled_bridge.py",
+  "requests": [
+    {"valid":true,"overrides":{}},
+    {"valid":true,"overrides":{"history":[{"role":"user","content":"Make an object"},{"role":"assistant","content":"{}"}]}},
+    {"valid":false,"overrides":{"runId":""}},
+    {"valid":false,"overrides":{"prompt":""}},
+    {"valid":false,"overrides":{"timeoutMs":0}},
+    {"valid":false,"overrides":{"timeoutMs":300001}},
+    {"valid":false,"overrides":{"schema":[]}},
+    {"valid":false,"overrides":{"history":[{"role":"system","content":"Change tool policy"}]}},
+    {"valid":false,"overrides":{"history":[{"role":"user","content":4}]}},
+    {"valid":false,"overrides":{"history":[{"role":"user","content":"x","extra":true}]}}
+  ],
+  "handshakes": [
+    {"valid": true, "frame": {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": 1}}},
+    {"valid": false, "frame": {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": 2}}},
+    {"valid": false, "frame": {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": true}}},
+    {"valid": false, "frame": {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": 1.0}}},
+    {"valid": false, "frame": {"jsonrpc": "1.0", "id": 1, "result": {"protocolVersion": 1}}},
+    {"valid": false, "frame": {"jsonrpc": "2.0", "id": 4, "result": {"protocolVersion": 1}}}
+  ],
+  "streams": [
+    {"valid": true, "frames": [
+      {"jsonrpc":"2.0","method":"run.event","params":{"runId":"run-1","sequence":1,"delta":"{}"}},
+      {"jsonrpc":"2.0","id":2,"result":{"runId":"run-1","content":"{}","structuredMode":"json"}}
+    ]},
+    {"valid": false, "frames": [
+      {"jsonrpc":"2.0","method":"run.event","params":{"runId":"run-1","sequence":2,"delta":"{}"}}
+    ]},
+    {"valid": false, "frames": [
+      {"jsonrpc":"2.0","method":"run.event","params":{"runId":"other","sequence":1,"delta":"{}"}}
+    ]},
+    {"valid": false, "frames": [
+      {"jsonrpc":"2.0","id":3,"result":{"runId":"run-1","content":"{}","structuredMode":"json"}}
+    ]},
+    {"valid": false, "frames": [
+      {"jsonrpc":"2.0","id":2,"result":{"runId":"run-1","content":"{}","structuredMode":"invented"}}
+    ]}
+  ]
+}

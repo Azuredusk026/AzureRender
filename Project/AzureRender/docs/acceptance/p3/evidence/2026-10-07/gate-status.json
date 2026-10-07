@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "longRun": "passed",
+  "longRunEvidence": "long-run/summary.json"
+}

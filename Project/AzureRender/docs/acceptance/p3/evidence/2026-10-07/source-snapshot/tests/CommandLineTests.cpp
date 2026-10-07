@@ -1,0 +1,264 @@
+#include "app/CommandLine.hpp"
+
+#include <cstdint>
+#include <cstdio>
+#include <initializer_list>
+#include <stdexcept>
+#include <string>
+#include <vector>
+
+namespace {
+
+using azurerender::CommandLineError;
+using azurerender::CommandLineErrorCode;
+
+void require(const bool condition, const char* message) {
+    if (!condition) throw std::runtime_error(message);
+}
+
+void expectError(
+    const CommandLineErrorCode expected,
+    const std::string& option,
+    const std::initializer_list<const char*> arguments) {
+    try {
+        std::vector<std::string> values;
+        for (const char* argument : arguments) values.emplace_back(argument);
+        (void)azurerender::parseCommandLine(values);
+        throw std::runtime_error("Expected command-line parsing to fail");
+    } catch (const CommandLineError& error) {
+        require(error.code() == expected, "Unexpected command-line error code");
+        require(error.option() == option, "Unexpected command-line error option");
+    }
+}
+
+}  // namespace
+
+int main() try {
+    const auto development=azurerender::parseCommandLine({"--shader-reload","Shader config with spaces.json","--preview-views","Views with spaces.json"});
+    require(development.options.shaderReloadConfig=="Shader config with spaces.json" && development.options.previewViews=="Views with spaces.json",
+        "Developer configuration paths must preserve their bytes");
+    const auto ai=azurerender::parseCommandLine({"--editor-project","project.azureproject","--ai-python","Python with spaces/python.exe","--ai-config","model config.json"});
+    require(ai.options.aiPython=="Python with spaces/python.exe"&&ai.options.aiConfig=="model config.json","Model tool arguments must preserve paths");
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config",{"--ai-config","config.json"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--ai-config/--ai-fixture",{"--editor-project","project.azureproject","--ai-config","config.json","--ai-fixture","fixed.json"});
+    const auto settings=azurerender::parseCommandLine({"--set","render.exposure=1.25","--settings-file","user settings.json","--default-settings","defaults.json","--project-settings","project.json"});
+    require(settings.options.settingOverrides.at("render.exposure")==1.25,"Typed setting value parsed");
+    require(settings.options.settingsFile=="user settings.json","Setting path preserved");
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","missing-equals"});
+    expectError(CommandLineErrorCode::InvalidValue,"--set",{"--set","render.exposure=nan"});
+
+    const auto diagnostics=azurerender::parseCommandLine({"--qa-disable-face-culling", "--qa-disable-depth-test"});
+    require(diagnostics.options.qaDisableFaceCulling && diagnostics.options.qaDisableDepthTest,
+        "Independent material face and depth diagnostics must be accepted");
+    require(azurerender::parseCommandLine({"--qa-light-scan"}).options.qaLightScan,
+            "Fixed-camera light scanning must be accepted");
+    require(azurerender::parseCommandLine({"--qa-isolation", "brow-mask"}).options.qaIsolation == "brow-mask",
+            "Eyebrow region mask must be accepted");
+    for (const char* camera : {"face-three-quarter-left", "face-three-quarter-right",
+                              "face-side-left", "face-side-right"}) {
+        require(azurerender::parseCommandLine({"--qa-camera", camera}).options.qaCamera == camera,
+                "Character inspection camera must be accepted");
+    }
+    const auto defaults = azurerender::parseCommandLine({});
+    require(!defaults.options.visibilityPrototype,"Visibility prototype must be optional");
+    require(azurerender::parseCommandLine({"--visibility-prototype"}).options.visibilityPrototype,
+            "Visibility prototype switch was not parsed");
+    require(!defaults.options.qaDisableFaceCulling && !defaults.options.qaDisableDepthTest,
+        "Face culling and depth must be enabled by default");
+    require(azurerender::parseCommandLine({"--disable-multi-draw-indirect"}).options.multiDrawIndirectDisabled,
+            "Single indirect command fallback was not parsed");
+    require(azurerender::parseCommandLine({"--fixed-frame-step"}).options.fixedFrameStep,
+            "Fixed simulation step was not parsed");
+    require(!defaults.options.parallelRecordingDisabled,
+            "Parallel recording should be enabled by default");
+    require(!defaults.options.gpuCullingDisabled, "GPU culling should default to enabled");
+    require(azurerender::parseCommandLine({"--disable-gpu-culling"}).options.gpuCullingDisabled,
+            "GPU culling fallback option was not parsed");
+    const auto serialRecording = azurerender::parseCommandLine({"--disable-parallel-recording"});
+    require(serialRecording.options.parallelRecordingDisabled,
+            "Single-thread recording option was not parsed");
+    require(defaults.options.width == 1280, "Unexpected default width");
+    require(defaults.options.height == 720, "Unexpected default height");
+    require(defaults.options.captureFps == 60, "Unexpected default capture FPS");
+    const auto help = azurerender::parseCommandLine({"--help"});
+    require(help.showHelp, "--help was not parsed");
+    require(
+        std::string(azurerender::commandLineHelp()).find("Scenes:")
+            != std::string::npos,
+        "Detailed help is missing scene options");
+
+    const auto valid = azurerender::parseCommandLine({
+        "--asset", "demo.gltf",
+        "--create-scene", "demo.azscene",
+        "--width", "1920",
+        "--height", "1080",
+        "--capture-dir", "capture",
+        "--capture-frames", "10",
+        "--capture-fps", "30",
+        "--diagnostic-view", "normal",
+        "--scene-type", "blackhole",
+        "--hud"});
+    require(
+        valid.options.assetPath == "demo.gltf",
+        "Asset path was not parsed");
+    require(
+        valid.createScenePath == "demo.azscene",
+        "Scene path was not parsed");
+    require(valid.options.width == 1920, "Width was not parsed");
+    require(valid.options.height == 1080, "Height was not parsed");
+    require(
+        valid.options.captureFrameLimit == 10,
+        "Frame count was not parsed");
+    require(valid.options.captureFps == 30, "Capture FPS was not parsed");
+    require(
+        valid.options.renderSettings.diagnosticView == 1,
+        "Diagnostic view was not parsed");
+    require(
+        valid.options.renderSettings.sceneType
+            == azurerender::SceneType::Blackhole,
+        "Scene type was not parsed");
+    require(valid.options.hudEnabled, "HUD flag was not parsed");
+    require(valid.options.gpuTimingEnabled, "GPU timing was not implied by HUD");
+    const auto morphWeights = azurerender::parseCommandLine({
+        "--qa-morph-weights", "0.75", "-0.25"});
+    require(
+        morphWeights.options.renderSettings.morphWeights[0] == 0.75F
+            && morphWeights.options.renderSettings.morphWeights[1] == -0.25F,
+        "Morph target weights were not parsed");
+
+    const auto bindlessDefault = azurerender::parseCommandLine(
+        {"--smoke-frames", "1"});
+    require(
+        !bindlessDefault.options.bindlessDisabled,
+        "Bindless descriptors default to enabled");
+    const auto legacyDescriptors = azurerender::parseCommandLine(
+        {"--disable-bindless", "--smoke-frames", "1"});
+    require(
+        legacyDescriptors.options.bindlessDisabled,
+        "--disable-bindless was not parsed");
+
+    require(
+        !valid.options.cullingDisabled,
+        "Frustum culling defaults to enabled");
+    const auto noCulling = azurerender::parseCommandLine(
+        {"--disable-culling", "--smoke-frames", "1"});
+    require(
+        noCulling.options.cullingDisabled,
+        "--disable-culling was not parsed");
+
+    // 2. Scene type defaults to Character and rejects unknown values.
+    const auto characterDefault = azurerender::parseCommandLine({});
+    require(
+        characterDefault.options.renderSettings.sceneType
+            == azurerender::SceneType::Character,
+        "Default scene type must be Character");
+    const auto sample = azurerender::parseCommandLine(
+        {"--scene-type", "sample", "--smoke-frames", "1"});
+    require(
+        sample.options.renderSettings.sceneType == azurerender::SceneType::Sample,
+        "Sample renderer must be selectable through the public CLI");
+    const auto blackholeProfile = azurerender::parseCommandLine({
+        "--scene-type", "blackhole",
+        "--blackhole-quality", "balanced",
+        "--blackhole-camera", "high"});
+    require(
+        blackholeProfile.options.renderSettings.blackhole.quality
+            == azurerender::BlackholeQuality::Balanced,
+        "Blackhole quality profile was not parsed");
+    require(
+        blackholeProfile.options.renderSettings.blackhole.camera
+            == azurerender::BlackholeCamera::High,
+        "Blackhole camera preset was not parsed");
+    const auto overShoulder = azurerender::parseCommandLine({
+        "--scene-type", "blackhole",
+        "--blackhole-camera", "over-shoulder"});
+    require(
+        overShoulder.options.renderSettings.blackhole.camera
+            == azurerender::BlackholeCamera::OverShoulder,
+        "Over-shoulder blackhole camera was not parsed");
+    expectError(CommandLineErrorCode::InvalidValue, "--blackhole-quality",
+        {"--blackhole-quality", "ultra"});
+    require(azurerender::parseCommandLine({"--qa-animation"}).options.qaAnimation,
+            "Fixed-camera animation playback must be accepted");
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--scene-type",
+        {"--scene-type", "galaxy"});
+
+    expectError(
+        CommandLineErrorCode::UnknownOption,
+        "--unknown",
+        {"--unknown"});
+    expectError(
+        CommandLineErrorCode::MissingValue,
+        "--asset",
+        {"--asset"});
+    expectError(
+        CommandLineErrorCode::MissingValue,
+        "--asset",
+        {"--asset", "--version"});
+    expectError(
+        CommandLineErrorCode::MissingValue,
+        "--asset",
+        {"--asset", ""});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--width",
+        {"--width", "1280px"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--width",
+        {"--width", "4294967296"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--qa-morph-weights",
+        {"--qa-morph-weights", "nan", "0"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--smoke-frames",
+        {"--smoke-frames", "18446744073709551616"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--smoke-frames",
+        {"--smoke-frames", "-1"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--smoke-frames",
+        {"--smoke-frames", "0"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--capture-fps",
+        {"--capture-fps", "241"});
+    expectError(
+        CommandLineErrorCode::InvalidCombination,
+        "--capture-dir/--capture-frames",
+        {"--capture-dir", "capture"});
+    expectError(
+        CommandLineErrorCode::InvalidCombination,
+        "--create-scene",
+        {"--create-scene", "demo.azscene"});
+    expectError(
+        CommandLineErrorCode::InvalidCombination,
+        "--scene/--create-scene/--editor",
+        {"--scene", "a.azscene", "--editor", "b.azscene"});
+    expectError(
+        CommandLineErrorCode::InvalidCombination,
+        "--qa-effect-state",
+        {"--qa-effect-state", "enabled"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--qa-camera",
+        {"--qa-camera", "sideways"});
+    expectError(
+        CommandLineErrorCode::InvalidValue,
+        "--qa-isolation",
+        {"--qa-isolation", "unknown"});
+
+    require(
+        std::string(azurerender::commandLineUsage()).find("Usage:") == 0,
+        "Usage contract is missing");
+    return 0;
+} catch (const std::exception& error) {
+    std::fprintf(stderr, "%s\n", error.what());
+    return 1;
+}

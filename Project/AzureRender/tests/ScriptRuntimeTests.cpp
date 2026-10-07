@@ -5,6 +5,17 @@
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+#ifdef _WIN32
+#define NOMINMAX
+#include <windows.h>
+#include <psapi.h>
+std::size_t privateMemoryBytes(){
+ PROCESS_MEMORY_COUNTERS_EX counters{};counters.cb=sizeof(counters);
+ if(!K32GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&counters),sizeof(counters)))
+  throw std::runtime_error("Cannot observe script process memory");
+ return counters.PrivateUsage;
+}
+#endif
 using namespace azurerender;
 void check(bool value) { if(!value)throw std::runtime_error("Script runtime contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data){std::ofstream(p)<<data;}
@@ -78,6 +89,27 @@ function shutdown() self:set('azure.transform','translation',{11,0,0});self:spaw
   hotScripts.reloadChanged();
   check(hotScripts.activeCount()==1 && hot.world().tryGet<ecs::TransformComponent>(hero)->translation[0]==999);
   hot.beginFrame(0);check(hot.entity("reserved")!=ecs::kInvalidEntity);
+#ifdef _WIN32
+  // Transient entity lookups must be collectible independently of the scene.
+  write(root/"assets/lookup.lua",R"(function init() self.counter=0 end
+function update(dt)
+ for i=1,64 do local other=self:find('owner');assert(other:alive()) end
+ self.counter=self.counter+1
+ self:set('azure.transform','translation',{self.counter,0,0})
+end)");
+  assets.refresh();RuntimeLifecycle lookupWorld;SceneDocument lookupScene;SceneNode lookupOwner;lookupOwner.id="owner";lookupScene.nodes.push_back(lookupOwner);
+  lookupWorld.loadScene(lookupScene);lookupWorld.start();GameRuntime lookupGame(lookupWorld,application::systems(),application::explorationConfiguration());
+  lookupWorld.world().addComponent(lookupWorld.entity("owner"),game::Script{"assets:/lookup.lua",true});
+  ScriptRuntime lookup(lookupWorld,lookupGame,assets);
+  for(int frame=0;frame<100;++frame)lookup.update(1.0/60.0);
+  const auto beforeLookups=privateMemoryBytes();
+  for(int frame=0;frame<400;++frame)lookup.update(1.0/60.0);
+  const auto afterLookups=privateMemoryBytes();
+  check(lookup.errors().empty() && lookup.activeCount()==1);
+  check(lookupWorld.world().tryGet<ecs::TransformComponent>(lookupWorld.entity("owner"))->translation[0]==500);
+  std::cout<<"Lua lookup private bytes: "<<beforeLookups<<" -> "<<afterLookups<<'\n';
+  if(afterLookups>beforeLookups+8*1024*1024)throw std::runtime_error("Transient Lua find proxies retained more than eight MiB");
+#endif
   std::cout<<"Lua reflection, error and loop isolation, triggers, reload retention and entity cleanup passed\n";
  }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}
  std::filesystem::remove_all(root);

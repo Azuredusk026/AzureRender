@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checks": [
+    "documentation",
+    "links",
+    "style",
+    "strict-site",
+    "two-configurations-provenance",
+    "installed-contracts"
+  ]
+}

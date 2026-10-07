@@ -1,0 +1,33 @@
+[0/2] Re-checking globbed directories...
+[1/30] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/30] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[3/30] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[4/30] Linking CXX executable AzureUiFoundationTests.exe
+[5/30] Linking CXX executable AzureThumbnailTests.exe
+[6/30] Linking CXX executable AzureEditorWorkspaceTests.exe
+[7/30] Linking CXX executable AzurePhysicsInputTests.exe
+[8/30] Linking CXX executable AzurePlayableQuestTests.exe
+[9/30] Linking CXX executable AzureLocomotionTests.exe
+[10/30] Linking CXX executable AzureScriptBackendContractTests.exe
+[11/30] Linking CXX executable AzureScriptInteropTests.exe
+[12/30] Linking CXX executable AzureInteractionTests.exe
+[13/30] Linking CXX executable AzureManagedModuleTests.exe
+[14/30] Linking CXX executable AzureScriptEntityTests.exe
+[15/30] Linking CXX executable AzureThirdPersonTests.exe
+[16/30] Linking CXX executable AzureManagedScriptRuntimeTests.exe
+[17/30] Linking CXX executable AzureSystemCompositionTests.exe
+[18/30] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[19/30] Linking CXX executable AzureProposalAdapterTests.exe
+[20/30] Linking CXX executable AzureProposalControllerTests.exe
+[21/30] Linking CXX executable AzureEditTransactionTests.exe
+[22/30] Linking CXX executable AzureEditorWorkflowTests.exe
+[23/30] Linking CXX executable AzureEditorObservationTests.exe
+[24/30] Linking CXX executable AzureEditServiceTests.exe
+[25/30] Linking CXX executable AzurePanelContextTests.exe
+[26/30] Linking CXX executable AzurePlayer.exe
+[27/30] Linking CXX executable AzureRenderEditorSessionTests.exe
+[28/30] Linking CXX executable AzureRegisteredComponentHost.exe
+[29/30] Linking CXX executable AzureRender.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-release\\build-provenance.json"}

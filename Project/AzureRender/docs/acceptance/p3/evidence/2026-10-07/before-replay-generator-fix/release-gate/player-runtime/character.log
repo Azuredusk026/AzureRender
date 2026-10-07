@@ -1,0 +1,37 @@
+﻿Project loaded: project (b59729b3-4bb3-4284-bb10-135d52694d6f)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\assets_public\test_model.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Clustered lighting: 0 lights, 0 cluster references
+GPU timing samples: 30
+  Shadow: 0.025 ms (9.383%)
+  Main scene: 0.177 ms (65.464%)
+  Internal outline: 0.068 ms (25.153%)
+  Total render: 0.270 ms avg, 0.257 ms min, 0.298 ms max
+  Percentiles: p50 0.269 ms, p95 0.293 ms, p99 0.297 ms
+  Submission per frame: 12.000 draws, 3.000 descriptor binds
+  CPU recording: 0.213 ms per frame, worker passes: 120
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\player-runtime\character.json
+Rendered frames: 30
+Allocator after unload: buffers=0 images=0
+
+[1791333789050][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791333789332][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791333789351][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791333789354][info][render][code=0] Character skinning and morph: Vulkan compute path
+

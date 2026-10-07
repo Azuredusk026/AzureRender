@@ -1,0 +1,494 @@
+[
+  {
+    "phase": "F4",
+    "path": "Project/AzureRender/src/ecs/World.hpp",
+    "expected": "52893574c25e3bb8535f51c129bed1ed4d8a88024f3097a7e20302f03d5e165e",
+    "normalized": "5ed7d8d27894120c88186f2562405741223a6f6049e1448c0afa0ae37d28802f"
+  },
+  {
+    "phase": "F4",
+    "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+    "expected": "d8c876dc3f802c654446b4b8baeefe344f44347b2f150ea53875abdf0a196157",
+    "normalized": "4b034b4394504191c96eb869996ad9cc5d9ed79862205bd282a7e09a9efc1d7c"
+  },
+  {
+    "phase": "F4",
+    "path": "Project/AzureRender/src/editor/ImGuiEditorLayer.cpp",
+    "expected": "dca439482ed0bf2f12e1ee94c5b71b3d63e4862e1982e9e43c4270be44c9bd3e",
+    "normalized": "c450ea93dfd6129df6d1213846ca373c882f087ce689e1d0274505c4d228d4f8"
+  },
+  {
+    "phase": "G8",
+    "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+    "expected": "7e3c7d955742c82425cfb4deb673b2eec366eb3286dd42a167de98fc1aa87b7d",
+    "normalized": "ad22a87dab2d8bf1078c319d46fcd52fdb2f603ef2497fa88582117fa7b276d2"
+  },
+  {
+    "phase": "G8",
+    "path": "Project/AzureRender/src/runtime/Project.cpp",
+    "expected": "99540d43b1d4ff3be43485666581eeed5fab1408acae9a1c7f992c26176bc283",
+    "normalized": "b20a239f9cee943fa2165b415509a24de178e509f048a04b2b6b87f74d01a7d5"
+  },
+  {
+    "phase": "G8",
+    "path": "Project/AzureRender/src/runtime/Project.hpp",
+    "expected": "e73f92d1a7eca5ea7163b8856fb4f090d506edd9c7523983b648b06f1c2c1199",
+    "normalized": "e3155de3c3196144d26bfd02d392f603ebb40eeff88a5cbe96a53fc97785a984"
+  },
+  {
+    "phase": "U3",
+    "path": "Project/AzureRender/src/editor/EditorContext.hpp",
+    "expected": "e0a600c25110555d8812f4389cc3dbeca897ac588c401c9c054e1f753408a76b",
+    "normalized": "65780eb17b5c1c671b1671fd96940d98fd551dd5e71d9d06a9e92bf2c1c168a1"
+  },
+  {
+    "phase": "U3",
+    "path": "Project/AzureRender/src/editor/EditorSession.cpp",
+    "expected": "c02450adfd20dcd359da79aaadfd320669d902098ebc13ffc04f52dd11976bcc",
+    "normalized": "6ae046d2b5eb9ed58fd11dee7da4a63fe18d0afe1d48920d467be150d05d2376"
+  },
+  {
+    "phase": "U3",
+    "path": "Project/AzureRender/src/editor/EditorSession.hpp",
+    "expected": "7a38bb58befa2fe8ab5ade7f465b49ab3a812d4c2081d3039e5ec58c34999c0a",
+    "normalized": "1d766f9818825e2420a698d7ac2f3861cbf818afa16d0971c9fee3f4ca1305a0"
+  },
+  {
+    "phase": "F5",
+    "path": "Project/AzureRender/src/app/AzureRenderOptions.hpp",
+    "expected": "0dcc3b66ab0bf5002b4ab3f2c0bb9b39743e9b0fb1160bea3c10986fcd870f88",
+    "normalized": "3620661d92d2cf90fa7baf787aa2b4bc82b77a8210818f32902593af92f83162"
+  },
+  {
+    "phase": "F5",
+    "path": "Project/AzureRender/src/app/CommandLine.cpp",
+    "expected": "ed9352fef3235f73eb1008dd04c0423cfdc89dc851b5de1ecc03ee68e511abe7",
+    "normalized": "69a683368f3e34c0a369d578839201f5facc8ffe4e2e84d80a5a38ba71e4109e"
+  },
+  {
+    "phase": "F5",
+    "path": "Project/AzureRender/src/editor/EditorContext.hpp",
+    "expected": "235715e7681a80041bdcfffdb2b130b93c5a01325b5d8231e7ed2997eae400ca",
+    "normalized": "2b2d7e2d21abf3bd93525eb34432ad830587b947efc3a057b9b84c6f868f03d8"
+  },
+  {
+    "phase": "F5",
+    "path": "Project/AzureRender/src/editor/EditorSession.hpp",
+    "expected": "c9329af5de0f32956fd9b47b0f0e02dfb934f3e0799df46332d5cbfb8866a26e",
+    "normalized": "4e064432c1c90e9ec01a9f1e14148839b92907c25964424af9bd5d377451afbe"
+  },
+  {
+    "phase": "U4",
+    "path": "Project/AzureRender/src/app/AzureRenderOptions.hpp",
+    "expected": "82236d3d7cc657f200e2c826a47179d020d55779244253b920592a1b71c55d3c",
+    "normalized": "c1bd11331a254f43b9209c25f95c34018d78dda3f86f6098040bb54fadb0378f"
+  },
+  {
+    "phase": "U4",
+    "path": "Project/AzureRender/src/editor/EditorContext.hpp",
+    "expected": "103dba491aad1c24b56fe9a01d4f492e7ecba1b9a5addca1017eaff0bbc8e5d2",
+    "normalized": "e6455b910ad20be5b7db2cf8402253c079ea4b5da7549aed53acb0bd2ee88b9b"
+  },
+  {
+    "phase": "U4",
+    "path": "Project/AzureRender/tests/UiFoundationTests.cpp",
+    "expected": "6415695afb0daf38ab66ad91cd93f01d5dcfd5f719a70e72c4bc4a3597f96b33",
+    "normalized": "96e472d98eb8caf8c9f9f17e0706be085325055f2650a92c3430c6c993f4f3aa"
+  },
+  {
+    "phase": "G9",
+    "path": "Project/AzureRender/CMakeLists.txt",
+    "expected": "8c23e15b015edd6119a487510ad03de81df49ff7c3a966c9aa4287758569eb7b",
+    "normalized": "2fb20be051cb7f7142f487dfae0c916c6e966e0b310a1c744daf24b7bb27f44e"
+  },
+  {
+    "phase": "G9",
+    "path": "Project/AzureRender/src/app/AzureRenderOptions.hpp",
+    "expected": "d7e578e1762be9fa4efc2a23e7bcc4922c5977d8768e6d6e50807da00dae0d80",
+    "normalized": "de19425b0de47449eb34c197dd4760dca3fa9638e2648ac751e2d8aa008f6277"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/CMakeLists.txt",
+    "expected": "0479805811bfd5cce0a78a04093b2b6da87ff9e9bd2952489bc14c6d0a4731a2",
+    "normalized": "f0da92fb39fa91735b9071bb55aec2a7fbff0f36b2d308d608d51479e179a310"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderApp.cpp",
+    "expected": "1e7d50b914bb58b3ad2eec3f6680f6fac409febddd310b5132a857f64a5a0a7d",
+    "normalized": "d1d26410617d55c8fcc88f4db0592069a6c8ef2d51a68a63ccdc8abb7a1244c7"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderApp.hpp",
+    "expected": "c617febdbfd21136732fe4e748a500554cfdb2515a68345e0fc98e77f0533489",
+    "normalized": "8269ff8c0444437fc6f8031b3f576cd978b54a2542cda4c9645b4af9d92fb0c3"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderDevtools.cpp",
+    "expected": "e7365c162a7504f2ea47bc834edb834340c208367c39891f71a626df4a394123",
+    "normalized": "8ed42213e10fa1505c03a3ff2f2f18d704dd19c91facb1e7cf2028847caee5b9"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderFrame.cpp",
+    "expected": "5a0bfa86964636ab880c519a81ea117ca080c66f531fd4b5485b29ad18c63a7a",
+    "normalized": "c58d77d7eba52c2d3748afd2a805b50cda08d2ef932053ecdbbe62b0d0a54fac"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderGameplay.cpp",
+    "expected": "582f6124a879d2d9d41d44d1af0b1a6919143298a7af9c832db2171e7a027be0",
+    "normalized": "de6e4de3547801cb7b1ba805d02db8c70e0604ed5499fafca2ff71986f35fc11"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderOptions.hpp",
+    "expected": "d65ce7573461ee9e0953aa4cc1c3908de1b7505bd5e150b1c2011d7a76f507f4",
+    "normalized": "474757619a744ce5b5a38b3bbe25325f4e5b023b069036ddb5e5697b279f20cb"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderSupport.cpp",
+    "expected": "807c73624503dc42639e2edf7df4b222b196e2b120300e23433437117f98a3c0",
+    "normalized": "41030b4f5e0388d75e680db840de7f5972be75b9a869b0e08d4d86ef60b551e7"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/AzureRenderValidation.cpp",
+    "expected": "8a5399b1777b971c6df8bd1b9a7f56e414f6d819d4fd6fb9afd26f9ca0a032ba",
+    "normalized": "07f2bbc03295df915eb057ea7ea96d8377e418504627efe6c572b8bd8595cb12"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/app/CommandLine.cpp",
+    "expected": "c8a285c87c7d457db1c6888d3332803d4eb44d3b46d76cdd380a412b7578bec1",
+    "normalized": "e34dabe489bf935e5e8961f9cd51b8e374887f719973d0630360e9e33783070b"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/EditorContext.hpp",
+    "expected": "8e3cffbb5930b8325525b28f73ae86a30aac1551ee538c9e0f92001292963edd",
+    "normalized": "29eb0d4ade1a96341c0b68eb62bff45b4b240cbc2487b49777e546ceb8c6d62b"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/EditorSession.hpp",
+    "expected": "93181fc85e492c51398178c2f1c3e7345d23539002324b3d8e03a2ea84358665",
+    "normalized": "ab63914315898fbe922323ab1d8d91340d6993365547b6cbcd89286e4f661689"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/EditorToolbar.cpp",
+    "expected": "89e4f59b69319f88c737a4e0cd02a8a5e5329950b2d6a347e3888257c3c711c8",
+    "normalized": "0c00bfdc9a282d1b535e25d00cf8095d0b22bc484939551a44463c4420091412"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/ImGuiEditorLayer.cpp",
+    "expected": "3763002a6bebedd14a1aaff4e57b911d95f52a96af5306495f903de6b9fa5923",
+    "normalized": "5ada6f00ab776e5efb85f81a36a4869ad9548bd0e85a6b3e322edc32454b24f8"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/ImGuiEditorLayer.hpp",
+    "expected": "955606fc0e977082cf9263bf896ae9e4c010fad34debd859aaa32f4fbcfdf295",
+    "normalized": "3ca236ce93babceb7aef22c3312da3935422e6e8fbfb56c64468c0d2809ad8b3"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/commands/EditorOperations.cpp",
+    "expected": "45d309e515d79ed4a39c7bd38c66e1f00f647195b3890824fada1a510a4c6819",
+    "normalized": "a7f55360a9be73160183e7691ebe26049b925d9d43fa0117dfdb60539a60caef"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp",
+    "expected": "1c96c7de7883d2a3382bd5d4da5d9446df98c4f77601d83edfe1fdafc78a1ab5",
+    "normalized": "8c3aea3d9fb90ce63af09929c315d5d72008ccbd5754a40117413565d923029f"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/panels/CapturePanel.cpp",
+    "expected": "274be3a302f25a2c7da57d0f87eff092c32910d06e8accf99a57ba6efb9cb456",
+    "normalized": "516ddecf732ddafc9e020308654c2cafd3daf77b0b2ccb53f26e113e54cbb19b"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/editor/panels/ConsolePanel.cpp",
+    "expected": "f7ae1cacba3f0f03b7b14c2fd417a38a9cd914c03928cee693b75b16a5549e6d",
+    "normalized": "2a8bad1f91d0e6eef0e319ac0bbbf534bb8244a99b1651c6756ba7efaa9022fb"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/render/RenderContext.hpp",
+    "expected": "b8bf13f7da1f06179bfa3846f4cee1868f8b6f542edf8a5d1b7e77b75fe9cf2d",
+    "normalized": "7dda22c993826ef7eb9d904e3b12c66076043a429b73e3b147e3838ab9500aa5"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/rhi/GpuAllocator.cpp",
+    "expected": "27273d2476eee74b8241b9279aab7975c5ce259d3999835753e779c39017560b",
+    "normalized": "1c33a8ac4a97bc837c6edbda8dbc8971a4996468a1257ab3a43b84a244c019d7"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/rhi/GpuAllocator.hpp",
+    "expected": "0feed091ba415fb55e2514ef02189945edd671e4e8d19554828d2552602de970",
+    "normalized": "cead83c3e1c0dc332e3e4e33036600f42df21beacadc03f39c58a6135226d632"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/rhi/IGpuAllocator.hpp",
+    "expected": "f04e81e19147ad02fcd84aabdcd0ca5a880943f4ad43893ac6e35d8252bb42cf",
+    "normalized": "2b80ad984f49508c4b93936ef50225eeebdc519fade22853c8c3cfa57a2552d7"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/rhi/NullRhi.hpp",
+    "expected": "fc74a567a824c12d69f65832fb5ba457cb06efb9c1203cf8860de46de7d4446c",
+    "normalized": "d40ff7e3bb18a56fdea4f87cb2d401356d6dcbff4540ecd832b16cf7b306a26f"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/rhi/VulkanRhi.cpp",
+    "expected": "767b96520ed4b025d83acd5d12b7562fec6bfa18d5db03ca00d7931b39d20bb4",
+    "normalized": "8ef31004e2632d530063e09aacb8e32432cc7cdd0fcbe1adc0ecda72ffd168c2"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/runtime/EngineSettings.cpp",
+    "expected": "a15c06ddcee83eddd67234b8a1a3e3f18f129f3d3de42d9dfac5cf231deab86d",
+    "normalized": "405cbe5cc82456b8661982581ed112700f1476ab8e903e7e87bee97e84f4c262"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/src/scenes/BlackholeSceneRenderer.cpp",
+    "expected": "2d880d4204425ce677312a4fcd02092dfdce9016955e34b22e09c745521e1f72",
+    "normalized": "c0e696a090c5da123a00c273cc2bd1b35171c4e87a0820dc66d81c5fc3f933bf"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tests/CommandLineTests.cpp",
+    "expected": "f6c4c372881d6f284aa1063038752a1cef997d165a7aa545c9ee5ca7c48477a0",
+    "normalized": "69f54e826975aac74c47c14e5204d2838ba2cb2c7fcec00771297deefe5deec2"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tests/EditorSessionTests.cpp",
+    "expected": "130a66a3aee352b93cc942c3c80bbe3be5a53d1449b88b1f040619545d1aede3",
+    "normalized": "c3008a44e3f582b803da8c0a1284b625a911fe1d76c41aecfcba130247f42f83"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tests/HotReloadTests.cpp",
+    "expected": "7c4072e0f8c3d5d954d8bc124704cc78a490716b3f3f0f64a44d11b0343648cd",
+    "normalized": "02efdca91682bc4ed33e27ae5e8bfb7357ce76ed35a2f119ea35ffba88f9731f"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tests/RenderViewTests.cpp",
+    "expected": "8fdaa22a688a5594318626f3827f7a39dbd8c995af85ca90b00db51869b1763e",
+    "normalized": "b4562cf975a85d2d078f1a8d68e7a27f046dde0d218cfd0a080df4d4f06013e6"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tools/check_module_boundaries.py",
+    "expected": "d5e735c9d9c1debcc335aa6dc51114d42031e7e75f2f89c45e99d9b0f01a7bc4",
+    "normalized": "c994051e225d4c0a0a5a78cf7101b4dc86a87e7a1c62baefa7163df32ec3840b"
+  },
+  {
+    "phase": "R7",
+    "path": "Project/AzureRender/tools/test_editor_workflow.py",
+    "expected": "e1671cad81719ffc178a25f571b464cd3e9ae2a594eb29ddc71cccc0e2022b99",
+    "normalized": "73b68d63ca2be5cdf0764642fdb72cfa8dedbdba2952255e3f591c9c9256f0a1"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/CMakeLists.txt",
+    "expected": "ca83f78015d78f8f86756485011c24200a6177af843c308d504bbb85fe7966dc",
+    "normalized": "697810d38406b9f6ae095c594a315daa601a7582f275223a1676484da952e487"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/app/AzureRenderApp.cpp",
+    "expected": "29d8fbba8cc72b1255b22d346d3fc4c8daa1ea794d4dd05035e352b0b7e751bd",
+    "normalized": "91ec2df87dcb727560c1ec1f4e6c6781bf4e88e83fc5a13759a1d6b19173a37a"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/assets/GltfLoader.cpp",
+    "expected": "8002a72edc631e5201fb0e53018e33dfb92f81c7ba2a64d3d270ecebeeae69a8",
+    "normalized": "77f66b2bb09d5ab40a3ec5b332f7f2471b41cfbc153d1073ac3b643a757a64a6"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/assets/GltfLoader.hpp",
+    "expected": "d541e3c1f0c05a50596491df602e2909079fbe5720b344f207dfb29dfa5ce240",
+    "normalized": "a2b6041cfaae6c96d1f5b70ce4450070f076362888bd63197dfc1890ea845e26"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/editor/EditorProjectEditing.cpp",
+    "expected": "96abaf79f6052d6909a8fdeaf3deae86dce8b65b7b5a6764f93b24d3f8aa2a6f",
+    "normalized": "1b2d1a3ee1606184a780ea0ae3927c298ccb0ce17d99b2c72b1c7d82b6af4752"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp",
+    "expected": "a1a2286535638d63e0c8146d3d5455867cb228de743e49a7e5c6384f7ea906aa",
+    "normalized": "181a66bbd72bcc013d90f708c4193141b8915637d72b9810fc8e0747a07f7104"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/main.cpp",
+    "expected": "09c574f0b40828672d9456e13fced60e58ccf0d9f92c7c6019b0bcb6ae551ab5",
+    "normalized": "9d8ed86c6e8335c7760d5852a32dbc7a13b9d022f8f386eea0a8dcdf0bd1e72d"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/render/RenderContext.hpp",
+    "expected": "8b6fbe575ed0d91961341ebe10d65b7954d6dcc50db47ae0f0cc200fb928775b",
+    "normalized": "4ce8dd42ed79463efeb0e8a6c68074c944bb8739a7a1b1c66183eb4183138f2a"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp",
+    "expected": "c13fbc41b2819337a41230ad90717e33b606e261e3f5a62703f182ca34152556",
+    "normalized": "a2666fd0cdcd6f30d4121e54817631996352d486cd018267c7d71dedb59783e1"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/tests/NullRhiPassTests.cpp",
+    "expected": "18a0509d44d397bd2a1d1e9422ab6f7f9b2889713f8a1ed02c9597a556638d90",
+    "normalized": "c774eb694084ce6b42a6babb488e9cc258fa45c58aeaf29d1665740971cdf5b0"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/tools/build_provenance.py",
+    "expected": "ebcbc212a422fd7b6aeeb827650299ca808e8fe8cb0c7c886b77c00b3c584bce",
+    "normalized": "f25e3b67a59b864db2f1527565e98ff7be275f2cb5fb03baf44a221f58fc085c"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/tools/check_module_boundaries.py",
+    "expected": "0121a78ff928054b8f6ea4e4e03d2990190a7aa527c23f4dea2a5153488aca86",
+    "normalized": "f2d850c34729ed18f9acd9c1eff0b9292ac49b89b9546959b97f38cb7766c465"
+  },
+  {
+    "phase": "G10",
+    "path": "Project/AzureRender/vcpkg.json",
+    "expected": "166c01eea7ce8e875e75f934bb4edfd2129b56fea09b2ce77c78ea4d558f22fa",
+    "normalized": "ad372c0c016329da95ada61e1f3c75ad55efa29ce2dc36739e21193a474988f0"
+  },
+  {
+    "phase": "R8",
+    "path": "Project/AzureRender/CMakeLists.txt",
+    "expected": "55aa34fb9bcf1e9ad3e6cabdcce3ed621abb53a5a54c75a4616a16803b53b1e4",
+    "normalized": "70616c9bbaffee62c0c2c689c668a5bb243899e8e2b6f66afe0cf66b372c2b85"
+  },
+  {
+    "phase": "R8",
+    "path": "Project/AzureRender/src/scenes/BlackholeSceneRenderer.hpp",
+    "expected": "6c243e93e2be969202d73a79ee37869637c59636ba34534902d3f4b4fc12e9cb",
+    "normalized": "ad7c6b677bf90e1a6598252cdef5037109298879461eea0b2c1ea3729eea3ecb"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/CMakeLists.txt",
+    "expected": "19ffd204b62cb39b962b426339044f2ad285b13d1adecef70188e8a57e1a41b2",
+    "normalized": "46176b9dfe74a263a7985e66394fd96efd179f6387735ac8c383500af23ec2c2"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/shaders/cull_indirect.comp",
+    "expected": "2a45eddc419b2e7e06d94c2460cbba1597e8484dd54d12aafcc783cc24c80a6d",
+    "normalized": "17ad1241c458fbcd7de70e3a8db2d0d531fa96e675a81950c6d904ab7b56b9d2"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/shaders/skin.comp",
+    "expected": "b1e356ab860de41a1169abb3193a27b53a681b18bb73e6f00cfeed532f8bbcfd",
+    "normalized": "2291526546b4a35b31bcfe9d4e0205707334840642641a5c0f73b0c07ed2744d"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/app/AzureRenderApp.cpp",
+    "expected": "9e39b3012f0eaed2c71436b47571d17fc3ee0a0dfaebd8063eeb2d3ea3f2c7cd",
+    "normalized": "503fd185746ea4f664d9c8bb4f1af79b1c3ef79249cdd794df8e965ae83e6a67"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/app/AzureRenderOptions.hpp",
+    "expected": "e42999d130bd21765275434a853704d1904f9420184274f1169a27d19cddadc3",
+    "normalized": "8f0c6c046d6d26e7e5764d8a16a66c6e69546c9221f957b7515cf7f1064fb03d"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/app/CommandLine.cpp",
+    "expected": "0f033189d59791afeaedd1eb0640a69004c123abfdfa98c634e4b346606ae48a",
+    "normalized": "6e7e8843901c517f68cad269f6c32647dc86d4273f8851fd111d9f8a2c93f6d3"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/diagnostics/GpuCapabilityReport.cpp",
+    "expected": "ff8556ddf2da0072e602e18e14b502936adb95a09342b24a1995f7beff8dc140",
+    "normalized": "3071c1bbbbc45343c9cc980aac69086cd6df6c6bab8e935f47aea0d5c98dc988"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/diagnostics/GpuCapabilityReport.hpp",
+    "expected": "0f276e912183d8916174b62b28f4052f206f4038197e41531fdaa0fd9389349f",
+    "normalized": "305c77b1420fb5ab4d1d0ad1f06bacd55ee5616ef42294096d712a35b3448680"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/render/GpuCullingResources.hpp",
+    "expected": "73647aa910b236eac45767acba5cab6116930f72c580d07f9bcbeab1522133fb",
+    "normalized": "efc8826529ddbfe2e97eec01688c005599949f0984ed17c5a04f82f7800fc1f5"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/render/RenderContext.hpp",
+    "expected": "7d86432353a3ec063fbf214b443214b8e31598ead51fdad4f1f42f7ab1133fe1",
+    "normalized": "cc5edf634c6ee1dd6a0614f347b9b433836c9f76a66304c61929d0b8977dfcf4"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/render/SceneInstanceSnapshot.hpp",
+    "expected": "6a13ed15ee31d09c21dda604015cef73e0dcad89dd52ba7a57937944f28a9911",
+    "normalized": "04cde00f6a7517455e8116b1f297480f832ba5365ed1b7f811bbbe49f785f450"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/scene/RenderBatching.hpp",
+    "expected": "ff83112b16f135cfc4efc21f5986b72a393ed44c95099e6b066c8872dc61d2cc",
+    "normalized": "d929af78a0f97cf8f984c29f63d32573eead631778faf8627731cc0e6b545fa4"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp",
+    "expected": "6e01d3f0c34f7a90becb679b928c4ac7ae1ff2160e7fe75ea244d60fccb87032",
+    "normalized": "730e8cd942a9e0641d06693f551ff5708b3ed4a2107af7105e46925183a493f9"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp",
+    "expected": "1698bf0901434b5ab2e5273dedb78764808be4fb5a4e0f2b18d5fec2f705b7b3",
+    "normalized": "24f33b924a31393cef64a00eabf77584d023bb91d2ebe58c08a3ca3a381b36c3"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/tests/CommandLineTests.cpp",
+    "expected": "068fffc034150544ca54b18a819f970ce2b7d6326be6b333d2efa463d46cf3d9",
+    "normalized": "b0ddc26faef528e6a381c1e06adfd34bef2a24a9f7e863772297d6501a1196ce"
+  },
+  {
+    "phase": "R9",
+    "path": "Project/AzureRender/tests/NullRhiPassTests.cpp",
+    "expected": "0b841d0270eb38fa644d91ca55746af1de66706200d23f3eb15fd2badeb162da",
+    "normalized": "51fcd4002217f2a42e40e25f425b369e1b7e691bfd3e01c41520068fb7f7f71b"
+  }
+]

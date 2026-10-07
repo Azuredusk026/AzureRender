@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "initial": "idle",
+  "states": [{"name":"idle","clip":0},{"name":"run","clip":1}],
+  "transitions": []
+}

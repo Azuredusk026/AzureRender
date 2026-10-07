@@ -1,0 +1,7 @@
+AzureRender 0.1.0-rc1
+Shader directory: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\shaders
+Public demo: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\assets_public\test_model.gltf
+Ramp profile: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\assets_public\toon_ramp_profiles.json
+Ramp atlas: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\assets_public\toon_ramp_atlas.ppm
+Showcase looks: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\share\AzureRender\assets_public\showcase_looks.json
+Isolated Windows runtime check passed: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\release-gate\install-moved\bin\AzureRender.exe

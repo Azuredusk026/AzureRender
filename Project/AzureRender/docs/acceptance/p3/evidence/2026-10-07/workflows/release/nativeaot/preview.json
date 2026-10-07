@@ -1,0 +1,705 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "developer": {
+    "camera": null,
+    "completedSubmission": 13,
+    "diagnostic": "",
+    "schemaVersion": 1,
+    "shaderAvailable": false,
+    "shaderDiagnostic": "",
+    "shaderGeneration": 0,
+    "shaderReplacements": 0,
+    "shaderState": "Idle",
+    "thumbnails": [],
+    "views": []
+  },
+  "editStateRestored": true,
+  "editorActions": [
+    {
+      "command": "play",
+      "error": "",
+      "milliseconds": 598.492,
+      "passed": true
+    },
+    {
+      "command": "pause",
+      "error": "",
+      "milliseconds": 1.0899,
+      "passed": true
+    },
+    {
+      "command": "stop",
+      "error": "",
+      "milliseconds": 48.6656,
+      "passed": true
+    }
+  ],
+  "editorDebugLines": 0,
+  "editorLevelRevision": 1,
+  "editorPlaySteps": 9,
+  "editorPlaying": false,
+  "editorPreviewFrames": 0,
+  "editorWorkspace": {
+    "diagnostic": "",
+    "dpi": 1.5,
+    "gizmoRotation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gizmoScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gizmoTranslation": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "history": [],
+    "image": {
+      "height": 399.0,
+      "width": 920.0,
+      "x": 12.0,
+      "y": 180.0
+    },
+    "nodeCount": 1,
+    "panels": {
+      "animation": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "assets": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "build": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "capture": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "console": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "gameplay-debug": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          594.0,
+          944.0,
+          90.0
+        ]
+      },
+      "inspector": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          947.0,
+          309.0,
+          333.0,
+          375.0
+        ]
+      },
+      "outliner": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          947.0,
+          96.0,
+          333.0,
+          210.0
+        ]
+      },
+      "settings": {
+        "docked": false,
+        "open": false,
+        "rect": []
+      },
+      "viewport": {
+        "docked": true,
+        "open": true,
+        "rect": [
+          0.0,
+          96.0,
+          944.0,
+          495.0
+        ]
+      }
+    },
+    "selectedName": "hero",
+    "settings": {
+      "ai.enabled": {
+        "default": false,
+        "description": "Enable optional content assistance",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": false,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "boolean",
+        "value": false
+      },
+      "ai.maxHistoryBytes": {
+        "default": 131072,
+        "description": "Maximum proposal history bytes",
+        "layers": {
+          "default": 131072
+        },
+        "maximum": 131072.0,
+        "minimum": 2.0,
+        "pending": 131072,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 131072
+      },
+      "ai.maxHistoryMessages": {
+        "default": 24,
+        "description": "Maximum proposal history messages",
+        "layers": {
+          "default": 24
+        },
+        "maximum": 24.0,
+        "minimum": 1.0,
+        "pending": 24,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 24
+      },
+      "ai.maxOperations": {
+        "default": 128,
+        "description": "Maximum proposal operations",
+        "layers": {
+          "default": 128
+        },
+        "maximum": 128.0,
+        "minimum": 1.0,
+        "pending": 128,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 128
+      },
+      "ai.maxRepairs": {
+        "default": 1,
+        "description": "Maximum proposal repairs",
+        "layers": {
+          "default": 1
+        },
+        "maximum": 1.0,
+        "minimum": 0.0,
+        "pending": 1,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 1
+      },
+      "ai.maxSourceBytes": {
+        "default": 2097152,
+        "description": "Maximum proposal source bytes",
+        "layers": {
+          "default": 2097152
+        },
+        "maximum": 2097152.0,
+        "minimum": 1.0,
+        "pending": 2097152,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2097152
+      },
+      "ai.profile": {
+        "default": "content",
+        "description": "Model tool profile",
+        "layers": {
+          "default": "content"
+        },
+        "pending": "content",
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "string",
+        "value": "content"
+      },
+      "ai.timeoutMs": {
+        "default": 300000,
+        "description": "Total proposal deadline",
+        "layers": {
+          "default": 300000
+        },
+        "maximum": 300000.0,
+        "minimum": 1.0,
+        "pending": 300000,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 300000
+      },
+      "developer.maxViews": {
+        "default": 3,
+        "description": "Maximum owned auxiliary render views",
+        "layers": {
+          "default": 3
+        },
+        "maximum": 3.0,
+        "minimum": 1.0,
+        "pending": 3,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": true,
+        "type": "integer",
+        "value": 3
+      },
+      "diagnostics.verbose": {
+        "default": false,
+        "description": "Verbose development diagnostics",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.compact": {
+        "default": false,
+        "description": "Compact workspace",
+        "layers": {
+          "default": false
+        },
+        "pending": false,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "boolean",
+        "value": false
+      },
+      "editor.scale": {
+        "default": 1.0,
+        "description": "Interface scale multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 3.0,
+        "minimum": 0.75,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "input.cameraSensitivity": {
+        "default": 1.0,
+        "description": "Mouse camera sensitivity multiplier",
+        "layers": {
+          "default": 1.0
+        },
+        "maximum": 4.0,
+        "minimum": 0.1,
+        "pending": 1.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 1.0
+      },
+      "render.blackholeQuality": {
+        "default": 2,
+        "description": "Blackhole quality: performance, balanced, cinematic",
+        "layers": {
+          "default": 2
+        },
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "pending": 2,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 2
+      },
+      "render.diagnosticView": {
+        "default": 0,
+        "description": "Diagnostic view: beauty, normal, outline, shadow, depth",
+        "layers": {
+          "default": 0
+        },
+        "maximum": 4.0,
+        "minimum": 0.0,
+        "pending": 0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "integer",
+        "value": 0
+      },
+      "render.exposure": {
+        "default": 0.0,
+        "description": "Temporary exposure in EV",
+        "layers": {
+          "default": 0.0
+        },
+        "maximum": 8.0,
+        "minimum": -8.0,
+        "pending": 0.0,
+        "pendingSource": "default",
+        "persistent": true,
+        "readOnly": false,
+        "source": "default",
+        "startupOnly": false,
+        "type": "number",
+        "value": 0.0
+      }
+    },
+    "uiErrors": [],
+    "version": 2,
+    "visibleAssets": [],
+    "widgets": {
+      "assets.grid": [
+        729.0,
+        639.0,
+        68.0,
+        33.0
+      ],
+      "assets.search": [
+        12.0,
+        639.0,
+        473.0,
+        33.0
+      ],
+      "assets.type": [
+        497.0,
+        639.0,
+        220.0,
+        33.0
+      ],
+      "build": [
+        643.5,
+        48.0,
+        60.0,
+        33.0
+      ],
+      "focus": [
+        12.0,
+        141.0,
+        126.0,
+        33.0
+      ],
+      "menu.Edit": [
+        55.0,
+        3.0,
+        51.0,
+        27.0
+      ],
+      "menu.File": [
+        6.0,
+        3.0,
+        49.0,
+        27.0
+      ],
+      "menu.Help": [
+        224.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "menu.Tools": [
+        162.0,
+        3.0,
+        62.0,
+        27.0
+      ],
+      "menu.View": [
+        106.0,
+        3.0,
+        56.0,
+        27.0
+      ],
+      "mode.Move": [
+        75.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Rotate": [
+        169.5,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "mode.Scale": [
+        264.0,
+        51.0,
+        94.5,
+        27.0
+      ],
+      "name": [
+        959.0,
+        474.0,
+        216.0,
+        33.0
+      ],
+      "node.hero": [
+        953.0,
+        223.0,
+        321.0,
+        27.0
+      ],
+      "outliner.search": [
+        959.0,
+        141.0,
+        308.0,
+        33.0
+      ],
+      "panelrect.animation": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.assets": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.build": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.capture": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.console": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.gameplay-debug": [
+        0.0,
+        594.0,
+        944.0,
+        90.0
+      ],
+      "panelrect.inspector": [
+        947.0,
+        309.0,
+        333.0,
+        375.0
+      ],
+      "panelrect.outliner": [
+        947.0,
+        96.0,
+        333.0,
+        210.0
+      ],
+      "panelrect.viewport": [
+        0.0,
+        96.0,
+        944.0,
+        495.0
+      ],
+      "pause": [
+        430.5,
+        48.0,
+        65.0,
+        33.0
+      ],
+      "play": [
+        364.5,
+        48.0,
+        54.0,
+        33.0
+      ],
+      "save": [
+        12.0,
+        48.0,
+        57.0,
+        33.0
+      ],
+      "step": [
+        507.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "stop": [
+        575.5,
+        48.0,
+        56.0,
+        33.0
+      ],
+      "tab.animation": [
+        570.0,
+        594.0,
+        165.0,
+        33.0
+      ],
+      "tab.assets": [
+        39.0,
+        594.0,
+        165.0,
+        33.0
+      ],
+      "tab.build": [
+        434.0,
+        594.0,
+        130.0,
+        33.0
+      ],
+      "tab.capture": [
+        210.0,
+        594.0,
+        106.0,
+        33.0
+      ],
+      "tab.console": [
+        322.0,
+        594.0,
+        106.0,
+        33.0
+      ],
+      "tab.gameplay-debug": [
+        741.0,
+        594.0,
+        165.0,
+        33.0
+      ],
+      "tab.inspector": [
+        986.0,
+        309.0,
+        98.0,
+        33.0
+      ],
+      "tab.outliner": [
+        986.0,
+        96.0,
+        151.0,
+        33.0
+      ],
+      "tab.viewport": [
+        39.0,
+        96.0,
+        112.0,
+        33.0
+      ],
+      "viewport.image": [
+        12.0,
+        180.0,
+        920.0,
+        399.0
+      ]
+    }
+  },
+  "fixedSteps": 0,
+  "gameBuildMilliseconds": 0.0,
+  "gameBuildPassed": false,
+  "levelRevision": 0,
+  "nodes": [
+    {
+      "id": "hero",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    }
+  ],
+  "observedScriptErrors": 0,
+  "presentationErrors": [],
+  "recoveredScripts": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "managed-annotation",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.0,
+  "uiDrawCalls": 0
+}

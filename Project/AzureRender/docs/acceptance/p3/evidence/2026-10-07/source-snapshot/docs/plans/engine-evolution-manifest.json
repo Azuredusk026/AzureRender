@@ -1,0 +1,3964 @@
+{
+  "schemaVersion": 1,
+  "planDate": "2026-10-06",
+  "pathBase": "Project/AzureRender",
+  "scope": "accepted-plan; implementation results recorded only after verification",
+  "executionStatusSource": "docs/plans/azure-engine-plan.md",
+  "mainPlan": "docs/plans/2026-10-06-engine-evolution.md",
+  "sourceMap": "docs/research/gknextengine-source-map.json",
+  "referenceRepository": "D:/Project/gkNextEngine",
+  "referenceCommit": "4ba5b7cd106c282e7ed166ff853aeea87b392680",
+  "projectBaselineCommit": "fe9afda68e30539fd61048ba23d19b90217d81ce",
+  "adoptionOutcomes": [
+    "formal-adoption",
+    "adapted-adoption",
+    "verified-prototype-retained"
+  ],
+  "phases": [
+    {
+      "id": "F4",
+      "order": 1,
+      "priority": "P0",
+      "dependsOn": [
+        "P2"
+      ],
+      "tasks": [
+        "F4.1",
+        "F4.2"
+      ],
+      "items": [
+        "A1",
+        "A2"
+      ],
+      "verification": {
+        "acceptance": "docs/acceptance/f4/2026-10-06.md",
+        "evidence": "docs/acceptance/f4/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(f4): 完成模块装配与类型契约验收",
+        "commit": "c22c47a816a698cd96b63bfbdb4c710be796a617"
+      },
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    },
+    {
+      "id": "G8",
+      "order": 2,
+      "priority": "P0",
+      "dependsOn": [
+        "F4"
+      ],
+      "tasks": [
+        "G8.1",
+        "G8.2"
+      ],
+      "items": [
+        "A1",
+        "B8"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g8/2026-10-06.md",
+        "evidence": "docs/acceptance/g8/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g8): 完成共享机制与应用玩法分层验收",
+        "commit": "7a5c521d888e964a979383f7b4ccf0809accd0f4"
+      }
+    },
+    {
+      "id": "U3",
+      "order": 3,
+      "priority": "P0",
+      "dependsOn": [
+        "G8"
+      ],
+      "tasks": [
+        "U3.1",
+        "U3.2"
+      ],
+      "items": [
+        "A3",
+        "A6"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/u3/2026-10-06.md",
+        "evidence": "docs/acceptance/u3/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(u3): 完成统一编辑操作与文档事务验收",
+        "commit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b"
+      }
+    },
+    {
+      "id": "F5",
+      "order": 4,
+      "priority": "P0",
+      "dependsOn": [
+        "U3"
+      ],
+      "tasks": [
+        "F5.1",
+        "F5.2",
+        "F5.3"
+      ],
+      "items": [
+        "A4",
+        "A5",
+        "B5"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/f5/2026-10-06.md",
+        "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收",
+        "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f"
+      }
+    },
+    {
+      "id": "U4",
+      "order": 5,
+      "priority": "P1",
+      "dependsOn": [
+        "F5"
+      ],
+      "tasks": [
+        "U4.1",
+        "U4.2",
+        "U4.3"
+      ],
+      "items": [
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/u4/2026-10-06.md",
+        "evidence": "docs/acceptance/u4/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(u4): 完成界面基础与设置体系验收",
+        "commit": "3451c5c7c44ec227d09033e35b079ec43151384a"
+      }
+    },
+    {
+      "id": "G9",
+      "order": 6,
+      "priority": "P1",
+      "dependsOn": [
+        "U4"
+      ],
+      "tasks": [
+        "G9.1",
+        "G9.2"
+      ],
+      "items": [
+        "A6",
+        "B4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g9/2026-10-06.md",
+        "evidence": "docs/acceptance/g9/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g9): 完成有界内容提案与模型接入验收",
+        "commit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188"
+      }
+    },
+    {
+      "id": "R7",
+      "order": 7,
+      "priority": "P1",
+      "dependsOn": [
+        "G9"
+      ],
+      "tasks": [
+        "R7.1",
+        "R7.2"
+      ],
+      "items": [
+        "B6",
+        "B7"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/r7/2026-10-06.md",
+        "evidence": "docs/acceptance/r7/evidence/2026-10-06/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(r7): 完成开发期重载与资产预览验收",
+        "commit": "56fc957c5898885784c98963f4227e1e5710fd31"
+      }
+    },
+    {
+      "id": "G10",
+      "order": 8,
+      "priority": "P2",
+      "dependsOn": [
+        "R7"
+      ],
+      "tasks": [
+        "G10.1",
+        "G10.2"
+      ],
+      "items": [
+        "C1"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g10/2026-10-07.md",
+        "evidence": "docs/acceptance/g10/evidence/2026-10-07/manifest.json",
+        "adoption": "adapted-adoption",
+        "commitTitle": "feat(g10): 完成程序化内容与文本动画原型验收",
+        "commit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137"
+      }
+    },
+    {
+      "id": "R8",
+      "order": 9,
+      "priority": "P2",
+      "dependsOn": [
+        "G10"
+      ],
+      "tasks": [
+        "R8.1",
+        "R8.2"
+      ],
+      "items": [
+        "C2"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/r8/2026-10-07.md",
+        "evidence": "docs/acceptance/r8/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(r8): 完成着色模块与算法组合原型验收",
+        "commit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514"
+      }
+    },
+    {
+      "id": "R9",
+      "order": 10,
+      "priority": "P2",
+      "dependsOn": [
+        "R8"
+      ],
+      "tasks": [
+        "R9.1",
+        "R9.2"
+      ],
+      "items": [
+        "C3"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/r9/2026-10-07.md",
+        "evidence": "docs/acceptance/r9/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(r9): 完成资源索引与可见性原型验收",
+        "commit": "17823b2215ad9c999c83c2cb29b7ba84aa692215"
+      }
+    },
+    {
+      "id": "G11",
+      "order": 11,
+      "priority": "P2",
+      "dependsOn": [
+        "R9"
+      ],
+      "tasks": [
+        "G11.1",
+        "G11.2"
+      ],
+      "items": [
+        "C4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g11/2026-10-07.md",
+        "evidence": "docs/acceptance/g11/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(g11): 完成脚本服务与生成绑定原型验收",
+        "commit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08"
+      }
+    },
+    {
+      "id": "P3",
+      "order": 12,
+      "priority": "P2",
+      "dependsOn": [
+        "G11"
+      ],
+      "tasks": [
+        "P3.1"
+      ],
+      "items": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7",
+        "B8",
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "F4.1",
+      "heading": "单向依赖与服务生命周期",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "F4.2",
+      "heading": "组件注册与属性描述",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "G8.1",
+      "heading": "系统装配与可配置控制",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "G8.2",
+      "heading": "通用交互与应用任务策略",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "U3.1",
+      "heading": "统一操作描述与入口",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "U3.2",
+      "heading": "文档版本、批量修改与历史",
+      "plan": "docs/plans/2026-10-06-engine-foundation-steps.md"
+    },
+    {
+      "id": "F5.1",
+      "heading": "观察注册与自动验证",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "F5.2",
+      "heading": "文本内容与生成来源",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "F5.3",
+      "heading": "统一开发命令入口",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.1",
+      "heading": "语义样式、尺度与控件",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.2",
+      "heading": "面板、上下文和选择服务",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "U4.3",
+      "heading": "类型化设置与来源优先级",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G9.1",
+      "heading": "模型客户端与进程协议",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G9.2",
+      "heading": "领域提案、校验与生产应用",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "R7.1",
+      "heading": "热重载服务与安全替换",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "R7.2",
+      "heading": "视图服务与资产缩略图",
+      "plan": "docs/plans/2026-10-06-ai-native-editor-steps.md"
+    },
+    {
+      "id": "G10.1",
+      "heading": "参数化几何与生成器适配",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G10.2",
+      "heading": "文本刚体骨骼与关键帧",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R8.1",
+      "heading": "工具链、共享类型与等价 Pass",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R8.2",
+      "heading": "策略组合与采用结论",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R9.1",
+      "heading": "资源访问与设备契约",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "R9.2",
+      "heading": "可见性、表面数据与规模基准",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G11.1",
+      "heading": "Lua 服务与绑定描述",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "G11.2",
+      "heading": "托管后端与生命周期原型",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    },
+    {
+      "id": "P3.1",
+      "heading": "双工作流与全部门禁",
+      "plan": "docs/plans/2026-10-06-engine-specialized-steps.md"
+    }
+  ],
+  "items": [
+    {
+      "id": "A1",
+      "name": "单向依赖与显式模块装配",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "单向依赖、服务所有权、显式装配和关闭",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "重复安装、反向依赖、销毁顺序",
+      "tasks": [
+        "F4.1",
+        "G8.1"
+      ],
+      "phases": [
+        "F4",
+        "G8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/cmake/TargetHelpers.cmake",
+        "src/Engine/Runtime/Interface/SceneContent.hpp",
+        "src/Modules/CMakeLists.txt"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ModuleAssembly",
+          "SystemRegistry"
+        ],
+        "interfaceFiles": [
+          "src/runtime/ModuleAssembly.hpp",
+          "src/runtime/SystemRegistry.hpp"
+        ],
+        "tests": [
+          "AzureEngine.ModuleAssembly",
+          "AzureEngine.SystemComposition",
+          "AzureEngine.ModuleBoundaries"
+        ],
+        "scope": "进程内模块装配与单向依赖采用。模块声明所有权、线程和关闭顺序。",
+        "verification": {
+          "acceptance": "docs/acceptance/g8/2026-10-06.md",
+          "evidence": "docs/acceptance/g8/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g8): 完成共享机制与应用玩法分层验收",
+          "commit": "7a5c521d888e964a979383f7b4ccf0809accd0f4"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEngine.ModuleAssembly",
+            "AzureEngine.SystemComposition",
+            "AzureEngine.ModuleBoundaries"
+          ],
+          "limits": [
+            "Windows 进程内装配，通用动态插件属于专项范围。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A2",
+      "name": "属性元数据与统一类型契约",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "稳定类型、范围、分类、权限和版本",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "字段漂移、非法输入、迁移",
+      "tasks": [
+        "F4.2"
+      ],
+      "phases": [
+        "F4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Reflection/PropertyMeta.hpp",
+        "src/Application/Editor/gkNextEditor/Panels/PropertyWidgets.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ComponentRegistry",
+          "Property"
+        ],
+        "interfaceFiles": [
+          "src/runtime/ComponentRegistry.hpp",
+          "src/reflection/Registry.hpp"
+        ],
+        "tests": [
+          "AzureEngine.ComponentRegistry",
+          "AzureEngine.MetadataGeneration",
+          "AzureEngine.RegisteredComponentHost"
+        ],
+        "scope": "稳定类型与属性元数据采用。编辑、工具和脚本共用校验规则。",
+        "verification": {
+          "acceptance": "docs/acceptance/f4/2026-10-06.md",
+          "evidence": "docs/acceptance/f4/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(f4): 完成模块装配与类型契约验收",
+          "commit": "c22c47a816a698cd96b63bfbdb4c710be796a617"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEngine.ComponentRegistry",
+            "AzureEngine.MetadataGeneration",
+            "AzureEngine.RegisteredComponentHost"
+          ],
+          "limits": [
+            "新增类型须注册版本和组件能力。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A3",
+      "name": "编辑命令、撤销与统一执行入口",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "同一操作入口、撤销、合并和分组",
+      "fitAndCost": "高，L",
+      "riskAndRequiredBehavior": "部分写入、入口差异、重做",
+      "tasks": [
+        "U3.1",
+        "U3.2"
+      ],
+      "phases": [
+        "U3"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Command/ICommand.hpp",
+        "src/Engine/Runtime/Command/CommandHistory.hpp",
+        "src/Application/Editor/gkNextEditor/EditorActionDispatcher.hpp",
+        "src/Application/Editor/gkNextEditor/Automation/EditorScriptExecutor.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "EditService",
+          "EditTransaction"
+        ],
+        "interfaceFiles": [
+          "src/editor/commands/EditService.hpp",
+          "src/editor/commands/EditTransaction.hpp"
+        ],
+        "tests": [
+          "AzureEditor.EditService",
+          "AzureEditor.EditTransaction",
+          "AzureEngine.EditorHost"
+        ],
+        "scope": "统一编辑操作与文档事务采用。批量恢复与版本拒绝由公共入口执行。",
+        "verification": {
+          "acceptance": "docs/acceptance/u3/2026-10-06.md",
+          "evidence": "docs/acceptance/u3/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(u3): 完成统一编辑操作与文档事务验收",
+          "commit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEditor.EditService",
+            "AzureEditor.EditTransaction",
+            "AzureEngine.EditorHost"
+          ],
+          "limits": [
+            "文档事务覆盖受控编辑操作，应用外部效果有独立恢复规则。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A4",
+      "name": "状态查询、条件等待和自动验证",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "查询、条件等待、输入、截图与报告",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "超时、替身偏离、模式差异",
+      "tasks": [
+        "F5.1"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/AgentQueries.hpp",
+        "src/Modules/NextValidation/AgentControlServer.cpp",
+        "src/Modules/NextValidation/NextValidationModule.cpp",
+        "src/Modules/NextValidation/SyntheticInput.cpp",
+        "tools/gnb/internal/validate/validate.go",
+        "assets/agentscripts/ui-foundation-editor-normal.agentscript.json"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ObservationRegistry"
+        ],
+        "interfaceFiles": [
+          "src/runtime/ObservationRegistry.hpp"
+        ],
+        "tests": [
+          "AzureEngine.Observation",
+          "AzureEditor.ObservationHost",
+          "AzureTools.ValidationProtocol",
+          "AzureEngine.ResourceFrameTrace"
+        ],
+        "scope": "注册查询与条件等待采用。生产状态在宿主线程读取。",
+        "verification": {
+          "acceptance": "docs/acceptance/f5/2026-10-06.md",
+          "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收",
+          "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEngine.Observation",
+            "AzureEditor.ObservationHost",
+            "AzureTools.ValidationProtocol",
+            "AzureEngine.ResourceFrameTrace"
+          ],
+          "limits": [
+            "本机控制通道使用回环地址与会话令牌。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A5",
+      "name": "文本内容与可追踪的资产生成",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "文本契约、输入、依赖、生成版本与输出",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "缓存失效、移动目录、重建失败",
+      "tasks": [
+        "F5.2"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/ScadLoader/FScadEvaluator.h",
+        "src/Modules/ScadLoader/FScadRig.h",
+        "assets/scad/proc/terrain_demo.scad"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "GeneratorRegistry",
+          "GenerationManifest"
+        ],
+        "interfaceFiles": [
+          "src/assets/GeneratorRegistry.hpp",
+          "src/assets/GenerationManifest.hpp"
+        ],
+        "tests": [
+          "AzureAssets.GenerationManifest",
+          "AzureAssets.ProceduralHost"
+        ],
+        "scope": "文本生成与来源清单采用。输入、版本、输出和许可形成可核对记录。",
+        "verification": {
+          "acceptance": "docs/acceptance/f5/2026-10-06.md",
+          "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收",
+          "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureAssets.GenerationManifest",
+            "AzureAssets.ProceduralHost"
+          ],
+          "limits": [
+            "生成器明确支持语义、输入规模和期限。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A6",
+      "name": "有界 AI 提案与领域验证",
+      "grade": "A",
+      "planningDecision": "accepted",
+      "designScope": "提案、基础版本、校验、取消与有限修复",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "过期写入、非法引用、预算耗尽",
+      "tasks": [
+        "U3.2",
+        "G9.2"
+      ],
+      "phases": [
+        "U3",
+        "G9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Application/Editor/ScadLibrary/AI/ScadAIContracts.hpp",
+        "src/Application/Editor/ScadLibrary/AI/ScadAIController.cpp",
+        "src/Application/Editor/ScadLibrary/AI/ScadAIValidationPolicy.hpp",
+        "src/Tests/Test_ScadAIController.cpp",
+        "src/Tests/Test_ScadAIAdapters.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ProposalController",
+          "IProposalAdapter",
+          "EditTransaction"
+        ],
+        "interfaceFiles": [
+          "src/editor/ai/ProposalController.hpp",
+          "src/editor/ai/ProposalContracts.hpp",
+          "src/editor/commands/EditTransaction.hpp"
+        ],
+        "tests": [
+          "AzureEditor.ProposalController",
+          "AzureEditor.ProposalAdapter",
+          "AzureEditor.ProposalHost",
+          "AzureEditor.EditTransaction"
+        ],
+        "scope": "有界提案与领域校验采用。候选关联基础版本，经授权操作和事务应用。",
+        "verification": {
+          "acceptance": "docs/acceptance/g9/2026-10-06.md",
+          "evidence": "docs/acceptance/g9/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g9): 完成有界内容提案与模型接入验收",
+          "commit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEditor.ProposalController",
+            "AzureEditor.ProposalAdapter",
+            "AzureEditor.ProposalHost",
+            "AzureEditor.EditTransaction"
+          ],
+          "limits": [
+            "候选通过领域校验，实体键鼠复核按实际执行报告。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B1",
+      "name": "UI 语义样式与基础组件",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "语义颜色、尺度、控件状态与样式作用域",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "DPI、样式栈、禁用与焦点",
+      "tasks": [
+        "U4.1"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/NextUI/UI/UiTheme.hpp",
+        "src/Modules/NextUI/UI/UiTheme.cpp",
+        "src/Modules/NextUI/UI/UiContext.hpp",
+        "src/Modules/NextUI/UI/UiScopes.hpp",
+        "src/Modules/NextUI/UI/UiWidgets.hpp",
+        "src/Modules/NextUI/UI/AppChrome.hpp",
+        "src/Modules/NextUI/ImGuiScaling.cpp",
+        "src/Modules/NextUI/UI/DesktopUI.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ThemeTokens",
+          "UiMetrics"
+        ],
+        "interfaceFiles": [
+          "src/editor/ui/ThemeTokens.hpp",
+          "src/editor/ui/UiMetrics.hpp"
+        ],
+        "tests": [
+          "AzureEditor.UiFoundation",
+          "AzureEditor.WorkspaceGpu"
+        ],
+        "scope": "语义样式、尺度与公共控件采用。字体和 DPI 验证来自生产工作区。",
+        "verification": {
+          "acceptance": "docs/acceptance/u4/2026-10-06.md",
+          "evidence": "docs/acceptance/u4/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(u4): 完成界面基础与设置体系验收",
+          "commit": "3451c5c7c44ec227d09033e35b079ec43151384a"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEditor.UiFoundation",
+            "AzureEditor.WorkspaceGpu"
+          ],
+          "limits": [
+            "Windows 编辑器与 Dear ImGui 范围。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B2",
+      "name": "编辑器上下文、面板和动作划分",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "面板、上下文、选择、动作与界面状态",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "上下文膨胀、拖放与布局恢复",
+      "tasks": [
+        "U4.2"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Application/Editor/gkNextEditor/EditorContext.hpp",
+        "src/Application/Editor/gkNextEditor/EditorUi.hpp",
+        "src/Application/Editor/gkNextEditor/Core/EditorUiState.hpp",
+        "src/Application/Editor/gkNextEditor/Overlays/TitleBarOverlay.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "PanelContext",
+          "SelectionService"
+        ],
+        "interfaceFiles": [
+          "src/editor/PanelContext.hpp",
+          "src/editor/SelectionService.hpp"
+        ],
+        "tests": [
+          "AzureEditor.PanelContext",
+          "AzureEditor.WorkspaceGpu"
+        ],
+        "scope": "面板上下文与选择服务采用。文档修改消费同一编辑服务。",
+        "verification": {
+          "acceptance": "docs/acceptance/u4/2026-10-06.md",
+          "evidence": "docs/acceptance/u4/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(u4): 完成界面基础与设置体系验收",
+          "commit": "3451c5c7c44ec227d09033e35b079ec43151384a"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEditor.PanelContext",
+            "AzureEditor.WorkspaceGpu"
+          ],
+          "limits": [
+            "面板消费受限文档视图和规定操作。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B3",
+      "name": "类型化控制变量与配置来源",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "类型化设置、来源、范围和持久化",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "优先级、线程、生效时机",
+      "tasks": [
+        "U4.3"
+      ],
+      "phases": [
+        "U4"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Config/CVarSystem.hpp",
+        "src/Modules/DevTools/CVarEditorPanel.cpp",
+        "src/Tests/Test_CVarSystem.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "SettingRegistry",
+          "SettingSource"
+        ],
+        "interfaceFiles": [
+          "src/foundation/SettingRegistry.hpp"
+        ],
+        "tests": [
+          "AzureEngine.SettingRegistry",
+          "AzureEngine.SettingsOverlay",
+          "AzureEditor.SettingsHost"
+        ],
+        "scope": "类型化设置与来源优先级采用。持久化偏好和帧边界应用各有归属。",
+        "verification": {
+          "acceptance": "docs/acceptance/u4/2026-10-06.md",
+          "evidence": "docs/acceptance/u4/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(u4): 完成界面基础与设置体系验收",
+          "commit": "3451c5c7c44ec227d09033e35b079ec43151384a"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEngine.SettingRegistry",
+            "AzureEngine.SettingsOverlay",
+            "AzureEditor.SettingsHost"
+          ],
+          "limits": [
+            "启动专用设置需重新启动生效。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B4",
+      "name": "模型接入的独立进程与协议",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "可选模型客户端、进程协议与领域规则",
+      "fitAndCost": "中高，L",
+      "riskAndRequiredBehavior": "协议、服务缺失、取消与期限",
+      "tasks": [
+        "G9.1",
+        "G9.2"
+      ],
+      "phases": [
+        "G9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/NextAI/AIService.hpp",
+        "src/Modules/NextAI/GnbClient/GnbAIClient.hpp",
+        "tools/gnb/internal/ai/bridge/bridge.go",
+        "tools/tests/fixtures/gnb-ai-protocol/v2/handshake.ndjson",
+        "src/Tests/Test_GnbAIClient.cpp",
+        "docs/designs/nextai-product-focused-architecture.md",
+        "docs/designs/gnb-ai-bridge-protocol-v2.md"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "IModelTransport",
+          "ModelClient",
+          "IProposalAdapter"
+        ],
+        "interfaceFiles": [
+          "src/ai/ModelClient.hpp",
+          "src/editor/ai/ProposalContracts.hpp"
+        ],
+        "tests": [
+          "AzureAI.ModelProtocol",
+          "AzureAI.Bridge",
+          "AzureEditor.ProposalController"
+        ],
+        "scope": "独立模型进程与版本化协议采用。可选服务使用固定响应完成自动验收。",
+        "verification": {
+          "acceptance": "docs/acceptance/g9/2026-10-06.md",
+          "evidence": "docs/acceptance/g9/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g9): 完成有界内容提案与模型接入验收",
+          "commit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureAI.ModelProtocol",
+            "AzureAI.Bridge",
+            "AzureEditor.ProposalController"
+          ],
+          "limits": [
+            "实际云模型输出质量未作为自动验收依据。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B5",
+      "name": "可组合的构建与验证命令行",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "薄命令入口、目标选择、退出码与报告",
+      "fitAndCost": "高，M",
+      "riskAndRequiredBehavior": "配置漂移、并发构建、工具膨胀",
+      "tasks": [
+        "F5.3"
+      ],
+      "phases": [
+        "F5"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "tools/gnb/README.md",
+        "tools/gnb/internal/validate/validate.go",
+        "src/Application/Render/gkNextMinimalRenderer/CMakeLists.txt"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "runtime_command",
+          "control"
+        ],
+        "interfaceFiles": [
+          "tools/azure.py"
+        ],
+        "tests": [
+          "AzureTools.Cli",
+          "AzureTools.ValidationProtocol"
+        ],
+        "scope": "薄命令入口采用。构建、查询、编辑与验证经生产命令执行。",
+        "verification": {
+          "acceptance": "docs/acceptance/f5/2026-10-06.md",
+          "evidence": "docs/acceptance/f5/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收",
+          "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureTools.Cli",
+            "AzureTools.ValidationProtocol"
+          ],
+          "limits": [
+            "本机命令工具，模型凭据归接入服务。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B6",
+      "name": "热重载的接口与模块边界",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "开发期热重载、状态与安全资源替换",
+      "fitAndCost": "高，M 至 L",
+      "riskAndRequiredBehavior": "在途资源、编译失败、退出释放",
+      "tasks": [
+        "R7.1"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/ShaderHotReload.hpp",
+        "src/Modules/LiveCoding/LiveCodingModule.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "IShaderHotReloader",
+          "ShaderHotReloader"
+        ],
+        "interfaceFiles": [
+          "src/render/IShaderHotReloader.hpp",
+          "src/devtools/ShaderHotReloader.hpp"
+        ],
+        "tests": [
+          "AzureRender.HotReload",
+          "AzurePlatform.ProcessRunner",
+          "AzureEditor.DevtoolsHost"
+        ],
+        "scope": "重载契约与开发期模块边界采用。成功候选在安全边界替换资源。",
+        "verification": {
+          "acceptance": "docs/acceptance/r7/2026-10-06.md",
+          "evidence": "docs/acceptance/r7/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(r7): 完成开发期重载与资产预览验收",
+          "commit": "56fc957c5898885784c98963f4227e1e5710fd31"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureRender.HotReload",
+            "AzurePlatform.ProcessRunner",
+            "AzureEditor.DevtoolsHost"
+          ],
+          "limits": [
+            "开发期着色重载；通用代码热替换属于专项范围。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B7",
+      "name": "离屏视图、缩略图与按需更新",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "视图句柄、相机覆盖、缩略图与按需调度",
+      "fitAndCost": "中高，L",
+      "riskAndRequiredBehavior": "历史串扰、尺寸、驻留资源",
+      "tasks": [
+        "R7.2"
+      ],
+      "phases": [
+        "R7"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/RenderViews/OffscreenRenderViewController.hpp",
+        "src/Application/Editor/Common/Preview/AssetThumbnailRenderer.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "RenderViewService",
+          "AssetThumbnailService"
+        ],
+        "interfaceFiles": [
+          "src/render/RenderViewService.hpp",
+          "src/editor/preview/AssetThumbnailService.hpp"
+        ],
+        "tests": [
+          "AzureRender.RenderView",
+          "AzureEditor.Thumbnail",
+          "AzureRender.PreviewHost"
+        ],
+        "scope": "独立视图和有界缩略图缓存采用。视口、预览与缓存具有独立生命周期。",
+        "verification": {
+          "acceptance": "docs/acceptance/r7/2026-10-06.md",
+          "evidence": "docs/acceptance/r7/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(r7): 完成开发期重载与资产预览验收",
+          "commit": "56fc957c5898885784c98963f4227e1e5710fd31"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureRender.RenderView",
+            "AzureEditor.Thumbnail",
+            "AzureRender.PreviewHost"
+          ],
+          "limits": [
+            "容量、色彩传递与完成后释放遵守视图契约。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "B8",
+      "name": "共享机制与应用玩法的分层",
+      "grade": "B",
+      "planningDecision": "accepted",
+      "designScope": "核心、共享机制与应用玩法的分层",
+      "fitAndCost": "高，L",
+      "riskAndRequiredBehavior": "任务兼容、动作绑定、系统装配",
+      "tasks": [
+        "G8.1",
+        "G8.2"
+      ],
+      "phases": [
+        "G8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Gameplay/CMakeLists.txt",
+        "src/Gameplay/Character/CharacterActor.h",
+        "src/Gameplay/AI/NavGrid.h"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "contract",
+        "regression-evidence",
+        "reuse-evidence"
+      ],
+      "implementation": {
+        "interfaces": [
+          "SystemRegistry",
+          "InteractionPolicy"
+        ],
+        "interfaceFiles": [
+          "src/runtime/SystemRegistry.hpp",
+          "src/runtime/InteractionRuntime.hpp"
+        ],
+        "tests": [
+          "AzureEngine.SystemComposition",
+          "AzureEngine.SceneInspectorHost",
+          "AzureEngine.PlayablePlayer"
+        ],
+        "scope": "共享机制与应用规则分层采用。探索与检视项目以配置组合各自行为。",
+        "verification": {
+          "acceptance": "docs/acceptance/g8/2026-10-06.md",
+          "evidence": "docs/acceptance/g8/evidence/2026-10-06/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g8): 完成共享机制与应用玩法分层验收",
+          "commit": "7a5c521d888e964a979383f7b4ccf0809accd0f4"
+        },
+        "riskResolution": {
+          "tests": [
+            "AzureEngine.SystemComposition",
+            "AzureEngine.SceneInspectorHost",
+            "AzureEngine.PlayablePlayer"
+          ],
+          "limits": [
+            "具体任务规则归应用脚本，核心调度通过配置装配。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "C1",
+      "name": "程序化几何与文本骨骼动画",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "参数化几何、刚体骨骼与文本动画",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "语义、坐标、CSG、复杂度",
+      "tasks": [
+        "G10.1",
+        "G10.2"
+      ],
+      "phases": [
+        "G10"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Modules/ScadLoader/FScadCsg.cpp",
+        "src/Modules/ScadLoader/FScadRig.h",
+        "src/Tests/Test_ScadRig.cpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ProceduralGeometryRequest",
+          "RigTextRequest",
+          "IGeometryCompiler"
+        ],
+        "tests": [
+          "AzureAssets.ProceduralGeometry",
+          "AzureAssets.RigText",
+          "AzureAssets.ProceduralProcess",
+          "AzureAssets.ProceduralHost",
+          "AzureEditor.ProposalAdapter"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/g10/2026-10-07.md",
+          "evidence": "docs/acceptance/g10/evidence/2026-10-07/manifest.json",
+          "adoption": "adapted-adoption",
+          "commitTitle": "feat(g10): 完成程序化内容与文本动画原型验收",
+          "commit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137"
+        },
+        "scope": "versioned bounded JSON geometry, closed-solid booleans and rigid animation; standard glTF outputs",
+        "interfaceFiles": [
+          "src/assets/generators/ProceduralContracts.hpp",
+          "src/assets/generators/RigTextContracts.hpp"
+        ],
+        "riskResolution": {
+          "tests": [
+            "AzureAssets.ProceduralGeometry",
+            "AzureAssets.RigText",
+            "AzureAssets.ProceduralProcess",
+            "AzureAssets.ProceduralHost",
+            "AzureEditor.ProposalAdapter"
+          ],
+          "limits": [
+            "受限几何与刚体动画，完整 SCAD 语义属于专项范围。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "name": "Slang 模块与着色算法组合",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "着色模块、共享类型与算法组合",
+      "fitAndCost": "中，L 至 XL",
+      "riskAndRequiredBehavior": "编译、SPIR-V、布局与性能",
+      "tasks": [
+        "R8.1",
+        "R8.2"
+      ],
+      "phases": [
+        "R8"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "assets/shaders/common/Interfaces.slang",
+        "assets/shaders/common/RayTracers.slang",
+        "assets/shaders/common/PathTracingRenderer.slang",
+        "assets/shaders/Core.PathTracing.comp.slang"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ],
+      "implementation": {
+        "interfaces": [
+          "ShaderCompileRequest",
+          "ShaderCompileResult",
+          "BloomParameters",
+          "IBlockSamples"
+        ],
+        "tests": [
+          "AzureRender.ShaderModule",
+          "AzureRender.ShaderComposition",
+          "AzureTools.ShaderModule",
+          "AzureTools.ShaderTypes",
+          "AzureTools.ShaderComposition"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/r8/2026-10-07.md",
+          "evidence": "docs/acceptance/r8/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(r8): 完成着色模块与算法组合原型验收",
+          "commit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514"
+        },
+        "scope": "checked shared scalar types; optional two-strategy Bloom Slang module; default GLSL renderer",
+        "interfaceFiles": [
+          "tools/compile_shader_module.py",
+          "src/render/ShaderSharedTypes.hpp",
+          "shaders/modules/interfaces/BlockSamples.slang"
+        ],
+        "riskResolution": {
+          "tests": [
+            "AzureRender.ShaderModule",
+            "AzureRender.ShaderComposition",
+            "AzureTools.ShaderModule",
+            "AzureTools.ShaderTypes",
+            "AzureTools.ShaderComposition"
+          ],
+          "limits": [
+            "可选两策略 Bloom 原型，默认 GLSL 渲染。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "name": "Bindless 与 GPU 驱动可见性",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "资源索引、设备能力与 GPU 可见性数据流",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "同步、镜像、蒙皮、透明与拾取",
+      "tasks": [
+        "R9.1",
+        "R9.2"
+      ],
+      "phases": [
+        "R9"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "assets/shaders/common/BasicTypes.slang",
+        "assets/shaders/common/BindlessTexture.slang",
+        "src/Engine/Rendering/PipelineCommon/VisibilityBufferLayout.hpp",
+        "src/Engine/Rendering/VulkanBaseRenderer.cpp",
+        "src/Engine/Assets/GPU/Texture.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ],
+      "implementation": {
+        "interfaces": [
+          "DeviceCapabilities",
+          "ResourceAccessProfile",
+          "ResourceIndexTable",
+          "VisibilityPrototype",
+          "GpuSurfaceIdentity",
+          "SkinningBatch",
+          "visibleInstanceSpans"
+        ],
+        "tests": [
+          "AzureRender.ResourceAccessProfile",
+          "AzureRender.VisibilityPrototype",
+          "AzureRender.VisibilityGpu",
+          "AzureTools.VisibilityBenchmark",
+          "AzureRender.GpuCapabilityReport",
+          "AzureRender.NullRhiPass",
+          "AzureRender.SkinningBatch",
+          "AzureRender.SkinningGpu",
+          "AzureRender.ViewBatching"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/r9/2026-10-07.md",
+          "evidence": "docs/acceptance/r9/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(r9): 完成资源索引与可见性原型验收",
+          "commit": "17823b2215ad9c999c83c2cb29b7ba84aa692215"
+        },
+        "scope": "queried resource capacity and fence generations adopted; optional frustum/surface prototype; CPU filtering retained; view-owned shadow spans and independent deformation batches; Hi-Z candidate",
+        "interfaceFiles": [
+          "src/render/ResourceAccessProfile.hpp",
+          "src/render/ResourceIndexTable.hpp",
+          "src/render/VisibilityPrototype.hpp",
+          "src/render/SkinningBatch.hpp",
+          "src/scene/RenderBatching.hpp"
+        ],
+        "riskResolution": {
+          "tests": [
+            "AzureRender.ResourceAccessProfile",
+            "AzureRender.VisibilityPrototype",
+            "AzureRender.VisibilityGpu",
+            "AzureTools.VisibilityBenchmark",
+            "AzureRender.GpuCapabilityReport",
+            "AzureRender.NullRhiPass",
+            "AzureRender.SkinningBatch",
+            "AzureRender.SkinningGpu",
+            "AzureRender.ViewBatching"
+          ],
+          "limits": [
+            "资源契约采用，可见性原型保留；CPU 筛选参与正式提交。"
+          ]
+        }
+      }
+    },
+    {
+      "id": "C4",
+      "name": "可替换脚本后端与生成绑定",
+      "grade": "C",
+      "planningDecision": "accepted",
+      "designScope": "脚本服务、版本化绑定与可替换后端",
+      "fitAndCost": "中，XL",
+      "riskAndRequiredBehavior": "ABI、句柄、异常、重载与恢复",
+      "tasks": [
+        "G11.1",
+        "G11.2"
+      ],
+      "phases": [
+        "G11"
+      ],
+      "finalClosure": "P3.1",
+      "referenceFiles": [
+        "src/Engine/Runtime/Interface/ScriptRuntime.hpp",
+        "src/Modules/NextDotNet/NextDotNetModule.cpp",
+        "src/Modules/NextDotNet/EngineApi.def.h",
+        "src/Application/Editor/gkNextEditor/Core/EditorPlaySession.hpp"
+      ],
+      "evaluationReference": "docs/research/2026-10-06-gknextengine.md",
+      "adoptionEvidenceRequired": [
+        "runnable-prototype",
+        "comparison-evidence",
+        "adoption-decision"
+      ],
+      "implementation": {
+        "interfaces": [
+          "IScriptRuntime",
+          "ScriptRuntimeRegistry",
+          "ScriptBindingHost",
+          "ScriptHostApi",
+          "ScriptHostSession",
+          "ManagedScriptRuntime"
+        ],
+        "tests": [
+          "AzureTools.ScriptBindings",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ScriptInterop",
+          "AzureEngine.ScriptRuntime",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/g11/2026-10-07.md",
+          "evidence": "docs/acceptance/g11/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(g11): 完成脚本服务与生成绑定原型验收",
+          "commit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08"
+        },
+        "scope": "shared service and generated description adopted; optional trusted CoreCLR and NativeAOT prototypes; Lua default",
+        "interfaceFiles": [
+          "src/runtime/IScriptRuntime.hpp",
+          "src/runtime/ScriptRuntimeRegistry.hpp",
+          "src/scripting/ScriptBindingHost.hpp",
+          "src/scripting/ScriptInterop.hpp",
+          "src/scripting/ScriptHostSession.hpp",
+          "src/scripting/dotnet/ManagedScriptRuntime.hpp"
+        ],
+        "riskResolution": {
+          "tests": [
+            "AzureTools.ScriptBindings",
+            "AzureEngine.ScriptBackendContract",
+            "AzureEngine.ScriptInterop",
+            "AzureEngine.ScriptRuntime",
+            "AzureEngine.ManagedModule.coreclr",
+            "AzureEngine.ManagedModule.nativeaot",
+            "AzureEngine.ManagedRuntime.coreclr",
+            "AzureEngine.ManagedRuntime.nativeaot",
+            "AzureEngine.ScriptBackendParity.lua",
+            "AzureEngine.ManagedWorkflows.coreclr",
+            "AzureEngine.ManagedWorkflows.nativeaot"
+          ],
+          "limits": [
+            "默认 Lua；托管内容受信任；CoreCLR 依赖外部运行库。"
+          ]
+        }
+      }
+    }
+  ],
+  "historicalByteForms": {
+    "F4": {
+      "Project/AzureRender/src/ecs/World.hpp": {
+        "gitCommit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+        "rawSha256": "52893574c25e3bb8535f51c129bed1ed4d8a88024f3097a7e20302f03d5e165e",
+        "normalizedSha256": "5ed7d8d27894120c88186f2562405741223a6f6049e1448c0afa0ae37d28802f",
+        "crlfLineRanges": [
+          [
+            0,
+            25
+          ],
+          [
+            33,
+            162
+          ]
+        ],
+        "lineCount": 162
+      }
+    },
+    "G8": {
+      "Project/AzureRender/src/runtime/Project.cpp": {
+        "gitCommit": "7a5c521d888e964a979383f7b4ccf0809accd0f4",
+        "rawSha256": "99540d43b1d4ff3be43485666581eeed5fab1408acae9a1c7f992c26176bc283",
+        "normalizedSha256": "b20a239f9cee943fa2165b415509a24de178e509f048a04b2b6b87f74d01a7d5",
+        "crlfLineRanges": [
+          [
+            0,
+            65
+          ],
+          [
+            94,
+            179
+          ]
+        ],
+        "lineCount": 179
+      },
+      "Project/AzureRender/src/runtime/Project.hpp": {
+        "gitCommit": "7a5c521d888e964a979383f7b4ccf0809accd0f4",
+        "rawSha256": "e73f92d1a7eca5ea7163b8856fb4f090d506edd9c7523983b648b06f1c2c1199",
+        "normalizedSha256": "e3155de3c3196144d26bfd02d392f603ebb40eeff88a5cbe96a53fc97785a984",
+        "crlfLineRanges": [
+          [
+            0,
+            15
+          ],
+          [
+            17,
+            22
+          ]
+        ],
+        "lineCount": 22
+      }
+    },
+    "F5": {
+      "Project/AzureRender/src/app/AzureRenderOptions.hpp": {
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "rawSha256": "0dcc3b66ab0bf5002b4ab3f2c0bb9b39743e9b0fb1160bea3c10986fcd870f88",
+        "normalizedSha256": "3620661d92d2cf90fa7baf787aa2b4bc82b77a8210818f32902593af92f83162",
+        "crlfLineRanges": [
+          [
+            0,
+            15
+          ],
+          [
+            17,
+            70
+          ]
+        ],
+        "lineCount": 70
+      },
+      "Project/AzureRender/src/editor/EditorContext.hpp": {
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "rawSha256": "235715e7681a80041bdcfffdb2b130b93c5a01325b5d8231e7ed2997eae400ca",
+        "normalizedSha256": "2b2d7e2d21abf3bd93525eb34432ad830587b947efc3a057b9b84c6f868f03d8",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            22,
+            32
+          ],
+          [
+            36,
+            37
+          ],
+          [
+            38,
+            39
+          ],
+          [
+            44,
+            50
+          ],
+          [
+            59,
+            170
+          ],
+          [
+            173,
+            199
+          ],
+          [
+            208,
+            217
+          ]
+        ],
+        "lineCount": 217
+      }
+    },
+    "U4": {
+      "Project/AzureRender/src/app/AzureRenderOptions.hpp": {
+        "gitCommit": "3451c5c7c44ec227d09033e35b079ec43151384a",
+        "rawSha256": "82236d3d7cc657f200e2c826a47179d020d55779244253b920592a1b71c55d3c",
+        "normalizedSha256": "c1bd11331a254f43b9209c25f95c34018d78dda3f86f6098040bb54fadb0378f",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            18,
+            73
+          ]
+        ],
+        "lineCount": 73
+      },
+      "Project/AzureRender/tests/UiFoundationTests.cpp": {
+        "gitCommit": "3451c5c7c44ec227d09033e35b079ec43151384a",
+        "rawSha256": "6415695afb0daf38ab66ad91cd93f01d5dcfd5f719a70e72c4bc4a3597f96b33",
+        "normalizedSha256": "96e472d98eb8caf8c9f9f17e0706be085325055f2650a92c3430c6c993f4f3aa",
+        "crlfLineRanges": [
+          [
+            30,
+            31
+          ]
+        ],
+        "lineCount": 31
+      },
+      "Project/AzureRender/src/editor/EditorContext.hpp": {
+        "gitCommit": "3451c5c7c44ec227d09033e35b079ec43151384a",
+        "rawSha256": "103dba491aad1c24b56fe9a01d4f492e7ecba1b9a5addca1017eaff0bbc8e5d2",
+        "normalizedSha256": "e6455b910ad20be5b7db2cf8402253c079ea4b5da7549aed53acb0bd2ee88b9b",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            22,
+            32
+          ],
+          [
+            36,
+            38
+          ],
+          [
+            39,
+            40
+          ],
+          [
+            45,
+            51
+          ],
+          [
+            60,
+            171
+          ],
+          [
+            174,
+            200
+          ],
+          [
+            209,
+            218
+          ]
+        ],
+        "lineCount": 218
+      }
+    },
+    "G9": {
+      "Project/AzureRender/src/app/AzureRenderOptions.hpp": {
+        "gitCommit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188",
+        "rawSha256": "d7e578e1762be9fa4efc2a23e7bcc4922c5977d8768e6d6e50807da00dae0d80",
+        "normalizedSha256": "de19425b0de47449eb34c197dd4760dca3fa9638e2648ac751e2d8aa008f6277",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            18,
+            74
+          ]
+        ],
+        "lineCount": 74
+      }
+    },
+    "R7": {
+      "Project/AzureRender/src/app/AzureRenderApp.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "c617febdbfd21136732fe4e748a500554cfdb2515a68345e0fc98e77f0533489",
+        "normalizedSha256": "8269ff8c0444437fc6f8031b3f576cd978b54a2542cda4c9645b4af9d92fb0c3",
+        "crlfLineRanges": [
+          [
+            0,
+            26
+          ],
+          [
+            32,
+            64
+          ],
+          [
+            84,
+            416
+          ],
+          [
+            419,
+            481
+          ]
+        ],
+        "lineCount": 481
+      },
+      "Project/AzureRender/src/app/AzureRenderDevtools.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "e7365c162a7504f2ea47bc834edb834340c208367c39891f71a626df4a394123",
+        "normalizedSha256": "8ed42213e10fa1505c03a3ff2f2f18d704dd19c91facb1e7cf2028847caee5b9",
+        "crlfLineRanges": [
+          [
+            0,
+            116
+          ],
+          [
+            121,
+            205
+          ]
+        ],
+        "lineCount": 205
+      },
+      "Project/AzureRender/src/app/AzureRenderFrame.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "5a0bfa86964636ab880c519a81ea117ca080c66f531fd4b5485b29ad18c63a7a",
+        "normalizedSha256": "c58d77d7eba52c2d3748afd2a805b50cda08d2ef932053ecdbbe62b0d0a54fac",
+        "crlfLineRanges": [
+          [
+            0,
+            48
+          ],
+          [
+            54,
+            71
+          ],
+          [
+            75,
+            145
+          ],
+          [
+            147,
+            196
+          ],
+          [
+            200,
+            216
+          ],
+          [
+            218,
+            880
+          ],
+          [
+            882,
+            924
+          ],
+          [
+            929,
+            1204
+          ]
+        ],
+        "lineCount": 1204
+      },
+      "Project/AzureRender/src/app/AzureRenderGameplay.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "582f6124a879d2d9d41d44d1af0b1a6919143298a7af9c832db2171e7a027be0",
+        "normalizedSha256": "de6e4de3547801cb7b1ba805d02db8c70e0604ed5499fafca2ff71986f35fc11",
+        "crlfLineRanges": [
+          [
+            0,
+            57
+          ],
+          [
+            61,
+            82
+          ],
+          [
+            85,
+            147
+          ]
+        ],
+        "lineCount": 147
+      },
+      "Project/AzureRender/src/app/AzureRenderSupport.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "807c73624503dc42639e2edf7df4b222b196e2b120300e23433437117f98a3c0",
+        "normalizedSha256": "41030b4f5e0388d75e680db840de7f5972be75b9a869b0e08d4d86ef60b551e7",
+        "crlfLineRanges": [
+          [
+            0,
+            128
+          ],
+          [
+            132,
+            755
+          ]
+        ],
+        "lineCount": 755
+      },
+      "Project/AzureRender/src/app/AzureRenderValidation.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "8a5399b1777b971c6df8bd1b9a7f56e414f6d819d4fd6fb9afd26f9ca0a032ba",
+        "normalizedSha256": "07f2bbc03295df915eb057ea7ea96d8377e418504627efe6c572b8bd8595cb12",
+        "crlfLineRanges": [
+          [
+            0,
+            40
+          ],
+          [
+            46,
+            124
+          ]
+        ],
+        "lineCount": 124
+      },
+      "Project/AzureRender/src/editor/EditorContext.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "8e3cffbb5930b8325525b28f73ae86a30aac1551ee538c9e0f92001292963edd",
+        "normalizedSha256": "29eb0d4ade1a96341c0b68eb62bff45b4b240cbc2487b49777e546ceb8c6d62b",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            22,
+            32
+          ],
+          [
+            36,
+            38
+          ],
+          [
+            39,
+            40
+          ],
+          [
+            45,
+            51
+          ],
+          [
+            60,
+            94
+          ],
+          [
+            96,
+            172
+          ],
+          [
+            175,
+            201
+          ],
+          [
+            210,
+            219
+          ]
+        ],
+        "lineCount": 219
+      },
+      "Project/AzureRender/src/editor/EditorSession.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "93181fc85e492c51398178c2f1c3e7345d23539002324b3d8e03a2ea84358665",
+        "normalizedSha256": "ab63914315898fbe922323ab1d8d91340d6993365547b6cbcd89286e4f661689",
+        "crlfLineRanges": [
+          [
+            0,
+            12
+          ],
+          [
+            14,
+            67
+          ],
+          [
+            70,
+            93
+          ],
+          [
+            95,
+            115
+          ]
+        ],
+        "lineCount": 115
+      },
+      "Project/AzureRender/src/editor/EditorToolbar.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "89e4f59b69319f88c737a4e0cd02a8a5e5329950b2d6a347e3888257c3c711c8",
+        "normalizedSha256": "0c00bfdc9a282d1b535e25d00cf8095d0b22bc484939551a44463c4420091412",
+        "crlfLineRanges": [
+          [
+            0,
+            43
+          ],
+          [
+            44,
+            46
+          ],
+          [
+            48,
+            96
+          ]
+        ],
+        "lineCount": 96
+      },
+      "Project/AzureRender/src/editor/ImGuiEditorLayer.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "3763002a6bebedd14a1aaff4e57b911d95f52a96af5306495f903de6b9fa5923",
+        "normalizedSha256": "5ada6f00ab776e5efb85f81a36a4869ad9548bd0e85a6b3e322edc32454b24f8",
+        "crlfLineRanges": [
+          [
+            0,
+            237
+          ],
+          [
+            240,
+            274
+          ],
+          [
+            275,
+            320
+          ],
+          [
+            333,
+            629
+          ],
+          [
+            631,
+            646
+          ]
+        ],
+        "lineCount": 646
+      },
+      "Project/AzureRender/src/editor/ImGuiEditorLayer.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "955606fc0e977082cf9263bf896ae9e4c010fad34debd859aaa32f4fbcfdf295",
+        "normalizedSha256": "3ca236ce93babceb7aef22c3312da3935422e6e8fbfb56c64468c0d2809ad8b3",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            18,
+            41
+          ],
+          [
+            44,
+            64
+          ],
+          [
+            70,
+            102
+          ],
+          [
+            106,
+            128
+          ],
+          [
+            131,
+            134
+          ],
+          [
+            137,
+            144
+          ]
+        ],
+        "lineCount": 144
+      },
+      "Project/AzureRender/src/editor/commands/EditorOperations.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "45d309e515d79ed4a39c7bd38c66e1f00f647195b3890824fada1a510a4c6819",
+        "normalizedSha256": "a7f55360a9be73160183e7691ebe26049b925d9d43fa0117dfdb60539a60caef",
+        "crlfLineRanges": [
+          [
+            0,
+            159
+          ],
+          [
+            161,
+            164
+          ]
+        ],
+        "lineCount": 164
+      },
+      "Project/AzureRender/src/editor/panels/CapturePanel.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "274be3a302f25a2c7da57d0f87eff092c32910d06e8accf99a57ba6efb9cb456",
+        "normalizedSha256": "516ddecf732ddafc9e020308654c2cafd3daf77b0b2ccb53f26e113e54cbb19b",
+        "crlfLineRanges": [
+          [
+            0,
+            36
+          ],
+          [
+            50,
+            55
+          ]
+        ],
+        "lineCount": 55
+      },
+      "Project/AzureRender/src/editor/panels/ConsolePanel.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "f7ae1cacba3f0f03b7b14c2fd417a38a9cd914c03928cee693b75b16a5549e6d",
+        "normalizedSha256": "2a8bad1f91d0e6eef0e319ac0bbbf534bb8244a99b1651c6756ba7efaa9022fb",
+        "crlfLineRanges": [
+          [
+            0,
+            28
+          ],
+          [
+            37,
+            82
+          ]
+        ],
+        "lineCount": 82
+      },
+      "Project/AzureRender/src/rhi/GpuAllocator.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "27273d2476eee74b8241b9279aab7975c5ce259d3999835753e779c39017560b",
+        "normalizedSha256": "1c33a8ac4a97bc837c6edbda8dbc8971a4996468a1257ab3a43b84a244c019d7",
+        "crlfLineRanges": [
+          [
+            0,
+            226
+          ]
+        ],
+        "lineCount": 231
+      },
+      "Project/AzureRender/src/rhi/GpuAllocator.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "0feed091ba415fb55e2514ef02189945edd671e4e8d19554828d2552602de970",
+        "normalizedSha256": "cead83c3e1c0dc332e3e4e33036600f42df21beacadc03f39c58a6135226d632",
+        "crlfLineRanges": [
+          [
+            0,
+            14
+          ],
+          [
+            17,
+            77
+          ]
+        ],
+        "lineCount": 77
+      },
+      "Project/AzureRender/src/rhi/IGpuAllocator.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "f04e81e19147ad02fcd84aabdcd0ca5a880943f4ad43893ac6e35d8252bb42cf",
+        "normalizedSha256": "2b80ad984f49508c4b93936ef50225eeebdc519fade22853c8c3cfa57a2552d7",
+        "crlfLineRanges": [
+          [
+            0,
+            72
+          ],
+          [
+            73,
+            75
+          ],
+          [
+            77,
+            83
+          ]
+        ],
+        "lineCount": 83
+      },
+      "Project/AzureRender/src/rhi/NullRhi.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "fc74a567a824c12d69f65832fb5ba457cb06efb9c1203cf8860de46de7d4446c",
+        "normalizedSha256": "d40ff7e3bb18a56fdea4f87cb2d401356d6dcbff4540ecd832b16cf7b306a26f",
+        "crlfLineRanges": [
+          [
+            0,
+            20
+          ],
+          [
+            23,
+            190
+          ]
+        ],
+        "lineCount": 190
+      },
+      "Project/AzureRender/src/rhi/VulkanRhi.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "767b96520ed4b025d83acd5d12b7562fec6bfa18d5db03ca00d7931b39d20bb4",
+        "normalizedSha256": "8ef31004e2632d530063e09aacb8e32432cc7cdd0fcbe1adc0ecda72ffd168c2",
+        "crlfLineRanges": [
+          [
+            0,
+            453
+          ],
+          [
+            454,
+            657
+          ],
+          [
+            660,
+            661
+          ],
+          [
+            666,
+            674
+          ],
+          [
+            675,
+            676
+          ],
+          [
+            681,
+            958
+          ]
+        ],
+        "lineCount": 958
+      },
+      "Project/AzureRender/src/runtime/EngineSettings.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "a15c06ddcee83eddd67234b8a1a3e3f18f129f3d3de42d9dfac5cf231deab86d",
+        "normalizedSha256": "405cbe5cc82456b8661982581ed112700f1476ab8e903e7e87bee97e84f4c262",
+        "crlfLineRanges": [
+          [
+            0,
+            5
+          ],
+          [
+            7,
+            28
+          ]
+        ],
+        "lineCount": 28
+      },
+      "Project/AzureRender/src/scenes/BlackholeSceneRenderer.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "2d880d4204425ce677312a4fcd02092dfdce9016955e34b22e09c745521e1f72",
+        "normalizedSha256": "c0e696a090c5da123a00c273cc2bd1b35171c4e87a0820dc66d81c5fc3f933bf",
+        "crlfLineRanges": [
+          [
+            0,
+            232
+          ],
+          [
+            234,
+            281
+          ],
+          [
+            288,
+            1297
+          ]
+        ],
+        "lineCount": 1297
+      },
+      "Project/AzureRender/tests/EditorSessionTests.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "130a66a3aee352b93cc942c3c80bbe3be5a53d1449b88b1f040619545d1aede3",
+        "normalizedSha256": "c3008a44e3f582b803da8c0a1284b625a911fe1d76c41aecfcba130247f42f83",
+        "crlfLineRanges": [
+          [
+            0,
+            7
+          ],
+          [
+            9,
+            57
+          ],
+          [
+            86,
+            169
+          ]
+        ],
+        "lineCount": 169
+      },
+      "Project/AzureRender/tests/HotReloadTests.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "7c4072e0f8c3d5d954d8bc124704cc78a490716b3f3f0f64a44d11b0343648cd",
+        "normalizedSha256": "02efdca91682bc4ed33e27ae5e8bfb7357ce76ed35a2f119ea35ffba88f9731f",
+        "crlfLineRanges": [
+          [
+            0,
+            5
+          ],
+          [
+            10,
+            51
+          ],
+          [
+            62,
+            64
+          ]
+        ],
+        "lineCount": 64
+      },
+      "Project/AzureRender/tests/RenderViewTests.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "8fdaa22a688a5594318626f3827f7a39dbd8c995af85ca90b00db51869b1763e",
+        "normalizedSha256": "b4562cf975a85d2d078f1a8d68e7a27f046dde0d218cfd0a080df4d4f06013e6",
+        "crlfLineRanges": [
+          [
+            0,
+            8
+          ],
+          [
+            10,
+            14
+          ],
+          [
+            16,
+            29
+          ],
+          [
+            35,
+            43
+          ],
+          [
+            60,
+            62
+          ]
+        ],
+        "lineCount": 62
+      },
+      "Project/AzureRender/tools/test_editor_workflow.py": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "e1671cad81719ffc178a25f571b464cd3e9ae2a594eb29ddc71cccc0e2022b99",
+        "normalizedSha256": "73b68d63ca2be5cdf0764642fdb72cfa8dedbdba2952255e3f591c9c9256f0a1",
+        "crlfLineRanges": [
+          [
+            0,
+            18
+          ],
+          [
+            35,
+            88
+          ]
+        ],
+        "lineCount": 88
+      },
+      "Project/AzureRender/src/app/AzureRenderOptions.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "d65ce7573461ee9e0953aa4cc1c3908de1b7505bd5e150b1c2011d7a76f507f4",
+        "normalizedSha256": "474757619a744ce5b5a38b3bbe25325f4e5b023b069036ddb5e5697b279f20cb",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            18,
+            21
+          ],
+          [
+            23,
+            75
+          ]
+        ],
+        "lineCount": 75
+      },
+      "Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "1c96c7de7883d2a3382bd5d4da5d9446df98c4f77601d83edfe1fdafc78a1ab5",
+        "normalizedSha256": "8c3aea3d9fb90ce63af09929c315d5d72008ccbd5754a40117413565d923029f",
+        "crlfLineRanges": [
+          [
+            0,
+            36
+          ],
+          [
+            37,
+            93
+          ],
+          [
+            95,
+            105
+          ],
+          [
+            115,
+            132
+          ]
+        ],
+        "lineCount": 132
+      },
+      "Project/AzureRender/tests/CommandLineTests.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "f6c4c372881d6f284aa1063038752a1cef997d165a7aa545c9ee5ca7c48477a0",
+        "normalizedSha256": "69f54e826975aac74c47c14e5204d2838ba2cb2c7fcec00771297deefe5deec2",
+        "crlfLineRanges": [
+          [
+            0,
+            35
+          ],
+          [
+            39,
+            261
+          ]
+        ],
+        "lineCount": 261
+      },
+      "Project/AzureRender/tools/check_module_boundaries.py": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "rawSha256": "d5e735c9d9c1debcc335aa6dc51114d42031e7e75f2f89c45e99d9b0f01a7bc4",
+        "normalizedSha256": "c994051e225d4c0a0a5a78cf7101b4dc86a87e7a1c62baefa7163df32ec3840b",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            19
+          ],
+          [
+            20,
+            61
+          ],
+          [
+            64,
+            167
+          ]
+        ],
+        "lineCount": 167
+      }
+    },
+    "G10": {
+      "Project/AzureRender/src/assets/GltfLoader.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "8002a72edc631e5201fb0e53018e33dfb92f81c7ba2a64d3d270ecebeeae69a8",
+        "normalizedSha256": "77f66b2bb09d5ab40a3ec5b332f7f2471b41cfbc153d1073ac3b643a757a64a6",
+        "crlfLineRanges": [
+          [
+            0,
+            1725
+          ],
+          [
+            1727,
+            1739
+          ],
+          [
+            1763,
+            1818
+          ],
+          [
+            1823,
+            1945
+          ]
+        ],
+        "lineCount": 1945
+      },
+      "Project/AzureRender/src/assets/GltfLoader.hpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "d541e3c1f0c05a50596491df602e2909079fbe5720b344f207dfb29dfa5ce240",
+        "normalizedSha256": "a2b6041cfaae6c96d1f5b70ce4450070f076362888bd63197dfc1890ea845e26",
+        "crlfLineRanges": [
+          [
+            0,
+            180
+          ],
+          [
+            183,
+            202
+          ]
+        ],
+        "lineCount": 202
+      },
+      "Project/AzureRender/src/editor/EditorProjectEditing.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "96abaf79f6052d6909a8fdeaf3deae86dce8b65b7b5a6764f93b24d3f8aa2a6f",
+        "normalizedSha256": "1b2d1a3ee1606184a780ea0ae3927c298ccb0ce17d99b2c72b1c7d82b6af4752",
+        "crlfLineRanges": [
+          [
+            0,
+            53
+          ],
+          [
+            74,
+            242
+          ]
+        ],
+        "lineCount": 242
+      },
+      "Project/AzureRender/src/editor/panels/AssetBrowserPanel.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "a1a2286535638d63e0c8146d3d5455867cb228de743e49a7e5c6384f7ea906aa",
+        "normalizedSha256": "181a66bbd72bcc013d90f708c4193141b8915637d72b9810fc8e0747a07f7104",
+        "crlfLineRanges": [
+          [
+            0,
+            36
+          ],
+          [
+            37,
+            86
+          ],
+          [
+            88,
+            91
+          ],
+          [
+            93,
+            103
+          ],
+          [
+            113,
+            118
+          ],
+          [
+            119,
+            130
+          ]
+        ],
+        "lineCount": 130
+      },
+      "Project/AzureRender/src/main.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "09c574f0b40828672d9456e13fced60e58ccf0d9f92c7c6019b0bcb6ae551ab5",
+        "normalizedSha256": "9d8ed86c6e8335c7760d5852a32dbc7a13b9d022f8f386eea0a8dcdf0bd1e72d",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            53
+          ],
+          [
+            60,
+            97
+          ],
+          [
+            119,
+            142
+          ]
+        ],
+        "lineCount": 142
+      },
+      "Project/AzureRender/vcpkg.json": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "166c01eea7ce8e875e75f934bb4edfd2129b56fea09b2ce77c78ea4d558f22fa",
+        "normalizedSha256": "ad372c0c016329da95ada61e1f3c75ad55efa29ce2dc36739e21193a474988f0",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            6,
+            19
+          ],
+          [
+            22,
+            23
+          ],
+          [
+            25,
+            31
+          ]
+        ],
+        "lineCount": 31
+      },
+      "Project/AzureRender/src/render/RenderContext.hpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "8b6fbe575ed0d91961341ebe10d65b7954d6dcc50db47ae0f0cc200fb928775b",
+        "normalizedSha256": "4ce8dd42ed79463efeb0e8a6c68074c944bb8739a7a1b1c66183eb4183138f2a",
+        "crlfLineRanges": [
+          [
+            0,
+            47
+          ],
+          [
+            50,
+            83
+          ],
+          [
+            88,
+            93
+          ],
+          [
+            95,
+            99
+          ],
+          [
+            101,
+            103
+          ],
+          [
+            105,
+            157
+          ],
+          [
+            161,
+            238
+          ]
+        ],
+        "lineCount": 238
+      },
+      "Project/AzureRender/tools/build_provenance.py": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "ebcbc212a422fd7b6aeeb827650299ca808e8fe8cb0c7c886b77c00b3c584bce",
+        "normalizedSha256": "f25e3b67a59b864db2f1527565e98ff7be275f2cb5fb03baf44a221f58fc085c",
+        "crlfLineRanges": [
+          [
+            0,
+            11
+          ],
+          [
+            20,
+            58
+          ],
+          [
+            59,
+            70
+          ]
+        ],
+        "lineCount": 70
+      },
+      "Project/AzureRender/tools/check_module_boundaries.py": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "rawSha256": "0121a78ff928054b8f6ea4e4e03d2990190a7aa527c23f4dea2a5153488aca86",
+        "normalizedSha256": "f2d850c34729ed18f9acd9c1eff0b9292ac49b89b9546959b97f38cb7766c465",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            20
+          ],
+          [
+            21,
+            62
+          ],
+          [
+            67,
+            170
+          ]
+        ],
+        "lineCount": 170
+      }
+    },
+    "R8": {
+      "Project/AzureRender/src/scenes/BlackholeSceneRenderer.hpp": {
+        "gitCommit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514",
+        "rawSha256": "6c243e93e2be969202d73a79ee37869637c59636ba34534902d3f4b4fc12e9cb",
+        "normalizedSha256": "ad7c6b677bf90e1a6598252cdef5037109298879461eea0b2c1ea3729eea3ecb",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            6,
+            68
+          ],
+          [
+            69,
+            186
+          ]
+        ],
+        "lineCount": 186
+      }
+    },
+    "R9": {
+      "Project/AzureRender/shaders/cull_indirect.comp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "2a45eddc419b2e7e06d94c2460cbba1597e8484dd54d12aafcc783cc24c80a6d",
+        "normalizedSha256": "17ad1241c458fbcd7de70e3a8db2d0d531fa96e675a81950c6d904ab7b56b9d2",
+        "crlfLineRanges": [
+          [
+            0,
+            13
+          ],
+          [
+            19,
+            44
+          ]
+        ],
+        "lineCount": 51
+      },
+      "Project/AzureRender/shaders/skin.comp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "b1e356ab860de41a1169abb3193a27b53a681b18bb73e6f00cfeed532f8bbcfd",
+        "normalizedSha256": "2291526546b4a35b31bcfe9d4e0205707334840642641a5c0f73b0c07ed2744d",
+        "crlfLineRanges": [
+          [
+            0,
+            20
+          ],
+          [
+            23,
+            32
+          ],
+          [
+            35,
+            38
+          ],
+          [
+            39,
+            78
+          ],
+          [
+            84,
+            102
+          ]
+        ],
+        "lineCount": 102
+      },
+      "Project/AzureRender/src/app/AzureRenderApp.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "9e39b3012f0eaed2c71436b47571d17fc3ee0a0dfaebd8063eeb2d3ea3f2c7cd",
+        "normalizedSha256": "503fd185746ea4f664d9c8bb4f1af79b1c3ef79249cdd794df8e965ae83e6a67",
+        "crlfLineRanges": [
+          [
+            0,
+            17
+          ],
+          [
+            19,
+            85
+          ],
+          [
+            89,
+            283
+          ],
+          [
+            287,
+            357
+          ],
+          [
+            361,
+            371
+          ],
+          [
+            375,
+            450
+          ],
+          [
+            452,
+            454
+          ],
+          [
+            459,
+            500
+          ],
+          [
+            504,
+            966
+          ],
+          [
+            968,
+            971
+          ],
+          [
+            977,
+            1256
+          ],
+          [
+            1262,
+            1632
+          ]
+        ],
+        "lineCount": 1632
+      },
+      "Project/AzureRender/src/app/AzureRenderOptions.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "e42999d130bd21765275434a853704d1904f9420184274f1169a27d19cddadc3",
+        "normalizedSha256": "8f0c6c046d6d26e7e5764d8a16a66c6e69546c9221f957b7515cf7f1064fb03d",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            18,
+            21
+          ],
+          [
+            23,
+            50
+          ],
+          [
+            52,
+            76
+          ]
+        ],
+        "lineCount": 76
+      },
+      "Project/AzureRender/src/app/CommandLine.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "0f033189d59791afeaedd1eb0640a69004c123abfdfa98c634e4b346606ae48a",
+        "normalizedSha256": "6e7e8843901c517f68cad269f6c32647dc86d4273f8851fd111d9f8a2c93f6d3",
+        "crlfLineRanges": [
+          [
+            0,
+            77
+          ],
+          [
+            79,
+            92
+          ],
+          [
+            95,
+            338
+          ],
+          [
+            343,
+            433
+          ],
+          [
+            437,
+            566
+          ]
+        ],
+        "lineCount": 566
+      },
+      "Project/AzureRender/src/diagnostics/GpuCapabilityReport.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "ff8556ddf2da0072e602e18e14b502936adb95a09342b24a1995f7beff8dc140",
+        "normalizedSha256": "3071c1bbbbc45343c9cc980aac69086cd6df6c6bab8e935f47aea0d5c98dc988",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            19,
+            24
+          ],
+          [
+            25,
+            48
+          ],
+          [
+            70,
+            76
+          ],
+          [
+            78,
+            81
+          ],
+          [
+            87,
+            112
+          ],
+          [
+            113,
+            131
+          ]
+        ],
+        "lineCount": 131
+      },
+      "Project/AzureRender/src/diagnostics/GpuCapabilityReport.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "0f276e912183d8916174b62b28f4052f206f4038197e41531fdaa0fd9389349f",
+        "normalizedSha256": "305c77b1420fb5ab4d1d0ad1f06bacd55ee5616ef42294096d712a35b3448680",
+        "crlfLineRanges": [
+          [
+            0,
+            8
+          ],
+          [
+            15,
+            23
+          ],
+          [
+            26,
+            29
+          ],
+          [
+            31,
+            33
+          ]
+        ],
+        "lineCount": 33
+      },
+      "Project/AzureRender/src/render/GpuCullingResources.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "73647aa910b236eac45767acba5cab6116930f72c580d07f9bcbeab1522133fb",
+        "normalizedSha256": "efc8826529ddbfe2e97eec01688c005599949f0984ed17c5a04f82f7800fc1f5",
+        "crlfLineRanges": [
+          [
+            0,
+            2
+          ],
+          [
+            4,
+            19
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            40,
+            41
+          ],
+          [
+            42,
+            46
+          ],
+          [
+            52,
+            66
+          ],
+          [
+            68,
+            69
+          ],
+          [
+            73,
+            77
+          ],
+          [
+            83,
+            104
+          ],
+          [
+            107,
+            115
+          ],
+          [
+            118,
+            125
+          ],
+          [
+            127,
+            129
+          ],
+          [
+            131,
+            137
+          ],
+          [
+            139,
+            142
+          ]
+        ],
+        "lineCount": 142
+      },
+      "Project/AzureRender/src/render/RenderContext.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "7d86432353a3ec063fbf214b443214b8e31598ead51fdad4f1f42f7ab1133fe1",
+        "normalizedSha256": "cc5edf634c6ee1dd6a0614f347b9b433836c9f76a66304c61929d0b8977dfcf4",
+        "crlfLineRanges": [
+          [
+            0,
+            47
+          ],
+          [
+            50,
+            83
+          ],
+          [
+            88,
+            93
+          ],
+          [
+            95,
+            99
+          ],
+          [
+            101,
+            103
+          ],
+          [
+            105,
+            157
+          ],
+          [
+            161,
+            168
+          ],
+          [
+            170,
+            239
+          ]
+        ],
+        "lineCount": 239
+      },
+      "Project/AzureRender/src/render/SceneInstanceSnapshot.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "6a13ed15ee31d09c21dda604015cef73e0dcad89dd52ba7a57937944f28a9911",
+        "normalizedSha256": "04cde00f6a7517455e8116b1f297480f832ba5365ed1b7f811bbbe49f785f450",
+        "crlfLineRanges": [
+          [
+            0,
+            38
+          ],
+          [
+            40,
+            51
+          ],
+          [
+            53,
+            56
+          ],
+          [
+            58,
+            84
+          ],
+          [
+            86,
+            90
+          ]
+        ],
+        "lineCount": 90
+      },
+      "Project/AzureRender/src/scene/RenderBatching.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "ff83112b16f135cfc4efc21f5986b72a393ed44c95099e6b066c8872dc61d2cc",
+        "normalizedSha256": "d929af78a0f97cf8f984c29f63d32573eead631778faf8627731cc0e6b545fa4",
+        "crlfLineRanges": [
+          [
+            0,
+            23
+          ],
+          [
+            24,
+            36
+          ],
+          [
+            54,
+            56
+          ]
+        ],
+        "lineCount": 56
+      },
+      "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "6e01d3f0c34f7a90becb679b928c4ac7ae1ff2160e7fe75ea244d60fccb87032",
+        "normalizedSha256": "730e8cd942a9e0641d06693f551ff5708b3ed4a2107af7105e46925183a493f9",
+        "crlfLineRanges": [
+          [
+            3,
+            246
+          ],
+          [
+            248,
+            371
+          ],
+          [
+            393,
+            451
+          ],
+          [
+            454,
+            473
+          ],
+          [
+            477,
+            481
+          ],
+          [
+            482,
+            559
+          ],
+          [
+            575,
+            683
+          ],
+          [
+            685,
+            692
+          ],
+          [
+            700,
+            704
+          ],
+          [
+            707,
+            710
+          ],
+          [
+            714,
+            972
+          ],
+          [
+            983,
+            1717
+          ],
+          [
+            1718,
+            1917
+          ],
+          [
+            1928,
+            1932
+          ],
+          [
+            1933,
+            1941
+          ],
+          [
+            1942,
+            2889
+          ],
+          [
+            2892,
+            3500
+          ]
+        ],
+        "lineCount": 3500
+      },
+      "Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "1698bf0901434b5ab2e5273dedb78764808be4fb5a4e0f2b18d5fec2f705b7b3",
+        "normalizedSha256": "24f33b924a31393cef64a00eabf77584d023bb91d2ebe58c08a3ca3a381b36c3",
+        "crlfLineRanges": [
+          [
+            0,
+            11
+          ],
+          [
+            13,
+            169
+          ],
+          [
+            170,
+            209
+          ],
+          [
+            211,
+            424
+          ]
+        ],
+        "lineCount": 424
+      },
+      "Project/AzureRender/tests/CommandLineTests.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "068fffc034150544ca54b18a819f970ce2b7d6326be6b333d2efa463d46cf3d9",
+        "normalizedSha256": "b0ddc26faef528e6a381c1e06adfd34bef2a24a9f7e863772297d6501a1196ce",
+        "crlfLineRanges": [
+          [
+            0,
+            35
+          ],
+          [
+            39,
+            61
+          ],
+          [
+            65,
+            264
+          ]
+        ],
+        "lineCount": 264
+      },
+      "Project/AzureRender/tests/NullRhiPassTests.cpp": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "rawSha256": "0b841d0270eb38fa644d91ca55746af1de66706200d23f3eb15fd2badeb162da",
+        "normalizedSha256": "51fcd4002217f2a42e40e25f425b369e1b7e691bfd3e01c41520068fb7f7f71b",
+        "crlfLineRanges": [
+          [
+            0,
+            53
+          ],
+          [
+            56,
+            62
+          ],
+          [
+            70,
+            178
+          ],
+          [
+            181,
+            240
+          ],
+          [
+            242,
+            354
+          ],
+          [
+            382,
+            394
+          ],
+          [
+            421,
+            455
+          ],
+          [
+            459,
+            480
+          ],
+          [
+            493,
+            494
+          ]
+        ],
+        "lineCount": 494
+      }
+    },
+    "U3": {
+      "Project/AzureRender/src/editor/EditorContext.hpp": {
+        "gitCommit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+        "rawSha256": "e0a600c25110555d8812f4389cc3dbeca897ac588c401c9c054e1f753408a76b",
+        "normalizedSha256": "65780eb17b5c1c671b1671fd96940d98fd551dd5e71d9d06a9e92bf2c1c168a1",
+        "crlfLineRanges": [
+          [
+            0,
+            4
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            10,
+            19
+          ],
+          [
+            21,
+            31
+          ],
+          [
+            37,
+            38
+          ],
+          [
+            43,
+            49
+          ],
+          [
+            58,
+            166
+          ],
+          [
+            169,
+            194
+          ],
+          [
+            203,
+            212
+          ]
+        ],
+        "lineCount": 212
+      }
+    },
+    "G11": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "be5efd5083cdf04287e4dd28eb1db45c0b0dcb851ec627bfcc25524f2915e01c",
+        "normalizedSha256": "5535b39a1e8598cc42832853784ed63365cfb87c4b54943f706332f79668020f",
+        "crlfLineRanges": [
+          [
+            0,
+            69
+          ],
+          [
+            71,
+            72
+          ],
+          [
+            74,
+            159
+          ],
+          [
+            170,
+            175
+          ],
+          [
+            178,
+            223
+          ],
+          [
+            225,
+            229
+          ],
+          [
+            235,
+            252
+          ],
+          [
+            262,
+            267
+          ],
+          [
+            270,
+            272
+          ],
+          [
+            275,
+            301
+          ],
+          [
+            303,
+            325
+          ],
+          [
+            352,
+            364
+          ],
+          [
+            374,
+            406
+          ],
+          [
+            408,
+            426
+          ],
+          [
+            427,
+            437
+          ],
+          [
+            438,
+            452
+          ],
+          [
+            454,
+            456
+          ],
+          [
+            510,
+            522
+          ],
+          [
+            545,
+            550
+          ],
+          [
+            554,
+            565
+          ],
+          [
+            571,
+            645
+          ],
+          [
+            671,
+            726
+          ],
+          [
+            730,
+            732
+          ],
+          [
+            736,
+            741
+          ],
+          [
+            744,
+            955
+          ],
+          [
+            958,
+            1277
+          ],
+          [
+            1278,
+            1345
+          ],
+          [
+            1351,
+            1396
+          ],
+          [
+            1397,
+            1443
+          ],
+          [
+            1449,
+            1495
+          ]
+        ],
+        "lineCount": 1507
+      },
+      "Project/AzureRender/src/app/AzureRenderApp.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "bbc9f801ac000dcbbcdb08f576a27f022559c54ac474d253145db9b92568d2fb",
+        "normalizedSha256": "1d2c2045c9d10874d167e82d52148937afee7a1ebc8883fe6194bad0af9ac3aa",
+        "crlfLineRanges": [
+          [
+            0,
+            17
+          ],
+          [
+            19,
+            85
+          ],
+          [
+            89,
+            100
+          ],
+          [
+            101,
+            102
+          ],
+          [
+            103,
+            283
+          ],
+          [
+            287,
+            357
+          ],
+          [
+            361,
+            371
+          ],
+          [
+            375,
+            450
+          ],
+          [
+            452,
+            454
+          ],
+          [
+            459,
+            500
+          ],
+          [
+            504,
+            588
+          ],
+          [
+            589,
+            966
+          ],
+          [
+            968,
+            971
+          ],
+          [
+            977,
+            1256
+          ],
+          [
+            1262,
+            1632
+          ]
+        ],
+        "lineCount": 1632
+      },
+      "Project/AzureRender/src/app/AzureRenderApp.hpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "b0243321d1d1b75193c2be2a34cfb38073fb9eeaea2b77ee868a4b1f5d5f8691",
+        "normalizedSha256": "9ef82ec7e5b1b506af6712a8c14d3c3c4b9573a6880da954aa8f0d537e40c299",
+        "crlfLineRanges": [
+          [
+            0,
+            14
+          ],
+          [
+            15,
+            26
+          ],
+          [
+            32,
+            64
+          ],
+          [
+            84,
+            199
+          ],
+          [
+            200,
+            403
+          ],
+          [
+            404,
+            416
+          ],
+          [
+            419,
+            481
+          ]
+        ],
+        "lineCount": 481
+      },
+      "Project/AzureRender/src/app/AzureRenderGameplay.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "bd3dc65e1f8db9906e0dd958f5625c2be03f36582b0cc50cf9a62fb693dc5030",
+        "normalizedSha256": "963109c654124b78ed4a5e8b9599742211dca1cc499df6704f591868c0841558",
+        "crlfLineRanges": [
+          [
+            0,
+            23
+          ],
+          [
+            24,
+            57
+          ],
+          [
+            61,
+            82
+          ],
+          [
+            85,
+            147
+          ]
+        ],
+        "lineCount": 147
+      },
+      "Project/AzureRender/src/ecs/World.hpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "05f445b3ef3b707e0800909816670902981e10886f591d3823f7f92b46b7e2eb",
+        "normalizedSha256": "b314743c8b9a2d87aacca3dd7ddc4e1b879b40524dee511ec18cfa444f2af1f2",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            11,
+            17
+          ],
+          [
+            23,
+            32
+          ],
+          [
+            41,
+            43
+          ],
+          [
+            44,
+            47
+          ],
+          [
+            59,
+            68
+          ],
+          [
+            70,
+            73
+          ],
+          [
+            83,
+            173
+          ],
+          [
+            185,
+            192
+          ]
+        ],
+        "lineCount": 192
+      },
+      "Project/AzureRender/src/editor/EditorSession.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "cf9b87fe8e43bdb77eda9376a716ebb17879793e42bf80f6bc02b3d53189edd7",
+        "normalizedSha256": "0e80130ec4b345cc87491becaf31cdb58f597213fb1de121d68e821bac368d1c",
+        "crlfLineRanges": [
+          [
+            0,
+            16
+          ],
+          [
+            17,
+            28
+          ],
+          [
+            29,
+            31
+          ],
+          [
+            32,
+            58
+          ],
+          [
+            59,
+            206
+          ]
+        ],
+        "lineCount": 206
+      },
+      "Project/AzureRender/src/editor/EditorSession.hpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "0c40fc53ff09f22edf9aa8f097583f4cd306366e371775b2f432b517415fef93",
+        "normalizedSha256": "26554ae9763acb8882129eadedf73863a5e72be373796fc2727b1c0a6e3ec1dd",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            7,
+            12
+          ],
+          [
+            14,
+            44
+          ],
+          [
+            45,
+            67
+          ],
+          [
+            70,
+            93
+          ],
+          [
+            95,
+            115
+          ]
+        ],
+        "lineCount": 115
+      },
+      "Project/AzureRender/src/runtime/AssetDatabase.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "a47b531586f37dbb25d41008d31d93824cd863facbf284c7acb389e866ce027c",
+        "normalizedSha256": "1dff41322193a1cff6cb2205d28ab52a70f0132d6d9fc44bdc4620124e2fcc18",
+        "crlfLineRanges": [
+          [
+            0,
+            104
+          ],
+          [
+            105,
+            126
+          ],
+          [
+            139,
+            269
+          ]
+        ],
+        "lineCount": 269
+      },
+      "Project/AzureRender/src/runtime/Project.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "54d01308b259497671f96ecf56b93548b0d1fc754cdc807991c87006b34a4f6b",
+        "normalizedSha256": "33e520184351ca9f186bdcc1210fade9a7055bfcb03e694e0d15d8363d915ee3",
+        "crlfLineRanges": [
+          [
+            0,
+            65
+          ],
+          [
+            94,
+            102
+          ],
+          [
+            112,
+            188
+          ]
+        ],
+        "lineCount": 188
+      },
+      "Project/AzureRender/src/runtime/Project.hpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "93ef6a3e9694a2a4e8866ca457ac0f2081667a53004aec864b715e6c88e036f8",
+        "normalizedSha256": "6d37b459216d30e7f995f897262b05481fe5bc09fcd5d186c41ac26fce01a068",
+        "crlfLineRanges": [
+          [
+            0,
+            13
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            18,
+            23
+          ]
+        ],
+        "lineCount": 23
+      },
+      "Project/AzureRender/src/runtime/RuntimeLifecycle.hpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "979b0009f1e215215791f98ee5204a6325039d7cbc0d649c2c06389a9cf4be5f",
+        "normalizedSha256": "eae0df7a374cf67e79fde756798f9d3b575aaaaa7b0d5285fd1a73b2947f135e",
+        "crlfLineRanges": [
+          [
+            0,
+            119
+          ],
+          [
+            120,
+            122
+          ],
+          [
+            130,
+            200
+          ]
+        ],
+        "lineCount": 200
+      },
+      "Project/AzureRender/tests/ScriptRuntimeTests.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "43e1c10bef368bb38fa269eb502bb62858e2b9466dfe7dd5a3062259fb626291",
+        "normalizedSha256": "684dc3884b28d4a2b852c4b7e9cd23b740dc5775119dba6583d425c58a2e4d00",
+        "crlfLineRanges": [
+          [
+            0,
+            63
+          ],
+          [
+            80,
+            84
+          ]
+        ],
+        "lineCount": 84
+      },
+      "Project/AzureRender/tools/build_provenance.py": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "e174404656d06a48a725a1766b02fbbd83a2d89eedbcf50ac17bddee992ad2fc",
+        "normalizedSha256": "451da5a374f53f1b0c3e33d14af6cdd8023b9265d95611c37d0b0a8bc7153376",
+        "crlfLineRanges": [
+          [
+            0,
+            7
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            26,
+            64
+          ],
+          [
+            65,
+            76
+          ]
+        ],
+        "lineCount": 76
+      },
+      "Project/AzureRender/tools/check_module_boundaries.py": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "rawSha256": "16a2aece322bbbcc79297ea5f6d3a07ff68fad26b7dd1b3d6d837f8365cc43e6",
+        "normalizedSha256": "0ec6ee9607fade136e3e0108c3dc6b406b2dd209236b81b5964bc153678f99ef",
+        "crlfLineRanges": [
+          [
+            0,
+            6
+          ],
+          [
+            12,
+            20
+          ],
+          [
+            21,
+            23
+          ],
+          [
+            30,
+            70
+          ],
+          [
+            81,
+            184
+          ]
+        ],
+        "lineCount": 184
+      }
+    }
+  },
+  "historicalSourceByteLimits": {
+    "F4": {
+      "Project/AzureRender/src/editor/EditorSession.cpp": {
+        "gitCommit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+        "recordedRawSha256": "d8c876dc3f802c654446b4b8baeefe344f44347b2f150ea53875abdf0a196157",
+        "committedNormalizedSha256": "4b034b4394504191c96eb869996ad9cc5d9ed79862205bd282a7e09a9efc1d7c",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/editor/ImGuiEditorLayer.cpp": {
+        "gitCommit": "c22c47a816a698cd96b63bfbdb4c710be796a617",
+        "recordedRawSha256": "dca439482ed0bf2f12e1ee94c5b71b3d63e4862e1982e9e43c4270be44c9bd3e",
+        "committedNormalizedSha256": "c450ea93dfd6129df6d1213846ca373c882f087ce689e1d0274505c4d228d4f8",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "G8": {
+      "Project/AzureRender/src/editor/EditorSession.cpp": {
+        "gitCommit": "7a5c521d888e964a979383f7b4ccf0809accd0f4",
+        "recordedRawSha256": "7e3c7d955742c82425cfb4deb673b2eec366eb3286dd42a167de98fc1aa87b7d",
+        "committedNormalizedSha256": "ad22a87dab2d8bf1078c319d46fcd52fdb2f603ef2497fa88582117fa7b276d2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "U3": {
+      "Project/AzureRender/src/editor/EditorSession.cpp": {
+        "gitCommit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+        "recordedRawSha256": "c02450adfd20dcd359da79aaadfd320669d902098ebc13ffc04f52dd11976bcc",
+        "committedNormalizedSha256": "6ae046d2b5eb9ed58fd11dee7da4a63fe18d0afe1d48920d467be150d05d2376",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/editor/EditorSession.hpp": {
+        "gitCommit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b",
+        "recordedRawSha256": "7a38bb58befa2fe8ab5ade7f465b49ab3a812d4c2081d3039e5ec58c34999c0a",
+        "committedNormalizedSha256": "1d766f9818825e2420a698d7ac2f3861cbf818afa16d0971c9fee3f4ca1305a0",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "F5": {
+      "Project/AzureRender/src/app/CommandLine.cpp": {
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "recordedRawSha256": "ed9352fef3235f73eb1008dd04c0423cfdc89dc851b5de1ecc03ee68e511abe7",
+        "committedNormalizedSha256": "69a683368f3e34c0a369d578839201f5facc8ffe4e2e84d80a5a38ba71e4109e",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/editor/EditorSession.hpp": {
+        "gitCommit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f",
+        "recordedRawSha256": "c9329af5de0f32956fd9b47b0f0e02dfb934f3e0799df46332d5cbfb8866a26e",
+        "committedNormalizedSha256": "4e064432c1c90e9ec01a9f1e14148839b92907c25964424af9bd5d377451afbe",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "G9": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188",
+        "recordedRawSha256": "8c23e15b015edd6119a487510ad03de81df49ff7c3a966c9aa4287758569eb7b",
+        "committedNormalizedSha256": "2fb20be051cb7f7142f487dfae0c916c6e966e0b310a1c744daf24b7bb27f44e",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "R7": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "0479805811bfd5cce0a78a04093b2b6da87ff9e9bd2952489bc14c6d0a4731a2",
+        "committedNormalizedSha256": "f0da92fb39fa91735b9071bb55aec2a7fbff0f36b2d308d608d51479e179a310",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/app/AzureRenderApp.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "1e7d50b914bb58b3ad2eec3f6680f6fac409febddd310b5132a857f64a5a0a7d",
+        "committedNormalizedSha256": "d1d26410617d55c8fcc88f4db0592069a6c8ef2d51a68a63ccdc8abb7a1244c7",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/app/CommandLine.cpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "c8a285c87c7d457db1c6888d3332803d4eb44d3b46d76cdd380a412b7578bec1",
+        "committedNormalizedSha256": "e34dabe489bf935e5e8961f9cd51b8e374887f719973d0630360e9e33783070b",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/render/RenderContext.hpp": {
+        "gitCommit": "56fc957c5898885784c98963f4227e1e5710fd31",
+        "recordedRawSha256": "b8bf13f7da1f06179bfa3846f4cee1868f8b6f542edf8a5d1b7e77b75fe9cf2d",
+        "committedNormalizedSha256": "7dda22c993826ef7eb9d904e3b12c66076043a429b73e3b147e3838ab9500aa5",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "G10": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "ca83f78015d78f8f86756485011c24200a6177af843c308d504bbb85fe7966dc",
+        "committedNormalizedSha256": "697810d38406b9f6ae095c594a315daa601a7582f275223a1676484da952e487",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/app/AzureRenderApp.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "29d8fbba8cc72b1255b22d346d3fc4c8daa1ea794d4dd05035e352b0b7e751bd",
+        "committedNormalizedSha256": "91ec2df87dcb727560c1ec1f4e6c6781bf4e88e83fc5a13759a1d6b19173a37a",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "c13fbc41b2819337a41230ad90717e33b606e261e3f5a62703f182ca34152556",
+        "committedNormalizedSha256": "a2666fd0cdcd6f30d4121e54817631996352d486cd018267c7d71dedb59783e1",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/tests/NullRhiPassTests.cpp": {
+        "gitCommit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137",
+        "recordedRawSha256": "18a0509d44d397bd2a1d1e9422ab6f7f9b2889713f8a1ed02c9597a556638d90",
+        "committedNormalizedSha256": "c774eb694084ce6b42a6babb488e9cc258fa45c58aeaf29d1665740971cdf5b0",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "R8": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514",
+        "recordedRawSha256": "55aa34fb9bcf1e9ad3e6cabdcce3ed621abb53a5a54c75a4616a16803b53b1e4",
+        "committedNormalizedSha256": "70616c9bbaffee62c0c2c689c668a5bb243899e8e2b6f66afe0cf66b372c2b85",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "R9": {
+      "Project/AzureRender/CMakeLists.txt": {
+        "gitCommit": "17823b2215ad9c999c83c2cb29b7ba84aa692215",
+        "recordedRawSha256": "19ffd204b62cb39b962b426339044f2ad285b13d1adecef70188e8a57e1a41b2",
+        "committedNormalizedSha256": "46176b9dfe74a263a7985e66394fd96efd179f6387735ac8c383500af23ec2c2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    },
+    "G11": {
+      "Project/AzureRender/src/app/AzureRenderCapture.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "aa7e4cc0d79511599a59172c2ccdeac4da1c03f57d2767a1c974f192f48b5f5c",
+        "committedNormalizedSha256": "7b88234bfb99a3f09b009c9134e31220519e1685ac4599e3a9290b129bc1d5f2",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/player/main.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "66c6a4b0e852b80359293ad8c0d852c8337cae3b84b416f5c94f39da04589c6a",
+        "committedNormalizedSha256": "e6bb49b1a9ce4eacecbf4398c837cd2047378afbbdffc8b5c85a1695c11fc48f",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/src/scripting/lua/ScriptRuntime.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "477c8f4a864c41b63ede639e82aa813b35ecd881d2c6433db5d145b110a7eae4",
+        "committedNormalizedSha256": "569ae110be128bc14ff277e78970f71c155689f66c647f703b332bcc2a814b81",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/tests/AssetLevelTests.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "27af02bce60aa408c67360eda2ec55aa3b66e3df5035b3f65a2127a2da615fcb",
+        "committedNormalizedSha256": "9379361125ef354f786d919fbd8423f4317388a464084c61ddcae9dcc063a33c",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/tests/ProjectTests.cpp": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "4f562b0da23fcaac4d0138b0d1c68805878ba723ac96d68cbaeec59a1052876c",
+        "committedNormalizedSha256": "493423ee38bbb2c8cea63bff81ba07d0f0921230cb4a8f1281261e9537885b68",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      },
+      "Project/AzureRender/tools/test_player_cli.py": {
+        "gitCommit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08",
+        "recordedRawSha256": "123e5777da926119c56c5d0da06cbba96db6bd52a253416f271a064f32abad33",
+        "committedNormalizedSha256": "87633739719f4befdc9bd9fafbe9ffcc16b6230f53e785f05d74857a2be232cd",
+        "reason": "Original working-tree bytes could not be reconstructed from the normalized Git blob. Archived hashes and committed content remain independently verifiable; byte equivalence is not claimed."
+      }
+    }
+  },
+  "deliveryVerification": {
+    "phase": "P3",
+    "coveragePolicy": "committed-content",
+    "strictHistoricalByteAudit": "reported independently; unresolved original bytes remain explicit limits",
+    "sourceArchive": "current source files copied as exact bytes and checked against frozen build inputs",
+    "interfaceDelivery": "interface-source-snapshots-and-schemas"
+  }
+}

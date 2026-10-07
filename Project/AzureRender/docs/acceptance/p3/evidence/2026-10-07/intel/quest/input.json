@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "frame": 4,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 5,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 8,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 108,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 112,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 140,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 144,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 145,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 148,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 176,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 180,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 340,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 344,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 372,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 376,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 377,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 380,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 408,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 412,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 572,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 576,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 604,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 608,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 609,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 612,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 640,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 644,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 800,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 802,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 803,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 806,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 898,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 910,
+      "action": "key",
+      "key": 82,
+      "down": true
+    },
+    {
+      "frame": 911,
+      "action": "key",
+      "key": 82,
+      "down": false
+    },
+    {
+      "frame": 922,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 923,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 926,
+      "action": "key",
+      "key": 82,
+      "down": true
+    },
+    {
+      "frame": 927,
+      "action": "key",
+      "key": 82,
+      "down": false
+    }
+  ]
+}

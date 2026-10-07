@@ -1,0 +1,40 @@
+{
+  "status": "diagnostic-complete",
+  "formalFailure": "before-telemetry-storage-fix/performance-first-final-failed/performance/strict-budget.json",
+  "failedGrowth": 0.1324412164627069,
+  "diagnosticRounds": [
+    {
+      "file": "memory-observation-2\\stress-1.memory.json",
+      "observations": 186,
+      "workingSetGrowth": 0.01446720766263132,
+      "privateGrowthBytes": 2232320
+    },
+    {
+      "file": "memory-observation-2\\stress-2.memory.json",
+      "observations": 218,
+      "workingSetGrowth": 0.014056358670308411,
+      "privateGrowthBytes": 1904640
+    },
+    {
+      "file": "memory-observation-2\\stress-3.memory.json",
+      "observations": 197,
+      "workingSetGrowth": 0.015987528401081308,
+      "privateGrowthBytes": 3575808
+    },
+    {
+      "file": "memory-observation-2\\stress-4.memory.json",
+      "observations": 179,
+      "workingSetGrowth": 0.012441756716565777,
+      "privateGrowthBytes": 2404352
+    },
+    {
+      "file": "memory-observation-2\\stress-5.memory.json",
+      "observations": 182,
+      "workingSetGrowth": 0.015660955218938843,
+      "privateGrowthBytes": 3420160
+    }
+  ],
+  "rootCause": "isolated abrupt working-set spike not reproduced; precise allocation source remains undetermined",
+  "productionChange": false,
+  "policy": "retain failure; repeat all nine rounds with identical budgets and sampling; confirm long-run stability"
+}

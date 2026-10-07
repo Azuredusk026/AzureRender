@@ -1,0 +1,62 @@
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+Ewarning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.
+======================================================================
+ERROR: test_committed_content_policy_reports_unavailable_original_bytes (__main__.CoverageTests.test_committed_content_policy_reports_unavailable_original_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_evolution_coverage.py", line 102, in test_committed_content_policy_reports_unavailable_original_bytes
+    report=verify(self.source,self.manifest,self.discovery,historical_policy='committed-content')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: verify() got an unexpected keyword argument 'historical_policy'
+
+----------------------------------------------------------------------
+Ran 14 tests in 8.627s
+
+FAILED (errors=1)

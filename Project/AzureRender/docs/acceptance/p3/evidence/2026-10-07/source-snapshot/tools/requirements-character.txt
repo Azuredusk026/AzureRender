@@ -1,0 +1,2 @@
+# Optional offline FBX inspection and retargeting. Runtime consumes glTF 2.0.
+numpy>=1.26

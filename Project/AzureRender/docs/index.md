@@ -1,5 +1,8 @@
 # AzureRender
 
+引擎交付范围见[交付说明](runtime/engine-delivery.md)。
+两种项目的使用步骤见[复用教程](tutorials/engine-reuse.md)。
+
 AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
 
 首次使用请阅读[构建与使用](getting-started.md)。制作关卡请阅读[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。运行和交付见[探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。
@@ -46,7 +49,7 @@ Lua 为默认后端，托管后端通过可选模块接入。
 
 ## 开发路线
 
-[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4、G8、U3、F5、U4、G9、R7、G10 已验收，当前执行阶段为 R8。
+[引擎实施计划](plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4 至 P3 的功能与交付验收已完成。
 
 当前阶段入口为 [开发总计划](plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7、U2 和 P2 已完成。[角色与可玩关卡计划](plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
 

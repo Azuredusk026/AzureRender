@@ -1,0 +1,13 @@
+..F....
+======================================================================
+FAIL: test_generated_replay_fits_player_budget_and_keeps_complete_routes (__main__.DeliveryRules.test_generated_replay_fits_player_budget_and_keeps_complete_routes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_playable_delivery_rules.py", line 18, in test_generated_replay_fits_player_budget_and_keeps_complete_routes
+    self.assertLessEqual(len(actions),8192)
+AssertionError: 9000 not less than or equal to 8192
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.026s
+
+FAILED (failures=1)

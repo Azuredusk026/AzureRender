@@ -58,6 +58,8 @@ struct ScriptRuntime::Impl {
     AssetDatabase& assets;
     ScriptBindingHost host;
     sol::state lua;
+    sol::protected_function objectMetadataFactory;
+    sol::table readOnlyFields;
     struct Entry {
         ScriptObject object;
         std::string asset,attemptedSource;
@@ -71,6 +73,24 @@ struct ScriptRuntime::Impl {
     bool closed=false;
     Impl(RuntimeLifecycle& r,GameRuntime& g,AssetDatabase& a):runtime(r),assets(a),host(r,g) {
         lua.open_libraries(sol::lib::base,sol::lib::math,sol::lib::string,sol::lib::table);
+        readOnlyFields=lua.create_table();readOnlyFields["id"]=true;
+        for(const auto& binding:kScriptBindings)readOnlyFields[binding.name]=true;
+        // Lua closures expose the proxy-to-backing references to its collector.
+        // Capturing a sol::table in C++ creates an independent registry root.
+        auto factory=lua.safe_script(R"(return function(backing, readOnly)
+            return {
+                __index=function(_, key)
+                    if key=='id' then return backing.id() end
+                    return backing[key]
+                end,
+                __newindex=function(_, key, value)
+                    if readOnly[key] then error('Script object API fields are read only') end
+                    backing[key]=value
+                end
+            }
+        end)",sol::script_pass_on_error);
+        if(!factory.valid()){const sol::error failure=factory;throw std::logic_error(failure.what());}
+        objectMetadataFactory=factory.get<sol::protected_function>();
     }
     void requireOpen() {if(closed)throw std::logic_error("Script runtime is closed");}
     void error(const std::string& message) {
@@ -93,19 +113,10 @@ struct ScriptRuntime::Impl {
                 return luaValue(lua,result);
             });
         }
-        auto metadata=lua.create_table();
-        metadata.set_function("__index",[this,object,backing](sol::table,const std::string& key)->sol::object {
-            if(key=="id")return luaValue(lua,host.invoke(object,"id",Json::array()));
-            return backing[key].get<sol::object>();
-        });
-        metadata.set_function("__newindex",[backing](sol::table,const std::string& key,sol::object value)mutable {
-            const bool method=std::any_of(std::begin(kScriptBindings),std::end(kScriptBindings),
-                [&key](const auto& binding){return key==binding.name;});
-            if(key=="id" || method)
-                throw std::invalid_argument("Script object API fields are read only");
-            backing[key]=value;
-        });
-        proxy[sol::metatable_key]=metadata;
+        backing.set_function("id",[this,object]{return luaValue(lua,host.invoke(object,"id",Json::array()));});
+        const auto metadata=objectMetadataFactory(backing,readOnlyFields);
+        if(!metadata.valid()){const sol::error failure=metadata;throw std::logic_error(failure.what());}
+        proxy[sol::metatable_key]=metadata.get<sol::table>();
         return proxy;
     }
     sol::environment environment(const ScriptObject& object) {

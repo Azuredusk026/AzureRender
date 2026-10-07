@@ -1,0 +1,259 @@
+AzureRender Scene v1
+schemaVersion 3
+renderSettingsVersion 7
+sceneId "r4-stress"
+resourceCount 32
+resource "asset-0" "gltf" "assets_public/test_model.gltf"
+resource "asset-1" "gltf" "assets_public/test_model.gltf"
+resource "asset-2" "gltf" "assets_public/test_model.gltf"
+resource "asset-3" "gltf" "assets_public/test_model.gltf"
+resource "asset-4" "gltf" "assets_public/test_model.gltf"
+resource "asset-5" "gltf" "assets_public/test_model.gltf"
+resource "asset-6" "gltf" "assets_public/test_model.gltf"
+resource "asset-7" "gltf" "assets_public/test_model.gltf"
+resource "asset-8" "gltf" "assets_public/test_model.gltf"
+resource "asset-9" "gltf" "assets_public/test_model.gltf"
+resource "asset-10" "gltf" "assets_public/test_model.gltf"
+resource "asset-11" "gltf" "assets_public/test_model.gltf"
+resource "asset-12" "gltf" "assets_public/test_model.gltf"
+resource "asset-13" "gltf" "assets_public/test_model.gltf"
+resource "asset-14" "gltf" "assets_public/test_model.gltf"
+resource "asset-15" "gltf" "assets_public/test_model.gltf"
+resource "asset-16" "gltf" "assets_public/test_model.gltf"
+resource "asset-17" "gltf" "assets_public/test_model.gltf"
+resource "asset-18" "gltf" "assets_public/test_model.gltf"
+resource "asset-19" "gltf" "assets_public/test_model.gltf"
+resource "asset-20" "gltf" "assets_public/test_model.gltf"
+resource "asset-21" "gltf" "assets_public/test_model.gltf"
+resource "asset-22" "gltf" "assets_public/test_model.gltf"
+resource "asset-23" "gltf" "assets_public/test_model.gltf"
+resource "asset-24" "gltf" "assets_public/test_model.gltf"
+resource "asset-25" "gltf" "assets_public/test_model.gltf"
+resource "asset-26" "gltf" "assets_public/test_model.gltf"
+resource "asset-27" "gltf" "assets_public/test_model.gltf"
+resource "asset-28" "gltf" "assets_public/test_model.gltf"
+resource "asset-29" "gltf" "assets_public/test_model.gltf"
+resource "asset-30" "gltf" "assets_public/test_model.gltf"
+resource "asset-31" "gltf" "assets_public/test_model.gltf"
+nodeCount 48
+node "mesh-0" "Public mesh 0" "" "asset-0"
+visible true
+transform 0.0 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-1" "Public mesh 1" "" "asset-1"
+visible true
+transform 0.15 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-2" "Public mesh 2" "" "asset-2"
+visible true
+transform 0.3 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-3" "Public mesh 3" "" "asset-3"
+visible true
+transform 0.44999999999999996 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-4" "Public mesh 4" "" "asset-4"
+visible true
+transform 0.6 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-5" "Public mesh 5" "" "asset-5"
+visible true
+transform 0.75 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-6" "Public mesh 6" "" "asset-6"
+visible true
+transform 0.8999999999999999 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-7" "Public mesh 7" "" "asset-7"
+visible true
+transform 1.05 0 0.0 0 0 0 1 1 1
+prefab "" ""
+node "mesh-8" "Public mesh 8" "" "asset-8"
+visible true
+transform 0.0 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-9" "Public mesh 9" "" "asset-9"
+visible true
+transform 0.15 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-10" "Public mesh 10" "" "asset-10"
+visible true
+transform 0.3 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-11" "Public mesh 11" "" "asset-11"
+visible true
+transform 0.44999999999999996 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-12" "Public mesh 12" "" "asset-12"
+visible true
+transform 0.6 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-13" "Public mesh 13" "" "asset-13"
+visible true
+transform 0.75 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-14" "Public mesh 14" "" "asset-14"
+visible true
+transform 0.8999999999999999 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-15" "Public mesh 15" "" "asset-15"
+visible true
+transform 1.05 0 0.15 0 0 0 1 1 1
+prefab "" ""
+node "mesh-16" "Public mesh 16" "" "asset-16"
+visible true
+transform 0.0 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-17" "Public mesh 17" "" "asset-17"
+visible true
+transform 0.15 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-18" "Public mesh 18" "" "asset-18"
+visible true
+transform 0.3 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-19" "Public mesh 19" "" "asset-19"
+visible true
+transform 0.44999999999999996 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-20" "Public mesh 20" "" "asset-20"
+visible true
+transform 0.6 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-21" "Public mesh 21" "" "asset-21"
+visible true
+transform 0.75 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-22" "Public mesh 22" "" "asset-22"
+visible true
+transform 0.8999999999999999 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-23" "Public mesh 23" "" "asset-23"
+visible true
+transform 1.05 0 0.3 0 0 0 1 1 1
+prefab "" ""
+node "mesh-24" "Public mesh 24" "" "asset-24"
+visible true
+transform 0.0 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-25" "Public mesh 25" "" "asset-25"
+visible true
+transform 0.15 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-26" "Public mesh 26" "" "asset-26"
+visible true
+transform 0.3 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-27" "Public mesh 27" "" "asset-27"
+visible true
+transform 0.44999999999999996 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-28" "Public mesh 28" "" "asset-28"
+visible true
+transform 0.6 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-29" "Public mesh 29" "" "asset-29"
+visible true
+transform 0.75 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-30" "Public mesh 30" "" "asset-30"
+visible true
+transform 0.8999999999999999 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "mesh-31" "Public mesh 31" "" "asset-31"
+visible true
+transform 1.05 0 0.44999999999999996 0 0 0 1 1 1
+prefab "" ""
+node "light-node-00" "Clustered light 00" "" ""
+visible false
+transform 1.4 1.4 1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-01" "Clustered light 01" "" ""
+visible false
+transform -1.4 1.1 0.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-02" "Clustered light 02" "" ""
+visible false
+transform 0.6 1.8 -1.4 0 0 0 1 1 1
+prefab "" ""
+node "light-node-03" "Clustered light 03" "" ""
+visible false
+transform -0.8 0.3 1.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-04" "Clustered light 04" "" ""
+visible false
+transform 1.8 0.2 -0.5 0 0 0 1 1 1
+prefab "" ""
+node "light-node-05" "Clustered light 05" "" ""
+visible false
+transform -1.8 0.7 -0.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-06" "Clustered light 06" "" ""
+visible false
+transform 0.2 -0.2 1.6 0 0 0 1 1 1
+prefab "" ""
+node "light-node-07" "Clustered light 07" "" ""
+visible false
+transform -0.4 1.7 1.0 0 0 0 1 1 1
+prefab "" ""
+node "light-node-08" "Clustered light 08" "" ""
+visible false
+transform 1.0 -0.1 -1.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-09" "Clustered light 09" "" ""
+visible false
+transform -1.0 1.6 -1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-10" "Clustered light 10" "" ""
+visible false
+transform 0.8 0.9 1.7 0 0 0 1 1 1
+prefab "" ""
+node "light-node-11" "Clustered light 11" "" ""
+visible false
+transform -0.9 0.1 1.5 0 0 0 1 1 1
+prefab "" ""
+node "light-node-12" "Clustered light 12" "" ""
+visible false
+transform 1.5 1.0 -1.2 0 0 0 1 1 1
+prefab "" ""
+node "light-node-13" "Clustered light 13" "" ""
+visible false
+transform -1.5 1.3 1.1 0 0 0 1 1 1
+prefab "" ""
+node "light-node-14" "Clustered light 14" "" ""
+visible false
+transform 0.3 1.2 -1.8 0 0 0 1 1 1
+prefab "" ""
+node "light-node-15" "Clustered light 15" "" ""
+visible false
+transform -0.3 1.5 -1.5 0 0 0 1 1 1
+prefab "" ""
+lightCount 16
+light "light-00" "light-node-00" 1.0 0.25 0.12 2.4 4.0 true
+light "light-01" "light-node-01" 0.18 0.38 1.0 2.4 4.0 true
+light "light-02" "light-node-02" 0.28 1.0 0.22 2.0 4.5 true
+light "light-03" "light-node-03" 1.0 0.2 0.58 2.0 3.8 true
+light "light-04" "light-node-04" 0.2 0.82 1.0 2.0 4.0 true
+light "light-05" "light-node-05" 1.0 0.72 0.18 2.2 4.2 true
+light "light-06" "light-node-06" 0.65 0.24 1.0 2.1 4.0 true
+light "light-07" "light-node-07" 0.18 1.0 0.72 1.8 3.8 true
+light "light-08" "light-node-08" 1.0 0.3 0.32 2.2 4.0 true
+light "light-09" "light-node-09" 0.24 0.42 1.0 2.0 4.2 true
+light "light-10" "light-node-10" 0.28 1.0 0.3 1.9 4.0 true
+light "light-11" "light-node-11" 1.0 0.78 0.24 2.1 4.0 true
+light "light-12" "light-node-12" 0.55 0.2 1.0 2.0 4.1 true
+light "light-13" "light-node-13" 0.2 1.0 0.6 1.8 3.8 true
+light "light-14" "light-node-14" 1.0 0.4 0.16 2.0 4.0 true
+light "light-15" "light-node-15" 0.3 0.65 1.0 2.1 4.0 true
+showcasePreset 0
+styleMaskStrength 1
+diffuseBandThreshold 0.4
+shadowMaximumFilterRadiusTexels 8
+innerOutlineEnabled true
+outlineStrength 0.4
+gradeExposureEv 0
+characterBackgroundEnabled true
+characterPlatformEnabled true
+blackholeQuality cinematic
+blackholeCamera front
+sceneRenderer character

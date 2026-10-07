@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "package": "Microsoft.NETCore.App.Runtime.win-x64",
+  "version": "9.0.11",
+  "source": "https://www.nuget.org/packages/Microsoft.NETCore.App.Runtime.win-x64/9.0.11",
+  "upstream": "https://github.com/dotnet/runtime",
+  "license": "MIT",
+  "files": {
+    "LICENSE.txt": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b",
+    "THIRD-PARTY-NOTICES.txt": "40686c6447a7d5b5d3693068e4571b5f483d7ed335aeee773ef662440de4c5d5"
+  },
+  "integration": "Hostfxr API and published NativeAOT runtime; no upstream engine code copied"
+}

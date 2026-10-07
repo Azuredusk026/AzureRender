@@ -1,0 +1,15 @@
+skinning-rtx passed
+skinning-intel passed
+managed-intel-coreclr passed
+managed-intel-nativeaot passed
+performance passed
+intel-procedural passed
+intel passed
+inspector-package passed
+generated-package passed
+installed-procedural passed
+forced-validation passed
+module-boundaries passed
+debug-provenance passed
+release-provenance passed
+P3 frozen device, budget and delivery gates passed

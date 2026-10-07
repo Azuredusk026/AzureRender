@@ -1,0 +1,12 @@
+debug-build passed
+release-build passed
+debug-tests passed
+debug-discovery passed
+release-discovery passed
+release-gate passed
+post-gates passed
+modules-off passed
+installed-contracts passed
+authoring-publish passed
+coverage passed
+P3 primary gates passed; real long run required

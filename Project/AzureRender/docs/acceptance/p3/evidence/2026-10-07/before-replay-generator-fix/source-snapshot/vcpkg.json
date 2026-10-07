@@ -1,0 +1,31 @@
+{
+  "name": "azure-render",
+  "version-string": "0.1.0",
+  "builtin-baseline": "2bc124dac8436f5d8e108273aacf3f68d9824185",
+  "dependencies": [
+    {"name": "manifold", "version>=": "3.5.2"},
+    "glfw3",
+    "stb",
+    "openexr",
+    "tinygltf",
+    "vulkan-memory-allocator",
+    {
+      "name": "joltphysics",
+      "version>=": "5.6.0"
+    },
+    {
+      "name": "sol2",
+      "version>=": "3.5.0"
+    },
+    "lua",
+    {"name": "rmlui", "version>=": "6.3"},
+    {"name": "miniaudio", "version>=": "0.11.25"}
+  ],
+  "overrides": [
+    {"name": "manifold", "version": "3.5.2"},
+    {
+      "name": "lua",
+      "version": "5.4.8"
+    }
+  ]
+}

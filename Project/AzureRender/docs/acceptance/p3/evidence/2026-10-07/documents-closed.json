@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "tests": {
+    "Debug": 150,
+    "Release": 152
+  },
+  "historicalByteLimits": 24
+}

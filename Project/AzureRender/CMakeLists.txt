@@ -72,6 +72,30 @@ find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(Lua 5.4 EXACT REQUIRED)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
+add_custom_target(AzureEngineContracts ALL
+    COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/write_engine_contracts.py"
+        --source "${CMAKE_CURRENT_SOURCE_DIR}"
+        --manifest "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/contracts"
+    BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/contracts/manifest.json"
+    COMMENT "Generating verified engine interface snapshots and schemas"
+    VERBATIM)
+if(BUILD_TESTING)
+    add_test(NAME AzureTools.EvolutionCoverage COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_evolution_coverage.py")
+    add_test(NAME AzureTools.EngineContracts COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_engine_contracts.py")
+    add_test(NAME AzureEngine.ContractsSnapshot COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/write_engine_contracts.py"
+        --verify --output "${CMAKE_CURRENT_BINARY_DIR}/contracts")
+    add_test(NAME AzureEngine.EvolutionCoverage COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_evolution_coverage.py"
+        --manifest "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
+        --evidence "${CMAKE_CURRENT_BINARY_DIR}/evolution-coverage"
+        --build-dir "${CMAKE_CURRENT_BINARY_DIR}" --configuration "$<CONFIG>"
+        --historical-policy committed-content)
+    set_tests_properties(AzureEngine.EvolutionCoverage PROPERTIES RUN_SERIAL TRUE TIMEOUT 300)
+endif()
 find_package(RmlUi CONFIG REQUIRED)
 find_path(MINIAUDIO_INCLUDE_DIR miniaudio.h REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
@@ -644,6 +668,9 @@ if(BUILD_TESTING)
     target_link_libraries(AzureGameplayPresentationTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.GameplayPresentation COMMAND AzureGameplayPresentationTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/portal.wav")
     add_executable(AzureScriptRuntimeTests tests/ScriptRuntimeTests.cpp)
+    add_executable(AzureResourceFrameTraceTests tests/ResourceFrameTraceTests.cpp)
+    target_link_libraries(AzureResourceFrameTraceTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.ResourceFrameTrace COMMAND AzureResourceFrameTraceTests)
     add_executable(AzureScriptBackendContractTests tests/ScriptBackendContractTests.cpp)
     target_link_libraries(AzureScriptBackendContractTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.ScriptBackendContract COMMAND AzureScriptBackendContractTests)
@@ -1276,6 +1303,16 @@ set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
 install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/contracts/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/contracts")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/tools/write_engine_contracts.py"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/tools")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/engine-delivery.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/p3-implementation.md"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 if(MSVC)
     if(MSVC_VERSION GREATER_EQUAL 1930)
         # CMake 3.20's runtime module recognizes VC142; VS2022 ships VC143.

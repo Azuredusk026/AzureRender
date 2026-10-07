@@ -1,0 +1,926 @@
+[
+  {
+    "seconds": 0.0,
+    "gpuFrames": 0,
+    "working": 217260032,
+    "peak": 217260032
+  },
+  {
+    "seconds": 0.5,
+    "gpuFrames": 237,
+    "working": 248467456,
+    "peak": 251445248
+  },
+  {
+    "seconds": 1.0309999999954016,
+    "gpuFrames": 511,
+    "working": 251707392,
+    "peak": 251707392
+  },
+  {
+    "seconds": 1.5619999999980791,
+    "gpuFrames": 784,
+    "working": 253124608,
+    "peak": 253124608
+  },
+  {
+    "seconds": 2.125,
+    "gpuFrames": 1041,
+    "working": 255193088,
+    "peak": 255193088
+  },
+  {
+    "seconds": 2.6559999999954016,
+    "gpuFrames": 1269,
+    "working": 256880640,
+    "peak": 256880640
+  },
+  {
+    "seconds": 3.186999999998079,
+    "gpuFrames": 1502,
+    "working": 257847296,
+    "peak": 257847296
+  },
+  {
+    "seconds": 3.702999999994063,
+    "gpuFrames": 1502,
+    "working": 257875968,
+    "peak": 257875968
+  },
+  {
+    "seconds": 4.202999999994063,
+    "gpuFrames": 1502,
+    "working": 257875968,
+    "peak": 257875968
+  },
+  {
+    "seconds": 4.702999999994063,
+    "gpuFrames": 1502,
+    "working": 257875968,
+    "peak": 257875968
+  },
+  {
+    "seconds": 5.202999999994063,
+    "gpuFrames": 1503,
+    "working": 256749568,
+    "peak": 266342400
+  },
+  {
+    "seconds": 6.0,
+    "gpuFrames": 1754,
+    "working": 261419008,
+    "peak": 269213696
+  },
+  {
+    "seconds": 6.625,
+    "gpuFrames": 2137,
+    "working": 264704000,
+    "peak": 269213696
+  },
+  {
+    "seconds": 7.264999999999418,
+    "gpuFrames": 2460,
+    "working": 244486144,
+    "peak": 269213696
+  },
+  {
+    "seconds": 7.905999999995402,
+    "gpuFrames": 2690,
+    "working": 271667200,
+    "peak": 273244160
+  },
+  {
+    "seconds": 8.43699999999808,
+    "gpuFrames": 3065,
+    "working": 273711104,
+    "peak": 273719296
+  },
+  {
+    "seconds": 9.093999999997322,
+    "gpuFrames": 3346,
+    "working": 292573184,
+    "peak": 292573184
+  },
+  {
+    "seconds": 9.73399999999674,
+    "gpuFrames": 3585,
+    "working": 295333888,
+    "peak": 303652864
+  },
+  {
+    "seconds": 10.452999999994063,
+    "gpuFrames": 3871,
+    "working": 296464384,
+    "peak": 303652864
+  },
+  {
+    "seconds": 11.10899999999674,
+    "gpuFrames": 4161,
+    "working": 298049536,
+    "peak": 303652864
+  },
+  {
+    "seconds": 11.81199999999808,
+    "gpuFrames": 4413,
+    "working": 299356160,
+    "peak": 303652864
+  },
+  {
+    "seconds": 12.43699999999808,
+    "gpuFrames": 4770,
+    "working": 287158272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 13.139999999999418,
+    "gpuFrames": 5138,
+    "working": 288636928,
+    "peak": 303652864
+  },
+  {
+    "seconds": 13.796999999998661,
+    "gpuFrames": 5558,
+    "working": 289763328,
+    "peak": 303652864
+  },
+  {
+    "seconds": 14.5,
+    "gpuFrames": 5878,
+    "working": 291549184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 15.046999999998661,
+    "gpuFrames": 6190,
+    "working": 292421632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 15.73399999999674,
+    "gpuFrames": 6498,
+    "working": 287338496,
+    "peak": 303652864
+  },
+  {
+    "seconds": 16.43699999999808,
+    "gpuFrames": 6793,
+    "working": 289157120,
+    "peak": 303652864
+  },
+  {
+    "seconds": 17.10899999999674,
+    "gpuFrames": 7027,
+    "working": 289964032,
+    "peak": 303652864
+  },
+  {
+    "seconds": 17.67199999999866,
+    "gpuFrames": 7245,
+    "working": 290791424,
+    "peak": 303652864
+  },
+  {
+    "seconds": 18.202999999994063,
+    "gpuFrames": 7478,
+    "working": 291766272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 18.75,
+    "gpuFrames": 7793,
+    "working": 292782080,
+    "peak": 303652864
+  },
+  {
+    "seconds": 19.4059999999954,
+    "gpuFrames": 8189,
+    "working": 293928960,
+    "peak": 303652864
+  },
+  {
+    "seconds": 20.1559999999954,
+    "gpuFrames": 8554,
+    "working": 295280640,
+    "peak": 303652864
+  },
+  {
+    "seconds": 20.81199999999808,
+    "gpuFrames": 8840,
+    "working": 295751680,
+    "peak": 303652864
+  },
+  {
+    "seconds": 21.43699999999808,
+    "gpuFrames": 9132,
+    "working": 295755776,
+    "peak": 303652864
+  },
+  {
+    "seconds": 22.125,
+    "gpuFrames": 9419,
+    "working": 296206336,
+    "peak": 303652864
+  },
+  {
+    "seconds": 22.81199999999808,
+    "gpuFrames": 9707,
+    "working": 296214528,
+    "peak": 303652864
+  },
+  {
+    "seconds": 23.48399999999674,
+    "gpuFrames": 9959,
+    "working": 296222720,
+    "peak": 303652864
+  },
+  {
+    "seconds": 24.077999999994063,
+    "gpuFrames": 10184,
+    "working": 296222720,
+    "peak": 303652864
+  },
+  {
+    "seconds": 24.639999999999418,
+    "gpuFrames": 10462,
+    "working": 296235008,
+    "peak": 303652864
+  },
+  {
+    "seconds": 25.2809999999954,
+    "gpuFrames": 10764,
+    "working": 296230912,
+    "peak": 303652864
+  },
+  {
+    "seconds": 25.92199999999866,
+    "gpuFrames": 11042,
+    "working": 296243200,
+    "peak": 303652864
+  },
+  {
+    "seconds": 26.43699999999808,
+    "gpuFrames": 11339,
+    "working": 296243200,
+    "peak": 303652864
+  },
+  {
+    "seconds": 26.968999999997322,
+    "gpuFrames": 11715,
+    "working": 296243200,
+    "peak": 303652864
+  },
+  {
+    "seconds": 27.593999999997322,
+    "gpuFrames": 12024,
+    "working": 296259584,
+    "peak": 303652864
+  },
+  {
+    "seconds": 28.17199999999866,
+    "gpuFrames": 12265,
+    "working": 296390656,
+    "peak": 303652864
+  },
+  {
+    "seconds": 28.718999999997322,
+    "gpuFrames": 12494,
+    "working": 297205760,
+    "peak": 303652864
+  },
+  {
+    "seconds": 29.25,
+    "gpuFrames": 12721,
+    "working": 297381888,
+    "peak": 303652864
+  },
+  {
+    "seconds": 29.7809999999954,
+    "gpuFrames": 12955,
+    "working": 297373696,
+    "peak": 303652864
+  },
+  {
+    "seconds": 30.343999999997322,
+    "gpuFrames": 13198,
+    "working": 297373696,
+    "peak": 303652864
+  },
+  {
+    "seconds": 30.93699999999808,
+    "gpuFrames": 13393,
+    "working": 297377792,
+    "peak": 303652864
+  },
+  {
+    "seconds": 31.452999999994063,
+    "gpuFrames": 13669,
+    "working": 297402368,
+    "peak": 303652864
+  },
+  {
+    "seconds": 32.06199999999808,
+    "gpuFrames": 13963,
+    "working": 297402368,
+    "peak": 303652864
+  },
+  {
+    "seconds": 32.625,
+    "gpuFrames": 14301,
+    "working": 297537536,
+    "peak": 303652864
+  },
+  {
+    "seconds": 33.23399999999674,
+    "gpuFrames": 14586,
+    "working": 297684992,
+    "peak": 303652864
+  },
+  {
+    "seconds": 33.76499999999942,
+    "gpuFrames": 14849,
+    "working": 297684992,
+    "peak": 303652864
+  },
+  {
+    "seconds": 34.35899999999674,
+    "gpuFrames": 15105,
+    "working": 297955328,
+    "peak": 303652864
+  },
+  {
+    "seconds": 34.95299999999406,
+    "gpuFrames": 15367,
+    "working": 298356736,
+    "peak": 303652864
+  },
+  {
+    "seconds": 35.56199999999808,
+    "gpuFrames": 15635,
+    "working": 298631168,
+    "peak": 303652864
+  },
+  {
+    "seconds": 36.18699999999808,
+    "gpuFrames": 15867,
+    "working": 298631168,
+    "peak": 303652864
+  },
+  {
+    "seconds": 36.75,
+    "gpuFrames": 16074,
+    "working": 298631168,
+    "peak": 303652864
+  },
+  {
+    "seconds": 37.26499999999942,
+    "gpuFrames": 16328,
+    "working": 298635264,
+    "peak": 303652864
+  },
+  {
+    "seconds": 37.9059999999954,
+    "gpuFrames": 16604,
+    "working": 298770432,
+    "peak": 303652864
+  },
+  {
+    "seconds": 38.5309999999954,
+    "gpuFrames": 16922,
+    "working": 298770432,
+    "peak": 303652864
+  },
+  {
+    "seconds": 39.17199999999866,
+    "gpuFrames": 17287,
+    "working": 298770432,
+    "peak": 303652864
+  },
+  {
+    "seconds": 39.82799999999406,
+    "gpuFrames": 17649,
+    "working": 298770432,
+    "peak": 303652864
+  },
+  {
+    "seconds": 40.45299999999406,
+    "gpuFrames": 17973,
+    "working": 298786816,
+    "peak": 303652864
+  },
+  {
+    "seconds": 41.04699999999866,
+    "gpuFrames": 18202,
+    "working": 298422272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 41.59399999999732,
+    "gpuFrames": 18474,
+    "working": 298557440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 42.21899999999732,
+    "gpuFrames": 18744,
+    "working": 298557440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 42.875,
+    "gpuFrames": 18992,
+    "working": 298557440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 43.48399999999674,
+    "gpuFrames": 19228,
+    "working": 298565632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 44.09399999999732,
+    "gpuFrames": 19482,
+    "working": 298565632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 44.70299999999406,
+    "gpuFrames": 19721,
+    "working": 298565632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 45.21899999999732,
+    "gpuFrames": 20033,
+    "working": 298565632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 45.81199999999808,
+    "gpuFrames": 20357,
+    "working": 298565632,
+    "peak": 303652864
+  },
+  {
+    "seconds": 46.4059999999954,
+    "gpuFrames": 20638,
+    "working": 298586112,
+    "peak": 303652864
+  },
+  {
+    "seconds": 46.96899999999732,
+    "gpuFrames": 20866,
+    "working": 298586112,
+    "peak": 303652864
+  },
+  {
+    "seconds": 47.48399999999674,
+    "gpuFrames": 21083,
+    "working": 298586112,
+    "peak": 303652864
+  },
+  {
+    "seconds": 48.0,
+    "gpuFrames": 21305,
+    "working": 298586112,
+    "peak": 303652864
+  },
+  {
+    "seconds": 48.5309999999954,
+    "gpuFrames": 21539,
+    "working": 298655744,
+    "peak": 303652864
+  },
+  {
+    "seconds": 49.09399999999732,
+    "gpuFrames": 21788,
+    "working": 298655744,
+    "peak": 303652864
+  },
+  {
+    "seconds": 49.70299999999406,
+    "gpuFrames": 21998,
+    "working": 298655744,
+    "peak": 303652864
+  },
+  {
+    "seconds": 50.23399999999674,
+    "gpuFrames": 22229,
+    "working": 298655744,
+    "peak": 303652864
+  },
+  {
+    "seconds": 50.84399999999732,
+    "gpuFrames": 22473,
+    "working": 298655744,
+    "peak": 303652864
+  },
+  {
+    "seconds": 51.42199999999866,
+    "gpuFrames": 22710,
+    "working": 298717184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 51.93699999999808,
+    "gpuFrames": 23048,
+    "working": 298717184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 52.60899999999674,
+    "gpuFrames": 23344,
+    "working": 298717184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 53.125,
+    "gpuFrames": 23657,
+    "working": 298717184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 53.68699999999808,
+    "gpuFrames": 23942,
+    "working": 298717184,
+    "peak": 303652864
+  },
+  {
+    "seconds": 54.20299999999406,
+    "gpuFrames": 24183,
+    "working": 298721280,
+    "peak": 303652864
+  },
+  {
+    "seconds": 54.7809999999954,
+    "gpuFrames": 24410,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 55.32799999999406,
+    "gpuFrames": 24672,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 55.96899999999732,
+    "gpuFrames": 24880,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 56.48399999999674,
+    "gpuFrames": 25081,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 57.01499999999942,
+    "gpuFrames": 25317,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 57.60899999999674,
+    "gpuFrames": 25594,
+    "working": 299134976,
+    "peak": 303652864
+  },
+  {
+    "seconds": 58.25,
+    "gpuFrames": 25848,
+    "working": 299069440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 58.76499999999942,
+    "gpuFrames": 26184,
+    "working": 299069440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 59.4059999999954,
+    "gpuFrames": 26535,
+    "working": 299069440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 60.04699999999866,
+    "gpuFrames": 26800,
+    "working": 299069440,
+    "peak": 303652864
+  },
+  {
+    "seconds": 60.67199999999866,
+    "gpuFrames": 27063,
+    "working": 299151360,
+    "peak": 303652864
+  },
+  {
+    "seconds": 61.29699999999866,
+    "gpuFrames": 27332,
+    "working": 299163648,
+    "peak": 303652864
+  },
+  {
+    "seconds": 61.93699999999808,
+    "gpuFrames": 27569,
+    "working": 299298816,
+    "peak": 303652864
+  },
+  {
+    "seconds": 62.51499999999942,
+    "gpuFrames": 27818,
+    "working": 299433984,
+    "peak": 303652864
+  },
+  {
+    "seconds": 63.1559999999954,
+    "gpuFrames": 28050,
+    "working": 299433984,
+    "peak": 303652864
+  },
+  {
+    "seconds": 63.76499999999942,
+    "gpuFrames": 28245,
+    "working": 299433984,
+    "peak": 303652864
+  },
+  {
+    "seconds": 64.2809999999954,
+    "gpuFrames": 28453,
+    "working": 299446272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 64.7809999999954,
+    "gpuFrames": 28744,
+    "working": 299446272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 65.42199999999866,
+    "gpuFrames": 29056,
+    "working": 299446272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 66.0309999999954,
+    "gpuFrames": 29389,
+    "working": 299446272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 66.625,
+    "gpuFrames": 29680,
+    "working": 299446272,
+    "peak": 303652864
+  },
+  {
+    "seconds": 67.13999999999942,
+    "gpuFrames": 29958,
+    "working": 298881024,
+    "peak": 303652864
+  },
+  {
+    "seconds": 67.67199999999866,
+    "gpuFrames": 30206,
+    "working": 298889216,
+    "peak": 303652864
+  },
+  {
+    "seconds": 68.2809999999954,
+    "gpuFrames": 30447,
+    "working": 298889216,
+    "peak": 303652864
+  },
+  {
+    "seconds": 68.875,
+    "gpuFrames": 30664,
+    "working": 298889216,
+    "peak": 303652864
+  },
+  {
+    "seconds": 69.42199999999866,
+    "gpuFrames": 30885,
+    "working": 298889216,
+    "peak": 303652864
+  },
+  {
+    "seconds": 69.98399999999674,
+    "gpuFrames": 31083,
+    "working": 298893312,
+    "peak": 303652864
+  },
+  {
+    "seconds": 70.51499999999942,
+    "gpuFrames": 31283,
+    "working": 298897408,
+    "peak": 303652864
+  },
+  {
+    "seconds": 71.0309999999954,
+    "gpuFrames": 31549,
+    "working": 298897408,
+    "peak": 303652864
+  },
+  {
+    "seconds": 71.6559999999954,
+    "gpuFrames": 31804,
+    "working": 298897408,
+    "peak": 303652864
+  },
+  {
+    "seconds": 72.20299999999406,
+    "gpuFrames": 32077,
+    "working": 298897408,
+    "peak": 303652864
+  },
+  {
+    "seconds": 72.71899999999732,
+    "gpuFrames": 32414,
+    "working": 298897408,
+    "peak": 303652864
+  },
+  {
+    "seconds": 73.34399999999732,
+    "gpuFrames": 32659,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 73.875,
+    "gpuFrames": 32915,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 74.5,
+    "gpuFrames": 33180,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 75.13999999999942,
+    "gpuFrames": 33440,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 75.7809999999954,
+    "gpuFrames": 33677,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 76.375,
+    "gpuFrames": 33885,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 76.9059999999954,
+    "gpuFrames": 34087,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 77.45299999999406,
+    "gpuFrames": 34323,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 78.04699999999866,
+    "gpuFrames": 34565,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 78.625,
+    "gpuFrames": 34842,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 79.21899999999732,
+    "gpuFrames": 35142,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 79.81199999999808,
+    "gpuFrames": 35440,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 80.375,
+    "gpuFrames": 35738,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 80.93699999999808,
+    "gpuFrames": 36002,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 81.46899999999732,
+    "gpuFrames": 36263,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 82.09399999999732,
+    "gpuFrames": 36491,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 82.67199999999866,
+    "gpuFrames": 36703,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 83.20299999999406,
+    "gpuFrames": 36919,
+    "working": 298901504,
+    "peak": 303652864
+  },
+  {
+    "seconds": 83.76499999999942,
+    "gpuFrames": 37153,
+    "working": 298905600,
+    "peak": 303652864
+  },
+  {
+    "seconds": 84.375,
+    "gpuFrames": 37361,
+    "working": 298905600,
+    "peak": 303652864
+  },
+  {
+    "seconds": 84.9059999999954,
+    "gpuFrames": 37587,
+    "working": 298905600,
+    "peak": 303652864
+  },
+  {
+    "seconds": 85.43699999999808,
+    "gpuFrames": 37837,
+    "working": 298905600,
+    "peak": 303652864
+  },
+  {
+    "seconds": 85.96899999999732,
+    "gpuFrames": 38157,
+    "working": 299175936,
+    "peak": 303652864
+  },
+  {
+    "seconds": 86.59399999999732,
+    "gpuFrames": 38481,
+    "working": 299175936,
+    "peak": 303652864
+  },
+  {
+    "seconds": 87.20299999999406,
+    "gpuFrames": 38722,
+    "working": 299175936,
+    "peak": 303652864
+  },
+  {
+    "seconds": 87.75,
+    "gpuFrames": 38982,
+    "working": 299184128,
+    "peak": 303652864
+  },
+  {
+    "seconds": 88.38999999999942,
+    "gpuFrames": 39202,
+    "working": 299184128,
+    "peak": 303652864
+  },
+  {
+    "seconds": 88.93699999999808,
+    "gpuFrames": 39412,
+    "working": 299188224,
+    "peak": 303652864
+  },
+  {
+    "seconds": 89.45299999999406,
+    "gpuFrames": 39661,
+    "working": 299192320,
+    "peak": 303652864
+  },
+  {
+    "seconds": 90.07799999999406,
+    "gpuFrames": 39900,
+    "working": 299192320,
+    "peak": 303652864
+  }
+]

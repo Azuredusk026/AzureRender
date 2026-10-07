@@ -1,0 +1,52 @@
+{
+  "status": "cause-isolated-and-regression-fixed",
+  "failedFormalRun": "before-telemetry-storage-fix/long-run/summary.json",
+  "failedWorkingSetGrowth": 0.05245713733315838,
+  "isolatedJsonGrowthBytes": 6107136,
+  "records": [
+    260,
+    3576
+  ],
+  "full8192Records": {
+    "legacyPrivateGrowthBytes": 15155200,
+    "typedPrivateGrowthBytes": 1187840,
+    "budgetBytes": 2097152
+  },
+  "preservedContract": {
+    "capacity": 8192,
+    "sampling": "periodic 240 frames plus every committed revision",
+    "fields": "all 15 existing resource fields, chronological ring retention"
+  },
+  "formalRevalidation": "passed",
+  "diagnosticCommands": [
+    [
+      "tools/msvc_env.bat",
+      "cl",
+      "/nologo",
+      "/EHsc",
+      "/std:c++17",
+      "/utf-8",
+      "/O2",
+      "/MD",
+      "/Ibuild/ninja-msvc-release/vcpkg_installed/x64-windows/include",
+      "build/evolution/p3/trace_memory_diagnostic.cpp",
+      "/Fobuild/evolution/p3/trace_memory_diagnostic.obj",
+      "/Febuild/evolution/p3/trace_memory_diagnostic.exe"
+    ],
+    [
+      "build/evolution/p3/trace_memory_diagnostic.exe"
+    ],
+    [
+      "ctest",
+      "--test-dir",
+      "build/ninja-msvc-release",
+      "-C",
+      "Release",
+      "-R",
+      "^AzureEngine.ResourceFrameTrace$",
+      "--output-on-failure"
+    ]
+  ],
+  "formalRevalidationEvidence": "long-run/summary.json",
+  "finalWorkingSetGrowth": 0.01653051417587692
+}

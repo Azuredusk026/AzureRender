@@ -6,6 +6,7 @@
 #endif
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/ResourceFrameTrace.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "validation/ValidationTransport.hpp"
 #include "runtime/LevelSession.hpp"
@@ -194,7 +195,7 @@ private:
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
     std::optional<azurerender::GameInputReplay> gameInputReplay_;
-    nlohmann::json resourceFrameSamples_=nlohmann::json::array();
+    azurerender::ResourceFrameTrace resourceFrameSamples_;
     std::uint64_t sampledLevelRevision_=0;
     nlohmann::json gameRouteFrames_=nlohmann::json::array();
     std::unique_ptr<azurerender::IScriptRuntime> scriptRuntime_;

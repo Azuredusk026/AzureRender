@@ -692,7 +692,9 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "    \"liveImageBytes\": " << gpuAllocator_.statistics().liveImageBytes << ",\n"
         << "    \"deviceLocalPeakBytes\": " << gpuAllocator_.statistics().deviceLocalPeakBytes << "\n"
         << "  },\n"
-        << "  \"resourceFrames\": " << resourceFrameSamples_.dump() << ",\n";
+        << "  \"resourceFrames\": ";
+    resourceFrameSamples_.write(output);
+    output<<",\n";
     output << "  \"sceneWidth\": " << renderExtent_.width << ",\n"
            << "  \"sceneHeight\": " << renderExtent_.height << ",\n";
     if(sceneRenderer_)sceneRenderer_->appendCaptureManifestFields(output);

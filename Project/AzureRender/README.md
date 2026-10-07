@@ -94,7 +94,7 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 [引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8、R9 已验收。
 
-系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 P3。
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。F4 至 P3 的功能与交付验收已完成。
 
 程序化内容通过生成器与标准资产管线进入项目。
 几何与刚体契约见[程序化内容说明](docs/runtime/procedural-content.md)。
@@ -113,3 +113,5 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 ## 资产与许可
 
 `assets_public/` 包含公共示例、测试资产和许可。`assets_private/` 保存本机授权素材。公开包与截图使用许可明确资源。依赖许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+引擎交付与限制见[P3 验收](docs/acceptance/p3/2026-10-07.md)。

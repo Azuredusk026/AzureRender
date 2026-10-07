@@ -1,0 +1,41 @@
+{"seconds": 60, "gpuFrames": 25644, "workingMiB": 282.7}
+{"seconds": 120, "gpuFrames": 51455, "workingMiB": 282.9}
+{"seconds": 180, "gpuFrames": 76426, "workingMiB": 283.2}
+{"seconds": 240, "gpuFrames": 101647, "workingMiB": 283.6}
+{"seconds": 300, "gpuFrames": 126517, "workingMiB": 286.5}
+{"seconds": 360, "gpuFrames": 151243, "workingMiB": 289.0}
+{"seconds": 420, "gpuFrames": 176032, "workingMiB": 289.1}
+{"seconds": 480, "gpuFrames": 200708, "workingMiB": 289.1}
+{"seconds": 540, "gpuFrames": 225208, "workingMiB": 289.4}
+{"seconds": 600, "gpuFrames": 249690, "workingMiB": 289.8}
+{"seconds": 660, "gpuFrames": 274089, "workingMiB": 290.8}
+{"seconds": 720, "gpuFrames": 298951, "workingMiB": 291.1}
+{"seconds": 781, "gpuFrames": 323657, "workingMiB": 291.2}
+{"seconds": 840, "gpuFrames": 348172, "workingMiB": 291.2}
+{"seconds": 900, "gpuFrames": 372502, "workingMiB": 291.7}
+{"seconds": 960, "gpuFrames": 397085, "workingMiB": 291.8}
+{"seconds": 1020, "gpuFrames": 421490, "workingMiB": 292.0}
+{"seconds": 1080, "gpuFrames": 445861, "workingMiB": 292.3}
+{"seconds": 1140, "gpuFrames": 470700, "workingMiB": 293.3}
+{"seconds": 1200, "gpuFrames": 494968, "workingMiB": 294.6}
+{"seconds": 1260, "gpuFrames": 519358, "workingMiB": 295.2}
+{"seconds": 1320, "gpuFrames": 543748, "workingMiB": 295.2}
+{"seconds": 1380, "gpuFrames": 568201, "workingMiB": 295.3}
+{"seconds": 1440, "gpuFrames": 592793, "workingMiB": 295.8}
+{"seconds": 1500, "gpuFrames": 617354, "workingMiB": 296.9}
+{"seconds": 1560, "gpuFrames": 641824, "workingMiB": 297.1}
+{"seconds": 1620, "gpuFrames": 666586, "workingMiB": 297.1}
+{"seconds": 1680, "gpuFrames": 690903, "workingMiB": 297.1}
+{"seconds": 1740, "gpuFrames": 715319, "workingMiB": 297.5}
+{"seconds": 1800, "gpuFrames": 739822, "workingMiB": 297.7}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 286, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 239, in run
+    try:evaluate(summary,formal=not probe)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 39, in evaluate
+    assert data['workingSetGrowth'] <= .05, 'Working set grew more than 5%'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Working set grew more than 5%

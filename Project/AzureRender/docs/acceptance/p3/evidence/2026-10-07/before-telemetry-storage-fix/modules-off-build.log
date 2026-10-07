@@ -1,0 +1,12 @@
+[1/10] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-p3-off && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/10] Generating verified engine interface snapshots and schemas
+{"status": "passed", "coveredItems": 18, "files": 42}
+[3/10] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[4/10] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[5/10] Linking CXX static library AzureLuaScripting.lib
+[6/10] Linking CXX executable AzureScriptEntityTests.exe
+[7/10] Linking CXX executable AzureScriptBackendContractTests.exe
+[8/10] Linking CXX executable AzureScriptRuntimeTests.exe
+[9/10] Linking CXX executable AzurePlayer.exe
+[10/10] Linking CXX executable AzureRender.exe

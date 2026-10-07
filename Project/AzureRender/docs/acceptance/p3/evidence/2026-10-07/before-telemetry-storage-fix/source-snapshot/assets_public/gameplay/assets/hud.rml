@@ -1,0 +1,17 @@
+<rml>
+<head>
+<title>Azure Game</title>
+<style>
+body { display: block; width: 100%; height: 100%; margin: 0; font-family: LatoLatin; font-size: 18dp; color: #f5f7ff; }
+#panel { position: absolute; left: 16dp; top: 16dp; width: 240dp; height: 112dp; background-color: #14253be6; padding: 12dp; border-radius: 4dp; }
+#status { display: block; margin-bottom: 12dp; }
+button { display: block; width: 90dp; height: 32dp; background-color: #2678b8; text-align: center; padding-top: 5dp; }
+button:hover { background-color: #469cd0; }
+#hint { position: absolute; left: 16dp; bottom: 16dp; font-size: 16dp; }
+</style>
+</head>
+<body>
+<div id="panel"><div id="status">courtyard</div><button id="pause" data-action="pause">Pause</button></div>
+<div id="hint">WASD: move | Space: jump | P: pause | O: step</div>
+</body>
+</rml>

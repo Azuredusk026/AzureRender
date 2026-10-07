@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "workflows": [
+    {
+      "workflow": "exploration",
+      "status": "passed",
+      "operations": 97,
+      "generationCosts": [
+        {
+          "generator": "azure.procedural",
+          "asset": "parameterized.gltf",
+          "milliseconds": 188.40410000120755,
+          "bytes": 4157
+        },
+        {
+          "generator": "direct-import",
+          "milliseconds": 68.42609999876004,
+          "bytes": 4157
+        },
+        {
+          "generator": "azure.rig-text",
+          "asset": "articulated.gltf",
+          "milliseconds": 111.46010000084061,
+          "bytes": 9388
+        },
+        {
+          "generator": "azure.rig-animation-graph",
+          "asset": "articulated-graph.json",
+          "milliseconds": 142.09909999772208,
+          "bytes": 158
+        }
+      ],
+      "animations": [
+        {
+          "blend": 1.0,
+          "clip": 0,
+          "morph": [
+            0.0,
+            0.0
+          ],
+          "node": "procedural-rig-0",
+          "previousClip": 0,
+          "time": 1.0833333333333344
+        },
+        {
+          "blend": 1.0,
+          "clip": 0,
+          "morph": [
+            0.0,
+            0.0
+          ],
+          "node": "procedural-rig-1",
+          "previousClip": 0,
+          "time": 1.3333333333333335
+        }
+      ],
+      "synchronizedValidation": true,
+      "physicalKeyboardMouse": "not performed"
+    },
+    {
+      "workflow": "inspector",
+      "status": "passed",
+      "operations": 97,
+      "generationCosts": [
+        {
+          "generator": "azure.procedural",
+          "asset": "parameterized.gltf",
+          "milliseconds": 59.78470000263769,
+          "bytes": 4181
+        },
+        {
+          "generator": "direct-import",
+          "milliseconds": 57.98009999853093,
+          "bytes": 4181
+        },
+        {
+          "generator": "azure.rig-text",
+          "asset": "articulated.gltf",
+          "milliseconds": 82.05540000199107,
+          "bytes": 9388
+        },
+        {
+          "generator": "azure.rig-animation-graph",
+          "asset": "articulated-graph.json",
+          "milliseconds": 110.0187999982154,
+          "bytes": 158
+        }
+      ],
+      "animations": [
+        {
+          "blend": 1.0,
+          "clip": 0,
+          "morph": [
+            0.0,
+            0.0
+          ],
+          "node": "procedural-rig-0",
+          "previousClip": 0,
+          "time": 1.0833333333333344
+        },
+        {
+          "blend": 1.0,
+          "clip": 0,
+          "morph": [
+            0.0,
+            0.0
+          ],
+          "node": "procedural-rig-1",
+          "previousClip": 0,
+          "time": 1.3333333333333335
+        }
+      ],
+      "synchronizedValidation": true,
+      "physicalKeyboardMouse": "not performed"
+    }
+  ]
+}

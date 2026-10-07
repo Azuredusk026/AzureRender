@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 286, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 239, in run
+    try:evaluate(summary,formal=not probe)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 39, in evaluate
+    assert data['workingSetGrowth'] <= .05, 'Working set grew more than 5%'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Working set grew more than 5%

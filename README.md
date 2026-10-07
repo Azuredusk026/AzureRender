@@ -75,7 +75,7 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 [引擎实施计划](Project/AzureRender/docs/plans/2026-10-06-engine-evolution.md)覆盖全部 18 项借鉴。12 个阶段按基础契约、编辑与 AI、专项和交付推进。F4、G8、U3、F5、U4、G9、R7、G10 已验收。
 
-探索与场景检视项目共用可配置系统。当前执行阶段为 P3 引擎复用与交付验收。
+探索与场景检视项目共用可配置系统。F4 至 P3 的功能与交付验收已完成。
 
 任务文件、接口、依赖和验收由三个子计划定义。
 
@@ -88,3 +88,5 @@ U2 工作区与教程、P2 展示与独立交付均已验收。
 ## 资产与许可
 
 公开资产、示例和展示媒体使用其随附许可。私有主角及派生素材按本机授权范围保存。第三方许可见 [THIRD_PARTY_NOTICES.md](Project/AzureRender/THIRD_PARTY_NOTICES.md)。
+
+引擎交付与限制见[P3 验收](Project/AzureRender/docs/acceptance/p3/2026-10-07.md)。

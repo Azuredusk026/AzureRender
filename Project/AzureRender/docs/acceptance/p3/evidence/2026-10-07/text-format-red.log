@@ -1,0 +1,16 @@
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+F
+======================================================================
+FAIL: test_engine_text_formats_support_checkout_newline_rules (__main__.CoverageTests.test_engine_text_formats_support_checkout_newline_rules)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_evolution_coverage.py", line 17, in test_engine_text_formats_support_checkout_newline_rules
+    self.assertTrue(matches_source(raw.replace(b'\r\n',b'\n'),expected,name))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 0.467s
+
+FAILED (failures=1)

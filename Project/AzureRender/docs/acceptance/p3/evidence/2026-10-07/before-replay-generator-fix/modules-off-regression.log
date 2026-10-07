@@ -1,0 +1,29 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-p3-off
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-p3-off
+      Start   3: AzureEngine.ContractsSnapshot
+ 1/10 Test   #3: AzureEngine.ContractsSnapshot .......   Passed    0.27 sec
+      Start  43: AzureEngine.ModuleAssembly
+ 2/10 Test  #43: AzureEngine.ModuleAssembly ..........   Passed    0.06 sec
+      Start  56: AzureEngine.ScriptBackendContract
+ 3/10 Test  #56: AzureEngine.ScriptBackendContract ...   Passed    0.06 sec
+      Start  58: AzureEngine.ScriptRuntime
+ 4/10 Test  #58: AzureEngine.ScriptRuntime ...........   Passed    0.76 sec
+      Start  62: AzureEngine.ScriptEntities
+ 5/10 Test  #62: AzureEngine.ScriptEntities ..........   Passed    0.11 sec
+      Start  90: AzureEngine.OptionalRuntimeTrace
+ 6/10 Test  #90: AzureEngine.OptionalRuntimeTrace ....   Passed    5.28 sec
+      Start  93: AzureEngine.EditorHost
+ 7/10 Test  #93: AzureEngine.EditorHost ..............   Passed    3.79 sec
+      Start  98: AzureEngine.ScriptPlayer
+ 8/10 Test  #98: AzureEngine.ScriptPlayer ............   Passed    2.12 sec
+      Start  99: AzureEngine.Project
+ 9/10 Test  #99: AzureEngine.Project .................   Passed    0.37 sec
+      Start 130: AzureEngine.PlayerCli
+10/10 Test #130: AzureEngine.PlayerCli ...............   Passed    0.65 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Label Time Summary:
+gpu    =  11.19 sec*proc (3 tests)
+
+Total Test time (real) =  13.48 sec

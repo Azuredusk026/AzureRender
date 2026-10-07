@@ -1,0 +1,14 @@
+{
+  "status": "aborted-for-memory-investigation",
+  "formalGate": "incomplete; complete 1800-second rerun required",
+  "lastProgress": {
+    "seconds": 600.3119999999981,
+    "gpuFrames": 247826,
+    "working": 393420800,
+    "peak": 399978496
+  },
+  "reason": "Sustained working-set growth after the fixed 120-second warmup; keep the 5% acceptance limit",
+  "interventionUtc": "2026-10-07T01:39:35.729516+00:00",
+  "normalWindowCloseRequested": true,
+  "pid": 23152
+}

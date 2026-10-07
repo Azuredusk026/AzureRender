@@ -6,7 +6,8 @@ from pathlib import Path
 import subprocess
 
 INPUT_DIRS = ("src", "shaders", "tools", "schemas", "assets_public", "cmake", "managed", "third_party/dotnet")
-INPUT_FILES = ("CMakeLists.txt", "CMakePresets.json", "vcpkg.json", "vcpkg-configuration.json")
+INPUT_FILES = ("CMakeLists.txt", "CMakePresets.json", "vcpkg.json", "vcpkg-configuration.json",
+               "docs/plans/engine-evolution-manifest.json")
 
 
 def digest(path):
@@ -23,6 +24,11 @@ def product_paths(build_dir, configuration):
         products += [build_dir/'managed'/name for name in (
             'coreclr/Azure.Engine.dll','coreclr/Azure.Engine.runtimeconfig.json','coreclr/Azure.Engine.deps.json',
             'coreclr/Azure.Samples.dll','nativeaot/Azure.Engine.Native.dll','manifest.json','complete.stamp')]
+    contracts=build_dir/'contracts'
+    if (contracts/'manifest.json').is_file():
+        from write_engine_contracts import verify_bundle
+        snapshot=verify_bundle(contracts)
+        products += [contracts/'manifest.json']+[contracts/name for name in snapshot['files']]
     return products
 
 
@@ -49,6 +55,10 @@ def verify(source, manifest):
     for name, expected in manifest["products"].items():
         if not Path(name).is_file() or digest(Path(name)) != expected:
             raise ValueError("Build product differs: " + name)
+        path=Path(name)
+        if path.name=='manifest.json' and path.parent.name=='contracts':
+            from write_engine_contracts import verify_bundle
+            verify_bundle(path.parent)
 
 
 def main():

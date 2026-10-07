@@ -1,0 +1,16 @@
+<rml><head><title>Azure Exploration</title><style>
+body { display: block; width: 100%; height: 100%; margin: 0; font-family: LatoLatin; font-size: 12dp; color: #eef4ff; }
+#panel { position: absolute; left: 12dp; top: 12dp; width: 290dp; padding: 10dp; background-color: #172338dd; border-radius: 8dp; }
+h1 { display: block; font-size: 16dp; margin: 0dp 0dp 8dp; color: #91ded5; }
+p { display: block; margin: 5dp 0dp; }
+#prompt { color: #ffe59d; }
+button { display: inline-block; background-color: #366b7e; padding: 6dp 10dp; margin-right: 8dp; border-radius: 4dp; }
+button:hover { background-color: #498c9e; }
+</style></head><body><div id="panel"><h1>Azure Exploration</h1>
+<p id="objective">Talk to the guide near the starting point [E].</p>
+<p id="progress">Artifacts: 0 / 3</p><p id="route">Follow the trail.</p>
+<p id="checkpoint"></p><p id="prompt"></p>
+<p>WASD Move | Shift Sprint | Mouse Camera | Space Jump | E Interact | R Restart</p>
+<p>Esc releases the cursor. Click the world to resume camera control.</p>
+<button data-action="pause">Pause / Resume</button><button data-action="restart">Restart</button>
+</div></body></rml>

@@ -1,0 +1,18 @@
+{"seconds": 60, "gpuFrames": 26559, "workingMiB": 298.6}
+{"seconds": 120, "gpuFrames": 52142, "workingMiB": 306.5}
+{"seconds": 180, "gpuFrames": 77579, "workingMiB": 318.3}
+{"seconds": 240, "gpuFrames": 102236, "workingMiB": 328.8}
+{"seconds": 300, "gpuFrames": 126676, "workingMiB": 338.6}
+{"seconds": 360, "gpuFrames": 150939, "workingMiB": 346.5}
+{"seconds": 420, "gpuFrames": 174238, "workingMiB": 353.1}
+{"seconds": 480, "gpuFrames": 198243, "workingMiB": 362.6}
+{"seconds": 540, "gpuFrames": 223035, "workingMiB": 370.7}
+{"seconds": 600, "gpuFrames": 247826, "workingMiB": 375.2}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 286, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 169, in run
+    assert process.poll() is None, 'Player exited before the real-time duration'
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Player exited before the real-time duration

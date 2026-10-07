@@ -1,8 +1,8 @@
 # Azure Engine 开发总计划
 
 > 文档类型：开发计划
-> 状态：F4、G8、U3、F5、U4、G9、R7、G10、R8、R9、G11 Complete，P3 Active。P2 及其前置完成。Android Deferred
-> 更新日期：2026-10-06
+> 状态：F4、G8、U3、F5、U4、G9、R7、G10、R8、R9、G11、P3 Complete。P2 及其前置完成。Android Deferred
+> 更新日期：2026-10-07
 > 适用范围：Windows 编辑器与 Windows 运行时。Android 目标暂缓
 > 实现状态依据：源码、测试与阶段验收记录
 
@@ -134,7 +134,7 @@ G6 交付包含 NPC、三件收集物、门与目标区的可玩关卡。U1 贯�
 
 ## 引擎架构与 AI 原生开发路线
 
-用户已采纳全部 18 项借鉴内容。范围与覆盖见[主实施计划](2026-10-06-engine-evolution.md)。文件与测试步骤见该计划的三个子计划。F4、G8、U3、F5、U4、G9、R7、G10、R8、R9、G11 已完成，当前执行阶段为 P3。
+用户已采纳全部 18 项借鉴内容。范围与覆盖见[主实施计划](2026-10-06-engine-evolution.md)。文件与测试步骤见该计划的三个子计划。F4 至 P3 的功能与交付验收已完成。
 
 P0 依次执行 F4、G8、U3、F5。P1 依次执行 U4、G9、R7。P2 执行 G10、R8、R9、G11 与 P3。C 类专项完成原型、实测和采用结论。
 
@@ -228,3 +228,5 @@ Android 目标无限期 Deferred，不配置 Android SDK、NDK、真机或移动
 G2 使用 UUID 与指纹分版本缓存，以及版本化目录资源包。U0 使用 miniaudio 与 RmlUi。P0 使用 Python 标准库生成 Windows 游戏目录。
 
 R6 验收见[场景可见性与裁剪验收](../acceptance/r6/2026-10-05.md)。
+
+引擎交付与限制见[P3 验收](../acceptance/p3/2026-10-07.md)。

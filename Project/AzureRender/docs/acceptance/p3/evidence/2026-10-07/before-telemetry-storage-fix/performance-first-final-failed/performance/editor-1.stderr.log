@@ -1,0 +1,12 @@
+[1791338946486][info][editor][code=0] Opened scene: exploration
+[1791338946769][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791338947019][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791338947033][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791338947045][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791338947053][info][editor][code=0] Opened scene: exploration
+[1791338947056][info][editor][code=0] Selected node: hero:body
+[1791338948223][info][editor][code=0] Play started
+[1791338948234][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791338948251][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791338948265][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791338954754][info][editor][code=0] Play stopped; edit state restored

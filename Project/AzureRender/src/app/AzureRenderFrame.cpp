@@ -315,18 +315,20 @@ void AzureRenderApp::drawFrame() {
         if(game)for(double sample:game->lastStepSamples())submissionCounters_.physicsSamplesMs.push_back(sample);
         const auto revision=activeRuntime()?activeRuntime()->sceneRevision():0;
         if(gameplayFrame_%240==0 || revision!=sampledLevelRevision_){
-            if(resourceFrameSamples_.size()>=8192)resourceFrameSamples_.erase(resourceFrameSamples_.begin());
             const auto& allocation=gpuAllocator_.statistics();
-            resourceFrameSamples_.push_back({{"frame",gameplayFrame_},{"revision",revision},
-                {"workMs",std::max(0.0,total-wait)},{"waitMs",wait},
-                {"physicsMaxMs",game && !game->lastStepSamples().empty()?*std::max_element(game->lastStepSamples().begin(),game->lastStepSamples().end()):0},
-                {"committed",revision!=sampledLevelRevision_},{"commitMs",levelSession_?levelSession_->lastCommitMilliseconds():0},
-                {"loading",levelSession_ && levelSession_->loading()},
-                {"cachedCandidates",levelSession_?levelSession_->cachedCandidates():0},
-                {"requestGeneration",levelSession_?levelSession_->requestGeneration():0},
-                {"loadError",levelSession_?levelSession_->lastError():std::string()},
-                {"buffers",allocation.liveBuffers},{"images",allocation.liveImages},
-                {"bufferBytes",allocation.liveBufferBytes},{"imageBytes",allocation.liveImageBytes}});
+            azurerender::ResourceFrameSample sample;
+            sample.frame=gameplayFrame_;sample.revision=revision;
+            sample.workMs=std::max(0.0,total-wait);sample.waitMs=wait;
+            sample.physicsMaxMs=game && !game->lastStepSamples().empty()?*std::max_element(game->lastStepSamples().begin(),game->lastStepSamples().end()):0;
+            sample.committed=revision!=sampledLevelRevision_;
+            sample.commitMs=levelSession_?levelSession_->lastCommitMilliseconds():0;
+            sample.loading=levelSession_ && levelSession_->loading();
+            sample.cachedCandidates=levelSession_?levelSession_->cachedCandidates():0;
+            sample.requestGeneration=levelSession_?levelSession_->requestGeneration():0;
+            sample.loadError=levelSession_?levelSession_->lastError():std::string();
+            sample.buffers=allocation.liveBuffers;sample.images=allocation.liveImages;
+            sample.bufferBytes=allocation.liveBufferBytes;sample.imageBytes=allocation.liveImageBytes;
+            resourceFrameSamples_.record(sample);
             sampledLevelRevision_=revision;
         }
     }
