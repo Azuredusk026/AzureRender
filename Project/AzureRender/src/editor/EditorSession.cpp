@@ -37,6 +37,27 @@ struct EditorSession::PlayState {
     }
 };
 EditorSession::~EditorSession()=default;
+void EditorSession::startImportTask(const std::filesystem::path& path) {
+    context_->startImport(path);
+    importTask_=tasks_->add("asset.import: "+path.u8string(),context_->project().file.u8string(),{
+        [this]{return context_->importProgress();},[this]{return context_->importReady();},
+        [this]{const auto result=edits_->current("asset.import-poll");if(!result)throw std::runtime_error(result.diagnostics.dump());return result.value;},
+        [this]{context_->cancelImport();}});
+}
+void EditorSession::cancelImportTask(){if(!importTask_.empty())tasks_->cancel(importTask_);else context_->cancelImport();}
+void EditorSession::pollTasks(){
+    if(tasks_)tasks_->poll(!playing()&&!building()&&(!gizmo_||!gizmo_->active())&&documentGuard_->state()!=DocumentActionState::AwaitingDecision);
+    pollBuild();
+}
+std::array<float,3> EditorSession::placementPosition(const nlohmann::json& parameters) const {
+    const auto origin=parameters.at("origin").get<std::array<float,3>>();auto direction=parameters.at("direction").get<std::array<float,3>>();
+    const auto length=internal::vectorLength(direction);if(length<1e-7F)throw EditRejection("Placement requires a nonzero ray direction");direction=internal::scaleVector(direction,1/length);
+    if(placementRaycast_)if(const auto hit=placementRaycast_(origin,direction))return *hit;
+    const auto plane=parameters.value("fallbackHeight",0.F);float distance=parameters.value("fallbackDistance",5.F);
+    if(distance<=0||!std::isfinite(distance))throw EditRejection("Fallback distance must be positive and finite");
+    if(std::abs(direction[1])>1e-7F){const auto intersection=(plane-origin[1])/direction[1];if(intersection>0)distance=intersection;}
+    return internal::addVectors(origin,internal::scaleVector(direction,distance));
+}
 bool EditorSession::startBuildInternal(const std::filesystem::path& install, const std::filesystem::path& output, bool replace) noexcept {
     try {
         if (playing() || building() || !context_->isProject()) throw std::runtime_error("Build requires an idle game project in edit mode");
@@ -50,7 +71,7 @@ void EditorSession::pollBuild() {
     if (!build_ || !build_->ready()) return;
     buildResult_ = build_->finish(); build_.reset();
     context_->log((buildResult_.passed ? "Game build completed: " : "ERROR: Game build failed: ") + buildResult_.message);
-    if (!buildResult_.passed) lastError_ = buildResult_.message;
+    if (!buildResult_.passed) recordError("project.build",buildResult_.message);
 }
 bool EditorSession::playing() const noexcept{return play_!=nullptr;}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
@@ -58,7 +79,7 @@ RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
 IScriptRuntime* EditorSession::scripts() noexcept{return play_?play_->scripts.get():nullptr;}
 PresentationRuntime* EditorSession::presentation() noexcept{return play_?play_->presentation.get():nullptr;}
-double EditorSession::advance(double delta){if(!play_)return 0;if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);return elapsed;}
+double EditorSession::advance(double delta){pollTasks();if(!play_)return 0;if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);return elapsed;}
 SceneDocument EditorSession::viewScene(){return play_?play_->runtime.snapshotScene():context_->scene();}
 bool EditorSession::consumeRuntimeReset() noexcept{const bool result=runtimeReset_;runtimeReset_=false;return result;}
 
@@ -67,6 +88,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     if (context_ == nullptr) {
         throw std::invalid_argument("Editor session requires a context");
     }
+    tasks_=std::make_unique<EditorTaskService>([this](const auto& source,const auto& message){recordError(source,message);});
     documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty();},[this]{context_->save();});
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
         if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
@@ -106,13 +128,14 @@ EditResult EditorSession::edit(const std::string& command,nlohmann::json paramet
     auto result=edits_->current(command,std::move(parameters),std::move(mergeKey));
     if(!result) {
         lastError_=result.diagnostics.empty()?"Edit failed":result.diagnostics.front().value("message",std::string("Edit rejected"));
-        context_->log("ERROR: "+lastError_);
-    }else lastError_.clear();
+        recordError(command,lastError_);
+    }
     return result;
 }
+void EditorSession::recordError(const std::string& source,const std::string& message){lastError_=message;feedback_.record(source,message);context_->log("ERROR ["+source+"]: "+message);}
 bool EditorSession::startBuild(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept {
-    try { return static_cast<bool>(edit("project.build",{{"install",install.string()},{"output",output.string()},{"replace",replace}})); }
-    catch(const std::exception& error) { lastError_=error.what();return false; }
+    try { return static_cast<bool>(edit("project.build",{{"install",install.u8string()},{"output",output.u8string()},{"replace",replace}})); }
+    catch(const std::exception& error) { recordError("editor.command",error.what());return false; }
 }
 bool EditorSession::execute(const EditorCommand command) noexcept {
     static const std::map<EditorCommand,std::string> ids={{EditorCommand::Save,"document.save"},{EditorCommand::Reload,"document.reload"},
@@ -121,7 +144,7 @@ bool EditorSession::execute(const EditorCommand command) noexcept {
         {EditorCommand::Stop,"preview.stop"},{EditorCommand::ResetLayout,"workspace.reset"},{EditorCommand::ReloadAssets,"assets.reload"},
         {EditorCommand::Capture,"viewport.capture"}};
     try { return static_cast<bool>(edit(ids.at(command))); }
-    catch(const std::exception& error) { lastError_=error.what();return false; }
+    catch(const std::exception& error) { recordError("editor.command",error.what());return false; }
 }
 bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     lastError_.clear();
@@ -129,6 +152,7 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
         lastError_="Wait for game build to finish"; return false;
     }
     if(command==EditorCommand::Play || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
+        context_->closeEditMerge();
         try{
             if(command==EditorCommand::Play){if(play_)return false;context_->detachRenderSettings();play_=std::make_unique<PlayState>(*context_);runtimeReset_=true;context_->log("Play started");}
             else if(command==EditorCommand::Stop){if(!play_)return false;play_.reset();runtimeReset_=true;context_->log("Play stopped; edit state restored");}
@@ -181,15 +205,15 @@ bool EditorSession::requestDocumentAction(DocumentAction action){
     if(state==DocumentActionState::AwaitingDecision && closePolicy_!="ask")
         return resolveDocumentAction(closePolicy_=="save"?DocumentDecision::Save:DocumentDecision::Discard);
     if(state==DocumentActionState::Ready && action==DocumentAction::Reload){
-        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){lastError_=error.what();return false;}
+        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){recordError("document.reload",error.what());return false;}
     }
     return state!=DocumentActionState::Failed;
 }
 bool EditorSession::resolveDocumentAction(DocumentDecision decision){
     const auto state=documentGuard_->resolve(decision);
-    if(state==DocumentActionState::Failed){lastError_=documentGuard_->diagnostic();context_->log("ERROR: "+lastError_);return false;}
+    if(state==DocumentActionState::Failed){recordError("document.decision",documentGuard_->diagnostic());return false;}
     if(state==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Reload){
-        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){lastError_=error.what();return false;}
+        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){recordError("document.reload",error.what());return false;}
     }
     return true;
 }

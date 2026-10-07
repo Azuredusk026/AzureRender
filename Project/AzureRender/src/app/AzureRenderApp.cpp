@@ -1,4 +1,5 @@
 #include "runtime/InputPreferences.hpp"
+#include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/GameplayKeys.hpp"
@@ -157,6 +158,21 @@ void AzureRenderApp::run(
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
         runOptions_.editorSession->context().attachRenderSettings(renderSettings_);
+        runOptions_.editorSession->setPlacementRaycast([this](const auto& origin,const auto& direction)->std::optional<std::array<float,3>> {
+            const auto* state=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+            if(!state)return {};float nearest=std::numeric_limits<float>::max();
+            for(const auto& entry:state->pickables) {
+                const auto& mesh=*entry.asset;
+                for(std::size_t i=0;i+2<mesh.indices.size();i+=3){
+                    const auto a=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i],entry.pose,entry.morph));
+                    const auto b=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i+1],entry.pose,entry.morph));
+                    const auto c=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[i+2],entry.pose,entry.morph));
+                    const auto distance=rayTriangleDistance(origin,direction,a,b,c);if(distance>0&&distance<nearest)nearest=distance;
+                }
+            }
+            if(nearest==std::numeric_limits<float>::max())return {};
+            return addVectors(origin,scaleVector(direction,nearest));
+        });
     }
 #endif
     hudEnabled_ = runOptions_.hudEnabled;
@@ -977,6 +993,7 @@ void AzureRenderApp::cleanup() {
     if(validationTransport_)validationTransport_->stop();
     if(validation_)validation_->stop();
 #if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)runOptions_.editorSession->setPlacementRaycast({});
     if(runOptions_.editorSession && runOptions_.editorSession->playing())static_cast<void>(runOptions_.editorSession->execute(azurerender::EditorCommand::Stop));
     if(shaderReloader_)shaderReloader_->cancel();
 #endif

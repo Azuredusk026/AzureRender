@@ -35,6 +35,9 @@ nav:
   - P3 引擎交付验收: acceptance/p3/2026-10-07.md
   - U5 交互与文档安全验收: acceptance/u5/2026-10-08.md
   - U6 选择与变换验收: acceptance/u6/2026-10-08.md
+  - U7 内容制作验收: acceptance/u7/2026-10-08.md
+  - 内容制作服务: runtime/content-workflows.md
+  - 编辑器交互教程: tutorials/editor-interaction.md
   - 构建与使用: getting-started.md
   - 渲染器架构: architecture.md
   - 角色渲染: character-rendering.md
@@ -59,6 +62,7 @@ nav:
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
       - 编辑器交互体验实施计划: plans/2026-10-07-editor-usability.md
+      - U7 内容制作细则: plans/2026-10-08-content-workflows.md
       - 引擎架构与 AI 原生实施计划: plans/2026-10-06-engine-evolution.md
       - 引擎基础与操作契约: plans/2026-10-06-engine-foundation-steps.md
       - AI 原生工具与编辑器: plans/2026-10-06-ai-native-editor-steps.md

@@ -6,6 +6,7 @@
 交互体验步骤见[体验实施计划](plans/2026-10-07-editor-usability.md)。
 问题证据见[体验审查](research/2026-10-07-editor-usability.md)。
 操作说明见[编辑器交互教程](tutorials/editor-interaction.md)。
+内容制作契约见[内容制作服务](runtime/content-workflows.md)。
 
 AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
 
@@ -139,3 +140,6 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 - Android、动态插件 ABI 和完整资产生产管线不属于 `0.1.0-rc1` 的发布承诺。
 
 文档只描述当前可验证实现。历史阶段计划、旧验收记录和源 DOCX 保留在仓库归档或 Git 历史中，不作为当前接口依据。
+
+编辑器交互步骤见[交互教程](tutorials/editor-interaction.md)。
+内容类型、引用和任务见[内容制作服务](runtime/content-workflows.md)。

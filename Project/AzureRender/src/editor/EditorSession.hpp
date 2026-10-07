@@ -2,6 +2,9 @@
 
 #include "EditorContext.hpp"
 #include "documents/DocumentActionGuard.hpp"
+#include "documents/EditorFeedback.hpp"
+#include "documents/EditorTaskService.hpp"
+#include "platform/PathSelection.hpp"
 #include "viewport/GizmoController.hpp"
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
@@ -51,6 +54,17 @@ public:
     bool consumeRuntimeReset() noexcept;
     bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
     void pollBuild();
+    void pollTasks();
+    void startImportTask(const std::filesystem::path& path);
+    void cancelImportTask();
+    const EditorTaskService& tasks() const{return *tasks_;}
+    const EditorFeedback& feedback() const{return feedback_;}
+    PathHistory& pathHistory(){return paths_;}
+    void setPathHistoryFile(std::filesystem::path file){pathHistoryFile_=std::move(file);paths_.load(pathHistoryFile_);}
+    void savePathHistory(){if(!pathHistoryFile_.empty())paths_.save(pathHistoryFile_);}
+    using PlacementRaycast=std::function<std::optional<std::array<float,3>>(const std::array<float,3>&,const std::array<float,3>&)>;
+    void setPlacementRaycast(PlacementRaycast query){placementRaycast_=std::move(query);}
+    std::array<float,3> placementPosition(const nlohmann::json& parameters) const;
     bool building() const noexcept { return build_ != nullptr; }
     const GameBuildResult& buildResult() const noexcept { return buildResult_; }
 
@@ -92,7 +106,7 @@ public:
         return captureLabel_;
     }
     [[nodiscard]] const std::string& lastError() const noexcept {
-        return lastError_;
+        return feedback_.latestError();
     }
 
 private:
@@ -114,6 +128,13 @@ private:
     std::string closePolicy_="ask";
     bool frameSelectionRequested_=false;
     std::string lastError_;
+    EditorFeedback feedback_;
+    std::unique_ptr<EditorTaskService> tasks_;
+    std::string importTask_;
+    PathHistory paths_;
+    std::filesystem::path pathHistoryFile_;
+    PlacementRaycast placementRaycast_;
+    void recordError(const std::string& source,const std::string& message);
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;
     bool captureRequested_ = false;

@@ -49,7 +49,8 @@ Json ComponentRegistry::describe(const std::string& type) const {
     for (const auto& property : descriptor.properties)
         properties.push_back({{"name", property.name}, {"label", property.label}, {"kind", static_cast<int>(property.kind)},
             {"minimum", property.minimum}, {"maximum", property.maximum}, {"category", property.category},
-            {"tooltip", property.tooltip}, {"readOnly", property.readOnly}, {"toolVisible", property.toolVisible}});
+            {"tooltip", property.tooltip}, {"readOnly", property.readOnly}, {"toolVisible", property.toolVisible},
+            {"reference",property.reference},{"assetTypes",property.assetTypes},{"referenceDefault",property.referenceDefault}});
     return {{"type", type}, {"id", descriptor.id}, {"version", descriptor.version}, {"properties", properties}};
 }
 ComponentRegistry makeRuntimeComponentRegistry() {

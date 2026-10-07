@@ -29,6 +29,12 @@
 | 节点属性 | `node.rename`、`node.visible` | `value` |
 | 实例关系 | `node.prefab-source`、`node.instance` | `value` |
 | 节点删除 | `node.remove`、`node.delete` | `index`，或当前选择 |
+| 父级关系 | `node.reparent` | `id` 与 `parent` |
+| 射线放置 | `asset.place` | `asset`、`origin` 与 `direction` |
+| 内容目录 | `assets.catalog` | 可选 `type` |
+| 组件恢复 | `component.remove`、`component.reset-field` | `type` 与可选 `field` |
+| 任务与反馈 | `tasks.describe`、`feedback.describe/dismiss` | 空对象或错误 `id` |
+| 路径服务 | `path.choose/history/remember` | 用途、路径与筛选 |
 | 节点复制 | `node.duplicate` | 当前选择 |
 | 变换 | `node.transform` | `translation`、`rotation`、`scale` |
 | 选择 | `node.select`、`selection.click` | 身份或索引，以及 Ctrl、Shift 和可见排序 |
@@ -37,7 +43,7 @@
 | 组件 | `component.add`、`component.field` | `type`，或 `type`、`field`、`value` |
 | 渲染 | `render.settings`、`render.preset` | `values` 或 `value` |
 | 文档 | `document.save`、`document.reload` | 空对象 |
-| 历史 | `history.undo`、`history.redo` | 空对象 |
+| 历史 | `history.undo`、`history.redo`、`history.end-edit` | 空对象 |
 | 预览 | `preview.play`、`preview.pause`、`preview.resume` | 空对象 |
 | 单步与停止 | `preview.step`、`preview.stop` | 空对象 |
 | 预览切关 | `preview.level` | `value` |
@@ -178,3 +184,5 @@ ctest --test-dir build/ninja-msvc-debug `
 事务用例验证失败恢复、合并与版本过期。
 生产宿主与输入回放分别验证真实调用路径。
 制作步骤见[编辑器教程](../tutorials/editor-first-game.md)。
+
+内容引用、任务和放置见[内容制作服务](content-workflows.md)。

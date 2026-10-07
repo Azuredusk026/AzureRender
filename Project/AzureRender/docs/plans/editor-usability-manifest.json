@@ -12,11 +12,11 @@
     },
     {
       "id": "U7",
-      "status": "Active"
+      "status": "Complete"
     },
     {
       "id": "P4",
-      "status": "Planned"
+      "status": "Active"
     }
   ],
   "issues": [
@@ -286,7 +286,15 @@
       "finding": "复制只遍历显式选中项，父节点子树未纳入，S5",
       "acceptance": "复制子树及内部引用，并保持外部引用",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX18",
@@ -294,7 +302,15 @@
       "finding": "大纲没有拖拽重设父级入口，S2/S5",
       "acceptance": "重设父级保持世界姿态，循环引用有反馈",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX19",
@@ -315,7 +331,15 @@
       "finding": "导入轮询位于面板和折叠区内，S7",
       "acceptance": "会话独立推进任务，面板只展示进度",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX21",
@@ -323,7 +347,15 @@
       "finding": "资产拖入只传资源身份，放置位置为默认原点，S7/S5",
       "acceptance": "按鼠标位置射线放置，并提供无命中回退",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX22",
@@ -331,7 +363,15 @@
       "finding": "同一模型出现虚拟路径和文件名两个条目，S7",
       "acceptance": "按资产身份统一列出，显示稳定名称和路径",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX23",
@@ -339,7 +379,15 @@
       "finding": "类型筛选仅有模型、Lua 和 Prefab，S7",
       "acceptance": "类型由注册描述提供，支持现有内容格式",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX24",
@@ -347,7 +395,15 @@
       "finding": "属性面板用字段名硬编码资产类型，字符串缓冲固定，S8",
       "acceptance": "引用元数据决定选择器，长文本安全编辑",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX25",
@@ -355,7 +411,15 @@
       "finding": "面板提供添加组件，缺少删除与逐字段重置，S8",
       "acceptance": "组件和字段支持明确的撤销及约束反馈",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX26",
@@ -423,7 +487,15 @@
       "finding": "成功操作清空 lastError，后台预览可能抹去失败反馈，S7/S10",
       "acceptance": "错误有独立寿命、来源与主动关闭入口",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     },
     {
       "id": "UX31",
@@ -431,7 +503,16 @@
       "finding": "创建、导入和构建主要依赖手输路径，S7/S11",
       "acceptance": "有路径选择、历史目录与明确的合法性反馈",
       "phase": "U7",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.ContentWorkflow",
+        "AzureEditor.TaskService",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ContentGpu"
+      ],
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7",
+      "nativeDialogVerification": "PendingP4"
     },
     {
       "id": "UX32",
@@ -455,15 +536,18 @@
       "finding": "选中反馈、轴标签、遮挡手柄和小窗口密度需复核，S1/S8",
       "acceptance": "选中对象、工具状态和禁用原因可直接辨认",
       "phase": "U6/U7",
-      "status": "PartiallyVerified",
+      "status": "Verified",
       "verifiedPhases": [
-        "U6"
+        "U6",
+        "U7"
       ],
       "tests": [
         "AzureEditor.WorkspaceGpu",
-        "AzureEditor.GizmoGpu"
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.ContentGpu"
       ],
-      "evidence": "../acceptance/u6/2026-10-08.md"
+      "evidence": "../acceptance/u7/2026-10-08.md",
+      "commitPhase": "u7"
     }
   ]
 }

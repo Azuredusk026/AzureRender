@@ -41,9 +41,11 @@ public:
     void startImport(const std::filesystem::path& path);
     void cancelImport();
     bool importing() const noexcept { return importJob_!=nullptr; }
+    bool importReady() const;
     float importProgress() const;
     std::optional<std::string> pollImport();
     void placeResource(const std::string& resource, const std::string& nodeId = {});
+    void placeAssetAt(const std::string& asset,const std::array<float,3>& position);
     void createNode(const std::string& nodeId);
     void placePrefab(const std::string& asset, const std::string& instance);
     void previewAnimation(const std::string& state, double time, const std::string& previous = {}, double crossfade = 0);
@@ -52,6 +54,9 @@ public:
     void selectNodes(std::vector<std::size_t> indices);
     const std::vector<std::size_t>& selectedNodes() const noexcept { return selectedNodes_; }
     void duplicateSelection();
+    void reparentNode(const std::string& id,const std::string& parent);
+    void removeGameplayComponent(const std::string& type);
+    void resetComponentField(const std::string& type,const std::string& field);
     void deleteSelection();
     nlohmann::json componentData(const std::string& node, const std::string& type) const;
     void setComponentField(const std::string& type, const std::string& field, const nlohmann::json& value);

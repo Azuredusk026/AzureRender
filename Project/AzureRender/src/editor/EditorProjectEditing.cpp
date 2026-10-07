@@ -6,6 +6,7 @@
 #include "assets/GltfLoader.hpp"
 #include "runtime/ComponentCodec.hpp"
 #include "runtime/AnimationStateMachine.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
 #include <chrono>
 #include <fstream>
 #include <set>
@@ -50,6 +51,7 @@ void EditorContext::startImport(const std::filesystem::path& path){
 }
 void EditorContext::cancelImport(){if(importJob_)importJob_->cancel();}
 float EditorContext::importProgress() const{return importJob_?importJob_->progress():0;}
+bool EditorContext::importReady() const{return !importJob_||importJob_->ready();}
 std::optional<std::string> EditorContext::pollImport(){if(!importJob_||!importJob_->ready())return {};auto job=std::move(importJob_);return commitImport(*job);}
 void EditorContext::placeResource(const std::string& resource,const std::string& nodeId){
     const auto id=nodeId.empty()?identity("node-"):nodeId;
@@ -59,7 +61,7 @@ void EditorContext::placeResource(const std::string& resource,const std::string&
         if(!assets_)throw std::invalid_argument("Unknown resource");
         const auto path=assets_->resolveReference(resource);
         if(path.extension()!=".gltf"&&path.extension()!=".glb")throw std::invalid_argument("Placement requires a registered model asset");
-        const auto existing=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.path==path;});
+        const auto existing=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return resolvedResourcePath(entry).lexically_normal()==path.lexically_normal();});
         if(existing!=scene_.resources.end())reference=existing->id;
         else{
             static_cast<void>(loadGltfAsset(path.string()));
@@ -119,15 +121,28 @@ void EditorContext::selectNodes(std::vector<std::size_t> indices){
     selectedNodes_=std::move(indices);if(!selectedNodes_.empty())selectedNodeIndex_=selectedNodes_.back();refreshSelectedTransform();
 }
 void EditorContext::duplicateSelection(){
-    if(selectedNodes_.empty())return;beginEdit();const auto selected=selectedNodes_;std::map<std::string,std::string> ids;std::vector<std::size_t> created;
-    for(auto index:selected)ids[scene_.nodes.at(index).id]=identity("node-");
-    for(auto index:selected){auto node=scene_.nodes.at(index);const auto original=node.id;node.id=ids.at(original);node.name+=" Copy";
+    if(selectedNodes_.empty())return;
+    std::set<std::string> selected;for(auto index:selectedNodes_)selected.insert(scene_.nodes.at(index).id);
+    bool grew=true;while(grew){grew=false;for(const auto& node:scene_.nodes)if(selected.count(node.parentId)&&selected.insert(node.id).second)grew=true;}
+    std::map<std::string,std::string> ids,resources;std::vector<std::size_t> created,source;
+    for(std::size_t i=0;i<scene_.nodes.size();++i)if(selected.count(scene_.nodes[i].id)){source.push_back(i);ids[scene_.nodes[i].id]=identity("node-");}
+    const auto originalLights=scene_.lights;beginEdit();
+    for(auto index:source){auto node=scene_.nodes.at(index);const auto original=node.id;node.id=ids.at(original);node.name+=" Copy";
         if(ids.count(node.parentId))node.parentId=ids.at(node.parentId);
         node.prefabSource.clear();node.instanceOf.clear();components_[node.id]=components_.count(original)?components_.at(original):nlohmann::json::object();
+        for(auto& component:components_[node.id].items())for(const auto& field:runtimeComponentRegistry().metadata().type(component.key()).properties)
+            if(field.reference=="node"&&component.value().at("data").contains(field.name)){
+                auto& reference=component.value()["data"][field.name];const auto found=ids.find(reference.get<std::string>());if(found!=ids.end())reference=found->second;
+            }
         if(node.resourceId.find(':')!=std::string::npos){const auto found=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==node.resourceId;});
-            if(found!=scene_.resources.end()){auto resource=*found;resource.id=identity("resource-");node.resourceId=resource.id;scene_.resources.push_back(resource);}}
+            if(found!=scene_.resources.end()){
+                const auto cached=resources.find(node.resourceId);
+                if(cached!=resources.end())node.resourceId=cached->second;
+                else{auto resource=*found;resource.id=identity("resource-");resources[node.resourceId]=resource.id;node.resourceId=resource.id;scene_.resources.push_back(resource);}
+            }}
         created.push_back(scene_.nodes.size());scene_.nodes.push_back(std::move(node));
     }
+    for(auto light:originalLights)if(ids.count(light.nodeId)){light.id=identity("light-");light.nodeId=ids.at(light.nodeId);scene_.lights.push_back(std::move(light));}
     rebuildEntities();selectNodes(std::move(created));
 }
 void EditorContext::deleteSelection(){
@@ -157,31 +172,30 @@ nlohmann::json EditorContext::componentData(const std::string& node,const std::s
     }
     const auto found=components_.find(node);
     if(found==components_.end() || !found->second.contains(type))return {};
-    return found->second.at(type).at("data");
+    auto fields=runtimeComponentRegistry().defaults(type).at("data");fields.update(found->second.at(type).at("data"));return fields;
 }
 void EditorContext::validateComponentReferences(const SceneNode& node,const nlohmann::json& data,const SceneDocument& scene)const {
     validateComponents(data);
     if(data.contains("azure.character") && data.contains("azure.rigid-body"))
         throw std::invalid_argument("Node "+node.id+": character and rigid-body require separate nodes");
-    for(const char* type:{"azure.script","azure.animator","azure.audio-source","azure.game-ui"}){
-        if(!data.contains(type))continue;
-        const auto fields=data.at(type).at("data");const auto reference=fields.value("asset",std::string());
-        if(reference.empty())continue;
-        if(!assets_)throw std::logic_error("Asset references require a project");
-        const auto path=assets_->resolveReference(reference);
-        if(!std::filesystem::is_regular_file(path))throw std::invalid_argument("Node "+node.id+": missing asset "+reference);
-        const auto extension=path.extension().string();
-        if((std::string(type)=="azure.script" && extension!=".lua") ||
-           (std::string(type)=="azure.audio-source" && extension!=".wav") ||
-           (std::string(type)=="azure.game-ui" && extension!=".rml") ||
-           (std::string(type)=="azure.animator" && extension!=".json"))
-            throw std::invalid_argument("Node "+node.id+": incompatible asset "+reference);
-        if(std::string(type)=="azure.animator"){
-            std::ifstream input(path);nlohmann::json graph;input>>graph;
+    for(const auto& component:data.items())for(const auto& field:runtimeComponentRegistry().metadata().type(component.key()).properties){
+        if(field.reference.empty()||!component.value().at("data").contains(field.name))continue;
+        const auto reference=component.value().at("data").at(field.name).get<std::string>();if(reference.empty())continue;
+        if(field.reference=="node"){
+            if(std::none_of(scene.nodes.begin(),scene.nodes.end(),[&](const auto& value){return value.id==reference;}))throw std::invalid_argument("Node "+node.id+": unknown node reference "+field.name+" = "+reference);
+        }else{
+            if(!assets_)throw std::logic_error("Asset references require a project");const auto path=assets_->resolveReference(reference);
+            if(!std::filesystem::is_regular_file(path)||!assetTypeRegistry().matches(path,field.assetTypes))throw std::invalid_argument("Node "+node.id+": incompatible or missing asset "+field.name+" = "+reference);
+        }
+    }
+    if(data.contains("azure.animator")){
+        const auto fields=data.at("azure.animator").at("data");const auto reference=fields.value("asset",std::string());
+        if(!reference.empty()){
+            std::ifstream input(assets_->resolveReference(reference));nlohmann::json graph;input>>graph;
             auto machine=AnimationStateMachine::parse(graph);machine.select(fields.value("state",std::string("idle")));
             const auto resource=std::find_if(scene.resources.begin(),scene.resources.end(),[&](const auto& r){return r.id==node.resourceId;});
             if(resource==scene.resources.end())throw std::invalid_argument("Node "+node.id+": animator requires a model");
-            const auto model=loadGltfAsset(resource->path.string());
+            const auto model=loadGltfAsset(resolvedResourcePath(*resource).u8string());
             for(const auto& state:graph.at("states"))if(state.at("clip").get<std::size_t>()>=model.animations.size())
                 throw std::invalid_argument("Node "+node.id+": animation clip exceeds model clips: "+state.at("name").get<std::string>());
         }
@@ -198,8 +212,8 @@ void EditorContext::addGameplayComponent(const std::string& type){
     if(!selectedNode())return;
     if(!componentData(selectedNode()->id,type).is_null())return;
         auto data=runtimeComponents().at(selectedNode()->id);data[type]=runtimeComponentRegistry().defaults(type);
-        // New camera components start with a valid, selected target.
-        if(type=="azure.third-person-camera")data[type]["data"]["target"]=selectedNode()->id;
+        for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties)
+            if(field.referenceDefault=="selected-node")data[type]["data"][field.name]=selectedNode()->id;
         validateComponentReferences(*selectedNode(),data,scene_);beginEdit();components_[selectedNode()->id]=std::move(data);syncComponents();
 }
 void EditorContext::setComponentField(const std::string& type,const std::string& field,const nlohmann::json& value){

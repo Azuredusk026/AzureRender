@@ -44,7 +44,7 @@ EditResult EditService::run(const std::vector<EditRequest>& requests,bool batch)
             const auto mergeKey=context_.mergeKey_;const auto mergeRevision=context_.mergeRevision_;
             const auto mergeSelection=context_.mergeSelection_;const auto importSummary=context_.importSummary_;
             try {
-                context_.closeEditMerge();
+                if(entries.front()->descriptor.modifiesDocument||entries.front()->descriptor.requiresIdle)context_.closeEditMerge();
                 result.value=entries.front()->handler(context_,requests.front().parameters);
                 if(!entries.front()->descriptor.modifiesDocument&&context_.documentContent()!=before)
                     throw EditRejection("Read-only operation modified the document");

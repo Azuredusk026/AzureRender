@@ -2,6 +2,7 @@
 #include "editor/EditorSession.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/LevelRenderSettings.hpp"
+#include "editor/content/AssetCatalog.hpp"
 #include <algorithm>
 #include <fstream>
 namespace azurerender {
@@ -29,6 +30,7 @@ EditRegistry editorOperations(EditorSession& session) {
     document("node.child",schema({{"parent",integer}},{"parent"}),[](auto& c,const auto& a) { c.addChildNode(a.at("parent").template get<std::size_t>()); });
     document("node.remove",schema({{"index",integer}},{"index"}),[](auto& c,const auto& a) { c.removeNode(a.at("index").template get<std::size_t>()); });
     document("node.duplicate",schema(),[](auto& c,const auto&) { c.duplicateSelection(); });
+    document("node.reparent",schema({{"id",text},{"parent",text}},{"id","parent"}),[](auto& c,const auto& a){c.reparentNode(a.at("id").template get<std::string>(),a.at("parent").template get<std::string>());});
     document("node.delete",schema(),[](auto& c,const auto&) { c.deleteSelection(); });
     registry.add({"selection.click",1,schema({{"id",text},{"ctrl",boolean},{"shift",boolean},{"visible",{{"type","array"},{"items",text}}}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
         session.selection().click(a.at("id").get<std::string>(),a.value("ctrl",false),a.value("shift",false),a.value("visible",std::vector<std::string>{}));return nullptr;
@@ -56,6 +58,20 @@ EditRegistry editorOperations(EditorSession& session) {
     document("node.place",schema({{"resource",text},{"id",text}},{"resource"}),[](auto& c,const auto& a) {
         c.placeResource(a.at("resource").template get<std::string>(),a.value("id",std::string()));
     });
+    document("asset.place",schema({{"asset",text},{"origin",vector},{"direction",vector},{"fallbackHeight",number},{"fallbackDistance",number}},{"asset","origin","direction"}),[&session](auto& c,const auto& a){c.placeAssetAt(a.at("asset").template get<std::string>(),session.placementPosition(a));});
+    registry.add({"assets.catalog",1,schema({{"type",text}}),false,false,false},[](EditorContext& c,const Json& a)->Json{return assetCatalog(c,a.value("type",std::string()));});
+    registry.add({"path.history",1,schema({{"purpose",text}},{"purpose"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.pathHistory().directories(a.at("purpose").get<std::string>());});
+    registry.add({"path.remember",1,schema({{"purpose",text},{"path",text},{"directory",boolean}},{"purpose","path"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{
+        session.pathHistory().remember(a.at("purpose").get<std::string>(),std::filesystem::u8path(a.at("path").get<std::string>()),a.value("directory",false));session.savePathHistory();return nullptr;
+    });
+    registry.add({"path.choose",1,schema({{"purpose",text},{"title",text},{"directory",boolean},{"extensions",{{"type","array"},{"items",text}}}},{"purpose"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        const auto purpose=a.at("purpose").get<std::string>();const auto history=session.pathHistory().directories(purpose);
+        PathSelectionRequest request;request.title=a.value("title",std::string("Select path"));request.directory=a.value("directory",false);request.extensions=a.value("extensions",std::vector<std::string>{});
+        if(!history.empty())request.initialDirectory=std::filesystem::u8path(history.front());
+        const auto result=choosePath(request);if(!result.diagnostic.empty())throw EditRejection(result.diagnostic);
+        if(result.cancelled)return {{"cancelled",true}};
+        session.pathHistory().remember(purpose,result.path,request.directory);session.savePathHistory();return {{"cancelled",false},{"path",result.path.u8string()}};
+    });
     document("prefab.place",schema({{"asset",text},{"instance",text}},{"asset","instance"}),[](auto& c,const auto& a) {
         c.placePrefab(a.at("asset").template get<std::string>(),a.at("instance").template get<std::string>());
     });
@@ -69,6 +85,8 @@ EditRegistry editorOperations(EditorSession& session) {
         if(a.contains("scale"))c.setGizmoScale(a.at("scale").template get<std::array<float,3>>());
     });
     document("component.add",schema({{"type",text}},{"type"}),[](auto& c,const auto& a) { c.addGameplayComponent(a.at("type").template get<std::string>()); });
+    document("component.remove",schema({{"type",text}},{"type"}),[](auto& c,const auto& a){c.removeGameplayComponent(a.at("type").template get<std::string>());});
+    document("component.reset-field",schema({{"type",text},{"field",text}},{"type","field"}),[](auto& c,const auto& a){c.resetComponentField(a.at("type").template get<std::string>(),a.at("field").template get<std::string>());});
     document("component.field",schema({{"type",text},{"field",text},{"value",Json::object()}},{"type","field","value"}),[](auto& c,const auto& a) {
         c.setComponentField(a.at("type").template get<std::string>(),a.at("field").template get<std::string>(),a.at("value"));
     });
@@ -126,14 +144,15 @@ EditRegistry editorOperations(EditorSession& session) {
             {"assets.reload",EditorCommand::ReloadAssets},{"viewport.capture",EditorCommand::Capture}}) {
         const bool idle=item.second==EditorCommand::Save||item.second==EditorCommand::Reload||item.second==EditorCommand::Undo||item.second==EditorCommand::Redo;
         registry.add({item.first,1,schema(),idle,false,idle},[&session,command=item.second](EditorContext&,const Json&)->Json {
-            if(!session.executeInternal(command))throw EditRejection(session.lastError().empty()?"Operation unavailable":session.lastError());
+            if(!session.executeInternal(command))throw EditRejection(session.lastError_.empty()?"Operation unavailable":session.lastError_);
             return nullptr;
         });
     }
+    registry.add({"history.end-edit",1,schema(),false,false,false},[](EditorContext& c,const Json&)->Json{c.closeEditMerge();return nullptr;});
     registry.add({"project.build",1,schema({{"install",text},{"output",text},{"replace",boolean}},{"install","output"}),true,false,true},
         [&session](EditorContext&,const Json& a)->Json {
-            if(!session.startBuildInternal(a.at("install").get<std::string>(),a.at("output").get<std::string>(),a.value("replace",false)))
-                throw EditRejection(session.lastError());
+            if(!session.startBuildInternal(std::filesystem::u8path(a.at("install").get<std::string>()),std::filesystem::u8path(a.at("output").get<std::string>()),a.value("replace",false)))
+                throw EditRejection(session.lastError_);
             return nullptr;
         });
     registry.add({"project.create",1,schema({{"path",text},{"name",text}},{"path","name"}),false,false,true},
@@ -155,9 +174,12 @@ EditRegistry editorOperations(EditorSession& session) {
                 a.value("inputs",std::vector<std::string>{}),a.value("dependencies",std::vector<std::string>{}),a.at("license").get<std::string>(),validator);
             c.notifyAssetVersionChanged();session.assetReloadRequested_=true;c.log("Generated asset: "+output);return id;
         });
-    registry.add({"asset.import-start",1,schema({{"path",text}},{"path"}),false,false,true},[](EditorContext& c,const Json& a)->Json { c.startImport(a.at("path").get<std::string>());return nullptr; });
-    registry.add({"asset.import-cancel",1,schema(),false,false,false},[](EditorContext& c,const Json&)->Json { c.cancelImport();return nullptr; });
+    registry.add({"asset.import-start",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json { session.startImportTask(std::filesystem::u8path(a.at("path").get<std::string>()));return nullptr; });
+    registry.add({"asset.import-cancel",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json { session.cancelImportTask();return nullptr; });
     registry.add({"asset.import-poll",1,schema(),true,false,true},[](EditorContext& c,const Json&)->Json { const auto value=c.pollImport();return value?Json(*value):Json(nullptr); });
+    registry.add({"tasks.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.tasks().report();});
+    registry.add({"feedback.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.feedback_.report();});
+    registry.add({"feedback.dismiss",1,schema({{"id",text}}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.feedback_.dismiss(a.value("id",std::string()));session.lastError_.clear();return nullptr;});
     registry.add({"animation.preview",1,schema({{"state",text},{"time",number},{"previous",text},{"crossfade",number}},{"state"}),false,false,true},
         [](EditorContext& c,const Json& a)->Json { c.previewAnimation(a.at("state").get<std::string>(),a.value("time",0.0),a.value("previous",std::string()),a.value("crossfade",0.0));return nullptr; });
     registry.add({"animation.clear-preview",1,schema(),false,false,true},[](EditorContext& c,const Json&)->Json { c.clearAnimationPreview();return nullptr; });
@@ -171,12 +193,12 @@ EditRegistry editorOperations(EditorSession& session) {
         session.frameSelectionRequested_=true;return nullptr;
     });
     registry.add({"document.close",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
-        if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError());return nullptr;
+        if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError_);return nullptr;
     });
     registry.add({"document.decision",1,schema({{"value",text}},{"value"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
         const auto decision=a.at("value").get<std::string>();
         if(decision!="save"&&decision!="discard"&&decision!="cancel")throw EditRejection("Unknown document decision");
-        if(!session.resolveDocumentAction(decision=="save"?DocumentDecision::Save:decision=="discard"?DocumentDecision::Discard:DocumentDecision::Cancel))throw EditRejection(session.lastError());return nullptr;
+        if(!session.resolveDocumentAction(decision=="save"?DocumentDecision::Save:decision=="discard"?DocumentDecision::Discard:DocumentDecision::Cancel))throw EditRejection(session.lastError_);return nullptr;
     });
     registry.add({"viewport.debug-overlay",1,schema({{"enabled",boolean}},{"enabled"}),false,false,false},
         [&session](EditorContext&,const Json& a)->Json { session.debugOverlay=a.at("enabled").get<bool>();return nullptr; });

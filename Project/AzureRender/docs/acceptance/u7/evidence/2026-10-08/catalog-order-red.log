@@ -1,0 +1,15 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 132: AzureEditor.AssetWorkflow
+1/1 Test #132: AzureEditor.AssetWorkflow ........***Failed    0.17 sec
+[1791403154332][info][editor][code=0] Opened scene: startup
+Catalog ordering must prioritize scene resources independently of random UUID ordering
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.18 sec
+
+The following tests FAILED:
+	132 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

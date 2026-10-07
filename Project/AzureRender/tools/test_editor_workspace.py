@@ -45,6 +45,10 @@ def main(executable,root):
         name=f'{size[0]}x{size[1]}-{dpi}'
         results[name]=launch(executable,root,name,size,dpi)
         assert all(p['docked'] for key,p in results[name]['panels'].items() if key!='settings')
+        browser=results[name]['panels']['assets']['rect']
+        first=results[name]['visibleAssets'][0]['id']
+        row=results[name]['widgets']['asset.'+first]
+        assert browser[1]<=row[1] and row[1]+row[3]<=browser[1]+browser[3], (name,'No fully visible asset row',row,browser)
         # Independent pinhole calculation for the initial focused hero.
         imageRect=results[name]['image']
         position=results[name]['camera']['position'];target=results[name]['camera']['target']
@@ -130,7 +134,7 @@ def main(executable,root):
         manipulated=launch(executable,root,'gizmo-'+mode,(1920,1080),1,events,capture=False)
         assert manipulated[field][0]>baseline,manipulated[field]
     scripts=launch(executable,root,'asset-scripts',(1920,1080),1,[dict(frame=25,action='click',target='tool.assets'),dict(frame=29,action='click',target='assets.type'),dict(frame=33,action='click',target='type.Scripts')])
-    assert scripts['visibleAssets'] and all(asset['type']=='.lua' for asset in scripts['visibleAssets'])
+    assert scripts['visibleAssets'] and all(asset['type']=='script' for asset in scripts['visibleAssets'])
     picking=launch(executable,root,'picking',(1920,1080),1,[dict(frame=25,action='click',target='node.hero:body'),dict(frame=28,action='click',target='focus'),dict(frame=32,action='click',target='node.ground'),dict(frame=36,action='click',target='pick.hero:body')],capture=False)
     assert picking['history'][-1]['selected']=='hero:body',picking['history'][-1]
     drag=launch(executable,root,'dock-drag',(1920,1080),1,[dict(frame=23,action='mouse',target='tab.assets',down=False),dict(frame=25,action='mouse',target='tab.assets',down=True),dict(frame=29,action='mouse',target='panelrect.outliner',down=True),dict(frame=33,action='mouse',target='panelrect.outliner',down=True),dict(frame=37,action='mouse',target='panelrect.outliner',down=False)],capture=False)

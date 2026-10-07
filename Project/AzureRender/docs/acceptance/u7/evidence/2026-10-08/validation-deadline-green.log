@@ -1,0 +1,8 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 44: AzureTools.ValidationProtocol
+1/1 Test #44: AzureTools.ValidationProtocol ....   Passed    1.89 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.90 sec

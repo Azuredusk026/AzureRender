@@ -77,6 +77,7 @@ private:
 #ifdef AZURERENDER_HAS_IMGUI
     void cancelViewportGizmo();
     bool drawViewportGizmo(ImVec2 origin,ImVec2 size);
+    void drawPathInput(const char* label,std::string& value,const std::string& purpose,bool directory,const std::vector<std::string>& extensions={});
 #endif
     std::array<float,16> viewportGizmoMatrix_{};
     void drawViewportPanel(PanelContext& context);
@@ -146,9 +147,10 @@ private:
 #ifdef AZURERENDER_HAS_IMGUI
     ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_;
 #endif
-    int assetType_ = 0,consoleLevel_ = 0;
+    int consoleLevel_ = 0;
     bool assetGrid_ = false;
     std::string assetDirectory_;
+    std::string assetTypeId_,importPath_,prefabInstance_,installPath_,outputPath_,projectPath_;
     std::set<std::string> openNodeIds_;
     nlohmann::json visibleAssets_=nlohmann::json::array();
 };

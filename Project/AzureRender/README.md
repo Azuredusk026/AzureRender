@@ -95,6 +95,8 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 编辑器提供共享输入路由、尺度构图和保存保护。
 选择服务支持过滤多选、范围选择与大纲揭示。
 操纵器提供空间变换、组操作、吸附及取消恢复。
+内容制作共享引用描述、资产目录和会话任务。
+层级拖拽、组件编辑和射线放置经公共操作执行。
 操作见[编辑器交互教程](docs/tutorials/editor-interaction.md)。
 问题与修复顺序见[体验实施计划](docs/plans/2026-10-07-editor-usability.md)。
 
@@ -121,3 +123,6 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 `assets_public/` 包含公共示例、测试资产和许可。`assets_private/` 保存本机授权素材。公开包与截图使用许可明确资源。依赖许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 引擎交付与限制见[P3 验收](docs/acceptance/p3/2026-10-07.md)。
+
+编辑器交互步骤见[交互教程](docs/tutorials/editor-interaction.md)。
+内容类型、引用和任务见[内容制作服务](docs/runtime/content-workflows.md)。

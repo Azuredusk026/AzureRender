@@ -1,0 +1,61 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 130: AzureEditor.ContentWorkflow
+1/2 Test #130: AzureEditor.ContentWorkflow ......***Failed    0.55 sec
+[1791399004024][info][editor][code=0] Opened scene: content
+[1791399004032][info][editor][code=0] Opened scene: content
+[1791399004046][info][editor][code=0] Opened scene: content
+[1791399004068][info][editor][code=0] Opened scene: content
+[1791399004086][info][editor][code=0] Opened scene: content
+[1791399004101][info][editor][code=0] Opened scene: content
+[1791399004122][info][editor][code=0] Opened scene: content
+[1791399004142][info][editor][code=0] Opened scene: content
+[1791399004160][info][editor][code=0] Opened scene: content
+[1791399004184][info][editor][code=0] Undo
+[1791399004194][info][editor][code=0] Opened scene: content
+[1791399004210][info][editor][code=0] Opened scene: content
+subtree: passed
+[1791399004226][info][editor][code=0] Opened scene: content
+[1791399004233][info][editor][code=0] Opened scene: content
+[1791399004250][info][editor][code=0] Undo
+[1791399004258][info][editor][code=0] Opened scene: content
+[1791399004262][info][editor][code=0] ERROR: Reparent would create a hierarchy cycle
+[1791399004267][info][editor][code=0] Opened scene: content
+[1791399004282][info][editor][code=0] Opened scene: content
+[1791399004299][info][editor][code=0] Opened scene: content
+[1791399004304][info][editor][code=0] ERROR: Transform contains shear that local TRS cannot represent
+reparent: passed
+[1791399004305][info][editor][code=0] Opened scene: content
+[1791399004312][info][editor][code=0] Opened scene: content
+[1791399004329][info][editor][code=0] Opened scene: content
+[1791399004346][info][editor][code=0] Opened scene: content
+[1791399004364][info][editor][code=0] Opened scene: content
+[1791399004384][info][editor][code=0] Undo
+[1791399004391][info][editor][code=0] Opened scene: content
+[1791399004415][info][editor][code=0] Undo
+[1791399004421][info][editor][code=0] Opened scene: content
+[1791399004426][info][editor][code=0] ERROR: This component is required by the scene node
+[1791399004429][info][editor][code=0] Opened scene: content
+[1791399004448][info][editor][code=0] Opened scene: content
+[1791399004470][info][editor][code=0] Opened scene: content
+components: passed
+metadata: passed
+[1791399004487][info][editor][code=0] Opened scene: content
+[1791399004495][info][editor][code=0] Opened scene: content
+[1791399004498][info][editor][code=0] ERROR: Unknown node: missing
+feedback: Successful read-only UI work must retain unrelated errors
+
+    Start 131: AzureEditor.TaskService
+2/2 Test #131: AzureEditor.TaskService ..........***Failed   10.14 sec
+[1791399004622][info][editor][code=0] Opened scene: startup
+Session must finish imports without any open panel
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =  10.69 sec
+
+The following tests FAILED:
+	130 - AzureEditor.ContentWorkflow (Failed)
+	131 - AzureEditor.TaskService (Failed)
+Errors while running CTest

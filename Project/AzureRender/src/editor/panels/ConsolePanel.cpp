@@ -27,6 +27,18 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
     if(!ImGui::Begin("Console###console",workspace_.open("console"))){ImGui::End();return;}
+    for(const auto& task:session_->tasks().report()) {
+        ImGui::TextWrapped("%s: %s",task.at("source").get<std::string>().c_str(),task.at("state").get<std::string>().c_str());
+        if(task.at("state")=="running")ImGui::ProgressBar(task.at("progress").get<float>());
+        const auto diagnostic=task.at("diagnostic").get<std::string>();
+        if(!diagnostic.empty())ImGui::TextWrapped("%s",diagnostic.c_str());
+    }
+    for(const auto& error:session_->feedback().report()) {
+        const auto id=error.at("id").get<std::string>();ImGui::PushID(id.c_str());
+        ImGui::TextWrapped("%s: %s",error.at("source").get<std::string>().c_str(),error.at("message").get<std::string>().c_str());
+        if(ui::button("Dismiss"))session_->edit("feedback.dismiss",{{"id",id}});
+        observeWidget("feedback.dismiss."+id);ImGui::PopID();
+    }
     if(session_->developerServices().report){
         const auto developer=session_->developerServices().report();
         if(developer.at("shaderAvailable").get<bool>()){

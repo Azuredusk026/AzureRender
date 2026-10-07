@@ -47,6 +47,7 @@ struct Character {
 AZURE_TYPE("azure.third-person-camera", 1)
 struct ThirdPersonCamera {
     AZURE_FIELD("Follow target", 0, 0)
+    AZURE_FIELD_REFERENCE("node", "", "selected-node")
     std::string target = "hero";
     AZURE_FIELD("Distance", 0.5, 30)
     float distance = 4;
@@ -115,6 +116,7 @@ struct TaskState {
 AZURE_TYPE("azure.script", 1)
 struct Script {
     AZURE_FIELD("Asset", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "script", "")
     std::string asset;
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
@@ -122,6 +124,7 @@ struct Script {
 AZURE_TYPE("azure.animator", 3)
 struct Animator {
     AZURE_FIELD("Graph asset", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "animation", "")
     std::string asset;
     AZURE_FIELD("State", 0, 0)
     std::string state = "idle";
@@ -146,6 +149,7 @@ struct Animator {
 AZURE_TYPE("azure.audio-source", 1)
 struct AudioSource {
     AZURE_FIELD("Audio asset", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "audio", "")
     std::string asset;
     AZURE_FIELD("Loop", 0, 1)
     bool loop = false;
@@ -159,6 +163,7 @@ struct AudioSource {
 AZURE_TYPE("azure.game-ui", 1)
 struct GameUiDocument {
     AZURE_FIELD("Document asset", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "ui", "")
     std::string asset;
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;

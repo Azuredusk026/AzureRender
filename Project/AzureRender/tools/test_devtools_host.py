@@ -77,7 +77,7 @@ def run(executable, output, workflow, config):
                           commandId=command, parameters=parameters, baseVersion=base)
             return result['value'] if passed else None
         def frames(count=8):
-            call('wait-frames', frames=count)
+            call('wait-frames', frames=count, timeoutMs=10000)
         def click(target):
             call('input', event=dict(action='click', target=target)); frames()
         def status():

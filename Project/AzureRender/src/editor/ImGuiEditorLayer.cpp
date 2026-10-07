@@ -1,5 +1,6 @@
 #include "runtime/InputPreferences.hpp"
 #include "ImGuiEditorLayer.hpp"
+#include "render/RenderMath.hpp"
 #include "input/EditorInputRouter.hpp"
 #include "EditorTheme.hpp"
 #include "EditorToolbar.hpp"
@@ -142,6 +143,7 @@ void ImGuiEditorLayer::initialize(
 #endif
     window_=window;
     configDirectory_=EditorWorkspace::configDirectory();
+    try{session_->setPathHistoryFile(configDirectory_/"path-history.json");}catch(const std::exception& error){session_->log(std::string("Path history: ")+error.what());}
     const bool restored=workspace_.load(configDirectory_);
     std::filesystem::create_directories(configDirectory_);
     iniPath_=(configDirectory_/"layout.ini").u8string();
@@ -256,6 +258,7 @@ void ImGuiEditorLayer::newFrame() {
         return;
     }
     session_->pollModel();
+    session_->pollTasks();
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     float nextDpi=1,scaleY=1;glfwGetWindowContentScale(window_,&nextDpi,&scaleY);
@@ -432,6 +435,8 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
+        const bool compact=ImGui::GetIO().DisplaySize.y/dpi_<720 || session_->settings().get("editor.compact").get<bool>();
+        if(compact){ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{8*dpi_,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{8*dpi_,2*dpi_});}
         if(ImGui::Button("Focus Selected")) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ImGui::SameLine();
@@ -455,6 +460,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             }
             ImGui::EndDisabled();ImGui::EndPopup();
         }
+        if(compact)ImGui::PopStyleVar(2);
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
         const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
@@ -492,7 +498,11 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 viewportTextures_[viewportImageIndex_]),
             imageSize);
         if(!session_->playing() && !session_->building() && ImGui::BeginDragDropTarget()){
-            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))try{session_->edit("node.place",{{"resource",static_cast<const char*>(payload->Data)}});}catch(const std::exception& error){context_->log(std::string("ERROR: ")+error.what());}
+            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE")){
+                const auto minimum=ImGui::GetItemRectMin();const auto mouse=ImGui::GetMousePos();
+                const auto direction=internal::pickRayDirection(cameraPosition_,cameraTarget_,(mouse.x-minimum.x)/imageSize.x,(mouse.y-minimum.y)/imageSize.y,imageSize.x/imageSize.y);
+                session_->edit("asset.place",{{"asset",static_cast<const char*>(payload->Data)},{"origin",cameraPosition_},{"direction",direction}});
+            }
             ImGui::EndDragDropTarget();
         }
         // Draw the viewport gizmo handles (if any selected primitive has a

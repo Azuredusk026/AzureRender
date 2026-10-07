@@ -37,8 +37,11 @@ nlohmann::json EditorContext::documentContent() const {
     render["blackholeCamera"]=static_cast<unsigned>(settings.blackhole.camera);
     auto references=nlohmann::json::object();
     for(const auto& reference:resourceReferences_)references[reference.first.generic_string()]=reference.second;
+    auto source=sourceLevel_.is_object()?sourceLevel_:nlohmann::json::object();
+    for(const auto* field:{"nodes","resources","lights","renderSettings"})source.erase(field);
+    if(source.contains("prefabs"))for(auto& instance:source["prefabs"])instance.erase("overrides");
     return {{"id",scene_.sceneId},{"nodes",nodes},{"resources",resources},{"lights",lights},
-        {"components",runtimeComponents()},{"sourceLevel",sourceLevel_},{"renderSettings",render},{"resourceReferences",references}};
+        {"components",runtimeComponents()},{"sourceLevel",source},{"renderSettings",render},{"resourceReferences",references}};
 }
 void EditorContext::checkpointSaved(){savedFingerprint_=documentFingerprint(documentContent());dirty_=false;}
 void EditorContext::refreshDirty(){dirty_=documentFingerprint(documentContent())!=savedFingerprint_;}

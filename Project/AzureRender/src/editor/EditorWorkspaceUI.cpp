@@ -1,5 +1,6 @@
 #include "ImGuiEditorLayer.hpp"
 #include "EditorTheme.hpp"
+#include "editor/ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui_internal.h>
 #include <algorithm>
@@ -8,6 +9,26 @@
 #include <set>
 #include <stdexcept>
 namespace azurerender {
+void ImGuiEditorLayer::drawPathInput(const char* label,std::string& value,const std::string& purpose,bool directory,const std::vector<std::string>& extensions) {
+    ImGui::PushID(purpose.c_str());ImGui::TextUnformatted(label);ImGui::SetNextItemWidth(-1);
+    ui::inputText("##path",value);observeWidget(purpose+".path");
+    if(ui::button("Browse...")){
+        const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",directory},{"extensions",extensions}});
+        if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
+    }observeWidget(purpose+".browse");ImGui::SameLine();ImGui::SetNextItemWidth(-1);
+    if(ImGui::BeginCombo("Recent","Directories")){
+        for(const auto& path:session_->pathHistory().directories(purpose))if(ImGui::Selectable(path.c_str())){
+            if(directory)value=path;
+            else{
+                session_->edit("path.remember",{{"purpose",purpose},{"path",path},{"directory",true}});
+                const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",false},{"extensions",extensions}});
+                if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
+            }
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::PopID();
+}
 void ImGuiEditorLayer::queueInputEvent(nlohmann::json event) {
     if(uiCursor_>=1024) { uiActions_.erase(uiActions_.begin(),uiActions_.begin()+static_cast<std::ptrdiff_t>(uiCursor_));uiCursor_=0; }
     if(uiActions_.size()-uiCursor_>=1024||event.dump().size()>65536)throw std::invalid_argument("UI event queue exceeds budget");
@@ -94,7 +115,7 @@ void ImGuiEditorLayer::drawWorkspace() {
             ImGuiID center=dockspace;
             const auto right=ImGui::DockBuilderSplitNode(center,ImGuiDir_Right,layout.right/hostSize.x,nullptr,&center);
             ImGuiID details=right;
-            const auto objects=ImGui::DockBuilderSplitNode(details,ImGuiDir_Up,.36F,nullptr,&details);
+            const auto objects=ImGui::DockBuilderSplitNode(details,ImGuiDir_Up,.42F,nullptr,&details);
             const auto bottom=ImGui::DockBuilderSplitNode(center,ImGuiDir_Down,layout.bottom/hostSize.y,nullptr,&center);
             for(const auto& panel:workspace_.panels()) {
                 const auto target=panel.id=="viewport"?center:panel.id=="outliner"?objects:panel.id=="inspector"?details:bottom;
@@ -141,6 +162,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["gizmoSpace"]=context_->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
     data["gizmoPivot"]=context_->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
     data["activeSelection"]=session_->selection().active();
+    data["feedback"]=session_->feedback().report();data["tasks"]=session_->tasks().report();
     data["gizmoMode"]=static_cast<unsigned>(context_->gizmoMode());
     data["capture"]={{"navigationButton",navigationButton_},{"gizmo",viewportGizmoDragActive_}};
     data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());

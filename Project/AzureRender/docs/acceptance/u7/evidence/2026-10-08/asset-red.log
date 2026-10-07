@@ -1,0 +1,18 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 131: AzureEditor.TaskService
+1/2 Test #131: AzureEditor.TaskService ..........   Passed    0.33 sec
+    Start 132: AzureEditor.AssetWorkflow
+2/2 Test #132: AzureEditor.AssetWorkflow ........***Failed    0.10 sec
+[1791399451139][info][editor][code=0] Opened scene: startup
+[1791399451146][info][editor][code=0] ERROR [assets.catalog]: Unknown operation: assets.catalog
+assets.catalog: [{"code":"RejectedOperation","message":"Unknown operation: assets.catalog"}]
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   0.45 sec
+
+The following tests FAILED:
+	132 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

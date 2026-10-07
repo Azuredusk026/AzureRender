@@ -22,6 +22,8 @@ struct Property {
     std::string category, tooltip;
     bool readOnly = false, toolVisible = true;
     std::function<void(const Json&)> validate;
+    std::string reference, referenceDefault;
+    std::vector<std::string> assetTypes;
 };
 struct Type {
     std::string name;
@@ -62,7 +64,7 @@ Property property(std::string name, std::string label, F T::* member, double min
                     if (!value.is_number_integer()) throw std::invalid_argument("Expected integer property");
             }
             static_cast<T*>(object)->*member = value.get<F>();
-        }, {}, {}, false, true, {}};
+        }, {}, {}, false, true, {}, {}, {}, {}};
     result.validate = [write = result.write](const Json& value) { T candidate{}; write(&candidate, value); };
     return result;
 }
@@ -81,6 +83,13 @@ Type reflectedType(std::string name, unsigned version, std::vector<Property> pro
 inline Property withMetadata(Property value, std::string category, std::string tooltip, bool readOnly, bool toolVisible) {
     value.category=std::move(category); value.tooltip=std::move(tooltip);
     value.readOnly=readOnly; value.toolVisible=toolVisible; return value;
+}
+inline Property withReference(Property value,std::string kind,std::vector<std::string> assetTypes={},std::string defaultPolicy={}) {
+    if(value.kind!=Kind::String || (kind!="node"&&kind!="asset"))throw std::invalid_argument("References require a string property and a declared kind");
+    if(defaultPolicy!=""&&defaultPolicy!="selected-node")throw std::invalid_argument("Unknown reference default policy");
+    if(kind!="node"&&!defaultPolicy.empty())throw std::invalid_argument("Selected-node defaults require a node reference");
+    if(kind=="node"&&!assetTypes.empty())throw std::invalid_argument("Node references cannot declare asset types");
+    value.reference=std::move(kind);value.assetTypes=std::move(assetTypes);value.referenceDefault=std::move(defaultPolicy);return value;
 }
 class Registry {
 public:

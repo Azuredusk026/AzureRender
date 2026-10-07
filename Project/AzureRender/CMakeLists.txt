@@ -277,6 +277,7 @@ add_library(AzureFoundation STATIC
 add_library(AzurePlatform STATIC
     src/platform/GlfwFrontend.cpp
     src/platform/ProcessRunner.cpp
+    src/platform/PathSelection.cpp
 )
 add_library(AzureDevtools STATIC src/devtools/ShaderHotReloader.cpp src/devtools/ShaderCompileJob.cpp src/devtools/GeometryProcessCompiler.cpp)
 target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform AzureProcedural)
@@ -419,10 +420,14 @@ add_library(AzureEditor STATIC
     src/editor/viewport/EditorCameraService.cpp
     src/editor/viewport/GizmoController.cpp
     src/editor/documents/DocumentActionGuard.cpp
+    src/editor/documents/EditorFeedback.cpp
+    src/editor/documents/EditorTaskService.cpp
     src/editor/input/EditorInputRouter.cpp
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
     src/editor/EditorProjectEditing.cpp
+    src/editor/EditorHierarchyEditing.cpp
+    src/editor/content/AssetCatalog.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
     src/editor/GameBuildJob.cpp
@@ -450,6 +455,9 @@ set(AZURE_HOST_SOURCES
 target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions nlohmann_json::nlohmann_json)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
+if(WIN32)
+    target_link_libraries(AzurePlatform PRIVATE ole32 shell32 uuid)
+endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
@@ -883,6 +891,15 @@ if(BUILD_TESTING)
     add_executable(AzureSelectionServiceTests tests/SelectionServiceTests.cpp)
     target_link_libraries(AzureSelectionServiceTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.SelectionService COMMAND AzureSelectionServiceTests)
+    add_executable(AzureEditorContentWorkflowTests tests/EditorContentWorkflowTests.cpp)
+    target_link_libraries(AzureEditorContentWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ContentWorkflow COMMAND AzureEditorContentWorkflowTests)
+    add_executable(AzureEditorTaskServiceTests tests/EditorTaskServiceTests.cpp)
+    target_link_libraries(AzureEditorTaskServiceTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.TaskService COMMAND AzureEditorTaskServiceTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf")
+    add_executable(AzureEditorAssetWorkflowTests tests/EditorAssetWorkflowTests.cpp)
+    target_link_libraries(AzureEditorAssetWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AssetWorkflow COMMAND AzureEditorAssetWorkflowTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf")
     target_include_directories(AzureEditorInputRouterTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.EditorInputRouter COMMAND AzureEditorInputRouterTests)
     add_executable(AzureEditorCameraServiceTests tests/EditorCameraServiceTests.cpp)
@@ -895,6 +912,8 @@ if(BUILD_TESTING)
     target_link_libraries(AzureDocumentActionGuardTests PRIVATE AzureEditor)
     add_test(NAME AzureRender.DocumentActionGuard COMMAND AzureDocumentActionGuardTests)
     if(Python3_Interpreter_FOUND)
+        add_test(NAME AzureEditor.ContentGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u7/content")
+        set_tests_properties(AzureEditor.ContentGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
         add_test(NAME AzureEditor.UsabilityGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_usability.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/usability")
         add_test(NAME AzureEditor.DocumentGuardGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_document_guard.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/documents")
         set_tests_properties(AzureEditor.UsabilityGpu AzureEditor.DocumentGuardGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
@@ -1599,3 +1618,9 @@ install(FILES third_party/ImGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATA
 install(FILES third_party/ImGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-source.json")
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u6/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u6/evidence" OPTIONAL)
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-workflows.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/editor-interaction.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-08-content-workflows.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/2026-10-08.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7/evidence" OPTIONAL)

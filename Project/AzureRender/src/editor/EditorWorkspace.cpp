@@ -87,7 +87,7 @@ EditorWorkspaceLayout EditorWorkspace::layout(float width,float height,float dpi
     EditorWorkspaceLayout r;r.menu=metrics.menuHeight;r.toolbar=metrics.toolbarHeight;r.status=metrics.statusHeight;
     r.compact=compact || width/dpi<1280 || height/dpi<720;
     r.left=r.compact?0:220*dpi;r.right=std::min(320*dpi,width*.26F);
-    r.bottom=r.compact?60*dpi:220*dpi;
+    r.bottom=r.compact?80*dpi:220*dpi;
     r.viewportWidth=width-r.left-r.right;
     r.viewportHeight=height-r.menu-r.toolbar-r.status-r.bottom-36*dpi;
     return r;

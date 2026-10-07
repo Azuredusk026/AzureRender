@@ -138,7 +138,11 @@ void EditorContext::save() {
         auto document = levelDocument();
         auto level = Level::parse(document, *assets_);level.save(scenePath_);
         sourceLevel_ = std::move(document);assets_->refresh();
-    } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources)resource.path=resourceReferences_.at(resource.path);portable.save(scenePath_);}else scene_.save(scenePath_);
+    } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources){
+        auto reference=resourceReferences_.at(resource.path);
+        if(reference.find(":/")==std::string::npos){const auto& record=assets_->records().at(reference);reference=record.virtualPath;}
+        resource.path=std::filesystem::u8path(reference);
+    }portable.save(scenePath_);}else scene_.save(scenePath_);
     checkpointSaved();
     ++revision_;closeEditMerge();
     log("Saved scene: " + scenePath_.string());
@@ -455,6 +459,7 @@ void EditorContext::refreshSelectedTransform() {
 std::filesystem::path EditorContext::resolvedResourcePath(
     const SceneResource& resource) const {
     if (resource.path.is_absolute()) return resource.path;
+    if(assets_ && resource.path.generic_u8string().find(":/")!=std::string::npos)return assets_->resolveReference(resource.path.generic_u8string());
     const std::filesystem::path besideScene =
         scenePath_.parent_path() / resource.path;
     if (std::filesystem::exists(besideScene)) return besideScene;

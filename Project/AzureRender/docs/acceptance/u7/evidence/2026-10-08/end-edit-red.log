@@ -1,0 +1,70 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 130: AzureEditor.ContentWorkflow
+1/1 Test #130: AzureEditor.ContentWorkflow ......***Failed    0.79 sec
+[1791402616109][info][editor][code=0] Opened scene: content
+[1791402616118][info][editor][code=0] Opened scene: content
+[1791402616133][info][editor][code=0] Opened scene: content
+[1791402616153][info][editor][code=0] Opened scene: content
+[1791402616173][info][editor][code=0] Opened scene: content
+[1791402616190][info][editor][code=0] Opened scene: content
+[1791402616212][info][editor][code=0] Opened scene: content
+[1791402616233][info][editor][code=0] Opened scene: content
+[1791402616250][info][editor][code=0] Opened scene: content
+[1791402616279][info][editor][code=0] Undo
+[1791402616288][info][editor][code=0] Opened scene: content
+[1791402616302][info][editor][code=0] Opened scene: content
+subtree: passed
+[1791402616321][info][editor][code=0] Opened scene: content
+[1791402616329][info][editor][code=0] Opened scene: content
+[1791402616350][info][editor][code=0] Undo
+[1791402616359][info][editor][code=0] Opened scene: content
+[1791402616363][info][editor][code=0] ERROR [node.reparent]: Reparent would create a hierarchy cycle
+[1791402616368][info][editor][code=0] Opened scene: content
+[1791402616383][info][editor][code=0] Opened scene: content
+[1791402616401][info][editor][code=0] Opened scene: content
+[1791402616406][info][editor][code=0] ERROR [node.reparent]: Transform contains shear that local TRS cannot represent
+reparent: passed
+[1791402616408][info][editor][code=0] Opened scene: content
+[1791402616415][info][editor][code=0] Opened scene: content
+[1791402616431][info][editor][code=0] Opened scene: content
+[1791402616448][info][editor][code=0] Opened scene: content
+[1791402616466][info][editor][code=0] Opened scene: content
+[1791402616487][info][editor][code=0] Undo
+[1791402616494][info][editor][code=0] Opened scene: content
+[1791402616513][info][editor][code=0] Undo
+[1791402616520][info][editor][code=0] Opened scene: content
+[1791402616525][info][editor][code=0] ERROR [component.remove]: This component is required by the scene node
+[1791402616530][info][editor][code=0] Opened scene: content
+[1791402616549][info][editor][code=0] Opened scene: content
+[1791402616569][info][editor][code=0] Opened scene: content
+components: passed
+metadata: passed
+[1791402616586][info][editor][code=0] Opened scene: content
+[1791402616595][info][editor][code=0] Opened scene: content
+[1791402616599][info][editor][code=0] ERROR [node.reparent]: Unknown node: missing
+feedback: passed
+[1791402616615][info][editor][code=0] Opened scene: content
+[1791402616622][info][editor][code=0] Opened scene: content
+[1791402616637][info][editor][code=0] Opened scene: content
+[1791402616655][info][editor][code=0] Opened scene: content
+[1791402616674][info][editor][code=0] Opened scene: content
+[1791402616690][info][editor][code=0] Opened scene: content
+[1791402616710][info][editor][code=0] Opened scene: content
+[1791402616729][info][editor][code=0] Opened scene: content
+registered: passed
+[1791402616753][info][editor][code=0] Opened scene: content
+[1791402616761][info][editor][code=0] Opened scene: content
+[1791402616777][info][editor][code=0] Opened scene: content
+[1791402616817][info][editor][code=0] Opened scene: content
+[1791402616833][info][editor][code=0] ERROR [history.end-edit]: Unknown operation: history.end-edit
+queries: history.end-edit: [{"code":"RejectedOperation","message":"Unknown operation: history.end-edit"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.80 sec
+
+The following tests FAILED:
+	130 - AzureEditor.ContentWorkflow (Failed)
+Errors while running CTest

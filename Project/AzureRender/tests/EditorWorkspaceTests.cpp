@@ -18,6 +18,7 @@ int main(){try{
  for(float dpi:{1.F,1.5F,2.F})for(auto size:{std::array<float,2>{1920,1080},std::array<float,2>{1280,720}}){
   auto layout=EditorWorkspace::layout(size[0],size[1],dpi);
   check(layout.viewportWidth>=480 && layout.viewportHeight>=270,"Physical viewport budget");
+  check(layout.bottom>=80*dpi,"Content browser must reserve a filter row and visible asset rows");
  }
  auto path=std::filesystem::temp_directory_path()/"azure-workspace-unit";
  std::filesystem::create_directories(path);

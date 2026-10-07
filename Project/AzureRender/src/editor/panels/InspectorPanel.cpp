@@ -3,6 +3,7 @@
 #include "editor/ui/UiScopes.hpp"
 #include "reflection/Registry.hpp"
 #include "runtime/ComponentRegistry.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -38,29 +39,15 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
             session_->edit("node.visible",{{"value",visible}});
         }
         ImGui::TextUnformatted("Name");
-        std::array<char, 128> nameBuffer{};
-        const std::size_t copyLength = std::min(
-            node->name.size(), nameBuffer.size() - 1);
-        std::memcpy(
-            nameBuffer.data(), node->name.data(), copyLength);
-        if (ImGui::InputText("##name", nameBuffer.data(), nameBuffer.size())) {
-            session_->edit("node.rename",{{"value",nameBuffer.data()}},"details-name");
-        }
+        auto name=node->name;
+        ImGui::SetNextItemWidth(-1);
+        if(ui::inputText("##name",name))session_->edit("node.rename",{{"value",name}},"details-name");
+        if(ImGui::IsItemDeactivatedAfterEdit())session_->edit("history.end-edit");
         observeWidget("name");
-        ImGui::TextUnformatted("Prefab Source");
-        std::array<char, 256> prefabBuffer{};
-        std::memcpy(prefabBuffer.data(), node->prefabSource.data(),
-            std::min(node->prefabSource.size(), prefabBuffer.size() - 1));
-        if (ImGui::InputText("##prefab", prefabBuffer.data(), prefabBuffer.size())) {
-            session_->edit("node.prefab-source",{{"value",prefabBuffer.data()}},"details-prefab");
-        }
-        ImGui::TextUnformatted("Instance Of");
-        std::array<char, 128> instanceBuffer{};
-        std::memcpy(instanceBuffer.data(), node->instanceOf.data(),
-            std::min(node->instanceOf.size(), instanceBuffer.size() - 1));
-        if (ImGui::InputText("##instance", instanceBuffer.data(), instanceBuffer.size())) {
-            session_->edit("node.instance",{{"value",instanceBuffer.data()}},"details-instance");
-        }
+        ImGui::TextUnformatted("Prefab Source");auto prefab=node->prefabSource;ImGui::SetNextItemWidth(-1);
+        if(ui::inputText("##prefab",prefab,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.prefab-source",{{"value",prefab}},"details-prefab");
+        ImGui::TextUnformatted("Instance Of");auto instance=node->instanceOf;ImGui::SetNextItemWidth(-1);
+        if(ui::inputText("##instance",instance,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.instance",{{"value",instance}},"details-instance");
     }
     if(view.isProject() && view.selectedNode()){
         std::vector<std::string> types;
@@ -70,29 +57,43 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{session_->edit("component.add",{{"type",type}});}catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
         const auto& componentRegistry=runtimeComponentRegistry().metadata();
         for(const auto& type:types){auto data=view.componentData(view.selectedNode()->id,type);if(data.is_null())continue;
-            ImGui::PushID(type.c_str());if(ImGui::CollapsingHeader(type.c_str()))for(const auto& field:componentRegistry.type(type).properties){
-                if(!field.toolVisible)continue;
-                ImGui::BeginDisabled(field.readOnly);
+            ImGui::PushID(type.c_str());
+            const bool open=ImGui::CollapsingHeader(type.c_str());observeWidget("component."+type);
+            if(ImGui::BeginPopupContextItem("Component actions")){
+                if(ImGui::MenuItem("Remove component"))session_->edit("component.remove",{{"type",type}});
+                observeWidget("component.remove."+type);ImGui::EndPopup();
+            }
+            if(open)for(const auto& field:componentRegistry.type(type).properties){
+                if(!field.toolVisible)continue;ImGui::PushID(field.name.c_str());
+                ImGui::TextUnformatted(field.label.c_str());ImGui::SetNextItemWidth(-1);ImGui::BeginDisabled(field.readOnly);
                 auto value=data.at(field.name);bool changed=false;
-                if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox(field.label.c_str(),&v);value=v;}
-                else if(value.is_number_integer()){int v=value.get<int>();changed=ImGui::DragInt(field.label.c_str(),&v,1,static_cast<int>(field.minimum),static_cast<int>(field.maximum));value=v;}
-                else if(value.is_number()){float v=value.get<float>();changed=ImGui::DragFloat(field.label.c_str(),&v,0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
-                else if(value.is_array() && value.size()==3){auto v=value.get<std::array<float,3>>();changed=ImGui::DragFloat3(field.label.c_str(),v.data(),0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
+                if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox("##value",&v);value=v;}
+                else if(value.is_number_integer()){int v=value.get<int>();changed=ImGui::DragInt("##value",&v,1,static_cast<int>(field.minimum),static_cast<int>(field.maximum));value=v;}
+                else if(value.is_number()){float v=value.get<float>();changed=ImGui::DragFloat("##value",&v,0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
+                else if(value.is_array() && value.size()==3){auto v=value.get<std::array<float,3>>();changed=ImGui::DragFloat3("##value",v.data(),0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
                 else if(value.is_string()){
-                    const auto text=value.get<std::string>();
-                    if(field.name=="target"){
-                        if(ImGui::BeginCombo(field.label.c_str(),text.c_str())){for(const auto& node:view.scene().nodes)if(ImGui::Selectable(node.id.c_str(),node.id==text)){value=node.id;changed=true;}ImGui::EndCombo();}
-                    }else if(field.name=="asset"){
-                        const std::string extension=type=="azure.script"?".lua":type=="azure.animator"?".json":type=="azure.audio-source"?".wav":".rml";
-                        if(ImGui::BeginCombo(field.label.c_str(),text.c_str())){for(const auto& [id,record]:view.assets().records())if(record.path.extension()==extension && ImGui::Selectable(record.virtualPath.c_str(),id==text)){value=id;changed=true;}ImGui::EndCombo();}
-                    }else{
-                        std::array<char,512> v{};std::memcpy(v.data(),text.data(),std::min(text.size(),v.size()-1));
-                        changed=ImGui::InputText(field.label.c_str(),v.data(),v.size(),ImGuiInputTextFlags_EnterReturnsTrue);value=v.data();
-                    }
+                    auto text=value.get<std::string>();
+                    if(field.reference=="node"){
+                        if(ImGui::BeginCombo("##value",text.c_str())){for(const auto& candidate:view.scene().nodes)if(ImGui::Selectable(candidate.name.c_str(),candidate.id==text)){value=candidate.id;changed=true;}ImGui::EndCombo();}
+                    }else if(field.reference=="asset"){
+                        if(ImGui::BeginCombo("##value",text.empty()?"Choose asset":text.c_str())){
+                            if(ImGui::Selectable("None",text.empty())){value="";changed=true;}
+                            for(const auto& [id,record]:view.assets().records())if(assetTypeRegistry().matches(record.path,field.assetTypes)&&ImGui::Selectable(record.virtualPath.c_str(),id==text)){value=id;changed=true;}
+                            ImGui::EndCombo();
+                        }
+                    }else{changed=ui::inputText("##value",text,ImGuiInputTextFlags_EnterReturnsTrue);value=text;}
                 }
-                ImGui::EndDisabled();
-                if(!field.tooltip.empty() && ImGui::IsItemHovered())ImGui::SetTooltip("%s",field.tooltip.c_str());
-                if(changed)try{session_->edit("component.field",{{"type",type},{"field",field.name},{"value",value}},"component-"+type+":"+field.name);}catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}
+                const bool ended=ImGui::IsItemDeactivatedAfterEdit();
+                observeWidget("field."+type+"."+field.name);ImGui::EndDisabled();
+                if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("%s%s",field.tooltip.c_str(),field.readOnly?" (Read-only)":" (Right-click to reset)");
+                if(ImGui::BeginPopupContextItem("Field actions")){
+                    if(ImGui::MenuItem("Reset field",nullptr,false,!field.readOnly))session_->edit("component.reset-field",{{"type",type},{"field",field.name}});
+                    observeWidget("field.reset."+type+"."+field.name);ImGui::EndPopup();
+                }
+                if(changed)session_->edit("component.field",{{"type",type},{"field",field.name},{"value",value}},"component-"+type+":"+field.name);
+                if(ended)session_->edit("history.end-edit");
+                for(const auto& error:session_->feedback().report())if(error.at("source")=="component.field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ImGui::TextWrapped("%s",error.at("message").get<std::string>().c_str());
+                ImGui::PopID();
             }ImGui::PopID();
         }
         ImGui::EndDisabled();
