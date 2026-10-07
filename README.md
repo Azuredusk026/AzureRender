@@ -78,6 +78,8 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 探索与场景检视项目共用可配置系统。F4 至 P3 的功能与交付验收已完成。
 
 编辑器提供共享输入路由、尺度构图和保存保护。
+选择服务支持过滤多选、范围选择与大纲揭示。
+操纵器提供空间变换、组操作、吸附及取消恢复。
 操作见[编辑器交互教程](Project/AzureRender/docs/tutorials/editor-interaction.md)。
 步骤见[体验实施计划](Project/AzureRender/docs/plans/2026-10-07-editor-usability.md)。
 

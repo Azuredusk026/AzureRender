@@ -417,6 +417,7 @@ add_library(AzureEditor STATIC
     src/editor/commands/EditorOperations.cpp
     src/editor/viewport/SelectionBounds.cpp
     src/editor/viewport/EditorCameraService.cpp
+    src/editor/viewport/GizmoController.cpp
     src/editor/documents/DocumentActionGuard.cpp
     src/editor/input/EditorInputRouter.cpp
     src/editor/EditorCameraController.cpp
@@ -459,6 +460,9 @@ if(WIN32)
 endif()
 target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime AzureAI)
 if(TARGET imgui::imgui)
+    target_sources(AzureEditor PRIVATE third_party/ImGuizmo/ImGuizmo.cpp src/editor/viewport/ViewportGizmo.cpp)
+    set_source_files_properties(third_party/ImGuizmo/ImGuizmo.cpp PROPERTIES COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/wd4245>")
+    target_include_directories(AzureEditor PRIVATE third_party/ImGuizmo)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
@@ -567,6 +571,12 @@ if(BUILD_TESTING)
         add_test(NAME AzurePlatform.ProcessRunner COMMAND AzureProcessRunnerTests)
         add_test(NAME AzureRender.PreviewHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_preview_host.py" --executable "$<TARGET_FILE:AzureRender>")
         set_tests_properties(AzureRender.PreviewHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+        add_test(NAME AzureEditor.SelectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_selection.py"
+            --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/u6-selection")
+        set_tests_properties(AzureEditor.SelectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+        add_test(NAME AzureEditor.GizmoGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_gizmo.py"
+            --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/u6-gizmo")
+        set_tests_properties(AzureEditor.GizmoGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
         add_test(NAME AzureEditor.DevtoolsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_devtools_host.py"
             --executable "$<TARGET_FILE:AzureRender>" --shader-config "${CMAKE_BINARY_DIR}/shader-reload.json")
         set_tests_properties(AzureEditor.DevtoolsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
@@ -858,6 +868,21 @@ if(BUILD_TESTING)
         NAME AzureRender.EditorCameraController
         COMMAND AzureRenderEditorCameraTests)
     add_executable(AzureEditorInputRouterTests tests/EditorInputRouterTests.cpp src/editor/input/EditorInputRouter.cpp)
+    add_executable(AzureSelectionBoundsTests tests/SelectionBoundsTests.cpp)
+    target_link_libraries(AzureSelectionBoundsTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.SelectionBounds COMMAND AzureSelectionBoundsTests)
+    add_executable(AzureTransformEditingTests tests/TransformEditingTests.cpp)
+    target_link_libraries(AzureTransformEditingTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.TransformEditing COMMAND AzureTransformEditingTests)
+    add_executable(AzureGizmoControllerTests tests/GizmoControllerTests.cpp)
+    add_executable(AzureAssetDeformationTests tests/AssetDeformationTests.cpp)
+    target_link_libraries(AzureAssetDeformationTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.AssetDeformation COMMAND AzureAssetDeformationTests)
+    target_link_libraries(AzureGizmoControllerTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.GizmoController COMMAND AzureGizmoControllerTests)
+    add_executable(AzureSelectionServiceTests tests/SelectionServiceTests.cpp)
+    target_link_libraries(AzureSelectionServiceTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.SelectionService COMMAND AzureSelectionServiceTests)
     target_include_directories(AzureEditorInputRouterTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.EditorInputRouter COMMAND AzureEditorInputRouterTests)
     add_executable(AzureEditorCameraServiceTests tests/EditorCameraServiceTests.cpp)
@@ -1518,7 +1543,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 f4 g8 u3 f5 u4 g9 r7 g10 r8 r9 g11 p3 u5 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 f4 g8 u3 f5 u4 g9 r7 g10 r8 r9 g11 p3 u5 u6 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
@@ -1569,3 +1594,8 @@ endif()
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/editor-usability-evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research/editor-usability-evidence")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u5/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u5/evidence")
+
+install(FILES third_party/ImGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-LICENSE.txt")
+install(FILES third_party/ImGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-source.json")
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u6/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u6/evidence" OPTIONAL)

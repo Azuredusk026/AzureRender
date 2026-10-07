@@ -30,6 +30,29 @@ EditRegistry editorOperations(EditorSession& session) {
     document("node.remove",schema({{"index",integer}},{"index"}),[](auto& c,const auto& a) { c.removeNode(a.at("index").template get<std::size_t>()); });
     document("node.duplicate",schema(),[](auto& c,const auto&) { c.duplicateSelection(); });
     document("node.delete",schema(),[](auto& c,const auto&) { c.deleteSelection(); });
+    registry.add({"selection.click",1,schema({{"id",text},{"ctrl",boolean},{"shift",boolean},{"visible",{{"type","array"},{"items",text}}}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
+        session.selection().click(a.at("id").get<std::string>(),a.value("ctrl",false),a.value("shift",false),a.value("visible",std::vector<std::string>{}));return nullptr;
+    });
+    registry.add({"viewport.gizmo-begin",1,schema({{"space",text},{"pivot",text}}),false,false,true},[&session](EditorContext& c,const Json& a)->Json {
+        return session.gizmo().begin({a.value("space",c.gizmoSpace()==EditorContext::GizmoSpace::World?std::string("world"):std::string("local")),
+            a.value("pivot",c.gizmoPivot()==EditorContext::GizmoPivot::Active?std::string("active"):std::string("bounds"))});
+    });
+    registry.add({"viewport.gizmo-update",1,schema({{"matrix",{{"type","array"},{"minItems",16},{"maxItems",16},{"items",number}}}},{"matrix"}),true,false,true},[&session](EditorContext&,const Json& a)->Json {
+        session.gizmo().update({a.at("matrix").get<internal::Matrix4>()});return nullptr;
+    });
+    registry.add({"viewport.gizmo-commit",1,schema(),false,false,true},[&session](EditorContext&,const Json&)->Json {session.gizmo().commit();return nullptr;});
+    registry.add({"viewport.gizmo-cancel",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json {session.gizmo().cancel();return nullptr;});
+    registry.add({"viewport.gizmo-options",1,schema({{"space",text},{"pivot",text}}),false,false,true},[&session](EditorContext& c,const Json& a)->Json {
+        if(session.gizmo().active())throw EditRejection("Finish the active gizmo drag before changing its options");
+        if(a.empty())throw EditRejection("Gizmo options require a coordinate space or pivot");
+        const auto space=a.value("space",c.gizmoSpace()==EditorContext::GizmoSpace::World?std::string("world"):std::string("local"));
+        const auto pivot=a.value("pivot",c.gizmoPivot()==EditorContext::GizmoPivot::Active?std::string("active"):std::string("bounds"));
+        if(space!="world"&&space!="local")throw EditRejection("Unknown coordinate space");
+        if(pivot!="active"&&pivot!="bounds")throw EditRejection("Unknown gizmo pivot");
+        c.setGizmoSpace(space=="world"?EditorContext::GizmoSpace::World:EditorContext::GizmoSpace::Local);
+        c.setGizmoPivot(pivot=="active"?EditorContext::GizmoPivot::Active:EditorContext::GizmoPivot::Bounds);
+        return nullptr;
+    });
     document("node.place",schema({{"resource",text},{"id",text}},{"resource"}),[](auto& c,const auto& a) {
         c.placeResource(a.at("resource").template get<std::string>(),a.value("id",std::string()));
     });

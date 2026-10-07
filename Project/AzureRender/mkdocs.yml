@@ -34,6 +34,7 @@ nav:
   - 项目总览: index.md
   - P3 引擎交付验收: acceptance/p3/2026-10-07.md
   - U5 交互与文档安全验收: acceptance/u5/2026-10-08.md
+  - U6 选择与变换验收: acceptance/u6/2026-10-08.md
   - 构建与使用: getting-started.md
   - 渲染器架构: architecture.md
   - 角色渲染: character-rendering.md

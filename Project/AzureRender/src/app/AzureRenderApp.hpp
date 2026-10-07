@@ -309,6 +309,7 @@ private:
     float pendingPickX_ = 0.0F;
     float pendingPickY_ = 0.0F;
     bool pendingPickRequested_ = false;
+    bool pendingPickAdditive_ = false;
     std::array<float, 3> cameraPosition_{2.8F, 2.1F, 3.2F};
     bool gameViewportFocus_ = true, gameCursorPrimed_ = false;
     double gameCursorX_ = 0, gameCursorY_ = 0;

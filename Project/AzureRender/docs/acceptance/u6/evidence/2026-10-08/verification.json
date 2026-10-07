@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "phase": "U6",
+  "baseCommit": "64381ea",
+  "debug": {
+    "cpuPassed": 120,
+    "gpuPassed": 43,
+    "finalAffectedGpuPassed": 4
+  },
+  "release": {
+    "cpuPassed": 120,
+    "gpuPassed": 43,
+    "finalAffectedGpuPassed": 2
+  },
+  "physicalKeyboardMouse": "NotExecuted",
+  "builds": {
+    "debug": {
+      "path": "build/ninja-msvc-debug/AzureRender.exe",
+      "sha256": "27033295b8b03c1c7aec5822f24061734af8290d53d65bdafac4fc362b751083"
+    },
+    "release": {
+      "path": "build/ninja-msvc-release/AzureRender.exe",
+      "sha256": "1d91b18011ab078cf9122c5cbcb20a0a52fa511c9364579db87e75171c433266"
+    }
+  },
+  "logs": {
+    "1280x720-2.png": "41c8de8b08f15e4b90a4ffada339c7660ee638dbb304651408db9bc018aab6fc",
+    "1920x1080-1.png": "ca5593372a6645b326c524f34623095d0798c15d224b855a898091503a96205f",
+    "close-drag-red.log": "acd538b6c225fdc28363271d746ad25c85f8bee258721489cc554fd46497eb10",
+    "debug-final-build.log": "faa0952e6224e24d9a04b6a1de5ea86c572ce35f56629d2a5558275daad8c3f2",
+    "debug-final-cpu.log": "8c338b69b05cfa88ae49999d7298e3cee08fe9adaf14b1db7113cf82043b0c8b",
+    "debug-final-gpu.log": "82c1be094acbac3a57f7cebfc3071438647e025dab1a9e5f6ef27f2dca7708df",
+    "debug-gizmo.json": "f323b848ff4156f570aad9f64dd491fed0e851da502e28b076262137839f729b",
+    "debug-gpu-green.log": "56cebdcae93189988a9ced68581b41cfc582beca6c2c3f32642c53c54bf9e9be",
+    "debug-selection.json": "4935c828085ac3626035cc2b4e2df3ab73137c6622a1c447e5fafa3797135328",
+    "debug-snap-build.log": "f3c024b1b19879399fa705af74fb20d3435fac8fb97538dff4dbd71fa74f76d6",
+    "deformation-red.log": "b3bf11e50f8b7f81574f3183baedd80c5803ad88648e3b519ad3999b30ee9072",
+    "docs-check.log": "9ec6b7cc3edebc3bd8f88827d3008c5a15519a424e308b1f2eae52a2436220a3",
+    "gizmo-green.log": "40fb6fb0535a54e3ca583034434d90630eb453ab0aa11ec42ed43ab66fdaa536",
+    "gizmo-isolation-red.log": "fd22c77e028c7cea7270c2635f367c3e9e9367ef7daa4a3f6d1473ffc4d945c3",
+    "gizmo-ui.log": "6562971e3865a2e911e14b80c3374363d544ca561ac243cb461c7fb51a15b8e5",
+    "imguizmo-compatibility-red.log": "450c7d119f9f80ddd14bb1069cb4de21e5d9e30ea15a6c2de6e5038492965d28",
+    "install-licenses.log": "ebe09569e6200ca4931018725544da91b4c1233f7100f9516b25faf5f15d85d4",
+    "mkdocs.log": "fef88f4955f187c8c801e0c41e2c43bbe7cbd1510bdd922bab15059036b36a58",
+    "move.png": "2b55a0e495ed60630729eb1e61dc83ea57c633103408c48d2eb29675a5dbc32d",
+    "release-build.log": "620723cd811512fca9f25b3b20d740d364e676a4944258289098f6b4394e9947",
+    "release-cpu.log": "f13a2794196a287c55687ef216584c2dfd59825c6b3db8d79f081ed6edcf4887",
+    "release-final-gizmo.log": "9e10b6798e9e4a67639dd42840f1eb9f0013f8e93825361998d8c54e5f8491fe",
+    "release-gizmo.json": "f323b848ff4156f570aad9f64dd491fed0e851da502e28b076262137839f729b",
+    "release-gpu.log": "8908d9c6ea7d39bf238739f1906bbc7ec3ff501549217eb2ab567d651a9c6a7f",
+    "release-selection.json": "4935c828085ac3626035cc2b4e2df3ab73137c6622a1c447e5fafa3797135328",
+    "release-snap-build.log": "7c605edf2dfe7553b7ec6792392eff1f7e7e3ea580977a9d423537fa0b6686ee",
+    "rotate.png": "ed99b1067c1a74f43537ed7166755e88ff80c3b34cf5e4b7c74f94da4551a02e",
+    "rotation-snap-red.log": "29931602f31499bec96df3090d4a3ac58a46bb40b8052f48ef900d8826d3b0cc",
+    "scale.png": "ffc81b3a68b05cc8def960712a4acc93dbaa01ca28dca4e79ba2f0f028a69e39",
+    "selection-bounds-red.log": "78876e3bb80626eb18c30fcce6bc13a8fc03e5b692d39ee5ed419e2ffd52564e",
+    "selection-edge-red.log": "54732d787052d5343b7a26aff0a6577112a9ce2edb0332520e957fbf0f71b614",
+    "selection-option-red.log": "91a6d872c8a2af2e6462799092eef90db093f02bb38615fa801a491d634ea4b1",
+    "selection-ui-green.log": "d8ff635dc6a70a975cb4418ab50d77c84bf37bcc3ce094fb992f85e4ee2d3b9d",
+    "style-check.log": "1e1dfe2368f74d45757ec968b56ff795bc0e7f49b21fda9d888b160c5994fdc5",
+    "workspace-green.log": "8a03882e19356e7f4cab3fd3d7ee3c5d94f6cd51f40ac8c7ca80c144cf4806da",
+    "workspace.json": "d4ef65bce2b3db88a64208cfeeac4b5e7763060fd80fe7115dfddf1de9a4b7b5"
+  }
+}

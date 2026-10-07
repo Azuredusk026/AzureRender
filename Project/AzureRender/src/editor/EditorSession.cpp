@@ -69,6 +69,8 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     }
     documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty();},[this]{context_->save();});
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
+        if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
+            if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
         return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
     });
     registerEngineSettings(settings_);
@@ -83,6 +85,11 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     for(const auto& binding:std::vector<std::pair<const char*,const char*>>{{"move","W"},{"rotate","E"},{"scale","R"},{"select","Q"},{"frame","F"}})
         settings_.add({std::string("editor.shortcuts.")+binding.first,"Scene shortcut (one uppercase letter)",binding.second,{},{},false,true,false});
     selection_=std::make_unique<SelectionService>(*context_,*edits_);
+    gizmo_=std::make_unique<GizmoController>(*context_);
+    settings_.add({"editor.gizmo.snap","Snap gizmo transforms",false,{},{},false,true,false});
+    settings_.add({"editor.gizmo.moveStep","Gizmo translation snap step",.5,.001,10000.,false,true,false});
+    settings_.add({"editor.gizmo.rotateStep","Gizmo rotation snap degrees",15.,.1,90.,false,true,false});
+    settings_.add({"editor.gizmo.scaleStep","Gizmo scale snap step",.1,.001,10.,false,true,false});
 }
 void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
     if(playing()||building()||(proposals_&&proposals_->state()==ProposalState::Generating))throw std::logic_error("Model assembly requires an idle session");
@@ -169,6 +176,7 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
 }
 
 bool EditorSession::requestDocumentAction(DocumentAction action){
+    if(gizmo_&&gizmo_->active())gizmo_->cancel();
     auto state=documentGuard_->request(action);
     if(state==DocumentActionState::AwaitingDecision && closePolicy_!="ask")
         return resolveDocumentAction(closePolicy_=="save"?DocumentDecision::Save:DocumentDecision::Discard);

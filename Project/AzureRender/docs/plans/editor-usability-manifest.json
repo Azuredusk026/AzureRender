@@ -8,11 +8,11 @@
     },
     {
       "id": "U6",
-      "status": "Active"
+      "status": "Complete"
     },
     {
       "id": "U7",
-      "status": "Planned"
+      "status": "Active"
     },
     {
       "id": "P4",
@@ -124,7 +124,17 @@
       "finding": "三种变换共用轴线和圆点，S1",
       "acceptance": "箭头、旋转环和缩放端点清晰区分",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX09",
@@ -132,7 +142,17 @@
       "finding": "轴线沿世界方向，修改却写入局部坐标，S4/S5",
       "acceptance": "世界和局部坐标系各有正确的变换语义",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX10",
@@ -140,7 +160,17 @@
       "finding": "多选后变换只修改当前对象，S5",
       "acceptance": "多选组操作保持相对关系并形成一个撤销单元",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX11",
@@ -148,7 +178,17 @@
       "finding": "操纵器缺少取消、平面移动和等比缩放，S1",
       "acceptance": "Esc 恢复拖拽起点，补齐常用手柄",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX12",
@@ -156,7 +196,17 @@
       "finding": "操纵器缺少移动、旋转和缩放吸附，S1",
       "acceptance": "吸附可配置，界面明确显示开关与步长",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX13",
@@ -164,7 +214,17 @@
       "finding": "空白拾取保持选中，Ctrl 拾取也直接替换，S4",
       "acceptance": "空白清选，Ctrl 增减选择，行为与大纲一致",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX14",
@@ -172,7 +232,17 @@
       "finding": "拾取使用原始顶点，动画形变命中需复核，S4",
       "acceptance": "拾取与实际可见姿态一致，遮挡规则明确",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX15",
@@ -180,7 +250,17 @@
       "finding": "大纲过滤分支忽略 Ctrl，多选反馈不完整，S2",
       "acceptance": "过滤、树和视口共享选择规则",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX16",
@@ -188,7 +268,17 @@
       "finding": "视口选中后没有展开父链与滚动定位，S2",
       "acceptance": "大纲自动揭示选中对象并保留用户展开状态",
       "phase": "U6",
-      "status": "Planned"
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.GizmoController",
+        "AzureEditor.SelectionService",
+        "AzureRender.AssetDeformation",
+        "AzureEditor.SelectionGpu",
+        "AzureEditor.GizmoGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md",
+      "commitPhase": "u6"
     },
     {
       "id": "UX17",
@@ -365,7 +455,15 @@
       "finding": "选中反馈、轴标签、遮挡手柄和小窗口密度需复核，S1/S8",
       "acceptance": "选中对象、工具状态和禁用原因可直接辨认",
       "phase": "U6/U7",
-      "status": "Planned"
+      "status": "PartiallyVerified",
+      "verifiedPhases": [
+        "U6"
+      ],
+      "tests": [
+        "AzureEditor.WorkspaceGpu",
+        "AzureEditor.GizmoGpu"
+      ],
+      "evidence": "../acceptance/u6/2026-10-08.md"
     }
   ]
 }

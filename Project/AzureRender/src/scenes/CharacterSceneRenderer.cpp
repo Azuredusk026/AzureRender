@@ -1,3 +1,4 @@
+#include "assets/AssetDeformation.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "render/ResourceAccessProfile.hpp"
 #include "render/ResourceIndexTable.hpp"
@@ -3043,16 +3044,8 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         std::vector<bool> prepared(mesh.vertices.size(),false);
         const auto vertexPosition = [&](std::uint32_t index) {
             if(prepared.at(index))return positions[index];
-            const auto& vertex = mesh.vertices.at(index);
-            Vector3 position{};
-            for (unsigned axis = 0; axis < 3; ++axis) position[axis] = vertex.position[axis]
-                + vertex.morph0[axis]*pose.morph[0] + vertex.morph1[axis]*pose.morph[1];
-            Vector3 skinned{};
-            for (unsigned joint = 0; joint < 4; ++joint) {
-                const auto transformed = transformPosition(pose.pose.jointMatrices.at(vertex.joints[joint]), position);
-                for (unsigned axis = 0; axis < 3; ++axis) skinned[axis] += transformed[axis]*vertex.weights[joint];
-            }
-            positions[index]=skinned;prepared[index]=true;return skinned;
+            positions[index]=deformedVertexPosition(mesh,index,&pose.pose,pose.morph);
+            prepared[index]=true;return positions[index];
         };
         std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
@@ -3489,7 +3482,8 @@ void CharacterSceneRenderer::buildSceneState() {
     state_.pickables.clear();
     for(const auto& instance:sceneInstances_) {
         const auto* mesh=instance.meshKey==0?&asset_:&additionalResources_[instance.meshKey-1]->asset;
-        state_.pickables.push_back({instance.nodeId,mesh,instance.model});
+        const auto* pose=instance.sourceIndex<instancePoses_.size()?&instancePoses_[instance.sourceIndex]:nullptr;
+        state_.pickables.push_back({instance.nodeId,mesh,instance.model,pose?&pose->pose:nullptr,pose?pose->morph:std::array<float,2>{}});
     }
     state_.asset = &asset_;
     state_.modelMatrix = currentModel_.data();

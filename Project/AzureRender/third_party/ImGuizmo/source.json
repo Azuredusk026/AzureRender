@@ -1,0 +1,14 @@
+{
+  "name": "ImGuizmo",
+  "version": "1.92.5 WIP",
+  "license": "MIT",
+  "author": "Cedric Guillemet",
+  "repository": "https://github.com/gameknife/gkNextEngine",
+  "commit": "4ba5b7cd106c282e7ed166ff853aeea87b392680",
+  "path": "src/ThirdParty/ImGuizmo",
+  "files": [
+    "ImGuizmo.cpp",
+    "ImGuizmo.h"
+  ],
+  "adaptation": "CanActivate uses current widget hover; behind-camera early exit balances clip stack. Engine TRS decomposition and operation transactions remain in AzureEditor. Scale endpoints use squares for distinct tool silhouettes. AddPolyline argument order and closed flags follow Dear ImGui 1.92.8. Rotation capture uses the exact zero-angle origin to preserve snap increments."
+}

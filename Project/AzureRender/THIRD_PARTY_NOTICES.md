@@ -9,6 +9,7 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 | Vulkan Headers 与 Loader | Apache License 2.0 |
 | GLFW | zlib/libpng |
 | Dear ImGui | MIT |
+| ImGuizmo 1.92.5 WIP | MIT |
 | tinygltf | MIT |
 | stb | MIT 或公有领域双许可 |
 | OpenEXR 与 Imath | BSD-3-Clause |
@@ -30,6 +31,29 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 Dear ImGui 使用 docking 分支 1.92.8，源码位于 `third_party/imgui`。它由项目工具链编译，保证库与项目的 ABI 一致。许可证保存在 `third_party/imgui/LICENSE.txt`。
 
 发布包使用 `assets_public/` 中的项目公开资源。私有角色资产与派生捕获由本机授权范围管理。
+
+## ImGuizmo
+
+旋转捕获以零角作为起点，保持吸附步长精度。
+
+ImGuizmo 提供编辑器的操纵器绘制和命中。
+源码位于 `third_party/ImGuizmo`。
+版权归 Cedric Guillemet，使用 MIT 许可。
+原始版权年份为 2016 至 2021。
+
+来源为 gkNextEngine 的 `src/ThirdParty/ImGuizmo`。
+参考提交为 `4ba5b7cd106c282e7ed166ff853aeea87b392680`。
+版本、文件和本地适配见该目录的 `source.json`。
+编辑服务负责合法变换、事务和撤销。
+
+适配采用 Dear ImGui 1.92.8 的折线契约。
+快速悬停切换、裁剪栈和缩放方块遵守视口规则。
+MSVC C4245 仅在此第三方编译单元关闭。
+本地引擎源码使用项目的严格警告规则。
+
+安装保留 `licenses/ImGuizmo-LICENSE.txt`。
+来源清单安装为 `licenses/ImGuizmo-source.json`。
+源码和许可的完整性随交付记录核对。
 
 ## Jolt Physics
 

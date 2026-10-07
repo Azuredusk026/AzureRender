@@ -16,6 +16,7 @@
 
 // Defined in assets/GltfLoader.hpp (global namespace).
 struct LoadedAsset;
+struct AssetPose;
 
 namespace azurerender {
 
@@ -46,7 +47,7 @@ struct SceneSubmissionCounters {
 // editor integration (picking, gizmos, HUD). A renderer without pickable
 // geometry (e.g. the blackhole renderer) leaves the pointer null.
 struct RendererSceneState {
-    struct Pickable { std::string node; const LoadedAsset* asset=nullptr; std::array<float,16> model{}; };
+    struct Pickable { std::string node; const LoadedAsset* asset=nullptr; std::array<float,16> model{}; const AssetPose* pose=nullptr; std::array<float,2> morph{}; };
     std::vector<Pickable> pickables;
     const LoadedAsset* asset = nullptr;
     const float* modelMatrix = nullptr;  // 16 floats, column-major

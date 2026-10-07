@@ -63,7 +63,16 @@ def main(executable,root):
         assert error<=2,(name,error)
         from PIL import Image
         pixels=Image.open(root/name/'capture/frame_000015.png').convert('RGB')
-        green=(expected[0],expected[1]-40*dpi)
+        # Independently project the mature handle endpoint using its public screen size.
+        # Projection, raster and input targets retain the two physical pixel budget.
+        factor = 100 * dpi * depth * tangent / imageRect['height']
+        yrelative = [-position[0], factor-position[1], -position[2]]
+        ydepth = sum(a*b for a,b in zip(yrelative,forward))
+        green = (imageRect['x']+imageRect['width']*(1+sum(a*b for a,b in zip(yrelative,right))/(ydepth*tangent*imageRect['width']/imageRect['height']))/2,
+                 imageRect['y']+imageRect['height']*(1-sum(a*b for a,b in zip(yrelative,up))/(ydepth*tangent))/2)
+        handle=results[name]['widgets']['gizmo.1']
+        handleError=math.hypot(handle[0]+handle[2]/2-green[0],handle[1]+handle[3]/2-green[1])
+        assert handleError<=2,(name,handleError)
         matches=[]
         for y in range(round(green[1])-2,round(green[1])+3):
             for x in range(round(green[0])-2,round(green[0])+3):
@@ -71,7 +80,7 @@ def main(executable,root):
         assert matches,(name,'Rendered Y handle missing at the projected mouse target')
         rasterError=min(math.hypot(x-green[0],y-green[1]) for x,y in matches)
         assert rasterError<=2,(name,rasterError)
-        hitErrors.append(dict(case=name,projectionErrorPixels=error,rasterErrorPixels=rasterError))
+        hitErrors.append(dict(case=name,projectionErrorPixels=error,handleProjectionErrorPixels=handleError,rasterErrorPixels=rasterError))
         if dpi==1 and size[0]==1920:
             from PIL import Image
             color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((110,700))

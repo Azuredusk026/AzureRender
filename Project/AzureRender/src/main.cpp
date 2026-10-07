@@ -1,3 +1,9 @@
+#if defined(_WIN32) && defined(_MSC_VER)
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <Windows.h>
+#include <crtdbg.h>
+#endif
 #include "app/AzureRenderApp.hpp"
 #include "app/CommandLine.hpp"
 #include "editor/EditorContext.hpp"
@@ -16,6 +22,7 @@
 #include <string>
 #include <vector>
 
+
 int main(const int argumentCount, char** argumentValues) {
     azurerender::RuntimeDiagnostics::instance().configure(
         "captures/azurerender.log.jsonl");
@@ -30,6 +37,18 @@ int main(const int argumentCount, char** argumentValues) {
         azurerender::ParsedCommandLine commandLine =
             azurerender::parseCommandLine(arguments);
         AzureRenderOptions& options = commandLine.options;
+#if defined(_WIN32) && defined(_MSC_VER)
+        // Automated runs report fatal errors to their caller instead of opening a modal dialog.
+        if(options.smokeFrameLimit>0 || options.captureFrameLimit>0) {
+            SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOGPFAULTERRORBOX);
+            _set_abort_behavior(_WRITE_ABORT_MSG,_WRITE_ABORT_MSG|_CALL_REPORTFAULT);
+#ifdef _DEBUG
+            for(int kind:{_CRT_WARN,_CRT_ERROR,_CRT_ASSERT}) {
+                _CrtSetReportMode(kind,_CRTDBG_MODE_FILE);_CrtSetReportFile(kind,_CRTDBG_FILE_STDERR);
+            }
+#endif
+        }
+#endif
         std::string& scenePath = commandLine.scenePath;
         if (commandLine.showHelp) {
             std::cout << azurerender::commandLineHelp();

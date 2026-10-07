@@ -1,0 +1,31 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  31: AzureEditor.GizmoGpu
+1/3 Test  #31: AzureEditor.GizmoGpu .............***Failed   31.15 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_gizmo.py", line 109, in <module>
+    result = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_gizmo.py", line 109, in <listcomp>
+    result = [run(args.executable.resolve(), root / workflow, workflow) for workflow in ('exploration', 'inspector')]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_gizmo.py", line 96, in run
+    assert abs(value / step - round(value / step)) < .001, tool + ' must obey its own snap step'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Rotate must obey its own snap step
+
+    Start 134: AzureEditor.UsabilityGpu
+2/3 Test #134: AzureEditor.UsabilityGpu .........   Passed   27.52 sec
+    Start 135: AzureEditor.DocumentGuardGpu
+3/3 Test #135: AzureEditor.DocumentGuardGpu .....   Passed   18.16 sec
+
+67% tests passed, 1 tests failed out of 3
+
+Label Time Summary:
+gpu    =  76.82 sec*proc (3 tests)
+
+Total Test time (real) =  76.83 sec
+
+The following tests FAILED:
+	 31 - AzureEditor.GizmoGpu (Failed)
+Errors while running CTest

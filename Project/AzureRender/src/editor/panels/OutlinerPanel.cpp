@@ -50,62 +50,56 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         ImGui::End();
         return;
     }
-    // Recursive tree draw: children are nodes whose parentId equals the
-    // current node id. Use an index-based recursion to avoid iterator
-    // invalidation while nodes stay stable during a frame.
-    const auto drawNode = [&](const auto& self,
-                              const std::string& parentId,
-                              const int depth) -> void {
-        for (std::size_t index = 0; index < nodes.size(); ++index) {
-            if (nodes[index].parentId != parentId) {
-                continue;
-            }
-            const bool selected = std::find(view.selectedNodes().begin(),view.selectedNodes().end(),index)!=view.selectedNodes().end();
-            bool hasChildren = false;
-            for (const SceneNode& candidate : nodes) {
-                if (candidate.parentId == nodes[index].id) {
-                    hasChildren = true;
-                    break;
-                }
-            }
-            ImGui::PushID(static_cast<int>(index));
-            bool open = false;
-            if (hasChildren) {
-                const bool clicked = ImGui::TreeNodeEx(
-                    nodes[index].name.c_str(),
-                    ImGuiTreeNodeFlags_OpenOnArrow
-                        | ImGuiTreeNodeFlags_SpanAvailWidth
-                        | (selected ? ImGuiTreeNodeFlags_Selected : 0));
-                open = clicked;
-            } else {
-                ImGui::Selectable(
-                    nodes[index].name.c_str(),
-                    selected,
-                    ImGuiSelectableFlags_SpanAvailWidth);
-            }
-            observeWidget("node."+nodes[index].id);
-            if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !ImGui::GetIO().KeyCtrl) {
-                panelContext.selection().set({nodes[index].id});session_->edit("viewport.frame-selection");
-            }
-            if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
-                if(ImGui::GetIO().KeyCtrl){auto selection=panelContext.selection().selected();auto found=std::find(selection.begin(),selection.end(),nodes[index].id);if(found==selection.end())selection.push_back(nodes[index].id);else selection.erase(found);panelContext.selection().set(selection);}else panelContext.selection().set({nodes[index].id});
-            }
-            if (open) {
-                self(self, nodes[index].id, depth + 1);
-                ImGui::TreePop();
-            }
-            ImGui::PopID();
+    std::string reveal;
+    if(panelContext.selection().consumeReveal()) {
+        reveal=panelContext.selection().active();
+        auto parent=reveal;
+        while(!parent.empty()) {
+            auto it=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==parent;});
+            if(it==nodes.end())break;
+            parent=it->parentId;if(!parent.empty())openNodeIds_.insert(parent);
+        }
+        const auto active=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==reveal;});
+        if(active!=nodes.end() && outlinerFilter_.IsActive() && !outlinerFilter_.PassFilter(active->name.c_str()) && !outlinerFilter_.PassFilter(active->id.c_str()))outlinerFilter_.Clear();
+    }
+    std::vector<std::string> visible;
+    const auto collect=[&](const auto& self,const std::string& parent)->void {
+        for(const auto& node:nodes)if(node.parentId==parent){visible.push_back(node.id);if(openNodeIds_.count(node.id))self(self,node.id);}
+    };
+    if(outlinerFilter_.IsActive()) {
+        for(const auto& node:nodes)if(outlinerFilter_.PassFilter(node.name.c_str())||outlinerFilter_.PassFilter(node.id.c_str()))visible.push_back(node.id);
+    }else collect(collect,"");
+    const auto selectionClick=[&](const SceneNode& node) {
+        const auto& io=ImGui::GetIO();
+        if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !io.KeyCtrl && !io.KeyShift) {
+            panelContext.selection().set({node.id});session_->edit("viewport.frame-selection");
+        }else if(ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
+            session_->edit("selection.click",{{"id",node.id},{"ctrl",io.KeyCtrl},{"shift",io.KeyShift},{"visible",visible}});
+        }
+        if(node.id==reveal)ImGui::SetScrollHereY(.5F);
+    };
+    const auto selected=[&](std::size_t index){return std::find(view.selectedNodes().begin(),view.selectedNodes().end(),index)!=view.selectedNodes().end();};
+    const auto drawNode=[&](const auto& self,const std::string& parent)->void {
+        for(std::size_t index=0;index<nodes.size();++index) {
+            const auto& node=nodes[index];if(node.parentId!=parent)continue;
+            const bool children=std::any_of(nodes.begin(),nodes.end(),[&](const auto& child){return child.parentId==node.id;});
+            ImGui::PushID(node.id.c_str());bool open=false;
+            if(children) {
+                ImGui::SetNextItemOpen(openNodeIds_.count(node.id)>0,ImGuiCond_Always);
+                open=ImGui::TreeNodeEx(node.name.c_str(),ImGuiTreeNodeFlags_OpenOnArrow|ImGuiTreeNodeFlags_SpanAvailWidth|(selected(index)?ImGuiTreeNodeFlags_Selected:0));
+                if(open)openNodeIds_.insert(node.id);else openNodeIds_.erase(node.id);
+            }else ImGui::Selectable(node.name.c_str(),selected(index),ImGuiSelectableFlags_SpanAvailWidth);
+            observeWidget("node."+node.id);selectionClick(node);
+            if(open){self(self,node.id);ImGui::TreePop();}ImGui::PopID();
         }
     };
     if(outlinerFilter_.IsActive()) {
-        for(std::size_t i=0;i<nodes.size();++i)if(outlinerFilter_.PassFilter(nodes[i].name.c_str()) || outlinerFilter_.PassFilter(nodes[i].id.c_str())) {
-            ImGui::PushID(nodes[i].id.c_str());
-            if(ImGui::Selectable(nodes[i].name.c_str(),view.selectedNodeIndex()==i))panelContext.selection().set({nodes[i].id});
-            observeWidget("node."+nodes[i].id);
-            if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !ImGui::GetIO().KeyCtrl)session_->edit("viewport.frame-selection");
-            ImGui::SameLine();ImGui::TextDisabled("%s",nodes[i].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
+        for(std::size_t index=0;index<nodes.size();++index)if(std::find(visible.begin(),visible.end(),nodes[index].id)!=visible.end()) {
+            ImGui::PushID(nodes[index].id.c_str());ImGui::Selectable(nodes[index].name.c_str(),selected(index));
+            observeWidget("node."+nodes[index].id);selectionClick(nodes[index]);
+            ImGui::SameLine();ImGui::TextDisabled("%s",nodes[index].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
-    }else drawNode(drawNode, "", 0);
+    }else drawNode(drawNode,"");
     ImGui::End();
 }
 

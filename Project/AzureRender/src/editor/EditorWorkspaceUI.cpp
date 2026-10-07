@@ -138,6 +138,9 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
     if(includeHistory)data["history"]=uiHistory_;
+    data["gizmoSpace"]=context_->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
+    data["gizmoPivot"]=context_->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
+    data["activeSelection"]=session_->selection().active();
     data["gizmoMode"]=static_cast<unsigned>(context_->gizmoMode());
     data["capture"]={{"navigationButton",navigationButton_},{"gizmo",viewportGizmoDragActive_}};
     data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());

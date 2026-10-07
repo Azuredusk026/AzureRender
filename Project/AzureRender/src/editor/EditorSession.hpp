@@ -2,6 +2,7 @@
 
 #include "EditorContext.hpp"
 #include "documents/DocumentActionGuard.hpp"
+#include "viewport/GizmoController.hpp"
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
@@ -77,6 +78,7 @@ public:
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
     void setClosePolicy(std::string policy){closePolicy_=std::move(policy);}
     DocumentActionGuard& documentGuard(){return *documentGuard_;}
+    GizmoController& gizmo(){return *gizmo_;}
     bool requestDocumentAction(DocumentAction action);
     bool resolveDocumentAction(DocumentDecision decision);
     bool closeReady() const {return documentGuard_->state()==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Close;}
@@ -102,6 +104,7 @@ private:
     DeveloperServices developerServices_;
     std::unique_ptr<EditService> edits_;
     std::unique_ptr<SelectionService> selection_;
+    std::unique_ptr<GizmoController> gizmo_;
     SettingRegistry settings_;
     std::unique_ptr<ModelClient> model_;
     std::unique_ptr<ProposalController> proposals_;

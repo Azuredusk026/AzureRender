@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_selection.py", line 69, in <module>
+    summaries = [run(args.executable.resolve(), folder / workflow, workflow)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_selection.py", line 69, in <listcomp>
+    summaries = [run(args.executable.resolve(), folder / workflow, workflow)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_selection.py", line 32, in run
+    selected = launch(executable, output, 'filtered-ctrl', (1280, 720), 1, events, capture=False, close_policy='discard')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 27, in launch
+    assert result.returncode==0,result.stdout+result.stderr
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+Editor viewport render extent: 1280x720
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\u6\debug-diagnostic\run-1791396645095820000\exploration\game\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\u6\debug-diagnostic\run-1791396645095820000\exploration\game\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+[1791396645355][info][editor][code=0] Opened scene: exploration
+[1791396645630][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791396645883][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791396645924][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791396645951][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791396645968][info][editor][code=0] Opened scene: exploration
+[1791396645983][info][editor][code=0] Selected node: hero:body
+[1791396646059][info][editor][code=0] Asset reload requested; changed files: 0
+[1791396646095][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791396646128][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791396646159][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791396646162][info][editor][code=0] Renderer resources reloaded
+Assertion failed: (flags & ImDrawFlags_InvalidMask_) == 0 && "Incorrect parameter. Did you swapped 'thickness' and 'flags'?", file ..\..\third_party\imgui\imgui_draw.cpp, line 832
+abort() has been called

@@ -16,7 +16,11 @@ SelectionBoundsResult SelectionBounds::resolve(const scene::SceneDescription& do
         const auto& node=document.nodes[index];if(!included.count(node.id))continue;
         auto local=provider&&!node.resourceId.empty()?provider(node.resourceId):std::optional<scene::AxisAlignedBounds>{};
         scene::AxisAlignedBounds bounds;
-        if(local)bounds=scene::transformBounds(*local,matrices[index]);
+        if(local) {
+            for(unsigned axis=0;axis<3;++axis)
+                if(!std::isfinite(local->minimum[axis])||!std::isfinite(local->maximum[axis])||local->minimum[axis]>local->maximum[axis])return {false,{},"Invalid asset bounds"};
+            bounds=scene::transformBounds(*local,matrices[index]);
+        }
         else {
             const auto centre=internal::transformPosition(matrices[index],{0,0,0});
             for(std::size_t axis=0;axis<3;++axis){bounds.minimum[axis]=centre[axis]-radius;bounds.maximum[axis]=centre[axis]+radius;}

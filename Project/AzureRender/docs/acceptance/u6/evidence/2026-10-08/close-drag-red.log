@@ -1,0 +1,35 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 128: AzureEditor.GizmoController
+1/1 Test #128: AzureEditor.GizmoController ......***Failed    0.11 sec
+[1791396950803][info][editor][code=0] Opened scene: gizmo
+[1791396950804][info][editor][code=0] Opened scene: gizmo
+[1791396950808][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-gizmo-24533916122500\scene.azscene
+[1791396950810][info][editor][code=0] ERROR: Operation requires an idle edit session
+[1791396950810][info][editor][code=0] ERROR: Operation requires an idle edit session
+[1791396950811][info][editor][code=0] Opened scene: gizmo
+[1791396950813][info][editor][code=0] Opened scene: gizmo
+[1791396950819][info][editor][code=0] Opened scene: gizmo
+[1791396950822][info][editor][code=0] Undo
+[1791396950826][info][editor][code=0] Opened scene: gizmo
+[1791396950829][info][editor][code=0] Opened scene: gizmo
+[1791396950832][info][editor][code=0] Opened scene: gizmo
+[1791396950834][info][editor][code=0] Undo
+[1791396950834][info][editor][code=0] Opened scene: gizmo
+[1791396950836][info][editor][code=0] Opened scene: gizmo
+[1791396950836][info][editor][code=0] ERROR: Transform contains shear that local TRS cannot represent
+[1791396950837][info][editor][code=0] Opened scene: gizmo
+[1791396950838][info][editor][code=0] ERROR: Select objects before using a gizmo
+[1791396950839][info][editor][code=0] Opened scene: gizmo
+[1791396950841][info][editor][code=0] ERROR: Parameter type mismatch: number
+[1791396950843][info][editor][code=0] Opened scene: gizmo
+Closing cancels the incomplete drag before applying the saved-document policy
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	128 - AzureEditor.GizmoController (Failed)
+Errors while running CTest

@@ -72,7 +72,7 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
     button(paused?"Resume":"Pause",paused?"resume":"pause",paused?EditorCommand::Resume:EditorCommand::Pause);
     button("Step","step",EditorCommand::Step);button("Stop","stop",EditorCommand::Stop);
     if(ImGui::Button("Build")){workspace.setVisible("build",true);ImGui::SetWindowFocus("Build Game###build");}observe("build");
-    if(!layout.compact){ImGui::SameLine();ImGui::TextDisabled("World space");}
+    if(!layout.compact){ImGui::SameLine();ImGui::TextDisabled("%s",context.gizmoSpace()==EditorContext::GizmoSpace::World?"World":"Local");}
     ImGui::End();
 }
 void EditorToolbar::status(EditorSession& s,float dpi) {

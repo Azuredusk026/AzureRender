@@ -1,3 +1,4 @@
+#include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
@@ -150,6 +151,10 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->setPreviewSubmission(graphicsSubmission_+1);
         editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
+        const auto view=lookAt(cameraPosition_,cameraTarget_,{0,1,0});
+        const auto projection=azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height);
+        runOptions_.editorSession->context().setViewportCameraMatrices(view,projection);
+        runOptions_.editorSession->context().setDebugProjection(multiply(projection,view));
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
         azurerender::EditorViewportInput viewportInput =
@@ -186,6 +191,7 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         if (viewportInput.pickRequested) {
             pendingPickRequested_ = true;
+            pendingPickAdditive_ = viewportInput.pickAdditive;
             pendingPickX_ = viewportInput.pickX;
             pendingPickY_ = viewportInput.pickY;
         }
@@ -374,6 +380,8 @@ void AzureRenderApp::updateGizmoScreenData() {
     auto& editorContext = runOptions_.editorSession->context();
     editorContext.setDebugProjection(multiply(azurerender::characterProjection(effectiveRenderSettings_,
         static_cast<float>(renderExtent_.width)/renderExtent_.height),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
+    editorContext.setViewportCameraMatrices(lookAt(cameraPosition_,cameraTarget_,{0,1,0}),
+        azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
         azurerender::RuntimeDiagnostics::instance().print(
@@ -391,13 +399,17 @@ void AzureRenderApp::updateGizmoScreenData() {
         return;
     }
     const LoadedAsset& asset = *sceneState->asset;
+    std::map<std::string,azurerender::scene::AxisAlignedBounds> assetBounds;
     std::map<std::string,std::array<float,3>> pickTargets;
     for(const auto& entry:sceneState->pickables)if(entry.asset) {
         const auto& mesh=*entry.asset;
+        const auto node=std::find_if(editorContext.scene().nodes.begin(),editorContext.scene().nodes.end(),[&](const auto& value){return value.id==entry.node;});
+        if(node!=editorContext.scene().nodes.end())assetBounds[node->resourceId]={mesh.boundsMin,mesh.boundsMax};
         const Vector3 center={(mesh.boundsMin[0]+mesh.boundsMax[0])*.5F,(mesh.boundsMin[1]+mesh.boundsMax[1])*.5F,(mesh.boundsMin[2]+mesh.boundsMax[2])*.5F};
         pickTargets[entry.node]=transformPosition(entry.model,center);
     }
     editorContext.setPickTargets(std::move(pickTargets));
+    editorContext.setSelectionAssetBounds(std::move(assetBounds));
     if (!editorContext.isProject() && (selectedPrimitiveIndex_ < 0
         || static_cast<std::size_t>(selectedPrimitiveIndex_)
             >= asset.primitives.size())) {
@@ -510,19 +522,18 @@ void AzureRenderApp::pickPrimitive(
     float bestDistance = std::numeric_limits<float>::max();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->context().isProject()) {
-        auto& context=runOptions_.editorSession->context();std::string selected;
+        std::string selected;
         for(const auto& entry:sceneState->pickables) {
             const auto& mesh=*entry.asset;
             for(std::size_t index=0;index+2<mesh.indices.size();index+=3) {
-                const auto a=transformPosition(entry.model,mesh.vertices[mesh.indices[index]].position);
-                const auto b=transformPosition(entry.model,mesh.vertices[mesh.indices[index+1]].position);
-                const auto c=transformPosition(entry.model,mesh.vertices[mesh.indices[index+2]].position);
+                const auto a=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index],entry.pose,entry.morph));
+                const auto b=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+1],entry.pose,entry.morph));
+                const auto c=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+2],entry.pose,entry.morph));
                 const float distance=rayTriangleDistance(cameraPosition_,direction,a,b,c);
                 if(distance>0 && distance<bestDistance){bestDistance=distance;selected=entry.node;}
             }
         }
-        if(!selected.empty())for(std::size_t index=0;index<context.scene().nodes.size();++index)
-            if(context.scene().nodes[index].id==selected){runOptions_.editorSession->edit("node.select",{{"index",index}});break;}
+        runOptions_.editorSession->edit("selection.click",{{"id",selected},{"ctrl",pendingPickAdditive_}});
         return;
     }
 #endif

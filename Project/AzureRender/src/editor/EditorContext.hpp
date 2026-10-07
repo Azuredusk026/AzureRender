@@ -119,6 +119,13 @@ public:
     std::size_t reloadChangedAssets();
 
     enum class GizmoMode { Translate, Rotate, Scale, Select };
+    enum class GizmoSpace { World, Local };
+    enum class GizmoPivot { Active, Bounds };
+    GizmoSpace gizmoSpace() const noexcept{return gizmoSpace_;}
+    GizmoPivot gizmoPivot() const noexcept{return gizmoPivot_;}
+    void setGizmoSpace(GizmoSpace value) noexcept{gizmoSpace_=value;}
+    void setGizmoPivot(GizmoPivot value) noexcept{gizmoPivot_=value;}
+    void setSelectionAssetBounds(std::map<std::string,scene::AxisAlignedBounds> bounds){selectionAssetBounds_=std::move(bounds);}
 
     struct GizmoScreenData {
         bool valid = false;
@@ -138,6 +145,9 @@ public:
     void setGizmoScreen(const GizmoScreenData& value) {
         gizmoScreen_ = value;
     }
+    void setViewportCameraMatrices(std::array<float,16> view,std::array<float,16> projection){viewportView_=view;viewportProjection_=projection;}
+    const std::array<float,16>& viewportView() const{return viewportView_;}
+    const std::array<float,16>& viewportProjection() const{return viewportProjection_;}
     void setDebugProjection(std::array<float,16> value) { debugProjection_=value; }
     void setPickTargets(std::map<std::string,std::array<float,3>> targets) { pickTargets_=std::move(targets); }
     const std::map<std::string,std::array<float,3>>& pickTargets() const { return pickTargets_; }
@@ -163,6 +173,7 @@ public:
     }
 
 private:
+    friend class GizmoController;
     friend class EditTransaction;
     friend class EditService;
     std::string documentId_=newDocumentIdentity();
@@ -194,8 +205,11 @@ private:
     std::array<float, 3> gizmoRotation_{0.0F, 0.0F, 0.0F};
     std::array<float, 3> gizmoScale_{1.0F, 1.0F, 1.0F};
     GizmoMode gizmoMode_ = GizmoMode::Translate;
+    GizmoSpace gizmoSpace_=GizmoSpace::World;
+    GizmoPivot gizmoPivot_=GizmoPivot::Active;
+    std::map<std::string,scene::AxisAlignedBounds> selectionAssetBounds_;
     GizmoScreenData gizmoScreen_;
-    std::array<float,16> debugProjection_{};
+    std::array<float,16> debugProjection_{},viewportView_{},viewportProjection_{};
     std::map<std::string,std::array<float,3>> pickTargets_;
     bool dirty_ = false;
     std::string savedFingerprint_;

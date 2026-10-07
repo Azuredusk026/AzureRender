@@ -15,6 +15,7 @@
 
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
+#include "ImGuizmo.h"
 #ifdef IMGUI_HAS_DOCK
 #include <imgui_internal.h>
 #endif
@@ -271,6 +272,7 @@ void ImGuiEditorLayer::newFrame() {
     if(std::abs(nextDpi-dpi_)>.01F){dpi_=nextDpi;EditorTheme::apply(dpi_);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;}
     ++uiFrame_;injectUiEvents();
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
 }
 
 void ImGuiEditorLayer::drawPanels() {
@@ -284,7 +286,7 @@ void ImGuiEditorLayer::drawPanels() {
     viewportFocused_=false;viewportAcceptsShortcuts_=false;
     const bool nativeFocus=!io.AppFocusLost;
     if(!nativeFocus || !workspace_.visible("viewport")) {
-        navigationButton_=-1;viewportGizmoDragActive_=false;gizmoDragAxis_=-1;viewportInput_={};
+        cancelViewportGizmo();navigationButton_=-1;viewportInput_={};
         glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
@@ -426,13 +428,33 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
-    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){navigationButton_=-1;viewportGizmoDragActive_=false;gizmoDragAxis_=-1;ImGui::End();return;}
+    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;ImGui::End();return;}
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
         if(ImGui::Button("Focus Selected")) {
             session_->edit("viewport.frame-selection");
-        }observeWidget("focus");ImGui::SameLine();ImGui::TextDisabled("Perspective");
+        }observeWidget("focus");ImGui::SameLine();
+        if(ImGui::Button("Transform"))ImGui::OpenPopup("Transform options");observeWidget("gizmo.options");
+        if(ImGui::BeginPopup("Transform options")) {
+            ImGui::BeginDisabled(session_->gizmo().active());
+            for(const auto* space:{"world","local"}) {
+                if(ImGui::Selectable(space,(context_->gizmoSpace()==EditorContext::GizmoSpace::World)==(std::string(space)=="world")))session_->edit("viewport.gizmo-options",{{"space",space}});
+                observeWidget(std::string("gizmo.space.")+space);
+            }
+            ImGui::Separator();
+            for(const auto* pivot:{"active","bounds"}) {
+                if(ImGui::Selectable(pivot,(context_->gizmoPivot()==EditorContext::GizmoPivot::Active)==(std::string(pivot)=="active")))session_->edit("viewport.gizmo-options",{{"pivot",pivot}});
+                observeWidget(std::string("gizmo.pivot.")+pivot);
+            }
+            bool snap=session_->settings().get("editor.gizmo.snap").get<bool>();
+            if(ImGui::Checkbox("Snap (Ctrl)",&snap))session_->edit("settings.set",{{"name","editor.gizmo.snap"},{"value",snap}});observeWidget("gizmo.snap");
+            for(const auto& entry:std::vector<std::pair<const char*,const char*>>{{"Move step","editor.gizmo.moveStep"},{"Rotate degrees","editor.gizmo.rotateStep"},{"Scale step","editor.gizmo.scaleStep"}}) {
+                float step=session_->settings().get(entry.second).get<float>();
+                if(ImGui::InputFloat(entry.first,&step))session_->edit("settings.set",{{"name",entry.second},{"value",step}});
+            }
+            ImGui::EndDisabled();ImGui::EndPopup();
+        }
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
         const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
@@ -476,7 +498,6 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         // Draw the viewport gizmo handles (if any selected primitive has a
         // valid screen projection). We compute endpoints here so the click
         // and drag logic can hit-test against them.
-        const auto& gizmoScreen = context_->gizmoScreen();
         const ImVec2 itemMin = ImGui::GetItemRectMin();
         imageRect_={itemMin.x,itemMin.y,imageSize.x,imageSize.y};
         widgets_["viewport.image"]=imageRect_;
@@ -509,47 +530,12 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
         }
-        ImVec2 gizmoCenter{0.0F, 0.0F};
-        ImVec2 pixelAxes[3]{};float worldPerPixel[3]{};
-        ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
-        bool gizmoDrawn = false;
-        if (!session_->playing() && !session_->building() && context_->gizmoMode()!=EditorContext::GizmoMode::Select && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
-            gizmoCenter = ImVec2(
-                itemMin.x + gizmoScreen.centerX * imageSize.x,
-                itemMin.y + gizmoScreen.centerY * imageSize.y);
-            const float axes[3][2] = {
-                {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
-                {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
-                {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
-            };
-            const ImU32 colors[3] = {
-                IM_COL32(230, 80, 80, 255),
-                IM_COL32(80, 220, 110, 255),
-                IM_COL32(90, 140, 230, 255),
-            };
-            ImDrawList* drawList = ImGui::GetWindowDrawList();
-            for (int axis = 0; axis < 3; ++axis) {
-                const float x=axes[axis][0]*imageSize.x,y=axes[axis][1]*imageSize.y;
-                const float length=std::hypot(x,y);
-                pixelAxes[axis]=length>1e-4F?ImVec2{x/length,y/length}:ImVec2{0,0};
-                worldPerPixel[axis]=length>1e-4F?.3F/length:0;
-                gizmoAxisEnds[axis] = ImVec2(
-                    gizmoCenter.x + pixelAxes[axis].x * 40.0F*dpi_,
-                    gizmoCenter.y + pixelAxes[axis].y * 40.0F*dpi_);
-                drawList->AddLine(
-                    gizmoCenter, gizmoAxisEnds[axis], colors[axis], 3.0F);
-                drawList->AddCircleFilled(
-                    gizmoAxisEnds[axis], 5.0F, colors[axis]);
-                widgets_["gizmo."+std::to_string(axis)]={gizmoAxisEnds[axis].x-5,gizmoAxisEnds[axis].y-5,10,10};
-            }
-            widgets_["gizmo.center"]={gizmoCenter.x-1,gizmoCenter.y-1,2,2};
-            gizmoDrawn = true;
-        }
         const bool hovered=ImGui::IsItemHovered();
+        const bool gizmoOver=drawViewportGizmo(itemMin,imageSize);
         const auto& navIo=ImGui::GetIO();
         const bool navigationAllowed=!session_->playing() && !session_->building() && !navIo.WantTextInput
             && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel)
-            && !navIo.AppFocusLost;
+            && !navIo.AppFocusLost && !viewportGizmoDragActive_;
         if(!navigationAllowed)navigationButton_=-1;
         if(navigationAllowed && hovered && navigationButton_<0) {
             if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
@@ -578,30 +564,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 viewportInput_.orbitDeltaY+=mouseDelta.y*orbitSensitivity*sy;
             }else if(navigationButton_==ImGuiMouseButton_Middle){viewportInput_.panDeltaX+=mouseDelta.x;viewportInput_.panDeltaY+=mouseDelta.y;}
 
-            bool pickThisClick = true;
-            if (gizmoDrawn
-                && navigationButton_<0 && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
-                const ImVec2 mousePosition = io.MousePos;
-                float bestDistance = 12.0F;
-                std::int32_t bestAxis = -1;
-                for (int axis = 0; axis < 3; ++axis) {
-                    const float distance = std::hypot(
-                        mousePosition.x - gizmoAxisEnds[axis].x,
-                        mousePosition.y - gizmoAxisEnds[axis].y);
-                    if (distance < bestDistance) {
-                        bestDistance = distance;
-                        bestAxis = axis;
-                    }
-                }
-                if (bestAxis >= 0) {
-                    gizmoDragAxis_ = bestAxis;
-                    gizmoDragStartMouse_ = mousePosition;
-                    gizmoDragStartTranslation_ = context_->gizmoTranslation();
-                    gizmoDragStartRotation_=context_->gizmoRotation();gizmoDragStartScale_=context_->gizmoScale();
-                    viewportGizmoDragActive_ = true;
-                    pickThisClick = false;
-                }
-            }
+            const bool pickThisClick=!gizmoOver && !viewportGizmoDragActive_;
             if (!session_->playing() && !session_->building() && pickThisClick
                 && navigationButton_<0 && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
@@ -618,35 +581,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                     viewportInput_.pickAdditive=io.KeyCtrl;
                 }
             }
-            if (viewportGizmoDragActive_
-                && gizmoDragAxis_ >= 0
-                && gizmoScreen.valid
-                && ImGui::IsMouseDragging(ImGuiMouseButton_Left)) {
-                const float axes[3][2] = {
-                    {gizmoScreen.axisXScreenX, gizmoScreen.axisXScreenY},
-                    {gizmoScreen.axisYScreenX, gizmoScreen.axisYScreenY},
-                    {gizmoScreen.axisZScreenX, gizmoScreen.axisZScreenY},
-                };
-                const float projection =
-                    (io.MousePos.x-gizmoDragStartMouse_.x) * pixelAxes[gizmoDragAxis_].x
-                    + (io.MousePos.y-gizmoDragStartMouse_.y) * pixelAxes[gizmoDragAxis_].y;
-                const float worldDelta = projection * worldPerPixel[gizmoDragAxis_];
-                std::array<float, 3> translation =
-                    gizmoDragStartTranslation_;
-                translation[gizmoDragAxis_] += worldDelta;
-                if(context_->gizmoMode()==EditorContext::GizmoMode::Translate)session_->edit("node.transform",{{"translation",translation}},"viewport-translate");
-                else if(context_->gizmoMode()==EditorContext::GizmoMode::Rotate) {
-                    auto value=gizmoDragStartRotation_;value[gizmoDragAxis_]+=projection*.5F;session_->edit("node.transform",{{"rotation",value}},"viewport-rotate");
-                }else {
-                    auto value=gizmoDragStartScale_;value[gizmoDragAxis_]+=worldDelta;
-                    if(std::abs(value[gizmoDragAxis_])<.001F)value[gizmoDragAxis_]=.001F;
-                    session_->edit("node.transform",{{"scale",value}},"viewport-scale");
-                }
-            }
-            if (!ImGui::IsMouseDown(ImGuiMouseButton_Left) || ImGui::IsKeyPressed(ImGuiKey_Escape,false)) {
-                viewportGizmoDragActive_ = false;
-                gizmoDragAxis_ = -1;
-            }
+
         }
     }
     viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)

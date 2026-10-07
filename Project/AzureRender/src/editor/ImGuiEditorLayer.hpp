@@ -16,6 +16,7 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <set>
 
 struct GLFWwindow;
 
@@ -73,6 +74,11 @@ private:
     int proposalDomain_=0;
     std::uint64_t proposalSequence_=0;
     void drawSettingsPanel(PanelContext& context);
+#ifdef AZURERENDER_HAS_IMGUI
+    void cancelViewportGizmo();
+    bool drawViewportGizmo(ImVec2 origin,ImVec2 size);
+#endif
+    std::array<float,16> viewportGizmoMatrix_{};
     void drawViewportPanel(PanelContext& context);
     void drawOutlinerPanel(PanelContext& context);
     void drawInspectorPanel(PanelContext& context);
@@ -143,6 +149,7 @@ private:
     int assetType_ = 0,consoleLevel_ = 0;
     bool assetGrid_ = false;
     std::string assetDirectory_;
+    std::set<std::string> openNodeIds_;
     nlohmann::json visibleAssets_=nlohmann::json::array();
 };
 

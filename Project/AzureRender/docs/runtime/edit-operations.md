@@ -31,7 +31,9 @@
 | 节点删除 | `node.remove`、`node.delete` | `index`，或当前选择 |
 | 节点复制 | `node.duplicate` | 当前选择 |
 | 变换 | `node.transform` | `translation`、`rotation`、`scale` |
-| 选择 | `node.select` | `id`、`index`、`indices` 三选一 |
+| 选择 | `node.select`、`selection.click` | 身份或索引，以及 Ctrl、Shift 和可见排序 |
+| 连续变换 | `viewport.gizmo-begin/update/commit/cancel` | 空间、枢轴与列主序世界矩阵 |
+| 变换偏好 | `viewport.gizmo-options` | `space` 与 `pivot` |
 | 组件 | `component.add`、`component.field` | `type`，或 `type`、`field`、`value` |
 | 渲染 | `render.settings`、`render.preset` | `values` 或 `value` |
 | 文档 | `document.save`、`document.reload` | 空对象 |
@@ -119,6 +121,33 @@
 构建期间脚本写入明确拒绝。
 运行预览独立持有世界与脚本实例。
 停止预览保持编辑文档状态。
+
+## 选择与连续变换
+
+`selection.click` 接收稳定身份和修饰键。
+Shift 范围使用调用方提供的完整可见顺序。
+当前对象为最近点击的范围端点。
+选择服务维护锚点和大纲揭示请求。
+
+`viewport.gizmo-begin` 保存起始文档与历史。
+参数 `space` 使用 `world` 或 `local`。
+参数 `pivot` 使用 `active` 或 `bounds`。
+返回值包含枢轴矩阵和顶层选择数量。
+
+`viewport.gizmo-update` 接收十六项列主序矩阵。
+增量相对起始矩阵计算，经父级逆变换写入。
+合法 TRS 分解遵守 `T * Rx * Ry * Rz * S`。
+非有限、奇异及不可表示的剪切矩阵返回诊断。
+
+`viewport.gizmo-commit` 结束单个撤销单元。
+`viewport.gizmo-cancel` 恢复起始内容和完整历史。
+取消同时恢复未保存标记与已有重做栈。
+活动拖拽期间，其他制作与运行操作保持隔离。
+
+ImGuizmo 负责绘制、命中和候选矩阵。
+公共变换服务负责候选校验和文档写入。
+源版本和许可见 `third_party/ImGuizmo/source.json`。
+来源提交、适配说明与 MIT 许可随安装交付。
 
 ## 自动工具
 
