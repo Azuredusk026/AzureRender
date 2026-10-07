@@ -46,6 +46,12 @@ int main() {
   parsed.setComponent("instance:node","azure.transform",registry.encode("azure.transform",&transform),db);
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
+  std::filesystem::create_directory(root/"blocked.azurelevel");
+  bool saveFailed=false;try { parsed.save(root/"blocked.azurelevel"); }catch(const std::exception&){saveFailed=true;}
+  check(saveFailed && std::filesystem::is_directory(root/"blocked.azurelevel"));
+  for(const auto& entry:std::filesystem::directory_iterator(root))
+    if(entry.path().filename().string().find(".tmp")!=std::string::npos)
+      throw std::runtime_error("Failed level save must clean temporary files");
   write(root/"assets/body.azureprefab",prefab.dump(2));auto dependencyChanges=db.refresh();
   check(std::find(dependencyChanges.begin(),dependencyChanges.end(),db.idForPath("assets:/start.azurelevel"))!=dependencyChanges.end());
   db.writePack(root/"pack");check(AssetDatabase::resolvePack(root/"pack",id).filename()=="moved.txt");

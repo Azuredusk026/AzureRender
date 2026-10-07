@@ -3,6 +3,8 @@
 #include "runtime/Prefab.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include <fstream>
+#include <chrono>
+#include <atomic>
 #include <set>
 namespace azurerender {
 Level Level::load(const std::filesystem::path& path, const AssetDatabase& assets) {
@@ -66,9 +68,20 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
     return level;
 }
 void Level::save(const std::filesystem::path& path) const {
-    const auto temporary = path.string() + ".tmp";
-    { std::ofstream output(temporary); output << document_.dump(2) << '\n'; output.flush(); if (!output) throw std::runtime_error("Cannot save level"); }
-    std::filesystem::copy_file(temporary, path, std::filesystem::copy_options::overwrite_existing); std::filesystem::remove(temporary);
+    static std::atomic<std::uint64_t> sequence{0};
+    const auto temporary = path.string() + ".tmp."
+        + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())
+        + "." + std::to_string(sequence++);
+    try {
+        { std::ofstream output(temporary, std::ios::binary);
+          output << document_.dump(2) << '\n'; output.flush();
+          if (!output) throw std::runtime_error("Cannot save complete level"); }
+        std::filesystem::rename(temporary, path);
+    } catch (...) {
+        std::error_code ignored;
+        std::filesystem::remove(temporary, ignored);
+        throw;
+    }
 }
 void Level::setComponent(const std::string& node, const std::string& type, const nlohmann::json& envelope, const AssetDatabase& assets) {
     auto document = document_;

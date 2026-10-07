@@ -415,6 +415,10 @@ add_library(AzureEditor STATIC
     src/editor/commands/EditService.cpp
     src/editor/commands/EditTransaction.cpp
     src/editor/commands/EditorOperations.cpp
+    src/editor/viewport/SelectionBounds.cpp
+    src/editor/viewport/EditorCameraService.cpp
+    src/editor/documents/DocumentActionGuard.cpp
+    src/editor/input/EditorInputRouter.cpp
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
     src/editor/EditorProjectEditing.cpp
@@ -853,6 +857,23 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.EditorCameraController
         COMMAND AzureRenderEditorCameraTests)
+    add_executable(AzureEditorInputRouterTests tests/EditorInputRouterTests.cpp src/editor/input/EditorInputRouter.cpp)
+    target_include_directories(AzureEditorInputRouterTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.EditorInputRouter COMMAND AzureEditorInputRouterTests)
+    add_executable(AzureEditorCameraServiceTests tests/EditorCameraServiceTests.cpp)
+    target_link_libraries(AzureEditorCameraServiceTests PRIVATE AzureEditor)
+    add_test(NAME AzureRender.EditorCameraService COMMAND AzureEditorCameraServiceTests)
+    add_executable(AzureDocumentBackupTests tests/DocumentBackupTests.cpp)
+    target_link_libraries(AzureDocumentBackupTests PRIVATE AzureEditor)
+    add_test(NAME AzureRender.DocumentBackup COMMAND AzureDocumentBackupTests)
+    add_executable(AzureDocumentActionGuardTests tests/DocumentActionGuardTests.cpp)
+    target_link_libraries(AzureDocumentActionGuardTests PRIVATE AzureEditor)
+    add_test(NAME AzureRender.DocumentActionGuard COMMAND AzureDocumentActionGuardTests)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME AzureEditor.UsabilityGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_usability.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/usability")
+        add_test(NAME AzureEditor.DocumentGuardGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_document_guard.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/documents")
+        set_tests_properties(AzureEditor.UsabilityGpu AzureEditor.DocumentGuardGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    endif()
     add_executable(AzureRenderEditorSessionTests tests/EditorSessionTests.cpp)
     target_link_libraries(AzureRenderEditorSessionTests PRIVATE AzureEditor)
     add_test(
@@ -1497,7 +1518,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY ON)
 include(CPack)
 
-foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 f4 g8 u3 f5 u4 g9 r7 g10 r8 r9 g11 p3 g1 g2 g3 g4 u0 p0)
+foreach(AZURE_PHASE f1 r5 g5 g6 u1 f2 p1 f3 r6 g7 u2 p2 f4 g8 u3 f5 u4 g9 r7 g10 r8 r9 g11 p3 u5 g1 g2 g3 g4 u0 p0)
     file(GLOB AZURE_PHASE_RECORDS "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PHASE}/*.md")
     if(AZURE_PHASE_RECORDS)
         install(FILES ${AZURE_PHASE_RECORDS} DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PHASE}")
@@ -1523,10 +1544,13 @@ install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-foundation-steps.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-ai-native-editor-steps.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-specialized-steps.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-07-editor-usability.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/editor-usability-manifest.json"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-06-gknextengine.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-07-editor-usability.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/gknextengine-source-map.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 
@@ -1542,3 +1566,6 @@ if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
     install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/dotnet/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "dotnet-LICENSE.txt")
     install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/dotnet/THIRD-PARTY-NOTICES.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "dotnet-THIRD-PARTY-NOTICES.txt")
 endif()
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/editor-usability-evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research/editor-usability-evidence")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u5/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u5/evidence")

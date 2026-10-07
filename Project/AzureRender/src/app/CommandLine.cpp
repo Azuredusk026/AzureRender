@@ -46,6 +46,7 @@ constexpr const char* kHelp =
     "  --editor <azscene>                  Open the editor\n"
     "  --editor-project <azureproject>     Open a game project\n"
     "  --create-game <empty-directory>     Create a playable game template\n"
+    "  --editor-close-policy <policy>     ask (default), save, discard\n"
     "  --editor-actions <json>             Run editor task commands\n"
     "  --validation-script <json>          Run versioned validation steps\n"
     "  --validation-report <json>          Write validation step results\n"
@@ -324,6 +325,10 @@ ParsedCommandLine parseCommandLine(
             if(arguments.size()!=2)fail(CommandLineErrorCode::InvalidCombination,argument,"--create-game is a standalone command");
         } else if (argument == "--editor-project") {
             parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
+        } else if (argument == "--editor-close-policy") {
+            const auto value=requireValue(arguments,index,argument);
+            if(value!="ask"&&value!="save"&&value!="discard")fail(CommandLineErrorCode::InvalidValue,argument,"Expected ask, save or discard");
+            parsed.options.editorClosePolicy=value;
         } else if (argument == "--editor-actions") {
             parsed.options.editorActionsPath = requireValue(arguments,index,argument);
         } else if (argument == "--set") {

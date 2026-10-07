@@ -4,6 +4,7 @@
 #include "render/CameraProjection.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorCameraController.hpp"
+#include "editor/viewport/EditorCameraService.hpp"
 #endif
 #if AZURE_WITH_EDITOR
 #include "editor/EditorContext.hpp"
@@ -63,6 +64,9 @@ void AzureRenderApp::drawFrame() {
         if(engineSettings_->get("diagnostics.verbose").get<bool>())
             azurerender::RuntimeDiagnostics::instance().info("settings","Applied setting layers: "+engineSettings_->describe().dump());
     }
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && !runOptions_.editorSession->playing() && editorCameraFar_>0){effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;}
+#endif
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
@@ -145,16 +149,41 @@ void AzureRenderApp::drawFrame() {
     if (editorLayer_ != nullptr) {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->setPreviewSubmission(graphicsSubmission_+1);
+        editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         editorLayer_->newFrame();
         editorLayer_->drawPanels();
-        const azurerender::EditorViewportInput viewportInput =
+        azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();
+        auto& session=*runOptions_.editorSession;
+        if(session.consumeFrameSelection() && !session.playing()) {
+            const auto description=session.context().scene().renderDescription();
+            const auto* rendererState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+            const auto bounds=azurerender::SelectionBounds::resolve(description,session.selection().selected(),[&](const std::string& resource)->std::optional<azurerender::scene::AxisAlignedBounds>{
+                if(rendererState)for(const auto& entry:rendererState->pickables) {
+                    const auto node=std::find_if(description.nodes.begin(),description.nodes.end(),[&](const auto& n){return n.id==entry.node;});
+                    if(node!=description.nodes.end() && node->resourceId==resource && entry.asset)return azurerender::scene::AxisAlignedBounds{entry.asset->boundsMin,entry.asset->boundsMax};
+                }
+                return {};
+            });
+            const float fov=2*std::atan(std::tan(3.14159265F/6)/azurerender::internal::kCharacterLensScale);
+            if(bounds.valid){
+                const float radius=.5F*vectorLength(subtract(bounds.bounds.maximum,bounds.bounds.minimum));
+                editorCameraNear_=std::max(.00001F,std::min(effectiveRenderSettings_.cameraNear,radius*.001F));
+                editorCameraFar_=std::max(effectiveRenderSettings_.cameraFar,radius*100.F);
+                effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;
+            }
+            const auto framed=azurerender::EditorCameraService::frameSelection(bounds,cameraPosition_,cameraTarget_,fov,
+                static_cast<float>(renderExtent_.width)/renderExtent_.height,effectiveRenderSettings_.cameraNear,effectiveRenderSettings_.cameraFar);
+            if(framed.passed){cameraPosition_=framed.position;cameraTarget_=framed.target;autoRotate_=false;}
+            else session.log("ERROR: "+framed.diagnostic);
+        }
         if (!runOptions_.editorSession->playing() && azurerender::EditorCameraController::apply(
                 viewportInput,
                 cameraPosition_,
                 cameraTarget_)) {
             autoRotate_ = false;
         }
+        editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         if (viewportInput.pickRequested) {
             pendingPickRequested_ = true;
             pendingPickX_ = viewportInput.pickX;

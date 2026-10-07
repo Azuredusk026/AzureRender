@@ -30,7 +30,7 @@ def run(build_dir,editor,output,evidence):
         actions=[dict(frame=1,command='build',install=str(engine),output=str(output),replace=output.exists()),dict(frame=2,command='wait-build')]
         (root/'publish.json').write_text(json.dumps(actions),encoding='utf-8')
         report=evidence/'editor.json'
-        log=execute([editor.resolve(),'--editor-project',project/'project.azureproject','--editor-actions',root/'publish.json',
+        log=execute([editor.resolve(),'--editor-close-policy', 'save', '--editor-project',project/'project.azureproject','--editor-actions',root/'publish.json',
             '--fixed-frame-step','--smoke-frames','8','--runtime-report',report],root)
         (evidence/'editor.log').write_text(log,encoding='utf-8')
         data=json.loads(report.read_text(encoding='utf-8'));assert data['gameBuildPassed'] and all(row['passed'] for row in data['editorActions'])

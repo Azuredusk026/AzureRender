@@ -56,6 +56,18 @@ int main() {
     auto context = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset(assetPath), scenePath);
     azurerender::EditorSession session(context);
+    // Returning to the saved content clears the document marker.
+    context->save();
+    session.edit("node.rename",{{"value","edited"}});
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    if(context->dirty()){std::cerr<<"Undo to checkpoint must clear dirty\n";return 1;}
+    if(!session.edit("node.create")){std::cerr<<"Default create must allocate an identity\n";return 1;}
+    const auto allocated=context->selectedNode()->id;
+    session.edit("node.delete");
+    if(!session.edit("node.create") || context->selectedNode()->id==allocated){std::cerr<<"Creation after deletion needs unique identity\n";return 1;}
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
+    static_cast<void>(session.execute(azurerender::EditorCommand::Undo));
     // Session-owned commands can be attached to successive host lifetimes.
     if(!session.edits().registry().find("developer.describe")) {
         std::cerr<<"Developer commands must belong to the session lifetime\n";return 1;

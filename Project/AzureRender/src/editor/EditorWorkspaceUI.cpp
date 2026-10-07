@@ -17,9 +17,12 @@ void ImGuiEditorLayer::queueInputEvent(nlohmann::json event) {
         if(!widgets_.contains(target))throw std::invalid_argument("Unknown UI target: "+target);
         for(const auto v:event.value("offset",std::array<float,2>{0,0}))if(!std::isfinite(v)||std::abs(v)>10000)throw std::invalid_argument("Invalid mouse offset");
         event.value("down",true);
-    }else if(action=="text")event.at("text").get<std::string>();
+        const auto button=event.value("button",std::string("left"));
+        if(button!="left"&&button!="right"&&button!="middle")throw std::invalid_argument("Unknown mouse button");
+    }else if(action=="focus")event.at("focused").get<bool>();
+    else if(action=="text")event.at("text").get<std::string>();
     else if(action=="key") {
-        const std::set<std::string> keys={"A","D","W","S","Z","Y","Delete","Enter","Escape","Shift"};
+        const std::set<std::string> keys={"A","D","W","S","E","R","F","Q","P","Z","Y","Delete","Enter","Escape","Shift","Alt"};
         if(!keys.count(event.at("key").get<std::string>()))throw std::invalid_argument("Unsupported UI key");
         event.value("down",true);event.value("ctrl",false);
     }else if(action=="wheel") {
@@ -34,8 +37,8 @@ void ImGuiEditorLayer::observeWidget(const std::string& id) {
 }
 void ImGuiEditorLayer::injectUiEvents() {
     if(uiActions_.empty())return;
-    auto& io=ImGui::GetIO();io.AddFocusEvent(true);io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
-    if(injectedMouseDown_){io.AddMouseButtonEvent(0,false);injectedMouseDown_=false;}
+    auto& io=ImGui::GetIO();io.AddFocusEvent(injectedFocus_);io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
+    if(injectedMouseDown_){io.AddMouseButtonEvent(injectedClickButton_,false);injectedMouseDown_=false;}
     while(uiCursor_<uiActions_.size()&&uiActions_[uiCursor_].at("frame").get<std::uint64_t>()<=uiFrame_) {
         const auto action=uiActions_[uiCursor_++];
         try {
@@ -46,14 +49,21 @@ void ImGuiEditorLayer::injectUiEvents() {
                 const auto offset=action.value("offset",std::array<float,2>{0,0});
                 uiMousePosition_={rect[0]+rect[2]/2+offset[0],rect[1]+rect[3]/2+offset[1]};
                 io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
-                io.AddMouseButtonEvent(0,action.value("down",true));injectedMouseDown_=kind=="click";
-            }else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
+                const auto button=action.value("button",std::string("left"));
+                const int index=button=="right"?1:button=="middle"?2:0;
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Shift),action.value("shift",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
+                io.AddMouseButtonEvent(index,action.value("down",true));injectedMouseDown_=kind=="click";injectedClickButton_=index;
+            }else if(kind=="focus"){injectedFocus_=action.at("focused").get<bool>();io.AddFocusEvent(injectedFocus_);}
+            else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
             else if(kind=="wheel")io.AddMouseWheelEvent(action.value("x",0.F),action.value("y",0.F));
             else if(kind=="key") {
                 static const std::map<std::string,ImGuiKey> keys={{"A",ImGuiKey_A},{"D",ImGuiKey_D},{"W",ImGuiKey_W},
-                    {"S",ImGuiKey_S},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
+                    {"S",ImGuiKey_S},{"E",ImGuiKey_E},{"R",ImGuiKey_R},{"F",ImGuiKey_F},{"Q",ImGuiKey_Q},{"P",ImGuiKey_P},{"Alt",ImGuiKey_LeftAlt},{"Z",ImGuiKey_Z},{"Y",ImGuiKey_Y},{"Delete",ImGuiKey_Delete},
                     {"Enter",ImGuiKey_Enter},{"Escape",ImGuiKey_Escape},{"Shift",ImGuiKey_LeftShift}};
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
+                io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
                 io.AddKeyEvent(keys.at(action.at("key").get<std::string>()),action.value("down",true));
             }else if(kind=="dpi") {
                 dpiOverride_=action.at("scale").get<float>();dpi_=dpiOverride_;
@@ -105,7 +115,7 @@ void ImGuiEditorLayer::drawWorkspace() {
         if(context_->isProject()){ImGui::TextWrapped("%s",context_->project().name.c_str());ImGui::TextDisabled("%s",context_->scene().sceneId.c_str());}
         ImGui::Separator();ImGui::TextUnformatted("Create objects");
         ImGui::BeginDisabled(session_->playing()||session_->building());
-        if(ImGui::Button("Empty Node",{-1,0}))session_->edit("node.create",{{"id","node-"+std::to_string(context_->scene().nodes.size())}});observeWidget("create.empty");
+        if(ImGui::Button("Empty Node",{-1,0}))session_->edit("node.create");observeWidget("create.empty");
         if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
         ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
@@ -115,17 +125,23 @@ void ImGuiEditorLayer::drawWorkspace() {
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
             observeWidget(std::string("tool.")+id);
         }
-        ImGui::Separator();ImGui::TextWrapped("RMB: orbit camera\nMMB: pan\nWheel: zoom\nCtrl+S: save\nCtrl+P: play / stop");
+        ImGui::Separator();ImGui::TextWrapped("RMB + WASD: fly\nShift: accelerate\nAlt + LMB: orbit\nMMB: pan\nWheel: zoom\nW/E/R: move/rotate/scale\nF / outliner double click: frame\nCtrl+S: save\nCtrl+P: play / stop");
         ImGui::End();
     }
 }
-nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const {
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     nlohmann::json data={{"version",EditorWorkspace::version},{"dpi",dpi_},{"panels",nlohmann::json::object()},
         {"image",{{"x",imageRect_[0]},{"y",imageRect_[1]},{"width",imageRect_[2]},{"height",imageRect_[3]}}},
-        {"widgets",widgets_},{"uiErrors",uiErrors_},{"history",uiHistory_},{"diagnostic",workspace_.diagnostic},
+        {"widgets",widgets_},{"uiErrors",uiErrors_},{"historyCount",uiHistory_.size()},{"diagnostic",workspace_.diagnostic},
         {"selectedName",context_->selectedNode()?context_->selectedNode()->name:""},
         {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
+    data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    if(includeHistory)data["history"]=uiHistory_;
+    data["gizmoMode"]=static_cast<unsigned>(context_->gizmoMode());
+    data["capture"]={{"navigationButton",navigationButton_},{"gizmo",viewportGizmoDragActive_}};
+    data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());
+    data["dirty"]=context_->dirty();data["undoCount"]=context_->undoCount();data["selection"]=session_->selection().selected();
     data["settings"]=session_->settings().describe();
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
@@ -141,6 +157,6 @@ void ImGuiEditorLayer::observeWidget(const std::string&){}
 void ImGuiEditorLayer::injectUiEvents(){}
 void ImGuiEditorLayer::queueInputEvent(nlohmann::json) { throw std::logic_error("UI input requires ImGui"); }
 void ImGuiEditorLayer::drawWorkspace(){}
-nlohmann::json ImGuiEditorLayer::workspaceSnapshot() const{return {};}
+nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool) const{return {};}
 }
 #endif

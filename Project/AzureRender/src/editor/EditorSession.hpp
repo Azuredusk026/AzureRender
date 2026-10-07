@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "documents/DocumentActionGuard.hpp"
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
@@ -74,6 +75,12 @@ public:
     nlohmann::json proposalReport() const;
     ProposalController& proposals();
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
+    void setClosePolicy(std::string policy){closePolicy_=std::move(policy);}
+    DocumentActionGuard& documentGuard(){return *documentGuard_;}
+    bool requestDocumentAction(DocumentAction action);
+    bool resolveDocumentAction(DocumentDecision decision);
+    bool closeReady() const {return documentGuard_->state()==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Close;}
+    bool consumeFrameSelection(){const bool result=frameSelectionRequested_;frameSelectionRequested_=false;return result;}
     [[nodiscard]] bool saveOnClose() noexcept;
     [[nodiscard]] bool consumeLayoutResetRequest() noexcept;
     [[nodiscard]] bool consumeAssetReloadRequest() noexcept;
@@ -100,6 +107,9 @@ private:
     std::unique_ptr<ProposalController> proposals_;
     EditorPanelRegistry panelRegistry_;
     std::filesystem::path userSettingsPath_;
+    std::unique_ptr<DocumentActionGuard> documentGuard_;
+    std::string closePolicy_="ask";
+    bool frameSelectionRequested_=false;
     std::string lastError_;
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;

@@ -84,6 +84,9 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
                     ImGuiSelectableFlags_SpanAvailWidth);
             }
             observeWidget("node."+nodes[index].id);
+            if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !ImGui::GetIO().KeyCtrl) {
+                panelContext.selection().set({nodes[index].id});session_->edit("viewport.frame-selection");
+            }
             if (ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
                 if(ImGui::GetIO().KeyCtrl){auto selection=panelContext.selection().selected();auto found=std::find(selection.begin(),selection.end(),nodes[index].id);if(found==selection.end())selection.push_back(nodes[index].id);else selection.erase(found);panelContext.selection().set(selection);}else panelContext.selection().set({nodes[index].id});
             }
@@ -98,7 +101,9 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         for(std::size_t i=0;i<nodes.size();++i)if(outlinerFilter_.PassFilter(nodes[i].name.c_str()) || outlinerFilter_.PassFilter(nodes[i].id.c_str())) {
             ImGui::PushID(nodes[i].id.c_str());
             if(ImGui::Selectable(nodes[i].name.c_str(),view.selectedNodeIndex()==i))panelContext.selection().set({nodes[i].id});
-            observeWidget("node."+nodes[i].id);ImGui::SameLine();ImGui::TextDisabled("%s",nodes[i].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
+            observeWidget("node."+nodes[i].id);
+            if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !ImGui::GetIO().KeyCtrl)session_->edit("viewport.frame-selection");
+            ImGui::SameLine();ImGui::TextDisabled("%s",nodes[i].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
     }else drawNode(drawNode, "", 0);
     ImGui::End();

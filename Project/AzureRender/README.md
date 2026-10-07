@@ -92,6 +92,10 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 ## 当前开发
 
+编辑器提供共享输入路由、尺度构图和保存保护。
+操作见[编辑器交互教程](docs/tutorials/editor-interaction.md)。
+问题与修复顺序见[体验实施计划](docs/plans/2026-10-07-editor-usability.md)。
+
 [引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8、R9 已验收。
 
 系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。F4 至 P3 的功能与交付验收已完成。

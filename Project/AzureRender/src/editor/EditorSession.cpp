@@ -67,6 +67,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     if (context_ == nullptr) {
         throw std::invalid_argument("Editor session requires a context");
     }
+    documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty();},[this]{context_->save();});
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
         return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
     });
@@ -74,6 +75,13 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     registerModelSettings(settings_);
     settings_.add({"editor.scale","Interface scale multiplier",1.0,.75,3.,false,true,false});
     settings_.add({"editor.compact","Compact workspace",false,{},{},false,true,false});
+    settings_.add({"editor.camera.invertX","Invert horizontal editor camera input",false,{},{},false,true,false});
+    settings_.add({"editor.camera.invertY","Invert vertical editor camera input",false,{},{},false,true,false});
+    settings_.add({"editor.camera.flySpeed","Editor flight speed",5.,.01,10000.,false,true,false});
+    settings_.add({"editor.camera.boost","Editor flight acceleration",4.,1.,100.,false,true,false});
+    settings_.add({"editor.camera.orbitSensitivity","Editor orbit sensitivity",1.,.01,10.,false,true,false});
+    for(const auto& binding:std::vector<std::pair<const char*,const char*>>{{"move","W"},{"rotate","E"},{"scale","R"},{"select","Q"},{"frame","F"}})
+        settings_.add({std::string("editor.shortcuts.")+binding.first,"Scene shortcut (one uppercase letter)",binding.second,{},{},false,true,false});
     selection_=std::make_unique<SelectionService>(*context_,*edits_);
 }
 void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
@@ -147,8 +155,7 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     }
     try {
         if (command == EditorCommand::Reload) {
-            context_->reload();
-            return true;
+            return requestDocumentAction(DocumentAction::Reload);
         }
         context_->save();
         return true;
@@ -161,6 +168,23 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     return false;
 }
 
+bool EditorSession::requestDocumentAction(DocumentAction action){
+    auto state=documentGuard_->request(action);
+    if(state==DocumentActionState::AwaitingDecision && closePolicy_!="ask")
+        return resolveDocumentAction(closePolicy_=="save"?DocumentDecision::Save:DocumentDecision::Discard);
+    if(state==DocumentActionState::Ready && action==DocumentAction::Reload){
+        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){lastError_=error.what();return false;}
+    }
+    return state!=DocumentActionState::Failed;
+}
+bool EditorSession::resolveDocumentAction(DocumentDecision decision){
+    const auto state=documentGuard_->resolve(decision);
+    if(state==DocumentActionState::Failed){lastError_=documentGuard_->diagnostic();context_->log("ERROR: "+lastError_);return false;}
+    if(state==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Reload){
+        try{context_->reload();documentGuard_->reset();}catch(const std::exception& error){lastError_=error.what();return false;}
+    }
+    return true;
+}
 bool EditorSession::saveOnClose() noexcept {
     if(play_)static_cast<void>(execute(EditorCommand::Stop));
     return !context_->dirty() || execute(EditorCommand::Save);

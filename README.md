@@ -77,6 +77,10 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 探索与场景检视项目共用可配置系统。F4 至 P3 的功能与交付验收已完成。
 
+编辑器提供共享输入路由、尺度构图和保存保护。
+操作见[编辑器交互教程](Project/AzureRender/docs/tutorials/editor-interaction.md)。
+步骤见[体验实施计划](Project/AzureRender/docs/plans/2026-10-07-editor-usability.md)。
+
 任务文件、接口、依赖和验收由三个子计划定义。
 
 F1 至 P1 的可玩关卡路线已完成。F3 仓库与文档基础已完成。R6 场景可见性已验收。G7 方向与冲刺已验收。

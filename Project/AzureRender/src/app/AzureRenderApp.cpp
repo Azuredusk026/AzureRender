@@ -298,9 +298,8 @@ void AzureRenderApp::initEditorUi() {
         if(context.isProject())for(std::size_t i=0;i<context.scene().nodes.size();++i) {
             const auto data=context.componentData(context.scene().nodes[i].id,"azure.character");
             if(!data.is_null()&&data.value("controlled",true)) {
-                azurerender::EditorViewportInput focus;focus.frameRequested=true;focus.frameTarget=context.scene().nodes[i].translation;
-                azurerender::EditorCameraController::apply(focus,cameraPosition_,cameraTarget_);
-                runOptions_.editorSession->edit("node.select",{{"index",i}});break;
+                runOptions_.editorSession->edit("node.select",{{"index",i}});
+                runOptions_.editorSession->edit("viewport.frame-selection");break;
             }
         }
         editorLayer_ = std::make_unique<azurerender::ImGuiEditorLayer>(
@@ -326,7 +325,21 @@ void AzureRenderApp::initEditorUi() {
 
 void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     std::uint64_t renderedFrames = 0;
-    while (!frontend_->shouldClose()) {
+    while (true) {
+        if(frontend_->shouldClose()) {
+#if AZURE_WITH_EDITOR
+            if(runOptions_.editorSession){
+                auto& session=*runOptions_.editorSession;
+                if(session.documentGuard().state()==azurerender::DocumentActionState::Idle)session.edit("document.close");
+                if(session.closeReady())break;
+                glfwSetWindowShouldClose(frontend_->nativeHandle(),GLFW_FALSE);
+            }else
+#endif
+            break;
+        }
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession && runOptions_.editorSession->closeReady())break;
+#endif
         frontend_->pollEvents();
         if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
@@ -1405,6 +1418,9 @@ void AzureRenderApp::createTimestampQueryPools() {
 
 void AzureRenderApp::scrollCallback(GLFWwindow* window, double x, double y) {
     (void)x;auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+#if AZURE_WITH_EDITOR
+    if(app && app->editorLayer_ && (!app->editorLayer_->acceptsViewportShortcuts() || !app->gameViewportFocus_))return;
+#endif
     if(app)if(auto* game=app->activeGame())game->cameraInput(0,0,static_cast<float>(y));
 }
 
@@ -1481,6 +1497,9 @@ void AzureRenderApp::keyCallback(
         }
         if(!values.empty()) { session->edit("render.settings",{{"values",values}});return; }
     }
+#endif
+#if AZURE_WITH_EDITOR
+    if(application->editorLayer_ && (key==GLFW_KEY_W||key==GLFW_KEY_E||key==GLFW_KEY_R||key==GLFW_KEY_Q||key==GLFW_KEY_F))return;
 #endif
     if (action == GLFW_PRESS) {
         if (key == GLFW_KEY_SPACE) {

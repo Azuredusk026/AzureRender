@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "kind": "editor-usability-audit",
+  "date": "2026-10-07",
+  "baselineCommit": "5de3dccb1d8376a4f5b1c4e556c236eea6cef5cc",
+  "productionChanges": false,
+  "physicalKeyboardMouse": "not performed",
+  "cases": 6,
+  "confirmedReplays": 3,
+  "files": {
+    "summary.json": {
+      "bytes": 1066,
+      "sha256": "69976c938d5e85811c8d5bdd0a7f9ebef600d0a4a37444353d62b90d87c62ae9"
+    },
+    "baseline/ui-input.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "baseline/runtime.json": {
+      "bytes": 29187,
+      "sha256": "6663055bb2836afdaf48f047b81d57f0f6411143171bd1756c6ab73f7318ef17"
+    },
+    "baseline/stdout.log": {
+      "bytes": 2291,
+      "sha256": "57722c6583e4024900eb5f52af8c082415daa25c1ac4fbf3b3087d41dd873ad5"
+    },
+    "baseline/stderr.log": {
+      "bytes": 1230,
+      "sha256": "781e46930f838ea684c86f2a92f6cdeeacbdaeaa3570386bca269052249e086a"
+    },
+    "outliner-select/ui-input.json": {
+      "bytes": 59,
+      "sha256": "e5ed76a077c5f7122f5930d00252076c3e30cae6c9d3736e89db52e8193fc46f"
+    },
+    "outliner-select/runtime.json": {
+      "bytes": 48102,
+      "sha256": "dffbdfb58eac04c45ff0fead2525d40d4f1b99b54887bca93bbdb43a0b084b1b"
+    },
+    "outliner-select/stdout.log": {
+      "bytes": 2298,
+      "sha256": "06d98de84d7b5d5c80a1f3f6b43f90fc350a8f0d77eb873611ff6298df82b4c0"
+    },
+    "outliner-select/stderr.log": {
+      "bytes": 1301,
+      "sha256": "2bf470d4fab8037d188c6c41093a7fedde092063a620b9753b2b439c545d885f"
+    },
+    "scale-then-w/ui-input.json": {
+      "bytes": 598,
+      "sha256": "8815723882561b4d444eff22db7d2172b6083e746e9e9878ad5bf58b513f0bef"
+    },
+    "scale-then-w/runtime.json": {
+      "bytes": 60245,
+      "sha256": "83bfe4f0aafd0fb0e712442d79a2e6d701173a763560905c518600ac103ff162"
+    },
+    "scale-then-w/stdout.log": {
+      "bytes": 2295,
+      "sha256": "d210996ca2d9dc72ad3d57ca1b94319a1be2b8e7a8f715e60e26d44bbdb25821"
+    },
+    "scale-then-w/stderr.log": {
+      "bytes": 1771,
+      "sha256": "310a838cc9808ce5d981aa8b635feffbaf0d31e2b9a16a4ddbff395c25700b03"
+    },
+    "create-after-delete/ui-input.json": {
+      "bytes": 367,
+      "sha256": "75cea66d892e4c1824ab7bcb154aba25a08ca4d1c59150ae4b2143e2e82189a5"
+    },
+    "create-after-delete/runtime.json": {
+      "bytes": 59366,
+      "sha256": "446456954afa8306a94236c2c2961f071c9568085c6ae225bb8e07908be563b8"
+    },
+    "create-after-delete/stdout.log": {
+      "bytes": 4251,
+      "sha256": "ab050b2254ad961acf9e634fa956eaf2c38fa5dec51d1af4125e4346c1872b00"
+    },
+    "create-after-delete/stderr.log": {
+      "bytes": 2889,
+      "sha256": "852f4efd1dcfd1215466bcb5759a75dd1eb4942ebc637993d5b6f7010cc1aabf"
+    },
+    "collision/reproduction/ui-input.json": {
+      "bytes": 544,
+      "sha256": "60e3de405e2c6ab58ee4061920b3ed9f05290c847405646ded7b5f2b17368864"
+    },
+    "collision/reproduction/runtime.json": {
+      "bytes": 61608,
+      "sha256": "e79adf83f3709eef8ffc1ed077c7724702c91ddfc5afa13e33971a548211f32d"
+    },
+    "collision/reproduction/stdout.log": {
+      "bytes": 4301,
+      "sha256": "786beb9e3a766db3f5515843e582e430b5e19250e1b0eae560996ad679c490e8"
+    },
+    "collision/reproduction/stderr.log": {
+      "bytes": 3182,
+      "sha256": "e78d804a04c72ccd57c4be0b4b1e2a205ac0f2d24a7104e3b9bb79864d3e3738"
+    },
+    "collision-isolated/reproduction/ui-input.json": {
+      "bytes": 539,
+      "sha256": "94e332dc72917879bd02d59a1d9b69ae431ccadc7df0699a25cb13e859d014f8"
+    },
+    "collision-isolated/reproduction/runtime.json": {
+      "bytes": 61615,
+      "sha256": "7e1740750833222a0d3a851d4dc0648830a93f0633853b2bf0439a819705bd6c"
+    },
+    "collision-isolated/reproduction/stdout.log": {
+      "bytes": 4346,
+      "sha256": "557f7a8dd0ec1f57672b3fd5337b3ef8b1f93f3cdef576df61903845affa1b67"
+    },
+    "collision-isolated/reproduction/stderr.log": {
+      "bytes": 3064,
+      "sha256": "4fcf9f2a1ab7947871da6cae10a5a0cb753ce15951f6246f78a097207347fe5b"
+    },
+    "outliner-select.png": {
+      "bytes": 287163,
+      "sha256": "a659c6679be9a6820b78ceaceaef72314dfce9855ae51e66e8ba6ab30dd60b89"
+    },
+    "scale-then-w.png": {
+      "bytes": 288611,
+      "sha256": "3f8a7badc6f70cc25b21664eb16201cd94fd8bc637f7ee888388cc59b5177c26"
+    }
+  }
+}

@@ -81,6 +81,10 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     for(const auto& node:session.viewScene().nodes)resources+=node.id+":"+node.resourceId+";";
     if(!session.playing() && resources!=editorResourceSignature_){editorResourceSignature_=resources;static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));}
     if(session.consumeRuntimeReset()){
+        if(session.playing() && !editorWasPlaying_){savedEditorCamera_=cameraPosition_;savedEditorTarget_=cameraTarget_;}
+        if(!session.playing() && editorWasPlaying_){cameraPosition_=savedEditorCamera_;cameraTarget_=savedEditorTarget_;}
+        editorWasPlaying_=session.playing();gameViewportFocus_=false;gameCursorPrimed_=false;
+        glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
         invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}

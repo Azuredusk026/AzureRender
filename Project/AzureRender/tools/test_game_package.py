@@ -38,7 +38,7 @@ def main():
                    {"frame": 2, "command": "wait-build"}]
         task, report = root / "actions.json", evidence / "editor-report.json"
         task.write_text(json.dumps(actions), encoding="utf-8")
-        log = run([args.editor.resolve(), "--editor-project", project / "project.azureproject", "--editor-actions", task,
+        log = run([args.editor.resolve(), "--editor-close-policy", "save", "--editor-project", project / "project.azureproject", "--editor-actions", task,
                    "--smoke-frames", "8", "--fixed-frame-step", "--runtime-report", report], root)
         (evidence / "editor.log").write_text(log, encoding="utf-8")
         editor_report = json.loads(report.read_text(encoding="utf-8"))

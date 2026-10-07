@@ -1,0 +1,32 @@
+[
+  {
+    "workflow": "exploration",
+    "decision": "exploration-save",
+    "passed": true
+  },
+  {
+    "workflow": "exploration",
+    "decision": "exploration-discard",
+    "passed": true
+  },
+  {
+    "workflow": "exploration",
+    "decision": "exploration-failure",
+    "passed": true
+  },
+  {
+    "workflow": "inspector",
+    "decision": "inspector-save",
+    "passed": true
+  },
+  {
+    "workflow": "inspector",
+    "decision": "inspector-discard",
+    "passed": true
+  },
+  {
+    "workflow": "inspector",
+    "decision": "inspector-failure",
+    "passed": true
+  }
+]

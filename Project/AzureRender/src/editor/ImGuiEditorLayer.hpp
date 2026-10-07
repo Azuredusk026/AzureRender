@@ -42,8 +42,9 @@ public:
     void drawPanels();
     void completePreviewTextures(std::uint64_t completed);
     void setPreviewSubmission(std::uint64_t submission){previewSubmission_=submission;}
-    nlohmann::json workspaceSnapshot() const;
+    nlohmann::json workspaceSnapshot(bool includeHistory = true) const;
     void queueInputEvent(nlohmann::json event);
+    void setCameraState(std::array<float,3> position,std::array<float,3> target){cameraPosition_=position;cameraTarget_=target;}
     void setGameUi(GameUi* ui) { gameUi_=ui; }
     std::uint64_t debugLineCount() const noexcept { return debugLineCount_; }
     void render(VkCommandBuffer commandBuffer);
@@ -105,6 +106,9 @@ private:
     ImVec2 gizmoDragStartMouse_{0.0F, 0.0F};
 #endif
     std::array<float, 3> gizmoDragStartTranslation_{0.0F, 0.0F, 0.0F};
+    int navigationButton_=-1;
+    int injectedClickButton_=0;
+    std::array<float,3> cameraPosition_{},cameraTarget_{};
     bool viewportGizmoDragActive_ = false;
     bool viewportFocused_ = false;
     bool viewportAcceptsShortcuts_ = false;
@@ -123,6 +127,7 @@ private:
     nlohmann::json uiErrors_=nlohmann::json::array(),widgets_=nlohmann::json::object();
     std::size_t uiCursor_ = 0;
     bool injectedMouseDown_ = false;
+    bool injectedFocus_=true;
     std::array<float,2> uiMousePosition_{0,0};
     std::array<float,4> imageRect_{};
     std::array<float,3> gizmoDragStartRotation_{},gizmoDragStartScale_{};

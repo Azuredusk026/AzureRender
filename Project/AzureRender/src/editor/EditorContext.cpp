@@ -10,6 +10,7 @@ struct VisibilityComponent {
 #include "ecs/Entity.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <cstring>
 #include <fstream>
 #include <system_error>
@@ -30,6 +31,7 @@ EditorContext::EditorContext(
     rebuildEntities();
     refreshSelectedTransform();
     updateResourceWriteTimes();
+    checkpointSaved();
 }
 
 RenderSettings& EditorContext::renderSettings() noexcept {
@@ -81,7 +83,54 @@ void EditorContext::selectNextNode() {
     }
 }
 
+std::filesystem::path EditorContext::recoveryPath() const {
+    const auto directory = project_ ? project_->file.parent_path() : scenePath_.parent_path();
+    std::uint64_t identity = 14695981039346656037ULL;
+    for (const unsigned char byte : std::filesystem::absolute(scenePath_).generic_string()) {
+        identity = (identity ^ byte) * 1099511628211ULL;
+    }
+    return directory / ".azure" / "recovery"
+        / (std::to_string(identity) + "-" + scenePath_.filename().string());
+}
+
 void EditorContext::save() {
+    if (std::filesystem::is_regular_file(scenePath_)) {
+        std::ifstream input(scenePath_, std::ios::binary);
+        if (!input) throw std::runtime_error("Cannot read recovery source");
+        const std::string bytes{std::istreambuf_iterator<char>(input), {}};
+        if (input.bad()) throw std::runtime_error("Cannot read complete recovery source");
+        if (assets_ && scenePath_.extension() == ".azurelevel")
+            (void)Level::parse(nlohmann::json::parse(bytes), *assets_);
+        else (void)SceneDocument::load(scenePath_);
+        const auto destination = recoveryPath();
+        std::filesystem::create_directories(destination.parent_path());
+        const auto writeVerified = [](const std::filesystem::path& target, const std::string& content) {
+            const auto temporary = target.string() + ".tmp."
+                + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
+            try {
+                {
+                    std::ofstream output(temporary, std::ios::binary | std::ios::trunc);
+                    output.write(content.data(), static_cast<std::streamsize>(content.size()));
+                    output.flush();
+                    if (!output) throw std::runtime_error("Cannot write complete recovery document");
+                }
+                std::ifstream verification(temporary, std::ios::binary);
+                const std::string actual{std::istreambuf_iterator<char>(verification), {}};
+                if (verification.bad() || actual != content)
+                    throw std::runtime_error("Recovery document verification failed");
+                verification.close();
+                std::filesystem::rename(temporary, target);
+            } catch (...) {
+                std::error_code ignored;
+                std::filesystem::remove(temporary, ignored);
+                throw;
+            }
+        };
+        writeVerified(destination, bytes);
+        writeVerified(destination.string() + ".json", nlohmann::json{
+            {"source", std::filesystem::absolute(scenePath_).generic_string()},
+            {"size", bytes.size()}, {"schemaVersion", 1}}.dump(2));
+    }
     if (attachedRenderSettings_ != nullptr) {
         scene_.renderSettings = *attachedRenderSettings_;
     }
@@ -90,7 +139,7 @@ void EditorContext::save() {
         auto level = Level::parse(document, *assets_);level.save(scenePath_);
         sourceLevel_ = std::move(document);assets_->refresh();
     } else if(assets_){auto portable=scene_;for(auto& resource:portable.resources)resource.path=resourceReferences_.at(resource.path);portable.save(scenePath_);}else scene_.save(scenePath_);
-    dirty_ = false;
+    checkpointSaved();
     ++revision_;closeEditMerge();
     log("Saved scene: " + scenePath_.string());
 }
@@ -113,7 +162,7 @@ void EditorContext::reload() {
     undoStack_.clear();
     redoStack_.clear();
     updateResourceWriteTimes();
-    dirty_ = false;
+    checkpointSaved();
     ++revision_;closeEditMerge();
     log("Reloaded scene: " + scene_.sceneId);
 }
@@ -352,7 +401,7 @@ void EditorContext::restore(Snapshot restored) {
         ? 0 : std::min(restored.selectedNodeIndex, scene_.nodes.size() - 1);
     rebuildEntities();
     refreshSelectedTransform();
-    dirty_ = true;
+    refreshDirty();
 }
 
 bool EditorContext::undo() {

@@ -3,6 +3,10 @@
 引擎交付范围见[交付说明](runtime/engine-delivery.md)。
 两种项目的使用步骤见[复用教程](tutorials/engine-reuse.md)。
 
+交互体验步骤见[体验实施计划](plans/2026-10-07-editor-usability.md)。
+问题证据见[体验审查](research/2026-10-07-editor-usability.md)。
+操作说明见[编辑器交互教程](tutorials/editor-interaction.md)。
+
 AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
 
 首次使用请阅读[构建与使用](getting-started.md)。制作关卡请阅读[从空关卡制作并发布游戏](tutorials/editor-first-game.md)。运行和交付见[探索关卡](runtime/exploration-gameplay.md)与[游戏发布](runtime/game-publishing.md)。

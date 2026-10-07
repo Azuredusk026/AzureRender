@@ -35,7 +35,7 @@ def run(executable,output,workflow):
     env=dict(os.environ,AZURE_PROPOSAL_TEST_TOKEN=token,AZURERENDER_EDITOR_CONFIG=str(folder/'config'),AZURERENDER_EDITOR_DPI='1')
     startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
     logs=[(folder/name).open('w',encoding='utf-8') for name in ('stdout.log','stderr.log')]
-    command=[str(executable),'--editor-project',str(project/'project.azureproject'),'--width','1920','--height','1080',
+    command=[str(executable),'--editor-close-policy', 'save', '--editor-project',str(project/'project.azureproject'),'--width','1920','--height','1080',
         '--fixed-frame-step','--set','ai.enabled=true','--ai-python',sys.executable,'--ai-fixture',str(fixture),
         '--validation-token-env','AZURE_PROPOSAL_TEST_TOKEN','--validation-endpoint',str(endpoint_file),'--runtime-report',str(folder/'runtime.json')]
     process=subprocess.Popen(command,cwd=folder,env=env,startupinfo=startup,stdout=logs[0],stderr=logs[1])
@@ -105,7 +105,7 @@ def run(executable,output,workflow):
     # A fresh host leaves optional assistance disabled while retaining production editing.
     disabled_endpoint=folder/'disabled-endpoint.json'
     disabled_logs=[(folder/name).open('w',encoding='utf-8') for name in ('disabled-stdout.log','disabled-stderr.log')]
-    off=subprocess.Popen([str(executable),'--editor-project',str(project/'project.azureproject'),
+    off=subprocess.Popen([str(executable),'--editor-close-policy', 'save', '--editor-project',str(project/'project.azureproject'),
         '--validation-token-env','AZURE_PROPOSAL_TEST_TOKEN','--validation-endpoint',str(disabled_endpoint),
         '--runtime-report',str(folder/'disabled.json')],cwd=folder,env=env,startupinfo=startup,stdout=disabled_logs[0],stderr=disabled_logs[1])
     disabled_evidence=[]

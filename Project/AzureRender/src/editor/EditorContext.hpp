@@ -94,6 +94,7 @@ public:
     void markDirty() noexcept { dirty_ = true; ++revision_; closeEditMerge(); }
     [[nodiscard]] bool dirty() const noexcept { return dirty_; }
     [[nodiscard]] std::uint64_t revision() const noexcept { return revision_; }
+    std::filesystem::path recoveryPath() const;
     void save();
     void reload();
     void addChildNode(std::size_t parentIndex);
@@ -117,7 +118,7 @@ public:
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();
 
-    enum class GizmoMode { Translate, Rotate, Scale };
+    enum class GizmoMode { Translate, Rotate, Scale, Select };
 
     struct GizmoScreenData {
         bool valid = false;
@@ -197,6 +198,9 @@ private:
     std::array<float,16> debugProjection_{};
     std::map<std::string,std::array<float,3>> pickTargets_;
     bool dirty_ = false;
+    std::string savedFingerprint_;
+    void checkpointSaved();
+    void refreshDirty();
     std::vector<std::string> consoleMessages_;
     std::vector<Snapshot> undoStack_;
     std::vector<Snapshot> redoStack_;

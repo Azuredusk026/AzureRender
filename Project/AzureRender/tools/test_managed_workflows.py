@@ -41,7 +41,7 @@ def verify(build,backend,evidence,configuration):
         if workflow=='annotation':
             task=root/'preview.json';task.write_text(json.dumps([{'frame':2,'command':'play'},{'frame':11,'command':'pause'},{'frame':12,'command':'stop'}]))
             report=evidence/'preview.json'
-            run('annotation-preview',[editor,'--editor-project',project/'project.azureproject','--editor-actions',task,
+            run('annotation-preview',[editor,'--editor-close-policy', 'save', '--editor-project',project/'project.azureproject','--editor-actions',task,
                 '--runtime-report',report,'--fixed-frame-step','--smoke-frames','13'])
             preview=json.loads(report.read_text());assert preview['editorPlaySteps']==9 and preview['editStateRestored'] and preview['observedScriptErrors']==0,preview
             assert all(row['passed'] for row in preview['editorActions']),preview

@@ -1,0 +1,1 @@
+Failed level save must clean temporary files

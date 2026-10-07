@@ -33,7 +33,7 @@ def run(executable, output, workflow):
     startup = subprocess.STARTUPINFO()
     startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startup.wShowWindow = 0
-    process = subprocess.Popen([str(executable), '--editor-project', str(project / 'project.azureproject'),
+    process = subprocess.Popen([str(executable), '--editor-close-policy', 'save', '--editor-project', str(project / 'project.azureproject'),
         '--width', '1920', '--height', '1080', '--smoke-frames', '1200', '--fixed-frame-step',
         '--resource-root', str(folder), '--set', 'render.exposure=1.25',
         '--validation-token-env', 'AZURE_SETTINGS_TEST_TOKEN', '--validation-endpoint', str(endpoint_file),
@@ -113,7 +113,7 @@ def run(executable, output, workflow):
     (folder / 'control-results.json').write_text(json.dumps(evidence, indent=2) + '\n', encoding='utf-8')
     # Reopen the same editor preferences in a fresh host.
     reopened = folder / 'reopened.json'
-    result = subprocess.run([str(executable), '--editor-project', str(project / 'project.azureproject'),
+    result = subprocess.run([str(executable), '--editor-close-policy', 'save', '--editor-project', str(project / 'project.azureproject'),
         '--width', '1920', '--height', '1080', '--smoke-frames', '20', '--runtime-report', str(reopened)],
         cwd=folder, env=env, startupinfo=startup, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
     assert result.returncode == 0, result.stdout + result.stderr

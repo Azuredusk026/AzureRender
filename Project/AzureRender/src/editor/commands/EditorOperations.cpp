@@ -18,7 +18,7 @@ EditRegistry editorOperations(EditorSession& session) {
             handler(context,args);return nullptr;
         });
     };
-    document("node.create",schema({{"id",text}},{"id"}),[](auto& c,const auto& a) { c.createNode(a.at("id").template get<std::string>()); });
+    document("node.create",schema({{"id",text}}),[](auto& c,const auto& a) { c.createNode(a.value("id",std::string())); });
     document("node.rename",schema({{"value",text}},{"value"}),[](auto& c,const auto& a) {
         if(!c.selectedNode())throw std::invalid_argument("Rename requires a selected node");
         c.setSelectedNodeName(a.at("value").template get<std::string>());
@@ -79,6 +79,12 @@ EditRegistry editorOperations(EditorSession& session) {
     };
     registry.add({"settings.set",1,schema({{"name",text},{"value",Json::object()},{"source",text}},{"name","value"}),false,false,false},
         [&session,settingSource](EditorContext&,const Json& a)->Json {
+            const auto name=a.at("name").get<std::string>();
+            if(name.rfind("editor.shortcuts.",0)==0){const auto value=a.at("value").get<std::string>();
+                if(value.size()!=1||value[0]<'A'||value[0]>'Z')throw EditRejection("Scene shortcuts require one uppercase letter");
+                const auto descriptions=session.settings().describe();
+                for(const auto& entry:descriptions.items())if(entry.key().rfind("editor.shortcuts.",0)==0 && entry.key()!=name && entry.value().at("value")==value)throw EditRejection("Scene shortcut is already assigned");
+            }
             const auto result=session.settings().set(a.at("name").get<std::string>(),a.at("value"),settingSource(a));
             if(!result.passed)throw EditRejection(result.diagnostic);return {{"queued",true}};
         });
@@ -134,9 +140,21 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"animation.clear-preview",1,schema(),false,false,true},[](EditorContext& c,const Json&)->Json { c.clearAnimationPreview();return nullptr; });
     registry.add({"viewport.gizmo-mode",1,schema({{"value",integer}},{"value"}),false,false,true},
         [](EditorContext& c,const Json& a)->Json {
-            const auto mode=a.at("value").get<unsigned>();if(mode>2)throw EditRejection("Unknown gizmo mode");
+            const auto mode=a.at("value").get<unsigned>();if(mode>3)throw EditRejection("Unknown gizmo mode");
             c.setGizmoMode(static_cast<EditorContext::GizmoMode>(mode));return nullptr;
         });
+    registry.add({"viewport.frame-selection",1,schema(),false,false,true},[&session](EditorContext& c,const Json&)->Json {
+        if(c.selectedNodes().empty())throw EditRejection("Select an object to frame");
+        session.frameSelectionRequested_=true;return nullptr;
+    });
+    registry.add({"document.close",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
+        if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError());return nullptr;
+    });
+    registry.add({"document.decision",1,schema({{"value",text}},{"value"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
+        const auto decision=a.at("value").get<std::string>();
+        if(decision!="save"&&decision!="discard"&&decision!="cancel")throw EditRejection("Unknown document decision");
+        if(!session.resolveDocumentAction(decision=="save"?DocumentDecision::Save:decision=="discard"?DocumentDecision::Discard:DocumentDecision::Cancel))throw EditRejection(session.lastError());return nullptr;
+    });
     registry.add({"viewport.debug-overlay",1,schema({{"enabled",boolean}},{"enabled"}),false,false,false},
         [&session](EditorContext&,const Json& a)->Json { session.debugOverlay=a.at("enabled").get<bool>();return nullptr; });
     registry.add({"preview.level",1,schema({{"value",text}},{"value"}),false,false,false},

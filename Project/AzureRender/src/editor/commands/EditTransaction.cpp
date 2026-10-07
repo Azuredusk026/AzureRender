@@ -40,6 +40,8 @@ nlohmann::json EditorContext::documentContent() const {
     return {{"id",scene_.sceneId},{"nodes",nodes},{"resources",resources},{"lights",lights},
         {"components",runtimeComponents()},{"sourceLevel",sourceLevel_},{"renderSettings",render},{"resourceReferences",references}};
 }
+void EditorContext::checkpointSaved(){savedFingerprint_=documentFingerprint(documentContent());dirty_=false;}
+void EditorContext::refreshDirty(){dirty_=documentFingerprint(documentContent())!=savedFingerprint_;}
 DocumentVersion EditorContext::documentVersion() const { return {documentId_,revision_,documentFingerprint(documentContent())}; }
 EditTransaction::EditTransaction(EditorContext& document):document_(document) {
     candidate_=std::make_unique<EditorContext>(document.scene_,document.scenePath_);
@@ -90,7 +92,7 @@ void EditTransaction::commit(const std::string& mergeKey) {
         target.selectedNodeIndex_=candidate_->selectedNodeIndex_;target.selectedNodes_=std::move(candidate_->selectedNodes_);
         target.ecsWorld_.swap(candidate_->ecsWorld_);target.nodeEntities_=std::move(candidate_->nodeEntities_);
         target.gizmoTranslation_=candidate_->gizmoTranslation_;target.gizmoRotation_=candidate_->gizmoRotation_;target.gizmoScale_=candidate_->gizmoScale_;
-        target.clearAnimationPreview();target.dirty_=true;
+        target.clearAnimationPreview();target.refreshDirty();
         if(target.attachedRenderSettings_)*target.attachedRenderSettings_=target.scene_.renderSettings;
         target.mergeKey_=mergeKey;target.mergeRevision_=target.revision_;target.mergeSelection_=target.selectedNodes_;
     }else {

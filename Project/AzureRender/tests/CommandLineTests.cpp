@@ -34,6 +34,8 @@ void expectError(
 }  // namespace
 
 int main() try {
+    static_cast<void>(azurerender::parseCommandLine({"--editor-project","project.azureproject","--editor-close-policy","discard"}));
+    expectError(CommandLineErrorCode::InvalidValue,"--editor-close-policy",{"--editor-project","project.azureproject","--editor-close-policy","invalid"});
     const auto development=azurerender::parseCommandLine({"--shader-reload","Shader config with spaces.json","--preview-views","Views with spaces.json"});
     require(development.options.shaderReloadConfig=="Shader config with spaces.json" && development.options.previewViews=="Views with spaces.json",
         "Developer configuration paths must preserve their bytes");

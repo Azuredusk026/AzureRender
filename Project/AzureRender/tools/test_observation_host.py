@@ -29,7 +29,7 @@ def run(executable, output, workflow):
     env = dict(os.environ, AZURE_OBSERVATION_TEST_TOKEN=token, AZURERENDER_EDITOR_CONFIG=str(folder / 'config'))
     stdout = (folder / 'stdout.log').open('w', encoding='utf-8')
     stderr = (folder / 'stderr.log').open('w', encoding='utf-8')
-    process = subprocess.Popen([str(executable), '--editor-project', str(project / 'project.azureproject'),
+    process = subprocess.Popen([str(executable), '--editor-close-policy', 'save', '--editor-project', str(project / 'project.azureproject'),
         '--width', '1280', '--height', '720', '--smoke-frames', '1200', '--fixed-frame-step',
         '--resource-root', str(folder), '--validation-token-env', 'AZURE_OBSERVATION_TEST_TOKEN',
         '--validation-endpoint', str(endpoint_file), '--runtime-report', str(runtime)],

@@ -1,0 +1,1 @@
+[{"frame": 25, "action": "click", "target": "create.empty"}, {"frame": 30, "action": "click", "target": "create.empty"}, {"frame": 35, "action": "click", "target": "node.node-21"}, {"frame": 38, "action": "key", "key": "Delete", "down": true}, {"frame": 39, "action": "key", "key": "Delete", "down": false}, {"frame": 43, "action": "click", "target": "create.empty"}]

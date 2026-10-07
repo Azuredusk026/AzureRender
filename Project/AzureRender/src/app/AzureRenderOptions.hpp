@@ -16,6 +16,7 @@ class EditorSession;
 struct AzureRenderOptions {
     std::string projectFile;
     std::string editorActionsPath;
+    std::string editorClosePolicy="ask";
     std::string runtimeReportPath;
     std::string gameActionsPath;
     std::string settingsFile,defaultSettingsFile,projectSettingsFile;

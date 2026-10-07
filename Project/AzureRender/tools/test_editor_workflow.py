@@ -25,7 +25,7 @@ def main():
             {"frame": 12, "command": "stop"},
         ]), encoding="utf-8")
         cadence_report = root / "cadence-report.json"
-        cadence = subprocess.run([str(args.executable.resolve()), "--editor-project", str(root / "game/project.azureproject"),
+        cadence = subprocess.run([str(args.executable.resolve()), "--editor-close-policy", "save", "--editor-project", str(root / "game/project.azureproject"),
             "--editor-actions", str(cadence_task), "--runtime-report", str(cadence_report),
             "--fixed-frame-step", "--smoke-frames", "13"], cwd=root, capture_output=True,
             text=True, encoding="utf-8", errors="replace", timeout=90)
@@ -62,7 +62,7 @@ def main():
         task = root / "actions.json"
         task.write_text(json.dumps(actions), encoding="utf-8")
         report = root / "report.json"
-        process = subprocess.run([str(args.executable.resolve()), "--editor-project", str(root / "game/project.azureproject"),
+        process = subprocess.run([str(args.executable.resolve()), "--editor-close-policy", "save", "--editor-project", str(root / "game/project.azureproject"),
             "--editor-actions", str(task), "--runtime-report", str(report), "--fixed-frame-step", "--smoke-frames", "32"],
             cwd=root, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=90)
         if process.returncode:

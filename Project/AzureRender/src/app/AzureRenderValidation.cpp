@@ -52,6 +52,8 @@ void AzureRenderApp::initializeValidation() {
         observations_->add("document.contentHash",[session]{return ObservationValue(session->edits().version().contentHash);});
         observations_->add("document.version",[session]{return ObservationValue(session->edits().version().describe().dump());});
         observations_->add("selection.id",[session]{const auto* node=session->context().selectedNode();return ObservationValue(node?node->id:std::string());});
+        observations_->add("editor.workspace",[this]{return ObservationValue(editorLayer_?editorLayer_->workspaceSnapshot(false).dump():std::string("{}"));});
+        observations_->add("editor.dirty",[session]{return ObservationValue(session->context().dirty());});
         observations_->add("editor.playing",[session]{return ObservationValue(session->playing());});
         observations_->add("editor.building",[session]{return ObservationValue(session->building());});
         observations_->add("ai.state",[session]{return ObservationValue(session->proposalReport().at("state").get<std::string>());});

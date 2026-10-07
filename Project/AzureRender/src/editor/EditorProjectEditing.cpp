@@ -28,7 +28,7 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
         for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_string();}
         if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_string();}
     }
-    context->syncComponents();return context;
+    context->syncComponents();context->checkpointSaved();return context;
 }
 std::string EditorContext::commitImport(AssetImportJob& job){
     const auto path=job.finish();
@@ -72,7 +72,8 @@ void EditorContext::placeResource(const std::string& resource,const std::string&
     if(!attach.empty()){scene_.resources.push_back({reference,"gltf",attach});resourceReferences_[attach]=reference;}
     SceneNode node;node.id=id;node.name="Placed Object";node.resourceId=reference;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }
-void EditorContext::createNode(const std::string& nodeId){
+void EditorContext::createNode(const std::string& requestedId){
+    const auto nodeId=requestedId.empty()?identity("node-"):requestedId;
     if(nodeId.empty() || nodeId.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==nodeId;}))throw std::invalid_argument("Duplicate or invalid node identity: "+nodeId);
     beginEdit();SceneNode node;node.id=nodeId;node.name=nodeId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }

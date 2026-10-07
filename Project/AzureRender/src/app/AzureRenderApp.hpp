@@ -189,6 +189,9 @@ private:
     std::unique_ptr<azurerender::GlfwFrontend> frontend_;
 #if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ImGuiEditorLayer> editorLayer_;
+    std::array<float,3> savedEditorCamera_{},savedEditorTarget_{};
+    bool editorWasPlaying_=false;
+    float editorCameraNear_=0,editorCameraFar_=0;
 #endif
     azurerender::RuntimeLifecycle runtime_;
     azurerender::ModuleAssembly runtimeModules_;

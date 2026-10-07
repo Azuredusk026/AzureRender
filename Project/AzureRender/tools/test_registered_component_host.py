@@ -30,7 +30,7 @@ def main():
         task.write_text(json.dumps(actions), encoding='utf-8')
         report = root / 'report.json'
         result = subprocess.run([
-            str(args.executable.resolve()), '--editor-project', str(root / 'project/project.azureproject'),
+            str(args.executable.resolve()), '--editor-close-policy', 'save', '--editor-project', str(root / 'project/project.azureproject'),
             '--editor-actions', str(task), '--runtime-report', str(report),
             '--fixed-frame-step', '--smoke-frames', '18'],
             cwd=root, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=90)

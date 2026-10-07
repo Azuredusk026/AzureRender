@@ -94,7 +94,7 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         events += [{'frame':start,'action':'key','key':68,'down':True},{'frame':start+60,'action':'key','key':68,'down':False},
                    {'frame':start+60,'action':'key','key':65,'down':True},{'frame':start+120,'action':'key','key':65,'down':False}]
     actions=output.with_suffix('.input.json');actions.write_text(json.dumps({'schemaVersion':1,'actions':events}),encoding='utf-8')
-    command=[str(executable.resolve()),'--editor-project' if editor else '--project',str(project.resolve()),
+    command=[str(executable.resolve()), *(['--editor-close-policy', 'save'] if editor else []),'--editor-project' if editor else '--project',str(project.resolve()),
              '--width','1920','--height','1080','--fixed-frame-step','--smoke-frames',str(warmup+samples),
              '--game-actions',str(actions.resolve()),'--gpu-timing','--gpu-timing-output',str(timing.resolve())]
     if editor:

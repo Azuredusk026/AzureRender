@@ -1,0 +1,48 @@
+{
+  "baselineCommit": "5de3dcc",
+  "evidenceType": "Dear ImGui production input replay",
+  "physicalKeyboardMouse": "not performed",
+  "diagnosticAttempts": [
+    "create-after-delete selected row outside clipped region",
+    "collision deleted hero after viewport click",
+    "collision-isolated deleted node-21 with mode toolbar focus"
+  ],
+  "confirmed": {
+    "outliner": {
+      "selected": "ground",
+      "before": [
+        912.8592529296875,
+        470.116943359375,
+        2,
+        2
+      ],
+      "after": [
+        912.8592529296875,
+        470.116943359375,
+        2,
+        2
+      ],
+      "cameraProjectionUnchanged": true
+    },
+    "W": {
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.21039879322052,
+        1.0,
+        1.0
+      ],
+      "actualMode": "Scale"
+    },
+    "identity": {
+      "initialNodes": 21,
+      "deletedId": "node-21",
+      "remainingId": "node-22",
+      "finalNodes": 22,
+      "createRejected": true
+    }
+  }
+}

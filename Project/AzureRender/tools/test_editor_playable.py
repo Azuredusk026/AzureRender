@@ -95,7 +95,7 @@ def run(executable, root, install=None):
         startup = subprocess.STARTUPINFO()
         startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         startup.wShowWindow = 0
-    process = subprocess.run([str(executable.resolve()), '--editor-project', str((game / 'project.azureproject').resolve()),
+    process = subprocess.run([str(executable.resolve()), '--editor-close-policy', 'save', '--editor-project', str((game / 'project.azureproject').resolve()),
         '--editor-actions', str(task.resolve()), '--runtime-report', str(report.resolve()), '--fixed-frame-step',
         '--smoke-frames', str(frame + 8)], cwd=root,
         capture_output=True, encoding='utf-8', errors='replace', timeout=240, startupinfo=startup)

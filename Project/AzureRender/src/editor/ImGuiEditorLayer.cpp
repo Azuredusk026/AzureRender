@@ -1,5 +1,6 @@
 #include "runtime/InputPreferences.hpp"
 #include "ImGuiEditorLayer.hpp"
+#include "input/EditorInputRouter.hpp"
 #include "EditorTheme.hpp"
 #include "EditorToolbar.hpp"
 #include "resources/ResourceLocator.hpp"
@@ -280,25 +281,45 @@ void ImGuiEditorLayer::drawPanels() {
     EditorToolbar::draw(*session_,workspace_,dpi_,[this](const std::string& id){observeWidget(id);});
     drawWorkspace();
     const ImGuiIO& io = ImGui::GetIO();
-    if(!io.WantTextInput && !session_->playing() && !session_->building()){
-        if(io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_D,false))session_->edit("node.duplicate");
-        if(ImGui::IsKeyPressed(ImGuiKey_Delete,false))session_->edit("node.delete");
-    }
-    if(!io.WantTextInput && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_P,false))static_cast<void>(session_->execute(session_->playing()?EditorCommand::Stop:EditorCommand::Play));
-    if (!io.WantTextInput && EditorToolbar::enabled(*session_,EditorCommand::Save) && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Save));
-    }
-    if (!io.WantTextInput && EditorToolbar::enabled(*session_,EditorCommand::Undo) && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Z, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Undo));
-    }
-    if (!io.WantTextInput && EditorToolbar::enabled(*session_,EditorCommand::Redo) && io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Y, false)) {
-        static_cast<void>(session_->execute(EditorCommand::Redo));
+    viewportFocused_=false;viewportAcceptsShortcuts_=false;
+    const bool nativeFocus=!io.AppFocusLost;
+    if(!nativeFocus || !workspace_.visible("viewport")) {
+        navigationButton_=-1;viewportGizmoDragActive_=false;gizmoDragAxis_=-1;viewportInput_={};
+        glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
         if(!workspace_.visible(std::string(panel->id())))continue;
         const bool editable=std::string(panel->id())=="viewport" || std::string(panel->id())=="console" || std::string(panel->id())=="capture";
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
-    }    EditorToolbar::status(*session_,dpi_);
+    }
+    const auto* nav=ImGui::GetCurrentContext()->NavWindow;
+    const bool sceneFocus=viewportFocused_ || (nav && std::string(nav->Name).find("###outliner")!=std::string::npos);
+    const bool modal=ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
+    std::map<std::string,std::string> bindings;
+    for(const auto& entry:std::vector<std::pair<const char*,const char*>>{{"W","move"},{"E","rotate"},{"R","scale"},{"Q","select"},{"F","frame"}})
+        bindings[entry.first]=session_->settings().get(std::string("editor.shortcuts.")+entry.second).get<std::string>();
+    for(int key=ImGuiKey_NamedKey_BEGIN;key<ImGuiKey_NamedKey_END;++key) {
+        const auto imguiKey=static_cast<ImGuiKey>(key);
+        if(!ImGui::IsKeyPressed(imguiKey,false))continue;
+        EditorInputEvent event;event.key=ImGui::GetKeyName(imguiKey);event.ctrl=io.KeyCtrl;
+        event.text=io.WantTextInput || ImGui::IsAnyItemActive();event.modal=modal;
+        event.scene=sceneFocus;event.viewport=viewportFocused_;event.navigating=navigationButton_>=0;
+        event.playing=session_->playing();event.building=session_->building();
+        const auto routed=EditorInputRouter::route(event,bindings);
+        if(routed.consumed)session_->edit(routed.operation,routed.mode>=0?nlohmann::json{{"value",routed.mode}}:nlohmann::json::object());
+    }
+    auto& guard=session_->documentGuard();
+    if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed)ImGui::OpenPopup("Unsaved changes");
+    if(ImGui::BeginPopupModal("Unsaved changes",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::TextUnformatted(guard.action()==DocumentAction::Close?"Save changes before closing?":"Save changes before reloading?");
+        if(!guard.diagnostic().empty())ImGui::TextWrapped("%s",guard.diagnostic().c_str());
+        for(const auto* decision:{"save","discard","cancel"}) {
+            if(ImGui::Button(decision)) {session_->edit("document.decision",{{"value",decision}});if(guard.state()!=DocumentActionState::Failed)ImGui::CloseCurrentPopup();}
+            observeWidget(std::string("document.")+decision);ImGui::SameLine();
+        }
+        ImGui::NewLine();ImGui::EndPopup();
+    }
+    EditorToolbar::status(*session_,dpi_);
     if(!ImGui::IsAnyItemActive()&&!viewportGizmoDragActive_)context_->closeEditMerge();
 #ifdef IMGUI_HAS_DOCK
     for(const auto& panel:workspace_.panels())if(const auto* window=ImGui::FindWindowByName(panel.title.c_str())) {
@@ -315,6 +336,8 @@ void ImGuiEditorLayer::drawPanels() {
         {"selected",context_->selectedNode()?context_->selectedNode()->id:""},{"dirty",context_->dirty()},
         {"nodeCount",context_->scene().nodes.size()},{"translation",context_->gizmoTranslation()},
         {"rotation",context_->gizmoRotation()},{"scale",context_->gizmoScale()},
+        {"gizmoMode",static_cast<unsigned>(context_->gizmoMode())},{"camera",cameraPosition_},{"target",cameraTarget_},
+        {"navigationButton",navigationButton_},{"gizmoCapture",viewportGizmoDragActive_},{"undoCount",context_->undoCount()},
         {"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},
         {"activeId",ImGui::GetCurrentContext()->ActiveId},
         {"movingWindow",ImGui::GetCurrentContext()->MovingWindow?ImGui::GetCurrentContext()->MovingWindow->Name:""}});
@@ -403,12 +426,12 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
-    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){ImGui::End();return;}
+    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){navigationButton_=-1;viewportGizmoDragActive_=false;gizmoDragAxis_=-1;ImGui::End();return;}
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
         if(ImGui::Button("Focus Selected")) {
-            viewportInput_.frameRequested=true;viewportInput_.frameTarget=context_->gizmoTranslation();
+            session_->edit("viewport.frame-selection");
         }observeWidget("focus");ImGui::SameLine();ImGui::TextDisabled("Perspective");
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
@@ -490,7 +513,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         ImVec2 pixelAxes[3]{};float worldPerPixel[3]{};
         ImVec2 gizmoAxisEnds[3] = {{0.0F, 0.0F}, {0.0F, 0.0F}, {0.0F, 0.0F}};
         bool gizmoDrawn = false;
-        if (!session_->playing() && !session_->building() && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
+        if (!session_->playing() && !session_->building() && context_->gizmoMode()!=EditorContext::GizmoMode::Select && gizmoScreen.valid && imageSize.x > 0.0F && imageSize.y > 0.0F) {
             gizmoCenter = ImVec2(
                 itemMin.x + gizmoScreen.centerX * imageSize.x,
                 itemMin.y + gizmoScreen.centerY * imageSize.y);
@@ -522,20 +545,42 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             widgets_["gizmo.center"]={gizmoCenter.x-1,gizmoCenter.y-1,2,2};
             gizmoDrawn = true;
         }
-        if (ImGui::IsItemHovered()) {
+        const bool hovered=ImGui::IsItemHovered();
+        const auto& navIo=ImGui::GetIO();
+        const bool navigationAllowed=!session_->playing() && !session_->building() && !navIo.WantTextInput
+            && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel)
+            && !navIo.AppFocusLost;
+        if(!navigationAllowed)navigationButton_=-1;
+        if(navigationAllowed && hovered && navigationButton_<0) {
+            if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
+            else if(ImGui::IsMouseClicked(ImGuiMouseButton_Middle))navigationButton_=ImGuiMouseButton_Middle;
+            else if(navIo.KeyAlt && ImGui::IsMouseClicked(ImGuiMouseButton_Left))navigationButton_=ImGuiMouseButton_Left;
+        }
+        if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false)))navigationButton_=-1;
+        if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();
-            viewportInput_.zoomSteps += io.MouseWheel;
-            if (ImGui::IsMouseDown(ImGuiMouseButton_Right)) {
-                viewportInput_.orbitDeltaX += io.MouseDelta.x*cameraSensitivity(session_->settings());
-                viewportInput_.orbitDeltaY += io.MouseDelta.y*cameraSensitivity(session_->settings());
-            }
-            if (ImGui::IsMouseDown(ImGuiMouseButton_Middle)) {
-                viewportInput_.panDeltaX += io.MouseDelta.x;
-                viewportInput_.panDeltaY += io.MouseDelta.y;
-            }
+            if(navigationAllowed && hovered)viewportInput_.zoomSteps += io.MouseWheel;
+            const float sx=session_->settings().get("editor.camera.invertX").get<bool>()?-1.F:1.F;
+            const float sy=session_->settings().get("editor.camera.invertY").get<bool>()?-1.F:1.F;
+            const auto sensitivity=cameraSensitivity(session_->settings());
+            const auto mouseDelta=navigationButton_>=0 && !ImGui::IsMouseClicked(navigationButton_)?io.MouseDelta:ImVec2{0,0};
+            if(navigationButton_==ImGuiMouseButton_Right) {
+                viewportInput_.lookDeltaX+=mouseDelta.x*sensitivity*sx;
+                viewportInput_.lookDeltaY+=mouseDelta.y*sensitivity*sy;
+                viewportInput_.flyForward=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_W))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_S));
+                viewportInput_.flyRight=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_D))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_A));
+                viewportInput_.flyUp=static_cast<float>(ImGui::IsKeyDown(ImGuiKey_E))-static_cast<float>(ImGui::IsKeyDown(ImGuiKey_Q));
+                viewportInput_.flySpeed=session_->settings().get("editor.camera.flySpeed").get<float>()*(io.KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
+                viewportInput_.deltaSeconds=io.DeltaTime;
+            }else if(navigationButton_==ImGuiMouseButton_Left) {
+                const auto orbitSensitivity=session_->settings().get("editor.camera.orbitSensitivity").get<float>();
+                viewportInput_.orbitDeltaX+=mouseDelta.x*orbitSensitivity*sx;
+                viewportInput_.orbitDeltaY+=mouseDelta.y*orbitSensitivity*sy;
+            }else if(navigationButton_==ImGuiMouseButton_Middle){viewportInput_.panDeltaX+=mouseDelta.x;viewportInput_.panDeltaY+=mouseDelta.y;}
+
             bool pickThisClick = true;
             if (gizmoDrawn
-                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                && navigationButton_<0 && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
                 float bestDistance = 12.0F;
                 std::int32_t bestAxis = -1;
@@ -558,7 +603,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 }
             }
             if (!session_->playing() && !session_->building() && pickThisClick
-                && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                && navigationButton_<0 && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
                 if (imageSize.x > 0.0F && imageSize.y > 0.0F) {
                     viewportInput_.pickX = std::clamp(
@@ -570,6 +615,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                         0.0F,
                         1.0F);
                     viewportInput_.pickRequested = true;
+                    viewportInput_.pickAdditive=io.KeyCtrl;
                 }
             }
             if (viewportGizmoDragActive_
@@ -597,13 +643,13 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                     session_->edit("node.transform",{{"scale",value}},"viewport-scale");
                 }
             }
-            if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+            if (!ImGui::IsMouseDown(ImGuiMouseButton_Left) || ImGui::IsKeyPressed(ImGuiKey_Escape,false)) {
                 viewportGizmoDragActive_ = false;
                 gizmoDragAxis_ = -1;
             }
         }
     }
-    viewportAcceptsShortcuts_ = viewportFocused_
+    viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)
         && !ImGui::GetIO().WantTextInput
         && !ImGui::IsAnyItemActive();
     ImGui::End();

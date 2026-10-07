@@ -102,6 +102,7 @@ int main(const int argumentCount, char** argumentValues) {
             options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));
         }
         if(options.editorSession){
+            options.editorSession->setClosePolicy(options.editorClosePolicy);
             const azurerender::ResourceLocator locator(options.resourceRoot);
             const auto name=std::filesystem::path(
 #ifdef _WIN32
@@ -118,12 +119,6 @@ int main(const int argumentCount, char** argumentValues) {
         }
         AzureRenderApp application;
         application.run(options);
-        if (options.editorSession != nullptr
-            && !options.editorSession->saveOnClose()) {
-            throw std::runtime_error(
-                "Editor close save failed: "
-                + options.editorSession->lastError());
-        }
     } catch (const azurerender::CommandLineError& exception) {
         constexpr auto code = azurerender::DiagnosticCode::InvalidArguments;
         azurerender::RuntimeDiagnostics::instance().error(

@@ -26,7 +26,7 @@ def run(executable, project, folder, enabled, samples, warmup, cooling):
     start=time.monotonic();peak=0
     startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
     with (folder/'stdout.log').open('w',encoding='utf-8') as stdout,(folder/'stderr.log').open('w',encoding='utf-8') as stderr:
-        process=subprocess.Popen([str(executable),'--editor-project',str(project), '--width','1920','--height','1080',
+        process=subprocess.Popen([str(executable),'--editor-close-policy', 'save', '--editor-project',str(project), '--width','1920','--height','1080',
             '--fixed-frame-step','--smoke-frames',str(warmup+samples),'--runtime-report',str(folder/'runtime.json'),
             '--gpu-timing','--gpu-timing-output',str(folder/'timing.json')],env=env,cwd=folder,stdout=stdout,stderr=stderr,startupinfo=startup)
         while process.poll() is None:

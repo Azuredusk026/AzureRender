@@ -9,7 +9,7 @@ import tempfile
 from create_playable_project import create
 
 
-def launch(executable, root, name, size, dpi, actions=(), capture=True, config=None):
+def launch(executable, root, name, size, dpi, actions=(), capture=True, config=None, close_policy="save"):
     folder=root/name;folder.mkdir(parents=True)
     config=config or folder/'config'
     project=root/'game/project.azureproject'
@@ -18,7 +18,7 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     env['AZURERENDER_EDITOR_UI_ACTIONS']=str(task);env['AZURERENDER_EDITOR_DPI']=str(dpi)
     report=folder/'runtime.json'
     count=max([16]+[a['frame']+8 for a in actions])
-    command=[str(executable),'--editor-project',str(project),'--width',str(size[0]),'--height',str(size[1]),
+    command=[str(executable),'--editor-close-policy', close_policy, '--editor-project',str(project),'--width',str(size[0]),'--height',str(size[1]),
              '--runtime-report',str(report),'--fixed-frame-step']
     command += ['--capture-dir',str(folder/'capture'),'--capture-frames',str(count)] if capture else ['--smoke-frames',str(count)]
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
@@ -46,11 +46,18 @@ def main(executable,root):
         results[name]=launch(executable,root,name,size,dpi)
         assert all(p['docked'] for key,p in results[name]['panels'].items() if key!='settings')
         # Independent pinhole calculation for the initial focused hero.
-        imageRect=results[name]['image'];distance=math.sqrt(38)
-        upY=math.sqrt(34)/distance
-        depth=distance+.9*2/distance
-        expected=(imageRect['x']+imageRect['width']/2,
-            imageRect['y']+imageRect['height']*(1+math.sqrt(3)*1.6*.9*upY/depth)/2)
+        imageRect=results[name]['image']
+        position=results[name]['camera']['position'];target=results[name]['camera']['target']
+        def normalize(vector):
+            length=math.sqrt(sum(value*value for value in vector));return [value/length for value in vector]
+        forward=normalize([b-a for a,b in zip(position,target)])
+        right=normalize([-forward[2],0,forward[0]])
+        up=[right[1]*forward[2]-right[2]*forward[1],right[2]*forward[0]-right[0]*forward[2],right[0]*forward[1]-right[1]*forward[0]]
+        relative=[-value for value in position]
+        depth=sum(a*b for a,b in zip(relative,forward))
+        tangent=math.tan(math.pi/6)/1.6
+        expected=(imageRect['x']+imageRect['width']*(1+sum(a*b for a,b in zip(relative,right))/(depth*tangent*imageRect['width']/imageRect['height']))/2,
+                  imageRect['y']+imageRect['height']*(1-sum(a*b for a,b in zip(relative,up))/(depth*tangent))/2)
         rect=results[name]['widgets']['gizmo.center']
         error=math.hypot(rect[0]+rect[2]/2-expected[0],rect[1]+rect[3]/2-expected[1])
         assert error<=2,(name,error)

@@ -32,7 +32,7 @@ def main():
         reports={}
         for mode,executable in [('editor',args.editor),('player',args.player)]:
             report=root/(mode+'.json')
-            command=[executable.resolve(),'--editor-project' if mode=='editor' else '--project',project/'project.azureproject',
+            command=[executable.resolve(),*(['--editor-close-policy', 'save'] if mode=='editor' else []),'--editor-project' if mode=='editor' else '--project',project/'project.azureproject',
                 '--game-actions',inputs,'--runtime-report',report,'--fixed-frame-step','--smoke-frames','24','--width','960','--height','540']
             if mode=='editor':
                 actions=root/'editor-actions.json'

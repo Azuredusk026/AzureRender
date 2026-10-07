@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "plan": "2026-10-07-editor-usability.md",
+  "phases": [
+    {
+      "id": "U5",
+      "status": "Complete"
+    },
+    {
+      "id": "U6",
+      "status": "Active"
+    },
+    {
+      "id": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "P4",
+      "status": "Planned"
+    }
+  ],
+  "issues": [
+    {
+      "id": "UX01",
+      "priority": "P0",
+      "finding": "右键使用绕目标轨道，横向符号与常用观察习惯相反，S1",
+      "acceptance": "右移向右看，上移向上看，提供反转设置",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX02",
+      "priority": "P0",
+      "finding": "大纲双击缺少定位入口，S2",
+      "acceptance": "单击只选择，双击及 F 显式定位",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX03",
+      "priority": "P0",
+      "finding": "Scale 后按 W 仍改变缩放，E/R 无变换绑定，S3",
+      "acceptance": "W/E/R 切换移动、旋转、缩放",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX04",
+      "priority": "P0",
+      "finding": "相机与拖拽释放依赖图像悬停，S1",
+      "acceptance": "操作拥有捕获会话，跨面板释放可靠结束",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX05",
+      "priority": "P1",
+      "finding": "编辑相机没有右键飞行和 WASD 移动，S1/S3",
+      "acceptance": "右键观察并支持 WASD、Q/E、Shift 导航",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX06",
+      "priority": "P0",
+      "finding": "定位使用局部平移、固定高度和固定距离，S1",
+      "acceptance": "按世界包围盒、视场角与视口比例构图",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX07",
+      "priority": "P1",
+      "finding": "相机距离固定限制在 0.25 至 50，S1",
+      "acceptance": "大场景和微小对象均有尺度适配导航",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX08",
+      "priority": "P0",
+      "finding": "三种变换共用轴线和圆点，S1",
+      "acceptance": "箭头、旋转环和缩放端点清晰区分",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX09",
+      "priority": "P0",
+      "finding": "轴线沿世界方向，修改却写入局部坐标，S4/S5",
+      "acceptance": "世界和局部坐标系各有正确的变换语义",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX10",
+      "priority": "P0",
+      "finding": "多选后变换只修改当前对象，S5",
+      "acceptance": "多选组操作保持相对关系并形成一个撤销单元",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX11",
+      "priority": "P1",
+      "finding": "操纵器缺少取消、平面移动和等比缩放，S1",
+      "acceptance": "Esc 恢复拖拽起点，补齐常用手柄",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX12",
+      "priority": "P1",
+      "finding": "操纵器缺少移动、旋转和缩放吸附，S1",
+      "acceptance": "吸附可配置，界面明确显示开关与步长",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX13",
+      "priority": "P1",
+      "finding": "空白拾取保持选中，Ctrl 拾取也直接替换，S4",
+      "acceptance": "空白清选，Ctrl 增减选择，行为与大纲一致",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX14",
+      "priority": "P1",
+      "finding": "拾取使用原始顶点，动画形变命中需复核，S4",
+      "acceptance": "拾取与实际可见姿态一致，遮挡规则明确",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX15",
+      "priority": "P1",
+      "finding": "大纲过滤分支忽略 Ctrl，多选反馈不完整，S2",
+      "acceptance": "过滤、树和视口共享选择规则",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX16",
+      "priority": "P1",
+      "finding": "视口选中后没有展开父链与滚动定位，S2",
+      "acceptance": "大纲自动揭示选中对象并保留用户展开状态",
+      "phase": "U6",
+      "status": "Planned"
+    },
+    {
+      "id": "UX17",
+      "priority": "P1",
+      "finding": "复制只遍历显式选中项，父节点子树未纳入，S5",
+      "acceptance": "复制子树及内部引用，并保持外部引用",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX18",
+      "priority": "P2",
+      "finding": "大纲没有拖拽重设父级入口，S2/S5",
+      "acceptance": "重设父级保持世界姿态，循环引用有反馈",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX19",
+      "priority": "P1",
+      "finding": "创建 ID 使用节点总数，删除后会产生重复 ID，S6",
+      "acceptance": "默认创建始终分配唯一身份",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureRender.EditorSession"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX20",
+      "priority": "P1",
+      "finding": "导入轮询位于面板和折叠区内，S7",
+      "acceptance": "会话独立推进任务，面板只展示进度",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX21",
+      "priority": "P1",
+      "finding": "资产拖入只传资源身份，放置位置为默认原点，S7/S5",
+      "acceptance": "按鼠标位置射线放置，并提供无命中回退",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX22",
+      "priority": "P1",
+      "finding": "同一模型出现虚拟路径和文件名两个条目，S7",
+      "acceptance": "按资产身份统一列出，显示稳定名称和路径",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX23",
+      "priority": "P2",
+      "finding": "类型筛选仅有模型、Lua 和 Prefab，S7",
+      "acceptance": "类型由注册描述提供，支持现有内容格式",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX24",
+      "priority": "P1",
+      "finding": "属性面板用字段名硬编码资产类型，字符串缓冲固定，S8",
+      "acceptance": "引用元数据决定选择器，长文本安全编辑",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX25",
+      "priority": "P1",
+      "finding": "面板提供添加组件，缺少删除与逐字段重置，S8",
+      "acceptance": "组件和字段支持明确的撤销及约束反馈",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX26",
+      "priority": "P1",
+      "finding": "Undo 恢复时恒设 dirty，回到保存点仍显示未保存，S9",
+      "acceptance": "未保存状态按保存检查点和内容计算",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureRender.DocumentActionGuard",
+        "AzureRender.DocumentBackup",
+        "AzureRender.EditorSession",
+        "AzureEditor.DocumentGuardGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX27",
+      "priority": "P0",
+      "finding": "关闭直接保存，Reload 直接覆盖编辑态，S9/S10",
+      "acceptance": "保存、放弃、取消有明确选择，失败保留会话",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureRender.DocumentActionGuard",
+        "AzureRender.DocumentBackup",
+        "AzureRender.EditorSession",
+        "AzureEditor.DocumentGuardGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX28",
+      "priority": "P1",
+      "finding": "Play/Stop 未见编辑相机状态恢复，S10",
+      "acceptance": "Stop 恢复视角、选择及输入所有权",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX29",
+      "priority": "P0",
+      "finding": "运行滚轮回调缺少焦点检查，关闭视口未统一清输入，S3/S10",
+      "acceptance": "面板滚动不驱动游戏，关闭视口释放全部输入",
+      "phase": "U5",
+      "status": "Verified",
+      "tests": [
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "evidence": "../acceptance/u5/2026-10-08.md",
+      "commitPhase": "u5"
+    },
+    {
+      "id": "UX30",
+      "priority": "P1",
+      "finding": "成功操作清空 lastError，后台预览可能抹去失败反馈，S7/S10",
+      "acceptance": "错误有独立寿命、来源与主动关闭入口",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX31",
+      "priority": "P1",
+      "finding": "创建、导入和构建主要依赖手输路径，S7/S11",
+      "acceptance": "有路径选择、历史目录与明确的合法性反馈",
+      "phase": "U7",
+      "status": "Planned"
+    },
+    {
+      "id": "UX32",
+      "priority": "P0",
+      "finding": "UI 回放缺少 E/R/F 和右中键，原生按键走另一入口，S3/S12",
+      "acceptance": "回放覆盖实际输入路由并区分原生事件证据",
+      "phase": "U5/P4",
+      "status": "PartiallyVerified",
+      "verifiedPhases": [
+        "U5"
+      ],
+      "tests": [
+        "AzureRender.EditorInputRouter",
+        "AzureEditor.UsabilityGpu",
+        "AzureEditor.DocumentGuardGpu"
+      ]
+    },
+    {
+      "id": "UX33",
+      "priority": "P2",
+      "finding": "选中反馈、轴标签、遮挡手柄和小窗口密度需复核，S1/S8",
+      "acceptance": "选中对象、工具状态和禁用原因可直接辨认",
+      "phase": "U6/U7",
+      "status": "Planned"
+    }
+  ]
+}
