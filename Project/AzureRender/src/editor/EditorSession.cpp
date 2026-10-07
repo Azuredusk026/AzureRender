@@ -14,7 +14,7 @@ struct EditorSession::PlayState {
     std::unique_ptr<LevelSession> levels;
     std::unique_ptr<GameRuntime> game;
     std::unique_ptr<PresentationRuntime> presentation;
-    std::unique_ptr<ScriptRuntime> scripts;
+    std::unique_ptr<IScriptRuntime> scripts;
     ModuleAssembly modules;
     explicit PlayState(EditorContext& context) {
         modules.add({"preview.document",1,{},{}}, [this,&context](auto&) {
@@ -26,10 +26,10 @@ struct EditorSession::PlayState {
         modules.add({"preview.world",1,{}, {"preview.document"}}, [this](auto&) { runtime.start(); }, [this] { runtime.stop(); });
         modules.add({"preview.game",1,{}, {"preview.world"}}, [this,&context](auto&) {
         game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
-        if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=std::make_unique<ScriptRuntime>(runtime,*game,levels->assets());
+        if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
             scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
-            game->setBeforeStep([this](double delta){scripts->update(delta);});
+            game->setBeforeStep([this](double delta){scripts->fixedStep(delta);});
             game->setEventHandler([this](const auto& event){scripts->dispatch(event);});
             game->setInteractionHandler([this](const auto& event){scripts->dispatchInteraction(event);});}
         }, [this] { scripts.reset(); game.reset(); presentation.reset(); });
@@ -56,7 +56,7 @@ bool EditorSession::playing() const noexcept{return play_!=nullptr;}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
 RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
-ScriptRuntime* EditorSession::scripts() noexcept{return play_?play_->scripts.get():nullptr;}
+IScriptRuntime* EditorSession::scripts() noexcept{return play_?play_->scripts.get():nullptr;}
 PresentationRuntime* EditorSession::presentation() noexcept{return play_?play_->presentation.get():nullptr;}
 double EditorSession::advance(double delta){if(!play_)return 0;if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);return elapsed;}
 SceneDocument EditorSession::viewScene(){return play_?play_->runtime.snapshotScene():context_->scene();}

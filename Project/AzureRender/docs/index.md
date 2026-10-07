@@ -11,6 +11,10 @@ AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player
 
 ## 能力总览
 
+[脚本服务](runtime/script-services.md)提供统一绑定与对象守卫。
+Lua 为默认后端，托管后端通过可选模块接入。
+使用步骤见[托管脚本教程](tutorials/managed-scripts.md)。
+
 [内容提案](runtime/content-proposals.md)提供可选模型接入。领域适配器校验预算、版本和引用。
 
 面板与用户偏好见[UI 与设置](runtime/ui-settings.md)。制作文档和生效渲染设置各自持有状态。

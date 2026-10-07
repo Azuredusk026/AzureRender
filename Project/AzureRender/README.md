@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+脚本服务使用统一绑定描述与对象身份守卫。
+Lua 为默认后端，CoreCLR 与 NativeAOT 为可选原型。
+范围与部署见[脚本服务](docs/runtime/script-services.md)。
+
 AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Windows 编辑器、独立 Player、资产管线和第三人称玩法。公开探索项目贯通制作、运行与游戏发布。
 
 ![编辑器工作区与公开探索关卡](docs/media/editor-workspace.png)
@@ -90,7 +94,7 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 [引擎实施计划](docs/plans/2026-10-06-engine-evolution.md)纳入全部 18 项借鉴。[架构评估](docs/research/2026-10-06-gknextengine.md)保留分级、源码和风险。F4、G8、U3、F5、U4、G9、R7、G10、R8、R9 已验收。
 
-系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 G11。
+系统组合与配置说明见[运行系统装配](docs/runtime/system-composition.md)。当前执行阶段为 P3。
 
 程序化内容通过生成器与标准资产管线进入项目。
 几何与刚体契约见[程序化内容说明](docs/runtime/procedural-content.md)。

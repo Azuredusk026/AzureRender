@@ -63,6 +63,21 @@ function shutdown() self:set('azure.transform','translation',{11,12,13}) end)");
   check(!session.poll() && hot.sceneRevision()==revision && hot.entity("hero")==hero);
   hotScripts.reloadChanged();hotScripts.update(1.0/60.0);
   check(hot.world().tryGet<ecs::TransformComponent>(hero)->translation[2]==6);
+  write(root/"assets/good.lua","function init() self.id='forged' end");
+  hotScripts.reloadChanged();hotScripts.update(1.0/60.0);
+  check(!hotScripts.errors().empty() && hotScripts.errors().back().find("read only")!=std::string::npos);
+  check(hotScripts.activeCount()==1 && hot.world().tryGet<ecs::TransformComponent>(hero)->translation[2]==6);
+  write(root/"assets/good.lua",R"(function init() self.counter=0 end
+function update(dt) self.counter=self.counter+1;self:set('azure.transform','translation',{self.counter,0,0}) end)");
+  hotScripts.reloadChanged();hotScripts.update(1.0/60.0);hotScripts.update(1.0/60.0);
+  check(hotScripts.activeCount()==1 && hot.world().tryGet<ecs::TransformComponent>(hero)->translation[0]==2);
+  write(root/"assets/good.lua",R"(function update(dt) self:set('azure.transform','translation',{7,0,0}) end
+function shutdown() self:set('azure.transform','translation',{11,0,0});self:spawn('reserved','',{0,0,0}) end)");
+  hotScripts.reloadChanged();hotScripts.update(1.0/60.0);
+  write(root/"assets/good.lua",R"(function init() self:set('azure.transform','translation',{999,0,0});self:spawn('reserved','',{0,0,0}) end)");
+  hotScripts.reloadChanged();
+  check(hotScripts.activeCount()==1 && hot.world().tryGet<ecs::TransformComponent>(hero)->translation[0]==999);
+  hot.beginFrame(0);check(hot.entity("reserved")!=ecs::kInvalidEntity);
   std::cout<<"Lua reflection, error and loop isolation, triggers, reload retention and entity cleanup passed\n";
  }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}
  std::filesystem::remove_all(root);

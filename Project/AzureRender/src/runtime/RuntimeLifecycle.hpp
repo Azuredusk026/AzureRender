@@ -122,6 +122,12 @@ class RuntimeLifecycle final {
         if (!operation) throw std::invalid_argument("Empty deferred operation");
         pending_.push_back(std::move(operation));
     }
+    // Builder may enqueue only. Restore the entire queue and spawn reservations
+    // when validation or allocation fails before the next frame consumes it.
+    void transactionalQueue(const std::function<void()>& builder) {
+        auto operations=pending_;auto reservations=pendingSpawns_;
+        try{builder();}catch(...){pending_.swap(operations);pendingSpawns_.swap(reservations);throw;}
+    }
     void validateSpawn(const SceneNode& node) {
         if(node.id.empty()||node.id.size()>128||nodes_.count(node.id)||pendingSpawns_.count(node.id))
             throw std::invalid_argument("Spawn identity is empty, too long or already reserved");

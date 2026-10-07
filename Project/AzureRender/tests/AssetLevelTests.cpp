@@ -27,6 +27,12 @@ int main() {
   db.refresh();check(db.idForPath("assets:/moved.txt")==id && db.resolve(id).filename()=="moved.txt");
   write(db.cacheFile(id),"corrupt");check(db.readSource(id)=="first");
   write(root/"assets/moved.txt","second");const auto changed=db.refresh();check(!changed.empty() && db.readSource(id)=="second");
+  write(root/"assets/example.azscript",R"({"schemaVersion":1,"type":"Example.Script","assembly":"assets:/moved.txt"})");
+  db.refresh();const auto scriptId=db.idForPath("assets:/example.azscript");
+  check(db.records().at(scriptId).dependencies==std::vector<std::string>{id});
+  write(root/"assets/example.azscript",R"({"schemaVersion":99,"type":"Example.Script"})");
+  bool badScript=false;try{db.refresh(true);}catch(const std::exception&){badScript=true;}check(badScript);
+  write(root/"assets/example.azscript",R"({"schemaVersion":1,"type":"Example.Script","assembly":"assets:/moved.txt"})");db.refresh();
   auto registry=reflection::makeRuntimeRegistry();ecs::TransformComponent transform;transform.translation={1,2,3};
   const auto component=registry.encode("azure.transform",&transform);
   nlohmann::json prefab={{"schemaVersion",1},{"id","prefab"},{"resources",nlohmann::json::array()},

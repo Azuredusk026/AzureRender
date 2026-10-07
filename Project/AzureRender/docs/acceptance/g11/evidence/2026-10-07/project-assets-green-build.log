@@ -1,0 +1,21 @@
+[0/2] Re-checking globbed directories...
+[1/20] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/20] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[3/20] Linking CXX static library AzureRuntime.lib
+[4/20] Linking CXX executable AzureAssetLevelTests.exe
+[5/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[6/20] Linking CXX executable AzureManagedScriptRuntimeTests.exe
+[7/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[8/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[9/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[10/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[11/20] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[12/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[13/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[14/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[15/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[16/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[17/20] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[18/20] Linking CXX static library AzurePlayerHost.lib
+[19/20] Linking CXX executable AzurePlayer.exe

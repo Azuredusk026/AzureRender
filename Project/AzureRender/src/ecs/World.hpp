@@ -5,8 +5,10 @@
 #include "IComponentArray.hpp"
 
 #include <algorithm>
+#include <atomic>
 #include <cstdint>
 #include <functional>
+#include <limits>
 #include <memory>
 #include <stdexcept>
 #include <typeindex>
@@ -14,6 +16,11 @@
 #include <vector>
 
 namespace azurerender::ecs {
+
+struct EntityHandle {
+    Entity entity = kInvalidEntity;
+    std::uint64_t generation = 0;
+};
 
 // A system is just a callable invoked once per World::update.
 using System = std::function<void(class World&)>;
@@ -28,21 +35,27 @@ public:
     void swap(World& other) noexcept {
         std::swap(nextId_, other.nextId_);
         freeList_.swap(other.freeList_);
+        identities_.swap(other.identities_);
         systems_.swap(other.systems_);
         componentArrays_.swap(other.componentArrays_);
     }
 
     void clear() noexcept {
-        systems_.clear();componentArrays_.clear();freeList_.clear();nextId_=0;
+        systems_.clear();componentArrays_.clear();freeList_.clear();identities_.clear();nextId_=0;
     }
 
     // Allocate a new entity. Uses a simple free list; ids start at 1.
     Entity createEntity() {
+        const auto identity=nextIdentity();
         if (!freeList_.empty()) {
             const Entity id = freeList_.back();
             freeList_.pop_back();
+            identities_[id]=identity;
             return id;
         }
+        if(nextId_==std::numeric_limits<Entity>::max())throw std::length_error("Entity capacity exhausted");
+        identities_.resize(static_cast<std::size_t>(nextId_)+2);
+        identities_[nextId_+1]=identity;
         return ++nextId_;
     }
 
@@ -54,12 +67,19 @@ public:
             entry.second->erase(entity);
         }
         freeList_.push_back(entity);
+        identities_[entity]=0;
     }
 
     [[nodiscard]] bool valid(const Entity entity) const noexcept {
-        return entity != kInvalidEntity && entity <= nextId_
-            && std::find(freeList_.begin(), freeList_.end(), entity)
-                == freeList_.end();
+        return entity != kInvalidEntity && entity < identities_.size() && identities_[entity]!=0;
+    }
+
+    [[nodiscard]] EntityHandle handle(Entity entity) const {
+        if(!valid(entity))throw std::invalid_argument("Cannot capture an invalid entity");
+        return {entity,identities_[entity]};
+    }
+    [[nodiscard]] bool valid(EntityHandle handle) const noexcept {
+        return valid(handle.entity) && identities_[handle.entity]==handle.generation;
     }
 
     template <typename T>
@@ -152,7 +172,17 @@ public:
     }
 
 private:
+    static std::uint64_t nextIdentity() {
+        // Process-wide incarnations prevent cross-world and clear/rebuild ABA.
+        static std::atomic<std::uint64_t> next{0};
+        auto current=next.load(std::memory_order_relaxed);
+        do {
+            if(current==std::numeric_limits<std::uint64_t>::max())throw std::length_error("Entity identity exhausted");
+        }while(!next.compare_exchange_weak(current,current+1,std::memory_order_relaxed));
+        return current+1;
+    }
     Entity nextId_ = 0;
+    std::vector<std::uint64_t> identities_;
     std::vector<Entity> freeList_;
     std::vector<System> systems_;
     std::unordered_map<std::type_index,

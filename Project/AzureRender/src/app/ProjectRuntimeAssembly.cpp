@@ -3,6 +3,10 @@
 #include "gameplay/InteractionPolicy.hpp"
 #include "gameplay/SystemConfiguration.hpp"
 #include "runtime/GameRuntime.hpp"
+#include "scripting/lua/LuaScriptingModule.hpp"
+#if AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE
+#include "scripting/dotnet/ManagedScriptingModule.hpp"
+#endif
 namespace azurerender::application {
 namespace {
 class ExplorationPolicy final: public IRuntimeSystem {
@@ -39,5 +43,15 @@ nlohmann::json explorationConfiguration() {
 }
 nlohmann::json configuration(const Project& project) {
     return project.runtimeConfiguration.is_null()?explorationConfiguration():project.runtimeConfiguration;
+}
+ScriptRuntimeRegistry scriptBackends() {
+    ScriptRuntimeRegistry registry;registerLuaScripting(registry);
+#if AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE
+    registerManagedScripting(registry);
+#endif
+    return registry;
+}
+std::unique_ptr<IScriptRuntime> scripts(const Project& project,RuntimeLifecycle& runtime,GameRuntime& game,AssetDatabase& assets) {
+    return scriptBackends().create(project.scriptingConfiguration,runtime,game,assets);
 }
 }

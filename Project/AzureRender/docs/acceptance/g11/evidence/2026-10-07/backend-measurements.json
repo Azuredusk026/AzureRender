@@ -1,0 +1,44 @@
+[
+  {
+    "configuration": "debug",
+    "backend": "coreclr",
+    "iterations": 1000,
+    "startupMs": 63.2435,
+    "stepMsPerIteration": 0.16120330000000002
+  },
+  {
+    "configuration": "debug",
+    "backend": "nativeaot",
+    "iterations": 1000,
+    "startupMs": 4.6649,
+    "stepMsPerIteration": 0.1573543
+  },
+  {
+    "configuration": "debug",
+    "backend": "lua",
+    "iterations": 1000,
+    "startupMs": 0.1552,
+    "stepMsPerIteration": 0.09187999999999999
+  },
+  {
+    "configuration": "release",
+    "backend": "coreclr",
+    "iterations": 1000,
+    "startupMs": 65.2375,
+    "stepMsPerIteration": 0.022624099999999998
+  },
+  {
+    "configuration": "release",
+    "backend": "nativeaot",
+    "iterations": 1000,
+    "startupMs": 4.3553,
+    "stepMsPerIteration": 0.0167257
+  },
+  {
+    "configuration": "release",
+    "backend": "lua",
+    "iterations": 1000,
+    "startupMs": 0.0707,
+    "stepMsPerIteration": 0.0096276
+  }
+]

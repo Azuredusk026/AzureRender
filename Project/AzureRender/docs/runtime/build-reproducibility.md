@@ -22,7 +22,10 @@ python tools/build_provenance.py verify --build-dir build/ninja-msvc-release
 
 验证时源码或产物变化会返回非零退出码。
 
-记录覆盖 `src`、`shaders`、`tools`、`schemas`、`assets_public`、`cmake` 和构建配置。私有素材通过单独的准入报告关联。构建复现验证同一输入与产物的身份关系。
+记录覆盖源码、着色器、工具、模式与公开资产。
+它还覆盖 `managed`、构建配置和托管许可来源。
+启用托管模块时，记录包含程序集与原生库。
+私有素材通过单独的准入报告关联。
 
 ## 回归入口
 

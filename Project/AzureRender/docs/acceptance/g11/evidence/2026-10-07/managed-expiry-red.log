@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 59: AzureEngine.ManagedModule.coreclr
+1/2 Test #59: AzureEngine.ManagedModule.coreclr .....***Failed    0.18 sec
+Expired saved ABI must reject without retaining managed session objects
+
+    Start 60: AzureEngine.ManagedModule.nativeaot
+2/2 Test #60: AzureEngine.ManagedModule.nativeaot ...***Failed    0.03 sec
+Expired saved ABI must reject without retaining managed session objects
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.22 sec
+
+The following tests FAILED:
+	 59 - AzureEngine.ManagedModule.coreclr (Failed)
+	 60 - AzureEngine.ManagedModule.nativeaot (Failed)
+Errors while running CTest

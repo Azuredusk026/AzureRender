@@ -21,7 +21,7 @@ azurerender::GameRuntime* AzureRenderApp::activeGame(){
 #endif
     return gameRuntime_.get();
 }
-azurerender::ScriptRuntime* AzureRenderApp::activeScripts(){
+azurerender::IScriptRuntime* AzureRenderApp::activeScripts(){
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession)return runOptions_.editorSession->scripts();
 #endif

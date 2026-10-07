@@ -44,6 +44,8 @@ int main() {
                 std::filesystem::weakly_canonical(std::filesystem::path(moved) /
                                                   "assets/startup.azscene"));
         auto edit = [&](const std::string& text) { std::ofstream(project.file) << text; };
+        edit(R"({"schemaVersion":1,"id":"x","name":"x","mounts":[{"name":"assets","path":"assets"}],"startupScene":"assets:/startup.azscene","scripting":{"schemaVersion":99,"backend":"lua"}})");
+        rejects([&] { Project::load(project.file); });
         edit(R"({"schemaVersion":99})");
         rejects([&] { Project::load(project.file); });
         edit(

@@ -98,9 +98,9 @@ void AzureRenderApp::run(
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
-        scriptRuntime_ = std::make_unique<azurerender::ScriptRuntime>(runtime_, *gameRuntime_, levelSession_->assets());
+        scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
         scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
-        gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->update(delta); });
+        gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
         gameRuntime_->setEventHandler([this](const auto& event) { scriptRuntime_->dispatch(event); });
         gameRuntime_->setInteractionHandler([this](const auto& event){scriptRuntime_->dispatchInteraction(event);});
     }
@@ -586,7 +586,7 @@ void AzureRenderApp::buildSceneFrameData(
         if(preview){frame.animations.push_back(*preview);++editorPreviewFrames_;}
     }
 #endif
-    if(game&&gameInputReplay_&&gameRouteFrames_.size()<8192){nlohmann::json state;
+    if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192){nlohmann::json state;
         state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
         state["characters"]=nlohmann::json::array();
         activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){

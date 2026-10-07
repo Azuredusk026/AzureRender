@@ -20,6 +20,10 @@ AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Window
 
 ## 当前能力
 
+脚本服务使用统一绑定描述与对象身份守卫。
+Lua 为默认后端，CoreCLR 与 NativeAOT 为可选原型。
+范围与部署见[脚本服务](Project/AzureRender/docs/runtime/script-services.md)。
+
 | 模块 | 已实现能力 |
 | --- | --- |
 | 渲染 | glTF 材质、独立蒙皮、光照、级联阴影、透明、描边与黑洞场景 |
@@ -71,7 +75,7 @@ Project/AzureRender/portfolio/    精选公共展示及来源清单
 
 [引擎实施计划](Project/AzureRender/docs/plans/2026-10-06-engine-evolution.md)覆盖全部 18 项借鉴。12 个阶段按基础契约、编辑与 AI、专项和交付推进。F4、G8、U3、F5、U4、G9、R7、G10 已验收。
 
-探索与场景检视项目共用可配置系统。当前执行阶段为 R8 着色模块与算法组合。
+探索与场景检视项目共用可配置系统。当前执行阶段为 P3 引擎复用与交付验收。
 
 任务文件、接口、依赖和验收由三个子计划定义。
 

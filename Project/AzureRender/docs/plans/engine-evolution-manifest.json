@@ -260,7 +260,13 @@
       "items": [
         "C4"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "verification": {
+        "acceptance": "docs/acceptance/g11/2026-10-07.md",
+        "evidence": "docs/acceptance/g11/evidence/2026-10-07/manifest.json",
+        "adoption": "verified-prototype-retained",
+        "commitTitle": "feat(g11): 完成脚本服务与生成绑定原型验收"
+      }
     },
     {
       "id": "P3",
@@ -1007,7 +1013,37 @@
         "runnable-prototype",
         "comparison-evidence",
         "adoption-decision"
-      ]
+      ],
+      "implementation": {
+        "interfaces": [
+          "IScriptRuntime",
+          "ScriptRuntimeRegistry",
+          "ScriptBindingHost",
+          "ScriptHostApi",
+          "ScriptHostSession",
+          "ManagedScriptRuntime"
+        ],
+        "tests": [
+          "AzureTools.ScriptBindings",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ScriptInterop",
+          "AzureEngine.ScriptRuntime",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot"
+        ],
+        "verification": {
+          "acceptance": "docs/acceptance/g11/2026-10-07.md",
+          "evidence": "docs/acceptance/g11/evidence/2026-10-07/manifest.json",
+          "adoption": "verified-prototype-retained",
+          "commitTitle": "feat(g11): 完成脚本服务与生成绑定原型验收"
+        },
+        "scope": "shared service and generated description adopted; optional trusted CoreCLR and NativeAOT prototypes; Lua default"
+      }
     }
   ]
 }

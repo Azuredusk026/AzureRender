@@ -1,0 +1,47 @@
+[0/2] Re-checking globbed directories...
+[1/13] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/13] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\BindingDescriptor.cpp.obj
+[3/13] Linking CXX static library AzureScriptingHost.lib
+[4/13] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[5/13] Linking CXX static library AzureLuaScripting.lib
+[6/13] Linking CXX executable AzureScriptInteropTests.exe
+[7/13] Linking CXX executable AzureScriptRuntimeTests.exe
+[8/13] Generating managed/complete.stamp
+FAILED: [code=1] managed/complete.stamp 
+cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/build_managed_scripts.py --output D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/managed"
+Script binding artifacts verified
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Azure.Engine -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\coreclr\Azure.Engine.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.37
+  Determining projects to restore...
+  Restored D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\projects\samples\Azure.Samples.csproj (in 50 ms).
+  Azure.Samples -> D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\coreclr\Azure.Samples.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.41
+  Determining projects to restore...
+  Restored D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\projects\native\Azure.Engine.Native.csproj (in 1.71 sec).
+D:\Assigment\2609\FYP\Project\AzureRender\managed\EngineBindings\AzureObject.cs(10,62): error IL2026: Using member 'System.Text.Json.Nodes.JsonArray.Add<T>(T)' which has 'RequiresUnreferencedCodeAttribute' can break functionality when trimming application code. Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed. [D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\projects\native\Azure.Engine.Native.csproj]
+D:\Assigment\2609\FYP\Project\AzureRender\managed\EngineBindings\AzureObject.cs(10,62): error IL3050: Using member 'System.Text.Json.Nodes.JsonArray.Add<T>(T)' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. Creating JsonValue instances with non-primitive types requires generating code at runtime. [D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\managed\projects\native\Azure.Engine.Native.csproj]
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_managed_scripts.py", line 77, in <module>
+    build(parser.parse_args().output)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_managed_scripts.py", line 64, in build
+    run('nativeaot',['publish',str(native_project),'-c','Release','-o',str(native),'--nologo'])
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\build_managed_scripts.py", line 54, in run
+    started=time.perf_counter();subprocess.run([dotnet,*args],check=True)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['C:\\Program Files\\dotnet\\dotnet.EXE', 'publish', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\managed\\projects\\native\\Azure.Engine.Native.csproj', '-c', 'Release', '-o', 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\managed\\nativeaot', '--nologo']' returned non-zero exit status 1.
+ninja: build stopped: subcommand failed.

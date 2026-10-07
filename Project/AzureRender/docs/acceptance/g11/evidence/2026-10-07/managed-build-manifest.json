@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "sdk": "9.0.308",
+  "bindingHash": "0702310e977fabbc5a72f17dc961510d61d188bc6042cb1145c2002a770b44de",
+  "types": [
+    "Azure.Samples.Counter",
+    "Azure.Samples.BrokenInit",
+    "Azure.Samples.BrokenUpdate",
+    "Azure.Samples.SceneAnnotator",
+    "Azure.Samples.ExplorationController"
+  ],
+  "measurements": [
+    {
+      "backend": "coreclr",
+      "buildSeconds": 12.469429100005073,
+      "bytes": 53505,
+      "distributionBytes": 26249
+    },
+    {
+      "backend": "coreclr-samples",
+      "buildSeconds": 2.1486522999985027,
+      "bytes": 53505,
+      "distributionBytes": 26249
+    },
+    {
+      "backend": "nativeaot",
+      "buildSeconds": 5.290782699994452,
+      "bytes": 10268672,
+      "distributionBytes": 1785856
+    }
+  ],
+  "files": {
+    "coreclr/Azure.Engine.deps.json": {
+      "bytes": 428,
+      "sha256": "e3d2fa079fb7c1165f4c78f99dc6f661d89c1033e4ab8d427893fae0e3bf0d0f"
+    },
+    "coreclr/Azure.Engine.dll": {
+      "bytes": 17920,
+      "sha256": "f802258eaab634295594249791bf37f9481ee1910f48e56fc9b77301c439d1bf"
+    },
+    "coreclr/Azure.Engine.pdb": {
+      "bytes": 15196,
+      "sha256": "30b52d17259db11cc42fb28f5747011aeb6921424c8905c067f0e2fc4e25cc35"
+    },
+    "coreclr/Azure.Engine.runtimeconfig.json": {
+      "bytes": 419,
+      "sha256": "8cc5d94ff93f60a590b22dd7b329edc3ec74d79df9909f329e6d78ed7d731daa"
+    },
+    "coreclr/Azure.Samples.deps.json": {
+      "bytes": 826,
+      "sha256": "fe720aa29e1affee1dcf5ddd4cb65de1cc19081c320051c48096ee0a06e8f01f"
+    },
+    "coreclr/Azure.Samples.dll": {
+      "bytes": 6656,
+      "sha256": "ebfff76db00fda94082f56cb940e25ce657a210abe6fdd59a12ffc2c7b2a7789"
+    },
+    "coreclr/Azure.Samples.pdb": {
+      "bytes": 12060,
+      "sha256": "b35deeb9f83608e8cd33f480c5daf5cf1227f01120a1b5745ae99cf3d521ab63"
+    },
+    "nativeaot/Azure.Engine.Native.dll": {
+      "bytes": 1785856,
+      "sha256": "708fe6abcc007c08945ffb39324012d1747514cc0217c6769c9ab5e36a195822"
+    },
+    "nativeaot/Azure.Engine.Native.pdb": {
+      "bytes": 8482816,
+      "sha256": "98e893fdf7367cec7deef2c9bfac7cc9a43fc108a36da163f410976bda22bf86"
+    }
+  }
+}

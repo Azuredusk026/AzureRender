@@ -1,0 +1,67 @@
+[0/2] Re-checking globbed directories...
+[1/65] Linking CXX executable AzureGameUiTests.exe
+[2/65] Linking CXX executable AzureGameplayPresentationTests.exe
+[3/65] Linking CXX executable AzureEngineSettingsTests.exe
+[4/65] Linking CXX executable AzureObservationTests.exe
+[5/65] Linking CXX executable AzureValidationProbe.exe
+[6/65] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[7/65] Linking CXX executable AzureSceneVisibilityTests.exe
+[8/65] Linking CXX executable AzureRigTextTests.exe
+[9/65] Linking CXX executable AzureProjectTests.exe
+[10/65] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_shader_types.py --description D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/shared-layout.json --cpp D:/Assigment/2609/FYP/Project/AzureRender/src/render/ShaderSharedTypes.hpp --slang D:/Assigment/2609/FYP/Project/AzureRender/shaders/modules/SharedTypes.slang --check"
+[11/65] Linking CXX executable AzureUiFoundationTests.exe
+[12/65] Building CXX object CMakeFiles\AzureRenderEcsTests.dir\tests\EcsTests.cpp.obj
+[13/65] Linking CXX executable AzureEditorWorkspaceTests.exe
+[14/65] Linking CXX executable AzureThumbnailTests.exe
+[15/65] Linking CXX executable AzureRenderEcsTests.exe
+[16/65] Building CXX object CMakeFiles\AzureRenderSceneGraphTests.dir\tests\SceneGraphTests.cpp.obj
+[17/65] Linking CXX executable AzurePlayer.exe
+[18/65] Linking CXX executable AzureRenderSceneGraphTests.exe
+[19/65] Building CXX object CMakeFiles\AzureModuleAssemblyTests.dir\tests\ModuleAssemblyTests.cpp.obj
+[20/65] Building CXX object CMakeFiles\AzureRuntimeLifecycleTests.dir\tests\RuntimeLifecycleTests.cpp.obj
+[21/65] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\tests\RegisterHostExtension.cpp.obj
+[22/65] Building CXX object CMakeFiles\AzureGenerationManifestTests.dir\tests\GenerationManifestTests.cpp.obj
+[23/65] Building CXX object CMakeFiles\AzurePhysicsInputTests.dir\tests\PhysicsInputTests.cpp.obj
+[24/65] Building CXX object CMakeFiles\AzureComponentRegistryTests.dir\tests\ComponentRegistryTests.cpp.obj
+[25/65] Building CXX object CMakeFiles\AzurePlayableQuestTests.dir\tests\PlayableQuestTests.cpp.obj
+[26/65] Building CXX object CMakeFiles\AzureScriptInteropTests.dir\tests\ScriptInteropTests.cpp.obj
+[27/65] Building CXX object CMakeFiles\AzureInteractionTests.dir\tests\InteractionTests.cpp.obj
+[28/65] Building CXX object CMakeFiles\AzurePresentationRuntimeTests.dir\tests\PresentationRuntimeTests.cpp.obj
+[29/65] Linking CXX executable AzureModuleAssemblyTests.exe
+[30/65] Linking CXX executable AzureRuntimeLifecycleTests.exe
+[31/65] Linking CXX executable AzureRender.exe
+[32/65] Building CXX object CMakeFiles\AzureThirdPersonTests.dir\tests\ThirdPersonTests.cpp.obj
+[33/65] Building CXX object CMakeFiles\AzureLocomotionTests.dir\tests\LocomotionTests.cpp.obj
+[34/65] Building CXX object CMakeFiles\AzureSystemCompositionTests.dir\tests\SystemCompositionTests.cpp.obj
+[35/65] Building CXX object CMakeFiles\AzureProposalControllerTests.dir\tests\ProposalControllerTests.cpp.obj
+[36/65] Linking CXX executable AzureComponentRegistryTests.exe
+[37/65] Building CXX object CMakeFiles\AzureRenderEditorSessionTests.dir\tests\EditorSessionTests.cpp.obj
+[38/65] Linking CXX executable AzureGenerationManifestTests.exe
+[39/65] Building CXX object CMakeFiles\AzurePanelContextTests.dir\tests\PanelContextTests.cpp.obj
+[40/65] Building CXX object CMakeFiles\AzureEditTransactionTests.dir\tests\EditTransactionTests.cpp.obj
+[41/65] Building CXX object CMakeFiles\AzureRegisteredComponentWorkflowTests.dir\tests\RegisteredComponentWorkflowTests.cpp.obj
+[42/65] Linking CXX executable AzurePlayableQuestTests.exe
+[43/65] Linking CXX executable AzureScriptInteropTests.exe
+[44/65] Linking CXX executable AzurePresentationRuntimeTests.exe
+[45/65] Linking CXX executable AzurePhysicsInputTests.exe
+[46/65] Linking CXX executable AzureInteractionTests.exe
+[47/65] Building CXX object CMakeFiles\AzureRegisteredComponentHost.dir\src\main.cpp.obj
+[48/65] Building CXX object CMakeFiles\AzureEditorObservationTests.dir\tests\EditorObservationTests.cpp.obj
+[49/65] Building CXX object CMakeFiles\AzureEditServiceTests.dir\tests\EditServiceTests.cpp.obj
+[50/65] Linking CXX executable AzureSystemCompositionTests.exe
+[51/65] Linking CXX executable AzureThirdPersonTests.exe
+[52/65] Linking CXX executable AzureLocomotionTests.exe
+[53/65] Building CXX object CMakeFiles\AzureEditorWorkflowTests.dir\tests\EditorWorkflowTests.cpp.obj
+[54/65] Building CXX object CMakeFiles\AzureProposalAdapterTests.dir\tests\ProposalAdapterTests.cpp.obj
+[55/65] Linking CXX executable AzureProposalControllerTests.exe
+[56/65] Linking CXX executable AzureRenderEditorSessionTests.exe
+[57/65] Linking CXX executable AzureRegisteredComponentWorkflowTests.exe
+[58/65] Linking CXX executable AzureEditTransactionTests.exe
+[59/65] Linking CXX executable AzurePanelContextTests.exe
+[60/65] Linking CXX executable AzureEditorObservationTests.exe
+[61/65] Linking CXX executable AzureEditServiceTests.exe
+[62/65] Linking CXX executable AzureProposalAdapterTests.exe
+[63/65] Linking CXX executable AzureEditorWorkflowTests.exe
+[64/65] Linking CXX executable AzureRegisteredComponentHost.exe
+{"status": "passed", "manifest": "build\\ninja-msvc-debug\\build-provenance.json"}

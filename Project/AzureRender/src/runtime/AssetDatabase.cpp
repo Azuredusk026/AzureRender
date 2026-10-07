@@ -102,7 +102,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
             const auto extension=path.extension().string();Json document;
-            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab")document=Json::parse(source);
+            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript")document=Json::parse(source);
             const auto& record=candidate.at(id);
             sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,meta,document,record.contentHash,record.fingerprint};
             metadata[id] = meta; documents[id]=std::move(document); paths[virtualPath] = id;
@@ -125,6 +125,18 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         };
         for (const auto& dep : metadata.at(record.id).value("dependencies", Json::array())) add(dep.get<std::string>());
         const auto extension = record.path.extension().string();
+        if(extension==".azscript") {
+            const auto& document=documents.at(record.id);
+            if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1
+                || !document.at("type").is_string() || !std::regex_match(document.at("type").get<std::string>(),std::regex("[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+")))
+                throw std::invalid_argument("Invalid managed script asset schema or type");
+            for(const auto& field:document.items())if(field.key()!="schemaVersion" && field.key()!="type" && field.key()!="assembly")
+                throw std::invalid_argument("Unknown managed script asset field");
+            if(document.contains("assembly")) {
+                const auto reference=document.at("assembly").get<std::string>();
+                if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");add(reference);
+            }
+        }
         if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab") {
             const Json& document = documents.at(record.id);
             const auto walk = [&](const Json& value, auto&& self) -> void {

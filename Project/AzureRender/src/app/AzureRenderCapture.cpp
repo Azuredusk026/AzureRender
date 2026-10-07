@@ -617,6 +617,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"width\": " << swapchainExtent_.width << ",\n"
         << "  \"height\": " << swapchainExtent_.height << ",\n"
         << "  \"samples\": " << gpuTiming_.samples << ",\n"
+        << "  \"runtimeTraceFrames\": " << gameRouteFrames_.size() << ",\n"
         << "  \"timestampPeriodNanoseconds\": "
         << timestampPeriodNanoseconds_ << ",\n"
         << "  \"shadowAverageMs\": " << shadowAverage << ",\n"

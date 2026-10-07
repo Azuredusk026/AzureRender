@@ -1,0 +1,56 @@
+{
+  "workflow": "inspector",
+  "status": "passed",
+  "operations": 97,
+  "generationCosts": [
+    {
+      "generator": "azure.procedural",
+      "asset": "parameterized.gltf",
+      "milliseconds": 136.62269999622367,
+      "bytes": 4181
+    },
+    {
+      "generator": "direct-import",
+      "milliseconds": 69.46050000260584,
+      "bytes": 4181
+    },
+    {
+      "generator": "azure.rig-text",
+      "asset": "articulated.gltf",
+      "milliseconds": 112.28010000195354,
+      "bytes": 9388
+    },
+    {
+      "generator": "azure.rig-animation-graph",
+      "asset": "articulated-graph.json",
+      "milliseconds": 119.37940000643721,
+      "bytes": 158
+    }
+  ],
+  "animations": [
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-0",
+      "previousClip": 0,
+      "time": 1.2166666666666672
+    },
+    {
+      "blend": 1.0,
+      "clip": 0,
+      "morph": [
+        0.0,
+        0.0
+      ],
+      "node": "procedural-rig-1",
+      "previousClip": 0,
+      "time": 1.4666666666666663
+    }
+  ],
+  "synchronizedValidation": true,
+  "physicalKeyboardMouse": "not performed"
+}

@@ -1,0 +1,39 @@
+skinning-rtx passed
+skinning-intel passed
+managed-intel-coreclr passed
+managed-intel-nativeaot passed
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\post_gates.py", line 24, in <module>
+    run('performance',['python',str(work/'measure_performance.py')])
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\post_gates.py", line 12, in run
+    if result.returncode:raise RuntimeError(name+': '+(work/(name+'.log')).read_text(encoding='utf-8',errors='replace')[-6500:])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: performance: Cooling GPU: 62 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+standard-1 {"gpu": {"mean": 1.6602697777777777, "p95": 2.2221536, "p99": 2.9444764799999996}, "cpu": {"mean": 1.7841227777777757, "p95": 2.428035000000056, "p99": 3.0692459999999686}, "physics": {"mean": 0.23264027777777777, "p95": 0.33270999999999984, "p99": 0.7468199999999998}, "passed": true}
+Cooling GPU: 73 C
+standard-2 {"gpu": {"mean": 1.6521529244444444, "p95": 2.2808176000000002, "p99": 3.02979648}, "cpu": {"mean": 1.775305166666665, "p95": 2.2830549999999534, "p99": 2.702209999999962}, "physics": {"mean": 0.23255338888888888, "p95": 0.29941, "p99": 0.7287449999999994}, "passed": true}
+Cooling GPU: 85 C
+Cooling GPU: 56 C
+standard-3 {"gpu": {"mean": 1.446487288888889, "p95": 1.9070736000000001, "p99": 1.97777024}, "cpu": {"mean": 1.8378094444444446, "p95": 2.3524400000000734, "p99": 2.9172190000003058}, "physics": {"mean": 0.24318761111111112, "p95": 0.3151999999999999, "p99": 0.8772749999999998}, "passed": true}
+Cooling GPU: 70 C
+editor-1 {"gpu": {"mean": 0.5789076444444444, "p95": 0.7573648, "p99": 0.82898816}, "cpu": {"mean": 2.9573961111111116, "p95": 3.650224999999997, "p99": 4.445386999999951}, "physics": {"mean": 0.22865922222222224, "p95": 0.29562499999999997, "p99": 1.0216729999999998}, "passed": true}
+Cooling GPU: 67 C
+editor-2 {"gpu": {"mean": 0.5663660088888889, "p95": 0.5984752, "p99": 0.76625056}, "cpu": {"mean": 2.8792021666666665, "p95": 3.5829500000000207, "p99": 4.590778999999982}, "physics": {"mean": 0.2205185, "p95": 0.287725, "p99": 0.8258549999999996}, "passed": true}
+Cooling GPU: 67 C
+editor-3 {"gpu": {"mean": 0.56552064, "p95": 0.5931872, "p99": 0.762896}, "cpu": {"mean": 2.8308256666666662, "p95": 3.5052100000000106, "p99": 4.348825000000015}, "physics": {"mean": 0.22118933333333332, "p95": 0.28496999999999995, "p99": 0.9282029999999996}, "passed": true}
+Cooling GPU: 66 C
+stress-1 {"gpu": {"mean": 2.267514968888889, "p95": 3.2898815999999993, "p99": 3.83408352}, "cpu": {"mean": 3.2640072222222223, "p95": 3.9379250000000017, "p99": 4.843300999999982}, "physics": {"mean": 0.7694156666666667, "p95": 0.9360899999999998, "p99": 1.4023399999999995}, "passed": true}
+Cooling GPU: 83 C
+Cooling GPU: 56 C
+stress-2 {"gpu": {"mean": 2.2217927466666665, "p95": 3.324540799999998, "p99": 3.8618969599999997}, "cpu": {"mean": 3.2887174999999997, "p95": 3.946224999999986, "p99": 4.953958000000013}, "physics": {"mean": 0.7794937222222222, "p95": 0.95836, "p99": 1.3796929999999998}, "passed": true}
+Cooling GPU: 75 C
+stress-3 {"gpu": {"mean": 2.320111591111111, "p95": 3.2815472, "p99": 3.8044096}, "cpu": {"mean": 3.2528755555555553, "p95": 3.866585000000009, "p99": 4.763299000000008}, "physics": {"mean": 0.7668661666666666, "p95": 0.92453, "p99": 1.3656019999999998}, "passed": true}
+{"schemaVersion": 1, "passed": false, "gpuLimitMs": 16.6, "playerCpuLimitMs": 8, "editorCpuLimitMs": 10, "memoryObservation": "positive peak growth from the first observation in the latter half of process observations", "checks": [{"load": "standard", "round": 1, "passed": true, "gpuP95": 2.2221536, "cpuP95": 2.428035000000056, "physicsP95": 0.33270999999999984, "workingSetGrowth": 0.04650777613992085}, {"load": "standard", "round": 2, "passed": true, "gpuP95": 2.2808176000000002, "cpuP95": 2.2830549999999534, "physicsP95": 0.29941, "workingSetGrowth": 0.04263905658192879}, {"load": "standard", "round": 3, "passed": true, "gpuP95": 1.9070736000000001, "cpuP95": 2.3524400000000734, "physicsP95": 0.3151999999999999, "workingSetGrowth": 0.04114968321013723}, {"load": "editor", "round": 1, "passed": true, "gpuP95": 0.7573648, "cpuP95": 3.650224999999997, "physicsP95": 0.29562499999999997, "workingSetGrowth": 0.03955390116653956}, {"load": "editor", "round": 2, "passed": true, "gpuP95": 0.5984752, "cpuP95": 3.5829500000000207, "physicsP95": 0.287725, "workingSetGrowth": 0.03989287752623194}, {"load": "editor", "round": 3, "passed": true, "gpuP95": 0.5931872, "cpuP95": 3.5052100000000106, "physicsP95": 0.28496999999999995, "workingSetGrowth": 0.04104033502314297}, {"load": "stress", "round": 1, "passed": true, "gpuP95": 3.2898815999999993, "cpuP95": 3.9379250000000017, "physicsP95": 0.9360899999999998, "workingSetGrowth": 0.04814622427115123}, {"load": "stress", "round": 2, "passed": false, "gpuP95": 3.324540799999998, "cpuP95": 3.946224999999986, "physicsP95": 0.95836, "workingSetGrowth": 0.052568445964565225}, {"load": "stress", "round": 3, "passed": false, "gpuP95": 3.2815472, "cpuP95": 3.866585000000009, "physicsP95": 0.92453, "workingSetGrowth": 0.05047109588376952}]}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\measure_performance.py", line 101, in <module>
+    assert report['passed'], 'Evolution performance budgets exceeded'
+           ~~~~~~^^^^^^^^^^
+AssertionError: Evolution performance budgets exceeded
+

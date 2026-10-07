@@ -1,0 +1,17 @@
+[0/2] Re-checking globbed directories...
+[1/16] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/16] Building CXX object CMakeFiles\AzureScriptBackendContractTests.dir\tests\ScriptBackendContractTests.cpp.obj
+[3/16] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptHostSession.cpp.obj
+[4/16] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptBindingHost.cpp.obj
+[5/16] Linking CXX static library AzureScriptingHost.lib
+[6/16] Building CXX object CMakeFiles\AzureManagedModuleTests.dir\tests\ManagedModuleTests.cpp.obj
+[7/16] Building CXX object CMakeFiles\AzureManagedScripting.dir\src\scripting\dotnet\ManagedScriptRuntime.cpp.obj
+[8/16] Linking CXX static library AzureManagedScripting.lib
+[9/16] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[10/16] Linking CXX static library AzureLuaScripting.lib
+[11/16] Linking CXX executable AzureManagedScriptRuntimeTests.exe
+[12/16] Linking CXX executable AzureManagedModuleTests.exe
+[13/16] Linking CXX executable AzureScriptBackendContractTests.exe
+[14/16] Linking CXX executable AzureScriptEntityTests.exe
+[15/16] Linking CXX executable AzureScriptRuntimeTests.exe

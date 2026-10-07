@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_optional_runtime_trace.py", line 37, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_optional_runtime_trace.py", line 36, in main
+    run(args.player,args.output.resolve() if args.output else Path(temporary))
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_optional_runtime_trace.py", line 24, in run
+    retained=data['runtimeTraceFrames']
+             ~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'runtimeTraceFrames'

@@ -1,0 +1,31 @@
+[0/2] Re-checking globbed directories...
+[1/30] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[3/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[4/30] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CharacterMovementSystem.cpp.obj
+[5/30] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\SharedSystems.cpp.obj
+[6/30] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\LocomotionSystem.cpp.obj
+[7/30] Building CXX object CMakeFiles\AzureGameplay.dir\src\gameplay\CameraFollowSystem.cpp.obj
+[8/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[9/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[10/30] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\LuaScriptingModule.cpp.obj
+[11/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[12/30] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[13/30] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[14/30] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[15/30] Building CXX object CMakeFiles\AzureScriptBackendContractTests.dir\tests\ScriptBackendContractTests.cpp.obj
+[16/30] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptHostSession.cpp.obj
+[17/30] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptBindingHost.cpp.obj
+[18/30] Building CXX object CMakeFiles\AzureManagedModuleTests.dir\tests\ManagedModuleTests.cpp.obj
+[19/30] Linking CXX static library AzureRuntime.lib
+[20/30] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[21/30] Linking CXX static library AzureScriptingHost.lib
+[22/30] Linking CXX static library AzureGameplay.lib
+[23/30] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[24/30] Linking CXX static library AzureLuaScripting.lib
+[25/30] Linking CXX static library AzureProjectRuntime.lib
+[26/30] Linking CXX executable AzureScriptBackendContractTests.exe
+[27/30] Linking CXX executable AzureManagedModuleTests.exe
+[28/30] Linking CXX executable AzureScriptEntityTests.exe
+[29/30] Linking CXX executable AzureScriptRuntimeTests.exe

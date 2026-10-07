@@ -16,6 +16,7 @@ class BoundaryTests(unittest.TestCase):
                 (root / 'src' / module).mkdir(parents=True)
             (root / 'src/runtime/Core.cpp').write_text(runtime_include, encoding='utf-8')
             (root / 'src/runtime/Core.hpp').write_text('#pragma once\n', encoding='utf-8')
+            (root / 'src/runtime/ScriptRuntime.hpp').write_text('#pragma once\n', encoding='utf-8')
             (root / 'src/editor/Panel.cpp').write_text(editor_include, encoding='utf-8')
             (root / 'src/editor/Panel.hpp').write_text('#pragma once\n', encoding='utf-8')
             (root / 'src/gameplay/Mechanism.hpp').write_text('#pragma once\n', encoding='utf-8')
@@ -48,6 +49,11 @@ class BoundaryTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('AzureRuntime', result.stdout)
         self.assertIn('AzureEditor', result.stdout)
+
+    def test_runtime_cannot_include_lua_backend(self):
+        result=self.run_case(runtime_include='#include "runtime/ScriptRuntime.hpp"\n')
+        self.assertNotEqual(result.returncode,0,result.stdout)
+        self.assertIn('AzureLuaScripting',result.stdout)
 
     def test_reverse_target_edge_rejected(self):
         result = self.run_case(dependency='editor')

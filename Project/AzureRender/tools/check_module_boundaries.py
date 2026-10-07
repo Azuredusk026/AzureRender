@@ -5,6 +5,9 @@ from pathlib import Path
 import re
 
 ALLOWED = {
+    'AzureScriptingHost': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore'},
+    'AzureLuaScripting': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore', 'AzureScriptingHost'},
+    'AzureManagedScripting': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore', 'AzureScriptingHost'},
     'AzureDevtools': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureProcedural'},
     'AzureProcedural': {'AzureFoundation', 'AzureRenderCore'},
     'AzureAI': {'AzureFoundation'},
@@ -15,11 +18,16 @@ ALLOWED = {
     'AzureReflection': {'AzureFoundation'},
     'AzureRuntime': {'AzureFoundation', 'AzureReflection', 'AzureRenderCore'},
     'AzureGameplay': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
-    'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay'},
+    'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureLuaScripting', 'AzureManagedScripting', 'AzureScriptingHost'},
     'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureAI'},
     'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation'},
     'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation', 'AzureAI', 'AzureDevtools', 'AzureProcedural'},
 }
+
+# CMake's codemodel includes the script libraries linked through project assembly.
+# Header ownership still prevents runtime core from consuming backend headers.
+for script_consumer in ('AzureEditor','AzurePlayerHost','AzureRenderHost'):
+    ALLOWED[script_consumer].update({'AzureScriptingHost','AzureLuaScripting','AzureManagedScripting'})
 
 def effective_includes(text, definitions):
     """Honor known build guards; conservatively inspect both unknown branches."""
@@ -61,6 +69,12 @@ def owner(path):
     if not tail:
         return None
     area = tail[0]
+    if area=='runtime' and path.name=='ScriptRuntime.hpp':
+        return 'AzureLuaScripting'
+    if area=='scripting':
+        if len(tail)>1 and tail[1]=='lua':return 'AzureLuaScripting'
+        if len(tail)>1 and tail[1]=='dotnet':return 'AzureManagedScripting'
+        return 'AzureScriptingHost'
     if area == 'assets' and len(tail)>1 and tail[1]=='generators':
         return 'AzureProcedural'
     if area == 'devtools':

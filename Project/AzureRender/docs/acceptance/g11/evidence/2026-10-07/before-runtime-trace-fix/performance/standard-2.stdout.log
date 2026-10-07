@@ -1,0 +1,30 @@
+Project loaded: Azure Exploration (7f971748-131f-4764-9aac-221848014a37)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits
+Turntable foot pivot: [0.035000, -0.010000, 0.080000]
+Asset path: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\performance\standard\assets\guide.gltf
+Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 15 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 2 (playing "idle", 1.000000 s loop)
+Scene renderer: character (sceneType=character)
+Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off
+Clustered lighting: 8 lights, 11808 cluster references
+GPU timing samples: 2100
+  Shadow: 0.080 ms (4.881%)
+  Main scene: 1.298 ms (79.145%)
+  Internal outline: 0.262 ms (15.974%)
+  Total render: 1.640 ms avg, 1.278 ms min, 3.898 ms max
+  Percentiles: p50 1.545 ms, p95 2.230 ms, p99 2.905 ms
+  Submission per frame: 51.097 draws, 2.000 descriptor binds
+  CPU recording: 0.207 ms per frame, worker passes: 8400
+GPU timing report: D:\Assigment\2609\FYP\Project\AzureRender\build\evolution\g11\performance\standard-2.json
+Rendered frames: 2100
+Allocator after unload: buffers=0 images=0

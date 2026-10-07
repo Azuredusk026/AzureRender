@@ -7,6 +7,19 @@ import build_provenance
 
 
 class ProvenanceTests(unittest.TestCase):
+    def test_managed_module_tampering_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'CMakeCache.txt').write_text('AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE:BOOL=ON\n')
+            native=root/'managed/nativeaot/Azure.Engine.Native.dll';native.parent.mkdir(parents=True);native.write_bytes(b'compiled managed module')
+            products=build_provenance.product_paths(root,'Debug')
+            self.assertIn(native,products)
+            for product in products:
+                product.parent.mkdir(parents=True,exist_ok=True)
+                if not product.exists():product.write_bytes(b'build product')
+            source=root/'source';source.mkdir()
+            manifest=build_provenance.describe(source,products);build_provenance.verify(source,manifest)
+            native.write_bytes(b'altered native module')
+            with self.assertRaisesRegex(ValueError,'Azure.Engine.Native.dll'):build_provenance.verify(source,manifest)
     def test_geometry_compiler_product_tampering_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

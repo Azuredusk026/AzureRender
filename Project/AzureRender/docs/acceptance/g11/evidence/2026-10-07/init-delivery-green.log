@@ -1,0 +1,35 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 57: AzureEngine.ScriptBackendContract
+1/5 Test #57: AzureEngine.ScriptBackendContract .....   Passed    0.08 sec
+    Start 59: AzureEngine.ManagedModule.coreclr
+2/5 Test #59: AzureEngine.ManagedModule.coreclr .....   Passed    0.18 sec
+    Start 60: AzureEngine.ManagedModule.nativeaot
+3/5 Test #60: AzureEngine.ManagedModule.nativeaot ...   Passed    0.03 sec
+    Start 61: AzureEngine.ScriptRuntime
+4/5 Test #61: AzureEngine.ScriptRuntime .............   Passed    0.75 sec
+    Start 65: AzureEngine.ScriptEntities
+5/5 Test #65: AzureEngine.ScriptEntities ............***Failed    0.13 sec
+[1791326099917][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: transaction rollback
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+[sol2] An exception occurred: Script entity handle is stale
+[1791326099920][warning][script][code=0] assets:/controller.lua: Script entity handle is stale
+stack traceback:
+	[C]: in method 'get'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+[1791326099923][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: abort structural effects
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function <.../Temp/azure_script_entity_contract/assets/controller.lua:1>
+Successful structural effects must commit at a frame boundary
+
+
+80% tests passed, 1 tests failed out of 5
+
+Total Test time (real) =   1.20 sec
+
+The following tests FAILED:
+	 65 - AzureEngine.ScriptEntities (Failed)
+Errors while running CTest

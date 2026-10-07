@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 
-INPUT_DIRS = ("src", "shaders", "tools", "schemas", "assets_public", "cmake")
+INPUT_DIRS = ("src", "shaders", "tools", "schemas", "assets_public", "cmake", "managed", "third_party/dotnet")
 INPUT_FILES = ("CMakeLists.txt", "CMakePresets.json", "vcpkg.json", "vcpkg-configuration.json")
 
 
@@ -16,8 +16,14 @@ def digest(path):
 def product_paths(build_dir, configuration):
     prefix = build_dir / configuration if (build_dir / configuration).is_dir() else build_dir
     suffix = ".exe" if __import__("os").name == "nt" else ""
-    return [prefix / (name + suffix) for name in
+    products=[prefix / (name + suffix) for name in
         ("AzureRender", "AzurePlayer", "AzureMetaGen", "AzureGeometryCompiler")]
+    cache=build_dir/'CMakeCache.txt'
+    if cache.is_file() and 'AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE:BOOL=ON' in cache.read_text(encoding='utf-8'):
+        products += [build_dir/'managed'/name for name in (
+            'coreclr/Azure.Engine.dll','coreclr/Azure.Engine.runtimeconfig.json','coreclr/Azure.Engine.deps.json',
+            'coreclr/Azure.Samples.dll','nativeaot/Azure.Engine.Native.dll','manifest.json','complete.stamp')]
+    return products
 
 
 def inputs(source):

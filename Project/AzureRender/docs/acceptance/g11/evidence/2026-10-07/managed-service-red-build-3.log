@@ -1,0 +1,7 @@
+[0/2] Re-checking globbed directories...
+[1/6] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/6] Building CXX object CMakeFiles\AzureManagedScripting.dir\src\scripting\dotnet\ManagedScriptRuntime.cpp.obj
+[3/6] Linking CXX static library AzureManagedScripting.lib
+[4/6] Linking CXX static library AzureProjectRuntime.lib
+[5/6] Linking CXX executable AzureManagedScriptRuntimeTests.exe

@@ -1,0 +1,1097 @@
+{
+  "format": "AzureGame v1",
+  "schemaVersion": 1,
+  "projectId": "c93ebca3-ffd8-4a86-b7c4-37f27e99b1f9",
+  "name": "annotation",
+  "engine": {
+    "schemaVersion": 1,
+    "engineVersion": "0.1.0",
+    "configuration": "Release",
+    "architecture": "x64",
+    "platform": "Windows",
+    "scriptBackends": [
+      "lua",
+      "coreclr",
+      "nativeaot"
+    ]
+  },
+  "entry": "start-game.cmd",
+  "project": "game/project.azureproject",
+  "files": [
+    {
+      "path": "bin/AzurePlayer.exe",
+      "size": 4197376,
+      "sha256": "ea59c97b9ff69cda41ae33889aff5dd1c0df70b4f00c5b9135135ced5854d3ef"
+    },
+    {
+      "path": "bin/brotlicommon.dll",
+      "size": 137728,
+      "sha256": "96cb02cab84e18a9b49817bc1c06765238cf632d87ca17f2bd4d1d0ca042b400"
+    },
+    {
+      "path": "bin/brotlidec.dll",
+      "size": 51712,
+      "sha256": "ea71412732111421c665ace9d28eef8f2315e6797f96c086d55e6d0a4af125f5"
+    },
+    {
+      "path": "bin/brotlienc.dll",
+      "size": 678912,
+      "sha256": "ec8646cff21fec78634f5513c0dedf11e9942e212e489c41bf1c144bb12a2313"
+    },
+    {
+      "path": "bin/bz2.dll",
+      "size": 76800,
+      "sha256": "e9a76d9f7a37ad7448d4933183f9be437fc9acb2168f902b235d43383b53cbda"
+    },
+    {
+      "path": "bin/concrt140.dll",
+      "size": 324208,
+      "sha256": "2405355f0a58067b258f8df33c327e3a3d716eaac5a3a5aebb757842d85bd376"
+    },
+    {
+      "path": "bin/deflate.dll",
+      "size": 84992,
+      "sha256": "14ff8f7bc4afa85d0a82bb067f512e9df7545441899f9923e4574b902a0725e9"
+    },
+    {
+      "path": "bin/freetype.dll",
+      "size": 701440,
+      "sha256": "b2cac200a5132b25a44b9b9101d4fad158b83b5453157d167a859204a6ce7474"
+    },
+    {
+      "path": "bin/glfw3.dll",
+      "size": 235008,
+      "sha256": "dc77d25c48516de243d21ca7115173d9e62878731aa69ed5de4a16b857054b9b"
+    },
+    {
+      "path": "bin/hwloc-15.dll",
+      "size": 240128,
+      "sha256": "29204e3676b3ae991ca24a54829bb5532c2daadccdb22bc58312006e73c7fc3d"
+    },
+    {
+      "path": "bin/Iex-3_4.dll",
+      "size": 292864,
+      "sha256": "d29280b7356b7442c1ffe3f225a81bdaa3792800e848c26a45f9c3d691395cfd"
+    },
+    {
+      "path": "bin/IlmThread-3_4.dll",
+      "size": 45568,
+      "sha256": "0535aebe6be70f4d8097f2306786ae35129927e29576ceac103ec6afa4dfd27b"
+    },
+    {
+      "path": "bin/Imath-3_2.dll",
+      "size": 338944,
+      "sha256": "2d3005c21b2f2fda5b5251036b136ac2f43361c84330be7c6db74f31ea51a3af"
+    },
+    {
+      "path": "bin/libpng16.dll",
+      "size": 198656,
+      "sha256": "aed14d620c5696c92d28d9f4dba9a830d857a4d8762c8c20a97dc7e45db4dc21"
+    },
+    {
+      "path": "bin/lua.dll",
+      "size": 240640,
+      "sha256": "e433e0989936447e3a792df9a4e510df0736f34d5f54bce1a35a875863066a04"
+    },
+    {
+      "path": "bin/manifold.dll",
+      "size": 2380800,
+      "sha256": "b871d619a3b56724d321313e5269efd56575192279e25df3ac8c6afd5cd2dcfa"
+    },
+    {
+      "path": "bin/manifoldc.dll",
+      "size": 322048,
+      "sha256": "15e52b3b302a5dbf996965f134d1e60ebabe827d9248ec656ac51313ed8f2581"
+    },
+    {
+      "path": "bin/msvcp140.dll",
+      "size": 557728,
+      "sha256": "0f885b509a685d2bbfa652fed26b5fb31d88fbdab0a978c641d1c7b8aa460aa9"
+    },
+    {
+      "path": "bin/msvcp140_1.dll",
+      "size": 35952,
+      "sha256": "bfad5aef4c63a669e3c140655cdfdf395b6c979b400a447bd5dcb65ed8826c3d"
+    },
+    {
+      "path": "bin/msvcp140_2.dll",
+      "size": 280200,
+      "sha256": "3ea06f0ee098b4823cb79599df3780e7f23cce52c19aac31d2a0d47efe33a5e9"
+    },
+    {
+      "path": "bin/msvcp140_atomic_wait.dll",
+      "size": 50304,
+      "sha256": "640b2aefced484d0368eea5bdd06addd0658a3a70a49256e560d6923b404a479"
+    },
+    {
+      "path": "bin/msvcp140_codecvt_ids.dll",
+      "size": 31872,
+      "sha256": "f2069a52880ec885ee7f0511186100eb7fada0411a2b4948fafea7735b878a18"
+    },
+    {
+      "path": "bin/OpenEXR-3_4.dll",
+      "size": 850944,
+      "sha256": "554bf61472f3be1f756ed476187a1a4c6cc0b6fb01cdbb3b8ffa98f5dc54b7c1"
+    },
+    {
+      "path": "bin/OpenEXRCore-3_4.dll",
+      "size": 312320,
+      "sha256": "f49f54723ae691ae3d6b6d41f341cb5ed8af947382c15e16ef58faa9de8df66a"
+    },
+    {
+      "path": "bin/OpenEXRUtil-3_4.dll",
+      "size": 159232,
+      "sha256": "8cc1d2e9bfca9d945b651cc81d0c39c4880d975e80ad192510bbbaf7f7d3da5f"
+    },
+    {
+      "path": "bin/openjph.0.31.dll",
+      "size": 356864,
+      "sha256": "6b0b386bf8bdb4f414173280d7447bd474f8650913c98fbc0f252b965670ee8f"
+    },
+    {
+      "path": "bin/rmlui.dll",
+      "size": 1755648,
+      "sha256": "f3d6699022e71109125adef33c851e734f9919efd239adf54d6b3ba7eea96636"
+    },
+    {
+      "path": "bin/tbb12.dll",
+      "size": 349696,
+      "sha256": "628404f0445719ec39a88cbcf8bb60ce61fb95a0d0f1fb98b8f87db990f7e4bd"
+    },
+    {
+      "path": "bin/tbbmalloc.dll",
+      "size": 114688,
+      "sha256": "43babdd068361b70541e2a04ffd4ffd648ac1894484f13b07bce8dd4fca8fa61"
+    },
+    {
+      "path": "bin/tbbmalloc_proxy.dll",
+      "size": 31232,
+      "sha256": "045aae3852db70a1d253131fc977e4a76e3c2884aaa0dd1a2c572f0b098a1c34"
+    },
+    {
+      "path": "bin/vccorlib140.dll",
+      "size": 352384,
+      "sha256": "19839407c3fdbc824e5bce189bf68ddf8097f12ec28b757797ffa0415c144ddd"
+    },
+    {
+      "path": "bin/vcruntime140.dll",
+      "size": 124544,
+      "sha256": "d5e4d9a3e835fa679450145d6a7d94e36573a509317111904d9b3712c30d9066"
+    },
+    {
+      "path": "bin/vcruntime140_1.dll",
+      "size": 49792,
+      "sha256": "1f2d41c4aa5db0bc33ebf7b66d72943a817d7ce6cbe880502a9403823633093f"
+    },
+    {
+      "path": "bin/vcruntime140_threads.dll",
+      "size": 38528,
+      "sha256": "219915cf20822f34d5e7c1fdd4e21ae7f3396881096c51036225fb8f84b47afa"
+    },
+    {
+      "path": "bin/z.dll",
+      "size": 91136,
+      "sha256": "cb2f8af6ba93d2b43bc99cc2849670eb1595625bb637a96c745e0f60079d9252"
+    },
+    {
+      "path": "game/assets/annotation.azurelevel",
+      "size": 581,
+      "sha256": "21398a0cceaa07ac377f59614208b920355dd913aaa58c4b8f0976baebab4947"
+    },
+    {
+      "path": "game/assets/annotation.azurelevel.azmeta",
+      "size": 112,
+      "sha256": "0489c5fc38c7e98c152b6d85370ae56d8849c25937dc63279865e09b9a32c08e"
+    },
+    {
+      "path": "game/assets/behaviour.azscript",
+      "size": 123,
+      "sha256": "f35bb18f56566975485d8f69d1a3b2486334c399ff4b0740edb90f7d74637697"
+    },
+    {
+      "path": "game/assets/behaviour.azscript.azmeta",
+      "size": 112,
+      "sha256": "51f2dd85a0892fb924d9671b9c7a16f4e3c5101d9a44a48fbba391aa30eb6631"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.deps.json",
+      "size": 428,
+      "sha256": "e3d2fa079fb7c1165f4c78f99dc6f661d89c1033e4ab8d427893fae0e3bf0d0f"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.deps.json.azmeta",
+      "size": 112,
+      "sha256": "fcf55213899158a075634a451d73d4de65c94738586e435a61eb783bd9dc882c"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.dll",
+      "size": 17920,
+      "sha256": "f802258eaab634295594249791bf37f9481ee1910f48e56fc9b77301c439d1bf"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.dll.azmeta",
+      "size": 112,
+      "sha256": "60abfb419e46e6611105ec91f04b70687c9fd7c6941cebe2ec1120a353efbaea"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.runtimeconfig.json",
+      "size": 419,
+      "sha256": "8cc5d94ff93f60a590b22dd7b329edc3ec74d79df9909f329e6d78ed7d731daa"
+    },
+    {
+      "path": "game/assets/managed/Azure.Engine.runtimeconfig.json.azmeta",
+      "size": 112,
+      "sha256": "b4d913a7a6cc248ed7bfae9c9233f52dee10a56484f7b1f2d68d92d388f49a6e"
+    },
+    {
+      "path": "game/assets/managed/Azure.Samples.dll",
+      "size": 6656,
+      "sha256": "ebfff76db00fda94082f56cb940e25ce657a210abe6fdd59a12ffc2c7b2a7789"
+    },
+    {
+      "path": "game/assets/managed/Azure.Samples.dll.azmeta",
+      "size": 112,
+      "sha256": "14ec78c68729c7214cbac4bef8098f95e0f7b512bb9ee1d4adb09ef33a3173e5"
+    },
+    {
+      "path": "game/assets/startup.azscene",
+      "size": 617,
+      "sha256": "9bcff1202ea18787d64bb152b72fe3fc7ddd14e2362439d8dabace289dffd8d7"
+    },
+    {
+      "path": "game/assets/startup.azscene.azmeta",
+      "size": 112,
+      "sha256": "bc24f923e1c267fbe9ca7ceb84e73c0a451a1f61ef12ac3f11006cea129a169e"
+    },
+    {
+      "path": "game/project.azureproject",
+      "size": 437,
+      "sha256": "8c749d6ee1cff0a1a5124da113f26f8e37836c576a55921946270b6b3a35c513"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_albedo_fullbody.png",
+      "size": 351967,
+      "sha256": "c7c3322828f7464e229576d92178aa69d7dfa3a30909a8bd9ba87e5b9ae691e3"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_beauty_fullbody.png",
+      "size": 410975,
+      "sha256": "86e1c437ec29aa1ece304daf8c17f978e9e0a37ddd6855585656800c3d3bd3f5"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_direct_diffuse_fullbody.png",
+      "size": 419371,
+      "sha256": "feadd9f5ee66c08607fdc5a11f3ba35665d0230df61cb07c81f8f84c918a2acb"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_face_sdf_closeup.png",
+      "size": 84803,
+      "sha256": "eb58ceac8bbeb29e28ff2984188f9e31a54c45aadae2f8227dd55ac3e030c01c"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_material_id_fullbody.png",
+      "size": 74723,
+      "sha256": "96f95bf4511edbb8aea4b5ec9c8eea8f0853648dc314db5a5318bd7a71d590bf"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_outline_fullbody.png",
+      "size": 36970,
+      "sha256": "20b20897c33ac8f0b24178ca34239b15a48035a277c73a0920bc3bbf4dc5af56"
+    },
+    {
+      "path": "share/AzureRender/assets_public/baselines/character/character_world_normal_fullbody.png",
+      "size": 37094,
+      "sha256": "156bc7ebcf292ef690e5dcb7dcd00d9d846898c0de22c0220f6fd8b3b98554eb"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/CHARACTER-LICENSE.txt",
+      "size": 499,
+      "sha256": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/checkpoint.lua",
+      "size": 186,
+      "sha256": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/collectible.lua",
+      "size": 461,
+      "sha256": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/cube.gltf",
+      "size": 6485,
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/door.lua",
+      "size": 511,
+      "sha256": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/exploration.azurelevel",
+      "size": 11786,
+      "sha256": "015c6c35bafb0c9bea07c792a75ff52498a5931620a618a74a19cc43ecfa7fad"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/goal.lua",
+      "size": 298,
+      "sha256": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/guide.gltf",
+      "size": 64692,
+      "sha256": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/guide.lua",
+      "size": 236,
+      "sha256": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/hero.gltf",
+      "size": 62414,
+      "sha256": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/hero.lua",
+      "size": 1736,
+      "sha256": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/hud.rml",
+      "size": 1136,
+      "sha256": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/locomotion.json",
+      "size": 202,
+      "sha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/prefabs/checkpoint.azureprefab",
+      "size": 1452,
+      "sha256": "e600119d12e1118bdc33dadf4552db0716b450f84a2ad938783544c79fb92543"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/prefabs/collectible.azureprefab",
+      "size": 1226,
+      "sha256": "eb0a10ba381da9a3c1d0126d3181a6a82194367d6a8550e7c027d4f28702dae2"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/prefabs/door.azureprefab",
+      "size": 1430,
+      "sha256": "bd5cfe2dc287c463e2f5b3305411bbceadec6df6ef1ec29e53d7dfa8421110aa"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/prefabs/guide.azureprefab",
+      "size": 1199,
+      "sha256": "fea8f99bffe882ddd83f8ea1ce9ef8e7c256bd5a5ebb613a9016ade603e73cd4"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/assets/prefabs/hero.azureprefab",
+      "size": 1254,
+      "sha256": "29db1ed3f46ee247654f41ea4c5656bd568b380dfffa19bae8e156958e59fed1"
+    },
+    {
+      "path": "share/AzureRender/assets_public/exploration/project.azureproject",
+      "size": 1701,
+      "sha256": "9a08677c134a508812554d85477364925a75a76048856c8de8afceffd796f259"
+    },
+    {
+      "path": "share/AzureRender/assets_public/face_sdf_v1.png",
+      "size": 163950,
+      "sha256": "45a2bde466ad8ea335555cb697f8f1247893af471c4e40b0d5105d13dba19b51"
+    },
+    {
+      "path": "share/AzureRender/assets_public/fonts/.gitattributes",
+      "size": 46,
+      "sha256": "926c2b3b3ac6d1fc561e5f50a2de73f27d112512b2c491e260e70c0857a4857b"
+    },
+    {
+      "path": "share/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf",
+      "size": 148540,
+      "sha256": "d785334ac4e7810f571def986bbad41161f68ac385db8813f798bf04d71478e1"
+    },
+    {
+      "path": "share/AzureRender/assets_public/fonts/NotoSansCJK-LICENSE.txt",
+      "size": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "share/AzureRender/assets_public/fonts/NotoSansCJKsc-Regular.otf",
+      "size": 16437364,
+      "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+    },
+    {
+      "path": "share/AzureRender/assets_public/fonts/RmlUi-Sample-Fonts-LICENSE.txt",
+      "size": 14920,
+      "sha256": "c97278bb336ab0fb2d3bb7ba3f303d638224d6dd1edc6e6fcdd4ba28b8dbf2a6"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/courtyard.azurelevel",
+      "size": 2917,
+      "sha256": "f2425350f521d2744fbe1865819fb1bcf1bd6dcc9da1e329c3edbbc6941bac80"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/courtyard.azurelevel.azmeta",
+      "size": 112,
+      "sha256": "7bd12f945d1b6e779ec3822c7057723a1423c2d81d4b837d7f01a59b838222f4"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/destination.azurelevel",
+      "size": 1980,
+      "sha256": "2f73e52c9f227e7de3b98fe14772574394b4bb1640a7023cb9e089bd62b8cfd4"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/destination.azurelevel.azmeta",
+      "size": 112,
+      "sha256": "3adcd296a517ef284ede84307219adafae37476ab77b19724c06e7cfd0be278a"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/hero.gltf",
+      "size": 6375,
+      "sha256": "bd955f3c529f45cc7ac7533d35a4f1074fd41dbd87468d3aae95d358271bc421"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/hero.gltf.azmeta",
+      "size": 112,
+      "sha256": "232c95295294711e582a75f8ced53266abe71cccf17cf60cfee24cc2f4b136b9"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/hud.rml",
+      "size": 830,
+      "sha256": "4f58c899fb038ebcd732264eadd5716cc9ac24e95ab0647f8dd1db78420df848"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/hud.rml.azmeta",
+      "size": 112,
+      "sha256": "85a9f7877095fb2ff2f4f1a3e7c7fbe7ef3a562e343cc49e4ec0284e88be5656"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/motion.json",
+      "size": 131,
+      "sha256": "657137af56cd8e2a654239ca79ae7b2c58ebdc1b18e77f551cdc2064421fd735"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/motion.json.azmeta",
+      "size": 112,
+      "sha256": "4de33967e978ba82556ef0815cb6205ca661e74df6b3d3b1348b996c40ed1d05"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/player.lua",
+      "size": 588,
+      "sha256": "d7cb64003c08a392be46976af3df8558c10e5bb6a598101a824796184cca68a7"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/player.lua.azmeta",
+      "size": 112,
+      "sha256": "3d44b8707e39bee2cdf04aa87cabe71c8e3f209fdd905f7f2e8f83647a693038"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.gltf",
+      "size": 5788,
+      "sha256": "e51feda90b93e3608911cf01fcdf6e460ccb9abfc34659d23c41531b304adfcb"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.gltf.azmeta",
+      "size": 112,
+      "sha256": "dd848e369cbf1e2eaaaf50b2554bd73c1eef41de980cf76b920fea8e3b909ad5"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.lua",
+      "size": 246,
+      "sha256": "4f4470c2d9dbef46fac305b710168b65bfca8193b61893ab394f545b88669cbc"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.lua.azmeta",
+      "size": 112,
+      "sha256": "5c72df34816b9190c5989f91e3de3cf8ca36bd02faccdc9fe7feb9e8c4d917ad"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.wav",
+      "size": 24044,
+      "sha256": "d3e6dcc52bd9f2fe7ff5ce228e70f55c4b43aac78d0042d07e8617a579fae462"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/assets/portal.wav.azmeta",
+      "size": 112,
+      "sha256": "cf314f662956ae31355e0eb5740ba47aa7d81bd0f5abea1f86c24467a3ed62ee"
+    },
+    {
+      "path": "share/AzureRender/assets_public/gameplay/project.azureproject",
+      "size": 1700,
+      "sha256": "6556c21c17b516369f1f53d8170d207f5a150eb2a8abf2ef9ddcf95c1e4d706f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/level.schema.json",
+      "size": 1410,
+      "sha256": "98fceff6809fb145f75690e84a5522b6de6b8833e411fed9ab7c5728527d66dd"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/checkpoint.lua",
+      "size": 186,
+      "sha256": "60fa48454c184884f356b9806c230adb0247ab778538bec5c154ebf06eea290e"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/collectible.lua",
+      "size": 461,
+      "sha256": "6c0246eab1fb714ae42f0aa09fbba3c5ced3605d370b56bd5f351f4c839e8b5e"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/door.lua",
+      "size": 511,
+      "sha256": "43aac45a599c866aa9871390c9e705b1cbe45075b5a7adb0e9933b64874d43a9"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/goal.lua",
+      "size": 298,
+      "sha256": "e35fdd4cfcbe0c74845fd32f9e11668b4cf8a09dcc5734f746522d5507caa09f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/guide.lua",
+      "size": 236,
+      "sha256": "c17d9962634bfd9aca38e04e123d787bcdf116feefbac83f129cef93096d6e21"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/hero.lua",
+      "size": 1736,
+      "sha256": "eb374d5523253aef7c7d09655d02d09af8756b29dca5f16b07bbf082f0b44bf1"
+    },
+    {
+      "path": "share/AzureRender/assets_public/playable_rules/hud.rml",
+      "size": 1136,
+      "sha256": "bfe8f2d4d6bee41f730dd7081e437076b080089d5ae09e56bd15de62c0e67f72"
+    },
+    {
+      "path": "share/AzureRender/assets_public/procedural/building-parameters.json",
+      "size": 65,
+      "sha256": "c1dd6e9ca757282902fb85ba5126c41fe1a45ddc03f940a6960f125b02544f85"
+    },
+    {
+      "path": "share/AzureRender/assets_public/procedural/modular-solid.json",
+      "size": 733,
+      "sha256": "cc4d6b18d345d5afe26a7076d76227e1f7e31e294e6a964b6199d5d79ba86878"
+    },
+    {
+      "path": "share/AzureRender/assets_public/procedural/prop-parameters.json",
+      "size": 69,
+      "sha256": "54f9f30e35ee0ed4fe0d3bbe12dd16d70f37e72efc2b1d6847a3337371e8d053"
+    },
+    {
+      "path": "share/AzureRender/assets_public/procedural/rig/articulated-tool.json",
+      "size": 830,
+      "sha256": "45f64e478eae0c907f13ae9650a26e78b4cd5d1c5e61c7efb1838244e1a777d2"
+    },
+    {
+      "path": "share/AzureRender/assets_public/project.schema.json",
+      "size": 1067,
+      "sha256": "89d2186527c35fc5b4ad121b97188d49dd8f2dbfd6d6b63a1b8b1147df3c3611"
+    },
+    {
+      "path": "share/AzureRender/assets_public/README.md",
+      "size": 2059,
+      "sha256": "fe2887ddfe835176b6b7927b931d31c3538e6f4e1b6f6ccc010f30974d2910bf"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/ASSET-LICENSE.txt",
+      "size": 146,
+      "sha256": "f8ef53b792ffe57a10dff212f6fc131d5a2280a56cb275741d45de705967e5d3"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/ASSET-LICENSE.txt.azmeta",
+      "size": 112,
+      "sha256": "fe433be7e50d5864a0475c6a2ef16367ebdc4ea5e986c03fc771bed36be17b09"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/cube.gltf",
+      "size": 6485,
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/cube.gltf.azmeta",
+      "size": 112,
+      "sha256": "d794aaa642f4154a7566c28a57cb5a7b8e931f21374c03f35f8f33db646fc5f5"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/inspect.lua",
+      "size": 150,
+      "sha256": "65cd3f51247e1d70013f16b5a0514202c17e634f192625fdbf9c558ed2a01ce8"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/inspect.lua.azmeta",
+      "size": 112,
+      "sha256": "0e239402411bcafee6c9dbdf0511a2f0eaac629dd5bda5048edadb8b3e946211"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/inspection.azurelevel",
+      "size": 2234,
+      "sha256": "b88a44ec391d072dde4ddb0c9b9e7b09439f1e57c6c6e00d47fe80bce9dfc842"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/assets/inspection.azurelevel.azmeta",
+      "size": 112,
+      "sha256": "720c81fa6f905704af8b57d9a4157b7665ca5919a3437c74662962cf2db9bce2"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/project.azureproject",
+      "size": 721,
+      "sha256": "d04fe53ea867533b30bb1607dd0871a101bb1121efb72699bed7276a8bf13f51"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scene_inspector/README.md",
+      "size": 871,
+      "sha256": "7a1890faf8dbe1a96f7ef573690078fd8e64d1d39df2af63aaac5cba7c1d2c56"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scenes/clustered_lights_16.azscene",
+      "size": 3404,
+      "sha256": "d69f57d45c85b0030b214270af99ded51851deb243c0c03c72aa3a5e59304edf"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scenes/clustered_lights_empty.azscene",
+      "size": 612,
+      "sha256": "c53ccc0a679ad2bf25f7c8317f75ae5b011a8937364b5ae9b73f10090149256a"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scenes/material_mixed.azscene",
+      "size": 907,
+      "sha256": "e651448e474f3ff5fe9823fb46d40b7699ca0a5f8753363d11aa4fad4bcb17e6"
+    },
+    {
+      "path": "share/AzureRender/assets_public/scenes/r4_stress.azscene",
+      "size": 8580,
+      "sha256": "27d9f5c4bd4c1352c5d958f5963d34e907212dcdf5bc2580c46a3bdd24a919c0"
+    },
+    {
+      "path": "share/AzureRender/assets_public/showcase_looks.json",
+      "size": 1120,
+      "sha256": "d9ba40a092c73bced1275fc10a7f5163134e9202327f29eab925762695849769"
+    },
+    {
+      "path": "share/AzureRender/assets_public/test_env.hdr",
+      "size": 8303,
+      "sha256": "9935b3676f7fb92e0fbf9001c91813da70094f348c964d5e35498e19a9162b5c"
+    },
+    {
+      "path": "share/AzureRender/assets_public/test_env_strong.hdr",
+      "size": 8303,
+      "sha256": "ab81b28cc59175c5070d2155cd96d523173dacf42db0c601a232e26b6c92e5d7"
+    },
+    {
+      "path": "share/AzureRender/assets_public/test_model.gltf",
+      "size": 8307,
+      "sha256": "a17af75cbbf98bcdc751c1dc23506ec860e72ebef4204ad15c0262cd28391a95"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/CHARACTER-LICENSE.txt",
+      "size": 499,
+      "sha256": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/explorer.gltf",
+      "size": 62414,
+      "sha256": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/fixture_hair_data.png",
+      "size": 77,
+      "sha256": "177f6c121d90c56ddac6abdf5b3ee75cf1d533c7ccdc273e89317679ae76e770"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/assets/courtyard.azurelevel",
+      "size": 5725,
+      "sha256": "863c0b3f4fb03abc2f26c835ddcaad97da189cc20e5255c475a5741fcc033f61"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/assets/cube.gltf",
+      "size": 6485,
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/assets/guide.gltf",
+      "size": 64692,
+      "sha256": "0817b2c40bc7211be56c6f3fcd7f540c0093a6f517b255b1a9f03f9d8ba19fe8"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/assets/hero.gltf",
+      "size": 62414,
+      "sha256": "dcf625ab773c35aa6d1b9d833606dfe3e4314ba63f1b60951f6d6911bc321301"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/assets/locomotion.json",
+      "size": 202,
+      "sha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/game/project.azureproject",
+      "size": 245,
+      "sha256": "84933dc25d411d9235679fcd8a8b33f9a9c5603b20b39855fe9fdbd747719134"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/guide.gltf",
+      "size": 64692,
+      "sha256": "728038e1e60d9f6b518372d76bcd7e0b3ab7522840ccb66b80edbcc575ca0696"
+    },
+    {
+      "path": "share/AzureRender/assets_public/third_person/material_fixture.gltf",
+      "size": 46086,
+      "sha256": "af33d262e6b23f1212d226ad9857760ded7c1ca66d745035da10f3b3ba557bbc"
+    },
+    {
+      "path": "share/AzureRender/assets_public/toon_ramp_atlas.ppm",
+      "size": 7214,
+      "sha256": "ea9150c3bd3463042851cfbc3df31be07837d0b4d4f68b5b4b119f6b94db9c6f"
+    },
+    {
+      "path": "share/AzureRender/assets_public/toon_ramp_profiles.json",
+      "size": 2413,
+      "sha256": "6cff7f3924267eb03b4c5c0f4f4369e9cc4c8a8abfdfb4e90b909609febf06b6"
+    },
+    {
+      "path": "share/AzureRender/licenses/brotli-LICENSE.txt",
+      "size": 1084,
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94"
+    },
+    {
+      "path": "share/AzureRender/licenses/bzip2-LICENSE.txt",
+      "size": 1896,
+      "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3"
+    },
+    {
+      "path": "share/AzureRender/licenses/clipper2-LICENSE.txt",
+      "size": 1338,
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+    },
+    {
+      "path": "share/AzureRender/licenses/dotnet-LICENSE.txt",
+      "size": 1139,
+      "sha256": "d7a68596ab69b06f51ca278a6545148e4269a9381c26d597c13df5d88e08cf5b"
+    },
+    {
+      "path": "share/AzureRender/licenses/dotnet-THIRD-PARTY-NOTICES.txt",
+      "size": 75640,
+      "sha256": "40686c6447a7d5b5d3693068e4571b5f483d7ed335aeee773ef662440de4c5d5"
+    },
+    {
+      "path": "share/AzureRender/licenses/freetype-LICENSE.txt",
+      "size": 27496,
+      "sha256": "cf82ed29473c1fd8e137fd34250f89eebf2bee9e126fa004286dd25495d5c654"
+    },
+    {
+      "path": "share/AzureRender/licenses/gkNextEngine-LICENSE.txt",
+      "size": 1094,
+      "sha256": "1665f132200c8e9902f8546860e75603516ce7be673244d8db08cda639789db4"
+    },
+    {
+      "path": "share/AzureRender/licenses/glfw3-LICENSE.txt",
+      "size": 904,
+      "sha256": "149704059b5d0bf551637e50042dd4de9c2cae921021f6636298911e3a5f9462"
+    },
+    {
+      "path": "share/AzureRender/licenses/hwloc-LICENSE.txt",
+      "size": 2552,
+      "sha256": "d79a936a42f3c6cb7c8375a023d43f4435f4664d3a5a2ea6b4623cff83c7fc06"
+    },
+    {
+      "path": "share/AzureRender/licenses/imath-LICENSE.txt",
+      "size": 1497,
+      "sha256": "c20236d3b39fd20eba8e3d1fb3b892a5483df2e7d8d61bf43f165d3fac22f601"
+    },
+    {
+      "path": "share/AzureRender/licenses/imgui-LICENSE.txt",
+      "size": 1104,
+      "sha256": "f20418b409e53c8c9f4e90917ff395554a60320d4dfbf833da89b339cad8628a"
+    },
+    {
+      "path": "share/AzureRender/licenses/joltphysics-LICENSE.txt",
+      "size": 1052,
+      "sha256": "800abe35d64ad9defd636ff1ee8c961e06f0ebca3ef8d10083e8aa0e8ef86ac3"
+    },
+    {
+      "path": "share/AzureRender/licenses/LatoLatin-LICENSE.txt",
+      "size": 14920,
+      "sha256": "c97278bb336ab0fb2d3bb7ba3f303d638224d6dd1edc6e6fcdd4ba28b8dbf2a6"
+    },
+    {
+      "path": "share/AzureRender/licenses/libdeflate-LICENSE.txt",
+      "size": 1078,
+      "sha256": "4ad69099cb4374836fd27583d9991e2838cd86b6e4666ab26b2d32582c91e73a"
+    },
+    {
+      "path": "share/AzureRender/licenses/libpng-LICENSE.txt",
+      "size": 5345,
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    {
+      "path": "share/AzureRender/licenses/lua-LICENSE.txt",
+      "size": 1063,
+      "sha256": "32a2adbaf0d6ae5b0cdd56afe4ee5059d58c540a2f9ad90a346f31cb4b3fa3ef"
+    },
+    {
+      "path": "share/AzureRender/licenses/manifold-LICENSE.txt",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "share/AzureRender/licenses/miniaudio-LICENSE.txt",
+      "size": 2597,
+      "sha256": "457f1b500e0adf6bc059edddfa78a2f62012e7c3bb43476c20e0bd23b25ba0eb"
+    },
+    {
+      "path": "share/AzureRender/licenses/nlohmann-json-LICENSE.txt",
+      "size": 1076,
+      "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603"
+    },
+    {
+      "path": "share/AzureRender/licenses/NotoSansCJK-LICENSE.txt",
+      "size": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "share/AzureRender/licenses/openexr-LICENSE.txt",
+      "size": 1501,
+      "sha256": "84853c91d4c2e0310741d4773469d98bb93e61029608e0ba0882a3fffdf330bd"
+    },
+    {
+      "path": "share/AzureRender/licenses/openjph-LICENSE.txt",
+      "size": 1448,
+      "sha256": "5ddf5177863dfc9ab65fa129d587db651241f00e21ed2427b218bea997591f98"
+    },
+    {
+      "path": "share/AzureRender/licenses/rmlui-LICENSE.txt",
+      "size": 5786,
+      "sha256": "8cef322d47d08528c97e8a76cb3b0ac3460ea480afaf633c91d06f1f2a607f52"
+    },
+    {
+      "path": "share/AzureRender/licenses/sol2-LICENSE.txt",
+      "size": 1124,
+      "sha256": "4e171f2251b1170c0a6c9e836a36605565eee238cd64abf50ad43a01c9412ce4"
+    },
+    {
+      "path": "share/AzureRender/licenses/stb-LICENSE.txt",
+      "size": 2510,
+      "sha256": "bebfe904b14301657e4e5d655c811d51fd31b97c455b9cc2d8600d6bac6cff63"
+    },
+    {
+      "path": "share/AzureRender/licenses/tbb-LICENSE.txt",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "share/AzureRender/licenses/tinygltf-LICENSE.txt",
+      "size": 1112,
+      "sha256": "2ae461f8c8b78ed77c14e9c3b7e353ba277e44cb3dbfb5a6d380f76f2ae081a2"
+    },
+    {
+      "path": "share/AzureRender/licenses/zlib-LICENSE.txt",
+      "size": 1002,
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
+      "path": "share/AzureRender/runtime-build.json",
+      "size": 194,
+      "sha256": "a9bf1be44c2d38d0ba1d5abf44c09772bad1b917adc39497ff2e109dba8a1f04"
+    },
+    {
+      "path": "share/AzureRender/shaders/background.frag.spv",
+      "size": 8676,
+      "sha256": "204668b3f3df8083eaf6c6794d73345e5420b8fdef964bec02f595abf7002e5f"
+    },
+    {
+      "path": "share/AzureRender/shaders/background.vert.spv",
+      "size": 1316,
+      "sha256": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6"
+    },
+    {
+      "path": "share/AzureRender/shaders/background_bindless.frag.spv",
+      "size": 8740,
+      "sha256": "3311d2e8bd3fea868c2bbc24a6402c56d7a30e2e58998df5d213bedb91707f8c"
+    },
+    {
+      "path": "share/AzureRender/shaders/blackhole.frag.spv",
+      "size": 36488,
+      "sha256": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5"
+    },
+    {
+      "path": "share/AzureRender/shaders/blackhole.vert.spv",
+      "size": 1316,
+      "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+    },
+    {
+      "path": "share/AzureRender/shaders/blackhole_composite.frag.spv",
+      "size": 928,
+      "sha256": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db"
+    },
+    {
+      "path": "share/AzureRender/shaders/blackhole_taa.frag.spv",
+      "size": 8096,
+      "sha256": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf"
+    },
+    {
+      "path": "share/AzureRender/shaders/blackhole_taa_compute.frag.spv",
+      "size": 3840,
+      "sha256": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2"
+    },
+    {
+      "path": "share/AzureRender/shaders/bloom_composite.comp.spv",
+      "size": 2384,
+      "sha256": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42"
+    },
+    {
+      "path": "share/AzureRender/shaders/bloom_downsample.comp.spv",
+      "size": 3112,
+      "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+    },
+    {
+      "path": "share/AzureRender/shaders/clear.comp.spv",
+      "size": 784,
+      "sha256": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3"
+    },
+    {
+      "path": "share/AzureRender/shaders/cull_indirect.comp.spv",
+      "size": 4904,
+      "sha256": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a"
+    },
+    {
+      "path": "share/AzureRender/shaders/editor_ui.frag.spv",
+      "size": 1056,
+      "sha256": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550"
+    },
+    {
+      "path": "share/AzureRender/shaders/editor_ui_srgb.frag.spv",
+      "size": 1952,
+      "sha256": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b"
+    },
+    {
+      "path": "share/AzureRender/shaders/game-ui.frag.spv",
+      "size": 1568,
+      "sha256": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e"
+    },
+    {
+      "path": "share/AzureRender/shaders/game-ui.vert.spv",
+      "size": 1948,
+      "sha256": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2"
+    },
+    {
+      "path": "share/AzureRender/shaders/hud.frag.spv",
+      "size": 452,
+      "sha256": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73"
+    },
+    {
+      "path": "share/AzureRender/shaders/hud.vert.spv",
+      "size": 1048,
+      "sha256": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789"
+    },
+    {
+      "path": "share/AzureRender/shaders/ibl_prefilter.comp.spv",
+      "size": 6308,
+      "sha256": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510"
+    },
+    {
+      "path": "share/AzureRender/shaders/inner_outline.frag.spv",
+      "size": 11988,
+      "sha256": "090f3df385c91923cbd11eafb65afa4793c1cfdbfee3487f57362d29c1335798"
+    },
+    {
+      "path": "share/AzureRender/shaders/inner_outline.vert.spv",
+      "size": 1316,
+      "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+    },
+    {
+      "path": "share/AzureRender/shaders/mesh.frag.spv",
+      "size": 62044,
+      "sha256": "b83eefe7b94e8321d6884196639406bbbc884e466d34cce8ae2b577e8e8d2f24"
+    },
+    {
+      "path": "share/AzureRender/shaders/mesh.vert.spv",
+      "size": 11380,
+      "sha256": "79a353450e27090fa07c5d3e1083d408dae00be01e5727088d81f0b2853a81c7"
+    },
+    {
+      "path": "share/AzureRender/shaders/mesh_bindless.frag.spv",
+      "size": 63804,
+      "sha256": "1583af43f07c28fbbf74de90b3c92fdbb857aa7d5d91580bbfbb0ba0f06b5512"
+    },
+    {
+      "path": "share/AzureRender/shaders/mesh_compute.vert.spv",
+      "size": 10092,
+      "sha256": "b28fe8cca81b38e9eb985c96240010069e0af7cccc13310ed6430a50a84053e0"
+    },
+    {
+      "path": "share/AzureRender/shaders/modules/bloom-cached.spv",
+      "size": 3828,
+      "sha256": "23301eac711d0c2857d010ec727de046930a46f2c47a2422c3cd42e0ddd09bf4"
+    },
+    {
+      "path": "share/AzureRender/shaders/modules/bloom-cached.spv.json",
+      "size": 7377,
+      "sha256": "ccb5b5f343a036be7be8bdb241c42563592c3580a30dd1f570813ec12981cc44"
+    },
+    {
+      "path": "share/AzureRender/shaders/modules/bloom-direct.spv",
+      "size": 3280,
+      "sha256": "afcc627569044edf16dc0d263cac02405963cc8c8d30fe7e4196acc9cd08ed43"
+    },
+    {
+      "path": "share/AzureRender/shaders/modules/bloom-direct.spv.json",
+      "size": 7377,
+      "sha256": "ad474ad68766f2d43f9e7b1c53a7d08de97d7f4f62fbff546c214ce614da6a0c"
+    },
+    {
+      "path": "share/AzureRender/shaders/outline.frag.spv",
+      "size": 588,
+      "sha256": "0d1ea9a50cdab74436a321fb93862a1daec3ef997168f9b53b9a84bebe99d921"
+    },
+    {
+      "path": "share/AzureRender/shaders/outline.vert.spv",
+      "size": 6252,
+      "sha256": "152486e4d08af050154ee200a62bab4f036a9a513cfa16e336426e79e23db3f9"
+    },
+    {
+      "path": "share/AzureRender/shaders/outline_compute.vert.spv",
+      "size": 5012,
+      "sha256": "e71139cdbc2f38ac2704f919e331b4872f68b6a0f6cb003264ca073e0e5ce2ac"
+    },
+    {
+      "path": "share/AzureRender/shaders/shadow.frag.spv",
+      "size": 2044,
+      "sha256": "1c0bf146d9f816ee1fe0a84c387f8824a04ef20c5681556b165443181d7c4c4e"
+    },
+    {
+      "path": "share/AzureRender/shaders/shadow.vert.spv",
+      "size": 5872,
+      "sha256": "397e593b352cc1148031b667c82df705d8d50bf4cbf081361d33a593f067383d"
+    },
+    {
+      "path": "share/AzureRender/shaders/shadow_bindless.frag.spv",
+      "size": 2380,
+      "sha256": "9eaf513d31ead8439112d00e6dd367990a9d2500abf849083db81e74d87e10c6"
+    },
+    {
+      "path": "share/AzureRender/shaders/shadow_compute.vert.spv",
+      "size": 4888,
+      "sha256": "afb1f9cf159c9e997a5c783fb89dbed593b70ab0afe2f7f07f9d25360b3f1ba2"
+    },
+    {
+      "path": "share/AzureRender/shaders/skin.comp.spv",
+      "size": 10864,
+      "sha256": "d00930a5e5fccbb0bb918965c9a2e843a0df01a57297c42cb89a44ec56de1639"
+    },
+    {
+      "path": "share/AzureRender/shaders/view_resolve.frag.spv",
+      "size": 3440,
+      "sha256": "4c2e6de3854577d7dccee67dd697e16d47bcafac44abea0ab820140d51fd3d13"
+    },
+    {
+      "path": "share/AzureRender/shaders/visibility_prototype.comp.spv",
+      "size": 6360,
+      "sha256": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+    },
+    {
+      "path": "start-game.cmd",
+      "size": 126,
+      "sha256": "37d0550041e862010bef033862c2a8f6ee8b8faa7d7f1ace2fe34db8b22411f5"
+    }
+  ]
+}

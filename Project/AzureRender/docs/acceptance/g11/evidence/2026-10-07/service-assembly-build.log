@@ -1,0 +1,217 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows...
+Compiler found: D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * brotli:x64-windows@1.2.0
+  * bzip2[core,tool]:x64-windows@1.0.8#6
+  * clipper2:x64-windows@2.0.1
+  * freetype[core,zlib,png,bzip2,brotli]:x64-windows@2.14.3
+    glfw3:x64-windows@3.5.1
+  * hwloc:x64-windows@2.11.2
+  * imath:x64-windows@3.2.2
+  * itlib:x64-windows@1.12.2
+    joltphysics:x64-windows@5.6.0
+  * libdeflate[core,zlib,gzip,decompression,compression]:x64-windows@1.25
+  * libpng:x64-windows@1.6.58
+    lua:x64-windows@5.4.8
+    manifold:x64-windows@3.5.2
+    miniaudio:x64-windows@0.11.25
+  * nlohmann-json:x64-windows@3.12.0#2
+    openexr:x64-windows@3.4.13
+  * openjph:x64-windows@0.31.0
+    rmlui[core,freetype]:x64-windows@6.3
+  * robin-hood-hashing:x64-windows@3.11.5#2
+    sol2:x64-windows@3.5.0#1
+    stb:x64-windows@2024-07-29#1
+  * tbb[core,hwloc]:x64-windows@2023.1.0
+    tinygltf:x64-windows@3.0.0#1
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2026-07-21
+    vulkan-memory-allocator:x64-windows@3.4.0
+  * zlib:x64-windows@1.3.2#1
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+joltphysics provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Jolt CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Jolt::Jolt)
+
+Use this package via the module FindLua that comes with CMake. To use in your CMakeLists.txt:
+
+    find_package(Lua REQUIRED)
+    target_include_directories(main PRIVATE ${LUA_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${LUA_LIBRARIES})
+
+manifold provides CMake targets:
+
+  find_package(manifold CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE manifold::manifold)
+
+miniaudio is header-only and can be used from CMake via:
+
+  find_path(MINIAUDIO_INCLUDE_DIRS "miniaudio.h")
+  target_include_directories(main PRIVATE ${MINIAUDIO_INCLUDE_DIRS})
+
+openexr provides CMake targets:
+
+    find_package(OpenEXR CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpenEXR::OpenEXR)
+
+rmlui provides CMake targets:
+
+    find_package(RmlUi CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE RmlUi::RmlUi)
+
+sol2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(sol2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE sol2::sol2)
+
+sol2 provides pkg-config modules:
+
+  # C++ <-> Lua Wrapper Library
+  sol2
+
+The package stb provides CMake targets:
+
+    find_package(Stb REQUIRED)
+    target_include_directories(main PRIVATE ${Stb_INCLUDE_DIR})
+tinygltf is header-only and can be used from CMake via:
+
+  find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+  target_include_directories(main PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+
+VulkanMemoryAllocator provides official find_package support. However, it requires the user to provide the include directory containing `vulkan/vulkan.h`. There are multiple ways to achieve this and VulkanMemoryAllocator is compatible with all of them.
+
+    find_package(Vulkan) # https://cmake.org/cmake/help/latest/module/FindVulkan.html, CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Vulkan GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(Vulkan) # CMake 3.21+
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+or
+
+    find_package(VulkanHeaders CONFIG) # From the vulkan-headers port
+    find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vulkan::Headers GPUOpen::VulkanMemoryAllocator)
+
+See the documentation for more information on setting up your project: https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/index.html
+
+All requested installations completed successfully in: 714 us
+-- Running vcpkg install - done
+-- Found Freetype target Freetype::Freetype - Freetype font engine enabled
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+[0/4] Re-checking globbed directories...
+[1/96] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ModuleAssembly.cpp.obj
+[3/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AudioRuntime.cpp.obj
+[4/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneDocument.cpp.obj
+[5/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SceneRenderSnapshot.cpp.obj
+[6/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ScriptRuntimeRegistry.cpp.obj
+[7/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\EngineSettings.cpp.obj
+[8/96] Building CXX object CMakeFiles\AzureProjectTests.dir\tests\ProjectTests.cpp.obj
+[9/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AnimationStateMachine.cpp.obj
+[10/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\app\CommandLine.cpp.obj
+[11/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PhysicsWorld.cpp.obj
+[12/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ObservationRegistry.cpp.obj
+[13/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\MiniaudioImpl.cpp.obj
+[14/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameUi.cpp.obj
+[15/96] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\BindingDescriptor.cpp.obj
+[16/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\SystemRegistry.cpp.obj
+[17/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Prefab.cpp.obj
+[18/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetGeneration.cpp.obj
+[19/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\PresentationRuntime.cpp.obj
+[20/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\GameRuntime.cpp.obj
+[21/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Project.cpp.obj
+[22/96] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\LuaScriptingModule.cpp.obj
+[23/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\LevelSession.cpp.obj
+[24/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\AssetDatabase.cpp.obj
+[25/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\ComponentRegistry.cpp.obj
+[26/96] Building CXX object CMakeFiles\AzureRuntime.dir\src\runtime\Level.cpp.obj
+[27/96] Building CXX object CMakeFiles\AzureProjectRuntime.dir\src\app\ProjectRuntimeAssembly.cpp.obj
+[28/96] Building CXX object CMakeFiles\AzureScriptingHost.dir\src\scripting\ScriptBindingHost.cpp.obj
+[29/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\DeveloperServices.cpp.obj
+[30/96] Linking CXX static library AzureRuntime.lib
+[31/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalOperations.cpp.obj
+[32/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[33/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalController.cpp.obj
+[34/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[35/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\adapters\ProposalAdapters.cpp.obj
+[36/96] Linking CXX static library AzureScriptingHost.lib
+[37/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[38/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[39/96] Building CXX object CMakeFiles\AzureLuaScripting.dir\src\scripting\lua\ScriptRuntime.cpp.obj
+[40/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[41/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\SelectionService.cpp.obj
+[42/96] Linking CXX static library AzureLuaScripting.lib
+[43/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[44/96] Linking CXX static library AzureProjectRuntime.lib
+[45/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditService.cpp.obj
+[46/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorContext.cpp.obj
+[47/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[48/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditTransaction.cpp.obj
+[49/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[50/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[51/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[52/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[53/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[54/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[55/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[56/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[57/96] Linking CXX executable AzureProjectTests.exe
+[58/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSettings.cpp.obj
+[59/96] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[60/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[61/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderCapture.cpp.obj
+[62/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[63/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[64/96] Linking CXX static library AzureEditor.lib
+[65/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDevtools.cpp.obj
+[66/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderResources.cpp.obj
+[67/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSettings.cpp.obj
+[68/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[69/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderValidation.cpp.obj
+[70/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderFrame.cpp.obj
+[71/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderSupport.cpp.obj
+[72/96] Building CXX object CMakeFiles\AzureScriptBackendContractTests.dir\tests\ScriptBackendContractTests.cpp.obj
+[73/96] Building CXX object CMakeFiles\AzureScriptEntityTests.dir\tests\ScriptEntityTests.cpp.obj
+[74/96] Building CXX object CMakeFiles\AzureRenderHost.dir\src\app\AzureRenderApp.cpp.obj
+[75/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderGameplay.cpp.obj
+[76/96] Building CXX object CMakeFiles\AzureScriptRuntimeTests.dir\tests\ScriptRuntimeTests.cpp.obj
+[77/96] Linking CXX static library AzureRenderHost.lib
+[78/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderValidation.cpp.obj
+[79/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderDescriptors.cpp.obj
+[80/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderPipeline.cpp.obj
+[81/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderResources.cpp.obj
+[82/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderCapture.cpp.obj
+[83/96] Linking CXX executable AzureScriptEntityTests.exe
+[84/96] Linking CXX executable AzureScriptBackendContractTests.exe
+[85/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderApp.cpp.obj
+[86/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderSupport.cpp.obj
+[87/96] Building CXX object CMakeFiles\AzurePlayer.dir\src\player\main.cpp.obj
+[88/96] Linking CXX executable AzureScriptRuntimeTests.exe
+[89/96] Building CXX object CMakeFiles\AzurePlayerHost.dir\src\app\AzureRenderFrame.cpp.obj
+[90/96] Building CXX object CMakeFiles\AzureRender.dir\src\main.cpp.obj
+[91/96] Linking CXX static library AzurePlayerHost.lib
+[92/96] Linking CXX executable AzurePlayer.exe
+[93/96] Linking CXX executable AzureRender.exe

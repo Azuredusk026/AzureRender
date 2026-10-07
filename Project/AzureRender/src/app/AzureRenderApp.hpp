@@ -12,7 +12,7 @@
 #include "runtime/GameRuntime.hpp"
 #include "runtime/EngineSettings.hpp"
 #include "runtime/GameInputReplay.hpp"
-#include "runtime/ScriptRuntime.hpp"
+#include "runtime/IScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "runtime/GameUi.hpp"
 #include "render/GameUiRenderer.hpp"
@@ -197,7 +197,7 @@ private:
     nlohmann::json resourceFrameSamples_=nlohmann::json::array();
     std::uint64_t sampledLevelRevision_=0;
     nlohmann::json gameRouteFrames_=nlohmann::json::array();
-    std::unique_ptr<azurerender::ScriptRuntime> scriptRuntime_;
+    std::unique_ptr<azurerender::IScriptRuntime> scriptRuntime_;
     std::unique_ptr<azurerender::PresentationRuntime> presentationRuntime_;
     std::unique_ptr<azurerender::GameUiRenderer> gameUiRenderer_;
     std::unique_ptr<azurerender::GameUi> gameUi_;
@@ -401,7 +401,7 @@ private:
     azurerender::PresentationRuntime* activePresentation();
     azurerender::RuntimeLifecycle* activeRuntime();
     azurerender::GameRuntime* activeGame();
-    azurerender::ScriptRuntime* activeScripts();
+    azurerender::IScriptRuntime* activeScripts();
     azurerender::AssetDatabase* activeAssets();
     void buildRenderContext(azurerender::RenderContext& context);
     azurerender::scene::SceneDescription resolveRenderDescription(

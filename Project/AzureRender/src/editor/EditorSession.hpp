@@ -4,7 +4,7 @@
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
-#include "runtime/ScriptRuntime.hpp"
+#include "runtime/IScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "editor/commands/EditService.hpp"
 #include "editor/PanelContext.hpp"
@@ -42,7 +42,7 @@ public:
     GameRuntime* game() noexcept;
     RuntimeLifecycle* runtime() noexcept;
     LevelSession* levels() noexcept;
-    ScriptRuntime* scripts() noexcept;
+    IScriptRuntime* scripts() noexcept;
     PresentationRuntime* presentation() noexcept;
     double advance(double delta);
     SceneDocument viewScene();

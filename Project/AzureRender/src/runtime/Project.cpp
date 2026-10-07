@@ -101,6 +101,15 @@ Project Project::load(const std::filesystem::path& path) {
             document.at("schemaVersion") != kSchemaVersion)
             throw std::runtime_error("Unsupported project schemaVersion");
         Project project;
+        if(document.contains("scripting")) {
+            project.scriptingConfiguration=document.at("scripting");
+            const auto& configuration=project.scriptingConfiguration;
+            if(!configuration.is_object() || !configuration.contains("schemaVersion")
+                || !configuration.at("schemaVersion").is_number_integer() || configuration.at("schemaVersion")!=1
+                || !configuration.contains("backend") || !configuration.at("backend").is_string()
+                || configuration.at("backend").get<std::string>().empty())
+                throw std::invalid_argument("Unsupported scripting configuration");
+        }
         if(document.contains("runtime")) {
             project.runtimeConfiguration=document.at("runtime");
             if(!project.runtimeConfiguration.is_object()||!project.runtimeConfiguration.contains("schemaVersion")

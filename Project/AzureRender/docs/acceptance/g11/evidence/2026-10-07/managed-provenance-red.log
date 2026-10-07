@@ -1,0 +1,13 @@
+.F..
+======================================================================
+FAIL: test_managed_module_tampering_is_rejected (__main__.ProvenanceTests.test_managed_module_tampering_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_build_provenance.py", line 15, in test_managed_module_tampering_is_rejected
+    self.assertIn(native,products)
+AssertionError: WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpt905ynib/managed/nativeaot/Azure.Engine.Native.dll') not found in [WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpt905ynib/AzureRender.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpt905ynib/AzurePlayer.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpt905ynib/AzureMetaGen.exe'), WindowsPath('C:/Users/23587/AppData/Local/Temp/tmpt905ynib/AzureGeometryCompiler.exe')]
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.350s
+
+FAILED (failures=1)

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 56: AzureEngine.ScriptBackendContract
+1/4 Test #56: AzureEngine.ScriptBackendContract ...   Passed    0.06 sec
+    Start 57: AzureEngine.ScriptRuntime
+2/4 Test #57: AzureEngine.ScriptRuntime ...........   Passed    0.78 sec
+    Start 61: AzureEngine.ScriptEntities
+3/4 Test #61: AzureEngine.ScriptEntities ..........   Passed    0.14 sec
+    Start 96: AzureEngine.RuntimeLifecycle
+4/4 Test #96: AzureEngine.RuntimeLifecycle ........   Passed    0.03 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   1.02 sec

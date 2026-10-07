@@ -530,7 +530,17 @@ flowchart TB
 候选文档在结构、类型与引用校验后提交。
 版本与历史规则见[编辑操作参考](runtime/edit-operations.md)。
 
+## 脚本服务与语言模块
+
+运行时核心声明 `IScriptRuntime` 与后端注册表。
+公共绑定宿主校验类型、权限与对象世代。
+Lua 和可选托管模块提供语言适配与生命周期。
+Player 和编辑预览消费项目装配入口。
+
+绑定生成、ABI 与部署见[脚本服务](runtime/script-services.md)。
+
 ## 程序化内容模块
+
 
 `AzureProcedural` 提供参数化几何与刚体文本契约。
 编辑宿主注入受控编译服务并注册生成器。

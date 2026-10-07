@@ -71,6 +71,7 @@ find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
 find_package(Lua 5.4 EXACT REQUIRED)
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
 find_package(RmlUi CONFIG REQUIRED)
 find_path(MINIAUDIO_INCLUDE_DIR miniaudio.h REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
@@ -299,6 +300,7 @@ add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTI
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/runtime/ScriptRuntimeRegistry.cpp
     src/runtime/EngineSettings.cpp
     src/runtime/ObservationRegistry.cpp
     src/runtime/ModuleAssembly.cpp
@@ -316,13 +318,38 @@ add_library(AzureRuntime STATIC
     src/runtime/LevelSession.cpp
     src/runtime/PhysicsWorld.cpp
     src/runtime/GameRuntime.cpp
-    src/runtime/ScriptRuntime.cpp
     src/runtime/GameUi.cpp
     src/runtime/AnimationStateMachine.cpp
     src/runtime/PresentationRuntime.cpp
     src/runtime/AudioRuntime.cpp
     src/runtime/MiniaudioImpl.cpp
 )
+add_custom_target(AzureScriptBindingCheck
+    COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_script_bindings.py" --check
+    VERBATIM)
+add_library(AzureScriptingHost STATIC src/scripting/BindingDescriptor.cpp src/scripting/ScriptBindingHost.cpp src/scripting/ScriptHostSession.cpp)
+target_link_libraries(AzureScriptingHost PUBLIC AzureRuntime)
+add_dependencies(AzureScriptingHost AzureScriptBindingCheck)
+option(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE "Enable trusted managed scripting prototypes" OFF)
+if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+    if(NOT WIN32)
+        message(FATAL_ERROR "Managed scripting prototype currently supports Windows x64")
+    endif()
+    find_program(AZURE_DOTNET_EXECUTABLE dotnet REQUIRED)
+    file(GLOB_RECURSE AZURE_MANAGED_INPUTS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/managed/*.cs" "${CMAKE_CURRENT_SOURCE_DIR}/managed/*.json" "${CMAKE_CURRENT_SOURCE_DIR}/managed/*.csproj")
+    set(AZURE_MANAGED_OUTPUT "${CMAKE_BINARY_DIR}/managed")
+    add_custom_command(OUTPUT "${AZURE_MANAGED_OUTPUT}/complete.stamp"
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/build_managed_scripts.py" --output "${AZURE_MANAGED_OUTPUT}"
+        DEPENDS ${AZURE_MANAGED_INPUTS} schemas/script_bindings.json tools/build_managed_scripts.py
+        VERBATIM)
+    add_custom_target(AzureManagedArtifacts DEPENDS "${AZURE_MANAGED_OUTPUT}/complete.stamp")
+    add_library(AzureManagedScripting STATIC src/scripting/dotnet/ManagedModule.cpp src/scripting/dotnet/ManagedScriptRuntime.cpp src/scripting/dotnet/ManagedScriptingModule.cpp)
+    target_link_libraries(AzureManagedScripting PUBLIC AzureScriptingHost)
+    add_dependencies(AzureManagedScripting AzureManagedArtifacts)
+endif()
+add_library(AzureLuaScripting STATIC src/scripting/lua/ScriptRuntime.cpp src/scripting/lua/LuaScriptingModule.cpp)
+target_link_libraries(AzureLuaScripting PUBLIC AzureScriptingHost PRIVATE sol2::sol2 ${LUA_LIBRARIES})
+target_include_directories(AzureLuaScripting PRIVATE ${LUA_INCLUDE_DIR})
 add_library(AzureGameplay STATIC
     src/gameplay/CharacterMovementSystem.cpp
     src/gameplay/CameraFollowSystem.cpp
@@ -335,7 +362,13 @@ if(WIN32)
     target_link_libraries(AzureValidation PRIVATE ws2_32)
 endif()
 add_library(AzureProjectRuntime STATIC src/app/ProjectRuntimeAssembly.cpp)
-target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay)
+target_link_libraries(AzureProjectRuntime PUBLIC AzureGameplay AzureLuaScripting)
+if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+    target_link_libraries(AzureProjectRuntime PUBLIC AzureManagedScripting)
+    target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=1)
+else()
+    target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=0)
+endif()
 add_library(AzureEditor STATIC
     src/editor/preview/AssetThumbnailService.cpp
     src/editor/preview/DeveloperServices.cpp
@@ -391,8 +424,7 @@ target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
-target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi PRIVATE sol2::sol2 ${LUA_LIBRARIES})
-target_include_directories(AzureRuntime PRIVATE ${LUA_INCLUDE_DIR})
+target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 if(WIN32)
     target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
@@ -423,6 +455,7 @@ add_dependencies(AzureRender AzureGeometryCompiler)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_test(NAME AzureTools.ScriptBindings COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_script_bindings.py")
     add_executable(AzureVisibilityPrototypeTests tests/VisibilityPrototypeTests.cpp)
     target_link_libraries(AzureVisibilityPrototypeTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.VisibilityPrototype COMMAND AzureVisibilityPrototypeTests)
@@ -611,6 +644,31 @@ if(BUILD_TESTING)
     target_link_libraries(AzureGameplayPresentationTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.GameplayPresentation COMMAND AzureGameplayPresentationTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/gameplay/assets/portal.wav")
     add_executable(AzureScriptRuntimeTests tests/ScriptRuntimeTests.cpp)
+    add_executable(AzureScriptBackendContractTests tests/ScriptBackendContractTests.cpp)
+    target_link_libraries(AzureScriptBackendContractTests PRIVATE AzureProjectRuntime)
+    add_test(NAME AzureEngine.ScriptBackendContract COMMAND AzureScriptBackendContractTests)
+    add_executable(AzureScriptInteropTests tests/ScriptInteropTests.cpp)
+    target_link_libraries(AzureScriptInteropTests PRIVATE AzureProjectRuntime)
+    add_test(NAME AzureEngine.ScriptInterop COMMAND AzureScriptInteropTests)
+    if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+        add_executable(AzureManagedModuleTests tests/ManagedModuleTests.cpp)
+        target_link_libraries(AzureManagedModuleTests PRIVATE AzureProjectRuntime AzureManagedScripting)
+        foreach(AZURE_BACKEND coreclr nativeaot)
+            add_test(NAME AzureEngine.ManagedModule.${AZURE_BACKEND} COMMAND AzureManagedModuleTests "${AZURE_BACKEND}" "${AZURE_MANAGED_OUTPUT}/${AZURE_BACKEND}")
+        endforeach()
+        add_executable(AzureManagedScriptRuntimeTests tests/ManagedScriptRuntimeTests.cpp)
+        target_link_libraries(AzureManagedScriptRuntimeTests PRIVATE AzureProjectRuntime)
+        foreach(AZURE_BACKEND coreclr nativeaot)
+            add_test(NAME AzureEngine.ManagedRuntime.${AZURE_BACKEND} COMMAND AzureManagedScriptRuntimeTests "${AZURE_BACKEND}" "${AZURE_MANAGED_OUTPUT}/${AZURE_BACKEND}")
+        endforeach()
+        add_test(NAME AzureEngine.ScriptBackendParity.lua COMMAND AzureManagedScriptRuntimeTests lua "${AZURE_MANAGED_OUTPUT}/coreclr")
+        foreach(AZURE_BACKEND coreclr nativeaot)
+            add_test(NAME AzureEngine.ManagedWorkflows.${AZURE_BACKEND} COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_managed_workflows.py" --build-dir "${CMAKE_BINARY_DIR}"
+                --backend "${AZURE_BACKEND}" --configuration "$<CONFIG>" --evidence "${CMAKE_BINARY_DIR}/managed-workflows/${AZURE_BACKEND}")
+            set_tests_properties(AzureEngine.ManagedWorkflows.${AZURE_BACKEND} PROPERTIES LABELS "gpu;script" RUN_SERIAL TRUE TIMEOUT 600)
+        endforeach()
+    endif()
     target_link_libraries(AzureScriptRuntimeTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.ScriptRuntime COMMAND AzureScriptRuntimeTests)
     add_executable(AzurePhysicsInputTests tests/PhysicsInputTests.cpp)
@@ -682,6 +740,8 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.IndependentAnimationGpu AzureEngine.ThirdPersonPlayer PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.PlayablePlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_playable_player.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.PlayablePlayer PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.OptionalRuntimeTrace COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_optional_runtime_trace.py" --player $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureEngine.OptionalRuntimeTrace PROPERTIES TIMEOUT 180 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.RuntimeSpawnGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_runtime_spawn_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.RuntimeSpawnGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     set_tests_properties(AzureEngine.MaterialFixtureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
@@ -1381,8 +1441,12 @@ else()
 endif()
 set(CPACK_PACKAGE_FILE_NAME
     "AzureRender-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${AZURERENDER_PACKAGE_ARCH}")
+set(AZURE_SCRIPT_BACKENDS "\"lua\"")
+if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+    set(AZURE_SCRIPT_BACKENDS "\"lua\", \"coreclr\", \"nativeaot\"")
+endif()
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/runtime-build-$<CONFIG>.json"
-    CONTENT "{\n  \"schemaVersion\": 1,\n  \"engineVersion\": \"${PROJECT_VERSION}\",\n  \"configuration\": \"$<CONFIG>\",\n  \"architecture\": \"${AZURERENDER_PACKAGE_ARCH}\",\n  \"platform\": \"${CMAKE_SYSTEM_NAME}\"\n}\n")
+    CONTENT "{\n  \"schemaVersion\": 1,\n  \"engineVersion\": \"${PROJECT_VERSION}\",\n  \"configuration\": \"$<CONFIG>\",\n  \"architecture\": \"${AZURERENDER_PACKAGE_ARCH}\",\n  \"platform\": \"${CMAKE_SYSTEM_NAME}\",\n  \"scriptBackends\": [${AZURE_SCRIPT_BACKENDS}]\n}\n")
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/runtime-build-$<CONFIG>.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender" RENAME "runtime-build.json")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/tools/build_game.py"
@@ -1430,3 +1494,14 @@ install(FILES
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/gknextengine/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "gkNextEngine-LICENSE.txt")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/script-services.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/managed-scripts.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g11-implementation.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/schemas/script_bindings.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/schemas")
+if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+    install(DIRECTORY "${AZURE_MANAGED_OUTPUT}/coreclr/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/scripting/coreclr" FILES_MATCHING PATTERN "*.dll" PATTERN "*.json")
+    install(FILES "${AZURE_MANAGED_OUTPUT}/nativeaot/Azure.Engine.Native.dll" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/scripting/nativeaot")
+    install(FILES "${AZURE_MANAGED_OUTPUT}/manifest.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/scripting")
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/dotnet/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "dotnet-LICENSE.txt")
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/dotnet/THIRD-PARTY-NOTICES.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "dotnet-THIRD-PARTY-NOTICES.txt")
+endif()

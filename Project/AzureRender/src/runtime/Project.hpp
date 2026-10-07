@@ -12,6 +12,7 @@ class Project final {
     std::filesystem::path file;
     std::string id, name, startupScene;
     nlohmann::json runtimeConfiguration = nullptr;
+    nlohmann::json scriptingConfiguration = {{"schemaVersion",1},{"backend","lua"}};
     std::map<std::string, std::filesystem::path> mounts;
     static void create(const std::filesystem::path& directory, const std::string& name);
     static void createGame(const std::filesystem::path& directory, const std::string& name);

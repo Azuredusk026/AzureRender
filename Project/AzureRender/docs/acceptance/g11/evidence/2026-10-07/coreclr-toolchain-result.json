@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "backend": "CoreCLR",
+  "runtime": "9.0.11",
+  "input": 41,
+  "output": 42,
+  "startupMs": 152.19070000603097,
+  "scope": "toolchain probe; not script lifecycle acceptance"
+}
