@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "occludedCameras": [
+    "face-side-left",
+    "face-side-right"
+  ],
+  "maximumOccludedBrowPixels": 16,
+  "review": "Side-view bangs fully occlude eyebrow geometry; front and three-quarter contribution gate remains 90 percent"
+}

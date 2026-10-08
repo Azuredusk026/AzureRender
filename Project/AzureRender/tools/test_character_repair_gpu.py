@@ -11,16 +11,19 @@ def main():
     parser.add_argument('--executable', type=Path, required=True)
     parser.add_argument('--asset', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--anti-aliasing',choices=['off','edge','supersample'],default='edge')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     results = {}
     for name, flags in [('base', []), ('off', ['--qa-effect','overlay','--qa-effect-state','disabled'])]:
         target = args.output / name
         cmd = [str(args.executable.resolve()),'--asset',str(args.asset.resolve()),'--width','1280','--height','720',
-               '--qa-camera','face-front','--capture-frames','1','--capture-dir',str(target.resolve()),*flags]
+               '--qa-camera','face-front','--anti-aliasing',args.anti_aliasing,'--capture-frames','1','--capture-dir',str(target.resolve()),*flags]
         run = subprocess.run(cmd,capture_output=True,text=True,encoding='utf-8',errors='replace')
         (args.output/(name+'.log')).write_text(run.stdout+run.stderr,encoding='utf-8')
         if run.returncode: raise RuntimeError(run.stderr)
+        assert 'VUID-' not in run.stderr and 'Validation Error' not in run.stderr
+        assert 'Allocator after unload: buffers=0 images=0' in run.stdout
         results[name] = np.asarray(Image.open(target/'frame_000000.png').convert('RGB'),dtype=np.int16)
     # White Face-D islands protruding in front of red bangs. Fixed forehead ROI.
     y0,y1,x0,x1 = 245,395,430,850

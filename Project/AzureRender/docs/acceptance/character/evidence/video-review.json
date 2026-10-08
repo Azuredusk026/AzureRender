@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "framesReviewed": 384,
+  "frameRangeInclusive": [
+    0,
+    383
+  ],
+  "fullFrameKeyframes": [
+    0,
+    96,
+    192,
+    288,
+    383
+  ],
+  "cropRegions": {
+    "head": [
+      1024,
+      48,
+      1536,
+      560
+    ],
+    "clothing": [
+      880,
+      470,
+      1680,
+      1030
+    ]
+  },
+  "previewSizes": {
+    "head": [
+      160,
+      160
+    ],
+    "clothing": [
+      160,
+      112
+    ]
+  },
+  "pagesReviewed": 16,
+  "pageSha256": {
+    "page-00.png": "f472a16c0363c1444929f9480301ae21908839fedff2944acd08f7ee84c5101d",
+    "page-01.png": "c5d139ca1381f51fe38ca429f4498af8dd78fb2f51e694292940209988261b9a",
+    "page-02.png": "1fa939ca76ca6b59d9eccdb95a83f01b944bb7c4afb9077f2b065875e0b13c44",
+    "page-03.png": "dcdb93bf06397023cc611d15505c854141d8c3fd150571478cef85a4a4e772d2",
+    "page-04.png": "8316fb9cba27aa5c649bb80db02c2eb1b83784e64a2e094a2beccf3cd97dcedb",
+    "page-05.png": "6dc04cf936cfe27cea1453e0cec2cba079f3bac5ae69e087b001759a45e8532e",
+    "page-06.png": "4c8e13a7f341e26c76d6c8e5415f1a072d002893b2b3bf0e0462b6343806bd61",
+    "page-07.png": "3f93897caab81bfb5e25f97ab579b0438bec0a11edfa3f6abe2c72896addeeb2",
+    "page-08.png": "56454c2122caac83cd774ecfdddd92a1b280cc45182527f32c31f24edb70b1ab",
+    "page-09.png": "99ed2ba1282e01f435a7ebe150eeeba269ecd01e15319c6545ba87a03afcc9be",
+    "page-10.png": "de7838f1a85ef97af6b0deb8890074e7a66e3b28442088ce9d1b73b2d4a06df7",
+    "page-11.png": "a417f5ac4a2d921cfbbfe995654b1f30fd56da2d64732c776724e12bde32aec1",
+    "page-12.png": "18f63f88a35ca1297662bb4fb17a0261655980dc1ba26b3bb2e23a70c0cee953",
+    "page-13.png": "a2aa06a8a1399de55f3b30a6974d64a2d57be7e2b844ecd15b28eec7b4b5f6b5",
+    "page-14.png": "6a3127c870b3eeb416585a38fe019f0762e7dad9dac13446617aec2fbe807564",
+    "page-15.png": "bfcf8832f6cd2494862ae8ff443e3e23052cbd3b968bcf744b4928a311ca8206"
+  },
+  "fullResolutionDetailCrops": [
+    "face-review.png",
+    "cloth-review.png"
+  ],
+  "observations": {
+    "unexpectedHairWhiteBlockObserved": false,
+    "discontinuousMaterialPatchObserved": false,
+    "silhouetteBreakObserved": false
+  },
+  "scope": "Visual review of head/clothing sequence previews and whole-frame keyframes; original-pixel detail crops supplement preview review. Frozen automated temporal and sampling metrics provide separate quantitative evidence."
+}

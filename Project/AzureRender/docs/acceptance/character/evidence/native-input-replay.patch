@@ -1,0 +1,12 @@
+--- a/tools/test_editor_native_input.py
++++ b/tools/test_editor_native_input.py
+@@ -117,7 +117,8 @@
+             wait(10)
+         wait(20); baseline=state(); saved=call('query',name='document.contentHash')
+         image=baseline['image'];x=image['x']+image['width']/2;y=image['y']+image['height']/2
+-        post(0x7);mouse(0x200,x,y);mouse(0x201,x,y,1);mouse(0x202,x,y)
++        # A distinct second move refreshes GLFW/ImGui after queued enter/leave events.
++        post(0x7);mouse(0x200,x-3,y-3);mouse(0x200,x,y);mouse(0x201,x,y,1);mouse(0x202,x,y)
+         for value,expected in (('E',1),('R',2),('W',0),('Q',3)):
+             key(value,True);key(value,False);assert state()['gizmoMode']==expected,(value,state()['gizmoMode'])
+         other='ground' if workflow=='exploration' else 'asset-b'

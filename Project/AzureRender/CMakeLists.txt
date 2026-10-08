@@ -564,6 +564,15 @@ if(BUILD_TESTING)
     add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
     target_include_directories(AzureTextureFilteringTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.TextureFiltering COMMAND AzureTextureFilteringTests)
+    add_test(NAME AzureRender.SamplingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_sampling.py"
+        --executable "$<TARGET_FILE:AzureRender>" --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-fixture")
+    set_tests_properties(AzureRender.SamplingGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    if(WIN32)
+        add_test(NAME AzureRender.SamplingHostGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_sampling_host.py"
+            --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-host")
+        set_tests_properties(AzureRender.SamplingHostGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    endif()
     add_test(NAME AzureRender.CharacterRepair COMMAND AzureCharacterRepairTests
         "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
     find_program(AZURE_NODE_EXECUTABLE node)

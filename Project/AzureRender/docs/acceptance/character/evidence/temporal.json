@@ -1,6 +1,6 @@
 {
   "assetSha256": "4fbb2431d85d73015b44a3ffef260455123ed6593ba6b7b1fc7129ab77fa6753",
-  "executableSha256": "3fa4aed22c34891a17bdbc097766b0cb163948fd688fb474c5d88b429cfe3e11",
+  "executableSha256": "e98be481c526f0d66500fcde1fc9e2543a6eb259da7f17d0479cb90342514ac8",
   "annotationsSha256": "f060a1aebd78765304ecf06984b80217bdd0cf6a337d7bceee9916d162fc58da",
   "shaderHashes": {
     "background.frag.spv": "204668b3f3df8083eaf6c6794d73345e5420b8fdef964bec02f595abf7002e5f",
@@ -46,26 +46,6 @@
   },
   "metric": "Farneback forward/backward consistency, eroded interior, encoded RGB residual",
   "cases": [
-    {
-      "frames": 120,
-      "stationaryExact": false,
-      "maximumCompensatedMeanDifference255": 2.979384660720825,
-      "maximumCompensatedP95Difference255": 15.541015625,
-      "minimumStableInteriorPixels": 81602,
-      "worstFrame": 1,
-      "mode": "shadow-turn",
-      "fps": 24
-    },
-    {
-      "frames": 120,
-      "stationaryExact": false,
-      "maximumCompensatedMeanDifference255": 2.085986375808716,
-      "maximumCompensatedP95Difference255": 10.304491996765137,
-      "minimumStableInteriorPixels": 82561,
-      "worstFrame": 13,
-      "mode": "shadow-turn",
-      "fps": 60
-    },
     {
       "frames": 120,
       "stationaryExact": true,
@@ -158,6 +138,26 @@
       "minimumStableInteriorPixels": 96788,
       "worstFrame": 95,
       "mode": "turntable",
+      "fps": 60
+    },
+    {
+      "frames": 120,
+      "stationaryExact": false,
+      "maximumCompensatedMeanDifference255": 2.979384660720825,
+      "maximumCompensatedP95Difference255": 15.541015625,
+      "minimumStableInteriorPixels": 81602,
+      "worstFrame": 1,
+      "mode": "shadow-turn",
+      "fps": 24
+    },
+    {
+      "frames": 120,
+      "stationaryExact": false,
+      "maximumCompensatedMeanDifference255": 2.085986375808716,
+      "maximumCompensatedP95Difference255": 10.304491996765137,
+      "minimumStableInteriorPixels": 82561,
+      "worstFrame": 13,
+      "mode": "shadow-turn",
       "fps": 60
     }
   ],

@@ -57,29 +57,41 @@ def main():
     parser.add_argument("--annotations", type=Path, help="Frozen JSON mapping camera to brow-mask PNG")
     parser.add_argument("--light-scans", action="store_true")
     parser.add_argument("--scan-only", action="store_true")
+    parser.add_argument("--measure-only", action="store_true", help="Evaluate retained captures against reviewed annotations")
     args = parser.parse_args()
     executable, asset, root = args.executable.resolve(), args.asset.resolve(), args.output.resolve()
-    if root.exists() and any(root.iterdir()):
+    if root.exists() and any(root.iterdir()) and not args.measure_only:
         raise ValueError("Output directory must be empty")
     root.mkdir(parents=True, exist_ok=True)
     annotations = json.loads(args.annotations.read_text()) if args.annotations else {}
     report = {"version": 1, "assetSha256": digest(asset), "executableSha256": digest(executable),
               "shaderSha256": {p.name: digest(p) for p in sorted((executable.parent / "shaders").glob("*.spv"))},
               "windowMode": "hidden", "cases": [], "failures": []}
+    if args.measure_only:
+        previous = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+        for key in ("assetSha256", "executableSha256", "shaderSha256"):
+            if previous[key] != report[key]:
+                raise ValueError("Retained capture input changed: " + key)
     frozen_inputs = executable.parent / "qa-inputs.json"
     if frozen_inputs.is_file():
         report["frozenRuntimeManifestSha256"] = digest(frozen_inputs)
     def check(condition, message):
         if not condition:
             report["failures"].append(message)
+    def retained_capture(executable,asset,root,name,*values,**options):
+        folder=root/name
+        if args.measure_only:
+            if not (folder/'frame_000000.png').is_file():raise FileNotFoundError(folder)
+            return folder
+        return capture(executable,asset,root,name,*values,**options)
     for camera in ([] if args.scan_only else args.camera or CAMERAS):
         for light in args.light or LIGHTS:
             prefix = camera + "_" + light
-            beauty = capture(executable, asset, root, prefix + "_beauty", camera, light, frames=3)
-            mask_dir = capture(executable, asset, root, prefix + "_mask", camera, light, "brow-mask")
-            disabled = capture(executable, asset, root, prefix + "_off", camera, light,
+            beauty = retained_capture(executable, asset, root, prefix + "_beauty", camera, light, frames=3)
+            mask_dir = retained_capture(executable, asset, root, prefix + "_mask", camera, light, "brow-mask")
+            disabled = retained_capture(executable, asset, root, prefix + "_off", camera, light,
                                extra=("--qa-effect", "overlay", "--qa-effect-state", "disabled"))
-            cpu = capture(executable, asset, root, prefix + "_cpu", camera, light,
+            cpu = retained_capture(executable, asset, root, prefix + "_cpu", camera, light,
                           extra=("--disable-compute-skinning",))
             first = pixels(beauty / "frame_000000.png")
             mask = np.min(pixels(mask_dir / "frame_000000.png"), axis=2) > 200
@@ -92,7 +104,9 @@ def main():
                     "browContribution": contribution, "stationaryExact": stationary,
                     "cpuComputeMeanDifference": float(cpu_delta.mean()),
                     "cpuComputePixelsOver3": int(np.count_nonzero(cpu_delta.max(axis=2) > 3))}
-            if camera.startswith("face-"):
+            if camera in annotations.get('occludedCameras',[]):
+                check(visible<=annotations['maximumOccludedBrowPixels'],prefix+": brow protrudes through reviewed hair occlusion")
+            elif camera.startswith("face-"):
                 check(visible > 0, prefix + ": no visible eyebrow")
                 check(contribution >= .9, prefix + ": brow contribution below 90%")
                 if camera in annotations:

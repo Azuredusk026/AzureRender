@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "faceRegion": "face-interior.png",
+  "maximumCompensatedMeanDifference255": 3,
+  "maximumAdjacentRegionMeanDifference255": 3,
+  "flowConsistencyPixels": 0.5,
+  "silhouetteErosionPixels": 4,
+  "review": "Left cheek interior excludes eyes, mouth and hair boundaries",
+  "faceLeftRegion": "face-left-interior.png"
+}
