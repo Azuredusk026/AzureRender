@@ -76,6 +76,8 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "cameraNear " << document.renderSettings.cameraNear << '\n'
            << "cameraFar " << document.renderSettings.cameraFar << '\n'
            << "shadowDistance " << document.renderSettings.shadowDistance << '\n'
+           << "outlinePixels " << document.renderSettings.outline.silhouetteWidthPixels << '\n'
+           << "antiAliasing " << document.renderSettings.antiAliasing << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -228,6 +230,10 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             || !(input >> key >> document.renderSettings.shadowDistance) || key!="shadowDistance")
             throw std::runtime_error("Invalid .azscene camera or shadow range");
     }
+    if(renderSettingsVersion>=9 && (!(input>>key>>document.renderSettings.outline.silhouetteWidthPixels)||key!="outlinePixels"))
+        throw std::runtime_error("Missing .azscene outlinePixels");
+    if(renderSettingsVersion>=9 && (!(input>>key>>document.renderSettings.antiAliasing)||key!="antiAliasing"))
+        throw std::runtime_error("Missing .azscene antiAliasing");
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)
         || key != "innerOutlineEnabled") {

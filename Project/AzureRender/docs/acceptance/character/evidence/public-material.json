@@ -1,0 +1,17 @@
+{
+  "assetSha256": "af33d262e6b23f1212d226ad9857760ded7c1ca66d745035da10f3b3ba557bbc",
+  "classes": [
+    "face",
+    "generic",
+    "hair",
+    "overlay",
+    "showcase"
+  ],
+  "browPixels": 1026,
+  "overlayContribution": 1.0,
+  "hairHighlightPixels": 4163,
+  "faceSdfPixels": 10758,
+  "validationErrors": 0,
+  "mixedSceneChangedPixels": 425638,
+  "headFollowMotionPixels": 11.48221343873513
+}

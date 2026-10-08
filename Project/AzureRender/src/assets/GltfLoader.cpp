@@ -160,6 +160,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "brow-overlay") return MaterialFeatureBrowOverlay;
     if (value == "surface-ao") return MaterialFeatureSurfaceAo;
     if (value == "scene-tint") return MaterialFeatureSceneTint;
+    if (value == "hair-ramp") return MaterialFeatureHairRamp;
     return 0;
 }
 
@@ -859,6 +860,29 @@ AssetMaterial loadMaterial(
             material->extras,
             "afterglowHairParameters",
             result.hairParameters);
+        if(result.materialClass==AssetMaterialClass::Hair && result.materialProfileVersion<2)
+            result.hairParameters[3]=.1F;
+        if(material->extras.IsObject() && material->extras.Has("azureRenderMaterial")){
+            const auto& p=material->extras.Get("azureRenderMaterial");
+            if(p.Has("hair")){
+                const auto& h=p.Get("hair");
+                if(!h.IsObject() || !h.Has("power") || !h.Has("strength") || !h.Has("rampRow") || !h.Has("strandShift"))
+                    throw std::runtime_error("Incomplete hair profile: "+result.name);
+                const char* fields[]={"power","strength","rampRow","strandShift"};
+                for(unsigned i=0;i<4;++i){if(!h.Get(fields[i]).IsNumber())throw std::runtime_error("Hair profile requires numeric fields");result.hairParameters[i]=static_cast<float>(h.Get(fields[i]).GetNumberAsDouble());}
+                auto& v=result.hairParameters;
+                if(!std::isfinite(v[0]) || v[0]<1 || v[0]>2048 || !std::isfinite(v[1]) || v[1]<0 || v[1]>4 || !std::isfinite(v[2]) || v[2]<0 || v[2]>9 || std::floor(v[2])!=v[2] || !std::isfinite(v[3]) || std::abs(v[3])>1)
+                    throw std::runtime_error("Hair profile is outside supported ranges");
+                if(h.Has("cameraOffset")){
+                    const auto& offset=h.Get("cameraOffset");
+                    if(!offset.IsArray() || offset.ArrayLen()!=3)throw std::runtime_error("Hair cameraOffset requires three components");
+                    for(unsigned i=0;i<3;++i){if(!offset.Get(i).IsNumber())throw std::runtime_error("Hair cameraOffset must be numeric");result.hairViewParameters[i]=static_cast<float>(offset.Get(i).GetNumberAsDouble());}
+                }
+                if(h.Has("upperLimit")){if(!h.Get("upperLimit").IsNumber())throw std::runtime_error("Hair upperLimit must be numeric");result.hairViewParameters[3]=static_cast<float>(h.Get("upperLimit").GetNumberAsDouble());}
+                for(float value:result.hairViewParameters)if(!std::isfinite(value)||std::abs(value)>16)throw std::runtime_error("Hair view profile is outside supported ranges");
+                if(result.hairViewParameters[3]<=0)throw std::runtime_error("Hair highlight limit must be positive");
+            }
+        }
         if (
             material->extras.IsObject()
             && material->extras.Has("afterglowMatcapTexture")) {
@@ -897,6 +921,16 @@ AssetMaterial loadMaterial(
             && material->extras.Has("azureRenderMaterial")) {
             const tinygltf::Value& profile =
                 material->extras.Get("azureRenderMaterial");
+            if (profile.IsObject() && profile.Has("hair") && profile.Get("hair").Has("rampTexture")) {
+                const auto& ramp=profile.Get("hair").Get("rampTexture");
+                const double index=ramp.IsNumber()?ramp.GetNumberAsDouble():-1;
+                if (!std::isfinite(index) || std::floor(index)!=index || index<0 || index>=model.textures.size()
+                    || result.materialClass!=AssetMaterialClass::Hair || !(result.materialFeatures&MaterialFeatureHairRamp)) {
+                    throw std::runtime_error("Invalid hair.rampTexture for "+result.name);
+                }
+                // Hair ramp and matcap are exclusive material-class uses of this slot.
+                matcapImage=model.textures[static_cast<std::size_t>(index)].source;
+            }
             if (profile.IsObject() && profile.Has("faceSdf")) {
                 const tinygltf::Value& faceSdf = profile.Get("faceSdf");
                 if (!faceSdf.IsObject()) {
@@ -1053,6 +1087,7 @@ AssetMaterial loadMaterial(
 
     if (baseColorImage >= 0) {
         for (std::size_t i = 0; i < result.baseColorPixels.size(); ++i) {
+            if (factor[i % 4] == 1.0) continue;
             const double value = result.baseColorPixels[i] / 255.0;
             const double linear = i % 4 == 3 ? value : (value <= .04045 ? value / 12.92 : std::pow((value + .055) / 1.055, 2.4));
             const double scaled = linear * std::clamp(factor[i % 4], 0.0, 1.0);

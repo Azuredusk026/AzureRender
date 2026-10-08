@@ -16,12 +16,12 @@ public:
         VkPhysicalDevice physicalDevice,
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
-        GpuAllocator& allocator)
+        GpuAllocator& allocator, bool samplerAnisotropyEnabled=false)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
-          allocator_(&allocator) {}
+          samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator) {}
 
     GpuAllocator& allocator() override { return *allocator_; }
 
@@ -38,7 +38,8 @@ public:
         const GpuBuffer& source,
         const GpuImage& destination,
         std::uint32_t width,
-        std::uint32_t height) override;
+        std::uint32_t height,
+        std::uint32_t mipLevels = 1) override;
     void clearImage(const GpuImage& image) override;
     void generateMipmaps(
         const GpuImage& image,
@@ -101,6 +102,7 @@ private:
     VkPhysicalDevice physicalDevice_ = VK_NULL_HANDLE;
     VkQueue graphicsQueue_ = VK_NULL_HANDLE;
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
+    bool samplerAnisotropyEnabled_ = false;
     GpuAllocator* allocator_ = nullptr;
 };
 

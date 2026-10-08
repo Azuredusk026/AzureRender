@@ -68,6 +68,9 @@ void AzureRenderApp::drawFrame() {
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && !runOptions_.editorSession->playing() && editorCameraFar_>0){effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;}
 #endif
+    const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
+    if(sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale)
+        recreateSwapchain();
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 
@@ -1036,6 +1039,8 @@ void AzureRenderApp::recordCommandBuffer(
             effectiveRenderSettings_.grade.tint[2],
             0.0F,
         },
+        {static_cast<float>(effectiveRenderSettings_.antiAliasing),effectiveRenderSettings_.cameraNear,
+         effectiveRenderSettings_.cameraFar,effectiveRenderSettings_.antiAliasing==2?2.0F:1.0F},
     };
     vkCmdPushConstants(
         commandBuffer,

@@ -176,7 +176,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}"
+        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -205,7 +205,10 @@ compile_shader(
     DEFINES AZURE_COMPUTE_SKINNING=1
     OUTPUT_NAME mesh_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
+compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME character_depth_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.frag"
@@ -523,6 +526,11 @@ if(BUILD_TESTING)
     add_dependencies(AzureSkinningGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.SkinningGpu COMMAND AzureSkinningGpuTests "${SHADER_BINARY_DIR}/skin.comp.spv")
     set_tests_properties(AzureRender.SkinningGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureShadowFilteringGpuTests tests/ShadowFilteringGpuTests.cpp)
+    target_link_libraries(AzureShadowFilteringGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureShadowFilteringGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ShadowFilteringGpu COMMAND AzureShadowFilteringGpuTests "${SHADER_BINARY_DIR}/shadow_filter_test.comp.spv")
+    set_tests_properties(AzureRender.ShadowFilteringGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     if(AZURE_ENABLE_SHADER_MODULE_PROTOTYPE)
         add_executable(AzureShaderModuleTests tests/ShaderModuleTests.cpp)
         target_link_libraries(AzureShaderModuleTests PRIVATE AzureRenderCore)
@@ -553,6 +561,9 @@ if(BUILD_TESTING)
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
+    add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
+    target_include_directories(AzureTextureFilteringTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.TextureFiltering COMMAND AzureTextureFilteringTests)
     add_test(NAME AzureRender.CharacterRepair COMMAND AzureCharacterRepairTests
         "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
     find_program(AZURE_NODE_EXECUTABLE node)
@@ -1635,3 +1646,6 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/editor-interaction.md"
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-08-content-workflows.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/2026-10-08.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7/evidence" OPTIONAL)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-rendering-repair.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-rendering-diagnosis.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/character/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/character")

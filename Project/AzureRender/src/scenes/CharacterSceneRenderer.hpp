@@ -1,3 +1,4 @@
+#include "assets/TextureMipChain.hpp"
 #pragma once
 
 #include "extensions/ISceneRenderer.hpp"
@@ -105,6 +106,7 @@ private:
     };
 
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
+    std::array<GpuTexture,kMaxFramesInFlight> opaqueSceneColor_;
     std::array<rhi::GpuImage,kMaxFramesInFlight> overlayDepthAttachments_;
     std::array<VkImageView,kMaxFramesInFlight> overlayDepthViews_{};
     std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
@@ -379,7 +381,7 @@ private:
         VkFormat format,
         bool clampVertical,
         GpuTexture& texture,
-        std::uint32_t mipLevels = 1);
+        std::uint32_t mipLevels = 1,TextureFilterSemantic semantic=TextureFilterSemantic::Linear,float alphaCutoff=0);
     void uploadMaterialTextures(
         const LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);

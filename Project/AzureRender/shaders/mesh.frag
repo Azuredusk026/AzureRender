@@ -1,10 +1,15 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
 
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
 #endif
+#include "shadow_compare.glsl"
 
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
+layout(binding = 19) uniform sampler2D opaqueSceneColor;
+#endif
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -164,15 +169,14 @@ vec3 sampleToonRamp(float coordinate) {
 float rawShadowDepth(ivec2 pixel, ivec2 lo, ivec2 hi) {
     return texelFetch(AZ_TEX_SHADOW, clamp(pixel,lo,hi),0).r;
 }
-float filteredShadow(vec2 uv,float receiver,ivec2 lo,ivec2 hi) {
+float filteredShadow(vec2 uv,float receiver,ivec2 lo,ivec2 hi,vec2 depthGradient) {
     vec2 pixel=uv*vec2(textureSize(AZ_TEX_SHADOW,0))-.5;
     ivec2 base=ivec2(floor(pixel));vec2 w=fract(pixel);
     vec4 depths=vec4(rawShadowDepth(base,lo,hi),rawShadowDepth(base+ivec2(1,0),lo,hi),
         rawShadowDepth(base+ivec2(0,1),lo,hi),rawShadowDepth(base+ivec2(1,1),lo,hi));
-    vec4 v=step(vec4(receiver),depths);
-    return mix(mix(v.x,v.y,w.x),mix(v.z,v.w,w.x),w.y);
+    return compareShadowDepths(depths,receiver,w,depthGradient/vec2(textureSize(AZ_TEX_SHADOW,0)));
 }
-float sampleCascadeShadow(int cascade,float normalDotLight) {
+float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient) {
     vec3 p=shadowPositions[cascade].xyz/shadowPositions[cascade].w;
     vec2 localUv=p.xy*.5+.5;
     if(p.z<=0||p.z>=1||any(lessThan(localUv,vec2(0)))||any(greaterThan(localUv,vec2(1))))return 1.0;
@@ -183,27 +187,53 @@ float sampleCascadeShadow(int cascade,float normalDotLight) {
     float receiver=p.z-max(.003*(1.0-normalDotLight),.001)/depthRange;
     float sum=0,blockers=0;
     for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
-        float d=rawShadowDepth(ivec2(uv*vec2(extent))+ivec2(x,y),lo,hi);
+        ivec2 pixel=clamp(ivec2(uv*vec2(extent))+ivec2(x,y),lo,hi);
+        float d=rawShadowDepth(pixel,lo,hi)-dot(depthGradient,(vec2(pixel)+.5)/vec2(extent)-uv);
         if(d<receiver){sum+=d;blockers+=1.0;}
     }
     float separation=blockers>0?max(receiver-sum/blockers,0)*depthRange:0;
     float worldTexel=depthRange/4.1*2.0/float(tile.x);
-    float radius=clamp(1.0+separation*.035/max(worldTexel,1e-6),1.0,clamp(camera.renderingParameters.w,1.0,16.0));
+    float maximumRadius=clamp(camera.renderingParameters.w,1.0,16.0);
+    // A 5x5 contact kernel spans two texels; half-texel tap spacing cannot
+    // cover that footprint. Preserve the authored maximum for small budgets.
+    float contactRadius=min(2.0,maximumRadius);
+    float radius=clamp(contactRadius+separation*.035/max(worldTexel,1e-6),contactRadius,maximumRadius);
     float visible=0;
-    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x)
-        visible+=filteredShadow(uv+vec2(x,y)*radius*.5/vec2(extent),receiver,lo,hi);
+    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
+        vec2 offset=vec2(x,y)*radius*.5/vec2(extent);
+        visible+=filteredShadow(uv+offset,receiver+dot(depthGradient,offset),lo,hi,depthGradient);
+    }
     return visible/25.0;
 }
 float sampleShadowMap(float normalDotLight) {
+    // Compute derivatives before nonuniform cascade selection. Each sampled
+    // depth is compared against the receiver plane at that texel centre.
+    vec2 gradients[4];
+    for(int i=0;i<4;++i){
+        vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
+        vec2 uv=(p.xy*.5+.5)*.5;
+        vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
+        float determinant=dx.x*dy.y-dx.y*dy.x;
+        gradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+    }
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
-    float result=sampleCascadeShadow(c,normalDotLight);
+    float result=sampleCascadeShadow(c,normalDotLight,gradients[c]);
     if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
         float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
-        result=mix(result,sampleCascadeShadow(c+1,normalDotLight),blend);}
+        result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1]),blend);}
     return result;
 }
 
+vec3 rgbToHsv(vec3 c){
+    float hi=max(c.r,max(c.g,c.b)),lo=min(c.r,min(c.g,c.b)),chroma=hi-lo,h=0;
+    if(chroma>1e-6){if(hi==c.r)h=(c.g-c.b)/chroma;else if(hi==c.g)h=2+(c.b-c.r)/chroma;else h=4+(c.r-c.g)/chroma;h=fract(h/6);}
+    return vec3(h,hi>1e-6?chroma/hi:0,hi);
+}
+vec3 hsvToRgb(vec3 hsv){
+    vec3 triangle=clamp(abs(fract(vec3(hsv.x)+vec3(0,2.0/3.0,1.0/3.0))*6-3)-1,0,1);
+    return hsv.z*mix(vec3(1),triangle,clamp(hsv.y,0,1));
+}
 void main() {
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
@@ -259,11 +289,11 @@ void main() {
         - geometricNormal * dot(geometricNormal, worldTangent.xyz));
     vec3 bitangent = normalize(cross(geometricNormal, tangent)) * worldTangent.w;
     mat3 tangentToWorld = mat3(tangent, bitangent, geometricNormal);
-    vec3 sampledNormal = texture(AZ_TEX_NORMAL, textureCoordinate).xyz * 2.0 - 1.0;
+    vec4 normalSample=texture(AZ_TEX_NORMAL,textureCoordinate);
+    vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
     vec4 hairData = texture(AZ_TEX_HAIR_DATA, textureCoordinate);
-    float hairActive = clamp(material.hairParameters.w, 0.0, 1.0)
-        * materialFeatureEnabled(2U);
+    float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
     float hairBasePeak = max(
         max(baseColor.r, baseColor.g),
         max(baseColor.b, 0.001));
@@ -286,7 +316,10 @@ void main() {
         0.62,
         texture(AZ_TEX_STYLE_MASK, textureCoordinate).r)
         * styleStrength;
-    float roughness = clamp(packedMaterial.g, 0.08, 1.0);
+    float normalVariance=max(1.0-normalSample.a,0.0);
+    vec3 dx=dFdx(shadedNormal),dy=dFdy(shadedNormal);
+    normalVariance+=min(dot(dx,dx)+dot(dy,dy),.25);
+    float roughness = clamp(sqrt(packedMaterial.g*packedMaterial.g+normalVariance*.25), 0.08, 1.0);
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
     float specularLevel = clamp(specularEmissive.a, 0.0, 1.0);
     // Character surface classes use authored packed maps from several source
@@ -301,8 +334,7 @@ void main() {
         roughness = max(roughness, 0.44);
         specularLevel = min(specularLevel, 0.30);
     } else if (material.materialClass == 4U) {
-        metallic = min(metallic, 0.06);
-        roughness = max(roughness, 0.42);
+        roughness = mix(max(roughness, 0.42),roughness,smoothstep(.15,.65,metallic));
     } else if (material.materialClass == 6U) {
         metallic = 0.0;
     }
@@ -382,7 +414,7 @@ void main() {
     // Endfield is a key-light presentation, not a flat HDRI preview. Keep
     // the sky directional, but leave enough energy headroom for the fixed
     // world-space key and real-time shadow map to create readable turns.
-    ambientDiffuse *= showcasePreset == 1.0 ? 0.58 : 1.0;
+    ambientDiffuse *= showcasePreset == 1.0 ? 0.85 : 1.0;
     float platformAmbientVisibility = mix(
         1.0,
         mix(0.44, 1.0, shadowVisibility),
@@ -447,7 +479,7 @@ void main() {
     float ambientRampVisibility = mix(
         1.0,
         mix(
-            showcasePreset == 1.0 ? 0.36 : 0.64,
+            showcasePreset == 1.0 ? 0.72 : 0.72,
             0.98,
             rampLuminance),
         toonWeight);
@@ -523,7 +555,7 @@ void main() {
         vec3(1.0),
         material.lamShadowColor.rgb,
         material.lamShadowColor.a * shadowWeight
-            * (showcasePreset == 1.0 ? 0.76 : 0.58));
+            * (showcasePreset == 1.0 ? 0.36 : 0.36));
     float aoClassWeight = material.materialClass == 2U
         ? 0.10
         : (material.materialClass == 1U ? 0.28 : 1.0);
@@ -540,23 +572,10 @@ void main() {
     vec3 hairAoColor = material.aoColor.a > 0.01
         ? material.aoColor.rgb
         : vec3(0.255);
-    float hairNormalCavity = smoothstep(
-        0.04,
-        0.30,
-        1.0 - max(dot(shadedNormal, geometricNormal), 0.0));
-    float hairCavity = clamp(
-        styleMask * 0.74
-            + (1.0 - max(dot(geometricNormal, viewDirection), 0.0)) * 0.30
-            + hairNormalCavity * 0.38,
-        0.0,
-        1.0);
-    vec3 hairAoTint = mix(
-        vec3(1.0),
-        hairAoColor,
-        hairActive * (0.20 + hairCavity * 0.54));
-    aoShadowTint *= hairAoTint;
-    vec3 tintedDiffuse = ambientDiffuse * aoShadowTint
-        + directDiffuse * lamShadowTint * aoShadowTint;
+    float physicalAo=mix(1.0,packedMaterial.r,materialFeatureEnabled(128U));
+    vec3 hairAoTint=mix(vec3(1),hairAoColor,hairActive*(1.0-physicalAo)*.65);
+    aoShadowTint*=hairAoTint;
+    vec3 tintedDiffuse=ambientDiffuse*aoShadowTint*physicalAo + directDiffuse*lamShadowTint;
     // Toon/environment energy may raise the hair value but must not erase its
     // authored red hue. Reproject only the diffuse hair layer onto the base
     // hue; specular and KK remain independent highlights.
@@ -629,11 +648,12 @@ void main() {
         bitangent + shadedNormal * hairShift);
     vec3 secondaryHairStrand = normalize(
         bitangent
-        + shadedNormal * (hairShift + material.hairParameters.z * 0.018));
-    float tangentDotHalf = dot(hairStrandDirection, halfDirection);
+        + shadedNormal * (hairShift + material.hairParameters.w));
+    vec3 hairHalf=normalize(lightDirection+normalize(viewDirection+tangentToWorld*material.matcapColor.xyz));
+    float tangentDotHalf = dot(hairStrandDirection, hairHalf);
     float secondaryTangentDotHalf = dot(
         secondaryHairStrand,
-        halfDirection);
+        hairHalf);
     float kkSine = sqrt(max(1.0 - tangentDotHalf * tangentDotHalf, 0.0));
     float secondaryKkSine = sqrt(max(
         1.0 - secondaryTangentDotHalf * secondaryTangentDotHalf,
@@ -645,8 +665,8 @@ void main() {
     // Direct lobe-to-ramp mapping preserves a narrow anti-aliased band. The
     // previous high threshold discarded the complete lobe at normal camera
     // distances and made Hair KK effectively black in its QA isolation.
-    float kkBand = smoothstep(0.28, 0.72, kkLobe);
-    float secondaryKkBand = smoothstep(0.22, 0.64, secondaryKkLobe);
+    float kkBand = smoothstep(.5-max(fwidth(kkLobe),.12),.5+max(fwidth(kkLobe),.12),kkLobe);
+    float secondaryKkBand = smoothstep(.43-max(fwidth(secondaryKkLobe),.12),.43+max(fwidth(secondaryKkLobe),.12),secondaryKkLobe);
     float hairViewVisibility = smoothstep(
         -0.20,
         0.45,
@@ -659,7 +679,7 @@ void main() {
         kkTint
         * kkBand
         * mix(0.58, 1.0, hairViewVisibility)
-        * max(material.hairParameters.y, 0.16)
+        * material.hairParameters.y
         * 0.58
         * hairActive
         * material.featureParameters.y
@@ -672,16 +692,26 @@ void main() {
         secondaryKkTint
         * secondaryKkBand
         * mix(0.35, 0.72, hairViewVisibility)
-        * max(material.hairParameters.y, 0.16)
+        * material.hairParameters.y
         * 0.22
         * hairActive
         * material.featureParameters.y
         * bandEnabled;
+    vec2 rampSize=vec2(textureSize(AZ_TEX_TOON_RAMP,0));
+    float kkRamp=dot(textureLod(AZ_TEX_TOON_RAMP,vec2(clamp(kkLobe,.5/rampSize.x,1-.5/rampSize.x),(material.hairParameters.z+.5)/rampSize.y),0).rgb,vec3(.2126,.7152,.0722));
+    if (materialFeatureEnabled(512U)>0.5) {
+        float rampWidth=float(textureSize(AZ_TEX_MATCAP,0).x);
+        kkRamp=textureLod(AZ_TEX_MATCAP,vec2((clamp(kkLobe,0,1)*(rampWidth-1)+.5)/rampWidth,.5),0).r;
+    }
+    kkSpecular*=kkRamp;
+    secondaryKkSpecular*=kkRamp;
+    kkSpecular=min(kkSpecular,vec3(material.matcapColor.w));
     if (qaEffectMode == 3 && qaEffectDisabled) {
         kkSpecular = vec3(0.0);
         secondaryKkSpecular = vec3(0.0);
     }
     float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (browOverlay) {
         // M_Common_Brow uses a constant Opaccity parameter; the face texture
         // alpha is not the brow mask and is intentionally ignored here.
@@ -690,6 +720,7 @@ void main() {
         float fade=clamp((sceneDepth-overlayDepth)/max(material.featureParameters.z,.0001),0.0,1.0);
         outputAlpha = material.featureParameters.y * fade;
     }
+#endif
     vec3 emissive =
         specularEmissive.rgb * material.emissiveStrength * 6.0
         * material.featureParameters.z
@@ -785,13 +816,17 @@ void main() {
         qaColor = vec3(eyebrowRegion > 0.5 ? 1.0 : 0.0);
         if (overlayMaterial) outputAlpha = eyebrowRegion > 0.5 ? 1.0 : 0.0;
     }
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {
-        float sceneDepth=texture(overlaySceneDepth,gl_FragCoord.xy/camera.clusterDepth.zw).r;
+        vec2 uv=gl_FragCoord.xy/camera.clusterDepth.zw;
+        float sceneDepth=texture(overlaySceneDepth,uv).r;
         outputAlpha=clamp(1.0-sceneDepth/max(material.featureParameters.z,.001),0.0,1.0)*material.featureParameters.y;
         if (overlayDisabled) outputAlpha=0.0;
-        // Fixed-function destination multiplication preserves opaque scene color.
-        qaColor=material.styleParameters.rgb*outputAlpha;
+        vec3 scene=texture(opaqueSceneColor,uv).rgb;
+        vec3 hsv=rgbToHsv(scene)*vec3(material.featureParameters.x,material.styleParameters.w,material.featureParameters.w);
+        qaColor=hsvToRgb(hsv)*material.styleParameters.rgb;
     }
+#endif
     outputColor = vec4(qaColor, outputAlpha);
     if (material.materialPadding == AZURE_SELECTED_PADDING) {
         outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
@@ -799,16 +834,18 @@ void main() {
     }
     float innerOutlineParticipation =
         (1.0 - platformMask)
+        * (overlayMaterial ? 0.0 : 1.0)
         * material.featureParameters.x
         * mix(
             1.0,
             0.68,
             max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
-    vec3 innerOutlineNormal = normalize(mix(
-        geometricNormal,
-        shadedNormal,
-        hairActive * 0.80));
+    vec3 innerOutlineNormal = geometricNormal;
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+    outputNormal=vec4(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),0,0,1);
+#else
     outputNormal = vec4(
         innerOutlineNormal * 0.5 + 0.5,
         innerOutlineParticipation);
+#endif
 }

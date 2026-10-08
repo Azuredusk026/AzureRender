@@ -1,0 +1,16 @@
+{
+  "linearMeanAbsoluteError": {
+    "off": 0.0007383340271189809,
+    "edge": 0.000735357403755188,
+    "ss": 0.00026540152612142265
+  },
+  "outputExtent": [
+    640,
+    360
+  ],
+  "supersampleSceneExtent": [
+    1280,
+    720
+  ],
+  "captureDirectory": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\sampling-fixture\\run-1791488159469247900"
+}

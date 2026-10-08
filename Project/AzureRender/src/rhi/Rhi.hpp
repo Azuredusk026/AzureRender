@@ -31,6 +31,7 @@ struct SamplerDesc {
     VkSamplerAddressMode addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     float maxLod = 0.0F;
     bool mipmapLinear = true;
+    float maxAnisotropy = 1.0F;
 };
 
 struct DescriptorBindingDesc {
@@ -103,8 +104,6 @@ struct GraphicsPipelineDesc {
 
     bool alphaBlend = false;
     bool premultipliedAlpha = false;
-    // Source RGB contains alpha-weighted transmittance; destination is modulated.
-    bool multiplicativeTint = false;
     // 0 for depth-only passes.
     std::uint32_t colorAttachmentCount = 0;
 
@@ -262,7 +261,8 @@ public:
         const GpuBuffer& source,
         const GpuImage& destination,
         std::uint32_t width,
-        std::uint32_t height) = 0;
+        std::uint32_t height,
+        std::uint32_t mipLevels = 1) = 0;
     virtual void clearImage(const GpuImage& image) = 0;
     virtual void generateMipmaps(
         const GpuImage& image,

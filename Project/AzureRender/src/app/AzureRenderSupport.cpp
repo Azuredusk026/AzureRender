@@ -1,3 +1,4 @@
+#include "runtime/EngineSettings.hpp"
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #if AZURE_WITH_EDITOR
@@ -199,6 +200,7 @@ void AzureRenderApp::recreateEditorViewportResources() {
 #endif
     cleanupEditorViewportResources(false);
     renderExtent_ = newExtent;
+    updateSceneRenderExtent();
     createEditorViewportResources();
     createSceneColorResources();
     createDepthResources();
@@ -206,6 +208,7 @@ void AzureRenderApp::recreateEditorViewportResources() {
     createFramebuffers();
     createPostProcessFramebuffers();
     createPostProcessDescriptorSets();
+    if(sceneRenderer_){azurerender::RenderContext context;buildRenderContext(context);sceneRenderer_->onSwapchainRecreate(context);}
 #if AZURE_WITH_EDITOR
     editorLayer_->setViewportImages(
         editorViewportSampler_,
@@ -752,4 +755,13 @@ void AzureRenderApp::populateDebugMessengerCreateInfo(
         VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
         | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
     createInfo.pfnUserCallback = debugCallback;
+}
+
+void AzureRenderApp::updateSceneRenderExtent() {
+    const auto settings=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
+    const unsigned scale=settings.antiAliasing==2?2:1;
+    VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    if(renderExtent_.width>properties.limits.maxImageDimension2D/scale || renderExtent_.height>properties.limits.maxImageDimension2D/scale)
+        throw std::runtime_error("Supersampling extent exceeds device image limit");
+    sceneRenderExtent_={renderExtent_.width*scale,renderExtent_.height*scale};
 }

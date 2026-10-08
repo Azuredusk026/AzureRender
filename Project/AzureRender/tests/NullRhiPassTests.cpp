@@ -154,7 +154,7 @@ std::vector<RecordedCall> runFrame(
     std::string error;
     if (!graph.compile(error)) throw std::runtime_error(error);
     const std::size_t expectedPasses =
-        2 + (computeSkinning ? 2 : 0);
+        3 + (computeSkinning ? 2 : 0);
     if (graph.passes().size() != expectedPasses) {
         throw std::runtime_error("Character registered an unexpected pass count");
     }
@@ -228,6 +228,8 @@ int main() {
              "mesh.vert.spv",
              "mesh.frag.spv",
              "mesh_bindless.frag.spv",
+             "character_snapshot.frag.spv",
+             "character_snapshot_bindless.frag.spv",
              "outline.vert.spv",
              "outline.frag.spv",
              "background.vert.spv",
@@ -315,13 +317,13 @@ int main() {
         }
     }
     assert(cascadeViewports.size() == 4);
-    assert(countCalls(legacy, "setScissor") == 6);
+    assert(countCalls(legacy, "setScissor") == 7);
 
     // Both modes record shadow pass + main pass.
-    assert(countCalls(legacy, "beginRenderPass") == 2);
-    assert(countCalls(legacy, "endRenderPass") == 2);
-    assert(countCalls(bindless, "beginRenderPass") == 2);
-    assert(countCalls(bindless, "endRenderPass") == 2);
+    assert(countCalls(legacy, "beginRenderPass") == 3);
+    assert(countCalls(legacy, "endRenderPass") == 3);
+    assert(countCalls(bindless, "beginRenderPass") == 3);
+    assert(countCalls(bindless, "endRenderPass") == 3);
 
     // The draw count is identical; only descriptor traffic may differ.
     const std::size_t legacyDraws = countCalls(legacy, "drawIndexed");
@@ -351,17 +353,17 @@ int main() {
     // Bindless binds once per pass; the fixed tables bind per primitive.
     const std::size_t legacyBinds = countCalls(legacy, "bindDescriptorSet");
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
-    assert(bindlessBinds == 3);
+    assert(bindlessBinds == 4);
     assert(legacyBinds > bindlessBinds);
 
-    // Four loaded materials require 35 textures and four other fragment
+    // Four loaded materials require 35 textures, two snapshot samplers and four other fragment
     // resources. Each independent Vulkan limit must select a legal path.
     VkPhysicalDeviceLimits limits{};
-    limits.maxPerStageDescriptorSamplers = 35;
-    limits.maxDescriptorSetSamplers = 35;
-    limits.maxPerStageDescriptorSampledImages = 35;
-    limits.maxDescriptorSetSampledImages = 35;
-    limits.maxPerStageResources = 39;
+    limits.maxPerStageDescriptorSamplers = 37;
+    limits.maxDescriptorSetSamplers = 37;
+    limits.maxPerStageDescriptorSampledImages = 37;
+    limits.maxDescriptorSetSampledImages = 37;
+    limits.maxPerStageResources = 41;
     const auto limitedFrame = [&](const VkPhysicalDeviceLimits& value) {
         return runFrame(true, shaderDirectory, true, false, false, false,
                         0, false, false, 0, &value);
@@ -389,7 +391,7 @@ int main() {
     const std::size_t culledDraws = countCalls(culled, "drawIndexed");
     assert(culledDraws == 0);
     assert(culledDraws < legacyDraws);
-    assert(countCalls(culled, "beginRenderPass") == 2);
+    assert(countCalls(culled, "beginRenderPass") == 3);
     const std::vector<RecordedCall> unculled =
         runFrame(true, shaderDirectory, false, true);
     assert(countCalls(unculled, "drawIndexed") == legacyDraws);

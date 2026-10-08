@@ -183,6 +183,7 @@ void validateRenderSettings(const RenderSettings& settings) {
         throw std::invalid_argument("Unknown blackhole camera preset");
     }
 
+    requireRange(settings.outline.silhouetteWidthPixels,0.F,8.F,"outline.silhouetteWidthPixels");
     if (settings.antiAliasing > 2) throw std::invalid_argument("Unknown anti-aliasing quality");
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
     requireRange(settings.cameraNear,.01F,10,"cameraNear");
@@ -251,6 +252,7 @@ void validateRenderSettings(const RenderSettings& settings) {
 #include "foundation/SettingRegistry.hpp"
 namespace azurerender {
 void registerRenderSettings(SettingRegistry& r) {
+    r.add({"render.shadowDistance","Shadow coverage distance in metres",100.0,.01,5000.,false,true,false});
     r.add({"render.antiAliasing","Anti-aliasing: off, edge adaptive, supersampling",1,0.,2.,false,true,false});
     r.add({"render.diagnosticView","Diagnostic view: beauty, normal, outline, shadow, depth",0,0.,4.,false,true,false});
     r.add({"render.exposure","Temporary exposure in EV",0.0,-8.,8.,false,true,false});

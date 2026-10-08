@@ -383,7 +383,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+1,12,4});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+2,13,4});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -993,12 +993,19 @@ void CharacterSceneRenderer::registerPasses(
     rhi::RenderPassBeginDesc overlayBegin{};overlayBegin.renderPass=overlayDepthPass_;
     overlayBegin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];overlayBegin.extent=context.renderExtent;
     VkClearValue linearClear{};linearClear.color.float32[0]=100000;VkClearValue depthClear{};depthClear.depthStencil={1,0};
-    overlayBegin.clearValues={linearClear,depthClear};
+    VkClearValue colorClear{};overlayBegin.clearValues={colorClear,linearClear,depthClear};
     const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
         recordOverlayDepth(*frozenContext,*frozenInstances,commands);
     });
     graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
+    const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
+    graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,lightResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,clusterHeaderResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,clusterIndexResource,RenderGraphUsage::FragmentStorage,false);
     if(skinnedResource)graph.use(prepass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
     for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepass,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
@@ -1038,6 +1045,7 @@ void CharacterSceneRenderer::registerPasses(
     }
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
+    graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
     if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
         const auto& buffer = oitIndexBuffers_[context.currentFrame];
@@ -1072,7 +1080,9 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     instanceSnapshot_->validateForRecording();
     recordComputeSkinning(context);
     recordShadowPass(context);
-    recordOverlayDepth(context,*instanceSnapshot_,*context.commands);
+    rhi::RenderPassBeginDesc begin{};begin.renderPass=overlayDepthPass_;begin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];begin.extent=context.renderExtent;
+    VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues={color,linear,depth};
+    context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
     recordMainPass(context);
 }
 
@@ -1262,15 +1272,20 @@ void CharacterSceneRenderer::uploadTextureData(
     const VkFormat format,
     const bool clampVertical,
     GpuTexture& texture,
-    const std::uint32_t mipLevels) {
-    const VkDeviceSize size = static_cast<VkDeviceSize>(pixels.size())
+    const std::uint32_t requestedMipLevels,TextureFilterSemantic semantic,float alphaCutoff) {
+    std::vector<std::uint8_t> filtered;unsigned mipLevels=requestedMipLevels;
+    if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==1){
+        if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
+    }
+    const bool cpuMips=!filtered.empty();
+    const VkDeviceSize size = static_cast<VkDeviceSize>(cpuMips?filtered.size():pixels.size())
         * sizeof(typename std::decay_t<Pixels>::value_type);
     rhi::GpuBuffer staging = allocator_->createBuffer(
         size,
         VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
         true);
     std::memcpy(
-        staging.mapped, pixels.data(), static_cast<std::size_t>(size));
+        staging.mapped, cpuMips?static_cast<const void*>(filtered.data()):static_cast<const void*>(pixels.data()), static_cast<std::size_t>(size));
     texture.image = allocator_->createImage2D(
         width,
         height,
@@ -1288,8 +1303,8 @@ void CharacterSceneRenderer::uploadTextureData(
         VK_IMAGE_LAYOUT_UNDEFINED,
         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
         mipLevels);
-    rhi_->copyBufferToImage(staging, texture.image, width, height);
-    if (mipLevels > 1) {
+    rhi_->copyBufferToImage(staging, texture.image, width, height,cpuMips?mipLevels:1);
+    if (mipLevels > 1 && !cpuMips) {
         rhi_->generateMipmaps(texture.image, format, width, height, mipLevels);
     } else {
         rhi_->transitionImageLayout(
@@ -1308,6 +1323,7 @@ void CharacterSceneRenderer::uploadTextureData(
         : VK_SAMPLER_ADDRESS_MODE_REPEAT;
     samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     samplerDesc.maxLod = static_cast<float>(mipLevels - 1);
+    samplerDesc.maxAnisotropy = clampVertical?1.0F:8.0F;
     texture.sampler = rhi_->createSampler(samplerDesc);
 }
 
@@ -1318,14 +1334,14 @@ void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std
 void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
     const auto& m=asset.materials.at(index);auto& g=materials.at(index);
     switch(slot){
-    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.baseColor);break;
-    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.normal);break;
-    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.metallicRoughness);break;
-    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.specularEmissive);break;
-    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.styleMask);break;
-    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.matcap);break;
-    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.hairData);break;
-    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,VK_FORMAT_R8G8B8A8_UNORM,false,g.faceSdf);break;}
+    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.baseColor,0,TextureFilterSemantic::Srgb,m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0);break;
+    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.normal,0,TextureFilterSemantic::Normal);break;
+    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.metallicRoughness,0,TextureFilterSemantic::Linear);break;
+    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.specularEmissive,0,TextureFilterSemantic::Srgb);break;
+    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.styleMask,0,TextureFilterSemantic::Linear);break;
+    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.matcap,0,TextureFilterSemantic::Srgb);break;
+    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.hairData,0,TextureFilterSemantic::PackedNormal);break;
+    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,VK_FORMAT_R8G8B8A8_UNORM,false,g.faceSdf,0,TextureFilterSemantic::Linear);break;}
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }
@@ -1832,10 +1848,14 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 }
 
 void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
-    rhi::RenderPassDesc pass;pass.attachments={{VK_FORMAT_R32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+    rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {VK_FORMAT_R32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,false,true}};
-    pass.depthAttachment=1;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
+    pass.depthAttachment=2;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
     for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
+        auto& color=opaqueSceneColor_[frame];
+        color.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.sceneColorFormat,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        color.view=rhi_->createImageView(color.image.image,context.sceneColorFormat,VK_IMAGE_ASPECT_COLOR_BIT,1);
         auto& target=overlaySceneDepth_[frame];
         target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,VK_FORMAT_R32_SFLOAT,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
         target.view=rhi_->createImageView(target.image.image,VK_FORMAT_R32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
@@ -1843,7 +1863,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         target.sampler=rhi_->createSampler(sampler);
         auto& depth=overlayDepthAttachments_[frame];depth=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.depthFormat,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
         overlayDepthViews_[frame]=rhi_->createImageView(depth.image,context.depthFormat,VK_IMAGE_ASPECT_DEPTH_BIT,1);
-        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,{target.view,overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,{color.view,target.view,overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
     }
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
@@ -1851,6 +1871,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
         if(overlayDepthFramebuffers_[i])rhi_->destroyFramebuffer(overlayDepthFramebuffers_[i]);overlayDepthFramebuffers_[i]=VK_NULL_HANDLE;
         if(overlayDepthViews_[i])rhi_->destroyImageView(overlayDepthViews_[i]);overlayDepthViews_[i]=VK_NULL_HANDLE;
         allocator_->destroyImage(overlayDepthAttachments_[i]);
+        auto& color=opaqueSceneColor_[i];if(color.view)rhi_->destroyImageView(color.view);allocator_->destroyImage(color.image);color={};
         auto& t=overlaySceneDepth_[i];if(t.view)rhi_->destroyImageView(t.view);if(t.sampler)rhi_->destroySampler(t.sampler);allocator_->destroyImage(t.image);t={};
     }
     if(overlayDepthPass_)rhi_->destroyRenderPass(overlayDepthPass_);overlayDepthPass_=VK_NULL_HANDLE;
@@ -1858,6 +1879,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
     commands.bindPipeline(overlayDepthPipeline_);
+    if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
     for(const auto& span:snapshot.visibleSpans){
         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
@@ -1867,8 +1889,10 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
-            commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
-            MaterialPushConstants material{};material.alphaCutoff=m.alphaCutoff;material.alphaMode=static_cast<std::uint32_t>(m.alphaMode);
+            if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
+            MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
+                m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
+                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,0};
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
@@ -1889,7 +1913,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 1)},
+             frameCount * (textureSlots + 2)},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 6},
         };
         poolDesc.maxSets = frameCount;
@@ -1900,7 +1924,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 12},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 13},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 6},
     };
     poolDesc.maxSets = descriptorCount;
@@ -1944,6 +1968,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_SHADER_STAGE_FRAGMENT_BIT},
             {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
             {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
+            {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -1971,6 +1996,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {16, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
     });
 }
 
@@ -2038,6 +2064,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImage({descriptorSets_[frame],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2119,6 +2146,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2363,9 +2391,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (bindlessTextures_?"/character_depth_bindless.frag.spv":"/character_depth.frag.spv")));
+        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
-        depthDesc.colorAttachmentCount=1;depthDesc.cullMode=VK_CULL_MODE_NONE;
+        depthDesc.colorAttachmentCount=2;depthDesc.cullMode=VK_CULL_MODE_NONE;
         overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
@@ -2378,7 +2406,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        auto tintDesc=materialDesc;tintDesc.multiplicativeTint=true;
+        auto tintDesc=materialDesc;
         sceneTintPipeline_=rhi_->createGraphicsPipeline(tintDesc);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
@@ -2774,7 +2802,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         cascadeSplits_[3],
     };
     uniform.renderingParameters = {
-        largestExtent * 0.004F,
+        settings.outline.silhouetteWidthPixels*(settings.antiAliasing==2?2.F:1.F),
         settings.stylizedLightingEnabled
             ? settings.styleMaskStrength
             : 0.0F,
@@ -2785,7 +2813,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     constexpr std::array<std::array<float, 4>, 5> kShowcasePresets = {{
         {0.0F, 1.08F, 0.24F, 0.18F},
-        {1.0F, 1.52F, 0.06F, 0.24F},
+        {1.0F, 1.08F, 0.26F, 0.10F},
         {2.0F, 0.95F, 0.08F, 0.05F},
         {3.0F, 0.48F, 0.04F, 0.85F},
         {4.0F, 0.18F, 0.02F, 0.08F},
@@ -3013,7 +3041,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                     material.showcasePlatform,
                     material.aoColor,
                     material.lamShadowColor,
-                    material.matcapColor,
+                    material.materialClass==AssetMaterialClass::Hair?material.hairViewParameters:material.matcapColor,
                     material.hairParameters,
                     material.styleParameters,
                     material.featureParameters,
@@ -3456,7 +3484,7 @@ void CharacterSceneRenderer::drawPrimitive(
         material.showcasePlatform,
         material.aoColor,
         material.lamShadowColor,
-        material.matcapColor,
+        material.materialClass==AssetMaterialClass::Hair?material.hairViewParameters:material.matcapColor,
         material.hairParameters,
         material.styleParameters,
         material.featureParameters,

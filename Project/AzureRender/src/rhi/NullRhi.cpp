@@ -156,8 +156,9 @@ void NullRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,
     const std::uint32_t width,
-    const std::uint32_t height) {
-    (void)source;
+    const std::uint32_t height,
+    const std::uint32_t mipLevels) {
+    (void)source;(void)mipLevels;
     calls.push_back(
         {"copyBufferToImage",
          hexHandle(destination.image) + " " + std::to_string(width) + "x"

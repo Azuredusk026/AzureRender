@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "camera": "full-body-front",
+      "height": 720,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 3108,
+      "exteriorDistanceP95Pixels": 1.0,
+      "exteriorDistanceP99Pixels": 1.4142135381698608
+    },
+    {
+      "camera": "face-front",
+      "height": 720,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 3338,
+      "exteriorDistanceP95Pixels": 1.4142135381698608,
+      "exteriorDistanceP99Pixels": 2.2360680103302
+    },
+    {
+      "camera": "back-detail",
+      "height": 720,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 3561,
+      "exteriorDistanceP95Pixels": 1.4142135381698608,
+      "exteriorDistanceP99Pixels": 2.0
+    },
+    {
+      "camera": "full-body-front",
+      "height": 1440,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 6858,
+      "exteriorDistanceP95Pixels": 1.0,
+      "exteriorDistanceP99Pixels": 1.4142135381698608
+    },
+    {
+      "camera": "face-front",
+      "height": 1440,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 6945,
+      "exteriorDistanceP95Pixels": 1.4142135381698608,
+      "exteriorDistanceP99Pixels": 2.2360680103302
+    },
+    {
+      "camera": "back-detail",
+      "height": 1440,
+      "outlinePixels": 0.8,
+      "changedExteriorPixels": 7671,
+      "exteriorDistanceP95Pixels": 1.4142135381698608,
+      "exteriorDistanceP99Pixels": 2.2360680103302
+    }
+  ]
+}

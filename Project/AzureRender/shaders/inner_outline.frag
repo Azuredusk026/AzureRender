@@ -17,6 +17,7 @@ layout(push_constant) uniform OutlineParameters {
     vec4 outlineColor;
     vec4 gradeParameters;
     vec4 gradeTint;
+    vec4 sampling;
 } outline;
 
 layout(location = 0) in vec2 screenUv;
@@ -35,7 +36,10 @@ vec3 acesFitted(vec3 color) {
         1.0);
 }
 
-void main() {
+float linearDepth(float z) {
+    return outline.sampling.y*outline.sampling.z / max(outline.sampling.z-z*(outline.sampling.z-outline.sampling.y),.00001);
+}
+vec4 shadePixel(vec2 screenUv) {
     ivec2 textureExtent = textureSize(normalTexture, 0);
     vec2 texelSize = 1.0 / vec2(textureExtent);
     vec4 centerSample = texture(normalTexture, screenUv);
@@ -44,27 +48,27 @@ void main() {
         vec3 normalColor = centerSample.a < 0.01
             ? vec3(0.018, 0.024, 0.040)
             : centerSample.rgb;
-        outputColor = vec4(normalColor, 1.0);
-        return;
+        return vec4(normalColor, 1.0);
+
     }
     if (diagnosticView == 3) {
         float shadowDepth = texture(shadowTexture, screenUv).r;
         float readableDepth = pow(clamp(shadowDepth, 0.0, 1.0), 4.0);
-        outputColor = vec4(vec3(readableDepth), 1.0);
-        return;
+        return vec4(vec3(readableDepth), 1.0);
+
     }
     if (diagnosticView == 4) {
         float depth = texture(depthTexture, screenUv).r;
         float readableDepth = centerSample.a < 0.01
             ? 0.0
             : 1.0 - pow(clamp(depth, 0.0, 1.0), 32.0);
-        outputColor = vec4(vec3(readableDepth), 1.0);
-        return;
+        return vec4(vec3(readableDepth), 1.0);
+
     }
     float edge = 0.0;
     if (centerSample.a >= 0.01 && outline.strength > 0.0) {
         vec3 centerNormal = normalize(centerSample.xyz * 2.0 - 1.0);
-        float centerDepth = texture(depthTexture, screenUv).r;
+        float centerDepth = linearDepth(texture(depthTexture, screenUv).r);
     const ivec2 offsets[8] = ivec2[](
         ivec2(-1, 0),
         ivec2(1, 0),
@@ -88,10 +92,10 @@ void main() {
             float participation = min(centerSample.a, neighbourSample.a);
             vec3 neighbourNormal =
                 normalize(neighbourSample.xyz * 2.0 - 1.0);
-            float neighbourDepth = texture(depthTexture, sampleUv).r;
+            float neighbourDepth = linearDepth(texture(depthTexture, sampleUv).r);
             maximumDepthDifference = max(
                 maximumDepthDifference,
-                abs(centerDepth - neighbourDepth) * 1400.0
+                abs(centerDepth - neighbourDepth) / max(centerDepth,.001) * 100.0
                     * participation);
             maximumNormalDifference = max(
                 maximumNormalDifference,
@@ -111,7 +115,7 @@ void main() {
     if (diagnosticView == 2) {
         vec3 background = vec3(0.018, 0.024, 0.040);
         vec3 edgeColor = vec3(0.35, 0.86, 1.0);
-        outputColor = vec4(mix(background, edgeColor, edge), 1.0);
+        return vec4(mix(background, edgeColor, edge), 1.0);
     } else {
         vec3 hdrColor = texture(sceneColorTexture, screenUv).rgb;
         vec3 bloom = vec3(0.0);
@@ -135,8 +139,8 @@ void main() {
         }
         if (outline.bloomIsolation > 0.5) {
             vec3 bloomDisplay = clamp(bloom * 4.0, vec3(0.0), vec3(1.0));
-            outputColor = vec4(bloomDisplay, 1.0);
-            return;
+            return vec4(bloomDisplay, 1.0);
+
         }
         hdrColor += bloom;
         hdrColor = mix(hdrColor, outline.outlineColor.rgb, edge);
@@ -155,6 +159,32 @@ void main() {
         displayLinear = (displayLinear - vec3(0.5))
             * outline.gradeParameters.y + vec3(0.5);
         displayLinear = clamp(displayLinear, vec3(0.0), vec3(1.0));
-        outputColor = vec4(displayLinear, 1.0);
+        return vec4(displayLinear, 1.0);
     }
+}
+
+float luma(vec3 rgb){return dot(rgb,vec3(.2126,.7152,.0722));}
+void main(){
+    vec2 texel=1.0/vec2(textureSize(sceneColorTexture,0));
+    if(outline.sampling.x>1.5){
+        vec4 sum=vec4(0);
+        for(int y=0;y<2;++y)for(int x=0;x<2;++x)
+            sum+=shadePixel(screenUv+(vec2(x,y)-vec2(.5))*texel);
+        outputColor=sum*.25;
+    }else if(outline.sampling.x>.5 && outline.diagnosticView<.5){
+        vec4 center=shadePixel(screenUv);
+        vec3 nw=shadePixel(screenUv+vec2(-1,-1)*texel).rgb;
+        vec3 ne=shadePixel(screenUv+vec2(1,-1)*texel).rgb;
+        vec3 sw=shadePixel(screenUv+vec2(-1,1)*texel).rgb;
+        vec3 se=shadePixel(screenUv+vec2(1,1)*texel).rgb;
+        float lc=luma(center.rgb),lnw=luma(nw),lne=luma(ne),lsw=luma(sw),lse=luma(se);
+        float lo=min(lc,min(min(lnw,lne),min(lsw,lse))),hi=max(lc,max(max(lnw,lne),max(lsw,lse)));
+        if(hi-lo<max(.025,hi*.125)){outputColor=center;return;}
+        vec2 direction=vec2(-((lnw+lne)-(lsw+lse)),(lnw+lsw)-(lne+lse));
+        float reduce=max((lnw+lne+lsw+lse)*(.25*.125),.0078125);
+        direction=clamp(direction/(min(abs(direction.x),abs(direction.y))+reduce),vec2(-8),vec2(8))*texel;
+        vec3 a=.5*(shadePixel(screenUv+direction*(1.0/3.0-.5)).rgb+shadePixel(screenUv+direction*(2.0/3.0-.5)).rgb);
+        vec3 b=a*.5+.25*(shadePixel(screenUv-direction*.5).rgb+shadePixel(screenUv+direction*.5).rgb);
+        float lb=luma(b);outputColor=vec4(lb<lo||lb>hi?a:b,1);
+    }else outputColor=shadePixel(screenUv);
 }

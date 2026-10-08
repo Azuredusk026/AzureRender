@@ -22,6 +22,7 @@ constexpr const char* kUsage =
     "[--scene <azscene path>] [--create-scene <azscene path>] "
     "[--editor <azscene path>] [--smoke-frames <positive integer>] "
     "[--portfolio] [--width <pixels>] [--height <pixels>] "
+    "[--anti-aliasing <off|edge|supersample>] "
     "[--gpu-timing] [--gpu-timing-output <json path>] "
     "[--diagnostic-view <beauty|normal|outline|shadow>] "
     "[--no-stylized] [--no-inner-outline] [--hud] "
@@ -58,6 +59,7 @@ constexpr const char* kHelp =
     "  --game-actions <json>               Replay fixed-route gameplay input\n"
     "Output:\n"
     "  --width <pixels> --height <pixels>  Output size\n"
+    "  --anti-aliasing off|edge|supersample  Spatial sampling quality\n"
     "  --capture-dir <empty-dir>           Deterministic PNG output\n"
     "  --capture-frames <N> --capture-fps <1-240>\n"
     "  --gpu-timing-output <json>          GPU pass timing\n\n"
@@ -475,6 +477,12 @@ ParsedCommandLine parseCommandLine(
             }
         } else if (argument == "--no-stylized") {
             parsed.options.renderSettings.stylizedLightingEnabled = false;
+        } else if (argument == "--anti-aliasing") {
+            const auto& value=requireValue(arguments,index,argument);
+            if(value=="off")parsed.options.renderSettings.antiAliasing=0;
+            else if(value=="edge")parsed.options.renderSettings.antiAliasing=1;
+            else if(value=="supersample")parsed.options.renderSettings.antiAliasing=2;
+            else fail(CommandLineErrorCode::InvalidValue,argument,"Expected off, edge, or supersample");
         } else if (argument == "--no-inner-outline") {
             parsed.options.renderSettings.innerOutlineEnabled = false;
         } else if (argument == "--hud") {

@@ -112,7 +112,7 @@ void AzureRenderApp::writeCaptureManifest(
         << runOptions_.qaDisableDepthTest << '|'
         << renderSettings_.cameraNear << '|'
         << renderSettings_.cameraFar << '|'
-        << renderSettings_.shadowDistance << '|'
+        << effectiveRenderSettings_.shadowDistance << '|'
         << qaIsolationMode_ << '|'
         << qaEffectMode_ << '|'
         << qaEffectEnabled_ << '|'
@@ -291,7 +291,10 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
         << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"
         << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
-        << "  \"shadowDistance\": " << renderSettings_.shadowDistance << ",\n"
+        << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
+        << "  \"sceneRenderWidth\": " << sceneRenderExtent_.width << ",\n"
+        << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
+        << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"

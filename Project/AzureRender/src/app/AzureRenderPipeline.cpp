@@ -446,8 +446,8 @@ void AzureRenderApp::createFramebuffers() {
         createInfo.renderPass = renderPass_;
         createInfo.attachmentCount = static_cast<std::uint32_t>(attachments.size());
         createInfo.pAttachments = attachments.data();
-        createInfo.width = renderExtent_.width;
-        createInfo.height = renderExtent_.height;
+        createInfo.width = sceneRenderExtent_.width;
+        createInfo.height = sceneRenderExtent_.height;
         createInfo.layers = 1;
         vkCheck(
             vkCreateFramebuffer(device_, &createInfo, nullptr, &swapchainFramebuffers_[index]),

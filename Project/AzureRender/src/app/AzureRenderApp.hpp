@@ -134,8 +134,9 @@ private:
         std::array<float, 4> outlineColor{0.008F, 0.013F, 0.022F, 1.0F};
         std::array<float, 4> gradeParameters{1.0F, 1.0F, 1.05F, 0.0F};
         std::array<float, 4> gradeTint{1.0F, 1.0F, 1.0F, 0.0F};
+        std::array<float,4> sampling{1,.1F,100,1};
     };
-    static_assert(sizeof(PostProcessPushConstants) == 80);
+    static_assert(sizeof(PostProcessPushConstants) == 96);
 
     struct GpuTimingAccumulator {
         std::uint64_t samples = 0;
@@ -254,6 +255,8 @@ private:
     VkFormat depthFormat_ = VK_FORMAT_UNDEFINED;
     VkExtent2D swapchainExtent_{};
     VkExtent2D renderExtent_{};
+    VkExtent2D sceneRenderExtent_{};
+    void updateSceneRenderExtent();
     VkExtent2D requestedEditorViewportExtent_{};
     bool editorViewportResizeRequested_ = false;
     std::vector<VkImage> swapchainImages_;

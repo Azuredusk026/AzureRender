@@ -1,0 +1,17 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "shadow_compare.glsl"
+layout(local_size_x=1) in;
+layout(binding=0,std430) buffer Results { float values[]; } result;
+void main() {
+    uint i=gl_GlobalInvocationID.x;
+    if(i==15u){
+        result.values[i]=compareShadowDepths(vec4(.39,.41,.39,.41),.399,vec2(.5),vec2(.02,0));
+        return;
+    }
+    // An independent depth step has half its samples blocked. Vary receiver
+    // depth as well as footprint position: linear visibility stays continuous.
+    float x=float(i%5)/4.0;
+    float receiver=float(i/5+1)/4.0;
+    result.values[i]=compareShadowDepths(vec4(.1,.9,.1,.9),receiver,vec2(x,.37));
+}

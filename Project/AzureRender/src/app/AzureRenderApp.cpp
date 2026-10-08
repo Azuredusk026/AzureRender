@@ -264,7 +264,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_);
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_));
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
     createShadowResources();
@@ -488,7 +488,7 @@ void AzureRenderApp::buildRenderContext(
         azurerender::VisibilityPrototype::supported(indirectProperties.limits);
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
-    context.renderExtent = renderExtent_;
+    context.renderExtent = sceneRenderExtent_;
     context.swapchainExtent = swapchainExtent_;
     context.sceneColorFormat = kHdrSceneColorFormat;
     context.depthFormat = depthFormat_;
@@ -704,8 +704,8 @@ void AzureRenderApp::buildSceneFrameData(
         frame.gizmoScale[2] = scale[2];
     }
 #endif
-    frame.swapchainWidth = swapchainExtent_.width;
-    frame.swapchainHeight = swapchainExtent_.height;
+    frame.swapchainWidth = sceneRenderExtent_.width;
+    frame.swapchainHeight = sceneRenderExtent_.height;
 }
 
 void AzureRenderApp::activatePortfolioOrbit() {
@@ -846,6 +846,7 @@ void AzureRenderApp::configureQaHarness() {
     if (!runOptions_.renderSettings.stylizedLightingEnabled) {
         renderSettings_.stylizedLightingEnabled = false;
     }
+    renderSettings_.antiAliasing=runOptions_.renderSettings.antiAliasing;
     if (!runOptions_.renderSettings.innerOutlineEnabled) {
         renderSettings_.innerOutlineEnabled = false;
     }
@@ -1266,6 +1267,8 @@ void AzureRenderApp::createLogicalDevice() {
     // Required so scene renderers (e.g. the blackhole tracer) can use a
     // zero-write World Normal attachment next to a written Scene Color.
     deviceFeatures.independentBlend = VK_TRUE;
+    VkPhysicalDeviceFeatures supportedSampler{};vkGetPhysicalDeviceFeatures(physicalDevice_,&supportedSampler);
+    deviceFeatures.samplerAnisotropy=supportedSampler.samplerAnisotropy;
     deviceFeatures.drawIndirectFirstInstance = indirectFirstInstanceSupported_ ? VK_TRUE : VK_FALSE;
     deviceFeatures.multiDrawIndirect = multiDrawIndirectSupported_ ? VK_TRUE : VK_FALSE;
     VkPhysicalDeviceVulkan12Features vulkan12Features{
@@ -1358,6 +1361,7 @@ void AzureRenderApp::createSwapchain() {
     } else {
         renderExtent_ = extent;
     }
+    updateSceneRenderExtent();
     if (editorUiEnabled_) {
         azurerender::RuntimeDiagnostics::instance().print(
             "editor",

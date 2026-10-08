@@ -119,8 +119,10 @@ def run(executable, output, workflow, config):
         if workflow=='exploration':
             assert Path(same['path']).name=='guide.gltf', 'Framing mask requires the declared guide model'
             image=Image.open(folder/'captures/asset-thumbnail.png').convert('RGB')
+            def linear_channels(rgb):
+                return [255*(v/255/12.92 if v/255<=.04045 else ((v/255+.055)/1.055)**2.4) for v in rgb]
             foreground=[(x,y) for y in range(image.height) for x in range(image.width)
-                        if (lambda rgb: rgb[2]>100 and rgb[0]<50 and rgb[1]>80)(image.getpixel((x,y)))]
+                        if (lambda rgb: rgb[2]>100 and rgb[0]<50 and rgb[1]>80)(linear_channels(image.getpixel((x,y))))]
             assert foreground and min(y for _,y in foreground)>4 and max(y for _,y in foreground)<image.height-4, 'Thumbnail crops its public model'
         asset_path=Path(same['path'])
         content=json.loads(asset_path.read_text(encoding='utf-8'))

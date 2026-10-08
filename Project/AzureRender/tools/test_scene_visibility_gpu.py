@@ -50,7 +50,12 @@ def run(executable, root):
             failures.append(str(error))
     def check(condition, message):
         if not condition: failures.append(message)
-    red = lambda image: (image[:, :, 0] > image[:, :, 1] * 1.5) & (image[:, :, 0] > image[:, :, 2] * 1.5)
+    def red(image):
+        # glTF factors and alpha blending are linear. Test chromatic dominance
+        # in that space while retaining the coverage and parity requirements.
+        encoded=image.astype(np.float64)/255
+        linear=np.where(encoded<=.04045,encoded/12.92,((encoded+.055)/1.055)**2.4)
+        return (linear[:,:,0]>linear[:,:,1]*1.5)&(linear[:,:,0]>linear[:,:,2]*1.5)
     counts = {name: int(red(image).sum()) for name, image in images.items()}
     for name in cases: counts.setdefault(name, 0)
     check(counts['positive'] > 1000, 'positive front surface absent')

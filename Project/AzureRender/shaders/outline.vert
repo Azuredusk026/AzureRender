@@ -66,10 +66,12 @@ void main() {
     vec3 skinnedNormal =
         normalize(mat3(skinMatrix) * normal);
 #endif
-    vec3 expandedPosition =
-        skinnedPosition
-        + skinnedNormal * camera.renderingParameters.x * 0.58;
-    gl_Position =
-        instanceData.instances[gl_InstanceIndex].modelViewProjection
-        * vec4(expandedPosition, 1.0);
+    mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
+    vec4 clip=mvp*vec4(skinnedPosition,1);
+    vec4 shifted=mvp*vec4(skinnedPosition+skinnedNormal*.001,1);
+    vec2 projected=shifted.xy/max(shifted.w,.0001)-clip.xy/max(clip.w,.0001);
+    vec2 pixelDirection=projected*camera.clusterDepth.zw;
+    float magnitude=length(pixelDirection);
+    if(magnitude>.00001)clip.xy+=pixelDirection/magnitude * camera.renderingParameters.x*2.0/camera.clusterDepth.zw*clip.w;
+    gl_Position=clip;
 }

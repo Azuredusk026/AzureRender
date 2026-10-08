@@ -76,8 +76,8 @@ void AzureRenderApp::createSceneColorResources() {
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         sceneColorImages_[index] = gpuAllocator_.createImage2D(
-            renderExtent_.width,
-            renderExtent_.height,
+            sceneRenderExtent_.width,
+            sceneRenderExtent_.height,
             kHdrSceneColorFormat,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT);
         sceneColorImageViews_[index] = createImageView(
@@ -94,8 +94,8 @@ void AzureRenderApp::createDepthResources() {
 
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         depthImages_[index] = gpuAllocator_.createImage2D(
-            renderExtent_.width,
-            renderExtent_.height,
+            sceneRenderExtent_.width,
+            sceneRenderExtent_.height,
             depthFormat_,
             VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT
                 | VK_IMAGE_USAGE_SAMPLED_BIT);
@@ -109,8 +109,8 @@ void AzureRenderApp::createNormalResources() {
     normalImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         normalImages_[index] = gpuAllocator_.createImage2D(
-            renderExtent_.width,
-            renderExtent_.height,
+            sceneRenderExtent_.width,
+            sceneRenderExtent_.height,
             normalFormat_,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT
                 | VK_IMAGE_USAGE_SAMPLED_BIT);

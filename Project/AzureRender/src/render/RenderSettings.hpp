@@ -36,6 +36,7 @@ struct BloomSettings {
 struct OutlineSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
+    float silhouetteWidthPixels = .8F;
     float strength = 0.40F;
     float depthThreshold = 0.18F;
     float normalThreshold = 0.20F;

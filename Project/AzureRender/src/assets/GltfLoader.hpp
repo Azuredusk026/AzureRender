@@ -47,6 +47,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureBrowOverlay = 1U << 6U,
     MaterialFeatureSurfaceAo = 1U << 7U,
     MaterialFeatureSceneTint = 1U << 8U,
+    MaterialFeatureHairRamp = 1U << 9U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -103,6 +104,7 @@ struct AssetMaterial {
     std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
+    std::array<float,4> hairViewParameters{0,0,0,1};
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

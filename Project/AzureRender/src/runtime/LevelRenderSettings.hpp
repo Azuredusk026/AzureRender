@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -16,6 +16,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
     auto settings=target;
+    settings.outline.silhouetteWidthPixels=data.value("outlinePixels",settings.outline.silhouetteWidthPixels);
     settings.antiAliasing=data.value("antiAliasing",settings.antiAliasing);
     settings.cameraNear=data.value("cameraNear",settings.cameraNear);
     settings.cameraFar=data.value("cameraFar",settings.cameraFar);

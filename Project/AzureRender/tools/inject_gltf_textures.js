@@ -245,8 +245,8 @@ for (const material of json.materials ?? []) {
     const color=detail.vector_parameters?.Color_RGB ?? {r:1,g:1,b:1};
     const hsv=detail.vector_parameters?.BackHSV ?? {r:1,g:1,b:1};
     material.extras.azureRenderMaterial.features.push("scene-tint");
-    material.extras.azureRenderMaterial.styleParameters=[color.r*hsv.b,color.g*hsv.b,color.b*hsv.b,0];
-    material.extras.azureRenderMaterial.featureParameters=[0,detail.scalar_parameters?.Opacity ?? 1,(detail.scalar_parameters?.Depth ?? 1000)*.01,0];
+    material.extras.azureRenderMaterial.styleParameters=[color.r,color.g,color.b,hsv.g];
+    material.extras.azureRenderMaterial.featureParameters=[hsv.r,detail.scalar_parameters?.Opacity ?? 1,(detail.scalar_parameters?.Depth ?? 1000)*.01,hsv.b];
     material.alphaMode="BLEND";material.doubleSided=true;
   }
   if (material.name.toLowerCase().includes("eyeshadow")) {
@@ -317,6 +317,17 @@ for (const material of json.materials ?? []) {
       scalarParameters.KK_Ramp ?? 4.0,
       1.0,
     ];
+    const cameraOffset=vectorParameters.KK_Spe_Camera_Offset ?? {r:0,g:0,b:0};
+    material.extras.azureRenderMaterial.hair={
+      power:scalarParameters.KK_Power ?? 64,strength:scalarParameters.KK_Ramp_Strengh ?? .15,
+      rampRow:scalarParameters.KK_Ramp ?? 3,strandShift:.1,
+      cameraOffset:[cameraOffset.r,cameraOffset.g,cameraOffset.b],upperLimit:scalarParameters.KK_Spe_Upper_Limit ?? 1
+    };
+    const rampFilename="azure_lwt_kk_ramp.png";
+    if (fs.existsSync(path.join(textureRoot,rampFilename))) {
+      material.extras.azureRenderMaterial.features.push("hair-ramp");
+      material.extras.azureRenderMaterial.hair.rampTexture=addTexture(rampFilename);
+    }
     boundHairData += 1;
   }
 
@@ -392,7 +403,7 @@ for (const material of json.materials ?? []) {
     fs.existsSync(path.join(textureRoot, packedFilename))
   ) {
     const metallicStrength =
-      scalarParameters.GGX_Metallic_Strengh ?? 1.0;
+      scalarParameters.GGX_Metallic_Strengh ?? (material.extras.azureRenderMaterial.class==="hair"?0.0:1.0);
     const roughnessBase = vectorParameters.MSRE?.b ?? 0.0;
     const roughnessMapped = scalarParameters.Roughnessmap_Strengh ?? 1.0;
     const glossScale = scalarParameters.Glossiness_Mask_Smooth ?? 1.0;
@@ -466,6 +477,44 @@ for (const material of json.materials ?? []) {
   }
 }
 
+// Keep only textures reachable from the authored material contract.
+const usedTextures=new Set();const textureRefs=[];
+const remember=ref=>{if(ref && Number.isInteger(ref.index)){usedTextures.add(ref.index);textureRefs.push(ref);}};
+for(const m of json.materials ?? []){
+  remember(m.pbrMetallicRoughness?.baseColorTexture);remember(m.pbrMetallicRoughness?.metallicRoughnessTexture);
+  remember(m.normalTexture);remember(m.occlusionTexture);remember(m.emissiveTexture);
+  for(const field of ["afterglowMatcapTexture","afterglowHairDataTexture"]){if(Number.isInteger(m.extras?.[field]))usedTextures.add(m.extras[field]);}
+  if(Number.isInteger(m.extras?.azureRenderMaterial?.faceSdf?.texture))usedTextures.add(m.extras.azureRenderMaterial.faceSdf.texture);
+  if(Number.isInteger(m.extras?.azureRenderMaterial?.hair?.rampTexture))usedTextures.add(m.extras.azureRenderMaterial.hair.rampTexture);
+}
+const textureMap=new Map([...usedTextures].sort((a,b)=>a-b).map((old,i)=>[old,i]));
+const keptTextures=[...textureMap.keys()].map(old=>json.textures[old]);
+for(const ref of textureRefs)ref.index=textureMap.get(ref.index);
+for(const m of json.materials ?? []){
+  for(const field of ["afterglowMatcapTexture","afterglowHairDataTexture"]){if(Number.isInteger(m.extras?.[field]))m.extras[field]=textureMap.get(m.extras[field]);}
+  const face=m.extras?.azureRenderMaterial?.faceSdf;if(face)face.texture=textureMap.get(face.texture);
+  const hair=m.extras?.azureRenderMaterial?.hair;if(Number.isInteger(hair?.rampTexture))hair.rampTexture=textureMap.get(hair.rampTexture);
+}
+const imageMap=new Map([...new Set(keptTextures.map(t=>t.source))].sort((a,b)=>a-b).map((old,i)=>[old,i]));
+json.images=[...imageMap.keys()].map(old=>json.images[old]);json.textures=keptTextures;
+for(const t of json.textures)t.source=imageMap.get(t.source);
+const usedViews=new Set(json.images.map(im=>im.bufferView));
+for(const accessor of json.accessors ?? []){
+  if(Number.isInteger(accessor.bufferView))usedViews.add(accessor.bufferView);
+  if(accessor.sparse){usedViews.add(accessor.sparse.indices.bufferView);usedViews.add(accessor.sparse.values.bufferView);}
+}
+const viewMap=new Map([...usedViews].sort((a,b)=>a-b).map((old,i)=>[old,i]));
+const originalBinary=Buffer.concat(binaryParts,binaryLength);binaryParts.length=0;binaryLength=0;
+json.bufferViews=[...viewMap.keys()].map(old=>{
+  const view={...json.bufferViews[old]};appendPadding();
+  binaryParts.push(originalBinary.subarray(view.byteOffset??0,(view.byteOffset??0)+view.byteLength));
+  view.byteOffset=binaryLength;binaryLength+=view.byteLength;return view;
+});
+for(const im of json.images)im.bufferView=viewMap.get(im.bufferView);
+for(const accessor of json.accessors ?? []){
+  if(Number.isInteger(accessor.bufferView))accessor.bufferView=viewMap.get(accessor.bufferView);
+  if(accessor.sparse){accessor.sparse.indices.bufferView=viewMap.get(accessor.sparse.indices.bufferView);accessor.sparse.values.bufferView=viewMap.get(accessor.sparse.values.bufferView);}
+}
 appendPadding();
 const outputBinary = Buffer.concat(binaryParts, binaryLength);
 json.buffers[0].byteLength = outputBinary.length;
@@ -505,3 +554,14 @@ console.log(
     `${boundMaterialProfiles} material profiles, ` +
     `${textureIndices.size} unique embedded textures)`
 );
+
+const crypto=require("crypto");
+const hash=data=>crypto.createHash("sha256").update(data).digest("hex");
+const dependencies={materialManifest:{path:manifestPath,sha256:hash(fs.readFileSync(manifestPath))},
+  codec:{path:require.resolve("./bc5_normal_png"),sha256:hash(fs.readFileSync(require.resolve("./bc5_normal_png")))},
+  faceSdf:{path:faceSdfPath,sha256:hash(fs.readFileSync(faceSdfPath))},
+  textureSources:fs.readdirSync(textureRoot).filter(name=>name.endsWith(".source.json")).map(name=>({name,...JSON.parse(fs.readFileSync(path.join(textureRoot,name),"utf8"))})),
+  textures:fs.readdirSync(textureRoot).filter(name=>name.endsWith(".png")).map(name=>({name,sha256:hash(fs.readFileSync(path.join(textureRoot,name)))}))};
+fs.writeFileSync(outputPath+".provenance.json",JSON.stringify({schemaVersion:2,source:{path:inputPath,sha256:hash(input)},
+  generator:{path:__filename,sha256:hash(fs.readFileSync(__filename)),nodeVersion:process.version},dependencies,
+  output:{path:outputPath,sha256:hash(fs.readFileSync(outputPath))}},null,2)+"\n");

@@ -74,7 +74,8 @@ public:
         const GpuBuffer& source,
         const GpuImage& destination,
         std::uint32_t width,
-        std::uint32_t height) override;
+        std::uint32_t height,
+        std::uint32_t mipLevels = 1) override;
     void clearImage(const GpuImage& image) override;
     void generateMipmaps(
         const GpuImage& image,

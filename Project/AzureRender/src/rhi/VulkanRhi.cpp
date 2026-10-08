@@ -104,19 +104,25 @@ void VulkanRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,
     const std::uint32_t width,
-    const std::uint32_t height) {
+    const std::uint32_t height,
+    const std::uint32_t mipLevels) {
     runOneShot("copyBufferToImage", [&](VkCommandBuffer commandBuffer) {
-        VkBufferImageCopy region{};
+        std::vector<VkBufferImageCopy> regions;
+        VkDeviceSize offset=0;unsigned w=width,h=height;
+        for(unsigned level=0;level<mipLevels;++level){
+        VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource.mipLevel=level;
         region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         region.imageSubresource.layerCount = 1;
-        region.imageExtent = {width, height, 1};
+        region.imageExtent = {w, h, 1};
+        regions.push_back(region);offset+=VkDeviceSize(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);
+        }
         vkCmdCopyBufferToImage(
             commandBuffer,
             source.buffer,
             destination.image,
             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-            1,
-            &region);
+            static_cast<unsigned>(regions.size()),
+            regions.data());
     });
 }
 
@@ -292,6 +298,12 @@ VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
         ? VK_SAMPLER_MIPMAP_MODE_LINEAR
         : VK_SAMPLER_MIPMAP_MODE_NEAREST;
     samplerInfo.maxLod = desc.maxLod;
+    VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physicalDevice_,&features);
+    VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    if(samplerAnisotropyEnabled_ && features.samplerAnisotropy && desc.maxAnisotropy>1){
+        samplerInfo.anisotropyEnable=VK_TRUE;
+        samplerInfo.maxAnisotropy=std::clamp(desc.maxAnisotropy,1.F,properties.limits.maxSamplerAnisotropy);
+    }
     VkSampler sampler = VK_NULL_HANDLE;
     vkCheck(
         vkCreateSampler(device_, &samplerInfo, nullptr, &sampler),
@@ -451,7 +463,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
             | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
         if (desc.alphaBlend) {
             attachment.blendEnable = VK_TRUE;
-            attachment.srcColorBlendFactor = desc.multiplicativeTint ? VK_BLEND_FACTOR_DST_COLOR : desc.premultipliedAlpha ? VK_BLEND_FACTOR_ONE : VK_BLEND_FACTOR_SRC_ALPHA;
+            attachment.srcColorBlendFactor = desc.premultipliedAlpha ? VK_BLEND_FACTOR_ONE : VK_BLEND_FACTOR_SRC_ALPHA;
             attachment.dstColorBlendFactor =
                 VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
             attachment.colorBlendOp = VK_BLEND_OP_ADD;

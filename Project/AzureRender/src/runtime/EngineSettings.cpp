@@ -17,6 +17,8 @@ void RenderSettingOverlay::apply(const SettingRegistry& registry,RenderSettings&
         if(found==active_.end())found=active_.emplace(name,Active{value,value}).first;
         write(registry.get(name));found->second.last=read();
     };
+    apply("render.shadowDistance",[&]()->Json{return settings.shadowDistance;},[&](const Json& v){settings.shadowDistance=v.get<float>();});
+    apply("render.antiAliasing",[&]()->Json{return settings.antiAliasing;},[&](const Json& v){settings.antiAliasing=v.get<unsigned>();});
     apply("render.diagnosticView",[&]()->Json{return settings.diagnosticView;},[&](const Json& v){settings.diagnosticView=v.get<unsigned>();});
     apply("render.exposure",[&]()->Json{return settings.grade.exposureEv;},[&](const Json& v){settings.grade.exposureEv=v.get<float>();});
     apply("render.blackholeQuality",[&]()->Json{return static_cast<int>(settings.blackhole.quality);},[&](const Json& v){settings.blackhole.quality=static_cast<BlackholeQuality>(v.get<int>());});
