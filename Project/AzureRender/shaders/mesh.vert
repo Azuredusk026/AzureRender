@@ -14,6 +14,7 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
     vec4 mainLightDirection;
+    vec4 cascadeDepthRanges;
 } camera;
 
 layout(std430, binding = 10) readonly buffer JointData {
@@ -93,7 +94,7 @@ void main() {
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
 #endif
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
-    if (browOverlay) {
+    if (browOverlay && browMask > 0.5) {
         vec3 initialWorldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
         vec3 worldViewDirection = normalize(
             camera.cameraPosition.xyz - initialWorldPosition);

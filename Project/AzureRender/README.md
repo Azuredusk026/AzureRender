@@ -126,3 +126,8 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 
 编辑器交互步骤见[交互教程](docs/tutorials/editor-interaction.md)。
 内容类型、引用和任务见[内容制作服务](docs/runtime/content-workflows.md)。
+
+## 角色渲染修复
+
+角色渲染采用版本化材质通道与叠层契约。
+根由与验收见[修复计划](docs/plans/2026-10-09-character-rendering-repair.md)。

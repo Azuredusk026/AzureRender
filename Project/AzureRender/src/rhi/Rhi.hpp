@@ -103,6 +103,8 @@ struct GraphicsPipelineDesc {
 
     bool alphaBlend = false;
     bool premultipliedAlpha = false;
+    // Source RGB contains alpha-weighted transmittance; destination is modulated.
+    bool multiplicativeTint = false;
     // 0 for depth-only passes.
     std::uint32_t colorAttachmentCount = 0;
 

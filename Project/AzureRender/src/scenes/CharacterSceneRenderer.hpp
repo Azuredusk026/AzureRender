@@ -104,6 +104,15 @@ private:
         GpuTexture faceSdf;
     };
 
+    std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
+    std::array<rhi::GpuImage,kMaxFramesInFlight> overlayDepthAttachments_;
+    std::array<VkImageView,kMaxFramesInFlight> overlayDepthViews_{};
+    std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
+    VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
+    VkPipeline overlayDepthPipeline_=VK_NULL_HANDLE;
+    void createOverlayDepth(const RenderContext& context);
+    void destroyOverlayDepth();
+    void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;
         std::uint32_t alphaMode = 0;
@@ -151,6 +160,7 @@ private:
         std::array<float, 4> faceSdfParameters{};
         std::array<float, 4> faceSdfShadowColor{};
         std::array<float, 4> mainLightDirection{};
+        std::array<float, 4> cascadeDepthRanges{};
     };
 
     // Per-instance transforms uploaded to the instance storage buffer. The
@@ -265,6 +275,7 @@ private:
     VkPipeline skinningPipeline_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> skinningDescriptorSets_;
     std::uint32_t meshResourceCount_ = 0;
+    std::uint32_t shadowCascadeResolution_ = 1024;
     std::size_t oitIndexBufferSize_ = 0;
     VkDescriptorSetLayout descriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
@@ -276,6 +287,7 @@ private:
     VkPipeline blendPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
+    VkPipeline sceneTintPipeline_ = VK_NULL_HANDLE;
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;

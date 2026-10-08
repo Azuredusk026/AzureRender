@@ -204,6 +204,8 @@ compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.vert"
     DEFINES AZURE_COMPUTE_SKINNING=1
     OUTPUT_NAME mesh_compute.vert)
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME character_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.frag"
@@ -549,6 +551,15 @@ if(BUILD_TESTING)
     target_link_libraries(AzureProceduralProcessTests PRIVATE AzureDevtools)
     add_test(NAME AzureAssets.ProceduralProcess COMMAND AzureProceduralProcessTests "$<TARGET_FILE:AzureGeometryCompiler>" "${CMAKE_CURRENT_BINARY_DIR}/procedural-process-tests")
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
+    add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
+    target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRender.CharacterRepair COMMAND AzureCharacterRepairTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
+    find_program(AZURE_NODE_EXECUTABLE node)
+    if(AZURE_NODE_EXECUTABLE)
+        add_test(NAME AzureRender.SurfaceConversion COMMAND "${AZURE_NODE_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_surface_conversion.js")
+    endif()
     target_link_libraries(AzureEngineSettingsTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.SettingsOverlay COMMAND AzureEngineSettingsTests)
     add_executable(AzureSettingRegistryTests tests/SettingRegistryTests.cpp)

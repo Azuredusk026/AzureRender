@@ -192,7 +192,7 @@ function buildMaterialProfile(materialName, parameters = {}) {
     showcase: [1.0, 1.0, 1.0, 1.0],
   }[materialClass]);
   // Unreal material distances are centimetres; glTF geometry is metres.
-  const featureParameters = isBrow ? [0.04679, 0.95, 0.02, 1.0] : ({
+  const featureParameters = isBrow ? [0.02, 0.95, 0.02, 1.0] : ({
     generic: [1.0, 0.0, 1.0, 0.0],
     skin: [0.75, 0.0, 1.0, 0.0],
     face: [0.65, 0.0, 1.0, 1.0],
@@ -205,7 +205,7 @@ function buildMaterialProfile(materialName, parameters = {}) {
     showcase: [1.0, 0.0, 1.0, 0.0],
   }[materialClass]);
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     class: materialClass,
     features,
     styleParameters,
@@ -239,6 +239,20 @@ for (const material of json.materials ?? []) {
       headNode: faceSdfHeadNode,
     };
     boundFaceSdf += 1;
+  }
+  if (material.name.toLowerCase().includes("hairshadow")) {
+    const detail=manifest.material_details?.[material.name] ?? {};
+    const color=detail.vector_parameters?.Color_RGB ?? {r:1,g:1,b:1};
+    const hsv=detail.vector_parameters?.BackHSV ?? {r:1,g:1,b:1};
+    material.extras.azureRenderMaterial.features.push("scene-tint");
+    material.extras.azureRenderMaterial.styleParameters=[color.r*hsv.b,color.g*hsv.b,color.b*hsv.b,0];
+    material.extras.azureRenderMaterial.featureParameters=[0,detail.scalar_parameters?.Opacity ?? 1,(detail.scalar_parameters?.Depth ?? 1000)*.01,0];
+    material.alphaMode="BLEND";material.doubleSided=true;
+  }
+  if (material.name.toLowerCase().includes("eyeshadow")) {
+    material.alphaMode="BLEND";
+    material.pbrMetallicRoughness ??= {};
+    material.pbrMetallicRoughness.baseColorFactor=[0,0,0,1];
   }
   boundMaterialProfiles += 1;
   if (!parameters) {
@@ -378,20 +392,22 @@ for (const material of json.materials ?? []) {
     fs.existsSync(path.join(textureRoot, packedFilename))
   ) {
     const metallicStrength =
-      scalarParameters.GGX_Metallic_Strengh ?? 0.5;
-    const roughnessOffset =
-      scalarParameters.Roughnessmap_Strengh ?? 0.0;
+      scalarParameters.GGX_Metallic_Strengh ?? 1.0;
+    const roughnessBase = vectorParameters.MSRE?.b ?? 0.0;
+    const roughnessMapped = scalarParameters.Roughnessmap_Strengh ?? 1.0;
+    const glossScale = scalarParameters.Glossiness_Mask_Smooth ?? 1.0;
+    const glossOffset = scalarParameters.Glossiness_Mask_Offset ?? 0.0;
     const metallicRoughnessKey = [
       packedFilename,
       metallicStrength.toFixed(4),
-      roughnessOffset.toFixed(4),
+      roughnessBase, roughnessMapped, glossScale, glossOffset, "surface-v2",
     ].join("|");
     if (!convertedMetallicRoughness.has(metallicRoughnessKey)) {
       convertedMetallicRoughness.set(
         metallicRoughnessKey,
         convertUnrealMsreToGltfMrPng(
           fs.readFileSync(path.join(textureRoot, packedFilename)),
-          { metallicStrength, roughnessOffset }
+          { metallicStrength, roughnessBase, roughnessMapped, glossScale, glossOffset }
         )
       );
     }
@@ -405,6 +421,7 @@ for (const material of json.materials ?? []) {
     };
     material.pbrMetallicRoughness.metallicFactor = 1.0;
     material.pbrMetallicRoughness.roughnessFactor = 1.0;
+    material.extras.azureRenderMaterial.features.push("surface-ao");
     boundMetallicRoughness += 1;
 
     const emissiveAssetPath = parameters._E;

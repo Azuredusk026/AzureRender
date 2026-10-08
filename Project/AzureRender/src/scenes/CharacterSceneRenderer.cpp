@@ -229,6 +229,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
 }
 
 void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
+    shadowCascadeResolution_=context.shadowMapSize/2;
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
         throw std::runtime_error(
@@ -382,7 +383,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots,11,4});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+1,12,4});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -393,7 +394,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + std::to_string(limits.maxPerStageDescriptorSamplers));
     loadJobs_.push_back([this]{createUniformBuffers();createJointBuffers();});
     loadJobs_.push_back([this]{createComputeSkinningResources();createOitIndexBuffers();});
-    loadJobs_.push_back([this]{createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
+    loadJobs_.push_back([this,context]{createOverlayDepth(context);createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
     loadJobs_.push_back([this,context]{createGraphicsPipeline(context);buildSceneState();});
 }
 
@@ -420,6 +421,9 @@ void CharacterSceneRenderer::onSwapchainRecreate(
     // The scene render pass is recreated by the engine; the character
     // pipelines reference it and must be rebuilt.
     destroyGraphicsPipelinesForRecreate();
+    destroyOverlayDepth();createOverlayDepth(context);
+    if(descriptorPool_!=VK_NULL_HANDLE)rhi_->destroyDescriptorPool(descriptorPool_);
+    createDescriptorPool();createDescriptorSets();
     createGraphicsPipeline(context);
 }
 
@@ -983,6 +987,20 @@ void CharacterSceneRenderer::registerPasses(
             graph.use(cull,output,RenderGraphUsage::Storage,true);
         }
     }
+    rhi::ImageBarrierDesc overlayInitial{};overlayInitial.image=overlaySceneDepth_[context.currentFrame].image.image;
+    overlayInitial.newLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+    const auto overlayDepth=graph.importImage("character-overlay-depth",overlayInitial);
+    rhi::RenderPassBeginDesc overlayBegin{};overlayBegin.renderPass=overlayDepthPass_;
+    overlayBegin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];overlayBegin.extent=context.renderExtent;
+    VkClearValue linearClear{};linearClear.color.float32[0]=100000;VkClearValue depthClear{};depthClear.depthStencil={1,0};
+    overlayBegin.clearValues={linearClear,depthClear};
+    const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+        recordOverlayDepth(*frozenContext,*frozenInstances,commands);
+    });
+    graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
+    if(skinnedResource)graph.use(prepass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+    for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepass,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
@@ -1019,6 +1037,7 @@ void CharacterSceneRenderer::registerPasses(
         });
     }
     graph.setRecordingChunks(main, std::move(mainChunks));
+    graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
     if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
         const auto& buffer = oitIndexBuffers_[context.currentFrame];
@@ -1053,6 +1072,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     instanceSnapshot_->validateForRecording();
     recordComputeSkinning(context);
     recordShadowPass(context);
+    recordOverlayDepth(context,*instanceSnapshot_,*context.commands);
     recordMainPass(context);
 }
 
@@ -1811,6 +1831,52 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
     }
 }
 
+void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
+    rhi::RenderPassDesc pass;pass.attachments={{VK_FORMAT_R32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,false,true}};
+    pass.depthAttachment=1;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
+    for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
+        auto& target=overlaySceneDepth_[frame];
+        target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,VK_FORMAT_R32_SFLOAT,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        target.view=rhi_->createImageView(target.image.image,VK_FORMAT_R32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
+        rhi::SamplerDesc sampler;sampler.filter=VK_FILTER_NEAREST;sampler.addressU=sampler.addressV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        target.sampler=rhi_->createSampler(sampler);
+        auto& depth=overlayDepthAttachments_[frame];depth=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.depthFormat,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+        overlayDepthViews_[frame]=rhi_->createImageView(depth.image,context.depthFormat,VK_IMAGE_ASPECT_DEPTH_BIT,1);
+        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,{target.view,overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+    }
+}
+void CharacterSceneRenderer::destroyOverlayDepth(){
+    for(std::size_t i=0;i<kMaxFramesInFlight;++i){
+        if(overlayDepthFramebuffers_[i])rhi_->destroyFramebuffer(overlayDepthFramebuffers_[i]);overlayDepthFramebuffers_[i]=VK_NULL_HANDLE;
+        if(overlayDepthViews_[i])rhi_->destroyImageView(overlayDepthViews_[i]);overlayDepthViews_[i]=VK_NULL_HANDLE;
+        allocator_->destroyImage(overlayDepthAttachments_[i]);
+        auto& t=overlaySceneDepth_[i];if(t.view)rhi_->destroyImageView(t.view);if(t.sampler)rhi_->destroySampler(t.sampler);allocator_->destroyImage(t.image);t={};
+    }
+    if(overlayDepthPass_)rhi_->destroyRenderPass(overlayDepthPass_);overlayDepthPass_=VK_NULL_HANDLE;
+}
+void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
+    commands.bindPipeline(overlayDepthPipeline_);
+    for(const auto& span:snapshot.visibleSpans){
+        const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
+        const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
+        commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
+        for(const auto& primitive:mesh.primitives){
+            const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
+            if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
+            const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
+            commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
+            MaterialPushConstants material{};material.alphaCutoff=m.alphaCutoff;material.alphaMode=static_cast<std::uint32_t>(m.alphaMode);
+            commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
+            MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
+            commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
+            commands.drawIndexed(primitive.indexCount,primitive.firstIndex,count,first);
+        }
+    }
+}
+
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
     if (bindlessTextures_) {
@@ -1823,7 +1889,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * textureSlots},
+             frameCount * (textureSlots + 1)},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 6},
         };
         poolDesc.maxSets = frameCount;
@@ -1834,7 +1900,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 11},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 12},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 6},
     };
     poolDesc.maxSets = descriptorCount;
@@ -1877,6 +1943,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              1,
              VK_SHADER_STAGE_FRAGMENT_BIT},
             {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+            {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -1903,6 +1970,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {15, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {16, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, kFragment},
         {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
+        {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
     });
 }
 
@@ -1969,6 +2037,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2049,6 +2118,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2293,6 +2363,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (bindlessTextures_?"/character_depth_bindless.frag.spv":"/character_depth.frag.spv")));
+        auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
+        depthDesc.colorAttachmentCount=1;depthDesc.cullMode=VK_CULL_MODE_NONE;
+        overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
@@ -2304,6 +2378,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        auto tintDesc=materialDesc;tintDesc.multiplicativeTint=true;
+        sceneTintPipeline_=rhi_->createGraphicsPipeline(tintDesc);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
         outlineDesc.vertexShader = outlineVertexModule;
@@ -2363,6 +2439,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    destroyOverlayDepth();
     for (auto& resources : gpuCullingFrames_) resources.reset();
     gpuCullingCapacities_.fill(0);
     if (rhi_ == nullptr) {
@@ -2375,10 +2452,12 @@ void CharacterSceneRenderer::destroyResources() {
              &blendPipeline_,
              &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
+             &sceneTintPipeline_,
              &outlinePipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
-             &shadowPipeline_}) {
+             &shadowPipeline_,
+             &overlayDepthPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -2528,10 +2607,12 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &blendPipeline_,
              &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
+             &sceneTintPipeline_,
              &outlinePipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
-             &shadowPipeline_}) {
+             &shadowPipeline_,
+             &overlayDepthPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -2608,7 +2689,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const Vector3 cameraRight = normalize(cross(cameraForward, worldUp));
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
     // Keep conservative shadow coverage around the shared geometry projection.
-    const float halfFovTangent = std::tan(kPi / 6.0F);
+    const float halfFovTangent = 1.0F / std::abs(projection[5]);
+    std::array<float,4> cascadeDepthRanges{};
     float cascadeNear = settings.cameraNear;
     for (std::size_t cascade = 0;
          cascade < kShadowCascadeCount;
@@ -2642,6 +2724,14 @@ void CharacterSceneRenderer::updateUniformBuffer(
                 radius, vectorLength(subtract(corner, center)));
         }
         radius = std::max(std::ceil(radius * 16.0F) / 16.0F, 0.25F);
+        cascadeDepthRanges[cascade]=radius*4.1F-.1F;
+        const Vector3 snapUp=std::abs(dot(lightDirection,worldUp))>.97F?Vector3{0,0,1}:worldUp;
+        const Vector3 snapRight=normalize(cross(snapUp,lightDirection));
+        const Vector3 snapVertical=normalize(cross(lightDirection,snapRight));
+        const float worldTexel=2*radius/static_cast<float>(shadowCascadeResolution_);
+        const float dx=std::round(dot(center,snapRight)/worldTexel)*worldTexel-dot(center,snapRight);
+        const float dy=std::round(dot(center,snapVertical)/worldTexel)*worldTexel-dot(center,snapVertical);
+        center=addVectors(center,addVectors(scaleVector(snapRight,dx),scaleVector(snapVertical,dy)));
         const Vector3 lightEye = addVectors(
             center, scaleVector(lightDirection, radius * 2.0F + 0.1F));
         const Vector3 lightUp = std::abs(dot(lightDirection, worldUp)) > 0.97F
@@ -2658,6 +2748,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
 
     UniformBufferObject uniform{};
+    uniform.cascadeDepthRanges=cascadeDepthRanges;
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };
@@ -3344,7 +3435,7 @@ void CharacterSceneRenderer::drawPrimitive(
     const auto& gizmoScale = snapshot ? snapshot->gizmo.scale : gizmoScale_;
     if (active && selected == static_cast<std::int32_t>(&primitive - mesh.primitives.data()))
         mirrored ^= gizmoScale[0]*gizmoScale[1]*gizmoScale[2] < 0;
-    const VkPipeline pipeline = blend
+    const VkPipeline pipeline = (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
         : (material.doubleSided ? opaqueDoubleSidedPipeline_ : mirrored ? opaqueMirroredPipeline_ : opaquePipeline_);
     commands.bindPipeline(pipeline);

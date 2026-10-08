@@ -182,8 +182,12 @@ function convertUnrealBc5NormalPng(data) {
 
 function convertUnrealMsreToGltfMrPng(
   data,
-  { metallicStrength = 1.0, roughnessOffset = 0.0 } = {}
+  { metallicStrength = 1.0, roughnessBase = 0.0, roughnessMapped = 1.0,
+    glossScale = 1.0, glossOffset = 0.0 } = {}
 ) {
+  for (const value of [metallicStrength, roughnessBase, roughnessMapped, glossScale, glossOffset]) {
+    if (!Number.isFinite(value)) throw new Error('Surface parameters must be finite');
+  }
   const decoded = decodePng(data);
   const output = Buffer.alloc(decoded.width * decoded.height * 4);
   const clampedMetallicStrength = Math.min(
@@ -196,16 +200,15 @@ function convertUnrealMsreToGltfMrPng(
     source += decoded.channels, destination += 4
   ) {
     const sourceMetallic = decoded.pixels[source] / 255.0;
-    const sourceRoughness = decoded.pixels[source + 2] / 255.0;
-    // The Unreal instances expose Roughnessmap_Strengh as a signed surface
-    // adjustment. The original material graph is unavailable, so bake a
-    // deliberately conservative quarter-scale approximation instead of
-    // treating the packed channel as the final glTF value.
+    const sourceAo = decoded.pixels[source + 2] / 255.0;
+    const gloss = Math.min(Math.max((decoded.channels > 3 ? decoded.pixels[source + 3] / 255.0 : 0.0)
+      * glossScale - glossOffset, 0.0), 1.0);
+    // M_Common_Cloth: lerp(MSRE.b, Roughnessmap_Strengh, 1 - adjustedGloss).
     const adjustedRoughness = Math.min(
-      Math.max(sourceRoughness + roughnessOffset * 0.25, 0.08),
+      Math.max(roughnessBase * gloss + roughnessMapped * (1 - gloss), 0.08),
       1.0
     );
-    output[destination] = 255;
+    output[destination] = Math.round(sourceAo * 255);
     output[destination + 1] = Math.round(adjustedRoughness * 255);
     output[destination + 2] = Math.round(
       sourceMetallic * clampedMetallicStrength * 255
@@ -223,7 +226,7 @@ function convertUnrealSpecularEmissivePng(packedData, emissiveData) {
     const packedSource = pixel * packed.channels;
     const destination = pixel * 4;
     const emissiveMask =
-      packed.channels > 3 ? packed.pixels[packedSource + 3] / 255.0 : 0.0;
+      1.0; // Emissive RGB belongs to _E; packed A is gloss.
     const packedX = pixel % packed.width;
     const packedY = Math.floor(pixel / packed.width);
     const emissiveX = emissive

@@ -158,6 +158,8 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "overlay") return MaterialFeatureOverlay;
     if (value == "neutral-fallback") return MaterialFeatureNeutralFallback;
     if (value == "brow-overlay") return MaterialFeatureBrowOverlay;
+    if (value == "surface-ao") return MaterialFeatureSurfaceAo;
+    if (value == "scene-tint") return MaterialFeatureSceneTint;
     return 0;
 }
 
@@ -173,7 +175,7 @@ void loadMaterialProfile(
         result.styleParameters = {0.0012F, 0.0F, 0.0F, 0.0F};
         // Unreal centimetres converted to glTF metres, then opacity,
         // fade distance and base power.
-        result.featureParameters = {0.04679F, 0.95F, 0.02F, 1.0F};
+        result.featureParameters = {0.02F, 0.95F, 0.02F, 1.0F};
     }
     if (!material.extras.IsObject()
         || !material.extras.Has("azureRenderMaterial")) {
@@ -188,7 +190,7 @@ void loadMaterialProfile(
     if (!profile.Has("schemaVersion")
         || !profile.Get("schemaVersion").IsNumber()
         || static_cast<int>(
-            profile.Get("schemaVersion").GetNumberAsDouble()) != 1) {
+            profile.Get("schemaVersion").GetNumberAsDouble()) < 1 || static_cast<int>(profile.Get("schemaVersion").GetNumberAsDouble()) > 2) {
         throw std::runtime_error(
             "Unsupported azureRenderMaterial schemaVersion for "
             + result.name);
@@ -197,7 +199,7 @@ void loadMaterialProfile(
         throw std::runtime_error(
             "azureRenderMaterial.class is required for " + result.name);
     }
-    result.materialProfileVersion = 1;
+    result.materialProfileVersion = static_cast<std::uint32_t>(profile.Get("schemaVersion").GetNumberAsDouble());
     result.materialProfileExplicit = true;
     const std::string className = profile.Get("class").Get<std::string>();
     result.materialClass = materialClassFromName(className);
@@ -246,6 +248,10 @@ void loadMaterialProfile(
             }
             result.materialFeatures |= flag;
         }
+    }
+    if ((result.materialFeatures & MaterialFeatureBrowOverlay) && result.materialProfileVersion == 1) {
+        result.featureParameters[0] = std::min(result.featureParameters[0], 0.02F);
+        result.styleParameters[0] = std::min(result.styleParameters[0], 0.0012F);
     }
 }
 
@@ -1029,7 +1035,7 @@ AssetMaterial loadMaterial(
         result.baseColorPixels = decodeImageRgba(
             model,
             baseColorImage,
-            factor,
+            {1.0, 1.0, 1.0, 1.0},
             result.baseColorWidth,
             result.baseColorHeight);
     } else {
@@ -1040,11 +1046,20 @@ AssetMaterial loadMaterial(
             for (std::size_t channel = 0; channel < 4; ++channel) {
                 result.baseColorPixels[pixel * 4 + channel] =
                     static_cast<std::uint8_t>(
-                        std::clamp(factor[channel], 0.0, 1.0) * 255.0);
+                        (channel == 3 ? std::clamp(factor[channel], 0.0, 1.0) : (factor[channel] <= 0.0031308 ? 12.92 * factor[channel] : 1.055 * std::pow(factor[channel], 1.0 / 2.4) - 0.055)) * 255.0);
             }
         }
     }
 
+    if (baseColorImage >= 0) {
+        for (std::size_t i = 0; i < result.baseColorPixels.size(); ++i) {
+            const double value = result.baseColorPixels[i] / 255.0;
+            const double linear = i % 4 == 3 ? value : (value <= .04045 ? value / 12.92 : std::pow((value + .055) / 1.055, 2.4));
+            const double scaled = linear * std::clamp(factor[i % 4], 0.0, 1.0);
+            const double encoded = i % 4 == 3 ? scaled : (scaled <= .0031308 ? scaled * 12.92 : 1.055 * std::pow(scaled, 1.0 / 2.4) - .055);
+            result.baseColorPixels[i] = static_cast<std::uint8_t>(std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
+        }
+    }
     if (normalImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
         result.normalPixels = decodeImageRgba(
@@ -1076,6 +1091,23 @@ AssetMaterial loadMaterial(
             255, 191, 0, 255, 255, 191, 0, 255,
             255, 191, 0, 255, 255, 191, 0, 255,
         };
+    }
+    const double roughnessFactor = material ? material->pbrMetallicRoughness.roughnessFactor : 1.0;
+    const double metallicFactor = material ? material->pbrMetallicRoughness.metallicFactor : 1.0;
+    for (std::size_t i = 0; i < result.metallicRoughnessPixels.size(); i += 4) {
+        result.metallicRoughnessPixels[i+1] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+1] : 255) * std::clamp(roughnessFactor, 0.0, 1.0)));
+        result.metallicRoughnessPixels[i+2] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+2] : 255) * std::clamp(metallicFactor, 0.0, 1.0)));
+    }
+    if (material && normalImage >= 0 && material->normalTexture.scale != 1.0) {
+        for (std::size_t i=0;i<result.normalPixels.size();i+=4) {
+            double x=(result.normalPixels[i]/255.0*2-1)*material->normalTexture.scale;
+            double y=(result.normalPixels[i+1]/255.0*2-1)*material->normalTexture.scale;
+            double z=result.normalPixels[i+2]/255.0*2-1;
+            const double length=std::max(std::sqrt(x*x+y*y+z*z),1e-8);
+            result.normalPixels[i]=static_cast<std::uint8_t>(std::round((x/length*.5+.5)*255));
+            result.normalPixels[i+1]=static_cast<std::uint8_t>(std::round((y/length*.5+.5)*255));
+            result.normalPixels[i+2]=static_cast<std::uint8_t>(std::round((z/length*.5+.5)*255));
+        }
     }
     if (specularEmissiveImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};

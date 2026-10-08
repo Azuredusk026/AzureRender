@@ -4,6 +4,8 @@
 #extension GL_EXT_nonuniform_qualifier : require
 #endif
 
+layout(binding = 18) uniform sampler2D overlaySceneDepth;
+
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
     vec4 cameraForward;
@@ -18,6 +20,7 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
     vec4 mainLightDirection;
+    vec4 cascadeDepthRanges;
 } camera;
 
 #if defined(AZURE_BINDLESS)
@@ -158,86 +161,47 @@ vec3 sampleToonRamp(float coordinate) {
     return texture(AZ_TEX_TOON_RAMP, uv).rgb;
 }
 
+float rawShadowDepth(ivec2 pixel, ivec2 lo, ivec2 hi) {
+    return texelFetch(AZ_TEX_SHADOW, clamp(pixel,lo,hi),0).r;
+}
+float filteredShadow(vec2 uv,float receiver,ivec2 lo,ivec2 hi) {
+    vec2 pixel=uv*vec2(textureSize(AZ_TEX_SHADOW,0))-.5;
+    ivec2 base=ivec2(floor(pixel));vec2 w=fract(pixel);
+    vec4 depths=vec4(rawShadowDepth(base,lo,hi),rawShadowDepth(base+ivec2(1,0),lo,hi),
+        rawShadowDepth(base+ivec2(0,1),lo,hi),rawShadowDepth(base+ivec2(1,1),lo,hi));
+    vec4 v=step(vec4(receiver),depths);
+    return mix(mix(v.x,v.y,w.x),mix(v.z,v.w,w.x),w.y);
+}
+float sampleCascadeShadow(int cascade,float normalDotLight) {
+    vec3 p=shadowPositions[cascade].xyz/shadowPositions[cascade].w;
+    vec2 localUv=p.xy*.5+.5;
+    if(p.z<=0||p.z>=1||any(lessThan(localUv,vec2(0)))||any(greaterThan(localUv,vec2(1))))return 1.0;
+    ivec2 extent=textureSize(AZ_TEX_SHADOW,0),tile=extent/2,origin=ivec2(cascade%2,cascade/2)*tile;
+    ivec2 lo=origin+ivec2(1),hi=origin+tile-ivec2(2);
+    vec2 uv=(vec2(origin)+localUv*vec2(tile))/vec2(extent);
+    float depthRange=camera.cascadeDepthRanges[cascade];
+    float receiver=p.z-max(.003*(1.0-normalDotLight),.001)/depthRange;
+    float sum=0,blockers=0;
+    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
+        float d=rawShadowDepth(ivec2(uv*vec2(extent))+ivec2(x,y),lo,hi);
+        if(d<receiver){sum+=d;blockers+=1.0;}
+    }
+    float separation=blockers>0?max(receiver-sum/blockers,0)*depthRange:0;
+    float worldTexel=depthRange/4.1*2.0/float(tile.x);
+    float radius=clamp(1.0+separation*.035/max(worldTexel,1e-6),1.0,clamp(camera.renderingParameters.w,1.0,16.0));
+    float visible=0;
+    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x)
+        visible+=filteredShadow(uv+vec2(x,y)*radius*.5/vec2(extent),receiver,lo,hi);
+    return visible/25.0;
+}
 float sampleShadowMap(float normalDotLight) {
-    float viewDepth = dot(
-        worldPosition - camera.cameraPosition.xyz,
-        camera.cameraForward.xyz);
-    int cascadeIndex = viewDepth <= camera.cascadeSplits.x ? 0
-        : (viewDepth <= camera.cascadeSplits.y ? 1
-            : (viewDepth <= camera.cascadeSplits.z ? 2 : 3));
-    vec4 lightClipPosition = shadowPositions[cascadeIndex];
-    vec3 projected = lightClipPosition.xyz / lightClipPosition.w;
-    vec2 localShadowUv = projected.xy * 0.5 + 0.5;
-    if (projected.z <= 0.0 || projected.z >= 1.0
-        || any(lessThan(localShadowUv, vec2(0.0)))
-        || any(greaterThan(localShadowUv, vec2(1.0)))) {
-        return 1.0;
-    }
-    vec2 atlasTile = vec2(float(cascadeIndex % 2), float(cascadeIndex / 2));
-    vec2 shadowUv = atlasTile * 0.5 + localShadowUv * 0.5;
-
-    const vec2 poissonDisk[16] = vec2[16](
-        vec2(-0.94201624, -0.39906216),
-        vec2( 0.94558609, -0.76890725),
-        vec2(-0.09418410, -0.92938870),
-        vec2( 0.34495938,  0.29387760),
-        vec2(-0.91588581,  0.45771432),
-        vec2(-0.81544232, -0.87912464),
-        vec2(-0.38277543,  0.27676845),
-        vec2( 0.97484398,  0.75648379),
-        vec2( 0.44323325, -0.97511554),
-        vec2( 0.53742981, -0.47373420),
-        vec2(-0.26496911, -0.41893023),
-        vec2( 0.79197514,  0.19090188),
-        vec2(-0.24188840,  0.99706507),
-        vec2(-0.81409955,  0.91437590),
-        vec2( 0.19984126,  0.78641367),
-        vec2( 0.14383161, -0.14100790));
-
-    vec2 texelSize = 1.0 / vec2(textureSize(AZ_TEX_SHADOW, 0));
-    float maximumRadius = clamp(camera.renderingParameters.w, 1.0, 16.0);
-    vec2 tileMargin = texelSize * (maximumRadius + 1.0);
-    vec2 tileMinimum = atlasTile * 0.5 + tileMargin;
-    vec2 tileMaximum = (atlasTile + vec2(1.0)) * 0.5 - tileMargin;
-    float bias = max(0.0011 * (1.0 - normalDotLight), 0.00025);
-    float receiverDepth = projected.z - bias;
-
-    // PCSS blocker search. The directional area-light penumbra grows with
-    // receiver/blocker separation while remaining bounded in shadow texels.
-    float blockerDepthSum = 0.0;
-    float blockerCount = 0.0;
-    float searchRadius = max(2.0, maximumRadius * 0.55);
-    for (int sampleIndex = 0; sampleIndex < 12; ++sampleIndex) {
-        vec2 sampleUv = clamp(
-            shadowUv + poissonDisk[sampleIndex] * texelSize * searchRadius,
-            tileMinimum,
-            tileMaximum);
-        float storedDepth = texture(AZ_TEX_SHADOW, sampleUv).r;
-        if (storedDepth < receiverDepth) {
-            blockerDepthSum += storedDepth;
-            blockerCount += 1.0;
-        }
-    }
-    if (blockerCount < 0.5) {
-        return 1.0;
-    }
-
-    float averageBlockerDepth = blockerDepthSum / blockerCount;
-    float blockerSeparation = max(receiverDepth - averageBlockerDepth, 0.0);
-    float filterRadius = clamp(
-        1.5 + blockerSeparation * maximumRadius * 24.0,
-        1.5,
-        maximumRadius);
-    float visibility = 0.0;
-    for (int sampleIndex = 0; sampleIndex < 16; ++sampleIndex) {
-        vec2 sampleUv = clamp(
-            shadowUv + poissonDisk[sampleIndex] * texelSize * filterRadius,
-            tileMinimum,
-            tileMaximum);
-        float storedDepth = texture(AZ_TEX_SHADOW, sampleUv).r;
-        visibility += receiverDepth <= storedDepth ? 1.0 : 0.0;
-    }
-    return visibility / 16.0;
+    float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+    int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
+    float result=sampleCascadeShadow(c,normalDotLight);
+    if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
+        float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
+        result=mix(result,sampleCascadeShadow(c+1,normalDotLight),blend);}
+    return result;
 }
 
 void main() {
@@ -354,7 +318,7 @@ void main() {
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
-    float shadowVisibility = sampleShadowMap(diffuse);
+    float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, lightDirection),0.0));
     int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
     bool qaEffectDisabled = camera.qaParameters.z < 0.5;
     if (qaEffectMode == 2 && qaEffectDisabled) {
@@ -721,7 +685,10 @@ void main() {
     if (browOverlay) {
         // M_Common_Brow uses a constant Opaccity parameter; the face texture
         // alpha is not the brow mask and is intentionally ignored here.
-        outputAlpha = material.featureParameters.y;
+        float sceneDepth=texture(overlaySceneDepth,gl_FragCoord.xy/camera.clusterDepth.zw).r;
+        float overlayDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+        float fade=clamp((sceneDepth-overlayDepth)/max(material.featureParameters.z,.0001),0.0,1.0);
+        outputAlpha = material.featureParameters.y * fade;
     }
     vec3 emissive =
         specularEmissive.rgb * material.emissiveStrength * 6.0
@@ -817,6 +784,13 @@ void main() {
     } else if (qaIsolationMode == 16) {
         qaColor = vec3(eyebrowRegion > 0.5 ? 1.0 : 0.0);
         if (overlayMaterial) outputAlpha = eyebrowRegion > 0.5 ? 1.0 : 0.0;
+    }
+    if (materialFeatureEnabled(256U) > 0.5) {
+        float sceneDepth=texture(overlaySceneDepth,gl_FragCoord.xy/camera.clusterDepth.zw).r;
+        outputAlpha=clamp(1.0-sceneDepth/max(material.featureParameters.z,.001),0.0,1.0)*material.featureParameters.y;
+        if (overlayDisabled) outputAlpha=0.0;
+        // Fixed-function destination multiplication preserves opaque scene color.
+        qaColor=material.styleParameters.rgb*outputAlpha;
     }
     outputColor = vec4(qaColor, outputAlpha);
     if (material.materialPadding == AZURE_SELECTED_PADDING) {

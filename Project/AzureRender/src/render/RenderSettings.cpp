@@ -132,6 +132,7 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 8) {
         settings.cameraNear=.1F;settings.cameraFar=100;settings.shadowDistance=100;
     }
+    if (sourceSchemaVersion < 9) settings.antiAliasing = 1;
     validateRenderSettings(settings);
     return settings;
 }
@@ -182,6 +183,7 @@ void validateRenderSettings(const RenderSettings& settings) {
         throw std::invalid_argument("Unknown blackhole camera preset");
     }
 
+    if (settings.antiAliasing > 2) throw std::invalid_argument("Unknown anti-aliasing quality");
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
     requireRange(settings.cameraNear,.01F,10,"cameraNear");
     requireRange(settings.cameraFar,.01F,5000,"cameraFar");
@@ -249,6 +251,7 @@ void validateRenderSettings(const RenderSettings& settings) {
 #include "foundation/SettingRegistry.hpp"
 namespace azurerender {
 void registerRenderSettings(SettingRegistry& r) {
+    r.add({"render.antiAliasing","Anti-aliasing: off, edge adaptive, supersampling",1,0.,2.,false,true,false});
     r.add({"render.diagnosticView","Diagnostic view: beauty, normal, outline, shadow, depth",0,0.,4.,false,true,false});
     r.add({"render.exposure","Temporary exposure in EV",0.0,-8.,8.,false,true,false});
     r.add({"render.blackholeQuality","Blackhole quality: performance, balanced, cinematic",2,0.,2.,false,true,false});

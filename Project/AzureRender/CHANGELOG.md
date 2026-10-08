@@ -573,3 +573,9 @@ All notable public changes are recorded here. Versions follow Semantic Versionin
 - Added editor, deterministic capture, GPU timing and public visual evidence.
 - Made Windows Debug/Release packages self-contained with MinGW runtime DLLs.
 - Consolidated release documentation and removed private assets from the current tree.
+
+## 2026-10-09：角色渲染 P0
+
+- 修复额发与眼部阴影叠层的白色回退值。
+- 分离 AO、光泽、金属度与发光通道。
+- 应用 glTF 系数及线性基色，接入比较阴影过滤。
