@@ -1,0 +1,32 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 145: AzureEditor.NativeInputGpu
+1/1 Test #145: AzureEditor.NativeInputGpu .......***Failed    4.60 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 191, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 191, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_input.py", line 138, in run
+    assert sum(a*b for a,b in zip(direction,right))>0 and sum(a*b for a,b in zip(direction,up))>0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =   4.60 sec*proc (1 test)
+
+Total Test time (real) =   4.61 sec
+
+The following tests FAILED:
+	145 - AzureEditor.NativeInputGpu (Failed)
+[ERROR_MESSAGE]
+Errors while running CTest

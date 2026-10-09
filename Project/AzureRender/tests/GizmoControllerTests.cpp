@@ -27,6 +27,8 @@ int main(){
         auto context=std::make_shared<EditorContext>(scene,root/"scene.azscene");
         EditorSession session(context);session.selection().set({"child"});context->save();
         const auto original=context->documentContent();
+        auto jitter=begin(session);jitter[14]+=1e-7F;update(session,jitter);session.edit("viewport.gizmo-commit");
+        check(context->documentContent()==original&&!context->dirty()&&context->undoCount()==0,"A handle click with floating-point jitter must preserve document bytes and history");
         auto matrix=begin(session);check(near(matrix[12],10)&&near(matrix[14],-2),"Gizmo pivot must use world coordinates");
         check(!session.edit("viewport.gizmo-mode",{{"value",2}}),"Active drag must isolate tool switching");
         check(!session.edit("preview.play"),"Active drag must isolate play lifecycle");

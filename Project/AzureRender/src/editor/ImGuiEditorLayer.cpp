@@ -1,6 +1,8 @@
 #include "runtime/InputPreferences.hpp"
 #include "ImGuiEditorLayer.hpp"
 #include "render/RenderMath.hpp"
+#include "render/CameraProjection.hpp"
+#include <cstdio>
 #include "input/EditorInputRouter.hpp"
 #include "EditorTheme.hpp"
 #include "EditorToolbar.hpp"
@@ -148,6 +150,7 @@ void ImGuiEditorLayer::initialize(
     configDirectory_=EditorWorkspace::configDirectory();
     try{session_->setPathHistoryFile(configDirectory_/"path-history.json");}catch(const std::exception& error){session_->log(std::string("Path history: ")+error.what());}
     const bool restored=workspace_.load(configDirectory_);
+    for(const auto& [category,policy]:workspace_.overlayPolicies)if(session_->viewportOverlays().contains(category))session_->viewportOverlayPolicies()[category]=policy;
     std::filesystem::create_directories(configDirectory_);
     iniPath_=(configDirectory_/"layout.ini").u8string();
     io.IniFilename=nullptr;
@@ -237,6 +240,8 @@ void ImGuiEditorLayer::shutdownVulkan() {
     if (!initialized_) {
         return;
     }
+    setNavigationCapture(false);
+    workspace_.overlayPolicies=session_->viewportOverlayPolicies();
     try { ImGui::SaveIniSettingsToDisk(iniPath_.c_str());workspace_.save(configDirectory_); }
     catch(const std::exception& error){context_->log(std::string("Workspace: ")+error.what());}
     for (const VkDescriptorSet texture : viewportTextures_) {
@@ -296,7 +301,7 @@ void ImGuiEditorLayer::drawPanels() {
     if(session_->references().active()&&(!nativeFocus||ImGui::IsKeyPressed(ImGuiKey_Escape,false)))session_->edit("reference.cancel");
     if(!nativeFocus || !workspace_.visible("viewport")) {
         cancelViewportGizmo();navigationButton_=-1;viewportInput_={};
-        glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);
+        setNavigationCapture(false);
     }
     for (const std::unique_ptr<IEditorPanel>& panel : panels_) {
         if(!workspace_.visible(std::string(panel->id())))continue;
@@ -349,6 +354,7 @@ void ImGuiEditorLayer::drawPanels() {
         {"rotation",context_->gizmoRotation()},{"scale",context_->gizmoScale()},
         {"gizmoMode",static_cast<unsigned>(context_->gizmoMode())},{"camera",cameraPosition_},{"target",cameraTarget_},
         {"navigationButton",navigationButton_},{"gizmoCapture",viewportGizmoDragActive_},{"undoCount",context_->undoCount()},
+        {"cursorCaptured",navigationCursorCaptured_},{"flySpeed",session_->settings().get("editor.camera.flySpeed")},
         {"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},
         {"activeId",ImGui::GetCurrentContext()->ActiveId},
         {"movingWindow",ImGui::GetCurrentContext()->MovingWindow?ImGui::GetCurrentContext()->MovingWindow->Name:""}});
@@ -437,7 +443,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
-    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;ImGui::End();return;}
+    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();return;}
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
@@ -446,6 +452,21 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         if(ImGui::Button("Focus Selected")) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ImGui::SameLine();
+        if(ImGui::Button("View"))ImGui::OpenPopup("Viewport view options");observeWidget("viewport.view-options");ImGui::SameLine();
+        if(ImGui::BeginPopup("Viewport view options")){
+            ImGui::BeginDisabled(session_->playing()||session_->building()||session_->gizmo().active());
+            for(const auto* axis:{"+X","-X","+Y","-Y","+Z","-Z"}){if(ImGui::MenuItem(axis))session_->edit("viewport.orientation",{{"axis",axis}});observeWidget(std::string("viewport.orientation.")+axis);}
+            ImGui::Separator();for(const auto* kind:{"perspective","orthographic"}){if(ImGui::MenuItem(kind))session_->edit("viewport.projection",{{"value",kind}});observeWidget(std::string("viewport.projection.")+kind);}
+            ImGui::Separator();
+            for(const auto& provider:session_->viewportOverlays().describe()){
+                const auto category=provider.at("category").get<std::string>();
+                if(ImGui::BeginMenu(provider.at("label").get<std::string>().c_str())){for(const auto* policy:{"hidden","selected","all"}){
+                    if(ImGui::MenuItem(policy,nullptr,session_->viewportOverlayPolicies()[category]==policy))session_->edit("viewport.overlay-policy",{{"category",category},{"policy",policy}});
+                    observeWidget("viewport.overlay."+category+"."+policy);
+                }ImGui::EndMenu();}observeWidget("viewport.overlay."+category);
+            }
+            ImGui::EndDisabled();ImGui::EndPopup();
+        }
         if(ImGui::Button("Transform"))ImGui::OpenPopup("Transform options");observeWidget("gizmo.options");
         if(ImGui::BeginPopup("Transform options")) {
             ImGui::BeginDisabled(session_->gizmo().active());
@@ -506,8 +527,8 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         if(!session_->playing() && !session_->building() && ImGui::BeginDragDropTarget()){
             if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE")){
                 const auto minimum=ImGui::GetItemRectMin();const auto mouse=ImGui::GetMousePos();
-                const auto direction=internal::pickRayDirection(cameraPosition_,cameraTarget_,(mouse.x-minimum.x)/imageSize.x,(mouse.y-minimum.y)/imageSize.y,imageSize.x/imageSize.y);
-                session_->edit("asset.place",{{"asset",static_cast<const char*>(payload->Data)},{"origin",cameraPosition_},{"direction",direction}});
+                const auto ray=cameraPickRay(session_->viewportView(),(mouse.x-minimum.x)/imageSize.x,(mouse.y-minimum.y)/imageSize.y,imageSize.x/imageSize.y);
+                session_->edit("asset.place",{{"asset",static_cast<const char*>(payload->Data)},{"origin",ray.origin},{"direction",ray.direction}});
             }
             ImGui::EndDragDropTarget();
         }
@@ -547,21 +568,26 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
         }
         const bool hovered=ImGui::IsItemHovered();
-        const bool gizmoOver=drawViewportGizmo(itemMin,imageSize);
+        drawViewportOverlays(itemMin,imageSize);
+        const bool orientationOver=drawViewportOrientation(itemMin,imageSize);
+        const bool gizmoOver=orientationOver||drawViewportGizmo(itemMin,imageSize);
         const auto& navIo=ImGui::GetIO();
         const bool navigationAllowed=!session_->playing() && !session_->building() && !navIo.WantTextInput
             && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel)
             && !navIo.AppFocusLost && !viewportGizmoDragActive_;
         if(!navigationAllowed)navigationButton_=-1;
-        if(navigationAllowed && hovered && navigationButton_<0) {
+        if(navigationAllowed && hovered && !orientationOver && navigationButton_<0) {
             if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
             else if(ImGui::IsMouseClicked(ImGuiMouseButton_Middle))navigationButton_=ImGuiMouseButton_Middle;
             else if(navIo.KeyAlt && ImGui::IsMouseClicked(ImGuiMouseButton_Left))navigationButton_=ImGuiMouseButton_Left;
+            if(navigationButton_>=0){ImGui::SetWindowFocus();viewportFocused_=true;}
         }
         if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false)))navigationButton_=-1;
+        setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();
-            if(navigationAllowed && hovered)viewportInput_.zoomSteps += io.MouseWheel;
+            if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){if(io.MouseWheel!=0){const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});if(changed)settingsSaveRequested_=true;}}
+            else if(navigationAllowed && hovered && !orientationOver)viewportInput_.zoomSteps += io.MouseWheel;
             const float sx=session_->settings().get("editor.camera.invertX").get<bool>()?-1.F:1.F;
             const float sy=session_->settings().get("editor.camera.invertY").get<bool>()?-1.F:1.F;
             const auto sensitivity=cameraSensitivity(session_->settings());
@@ -600,10 +626,28 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 
         }
     }
+    if(!viewportTextures_.empty()){
+        auto* draw=ImGui::GetWindowDrawList();const bool flying=navigationButton_==ImGuiMouseButton_Right;
+        const float speed=session_->settings().get("editor.camera.flySpeed").get<float>()*(flying&&ImGui::GetIO().KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
+        char status[160];if(flying)std::snprintf(status,sizeof(status),"Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release",static_cast<double>(speed));
+        else std::snprintf(status,sizeof(status),"%s | RMB: fly / look\nWheel: zoom | F: frame",session_->viewportView().projection==CameraProjectionKind::Orthographic?"Orthographic":"Perspective");
+        const ImVec2 lower{imageRect_[0]+imageRect_[2],imageRect_[1]+imageRect_[3]},hud{imageRect_[0]+8*dpi_,lower.y-46*dpi_};
+        draw->PushClipRect({imageRect_[0],imageRect_[1]},lower,true);draw->AddRectFilled({hud.x-4*dpi_,hud.y-2*dpi_},{std::min(lower.x,hud.x+330*dpi_),hud.y+42*dpi_},IM_COL32(20,23,29,215),4*dpi_);draw->AddText(hud,IM_COL32(220,225,235,255),status);draw->PopClipRect();
+    }
     viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)
         && !ImGui::GetIO().WantTextInput
         && !ImGui::IsAnyItemActive();
     ImGui::End();
+}
+
+void ImGuiEditorLayer::setNavigationCapture(bool captured){
+    if(captured==navigationCursorCaptured_||!window_)return;
+    if(captured){glfwGetCursorPos(window_,&savedNavigationCursor_[0],&savedNavigationCursor_[1]);navigationRawMouse_=session_->settings().get("editor.camera.rawMouse").get<bool>()&&glfwRawMouseMotionSupported()==GLFW_TRUE;
+        glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_DISABLED);if(navigationRawMouse_)glfwSetInputMode(window_,GLFW_RAW_MOUSE_MOTION,GLFW_TRUE);
+    }else{if(navigationRawMouse_)glfwSetInputMode(window_,GLFW_RAW_MOUSE_MOTION,GLFW_FALSE);glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);
+        if(glfwGetWindowAttrib(window_,GLFW_FOCUSED))glfwSetCursorPos(window_,savedNavigationCursor_[0],savedNavigationCursor_[1]);
+    }
+    navigationCursorCaptured_=captured;
 }
 
 }  // namespace azurerender

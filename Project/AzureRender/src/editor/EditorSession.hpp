@@ -13,6 +13,8 @@
 #include "documents/EditorTaskService.hpp"
 #include "platform/PathSelection.hpp"
 #include "viewport/GizmoController.hpp"
+#include "viewport/EditorViewDescriptor.hpp"
+#include "viewport/ViewportOverlayRegistry.hpp"
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
@@ -51,6 +53,12 @@ public:
     ~EditorSession();
     bool playing() const noexcept;
     bool debugOverlay = false;
+    ViewportOverlayRegistry& viewportOverlays(){return viewportOverlays_;}
+    std::map<std::string,std::string>& viewportOverlayPolicies(){return viewportOverlayPolicies_;}
+    EditorViewDescriptor& viewportView(){return viewportView_;}
+    const EditorViewDescriptor& viewportView() const{return viewportView_;}
+    void synchronizeViewportCamera(std::array<float,3> position,std::array<float,3> target){if(!viewportViewChanged_){viewportView_.position=position;viewportView_.target=target;}}
+    bool consumeViewportViewChange(){const bool changed=viewportViewChanged_;viewportViewChanged_=false;return changed;}
     GameRuntime* game() noexcept;
     RuntimeLifecycle* runtime() noexcept;
     LevelSession* levels() noexcept;
@@ -135,6 +143,10 @@ public:
     }
 
 private:
+    EditorViewDescriptor viewportView_;
+    bool viewportViewChanged_=false;
+    ViewportOverlayRegistry viewportOverlays_=ViewportOverlayRegistry::builtins();
+    std::map<std::string,std::string> viewportOverlayPolicies_{{"grid","all"},{"light","selected"},{"camera","selected"}};
     MaterialEditingService materials_;
     friend EditRegistry editorOperations(EditorSession&);
     bool executeInternal(EditorCommand command) noexcept;

@@ -444,6 +444,8 @@ add_library(AzureEditor STATIC
     src/editor/preview/ThumbnailProviderRegistry.cpp
     src/editor/panels/TextureAssetPanel.cpp
     src/editor/panels/MaterialAssetPanel.cpp
+    src/editor/viewport/ViewportOverlayRegistry.cpp
+    src/editor/viewport/ViewportOverlays.cpp
     src/editor/content/AssetCatalog.cpp
     src/editor/content/ContentDirectoryModel.cpp
     src/editor/content/AssetEditorRegistry.cpp
@@ -491,6 +493,7 @@ if(TARGET imgui::imgui)
     target_sources(AzureEditor PRIVATE third_party/ImGuizmo/ImGuizmo.cpp src/editor/viewport/ViewportGizmo.cpp)
     set_source_files_properties(third_party/ImGuizmo/ImGuizmo.cpp PROPERTIES COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/wd4245>")
     target_include_directories(AzureEditor PRIVATE third_party/ImGuizmo)
+    target_include_directories(AzureEditor PRIVATE third_party/ImViewGuizmo)
     target_link_libraries(AzureEditor PUBLIC imgui::imgui)
     target_compile_definitions(AzureEditor PRIVATE AZURERENDER_HAS_IMGUI=1)
 endif()
@@ -965,6 +968,10 @@ if(BUILD_TESTING)
     if(Python3_Interpreter_FOUND)
         add_test(NAME AzureEditor.ContentGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u7/content")
         set_tests_properties(AzureEditor.ContentGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+        if(WIN32)
+            add_test(NAME AzureEditor.NativeInputGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_native_viewport.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/p4/native")
+            set_tests_properties(AzureEditor.NativeInputGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+        endif()
         add_test(NAME AzureEditor.UsabilityGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_usability.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/usability")
         add_test(NAME AzureEditor.DocumentGuardGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_document_guard.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/u5/documents")
         set_tests_properties(AzureEditor.UsabilityGpu AzureEditor.DocumentGuardGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
@@ -1669,6 +1676,8 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u5/evidence/" DES
 
 install(FILES third_party/ImGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-LICENSE.txt")
 install(FILES third_party/ImGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-source.json")
+install(FILES third_party/ImViewGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImViewGuizmo-LICENSE.txt")
+install(FILES third_party/ImViewGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImViewGuizmo-source.json")
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u6/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u6/evidence" OPTIONAL)
 
@@ -1773,4 +1782,12 @@ if(BUILD_TESTING)
     add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
     target_link_libraries(AzureMaterialDocumentTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.MaterialDocument COMMAND AzureMaterialDocumentTests)
+    add_executable(AzureEditorProjectionTests tests/EditorProjectionTests.cpp)
+    target_link_libraries(AzureEditorProjectionTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.EditorProjection COMMAND AzureEditorProjectionTests)
+    add_executable(AzureViewportOverlayTests tests/ViewportOverlayTests.cpp)
+    target_link_libraries(AzureViewportOverlayTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ViewportOverlays COMMAND AzureViewportOverlayTests)
+    add_test(NAME AzureEditor.ViewportNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_viewport_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/viewport-navigation-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.ViewportNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
 endif()

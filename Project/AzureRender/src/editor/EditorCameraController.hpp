@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include "render/CameraViewDescriptor.hpp"
 
 namespace azurerender {
 
@@ -30,6 +31,7 @@ struct EditorViewportInput {
 
 class EditorCameraController final {
 public:
+    static bool apply(const EditorViewportInput&,CameraViewDescriptor&);
     static bool apply(
         const EditorViewportInput& input,
         std::array<float, 3>& position,

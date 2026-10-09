@@ -1,0 +1,18 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.EditorProjection
+1/1 Test #193: AzureEditor.EditorProjection .....***Failed    0.11 sec
+[1791578000391][info][editor][code=0] Opened scene: untitled
+[1791578000424][info][editor][code=0] ERROR [viewport.orientation]: Unknown viewport orientation
+[1791578000431][info][editor][code=0] ERROR [viewport.fly-speed]: Flight wheel steps must be finite and within 100
+[1791578000432][info][editor][code=0] ERROR [viewport.overlays]: Unknown operation: viewport.overlays
+Grid, camera and light helper providers must be discoverable
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	193 - AzureEditor.EditorProjection (Failed)
+Errors while running CTest

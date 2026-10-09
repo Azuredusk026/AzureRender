@@ -1,0 +1,19 @@
+{
+  "name": "ImViewGuizmo",
+  "repository": "https://github.com/Yang-Junjie/Fermion",
+  "commit": "eeac811ae4b6dd7827d24c255b4fa0241ac603af",
+  "path": "Fermion/external/ImViewGuizmo/ImViewGuizmo.h",
+  "license": "MIT",
+  "copyright": "2025 Marcel Kazemi",
+  "sourceSha256": "98a5ea5bdbdf2c38863869a9e55ba40cb244a203a2dd72085636ac457b2a91d2",
+  "adaptation": "Direction-axis drawing and depth ordering adapted to engine matrices. The widget emits axis intents through viewport.orientation; capture and projection belong to engine services. Orbit, dolly and pan use the existing editor input router.",
+  "files": {
+    "ImViewGuizmo.h": "913e3e88ff5e7ca1774fbf0ed876d2965135e3d6eb7adc3207712083a3c7e7c5",
+    "LICENSE.txt": "181eaebdb3717918d192447767a9234908fa598bab2100023e81fcbfd84b1544"
+  },
+  "navigationReference": {
+    "path": "Fermion/Sources/Renderer/Camera/EditorCamera.cpp",
+    "sha256": "a260bcb4940d228e2ae4f76312fc2062713c21d84f312fc959036c573ce8f7b1",
+    "adoption": "State organization only; engine operation service owns camera state and capture."
+  }
+}

@@ -53,6 +53,7 @@ void EditorWorkspace::setVisible(const std::string& id,bool value){*open(id)=val
 nlohmann::json EditorWorkspace::snapshot() const {
     nlohmann::json result={{"version",version},{"preset",preset_},{"panels",nlohmann::json::object()}};
     for(const auto& panel:panels_)result["panels"][panel.id]=panel.visible;
+    result["overlayPolicies"]=overlayPolicies;
     return result;
 }
 bool EditorWorkspace::load(const std::filesystem::path& directory) noexcept {
@@ -72,7 +73,9 @@ bool EditorWorkspace::load(const std::filesystem::path& directory) noexcept {
         }
         const auto preset=state.value("preset",std::string("custom"));
         if(preset!="custom"&&preset!="authoring"&&preset!="debugging")throw std::runtime_error("Invalid workspace preset");
-        panels_=std::move(candidate);preset_=preset;return true;
+        auto policies=overlayPolicies;
+        if(state.contains("overlayPolicies"))for(const auto& field:state.at("overlayPolicies").items()){const auto policy=field.value().get<std::string>();if(policy!="hidden"&&policy!="selected"&&policy!="all")throw std::invalid_argument("Invalid helper policy");policies[field.key()]=policy;}
+        panels_=std::move(candidate);preset_=preset;overlayPolicies=std::move(policies);return true;
     }catch(...) { diagnostic="Invalid workspace configuration. Default layout loaded.";return false; }
 }
 void EditorWorkspace::save(const std::filesystem::path& directory) const {

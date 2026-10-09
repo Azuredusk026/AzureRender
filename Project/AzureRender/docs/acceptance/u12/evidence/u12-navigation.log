@@ -1,0 +1,29 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 195: AzureEditor.ViewportNavigationGpu
+1/1 Test #195: AzureEditor.ViewportNavigationGpu ...***Failed   11.52 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_navigation.py", line 58, in <module>
+    args=parser.parse_args();run(args.executable.resolve(),args.output.resolve())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_viewport_navigation.py", line 31, in run
+    assert math.isclose(ratio,4,rel_tol=.01),ratio
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1.0
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  11.52 sec*proc (1 test)
+
+Total Test time (real) =  11.53 sec
+
+The following tests FAILED:
+	195 - AzureEditor.ViewportNavigationGpu (Failed)
+[ERROR_MESSAGE]
+Errors while running CTest

@@ -4,6 +4,7 @@
 #include "scene/TransformEditing.hpp"
 #include "scene/SceneDescription.hpp"
 #include <set>
+#include <limits>
 namespace azurerender {
 using namespace internal;
 Matrix4 GizmoController::pivotMatrix(const GizmoDragRequest& request) const {
@@ -58,9 +59,16 @@ void GizmoController::checkVersion() const {
 void GizmoController::update(const GizmoDragUpdate& update) {
     checkVersion();(void)scene::inverseAffine(update.matrix);
     const auto delta=multiply(update.matrix,scene::inverseAffine(startPivot_));
+    bool initialPose=true;
+    for(std::size_t i=0;i<update.matrix.size();++i){
+        const auto tolerance=4*std::numeric_limits<float>::epsilon()*std::max(1.F,std::abs(startPivot_[i]));
+        if(std::abs(update.matrix[i]-startPivot_[i])>tolerance){initialPose=false;break;}
+    }
     EditTransaction transaction(context_);auto& candidate=transaction.candidate();
     for(const auto index:roots_){
-        const auto& source=initial_.scene.nodes.at(index);auto matrix=multiply(delta,startWorld_.at(index));
+        const auto& source=initial_.scene.nodes.at(index);
+        if(initialPose){auto& node=candidate.scene_.nodes.at(index);node.translation=source.translation;node.rotation=source.rotation;node.scale=source.scale;continue;}
+        auto matrix=multiply(delta,startWorld_.at(index));
         if(!source.parentId.empty()){
             const auto parent=std::find_if(initial_.scene.nodes.begin(),initial_.scene.nodes.end(),[&](const auto& node){return node.id==source.parentId;});
             if(parent==initial_.scene.nodes.end())throw EditRejection("Missing gizmo parent");

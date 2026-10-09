@@ -2687,10 +2687,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
             uniformScale(fitScale),
             translation(-center[0], -center[1], -center[2])));
     currentModel_ = sceneWorldCoordinates_ ? scene::identityMatrix() : model;
-    const Matrix4 view = lookAt(
-        cameraPosition_,
-        cameraTarget_,
-        {0.0F, 1.0F, 0.0F});
+    const Matrix4 view = characterView(*renderSettings_,cameraPosition_,cameraTarget_);
     viewMatrix_ = view;
     const float aspect =
         static_cast<float>(frame.swapchainWidth)
@@ -2721,7 +2718,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     std::copy(splits.begin(), splits.end(), cascadeSplits_.begin());
     const Vector3 cameraForward = normalize(
         subtract(cameraTarget_, cameraPosition_));
-    const Vector3 worldUp = {0.0F, 1.0F, 0.0F};
+    const Vector3 worldUp = settings.cameraView?settings.cameraView->up:Vector3{0.0F, 1.0F, 0.0F};
     const Vector3 cameraRight = normalize(cross(cameraForward, worldUp));
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
     // Keep conservative shadow coverage around the shared geometry projection.
@@ -2736,7 +2733,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         std::size_t cornerIndex = 0;
         Vector3 center{};
         for (const float depth : {cascadeNear, cascadeFar}) {
-            const float halfHeight = depth * halfFovTangent;
+            const float halfHeight = settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?settings.cameraView->orthoHeight*.5F:depth * halfFovTangent;
             const float halfWidth = halfHeight * aspect;
             const Vector3 sliceCenter = addVectors(
                 cameraPosition_, scaleVector(cameraForward, depth));
@@ -2911,6 +2908,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         renderSettings_->cameraFar,
         std::abs(projection[0]),
         std::abs(projection[5]),
+        renderSettings_->cameraView && renderSettings_->cameraView->projection
+            == CameraProjectionKind::Orthographic,
     });
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();

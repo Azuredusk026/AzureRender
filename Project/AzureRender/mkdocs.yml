@@ -57,6 +57,7 @@ nav:
   - 着色模块与共享类型: runtime/shader-modules.md
   - 着色模块对照教程: tutorials/shader-modules.md
   - 架构调研:
+      - 视口导航与辅助显示: runtime/viewport-navigation.md
       - 材质参数与槽位制作: runtime/material-authoring.md
       - U11 材质制作验收: acceptance/u11/2026-10-10.md
       - 内容导航与基础创建: runtime/content-navigation.md
@@ -121,6 +122,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U12 视口工具与导航验收: acceptance/u12/2026-10-10.md
       - G10 程序化内容与文本动画: acceptance/g10/2026-10-07.md
       - G9 有界内容提案: acceptance/g9/2026-10-06.md
       - U4 UI 基础与设置: acceptance/u4/2026-10-06.md

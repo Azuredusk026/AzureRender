@@ -5,6 +5,7 @@
 #include "editor/content/AssetCatalog.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include "editor/preview/ThumbnailProviderRegistry.hpp"
+#include "editor/viewport/EditorCameraService.hpp"
 #include <algorithm>
 #include <fstream>
 namespace azurerender {
@@ -270,6 +271,27 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"viewport.frame-selection",1,schema(),false,false,true},[&session](EditorContext& c,const Json&)->Json {
         if(c.selectedNodes().empty())throw EditRejection("Select an object to frame");
         session.frameSelectionRequested_=true;return nullptr;
+    });
+    registry.add({"viewport.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
+        const auto& view=session.viewportView_;return {{"projection",view.projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"position",view.position},{"target",view.target},{"up",view.up},{"fov",view.fov},{"orthoHeight",view.orthoHeight},{"near",view.nearPlane},{"far",view.farPlane}};
+    });
+    registry.add({"viewport.overlays",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.viewportOverlays().describe();});
+    registry.add({"viewport.overlay-policy",1,schema({{"category",text},{"policy",text}},{"category","policy"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        const auto category=a.at("category").get<std::string>(),policy=a.at("policy").get<std::string>();
+        if(!session.viewportOverlays().contains(category)||(policy!="hidden"&&policy!="selected"&&policy!="all"))throw EditRejection("Invalid viewport helper category or visibility policy");
+        session.viewportOverlayPolicies()[category]=policy;return nullptr;
+    });
+    registry.add({"viewport.orientation",1,schema({{"axis",text}},{"axis"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        auto candidate=session.viewportView_;EditorCameraService::orient(candidate,a.at("axis").get<std::string>());session.viewportView_=candidate;session.viewportViewChanged_=true;return nullptr;
+    });
+    registry.add({"viewport.projection",1,schema({{"value",text}},{"value"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        const auto kind=a.at("value").get<std::string>();if(kind!="perspective"&&kind!="orthographic")throw EditRejection("Unknown viewport projection");
+        auto candidate=session.viewportView_;EditorCameraService::projection(candidate,kind=="perspective"?CameraProjectionKind::Perspective:CameraProjectionKind::Orthographic);session.viewportView_=candidate;session.viewportViewChanged_=true;return nullptr;
+    });
+    registry.add({"viewport.fly-speed",1,schema({{"steps",number}},{"steps"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
+        const auto steps=a.at("steps").get<double>();if(!std::isfinite(steps)||std::abs(steps)>100)throw EditRejection("Flight wheel steps must be finite and within 100");
+        const auto value=std::clamp(session.settings().get("editor.camera.flySpeed").get<double>()*std::exp(steps*.16),.01,10000.);
+        const auto result=session.settings().set("editor.camera.flySpeed",value,SettingSource::UserFile);if(!result.passed)throw EditRejection(result.diagnostic);session.settings().applyPending();return value;
     });
     registry.add({"document.close",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
         if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError_);return nullptr;

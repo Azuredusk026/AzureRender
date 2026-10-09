@@ -20,6 +20,7 @@ struct ClusterGridDesc {
     float farPlane = 100.0F;
     float projectionScaleX = 1.0F;
     float projectionScaleY = 1.0F;
+    bool orthographic = false;
 };
 
 class ClusteredLightGrid final {
@@ -54,14 +55,16 @@ public:
                         * static_cast<float>(count), 0.0F,
                         static_cast<float>(count - 1))));
             };
+            const float projectedRadius = desc_.orthographic
+                ? radius : radius / minimumDepth;
             const float minimumX = light.clusterPosition[0]
-                - desc_.projectionScaleX * radius / minimumDepth;
+                - desc_.projectionScaleX * projectedRadius;
             const float maximumX = light.clusterPosition[0]
-                + desc_.projectionScaleX * radius / minimumDepth;
+                + desc_.projectionScaleX * projectedRadius;
             const float minimumY = light.clusterPosition[1]
-                - desc_.projectionScaleY * radius / minimumDepth;
+                - desc_.projectionScaleY * projectedRadius;
             const float maximumY = light.clusterPosition[1]
-                + desc_.projectionScaleY * radius / minimumDepth;
+                + desc_.projectionScaleY * projectedRadius;
             if (maximumX < -1.0F || minimumX > 1.0F
                 || maximumY < -1.0F || minimumY > 1.0F) {
                 continue;

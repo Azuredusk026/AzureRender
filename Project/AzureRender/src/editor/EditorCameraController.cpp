@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cmath>
+#include "render/CameraProjection.hpp"
 
 namespace azurerender {
 
@@ -113,6 +114,33 @@ bool EditorCameraController::apply(
             position[axis]=startingPosition[axis]+translation[axis];
     }
     return true;
+}
+
+bool EditorCameraController::apply(const EditorViewportInput& input,CameraViewDescriptor& view){
+    if(!input.active())return false;validateCameraView(view,1);
+    auto next=view;
+    if(input.frameRequested){const auto forward=internal::normalize(internal::subtract(next.target,next.position));next.target=input.frameTarget;next.position=internal::subtract(next.target,internal::scaleVector(forward,std::max(input.frameDistance,.001F)));view=next;return true;}
+    auto forward=internal::normalize(internal::subtract(next.target,next.position));auto right=internal::normalize(internal::cross(forward,next.up));
+    const auto rotate=[](const Vector3& v,const Vector3& axis,float angle){const auto c=std::cos(angle),s=std::sin(angle);return internal::addVectors(internal::addVectors(internal::scaleVector(v,c),internal::scaleVector(internal::cross(axis,v),s)),internal::scaleVector(axis,internal::dot(axis,v)*(1-c)));};
+    const auto distance=internal::vectorLength(internal::subtract(next.target,next.position));
+    if(input.lookDeltaX!=0||input.lookDeltaY!=0){
+        forward=rotate(forward,internal::normalize(next.up),-input.lookDeltaX*.008F);right=internal::normalize(internal::cross(forward,next.up));
+        const auto pitch=rotate(forward,right,-input.lookDeltaY*.008F);if(std::abs(internal::dot(pitch,internal::normalize(next.up)))<.996F)forward=pitch;
+        next.target=internal::addVectors(next.position,internal::scaleVector(forward,distance));
+    }
+    if(input.orbitDeltaX!=0||input.orbitDeltaY!=0){
+        auto offset=internal::subtract(next.position,next.target);offset=rotate(offset,internal::normalize(next.up),-input.orbitDeltaX*.008F);forward=internal::normalize(internal::scaleVector(offset,-1));right=internal::normalize(internal::cross(forward,next.up));
+        const auto tilted=rotate(offset,right,input.orbitDeltaY*.008F);if(std::abs(internal::dot(internal::normalize(tilted),internal::normalize(next.up)))<.996F)offset=tilted;
+        next.position=internal::addVectors(next.target,offset);forward=internal::normalize(internal::scaleVector(offset,-1));
+    }
+    right=internal::normalize(internal::cross(forward,next.up));const auto up=internal::cross(right,forward);
+    if(input.zoomSteps!=0){const auto factor=std::exp(-input.zoomSteps*.16F);if(next.projection==CameraProjectionKind::Orthographic)next.orthoHeight=std::clamp(next.orthoHeight*factor,.0001F,1000000.F);
+        else next.position=internal::subtract(next.target,internal::scaleVector(forward,std::clamp(distance*factor,.001F,1000000.F)));}
+    const float panScale=(next.projection==CameraProjectionKind::Orthographic?next.orthoHeight:distance)*.0015F;
+    auto translation=internal::addVectors(internal::scaleVector(right,-input.panDeltaX*panScale),internal::scaleVector(up,input.panDeltaY*panScale));
+    auto motion=internal::addVectors(internal::addVectors(internal::scaleVector(forward,input.flyForward),internal::scaleVector(right,input.flyRight)),Vector3{0,input.flyUp,0});
+    const auto length=internal::vectorLength(motion);if(length>1e-6F)translation=internal::addVectors(translation,internal::scaleVector(motion,input.flySpeed*std::clamp(input.deltaSeconds,0.F,.1F)/length));
+    next.position=internal::addVectors(next.position,translation);next.target=internal::addVectors(next.target,translation);validateCameraView(next,1);view=next;return true;
 }
 
 }  // namespace azurerender

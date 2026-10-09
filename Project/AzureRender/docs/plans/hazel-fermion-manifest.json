@@ -280,8 +280,9 @@
       "phase": "U12",
       "proposal": "接入方向控件与六向视图，统一透视及正交投影。",
       "acceptance": "六向构图、透视切换、定位、拾取和操纵器使用同一相机描述。",
-      "status": "Planned",
-      "sourceSha256": "e2eda78cd9cbc470087c651ec969133a3fdcc53d33ab003ffe698bf0685a7aba"
+      "status": "Complete",
+      "sourceSha256": "e2eda78cd9cbc470087c651ec969133a3fdcc53d33ab003ffe698bf0685a7aba",
+      "evidence": "docs/acceptance/u12/2026-10-10.md"
     },
     {
       "id": "B02",
@@ -299,8 +300,9 @@
       "phase": "U12",
       "proposal": "注册网格、图标、边界和相机视锥提供者。编辑辅助与游戏渲染分开。",
       "acceptance": "辅助显示按类别开关。远近视距稳定，Player 画面保持项目表现。",
-      "status": "Planned",
-      "sourceSha256": "a6113dd1bc981f4044344e84aec8db7b2bee1f488c570052d517c5980e39f4eb"
+      "status": "Complete",
+      "sourceSha256": "a6113dd1bc981f4044344e84aec8db7b2bee1f488c570052d517c5980e39f4eb",
+      "evidence": "docs/acceptance/u12/2026-10-10.md"
     },
     {
       "id": "B03",
@@ -318,8 +320,9 @@
       "phase": "U12",
       "proposal": "飞行滚轮调基础速度。状态条显示导航模式、速度与快捷键。",
       "acceptance": "右键外滚轮缩放，右键内滚轮调速。Shift 释放恢复速度，失焦释放捕获。",
-      "status": "Planned",
-      "sourceSha256": "a260bcb4940d228e2ae4f76312fc2062713c21d84f312fc959036c573ce8f7b1"
+      "status": "Complete",
+      "sourceSha256": "a260bcb4940d228e2ae4f76312fc2062713c21d84f312fc959036c573ce8f7b1",
+      "evidence": "docs/acceptance/u12/2026-10-10.md"
     },
     {
       "id": "B04",
@@ -767,8 +770,10 @@
         "A10",
         "A11"
       ],
-      "evidence": [],
-      "commit": null,
+      "evidence": [
+        "docs/acceptance/u11/2026-10-10.md"
+      ],
+      "commit": "3ab7ed68ded724e2802db2be2baafd9449f21de2",
       "dependsOn": [
         "U10"
       ],
@@ -778,14 +783,16 @@
     },
     {
       "id": "U12",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "B01",
         "B02",
         "B03"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/u12/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "U11"
@@ -829,7 +836,7 @@
     },
     {
       "id": "G13",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "A12",
@@ -858,6 +865,51 @@
       "dependsOn": [
         "G13"
       ]
+    },
+    {
+      "id": "G15",
+      "status": "Planned",
+      "kind": "main",
+      "items": [],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U13"
+      ],
+      "requirements": [
+        "input-driven exploration completion baseline",
+        "measured route, scale and travel time",
+        "landmark and lighting guidance",
+        "near/middle/far environment composition",
+        "Blender/script asset provenance",
+        "albedo, normal and roughness interpretation",
+        "camera, collision and performance regression"
+      ],
+      "plan": "docs/plans/2026-10-09-editor-productization.md"
+    },
+    {
+      "id": "G16",
+      "status": "Planned",
+      "kind": "main",
+      "items": [],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "G15"
+      ],
+      "requirements": [
+        "measured speed, airtime, jump height, range and collider",
+        "joint distance/height validation for every mandatory jump",
+        "static, horizontal and vertical platforms",
+        "moving-platform carriage",
+        "coins and optional paths",
+        "checkpoint, falling and fast retry",
+        "jump, landing, collection, respawn and completion audio",
+        "identifiable completion gate and minimal HUD",
+        "exploration transition and standalone launch",
+        "object and resource lifecycle regression"
+      ],
+      "plan": "docs/plans/2026-10-09-editor-productization.md"
     },
     {
       "id": "P5",
@@ -894,7 +946,7 @@
       "evidence": [],
       "commit": null,
       "dependsOn": [
-        "U13"
+        "G16"
       ]
     },
     {
@@ -1053,7 +1105,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression"
   },
   "execution": {
     "order": [
@@ -1069,13 +1121,14 @@
       "G16",
       "P5"
     ],
-    "active": "U12",
+    "active": "G13",
     "completed": [
       "U8",
       "U9",
       "G12",
       "U10",
-      "U11"
+      "U11",
+      "U12"
     ]
   }
 }

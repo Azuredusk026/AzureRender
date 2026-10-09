@@ -1,6 +1,8 @@
 #pragma once
 
 #include "extensions/SceneType.hpp"
+#include "render/CameraViewDescriptor.hpp"
+#include <optional>
 
 #include <array>
 #include <cstdint>
@@ -97,6 +99,7 @@ struct RenderSettings {
     std::uint32_t antiAliasing = 1;
     float cameraNear = .1F;
     float cameraFar = 100.0F;
+    std::optional<CameraViewDescriptor> cameraView;
     float shadowDistance = 100.0F;
 
     // Selects the pluggable scene renderer that draws the current frame.

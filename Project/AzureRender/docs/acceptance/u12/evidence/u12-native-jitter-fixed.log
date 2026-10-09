@@ -1,0 +1,17 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 135: AzureEditor.GizmoController
+1/2 Test #135: AzureEditor.GizmoController ......   Passed    0.31 sec
+    Start 145: AzureEditor.NativeInputGpu
+2/2 Test #145: AzureEditor.NativeInputGpu .......   Passed   18.69 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Label Time Summary:
+gpu    =  18.69 sec*proc (1 test)
+
+Total Test time (real) =  19.01 sec

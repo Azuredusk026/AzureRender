@@ -660,6 +660,12 @@ void AzureRenderApp::buildSceneFrameData(
         frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
     effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+        auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
+        effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
+    }
+#endif
     frame.renderSettings = &effectiveRenderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
     frame.cameraPosition[1] = cameraPosition_[1];

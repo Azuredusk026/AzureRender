@@ -2,6 +2,7 @@
 #include "EditorTheme.hpp"
 #include "editor/ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
+#include <GLFW/glfw3.h>
 #include <imgui_internal.h>
 #include <algorithm>
 #include <cmath>
@@ -85,6 +86,8 @@ void ImGuiEditorLayer::injectUiEvents() {
                     {"Enter",ImGuiKey_Enter},{"Escape",ImGuiKey_Escape},{"Shift",ImGuiKey_LeftShift}};
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
+                if(action.contains("shift")||action.at("key")=="Shift")
+                    io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Shift),action.value("shift",action.value("down",true)));
                 io.AddKeyEvent(keys.at(action.at("key").get<std::string>()),action.value("down",true));
             }else if(kind=="dpi") {
                 dpiOverride_=action.at("scale").get<float>();dpi_=dpiOverride_;
@@ -148,7 +151,7 @@ void ImGuiEditorLayer::drawWorkspace() {
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
             observeWidget(std::string("tool.")+id);
         }
-        ImGui::Separator();ImGui::TextWrapped("RMB + WASD: fly\nShift: accelerate\nAlt + LMB: orbit\nMMB: pan\nWheel: zoom\nW/E/R: move/rotate/scale\nF / outliner double click: frame\nCtrl+S: save\nCtrl+P: play / stop");
+        ImGui::Separator();ImGui::TextWrapped("Hold RMB: fly / look\nWASD: move | E/Q: up/down\nShift: accelerate\nRMB + wheel: flight speed\nAlt + LMB: orbit\nMMB: pan | Wheel: zoom\nW/E/R: move/rotate/scale\nF / outliner double click: frame\nView: axes, projection, helpers\nCtrl+S: save\nCtrl+P: play / stop");
         ImGui::End();
     }
 }
@@ -160,6 +163,10 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    data["view"]=session_->edit("viewport.describe").value;
+    data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
+    data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";
+    data["navigation"]["rawMouse"]=window_&&glfwRawMouseMotionSupported()&&glfwGetInputMode(window_,GLFW_RAW_MOUSE_MOTION)==GLFW_TRUE;
     data["materialEditor"]={{"asset",materialAsset_},{"snapshot",materialSnapshot_}};
     data["contentNavigation"]={{"mount",assetMount_},{"path",assetDirectory_},{"historyIndex",assetNavigationIndex_},{"historySize",assetNavigation_.size()},{"selected",selectedAssets_},{"previewHandle",assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
     if(includeHistory)data["history"]=uiHistory_;

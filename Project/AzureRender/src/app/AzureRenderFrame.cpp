@@ -66,7 +66,12 @@ void AzureRenderApp::drawFrame() {
             azurerender::RuntimeDiagnostics::instance().info("settings","Applied setting layers: "+engineSettings_->describe().dump());
     }
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && !runOptions_.editorSession->playing() && editorCameraFar_>0){effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;}
+    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+        auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
+        if(session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
+        if(editorCameraFar_>0){session.viewportView().nearPlane=editorCameraNear_;session.viewportView().farPlane=editorCameraFar_;}
+        effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
+    }
 #endif
     const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
     if(sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale)
@@ -154,7 +159,7 @@ void AzureRenderApp::drawFrame() {
         editorLayer_->setViewportImageIndex(imageIndex);
         editorLayer_->setPreviewSubmission(graphicsSubmission_+1);
         editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
-        const auto view=lookAt(cameraPosition_,cameraTarget_,{0,1,0});
+        const auto view=azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_);
         const auto projection=azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height);
         runOptions_.editorSession->context().setViewportCameraMatrices(view,projection);
         runOptions_.editorSession->context().setDebugProjection(multiply(projection,view));
@@ -163,6 +168,7 @@ void AzureRenderApp::drawFrame() {
         azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();
         auto& session=*runOptions_.editorSession;
+        if(!session.playing() && session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
         if(session.consumeFrameSelection() && !session.playing()) {
             const auto description=session.context().scene().renderDescription();
             const auto* rendererState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
@@ -173,24 +179,22 @@ void AzureRenderApp::drawFrame() {
                 }
                 return {};
             });
-            const float fov=2*std::atan(std::tan(3.14159265F/6)/azurerender::internal::kCharacterLensScale);
             if(bounds.valid){
                 const float radius=.5F*vectorLength(subtract(bounds.bounds.maximum,bounds.bounds.minimum));
                 editorCameraNear_=std::max(.00001F,std::min(effectiveRenderSettings_.cameraNear,radius*.001F));
                 editorCameraFar_=std::max(effectiveRenderSettings_.cameraFar,radius*100.F);
                 effectiveRenderSettings_.cameraNear=editorCameraNear_;effectiveRenderSettings_.cameraFar=editorCameraFar_;
             }
-            const auto framed=azurerender::EditorCameraService::frameSelection(bounds,cameraPosition_,cameraTarget_,fov,
-                static_cast<float>(renderExtent_.width)/renderExtent_.height,effectiveRenderSettings_.cameraNear,effectiveRenderSettings_.cameraFar);
+            auto& editorView=session.viewportView();editorView.nearPlane=effectiveRenderSettings_.cameraNear;editorView.farPlane=effectiveRenderSettings_.cameraFar;
+            const auto framed=azurerender::EditorCameraService::frameSelection(editorView,bounds,static_cast<float>(renderExtent_.width)/renderExtent_.height);
             if(framed.passed){cameraPosition_=framed.position;cameraTarget_=framed.target;autoRotate_=false;}
             else session.log("ERROR: "+framed.diagnostic);
         }
-        if (!runOptions_.editorSession->playing() && azurerender::EditorCameraController::apply(
-                viewportInput,
-                cameraPosition_,
-                cameraTarget_)) {
+        if (!session.playing() && azurerender::EditorCameraController::apply(viewportInput,session.viewportView())) {
+            cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;
             autoRotate_ = false;
         }
+        if(!session.playing()){session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);effectiveRenderSettings_.cameraView=session.viewportView();}
         editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         if (viewportInput.pickRequested) {
             pendingPickRequested_ = true;
@@ -382,8 +386,8 @@ void AzureRenderApp::updateGizmoScreenData() {
     }
     auto& editorContext = runOptions_.editorSession->context();
     editorContext.setDebugProjection(multiply(azurerender::characterProjection(effectiveRenderSettings_,
-        static_cast<float>(renderExtent_.width)/renderExtent_.height),lookAt(cameraPosition_,cameraTarget_,{0,1,0})));
-    editorContext.setViewportCameraMatrices(lookAt(cameraPosition_,cameraTarget_,{0,1,0}),
+        static_cast<float>(renderExtent_.width)/renderExtent_.height),azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_)));
+    editorContext.setViewportCameraMatrices(azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_),
         azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height));
     editorContext.syncComponents();
     if (!ecsRenderableLogged_) {
@@ -423,8 +427,7 @@ void AzureRenderApp::updateGizmoScreenData() {
     const float aspect =
         static_cast<float>(renderExtent_.width)
         / static_cast<float>(renderExtent_.height);
-    const Matrix4 view = lookAt(
-        cameraPosition_, cameraTarget_, {0.0F, 1.0F, 0.0F});
+    const Matrix4 view = azurerender::characterView(effectiveRenderSettings_,cameraPosition_,cameraTarget_);
     const Matrix4 projection =
         azurerender::characterProjection(effectiveRenderSettings_,aspect);
     const Matrix4 viewProj = multiply(projection, view);
@@ -516,12 +519,9 @@ void AzureRenderApp::pickPrimitive(
     const float aspect =
         static_cast<float>(renderExtent_.width)
         / static_cast<float>(renderExtent_.height);
-    const Vector3 direction = pickRayDirection(
-        cameraPosition_,
-        cameraTarget_,
-        viewportX,
-        viewportY,
-        aspect);
+    const azurerender::CameraPickRay ray=effectiveRenderSettings_.cameraView?azurerender::cameraPickRay(*effectiveRenderSettings_.cameraView,viewportX,viewportY,aspect):
+        azurerender::CameraPickRay{cameraPosition_,pickRayDirection(cameraPosition_,cameraTarget_,viewportX,viewportY,aspect)};
+    const auto& direction=ray.direction;
     float bestDistance = std::numeric_limits<float>::max();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->context().isProject()) {
@@ -532,7 +532,7 @@ void AzureRenderApp::pickPrimitive(
                 const auto a=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index],entry.pose,entry.morph));
                 const auto b=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+1],entry.pose,entry.morph));
                 const auto c=transformPosition(entry.model,azurerender::deformedVertexPosition(mesh,mesh.indices[index+2],entry.pose,entry.morph));
-                const float distance=rayTriangleDistance(cameraPosition_,direction,a,b,c);
+                const float distance=rayTriangleDistance(ray.origin,direction,a,b,c);
                 if(distance>0 && distance<bestDistance){bestDistance=distance;selected=entry.node;}
             }
         }
@@ -562,7 +562,7 @@ void AzureRenderApp::pickPrimitive(
                 currentModel, asset.vertices[i2].position);
             // Möller–Trumbore 求交(纯函数,可单测)。
             const float distance = rayTriangleDistance(
-                cameraPosition_, direction, v0, v1, v2);
+                ray.origin, direction, v0, v1, v2);
             if (distance > 0.0F && distance < bestDistance) {
                 bestDistance = distance;
                 selectedPrimitiveIndex_ =

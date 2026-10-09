@@ -1,0 +1,1 @@
+[{"frame": 25, "action": "click", "target": "viewport.view-options"}, {"frame": 30, "action": "click", "target": "viewport.orientation.+Y"}, {"frame": 35, "action": "click", "target": "node.asset-a"}, {"frame": 40, "action": "key", "key": "F", "down": true}, {"frame": 41, "action": "key", "key": "F", "down": false}, {"frame": 48, "action": "click", "target": "pick.asset-a"}]

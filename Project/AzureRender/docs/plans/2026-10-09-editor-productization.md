@@ -2,7 +2,7 @@
 
 > 文档类型：正式实施计划
 > 日期：2026-10-10
-> 状态：Active，U8/U9/G12/U10/U11 Complete，U12 实施中
+> 状态：Active，U8/U9/G12/U10/U11/U12 Complete，G13 实施中
 > 执行方式：按阶段顺序实施，每阶段独立验收与提交
 > 依据：[Hazel 与 Fermion 借鉴评估](../research/2026-10-09-hazel-fermion.md)
 > 约束：仓库根目录的 `AGENT.md`
@@ -410,7 +410,8 @@ PBR 与风格材质各自注册描述。
 - 修改 `src/editor/input/EditorInputRouter.hpp/.cpp`。
 - 新建 `src/editor/viewport/EditorViewDescriptor.hpp`。
 - 新建 `src/editor/viewport/ViewportOverlayRegistry.hpp/.cpp`。
-- 新建 `shaders/editor_grid.vert` 与 `editor_grid.frag`。
+- 新建 `src/editor/viewport/ViewportOverlays.cpp`。
+- 新建 `src/render/CameraViewDescriptor.hpp` 与 `LinearMath.hpp`。
 - 新建 `third_party/ImViewGuizmo/source.json` 与许可文件。
 - 新建 `tests/EditorProjectionTests.cpp`。
 - 扩展 `tools/test_editor_productization.py`。
@@ -423,6 +424,8 @@ PBR 与风格材质各自注册描述。
 辅助提供者返回带类别的线、图标或网格描述。
 每类支持隐藏、选中与全部显示策略。
 辅助状态归工作区，内容数据归项目。
+辅助线经齐次裁剪，由编辑叠加层统一绘制。
+网格采用同一提供者契约与显示策略。
 视口按住右键进入漂浮与环视模式。
 鼠标移动以相机位置为中心改变朝向。
 WASD 控制前后与侧向移动，E/Q 控制升降。
@@ -441,16 +444,16 @@ Shift 临时加速，滚轮调整基础飞行速度。
 公共相机服务支持不同项目和视口布局。
 飞行调速消费现有输入路由与设置。
 
-- [ ] 核验 ImViewGuizmo 文件许可、哈希与安装归属。
-- [ ] 建立六向、正交构图及拾取一致性失败夹具。
-- [ ] 接入方向控件和统一投影描述。
-- [ ] 建立网格、相机和光源辅助提供者。
-- [ ] 实现右键漂浮、原地环视与六向移动。
-- [ ] 实现飞行滚轮调速与可读状态反馈。
-- [ ] 验证右键方向、Shift 加速与工具快捷键仲裁。
-- [ ] 验证松键、Esc 与失焦均终止输入捕获。
-- [ ] 验证失焦、弹窗、拖出视口和尺寸变化。
-- [ ] 完成文档、清单与阶段提交。
+- [x] 核验 ImViewGuizmo 文件许可、哈希与安装归属。
+- [x] 建立六向、正交构图及拾取一致性失败夹具。
+- [x] 接入方向控件和统一投影描述。
+- [x] 建立网格、相机和光源辅助提供者。
+- [x] 实现右键漂浮、原地环视与六向移动。
+- [x] 实现飞行滚轮调速与可读状态反馈。
+- [x] 验证右键方向、Shift 加速与工具快捷键仲裁。
+- [x] 验证松键、Esc 与失焦均终止输入捕获。
+- [x] 验证失焦、弹窗、拖出视口和尺寸变化。
+- [x] 完成文档、清单与阶段提交。
 
 辅助工具命中区域先由输入路由消费。
 悬停不强制改变活动面板。
@@ -807,5 +810,6 @@ U9 验收见[属性制作记录](../acceptance/u9/2026-10-10.md)。
 G12 验收见[内容制作记录](../acceptance/g12/2026-10-10.md)。
 U10 验收见[内容导航记录](../acceptance/u10/2026-10-10.md)。
 U11 验收见[材质制作记录](../acceptance/u11/2026-10-10.md)。
-U12 为当前实施阶段。
+U12 验收见[视口导航记录](../acceptance/u12/2026-10-10.md)。
+G13 为当前实施阶段。
 其余主线阶段按计划顺序执行。

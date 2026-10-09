@@ -1,0 +1,20 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 126: AzureRender.ClusteredLightGrid
+1/5 Test #126: AzureRender.ClusteredLightGrid .......   Passed    0.01 sec
+    Start 131: AzureRender.EditorCameraController
+2/5 Test #131: AzureRender.EditorCameraController ...   Passed    0.04 sec
+    Start 140: AzureRender.EditorInputRouter
+3/5 Test #140: AzureRender.EditorInputRouter ........   Passed    0.01 sec
+    Start 193: AzureEditor.EditorProjection
+4/5 Test #193: AzureEditor.EditorProjection .........   Passed    0.16 sec
+    Start 194: AzureEditor.ViewportOverlays
+5/5 Test #194: AzureEditor.ViewportOverlays .........   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   0.30 sec

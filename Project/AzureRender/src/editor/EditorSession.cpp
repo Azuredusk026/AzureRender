@@ -160,6 +160,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.camera.flySpeed","Editor flight speed",5.,.01,10000.,false,true,false});
     settings_.add({"editor.thumbnailSize","Content thumbnail size",96,64,192,false,true,false});
     settings_.add({"editor.camera.boost","Editor flight acceleration",4.,1.,100.,false,true,false});
+    settings_.add({"editor.camera.rawMouse","Use raw mouse motion during captured flight",true,{},{},false,true,false});
     settings_.add({"editor.camera.orbitSensitivity","Editor orbit sensitivity",1.,.01,10.,false,true,false});
     for(const auto& binding:std::vector<std::pair<const char*,const char*>>{{"move","W"},{"rotate","E"},{"scale","R"},{"select","Q"},{"frame","F"}})
         settings_.add({std::string("editor.shortcuts.")+binding.first,"Scene shortcut (one uppercase letter)",binding.second,{},{},false,true,false});

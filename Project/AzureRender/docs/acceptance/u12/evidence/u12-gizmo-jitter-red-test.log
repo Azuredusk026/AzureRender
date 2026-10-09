@@ -1,0 +1,23 @@
+[OUTPUT]
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+[HANDLER_OUTPUT]
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+
+    Start 135: AzureEditor.GizmoController
+1/1 Test #135: AzureEditor.GizmoController ......***Failed    0.15 sec
+[1791579679889][info][editor][code=0] Opened scene: gizmo
+[1791579679901][info][editor][code=0] Opened scene: gizmo
+[1791579679915][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-gizmo-30486002731000\scene.azscene
+[1791579679924][info][editor][code=0] Opened scene: gizmo
+A handle click with floating-point jitter must preserve document bytes and history
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.16 sec
+
+The following tests FAILED:
+	135 - AzureEditor.GizmoController (Failed)
+[ERROR_MESSAGE]
+Errors while running CTest

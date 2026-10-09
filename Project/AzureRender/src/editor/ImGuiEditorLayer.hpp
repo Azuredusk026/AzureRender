@@ -122,6 +122,14 @@ private:
 #endif
     std::array<float, 3> gizmoDragStartTranslation_{0.0F, 0.0F, 0.0F};
     int navigationButton_=-1;
+    bool navigationCursorCaptured_=false;
+    bool navigationRawMouse_=false;
+    std::array<double,2> savedNavigationCursor_{};
+    void setNavigationCapture(bool captured);
+#ifdef AZURERENDER_HAS_IMGUI
+    bool drawViewportOrientation(ImVec2 origin,ImVec2 size);
+    void drawViewportOverlays(ImVec2 origin,ImVec2 size);
+#endif
     int injectedClickButton_=0;
     std::array<float,3> cameraPosition_{},cameraTarget_{};
     bool viewportGizmoDragActive_ = false;

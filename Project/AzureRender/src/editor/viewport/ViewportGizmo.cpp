@@ -17,7 +17,7 @@ bool ImGuiEditorLayer::drawViewportGizmo(ImVec2 origin,ImVec2 size) {
     if(!enabled || ImGui::IsKeyPressed(ImGuiKey_Escape,false)) {
         cancelViewportGizmo();return false;
     }
-    ImGuizmo::Enable(true);ImGuizmo::SetOrthographic(false);ImGuizmo::AllowAxisFlip(false);
+    ImGuizmo::Enable(true);ImGuizmo::SetOrthographic(session_->viewportView().projection==CameraProjectionKind::Orthographic);ImGuizmo::AllowAxisFlip(false);
     auto& style=ImGuizmo::GetStyle();style=ImGuizmo::Style{};
     style.TranslationLineThickness*=dpi_;style.TranslationLineArrowSize*=dpi_;
     style.RotationLineThickness*=dpi_;style.ScaleLineThickness*=dpi_;
