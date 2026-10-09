@@ -14,6 +14,8 @@
 #include <cmath>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include <functional>
 #include <iostream>
 #include <limits>
@@ -1807,7 +1809,23 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     if (!loaded) {
         throw std::runtime_error("Unable to load glTF asset: " + error);
     }
-    return importGltfModel(model);
+    auto asset=importGltfModel(model);
+    for(std::size_t index=0;index<model.materials.size();++index) {
+        const auto& material=model.materials[index];
+        const int textures[]={material.pbrMetallicRoughness.baseColorTexture.index,material.normalTexture.index,material.pbrMetallicRoughness.metallicRoughnessTexture.index,material.emissiveTexture.index,material.occlusionTexture.index};
+        for(std::size_t slot=0;slot<5;++slot) {
+            if(textures[slot]<0)continue;
+            const auto image=model.textures.at(static_cast<std::size_t>(textures[slot])).source;
+            if(image<0)continue;const auto& uri=model.images.at(static_cast<std::size_t>(image)).uri;
+            if(uri.empty()||uri.rfind("data:",0)==0)continue;
+            const auto sidecar=filePath.parent_path()/std::filesystem::u8path(uri+".azmeta");
+            if(!std::filesystem::exists(sidecar))continue;
+            std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;
+            const auto settings=metadata.value("settings",nlohmann::json::object());
+            if(settings.contains("texture"))asset.materials[index].textureSettings[slot]=azurerender::TextureImportSettings::parse(settings.at("texture"),asset.materials[index].textureSettings[slot]);
+        }
+    }
+    return asset;
 }
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");

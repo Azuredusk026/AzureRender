@@ -4,6 +4,7 @@
 #include <future>
 #include <string>
 #include <nlohmann/json.hpp>
+#include "runtime/AssetDatabase.hpp"
 namespace azurerender {
 class AssetImportJob {
 public:
@@ -25,5 +26,20 @@ private:
     std::future<void> work_;
     std::string filename_;
     nlohmann::json summary_;
+};
+// Validates existing project content without publishing from a worker thread.
+class AssetReimportJob final {
+public:
+    AssetReimportJob(AssetRecord asset,std::vector<AssetRecord> inputs,nlohmann::json settings);
+    ~AssetReimportJob();
+    void cancel() {cancelled_=true;}
+    bool ready() const;
+    float progress() const {return progress_.load();}
+    nlohmann::json finish();
+private:
+    std::atomic<bool> cancelled_{false};
+    std::atomic<float> progress_{0};
+    std::future<nlohmann::json> work_;
+    void check() const;
 };
 }

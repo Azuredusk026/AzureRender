@@ -102,6 +102,7 @@ public:
     std::filesystem::path recoveryPath() const;
     void save();
     void reload();
+    void reloadProjectContent();
     void addChildNode(std::size_t parentIndex);
     void removeNode(std::size_t index);
     void setSelectedNodeName(std::string name);

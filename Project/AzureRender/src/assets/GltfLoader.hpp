@@ -1,5 +1,6 @@
 #pragma once
 
+#include "assets/TextureImportSettings.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -73,6 +74,15 @@ struct AssetFaceSdfProfile {
 };
 
 struct AssetMaterial {
+    std::array<azurerender::TextureImportSettings,8> textureSettings=[] {
+        std::array<azurerender::TextureImportSettings,8> result;
+        const char* usage[]={"albedo","normal","roughness","emissive","mask","albedo","packed-normal","linear"};
+        for(std::size_t slot=0;slot<result.size();++slot) {
+            result[slot].usage=usage[slot];
+            result[slot].colorSpace=slot==0||slot==3||slot==5?"srgb":"linear";
+        }
+        return result;
+    }();
     std::string name = "FallbackMaterial";
     AssetMaterialClass materialClass = AssetMaterialClass::Generic;
     std::uint32_t materialFeatures = MaterialFeatureNeutralFallback;

@@ -89,6 +89,7 @@ private:
     void drawOutlinerPanel(PanelContext& context);
     void drawInspectorPanel(PanelContext& context);
     void drawAssetBrowserPanel(PanelContext& context);
+    void drawTextureAssetPanel();
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);
     void drawBuildPanel(PanelContext& context);
@@ -155,6 +156,10 @@ private:
     int consoleLevel_ = 0;
     bool assetGrid_ = false;
     std::string assetDirectory_;
+    std::set<std::string> selectedAssets_,textureFields_;
+    nlohmann::json textureSnapshot_,contentImpact_,contentRequest_,dependencySnapshot_;
+    std::string contentValue_,contentOperation_;
+    bool contentDialogRequested_=false,textureDialogRequested_=false,dependencyDialogRequested_=false;
     std::string assetTypeId_,importPath_,prefabInstance_,installPath_,outputPath_,projectPath_;
     std::set<std::string> openNodeIds_;
     nlohmann::json visibleAssets_=nlohmann::json::array();

@@ -1,5 +1,6 @@
 #include "EditorSession.hpp"
 #include "EditorWorkspace.hpp"
+#include "AssetImportJob.hpp"
 #include "projects/ProjectCreateJob.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
@@ -39,6 +40,46 @@ struct EditorSession::PlayState {
     }
 };
 EditorSession::~EditorSession()=default;
+ContentOperationService& EditorSession::content() {
+    if(!context_->isProject())throw EditRejection("Content operations require a project");
+    if(!content_)content_=std::make_unique<ContentOperationService>(context_->project());return *content_;
+}
+nlohmann::json EditorSession::applyContent(const std::string& planId) {
+    if(context_->importing()||reimporting_)throw EditRejection("Finish the content import task first");
+    if(context_->dirty())throw EditRejection("Save scene changes before applying content operations");
+    references_.cancel();const auto result=content().apply(planId);
+    try{context_->reloadProjectContent();}
+    catch(...){const auto failure=std::current_exception();content().undo();context_->reloadProjectContent();std::rethrow_exception(failure);}
+    assetReloadRequested_=true;return result;
+}
+void EditorSession::undoContent() {
+    if(context_->importing()||reimporting_)throw EditRejection("Finish the content import task first");
+    if(context_->dirty())throw EditRejection("Save scene changes before undoing content operations");
+    references_.cancel();content().undo();context_->reloadProjectContent();assetReloadRequested_=true;
+}
+void EditorSession::redoContent() {
+    if(context_->importing()||reimporting_||context_->dirty())throw EditRejection("Content redo requires a saved idle project");
+    references_.cancel();content().redo();context_->reloadProjectContent();assetReloadRequested_=true;
+}
+std::string EditorSession::startReimport(const nlohmann::json& request) {
+    if(context_->dirty()||context_->importing()||reimporting_)throw EditRejection("Reimport requires a saved idle project");
+    auto parameters=request;parameters["operation"]="asset.reimport";auto plan=content().plan(parameters);
+    const auto id=plan.at("asset").get<std::string>(),planId=plan.at("id").get<std::string>();
+    const auto& database=content().database();std::set<std::string> visited;std::vector<AssetRecord> inputs;
+    const auto collect=[&](const std::string& current,auto&& self)->void {
+        if(!visited.insert(current).second)return;const auto& record=database.records().at(current);inputs.push_back(record);
+        for(const auto& dependency:record.dependencies)self(dependency,self);
+    };collect(id,collect);
+    auto job=std::make_shared<AssetReimportJob>(database.records().at(id),std::move(inputs),plan.at("settings"));
+    const auto task=tasks_->add("asset.reimport",id,{
+        [job]{return job->progress();},[job]{return job->ready();},
+        [this,job,planId] {
+            try{auto result=job->finish();reimporting_=false;result["transaction"]=applyContent(planId);return result;}
+            catch(...){reimporting_=false;content().discard(planId);throw;}
+        },[job]{job->cancel();}});
+    reimporting_=true;return task;
+}
+
 void EditorSession::startImportTask(const std::filesystem::path& path) {
     context_->startImport(path);
     importTask_=tasks_->add("asset.import: "+path.u8string(),context_->project().file.u8string(),{
@@ -114,12 +155,13 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.gizmo.scaleStep","Gizmo scale snap step",.1,.001,10.,false,true,false});
 }
 bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
+    if(reimporting_&&(descriptor.requiresIdle||descriptor.modifiesDocument))return false;
     if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
         if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
     return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
 }
 std::string EditorSession::startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name) {
-    if(creatingProject_||playing()||building()||context_->importing()||gizmo_->active()||pendingProject_||
+    if(creatingProject_||playing()||building()||context_->importing()||reimporting_||gizmo_->active()||pendingProject_||
         (proposals_&&proposals_->state()==ProposalState::Generating)||documentGuard_->state()!=DocumentActionState::Idle)
         throw EditRejection("Finish the active task before creating a project");
     auto job=std::make_shared<ProjectCreateJob>(templateId,destination,name);
@@ -134,7 +176,7 @@ std::string EditorSession::startProjectCreation(const std::string& templateId,co
 }
 void EditorSession::requestProject(std::shared_ptr<EditorContext> candidate) {
     if(!candidate||!candidate->isProject())throw EditRejection("Prepared project is required");
-    if(creatingProject_||playing()||building()||context_->importing()||gizmo_->active()||pendingProject_||
+    if(creatingProject_||playing()||building()||context_->importing()||reimporting_||gizmo_->active()||pendingProject_||
         (proposals_&&proposals_->state()==ProposalState::Generating)||
         documentGuard_->state()==DocumentActionState::AwaitingDecision||documentGuard_->state()==DocumentActionState::Failed)
         throw EditRejection("Finish the active task before switching project");
@@ -152,7 +194,7 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
-        references_.cancel();context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();content_.reset();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}

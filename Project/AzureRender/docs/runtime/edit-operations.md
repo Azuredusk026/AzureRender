@@ -32,6 +32,10 @@
 | 父级关系 | `node.reparent` | `id` 与 `parent` |
 | 射线放置 | `asset.place` | `asset`、`origin` 与 `direction` |
 | 内容目录 | `assets.catalog` | 可选 `type` |
+| 文件制作 | `content.create-directory`、`asset.move/rename/duplicate/delete` | 来源、目标和影响计划 |
+| 纹理配置 | `texture.describe/settings` | 资产集合和可选择字段 |
+| 重导入与依赖 | `asset.reimport/dependencies` | 来源指纹、设置或方向 |
+| 文件历史 | `content.undo/redo/discard` | 空参数或 `planId` |
 | 组件恢复 | `component.remove`、`component.reset-field` | `type` 与可选 `field` |
 | 任务与反馈 | `tasks.describe`、`feedback.describe/dismiss` | 空对象或错误 `id` |
 | 路径服务 | `path.choose/history/remember` | 用途、路径与筛选 |
@@ -57,6 +61,7 @@
 
 参数模式检查类型、必填字段与未知字段。
 数值必须有限，数组与文本具有大小上限。
+文件与纹理流程见[内容事务](content-transactions.md)。
 组件属性继续使用运行时类型契约。
 渲染、层级、引用与变换使用领域校验。
 

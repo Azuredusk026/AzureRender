@@ -1272,7 +1272,7 @@ void CharacterSceneRenderer::uploadTextureData(
     const VkFormat format,
     const bool clampVertical,
     GpuTexture& texture,
-    const std::uint32_t requestedMipLevels,TextureFilterSemantic semantic,float alphaCutoff) {
+    const std::uint32_t requestedMipLevels,TextureFilterSemantic semantic,float alphaCutoff,const TextureImportSettings* importSettings) {
     std::vector<std::uint8_t> filtered;unsigned mipLevels=requestedMipLevels;
     if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==1){
         if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
@@ -1324,6 +1324,7 @@ void CharacterSceneRenderer::uploadTextureData(
     samplerDesc.addressW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     samplerDesc.maxLod = static_cast<float>(mipLevels - 1);
     samplerDesc.maxAnisotropy = clampVertical?1.0F:8.0F;
+    if(importSettings)samplerDesc=importSettings->sampler(mipLevels,16);
     texture.sampler = rhi_->createSampler(samplerDesc);
 }
 
@@ -1333,15 +1334,18 @@ void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std
 }
 void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
     const auto& m=asset.materials.at(index);auto& g=materials.at(index);
+    const auto& settings=m.textureSettings.at(slot);
+    const auto mipLevels=settings.mipPolicy=="none"?1U:0U;
+    const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
     switch(slot){
-    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.baseColor,0,TextureFilterSemantic::Srgb,m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0);break;
-    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.normal,0,TextureFilterSemantic::Normal);break;
-    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.metallicRoughness,0,TextureFilterSemantic::Linear);break;
-    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.specularEmissive,0,TextureFilterSemantic::Srgb);break;
-    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.styleMask,0,TextureFilterSemantic::Linear);break;
-    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,VK_FORMAT_R8G8B8A8_SRGB,false,g.matcap,0,TextureFilterSemantic::Srgb);break;
-    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,VK_FORMAT_R8G8B8A8_UNORM,false,g.hairData,0,TextureFilterSemantic::PackedNormal);break;
-    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,VK_FORMAT_R8G8B8A8_UNORM,false,g.faceSdf,0,TextureFilterSemantic::Linear);break;}
+    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,colorFormat,false,g.baseColor,mipLevels,settings.semantic(),m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0,&settings);break;
+    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,colorFormat,false,g.normal,mipLevels,settings.semantic(),0,&settings);break;
+    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,colorFormat,false,g.metallicRoughness,mipLevels,settings.semantic(),0,&settings);break;
+    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,colorFormat,false,g.specularEmissive,mipLevels,settings.semantic(),0,&settings);break;
+    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,colorFormat,false,g.styleMask,mipLevels,settings.semantic(),0,&settings);break;
+    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,colorFormat,false,g.matcap,mipLevels,settings.semantic(),0,&settings);break;
+    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,colorFormat,false,g.hairData,mipLevels,settings.semantic(),0,&settings);break;
+    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,colorFormat,false,g.faceSdf,mipLevels,settings.semantic(),0,&settings);break;}
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }

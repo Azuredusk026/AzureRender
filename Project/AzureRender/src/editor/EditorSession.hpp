@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "content/ContentOperationService.hpp"
 #include "properties/ReferencePickerService.hpp"
 #include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
@@ -57,6 +58,12 @@ public:
     bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
     void pollBuild();
     void pollTasks();
+    ContentOperationService& content();
+    nlohmann::json applyContent(const std::string& planId);
+    void undoContent();
+    void redoContent();
+    std::string startReimport(const nlohmann::json& request);
+    bool reimporting() const noexcept {return reimporting_;}
     ProjectOpenService& projects() {return *projects_;}
     void setRecentProjectsPath(std::filesystem::path file) {projects_=std::make_unique<ProjectOpenService>(std::move(file));}
     std::string startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name);
@@ -128,6 +135,7 @@ private:
     std::shared_ptr<EditorContext> context_;
     std::shared_ptr<EditorContext> pendingProject_;
     std::unique_ptr<ProjectOpenService> projects_;
+    std::unique_ptr<ContentOperationService> content_;
     std::string workspacePreset_;
     bool creatingProject_=false;
 
@@ -150,6 +158,7 @@ private:
     EditorFeedback feedback_;
     std::unique_ptr<EditorTaskService> tasks_;
     std::string importTask_;
+    bool reimporting_=false;
     PathHistory paths_;
     std::filesystem::path pathHistoryFile_;
     PlacementRaycast placementRaycast_;

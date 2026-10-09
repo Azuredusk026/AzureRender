@@ -29,7 +29,12 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext& panelContext) {
     if(!ImGui::Begin("Console###console",workspace_.open("console"))){ImGui::End();return;}
     for(const auto& task:session_->tasks().report()) {
         ImGui::TextWrapped("%s: %s",task.at("source").get<std::string>().c_str(),task.at("state").get<std::string>().c_str());
-        if(task.at("state")=="running")ImGui::ProgressBar(task.at("progress").get<float>());
+        if(task.at("state")=="running") {
+            ImGui::ProgressBar(task.at("progress").get<float>());
+            const auto id=task.at("id").get<std::string>();ImGui::PushID(id.c_str());
+            if(ui::button("Cancel task"))session_->edit("tasks.cancel",{{"id",id}});
+            observeWidget("tasks.cancel."+id);ImGui::PopID();
+        }
         const auto diagnostic=task.at("diagnostic").get<std::string>();
         if(!diagnostic.empty())ImGui::TextWrapped("%s",diagnostic.c_str());
     }

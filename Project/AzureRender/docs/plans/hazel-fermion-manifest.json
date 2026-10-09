@@ -155,8 +155,11 @@
       "phase": "G12",
       "proposal": "统一新建、重命名、移动、复制和删除。预览引用影响并维护元数据。",
       "acceptance": "移动保持 UUID。重名、只读、被引用删除和写入失败都有确定结果。",
-      "status": "Planned",
-      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+      "status": "Complete",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0",
+      "evidence": [
+        "docs/acceptance/g12/2026-10-10.md"
+      ]
     },
     {
       "id": "A08",
@@ -174,8 +177,11 @@
       "phase": "G12",
       "proposal": "建立纹理用途与采样配置。保存触发可取消重导入，批量字段可单独选择。",
       "acceptance": "颜色、法线和遮罩分别验证。保存重开、取消、失败恢复及设备上限通过。",
-      "status": "Planned",
-      "sourceSha256": "0b5a6fded2da65aaaedb9089e4a55d2c0c531e57ceb5957311a9e0902099abea"
+      "status": "Complete",
+      "sourceSha256": "0b5a6fded2da65aaaedb9089e4a55d2c0c531e57ceb5957311a9e0902099abea",
+      "evidence": [
+        "docs/acceptance/g12/2026-10-10.md"
+      ]
     },
     {
       "id": "A09",
@@ -345,8 +351,11 @@
       "phase": "G12",
       "proposal": "展示依赖与反向引用、导入来源、失败和重导入。快照按版本生成。",
       "acceptance": "改动源文件可追到依赖。只读诊断保持文档与 GPU 状态。",
-      "status": "Planned",
-      "sourceSha256": "508a245c1b4fafaeeaaab8dea0bfc22e772a8ee15d56559838b64ec37241d996"
+      "status": "Complete",
+      "sourceSha256": "508a245c1b4fafaeeaaab8dea0bfc22e772a8ee15d56559838b64ec37241d996",
+      "evidence": [
+        "docs/acceptance/g12/2026-10-10.md"
+      ]
     },
     {
       "id": "B06",
@@ -704,21 +713,23 @@
       "evidence": [
         "docs/acceptance/u9/2026-10-10.md"
       ],
-      "commit": null,
+      "commit": "7cad5de",
       "dependsOn": [
         "U8"
       ]
     },
     {
       "id": "G12",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A07",
         "A08",
         "B05"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/g12/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "U9"
@@ -726,7 +737,7 @@
     },
     {
       "id": "U10",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "A05",
@@ -1031,7 +1042,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields"
   },
   "execution": {
     "order": [
@@ -1047,10 +1058,11 @@
       "G16",
       "P5"
     ],
-    "active": "G12",
+    "active": "U10",
     "completed": [
       "U8",
-      "U9"
+      "U9",
+      "G12"
     ]
   }
 }

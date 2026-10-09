@@ -1,5 +1,6 @@
 #include "editor/EditorContext.hpp"
 #include "editor/AssetImportJob.hpp"
+#include "editor/content/ContentOperationService.hpp"
 #include "runtime/Prefab.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #include "resources/ResourceLocator.hpp"
@@ -15,6 +16,7 @@ namespace {
 std::string identity(const char* prefix){static std::uint64_t count=0;return std::string(prefix)+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+"-"+std::to_string(++count);}
 }
 std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem::path& path){
+    ContentOperationService::recoverProject(path);
     runtimeComponentRegistry().seal();
     auto project=std::make_unique<Project>(Project::load(path));auto assets=std::make_unique<AssetDatabase>(*project);assets->refresh();
     const auto scenePath=project->resolve(project->startupScene);
@@ -30,6 +32,20 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
         if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_string();}
     }
     context->syncComponents();context->checkpointSaved();return context;
+}
+void EditorContext::reloadProjectContent() {
+    if(!project_||dirty())throw std::invalid_argument("Save scene changes before refreshing content");
+    auto candidate=EditorContext::openProject(project_->file);
+    std::vector<std::string> selected;for(const auto index:selectedNodes_)selected.push_back(scene_.nodes.at(index).id);
+    std::vector<std::size_t> indices;
+    for(const auto& id:selected)for(std::size_t index=0;index<candidate->scene_.nodes.size();++index)if(candidate->scene_.nodes[index].id==id)indices.push_back(index);
+    scene_=std::move(candidate->scene_);scenePath_=std::move(candidate->scenePath_);project_=std::move(candidate->project_);assets_=std::move(candidate->assets_);
+    components_=std::move(candidate->components_);sourceLevel_=std::move(candidate->sourceLevel_);resourceReferences_=std::move(candidate->resourceReferences_);
+    ecsWorld_.swap(candidate->ecsWorld_);nodeEntities_=std::move(candidate->nodeEntities_);
+    selectedNodes_=std::move(indices);selectedNodeIndex_=selectedNodes_.empty()?0:selectedNodes_.back();
+    clearAnimationPreview();undoStack_.clear();redoStack_.clear();closeEditMerge();refreshSelectedTransform();
+    if(attachedRenderSettings_)*attachedRenderSettings_=scene_.renderSettings;
+    updateResourceWriteTimes();checkpointSaved();++revision_;
 }
 std::string EditorContext::commitImport(AssetImportJob& job){
     const auto path=job.finish();

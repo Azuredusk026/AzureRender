@@ -1,5 +1,6 @@
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
+#include "assets/TextureImportSettings.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
@@ -97,12 +98,21 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             const auto id = meta.at("id").get<std::string>();
             if (!std::regex_match(id, std::regex("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")))
                 throw std::runtime_error("Invalid asset UUID: " + sidecar);
+            if(meta.value("settings",Json::object()).contains("texture")) {
+                const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));
+                meta["settings"]["texture"]=settings.describe();
+            }
             const auto source = bytes(path,check);
             statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
             const auto extension=path.extension().string();Json document;
             if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript")document=Json::parse(source);
+            if(extension==".azscene") {
+                document={{"resources",Json::array()}};
+                const auto scene=SceneDocument::load(path);
+                for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
+            }
             const auto& record=candidate.at(id);
             sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,meta,document,record.contentHash,record.fingerprint};
             metadata[id] = meta; documents[id]=std::move(document); paths[virtualPath] = id;
@@ -137,7 +147,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");add(reference);
             }
         }
-        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab") {
+        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" || extension == ".azscene") {
             const Json& document = documents.at(record.id);
             const auto walk = [&](const Json& value, auto&& self) -> void {
                 if (value.is_object()) for (const auto& field : value.items()) {
@@ -165,6 +175,12 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if(imported.inputHashes!=imported.outputHashes||imported.outputHashes.empty())throw std::runtime_error("Import provenance requires immutable copied inputs");
             const auto base=std::filesystem::weakly_canonical(record.path.parent_path());
             for(const auto& output:imported.outputHashes) {
+                if(output.first.find(":/")!=std::string::npos) {
+                    const auto found=paths.find(output.first);
+                    if(found==paths.end()||generationHash(bytes(candidate.at(found->second).path,check))!=output.second)
+                        throw std::runtime_error("Imported output hash is stale: "+output.first);
+                    continue;
+                }
                 const std::filesystem::path relative(output.first);
                 const auto resolved=std::filesystem::weakly_canonical(base/relative);const auto inside=resolved.lexically_relative(base);
                 if(relative.is_absolute()||relative.has_root_name()||inside.empty()||*inside.begin()==".."||generationHash(bytes(resolved,check))!=output.second)

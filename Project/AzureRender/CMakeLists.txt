@@ -295,6 +295,7 @@ add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
+    src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/ResourceAccessProfile.cpp
@@ -435,6 +436,8 @@ add_library(AzureEditor STATIC
     src/editor/EditorContext.cpp
     src/editor/EditorProjectEditing.cpp
     src/editor/EditorHierarchyEditing.cpp
+    src/editor/content/ContentOperationService.cpp
+    src/editor/panels/TextureAssetPanel.cpp
     src/editor/content/AssetCatalog.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
@@ -885,7 +888,7 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ComputePass COMMAND AzureRenderComputePassTests)
     add_executable(AzureRenderFrameTaskSchedulerTests tests/FrameTaskSchedulerTests.cpp)
     target_include_directories(AzureRenderFrameTaskSchedulerTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
-    target_link_libraries(AzureRenderFrameTaskSchedulerTests PRIVATE Vulkan::Vulkan)
+    target_link_libraries(AzureRenderFrameTaskSchedulerTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FrameTaskScheduler COMMAND AzureRenderFrameTaskSchedulerTests)
     add_executable(AzureRenderSurfaceLifecycleTests tests/SurfaceLifecycleTests.cpp)
     target_include_directories(AzureRenderSurfaceLifecycleTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1088,6 +1091,7 @@ if(BUILD_TESTING)
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
+        src/assets/TextureImportSettings.cpp
         src/render/EnvironmentAsset.cpp
         src/render/RenderSettings.cpp
         src/diagnostics/RuntimeDiagnostics.cpp
@@ -1708,3 +1712,28 @@ if(BUILD_TESTING AND TARGET AzureRender)
 endif()
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u9/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u9")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/content-transactions.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g12/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/g12")
+
+if(BUILD_TESTING)
+    add_executable(AzureContentOperationTests tests/ContentOperationTests.cpp)
+    target_link_libraries(AzureContentOperationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ContentOperations COMMAND AzureContentOperationTests)
+    add_executable(AzureTextureImportContractTests tests/TextureImportContractTests.cpp)
+    target_link_libraries(AzureTextureImportContractTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.TextureImportContract COMMAND AzureTextureImportContractTests)
+endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureTextureMaterialImportTests tests/TextureMaterialImportTests.cpp)
+    target_link_libraries(AzureTextureMaterialImportTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.TextureMaterialImport COMMAND AzureTextureMaterialImportTests)
+endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureContentEditingWorkflowTests tests/ContentEditingWorkflowTests.cpp)
+    target_link_libraries(AzureContentEditingWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ContentEditingWorkflow COMMAND AzureContentEditingWorkflowTests)
+    add_test(NAME AzureEditor.ContentTransactionsGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content_transactions.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/content-transactions-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.ContentTransactionsGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+endif()

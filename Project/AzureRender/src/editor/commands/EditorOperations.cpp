@@ -79,6 +79,26 @@ EditRegistry editorOperations(EditorSession& session) {
         c.placeResource(a.at("resource").template get<std::string>(),a.value("id",std::string()));
     });
     document("asset.place",schema({{"asset",text},{"origin",vector},{"direction",vector},{"fallbackHeight",number},{"fallbackDistance",number}},{"asset","origin","direction"}),[&session](auto& c,const auto& a){c.placeAssetAt(a.at("asset").template get<std::string>(),session.placementPosition(a));});
+    const auto fileArgs=schema({{"asset",text},{"assets",{{"type","array"},{"items",text}}},{"destination",text},{"name",text},{"parent",text},{"values",Json::object()},{"referencePolicy",text},{"includeDependencies",boolean},{"dryRun",boolean},{"planId",text}});
+    for(const auto* operation:{"content.create-directory","asset.move","asset.rename","asset.duplicate","asset.delete","texture.settings"}) {
+        registry.add({operation,1,fileArgs,true,false,true},[&session,operation](EditorContext&,const Json& a)->Json {
+            if(a.contains("planId"))return session.applyContent(a.at("planId").get<std::string>());
+            auto request=a;request.erase("dryRun");request["operation"]=operation;
+            auto plan=session.content().plan(request);if(a.value("dryRun",false))return plan;
+            return session.applyContent(plan.at("id").get<std::string>());
+        });
+    }
+    registry.add({"content.undo",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json{session.undoContent();return nullptr;});
+    registry.add({"content.redo",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json{session.redoContent();return nullptr;});
+    registry.add({"content.discard",1,schema({{"planId",text}},{"planId"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.content().discard(a.at("planId").get<std::string>());return nullptr;});
+    registry.add({"asset.reimport",1,schema({{"asset",text},{"settings",{{"type","object"}}},{"baseFingerprint",text}},{"asset","settings","baseFingerprint"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return {{"task",session.startReimport(a)}};});
+    registry.add({"texture.describe",1,schema({{"assets",{{"type","array"},{"items",text}}}},{"assets"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().textureSettings(a.at("assets").get<std::vector<std::string>>());});
+    registry.add({"asset.inspect",1,schema({{"asset",text}},{"asset"}),false,false,false},[&session](EditorContext& context,const Json& a)->Json {
+        auto result=session.content().inspect(a.at("asset").get<std::string>());const auto id=result.at("id").get<std::string>();
+        const auto active=context.assets().records().find(id);
+        result["activeChanged"]=active==context.assets().records().end()||std::to_string(active->second.fingerprint)!=result.at("fingerprint");return result;
+    });
+    registry.add({"asset.dependencies",1,schema({{"asset",text},{"direction",text}},{"asset"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().dependencies(a.at("asset").get<std::string>(),a.value("direction",std::string("forward")));});
     registry.add({"assets.catalog",1,schema({{"type",text}}),false,false,false},[](EditorContext& c,const Json& a)->Json{return assetCatalog(c,a.value("type",std::string()));});
     registry.add({"path.history",1,schema({{"purpose",text}},{"purpose"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.pathHistory().directories(a.at("purpose").get<std::string>());});
     registry.add({"path.remember",1,schema({{"purpose",text},{"path",text},{"directory",boolean}},{"purpose","path"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{

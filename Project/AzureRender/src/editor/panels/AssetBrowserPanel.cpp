@@ -30,7 +30,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
 #endif
     if(!ImGui::Begin("Content Browser###assets",workspace_.open("assets"))){ImGui::End();return;}
     const auto reveal=session_->consumeAssetReveal();
-    if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();}
+    if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();selectedAssets_={reveal};}
     const bool compact=ImGui::GetContentRegionAvail().y<150*dpi_;
     const bool wide=ImGui::GetContentRegionAvail().x>360*dpi_;
     assetFilter_.Draw("##Search assets",wide?ImGui::GetContentRegionAvail().x-(compact?280:230)*dpi_:-1);observeWidget("assets.search");
@@ -64,6 +64,12 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         import.tooltip="Select a glTF or GLB file. Import continues when this panel is closed.";
         if(ui::button("Import",import)){const auto result=session_->edit("asset.import-start",{{"path",importPath_}});if(result)ImGui::CloseCurrentPopup();}observeWidget("asset.import");
         if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button("Cancel Import"))session_->edit("asset.import-cancel");observeWidget("asset.import-cancel");}
+        ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
+        if(ui::button("Create directory")){contentOperation_="content.create-directory";contentRequest_={{"parent","assets:/"}};contentValue_="New Folder";contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
+        observeWidget("content.create-directory");
+        if(ui::button("Undo content transaction"))session_->edit("content.undo");observeWidget("content.undo");ImGui::EndDisabled();
+        ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
+        if(ui::button("Redo content transaction"))session_->edit("content.redo");observeWidget("content.redo");ImGui::EndDisabled();
         ui::inputText("Prefab instance",prefabInstance_);
         ImGui::BeginDisabled(session_->playing()||session_->building());
         if(ui::button("Create empty node"))session_->edit("node.create",{{"id",prefabInstance_}});
@@ -90,12 +96,47 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                 if(result&&result.value.contains("handle"))if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{96*dpi_,96*dpi_});
             }
             const auto registered=types.find(type);const bool placeable=registered!=types.end()&&registered->second.placeable;
-            if(ImGui::Selectable(label.c_str(),id==reveal,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,assetGrid_?44*dpi_:0})) {
+            if(ImGui::Selectable(label.c_str(),selectedAssets_.count(id)!=0,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,assetGrid_?44*dpi_:0})) {
+                if(ImGui::GetIO().KeyCtrl){if(selectedAssets_.count(id))selectedAssets_.erase(id);else selectedAssets_.insert(id);}else selectedAssets_={id};
                 if(session_->references().active())session_->edit("reference.deliver",{{"kind","asset"},{"id",id}});
                 else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)&&placeable&&!session_->playing()&&!session_->building())session_->edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});
             }
             if(id==reveal)ImGui::SetScrollHereY(.5F);
             observeWidget("asset."+id);
+            if(ImGui::BeginPopupContextItem("Asset actions")) {
+                if(!selectedAssets_.count(id))selectedAssets_={id};
+                const bool writable=view.isProject()&&label.rfind("engine:/",0)!=0;
+                ImGui::BeginDisabled(!writable||session_->playing()||session_->building()||view.importing()||session_->reimporting());
+                for(const auto& option:std::vector<std::pair<const char*,const char*>>{{"Rename","asset.rename"},{"Move","asset.move"},{"Duplicate","asset.duplicate"}}) {
+                    if(ImGui::MenuItem(option.first)){contentOperation_=option.second;contentRequest_={{"asset",id}};contentValue_=option.second==std::string("asset.rename")?path.filename().u8string():label;contentDialogRequested_=true;}
+                    observeWidget(option.second);
+                }
+                if(ImGui::MenuItem("Duplicate with dependencies")){contentOperation_="asset.duplicate";contentRequest_={{"asset",id},{"includeDependencies",true}};contentValue_=label;contentDialogRequested_=true;}observeWidget("asset.duplicate-tree");
+                if(ImGui::MenuItem("Delete selected")) {
+                    const auto result=session_->edit("asset.delete",{{"assets",selectedAssets_},{"referencePolicy","reject"},{"dryRun",true}});
+                    if(result){contentOperation_="asset.delete";contentImpact_=result.value;}
+                }observeWidget("asset.delete");
+                if(ImGui::MenuItem("Reimport")) {
+                    const auto& record=view.assets().records().at(id);
+                    session_->edit("asset.reimport",{{"asset",id},{"settings",nlohmann::json::object()},{"baseFingerprint",std::to_string(record.fingerprint)}});
+                }observeWidget("asset.reimport");
+                if(type=="image") {
+                    if(ImGui::MenuItem("Texture settings")) {
+                        const auto result=session_->edit("texture.describe",{{"assets",selectedAssets_}});
+                        if(result){textureSnapshot_=result.value;textureFields_.clear();textureDialogRequested_=true;}
+                    }observeWidget("asset.texture-settings");
+                }ImGui::EndDisabled();
+                if(ImGui::MenuItem("Asset diagnostics")) {
+                    const auto result=session_->edit("asset.inspect",{{"asset",id}});
+                    if(result){dependencySnapshot_=result.value;dependencyDialogRequested_=true;}
+                }observeWidget("asset.inspect");
+                for(const auto* direction:{"forward","reverse"}) {
+                    if(ImGui::MenuItem(direction==std::string("forward")?"Dependencies":"Referenced by")) {
+                        const auto result=session_->edit("asset.dependencies",{{"asset",id},{"direction",direction}});
+                        if(result){dependencySnapshot_=result.value;dependencyDialogRequested_=true;}
+                    }observeWidget(std::string("asset.dependencies.")+direction);
+                }ImGui::EndPopup();
+            }
             if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\n%s",label.c_str(),path.u8string().c_str(),ready?"Ready":"Missing source");
             if(ready&&ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",id.c_str(),id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
             if(!assetGrid_){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(type.c_str());ImGui::TableSetColumnIndex(2);ImGui::TextUnformatted(ready?"Ready":"Missing");ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",row.at("users").get<std::size_t>());}
@@ -103,7 +144,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         }ImGui::EndTable();
     }
     if(visibleAssets_.empty())ImGui::TextWrapped("No assets match the directory, search and type filters.");
-    ImGui::EndChild();ImGui::End();
+    ImGui::EndChild();drawTextureAssetPanel();ImGui::End();
 }
 
 

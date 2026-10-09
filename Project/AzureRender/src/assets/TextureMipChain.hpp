@@ -16,7 +16,7 @@ inline TextureMipChain buildTextureMipChain(const std::vector<std::uint8_t>& pix
     const auto encode=[](float x){return x<=.0031308F?x*12.92F:1.055F*std::pow(x,1/2.4F)-.055F;};
     const auto byte=[](float x){return static_cast<std::uint8_t>(std::round(std::clamp(x,0.F,1.F)*255));};
     TextureMipChain result{pixels,1};std::vector<std::uint8_t> previous=pixels;
-    const auto coverage=[&](const auto& data,float scale){std::size_t count=0;for(std::size_t i=3;i<data.size();i+=4)count+=data[i]/255.F*scale>=alphaCutoff;return float(count)/float(data.size()/4);};
+    const auto coverage=[&](const auto& data,float scale){std::size_t count=0;for(std::size_t i=3;i<data.size();i+=4)count+=byte(data[i]/255.F*scale)/255.F>=alphaCutoff;return float(count)/float(data.size()/4);};
     const float targetCoverage=alphaCutoff>0?coverage(pixels,1):0;
     while(width>1||height>1){
         const unsigned w=std::max(width/2,1U),h=std::max(height/2,1U);
@@ -44,9 +44,10 @@ inline TextureMipChain buildTextureMipChain(const std::vector<std::uint8_t>& pix
             if(semantic==TextureFilterSemantic::Srgb)for(unsigned c=0;c<3;++c)mean[c]=encode(mean[c]);
             for(unsigned c=0;c<4;++c)next[(std::size_t(y)*w+x)*4+c]=byte(mean[c]);
         }
-        if(alphaCutoff>0 && semantic==TextureFilterSemantic::Srgb && targetCoverage>0 && targetCoverage<1){
+        if(alphaCutoff>0 && (semantic==TextureFilterSemantic::Srgb||semantic==TextureFilterSemantic::Linear) && targetCoverage>0 && targetCoverage<1){
             float lo=0,hi=4;for(unsigned i=0;i<12;++i){float mid=(lo+hi)*.5F;if(coverage(next,mid)<targetCoverage)lo=mid;else hi=mid;}
-            for(std::size_t i=3;i<next.size();i+=4)next[i]=byte(next[i]/255.F*((lo+hi)*.5F));
+            const auto scale=std::abs(coverage(next,lo)-targetCoverage)<=std::abs(coverage(next,hi)-targetCoverage)?lo:hi;
+            for(std::size_t i=3;i<next.size();i+=4)next[i]=byte(next[i]/255.F*scale);
         }
         result.pixels.insert(result.pixels.end(),next.begin(),next.end());++result.levels;
         previous=std::move(next);width=w;height=h;

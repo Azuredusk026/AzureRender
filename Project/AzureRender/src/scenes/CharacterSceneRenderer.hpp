@@ -381,7 +381,7 @@ private:
         VkFormat format,
         bool clampVertical,
         GpuTexture& texture,
-        std::uint32_t mipLevels = 1,TextureFilterSemantic semantic=TextureFilterSemantic::Linear,float alphaCutoff=0);
+        std::uint32_t mipLevels = 1,TextureFilterSemantic semantic=TextureFilterSemantic::Linear,float alphaCutoff=0,const TextureImportSettings* importSettings=nullptr);
     void uploadMaterialTextures(
         const LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);
