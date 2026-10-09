@@ -152,7 +152,7 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
-        context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
@@ -169,6 +169,7 @@ nlohmann::json EditorSession::proposalReport() const{return proposals_?proposals
 ProposalController& EditorSession::proposals(){if(!proposals_)throw EditRejection("Optional content assistance is disabled");return *proposals_;}
 
 EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
+    if(command=="node.select"||command=="selection.click"||command.rfind("preview.",0)==0||command=="document.reload")references_.cancel();
     auto result=edits_->current(command,std::move(parameters),std::move(mergeKey));
     if(!result) {
         lastError_=result.diagnostics.empty()?"Edit failed":result.diagnostics.front().value("message",std::string("Edit rejected"));
@@ -244,6 +245,7 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
 }
 
 bool EditorSession::requestDocumentAction(DocumentAction action){
+    references_.cancel();
     if(gizmo_&&gizmo_->active())gizmo_->cancel();
     auto state=documentGuard_->request(action);
     if(state==DocumentActionState::AwaitingDecision && closePolicy_!="ask")

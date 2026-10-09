@@ -16,7 +16,7 @@ void ImGuiEditorLayer::drawPathInput(const char* label,std::string& value,const 
         const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",directory},{"extensions",extensions}});
         if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
     }observeWidget(purpose+".browse");ImGui::SameLine();ImGui::SetNextItemWidth(-1);
-    if(ImGui::BeginCombo("Recent","Directories")){
+    if(ImGui::BeginCombo("##Recent","Recent directories")){
         for(const auto& path:session_->pathHistory().directories(purpose))if(ImGui::Selectable(path.c_str())){
             if(directory)value=path;
             else{
@@ -163,6 +163,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     if(includeHistory)data["history"]=uiHistory_;
     data["gizmoSpace"]=context_->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
     data["gizmoPivot"]=context_->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
+    data["referencePicker"]=session_->references().active();
     data["activeSelection"]=session_->selection().active();
     data["feedback"]=session_->feedback().report();data["tasks"]=session_->tasks().report();
     data["gizmoMode"]=static_cast<unsigned>(context_->gizmoMode());

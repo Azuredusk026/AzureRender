@@ -89,9 +89,12 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     if(outlinerFilter_.IsActive()) {
         for(const auto& node:nodes)if(outlinerFilter_.PassFilter(node.name.c_str())||outlinerFilter_.PassFilter(node.id.c_str()))visible.push_back(node.id);
     }else collect(collect,"");
+    std::string referenceCandidate;
     const auto selectionClick=[&](const SceneNode& node) {
         const auto& io=ImGui::GetIO();
-        if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !io.KeyCtrl && !io.KeyShift) {
+        if(session_->references().active()&&ImGui::IsItemClicked()) {
+            referenceCandidate=node.id;
+        }else if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) && !io.KeyCtrl && !io.KeyShift) {
             panelContext.selection().set({node.id});session_->edit("viewport.frame-selection");
         }else if(ImGui::IsItemClicked() && !ImGui::IsItemToggledOpen()) {
             session_->edit("selection.click",{{"id",node.id},{"ctrl",io.KeyCtrl},{"shift",io.KeyShift},{"visible",visible}});
@@ -127,7 +130,9 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             ImGui::SameLine();ImGui::TextDisabled("%s",nodes[index].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
     }else drawNode(drawNode,"");
-    ImGui::EndChild();if(drop)session_->edit("node.reparent",*drop);
+    ImGui::EndChild();
+    if(!referenceCandidate.empty())session_->edit("reference.deliver",{{"kind","node"},{"id",referenceCandidate}});
+    if(drop)session_->edit("node.reparent",*drop);
     ImGui::End();
 }
 

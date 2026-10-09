@@ -536,7 +536,9 @@ void AzureRenderApp::pickPrimitive(
                 if(distance>0 && distance<bestDistance){bestDistance=distance;selected=entry.node;}
             }
         }
-        runOptions_.editorSession->edit("selection.click",{{"id",selected},{"ctrl",pendingPickAdditive_}});
+        if(runOptions_.editorSession->references().active()) {
+            if(!selected.empty())runOptions_.editorSession->edit("reference.deliver",{{"kind","node"},{"id",selected}});
+        }else runOptions_.editorSession->edit("selection.click",{{"id",selected},{"ctrl",pendingPickAdditive_}});
         return;
     }
 #endif

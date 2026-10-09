@@ -192,3 +192,9 @@ ctest --test-dir build/ninja-msvc-debug `
 项目、模板与布局消费共同操作服务。
 参数和生命周期见[项目工作区](project-workspace.md)。
 项目激活重建文档服务，并保留用户设置。
+
+## 批量属性与引用操作
+
+字段、单轴重置与吸管见[属性编辑](property-editing.md)。
+批量操作使用共同事务和撤销入口。
+引用请求携带捕获文档版本。

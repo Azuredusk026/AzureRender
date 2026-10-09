@@ -24,7 +24,7 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
     result=subprocess.run(command,cwd=folder,env=env,capture_output=True,encoding='utf-8',errors='replace',timeout=180,startupinfo=info)
     (folder/'stdout.log').write_bytes(result.stdout.encode());(folder/'stderr.log').write_bytes(result.stderr.encode())
-    assert result.returncode==0,result.stdout+result.stderr
+    assert result.returncode==0,f'Exit code: {result.returncode}\n'+result.stdout+result.stderr
     assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']

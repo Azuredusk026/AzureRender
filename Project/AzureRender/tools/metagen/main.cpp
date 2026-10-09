@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
         std::set<std::string> names;
         const std::regex ns(R"meta(namespace\s+([A-Za-z_][A-Za-z0-9_:]*)\s*\{)meta");
         const std::regex types(R"meta(AZURE_TYPE\s*\(\s*"([A-Za-z0-9_.-]+)"\s*,\s*([0-9]+)\s*\)\s*struct\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{([\s\S]*?)\n\};)meta");
-        const std::regex fields(R"meta(AZURE_FIELD\s*\(\s*("[^"\r\n]*")\s*,\s*([-+0-9.eE]+)\s*,\s*([-+0-9.eE]+)\s*\)\s*(?:AZURE_FIELD_META\s*\(\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*,\s*(true|false)\s*,\s*(true|false)\s*\)\s*)?(?:AZURE_FIELD_REFERENCE\s*\(\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*\)\s*)?([^;=\{]+?)\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:[=\{;]))meta");
+        const std::regex fields(R"meta(AZURE_FIELD\s*\(\s*("[^"\r\n]*")\s*,\s*([-+0-9.eE]+)\s*,\s*([-+0-9.eE]+)\s*\)\s*(?:AZURE_FIELD_META\s*\(\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*,\s*(true|false)\s*,\s*(true|false)\s*\)\s*)?(?:AZURE_FIELD_REFERENCE\s*\(\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*,\s*("[^"\r\n]*")\s*\)\s*)?(?:AZURE_FIELD_EDITOR\s*\(\s*("[^"\r\n]*")\s*,\s*([0-9]+)\s*,\s*(true|false)\s*\)\s*)?([^;=\{]+?)\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:[=\{;]))meta");
         for (const auto& input : inputs) {
             const std::string path = std::filesystem::path(input).generic_string(), text = read(path);
             std::smatch space;
@@ -61,13 +61,14 @@ int main(int argc, char** argv) {
                 std::set<std::string> members;
                 std::size_t count = 0;
                 for (auto field = std::sregex_iterator(body.begin(), body.end(), fields); field != std::sregex_iterator(); ++field) {
-                    std::string type = (*field)[11], member = (*field)[12];
+                    std::string type = (*field)[14], member = (*field)[15];
                     type = std::regex_replace(type, std::regex("\\s+"), "");
                     const std::set<std::string> supported{"float", "bool", "std::string", "std::uint32_t", "std::array<float,3>"};
                     if (!supported.count(type) || !members.insert(member).second)
                         fail(path, text, static_cast<std::size_t>(match.position(4) + field->position()), "Unsupported or duplicate field: " + type + " " + member);
                     const bool reference=(*field)[8].matched;
                     if(reference && type!="std::string")fail(path,text,static_cast<std::size_t>(match.position(4)+field->position()),"Reference annotations require string fields");
+                    if((*field)[11].matched)output << "withEditor(";
                     if(reference)output << "withReference(";
                     output << "withMetadata(property<" << qualified << "> (\"" << member << "\", " << (*field)[1].str()
                            << ", &" << qualified << "::" << member << ", " << (*field)[2].str() << ", " << (*field)[3].str() << "), "
@@ -81,6 +82,7 @@ int main(int argc, char** argv) {
                         while(std::getline(values,value,'|'))if(!value.empty()){if(!first)output << ", ";output << "\"" << value << "\"";first=false;}
                         output << "}, " << (*field)[10].str() << ")";
                     }
+                    if((*field)[11].matched)output << ", " << (*field)[11].str() << ", " << (*field)[12].str() << ", " << (*field)[13].str() << ")";
                     output << ",\n";
                     ++count;
                 }

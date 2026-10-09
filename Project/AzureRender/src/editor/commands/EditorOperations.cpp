@@ -110,6 +110,17 @@ EditRegistry editorOperations(EditorSession& session) {
     document("component.field",schema({{"type",text},{"field",text},{"value",Json::object()}},{"type","field","value"}),[](auto& c,const auto& a) {
         c.setComponentField(a.at("type").template get<std::string>(),a.at("field").template get<std::string>(),a.at("value"));
     });
+    const auto ownerList=Json{{"type","array"},{"items",text},{"minItems",1},{"maxItems",4096}};
+    document("component.batch-field",schema({{"nodes",ownerList},{"type",text},{"field",text},{"value",Json::object()},{"axis",integer},{"reset",boolean}},{"nodes","type","field"}),[](auto& c,const auto& a){PropertyEditorRegistry::apply(c,a);});
+    registry.add({"reference.begin",1,schema({{"nodes",ownerList},{"type",text},{"field",text}},{"nodes","type","field"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json {session.references().begin(c,a);return nullptr;});
+    registry.add({"reference.deliver",1,schema({{"kind",text},{"id",text}},{"kind","id"}),true,true,true},[&session](EditorContext& c,const Json& a)->Json {session.references().deliver(c,session.context().documentVersion(),a.at("kind").get<std::string>(),a.at("id").get<std::string>());return nullptr;});
+    registry.add({"reference.cancel",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {session.references().cancel();return nullptr;});
+    registry.add({"reference.reveal",1,schema({{"kind",text},{"id",text}},{"kind","id"}),false,false,false},[&session](EditorContext& c,const Json& a)->Json {
+        const auto kind=a.at("kind").get<std::string>(),id=a.at("id").get<std::string>();
+        if(kind=="node")session.selection().set({id});
+        else if(kind=="asset"){if(!c.isProject())throw EditRejection("Asset reveal requires a project");c.assets().resolveReference(id);session.assetReveal_=id;}
+        else throw EditRejection("Unknown reference kind");return nullptr;
+    });
     document("render.settings",schema({{"values",Json::object()}},{"values"}),[](auto& c,const auto& a) {
         auto settings=c.renderSettings();const auto& fields=a.at("values");const auto known=encodeLevelRenderSettings(settings);
         if(!fields.is_object())throw std::invalid_argument("Render settings require an object");

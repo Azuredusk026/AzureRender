@@ -1,0 +1,22 @@
+{
+  "stage": "U9",
+  "status": "Complete",
+  "date": "2026-10-10",
+  "compiler": "MSVC 14.44",
+  "configuration": "Debug",
+  "nonGpuTests": 129,
+  "gpuRegressionsPassed": [
+    "WorkspaceGpu",
+    "UsabilityGpu",
+    "DocumentGuardGpu",
+    "ProductizationGpu",
+    "ContentGpu",
+    "PropertiesGpu"
+  ],
+  "initialFailure": "ContentGpu: property field outside visible panel; replay collapses Transform before editing; complete text assertions retained",
+  "physicalKeyboardMouse": "not-performed",
+  "releaseRegression": "scheduled-P5",
+  "binarySha256": "562af231d4a114bb7d8c88f0e4a6e619c67bdbc377092fa861771279d9e1e085",
+  "workingTreeIncludesPreExistingChanges": true,
+  "unrelatedChangesCommitted": false
+}

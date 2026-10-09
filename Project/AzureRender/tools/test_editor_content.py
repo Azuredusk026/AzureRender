@@ -72,6 +72,7 @@ def run(executable, root, workflow):
     assert not next(n for n in authored['nodes'] if n['id']=='work-a').get('parentId'), 'Root drop must preserve the world transform'
     prompt='组件长文本_'+'abcdefghij'*60
     editing=[dict(frame=25,action='click',target='node.work-a'),
+             dict(frame=27,action='click',target='component.azure.transform'),
              dict(frame=29,action='click',target='component.azure.interactable'),
              dict(frame=33,action='click',target='field.azure.interactable.prompt'),
              dict(frame=35,action='key',key='A',ctrl=True),dict(frame=36,action='key',key='A',ctrl=False,down=False),
@@ -80,7 +81,7 @@ def run(executable, root, workflow):
     authored=json.loads(level.read_text(encoding='utf-8'))
     node=next(n for n in authored['nodes'] if n['id']=='work-a')
     assert node['components']['azure.interactable']['data']['prompt']==prompt, 'Component strings must preserve full UTF-8 content'
-    reset=[dict(frame=25,action='click',target='node.work-a'),dict(frame=29,action='click',target='component.azure.character'),
+    reset=[dict(frame=25,action='click',target='node.work-a'),dict(frame=27,action='click',target='component.azure.transform'),dict(frame=29,action='click',target='component.azure.character'),
            dict(frame=33,action='click',target='field.azure.character.speed',button='right'),
            dict(frame=37,action='click',target='field.reset.azure.character.speed')]
     launch(executable,root,'reset-field',(1920,1080),1,reset,capture=False)

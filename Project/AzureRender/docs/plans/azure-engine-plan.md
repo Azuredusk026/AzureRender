@@ -267,7 +267,7 @@ P2 时间、生命周期、性能与同规格视频已验收。
 正式范围见[产品化实施计划](2026-10-09-editor-productization.md)。
 阶段顺序为 U8、U9、G12、U10、U11、U12。
 随后执行 G13、U13、G15、G16 和 P5。
-U8 状态为 Complete，U9 为 Active。
+U8、U9 状态为 Complete，G12 为 Active。
 其余主线阶段为 Planned。
 
 G15 完成探索路线与环境制作验收。

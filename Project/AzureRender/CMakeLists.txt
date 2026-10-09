@@ -421,6 +421,8 @@ add_library(AzureEditor STATIC
     src/editor/commands/EditRegistry.cpp
     src/editor/commands/EditService.cpp
     src/editor/commands/EditTransaction.cpp
+    src/editor/properties/PropertyEditorRegistry.cpp
+    src/editor/properties/ReferencePickerService.cpp
     src/editor/commands/EditorOperations.cpp
     src/editor/viewport/SelectionBounds.cpp
     src/editor/viewport/EditorCameraService.cpp
@@ -1689,3 +1691,20 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/project-workspace.md" DE
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-editor-productization.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/hazel-fermion-manifest.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-hazel-fermion.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u8/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u8")
+
+if(BUILD_TESTING)
+    add_executable(AzurePropertyEditingTests tests/PropertyEditingTests.cpp)
+    target_link_libraries(AzurePropertyEditingTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.PropertyEditing COMMAND AzurePropertyEditingTests)
+    add_executable(AzureReferencePickerTests tests/ReferencePickerTests.cpp)
+    target_link_libraries(AzureReferencePickerTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ReferencePicker COMMAND AzureReferencePickerTests)
+endif()
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/property-editing.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+if(BUILD_TESTING AND TARGET AzureRender)
+    add_test(NAME AzureEditor.PropertiesGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_properties.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/property-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.PropertiesGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+endif()
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u9/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u9")

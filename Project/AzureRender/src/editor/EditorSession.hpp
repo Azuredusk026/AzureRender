@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "properties/ReferencePickerService.hpp"
 #include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
 #include "documents/EditorFeedback.hpp"
@@ -87,6 +88,8 @@ public:
     const std::filesystem::path& userSettingsPath() const {return userSettingsPath_;}
     SettingRegistry& settings() noexcept { return settings_; }
     EditorPanelRegistry& panelRegistry() noexcept { return panelRegistry_; }
+    std::string consumeAssetReveal(){auto result=assetReveal_;assetReveal_.clear();return result;}
+    ReferencePickerService& references() noexcept {return references_;}
     SelectionService& selection() noexcept { return *selection_; }
     GeneratorRegistry& generators() noexcept { return generators_; }
     void setDeveloperServices(DeveloperServices services){developerServices_=std::move(services);}
@@ -134,6 +137,8 @@ private:
     std::unique_ptr<SelectionService> selection_;
     std::unique_ptr<GizmoController> gizmo_;
     SettingRegistry settings_;
+    ReferencePickerService references_;
+    std::string assetReveal_;
     std::unique_ptr<ModelClient> model_;
     std::unique_ptr<ProposalController> proposals_;
     EditorPanelRegistry panelRegistry_;

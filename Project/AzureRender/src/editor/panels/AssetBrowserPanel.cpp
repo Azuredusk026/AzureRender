@@ -29,6 +29,8 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
 #endif
     if(!ImGui::Begin("Content Browser###assets",workspace_.open("assets"))){ImGui::End();return;}
+    const auto reveal=session_->consumeAssetReveal();
+    if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();}
     const bool compact=ImGui::GetContentRegionAvail().y<150*dpi_;
     const bool wide=ImGui::GetContentRegionAvail().x>360*dpi_;
     assetFilter_.Draw("##Search assets",wide?ImGui::GetContentRegionAvail().x-(compact?280:230)*dpi_:-1);observeWidget("assets.search");
@@ -88,10 +90,14 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                 if(result&&result.value.contains("handle"))if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{96*dpi_,96*dpi_});
             }
             const auto registered=types.find(type);const bool placeable=registered!=types.end()&&registered->second.placeable;
-            if(ImGui::Selectable(label.c_str(),false,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,assetGrid_?44*dpi_:0})&&ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)&&placeable&&!session_->playing()&&!session_->building())session_->edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});
+            if(ImGui::Selectable(label.c_str(),id==reveal,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,assetGrid_?44*dpi_:0})) {
+                if(session_->references().active())session_->edit("reference.deliver",{{"kind","asset"},{"id",id}});
+                else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)&&placeable&&!session_->playing()&&!session_->building())session_->edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});
+            }
+            if(id==reveal)ImGui::SetScrollHereY(.5F);
             observeWidget("asset."+id);
             if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\n%s",label.c_str(),path.u8string().c_str(),ready?"Ready":"Missing source");
-            if(placeable&&ready&&ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",id.c_str(),id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
+            if(ready&&ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",id.c_str(),id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
             if(!assetGrid_){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(type.c_str());ImGui::TableSetColumnIndex(2);ImGui::TextUnformatted(ready?"Ready":"Missing");ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",row.at("users").get<std::size_t>());}
             ImGui::PopID();
         }ImGui::EndTable();

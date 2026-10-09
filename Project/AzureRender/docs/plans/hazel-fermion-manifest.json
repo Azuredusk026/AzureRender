@@ -57,8 +57,9 @@
       "phase": "U9",
       "proposal": "扩展公共属性控件。默认值、单位和范围来自元数据。",
       "acceptance": "拖动合并为一次撤销。单轴重置正确，中文标签与窄面板可读。",
-      "status": "Planned",
-      "sourceSha256": "38fcc3cf9cd365c68fa2a5caa70e3e1bb80c80ced0fdc48f4191111af99104ed"
+      "status": "Complete",
+      "sourceSha256": "38fcc3cf9cd365c68fa2a5caa70e3e1bb80c80ced0fdc48f4191111af99104ed",
+      "evidence": "docs/acceptance/u9/2026-10-10.md"
     },
     {
       "id": "A03",
@@ -76,8 +77,9 @@
       "phase": "U9",
       "proposal": "按引用元数据提供搜索、拖放、吸管、清空和揭示。",
       "acceptance": "Esc 取消无写入。非法类型与失效引用被拒绝，成功写入可撤销。",
-      "status": "Planned",
-      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+      "status": "Complete",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1",
+      "evidence": "docs/acceptance/u9/2026-10-10.md"
     },
     {
       "id": "A04",
@@ -95,8 +97,9 @@
       "phase": "U9",
       "proposal": "显示共同组件与混合值。按字段声明批量修改规则。空选择显示引导。",
       "acceptance": "两个不同类型对象批量编辑。一个非法值使事务完整恢复。",
-      "status": "Planned",
-      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+      "status": "Complete",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1",
+      "evidence": "docs/acceptance/u9/2026-10-10.md"
     },
     {
       "id": "A05",
@@ -674,29 +677,33 @@
   "phases": [
     {
       "id": "U8",
-      "status": "Planned",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A01",
         "B06",
         "B12"
       ],
-      "evidence": [],
-      "commit": null,
+      "evidence": [
+        "docs/acceptance/u8/2026-10-10.md"
+      ],
+      "commit": "c420cbb",
       "dependsOn": [
         "current-work-status-review"
       ]
     },
     {
       "id": "U9",
-      "status": "Planned",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A02",
         "A03",
         "A04"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/u9/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "U8"
@@ -704,7 +711,7 @@
     },
     {
       "id": "G12",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "A07",
@@ -760,7 +767,43 @@
       "commit": null,
       "dependsOn": [
         "U11"
-      ]
+      ],
+      "navigationRequirements": {
+        "activation": "hold-right-mouse",
+        "look": "rotate-about-camera-position",
+        "movement": [
+          "W",
+          "A",
+          "S",
+          "D",
+          "E",
+          "Q"
+        ],
+        "boost": "Shift",
+        "speed": "wheel-with-visible-feedback",
+        "exit": [
+          "release-right-mouse",
+          "Escape",
+          "focus-lost"
+        ],
+        "shortcutPolicy": "navigation-owns-movement-keys",
+        "outliner": "single-select-double-frame",
+        "validation": [
+          "input-replay",
+          "cross-project",
+          "viewport-boundaries",
+          "popup-and-preview-routing"
+        ]
+      },
+      "navigationReference": {
+        "repo": "Fermion",
+        "commit": "eeac811ae4b6dd7827d24c255b4fa0241ac603af",
+        "file": "Fermion/Sources/Renderer/Camera/EditorCamera.cpp",
+        "symbol": "EditorCamera::onUpdate",
+        "sourceSha256": "a260bcb4940d228e2ae4f76312fc2062713c21d84f312fc959036c573ce8f7b1",
+        "license": "MIT",
+        "adoption": "参考输入捕获与状态组织；消费本引擎相机服务"
+      }
     },
     {
       "id": "G13",
@@ -988,7 +1031,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU and 5 GPU regressions passed; project UI retest passed"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow"
   },
   "execution": {
     "order": [
@@ -1004,9 +1047,10 @@
       "G16",
       "P5"
     ],
-    "active": "U9",
+    "active": "G12",
     "completed": [
-      "U8"
+      "U8",
+      "U9"
     ]
   }
 }

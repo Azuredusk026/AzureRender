@@ -292,6 +292,7 @@ void ImGuiEditorLayer::drawPanels() {
     const ImGuiIO& io = ImGui::GetIO();
     viewportFocused_=false;viewportAcceptsShortcuts_=false;
     const bool nativeFocus=!io.AppFocusLost;
+    if(session_->references().active()&&(!nativeFocus||ImGui::IsKeyPressed(ImGuiKey_Escape,false)))session_->edit("reference.cancel");
     if(!nativeFocus || !workspace_.visible("viewport")) {
         cancelViewportGizmo();navigationButton_=-1;viewportInput_={};
         glfwSetInputMode(window_,GLFW_CURSOR,GLFW_CURSOR_NORMAL);

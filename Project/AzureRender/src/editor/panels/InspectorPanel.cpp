@@ -32,6 +32,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
     const auto selected=view.selectedNode()?std::optional<SceneNode>(*view.selectedNode()):std::nullopt;
     if (selected) {
         const auto* node=&*selected;
+        ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());
         bool visible = node->visible;
@@ -48,69 +49,87 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         if(ui::inputText("##prefab",prefab,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.prefab-source",{{"value",prefab}},"details-prefab");
         ImGui::TextUnformatted("Instance Of");auto instance=node->instanceOf;ImGui::SetNextItemWidth(-1);
         if(ui::inputText("##instance",instance,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.instance",{{"value",instance}},"details-instance");
+        ImGui::EndDisabled();
     }
-    if(view.isProject() && view.selectedNode()){
-        std::vector<std::string> types;
-        for(const auto& entry:runtimeComponentRegistry().metadata().types())
-            if(entry.first!="azure.transform" && entry.first!="azure.renderable") types.push_back(entry.first);
-        ImGui::BeginDisabled(session_->playing() || session_->building());
-        if(ImGui::BeginCombo("Add Component","Choose type")){for(const auto& type:types)if(ImGui::Selectable(type.c_str()))try{session_->edit("component.add",{{"type",type}});}catch(const std::exception& error){session_->log(std::string("ERROR: ")+error.what());}ImGui::EndCombo();}
-        const auto& componentRegistry=runtimeComponentRegistry().metadata();
-        for(const auto& type:types){auto data=view.componentData(view.selectedNode()->id,type);if(data.is_null())continue;
+    const auto owners=panelContext.selection().selected();
+    if(owners.empty())ImGui::TextWrapped("Select an object in the outliner or viewport to edit its properties.");
+    else {
+        if(owners.size()>1)ImGui::Text("%zu objects selected | Shared components",owners.size());
+        std::vector<std::string> types{"azure.transform"};
+        if(view.isProject()) {
+            ImGui::BeginDisabled(owners.size()>1);
+            if(ImGui::BeginCombo("Add Component","Choose type")) {
+                for(const auto& [type,descriptor]:runtimeComponentRegistry().metadata().types()) {
+                    (void)descriptor;
+                    if(type!="azure.transform"&&type!="azure.renderable"&&ImGui::Selectable(type.c_str()))session_->edit("component.add",{{"type",type}});
+                }ImGui::EndCombo();
+            }
+            ImGui::EndDisabled();
+            for(const auto& [type,descriptor]:runtimeComponentRegistry().metadata().types()) {
+                (void)descriptor;if(type!="azure.transform"&&type!="azure.renderable")types.push_back(type);
+            }
+        }
+        for(const auto& type:types) {
+            const auto fields=PropertyEditorRegistry::selection(view,owners,type);if(fields.empty())continue;
             ImGui::PushID(type.c_str());
-            const bool open=ImGui::CollapsingHeader(type.c_str());observeWidget("component."+type);
-            if(ImGui::BeginPopupContextItem("Component actions")){
-                if(ImGui::MenuItem("Remove component"))session_->edit("component.remove",{{"type",type}});
+            const bool open=ImGui::CollapsingHeader(type=="azure.transform"?"Transform":type.c_str(),type=="azure.transform"?ImGuiTreeNodeFlags_DefaultOpen:0);
+            observeWidget("component."+type);
+            if(ImGui::BeginPopupContextItem("Component actions")) {
+                if(type!="azure.transform"&&ImGui::MenuItem("Remove component",nullptr,false,owners.size()==1))session_->edit("component.remove",{{"type",type}});
                 observeWidget("component.remove."+type);ImGui::EndPopup();
             }
-            if(open)for(const auto& field:componentRegistry.type(type).properties){
+            if(open)for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties) {
                 if(!field.toolVisible)continue;ImGui::PushID(field.name.c_str());
-                ImGui::TextUnformatted(field.label.c_str());ImGui::SetNextItemWidth(-1);ImGui::BeginDisabled(field.readOnly);
-                auto value=data.at(field.name);bool changed=false;
-                if(value.is_boolean()){bool v=value.get<bool>();changed=ImGui::Checkbox("##value",&v);value=v;}
-                else if(value.is_number_integer()){int v=value.get<int>();changed=ImGui::DragInt("##value",&v,1,static_cast<int>(field.minimum),static_cast<int>(field.maximum));value=v;}
-                else if(value.is_number()){float v=value.get<float>();changed=ImGui::DragFloat("##value",&v,0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
-                else if(value.is_array() && value.size()==3){auto v=value.get<std::array<float,3>>();changed=ImGui::DragFloat3("##value",v.data(),0.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum));value=v;}
-                else if(value.is_string()){
-                    auto text=value.get<std::string>();
-                    if(field.reference=="node"){
-                        if(ImGui::BeginCombo("##value",text.c_str())){for(const auto& candidate:view.scene().nodes)if(ImGui::Selectable(candidate.name.c_str(),candidate.id==text)){value=candidate.id;changed=true;}ImGui::EndCombo();}
-                    }else if(field.reference=="asset"){
-                        if(ImGui::BeginCombo("##value",text.empty()?"Choose asset":text.c_str())){
-                            if(ImGui::Selectable("None",text.empty())){value="";changed=true;}
-                            for(const auto& [id,record]:view.assets().records())if(assetTypeRegistry().matches(record.path,field.assetTypes)&&ImGui::Selectable(record.virtualPath.c_str(),id==text)){value=id;changed=true;}
-                            ImGui::EndCombo();
+                const auto& state=fields.at(field.name);ImGui::BeginDisabled(!state.at("editable").get<bool>());
+                PropertyEditEvent event;event.value=state.at("value");
+                if(field.reference.empty()) {
+                    event=ui::propertyEditor(field,state,runtimeComponentRegistry().defaults(type).at("data").at(field.name),dpi_,[&](const auto& id){
+                        const auto split=id.find(field.name);observeWidget(id.substr(0,split)+type+"."+id.substr(split));
+                    });
+                }else {
+                    ImGui::TextUnformatted(field.label.c_str());ImGui::SetNextItemWidth(-1);
+                    const auto reference=event.value.get<std::string>();
+                    if(ImGui::BeginCombo("##value",state.at("mixed").get<bool>()?"Mixed":reference.empty()?"Choose reference":reference.c_str())) {
+                        referenceFilter_.Draw("Search",-1);
+                        if(field.reference=="node")for(const auto& node:view.scene().nodes) {
+                            if((referenceFilter_.PassFilter(node.name.c_str())||referenceFilter_.PassFilter(node.id.c_str()))&&ImGui::Selectable((node.name+"##"+node.id).c_str(),reference==node.id)){event.value=node.id;event.changed=true;}
                         }
-                    }else{changed=ui::inputText("##value",text,ImGuiInputTextFlags_EnterReturnsTrue);value=text;}
+                        if(field.reference=="asset")for(const auto& [id,record]:view.assets().records()) {
+                            if(assetTypeRegistry().matches(record.path,field.assetTypes)&&referenceFilter_.PassFilter(record.virtualPath.c_str())&&ImGui::Selectable(record.virtualPath.c_str(),reference==id)){event.value=id;event.changed=true;}
+                        }ImGui::EndCombo();
+                    }
+                    observeWidget("field."+type+"."+field.name);
+                    if(ImGui::BeginDragDropTarget()) {
+                        const auto* payload=ImGui::AcceptDragDropPayload(field.reference=="node"?"AZURE_NODE":"AZURE_RESOURCE");
+                        if(payload){event.value=std::string(static_cast<const char*>(payload->Data));event.changed=true;event.ended=true;}ImGui::EndDragDropTarget();
+                    }
+                    if(ui::button("Pick")){session_->edit("reference.begin",{{"nodes",owners},{"type",type},{"field",field.name}});}
+                    observeWidget("reference.pick."+type+"."+field.name);ImGui::SameLine();
+                    if(ui::button("Reveal",{ui::ButtonVariant::Default,false,reference.empty()}))session_->edit("reference.reveal",{{"kind",field.reference},{"id",reference}});
+                    observeWidget("reference.reveal."+type+"."+field.name);ImGui::SameLine();
+                    if(ui::button("Clear",{ui::ButtonVariant::Default,false,field.referenceDefault=="selected-node"})){event.value="";event.changed=true;event.ended=true;}
+                    observeWidget("reference.clear."+type+"."+field.name);
                 }
-                const bool ended=ImGui::IsItemDeactivatedAfterEdit();
                 observeWidget("field."+type+"."+field.name);ImGui::EndDisabled();
-                if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("%s%s",field.tooltip.c_str(),field.readOnly?" (Read-only)":" (Right-click to reset)");
-                if(ImGui::BeginPopupContextItem("Field actions")){
-                    if(ImGui::MenuItem("Reset field",nullptr,false,!field.readOnly))session_->edit("component.reset-field",{{"type",type},{"field",field.name}});
+                if(!state.at("editable").get<bool>())ImGui::TextDisabled("%s",field.readOnly?"Read-only field":"This field supports one object at a time");
+                if(ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)&&!field.tooltip.empty())ImGui::SetTooltip("%s",field.tooltip.c_str());
+                if(ImGui::BeginPopupContextItem("Field actions")) {
+                    if(ImGui::MenuItem("Reset field",nullptr,false,state.at("editable").get<bool>()))session_->edit("component.batch-field",{{"nodes",owners},{"type",type},{"field",field.name},{"reset",true}});
                     observeWidget("field.reset."+type+"."+field.name);ImGui::EndPopup();
                 }
-                if(changed)session_->edit("component.field",{{"type",type},{"field",field.name},{"value",value}},"component-"+type+":"+field.name);
-                if(ended)session_->edit("history.end-edit");
-                for(const auto& error:session_->feedback().report())if(error.at("source")=="component.field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ImGui::TextWrapped("%s",error.at("message").get<std::string>().c_str());
+                if(event.changed) {
+                    nlohmann::json args={{"nodes",owners},{"type",type},{"field",field.name},{"value",event.value}};
+                    if(event.axis)args["axis"]=*event.axis;
+                    session_->edit("component.batch-field",args,"property:"+type+":"+field.name);
+                }
+                if(event.ended||event.cancelled)session_->edit("history.end-edit");
+                for(const auto& error:session_->feedback().report())if(error.at("source")=="component.batch-field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ImGui::TextWrapped("%s",error.at("message").get<std::string>().c_str());
                 ImGui::PopID();
             }ImGui::PopID();
         }
-        ImGui::EndDisabled();
-    }
-    ImGui::Separator();
-    ImGui::Text("Transform | Position (m), Rotation (deg), Scale");
-    if(ui::button("Reset Transform")){session_->edit("node.transform",{{"translation",{0,0,0}},{"rotation",{0,0,0}},{"scale",{1,1,1}}});}
-    ImGui::SetNextItemWidth(-110*dpi_);
-    static const auto registry = reflection::makeRuntimeRegistry();
-    ecs::TransformComponent transform{view.gizmoTranslation(), view.gizmoRotation(), view.gizmoScale()};
-    for (const auto& property : registry.type("azure.transform").properties) {
-        ImGui::SetNextItemWidth(-110*dpi_);
-        auto value = property.read(&transform).get<std::array<float, 3>>();
-        if (ImGui::DragFloat3(property.label.c_str(), value.data(), 0.01F,
-                static_cast<float>(property.minimum), static_cast<float>(property.maximum))) {
-            property.write(&transform, value);
-            session_->edit("node.transform",{{property.name,value}},"details-"+property.name);
+        if(session_->references().active()) {
+            ImGui::Separator();ImGui::TextWrapped("Pick a compatible reference from the outliner, viewport or content browser. Esc cancels.");
+            if(ui::button("Cancel picking"))session_->edit("reference.cancel");observeWidget("reference.cancel");
         }
     }
     ImGui::EndDisabled();

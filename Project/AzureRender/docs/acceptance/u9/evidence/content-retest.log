@@ -1,0 +1,28 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 144: AzureEditor.ContentGpu
+1/2 Test #144: AzureEditor.ContentGpu ...........   Passed   73.63 sec
+    Start 180: AzureEditor.PropertiesGpu
+2/2 Test #180: AzureEditor.PropertiesGpu ........***Failed   27.16 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_properties.py", line 70, in <module>
+    run(args.executable.resolve(),args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_properties.py", line 58, in run
+    playable=launch(executable,second,'properties',(1920,1080),1,[dict(frame=25,action='click',target='node.hero')],capture=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 34, in launch
+    assert data['uiErrors']==[],data['uiErrors']
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'action': {'action': 'click', 'frame': 25, 'target': 'node.hero'}, 'error': "[json.exception.out_of_range.403] key 'node.hero' not found", 'frame': 25}]
+
+
+50% tests passed, 1 tests failed out of 2
+
+Label Time Summary:
+gpu    = 100.79 sec*proc (2 tests)
+
+Total Test time (real) = 100.81 sec
+
+The following tests FAILED:
+	180 - AzureEditor.PropertiesGpu (Failed)
+Errors while running CTest

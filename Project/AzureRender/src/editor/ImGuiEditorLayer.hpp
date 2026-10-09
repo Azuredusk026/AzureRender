@@ -150,7 +150,7 @@ private:
     std::string settingDiagnostic_;
     bool settingsSaveRequested_=false,compactPreference_=false;
 #ifdef AZURERENDER_HAS_IMGUI
-    ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_;
+    ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_,referenceFilter_;
 #endif
     int consoleLevel_ = 0;
     bool assetGrid_ = false;
