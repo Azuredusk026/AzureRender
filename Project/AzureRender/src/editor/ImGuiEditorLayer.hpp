@@ -74,6 +74,11 @@ private:
     int proposalDomain_=0;
     std::uint64_t proposalSequence_=0;
     void drawSettingsPanel(PanelContext& context);
+    void drawProjectBrowserPanel(PanelContext& context);
+    void drawEnvironmentPanel(PanelContext& context);
+    std::string projectOpenPath_,projectDestination_,projectName_="New Project";
+    int projectTemplate_=0,settingsCategory_=0;
+
 #ifdef AZURERENDER_HAS_IMGUI
     void cancelViewportGizmo();
     bool drawViewportGizmo(ImVec2 origin,ImVec2 size);

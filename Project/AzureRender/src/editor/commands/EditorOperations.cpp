@@ -14,6 +14,26 @@ EditRegistry editorOperations(EditorSession& session) {
     auto schema=[](Json fields=Json::object(),Json required=Json::array()) {
         return Json{{"type","object"},{"properties",fields},{"required",required}};
     };
+    registry.add({"project.templates",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json {return ProjectOpenService::templates();});
+    registry.add({"project.recent",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {return session.projects().recent();});
+    registry.add({"project.open",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json {
+        auto candidate=session.projects().open(std::filesystem::u8path(a.at("path").get<std::string>()));
+        const auto id=candidate->project().id;session.requestProject(std::move(candidate));return {{"project",id},{"pending",true}};
+    });
+    registry.add({"project.create",1,schema({{"templateId",text},{"destination",text},{"path",text},{"name",text}}),false,false,true},[&session](EditorContext&,const Json& a)->Json {
+        if(session.context().importing()||session.documentGuard().state()==DocumentActionState::AwaitingDecision)throw EditRejection("Finish the current task first");
+        if(!a.contains("templateId")) {
+            auto candidate=session.projects().create("game",std::filesystem::u8path(a.at("path").get<std::string>()),a.at("name").get<std::string>());
+            return {{"path",candidate->project().file.u8string()},{"pending",false}};
+        }
+        const auto destination=std::filesystem::u8path(a.at("destination").get<std::string>());
+        return {{"task",session.startProjectCreation(a.at("templateId").get<std::string>(),destination,a.value("name",destination.filename().u8string()))}};
+    });
+    registry.add({"workspace.preset",1,schema({{"id",text}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
+        const auto id=a.at("id").get<std::string>();
+        if(id!="authoring"&&id!="debugging")throw EditRejection("Unknown workspace preset");
+        session.workspacePreset_=id;return {{"id",id}};
+    });
     auto document=[&](const std::string& id,Json parameters,auto handler) {
         registry.add({id,1,std::move(parameters),true,true,true},[handler](EditorContext& context,const Json& args)->Json {
             handler(context,args);return nullptr;
@@ -155,11 +175,6 @@ EditRegistry editorOperations(EditorSession& session) {
                 throw EditRejection(session.lastError_);
             return nullptr;
         });
-    registry.add({"project.create",1,schema({{"path",text},{"name",text}},{"path","name"}),false,false,true},
-        [](EditorContext& c,const Json& a)->Json {
-            Project::createGame(a.at("path").get<std::string>(),a.at("name").get<std::string>());
-            c.log("Game template created: "+a.at("path").get<std::string>());return nullptr;
-        });
     registry.add({"asset.import",1,schema({{"path",text}},{"path"}),true,false,true},[](EditorContext& c,const Json& a)->Json { return c.importAsset(a.at("path").get<std::string>()); });
     registry.add({"asset.generate",1,schema({{"generator",text},{"output",text},{"parameters",Json::object()},
         {"inputs",{{"type","array"},{"maxItems",1024},{"items",text}}},{"dependencies",{{"type","array"},{"maxItems",1024},{"items",text}}},{"license",text}},
@@ -177,6 +192,7 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"asset.import-start",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json { session.startImportTask(std::filesystem::u8path(a.at("path").get<std::string>()));return nullptr; });
     registry.add({"asset.import-cancel",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json { session.cancelImportTask();return nullptr; });
     registry.add({"asset.import-poll",1,schema(),true,false,true},[](EditorContext& c,const Json&)->Json { const auto value=c.pollImport();return value?Json(*value):Json(nullptr); });
+    registry.add({"tasks.cancel",1,schema({{"id",text}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.tasks_->cancel(a.at("id").get<std::string>());return nullptr;});
     registry.add({"tasks.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.tasks().report();});
     registry.add({"feedback.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.feedback_.report();});
     registry.add({"feedback.dismiss",1,schema({{"id",text}}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.feedback_.dismiss(a.value("id",std::string()));session.lastError_.clear();return nullptr;});

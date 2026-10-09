@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorContext.hpp"
+#include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
 #include "documents/EditorFeedback.hpp"
 #include "documents/EditorTaskService.hpp"
@@ -55,6 +56,12 @@ public:
     bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
     void pollBuild();
     void pollTasks();
+    ProjectOpenService& projects() {return *projects_;}
+    void setRecentProjectsPath(std::filesystem::path file) {projects_=std::make_unique<ProjectOpenService>(std::move(file));}
+    std::string startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name);
+    void requestProject(std::shared_ptr<EditorContext> candidate);
+    std::string consumeWorkspacePreset() {auto result=workspacePreset_;workspacePreset_.clear();return result;}
+
     void startImportTask(const std::filesystem::path& path);
     void cancelImportTask();
     const EditorTaskService& tasks() const{return *tasks_;}
@@ -113,7 +120,14 @@ private:
     friend EditRegistry editorOperations(EditorSession&);
     bool executeInternal(EditorCommand command) noexcept;
     bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;
+    void activatePendingProject();
+    bool editEnabled(const EditDescriptor& descriptor) const;
     std::shared_ptr<EditorContext> context_;
+    std::shared_ptr<EditorContext> pendingProject_;
+    std::unique_ptr<ProjectOpenService> projects_;
+    std::string workspacePreset_;
+    bool creatingProject_=false;
+
     GeneratorRegistry generators_=GeneratorRegistry::builtins();
     DeveloperServices developerServices_;
     std::unique_ptr<EditService> edits_;

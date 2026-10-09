@@ -1,4 +1,6 @@
 #include "EditorSession.hpp"
+#include "EditorWorkspace.hpp"
+#include "projects/ProjectCreateJob.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
@@ -46,6 +48,7 @@ void EditorSession::startImportTask(const std::filesystem::path& path) {
 }
 void EditorSession::cancelImportTask(){if(!importTask_.empty())tasks_->cancel(importTask_);else context_->cancelImport();}
 void EditorSession::pollTasks(){
+    activatePendingProject();
     if(tasks_)tasks_->poll(!playing()&&!building()&&(!gizmo_||!gizmo_->active())&&documentGuard_->state()!=DocumentActionState::AwaitingDecision);
     pollBuild();
 }
@@ -88,13 +91,10 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     if (context_ == nullptr) {
         throw std::invalid_argument("Editor session requires a context");
     }
+    projects_=std::make_unique<ProjectOpenService>(EditorWorkspace::configDirectory()/"recent-projects.json");
     tasks_=std::make_unique<EditorTaskService>([this](const auto& source,const auto& message){recordError(source,message);});
     documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty();},[this]{context_->save();});
-    edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor) {
-        if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
-            if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
-        return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
-    });
+    edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor){return editEnabled(descriptor);});
     registerEngineSettings(settings_);
     registerModelSettings(settings_);
     settings_.add({"editor.scale","Interface scale multiplier",1.0,.75,3.,false,true,false});
@@ -112,6 +112,50 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.gizmo.moveStep","Gizmo translation snap step",.5,.001,10000.,false,true,false});
     settings_.add({"editor.gizmo.rotateStep","Gizmo rotation snap degrees",15.,.1,90.,false,true,false});
     settings_.add({"editor.gizmo.scaleStep","Gizmo scale snap step",.1,.001,10.,false,true,false});
+}
+bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
+    if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
+        if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
+    return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
+}
+std::string EditorSession::startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name) {
+    if(creatingProject_||playing()||building()||context_->importing()||gizmo_->active()||pendingProject_||
+        (proposals_&&proposals_->state()==ProposalState::Generating)||documentGuard_->state()!=DocumentActionState::Idle)
+        throw EditRejection("Finish the active task before creating a project");
+    auto job=std::make_shared<ProjectCreateJob>(templateId,destination,name);
+    const auto id=tasks_->add("project.create",destination.u8string(),{
+        [job]{return job->progress();},[job]{return job->ready();},
+        [this,job]{
+            creatingProject_=false;
+            try{auto candidate=job->finish();const auto path=candidate->project().file.u8string();requestProject(std::move(candidate));return nlohmann::json{{"path",path},{"pending",true}};}
+            catch(...){creatingProject_=false;throw;}
+        },[job]{job->cancel();}});
+    creatingProject_=true;return id;
+}
+void EditorSession::requestProject(std::shared_ptr<EditorContext> candidate) {
+    if(!candidate||!candidate->isProject())throw EditRejection("Prepared project is required");
+    if(creatingProject_||playing()||building()||context_->importing()||gizmo_->active()||pendingProject_||
+        (proposals_&&proposals_->state()==ProposalState::Generating)||
+        documentGuard_->state()==DocumentActionState::AwaitingDecision||documentGuard_->state()==DocumentActionState::Failed)
+        throw EditRejection("Finish the active task before switching project");
+    pendingProject_=std::move(candidate);
+    if(!requestDocumentAction(DocumentAction::Open)){pendingProject_.reset();throw EditRejection("Project switch protection failed");}
+}
+void EditorSession::activatePendingProject() {
+    if(!pendingProject_)return;
+    if(documentGuard_->state()==DocumentActionState::Idle){pendingProject_.reset();return;}
+    if(documentGuard_->state()!=DocumentActionState::Ready||documentGuard_->action()!=DocumentAction::Open)return;
+    try {
+        auto edits=std::make_unique<EditService>(*pendingProject_,editorOperations(*this),[this](const EditDescriptor& descriptor){return editEnabled(descriptor);});
+        auto selection=std::make_unique<SelectionService>(*pendingProject_,*edits);
+        auto gizmo=std::make_unique<GizmoController>(*pendingProject_);
+        std::unique_ptr<ProposalController> proposals;
+        if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
+        projects_->remember(pendingProject_->project());
+        context_->detachRenderSettings();proposals_.reset();
+        selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
+        context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
+    }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
 }
 void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
     if(playing()||building()||(proposals_&&proposals_->state()==ProposalState::Generating))throw std::logic_error("Model assembly requires an idle session");

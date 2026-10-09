@@ -12,6 +12,11 @@ U6 与 U7 当前处于 Complete。
 P4 当前处于 Active。
 问题与步骤见[交互体验实施计划](2026-10-07-editor-usability.md)。
 
+制作能力见[编辑器产品化实施计划](2026-10-09-editor-productization.md)。
+来源与评估见[Hazel 与 Fermion 调研](../research/2026-10-09-hazel-fermion.md)。
+该计划为 Active，涵盖十一阶段与三个可选专项。
+阶段状态由[借鉴清单](hazel-fermion-manifest.json)记录。
+
 ## 产品目标与决策
 
 Azure Engine 面向小型项目提供可配置、可扩展和可组合的引擎。能力包括渲染、关卡、物理、脚本、反射、资产管线和编辑器。第三人称探索项目与场景检视工具验证公共能力。AzureRender 提供现有渲染与运行时基础。
@@ -256,3 +261,16 @@ P2 时间、生命周期、性能与同规格视频已验收。
 本机工作区 Release 的 175 项回归全部通过。
 1440p 的五段转台视频已通过完整解码检查。
 性能与边界见[展示验收](../acceptance/character/2026-10-09-refinement.md)。
+
+## 编辑器产品化与游戏制作执行
+
+正式范围见[产品化实施计划](2026-10-09-editor-productization.md)。
+阶段顺序为 U8、U9、G12、U10、U11、U12。
+随后执行 G13、U13、G15、G16 和 P5。
+U8 状态为 Complete，U9 为 Active。
+其余主线阶段为 Planned。
+
+G15 完成探索路线与环境制作验收。
+G16 完成实测驱动的平台跳跃关卡。
+P5 验证双项目制作、独立交付及两个游戏。
+P4 的实体键鼠复核按独立证据维护。

@@ -86,6 +86,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         throw std::invalid_argument("ImGui editor requires an editor session");
     }
     context_ = &session_->context();
+    if(!context_->isProject())workspace_.setVisible("projects",true);
     EditorPanelRegistry registry;
     const auto addPanel = [&registry](
                               const char* id,
@@ -108,6 +109,8 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("animation", "Animation Preview", [this](PanelContext& context) { drawAnimationPanel(context); });
     addPanel("gameplay-debug", "Gameplay Debug", [this](PanelContext& context) { drawGameplayDebugPanel(context); });
     addPanel("settings", "Settings", [this](PanelContext& context) { drawSettingsPanel(context); });
+    addPanel("projects", "Projects", [this](PanelContext& context) { drawProjectBrowserPanel(context); });
+    addPanel("environment", "Environment", [this](PanelContext& context) { drawEnvironmentPanel(context); });
     panels_ = registry.createAll();
     auto extensions=session_->panelRegistry().createAll();
     for(auto& panel:extensions) {
@@ -282,6 +285,7 @@ void ImGuiEditorLayer::drawPanels() {
     if (!initialized_) {
         return;
     }
+    context_=&session_->context();
     widgets_=nlohmann::json::object();
     EditorToolbar::draw(*session_,workspace_,dpi_,[this](const std::string& id){observeWidget(id);});
     drawWorkspace();
@@ -316,7 +320,7 @@ void ImGuiEditorLayer::drawPanels() {
     auto& guard=session_->documentGuard();
     if(guard.state()==DocumentActionState::AwaitingDecision || guard.state()==DocumentActionState::Failed)ImGui::OpenPopup("Unsaved changes");
     if(ImGui::BeginPopupModal("Unsaved changes",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::TextUnformatted(guard.action()==DocumentAction::Close?"Save changes before closing?":"Save changes before reloading?");
+        ImGui::TextUnformatted(guard.action()==DocumentAction::Close?"Save changes before closing?":guard.action()==DocumentAction::Open?"Save changes before switching project?":"Save changes before reloading?");
         if(!guard.diagnostic().empty())ImGui::TextWrapped("%s",guard.diagnostic().c_str());
         for(const auto* decision:{"save","discard","cancel"}) {
             if(ImGui::Button(decision)) {session_->edit("document.decision",{{"value",decision}});if(guard.state()!=DocumentActionState::Failed)ImGui::CloseCurrentPopup();}

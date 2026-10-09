@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "stage": "U8",
+  "projectEntry": true,
+  "projectSwitch": true,
+  "authoringPreset": true,
+  "debuggingPreset": true,
+  "matrix": [
+    {
+      "workflow": "exploration",
+      "size": [
+        1280,
+        720
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 1.5
+    },
+    {
+      "workflow": "exploration",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 2
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        1280,
+        720
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 1
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        1920,
+        1080
+      ],
+      "dpi": 1.5
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 1.5
+    },
+    {
+      "workflow": "inspection",
+      "size": [
+        2560,
+        1440
+      ],
+      "dpi": 2
+    }
+  ],
+  "presetPersistence": true,
+  "input": "production Dear ImGui replay",
+  "physicalKeyboardMouse": "not performed"
+}

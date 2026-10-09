@@ -17,12 +17,22 @@ std::uint64_t layoutHash(const std::filesystem::path& path) {
 }
 }
 void EditorWorkspace::reset() {
+    preset_="custom";
     panels_={{"viewport","Viewport###viewport"},{"outliner","Scene Outliner###outliner"},
         {"inspector","Details###inspector"},{"assets","Content Browser###assets"},
         {"capture","Capture###capture"},{"console","Console###console"},
         {"build","Build Game###build"},{"animation","Animation Preview###animation"},
-        {"gameplay-debug","Gameplay Debug###gameplay-debug"},{"settings","Settings###settings",false}};
+        {"gameplay-debug","Gameplay Debug###gameplay-debug"},{"settings","Settings###settings",false},{"projects","Projects###projects",false},{"environment","Environment###environment",false}};
     panels_.insert(panels_.end(),extraPanels_.begin(),extraPanels_.end());
+}
+void EditorWorkspace::preset(const std::string& id) {
+    if(id!="authoring"&&id!="debugging")throw std::invalid_argument("Unknown workspace preset");
+    reset();preset_=id;
+    for(auto& panel:panels_) {
+        if(std::any_of(extraPanels_.begin(),extraPanels_.end(),[&](const auto& p){return p.id==panel.id;}))continue;
+        panel.visible=panel.id=="viewport"||panel.id=="outliner"||panel.id=="inspector"||panel.id=="assets"||panel.id=="environment"||
+            (id=="debugging"&&(panel.id=="console"||panel.id=="gameplay-debug"||panel.id=="capture"));
+    }
 }
 void EditorWorkspace::registerPanel(std::string id,std::string title,bool visible) {
     if(id.empty()||title.empty()||id.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.")!=std::string::npos
@@ -41,7 +51,7 @@ bool EditorWorkspace::visible(const std::string& id) const {
 }
 void EditorWorkspace::setVisible(const std::string& id,bool value){*open(id)=value;}
 nlohmann::json EditorWorkspace::snapshot() const {
-    nlohmann::json result={{"version",version},{"panels",nlohmann::json::object()}};
+    nlohmann::json result={{"version",version},{"preset",preset_},{"panels",nlohmann::json::object()}};
     for(const auto& panel:panels_)result["panels"][panel.id]=panel.visible;
     return result;
 }
@@ -56,11 +66,13 @@ bool EditorWorkspace::load(const std::filesystem::path& directory) noexcept {
             throw std::runtime_error("docking data integrity");
         auto candidate=panels_;
         for(auto& panel:candidate) {
-            const bool extension=panel.id=="settings"||std::any_of(extraPanels_.begin(),extraPanels_.end(),[&](const auto& extra){return extra.id==panel.id;});
+            const bool extension=(panel.id=="settings"||panel.id=="projects"||panel.id=="environment")||std::any_of(extraPanels_.begin(),extraPanels_.end(),[&](const auto& extra){return extra.id==panel.id;});
             if(extension&&!state.at("panels").contains(panel.id))continue;
             panel.visible=state.at("panels").at(panel.id).get<bool>();
         }
-        panels_=std::move(candidate);return true;
+        const auto preset=state.value("preset",std::string("custom"));
+        if(preset!="custom"&&preset!="authoring"&&preset!="debugging")throw std::runtime_error("Invalid workspace preset");
+        panels_=std::move(candidate);preset_=preset;return true;
     }catch(...) { diagnostic="Invalid workspace configuration. Default layout loaded.";return false; }
 }
 void EditorWorkspace::save(const std::filesystem::path& directory) const {

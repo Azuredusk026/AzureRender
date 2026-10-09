@@ -30,14 +30,16 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
             if(ImGui::MenuItem(label,shortcut,false,enabled(s,command)))static_cast<void>(s.execute(command));
             observe(std::string("menu.")+label);
         };
-        if(ImGui::BeginMenu("File")){item("Save","Ctrl+S",EditorCommand::Save);item("Reload",nullptr,EditorCommand::Reload);ImGui::EndMenu();}observe("menu.File");
+        if(ImGui::BeginMenu("File")){if(ImGui::MenuItem("Projects..."))workspace.setVisible("projects",true);observe("menu.Projects");item("Save","Ctrl+S",EditorCommand::Save);item("Reload",nullptr,EditorCommand::Reload);ImGui::EndMenu();}observe("menu.File");
         if(ImGui::BeginMenu("Edit")){item("Undo","Ctrl+Z",EditorCommand::Undo);item("Redo","Ctrl+Y",EditorCommand::Redo);item("Reload Assets",nullptr,EditorCommand::ReloadAssets);ImGui::EndMenu();}observe("menu.Edit");
         if(ImGui::BeginMenu("View")){
             for(auto& panel:workspace.panels()) {
                 std::string title=panel.title.substr(0,panel.title.find("###"));
                 ImGui::MenuItem(title.c_str(),nullptr,&panel.visible);observe("panel."+panel.id);
             }
-            ImGui::Separator();item("Reset Layout",nullptr,EditorCommand::ResetLayout);ImGui::EndMenu();
+            ImGui::Separator();
+            for(const auto* preset:{"authoring","debugging"}){if(ImGui::MenuItem(preset))s.edit("workspace.preset",{{"id",preset}});observe(std::string("layout.")+preset);}
+            item("Reset Layout",nullptr,EditorCommand::ResetLayout);ImGui::EndMenu();
         }observe("menu.View");
         if(ImGui::BeginMenu("Tools")) {
             for(const auto& id:{"build","animation","gameplay-debug","capture"}) {

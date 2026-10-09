@@ -13,7 +13,7 @@ RHI 管理采样与资源生命周期，应用资产提供角色参数。
 
 **技术栈：** C++、Vulkan、GLSL、Python、Node.js。
 
-**依据：** [根由报告](../research/2026-10-09-character-rendering-diagnosis.md)与[仓库规则](../../../../AGENT.md)。
+**依据：** [根由报告](../research/2026-10-09-character-rendering-diagnosis.md)与仓库根目录的 `AGENT.md`。
 
 ## 全局约束
 

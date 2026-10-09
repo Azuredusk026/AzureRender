@@ -18,6 +18,7 @@ public:
     static constexpr int version = 2;
     EditorWorkspace() { reset(); }
     void reset();
+    void preset(const std::string& id);
     std::vector<EditorPanelState>& panels() { return panels_; }
     const std::vector<EditorPanelState>& panels() const { return panels_; }
     bool visible(const std::string& id) const;
@@ -32,6 +33,7 @@ public:
     nlohmann::json snapshot() const;
     std::string diagnostic;
 private:
+    std::string preset_="custom";
     std::vector<EditorPanelState> panels_;
     std::vector<EditorPanelState> extraPanels_;
 };

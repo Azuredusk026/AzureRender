@@ -104,6 +104,8 @@ void ImGuiEditorLayer::drawWorkspace() {
     ImGui::Begin("Workspace###workspace-host",nullptr,flags);
 #ifdef IMGUI_HAS_DOCK
     const auto dockspace=ImGui::GetID("AzureWorkspace");
+    const auto preset=session_->consumeWorkspacePreset();
+    if(!preset.empty()){workspace_.preset(preset);dockingLayoutInitialized_=false;workspaceRebuildRequested_=true;}
     const bool reset=session_->consumeLayoutResetRequest();
     if(reset){workspace_.reset();dockingLayoutInitialized_=false;}
     if(!dockingLayoutInitialized_) {
@@ -118,7 +120,7 @@ void ImGuiEditorLayer::drawWorkspace() {
             const auto objects=ImGui::DockBuilderSplitNode(details,ImGuiDir_Up,.42F,nullptr,&details);
             const auto bottom=ImGui::DockBuilderSplitNode(center,ImGuiDir_Down,layout.bottom/hostSize.y,nullptr,&center);
             for(const auto& panel:workspace_.panels()) {
-                const auto target=panel.id=="viewport"?center:panel.id=="outliner"?objects:panel.id=="inspector"?details:bottom;
+                const auto target=(panel.id=="viewport"||panel.id=="projects")?center:panel.id=="outliner"?objects:(panel.id=="inspector"||panel.id=="environment"||panel.id=="settings")?details:bottom;
                 ImGui::DockBuilderDockWindow(panel.title.c_str(),target);
             }
             ImGui::DockBuilderFinish(dockspace);
@@ -140,7 +142,7 @@ void ImGuiEditorLayer::drawWorkspace() {
         if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
         ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
-        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console","settings"}) {
+        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console","settings","environment","projects"}) {
             const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});
             const auto title=panel.title.substr(0,panel.title.find("###"));
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
@@ -151,7 +153,7 @@ void ImGuiEditorLayer::drawWorkspace() {
     }
 }
 nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
-    nlohmann::json data={{"version",EditorWorkspace::version},{"dpi",dpi_},{"panels",nlohmann::json::object()},
+    nlohmann::json data={{"version",EditorWorkspace::version},{"preset",workspace_.snapshot().at("preset")},{"dpi",dpi_},{"panels",nlohmann::json::object()},
         {"image",{{"x",imageRect_[0]},{"y",imageRect_[1]},{"width",imageRect_[2]},{"height",imageRect_[3]}}},
         {"widgets",widgets_},{"uiErrors",uiErrors_},{"historyCount",uiHistory_.size()},{"diagnostic",workspace_.diagnostic},
         {"selectedName",context_->selectedNode()?context_->selectedNode()->name:""},
@@ -168,6 +170,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());
     data["dirty"]=context_->dirty();data["undoCount"]=context_->undoCount();data["selection"]=session_->selection().selected();
     data["settings"]=session_->settings().describe();
+    data["project"]=context_->isProject()?nlohmann::json{{"id",context_->project().id},{"name",context_->project().name},{"path",context_->project().file.u8string()}}:nlohmann::json::object();
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
         data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},

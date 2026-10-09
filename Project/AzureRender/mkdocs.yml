@@ -57,6 +57,7 @@ nav:
   - 着色模块与共享类型: runtime/shader-modules.md
   - 着色模块对照教程: tutorials/shader-modules.md
   - 架构调研:
+      - 项目入口与工作区: runtime/project-workspace.md
       - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
       - 编辑器交互体验审查: research/2026-10-07-editor-usability.md
   - 计划:

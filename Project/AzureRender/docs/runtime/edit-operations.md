@@ -186,3 +186,9 @@ ctest --test-dir build/ninja-msvc-debug `
 制作步骤见[编辑器教程](../tutorials/editor-first-game.md)。
 
 内容引用、任务和放置见[内容制作服务](content-workflows.md)。
+
+## 项目与工作区操作
+
+项目、模板与布局消费共同操作服务。
+参数和生命周期见[项目工作区](project-workspace.md)。
+项目激活重建文档服务，并保留用户设置。

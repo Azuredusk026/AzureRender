@@ -2,7 +2,7 @@
 #include <functional>
 #include <string>
 namespace azurerender {
-enum class DocumentAction { Close, Reload };
+enum class DocumentAction { Close, Reload, Open };
 enum class DocumentDecision { Save, Discard, Cancel };
 enum class DocumentActionState { Idle, AwaitingDecision, Ready, Failed };
 class DocumentActionGuard {

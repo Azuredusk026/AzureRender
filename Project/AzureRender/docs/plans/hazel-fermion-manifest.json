@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-10",
+  "status": "Active",
+  "scope": "implementation-and-game-acceptance",
+  "azureBaseCommit": "a070b0ba99016137e85f4faa33b9527cd7ba28b1",
+  "repos": {
+    "Hazel": {
+      "path": "D:/Project/Hazel",
+      "url": "https://github.com/TheCherno/Hazel",
+      "commit": "1feb70572fa87fa1c4ba784a2cfeada5b4a500db",
+      "license": "Apache-2.0",
+      "commitDate": "2023-10-27"
+    },
+    "Fermion": {
+      "path": "D:/Project/Fermion",
+      "url": "https://github.com/Yang-Junjie/Fermion",
+      "commit": "eeac811ae4b6dd7827d24c255b4fa0241ac603af",
+      "license": "MIT",
+      "commitDate": "2026-04-07"
+    }
+  },
+  "items": [
+    {
+      "id": "A01",
+      "title": "工作区与设置分区",
+      "repo": "Fermion",
+      "file": "Boson/src/BosonLayer.cpp",
+      "line": 174,
+      "symbol": "onImGuiRender",
+      "finding": "停靠面板围绕中央视口组织，属性与环境设置分开。",
+      "current": "已有停靠、主题、DPI 和布局恢复。属性面板同时包含对象与全局渲染设置。",
+      "adoption": "参考设计",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：面板焦点和布局迁移。",
+      "phase": "U8",
+      "proposal": "建立制作、调试布局。对象、场景、项目和用户设置各有入口。",
+      "acceptance": "双项目、六组尺寸与 DPI 下操作可达。布局保存和恢复正确。",
+      "status": "Complete",
+      "sourceSha256": "130ff2ceb7be45761b4601d0329ffde1f27a8735e8d967cb671f9b49d71e6d45",
+      "evidence": "docs/acceptance/u8/2026-10-10.md"
+    },
+    {
+      "id": "A02",
+      "title": "统一属性控件与轴重置",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/ImGui/BosonUI.hpp",
+      "line": 26,
+      "symbol": "drawVec3Control",
+      "finding": "属性行对齐，三轴着色，每个轴有重置按钮。",
+      "current": "已有 Widgets、语义主题和字段重置。变换使用普通 DragFloat3。",
+      "adoption": "小段适配移植",
+      "fit": "高",
+      "effortDays": "1–2",
+      "risk": "低：窄面板、单位和撤销合并。",
+      "phase": "U9",
+      "proposal": "扩展公共属性控件。默认值、单位和范围来自元数据。",
+      "acceptance": "拖动合并为一次撤销。单轴重置正确，中文标签与窄面板可读。",
+      "status": "Planned",
+      "sourceSha256": "38fcc3cf9cd365c68fa2a5caa70e3e1bb80c80ced0fdc48f4191111af99104ed"
+    },
+    {
+      "id": "A03",
+      "title": "资产与对象引用选择器",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/InspectorPanel.cpp",
+      "line": 376,
+      "symbol": "deliverPickedEntity",
+      "finding": "支持视口吸管选择关联对象，支持资源拖放。",
+      "current": "节点和资产引用已用下拉框编辑。缺少通用吸管与资源揭示流程。",
+      "adoption": "参考交互并重写服务",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：失效对象、跨项目和拖放类型。",
+      "phase": "U9",
+      "proposal": "按引用元数据提供搜索、拖放、吸管、清空和揭示。",
+      "acceptance": "Esc 取消无写入。非法类型与失效引用被拒绝，成功写入可撤销。",
+      "status": "Planned",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+    },
+    {
+      "id": "A04",
+      "title": "属性面板上下文与批量编辑",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/InspectorPanel.cpp",
+      "line": 460,
+      "symbol": "drawComponents",
+      "finding": "组件分组与专门属性控件提供清晰阅读顺序。",
+      "current": "已有组件注册与多选变换。组件字段主要消费主选中对象。",
+      "adoption": "参考设计；批量语义为本项目扩展",
+      "fit": "高",
+      "effortDays": "2–4",
+      "risk": "中：混合值、只读字段和部分失败。",
+      "phase": "U9",
+      "proposal": "显示共同组件与混合值。按字段声明批量修改规则。空选择显示引导。",
+      "acceptance": "两个不同类型对象批量编辑。一个非法值使事务完整恢复。",
+      "status": "Planned",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+    },
+    {
+      "id": "A05",
+      "title": "内容目录树与导航",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/ContentBrowserPanel.cpp",
+      "line": 37,
+      "symbol": "onImGuiRender / drawFolderTree",
+      "finding": "左侧目录树与右侧网格协作，目录双击进入。",
+      "current": "已有搜索、类型筛选和网格。目录入口为下拉筛选。",
+      "adoption": "适配布局；导航服务自主实现",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：目录规模、挂载和中文路径。",
+      "phase": "U10",
+      "proposal": "添加挂载树、面包屑、前进后退与可调缩略图。枚举通过目录模型缓存。",
+      "acceptance": "空目录可见，项目移动后导航有效。大量条目使用裁剪与增量刷新。",
+      "status": "Planned",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+    },
+    {
+      "id": "A06",
+      "title": "按类型打开资产",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/ContentBrowserPanel.cpp",
+      "line": 285,
+      "symbol": "HandleDragDrop / double-click dispatch",
+      "finding": "场景、材质、纹理等资源提供类型化交互。",
+      "current": "当前可放置资产的双击行为是直接放到默认射线上。",
+      "adoption": "参考设计并扩展注册契约",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：打开与放置的语义迁移。",
+      "phase": "U10",
+      "proposal": "注册资产默认打开操作。单击选择资产，双击打开编辑或预览。拖到视口显式放置。",
+      "acceptance": "模型、关卡、材质、图片、脚本各有结果。大纲单击与双击规则保持有效。",
+      "status": "Planned",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+    },
+    {
+      "id": "A07",
+      "title": "受控内容文件操作",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/ContentBrowserPanel.cpp",
+      "line": 120,
+      "symbol": "Create New Folder / Open in File Manager",
+      "finding": "内容区提供新建目录、文件管理器揭示和复制资产标识。",
+      "current": "已有 UUID、依赖、导入和放置。面板缺少完整目录制作操作。",
+      "adoption": "参考交互；文件事务自主实现",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "高：磁盘与数据库一致性。",
+      "phase": "G12",
+      "proposal": "统一新建、重命名、移动、复制和删除。预览引用影响并维护元数据。",
+      "acceptance": "移动保持 UUID。重名、只读、被引用删除和写入失败都有确定结果。",
+      "status": "Planned",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+    },
+    {
+      "id": "A08",
+      "title": "纹理导入设置与批处理",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/TextureConfigPanel.cpp",
+      "line": 292,
+      "symbol": "drawTextureConfig / saveAllTextures",
+      "finding": "设置纹理层级、过滤、环绕、各向异性和颜色空间。",
+      "current": "图片类型已注册。glTF 纹理加载与采样修复在途。缺少独立设置文档与面板。",
+      "adoption": "适配数据契约与交互",
+      "fit": "高",
+      "effortDays": "4–7",
+      "risk": "高：颜色语义、缓存失效和 GPU 生命周期。",
+      "phase": "G12",
+      "proposal": "建立纹理用途与采样配置。保存触发可取消重导入，批量字段可单独选择。",
+      "acceptance": "颜色、法线和遮罩分别验证。保存重开、取消、失败恢复及设备上限通过。",
+      "status": "Planned",
+      "sourceSha256": "0b5a6fded2da65aaaedb9089e4a55d2c0c531e57ceb5957311a9e0902099abea"
+    },
+    {
+      "id": "A09",
+      "title": "独立材质资产编辑",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/MaterialEditorPanel.cpp",
+      "line": 592,
+      "symbol": "compileMaterial",
+      "finding": "把固定 PBR 输出参数和贴图连接保存为材质。",
+      "current": "已有模型材质、着色器模块和角色材质解释。缺少独立材质资产制作入口。",
+      "adoption": "参考固定参数设计并重写",
+      "fit": "高",
+      "effortDays": "4–7",
+      "risk": "高：通用 PBR 与风格材质边界。",
+      "phase": "U11",
+      "proposal": "材质类型声明参数与贴图槽。先交付表单编辑、保存和实例覆盖。",
+      "acceptance": "PBR 与风格材质各完成创建、赋值、撤销、重开和 Player 发布。",
+      "status": "Planned",
+      "sourceSha256": "383487162172ab00246c00b865060e3f913ae6a613881b480ef02f65a1e30fe8"
+    },
+    {
+      "id": "A10",
+      "title": "子网格与材质槽编辑",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/InspectorPanel.cpp",
+      "line": 238,
+      "symbol": "drawSubmeshMaterialsEditor",
+      "finding": "展示子网格列表、当前材质与缩略图，支持拖放赋值。",
+      "current": "模型加载已有材质索引。对象检查器缺少材质槽工作流。",
+      "adoption": "适配交互；覆盖数据自主实现",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "高：源模型重导入后槽位映射。",
+      "phase": "U11",
+      "proposal": "使用稳定槽位标识保存覆盖。支持揭示、重置和批量赋值。",
+      "acceptance": "多材质模型与实例分别保存。源槽变化有冲突报告，其他实例保持自身设置。",
+      "status": "Planned",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+    },
+    {
+      "id": "A11",
+      "title": "多类型缩略图与预览服务",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Renderer/Thumbnail/IThumbnailProvider.hpp",
+      "line": 10,
+      "symbol": "IThumbnailProvider",
+      "finding": "按资产类型提供材质球缩略图，浏览器和属性面板共享预览。",
+      "current": "已有 RenderViewService 和两槽 AssetThumbnailService。面板主要请求模型预览。",
+      "adoption": "参考提供者设计；复用现有服务",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "高：缓存上限、GPU 在途释放与刷新。",
+      "phase": "U11",
+      "proposal": "注册模型、图片、材质预览提供者。缓存键含依赖指纹与设置。",
+      "acceptance": "修改贴图更新关联材质预览。容量、失效、关面板与切项目均正确。",
+      "status": "Planned",
+      "sourceSha256": "5601bd8c5652c05e28ca6f1af6909dbe99993f5a4d2b48c97c84813c847dc3ed"
+    },
+    {
+      "id": "A12",
+      "title": "编辑、运行与模拟会话",
+      "repo": "Hazel",
+      "file": "Hazelnut/src/EditorLayer.cpp",
+      "line": 712,
+      "symbol": "OnScenePlay / OnSceneSimulate / OnSceneStop",
+      "finding": "运行与物理模拟使用编辑场景副本，停止回到编辑场景。",
+      "current": "已有 Play、Pause、Step、Stop 与编辑态恢复。缺少独立物理模拟模式。",
+      "adoption": "参考生命周期并适配现有会话",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "高：输入、脚本、物理与资源关闭顺序。",
+      "phase": "G13",
+      "proposal": "以会话模式声明启用系统。模拟默认启用物理并关闭玩法脚本。",
+      "acceptance": "反复 Play/Simulate/Stop 后编辑文档哈希一致。失败启动和停止均释放资源。",
+      "status": "Planned",
+      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17"
+    },
+    {
+      "id": "B01",
+      "title": "方向控件与正交视图",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/ViewportPanel.cpp",
+      "line": 301,
+      "symbol": "ImViewGuizmo::Rotate",
+      "finding": "视口右上角提供可点击方向轴，编辑相机支持正交投影。",
+      "current": "已有飞行、环绕、平移与构图。主编辑相机服务只暴露位置与目标。",
+      "adoption": "直接接入上游控件；相机适配",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "中：Vulkan 投影、坐标系和拾取一致性。",
+      "phase": "U12",
+      "proposal": "接入方向控件与六向视图，统一透视及正交投影。",
+      "acceptance": "六向构图、透视切换、定位、拾取和操纵器使用同一相机描述。",
+      "status": "Planned",
+      "sourceSha256": "e2eda78cd9cbc470087c651ec969133a3fdcc53d33ab003ffe698bf0685a7aba"
+    },
+    {
+      "id": "B02",
+      "title": "网格与编辑辅助显示",
+      "repo": "Fermion",
+      "file": "Boson/Resources/Shaders/InfiniteGrid.glsl",
+      "line": 1,
+      "symbol": "infinite-grid shader",
+      "finding": "可选择网格平面，配合相机、灯光图标与物理辅助显示。",
+      "current": "已有选择框与 GameplayDebugGeometry。缺少完整编辑辅助类别。",
+      "adoption": "参考算法；Vulkan 着色器重写",
+      "fit": "高",
+      "effortDays": "2–4",
+      "risk": "中：深度、透明排序、远近裁剪。",
+      "phase": "U12",
+      "proposal": "注册网格、图标、边界和相机视锥提供者。编辑辅助与游戏渲染分开。",
+      "acceptance": "辅助显示按类别开关。远近视距稳定，Player 画面保持项目表现。",
+      "status": "Planned",
+      "sourceSha256": "a6113dd1bc981f4044344e84aec8db7b2bee1f488c570052d517c5980e39f4eb"
+    },
+    {
+      "id": "B03",
+      "title": "导航速度与模式反馈",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Renderer/Camera/EditorCamera.cpp",
+      "line": 131,
+      "symbol": "onMouseScroll",
+      "finding": "飞行模式滚轮调节速度，视口显示速度条。",
+      "current": "已有右键导航、Shift 加速、方向设置和可配置速度。",
+      "adoption": "小段交互适配",
+      "fit": "高",
+      "effortDays": "1–2",
+      "risk": "低：滚轮归属和速度持久化。",
+      "phase": "U12",
+      "proposal": "飞行滚轮调基础速度。状态条显示导航模式、速度与快捷键。",
+      "acceptance": "右键外滚轮缩放，右键内滚轮调速。Shift 释放恢复速度，失焦释放捕获。",
+      "status": "Planned",
+      "sourceSha256": "a260bcb4940d228e2ae4f76312fc2062713c21d84f312fc959036c573ce8f7b1"
+    },
+    {
+      "id": "B04",
+      "title": "基础几何与制作预设",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Renderer/Model/MeshFactory.cpp",
+      "line": 9,
+      "symbol": "CreateBox / CreateSphere / CreateCylinder",
+      "finding": "提供盒、球、圆柱、胶囊和圆锥生成函数。",
+      "current": "已有注册生成器、参数化几何和内容来源清单。创建栏主要提供空节点。",
+      "adoption": "适配纯几何生成代码",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：法线、切线、绕序和参数预算。",
+      "phase": "U10",
+      "proposal": "基础几何进入 GeneratorRegistry。相机、光源和物理对象以注册模板创建。",
+      "acceptance": "两个项目可生成并发布。极小尺寸、分段边界、负值和预算验证通过。",
+      "status": "Planned",
+      "sourceSha256": "7ec245e9d26116b2c326a6f2694599d33b4192a132db3705c3b88f7924f2aee6"
+    },
+    {
+      "id": "B05",
+      "title": "资产诊断与引用影响",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/AssetManagerPanel.cpp",
+      "line": 14,
+      "symbol": "onImGuiRender",
+      "finding": "表格显示资产类型、标识、路径、加载状态，支持搜索。",
+      "current": "已有目录状态、引用计数、依赖和来源信息。缺少完整影响分析页面。",
+      "adoption": "适配表格；诊断自主扩展",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：诊断快照成本与过期状态。",
+      "phase": "G12",
+      "proposal": "展示依赖与反向引用、导入来源、失败和重导入。快照按版本生成。",
+      "acceptance": "改动源文件可追到依赖。只读诊断保持文档与 GPU 状态。",
+      "status": "Planned",
+      "sourceSha256": "508a245c1b4fafaeeaaab8dea0bfc22e772a8ee15d56559838b64ec37241d996"
+    },
+    {
+      "id": "B06",
+      "title": "项目入口与最近项目",
+      "repo": "Fermion",
+      "file": "Boson/src/BosonLayer_Project.cpp",
+      "line": 39,
+      "symbol": "newProject / openProject",
+      "finding": "提供项目创建与打开，配置起始场景和资产目录。",
+      "current": "已有 Project、模板工具和打开服务。最近目录入口用于路径选择。",
+      "adoption": "参考流程；最近项目为本项目扩展",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "中：模板复制与切换中的未保存状态。",
+      "phase": "U8",
+      "proposal": "欢迎页提供模板、最近项目、导入项目和错误恢复。调用项目服务。",
+      "acceptance": "全新目录完成创建与启动。中文路径、移动项目、缺失最近项目均可处理。",
+      "status": "Complete",
+      "sourceSha256": "f96663f826d0c65c8c6f219ad3f6ff375f990819333e2f6406b3d566b8dac59a",
+      "evidence": "docs/acceptance/u8/2026-10-10.md"
+    },
+    {
+      "id": "B07",
+      "title": "场景文档与工作区恢复",
+      "repo": "Hazel",
+      "file": "Hazelnut/src/EditorLayer.cpp",
+      "line": 650,
+      "symbol": "NewScene / OpenScene / SaveScene",
+      "finding": "场景创建、打开和保存构成制作入口。",
+      "current": "已有单文档、保存保护和备份。缺少多文档工作区。",
+      "adoption": "参考基础流程；多文档为自主扩展",
+      "fit": "中",
+      "effortDays": "4–7",
+      "risk": "高：版本、撤销栈和选择跨文档串用。",
+      "phase": "U13",
+      "proposal": "提供场景标签、逐文档保存与恢复。每个文档独立拥有选择、版本和历史。",
+      "acceptance": "打开两关卡分别编辑。关标签、切项目及异常重启都恢复正确归属。",
+      "status": "Planned",
+      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17"
+    },
+    {
+      "id": "B08",
+      "title": "动画片段与骨架检视",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/InspectorPanel.cpp",
+      "line": 818,
+      "symbol": "animation clip controls",
+      "finding": "检查器列出动画片段，并提供播放控制。",
+      "current": "已有语义动画预览、混合和状态机。面板按手动时间预览姿势。",
+      "adoption": "参考控件并复用现有动画",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "中：多实例、预览状态与玩法状态混用。",
+      "phase": "U13",
+      "proposal": "加入播放时间轴、循环、速度、骨架显示和重绑定诊断。",
+      "acceptance": "两个不同骨架独立预览。暂停拖动与切对象正确，预览保持制作数据。",
+      "status": "Planned",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+    },
+    {
+      "id": "B09",
+      "title": "物理形状与约束制作",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Physics/Physics3DShapes.cpp",
+      "line": 20,
+      "symbol": "CreateBoxShape / CreateMeshShape",
+      "finding": "Jolt 形状创建独立于调度，支持多类碰撞体与铰链约束。",
+      "current": "已有 Jolt、角色、触发和查询。公共 PhysicsWorld 尚无通用约束制作接口。",
+      "adoption": "适配相同物理库的设计与算法",
+      "fit": "高",
+      "effortDays": "4–7",
+      "risk": "高：负缩放、动态网格与约束生命周期。",
+      "phase": "G13",
+      "proposal": "声明形状和约束描述。通过注册组件及公共编辑服务创建并模拟。",
+      "acceptance": "两个机械场景验证铰链。端点删除、非法轴和重启释放都正确。",
+      "status": "Planned",
+      "sourceSha256": "1021e9caf65fab5d5ea42d10b3e3d3cc27e6877da7c1313e4c783b8a2cd4637a"
+    },
+    {
+      "id": "B10",
+      "title": "脚本字段与调试制作流程",
+      "repo": "Hazel",
+      "file": "Hazel/src/Hazel/Scripting/ScriptEngine.cpp",
+      "line": 131,
+      "symbol": "EntityClasses / EntityScriptFields",
+      "finding": "脚本类和公开字段可发现，程序集监视支持重载。",
+      "current": "已有 Lua、可选托管后端、绑定和重载。需要完善编辑器的字段与诊断展示。",
+      "adoption": "参考体验并复用 ScriptRuntimeRegistry",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "中：后端差异与字段版本迁移。",
+      "phase": "U13",
+      "proposal": "提供脚本模板、类搜索、公开字段、源码揭示和重载诊断。",
+      "acceptance": "Lua 与托管用例共用字段契约。类型变化、无后端和重载失败可恢复。",
+      "status": "Planned",
+      "sourceSha256": "097c837a65735f9d0abba45b3936ee0242466e92af3a5c042442b35064f07b80"
+    },
+    {
+      "id": "B11",
+      "title": "结构化问题列表",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/ImGui/ConsolePanel.cpp",
+      "line": 43,
+      "symbol": "onImGuiRender",
+      "finding": "控制台提供滚动日志与基础清理命令。",
+      "current": "已有日志筛选、复制、任务和错误展示。AI 提案也在控制台区域。",
+      "adoption": "参考排版；结构化诊断自主实现",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：错误去重、定位和日志容量。",
+      "phase": "U13",
+      "proposal": "分离日志、任务、问题与内容辅助。诊断包含文件、对象、操作和关联编号。",
+      "acceptance": "点问题揭示目标。过滤与清除保留诊断来源，长日志维持预算。",
+      "status": "Planned",
+      "sourceSha256": "79e67fb7a7a17604a3b624fba05ed15e86ccd8c5552aebf64d57bdb10d089eac"
+    },
+    {
+      "id": "B12",
+      "title": "面板上下文与扩展装配",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/ViewportPanel.hpp",
+      "line": 32,
+      "symbol": "Context / Callbacks",
+      "finding": "面板接收上下文与有限回调，宿主组织生命周期。",
+      "current": "已有 IEditorPanel、PanelContext、PanelDocumentView 与面板注册。内置绘制仍集中到层类。",
+      "adoption": "参考拆分；沿用公共编辑接口",
+      "fit": "高",
+      "effortDays": "2–4",
+      "risk": "中：回调生命周期与插件状态所有权。",
+      "phase": "U8",
+      "proposal": "内置面板按职责持有 UI 状态。注入只读视图与操作服务，公开可注册入口。",
+      "acceptance": "一个独立扩展面板接入双项目。关闭后状态与回调生命周期确定。",
+      "status": "Complete",
+      "sourceSha256": "e21f2218129fef0f7d31c8f0cd1d9babdd8e10bfa2cbce6e9d27fc89a23f7301",
+      "evidence": "docs/acceptance/u8/2026-10-10.md"
+    },
+    {
+      "id": "B13",
+      "title": "AI 辅助接入新制作能力",
+      "repo": "Fermion",
+      "file": "README_CN.md",
+      "line": 5,
+      "symbol": "AI 辅助编程声明",
+      "finding": "README 声明 AI 辅助开发，检索范围内未发现模型提案或工具协议模块。",
+      "current": "已有内容提案、领域适配器、观察注册和公共编辑契约。",
+      "adoption": "本项目横向要求；非外部实现移植",
+      "fit": "高",
+      "effortDays": "2–4",
+      "risk": "高：候选版本、资源规模和授权范围。",
+      "phase": "U13",
+      "proposal": "材质、纹理和物理新能力公开操作描述。领域提案调用相同校验与事务。",
+      "acceptance": "固定响应、取消、过期、非法引用和失败恢复通过。关闭模型仍可制作。",
+      "status": "Planned",
+      "sourceSha256": "66c173489e60d1d90818599752d4263732368f3cff905a6d8e5494089df1126b"
+    },
+    {
+      "id": "B14",
+      "title": "Prefab 制作与覆盖面板",
+      "repo": "Hazel",
+      "file": "Hazel/src/Hazel/Scene/Scene.cpp",
+      "line": 71,
+      "symbol": "Scene::Copy / DuplicateEntity",
+      "finding": "场景复制说明持久标识与运行实例需要明确边界。",
+      "current": "已有 Prefab 展开、实例覆盖、子树复制和内部引用重写。缺少集中制作界面。",
+      "adoption": "已有能力产品化；非外部 Prefab 移植",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "高：源资产编辑与实例覆盖的事务关系。",
+      "phase": "U13",
+      "proposal": "提供创建 Prefab、覆盖列表、单项还原与受控应用源资产。",
+      "acceptance": "两个实例独立覆盖。源变更与失效字段报告清楚，撤销及保存重开一致。",
+      "status": "Planned",
+      "sourceSha256": "00168bf1320605c4105e1a72687a7bb23e31510505e6dc056cd219b6241aa1b1"
+    },
+    {
+      "id": "C01",
+      "title": "材质连接画布",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/MaterialEditorPanel.cpp",
+      "line": 384,
+      "symbol": "handleInteractions",
+      "finding": "节点创建、连线、删除及画布位置持久化。",
+      "current": "已有着色器模块。独立材质资产由 U11 提案建设。",
+      "adoption": "可选接入上游画布；固定参数图适配",
+      "fit": "中",
+      "effortDays": "5–9",
+      "risk": "高：用户期待与实际编译能力不匹配。",
+      "phase": "U14",
+      "proposal": "先提供固定材质槽连接图。通用节点语言需单独定义类型、版本和编译诊断。",
+      "acceptance": "非法连接被拒绝，画布重开与撤销正确。图与表单产生相同材质数据。",
+      "status": "Planned",
+      "sourceSha256": "383487162172ab00246c00b865060e3f913ae6a613881b480ef02f65a1e30fe8"
+    },
+    {
+      "id": "C02",
+      "title": "二维精灵与世界文字",
+      "repo": "Hazel",
+      "file": "Hazel/src/Hazel/Renderer/Renderer2D.cpp",
+      "line": 271,
+      "symbol": "StartBatch / DrawString",
+      "finding": "精灵、线、圆和多通道距离场文字采用批处理。",
+      "current": "已有 RmlUi 游戏界面与编辑辅助。完整二维场景制作尚未列为当前目标。",
+      "adoption": "参考批处理；Vulkan 渲染重写",
+      "fit": "中",
+      "effortDays": "8–14",
+      "risk": "高：排序、中文排版、纹理槽与资源预算。",
+      "phase": "G14",
+      "proposal": "独立二维渲染模块组合精灵和世界文字。游戏界面继续使用现有服务。",
+      "acceptance": "二维关卡与三维标签两个场景验证。透明排序、批次上限与中文明确验收。",
+      "status": "Planned",
+      "sourceSha256": "8939da8bfcd9a8e8866de6b947ccc4b4aa64e4d848ba94e6d5158036dd05c515"
+    },
+    {
+      "id": "C03",
+      "title": "异步 GPU 对象拾取",
+      "repo": "Hazel",
+      "file": "Hazelnut/src/EditorLayer.cpp",
+      "line": 133,
+      "symbol": "ReadPixel",
+      "finding": "整数对象缓冲提供可见片元的实体标识。",
+      "current": "已有真实形变几何的 CPU 拾取。新增路径需证明遮挡或性能收益。",
+      "adoption": "参考对象标识；Vulkan 异步实现",
+      "fit": "中",
+      "effortDays": "5–8",
+      "risk": "高：读回同步、迟到结果与透明语义。",
+      "phase": "R10",
+      "proposal": "按需读回对象标识，关联相机、文档和帧版本。保留 CPU 回退。",
+      "acceptance": "蒙皮、透明、MSAA、DPI 和多视图一致。过期读回不改变选择。",
+      "status": "Planned",
+      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17"
+    },
+    {
+      "id": "C04",
+      "title": "渲染图可视化与诊断",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Renderer/RenderGraph/RenderGraphCompiler.cpp",
+      "line": 9,
+      "symbol": "compile / topologicalSort",
+      "finding": "编译器检查多生产者与环，错误包含 Pass 名称。",
+      "current": "已有 Render Graph、资源状态、瞬态池与帧诊断。",
+      "adoption": "参考错误展示；保留现有编译器",
+      "fit": "高",
+      "effortDays": "3–5",
+      "risk": "中：大图快照和资源状态解释。",
+      "phase": "U14",
+      "proposal": "显示真实生产图的依赖、读写、寿命和耗时。诊断使用公共观察描述。",
+      "acceptance": "环与非法资源夹具定位准确。查看和导出保持帧执行结果。",
+      "status": "Planned",
+      "sourceSha256": "701b7da1f8382816865106b39640bdbeda99ef3933483c4d0dc5de7bc66eac7e"
+    },
+    {
+      "id": "C05",
+      "title": "更多模型源格式",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Asset/Importer/ModelSourceImporter.cpp",
+      "line": 542,
+      "symbol": "ModelSourceImporter::importAsset",
+      "finding": "Assimp 转换模型源，生成模型、网格、材质和动画资产。",
+      "current": "已有 glTF 与受控模型转换工具。格式扩展需实际素材需求。",
+      "adoption": "参考导入分解；可选工具适配",
+      "fit": "中",
+      "effortDays": "6–10",
+      "risk": "高：单位、骨架、材质语义和格式许可。",
+      "phase": "G14",
+      "proposal": "源格式适配器统一输出 glTF 与来源清单，运行时只消费统一产物。",
+      "acceptance": "FBX 或 OBJ 与原生 glTF 比较。单位、轴、材质、动画和移动安装正确。",
+      "status": "Planned",
+      "sourceSha256": "846e819e3b669b5af1b3cd363ff0a25970a75db85606d86298503b23a32918aa"
+    },
+    {
+      "id": "C06",
+      "title": "CPU 时间线导出",
+      "repo": "Hazel",
+      "file": "Hazel/src/Hazel/Debug/Instrumentor.h",
+      "line": 75,
+      "symbol": "WriteProfile",
+      "finding": "作用域采样输出可供浏览器工具读取的时间线。",
+      "current": "已有 CPU/GPU 计时和帧任务统计。需要时可补事件时间线。",
+      "adoption": "小段格式与作用域适配",
+      "fit": "高",
+      "effortDays": "2–3",
+      "risk": "中：锁、文件刷新和采样扰动。",
+      "phase": "U14",
+      "proposal": "复用诊断通道，使用有界缓冲导出时间线。GPU 事件记录对应帧。",
+      "acceptance": "并发事件可解析，丢弃计数可见。关闭采样无持续开销。",
+      "status": "Planned",
+      "sourceSha256": "cf0063582952c54d490368b416ddd0081a29bae91246c4910941e3a036b64165"
+    },
+    {
+      "id": "C07",
+      "title": "自绘窗口标题栏",
+      "repo": "Fermion",
+      "file": "Boson/src/Panels/MenuBarPanel.cpp",
+      "line": 199,
+      "symbol": "DrawWindowButton / HandleWindowDrag",
+      "finding": "菜单栏与最小化、最大化及窗口拖动组合。",
+      "current": "已有原生窗口和停靠工作区。可用性重点为制作路径。",
+      "adoption": "暂缓；保留样式参考",
+      "fit": "中",
+      "effortDays": "3–5",
+      "risk": "高：系统缩放、吸附、无障碍和多屏。",
+      "phase": "Deferred",
+      "proposal": "仅在原生窗口体验存在已确认问题时立项。系统交互专项验收。",
+      "acceptance": "多屏、DPI、最大化、系统吸附与键盘窗口操作全部通过。",
+      "status": "Deferred",
+      "sourceSha256": "5a18d8372b774f45a2a09b661281bcc6191b1b837388cdbe87a059e3b39dccda"
+    },
+    {
+      "id": "C08",
+      "title": "整套底层模块替换",
+      "repo": "Fermion",
+      "file": "Fermion/Sources/Asset/AssetManager/AssetManagerBase.hpp",
+      "line": 7,
+      "symbol": "AssetManagerBase",
+      "finding": "编辑与运行资产接口包装同一静态管理器。",
+      "current": "已有模块目标、实例服务、独立 Player 与设备回退。",
+      "adoption": "暂缓；仅作边界反例",
+      "fit": "低",
+      "effortDays": "专项估算",
+      "risk": "高：全局状态、后端差异与已有承诺。",
+      "phase": "Deferred",
+      "proposal": "模块引入以独立能力和可替换契约为单位。ECS、RHI 与脚本保留现有主线。",
+      "acceptance": "任何替换需双项目、独立 Player 和全部受影响门禁的对等证据。",
+      "status": "Deferred",
+      "sourceSha256": "fd9be66023f3786679652bdab855d1e0446ce47f6a163d25f25870ac7c00daff"
+    }
+  ],
+  "phases": [
+    {
+      "id": "U8",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A01",
+        "B06",
+        "B12"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "current-work-status-review"
+      ]
+    },
+    {
+      "id": "U9",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U8"
+      ]
+    },
+    {
+      "id": "G12",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A07",
+        "A08",
+        "B05"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U9"
+      ]
+    },
+    {
+      "id": "U10",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A05",
+        "A06",
+        "B04"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "G12"
+      ]
+    },
+    {
+      "id": "U11",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A09",
+        "A10",
+        "A11"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U10"
+      ]
+    },
+    {
+      "id": "U12",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "B01",
+        "B02",
+        "B03"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U11"
+      ]
+    },
+    {
+      "id": "G13",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A12",
+        "B09"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U12"
+      ]
+    },
+    {
+      "id": "U13",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "B07",
+        "B08",
+        "B10",
+        "B11",
+        "B13",
+        "B14"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "G13"
+      ]
+    },
+    {
+      "id": "P5",
+      "status": "Planned",
+      "kind": "main",
+      "items": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B14"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "U13"
+      ]
+    },
+    {
+      "id": "U14",
+      "status": "Planned",
+      "kind": "optional",
+      "items": [
+        "C01",
+        "C04",
+        "C06"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "P5"
+      ]
+    },
+    {
+      "id": "G14",
+      "status": "Planned",
+      "kind": "optional",
+      "items": [
+        "C02",
+        "C05"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "P5"
+      ]
+    },
+    {
+      "id": "R10",
+      "status": "Planned",
+      "kind": "optional",
+      "items": [
+        "C03"
+      ],
+      "evidence": [],
+      "commit": null,
+      "dependsOn": [
+        "P5"
+      ]
+    }
+  ],
+  "azureInspectedFiles": [
+    {
+      "file": "src/editor/EditorSession.hpp",
+      "sha256": "d13794035905c4d0b0db6af51cba82ec26d8feebd593aecdddabdd345c04563e"
+    },
+    {
+      "file": "src/editor/panels/InspectorPanel.cpp",
+      "sha256": "5a3f03a7d8a7c533851ed13a6b6d858c6f8aef95e3b0f774c81833acdad54e52"
+    },
+    {
+      "file": "src/editor/panels/AssetBrowserPanel.cpp",
+      "sha256": "ced5e4ba9f46fc09b4d0c98a0650176b807ec530ebad3001ab9aa576a6190b6a"
+    },
+    {
+      "file": "src/editor/panels/AnimationPanel.cpp",
+      "sha256": "8f459aad3668c94027e229bbd6469f5ca553adeccbc54879a0444010dceb0deb"
+    },
+    {
+      "file": "src/editor/panels/ConsolePanel.cpp",
+      "sha256": "15afea960cfff3228afb9ae2572c62ab14dba1dde4b2845c88ed64f2acb09244"
+    },
+    {
+      "file": "src/editor/EditorWorkspaceUI.cpp",
+      "sha256": "c96a8716e53c561d28c9766242a36d1a485ded50e53b01fc0c8b4066c1a86db5"
+    },
+    {
+      "file": "src/editor/EditorToolbar.cpp",
+      "sha256": "1d54dc5f93b16a43ffad9ec852a132c66fc2d72ef234e5d740be8e85e75de8ad"
+    },
+    {
+      "file": "src/editor/commands/EditorOperations.cpp",
+      "sha256": "c04bc8e0c9d19b901b26daa86af816bae83b4e18e1fc07d6129c2b77ddc537ee"
+    },
+    {
+      "file": "src/editor/content/AssetCatalog.cpp",
+      "sha256": "a029dba4e50f0666892dfca17d02449ac7438e94b5b01b6eb4a7049a414e4249"
+    },
+    {
+      "file": "src/editor/ui/Widgets.hpp",
+      "sha256": "2aebe3417e7ba14214c9b7d8b8a7fe55ef576edf29eba62cd86d42de20ff1aaf"
+    },
+    {
+      "file": "src/editor/preview/AssetThumbnailService.hpp",
+      "sha256": "a3e03b2f24de782385678cea16c482aec36ae8b45933262b6a0bfae3d08c5af2"
+    },
+    {
+      "file": "src/editor/preview/DeveloperServices.hpp",
+      "sha256": "25d5f3b8461a82c3e410fd904cd17a6cb6489cbbb6dda9e0ce57b3a7d56d0cec"
+    },
+    {
+      "file": "src/editor/viewport/EditorCameraService.hpp",
+      "sha256": "82e753a86d50dd7ec2ae55df17ae9c523a712c0b4690316558e7b4c31e227d59"
+    },
+    {
+      "file": "src/editor/EditorCameraController.hpp",
+      "sha256": "40d67db343d1b0f6f230281742cbb15f2d5693f6e3966c0a1445d04c759694d1"
+    },
+    {
+      "file": "src/editor/PanelContext.hpp",
+      "sha256": "5a806b88cf9ececf19b1cc69fdbb58089f7f5ba14c935b92679c71bf6bfe2a01"
+    },
+    {
+      "file": "src/runtime/AssetDatabase.hpp",
+      "sha256": "6141c123ae9b8a96a3ed34a41b61e04ac7c74b6d861c953e3d62bf4bfd7f65b1"
+    },
+    {
+      "file": "src/runtime/AssetTypeRegistry.hpp",
+      "sha256": "ee342b6a0bb41f9e01962fc6428383932a5dd3aaa492df13e81c6e6aaa51774b"
+    },
+    {
+      "file": "src/runtime/ComponentRegistry.hpp",
+      "sha256": "e1948d03b9bf58f267fe3eee16333da654065d00d6fc851e6235a58f899786bc"
+    },
+    {
+      "file": "src/runtime/Prefab.hpp",
+      "sha256": "60346a75facb995c52dd7c4776b60b80637b6223ca2f7b24cfab39d6c6e99156"
+    },
+    {
+      "file": "src/runtime/PhysicsWorld.hpp",
+      "sha256": "93818e7ea6a417eac9bf0d96faf67620ee62f5fb72401d839ef531ae1d35fe57"
+    },
+    {
+      "file": "src/render/CameraProjection.hpp",
+      "sha256": "e184bea82a58b04e525eac289d4a9c6ca452364277464a60256e457ef5fc18cb"
+    }
+  ],
+  "thirdPartyCandidates": [
+    {
+      "name": "ImViewGuizmo",
+      "sourceRepo": "Fermion",
+      "file": "Fermion/external/ImViewGuizmo/ImViewGuizmo.h",
+      "sha256": "98a5ea5bdbdf2c38863869a9e55ba40cb244a203a2dd72085636ac457b2a91d2",
+      "license": "MIT",
+      "copyright": "2025 Marcel Kazemi",
+      "licenseVerified": true
+    },
+    {
+      "name": "ImguiNodeEditor",
+      "upstream": "https://github.com/thedmd/imgui-node-editor",
+      "gitlinkCommit": "b302971455b3719ec9b5fb94b2f92d27c62b9ff0",
+      "licenseVerified": false,
+      "localCheckout": "missing"
+    }
+  ],
+  "documentationVerification": {
+    "proseStyle": "passed",
+    "markdownLinks": "passed",
+    "candidateCoverage": "34/34",
+    "sourceHashes": "34/34",
+    "azureFingerprints": "21/21",
+    "normalSiteBuild": "passed",
+    "strictSiteBuild": "passed",
+    "externalEngineBuilds": "not-run",
+    "implementationTests": "U8: 127 non-GPU and 5 GPU regressions passed; project UI retest passed"
+  },
+  "execution": {
+    "order": [
+      "U8",
+      "U9",
+      "G12",
+      "U10",
+      "U11",
+      "U12",
+      "G13",
+      "U13",
+      "G15",
+      "G16",
+      "P5"
+    ],
+    "active": "U9",
+    "completed": [
+      "U8"
+    ]
+  }
+}

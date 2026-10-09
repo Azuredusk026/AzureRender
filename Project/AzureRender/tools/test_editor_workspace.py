@@ -28,9 +28,9 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']
-    assert data['version']==2 and set(data['panels'])=={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings'},data
+    assert data['version']==2 and set(data['panels'])=={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings','projects','environment'},data
     assert data['image']['width']>=480 and data['image']['height']>=270,data['image']
-    assert len(data['panels'])==10
+    assert len(data['panels'])==12
     assert data['uiErrors']==[],data['uiErrors']
     return data
 
@@ -44,7 +44,7 @@ def main(executable,root):
     for dpi,size in cases:
         name=f'{size[0]}x{size[1]}-{dpi}'
         results[name]=launch(executable,root,name,size,dpi)
-        assert all(p['docked'] for key,p in results[name]['panels'].items() if key!='settings')
+        assert all(p['docked'] for key,p in results[name]['panels'].items() if key not in {'settings','projects','environment'})
         browser=results[name]['panels']['assets']['rect']
         first=results[name]['visibleAssets'][0]['id']
         row=results[name]['widgets']['asset.'+first]
@@ -115,7 +115,7 @@ def main(executable,root):
     launch(executable,root,'ini-valid',(1920,1080),1,capture=False,config=iniConfig)
     with (iniConfig/'layout.ini').open('a',encoding='utf-8') as file:file.write('\n[Docking][Data]\nmalformed\n')
     iniRecovered=launch(executable,root,'ini-corrupt',(1920,1080),1,capture=False,config=iniConfig)
-    assert iniRecovered['diagnostic'] and all(p['docked'] for key,p in iniRecovered['panels'].items() if key!='settings')
+    assert iniRecovered['diagnostic'] and all(p['docked'] for key,p in iniRecovered['panels'].items() if key not in {'settings','projects','environment'})
     focus=[dict(frame=25,action='click',target='name')]
     for index,(value,ctrl) in enumerate((('W',False),('A',False),('S',False),('D',False),('Shift',False),('D',True),('Z',True),('Y',True),('S',True),('Delete',False))):
         frame=28+index*3
@@ -125,9 +125,9 @@ def main(executable,root):
     assert all(Path(path).read_bytes()==value for path,value in savedLevels.items()),'Text focus Ctrl+S must not save scene'
     states=focused['history'];assert all(state['nodeCount']==states[0]['nodeCount'] and state['translation']==states[0]['translation'] and not state['playing'] for state in states)
     dynamic=launch(executable,root,'dynamic-dpi',(1280,720),1,[dict(frame=25,action='dpi',scale=2),dict(frame=35,action='dpi',scale=1.5)])
-    assert dynamic['dpi']==1.5 and all(p['docked'] for key,p in dynamic['panels'].items() if key!='settings')
+    assert dynamic['dpi']==1.5 and all(p['docked'] for key,p in dynamic['panels'].items() if key not in {'settings','projects','environment'})
     reset=launch(executable,root,'reset',(1920,1080),1,[dict(frame=25,action='click',target='menu.View'),dict(frame=29,action='click',target='menu.Reset Layout')],capture=False,config=config)
-    assert all(p['open'] and p['docked'] for key,p in reset['panels'].items() if key!='settings')
+    assert all(p['open'] and p['docked'] for key,p in reset['panels'].items() if key not in {'settings','projects','environment'})
     for mode,field,baseline in (('Move','gizmoTranslation',0),('Rotate','gizmoRotation',0),('Scale','gizmoScale',1)):
         events=[dict(frame=25,action='click',target='node.hero:body'),dict(frame=28,action='click',target='focus'),dict(frame=30,action='click',target='mode.'+mode),
             dict(frame=35,action='mouse',target='gizmo.0',down=True),dict(frame=38,action='mouse',target='gizmo.0',down=True,offset=[30,0]),dict(frame=41,action='mouse',target='gizmo.0',down=False,offset=[30,0])]

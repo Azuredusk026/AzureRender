@@ -122,6 +122,10 @@ int main(const int argumentCount, char** argumentValues) {
         }
         if(options.editorSession){
             options.editorSession->setClosePolicy(options.editorClosePolicy);
+            if(options.editorSession->context().isProject()) {
+                try {options.editorSession->projects().remember(options.editorSession->context().project());}
+                catch(const std::exception& error){options.editorSession->log(std::string("Recent project history: ")+error.what());}
+            }
             const azurerender::ResourceLocator locator(options.resourceRoot);
             const auto name=std::filesystem::path(
 #ifdef _WIN32

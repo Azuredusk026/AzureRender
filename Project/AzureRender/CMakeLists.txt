@@ -1666,3 +1666,26 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-re
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-presentation-refinement.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-presentation-refinement.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/character/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/character")
+
+# Editor productization contracts.
+if(BUILD_TESTING)
+    add_executable(AzureEditorProjectFlowTests tests/EditorProjectFlowTests.cpp)
+    target_link_libraries(AzureEditorProjectFlowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ProjectFlow COMMAND AzureEditorProjectFlowTests)
+endif()
+
+target_sources(AzureEditor PRIVATE src/editor/projects/ProjectOpenService.cpp)
+
+target_sources(AzureEditor PRIVATE src/editor/panels/ProjectBrowserPanel.cpp src/editor/panels/EnvironmentPanel.cpp)
+
+target_sources(AzureEditor PRIVATE src/editor/projects/ProjectCreateJob.cpp)
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME AzureEditor.ProductizationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_productization.py" --executable $<TARGET_FILE:AzureRender> --output "${CMAKE_CURRENT_BINARY_DIR}/productization")
+    set_tests_properties(AzureEditor.ProductizationGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+endif()
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/project-workspace.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-editor-productization.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/hazel-fermion-manifest.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-hazel-fermion.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u8/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u8")

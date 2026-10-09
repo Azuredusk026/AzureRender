@@ -12,7 +12,7 @@ int main(){try{
  check(EditorCameraController::apply(focus,camera,target),"Focus command must move camera");
  check(target[0]==4 && target[2]==-3 && camera[2]>target[2],"Focus selected world coordinates");
  EditorWorkspace workspace;
- check(workspace.panels().size()==10,"Nine standard panels and settings extension registered");
+ check(workspace.panels().size()==12,"Standard panels, settings, projects and environment registered");
  check(!workspace.visible("settings"),"Settings extension is closed by default");
  workspace.setVisible("settings",true);
  for(float dpi:{1.F,1.5F,2.F})for(auto size:{std::array<float,2>{1920,1080},std::array<float,2>{1280,720}}){

@@ -1,0 +1,17 @@
+{
+  "stage": "U8",
+  "status": "Complete",
+  "date": "2026-10-10",
+  "compiler": "MSVC 14.44",
+  "configuration": "Debug",
+  "nonGpuTests": 127,
+  "gpuRegressions": 5,
+  "finalProjectUiRetest": 1,
+  "workflowDpiCases": 12,
+  "physicalKeyboardMouse": "not-performed",
+  "releaseRegression": "scheduled-P5",
+  "binarySha256": "f1cf3a9b880de85b07fb1f0b677a840c8a1fc476090be0f4a5f1405e8afc74f5",
+  "workingTreeIncludesPreExistingChanges": true,
+  "unrelatedChangesCommitted": false,
+  "finalWorkspaceRetest": 1
+}
