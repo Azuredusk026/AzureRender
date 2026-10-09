@@ -22,6 +22,13 @@ scene::SceneDescription SceneDocument::renderDescription() const {
         desc.rotation = node.rotation;
         desc.scale = node.scale;
         desc.visible = node.visible;
+        if(!node.materialSlots.empty()){
+            if(node.resolvedMaterials.size()!=node.materialSlots.size())throw std::invalid_argument("Material bindings must be resolved before rendering");
+            const auto resource=std::find_if(resources.begin(),resources.end(),[&](const auto& item){return item.id==node.resourceId;});
+            if(resource==resources.end())throw std::invalid_argument("Material override requires a model resource");
+            desc.resourceId=node.resourceId+"::materials::"+node.id;
+            result.resources.push_back({desc.resourceId,resource->path.u8string(),node.resolvedMaterials});
+        }
         result.nodes.push_back(std::move(desc));
     }
     std::unordered_map<std::string, std::size_t> nodeIndices;

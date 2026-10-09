@@ -78,7 +78,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     auto& session=*runOptions_.editorSession;
     if(editorAutomation_)editorAutomation_->advance(gameplayFrame_,session);
     std::string resources;for(const auto& resource:session.viewScene().resources)resources+=resource.id+resource.path.generic_string();
-    for(const auto& node:session.viewScene().nodes)resources+=node.id+":"+node.resourceId+";";
+    for(const auto& node:session.viewScene().nodes){resources+=node.id+":"+node.resourceId+";";for(const auto& [slot,binding]:node.resolvedMaterials)resources+=slot+":"+binding.path+":"+binding.fingerprint+";";}
     if(!session.playing() && resources!=editorResourceSignature_){editorResourceSignature_=resources;static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));}
     if(session.consumeRuntimeReset()){
         if(session.playing() && !editorWasPlaying_){savedEditorCamera_=cameraPosition_;savedEditorTarget_=cameraTarget_;}

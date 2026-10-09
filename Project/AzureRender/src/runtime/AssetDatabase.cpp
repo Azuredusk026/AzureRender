@@ -107,11 +107,12 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
             const auto extension=path.extension().string();Json document;
-            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript")document=Json::parse(source);
+            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial")document=Json::parse(source);
             if(extension==".azscene") {
                 document={{"resources",Json::array()}};
                 const auto scene=SceneDocument::load(path);
                 for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
+                document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
             }
             const auto& record=candidate.at(id);
             sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,meta,document,record.contentHash,record.fingerprint};
@@ -147,11 +148,12 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");add(reference);
             }
         }
-        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" || extension == ".azscene") {
+        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" || extension == ".azscene" || extension==".azurematerial") {
             const Json& document = documents.at(record.id);
             const auto walk = [&](const Json& value, auto&& self) -> void {
                 if (value.is_object()) for (const auto& field : value.items()) {
                     if ((field.key() == "asset" || field.key() == "prefab") && field.value().is_string()) add(field.value().get<std::string>());
+                    else if(field.key()=="materialSlots"&&field.value().is_object()){for(const auto& slot:field.value().items())add(slot.value().get<std::string>());}
                     else self(field.value(), self);
                 }
                 else if (value.is_array()) for (const auto& child : value) self(child, self);

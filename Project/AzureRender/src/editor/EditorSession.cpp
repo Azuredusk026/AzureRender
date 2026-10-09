@@ -73,6 +73,10 @@ std::string EditorSession::startReimport(const nlohmann::json& request) {
     if(context_->dirty()||context_->importing()||reimporting_)throw EditRejection("Reimport requires a saved idle project");
     auto parameters=request;parameters["operation"]="asset.reimport";auto plan=content().plan(parameters);
     const auto id=plan.at("asset").get<std::string>(),planId=plan.at("id").get<std::string>();
+    nlohmann::json materialMapping;
+    try{materialMapping=MaterialEditingService::reimportSlots(*context_,id);
+        if(!materialMapping.at("slotDiagnostics").empty())throw EditRejection(materialMapping.at("slotDiagnostics").dump());
+    }catch(...){content().discard(planId);throw;}
     const auto& database=content().database();std::set<std::string> visited;std::vector<AssetRecord> inputs;
     const auto collect=[&](const std::string& current,auto&& self)->void {
         if(!visited.insert(current).second)return;const auto& record=database.records().at(current);inputs.push_back(record);
@@ -81,8 +85,10 @@ std::string EditorSession::startReimport(const nlohmann::json& request) {
     auto job=std::make_shared<AssetReimportJob>(database.records().at(id),std::move(inputs),plan.at("settings"));
     const auto task=tasks_->add("asset.reimport",id,{
         [job]{return job->progress();},[job]{return job->ready();},
-        [this,job,planId] {
-            try{auto result=job->finish();reimporting_=false;result["transaction"]=applyContent(planId);return result;}
+        [this,job,planId,id,materialMapping] {
+            try{auto result=job->finish();const auto current=MaterialEditingService::reimportSlots(*context_,id);
+                if(current!=materialMapping)throw EditRejection("Source material slots changed during reimport");
+                result.update(materialMapping);reimporting_=false;result["transaction"]=applyContent(planId);return result;}
             catch(...){reimporting_=false;content().discard(planId);throw;}
         },[job]{job->cancel();}});
     reimporting_=true;return task;
@@ -204,7 +210,7 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
-        references_.cancel();content_.reset();contentDirectories_.reset();context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}

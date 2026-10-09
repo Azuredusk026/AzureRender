@@ -21,7 +21,7 @@ nlohmann::json EditorContext::documentContent() const {
     auto nodes=nlohmann::json::array(),resources=nlohmann::json::array(),lights=nlohmann::json::array();
     for(const auto& node:scene_.nodes)nodes.push_back({{"id",node.id},{"name",node.name},{"parentId",node.parentId},
         {"resourceId",node.resourceId},{"visible",node.visible},{"translation",node.translation},{"rotation",node.rotation},
-        {"scale",node.scale},{"prefabSource",node.prefabSource},{"instanceOf",node.instanceOf}});
+        {"scale",node.scale},{"prefabSource",node.prefabSource},{"instanceOf",node.instanceOf},{"materialSlots",node.materialSlots}});
     for(const auto& resource:scene_.resources)resources.push_back({{"id",resource.id},{"type",resource.type},{"path",resource.path.generic_string()}});
     for(const auto& light:scene_.lights)lights.push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},
         {"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});

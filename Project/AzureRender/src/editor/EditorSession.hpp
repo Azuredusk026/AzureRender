@@ -5,6 +5,7 @@
 #include "content/ContentDirectoryModel.hpp"
 #include "content/AssetEditorRegistry.hpp"
 #include "content/NodePresetRegistry.hpp"
+#include "material/MaterialEditingService.hpp"
 #include "properties/ReferencePickerService.hpp"
 #include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
@@ -65,6 +66,7 @@ public:
     ContentDirectoryModel& contentDirectories(){return contentDirectories_;}
     AssetEditorRegistry& assetEditors(){return assetEditors_;}
     NodePresetRegistry& nodePresets(){return nodePresets_;}
+    MaterialEditingService& materials(){return materials_;}
     nlohmann::json applyContent(const std::string& planId);
     void undoContent();
     void redoContent();
@@ -133,6 +135,7 @@ public:
     }
 
 private:
+    MaterialEditingService materials_;
     friend EditRegistry editorOperations(EditorSession&);
     bool executeInternal(EditorCommand command) noexcept;
     bool startBuildInternal(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept;

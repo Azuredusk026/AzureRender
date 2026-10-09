@@ -2,6 +2,7 @@
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
+#include "editor/preview/ThumbnailProviderRegistry.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "scenes/BuiltinRendererCatalog.hpp"
 #include "assets/GeneratorRegistry.hpp"
@@ -140,12 +141,8 @@ nlohmann::json AzureRenderApp::previewOperation(const std::string& operation,con
             id=record->first;
         }
         const auto& record=assets.records().at(id);
-        if(record.path.extension()!=".gltf" && record.path.extension()!=".glb")throw EditRejection("Asset preview requires a model");
-        auto descriptor=previewDescriptor(nlohmann::json::object());descriptor.rendererId="character";descriptor.extent={128,128};descriptor.scene={};
-        descriptor.sceneWorldCoordinates=false;
-        descriptor.scene.resources.push_back({id,record.path.u8string()});scene::SceneNodeDesc node;node.resourceId=id;descriptor.scene.nodes.push_back(node);
-        descriptor.cameraPosition={2.8F,2.1F,3.2F};descriptor.cameraTarget={0,0,0};
-        const auto handle=thumbnails_->request({id,std::to_string(record.fingerprint),"128x128-bounds-fit-camera"},descriptor);
+        const auto provided=ThumbnailProviderRegistry::builtins().describe(record,assets,runOptions_.editorSession->context().project().file.parent_path()/".azure/previews",previewDescriptor(nlohmann::json::object()));
+        const auto handle=thumbnails_->request(provided.key,provided.view);
         return {{"handle",handle},{"path",record.path.u8string()},{"view",renderViews_->describe(handle)}};
     }
     if(operation=="preview.clear"){invalidatePreviews();return true;}

@@ -58,6 +58,8 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << node.scale[2] << '\n'
                << "prefab " << std::quoted(node.prefabSource) << ' '
                << std::quoted(node.instanceOf) << '\n';
+        output<<"materialSlotCount "<<node.materialSlots.size()<<'\n';
+        for(const auto& [slot,asset]:node.materialSlots)output<<"materialSlot "<<std::quoted(slot)<<' '<<std::quoted(asset)<<'\n';
     }
     output << "lightCount " << document.lights.size() << '\n';
     for (const SceneLight& light : document.lights) {
@@ -178,6 +180,10 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                   >> std::quoted(node.instanceOf)) || key != "prefab") {
                 throw std::runtime_error("Invalid .azscene prefab instance");
             }
+        }
+        if(schemaVersion>=4){
+            std::size_t count=0;if(!(input>>key>>count)||key!="materialSlotCount"||count>256)throw std::invalid_argument("Invalid material slot count");
+            for(std::size_t slotIndex=0;slotIndex<count;++slotIndex){std::string slot,asset;if(!(input>>key>>std::quoted(slot)>>std::quoted(asset))||key!="materialSlot"||slot.empty()||asset.empty()||!node.materialSlots.emplace(slot,asset).second)throw std::invalid_argument("Invalid scene material slot");}
         }
         document.nodes.push_back(std::move(node));
     }

@@ -4,6 +4,7 @@
 #include "runtime/LevelRenderSettings.hpp"
 #include "editor/content/AssetCatalog.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
+#include "editor/preview/ThumbnailProviderRegistry.hpp"
 #include <algorithm>
 #include <fstream>
 namespace azurerender {
@@ -40,6 +41,19 @@ EditRegistry editorOperations(EditorSession& session) {
             handler(context,args);return nullptr;
         });
     };
+    registry.add({"preview.types",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json{return ThumbnailProviderRegistry::builtins().types();});
+    for(const auto* operation:{"material.types","material.create","material.describe","material.field","material.undo","material.redo","material.save"}){
+        registry.add({operation,1,schema({{"type",text},{"destination",text},{"asset",text},{"field",text},{"value",Json::object()}}),false,false,std::string(operation)!="material.types"&&std::string(operation)!="material.describe"},[&session,operation](EditorContext& context,const Json& args)->Json {
+            if(std::string(operation)=="material.types")return MaterialTypeRegistry::builtins().describe();
+            session.contentDirectories().cancelRefresh();
+            const auto result=session.materials().execute(context,session.content(),operation,args);
+            if(std::string(operation)!="material.describe"){session.assetReloadRequested_=true;session.contentDirectories().reset();}
+            return result;
+        });
+    }
+    registry.add({"material.slots",1,schema({{"node",text}},{"node"}),false,false,false},[](EditorContext& context,const Json& args)->Json{return MaterialEditingService::slots(context,args.at("node").get<std::string>());});
+    document("material.assign",schema({{"nodes",{{"type","array"},{"items",text}}},{"slotId",text},{"material",text}},{"nodes","slotId","material"}),[&session](auto& context,const auto& args){MaterialEditingService::assign(context,args.at("nodes").template get<std::vector<std::string>>(),args.at("slotId").template get<std::string>(),args.at("material").template get<std::string>());session.assetReloadRequested_=true;});
+    document("material.reset-slot",schema({{"nodes",{{"type","array"},{"items",text}}},{"slotId",text}},{"nodes","slotId"}),[&session](auto& context,const auto& args){MaterialEditingService::assign(context,args.at("nodes").template get<std::vector<std::string>>(),args.at("slotId").template get<std::string>(),{});session.assetReloadRequested_=true;});
     document("node.create",schema({{"id",text}}),[](auto& c,const auto& a) { c.createNode(a.value("id",std::string())); });
     registry.add({"node.presets",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.nodePresets().describe();});
     document("node.create-preset",schema({{"preset",text},{"id",text}},{"preset"}),[&session](auto& c,const auto& a){session.nodePresets().create(c,a.at("preset").template get<std::string>(),a.value("id",std::string()));});

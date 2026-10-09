@@ -1,0 +1,35 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 191: AzureEditor.MaterialSlotEditing
+1/1 Test #191: AzureEditor.MaterialSlotEditing ...***Failed    0.70 sec
+[1791576858293][info][editor][code=0] Opened scene: startup
+[1791576858377][info][editor][code=0] ERROR [material.create]: Material asset already exists
+[1791576858380][info][editor][code=0] ERROR [material.create]: Unknown material type: unknown
+[1791576858415][info][editor][code=0] ERROR [material.field]: Invalid material parameter: roughness
+[1791576858514][info][editor][code=0] ERROR [material.field]: Material texture must reference an image asset
+[1791576858552][info][editor][code=0] ERROR [material.field]: Invalid material texture slot or usage
+[1791576858695][info][editor][code=0] Generated asset: assets:/cube.glb
+[1791576858697][info][editor][code=0] Opened scene: startup
+[1791576858702][info][editor][code=0] Selected node: Placed Object
+[1791576858711][info][editor][code=0] Opened scene: startup
+[1791576858715][info][editor][code=0] Selected node: Placed Object
+[1791576858727][info][editor][code=0] Opened scene: startup
+[1791576858746][info][editor][code=0] Opened scene: startup
+[1791576858751][info][editor][code=0] ERROR [material.assign]: Unknown material target node
+[1791576858752][info][editor][code=0] Opened scene: startup
+[1791576858757][info][editor][code=0] ERROR [material.assign]: Unknown material source slot
+[1791576858760][info][editor][code=0] Undo
+[1791576858769][info][editor][code=0] Redo
+[1791576858772][info][editor][code=0] Opened scene: startup
+[1791576858812][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-material-edit-27664387622300\assets\startup.azscene
+[1791576858893][info][editor][code=0] Opened scene: startup
+Model reimport must report stable slot mappings
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.70 sec
+
+The following tests FAILED:
+	191 - AzureEditor.MaterialSlotEditing (Failed)
+Errors while running CTest

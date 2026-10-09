@@ -410,9 +410,9 @@ void EditorContext::restore(Snapshot restored) {
 
 bool EditorContext::undo() {
     if (undoStack_.empty()) return false;
+    auto restored=undoStack_.back();if(assets_)resolveSceneMaterials(restored.scene,*assets_);
     ++revision_;closeEditMerge();
     redoStack_.push_back(snapshot());
-    Snapshot restored = std::move(undoStack_.back());
     undoStack_.pop_back();
     restore(std::move(restored));
     log("Undo");
@@ -421,9 +421,9 @@ bool EditorContext::undo() {
 
 bool EditorContext::redo() {
     if (redoStack_.empty()) return false;
+    auto restored=redoStack_.back();if(assets_)resolveSceneMaterials(restored.scene,*assets_);
     ++revision_;closeEditMerge();
     undoStack_.push_back(snapshot());
-    Snapshot restored = std::move(redoStack_.back());
     redoStack_.pop_back();
     restore(std::move(restored));
     log("Redo");

@@ -2,6 +2,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "assets/GenerationManifest.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
+#include "runtime/MaterialDocument.hpp"
 #include <fstream>
 #include <chrono>
 #include <iomanip>
@@ -38,7 +39,7 @@ std::string uuid() {
     for(int i=0;i<16;++i){if(i==4||i==6||i==8||i==10)out<<'-';unsigned value=random()&255;if(i==6)value=(value&15)|64;if(i==8)value=(value&63)|128;out<<std::setw(2)<<value;}return out.str();
 }
 bool jsonFile(const fs::path& path) {
-    static const std::set<std::string> extensions{".gltf",".azurelevel",".azureprefab",".azscript",".json",".azmeta",".azureproject"};return extensions.count(path.extension().u8string())!=0;
+    static const std::set<std::string> extensions{".gltf",".azurelevel",".azureprefab",".azscript",".json",".azmeta",".azureproject",".azurematerial"};return extensions.count(path.extension().u8string())!=0;
 }
 void rewrite(Json& value,const std::map<std::string,std::string>& map) {
     if(value.is_string()){const auto found=map.find(value.get<std::string>());if(found!=map.end())value=found->second;}
@@ -101,7 +102,15 @@ nlohmann::json ContentOperationService::plan(const nlohmann::json& request) {
         value.changes.push_back({path,fs::exists(path)?std::optional<std::string>(read(path)):std::nullopt,std::move(after)});
         value.description["affected"].push_back(path.lexically_relative(project_.file.parent_path()).generic_u8string());
     };
-    if(operation=="content.create-directory") {
+    if(operation=="material.write") {
+        const auto path=writable(request.at("destination").get<std::string>());
+        if(path.extension()!=".azurematerial"||!fs::is_directory(path.parent_path()))throw std::invalid_argument("Material destination requires an existing project directory and .azurematerial extension");
+        if(request.value("create",false)&&fs::exists(path))throw std::invalid_argument("Material asset already exists");
+        const auto document=MaterialDocument::parse(request.at("document"));
+        for(const auto& texture:document.textures.items())if(!assetTypeRegistry().matches(database_.resolve(texture.value().at("asset").get<std::string>()),{"image"}))throw std::invalid_argument("Material texture requires an image asset");
+        change(path,document.encode().dump(2)+"\n");
+        if(!fs::exists(path)){const auto id=uuid();change(fs::u8path(path.u8string()+".azmeta"),Json{{"schemaVersion",1},{"id",id},{"settings",Json::object()}}.dump(2));value.description["asset"]=id;}
+    }else if(operation=="content.create-directory") {
         const auto name=request.at("name").get<std::string>();if(name.empty()||name=="."||name==".."||name.find_first_of("/\\:")!=std::string::npos)throw std::invalid_argument("Invalid content directory name");
         const auto parent=writable(request.at("parent").get<std::string>());if(!fs::is_directory(parent)||!writableFile(parent))throw std::invalid_argument("Content parent is not writable");
         value.directory=parent/fs::u8path(name);if(fs::exists(*value.directory))throw std::invalid_argument("Content directory already exists");

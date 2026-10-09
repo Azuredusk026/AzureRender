@@ -57,6 +57,8 @@ nav:
   - 着色模块与共享类型: runtime/shader-modules.md
   - 着色模块对照教程: tutorials/shader-modules.md
   - 架构调研:
+      - 材质参数与槽位制作: runtime/material-authoring.md
+      - U11 材质制作验收: acceptance/u11/2026-10-10.md
       - 内容导航与基础创建: runtime/content-navigation.md
       - U10 内容导航验收: acceptance/u10/2026-10-10.md
       - G12 内容制作验收: acceptance/g12/2026-10-10.md

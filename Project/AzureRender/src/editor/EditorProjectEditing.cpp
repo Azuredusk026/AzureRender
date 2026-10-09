@@ -249,6 +249,7 @@ nlohmann::json EditorContext::levelDocument()const{
     const auto data=runtimeComponents();std::set<std::string> prefabResources,liveInstances;
     for(const auto& node:scene_.nodes){
         nlohmann::json encoded={{"id",node.id},{"name",node.name},{"parentId",node.parentId},{"resourceId",node.resourceId},{"components",data.at(node.id)}};
+        if(!node.materialSlots.empty())encoded["materialSlots"]=node.materialSlots;
         if(!node.prefabSource.empty()&&!node.instanceOf.empty()){
             const auto prefix=node.id.substr(0,node.id.find(':'));liveInstances.insert(prefix);prefabResources.insert(node.resourceId);
             bool found=false;for(auto& instance:document["prefabs"])if(instance.at("instance")==prefix){

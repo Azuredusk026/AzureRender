@@ -1,4 +1,5 @@
 #include "Project.hpp"
+#include "MaterialDocument.hpp"
 #include "runtime/Level.hpp"
 
 #include <fstream>
@@ -161,6 +162,9 @@ SceneDocument Project::loadStartupScene() const {
         }
         if (!std::filesystem::is_regular_file(resource.path))
             throw std::runtime_error("Scene resource missing: " + resource.path.string());
+    }
+    if(std::any_of(scene.nodes.begin(),scene.nodes.end(),[](const auto& node){return !node.materialSlots.empty();})){
+        AssetDatabase assets(*this);assets.refresh();resolveSceneMaterials(scene,assets);
     }
     return scene;
 }

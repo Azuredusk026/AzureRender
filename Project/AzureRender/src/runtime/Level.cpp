@@ -2,6 +2,7 @@
 #include "runtime/LevelRenderSettings.hpp"
 #include "runtime/Prefab.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/MaterialDocument.hpp"
 #include <fstream>
 #include <chrono>
 #include <atomic>
@@ -37,6 +38,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
         SceneNode node; node.id = source.at("id").get<std::string>(); node.name = source.value("name", node.id);
         node.parentId = source.value("parentId", ""); node.resourceId = source.value("resourceId", "");
         node.prefabSource = source.value("prefabSource", ""); node.instanceOf = source.value("instanceOf", "");
+        node.materialSlots=source.value("materialSlots",std::map<std::string,std::string>{});
         if (!node.resourceId.empty() && !resources.count(node.resourceId)) throw std::runtime_error("Node references unknown resource");
         node.visible = !node.resourceId.empty();
         auto data = source.value("components", nlohmann::json::object()); validateComponents(data);
@@ -64,6 +66,8 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) 
         level.resourceKey+=resource.path.generic_string()+":";
         for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
     }
+    resolveSceneMaterials(level.scene,assets);
+    for(const auto& node:level.scene.nodes)for(const auto& [slot,binding]:node.resolvedMaterials){level.resourceKey+=slot+":"+binding.path+":"+binding.fingerprint;level.reloadKey_+=slot+":"+binding.fingerprint;}
     RuntimeLifecycle validation; validation.loadScene(level.scene);
     return level;
 }

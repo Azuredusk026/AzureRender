@@ -170,6 +170,11 @@ void loadMaterialProfile(
     const tinygltf::Material& material,
     AssetMaterial& result) {
     result.name = material.name.empty() ? "UnnamedMaterial" : material.name;
+    if(material.extras.IsObject()&&material.extras.Has("azureSlotId")){
+        const auto& identity=material.extras.Get("azureSlotId");
+        if(!identity.IsString()||identity.Get<std::string>().empty())throw std::invalid_argument("azureSlotId requires a nonempty string");
+        result.slotId=identity.Get<std::string>();
+    }
     result.materialClass = inferLegacyMaterialClass(result.name);
     result.materialFeatures = defaultMaterialFeatures(result.materialClass);
     if (isBrowMaterialName(result.name)) {
@@ -2027,4 +2032,18 @@ AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, c
 void sampleAnimation(const LoadedAsset& asset, std::size_t animationIndex, float time,
                      std::vector<std::array<float,16>>& jointMatrices) {
     jointMatrices = sampleAnimationPose(asset, animationIndex, time).jointMatrices;
+}
+
+AssetImage loadAssetImage(const std::string& path){
+    std::ifstream input(std::filesystem::u8path(path),std::ios::binary|std::ios::ate);
+    if(!input)throw std::runtime_error("Cannot open material image: "+path);
+    const auto size=input.tellg();if(size<=0||size>64*1024*1024)throw std::invalid_argument("Image source exceeds the 64 MiB budget");
+    std::vector<unsigned char> bytes(static_cast<std::size_t>(size));input.seekg(0);input.read(reinterpret_cast<char*>(bytes.data()),static_cast<std::streamsize>(size));
+    if(!input)throw std::runtime_error("Cannot read complete material image");
+    int width=0,height=0,channels=0;
+    if(!stbi_info_from_memory(bytes.data(),static_cast<int>(bytes.size()),&width,&height,&channels)||width<1||height<1||width>8192||height>8192)throw std::invalid_argument("Unsupported image or image dimensions exceed 8192");
+    auto* pixels=stbi_load_from_memory(bytes.data(),static_cast<int>(bytes.size()),&width,&height,&channels,4);
+    if(!pixels)throw std::runtime_error("Cannot decode material image");
+    AssetImage result;result.width=static_cast<std::uint32_t>(width);result.height=static_cast<std::uint32_t>(height);
+    try{result.pixels.assign(pixels,pixels+static_cast<std::size_t>(width)*height*4);}catch(...){stbi_image_free(pixels);throw;}stbi_image_free(pixels);return result;
 }

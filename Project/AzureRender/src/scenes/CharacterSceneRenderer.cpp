@@ -1,5 +1,6 @@
 #include "assets/AssetDeformation.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "assets/MaterialData.hpp"
 #include "render/ResourceAccessProfile.hpp"
 #include "render/ResourceIndexTable.hpp"
 
@@ -352,6 +353,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     animationPlaying_ = true;
 
     const scene::ResourceLayout layout(scene_);
+    applyMaterialBindings(asset_,layout.materials.at(0));
     jointBounds_.clear();jointBounds_.push_back(JointBounds::build(asset_));
     loadJobs_.push_back([this]{createVertexBuffer();});
     const auto materials=[this](const LoadedAsset& mesh,std::vector<GpuMaterial>& gpu){
@@ -367,6 +369,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         auto resource=std::make_unique<AdditionalResource>();resource->path=layout.paths[key];
         resource->asset=context.preparedMeshes && context.preparedMeshes->count(resource->path)
             ? *context.preparedMeshes->at(resource->path):loadGltfAsset(resource->path);
+        applyMaterialBindings(resource->asset,layout.materials.at(key));
         resource->textureBase=textureBase;resource->globalMaterialBase=materialBase;
         textureBase+=kMaterialTextureSlots*static_cast<std::uint32_t>(resource->asset.materials.size());materialBase+=resource->asset.materials.size();
         auto* item=resource.get();jointBounds_.push_back(JointBounds::build(item->asset));
@@ -411,7 +414,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     return loadJobs_.empty();
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
-    if(scene::ResourceLayout(scene_).paths!=scene::ResourceLayout(context.scene).paths)return false;
+    if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
 }
 
@@ -1637,6 +1640,7 @@ void CharacterSceneRenderer::createAdditionalResources() {
         auto resource = std::make_unique<AdditionalResource>();
         resource->path = layout.paths[index];
         resource->asset = loadGltfAsset(resource->path);
+        applyMaterialBindings(resource->asset,layout.materials.at(index));
         createMeshBuffers(
             resource->asset, resource->vertexBuffer, resource->indexBuffer);
         uploadMaterialTextures(resource->asset, resource->gpuMaterials);

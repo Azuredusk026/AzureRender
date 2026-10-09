@@ -1,6 +1,7 @@
 #pragma once
 
 #include "render/RenderSettings.hpp"
+#include "assets/MaterialBinding.hpp"
 
 #include <cstdint>
 #include <array>
@@ -29,6 +30,8 @@ struct SceneNode {
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
     std::string prefabSource;
     std::string instanceOf;
+    std::map<std::string,std::string> materialSlots;
+    std::map<std::string,MaterialBinding> resolvedMaterials;
 };
 
 // Point light attached to a scene node. The node supplies world placement;
@@ -43,7 +46,7 @@ struct SceneLight {
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 3;
+    static constexpr std::uint32_t kSchemaVersion = 4;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;

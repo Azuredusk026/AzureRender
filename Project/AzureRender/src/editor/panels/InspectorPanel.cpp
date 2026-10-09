@@ -32,6 +32,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
     const auto selected=view.selectedNode()?std::optional<SceneNode>(*view.selectedNode()):std::nullopt;
     if (selected) {
         const auto* node=&*selected;
+        drawMaterialSlots(*node);
         ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());

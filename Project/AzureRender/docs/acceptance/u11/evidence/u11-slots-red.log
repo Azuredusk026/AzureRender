@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 191: AzureEditor.MaterialSlotEditing
+1/1 Test #191: AzureEditor.MaterialSlotEditing ...***Failed    0.12 sec
+[1791574986756][info][editor][code=0] Opened scene: startup
+[1791574986765][info][editor][code=0] ERROR [material.create]: Unknown operation: material.create
+material.create: [{"code":"RejectedOperation","message":"Unknown operation: material.create"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.14 sec
+
+The following tests FAILED:
+	191 - AzureEditor.MaterialSlotEditing (Failed)
+Errors while running CTest

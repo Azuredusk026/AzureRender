@@ -1,0 +1,10 @@
+{
+  "stage": "U11",
+  "passed": true,
+  "releasePackage": true,
+  "relocated": true,
+  "isolatedPath": true,
+  "frames": 60,
+  "files": 221,
+  "physicalKeyboardMouse": "not performed"
+}

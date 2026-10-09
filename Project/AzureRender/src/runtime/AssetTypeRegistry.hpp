@@ -36,6 +36,7 @@ inline AssetTypeRegistry& assetTypeRegistry() {
         value.add({"animation","Animation graphs / JSON",{".json"}});value.add({"audio","Audio",{".wav"}});
         value.add({"ui","UI documents",{".rml"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
         value.add({"image","Images",{".png",".jpg",".jpeg",".ppm",".hdr"}});value.add({"font","Fonts",{".ttf",".otf"}});
+        value.add({"material","Materials",{".azurematerial"}});
         value.add({"shader","Shaders",{".azshader",".slang",".glsl",".spv"}});value.add({"text","Text",{".txt",".md"}});
         return value;}();return registry;
 }

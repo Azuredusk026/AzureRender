@@ -4,6 +4,7 @@
 #include "ecs/Components.hpp"
 #include "ecs/World.hpp"
 #include "runtime/AssetDatabase.hpp"
+#include "runtime/MaterialDocument.hpp"
 #include "runtime/Level.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "editor/commands/DocumentVersion.hpp"
@@ -121,6 +122,7 @@ public:
     std::size_t redoCount() const noexcept { return redoStack_.size(); }
     void closeEditMerge() noexcept { mergeKey_.clear(); }
     void notifyAssetVersionChanged() { ++revision_;closeEditMerge();clearAnimationPreview(); }
+    void refreshMaterialBindings(){resolveSceneMaterials(scene_,assets());}
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();
 

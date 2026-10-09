@@ -10,6 +10,7 @@
 #include <filesystem>
 
 #include "scene/TransformMath.hpp"
+#include "assets/MaterialBinding.hpp"
 
 namespace azurerender::scene {
 
@@ -19,6 +20,7 @@ namespace azurerender::scene {
 struct SceneResourceDesc {
     std::string id;
     std::string path;
+    std::map<std::string,MaterialBinding> materials;
 };
 
 // One placed occurrence. Nodes sharing a resourceId instance the same mesh
@@ -54,13 +56,17 @@ struct SceneDescription {
 
 struct ResourceLayout {
     std::vector<std::string> paths;
+    std::vector<std::string> keys;
+    std::vector<std::map<std::string,MaterialBinding>> materials;
     std::unordered_map<std::string,std::size_t> identities;
     explicit ResourceLayout(const SceneDescription& scene) {
         for(const auto& resource:scene.resources){
             const auto path=std::filesystem::path(resource.path).lexically_normal().generic_string();
-            auto found=std::find(paths.begin(),paths.end(),path);
-            const auto index=static_cast<std::size_t>(found-paths.begin());
-            if(found==paths.end())paths.push_back(path);
+            auto key=path;
+            for(const auto& [slot,binding]:resource.materials)key+="|"+std::to_string(slot.size())+":"+slot+":"+binding.path+":"+binding.fingerprint;
+            auto found=std::find(keys.begin(),keys.end(),key);
+            const auto index=static_cast<std::size_t>(found-keys.begin());
+            if(found==keys.end()){paths.push_back(path);keys.push_back(key);materials.push_back(resource.materials);}
             identities.emplace(resource.id,index);
         }
     }

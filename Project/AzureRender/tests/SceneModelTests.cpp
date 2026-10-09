@@ -122,7 +122,7 @@ int main() {
                 std::istreambuf_iterator<char>());
             assert(contents.find("renderSettingsVersion 9")
                 != std::string::npos);
-            assert(contents.find("schemaVersion 3") != std::string::npos);
+            assert(contents.find("schemaVersion "+std::to_string(azurerender::SceneDocument::kSchemaVersion)) != std::string::npos);
             assert(contents.find("lightCount 1") != std::string::npos);
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);

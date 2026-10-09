@@ -1,0 +1,121 @@
+{
+  "stage": "U11",
+  "files": [
+    {
+      "file": "assign-slots-runtime.json",
+      "sha256": "72ab4fa7b28dbb60c44f138dc20d3d47cb725f4b99eb9b8db58129991a565170"
+    },
+    {
+      "file": "assign-slots-ui-input.json",
+      "sha256": "26fac1c14637fc7c4afba49354200913ad69f27f742bb39295638731ee957972"
+    },
+    {
+      "file": "create-pbr-ui-input.json",
+      "sha256": "9e4854e5b048f63aec99cab8d4deff287b3c42667b8c7a94e8fc29f5d59519e0"
+    },
+    {
+      "file": "create-style-ui-input.json",
+      "sha256": "dd0fea36bb3556f42f7cc514e35fa04689163165daa73f2def028434f896f635"
+    },
+    {
+      "file": "material-form.png",
+      "sha256": "63f7b72ffc85f2334d2b440052a0f2b92a6ce4ef5d1ef192e7c7ad7bc40c9768"
+    },
+    {
+      "file": "relocated-player-runtime.json",
+      "sha256": "9910a9eacf7856d5c04bfde214a2422112621f6530044e9674412b39cc3e56d9"
+    },
+    {
+      "file": "slot-overrides.png",
+      "sha256": "9d89472b997e523c32997c8f01e069c4f574d0f13757731d1111e06c6e310ea7"
+    },
+    {
+      "file": "small-form.png",
+      "sha256": "62c37bf63f1adde3330830be07bad301a90e2b97134bd33e9852526454dd02df"
+    },
+    {
+      "file": "source-player-runtime.json",
+      "sha256": "c89144fd56a0515f5861f136115d6aea958d12ceadfc014d1bb27c23d527e489"
+    },
+    {
+      "file": "summary.json",
+      "sha256": "89b3b6a167b38212a9f8abbeed4d6eb41c5590b6d2a331b340951c4578e640d7"
+    },
+    {
+      "file": "u11-authoring-red.log",
+      "sha256": "f7817d374fa63be948420e1df89f047f17edcdaa17766e2254d3ec9386459810"
+    },
+    {
+      "file": "u11-cpu-final-verified.log",
+      "sha256": "3bf38d5bef09ed7fc43ca1c39371ced1188b32d19cb4f81429ae0a5e48071541"
+    },
+    {
+      "file": "u11-cpu-verified.log",
+      "sha256": "2908721598f72bf19b79ea66ba846bebbf6608e37e08a93ab40c0e3a5a868e17"
+    },
+    {
+      "file": "u11-docs-site.log",
+      "sha256": "a7c704aedcba2e6a4fc9419c3a5ecef649fe7d5b2163097f1ca365bc666d3a87"
+    },
+    {
+      "file": "u11-final-build.log",
+      "sha256": "e450e77d6fc33a7d7e136dfbbf11d00531fa8d6cb664c5e7f275e0760a7cfafa"
+    },
+    {
+      "file": "u11-gpu-final.log",
+      "sha256": "05a65752174cbf95a674c06fc857ecdf5727f64fee8a0ecdb51806640819871a"
+    },
+    {
+      "file": "u11-gpu-regressions.log",
+      "sha256": "a8f1ac87439a8ff2366348a4ee50196aa9a807a1eee04e1cb7ac22c2b2d2ed93"
+    },
+    {
+      "file": "u11-install.log",
+      "sha256": "bc4aeaaea54487054b1f2cb6dea6c6a96b8d6d1072612263d9882867a00801c8"
+    },
+    {
+      "file": "u11-mapping-green.log",
+      "sha256": "41ba75a6bb5d65b905c916eafb904b08ad4a253adc25d773199ced8fe9135f02"
+    },
+    {
+      "file": "u11-package-player.log",
+      "sha256": "61584e7e3b36677b29edc507f42158077462dda23dd88af28d78c3b3fc7149bd"
+    },
+    {
+      "file": "u11-package-receipt.json",
+      "sha256": "a5c12b7143ce74bd025c4daa6143d92bece6d9554abce365a40a4bc14acac969"
+    },
+    {
+      "file": "u11-package-runtime.json",
+      "sha256": "cd8ac72d065c62018e0228638df75e8e8832ccff9a261f34b70fe10352782dc1"
+    },
+    {
+      "file": "u11-package.log",
+      "sha256": "5612648c4167c01913d7a57d0389cbbe927acd6c522d950bf3b0a9fb625fae0f"
+    },
+    {
+      "file": "u11-reimport-red.log",
+      "sha256": "46371f2fa826caf14cab41b0870bc4de61c464b482964b35cae4cf245871382e"
+    },
+    {
+      "file": "u11-release-final-build.log",
+      "sha256": "5772c1f5e40354971acb71c54afcefadb109350af4355d6d73945226d04d7148"
+    },
+    {
+      "file": "u11-slots-red.log",
+      "sha256": "7b62ba7049f70a9cdf363c9edebcc5b88a9308baecdb1b901129fabd54b933f9"
+    },
+    {
+      "file": "u11-small-form.json",
+      "sha256": "b6e27c29ea5a12842aa545a2e85b938163f3b059dbb269095f1a61d058961763"
+    },
+    {
+      "file": "u11-texture-settings-green.log",
+      "sha256": "b7cefc79443d13c8e487c4d69b671df402e0a5b2a1f7120cfbaefe8a8fca6d21"
+    },
+    {
+      "file": "u11-texture-settings-red.log",
+      "sha256": "40ee73a65e5060a10aee5989f626e470255650728c3d7fbcf1d3640a51b591dd"
+    }
+  ]
+}

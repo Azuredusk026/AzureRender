@@ -126,6 +126,20 @@ Reject 保留当前制作内容，Cancel 结束请求。
 
 ## 构建独立游戏
 
+制作材质时，在内容浏览器打开 `Import / Create`。
+点击 `Create material`，填写名称并选择类型。
+PBR 和 Stylized 共用参数与贴图表单。
+合法字段编辑立即发布到独立资产。
+
+选择模型对象，在属性中展开 `Materials`。
+为每个源槽位选择材质，或拖入材质资产。
+点击 `Reset slot` 恢复该槽位的源材质。
+保存场景后，Player 与发布包读取同一覆盖。
+
+材质球预览使用实际参数与关联贴图。
+材质表单的撤销与场景撤销各自独立。
+源槽位身份和接口见[材质制作](../runtime/material-authoring.md)。
+
 停止运行后点击工具栏 Build。Release engine directory 填写安装树根目录。Game output directory 填写独立输出目录。点击 Build Windows game，查看结果与耗时。
 
 ![游戏构建面板](images/build.png)

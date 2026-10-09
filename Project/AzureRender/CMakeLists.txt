@@ -296,6 +296,7 @@ target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
+    src/assets/MaterialData.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
@@ -333,6 +334,7 @@ add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTI
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/runtime/MaterialDocument.cpp
     src/runtime/ScriptRuntimeRegistry.cpp
     src/runtime/EngineSettings.cpp
     src/runtime/ObservationRegistry.cpp
@@ -438,7 +440,10 @@ add_library(AzureEditor STATIC
     src/editor/EditorProjectEditing.cpp
     src/editor/EditorHierarchyEditing.cpp
     src/editor/content/ContentOperationService.cpp
+    src/editor/material/MaterialEditingService.cpp
+    src/editor/preview/ThumbnailProviderRegistry.cpp
     src/editor/panels/TextureAssetPanel.cpp
+    src/editor/panels/MaterialAssetPanel.cpp
     src/editor/content/AssetCatalog.cpp
     src/editor/content/ContentDirectoryModel.cpp
     src/editor/content/AssetEditorRegistry.cpp
@@ -1087,6 +1092,7 @@ if(BUILD_TESTING)
         COMMAND AzureRenderNullRhiTests)
     add_executable(
         AzureRenderNullRhiPassTests
+        src/assets/MaterialData.cpp
         tests/NullRhiPassTests.cpp
         src/scenes/BlackholeSceneRenderer.cpp
         src/render/ComputePass.cpp
@@ -1758,4 +1764,13 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEditor.ContentDirectoryScale PROPERTIES TIMEOUT 180)
     add_test(NAME AzureEditor.ContentNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/content-navigation-ui-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.ContentNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureMaterialSlotEditingTests tests/MaterialSlotEditingTests.cpp)
+    target_link_libraries(AzureMaterialSlotEditingTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.MaterialSlotEditing COMMAND AzureMaterialSlotEditingTests)
+    add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
+    target_link_libraries(AzureMaterialDocumentTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.MaterialDocument COMMAND AzureMaterialDocumentTests)
 endif()

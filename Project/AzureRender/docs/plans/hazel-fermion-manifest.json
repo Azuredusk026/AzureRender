@@ -201,8 +201,9 @@
       "phase": "U11",
       "proposal": "材质类型声明参数与贴图槽。先交付表单编辑、保存和实例覆盖。",
       "acceptance": "PBR 与风格材质各完成创建、赋值、撤销、重开和 Player 发布。",
-      "status": "Planned",
-      "sourceSha256": "383487162172ab00246c00b865060e3f913ae6a613881b480ef02f65a1e30fe8"
+      "status": "Complete",
+      "sourceSha256": "383487162172ab00246c00b865060e3f913ae6a613881b480ef02f65a1e30fe8",
+      "evidence": "docs/acceptance/u11/2026-10-10.md"
     },
     {
       "id": "A10",
@@ -220,8 +221,9 @@
       "phase": "U11",
       "proposal": "使用稳定槽位标识保存覆盖。支持揭示、重置和批量赋值。",
       "acceptance": "多材质模型与实例分别保存。源槽变化有冲突报告，其他实例保持自身设置。",
-      "status": "Planned",
-      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+      "status": "Complete",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1",
+      "evidence": "docs/acceptance/u11/2026-10-10.md"
     },
     {
       "id": "A11",
@@ -239,8 +241,9 @@
       "phase": "U11",
       "proposal": "注册模型、图片、材质预览提供者。缓存键含依赖指纹与设置。",
       "acceptance": "修改贴图更新关联材质预览。容量、失效、关面板与切项目均正确。",
-      "status": "Planned",
-      "sourceSha256": "5601bd8c5652c05e28ca6f1af6909dbe99993f5a4d2b48c97c84813c847dc3ed"
+      "status": "Complete",
+      "sourceSha256": "5601bd8c5652c05e28ca6f1af6909dbe99993f5a4d2b48c97c84813c847dc3ed",
+      "evidence": "docs/acceptance/u11/2026-10-10.md"
     },
     {
       "id": "A12",
@@ -750,14 +753,14 @@
       "evidence": [
         "docs/acceptance/u10/2026-10-10.md"
       ],
-      "commit": null,
+      "commit": "6dba6383883004672c3adf4bb585f52fdea8c6c2",
       "dependsOn": [
         "G12"
       ]
     },
     {
       "id": "U11",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A09",
@@ -768,11 +771,14 @@
       "commit": null,
       "dependsOn": [
         "U10"
+      ],
+      "verification": [
+        "docs/acceptance/u11/2026-10-10.md"
       ]
     },
     {
       "id": "U12",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "B01",
@@ -1047,7 +1053,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package"
   },
   "execution": {
     "order": [
@@ -1063,12 +1069,13 @@
       "G16",
       "P5"
     ],
-    "active": "U11",
+    "active": "U12",
     "completed": [
       "U8",
       "U9",
       "G12",
-      "U10"
+      "U10",
+      "U11"
     ]
   }
 }

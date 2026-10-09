@@ -84,6 +84,7 @@ struct AssetMaterial {
         return result;
     }();
     std::string name = "FallbackMaterial";
+    std::string slotId;
     AssetMaterialClass materialClass = AssetMaterialClass::Generic;
     std::uint32_t materialFeatures = MaterialFeatureNeutralFallback;
     std::uint32_t materialProfileVersion = 1;
@@ -193,6 +194,8 @@ struct LoadedAsset {
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
+struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;};
+[[nodiscard]] AssetImage loadAssetImage(const std::string& path);
 // Candidate validation consumes embedded data without filesystem access.
 [[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);

@@ -88,6 +88,17 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
         if(ui::button("Create directory")){contentOperation_="content.create-directory";contentRequest_={{"parent",(assetMount_.empty()?"assets":assetMount_)+":/"+assetDirectory_}};contentValue_="New Folder";contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
         observeWidget("content.create-directory");
+        if(ImGui::BeginMenu("Create material")){
+            ui::inputText("Name",materialName_);observeWidget("material.create-name");
+            for(const auto& type:MaterialTypeRegistry::builtins().describe()){
+                const auto id=type.at("id").get<std::string>();
+                if(ImGui::MenuItem(type.at("label").get<std::string>().c_str())){
+                    const auto destination=(assetMount_.empty()?"assets:/":assetMount_+":/")+(assetDirectory_.empty()?"":assetDirectory_+"/")+materialName_;
+                    const auto created=session_->edit("material.create",{{"type",id},{"destination",destination}});
+                    if(created){materialAsset_=created.value.at("asset").get<std::string>();const auto opened=session_->edit("material.describe",{{"asset",materialAsset_}});if(opened){materialSnapshot_=opened.value;materialDialogRequested_=true;}}
+                }observeWidget("material.create."+id);
+            }ImGui::EndMenu();
+        }observeWidget("assets.create-material");
         if(ImGui::BeginMenu("Create object")){
             for(const auto& preset:session_->nodePresets().describe()){
                 const auto id=preset.at("id").get<std::string>();if(ImGui::MenuItem(preset.at("label").get<std::string>().c_str()))session_->edit("node.create-preset",{{"preset",id}});observeWidget("preset."+id);
@@ -158,7 +169,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             visibleAssets_.push_back(row);ImGui::PushID(id.c_str());
             if(renderGrid)ImGui::TableNextColumn();else{ImGui::TableNextRow();ImGui::TableSetColumnIndex(0);}
             bool thumbnailDrawn=false;
-            if(renderGrid&&type=="model"&&requestedPreviews<2&&ImGui::IsRectVisible({thumbnailSize,thumbnailSize})&&session_->developerServices().image){
+            if(renderGrid&&(type=="model"||type=="material"||type=="image")&&requestedPreviews<2&&ImGui::IsRectVisible({thumbnailSize,thumbnailSize})&&session_->developerServices().image){
                 ++requestedPreviews;const auto result=session_->edit("preview.asset",{{"asset",id}});
                 if(result&&result.value.contains("handle"))if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>())){ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{thumbnailSize,thumbnailSize});thumbnailDrawn=true;}
             }
@@ -172,6 +183,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                     if(opened){const auto operation=opened.value.at("operation").get<std::string>();
                         const auto result=session_->edit(operation,operation=="texture.describe"?nlohmann::json{{"assets",nlohmann::json::array({id})}}:nlohmann::json{{"asset",id}});
                         if(result){if(operation=="texture.describe"){textureSnapshot_=result.value;textureFields_.clear();textureDialogRequested_=true;}
+                        else if(operation=="material.describe"){materialAsset_=id;materialSnapshot_=result.value;materialDialogRequested_=true;}
                         else if(result.value.contains("handle")){assetPreviewHandle_=result.value.at("handle").get<std::uint64_t>();assetPreviewTitle_=label;assetPreviewRequested_=true;}
                         else {dependencySnapshot_=result.value;dependencyDialogRequested_=true;}}
                     }
@@ -222,7 +234,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         }}ImGui::EndTable();
     }
     if(visibleAssets_.empty())ImGui::TextWrapped("No assets match the directory, search and type filters.");
-    ImGui::EndChild();drawTextureAssetPanel();
+    ImGui::EndChild();drawTextureAssetPanel();drawMaterialAssetPanel();
     if(assetPreviewRequested_){ImGui::OpenPopup("Asset preview");assetPreviewRequested_=false;}
     if(ImGui::BeginPopupModal("Asset preview",nullptr,ImGuiWindowFlags_AlwaysAutoResize)){
         ImGui::TextUnformatted(assetPreviewTitle_.c_str());

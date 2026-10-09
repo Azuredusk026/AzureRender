@@ -90,6 +90,8 @@ private:
     void drawInspectorPanel(PanelContext& context);
     void drawAssetBrowserPanel(PanelContext& context);
     void drawTextureAssetPanel();
+    void drawMaterialAssetPanel();
+    void drawMaterialSlots(const SceneNode&);
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);
     void drawBuildPanel(PanelContext& context);
@@ -163,6 +165,9 @@ private:
     std::string assetPreviewTitle_;
     bool assetPreviewRequested_=false;
     std::string primitiveKind_="cube",primitiveName_="Primitive.glb";
+    std::string materialName_="Material.azurematerial",materialAsset_;
+    bool materialDialogRequested_=false;
+    nlohmann::json materialSnapshot_;
     std::array<float,3> primitiveSize_{1,1,1};
     int primitiveSegments_=12;
     std::set<std::string> selectedAssets_,textureFields_;
