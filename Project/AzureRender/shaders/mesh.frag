@@ -5,6 +5,7 @@
 #extension GL_EXT_nonuniform_qualifier : require
 #endif
 #include "shadow_compare.glsl"
+#include "surface_response.glsl"
 
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
@@ -166,17 +167,21 @@ vec3 sampleToonRamp(float coordinate) {
     return texture(AZ_TEX_TOON_RAMP, uv).rgb;
 }
 
-float rawShadowDepth(ivec2 pixel, ivec2 lo, ivec2 hi) {
-    return texelFetch(AZ_TEX_SHADOW, clamp(pixel,lo,hi),0).r;
+vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradient) {
+    vec2 first=(vec2(clamp(base,lo,hi))+.5)/extent;
+    vec2 last=(vec2(clamp(base+ivec2(1),lo,hi))+.5)/extent;
+    vec4 x=vec4(first.x,last.x,first.x,last.x)-uv.x;
+    vec4 y=vec4(first.y,first.y,last.y,last.y)-uv.y;
+    return x*gradient.x+y*gradient.y;
 }
-float filteredShadow(vec2 uv,float receiver,ivec2 lo,ivec2 hi,vec2 depthGradient) {
-    vec2 pixel=uv*vec2(textureSize(AZ_TEX_SHADOW,0))-.5;
-    ivec2 base=ivec2(floor(pixel));vec2 w=fract(pixel);
-    vec4 depths=vec4(rawShadowDepth(base,lo,hi),rawShadowDepth(base+ivec2(1,0),lo,hi),
-        rawShadowDepth(base+ivec2(0,1),lo,hi),rawShadowDepth(base+ivec2(1,1),lo,hi));
-    return compareShadowDepths(depths,receiver,w,depthGradient/vec2(textureSize(AZ_TEX_SHADOW,0)));
+vec2 filteredShadowBlockers(vec2 uv,float receiver,ivec2 lo,ivec2 hi,vec2 depthGradient) {
+    vec2 extent=vec2(textureSize(AZ_TEX_SHADOW,0));
+    vec2 point=uv*extent-.5;ivec2 base=ivec2(floor(point));vec2 weight=fract(point);
+    vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base,lo,hi);
+    depths-=shadowPlaneQuad(base,lo,hi,uv,extent,depthGradient);
+    return shadowBlockerMoments(depths,receiver,weight);
 }
-float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient) {
+float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,float normalCurvature) {
     vec3 p=shadowPositions[cascade].xyz/shadowPositions[cascade].w;
     vec2 localUv=p.xy*.5+.5;
     if(p.z<=0||p.z>=1||any(lessThan(localUv,vec2(0)))||any(greaterThan(localUv,vec2(1))))return 1.0;
@@ -184,31 +189,44 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient) {
     ivec2 lo=origin+ivec2(1),hi=origin+tile-ivec2(2);
     vec2 uv=(vec2(origin)+localUv*vec2(tile))/vec2(extent);
     float depthRange=camera.cascadeDepthRanges[cascade];
-    float receiver=p.z-max(.003*(1.0-normalDotLight),.001)/depthRange;
-    float sum=0,blockers=0;
-    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
-        ivec2 pixel=clamp(ivec2(uv*vec2(extent))+ivec2(x,y),lo,hi);
-        float d=rawShadowDepth(pixel,lo,hi)-dot(depthGradient,(vec2(pixel)+.5)/vec2(extent)-uv);
-        if(d<receiver){sum+=d;blockers+=1.0;}
-    }
-    float separation=blockers>0?max(receiver-sum/blockers,0)*depthRange:0;
     float worldTexel=depthRange/4.1*2.0/float(tile.x);
     float maximumRadius=clamp(camera.renderingParameters.w,1.0,16.0);
-    // A 5x5 contact kernel spans two texels; half-texel tap spacing cannot
-    // cover that footprint. Preserve the authored maximum for small budgets.
-    float contactRadius=min(2.0,maximumRadius);
-    float radius=clamp(contactRadius+separation*.035/max(worldTexel,1e-6),contactRadius,maximumRadius);
-    float visible=0;
+    depthGradient*=shadowReceiverPlaneWeight(normalCurvature,worldTexel*maximumRadius);
+    float receiver=p.z-shadowReceiverBias(normalDotLight,worldTexel)/depthRange;
+    float sum=0,blockers=0;
     for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
-        vec2 offset=vec2(x,y)*radius*.5/vec2(extent);
-        visible+=filteredShadow(uv+offset,receiver+dot(depthGradient,offset),lo,hi,depthGradient);
+        vec2 offset=vec2(x,y)/vec2(extent);
+        vec2 moments=filteredShadowBlockers(uv+offset,receiver+dot(depthGradient,offset),lo,hi,depthGradient);
+        // Convert each moment back to the centre receiver plane before the
+        // PCSS separation estimate; coverage is interpolated after comparison.
+        sum+=moments.x-dot(depthGradient,offset)*moments.y;
+        blockers+=moments.y;
     }
-    return visible/25.0;
+    float separation=blockers>0?max(receiver-sum/blockers,0)*depthRange:0;
+    float contactRadius=shadowContactRadius(float(tile.x),maximumRadius);
+    float radius=clamp(contactRadius+separation*.035/max(worldTexel,1e-6),contactRadius,maximumRadius);
+    float visible=0,totalWeight=0;
+    vec2 centre=uv*vec2(extent)-.5;
+    ivec2 base=ivec2(floor(centre));vec2 fraction=fract(centre);
+    int bound=int(ceil(radius+.5));
+    for(int y=-bound;y<=bound;y+=2)for(int x=-bound;x<=bound;x+=2){
+        vec4 weights=shadowDiskQuadWeights(vec2(x,y)-fraction,radius);
+        vec4 planeDepths=vec4(receiver)+shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient);
+        float weight=dot(weights,vec4(1));
+        if(weight<=0)continue;
+        vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base+ivec2(x,y),lo,hi);
+        visible+=dot(weights,step(planeDepths,depths));
+        totalWeight+=weight;
+    }
+    return visible/max(totalWeight,1e-6);
 }
 float sampleShadowMap(float normalDotLight) {
     // Compute derivatives before nonuniform cascade selection. Each sampled
     // depth is compared against the receiver plane at that texel centre.
     vec2 gradients[4];
+    vec3 receiverNormal=normalize(worldNormal);
+    float normalCurvature=max(length(dFdx(receiverNormal)),length(dFdy(receiverNormal)))
+        /max(max(length(dFdx(worldPosition)),length(dFdy(worldPosition))),1e-6);
     for(int i=0;i<4;++i){
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
@@ -218,10 +236,10 @@ float sampleShadowMap(float normalDotLight) {
     }
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
-    float result=sampleCascadeShadow(c,normalDotLight,gradients[c]);
+    float result=sampleCascadeShadow(c,normalDotLight,gradients[c],normalCurvature);
     if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
         float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
-        result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1]),blend);}
+        result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1],normalCurvature),blend);}
     return result;
 }
 
@@ -333,8 +351,6 @@ void main() {
         metallic = min(metallic, 0.04);
         roughness = max(roughness, 0.44);
         specularLevel = min(specularLevel, 0.30);
-    } else if (material.materialClass == 4U) {
-        roughness = mix(max(roughness, 0.42),roughness,smoothstep(.15,.65,metallic));
     } else if (material.materialClass == 6U) {
         metallic = 0.0;
     }
@@ -381,8 +397,10 @@ void main() {
     float specularLobe = pow(
         max(dot(shadedNormal, halfDirection), 0.0),
         specularPower);
-    vec3 f0 = mix(vec3(0.04 * specularLevel), baseColor.rgb, metallic);
+    vec3 f0 = mix(vec3(dielectricF0(specularLevel)), baseColor.rgb, metallic);
     float normalDotView = max(dot(shadedNormal, viewDirection), 0.0);
+    bool microfacetSurface = material.materialClass == 0U || material.materialClass == 4U
+        || material.materialClass == 5U || material.materialClass == 9U;
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     vec3 diffuseColor = baseColor.rgb * (1.0 - metallic);
@@ -474,6 +492,7 @@ void main() {
         mix(0.44, 0.74, faceIllumination),
         faceSdfWeight);
     vec3 classRamp = sampleToonRamp(rampCoordinate);
+    vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
     float ambientRampVisibility = mix(
@@ -483,7 +502,7 @@ void main() {
             0.98,
             rampLuminance),
         toonWeight);
-    ambientDiffuse *= ambientRampVisibility;
+    ambientDiffuse *= ambientRampVisibility * indirectChroma;
     float diffuseScale = mix(0.62, 0.68, toonWeight);
     vec3 directDiffuse =
         diffuseColor
@@ -491,7 +510,7 @@ void main() {
             diffuseResponse * diffuseScale * keyColor
                 * camera.showcaseParameters.y
                 * keyVisibility
-            + fillDiffuse * camera.showcaseParameters.z * fillColor);
+            + fillDiffuse * camera.showcaseParameters.z * fillColor * indirectChroma);
     directDiffuse *= mix(1.0, 0.72, hairActive);
     uint gridX = max(uint(camera.clusterGrid.x), 1U);
     uint gridY = max(uint(camera.clusterGrid.y), 1U);
@@ -535,8 +554,11 @@ void main() {
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
             max(dot(shadedNormal, pointHalfDirection), 0.0), specularPower);
-        clusteredSpecular += f0 * radiance * pointSpecular * pointDiffuse
-            * mix(0.7, 0.12, roughness);
+        vec3 pointResponse = microfacetSurface
+            ? directSurfaceSpecular(f0, roughness, pointDiffuse, normalDotView,
+                max(dot(shadedNormal, pointHalfDirection), 0.0), max(dot(viewDirection, pointHalfDirection), 0.0))
+            : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
+        clusteredSpecular += pointResponse * radiance;
     }
     directDiffuse += clusteredDiffuse * mix(1.0, 0.72, hairActive);
     float shadowRegion = 1.0 - smoothstep(0.38, 0.66, rampLuminance);
@@ -599,7 +621,11 @@ void main() {
             * camera.faceSdfShadowColor.a
             * 0.55);
     vec3 directSpecular =
-        f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness)
+        (microfacetSurface
+            ? directSurfaceSpecular(f0, roughness, diffuse, normalDotView,
+                max(dot(shadedNormal, halfDirection), 0.0), max(dot(viewDirection, halfDirection), 0.0))
+                * keyColor * camera.showcaseParameters.y
+            : f0 * specularLobe * diffuse * mix(0.7, 0.12, roughness))
         * keyVisibility * material.styleParameters.z;
     directSpecular += clusteredSpecular * material.styleParameters.z;
     ambientSpecular *= material.styleParameters.z;

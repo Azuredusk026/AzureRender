@@ -1,0 +1,10 @@
+{
+  "foreheadWhiteLeakPixels": 0,
+  "maximum": 16,
+  "roi": [
+    430,
+    245,
+    850,
+    395
+  ]
+}

@@ -1,0 +1,22 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "surface_response.glsl"
+layout(local_size_x=1) in;
+layout(binding=0,std430) buffer Results { float values[]; } result;
+layout(push_constant) uniform Parameters { float contrast; } parameters;
+void main(){
+    uint i=gl_GlobalInvocationID.x;
+    if(i==0u)result.values[i]=max((0.0-.5)*parameters.contrast+.5,0.0);
+    else if(i==1u)result.values[i]=dielectricF0(.5);
+    else if(i==2u)result.values[i]=directSurfaceSpecular(vec3(.04),.2,1,1,1,1).r;
+    else if(i==3u)result.values[i]=directSurfaceSpecular(vec3(.04),.8,1,1,1,1).r;
+    else if(i==4u)result.values[i]=directSurfaceSpecular(vec3(.04),.2,0,1,1,1).r;
+    else if(i==5u) result.values[i]=directSurfaceSpecular(vec3(.04),.2,1,0,1,1).r;
+    else {
+        uint probe=(i-6u)/3u;uint channel=(i-6u)%3u;
+        uint materialClass=probe==1u ? 2u : (probe==2u ? 4u : 1u);
+        float toonWeight=probe==3u ? 0.0 : 1.0;
+        vec3 ramp=probe==4u ? vec3(0) : (probe==5u ? vec3(.8) : vec3(.8,.6,.5));
+        result.values[i]=toonIndirectChroma(ramp,toonWeight,materialClass)[channel];
+    }
+}

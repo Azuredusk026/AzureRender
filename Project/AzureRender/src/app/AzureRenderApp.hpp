@@ -94,7 +94,7 @@ private:
     std::uint64_t validationScreenshots_=0;
     void initializeValidation();
     void finishValidation();
-    static constexpr std::uint32_t kShadowMapSize = 2048;
+    static constexpr std::uint32_t kShadowMapSize = 4096;
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kTimestampQueryCount = 4;
     static constexpr std::size_t kMaxHudVertices = 24576;

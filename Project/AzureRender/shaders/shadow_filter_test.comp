@@ -3,8 +3,66 @@
 #include "shadow_compare.glsl"
 layout(local_size_x=1) in;
 layout(binding=0,std430) buffer Results { float values[]; } result;
+layout(binding=1) uniform sampler2D testShadow;
 void main() {
     uint i=gl_GlobalInvocationID.x;
+    if(i>=209u){
+        uint probe=(i-209u)/4u;
+        float radius=probe/17u==0u?2.0:(probe/17u==1u?6.0:8.0);
+        vec2 offset=vec2((float(probe%17u)/16.0*2.0-1.0)*(radius+1.0),.37);
+        result.values[i]=shadowDiskQuadWeights(offset,radius)[(i-209u)%4u];
+        return;
+    }
+    if(i>=197u){
+        uint probe=(i-197u)/4u;
+        vec4 depths=shadowTexelQuad(testShadow,probe==1u?ivec2(-1,0):ivec2(0),ivec2(0),probe==2u?ivec2(0):ivec2(1));
+        result.values[i]=depths[(i-197u)%4u];
+        return;
+    }
+    if(i>=194u){
+        result.values[i]=shadowContactRadius(i==194u?1024.0:2048.0,i==196u?3.0:8.0);
+        return;
+    }
+    if(i>=162u){
+        vec2 centre=vec2(1,.7)*(float(i-162u)/31.0*4.0-2.0);
+        float blocked=0,total=0;ivec2 base=ivec2(floor(centre));
+        for(int y=-9;y<=9;++y)for(int x=-9;x<=9;++x){
+            float weight=shadowDiskTexelWeight(vec2(x,y)-fract(centre),8.0);
+            blocked+=weight*(all(equal(base+ivec2(x,y),ivec2(0)))?1.0:0.0);
+            total+=weight;
+        }
+        result.values[i]=blocked/total;
+        return;
+    }
+    if(i>=152u){
+        float weight=float((i-152u)%5u)/4.0;
+        vec2 moments=shadowBlockerMoments(vec4(.1,.9,.1,.9),.5,vec2(weight,.37));
+        result.values[i]=i<157u?moments.y:moments.x;
+        return;
+    }
+    if(i>=150u){ result.values[i]=shadowReceiverPlaneWeight(i==150u?0.0:30.0,.04); return; }
+    if(i>=148u){
+        float worldTexel=i==148u?.01:.02;
+        result.values[i]=shadowReceiverBias(.2,worldTexel);
+        return;
+    }
+    if(i>=16u){
+        uint probe=i-16u;
+        float angle=float(probe/33u)*.3926990817;
+        vec2 axis=vec2(cos(angle),sin(angle));
+        float position=float(probe%33u)/16.0-1.0;
+        float visible=0.0,total=0.0;
+        // Reproduce the production wide-radius footprint against an
+        // independently authored straight depth boundary at four angles.
+        vec2 centre=axis*position*8.0;ivec2 base=ivec2(floor(centre));
+        for(int y=-9;y<=9;++y)for(int x=-9;x<=9;++x){
+            float weight=shadowDiskTexelWeight(vec2(x,y)-fract(centre),8.0);
+            float depth=dot(vec2(base+ivec2(x,y)),axis)>=0.0?.9:.1;
+            visible+=weight*step(.5,depth);total+=weight;
+        }
+        result.values[i]=visible/total;
+        return;
+    }
     if(i==15u){
         result.values[i]=compareShadowDepths(vec4(.39,.41,.39,.41),.399,vec2(.5),vec2(.02,0));
         return;

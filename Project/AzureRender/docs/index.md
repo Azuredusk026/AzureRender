@@ -1,5 +1,9 @@
 # AzureRender
 
+角色展示的采样与材质问题见[画面根由报告](research/2026-10-09-character-presentation-refinement.md)。
+完整执行步骤见[画面优化计划](plans/2026-10-09-character-presentation-refinement.md)。
+五段视频与验收见[展示验收](acceptance/character/2026-10-09-refinement.md)。
+
 引擎交付范围见[交付说明](runtime/engine-delivery.md)。
 两种项目的使用步骤见[复用教程](tutorials/engine-reuse.md)。
 

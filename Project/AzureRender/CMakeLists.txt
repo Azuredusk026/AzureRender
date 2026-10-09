@@ -176,7 +176,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl"
+        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -206,6 +206,7 @@ compile_shader(
     OUTPUT_NAME mesh_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME character_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_bindless.frag)
@@ -531,6 +532,11 @@ if(BUILD_TESTING)
     add_dependencies(AzureShadowFilteringGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.ShadowFilteringGpu COMMAND AzureShadowFilteringGpuTests "${SHADER_BINARY_DIR}/shadow_filter_test.comp.spv")
     set_tests_properties(AzureRender.ShadowFilteringGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureSurfaceResponseGpuTests tests/SurfaceResponseGpuTests.cpp)
+    target_link_libraries(AzureSurfaceResponseGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSurfaceResponseGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.SurfaceResponseGpu COMMAND AzureSurfaceResponseGpuTests "${SHADER_BINARY_DIR}/surface_response_test.comp.spv" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/showcase_looks.json")
+    set_tests_properties(AzureRender.SurfaceResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     if(AZURE_ENABLE_SHADER_MODULE_PROTOTYPE)
         add_executable(AzureShaderModuleTests tests/ShaderModuleTests.cpp)
         target_link_libraries(AzureShaderModuleTests PRIVATE AzureRenderCore)
@@ -1657,4 +1663,6 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/2026-10-08.md" DES
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7/evidence" OPTIONAL)
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-rendering-repair.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-rendering-diagnosis.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-presentation-refinement.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-presentation-refinement.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/character/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/character")

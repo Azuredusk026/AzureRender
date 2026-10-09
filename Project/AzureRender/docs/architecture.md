@@ -324,7 +324,7 @@ Renderer 不自行持有 Swapchain，也不能缓存跨重建失效的 `sceneFra
 | HDR Scene Color | 场景线性高动态范围颜色 |
 | Depth | 深度测试、内部轮廓和诊断 |
 | Normal | 屏幕空间法线边缘与诊断 |
-| 2048 Shadow Map | Character 实时阴影及 Shadow Map 诊断 |
+| 4096×4096 阴影图集 | 四级联实时阴影与阴影图诊断。每级联为 2048×2048。 |
 | Swapchain Color | Tone Mapping 后的最终显示和 Present |
 
 `SceneRendererCapabilities` 决定场景 Render Pass 需要哪些 Attachment。Character 需要 Depth 和 Normal。纯全屏 Renderer 可以少声明一些几何缓冲。

@@ -138,5 +138,12 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 质量档通过关卡配置保存，并随尺寸变化重建资源。
 
 角色渲染专项的 P0、P1 与 P2 已验收。
-本机工作区 Release 的 174 项回归全部通过。
-同规格视频与边界见[角色验收](docs/acceptance/character/2026-10-09.md)。
+核心验收见[角色验收](docs/acceptance/character/2026-10-09.md)。
+
+展示阴影采用完整圆盘纹素积分与曲率控制。
+衣料和金属采用 GGX 高光，调色保留零黑位。
+皮肤与脸部采用暖色色阶，间接光保留肤色色度。
+诊断见[画面根由报告](docs/research/2026-10-09-character-presentation-refinement.md)。
+执行与交付见[画面优化计划](docs/plans/2026-10-09-character-presentation-refinement.md)。
+本机工作区 Release 的 175 项回归全部通过。
+五段视频与性能边界见[展示验收](docs/acceptance/character/2026-10-09-refinement.md)。

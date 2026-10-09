@@ -247,3 +247,12 @@ R6 验收见[场景可见性与裁剪验收](../acceptance/r6/2026-10-05.md)。
 P1 层次与采样已通过专项验收。
 P2 时间、生命周期、性能与同规格视频已验收。
 范围见[修复计划](2026-10-09-character-rendering-repair.md)。
+
+角色展示 P3 优化已完成验收。
+范围包含连续软阴影、暖色色阶与 GGX 材质高光。
+展示调色保留零黑位。
+步骤见[画面优化计划](2026-10-09-character-presentation-refinement.md)。
+
+本机工作区 Release 的 175 项回归全部通过。
+1440p 的五段转台视频已通过完整解码检查。
+性能与边界见[展示验收](../acceptance/character/2026-10-09-refinement.md)。
