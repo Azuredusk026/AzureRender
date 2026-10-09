@@ -32,6 +32,8 @@ int main(int argc,char** argv){
         require(session.lastError().empty(),"Explicit cancellation must have its own task state");
         require(static_cast<bool>(session.edit("asset.import-start",{{"path",(root/"missing.gltf").u8string()}})),"Background failures must be tracked after task start");wait(session);
         const auto message=session.lastError();require(!message.empty(),"Background failure must publish a persistent error");
+        const auto problem=session.edit("diagnostic.query",{{"source","asset.import"}});
+        require(!problem.value.at("entries").empty()&&problem.value.at("entries").back().at("path")== (root/"missing.gltf").u8string(),"Asynchronous import problems retain their exact input path");
         session.edit("viewport.gizmo-mode",{{"value",1}});
         require(session.lastError()==message,"Unrelated successful work must retain task diagnostics");
         const auto result=session.edit("tasks.describe");require(static_cast<bool>(result),"Task state must be queryable through a registered operation");

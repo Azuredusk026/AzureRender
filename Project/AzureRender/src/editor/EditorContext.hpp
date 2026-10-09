@@ -32,7 +32,7 @@ public:
         std::size_t dependentNodeCount = 0;
     };
     EditorContext(SceneDocument document, std::filesystem::path scenePath);
-    static std::shared_ptr<EditorContext> openProject(const std::filesystem::path& path);
+    static std::shared_ptr<EditorContext> openProject(const std::filesystem::path& path,const std::filesystem::path& documentPath={});
     bool isProject() const noexcept { return assets_ != nullptr; }
     const Project& project() const { return *project_; }
     AssetDatabase& assets() { if(!assets_)throw std::logic_error("Asset access requires a project");return *assets_; }
@@ -50,6 +50,7 @@ public:
     void createNode(const std::string& nodeId);
     void placePrefab(const std::string& asset, const std::string& instance);
     void previewAnimation(const std::string& state, double time, const std::string& previous = {}, double crossfade = 0);
+    NodeAnimationFrame animationPose(const std::string& node,const std::string& state,double time,const std::string& previous={},double crossfade=0) const;
     void clearAnimationPreview() noexcept { animationPreview_.reset(); }
     const std::optional<NodeAnimationFrame>& animationPreview() const noexcept { return animationPreview_; }
     void selectNodes(std::vector<std::size_t> indices);
@@ -119,6 +120,7 @@ public:
     bool redo();
     nlohmann::json documentContent() const;
     DocumentVersion documentVersion() const;
+    const std::string& documentId() const noexcept{return documentId_;}
     std::size_t undoCount() const noexcept { return undoStack_.size(); }
     std::size_t redoCount() const noexcept { return redoStack_.size(); }
     void closeEditMerge() noexcept { mergeKey_.clear(); }
@@ -185,6 +187,8 @@ private:
     friend class GizmoController;
     friend class EditTransaction;
     friend class EditService;
+    friend class PrefabAuthoringService;
+    friend class DocumentBatchTransaction;
     std::string documentId_=newDocumentIdentity();
     std::uint64_t revision_=1,mergeRevision_=0;
     std::string mergeKey_;
@@ -196,6 +200,7 @@ private:
         std::vector<std::size_t> selectedNodes;
         nlohmann::json sourceLevel;
         std::map<std::filesystem::path,std::string> resourceReferences;
+        nlohmann::json prefabBaselines,prefabFingerprints;
     };
     [[nodiscard]] Snapshot snapshot() const;
     void restore(Snapshot snapshot);
@@ -231,6 +236,8 @@ private:
     std::unique_ptr<Project> project_;
     std::unique_ptr<AssetDatabase> assets_;
     nlohmann::json sourceLevel_;
+    nlohmann::json prefabBaselines_=nlohmann::json::object(),prefabFingerprints_=nlohmann::json::object();
+    void capturePrefabSources(const std::map<std::string,nlohmann::json>& sources={});
     std::map<std::filesystem::path,std::string> resourceReferences_;
     std::shared_ptr<AssetImportJob> importJob_;
     std::string commitImport(AssetImportJob& job);

@@ -145,7 +145,9 @@ Project Project::load(const std::filesystem::path& path) {
     }
 }
 SceneDocument Project::loadStartupScene() const {
-    const auto sceneFile = resolve(startupScene);
+    return loadScene(resolve(startupScene));
+}
+SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
     if (sceneFile.extension() == ".azurelevel") { AssetDatabase assets(*this); assets.refresh(); return Level::load(sceneFile, assets).scene; }
     auto scene = SceneDocument::load(sceneFile);
     for (auto& resource : scene.resources) {

@@ -181,11 +181,11 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                 else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)){
                     const auto opened=session_->edit("asset.open",{{"asset",id}});
                     if(opened){const auto operation=opened.value.at("operation").get<std::string>();
-                        const auto result=session_->edit(operation,operation=="texture.describe"?nlohmann::json{{"assets",nlohmann::json::array({id})}}:nlohmann::json{{"asset",id}});
+                        const auto result=session_->edit(operation,operation=="document.open"?nlohmann::json{{"path",id}}:operation=="texture.describe"?nlohmann::json{{"assets",nlohmann::json::array({id})}}:nlohmann::json{{"asset",id}});
                         if(result){if(operation=="texture.describe"){textureSnapshot_=result.value;textureFields_.clear();textureDialogRequested_=true;}
                         else if(operation=="material.describe"){materialAsset_=id;materialSnapshot_=result.value;materialDialogRequested_=true;}
                         else if(result.value.contains("handle")){assetPreviewHandle_=result.value.at("handle").get<std::uint64_t>();assetPreviewTitle_=label;assetPreviewRequested_=true;}
-                        else {dependencySnapshot_=result.value;dependencyDialogRequested_=true;}}
+                        else if(operation!="document.open"){dependencySnapshot_=result.value;dependencyDialogRequested_=true;}}
                     }
                 }
             }

@@ -59,6 +59,7 @@ nav:
   - 架构调研:
       - 视口导航与辅助显示: runtime/viewport-navigation.md
       - 独立模拟与物理制作: runtime/physics-authoring.md
+      - 文档与内容制作工作流: runtime/authoring-workflows.md
       - 材质参数与槽位制作: runtime/material-authoring.md
       - U11 材质制作验收: acceptance/u11/2026-10-10.md
       - 内容导航与基础创建: runtime/content-navigation.md
@@ -123,6 +124,7 @@ nav:
       - 环境资源: runtime/environment-assets.md
       - 聚簇光照: runtime/clustered-lighting.md
   - 阶段验收:
+      - U13 文档与内容制作验收: acceptance/u13/2026-10-10.md
       - U12 视口工具与导航验收: acceptance/u12/2026-10-10.md
       - G13 独立模拟与物理制作验收: acceptance/g13/2026-10-10.md
       - G10 程序化内容与文本动画: acceptance/g10/2026-10-07.md

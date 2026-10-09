@@ -37,10 +37,6 @@ bool ProposalController::generate(const ProposalRequest& request){
         if(request.runId.empty()||request.runId.size()>128||request.instruction.empty()||request.instruction.size()>budget_.sourceBytes)
             throw std::invalid_argument("Proposal identity or instruction exceeds budget");
         const auto adapter=adapters_.at(request.domain);
-        if(request.targetId!="document"){
-            const auto& nodes=document_.scene().nodes;
-            if(std::none_of(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==request.targetId;}))throw std::invalid_argument("Unknown proposal target");
-        }
         envelope_={};envelope_.runId=request.runId;envelope_.profile=request.profile;envelope_.schema=adapter->schema();envelope_.timeoutMs=budget_.timeoutMs;envelope_.history=history_;
         envelope_.prompt=nlohmann::json{{"instruction",request.instruction},{"domain",request.domain},{"target",request.targetId},
             {"baseVersion",base_.describe()},{"snapshot",adapter->snapshot(validationContext())}}.dump();

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_authoring.py", line 33, in <module>
+    args=parser.parse_args();run(args.executable.resolve(),args.output.resolve())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_authoring.py", line 14, in run
+    data=launch(executable,root,'assistance',(1920,1080),1,actions,capture=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 36, in launch
+    assert data['uiErrors']==[],data['uiErrors']
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'action': {'action': 'click', 'frame': 20, 'target': 'tool.assistance'}, 'error': "[json.exception.out_of_range.403] key 'tool.assistance' not found", 'frame': 20}]

@@ -10,6 +10,6 @@ nlohmann::json AssetEditorRegistry::open(const std::string& type,const std::stri
     const auto& descriptor=found->second;return {{"asset",asset},{"type",type},{"label",descriptor.label},{"operation",descriptor.openOperation}};
 }
 AssetEditorRegistry AssetEditorRegistry::builtins(){
-    AssetEditorRegistry result;for(const auto& [id,type]:assetTypeRegistry().types())result.add({id,type.label,id=="image"?"texture.describe":id=="model"?"preview.asset":id=="material"?"material.describe":"asset.inspect"});return result;
+    AssetEditorRegistry result;for(const auto& [id,type]:assetTypeRegistry().types())result.add({id,type.label,id=="level"?"document.open":id=="image"?"texture.describe":id=="model"?"preview.asset":id=="material"?"material.describe":"asset.inspect"});return result;
 }
 }

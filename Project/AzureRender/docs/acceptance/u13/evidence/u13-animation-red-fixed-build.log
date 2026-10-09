@@ -1,0 +1,11 @@
+[0/2] Re-checking globbed directories...
+[1/10] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\DocumentTabs.cpp.obj
+[3/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[4/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[5/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[6/10] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[7/10] Building CXX object CMakeFiles\AzureAnimationAuthoringTests.dir\tests\AnimationAuthoringTests.cpp.obj
+[8/10] Linking CXX static library AzureEditor.lib
+[9/10] Linking CXX executable AzureAnimationAuthoringTests.exe

@@ -4,6 +4,9 @@
 #include "runtime/Level.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include "assets/GltfLoader.hpp"
+#include "editor/material/MaterialEditingService.hpp"
+#include "editor/content/ContentOperationService.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
 #include <cmath>
 #include <fstream>
 #include <set>
@@ -42,6 +45,7 @@ public:
     std::string id() const override{return "scene";}
     Json schema() const override{return proposalSchema();}
     Json snapshot(const ProposalValidationContext& context) const override{
+        if(context.targetId!="document"&&std::none_of(context.document.scene().nodes.begin(),context.document.scene().nodes.end(),[&](const auto& node){return node.id==context.targetId;}))throw std::invalid_argument("Unknown scene proposal target");
         auto descriptors=Json::array();for(const auto& row:context.edits.describe())if(allowed().count(row.at("id").get<std::string>()))descriptors.push_back(row);
         auto types=Json::array();for(const auto& item:runtimeComponentRegistry().metadata().types())types.push_back(runtimeComponentRegistry().describe(item.first));
         return {{"document",context.document.documentContent()},{"operations",descriptors},{"componentTypes",types}};
@@ -75,6 +79,7 @@ public:
     Json schema() const override{return proposalSchema();}
     Json snapshot(const ProposalValidationContext& context) const override{
         if(!context.document.isProject())throw std::invalid_argument("Asset parameters require a project session");
+        if(context.targetId!="document")throw std::invalid_argument("Asset generation requires document scope");
         auto references=Json::array();for(const auto& [id,record]:context.document.assets().records())references.push_back({{"id",id},{"path",record.virtualPath},{"hash",record.contentHash}});
         return {{"generators",context.generators.describe()},{"assets",references},{"operation",context.edits.registry().find("asset.generate")->descriptor.parameters},
             {"outputFormats",{".json",".azurelevel",".azureprefab",".gltf",".glb"}},{"effects","one generated asset with versioned source metadata"}};
@@ -119,6 +124,67 @@ public:
         return candidate;
     }
 };
+class PhysicsAdapter final:public IProposalAdapter {
+public:
+    std::string id() const override{return "physics";}
+    Json schema() const override{return proposalSchema();}
+    Json snapshot(const ProposalValidationContext& context) const override{
+        if(std::none_of(context.document.scene().nodes.begin(),context.document.scene().nodes.end(),[&](const auto& node){return node.id==context.targetId;}))throw std::invalid_argument("Physics proposal requires a stable node target");
+        return {{"node",context.targetId},{"components",context.document.runtimeComponents().at(context.targetId)},
+            {"types",{runtimeComponentRegistry().describe("azure.rigid-body"),runtimeComponentRegistry().describe("azure.hinge")}}};
+    }
+    ProposalCandidate validate(const std::string& source,const ProposalValidationContext& context) const override{
+        static_cast<void>(snapshot(context));ProposalCandidate candidate;
+        candidate.operations=operations(envelope(source),context,{"node.select","component.add","component.field","component.fields"});
+        if(candidate.operations.front().commandId!="node.select"||candidate.operations.front().parameters!=Json{{"id",context.targetId}})throw std::invalid_argument("Physics proposal must select its stable target first");
+        for(const auto& request:candidate.operations){
+            if(request.commandId=="node.select"){if(request.parameters!=Json{{"id",context.targetId}})throw std::invalid_argument("Physics selection exceeds target scope");}
+            else {const auto type=request.parameters.at("type").get<std::string>();if(type!="azure.rigid-body"&&type!="azure.hinge")throw std::invalid_argument("Physics proposal requires a registered physics component");}
+        }
+        EditTransaction transaction(context.document);EditService edits(transaction.candidate(),context.edits.registry());
+        auto requests=candidate.operations;for(auto& request:requests)request.baseVersion=edits.version();
+        const auto result=edits.executeBatch(requests);if(!result)throw std::invalid_argument("Physics candidate violates production semantics: "+result.diagnostics.dump());candidate.diff=result.diff;return candidate;
+    }
+};
+class ContentDomainAdapter final:public IProposalAdapter {
+    bool material_;
+    std::string asset(const ProposalValidationContext& context) const {
+        if(!context.document.isProject())throw std::invalid_argument("Content proposals require a project");
+        const auto& record=context.document.assets().records().at(context.targetId);
+        if(!assetTypeRegistry().matches(record.path,{material_?"material":"image"}))throw std::invalid_argument("Content target has the wrong registered type");
+        return record.id;
+    }
+public:
+    explicit ContentDomainAdapter(bool material):material_(material){}
+    std::string id() const override{return material_?"material":"texture";}
+    Json schema() const override{return proposalSchema();}
+    Json snapshot(const ProposalValidationContext& context) const override{
+        const auto target=asset(context);const auto& record=context.document.assets().records().at(target);
+        if(material_){const auto document=MaterialDocument::load(record.path);const auto& type=MaterialTypeRegistry::builtins().type(document.typeId);
+            return {{"asset",target},{"document",document.encode()},{"parameters",type.parameters},{"textures",type.textures},{"operation",context.edits.registry().find("material.field")->descriptor.parameters}};}
+        ContentOperationService service(context.document.project());service.synchronize(context.document.assets());
+        return {{"asset",target},{"settings",service.textureSettings({target})},{"operation",context.edits.registry().find("texture.settings")->descriptor.parameters}};
+    }
+    ProposalCandidate validate(const std::string& source,const ProposalValidationContext& context) const override{
+        const auto target=asset(context);ProposalCandidate candidate;candidate.transactional=false;
+        candidate.operations=operations(envelope(source),context,{material_?"material.field":"texture.settings"});
+        if(candidate.operations.size()!=1)throw std::invalid_argument("Content proposals use one recoverable file transaction");
+        const auto& args=candidate.operations.front().parameters;
+        if(material_){
+            if(args.at("asset")!=target)throw std::invalid_argument("Material proposal exceeds asset scope");
+            const auto& record=context.document.assets().records().at(target);const auto before=MaterialDocument::load(record.path).encode();
+            const auto after=MaterialEditingService::previewField(context.document,target,args.at("field").get<std::string>(),args.at("value")).encode();
+            candidate.diff.push_back({{"asset",target},{"before",before},{"patch",Json::diff(before,after)}});
+        }else{
+            if(args.size()!=2||!args.contains("assets")||args.at("assets")!=Json::array({target})||!args.contains("values"))throw std::invalid_argument("Texture proposal requires only its stable target and settings");
+            if(context.document.dirty())throw std::invalid_argument("Save the scene before changing texture import settings");
+            ContentOperationService service(context.document.project());service.synchronize(context.document.assets());
+            auto request=args;request["operation"]="texture.settings";const auto plan=service.plan(request);service.discard(plan.at("id"));
+            candidate.diff.push_back({{"asset",target},{"before",service.textureSettings({target})},{"values",args.at("values")},{"version",plan.at("version")}});
+        }
+        return candidate;
+    }
+};
 }
-std::vector<std::shared_ptr<IProposalAdapter>> builtinProposalAdapters(){return {std::make_shared<SceneAdapter>(),std::make_shared<AssetParameterAdapter>()};}
+std::vector<std::shared_ptr<IProposalAdapter>> builtinProposalAdapters(){return {std::make_shared<SceneAdapter>(),std::make_shared<AssetParameterAdapter>(),std::make_shared<ContentDomainAdapter>(true),std::make_shared<ContentDomainAdapter>(false),std::make_shared<PhysicsAdapter>()};}
 }

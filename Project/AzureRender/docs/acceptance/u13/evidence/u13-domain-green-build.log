@@ -1,0 +1,43 @@
+[0/2] Re-checking globbed directories...
+[1/42] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\EditorDocumentSession.cpp.obj
+[3/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\DeveloperServices.cpp.obj
+[4/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\documents\DiagnosticOperations.cpp.obj
+[5/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\scripts\ScriptAuthoringOperations.cpp.obj
+[6/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalController.cpp.obj
+[7/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalOperations.cpp.obj
+[8/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[9/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\adapters\ProposalAdapters.cpp.obj
+[10/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[11/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[12/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[13/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[14/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[15/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[16/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[17/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[18/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\material\MaterialEditingService.cpp.obj
+[19/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\TextureAssetPanel.cpp.obj
+[20/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\MaterialAssetPanel.cpp.obj
+[21/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[22/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\PhysicsAuthoringPanel.cpp.obj
+[23/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\DocumentTabs.cpp.obj
+[24/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ScriptAuthoringPanel.cpp.obj
+[25/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProblemsPanel.cpp.obj
+[26/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportOverlays.cpp.obj
+[27/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[28/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[29/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[30/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[31/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[32/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[33/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[34/42] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[35/42] Linking CXX static library AzureEditor.lib
+[36/42] Building CXX object CMakeFiles\AzureProposalControllerTests.dir\tests\ProposalControllerTests.cpp.obj
+[37/42] Building CXX object CMakeFiles\AzureDomainAuthoringTests.dir\tests\DomainAuthoringTests.cpp.obj
+[38/42] Building CXX object CMakeFiles\AzureProposalAdapterTests.dir\tests\ProposalAdapterTests.cpp.obj
+[39/42] Linking CXX executable AzureProposalControllerTests.exe
+[40/42] Linking CXX executable AzureDomainAuthoringTests.exe
+[41/42] Linking CXX executable AzureProposalAdapterTests.exe

@@ -20,6 +20,7 @@ std::vector<ViewportOverlayLine> ViewportOverlayRegistry::collect(const Viewport
 }
 ViewportOverlayRegistry ViewportOverlayRegistry::builtins(){
     ViewportOverlayRegistry result;
+    result.add("skeleton","Animation skeleton",[](const auto& request){return request.skeleton?*request.skeleton:std::vector<ViewportOverlayLine>{};});
     result.add("grid","Ground grid",[](const auto& request){
         std::vector<ViewportOverlayLine> lines;const auto distance=internal::vectorLength(internal::subtract(request.view.position,request.view.target));
         const float scale=request.view.projection==CameraProjectionKind::Orthographic?request.view.orthoHeight:distance;

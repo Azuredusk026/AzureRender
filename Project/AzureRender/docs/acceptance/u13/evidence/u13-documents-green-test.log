@@ -1,0 +1,15 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.DocumentManager
+1/1 Test #193: AzureEditor.DocumentManager ......***Failed    0.11 sec
+[1791582646621][info][editor][code=0] Opened scene: first
+Duplicate edit operation: document.close
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.12 sec
+
+The following tests FAILED:
+	193 - AzureEditor.DocumentManager (Failed)
+Errors while running CTest

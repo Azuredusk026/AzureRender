@@ -1,0 +1,29 @@
+[1791587563907][info][editor][code=0] Opened scene: physics-door
+[1791587564253][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791587564537][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791587564571][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791587564576][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791587564606][info][editor][code=0] Asset reload requested; changed files: 0
+[1791587564620][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791587564649][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791587564655][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791587564663][info][editor][code=0] Renderer resources reloaded
+[1791587564850][info][editor][code=0] Opened scene: physics-door
+[1791587564916][info][editor][code=0] Opened scene: physics-door
+[1791587564980][info][editor][code=0] Opened scene: physics-door
+[1791587565335][info][editor][code=0] Opened scene: physics-door
+[1791587565356][info][editor][code=0] Selected node: fixed
+[1791587565356][info][editor][code=0] Placed prefab: door-copy
+[1791587565381][info][editor][code=0] Asset reload requested; changed files: 1
+[1791587565392][info][render][code=0] Character texture access: indexed, requested slots=27, stage sampler limit=1048576
+[1791587565424][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791587565429][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791587565437][info][editor][code=0] Renderer resources reloaded
+[1791587565512][info][editor][code=0] Opened scene: physics-door
+[1791587565521][info][editor][code=0] Selected node: moving
+[1791587565609][info][editor][code=0] Opened scene: physics-door
+[1791587566194][info][editor][code=0] Opened scene: physics-door
+[1791587566546][info][editor][code=0] Undo
+[1791587567144][info][editor][code=0] Opened scene: physics-door
+[1791587568208][info][editor][code=0] Opened scene: physics-door
+[1791587568555][info][editor][code=0] Opened scene: physics-door

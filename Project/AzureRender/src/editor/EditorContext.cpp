@@ -153,7 +153,8 @@ void EditorContext::reload() {
     if (assets_ && scenePath_.extension()==".azurelevel") {
         assets_->refresh();auto level=Level::load(scenePath_,*assets_);document=level.scene;components_=level.components;
         std::ifstream file(scenePath_);file>>sourceLevel_;
-    } else document = assets_?project_->loadStartupScene():SceneDocument::load(scenePath_);
+        capturePrefabSources();
+    } else document = assets_?project_->loadScene(scenePath_):SceneDocument::load(scenePath_);
     scene_ = std::move(document);
     clearAnimationPreview();
     if (attachedRenderSettings_ != nullptr) {
@@ -374,7 +375,7 @@ void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
 }
 
 EditorContext::Snapshot EditorContext::snapshot() const {
-    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_, sourceLevel_, resourceReferences_};
+    Snapshot result{scene_, selectedNodeIndex_, components_, selectedNodes_, sourceLevel_, resourceReferences_,prefabBaselines_,prefabFingerprints_};
     result.scene.renderSettings = renderSettings();
     return result;
 }
@@ -395,6 +396,7 @@ void EditorContext::restore(Snapshot restored) {
     scene_ = std::move(restored.scene);
     components_ = std::move(restored.components);
     sourceLevel_ = std::move(restored.sourceLevel);
+    prefabBaselines_=std::move(restored.prefabBaselines);prefabFingerprints_=std::move(restored.prefabFingerprints);
     resourceReferences_ = std::move(restored.resourceReferences);
     clearAnimationPreview();
     selectedNodes_ = std::move(restored.selectedNodes);

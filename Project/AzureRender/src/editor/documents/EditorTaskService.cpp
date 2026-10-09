@@ -15,7 +15,7 @@ void EditorTaskService::poll(bool allowCommit) {
     for(auto& task:tasks_)if(task.state=="running"){
         task.progress=task.callbacks.progress();if(!task.callbacks.ready()||!allowCommit)continue;
         try{task.result=task.callbacks.finish();task.state=task.cancelling?"cancelled":"completed";task.progress=1;}
-        catch(const std::exception& error){task.diagnostic=error.what();task.state=task.cancelling?"cancelled":"failed";if(!task.cancelling&&failure_)failure_(task.source,task.diagnostic);}
+        catch(const std::exception& error){task.diagnostic=error.what();task.state=task.cancelling?"cancelled":"failed";if(!task.cancelling){if(task.callbacks.failure)task.callbacks.failure(task.diagnostic);else if(failure_)failure_(task.source,task.diagnostic);}}
         task.callbacks={};
     }
 }

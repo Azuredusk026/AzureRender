@@ -1,0 +1,12 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.AuthoringWorkflow
+1/3 Test #193: AzureEditor.AuthoringWorkflow ....   Passed    2.46 sec
+    Start 194: AzureEditor.AnimationAuthoring
+2/3 Test #194: AzureEditor.AnimationAuthoring ...   Passed    0.32 sec
+    Start 195: AzureEditor.DocumentManager
+3/3 Test #195: AzureEditor.DocumentManager ......   Passed    0.21 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   3.00 sec

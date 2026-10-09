@@ -19,7 +19,8 @@ void ImGuiEditorLayer::drawViewportOverlays(ImVec2 origin,ImVec2 size){
     auto* draw=ImGui::GetWindowDrawList();draw->PushClipRect(origin,{origin.x+size.x,origin.y+size.y},true);
     try{
         const auto scene=session_->viewScene();
-        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView(),&scene},session_->viewportOverlayPolicies(),session_->selection().selected());
+        std::vector<ViewportOverlayLine> skeleton;const auto policy=session_->viewportOverlayPolicies().find("skeleton");if(policy!=session_->viewportOverlayPolicies().end()&&policy->second!="hidden")skeleton=session_->animations().skeletonLines(session_->context());
+        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView(),&scene,&skeleton},session_->viewportOverlayPolicies(),session_->selection().selected());
         for(const auto& line:lines){const auto segment=projectCameraSegment(session_->viewportView(),size.x/size.y,line.from,line.to);if(!segment)continue;
             const auto color=ImGui::ColorConvertFloat4ToU32({line.color[0],line.color[1],line.color[2],line.color[3]});
             draw->AddLine({origin.x+segment->from[0]*size.x,origin.y+segment->from[1]*size.y},{origin.x+segment->to[0]*size.x,origin.y+segment->to[1]*size.y},color,std::max(1.F,dpi_));

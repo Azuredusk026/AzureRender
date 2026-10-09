@@ -37,6 +37,8 @@ struct ManagedScriptRuntime::Impl {
     struct Entry {ScriptObject object;std::string asset,attempted;bool active=false;};
     std::map<ecs::Entity,Entry> entries;
     std::vector<std::string> errors;
+    std::vector<StructuredDiagnostic> diagnostics;
+    std::uint64_t diagnosticSequence=0;
     bool closed=false;
     std::uint64_t revision=0;
     std::chrono::steady_clock::time_point nextPoll{};
@@ -50,8 +52,13 @@ struct ManagedScriptRuntime::Impl {
             static_cast<void>(source(asset.second.virtualPath));
     }
     void open() const {if(closed)throw std::logic_error("Managed script runtime is closed");}
-    void error(const std::string& text) {
-        if(errors.empty() || errors.back()!=text){if(errors.size()==128)errors.erase(errors.begin());errors.push_back(text);RuntimeDiagnostics::instance().warning("script",text);}
+    void error(const std::string& text,const std::string& node={},const std::string& asset={}) {
+        if(errors.empty() || errors.back()!=text){if(errors.size()==128)errors.erase(errors.begin());errors.push_back(text);RuntimeDiagnostics::instance().warning("script",text);
+            StructuredDiagnostic diagnostic;diagnostic.id="managed-"+std::to_string(++diagnosticSequence);diagnostic.source="script."+backend;diagnostic.code="ScriptFailed";
+            diagnostic.message=text;diagnostic.node=node;diagnostic.asset=asset;
+            if(!asset.empty())try{diagnostic.path=assets.resolveReference(asset).u8string();}catch(...){}
+            if(diagnostics.size()==128)diagnostics.erase(diagnostics.begin());diagnostics.push_back(std::move(diagnostic));
+        }
     }
     Json command(const Json& request){return module.call(session.api(),request);}
     struct Source {Json manifest;std::string fingerprint;std::filesystem::path assembly;};
@@ -75,7 +82,7 @@ struct ManagedScriptRuntime::Impl {
         try {
             parameters["operation"]="callback";parameters["id"]=entry.object.node;parameters["callback"]=name;
             command(parameters);host->endCallback(true);
-        }catch(const std::exception& failure){host->endCallback(false);entry.active=false;error(entry.asset+": "+failure.what());}
+        }catch(const std::exception& failure){host->endCallback(false);entry.active=false;error(entry.asset+": "+failure.what(),entry.object.node,entry.asset);}
     }
     void closeEntry(Entry& entry) {
         if(entry.active && host->valid(entry.object))callback(entry,"shutdown");
@@ -92,7 +99,7 @@ struct ManagedScriptRuntime::Impl {
         }catch(const std::exception& failure) {
             if(callbackActive)host->endCallback(false);else host->cancelInitialization();
             try{command({{"operation","cancel"},{"id",entry.object.node}});}catch(...){}
-            error(entry.asset+": "+failure.what());return false;
+            error(entry.asset+": "+failure.what(),entry.object.node,entry.asset);return false;
         }
     }
     void synchronize() {
@@ -108,7 +115,7 @@ struct ManagedScriptRuntime::Impl {
         runtime.world().each<game::Script>([&](auto entity,const auto& script) {
             if(!script.enabled || script.asset.empty() || entries.count(entity))return;
             auto inserted=entries.emplace(entity,Entry{host->object(runtime.nodeId(entity)),script.asset,{},false});
-            try{prepare(inserted.first->second,source(script.asset));}catch(const std::exception& failure){error(script.asset+": "+failure.what());}
+            try{prepare(inserted.first->second,source(script.asset));}catch(const std::exception& failure){error(script.asset+": "+failure.what(),runtime.nodeId(entity),script.asset);}
         });
     }
     void reload() {
@@ -116,7 +123,7 @@ struct ManagedScriptRuntime::Impl {
         if(backend=="nativeaot"){error("NativeAOT reload requires a rebuilt module and a new process");return;}
         for(auto& entry:entries)try {
             const auto content=source(entry.second.asset);if(content.fingerprint!=entry.second.attempted)prepare(entry.second,content);
-        }catch(const std::exception& failure){error(entry.second.asset+": "+failure.what());}
+        }catch(const std::exception& failure){error(entry.second.asset+": "+failure.what(),entry.second.object.node,entry.second.asset);}
     }
     void shutdown() noexcept {
         if(closed)return;
@@ -154,5 +161,6 @@ void ManagedScriptRuntime::setAudioHandler(std::function<void(ecs::Entity)> hand
 void ManagedScriptRuntime::setUiHandler(std::function<void(std::string,std::string)> handler){impl_->host->setUiHandler(std::move(handler));}
 std::size_t ManagedScriptRuntime::activeCount() const {std::size_t count=0;for(const auto& entry:impl_->entries)if(entry.second.active)++count;return count;}
 const std::vector<std::string>& ManagedScriptRuntime::errors() const{return impl_->errors;}
+const std::vector<StructuredDiagnostic>& ManagedScriptRuntime::diagnostics() const{return impl_->diagnostics;}
 ScriptRuntimeCapabilities ManagedScriptRuntime::capabilities() const{return {impl_->backend,impl_->backend=="coreclr",true};}
 }

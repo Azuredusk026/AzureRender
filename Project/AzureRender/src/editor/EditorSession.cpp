@@ -107,13 +107,16 @@ void EditorSession::startImportTask(const std::filesystem::path& path) {
     importTask_=tasks_->add("asset.import: "+path.u8string(),context_->project().file.u8string(),{
         [this]{return context_->importProgress();},[this]{return context_->importReady();},
         [this]{const auto result=edits_->current("asset.import-poll");if(!result)throw std::runtime_error(result.diagnostics.dump());return result.value;},
-        [this]{context_->cancelImport();}});
+        [this]{context_->cancelImport();},
+        [this,path](const auto& message){recordError("asset.import",message,{{"path",path.u8string()}});}});
 }
 void EditorSession::cancelImportTask(){if(!importTask_.empty())tasks_->cancel(importTask_);else context_->cancelImport();}
 void EditorSession::pollTasks(){
+    pollDocuments();
     activatePendingProject();
     if(tasks_)tasks_->poll(!playing()&&!building()&&(!gizmo_||!gizmo_->active())&&documentGuard_->state()!=DocumentActionState::AwaitingDecision);
     pollBuild();
+    collectDiagnostics();
 }
 std::array<float,3> EditorSession::placementPosition(const nlohmann::json& parameters) const {
     const auto origin=parameters.at("origin").get<std::array<float,3>>();auto direction=parameters.at("direction").get<std::array<float,3>>();
@@ -146,7 +149,11 @@ RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
 IScriptRuntime* EditorSession::scripts() noexcept{return play_?play_->scripts.get():nullptr;}
 PresentationRuntime* EditorSession::presentation() noexcept{return play_?play_->presentation.get():nullptr;}
-double EditorSession::advance(double delta){pollTasks();if(!play_)return 0;if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);return elapsed;}
+double EditorSession::advance(double delta){pollTasks();if(!play_){animations().advance(*context_,delta);return 0;}if(play_->levels)play_->levels->poll();auto elapsed=play_->game->advance(delta);if(play_->presentation)play_->presentation->update(elapsed);collectDiagnostics();return elapsed;}
+std::vector<NodeAnimationFrame> EditorSession::animationFrames() const{
+    auto result=documents_.at(context_->documentId()).animations.frames();
+    if(const auto& pose=context_->animationPreview();pose&&std::none_of(result.begin(),result.end(),[&](const auto& frame){return frame.node==pose->node;}))result.push_back(*pose);return result;
+}
 SceneDocument EditorSession::viewScene(){return play_?play_->runtime.snapshotScene():context_->scene();}
 bool EditorSession::consumeRuntimeReset() noexcept{const bool result=runtimeReset_;runtimeReset_=false;return result;}
 
@@ -157,7 +164,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     }
     projects_=std::make_unique<ProjectOpenService>(EditorWorkspace::configDirectory()/"recent-projects.json");
     tasks_=std::make_unique<EditorTaskService>([this](const auto& source,const auto& message){recordError(source,message);});
-    documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty();},[this]{context_->save();});
+    documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty()||(documentGuard_->action()==DocumentAction::Close&&documents_.dirtyExcept(context_->documentId()));},[this]{if(documentGuard_->action()==DocumentAction::Close)documents_.saveAll();else context_->save();});
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor){return editEnabled(descriptor);});
     registerEngineSettings(settings_);
     registerModelSettings(settings_);
@@ -178,8 +185,10 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.gizmo.moveStep","Gizmo translation snap step",.5,.001,10000.,false,true,false});
     settings_.add({"editor.gizmo.rotateStep","Gizmo rotation snap degrees",15.,.1,90.,false,true,false});
     settings_.add({"editor.gizmo.scaleStep","Gizmo scale snap step",.1,.001,10.,false,true,false});
+    retainDocument();
 }
 bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
+    if(descriptor.id.rfind("document.",0)==0&&descriptor.id!="document.decision"&&(context_->importing()||creatingProject_||pendingProject_||!pendingDocument_.empty()||!closingDocument_.empty()))return false;
     if(reimporting_&&(descriptor.requiresIdle||descriptor.modifiesDocument))return false;
     if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
         if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
@@ -202,6 +211,7 @@ std::string EditorSession::startProjectCreation(const std::string& templateId,co
 }
 void EditorSession::requestProject(std::shared_ptr<EditorContext> candidate) {
     if(!candidate||!candidate->isProject())throw EditRejection("Prepared project is required");
+    if(documents_.dirtyExcept(context_->documentId()))throw EditRejection("Save or close other modified documents before switching project");
     if(creatingProject_||playing()||building()||context_->importing()||reimporting_||gizmo_->active()||pendingProject_||
         (proposals_&&proposals_->state()==ProposalState::Generating)||
         documentGuard_->state()==DocumentActionState::AwaitingDecision||documentGuard_->state()==DocumentActionState::Failed)
@@ -220,9 +230,9 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
-        references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
-        context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
+        context_=std::move(pendingProject_);proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
 }
 void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
@@ -238,14 +248,29 @@ ProposalController& EditorSession::proposals(){if(!proposals_)throw EditRejectio
 
 EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
     if(command=="node.select"||command=="selection.click"||command.rfind("preview.",0)==0||command=="document.reload")references_.cancel();
-    auto result=edits_->current(command,std::move(parameters),std::move(mergeKey));
+    auto result=edits_->current(command,parameters,std::move(mergeKey));
     if(!result) {
         lastError_=result.diagnostics.empty()?"Edit failed":result.diagnostics.front().value("message",std::string("Edit rejected"));
-        recordError(command,lastError_);
+        recordError(command,lastError_,parameters);
     }
     return result;
 }
-void EditorSession::recordError(const std::string& source,const std::string& message){lastError_=message;feedback_.record(source,message);context_->log("ERROR ["+source+"]: "+message);}
+void EditorSession::recordError(const std::string& source,const std::string& message,const nlohmann::json& parameters){
+    lastError_=message;feedback_.record(source,message);context_->log("ERROR ["+source+"]: "+message);
+    StructuredDiagnostic diagnostic;diagnostic.source=source;diagnostic.code="OperationFailed";diagnostic.message=message;diagnostic.document=context_->documentId();
+    if(source.rfind("component.",0)==0&&context_->selectedNode())diagnostic.node=context_->selectedNode()->id;
+    if(parameters.contains("path")&&parameters.at("path").is_string())diagnostic.path=parameters.at("path").get<std::string>();
+    if(parameters.contains("asset")&&parameters.at("asset").is_string()&&context_->isProject()){
+        const auto asset=parameters.at("asset").get<std::string>();if(context_->assets().records().count(asset)){diagnostic.asset=asset;if(diagnostic.path.empty())diagnostic.path=context_->assets().records().at(asset).path.u8string();}
+    }
+    diagnostics_.record(std::move(diagnostic));
+}
+EditResult EditorSession::editRequest(const EditRequest& request){
+    if(request.commandId=="node.select"||request.commandId=="selection.click"||request.commandId.rfind("preview.",0)==0||request.commandId=="document.reload")references_.cancel();
+    auto result=edits_->execute(request);
+    if(!result)recordError(request.commandId,result.diagnostics.empty()?"Edit rejected":result.diagnostics.front().value("message",std::string("Edit rejected")),request.parameters);
+    return result;
+}
 bool EditorSession::startBuild(const std::filesystem::path& install,const std::filesystem::path& output,bool replace) noexcept {
     try { return static_cast<bool>(edit("project.build",{{"install",install.u8string()},{"output",output.u8string()},{"replace",replace}})); }
     catch(const std::exception& error) { recordError("editor.command",error.what());return false; }
@@ -333,7 +358,7 @@ bool EditorSession::resolveDocumentAction(DocumentDecision decision){
 }
 bool EditorSession::saveOnClose() noexcept {
     if(play_)static_cast<void>(execute(EditorCommand::Stop));
-    return !context_->dirty() || execute(EditorCommand::Save);
+    try{documents_.saveAll();return true;}catch(const std::exception& error){recordError("document.save-all",error.what());return false;}
 }
 
 bool EditorSession::consumeLayoutResetRequest() noexcept {

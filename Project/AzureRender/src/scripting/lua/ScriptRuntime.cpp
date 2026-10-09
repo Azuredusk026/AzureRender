@@ -14,6 +14,7 @@
 #include <chrono>
 #include <cmath>
 #include <fstream>
+#include <regex>
 namespace azurerender {
 namespace {
 using Json=nlohmann::json;
@@ -68,6 +69,8 @@ struct ScriptRuntime::Impl {
     };
     std::map<ecs::Entity,Entry> entries;
     std::vector<std::string> errors;
+    std::vector<StructuredDiagnostic> diagnostics;
+    std::uint64_t diagnosticSequence=0;
     std::chrono::steady_clock::time_point nextPoll{};
     std::uint64_t sceneRevision=0;
     bool closed=false;
@@ -93,10 +96,16 @@ struct ScriptRuntime::Impl {
         objectMetadataFactory=factory.get<sol::protected_function>();
     }
     void requireOpen() {if(closed)throw std::logic_error("Script runtime is closed");}
-    void error(const std::string& message) {
+    void error(const std::string& message,const std::string& node={},const std::string& asset={}) {
         if(errors.empty() || errors.back()!=message) {
             if(errors.size()==128)errors.erase(errors.begin());
             errors.push_back(message);RuntimeDiagnostics::instance().warning("script",message);
+            StructuredDiagnostic diagnostic;diagnostic.id="lua-"+std::to_string(++diagnosticSequence);diagnostic.source="script.lua";diagnostic.code="ScriptFailed";
+            diagnostic.message=message;diagnostic.node=node;diagnostic.asset=asset;
+            if(!asset.empty())try{diagnostic.path=assets.resolveReference(asset).u8string();}catch(...){}
+            static const std::regex location(":([0-9]+):");std::smatch match;
+            if(std::regex_search(message,match,location))try{diagnostic.line=static_cast<unsigned>(std::stoul(match[1].str()));}catch(...){}
+            if(diagnostics.size()==128)diagnostics.erase(diagnostics.begin());diagnostics.push_back(std::move(diagnostic));
         }
     }
     sol::table objectTable(const ScriptObject& object) {
@@ -139,7 +148,7 @@ struct ScriptRuntime::Impl {
     template<class... Args> bool call(Entry& entry,const std::string& name,Args&&... args) {
         const sol::object function=entry.environment[name];
         if(function.get_type()!=sol::type::nil && function.get_type()!=sol::type::function) {
-            error(entry.asset+": callback is not a function: "+name);entry.active=false;return false;
+            error(entry.asset+": callback is not a function: "+name,entry.object.node,entry.asset);entry.active=false;return false;
         }
         host.beginCallback(name=="init");
         if(function.get_type()==sol::type::nil){host.endCallback(true);return true;}
@@ -148,7 +157,7 @@ struct ScriptRuntime::Impl {
         const sol::protected_function_result result=callback(std::forward<Args>(args)...);
         lua_sethook(lua.lua_state(),nullptr,0,0);host.endCallback(result.valid());
         if(!result.valid()) {
-            const sol::error failure=result;error(entry.asset+": "+failure.what());entry.active=false;return false;
+            const sol::error failure=result;error(entry.asset+": "+failure.what(),entry.object.node,entry.asset);entry.active=false;return false;
         }
         return true;
     }
@@ -157,15 +166,15 @@ struct ScriptRuntime::Impl {
         if(existing!=entries.end())existing->second.attemptedSource=code;
         const auto object=host.object(runtime.nodeId(entity));auto env=environment(object);
         const sol::load_result loaded=lua.load(code,"@"+assets.resolveReference(asset).generic_string());
-        if(!loaded.valid()){const sol::error failure=loaded;error(asset+": "+failure.what());return false;}
+        if(!loaded.valid()){const sol::error failure=loaded;error(asset+": "+failure.what(),object.node,asset);return false;}
         sol::protected_function chunk=loaded;sol::set_environment(env,chunk);
         lua_sethook(lua.lua_state(),instructionLimit,LUA_MASKCOUNT,100000);
         const sol::protected_function_result result=chunk();lua_sethook(lua.lua_state(),nullptr,0,0);
-        if(!result.valid()){const sol::error failure=result;error(asset+": "+failure.what());return false;}
+        if(!result.valid()){const sol::error failure=result;error(asset+": "+failure.what(),object.node,asset);return false;}
         for(const char* name:{"init","update","trigger","interact","shutdown"}) {
             const sol::object callback=env[name];
             if(callback.get_type()!=sol::type::nil && callback.get_type()!=sol::type::function) {
-                error(asset+": invalid callback: "+name);return false;
+                error(asset+": invalid callback: "+name,object.node,asset);return false;
             }
         }
         Entry candidate{object,asset,code,std::move(env),true};
@@ -195,7 +204,7 @@ struct ScriptRuntime::Impl {
                         entries.emplace(entity,Entry{host.object(runtime.nodeId(entity)),script.asset,code,
                             environment(host.object(runtime.nodeId(entity))),false});
                 }catch(const std::exception& failure) {
-                    host.cancelInitialization();error(script.asset+": "+failure.what());
+                    host.cancelInitialization();error(script.asset+": "+failure.what(),runtime.nodeId(entity),script.asset);
                     if(!entries.count(entity))entries.emplace(entity,Entry{host.object(runtime.nodeId(entity)),script.asset,{},
                         environment(host.object(runtime.nodeId(entity))),false});
                 }
@@ -206,7 +215,7 @@ struct ScriptRuntime::Impl {
         synchronize();
         for(auto& entry:entries) {
             try{const auto code=source(entry.second.asset);if(code!=entry.second.attemptedSource)reload(entry.first,entry.second.asset,code);}
-            catch(const std::exception& failure){host.cancelInitialization();error(entry.second.asset+": "+failure.what());}
+            catch(const std::exception& failure){host.cancelInitialization();error(entry.second.asset+": "+failure.what(),entry.second.object.node,entry.second.asset);}
         }
     }
     void shutdown() noexcept {
@@ -251,4 +260,5 @@ std::size_t ScriptRuntime::activeCount() const {
     std::size_t result=0;for(const auto& entry:impl_->entries)if(entry.second.active)++result;return result;
 }
 const std::vector<std::string>& ScriptRuntime::errors() const{return impl_->errors;}
+const std::vector<StructuredDiagnostic>& ScriptRuntime::diagnostics() const{return impl_->diagnostics;}
 }

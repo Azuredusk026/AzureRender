@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PrefabAuthoring
+1/1 Test #193: AzureEditor.PrefabAuthoring ......***Failed    0.08 sec
+[1791584722640][info][editor][code=0] Opened scene: physics-arm
+[1791584722653][info][editor][code=0] ERROR [prefab.create]: Unknown operation: prefab.create
+prefab.create: [{"code":"RejectedOperation","message":"Unknown operation: prefab.create"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.10 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PrefabAuthoring (Failed)
+Errors while running CTest

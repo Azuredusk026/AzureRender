@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 176: AzureEditor.ProjectFlow
+1/2 Test #176: AzureEditor.ProjectFlow ..........   Passed    0.41 sec
+    Start 193: AzureEditor.DomainAuthoring
+2/2 Test #193: AzureEditor.DomainAuthoring ......***Failed    0.15 sec
+[1791584078822][info][editor][code=0] Opened scene: startup
+Registered domain accepts its typed target
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   0.60 sec
+
+The following tests FAILED:
+	193 - AzureEditor.DomainAuthoring (Failed)
+Errors while running CTest

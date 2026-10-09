@@ -18,6 +18,7 @@ class Project final {
     static void createGame(const std::filesystem::path& directory, const std::string& name);
     static Project load(const std::filesystem::path& file);
     [[nodiscard]] SceneDocument loadStartupScene() const;
+    [[nodiscard]] SceneDocument loadScene(const std::filesystem::path& sceneFile) const;
     [[nodiscard]] std::filesystem::path resolve(const std::string& virtualPath) const;
 };
 }  // namespace azurerender

@@ -70,7 +70,7 @@ int main(){try{
     session.settings().applyPending();session.configureModel(fixed);
     require(session.modelAvailable(),"Explicit model assembly must expose the optional service");
     const auto description=session.edit("ai.describe").value;
-    require(description.at("domains").size()==2&&description.at("domains").at(0).contains("schema"),
+    require(description.at("domains").size()>=5&&description.at("domains").at(0).contains("schema"),
             "Production discovery must describe registered domains and their candidate schemas");
     auto hostRequest=session.edit("ai.generate",{{"runId","host"},{"domain","scene"},{"target","document"},{"instruction","Create a node"}});
     require(static_cast<bool>(hostRequest),"Session production operation must start model generation");

@@ -12,8 +12,8 @@ Level Level::load(const std::filesystem::path& path, const AssetDatabase& assets
     std::ifstream input(path); if (!input) throw std::runtime_error("Cannot open level: " + path.string());
     nlohmann::json document; input >> document; return parse(document, assets);
 }
-Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets) {
-    const auto expanded = expandPrefabs(document, assets);
+Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,const std::map<std::string,nlohmann::json>& prefabSources) {
+    const auto expanded = expandPrefabs(document, assets,prefabSources);
     Level level; level.document_ = document;
     level.reloadKey_ = expanded.dump();
     level.scene.sceneId = expanded.at("id").get<std::string>();

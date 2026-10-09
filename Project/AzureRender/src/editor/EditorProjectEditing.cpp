@@ -15,12 +15,12 @@ namespace azurerender {
 namespace {
 std::string identity(const char* prefix){static std::uint64_t count=0;return std::string(prefix)+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+"-"+std::to_string(++count);}
 }
-std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem::path& path){
+std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem::path& path,const std::filesystem::path& documentPath){
     ContentOperationService::recoverProject(path);
     runtimeComponentRegistry().seal();
     auto project=std::make_unique<Project>(Project::load(path));auto assets=std::make_unique<AssetDatabase>(*project);assets->refresh();
-    const auto scenePath=project->resolve(project->startupScene);
-    Level level; if(scenePath.extension()==".azurelevel")level=Level::load(scenePath,*assets);else level.scene=project->loadStartupScene();
+    const auto scenePath=documentPath.empty()?project->resolve(project->startupScene):documentPath;
+    Level level; if(scenePath.extension()==".azurelevel")level=Level::load(scenePath,*assets);else level.scene=project->loadScene(scenePath);
     auto context=std::make_shared<EditorContext>(level.scene,scenePath);
     context->project_=std::move(project);context->assets_=std::move(assets);context->components_=std::move(level.components);
     if(scenePath.extension()==".azurelevel"){
@@ -31,16 +31,17 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
         for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_string();}
         if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_string();}
     }
-    context->syncComponents();context->checkpointSaved();return context;
+    context->capturePrefabSources();context->syncComponents();context->checkpointSaved();return context;
 }
 void EditorContext::reloadProjectContent() {
     if(!project_||dirty())throw std::invalid_argument("Save scene changes before refreshing content");
-    auto candidate=EditorContext::openProject(project_->file);
+    auto candidate=EditorContext::openProject(project_->file,scenePath_);
     std::vector<std::string> selected;for(const auto index:selectedNodes_)selected.push_back(scene_.nodes.at(index).id);
     std::vector<std::size_t> indices;
     for(const auto& id:selected)for(std::size_t index=0;index<candidate->scene_.nodes.size();++index)if(candidate->scene_.nodes[index].id==id)indices.push_back(index);
     scene_=std::move(candidate->scene_);scenePath_=std::move(candidate->scenePath_);project_=std::move(candidate->project_);assets_=std::move(candidate->assets_);
     components_=std::move(candidate->components_);sourceLevel_=std::move(candidate->sourceLevel_);resourceReferences_=std::move(candidate->resourceReferences_);
+    prefabBaselines_=std::move(candidate->prefabBaselines_);prefabFingerprints_=std::move(candidate->prefabFingerprints_);
     ecsWorld_.swap(candidate->ecsWorld_);nodeEntities_=std::move(candidate->nodeEntities_);
     selectedNodes_=std::move(indices);selectedNodeIndex_=selectedNodes_.empty()?0:selectedNodes_.back();
     clearAnimationPreview();undoStack_.clear();redoStack_.clear();closeEditMerge();refreshSelectedTransform();
@@ -98,6 +99,10 @@ void EditorContext::createNode(const std::string& requestedId){
 void EditorContext::placePrefab(const std::string& asset,const std::string& instance){
     if(!assets_)throw std::logic_error("Prefab placement requires a project");
     if(assets_->resolveReference(asset).extension()!=".azureprefab")throw std::invalid_argument("Prefab placement expects .azureprefab");
+    for(const auto& existing:sourceLevel_.value("prefabs",nlohmann::json::array())){
+        std::ifstream input(assets_->resolveReference(existing.at("asset")));nlohmann::json source;input>>source;
+        if(prefabFingerprints_.at(existing.at("instance").get<std::string>())!=documentFingerprint(source))throw std::invalid_argument("Reload changed prefab sources before placing another instance");
+    }
     auto document=levelDocument();if(!document.contains("schemaVersion"))document["schemaVersion"]=1;
     if(!document.contains("prefabs"))document["prefabs"]=nlohmann::json::array();
     document["prefabs"].push_back({{"instance",instance},{"asset",asset}});
@@ -109,26 +114,31 @@ void EditorContext::placePrefab(const std::string& asset,const std::string& inst
     for(const auto& resource:expanded.at("resources")){
         const auto reference=resource.at("asset").get<std::string>();references[assets_->resolveReference(reference)]=reference;
     }
-    beginEdit();sourceLevel_=std::move(document);resourceReferences_=std::move(references);
+    beginEdit();sourceLevel_=std::move(document);resourceReferences_=std::move(references);capturePrefabSources();
     scene_=std::move(candidate.scene);components_=std::move(candidate.components);rebuildEntities();
     for(std::size_t i=0;i<scene_.nodes.size();++i)if(scene_.nodes[i].id.rfind(instance+":",0)==0){selectNode(i);break;}
     log("Placed prefab: "+instance);
 }
 void EditorContext::previewAnimation(const std::string& state,double time,const std::string& previous,double crossfade){
     if(!selectedNode() || !assets_)throw std::logic_error("Animation preview requires a project node");
-    const auto data=runtimeComponents().at(selectedNode()->id);
+    animationPreview_=animationPose(selectedNode()->id,state,time,previous,crossfade);
+}
+NodeAnimationFrame EditorContext::animationPose(const std::string& id,const std::string& state,double time,const std::string& previous,double crossfade) const{
+    if(!assets_)throw std::logic_error("Animation pose requires a project");
+    const auto node=std::find_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& value){return value.id==id;});if(node==scene_.nodes.end())throw std::invalid_argument("Unknown animation node");
+    const auto data=runtimeComponents().at(id);
     if(!data.contains("azure.animator"))throw std::invalid_argument("Selected node lacks animator");
     auto candidate=data;candidate["azure.animator"]["data"]["state"]=state;
-    validateComponentReferences(*selectedNode(),candidate,scene_);
+    validateComponentReferences(*node,candidate,scene_);
     const auto fields=candidate.at("azure.animator").at("data");
     std::ifstream input(assets_->resolveReference(fields.at("asset").get<std::string>()));nlohmann::json graph;input>>graph;
     auto machine=AnimationStateMachine::parse(graph);
     if(!previous.empty())machine.select(previous);
     machine.select(state,previous.empty()?0:crossfade);machine.advance(time);
-    NodeAnimationFrame frame{selectedNode()->id,machine.clip(),machine.time(),machine.loop(),
+    NodeAnimationFrame frame{id,machine.clip(),machine.time(),machine.loop(),
         machine.previousClip(),machine.previousTime(),machine.blend(),machine.previousLoop(),
         {fields.value("morph0",0.0F),fields.value("morph1",0.0F)}};
-    animationPreview_=std::move(frame);
+    return frame;
 }
 void EditorContext::selectNodes(std::vector<std::size_t> indices){
     for(auto index:indices)if(index>=scene_.nodes.size())throw std::out_of_range("Editor node selection is out of range");
@@ -251,14 +261,17 @@ nlohmann::json EditorContext::levelDocument()const{
     auto document=sourceLevel_;document["id"]=scene_.sceneId;document["nodes"]=nlohmann::json::array();document["resources"]=nlohmann::json::array();document["lights"]=nlohmann::json::array();
     document["renderSettings"]=encodeLevelRenderSettings(renderSettings());
     const auto data=runtimeComponents();std::set<std::string> prefabResources,liveInstances;
+    if(document.contains("prefabs"))for(auto& instance:document["prefabs"])instance["overrides"]=nlohmann::json::object();
     for(const auto& node:scene_.nodes){
         nlohmann::json encoded={{"id",node.id},{"name",node.name},{"parentId",node.parentId},{"resourceId",node.resourceId},{"components",data.at(node.id)}};
         if(!node.materialSlots.empty())encoded["materialSlots"]=node.materialSlots;
         if(!node.prefabSource.empty()&&!node.instanceOf.empty()){
             const auto prefix=node.id.substr(0,node.id.find(':'));liveInstances.insert(prefix);prefabResources.insert(node.resourceId);
             bool found=false;for(auto& instance:document["prefabs"])if(instance.at("instance")==prefix){
-                auto local=encoded;local.erase("id");for(const char* link:{"parentId","resourceId"}){const auto text=local[link].get<std::string>();if(!text.empty())local[link]=text.substr(prefix.size()+1);}
-                instance["overrides"][node.instanceOf].merge_patch(local);found=true;break;}
+                auto local=encoded;local["id"]=node.instanceOf;for(const char* link:{"parentId","resourceId"}){const auto text=local[link].get<std::string>();if(!text.empty()){if(text.rfind(prefix+":",0)!=0)throw std::invalid_argument("Prefab links must remain inside their instance");local[link]=text.substr(prefix.size()+1);}}
+                std::map<std::string,std::string> mapping;for(const auto& item:scene_.nodes)if(item.id.rfind(prefix+":",0)==0)mapping[item.id]=item.id.substr(prefix.size()+1);remapPrefabReferences(local,mapping);
+                local=canonicalPrefabNode(std::move(local));auto base=prefabBaselines_.at(prefix).at(node.instanceOf);local.erase("id");base.erase("id");
+                const auto patch=prefabOverride(base,local);if(!patch.empty())instance["overrides"][node.instanceOf]=patch;found=true;break;}
             if(!found)throw std::runtime_error("Prefab node lacks serialized instance");
         }else document["nodes"].push_back(std::move(encoded));
     }
@@ -274,5 +287,15 @@ nlohmann::json EditorContext::levelDocument()const{
     for(const auto& light:scene_.lights){if(light.nodeId.find(':')!=std::string::npos && liveInstances.count(light.nodeId.substr(0,light.nodeId.find(':'))))continue;
         document["lights"].push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},{"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});}
     return document;
+}
+void EditorContext::capturePrefabSources(const std::map<std::string,nlohmann::json>& sources){
+    prefabBaselines_=nlohmann::json::object();prefabFingerprints_=nlohmann::json::object();
+    if(!assets_||!sourceLevel_.is_object())return;
+    for(const auto& instance:sourceLevel_.value("prefabs",nlohmann::json::array())){
+        const auto asset=instance.at("asset").get<std::string>(),id=instance.at("instance").get<std::string>();nlohmann::json source;
+        const auto replacement=sources.find(asset);if(replacement!=sources.end())source=replacement->second;else{std::ifstream input(assets_->resolveReference(asset));input>>source;}
+        prefabFingerprints_[id]=documentFingerprint(source);const auto expanded=expandPrefabs(source,*assets_,sources);
+        prefabBaselines_[id]=nlohmann::json::object();for(const auto& node:expanded.at("nodes"))prefabBaselines_[id][node.at("id").get<std::string>()]=canonicalPrefabNode(node);
+    }
 }
 }

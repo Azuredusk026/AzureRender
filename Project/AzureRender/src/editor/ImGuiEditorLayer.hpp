@@ -71,7 +71,8 @@ private:
     VkDescriptorSet previewTexture(std::uint64_t handle);
     bool cameraPreviewEnabled_=false;
     std::array<char,4096> proposalInstruction_{};
-    int proposalDomain_=0;
+    std::string proposalDomain_="scene",proposalTarget_="document";
+    void drawContentAssistancePanel(PanelContext&);
     std::uint64_t proposalSequence_=0;
     void drawSettingsPanel(PanelContext& context);
     void drawProjectBrowserPanel(PanelContext& context);
@@ -93,6 +94,14 @@ private:
     void drawMaterialAssetPanel();
     void drawMaterialSlots(const SceneNode&);
     void drawPhysicsAuthoring(const SceneNode&);
+    void drawDocumentTabs();
+    void drawScriptAuthoringPanel(PanelContext&);
+    void drawProblemsPanel(PanelContext&);
+    void drawPrefabAuthoringPanel(PanelContext&);
+    std::string prefabOutputPath_="assets:/NewPrefab.azureprefab",prefabOverrideInstance_,prefabFieldScope_;
+    std::set<std::string> prefabSelectedFields_;
+    std::string scriptTemplateBackend_="lua",scriptTemplatePath_="assets:/NewBehaviour.lua",problemSearch_;
+    std::string displayedDocument_,documentCloseTarget_;
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);
     void drawBuildPanel(PanelContext& context);

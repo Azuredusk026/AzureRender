@@ -618,8 +618,8 @@ void AzureRenderApp::buildSceneFrameData(
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
-        const auto& preview=runOptions_.editorSession->context().animationPreview();
-        if(preview){frame.animations.push_back(*preview);++editorPreviewFrames_;}
+        const auto previews=runOptions_.editorSession->animationFrames();
+        frame.animations.insert(frame.animations.end(),previews.begin(),previews.end());editorPreviewFrames_+=previews.size();
     }
 #endif
     if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192){nlohmann::json state;

@@ -145,7 +145,7 @@ void ImGuiEditorLayer::drawWorkspace() {
         if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
         ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
-        for(const auto& id:{"assets","animation","gameplay-debug","build","capture","console","settings","environment","projects"}) {
+        for(const auto& id:{"assets","animation","scripts","problems","assistance","prefabs","gameplay-debug","build","capture","console","settings","environment","projects"}) {
             const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});
             const auto title=panel.title.substr(0,panel.title.find("###"));
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
@@ -165,6 +165,8 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
     data["previewMode"]=session_->previewMode();
     data["document"]=context_->documentVersion().describe();
+    data["documents"]=session_->documents().describe(context_->documentId());
+    data["animationTimelines"]=session_->animations().describe();
     data["previewSteps"]=session_->game()?session_->game()->steps():0;
     data["physicsBodies"]=nlohmann::json::array();data["physicsConstraints"]=0;
     if(auto* runtime=session_->runtime()){
@@ -172,6 +174,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         if(session_->game())data["physicsConstraints"]=session_->game()->physics().constraintCount();
     }
     data["view"]=session_->edit("viewport.describe").value;
+    data["viewportOverlayPolicies"]=session_->viewportOverlayPolicies();
     data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
     data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";
     data["navigation"]["rawMouse"]=window_&&glfwRawMouseMotionSupported()&&glfwGetInputMode(window_,GLFW_RAW_MOUSE_MOTION)==GLFW_TRUE;

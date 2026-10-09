@@ -4,6 +4,7 @@ namespace azurerender {
 std::string EditorFeedback::record(std::string source,std::string message) {
     if(!entries_.empty()&&entries_.back().source==source&&entries_.back().message==message)return entries_.back().id;
     const auto id="feedback-"+std::to_string(++sequence_);latest_=message;
+    if(entries_.size()==512)entries_.erase(entries_.begin());
     entries_.push_back({id,std::move(source),std::move(message)});return id;
 }
 void EditorFeedback::dismiss(const std::string& id) {

@@ -54,6 +54,20 @@ void MaterialEditingService::assign(EditorContext& context,const std::vector<std
     for(auto& node:candidate.nodes)if(unique.count(node.id)){if(material.empty())node.materialSlots.erase(slot);else node.materialSlots[slot]=material;}
     resolveSceneMaterials(candidate,context.assets());context.scene()=std::move(candidate);
 }
+MaterialDocument MaterialEditingService::previewField(const EditorContext& context,const std::string& asset,const std::string& field,const Json& value){
+    const auto& record=context.assets().records().at(asset);
+    if(!assetTypeRegistry().matches(record.path,{"material"}))throw std::invalid_argument("Material operations require a material asset");
+    auto document=MaterialDocument::load(record.path);
+    if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);if(value.is_null())document.textures.erase(slot);else document.textures[slot]=value;}
+    else {if(!document.parameters.contains(field))throw std::invalid_argument("Unknown material parameter");document.parameters[field]=value;}
+    document.validate();
+    for(const auto& texture:document.textures.items()){
+        const auto path=context.assets().resolve(texture.value().at("asset").get<std::string>());
+        if(!assetTypeRegistry().matches(path,{"image"}))throw std::invalid_argument("Material texture must reference an image asset");
+        static_cast<void>(loadAssetImage(path.u8string()));
+    }
+    return document;
+}
 Json MaterialEditingService::execute(EditorContext& context,ContentOperationService& content,const std::string& operation,const Json& args){
     if(!context.isProject())throw std::invalid_argument("Material authoring requires a project");
     if(operation=="material.types")return MaterialTypeRegistry::builtins().describe();
@@ -68,9 +82,7 @@ Json MaterialEditingService::execute(EditorContext& context,ContentOperationServ
     if(history.current!=before){history.undo.clear();history.redo.clear();history.current=before;}
     if(operation=="material.describe")return {{"asset",id},{"document",before},{"type",MaterialTypeRegistry::builtins().type(document.typeId).parameters},{"textures",MaterialTypeRegistry::builtins().type(document.typeId).textures},{"canUndo",!history.undo.empty()},{"canRedo",!history.redo.empty()}};
     if(operation=="material.field"){
-        const auto field=args.at("field").get<std::string>();
-        if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);if(args.at("value").is_null())document.textures.erase(slot);else document.textures[slot]=args.at("value");}
-        else{if(!document.parameters.contains(field))throw std::invalid_argument("Unknown material parameter");document.parameters[field]=args.at("value");}
+        document=previewField(context,id,args.at("field").get<std::string>(),args.at("value"));
     }else if(operation=="material.undo"){
         if(history.undo.empty())throw std::invalid_argument("Material undo history is empty");document=MaterialDocument::parse(history.undo.back());
     }else if(operation=="material.redo"){

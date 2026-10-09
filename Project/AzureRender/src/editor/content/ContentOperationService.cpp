@@ -3,6 +3,7 @@
 #include "assets/GenerationManifest.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include "runtime/MaterialDocument.hpp"
+#include "runtime/Level.hpp"
 #include <fstream>
 #include <chrono>
 #include <iomanip>
@@ -102,7 +103,13 @@ nlohmann::json ContentOperationService::plan(const nlohmann::json& request) {
         value.changes.push_back({path,fs::exists(path)?std::optional<std::string>(read(path)):std::nullopt,std::move(after)});
         value.description["affected"].push_back(path.lexically_relative(project_.file.parent_path()).generic_u8string());
     };
-    if(operation=="material.write") {
+    if(operation=="prefab.write") {
+        const auto path=writable(request.at("destination").get<std::string>());
+        if(path.extension()!=".azureprefab"||!fs::is_directory(path.parent_path()))throw std::invalid_argument("Prefab destination requires an existing project directory and .azureprefab extension");
+        if(request.value("create",false)&&fs::exists(path))throw std::invalid_argument("Prefab source already exists");
+        const auto& document=request.at("document");static_cast<void>(Level::parse(document,database_));change(path,document.dump(2)+"\n");
+        if(!fs::exists(path)){const auto id=uuid();change(fs::u8path(path.u8string()+".azmeta"),Json{{"schemaVersion",1},{"id",id},{"settings",Json::object()}}.dump(2));value.description["asset"]=id;}
+    }else if(operation=="material.write") {
         const auto path=writable(request.at("destination").get<std::string>());
         if(path.extension()!=".azurematerial"||!fs::is_directory(path.parent_path()))throw std::invalid_argument("Material destination requires an existing project directory and .azurematerial extension");
         if(request.value("create",false)&&fs::exists(path))throw std::invalid_argument("Material asset already exists");

@@ -1,0 +1,41 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PrefabAuthoring
+1/1 Test #193: AzureEditor.PrefabAuthoring ......***Failed    1.04 sec
+[1791585447508][info][editor][code=0] Opened scene: physics-arm
+[1791585447610][info][editor][code=0] ERROR [prefab.create]: Prefab source already exists
+[1791585447617][info][editor][code=0] ERROR [prefab.create]: Prefab component depends on an external object
+[1791585447619][info][editor][code=0] Opened scene: physics-arm
+[1791585447632][info][editor][code=0] Selected node: fixed
+[1791585447632][info][editor][code=0] Placed prefab: one
+[1791585447697][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-36253597869200\assets\mechanism.azurelevel
+[1791585447703][info][editor][code=0] Opened scene: physics-arm
+[1791585447709][info][editor][code=0] Selected node: moving
+[1791585447720][info][editor][code=0] Opened scene: physics-arm
+[1791585447757][info][editor][code=0] Opened scene: physics-arm
+[1791585447804][info][editor][code=0] Undo
+[1791585447863][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-36253597869200\assets\mechanism.azurelevel
+[1791585447907][info][editor][code=0] Opened scene: physics-arm
+[1791585447924][info][editor][code=0] Opened scene: physics-arm
+[1791585447930][info][editor][code=0] Selected node: Authored arm
+[1791585447941][info][editor][code=0] Opened scene: physics-arm
+[1791585447964][info][editor][code=0] Opened scene: physics-arm
+[1791585448038][info][editor][code=0] ERROR [prefab.apply]: Prefab source fingerprint is expired
+[1791585448063][info][editor][code=0] Opened scene: physics-arm
+[1791585448071][info][editor][code=0] Opened scene: physics-arm
+[1791585448241][info][editor][code=0] Opened scene: physics-arm
+[1791585448248][info][editor][code=0] Opened scene: physics-arm
+[1791585448393][info][editor][code=0] Opened scene: physics-arm
+[1791585448401][info][editor][code=0] Opened scene: physics-arm
+[1791585448428][info][editor][code=0] Opened scene: physics-arm
+[1791585448436][info][editor][code=0] Opened scene: physics-arm
+Rollback callback failure still restores all document contents and histories
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.05 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PrefabAuthoring (Failed)
+Errors while running CTest

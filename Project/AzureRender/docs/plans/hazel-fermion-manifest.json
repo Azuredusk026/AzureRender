@@ -403,8 +403,9 @@
       "phase": "U13",
       "proposal": "提供场景标签、逐文档保存与恢复。每个文档独立拥有选择、版本和历史。",
       "acceptance": "打开两关卡分别编辑。关标签、切项目及异常重启都恢复正确归属。",
-      "status": "Planned",
-      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17"
+      "status": "Complete",
+      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "B08",
@@ -422,8 +423,9 @@
       "phase": "U13",
       "proposal": "加入播放时间轴、循环、速度、骨架显示和重绑定诊断。",
       "acceptance": "两个不同骨架独立预览。暂停拖动与切对象正确，预览保持制作数据。",
-      "status": "Planned",
-      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1"
+      "status": "Complete",
+      "sourceSha256": "c97ae1f858286b98f3fabe662d8429aedcc6dfb30364d05dc5ee3ee5223a9df1",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "B09",
@@ -461,8 +463,9 @@
       "phase": "U13",
       "proposal": "提供脚本模板、类搜索、公开字段、源码揭示和重载诊断。",
       "acceptance": "Lua 与托管用例共用字段契约。类型变化、无后端和重载失败可恢复。",
-      "status": "Planned",
-      "sourceSha256": "097c837a65735f9d0abba45b3936ee0242466e92af3a5c042442b35064f07b80"
+      "status": "Complete",
+      "sourceSha256": "097c837a65735f9d0abba45b3936ee0242466e92af3a5c042442b35064f07b80",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "B11",
@@ -480,8 +483,9 @@
       "phase": "U13",
       "proposal": "分离日志、任务、问题与内容辅助。诊断包含文件、对象、操作和关联编号。",
       "acceptance": "点问题揭示目标。过滤与清除保留诊断来源，长日志维持预算。",
-      "status": "Planned",
-      "sourceSha256": "79e67fb7a7a17604a3b624fba05ed15e86ccd8c5552aebf64d57bdb10d089eac"
+      "status": "Complete",
+      "sourceSha256": "79e67fb7a7a17604a3b624fba05ed15e86ccd8c5552aebf64d57bdb10d089eac",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "B12",
@@ -519,8 +523,9 @@
       "phase": "U13",
       "proposal": "材质、纹理和物理新能力公开操作描述。领域提案调用相同校验与事务。",
       "acceptance": "固定响应、取消、过期、非法引用和失败恢复通过。关闭模型仍可制作。",
-      "status": "Planned",
-      "sourceSha256": "66c173489e60d1d90818599752d4263732368f3cff905a6d8e5494089df1126b"
+      "status": "Complete",
+      "sourceSha256": "66c173489e60d1d90818599752d4263732368f3cff905a6d8e5494089df1126b",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "B14",
@@ -538,8 +543,9 @@
       "phase": "U13",
       "proposal": "提供创建 Prefab、覆盖列表、单项还原与受控应用源资产。",
       "acceptance": "两个实例独立覆盖。源变更与失效字段报告清楚，撤销及保存重开一致。",
-      "status": "Planned",
-      "sourceSha256": "00168bf1320605c4105e1a72687a7bb23e31510505e6dc056cd219b6241aa1b1"
+      "status": "Complete",
+      "sourceSha256": "00168bf1320605c4105e1a72687a7bb23e31510505e6dc056cd219b6241aa1b1",
+      "evidence": "docs/acceptance/u13/2026-10-10.md"
     },
     {
       "id": "C01",
@@ -847,14 +853,14 @@
       "evidence": [
         "docs/acceptance/g13/2026-10-10.md"
       ],
-      "commit": null,
+      "commit": "c0f478efbcc0d0f1adf2bb79a47060e434d3066b",
       "dependsOn": [
         "U12"
       ]
     },
     {
       "id": "U13",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "B07",
@@ -864,7 +870,9 @@
         "B13",
         "B14"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/u13/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "G13"
@@ -872,7 +880,7 @@
     },
     {
       "id": "G15",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [],
       "evidence": [],
@@ -1109,7 +1117,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring; U13: 149 non-GPU, 6 final-host GPU, multi-document and Prefab UI, animation controls, managed template execution"
   },
   "execution": {
     "order": [
@@ -1125,7 +1133,7 @@
       "G16",
       "P5"
     ],
-    "active": "U13",
+    "active": "G15",
     "completed": [
       "U8",
       "U9",
@@ -1133,7 +1141,8 @@
       "U10",
       "U11",
       "U12",
-      "G13"
+      "G13",
+      "U13"
     ]
   }
 }

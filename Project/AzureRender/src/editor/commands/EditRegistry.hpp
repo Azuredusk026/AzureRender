@@ -18,4 +18,5 @@ private:
 };
 EditRegistry editorOperations(EditorSession& session);
 void registerProposalOperations(EditRegistry& registry,EditorSession& session);
+void registerDiagnosticOperations(EditRegistry& registry,EditorSession& session);
 }

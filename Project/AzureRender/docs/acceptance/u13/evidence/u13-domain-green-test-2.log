@@ -1,0 +1,50 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  43: AzureEditor.ProposalController
+1/3 Test  #43: AzureEditor.ProposalController ...   Passed    1.89 sec
+    Start  44: AzureEditor.ProposalAdapter
+2/3 Test  #44: AzureEditor.ProposalAdapter ......   Passed    0.91 sec
+    Start 193: AzureEditor.DomainAuthoring
+3/3 Test #193: AzureEditor.DomainAuthoring ......***Failed    0.54 sec
+[1791584379494][info][editor][code=0] Opened scene: startup
+[1791584379754][info][editor][code=0] Opened scene: startup
+[1791584379836][info][editor][code=0] Opened scene: startup
+[1791584379873][info][editor][code=0] Opened scene: startup
+[1791584379883][info][editor][code=0] Opened scene: startup
+[1791584379887][info][editor][code=0] Selected node: test_model
+{
+  "baseVersion": {
+    "contentHash": "fnv1a64:322f75264a38b646",
+    "documentId": "17915843794941474-1",
+    "revision": 6
+  },
+  "diagnostics": [
+    {
+      "code": "InvalidProposal",
+      "message": "Physics candidate violates production semantics: [{\"code\":\"OperationFailed\",\"message\":\"Unknown property: friction\"}]"
+    }
+  ],
+  "diff": [],
+  "domain": "physics",
+  "historyBytes": 869,
+  "historyCount": 4,
+  "operations": [],
+  "repairCount": 1,
+  "runId": "domain-physics",
+  "schemaVersion": 1,
+  "sourceHash": "fnv1a64:e2a653bbcc167d31",
+  "state": "Generating",
+  "structuredMode": "json",
+  "target": "root",
+  "transactional": true
+}
+Production semantics validate the proposal
+
+
+67% tests passed, 1 tests failed out of 3
+
+Total Test time (real) =   3.36 sec
+
+The following tests FAILED:
+	193 - AzureEditor.DomainAuthoring (Failed)
+Errors while running CTest

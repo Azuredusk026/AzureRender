@@ -1,0 +1,11 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 199: AzureEditor.AuthoringGpu
+1/1 Test #199: AzureEditor.AuthoringGpu .........   Passed   81.40 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+gpu    =  81.40 sec*proc (1 test)
+
+Total Test time (real) =  81.42 sec

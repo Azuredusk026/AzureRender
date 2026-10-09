@@ -1,5 +1,6 @@
 #pragma once
 #include "ecs/Entity.hpp"
+#include "diagnostics/StructuredDiagnostic.hpp"
 #include <functional>
 #include <string>
 #include <vector>
@@ -26,6 +27,7 @@ public:
     virtual void setUiHandler(std::function<void(std::string,std::string)>)=0;
     virtual std::size_t activeCount() const=0;
     virtual const std::vector<std::string>& errors() const=0;
+    virtual const std::vector<StructuredDiagnostic>& diagnostics() const {static const std::vector<StructuredDiagnostic> empty;return empty;}
     virtual ScriptRuntimeCapabilities capabilities() const=0;
 };
 }

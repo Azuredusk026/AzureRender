@@ -5,10 +5,14 @@
 #include "content/ContentDirectoryModel.hpp"
 #include "content/AssetEditorRegistry.hpp"
 #include "content/NodePresetRegistry.hpp"
+#include "content/PrefabAuthoringService.hpp"
 #include "material/MaterialEditingService.hpp"
 #include "properties/ReferencePickerService.hpp"
 #include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
+#include "documents/EditorDocumentManager.hpp"
+#include "scripts/ScriptAuthoringRegistry.hpp"
+#include "diagnostics/StructuredDiagnostic.hpp"
 #include "documents/EditorFeedback.hpp"
 #include "documents/EditorTaskService.hpp"
 #include "platform/PathSelection.hpp"
@@ -79,6 +83,7 @@ public:
     AssetEditorRegistry& assetEditors(){return assetEditors_;}
     NodePresetRegistry& nodePresets(){return nodePresets_;}
     MaterialEditingService& materials(){return materials_;}
+    PrefabAuthoringService& prefabs(){return prefabs_;}
     nlohmann::json applyContent(const std::string& planId);
     void undoContent();
     void redoContent();
@@ -88,6 +93,18 @@ public:
     void setRecentProjectsPath(std::filesystem::path file) {projects_=std::make_unique<ProjectOpenService>(std::move(file));}
     std::string startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name);
     void requestProject(std::shared_ptr<EditorContext> candidate);
+    EditorDocumentManager& documents(){return documents_;}
+    const EditorDocumentManager& documents() const{return documents_;}
+    AnimationPreviewService& animations(){return documents_.at(context_->documentId()).animations;}
+    ScriptAuthoringRegistry& scriptAuthoring(){return scriptAuthoring_;}
+    DiagnosticStore& diagnostics(){return diagnostics_;}
+    const DiagnosticStore& diagnostics() const{return diagnostics_;}
+    void revealDiagnostic(const std::string& id);
+    void collectDiagnostics();
+    std::vector<NodeAnimationFrame> animationFrames() const;
+    std::string openDocument(const std::string& path);
+    void requestDocumentActivation(const std::string& id);
+    void requestDocumentClose(const std::string& id,const std::string& decision);
     std::string consumeWorkspacePreset() {auto result=workspacePreset_;workspacePreset_.clear();return result;}
 
     void startImportTask(const std::filesystem::path& path);
@@ -127,6 +144,7 @@ public:
     nlohmann::json proposalReport() const;
     ProposalController& proposals();
     EditResult edit(const std::string& command,nlohmann::json parameters=nlohmann::json::object(),std::string mergeKey={});
+    EditResult editRequest(const EditRequest& request);
     void setClosePolicy(std::string policy){closePolicy_=std::move(policy);}
     DocumentActionGuard& documentGuard(){return *documentGuard_;}
     GizmoController& gizmo(){return *gizmo_;}
@@ -147,6 +165,14 @@ public:
     }
 
 private:
+    EditorDocumentManager documents_;
+    ScriptAuthoringRegistry scriptAuthoring_=ScriptAuthoringRegistry::builtins();
+    DiagnosticStore diagnostics_;
+    std::string diagnosticNode_;
+    std::string pendingDocument_,closingDocument_;
+    void activateDocument(const std::string& id);
+    void pollDocuments();
+    void retainDocument();
     EditorViewDescriptor viewportView_;
     bool viewportViewChanged_=false;
     ViewportOverlayRegistry viewportOverlays_=ViewportOverlayRegistry::builtins();
@@ -170,10 +196,11 @@ private:
     bool creatingProject_=false;
 
     GeneratorRegistry generators_=GeneratorRegistry::builtins();
+    PrefabAuthoringService prefabs_;
     DeveloperServices developerServices_;
-    std::unique_ptr<EditService> edits_;
-    std::unique_ptr<SelectionService> selection_;
-    std::unique_ptr<GizmoController> gizmo_;
+    std::shared_ptr<EditService> edits_;
+    std::shared_ptr<SelectionService> selection_;
+    std::shared_ptr<GizmoController> gizmo_;
     SettingRegistry settings_;
     ReferencePickerService references_;
     std::string assetReveal_;
@@ -192,7 +219,9 @@ private:
     PathHistory paths_;
     std::filesystem::path pathHistoryFile_;
     PlacementRaycast placementRaycast_;
-    void recordError(const std::string& source,const std::string& message);
+    void recordError(const std::string& source,const std::string& message,const nlohmann::json& parameters=nlohmann::json::object());
+    std::set<std::string> runtimeDiagnosticIds_;
+    std::string shaderDiagnostic_;
     bool layoutResetRequested_ = false;
     bool assetReloadRequested_ = false;
     bool captureRequested_ = false;

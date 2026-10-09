@@ -76,6 +76,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
 #if AZURE_WITH_EDITOR
     if(!runOptions_.editorSession)return;
     auto& session=*runOptions_.editorSession;
+    session.pollTasks();
     if(editorAutomation_)editorAutomation_->advance(gameplayFrame_,session);
     std::string resources;for(const auto& resource:session.viewScene().resources)resources+=resource.id+resource.path.generic_string();
     for(const auto& node:session.viewScene().nodes){resources+=node.id+":"+node.resourceId+";";for(const auto& [slot,binding]:node.resolvedMaterials)resources+=slot+":"+binding.path+":"+binding.fingerprint+";";}

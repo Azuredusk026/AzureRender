@@ -59,7 +59,7 @@ void EditTransaction::commit(const std::string& mergeKey) {
         if(index>=candidate_->scene_.nodes.size())throw std::invalid_argument("Candidate selection is out of range");
     if(!candidate_->selectedNodes_.empty()&&candidate_->selectedNodeIndex_>=candidate_->scene_.nodes.size())
         throw std::invalid_argument("Candidate active selection is out of range");
-    const bool changed=target.documentContent()!=candidate_->documentContent();
+    const bool changed=target.documentContent()!=candidate_->documentContent()||target.prefabBaselines_!=candidate_->prefabBaselines_||target.prefabFingerprints_!=candidate_->prefabFingerprints_;
     const bool selection=target.selectedNodes_!=candidate_->selectedNodes_;
     if(!changed&&!selection)return;
     if(changed) {
@@ -92,6 +92,7 @@ void EditTransaction::commit(const std::string& mergeKey) {
         if(!merge)target.beginEdit();else ++target.revision_;
         target.scene_=std::move(candidate_->scene_);target.components_=std::move(candidate_->components_);
         target.sourceLevel_=std::move(candidate_->sourceLevel_);target.resourceReferences_=std::move(candidate_->resourceReferences_);
+        target.prefabBaselines_=std::move(candidate_->prefabBaselines_);target.prefabFingerprints_=std::move(candidate_->prefabFingerprints_);
         target.selectedNodeIndex_=candidate_->selectedNodeIndex_;target.selectedNodes_=std::move(candidate_->selectedNodes_);
         target.ecsWorld_.swap(candidate_->ecsWorld_);target.nodeEntities_=std::move(candidate_->nodeEntities_);
         target.gizmoTranslation_=candidate_->gizmoTranslation_;target.gizmoRotation_=candidate_->gizmoRotation_;target.gizmoScale_=candidate_->gizmoScale_;
@@ -103,5 +104,10 @@ void EditTransaction::commit(const std::string& mergeKey) {
         target.animationPreview_=candidate_->animationPreview_;
         target.refreshSelectedTransform();++target.revision_;target.mergeKey_.clear();
     }
+}
+void EditTransaction::validate(){
+    RuntimeLifecycle runtime;runtime.loadScene(candidate_->scene_);validateRenderSettings(candidate_->renderSettings());
+    const auto components=candidate_->runtimeComponents();
+    for(const auto& node:candidate_->scene_.nodes)candidate_->validateComponentReferences(node,components.at(node.id),candidate_->scene_);
 }
 }

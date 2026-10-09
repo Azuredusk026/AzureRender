@@ -5,6 +5,8 @@ class PanelDocumentView {
 public:
     explicit PanelDocumentView(const EditorContext& context):context_(context){}
     const SceneDocument& scene() const {return context_.scene();}
+    nlohmann::json levelDocument() const {return context_.levelDocument();}
+    const std::string& documentId() const {return context_.documentId();}
     const SceneNode* selectedNode() const {return context_.selectedNode();}
     std::size_t selectedNodeIndex() const {return context_.selectedNodeIndex();}
     const std::vector<std::size_t>& selectedNodes() const {return context_.selectedNodes();}

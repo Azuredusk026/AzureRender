@@ -1,0 +1,1 @@
+[{"frame": 20, "action": "click", "target": "tool.animation"}, {"frame": 24, "action": "click", "target": "node.hero"}, {"frame": 28, "action": "click", "target": "animation.play-pause"}, {"frame": 33, "action": "click", "target": "node.guide"}, {"frame": 38, "action": "click", "target": "animation.play-pause"}]

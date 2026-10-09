@@ -1,0 +1,34 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 194: AzureEditor.PrefabAuthoring
+1/1 Test #194: AzureEditor.PrefabAuthoring ......***Failed    0.66 sec
+[1791586220813][info][editor][code=0] Opened scene: physics-arm
+[1791586220907][info][editor][code=0] ERROR [prefab.create]: Prefab source already exists
+[1791586220913][info][editor][code=0] ERROR [prefab.create]: Prefab component depends on an external object
+[1791586220915][info][editor][code=0] Opened scene: physics-arm
+[1791586220929][info][editor][code=0] Selected node: fixed
+[1791586220929][info][editor][code=0] Placed prefab: one
+[1791586220993][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-37026905139400\assets\mechanism.azurelevel
+[1791586220998][info][editor][code=0] Opened scene: physics-arm
+[1791586221004][info][editor][code=0] Selected node: moving
+[1791586221016][info][editor][code=0] Opened scene: physics-arm
+[1791586221053][info][editor][code=0] Opened scene: physics-arm
+[1791586221103][info][editor][code=0] Undo
+[1791586221149][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-37026905139400\assets\mechanism.azurelevel
+[1791586221206][info][editor][code=0] Opened scene: physics-arm
+[1791586221224][info][editor][code=0] Opened scene: physics-arm
+[1791586221232][info][editor][code=0] Selected node: Authored arm
+[1791586221246][info][editor][code=0] Opened scene: physics-arm
+[1791586221271][info][editor][code=0] Opened scene: physics-arm
+[1791586221354][info][editor][code=0] ERROR [prefab.apply]: Prefab source fingerprint is expired
+[1791586221370][info][editor][code=0] ERROR [prefab.apply]: invalid map<K, T> key
+prefab.apply: [{"code":"OperationFailed","message":"invalid map<K, T> key"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.67 sec
+
+The following tests FAILED:
+	194 - AzureEditor.PrefabAuthoring (Failed)
+Errors while running CTest

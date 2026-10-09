@@ -12,12 +12,17 @@ namespace azurerender {
 EditRegistry editorOperations(EditorSession& session) {
     using Json=nlohmann::json;
     EditRegistry registry;
+    registerPrefabAuthoringOperations(registry,session);
     const Json text={{"type","string"}},boolean={{"type","boolean"}},integer={{"type","integer"}},number={{"type","number"}};
     const Json vector={{"type","array"},{"minItems",3},{"maxItems",3},{"items",number}};
     auto schema=[](Json fields=Json::object(),Json required=Json::array()) {
         return Json{{"type","object"},{"properties",fields},{"required",required}};
     };
     registry.add({"project.templates",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json {return ProjectOpenService::templates();});
+    registry.add({"document.describe",1,schema(),false,false,false},[&session](EditorContext& c,const Json&)->Json{return session.documents().describe(c.documentId());});
+    registry.add({"document.save",1,schema({{"id",text}}),true,false,true},[&session](EditorContext& c,const Json& a)->Json{session.documents().save(a.value("id",c.documentId()));return nullptr;});
+    registry.add({"document.open",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return {{"id",session.openDocument(a.at("path"))},{"pending",true}};});
+    registry.add({"document.activate",1,schema({{"id",text}},{"id"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{session.requestDocumentActivation(a.at("id"));return {{"pending",true}};});
     registry.add({"project.recent",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {return session.projects().recent();});
     registry.add({"project.open",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json {
         auto candidate=session.projects().open(std::filesystem::u8path(a.at("path").get<std::string>()));
@@ -220,7 +225,7 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"settings.describe",1,schema({{"search",text}}),false,false,false},
         [&session](EditorContext&,const Json& a)->Json{return session.settings().describe(a.value("search",std::string()));});
     for(const auto& item:std::vector<std::pair<std::string,EditorCommand>>{
-            {"document.save",EditorCommand::Save},{"document.reload",EditorCommand::Reload},
+            {"document.reload",EditorCommand::Reload},
             {"history.undo",EditorCommand::Undo},{"history.redo",EditorCommand::Redo},
             {"preview.play",EditorCommand::Play},{"preview.simulate",EditorCommand::Simulate},{"preview.pause",EditorCommand::Pause},{"preview.resume",EditorCommand::Resume},
             {"preview.step",EditorCommand::Step},{"preview.stop",EditorCommand::Stop},{"workspace.reset",EditorCommand::ResetLayout},
@@ -263,6 +268,12 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"feedback.dismiss",1,schema({{"id",text}}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.feedback_.dismiss(a.value("id",std::string()));session.lastError_.clear();return nullptr;});
     registry.add({"animation.preview",1,schema({{"state",text},{"time",number},{"previous",text},{"crossfade",number}},{"state"}),false,false,true},
         [](EditorContext& c,const Json& a)->Json { c.previewAnimation(a.at("state").get<std::string>(),a.value("time",0.0),a.value("previous",std::string()),a.value("crossfade",0.0));return nullptr; });
+    registry.add({"animation.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.animations().describe();});
+    registry.add({"animation.configure",1,schema({{"node",text},{"speed",number},{"loop",boolean}},{"node","speed","loop"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{session.animations().configure(c,a.at("node"),a.at("speed"),a.at("loop"));return session.animations().describe();});
+    registry.add({"animation.seek",1,schema({{"node",text},{"state",text},{"time",number},{"previous",text},{"crossfade",number}},{"node","time"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{session.animations().seek(c,a.at("node"),a.value("state",std::string()),a.at("time"),a.value("previous",std::string()),a.value("crossfade",0.0));return session.animations().describe();});
+    registry.add({"animation.play",1,schema({{"node",text}},{"node"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{session.animations().play(c,a.at("node"));return nullptr;});
+    registry.add({"animation.pause",1,schema({{"node",text}},{"node"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{session.animations().pause(a.at("node"));return nullptr;});
+    registry.add({"animation.clear",1,schema({{"node",text}}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{session.animations().clear(a.value("node",std::string()));c.clearAnimationPreview();return nullptr;});
     registry.add({"animation.clear-preview",1,schema(),false,false,true},[](EditorContext& c,const Json&)->Json { c.clearAnimationPreview();return nullptr; });
     registry.add({"viewport.gizmo-mode",1,schema({{"value",integer}},{"value"}),false,false,true},
         [](EditorContext& c,const Json& a)->Json {
@@ -294,7 +305,8 @@ EditRegistry editorOperations(EditorSession& session) {
         const auto value=std::clamp(session.settings().get("editor.camera.flySpeed").get<double>()*std::exp(steps*.16),.01,10000.);
         const auto result=session.settings().set("editor.camera.flySpeed",value,SettingSource::UserFile);if(!result.passed)throw EditRejection(result.diagnostic);session.settings().applyPending();return value;
     });
-    registry.add({"document.close",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
+    registry.add({"document.close",1,schema({{"id",text},{"decision",text}}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
+        if(a.contains("id")){if(session.playing()||session.building())throw EditRejection("Document close requires edit mode");session.requestDocumentClose(a.at("id"),a.value("decision",std::string("ask")));return {{"pending",true}};}
         if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError_);return nullptr;
     });
     registry.add({"document.decision",1,schema({{"value",text}},{"value"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
@@ -323,6 +335,8 @@ EditRegistry editorOperations(EditorSession& session) {
             if(session.scripts())session.scripts()->reloadChanged();return nullptr;
         });
     registerProposalOperations(registry,session);
+    registerScriptAuthoringOperations(registry,session);
+    registerDiagnosticOperations(registry,session);
     registerDeveloperOperations(registry,session);
     return registry;
 }

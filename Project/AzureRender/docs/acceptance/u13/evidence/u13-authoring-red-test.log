@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.AuthoringWorkflow
+1/1 Test #193: AzureEditor.AuthoringWorkflow ....***Failed    0.16 sec
+[1791583079100][info][editor][code=0] Opened scene: inspection
+[1791583079112][info][editor][code=0] ERROR [script.template]: Unknown operation: script.template
+Create Lua script through its registered backend
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.19 sec
+
+The following tests FAILED:
+	193 - AzureEditor.AuthoringWorkflow (Failed)
+Errors while running CTest

@@ -20,6 +20,7 @@ public:
     void setUiHandler(std::function<void(std::string,std::string)> handler) override;
     std::size_t activeCount() const override;
     const std::vector<std::string>& errors() const override;
+    const std::vector<StructuredDiagnostic>& diagnostics() const override;
     ScriptRuntimeCapabilities capabilities() const override {return {"lua",true,false};}
 private:
     struct Impl;

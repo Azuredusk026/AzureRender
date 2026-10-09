@@ -406,6 +406,13 @@ else()
     target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=0)
 endif()
 add_library(AzureEditor STATIC
+    src/editor/documents/EditorDocumentManager.cpp
+    src/editor/animation/AnimationPreviewService.cpp
+    src/editor/scripts/ScriptAuthoringRegistry.cpp
+    src/editor/scripts/ScriptAuthoringOperations.cpp
+    src/editor/documents/EditorDocumentSession.cpp
+    src/editor/documents/DocumentBatchTransaction.cpp
+    src/editor/documents/DiagnosticOperations.cpp
     src/editor/preview/AssetThumbnailService.cpp
     src/editor/preview/DeveloperServices.cpp
     src/editor/ai/ProposalController.cpp
@@ -441,11 +448,18 @@ add_library(AzureEditor STATIC
     src/editor/EditorProjectEditing.cpp
     src/editor/EditorHierarchyEditing.cpp
     src/editor/content/ContentOperationService.cpp
+    src/editor/content/PrefabAuthoringService.cpp
+    src/editor/content/PrefabAuthoringOperations.cpp
+    src/editor/panels/PrefabAuthoringPanel.cpp
     src/editor/material/MaterialEditingService.cpp
     src/editor/preview/ThumbnailProviderRegistry.cpp
     src/editor/panels/TextureAssetPanel.cpp
     src/editor/panels/MaterialAssetPanel.cpp
     src/editor/panels/PhysicsAuthoringPanel.cpp
+    src/editor/panels/DocumentTabs.cpp
+    src/editor/panels/ScriptAuthoringPanel.cpp
+    src/editor/panels/ProblemsPanel.cpp
+    src/editor/panels/ContentAssistancePanel.cpp
     src/editor/viewport/ViewportOverlayRegistry.cpp
     src/editor/viewport/ViewportOverlays.cpp
     src/editor/viewport/PhysicsOverlays.cpp
@@ -1788,6 +1802,29 @@ if(BUILD_TESTING)
     add_test(NAME AzureAssets.MaterialDocument COMMAND AzureMaterialDocumentTests)
     add_executable(AzureEditorProjectionTests tests/EditorProjectionTests.cpp)
     add_executable(AzurePreviewSimulationTests tests/PreviewSimulationTests.cpp)
+    add_executable(AzureEditorDocumentManagerTests tests/EditorDocumentManagerTests.cpp)
+    add_executable(AzureAnimationAuthoringTests tests/AnimationAuthoringTests.cpp)
+    add_executable(AzureAuthoringWorkflowTests tests/AuthoringWorkflowTests.cpp)
+    add_executable(AzureManagedAuthoringTests tests/ManagedAuthoringTests.cpp)
+    target_link_libraries(AzureManagedAuthoringTests PRIVATE AzureEditor)
+    if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
+        add_test(NAME AzureEditor.ManagedAuthoring COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_managed_authoring.py" --tester "$<TARGET_FILE:AzureManagedAuthoringTests>" --artifacts "${AZURE_MANAGED_OUTPUT}/coreclr" --output "${CMAKE_CURRENT_BINARY_DIR}/managed-authoring-${CMAKE_BUILD_TYPE}")
+        set_tests_properties(AzureEditor.ManagedAuthoring PROPERTIES TIMEOUT 120)
+    endif()
+    add_executable(AzureDomainAuthoringTests tests/DomainAuthoringTests.cpp)
+    add_executable(AzurePrefabAuthoringTests tests/PrefabAuthoringTests.cpp)
+    target_link_libraries(AzurePrefabAuthoringTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.PrefabAuthoring COMMAND AzurePrefabAuthoringTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/physics_arm")
+    target_link_libraries(AzureDomainAuthoringTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.DomainAuthoring COMMAND AzureDomainAuthoringTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/face_sdf_v1.png")
+    target_link_libraries(AzureAuthoringWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AuthoringWorkflow COMMAND AzureAuthoringWorkflowTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
+    target_link_libraries(AzureAnimationAuthoringTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AnimationAuthoring COMMAND AzureAnimationAuthoringTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/game")
+    target_link_libraries(AzureEditorDocumentManagerTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.DocumentManager COMMAND AzureEditorDocumentManagerTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
+    add_test(NAME AzureEditor.AuthoringGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_authoring.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/authoring-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.AuthoringGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
     target_link_libraries(AzurePreviewSimulationTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.PreviewSimulation COMMAND AzurePreviewSimulationTests)
     add_executable(AzurePhysicsAuthoringTests tests/PhysicsAuthoringTests.cpp)

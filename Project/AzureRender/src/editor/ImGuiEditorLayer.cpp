@@ -113,6 +113,14 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("settings", "Settings", [this](PanelContext& context) { drawSettingsPanel(context); });
     addPanel("projects", "Projects", [this](PanelContext& context) { drawProjectBrowserPanel(context); });
     addPanel("environment", "Environment", [this](PanelContext& context) { drawEnvironmentPanel(context); });
+    workspace_.registerPanel("scripts","Script Authoring",false);
+    workspace_.registerPanel("problems","Problems",false);
+    workspace_.registerPanel("assistance","Content Assistance",false);
+    workspace_.registerPanel("prefabs","Prefab Authoring",false);
+    addPanel("prefabs", "Prefab Authoring", [this](PanelContext& context) { drawPrefabAuthoringPanel(context); });
+    addPanel("assistance", "Content Assistance", [this](PanelContext& context) { drawContentAssistancePanel(context); });
+    addPanel("scripts", "Script Authoring", [this](PanelContext& context) { drawScriptAuthoringPanel(context); });
+    addPanel("problems", "Problems", [this](PanelContext& context) { drawProblemsPanel(context); });
     panels_ = registry.createAll();
     auto extensions=session_->panelRegistry().createAll();
     for(auto& panel:extensions) {
@@ -266,7 +274,6 @@ void ImGuiEditorLayer::newFrame(float fixedDeltaSeconds) {
         return;
     }
     session_->pollModel();
-    session_->pollTasks();
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     if(fixedDeltaSeconds>0)ImGui::GetIO().DeltaTime=fixedDeltaSeconds;
@@ -443,12 +450,13 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.20F, 0.0F, 0.56F, 0.72F);
 #endif
-    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();return;}
+    const bool compact=EditorWorkspace::layout(ImGui::GetIO().DisplaySize.x,ImGui::GetIO().DisplaySize.y,dpi_,session_->settings().get("editor.compact").get<bool>()).compact;
+    if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{8*dpi_,0});ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{8*dpi_,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{8*dpi_,2*dpi_});}
+    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(3);return;}
+    drawDocumentTabs();
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
-        const bool compact=ImGui::GetIO().DisplaySize.y/dpi_<720 || session_->settings().get("editor.compact").get<bool>();
-        if(compact){ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{8*dpi_,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{8*dpi_,2*dpi_});}
         if(ImGui::Button("Focus Selected")) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ImGui::SameLine();
@@ -487,7 +495,6 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             }
             ImGui::EndDisabled();ImGui::EndPopup();
         }
-        if(compact)ImGui::PopStyleVar(2);
         const ImVec2 available = ImGui::GetContentRegionAvail();
         const ImVec2 framebufferScale = ImGui::GetIO().DisplayFramebufferScale;
         const std::uint32_t desiredWidth = static_cast<std::uint32_t>(
@@ -638,6 +645,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         && !ImGui::GetIO().WantTextInput
         && !ImGui::IsAnyItemActive();
     ImGui::End();
+    if(compact)ImGui::PopStyleVar(3);
 }
 
 void ImGuiEditorLayer::setNavigationCapture(bool captured){

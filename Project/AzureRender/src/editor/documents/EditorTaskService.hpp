@@ -9,6 +9,7 @@ struct EditorTaskCallbacks {
     std::function<bool()> ready;
     std::function<nlohmann::json()> finish;
     std::function<void()> cancel;
+    std::function<void(const std::string&)> failure;
 };
 class EditorTaskService {
 public:

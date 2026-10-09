@@ -1,0 +1,38 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 194: AzureEditor.PrefabAuthoring
+1/1 Test #194: AzureEditor.PrefabAuthoring ......***Failed    1.00 sec
+[1791586286795][info][editor][code=0] Opened scene: physics-arm
+[1791586286900][info][editor][code=0] ERROR [prefab.create]: Prefab source already exists
+[1791586286906][info][editor][code=0] ERROR [prefab.create]: Prefab component depends on an external object
+[1791586286908][info][editor][code=0] Opened scene: physics-arm
+[1791586286922][info][editor][code=0] Selected node: fixed
+[1791586286922][info][editor][code=0] Placed prefab: one
+[1791586286967][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-37092887576000\assets\mechanism.azurelevel
+[1791586286973][info][editor][code=0] Opened scene: physics-arm
+[1791586286979][info][editor][code=0] Selected node: moving
+[1791586286991][info][editor][code=0] Opened scene: physics-arm
+[1791586287030][info][editor][code=0] Opened scene: physics-arm
+[1791586287084][info][editor][code=0] Undo
+[1791586287127][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-prefab-authoring-37092887576000\assets\mechanism.azurelevel
+[1791586287165][info][editor][code=0] Opened scene: physics-arm
+[1791586287186][info][editor][code=0] Opened scene: physics-arm
+[1791586287192][info][editor][code=0] Selected node: Authored arm
+[1791586287205][info][editor][code=0] Opened scene: physics-arm
+[1791586287231][info][editor][code=0] Opened scene: physics-arm
+[1791586287316][info][editor][code=0] ERROR [prefab.apply]: Prefab source fingerprint is expired
+[1791586287345][info][editor][code=0] Opened scene: physics-arm
+[1791586287353][info][editor][code=0] Opened scene: physics-arm
+[1791586287546][info][editor][code=0] Opened scene: physics-arm
+[1791586287555][info][editor][code=0] Opened scene: physics-arm
+[1791586287706][info][editor][code=0] ERROR [prefab.redo-apply]: Unknown operation: prefab.redo-apply
+prefab.redo-apply: [{"code":"RejectedOperation","message":"Unknown operation: prefab.redo-apply"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.01 sec
+
+The following tests FAILED:
+	194 - AzureEditor.PrefabAuthoring (Failed)
+Errors while running CTest

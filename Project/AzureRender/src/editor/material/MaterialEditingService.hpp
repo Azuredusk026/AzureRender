@@ -7,6 +7,7 @@ class MaterialEditingService {
 public:
     nlohmann::json execute(EditorContext&,ContentOperationService&,const std::string&,const nlohmann::json&);
     void clear(){history_.clear();}
+    static MaterialDocument previewField(const EditorContext&,const std::string& asset,const std::string& field,const nlohmann::json& value);
     static nlohmann::json slots(const EditorContext&,const std::string&);
     static nlohmann::json reimportSlots(const EditorContext&,const std::string& asset);
     static void assign(EditorContext&,const std::vector<std::string>&,const std::string&,const std::string&);

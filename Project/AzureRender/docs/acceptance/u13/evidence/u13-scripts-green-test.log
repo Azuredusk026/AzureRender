@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.AuthoringWorkflow
+1/1 Test #193: AzureEditor.AuthoringWorkflow ....***Failed    1.44 sec
+[1791583240270][info][editor][code=0] Opened scene: inspection
+[1791583240349][info][editor][code=0] ERROR [script.template]: Script destination already exists
+[1791583240353][info][editor][code=0] ERROR [script.template]: Unknown script authoring backend
+[1791583240356][info][editor][code=0] ERROR [script.template]: Project path escapes mount: ../outside.lua
+[1791583240360][info][editor][code=0] ERROR [script.template]: Script extension does not match backend
+[1791583240364][info][editor][code=0] Opened scene: inspection
+[1791583240380][info][editor][code=0] Opened scene: inspection
+[1791583241552][info][editor][code=0] Play started
+Created Lua template runs through production backend
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.45 sec
+
+The following tests FAILED:
+	193 - AzureEditor.AuthoringWorkflow (Failed)
+Errors while running CTest

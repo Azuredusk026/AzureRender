@@ -68,7 +68,7 @@ void AzureRenderApp::initializeValidation() {
             const auto& version=request.at("baseVersion");
             EditRequest edit{request.at("requestId").get<std::string>(),request.at("commandId").get<std::string>(),request.value("parameters",nlohmann::json::object()),
                 {version.at("documentId").get<std::string>(),version.at("revision").get<std::uint64_t>(),version.at("contentHash").get<std::string>()},request.value("mergeKey",std::string())};
-            const auto result=session->edits().execute(edit);
+            const auto result=session->editRequest(edit);
             if(!result)throw std::runtime_error(result.diagnostics.dump());
             return nlohmann::json{{"version",result.version.describe()},{"diff",result.diff},{"value",result.value}};
         };

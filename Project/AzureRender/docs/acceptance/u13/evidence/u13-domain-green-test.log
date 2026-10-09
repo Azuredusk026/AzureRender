@@ -1,0 +1,24 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  43: AzureEditor.ProposalController
+1/3 Test  #43: AzureEditor.ProposalController ...   Passed    1.70 sec
+    Start  44: AzureEditor.ProposalAdapter
+2/3 Test  #44: AzureEditor.ProposalAdapter ......   Passed    0.79 sec
+    Start 193: AzureEditor.DomainAuthoring
+3/3 Test #193: AzureEditor.DomainAuthoring ......***Failed    0.46 sec
+[1791584171233][info][editor][code=0] Opened scene: startup
+[1791584171478][info][editor][code=0] Opened scene: startup
+[1791584171523][info][editor][code=0] Opened scene: startup
+[1791584171550][info][editor][code=0] Opened scene: startup
+[1791584171559][info][editor][code=0] Opened scene: startup
+[1791584171563][info][editor][code=0] Selected node: test_model
+Production semantics validate the proposal
+
+
+67% tests passed, 1 tests failed out of 3
+
+Total Test time (real) =   2.97 sec
+
+The following tests FAILED:
+	193 - AzureEditor.DomainAuthoring (Failed)
+Errors while running CTest

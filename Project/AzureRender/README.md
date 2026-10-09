@@ -15,6 +15,8 @@ AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Wind
 
 ## 使用入口
 
+场景标签、动画、脚本与 Prefab 见[内容制作](docs/runtime/authoring-workflows.md)。
+
 右键漂浮、六向视图与辅助见[视口导航](docs/runtime/viewport-navigation.md)。
 
 材质参数、贴图与槽位覆盖见[材质制作](docs/runtime/material-authoring.md)。
