@@ -55,6 +55,10 @@ public:
         metadata_->addMigration(name, version, std::move(migration));
     }
     const reflection::Registry& metadata() const noexcept { return *metadata_; }
+    void addValidation(const std::string& name,std::function<void(const Json&)> validation){
+        if(sealed_)throw std::logic_error("Component registration is sealed");
+        metadata_->addValidation(name,std::move(validation));
+    }
     void install(const std::string& type, ecs::World& world, ecs::Entity entity, const Json& envelope) const;
     Json encode(const std::string& type, const ecs::World& world, ecs::Entity entity) const;
     void remove(const std::string& type, ecs::World& world, ecs::Entity entity) const;

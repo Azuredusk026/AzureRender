@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "physics-door",
+  "name": "Physics door",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/mechanism.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {},
+    "systems": [
+      {
+        "id": "physics",
+        "config": {}
+      }
+    ]
+  }
+}

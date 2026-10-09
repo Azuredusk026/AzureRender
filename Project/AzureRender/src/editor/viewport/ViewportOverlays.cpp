@@ -5,7 +5,7 @@
 #include <cstdio>
 namespace azurerender {
 bool ImGuiEditorLayer::drawViewportOrientation(ImVec2 origin,ImVec2 size){
-    const auto& io=ImGui::GetIO();const bool enabled=!session_->playing()&&!session_->building()&&!session_->gizmo().active()&&navigationButton_<0&&!io.AppFocusLost&&!io.WantTextInput
+    const auto& io=ImGui::GetIO();const bool enabled=session_->editCameraActive()&&!session_->building()&&!session_->gizmo().active()&&navigationButton_<0&&!io.AppFocusLost&&!io.WantTextInput
         &&!ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);
     auto* draw=ImGui::GetWindowDrawList();draw->PushClipRect(origin,{origin.x+size.x,origin.y+size.y},true);
     const auto result=ImViewGuizmo::Draw(session_->viewportView(),{origin.x+size.x-58*dpi_,origin.y+58*dpi_},dpi_,enabled);draw->PopClipRect();
@@ -15,10 +15,11 @@ bool ImGuiEditorLayer::drawViewportOrientation(ImVec2 origin,ImVec2 size){
     return result.hovered;
 }
 void ImGuiEditorLayer::drawViewportOverlays(ImVec2 origin,ImVec2 size){
-    if(session_->playing())return;
+    if(!session_->editCameraActive())return;
     auto* draw=ImGui::GetWindowDrawList();draw->PushClipRect(origin,{origin.x+size.x,origin.y+size.y},true);
     try{
-        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView()},session_->viewportOverlayPolicies(),session_->selection().selected());
+        const auto scene=session_->viewScene();
+        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView(),&scene},session_->viewportOverlayPolicies(),session_->selection().selected());
         for(const auto& line:lines){const auto segment=projectCameraSegment(session_->viewportView(),size.x/size.y,line.from,line.to);if(!segment)continue;
             const auto color=ImGui::ColorConvertFloat4ToU32({line.color[0],line.color[1],line.color[2],line.color[3]});
             draw->AddLine({origin.x+segment->from[0]*size.x,origin.y+segment->from[1]*size.y},{origin.x+segment->to[0]*size.x,origin.y+segment->to[1]*size.y},color,std::max(1.F,dpi_));

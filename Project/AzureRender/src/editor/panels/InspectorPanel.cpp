@@ -33,6 +33,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
     if (selected) {
         const auto* node=&*selected;
         drawMaterialSlots(*node);
+        if(panelContext.selection().selected().size()==1)drawPhysicsAuthoring(*node);
         ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());

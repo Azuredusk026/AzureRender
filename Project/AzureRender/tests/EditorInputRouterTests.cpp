@@ -16,5 +16,9 @@ int main(){
     event.ctrl=false;event.viewport=true;event.scene=true;event.key="G";
     if(EditorInputRouter::route(event,{{"W","G"}}).mode!=0){std::cerr<<"Rebound move key must route through the shared operation\n";return 10;}
     event.key="W";if(EditorInputRouter::route(event,{{"W","G"}}).consumed)return 11;
+    event.playing=true;event.simulating=true;event.ctrl=true;event.key="P";
+    if(EditorInputRouter::route(event).operation!="preview.stop")return 12;
+    event.ctrl=false;event.key="F";if(EditorInputRouter::route(event).operation!="viewport.frame-selection")return 13;
+    event.key="W";if(EditorInputRouter::route(event).consumed)return 14;
     return 0;
 }

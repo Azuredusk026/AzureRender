@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "id": "physics-arm",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false
+  },
+  "resources": [
+    {
+      "id": "cube",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "fixed",
+      "name": "fixed",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              3,
+              0
+            ],
+            "scale": [
+              0.12,
+              0.12,
+              0.12
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "dynamic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "moving",
+      "name": "moving",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1,
+              3,
+              0
+            ],
+            "scale": [
+              1,
+              0.12,
+              0.12
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "dynamic": true
+          }
+        }
+      }
+    },
+    {
+      "id": "joint",
+      "name": "Hinge",
+      "resourceId": "",
+      "components": {
+        "azure.hinge": {
+          "type": "azure.hinge",
+          "version": 1,
+          "data": {
+            "bodyA": "fixed",
+            "bodyB": "moving",
+            "anchorA": [
+              0,
+              0,
+              0
+            ],
+            "anchorB": [
+              -1,
+              0,
+              0
+            ],
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "normal": [
+              1,
+              0,
+              0
+            ],
+            "minimumAngle": -60,
+            "maximumAngle": 60
+          }
+        }
+      }
+    },
+    {
+      "id": "ground",
+      "name": "ground",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "scale": [
+              5,
+              0.2,
+              5
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 1,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "dynamic": false
+          }
+        }
+      }
+    }
+  ],
+  "lights": []
+}

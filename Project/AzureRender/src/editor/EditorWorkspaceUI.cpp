@@ -163,6 +163,14 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    data["previewMode"]=session_->previewMode();
+    data["document"]=context_->documentVersion().describe();
+    data["previewSteps"]=session_->game()?session_->game()->steps():0;
+    data["physicsBodies"]=nlohmann::json::array();data["physicsConstraints"]=0;
+    if(auto* runtime=session_->runtime()){
+        runtime->world().each<ecs::TransformComponent,game::RigidBody>([&](auto entity,const auto& transform,const auto& body){data["physicsBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation},{"rotation",transform.rotation},{"shape",body.shape}});});
+        if(session_->game())data["physicsConstraints"]=session_->game()->physics().constraintCount();
+    }
     data["view"]=session_->edit("viewport.describe").value;
     data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
     data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";

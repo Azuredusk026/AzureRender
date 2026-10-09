@@ -233,10 +233,14 @@ void EditorContext::addGameplayComponent(const std::string& type){
         validateComponentReferences(*selectedNode(),data,scene_);beginEdit();components_[selectedNode()->id]=std::move(data);syncComponents();
 }
 void EditorContext::setComponentField(const std::string& type,const std::string& field,const nlohmann::json& value){
+    setComponentFields(type,{{field,value}});
+}
+void EditorContext::setComponentFields(const std::string& type,const nlohmann::json& values){
     if(!selectedNode())throw std::logic_error("Component editing requires selection");
     auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component");
-    runtimeComponentRegistry().validateWrite(type,field,value);
-    data[type]["data"][field]=value;validateComponentReferences(*selectedNode(),data,scene_);
+    if(!values.is_object()||values.empty())throw std::invalid_argument("Component fields require a nonempty object");
+    for(const auto& field:values.items())runtimeComponentRegistry().validateWrite(type,field.key(),field.value());
+    data[type]["data"].update(values);data[type]["version"]=runtimeComponentRegistry().metadata().type(type).version;validateComponentReferences(*selectedNode(),data,scene_);
     beginEdit();components_[selectedNode()->id]=data;
     if(type=="azure.transform"){ecs::TransformComponent transform;reflection::makeRuntimeRegistry().decode(type,&transform,data[type]);auto* node=selectedNode();node->translation=transform.translation;node->rotation=transform.rotation;node->scale=transform.scale;refreshSelectedTransform();}
     if(type=="azure.renderable")selectedNode()->visible=data[type]["data"].at("visible").get<bool>();

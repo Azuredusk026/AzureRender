@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PreviewSimulation
+1/2 Test #193: AzureEditor.PreviewSimulation ....***Failed    0.07 sec
+[1791580595425][info][editor][code=0] Opened scene: untitled
+[1791580595432][info][editor][code=0] ERROR [document.describe]: Unknown operation: document.describe
+[1791580595433][info][editor][code=0] ERROR [preview.simulate]: Unknown operation: preview.simulate
+Independent physics simulation must start
+
+    Start 194: AzureEngine.PhysicsAuthoring
+2/2 Test #194: AzureEngine.PhysicsAuthoring .....***Failed    0.05 sec
+Rigid bodies must expose configurable collision shapes
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.14 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PreviewSimulation (Failed)
+	194 - AzureEngine.PhysicsAuthoring (Failed)
+Errors while running CTest

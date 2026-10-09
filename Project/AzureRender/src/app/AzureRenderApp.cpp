@@ -3,6 +3,7 @@
 #include "AzureRenderApp.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "runtime/GameplayKeys.hpp"
+#include "runtime/physics/PhysicsShapeFactory.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "editor/EditorAutomation.hpp"
@@ -99,6 +100,8 @@ void AzureRenderApp::run(
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
+        gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
+        gameRuntime_->physics().validateScene(runtime_);
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());
         scriptRuntime_->setLevelHandler([this](std::string reference) { levelSession_->request(std::move(reference)); });
         gameRuntime_->setBeforeStep([this](double delta) { scriptRuntime_->fixedStep(delta); });
@@ -573,7 +576,11 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
         gameInputReplay_->apply(gameplayFrame_,*game,levels);
     }
-    if (game&&!gameInputReplay_) {
+    bool runtimeOwnsInput=true;
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)runtimeOwnsInput=!runOptions_.editorSession->simulating();
+#endif
+    if (game&&!gameInputReplay_&&runtimeOwnsInput) {
         bool focused = glfwGetWindowAttrib(frontend_->nativeHandle(), GLFW_FOCUSED) != 0;
 #if AZURE_WITH_EDITOR
         if (editorLayer_) focused = focused && editorLayer_->acceptsViewportShortcuts();
@@ -610,7 +617,7 @@ void AzureRenderApp::buildSceneFrameData(
     }
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
         const auto& preview=runOptions_.editorSession->context().animationPreview();
         if(preview){frame.animations.push_back(*preview);++editorPreviewFrames_;}
     }
@@ -661,7 +668,7 @@ void AzureRenderApp::buildSceneFrameData(
     }
     effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
         auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
         effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
     }

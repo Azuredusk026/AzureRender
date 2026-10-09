@@ -35,4 +35,12 @@ inline std::vector<DebugLine> debugCapsule(const ecs::TransformComponent& transf
         if(plane>0)for(float sign:{-1.0F,1.0F}){auto bottom=center,top=center;bottom[1]-=character.halfHeight;top[1]+=character.halfHeight;bottom[plane==1?0:2]+=sign*character.radius;top[plane==1?0:2]+=sign*character.radius;lines.push_back({bottom,top});}
     }return lines;
 }
+inline std::vector<DebugLine> debugRigidBody(const ecs::TransformComponent& transform,const game::RigidBody& body){
+    if(body.shape=="box"||body.shape=="mesh")return debugBox(transform,body);
+    game::Character capsule;capsule.radius=body.radius*std::abs(transform.scale[0]);capsule.halfHeight=body.shape=="sphere"?0:body.halfHeight*std::abs(transform.scale[1]);
+    ecs::TransformComponent local;auto lines=debugCapsule(local,capsule);
+    const auto rotation=JPH::Quat::sEulerAngles(JPH::Vec3(transform.rotation[0],transform.rotation[1],transform.rotation[2])*.017453292519943295F);
+    auto apply=[&](const auto& value){const auto p=rotation*JPH::Vec3(value[0],value[1],value[2]);return std::array<float,3>{transform.translation[0]+p.GetX(),transform.translation[1]+p.GetY(),transform.translation[2]+p.GetZ()};};
+    for(auto& line:lines){line.from=apply(line.from);line.to=apply(line.to);}return lines;
+}
 }

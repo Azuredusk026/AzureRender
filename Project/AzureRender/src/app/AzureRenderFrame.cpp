@@ -66,7 +66,7 @@ void AzureRenderApp::drawFrame() {
             azurerender::RuntimeDiagnostics::instance().info("settings","Applied setting layers: "+engineSettings_->describe().dump());
     }
 #if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && !runOptions_.editorSession->playing()){
+    if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
         auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
         if(session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
         if(editorCameraFar_>0){session.viewportView().nearPlane=editorCameraNear_;session.viewportView().farPlane=editorCameraFar_;}
@@ -168,8 +168,8 @@ void AzureRenderApp::drawFrame() {
         azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();
         auto& session=*runOptions_.editorSession;
-        if(!session.playing() && session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
-        if(session.consumeFrameSelection() && !session.playing()) {
+        if(session.editCameraActive() && session.consumeViewportViewChange()){cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;autoRotate_=false;}
+        if(session.consumeFrameSelection() && session.editCameraActive()) {
             const auto description=session.context().scene().renderDescription();
             const auto* rendererState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
             const auto bounds=azurerender::SelectionBounds::resolve(description,session.selection().selected(),[&](const std::string& resource)->std::optional<azurerender::scene::AxisAlignedBounds>{
@@ -190,11 +190,11 @@ void AzureRenderApp::drawFrame() {
             if(framed.passed){cameraPosition_=framed.position;cameraTarget_=framed.target;autoRotate_=false;}
             else session.log("ERROR: "+framed.diagnostic);
         }
-        if (!session.playing() && azurerender::EditorCameraController::apply(viewportInput,session.viewportView())) {
+        if (session.editCameraActive() && azurerender::EditorCameraController::apply(viewportInput,session.viewportView())) {
             cameraPosition_=session.viewportView().position;cameraTarget_=session.viewportView().target;
             autoRotate_ = false;
         }
-        if(!session.playing()){session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);effectiveRenderSettings_.cameraView=session.viewportView();}
+        if(session.editCameraActive()){session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);effectiveRenderSettings_.cameraView=session.viewportView();}
         editorLayer_->setCameraState(cameraPosition_,cameraTarget_);
         if (viewportInput.pickRequested) {
             pendingPickRequested_ = true;

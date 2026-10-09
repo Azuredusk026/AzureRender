@@ -11,6 +11,7 @@
 问题证据见[体验审查](research/2026-10-07-editor-usability.md)。
 操作说明见[编辑器交互教程](tutorials/editor-interaction.md)。
 漂浮、六轴视图与辅助见[视口导航](runtime/viewport-navigation.md)。
+独立模拟与机构制作见[物理制作](runtime/physics-authoring.md)。
 内容制作契约见[内容制作服务](runtime/content-workflows.md)。
 
 AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。

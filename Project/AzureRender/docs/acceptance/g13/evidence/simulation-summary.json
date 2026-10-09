@@ -1,0 +1,16 @@
+{
+  "arm": {
+    "constraints": 1,
+    "pausedSteps": 5,
+    "singleStep": 6,
+    "cameraNavigation": true,
+    "restored": true
+  },
+  "door": {
+    "constraints": 1,
+    "pausedSteps": 5,
+    "singleStep": 6,
+    "cameraNavigation": true,
+    "restored": true
+  }
+}

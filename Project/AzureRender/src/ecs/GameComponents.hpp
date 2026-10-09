@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 namespace azurerender::game {
-AZURE_TYPE("azure.rigid-body", 1)
+AZURE_TYPE("azure.rigid-body", 2)
 struct RigidBody {
     AZURE_FIELD("Half extent", 0.01, 10000)
     std::array<float, 3> halfExtent{0.5F, 0.5F, 0.5F};
@@ -12,6 +12,36 @@ struct RigidBody {
     bool dynamic = false;
     AZURE_FIELD("Trigger", 0, 1)
     bool trigger = false;
+    AZURE_FIELD("Collision shape", 0, 0)
+    std::string shape = "box";
+    AZURE_FIELD("Radius", 0.01, 10000)
+    float radius = .5F;
+    AZURE_FIELD("Capsule half height", 0.01, 10000)
+    float halfHeight = .5F;
+    AZURE_FIELD("Static collision mesh", 0, 0)
+    AZURE_FIELD_REFERENCE("asset", "model", "")
+    std::string mesh;
+};
+AZURE_TYPE("azure.hinge", 1)
+struct Hinge {
+    AZURE_FIELD("First body", 0, 0)
+    AZURE_FIELD_REFERENCE("node", "", "")
+    std::string bodyA;
+    AZURE_FIELD("Second body", 0, 0)
+    AZURE_FIELD_REFERENCE("node", "", "")
+    std::string bodyB;
+    AZURE_FIELD("First local anchor", -10000, 10000)
+    std::array<float,3> anchorA{0,0,0};
+    AZURE_FIELD("Second local anchor", -10000, 10000)
+    std::array<float,3> anchorB{0,0,0};
+    AZURE_FIELD("World hinge axis", -1, 1)
+    std::array<float,3> axis{0,1,0};
+    AZURE_FIELD("World reference normal", -1, 1)
+    std::array<float,3> normal{1,0,0};
+    AZURE_FIELD("Minimum angle degrees", -180, 0)
+    float minimumAngle = -90;
+    AZURE_FIELD("Maximum angle degrees", 0, 180)
+    float maximumAngle = 90;
 };
 AZURE_TYPE("azure.character", 4)
 struct Character {

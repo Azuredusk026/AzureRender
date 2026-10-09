@@ -11,7 +11,7 @@ constexpr ImGuiWindowFlags barFlags=ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags
 }
 bool EditorToolbar::enabled(EditorSession& s,EditorCommand command) {
     switch(command) {
-    case EditorCommand::Play:return !s.playing()&&!s.building();
+    case EditorCommand::Play:case EditorCommand::Simulate:return !s.playing()&&!s.building();
     case EditorCommand::Pause:return s.runtime()&&s.runtime()->state()==RuntimeLifecycle::State::Running;
     case EditorCommand::Resume:case EditorCommand::Step:return s.runtime()&&s.runtime()->state()==RuntimeLifecycle::State::Paused;
     case EditorCommand::Stop:return s.playing();
@@ -70,6 +70,7 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
         observe(std::string("mode.")+entry.first);ImGui::EndDisabled();ImGui::SameLine();
     }
     button("Play","play",EditorCommand::Play);
+    button("Simulate","simulate",EditorCommand::Simulate);
     const bool paused=s.runtime()&&s.runtime()->state()==RuntimeLifecycle::State::Paused;
     button(paused?"Resume":"Pause",paused?"resume":"pause",paused?EditorCommand::Resume:EditorCommand::Pause);
     button("Step","step",EditorCommand::Step);button("Stop","stop",EditorCommand::Stop);

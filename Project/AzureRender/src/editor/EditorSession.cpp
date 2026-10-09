@@ -5,6 +5,8 @@
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
+#include "gameplay/SharedSystems.hpp"
+#include "runtime/physics/PhysicsShapeFactory.hpp"
 
 #include <exception>
 #include <stdexcept>
@@ -13,22 +15,27 @@
 namespace azurerender {
 
 struct EditorSession::PlayState {
+    bool simulation=false;
     RuntimeLifecycle runtime;
     std::unique_ptr<LevelSession> levels;
     std::unique_ptr<GameRuntime> game;
     std::unique_ptr<PresentationRuntime> presentation;
     std::unique_ptr<IScriptRuntime> scripts;
     ModuleAssembly modules;
-    explicit PlayState(EditorContext& context) {
+    explicit PlayState(EditorContext& context,bool simulate=false):simulation(simulate) {
         modules.add({"preview.document",1,{},{}}, [this,&context](auto&) {
-        if (context.isProject()) levels = std::make_unique<LevelSession>(context.project(), runtime);
+        if (context.isProject()&&!simulation) levels = std::make_unique<LevelSession>(context.project(), runtime);
         runtime.replaceScene(context.scene(), [&](auto& target) {
             for (const auto& node : context.runtimeComponents()) installComponents(target.world(), target.entity(node.first), node.second);
         });
         }, [this] { levels.reset(); });
         modules.add({"preview.world",1,{}, {"preview.document"}}, [this](auto&) { runtime.start(); }, [this] { runtime.stop(); });
         modules.add({"preview.game",1,{}, {"preview.world"}}, [this,&context](auto&) {
-        game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
+        if(simulation){SystemRegistry registry;gameplay::registerSharedSystems(registry);
+            game=std::make_unique<GameRuntime>(runtime,registry,nlohmann::json{{"schemaVersion",1},{"input",nlohmann::json::object()},{"systems",nlohmann::json::array({{{"id","physics"},{"config",nlohmann::json::object()}}})}});
+        }else game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
+        if(context.isProject())game->physics().setMeshResolver(collisionMeshAssets(levels?levels->assets():context.assets()));
+        game->physics().validateScene(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());
             scripts->setAudioHandler([this](auto entity){presentation->play(entity);});
             scripts->setLevelHandler([this](std::string reference){levels->request(std::move(reference));});
@@ -133,6 +140,7 @@ void EditorSession::pollBuild() {
     if (!buildResult_.passed) recordError("project.build",buildResult_.message);
 }
 bool EditorSession::playing() const noexcept{return play_!=nullptr;}
+bool EditorSession::simulating() const noexcept{return play_&&play_->simulation;}
 GameRuntime* EditorSession::game() noexcept{return play_?play_->game.get():nullptr;}
 RuntimeLifecycle* EditorSession::runtime() noexcept{return play_?&play_->runtime:nullptr;}
 LevelSession* EditorSession::levels() noexcept{return play_?play_->levels.get():nullptr;}
@@ -175,6 +183,7 @@ bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
     if(reimporting_&&(descriptor.requiresIdle||descriptor.modifiesDocument))return false;
     if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
         if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
+    if(simulating()&&!descriptor.modifiesDocument&&!building()&&(descriptor.id=="viewport.orientation"||descriptor.id=="viewport.projection"||descriptor.id=="viewport.fly-speed"||descriptor.id=="viewport.frame-selection"||descriptor.id=="viewport.overlay-policy"))return true;
     return !(descriptor.requiresIdle||descriptor.modifiesDocument)||(!playing()&&!building());
 }
 std::string EditorSession::startProjectCreation(const std::string& templateId,const std::filesystem::path& destination,const std::string& name) {
@@ -243,7 +252,7 @@ bool EditorSession::startBuild(const std::filesystem::path& install,const std::f
 }
 bool EditorSession::execute(const EditorCommand command) noexcept {
     static const std::map<EditorCommand,std::string> ids={{EditorCommand::Save,"document.save"},{EditorCommand::Reload,"document.reload"},
-        {EditorCommand::Undo,"history.undo"},{EditorCommand::Redo,"history.redo"},{EditorCommand::Play,"preview.play"},
+        {EditorCommand::Undo,"history.undo"},{EditorCommand::Redo,"history.redo"},{EditorCommand::Play,"preview.play"},{EditorCommand::Simulate,"preview.simulate"},
         {EditorCommand::Pause,"preview.pause"},{EditorCommand::Resume,"preview.resume"},{EditorCommand::Step,"preview.step"},
         {EditorCommand::Stop,"preview.stop"},{EditorCommand::ResetLayout,"workspace.reset"},{EditorCommand::ReloadAssets,"assets.reload"},
         {EditorCommand::Capture,"viewport.capture"}};
@@ -252,13 +261,13 @@ bool EditorSession::execute(const EditorCommand command) noexcept {
 }
 bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     lastError_.clear();
-    if(building() && (command==EditorCommand::Save || command==EditorCommand::Reload || command==EditorCommand::Play || command==EditorCommand::Undo || command==EditorCommand::Redo)) {
+    if(building() && (command==EditorCommand::Save || command==EditorCommand::Reload || command==EditorCommand::Play || command==EditorCommand::Simulate || command==EditorCommand::Undo || command==EditorCommand::Redo)) {
         lastError_="Wait for game build to finish"; return false;
     }
-    if(command==EditorCommand::Play || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
+    if(command==EditorCommand::Play || command==EditorCommand::Simulate || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
         context_->closeEditMerge();
         try{
-            if(command==EditorCommand::Play){if(play_)return false;context_->detachRenderSettings();play_=std::make_unique<PlayState>(*context_);runtimeReset_=true;context_->log("Play started");}
+            if(command==EditorCommand::Play||command==EditorCommand::Simulate){if(play_)return false;auto candidate=std::make_unique<PlayState>(*context_,command==EditorCommand::Simulate);context_->detachRenderSettings();play_=std::move(candidate);runtimeReset_=true;context_->log(simulating()?"Simulation started":"Play started");}
             else if(command==EditorCommand::Stop){if(!play_)return false;play_.reset();runtimeReset_=true;context_->log("Play stopped; edit state restored");}
             else{if(!play_)return false;if(command==EditorCommand::Pause)play_->runtime.pause();else if(command==EditorCommand::Resume)play_->runtime.resume();else play_->runtime.step();}
             return true;

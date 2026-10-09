@@ -1,0 +1,26 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 195: AzureEditor.SimulationGpu
+1/1 Test #195: AzureEditor.SimulationGpu ........***Failed   38.04 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_simulation.py", line 57, in <module>
+    run(args.executable.resolve(), args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_simulation.py", line 41, in run
+    axis = launch(executable, root, 'axis', (1920, 1080), 1, pause + [dict(frame=34, action='click', target='viewport.axis.positiveY')], capture=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 34, in launch
+    assert data['uiErrors']==[],data['uiErrors']
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'action': {'action': 'click', 'frame': 34, 'target': 'viewport.axis.positiveY'}, 'error': "[json.exception.out_of_range.403] key 'viewport.axis.positiveY' not found", 'frame': 34}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  38.04 sec*proc (1 test)
+
+Total Test time (real) =  38.05 sec
+
+The following tests FAILED:
+	195 - AzureEditor.SimulationGpu (Failed)
+Errors while running CTest

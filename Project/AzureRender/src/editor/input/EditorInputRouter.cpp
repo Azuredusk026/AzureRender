@@ -17,7 +17,8 @@ EditorInputResult EditorInputRouter::route(const EditorInputEvent& input,const s
         if(e.scene && e.key=="D")return {true,"node.duplicate",-1};
         return {};
     }
-    if(e.playing || e.building || e.navigating)return {};
+    if(e.building||e.navigating)return {};
+    if(e.playing){if(e.simulating&&e.scene&&e.key=="F")return {true,"viewport.frame-selection",-1};return {};}
     if(e.scene && e.key=="Delete")return {true,"node.delete",-1};
     if(e.scene && e.key=="F")return {true,"viewport.frame-selection",-1};
     if(e.viewport) {

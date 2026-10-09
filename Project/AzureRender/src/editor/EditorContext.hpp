@@ -61,6 +61,7 @@ public:
     void deleteSelection();
     nlohmann::json componentData(const std::string& node, const std::string& type) const;
     void setComponentField(const std::string& type, const std::string& field, const nlohmann::json& value);
+    void setComponentFields(const std::string& type,const nlohmann::json& values);
     void addGameplayComponent(const std::string& type);
     std::map<std::string,nlohmann::json> runtimeComponents() const;
     nlohmann::json levelDocument() const;

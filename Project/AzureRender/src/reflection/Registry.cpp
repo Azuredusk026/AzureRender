@@ -66,7 +66,12 @@ void Registry::decode(const std::string& name, void* object, const Json& envelop
             || numeric("minimumPitch") > numeric("maximumPitch"))
             throw std::invalid_argument("Incompatible third-person camera ranges");
     }
+    const auto validator=validators_.find(name);
+    if(validator!=validators_.end()){auto candidate=encode(name,object).at("data");candidate.update(data);validator->second(candidate);}
     t.assign(object, data);
+}
+void Registry::addValidation(const std::string& name,std::function<void(const Json&)> validation){
+    type(name);if(!validation||!validators_.emplace(name,std::move(validation)).second)throw std::invalid_argument("Invalid or duplicate component validation");
 }
 void Registry::addMigration(const std::string& name, unsigned version, std::function<Json(Json)> migration) {
     if (version >= type(name).version || !migration || !migrations_.emplace(std::make_pair(name, version), std::move(migration)).second)
@@ -74,6 +79,7 @@ void Registry::addMigration(const std::string& name, unsigned version, std::func
 }
 Registry makeRuntimeRegistry() {
     Registry registry; registerGeneratedTypes(registry);
+    registry.addMigration("azure.rigid-body", 1, [](Json data) { return data; });
     registry.addMigration("azure.character", 1, [](Json data) { return data; });
     registry.addMigration("azure.character", 2, [](Json data) { data["sprintMultiplier"]=2.5F;return data; });
     registry.addMigration("azure.character", 3, [](Json data) { data["inputProfile"]="default";return data; });

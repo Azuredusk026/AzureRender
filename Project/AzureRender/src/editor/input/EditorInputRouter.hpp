@@ -6,6 +6,7 @@ struct EditorInputEvent {
     std::string key;
     bool pressed=true, ctrl=false, text=false, modal=false;
     bool scene=false, viewport=false, navigating=false, playing=false, building=false;
+    bool simulating=false;
 };
 struct EditorInputResult { bool consumed=false; std::string operation; int mode=-1; };
 class EditorInputRouter {

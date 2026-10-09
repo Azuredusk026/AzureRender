@@ -261,8 +261,9 @@
       "phase": "G13",
       "proposal": "以会话模式声明启用系统。模拟默认启用物理并关闭玩法脚本。",
       "acceptance": "反复 Play/Simulate/Stop 后编辑文档哈希一致。失败启动和停止均释放资源。",
-      "status": "Planned",
-      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17"
+      "status": "Complete",
+      "sourceSha256": "2b3945d2d059f7a4c7f0af41db0e4f97372225fad788603a7600edde2d1a0a17",
+      "evidence": "docs/acceptance/g13/2026-10-10.md"
     },
     {
       "id": "B01",
@@ -440,8 +441,9 @@
       "phase": "G13",
       "proposal": "声明形状和约束描述。通过注册组件及公共编辑服务创建并模拟。",
       "acceptance": "两个机械场景验证铰链。端点删除、非法轴和重启释放都正确。",
-      "status": "Planned",
-      "sourceSha256": "1021e9caf65fab5d5ea42d10b3e3d3cc27e6877da7c1313e4c783b8a2cd4637a"
+      "status": "Complete",
+      "sourceSha256": "1021e9caf65fab5d5ea42d10b3e3d3cc27e6877da7c1313e4c783b8a2cd4637a",
+      "evidence": "docs/acceptance/g13/2026-10-10.md"
     },
     {
       "id": "B10",
@@ -793,7 +795,7 @@
       "evidence": [
         "docs/acceptance/u12/2026-10-10.md"
       ],
-      "commit": null,
+      "commit": "3fd3abc8f74271a9a07cd7187f5d574bc2656886",
       "dependsOn": [
         "U11"
       ],
@@ -836,13 +838,15 @@
     },
     {
       "id": "G13",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A12",
         "B09"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/g13/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "U12"
@@ -850,7 +854,7 @@
     },
     {
       "id": "U13",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "B07",
@@ -1105,7 +1109,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring"
   },
   "execution": {
     "order": [
@@ -1121,14 +1125,15 @@
       "G16",
       "P5"
     ],
-    "active": "G13",
+    "active": "U13",
     "completed": [
       "U8",
       "U9",
       "G12",
       "U10",
       "U11",
-      "U12"
+      "U12",
+      "G13"
     ]
   }
 }

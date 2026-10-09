@@ -1,0 +1,33 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 193: AzureEditor.PreviewSimulation
+1/1 Test #193: AzureEditor.PreviewSimulation ....***Failed    0.31 sec
+[1791581881084][info][editor][code=0] Opened scene: untitled
+[1791581881100][info][editor][code=0] Simulation started
+[1791581881116][info][editor][code=0] ERROR [node.rename]: Operation requires an idle edit session
+[1791581881119][info][editor][code=0] Play stopped; edit state restored
+[1791581881128][info][editor][code=0] Simulation started
+[1791581881137][info][editor][code=0] Play stopped; edit state restored
+[1791581881145][info][editor][code=0] Simulation started
+[1791581881154][info][editor][code=0] Play stopped; edit state restored
+[1791581881162][info][editor][code=0] Simulation started
+[1791581881171][info][editor][code=0] Play stopped; edit state restored
+[1791581881178][info][editor][code=0] Simulation started
+[1791581881187][info][editor][code=0] Play stopped; edit state restored
+[1791581881195][info][editor][code=0] Simulation started
+[1791581881205][info][editor][code=0] Play stopped; edit state restored
+[1791581881213][info][editor][code=0] Simulation started
+[1791581881223][info][editor][code=0] Play stopped; edit state restored
+[1791581881277][info][editor][code=0] Opened scene: physics
+[1791581881287][info][editor][code=0] Selected node: fixed
+[1791581881290][info][editor][code=0] Opened scene: physics
+Editing a legacy component writes its current version
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.32 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PreviewSimulation (Failed)
+Errors while running CTest

@@ -9,6 +9,7 @@
 #include <Jolt/Physics/Collision/Shape/BoxShape.h>
 #include <Jolt/Physics/Collision/Shape/CapsuleShape.h>
 #include <Jolt/Physics/Collision/Shape/SphereShape.h>
+#include <Jolt/Physics/Constraints/HingeConstraint.h>
 #include <Jolt/Physics/Collision/ShapeCast.h>
 #include <Jolt/Physics/Collision/RayCast.h>
 #include <Jolt/Physics/Collision/CastResult.h>
@@ -19,6 +20,7 @@
 #include <Jolt/Physics/Collision/BroadPhase/ObjectVsBroadPhaseLayerFilterTable.h>
 #include "runtime/PhysicsWorld.hpp"
 #include "runtime/GameComponents.hpp"
+#include "runtime/physics/PhysicsShapeFactory.hpp"
 #include <cmath>
 #include <mutex>
 #include <set>
@@ -47,6 +49,8 @@ struct PhysicsWorld::Impl {
     struct Character { JPH::Ref<JPH::CharacterVirtual> value; std::string node; game::Character settings; float groundAge = 1, jumpBuffer = 0; bool jumping = false; };
     std::map<ecs::Entity, Body> bodies;
     std::map<ecs::Entity, Character> characters;
+    struct HingeState {JPH::Ref<JPH::TwoBodyConstraint> value;ecs::Entity a,b;game::Hinge settings;};
+    std::map<ecs::Entity,HingeState> hinges;
     std::set<std::pair<ecs::Entity, ecs::Entity>> contacts;
     Impl() {
         broad.MapObjectToBroadPhaseLayer(0, JPH::BroadPhaseLayer(0)); broad.MapObjectToBroadPhaseLayer(1, JPH::BroadPhaseLayer(1));
@@ -55,15 +59,34 @@ struct PhysicsWorld::Impl {
         system.Init(4096, 0, 4096, 4096, broad, *filter, pairs);
     }
     void removeBody(ecs::Entity entity) {
+        for(auto it=hinges.begin();it!=hinges.end();)if(it->second.a==entity||it->second.b==entity){system.RemoveConstraint(it->second.value);it=hinges.erase(it);}else ++it;
         const auto id = bodies.at(entity).id; system.GetBodyInterface().RemoveBody(id); system.GetBodyInterface().DestroyBody(id); bodies.erase(entity);
     }
     ~Impl() { characters.clear(); while (!bodies.empty()) removeBody(bodies.begin()->first); }
 };
 PhysicsWorld::PhysicsWorld() { initializeJolt(); impl_ = std::make_unique<Impl>(); }
 PhysicsWorld::~PhysicsWorld() = default;
+std::size_t PhysicsWorld::constraintCount() const{return impl_->hinges.size();}
+std::optional<float> PhysicsWorld::hingeAngle(ecs::Entity entity) const{
+    const auto found=impl_->hinges.find(entity);if(found==impl_->hinges.end())return {};
+    return JPH::RadiansToDegrees(static_cast<const JPH::HingeConstraint*>(found->second.value.GetPtr())->GetCurrentAngle());
+}
+void PhysicsWorld::validateScene(RuntimeLifecycle& runtime) const{
+    auto& world=runtime.world();
+    world.each<ecs::TransformComponent,game::RigidBody>([&](auto entity,const auto& transform,const auto& settings){
+        if(world.has<game::Character>(entity))throw std::invalid_argument("Character and rigid body are mutually exclusive");
+        static_cast<void>(createPhysicsShape(settings,transform.scale,meshResolver_));
+    });
+    world.each<game::Hinge>([&](auto,const auto& settings){
+        validateHinge(settings);const auto a=runtime.entity(settings.bodyA),b=runtime.entity(settings.bodyB);
+        const auto* first=world.tryGet<game::RigidBody>(a);const auto* second=world.tryGet<game::RigidBody>(b);
+        if(!first||!second||(!first->dynamic&&!second->dynamic)||first->trigger||second->trigger)throw std::invalid_argument("Hinge requires two rigid bodies, one dynamic, without sensors");
+    });
+}
 std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt, const std::map<ecs::Entity, CharacterMotion>& motions) {
     if (!std::isfinite(dt) || dt <= 0) throw std::invalid_argument("Physics dt must be finite and positive");
     if (sceneRevision_ != runtime.sceneRevision()) {
+        validateScene(runtime);
         impl_ = std::make_unique<Impl>(); sceneRevision_ = runtime.sceneRevision();
     }
     auto& p = *impl_; auto& world = runtime.world(); auto& bi = p.system.GetBodyInterface();
@@ -75,22 +98,46 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
     for (auto entity : deleted) p.removeBody(entity);
     world.each<ecs::TransformComponent, game::RigidBody>([&](auto entity, auto& transform, const auto& settings) {
         if (world.has<game::Character>(entity)) throw std::invalid_argument("Character and rigid body are mutually exclusive");
-        for (unsigned i = 0; i < 3; ++i) if (!std::isfinite(settings.halfExtent[i]) || settings.halfExtent[i] <= 0 || transform.scale[i] <= 0)
-            throw std::invalid_argument("Invalid rigid body extent");
+        validateRigidBody(settings,transform.scale);
         auto existing = p.bodies.find(entity);
         if (existing != p.bodies.end() && (existing->second.settings.halfExtent != settings.halfExtent
-            || existing->second.settings.dynamic != settings.dynamic || existing->second.settings.trigger != settings.trigger || existing->second.scale != transform.scale)) {
+            || existing->second.settings.dynamic != settings.dynamic || existing->second.settings.trigger != settings.trigger || existing->second.scale != transform.scale
+            || existing->second.settings.shape!=settings.shape || existing->second.settings.radius!=settings.radius || existing->second.settings.halfHeight!=settings.halfHeight || existing->second.settings.mesh!=settings.mesh)) {
             p.removeBody(entity); existing = p.bodies.end();
         }
         if (existing == p.bodies.end()) {
-            const JPH::Vec3 extent = vec(settings.halfExtent) * vec(transform.scale);
-            JPH::BodyCreationSettings create(new JPH::BoxShape(extent, std::min(0.05F, extent.ReduceMin() * 0.5F)), JPH::RVec3(vec(transform.translation)), rotation(transform.rotation),
+            const auto shape=createPhysicsShape(settings,transform.scale,meshResolver_);
+            JPH::BodyCreationSettings create(shape, JPH::RVec3(vec(transform.translation)), rotation(transform.rotation),
                 settings.dynamic ? JPH::EMotionType::Dynamic : JPH::EMotionType::Static, settings.dynamic || settings.trigger ? 1 : 0);
             create.mIsSensor = settings.trigger;
             const auto id = bi.CreateAndAddBody(create, JPH::EActivation::Activate);
             if (id.IsInvalid()) throw std::runtime_error("Jolt body capacity exceeded");
             bi.SetUserData(id, entity); p.bodies.emplace(entity, Impl::Body{id, runtime.nodeId(entity), settings, transform.scale});
         } else if (!settings.dynamic) bi.SetPositionAndRotation(existing->second.id, JPH::RVec3(vec(transform.translation)), rotation(transform.rotation), JPH::EActivation::DontActivate);
+    });
+    for(auto it=p.hinges.begin();it!=p.hinges.end();)if(!world.has<game::Hinge>(it->first)||!p.bodies.count(it->second.a)||!p.bodies.count(it->second.b)){
+        p.system.RemoveConstraint(it->second.value);it=p.hinges.erase(it);
+    }else ++it;
+    world.each<game::Hinge>([&](auto entity,const auto& settings){
+        validateHinge(settings);const auto a=runtime.entity(settings.bodyA),b=runtime.entity(settings.bodyB);
+        if(!p.bodies.count(a)||!p.bodies.count(b))return; // Live endpoint deletion releases the constraint.
+        const auto* first=world.tryGet<game::RigidBody>(a);const auto* second=world.tryGet<game::RigidBody>(b);
+        if((!first->dynamic&&!second->dynamic)||first->trigger||second->trigger)throw std::invalid_argument("Hinge requires a dynamic body and nonsensor endpoints");
+        auto found=p.hinges.find(entity);
+        if(found!=p.hinges.end()){
+            const auto& old=found->second.settings;
+            if(found->second.a==a&&found->second.b==b&&old.axis==settings.axis&&old.normal==settings.normal&&old.anchorA==settings.anchorA&&old.anchorB==settings.anchorB&&old.minimumAngle==settings.minimumAngle&&old.maximumAngle==settings.maximumAngle)return;
+            p.system.RemoveConstraint(found->second.value);p.hinges.erase(found);
+        }
+        JPH::HingeConstraintSettings create;
+        const auto point=[&](ecs::Entity endpoint,const auto& anchor){const auto& body=p.bodies.at(endpoint);return bi.GetPosition(body.id)+bi.GetRotation(body.id)*(vec(anchor)*vec(body.scale));};
+        create.mPoint1=point(a,settings.anchorA);create.mPoint2=point(b,settings.anchorB);
+        create.mHingeAxis1=create.mHingeAxis2=vec(settings.axis).Normalized();create.mNormalAxis1=create.mNormalAxis2=vec(settings.normal).Normalized();
+        create.mLimitsMin=JPH::DegreesToRadians(settings.minimumAngle);create.mLimitsMax=JPH::DegreesToRadians(settings.maximumAngle);
+        JPH::Ref<JPH::TwoBodyConstraint> constraint=bi.CreateConstraint(&create,p.bodies.at(a).id,p.bodies.at(b).id);
+        if(!constraint)throw std::runtime_error("Cannot create hinge constraint");
+        p.system.AddConstraint(constraint);p.hinges.emplace(entity,Impl::HingeState{constraint,a,b,settings});
+        bi.ActivateBody(p.bodies.at(b).id);
     });
     world.each<ecs::TransformComponent, game::Character>([&](auto entity, auto& transform, const auto& settings) {
         if (!(settings.radius > 0 && settings.halfHeight > 0)) throw std::invalid_argument("Invalid character shape");

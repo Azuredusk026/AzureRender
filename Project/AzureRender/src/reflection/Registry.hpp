@@ -106,9 +106,11 @@ public:
     Json encode(const std::string& name, const void* object) const;
     void decode(const std::string& name, void* object, const Json& envelope) const;
     void addMigration(const std::string& name, unsigned version, std::function<Json(Json)> migration);
+    void addValidation(const std::string& name, std::function<void(const Json&)> validation);
 private:
     std::map<std::string, Type> types_;
     std::map<std::pair<std::string, unsigned>, std::function<Json(Json)>> migrations_;
+    std::map<std::string, std::function<void(const Json&)>> validators_;
 };
 Registry makeRuntimeRegistry();
 } // namespace azurerender::reflection

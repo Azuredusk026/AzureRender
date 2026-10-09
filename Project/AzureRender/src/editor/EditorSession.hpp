@@ -41,6 +41,7 @@ enum class EditorCommand {
     ReloadAssets,
     Capture,
     Play,
+    Simulate,
     Pause,
     Resume,
     Step,
@@ -52,6 +53,9 @@ public:
     explicit EditorSession(std::shared_ptr<EditorContext> context);
     ~EditorSession();
     bool playing() const noexcept;
+    bool simulating() const noexcept;
+    bool editCameraActive() const noexcept {return !playing()||simulating();}
+    std::string previewMode() const {return simulating()?"simulate":playing()?"play":"edit";}
     bool debugOverlay = false;
     ViewportOverlayRegistry& viewportOverlays(){return viewportOverlays_;}
     std::map<std::string,std::string>& viewportOverlayPolicies(){return viewportOverlayPolicies_;}
@@ -146,7 +150,7 @@ private:
     EditorViewDescriptor viewportView_;
     bool viewportViewChanged_=false;
     ViewportOverlayRegistry viewportOverlays_=ViewportOverlayRegistry::builtins();
-    std::map<std::string,std::string> viewportOverlayPolicies_{{"grid","all"},{"light","selected"},{"camera","selected"}};
+    std::map<std::string,std::string> viewportOverlayPolicies_{{"grid","all"},{"light","selected"},{"camera","selected"},{"collision","selected"},{"hinge","selected"}};
     MaterialEditingService materials_;
     friend EditRegistry editorOperations(EditorSession&);
     bool executeInternal(EditorCommand command) noexcept;

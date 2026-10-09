@@ -5,7 +5,8 @@
 #include <map>
 namespace azurerender {
 struct ViewportOverlayLine {std::array<float,3> from,to;std::array<float,4> color;std::string node;};
-struct ViewportOverlayRequest {const EditorContext& context;const EditorViewDescriptor& view;};
+struct ViewportOverlayRequest {const EditorContext& context;const EditorViewDescriptor& view;const SceneDocument* scene=nullptr;};
+void registerPhysicsOverlayProviders(class ViewportOverlayRegistry&);
 class ViewportOverlayRegistry {
 public:
     using Provider=std::function<std::vector<ViewportOverlayLine>(const ViewportOverlayRequest&)>;

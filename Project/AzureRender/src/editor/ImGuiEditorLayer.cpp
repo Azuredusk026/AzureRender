@@ -320,7 +320,7 @@ void ImGuiEditorLayer::drawPanels() {
         EditorInputEvent event;event.key=ImGui::GetKeyName(imguiKey);event.ctrl=io.KeyCtrl;
         event.text=io.WantTextInput || ImGui::IsAnyItemActive();event.modal=modal;
         event.scene=sceneFocus;event.viewport=viewportFocused_;event.navigating=navigationButton_>=0;
-        event.playing=session_->playing();event.building=session_->building();
+        event.playing=session_->playing();event.simulating=session_->simulating();event.building=session_->building();
         const auto routed=EditorInputRouter::route(event,bindings);
         if(routed.consumed)session_->edit(routed.operation,routed.mode>=0?nlohmann::json{{"value",routed.mode}}:nlohmann::json::object());
     }
@@ -454,7 +454,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         }observeWidget("focus");ImGui::SameLine();
         if(ImGui::Button("View"))ImGui::OpenPopup("Viewport view options");observeWidget("viewport.view-options");ImGui::SameLine();
         if(ImGui::BeginPopup("Viewport view options")){
-            ImGui::BeginDisabled(session_->playing()||session_->building()||session_->gizmo().active());
+            ImGui::BeginDisabled(!session_->editCameraActive()||session_->building()||session_->gizmo().active());
             for(const auto* axis:{"+X","-X","+Y","-Y","+Z","-Z"}){if(ImGui::MenuItem(axis))session_->edit("viewport.orientation",{{"axis",axis}});observeWidget(std::string("viewport.orientation.")+axis);}
             ImGui::Separator();for(const auto* kind:{"perspective","orthographic"}){if(ImGui::MenuItem(kind))session_->edit("viewport.projection",{{"value",kind}});observeWidget(std::string("viewport.projection.")+kind);}
             ImGui::Separator();
@@ -556,7 +556,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 if(runtime){const auto entity=runtime->entity(node.id);if(const auto* value=runtime->world().tryGet<game::RigidBody>(entity)){body=*value;hasBody=true;}if(const auto* value=runtime->world().tryGet<game::Character>(entity)){character=*value;hasCharacter=true;}}
                 else{auto data=context_->componentData(node.id,"azure.rigid-body");if(!data.is_null()){registry.decode("azure.rigid-body",&body,{{"type","azure.rigid-body"},{"version",1},{"data",data}});hasBody=true;}
                     data=context_->componentData(node.id,"azure.character");if(!data.is_null()){registry.decode("azure.character",&character,{{"type","azure.character"},{"version",registry.type("azure.character").version},{"data",data}});hasCharacter=true;}}
-                if(hasBody)for(const auto& edge:debugBox(transform,body))line(edge,body.trigger?IM_COL32(255,210,60,220):IM_COL32(70,220,120,220));
+                if(hasBody)for(const auto& edge:debugRigidBody(transform,body))line(edge,body.trigger?IM_COL32(255,210,60,220):IM_COL32(70,220,120,220));
                 if(hasCharacter)for(const auto& edge:debugCapsule(transform,character))line(edge,IM_COL32(80,180,255,230));
             }
             if(auto* game=session_->game();game && game->hasCamera())line({game->camera().target(),game->camera().position()},IM_COL32(255,80,170,255));
@@ -572,7 +572,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         const bool orientationOver=drawViewportOrientation(itemMin,imageSize);
         const bool gizmoOver=orientationOver||drawViewportGizmo(itemMin,imageSize);
         const auto& navIo=ImGui::GetIO();
-        const bool navigationAllowed=!session_->playing() && !session_->building() && !navIo.WantTextInput
+        const bool navigationAllowed=session_->editCameraActive() && !session_->building() && !navIo.WantTextInput
             && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel)
             && !navIo.AppFocusLost && !viewportGizmoDragActive_;
         if(!navigationAllowed)navigationButton_=-1;
@@ -607,7 +607,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             }else if(navigationButton_==ImGuiMouseButton_Middle){viewportInput_.panDeltaX+=mouseDelta.x;viewportInput_.panDeltaY+=mouseDelta.y;}
 
             const bool pickThisClick=!gizmoOver && !viewportGizmoDragActive_;
-            if (!session_->playing() && !session_->building() && pickThisClick
+            if (session_->editCameraActive() && !session_->building() && pickThisClick
                 && navigationButton_<0 && hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
                 const ImVec2 mousePosition = io.MousePos;
                 if (imageSize.x > 0.0F && imageSize.y > 0.0F) {

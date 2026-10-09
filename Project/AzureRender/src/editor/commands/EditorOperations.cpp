@@ -161,6 +161,7 @@ EditRegistry editorOperations(EditorSession& session) {
     document("component.field",schema({{"type",text},{"field",text},{"value",Json::object()}},{"type","field","value"}),[](auto& c,const auto& a) {
         c.setComponentField(a.at("type").template get<std::string>(),a.at("field").template get<std::string>(),a.at("value"));
     });
+    document("component.fields",schema({{"type",text},{"values",Json::object()}},{"type","values"}),[](auto& c,const auto& a){c.setComponentFields(a.at("type").template get<std::string>(),a.at("values"));});
     const auto ownerList=Json{{"type","array"},{"items",text},{"minItems",1},{"maxItems",4096}};
     document("component.batch-field",schema({{"nodes",ownerList},{"type",text},{"field",text},{"value",Json::object()},{"axis",integer},{"reset",boolean}},{"nodes","type","field"}),[](auto& c,const auto& a){PropertyEditorRegistry::apply(c,a);});
     registry.add({"reference.begin",1,schema({{"nodes",ownerList},{"type",text},{"field",text}},{"nodes","type","field"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json {session.references().begin(c,a);return nullptr;});
@@ -221,7 +222,7 @@ EditRegistry editorOperations(EditorSession& session) {
     for(const auto& item:std::vector<std::pair<std::string,EditorCommand>>{
             {"document.save",EditorCommand::Save},{"document.reload",EditorCommand::Reload},
             {"history.undo",EditorCommand::Undo},{"history.redo",EditorCommand::Redo},
-            {"preview.play",EditorCommand::Play},{"preview.pause",EditorCommand::Pause},{"preview.resume",EditorCommand::Resume},
+            {"preview.play",EditorCommand::Play},{"preview.simulate",EditorCommand::Simulate},{"preview.pause",EditorCommand::Pause},{"preview.resume",EditorCommand::Resume},
             {"preview.step",EditorCommand::Step},{"preview.stop",EditorCommand::Stop},{"workspace.reset",EditorCommand::ResetLayout},
             {"assets.reload",EditorCommand::ReloadAssets},{"viewport.capture",EditorCommand::Capture}}) {
         const bool idle=item.second==EditorCommand::Save||item.second==EditorCommand::Reload||item.second==EditorCommand::Undo||item.second==EditorCommand::Redo;

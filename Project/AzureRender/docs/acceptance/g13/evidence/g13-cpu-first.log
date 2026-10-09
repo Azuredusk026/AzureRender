@@ -1,0 +1,53 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start  60: AzureEngine.RegisteredComponentWorkflow
+    Start 193: AzureEditor.PreviewSimulation
+1/7 Test #193: AzureEditor.PreviewSimulation .............***Failed    0.37 sec
+[1791581290374][info][editor][code=0] Opened scene: untitled
+[1791581290395][info][editor][code=0] Simulation started
+[1791581290418][info][editor][code=0] ERROR [node.rename]: Operation requires an idle edit session
+[1791581290422][info][editor][code=0] Play stopped; edit state restored
+[1791581290432][info][editor][code=0] Simulation started
+[1791581290445][info][editor][code=0] Play stopped; edit state restored
+[1791581290457][info][editor][code=0] Simulation started
+[1791581290468][info][editor][code=0] Play stopped; edit state restored
+[1791581290477][info][editor][code=0] Simulation started
+[1791581290493][info][editor][code=0] Play stopped; edit state restored
+[1791581290502][info][editor][code=0] Simulation started
+[1791581290515][info][editor][code=0] Play stopped; edit state restored
+[1791581290524][info][editor][code=0] Simulation started
+[1791581290536][info][editor][code=0] Play stopped; edit state restored
+[1791581290546][info][editor][code=0] Simulation started
+[1791581290558][info][editor][code=0] Play stopped; edit state restored
+[1791581290598][info][editor][code=0] Opened scene: physics
+[1791581290606][info][editor][code=0] Selected node: fixed
+[1791581290608][info][editor][code=0] Opened scene: physics
+[1791581290626][info][editor][code=0] Selected node: joint
+[1791581290628][info][editor][code=0] Opened scene: physics
+[1791581290648][info][editor][code=0] Opened scene: physics
+[1791581290679][info][editor][code=0] ERROR: Hinge requires two rigid bodies, one dynamic, without sensors
+[1791581290681][info][editor][code=0] ERROR [preview.simulate]: Hinge requires two rigid bodies, one dynamic, without sensors
+Failed startup preserves document and render-settings attachment
+
+    Start 194: AzureEngine.PhysicsAuthoring
+2/7 Test #194: AzureEngine.PhysicsAuthoring ..............   Passed    0.10 sec
+    Start  58: AzureEngine.ComponentRegistry
+3/7 Test  #58: AzureEngine.ComponentRegistry .............   Passed    0.03 sec
+    Start  90: AzureEngine.Reflection
+4/7 Test  #90: AzureEngine.Reflection ....................   Passed    0.06 sec
+    Start 140: AzureRender.EditorInputRouter
+5/7 Test #140: AzureRender.EditorInputRouter .............   Passed    0.05 sec
+6/7 Test  #60: AzureEngine.RegisteredComponentWorkflow ...   Passed    1.58 sec
+    Start  61: AzureEngine.RegisteredComponentHost
+7/7 Test  #61: AzureEngine.RegisteredComponentHost .......   Passed    3.92 sec
+
+86% tests passed, 1 tests failed out of 7
+
+Label Time Summary:
+gpu    =   3.92 sec*proc (1 test)
+
+Total Test time (real) =   5.52 sec
+
+The following tests FAILED:
+	193 - AzureEditor.PreviewSimulation (Failed)
+Errors while running CTest

@@ -43,6 +43,6 @@ ViewportOverlayRegistry ViewportOverlayRegistry::builtins(){
             std::array<internal::Vector3,4> corners;for(unsigned c=0;c<4;++c)corners[c]=internal::transformPosition(world[i],{c&1?.5F:-.5F,c&2?.3F:-.3F,-1});
             const auto center=internal::transformPosition(world[i],{0,0,0});for(unsigned c=0;c<4;++c){lines.push_back({center,corners[c],{.25F,.75F,1,.85F},node.id});for(unsigned axis=0;axis<2;++axis)if(!(c&(1U<<axis)))lines.push_back({corners[c],corners[c|(1U<<axis)],{.25F,.75F,1,.85F},node.id});}
         }return lines;
-    });return result;
+    });registerPhysicsOverlayProviders(result);return result;
 }
 }

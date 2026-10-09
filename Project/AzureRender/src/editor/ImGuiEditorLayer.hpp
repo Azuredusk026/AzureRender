@@ -92,6 +92,7 @@ private:
     void drawTextureAssetPanel();
     void drawMaterialAssetPanel();
     void drawMaterialSlots(const SceneNode&);
+    void drawPhysicsAuthoring(const SceneNode&);
     void drawCapturePanel(PanelContext& context);
     void drawConsolePanel(PanelContext& context);
     void drawBuildPanel(PanelContext& context);

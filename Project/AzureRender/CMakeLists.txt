@@ -352,6 +352,7 @@ add_library(AzureRuntime STATIC
     src/runtime/Prefab.cpp
     src/runtime/LevelSession.cpp
     src/runtime/PhysicsWorld.cpp
+    src/runtime/physics/PhysicsShapeFactory.cpp
     src/runtime/GameRuntime.cpp
     src/runtime/GameUi.cpp
     src/runtime/AnimationStateMachine.cpp
@@ -444,8 +445,10 @@ add_library(AzureEditor STATIC
     src/editor/preview/ThumbnailProviderRegistry.cpp
     src/editor/panels/TextureAssetPanel.cpp
     src/editor/panels/MaterialAssetPanel.cpp
+    src/editor/panels/PhysicsAuthoringPanel.cpp
     src/editor/viewport/ViewportOverlayRegistry.cpp
     src/editor/viewport/ViewportOverlays.cpp
+    src/editor/viewport/PhysicsOverlays.cpp
     src/editor/content/AssetCatalog.cpp
     src/editor/content/ContentDirectoryModel.cpp
     src/editor/content/AssetEditorRegistry.cpp
@@ -1678,6 +1681,7 @@ install(FILES third_party/ImGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATA
 install(FILES third_party/ImGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImGuizmo-source.json")
 install(FILES third_party/ImViewGuizmo/LICENSE.txt DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImViewGuizmo-LICENSE.txt")
 install(FILES third_party/ImViewGuizmo/source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "ImViewGuizmo-source.json")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/physics-authoring.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u6/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u6/evidence" OPTIONAL)
 
@@ -1783,6 +1787,14 @@ if(BUILD_TESTING)
     target_link_libraries(AzureMaterialDocumentTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.MaterialDocument COMMAND AzureMaterialDocumentTests)
     add_executable(AzureEditorProjectionTests tests/EditorProjectionTests.cpp)
+    add_executable(AzurePreviewSimulationTests tests/PreviewSimulationTests.cpp)
+    target_link_libraries(AzurePreviewSimulationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.PreviewSimulation COMMAND AzurePreviewSimulationTests)
+    add_executable(AzurePhysicsAuthoringTests tests/PhysicsAuthoringTests.cpp)
+    target_link_libraries(AzurePhysicsAuthoringTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.PhysicsAuthoring COMMAND AzurePhysicsAuthoringTests)
+    add_test(NAME AzureEditor.SimulationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_simulation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/simulation-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.SimulationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
     target_link_libraries(AzureEditorProjectionTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.EditorProjection COMMAND AzureEditorProjectionTests)
     add_executable(AzureViewportOverlayTests tests/ViewportOverlayTests.cpp)
