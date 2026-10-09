@@ -2,6 +2,9 @@
 
 #include "EditorContext.hpp"
 #include "content/ContentOperationService.hpp"
+#include "content/ContentDirectoryModel.hpp"
+#include "content/AssetEditorRegistry.hpp"
+#include "content/NodePresetRegistry.hpp"
 #include "properties/ReferencePickerService.hpp"
 #include "projects/ProjectOpenService.hpp"
 #include "documents/DocumentActionGuard.hpp"
@@ -59,6 +62,9 @@ public:
     void pollBuild();
     void pollTasks();
     ContentOperationService& content();
+    ContentDirectoryModel& contentDirectories(){return contentDirectories_;}
+    AssetEditorRegistry& assetEditors(){return assetEditors_;}
+    NodePresetRegistry& nodePresets(){return nodePresets_;}
     nlohmann::json applyContent(const std::string& planId);
     void undoContent();
     void redoContent();
@@ -136,6 +142,11 @@ private:
     std::shared_ptr<EditorContext> pendingProject_;
     std::unique_ptr<ProjectOpenService> projects_;
     std::unique_ptr<ContentOperationService> content_;
+    const AssetDatabase* contentDatabase_=nullptr;
+    std::uint64_t contentDatabaseVersion_=0;
+    ContentDirectoryModel contentDirectories_;
+    AssetEditorRegistry assetEditors_=AssetEditorRegistry::builtins();
+    NodePresetRegistry nodePresets_=NodePresetRegistry::builtins();
     std::string workspacePreset_;
     bool creatingProject_=false;
 

@@ -34,7 +34,12 @@ python tools/create_editor_tutorial.py --output "D:/Games/My Exploration"
 
 打开 Content Browser 的 Import / Create。填写公开资源的完整路径，点击 Import。依次导入 `assets_public/exploration/assets/hero.gltf`、`guide.gltf` 和 `cube.gltf`。
 
-导入结果显示顶点、关节、材质和片段信息。资源行显示 Ready 后，双击模型或将其拖入视口。搜索与 Type、Directory 共同过滤记录。Scripts 和 Prefabs 显示对应资产。
+导入结果显示顶点、关节、材质和片段信息。
+资源行显示 Ready 后，双击模型打开预览。
+将模型拖入视口，或使用右键放置操作。
+搜索、类型与目录共同筛选记录。
+
+目录导航和基础创建见[内容导航](../runtime/content-navigation.md)。
 
 ![资源搜索与类型筛选](images/assets.png)
 

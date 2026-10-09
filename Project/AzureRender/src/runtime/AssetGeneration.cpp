@@ -60,7 +60,7 @@ std::string AssetDatabase::generateAsset(const GeneratorRegistry& generators,con
         else if(path.extension()==".gltf"||path.extension()==".glb")static_cast<void>(loadGltfAsset(path.string()));
         else if(path.extension()==".json") { const auto document=nlohmann::json::parse(result.bytes);
             if(document.contains("states"))static_cast<void>(AnimationStateMachine::parse(document)); }
-        if(check)check();const auto id=candidate.idForPath(output);records_.swap(candidate.records_);sources_.swap(candidate.sources_);statistics_=candidate.statistics_;return id;
+        if(check)check();const auto id=candidate.idForPath(output);records_.swap(candidate.records_);sources_.swap(candidate.sources_);statistics_=candidate.statistics_;version_=candidate.version_;return id;
     }catch(...) {
         if(hadOutput)save(path,oldOutput);else std::filesystem::remove(path);
         if(hadMeta)save(sidecar,oldMeta);else std::filesystem::remove(sidecar);

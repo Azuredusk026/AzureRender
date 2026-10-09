@@ -117,8 +117,9 @@
       "phase": "U10",
       "proposal": "添加挂载树、面包屑、前进后退与可调缩略图。枚举通过目录模型缓存。",
       "acceptance": "空目录可见，项目移动后导航有效。大量条目使用裁剪与增量刷新。",
-      "status": "Planned",
-      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+      "status": "Complete",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0",
+      "evidence": "docs/acceptance/u10/2026-10-10.md"
     },
     {
       "id": "A06",
@@ -136,8 +137,9 @@
       "phase": "U10",
       "proposal": "注册资产默认打开操作。单击选择资产，双击打开编辑或预览。拖到视口显式放置。",
       "acceptance": "模型、关卡、材质、图片、脚本各有结果。大纲单击与双击规则保持有效。",
-      "status": "Planned",
-      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0"
+      "status": "Complete",
+      "sourceSha256": "b140fe468bd7b1fdb33b6d56617aab9810fbe9b582b6e942bf1c693a802f3be0",
+      "evidence": "docs/acceptance/u10/2026-10-10.md"
     },
     {
       "id": "A07",
@@ -332,8 +334,9 @@
       "phase": "U10",
       "proposal": "基础几何进入 GeneratorRegistry。相机、光源和物理对象以注册模板创建。",
       "acceptance": "两个项目可生成并发布。极小尺寸、分段边界、负值和预算验证通过。",
-      "status": "Planned",
-      "sourceSha256": "7ec245e9d26116b2c326a6f2694599d33b4192a132db3705c3b88f7924f2aee6"
+      "status": "Complete",
+      "sourceSha256": "7ec245e9d26116b2c326a6f2694599d33b4192a132db3705c3b88f7924f2aee6",
+      "evidence": "docs/acceptance/u10/2026-10-10.md"
     },
     {
       "id": "B05",
@@ -730,21 +733,23 @@
       "evidence": [
         "docs/acceptance/g12/2026-10-10.md"
       ],
-      "commit": null,
+      "commit": "46c5a179617cb8d03fcc79d31705ccef2edc00ce",
       "dependsOn": [
         "U9"
       ]
     },
     {
       "id": "U10",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [
         "A05",
         "A06",
         "B04"
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/u10/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "G12"
@@ -752,7 +757,7 @@
     },
     {
       "id": "U11",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "A09",
@@ -1042,7 +1047,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples"
   },
   "execution": {
     "order": [
@@ -1058,11 +1063,12 @@
       "G16",
       "P5"
     ],
-    "active": "U10",
+    "active": "U11",
     "completed": [
       "U8",
       "U9",
-      "G12"
+      "G12",
+      "U10"
     ]
   }
 }

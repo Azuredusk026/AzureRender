@@ -1,0 +1,3 @@
+[1791574350364][info][editor][code=0] Opened scene: startup
+{"directoryResetMs":77.4147}
+{"assets":10000,"cachedP95Ms":0.0411,"firstSnapshotMs":2604.6367,"peakWorkingSetBytes":258105344,"samples":1800,"statistics":{"catalogBuilds":2,"directoryEnumerations":2,"refreshing":false,"snapshots":0},"warmup":300}

@@ -1,0 +1,1 @@
+[{"frame": 25, "action": "click", "target": "directory.assets:/navigation"}, {"frame": 32, "action": "click", "target": "folder.assets:/navigation/empty"}, {"frame": 34, "action": "click", "target": "folder.assets:/navigation/empty"}, {"frame": 40, "action": "click", "target": "assets.back"}, {"frame": 45, "action": "click", "target": "assets.forward"}]

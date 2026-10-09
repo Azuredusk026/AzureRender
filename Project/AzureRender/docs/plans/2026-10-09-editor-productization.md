@@ -2,7 +2,7 @@
 
 > 文档类型：正式实施计划
 > 日期：2026-10-10
-> 状态：Active，U8/U9/G12 Complete，U10 实施中
+> 状态：Active，U8/U9/G12/U10 Complete，U11 实施中
 > 执行方式：按阶段顺序实施，每阶段独立验收与提交
 > 依据：[Hazel 与 Fermion 借鉴评估](../research/2026-10-09-hazel-fermion.md)
 > 约束：仓库根目录的 `AGENT.md`
@@ -317,7 +317,7 @@ DPI 覆盖 100%、150%、200% 的既有组合。
 - 修改 `src/assets/GeneratorRegistry.hpp/.cpp`。
 - 新建 `src/editor/content/ContentDirectoryModel.hpp/.cpp`。
 - 新建 `src/editor/content/AssetEditorRegistry.hpp/.cpp`。
-- 新建 `src/assets/generators/PrimitiveGenerator.cpp`。
+- 新建 `src/assets/PrimitiveGenerator.cpp`。
 - 新建 `tests/ContentNavigationTests.cpp`。
 - 新建 `tests/AssetOpenTests.cpp`。
 - 扩展 `tests/EditorAssetWorkflowTests.cpp`。
@@ -337,13 +337,13 @@ DPI 覆盖 100%、150%、200% 的既有组合。
 输出标准资产，并附生成来源及版本。
 创建相机与光源使用注册组件模板。
 
-- [ ] 建立目录导航与类型打开失败夹具。
-- [ ] 实现目录树、面包屑、历史和缩略图尺寸设置。
-- [ ] 接入 G12 的右键内容操作与影响预览。
-- [ ] 完成资产选择、双击打开和显式放置语义。
-- [ ] 接入基础几何与相机、灯光对象预设。
-- [ ] 验证空目录、一万条资产及外部目录变动。
-- [ ] 完成文档、清单与阶段提交。
+- [x] 建立目录导航与类型打开失败夹具。
+- [x] 实现目录树、面包屑、历史和缩略图尺寸设置。
+- [x] 接入 G12 的右键内容操作与影响预览。
+- [x] 完成资产选择、双击打开和显式放置语义。
+- [x] 接入基础几何与相机、灯光对象预设。
+- [x] 验证空目录、一万条资产及外部目录变动。
+- [x] 完成文档、清单与阶段提交。
 
 大目录测试记录枚举次数、耗时和峰值内存。
 验收需同时保持既有编辑器 CPU 预算。
@@ -805,5 +805,6 @@ python -m mkdocs build --strict --site-dir build/docs-productization
 U8 验收见[项目工作区记录](../acceptance/u8/2026-10-10.md)。
 U9 验收见[属性制作记录](../acceptance/u9/2026-10-10.md)。
 G12 验收见[内容制作记录](../acceptance/g12/2026-10-10.md)。
-U10 为当前实施阶段。
+U10 验收见[内容导航记录](../acceptance/u10/2026-10-10.md)。
+U11 为当前实施阶段。
 其余主线阶段按计划顺序执行。

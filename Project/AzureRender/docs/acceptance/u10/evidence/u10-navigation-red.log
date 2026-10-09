@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 186: AzureEditor.ContentNavigation
+1/1 Test #186: AzureEditor.ContentNavigation ....***Failed    0.07 sec
+[1791571612738][info][editor][code=0] Opened scene: startup
+[1791571612745][info][editor][code=0] ERROR [content.directory]: Unknown operation: content.directory
+content.directory: [{"code":"RejectedOperation","message":"Unknown operation: content.directory"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.09 sec
+
+The following tests FAILED:
+	186 - AzureEditor.ContentNavigation (Failed)
+Errors while running CTest

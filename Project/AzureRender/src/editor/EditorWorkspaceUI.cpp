@@ -160,6 +160,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
         {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    data["contentNavigation"]={{"mount",assetMount_},{"path",assetDirectory_},{"historyIndex",assetNavigationIndex_},{"historySize",assetNavigation_.size()},{"selected",selectedAssets_},{"previewHandle",assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
     if(includeHistory)data["history"]=uiHistory_;
     data["gizmoSpace"]=context_->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
     data["gizmoPivot"]=context_->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";

@@ -3,12 +3,27 @@
 #define NOMINMAX
 #include <windows.h>
 #include <shobjidl.h>
+#include <shlobj.h>
 #endif
 #include "PathSelection.hpp"
 #include <algorithm>
 #include <fstream>
 #include <stdexcept>
 namespace azurerender {
+void revealPath(const std::filesystem::path& requested){
+    if(!std::filesystem::exists(requested))throw std::invalid_argument("Cannot reveal an unavailable path");
+#ifdef _WIN32
+    const auto path=std::filesystem::weakly_canonical(requested);
+    const auto initialized=CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED|COINIT_DISABLE_OLE1DDE);
+    if(FAILED(initialized)&&initialized!=RPC_E_CHANGED_MODE)throw std::runtime_error("Cannot initialize path reveal");
+    PIDLIST_ABSOLUTE item=nullptr;auto status=SHParseDisplayName(path.c_str(),nullptr,&item,0,nullptr);
+    if(SUCCEEDED(status)){status=SHOpenFolderAndSelectItems(item,0,nullptr,0);CoTaskMemFree(item);}
+    if(SUCCEEDED(initialized))CoUninitialize();
+    if(FAILED(status))throw std::runtime_error("File manager reveal failed");
+#else
+    throw std::runtime_error("File manager reveal requires the Windows editor");
+#endif
+}
 PathSelectionResult choosePath(const PathSelectionRequest& request) {
     PathSelectionResult result;
 #ifdef _WIN32

@@ -256,7 +256,7 @@ void ImGuiEditorLayer::shutdownVulkan() {
     initialized_ = false;
 }
 
-void ImGuiEditorLayer::newFrame() {
+void ImGuiEditorLayer::newFrame(float fixedDeltaSeconds) {
     if (!initialized_) {
         return;
     }
@@ -264,6 +264,7 @@ void ImGuiEditorLayer::newFrame() {
     session_->pollTasks();
     ImGui_ImplVulkan_NewFrame();
     ImGui_ImplGlfw_NewFrame();
+    if(fixedDeltaSeconds>0)ImGui::GetIO().DeltaTime=fixedDeltaSeconds;
     float nextDpi=1,scaleY=1;glfwGetWindowContentScale(window_,&nextDpi,&scaleY);
     session_->settings().applyPending();
     const auto compact=session_->settings().get("editor.compact").get<bool>();
@@ -622,7 +623,7 @@ void ImGuiEditorLayer::initialize(
     VkQueue, VkRenderPass, std::uint32_t, VkFormat) {}
 
 void ImGuiEditorLayer::shutdownVulkan() {}
-void ImGuiEditorLayer::newFrame() {}
+void ImGuiEditorLayer::newFrame(float) {}
 void ImGuiEditorLayer::drawPanels() {}
 void ImGuiEditorLayer::completePreviewTextures(std::uint64_t) {}
 void ImGuiEditorLayer::render(VkCommandBuffer) {}

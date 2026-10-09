@@ -295,6 +295,7 @@ add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
+    src/assets/PrimitiveGenerator.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/diagnostics/GpuCapabilityReport.cpp
@@ -439,6 +440,9 @@ add_library(AzureEditor STATIC
     src/editor/content/ContentOperationService.cpp
     src/editor/panels/TextureAssetPanel.cpp
     src/editor/content/AssetCatalog.cpp
+    src/editor/content/ContentDirectoryModel.cpp
+    src/editor/content/AssetEditorRegistry.cpp
+    src/editor/content/NodePresetRegistry.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
     src/editor/GameBuildJob.cpp
@@ -1736,4 +1740,22 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.ContentEditingWorkflow COMMAND AzureContentEditingWorkflowTests)
     add_test(NAME AzureEditor.ContentTransactionsGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content_transactions.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/content-transactions-ui-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.ContentTransactionsGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureContentNavigationTests tests/ContentNavigationTests.cpp)
+    target_link_libraries(AzureContentNavigationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ContentNavigation COMMAND AzureContentNavigationTests)
+    add_executable(AzureAssetOpenTests tests/AssetOpenTests.cpp)
+    target_link_libraries(AzureAssetOpenTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AssetOpen COMMAND AzureAssetOpenTests)
+    add_executable(AzurePrimitiveGeneratorTests tests/PrimitiveGeneratorTests.cpp)
+    target_link_libraries(AzurePrimitiveGeneratorTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.PrimitiveGenerator COMMAND AzurePrimitiveGeneratorTests)
+    add_executable(AzureContentDirectoryScaleTests tests/ContentDirectoryScaleTests.cpp)
+    target_link_libraries(AzureContentDirectoryScaleTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ContentDirectoryScale COMMAND AzureContentDirectoryScaleTests)
+    set_tests_properties(AzureEditor.ContentDirectoryScale PROPERTIES TIMEOUT 180)
+    add_test(NAME AzureEditor.ContentNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/content-navigation-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.ContentNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
 endif()

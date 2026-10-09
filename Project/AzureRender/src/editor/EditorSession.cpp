@@ -42,9 +42,14 @@ struct EditorSession::PlayState {
 EditorSession::~EditorSession()=default;
 ContentOperationService& EditorSession::content() {
     if(!context_->isProject())throw EditRejection("Content operations require a project");
-    if(!content_)content_=std::make_unique<ContentOperationService>(context_->project());return *content_;
+    if(!content_)content_=std::make_unique<ContentOperationService>(context_->project());
+    const auto& database=context_->assets();
+    if(contentDatabase_!=&database||contentDatabaseVersion_!=database.version()){
+        content_->synchronize(database);contentDatabase_=&database;contentDatabaseVersion_=database.version();
+    }return *content_;
 }
 nlohmann::json EditorSession::applyContent(const std::string& planId) {
+    contentDirectories_.cancelRefresh();
     if(context_->importing()||reimporting_)throw EditRejection("Finish the content import task first");
     if(context_->dirty())throw EditRejection("Save scene changes before applying content operations");
     references_.cancel();const auto result=content().apply(planId);
@@ -53,15 +58,18 @@ nlohmann::json EditorSession::applyContent(const std::string& planId) {
     assetReloadRequested_=true;return result;
 }
 void EditorSession::undoContent() {
+    contentDirectories_.cancelRefresh();
     if(context_->importing()||reimporting_)throw EditRejection("Finish the content import task first");
     if(context_->dirty())throw EditRejection("Save scene changes before undoing content operations");
     references_.cancel();content().undo();context_->reloadProjectContent();assetReloadRequested_=true;
 }
 void EditorSession::redoContent() {
+    contentDirectories_.cancelRefresh();
     if(context_->importing()||reimporting_||context_->dirty())throw EditRejection("Content redo requires a saved idle project");
     references_.cancel();content().redo();context_->reloadProjectContent();assetReloadRequested_=true;
 }
 std::string EditorSession::startReimport(const nlohmann::json& request) {
+    contentDirectories_.cancelRefresh();
     if(context_->dirty()||context_->importing()||reimporting_)throw EditRejection("Reimport requires a saved idle project");
     auto parameters=request;parameters["operation"]="asset.reimport";auto plan=content().plan(parameters);
     const auto id=plan.at("asset").get<std::string>(),planId=plan.at("id").get<std::string>();
@@ -81,6 +89,7 @@ std::string EditorSession::startReimport(const nlohmann::json& request) {
 }
 
 void EditorSession::startImportTask(const std::filesystem::path& path) {
+    contentDirectories_.cancelRefresh();
     context_->startImport(path);
     importTask_=tasks_->add("asset.import: "+path.u8string(),context_->project().file.u8string(),{
         [this]{return context_->importProgress();},[this]{return context_->importReady();},
@@ -143,6 +152,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.camera.invertX","Invert horizontal editor camera input",false,{},{},false,true,false});
     settings_.add({"editor.camera.invertY","Invert vertical editor camera input",false,{},{},false,true,false});
     settings_.add({"editor.camera.flySpeed","Editor flight speed",5.,.01,10000.,false,true,false});
+    settings_.add({"editor.thumbnailSize","Content thumbnail size",96,64,192,false,true,false});
     settings_.add({"editor.camera.boost","Editor flight acceleration",4.,1.,100.,false,true,false});
     settings_.add({"editor.camera.orbitSensitivity","Editor orbit sensitivity",1.,.01,10.,false,true,false});
     for(const auto& binding:std::vector<std::pair<const char*,const char*>>{{"move","W"},{"rotate","E"},{"scale","R"},{"select","Q"},{"frame","F"}})
@@ -194,7 +204,7 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
-        references_.cancel();content_.reset();context_->detachRenderSettings();proposals_.reset();
+        references_.cancel();content_.reset();contentDirectories_.reset();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);proposals_=std::move(proposals);documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}

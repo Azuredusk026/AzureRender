@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <functional>
 #include <map>
+#include <memory>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
@@ -22,6 +23,7 @@ public:
     explicit AssetDatabase(Project project) : project_(std::move(project)) {}
     struct RefreshStatistics { std::uint64_t sourceBytesRead=0, filesRead=0, filesReused=0; };
     const RefreshStatistics& refreshStatistics() const noexcept { return statistics_; }
+    std::uint64_t version() const noexcept{return version_;}
     std::vector<std::string> refresh(bool verifyAll=false, std::function<void()> check={});
     std::string idForPath(const std::string& virtualPath) const;
     std::filesystem::path resolve(const std::string& id) const;
@@ -38,6 +40,7 @@ private:
     Project project_;
     std::map<std::string, AssetRecord> records_;
     RefreshStatistics statistics_;
+    std::uint64_t version_=0;
     struct SourceState {
         std::filesystem::file_time_type sourceTime, metadataTime;
         std::uintmax_t size=0;
@@ -45,6 +48,6 @@ private:
         nlohmann::json metadata, document;
         std::uint64_t contentHash=0, baseFingerprint=0;
     };
-    std::map<std::filesystem::path,SourceState> sources_;
+    std::shared_ptr<const std::map<std::filesystem::path,SourceState>> sources_=std::make_shared<const std::map<std::filesystem::path,SourceState>>();
 };
 } // namespace azurerender

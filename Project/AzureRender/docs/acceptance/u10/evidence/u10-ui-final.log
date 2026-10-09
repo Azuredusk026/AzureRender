@@ -1,0 +1,30 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 189: AzureEditor.ContentNavigationGpu
+1/1 Test #189: AzureEditor.ContentNavigationGpu ...***Failed   69.72 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_navigation.py", line 80, in <module>
+    args = parser.parse_args()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_navigation.py", line 65, in run
+    descriptor = json.loads((root / 'game/project.azureproject').read_text(encoding='utf-8'))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\content-navigation-ui-Debug\\run-8f2757b7\\game\\assets\\start.azurelevel'
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  69.72 sec*proc (1 test)
+
+Total Test time (real) =  69.72 sec
+
+The following tests FAILED:
+	189 - AzureEditor.ContentNavigationGpu (Failed)
+Errors while running CTest

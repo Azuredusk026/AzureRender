@@ -7,6 +7,7 @@ class ContentOperationService final {
 public:
     explicit ContentOperationService(Project project);
     const AssetDatabase& database() const {return database_;}
+    void synchronize(const AssetDatabase& database){database_=database;}
     nlohmann::json plan(const nlohmann::json& request);
     nlohmann::json apply(const std::string& planId,std::function<void()> check={});
     void discard(const std::string& planId) {plans_.erase(planId);}

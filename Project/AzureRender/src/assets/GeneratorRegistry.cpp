@@ -1,4 +1,5 @@
 #include "assets/GeneratorRegistry.hpp"
+#include "assets/PrimitiveGenerator.hpp"
 #include <iomanip>
 #include <regex>
 #include <sstream>
@@ -62,6 +63,7 @@ GeneratorRegistry GeneratorRegistry::builtins() {
     GeneratorRegistry registry;
     registry.add("azure.text",1,[](const auto& r){return r.parameters.at("source").template get<std::string>();});
     registry.add("azure.binary-copy",1,[](const auto& r){if(r.inputs.size()!=1)throw std::invalid_argument("Copy requires one input");return r.inputs.front().bytes;});
+    registerPrimitiveGenerator(registry);
     return registry;
 }
 }

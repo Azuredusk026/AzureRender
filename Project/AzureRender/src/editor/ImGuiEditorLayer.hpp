@@ -39,7 +39,7 @@ public:
         VkRenderPass renderPass,
         std::uint32_t imageCount, VkFormat colorFormat=VK_FORMAT_B8G8R8A8_SRGB);
     void shutdownVulkan();
-    void newFrame();
+    void newFrame(float fixedDeltaSeconds=0);
     void drawPanels();
     void completePreviewTextures(std::uint64_t completed);
     void setPreviewSubmission(std::uint64_t submission){previewSubmission_=submission;}
@@ -156,6 +156,15 @@ private:
     int consoleLevel_ = 0;
     bool assetGrid_ = false;
     std::string assetDirectory_;
+    std::string assetMount_;
+    std::vector<std::pair<std::string,std::string>> assetNavigation_={{"",""}};
+    std::size_t assetNavigationIndex_=0;
+    std::uint64_t assetPreviewHandle_=0;
+    std::string assetPreviewTitle_;
+    bool assetPreviewRequested_=false;
+    std::string primitiveKind_="cube",primitiveName_="Primitive.glb";
+    std::array<float,3> primitiveSize_{1,1,1};
+    int primitiveSegments_=12;
     std::set<std::string> selectedAssets_,textureFields_;
     nlohmann::json textureSnapshot_,contentImpact_,contentRequest_,dependencySnapshot_;
     std::string contentValue_,contentOperation_;

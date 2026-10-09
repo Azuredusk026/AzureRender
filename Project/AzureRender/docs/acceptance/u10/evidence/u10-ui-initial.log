@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 189: AzureEditor.ContentNavigationGpu
+1/1 Test #189: AzureEditor.ContentNavigationGpu ...***Failed   30.33 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_navigation.py", line 62, in <module>
+    run(args.executable.resolve(), args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_content_navigation.py", line 27, in run
+    assert navigation['contentNavigation']['path'] == 'navigation/empty'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+gpu    =  30.33 sec*proc (1 test)
+
+Total Test time (real) =  30.34 sec
+
+The following tests FAILED:
+	189 - AzureEditor.ContentNavigationGpu (Failed)
+Errors while running CTest

@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 186: AzureEditor.ContentNavigation
+1/2 Test #186: AzureEditor.ContentNavigation .......   Passed    0.33 sec
+    Start 188: AzureEditor.ContentDirectoryScale
+2/2 Test #188: AzureEditor.ContentDirectoryScale ...***Failed   68.84 sec
+[1791573838384][info][editor][code=0] Opened scene: startup
+Directory teardown must cancel in at most 100ms
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =  69.18 sec
+
+The following tests FAILED:
+	188 - AzureEditor.ContentDirectoryScale (Failed)
+Errors while running CTest

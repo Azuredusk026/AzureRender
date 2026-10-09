@@ -158,7 +158,7 @@ void AzureRenderApp::drawFrame() {
         const auto projection=azurerender::characterProjection(effectiveRenderSettings_,static_cast<float>(renderExtent_.width)/renderExtent_.height);
         runOptions_.editorSession->context().setViewportCameraMatrices(view,projection);
         runOptions_.editorSession->context().setDebugProjection(multiply(projection,view));
-        editorLayer_->newFrame();
+        editorLayer_->newFrame((fixedSimulation_||runOptions_.fixedFrameStep)?fixedDeltaSeconds_:0.F);
         editorLayer_->drawPanels();
         azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();

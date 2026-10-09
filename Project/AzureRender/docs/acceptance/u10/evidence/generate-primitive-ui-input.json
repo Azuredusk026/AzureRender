@@ -1,0 +1,1 @@
+[{"frame": 25, "action": "click", "target": "assets.import-create"}, {"frame": 32, "action": "click", "target": "assets.generate-primitive"}, {"frame": 40, "action": "click", "target": "primitive.generate"}]

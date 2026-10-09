@@ -1,0 +1,30 @@
+[0/2] Re-checking globbed directories...
+[1/29] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\preview\DeveloperServices.cpp.obj
+[3/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ai\ProposalOperations.cpp.obj
+[4/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\SettingsPanel.cpp.obj
+[5/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\OutlinerPanel.cpp.obj
+[6/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\CapturePanel.cpp.obj
+[7/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\InspectorPanel.cpp.obj
+[8/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AnimationPanel.cpp.obj
+[9/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\AssetBrowserPanel.cpp.obj
+[10/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\GameplayDebugPanel.cpp.obj
+[11/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\BuildPanel.cpp.obj
+[12/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ConsolePanel.cpp.obj
+[13/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\commands\EditorOperations.cpp.obj
+[14/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\content\ContentDirectoryModel.cpp.obj
+[15/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\TextureAssetPanel.cpp.obj
+[16/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorSession.cpp.obj
+[17/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorAutomation.cpp.obj
+[18/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorToolbar.cpp.obj
+[19/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorWorkspaceUI.cpp.obj
+[20/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\ImGuiEditorLayer.cpp.obj
+[21/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\viewport\ViewportGizmo.cpp.obj
+[22/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\ProjectBrowserPanel.cpp.obj
+[23/29] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\panels\EnvironmentPanel.cpp.obj
+[24/29] Linking CXX static library AzureEditor.lib
+[25/29] Building CXX object CMakeFiles\AzureContentDirectoryScaleTests.dir\tests\ContentDirectoryScaleTests.cpp.obj
+[26/29] Linking CXX executable AzureContentDirectoryScaleTests.exe
+[27/29] Building CXX object CMakeFiles\AzureContentNavigationTests.dir\tests\ContentNavigationTests.cpp.obj
+[28/29] Linking CXX executable AzureContentNavigationTests.exe

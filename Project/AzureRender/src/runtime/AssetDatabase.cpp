@@ -79,10 +79,10 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             const auto virtualPath = mount.first + ":/" + entry.path().lexically_relative(mount.second).generic_string();
             const auto path = project_.resolve(virtualPath);
             const auto sidecar = path.string() + ".azmeta";
-            const auto previous=sources_.find(path);
+            const auto previous=sources_->find(path);
             const auto time=std::filesystem::last_write_time(path);
             const auto size=std::filesystem::file_size(path);
-            if(!verifyAll && previous!=sources_.end() && std::filesystem::exists(sidecar)
+            if(!verifyAll && previous!=sources_->end() && std::filesystem::exists(sidecar)
                 && previous->second.sourceTime==time && previous->second.size==size
                 && previous->second.metadataTime==std::filesystem::last_write_time(sidecar)){
                 const auto& state=previous->second;
@@ -224,7 +224,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
     for (const auto& old : records_) if (!candidate.count(old.first)) changed.push_back(old.first);
     if(check)check();
     records_.swap(candidate);
-    sources_.swap(sources);
+    sources_=std::make_shared<const std::map<std::filesystem::path,SourceState>>(std::move(sources));
+    ++version_;
     return changed;
 }
 std::string AssetDatabase::idForPath(const std::string& path) const {

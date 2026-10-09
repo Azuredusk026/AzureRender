@@ -30,8 +30,9 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
 #endif
     if(!ImGui::Begin("Content Browser###assets",workspace_.open("assets"))){ImGui::End();return;}
     const auto reveal=session_->consumeAssetReveal();
-    if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();selectedAssets_={reveal};}
+    if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();assetMount_.clear();selectedAssets_={reveal};}
     const bool compact=ImGui::GetContentRegionAvail().y<150*dpi_;
+    const bool renderGrid=assetGrid_&&!compact;
     const bool wide=ImGui::GetContentRegionAvail().x>360*dpi_;
     assetFilter_.Draw("##Search assets",wide?ImGui::GetContentRegionAvail().x-(compact?280:230)*dpi_:-1);observeWidget("assets.search");
     if(ImGui::IsItemHovered())ImGui::SetTooltip("Search asset names and paths");if(wide)ImGui::SameLine();
@@ -43,14 +44,26 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         for(const auto& [id,type]:types){if(ImGui::Selectable(type.label.c_str(),assetTypeId_==id))assetTypeId_=id;observeWidget("type."+type.label);}
         ImGui::EndCombo();
     }observeWidget("assets.type");ImGui::SameLine();ImGui::Checkbox("Grid",&assetGrid_);observeWidget("assets.grid");
-    const auto resources=session_->edit("assets.catalog",{{"type",assetTypeId_}}).value;
+    auto& directories=session_->contentDirectories();
+    const auto navigate=[&](const std::string& mount,const std::string& path){
+        if(assetMount_==mount&&assetDirectory_==path)return;
+        assetMount_=mount;assetDirectory_=path;
+        assetNavigation_.resize(assetNavigationIndex_+1);assetNavigation_.push_back({mount,path});++assetNavigationIndex_;
+    };
+    std::shared_ptr<const ContentDirectorySnapshot> snapshot;
+    try{snapshot=directories.snapshot(session_->context(),assetMount_,assetDirectory_,assetTypeId_,assetFilter_.InputBuf);}
+    catch(const std::exception&){assetMount_.clear();assetDirectory_.clear();snapshot=directories.snapshot(session_->context(),{}, {},assetTypeId_,assetFilter_.InputBuf);}
+    const auto& resources=snapshot->assets;
     const auto directoryFilter=[&]{
-        std::set<std::string> directories;for(const auto& row:resources)directories.insert(std::filesystem::u8path(row.at("source").get<std::string>()).parent_path().u8string());
-        ImGui::SetNextItemWidth(-1);
-        if(ImGui::BeginCombo("##Directory",assetDirectory_.empty()?"All directories":assetDirectory_.c_str())){
-            if(ImGui::Selectable("All directories",assetDirectory_.empty()))assetDirectory_.clear();
-            for(const auto& directory:directories)if(ImGui::Selectable(directory.c_str(),directory==assetDirectory_))assetDirectory_=directory;
-            ImGui::EndCombo();
+        if(ui::button("Back",{ui::ButtonVariant::Default,false,assetNavigationIndex_==0})){const auto& entry=assetNavigation_[--assetNavigationIndex_];assetMount_=entry.first;assetDirectory_=entry.second;}observeWidget("assets.back");ImGui::SameLine();
+        if(ui::button("Forward",{ui::ButtonVariant::Default,false,assetNavigationIndex_+1>=assetNavigation_.size()})){const auto& entry=assetNavigation_[++assetNavigationIndex_];assetMount_=entry.first;assetDirectory_=entry.second;}observeWidget("assets.forward");ImGui::SameLine();
+        if(ui::button("All"))navigate({},{});observeWidget("assets.all");
+        if(!assetMount_.empty()){
+            ImGui::SameLine();if(ui::button(assetMount_.c_str()))navigate(assetMount_,{});observeWidget("assets.mount");
+            std::string accumulated;for(const auto& part:std::filesystem::u8path(assetDirectory_)){
+                if(!accumulated.empty())accumulated+='/';accumulated+=part.u8string();ImGui::SameLine();
+                if(ui::button(part.u8string().c_str()))navigate(assetMount_,accumulated);observeWidget("assets.breadcrumb."+accumulated);
+            }
         }
     };
     if(compact)ImGui::SameLine();
@@ -58,15 +71,40 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
     if(ImGui::IsItemHovered())ImGui::SetTooltip("Import, create and browse content");
     ImGui::SetNextWindowSize({std::min(640*dpi_,ImGui::GetIO().DisplaySize.x-32*dpi_),0});
     if(ImGui::BeginPopup("Content operations")) {
-        if(compact){directoryFilter();if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));ImGui::Separator();}
+        if(compact){
+            directoryFilter();ImGui::SetNextItemWidth(-1);
+            if(ImGui::BeginCombo("Directory",assetMount_.empty()?"All directories":(assetMount_+":/"+assetDirectory_).c_str())){
+                if(ImGui::Selectable("All directories",assetMount_.empty()))navigate({},{});
+                for(const auto& directory:directories.tree())if(ImGui::Selectable(directory.at("reference").get<std::string>().c_str()))navigate(directory.at("mount").get<std::string>(),directory.at("path").get<std::string>());
+                ImGui::EndCombo();
+            }observeWidget("assets.directory");
+            if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));ImGui::Separator();
+        }
         drawPathInput("glTF / GLB source",importPath_,"import",false,{".gltf",".glb"});
         ui::ButtonOptions import;import.disabled=view.importing()||session_->playing()||session_->building()||importPath_.empty();
         import.tooltip="Select a glTF or GLB file. Import continues when this panel is closed.";
         if(ui::button("Import",import)){const auto result=session_->edit("asset.import-start",{{"path",importPath_}});if(result)ImGui::CloseCurrentPopup();}observeWidget("asset.import");
         if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button("Cancel Import"))session_->edit("asset.import-cancel");observeWidget("asset.import-cancel");}
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
-        if(ui::button("Create directory")){contentOperation_="content.create-directory";contentRequest_={{"parent","assets:/"}};contentValue_="New Folder";contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
+        if(ui::button("Create directory")){contentOperation_="content.create-directory";contentRequest_={{"parent",(assetMount_.empty()?"assets":assetMount_)+":/"+assetDirectory_}};contentValue_="New Folder";contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
         observeWidget("content.create-directory");
+        if(ImGui::BeginMenu("Create object")){
+            for(const auto& preset:session_->nodePresets().describe()){
+                const auto id=preset.at("id").get<std::string>();if(ImGui::MenuItem(preset.at("label").get<std::string>().c_str()))session_->edit("node.create-preset",{{"preset",id}});observeWidget("preset."+id);
+            }ImGui::EndMenu();
+        }observeWidget("assets.create-object");
+        if(ImGui::BeginMenu("Generate primitive")){
+            if(ImGui::BeginCombo("Shape",primitiveKind_.c_str())){for(const auto* kind:{"cube","plane","sphere","cylinder"})if(ImGui::Selectable(kind,primitiveKind_==kind))primitiveKind_=kind;ImGui::EndCombo();}observeWidget("primitive.kind");
+            ImGui::InputFloat3("Dimensions",primitiveSize_.data());observeWidget("primitive.size");
+            ImGui::InputInt("Segments",&primitiveSegments_);observeWidget("primitive.segments");
+            ui::inputText("File name",primitiveName_);observeWidget("primitive.name");
+            if(ui::button("Generate asset")){
+                const auto parent=(assetMount_.empty()?"assets":assetMount_)+":/"+assetDirectory_;
+                const auto output=parent+(parent.back()=='/'?"":"/")+primitiveName_;
+                const auto result=session_->edit("asset.generate",{{"generator","azure.primitive"},{"output",output},{"parameters",{{"kind",primitiveKind_},{"size",primitiveSize_},{"segments",primitiveSegments_}}},{"license","Azure primitive generator v1"},{"replace",false}});
+                if(result)selectedAssets_={result.value.get<std::string>()};
+            }observeWidget("primitive.generate");ImGui::TextWrapped("Sphere and cylinder segments use a multiple of four.");ImGui::EndMenu();
+        }observeWidget("assets.generate-primitive");
         if(ui::button("Undo content transaction"))session_->edit("content.undo");observeWidget("content.undo");ImGui::EndDisabled();
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
         if(ui::button("Redo content transaction"))session_->edit("content.redo");observeWidget("content.redo");ImGui::EndDisabled();
@@ -81,30 +119,70 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         const auto& summary=view.importSummary();if(summary.contains("vertices"))ImGui::TextWrapped("Imported: %zu vertices, %zu joints, %zu materials",summary.at("vertices").get<std::size_t>(),summary.at("joints").get<std::size_t>(),summary.at("materials").get<std::size_t>());
         ImGui::EndPopup();
     }
-    if(!compact){ImGui::SameLine();if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));ImGui::SameLine();directoryFilter();}
+    if(!compact){ImGui::SameLine();if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));directoryFilter();}
+    if(renderGrid){int size=session_->settings().get("editor.thumbnailSize").get<int>();ImGui::SetNextItemWidth(120*dpi_);if(ImGui::SliderInt("Thumbnail size",&size,64,192))session_->edit("settings.set",{{"name","editor.thumbnailSize"},{"value",size},{"source","user"}});observeWidget("assets.thumbnail-size");}
+    const auto thumbnailSize=session_->settings().get("editor.thumbnailSize").get<float>()*dpi_;
+    if(wide&&!compact){
+        ImGui::BeginChild("content-tree",{160*dpi_,0},true);
+        const auto drawDirectory=[&](const std::string& mount,const std::string& path,auto&& self)->void{
+            const auto reference=mount+":/"+path;
+            const auto label=path.empty()?mount:std::filesystem::u8path(path).filename().u8string();
+            bool children=false;for(const auto& entry:directories.tree())if(entry.at("mount")==mount){const auto candidate=entry.at("path").get<std::string>();if(!candidate.empty()&&std::filesystem::u8path(candidate).parent_path().generic_u8string()==path){children=true;break;}}
+            auto flags=ImGuiTreeNodeFlags_OpenOnArrow|ImGuiTreeNodeFlags_SpanAvailWidth;
+            if(!children)flags|=ImGuiTreeNodeFlags_Leaf;if(assetMount_==mount&&assetDirectory_==path)flags|=ImGuiTreeNodeFlags_Selected;
+            if(path.empty())flags|=ImGuiTreeNodeFlags_DefaultOpen;
+            const bool open=ImGui::TreeNodeEx(reference.c_str(),flags,"%s",label.c_str());observeWidget("directory."+reference);
+            if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen())navigate(mount,path);
+            if(open){for(const auto& entry:directories.tree())if(entry.at("mount")==mount){const auto candidate=entry.at("path").get<std::string>();if(!candidate.empty()&&std::filesystem::u8path(candidate).parent_path().generic_u8string()==path)self(mount,candidate,self);}ImGui::TreePop();}
+        };
+        for(const auto& entry:directories.tree())if(entry.at("path")=="")drawDirectory(entry.at("mount").get<std::string>(),{},drawDirectory);
+        ImGui::EndChild();ImGui::SameLine();
+    }
     visibleAssets_=nlohmann::json::array();ImGui::BeginChild("asset-list",{0,0});std::size_t requestedPreviews=0;
-    if(ImGui::BeginTable("assets",assetGrid_?std::max(1,static_cast<int>(ImGui::GetContentRegionAvail().x/(180*dpi_))):4,ImGuiTableFlags_RowBg|ImGuiTableFlags_Resizable|ImGuiTableFlags_ScrollY)){
-        if(!assetGrid_){for(const auto* title:{"Asset","Type","State","Users"})ImGui::TableSetupColumn(title);if(!compact)ImGui::TableHeadersRow();}
-        for(const auto& row:resources){
+    if(!compact)for(const auto& directory:snapshot->directories){
+        const auto reference=directory.at("reference").get<std::string>();
+        if(ImGui::Selectable(("[Folder] "+reference).c_str(),false,ImGuiSelectableFlags_AllowDoubleClick)&&ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))navigate(directory.at("mount").get<std::string>(),directory.at("path").get<std::string>());
+        observeWidget("folder."+reference);
+    }
+    const int columns=renderGrid?std::max(1,static_cast<int>(ImGui::GetContentRegionAvail().x/(thumbnailSize+28*dpi_))):4;
+    if(ImGui::BeginTable("assets",columns,ImGuiTableFlags_RowBg|ImGuiTableFlags_Resizable|ImGuiTableFlags_ScrollY)){
+        if(!renderGrid){for(const auto* title:{"Asset","Type","State","Users"})ImGui::TableSetupColumn(title);if(!compact)ImGui::TableHeadersRow();}
+        ImGuiListClipper clipper;const int perRow=renderGrid?columns:1;
+        const float rowHeight=renderGrid?thumbnailSize+52*dpi_:ImGui::GetTextLineHeightWithSpacing()+ImGui::GetStyle().CellPadding.y*2;
+        clipper.Begin(static_cast<int>((resources.size()+perRow-1)/perRow),rowHeight);
+        while(clipper.Step())for(int clippedRow=clipper.DisplayStart;clippedRow<clipper.DisplayEnd;++clippedRow){
+        for(int column=0;column<perRow;++column){const auto assetIndex=static_cast<std::size_t>(clippedRow*perRow+column);if(assetIndex>=resources.size())break;
+            const auto& row=resources[assetIndex];
             const auto id=row.at("id").get<std::string>(),label=row.at("path").get<std::string>(),type=row.at("type").get<std::string>();
             const auto path=std::filesystem::u8path(row.at("source").get<std::string>());const bool ready=row.at("ready").get<bool>();
-            if(!assetFilter_.PassFilter(label.c_str())||(!assetDirectory_.empty()&&path.parent_path().u8string()!=assetDirectory_))continue;
             visibleAssets_.push_back(row);ImGui::PushID(id.c_str());
-            if(assetGrid_)ImGui::TableNextColumn();else{ImGui::TableNextRow();ImGui::TableSetColumnIndex(0);}
-            if(assetGrid_&&type=="model"&&requestedPreviews<2&&ImGui::IsRectVisible({96*dpi_,96*dpi_})&&session_->developerServices().image){
+            if(renderGrid)ImGui::TableNextColumn();else{ImGui::TableNextRow();ImGui::TableSetColumnIndex(0);}
+            bool thumbnailDrawn=false;
+            if(renderGrid&&type=="model"&&requestedPreviews<2&&ImGui::IsRectVisible({thumbnailSize,thumbnailSize})&&session_->developerServices().image){
                 ++requestedPreviews;const auto result=session_->edit("preview.asset",{{"asset",id}});
-                if(result&&result.value.contains("handle"))if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{96*dpi_,96*dpi_});
+                if(result&&result.value.contains("handle"))if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>())){ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{thumbnailSize,thumbnailSize});thumbnailDrawn=true;}
             }
+            if(renderGrid&&!thumbnailDrawn)ImGui::Dummy({thumbnailSize,thumbnailSize});
             const auto registered=types.find(type);const bool placeable=registered!=types.end()&&registered->second.placeable;
-            if(ImGui::Selectable(label.c_str(),selectedAssets_.count(id)!=0,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,assetGrid_?44*dpi_:0})) {
+            if(ImGui::Selectable(label.c_str(),selectedAssets_.count(id)!=0,ImGuiSelectableFlags_AllowDoubleClick,{ImGui::GetContentRegionAvail().x,renderGrid?44*dpi_:0})) {
                 if(ImGui::GetIO().KeyCtrl){if(selectedAssets_.count(id))selectedAssets_.erase(id);else selectedAssets_.insert(id);}else selectedAssets_={id};
                 if(session_->references().active())session_->edit("reference.deliver",{{"kind","asset"},{"id",id}});
-                else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)&&placeable&&!session_->playing()&&!session_->building())session_->edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});
+                else if(ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)){
+                    const auto opened=session_->edit("asset.open",{{"asset",id}});
+                    if(opened){const auto operation=opened.value.at("operation").get<std::string>();
+                        const auto result=session_->edit(operation,operation=="texture.describe"?nlohmann::json{{"assets",nlohmann::json::array({id})}}:nlohmann::json{{"asset",id}});
+                        if(result){if(operation=="texture.describe"){textureSnapshot_=result.value;textureFields_.clear();textureDialogRequested_=true;}
+                        else if(result.value.contains("handle")){assetPreviewHandle_=result.value.at("handle").get<std::uint64_t>();assetPreviewTitle_=label;assetPreviewRequested_=true;}
+                        else {dependencySnapshot_=result.value;dependencyDialogRequested_=true;}}
+                    }
+                }
             }
             if(id==reveal)ImGui::SetScrollHereY(.5F);
             observeWidget("asset."+id);
             if(ImGui::BeginPopupContextItem("Asset actions")) {
                 if(!selectedAssets_.count(id))selectedAssets_={id};
+                if(placeable){if(ImGui::MenuItem("Place in scene"))session_->edit("asset.place",{{"asset",id},{"origin",{0,5,0}},{"direction",{0,-1,0}}});observeWidget("asset.place");}
+                if(ImGui::MenuItem("Reveal in file manager"))session_->edit("path.reveal",{{"path",path.u8string()}});observeWidget("asset.reveal-file");
                 const bool writable=view.isProject()&&label.rfind("engine:/",0)!=0;
                 ImGui::BeginDisabled(!writable||session_->playing()||session_->building()||view.importing()||session_->reimporting());
                 for(const auto& option:std::vector<std::pair<const char*,const char*>>{{"Rename","asset.rename"},{"Move","asset.move"},{"Duplicate","asset.duplicate"}}) {
@@ -139,12 +217,18 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             }
             if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\n%s",label.c_str(),path.u8string().c_str(),ready?"Ready":"Missing source");
             if(ready&&ImGui::BeginDragDropSource()){ImGui::SetDragDropPayload("AZURE_RESOURCE",id.c_str(),id.size()+1);ImGui::TextUnformatted(label.c_str());ImGui::EndDragDropSource();}
-            if(!assetGrid_){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(type.c_str());ImGui::TableSetColumnIndex(2);ImGui::TextUnformatted(ready?"Ready":"Missing");ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",row.at("users").get<std::size_t>());}
+            if(!renderGrid){ImGui::TableSetColumnIndex(1);ImGui::TextUnformatted(type.c_str());ImGui::TableSetColumnIndex(2);ImGui::TextUnformatted(ready?"Ready":"Missing");ImGui::TableSetColumnIndex(3);ImGui::Text("%zu",row.at("users").get<std::size_t>());}
             ImGui::PopID();
-        }ImGui::EndTable();
+        }}ImGui::EndTable();
     }
     if(visibleAssets_.empty())ImGui::TextWrapped("No assets match the directory, search and type filters.");
-    ImGui::EndChild();drawTextureAssetPanel();ImGui::End();
+    ImGui::EndChild();drawTextureAssetPanel();
+    if(assetPreviewRequested_){ImGui::OpenPopup("Asset preview");assetPreviewRequested_=false;}
+    if(ImGui::BeginPopupModal("Asset preview",nullptr,ImGuiWindowFlags_AlwaysAutoResize)){
+        ImGui::TextUnformatted(assetPreviewTitle_.c_str());
+        if(const auto texture=previewTexture(assetPreviewHandle_))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{320*dpi_,320*dpi_});
+        if(ui::button("Close preview")){assetPreviewHandle_=0;ImGui::CloseCurrentPopup();}observeWidget("asset.close-preview");ImGui::EndPopup();
+    }ImGui::End();
 }
 
 

@@ -14,6 +14,7 @@ struct PathSelectionRequest {
 };
 struct PathSelectionResult {std::filesystem::path path;bool cancelled=false;std::string diagnostic;};
 PathSelectionResult choosePath(const PathSelectionRequest&);
+void revealPath(const std::filesystem::path&);
 class PathHistory {
 public:
     void remember(const std::string& purpose,const std::filesystem::path& path,bool directory);

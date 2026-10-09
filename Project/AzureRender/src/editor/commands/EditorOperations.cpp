@@ -3,6 +3,7 @@
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #include "editor/content/AssetCatalog.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
 #include <algorithm>
 #include <fstream>
 namespace azurerender {
@@ -40,6 +41,8 @@ EditRegistry editorOperations(EditorSession& session) {
         });
     };
     document("node.create",schema({{"id",text}}),[](auto& c,const auto& a) { c.createNode(a.value("id",std::string())); });
+    registry.add({"node.presets",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.nodePresets().describe();});
+    document("node.create-preset",schema({{"preset",text},{"id",text}},{"preset"}),[&session](auto& c,const auto& a){session.nodePresets().create(c,a.at("preset").template get<std::string>(),a.value("id",std::string()));});
     document("node.rename",schema({{"value",text}},{"value"}),[](auto& c,const auto& a) {
         if(!c.selectedNode())throw std::invalid_argument("Rename requires a selected node");
         c.setSelectedNodeName(a.at("value").template get<std::string>());
@@ -83,6 +86,7 @@ EditRegistry editorOperations(EditorSession& session) {
     for(const auto* operation:{"content.create-directory","asset.move","asset.rename","asset.duplicate","asset.delete","texture.settings"}) {
         registry.add({operation,1,fileArgs,true,false,true},[&session,operation](EditorContext&,const Json& a)->Json {
             if(a.contains("planId"))return session.applyContent(a.at("planId").get<std::string>());
+            session.contentDirectories().cancelRefresh();
             auto request=a;request.erase("dryRun");request["operation"]=operation;
             auto plan=session.content().plan(request);if(a.value("dryRun",false))return plan;
             return session.applyContent(plan.at("id").get<std::string>());
@@ -100,7 +104,19 @@ EditRegistry editorOperations(EditorSession& session) {
     });
     registry.add({"asset.dependencies",1,schema({{"asset",text},{"direction",text}},{"asset"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().dependencies(a.at("asset").get<std::string>(),a.value("direction",std::string("forward")));});
     registry.add({"assets.catalog",1,schema({{"type",text}}),false,false,false},[](EditorContext& c,const Json& a)->Json{return assetCatalog(c,a.value("type",std::string()));});
+    registry.add({"content.directory",1,schema({{"mount",text},{"path",text},{"type",text},{"search",text},{"refresh",boolean}}),false,false,false},[&session](EditorContext& c,const Json& a)->Json{
+        auto& directories=session.contentDirectories();if(a.value("refresh",false))directories.refresh(c);
+        return directories.describe(*directories.snapshot(c,a.value("mount",std::string()),a.value("path",std::string()),a.value("type",std::string()),a.value("search",std::string())));
+    });
+    registry.add({"asset.open",1,schema({{"asset",text}},{"asset"}),false,false,false},[&session](EditorContext& c,const Json& a)->Json{
+        const auto asset=a.at("asset").get<std::string>();
+        if(!c.isProject())throw EditRejection("Asset opening requires a project");
+        const auto found=c.assets().records().find(asset);if(found==c.assets().records().end())throw EditRejection("Unknown asset");
+        const auto* type=assetTypeRegistry().classify(found->second.path);if(!type)throw EditRejection("Unknown asset type");
+        return session.assetEditors().open(type->id,asset);
+    });
     registry.add({"path.history",1,schema({{"purpose",text}},{"purpose"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.pathHistory().directories(a.at("purpose").get<std::string>());});
+    registry.add({"path.reveal",1,schema({{"path",text}},{"path"}),false,false,false},[](EditorContext&,const Json& a)->Json{revealPath(std::filesystem::u8path(a.at("path").get<std::string>()));return nullptr;});
     registry.add({"path.remember",1,schema({{"purpose",text},{"path",text},{"directory",boolean}},{"purpose","path"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{
         session.pathHistory().remember(a.at("purpose").get<std::string>(),std::filesystem::u8path(a.at("path").get<std::string>()),a.value("directory",false));session.savePathHistory();return nullptr;
     });
@@ -208,10 +224,12 @@ EditRegistry editorOperations(EditorSession& session) {
         });
     registry.add({"asset.import",1,schema({{"path",text}},{"path"}),true,false,true},[](EditorContext& c,const Json& a)->Json { return c.importAsset(a.at("path").get<std::string>()); });
     registry.add({"asset.generate",1,schema({{"generator",text},{"output",text},{"parameters",Json::object()},
-        {"inputs",{{"type","array"},{"maxItems",1024},{"items",text}}},{"dependencies",{{"type","array"},{"maxItems",1024},{"items",text}}},{"license",text}},
+        {"inputs",{{"type","array"},{"maxItems",1024},{"items",text}}},{"dependencies",{{"type","array"},{"maxItems",1024},{"items",text}}},{"license",text},{"replace",boolean}},
         {"generator","output","parameters","license"}),true,false,true},[&session](EditorContext& c,const Json& a)->Json {
             if(!c.isProject())throw EditRejection("Asset generation requires a project session");
+            session.contentDirectories().cancelRefresh();
             const auto output=a.at("output").get<std::string>();const auto extension=std::filesystem::path(output).extension();
+            if(!a.value("replace",true)&&std::filesystem::exists(c.project().resolve(output)))throw EditRejection("Asset already exists; choose a new output name");
             if(extension!=".azurelevel"&&extension!=".azureprefab"&&extension!=".json"&&extension!=".gltf"&&extension!=".glb")throw EditRejection("Generated content requires a registered engine format");
             const auto validator=[extension](const std::string& source) {
                 if(extension!=".glb") { const auto data=Json::parse(source);if(!data.is_object())throw EditRejection("Generated text requires an object"); }

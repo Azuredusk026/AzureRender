@@ -194,6 +194,7 @@ ctest --test-dir build/ninja-msvc-debug `
 
 ## 项目与工作区操作
 
+目录快照、类型打开与对象预设见[内容导航](content-navigation.md)。
 项目、模板与布局消费共同操作服务。
 参数和生命周期见[项目工作区](project-workspace.md)。
 项目激活重建文档服务，并保留用户设置。

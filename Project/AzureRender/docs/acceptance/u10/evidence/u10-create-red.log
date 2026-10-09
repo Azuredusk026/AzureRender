@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 186: AzureEditor.ContentNavigation
+1/1 Test #186: AzureEditor.ContentNavigation ....***Failed    0.22 sec
+[1791573007591][info][editor][code=0] Opened scene: startup
+[1791573007651][info][editor][code=0] ERROR [content.directory]: Directory escapes its mount
+[1791573007653][info][editor][code=0] ERROR [content.directory]: Unknown content mount
+[1791573007656][info][editor][code=0] ERROR [asset.open]: Unknown asset
+[1791573007698][info][editor][code=0] ERROR [asset.generate]: Unknown parameter: replace
+asset.generate: [{"code":"RejectedOperation","message":"Unknown parameter: replace"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	186 - AzureEditor.ContentNavigation (Failed)
+Errors while running CTest

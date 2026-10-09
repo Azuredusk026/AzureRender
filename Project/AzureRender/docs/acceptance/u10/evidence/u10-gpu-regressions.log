@@ -1,0 +1,37 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 105: AzureEditor.WorkspaceGpu
+1/8 Test #105: AzureEditor.WorkspaceGpu .............***Failed   26.63 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 154, in <module>
+    main(args.executable.resolve(),args.output.resolve() if args.output else Path(temporary))
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_workspace.py", line 49, in main
+    first=results[name]['visibleAssets'][0]['id']
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+    Start 144: AzureEditor.ContentGpu
+2/8 Test #144: AzureEditor.ContentGpu ...............   Passed   47.84 sec
+    Start 145: AzureEditor.NativeInputGpu
+3/8 Test #145: AzureEditor.NativeInputGpu ...........   Passed   16.89 sec
+    Start 147: AzureEditor.DocumentGuardGpu
+4/8 Test #147: AzureEditor.DocumentGuardGpu .........   Passed   21.56 sec
+    Start 177: AzureEditor.ProductizationGpu
+5/8 Test #177: AzureEditor.ProductizationGpu ........   Passed   47.76 sec
+    Start 180: AzureEditor.PropertiesGpu
+6/8 Test #180: AzureEditor.PropertiesGpu ............   Passed   25.79 sec
+    Start 185: AzureEditor.ContentTransactionsGpu
+7/8 Test #185: AzureEditor.ContentTransactionsGpu ...   Passed   66.12 sec
+    Start 189: AzureEditor.ContentNavigationGpu
+8/8 Test #189: AzureEditor.ContentNavigationGpu .....   Passed   47.26 sec
+
+88% tests passed, 1 tests failed out of 8
+
+Label Time Summary:
+gpu    = 299.84 sec*proc (8 tests)
+
+Total Test time (real) = 299.85 sec
+
+The following tests FAILED:
+	105 - AzureEditor.WorkspaceGpu (Failed)
+Errors while running CTest

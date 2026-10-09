@@ -1,0 +1,21 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 186: AzureEditor.ContentNavigation
+1/2 Test #186: AzureEditor.ContentNavigation ....***Failed    0.14 sec
+[1791572213026][info][editor][code=0] Opened scene: startup
+[1791572213046][info][editor][code=0] ERROR [content.directory]: Directory escapes its mount
+[1791572213049][info][editor][code=0] ERROR [content.directory]: Unknown content mount
+[1791572213051][info][editor][code=0] ERROR [asset.open]: Unknown asset
+[1791572213063][info][editor][code=0] ERROR [node.presets]: Unknown operation: node.presets
+node.presets: [{"code":"RejectedOperation","message":"Unknown operation: node.presets"}]
+
+    Start 187: AzureAssets.PrimitiveGenerator
+2/2 Test #187: AzureAssets.PrimitiveGenerator ...   Passed    0.11 sec
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =   0.26 sec
+
+The following tests FAILED:
+	186 - AzureEditor.ContentNavigation (Failed)
+Errors while running CTest
