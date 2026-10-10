@@ -1,0 +1,15 @@
+{
+  "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\serialized-trace-probe",
+  "command": [
+    "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe",
+    "build/p5-p6-closure-2026-10-10/threaded_probe.py",
+    "build/p5-p6-closure-2026-10-10/serialized-proofs"
+  ],
+  "maxEvents": 50000,
+  "diagnosticOnly": true,
+  "fileHashes": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\serialized-trace-candidate\\trace_virtual_allocations.py": "d61862a3356370cffd106cbc4a43b567d60dcea2ffbc39d7c489349110c96c16",
+    "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe": "5f7b89a612c9b8af1d6456cdfcd1dbe5ca630849e79aebced9bee9a6694952ec",
+    "C:\\Program Files\\LLVM\\bin\\lldb.exe": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669"
+  }
+}

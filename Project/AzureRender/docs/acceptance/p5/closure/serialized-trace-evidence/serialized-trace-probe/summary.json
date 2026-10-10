@@ -1,0 +1,76 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 330,
+  "successfulReleases": 29,
+  "failedCalls": 7,
+  "partialOrAmbiguousCalls": 293,
+  "trackedLiveBytes": 16777216,
+  "liveRegions": [
+    {
+      "base": 2224190062592,
+      "size": 1048576
+    },
+    {
+      "base": 2224191897600,
+      "size": 1048576
+    },
+    {
+      "base": 2224192946176,
+      "size": 1048576
+    },
+    {
+      "base": 2224193994752,
+      "size": 1048576
+    },
+    {
+      "base": 2224195043328,
+      "size": 1048576
+    },
+    {
+      "base": 2224196091904,
+      "size": 1048576
+    },
+    {
+      "base": 2224197140480,
+      "size": 1048576
+    },
+    {
+      "base": 2224198647808,
+      "size": 1048576
+    },
+    {
+      "base": 2224199696384,
+      "size": 2097152
+    },
+    {
+      "base": 2224201793536,
+      "size": 4194304
+    },
+    {
+      "base": 2224205987840,
+      "size": 1048576
+    },
+    {
+      "base": 2224207036416,
+      "size": 1048576
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": 0,
+  "returnedEvents": 366,
+  "entryCalls": 366,
+  "pendingReturns": [],
+  "errors": [],
+  "droppedEntries": 0,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}
