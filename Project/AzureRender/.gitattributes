@@ -1,3 +1,7 @@
 docs/acceptance/p5/evidence/** -text -whitespace
 docs/acceptance/p5/closure/evidence/** -text -whitespace
 docs/acceptance/u16/evidence/** -text -whitespace
+docs/acceptance/p5/closure/** -text -whitespace
+docs/acceptance/u15/evidence/** -text -whitespace
+docs/acceptance/u16/*-evidence/** -text -whitespace
+docs/acceptance/p6/software-evidence/** -text -whitespace
