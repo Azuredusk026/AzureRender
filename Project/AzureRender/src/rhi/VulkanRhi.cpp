@@ -376,6 +376,7 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     info.layout = desc.layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    if (pipelineInspection_) pipelineInspection_->inspect(pipeline);
     return pipeline;
 }
 void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
@@ -511,6 +512,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         vkCreateGraphicsPipelines(
             device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
         "vkCreateGraphicsPipelines");
+    if (pipelineInspection_) pipelineInspection_->inspect(pipeline);
     return pipeline;
 }
 

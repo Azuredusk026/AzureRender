@@ -314,6 +314,7 @@ add_library(AzureRenderCore STATIC
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
     src/rhi/NullRhi.cpp
+    src/rhi/PipelineInspection.cpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/VulkanRhi.cpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
@@ -554,6 +555,9 @@ if(BUILD_TESTING)
         "${CMAKE_CURRENT_BINARY_DIR}/visibility-gpu.json")
     set_tests_properties(AzureRender.VisibilityGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureResourceAccessProfileTests tests/ResourceAccessProfileTests.cpp)
+    add_executable(AzurePipelineInspectionTests tests/PipelineInspectionTests.cpp)
+    target_link_libraries(AzurePipelineInspectionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.PipelineInspection COMMAND AzurePipelineInspectionTests)
     target_link_libraries(AzureResourceAccessProfileTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ResourceAccessProfile COMMAND AzureResourceAccessProfileTests)
     add_executable(AzureSkinningBatchTests tests/SkinningBatchTests.cpp)
@@ -1894,4 +1898,5 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/closure/" DEST
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u16/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u16")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p6/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p6")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-10-p5-closure-and-user-experience.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/authoring-usability-manifest.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-11-pipeline-inspection.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-10-authoring-usability.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")

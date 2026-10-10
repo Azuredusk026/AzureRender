@@ -2,6 +2,7 @@
 
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
+#include "rhi/PipelineInspection.hpp"
 
 #include <functional>
 
@@ -16,12 +17,14 @@ public:
         VkPhysicalDevice physicalDevice,
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
-        GpuAllocator& allocator, bool samplerAnisotropyEnabled=false)
+        GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
+        PipelineInspection* pipelineInspection=nullptr)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
-          samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator) {}
+          samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
+          pipelineInspection_(pipelineInspection) {}
 
     GpuAllocator& allocator() override { return *allocator_; }
 
@@ -104,6 +107,7 @@ private:
     VkCommandPool commandPool_ = VK_NULL_HANDLE;
     bool samplerAnisotropyEnabled_ = false;
     GpuAllocator* allocator_ = nullptr;
+    PipelineInspection* pipelineInspection_ = nullptr;
 };
 
 // Records onto a live VkCommandBuffer. Created per frame by the engine.

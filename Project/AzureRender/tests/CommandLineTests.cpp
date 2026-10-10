@@ -62,6 +62,10 @@ int main() try {
                 "Character inspection camera must be accepted");
     }
     const auto defaults = azurerender::parseCommandLine({});
+    require(!defaults.options.pipelineInspectionDisabled,
+            "Supported pipeline inspection must default to enabled");
+    require(azurerender::parseCommandLine({"--disable-pipeline-inspection"}).options.pipelineInspectionDisabled,
+            "Pipeline inspection diagnostic switch was not parsed");
     require(!defaults.options.visibilityPrototype,"Visibility prototype must be optional");
     require(azurerender::parseCommandLine({"--visibility-prototype"}).options.visibilityPrototype,
             "Visibility prototype switch was not parsed");

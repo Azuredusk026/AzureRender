@@ -267,7 +267,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_));
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get());
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
     createShadowResources();
@@ -1272,14 +1272,43 @@ void AzureRenderApp::createLogicalDevice() {
         vulkan12Features.shaderSampledImageArrayNonUniformIndexing = VK_TRUE;
     }
     VkDeviceCreateInfo createInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+    std::uint32_t extensionCount = 0;
+    vkCheck(vkEnumerateDeviceExtensionProperties(physicalDevice_, nullptr, &extensionCount, nullptr),
+            "vkEnumerateDeviceExtensionProperties(inspection count)");
+    std::vector<VkExtensionProperties> availableExtensions(extensionCount);
+    vkCheck(vkEnumerateDeviceExtensionProperties(physicalDevice_, nullptr, &extensionCount, availableExtensions.data()),
+            "vkEnumerateDeviceExtensionProperties(inspection)");
+    availableExtensions.resize(extensionCount);
+    const bool inspectionExtension = std::any_of(availableExtensions.begin(), availableExtensions.end(),
+        [](const auto& extension) { return std::strcmp(extension.extensionName,
+            VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME) == 0; });
+    VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR inspectionFeatures{
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR};
+    if (inspectionExtension) {
+        VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};
+        available.pNext = &inspectionFeatures;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_, &available);
+    }
+    const bool inspectionSupported = inspectionExtension && inspectionFeatures.pipelineExecutableInfo == VK_TRUE;
+    const bool inspectionEnabled = inspectionSupported && !runOptions_.pipelineInspectionDisabled;
+    std::vector<const char*> enabledExtensions(kDeviceExtensions.begin(), kDeviceExtensions.end());
+    if (inspectionEnabled) {
+        enabledExtensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
+        vulkan12Features.pNext = &inspectionFeatures;
+    }
     createInfo.pNext = &vulkan12Features;
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());
     createInfo.pQueueCreateInfos = queueCreateInfos.data();
     createInfo.pEnabledFeatures = &deviceFeatures;
-    createInfo.enabledExtensionCount = static_cast<std::uint32_t>(kDeviceExtensions.size());
-    createInfo.ppEnabledExtensionNames = kDeviceExtensions.data();
+    createInfo.enabledExtensionCount = static_cast<std::uint32_t>(enabledExtensions.size());
+    createInfo.ppEnabledExtensionNames = enabledExtensions.data();
 
     vkCheck(vkCreateDevice(physicalDevice_, &createInfo, nullptr, &device_), "vkCreateDevice");
+    const auto inspectionQuery = inspectionEnabled
+        ? reinterpret_cast<PFN_vkGetPipelineExecutablePropertiesKHR>(
+            vkGetDeviceProcAddr(device_, "vkGetPipelineExecutablePropertiesKHR")) : nullptr;
+    pipelineInspection_ = std::make_unique<azurerender::rhi::PipelineInspection>(
+        device_, inspectionSupported, !runOptions_.pipelineInspectionDisabled, inspectionQuery);
     vkGetDeviceQueue(device_, *indices.graphics, 0, &graphicsQueue_);
     vkGetDeviceQueue(device_, *indices.present, 0, &presentQueue_);
     const std::filesystem::path capabilityDirectory = runOptions_.captureDirectory.empty()

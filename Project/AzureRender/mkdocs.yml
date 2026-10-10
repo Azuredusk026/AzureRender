@@ -31,6 +31,9 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 管线执行信息: acceptance/p5/closure/pipeline-inspection.md
+  - 映射追踪与性能边界: acceptance/p5/closure/mapping-inspection.md
+  - 管线检查实施计划: plans/2026-10-11-pipeline-inspection.md
   - 进程内内存诊断: acceptance/p5/closure/native-memory-trace.md
   - 游戏输入回放: runtime/game-input-replay.md
   - 资产格式拓展计划: plans/2026-10-11-asset-format-expansion.md

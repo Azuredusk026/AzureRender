@@ -368,6 +368,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &innerOutlinePipeline_),
             "vkCreateGraphicsPipelines(inner outline)");
+        if (pipelineInspection_) pipelineInspection_->inspect(innerOutlinePipeline_);
 
         VkVertexInputBindingDescription hudBinding{};
         hudBinding.binding = 0;
@@ -409,6 +410,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &hudPipeline_),
             "vkCreateGraphicsPipelines(HUD)");
+        if (pipelineInspection_) pipelineInspection_->inspect(hudPipeline_);
     } catch (...) {
         vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
         vkDestroyShaderModule(device_, hudVertexModule, nullptr);

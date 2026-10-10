@@ -121,3 +121,8 @@ python tools/trace_virtual_allocations.py --output build/local-allocation-trace 
 缓存对照的热缓存轮次仍超过工作集预算。
 查询候选按生产来源进行正式复测。
 上述局部证据保持诊断用途和有限覆盖范围。
+
+生产查询契约见[管线检查](pipeline-inspection.md)。
+映射与取消映射原型通过 44 个已知调用匹配。
+扩容探索录制 16427 个事件，四类异常均为零。
+正式异常未复现，范围见[映射诊断](mapping-inspection.md)。
