@@ -57,3 +57,45 @@ python tools/collect_memory_residency.py --self-test --output build/residency-se
 源程序、设备、调用覆盖与原始结果一起归档。
 
 原始记录见[子任务证据清单](evidence/manifest.json)。
+
+## 返回值与释放追踪
+
+`trace_virtual_allocations.py` 启动自有调试进程。
+目标在加载入口暂停后安装本地内存断点。
+入口保存参数、线程、时间与调用栈。
+返回断点读取 NTSTATUS 和申请的输出地址。
+
+追踪覆盖三个本地虚拟内存入口。
+分别为 `NtAllocateVirtualMemory`、其 Ex 版本及释放入口。
+成功预约进入有限覆盖账本，完整释放配对移除。
+提交、取消提交与未知释放登记部分覆盖。
+
+已知探针直接执行七个本地调用。
+两次成功申请分别为 4 MiB 和 1 MiB。
+两次完整释放及三次失败调用均匹配返回事件。
+探针配对后的存活量为零。
+
+真实驻留自检另验证 4 MiB 触页与释放。
+事件上限夹具记录丢弃计数并返回失败。
+超时夹具终止工具创建的调试进程树。
+参数传递验证空格、引号、中文与反斜杠。
+
+入口安装时序及重复返回断点的失败记录保留。
+正式实现显式禁用并删除已消费的返回断点。
+调试输出、事件与分类结论归档至证据清单。
+该结果仅证明工具契约与已知探针。
+
+覆盖限于当前进程伪句柄对应的调用。
+系统堆、映射及显式进程句柄需另行归因。
+预约字节、驻留字节与泄漏具有独立含义。
+引擎真实负载及生命周期关联保持待执行。
+
+追踪入口使用新的输出目录：
+
+```powershell
+python tools/trace_virtual_allocations.py --output build/local-allocation-trace --timeout 600 -- build/ninja-msvc-release-symbols/AzureRender.exe <运行参数>
+```
+
+结果包含原始事件、失败、待返回和漏采计数。
+原始调用栈包含模块、地址及可用源码行。
+普通启动性能测量使用独立入口。

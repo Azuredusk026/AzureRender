@@ -1,0 +1,16 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-implementation-2026-10-10\returned-trace-timeout\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-implementation-2026-10-10\returned-trace-timeout\commands.lldb'.
+(lldb) target create "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe"
+Current executable set to 'C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe' (x86_64).
+(lldb) command script import "D:/Assigment/2609/FYP/Project/AzureRender/tools/trace_virtual_allocations.py"
+(lldb) process launch -s -o "D:/Assigment/2609/FYP/Project/AzureRender/build/p5-p6-implementation-2026-10-10/returned-trace-timeout/stdout.log" -e "D:/Assigment/2609/FYP/Project/AzureRender/build/p5-p6-implementation-2026-10-10/returned-trace-timeout/stderr.log" -- "-c" "import time; time.sleep(10)"
+Process 32416 launched: 'C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe' (x86_64)
+(lldb) script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-timeout\\config.json')
+(lldb) continue
+SUCCESS: The process with PID 17596 (child process of PID 32416) has been terminated.
+SUCCESS: The process with PID 32556 (child process of PID 30656) has been terminated.
+Process 32416 resuming
+Process 32416 exited with status = 1 (0x00000001)
+(lldb) script trace_virtual_allocations.finish(lldb.debugger)
+SUCCESS: The process with PID 32416 (child process of PID 30656) has been terminated.
+SUCCESS: The process with PID 30656 (child process of PID 12568) has been terminated.

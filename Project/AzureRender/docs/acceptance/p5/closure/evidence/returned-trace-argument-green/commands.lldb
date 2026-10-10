@@ -1,0 +1,7 @@
+target create "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py"
+process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green\\stderr.log" -- "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\argument_probe.py" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green\\arguments.json" "C:\\Source\\path with spaces\\file" "quoted \"name\"" "中文目录"
+script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green\\config.json')
+continue
+script trace_virtual_allocations.finish(lldb.debugger)
+quit

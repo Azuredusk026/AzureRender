@@ -1,0 +1,7 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-implementation-2026-10-10\returned-trace-self-test\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-implementation-2026-10-10\returned-trace-self-test\commands.lldb'.
+(lldb) target create "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe"
+Current executable set to 'C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe' (x86_64).
+(lldb) settings set target.run-args "tools/collect_memory_residency.py" "--self-test" "--output" "build/p5-p6-implementation-2026-10-10/returned-residency-self-test"
+                                                                        ˄˜˜˜˜˜˜˜˜˜˜
+                                                                        ╰─ error: unknown or ambiguous option

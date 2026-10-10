@@ -1,0 +1,13 @@
+{
+  "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green",
+  "command": [
+    "C:\\Users\\23587\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\argument_probe.py",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-implementation-2026-10-10\\returned-trace-argument-green\\arguments.json",
+    "C:\\Source\\path with spaces\\file",
+    "quoted \"name\"",
+    "\u4e2d\u6587\u76ee\u5f55"
+  ],
+  "maxEvents": 100000,
+  "diagnosticOnly": true
+}

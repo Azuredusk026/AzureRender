@@ -1,0 +1,40 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 20,
+  "successfulReleases": 0,
+  "failedCalls": 0,
+  "partialOrAmbiguousCalls": 17,
+  "trackedLiveBytes": 1130496,
+  "liveRegions": [
+    {
+      "base": 2491816869888,
+      "size": 65536
+    },
+    {
+      "base": 2491819229184,
+      "size": 1048576
+    },
+    {
+      "base": 2491816935424,
+      "size": 16384
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": 0,
+  "returnedEvents": 20,
+  "entryCalls": 20,
+  "pendingReturns": [],
+  "errors": [],
+  "droppedEntries": 1,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}
