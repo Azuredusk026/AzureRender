@@ -1,0 +1,120 @@
+{
+  "diagnosticOnly": true,
+  "successfulAllocations": 4751,
+  "successfulReleases": 113,
+  "failedCalls": 0,
+  "partialOrAmbiguousCalls": 4811,
+  "trackedLiveBytes": 1144221696,
+  "liveRegions": [
+    {
+      "base": 2024226291712,
+      "size": 1048576
+    },
+    {
+      "base": 2024227340288,
+      "size": 2097152
+    },
+    {
+      "base": 2024240644096,
+      "size": 1048576
+    },
+    {
+      "base": 2024249360384,
+      "size": 2359296
+    },
+    {
+      "base": 2022929596416,
+      "size": 1073741824
+    },
+    {
+      "base": 2024202567680,
+      "size": 65536
+    },
+    {
+      "base": 2024251719680,
+      "size": 4194304
+    },
+    {
+      "base": 2024291368960,
+      "size": 8388608
+    },
+    {
+      "base": 2024203354112,
+      "size": 16384
+    },
+    {
+      "base": 2024333312000,
+      "size": 16580608
+    },
+    {
+      "base": 2024203485184,
+      "size": 4096
+    },
+    {
+      "base": 2025526657024,
+      "size": 4096
+    },
+    {
+      "base": 2025526919168,
+      "size": 1048576
+    },
+    {
+      "base": 2025841033216,
+      "size": 65536
+    },
+    {
+      "base": 2025909321728,
+      "size": 65536
+    },
+    {
+      "base": 2025908207616,
+      "size": 65536
+    },
+    {
+      "base": 2025908273152,
+      "size": 65536
+    },
+    {
+      "base": 2025908338688,
+      "size": 65536
+    },
+    {
+      "base": 2025953624064,
+      "size": 16580608
+    },
+    {
+      "base": 2025908404224,
+      "size": 65536
+    },
+    {
+      "base": 2025908862976,
+      "size": 4096
+    },
+    {
+      "base": 2025908928512,
+      "size": 65536
+    },
+    {
+      "base": 2026030104576,
+      "size": 16580608
+    }
+  ],
+  "completeAllocationCoverage": false,
+  "commandExitCode": 0,
+  "returnedEvents": 4864,
+  "entryCalls": 4864,
+  "pendingReturns": [],
+  "errors": [],
+  "droppedEntries": 0,
+  "excludedNonPseudoHandles": 0,
+  "resolvedApis": {
+    "NtAllocateVirtualMemory": 1,
+    "NtAllocateVirtualMemoryEx": 1,
+    "NtFreeVirtualMemory": 1
+  },
+  "coverage": "current-process pseudo handle; reserve/commit/decommit/release APIs",
+  "limits": [
+    "Kernel heaps, mappings, explicit process handles and calls before debugger attachment are outside coverage.",
+    "Debugger timing and returned size do not establish resident ownership or a leak."
+  ]
+}

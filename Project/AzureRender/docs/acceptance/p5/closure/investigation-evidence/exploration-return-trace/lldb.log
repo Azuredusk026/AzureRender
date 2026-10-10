@@ -1,0 +1,20 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\exploration-return-trace\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\exploration-return-trace\commands.lldb'.
+(lldb) target create "build/ninja-msvc-release-symbols/AzurePlayer.exe"
+Current executable set to 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release-symbols\AzurePlayer.exe' (x86_64).
+(lldb) command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py"
+(lldb) process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\stderr.log" -- "--project" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration\\project.azureproject" "--width" "1920" "--height" "1080" "--fixed-frame-step" "--smoke-frames" "2100" "--game-actions" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration-1.input.json" "--gpu-timing" "--gpu-timing-output" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-trace-timing.json"
+Process 32088 launched: 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release-symbols\AzurePlayer.exe' (x86_64)
+(lldb) script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\exploration-return-trace\\config.json')
+(lldb) continue
+Process 32088 resuming
+Process 32088 stopped
+* thread #38, stop reason = Exception 0x80000003 encountered at address 0x7ff8b0ec94b3
+    frame #0: 0x00007ff8b0ec94b4 ntdll.dll`RtlNtStatusToDosErrorNoTeb + 2852
+ntdll.dll`RtlNtStatusToDosErrorNoTeb:
+->  0x7ff8b0ec94b4 <+2852>: xorl   $0x0, 0x2(%rax)
+    0x7ff8b0ec94b8 <+2856>: addb   %al, -0x5c77f040(%rbp)
+    0x7ff8b0ec94be <+2862>: addl   %eax, (%rax)
+    0x7ff8b0ec94c0 <+2864>: addb   %ch, %al
+(lldb) script trace_virtual_allocations.finish(lldb.debugger)
+(lldb) quit

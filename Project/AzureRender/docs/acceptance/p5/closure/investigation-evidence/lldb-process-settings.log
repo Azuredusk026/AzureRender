@@ -1,0 +1,105 @@
+(lldb) settings list target.process
+
+'target.process' variables:
+
+  detach-keeps-stopped                 -- If true, detach will attempt to keep
+                                          the process stopped.
+  disable-language-runtime-unwindplans -- If true, language runtime
+                                          augmented/overridden backtraces will
+                                          not be used when printing a stack
+                                          trace.
+  disable-memory-cache                 -- Disable reading and caching of memory
+                                          in fixed-size units.
+  extra-startup-command                -- A list containing extra commands
+                                          understood by the particular process
+                                          plugin used.  For instance, to turn
+                                          on debugserver logging set this to
+                                          'QSetLogging:bitmask=LOG_DEFAULT;'
+  follow-fork-mode                     -- Debugger's behavior upon fork or
+                                          vfork.
+  highmem-virtual-addressable-bits     -- The number of bits used for
+                                          addressing high memory, when it
+                                          differs from low memory in the same
+                                          Process. When this is non-zero,
+                                          target.process.virtual-addressable-bit
+                                          s will be the value for low memory
+                                          (0x000... addresses) and this setting
+                                          will be the value for high memory
+                                          (0xfff... addresses). When this is
+                                          zero,
+                                          target.process.virtual-addressable-bit
+                                          s applies to all addresses. It is
+                                          very uncommon to use this setting.
+  ignore-breakpoints-in-expressions    -- If true, breakpoints will be ignored
+                                          during expression evaluation.
+  interrupt-timeout                    -- The time in seconds to wait for an
+                                          interrupt succeed in stopping the
+                                          target.
+  memory-cache-line-size               -- The memory cache line size
+  python-os-plugin-path                -- A path to a python OS plug-in module
+                                          file that contains a
+                                          OperatingSystemPlugIn class.
+  run-all-threads                      -- If true, stepping operations will run
+                                          all threads.  This is equivalent to
+                                          setting the run-mode option to
+                                          'all-threads'.
+  stop-on-exec                         -- If true, stop when the inferior
+                                          exec's.
+  stop-on-sharedlibrary-events         -- If true, stop when a shared library
+                                          is loaded or unloaded.
+  track-memory-cache-changes           -- If true, memory cache modifications
+                                          (which happen often during
+                                          expressions evaluation) will bump
+                                          process state ID (and invalidate all
+                                          synthetic children). Disabling this
+                                          option helps to avoid synthetic
+                                          children reevaluation when pretty
+                                          printers heavily use expressions. The
+                                          downside of disabled setting is that
+                                          convenience variables won't
+                                          reevaluate synthetic children
+                                          automatically.
+  unwind-on-error-in-expressions       -- If true, errors in expression
+                                          evaluation will unwind the stack back
+                                          to the state before the call.
+  utility-expression-timeout           -- The time in seconds to wait for
+                                          LLDB-internal utility expressions.
+  virtual-addressable-bits             -- The number of bits used for
+                                          addressing. If the value is 39, then
+                                          bits 0..38 are used for addressing.
+                                          The default value of 0 means
+                                          unspecified.
+  optimization-warnings                -- If true, warn when stopped in code
+                                          that is optimized where stepping and
+                                          variable availability may not behave
+                                          as expected.
+  unsupported-language-warnings        -- If true, warn when stopped in code
+                                          that is written in a source language
+                                          that LLDB does not support.
+
+'target.process.thread' variables:
+
+  trace-thread               -- If true, this thread will single-step and log
+                                execution.
+  max-backtrace-depth        -- Maximum number of frames to backtrace.
+  single-thread-plan-timeout -- The time in milliseconds to wait for single
+                                thread ThreadPlan to move forward before
+                                resuming all threads to resolve any potential
+                                deadlock. Specify value 0 to disable timeout.
+  step-avoid-libraries       -- A list of libraries that source stepping won't
+                                stop in.
+  step-avoid-regexp          -- A regular expression defining functions step-in
+                                won't stop in.
+  step-in-avoid-nodebug      -- If true, step-in will not stop in functions
+                                with no debug information.
+  step-out-avoid-nodebug     -- If true, when step-in/step-out/step-over leave
+                                the current frame, they will continue to step
+                                out till they come to a function with debug
+                                information. Passing a frame argument to
+                                step-out will override this option.
+
+'target.process.experimental' variables:
+
+  os-plugin-reports-all-threads -- Set to False if your Python OS Plugin
+                                   doesn't report all threads on each stop.
+(lldb) quit

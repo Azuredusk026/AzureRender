@@ -1,0 +1,7 @@
+target create "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release-symbols\\AzurePlayer.exe"
+command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\pipeline_flags_probe.py"
+process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\stderr.log" -- "--project" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration\\project.azureproject" "--width" "1920" "--height" "1080" "--fixed-frame-step" "--smoke-frames" "2100" "--game-actions" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\formal-source-verified\\exploration-1.input.json" "--gpu-timing" "--gpu-timing-output" "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\timing.json"
+script pipeline_flags_probe.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\pipeline-unoptimized\\config.json')
+continue
+script pipeline_flags_probe.finish(lldb.debugger)
+quit

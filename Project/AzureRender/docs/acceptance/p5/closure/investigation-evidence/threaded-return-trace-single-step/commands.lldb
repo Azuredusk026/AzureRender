@@ -1,0 +1,9 @@
+settings set target.process.run-all-threads false
+settings set target.process.thread.single-thread-plan-timeout 0
+target create "C:/Users/23587/AppData/Local/Programs/Python/Python311/python.exe"
+command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py"
+process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\threaded-return-trace-single-step\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\threaded-return-trace-single-step\\stderr.log" -- "build/p5-p6-closure-2026-10-10/threaded_probe.py" "build/p5-p6-closure-2026-10-10/threaded-proofs-single-step"
+script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\threaded-return-trace-single-step\\config.json')
+continue
+script trace_virtual_allocations.finish(lldb.debugger)
+quit

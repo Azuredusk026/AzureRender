@@ -177,6 +177,7 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 后续路线见[P5 收口与使用体验计划](docs/plans/2026-10-10-p5-closure-and-user-experience.md)。
 性能工具进度见[P5-A 验收](docs/acceptance/p5/closure/p5-a.md)。
 驻留诊断进度见[P5-B 验收](docs/acceptance/p5/closure/p5-b.md)。
+正式十五轮基线有两轮内存失败，归因边界已归档。
 返回值追踪通过已知申请、释放及失败探针自检。
 正式测量先校验构建来源，并冻结实际运行依赖。
 输入与对象创建的 CPU 修复见[U16 记录](docs/acceptance/u16/2026-10-10.md)。

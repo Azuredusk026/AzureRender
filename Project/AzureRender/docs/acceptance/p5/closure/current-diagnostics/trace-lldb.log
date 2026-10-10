@@ -1,0 +1,13 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\editor-return-trace\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\editor-return-trace\commands.lldb'.
+(lldb) target create "build/ninja-msvc-release-symbols/AzureRender.exe"
+Current executable set to 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release-symbols\AzureRender.exe' (x86_64).
+(lldb) command script import "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\trace_virtual_allocations.py"
+(lldb) process launch -s -o "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\editor-return-trace\\stdout.log" -e "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\editor-return-trace\\stderr.log" -- "--editor-close-policy" "save" "--editor-project" "build/p5-p6-closure-2026-10-10/baseline-project/project.azureproject" "--width" "1920" "--height" "1080" "--fixed-frame-step" "--smoke-frames" "2100" "--game-actions" "build/p5-p6-closure-2026-10-10/baseline-editor.input.json" "--editor-actions" "build/p5-p6-closure-2026-10-10/baseline-editor.editor.json" "--gpu-timing" "--gpu-timing-output" "build/p5-p6-closure-2026-10-10/trace-timing.json"
+Process 33852 launched: 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release-symbols\AzureRender.exe' (x86_64)
+(lldb) script trace_virtual_allocations.configure(lldb.debugger, 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\editor-return-trace\\config.json')
+(lldb) continue
+Process 33852 resuming
+Process 33852 exited with status = 0 (0x00000000)
+(lldb) script trace_virtual_allocations.finish(lldb.debugger)
+(lldb) quit
