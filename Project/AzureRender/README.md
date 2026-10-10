@@ -178,3 +178,4 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 性能工具进度见[P5-A 验收](docs/acceptance/p5/closure/p5-a.md)。
 驻留诊断进度见[P5-B 验收](docs/acceptance/p5/closure/p5-b.md)。
 P5 保持 Active，性能与人工门禁按实际证据维护。
+制作体验问题见[双工作流审查](docs/research/2026-10-10-authoring-usability.md)。

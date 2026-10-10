@@ -74,6 +74,7 @@ nav:
       - 项目入口与工作区: runtime/project-workspace.md
       - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
       - 编辑器交互体验审查: research/2026-10-07-editor-usability.md
+      - 双工作流制作体验审查: research/2026-10-10-authoring-usability.md
   - 计划:
       - Azure Engine 总计划: plans/azure-engine-plan.md
       - P5 收口与用户体验计划: plans/2026-10-10-p5-closure-and-user-experience.md
