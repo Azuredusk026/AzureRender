@@ -407,6 +407,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 #endif
         data["routeFrames"]=gameRouteFrames_;
         data["replayedActions"]=gameInputReplay_?gameInputReplay_->consumed():0;
+        data["replayDelayedFrames"]=gameInputReplay_?gameInputReplay_->delayedFrames():0;
         data["animations"]=nlohmann::json::array();
         if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
             data["animations"].push_back({{"node",animation.node},{"clip",animation.clip},{"time",animation.time},

@@ -10,7 +10,9 @@ def run(executable,planner,exploration,platformer,output):
     start=json.loads((baseline/'input.json').read_text(encoding='utf-8'))['actions'];cutoff=min(e['frame'] for e in start if e.get('key')==82)
     actions=[dict(e,frame=round(e['frame']*fps/4)) for e in start if e['frame']<cutoff]
     enter=round(cutoff*fps/4);actions += [dict(frame=enter,action='key',key=69,down=True),dict(frame=enter+1,action='key',key=69,down=False)]
-    offset=enter+90;actions += [dict(e,frame=e['frame']+offset) for e in course];count=offset+planned['frames']+15
+    barrier=enter+2
+    actions.append(dict(frame=barrier,action='wait-level',reference='assets:/platformer/platformer.azurelevel',timeoutFrames=900))
+    offset=barrier+1;actions += [dict(e,frame=e['frame']+offset) for e in course];count=offset+planned['frames']+15+900
     (root/'input.json').write_text(json.dumps(dict(schemaVersion=1,actions=actions),indent=2)+'\n',encoding='utf-8')
     command=[str(executable.resolve()),'--project',str(exploration.resolve()),'--game-actions',str((root/'input.json').resolve()),'--runtime-report',str((root/'runtime.json').resolve()),'--width','1280','--height','720','--fixed-frame-step','--capture-fps',str(fps),'--smoke-frames',str(count)]
     startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
@@ -24,7 +26,8 @@ def run(executable,planner,exploration,platformer,output):
     assert expedition and course,'Both games must complete in the same Player process'
     assert expedition[0]['tasks'][0]['collected']==3 and course[0]['tasks'][0]['collected']==8
     assert course[0]['levelRevision']==expedition[0]['levelRevision']+1
-    summary=dict(passed=True,explorationCompleted=True,platformerCompleted=True,successorTransition=True,courseCoins=8,released=True,frames=count)
+    assert d['replayedActions']==len(actions),'The complete input route must be consumed'
+    summary=dict(passed=True,explorationCompleted=True,platformerCompleted=True,successorTransition=True,courseCoins=8,released=True,frames=count,replayDelayedFrames=d['replayDelayedFrames'])
     (root/'sequence-summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8');print(json.dumps(summary));return root
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--planner',type=Path,required=True);p.add_argument('--exploration',type=Path,required=True);p.add_argument('--platformer',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();run(a.executable,a.planner,a.exploration,a.platformer,a.output)

@@ -77,6 +77,34 @@ void configuration() {
     bool unboundRejected=false;try { GameRuntime invalid(runtime,registry,bad); } catch(const std::exception&) { unboundRejected=true; }
     check(unboundRejected,"Unbound movement action must fail during assembly");
 }
+void transitionInput() {
+    using Json=nlohmann::json;
+    auto project=Project::load(std::filesystem::path(AZURE_INSPECTOR_PROJECT)/"project.azureproject");
+    RuntimeLifecycle runtime;LevelSession levels(project,runtime);runtime.start();
+    GameRuntime game(runtime);game.input().configure({{"move",{87}}});
+    const auto makeReplay=[&](unsigned timeout) {return GameInputReplay::parse({{"schemaVersion",1},{"actions",Json::array({
+        {{"frame",2},{"action","wait-level"},{"reference",project.startupScene},{"afterRevision",levels.revision()},{"timeoutFrames",timeout}},
+        {{"frame",3},{"action","key"},{"key",87},{"down",true}},
+        {{"frame",5},{"action","key"},{"key",87},{"down",false}}
+    })}});};
+    auto replay=makeReplay(100);
+    replay.apply(2,game,&levels);replay.apply(70,game,&levels);
+    check(replay.consumed()==0&&!game.input().down("move"),"Pending transition must retain all route input");
+    levels.request(project.startupScene);check(levels.poll(),"Same-level restart must commit through its session");
+    replay.apply(71,game,&levels);
+    check(replay.consumed()==1&&!game.input().down("move"),"Transition barrier must preserve relative input spacing");
+    replay.apply(72,game,&levels);check(game.input().down("move"),"Delayed route must begin after commit");
+    replay.apply(74,game,&levels);check(!game.input().down("move")&&replay.consumed()==3,"Delayed key release must retain its duration");
+    auto timeout=makeReplay(10);timeout.apply(2,game,&levels);
+    rejects([&]{timeout.apply(12,game,&levels);});check(timeout.consumed()==0,"Expired wait must fail without consuming route input");
+    auto missing=makeReplay(10);rejects([&]{missing.apply(2,game);});
+    check(missing.consumed()==0,"Missing session must preserve the pending barrier");
+    for(const Json value:Json::array({0,-1,1.5,1000001})) {
+        rejects([&]{GameInputReplay::parse({{"schemaVersion",1},{"actions",Json::array({
+            {{"frame",0},{"action","wait-level"},{"reference",project.startupScene},{"timeoutFrames",value}}
+        })}});});
+    }
+}
 void dynamicInput() {
     using Json=nlohmann::json;
     RuntimeLifecycle runtime;runtime.start();auto registry=application::systems();
@@ -132,6 +160,6 @@ int main() { try {
     interactions.setPolicy([](const auto&,auto,auto) { return false; });
     check(!interactions.select(runtime,physics,runtime.entity("actor")),"Application policy must filter generic targets");
     interactions.setPolicy({});check(interactions.select(runtime,physics,runtime.entity("actor")).has_value(),"Missing policy must allow a valid target");
-    composition();configuration();dynamicInput();inspectorProject();
+    composition();configuration();transitionInput();dynamicInput();inspectorProject();
     std::cout<<"Generic target selection passed\n";
 } catch(const std::exception& error) { std::cerr<<error.what()<<'\n'; return 1; } }
