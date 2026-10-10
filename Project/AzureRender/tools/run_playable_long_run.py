@@ -135,21 +135,27 @@ def process_memory(pid):
     finally:kernel.CloseHandle(handle)
 
 
-def run(package,output,seconds=1800,probe=False):
+def run(package,output,seconds=1800,probe=False,*,scenario=None):
     package=package.resolve();output=output.resolve();output.mkdir(parents=True,exist_ok=True)
     assert os.name=='nt' and seconds >= (15 if probe else 1800)
     verify_package(package)
-    assert (package/'game/assets/alternate.azurelevel').is_file(), 'Alternating exploration level required'
+    if scenario is None:assert (package/'game/assets/alternate.azurelevel').is_file(), 'Alternating exploration level required'
     quality=json.loads((package/'QUALITY.json').read_text(encoding='utf-8'))
-    assert quality['entities']==100 and quality['animatedCharacters']==4 and quality['pointLights']==8
+    if scenario is None:assert quality['entities']==100 and quality['animatedCharacters']==4 and quality['pointLights']==8
     from build_provenance import inputs as source_inputs
     source=Path(__file__).resolve().parents[1];frozen=source_inputs(source)
-    actions=inputs(output/'input.json');timing=output/'timing.json';runtime=output/'runtime.json'
+    if scenario is None:actions=inputs(output/'input.json')
+    else:
+        actions=scenario.prepare(package,output)
+        (output/'input.json').write_text(json.dumps(dict(schemaVersion=1,actions=actions)),encoding='utf-8')
+    timing=output/'timing.json';runtime=output/'runtime.json'
     assert not timing.exists(), 'Use a fresh evidence directory'
     env=isolated_environment()
+    if scenario:env.update(scenario.environment())
     command=[str(package/'bin/AzurePlayer.exe'),'--project',str(package/'game/project.azureproject'),
         '--resource-root',str(package/'share/AzureRender'),'--width','1920','--height','1080',
         '--game-actions',str(output/'input.json'),'--gpu-timing','--gpu-timing-output',str(timing),'--runtime-report',str(runtime)]
+    if scenario:command+=scenario.arguments()
     csv_path=timing.with_suffix('.csv');observations=[];gpu=[];gpu_windows=[];minute=[];pending=b'';csv_offset=0
     checks=dict(minimized=False,restored=False,resized=False,finalExtent=[]);peak=0;warm_frame=0;window_events=[]
     warm_seconds=max(11,min(120,seconds/3))
@@ -176,6 +182,7 @@ def run(package,output,seconds=1800,probe=False):
                 if elapsed>=9 and not large:
                     large=window.resize(1920,1080);checks['resized']=small and large
                     window_events.append(dict(seconds=elapsed,event='resize',extent=window.extent(),passed=large))
+                if scenario and not window.user.IsIconic(window.handle):scenario.update(elapsed)
                 mem=process_memory(process.pid);peak=max(peak,mem['peak'])
                 if csv_path.exists():
                     with csv_path.open('rb') as stream:
@@ -191,9 +198,14 @@ def run(package,output,seconds=1800,probe=False):
                     print(json.dumps(dict(seconds=round(elapsed),gpuFrames=len(gpu),workingMiB=round(mem['working']/1024**2,1))),flush=True)
                     (output/'progress.json').write_text(json.dumps(observations[-1]),encoding='utf-8')
                 if elapsed>=seconds:break
-                time.sleep(.5)
+                time.sleep(.02 if scenario else .5)
+            if scenario:scenario.release()
             checks['finalExtent']=window.extent();window.close();actual=time.monotonic()-start
             assert process.wait(timeout=60)==0, 'Normal WM_CLOSE shutdown failed'
+        except BaseException as error:
+            (output/'error.json').write_text(json.dumps(dict(status='failed',errorType=type(error).__name__,
+                error=str(error),scenario=type(scenario).__name__ if scenario else 'standard'),indent=2)+'\n',encoding='utf-8')
+            raise
         finally:
             if process.poll() is None:
                 if window.handle:
@@ -201,6 +213,8 @@ def run(package,output,seconds=1800,probe=False):
                     try:process.wait(timeout=20)
                     except subprocess.TimeoutExpired:process.kill();process.wait()
                 else:process.kill();process.wait()
+            (output/'observation.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
+            if scenario:scenario.close()
     # The final flushed CSV is authoritative, including shutdown frames.
     import csv
     with csv_path.open(encoding='utf-8') as stream:all_gpu=[float(row['frameMs']) for row in csv.DictReader(stream)]
@@ -215,7 +229,7 @@ def run(package,output,seconds=1800,probe=False):
     consumed=actions[:game['replayedActions']];switches=sum(row['action']=='load-level' for row in consumed)
     restarts=sum(row['action']=='key' and row['key']==82 and row['down'] for row in consumed)
     commits=[row for row in resources if row['committed'] and row['frame']>1]
-    assert len(commits)==switches+restarts, (len(commits),switches,restarts)
+    if scenario is None:assert len(commits)==switches+restarts, (len(commits),switches,restarts)
     log=(output/'stdout.log').read_text(encoding='utf-8')+'\n'+(output/'stderr.log').read_text(encoding='utf-8')
     cpu=data['cpuFrame']
     summary=dict(status='measured',actualSeconds=actual,realTime='--fixed-frame-step' not in command,
@@ -231,12 +245,17 @@ def run(package,output,seconds=1800,probe=False):
         cpuRetainedFrames=len(cpu['workSamplesMs']),cpuSampleOffset=cpu['sampleOffsetFrame'],warmupSeconds=warm_seconds,warmupFrame=warm_frame,
         runtimeHash=digest(package/'bin/AzurePlayer.exe'))
     summary.update(periodic_statistics(resources,warm_frame))
+    if scenario:
+        summary.update(scenario.finalize(resources,warm_frame));scenario.close()
+        assert len(commits)==summary['switches']+summary['restarts']
     assert data['sceneWidth']==1920 and data['sceneHeight']==1080
     assert data['samples']==len(all_gpu)
     assert source_inputs(source)==frozen, 'Source changed during long run'
     verify_package(package)
     (output/'observation.json').write_text(json.dumps(observations,indent=2),encoding='utf-8')
-    try:evaluate(summary,formal=not probe)
+    try:
+        if scenario:scenario.evaluate(summary,formal=not probe)
+        else:evaluate(summary,formal=not probe)
     except AssertionError:
         summary['status']='failed'
         (output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')

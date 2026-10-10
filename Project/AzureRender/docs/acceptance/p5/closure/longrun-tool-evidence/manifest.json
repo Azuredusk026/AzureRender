@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "formalLongRunPassed": false,
+  "physicalInput": false,
+  "files": {
+    "platformer-long-run-green.log": "74e66da65e945dd645d1e549ea077ddc9dcb73520c4bd00126f003cd4010f682",
+    "platformer-long-run-red.log": "673e48e17fc14a7b5611514ddb5aed63a2b7d9d66982c33bfba62da2253d5667",
+    "platformer-rules-green.log": "cb758399be7e78a56e543f467c02df481ab56221b58d2691d71727d38aad223a",
+    "shared-longrun-rules-green.log": "d7914c2ce5de5f486d542a23485fe3cd35dda1ed2c26545f944f3a08d18ca9e6"
+  }
+}
