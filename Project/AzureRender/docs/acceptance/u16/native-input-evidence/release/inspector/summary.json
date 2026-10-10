@@ -1,0 +1,26 @@
+{
+  "workflow": "inspector",
+  "passed": true,
+  "inputSource": "Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks",
+  "physicalKeyboardMouse": "NotExecuted",
+  "dialogOpenSources": [
+    "Native Browse button (cancel)",
+    "Registered path.choose operation (file/directory selection and cancel)"
+  ],
+  "tools": true,
+  "singleOnlySelects": true,
+  "doubleFrames": true,
+  "fFrames": true,
+  "rightLook": true,
+  "flight": true,
+  "flightRelease": true,
+  "outsideRelease": true,
+  "focusRelease": true,
+  "resize": true,
+  "rawMouse": false,
+  "nativeFileChoose": true,
+  "nativeDirectoryChoose": true,
+  "nativeCancel": true,
+  "utf8Path": true,
+  "contentPreserved": true
+}

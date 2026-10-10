@@ -30,7 +30,7 @@ def run(executable, output, workflow):
     env=dict(os.environ,AZURE_NATIVE_TOKEN=token,AZURERENDER_EDITOR_CONFIG=str(output/'config'))
     logs=[(output/name).open('w',encoding='utf-8') for name in ('stdout.log','stderr.log')]
     process=subprocess.Popen([str(executable),'--editor-project',str(project/'project.azureproject'),'--editor-close-policy','discard',
-        '--width','1280','--height','720','--fixed-frame-step','--validation-token-env','AZURE_NATIVE_TOKEN',
+        '--width','1280','--height','720','--validation-token-env','AZURE_NATIVE_TOKEN',
         '--validation-endpoint',str(endpoint_path),'--runtime-report',str(output/'runtime.json')],env=env,stdout=logs[0],stderr=logs[1])
     evidence=[]
     try:
@@ -64,10 +64,20 @@ def run(executable, output, workflow):
         window.user.SendInput.argtypes=[wintypes.UINT,ctypes.POINTER(Input),ctypes.c_int]
         window.user.GetForegroundWindow.restype=wintypes.HWND
         logical_mouse=[0,0]
+        def activate_window():
+            caller=ctypes.WinDLL('kernel32').GetCurrentThreadId()
+            foreground=window.user.GetForegroundWindow()
+            thread=window.user.GetWindowThreadProcessId(foreground,None)
+            attached=thread!=caller and bool(window.user.AttachThreadInput(caller,thread,True))
+            try:
+                window.user.BringWindowToTop(window.handle)
+                assert window.user.SetForegroundWindow(window.handle) or window.user.GetForegroundWindow()==window.handle
+            finally:
+                if attached:window.user.AttachThreadInput(caller,thread,False)
         def mouse(message,x,y,buttons=0,settle=True):
             captured=state()['navigation']['cursorCaptured']
             if captured and message==0x200:
-                assert window.user.SetForegroundWindow(window.handle) or window.user.GetForegroundWindow()==window.handle
+                activate_window()
                 relative=[int(x)-logical_mouse[0],int(y)-logical_mouse[1]]
                 event=Input(0,InputUnion(MouseInput(relative[0],relative[1],0,1,0,0)))
                 assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
@@ -82,6 +92,17 @@ def run(executable, output, workflow):
         def click_widget(identity,settle=True):
             rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
             mouse(0x200,cx-3,cy-3);mouse(0x200,cx,cy);mouse(0x201,cx,cy,1);mouse(0x202,cx,cy,settle=settle)
+        def native_click_widget(identity,settle=True):
+            activate_window()
+            rect=state()['widgets'][identity];point=wintypes.POINT(int(rect[0]+rect[2]/2),int(rect[1]+rect[3]/2))
+            assert window.user.ClientToScreen(window.handle,ctypes.byref(point))
+            assert window.user.SetCursorPos(point.x,point.y);wait(5)
+            for flag in (2,4):
+                event=Input(0,InputUnion(MouseInput(0,0,0,flag,0,0)))
+                assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
+                evidence.append(dict(nativeMouseButton=flag,target=identity,inputSource='Win32 SendInput'))
+                if flag==2:wait(3)
+            if settle:wait(5)
         def double_click_widget(identity):
             rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
             mouse(0x200,cx-3,cy-3);mouse(0x200,cx,cy)
@@ -108,7 +129,8 @@ def run(executable, output, workflow):
         def choose(identity,path=None,via_browse=False):
             pending=None;pool=None
             if via_browse:
-                click_widget('assets.import-create');click_widget(identity,settle=False)
+                activate_window();wait(10)
+                native_click_widget('assets.import-create');native_click_widget(identity,settle=False)
             else:
                 pool=ThreadPoolExecutor(max_workers=1)
                 purpose=identity.split('.')[0]
@@ -152,7 +174,8 @@ def run(executable, output, workflow):
         other='ground' if workflow=='exploration' else 'asset-b'
         before_click=state()['camera'];click_widget('node.'+other)
         assert state()['camera']==before_click,'Outliner single click must only select'
-        wait(80);double_click_widget('node.'+other)
+        # Native click deadlines use wall time, independently of rendering speed.
+        time.sleep(.35);double_click_widget('node.'+other)
         assert state()['camera']!=before_click,'Outliner double click must frame the object'
         mouse(0x200,x,y);mouse(0x204,x,y,2);assert state()['capture']['navigationButton']==1
         assert state()['navigation']['nativeCursorMode']=='disabled' and state()['navigation']['rawMouse']==raw_mouse
@@ -201,7 +224,7 @@ def run(executable, output, workflow):
         choose('project.browse')
         assert call('query',name='document.contentHash')==saved
         post(0x7);window.close();assert process.wait(timeout=30)==0
-        summary=dict(workflow=workflow,passed=True,inputSource='Windows PostMessage + SetCursorPos + captured relative SendInput -> GLFW callbacks',physicalKeyboardMouse='NotExecuted',
+        summary=dict(workflow=workflow,passed=True,inputSource='Windows PostMessage + SetCursorPos + relative and dialog-click SendInput -> GLFW callbacks',physicalKeyboardMouse='NotExecuted',
             dialogOpenSources=['Native Browse button (cancel)','Registered path.choose operation (file/directory selection and cancel)'],
             tools=True,singleOnlySelects=True,doubleFrames=True,fFrames=True,rightLook=True,flight=True,flightRelease=True,outsideRelease=True,focusRelease=True,resize=True,rawMouse=raw_mouse,
             nativeFileChoose=True,nativeDirectoryChoose=True,nativeCancel=True,utf8Path=True,contentPreserved=True)
