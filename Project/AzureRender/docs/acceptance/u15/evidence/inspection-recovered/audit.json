@@ -1,0 +1,27 @@
+{
+  "input": "production ImGui replay and public edit operations",
+  "elapsedSeconds": 1.0630000000001019,
+  "physicalInput": false,
+  "steps": 0,
+  "injectedFailures": 0,
+  "operations": [
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.030999999999039574,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000000858563,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    }
+  ]
+}

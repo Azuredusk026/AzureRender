@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "ActivePreparationGpuAndPhysicalInputPending",
+  "status": "AutomatedAuthoringAndInteractionVerifiedPhysicalInputPending",
   "workflows": [
     "exploration",
     "inspection"
@@ -11,10 +11,10 @@
       "severity": "major",
       "summary": "导航时组合按键触发文档操作",
       "owner": "EditorInputRouter",
-      "status": "CpuContractVerifiedUiPending",
+      "status": "ProductionUiVerifiedPhysicalInputPending",
       "source": "src/editor/input/EditorInputRouter.cpp",
-      "test": "AzureRender.EditorInputRouter",
-      "productionUiVerified": false,
+      "test": "AzureEditor.ViewportNavigationGpu",
+      "productionUiVerified": true,
       "physicalInputVerified": false,
       "acceptance": "docs/acceptance/u16/2026-10-10.md"
     },
@@ -23,10 +23,10 @@
       "severity": "major",
       "summary": "空场景的大纲 Add 缺少有效创建操作",
       "owner": "EditorOperationsAndOutliner",
-      "status": "CpuContractVerifiedUiPending",
+      "status": "ProductionUiVerifiedPhysicalInputPending",
       "source": "src/editor/panels/OutlinerPanel.cpp",
-      "test": "AzureEditor.NodeAddition",
-      "productionUiVerified": false,
+      "test": "AzureEditor.NodeAdditionGpu",
+      "productionUiVerified": true,
       "physicalInputVerified": false,
       "acceptance": "docs/acceptance/u16/2026-10-10.md"
     },
@@ -35,11 +35,12 @@
       "severity": "minor",
       "summary": "无选择时对象操作菜单仍处于启用状态",
       "owner": "OutlinerPanel",
-      "status": "SourceConditionVerifiedUiPending",
+      "status": "ProductionUiVerifiedPhysicalInputPending",
       "source": "src/editor/panels/OutlinerPanel.cpp",
-      "productionUiVerified": false,
+      "productionUiVerified": true,
       "physicalInputVerified": false,
-      "acceptance": "docs/acceptance/u16/2026-10-10.md"
+      "acceptance": "docs/acceptance/u16/2026-10-10.md",
+      "test": "AzureEditor.NodeAdditionGpu"
     },
     {
       "id": "UX-004",
@@ -57,12 +58,51 @@
     }
   ],
   "taskBaseline": {
-    "status": "NotExecuted",
+    "status": "AutomatedProductionTasksVerifiedManualEfficiencyPending",
     "packageHashes": {},
-    "taskTimesSeconds": {},
-    "steps": {},
-    "recoveryResults": {},
-    "efficiencyTargets": {}
+    "taskTimesSeconds": {
+      "exploration": {
+        "create": 2.0,
+        "authoring": 7.625,
+        "reopen": 1.7180000000007567,
+        "recovered": 1.4069999999992433
+      },
+      "inspection": {
+        "create": 1.7189999999991414,
+        "authoring": 5.109000000000378,
+        "reopen": 1.1710000000002765,
+        "recovered": 1.0630000000001019
+      }
+    },
+    "steps": {
+      "exploration": {
+        "create": 1,
+        "authoring": 71,
+        "reopen": 3,
+        "recovered": 0
+      },
+      "inspection": {
+        "create": 1,
+        "authoring": 71,
+        "reopen": 3,
+        "recovered": 0
+      }
+    },
+    "recoveryResults": {
+      "exploration": {
+        "backupRecovery": true,
+        "injectedFailureRecovery": true,
+        "reopenContentPreserved": true
+      },
+      "inspection": {
+        "backupRecovery": true,
+        "injectedFailureRecovery": true,
+        "reopenContentPreserved": true
+      }
+    },
+    "efficiencyTargets": {},
+    "evidence": "docs/acceptance/u15/evidence/manifest.json",
+    "physicalInput": false
   },
   "u15Complete": false,
   "u16Complete": false,

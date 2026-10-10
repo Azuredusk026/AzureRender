@@ -1,0 +1,173 @@
+{
+  "input": "production ImGui replay and public edit operations",
+  "elapsedSeconds": 2.0,
+  "physicalInput": false,
+  "steps": 1,
+  "injectedFailures": 0,
+  "operations": [
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.07799999999951979,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.015000000001236913,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "project.create",
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-1",
+        "commandId": "project.create",
+        "parameters": {
+          "templateId": "game",
+          "destination": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\authoring-audit\\exploration",
+          "name": "P5 exploration"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:edc2cebed16b3aa0",
+          "documentId": "17916470726610370-1",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000000858563,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999962165,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.04700000000048021,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.01599999999962165,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000000858563,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.01599999999962165,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000000858563,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.0930000000007567,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.06300000000010186,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "screenshot",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "label": "p5-exploration-created"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.26599999999962165,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    }
+  ]
+}
