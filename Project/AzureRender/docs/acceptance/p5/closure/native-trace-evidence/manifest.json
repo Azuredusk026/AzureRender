@@ -280,11 +280,6 @@
       "sha256": "bcc4001e30452e9221ec71eb81340ece91e0eb9ab577ba8644cb788a0ccd5444",
       "rawSha256": "bcc4001e30452e9221ec71eb81340ece91e0eb9ab577ba8644cb788a0ccd5444"
     },
-    "native-memory-trace/compiled-ninja/AzureNtTrace.dll": {
-      "bytes": 23040,
-      "sha256": "2fa3f74dab211364ff02c0f54c8f71f6f1f0d6cd17c6c3418476eff430859ec3",
-      "rawSha256": "2fa3f74dab211364ff02c0f54c8f71f6f1f0d6cd17c6c3418476eff430859ec3"
-    },
     "native-memory-trace/minhook/LICENSE.txt": {
       "bytes": 4446,
       "sha256": "4f21f857550d7be854da6ea5f2da4e6775ca4e3fbb535e4f3d961c47d0bf3335",
@@ -379,6 +374,11 @@
       "bytes": 51679,
       "sha256": "d02df7bd652da780ab2984eda33cbc92482798fd74ce8d63884a23e27212bb06",
       "rawSha256": "ffcfed2d03b531cef1b2fb3ade18427951379ad2c586891ff4e863d4c3f9f8ab"
+    },
+    "native-memory-trace/compiled-ninja/AzureNtTrace.dll.gz": {
+      "bytes": 12086,
+      "sha256": "8844e6024739da6a86051fb0c85dc6aecf384bc0943967ff0bac5c873427777e",
+      "rawSha256": "2fa3f74dab211364ff02c0f54c8f71f6f1f0d6cd17c6c3418476eff430859ec3"
     }
   }
 }
