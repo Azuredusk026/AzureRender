@@ -1,0 +1,449 @@
+{
+  "byClass": {
+    "privateUnattributed": 22917120,
+    "mapped": 16384,
+    "image": 3383296
+  },
+  "regions": [
+    {
+      "allocation": 2541682425856,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 8056832,
+      "afterResidentBytes": 16416768,
+      "changeBytes": 8359936,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2540028624896,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 23912448,
+      "afterResidentBytes": 29528064,
+      "changeBytes": 5615616,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541647036416,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 2228224,
+      "changeBytes": 2228224,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541560987648,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 2097152,
+      "changeBytes": 2097152,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541699006464,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 1536000,
+      "changeBytes": 1536000,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541569900544,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 1384448,
+      "changeBytes": 1384448,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140697480396800,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+      "beforeResidentBytes": 3809280,
+      "afterResidentBytes": 4866048,
+      "changeBytes": 1056768,
+      "category": "image"
+    },
+    {
+      "allocation": 140734568529920,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\rmlui.dll",
+      "beforeResidentBytes": 188416,
+      "afterResidentBytes": 1134592,
+      "changeBytes": 946176,
+      "category": "image"
+    },
+    {
+      "allocation": 2539986354176,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 15183872,
+      "afterResidentBytes": 16011264,
+      "changeBytes": 827392,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541518585856,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 491520,
+      "changeBytes": 491520,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140704386842624,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+      "beforeResidentBytes": 9478144,
+      "afterResidentBytes": 9879552,
+      "changeBytes": 401408,
+      "category": "image"
+    },
+    {
+      "allocation": 140735308693504,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\freetype.dll",
+      "beforeResidentBytes": 45056,
+      "afterResidentBytes": 303104,
+      "changeBytes": 258048,
+      "category": "image"
+    },
+    {
+      "allocation": 140705836498944,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+      "beforeResidentBytes": 2760704,
+      "afterResidentBytes": 2936832,
+      "changeBytes": 176128,
+      "category": "image"
+    },
+    {
+      "allocation": 140734504370176,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+      "beforeResidentBytes": 5853184,
+      "afterResidentBytes": 6017024,
+      "changeBytes": 163840,
+      "category": "image"
+    },
+    {
+      "allocation": 702816452608,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 12288,
+      "afterResidentBytes": 110592,
+      "changeBytes": 98304,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 702843715584,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 12288,
+      "afterResidentBytes": 110592,
+      "changeBytes": 98304,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140706007285760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+      "beforeResidentBytes": 688128,
+      "afterResidentBytes": 770048,
+      "changeBytes": 81920,
+      "category": "image"
+    },
+    {
+      "allocation": 702838472704,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 12288,
+      "afterResidentBytes": 73728,
+      "changeBytes": 61440,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140705881391104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+      "beforeResidentBytes": 708608,
+      "afterResidentBytes": 757760,
+      "changeBytes": 49152,
+      "category": "image"
+    },
+    {
+      "allocation": 140705515765760,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+      "beforeResidentBytes": 827392,
+      "afterResidentBytes": 868352,
+      "changeBytes": 40960,
+      "category": "image"
+    },
+    {
+      "allocation": 702805966848,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 299008,
+      "afterResidentBytes": 331776,
+      "changeBytes": 32768,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140704839172096,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+      "beforeResidentBytes": 1368064,
+      "afterResidentBytes": 1400832,
+      "changeBytes": 32768,
+      "category": "image"
+    },
+    {
+      "allocation": 140706053226496,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+      "beforeResidentBytes": 712704,
+      "afterResidentBytes": 745472,
+      "changeBytes": 32768,
+      "category": "image"
+    },
+    {
+      "allocation": 140706004598784,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+      "beforeResidentBytes": 856064,
+      "afterResidentBytes": 880640,
+      "changeBytes": 24576,
+      "category": "image"
+    },
+    {
+      "allocation": 140706054602752,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+      "beforeResidentBytes": 1216512,
+      "afterResidentBytes": 1241088,
+      "changeBytes": 24576,
+      "category": "image"
+    },
+    {
+      "allocation": 2538325671936,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 331776,
+      "afterResidentBytes": 352256,
+      "changeBytes": 20480,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140705321910272,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140.dll",
+      "beforeResidentBytes": 65536,
+      "afterResidentBytes": 86016,
+      "changeBytes": 20480,
+      "category": "image"
+    },
+    {
+      "allocation": 140705904197632,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+      "beforeResidentBytes": 765952,
+      "afterResidentBytes": 786432,
+      "changeBytes": 20480,
+      "category": "image"
+    },
+    {
+      "allocation": 2541664731136,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 16384,
+      "changeBytes": 16384,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 702805835776,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 12288,
+      "changeBytes": 12288,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 702844764160,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 12288,
+      "changeBytes": 12288,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 702845812736,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 12288,
+      "changeBytes": 12288,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 702846861312,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 12288,
+      "changeBytes": 12288,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140705359265792,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\vcruntime140_1.dll",
+      "beforeResidentBytes": 32768,
+      "afterResidentBytes": 45056,
+      "changeBytes": 12288,
+      "category": "image"
+    },
+    {
+      "allocation": 140737017741312,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\lua.dll",
+      "beforeResidentBytes": 192512,
+      "afterResidentBytes": 204800,
+      "changeBytes": 12288,
+      "category": "image"
+    },
+    {
+      "allocation": 2541430046720,
+      "kind": 262144,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 4096,
+      "changeBytes": 4096,
+      "category": "mapped"
+    },
+    {
+      "allocation": 2541637730304,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 4096,
+      "changeBytes": 4096,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 2541637795840,
+      "kind": 262144,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 4096,
+      "changeBytes": 4096,
+      "category": "mapped"
+    },
+    {
+      "allocation": 2541637861376,
+      "kind": 262144,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 4096,
+      "changeBytes": 4096,
+      "category": "mapped"
+    },
+    {
+      "allocation": 2541638189056,
+      "kind": 262144,
+      "path": "",
+      "beforeResidentBytes": 0,
+      "afterResidentBytes": 4096,
+      "changeBytes": 4096,
+      "category": "mapped"
+    },
+    {
+      "allocation": 2541758906368,
+      "kind": 131072,
+      "path": "",
+      "beforeResidentBytes": 4096,
+      "afterResidentBytes": 0,
+      "changeBytes": -4096,
+      "category": "privateUnattributed"
+    },
+    {
+      "allocation": 140705824047104,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+      "beforeResidentBytes": 1257472,
+      "afterResidentBytes": 1261568,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140705892204544,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+      "beforeResidentBytes": 90112,
+      "afterResidentBytes": 94208,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140706044379136,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cfgmgr32.dll",
+      "beforeResidentBytes": 188416,
+      "afterResidentBytes": 192512,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140706053029888,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\win32u.dll",
+      "beforeResidentBytes": 122880,
+      "afterResidentBytes": 126976,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140706070724608,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+      "beforeResidentBytes": 786432,
+      "afterResidentBytes": 790528,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140706074984448,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\imm32.dll",
+      "beforeResidentBytes": 94208,
+      "afterResidentBytes": 98304,
+      "changeBytes": 4096,
+      "category": "image"
+    },
+    {
+      "allocation": 140706093268992,
+      "kind": 16777216,
+      "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+      "beforeResidentBytes": 208896,
+      "afterResidentBytes": 212992,
+      "changeBytes": 4096,
+      "category": "image"
+    }
+  ],
+  "netResidentChangeBytes": 26316800,
+  "allocationOwnershipProven": false,
+  "allocationReleaseProof": [],
+  "diagnosticOnly": true,
+  "source": "prior LLDB residency capture",
+  "baselineSeconds": 40.016000000000076,
+  "peakSeconds": 79.25,
+  "rootCauseConfirmed": false
+}

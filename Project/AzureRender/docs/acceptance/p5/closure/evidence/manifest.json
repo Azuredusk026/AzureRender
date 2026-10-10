@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "phaseComplete": false,
+  "p5Complete": false,
+  "rootCauseConfirmed": false,
+  "gpuMeasurementExecuted": false,
+  "physicalInputExecuted": false,
+  "subjectiveAudioExecuted": false,
+  "files": {
+    "p5-a-red.log": {
+      "sha256": "682e4b0df815ab93c32a1baf5eb76c6ebb782dd3a1b81164a1c8d6b998f07058",
+      "bytes": 272
+    },
+    "p5-a-green.log": {
+      "sha256": "decb609ccb72c6c0afba61dd87a35251b34c9744582a26e1cc4317436f85d13e",
+      "bytes": 111
+    },
+    "p5-a-historical-classification.json": {
+      "sha256": "316cc9967bf14fbb333a2523db210d6b18a9acd3f83dbf2373c605ca776f51be",
+      "bytes": 5779
+    },
+    "p5-a-cpu-debug.log": {
+      "sha256": "0e193475658d69de2b3e808d81bda9f0accd10316ac31147e8edfa610a870002",
+      "bytes": 20883
+    },
+    "p5-a-cpu-release.log": {
+      "sha256": "eeab264b0381e02fd989ae11551913f032667d96bd805068948837137eb3c1f1",
+      "bytes": 20887
+    },
+    "p5-a-live-editor.log": {
+      "sha256": "01f41b764997a2c7b5e75bdacb290ade86ea91213c8e27e6a249e6bd88cd4833",
+      "bytes": 171
+    },
+    "p5-b-red.log": {
+      "sha256": "c5f2a9e92dfd0b59bfdc766c768e4b2f830b8cc3149d01eaccb34f3203bbaae0",
+      "bytes": 285
+    },
+    "p5-b-final-tests.log": {
+      "sha256": "b952dcfedeb098924df82657c0a7eaafc54599572fb5786304cccc5bc23a2a67",
+      "bytes": 109
+    },
+    "p5-b-historical-residency-analysis.json": {
+      "sha256": "cfdae7cd4310870280c7e1a76fdfc25750f4b185aa90f2b3d39b6fa5ab69d184",
+      "bytes": 13337
+    },
+    "p5-b-live-self-test-final/self-test.json": {
+      "sha256": "57b724e7bb4945916aa0fe8a45e62a29c6cc61563ee89298ef1d935380893251",
+      "bytes": 34761
+    },
+    "p5-b-owned-child-retest/residency.json": {
+      "sha256": "f9ba0a57641e1b113b9a5be7251a6cb991e3c53623e20fa0a16ea6c03edb3f84",
+      "bytes": 33126
+    },
+    "p5-b-owned-timeout/residency.json": {
+      "sha256": "eb58dd4756e1fb7559e34495d10afb95d42cb10584b7348d6632c14d785dc30f",
+      "bytes": 4334
+    },
+    "p5-b-symbol-lookup.log": {
+      "sha256": "8e581f23d0df7c3c7d8717f9a497e0f109e8d29cdce644dd169698cc0488f798",
+      "bytes": 2815
+    }
+  }
+}

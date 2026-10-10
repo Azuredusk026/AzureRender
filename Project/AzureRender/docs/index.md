@@ -155,3 +155,7 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 平台跳跃与连续通关见[平台关卡](runtime/platformer-gameplay.md)。
 
 产品化验收与人工操作记录见[P5 验收](acceptance/p5/2026-10-10.md)。
+
+后续执行步骤见[P5 收口与用户体验计划](plans/2026-10-10-p5-closure-and-user-experience.md)。
+路线先完成性能与人工门禁，再推进制作体验优化。
+计划状态为 Active，验收状态按阶段证据维护。
