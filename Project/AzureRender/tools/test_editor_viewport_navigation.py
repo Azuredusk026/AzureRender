@@ -8,6 +8,14 @@ def run(executable,output):
     shutil.copytree(Path(__file__).resolve().parents[1]/'assets_public/scene_inspector',output/'game',ignore=shutil.ignore_patterns('.azure'))
     baseline=launch(executable,output,'baseline',(1280,720),1,capture=False)
     held=[dict(frame=21,action='mouse',target='viewport.image',button='right',down=False),dict(frame=25,action='mouse',target='viewport.image',button='right',down=True)]
+    for key in ('D','S','Z','Y'):
+        modified=launch(executable,output,'held-control-'+key,(1280,720),1,held+[
+            dict(frame=30,action='key',key=key,down=True,ctrl=True),
+            dict(frame=31,action='key',key=key,down=False,ctrl=True),
+            dict(frame=32,action='key',key=key,down=False,ctrl=False),
+            dict(frame=35,action='mouse',target='viewport.image',button='right',down=False)],capture=False)
+        assert modified['undoCount']==baseline['undoCount'],'Navigation must preserve document history'
+        assert modified['feedback']==[],'Navigation must not route document shortcuts'
     actions=held+[dict(frame=30,action='wheel',y=2),dict(frame=36,action='key',key='Escape',down=True),dict(frame=37,action='key',key='Escape',down=False),dict(frame=40,action='mouse',target='viewport.image',button='right',down=False)]
     wheel=launch(executable,output,'flight-wheel',(1280,720),1,actions,capture=False)
     assert wheel['camera']==baseline['camera'],'Held RMB wheel must adjust speed without dollying camera'

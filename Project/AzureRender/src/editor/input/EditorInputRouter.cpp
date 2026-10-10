@@ -10,7 +10,7 @@ EditorInputResult EditorInputRouter::route(const EditorInputEvent& input,const s
     if(!e.pressed || e.text || e.modal)return {};
     if(e.ctrl) {
         if(e.key=="P")return {true,e.playing?"preview.stop":"preview.play",-1};
-        if(e.playing || e.building)return {};
+        if(e.navigating || e.playing || e.building)return {};
         if(e.key=="S")return {true,"document.save",-1};
         if(e.key=="Z")return {true,"history.undo",-1};
         if(e.key=="Y")return {true,"history.redo",-1};

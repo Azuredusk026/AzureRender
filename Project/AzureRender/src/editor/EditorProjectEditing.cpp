@@ -91,10 +91,11 @@ void EditorContext::placeResource(const std::string& resource,const std::string&
     if(!attach.empty()){scene_.resources.push_back({reference,"gltf",attach});resourceReferences_[attach]=reference;}
     SceneNode node;node.id=id;node.name="Placed Object";node.resourceId=reference;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }
-void EditorContext::createNode(const std::string& requestedId){
+void EditorContext::createNode(const std::string& requestedId,const std::string& parentId){
     const auto nodeId=requestedId.empty()?identity("node-"):requestedId;
     if(nodeId.empty() || nodeId.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==nodeId;}))throw std::invalid_argument("Duplicate or invalid node identity: "+nodeId);
-    beginEdit();SceneNode node;node.id=nodeId;node.name=nodeId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+    if(!parentId.empty()&&std::none_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==parentId;}))throw std::invalid_argument("Unknown parent: "+parentId);
+    beginEdit();SceneNode node;node.id=nodeId;node.name=nodeId;node.parentId=parentId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }
 void EditorContext::placePrefab(const std::string& asset,const std::string& instance){
     if(!assets_)throw std::logic_error("Prefab placement requires a project");

@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start   7: AzureTools.MemoryResidency
+1/4 Test   #7: AzureTools.MemoryResidency .......   Passed    0.60 sec
+    Start 141: AzureEditor.NodeAddition
+2/4 Test #141: AzureEditor.NodeAddition .........   Passed    0.09 sec
+    Start 142: AzureEditor.SelectionService
+3/4 Test #142: AzureEditor.SelectionService .....   Passed    0.03 sec
+    Start 146: AzureRender.EditorInputRouter
+4/4 Test #146: AzureRender.EditorInputRouter ....   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.74 sec

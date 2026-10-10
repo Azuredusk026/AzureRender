@@ -47,7 +47,7 @@ public:
     std::optional<std::string> pollImport();
     void placeResource(const std::string& resource, const std::string& nodeId = {});
     void placeAssetAt(const std::string& asset,const std::array<float,3>& position);
-    void createNode(const std::string& nodeId);
+    void createNode(const std::string& nodeId,const std::string& parentId={});
     void placePrefab(const std::string& asset, const std::string& instance);
     void previewAnimation(const std::string& state, double time, const std::string& previous = {}, double crossfade = 0);
     NodeAnimationFrame animationPose(const std::string& node,const std::string& state,double time,const std::string& previous={},double crossfade=0) const;

@@ -1,39 +1,59 @@
 {
   "schemaVersion": 1,
   "status": "ActivePreparationGpuAndPhysicalInputPending",
-  "workflows": ["exploration", "inspection"],
+  "workflows": [
+    "exploration",
+    "inspection"
+  ],
   "issues": [
     {
       "id": "UX-001",
       "severity": "major",
       "summary": "导航时组合按键触发文档操作",
       "owner": "EditorInputRouter",
-      "status": "ReproducedCpuFixUnderVerification",
+      "status": "CpuContractVerifiedUiPending",
       "source": "src/editor/input/EditorInputRouter.cpp",
       "test": "AzureRender.EditorInputRouter",
       "productionUiVerified": false,
-      "physicalInputVerified": false
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/u16/2026-10-10.md"
     },
     {
       "id": "UX-002",
       "severity": "major",
       "summary": "空场景的大纲 Add 缺少有效创建操作",
       "owner": "EditorOperationsAndOutliner",
-      "status": "ConfirmedSourceFixUnderVerification",
+      "status": "CpuContractVerifiedUiPending",
       "source": "src/editor/panels/OutlinerPanel.cpp",
       "test": "AzureEditor.NodeAddition",
       "productionUiVerified": false,
-      "physicalInputVerified": false
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/u16/2026-10-10.md"
     },
     {
       "id": "UX-003",
       "severity": "minor",
       "summary": "无选择时对象操作菜单仍处于启用状态",
       "owner": "OutlinerPanel",
-      "status": "ConfirmedSourceUiVerificationPending",
+      "status": "SourceConditionVerifiedUiPending",
       "source": "src/editor/panels/OutlinerPanel.cpp",
       "productionUiVerified": false,
-      "physicalInputVerified": false
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/u16/2026-10-10.md"
+    },
+    {
+      "id": "UX-004",
+      "severity": "performance",
+      "summary": "Debug 内容目录取消存在超预算观察",
+      "owner": "ContentDirectoryModel",
+      "status": "OriginalFailureRetainedIsolatedRecheckPassedCausePending",
+      "source": "src/editor/content/ContentDirectoryModel.cpp",
+      "test": "AzureEditor.ContentDirectoryScale",
+      "productionUiVerified": false,
+      "physicalInputVerified": false,
+      "budgetMilliseconds": 100,
+      "firstObservedMilliseconds": 104.2468,
+      "isolatedMilliseconds": 89.2848
     }
   ],
   "taskBaseline": {
@@ -43,5 +63,9 @@
     "steps": {},
     "recoveryResults": {},
     "efficiencyTargets": {}
-  }
+  },
+  "u15Complete": false,
+  "u16Complete": false,
+  "p6Complete": false,
+  "p6Acceptance": "docs/acceptance/p6/2026-10-10.md"
 }

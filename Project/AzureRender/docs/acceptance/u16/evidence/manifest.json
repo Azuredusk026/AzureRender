@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "u16Complete": false,
+  "p6Complete": false,
+  "cpuContractsVerified": [
+    "UX-001",
+    "UX-002"
+  ],
+  "uiSourceConditionReviewed": [
+    "UX-003"
+  ],
+  "gpuExecuted": false,
+  "physicalInputExecuted": false,
+  "subjectiveAudioExecuted": false,
+  "files": {
+    "u16-input-red.log": {
+      "sha256": "3fccf53ec62ef5a3e7001f2a6699399113a4533b391ec9c9af4a38d4434610f3",
+      "bytes": 554
+    },
+    "u16-green-release-retest.log": {
+      "sha256": "7bc435a0e51ffc80ff79300b2639789ff7952c24f35cef2b946ec0f75572fb20",
+      "bytes": 737
+    },
+    "u16-green-debug.log": {
+      "sha256": "e7c5cd8e4c559aebcb78ea77475d26df0af0fa73dca5ddb41cebeafd120ae874",
+      "bytes": 733
+    },
+    "final-build-release.log": {
+      "sha256": "809e8c7f3b6312ce8e4ba238ad05f6c3f6bdff63de167054f7e55f2510404a90",
+      "bytes": 8339
+    },
+    "final-build-debug.log": {
+      "sha256": "0b73731908da299eec17238e0fb3bdd7aa75e8edc40e134ebac42f3e62f9143d",
+      "bytes": 8335
+    },
+    "final-cpu-debug.log": {
+      "sha256": "9b46257115cfa55d4732a0b119d219b291e4294c08b608a43990a3dda54db26e",
+      "bytes": 21536
+    },
+    "final-cpu-release.log": {
+      "sha256": "68df1e369636a1c9ae55d9ec6adedc41f87282ff94d4fb990e2bbd06a9108322",
+      "bytes": 21288
+    },
+    "content-scale-isolated-debug.log": {
+      "sha256": "ac1b5e2b6ba1ae4b2c685f2362a02b285cfec23523cac94249e82fb91ae65946",
+      "bytes": 395
+    },
+    "content-scale-isolated-debug-detail.log": {
+      "sha256": "0a18fc47a2e5c518bcab8e32b6b1640b3c1aec2a9cf6f51a2a6786c60a7df20a",
+      "bytes": 1273
+    },
+    "final-serial-cpu-debug.log": {
+      "sha256": "251c077a312fc063a4239c2a6e5cc25edfe1c47cb9ba2a60491e501657a2b1b2",
+      "bytes": 21284
+    },
+    "final-doc-build-debug.log": {
+      "sha256": "041db99a054d2e4ce764b3603a5326352f47b497b126d791f04cea2cd46cdc4e",
+      "bytes": 5527
+    },
+    "final-doc-build-release.log": {
+      "sha256": "12427c365afcb3679cc20fe11a3af0e521e36a6a8ee4141b6af044137b3cfa6d",
+      "bytes": 5533
+    }
+  },
+  "cpuRuns": [
+    {
+      "configuration": "Debug",
+      "file": "final-cpu-debug.log",
+      "passed": false,
+      "total": 158,
+      "failed": [
+        "AzureEditor.ContentDirectoryScale"
+      ]
+    },
+    {
+      "configuration": "Debug",
+      "file": "content-scale-isolated-debug.log",
+      "passed": true,
+      "total": 1
+    },
+    {
+      "configuration": "Release",
+      "file": "final-cpu-release.log",
+      "passed": true,
+      "total": 158
+    },
+    {
+      "configuration": "Debug",
+      "file": "final-serial-cpu-debug.log",
+      "passed": true,
+      "total": 158,
+      "serialBetweenConfigurations": true
+    }
+  ],
+  "sourceHashes": {
+    "src/editor/input/EditorInputRouter.cpp": "2f1faa5a5c891b68a5ac17cb0ec27b2fc651bb73f419b728e07faabc10856d02",
+    "src/editor/EditorContext.hpp": "ec19a4964137573925dae11addd5eaf42a2fe96617191e93b965d4106235083d",
+    "src/editor/EditorProjectEditing.cpp": "c249fbc52cd4b7d9b8fc6d7c0c6ae196b2870212d41bfd5d1528345bd0684963",
+    "src/editor/commands/EditorOperations.cpp": "7e20758f722c3ee3b9bed1247784b7f180cf9a95357fc648fd4420fa7f47932f",
+    "src/editor/panels/OutlinerPanel.cpp": "c95153c921ba425f4fecca582d28dccd77a4c4e4456b0df28488eff62c2bdcc0",
+    "tests/EditorInputRouterTests.cpp": "890db97d2d837515d7651d85166482a78d72fde5af18d2ffc0c81e40da6a2c03",
+    "tests/EditorNodeAdditionTests.cpp": "a37a07979f9da667bd46d7a06ca523c7ab028cc27e23d6601afcd0261597e264",
+    "tools/test_editor_viewport_navigation.py": "132fe7b5da0245376d576c25e13dc1783e5791429704cf868b7d04fd8013d29a"
+  },
+  "cpuRegressionPassed": true,
+  "directoryCancellationTimingRiskRetained": true
+}

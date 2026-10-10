@@ -1,2 +1,3 @@
 docs/acceptance/p5/evidence/** -text -whitespace
 docs/acceptance/p5/closure/evidence/** -text -whitespace
+docs/acceptance/u16/evidence/** -text -whitespace

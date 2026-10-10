@@ -31,7 +31,7 @@
 
 | 操作组 | 操作标识 | 主要参数 |
 | --- | --- | --- |
-| 节点创建 | `node.create`、`node.child` | `id` 或 `parent` |
+| 节点创建 | `node.create`、`node.child`、`node.add` | `id`、`parent` 或当前选择 |
 | 资产放置 | `node.place`、`prefab.place` | `resource`，或 `asset` 与 `instance` |
 | 节点属性 | `node.rename`、`node.visible` | `value` |
 | 实例关系 | `node.prefab-source`、`node.instance` | `value` |
@@ -69,6 +69,12 @@
 参数模式检查类型、必填字段与未知字段。
 数值必须有限，数组与文本具有大小上限。
 文件与纹理流程见[内容事务](content-transactions.md)。
+
+`node.add` 使用空参数，并读取当前选择。
+有选择时创建空子节点，无选择时创建空根节点。
+创建完成后选择新节点，并形成一次撤销记录。
+大纲 Add 按钮与自动工具调用同一操作。
+
 组件属性继续使用运行时类型契约。
 渲染、层级、引用与变换使用领域校验。
 

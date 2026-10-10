@@ -20,5 +20,14 @@ int main(){
     if(EditorInputRouter::route(event).operation!="preview.stop")return 12;
     event.ctrl=false;event.key="F";if(EditorInputRouter::route(event).operation!="viewport.frame-selection")return 13;
     event.key="W";if(EditorInputRouter::route(event).consumed)return 14;
+    event.playing=false;event.simulating=false;event.navigating=true;event.ctrl=true;
+    for(const auto* key:{"D","S","Z","Y"}) {
+        event.key=key;
+        if(EditorInputRouter::route(event).consumed){std::cerr<<"Navigation owns modified movement and document keys: "<<key<<'\n';return 15;}
+    }
+    event.key="P";event.playing=true;
+    if(EditorInputRouter::route(event).operation!="preview.stop")return 16;
+    event.navigating=false;event.playing=false;event.key="D";
+    if(EditorInputRouter::route(event).operation!="node.duplicate")return 17;
     return 0;
 }

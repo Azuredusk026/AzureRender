@@ -1229,5 +1229,30 @@
         "longRun"
       ]
     }
+  },
+  "closureProgress": {
+    "plan": "docs/plans/2026-10-10-p5-closure-and-user-experience.md",
+    "status": "Active",
+    "p5Complete": false,
+    "p6Complete": false,
+    "rootCauseConfirmed": false,
+    "gpuMeasurementsExecuted": false,
+    "physicalInputExecuted": false,
+    "subjectiveAudioExecuted": false,
+    "toolsVerified": [
+      "strictPerformanceBudget",
+      "residencyClassification",
+      "returnedVirtualAllocationCalls"
+    ],
+    "interactionCpuVerified": [
+      "navigationShortcutOwnership",
+      "contextualNodeAddition"
+    ],
+    "uiVerificationPending": [
+      "UX-001",
+      "UX-002",
+      "UX-003"
+    ],
+    "gpuSchedule": "User requested keeping the game running and completing other work first"
   }
 }

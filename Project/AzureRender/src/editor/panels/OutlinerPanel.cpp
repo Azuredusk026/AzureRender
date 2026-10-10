@@ -31,19 +31,14 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     outlinerFilter_.Draw("##Search objects",-1);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
     if (ui::button("Add")) {
-        if (!nodes.empty()) {
-            try {
-                session_->edit("node.child",{{"parent",view.selectedNodeIndex()}});
-            } catch (const std::exception& exception) {
-                session_->log(std::string("ERROR: ") + exception.what());
-            }
-        }
+        session_->edit("node.add");
     }
+    observeWidget("outliner.add");
     ImGui::SameLine();
     if(ui::button("Actions"))ImGui::OpenPopup("Node actions");
     if(ImGui::BeginPopup("Node actions")) {
-        if(ImGui::MenuItem("Delete",nullptr,false,!nodes.empty()))session_->edit("node.delete");
-        if(ImGui::MenuItem("Duplicate",nullptr,false,!nodes.empty()))session_->edit("node.duplicate");
+        if(ImGui::MenuItem("Delete",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.delete");
+        if(ImGui::MenuItem("Duplicate",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.duplicate");
         ImGui::EndPopup();
     }
     if (nodes.empty()) {

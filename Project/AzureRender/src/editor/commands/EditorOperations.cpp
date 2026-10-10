@@ -61,6 +61,10 @@ EditRegistry editorOperations(EditorSession& session) {
     document("material.assign",schema({{"nodes",{{"type","array"},{"items",text}}},{"slotId",text},{"material",text}},{"nodes","slotId","material"}),[&session](auto& context,const auto& args){MaterialEditingService::assign(context,args.at("nodes").template get<std::vector<std::string>>(),args.at("slotId").template get<std::string>(),args.at("material").template get<std::string>());session.assetReloadRequested_=true;});
     document("material.reset-slot",schema({{"nodes",{{"type","array"},{"items",text}}},{"slotId",text}},{"nodes","slotId"}),[&session](auto& context,const auto& args){MaterialEditingService::assign(context,args.at("nodes").template get<std::vector<std::string>>(),args.at("slotId").template get<std::string>(),{});session.assetReloadRequested_=true;});
     document("node.create",schema({{"id",text}}),[](auto& c,const auto& a) { c.createNode(a.value("id",std::string())); });
+    document("node.add",schema(),[](auto& c,const auto&) {
+        const auto parent=c.selectedNode()?c.selectedNode()->id:std::string();
+        c.createNode(std::string(),parent);
+    });
     registry.add({"node.presets",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.nodePresets().describe();});
     document("node.create-preset",schema({{"preset",text},{"id",text}},{"preset"}),[&session](auto& c,const auto& a){session.nodePresets().create(c,a.at("preset").template get<std::string>(),a.value("id",std::string()));});
     document("node.rename",schema({{"value",text}},{"value"}),[](auto& c,const auto& a) {
