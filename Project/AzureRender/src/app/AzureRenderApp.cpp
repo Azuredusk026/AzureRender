@@ -503,6 +503,7 @@ void AzureRenderApp::buildRenderContext(
     context.screenAttachmentSampler = screenAttachmentSampler_;
     context.shadowFormat = shadowFormat_;
     context.shadowRenderPass = shadowRenderPass_;
+    context.shadowImage = shadowImage_.image;
     context.shadowFramebuffer = shadowFramebuffer_;
     context.shadowImageView = shadowImageView_;
     context.shadowSampler = shadowSampler_;

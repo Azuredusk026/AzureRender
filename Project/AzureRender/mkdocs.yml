@@ -57,6 +57,8 @@ nav:
   - 着色模块与共享类型: runtime/shader-modules.md
   - 着色模块对照教程: tutorials/shader-modules.md
   - 架构调研:
+      - 探索路线与环境制作: runtime/exploration-environment.md
+      - G15 探索体验验收: acceptance/g15/2026-10-10.md
       - 视口导航与辅助显示: runtime/viewport-navigation.md
       - 独立模拟与物理制作: runtime/physics-authoring.md
       - 文档与内容制作工作流: runtime/authoring-workflows.md

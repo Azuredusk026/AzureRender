@@ -154,7 +154,7 @@ std::vector<RecordedCall> runFrame(
     std::string error;
     if (!graph.compile(error)) throw std::runtime_error(error);
     const std::size_t expectedPasses =
-        3 + (computeSkinning ? 2 : 0);
+        4 + (computeSkinning ? 2 : 0);
     if (graph.passes().size() != expectedPasses) {
         throw std::runtime_error("Character registered an unexpected pass count");
     }
@@ -176,7 +176,7 @@ std::vector<RecordedCall> runFrame(
     graph.execute(&recorder);
     if(runtimeMutation==5&&counters.visibleInstances!=32)
         throw std::runtime_error("Spawned instances must grow every in-flight pose slice and remain visible");
-    if(runtimeMutation==4&&(countCalls(recorder.calls,"dispatch")!=2
+    if(runtimeMutation==4&&(countCalls(recorder.calls,"dispatch")!=3
         || std::none_of(recorder.calls.begin(),recorder.calls.end(),
             [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})))
         throw std::runtime_error("Frozen skinning dispatches changed after preparing another frame");
@@ -206,7 +206,7 @@ std::vector<RecordedCall> runFrame(
 
 }  // namespace
 
-int main() {
+int main() try {
 #undef assert
 #define assert(condition) do { if (!(condition)) { std::cerr << "Check failed: " << #condition << '\n'; return 1; } } while (false)
 #ifdef _WIN32
@@ -236,6 +236,7 @@ int main() {
              "background.frag.spv",
              "background_bindless.frag.spv",
              "shadow.vert.spv",
+             "shadow_bounds.comp.spv",
              "mesh_compute.vert.spv",
              "outline_compute.vert.spv",
              "shadow_compute.vert.spv",
@@ -317,7 +318,7 @@ int main() {
         }
     }
     assert(cascadeViewports.size() == 4);
-    assert(countCalls(legacy, "setScissor") == 7);
+    assert(countCalls(legacy, "setScissor") == 6);
 
     // Both modes record shadow pass + main pass.
     assert(countCalls(legacy, "beginRenderPass") == 3);
@@ -353,7 +354,7 @@ int main() {
     // Bindless binds once per pass; the fixed tables bind per primitive.
     const std::size_t legacyBinds = countCalls(legacy, "bindDescriptorSet");
     const std::size_t bindlessBinds = countCalls(bindless, "bindDescriptorSet");
-    assert(bindlessBinds == 4);
+    assert(bindlessBinds == 3);
     assert(legacyBinds > bindlessBinds);
 
     // Four loaded materials require 35 textures, two snapshot samplers and four other fragment
@@ -399,7 +400,7 @@ int main() {
     // Deformation is required by the union of main and shadow views.
     // Models outside every consuming view must not issue skinning work.
     const auto hiddenDeformation = runFrame(true, shaderDirectory, true, true, true, true);
-    if (countCalls(hiddenDeformation, "dispatch") != 1) {
+    if (countCalls(hiddenDeformation, "dispatch") != 2) {
         std::cerr << "Invisible non-casters still issue compute skinning work\n";
         return 20;
     }
@@ -410,12 +411,12 @@ int main() {
     const auto batchedDeformation = runFrame(true, shaderDirectory, true, false, false, true, 0, false, true);
     const auto batch = std::find_if(batchedDeformation.begin(), batchedDeformation.end(),
         [](const auto& call) { return call.name == "dispatch" && call.detail == "6x32x1"; });
-    if (batch == batchedDeformation.end() || countCalls(batchedDeformation, "dispatch") != 2) {
+    if (batch == batchedDeformation.end() || countCalls(batchedDeformation, "dispatch") != 3) {
         std::cerr << "Contiguous pose slices must share a two-dimensional skinning dispatch\n";
         return 22;
     }
     const auto fullDeformation = runFrame(true, shaderDirectory, false, true, true, true);
-    if (countCalls(fullDeformation, "dispatch") != 2
+    if (countCalls(fullDeformation, "dispatch") != 3
         || std::none_of(fullDeformation.begin(),fullDeformation.end(),
             [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})) {
         std::cerr << "Disabling culling must restore both deformation slices\n";
@@ -455,10 +456,10 @@ int main() {
         return 1;
     }
     const std::size_t skinDispatches = countCalls(computeSkinning, "dispatch");
-    if (skinDispatches != 2
+    if (skinDispatches != 3
         || std::none_of(computeSkinning.begin(),computeSkinning.end(),
             [](const auto& call){return call.name=="dispatch"&&call.detail=="6x2x1";})) {
-        std::cerr << "Expected one skinning batch with two slices and one culling dispatch, got "
+        std::cerr << "Expected skinning, culling and shadow bounds dispatches, got "
                   << skinDispatches << '\n';
         return 2;
     }
@@ -493,4 +494,4 @@ int main() {
         }
     } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 19;}
     return 0;
-}
+}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

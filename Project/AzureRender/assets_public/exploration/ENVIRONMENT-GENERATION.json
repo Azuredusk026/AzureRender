@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "generator": "azure.exploration-environment",
+  "version": 1,
+  "seed": 260910,
+  "license": "CC0-1.0",
+  "blender": "4.2.22 LTS",
+  "inputs": {
+    "generate_exploration_environment.py": "e5f1bdce28e8532abd1bee7c5ff765c54af5b7e930a12c720e76486578c0da39",
+    "blender_exploration_environment.py": "1632bb508b5907a5a0a377f3937c41ed58b5f5822a82ee6bbbdc6666efcc9ef5"
+  },
+  "outputs": {
+    "assets/environment/arch.glb": "7633ede1c17880a63b59306cec9778adecc0abf897236ef8594c7f437e6dd025",
+    "assets/environment/blender-version.txt": "f99607f24ed356f458cdad9f1b5ecb0771fc1570dc4ccdb400e09734a410cea5",
+    "assets/environment/branch.glb": "e4316ec4a0d0e7ac94c515d1ca65d935643e1d7da983768edc583c8dbc23a14c",
+    "assets/environment/ground.glb": "01bfaafa194c25e5396f3be2d0ea54b5724369f58e343988fe97cce564cdec9f",
+    "assets/environment/leaf-albedo.png": "2ce484c20ca03613409659933fd24d66ff258575f0f1ac9bed39feb0b9fb492e",
+    "assets/environment/leaf-normal.png": "da9e6b7b440547bb8f87cec0289911f0da3820c1412f507d03d73e5c79ef7ccb",
+    "assets/environment/leaf-orm.png": "fe67c1b3818365d80d80c4e91716f4241df0b4b11e4ca2bad1766126ae36ca4e",
+    "assets/environment/relic-albedo.png": "bc81559cfd8344feeac5c60bbda7c9243256e661f0c776dbd2035c92508bb1b6",
+    "assets/environment/relic-normal.png": "ce0c4bd5e36902e760cc647c099d1d5febd8278bf65c7e82fb0c3a6e4c782272",
+    "assets/environment/relic-orm.png": "8917840dba8f44cd989f83b4a8a351dd41d624744f8fd4b29d02d52ab512be5b",
+    "assets/environment/relic.glb": "fac1908292b7287a9d1b3d3664592a20d0bb09634a80ccab5252c34c93fdc5de",
+    "assets/environment/rock.glb": "242973dfef235a51873fa3dd58159c8b6c3974aed4dcda8595d932abe6d96f6f",
+    "assets/environment/ruin.glb": "aa4c41d748d0b545a221a93748a83d5be5d6a8213b73d908d3825b0e3711cbbc",
+    "assets/environment/sand-albedo.png": "2c785bf9aca137dc951e970255c16969fc366bcd4224b76d58d12aeefebad955",
+    "assets/environment/sand-normal.png": "8f625e97bcbd68aac8d823dc4e8e780fc26e6beabe81aca90b268698af9d435c",
+    "assets/environment/sand-orm.png": "91df709dcf0a5253b32dd8e29b734f2b3a8642ccd2a092d6054fff8ebe75daea",
+    "assets/environment/shrub.glb": "9e694b66a2b2b7e06c686707be15aac081b26719e2ac65332af812bd35d16a89",
+    "assets/environment/stone-albedo.png": "01f581c65304fe10e5bd52282f40c4ac4bb7783236cbdd38b5ddde4a23e3b308",
+    "assets/environment/stone-normal.png": "f3afd237f207d4f2f5e12af44ea0887aefd7a6f7075d64ffb070c83bbdf00803",
+    "assets/environment/stone-orm.png": "a97e73beb30c683ffc3270ac9306cbba77e12da69d4b17b5f343058856ae4f7a",
+    "assets/environment/trail.glb": "c973efcf8e175e2b1b7858d201713739d73bd1bd69cbe9378ca6c03f77a0c3d9"
+  },
+  "textureSemantics": {
+    "albedo": "sRGB",
+    "normal": "linear tangent-space +Y",
+    "roughness": "linear green",
+    "metallic": "linear blue"
+  }
+}

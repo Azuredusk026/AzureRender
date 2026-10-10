@@ -1,0 +1,73 @@
+{
+  "gpu": {
+    "mean": 10.995810808888889,
+    "p95": 12.5151984,
+    "p99": 12.995270399999999
+  },
+  "cpu": {
+    "mean": 1.6662797222222385,
+    "p95": 2.2453099999993635,
+    "p99": 2.900730000000641
+  },
+  "wait": {
+    "mean": 9.327856111111094,
+    "p95": 10.864570000003004,
+    "p99": 11.354491000000033
+  },
+  "physics": {
+    "mean": 0.2523567222222222,
+    "p95": 0.3702749999999999,
+    "p99": 1.056412
+  },
+  "initialDevice": {
+    "temperature": 47,
+    "driver": "595.79",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "peakWorkingSetBytes": 280780800,
+  "allocator": {
+    "bufferAllocations": 396,
+    "imageAllocations": 213,
+    "liveBuffers": 67,
+    "liveImages": 213,
+    "bufferBytes": 24186520,
+    "imageBytes": 255309312,
+    "liveBufferBytes": 13243360,
+    "liveImageBytes": 255309312,
+    "deviceLocalPeakBytes": 277610496
+  },
+  "submission": {
+    "frames": 2100,
+    "instances": 157500,
+    "indirectDrawCalls": 40089,
+    "visibleInstances": 149628,
+    "visibleRatio": 0.950019,
+    "recordingMilliseconds": 667.8342,
+    "graphPreparationMilliseconds": 380.5546,
+    "workerWaitMilliseconds": 148.4552,
+    "graphExecutionMilliseconds": 138.7167,
+    "workerRecordedPasses": 10500,
+    "workerRecordedChunks": 10500,
+    "drawCalls": 201329,
+    "descriptorSetBinds": 4200,
+    "pipelineBinds": 42189,
+    "pushConstantUpdates": 332980,
+    "drawCallsPerFrame": 95.870952,
+    "descriptorSetBindsPerFrame": 2.0
+  },
+  "samples": 1800,
+  "warmup": 300,
+  "complexity": {
+    "uniqueMeshes": 11,
+    "sceneTriangles": 8584,
+    "skinnedVertices": 2379,
+    "transparentTriangles": 0,
+    "jointCapacity": 132,
+    "vertexCapacity": 13899
+  },
+  "sceneExtent": [
+    1920,
+    1080
+  ],
+  "passed": true
+}

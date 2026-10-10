@@ -4,8 +4,23 @@
 layout(local_size_x=1) in;
 layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(binding=1) uniform sampler2D testShadow;
+float fixtureDepth(ivec2 p){return .1+float(((p.x+3)*3+(p.y+3)*7)%13)*.06;}
 void main() {
     uint i=gl_GlobalInvocationID.x;
+    if(i>=413u){
+        uint probe=(i-413u)/2u;vec2 fraction=vec2(float(probe%8u)/7.0,float(probe/8u)/3.0);
+        vec2 reference=vec2(0),grid=vec2(0);
+        for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
+            vec4 d=vec4(fixtureDepth(ivec2(x,y)),fixtureDepth(ivec2(x+1,y)),fixtureDepth(ivec2(x,y+1)),fixtureDepth(ivec2(x+1,y+1)));
+            reference+=shadowBlockerMoments(d,.5,fraction);
+        }
+        for(int y=-2;y<=2;y+=2)for(int x=-2;x<=2;x+=2){
+            vec4 d=vec4(fixtureDepth(ivec2(x,y)),fixtureDepth(ivec2(x+1,y)),fixtureDepth(ivec2(x,y+1)),fixtureDepth(ivec2(x+1,y+1)));
+            vec4 mass=(vec4(1)-step(vec4(.5),d))*shadowBlockerGridWeights(ivec2(x,y),fraction);
+            grid+=vec2(dot(d,mass),dot(vec4(1),mass));
+        }
+        result.values[i]=abs(reference-grid)[(i-413u)%2u];return;
+    }
     if(i>=209u){
         uint probe=(i-209u)/4u;
         float radius=probe/17u==0u?2.0:(probe/17u==1u?6.0:8.0);

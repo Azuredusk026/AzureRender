@@ -1133,7 +1133,7 @@
       "G16",
       "P5"
     ],
-    "active": "G15",
+    "active": "G16",
     "completed": [
       "U8",
       "U9",
@@ -1142,7 +1142,16 @@
       "U11",
       "U12",
       "G13",
-      "U13"
-    ]
+      "U13",
+      "G15"
+    ],
+    "gameEvidence": {
+      "G15": {
+        "status": "Complete",
+        "evidence": "docs/acceptance/g15/evidence/manifest.json",
+        "acceptance": "docs/acceptance/g15/2026-10-10.md",
+        "commitPolicy": "phase completion commit"
+      }
+    }
   }
 }

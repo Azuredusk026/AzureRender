@@ -1,0 +1,17 @@
+#version 450
+layout(local_size_x=4,local_size_y=4) in;
+layout(binding=0) uniform sampler2D sourceDepth;
+layout(binding=1,std430) buffer Bounds { vec2 values[]; } result;
+shared vec2 tileBounds[16];
+void main(){
+    ivec2 tile=ivec2(gl_WorkGroupID.xy),base=tile*8+ivec2(gl_LocalInvocationID.xy)*2;
+    vec4 depths=textureGather(sourceDepth,(vec2(base)+1.0)/vec2(textureSize(sourceDepth,0)));
+    uint i=gl_LocalInvocationIndex;
+    tileBounds[i]=vec2(min(min(depths.x,depths.y),min(depths.z,depths.w)),max(max(depths.x,depths.y),max(depths.z,depths.w)));
+    barrier();
+    for(uint stride=8u;stride>0u;stride/=2u){
+        if(i<stride)tileBounds[i]=vec2(min(tileBounds[i].x,tileBounds[i+stride].x),max(tileBounds[i].y,tileBounds[i+stride].y));
+        barrier();
+    }
+    if(i==0u)result.values[tile.y*(textureSize(sourceDepth,0).x/8)+tile.x]=tileBounds[0];
+}

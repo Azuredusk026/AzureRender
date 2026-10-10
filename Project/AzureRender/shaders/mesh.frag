@@ -60,6 +60,7 @@ layout(std430, binding = 15) readonly buffer ClusterHeaderBuffer {
 layout(std430, binding = 16) readonly buffer ClusterIndexBuffer {
     uint indices[];
 } clusterIndexData;
+layout(binding=20,std430) readonly buffer ShadowBounds { vec2 values[]; } shadowBounds;
 
 layout(push_constant) uniform MaterialData {
     float alphaCutoff;
@@ -193,25 +194,38 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     float maximumRadius=clamp(camera.renderingParameters.w,1.0,16.0);
     depthGradient*=shadowReceiverPlaneWeight(normalCurvature,worldTexel*maximumRadius);
     float receiver=p.z-shadowReceiverBias(normalDotLight,worldTexel)/depthRange;
+    vec2 centre=uv*vec2(extent)-.5;
+    ivec2 base=ivec2(floor(centre));vec2 fraction=fract(centre);
+    vec2 depthPerTexel=depthGradient/vec2(extent);
+    // A full square bounds every possible disk texel, including atlas edges.
+    int reach=int(ceil(maximumRadius+.5));
+    ivec2 tileLow=clamp(base-ivec2(reach),lo,hi)/8,tileHigh=clamp(base+ivec2(reach+1),lo,hi)/8;
+    float minimumDepth=1,maximumDepth=0;
+    for(int ty=tileLow.y;ty<=tileHigh.y;++ty)for(int tx=tileLow.x;tx<=tileHigh.x;++tx){
+        vec2 range=shadowBounds.values[ty*(extent.x/8)+tx];minimumDepth=min(minimumDepth,range.x);maximumDepth=max(maximumDepth,range.y);
+    }
+    float planeMargin=(float(reach)+2.0)*(abs(depthPerTexel.x)+abs(depthPerTexel.y));
+    if(receiver+planeMargin<=minimumDepth)return 1.0;
+    if(receiver-planeMargin>maximumDepth)return 0.0;
+    bool interior=all(greaterThanEqual(base-ivec2(17),lo))&&all(lessThanEqual(base+ivec2(18),hi));
     float sum=0,blockers=0;
-    for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
-        vec2 offset=vec2(x,y)/vec2(extent);
-        vec2 moments=filteredShadowBlockers(uv+offset,receiver+dot(depthGradient,offset),lo,hi,depthGradient);
-        // Convert each moment back to the centre receiver plane before the
-        // PCSS separation estimate; coverage is interpolated after comparison.
-        sum+=moments.x-dot(depthGradient,offset)*moments.y;
-        blockers+=moments.y;
+    // The 25 bilinear footprints integrate exactly to a weighted 6x6 grid.
+    // Each texel is fetched once; only the outer rows have fractional mass.
+    for(int y=-2;y<=2;y+=2)for(int x=-2;x<=2;x+=2){
+        vec4 weights=shadowBlockerGridWeights(ivec2(x,y),fraction);
+        vec4 plane=interior?dot(vec2(x,y)-fraction,depthPerTexel)+vec4(0,depthPerTexel.x,depthPerTexel.y,depthPerTexel.x+depthPerTexel.y):shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient);
+        vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base+ivec2(x,y),lo,hi)-plane;
+        vec4 mass=(vec4(1)-step(vec4(receiver),depths))*weights;
+        sum+=dot(depths,mass);blockers+=dot(vec4(1),mass);
     }
     float separation=blockers>0?max(receiver-sum/blockers,0)*depthRange:0;
     float contactRadius=shadowContactRadius(float(tile.x),maximumRadius);
     float radius=clamp(contactRadius+separation*.035/max(worldTexel,1e-6),contactRadius,maximumRadius);
     float visible=0,totalWeight=0;
-    vec2 centre=uv*vec2(extent)-.5;
-    ivec2 base=ivec2(floor(centre));vec2 fraction=fract(centre);
     int bound=int(ceil(radius+.5));
     for(int y=-bound;y<=bound;y+=2)for(int x=-bound;x<=bound;x+=2){
         vec4 weights=shadowDiskQuadWeights(vec2(x,y)-fraction,radius);
-        vec4 planeDepths=vec4(receiver)+shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient);
+        vec4 planeDepths=vec4(receiver)+(interior?dot(vec2(x,y)-fraction,depthPerTexel)+vec4(0,depthPerTexel.x,depthPerTexel.y,depthPerTexel.x+depthPerTexel.y):shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient));
         float weight=dot(weights,vec4(1));
         if(weight<=0)continue;
         vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base+ivec2(x,y),lo,hi);
@@ -239,7 +253,7 @@ float sampleShadowMap(float normalDotLight) {
     float result=sampleCascadeShadow(c,normalDotLight,gradients[c],normalCurvature);
     if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
         float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
-        result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1],normalCurvature),blend);}
+        if(blend>0.0)result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1],normalCurvature),blend);}
     return result;
 }
 
@@ -667,6 +681,8 @@ void main() {
     if (qaEffectMode == 4 && qaEffectDisabled) {
         rimLighting = vec3(0.0);
     }
+    vec3 kkSpecular=vec3(0),secondaryKkSpecular=vec3(0);
+    if(hairActive>0.0) {
     vec3 hairHighlightNormal = normalize(
         tangentToWorld * decodePackedHairNormal(hairData.ba));
     float hairShift = dot(hairHighlightNormal, tangent) * 0.16;
@@ -701,7 +717,7 @@ void main() {
         baseColor.rgb,
         vec3(1.0, 0.68, 0.74),
         0.18);
-    vec3 kkSpecular =
+    kkSpecular =
         kkTint
         * kkBand
         * mix(0.58, 1.0, hairViewVisibility)
@@ -714,7 +730,7 @@ void main() {
         baseColor.rgb,
         vec3(0.72, 0.88, 1.0),
         0.12);
-    vec3 secondaryKkSpecular =
+    secondaryKkSpecular =
         secondaryKkTint
         * secondaryKkBand
         * mix(0.35, 0.72, hairViewVisibility)
@@ -732,6 +748,7 @@ void main() {
     kkSpecular*=kkRamp;
     secondaryKkSpecular*=kkRamp;
     kkSpecular=min(kkSpecular,vec3(material.matcapColor.w));
+    }
     if (qaEffectMode == 3 && qaEffectDisabled) {
         kkSpecular = vec3(0.0);
         secondaryKkSpecular = vec3(0.0);
@@ -754,6 +771,8 @@ void main() {
     if (qaEffectMode == 6 && qaEffectDisabled) {
         emissive = vec3(0.0);
     }
+    vec3 matcapAccent=vec3(0);
+    if(materialFeatureEnabled(4U)>0.5&&material.matcapColor.a!=0.0) {
     vec3 cameraForward = normalize(worldPosition - camera.cameraPosition.xyz);
     vec3 cameraRight = normalize(cross(cameraForward, vec3(0.0, 1.0, 0.0)));
     vec3 cameraUp = normalize(cross(cameraRight, cameraForward));
@@ -780,7 +799,7 @@ void main() {
         baseColor.rgb,
         material.matcapColor.rgb,
         0.10);
-    vec3 matcapAccent =
+    matcapAccent =
         matcapMask
         * matcapTint
         * material.matcapColor.a
@@ -788,6 +807,7 @@ void main() {
         * materialFeatureEnabled(4U)
         * bandEnabled
         * 0.055;
+    }
     vec3 beautyColor =
         tintedDiffuse
         + ambientSpecular

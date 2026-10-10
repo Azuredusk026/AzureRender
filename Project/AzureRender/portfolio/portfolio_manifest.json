@@ -205,6 +205,26 @@
       },
       "inputSha256": "9c6c028168f135fb5a0f35bf334ed805f7041661ad9156661f31fc70d968da43",
       "inputEvidencePath": "docs/acceptance/p2/evidence/2026-10-05/capture-exploration-input.json"
+    },
+    {
+      "scene": "exploration",
+      "role": "environment-route",
+      "path": "docs/media/exploration-environment.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 1677029,
+      "sha256": "4190101a9ac236df31c6544a595c4020e53c562ef54c9ea4684dcc13c94f8d11",
+      "evidence": "docs/acceptance/g15/evidence/manifest.json"
+    },
+    {
+      "scene": "exploration",
+      "role": "environment-route",
+      "path": "docs/media/exploration-environment.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 1677029,
+      "sha256": "4190101a9ac236df31c6544a595c4020e53c562ef54c9ea4684dcc13c94f8d11",
+      "evidence": "docs/acceptance/g15/evidence/manifest.json"
     }
   ],
   "evidence": [

@@ -17,7 +17,7 @@ int main(int argc,char** argv) try {
         if(depthSampler)backend.destroySampler(depthSampler);if(depthView)backend.destroyImageView(depthView);
         host.allocator.destroyImage(depth);host.allocator.destroyBuffer(staging);
     });
-    constexpr unsigned count=16+4*33+4+10+32+3+12+3*17*4;
+    constexpr unsigned count=16+4*33+4+10+32+3+12+3*17*4+64;
     output=host.allocator.createBuffer(count*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memset(output.mapped,0xCD,output.size);host.allocator.flush(output,0,output.size);
     const float depths[]={.1F,.2F,.3F,.4F};
@@ -91,5 +91,6 @@ int main(int argc,char** argv) try {
             throw std::runtime_error("Quad integration weights must match the analytic circular footprint");
     }
     if(host.errors.load())throw std::runtime_error("Vulkan validation errors");
+    for(unsigned i=413;i<count;++i)if(values[i]>1e-5F)throw std::runtime_error("Nine quad blocker integration must preserve all 25 bilinear blocker moments");
     std::cout<<"15 GPU depth-step samples passed at three receiver depths\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

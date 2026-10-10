@@ -12,6 +12,7 @@
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
 #include "render/SkinningBatch.hpp"
+#include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
@@ -228,6 +229,7 @@ private:
     // Engine-owned shadow map sampled by the material descriptor sets.
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
+    std::array<std::unique_ptr<ShadowTileBounds>,kMaxFramesInFlight> shadowBounds_;
 
     LoadedAsset asset_;
     std::vector<JointBounds> jointBounds_;

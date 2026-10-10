@@ -25,7 +25,10 @@ build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/pro
 | 点击游戏区域 | 恢复相机控制 |
 | Pause / Resume 按钮 | 暂停或恢复固定模拟 |
 
-路线经过开放区域、狭窄通道、检查点、坡道和室内。界面显示目标、收集数量、路径提示与交互目标。参考路线在第 221 秒完成，可连续重新开始。
+路线经过开放区域、通道、检查点、坡道和室内。
+界面显示目标、收集数量、路径提示与交互目标。
+设计路线长一百三十八米，可连续重新开始。
+环境制作见[探索路线与材质](exploration-environment.md)。
 
 ## 创建本机项目
 
@@ -40,7 +43,9 @@ python tools/create_playable_project.py --output build/local-exploration --chara
 
 ## 组件与实体
 
-组件使用反射存档，当前版本均为 1。Prefab 位于项目的 `assets/prefabs/`。主角、引导角色、收集物、门与检查点具有独立模板。
+组件使用反射存档，各类型声明自身版本。
+Prefab 位于项目的 `assets/prefabs/`。
+主角、引导角色、收集物、门与检查点具有独立模板。
 
 | 类型 | 字段与规则 |
 | --- | --- |

@@ -15,6 +15,8 @@ AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Wind
 
 ## 使用入口
 
+探索路线、Blender 与材质见[环境制作](docs/runtime/exploration-environment.md)。
+
 场景标签、动画、脚本与 Prefab 见[内容制作](docs/runtime/authoring-workflows.md)。
 
 右键漂浮、六向视图与辅助见[视口导航](docs/runtime/viewport-navigation.md)。
@@ -94,7 +96,7 @@ GPU 验收串行执行。发布门禁覆盖真实游戏包、移动安装树、�
 
 侧面视角展示公开机器人的行走姿态。输入事件、角色场景和捕获帧进入展示清单。
 
-![探索关卡与任务界面](docs/media/exploration.png)
+![探索道路、地标与环境](docs/media/exploration-environment.png)
 
 探索场景展示主角、同伴、关卡与任务界面。图片来源见[展示清单](portfolio/portfolio_manifest.json)。
 

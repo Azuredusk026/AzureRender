@@ -1,0 +1,125 @@
+{
+  "stage": "G15",
+  "files": [
+    {
+      "file": ".gitattributes",
+      "sha256": "2c1a2bde4ba997282efe8927796ceb6c271363d8c4cc9e0809bc0a519fc47a5b"
+    },
+    {
+      "file": "g15-axis-green.log",
+      "sha256": "9eadc22d5ddf678263cd32c535fc4ad0b8abb17183da6032231d3f04d02ee760"
+    },
+    {
+      "file": "g15-axis-red.log",
+      "sha256": "6eb06c47fdf1568dde21df03220102c4da6e1affbf27da334a1ef1088b2ea326"
+    },
+    {
+      "file": "g15-baseline-completion.log",
+      "sha256": "5b0303b5aee38193cdb33594ba6ead352c101f180eb006a132404d51e1a9e5fa"
+    },
+    {
+      "file": "g15-build-verified.log",
+      "sha256": "91b008342fda20501a02a5c985ca833d4abfe6ef28716e0831df51d3097a18dd"
+    },
+    {
+      "file": "g15-contact-final.png",
+      "sha256": "7faf1601418110634120b024f4de7e46036286bd84f62647b650cf9384f14c16"
+    },
+    {
+      "file": "g15-cpu-final.log",
+      "sha256": "5538034390e4a66b984328ddeab36e7af950164303efab9c268294cc210efec6"
+    },
+    {
+      "file": "g15-final-linked-cpu.log",
+      "sha256": "250ba29993ccd28922a8a9e3e3fa50cf3e02013673dadb3d90f85242b8846a21"
+    },
+    {
+      "file": "g15-gpu-verified.log",
+      "sha256": "ca05f2047438b20029077d73fc4cbbdeba4c6749a52ed3c56c1d7ac66838f30a"
+    },
+    {
+      "file": "g15-image-equivalence.log",
+      "sha256": "e1d73e4b6885212db5a0bca6298c80e0053545eeb7e2815c8648c3654e71be94"
+    },
+    {
+      "file": "g15-performance-final-host-summary.json",
+      "sha256": "b0d07abeddd0014ec308f3f97cef5474ef812b107c60480aa54e1fa184f6ee80"
+    },
+    {
+      "file": "g15-performance-final-host.csv",
+      "sha256": "79ef9989937a768eaa754a923d08992ab0dd854bb870f88318ce47bf486c16b1"
+    },
+    {
+      "file": "g15-performance-final-host.json",
+      "sha256": "0902a67a8b4e9b38ff9324d2dff08af6daf30b402e8528082af2a37a2f3eaea6"
+    },
+    {
+      "file": "g15-performance-final-host.log",
+      "sha256": "82f727503358fe3a9884b3f5fb710b728298ebd34bf65603b1141ebf364b76d0"
+    },
+    {
+      "file": "g15-private-final.log",
+      "sha256": "a75b60f578d0398459ae9c1b7ef6390391cb60b423b334ae61b06b86866e84ff"
+    },
+    {
+      "file": "g15-release-sync-build.log",
+      "sha256": "b9903bc5a0dee8f22d9dac39734eab58e8b97bb64704db4e60143cc0910386b4"
+    },
+    {
+      "file": "image-equivalence.json",
+      "sha256": "fbefdf562059fa72b5c94adb0ac525f7a1dc744c6f4c09883d4c1738bf591405"
+    },
+    {
+      "file": "private-debug-stderr.log",
+      "sha256": "4eacf502e52469b1027c98935920726da651f28c7babc3888a58c0f168538c8f"
+    },
+    {
+      "file": "private-debug-stdout.log",
+      "sha256": "f09c94123e4de549422ef5ddce6b697e6c694c0516efff54e397ccc833655d81"
+    },
+    {
+      "file": "private-input.json",
+      "sha256": "1ef1a08f5d40029e9fd601c70188a87ff9346255925acdc34ff835929b9aead1"
+    },
+    {
+      "file": "private-runtime.json",
+      "sha256": "715fd550942a50ef33ce4834aa145a928e85362325510ee828458addd51fd2fc"
+    },
+    {
+      "file": "private-stderr.log",
+      "sha256": "c594ac4c981ae7a6a94756ff148f24e6ecaaceaca0dc2285b8259e3488b96590"
+    },
+    {
+      "file": "private-stdout.log",
+      "sha256": "3c5886e1d0b44796e6c2d8ea6ad06be0bc029d456c35c9541e014181d41c3a27"
+    },
+    {
+      "file": "private-summary.json",
+      "sha256": "a9ba085d3121ee6444aad4954c7b0e4f4a1294e85a06198102f6119586fa8ed3"
+    },
+    {
+      "file": "public-input.json",
+      "sha256": "1ef1a08f5d40029e9fd601c70188a87ff9346255925acdc34ff835929b9aead1"
+    },
+    {
+      "file": "public-runtime.json",
+      "sha256": "efa20cbdd9662d775fee18f946710cdbb31230a9aaf66147cb4487157196f707"
+    },
+    {
+      "file": "public-stderr.log",
+      "sha256": "9be0116fd68eda03d01edbcf979c8266da399fd46e0a45806e8221fc2fb760c9"
+    },
+    {
+      "file": "public-stdout.log",
+      "sha256": "313b70ca06b92b3d993bb949413e575aee00f6d39594d3f77169dca30879779e"
+    },
+    {
+      "file": "public-summary.json",
+      "sha256": "a9ba085d3121ee6444aad4954c7b0e4f4a1294e85a06198102f6119586fa8ed3"
+    },
+    {
+      "file": "source-products.json",
+      "sha256": "f9cd5554fa567fc8de5563593d9eb4268ade36a6b09c8b5654a3d31fe1fbdcd4"
+    }
+  ]
+}

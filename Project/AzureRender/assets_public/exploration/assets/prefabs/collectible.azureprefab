@@ -4,7 +4,7 @@
   "resources": [
     {
       "id": "mesh",
-      "asset": "assets:/cube.gltf"
+      "asset": "assets:/environment/relic.glb"
     }
   ],
   "nodes": [

@@ -58,3 +58,8 @@ vec4 shadowDiskQuadWeights(vec2 offset, float radius) {
     vec4 x=offset.x+vec4(0,1,0,1),y=offset.y+vec4(0,0,1,1);
     return clamp(vec4(radius+.5)-sqrt(x*x+y*y),vec4(0),vec4(1));
 }
+vec4 shadowBlockerGridWeights(ivec2 offset,vec2 fraction){
+    vec2 x=vec2(offset.x==-2?1-fraction.x:1,offset.x==2?fraction.x:1);
+    vec2 y=vec2(offset.y==-2?1-fraction.y:1,offset.y==2?fraction.y:1);
+    return x.xyxy*y.xxyy;
+}

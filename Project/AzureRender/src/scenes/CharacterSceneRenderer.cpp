@@ -397,7 +397,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + std::to_string(limits.maxPerStageDescriptorSamplers));
     loadJobs_.push_back([this]{createUniformBuffers();createJointBuffers();});
     loadJobs_.push_back([this]{createComputeSkinningResources();createOitIndexBuffers();});
-    loadJobs_.push_back([this,context]{createOverlayDepth(context);createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
+    loadJobs_.push_back([this,context]{createOverlayDepth(context);for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
     loadJobs_.push_back([this,context]{createGraphicsPipeline(context);buildSceneState();});
 }
 
@@ -948,6 +948,13 @@ void CharacterSceneRenderer::registerPasses(
     if (skinnedResource) graph.use(shadow, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    auto* bounds=shadowBounds_[context.currentFrame].get();
+    rhi::BufferBarrierDesc boundsInitial{};boundsInitial.buffer=bounds->buffer().buffer;boundsInitial.size=bounds->buffer().size;
+    boundsInitial.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;boundsInitial.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;
+    const auto boundsResource=graph.importBuffer("shadow-tile-bounds",boundsInitial);
+    const auto boundsPass=graph.addCommandPass("shadow-tile-bounds",[bounds](rhi::ICommandRecorder& commands){bounds->record(commands);});
+    graph.use(boundsPass,resources.shadow,RenderGraphUsage::ComputeSampled,false);
+    graph.use(boundsPass,boundsResource,RenderGraphUsage::Storage,true);
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
     mainCounters->instances = frozenInstances->instances.size();
     mainCounters->visibleInstances = frozenInstances->visibleIndices.size();
@@ -1006,6 +1013,7 @@ void CharacterSceneRenderer::registerPasses(
     graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,boundsResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,lightResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,clusterHeaderResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,clusterIndexResource,RenderGraphUsage::FragmentStorage,false);
@@ -1061,6 +1069,7 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, transparentIndices, RenderGraphUsage::IndexBuffer, false);
     }
     if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
+    graph.use(main, boundsResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, lightResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterHeaderResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterIndexResource, RenderGraphUsage::FragmentStorage, false);
@@ -1083,6 +1092,11 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     instanceSnapshot_->validateForRecording();
     recordComputeSkinning(context);
     recordShadowPass(context);
+    context.commands->imageBarrier({context.shadowImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    const auto& bounds=shadowBounds_[context.currentFrame];
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->buffer().size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
+    bounds->record(*context.commands);
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->buffer().size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     rhi::RenderPassBeginDesc begin{};begin.renderPass=overlayDepthPass_;begin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];begin.extent=context.renderExtent;
     VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues={color,linear,depth};
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
@@ -1885,6 +1899,13 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
     if(overlayDepthPass_)rhi_->destroyRenderPass(overlayDepthPass_);overlayDepthPass_=VK_NULL_HANDLE;
 }
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    bool sampled=false;
+    for(const auto& span:snapshot.visibleSpans){
+        const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
+        for(const auto& material:mesh.materials)
+            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint))!=0;
+    }
+    if(!sampled)return;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
     commands.bindPipeline(overlayDepthPipeline_);
     if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
@@ -1922,7 +1943,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 2)},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 6},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 7},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1933,7 +1954,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 13},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 6},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 7},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1977,6 +1998,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
             {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
             {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
+            {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -2005,6 +2027,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     });
 }
 
@@ -2073,6 +2096,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             uniformWrite.set = descriptorSets_[frame];
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2155,6 +2179,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             uniformWrite.set = descriptorSets_[descriptorIndex];
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
@@ -2503,6 +2528,7 @@ void CharacterSceneRenderer::destroyResources() {
         rhi_->destroyPipelineLayout(pipelineLayout_);
         pipelineLayout_ = VK_NULL_HANDLE;
     }
+    for(auto& bounds:shadowBounds_)bounds.reset();
     if (descriptorPool_ != VK_NULL_HANDLE) {
         rhi_->destroyDescriptorPool(descriptorPool_);
         descriptorPool_ = VK_NULL_HANDLE;

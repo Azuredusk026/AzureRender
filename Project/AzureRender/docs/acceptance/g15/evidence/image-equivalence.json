@@ -1,0 +1,14 @@
+[
+  {
+    "case": "public",
+    "maximumDifference": 0,
+    "meanDifference": 0.0,
+    "changedChannels": 0
+  },
+  {
+    "case": "private-surface",
+    "maximumDifference": 0,
+    "meanDifference": 0.0,
+    "changedChannels": 0
+  }
+]

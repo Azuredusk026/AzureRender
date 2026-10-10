@@ -207,6 +207,7 @@ struct RenderContext {
     VkRenderPass shadowRenderPass = VK_NULL_HANDLE;
     VkFramebuffer shadowFramebuffer = VK_NULL_HANDLE;
     VkImageView shadowImageView = VK_NULL_HANDLE;
+    VkImage shadowImage = VK_NULL_HANDLE;
     VkSampler shadowSampler = VK_NULL_HANDLE;
     std::uint32_t shadowMapSize = 2048;
 
