@@ -36,9 +36,12 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     observeWidget("outliner.add");
     ImGui::SameLine();
     if(ui::button("Actions"))ImGui::OpenPopup("Node actions");
+    observeWidget("outliner.actions");
     if(ImGui::BeginPopup("Node actions")) {
         if(ImGui::MenuItem("Delete",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.delete");
+        observeWidget("outliner.delete");
         if(ImGui::MenuItem("Duplicate",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.duplicate");
+        observeWidget("outliner.duplicate");
         ImGui::EndPopup();
     }
     if (nodes.empty()) {

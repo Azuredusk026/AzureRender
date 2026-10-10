@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "input": "production ImGui replay",
+  "physicalInput": false,
+  "cases": [
+    {
+      "workflow": "exploration",
+      "dpi": 1,
+      "window": [
+        1280,
+        720
+      ],
+      "passed": true,
+      "rootAndChild": true,
+      "disabledActions": true,
+      "twoUndoRedo": true
+    },
+    {
+      "workflow": "exploration",
+      "dpi": 1.5,
+      "window": [
+        1280,
+        720
+      ],
+      "passed": true,
+      "rootAndChild": true,
+      "disabledActions": true,
+      "twoUndoRedo": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "dpi": 1,
+      "window": [
+        1280,
+        720
+      ],
+      "passed": true,
+      "rootAndChild": true,
+      "disabledActions": true,
+      "twoUndoRedo": true
+    },
+    {
+      "workflow": "scene_inspector",
+      "dpi": 1.5,
+      "window": [
+        1280,
+        720
+      ],
+      "passed": true,
+      "rootAndChild": true,
+      "disabledActions": true,
+      "twoUndoRedo": true
+    }
+  ]
+}

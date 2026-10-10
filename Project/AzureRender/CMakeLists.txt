@@ -1869,6 +1869,8 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.ViewportOverlays COMMAND AzureViewportOverlayTests)
     add_test(NAME AzureEditor.ViewportNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_viewport_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/viewport-navigation-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.ViewportNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+    add_test(NAME AzureEditor.NodeAdditionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_node_addition.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/node-addition")
+    set_tests_properties(AzureEditor.NodeAdditionGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
 endif()
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/2026-10-10.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/physical-input.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p5")

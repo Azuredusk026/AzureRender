@@ -1,0 +1,23 @@
+{
+  "physicalInput": false,
+  "phaseComplete": false,
+  "files": {
+    "exploration-1-add-root-child-runtime.json.gz": "2f793b11eb6d0bb545b4067bee0687e861286d80b66a9162424e8a2824f5c152",
+    "exploration-1-disabled-runtime.json.gz": "a17de16f44457338e2f753ef91598da089e1636b5c5737e0afb29ee214146788",
+    "exploration-1-undo-redo-runtime.json.gz": "096b7df50b7514792a668dead786c0c052d21d9e0d21e29ec4d6e24927dcfec8",
+    "exploration-1.5-add-root-child-runtime.json.gz": "838efee1b0ff869339bb46a6a9f22e6b8731e5aa7ae5fc4c769f381a461bb5ab",
+    "exploration-1.5-disabled-runtime.json.gz": "d91dd236c8bc869bb19b967898400b933e864f24aaab4a6180f4f159e2d75759",
+    "exploration-1.5-undo-redo-runtime.json.gz": "d6e38bac516ce1b3b89f6a4e994d19ef8167926fd9a2fefdd0b5b92ab8a372ba",
+    "node-addition-green.log": "1dc5ff23eb7f8430feda459bce9e641ef7bec7b122b5a31cc9411ffcc4236910",
+    "node-addition-green2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "node-addition-red.log": "7c9b07c1e2a7f8dd2dc179da1362492b51515b5c0f92f6c9cd21334e9cdfe097",
+    "scene_inspector-1-add-root-child-runtime.json.gz": "5846cb5c0ab12c78fef78a03c32a120b6d7f6a9211a2137b104890390fb4ea48",
+    "scene_inspector-1-disabled-runtime.json.gz": "e55d42150af99add8813ab226624b5b05255294cc466569f8170c769ace57480",
+    "scene_inspector-1-undo-redo-runtime.json.gz": "3d0594d79fb3c4e8ea85b86c8b71ffb5ca13ee021b1647149e8a67bc1a5d1fd5",
+    "scene_inspector-1.5-add-root-child-runtime.json.gz": "a660253cf5cfb50d52381166d1d335ba4ed0a2c91eca9974c08cd8164c14d975",
+    "scene_inspector-1.5-disabled-runtime.json.gz": "4641b2964a2d1ce5a0bc1b9d89559458d172cced6a4f2c6d1c95e43f16c1fa54",
+    "scene_inspector-1.5-undo-redo-runtime.json.gz": "98ed803a114ddd02a440499ad313b429483cb90b4f1059bc41bc7648da4650a9",
+    "summary.json": "f335477cb5154a336e1714634aa3ed406543f0b0a48b5723434fb2ddbf2a249f",
+    "targeted-gpu.log": "320fab475e5dffb85ec3f5ba1aaa2dcfbb5ecca7e096414f33f1ae6f0843b3ed"
+  }
+}
