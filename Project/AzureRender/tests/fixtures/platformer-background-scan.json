@@ -1,0 +1,80 @@
+{
+  "kind": "state",
+  "seconds": 1615.0940000000046,
+  "value": {
+    "audioStarts": 1977,
+    "camera": [
+      0.24874995648860931,
+      2.7680575847625732,
+      -0.9786627888679504
+    ],
+    "cameraObstructed": false,
+    "characters": [
+      {
+        "grounded": true,
+        "node": "hero",
+        "playbackRate": 2.0,
+        "position": [
+          -6.1464584533155175e-09,
+          1.7881393432617188e-07,
+          -7.099996089935303
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "state": "walk",
+        "velocity": [
+          0.0,
+          -0.16350001096725464,
+          -4.0
+        ]
+      }
+    ],
+    "checkpointActivated": false,
+    "collectibles": 8,
+    "doorOpen": false,
+    "focused": true,
+    "frame": 323185,
+    "interactionTarget": "",
+    "levelReference": "assets:/platformer/platformer.azurelevel",
+    "levelRevision": 222,
+    "loadError": "",
+    "loading": true,
+    "presentationErrors": [],
+    "rigidBodies": [
+      {
+        "node": "platform-3",
+        "position": [
+          0.11999999731779099,
+          -0.20000000298023224,
+          -19.79132652282715
+        ]
+      },
+      {
+        "node": "platform-5",
+        "position": [
+          0.0,
+          0.3499999940395355,
+          -33.15932083129883
+        ]
+      }
+    ],
+    "scriptErrors": [],
+    "target": [
+      -8.457680389373223e-11,
+      1.2229081392288208,
+      -6.7452392578125
+    ],
+    "tasks": [
+      {
+        "collected": 2,
+        "completed": false,
+        "doorOpened": false,
+        "node": "hero",
+        "started": true
+      }
+    ]
+  }
+}

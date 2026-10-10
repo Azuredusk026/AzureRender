@@ -31,6 +31,7 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 当前软件候选验收: acceptance/p5/closure/software-candidate-2026-10-11.md
   - 外部恢复与文档保护: acceptance/p5/closure/document-guard-scan.md
   - 管线执行信息: acceptance/p5/closure/pipeline-inspection.md
   - 映射追踪与性能边界: acceptance/p5/closure/mapping-inspection.md

@@ -72,17 +72,48 @@
       "severity": "major",
       "summary": "后台项目创建期间窗口关闭请求丢失",
       "owner": "EditorSession",
-      "status": "CpuAndHostVerifiedFullRegressionPending",
+      "status": "CpuAndHostAndFullRegressionVerifiedPhysicalInputPending",
       "source": "src/editor/EditorSession.cpp",
       "test": "AzureEditor.ProjectFlow",
       "productionUiVerified": true,
       "physicalInputVerified": false,
       "acceptance": "docs/acceptance/u16/deferred-close.md"
+    },
+    {
+      "id": "UX-007",
+      "severity": "verification",
+      "summary": "外部文件恢复后的目录扫描改变文档修订号",
+      "owner": "EditorValidationClient",
+      "status": "ClientSynchronizationAndFullRegressionVerified",
+      "source": "tools/editor_content_wait.py",
+      "test": "AzureEditor.DocumentGuardGpu",
+      "productionUiVerified": true,
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/p5/closure/document-guard-scan.md"
+    },
+    {
+      "id": "UX-008",
+      "severity": "major",
+      "summary": "场景项目创建在目录发布时遇到拒绝访问",
+      "owner": "ProjectCreateJob",
+      "status": "OriginalFailureRetainedFreshDirectoryPassedCausePending",
+      "source": "src/editor/projects/ProjectCreateJob.cpp",
+      "test": "installed authoring project.create",
+      "productionUiVerified": false,
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/p5/closure/software-candidate-2026-10-11.md"
     }
   ],
   "taskBaseline": {
     "status": "AutomatedProductionTasksVerifiedManualEfficiencyPending",
-    "packageHashes": {},
+    "packageHashes": {
+      "engine": "642ad9e503f6dc93a0b170b177295e2ed5b60ebc152175789412428566a0aa8b",
+      "exploration": "ca554cf82fb29ef797b3ea6d1edf873f871aab17940e961b4a8579a4c820ff45",
+      "platformer": "b41a346fa7e8a1d8ed6ac9541503dcf7b078938aba70dc507a24db5118d8e6ee",
+      "scene_inspector": "ce94634ceea907dcfb33b0ac1ecc001d2c14237c61f3d37fc6c6de9132ef8d02",
+      "authored-exploration": "66c96ed7a8cd22aec4c7acc3af826f26a9c83de7adbe11d3e0afedd4f43397d7",
+      "authored-inspection": "be90632607c033c50f0eb899f6ae27a96dfad7dc3c2f4334a9fdaf401e763ce9"
+    },
     "taskTimesSeconds": {
       "exploration": {
         "create": 2.0,
@@ -130,5 +161,30 @@
   "u15Complete": false,
   "u16Complete": false,
   "p6Complete": false,
-  "p6Acceptance": "docs/acceptance/p6/2026-10-10.md"
+  "p6Acceptance": "docs/acceptance/p6/2026-10-10.md",
+  "currentSoftwareVerification": {
+    "sourceHash": "126d7d78297476f6e35aa11250213bddeb8f7d1e5a24a5af1952815ecfee257d",
+    "releaseTests": 228,
+    "debugTests": 226,
+    "deliveryChecks": 10,
+    "formalPerformancePassed": false,
+    "physicalInputVerified": false,
+    "acceptance": "docs/acceptance/p5/closure/software-candidate-2026-10-11.md",
+    "longRuns": {
+      "standard": {
+        "status": "passed",
+        "actualSeconds": 1800.5,
+        "frames": 239952,
+        "workingSetGrowth": 0.00812003742173828
+      },
+      "platformer": {
+        "status": "failed",
+        "actualSeconds": 1800.109000000004,
+        "frames": 347118,
+        "workingSetGrowth": 0.005805612091688728
+      }
+    },
+    "finalToolSourceHash": "c5f25bf90e4a873e9c2187fd3adb17a9ce1b23227a2dbce0b78d9fd52e04beaf",
+    "controllerByteEquivalent": true
+  }
 }

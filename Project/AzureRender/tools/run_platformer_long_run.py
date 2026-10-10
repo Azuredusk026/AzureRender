@@ -120,7 +120,8 @@ class PlatformerScenario:
             if not state['loading'] and state['levelRevision']>self.oldRevision:
                 self.counts['restarts']+=1;self.load(self.exploration,'return-course',state,now)
             return
-        if state['loading']:return
+        # Background asset scans keep the current world running. Scene
+        # switches wait in the explicit preloading/loading phases above.
         assert state['levelReference']==self.course
         hero=next(c for c in state['characters'] if c['node']=='hero');position=hero['position']
         if self.phase=='start':
@@ -148,7 +149,10 @@ class PlatformerScenario:
             return
         target=self.platforms[min(7,self.index+1)]
         if self.phase=='jump':
-            if position[2]<=target['z']+.35:
+            # A completed goal disables movement before the controller's
+            # stop point. Keep the existing grounded landing check.
+            terminal_stop=self.index==6 and state['tasks'][0]['completed']
+            if position[2]<=target['z']+.35 or terminal_stop:
                 self.key(87,False);self.transition('land',now)
             return
         if self.phase=='land':

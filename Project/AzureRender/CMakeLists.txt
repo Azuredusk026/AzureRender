@@ -1899,5 +1899,9 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/closure/" DEST
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u16/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u16")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p6/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p6")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-10-p5-closure-and-user-experience.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/authoring-usability-manifest.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-11-pipeline-inspection.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
+install(FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-11-pipeline-inspection.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-11-asset-format-expansion.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/asset-format-manifest.json"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-10-authoring-usability.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")

@@ -205,5 +205,9 @@ P5 保持 Active，性能与人工门禁按实际证据维护。
 外部文件恢复契约见[文档保护复核](docs/acceptance/p5/closure/document-guard-scan.md)。
 两配置完整回归共四百五十四项通过。
 
+回归、移动发布与标准三十分钟长跑通过。
+当前结果见[软件候选验收](docs/acceptance/p5/closure/software-candidate-2026-10-11.md)。
+正式性能与人工复核保持待验。
+
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。
