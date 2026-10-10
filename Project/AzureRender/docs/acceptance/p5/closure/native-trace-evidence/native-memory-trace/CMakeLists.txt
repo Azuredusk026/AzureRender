@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.21)
+project(AzureDiagnosticMemoryTrace LANGUAGES C)
+add_subdirectory(minhook EXCLUDE_FROM_ALL)
+add_library(AzureNtTrace SHARED trace.c)
+target_link_libraries(AzureNtTrace PRIVATE minhook)
+target_compile_definitions(AzureNtTrace PRIVATE WIN32_LEAN_AND_MEAN)
+target_compile_options(AzureNtTrace PRIVATE /W4)

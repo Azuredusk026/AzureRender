@@ -1,0 +1,615 @@
+{
+  "diagnosticOnly": true,
+  "childExitCode": 3221225477,
+  "command": [
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "assets_public/exploration/project.azureproject",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--width",
+    "1920",
+    "--height",
+    "1080",
+    "--smoke-frames",
+    "2100",
+    "--validation-token-env",
+    "AZURE_NT_DIAGNOSTIC_TOKEN",
+    "--validation-endpoint",
+    "build/p5-p6-closure-2026-10-10/native-exploration-ready2.json"
+  ],
+  "modules": [
+    {
+      "base": 140699898740736,
+      "size": 4722688,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe"
+    },
+    {
+      "base": 140706096742400,
+      "size": 2527232,
+      "path": "C:\\WINDOWS\\SYSTEM32\\ntdll.dll"
+    },
+    {
+      "base": 140706083700736,
+      "size": 823296,
+      "path": "C:\\WINDOWS\\System32\\KERNEL32.DLL"
+    },
+    {
+      "base": 140706054602752,
+      "size": 4141056,
+      "path": "C:\\WINDOWS\\System32\\KERNELBASE.dll"
+    },
+    {
+      "base": 140706060894208,
+      "size": 475136,
+      "path": "C:\\WINDOWS\\System32\\WS2_32.dll"
+    },
+    {
+      "base": 140706053226496,
+      "size": 1355776,
+      "path": "C:\\WINDOWS\\System32\\ucrtbase.dll"
+    },
+    {
+      "base": 140706086387712,
+      "size": 1146880,
+      "path": "C:\\WINDOWS\\System32\\RPCRT4.dll"
+    },
+    {
+      "base": 140737038843904,
+      "size": 266240,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\glfw3.dll"
+    },
+    {
+      "base": 140703496011776,
+      "size": 262144,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\lua.dll"
+    },
+    {
+      "base": 140736182550528,
+      "size": 1769472,
+      "path": "C:\\WINDOWS\\SYSTEM32\\vulkan-1.dll"
+    },
+    {
+      "base": 140736185696256,
+      "size": 868352,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\OpenEXR-3_4.dll"
+    },
+    {
+      "base": 140706087567360,
+      "size": 1851392,
+      "path": "C:\\WINDOWS\\System32\\USER32.dll"
+    },
+    {
+      "base": 140706072166400,
+      "size": 737280,
+      "path": "C:\\WINDOWS\\System32\\ADVAPI32.dll"
+    },
+    {
+      "base": 140706053029888,
+      "size": 159744,
+      "path": "C:\\WINDOWS\\System32\\win32u.dll"
+    },
+    {
+      "base": 140706095235072,
+      "size": 692224,
+      "path": "C:\\WINDOWS\\System32\\msvcrt.dll"
+    },
+    {
+      "base": 140706070528000,
+      "size": 176128,
+      "path": "C:\\WINDOWS\\System32\\GDI32.dll"
+    },
+    {
+      "base": 140706093268992,
+      "size": 679936,
+      "path": "C:\\WINDOWS\\System32\\sechost.dll"
+    },
+    {
+      "base": 140734755831808,
+      "size": 1773568,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\rmlui.dll"
+    },
+    {
+      "base": 140706050998272,
+      "size": 1232896,
+      "path": "C:\\WINDOWS\\System32\\gdi32full.dll"
+    },
+    {
+      "base": 140706048049152,
+      "size": 667648,
+      "path": "C:\\WINDOWS\\System32\\msvcp_win.dll"
+    },
+    {
+      "base": 140705318240256,
+      "size": 643072,
+      "path": "C:\\WINDOWS\\SYSTEM32\\MSVCP140.dll"
+    },
+    {
+      "base": 140705359265792,
+      "size": 49152,
+      "path": "C:\\WINDOWS\\SYSTEM32\\VCRUNTIME140_1.dll"
+    },
+    {
+      "base": 140706062860288,
+      "size": 7655424,
+      "path": "C:\\WINDOWS\\System32\\SHELL32.dll"
+    },
+    {
+      "base": 140705321910272,
+      "size": 180224,
+      "path": "C:\\WINDOWS\\SYSTEM32\\VCRUNTIME140.dll"
+    },
+    {
+      "base": 140706044379136,
+      "size": 356352,
+      "path": "C:\\WINDOWS\\SYSTEM32\\CFGMGR32.dll"
+    },
+    {
+      "base": 140706059386880,
+      "size": 1490944,
+      "path": "C:\\WINDOWS\\System32\\wintypes.dll"
+    },
+    {
+      "base": 140705207943168,
+      "size": 61440,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\IlmThread-3_4.dll"
+    },
+    {
+      "base": 140736173506560,
+      "size": 856064,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\OpenEXRCore-3_4.dll"
+    },
+    {
+      "base": 140706080030720,
+      "size": 3649536,
+      "path": "C:\\WINDOWS\\System32\\combase.dll"
+    },
+    {
+      "base": 140737025474560,
+      "size": 311296,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\Iex-3_4.dll"
+    },
+    {
+      "base": 140737023836160,
+      "size": 356352,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\Imath-3_2.dll"
+    },
+    {
+      "base": 140735308693504,
+      "size": 720896,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\freetype.dll"
+    },
+    {
+      "base": 140704628211712,
+      "size": 106496,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\deflate.dll"
+    },
+    {
+      "base": 140737006272512,
+      "size": 450560,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\openjph.0.31.dll"
+    },
+    {
+      "base": 140704626507776,
+      "size": 110592,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\z.dll"
+    },
+    {
+      "base": 140704596492288,
+      "size": 69632,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\brotlidec.dll"
+    },
+    {
+      "base": 140737101627392,
+      "size": 217088,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\libpng16.dll"
+    },
+    {
+      "base": 140704596885504,
+      "size": 98304,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\bz2.dll"
+    },
+    {
+      "base": 140737025277952,
+      "size": 159744,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\brotlicommon.dll"
+    },
+    {
+      "base": 140706074984448,
+      "size": 192512,
+      "path": "C:\\WINDOWS\\System32\\IMM32.DLL"
+    },
+    {
+      "base": 140706030026752,
+      "size": 221184,
+      "path": "C:\\WINDOWS\\SYSTEM32\\ntmarta.dll"
+    },
+    {
+      "base": 140706028847104,
+      "size": 110592,
+      "path": "C:\\WINDOWS\\SYSTEM32\\kernel.appcore.dll"
+    },
+    {
+      "base": 140706072952832,
+      "size": 1671168,
+      "path": "C:\\WINDOWS\\System32\\ole32.dll"
+    },
+    {
+      "base": 140706050342912,
+      "size": 626688,
+      "path": "C:\\WINDOWS\\System32\\bcryptPrimitives.dll"
+    },
+    {
+      "base": 140706008596480,
+      "size": 45056,
+      "path": "C:\\WINDOWS\\SYSTEM32\\avrt.dll"
+    },
+    {
+      "base": 140706091892736,
+      "size": 724992,
+      "path": "C:\\WINDOWS\\System32\\clbcatq.dll"
+    },
+    {
+      "base": 140705890959360,
+      "size": 626688,
+      "path": "C:\\WINDOWS\\System32\\MMDevApi.dll"
+    },
+    {
+      "base": 140706044772352,
+      "size": 184320,
+      "path": "C:\\WINDOWS\\System32\\DEVOBJ.dll"
+    },
+    {
+      "base": 140705598341120,
+      "size": 1814528,
+      "path": "C:\\WINDOWS\\SYSTEM32\\AUDIOSES.DLL"
+    },
+    {
+      "base": 140706093989888,
+      "size": 983040,
+      "path": "C:\\WINDOWS\\System32\\shcore.dll"
+    },
+    {
+      "base": 140705989656576,
+      "size": 81920,
+      "path": "C:\\WINDOWS\\SYSTEM32\\resourcepolicyclient.dll"
+    },
+    {
+      "base": 140706039857152,
+      "size": 385024,
+      "path": "C:\\WINDOWS\\SYSTEM32\\powrprof.dll"
+    },
+    {
+      "base": 140706039529472,
+      "size": 81920,
+      "path": "C:\\WINDOWS\\SYSTEM32\\UMPDC.dll"
+    },
+    {
+      "base": 140704302497792,
+      "size": 307200,
+      "path": "C:\\WINDOWS\\SYSTEM32\\dinput8.dll"
+    },
+    {
+      "base": 140735369510912,
+      "size": 73728,
+      "path": "C:\\WINDOWS\\SYSTEM32\\xinput1_4.dll"
+    },
+    {
+      "base": 140705379713024,
+      "size": 1941504,
+      "path": "C:\\WINDOWS\\SYSTEM32\\inputhost.dll"
+    },
+    {
+      "base": 140705978646528,
+      "size": 1200128,
+      "path": "C:\\WINDOWS\\SYSTEM32\\CoreMessaging.dll"
+    },
+    {
+      "base": 140705986052096,
+      "size": 176128,
+      "path": "C:\\WINDOWS\\SYSTEM32\\dwmapi.dll"
+    },
+    {
+      "base": 140705984872448,
+      "size": 688128,
+      "path": "C:\\WINDOWS\\system32\\uxtheme.dll"
+    },
+    {
+      "base": 140706037563392,
+      "size": 49152,
+      "path": "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL"
+    },
+    {
+      "base": 140706070724608,
+      "size": 1409024,
+      "path": "C:\\WINDOWS\\System32\\MSCTF.dll"
+    },
+    {
+      "base": 140706010431488,
+      "size": 8753152,
+      "path": "C:\\WINDOWS\\SYSTEM32\\Windows.Storage.dll"
+    },
+    {
+      "base": 140706084552704,
+      "size": 880640,
+      "path": "C:\\WINDOWS\\System32\\OLEAUT32.dll"
+    },
+    {
+      "base": 140705515765760,
+      "size": 1347584,
+      "path": "C:\\WINDOWS\\SYSTEM32\\textinputframework.dll"
+    },
+    {
+      "base": 140705498464256,
+      "size": 491520,
+      "path": "C:\\WINDOWS\\system32\\Oleacc.dll"
+    },
+    {
+      "base": 140706007285760,
+      "size": 1286144,
+      "path": "C:\\WINDOWS\\system32\\dxgi.dll"
+    },
+    {
+      "base": 140705869070336,
+      "size": 106496,
+      "path": "C:\\WINDOWS\\SYSTEM32\\windows.staterepositorycore.dll"
+    },
+    {
+      "base": 140705991098368,
+      "size": 278528,
+      "path": "C:\\WINDOWS\\SYSTEM32\\dxcore.dll"
+    },
+    {
+      "base": 140705944829952,
+      "size": 393216,
+      "path": "C:\\WINDOWS\\SYSTEM32\\directxdatabasehelper.dll"
+    },
+    {
+      "base": 140734718738432,
+      "size": 17301504,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.dll"
+    },
+    {
+      "base": 140706091433984,
+      "size": 401408,
+      "path": "C:\\WINDOWS\\System32\\SHLWAPI.dll"
+    },
+    {
+      "base": 140735304630272,
+      "size": 1097728,
+      "path": "C:\\WINDOWS\\system32\\OpenGL32.dll"
+    },
+    {
+      "base": 140735304433664,
+      "size": 184320,
+      "path": "C:\\WINDOWS\\SYSTEM32\\GLU32.dll"
+    },
+    {
+      "base": 140705824047104,
+      "size": 4288512,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll"
+    },
+    {
+      "base": 140705749729280,
+      "size": 73158656,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igc64.dll"
+    },
+    {
+      "base": 140734671880192,
+      "size": 46854144,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll"
+    },
+    {
+      "base": 140706075246592,
+      "size": 4747264,
+      "path": "C:\\WINDOWS\\System32\\SETUPAPI.dll"
+    },
+    {
+      "base": 140705983299584,
+      "size": 172032,
+      "path": "C:\\WINDOWS\\SYSTEM32\\WTSAPI32.dll"
+    },
+    {
+      "base": 140705915863040,
+      "size": 45056,
+      "path": "C:\\WINDOWS\\SYSTEM32\\VERSION.dll"
+    },
+    {
+      "base": 140706048770048,
+      "size": 1536000,
+      "path": "C:\\WINDOWS\\System32\\CRYPT32.dll"
+    },
+    {
+      "base": 140706031599616,
+      "size": 299008,
+      "path": "C:\\WINDOWS\\SYSTEM32\\SspiCli.dll"
+    },
+    {
+      "base": 140706037891072,
+      "size": 77824,
+      "path": "C:\\WINDOWS\\SYSTEM32\\msasn1.dll"
+    },
+    {
+      "base": 140705881128960,
+      "size": 241664,
+      "path": "C:\\WINDOWS\\SYSTEM32\\cryptnet.dll"
+    },
+    {
+      "base": 140706038480896,
+      "size": 409600,
+      "path": "C:\\WINDOWS\\SYSTEM32\\wldp.dll"
+    },
+    {
+      "base": 140705877524480,
+      "size": 1527808,
+      "path": "C:\\WINDOWS\\SYSTEM32\\drvstore.dll"
+    },
+    {
+      "base": 140706058797056,
+      "size": 516096,
+      "path": "C:\\WINDOWS\\System32\\WINTRUST.dll"
+    },
+    {
+      "base": 140706095038464,
+      "size": 131072,
+      "path": "C:\\WINDOWS\\System32\\imagehlp.dll"
+    },
+    {
+      "base": 140706037432320,
+      "size": 110592,
+      "path": "C:\\WINDOWS\\SYSTEM32\\CRYPTSP.dll"
+    },
+    {
+      "base": 140706028191744,
+      "size": 241664,
+      "path": "C:\\WINDOWS\\system32\\rsaenh.dll"
+    },
+    {
+      "base": 140706046935040,
+      "size": 155648,
+      "path": "C:\\WINDOWS\\SYSTEM32\\bcrypt.dll"
+    },
+    {
+      "base": 140704489603072,
+      "size": 83193856,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll"
+    },
+    {
+      "base": 140705512620032,
+      "size": 233472,
+      "path": "C:\\WINDOWS\\SYSTEM32\\rometadata.dll"
+    },
+    {
+      "base": 140737012826112,
+      "size": 319488,
+      "path": "C:\\ProgramData\\obs-studio-hook\\graphics-hook64.dll"
+    },
+    {
+      "base": 140705904197632,
+      "size": 1458176,
+      "path": "C:\\WINDOWS\\system32\\nvspcap64.dll"
+    },
+    {
+      "base": 140706047131648,
+      "size": 167936,
+      "path": "C:\\WINDOWS\\SYSTEM32\\profapi.dll"
+    },
+    {
+      "base": 140705600176128,
+      "size": 5681152,
+      "path": "C:\\WINDOWS\\SYSTEM32\\nvapi64.dll"
+    },
+    {
+      "base": 140705682096128,
+      "size": 581632,
+      "path": "C:\\Windows\\System32\\DispBroker.dll"
+    },
+    {
+      "base": 140734620565504,
+      "size": 51269632,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll"
+    },
+    {
+      "base": 140705962131456,
+      "size": 143360,
+      "path": "C:\\WINDOWS\\system32\\d3d12.dll"
+    },
+    {
+      "base": 140734746591232,
+      "size": 2555904,
+      "path": "C:\\WINDOWS\\system32\\D3D12Core.dll"
+    },
+    {
+      "base": 140704608419840,
+      "size": 802816,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll"
+    },
+    {
+      "base": 140704609927168,
+      "size": 1290240,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\NvMemMapStoragex.dll"
+    },
+    {
+      "base": 140705892204544,
+      "size": 217088,
+      "path": "C:\\WINDOWS\\SYSTEM32\\WINMM.dll"
+    },
+    {
+      "base": 140704386842624,
+      "size": 87707648,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll"
+    },
+    {
+      "base": 140704634765312,
+      "size": 7491584,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvppex.dll"
+    },
+    {
+      "base": 140737039302656,
+      "size": 188416,
+      "path": "C:\\WINDOWS\\SYSTEM32\\D3DSCache.dll"
+    },
+    {
+      "base": 140706035138560,
+      "size": 176128,
+      "path": "C:\\WINDOWS\\SYSTEM32\\USERENV.dll"
+    },
+    {
+      "base": 140705829289984,
+      "size": 2330624,
+      "path": "C:\\WINDOWS\\SYSTEM32\\twinapi.appcore.dll"
+    },
+    {
+      "base": 140705971896320,
+      "size": 2240512,
+      "path": "C:\\WINDOWS\\system32\\dcomp.dll"
+    },
+    {
+      "base": 140705964621824,
+      "size": 102400,
+      "path": "C:\\WINDOWS\\SYSTEM32\\Microsoft.Internal.WarpPal.dll"
+    },
+    {
+      "base": 140706004598784,
+      "size": 2490368,
+      "path": "C:\\WINDOWS\\SYSTEM32\\d3d11.dll"
+    },
+    {
+      "base": 140705864155136,
+      "size": 4698112,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10iumd64.dll"
+    },
+    {
+      "base": 140705982513152,
+      "size": 647168,
+      "path": "C:\\WINDOWS\\SYSTEM32\\apphelp.dll"
+    },
+    {
+      "base": 140705836498944,
+      "size": 25833472,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.DLL"
+    },
+    {
+      "base": 140705828765696,
+      "size": 503808,
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\IntelControlLib.dll"
+    },
+    {
+      "base": 140706034483200,
+      "size": 438272,
+      "path": "C:\\WINDOWS\\system32\\mswsock.dll"
+    },
+    {
+      "base": 140705201061888,
+      "size": 49152,
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p5-p6-closure-2026-10-10\\native-memory-trace\\compiled-ninja\\AzureNtTrace.dll"
+    }
+  ],
+  "snapshotErrors": [
+    {
+      "seconds": 21.244085399997857,
+      "error": "[WinError 299] \u4ec5\u5b8c\u6210\u90e8\u5206\u7684 ReadProcessMemory \u6216 WriteProcessMemory \u8bf7\u6c42\u3002"
+    }
+  ]
+}

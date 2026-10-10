@@ -193,5 +193,8 @@ P5 保持 Active，性能与人工门禁按实际证据维护。
 
 连续关卡回放按目标提交等待，保持后续输入时序。
 
+内存诊断已关联驱动调用与单区域驻留。
+范围见[进程内追踪](docs/acceptance/p5/closure/native-memory-trace.md)。
+
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。

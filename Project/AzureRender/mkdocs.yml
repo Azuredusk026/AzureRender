@@ -31,6 +31,7 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 进程内内存诊断: acceptance/p5/closure/native-memory-trace.md
   - 游戏输入回放: runtime/game-input-replay.md
   - 资产格式拓展计划: plans/2026-10-11-asset-format-expansion.md
   - 平台跳跃关卡: runtime/platformer-gameplay.md
