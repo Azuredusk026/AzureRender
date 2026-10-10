@@ -225,6 +225,16 @@
       "bytes": 1677029,
       "sha256": "4190101a9ac236df31c6544a595c4020e53c562ef54c9ea4684dcc13c94f8d11",
       "evidence": "docs/acceptance/g15/evidence/manifest.json"
+    },
+    {
+      "scene": "platformer",
+      "role": "measured-course",
+      "path": "docs/media/platformer-course.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 214004,
+      "sha256": "f34e6851e01b2963aa9fa4a5f6abee958a3a5a10df6c3f8d20b32c4d949c9429",
+      "evidence": "docs/acceptance/g16/evidence/manifest.json"
     }
   ],
   "evidence": [

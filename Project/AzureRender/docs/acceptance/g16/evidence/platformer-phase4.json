@@ -1,0 +1,94 @@
+{
+  "audioEvents": {
+    "audio-coin": 8,
+    "audio-finish": 1,
+    "audio-jump": 7,
+    "audio-land": 8,
+    "audio-respawn": 2
+  },
+  "audioStarts": 26,
+  "coins": 8,
+  "fallRecovery": true,
+  "fps": 15,
+  "frames": 565,
+  "landings": [
+    {
+      "frame": 172,
+      "grounded": true,
+      "platform": "platform-1",
+      "position": [
+        0.0,
+        -5.960464477539063e-08,
+        -7.11777400970459
+      ]
+    },
+    {
+      "frame": 211,
+      "grounded": true,
+      "platform": "platform-2",
+      "position": [
+        0.0,
+        0.1499999761581421,
+        -13.168879508972168
+      ]
+    },
+    {
+      "frame": 252,
+      "grounded": true,
+      "platform": "platform-3",
+      "position": [
+        0.35499995946884155,
+        0.15000009536743164,
+        -19.753372192382813
+      ]
+    },
+    {
+      "frame": 323,
+      "grounded": true,
+      "platform": "platform-4",
+      "position": [
+        0.4999999403953552,
+        0.3500000238418579,
+        -26.337900161743164
+      ]
+    },
+    {
+      "frame": 425,
+      "grounded": true,
+      "platform": "platform-5",
+      "position": [
+        0.0,
+        0.3500000238418579,
+        -33.285823822021484
+      ]
+    },
+    {
+      "frame": 498,
+      "grounded": true,
+      "platform": "platform-6",
+      "position": [
+        0.0,
+        0.3500000238418579,
+        -40.40350341796875
+      ]
+    },
+    {
+      "frame": 542,
+      "grounded": true,
+      "platform": "platform-7",
+      "position": [
+        0.0,
+        0.3500000238418579,
+        -47.45451736450195
+      ]
+    }
+  ],
+  "mixedEnergy": 1642.925051787332,
+  "passed": true,
+  "ui": {
+    "checkpoint": "Checkpoint saved | Falls: 2",
+    "feedback": "All platforms cleared! Optional coins remain a bonus.",
+    "objective": "Course complete! Press R to play again.",
+    "progress": "Coins: 8.0 / 10"
+  }
+}

@@ -6,7 +6,7 @@
   "license": "CC0-1.0",
   "blender": "4.2.22 LTS",
   "inputs": {
-    "generate_exploration_environment.py": "e5f1bdce28e8532abd1bee7c5ff765c54af5b7e930a12c720e76486578c0da39",
+    "generate_exploration_environment.py": "e46c38aa4d31292af2a28f92901d0d28a6a7cae7fa96475695c6887921b4f80b",
     "blender_exploration_environment.py": "1632bb508b5907a5a0a377f3937c41ed58b5f5822a82ee6bbbdc6666efcc9ef5"
   },
   "outputs": {

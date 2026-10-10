@@ -30,7 +30,7 @@ int main(){try{
     {
         auto author=EditorContext::openProject(folder/"project.azureproject");EditorSession authoring(author);
         author->selectNode(0);require(static_cast<bool>(authoring.edit("component.fields",{{"type","azure.rigid-body"},{"values",{{"halfExtent",{.7,.5,.5}}}}})),"Edit legacy body");
-        require(author->runtimeComponents().at("fixed").at("azure.rigid-body").at("version")==2,"Editing a legacy component writes its current version");
+        require(author->runtimeComponents().at("fixed").at("azure.rigid-body").at("version")==3,"Editing a legacy component writes its current version");
         author->selectNode(2);require(static_cast<bool>(authoring.edit("component.add",{{"type","azure.hinge"}})),"Add hinge");
         require(static_cast<bool>(authoring.edit("component.fields",{{"type","azure.hinge"},{"values",{{"bodyA","fixed"},{"bodyB","moving"},{"axis",{0,0,1}},{"normal",{1,0,0}}}}})),"Configure hinge atomically");
         RenderSettings attached=author->renderSettings();author->attachRenderSettings(attached);const auto invalidStart=author->documentContent();
@@ -41,7 +41,7 @@ int main(){try{
         require(author->documentContent()==invalidStart&&author->undoCount()==undo,"Failed authoring restores document and history");
         author->selectNode(1);require(static_cast<bool>(authoring.edit("component.add",{{"type","azure.rigid-body"}})),"Add moving body");
         require(static_cast<bool>(authoring.edit("component.fields",{{"type","azure.rigid-body"},{"values",{{"dynamic",true}}}})),"Configure dynamic body");
-        require(author->runtimeComponents().at("moving").at("azure.rigid-body").at("version")==2,"Edited rigid bodies use the current component version");
+        require(author->runtimeComponents().at("moving").at("azure.rigid-body").at("version")==3,"Edited rigid bodies use the current component version");
         author->save();auto reopened=EditorContext::openProject(folder/"project.azureproject");require(reopened->componentData("joint","azure.hinge").at("axis")==Json::array({0,0,1}),"Physics authoring saves and reopens");
         require(static_cast<bool>(authoring.edit("preview.simulate")),"Valid project simulation starts");authoring.advance(.02);require(authoring.execute(EditorCommand::Stop),"Project simulation stops");
     }

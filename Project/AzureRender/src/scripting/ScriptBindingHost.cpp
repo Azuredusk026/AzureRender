@@ -119,6 +119,8 @@ Json ScriptBindingHost::invoke(const ScriptObject& object,const std::string& met
             && runtime_.entity(target->node)==target->target ? target->node : std::string();
     }
     if(method=="has")return components.contains(args[0].get<std::string>(),runtime_.world(),entity);
+    if(method=="grounded")return game_.physics().grounded(entity);
+    if(method=="velocity")return game_.physics().velocity(entity);
     if(method=="action")return game_.input().down(args[0].get<std::string>());
     if(method=="pressed")return game_.input().pressed(args[0].get<std::string>());
     if(method=="get" || method=="set") {

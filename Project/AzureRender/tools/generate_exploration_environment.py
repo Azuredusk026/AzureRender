@@ -81,7 +81,9 @@ def author(output,blender,character=None):
         (assets/'hero.lua').write_text('''function update(dt)
     if self:pressed('restart') then self:load_level('assets:/exploration.azurelevel') end
     local collected=self:get('azure.task-state','collected')
-    if self:get('azure.task-state','completed') then self:ui_text('objective','Expedition complete! Press R to explore again.')
+    if self:get('azure.task-state','completed') then
+        self:ui_text('objective','Expedition complete! Press E to enter Sky Steps, or R to explore again.')
+        if self:pressed('interact') then self:load_level('assets:/platformer/platformer.azurelevel'); return end
     elseif self:get('azure.task-state','doorOpened') then self:ui_text('objective','Enter the illuminated hall.')
     elseif self:get('azure.task-state','started') then self:ui_text('objective','Find three artifacts by the golden stone markers.')
     else self:ui_text('objective','Talk to the guide at the trailhead [E].') end
@@ -110,6 +112,7 @@ Esc 释放光标，点击游戏区域恢复控制。
 收集完成后，打开蓝色灯光标记的大门。
 
 进入大厅尽头即可完成探索。
+完成后按 E 进入平台跳跃，R 重新开始探索。
 步行速度为每秒两米，冲刺速度为每秒五米。
 路线包含短距离支路，通道宽度为 4.6 米。
 素材与生成来源见 ENVIRONMENT-GENERATION.json。
@@ -118,6 +121,10 @@ Esc 释放光标，点击游戏区域恢复控制。
         for path in candidate.rglob('*'):
             if path.is_file():
                 target=output/path.relative_to(candidate);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
+    platformer=SOURCE/'assets_public/platformer'
+    if (platformer/'project.azureproject').exists():
+        from generate_platformer import link_exploration
+        link_exploration(platformer,output)
     print(json.dumps(dict(output=str(output),routeMeters=meters,environmentAssets=len(environment_assets),entities=quality['entities'])))
 
 if __name__=='__main__':

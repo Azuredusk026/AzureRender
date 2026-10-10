@@ -133,3 +133,14 @@ NativeAOT 使用发布期直接类型构造。
 教程见[托管脚本工作流](../tutorials/managed-scripts.md)。
 源码许可见 `third_party/dotnet/source.json`。
 阶段范围见[实施步骤](../plans/g11-implementation.md)。
+
+## 角色状态查询
+
+`grounded()` 返回当前角色是否处于地面接触。
+`velocity()` 返回三个世界轴向的实际物理速度。
+查询通过对象身份守卫，并在宿主所属线程执行。
+两个查询均为只读操作，供 Lua 与托管绑定共享。
+
+平台音效依据真实起跳与落地状态触发。
+普通实体查询返回无支撑与零速度。
+失效句柄按公共对象契约产生诊断。

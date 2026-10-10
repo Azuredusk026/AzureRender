@@ -9,13 +9,14 @@ using CollisionTriangle=std::array<std::array<float,3>,3>;
 using CollisionMesh=std::vector<CollisionTriangle>;
 using CollisionMeshResolver=std::function<CollisionMesh(const std::string&)>;
 inline void validateRigidBody(const game::RigidBody& body,const std::array<float,3>& scale={1,1,1}){
+    if(body.dynamic&&body.kinematic)throw std::invalid_argument("Dynamic and kinematic motion are mutually exclusive");
     for(unsigned i=0;i<3;++i)if(!std::isfinite(scale[i])||std::abs(scale[i])<.001F||!std::isfinite(body.halfExtent[i])||body.halfExtent[i]<=0)throw std::invalid_argument("Collision extent and absolute scale must be positive and finite");
     if(!std::isfinite(body.radius)||body.radius<=0||!std::isfinite(body.halfHeight)||body.halfHeight<=0)throw std::invalid_argument("Collision radius and half height must be positive and finite");
     if(body.shape!="box"&&body.shape!="sphere"&&body.shape!="capsule"&&body.shape!="mesh")throw std::invalid_argument("Unknown collision shape");
     const auto same=[](float a,float b){return std::abs(std::abs(a)-std::abs(b))<1e-5F;};
     if(body.shape=="sphere"&&(!same(scale[0],scale[1])||!same(scale[0],scale[2])))throw std::invalid_argument("Sphere requires uniform absolute scale");
     if(body.shape=="capsule"&&!same(scale[0],scale[2]))throw std::invalid_argument("Capsule requires equal absolute X/Z scale");
-    if(body.shape=="mesh"&&(body.dynamic||body.mesh.empty()||body.trigger))throw std::invalid_argument("Mesh collision requires a static nonsensor body and model reference");
+    if(body.shape=="mesh"&&(body.dynamic||body.kinematic||body.mesh.empty()||body.trigger))throw std::invalid_argument("Mesh collision requires a static nonsensor body and model reference");
 }
 inline void validateHinge(const game::Hinge& hinge,bool requireEndpoints=true){
     if(requireEndpoints&&(hinge.bodyA.empty()||hinge.bodyB.empty()||hinge.bodyA==hinge.bodyB))throw std::invalid_argument("Hinge requires two distinct body references");

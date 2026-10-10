@@ -80,6 +80,7 @@ void Registry::addMigration(const std::string& name, unsigned version, std::func
 Registry makeRuntimeRegistry() {
     Registry registry; registerGeneratedTypes(registry);
     registry.addMigration("azure.rigid-body", 1, [](Json data) { return data; });
+    registry.addMigration("azure.rigid-body", 2, [](Json data) { data["kinematic"]=false;return data; });
     registry.addMigration("azure.character", 1, [](Json data) { return data; });
     registry.addMigration("azure.character", 2, [](Json data) { data["sprintMultiplier"]=2.5F;return data; });
     registry.addMigration("azure.character", 3, [](Json data) { data["inputProfile"]="default";return data; });

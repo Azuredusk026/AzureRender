@@ -901,10 +901,12 @@
     },
     {
       "id": "G16",
-      "status": "Planned",
+      "status": "Complete",
       "kind": "main",
       "items": [],
-      "evidence": [],
+      "evidence": [
+        "docs/acceptance/g16/2026-10-10.md"
+      ],
       "commit": null,
       "dependsOn": [
         "G15"
@@ -925,7 +927,7 @@
     },
     {
       "id": "P5",
-      "status": "Planned",
+      "status": "Active",
       "kind": "main",
       "items": [
         "A01",
@@ -1117,7 +1119,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring; U13: 149 non-GPU, 6 final-host GPU, multi-document and Prefab UI, animation controls, managed template execution"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring; U13: 149 non-GPU, 6 final-host GPU, multi-document and Prefab UI, animation controls, managed template execution; G16: 154 non-GPU, 4 affected GPU, 21 phase-varied mandatory landings, full game sequence, five audio events and lifecycle recovery"
   },
   "execution": {
     "order": [
@@ -1133,7 +1135,7 @@
       "G16",
       "P5"
     ],
-    "active": "G16",
+    "active": "P5",
     "completed": [
       "U8",
       "U9",
@@ -1143,13 +1145,20 @@
       "U12",
       "G13",
       "U13",
-      "G15"
+      "G15",
+      "G16"
     ],
     "gameEvidence": {
       "G15": {
         "status": "Complete",
         "evidence": "docs/acceptance/g15/evidence/manifest.json",
         "acceptance": "docs/acceptance/g15/2026-10-10.md",
+        "commitPolicy": "phase completion commit"
+      },
+      "G16": {
+        "status": "Complete",
+        "evidence": "docs/acceptance/g16/evidence/manifest.json",
+        "acceptance": "docs/acceptance/g16/2026-10-10.md",
         "commitPolicy": "phase completion commit"
       }
     }

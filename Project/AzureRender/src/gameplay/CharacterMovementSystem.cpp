@@ -37,6 +37,8 @@ public:
             const float targetX=(x*std::cos(radians)-z*std::sin(radians))/length*speed;
             const float targetZ=(x*std::sin(radians)+z*std::cos(radians))/length*speed;
             auto velocity=c.physics.velocity(entity);
+            const auto support=c.physics.groundVelocity(entity);
+            velocity[0]-=support[0];velocity[2]-=support[2];
             const float dx=targetX-velocity[0],dz=targetZ-velocity[2],distance=std::hypot(dx,dz);
             const float amount=(x==0&&z==0?settings.braking:settings.acceleration)*static_cast<float>(c.fixedStep);
             const float factor=distance>0?std::min(1.0F,amount/distance):0;

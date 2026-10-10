@@ -17,6 +17,8 @@
     {"name":"audio_play","managed":"AudioPlay","parameters":[],"result":"void","mutating":true},
     {"name":"ui_text","managed":"UiText","parameters":[{"name":"id","type":"string"},{"name":"text","type":"string"}],"result":"void","mutating":true},
     {"name":"get","managed":"Get","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"}],"result":"value","mutating":false},
-    {"name":"set","managed":"Set","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"value"}],"result":"void","mutating":true}
+    {"name":"set","managed":"Set","parameters":[{"name":"type","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"value"}],"result":"void","mutating":true},
+    {"name":"grounded","managed":"Grounded","parameters":[],"result":"boolean","mutating":false},
+    {"name":"velocity","managed":"Velocity","parameters":[],"result":"array","mutating":false}
   ]
 }

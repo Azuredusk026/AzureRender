@@ -4,12 +4,14 @@
 #include <cstdint>
 #include <string>
 namespace azurerender::game {
-AZURE_TYPE("azure.rigid-body", 2)
+AZURE_TYPE("azure.rigid-body", 3)
 struct RigidBody {
     AZURE_FIELD("Half extent", 0.01, 10000)
     std::array<float, 3> halfExtent{0.5F, 0.5F, 0.5F};
     AZURE_FIELD("Dynamic", 0, 1)
     bool dynamic = false;
+    AZURE_FIELD("Kinematic", 0, 1)
+    bool kinematic = false;
     AZURE_FIELD("Trigger", 0, 1)
     bool trigger = false;
     AZURE_FIELD("Collision shape", 0, 0)

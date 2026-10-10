@@ -15,6 +15,8 @@ AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Wind
 
 ## 使用入口
 
+平台跳跃、承载与连续通关见[平台关卡](docs/runtime/platformer-gameplay.md)。
+
 探索路线、Blender 与材质见[环境制作](docs/runtime/exploration-environment.md)。
 
 场景标签、动画、脚本与 Prefab 见[内容制作](docs/runtime/authoring-workflows.md)。

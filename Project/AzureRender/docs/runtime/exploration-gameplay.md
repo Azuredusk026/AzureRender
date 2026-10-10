@@ -90,3 +90,10 @@ python tools/test_runtime_spawn_gpu.py --executable build/ninja-msvc-release/Azu
 ```
 
 路线报告保存逐帧任务、对象、交互、相机遮挡和关卡版本。工具使用生产输入，检查完成时间、两次重开、界面绘制和退出释放。私有主角验收通过同一工具的 `--character` 参数运行。
+
+## 后续关卡
+
+探索完成后按 E 进入平台跳跃关卡。
+完成时按 R 可重新开始探索。
+平台关卡也提供独立项目入口。
+操作与机制见[平台关卡](platformer-gameplay.md)。

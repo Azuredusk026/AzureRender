@@ -58,7 +58,7 @@ Json ComponentRegistry::describe(const std::string& type) const {
 ComponentRegistry makeRuntimeComponentRegistry() {
     ComponentRegistry result(reflection::makeRuntimeRegistry()); registerGeneratedComponents(result);
     result.addValidation("azure.rigid-body",[](const Json& value){
-        game::RigidBody body;body.shape=value.at("shape");body.radius=value.at("radius");body.halfHeight=value.at("halfHeight");body.halfExtent=value.at("halfExtent");body.dynamic=value.at("dynamic");body.trigger=value.at("trigger");body.mesh=value.at("mesh");validateRigidBody(body);
+        game::RigidBody body;body.shape=value.at("shape");body.radius=value.at("radius");body.halfHeight=value.at("halfHeight");body.halfExtent=value.at("halfExtent");body.dynamic=value.at("dynamic");body.kinematic=value.at("kinematic");body.trigger=value.at("trigger");body.mesh=value.at("mesh");validateRigidBody(body);
     });
     result.addValidation("azure.hinge",[](const Json& value){
         game::Hinge hinge;hinge.bodyA=value.at("bodyA");hinge.bodyB=value.at("bodyB");hinge.axis=value.at("axis");hinge.normal=value.at("normal");hinge.anchorA=value.at("anchorA");hinge.anchorB=value.at("anchorB");hinge.minimumAngle=value.at("minimumAngle");hinge.maximumAngle=value.at("maximumAngle");validateHinge(hinge,false);

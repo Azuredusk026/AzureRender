@@ -151,3 +151,5 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 
 编辑器交互步骤见[交互教程](tutorials/editor-interaction.md)。
 内容类型、引用和任务见[内容制作服务](runtime/content-workflows.md)。
+
+平台跳跃与连续通关见[平台关卡](runtime/platformer-gameplay.md)。

@@ -1,7 +1,9 @@
 function update(dt)
     if self:pressed('restart') then self:load_level('assets:/exploration.azurelevel') end
     local collected=self:get('azure.task-state','collected')
-    if self:get('azure.task-state','completed') then self:ui_text('objective','Expedition complete! Press R to explore again.')
+    if self:get('azure.task-state','completed') then
+        self:ui_text('objective','Expedition complete! Press E to enter Sky Steps, or R to explore again.')
+        if self:pressed('interact') then self:load_level('assets:/platformer/platformer.azurelevel'); return end
     elseif self:get('azure.task-state','doorOpened') then self:ui_text('objective','Enter the illuminated hall.')
     elseif self:get('azure.task-state','started') then self:ui_text('objective','Find three artifacts by the golden stone markers.')
     else self:ui_text('objective','Talk to the guide at the trailhead [E].') end

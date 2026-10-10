@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "measurementSha256": "1cdc892d81c29a4939a542e6641bc1676af4e5c996aa03e7cec1dead92281294",
+  "generators": {
+    "generate_platformer.py": "f61b15115b54b53deb321d1e51fbc0a398141027bdf70f5faf989e5030d562dd",
+    "blender_platformer.py": "1f1d099279d2f683d253a4f013d8b47dee925d802e7e408d8a6476e4f7722550"
+  },
+  "outputs": {
+    "assets/audio/coin.wav": "8d8e51709a430aaa5da65c6f29cb8e4321282139533e3f3e4968c1755ff4f039",
+    "assets/audio/finish.wav": "66152f6d4f12740447251f4de9adce9284de6a32b7e25710f481c4f129292014",
+    "assets/audio/jump.wav": "8baa929fe677c5d8024db4bdf322c80d067008a18dbcbd8782b86c86c6cb7d20",
+    "assets/audio/land.wav": "ee2c850f7c5b114e113b8ebbed1f76bc80390913633937ebefb4bb4911db7e1b",
+    "assets/audio/respawn.wav": "158b7ffbe6ad00b997210b7fc48efd001baace9daa6bfacdbc16dacaa07e9e26",
+    "assets/CHARACTER-LICENSE.txt": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb",
+    "assets/checkpoint.lua": "4be0e01f82abc6dfff42b30523898384ee3fc2698a78f65b2bab1ffecdf9fd15",
+    "assets/coin.lua": "7976547096f1c6a06273b21183355d6a146b092da797c716315c48c960f487bd",
+    "assets/environment/arch.glb": "7633ede1c17880a63b59306cec9778adecc0abf897236ef8594c7f437e6dd025",
+    "assets/environment/blender-version.txt": "f99607f24ed356f458cdad9f1b5ecb0771fc1570dc4ccdb400e09734a410cea5",
+    "assets/environment/challenge.glb": "539b8bcdab055300cd8e6787fe9cb371dce5f860fe4231a10e55dc3356ab4667",
+    "assets/environment/coin.glb": "ed2ab982ba2fbd5d2b8df289c9def0de094be9c6fd7c310d78ef9204f621c698",
+    "assets/environment/moving.glb": "408ea2b89e5f2a207935edad6dfbc2e21a15b70232607bcb1d7fd90e0eb80160",
+    "assets/environment/platform.glb": "ff7a9a3f517a63ffe366e77c6a87680aea57f79476557da932eea1e6cedd45ba",
+    "assets/environment/practice.glb": "089482821cfa275d3b527ab3520a577dae77715b1a1de15ffcf9316014ddbf94",
+    "assets/environment/rock.glb": "242973dfef235a51873fa3dd58159c8b6c3974aed4dcda8595d932abe6d96f6f",
+    "assets/environment/stone-albedo.png": "01f581c65304fe10e5bd52282f40c4ac4bb7783236cbdd38b5ddde4a23e3b308",
+    "assets/environment/stone-normal.png": "f3afd237f207d4f2f5e12af44ea0887aefd7a6f7075d64ffb070c83bbdf00803",
+    "assets/environment/stone-orm.png": "a97e73beb30c683ffc3270ac9306cbba77e12da69d4b17b5f343058856ae4f7a",
+    "assets/goal.lua": "9f30ff4c98da0fbd60f5cdb95e05f9ad4ccd522b7d214660a76e40553faeeb14",
+    "assets/hero.gltf": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f",
+    "assets/hero.lua": "173d619c929db435db7744c064540e660a06231a4820a1b9696848d3bef46868",
+    "assets/hud.rml": "b47770d7fc42946473a59f5eb7f3b273cf3f3e71b408a0c5102a24d6eacb5ff3",
+    "assets/locomotion.json": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+    "assets/motion.lua": "700e30c91efa141da52c9c14b7537f3fc9582718585d49c38e786566877621a7",
+    "assets/platformer.azurelevel": "2f5264437cfdd5b4d4462a58b03bc5bf9f9a45b6bc69ef8b1505783fa6160826"
+  }
+}

@@ -631,6 +631,7 @@ void AzureRenderApp::buildSceneFrameData(
             const auto* animator=activeRuntime()->world().tryGet<azurerender::game::Animator>(entity);
             if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
                 {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
+                {"velocity",game->physics().velocity(entity)},
                 {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
         });
         auto* runtime=activeRuntime();state["tasks"]=nlohmann::json::array();
@@ -643,6 +644,11 @@ void AzureRenderApp::buildSceneFrameData(
         runtime->world().each<azurerender::game::Checkpoint>([&](auto,const auto& value){checkpointActivated|=value.activated;});
         state["collectibles"]=collectibles;state["doorOpen"]=doorOpen;state["checkpointActivated"]=checkpointActivated;
         state["levelRevision"]=runtime->sceneRevision();
+        state["rigidBodies"]=nlohmann::json::array();
+        runtime->world().each<azurerender::ecs::TransformComponent,azurerender::game::RigidBody>([&](auto entity,const auto& transform,const auto& body){
+            if(body.kinematic)state["rigidBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation}});
+        });
+        state["audioStarts"]=activePresentation()?activePresentation()->audioStarts():0;
         state["interactionTarget"]=game->interactionTarget()?game->interactionTarget()->node:std::string();
         state["cameraObstructed"]=game->hasCamera()&&game->camera().actualDistance()<game->camera().distance()-.1F;
         gameRouteFrames_.push_back(std::move(state));}

@@ -101,19 +101,20 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
         validateRigidBody(settings,transform.scale);
         auto existing = p.bodies.find(entity);
         if (existing != p.bodies.end() && (existing->second.settings.halfExtent != settings.halfExtent
-            || existing->second.settings.dynamic != settings.dynamic || existing->second.settings.trigger != settings.trigger || existing->second.scale != transform.scale
+            || existing->second.settings.dynamic != settings.dynamic || existing->second.settings.kinematic != settings.kinematic || existing->second.settings.trigger != settings.trigger || existing->second.scale != transform.scale
             || existing->second.settings.shape!=settings.shape || existing->second.settings.radius!=settings.radius || existing->second.settings.halfHeight!=settings.halfHeight || existing->second.settings.mesh!=settings.mesh)) {
             p.removeBody(entity); existing = p.bodies.end();
         }
         if (existing == p.bodies.end()) {
             const auto shape=createPhysicsShape(settings,transform.scale,meshResolver_);
             JPH::BodyCreationSettings create(shape, JPH::RVec3(vec(transform.translation)), rotation(transform.rotation),
-                settings.dynamic ? JPH::EMotionType::Dynamic : JPH::EMotionType::Static, settings.dynamic || settings.trigger ? 1 : 0);
+                settings.dynamic ? JPH::EMotionType::Dynamic : settings.kinematic ? JPH::EMotionType::Kinematic : JPH::EMotionType::Static, settings.dynamic || settings.kinematic || settings.trigger ? 1 : 0);
             create.mIsSensor = settings.trigger;
             const auto id = bi.CreateAndAddBody(create, JPH::EActivation::Activate);
             if (id.IsInvalid()) throw std::runtime_error("Jolt body capacity exceeded");
             bi.SetUserData(id, entity); p.bodies.emplace(entity, Impl::Body{id, runtime.nodeId(entity), settings, transform.scale});
-        } else if (!settings.dynamic) bi.SetPositionAndRotation(existing->second.id, JPH::RVec3(vec(transform.translation)), rotation(transform.rotation), JPH::EActivation::DontActivate);
+        } else if (settings.kinematic) bi.MoveKinematic(existing->second.id,JPH::RVec3(vec(transform.translation)),rotation(transform.rotation),dt);
+        else if (!settings.dynamic) bi.SetPositionAndRotation(existing->second.id, JPH::RVec3(vec(transform.translation)), rotation(transform.rotation), JPH::EActivation::DontActivate);
     });
     for(auto it=p.hinges.begin();it!=p.hinges.end();)if(!world.has<game::Hinge>(it->first)||!p.bodies.count(it->second.a)||!p.bodies.count(it->second.b)){
         p.system.RemoveConstraint(it->second.value);it=p.hinges.erase(it);
@@ -164,17 +165,19 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
         const float length = std::sqrt(move.x * move.x + move.z * move.z), denominator = std::max(1.0F, length);
         float vertical = character.GetLinearVelocity().GetY();
         const bool onGround = character.GetGroundState() == JPH::CharacterBase::EGroundState::OnGround;
+        character.UpdateGroundVelocity();
+        const auto support=onGround?character.GetGroundVelocity():JPH::Vec3::sZero();
         auto& state = found->second;
         state.groundAge = onGround ? 0 : state.groundAge + dt;
-        if (onGround && vertical <= 0) state.jumping = false;
+        if (onGround && vertical <= support.GetY()+.01F) state.jumping = false;
         state.jumpBuffer = move.jump ? .1F : std::max(0.0F,state.jumpBuffer-dt);
-        if (onGround && vertical < 0) vertical = 0;
+        if (onGround && !state.jumping) vertical = support.GetY();
         if (!state.jumping && state.groundAge <= .1F && state.jumpBuffer > 0) {
-            vertical = settings.jumpSpeed; state.jumpBuffer = 0; state.groundAge = 1; state.jumping = true;
+            vertical = settings.jumpSpeed+support.GetY(); state.jumpBuffer = 0; state.groundAge = 1; state.jumping = true;
         }
         vertical -= 9.81F * dt;
         const float speed = move.velocity ? 1 : settings.speed / denominator;
-        character.SetLinearVelocity({move.x * speed, vertical, move.z * speed});
+        character.SetLinearVelocity({move.x * speed+support.GetX(), vertical, move.z * speed+support.GetZ()});
         JPH::CharacterVirtual::ExtendedUpdateSettings update;
         update.mWalkStairsStepUp = {0,settings.stepHeight,0};
         if (vertical > 0) update.mStickToFloorStepDown = JPH::Vec3::sZero();
@@ -219,6 +222,10 @@ std::optional<RayHit> PhysicsWorld::raycast(const std::array<float, 3>& origin, 
 std::array<float,3> PhysicsWorld::velocity(ecs::Entity entity) const {
     const auto found=impl_->characters.find(entity);
     return found==impl_->characters.end()?std::array<float,3>{}:array(found->second.value->GetLinearVelocity());
+}
+std::array<float,3> PhysicsWorld::groundVelocity(ecs::Entity entity) const {
+    const auto found=impl_->characters.find(entity);
+    return found==impl_->characters.end()||!grounded(entity)?std::array<float,3>{}:array(found->second.value->GetGroundVelocity());
 }
 std::optional<RayHit> PhysicsWorld::sphereSweep(const std::array<float,3>& origin,
     const std::array<float,3>& displacement, float radius, ecs::Entity ignore) const {
