@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "PlannedAfterCurrentAcceptance",
+  "plan": "docs/plans/2026-10-11-asset-format-expansion.md",
+  "executionAuthorized": true,
+  "prerequisites": ["P5-A", "P5-B", "P5-C", "P5-D", "P5-E", "U15", "U16", "P6"],
+  "prerequisitesComplete": false,
+  "phases": [
+    {"id": "G17", "summary": "格式注册与传输契约", "status": "Planned", "dependsOn": ["P6"]},
+    {"id": "G18", "summary": "模型互操作与动画保真", "status": "Planned", "dependsOn": ["G17"]},
+    {"id": "G19", "summary": "图像解码与精度语义", "status": "Planned", "dependsOn": ["G18"]},
+    {"id": "G20", "summary": "音频解码与资源生命周期", "status": "Planned", "dependsOn": ["G19"]},
+    {"id": "G21", "summary": "通用导出与往返验证", "status": "Planned", "dependsOn": ["G20"]},
+    {"id": "U17", "summary": "导入导出与重导入体验", "status": "Planned", "dependsOn": ["G21"]},
+    {"id": "P7", "summary": "第一批格式制作与交付验收", "status": "Planned", "dependsOn": ["U17"]},
+    {"id": "G22", "summary": "压缩纹理与 mip 交换", "status": "Planned", "dependsOn": ["P7"]},
+    {"id": "G23", "summary": "压缩音频与容器交换", "status": "Planned", "dependsOn": ["G22"]},
+    {"id": "P8", "summary": "完整格式能力收口", "status": "Planned", "dependsOn": ["G23"]}
+  ],
+  "firstBatch": {
+    "model": {"input": ["gltf", "glb", "fbx", "obj", "stl", "ply", "dae"], "output": ["gltf", "glb", "obj", "stl", "ply"]},
+    "image": {"input": ["png", "jpeg", "bmp", "tga", "ppm", "hdr", "exr", "tiff", "webp"], "output": ["png", "jpeg", "bmp", "tga", "hdr", "exr", "tiff", "webp"]},
+    "audio": {"input": ["wav", "mp3", "flac", "ogg-vorbis"], "output": ["wav", "flac", "ogg-vorbis"]}
+  },
+  "secondBatch": {
+    "texture": {"input": ["dds", "ktx2"], "output": ["dds", "ktx2"]},
+    "audio": {"input": ["ogg-opus", "aac", "m4a"], "output": ["ogg-opus", "mp3"]}
+  },
+  "implementedFormats": {},
+  "evidence": {},
+  "complete": false
+}
