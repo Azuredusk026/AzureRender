@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-diagnostic.py", line 230, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-diagnostic.py", line 230, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-diagnostic.py", line 202, in run
+    shutil.copyfile(Path(__file__).resolve().parents[1]/'assets_public/scene_inspector/assets/cube.gltf',source)
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\shutil.py", line 256, in copyfile
+    with open(src, 'rb') as fsrc:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\assets_public\\scene_inspector\\assets\\cube.gltf'

@@ -311,7 +311,7 @@ EditRegistry editorOperations(EditorSession& session) {
     });
     registry.add({"document.close",1,schema({{"id",text},{"decision",text}}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
         if(a.contains("id")){if(session.playing()||session.building())throw EditRejection("Document close requires edit mode");session.requestDocumentClose(a.at("id"),a.value("decision",std::string("ask")));return {{"pending",true}};}
-        if(!session.requestDocumentAction(DocumentAction::Close))throw EditRejection(session.lastError_);return nullptr;
+        if(!session.requestWindowClose())throw EditRejection(session.lastError_);return nullptr;
     });
     registry.add({"document.decision",1,schema({{"value",text}},{"value"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
         const auto decision=a.at("value").get<std::string>();

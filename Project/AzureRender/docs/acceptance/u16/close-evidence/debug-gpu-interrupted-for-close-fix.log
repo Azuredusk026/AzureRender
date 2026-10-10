@@ -1,0 +1,47 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start  13: AzureRender.VisibilityGpu
+ 1/64 Test  #13: AzureRender.VisibilityGpu .......................   Passed    0.49 sec
+      Start  17: AzureRender.SkinningGpu
+ 2/64 Test  #17: AzureRender.SkinningGpu .........................   Passed    0.41 sec
+      Start  18: AzureRender.ShadowTileBoundsGpu
+ 3/64 Test  #18: AzureRender.ShadowTileBoundsGpu .................   Passed    0.40 sec
+      Start  19: AzureRender.ShadowFilteringGpu
+ 4/64 Test  #19: AzureRender.ShadowFilteringGpu ..................   Passed    0.41 sec
+      Start  20: AzureRender.SurfaceResponseGpu
+ 5/64 Test  #20: AzureRender.SurfaceResponseGpu ..................   Passed    0.37 sec
+      Start  22: AzureRender.ShaderComposition
+ 6/64 Test  #22: AzureRender.ShaderComposition ...................   Passed    0.73 sec
+      Start  30: AzureRender.SamplingGpu
+ 7/64 Test  #30: AzureRender.SamplingGpu .........................   Passed    5.43 sec
+      Start  31: AzureRender.SamplingHostGpu
+ 8/64 Test  #31: AzureRender.SamplingHostGpu .....................   Passed    6.81 sec
+      Start  42: AzureRender.PreviewHost
+ 9/64 Test  #42: AzureRender.PreviewHost .........................   Passed    3.65 sec
+      Start  43: AzureEditor.SelectionGpu
+10/64 Test  #43: AzureEditor.SelectionGpu ........................   Passed   14.39 sec
+      Start  44: AzureEditor.GizmoGpu
+11/64 Test  #44: AzureEditor.GizmoGpu ............................   Passed   42.11 sec
+      Start  45: AzureEditor.DevtoolsHost
+12/64 Test  #45: AzureEditor.DevtoolsHost ........................   Passed   48.35 sec
+      Start  48: AzureEditor.ProposalHost
+13/64 Test  #48: AzureEditor.ProposalHost ........................   Passed   25.01 sec
+      Start  53: AzureAssets.ProceduralHost
+14/64 Test  #53: AzureAssets.ProceduralHost ......................   Passed   26.63 sec
+      Start  54: AzureEditor.SettingsHost
+15/64 Test  #54: AzureEditor.SettingsHost ........................   Passed   34.82 sec
+      Start  55: AzureEditor.ObservationHost
+16/64 Test  #55: AzureEditor.ObservationHost .....................   Passed   33.51 sec
+      Start  62: AzureEngine.SceneInspectorHost
+17/64 Test  #62: AzureEngine.SceneInspectorHost ..................   Passed    4.48 sec
+      Start  67: AzureEngine.RegisteredComponentHost
+18/64 Test  #67: AzureEngine.RegisteredComponentHost .............   Passed    2.87 sec
+      Start  84: AzureEngine.ManagedWorkflows.coreclr
+19/64 Test  #84: AzureEngine.ManagedWorkflows.coreclr ............   Passed    9.04 sec
+      Start  85: AzureEngine.ManagedWorkflows.nativeaot
+20/64 Test  #85: AzureEngine.ManagedWorkflows.nativeaot ..........   Passed    8.53 sec
+      Start  99: AzureRender.SceneVisibilityGpu
+21/64 Test  #99: AzureRender.SceneVisibilityGpu ..................   Passed   56.01 sec
+      Start 101: AzureEngine.LocomotionPlayer
+22/64 Test #101: AzureEngine.LocomotionPlayer ....................   Passed   34.95 sec
+      Start 111: AzureEditor.WorkspaceGpu

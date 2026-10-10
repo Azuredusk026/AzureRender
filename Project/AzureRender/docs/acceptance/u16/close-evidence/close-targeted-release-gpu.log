@@ -1,0 +1,61 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 154: AzureEditor.NativeInputGpu
+1/4 Test #154: AzureEditor.NativeInputGpu .......***Failed    6.20 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 230, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 230, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 199, in run
+    choose('import.browse',via_browse=True)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 119, in choose
+    click_widget('assets.import-create');click_widget(identity,settle=False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_native_viewport.py", line 91, in click_widget
+    rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
+         ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'import.browse'
+
+    Start 156: AzureEditor.DocumentGuardGpu
+2/4 Test #156: AzureEditor.DocumentGuardGpu .....   Passed   12.34 sec
+    Start 186: AzureEditor.ProductizationGpu
+3/4 Test #186: AzureEditor.ProductizationGpu ....   Passed   30.14 sec
+    Start 225: AzureEditor.SceneGeometryGpu
+4/4 Test #225: AzureEditor.SceneGeometryGpu .....***Failed    1.96 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 28, in __enter__
+    assert self.process.poll() is None,'Editor exited during startup'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Editor exited during startup
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 33, in <module>
+    a=p.parse_args();run(a.editor.resolve(),a.output.resolve())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py", line 15, in run
+    with EditorHost(editor,project/'project.azureproject',out/'geometry') as host:
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 33, in __enter__
+    self.__exit__(None,None,None);raise
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 46, in __exit__
+    assert self.process.returncode==0,self.process.returncode
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 3
+
+
+50% tests passed, 2 tests failed out of 4
+
+Label Time Summary:
+gpu    =  50.64 sec*proc (4 tests)
+
+Total Test time (real) =  50.65 sec
+
+The following tests FAILED:
+	154 - AzureEditor.NativeInputGpu (Failed)
+	225 - AzureEditor.SceneGeometryGpu (Failed)
+Errors while running CTest

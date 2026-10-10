@@ -1,0 +1,14 @@
+[1791653625671][info][editor][code=0] Opened scene: exploration
+[1791653625981][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\productization\run-a24f2141\project-entry\capture\gpu_capabilities.json
+[1791653626271][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791653626308][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653626338][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653626353][info][editor][code=0] Opened scene: exploration
+[1791653626370][info][editor][code=0] Selected node: hero:body
+[1791653626427][info][editor][code=0] Asset reload requested; changed files: 0
+[1791653626464][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791653626499][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653626526][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653626535][info][editor][code=0] Renderer resources reloaded
+[1791653626995][info][capture][code=0] Capture progress: 1 / 48
+[1791653648378][info][capture][code=0] Capture progress: 48 / 48

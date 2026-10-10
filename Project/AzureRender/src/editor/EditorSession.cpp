@@ -116,6 +116,7 @@ void EditorSession::pollTasks(){
     activatePendingProject();
     if(tasks_)tasks_->poll(!playing()&&!building()&&(!gizmo_||!gizmo_->active())&&documentGuard_->state()!=DocumentActionState::AwaitingDecision);
     pollBuild();
+    pollWindowClose();
     collectDiagnostics();
 }
 std::array<float,3> EditorSession::placementPosition(const nlohmann::json& parameters) const {
@@ -188,7 +189,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     retainDocument();
 }
 bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
-    if(descriptor.id.rfind("document.",0)==0&&descriptor.id!="document.decision"&&(context_->importing()||creatingProject_||pendingProject_||!pendingDocument_.empty()||!closingDocument_.empty()))return false;
+    if(descriptor.id.rfind("document.",0)==0&&descriptor.id!="document.decision"&&descriptor.id!="document.close"&&(context_->importing()||creatingProject_||pendingProject_||!pendingDocument_.empty()||!closingDocument_.empty()))return false;
     if(reimporting_&&(descriptor.requiresIdle||descriptor.modifiesDocument))return false;
     if(gizmo_&&gizmo_->active()&&(descriptor.requiresIdle||descriptor.modifiesDocument||descriptor.id=="node.select"||descriptor.id=="selection.click"||descriptor.id=="document.save"||descriptor.id.rfind("preview.",0)==0))
         if(descriptor.id!="viewport.gizmo-update"&&descriptor.id!="viewport.gizmo-cancel"&&descriptor.id!="viewport.gizmo-commit")return false;
@@ -337,6 +338,24 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     return false;
 }
 
+bool EditorSession::requestWindowClose(){
+    if(documentGuard_->state()!=DocumentActionState::Idle&&documentGuard_->action()==DocumentAction::Close)
+        return documentGuard_->state()!=DocumentActionState::Failed;
+    const bool wasPending=windowClosePending_;
+    windowClosePending_=true;
+    const bool accepted=(gizmo_&&gizmo_->active())||pollWindowClose();
+    if(windowClosePending_&&!wasPending)context_->log("Window close pending: waiting for active document tasks");
+    return accepted;
+}
+bool EditorSession::pollWindowClose(){
+    if(!windowClosePending_)return true;
+    references_.cancel();
+    if(gizmo_&&gizmo_->active())gizmo_->cancel();
+    if(context_->importing()||creatingProject_||pendingProject_||reimporting_||building()||
+       !pendingDocument_.empty()||!closingDocument_.empty()||documentGuard_->state()!=DocumentActionState::Idle)return true;
+    windowClosePending_=false;
+    return requestDocumentAction(DocumentAction::Close);
+}
 bool EditorSession::requestDocumentAction(DocumentAction action){
     references_.cancel();
     if(gizmo_&&gizmo_->active())gizmo_->cancel();

@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 238, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 238, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 207, in run
+    choose('import.browse',via_browse=True)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 127, in choose
+    click_widget('assets.import-create');click_widget(identity,settle=False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 99, in click_widget
+    rect=widget_rect(identity);cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-stable-layout-candidate.py", line 97, in widget_rect
+    raise AssertionError('Widget must appear and finish layout: '+identity)
+AssertionError: Widget must appear and finish layout: import.browse

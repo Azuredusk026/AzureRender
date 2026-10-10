@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-real-clock-candidate.py", line 223, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-real-clock-candidate.py", line 223, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-real-clock-candidate.py", line 161, in run
+    before=state()['camera'];mouse(0x200,x+24,y-18,2);turned=state()
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-real-clock-candidate.py", line 72, in mouse
+    assert window.user.SetForegroundWindow(window.handle) or window.user.GetForegroundWindow()==window.handle
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,24 @@
+[1791653564319][info][editor][code=0] Opened scene: exploration
+[1791653564632][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791653564961][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791653564981][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653564995][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653565002][info][editor][code=0] Opened scene: exploration
+[1791653565004][info][editor][code=0] Selected node: hero:body
+[1791653565022][info][editor][code=0] Asset reload requested; changed files: 0
+[1791653565031][info][render][code=0] Character texture access: indexed, requested slots=59, stage sampler limit=1048576
+[1791653565053][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653565064][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653565068][info][editor][code=0] Renderer resources reloaded
+[1791653565198][info][editor][code=0] Opened scene: startup
+[1791653565218][info][editor][code=0] Opened scene: startup
+[1791653565229][info][editor][code=0] Opened scene: startup
+[1791653565235][info][editor][code=0] Opened scene: startup
+[1791653565239][info][editor][code=0] Asset reload requested; changed files: 0
+[1791653565243][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791653565263][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653565265][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653565274][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791653565289][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791653565291][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791653565295][info][editor][code=0] Renderer resources reloaded

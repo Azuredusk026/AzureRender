@@ -68,6 +68,34 @@ int main() {
         require(static_cast<bool>(session.edit("tasks.cancel",{{"id",cancel.value.at("task")}})),"Task cancellation uses public operation");
         for(int i=0;i<1000;++i){session.pollTasks();if(session.tasks().report().back().at("state")!="running")break;std::this_thread::sleep_for(std::chrono::milliseconds(2));}
         require(session.tasks().report().back().at("state")=="cancelled"&&!std::filesystem::exists(root/"cancel-task"),"Cancelled task must reclaim its project and preserve active document");
+        for(const auto* type:{"scene","game"}){
+            EditorSession closing(EditorContext::openProject(first->project().file));
+            closing.setClosePolicy("discard");
+            require(static_cast<bool>(closing.edit("project.create",{{"templateId",type},{"destination",(root/(std::string("close-")+type)).u8string()},{"name","Closing"}})),"Start independent background creation");
+            const auto beforeDrag=closing.context().documentContent();
+            if(std::string(type)=="scene"){
+                auto begin=closing.edit("viewport.gizmo-begin");require(static_cast<bool>(begin),"Begin a drag while the project task is pending");
+                auto matrix=begin.value.at("matrix").get<internal::Matrix4>();matrix[12]+=2;
+                require(static_cast<bool>(closing.edit("viewport.gizmo-update",{{"matrix",matrix}})),"Apply an actual transform before closing");
+            }
+            require(static_cast<bool>(closing.edit("document.close")),"Window close must queue while project creation is active");
+            closing.pollTasks();
+            require(!closing.gizmo().active(),"Queued close must release a drag that blocks task activation");
+            if(std::string(type)=="scene")require(closing.context().documentContent()==beforeDrag,"Window-close lifecycle must cancel and restore the drag");
+            for(int i=0;i<1000&&!closing.closeReady();++i){closing.pollTasks();std::this_thread::sleep_for(std::chrono::milliseconds(2));}
+            require(closing.closeReady()&&closing.context().project().name=="Closing","Queued close must complete after project activation");
+        }
+        {
+            EditorSession cancelClose(EditorContext::openProject(first->project().file));
+            require(static_cast<bool>(cancelClose.edit("node.rename",{{"value","Keep unsaved"}})),"Make close protection necessary");
+            require(static_cast<bool>(cancelClose.edit("document.close")),"Dirty close requests a decision");
+            require(cancelClose.documentGuard().state()==DocumentActionState::AwaitingDecision,"Dirty close must retain the prompt");
+            require(static_cast<bool>(cancelClose.edit("document.decision",{{"value","cancel"}})),"User may cancel closing");
+            for(int i=0;i<10;++i)cancelClose.pollTasks();
+            require(!cancelClose.closeReady()&&cancelClose.documentGuard().state()==DocumentActionState::Idle&&cancelClose.context().dirty(),"Cancelled close must preserve content and remain cancelled");
+            cancelClose.setClosePolicy("discard");
+            require(static_cast<bool>(cancelClose.edit("document.close"))&&cancelClose.closeReady(),"A later independent close remains available");
+        }
         EditorWorkspace workspace;workspace.registerPanel("custom","Custom");
         workspace.preset("authoring");require(!workspace.visible("capture"),"Authoring should focus content");
         workspace.preset("debugging");require(workspace.visible("gameplay-debug"),"Debugging should expose diagnostics");

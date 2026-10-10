@@ -349,7 +349,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 #if AZURE_WITH_EDITOR
             if(runOptions_.editorSession){
                 auto& session=*runOptions_.editorSession;
-                if(session.documentGuard().state()==azurerender::DocumentActionState::Idle)session.edit("document.close");
+                session.edit("document.close");
                 if(session.closeReady())break;
                 glfwSetWindowShouldClose(frontend_->nativeHandle(),GLFW_FALSE);
             }else

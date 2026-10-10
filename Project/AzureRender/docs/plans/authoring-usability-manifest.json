@@ -66,6 +66,18 @@
       "physicalInputVerified": false,
       "test": "AzureEditor.SceneGeometryGpu",
       "acceptance": "docs/acceptance/u16/scene-geometry.md"
+    },
+    {
+      "id": "UX-006",
+      "severity": "major",
+      "summary": "后台项目创建期间窗口关闭请求丢失",
+      "owner": "EditorSession",
+      "status": "CpuAndHostVerifiedFullRegressionPending",
+      "source": "src/editor/EditorSession.cpp",
+      "test": "AzureEditor.ProjectFlow",
+      "productionUiVerified": true,
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/u16/deferred-close.md"
     }
   ],
   "taskBaseline": {

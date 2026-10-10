@@ -175,6 +175,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         if(session_->game())data["physicsConstraints"]=session_->game()->physics().constraintCount();
     }
     data["view"]=session_->edit("viewport.describe").value;
+    data["windowClosePending"]=session_->windowClosePending();
     data["viewportOverlayPolicies"]=session_->viewportOverlayPolicies();
     data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
     data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";

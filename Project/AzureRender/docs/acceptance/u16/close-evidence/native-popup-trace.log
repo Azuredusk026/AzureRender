@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 240, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 240, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 209, in run
+    choose('import.browse',via_browse=True)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 129, in choose
+    click_widget('assets.import-create');click_widget(identity,settle=False)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 99, in click_widget
+    rect=widget_rect(identity);evidence.append(dict(clickTarget=identity,rect=rect,foreground=int(window.user.GetForegroundWindow()),ownWindow=int(window.handle)));cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\native-popup-trace.py", line 97, in widget_rect
+    raise AssertionError('Widget must appear and finish layout: '+identity)
+AssertionError: Widget must appear and finish layout: import.browse

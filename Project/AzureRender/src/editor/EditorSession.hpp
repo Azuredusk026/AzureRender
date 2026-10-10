@@ -149,6 +149,8 @@ public:
     DocumentActionGuard& documentGuard(){return *documentGuard_;}
     GizmoController& gizmo(){return *gizmo_;}
     bool requestDocumentAction(DocumentAction action);
+    bool requestWindowClose();
+    bool windowClosePending() const noexcept { return windowClosePending_; }
     bool resolveDocumentAction(DocumentDecision decision);
     bool closeReady() const {return documentGuard_->state()==DocumentActionState::Ready && documentGuard_->action()==DocumentAction::Close;}
     bool consumeFrameSelection(){const bool result=frameSelectionRequested_;frameSelectionRequested_=false;return result;}
@@ -210,6 +212,8 @@ private:
     std::filesystem::path userSettingsPath_;
     std::unique_ptr<DocumentActionGuard> documentGuard_;
     std::string closePolicy_="ask";
+    bool windowClosePending_=false;
+    bool pollWindowClose();
     bool frameSelectionRequested_=false;
     std::string lastError_;
     EditorFeedback feedback_;
