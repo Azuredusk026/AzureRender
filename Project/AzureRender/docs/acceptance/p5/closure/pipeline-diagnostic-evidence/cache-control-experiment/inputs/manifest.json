@@ -1,0 +1,11 @@
+{
+  "diagnosticOnly": true,
+  "dllRawSha256": "7f4f9980569fc4f9d8654eb3b5e1f2b5d282c7e96efda41dec20a83978e4936c",
+  "files": {
+    "AzureCacheShim.dll.gz": "bc44758f6e84fbd614dad8e6bfdf50a1626d3a1a9fea093f0fc410ab9de1e8fd",
+    "build_cache.cmd": "885558df03bce3cd9827a25cc9adcfae19ad5956575a23ed491a3f601f6f9182",
+    "cache_control_experiment.py": "80964b416da575079e9987a5cb523bebd1fc95a8da2ddc2ecfc99b75ed645cef",
+    "cache_shim.c": "64bf796c6615a87bd89323724dcce47a6d729f3e2f5ccba8de58c3c85e442c3b",
+    "CMakeLists.txt": "7f5940ec552d4498b4b1839225980d5daac26d6fba97ca657c9b751108d2d4c9"
+  }
+}

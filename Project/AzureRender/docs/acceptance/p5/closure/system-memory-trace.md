@@ -16,9 +16,14 @@
 `ResidentSet` 记录驻留集合。
 当前进程的管理员状态查询为否。
 
-已有普通启动、页面分类与调试追踪均保留。
-八线程调用对照尚有漏采。
-现有诊断不足以证明全部异常的因果。
+普通启动、页面分类与调试追踪均保留。
+调试器并发返回对照存在漏采。
+进程内原型通过四十个已知调用配对。
+正式失败的完整因果仍需独立复核。
+
+局部结果见[进程内诊断](native-memory-trace.md)。
+系统追踪使用对应正式负载的项目与输入。
+记录输入文件和项目内容的哈希。
 正式性能和系统追踪分别报告。
 
 ## 采集步骤
@@ -31,6 +36,7 @@
 ```powershell
 python tools/build_provenance.py verify --build-dir build/ninja-msvc-release --config Release
 New-Item -ItemType Directory -Path build/p5-system-trace
+Copy-Item -LiteralPath build/p5-p6-closure-2026-10-10/final-formal-performance/exploration-1.input.json -Destination build/p5-system-trace/input.json
 wpr -start VirtualAllocation -start ResidentSet -filemode -instancename AzureP5Memory
 ```
 
@@ -39,7 +45,7 @@ wpr -start VirtualAllocation -start ResidentSet -filemode -instancename AzureP5M
 程序正常退出后保存系统事件文件。
 
 ```powershell
-./build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/project.azureproject --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --gpu-timing --gpu-timing-output build/p5-system-trace/timing.json --runtime-report build/p5-system-trace/runtime.json
+./build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/project.azureproject --game-actions build/p5-system-trace/input.json --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --gpu-timing --gpu-timing-output build/p5-system-trace/timing.json --runtime-report build/p5-system-trace/runtime.json
 wpr -stop build/p5-system-trace/memory.etl -instancename AzureP5Memory
 ```
 
