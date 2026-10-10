@@ -152,7 +152,7 @@ void AzureRenderApp::run(
         rendererResourceKey_=levelSession_->current().resourceKey;
         levelSession_->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
         levelSession_->setPreloadHandler([this](const auto& level){return preloadLevelRenderer(level);});
-        levelSession_->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
+        levelSession_->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty()) && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
     }
     if(!runOptions_.projectFile.empty())autoRotate_=false;
     if (runOptions_.portfolioMode) {
@@ -438,9 +438,9 @@ void AzureRenderApp::createSceneRenderer() {
     buildRenderContext(context);
     std::string rendererId =
         azurerender::sceneTypeName(renderSettings_.sceneType);
-#if AZURE_WITH_EDITOR
-    if(runOptions_.editorSession && context.scene.resources.empty())rendererId="sample";
-#endif
+    if(context.sceneWorldCoordinates)
+        rendererId=azurerender::BuiltinRendererCatalog::documentRendererId(
+            renderSettings_.sceneType,!context.scene.resources.empty());
     azurerender::SceneRendererRegistry registry =
         azurerender::BuiltinRendererCatalog::createRegistry();
     sceneRenderer_ = registry.create(rendererId);

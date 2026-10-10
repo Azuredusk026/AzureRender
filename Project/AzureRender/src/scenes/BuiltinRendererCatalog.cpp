@@ -8,6 +8,12 @@
 
 namespace azurerender {
 
+std::string BuiltinRendererCatalog::documentRendererId(SceneType requested, bool hasResources) {
+    if (requested == SceneType::Character || requested == SceneType::Sample)
+        return hasResources ? "character" : "sample";
+    return sceneTypeName(requested);
+}
+
 SceneRendererRegistry BuiltinRendererCatalog::createRegistry() {
     SceneRendererRegistry registry;
     registry.registerFactory(

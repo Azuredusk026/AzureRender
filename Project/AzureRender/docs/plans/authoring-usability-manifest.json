@@ -55,6 +55,17 @@
       "budgetMilliseconds": 100,
       "firstObservedMilliseconds": 104.2468,
       "isolatedMilliseconds": 89.2848
+    },
+    {
+      "id": "UX-005",
+      "severity": "blocker",
+      "summary": "场景模板放置模型后视口未绘制几何",
+      "owner": "BuiltinRendererCatalog",
+      "status": "ProductionPixelsVerifiedPhysicalInputPending",
+      "productionUiVerified": true,
+      "physicalInputVerified": false,
+      "test": "AzureEditor.SceneGeometryGpu",
+      "acceptance": "docs/acceptance/u16/scene-geometry.md"
     }
   ],
   "taskBaseline": {

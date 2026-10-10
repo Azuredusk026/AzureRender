@@ -1,0 +1,28 @@
+[1791648501307][info][editor][code=0] Opened scene: startup
+[1791648501614][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791648501909][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791648501927][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791648501928][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791648501946][info][editor][code=0] Asset reload requested; changed files: 0
+[1791648501950][info][render][code=0] Character texture access: indexed, requested slots=35, stage sampler limit=1048576
+[1791648501966][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791648501968][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791648501972][info][editor][code=0] Renderer resources reloaded
+[1791648502086][info][editor][code=0] Imported asset: cube.gltf (48 vertices)
+[1791648502088][info][editor][code=0] Asset reload requested; changed files: 1
+[1791648502093][info][render][code=0] Character texture access: indexed, requested slots=51, stage sampler limit=1048576
+[1791648502111][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791648502118][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791648502122][info][editor][code=0] Renderer resources reloaded
+[1791648502148][info][editor][code=0] Opened scene: startup
+[1791648502149][info][editor][code=0] Selected node: Placed Object
+[1791648502150][info][editor][code=0] Asset reload requested; changed files: 0
+[1791648502154][info][render][code=0] Character texture access: indexed, requested slots=51, stage sampler limit=1048576
+[1791648502171][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791648502177][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791648502180][info][editor][code=0] Renderer resources reloaded
+[1791648502187][info][editor][code=0] Opened scene: startup
+[1791648502187][info][editor][code=0] Selected node: Placed Object
+[1791648502587][info][editor][code=0] Opened scene: startup
+[1791648503191][info][editor][code=0] Opened scene: startup
+[1791648503288][info][editor][code=0] Saved scene: D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\scene-geometry-green\run-93f1504e\authored\assets\startup.azurelevel

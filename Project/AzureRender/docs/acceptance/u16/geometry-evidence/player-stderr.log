@@ -1,0 +1,6 @@
+[1791648697073][info][gpu][code=0] GPU capability report: D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\scene-geometry-player\gpu_capabilities.json
+[1791648697365][info][render][code=0] Character texture access: indexed, requested slots=51, stage sampler limit=1048576
+[1791648697382][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791648697389][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791648698331][info][capture][code=0] Capture progress: 1 / 20
+[1791648699532][info][capture][code=0] Capture progress: 20 / 20

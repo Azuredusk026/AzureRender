@@ -1,0 +1,2 @@
+D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_scene_geometry.py:25: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  changed=sum(max(pixel)>12 for pixel in diff.getdata())

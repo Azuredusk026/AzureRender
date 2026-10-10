@@ -40,7 +40,7 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
     return levelSession_?&levelSession_->assets():nullptr;
 }
 bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
-    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character){
+    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
         if(preparedRenderer_){azurerender::RenderContext context;buildRenderContext(context);preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();}
         return true;
     }
@@ -48,7 +48,7 @@ bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
     if(!preparedRenderer_ || preparedResourceKey_!=level.resourceKey || preparedRenderSettings_.sceneType!=level.scene.renderSettings.sceneType){
         if(preparedRenderer_)preparedRenderer_->onUnload(context);
         auto registry=azurerender::BuiltinRendererCatalog::createRegistry();
-        preparedRenderer_=registry.create(azurerender::sceneTypeName(level.scene.renderSettings.sceneType));
+        preparedRenderer_=registry.create(azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()));
         preparedRenderSettings_=level.scene.renderSettings;preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
     }
     context.renderSettings=&preparedRenderSettings_;
@@ -60,7 +60,7 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     invalidatePreviews();
 #endif
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
-    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::sceneTypeName(level.scene.renderSettings.sceneType) && sceneRenderer_->reuseScene(context)){
+    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()) && sceneRenderer_->reuseScene(context)){
         renderSettings_=level.scene.renderSettings;return;
     }
     if(preparedResourceKey_!=level.resourceKey || !preparedRendererReady_){
@@ -94,7 +94,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
                 rendererResourceKey_=session.levels()->current().resourceKey;
                 session.levels()->setPrepareHandler([this](const auto& level){prepareLevelRenderer(level);});
                 session.levels()->setPreloadHandler([this](const auto& level){return preloadLevelRenderer(level);});
-                session.levels()->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()=="character" && level.scene.renderSettings.sceneType==azurerender::SceneType::Character && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
+                session.levels()->setReadinessHandler([this](const auto& level){return (sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty()) && rendererResourceKey_==level.resourceKey) || (preparedRendererReady_ && preparedRenderSettings_.sceneType==level.scene.renderSettings.sceneType && preparedResourceKey_==level.resourceKey);});
             }}
         else session.context().attachRenderSettings(renderSettings_);
     }
