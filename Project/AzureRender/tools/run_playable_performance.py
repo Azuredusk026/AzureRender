@@ -90,6 +90,32 @@ def memory(pid):
     return memory_snapshot(pid)['peak']
 
 
+def freeze_products(source, player, editor):
+    """Verify build provenance, then freeze the executable dependency closure."""
+    from build_provenance import verify
+    paths=set()
+    manifests={}
+    for executable in (player.resolve(),editor.resolve()):
+        build=executable.parent
+        manifest_path=build/'build-provenance.json'
+        if manifest_path not in manifests:
+            proof=json.loads(manifest_path.read_text(encoding='utf-8'))
+            verify(source,proof)
+            manifests[manifest_path]=proof
+        proof=manifests[manifest_path]
+        recorded={Path(name).resolve() for name in proof['products']}
+        if executable not in recorded:
+            raise ValueError('Performance executable is not recorded in build provenance')
+        paths.update(recorded)
+        paths.update(p.resolve() for p in build.glob('*.dll') if p.is_file())
+        paths.update(p.resolve() for p in (build/'shaders').rglob('*.spv') if p.is_file())
+        # Runtime modules use their recorded manifest and configuration files.
+        for directory in ('managed/coreclr','managed/nativeaot'):
+            paths.update(p.resolve() for p in (build/directory).glob('*')
+                         if p.is_file() and p.suffix.lower() in ('.dll','.json'))
+    return {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
+
+
 def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1800):
     initial=thermal()
     while initial['temperature']>55:
@@ -160,12 +186,7 @@ def main():
     from build_provenance import inputs
     frozen_inputs=inputs(ROOT)
     source_hash=hashlib.sha256(json.dumps(frozen_inputs,sort_keys=True).encode()).hexdigest()
-    product_files=set()
-    for executable in (args.player,args.editor):
-        product_files.add(executable.resolve())
-        product_files.update(p.resolve() for p in executable.parent.rglob('*') if p.is_file()
-            and (p.suffix.lower() in ('.dll','.spv') or p.name in ('manifest.json','complete.stamp')))
-    products={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(product_files)}
+    products=freeze_products(ROOT,args.player,args.editor)
     (args.output/'frozen-inputs.json').write_text(json.dumps(dict(source=frozen_inputs,products=products),indent=2)+'\n',encoding='utf-8')
     loads=[('standard',False,None,False),('editor',False,None,True),('stress',True,None,False)]
     loads.extend((name,False,None,False) for name in ('exploration','platformer') if getattr(args,name))

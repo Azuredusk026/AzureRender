@@ -178,6 +178,7 @@ F1 至 P1、F3 和 R6 已完成。G7 角色方向与冲刺已验收。U2 工作�
 性能工具进度见[P5-A 验收](docs/acceptance/p5/closure/p5-a.md)。
 驻留诊断进度见[P5-B 验收](docs/acceptance/p5/closure/p5-b.md)。
 返回值追踪通过已知申请、释放及失败探针自检。
+正式测量先校验构建来源，并冻结实际运行依赖。
 输入与对象创建的 CPU 修复见[U16 记录](docs/acceptance/u16/2026-10-10.md)。
 完整制作与交付按[P6 验收表](docs/acceptance/p6/2026-10-10.md)记录。
 P5 保持 Active，性能与人工门禁按实际证据维护。
