@@ -1,0 +1,14 @@
+[0/2] Re-checking globbed directories...
+[1/5] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/5] Building CXX object CMakeFiles\AzureEditor.dir\src\editor\EditorProjectEditing.cpp.obj
+[3/5] Linking CXX static library AzureEditor.lib
+[4/5] Linking CXX executable AzureEditorProjectFlowTests.exe
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 177: AzureEditor.ProjectFlow
+1/1 Test #177: AzureEditor.ProjectFlow ..........   Passed    0.74 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.74 sec

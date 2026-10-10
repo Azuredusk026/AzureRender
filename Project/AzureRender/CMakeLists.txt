@@ -1863,3 +1863,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.ViewportNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_viewport_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/viewport-navigation-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.ViewportNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
 endif()
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/2026-10-10.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/physical-input.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p5")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime"
+    FILES_MATCHING PATTERN "*.md")
+foreach(AZURE_PRODUCT_PHASE u10 u11 u12 g13 u13 g15 g16)
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/${AZURE_PRODUCT_PHASE}/"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/${AZURE_PRODUCT_PHASE}")
+endforeach()
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p5/evidence" OPTIONAL)

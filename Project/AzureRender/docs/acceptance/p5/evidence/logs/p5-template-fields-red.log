@@ -1,0 +1,27 @@
+[0/2] Re-checking globbed directories...
+[1/4] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/4] Building CXX object CMakeFiles\AzureEditorProjectFlowTests.dir\tests\EditorProjectFlowTests.cpp.obj
+[3/4] Linking CXX executable AzureEditorProjectFlowTests.exe
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 177: AzureEditor.ProjectFlow
+1/1 Test #177: AzureEditor.ProjectFlow ..........***Failed    0.22 sec
+[1791593458063][info][editor][code=0] Opened scene: startup
+[1791593458077][info][editor][code=0] Opened scene: startup
+[1791593458098][info][editor][code=0] Opened scene: startup
+[1791593458117][info][editor][code=0] Opened scene: startup
+[1791593458127][info][editor][code=0] Opened scene: startup
+[1791593458142][info][editor][code=0] Opened scene: startup
+[1791593458175][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-project-flow-44264153581900\中文项目\assets\startup.azscene
+[1791593458182][info][editor][code=0] Opened scene: startup
+Registered component fields survive template save and reopen
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.23 sec
+
+The following tests FAILED:
+	177 - AzureEditor.ProjectFlow (Failed)
+Errors while running CTest

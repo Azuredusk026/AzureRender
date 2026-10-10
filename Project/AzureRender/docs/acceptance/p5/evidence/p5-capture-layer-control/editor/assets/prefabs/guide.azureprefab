@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "guide",
+  "resources": [
+    {
+      "id": "mesh",
+      "asset": "assets:/guide.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "body",
+      "resourceId": "mesh",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -1,
+              0,
+              -1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 2,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "startTime": 0.4
+          }
+        },
+        "azure.interactable": {
+          "type": "azure.interactable",
+          "version": 1,
+          "data": {
+            "prompt": "Talk to the guide [E]",
+            "range": 2.5
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/guide.lua"
+          }
+        }
+      }
+    }
+  ]
+}

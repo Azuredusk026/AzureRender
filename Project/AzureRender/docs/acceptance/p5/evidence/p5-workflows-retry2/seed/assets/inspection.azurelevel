@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "inspection",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false
+  },
+  "resources": [
+    {
+      "id": "cube",
+      "asset": "assets:/cube.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "observer",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "asset-a",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.8,
+              0,
+              -1
+            ],
+            "scale": [
+              0.4,
+              0.4,
+              0.4
+            ]
+          }
+        },
+        "azure.interactable": {
+          "type": "azure.interactable",
+          "version": 1,
+          "data": {
+            "range": 3,
+            "prompt": "Select asset [F]"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/inspect.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "asset-b",
+      "resourceId": "cube",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.8,
+              0,
+              -1
+            ],
+            "scale": [
+              0.4,
+              0.4,
+              0.4
+            ]
+          }
+        },
+        "azure.interactable": {
+          "type": "azure.interactable",
+          "version": 1,
+          "data": {
+            "range": 3,
+            "prompt": "Select asset [F]"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/inspect.lua"
+          }
+        }
+      }
+    }
+  ]
+}

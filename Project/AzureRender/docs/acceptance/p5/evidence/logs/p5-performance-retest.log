@@ -1,0 +1,32 @@
+editor-1 {"gpu": {"mean": 2.6072632, "p95": 3.0582608000000002, "p99": 3.24843584}, "cpu": {"mean": 3.218605111111111, "p95": 3.9585449999999964, "p99": 4.6430820000000015}, "physics": {"mean": 0.21235894444444445, "p95": 0.319925, "p99": 0.43871499999999997}, "passed": true}
+editor 1 strict True working growth 0.007319836608127961 private growth 0.0006044845195292137
+Cooling GPU: 77 C
+editor-2 {"gpu": {"mean": 2.798663377777778, "p95": 3.1085616000000003, "p99": 3.27184448}, "cpu": {"mean": 2.959445166666667, "p95": 3.6168399999999656, "p99": 4.378278999999982}, "physics": {"mean": 0.19427516666666667, "p95": 0.2852799999999999, "p99": 0.41666699999999973}, "passed": true}
+editor 2 strict False working growth 0.12323346523459588 private growth 0.0
+Cooling GPU: 78 C
+editor-3 {"gpu": {"mean": 2.811648657777778, "p95": 3.1301296, "p99": 3.3332707200000002}, "cpu": {"mean": 2.940068388888889, "p95": 3.6287050000000054, "p99": 4.489569999999999}, "physics": {"mean": 0.19459405555555556, "p95": 0.28661000000000003, "p99": 0.3871109999999999}, "passed": true}
+editor 3 strict True working growth 0.009553807341503795 private growth 0.0
+Cooling GPU: 66 C
+exploration-1 {"gpu": {"mean": 10.865755182222221, "p95": 12.173259199999999, "p99": 12.83060128}, "cpu": {"mean": 1.777345111111102, "p95": 2.404065000001016, "p99": 2.915888999999385}, "physics": {"mean": 0.25918155555555555, "p95": 0.4091299999999999, "p99": 1.122314}, "passed": true}
+exploration 1 strict True working growth 0.000614925110906217 private growth 0.0003140574861746348
+Cooling GPU: 80 C
+exploration-2 {"gpu": {"mean": 11.287680977777777, "p95": 12.7768704, "p99": 13.57315328}, "cpu": {"mean": 1.7761312777777785, "p95": 2.4019900000015144, "p99": 2.9849070000006805}, "physics": {"mean": 0.2621156666666667, "p95": 0.40801499999999996, "p99": 1.1739609999999998}, "passed": true}
+exploration 2 strict True working growth 0.0005707511963823908 private growth 0.0002454305601953255
+Cooling GPU: 72 C
+exploration-3 {"gpu": {"mean": 11.671633955555556, "p95": 13.1853184, "p99": 13.929530879999998}, "cpu": {"mean": 1.8383902777777867, "p95": 2.4921899999997503, "p99": 3.0915730000005266}, "physics": {"mean": 0.2678643333333333, "p95": 0.43864, "p99": 1.2885149999999999}, "passed": true}
+exploration 3 strict False working growth 0.10722312953770041 private growth 0.034510291613377264
+Cooling GPU: 88 C
+Cooling GPU: 56 C
+platformer-1 {"gpu": {"mean": 4.643124782222222, "p95": 5.3077103999999995, "p99": 6.76600352}, "cpu": {"mean": 1.5447276111111075, "p95": 2.027614999999631, "p99": 2.8823059999999283}, "physics": {"mean": 0.33856244444444444, "p95": 0.42575999999999997, "p99": 0.9980859999999953}, "passed": true}
+platformer 1 strict False working growth 0.15058361843429258 private growth 0.0526542633431506
+Cooling GPU: 76 C
+platformer-2 {"gpu": {"mean": 4.6289072, "p95": 5.271592, "p99": 6.8020524799999995}, "cpu": {"mean": 1.6847263333333276, "p95": 2.176989999999953, "p99": 3.046142000000129}, "physics": {"mean": 0.37508855555555554, "p95": 0.497325, "p99": 0.8587789999999997}, "passed": true}
+platformer 2 strict True working growth 0.0037019586726796394 private growth 0.001560971398975708
+Cooling GPU: 71 C
+platformer-3 {"gpu": {"mean": 4.7417480888888885, "p95": 5.526971199999999, "p99": 6.97512576}, "cpu": {"mean": 1.7429102222222224, "p95": 2.323294999999933, "p99": 3.2459879999995587}, "physics": {"mean": 0.3837783888888889, "p95": 0.52245, "p99": 0.8731959999999994}, "passed": true}
+platformer 3 strict True working growth 0.0019036885870062914 private growth 0.0008438171218165813
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-performance-retest.py", line 73, in <module>
+    assert result['passed'],'Repeated working-set budget failure requires further diagnosis'
+           ~~~~~~^^^^^^^^^^
+AssertionError: Repeated working-set budget failure requires further diagnosis

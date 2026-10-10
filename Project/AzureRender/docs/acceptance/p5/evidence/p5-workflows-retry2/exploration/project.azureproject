@@ -1,0 +1,91 @@
+{
+  "id": "59cf0f29-0b8e-4479-9776-4e9418623c45",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "name": "P5 exploration",
+  "runtime": {
+    "input": {
+      "interact": [
+        69
+      ],
+      "jump": [
+        32
+      ],
+      "move-back": [
+        83
+      ],
+      "move-forward": [
+        87
+      ],
+      "move-left": [
+        65
+      ],
+      "move-right": [
+        68
+      ],
+      "restart": [
+        82
+      ],
+      "sprint": [
+        340,
+        344
+      ]
+    },
+    "schemaVersion": 1,
+    "systems": [
+      {
+        "config": {
+          "profiles": {
+            "default": {
+              "back": "move-back",
+              "forward": "move-forward",
+              "jump": "jump",
+              "left": "move-left",
+              "right": "move-right",
+              "sprint": "sprint"
+            }
+          }
+        },
+        "id": "character-movement"
+      },
+      {
+        "config": {},
+        "id": "physics"
+      },
+      {
+        "config": {
+          "profiles": {
+            "default": {
+              "idle": "idle",
+              "moving": "walk",
+              "threshold": 0.1
+            }
+          }
+        },
+        "id": "locomotion"
+      },
+      {
+        "config": {
+          "mode": "follow"
+        },
+        "id": "camera"
+      },
+      {
+        "config": {},
+        "id": "exploration-policy"
+      },
+      {
+        "config": {
+          "action": "interact"
+        },
+        "id": "interaction"
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "startupScene": "assets:/courtyard.azurelevel"
+}

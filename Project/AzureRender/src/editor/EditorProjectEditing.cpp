@@ -258,7 +258,8 @@ void EditorContext::setComponentFields(const std::string& type,const nlohmann::j
 }
 nlohmann::json EditorContext::levelDocument()const{
     if(!assets_)throw std::logic_error("Level serialization requires a project");
-    auto document=sourceLevel_;document["id"]=scene_.sceneId;document["nodes"]=nlohmann::json::array();document["resources"]=nlohmann::json::array();document["lights"]=nlohmann::json::array();
+    const auto source=sourceLevel_.is_object()?sourceLevel_:nlohmann::json::object();
+    auto document=source;document["id"]=scene_.sceneId;document["nodes"]=nlohmann::json::array();document["resources"]=nlohmann::json::array();document["lights"]=nlohmann::json::array();
     document["renderSettings"]=encodeLevelRenderSettings(renderSettings());
     const auto data=runtimeComponents();std::set<std::string> prefabResources,liveInstances;
     if(document.contains("prefabs"))for(auto& instance:document["prefabs"])instance["overrides"]=nlohmann::json::object();
@@ -279,7 +280,7 @@ nlohmann::json EditorContext::levelDocument()const{
     for(const auto& resource:scene_.resources){if(prefabResources.count(resource.id))continue;
         if(resource.id.find(':')!=std::string::npos && std::none_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.resourceId==resource.id;}))continue;
         std::string reference=resourceReferences_.count(resource.path)?resourceReferences_.at(resource.path):std::string();
-        for(const auto& original:sourceLevel_.value("resources",nlohmann::json::array()))if(original.at("id")==resource.id)reference=original.at("asset").get<std::string>();
+        for(const auto& original:source.value("resources",nlohmann::json::array()))if(original.at("id")==resource.id)reference=original.at("asset").get<std::string>();
         if(reference.empty())for(const auto& record:assets_->records())if(record.second.path==resource.path){reference=record.first;break;}
         if(reference.empty())throw std::runtime_error("Resource lacks project asset identity: "+resource.id);
         document["resources"].push_back({{"id",resource.id},{"asset",reference}});

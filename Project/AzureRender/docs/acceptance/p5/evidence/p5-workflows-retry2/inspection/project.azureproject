@@ -1,0 +1,12 @@
+{
+  "id": "623c9162-415d-4444-874e-c313f26d887e",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "name": "P5 inspection",
+  "schemaVersion": 1,
+  "startupScene": "assets:/startup.azurelevel"
+}

@@ -142,7 +142,7 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 
 - Character 和 Blackhole 均可通过同一可执行文件运行，并支持确定性捕获。
 - Renderer SDK 当前是进程内 C++ 接口，不承诺跨 DLL 的二进制 ABI。
-- `.azscene` 当前 Schema 为 v2，`RenderSettings` 当前 Schema 为 v8。
+- `.azscene` 当前 Schema 为 v4，`RenderSettings` 当前 Schema 为 v9。
 - 黑洞是视觉导向的 Schwarzschild 近似模拟，不是科研级广义相对论求解器。
 - 私有角色用于本机美术验收，公共 CI 和作品集必须使用可再分发资产。
 - Android、动态插件 ABI 和完整资产生产管线不属于 `0.1.0-rc1` 的发布承诺。
@@ -153,3 +153,5 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 内容类型、引用和任务见[内容制作服务](runtime/content-workflows.md)。
 
 平台跳跃与连续通关见[平台关卡](runtime/platformer-gameplay.md)。
+
+产品化验收与人工操作记录见[P5 验收](acceptance/p5/2026-10-10.md)。

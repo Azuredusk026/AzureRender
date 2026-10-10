@@ -1,0 +1,79 @@
+{"timestamp_ms":1791593956916,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: inspection"}
+{"timestamp_ms":1791593956987,"level":"print","subsystem":"input","code":0,"message":"Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot"}
+{"timestamp_ms":1791593956987,"level":"print","subsystem":"gpu","code":0,"message":"Validation layer: disabled"}
+{"timestamp_ms":1791593957175,"level":"print","subsystem":"gpu","code":0,"message":"Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU"}
+{"timestamp_ms":1791593957175,"level":"print","subsystem":"gpu","code":0,"message":"HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"}
+{"timestamp_ms":1791593957222,"level":"info","subsystem":"gpu","code":0,"message":"GPU capability report: captures\\gpu_capabilities.json"}
+{"timestamp_ms":1791593957482,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport render extent: 1920x1080"}
+{"timestamp_ms":1791593957487,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [1.000000, -1.000000, 1.000000]"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\seed\\assets\\cube.gltf"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 337 vertices, 900 indices, 3 primitives, 3 materials"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"  [0] stone -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791593957488,"level":"print","subsystem":"asset","code":0,"message":"Skinning: static fallback, 1 joint matrices, 0 Morph targets"}
+{"timestamp_ms":1791593957489,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791593957489,"level":"print","subsystem":"asset","code":0,"message":"Animations: 0"}
+{"timestamp_ms":1791593957489,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=27, stage sampler limit=1048576"}
+{"timestamp_ms":1791593957506,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791593957507,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791593957513,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: character (sceneType=character)"}
+{"timestamp_ms":1791593957523,"level":"print","subsystem":"render","code":0,"message":"Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off"}
+{"timestamp_ms":1791593957526,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593957529,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [1.000000, -1.000000, 1.000000]"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\seed\\assets\\cube.gltf"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 337 vertices, 900 indices, 3 primitives, 3 materials"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"  [0] stone -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Skinning: static fallback, 1 joint matrices, 0 Morph targets"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791593957530,"level":"print","subsystem":"asset","code":0,"message":"Animations: 0"}
+{"timestamp_ms":1791593957530,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=27, stage sampler limit=1048576"}
+{"timestamp_ms":1791593957556,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791593957557,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791593957561,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: character (sceneType=character)"}
+{"timestamp_ms":1791593957561,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593957564,"level":"print","subsystem":"render","code":0,"message":"Clustered lighting: 0 lights, 0 cluster references"}
+{"timestamp_ms":1791593957565,"level":"print","subsystem":"ecs","code":0,"message":"ECS visible renderables: 2"}
+{"timestamp_ms":1791593957602,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport resources rebuilt: 1362x680"}
+{"timestamp_ms":1791593957802,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: courtyard"}
+{"timestamp_ms":1791593957837,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: courtyard"}
+{"timestamp_ms":1791593957865,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: courtyard"}
+{"timestamp_ms":1791593957873,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593957877,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [1.000000, -1.000000, 1.000000]"}
+{"timestamp_ms":1791593957878,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\exploration\\assets\\hero.gltf"}
+{"timestamp_ms":1791593957878,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials"}
+{"timestamp_ms":1791593957878,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791593957878,"level":"print","subsystem":"asset","code":0,"message":"  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"Skinning: enabled, 1 joint matrices, 1 Morph targets"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791593957879,"level":"print","subsystem":"asset","code":0,"message":"Animations: 2 (playing \"MorphJointPulse\", 0.250000 s loop)"}
+{"timestamp_ms":1791593957880,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=59, stage sampler limit=1048576"}
+{"timestamp_ms":1791593957906,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791593957918,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791593957923,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: character (sceneType=character)"}
+{"timestamp_ms":1791593957927,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [1.000000, -1.000000, 1.000000]"}
+{"timestamp_ms":1791593957927,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\exploration\\assets\\hero.gltf"}
+{"timestamp_ms":1791593957927,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials"}
+{"timestamp_ms":1791593957928,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791593957928,"level":"print","subsystem":"asset","code":0,"message":"  [0] PublicTestMaterial -> generic, flags=0x20, source=asset-extras"}
+{"timestamp_ms":1791593957928,"level":"print","subsystem":"asset","code":0,"message":"  [1] PublicTestMaterialB -> generic, flags=0x20, source=asset-extras"}
+{"timestamp_ms":1791593957928,"level":"print","subsystem":"asset","code":0,"message":"  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791593957929,"level":"print","subsystem":"asset","code":0,"message":"  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791593957929,"level":"print","subsystem":"asset","code":0,"message":"Skinning: enabled, 1 joint matrices, 1 Morph targets"}
+{"timestamp_ms":1791593957929,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791593957929,"level":"print","subsystem":"asset","code":0,"message":"Animations: 2 (playing \"MorphJointPulse\", 0.250000 s loop)"}
+{"timestamp_ms":1791593957930,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=59, stage sampler limit=1048576"}
+{"timestamp_ms":1791593957957,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791593957970,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791593957975,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: character (sceneType=character)"}
+{"timestamp_ms":1791593957975,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593957977,"level":"print","subsystem":"render","code":0,"message":"Clustered lighting: 0 lights, 0 cluster references"}
+{"timestamp_ms":1791593958256,"level":"print","subsystem":"render","code":0,"message":"Rendered frames: 129"}
+{"timestamp_ms":1791593958353,"level":"print","subsystem":"render","code":0,"message":"Allocator after unload: buffers=0 images=0"}

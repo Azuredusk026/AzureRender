@@ -1,0 +1,6 @@
+{
+  "templates": 2,
+  "compiler": "net9.0",
+  "runtime": "coreclr",
+  "callbacks": true
+}

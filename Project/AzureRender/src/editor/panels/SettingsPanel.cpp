@@ -7,7 +7,16 @@ namespace azurerender {
 void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
     if(!ImGui::Begin("Settings###settings",workspace_.open("settings"))){ImGui::End();return;}
     const char* categories[]={"Editor preferences","Project configuration","Renderer diagnostics","Content assistance"};
-    ImGui::Combo("Category",&settingsCategory_,categories,4);observeWidget("settings.category");
+    if(ImGui::BeginCombo("Category",categories[settingsCategory_])){
+        for(int category=0;category<4;++category){
+            const bool selected=settingsCategory_==category;
+            if(ImGui::Selectable(categories[category],selected))settingsCategory_=category;
+            observeWidget("settings.category."+std::to_string(category));
+            if(selected)ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+    observeWidget("settings.category");
     if(settingsCategory_==1){
         if(session_->context().isProject()){
             const auto& project=session_->context().project();

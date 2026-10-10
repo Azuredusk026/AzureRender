@@ -111,7 +111,25 @@ def run(executable, root, install=None):
     assert not data['presentationErrors'], data
     assert data['editorPreviewFrames'] >= 1 and data['editorDebugLines'] > 0, data
     saved = json.loads((assets / 'exploration.azurelevel').read_text(encoding='utf-8'))
-    assert len(saved['nodes']) == len(nodes) and len(saved['resources']) == 3, saved
+    assert len(saved['nodes']) == len(nodes), 'Every authored node must survive save and reload'
+    saved_nodes = {node['id']: node for node in saved['nodes']}
+    assert set(saved_nodes) == {node['id'] for node in nodes}, 'Authored node identities must remain complete'
+    saved_resources = {resource['id']: resource['asset'] for resource in saved['resources']}
+    expected_references = set(resources.values())
+    assert len(saved['resources']) == len(saved_resources) == len(expected_references), 'Every distinct source model must be retained'
+    metadata = {json.loads(path.read_text(encoding='utf-8'))['id']: path.with_suffix('')
+                for path in assets.rglob('*.azmeta')}
+    imported = {}
+    for node in nodes:
+        if not node.get('resourceId'):
+            continue
+        reference = resources[node['resourceId']]
+        identity = saved_nodes[node['id']]['resourceId']
+        assert identity in saved_resources, 'Saved nodes must resolve to retained resources'
+        assert imported.setdefault(reference, identity) == identity, 'Shared models must retain shared identity'
+        model = metadata[saved_resources[identity]]
+        assert model.is_file() and model.name == Path(reference.split(':/', 1)[1]).name, 'Model references must retain their imported source'
+    assert set(imported) == expected_references and set(imported.values()) == set(saved_resources), 'All source models must retain distinct usable identities'
     hero = next(node for node in saved['nodes'] if node['id'] == 'hero:body')
     assert hero['components']['azure.transform']['data']['translation'] == [0, 0, 0], hero
     assert hero['components']['azure.animator']['data']['locomotion'], hero

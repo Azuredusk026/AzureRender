@@ -1,0 +1,41 @@
+{"timestamp_ms":1791609479233,"level":"print","subsystem":"input","code":0,"message":"Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot"}
+{"timestamp_ms":1791609479233,"level":"print","subsystem":"gpu","code":0,"message":"Validation layer: disabled"}
+{"timestamp_ms":1791609479470,"level":"print","subsystem":"gpu","code":0,"message":"Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU"}
+{"timestamp_ms":1791609479470,"level":"print","subsystem":"gpu","code":0,"message":"HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"}
+{"timestamp_ms":1791609479470,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing: enabled, timestamp period 1.000000 ns, 64 valid bits"}
+{"timestamp_ms":1791609479543,"level":"info","subsystem":"gpu","code":0,"message":"GPU capability report: captures\\gpu_capabilities.json"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [0.035000, -0.010000, 0.080000]"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-delivery\\Moved exploration\\game\\assets\\guide.gltf"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 673 vertices, 1440 indices, 2 primitives, 3 materials"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"  [0] guide-cloth -> fabric, flags=0x1, source=fallback/inferred"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Skinning: enabled, 15 joint matrices, 1 Morph targets"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791609479808,"level":"print","subsystem":"asset","code":0,"message":"Animations: 2 (playing \"idle\", 1.000000 s loop)"}
+{"timestamp_ms":1791609479852,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=195, stage sampler limit=1048576"}
+{"timestamp_ms":1791609479882,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791609480006,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791609480017,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: character (sceneType=character)"}
+{"timestamp_ms":1791609480017,"level":"print","subsystem":"render","code":0,"message":"Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off"}
+{"timestamp_ms":1791609480027,"level":"print","subsystem":"render","code":0,"message":"Clustered lighting: 4 lights, 159 cluster references"}
+{"timestamp_ms":1791609485561,"level":"print","subsystem":"asset","code":0,"message":"Turntable foot pivot: [0.035000, -0.010000, 0.080000]"}
+{"timestamp_ms":1791609485561,"level":"print","subsystem":"asset","code":0,"message":"Asset path: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-delivery\\Moved exploration\\game\\assets\\platformer\\hero.gltf"}
+{"timestamp_ms":1791609485561,"level":"print","subsystem":"asset","code":0,"message":"Loaded asset: 649 vertices, 1404 indices, 2 primitives, 3 materials"}
+{"timestamp_ms":1791609485561,"level":"print","subsystem":"asset","code":0,"message":"Material Class v1 inventory:"}
+{"timestamp_ms":1791609485561,"level":"print","subsystem":"asset","code":0,"message":"  [0] explorer-cloth -> fabric, flags=0x1, source=fallback/inferred"}
+{"timestamp_ms":1791609485562,"level":"print","subsystem":"asset","code":0,"message":"  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"}
+{"timestamp_ms":1791609485562,"level":"print","subsystem":"asset","code":0,"message":"  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"}
+{"timestamp_ms":1791609485562,"level":"print","subsystem":"asset","code":0,"message":"Skinning: enabled, 15 joint matrices, 1 Morph targets"}
+{"timestamp_ms":1791609485562,"level":"print","subsystem":"asset","code":0,"message":"Morph weights: 0.000000, 0.000000"}
+{"timestamp_ms":1791609485562,"level":"print","subsystem":"asset","code":0,"message":"Animations: 2 (playing \"idle\", 1.000000 s loop)"}
+{"timestamp_ms":1791609485563,"level":"info","subsystem":"render","code":0,"message":"Character texture access: indexed, requested slots=147, stage sampler limit=1048576"}
+{"timestamp_ms":1791609485599,"level":"info","subsystem":"render","code":0,"message":"Character IBL: GPU-prefiltered environment mip chain"}
+{"timestamp_ms":1791609485800,"level":"info","subsystem":"render","code":0,"message":"Character skinning and morph: Vulkan compute path"}
+{"timestamp_ms":1791609485812,"level":"info","subsystem":"runtime","code":0,"message":"Level committed: platformer"}
+{"timestamp_ms":1791609485822,"level":"print","subsystem":"render","code":0,"message":"Clustered lighting: 8 lights, 1451 cluster references"}
+{"timestamp_ms":1791609487694,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing samples: 1945   Shadow: 0.300 ms (9.869%)   Main scene: 2.323 ms (76.481%)   Internal outline: 0.415 ms (13.650%)   Total render: 3.038 ms avg, 1.022 ms min, 5.101 ms max   Percentiles: p50 3.433 ms, p95 4.438 ms, p99 4.622 ms   Submission per frame: 92.868 draws, 2.000 descriptor binds   CPU recording: 1.365 ms per frame, worker passes: 9725"}
+{"timestamp_ms":1791609487696,"level":"print","subsystem":"gpu","code":0,"message":"GPU timing report: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-delivery\\nvidia-exploration\\timing.json"}
+{"timestamp_ms":1791609487788,"level":"print","subsystem":"render","code":0,"message":"Rendered frames: 1945"}
+{"timestamp_ms":1791609487814,"level":"print","subsystem":"render","code":0,"message":"Allocator after unload: buffers=0 images=0"}

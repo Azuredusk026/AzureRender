@@ -1,0 +1,157 @@
+{"timestamp_ms":1791593970110,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593970221,"level":"print","subsystem":"input","code":0,"message":"Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot"}
+{"timestamp_ms":1791593970221,"level":"print","subsystem":"gpu","code":0,"message":"Validation layer: disabled"}
+{"timestamp_ms":1791593970401,"level":"print","subsystem":"gpu","code":0,"message":"Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU"}
+{"timestamp_ms":1791593970404,"level":"print","subsystem":"gpu","code":0,"message":"HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"}
+{"timestamp_ms":1791593970439,"level":"info","subsystem":"gpu","code":0,"message":"GPU capability report: captures\\gpu_capabilities.json"}
+{"timestamp_ms":1791593970676,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport render extent: 1920x1080"}
+{"timestamp_ms":1791593970680,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593970689,"level":"print","subsystem":"render","code":0,"message":"Diagnostic view: Beauty, stylized lighting: on, internal outline: on, HUD: off"}
+{"timestamp_ms":1791593970696,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593970697,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593970697,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593970701,"level":"print","subsystem":"ecs","code":0,"message":"ECS visible renderables: 1"}
+{"timestamp_ms":1791593970731,"level":"print","subsystem":"editor","code":0,"message":"Editor viewport resources rebuilt: 1362x680"}
+{"timestamp_ms":1791593970830,"level":"info","subsystem":"editor","code":0,"message":"Imported asset: model.gltf (48 vertices)"}
+{"timestamp_ms":1791593970832,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 1"}
+{"timestamp_ms":1791593970832,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593970833,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593970920,"level":"info","subsystem":"editor","code":0,"message":"Saved scene: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\inspection\\assets\\startup.azurelevel"}
+{"timestamp_ms":1791593970995,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593970999,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593970999,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971076,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971078,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971078,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971078,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971151,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971153,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971154,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971154,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971260,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971262,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971262,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971265,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971266,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593971267,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971268,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971268,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971310,"level":"info","subsystem":"editor","code":0,"message":"Saved scene: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\inspection\\assets\\startup.azurelevel"}
+{"timestamp_ms":1791593971380,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971381,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971439,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971440,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971466,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971469,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971470,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971470,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971571,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971571,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971630,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971630,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971651,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971654,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971654,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971654,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971750,"level":"info","subsystem":"editor","code":0,"message":"Generated asset: assets:/Authored/Cube.glb"}
+{"timestamp_ms":1791593971750,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971751,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971793,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971794,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593971797,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 1"}
+{"timestamp_ms":1791593971797,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971797,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971827,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971827,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593971829,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971829,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971830,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971855,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971856,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593971856,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593971898,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971899,"level":"info","subsystem":"editor","code":0,"message":"Selected node: authored-light"}
+{"timestamp_ms":1791593971901,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971902,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971902,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971930,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971931,"level":"info","subsystem":"editor","code":0,"message":"Selected node: authored-camera"}
+{"timestamp_ms":1791593971933,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593971934,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593971934,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593971989,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593971990,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Third-person camera"}
+{"timestamp_ms":1791593972027,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972028,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972097,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972100,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972100,"level":"info","subsystem":"editor","code":0,"message":"Placed prefab: first"}
+{"timestamp_ms":1791593972104,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 1"}
+{"timestamp_ms":1791593972105,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593972105,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593972143,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972144,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972176,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972238,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972243,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972243,"level":"info","subsystem":"editor","code":0,"message":"Placed prefab: second"}
+{"timestamp_ms":1791593972247,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 1"}
+{"timestamp_ms":1791593972249,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593972249,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593972285,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972286,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972330,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972393,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972394,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972438,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972485,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972503,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972548,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972549,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593972568,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972597,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972641,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972672,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972673,"level":"info","subsystem":"editor","code":0,"message":"Selected node: authored-joint"}
+{"timestamp_ms":1791593972677,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593972678,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593972678,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593972719,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972751,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593972818,"level":"info","subsystem":"editor","code":0,"message":"Saved scene: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\inspection\\assets\\startup.azurelevel"}
+{"timestamp_ms":1791593972864,"level":"info","subsystem":"editor","code":0,"message":"Simulation started"}
+{"timestamp_ms":1791593972866,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973080,"level":"info","subsystem":"editor","code":0,"message":"Play stopped; edit state restored"}
+{"timestamp_ms":1791593973082,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973155,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973156,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593973249,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973281,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973326,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973372,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973405,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973407,"level":"info","subsystem":"editor","code":0,"message":"ERROR [component.field]: Expected vector3"}
+{"timestamp_ms":1791593973502,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973608,"level":"info","subsystem":"editor","code":0,"message":"Saved scene: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\inspection\\assets\\startup.azurelevel"}
+{"timestamp_ms":1791593973683,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593973686,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973686,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593973734,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973738,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593973739,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973739,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973740,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593973789,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973790,"level":"info","subsystem":"editor","code":0,"message":"Selected node: Placed Object"}
+{"timestamp_ms":1791593973822,"level":"info","subsystem":"editor","code":0,"message":"Opened scene: startup"}
+{"timestamp_ms":1791593973879,"level":"info","subsystem":"editor","code":0,"message":"Saved scene: D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-workflows-retry2\\inspection\\assets\\second.azurelevel"}
+{"timestamp_ms":1791593973965,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593973967,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973967,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593973967,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593974247,"level":"info","subsystem":"editor","code":0,"message":"Asset reload requested; changed files: 0"}
+{"timestamp_ms":1791593974249,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593974250,"level":"print","subsystem":"render","code":0,"message":"Scene renderer: sample (sceneType=sample)"}
+{"timestamp_ms":1791593974250,"level":"info","subsystem":"editor","code":0,"message":"Renderer resources reloaded"}
+{"timestamp_ms":1791593974295,"level":"print","subsystem":"render","code":0,"message":"Rendered frames: 1429"}
+{"timestamp_ms":1791593974363,"level":"print","subsystem":"render","code":0,"message":"Allocator after unload: buffers=0 images=0"}

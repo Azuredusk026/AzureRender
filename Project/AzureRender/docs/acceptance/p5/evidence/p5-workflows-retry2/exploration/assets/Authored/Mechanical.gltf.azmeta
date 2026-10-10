@@ -1,0 +1,41 @@
+{
+  "dependencies": [],
+  "id": "428b99e4-b484-434a-913f-ee0ff8179423",
+  "importGeneration": {
+    "dependencyHashes": {},
+    "generatorId": "azure.gltf-import",
+    "generatorVersion": 1,
+    "inputHashes": {
+      "assets:/Authored/Mechanical.gltf": "fnv1a64:09c55d09a57b25f1",
+      "assets:/imports/asset-44766128920200-1/source.png": "fnv1a64:923872751b51a174"
+    },
+    "licenseSource": "LicenseRef-External-Asset",
+    "outputHashes": {
+      "assets:/Authored/Mechanical.gltf": "fnv1a64:09c55d09a57b25f1",
+      "assets:/imports/asset-44766128920200-1/source.png": "fnv1a64:923872751b51a174"
+    },
+    "parametersHash": "fnv1a64:9110badb53b6a38d",
+    "schemaVersion": 1
+  },
+  "provenanceTransform": {
+    "operation": "asset.rename",
+    "source": {
+      "dependencyHashes": {},
+      "generatorId": "azure.gltf-import",
+      "generatorVersion": 1,
+      "inputHashes": {
+        "assets:/Authored/model.gltf": "fnv1a64:09c55d09a57b25f1",
+        "assets:/imports/asset-44766128920200-1/source.png": "fnv1a64:923872751b51a174"
+      },
+      "licenseSource": "LicenseRef-External-Asset",
+      "outputHashes": {
+        "assets:/Authored/model.gltf": "fnv1a64:09c55d09a57b25f1",
+        "assets:/imports/asset-44766128920200-1/source.png": "fnv1a64:923872751b51a174"
+      },
+      "parametersHash": "fnv1a64:9110badb53b6a38d",
+      "schemaVersion": 1
+    }
+  },
+  "schemaVersion": 1,
+  "settings": {}
+}

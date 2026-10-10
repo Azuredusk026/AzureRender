@@ -1,0 +1,30 @@
+{
+  "assistance": true,
+  "scripts": true,
+  "animation": {
+    "guide": {
+      "blend": 1.0,
+      "clip": 0,
+      "crossfade": 0.0,
+      "joints": 15,
+      "loop": true,
+      "playing": true,
+      "previous": "",
+      "speed": 1.0,
+      "state": "idle",
+      "time": 0.13333334028720856
+    },
+    "hero": {
+      "blend": 1.0,
+      "clip": 0,
+      "crossfade": 0.0,
+      "joints": 15,
+      "loop": true,
+      "playing": true,
+      "previous": "",
+      "speed": 1.0,
+      "state": "idle",
+      "time": 0.30000001564621925
+    }
+  }
+}

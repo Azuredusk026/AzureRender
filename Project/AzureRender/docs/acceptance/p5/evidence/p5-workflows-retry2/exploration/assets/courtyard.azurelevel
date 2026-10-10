@@ -1,0 +1,591 @@
+{
+  "id": "courtyard",
+  "lights": [
+    {
+      "color": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "enabled": true,
+      "id": "authored-light:light-0",
+      "intensity": 2.0,
+      "nodeId": "authored-light",
+      "radius": 8.0
+    }
+  ],
+  "nodes": [
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": false
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.rigid-body": {
+          "data": {
+            "halfExtent": [
+              20,
+              1,
+              20
+            ]
+          },
+          "type": "azure.rigid-body",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              -1.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "floor",
+      "name": "floor",
+      "parentId": "",
+      "resourceId": ""
+    },
+    {
+      "components": {
+        "azure.animator": {
+          "data": {
+            "asset": "assets:/motion.json"
+          },
+          "type": "azure.animator",
+          "version": 1
+        },
+        "azure.character": {
+          "data": {},
+          "type": "azure.character",
+          "version": 1
+        },
+        "azure.game-ui": {
+          "data": {
+            "asset": "assets:/hud.rml"
+          },
+          "type": "azure.game-ui",
+          "version": 1
+        },
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.script": {
+          "data": {
+            "asset": "assets:/player.lua"
+          },
+          "type": "azure.script",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              -2.0,
+              1.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "hero",
+      "name": "hero",
+      "parentId": "",
+      "resourceId": "mesh"
+    },
+    {
+      "components": {
+        "azure.audio-source": {
+          "data": {
+            "asset": "assets:/portal.wav",
+            "volume": 0.7
+          },
+          "type": "azure.audio-source",
+          "version": 1
+        },
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.rigid-body": {
+          "data": {
+            "halfExtent": [
+              0.35,
+              1,
+              1
+            ],
+            "trigger": true
+          },
+          "type": "azure.rigid-body",
+          "version": 1
+        },
+        "azure.script": {
+          "data": {
+            "asset": "assets:/portal.lua"
+          },
+          "type": "azure.script",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              0.3499999940395355,
+              1.0,
+              0.3499999940395355
+            ],
+            "translation": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "portal",
+      "name": "portal",
+      "parentId": "",
+      "resourceId": "portal-mesh"
+    },
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.script": {
+          "data": {
+            "asset": "c527ff02-d6d2-4813-8db3-55c0aecf40d8",
+            "enabled": true
+          },
+          "type": "azure.script",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-model",
+      "materialSlots": {
+        "name:second-surface": "3e061c39-3a2f-4e11-ab94-cb0fe595da50",
+        "name:stone": "3db4a99f-823b-4147-b309-051230a439c7"
+      },
+      "name": "Placed Object",
+      "parentId": "",
+      "resourceId": "428b99e4-b484-434a-913f-ee0ff8179423"
+    },
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.rigid-body": {
+          "data": {
+            "dynamic": false,
+            "halfExtent": [
+              0.25,
+              0.25,
+              0.25
+            ],
+            "halfHeight": 0.5,
+            "kinematic": false,
+            "mesh": "",
+            "radius": 0.5,
+            "shape": "box",
+            "trigger": false
+          },
+          "type": "azure.rigid-body",
+          "version": 3
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "translation": [
+              5.0,
+              3.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-fixed",
+      "name": "Placed Object",
+      "parentId": "",
+      "resourceId": "ada85808-ea97-4b73-a54c-59d3cccbfff6"
+    },
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": true
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.rigid-body": {
+          "data": {
+            "dynamic": true,
+            "halfExtent": [
+              0.25,
+              0.25,
+              0.25
+            ],
+            "halfHeight": 0.5,
+            "kinematic": false,
+            "mesh": "",
+            "radius": 0.5,
+            "shape": "box",
+            "trigger": false
+          },
+          "type": "azure.rigid-body",
+          "version": 3
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "translation": [
+              5.0,
+              2.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-moving",
+      "name": "Placed Object",
+      "parentId": "",
+      "resourceId": "ada85808-ea97-4b73-a54c-59d3cccbfff6"
+    },
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": false
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-light",
+      "name": "Point light",
+      "parentId": "",
+      "resourceId": ""
+    },
+    {
+      "components": {
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": false
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.third-person-camera": {
+          "data": {
+            "collisionRadius": 0.20000000298023224,
+            "distance": 4.0,
+            "maximumDistance": 8.0,
+            "maximumPitch": 65.0,
+            "minimumDistance": 1.0,
+            "minimumPitch": -15.0,
+            "response": 12.0,
+            "sensitivity": 0.15000000596046448,
+            "shoulder": 0.25,
+            "target": "authored-model",
+            "targetHeight": 1.0
+          },
+          "type": "azure.third-person-camera",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-camera",
+      "name": "Third-person camera",
+      "parentId": "",
+      "resourceId": ""
+    },
+    {
+      "components": {
+        "azure.hinge": {
+          "data": {
+            "anchorA": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "anchorB": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "axis": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "bodyA": "authored-fixed",
+            "bodyB": "authored-moving",
+            "maximumAngle": 90.0,
+            "minimumAngle": -90.0,
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.hinge",
+          "version": 1
+        },
+        "azure.renderable": {
+          "data": {
+            "primitiveIndex": 0,
+            "visible": false
+          },
+          "type": "azure.renderable",
+          "version": 1
+        },
+        "azure.transform": {
+          "data": {
+            "rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "translation": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "type": "azure.transform",
+          "version": 1
+        }
+      },
+      "id": "authored-joint",
+      "name": "authored-joint",
+      "parentId": "",
+      "resourceId": ""
+    }
+  ],
+  "prefabs": [
+    {
+      "asset": "73ad685c-b56a-4d0b-a697-836431347252",
+      "instance": "first",
+      "overrides": {
+        "authored-model": {
+          "name": "First override"
+        }
+      }
+    },
+    {
+      "asset": "73ad685c-b56a-4d0b-a697-836431347252",
+      "instance": "second",
+      "overrides": {
+        "authored-model": {
+          "name": "Second override"
+        }
+      }
+    }
+  ],
+  "renderSettings": {
+    "antiAliasing": 1,
+    "background": true,
+    "bloomEnabled": true,
+    "bloomStrength": 0.1599999964237213,
+    "bloomThreshold": 1.0499999523162842,
+    "cameraFar": 100.0,
+    "cameraNear": 0.10000000149011612,
+    "contrast": 1.0,
+    "diagnosticView": 0,
+    "diffuseBandThreshold": 0.4000000059604645,
+    "exposure": 0.0,
+    "faceSdf": true,
+    "faceSoftness": 0.07999999821186066,
+    "faceThreshold": 0.5,
+    "innerOutline": true,
+    "outline": 0.4000000059604645,
+    "outlineColor": [
+      0.00800000037997961,
+      0.013000000268220901,
+      0.02199999988079071
+    ],
+    "outlineDepth": 0.18000000715255737,
+    "outlineNormal": 0.20000000298023224,
+    "outlinePixels": 0.800000011920929,
+    "platform": true,
+    "saturation": 1.0,
+    "shadowDistance": 100.0,
+    "shadowRadius": 8.0,
+    "showcasePreset": 0,
+    "silhouetteOutline": true,
+    "styleMaskStrength": 1.0,
+    "stylized": true,
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "toneMapping": true
+  },
+  "resources": [
+    {
+      "asset": "assets:/hero.gltf",
+      "id": "mesh"
+    },
+    {
+      "asset": "assets:/portal.gltf",
+      "id": "portal-mesh"
+    },
+    {
+      "asset": "428b99e4-b484-434a-913f-ee0ff8179423",
+      "id": "428b99e4-b484-434a-913f-ee0ff8179423"
+    },
+    {
+      "asset": "ada85808-ea97-4b73-a54c-59d3cccbfff6",
+      "id": "ada85808-ea97-4b73-a54c-59d3cccbfff6"
+    }
+  ],
+  "sceneType": "character",
+  "schemaVersion": 1
+}

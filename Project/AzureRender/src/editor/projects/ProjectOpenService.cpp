@@ -1,5 +1,6 @@
 #include "ProjectOpenService.hpp"
 #include "editor/commands/DocumentVersion.hpp"
+#include "runtime/Level.hpp"
 #include <fstream>
 namespace azurerender {
 ProjectOpenService::ProjectOpenService(std::filesystem::path history):history_(std::move(history)) {
@@ -32,7 +33,20 @@ std::shared_ptr<EditorContext> ProjectOpenService::create(const std::string& tem
     const auto temporary=target.parent_path()/(".azure-project-"+newDocumentIdentity());
     try {
         if(cancelled&&cancelled())throw std::runtime_error("Project creation cancelled");
-        if(templateId=="scene")Project::create(temporary,name);else Project::createGame(temporary,name);
+        if(templateId=="scene"){
+            Project::create(temporary,name);
+            const auto context=open(temporary/"project.azureproject");
+            auto document=context->levelDocument();document["schemaVersion"]=1;
+            document["sceneType"]="sample";
+            Level::parse(document,context->assets()).save(temporary/"assets/startup.azurelevel");
+            nlohmann::json project;
+            {std::ifstream input(temporary/"project.azureproject");input>>project;}
+            project["startupScene"]="assets:/startup.azurelevel";
+            {std::ofstream output(temporary/"project.azureproject");output<<project.dump(2)<<'\n';output.flush();
+                if(!output)throw std::runtime_error("Cannot write scene template project");}
+            std::filesystem::remove(temporary/"assets/startup.azscene");
+            std::filesystem::remove(temporary/"assets/startup.azscene.azmeta");
+        }else Project::createGame(temporary,name);
         static_cast<void>(open(temporary/"project.azureproject"));
         if(cancelled&&cancelled())throw std::runtime_error("Project creation cancelled");
         std::filesystem::rename(temporary,target);

@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "stage": "refresh-install",
+      "exitCode": 0,
+      "seconds": 39.26599999999996
+    },
+    {
+      "stage": "performance",
+      "exitCode": 1,
+      "seconds": 459.48400000000004
+    }
+  ]
+}

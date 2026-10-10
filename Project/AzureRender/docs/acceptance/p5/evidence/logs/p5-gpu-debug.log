@@ -1,0 +1,75 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start   8: AzureRender.VisibilityGpu
+ 1/60 Test   #8: AzureRender.VisibilityGpu .......................   Passed    0.74 sec
+      Start  12: AzureRender.SkinningGpu
+ 2/60 Test  #12: AzureRender.SkinningGpu .........................   Passed    0.57 sec
+      Start  13: AzureRender.ShadowTileBoundsGpu
+ 3/60 Test  #13: AzureRender.ShadowTileBoundsGpu .................   Passed    0.54 sec
+      Start  14: AzureRender.ShadowFilteringGpu
+ 4/60 Test  #14: AzureRender.ShadowFilteringGpu ..................   Passed    0.54 sec
+      Start  15: AzureRender.SurfaceResponseGpu
+ 5/60 Test  #15: AzureRender.SurfaceResponseGpu ..................   Passed    0.58 sec
+      Start  17: AzureRender.ShaderComposition
+ 6/60 Test  #17: AzureRender.ShaderComposition ...................   Passed    1.12 sec
+      Start  25: AzureRender.SamplingGpu
+ 7/60 Test  #25: AzureRender.SamplingGpu .........................   Passed   11.52 sec
+      Start  26: AzureRender.SamplingHostGpu
+ 8/60 Test  #26: AzureRender.SamplingHostGpu .....................   Passed   12.49 sec
+      Start  37: AzureRender.PreviewHost
+ 9/60 Test  #37: AzureRender.PreviewHost .........................   Passed    8.31 sec
+      Start  38: AzureEditor.SelectionGpu
+10/60 Test  #38: AzureEditor.SelectionGpu ........................   Passed   29.04 sec
+      Start  39: AzureEditor.GizmoGpu
+11/60 Test  #39: AzureEditor.GizmoGpu ............................   Passed   59.62 sec
+      Start  40: AzureEditor.DevtoolsHost
+12/60 Test  #40: AzureEditor.DevtoolsHost ........................   Passed   55.61 sec
+      Start  43: AzureEditor.ProposalHost
+13/60 Test  #43: AzureEditor.ProposalHost ........................   Passed   29.36 sec
+      Start  48: AzureAssets.ProceduralHost
+14/60 Test  #48: AzureAssets.ProceduralHost ......................   Passed   27.52 sec
+      Start  49: AzureEditor.SettingsHost
+15/60 Test  #49: AzureEditor.SettingsHost ........................***Failed    3.19 sec
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 144, in <module>
+    main(args.executable, Path(temporary) / 'evidence')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 129, in main
+    rows = [run(executable.resolve(), output.resolve(), name) for name in ('exploration', 'inspector')]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 129, in <listcomp>
+    rows = [run(executable.resolve(), output.resolve(), name) for name in ('exploration', 'inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 82, in run
+    event('click', target='setting.diagnostics.verbose')
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 58, in event
+    call('input', event=dict(action=action, **fields))
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_settings_host.py", line 51, in call
+    assert response['passed'] == passed, response
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 4.2128, 'message': 'Unknown UI target: setting.diagnostics.verbose', 'passed': False, 'schemaVersion': 1}
+
+      Start  50: AzureEditor.ObservationHost
+16/60 Test  #50: AzureEditor.ObservationHost .....................   Passed   33.83 sec
+      Start  57: AzureEngine.SceneInspectorHost
+17/60 Test  #57: AzureEngine.SceneInspectorHost ..................   Passed    5.64 sec
+      Start  62: AzureEngine.RegisteredComponentHost
+18/60 Test  #62: AzureEngine.RegisteredComponentHost .............   Passed    4.45 sec
+      Start  79: AzureEngine.ManagedWorkflows.coreclr
+19/60 Test  #79: AzureEngine.ManagedWorkflows.coreclr ............   Passed   10.00 sec
+      Start  80: AzureEngine.ManagedWorkflows.nativeaot
+20/60 Test  #80: AzureEngine.ManagedWorkflows.nativeaot ..........   Passed    8.49 sec
+      Start  94: AzureRender.SceneVisibilityGpu
+21/60 Test  #94: AzureRender.SceneVisibilityGpu ..................   Passed   47.04 sec
+      Start  96: AzureEngine.LocomotionPlayer
+22/60 Test  #96: AzureEngine.LocomotionPlayer ....................   Passed   43.99 sec
+      Start 106: AzureEditor.WorkspaceGpu
+23/60 Test #106: AzureEditor.WorkspaceGpu ........................   Passed  147.74 sec
+      Start 107: AzureEngine.MaterialFixtureGpu
+24/60 Test #107: AzureEngine.MaterialFixtureGpu ..................   Passed   15.90 sec
+      Start 108: AzureEngine.IndependentAnimationGpu
+25/60 Test #108: AzureEngine.IndependentAnimationGpu .............   Passed   10.33 sec
+      Start 109: AzureEngine.ThirdPersonPlayer
+26/60 Test #109: AzureEngine.ThirdPersonPlayer ...................   Passed    5.04 sec
+      Start 110: AzureEngine.PlayablePlayer
+27/60 Test #110: AzureEngine.PlayablePlayer ......................   Passed   18.84 sec
+      Start 111: AzureEngine.OptionalRuntimeTrace

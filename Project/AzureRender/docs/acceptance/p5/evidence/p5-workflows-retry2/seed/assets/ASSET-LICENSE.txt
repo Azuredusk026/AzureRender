@@ -1,0 +1,2 @@
+The cube asset is created for AzureRender and released under CC0-1.0.
+The inspection scene and script are original AzureRender example content.

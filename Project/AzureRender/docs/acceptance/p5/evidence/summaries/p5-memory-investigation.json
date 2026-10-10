@@ -1,0 +1,237 @@
+{
+  "status": "UnresolvedPerformanceGate",
+  "budgetsUnchanged": true,
+  "failures": {
+    "p5-performance/summary.json": {
+      "editor": [
+        {
+          "round": 2,
+          "growth": 0.12539264287734664,
+          "privateGrowth": null,
+          "gpuP95": 3.1132416,
+          "cpuP95": 3.6203950000000074
+        }
+      ],
+      "exploration": [
+        {
+          "round": 3,
+          "growth": 0.06309802411351728,
+          "privateGrowth": null,
+          "gpuP95": 12.781742399999999,
+          "cpuP95": 2.591795000002075
+        }
+      ],
+      "platformer": [
+        {
+          "round": 3,
+          "growth": 0.17506617967362526,
+          "privateGrowth": null,
+          "gpuP95": 5.6630384,
+          "cpuP95": 2.1235299999995574
+        }
+      ]
+    },
+    "p5-performance-retest/summary.json": {
+      "editor": [
+        {
+          "round": 2,
+          "growth": 0.12323346523459588,
+          "privateGrowth": 0.0,
+          "gpuP95": 3.1085616000000003,
+          "cpuP95": 3.6168399999999656
+        }
+      ],
+      "exploration": [
+        {
+          "round": 3,
+          "growth": 0.10722312953770041,
+          "privateGrowth": 0.034510291613377264,
+          "gpuP95": 13.1853184,
+          "cpuP95": 2.4921899999997503
+        }
+      ],
+      "platformer": [
+        {
+          "round": 1,
+          "growth": 0.15058361843429258,
+          "privateGrowth": 0.0526542633431506,
+          "gpuP95": 5.3077103999999995,
+          "cpuP95": 2.027614999999631
+        }
+      ]
+    }
+  },
+  "residentPageDiagnostic": {
+    "baselineBytes": 274939904,
+    "finalBytes": 308858880,
+    "positiveRegions": [
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933284802560,
+        "residentIncreaseBytes": 12615680
+      },
+      {
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll",
+        "kind": 16777216,
+        "allocation": 140712683896832,
+        "residentIncreaseBytes": 10383360
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933603897344,
+        "residentIncreaseBytes": 5517312
+      },
+      {
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+        "kind": 16777216,
+        "allocation": 140709441175552,
+        "residentIncreaseBytes": 3162112
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1932957057024,
+        "residentIncreaseBytes": 1015808
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933198229504,
+        "residentIncreaseBytes": 663552
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1934726791168,
+        "residentIncreaseBytes": 524288
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1934760345600,
+        "residentIncreaseBytes": 24576
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 820522254336,
+        "residentIncreaseBytes": 20480
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933547012096,
+        "residentIncreaseBytes": 16384
+      },
+      {
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dcomp.dll",
+        "kind": 16777216,
+        "allocation": 140714169466880,
+        "residentIncreaseBytes": 12288
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1934718402560,
+        "residentIncreaseBytes": 8192
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1934677639168,
+        "residentIncreaseBytes": 4096
+      },
+      {
+        "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+        "kind": 16777216,
+        "allocation": 140714201841664,
+        "residentIncreaseBytes": 4096
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933601538048,
+        "residentIncreaseBytes": 4096
+      },
+      {
+        "path": "",
+        "kind": 131072,
+        "allocation": 1933590528000,
+        "residentIncreaseBytes": 4096
+      }
+    ]
+  },
+  "heapTrace": {
+    "command": [
+      "xperf",
+      "-start",
+      "AzureP5Heap",
+      "-heap",
+      "-pids",
+      "17280",
+      "-stackwalk",
+      "HeapAlloc+HeapRealloc",
+      "-f",
+      "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-heap-diagnose\\heap.etl",
+      "-MaxFile",
+      "256",
+      "-FileMode",
+      "Circular"
+    ],
+    "exitCode": 2147942405,
+    "stdout": "",
+    "stderr": "xperf: error: AzureP5Heap: \u62d2\u7edd\u8bbf\u95ee\u3002 (0x5).\n"
+  },
+  "conclusions": [
+    "NVIDIA compiler and driver image pages contribute to resident growth.",
+    "Private committed memory is stable in the failed editor retest.",
+    "Unattributed private regions still require allocation stack ownership evidence.",
+    "Instruction pointer sampling is inconclusive and is not allocation attribution.",
+    "Pipeline cache remains an unvalidated candidate, not a proven remedy.",
+    "No quality, workload, warmup, threshold, or production rendering setting was changed."
+  ],
+  "nativeAllocationDiagnostics": {
+    "status": "diagnosticComplete",
+    "runs": [
+      {
+        "directory": "p5-allocation-debug-native-entry",
+        "requests": 4764
+      },
+      {
+        "directory": "p5-allocation-debug-residency",
+        "requests": 5202
+      }
+    ],
+    "attribution": "unresolved",
+    "successfulOwnedProcessExit": true,
+    "productionExecutableUnchanged": true,
+    "limitations": [
+      "Requests do not prove successful allocations, current residency, or leaks.",
+      "Debugger timing and heaps differ from formal runs.",
+      "NtAllocateVirtualMemoryEx and allocation reuse are outside coverage.",
+      "Release binary provides module and address evidence, not source symbols.",
+      "Formal working-set failures remain unresolved."
+    ]
+  },
+  "captureLayerControl": {
+    "passed": false,
+    "diagnosticOnly": true,
+    "environment": {
+      "DISABLE_VULKAN_OBS_CAPTURE": "1"
+    },
+    "rounds": 9,
+    "budgetsUnchanged": true,
+    "originalSourceAssertionFailed": true,
+    "sourceEquivalence": "p5-closeout-source-equivalence.json",
+    "conclusion": "Capture suppression does not resolve working-set failures",
+    "failedRounds": [
+      {
+        "load": "exploration",
+        "round": 3,
+        "growth": 0.13410079386893892
+      }
+    ]
+  }
+}

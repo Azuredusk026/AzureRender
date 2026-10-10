@@ -13,7 +13,17 @@ AzureRender 使用 C++17 与原生 Vulkan 实现渲染核心。引擎提供 Wind
 
 截图展示公开探索项目。菜单、停靠面板和制作流程见[关卡制作教程](docs/tutorials/editor-first-game.md)。
 
+探索主路由沙土道路、金色地标和蓝色终点引导。
+平台关卡依据角色实测轨迹布置连续跳跃。
+以下运行画面均使用公开程序化资源。
+
+![探索道路与环境](docs/media/exploration-environment.png)
+
+![平台路线与金币](docs/media/platformer-course.png)
+
 ## 使用入口
+
+交付门禁与人工复核见[P5 验收](docs/acceptance/p5/2026-10-10.md)。
 
 平台跳跃、承载与连续通关见[平台关卡](docs/runtime/platformer-gameplay.md)。
 

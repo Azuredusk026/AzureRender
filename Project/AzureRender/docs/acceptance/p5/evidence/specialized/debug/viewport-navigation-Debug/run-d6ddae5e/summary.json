@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "heldWheelAdjustsSpeed": true,
+  "sixDirections": true,
+  "escapeReleases": true,
+  "axisViewsPicked": [
+    "+X",
+    "-X",
+    "+Y",
+    "-Y",
+    "+Z",
+    "-Z"
+  ],
+  "physicalKeyboardMouse": "not performed"
+}

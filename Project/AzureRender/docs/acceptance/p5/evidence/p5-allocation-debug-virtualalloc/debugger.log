@@ -1,0 +1,318 @@
+(lldb) command source -s 0 'D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-allocation-debug-virtualalloc\commands.lldb'
+Executing commands in 'D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-allocation-debug-virtualalloc\commands.lldb'.
+(lldb) settings set auto-confirm true
+(lldb) target create "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release/AzureRender.exe"
+Current executable set to 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64).
+(lldb) breakpoint set -n VirtualAlloc -s KERNELBASE.dll -c "$rdx >= 262144"
+Breakpoint 1: no locations (pending).
+WARNING:  Unable to resolve breakpoint to any actual locations.
+(lldb) breakpoint command add 1
+(lldb) process launch -w "D:/Assigment/2609/FYP/Project/AzureRender" -o "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-virtualalloc/player.stdout.log" -e "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-virtualalloc/player.stderr.log" -- --editor-close-policy save --editor-project "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-performance/editor/project.azureproject" --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --game-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-virtualalloc/input.json" --editor-actions "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-virtualalloc/editor.json" --gpu-timing --gpu-timing-output "D:/Assigment/2609/FYP/Project/AzureRender/build/implementation-2026-10-10/p5-allocation-debug-virtualalloc/timing.json"
+1 location added to breakpoint 1
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000000800000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000001
+     rsp = 0x000000EBB7AFF0B8
+(lldb) (lldb)  thread backtrace -c 18
+* thread #9, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff8a9e7de86 CoreMessaging.dll`CoreUICallCreateConversationHost + 17030
+    frame #2: 0x00007ff8a9e6269c CoreMessaging.dll`CoreUICallSend + 337212
+    frame #3: 0x00007ff8a9e92c36 CoreMessaging.dll`CoreUICallCreateEndpointHost + 31574
+    frame #4: 0x00007ff8b1000ede ntdll.dll`RtlEncodeRemotePointer + 206
+    frame #5: 0x00007ff8b0f1483e ntdll.dll`RtlDeactivateActivationContext + 3614
+    frame #6: 0x00007ff8b0f137ac ntdll.dll`RtlDeleteElementGenericTableAvlEx + 1276
+    frame #7: 0x00007ff8b0ea86fa ntdll.dll`LdrGetProcedureAddressForCaller + 2842
+    frame #8: 0x00007ff8b0ea8726 ntdll.dll`LdrGetProcedureAddressForCaller + 2886
+    frame #9: 0x00007ff8b0ea7883 ntdll.dll`LdrGetProcedureAddress + 275
+    frame #10: 0x00007ff8b0eea584 ntdll.dll`LdrGetDllHandleEx + 3460
+    frame #11: 0x00007ff8b0eea190 ntdll.dll`LdrGetDllHandleEx + 2448
+    frame #12: 0x00007ff8b0eb4fb0 ntdll.dll`LdrLoadDll + 368
+    frame #13: 0x00007ff8ae68dd0f KernelBase.dll`LoadLibraryExW + 255
+    frame #14: 0x00007ff8ae75b794 KernelBase.dll`LoadLibraryExA + 100
+    frame #15: 0x00007ff845f985e1 dinput8.dll`DirectInput8Create + 29697
+    frame #16: 0x00007ff845f9c755 dinput8.dll`DllGetClassObject + 8725
+    frame #17: 0x00007ff845f9946d dinput8.dll`DirectInput8Create + 33421
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x000000000009F600
+      r8 = 0x0000000000102000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F2498
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007fff7dd7cc97 opengl32.dll`wglSwapLayerBuffers + 8519
+    frame #2: 0x00007fff7dd7c25c opengl32.dll`wglSwapLayerBuffers + 5900
+    frame #3: 0x00007fff7ddcbf19 opengl32.dll`glTexCoord4d + 9273
+    frame #4: 0x00007ff8b1000ede ntdll.dll`RtlEncodeRemotePointer + 206
+    frame #5: 0x00007ff8b0f1483e ntdll.dll`RtlDeactivateActivationContext + 3614
+    frame #6: 0x00007ff8b0f137ac ntdll.dll`RtlDeleteElementGenericTableAvlEx + 1276
+    frame #7: 0x00007ff8b0ea86fa ntdll.dll`LdrGetProcedureAddressForCaller + 2842
+    frame #8: 0x00007ff8b0ea7883 ntdll.dll`LdrGetProcedureAddress + 275
+    frame #9: 0x00007ff8b0eea584 ntdll.dll`LdrGetDllHandleEx + 3460
+    frame #10: 0x00007ff8b0eea190 ntdll.dll`LdrGetDllHandleEx + 2448
+    frame #11: 0x00007ff8b0eb4fb0 ntdll.dll`LdrLoadDll + 368
+    frame #12: 0x00007ff8ae68dd0f KernelBase.dll`LoadLibraryExW + 255
+    frame #13: 0x00007ff8ae75b794 KernelBase.dll`LoadLibraryExA + 100
+    frame #14: 0x00007fff50e6d286 igvk64.dll`DumpRegistryKeyDefinitions + 1938278
+    frame #15: 0x00007fff50e6c8a4 igvk64.dll`DumpRegistryKeyDefinitions + 1935748
+    frame #16: 0x00007fff50ca4ce1 igvk64.dll`DumpRegistryKeyDefinitions + 69057
+    frame #17: 0x00007fff51c77574 vulkan-1.dll`vkResetEvent + 220212
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000000240000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F2A38
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007fff4e6bfb54 nvoglv64.dll`DrvPresentBuffers + 282132
+    frame #2: 0x00007fff4e6bee19 nvoglv64.dll`DrvPresentBuffers + 278745
+    frame #3: 0x00007fff4e6ba9a0 nvoglv64.dll`DrvPresentBuffers + 261216
+    frame #4: 0x00007fff4e6baaf1 nvoglv64.dll`DrvPresentBuffers + 261553
+    frame #5: 0x00007fff4e6b9549 nvoglv64.dll`DrvPresentBuffers + 256009
+    frame #6: 0x00007fff4e6bc44f nvoglv64.dll`DrvPresentBuffers + 268047
+    frame #7: 0x00007fff4e6b790f nvoglv64.dll`DrvPresentBuffers + 248783
+    frame #8: 0x00007fff4e6b7308 nvoglv64.dll`DrvPresentBuffers + 247240
+    frame #9: 0x00007ff8b0f8a39b ntdll.dll`RtlTimeToSecondsSince1970 + 827
+    frame #10: 0x00007ff8b1000ede ntdll.dll`RtlEncodeRemotePointer + 206
+    frame #11: 0x00007ff8b0f1483e ntdll.dll`RtlDeactivateActivationContext + 3614
+    frame #12: 0x00007ff8b0f144ce ntdll.dll`RtlDeactivateActivationContext + 2734
+    frame #13: 0x00007ff8b0f1377b ntdll.dll`RtlDeleteElementGenericTableAvlEx + 1227
+    frame #14: 0x00007ff8b0ea86fa ntdll.dll`LdrGetProcedureAddressForCaller + 2842
+    frame #15: 0x00007ff8b0ea7883 ntdll.dll`LdrGetProcedureAddress + 275
+    frame #16: 0x00007ff8b0eea584 ntdll.dll`LdrGetDllHandleEx + 3460
+    frame #17: 0x00007ff8b0eea190 ntdll.dll`LdrGetDllHandleEx + 2448
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000040000000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F2668
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007fff4e6bfb54 nvoglv64.dll`DrvPresentBuffers + 282132
+    frame #2: 0x00007fff4e6bee19 nvoglv64.dll`DrvPresentBuffers + 278745
+    frame #3: 0x00007fff4e6ba9a0 nvoglv64.dll`DrvPresentBuffers + 261216
+    frame #4: 0x00007fff4e6baaf1 nvoglv64.dll`DrvPresentBuffers + 261553
+    frame #5: 0x00007fff4e6b9549 nvoglv64.dll`DrvPresentBuffers + 256009
+    frame #6: 0x00007fff4e6b3cfb nvoglv64.dll`DrvPresentBuffers + 233403
+    frame #7: 0x00007fff4e6b2760 nvoglv64.dll`DrvPresentBuffers + 227872
+    frame #8: 0x00007fff4e6b32e0 nvoglv64.dll`DrvPresentBuffers + 230816
+    frame #9: 0x00007fff4e6b2c4b nvoglv64.dll`DrvPresentBuffers + 229131
+    frame #10: 0x00007fff4e6b301a nvoglv64.dll`DrvPresentBuffers + 230106
+    frame #11: 0x00007fff4e6bbaf3 nvoglv64.dll`DrvPresentBuffers + 265651
+    frame #12: 0x00007fff4e6bc0ce nvoglv64.dll`DrvPresentBuffers + 267150
+    frame #13: 0x00007fff4e6bb0ed nvoglv64.dll`DrvPresentBuffers + 263085
+    frame #14: 0x00007fff4e6b14d0 nvoglv64.dll`DrvPresentBuffers + 223120
+    frame #15: 0x00007fff4dcc1f58 nvoglv64.dll`
+    frame #16: 0x00007fff4dc2d9cb nvoglv64.dll`
+    frame #17: 0x00007fff4ed050f5 nvoglv64.dll`vk_icdNegotiateLoaderICDInterfaceVersion + 1336677
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x000001F9B5DD0000
+     rdx = 0x0000000000080000
+      r8 = 0x0000000000001000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F63F8
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007fff4e6bf09a nvoglv64.dll`DrvPresentBuffers + 279386
+    frame #2: 0x00007fff4e6b9bec nvoglv64.dll`DrvPresentBuffers + 257708
+    frame #3: 0x00007fff4e6b2938 nvoglv64.dll`DrvPresentBuffers + 228344
+    frame #4: 0x00007fff4e6b3462 nvoglv64.dll`DrvPresentBuffers + 231202
+    frame #5: 0x00007fff4e6b3289 nvoglv64.dll`DrvPresentBuffers + 230729
+    frame #6: 0x00007fff4e6b2c4b nvoglv64.dll`DrvPresentBuffers + 229131
+    frame #7: 0x00007fff4e6b301a nvoglv64.dll`DrvPresentBuffers + 230106
+    frame #8: 0x00007fff4e6bbaf3 nvoglv64.dll`DrvPresentBuffers + 265651
+    frame #9: 0x00007fff4e6bc0ce nvoglv64.dll`DrvPresentBuffers + 267150
+    frame #10: 0x00007fff4e6bb0ed nvoglv64.dll`DrvPresentBuffers + 263085
+    frame #11: 0x00007fff4e6b14d0 nvoglv64.dll`DrvPresentBuffers + 223120
+    frame #12: 0x00007fff4ec96c7a nvoglv64.dll`vk_icdNegotiateLoaderICDInterfaceVersion + 884970
+    frame #13: 0x00007fff4e68bf52 nvoglv64.dll`DrvPresentBuffers + 70162
+    frame #14: 0x00007fff4e689a35 nvoglv64.dll`DrvPresentBuffers + 60661
+    frame #15: 0x00007fff4e688e44 nvoglv64.dll`DrvPresentBuffers + 57604
+    frame #16: 0x00007fff4e686dbc nvoglv64.dll`DrvPresentBuffers + 49276
+    frame #17: 0x00007fff4e63a9e5 nvoglv64.dll`
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000000240000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F8698
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff84b0c419f nvwgf2umx.dll`
+    frame #2: 0x00007ff84b0be39b nvwgf2umx.dll`
+    frame #3: 0x00007ff84b0be5d7 nvwgf2umx.dll`
+    frame #4: 0x00007ff84b0beb86 nvwgf2umx.dll`
+    frame #5: 0x00007ff84b0c1396 nvwgf2umx.dll`
+    frame #6: 0x00007ff84b0bc3a9 nvwgf2umx.dll`
+    frame #7: 0x00007ff84b0bc277 nvwgf2umx.dll`
+    frame #8: 0x00007ff8b0f8a39b ntdll.dll`RtlTimeToSecondsSince1970 + 827
+    frame #9: 0x00007ff8b1000ede ntdll.dll`RtlEncodeRemotePointer + 206
+    frame #10: 0x00007ff8b0f1483e ntdll.dll`RtlDeactivateActivationContext + 3614
+    frame #11: 0x00007ff8b0f144ce ntdll.dll`RtlDeactivateActivationContext + 2734
+    frame #12: 0x00007ff8b0f1377b ntdll.dll`RtlDeleteElementGenericTableAvlEx + 1227
+    frame #13: 0x00007ff8b0ea86fa ntdll.dll`LdrGetProcedureAddressForCaller + 2842
+    frame #14: 0x00007ff8b0ea7883 ntdll.dll`LdrGetProcedureAddress + 275
+    frame #15: 0x00007ff8b0eea584 ntdll.dll`LdrGetDllHandleEx + 3460
+    frame #16: 0x00007ff8b0eea190 ntdll.dll`LdrGetDllHandleEx + 2448
+    frame #17: 0x00007ff8b0eb4fb0 ntdll.dll`LdrLoadDll + 368
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000040000000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB86FF098
+(lldb) (lldb)  thread backtrace -c 18
+* thread #22, stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff84b0c419f nvwgf2umx.dll`
+    frame #2: 0x00007ff84b0be39b nvwgf2umx.dll`
+    frame #3: 0x00007ff84b0be5d7 nvwgf2umx.dll`
+    frame #4: 0x00007ff84b0beb86 nvwgf2umx.dll`
+    frame #5: 0x00007ff84b0b8146 nvwgf2umx.dll`
+    frame #6: 0x00007ff84b0b5e7e nvwgf2umx.dll`
+    frame #7: 0x00007ff84b0b6248 nvwgf2umx.dll`
+    frame #8: 0x00007ff84b0b8f79 nvwgf2umx.dll`
+    frame #9: 0x00007ff84b0bba2e nvwgf2umx.dll`
+    frame #10: 0x00007ff84b0bbd61 nvwgf2umx.dll`
+    frame #11: 0x00007ff84b0b454a nvwgf2umx.dll`
+    frame #12: 0x00007ff8b1000ede ntdll.dll`RtlEncodeRemotePointer + 206
+    frame #13: 0x00007ff8b0f1483e ntdll.dll`RtlDeactivateActivationContext + 3614
+    frame #14: 0x00007ff8b0f14147 ntdll.dll`RtlDeactivateActivationContext + 1831
+    frame #15: 0x00007ff8b0f7262b ntdll.dll`EtwEventWriteNoRegistration + 1691
+    frame #16: 0x00007ff8b0f724da ntdll.dll`EtwEventWriteNoRegistration + 1354
+    frame #17: 0x00007ff8b0ea2a2e ntdll.dll`LdrInitializeThunk + 14
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000002010000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F87C8
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, name = '0xdd100001', stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff8a17163a9 igd10um64xe.dll`
+    frame #2: 0x00007ff8a1716406 igd10um64xe.dll`
+    frame #3: 0x00007ff8a1716caf igd10um64xe.dll`
+    frame #4: 0x00007ff8a1716baf igd10um64xe.dll`
+    frame #5: 0x00007ff8a1780a2d igd10um64xe.dll`
+    frame #6: 0x00007ff8a1780fec igd10um64xe.dll`
+    frame #7: 0x00007ff8a17ba097 igd10um64xe.dll`
+    frame #8: 0x00007ff8a17b854e igd10um64xe.dll`
+    frame #9: 0x00007ff8ab70e551 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 278401
+    frame #10: 0x00007ff8ab6cb512 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 3906
+    frame #11: 0x00007ff8ab6caf26 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 2390
+    frame #12: 0x00007ff8ab6d51cb d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44027
+    frame #13: 0x00007ff8ab6d57b2 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 45538
+    frame #14: 0x00007ff8ab6d53a6 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44502
+    frame #15: 0x00007ff8ab75ccab d3d11.dll`D3DPerformance_SetMarker + 49163
+    frame #16: 0x00007ff8ab70dc6b d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 276123
+    frame #17: 0x00007ff8ab711354 d3d11.dll`D3D11CoreCreateLayeredDevice + 5748
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000002010000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F87C8
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, name = '0xdd100001', stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff8a17163a9 igd10um64xe.dll`
+    frame #2: 0x00007ff8a1716406 igd10um64xe.dll`
+    frame #3: 0x00007ff8a1716caf igd10um64xe.dll`
+    frame #4: 0x00007ff8a1716baf igd10um64xe.dll`
+    frame #5: 0x00007ff8a1780a2d igd10um64xe.dll`
+    frame #6: 0x00007ff8a1780fec igd10um64xe.dll`
+    frame #7: 0x00007ff8a17ba097 igd10um64xe.dll`
+    frame #8: 0x00007ff8a17b854e igd10um64xe.dll`
+    frame #9: 0x00007ff8ab70e551 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 278401
+    frame #10: 0x00007ff8ab6cb512 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 3906
+    frame #11: 0x00007ff8ab6caf26 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 2390
+    frame #12: 0x00007ff8ab6d51cb d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44027
+    frame #13: 0x00007ff8ab6d57b2 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 45538
+    frame #14: 0x00007ff8ab6d53a6 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44502
+    frame #15: 0x00007ff8ab75ccab d3d11.dll`D3DPerformance_SetMarker + 49163
+    frame #16: 0x00007ff8ab70dc6b d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 276123
+    frame #17: 0x00007ff8ab711354 d3d11.dll`D3D11CoreCreateLayeredDevice + 5748
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) (lldb)  register read rcx rdx r8 r9 rsp
+     rcx = 0x0000000000000000
+     rdx = 0x0000000002010000
+      r8 = 0x0000000000002000
+      r9 = 0x0000000000000004
+     rsp = 0x000000EBB72F87C8
+(lldb) (lldb)  thread backtrace -c 18
+* thread #1, name = '0xdd100001', stop reason = breakpoint 1.1
+  * frame #0: 0x00007ff8ae729ef0 KernelBase.dll`VirtualAlloc
+    frame #1: 0x00007ff8a17163a9 igd10um64xe.dll`
+    frame #2: 0x00007ff8a1716406 igd10um64xe.dll`
+    frame #3: 0x00007ff8a1716caf igd10um64xe.dll`
+    frame #4: 0x00007ff8a1716baf igd10um64xe.dll`
+    frame #5: 0x00007ff8a1780a2d igd10um64xe.dll`
+    frame #6: 0x00007ff8a1780fec igd10um64xe.dll`
+    frame #7: 0x00007ff8a17ba097 igd10um64xe.dll`
+    frame #8: 0x00007ff8a17b854e igd10um64xe.dll`
+    frame #9: 0x00007ff8ab70e551 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 278401
+    frame #10: 0x00007ff8ab6cb512 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 3906
+    frame #11: 0x00007ff8ab6caf26 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 2390
+    frame #12: 0x00007ff8ab6d51cb d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44027
+    frame #13: 0x00007ff8ab6d57b2 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 45538
+    frame #14: 0x00007ff8ab6d53a6 d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 44502
+    frame #15: 0x00007ff8ab75ccab d3d11.dll`D3DPerformance_SetMarker + 49163
+    frame #16: 0x00007ff8ab70dc6b d3d11.dll`CreateDirect3D11DeviceFromDXGIDevice + 276123
+    frame #17: 0x00007ff8ab711354 d3d11.dll`D3D11CoreCreateLayeredDevice + 5748
+(lldb) (lldb)  continue
+Process 5372 resuming
+(lldb) Command #3 'continue' continued the target.
+(lldb) Process 5372 launched: 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64)
+Process 5372 exited with status = 0 (0x00000000)
+(lldb) breakpoint list
+Current breakpoints:
+1: name = 'VirtualAlloc', module = KERNELBASE.dll, locations = 1, resolved = 1, hit count = 10
+    Breakpoint commands:
+      register read rcx rdx r8 r9 rsp
+      thread backtrace -c 18
+      continue
+
+Condition: $rdx >= 262144
+
+  1.1: where = KernelBase.dll`VirtualAlloc, address = 0x00007ff8ae729ef0, resolved, hit count = 10 
+
+(lldb) process status
+Process 5372 exited with status = 0 (0x00000000) 
+(lldb) quit

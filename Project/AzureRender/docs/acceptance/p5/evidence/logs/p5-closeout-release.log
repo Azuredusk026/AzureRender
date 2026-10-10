@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start  29: AzureEngine.SettingsOverlay
+1/5 Test  #29: AzureEngine.SettingsOverlay ......   Passed    0.03 sec
+    Start  49: AzureEditor.SettingsHost
+2/5 Test  #49: AzureEditor.SettingsHost .........   Passed   13.07 sec
+    Start 115: AzureEngine.EditorPlayable
+3/5 Test #115: AzureEngine.EditorPlayable .......   Passed   13.37 sec
+    Start 177: AzureEditor.ProjectFlow
+4/5 Test #177: AzureEditor.ProjectFlow ..........   Passed    0.48 sec
+    Start 178: AzureEditor.ProductizationGpu
+5/5 Test #178: AzureEditor.ProductizationGpu ....   Passed   32.16 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+gpu    =  58.60 sec*proc (3 tests)
+
+Total Test time (real) =  59.15 sec

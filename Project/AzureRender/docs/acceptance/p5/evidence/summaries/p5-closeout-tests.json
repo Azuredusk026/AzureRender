@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "config": "debug",
+      "passed": true,
+      "exitCode": 0,
+      "tests": 5,
+      "log": "p5-closeout-debug.log",
+      "seconds": 193.84400000000005
+    },
+    {
+      "config": "release",
+      "passed": true,
+      "exitCode": 0,
+      "tests": 5,
+      "log": "p5-closeout-release.log",
+      "seconds": 59.21799999999985
+    }
+  ]
+}

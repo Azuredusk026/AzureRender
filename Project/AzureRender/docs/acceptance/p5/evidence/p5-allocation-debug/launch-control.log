@@ -1,0 +1,76 @@
+(lldb) target create build/ninja-msvc-release/AzureRender.exe
+Current executable set to 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64).
+(lldb) process launch -- --help
+AzureRender 0.1 command-line reference
+
+Scenes:
+  --scene-type character|blackhole|sample
+                                      Select the renderer
+  --asset <gltf/glb>                  Character asset
+  --scene <azscene>                   Load a saved scene
+  --editor <azscene>                  Open the editor
+  --editor-project <azureproject>     Open a game project
+  --create-game <empty-directory>     Create a playable game template
+  --editor-close-policy <policy>     ask (default), save, discard
+  --editor-actions <json>             Run editor task commands
+  --validation-script <json>          Run versioned validation steps
+  --validation-report <json>          Write validation step results
+  --validation-token-env <name>       Enable control with an environment token
+  --validation-endpoint <json>        Write control address and assigned port
+  --validation-address <address>      IPv4 loopback address (127.0.0.1)
+  --validation-port <port>            Control port; 0 assigns a free port
+  --runtime-report <json>             Write gameplay evidence
+
+  --game-actions <json>               Replay fixed-route gameplay input
+Output:
+  --width <pixels> --height <pixels>  Output size
+  --anti-aliasing off|edge|supersample  Spatial sampling quality
+  --capture-dir <empty-dir>           Deterministic PNG output
+  --capture-frames <N> --capture-fps <1-240>
+  --gpu-timing-output <json>          GPU pass timing
+
+Quality and QA:
+  --qa-camera <preset> --qa-light <preset>
+  --qa-light-scan                    Rotate the key light through 120 frames
+  --qa-animation                     Play animation with a fixed QA camera
+  --qa-isolation brow-mask           Show visible eyebrow regions
+  Face cameras: face-front, face-three-quarter-left/right, face-side-left/right
+  --qa-morph-weights <w0> <w1>      Set Morph target weights
+  --blackhole-quality performance|balanced|cinematic
+  --blackhole-camera front|orbit-left|high|close|over-shoulder
+  --diagnostic-view beauty|normal|outline|shadow
+  --hud --no-stylized --no-inner-outline
+  --disable-bindless                Force legacy per-material descriptors
+  --disable-culling                 Submit all instances without culling
+  --disable-compute-skinning        Use vertex-shader skinning and morph
+  --disable-parallel-recording      Record every pass on the main thread
+  --disable-gpu-culling             Use CPU visibility and direct draws
+  --visibility-prototype            Emit stable GPU surface identities
+  --qa-disable-face-culling         Diagnose winding by rendering both faces
+  --qa-disable-depth-test           Diagnose depth by showing submission order
+  --disable-multi-draw-indirect     Use one indirect command per call
+  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps
+  --instances <N>                   Clone the asset entity N times (QA)
+
+Settings:
+  --set <name=JSON>                  Typed command-line override
+  --settings-file <json>             User settings layer
+  --default-settings <json>           Default file layer
+  --project-settings <json>           Project settings layer
+
+  --ai-python <executable>            Optional model tool interpreter
+  --ai-config <json>                  Tool-owned provider configuration
+  --ai-fixture <json>                 Fixed-response model service
+
+Utility:
+  --shader-reload <json>             Developer shader source configuration
+  --preview-views <json>             Independent offscreen view descriptors
+  --check-resources  Validate the installed resource tree
+  --smoke-frames <N> Exit after N rendered frames
+  --version          Print the version
+  --help             Print this reference
+Process 8696 launched: 'D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-release\AzureRender.exe' (x86_64)
+Process 8696 exited with status = 0 (0x00000000)
+(lldb) process status
+Process 8696 exited with status = 0 (0x00000000) 
+(lldb) quit

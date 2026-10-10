@@ -16,6 +16,16 @@ int main() {
         const auto first=projects.create("scene",root/"中文项目","中文项目");
         const auto second=projects.create("scene",root/"second","Second");
         require(first->isProject()&&second->isProject(),"Templates must open as independent projects");
+        {
+            EditorSession authored(first);
+            const auto owner=first->selectedNode()->id;
+            require(static_cast<bool>(authored.edit("component.add",{{"type","azure.rigid-body"}})),"Template permits physics authoring");
+            require(static_cast<bool>(authored.edit("component.fields",{{"type","azure.rigid-body"},{"values",{{"kinematic",true},{"radius",.7}}}})),"Template accepts reusable physics parameters");
+            require(static_cast<bool>(authored.edit("document.save")),"Template saves authored content");
+            const auto reopened=EditorContext::openProject(first->project().file);
+            const auto body=reopened->componentData(owner,"azure.rigid-body");
+            require(body.is_object()&&body.at("kinematic")==true&&std::abs(body.at("radius").get<double>()-.7)<1e-6,"Registered component fields survive template save and reopen");
+        }
         bool rejected=false;
         try{projects.create("scene",root/"second","Duplicate");}catch(const std::exception&){rejected=true;}
         require(rejected,"Occupied destination must be rejected");

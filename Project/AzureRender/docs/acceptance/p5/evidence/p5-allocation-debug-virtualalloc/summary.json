@@ -1,0 +1,11 @@
+{
+  "diagnosticOnly": true,
+  "elapsedSeconds": 45.172000000000025,
+  "debugger": "C:\\Program Files\\LLVM\\bin\\lldb.exe",
+  "debuggerSha256": "414b5463e2d2be0a72dd6e219a6f36925857e38b2712109162ccbebc1027d669",
+  "executableSha256": "3716af4670aeb0469a0760b524ebe893f06c9294b82bd2f027c6111d60aacad5",
+  "debuggerExitCode": 0,
+  "completed": true,
+  "unchangedBudgets": true,
+  "covers": "VirtualAlloc requests >= 256 KiB; not all heap allocations"
+}

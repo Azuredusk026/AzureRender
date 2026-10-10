@@ -4,9 +4,11 @@ import json
 import tempfile
 import shutil
 import uuid
+import time
 from pathlib import Path
 from create_playable_project import create
 from test_editor_workspace import launch
+from editor_test_host import EditorHost
 
 
 def run(executable, output):
@@ -46,6 +48,18 @@ def run(executable, output):
     assert switched['project']['id']==expected['id'],switched.get('project')
     assert switched['undoCount']==0
     assert switched['feedback']==[],switched['feedback']
+    with EditorHost(executable, output/'game/project.azureproject', output/'live-template') as host:
+        original=host.workspace()['document']['documentId']
+        host.edit('project.create',templateId='scene',destination=str(output/'live-created'),name='Live template')
+        deadline=time.monotonic()+45
+        while host.workspace()['project']['name']!='Live template':
+            assert time.monotonic()<deadline,'Template task must complete'
+            host.frames()
+        for _ in range(12):
+            state=host.workspace()
+            assert state['document']['documentId']!=original
+            assert state['project']['name']=='Live template'
+            host.frames()
     matrix=[]
     for workflow in ('exploration','inspection'):
         folder=output/('matrix-'+workflow);folder.mkdir()
@@ -64,6 +78,7 @@ def run(executable, output):
     summary = dict(passed=True, stage='U8', projectEntry=True, projectSwitch=True,
                    authoringPreset=True, debuggingPreset=True, matrix=matrix,
                    presetPersistence=True, input='production Dear ImGui replay',
+                   liveTemplateObservations=True,
                    physicalKeyboardMouse='not performed')
     (output/'summary.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(summary))

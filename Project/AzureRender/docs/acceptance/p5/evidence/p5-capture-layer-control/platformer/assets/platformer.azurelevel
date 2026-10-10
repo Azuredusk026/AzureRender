@@ -1,0 +1,1609 @@
+{
+  "schemaVersion": 1,
+  "id": "platformer",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false,
+    "cameraNear": 0.1,
+    "cameraFar": 200,
+    "shadowDistance": 65
+  },
+  "resources": [
+    {
+      "id": "hero",
+      "asset": "assets:/hero.gltf"
+    },
+    {
+      "id": "platform",
+      "asset": "assets:/environment/platform.glb"
+    },
+    {
+      "id": "practice",
+      "asset": "assets:/environment/practice.glb"
+    },
+    {
+      "id": "moving",
+      "asset": "assets:/environment/moving.glb"
+    },
+    {
+      "id": "challenge",
+      "asset": "assets:/environment/challenge.glb"
+    },
+    {
+      "id": "coin",
+      "asset": "assets:/environment/coin.glb"
+    },
+    {
+      "id": "rock",
+      "asset": "assets:/environment/rock.glb"
+    },
+    {
+      "id": "arch",
+      "asset": "assets:/environment/arch.glb"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "platform-0",
+      "resourceId": "practice",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.35,
+              0
+            ],
+            "scale": [
+              3,
+              0.35,
+              3
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-0",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.6,
+              0
+            ],
+            "scale": [
+              1.7999999999999998,
+              2,
+              1.7999999999999998
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-0",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.75,
+              -1.2
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-1",
+      "resourceId": "practice",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.35,
+              -7.033331394195557
+            ],
+            "scale": [
+              3,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-1",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.6,
+              -7.033331394195557
+            ],
+            "scale": [
+              1.7999999999999998,
+              2,
+              1.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-1",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.75,
+              -7.033331394195557
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-2",
+      "resourceId": "practice",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -0.19999999999999998,
+              -13.269995927810669
+            ],
+            "scale": [
+              3,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-2",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.449999999999999,
+              -13.269995927810669
+            ],
+            "scale": [
+              1.7999999999999998,
+              2,
+              1.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-2",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.9,
+              -13.269995927810669
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-3",
+      "resourceId": "moving",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.65,
+              -0.19999999999999998,
+              -19.79132685661316
+            ],
+            "scale": [
+              2.4,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": true
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/motion.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-3",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.9,
+              -19.79132685661316
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-4",
+      "resourceId": "platform",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.0,
+              -26.434657669067384
+            ],
+            "scale": [
+              2.4,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-4",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.25,
+              -26.434657669067384
+            ],
+            "scale": [
+              1.44,
+              2,
+              1.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-4",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.1,
+              -26.434657669067384
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-5",
+      "resourceId": "moving",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.0,
+              -33.15932173728943
+            ],
+            "scale": [
+              2.4,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": true
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/motion.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-5",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.1,
+              -33.15932173728943
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-6",
+      "resourceId": "challenge",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.0,
+              -40.3313187122345
+            ],
+            "scale": [
+              2.4,
+              0.35,
+              2
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-6",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.25,
+              -40.3313187122345
+            ],
+            "scale": [
+              1.44,
+              2,
+              1.2
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-6",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.1,
+              -40.3313187122345
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "platform-7",
+      "resourceId": "platform",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.0,
+              -47.77131638526917
+            ],
+            "scale": [
+              2.4,
+              0.35,
+              3
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "halfExtent": [
+              1,
+              1,
+              1
+            ],
+            "kinematic": false
+          }
+        }
+      }
+    },
+    {
+      "id": "cliff-7",
+      "resourceId": "rock",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              -4.25,
+              -47.77131638526917
+            ],
+            "scale": [
+              1.44,
+              2,
+              1.7999999999999998
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "coin-7",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.1,
+              -47.77131638526917
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "bonus-2",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.6,
+              0.9,
+              -13.269995927810669
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "bonus-6",
+      "resourceId": "coin",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.6,
+              1.1,
+              -40.3313187122345
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              0.55,
+              0.8,
+              0.55
+            ]
+          }
+        },
+        "azure.collectible": {
+          "type": "azure.collectible",
+          "version": 1,
+          "data": {
+            "category": "coin"
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/coin.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "hero",
+      "resourceId": "hero",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.02,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.character": {
+          "type": "azure.character",
+          "version": 4,
+          "data": {
+            "speed": 4.0,
+            "sprintMultiplier": 1.399999976158142,
+            "centerOffset": 0.9,
+            "forwardYaw": 180
+          }
+        },
+        "azure.animator": {
+          "type": "azure.animator",
+          "version": 3,
+          "data": {
+            "asset": "assets:/locomotion.json",
+            "locomotion": true,
+            "referenceSpeed": 2
+          }
+        },
+        "azure.task-state": {
+          "type": "azure.task-state",
+          "version": 1,
+          "data": {
+            "started": true
+          }
+        },
+        "azure.checkpoint": {
+          "type": "azure.checkpoint",
+          "version": 1,
+          "data": {
+            "position": [
+              0,
+              0.02,
+              0
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hero.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "camera",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.third-person-camera": {
+          "type": "azure.third-person-camera",
+          "version": 1,
+          "data": {
+            "target": "hero",
+            "distance": 6,
+            "targetHeight": 1.2
+          }
+        }
+      }
+    },
+    {
+      "id": "hud",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.game-ui": {
+          "type": "azure.game-ui",
+          "version": 1,
+          "data": {
+            "asset": "assets:/hud.rml"
+          }
+        }
+      }
+    },
+    {
+      "id": "checkpoint",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.15,
+              -26.434657669067384
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              1.6,
+              1.3,
+              1
+            ]
+          }
+        },
+        "azure.checkpoint": {
+          "type": "azure.checkpoint",
+          "version": 1,
+          "data": {
+            "position": [
+              0,
+              0.39999999999999997,
+              -26.434657669067384
+            ]
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/checkpoint.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "finish-arch",
+      "resourceId": "arch",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.35,
+              -47.77131638526917
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "goal",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              1.35,
+              -47.77131638526917
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.rigid-body": {
+          "type": "azure.rigid-body",
+          "version": 3,
+          "data": {
+            "trigger": true,
+            "halfExtent": [
+              1.8,
+              1.8,
+              0.3
+            ]
+          }
+        },
+        "azure.door": {
+          "type": "azure.door",
+          "version": 1,
+          "data": {
+            "requiredCount": 1
+          }
+        },
+        "azure.script": {
+          "type": "azure.script",
+          "version": 1,
+          "data": {
+            "asset": "assets:/goal.lua"
+          }
+        }
+      }
+    },
+    {
+      "id": "light-0",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-1",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2,
+              -7.033331394195557
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-2",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.15,
+              -13.269995927810669
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-3",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.15,
+              -19.79132685661316
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-4",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -26.434657669067384
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-5",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -33.15932173728943
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-6",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -40.3313187122345
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "light-7",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              2.35,
+              -47.77131638526917
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "audio-jump",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/audio/jump.wav",
+            "volume": 0.65
+          }
+        }
+      }
+    },
+    {
+      "id": "audio-land",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/audio/land.wav",
+            "volume": 0.65
+          }
+        }
+      }
+    },
+    {
+      "id": "audio-coin",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/audio/coin.wav",
+            "volume": 0.65
+          }
+        }
+      }
+    },
+    {
+      "id": "audio-respawn",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/audio/respawn.wav",
+            "volume": 0.65
+          }
+        }
+      }
+    },
+    {
+      "id": "audio-finish",
+      "resourceId": "",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "azure.audio-source": {
+          "type": "azure.audio-source",
+          "version": 1,
+          "data": {
+            "asset": "assets:/audio/finish.wav",
+            "volume": 0.65
+          }
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "light-0",
+      "nodeId": "light-0",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-1",
+      "nodeId": "light-1",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-2",
+      "nodeId": "light-2",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-3",
+      "nodeId": "light-3",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-4",
+      "nodeId": "light-4",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-5",
+      "nodeId": "light-5",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-6",
+      "nodeId": "light-6",
+      "color": [
+        1,
+        0.7,
+        0.35
+      ],
+      "intensity": 2,
+      "radius": 4
+    },
+    {
+      "id": "light-7",
+      "nodeId": "light-7",
+      "color": [
+        0.3,
+        0.75,
+        1
+      ],
+      "intensity": 2,
+      "radius": 4
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "style",
+      "exitCode": 0,
+      "passed": true,
+      "seconds": 0.25,
+      "log": "p5-closeout-style-final.log"
+    },
+    {
+      "name": "audit",
+      "exitCode": 0,
+      "passed": true,
+      "seconds": 0.5779999999999745,
+      "log": "p5-closeout-audit-final.log"
+    },
+    {
+      "name": "site",
+      "exitCode": 0,
+      "passed": true,
+      "seconds": 11.577999999999975,
+      "log": "p5-closeout-site-final.log"
+    }
+  ]
+}

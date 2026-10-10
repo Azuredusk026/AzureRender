@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "heldWheelAdjustsSpeed": true,
+  "sixDirections": true,
+  "shiftSpeedRatio": 3.9999998939999744,
+  "releasedToolKeys": [
+    "W",
+    "E",
+    "R"
+  ],
+  "escapeReleases": true,
+  "exitCases": [
+    "focus",
+    "popup",
+    "dpi",
+    "outside"
+  ],
+  "nativeCaptureRestored": true,
+  "axisViewsPicked": [
+    "+X",
+    "-X",
+    "+Y",
+    "-Y",
+    "+Z",
+    "-Z"
+  ],
+  "physicalKeyboardMouse": "not performed"
+}

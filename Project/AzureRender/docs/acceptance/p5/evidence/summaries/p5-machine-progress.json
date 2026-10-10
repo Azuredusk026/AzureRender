@@ -1,0 +1,17 @@
+{
+  "passed": false,
+  "stage": "P5",
+  "status": "ActivePerformanceAndPhysicalInputPending",
+  "checks": {
+    "cpu": true,
+    "gpu": true,
+    "workflows": true,
+    "delivery": true,
+    "performance": false,
+    "longRun": true,
+    "physicalInput": false,
+    "subjectiveAudio": false
+  },
+  "baseCommit": "6e864eb",
+  "budgetsUnchanged": true
+}

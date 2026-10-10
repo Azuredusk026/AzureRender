@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "config": "debug",
+      "group": "gpu",
+      "exitCode": 8,
+      "seconds": 1402.0469999999987,
+      "log": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\implementation-2026-10-10\\p5-final-gpu-debug.log",
+      "passed": false
+    }
+  ]
+}

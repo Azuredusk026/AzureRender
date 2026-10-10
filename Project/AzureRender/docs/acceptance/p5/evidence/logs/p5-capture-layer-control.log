@@ -1,0 +1,57 @@
+editor-1 {"gpu": {"mean": 3.041927768888889, "p95": 3.7722784, "p99": 4.09387744}, "cpu": {"mean": 3.8987361111111114, "p95": 5.029649999999985, "p99": 6.275814999999978}, "physics": {"mean": 0.2662918888888889, "p95": 0.38808999999999994, "p99": 0.6655849999999989}, "passed": true}
+editor 1 strict True working growth 0.010127683836216539 private growth 0.003503457688050826
+Cooling GPU: 69 C
+editor-2 {"gpu": {"mean": 3.0596264, "p95": 3.8330607999999997, "p99": 4.13504736}, "cpu": {"mean": 3.914933, "p95": 5.191874999999999, "p99": 6.824792999999997}, "physics": {"mean": 0.2716828333333333, "p95": 0.40444499999999994, "p99": 0.7446179999999994}, "passed": true}
+editor 2 strict True working growth 0.011941327180378547 private growth 0.007766908770309389
+Cooling GPU: 81 C
+Cooling GPU: 56 C
+editor-3 {"gpu": {"mean": 2.9461062044444444, "p95": 3.7520848, "p99": 4.01772448}, "cpu": {"mean": 4.291593833333334, "p95": 5.438884999999981, "p99": 7.304318999999979}, "physics": {"mean": 0.2976147777777778, "p95": 0.460105, "p99": 0.8584029999999989}, "passed": true}
+editor 3 strict True working growth 0.006023286053776111 private growth 0.0010336089623899092
+Cooling GPU: 65 C
+Cooling GPU: 56 C
+exploration-1 {"gpu": {"mean": 13.392580817777779, "p95": 15.1085136, "p99": 15.759328}, "cpu": {"mean": 2.4801098888888684, "p95": 3.4029850000019715, "p99": 4.581898999994522}, "physics": {"mean": 0.36506883333333334, "p95": 0.5684199999999999, "p99": 1.623074}, "passed": true}
+exploration 1 strict True working growth 0.021719355696432796 private growth 0.011849007118771127
+Cooling GPU: 87 C
+Cooling GPU: 60 C
+Cooling GPU: 58 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+exploration-2 {"gpu": {"mean": 13.606394044444444, "p95": 15.2618992, "p99": 16.07509152}, "cpu": {"mean": 2.428206166666665, "p95": 3.3189499999997447, "p99": 4.529845999999511}, "physics": {"mean": 0.35133983333333335, "p95": 0.5410999999999999, "p99": 1.411124}, "passed": true}
+exploration 2 strict True working growth 0.00010000428589806987 private growth 2.698254229516195e-05
+Cooling GPU: 74 C
+Cooling GPU: 60 C
+Cooling GPU: 58 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+exploration-3 {"gpu": {"mean": 13.352352995555556, "p95": 14.919688, "p99": 15.718717119999999}, "cpu": {"mean": 2.3474582222221834, "p95": 3.250185000001142, "p99": 4.253367000001878}, "physics": {"mean": 0.34507427777777777, "p95": 0.5362749999999998, "p99": 1.5782699999999998}, "passed": true}
+exploration 3 strict False working growth 0.13410079386893892 private growth 0.04691087639973146
+Cooling GPU: 71 C
+Cooling GPU: 60 C
+Cooling GPU: 58 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+platformer-1 {"gpu": {"mean": 5.401094328888889, "p95": 6.550064, "p99": 7.940332799999999}, "cpu": {"mean": 2.0931438333333277, "p95": 2.7287599999998147, "p99": 4.4278710000006924}, "physics": {"mean": 0.46895705555555556, "p95": 0.6655599999999999, "p99": 1.991112}, "passed": true}
+platformer 1 strict True working growth 0.032266992978469355 private growth 0.016049780360606114
+Cooling GPU: 80 C
+Cooling GPU: 58 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+platformer-2 {"gpu": {"mean": 5.447829102222222, "p95": 6.5925872, "p99": 7.97400896}, "cpu": {"mean": 2.1151598333333332, "p95": 2.814615000000082, "p99": 4.305699000000143}, "physics": {"mean": 0.45726266666666665, "p95": 0.5986649999999999, "p99": 1.9450849999999993}, "passed": true}
+platformer 2 strict True working growth 7.309300353774972e-05 private growth 1.366857798945631e-05
+Cooling GPU: 87 C
+Cooling GPU: 58 C
+Cooling GPU: 57 C
+Cooling GPU: 56 C
+Cooling GPU: 56 C
+platformer-3 {"gpu": {"mean": 5.428023555555556, "p95": 6.6611552000000005, "p99": 8.10750208}, "cpu": {"mean": 2.1434047222222223, "p95": 2.8649050000005407, "p99": 4.354134000000064}, "physics": {"mean": 0.46769822222222224, "p95": 0.6402749999999998, "p99": 1.953907999999999}, "passed": true}
+platformer 3 strict True working growth 0.0012244418725573247 private growth 0.000647109577221805
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-capture-layer-control.py", line 73, in <module>
+    assert result['sourceHash']==original['sourceHash']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

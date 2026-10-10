@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\implementation-2026-10-10\p5-workflows.py", line 84, in <module>
+    host.edit('component.fields',type='azure.rigid-body',values={'dynamic':dynamic,'shape':'box','halfExtents':[.25,.25,.25]})
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 57, in edit
+    result=self.call('edit',passed=passed,requestId='authoring-'+str(len(self.evidence)),commandId=command,parameters=parameters,baseVersion=json.loads(self.query('document.version')))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\editor_test_host.py", line 52, in call
+    assert result['passed']==passed,result
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 1.0256, 'message': '[{"code":"OperationFailed","message":"Unknown property: halfExtents"}]', 'passed': False, 'schemaVersion': 1}

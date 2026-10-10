@@ -156,16 +156,17 @@ void ImGuiEditorLayer::drawWorkspace() {
     }
 }
 nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
+    const auto* context=&session_->context();
     nlohmann::json data={{"version",EditorWorkspace::version},{"preset",workspace_.snapshot().at("preset")},{"dpi",dpi_},{"panels",nlohmann::json::object()},
         {"image",{{"x",imageRect_[0]},{"y",imageRect_[1]},{"width",imageRect_[2]},{"height",imageRect_[3]}}},
         {"widgets",widgets_},{"uiErrors",uiErrors_},{"historyCount",uiHistory_.size()},{"diagnostic",workspace_.diagnostic},
-        {"selectedName",context_->selectedNode()?context_->selectedNode()->name:""},
-        {"nodeCount",context_->scene().nodes.size()},{"gizmoTranslation",context_->gizmoTranslation()},
-        {"gizmoRotation",context_->gizmoRotation()},{"gizmoScale",context_->gizmoScale()},{"visibleAssets",visibleAssets_}};
+        {"selectedName",context->selectedNode()?context->selectedNode()->name:""},
+        {"nodeCount",context->scene().nodes.size()},{"gizmoTranslation",context->gizmoTranslation()},
+        {"gizmoRotation",context->gizmoRotation()},{"gizmoScale",context->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
     data["previewMode"]=session_->previewMode();
-    data["document"]=context_->documentVersion().describe();
-    data["documents"]=session_->documents().describe(context_->documentId());
+    data["document"]=context->documentVersion().describe();
+    data["documents"]=session_->documents().describe(context->documentId());
     data["animationTimelines"]=session_->animations().describe();
     data["previewSteps"]=session_->game()?session_->game()->steps():0;
     data["physicsBodies"]=nlohmann::json::array();data["physicsConstraints"]=0;
@@ -181,17 +182,17 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["materialEditor"]={{"asset",materialAsset_},{"snapshot",materialSnapshot_}};
     data["contentNavigation"]={{"mount",assetMount_},{"path",assetDirectory_},{"historyIndex",assetNavigationIndex_},{"historySize",assetNavigation_.size()},{"selected",selectedAssets_},{"previewHandle",assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
     if(includeHistory)data["history"]=uiHistory_;
-    data["gizmoSpace"]=context_->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
-    data["gizmoPivot"]=context_->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
+    data["gizmoSpace"]=context->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
+    data["gizmoPivot"]=context->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";
     data["referencePicker"]=session_->references().active();
     data["activeSelection"]=session_->selection().active();
     data["feedback"]=session_->feedback().report();data["tasks"]=session_->tasks().report();
-    data["gizmoMode"]=static_cast<unsigned>(context_->gizmoMode());
+    data["gizmoMode"]=static_cast<unsigned>(context->gizmoMode());
     data["capture"]={{"navigationButton",navigationButton_},{"gizmo",viewportGizmoDragActive_}};
     data["documentGuard"]=static_cast<unsigned>(session_->documentGuard().state());
-    data["dirty"]=context_->dirty();data["undoCount"]=context_->undoCount();data["selection"]=session_->selection().selected();
+    data["dirty"]=context->dirty();data["undoCount"]=context->undoCount();data["selection"]=session_->selection().selected();
     data["settings"]=session_->settings().describe();
-    data["project"]=context_->isProject()?nlohmann::json{{"id",context_->project().id},{"name",context_->project().name},{"path",context_->project().file.u8string()}}:nlohmann::json::object();
+    data["project"]=context->isProject()?nlohmann::json{{"id",context->project().id},{"name",context->project().name},{"path",context->project().file.u8string()}}:nlohmann::json::object();
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
         data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},

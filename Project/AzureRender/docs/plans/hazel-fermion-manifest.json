@@ -1119,7 +1119,7 @@
     "normalSiteBuild": "passed",
     "strictSiteBuild": "passed",
     "externalEngineBuilds": "not-run",
-    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring; U13: 149 non-GPU, 6 final-host GPU, multi-document and Prefab UI, animation controls, managed template execution; G16: 154 non-GPU, 4 affected GPU, 21 phase-varied mandatory landings, full game sequence, five audio events and lifecycle recovery"
+    "implementationTests": "U8: 127 non-GPU, 5 GPU; U9: 129 non-GPU, 6 GPU, two-project property workflow; G12: 133 non-GPU, 7 GPU, file journals and selected texture fields; U10: 137 non-GPU, 8 affected GPU, 10000 assets and 1800 CPU frame samples; U11: 139 non-GPU, material UI and Player, Release relocated package; U12: 141 non-GPU, held RMB six-way flight, orthographic picking, native capture, affected GPU regression; G13: 143 non-GPU, 10 affected GPU, two independent mechanisms, simulation and shape authoring; U13: 149 non-GPU, 6 final-host GPU, multi-document and Prefab UI, animation controls, managed template execution; G16: 154 non-GPU, 4 affected GPU, 21 phase-varied mandatory landings, full game sequence, five audio events and lifecycle recovery; P5: 430 distinct regression items passed with retained interruption/retest logs; five relocated projects on two GPUs; working-set performance gate failed; physical input and subjective audio pending"
   },
   "execution": {
     "order": [
@@ -1161,6 +1161,73 @@
         "acceptance": "docs/acceptance/g16/2026-10-10.md",
         "commitPolicy": "phase completion commit"
       }
+    },
+    "productizationEvidence": {
+      "status": "ActivePerformanceAndPhysicalInputPending",
+      "acceptance": "docs/acceptance/p5/2026-10-10.md",
+      "manifest": "docs/acceptance/p5/evidence/manifest.json",
+      "manual": "docs/acceptance/p5/physical-input.md",
+      "cpuTests": 308,
+      "gpuTests": 122,
+      "deliveredProjects": 5,
+      "deviceChecks": 10,
+      "performanceGate": "failed",
+      "workingSetBudget": 0.05,
+      "workingSetAttribution": "unresolved",
+      "longRun": {
+        "status": "passed",
+        "seconds": 1800.2040000000002,
+        "frames": 249294,
+        "gpuP95Ms": 9.04624
+      },
+      "allocationDiagnostics": {
+        "status": "diagnosticComplete",
+        "runs": [
+          {
+            "directory": "p5-allocation-debug-native-entry",
+            "requests": 4764
+          },
+          {
+            "directory": "p5-allocation-debug-residency",
+            "requests": 5202
+          }
+        ],
+        "attribution": "unresolved",
+        "successfulOwnedProcessExit": true,
+        "productionExecutableUnchanged": true,
+        "limitations": [
+          "Requests do not prove successful allocations, current residency, or leaks.",
+          "Debugger timing and heaps differ from formal runs.",
+          "NtAllocateVirtualMemoryEx and allocation reuse are outside coverage.",
+          "Release binary provides module and address evidence, not source symbols.",
+          "Formal working-set failures remain unresolved."
+        ]
+      },
+      "captureLayerControl": {
+        "passed": false,
+        "diagnosticOnly": true,
+        "environment": {
+          "DISABLE_VULKAN_OBS_CAPTURE": "1"
+        },
+        "rounds": 9,
+        "budgetsUnchanged": true,
+        "originalSourceAssertionFailed": true,
+        "sourceEquivalence": "p5-closeout-source-equivalence.json",
+        "conclusion": "Capture suppression does not resolve working-set failures",
+        "failedRounds": [
+          {
+            "load": "exploration",
+            "round": 3,
+            "growth": 0.13410079386893892
+          }
+        ]
+      },
+      "verifiedSubtasks": [
+        "authoring",
+        "delivery",
+        "regression",
+        "longRun"
+      ]
     }
   }
 }

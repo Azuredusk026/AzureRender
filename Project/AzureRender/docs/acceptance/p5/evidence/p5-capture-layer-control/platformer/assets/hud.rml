@@ -1,0 +1,11 @@
+<rml><head><title>Azure Sky Steps</title><style>
+body { display:block; width:100%; height:100%; margin:0; font-family:LatoLatin; font-size:13dp; color:#eef4ff; }
+#panel { position:absolute; left:16dp; top:16dp; width:320dp; padding:12dp; background-color:#172338dd; border-radius:8dp; }
+h1 { display:block; font-size:19dp; color:#9bded9; margin:0 0 8dp; } p { display:block; margin:6dp 0; }
+#feedback { color:#ffe59d; } button { display:inline-block; background-color:#366b7e; padding:6dp 10dp; }
+</style></head><body><div id="panel"><h1>Sky Steps</h1>
+<p id="objective">Follow the golden coins to the blue finish gate.</p><p id="progress">Coins: 0 / 10</p>
+<p id="checkpoint">Start checkpoint</p><p id="feedback">Observe moving platforms before jumping.</p>
+<p>WASD Move | Space Jump | Shift Sprint | Mouse Camera | R Restart</p>
+<button data-action="restart">Restart course</button>
+</div></body></rml>

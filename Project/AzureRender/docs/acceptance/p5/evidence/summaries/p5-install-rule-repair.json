@@ -1,0 +1,25 @@
+{
+  "originalFailure": "Installed viewport navigation documentation absent",
+  "before": {
+    "docs/runtime/viewport-navigation.md": false,
+    "docs/runtime/platformer-gameplay.md": false
+  },
+  "after": {
+    "docs/runtime/viewport-navigation.md": true,
+    "docs/runtime/platformer-gameplay.md": true
+  },
+  "configurations": {
+    "debug": {
+      "productsUnchanged": true,
+      "changedInputs": [
+        "CMakeLists.txt"
+      ]
+    },
+    "release": {
+      "productsUnchanged": true,
+      "changedInputs": [
+        "CMakeLists.txt"
+      ]
+    }
+  }
+}

@@ -26,6 +26,11 @@
 - `character_endfield_public_closeup_v1_1280x720.png` 展示近景视角。
 - `blackhole_temporal_beauty_v1_1280x720.png` 展示黑洞渲染。
 
+探索路线图位于 `docs/media/exploration-environment.png`。
+平台关卡图位于 `docs/media/platformer-course.png`。
+两张图使用公开的程序化资源。
+来源、尺寸与哈希由图片清单记录。
+
 ## 验证与阅读
 
 在工程目录执行图片与证据清单验证。
@@ -35,3 +40,6 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/verify_portfolio.p
 ```
 
 完整交付结果见[P2 验收](../docs/acceptance/p2/2026-10-05.md)。关卡制作见[使用教程](../docs/tutorials/editor-first-game.md)。渲染说明见[架构文档](../docs/architecture.md)。
+
+产品化交付与人工范围见[P5 验收](../docs/acceptance/p5/2026-10-10.md)。
+探索环境与跳跃流程分别见 G15 和 G16 的证据。
