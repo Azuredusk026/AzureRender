@@ -202,5 +202,8 @@ P5 保持 Active，性能与人工门禁按实际证据维护。
 正式十五轮候选测量有一轮工作集增长超限。
 原始结果与映射边界见[诊断记录](docs/acceptance/p5/closure/mapping-inspection.md)。
 
+外部文件恢复契约见[文档保护复核](docs/acceptance/p5/closure/document-guard-scan.md)。
+两配置完整回归共四百五十四项通过。
+
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。

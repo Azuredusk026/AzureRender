@@ -10,6 +10,7 @@ import time
 from create_playable_project import create
 from run_playable_long_run import NativeWindow
 from test_validation_protocol import exchange
+from editor_content_wait import wait_content_scan
 
 
 def run(executable, output, workflow, decision):
@@ -85,8 +86,12 @@ def run(executable, output, workflow, decision):
             assert call('query', name='editor.dirty') is True
             click('document.cancel')
             call('wait-frames', frames=5)
+            previous = workspace()['contentNavigation']['statistics']['directoryEnumerations']
             level.rmdir()
             backup.rename(level)
+            wait_content_scan(workspace, lambda: call('wait-frames', frames=6), previous)
+            assert call('query', name='document.contentHash') == authored
+            assert call('query', name='selection.id') == selection
             decision = 'discard'
         # Reload uses the same confirmation controls.
         edit('document.reload')

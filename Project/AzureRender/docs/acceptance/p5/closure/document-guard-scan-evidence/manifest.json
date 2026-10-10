@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "126d7d78297476f6e35aa11250213bddeb8f7d1e5a24a5af1952815ecfee257d",
+  "productionStaleRejectionPreserved": true,
+  "clientSynchronizationVerified": true,
+  "physicalInputVerified": false,
+  "files": {
+    "document-guard-release.log.gz": {
+      "source": "build/p5-p6-closure-candidate-2026-10-11/document-guard-release.log",
+      "originalBytes": 552,
+      "storedBytes": 303,
+      "originalSha256": "f82b8eb044aaf70e72b4611e66e46d20948dda7c6ed231f2466d472107b9664d",
+      "sha256": "bdeb1a52179e291908bcc266328ec394247116df97b12072ee80439c31e56fa0",
+      "compressed": true
+    },
+    "document-guard-debug.log.gz": {
+      "source": "build/p5-p6-closure-candidate-2026-10-11/document-guard-debug.log",
+      "originalBytes": 548,
+      "storedBytes": 301,
+      "originalSha256": "cb38dfb5a3339f73011712af568c7043ca9976d5550b1ebda32b09cce75a7329",
+      "sha256": "3092cb7de7b987e96711f329cab8086b9289cd6bfba312ea2ba78ce436bfc29b",
+      "compressed": true
+    },
+    "document-guard-scan-analysis.json.gz": {
+      "source": "build/p5-p6-closure-candidate-2026-10-11/document-guard-scan-analysis.json",
+      "originalBytes": 3293,
+      "storedBytes": 521,
+      "originalSha256": "3faa9ec7a0c4c3c002ae81613582fd80966716ecf3013633c6534035266c9279",
+      "sha256": "aa16446a92801de680f87483846039dd22162d462983d8b720241ac35960492d",
+      "compressed": true
+    },
+    "frozen-inputs.json.gz": {
+      "source": "build/p5-p6-closure-candidate-2026-10-11/frozen-inputs.json",
+      "originalBytes": 105265,
+      "storedBytes": 42990,
+      "originalSha256": "26d10004c82742f701c6de908b72c2d92fa26b0547dd54d9c16ce0088c9adf18",
+      "sha256": "7a6178aacf7643612f937570786ce406716f27d6f9e636971e9601312ac0051b",
+      "compressed": true
+    },
+    "repository-audit.json.gz": {
+      "source": "build/p5-p6-closure-candidate-2026-10-11/repository-audit.json",
+      "originalBytes": 859,
+      "storedBytes": 261,
+      "originalSha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d",
+      "sha256": "9e61fe52c3445c18223b122efc56a2fd08f1b95f254ea78bf382aa79f3dc95e2",
+      "compressed": true
+    },
+    "content-wait-red.log.gz": {
+      "source": "build/p5-p6-inspection-2026-10-11/content-wait-red.log",
+      "originalBytes": 279,
+      "storedBytes": 225,
+      "originalSha256": "48631fb860cac8f59c67c968b155d1888676497c2a7a279f950cbc2cf5a0fe7b",
+      "sha256": "4943069acd75cd74b308a17eec2dc355e3d41427f9af185b4f6adae8b18a36f2",
+      "compressed": true
+    },
+    "content-wait-green.log.gz": {
+      "source": "build/p5-p6-inspection-2026-10-11/content-wait-green.log",
+      "originalBytes": 106,
+      "storedBytes": 59,
+      "originalSha256": "8ee4669655aaed29bbc70e28a8ef25f73d1ebe2b002448e637699b5a2cbcaa41",
+      "sha256": "e501d34ca7496e2e3a261c32a23624884e5e6b1eea81b93839c85fb48aa42381",
+      "compressed": true
+    },
+    "content-wait-rebuild.log.gz": {
+      "source": "build/p5-p6-inspection-2026-10-11/content-wait-rebuild.log",
+      "originalBytes": 11530,
+      "storedBytes": 2094,
+      "originalSha256": "5b64bb574eaf5cb9bd20974f6f4f619a4a64c5416b18f8d03abababb5f1d52d4",
+      "sha256": "9fdcba428e88bd753c90f3f98519ec2be02ecb33658d9001be3a060be64016c9",
+      "compressed": true
+    },
+    "source/tools/editor_content_wait.py.gz": {
+      "source": "tools/editor_content_wait.py",
+      "originalBytes": 613,
+      "storedBytes": 326,
+      "originalSha256": "303a0c56db6b4e6603ff97b591a1b4ada783cd0a20d6b7153e4644066e574294",
+      "sha256": "ff6d0d609075072c068ab3677d5714db0304965b625d1f6f0b89e12679ebe7a2",
+      "compressed": true
+    },
+    "source/tools/test_editor_content_wait.py.gz": {
+      "source": "tools/test_editor_content_wait.py",
+      "originalBytes": 1227,
+      "storedBytes": 534,
+      "originalSha256": "abaadac00732721f10d39a45385836f7ea487858449ed37a9d5eb8d7369a2e36",
+      "sha256": "6fff909104b20ce16c6ffa92a2fa05511a7442efa7dfdf2d0fa59c2806b2f177",
+      "compressed": true
+    },
+    "source/tools/test_editor_document_guard.py.gz": {
+      "source": "tools/test_editor_document_guard.py",
+      "originalBytes": 6589,
+      "storedBytes": 2135,
+      "originalSha256": "1a77a948db1ea5394f2f7eabbf0b898b9efc576674804b913250694572aa8bad",
+      "sha256": "d8cd5e82fbe3b6ff633634a5c910d9139c2d7b38af741641c8fe3b936c84d40c",
+      "compressed": true
+    },
+    "original-stale-failure/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791665528880152800/exploration-failure/control-results.json",
+      "originalBytes": 91566,
+      "storedBytes": 6152,
+      "originalSha256": "5aa7b44298fc527920312b5b0914e5ba54e756fc86be4733547ea2b6ef902b79",
+      "sha256": "0ab92c829d431aafd47855903479f517bf8105a1e5720f7d35041a8d18a6ff95",
+      "compressed": true
+    },
+    "original-stale-failure/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791665528880152800/exploration-failure/stdout.log",
+      "originalBytes": 2215,
+      "storedBytes": 928,
+      "originalSha256": "0495e015975fdf41dff12497304721a52565635c2968ad1e7b3c42af83733975",
+      "sha256": "37c5e37a825e599d9bd1e09db174636cc4a102f7c1cd16b4934087b465b6b594",
+      "compressed": true
+    },
+    "original-stale-failure/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791665528880152800/exploration-failure/stderr.log",
+      "originalBytes": 2058,
+      "storedBytes": 571,
+      "originalSha256": "329b1ea70f30e7d52e98cefef1e30517347b738b794ffda3123f8f2a2984fbaf",
+      "sha256": "396eb265943ea8344ad788ae69713ee054abb26b4c69e1807aa846ea2c18b355",
+      "compressed": true
+    },
+    "analysed-scans/release-exploration.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-failure/control-results.json",
+      "originalBytes": 269403,
+      "storedBytes": 8093,
+      "originalSha256": "3c2301fd3baaf6e9b3ad916e6f5002a918e34c4b5dcc83c7e9ca59070757f811",
+      "sha256": "030194267a8a7bf5e63545463b5167f2d719e6c2d20c02deebe01d369222401a",
+      "compressed": true
+    },
+    "analysed-scans/release-inspector.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-failure/control-results.json",
+      "originalBytes": 264240,
+      "storedBytes": 7399,
+      "originalSha256": "980dbd7afd8637111a4b3ec614474ccff7841014bbe40b67d5c3a742a280bce4",
+      "sha256": "115e87d07c11658ec047520fbd01ca46a235924b41a1c5dd231a157be579aae4",
+      "compressed": true
+    },
+    "analysed-scans/debug-exploration.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791666549271144800/exploration-failure/control-results.json",
+      "originalBytes": 181155,
+      "storedBytes": 7318,
+      "originalSha256": "5333c92d26578a752a797cbed7e42edb4cfccaf7688155b7606a9b0c6d4ac003",
+      "sha256": "a7cf4066412f6870c524451f1e8fbd46f640fb6579f2704da1350aff42067f07",
+      "compressed": true
+    },
+    "analysed-scans/debug-inspector.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791666549271144800/inspector-failure/control-results.json",
+      "originalBytes": 184364,
+      "storedBytes": 6695,
+      "originalSha256": "7694a449bfc68f2fd8aa96d5cf9c612d1597eb4ca7bc4f1401db05652c435c03",
+      "sha256": "413e9ad890ad5ab83422428bed26c7e1007281af6b8a7813cbc2f2926d810128",
+      "compressed": true
+    },
+    "full-regression-cases/release/summary.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/summary.json",
+      "originalBytes": 603,
+      "storedBytes": 139,
+      "originalSha256": "822ad8e0eb0920ba2dea55edc96367d8ad1efdf2921260548c2a1b40c0b93353",
+      "sha256": "13a8dc30811ee398f2567a720f8af03c72459ab2bc80bf4145dcca13d4c47662",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-discard/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-discard/control-results.json",
+      "originalBytes": 90705,
+      "storedBytes": 5977,
+      "originalSha256": "fb8024041f3f76fdfd77f532865eabc10295b884ff4feb6247aa72133742c5ca",
+      "sha256": "d1b45a2c0523a09a03c4f3e04f04a99cc4fdf38a25bdea90ba39df32789ab93a",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-discard/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-discard/runtime.json",
+      "originalBytes": 305139,
+      "storedBytes": 8132,
+      "originalSha256": "9b8534802f86b11a8d8f9b4c509839c8afc03729fbc92bfbfc5889875fb7f24d",
+      "sha256": "c2c383b4acc7bc4afcb79bde5b10b9ceb13d38aaec284e2ec21eaeebdc47fd88",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-discard/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-discard/stderr.log",
+      "originalBytes": 1102,
+      "storedBytes": 379,
+      "originalSha256": "338f4308c5f1d67b567d3c9b93725725ed40680adea63286a31102aeac6b2591",
+      "sha256": "8323ad78f040d636086a2ae2e55fd2dd94f2517566bb6d8ddd4e64692cae0fc2",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-discard/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-discard/stdout.log",
+      "originalBytes": 2286,
+      "storedBytes": 968,
+      "originalSha256": "00664637659243a642ca61f676a4e7fea04e220bf433f72e02faf31b3daa1b48",
+      "sha256": "9cd11d4ce84a269270121fbce5beb8bb79062305298aa85833ab9e70368550f0",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-failure/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-failure/control-results.json",
+      "originalBytes": 269403,
+      "storedBytes": 8093,
+      "originalSha256": "3c2301fd3baaf6e9b3ad916e6f5002a918e34c4b5dcc83c7e9ca59070757f811",
+      "sha256": "030194267a8a7bf5e63545463b5167f2d719e6c2d20c02deebe01d369222401a",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-failure/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-failure/runtime.json",
+      "originalBytes": 566548,
+      "storedBytes": 10291,
+      "originalSha256": "214de8a7cc5dafa80cd1598f71cecf0ea48975efb3bf794f8aeb9a728f65db78",
+      "sha256": "c59c0e6c24fdc4a2b2bf847f3afc3ede4d6ee9ca02efcd1c9fed127c13855d3f",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-failure/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-failure/stderr.log",
+      "originalBytes": 1988,
+      "storedBytes": 542,
+      "originalSha256": "cd51809cc08f65ff752bd1bbe59fb142707ecbf5744622ffc58ac14dfb900a59",
+      "sha256": "23beb7ba5b0da313a8aebc78fe74d9bcd8a70117dab9ac559892c2622b3869db",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-failure/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-failure/stdout.log",
+      "originalBytes": 2286,
+      "storedBytes": 968,
+      "originalSha256": "4d5579ea20c975776303151a390686f2804fa0eed532f480135e5f94579d615f",
+      "sha256": "07e642b4e40c24dc48c225468fd4dca792893437d93a9833ca790b3cb1182525",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-save/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-save/control-results.json",
+      "originalBytes": 90668,
+      "storedBytes": 5991,
+      "originalSha256": "b4aede08b9d4c2e427f81f0b78c1cb43425de32cdf6a7d45fa121c7efef2634b",
+      "sha256": "ed896bec7c7a11398b948810134b3dde73976c16026a0afd9fc4acecb68dda1c",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-save/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-save/runtime.json",
+      "originalBytes": 319396,
+      "storedBytes": 8255,
+      "originalSha256": "ee0a00928b6b3a0d9eb6f60b9c23a541f6540c7acc1b34d9cd4ad30cbeac0c6d",
+      "sha256": "db949747a956870da62e654c3975c89a03ffb6bd8a8a36955ac6131c0907fa21",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-save/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-save/stderr.log",
+      "originalBytes": 1313,
+      "storedBytes": 485,
+      "originalSha256": "46fe9b0722973f58f36144fa14c86557a449512f9403339b465f5b5cc14d033f",
+      "sha256": "afae957ad67758124226e943a86f0d86936ab1d5d2440f9b3a818a4049cdf930",
+      "compressed": true
+    },
+    "full-regression-cases/release/exploration-save/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/exploration-save/stdout.log",
+      "originalBytes": 2280,
+      "storedBytes": 966,
+      "originalSha256": "b06adae4170ac338ac5a6265d58375416d150f522d49635bfd20c9410c14fbe7",
+      "sha256": "7d6dc5dd8293db04e1fe4210ac887a7f1a44612dcab93fd0239da1986e91a528",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-discard/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-discard/control-results.json",
+      "originalBytes": 82363,
+      "storedBytes": 5272,
+      "originalSha256": "f401702ef44cb60d78f02e6fafe0d3b994671f1b31d3f83ceab2c5ac47feea51",
+      "sha256": "2bbbe0510a3e7ae32c4b7c95b0a1adb84ba77cd437956cd7a27c41a06ba31253",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-discard/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-discard/runtime.json",
+      "originalBytes": 365727,
+      "storedBytes": 7703,
+      "originalSha256": "9d669ce32b4b57eb4997d9c7b31d07217b0c6f960ec078ef011695fdcd7ae8f0",
+      "sha256": "bbabea6fdfa1de3c9c1ea1012be8667403104da69f137ca09b6d21c6eba8f7cc",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-discard/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-discard/stderr.log",
+      "originalBytes": 971,
+      "storedBytes": 349,
+      "originalSha256": "56563346e899961e30be3111de08180dcc0181add299e2fe3477ef0e66de6229",
+      "sha256": "e5205b1b99308d57dd1e6cd92d8e492bcbc049e75d445b27c5c5ae2eabb346ad",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-discard/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-discard/stdout.log",
+      "originalBytes": 2215,
+      "storedBytes": 927,
+      "originalSha256": "8a37dee7cd3ce335c4ec1d9b63739e02482f4e9245cc6d2e3a07a9135ce117df",
+      "sha256": "614ab0f1869f4bf1cb42a1ea989f26969432a620800283088f6444ac7e67bacf",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-failure/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-failure/control-results.json",
+      "originalBytes": 264240,
+      "storedBytes": 7399,
+      "originalSha256": "980dbd7afd8637111a4b3ec614474ccff7841014bbe40b67d5c3a742a280bce4",
+      "sha256": "115e87d07c11658ec047520fbd01ca46a235924b41a1c5dd231a157be579aae4",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-failure/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-failure/runtime.json",
+      "originalBytes": 635831,
+      "storedBytes": 9894,
+      "originalSha256": "a0e19114f11388ca2b0e9248aacefc943badbee744c8ad072cf188b1958dde16",
+      "sha256": "a70ae45ac64b09afc753580d0663116d3bb541d36768c19d9dc0a969ccec27e5",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-failure/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-failure/stderr.log",
+      "originalBytes": 1845,
+      "storedBytes": 510,
+      "originalSha256": "88777123f217262cc190fdaecd79c525954ae55b1bb2c87496e399f57d5c9535",
+      "sha256": "26cede2543533413d492b33f01fc730e5fb67b378eb887e8abfffca5a57db9d6",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-failure/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-failure/stdout.log",
+      "originalBytes": 2215,
+      "storedBytes": 927,
+      "originalSha256": "b6f274b8b322bbbbe0c522c7d4a211b62ab9ca929b0d6d8b33d656bbdb40bf50",
+      "sha256": "85a2db346184f6f480c0a98601bd8a92252b934addc33b02581a70502190091d",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-save/control-results.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-save/control-results.json",
+      "originalBytes": 82323,
+      "storedBytes": 5285,
+      "originalSha256": "b92effbb1702d40e8e8c806f57c529aec8ca88ded23013f266cf82736df8f189",
+      "sha256": "8883a41252348b3de1514f09b5cced2100498a422f540bbe66a9777b9da7bcac",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-save/runtime.json.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-save/runtime.json",
+      "originalBytes": 401803,
+      "storedBytes": 7975,
+      "originalSha256": "1385db2d85901bca4fd723640c99e897f807a416b13f9d269a5c11c9e31e74e6",
+      "sha256": "c765b0478ce8a8821ec1cb23df66f0556ece0b04a18b0366970fe8e8148d3c82",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-save/stderr.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-save/stderr.log",
+      "originalBytes": 1179,
+      "storedBytes": 455,
+      "originalSha256": "a6d4ae42aeedfe99abcc3bdde080af1c4f244e700b29a735aad58f3fe342cd6e",
+      "sha256": "73968237f79e802a70d774842d47e5f698da87c3b78f158b7b8f60865ff0ec71",
+      "compressed": true
+    },
+    "full-regression-cases/release/inspector-save/stdout.log.gz": {
+      "source": "build/ninja-msvc-release/u5/documents/run-1791667231764433000/inspector-save/stdout.log",
+      "originalBytes": 2209,
+      "storedBytes": 926,
+      "originalSha256": "6c406ccc42d896d1b9d28544c06b67e7a5264b46c06af9d6f8c93b226155f315",
+      "sha256": "95b9f38ecf453f1be4211cc4895fce20fdea24dbd0711e8fd54797e157f40110",
+      "compressed": true
+    },
+    "full-regression-cases/debug/summary.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/summary.json",
+      "originalBytes": 603,
+      "storedBytes": 139,
+      "originalSha256": "822ad8e0eb0920ba2dea55edc96367d8ad1efdf2921260548c2a1b40c0b93353",
+      "sha256": "13a8dc30811ee398f2567a720f8af03c72459ab2bc80bf4145dcca13d4c47662",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-discard/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-discard/control-results.json",
+      "originalBytes": 90690,
+      "storedBytes": 6000,
+      "originalSha256": "3de316aaf614e070c802655118ffb755fbdf2bd5db46f5e7015f4a2abe37a9dd",
+      "sha256": "28ba52ffad5617cdea1ad4b3c4bcf422978b92e13d069c71e19f492523be9335",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-discard/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-discard/runtime.json",
+      "originalBytes": 256533,
+      "storedBytes": 7721,
+      "originalSha256": "a5c1454ce01a22b8d03fbce395092d4e78fcd55799b09ca385680666ae92c330",
+      "sha256": "7dfcb70fd730454c11d75ff0d6f5af8978ebfc2c1ef75f2aa69b68035e967a2e",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-discard/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-discard/stderr.log",
+      "originalBytes": 1102,
+      "storedBytes": 380,
+      "originalSha256": "fccbe3e19750ded4f407f957652762c1823effede5568a40b0371c4bb2d1585c",
+      "sha256": "c62d1eeb528fed61659cab56fd616d84f707b6272278ba88c82946409d0412c5",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-discard/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-discard/stdout.log",
+      "originalBytes": 2281,
+      "storedBytes": 966,
+      "originalSha256": "febdd8a45ce2bdb7afb3f6b7a77dcffe6762bbfd07dbc0b6ab249ba359e32436",
+      "sha256": "2d5e2e2ddfac2ec54ed0ad34754592842b5fccd47ff8a7e2d42faafede9c5a5f",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-failure/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-failure/control-results.json",
+      "originalBytes": 203181,
+      "storedBytes": 7516,
+      "originalSha256": "8414ec9e3ea148df7a10fddf9d654cf6a7056dc5f2767dad8bdf10f34c76837e",
+      "sha256": "680c4255ead820df6caa7b28c30004b2213addd5f7b319efec3d403d5084beae",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-failure/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-failure/runtime.json",
+      "originalBytes": 311362,
+      "storedBytes": 8325,
+      "originalSha256": "71c4f8e3393140c8bdb4e5f161832be9897a3dd9a69355d48b09554e0f09698f",
+      "sha256": "d77e7a0876e90a4ba27fbca6e618002da14d07b2cc9adc53c8bf24e50f03d8b7",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-failure/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-failure/stderr.log",
+      "originalBytes": 1980,
+      "storedBytes": 547,
+      "originalSha256": "3b7c441ff7e013a03b5efa92b55c1bdce44daa83fb37b3c564f54065d7d2e2d7",
+      "sha256": "e61e9fde4713a9168fbb32977f2086aebf9c97d39c96e4d145f6617b0a83f889",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-failure/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-failure/stdout.log",
+      "originalBytes": 2281,
+      "storedBytes": 966,
+      "originalSha256": "9036bc49d336897ba10541d2b935b3f843252aaaaab38d186d7b8589f0118021",
+      "sha256": "dbbc0c77db079b12905dc19d339c10205a0e551038f2e56b5499458b099e9046",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-save/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-save/control-results.json",
+      "originalBytes": 90646,
+      "storedBytes": 6003,
+      "originalSha256": "db7efc3e93295c150cd66f3846450d4a657e737c0310a606b263cf21478a506d",
+      "sha256": "33f3543ad5301730d8d5bd74878286475c2499d3edc0ff5fdb55d07f8d9c6f27",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-save/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-save/runtime.json",
+      "originalBytes": 256529,
+      "storedBytes": 7723,
+      "originalSha256": "c1ebd0e11ff1fd4b678ff4ba7e6806e7b79dbb06977aa9a1a893927e61db9828",
+      "sha256": "c821debf8d7db925a6636ba4b812cc90a5c55e21ec500daee9f0e2294ae16564",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-save/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-save/stderr.log",
+      "originalBytes": 1311,
+      "storedBytes": 487,
+      "originalSha256": "05223f8e451a13a019bd3d9882a593d8f1de0b0b1c4e7a55fd9c79094edc1c40",
+      "sha256": "8e9c2ba671bc0dc817fa84933e100e9bfb7d77f74d298d3300c4a99a52505d67",
+      "compressed": true
+    },
+    "full-regression-cases/debug/exploration-save/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/exploration-save/stdout.log",
+      "originalBytes": 2275,
+      "storedBytes": 966,
+      "originalSha256": "c6d0e9c982a3e28afb526fab6d9073c334985e3b59911b42ab2a4e9b82810c42",
+      "sha256": "5ffa55214635de92271073bed8ba8f7ed1c3aa46a6581156c90295a9fdfd4f7b",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-discard/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-discard/control-results.json",
+      "originalBytes": 82341,
+      "storedBytes": 5280,
+      "originalSha256": "90018ad289cbd52f0227e43b6656414b1618f9f6da399bc640083242c952be33",
+      "sha256": "9555a84da35fb391809d647be92b2e887286717e13cf016d0c6fb1f954139100",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-discard/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-discard/runtime.json",
+      "originalBytes": 272706,
+      "storedBytes": 6970,
+      "originalSha256": "3c25c23dfdbfa9f4529bce2fd3ed332d911461a7f54bff5d9e5874f2f7e2fbbb",
+      "sha256": "5ed72aa7abc20226a39ae0beb1f15ca4253c17db8ba0eec4e33bef47f489a6fa",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-discard/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-discard/stderr.log",
+      "originalBytes": 971,
+      "storedBytes": 351,
+      "originalSha256": "bdc18ac766412f29a92c2c270186c2cddf7185939dce9c3951782cd970f5b4c5",
+      "sha256": "5a930ab31d1f94653492aa9831f6ca9b841fd1d8a895848901451dfcc20e38e3",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-discard/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-discard/stdout.log",
+      "originalBytes": 2210,
+      "storedBytes": 928,
+      "originalSha256": "15077662d54cb25a7d12b93bc2ec112bde4a6f5fd9e384452ae2825fef71bc8e",
+      "sha256": "6da0a299d3388be59f9a321115940dc2bf4c90d89e807816915464c8dbacca82",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-failure/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-failure/control-results.json",
+      "originalBytes": 184366,
+      "storedBytes": 6695,
+      "originalSha256": "d0c004e2e94e6488dd4c8b0fb556d13b54d34e164b50feb9dae7a260a7378e16",
+      "sha256": "06eb8c068e27f3cc429f1a2446c595ab42c7fa2358e980c4b5152af2e9897539",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-failure/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-failure/runtime.json",
+      "originalBytes": 333997,
+      "storedBytes": 7601,
+      "originalSha256": "c868b92e526c4002f60b4f55367b74a169ade0351b80a8c24c8a34035fa14b5b",
+      "sha256": "b270e9f56c429e86647f10120c9f97af93ee68ca77ec9faaa422a255f35868ec",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-failure/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-failure/stderr.log",
+      "originalBytes": 1837,
+      "storedBytes": 515,
+      "originalSha256": "44cd6d0cd1b91d450792f4e5a1426b4588a76e41a638573de9929e2b6bafc800",
+      "sha256": "cabf0ee661a2398aa86353c6c53f21b5897b9b64d97a743f27955f89d9433b8e",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-failure/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-failure/stdout.log",
+      "originalBytes": 2210,
+      "storedBytes": 927,
+      "originalSha256": "d6d83280cc94c2f8e8a1736725baaf4ac5546df073097e20db7732d9b59b0fba",
+      "sha256": "98cde2c8c68b5cdc1bd5187a9eb12103ff6cc68259dcbbd1180ec94571d46a6a",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-save/control-results.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-save/control-results.json",
+      "originalBytes": 82302,
+      "storedBytes": 5291,
+      "originalSha256": "f94232f945009dfc0806c60d754c7a4b0295c7c02d7ab51f709fd2468684ae90",
+      "sha256": "cdef875064c8e2e2d36e4832fd4b00b51aa5b384f5d2fa6ad0e12289c0c9580e",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-save/runtime.json.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-save/runtime.json",
+      "originalBytes": 272690,
+      "storedBytes": 6972,
+      "originalSha256": "cad2e5214176f9e49aae7f0094611ec7de521de6fca7f8044dc68a08516c8972",
+      "sha256": "37b22ce6b30cbe7faa36ba7d4782950ec7666309775a1969ce5c24227defa8c5",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-save/stderr.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-save/stderr.log",
+      "originalBytes": 1177,
+      "storedBytes": 458,
+      "originalSha256": "4a7297a83e66f7dce014f7754f4b84d48e1de810e5c6cabe655ea8c9747f3cb2",
+      "sha256": "fb033473b5f1b84015f615b3dcfbce71052d755c50fcb71bfaf91cc2e4f26bc8",
+      "compressed": true
+    },
+    "full-regression-cases/debug/inspector-save/stdout.log.gz": {
+      "source": "build/ninja-msvc-debug/u5/documents/run-1791668428438625700/inspector-save/stdout.log",
+      "originalBytes": 2204,
+      "storedBytes": 926,
+      "originalSha256": "7eba7e65dfd96cf13ac954e9e5c41b16f3ef4100252ae7fbd007241088a0ef20",
+      "sha256": "fc0cb6cbc0803d7d74dbea9aa47d1302804d8fc064792f9ee075060000851c0f",
+      "compressed": true
+    }
+  }
+}
