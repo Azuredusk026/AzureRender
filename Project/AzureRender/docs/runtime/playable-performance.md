@@ -79,6 +79,23 @@ python tools/run_playable_performance.py `
 
 私有主角使用可选参数 `--character <GLB>`。输出目录必须使用新的路径。每轮开始时 GPU 温度至多为 55°C。
 
+预算由 `tools/performance_budget.py` 统一解释。
+压力负载 GPU P95 上限为 16.6 毫秒。
+各负载的稳定工作集增长上限为百分之五。
+峰值工作集与设备本地容量按 P5 预算验收。
+
+探索与平台测量分别使用下列可选参数：
+
+```powershell
+--exploration assets_public/exploration/project.azureproject
+--platformer assets_public/platformer/project.azureproject
+```
+
+将参数加入上述正式测量命令。
+每个关卡各执行三轮，并分别报告失败诊断。
+原始内存观察保存为 `.memory.json`。
+源码、内容和产物指纹在测量前后核对。
+
 ```powershell
 python tools/test_level_cycles.py `
   --player build/ninja-msvc-release/AzurePlayer.exe `

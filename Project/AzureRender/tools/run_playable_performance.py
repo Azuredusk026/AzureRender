@@ -12,6 +12,7 @@ import subprocess
 import time
 from create_playable_project import create
 from test_independent_animation_gpu import component
+from performance_budget import BUDGETS, validate_round, working_set_growth
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -67,7 +68,7 @@ def thermal():
     return dict(temperature=int(fields[0]),driver=fields[1].strip(),gpu=fields[2].strip())
 
 
-def memory(pid):
+def memory_snapshot(pid):
     class Counters(ctypes.Structure):
         _fields_=[('cb',ctypes.c_ulong),('faults',ctypes.c_ulong)]+[(x,ctypes.c_size_t) for x in ('peak','working','quotaPeakPaged','quotaPaged','quotaPeakNonPaged','quotaNonPaged','pagefile','peakPagefile')]
     kernel=ctypes.WinDLL('kernel32',use_last_error=True)
@@ -75,11 +76,18 @@ def memory(pid):
     kernel.CloseHandle.argtypes=[ctypes.c_void_p]
     psapi=ctypes.WinDLL('psapi');psapi.GetProcessMemoryInfo.argtypes=[ctypes.c_void_p,ctypes.c_void_p,ctypes.c_ulong]
     handle=kernel.OpenProcess(0x410,False,pid)
-    if not handle:return 0
-    data=Counters();data.cb=ctypes.sizeof(data)
-    success=psapi.GetProcessMemoryInfo(handle,ctypes.byref(data),data.cb)
-    kernel.CloseHandle(handle)
-    return data.peak if success else 0
+    if not handle:raise OSError(ctypes.get_last_error(),'OpenProcess failed for memory observation')
+    try:
+        data=Counters();data.cb=ctypes.sizeof(data)
+        if not psapi.GetProcessMemoryInfo(handle,ctypes.byref(data),data.cb):
+            raise OSError(ctypes.get_last_error(),'GetProcessMemoryInfo failed')
+        return dict(peak=data.peak,working=data.working,privateBytes=data.pagefile)
+    finally:
+        kernel.CloseHandle(handle)
+
+
+def memory(pid):
+    return memory_snapshot(pid)['peak']
 
 
 def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1800):
@@ -101,14 +109,24 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         task=output.with_suffix('.editor.json');task.write_text('[{"frame":1,"command":"play"}]',encoding='utf-8')
         command += ['--editor-actions',str(task.resolve())]
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
-    peak=0;start=time.monotonic()
+    peak=0;start=time.monotonic();observations=[]
     with output.with_suffix('.stdout.log').open('w',encoding='utf-8') as stdout,output.with_suffix('.stderr.log').open('w',encoding='utf-8') as stderr:
         process=subprocess.Popen(command,cwd=ROOT,stdout=stdout,stderr=stderr,startupinfo=info)
-        while process.poll() is None:
-            peak=max(peak,memory(process.pid))
-            if time.monotonic()-start>600:
-                process.kill();process.wait();raise TimeoutError(command)
-            time.sleep(.05)
+        try:
+            while process.poll() is None:
+                try:
+                    observation=memory_snapshot(process.pid)
+                except OSError:
+                    # A normally exiting process can disappear between poll and query.
+                    if process.poll() is not None:break
+                    raise
+                observation['seconds']=time.monotonic()-start
+                observations.append(observation);peak=max(peak,observation['peak'])
+                if time.monotonic()-start>600:raise TimeoutError(command)
+                time.sleep(.05)
+        finally:
+            if process.poll() is None:process.kill();process.wait()
+            output.with_suffix('.memory.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
     if process.returncode:raise RuntimeError(f'Player failed: {process.returncode}, {output}')
     data=json.loads(timing.read_text(encoding='utf-8'))
     assert data['sceneTriangles']>0 and data['skinnedVertices']>0,'Scene complexity must survive renderer unload'
@@ -116,16 +134,19 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         gpu=[float(row['frameMs']) for row in csv.DictReader(stream)][warmup:warmup+samples]
     if len(gpu)!=samples:raise ValueError('Incomplete GPU measurement')
     cpu=data['cpuFrame']
+    if len(cpu['workSamplesMs'][warmup:])!=samples:raise ValueError('Incomplete CPU measurement')
     physics=cpu['physicsSamplesMs'][sum(cpu['physicsStepCounts'][:warmup]):]
     result={'gpu':stats(gpu),'cpu':stats(cpu['workSamplesMs'][warmup:]),'wait':stats(cpu['waitSamplesMs'][warmup:]),
             'physics':stats(physics),'initialDevice':initial,'peakWorkingSetBytes':peak,
             'allocator':data['allocator'],'submission':data['submission'], 'samples':samples,'warmup':warmup,
             'complexity':{key:data[key] for key in ('uniqueMeshes','sceneTriangles','skinnedVertices','transparentTriangles','jointCapacity','vertexCapacity')},
             'sceneExtent':[data['sceneWidth'],data['sceneHeight']]}
-    gpu_limit,cpu_limit=(25,12) if stress else (16.6,10 if editor else 8)
-    result['passed']=result['gpu']['p95']<=gpu_limit and result['cpu']['p95']<=cpu_limit and result['physics']['p95']<=2
-    if not stress and 'private' not in output.name:
-        result['passed'] &= peak<=2*1024**3 and data['allocator']['deviceLocalPeakBytes']<=1.5*1024**3
+    result['workingSetSamplesBytes']=[row['working'] for row in observations]
+    result['stableWorkingSetGrowth']=working_set_growth(result['workingSetSamplesBytes'])
+    result['workingSetObservationIntervalMs']=50
+    result['measurementFrameRange']={'warmup':[0,warmup],'samples':[warmup,warmup+samples]}
+    result['budgetFailures']=validate_round(result,editor=editor)
+    result['passed']=not result['budgetFailures']
     print(output.name,json.dumps({k:result[k] for k in ('gpu','cpu','physics','passed')}),flush=True)
     return result
 
@@ -134,22 +155,52 @@ def main():
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--player',type=Path,required=True);parser.add_argument('--editor',type=Path,required=True)
     parser.add_argument('--character',type=Path);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=True)
+    parser.add_argument('--exploration',type=Path);parser.add_argument('--platformer',type=Path)
+    args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=False)
     from build_provenance import inputs
     frozen_inputs=inputs(ROOT)
     source_hash=hashlib.sha256(json.dumps(frozen_inputs,sort_keys=True).encode()).hexdigest()
+    product_files=set()
+    for executable in (args.player,args.editor):
+        product_files.add(executable.resolve())
+        product_files.update(p.resolve() for p in executable.parent.rglob('*') if p.is_file()
+            and (p.suffix.lower() in ('.dll','.spv') or p.name in ('manifest.json','complete.stamp')))
+    products={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(product_files)}
+    (args.output/'frozen-inputs.json').write_text(json.dumps(dict(source=frozen_inputs,products=products),indent=2)+'\n',encoding='utf-8')
     loads=[('standard',False,None,False),('editor',False,None,True),('stress',True,None,False)]
+    loads.extend((name,False,None,False) for name in ('exploration','platformer') if getattr(args,name))
     if args.character:loads.append(('private',False,args.character,False))
     results={};fingerprints={};quality={}
     for name,stress,character,editor in loads:
-        folder=args.output/name;quality[name]=fixture(folder,stress,character)
-        fingerprints[name]={str(p.relative_to(folder)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((folder/'assets').rglob('*')) if p.is_file()}
-        results[name]=[run(args.editor if editor else args.player,folder/'project.azureproject',args.output/f'{name}-{i+1}',editor,stress) for i in range(3)]
+        folder=args.output/name
+        if name in ('exploration','platformer'):
+            import shutil
+            source_project=getattr(args,name)
+            shutil.copytree(source_project.parent,folder,ignore=shutil.ignore_patterns('.azure'))
+            quality[name]=json.loads((folder/'QUALITY.json').read_text(encoding='utf-8'))
+        else:quality[name]=fixture(folder,stress,character)
+        fingerprints[name]={p.relative_to(folder).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(folder.rglob('*')) if p.is_file() and '.azure' not in p.parts}
+        results[name]=[]
+        for i in range(3):
+            if editor:os.environ['AZURERENDER_EDITOR_CONFIG']=str(args.output.resolve()/f'editor-config-{i+1}')
+            try:
+                result=run(args.editor if editor else args.player,folder/'project.azureproject',args.output/f'{name}-{i+1}',editor,stress)
+            except Exception as error:
+                result={'passed':False,'errorType':type(error).__name__,'error':str(error)}
+            results[name].append(result)
+            (args.output/'partial.json').write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8')
+        for path,expected in fingerprints[name].items():
+            if not (folder/path).is_file() or hashlib.sha256((folder/path).read_bytes()).hexdigest()!=expected:
+                raise RuntimeError('Measured content changed: '+name+'/'+path)
     source=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip()
     if inputs(ROOT)!=frozen_inputs:raise RuntimeError('Source changed during performance measurement')
+    if any(not Path(p).is_file() or hashlib.sha256(Path(p).read_bytes()).hexdigest()!=value for p,value in products.items()):
+        raise RuntimeError('Build products changed during performance measurement')
     summary=dict(schemaVersion=1,sourceCommit=source,sourceHash=source_hash,host=platform.platform(),quality=quality,sceneHashes=fingerprints,rounds=results,
-                 median={name:{key:statistics.median(r[key]['p95'] for r in rounds) for key in ('gpu','cpu','physics')} for name,rounds in results.items()},
-                 passed=all(r['passed'] for rounds in results.values() for r in rounds))
+                 median={name:{key:statistics.median(r[key]['p95'] for r in rounds if key in r)
+                    if any(key in r for r in rounds) else None for key in ('gpu','cpu','physics')} for name,rounds in results.items()},
+                 products=products,budgets=BUDGETS,passed=all(r['passed'] for rounds in results.values() for r in rounds))
     (args.output/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
     return 0 if summary['passed'] else 1
 

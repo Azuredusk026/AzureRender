@@ -537,6 +537,7 @@ add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
     add_test(NAME AzureTools.ScriptBindings COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_script_bindings.py")
+    add_test(NAME AzureTools.PerformanceBudget COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_performance_budget.py")
     add_executable(AzureVisibilityPrototypeTests tests/VisibilityPrototypeTests.cpp)
     target_link_libraries(AzureVisibilityPrototypeTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.VisibilityPrototype COMMAND AzureVisibilityPrototypeTests)
