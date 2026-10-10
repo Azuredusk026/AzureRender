@@ -83,6 +83,8 @@ void AzureRenderApp::drawFrame() {
     if (runOptions_.editorSession != nullptr) {
         if (runOptions_.editorSession->consumeAssetReloadRequest()) {
             vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
+            graphicsCompleted_=graphicsSubmission_;
+            releasePreparedRenderer();
 #if AZURE_WITH_EDITOR
             invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
 #endif

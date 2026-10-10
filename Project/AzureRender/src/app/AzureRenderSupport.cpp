@@ -128,6 +128,8 @@ void AzureRenderApp::recreateSwapchain() {
     if (!azurerender::waitForDrawableSurface(*frontend_)) return;
 
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
+    graphicsCompleted_=graphicsSubmission_;
+    releasePreparedRenderer();
 #if AZURE_WITH_EDITOR
     invalidatePreviews();graphicsCompleted_=graphicsSubmission_;
     if(renderViews_)renderViews_->complete(graphicsCompleted_);
@@ -193,6 +195,8 @@ void AzureRenderApp::recreateEditorViewportResources() {
             VK_TRUE,
             UINT64_MAX),
         "vkWaitForFences(editor viewport resize)");
+    graphicsCompleted_=graphicsSubmission_;
+    releasePreparedRenderer();
 #if AZURE_WITH_EDITOR
     if (editorLayer_ != nullptr) {
         editorLayer_->clearViewportImages();

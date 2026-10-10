@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "phaseComplete": false,
+  "formalLongRunPassed": false,
+  "physicalInput": false,
+  "commit": "69fe9259cd0ef9ce8bbe10976ebb9a28049b9355",
+  "files": {
+    "cache-final-debug-build.log": {
+      "bytes": 14978,
+      "sha256": "284d51557bc2444eaf8b92043664716f3655d6719223822a8a3d433f881e0877"
+    },
+    "cache-final-release-build.log": {
+      "bytes": 12562,
+      "sha256": "19a7a910ab572b488952da11a23442a4e057149c4da56b9778e4bc4f5b4b2c9b"
+    },
+    "cache-targeted-gpu.log": {
+      "bytes": 794,
+      "sha256": "b73444a7e09f3f6f3e6858ca224ad2b3842cafecc2e8cb7a8cbfb8551eb2618d"
+    },
+    "live-state-green.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "live-state-red.log": {
+      "bytes": 1059,
+      "sha256": "b624fc83605f2ef0fda0c86ca0f495608a82ef6a89376c72c1556f5f6215213b"
+    },
+    "renderer-residency-green.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "renderer-residency-red.log": {
+      "bytes": 953,
+      "sha256": "12a0492d3690291e09dfd2ff5ef06e0d2f79b2d3240bdc6864f2e4ef10bb4a43"
+    },
+    "renderer-residency-red2.log": {
+      "bytes": 808,
+      "sha256": "f587878b52a58370c93c9ff8e77e23a99009f76e154b78cf70a60a2d3deb3610"
+    },
+    "live-state-green/run-5c728764/requests.json": {
+      "bytes": 3835,
+      "sha256": "12fc6c9c3a1604cb1487e63d251d1894be3c6c3408c9ad2180cef2c805bda191",
+      "originalBytes": 3835,
+      "originalSha256": "12fc6c9c3a1604cb1487e63d251d1894be3c6c3408c9ad2180cef2c805bda191"
+    },
+    "live-state-green/run-5c728764/stderr.log": {
+      "bytes": 462,
+      "sha256": "74408b06f3bdc821acb9da736c0ab0496f32725fbf5af02d7aab951cf3e3334b",
+      "originalBytes": 462,
+      "originalSha256": "74408b06f3bdc821acb9da736c0ab0496f32725fbf5af02d7aab951cf3e3334b"
+    },
+    "live-state-green/run-5c728764/stdout.log": {
+      "bytes": 2024,
+      "sha256": "92954c51e7e4171c3d92371d7a7d3407c1f32bfda4ce9e4b2bfaca2cd51651ea",
+      "originalBytes": 2024,
+      "originalSha256": "92954c51e7e4171c3d92371d7a7d3407c1f32bfda4ce9e4b2bfaca2cd51651ea"
+    },
+    "live-state-green/run-5c728764/summary.json": {
+      "bytes": 159,
+      "sha256": "c10669a985ddebf8f077df5348a4e9a14ebda98a6e37de3c876a6f8c7d5d8cd4",
+      "originalBytes": 159,
+      "originalSha256": "c10669a985ddebf8f077df5348a4e9a14ebda98a6e37de3c876a6f8c7d5d8cd4"
+    },
+    "live-state-green/run-5c728764/timing.csv": {
+      "bytes": 12272,
+      "sha256": "af188716fc71675973a99782d5d03a60d660869e193530abdc6854a01e2e3710",
+      "originalBytes": 12272,
+      "originalSha256": "af188716fc71675973a99782d5d03a60d660869e193530abdc6854a01e2e3710"
+    },
+    "live-state-green/run-5c728764/timing.json": {
+      "bytes": 14055,
+      "sha256": "63c88887a73cbb186fa60933d39e1f77bbb7e616e8ea9012475cd50f2cc16001",
+      "originalBytes": 14055,
+      "originalSha256": "63c88887a73cbb186fa60933d39e1f77bbb7e616e8ea9012475cd50f2cc16001"
+    },
+    "platformer-cache-probe2/input.json": {
+      "bytes": 35,
+      "sha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "originalBytes": 35,
+      "originalSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59"
+    },
+    "platformer-cache-probe2/observation.json.gz": {
+      "bytes": 13778,
+      "sha256": "f8ce5dcce2706127f26414509cf4dd77cda02876158265a6e89b3153f1683b4c",
+      "originalBytes": 198215,
+      "originalSha256": "f033afd401584e0128c5b493b35acc4339a3731275aebb2e86bbf312c1b894ba"
+    },
+    "platformer-cache-probe2/progress.json": {
+      "bytes": 92,
+      "sha256": "28513d911d65067f625619dea7df018e1cf4f602ac92a4c92f2f5ebfd031f947",
+      "originalBytes": 92,
+      "originalSha256": "28513d911d65067f625619dea7df018e1cf4f602ac92a4c92f2f5ebfd031f947"
+    },
+    "platformer-cache-probe2/route.jsonl.gz": {
+      "bytes": 76321,
+      "sha256": "f03705edd264825e5a478d381f5606556cf8218e65f16d330f1c0f77d5f1fc23",
+      "originalBytes": 789118,
+      "originalSha256": "76734df95ec27536521f9d0332b2fa04c1cde7fd313bd50daf1739da1d65e448"
+    },
+    "platformer-cache-probe2/runtime.json.gz": {
+      "bytes": 528315,
+      "sha256": "bdbf371e4cb8d8325829ce2ab3f6007f070785911ae26541a1ce5fd3e3e87f0f",
+      "originalBytes": 14087746,
+      "originalSha256": "6305c166d50cf114c8c72a7115c684f8cff1983d76cec9631d297447048624ac"
+    },
+    "platformer-cache-probe2/stderr.log": {
+      "bytes": 1586,
+      "sha256": "753fe9a4bb4d9e17c12ab7173cfa2039fda52177586d7c42cea7418a46cd9027",
+      "originalBytes": 1586,
+      "originalSha256": "753fe9a4bb4d9e17c12ab7173cfa2039fda52177586d7c42cea7418a46cd9027"
+    },
+    "platformer-cache-probe2/stdout.log": {
+      "bytes": 2940,
+      "sha256": "b699c97e8432d489383ba858cc9ba40a1aa67f907a0bb9a72982491b90e1a548",
+      "originalBytes": 2940,
+      "originalSha256": "b699c97e8432d489383ba858cc9ba40a1aa67f907a0bb9a72982491b90e1a548"
+    },
+    "platformer-cache-probe2/summary.json": {
+      "bytes": 5291,
+      "sha256": "7094c17040231f97cc5c1bc909a9d5eaae97ce73f639dcfc942dd6b03c383147",
+      "originalBytes": 5291,
+      "originalSha256": "7094c17040231f97cc5c1bc909a9d5eaae97ce73f639dcfc942dd6b03c383147"
+    },
+    "platformer-cache-probe2/timing.csv.gz": {
+      "bytes": 362672,
+      "sha256": "c123ca9f68c1509d4697f597affa4143cfcc80e670855ad733b8f1a25703fd00",
+      "originalBytes": 1301506,
+      "originalSha256": "c0a819e52e83595195a3cd624f94c8b723c8306670355b980f263c030ffbe1f7"
+    },
+    "platformer-cache-probe2/timing.json.gz": {
+      "bytes": 130120,
+      "sha256": "1e7b32af7fa267d85b1e785f43b5c0af97bbe36b7a5cf8eddd917a4a5f24c919",
+      "originalBytes": 428445,
+      "originalSha256": "192441663adf11c276fa128cbc2d8ecf23889e6532557aa012a5661516ea771f"
+    },
+    "platformer-probe4/input.json": {
+      "bytes": 35,
+      "sha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "originalBytes": 35,
+      "originalSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59"
+    },
+    "platformer-probe4/observation.json.gz": {
+      "bytes": 14372,
+      "sha256": "a704aa118bcb9ed0520ae99d5df126ca2cc1cd43265e74663edc4d041a7c2e0e",
+      "originalBytes": 199409,
+      "originalSha256": "2eaa71b288f3cdb5d3249f75b804b0dd4eae9ab31b3672b19dedbdfdb334aa9e"
+    },
+    "platformer-probe4/progress.json": {
+      "bytes": 79,
+      "sha256": "29147e19a43582273ddf50d52309a55e4bff015b91fcc8946be8c25cb9c43004",
+      "originalBytes": 79,
+      "originalSha256": "29147e19a43582273ddf50d52309a55e4bff015b91fcc8946be8c25cb9c43004"
+    },
+    "platformer-probe4/route.jsonl.gz": {
+      "bytes": 72044,
+      "sha256": "6d6d3caf3ac49a8fa22b438382c69f51502a301aa38ae46185438474ad7ac176",
+      "originalBytes": 781355,
+      "originalSha256": "b0504324f2ced99e6b4b593582583476ad92e089f99d5c49122ee0c0e704acaf"
+    },
+    "platformer-probe4/runtime.json.gz": {
+      "bytes": 525076,
+      "sha256": "3021edd9b4777e6d1cfb3b45a96f32f53b61662d163601fe5497c3676b6ee683",
+      "originalBytes": 14029817,
+      "originalSha256": "802820490299116f7c26555a97b036bd6d14efb1d0ec0f3f6911c6c8ada96aef"
+    },
+    "platformer-probe4/stderr.log": {
+      "bytes": 4018,
+      "sha256": "00c4518ed235b6a6acf3182729e0522a52a28f571f4f52bd6adf90d682766767",
+      "originalBytes": 4018,
+      "originalSha256": "00c4518ed235b6a6acf3182729e0522a52a28f571f4f52bd6adf90d682766767"
+    },
+    "platformer-probe4/stdout.log": {
+      "bytes": 8493,
+      "sha256": "17ee4925df1fcc0863eaa3fc7e9ff3ec0f56b72d5a4be5a946086a1b1bc628b9",
+      "originalBytes": 8493,
+      "originalSha256": "17ee4925df1fcc0863eaa3fc7e9ff3ec0f56b72d5a4be5a946086a1b1bc628b9"
+    },
+    "platformer-probe4/summary.json": {
+      "bytes": 5385,
+      "sha256": "27461bea51c625861850377d98051adeca7103c181d36e0b55a295fcb7755cb3",
+      "originalBytes": 5385,
+      "originalSha256": "27461bea51c625861850377d98051adeca7103c181d36e0b55a295fcb7755cb3"
+    },
+    "platformer-probe4/timing.csv.gz": {
+      "bytes": 338973,
+      "sha256": "25a3f59beb77f9401663cff15389d12fe601fa7f72dd564d3b24045a3cc28b40",
+      "originalBytes": 1211573,
+      "originalSha256": "21912403541dd1fb1139f36e26597a9c10fc3ac432a7ab85ad9b77c260ad7867"
+    },
+    "platformer-probe4/timing.json.gz": {
+      "bytes": 132325,
+      "sha256": "bacabcc90ca85f84babd94cd424a9bda1925606067ec0c2db00912bb6a8a59cd",
+      "originalBytes": 429345,
+      "originalSha256": "37193d2c12c15080473455e3b9faab7f582f2e93dbaa8f286a5560311126447d"
+    },
+    "renderer-residency-green/run-11b4ff7f/summary.json": {
+      "bytes": 357,
+      "sha256": "a971ab5d57ec86343b497ad0431ca3b825e23c30eb3b68911303b4fb5471e25d",
+      "originalBytes": 357,
+      "originalSha256": "a971ab5d57ec86343b497ad0431ca3b825e23c30eb3b68911303b4fb5471e25d"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/observations.json": {
+      "bytes": 14633,
+      "sha256": "2ac58324efbe1a55c38c2ce77f00c63ef87ecb31b5e8d58dbe8c21058d548e50",
+      "originalBytes": 14633,
+      "originalSha256": "2ac58324efbe1a55c38c2ce77f00c63ef87ecb31b5e8d58dbe8c21058d548e50"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/stderr.log": {
+      "bytes": 1704,
+      "sha256": "398b3ba8c0aa627fc942c21f8dfa1b0267466d14b278ed9d6a145c556dfcac0f",
+      "originalBytes": 1704,
+      "originalSha256": "398b3ba8c0aa627fc942c21f8dfa1b0267466d14b278ed9d6a145c556dfcac0f"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/stdout.log": {
+      "bytes": 3723,
+      "sha256": "acd54be0aba40cabfe2a7bfe5ba81d91b9f35844d364cbba28a6e4c60419ad35",
+      "originalBytes": 3723,
+      "originalSha256": "acd54be0aba40cabfe2a7bfe5ba81d91b9f35844d364cbba28a6e4c60419ad35"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/game/BLENDER-GENERATION.log": {
+      "bytes": 1319,
+      "sha256": "b5524830a342bae63cc6c893ed914450e185a362b5ab2842bd1cc12458054651",
+      "originalBytes": 1319,
+      "originalSha256": "b5524830a342bae63cc6c893ed914450e185a362b5ab2842bd1cc12458054651"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/game/GENERATION.json": {
+      "bytes": 3034,
+      "sha256": "a7cbbc33c1bded65e2ff1a5ce7d79bed168e4e6c39b239c74c5b91afb5c2f883",
+      "originalBytes": 3034,
+      "originalSha256": "a7cbbc33c1bded65e2ff1a5ce7d79bed168e4e6c39b239c74c5b91afb5c2f883"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/game/PLATFORMER-DESIGN.json": {
+      "bytes": 13717,
+      "sha256": "95f0a6cab93f4f16f7709ea15d5748a8cc2f6e425bd9507d68e4db2c9b56f303",
+      "originalBytes": 13717,
+      "originalSha256": "95f0a6cab93f4f16f7709ea15d5748a8cc2f6e425bd9507d68e4db2c9b56f303"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/game/QUALITY.json": {
+      "bytes": 215,
+      "sha256": "004d19d4f449d09e678b13cecbb5235f40d533c7acced705301b409998326f67",
+      "originalBytes": 215,
+      "originalSha256": "004d19d4f449d09e678b13cecbb5235f40d533c7acced705301b409998326f67"
+    },
+    "renderer-residency-green/run-11b4ff7f/platformer/game/assets/locomotion.json": {
+      "bytes": 202,
+      "sha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088",
+      "originalBytes": 202,
+      "originalSha256": "fc2aa99243b2816d1b5c2ff2ce63a42deca6282f1e842db659e29123e84c8088"
+    },
+    "renderer-residency-green/run-11b4ff7f/scene_inspector/observations.json": {
+      "bytes": 3546,
+      "sha256": "738965bbd90b20c11fa7ef83c86ea439f0fbd669362349bcdcf3c54d4b5ed656",
+      "originalBytes": 3546,
+      "originalSha256": "738965bbd90b20c11fa7ef83c86ea439f0fbd669362349bcdcf3c54d4b5ed656"
+    },
+    "renderer-residency-green/run-11b4ff7f/scene_inspector/stderr.log": {
+      "bytes": 1700,
+      "sha256": "f29805a8f415cfced5a589b69b14df6ba35165813e177ae4471c2cd2fce63ed2",
+      "originalBytes": 1700,
+      "originalSha256": "f29805a8f415cfced5a589b69b14df6ba35165813e177ae4471c2cd2fce63ed2"
+    },
+    "renderer-residency-green/run-11b4ff7f/scene_inspector/stdout.log": {
+      "bytes": 3591,
+      "sha256": "3440b677dfefa12f5acad0788b59f9a88eb725ece6a51abb400bb8826a3b44fa",
+      "originalBytes": 3591,
+      "originalSha256": "3440b677dfefa12f5acad0788b59f9a88eb725ece6a51abb400bb8826a3b44fa"
+    },
+    "source/src/app/AzureRenderApp.cpp": {
+      "bytes": 82352,
+      "sha256": "30c9b61f894ddfa96d148f04b459a469b041f8b51cc3aa03f3a586a86ca816f7"
+    },
+    "source/src/app/AzureRenderGameplay.cpp": {
+      "bytes": 10950,
+      "sha256": "f4d7be81e4f689bd78319185131c06c75c4a591ccf9e7d37f90b23560b6b0e74"
+    },
+    "source/src/app/AzureRenderValidation.cpp": {
+      "bytes": 10588,
+      "sha256": "16ea5ef960298cfda2d73c2c7d894114b325fb772fc9cbad7e8e7f8020ce1c03"
+    },
+    "source/src/scenes/SampleSceneRenderer.cpp": {
+      "bytes": 3319,
+      "sha256": "0bf600bdd12795366fa821d2b04c851007a54d084d98b7f15e1c36165a7de668"
+    },
+    "source/tools/run_platformer_long_run.py": {
+      "bytes": 12366,
+      "sha256": "33baafa38e9141be6eff21187ea49686ae626509ca4108207f82840ded57e16d"
+    },
+    "source/tools/run_playable_long_run.py": {
+      "bytes": 20462,
+      "sha256": "d9ed50bae2e5acec556528206d523eabb17dbee7b23c88a2c2a6371429fff712"
+    },
+    "source/tools/test_live_game_state.py": {
+      "bytes": 3782,
+      "sha256": "a77af0047c894547185edbe3e92dc7939be979bd793bb17afbb593be97111557"
+    },
+    "source/tools/test_renderer_residency.py": {
+      "bytes": 4913,
+      "sha256": "f09dc573c4b596e83c07d25ffd7941090c7d7357bb90a4af54594aab4b605e8f"
+    }
+  }
+}

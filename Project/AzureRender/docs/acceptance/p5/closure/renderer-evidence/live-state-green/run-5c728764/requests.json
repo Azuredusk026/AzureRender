@@ -1,0 +1,56 @@
+[
+  {
+    "elapsedMs": 0.5778,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"audioStarts\":1,\"camera\":[0.2487499862909317,2.745974540710449,5.766577243804932],\"cameraObstructed\":false,\"characters\":[{\"grounded\":true,\"node\":\"hero\",\"playbackRate\":1.0,\"position\":[0.0,-5.960464477539063e-08,0.0],\"rotation\":[0.0,0.0,0.0],\"state\":\"idle\",\"velocity\":[0.0,-0.16350001096725464,0.0]}],\"checkpointActivated\":false,\"collectibles\":10,\"doorOpen\":false,\"focused\":true,\"frame\":10,\"interactionTarget\":\"\",\"levelReference\":\"assets:/platformer.azurelevel\",\"levelRevision\":2,\"loadError\":\"\",\"loading\":false,\"presentationErrors\":[],\"rigidBodies\":[{\"node\":\"platform-3\",\"position\":[-0.6499999761581421,-0.20000000298023224,-19.79132652282715]},{\"node\":\"platform-5\",\"position\":[0.0,0.0,-33.15932083129883]}],\"scriptErrors\":[],\"target\":[0.0,1.2008249759674072,0.0],\"tasks\":[{\"collected\":0,\"completed\":false,\"doorOpened\":false,\"node\":\"hero\",\"started\":true}]}"
+  },
+  {
+    "elapsedMs": 2.3149,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "domain": "game",
+      "queued": true
+    }
+  },
+  {
+    "elapsedMs": 1.453,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "domain": "game",
+      "queued": true
+    }
+  },
+  {
+    "elapsedMs": 0.8334,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"audioStarts\":1,\"camera\":[1.3197851181030273,2.7451539039611816,5.766577243804932],\"cameraObstructed\":false,\"characters\":[{\"grounded\":true,\"node\":\"hero\",\"playbackRate\":2.0,\"position\":[1.3666670322418213,-5.960464477539063e-08,0.0],\"rotation\":[0.0,-90.0,0.0],\"state\":\"walk\",\"velocity\":[4.0,-0.16350001096725464,0.0]}],\"checkpointActivated\":false,\"collectibles\":10,\"doorOpen\":false,\"focused\":true,\"frame\":196,\"interactionTarget\":\"\",\"levelReference\":\"assets:/platformer.azurelevel\",\"levelRevision\":2,\"loadError\":\"\",\"loading\":false,\"presentationErrors\":[],\"rigidBodies\":[{\"node\":\"platform-3\",\"position\":[-0.6499999761581421,-0.20000000298023224,-19.79132652282715]},{\"node\":\"platform-5\",\"position\":[0.0,0.0,-33.15932083129883]}],\"scriptErrors\":[],\"target\":[1.0710351467132568,1.20000422000885,0.0],\"tasks\":[{\"collected\":0,\"completed\":false,\"doorOpened\":false,\"node\":\"hero\",\"started\":true}]}"
+  },
+  {
+    "elapsedMs": 0.8662,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "domain": "game",
+      "queued": true
+    }
+  },
+  {
+    "elapsedMs": 1.3696,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": {
+      "domain": "game",
+      "queued": true
+    }
+  },
+  {
+    "elapsedMs": 2.0397,
+    "passed": true,
+    "schemaVersion": 1,
+    "value": "{\"audioStarts\":2,\"camera\":[0.28915733098983765,2.758958578109741,5.766577243804932],\"cameraObstructed\":false,\"characters\":[{\"grounded\":true,\"node\":\"hero\",\"playbackRate\":0.40000006556510925,\"position\":[0.1066666841506958,5.960464477539063e-08,0.0],\"rotation\":[0.0,-36.0,0.0],\"state\":\"walk\",\"velocity\":[0.8000001311302185,-0.6540000438690186,0.0]}],\"checkpointActivated\":false,\"collectibles\":10,\"doorOpen\":false,\"focused\":true,\"frame\":235,\"interactionTarget\":\"\",\"levelReference\":\"assets:/platformer.azurelevel\",\"levelRevision\":3,\"loadError\":\"\",\"loading\":false,\"presentationErrors\":[],\"rigidBodies\":[{\"node\":\"platform-3\",\"position\":[-0.6499999761581421,-0.20000000298023224,-19.79132652282715]},{\"node\":\"platform-5\",\"position\":[0.0,0.0,-33.15932083129883]}],\"scriptErrors\":[],\"target\":[0.04040733352303505,1.2138090133666992,0.0],\"tasks\":[{\"collected\":0,\"completed\":false,\"doorOpened\":false,\"node\":\"hero\",\"started\":true}]}"
+  }
+]

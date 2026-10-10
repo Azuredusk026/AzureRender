@@ -623,35 +623,8 @@ void AzureRenderApp::buildSceneFrameData(
         frame.animations.insert(frame.animations.end(),previews.begin(),previews.end());editorPreviewFrames_+=previews.size();
     }
 #endif
-    if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192){nlohmann::json state;
-        state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
-        state["characters"]=nlohmann::json::array();
-        activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
-            const auto* transform=activeRuntime()->world().tryGet<azurerender::ecs::TransformComponent>(entity);
-            const auto* animator=activeRuntime()->world().tryGet<azurerender::game::Animator>(entity);
-            if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
-                {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
-                {"velocity",game->physics().velocity(entity)},
-                {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
-        });
-        auto* runtime=activeRuntime();state["tasks"]=nlohmann::json::array();
-        runtime->world().each<azurerender::game::TaskState>([&](auto entity,const auto& task){
-            state["tasks"].push_back({{"node",runtime->nodeId(entity)},{"started",task.started},{"collected",task.collected},
-                {"doorOpened",task.doorOpened},{"completed",task.completed}});});
-        unsigned collectibles=0;bool doorOpen=false,checkpointActivated=false;
-        runtime->world().each<azurerender::game::Collectible>([&](auto,const auto& value){if(!value.collected)++collectibles;});
-        runtime->world().each<azurerender::game::Door>([&](auto,const auto& value){doorOpen|=value.open;});
-        runtime->world().each<azurerender::game::Checkpoint>([&](auto,const auto& value){checkpointActivated|=value.activated;});
-        state["collectibles"]=collectibles;state["doorOpen"]=doorOpen;state["checkpointActivated"]=checkpointActivated;
-        state["levelRevision"]=runtime->sceneRevision();
-        state["rigidBodies"]=nlohmann::json::array();
-        runtime->world().each<azurerender::ecs::TransformComponent,azurerender::game::RigidBody>([&](auto entity,const auto& transform,const auto& body){
-            if(body.kinematic)state["rigidBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation}});
-        });
-        state["audioStarts"]=activePresentation()?activePresentation()->audioStarts():0;
-        state["interactionTarget"]=game->interactionTarget()?game->interactionTarget()->node:std::string();
-        state["cameraObstructed"]=game->hasCamera()&&game->camera().actualDistance()<game->camera().distance()-.1F;
-        gameRouteFrames_.push_back(std::move(state));}
+    if(game&&gameInputReplay_&&!runOptions_.runtimeReportPath.empty()&&gameRouteFrames_.size()<8192)
+        gameRouteFrames_.push_back(observeGameState());
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession)frame.sceneSnapshot=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(game?game->renderScene():runOptions_.editorSession->viewScene()));
 #endif
@@ -1689,4 +1662,48 @@ void AzureRenderApp::keyCallback(
         }
 
     }
+}
+
+nlohmann::json AzureRenderApp::observeGameState() {
+    auto* game=activeGame();
+    if(!game)throw std::logic_error("Game observation requires an active project");
+    nlohmann::json state;
+    state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
+    state["characters"]=nlohmann::json::array();
+    activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
+        const auto* transform=activeRuntime()->world().tryGet<azurerender::ecs::TransformComponent>(entity);
+        const auto* animator=activeRuntime()->world().tryGet<azurerender::game::Animator>(entity);
+        if(transform)state["characters"].push_back({{"node",activeRuntime()->nodeId(entity)},{"position",transform->translation},
+            {"rotation",transform->rotation},{"grounded",game->physics().grounded(entity)},
+            {"velocity",game->physics().velocity(entity)},
+            {"state",animator?animator->state:""},{"playbackRate",animator?animator->playbackRate:0}});
+    });
+    auto* runtime=activeRuntime();state["tasks"]=nlohmann::json::array();
+    runtime->world().each<azurerender::game::TaskState>([&](auto entity,const auto& task){
+        state["tasks"].push_back({{"node",runtime->nodeId(entity)},{"started",task.started},{"collected",task.collected},
+            {"doorOpened",task.doorOpened},{"completed",task.completed}});});
+    unsigned collectibles=0;bool doorOpen=false,checkpointActivated=false;
+    runtime->world().each<azurerender::game::Collectible>([&](auto,const auto& value){if(!value.collected)++collectibles;});
+    runtime->world().each<azurerender::game::Door>([&](auto,const auto& value){doorOpen|=value.open;});
+    runtime->world().each<azurerender::game::Checkpoint>([&](auto,const auto& value){checkpointActivated|=value.activated;});
+    state["collectibles"]=collectibles;state["doorOpen"]=doorOpen;state["checkpointActivated"]=checkpointActivated;
+    state["levelRevision"]=runtime->sceneRevision();
+    state["rigidBodies"]=nlohmann::json::array();
+    runtime->world().each<azurerender::ecs::TransformComponent,azurerender::game::RigidBody>([&](auto entity,const auto& transform,const auto& body){
+        if(body.kinematic)state["rigidBodies"].push_back({{"node",runtime->nodeId(entity)},{"position",transform.translation}});
+    });
+    state["audioStarts"]=activePresentation()?activePresentation()->audioStarts():0;
+    state["interactionTarget"]=game->interactionTarget()?game->interactionTarget()->node:std::string();
+    state["cameraObstructed"]=game->hasCamera()&&game->camera().actualDistance()<game->camera().distance()-.1F;
+
+    auto* levels=levelSession_.get();
+#if AZURE_WITH_EDITOR
+    if(runOptions_.editorSession)levels=runOptions_.editorSession->levels();
+#endif
+    state["levelReference"]=levels?levels->currentReference():std::string();
+    state["loading"]=levels&&levels->loading();
+    state["loadError"]=levels?levels->lastError():std::string();
+    state["scriptErrors"]=activeScripts()?activeScripts()->errors():std::vector<std::string>{};
+    state["presentationErrors"]=activePresentation()?activePresentation()->errors():std::vector<std::string>{};
+    return state;
 }

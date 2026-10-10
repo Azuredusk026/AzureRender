@@ -328,6 +328,7 @@ private:
     std::string rendererResourceKey_, preparedResourceKey_;
     azurerender::RenderSettings preparedRenderSettings_;
     bool preparedRendererReady_=false;
+    std::uint64_t preparedRendererLastSubmission_=0;
     bool hudEnabled_ = false;
     bool editorUiEnabled_ = false;
     bool qaHarnessEnabled_ = false;
@@ -403,6 +404,7 @@ private:
     void createSceneRenderer();
     bool preloadLevelRenderer(const azurerender::Level& level);
     void prepareLevelRenderer(const azurerender::Level& level);
+    void releasePreparedRenderer();
     void synchronizeEditorRuntime();
     void synchronizeGameUi();
     void updateGameUi(double delta);
@@ -415,6 +417,7 @@ private:
     azurerender::scene::SceneDescription resolveRenderDescription(
         const azurerender::SceneDocument& document) const;
     void buildSceneFrameData(azurerender::SceneFrameData& frame);
+    nlohmann::json observeGameState();
 
     void drawFrame();
     void pickPrimitive(float viewportX, float viewportY);

@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 204: AzureGame.PlatformerCompletion
+1/4 Test #204: AzureGame.PlatformerCompletion ...   Passed    4.74 sec
+    Start 205: AzureEngine.LiveGameState
+2/4 Test #205: AzureEngine.LiveGameState ........   Passed    3.41 sec
+    Start 207: AzureGame.GameSequence
+3/4 Test #207: AzureGame.GameSequence ...........   Passed   17.60 sec
+    Start 225: AzureEditor.SceneGeometryGpu
+4/4 Test #225: AzureEditor.SceneGeometryGpu .....   Passed    5.19 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Label Time Summary:
+gpu    =  30.93 sec*proc (4 tests)
+
+Total Test time (real) =  30.97 sec

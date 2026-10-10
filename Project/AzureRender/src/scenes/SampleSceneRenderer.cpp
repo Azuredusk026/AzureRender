@@ -24,6 +24,10 @@ void SampleSceneRenderer::onLoad(const RenderContext& context) {
     loaded_ = true;
 }
 
+bool SampleSceneRenderer::reuseScene(const RenderContext& context) {
+    return loaded_ && context.scene.resources.empty();
+}
+
 void SampleSceneRenderer::onSwapchainRecreate(const RenderContext& context) {
     if (!loaded_ || context.sceneRenderPass == VK_NULL_HANDLE) {
         throw std::logic_error("Sample renderer recreate outside loaded lifecycle");

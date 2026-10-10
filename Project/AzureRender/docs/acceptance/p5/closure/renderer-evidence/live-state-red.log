@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\live_state_test.py", line 60, in <module>
+    a=p.parse_args();run(a.player,a.project,a.output)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\live_state_test.py", line 31, in run
+    first=state();assert first['characters'] and not first['loading']
+          ^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\live_state_test.py", line 30, in <lambda>
+    state=lambda:json.loads(call('query',name='game.state'))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p5-p6-closure-2026-10-10\live_state_test.py", line 28, in call
+    assert result['passed'],result
+           ~~~~~~^^^^^^^^^^
+AssertionError: {'code': 'InvalidRequest', 'elapsedMs': 9.1467, 'message': 'Unknown observation: game.state', 'passed': False, 'schemaVersion': 1}

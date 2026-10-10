@@ -1,4 +1,5 @@
 #include "AzureRenderApp.hpp"
+#include "extensions/ISceneRenderer.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
@@ -16,6 +17,17 @@ void AzureRenderApp::initializeValidation() {
     using namespace azurerender;
     observations_=std::make_unique<ObservationRegistry>();
     observations_->add("engine.status",[]{return ObservationValue(std::string("ready"));});
+    observations_->add("game.state",[this]{return ObservationValue(observeGameState().dump());});
+    observations_->add("render.residency",[this]{
+        const auto& allocation=gpuAllocator_.statistics();
+        return ObservationValue(nlohmann::json{
+            {"frame",gameplayFrame_},{"renderer",sceneRenderer_?std::string(sceneRenderer_->name()):std::string()},
+            {"activeResourceKey",rendererResourceKey_},{"cachedResourceKey",preparedResourceKey_},
+            {"entries",static_cast<unsigned>(!!sceneRenderer_)+static_cast<unsigned>(!!preparedRenderer_)},
+            {"cachedReady",preparedRendererReady_},{"cachedLastSubmission",preparedRendererLastSubmission_},
+            {"completedSubmission",graphicsCompleted_},{"buffers",allocation.liveBuffers},{"images",allocation.liveImages},
+            {"bufferBytes",allocation.liveBufferBytes},{"imageBytes",allocation.liveImageBytes}}.dump());
+    });
     observations_->add("engine.frameCount",[this]{return ObservationValue(static_cast<std::int64_t>(gameplayFrame_));});
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});
     observations_->add("engine.gameInputSource",[this]{return ObservationValue(std::string(gameInputReplay_?"replay":"window"));});

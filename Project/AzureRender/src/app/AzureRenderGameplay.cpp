@@ -41,16 +41,16 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
 }
 bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
     if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
-        if(preparedRenderer_){azurerender::RenderContext context;buildRenderContext(context);preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();}
         return true;
     }
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();context.preparedMeshes=&level.preparedMeshes;
     if(!preparedRenderer_ || preparedResourceKey_!=level.resourceKey || preparedRenderSettings_.sceneType!=level.scene.renderSettings.sceneType){
-        if(preparedRenderer_)preparedRenderer_->onUnload(context);
+        releasePreparedRenderer();
         auto registry=azurerender::BuiltinRendererCatalog::createRegistry();
         preparedRenderer_=registry.create(azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()));
         preparedRenderSettings_=level.scene.renderSettings;preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
     }
+    if(preparedRendererReady_)return true;
     context.renderSettings=&preparedRenderSettings_;
     try{preparedRendererReady_=preparedRenderer_->prepareLoad(context,4.0);return preparedRendererReady_;}
     catch(...){preparedRenderer_->onUnload(context);preparedRenderer_.reset();preparedResourceKey_.clear();throw;}
@@ -66,11 +66,30 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     if(preparedResourceKey_!=level.resourceKey || !preparedRendererReady_){
         while(!preloadLevelRenderer(level)){}
     }
-    vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(level commit)");
+    // The previous scene remains cached. Only reusing a renderer with work
+    // still in flight needs GPU retirement; ordinary alternating loads reuse
+    // a renderer whose last submission completed many frames earlier.
+    if(preparedRendererLastSubmission_>graphicsCompleted_){
+        vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(renderer reuse)");
+        graphicsCompleted_=graphicsSubmission_;
+    }
     static_cast<void>(preparedRenderer_->reuseScene(context));
-    if(sceneRenderer_)sceneRenderer_->onUnload(context);
-    sceneRenderer_=std::move(preparedRenderer_);rendererResourceKey_=level.resourceKey;
-    renderSettings_=level.scene.renderSettings;preparedResourceKey_.clear();preparedRendererReady_=false;
+    sceneRenderer_.swap(preparedRenderer_);
+    preparedResourceKey_=rendererResourceKey_;rendererResourceKey_=level.resourceKey;
+    preparedRenderSettings_=renderSettings_;renderSettings_=level.scene.renderSettings;
+    preparedRendererReady_=static_cast<bool>(preparedRenderer_);
+    preparedRendererLastSubmission_=graphicsSubmission_;
+}
+void AzureRenderApp::releasePreparedRenderer(){
+    if(preparedRenderer_){
+        if(preparedRendererLastSubmission_>graphicsCompleted_){
+            vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(renderer eviction)");
+            graphicsCompleted_=graphicsSubmission_;
+        }
+        azurerender::RenderContext context;buildRenderContext(context);
+        preparedRenderer_->onUnload(context);preparedRenderer_.reset();
+    }
+    preparedResourceKey_.clear();preparedRendererReady_=false;preparedRendererLastSubmission_=0;
 }
 void AzureRenderApp::synchronizeEditorRuntime(){
 #if AZURE_WITH_EDITOR
