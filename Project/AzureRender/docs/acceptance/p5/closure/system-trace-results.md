@@ -95,3 +95,6 @@
 OBS 的影响仍按既有有无捕获对照解释。
 P5-B 的完整因果与 P5-C 的修复继续待验。
 正式门禁见[设备环境验收](device-environment.md)。
+
+目录回收候选的缺页追踪使用独立来源。
+结果与原目标复测见[缺页验收](pagefault-trace-results.md)。

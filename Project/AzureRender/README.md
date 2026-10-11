@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+缺页追踪与原目标复测见[诊断记录](docs/acceptance/p5/closure/pagefault-trace-results.md)。
+正式性能、完整归因与实体使用按阶段证据验收。
+
 内容目录通过自有任务回收缓存与快照。
 万文件取消及连续重置按一百毫秒验收。
 机制与证据见[目录回收验收](docs/acceptance/u16/directory-reclamation.md)。

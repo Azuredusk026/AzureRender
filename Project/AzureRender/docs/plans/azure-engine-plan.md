@@ -13,6 +13,11 @@ P4 当前处于 Active。
 问题与步骤见[交互体验实施计划](2026-10-07-editor-usability.md)。
 
 后续任务、依赖与交付顺序见[后续开发路线](2026-10-11-next-development.md)。
+
+目录回收候选的正式性能八轮通过、七轮待修。
+缺页与原目标复测见[诊断验收](../acceptance/p5/closure/pagefault-trace-results.md)。
+平台观测阻塞按[专项计划](2026-10-11-longrun-observation.md)推进。
+
 P5、U15、U16 与 P6 的剩余门禁优先完成。
 随后连续推进 G17 至 P8 的资产格式拓展。
 

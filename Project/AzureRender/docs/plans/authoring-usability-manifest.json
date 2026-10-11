@@ -129,12 +129,15 @@
       "severity": "major",
       "summary": "场景项目创建在目录发布时遇到拒绝访问",
       "owner": "ProjectCreateJob",
-      "status": "OriginalFailureRetainedFreshDirectoryPassedCausePending",
+      "status": "OriginalTargetRetestPassedOriginalFailureCausePending",
       "source": "src/editor/projects/ProjectCreateJob.cpp",
       "test": "installed authoring project.create",
       "productionUiVerified": false,
       "physicalInputVerified": false,
-      "acceptance": "docs/acceptance/p5/closure/software-candidate-2026-10-11.md"
+      "acceptance": "docs/acceptance/p5/closure/pagefault-trace-results.md",
+      "originalTargetRetestPassed": true,
+      "causeIdentified": false,
+      "candidateSourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4"
     },
     {
       "id": "UX-009",
