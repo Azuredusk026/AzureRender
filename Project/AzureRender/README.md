@@ -210,8 +210,13 @@ P5 保持 Active，性能与人工门禁按实际证据维护。
 正式性能与人工复核保持待验。
 
 界面几何使用共享缓冲页，保留在途退休规则。
-当前来源回归与实测见[界面驻留验收](docs/acceptance/p5/closure/ui-residency.md)。
+界面共享页候选的回归与实测见[界面驻留验收](docs/acceptance/p5/closure/ui-residency.md)。
 历史内存归因和人工门禁继续按实际结果维护。
+
+资产缓存使用独立暂存目录与完整文件发布。
+Windows 缓存读取共享发布所需的删除访问。
+完整回归与当前来源实测见[缓存并发验收](docs/acceptance/u16/cache-publication.md)。
+人工门禁与历史内存归因按各自证据维护。
 
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。

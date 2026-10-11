@@ -10,12 +10,25 @@
 #include <set>
 #include <sstream>
 #include <stdexcept>
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
 namespace azurerender {
 namespace {
 using Json = nlohmann::json;
 std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
     std::ifstream input(path, std::ios::binary|std::ios::ate);
-    if (!input) throw std::runtime_error("Cannot read asset: " + path.string());
+    if (!input) {
+#ifdef _WIN32
+        const auto nativeError=GetLastError();
+        throw std::runtime_error("Cannot read asset: " + path.u8string()+" (Windows error "+std::to_string(nativeError)+")");
+#else
+        throw std::runtime_error("Cannot read asset: " + path.string());
+#endif
+    }
     const auto size=input.tellg();if(size<0)throw std::runtime_error("Cannot size asset: "+path.string());
     std::string data(static_cast<std::size_t>(size),'\0');input.seekg(0);
     for(std::size_t offset=0;offset<data.size();){
@@ -24,6 +37,35 @@ std::string bytes(const std::filesystem::path& path, const std::function<void()>
     }
     if (!input) throw std::runtime_error("Asset read failed: " + path.string());
     return data;
+}
+std::string cacheBytes(const std::filesystem::path& path) {
+#ifdef _WIN32
+    const auto fail=[&](const char* message){
+        const auto error=GetLastError();
+        throw std::filesystem::filesystem_error(message,path,
+            std::error_code(static_cast<int>(error),std::system_category()));
+    };
+    const auto input=CreateFileW(path.c_str(),GENERIC_READ,
+        FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL|FILE_FLAG_SEQUENTIAL_SCAN,nullptr);
+    if(input==INVALID_HANDLE_VALUE)fail("Cannot read asset cache");
+    struct Guard {HANDLE value;~Guard(){CloseHandle(value);}} guard{input};
+    LARGE_INTEGER size{};
+    if(!GetFileSizeEx(input,&size))fail("Cannot size asset cache");
+    if(size.QuadPart<0 || static_cast<std::uint64_t>(size.QuadPart)>std::string().max_size())
+        throw std::runtime_error("Asset cache size exceeds addressable storage: "+path.u8string());
+    std::string data(static_cast<std::size_t>(size.QuadPart),'\0');
+    for(std::size_t offset=0;offset<data.size();){
+        const auto count=static_cast<DWORD>(std::min<std::size_t>(1024*1024,data.size()-offset));
+        DWORD received=0;
+        if(!ReadFile(input,data.data()+offset,count,&received,nullptr))fail("Asset cache read failed");
+        if(received!=count)throw std::runtime_error("Incomplete asset cache read: "+path.u8string());
+        offset+=received;
+    }
+    return data;
+#else
+    return bytes(path);
+#endif
 }
 std::uint64_t hash(const std::string& data) {
     std::uint64_t result = 14695981039346656037ULL;
@@ -50,6 +92,43 @@ std::string uuid() {
     }
     return out.str();
 }
+void writeCache(const std::filesystem::path& path, const std::string& data) {
+    namespace fs=std::filesystem;
+    fs::create_directories(path.parent_path());
+    fs::path staging;
+    for(unsigned attempt=0;attempt<8 && staging.empty();++attempt){
+        auto token=uuid();token.erase(std::remove(token.begin(),token.end(),'-'),token.end());
+        const auto candidate=path.parent_path().parent_path()/(token.substr(0,16)+".tmp");
+        if(fs::create_directory(candidate))staging=std::move(candidate);
+    }
+    if(staging.empty())throw std::runtime_error("Cannot reserve asset cache staging: "+path.u8string());
+    const auto payload=staging/"payload";
+    const auto cleanup=[&]{std::error_code ignored;fs::remove(payload,ignored);fs::remove(staging,ignored);};
+    try{
+        {std::ofstream output(payload,std::ios::binary|std::ios::trunc);
+         output.write(data.data(),static_cast<std::streamsize>(data.size()));output.flush();output.close();
+         if(!output)throw std::runtime_error("Cannot write asset cache: "+path.u8string());}
+        std::error_code error;
+#ifdef _WIN32
+        if(!MoveFileExW(payload.c_str(),path.c_str(),MOVEFILE_WRITE_THROUGH))
+            error={static_cast<int>(GetLastError()),std::system_category()};
+#else
+        fs::rename(payload,path,error);
+#endif
+        // Preserve a complete immutable winner. Replacing identical files on
+        // Windows can disrupt readers while multiple planners publish.
+        if(error && fs::is_regular_file(path)){
+            if(cacheBytes(path)==data)error.clear();
+#ifdef _WIN32
+            else if(MoveFileExW(payload.c_str(),path.c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH))
+                error.clear();
+            else error={static_cast<int>(GetLastError()),std::system_category()};
+#endif
+        }
+        if(error)throw fs::filesystem_error("Cannot publish asset cache",payload,path,error);
+        cleanup();
+    }catch(...){cleanup();throw;}
+}
 void append64(std::string& out, std::uint64_t value) {
     for (unsigned i = 0; i < 8; ++i) out.push_back(static_cast<char>((value >> (i * 8)) & 255));
 }
@@ -62,7 +141,7 @@ void cache(const std::filesystem::path& path, const AssetRecord& record) {
     const auto source = bytes(record.path);
     if (hash(source) != record.contentHash) throw std::runtime_error("Asset changed during import: " + record.path.string());
     std::string data = "AZCACHE1"; append64(data, record.fingerprint); append64(data, source.size()); data += source;
-    write(path, data);
+    writeCache(path, data);
 }
 }
 std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<void()> check) {
@@ -251,7 +330,7 @@ std::string AssetDatabase::readSource(const std::string& id) const {
     const auto& record = records_.at(id);
     const auto path = cacheFile(id);
     if (std::filesystem::exists(path)) {
-        const auto data = bytes(path);
+        const auto data = cacheBytes(path);
         if (data.size() >= 24 && data.substr(0, 8) == "AZCACHE1" && read64(data, 8) == record.fingerprint
             && read64(data, 16) == data.size() - 24 && hash(data.substr(24)) == record.contentHash) return data.substr(24);
     }

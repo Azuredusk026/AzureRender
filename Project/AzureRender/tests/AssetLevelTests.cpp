@@ -4,6 +4,12 @@
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
 using namespace azurerender;
 void check(bool value) { if (!value) throw std::runtime_error("Asset/level contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data) { std::ofstream(p) << data; }
@@ -25,6 +31,43 @@ int main() {
   std::filesystem::rename(root/"assets/data.txt",root/"assets/moved.txt");
   std::filesystem::rename(root/"assets/data.txt.azmeta",root/"assets/moved.txt.azmeta");
   db.refresh();check(db.idForPath("assets:/moved.txt")==id && db.resolve(id).filename()=="moved.txt");
+  // A cache publisher owns only its unique staging file. Another
+  // operation's staging path must survive both publication and failure.
+  const auto cachePath=db.cacheFile(id);
+#ifdef _WIN32
+  // A publisher retains delete access during rename. A cache reader must
+  // permit that access while reading the complete immutable file.
+  const auto publishingHandle=CreateFileW(cachePath.c_str(),DELETE,
+      FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,nullptr);
+  check(publishingHandle!=INVALID_HANDLE_VALUE);
+  std::string concurrentRead;
+  try{concurrentRead=db.readSource(id);}catch(...){CloseHandle(publishingHandle);throw;}
+  CloseHandle(publishingHandle);check(concurrentRead=="first");
+#endif
+  const auto foreignTemporary=std::filesystem::path(cachePath.string()+".tmp");
+  std::filesystem::remove(cachePath);
+  std::filesystem::create_directory(foreignTemporary);
+  write(foreignTemporary/"owner.txt","other operation");
+  check(db.readSource(id)=="first");
+  std::string owner;std::ifstream ownerFile(foreignTemporary/"owner.txt");std::getline(ownerFile,owner);ownerFile.close();
+  check(owner=="other operation" && std::filesystem::is_directory(foreignTemporary));
+  std::filesystem::remove(cachePath);std::filesystem::create_directory(cachePath);
+  bool publicationRejected=false;
+  try{AssetDatabase blockedPublisher(project);blockedPublisher.refresh();}
+  catch(const std::exception&){publicationRejected=true;}
+  check(publicationRejected && std::filesystem::is_directory(cachePath));
+  for(const auto& entry:std::filesystem::directory_iterator(cachePath.parent_path().parent_path()))
+    if(entry.path().extension()==".tmp")
+      throw std::runtime_error("Failed cache publication must clean owned staging files");
+  std::filesystem::remove(cachePath);check(db.readSource(id)=="first");
+  std::filesystem::remove_all(foreignTemporary);
+  write(cachePath,"existing incomplete cache");
+  write(root/"assets/moved.txt","changed after snapshot");
+  bool stalePublicationRejected=false;
+  try{db.readSource(id);}catch(const std::exception&){stalePublicationRejected=true;}
+  std::string preserved;std::ifstream priorCache(cachePath);std::getline(priorCache,preserved);priorCache.close();
+  check(stalePublicationRejected && preserved=="existing incomplete cache");
+  write(root/"assets/moved.txt","first");check(db.readSource(id)=="first");
   write(db.cacheFile(id),"corrupt");check(db.readSource(id)=="first");
   write(root/"assets/moved.txt","second");const auto changed=db.refresh();check(!changed.empty() && db.readSource(id)=="second");
   write(root/"assets/example.azscript",R"({"schemaVersion":1,"type":"Example.Script","assembly":"assets:/moved.txt"})");

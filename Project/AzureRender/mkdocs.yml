@@ -31,6 +31,8 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 资产缓存并发验收: acceptance/u16/cache-publication.md
+  - 资产缓存发布计划: plans/2026-10-11-cache-publication.md
   - 平台界面缓冲驻留: acceptance/p5/closure/ui-residency.md
   - 当前软件候选验收: acceptance/p5/closure/software-candidate-2026-10-11.md
   - 外部恢复与文档保护: acceptance/p5/closure/document-guard-scan.md

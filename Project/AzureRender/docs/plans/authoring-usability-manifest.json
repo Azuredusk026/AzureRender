@@ -108,11 +108,14 @@
       "severity": "major",
       "summary": "同一项目的并行规划争用资产缓存临时文件",
       "owner": "AssetDatabase",
-      "status": "SharedTemporaryPathRaceReproducedNotFixed",
+      "status": "MechanismConcurrencyAndFullRegressionVerified",
       "source": "src/runtime/AssetDatabase.cpp",
       "productionUiVerified": false,
       "physicalInputVerified": false,
-      "acceptance": "docs/acceptance/p5/closure/ui-residency.md"
+      "acceptance": "docs/acceptance/u16/cache-publication.md",
+      "test": "AzureEngine.AssetLevel",
+      "concurrentRuns": 18,
+      "serializedRuns": 6
     }
   ],
   "taskBaseline": {
@@ -228,6 +231,44 @@
       "scene_inspector": "db824dca71e89088ca469ffebd45aa52c5e34314650f9038e47bdcd4c73e221a",
       "authored-exploration": "1d859b118894378178139b99765ef4885f55407d858c6dfc1d54e6e036654963",
       "authored-inspection": "b9b9163c0770b81f16645af849298cfe902f815d2ee3894688721c696035ffb0"
+    },
+    "physicalInputVerified": false,
+    "subjectiveAudioVerified": false,
+    "authoringEfficiencyVerified": false,
+    "priorWorkingSetCauseResolved": false
+  },
+  "cachePublicationCandidate": {
+    "sourceHash": "b2af43f8a206f6edc16e30c259e41f6230fa64adf6b261e8fd7cbf4dec9b64c2",
+    "acceptance": "docs/acceptance/u16/cache-publication.md",
+    "releaseTests": 228,
+    "debugTests": 226,
+    "concurrentRuns": 18,
+    "serializedRuns": 6,
+    "deliveryChecks": 10,
+    "formalPerformancePassed": false,
+    "formalPassedRounds": 13,
+    "formalTotalRounds": 15,
+    "longRuns": {
+      "platformer": {
+        "status": "InterruptedWithoutFinalResult",
+        "actualSeconds": null,
+        "frames": null,
+        "workingSetGrowth": null
+      },
+      "standard": {
+        "status": "NotExecuted",
+        "actualSeconds": null,
+        "frames": null,
+        "workingSetGrowth": null
+      }
+    },
+    "packageHashes": {
+      "engine": "5ce6e7c0b6ec88f756ed0648d5a0b2c45603be7e84e6d65bd32df91f1fa2bd66",
+      "exploration": "26e5189cc0d87c70b4403d371a9bc3609cf016cd8d5dc32506fa357ef9008277",
+      "platformer": "63b45fba88e94cfa3f40c7bc099231defc2a0b9f241f630faf2d78a5293defd3",
+      "scene_inspector": "020ce0b46fa142a78712e853fe1a7f09ca88765356861347c78a3ff9bd8eed74",
+      "authored-exploration": "1c7684d0920fac47721aa8149828bf92a590e369004e13d16b13e32584800858",
+      "authored-inspection": "854152b295380f93cb5f6e7cfa17df9321668f366f89f37e0040ecec9e8c58eb"
     },
     "physicalInputVerified": false,
     "subjectiveAudioVerified": false,
