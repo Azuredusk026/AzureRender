@@ -400,5 +400,12 @@
     "formalRounds": 15,
     "originalPassedRounds": 6,
     "longRunsExecuted": false
+  },
+  "manualReview": {
+    "phase": "P8",
+    "status": "DeferredToP8",
+    "manifest": "docs/plans/manual-review-manifest.json",
+    "blocksIntermediateProgress": false,
+    "blocksFinalCompletion": true
   }
 }
