@@ -1,0 +1,101 @@
+{
+  "input": "production ImGui replay and public edit operations",
+  "elapsedSeconds": 1.6560000000026776,
+  "physicalInput": false,
+  "steps": 1,
+  "injectedFailures": 0,
+  "operations": [
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.14099999999598367,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "document.version"
+      }
+    },
+    {
+      "op": "edit",
+      "command": "project.create",
+      "seconds": 0.01600000000325963,
+      "expectedSuccess": true,
+      "fields": {
+        "requestId": "authoring-1",
+        "commandId": "project.create",
+        "parameters": {
+          "templateId": "scene",
+          "destination": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\authoring-installed\\inspection",
+          "name": "P5 inspection"
+        },
+        "baseVersion": {
+          "contentHash": "fnv1a64:1072b74e881c4224",
+          "documentId": "17917350615830088-1",
+          "revision": 1
+        }
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.20399999999790452,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.014999999999417923,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "query",
+      "command": null,
+      "seconds": 0.031000000002677552,
+      "expectedSuccess": true,
+      "fields": {
+        "name": "editor.workspace"
+      }
+    },
+    {
+      "op": "screenshot",
+      "command": null,
+      "seconds": 0.0319999999992433,
+      "expectedSuccess": true,
+      "fields": {
+        "label": "p5-inspection-created"
+      }
+    },
+    {
+      "op": "wait-frames",
+      "command": null,
+      "seconds": 0.31199999999807915,
+      "expectedSuccess": true,
+      "fields": {
+        "frames": 6
+      }
+    }
+  ]
+}
