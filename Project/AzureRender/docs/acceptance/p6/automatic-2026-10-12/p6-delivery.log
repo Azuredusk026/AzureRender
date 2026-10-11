@@ -1,0 +1,11 @@
+nvidia exploration complete and released
+nvidia platformer complete and released
+nvidia scene_inspector complete and released
+nvidia authored-exploration complete and released
+nvidia authored-inspection complete and released
+intel exploration complete and released
+intel platformer complete and released
+intel scene_inspector complete and released
+intel authored-exploration complete and released
+intel authored-inspection complete and released
+{"passed": true, "packages": [{"kind": "engine", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-engine.zip", "sha256": "d3c92e9fe6ee63ef9ce7986074d20359063b2f0ab94f9ad06d29924860a43243", "bytes": 227006086, "files": 7927}, {"kind": "exploration", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-exploration.zip", "sha256": "726555ad55858a18f461d10bf1b3a6b74f5ffb2506bfab8bd7c2a4828074d5ec", "bytes": 31971066, "files": 530}, {"kind": "platformer", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-platformer.zip", "sha256": "69ad7e01a09fb2f17ceb6de594055f1aaa780e185b404bdc87bf38ba2b2dd2a2", "bytes": 28680557, "files": 452}, {"kind": "scene_inspector", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-scene_inspector.zip", "sha256": "bc8ce21e669646a1603e708e2c65238c134b10267542b65bfd2803e6e239f0d4", "bytes": 27525918, "files": 406}, {"kind": "authored-exploration", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-authored-exploration.zip", "sha256": "cf21e9cbaf6e328ceeb8ba962176fbc06573b497029f666cb79944f650f5b433", "bytes": 27568949, "files": 432}, {"kind": "authored-inspection", "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\automatic-forward-2026-10-12\\p6-delivery\\packages\\Azure-P6-2026-10-12-authored-inspection.zip", "sha256": "72aa0203aafa101adfcab098e8f9947ccf2ee5e3b0d066e28a4b5a74ffd1664e", "bytes": 27536797, "files": 416}]}
