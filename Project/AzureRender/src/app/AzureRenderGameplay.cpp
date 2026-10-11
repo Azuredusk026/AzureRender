@@ -97,7 +97,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
     auto& session=*runOptions_.editorSession;
     session.pollTasks();
     if(editorAutomation_)editorAutomation_->advance(gameplayFrame_,session);
-    std::string resources;for(const auto& resource:session.viewScene().resources)resources+=resource.id+resource.path.generic_string();
+    std::string resources;for(const auto& resource:session.viewScene().resources)resources+=resource.id+resource.path.generic_u8string();
     for(const auto& node:session.viewScene().nodes){resources+=node.id+":"+node.resourceId+";";for(const auto& [slot,binding]:node.resolvedMaterials)resources+=slot+":"+binding.path+":"+binding.fingerprint+";";}
     if(!session.playing() && resources!=editorResourceSignature_){editorResourceSignature_=resources;static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));}
     if(session.consumeRuntimeReset()){
@@ -123,7 +123,7 @@ void AzureRenderApp::synchronizeEditorRuntime(){
 }
 void AzureRenderApp::synchronizeGameUi(){
     auto* presentation=activePresentation();auto* assets=activeAssets();const auto reference=presentation?presentation->uiDocument():std::string();
-    const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_string():std::string();
+    const auto path=assets&&!reference.empty()?assets->resolveReference(reference).generic_u8string():std::string();
     if(path!=gameUiPath_){
         gameUi_.reset();gameUiPath_.clear();
         if(!path.empty()){

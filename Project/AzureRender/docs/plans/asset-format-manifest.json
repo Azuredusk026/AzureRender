@@ -70,25 +70,28 @@
     {
       "id": "U17",
       "summary": "导入导出与重导入体验",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "G21"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false,
+      "automaticComplete": true,
       "followUpIssues": [
         {
           "id": "capture-manifest-utf8",
           "sourcePhase": "G19",
           "scope": "Verify Unicode source paths in capture metadata and Unicode output directories in both hosts; actual Unicode asset decoding already passed.",
-          "evidence": "docs/acceptance/g19/evidence/2026-10-12/follow-up-issues.json"
+          "evidence": "docs/acceptance/g19/evidence/2026-10-12/follow-up-issues.json",
+          "status": "AutomaticVerified",
+          "resolutionEvidence": "docs/acceptance/u17/evidence/2026-10-12/manifest.json"
         }
-      ]
+      ],
+      "evidence": "docs/acceptance/u17/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "P7",
       "summary": "第一批格式制作与交付验收",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "U17"
       ],

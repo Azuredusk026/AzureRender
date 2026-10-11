@@ -75,7 +75,7 @@ int main(const int argumentCount, char** argumentValues) {
         if (!commandLine.createScenePath.empty()) {
             const azurerender::SceneDocument scene =
                 azurerender::SceneDocument::fromAsset(std::filesystem::u8path(options.assetPath));
-            scene.save(commandLine.createScenePath);
+            scene.save(std::filesystem::u8path(commandLine.createScenePath));
             azurerender::RuntimeDiagnostics::instance().print(
                 "cli", "Scene created: " + commandLine.createScenePath);
             return EXIT_SUCCESS;

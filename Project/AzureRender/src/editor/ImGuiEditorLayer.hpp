@@ -91,6 +91,7 @@ private:
     void drawInspectorPanel(PanelContext& context);
     void drawAssetBrowserPanel(PanelContext& context);
     void drawTextureAssetPanel();
+    void drawAssetTransferPanel();
     void drawMaterialAssetPanel();
     void drawMaterialSlots(const SceneNode&);
     void drawPhysicsAuthoring(const SceneNode&);
@@ -189,6 +190,9 @@ private:
     std::array<float,3> primitiveSize_{1,1,1};
     int primitiveSegments_=12;
     std::set<std::string> selectedAssets_,textureFields_;
+    nlohmann::json exportRequest_=nlohmann::json::object(),exportImpact_;
+    std::string exportFormat_,exportDestination_,exportTask_;
+    bool exportDialogRequested_=false,exportReplace_=false;
     nlohmann::json textureSnapshot_,contentImpact_,contentRequest_,dependencySnapshot_;
     std::string contentValue_,contentOperation_;
     bool contentDialogRequested_=false,textureDialogRequested_=false,dependencyDialogRequested_=false;

@@ -130,16 +130,20 @@ EditRegistry editorOperations(EditorSession& session) {
         result["activeChanged"]=active==context.assets().records().end()||std::to_string(active->second.fingerprint)!=result.at("fingerprint");return result;
     });
     registry.add({"asset.dependencies",1,schema({{"asset",text},{"direction",text}},{"asset"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().dependencies(a.at("asset").get<std::string>(),a.value("direction",std::string("forward")));});
-    registry.add({"asset.formats",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json {
+    registry.add({"asset.formats",1,schema({{"asset",text},{"node",text}}),false,false,false},[](EditorContext& context,const Json& a)->Json {
         Json result=Json::array();
+        const auto domainFilter=a.contains("asset")?assetFormatRegistry().detect(context.assets().resolveReference(a.at("asset"))).domain:AssetDomain::Model;
         for(const auto& pair:assetFormatRegistry().formats()) {
             const auto& f=pair.second;
+            if((a.contains("asset")||a.contains("node"))&&(f.domain!=domainFilter||!f.canWrite))continue;
             const auto domain=f.domain==AssetDomain::Model?"model":f.domain==AssetDomain::Image?"image":"audio";
             result.push_back({{"id",f.id},{"label",f.label},{"domain",domain},{"extensions",f.extensions},
-                {"read",f.canRead},{"write",f.canWrite},{"transformsSource",f.transformsSource},{"features",f.features},{"settingsVersion",f.settingsVersion},{"generatorVersion",f.generatorVersion}});
+                {"read",f.canRead},{"write",f.canWrite},{"transformsSource",f.transformsSource},{"features",f.features},{"settingsVersion",f.settingsVersion},{"generatorVersion",f.generatorVersion},{"exportSettings",f.exportSettingsSchema}});
         }
         return result;
     });
+    registry.add({"asset.export-plan",1,schema({{"asset",text},{"node",text},{"format",text},{"destination",text},{"settings",{{"type","object"},{"additionalProperties",true}}},{"settingsVersion",integer}},{"format","destination"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return session.planExport(a);});
+    registry.add({"asset.export",1,schema({{"plan",text},{"replace",boolean}},{"plan"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return {{"task",session.startExport(a.at("plan"),a.value("replace",false))}};});
     registry.add({"assets.catalog",1,schema({{"type",text}}),false,false,false},[](EditorContext& c,const Json& a)->Json{return assetCatalog(c,a.value("type",std::string()));});
     registry.add({"content.directory",1,schema({{"mount",text},{"path",text},{"type",text},{"search",text},{"refresh",boolean}}),false,false,false},[&session](EditorContext& c,const Json& a)->Json{
         auto& directories=session.contentDirectories();if(a.value("refresh",false))directories.refresh(c);

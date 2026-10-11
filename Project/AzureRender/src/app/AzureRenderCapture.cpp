@@ -3,7 +3,7 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ISceneRenderer.hpp"
 
-#include <stb_image_write.h>
+#include "assets/image/ImageEncoder.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -35,7 +35,7 @@ std::string fnv1a64Hex(const std::string& value) {
 std::string fnv1a64FileHex(const std::filesystem::path& path) {
     std::ifstream input(path, std::ios::binary);
     if (!input) {
-        throw std::runtime_error("Failed to hash file: " + path.string());
+        throw std::runtime_error("Failed to hash file: " + path.u8string());
     }
     std::uint64_t hash = 14695981039346656037ULL;
     std::array<char, 4096> buffer{};
@@ -56,35 +56,35 @@ std::string fnv1a64FileHex(const std::filesystem::path& path) {
 }  // namespace
 
 void AzureRenderApp::prepareCaptureDirectory() {
-    const std::filesystem::path directory = runOptions_.captureDirectory;
+    const std::filesystem::path directory = std::filesystem::u8path(runOptions_.captureDirectory);
     if (std::filesystem::exists(directory)) {
         if (!std::filesystem::is_directory(directory)) {
             throw std::runtime_error(
                 "Capture path is not a directory: "
-                + directory.string());
+                + directory.u8string());
         }
         if (!std::filesystem::is_empty(directory)) {
             throw std::runtime_error(
                 "Capture directory must be empty: "
-                + directory.string());
+                + directory.u8string());
         }
     } else if (!std::filesystem::create_directories(directory)) {
         throw std::runtime_error(
             "Failed to create capture directory: "
-            + directory.string());
+            + directory.u8string());
     }
 }
 
 void AzureRenderApp::writeCaptureManifest(
     const std::uint64_t renderedFrames) const {
     const std::filesystem::path outputPath =
-        std::filesystem::path(runOptions_.captureDirectory)
+        std::filesystem::u8path(runOptions_.captureDirectory)
         / "capture_manifest.json";
     std::ofstream output(outputPath, std::ios::binary);
     if (!output) {
         throw std::runtime_error(
             "Failed to create capture manifest: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     constexpr std::array<const char*, 5> kDiagnosticNames = {
         "beauty",
@@ -301,12 +301,12 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"toonRampVersion\": 1,\n"
         << "  \"toonRampClassCount\": 10,\n"
         << "  \"toonRampProfile\": "
-        << std::quoted(rampProfilePath.string()) << ",\n"
+        << std::quoted(rampProfilePath.u8string()) << ",\n"
         << "  \"toonRampProfileHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"toonRampProfileHash\": "
         << std::quoted(rampProfileHash) << ",\n"
         << "  \"toonRampAtlas\": "
-        << std::quoted(rampAtlasPath.string()) << ",\n"
+        << std::quoted(rampAtlasPath.u8string()) << ",\n"
         << "  \"toonRampAtlasHashAlgorithm\": \"FNV-1a-64\",\n"
         << "  \"toonRampAtlasHash\": "
         << std::quoted(rampAtlasHash) << ",\n"
@@ -428,10 +428,10 @@ void AzureRenderApp::writeCaptureManifest(
     if (!output) {
         throw std::runtime_error(
             "Failed to write capture manifest: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     azurerender::RuntimeDiagnostics::instance().print(
-        "capture", "Capture manifest: " + outputPath.string());
+        "capture", "Capture manifest: " + outputPath.u8string());
 }
 
 
@@ -510,7 +510,7 @@ void AzureRenderApp::appendFrameTimingCsv(
     if (runOptions_.gpuTimingOutput.empty()) {
         return;
     }
-    std::filesystem::path outputPath = runOptions_.gpuTimingOutput;
+    std::filesystem::path outputPath = std::filesystem::u8path(runOptions_.gpuTimingOutput);
     outputPath.replace_extension(".csv");
     const bool firstFrame = gpuTiming_.samples == 1;
     std::ofstream output(
@@ -600,7 +600,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
         return;
     }
     const std::filesystem::path outputPath =
-        runOptions_.gpuTimingOutput;
+        std::filesystem::u8path(runOptions_.gpuTimingOutput);
     const std::filesystem::path parent = outputPath.parent_path();
     if (!parent.empty()) {
         std::filesystem::create_directories(parent);
@@ -609,7 +609,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
     if (!output) {
         throw std::runtime_error(
             "Failed to create GPU timing report: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     output
         << std::fixed << std::setprecision(6)
@@ -709,10 +709,10 @@ void AzureRenderApp::printGpuTimingSummary() const {
     if (!output) {
         throw std::runtime_error(
             "Failed to write GPU timing report: "
-            + outputPath.string());
+            + outputPath.u8string());
     }
     azurerender::RuntimeDiagnostics::instance().print(
-        "gpu", "GPU timing report: " + outputPath.string());
+        "gpu", "GPU timing report: " + outputPath.u8string());
 }
 
 std::string AzureRenderApp::renderPathName() const {
@@ -764,20 +764,11 @@ void AzureRenderApp::saveScreenshot(
             captureDirectory
             / ("capture_" + std::to_string(timestamp) + ".png");
     } else {
-        outputPath = requestedOutputPath;
+        outputPath = std::filesystem::u8path(requestedOutputPath);
     }
-    if (stbi_write_png(
-            outputPath.string().c_str(),
-            static_cast<int>(width),
-            static_cast<int>(height),
-            4,
-            rgba.data(),
-            static_cast<int>(width * 4)) == 0) {
-        throw std::runtime_error(
-            "Failed to write screenshot: " + outputPath.string());
-    }
+    azurerender::writeRgba8Png(outputPath,width,height,rgba.data());
     if (requestedOutputPath.empty()) {
         azurerender::RuntimeDiagnostics::instance().print(
-            "capture", "Screenshot saved: " + outputPath.string());
+            "capture", "Screenshot saved: " + outputPath.u8string());
     }
 }

@@ -117,7 +117,7 @@ SceneDocument SceneDocument::fromAsset(
 SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     std::ifstream input(path);
     if (!input) {
-        throw std::runtime_error("Unable to open scene: " + path.string());
+        throw std::runtime_error("Unable to open scene: " + path.u8string());
     }
     requireHeader(input, "AzureRender Scene v1");
     SceneDocument document;
@@ -344,7 +344,7 @@ void SceneDocument::save(const std::filesystem::path& path) const {
     if (!std::filesystem::is_directory(directory, directoryError)
         || directoryError) {
         throw std::runtime_error(
-            "Scene save directory does not exist: " + directory.string());
+            "Scene save directory does not exist: " + directory.u8string());
     }
 
     // Atomic save: write a unique temporary file in the same directory, flush
@@ -356,7 +356,7 @@ void SceneDocument::save(const std::filesystem::path& path) const {
     const std::string suffix =
         ".tmp." + std::to_string(generator());
     const std::filesystem::path temporary =
-        directory / (path.filename().string() + suffix);
+        directory / std::filesystem::u8path(path.filename().u8string() + suffix);
 
     try {
         {
@@ -364,20 +364,20 @@ void SceneDocument::save(const std::filesystem::path& path) const {
                 std::ios::binary | std::ios::trunc);
             if (!output) {
                 throw std::runtime_error(
-                    "Unable to write scene: " + temporary.string());
+                    "Unable to write scene: " + temporary.u8string());
             }
             writeDocument(output, *this);
             output.flush();
             if (!output) {
                 throw std::runtime_error(
-                    "Failed to flush scene: " + temporary.string());
+                    "Failed to flush scene: " + temporary.u8string());
             }
         }
         std::error_code renameError;
         std::filesystem::rename(temporary, path, renameError);
         if (renameError) {
             throw std::runtime_error(
-                "Unable to replace scene: " + path.string()
+                "Unable to replace scene: " + path.u8string()
                 + " (" + renameError.message() + ")");
         }
     } catch (...) {

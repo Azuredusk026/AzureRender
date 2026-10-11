@@ -1,6 +1,7 @@
 #include "EditorSession.hpp"
 #include "EditorWorkspace.hpp"
 #include "AssetImportJob.hpp"
+#include "assets/AssetExportJob.hpp"
 #include "projects/ProjectCreateJob.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
@@ -109,6 +110,19 @@ void EditorSession::startImportTask(const std::filesystem::path& path) {
         [this]{const auto result=edits_->current("asset.import-poll");if(!result)throw std::runtime_error(result.diagnostics.dump());return result.value;},
         [this]{context_->cancelImport();},
         [this,path](const auto& message){recordError("asset.import",message,{{"path",path.u8string()}});}});
+}
+nlohmann::json EditorSession::planExport(const nlohmann::json& request){
+    if(playing()||building()||reimporting_)throw EditRejection("Export planning requires an idle editor");return exports_.plan(*context_,request);
+}
+std::string EditorSession::startExport(const std::string& plan,bool replaceExisting){
+    if(playing()||building()||reimporting_)throw EditRejection("Export requires an idle editor");
+    auto request=exports_.consume(*context_,plan);auto job=std::make_shared<AssetExportJob>(request);const auto context=context_;const auto revision=context->revision();const auto databaseVersion=context->assets().version();
+    return tasks_->add("asset.export",request.destination.u8string(),{
+        [job]{return job->progress();},[job]{return job->ready();},
+        [this,job,context,revision,databaseVersion,replaceExisting]{
+            if(context_!=context||context->dirty()||context->revision()!=revision||context->assets().version()!=databaseVersion)throw EditRejection("Export document changed before publication");
+            const auto output=job->finish(replaceExisting);auto result=job->report().summary;result["output"]=output.u8string();return result;
+        },[job]{job->cancel();}});
 }
 void EditorSession::cancelImportTask(){if(!importTask_.empty())tasks_->cancel(importTask_);else context_->cancelImport();}
 void EditorSession::pollTasks(){

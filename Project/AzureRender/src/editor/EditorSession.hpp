@@ -4,6 +4,7 @@
 #include "content/ContentOperationService.hpp"
 #include "content/ContentDirectoryModel.hpp"
 #include "content/AssetEditorRegistry.hpp"
+#include "content/AssetExportService.hpp"
 #include "content/NodePresetRegistry.hpp"
 #include "content/PrefabAuthoringService.hpp"
 #include "material/MaterialEditingService.hpp"
@@ -88,6 +89,8 @@ public:
     void undoContent();
     void redoContent();
     std::string startReimport(const nlohmann::json& request);
+    nlohmann::json planExport(const nlohmann::json& request);
+    std::string startExport(const std::string& plan,bool replaceExisting=false);
     bool reimporting() const noexcept {return reimporting_;}
     ProjectOpenService& projects() {return *projects_;}
     void setRecentProjectsPath(std::filesystem::path file) {projects_=std::make_unique<ProjectOpenService>(std::move(file));}
@@ -193,6 +196,7 @@ private:
     std::uint64_t contentDatabaseVersion_=0;
     ContentDirectoryModel contentDirectories_;
     AssetEditorRegistry assetEditors_=AssetEditorRegistry::builtins();
+    AssetExportService exports_;
     NodePresetRegistry nodePresets_=NodePresetRegistry::builtins();
     std::string workspacePreset_;
     bool creatingProject_=false;

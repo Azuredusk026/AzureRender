@@ -11,7 +11,7 @@
 #include <fstream>
 #include <cmath>
 #include <set>
-#include <stb_image_write.h>
+#include "assets/image/ImageEncoder.hpp"
 using namespace azurerender;
 using namespace azurerender::internal;
 namespace {
@@ -109,7 +109,7 @@ nlohmann::json AzureRenderApp::previewOperation(const std::string& operation,con
         }
         const auto output=resourceLocator_.captureDirectory()/(label+".png");std::filesystem::create_directories(output.parent_path());
         const auto width=description.at("extent").at(0).get<int>(),height=description.at("extent").at(1).get<int>();
-        if(!stbi_write_png(output.u8string().c_str(),width,height,4,pixels.data(),width*4))throw EditRejection("Cannot write preview capture");
+        writeRgba8Png(output,static_cast<unsigned>(width),static_cast<unsigned>(height),pixels.data());
         return {{"path",output.u8string()},{"view",description}};
     }
     if(operation=="preview.resize"){
@@ -194,7 +194,7 @@ void AzureRenderApp::finishDevtools(){
             const auto description=renderViews_->describe(toolViews_[i]);const auto pixels=renderViews_->readPixels(toolViews_[i]);
             const auto width=description.at("extent").at(0).get<int>(),height=description.at("extent").at(1).get<int>();
             const auto image=output/(std::to_string(i)+".png");
-            if(!stbi_write_png(image.u8string().c_str(),width,height,4,pixels.data(),width*4))throw std::runtime_error("Cannot write preview capture");
+            writeRgba8Png(image,static_cast<unsigned>(width),static_cast<unsigned>(height),pixels.data());
         }
         devtoolsReport_["captures"]=toolViews_.size();
     }

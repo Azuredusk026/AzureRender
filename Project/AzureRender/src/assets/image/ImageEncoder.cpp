@@ -98,4 +98,10 @@ AssetTransferReport planImageExport(const AssetTransferRequest& request,const As
     if(request.formatId!="tiff"&&request.formatId!="exr"&&request.formatId!="hdr"&&!(request.formatId=="png"&&image.precision==ImagePrecision::UInt16)){
         const auto losses=convertImageToRgba8(image).losses;report.losses.insert(report.losses.begin(),losses.begin(),losses.end());}return report;
 }
+void writeRgba8Png(const std::filesystem::path& target,unsigned width,unsigned height,const unsigned char* pixels){
+    if(!pixels||!width||!height||width>8192||height>8192)throw std::invalid_argument("PNG output requires bounded RGBA dimensions");
+    std::ofstream output(target,std::ios::binary);if(!output)throw std::runtime_error("PNG output is unavailable");
+    const auto writer=[](void* context,void* bytes,int count){auto& stream=*static_cast<std::ofstream*>(context);if(count<0){stream.setstate(std::ios::failbit);return;}stream.write(static_cast<const char*>(bytes),count);};
+    const auto result=stbi_write_png_to_func(writer,&output,static_cast<int>(width),static_cast<int>(height),4,pixels,static_cast<int>(width*4));output.close();if(!result||!output)throw std::runtime_error("PNG output write failed");
+}
 }

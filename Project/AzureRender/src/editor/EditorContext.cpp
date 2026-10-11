@@ -86,11 +86,11 @@ void EditorContext::selectNextNode() {
 std::filesystem::path EditorContext::recoveryPath() const {
     const auto directory = project_ ? project_->file.parent_path() : scenePath_.parent_path();
     std::uint64_t identity = 14695981039346656037ULL;
-    for (const unsigned char byte : std::filesystem::absolute(scenePath_).generic_string()) {
+    for (const unsigned char byte : std::filesystem::absolute(scenePath_).generic_u8string()) {
         identity = (identity ^ byte) * 1099511628211ULL;
     }
     return directory / ".azure" / "recovery"
-        / (std::to_string(identity) + "-" + scenePath_.filename().string());
+        / std::filesystem::u8path(std::to_string(identity) + "-" + scenePath_.filename().u8string());
 }
 
 void EditorContext::save() {
@@ -105,8 +105,8 @@ void EditorContext::save() {
         const auto destination = recoveryPath();
         std::filesystem::create_directories(destination.parent_path());
         const auto writeVerified = [](const std::filesystem::path& target, const std::string& content) {
-            const auto temporary = target.string() + ".tmp."
-                + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
+            const auto temporary = std::filesystem::u8path(target.u8string() + ".tmp."
+                + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
             try {
                 {
                     std::ofstream output(temporary, std::ios::binary | std::ios::trunc);
@@ -127,8 +127,8 @@ void EditorContext::save() {
             }
         };
         writeVerified(destination, bytes);
-        writeVerified(destination.string() + ".json", nlohmann::json{
-            {"source", std::filesystem::absolute(scenePath_).generic_string()},
+        writeVerified(std::filesystem::u8path(destination.u8string() + ".json"), nlohmann::json{
+            {"source", std::filesystem::absolute(scenePath_).generic_u8string()},
             {"size", bytes.size()}, {"schemaVersion", 1}}.dump(2));
     }
     if (attachedRenderSettings_ != nullptr) {
@@ -145,7 +145,7 @@ void EditorContext::save() {
     }portable.save(scenePath_);}else scene_.save(scenePath_);
     checkpointSaved();
     ++revision_;closeEditMerge();
-    log("Saved scene: " + scenePath_.string());
+    log("Saved scene: " + scenePath_.u8string());
 }
 
 void EditorContext::reload() {

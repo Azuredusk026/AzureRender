@@ -136,7 +136,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/imgui.cpp")
             "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/backends"
     )
     target_compile_features(azure_imgui PUBLIC cxx_std_17)
-    target_compile_definitions(azure_imgui PUBLIC GLFW_INCLUDE_VULKAN)
+    target_compile_definitions(azure_imgui PUBLIC GLFW_INCLUDE_VULKAN IMGUI_USE_WCHAR32)
     target_link_libraries(azure_imgui PUBLIC Vulkan::Vulkan glfw)
     add_library(imgui::imgui ALIAS azure_imgui)
 else()
@@ -476,6 +476,7 @@ add_library(AzureEditor STATIC
     src/editor/material/MaterialEditingService.cpp
     src/editor/preview/ThumbnailProviderRegistry.cpp
     src/editor/panels/TextureAssetPanel.cpp
+    src/editor/panels/AssetTransferPanel.cpp
     src/editor/panels/MaterialAssetPanel.cpp
     src/editor/panels/PhysicsAuthoringPanel.cpp
     src/editor/panels/DocumentTabs.cpp
@@ -488,6 +489,7 @@ add_library(AzureEditor STATIC
     src/editor/content/AssetCatalog.cpp
     src/editor/content/ContentDirectoryModel.cpp
     src/editor/content/AssetEditorRegistry.cpp
+    src/editor/content/AssetExportService.cpp
     src/editor/content/NodePresetRegistry.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
@@ -1968,6 +1970,21 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.AudioWorkflow COMMAND AzureEditorAudioWorkflowTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
     set_tests_properties(AzureEditor.AudioWorkflow PROPERTIES FIXTURES_REQUIRED AudioCodecFixtures)
     add_executable(AzureAssetRoundTripTests tests/AssetRoundTripTests.cpp)
+    add_executable(AzureEditorAssetTransferTests tests/EditorAssetTransferTests.cpp)
+    target_link_libraries(AzureEditorAssetTransferTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AssetTransfer COMMAND AzureEditorAssetTransferTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g19/evidence/2026-10-12/image-fixtures/alpha.png"
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g20/evidence/2026-10-12/audio-fixtures/tone.wav")
+    add_test(NAME AzureEditor.AssetTransferGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_asset_transfer_workflows.py" --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureEditor.AssetTransferGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+    foreach(_host AzureRender AzurePlayer)
+        add_test(NAME "AzureEngine.UnicodeOutputs${_host}" COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unicode_outputs.py" --executable "$<TARGET_FILE:${_host}>"
+            --source "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g21/evidence/2026-10-12/roundtrip-outputs/glb-output/test_model.glb")
+        set_tests_properties("AzureEngine.UnicodeOutputs${_host}" PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    endforeach()
     add_test(NAME AzureTools.AssetExchange COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_asset_exchange.py" "$<TARGET_FILE:AzureAssetExchange>"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g19/evidence/2026-10-12/image-fixtures/alpha.png")

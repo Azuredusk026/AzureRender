@@ -38,7 +38,12 @@ void EditRegistry::validate(const nlohmann::json& value,const nlohmann::json& sc
         for(const auto& name:schema.value("required",nlohmann::json::array()))
             if(!value.contains(name.get<std::string>()))throw EditRejection("Missing parameter: "+name.get<std::string>());
         for(const auto& field:value.items()) {
-            if(!fields.contains(field.key()))throw EditRejection("Unknown parameter: "+field.key());
+            if(!fields.contains(field.key())) {
+                const auto additional=schema.value("additionalProperties",nlohmann::json(false));
+                if(additional==true)continue;
+                if(additional.is_object()){validate(field.value(),additional);continue;}
+                throw EditRejection("Unknown parameter: "+field.key());
+            }
             validate(field.value(),fields.at(field.key()));
         }
     }

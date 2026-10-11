@@ -136,7 +136,7 @@ void AzureRenderApp::run(
         prepareCaptureDirectory();
     }
     if (!runOptions_.gpuTimingOutput.empty()
-        && std::filesystem::exists(runOptions_.gpuTimingOutput)) {
+        && std::filesystem::exists(std::filesystem::u8path(runOptions_.gpuTimingOutput))) {
         throw std::runtime_error(
             "GPU timing output already exists; refusing to overwrite: "
             + runOptions_.gpuTimingOutput);
@@ -397,10 +397,10 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         if(runOptions_.editorSession)scene=runOptions_.editorSession->viewScene();
 #endif
         for (const auto& node : scene.nodes) nodes.push_back({{"id", node.id}, {"translation", node.translation}, {"visible", node.visible}});
-        std::ofstream report(runOptions_.runtimeReportPath);
+        std::ofstream report(std::filesystem::u8path(runOptions_.runtimeReportPath));
         report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}, {"activeScripts", scriptRuntime_ ? scriptRuntime_->activeCount() : 0}, {"scriptErrors", scriptRuntime_ ? scriptRuntime_->errors() : std::vector<std::string>{}}}.dump(2);
         report.close();
-        std::ifstream saved(runOptions_.runtimeReportPath);nlohmann::json data;saved>>data;saved.close();
+        std::ifstream saved(std::filesystem::u8path(runOptions_.runtimeReportPath));nlohmann::json data;saved>>data;saved.close();
         data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
 #if AZURE_WITH_EDITOR
         data["developer"]=devtoolsReport_;
@@ -419,7 +419,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         if(editorLayer_)data["editorWorkspace"]=editorLayer_->workspaceSnapshot();
         if(runOptions_.editorSession) { data["gameBuildPassed"]=runOptions_.editorSession->buildResult().passed; data["gameBuildMilliseconds"]=runOptions_.editorSession->buildResult().milliseconds; }
 #endif
-        std::ofstream extended(runOptions_.runtimeReportPath);extended<<data.dump(2);
+        std::ofstream extended(std::filesystem::u8path(runOptions_.runtimeReportPath));extended<<data.dump(2);
         if (!extended) throw std::runtime_error("Cannot write runtime report");
     }
     runtimeModules_.stop();
@@ -1312,7 +1312,7 @@ void AzureRenderApp::createLogicalDevice() {
     vkGetDeviceQueue(device_, *indices.graphics, 0, &graphicsQueue_);
     vkGetDeviceQueue(device_, *indices.present, 0, &presentQueue_);
     const std::filesystem::path capabilityDirectory = runOptions_.captureDirectory.empty()
-        ? std::filesystem::path("captures") : std::filesystem::path(runOptions_.captureDirectory);
+        ? std::filesystem::path("captures") : std::filesystem::u8path(runOptions_.captureDirectory);
     static_cast<void>(azurerender::writeGpuCapabilityReport(physicalDevice_,
         capabilityDirectory / "gpu_capabilities.json",
         {bindlessTexturesSupported_ && !runOptions_.bindlessDisabled, false, false, false}));

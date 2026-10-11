@@ -283,14 +283,14 @@ void AzureRenderApp::drawFrame() {
                     << "frame_" << std::setfill('0') << std::setw(6)
                     << capturedFrames_ << ".png";
                 outputPath =
-                    (std::filesystem::path(runOptions_.captureDirectory)
-                     / filename.str()).string();
+                    (std::filesystem::u8path(runOptions_.captureDirectory)
+                     / filename.str()).u8string();
             } else if (!pendingScreenshotLabel_.empty()) {
                 const std::filesystem::path captureDirectory =
                     resourceLocator_.captureDirectory();
                 std::filesystem::create_directories(captureDirectory);
                 outputPath = (captureDirectory
-                    / (pendingScreenshotLabel_ + ".png")).string();
+                    / std::filesystem::u8path(pendingScreenshotLabel_ + ".png")).u8string();
             }
             saveScreenshot(
                 readback.buffer.mapped,
@@ -872,7 +872,7 @@ void AzureRenderApp::updateHudBuffer(const std::size_t frameIndex) {
                  index < editorScene.resources.size(); ++index) {
                 if (index > 0) text << " | ";
                 text << printable(
-                    editorScene.resources[index].path.string(), 38);
+                    editorScene.resources[index].path.u8string(), 38);
             }
         }
         text << "\nCONSOLE: [/] OUTLINE  -/= EXPOSURE  F1-F3 LIGHT  CLOSE=SAVES\n";

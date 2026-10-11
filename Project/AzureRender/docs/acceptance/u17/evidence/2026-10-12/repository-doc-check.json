@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "check": "tools/check_docs.sh",
+  "status": "PreexistingDensePunctuationFailure",
+  "scope": "Repository-wide punctuation audit",
+  "introducedByU17": false,
+  "scopedChangedDocumentStyle": "Passed",
+  "files": [
+    {
+      "path": "docs/plans/2026-10-09-character-rendering-repair.md",
+      "currentDensePunctuation": 1,
+      "beforeU17DensePunctuation": 1
+    },
+    {
+      "path": "docs/plans/2026-10-09-editor-productization.md",
+      "currentDensePunctuation": 15,
+      "beforeU17DensePunctuation": 15
+    },
+    {
+      "path": "docs/plans/2026-10-11-asset-format-expansion.md",
+      "currentDensePunctuation": 5,
+      "beforeU17DensePunctuation": 5
+    },
+    {
+      "path": "docs/plans/azure-engine-plan.md",
+      "currentDensePunctuation": 1,
+      "beforeU17DensePunctuation": 1
+    },
+    {
+      "path": "docs/runtime/asset-exchange.md",
+      "currentDensePunctuation": 3,
+      "beforeU17DensePunctuation": 3
+    },
+    {
+      "path": "docs/runtime/authoring-workflows.md",
+      "currentDensePunctuation": 13,
+      "beforeU17DensePunctuation": 13
+    },
+    {
+      "path": "docs/runtime/content-navigation.md",
+      "currentDensePunctuation": 6,
+      "beforeU17DensePunctuation": 6
+    },
+    {
+      "path": "docs/runtime/physics-authoring.md",
+      "currentDensePunctuation": 4,
+      "beforeU17DensePunctuation": 4
+    }
+  ],
+  "finalReviewPhase": "P8"
+}

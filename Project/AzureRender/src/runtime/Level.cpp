@@ -9,7 +9,7 @@
 #include <set>
 namespace azurerender {
 Level Level::load(const std::filesystem::path& path, const AssetDatabase& assets) {
-    std::ifstream input(path); if (!input) throw std::runtime_error("Cannot open level: " + path.string());
+    std::ifstream input(path); if (!input) throw std::runtime_error("Cannot open level: " + path.u8string());
     nlohmann::json document; input >> document; return parse(document, assets);
 }
 Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,const std::map<std::string,nlohmann::json>& prefabSources) {
@@ -73,9 +73,9 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
 }
 void Level::save(const std::filesystem::path& path) const {
     static std::atomic<std::uint64_t> sequence{0};
-    const auto temporary = path.string() + ".tmp."
+    const auto temporary = std::filesystem::u8path(path.u8string() + ".tmp."
         + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())
-        + "." + std::to_string(sequence++);
+        + "." + std::to_string(sequence++));
     try {
         { std::ofstream output(temporary, std::ios::binary);
           output << document_.dump(2) << '\n'; output.flush();

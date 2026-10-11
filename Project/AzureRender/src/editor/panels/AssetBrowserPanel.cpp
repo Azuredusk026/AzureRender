@@ -81,12 +81,14 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));ImGui::Separator();
         }
         std::vector<std::string> importExtensions;
-        for(const auto& format:assetFormatRegistry().list(AssetDomain::Model))if(format.canRead)importExtensions.insert(importExtensions.end(),format.extensions.begin(),format.extensions.end());
-        drawPathInput("Model source",importPath_,"import",false,importExtensions);
+        for(const auto& [id,format]:assetFormatRegistry().formats()){(void)id;if(format.canRead)importExtensions.insert(importExtensions.end(),format.extensions.begin(),format.extensions.end());}
+        drawPathInput("Asset source",importPath_,"import",false,importExtensions);
         ui::ButtonOptions import;import.disabled=view.importing()||session_->playing()||session_->building()||importPath_.empty();
-        import.tooltip="Select a supported model file. Import continues when this panel is closed.";
+        import.tooltip="Select a supported model, image or audio file. Import continues when this panel is closed.";
         if(ui::button("Import",import)){const auto result=session_->edit("asset.import-start",{{"path",importPath_}});if(result)ImGui::CloseCurrentPopup();}observeWidget("asset.import");
         if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button("Cancel Import"))session_->edit("asset.import-cancel");observeWidget("asset.import-cancel");}
+        ui::ButtonOptions exportOptions;exportOptions.disabled=selectedAssets_.size()!=1||session_->context().dirty()||view.importing()||session_->playing()||session_->building()||session_->reimporting();
+        if(ui::button("Export selected asset",exportOptions)){exportRequest_={{"asset",*selectedAssets_.begin()}};exportDialogRequested_=true;ImGui::CloseCurrentPopup();}observeWidget("assets.export");
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
         if(ui::button("Create directory")){contentOperation_="content.create-directory";contentRequest_={{"parent",(assetMount_.empty()?"assets":assetMount_)+":/"+assetDirectory_}};contentValue_="New Folder";contentDialogRequested_=true;ImGui::CloseCurrentPopup();}
         observeWidget("content.create-directory");
@@ -212,6 +214,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                     const auto& record=view.assets().records().at(id);
                     session_->edit("asset.reimport",{{"asset",id},{"settings",nlohmann::json::object()},{"baseFingerprint",std::to_string(record.fingerprint)}});
                 }observeWidget("asset.reimport");
+                if(ImGui::MenuItem("Export asset",nullptr,false,!session_->context().dirty())){exportRequest_={{"asset",id}};exportDialogRequested_=true;}observeWidget("asset.export");
                 if(type=="image") {
                     if(ImGui::MenuItem("Texture settings")) {
                         const auto result=session_->edit("texture.describe",{{"assets",selectedAssets_}});

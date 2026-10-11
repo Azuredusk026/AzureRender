@@ -1,0 +1,683 @@
+{
+  "schemaVersion": 1,
+  "phase": "U17",
+  "automaticComplete": true,
+  "finalAcceptancePhase": "P8",
+  "sourceSnapshotSha256": "4027354c6a16c5a132380eb575a063992a84eae517b707e2dc161a8b8f82444f",
+  "sourceScope": "Complete working-tree snapshot preserving existing user edits",
+  "cpu": {
+    "Debug": 171,
+    "Release": 171
+  },
+  "gpuRegression": {
+    "Debug": 7,
+    "Release": 7
+  },
+  "productionUiWorkflows": 2,
+  "devices": [
+    "NVIDIA",
+    "Intel"
+  ],
+  "installedFileCount": 8581,
+  "packageFileCount": 456,
+  "manualAcceptance": "DeferredToP8",
+  "files": [
+    {
+      "path": "authored-project.log.gz",
+      "sha256": "44858810e84952be556af91ae0d66327881e95cee038789459cccbd91dcf2234",
+      "bytes": 471
+    },
+    {
+      "path": "chinese-project-save-red.log.gz",
+      "sha256": "9d81d18ec857c95ba0ecf5cb3ab21ab7ce1c96eb6520cab5a6d7e6524f84e6c0",
+      "bytes": 4296
+    },
+    {
+      "path": "close-stage.py",
+      "sha256": "9ea02b77c74ddd6b42e1be3a26d017bf2bfec24203318f825a091493ae8f42e0",
+      "bytes": 10540
+    },
+    {
+      "path": "debug-build-final.log.gz",
+      "sha256": "56f273195bce895b9279353f45748aef232753816091b0e6daa5470bc1d94999",
+      "bytes": 1411
+    },
+    {
+      "path": "debug-build-reviewed.log.gz",
+      "sha256": "19b4fdf46c81e7ab77eb55a01822155e403775284f5890e0a2b87925ea414ad2",
+      "bytes": 525
+    },
+    {
+      "path": "debug-build.log.gz",
+      "sha256": "d4f4327d05bd306fe4c74d64de254bff5b835d479d0596c8590ce51cc3b51dd6",
+      "bytes": 4487
+    },
+    {
+      "path": "debug-cpu.log.gz",
+      "sha256": "8bff1939f341c2303f57bd5420594e4474d5b7007b73deb4edacd4de1aed1b42",
+      "bytes": 4085
+    },
+    {
+      "path": "debug-gpu.log.gz",
+      "sha256": "645b6518cec8118186e0a940c9897d08fde102f06ad4f79e9e90c7a4deae90d9",
+      "bytes": 451
+    },
+    {
+      "path": "debug-provenance.json.gz",
+      "sha256": "e71618aa926f82bd3b21c573eab49badec9e263aae0aef10f9ec1727ad85e70d",
+      "bytes": 54843
+    },
+    {
+      "path": "debug-reviewed-contracts.log.gz",
+      "sha256": "5e1925b21c98d3efc6494273b95f6ff484fb58a352f98c41c4b8a1770db1e4d6",
+      "bytes": 350
+    },
+    {
+      "path": "default-temporary-red.log.gz",
+      "sha256": "6e1c81aa60df32e0414eab39483d5741c08ed0389f31207ee0d12472e3dfa9e6",
+      "bytes": 908
+    },
+    {
+      "path": "delivery-final.log.gz",
+      "sha256": "eb3f9da080e9067513eaa00197616eaa21d47f8bb7b1e64d9a6bab5384f11f0b",
+      "bytes": 99
+    },
+    {
+      "path": "delivery-prepare.log.gz",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "bytes": 20
+    },
+    {
+      "path": "delivery-summary.json",
+      "sha256": "7ebf831edeb5f205c4df6840c9a9cb395ed216658c86826b7e297e166147c67d",
+      "bytes": 21993
+    },
+    {
+      "path": "docs-check.log.gz",
+      "sha256": "38c8fbad44dc497c1769dc21fbf1ae962158cd7d9d65b37427ce317fffc58644",
+      "bytes": 2728
+    },
+    {
+      "path": "editor-label-build.log.gz",
+      "sha256": "cb845b4ee21063db48681a30654d4558e179e51c144b7e68f8fade2cda442e95",
+      "bytes": 452
+    },
+    {
+      "path": "editor-unicode-after-label.log.gz",
+      "sha256": "858ccdb2507e2d1603e2a406a488f115bc6de602a0bf74651cae21f4451b023b",
+      "bytes": 1364
+    },
+    {
+      "path": "editor-unicode-correct-final.log.gz",
+      "sha256": "411784324e9df2328e57ad60cb22575497c76f9e57d448b532f66b1cc2e14eb6",
+      "bytes": 1365
+    },
+    {
+      "path": "editor-unicode-final.log.gz",
+      "sha256": "8fe7b0eefa0ac861d704fd0f0aa1132c4adb07ba6abc713b979e519b3767f14a",
+      "bytes": 792
+    },
+    {
+      "path": "editor-unicode-gameplay-green.log.gz",
+      "sha256": "1360bfac1a3ace3f014ab95da513cbf31bba041875657a226950d30dafae3933",
+      "bytes": 357
+    },
+    {
+      "path": "editor-wchar32-green.log.gz",
+      "sha256": "46b54e698e3547106e264db2ba9a00c3c5662feba37a7abe505dbe775200a716",
+      "bytes": 83
+    },
+    {
+      "path": "fixtures.log.gz",
+      "sha256": "59475bfc80a309abfa262ac0f3382b9a564bcd8fc5648275b9f1c91e2c50b1e5",
+      "bytes": 292
+    },
+    {
+      "path": "install-documents-final.log.gz",
+      "sha256": "44001b60e1d344988706b9a283a50f801a52f087397cafab87e97318728da651",
+      "bytes": 93
+    },
+    {
+      "path": "install-final-manifest.log.gz",
+      "sha256": "80c5270efbf4586304e0e8777212bbac50838eb5e9a81e038ffb9c4ff1a14694",
+      "bytes": 146
+    },
+    {
+      "path": "install-final-verify.log.gz",
+      "sha256": "fef14cbd7f572a10328304f4b402bc1be9b6ecf3be1d7875481aa77a4afc03a8",
+      "bytes": 151
+    },
+    {
+      "path": "install-final.log.gz",
+      "sha256": "3fd57e8d2965af9914204386aa7d56e1dc6f23d3c868ea800206400286234fca",
+      "bytes": 65877
+    },
+    {
+      "path": "install-manifest.json.gz",
+      "sha256": "3bb4c1876539651eaf69cb25684ad8197039d35698f98e9eb9ab081d4677aa8a",
+      "bytes": 373172
+    },
+    {
+      "path": "install-manifest.log.gz",
+      "sha256": "80c5270efbf4586304e0e8777212bbac50838eb5e9a81e038ffb9c4ff1a14694",
+      "bytes": 146
+    },
+    {
+      "path": "install-verify.log.gz",
+      "sha256": "3bfe575b2f3901e431a9af18f2222279199333074cadc3d8ba3f7c921b2712ea",
+      "bytes": 175
+    },
+    {
+      "path": "install.log.gz",
+      "sha256": "75683c4f479732c9dca05f056a19ca5ed61b6beaba968f402205e8e46e8b7ab6",
+      "bytes": 65226
+    },
+    {
+      "path": "intel-capture_manifest.json",
+      "sha256": "9cf8fd2e142b74374f53d9d76f268045a442743b238c92c5fac7f480a3c2d258",
+      "bytes": 4339
+    },
+    {
+      "path": "intel-frame_000000.png",
+      "sha256": "e7c2a1e14a31f5bcbd2aa4dda1ead17d567f2abb90fbab59facf6187d5bb9f37",
+      "bytes": 343159
+    },
+    {
+      "path": "intel-frame_000001.png",
+      "sha256": "86ce385108f6c906b8b8b73b265972d45514a47fdb6222b5677cf1b9ca9eb5d9",
+      "bytes": 340994
+    },
+    {
+      "path": "intel-gpu_capabilities.json",
+      "sha256": "96c61c2f80fb4e15353b79a184e5081c568963886063d66464773b139f8c3ea4",
+      "bytes": 5911
+    },
+    {
+      "path": "intel-runtime.json",
+      "sha256": "aeec2dd50d5ca86fc2595974b40c9c7db8b5359a41174601dcd3795e75c055a5",
+      "bytes": 1472
+    },
+    {
+      "path": "isolated-AzurePlayer.log.gz",
+      "sha256": "bf06897eed4103331c21af00db6c93e02324408bf7510d79b33476994a434409",
+      "bytes": 232
+    },
+    {
+      "path": "isolated-AzureRender.log.gz",
+      "sha256": "39a7b2ab596ff125d0c24935e49b32c8289b4393874220aaed544371725c053c",
+      "bytes": 271
+    },
+    {
+      "path": "isolated-exchange.log.gz",
+      "sha256": "b3c972ac4d75823f1480ad2443eca730a5ee9c2346dac99e59b719bf3d9c375d",
+      "bytes": 352
+    },
+    {
+      "path": "module-boundaries-release.json",
+      "sha256": "4d3b61b3325340282845869242ec65ab06814b6aaadb11caf60782dc046387bf",
+      "bytes": 89
+    },
+    {
+      "path": "module-boundaries-release.log.gz",
+      "sha256": "1dedcf459c4d49867df499f0c739f8ab47211f3fafc5495464448202b96577b8",
+      "bytes": 90
+    },
+    {
+      "path": "module-boundaries.json",
+      "sha256": "4d3b61b3325340282845869242ec65ab06814b6aaadb11caf60782dc046387bf",
+      "bytes": 89
+    },
+    {
+      "path": "module-boundaries.log.gz",
+      "sha256": "1dedcf459c4d49867df499f0c739f8ab47211f3fafc5495464448202b96577b8",
+      "bytes": 90
+    },
+    {
+      "path": "moved-intel.log.gz",
+      "sha256": "71234e50cfe803c051186b87ce4169a2e47dcc365010b4637376358685c78e61",
+      "bytes": 2716
+    },
+    {
+      "path": "moved-nvidia.log.gz",
+      "sha256": "429408d5a1d047e654ab40876aac07ada4f0b0035b897b1b26bd68af01bcd737",
+      "bytes": 2690
+    },
+    {
+      "path": "native-outputs-build.log.gz",
+      "sha256": "a922c01e5fc1ecf6732efc98737a7578e69828239879defa2b8cc7327105e4fe",
+      "bytes": 511
+    },
+    {
+      "path": "nested-red-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "nested-red.log.gz",
+      "sha256": "2bdde1bdb4a8e8ce8295ceba20567fdf944551d95214de2942419ed9862f96bd",
+      "bytes": 731
+    },
+    {
+      "path": "nvidia-capture_manifest.json",
+      "sha256": "758dffa328dda07faab63968e34a3d9e79a9d3f3d67a3fd39df2c8e9a7e621d3",
+      "bytes": 4325
+    },
+    {
+      "path": "nvidia-frame_000000.png",
+      "sha256": "f5a95f5c8666937810a9918428f8e87a2b82ef207a07f664bf738d449fc8dcbf",
+      "bytes": 388782
+    },
+    {
+      "path": "nvidia-frame_000001.png",
+      "sha256": "77ccf49c511502f9aceb914bfb717b0439e905c4e566b99c3a1c2e71b9dbdd41",
+      "bytes": 385419
+    },
+    {
+      "path": "nvidia-gpu_capabilities.json",
+      "sha256": "8891b4401836d2ab6424d40ddfd94e47cbf8c737bde20d36944397e8905dd7b9",
+      "bytes": 11464
+    },
+    {
+      "path": "nvidia-runtime.json",
+      "sha256": "01c1e8ba1d9b3f48cb16840c401e3fcee997dfd3eaedf5747feb4aabc315323d",
+      "bytes": 1485
+    },
+    {
+      "path": "package-manifest.json.gz",
+      "sha256": "076f32ef6333005acfe0aa074369b534bd5c06757111d29b067ed852fb509b60",
+      "bytes": 22179
+    },
+    {
+      "path": "player-unicode-final.log.gz",
+      "sha256": "daf5f206bae0f9508a1764a04e914908b406645c4a98b1b9239bf967ec35f3b5",
+      "bytes": 83
+    },
+    {
+      "path": "player-unicode-green.log.gz",
+      "sha256": "9ee0a16da42d371000a2874e5032f561fc1a17114081e82f9dbb1bedfbf0e4ee",
+      "bytes": 1328
+    },
+    {
+      "path": "player-wchar32-green.log.gz",
+      "sha256": "daf5f206bae0f9508a1764a04e914908b406645c4a98b1b9239bf967ec35f3b5",
+      "bytes": 83
+    },
+    {
+      "path": "public-build.log.gz",
+      "sha256": "3ba62dd471c7bb11c38402dbe452bbc87cee3ba6853b0102e9b1544d2121869c",
+      "bytes": 2964
+    },
+    {
+      "path": "public-green-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "public-green.log.gz",
+      "sha256": "87944b1f95488c4c9dfc1e6478c4da40518a7b5cb5b5b222f6358607d1da210d",
+      "bytes": 238
+    },
+    {
+      "path": "public-operations-red.log.gz",
+      "sha256": "ebdaba072457158bdb217e9b980f76e40b29416cdc7922764880b189b9c29558",
+      "bytes": 464
+    },
+    {
+      "path": "public-rebuild.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "public-test.log.gz",
+      "sha256": "e1f780f0144026dbf9a52a6f5ef8df6b9858782205a96afd2aa1f095e68dbac6",
+      "bytes": 675
+    },
+    {
+      "path": "public-with-nested-green.log.gz",
+      "sha256": "df6f45252815be81345e6b867131b2aa84d334b72b925fa81ae62748185ea1a8",
+      "bytes": 239
+    },
+    {
+      "path": "publish.log.gz",
+      "sha256": "761f4cd45f95a2bfaeb1c43bab9a921dba2c8552ae23702432d8af269eeb8790",
+      "bytes": 74
+    },
+    {
+      "path": "red-build.log.gz",
+      "sha256": "e87824c938a67f882d5dc9e0c706f2aba7d41c3cd25c7f4bb9d5558a7630a46d",
+      "bytes": 2498
+    },
+    {
+      "path": "refresh-installed-documents.py",
+      "sha256": "5b4274e17fd52225b7423a228b4dd070309e89834724c766be045185fa1ddcb7",
+      "bytes": 1673
+    },
+    {
+      "path": "release-build-final.log.gz",
+      "sha256": "9ad6113ae17a0354eb2a9f3db027ae1b284a4dd507d26f0d005a7a79a7c482f3",
+      "bytes": 1407
+    },
+    {
+      "path": "release-build-reviewed.log.gz",
+      "sha256": "fa9cc6d028078238e6b5e2aebeb433f2de5bbfd28a5dba6ea28ffb26e5816adc",
+      "bytes": 526
+    },
+    {
+      "path": "release-build.log.gz",
+      "sha256": "58c2b2982667ab4ea1dd20699feddf5e77ae297333ee254f90386a93c4b0ec33",
+      "bytes": 5855
+    },
+    {
+      "path": "release-cpu.log.gz",
+      "sha256": "90140253571d5813ee8e51e5a7773a7d26b457f4c8b5360da28b9e0386a5fd49",
+      "bytes": 4056
+    },
+    {
+      "path": "release-gpu.log.gz",
+      "sha256": "5a1ed35fbc0c93083793770232ef39004f9349efbbc0deba95264a99a04a0944",
+      "bytes": 453
+    },
+    {
+      "path": "release-provenance.json.gz",
+      "sha256": "f8c580affcc59adb61b9c7f39c5e3fa2f3a5882a297dc6a0eadbddc5be22768c",
+      "bytes": 54266
+    },
+    {
+      "path": "release-reviewed-contracts.log.gz",
+      "sha256": "5e03e8c70e93a43814e75cf47cae7a415e14a5145f18b8a2b4f3e83d31ccdd28",
+      "bytes": 355
+    },
+    {
+      "path": "release-save-path-red.log.gz",
+      "sha256": "b462ee3feb697b678b32debf29e83b3f77b24a306c4219add5fda4978d71c1cc",
+      "bytes": 4263
+    },
+    {
+      "path": "repository-doc-check.json",
+      "sha256": "92125d0461357c4b57b3352209978a1c7a185e835d4746269fddc4d29eca8332",
+      "bytes": 1466
+    },
+    {
+      "path": "roundtrip-retained.log.gz",
+      "sha256": "46dda9010c179bd9202cf96780e9c8bc8dc5b4435cded0473ee176d6e6dd4fcd",
+      "bytes": 93
+    },
+    {
+      "path": "save-path-green.log.gz",
+      "sha256": "eea3a89c4ff815f5a8eacab5d7a1bebaa6fba29a1f7bb0998a796cf639d6f297",
+      "bytes": 263
+    },
+    {
+      "path": "settings-green-build.log.gz",
+      "sha256": "65822850dfc68e5c3e4a4f9bca5c02675a85768016a4db7da00331f0161a924e",
+      "bytes": 393
+    },
+    {
+      "path": "settings-green.log.gz",
+      "sha256": "19c943b94210177ce2cdc1e39b04257ff77b85acd67600c3d2dc168d68a0224d",
+      "bytes": 235
+    },
+    {
+      "path": "settings-red.log.gz",
+      "sha256": "9738de023ee67f9817c83910b131af4de65de8c452ca89d69b28522b22a65c03",
+      "bytes": 482
+    },
+    {
+      "path": "settings-tests-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "site-build.log.gz",
+      "sha256": "e5a96688ceff2319517313dc8a621d6bde98dba28c772d35daac74532e45c179",
+      "bytes": 1454
+    },
+    {
+      "path": "stage-finalize.log.gz",
+      "sha256": "a949cbf6446fc7f674bfed1e94ce4d4d9bc7d24dbff6b65be9f238d9dbccf84e",
+      "bytes": 127
+    },
+    {
+      "path": "subtree-diagnostic-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "subtree-diagnostic.log.gz",
+      "sha256": "c5759cd50567f1092076130a2856293724c2442e5c38d5d8a1a1313603efb0f9",
+      "bytes": 990
+    },
+    {
+      "path": "ui-green.log.gz",
+      "sha256": "4400bb673358398fc0136dab0c78292a90c889a0537b43e7d1c56eb6a9bdac60",
+      "bytes": 423
+    },
+    {
+      "path": "ui-intel/asset-export/runtime.json",
+      "sha256": "8eece26301792961a333cbe8d518901298d2a9fc578d11aafe5627ed1235e7b6",
+      "bytes": 124912
+    },
+    {
+      "path": "ui-intel/baseline/runtime.json",
+      "sha256": "33d3a27d64a159882889d61248692da04a2ed732e84235acf46fe86f6e89faf8",
+      "bytes": 43143
+    },
+    {
+      "path": "ui-intel/subtree-export/runtime.json",
+      "sha256": "678abb756603f43c1a8b39fe9a9bafe065e38e6ed7c1359d438e1d9ec22e02c6",
+      "bytes": 125521
+    },
+    {
+      "path": "ui-intel-asset-export.png",
+      "sha256": "270c26e40670d50c3b329ee9ec80412107f90c990eb7d8930343728159fd3917",
+      "bytes": 564431
+    },
+    {
+      "path": "ui-intel-subtree-export.png",
+      "sha256": "cc325640e0a7c3a2e2e89a72f741df3bfcc83a201810ee7bca8aab681bbed972",
+      "bytes": 563217
+    },
+    {
+      "path": "ui-intel-summary.json",
+      "sha256": "fa5c77c1ba77a9c1c174e30b1091545b646b32a560b387d2d4f16ccd5ab96770",
+      "bytes": 169
+    },
+    {
+      "path": "ui-intel.log.gz",
+      "sha256": "eccfb5c80be11f7bc57848b8a550e673fb25ef8cc50b23bd2ecc5647b27d1f1f",
+      "bytes": 130
+    },
+    {
+      "path": "ui-nvidia/asset-export/runtime.json",
+      "sha256": "4a805c6fecffb754601a5b74d090961efb87253db162f575a7a23cff25061a41",
+      "bytes": 124920
+    },
+    {
+      "path": "ui-nvidia/baseline/runtime.json",
+      "sha256": "ed5970252b0084cdf1a019d8d64c8558f1c6bcf48328eaa23a48cd243868fa69",
+      "bytes": 43149
+    },
+    {
+      "path": "ui-nvidia/subtree-export/runtime.json",
+      "sha256": "1dcd199f2d4b140c0045e717fb913fb5f728eab7d5c85d5d7dae8b3ddcf11fb3",
+      "bytes": 125530
+    },
+    {
+      "path": "ui-nvidia-asset-export.png",
+      "sha256": "dfedcf78cb1dead24f1001afb63ea33bc823c1bdb8fa9a201d2e43d6639c1b7c",
+      "bytes": 559306
+    },
+    {
+      "path": "ui-nvidia-subtree-export.png",
+      "sha256": "9bc458dc7a55cbbb2d0cf69d2e5bcb164eb3278dd609647512a0e37177de88ab",
+      "bytes": 558201
+    },
+    {
+      "path": "ui-nvidia-summary.json",
+      "sha256": "fa5c77c1ba77a9c1c174e30b1091545b646b32a560b387d2d4f16ccd5ab96770",
+      "bytes": 169
+    },
+    {
+      "path": "ui-nvidia.log.gz",
+      "sha256": "eccfb5c80be11f7bc57848b8a550e673fb25ef8cc50b23bd2ecc5647b27d1f1f",
+      "bytes": 130
+    },
+    {
+      "path": "ui-red.log.gz",
+      "sha256": "00c527baa030679d2a149e54bad34ea972fa0c658731b0390e2ca1ce472111f5",
+      "bytes": 476
+    },
+    {
+      "path": "ui-unicode-build.log.gz",
+      "sha256": "d28a87adec5ae776d31a0b240b00d45721fdcd9217fd0dae088a4231119549e4",
+      "bytes": 3208
+    },
+    {
+      "path": "ui-unicode-rebuild.log.gz",
+      "sha256": "a7cd40f9be3371bb4f1372e93aeef29edde0e228507223956625e07e340316f5",
+      "bytes": 814
+    },
+    {
+      "path": "ui-wchar32-green/asset-export/runtime.json",
+      "sha256": "da58729434f66445fe27e29b4f6d0d9e773920f196fe573ad25b4dbac98b1c44",
+      "bytes": 124975
+    },
+    {
+      "path": "ui-wchar32-green/baseline/runtime.json",
+      "sha256": "acadf1d6e1ab35d464c928ef2a53fa68de7ee25eeb0ce740bb7a64fd70999637",
+      "bytes": 43191
+    },
+    {
+      "path": "ui-wchar32-green/subtree-export/runtime.json",
+      "sha256": "2a160aec011654b8bea2725221e3facbb4b6fcb3a87ff11a578377c7aa39c330",
+      "bytes": 125593
+    },
+    {
+      "path": "ui-wchar32-green-asset-export.png",
+      "sha256": "8344ee0c7f589c9ae1e621718c5da982579feac2d2f814be51c8ec6ebbea8476",
+      "bytes": 561884
+    },
+    {
+      "path": "ui-wchar32-green-subtree-export.png",
+      "sha256": "16506163ae7215ad0934398f1244f1eec1563e150b042756ef01131120925d4c",
+      "bytes": 560704
+    },
+    {
+      "path": "ui-wchar32-green-summary.json",
+      "sha256": "fa5c77c1ba77a9c1c174e30b1091545b646b32a560b387d2d4f16ccd5ab96770",
+      "bytes": 169
+    },
+    {
+      "path": "ui-wchar32-green.log.gz",
+      "sha256": "80d9667a7c6b0b3cd08433a5443191ce0b592181e5e28df9fc5378865c2aa4e2",
+      "bytes": 132
+    },
+    {
+      "path": "unicode-intel-AzurePlayer.log.gz",
+      "sha256": "a688639327ee70bf2c60c5f69eb2bd925ff5375098330eadc2e5a6afd967d5bf",
+      "bytes": 82
+    },
+    {
+      "path": "unicode-intel-AzureRender.log.gz",
+      "sha256": "17e30c61aa380a0e0749e96a10ffef2fb9ef16da6dde0a9ae4fe57d49216cdf6",
+      "bytes": 82
+    },
+    {
+      "path": "unicode-keyboard-build.log.gz",
+      "sha256": "eb4223fb6b257be7bc5ee2ef0e62ffe9fbce872b412bb0f84502c2fe82787518",
+      "bytes": 3701
+    },
+    {
+      "path": "unicode-keyboard-red.log.gz",
+      "sha256": "f84e3b1e3d503624c9e6c710af9e9c1909f210bb43e1ad801f99797bab02df12",
+      "bytes": 213
+    },
+    {
+      "path": "unicode-level-correct-red-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "unicode-level-correct-red.log.gz",
+      "sha256": "062b67b9f146b8cdbb70d720c3ff7578563f7d49c57764162bced7b3a24c6f66",
+      "bytes": 808
+    },
+    {
+      "path": "unicode-level-green-build.log.gz",
+      "sha256": "6fed70001fd1ada7af1d89f2740ce90bbfb759139dd2b819c7d3d978f52f9919",
+      "bytes": 1443
+    },
+    {
+      "path": "unicode-level-red-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "unicode-level-red.log.gz",
+      "sha256": "878f1fa78e0d4265821f7ad9a93d27a275f93bb1d386f57b5d10960a1dccedea",
+      "bytes": 705
+    },
+    {
+      "path": "unicode-nvidia-AzurePlayer.log.gz",
+      "sha256": "a688639327ee70bf2c60c5f69eb2bd925ff5375098330eadc2e5a6afd967d5bf",
+      "bytes": 82
+    },
+    {
+      "path": "unicode-nvidia-AzureRender.log.gz",
+      "sha256": "17e30c61aa380a0e0749e96a10ffef2fb9ef16da6dde0a9ae4fe57d49216cdf6",
+      "bytes": 82
+    },
+    {
+      "path": "unicode-output-correct-red.log.gz",
+      "sha256": "f234b03ac35e3a8e3293df5dbfbf5496b379464ef3ba5744d67f0f0f607b305f",
+      "bytes": 286
+    },
+    {
+      "path": "unicode-output-red.log.gz",
+      "sha256": "3d3ecead9360d8daa0d8d67576c231925130fc0420a961fbe4251020bac41c56",
+      "bytes": 292
+    },
+    {
+      "path": "unicode-red.log.gz",
+      "sha256": "a4639d5c57ef154df6e5cb6b277c38bcbb309a99709a8f92972fa5d8d196882d",
+      "bytes": 295
+    },
+    {
+      "path": "unicode-scene-build.log.gz",
+      "sha256": "55df5a4c22669c09b346e893d25fe48fc3a0c5a3049e9a9a31bc92ebba9df267",
+      "bytes": 472
+    },
+    {
+      "path": "unicode-scene-red-build.log.gz",
+      "sha256": "eb9f5d6867322d3d9d3f433d0ff8b62666361993640ce2cbfcbcabcbc1792421",
+      "bytes": 337
+    },
+    {
+      "path": "unicode-scene-red.log.gz",
+      "sha256": "46a683efca44a8311ede1311761b28c54d68372bd219255d17b212e86cff36dc",
+      "bytes": 747
+    },
+    {
+      "path": "user-source-preservation.json",
+      "sha256": "4be6edc5d8bb84acf1f7a473c372fa119bfb2798b2893ab045fe230f77eef296",
+      "bytes": 10629
+    },
+    {
+      "path": "verify-delivery.py",
+      "sha256": "d6550af2a2ef4d97a7ee3a1d5f46fad45166a86dae5f059547b7d83dfc2f0cd0",
+      "bytes": 7077
+    }
+  ],
+  "reviewVerification": {
+    "Debug": 4,
+    "Release": 4,
+    "runtimeProductsUnchanged": true,
+    "changes": "Trailing whitespace cleanup in two test files"
+  },
+  "documentation": {
+    "changedDocumentStyle": "Passed",
+    "strictSite": "Passed",
+    "repositoryPunctuationAudit": "PreexistingFailureRecorded",
+    "finalReviewPhase": "P8"
+  }
+}

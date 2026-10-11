@@ -42,6 +42,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         observeWidget("outliner.delete");
         if(ImGui::MenuItem("Duplicate",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.duplicate");
         observeWidget("outliner.duplicate");
+        if(ImGui::MenuItem("Export subtree",nullptr,false,view.isProject()&&view.selectedNode()&&!session_->context().dirty())){exportRequest_={{"node",view.selectedNode()->id}};exportDialogRequested_=true;}observeWidget("outliner.export");
         ImGui::EndPopup();
     }
     if (nodes.empty()) {

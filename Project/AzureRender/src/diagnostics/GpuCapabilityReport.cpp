@@ -106,7 +106,7 @@ bool writeGpuCapabilityReport(
         if (!output) {
             RuntimeDiagnostics::instance().error(
                 "gpu", DiagnosticCode::Runtime,
-                "Unable to write GPU capability report: " + path.string());
+                "Unable to write GPU capability report: " + path.u8string());
             return false;
         }
         output << formatGpuCapabilityReport(
@@ -114,11 +114,11 @@ bool writeGpuCapabilityReport(
         if (!output) {
             RuntimeDiagnostics::instance().error(
                 "gpu", DiagnosticCode::Runtime,
-                "Failed to flush GPU capability report: " + path.string());
+                "Failed to flush GPU capability report: " + path.u8string());
             return false;
         }
         RuntimeDiagnostics::instance().info(
-            "gpu", "GPU capability report: " + path.string());
+            "gpu", "GPU capability report: " + path.u8string());
         return true;
     } catch (...) {
         RuntimeDiagnostics::instance().error(
