@@ -1,0 +1,2272 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "32636fe8bc21a8208d6916c18ba71c6afe341b1a1eeb737b2d7109ba67e1c6a8",
+  "status": "SystemCaptureAndKnownCoverageVerifiedCompleteRootCausePending",
+  "formalAcceptance": false,
+  "formalFailureReproduced": false,
+  "originalCollectorFailureRetained": true,
+  "traceFilesKeptLocally": true,
+  "traces": [
+    {
+      "directory": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371",
+      "process": {
+        "exitCode": null,
+        "processId": 5144,
+        "runtimeReportEnabled": false,
+        "seconds": 26.8523087,
+        "session": "AzureP5EnvironmentMemory_1791705280371",
+        "formalAcceptance": false,
+        "diagnosticOnly": true
+      },
+      "etlBytes": 977272832,
+      "etlSha256": "c86da31cd08802904bba82720f6739f1dbb5d3a02ed4f182bf5254a3fcec4efc",
+      "lostBuffers": 0,
+      "lostEvents": 0
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470",
+      "process": {
+        "seconds": 21.1145729,
+        "exitCode": 0,
+        "retainedHandle": true,
+        "runtimeReportEnabled": false,
+        "formalAcceptance": false,
+        "processId": 21776,
+        "diagnosticOnly": true,
+        "session": "AzureP5EnvironmentMemory_1791705925470"
+      },
+      "etlBytes": 618659840,
+      "etlSha256": "e97b9d1bfcf5a745030f6e258e8a876818b9bcb3ae94c534c5c2e3b049ce3350",
+      "lostBuffers": 0,
+      "lostEvents": 0
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726",
+      "process": {
+        "seconds": 24.7226698,
+        "exitCode": 0,
+        "retainedHandle": true,
+        "runtimeReportEnabled": false,
+        "formalAcceptance": false,
+        "processId": 25932,
+        "diagnosticOnly": true,
+        "session": "AzureP5EnvironmentMemory_1791706172726"
+      },
+      "etlBytes": 84934656,
+      "etlSha256": "ffe55fd3d5f938ed785d6f43960399f386c8c4267c981837edaf769d1b38f77f",
+      "lostBuffers": 0,
+      "lostEvents": 0
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316",
+      "process": {
+        "seconds": 25.6572925,
+        "exitCode": 0,
+        "retainedHandle": true,
+        "runtimeReportEnabled": false,
+        "formalAcceptance": false,
+        "processId": 11456,
+        "diagnosticOnly": true,
+        "session": "AzureP5EnvironmentMemory_1791706203316"
+      },
+      "etlBytes": 79691776,
+      "etlSha256": "4fe47f83794cdd06a9262781f1d59e0a07405271f2b8328a1c54335fa5dbe700",
+      "lostBuffers": 0,
+      "lostEvents": 0
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681",
+      "process": {
+        "seconds": 26.5008199,
+        "exitCode": 0,
+        "retainedHandle": true,
+        "runtimeReportEnabled": false,
+        "formalAcceptance": false,
+        "processId": 28120,
+        "diagnosticOnly": true,
+        "session": "AzureP5EnvironmentMemory_1791706234681"
+      },
+      "etlBytes": 91226112,
+      "etlSha256": "f2c50fad4edcf328fef640b1b10cda49dc42d43d8bbaa5a17e31d34d3d489ae5",
+      "lostBuffers": 0,
+      "lostEvents": 0
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700",
+      "process": {
+        "pid": 3348,
+        "exitCode": 0,
+        "seconds": 11.515999999999622,
+        "samples": 365,
+        "workingSetGrowth": 0.012565031280869388,
+        "privateCommitGrowth": 0.00039005865599039957,
+        "ordinaryToken": true,
+        "diagnosticOnly": true,
+        "formalAcceptance": false,
+        "residentChange": {
+          "byClass": {
+            "privateUnattributed": -73678848,
+            "mapped": -24948736,
+            "image": -24080384
+          },
+          "regions": [
+            {
+              "allocation": 2515580616704,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 16441344,
+              "afterResidentBytes": 0,
+              "changeBytes": -16441344,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2513910759424,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 16412672,
+              "afterResidentBytes": 3485696,
+              "changeBytes": -12926976,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515564036096,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 14516224,
+              "afterResidentBytes": 3571712,
+              "changeBytes": -10944512,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140708144349184,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvwgf2umx.dll",
+              "beforeResidentBytes": 9879552,
+              "afterResidentBytes": 0,
+              "changeBytes": -9879552,
+              "category": "image"
+            },
+            {
+              "allocation": 2515597131776,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 9768960,
+              "afterResidentBytes": 0,
+              "changeBytes": -9768960,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515106725888,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 9441280,
+              "afterResidentBytes": 0,
+              "changeBytes": -9441280,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515226722304,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 8294400,
+              "afterResidentBytes": 0,
+              "changeBytes": -8294400,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515243892736,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 8294400,
+              "afterResidentBytes": 0,
+              "changeBytes": -8294400,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515261063168,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 8294400,
+              "afterResidentBytes": 0,
+              "changeBytes": -8294400,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2513868357632,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 8327168,
+              "afterResidentBytes": 2531328,
+              "changeBytes": -5795840,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2512754966528,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 5898240,
+              "afterResidentBytes": 507904,
+              "changeBytes": -5390336,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709679726592,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igc64.dll",
+              "beforeResidentBytes": 4898816,
+              "afterResidentBytes": 0,
+              "changeBytes": -4898816,
+              "category": "image"
+            },
+            {
+              "allocation": 140703773163520,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igvk64.dll",
+              "beforeResidentBytes": 4628480,
+              "afterResidentBytes": 0,
+              "changeBytes": -4628480,
+              "category": "image"
+            },
+            {
+              "allocation": 2515278233600,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 0,
+              "afterResidentBytes": 2097152,
+              "changeBytes": 2097152,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2513828708352,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4190208,
+              "afterResidentBytes": 2711552,
+              "changeBytes": -1478656,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140706282864640,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12Core.dll",
+              "beforeResidentBytes": 1400832,
+              "afterResidentBytes": 0,
+              "changeBytes": -1400832,
+              "category": "image"
+            },
+            {
+              "allocation": 140709752930304,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igdgmm64.dll",
+              "beforeResidentBytes": 1261568,
+              "afterResidentBytes": 0,
+              "changeBytes": -1261568,
+              "category": "image"
+            },
+            {
+              "allocation": 2513877073920,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 30216192,
+              "afterResidentBytes": 31264768,
+              "changeBytes": 1048576,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515651067904,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 1327104,
+              "afterResidentBytes": 327680,
+              "changeBytes": -999424,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515417956352,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 905216,
+              "afterResidentBytes": 0,
+              "changeBytes": -905216,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709890752512,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\d3d11.dll",
+              "beforeResidentBytes": 880640,
+              "afterResidentBytes": 0,
+              "changeBytes": -880640,
+              "category": "image"
+            },
+            {
+              "allocation": 2512727834624,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 2088960,
+              "afterResidentBytes": 1294336,
+              "changeBytes": -794624,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709790220288,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10iumd64.dll",
+              "beforeResidentBytes": 753664,
+              "afterResidentBytes": 0,
+              "changeBytes": -753664,
+              "category": "image"
+            },
+            {
+              "allocation": 140708739612672,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\NvMemMapStoragex.dll",
+              "beforeResidentBytes": 503808,
+              "afterResidentBytes": 0,
+              "changeBytes": -503808,
+              "category": "image"
+            },
+            {
+              "allocation": 2512726786048,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 1044480,
+              "afterResidentBytes": 598016,
+              "changeBytes": -446464,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2514032984064,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 393216,
+              "afterResidentBytes": 0,
+              "changeBytes": -393216,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2512697163776,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 1044480,
+              "afterResidentBytes": 655360,
+              "changeBytes": -389120,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140708787978240,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvldumdx.dll",
+              "beforeResidentBytes": 380928,
+              "afterResidentBytes": 0,
+              "changeBytes": -380928,
+              "category": "image"
+            },
+            {
+              "allocation": 140708530683904,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvgpucomp64.dll",
+              "beforeResidentBytes": 15990784,
+              "afterResidentBytes": 16338944,
+              "changeBytes": 348160,
+              "category": "image"
+            },
+            {
+              "allocation": 140709760860160,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\IntelControlLib.dll",
+              "beforeResidentBytes": 319488,
+              "afterResidentBytes": 0,
+              "changeBytes": -319488,
+              "category": "image"
+            },
+            {
+              "allocation": 140709761646592,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+              "beforeResidentBytes": 2908160,
+              "afterResidentBytes": 3219456,
+              "changeBytes": 311296,
+              "category": "image"
+            },
+            {
+              "allocation": 140709624676352,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\twinapi.appcore.dll",
+              "beforeResidentBytes": 245760,
+              "afterResidentBytes": 0,
+              "changeBytes": -245760,
+              "category": "image"
+            },
+            {
+              "allocation": 506365739008,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 315392,
+              "afterResidentBytes": 102400,
+              "changeBytes": -212992,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709443338240,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3DSCache.dll",
+              "beforeResidentBytes": 135168,
+              "afterResidentBytes": 0,
+              "changeBytes": -135168,
+              "category": "image"
+            },
+            {
+              "allocation": 140703672107008,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvrtum64.dll",
+              "beforeResidentBytes": 3366912,
+              "afterResidentBytes": 3489792,
+              "changeBytes": 122880,
+              "category": "image"
+            },
+            {
+              "allocation": 140703726305280,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvoglv64.dll",
+              "beforeResidentBytes": 9232384,
+              "afterResidentBytes": 9355264,
+              "changeBytes": 122880,
+              "category": "image"
+            },
+            {
+              "allocation": 140707158622208,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\D3D12.dll",
+              "beforeResidentBytes": 114688,
+              "afterResidentBytes": 0,
+              "changeBytes": -114688,
+              "category": "image"
+            },
+            {
+              "allocation": 140709995216896,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\userenv.dll",
+              "beforeResidentBytes": 77824,
+              "afterResidentBytes": 0,
+              "changeBytes": -77824,
+              "category": "image"
+            },
+            {
+              "allocation": 506398244864,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 73728,
+              "afterResidentBytes": 0,
+              "changeBytes": -73728,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709797298176,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\drvstore.dll",
+              "beforeResidentBytes": 167936,
+              "afterResidentBytes": 217088,
+              "changeBytes": 49152,
+              "category": "image"
+            },
+            {
+              "allocation": 140709894094848,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dcomp.dll",
+              "beforeResidentBytes": 421888,
+              "afterResidentBytes": 462848,
+              "changeBytes": 40960,
+              "category": "image"
+            },
+            {
+              "allocation": 140706901590016,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvspcap64.dll",
+              "beforeResidentBytes": 786432,
+              "afterResidentBytes": 823296,
+              "changeBytes": 36864,
+              "category": "image"
+            },
+            {
+              "allocation": 140709511954432,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\nvapi64.dll",
+              "beforeResidentBytes": 667648,
+              "afterResidentBytes": 704512,
+              "changeBytes": 36864,
+              "category": "image"
+            },
+            {
+              "allocation": 506382516224,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 32768,
+              "afterResidentBytes": 0,
+              "changeBytes": -32768,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140699164606464,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+              "beforeResidentBytes": 4800512,
+              "afterResidentBytes": 4833280,
+              "changeBytes": 32768,
+              "category": "image"
+            },
+            {
+              "allocation": 140710019792896,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\setupapi.dll",
+              "beforeResidentBytes": 270336,
+              "afterResidentBytes": 303104,
+              "changeBytes": 32768,
+              "category": "image"
+            },
+            {
+              "allocation": 140709835243520,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\avrt.dll",
+              "beforeResidentBytes": 28672,
+              "afterResidentBytes": 0,
+              "changeBytes": -28672,
+              "category": "image"
+            },
+            {
+              "allocation": 140709544329216,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\AudioSes.dll",
+              "beforeResidentBytes": 667648,
+              "afterResidentBytes": 692224,
+              "changeBytes": 24576,
+              "category": "image"
+            },
+            {
+              "allocation": 140710006030336,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\profapi.dll",
+              "beforeResidentBytes": 73728,
+              "afterResidentBytes": 98304,
+              "changeBytes": 24576,
+              "category": "image"
+            },
+            {
+              "allocation": 506400342016,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 32768,
+              "afterResidentBytes": 12288,
+              "changeBytes": -20480,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709905563648,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wtsapi32.dll",
+              "beforeResidentBytes": 61440,
+              "afterResidentBytes": 81920,
+              "changeBytes": 20480,
+              "category": "image"
+            },
+            {
+              "allocation": 140709950914560,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\winmm.dll",
+              "beforeResidentBytes": 94208,
+              "afterResidentBytes": 114688,
+              "changeBytes": 20480,
+              "category": "image"
+            },
+            {
+              "allocation": 140709991677952,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sspicli.dll",
+              "beforeResidentBytes": 73728,
+              "afterResidentBytes": 94208,
+              "changeBytes": 20480,
+              "category": "image"
+            },
+            {
+              "allocation": 2515634225152,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 16384,
+              "afterResidentBytes": 0,
+              "changeBytes": -16384,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709435211776,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\TextInputFramework.dll",
+              "beforeResidentBytes": 864256,
+              "afterResidentBytes": 880640,
+              "changeBytes": 16384,
+              "category": "image"
+            },
+            {
+              "allocation": 140709955174400,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dxgi.dll",
+              "beforeResidentBytes": 765952,
+              "afterResidentBytes": 782336,
+              "changeBytes": 16384,
+              "category": "image"
+            },
+            {
+              "allocation": 506370981888,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506372030464,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506373079040,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506374127616,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506383564800,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506384613376,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506385661952,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506386710528,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506387759104,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506388807680,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506389856256,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506390904832,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506391953408,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506393001984,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506394050560,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506395099136,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506396147712,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506397196288,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506399293440,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506401390592,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506402439168,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506403487744,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506404536320,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 506405584896,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2514030559232,
+              "kind": 262144,
+              "path": "\\Device\\HarddiskVolume3\\Users\\23587\\AppData\\Local\\NVIDIA\\DXCache\\96eda938fdbb3da1.nvph",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515623936000,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515624001536,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 12288,
+              "afterResidentBytes": 0,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140708750229504,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\nvhmsi.inf_amd64_5ec4b201b8059b6f\\nvppex.dll",
+              "beforeResidentBytes": 339968,
+              "afterResidentBytes": 352256,
+              "changeBytes": 12288,
+              "category": "image"
+            },
+            {
+              "allocation": 140710017433600,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\crypt32.dll",
+              "beforeResidentBytes": 606208,
+              "afterResidentBytes": 618496,
+              "changeBytes": 12288,
+              "category": "image"
+            },
+            {
+              "allocation": 140703826509824,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\rmlui.dll",
+              "beforeResidentBytes": 1134592,
+              "afterResidentBytes": 1142784,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140709622841344,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DispBroker.dll",
+              "beforeResidentBytes": 356352,
+              "afterResidentBytes": 364544,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140709757648896,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\MMDevAPI.dll",
+              "beforeResidentBytes": 442368,
+              "afterResidentBytes": 450560,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140709799002112,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\cryptnet.dll",
+              "beforeResidentBytes": 90112,
+              "afterResidentBytes": 98304,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140709985845248,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\umpdc.dll",
+              "beforeResidentBytes": 49152,
+              "afterResidentBytes": 57344,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140709998428160,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wldp.dll",
+              "beforeResidentBytes": 106496,
+              "afterResidentBytes": 114688,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140710013960192,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ucrtbase.dll",
+              "beforeResidentBytes": 745472,
+              "afterResidentBytes": 753664,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140710030737408,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\clbcatq.dll",
+              "beforeResidentBytes": 237568,
+              "afterResidentBytes": 245760,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140710037946368,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\SHCore.dll",
+              "beforeResidentBytes": 249856,
+              "afterResidentBytes": 258048,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 140710049415168,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\msctf.dll",
+              "beforeResidentBytes": 790528,
+              "afterResidentBytes": 798720,
+              "changeBytes": 8192,
+              "category": "image"
+            },
+            {
+              "allocation": 2512698212352,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 114688,
+              "afterResidentBytes": 118784,
+              "changeBytes": 4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2512705748992,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 28672,
+              "afterResidentBytes": 32768,
+              "changeBytes": 4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2512729931776,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2512741859328,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2512748347392,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2513910693888,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514028003328,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2514030493696,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514030624768,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2514030755840,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514031280128,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514031411200,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514031935488,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514032459776,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2514032918528,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515116228608,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515149848576,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515217088512,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515220299776,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515223511040,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515607027712,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515607093248,
+              "kind": 262144,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "mapped"
+            },
+            {
+              "allocation": 2515623804928,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515623870464,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2515624198144,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4096,
+              "afterResidentBytes": 0,
+              "changeBytes": -4096,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140703824150528,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\freetype.dll",
+              "beforeResidentBytes": 303104,
+              "afterResidentBytes": 307200,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140703829262336,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume5\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\glfw3.dll",
+              "beforeResidentBytes": 245760,
+              "afterResidentBytes": 249856,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140709800640512,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\CoreUIComponents.dll",
+              "beforeResidentBytes": 757760,
+              "afterResidentBytes": 761856,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140709904777216,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\apphelp.dll",
+              "beforeResidentBytes": 131072,
+              "afterResidentBytes": 135168,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140709965856768,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\ResourcePolicyClient.dll",
+              "beforeResidentBytes": 69632,
+              "afterResidentBytes": 73728,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140709988401152,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rsaenh.dll",
+              "beforeResidentBytes": 118784,
+              "afterResidentBytes": 122880,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140710008324096,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\KernelBase.dll",
+              "beforeResidentBytes": 1265664,
+              "afterResidentBytes": 1269760,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140710016843776,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\wintrust.dll",
+              "beforeResidentBytes": 233472,
+              "afterResidentBytes": 237568,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140710029688832,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\sechost.dll",
+              "beforeResidentBytes": 208896,
+              "afterResidentBytes": 212992,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140710034079744,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\user32.dll",
+              "beforeResidentBytes": 503808,
+              "afterResidentBytes": 507904,
+              "changeBytes": 4096,
+              "category": "image"
+            },
+            {
+              "allocation": 140710036766720,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\rpcrt4.dll",
+              "beforeResidentBytes": 626688,
+              "afterResidentBytes": 630784,
+              "changeBytes": 4096,
+              "category": "image"
+            }
+          ],
+          "netResidentChangeBytes": -122707968,
+          "allocationOwnershipProven": false,
+          "allocationReleaseProof": []
+        }
+      },
+      "etlBytes": 58720256,
+      "etlSha256": "e82053f610e74ba095d3544baa243e865836e78849a28713cf05641b07f8cfe0",
+      "lostBuffers": 0,
+      "lostEvents": 0,
+      "knownProbePassed": true
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500",
+      "process": {
+        "pid": 24260,
+        "exitCode": 0,
+        "seconds": 8.875,
+        "samples": 282,
+        "workingSetGrowth": 0.008475201913564767,
+        "privateCommitGrowth": 0.0,
+        "ordinaryToken": true,
+        "diagnosticOnly": true,
+        "formalAcceptance": false,
+        "residentChange": {
+          "byClass": {
+            "privateUnattributed": 139264,
+            "image": 12288
+          },
+          "regions": [
+            {
+              "allocation": 1890740862976,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 14163968,
+              "afterResidentBytes": 14299136,
+              "changeBytes": 135168,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 1888947601408,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 98304,
+              "afterResidentBytes": 114688,
+              "changeBytes": 16384,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 1890698461184,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 3735552,
+              "afterResidentBytes": 3723264,
+              "changeBytes": -12288,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709894094848,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\dcomp.dll",
+              "beforeResidentBytes": 409600,
+              "afterResidentBytes": 421888,
+              "changeBytes": 12288,
+              "category": "image"
+            }
+          ],
+          "netResidentChangeBytes": 151552,
+          "allocationOwnershipProven": false,
+          "allocationReleaseProof": []
+        }
+      },
+      "etlBytes": 59768832,
+      "etlSha256": "b10c259e342d43b1eeaf484265090145bdfb106fcb1c63f14c6c40c0bfd69deb",
+      "lostBuffers": 0,
+      "lostEvents": 0,
+      "knownProbePassed": true
+    },
+    {
+      "directory": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800",
+      "process": {
+        "pid": 29344,
+        "exitCode": 0,
+        "seconds": 24.34400000000096,
+        "samples": 771,
+        "workingSetGrowth": 0.001650636447322551,
+        "privateCommitGrowth": 0.0007241995134503743,
+        "ordinaryToken": true,
+        "diagnosticOnly": true,
+        "formalAcceptance": false,
+        "residentChange": {
+          "byClass": {
+            "privateUnattributed": -532480,
+            "image": 4096
+          },
+          "regions": [
+            {
+              "allocation": 2041759072256,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 16465920,
+              "afterResidentBytes": 15417344,
+              "changeBytes": -1048576,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2043487059968,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 4124672,
+              "afterResidentBytes": 4624384,
+              "changeBytes": 499712,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 2041793740800,
+              "kind": 131072,
+              "path": "",
+              "beforeResidentBytes": 16379904,
+              "afterResidentBytes": 16396288,
+              "changeBytes": 16384,
+              "category": "privateUnattributed"
+            },
+            {
+              "allocation": 140709761646592,
+              "kind": 16777216,
+              "path": "\\Device\\HarddiskVolume3\\Windows\\System32\\DriverStore\\FileRepository\\iigd_dch.inf_amd64_1ed7c95e585e0202\\igd10um64xe.dll",
+              "beforeResidentBytes": 2912256,
+              "afterResidentBytes": 2916352,
+              "changeBytes": 4096,
+              "category": "image"
+            }
+          ],
+          "netResidentChangeBytes": -528384,
+          "allocationOwnershipProven": false,
+          "allocationReleaseProof": []
+        }
+      },
+      "etlBytes": 59768832,
+      "etlSha256": "dd3ac5e02850ee61966b15404df363709dac986c204081fa63b11d40e4130fb3",
+      "lostBuffers": 0,
+      "lostEvents": 0,
+      "knownProbePassed": true
+    }
+  ],
+  "files": {
+    "analysis/collect_system_trace_v2.ps1.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\collect_system_trace_v2.ps1",
+      "originalBytes": 8130,
+      "originalSha256": "4b0a0525ba20687b9de578116b085e440383a410c024dc22a448867475f97a82",
+      "storedBytes": 2623,
+      "sha256": "54a0c49b08843143a6e99c3a81ae505a7c758f5e4fedf51e692e868027f4453c"
+    },
+    "analysis/collect_system_trace_v3.ps1.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\collect_system_trace_v3.ps1",
+      "originalBytes": 8340,
+      "originalSha256": "1c6b9761b15f4c67faa093c76c5f9d3cc53f9126bb7967e6b4378f2df61ac1b3",
+      "storedBytes": 2682,
+      "sha256": "00051aa5e637c15cebbd17f9a8806ac84e520c3cbf6bedc2d51f527f53c7be90"
+    },
+    "analysis/azure-memory.wprp.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\azure-memory.wprp",
+      "originalBytes": 1062,
+      "originalSha256": "3ee76c58d229a11dbcace40cf34de768f8d568b58ae8ff09619c8d5a00783584",
+      "storedBytes": 403,
+      "sha256": "198ea995ea12918b79eb41b9abd72ae71425786c6b22403d4a9e74e894c13427"
+    },
+    "analysis/azure-memory-events.wprp.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\azure-memory-events.wprp",
+      "originalBytes": 1012,
+      "originalSha256": "565df7af13cb6822c2213fee06919e829625d6f7fb0d13aafd63f4b09cb1b178",
+      "storedBytes": 397,
+      "sha256": "80c63c6ae88cf85f4915f9da3687028cd302817d8e993ffebef519efa0541760"
+    },
+    "analysis/known-allocation-probe.py.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\known-allocation-probe.py",
+      "originalBytes": 1117,
+      "originalSha256": "3cb708fdc8d9f27d5c5e6c5f95cbb75cc51888a06f22dba044473d8df51c4d9a",
+      "storedBytes": 510,
+      "sha256": "cb3805d2115d919183f229373dc275164f092cf9e9a1143cd66940bdd619ac27"
+    },
+    "analysis/validate-known-probe.py.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\validate-known-probe.py",
+      "originalBytes": 2023,
+      "originalSha256": "ea1513ccf329b0a68f49d33f55ea60eb2a00562bcef3e5fc04a5cf13ff289715",
+      "storedBytes": 897,
+      "sha256": "463e1dac3b0dce35451ac56aaf1bd915f47471668287472ede450e9cf3596a8d"
+    },
+    "analysis/control-session.ps1.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\control-session.ps1",
+      "originalBytes": 2423,
+      "originalSha256": "4d6327d5acf19f6744714ec86bb5feb1bd49ad8e8fc72e84e3e447fac6cc7510",
+      "storedBytes": 995,
+      "sha256": "f651a5ff27cd7984f10cf112fa8e799fdc5381b3db3f0a7709d1c29ad4c7da3a"
+    },
+    "analysis/run-coordinated-trace.py.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\run-coordinated-trace.py",
+      "originalBytes": 6225,
+      "originalSha256": "af97e846d1bf7740a77b832632d4b1bbf2c727a1dd89304d13a5223db37c58d7",
+      "storedBytes": 2334,
+      "sha256": "e5efa3c8904c2ddb60fa3f5fd6b0a98120485a13c649bab861bc674f02d02ca1"
+    },
+    "analysis/freeze-historical-source.py.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\freeze-historical-source.py",
+      "originalBytes": 1661,
+      "originalSha256": "aa274619c12e467c15238974d697c7b844a0896f796a57d76e7ea736df01e445",
+      "storedBytes": 806,
+      "sha256": "be91976c54754f397160c353f1e19bf9abf09e1749877b373f3ff4675d0f523c"
+    },
+    "analysis/source-snapshot-association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\source-snapshot-association.json",
+      "originalBytes": 442,
+      "originalSha256": "969d275b16599f4006485043f77608c3f29f8d4977ffee751aeefe27d0f77159",
+      "storedBytes": 305,
+      "sha256": "a7fd87e780782b492552557da850a1417852e616bcc217c2a7f7f0017d97e759"
+    },
+    "analysis/analyze-lifetimes.py.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\analyze-lifetimes.py",
+      "originalBytes": 3061,
+      "originalSha256": "4edcc1d5470a5e300b6b6453adf58c1f21f6aa0de0d62c5e7f70ec3ea4c40ace",
+      "storedBytes": 1390,
+      "sha256": "52ae869bb35511e6f7a04fb972978db4c9b540b82588c3c20d75c0059268fb36"
+    },
+    "analysis/exit-poll-results.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\exit-poll-results.json",
+      "originalBytes": 1824,
+      "originalSha256": "68457e9935da641474979187e06f1d4ee7684df84ed52db1d6cdf0f8eb05f2c8",
+      "storedBytes": 160,
+      "sha256": "df94ce7bb4ca93aec0ee038337173085ad85e32bad14e9166081b9504fb248da"
+    },
+    "analysis/exit-poll-redirect-results.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\exit-poll-redirect-results.json",
+      "originalBytes": 585,
+      "originalSha256": "752042fd8551ccb3ee6e5b93b864f6d96b055745ea482444c6110336be4e9528",
+      "storedBytes": 111,
+      "sha256": "d68f226f089b0b8e4bc0aeae9dced8509e5d0bdf28c3c581625e412832e4f978"
+    },
+    "analysis/player-lifetime-analysis.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\player-lifetime-analysis.json",
+      "originalBytes": 46231,
+      "originalSha256": "c4561f817bc5731d59bbc22d91a65b2a5246e06f2d087047de97c69762536ccf",
+      "storedBytes": 3122,
+      "sha256": "2bfe5ba68f07500c5ae6b26ab690be78ca7b49ced0b022c840b92b9764a923e4"
+    },
+    "analysis/player-commit-lifetimes.csv.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\player-commit-lifetimes.csv",
+      "originalBytes": 4659897,
+      "originalSha256": "e28455fb667ab591c8d4714d5630d2cf5cc6159bcd9c201eb63d9653d3713d72",
+      "storedBytes": 70322,
+      "sha256": "fbe6e36efba53ec5fc82135101f7db98122ce82de4550addede4d53a04c2cfeb"
+    },
+    "analysis/memory-lifetimes.wpaProfile.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\memory-lifetimes.wpaProfile",
+      "originalBytes": 5484,
+      "originalSha256": "dc7e3bb876bc40f2afd80775c51a9a7d42d2454febc8f7cbeed25505539c29c0",
+      "storedBytes": 1573,
+      "sha256": "0af2a3664b27bc0e424437670b021b514e433be13ec57b5f157872e666c15377"
+    },
+    "analysis/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\trace-timespan.txt",
+      "originalBytes": 1346,
+      "originalSha256": "13e418c8966d5a111a6a2eae5d1a5ada09fe259cb57cbdb37a68ed43c2cf566c",
+      "storedBytes": 474,
+      "sha256": "ca721b8797ebf39de2f06b8f0e905347f8fab05e227bcd9a736cdd2ef9f12446"
+    },
+    "analysis/trace-statistics.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\trace-statistics.txt",
+      "originalBytes": 31651,
+      "originalSha256": "77d86b42808575df49381418ae8759643bde5619b0c0e66fba70bbd24cc06080",
+      "storedBytes": 4546,
+      "sha256": "679c6c3d6975fb8e4c5d4eaae13eab96a55cad0a10e71d01b2c78f44dbe6bb85"
+    },
+    "analysis/virtual-allocation-images.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\virtual-allocation-images.txt",
+      "originalBytes": 4626,
+      "originalSha256": "31d78996fd92290d9061f98159b9ae8161bd933d122a83907ac153c462e59a1a",
+      "storedBytes": 785,
+      "sha256": "5356bb36375ee63879261acafdededf9534b109716b2749464c010e4fe1ab4b0"
+    },
+    "analysis/minimal-completion.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\minimal-completion.json",
+      "originalBytes": 196,
+      "originalSha256": "0ff54ac1f4f26d6ff9979ab0e8927b7fd2170eaada276ad12c5cee8938bf52bb",
+      "storedBytes": 157,
+      "sha256": "2f9a808f0b63ddd71002a7c7259d2f07368e80d19f7261dc05287242e949f9b5"
+    },
+    "analysis/stress-retry-completion.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\stress-retry-completion.json",
+      "originalBytes": 196,
+      "originalSha256": "0c8196b212a95f272a4693dd842cd59dc97722dd4c599973715d402fe908b8cf",
+      "storedBytes": 157,
+      "sha256": "df371455938917b05d225a6d4b7c7104abc781bbee2e0c6014a55a2753de63fe"
+    },
+    "system-trace-1791705280371/association.json.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\association.json",
+      "originalBytes": 394,
+      "originalSha256": "a9baf6ac286f098551799943be500b1f257810119d6e263b19cc47f0037415f1",
+      "storedBytes": 283,
+      "sha256": "3bafe8426f7d87c62bcb205679232b761cda4067baf02e0ebc7e51c25a1a8a23"
+    },
+    "system-trace-1791705280371/process.json.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\process.json",
+      "originalBytes": 245,
+      "originalSha256": "1f1c180a6381d53eff35ee738bc22847caecbabd793324139aa48e7b578f275f",
+      "storedBytes": 196,
+      "sha256": "f5b96d6785153eb60d3a24a0ca54eed7ad9a19d8d95b12082e8a92422c4de4ed"
+    },
+    "system-trace-1791705280371/observations.json.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\observations.json",
+      "originalBytes": 68255,
+      "originalSha256": "523d30dbccead74563b391a6c958ec41d6a1a2df4054da8f69cdd8a7dfd66792",
+      "storedBytes": 4938,
+      "sha256": "608da3d704b24f08c7595f67c3d8d14597d1c9b24ba65012d372ff0b9c7fce75"
+    },
+    "system-trace-1791705280371/stdout.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\stdout.log",
+      "originalBytes": 2077,
+      "originalSha256": "cb878c248344ea1b18c759c1000147d7c827f4d6c7188c17990ec2ac983b8e8a",
+      "storedBytes": 1200,
+      "sha256": "beb06dd589b331d9895e3c8ab8125e80b9115442edf2bbf1e80a84e73c919a15"
+    },
+    "system-trace-1791705280371/stderr.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "0795d3592c4eb45451f5e931cec9c05cac80adbb6c20fcf13fa4793c4770c255",
+      "storedBytes": 254,
+      "sha256": "084e2d8e8185468b9ed56e8a6de081f32842913c9d0ca759645bde076f8a6c3c"
+    },
+    "system-trace-1791705280371/wpr-start.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705280371/wpr-start-error.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705280371/wpr-stop.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "system-trace-1791705280371/wpr-stop-error.log.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705280371/failure.json.gz": {
+      "source": "build\\p5-relative-thermal-2026-10-11\\system-trace-1791705280371\\failure.json",
+      "originalBytes": 255,
+      "originalSha256": "2a05ff6a787e754621ecd1da4dce113de4526747c397a05713b45704681131a7",
+      "storedBytes": 201,
+      "sha256": "1a2a615a2d80c7461634b9e5429b6a7266bff059f1ec54a06a5bfd69e151db13"
+    },
+    "system-trace-1791705925470/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\association.json",
+      "originalBytes": 389,
+      "originalSha256": "ee7ff6231ac036063430c3c7eed6647c1aea44e4d9f7e01d7eab5d0e1bec399d",
+      "storedBytes": 279,
+      "sha256": "dca3859b5320235bbf65c986f46af1452c71c2a7718415677b4ede29176891bf"
+    },
+    "system-trace-1791705925470/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\process.json",
+      "originalBytes": 273,
+      "originalSha256": "109737c70bfbef822733e4107c41f9089045a5e70c3ebafa251201b69c098863",
+      "storedBytes": 206,
+      "sha256": "11b4c6ea072cab04a31342846c44d50522cdd995ebfac698d09a4bf3935708e7"
+    },
+    "system-trace-1791705925470/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\observations.json",
+      "originalBytes": 52971,
+      "originalSha256": "5d1e1189444eef81bb679612bd46376bb5781aa7f3fc0d238f58f27d19fa1945",
+      "storedBytes": 5247,
+      "sha256": "a377656d1754fa3846bdfd6dde76db7e8a2b935e6456560609996a2701db3a7c"
+    },
+    "system-trace-1791705925470/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\stdout.log",
+      "originalBytes": 2068,
+      "originalSha256": "20c01fe747f87c11241e289c6b2553595e0be752f952519daad2321990bb36e3",
+      "storedBytes": 1201,
+      "sha256": "e7112ae3d6aa8507e246dc0ad0c4fa57a8ec4954c4bd23746b2e32d40a4dc9a5"
+    },
+    "system-trace-1791705925470/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "9a8a3be409ea5a57f833910524a314ec93b14d2f68b08c681d496ef2b0b55d3d",
+      "storedBytes": 252,
+      "sha256": "5446d323a74c35e5cfc2f19fdfb2bb6246e7527652b9d1b4a0335eb174bf8786"
+    },
+    "system-trace-1791705925470/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705925470/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705925470/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "system-trace-1791705925470/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791705925470/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791705925470\\trace-timespan.txt",
+      "originalBytes": 1342,
+      "originalSha256": "8bff3069ffa75302f1b705854fe3aad8e842353e8b3f0c57fb684fd845b78ff1",
+      "storedBytes": 463,
+      "sha256": "a66f01c4cdf36f57edc6a18b4f9aff16b932f00b29c8fc884d230870ed8a8f22"
+    },
+    "system-trace-1791706172726/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\association.json",
+      "originalBytes": 394,
+      "originalSha256": "a9baf6ac286f098551799943be500b1f257810119d6e263b19cc47f0037415f1",
+      "storedBytes": 283,
+      "sha256": "3bafe8426f7d87c62bcb205679232b761cda4067baf02e0ebc7e51c25a1a8a23"
+    },
+    "system-trace-1791706172726/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\process.json",
+      "originalBytes": 273,
+      "originalSha256": "99098058a5470c8716902869c8e4f88e287cc176db21d099b6af182db6035eb0",
+      "storedBytes": 205,
+      "sha256": "379df98ebec1840f1a01216070268ae1247d1696ccb4f9fee4745b29c5079ec7"
+    },
+    "system-trace-1791706172726/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\observations.json",
+      "originalBytes": 61818,
+      "originalSha256": "01eb9e76a141155a3a2799c59f283ae3eeaac9f9ae3ba7a8f4544309e9325498",
+      "storedBytes": 4456,
+      "sha256": "006727b637c584d64dff1992ab72fcbec18f8b4b2102e61938277113fdbc0769"
+    },
+    "system-trace-1791706172726/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\stdout.log",
+      "originalBytes": 2073,
+      "originalSha256": "2becdfc31272a1912c77ae5bd85811b8a176deb073406743c5bbb3ac8dc53a78",
+      "storedBytes": 1200,
+      "sha256": "ffe117fc2bc1e86a5e611dabe909a3875d7ee65cb4a9801307b1b5b88d1098f7"
+    },
+    "system-trace-1791706172726/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "08ba1903b508d3e7b398944631928e38afee4ab16ada9355f2e4b9c103faddc7",
+      "storedBytes": 254,
+      "sha256": "ef9f80d51bbc5a36725858181b3ef29f8fb07bc8110de968344924026ca0a1d3"
+    },
+    "system-trace-1791706172726/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706172726/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706172726/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "system-trace-1791706172726/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706172726/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "c11c785f581035e0099b417066f46d0d385a2848cc8867c8b4d353a6c1fcecc2",
+      "storedBytes": 553,
+      "sha256": "99c10074ff3841ffb6960a3c0d6d36652a7a7e7cccf324b7edbb922780c549a9"
+    },
+    "system-trace-1791706172726/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706172726\\trace-timespan.txt",
+      "originalBytes": 1342,
+      "originalSha256": "1ecf8d51a193ec6c58357ca3f03d20dae5101571fb2ac372708e36be1b54ecce",
+      "storedBytes": 463,
+      "sha256": "09cd6b8e26feda97241e6659e02593820374bd34122b9aac64983cf8615966a1"
+    },
+    "system-trace-1791706203316/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\association.json",
+      "originalBytes": 394,
+      "originalSha256": "4f064e155ecec5fbc5c2756f3d8952a2fc4a68420aabfb035570ce6462c5ee72",
+      "storedBytes": 283,
+      "sha256": "b868f385aba0522278d4ff2c9b96e9b78d7c0e4876bd7946bd19f8281622f81e"
+    },
+    "system-trace-1791706203316/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\process.json",
+      "originalBytes": 273,
+      "originalSha256": "3c20e67808f163fe27d9bb1c47f44d50234273ca29a18fec7226ec53305f695e",
+      "storedBytes": 206,
+      "sha256": "3000ba02b2702918d576d2a05e1aae1db039682b3ea20006e1ccd03b2acd4b32"
+    },
+    "system-trace-1791706203316/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\observations.json",
+      "originalBytes": 64352,
+      "originalSha256": "358e14f22e70e597af3365f4866eca62b4165fe2f1e344ac91526dbbaa7bfc32",
+      "storedBytes": 4500,
+      "sha256": "440537fdcb9c746a49b98c5cd03d2872065cd8aa7150eda7d55931235692e3d9"
+    },
+    "system-trace-1791706203316/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\stdout.log",
+      "originalBytes": 2073,
+      "originalSha256": "c3526d1ca4f678fe0cc3f6909c6d2ec822b4c7e5a4f7cd3785812e2543bfaf68",
+      "storedBytes": 1199,
+      "sha256": "e5455d2002d8a1ec3c18a4051c22e2699369a62943fb78deed9a0a0f0efd408c"
+    },
+    "system-trace-1791706203316/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "686b8122f1dedda606a4d6106dd55c1d95fbf5f19f1d012b65c7e1c8e03e4a80",
+      "storedBytes": 253,
+      "sha256": "5f9da880fb0650b7345b82404e7fbda8ea1895b18887de1773675d2c94a47d94"
+    },
+    "system-trace-1791706203316/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706203316/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706203316/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "system-trace-1791706203316/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706203316/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "5a648b2f994b327c2f2d6b459000f9c509565b01ea8d77a5c54abc3fda62e7ce",
+      "storedBytes": 555,
+      "sha256": "8ec07cedd77a732752f859484c461187a03c5d51c2d1fafe0a822eee3b587e98"
+    },
+    "system-trace-1791706203316/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706203316\\trace-timespan.txt",
+      "originalBytes": 1342,
+      "originalSha256": "4a781d79859870498dff7a2b6866cd217c4e25d4d2f17523daf876eadaa70768",
+      "storedBytes": 462,
+      "sha256": "b764811386033093bcc51dc3e32505a21eff9dc1042ac2bd2fe71efb2afb59a6"
+    },
+    "system-trace-1791706234681/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\association.json",
+      "originalBytes": 394,
+      "originalSha256": "7a4d31b1b29b9bc167518336f5dd19ec72c9c13548834f10e26904072e934dbc",
+      "storedBytes": 283,
+      "sha256": "125c2e65fe7ab6002749a98271566c2ecd81e519e335cef3561c2ce6d5d119bc"
+    },
+    "system-trace-1791706234681/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\process.json",
+      "originalBytes": 273,
+      "originalSha256": "d0d90e839bb089b186ac6d4eb09494c4cc14ce6e34ef494ba4127208ec8cd11d",
+      "storedBytes": 206,
+      "sha256": "a3269e5a8782c800dd13966fe353725e782b7515b8ea0cd0617f7917934c30f4"
+    },
+    "system-trace-1791706234681/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\observations.json",
+      "originalBytes": 66937,
+      "originalSha256": "923b668f40ca39a8514690ebea32a07b4879e47acd7e9a9d19dd055226c6acc7",
+      "storedBytes": 4487,
+      "sha256": "7e53ffbd2acb3304696932e07d1f1bfa01de0f99f5de1fd35fdbe12192cc6d32"
+    },
+    "system-trace-1791706234681/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\stdout.log",
+      "originalBytes": 2073,
+      "originalSha256": "3658569957f8f354da2720164d82a85ff5cb4e4e2c4bc3f7730666065395e08c",
+      "storedBytes": 1202,
+      "sha256": "a856c29c7141fc673fac43a69d5bc631abe1b9ef1d08a27e0f71ecfbdd7e73de"
+    },
+    "system-trace-1791706234681/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "cd0ac86c3cf51d15bcadc481c2e9f96aa8f06997e66b96d80a3cc0e623719dcc",
+      "storedBytes": 253,
+      "sha256": "f9e17bc6abc7524f73df14cee0e849cc3924b2253586a84ed8ce529a9e5edcf2"
+    },
+    "system-trace-1791706234681/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706234681/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706234681/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "system-trace-1791706234681/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "system-trace-1791706234681/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "b2a7f6e278642f4987cae3984ea0ca5605c91d25d721e805d8af907a0478d695",
+      "storedBytes": 552,
+      "sha256": "a1964caa624a52925624bb6dad3afed0d62f0b3f85fc5e3a2f121c521ada2e92"
+    },
+    "system-trace-1791706234681/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\system-trace-1791706234681\\trace-timespan.txt",
+      "originalBytes": 1342,
+      "originalSha256": "f7134bb3a8002e9dcb9fad17eec4217fefc7c16965a88573a83afa3304b7d874",
+      "storedBytes": 464,
+      "sha256": "5c7c01a39d7f8ce599a5d08aa645bfe56d4c6b7fd11f2947178c85d891239994"
+    },
+    "coordinated-editor-1-1791707218965051700/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\association.json",
+      "originalBytes": 1380,
+      "originalSha256": "2263ce5f0a4379170ac368760c98dae4dfb7cd19044ba7e2a8dcea0d9cf8d387",
+      "storedBytes": 540,
+      "sha256": "594bf05d3828afa04285e43f931f46374cadf0c5aad763d6083643b217b03b43"
+    },
+    "coordinated-editor-1-1791707218965051700/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\process.json",
+      "originalBytes": 37318,
+      "originalSha256": "b0ef9d03dc62b85a874beee6ed59601f6ba22e94ffe202ff7e088c26a27c982a",
+      "storedBytes": 3277,
+      "sha256": "8819013b39e6ba3ae3a79e6f8914a5316d7ee8fb8ee1d9f984e2b7eadf251dd9"
+    },
+    "coordinated-editor-1-1791707218965051700/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\observations.json",
+      "originalBytes": 46158,
+      "originalSha256": "473b828ed93854dc66576109bd7507d9b739fecf2cde16c1fd39d7702816f52c",
+      "storedBytes": 3366,
+      "sha256": "a44febca300a4ac497f336164cd129bf057c30be3e8b9fb1fdaa0b983e7e3daa"
+    },
+    "coordinated-editor-1-1791707218965051700/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\stdout.log",
+      "originalBytes": 2818,
+      "originalSha256": "9883c057652cf7470c67ebad0b56d52e61e8c65fcb4c60a194693dc28f14756d",
+      "storedBytes": 1235,
+      "sha256": "ee4d7f3965e3c9c279167df033d4b1362112de69fe9009a120a68560d100c0cc"
+    },
+    "coordinated-editor-1-1791707218965051700/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\stderr.log",
+      "originalBytes": 1015,
+      "originalSha256": "97f62a5fe72eba72dfa2ab1ff39ab7016d182b0b4f6646f463a0a8b3e1ac933d",
+      "storedBytes": 363,
+      "sha256": "699444e294bf8dbe2d14d791af77c73c6a59edfafa0c5233764c28db2a8aec44"
+    },
+    "coordinated-editor-1-1791707218965051700/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-1-1791707218965051700/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-1-1791707218965051700/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "coordinated-editor-1-1791707218965051700/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-1-1791707218965051700/ready.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\ready.json",
+      "originalBytes": 149,
+      "originalSha256": "ab18cc49c8b35add06ece27a19b949f67c59c4c7ae378c9305877534e907d120",
+      "storedBytes": 139,
+      "sha256": "bd6cd5f39dbe1aaed54be40b6805e1d2e9df63d84f8f72724d81b84d00538c13"
+    },
+    "coordinated-editor-1-1791707218965051700/control-completion.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\control-completion.json",
+      "originalBytes": 139,
+      "originalSha256": "3af36fd243334d2e15a241672773f61098376e97384e620091729977567caf5c",
+      "storedBytes": 128,
+      "sha256": "f7b06fe6b633279a0322cfc08a26fe88313d81b05c15f2a8f2799aa28702f4ab"
+    },
+    "coordinated-editor-1-1791707218965051700/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "dedc4d8084b7330efe0e7d003b8115cc7f4bfb67935eef2faa35b1b0acad8d66",
+      "storedBytes": 557,
+      "sha256": "2bec250059e06a1ab1a24373ca47eabb16f1e65b9a8e2fb6752ac41c759dab7a"
+    },
+    "coordinated-editor-1-1791707218965051700/known-probe-analysis.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\known-probe-analysis.json",
+      "originalBytes": 16555,
+      "originalSha256": "ce96bfaf03874a8a16a8209dc44775b4258a733fe40f87a14860ce23c9db73a5",
+      "storedBytes": 1183,
+      "sha256": "7828b4710e56fef686bc4cfdf26977b4a92110468682c36a7c4ae8a2160fc176"
+    },
+    "coordinated-editor-1-1791707218965051700/resident-snapshots.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\resident-snapshots.json",
+      "originalBytes": 647974,
+      "originalSha256": "d9b2ec267fe4235e790570b0b0dc4e7304963bc56c8770a4b0bf28d11b8c2197",
+      "storedBytes": 56527,
+      "sha256": "41d48ddb9f76fde515a4049483e721503e019367d7e78af794617c4bd0fbd46e"
+    },
+    "coordinated-editor-1-1791707218965051700/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-1-1791707218965051700\\trace-timespan.txt",
+      "originalBytes": 1356,
+      "originalSha256": "fb3ecdd8bce4881c06ed09e633741433f0c85988d4389d96f202070035df91ff",
+      "storedBytes": 480,
+      "sha256": "c47ec98f164cc1b1fed53e9dec9f0ded696742b5c0bf595a36e4e6a333312046"
+    },
+    "coordinated-editor-2-1791707288227552500/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\association.json",
+      "originalBytes": 1380,
+      "originalSha256": "305f4c471e2640d8ef61a474ceb9fe6331bc243f00bd56bd6ae1fc7ced64d377",
+      "storedBytes": 541,
+      "sha256": "2a0e11df160188ca49cf8ef351ea3b23a536503d4a31de378d0eab6c9236aa1c"
+    },
+    "coordinated-editor-2-1791707288227552500/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\process.json",
+      "originalBytes": 1569,
+      "originalSha256": "ca61de2c221560e3146b62d4c4d4f380787379f7c6b4be734425e650a6aad677",
+      "storedBytes": 543,
+      "sha256": "6edffcf8eba37617d9d14a802ff3225c1251b32eccdc6bb027cd65bc05ed540b"
+    },
+    "coordinated-editor-2-1791707288227552500/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\observations.json",
+      "originalBytes": 35667,
+      "originalSha256": "fa73f7c12ab59350880f11d5dc15acfc3de2e7b47372ec2d4211374d60009fb8",
+      "storedBytes": 2360,
+      "sha256": "a1e501a77632c02756c3ae8e4cf359df7c4d3c889f8bb260142674c2e29dc626"
+    },
+    "coordinated-editor-2-1791707288227552500/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\stdout.log",
+      "originalBytes": 2818,
+      "originalSha256": "0295a1327e80d7e22921188534849204b5efb146f07c8b2bf8e3560a4befe328",
+      "storedBytes": 1235,
+      "sha256": "1d7c027ff0c48a571b8d5f6e138a2c52076269c97daad03a9f182203c98e03ac"
+    },
+    "coordinated-editor-2-1791707288227552500/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\stderr.log",
+      "originalBytes": 1015,
+      "originalSha256": "e42879a8edf05d891d627d965badd7b00ec8b3e170cc6246e2f6c2467e7b23c2",
+      "storedBytes": 363,
+      "sha256": "30e12eed7006d2ee5df1ee381bd9c1b21249c529edd2915acc2d67e282bb04ef"
+    },
+    "coordinated-editor-2-1791707288227552500/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-2-1791707288227552500/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-2-1791707288227552500/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "coordinated-editor-2-1791707288227552500/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-editor-2-1791707288227552500/ready.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\ready.json",
+      "originalBytes": 149,
+      "originalSha256": "c96547649bb3dbe3b19e04ff7e803bf29ea1080670d6645bda7464b1b749e16a",
+      "storedBytes": 139,
+      "sha256": "90cbc12709d30f587a961785b898587862afb1d81ea72b5c64c0abfe9dcec764"
+    },
+    "coordinated-editor-2-1791707288227552500/control-completion.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\control-completion.json",
+      "originalBytes": 139,
+      "originalSha256": "ef905d4306f661b257f3512575423bc1fedfabcbe1ff20ec91999028b8bf5364",
+      "storedBytes": 128,
+      "sha256": "36219acd6f494bc2836fe0caa0177c26ae66ca4d01971f3da59e4d9e2831a9b7"
+    },
+    "coordinated-editor-2-1791707288227552500/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "465f9c6ce7b418188902271f2b2f41cf2c55c8ae3c9094f50e0d6c8fc2256352",
+      "storedBytes": 554,
+      "sha256": "6dba6a9b7bcf1fb427ffdacca7304f463cc5bce1b3349450ed7672c7814ab5f2"
+    },
+    "coordinated-editor-2-1791707288227552500/known-probe-analysis.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\known-probe-analysis.json",
+      "originalBytes": 15802,
+      "originalSha256": "753c043c48652949607fa3ffed0b7acd8273b8fbed594da93aeeb59c78cee50a",
+      "storedBytes": 1144,
+      "sha256": "51fcc77cc1fac8edc512ae01d7fb560a2da92f6dd33fac9acdb5d40513470b33"
+    },
+    "coordinated-editor-2-1791707288227552500/resident-snapshots.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\resident-snapshots.json",
+      "originalBytes": 482600,
+      "originalSha256": "ffe54b9648c6ffa2f67617e54994031534b0f3e8dce0e9a78724e8ba9be170e6",
+      "storedBytes": 41790,
+      "sha256": "33682573e9f63ecbda934671c6d2f4c451c1e6c57f371d17352c81e142405198"
+    },
+    "coordinated-editor-2-1791707288227552500/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-editor-2-1791707288227552500\\trace-timespan.txt",
+      "originalBytes": 1356,
+      "originalSha256": "8bcc80d1aced62cc75e84537fafa4f6dc14d2b96c940f59e1650fcafad2f0c0e",
+      "storedBytes": 480,
+      "sha256": "c9aed9494cb1a34af81422f9df08070862fc1a10e0b5dba83540fe6a8237981e"
+    },
+    "coordinated-exploration-1-1791707026464014800/association.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\association.json",
+      "originalBytes": 1098,
+      "originalSha256": "93afd48d754eb24cb2d220e4afa0ffa4f089a897951b50e5f473460ba0c42baf",
+      "storedBytes": 463,
+      "sha256": "18418ee708ca75047eafa5af713c5736f55ff08e01baeac262a7d2bd852410b7"
+    },
+    "coordinated-exploration-1-1791707026464014800/process.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\process.json",
+      "originalBytes": 1680,
+      "originalSha256": "e0366662b432a7d686316d8e45e369f50a8032f7f1e650ef04597d0ca46089cb",
+      "storedBytes": 616,
+      "sha256": "d3866c16a607f9b134ce60da1bd88f04f0734939f3c185043a34c51426771527"
+    },
+    "coordinated-exploration-1-1791707026464014800/observations.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\observations.json",
+      "originalBytes": 97514,
+      "originalSha256": "6cf6be4cba578ead58e9cba5fcb4a5f77e5b51332923f5b8fc9327399a169f5f",
+      "storedBytes": 4545,
+      "sha256": "43b48c992968a51888484cea3d71399344705b82f4446e66a06792d7e8cc7f50"
+    },
+    "coordinated-exploration-1-1791707026464014800/stdout.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\stdout.log",
+      "originalBytes": 2092,
+      "originalSha256": "a295ce92b4d34fb2bda100ad27c13940dbb665f4f6d3c69d2403293955d3c220",
+      "storedBytes": 1216,
+      "sha256": "942f785b57d3cb3ca16af7f821917d964e3072942c4892683c2f90ab7726ef12"
+    },
+    "coordinated-exploration-1-1791707026464014800/stderr.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "ebde6fb3841262613fec3a68a95ce677bfb2ab3bbc08372093ac6682d1bc58e9",
+      "storedBytes": 253,
+      "sha256": "18c25f2a5deb2e34539d037fe92a62ec7094ee3349cfdc6c4b0dcca242fda78c"
+    },
+    "coordinated-exploration-1-1791707026464014800/wpr-start.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\wpr-start.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-exploration-1-1791707026464014800/wpr-start-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\wpr-start-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-exploration-1-1791707026464014800/wpr-stop.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\wpr-stop.log",
+      "originalBytes": 79,
+      "originalSha256": "56f7594e4d60953c950db6c9a06253129b7d11f145d55c129ff61fe31f466486",
+      "storedBytes": 94,
+      "sha256": "63040faf7b6726cd7397675680f94af71bdd85db8cd6463349a3b397b431f5cc"
+    },
+    "coordinated-exploration-1-1791707026464014800/wpr-stop-error.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\wpr-stop-error.log",
+      "originalBytes": 0,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storedBytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    "coordinated-exploration-1-1791707026464014800/ready.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\ready.json",
+      "originalBytes": 149,
+      "originalSha256": "825b34a17308d06bb01c379f74e291516960ecf226edecd1e43762d7ed8ef006",
+      "storedBytes": 139,
+      "sha256": "d4b8e69e339db6f4c294c7d222a8ce0e9f93c7624a339f1d9ba68b0772f1a492"
+    },
+    "coordinated-exploration-1-1791707026464014800/control-completion.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\control-completion.json",
+      "originalBytes": 139,
+      "originalSha256": "b6ad69250f733c48becc62d70a3f2c1442393030b2d892737c49926ce25bee38",
+      "storedBytes": 128,
+      "sha256": "487a15d41292b534ff683d01bf5cb19958fc1b15de327e701031607e82d34187"
+    },
+    "coordinated-exploration-1-1791707026464014800/known-probe.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\known-probe.json",
+      "originalBytes": 9362,
+      "originalSha256": "b07e3c8fcd9bd8391ec7a13d1d40217e467b55159a42691f39dae74cf2581332",
+      "storedBytes": 555,
+      "sha256": "be8ec54ff6694c3f2b42ea2d7a83e0c5895524b99b4bb20d2cbfb8870a551ea0"
+    },
+    "coordinated-exploration-1-1791707026464014800/known-probe-analysis.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\known-probe-analysis.json",
+      "originalBytes": 15802,
+      "originalSha256": "fc430dbfd3d80c44255e18596cabd16fd10900bdd85fb36660997b0f9b4d3d5e",
+      "storedBytes": 1141,
+      "sha256": "287594dc9cded058a4570f67e81a1d94254a62a89168b2899b7f072d23df42e1"
+    },
+    "coordinated-exploration-1-1791707026464014800/resident-snapshots.json.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\resident-snapshots.json",
+      "originalBytes": 1371223,
+      "originalSha256": "72055c984c0c5f3f0be65efc9cc9016177d0b0dc973b5ad3f875f5120589c0f8",
+      "storedBytes": 119066,
+      "sha256": "fc75b4e3c49f240f50d337f341fdf4625320e3bcbb31bcf97814fe374f59785f"
+    },
+    "coordinated-exploration-1-1791707026464014800/trace-timespan.txt.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\coordinated-exploration-1-1791707026464014800\\trace-timespan.txt",
+      "originalBytes": 1361,
+      "originalSha256": "15d614bb99ff57d0af3cbd39a1d061b7e52d1a33c4d6aed916e613d982ab7ca1",
+      "storedBytes": 486,
+      "sha256": "425d2735744279b626955f5edee21a45491b4519f9b8d289d2a058a590bb78af"
+    }
+  }
+}

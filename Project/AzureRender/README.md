@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+系统追踪已核验采集与已知调用覆盖。
+完整内存归因仍待验收。
+结果见[系统追踪验收](docs/acceptance/p5/closure/system-trace-results.md)。
+
 脚本服务使用统一绑定描述与对象身份守卫。
 Lua 为默认后端，CoreCLR 与 NativeAOT 为可选原型。
 范围与部署见[脚本服务](docs/runtime/script-services.md)。
