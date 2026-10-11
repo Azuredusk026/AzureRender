@@ -12,7 +12,19 @@
       "id": "P5-causality",
       "originPhase": "P5-B",
       "summary": "完整工作集因果、覆盖限制及热降频调查",
-      "status": "DeferredToP8"
+      "status": "DeferredToP8",
+      "observations": [
+        {
+          "test": "AzureEngine.ResourceFrameTrace",
+          "configuration": "Debug",
+          "privateBytesBefore": 757760,
+          "privateBytesAfter": 2912256,
+          "allowedGrowthBytes": 2097152,
+          "isolatedRepetitionsPassed": 5,
+          "status": "IntermittentFailureRecorded",
+          "evidence": "docs/acceptance/g18/evidence/2026-10-12/debug-final-cpu.log.gz"
+        }
+      ]
     },
     {
       "id": "P5-performance",

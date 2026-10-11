@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
+list(PREPEND VCPKG_OVERLAY_PORTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-overlays")
+
 project(
     AzureRender
     VERSION 0.1.0
@@ -67,6 +69,7 @@ if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja")
     unset(_azr_prefix_pos)
 endif()
 
+find_package(assimp 6.0.4 EXACT CONFIG REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
@@ -282,6 +285,7 @@ add_library(AzureFoundation STATIC
     src/resources/ResourceLocator.cpp
 )
 add_library(AzurePlatform STATIC
+    src/platform/NativeArguments.cpp
     src/platform/GlfwFrontend.cpp
     src/platform/ProcessRunner.cpp
     src/platform/PathSelection.cpp
@@ -302,6 +306,7 @@ add_library(AzureRenderCore STATIC
     src/assets/GltfLoader.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
+    src/assets/model/ModelFormatAdapter.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/ResourceAccessProfile.cpp
     src/render/VisibilityPrototype.cpp
@@ -503,6 +508,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
+target_link_libraries(AzureRenderCore PRIVATE assimp::assimp)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -1595,7 +1601,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
+foreach(_pkg assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -1913,4 +1919,10 @@ if(BUILD_TESTING)
     add_executable(AzureAssetFormatRegistryTests tests/AssetFormatRegistryTests.cpp)
     target_link_libraries(AzureAssetFormatRegistryTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.FormatRegistry COMMAND AzureAssetFormatRegistryTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf")
+endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureModelFormatAdapterTests tests/ModelFormatAdapterTests.cpp)
+    target_link_libraries(AzureModelFormatAdapterTests PRIVATE AzureRuntime assimp::assimp)
+    add_test(NAME AzureAssets.ModelFormats COMMAND AzureModelFormatAdapterTests)
 endif()

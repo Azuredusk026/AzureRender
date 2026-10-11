@@ -7,7 +7,7 @@ namespace {
 void assignLegacyResourceKey(Level& level,const AssetDatabase& assets){
     if(!level.resourceKey.empty())return;
     for(const auto& resource:level.scene.resources){
-        level.resourceKey+=resource.path.lexically_normal().generic_string()+":";
+        level.resourceKey+=resource.path.lexically_normal().generic_u8string()+":";
         for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
     }
 }
@@ -40,7 +40,7 @@ void LevelSession::startWork(const std::string& reference,bool refresh){
         assignLegacyResourceKey(level,database);
         if(level.resourceKey==activeKey)level.preparedMeshes=meshes;
         for(const auto& resource:level.scene.resources){
-            if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_string())){check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_string(),std::make_shared<const LoadedAsset>(loadGltfAsset(resource.path.string())));}
+            if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_u8string())){check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_u8string(),std::make_shared<const LoadedAsset>(loadGltfAsset(resource.path.u8string())));}
         }
         check();return Candidate{std::move(database),std::move(level),reference,generation,refresh};
     });

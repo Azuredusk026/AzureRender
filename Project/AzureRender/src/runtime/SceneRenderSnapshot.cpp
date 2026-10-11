@@ -10,7 +10,7 @@ scene::SceneDescription SceneDocument::renderDescription() const {
     for (const azurerender::SceneResource& resource :
          this->resources) {
         result.resources.push_back(
-            {resource.id, resource.path.string()});
+            {resource.id, resource.path.u8string()});
     }
     result.nodes.reserve(this->nodes.size());
     for (const azurerender::SceneNode& node : this->nodes) {

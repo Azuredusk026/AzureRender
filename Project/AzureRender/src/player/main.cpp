@@ -6,6 +6,7 @@
 
 #include "app/AzureRenderApp.hpp"
 #include "app/CommandLine.hpp"
+#include "platform/NativeArguments.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "runtime/Project.hpp"
@@ -17,21 +18,23 @@
 #include "runtime/GameRuntime.hpp"
 int main(int argc, char** argv) {
     try {
+        const auto native=azurerender::nativeArguments(argc,argv);
+        argc=static_cast<int>(native.size());
         std::string projectPath, createPath;
         bool check = false, gameTemplate = false;
         std::vector<std::string> args;
         std::string runtimeReport;
         for (int i = 1; i < argc; ++i) {
-            std::string arg = argv[i];
+            std::string arg = native[i];
             if (arg == "--project" || arg == "--create-project" || arg == "--create-game") {
                 if (arg == "--create-game") gameTemplate = true;
                 if (++i == argc) throw std::runtime_error("Missing value for " + arg);
                 auto& path = arg == "--project" ? projectPath : createPath;
                 if (!path.empty()) throw std::runtime_error("Duplicate option: " + arg);
-                path = argv[i];
+                path = native[i];
             } else if (arg == "--runtime-report") {
                 if (++i >= argc || !runtimeReport.empty()) throw std::runtime_error("Expected one runtime report path");
-                runtimeReport = argv[i];
+                runtimeReport = native[i];
             } else if (arg == "--check-project") {
                 check = true;
             } else
@@ -40,8 +43,8 @@ int main(int argc, char** argv) {
         if (!createPath.empty()) {
             if (!projectPath.empty() || check || !args.empty() || !runtimeReport.empty())
                 throw std::runtime_error("--create-project is a standalone command");
-            (gameTemplate ? azurerender::Project::createGame : azurerender::Project::create)(createPath,
-                                         std::filesystem::path(createPath).filename().string());
+            (gameTemplate ? azurerender::Project::createGame : azurerender::Project::create)(std::filesystem::u8path(createPath),
+                                         std::filesystem::u8path(createPath).filename().u8string());
             std::cout << "Project created: " << createPath << '\n';
             return EXIT_SUCCESS;
         }
@@ -49,12 +52,12 @@ int main(int argc, char** argv) {
         initial.projectFile = projectPath;
         initial.runtimeReportPath = runtimeReport;
         if (!projectPath.empty()) {
-            const auto project = azurerender::Project::load(projectPath);
+            const auto project = azurerender::Project::load(std::filesystem::u8path(projectPath));
             auto scene = project.loadStartupScene();
             initial.renderSettings = scene.renderSettings;
             initial.sceneDocument = std::move(scene);
             if (!initial.sceneDocument->resources.empty())
-                initial.assetPath = initial.sceneDocument->resources.front().path.string();
+                initial.assetPath = initial.sceneDocument->resources.front().path.u8string();
             std::cout << "Project loaded: " << project.name << " (" << project.id << ")\n";
         }
         auto cli = azurerender::parseCommandLine(args, std::move(initial));
@@ -80,7 +83,7 @@ int main(int argc, char** argv) {
         }
         if (check) {
             if (projectPath.empty()) throw std::runtime_error("--check-project requires --project");
-            const auto project=azurerender::Project::load(projectPath);
+            const auto project=azurerender::Project::load(std::filesystem::u8path(projectPath));
             azurerender::AssetDatabase assets(project); assets.refresh();
             for (const auto& item : assets.records()) {
                 const auto& path = item.second.path;
@@ -94,18 +97,18 @@ int main(int argc, char** argv) {
             return EXIT_SUCCESS;
         }
         if (cli.checkResources) {
-            const azurerender::ResourceLocator locator(cli.options.resourceRoot);
+            const azurerender::ResourceLocator locator(std::filesystem::u8path(cli.options.resourceRoot));
             std::cout << locator.shaderDirectory() << '\n'
                       << locator.publicAsset("test_model.gltf") << '\n';
             return EXIT_SUCCESS;
         }
         if (!cli.scenePath.empty()) {
-            auto scene = azurerender::SceneDocument::load(cli.scenePath);
+            auto scene = azurerender::SceneDocument::load(std::filesystem::u8path(cli.scenePath));
             auto sceneOptions = cli.options;
             sceneOptions.renderSettings = scene.renderSettings;
             cli = azurerender::parseCommandLine(args, std::move(sceneOptions));
             if (!scene.resources.empty())
-                cli.options.assetPath = scene.resources.front().path.string();
+                cli.options.assetPath = scene.resources.front().path.u8string();
             cli.options.sceneDocument = std::move(scene);
         }
         if (projectPath.empty() && cli.scenePath.empty())

@@ -15,7 +15,7 @@ struct AssetFormatDescriptor {
     AssetDomain domain=AssetDomain::Model;
     std::vector<std::string> extensions, features;
     unsigned settingsVersion=1, generatorVersion=1;
-    bool canRead=false, canWrite=false;
+    bool canRead=false, canWrite=false, transformsSource=false;
     std::function<bool(const std::vector<unsigned char>&)> probe;
     std::function<AssetTransferReport(const AssetTransferRequest&,const AssetCancellation&)> prepare;
 };

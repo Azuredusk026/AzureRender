@@ -133,7 +133,7 @@ EditRegistry editorOperations(EditorSession& session) {
             const auto& f=pair.second;
             const auto domain=f.domain==AssetDomain::Model?"model":f.domain==AssetDomain::Image?"image":"audio";
             result.push_back({{"id",f.id},{"label",f.label},{"domain",domain},{"extensions",f.extensions},
-                {"read",f.canRead},{"write",f.canWrite},{"features",f.features},{"settingsVersion",f.settingsVersion},{"generatorVersion",f.generatorVersion}});
+                {"read",f.canRead},{"write",f.canWrite},{"transformsSource",f.transformsSource},{"features",f.features},{"settingsVersion",f.settingsVersion},{"generatorVersion",f.generatorVersion}});
         }
         return result;
     });

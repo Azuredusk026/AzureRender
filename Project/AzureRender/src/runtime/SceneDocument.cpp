@@ -104,7 +104,7 @@ SceneDocument SceneDocument::fromAsset(
         throw std::invalid_argument("Scene asset path must not be empty");
     }
     SceneDocument document;
-    document.sceneId = assetPath.stem().string();
+    document.sceneId = assetPath.stem().u8string();
     document.resources.push_back({"asset-0", "gltf", assetPath});
     SceneNode root;
     root.id = "root";

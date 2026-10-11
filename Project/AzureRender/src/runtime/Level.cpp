@@ -63,7 +63,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
         level.scene.lights.push_back(std::move(light));
     }
     for(const auto& resource:level.scene.resources){
-        level.resourceKey+=resource.path.generic_string()+":";
+        level.resourceKey+=resource.path.generic_u8string()+":";
         for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
     }
     resolveSceneMaterials(level.scene,assets);

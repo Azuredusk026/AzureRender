@@ -21,7 +21,8 @@ int main(int argc,char** argv) {
     int status=0;
     try {
         const auto& builtins=assetFormatRegistry();
-        require(builtins.list(AssetDomain::Model).size()==2,"Only verified built-in model formats are advertised");
+        for(const std::string id:{"gltf","glb","obj","stl","ply","dae","fbx"})
+            require(builtins.require(id).canRead&&builtins.require(id).settingsVersion==1,"Verified model readers must remain discoverable with supported settings");
         AssetFormatRegistry formats;
         auto descriptor=builtins.require("gltf");formats.add(descriptor);
         rejects([&]{formats.add(descriptor);},"Duplicate identity must be rejected");

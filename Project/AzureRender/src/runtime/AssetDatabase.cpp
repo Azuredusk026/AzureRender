@@ -254,7 +254,16 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         if(meta.contains("importGeneration")) {
             record.importGeneration=GenerationManifest::fromJson(meta.at("importGeneration"));
             const auto& imported=*record.importGeneration;
-            if(imported.inputHashes!=imported.outputHashes||imported.outputHashes.empty())throw std::runtime_error("Import provenance requires immutable copied inputs");
+            if(imported.inputHashes.empty()||imported.outputHashes.empty())throw std::runtime_error("Import provenance requires source and output fingerprints");
+            if(imported.inputHashes!=imported.outputHashes) {
+                bool supported=false;
+                for(const auto& pair:assetFormatRegistry().formats()) {
+                    const auto& format=pair.second;
+                    if(format.transformsSource&&format.canRead&&imported.generatorId=="azure."+format.id+"-import"&&imported.generatorVersion==format.generatorVersion)
+                        supported=true;
+                }
+                if(!supported)throw std::runtime_error("Unsupported asset conversion provenance");
+            }
             const auto base=std::filesystem::weakly_canonical(record.path.parent_path());
             for(const auto& output:imported.outputHashes) {
                 if(output.first.find(":/")!=std::string::npos) {

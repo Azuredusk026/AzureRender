@@ -61,7 +61,7 @@ struct ResourceLayout {
     std::unordered_map<std::string,std::size_t> identities;
     explicit ResourceLayout(const SceneDescription& scene) {
         for(const auto& resource:scene.resources){
-            const auto path=std::filesystem::path(resource.path).lexically_normal().generic_string();
+            const auto path=std::filesystem::u8path(resource.path).lexically_normal().generic_u8string();
             auto key=path;
             for(const auto& [slot,binding]:resource.materials)key+="|"+std::to_string(slot.size())+":"+slot+":"+binding.path+":"+binding.fingerprint;
             auto found=std::find(keys.begin(),keys.end(),key);

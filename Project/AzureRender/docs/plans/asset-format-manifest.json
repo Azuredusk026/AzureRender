@@ -26,17 +26,18 @@
     {
       "id": "G18",
       "summary": "模型互操作与动画保真",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "G17"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/g18/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "G19",
       "summary": "图像解码与精度语义",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "G18"
       ],
@@ -216,6 +217,7 @@
       "domain": "model",
       "read": true,
       "write": false,
+      "transformsSource": false,
       "settingsVersion": 1,
       "generatorVersion": 1
     },
@@ -224,6 +226,52 @@
       "domain": "model",
       "read": true,
       "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "obj",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "stl",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "ply",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "dae",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "fbx",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
       "settingsVersion": 1,
       "generatorVersion": 1
     }

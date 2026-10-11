@@ -116,10 +116,10 @@ void AzureRenderApp::run(
 #if AZURE_WITH_EDITOR
     if(!options.editorActionsPath.empty())editorAutomation_=std::make_unique<azurerender::EditorAutomation>(options.editorActionsPath);
 #endif
-    resourceLocator_ = azurerender::ResourceLocator(options.resourceRoot);
+    resourceLocator_ = azurerender::ResourceLocator(std::filesystem::u8path(options.resourceRoot));
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
-    sceneView.assetPath = resourceLocator_.resolveAsset(options.assetPath).string();
+    sceneView.assetPath = resourceLocator_.resolveAsset(std::filesystem::u8path(options.assetPath)).u8string();
     sceneView.renderSettings = options.renderSettings;
     azurerender::RendererCoreBoundary::validateSceneView(sceneView);
     azurerender::validateRenderSettings(runOptions_.renderSettings);
@@ -269,7 +269,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         device_, physicalDevice_, graphicsQueue_, commandPool_,
         gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get());
     createPostProcessDescriptorSetLayout();
-    resolvedAssetPath_ = resourceLocator_.resolveAsset(assetPath).string();
+    resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
     createShadowResources();
     createSwapchain();
     if (fixedSimulation_
@@ -459,7 +459,7 @@ azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
     const azurerender::SceneDocument& document) const {
     auto description = document.renderDescription();
     for (auto& resource : description.resources) {
-        resource.path = resourceLocator_.resolveAsset(resource.path).string();
+        resource.path = resourceLocator_.resolveAsset(std::filesystem::u8path(resource.path)).u8string();
     }
     return description;
 }

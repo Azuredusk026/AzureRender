@@ -263,8 +263,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     scene_ = context.scene;
     sceneWorldCoordinates_ = context.sceneWorldCoordinates;
     const std::string resolvedAssetPath = context.scene.resources[0].path;
-    asset_ = context.preparedMeshes && context.preparedMeshes->count(std::filesystem::path(resolvedAssetPath).lexically_normal().generic_string())
-        ? *context.preparedMeshes->at(std::filesystem::path(resolvedAssetPath).lexically_normal().generic_string()) : loadGltfAsset(resolvedAssetPath);
+    asset_ = context.preparedMeshes && context.preparedMeshes->count(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string())
+        ? *context.preparedMeshes->at(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string()) : loadGltfAsset(resolvedAssetPath);
     for (const AssetMaterial& material : asset_.materials) {
         if (!material.faceSdf.present) {
             continue;

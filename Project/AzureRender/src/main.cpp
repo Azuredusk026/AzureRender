@@ -6,6 +6,7 @@
 #endif
 #include "app/AzureRenderApp.hpp"
 #include "app/CommandLine.hpp"
+#include "platform/NativeArguments.hpp"
 #include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
@@ -27,13 +28,8 @@ int main(const int argumentCount, char** argumentValues) {
     azurerender::RuntimeDiagnostics::instance().configure(
         "captures/azurerender.log.jsonl");
     try {
-        std::vector<std::string> arguments;
-        if (argumentCount > 1) {
-            arguments.reserve(static_cast<std::size_t>(argumentCount - 1));
-        }
-        for (int index = 1; index < argumentCount; ++index) {
-            arguments.emplace_back(argumentValues[index]);
-        }
+        const auto native=azurerender::nativeArguments(argumentCount,argumentValues);
+        std::vector<std::string> arguments(native.begin()+1,native.end());
         azurerender::ParsedCommandLine commandLine =
             azurerender::parseCommandLine(arguments);
         AzureRenderOptions& options = commandLine.options;
@@ -60,7 +56,7 @@ int main(const int argumentCount, char** argumentValues) {
             return EXIT_SUCCESS;
         }
         if (commandLine.checkResources) {
-            const azurerender::ResourceLocator locator(options.resourceRoot);
+            const azurerender::ResourceLocator locator(std::filesystem::u8path(options.resourceRoot));
             azurerender::RuntimeDiagnostics::instance().print(
                 "cli",
                 "Shader directory: " + locator.shaderDirectory().string() + '\n'
@@ -71,14 +67,14 @@ int main(const int argumentCount, char** argumentValues) {
             return EXIT_SUCCESS;
         }
         if (!commandLine.createGamePath.empty()) {
-            const std::filesystem::path directory(commandLine.createGamePath);
-            azurerender::Project::createGame(directory, directory.filename().string());
+            const std::filesystem::path directory(std::filesystem::u8path(commandLine.createGamePath));
+            azurerender::Project::createGame(directory, directory.filename().u8string());
             std::cout << "Game project created: " << directory << '\n';
             return EXIT_SUCCESS;
         }
         if (!commandLine.createScenePath.empty()) {
             const azurerender::SceneDocument scene =
-                azurerender::SceneDocument::fromAsset(options.assetPath);
+                azurerender::SceneDocument::fromAsset(std::filesystem::u8path(options.assetPath));
             scene.save(commandLine.createScenePath);
             azurerender::RuntimeDiagnostics::instance().print(
                 "cli", "Scene created: " + commandLine.createScenePath);
@@ -91,7 +87,7 @@ int main(const int argumentCount, char** argumentValues) {
         }
         if (!scenePath.empty()) {
             azurerender::SceneDocument scene =
-                azurerender::SceneDocument::load(scenePath);
+                azurerender::SceneDocument::load(std::filesystem::u8path(scenePath));
             const auto asset = std::find_if(
                 scene.resources.begin(), scene.resources.end(),
                 [](const azurerender::SceneResource& resource) {
@@ -101,7 +97,7 @@ int main(const int argumentCount, char** argumentValues) {
                 throw std::runtime_error(
                     "Scene contains no gltf resource: " + scenePath);
             }
-            options.assetPath = asset->path.string();
+            options.assetPath = asset->path.u8string();
             options.renderSettings = scene.renderSettings;
             if (options.editorMode) {
                 options.sceneDocument = scene;
@@ -115,9 +111,9 @@ int main(const int argumentCount, char** argumentValues) {
         }
 
         if(options.editorMode && !options.projectFile.empty()){
-            auto context=azurerender::EditorContext::openProject(options.projectFile);
+            auto context=azurerender::EditorContext::openProject(std::filesystem::u8path(options.projectFile));
             options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
-            if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.string();
+            if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.u8string();
             options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));
         }
         if(options.editorSession){
@@ -126,7 +122,7 @@ int main(const int argumentCount, char** argumentValues) {
                 try {options.editorSession->projects().remember(options.editorSession->context().project());}
                 catch(const std::exception& error){options.editorSession->log(std::string("Recent project history: ")+error.what());}
             }
-            const azurerender::ResourceLocator locator(options.resourceRoot);
+            const azurerender::ResourceLocator locator(std::filesystem::u8path(options.resourceRoot));
             const auto name=std::filesystem::path(
 #ifdef _WIN32
                 "AzureGeometryCompiler.exe"
