@@ -87,7 +87,8 @@
         "gpuTestsPassed": 128,
         "acceptance": "docs/acceptance/u16/directory-reclamation-evidence/manifest.json",
         "physicalOperatorVerification": false
-      }
+      },
+      "currentFunctionalRegression": "docs/acceptance/u16/automatic-2026-10-12/manifest.json"
     },
     {
       "id": "UX-005",
@@ -137,7 +138,10 @@
       "acceptance": "docs/acceptance/p5/closure/pagefault-trace-results.md",
       "originalTargetRetestPassed": true,
       "causeIdentified": false,
-      "candidateSourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4"
+      "candidateSourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4",
+      "currentFunctionalRegression": "docs/acceptance/u16/automatic-2026-10-12/manifest.json",
+      "historicalCauseAcceptancePhase": "P8",
+      "blocksIntermediateProgress": false
     },
     {
       "id": "UX-009",
@@ -430,5 +434,16 @@
     "complete": false,
     "formalPassedRounds": 14,
     "blockingRound": "exploration-2"
+  },
+  "currentAutomaticAcceptance": {
+    "U15": {
+      "status": "AutomaticVerifiedManualDeferred",
+      "evidence": "docs/acceptance/u15/automatic-2026-10-12/manifest.json"
+    },
+    "U16": {
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "evidence": "docs/acceptance/u16/automatic-2026-10-12/manifest.json"
+    },
+    "finalAcceptancePhase": "P8"
   }
 }

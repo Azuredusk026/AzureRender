@@ -1,0 +1,28 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start 146: AzureEditor.NodeAddition
+ 1/11 Test #146: AzureEditor.NodeAddition ............   Passed    0.04 sec
+      Start 150: AzureEditor.AssetWorkflow
+ 2/11 Test #150: AzureEditor.AssetWorkflow ...........   Passed    0.19 sec
+      Start 151: AzureRender.EditorInputRouter
+ 3/11 Test #151: AzureRender.EditorInputRouter .......   Passed    0.01 sec
+      Start 188: AzureEditor.ProjectFlow
+ 4/11 Test #188: AzureEditor.ProjectFlow .............   Passed    1.10 sec
+      Start 201: AzureEditor.ContentDirectoryScale
+ 5/11 Test #201: AzureEditor.ContentDirectoryScale ...   Passed   70.14 sec
+      Start 215: AzureEditor.ManagedAuthoring
+ 6/11 Test #215: AzureEditor.ManagedAuthoring ........   Passed    3.13 sec
+      Start 216: AzureEditor.PrefabAuthoring
+ 7/11 Test #216: AzureEditor.PrefabAuthoring .........   Passed    0.86 sec
+      Start 217: AzureEditor.DomainAuthoring
+ 8/11 Test #217: AzureEditor.DomainAuthoring .........   Passed    0.43 sec
+      Start 218: AzureEditor.AuthoringWorkflow
+ 9/11 Test #218: AzureEditor.AuthoringWorkflow .......   Passed    1.27 sec
+      Start 219: AzureEditor.AnimationAuthoring
+10/11 Test #219: AzureEditor.AnimationAuthoring ......   Passed    0.20 sec
+      Start 223: AzureEngine.PhysicsAuthoring
+11/11 Test #223: AzureEngine.PhysicsAuthoring ........   Passed    0.02 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =  77.42 sec

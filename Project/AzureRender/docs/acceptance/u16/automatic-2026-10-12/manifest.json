@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+  "automaticComplete": true,
+  "phaseComplete": false,
+  "testsPerConfiguration": 11,
+  "configurations": [
+    "Debug",
+    "Release"
+  ],
+  "authoringEvidence": "docs/acceptance/u15/automatic-2026-10-12/manifest.json",
+  "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json",
+  "files": {
+    "u16-debug.log": "28e500e412e72a8495867cf8b443b33b63a3fc0e9025f29da39f5854e652bfa7",
+    "u16-release.log": "b9152ab4b4b60ac948c374ceb64e5652e9d0975d4c98305eb20a174cc6586672"
+  }
+}
