@@ -1,0 +1,16 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/1 Test #148: AzureEditor.AssetWorkflow ........***Failed    0.29 sec
+[1791736456625][info][editor][code=0] Opened scene: startup
+[1791736456745][info][editor][code=0] Imported asset: 导入 模型.GLTF (48 vertices)
+invalid map<K, T> key
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.30 sec
+
+The following tests FAILED:
+	148 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

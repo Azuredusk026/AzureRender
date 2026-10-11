@@ -22,7 +22,7 @@ nlohmann::json EditorContext::documentContent() const {
     for(const auto& node:scene_.nodes)nodes.push_back({{"id",node.id},{"name",node.name},{"parentId",node.parentId},
         {"resourceId",node.resourceId},{"visible",node.visible},{"translation",node.translation},{"rotation",node.rotation},
         {"scale",node.scale},{"prefabSource",node.prefabSource},{"instanceOf",node.instanceOf},{"materialSlots",node.materialSlots}});
-    for(const auto& resource:scene_.resources)resources.push_back({{"id",resource.id},{"type",resource.type},{"path",resource.path.generic_string()}});
+    for(const auto& resource:scene_.resources)resources.push_back({{"id",resource.id},{"type",resource.type},{"path",resource.path.generic_u8string()}});
     for(const auto& light:scene_.lights)lights.push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},
         {"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});
     const auto& settings=renderSettings();auto render=encodeLevelRenderSettings(settings);
@@ -36,7 +36,7 @@ nlohmann::json EditorContext::documentContent() const {
     render["blackholeQuality"]=static_cast<unsigned>(settings.blackhole.quality);
     render["blackholeCamera"]=static_cast<unsigned>(settings.blackhole.camera);
     auto references=nlohmann::json::object();
-    for(const auto& reference:resourceReferences_)references[reference.first.generic_string()]=reference.second;
+    for(const auto& reference:resourceReferences_)references[reference.first.generic_u8string()]=reference.second;
     auto source=sourceLevel_.is_object()?sourceLevel_:nlohmann::json::object();
     for(const auto* field:{"nodes","resources","lights","renderSettings"})source.erase(field);
     if(source.contains("prefabs"))for(auto& instance:source["prefabs"])instance.erase("overrides");

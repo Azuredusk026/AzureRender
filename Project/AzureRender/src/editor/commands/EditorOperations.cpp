@@ -127,6 +127,16 @@ EditRegistry editorOperations(EditorSession& session) {
         result["activeChanged"]=active==context.assets().records().end()||std::to_string(active->second.fingerprint)!=result.at("fingerprint");return result;
     });
     registry.add({"asset.dependencies",1,schema({{"asset",text},{"direction",text}},{"asset"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().dependencies(a.at("asset").get<std::string>(),a.value("direction",std::string("forward")));});
+    registry.add({"asset.formats",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json {
+        Json result=Json::array();
+        for(const auto& pair:assetFormatRegistry().formats()) {
+            const auto& f=pair.second;
+            const auto domain=f.domain==AssetDomain::Model?"model":f.domain==AssetDomain::Image?"image":"audio";
+            result.push_back({{"id",f.id},{"label",f.label},{"domain",domain},{"extensions",f.extensions},
+                {"read",f.canRead},{"write",f.canWrite},{"features",f.features},{"settingsVersion",f.settingsVersion},{"generatorVersion",f.generatorVersion}});
+        }
+        return result;
+    });
     registry.add({"assets.catalog",1,schema({{"type",text}}),false,false,false},[](EditorContext& c,const Json& a)->Json{return assetCatalog(c,a.value("type",std::string()));});
     registry.add({"content.directory",1,schema({{"mount",text},{"path",text},{"type",text},{"search",text},{"refresh",boolean}}),false,false,false},[&session](EditorContext& c,const Json& a)->Json{
         auto& directories=session.contentDirectories();if(a.value("refresh",false))directories.refresh(c);
@@ -247,7 +257,7 @@ EditRegistry editorOperations(EditorSession& session) {
                 throw EditRejection(session.lastError_);
             return nullptr;
         });
-    registry.add({"asset.import",1,schema({{"path",text}},{"path"}),true,false,true},[](EditorContext& c,const Json& a)->Json { return c.importAsset(a.at("path").get<std::string>()); });
+    registry.add({"asset.import",1,schema({{"path",text}},{"path"}),true,false,true},[](EditorContext& c,const Json& a)->Json { return c.importAsset(std::filesystem::u8path(a.at("path").get<std::string>())); });
     registry.add({"asset.generate",1,schema({{"generator",text},{"output",text},{"parameters",Json::object()},
         {"inputs",{{"type","array"},{"maxItems",1024},{"items",text}}},{"dependencies",{{"type","array"},{"maxItems",1024},{"items",text}}},{"license",text},{"replace",boolean}},
         {"generator","output","parameters","license"}),true,false,true},[&session](EditorContext& c,const Json& a)->Json {

@@ -1,0 +1,17 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/1 Test #148: AzureEditor.AssetWorkflow ........***Failed    0.27 sec
+[1791736308446][info][editor][code=0] Opened scene: startup
+[1791736308563][info][editor][code=0] Imported asset: 导入 模型.GLTF (48 vertices)
+[1791736308565][info][editor][code=0] ERROR [asset.import]: [json.exception.type_error.316] invalid UTF-8 byte at index 100: 0xB5
+asset.import: [{"code":"OperationFailed","message":"[json.exception.type_error.316] invalid UTF-8 byte at index 100: 0xB5"}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.28 sec
+
+The following tests FAILED:
+	148 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

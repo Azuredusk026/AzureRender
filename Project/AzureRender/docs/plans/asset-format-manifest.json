@@ -15,17 +15,18 @@
     {
       "id": "G17",
       "summary": "格式注册与传输契约",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "P6"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/g17/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "G18",
       "summary": "模型互操作与动画保真",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "G17"
       ],
@@ -208,5 +209,23 @@
     "U15": "docs/acceptance/u15/automatic-2026-10-12/manifest.json",
     "U16": "docs/acceptance/u16/automatic-2026-10-12/manifest.json",
     "P6": "docs/acceptance/p6/automatic-2026-10-12/manifest.json"
-  }
+  },
+  "verifiedCapabilities": [
+    {
+      "id": "gltf",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    },
+    {
+      "id": "glb",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1
+    }
+  ]
 }

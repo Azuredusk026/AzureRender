@@ -1236,7 +1236,7 @@
     "p5Complete": false,
     "p6Complete": false,
     "rootCauseConfirmed": false,
-    "gpuMeasurementsExecuted": false,
+    "gpuMeasurementsExecuted": true,
     "physicalInputExecuted": false,
     "subjectiveAudioExecuted": false,
     "toolsVerified": [
@@ -1248,11 +1248,13 @@
       "navigationShortcutOwnership",
       "contextualNodeAddition"
     ],
-    "uiVerificationPending": [
-      "UX-001",
-      "UX-002",
-      "UX-003"
-    ],
-    "gpuSchedule": "User requested keeping the game running and completing other work first"
+    "uiVerificationPending": [],
+    "gpuSchedule": "User requested keeping the game running and completing other work first",
+    "p5AcceptancePhase": "P8",
+    "p6AutomaticComplete": true,
+    "p6AutomaticEvidence": "docs/acceptance/p6/automatic-2026-10-12/manifest.json",
+    "formalPerformanceEvidence": "docs/acceptance/p5/closure/automatic-resume.md",
+    "currentAutomaticPhase": "G18",
+    "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json"
   }
 }

@@ -1,6 +1,7 @@
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
 #include "assets/TextureImportSettings.hpp"
+#include "assets/AssetFormatRegistry.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
 #include <fstream>
@@ -74,7 +75,7 @@ std::uint64_t hash(const std::string& data) {
 }
 void write(const std::filesystem::path& path, const std::string& data) {
     std::filesystem::create_directories(path.parent_path());
-    const auto temporary = path.string() + ".tmp";
+    auto temporary = path;temporary += ".tmp";
     { std::ofstream output(temporary, std::ios::binary); output << data; output.flush();
       if (!output) throw std::runtime_error("Cannot write asset file: " + path.string()); }
     std::filesystem::copy_file(temporary, path, std::filesystem::copy_options::overwrite_existing);
@@ -155,9 +156,9 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         for (const auto& entry : std::filesystem::recursive_directory_iterator(mount.second)) {
             if(check)check();
             if (!entry.is_regular_file() || entry.path().extension() == ".azmeta" || entry.path().extension() == ".tmp") continue;
-            const auto virtualPath = mount.first + ":/" + entry.path().lexically_relative(mount.second).generic_string();
+            const auto virtualPath = mount.first + ":/" + entry.path().lexically_relative(mount.second).generic_u8string();
             const auto path = project_.resolve(virtualPath);
-            const auto sidecar = path.string() + ".azmeta";
+            auto sidecar = path;sidecar += ".azmeta";
             const auto previous=sources_->find(path);
             const auto time=std::filesystem::last_write_time(path);
             const auto size=std::filesystem::file_size(path);
@@ -176,7 +177,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if (!meta.at("schemaVersion").is_number_integer() || meta.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset metadata version");
             const auto id = meta.at("id").get<std::string>();
             if (!std::regex_match(id, std::regex("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")))
-                throw std::runtime_error("Invalid asset UUID: " + sidecar);
+                throw std::runtime_error("Invalid asset UUID: " + sidecar.u8string());
             if(meta.value("settings",Json::object()).contains("texture")) {
                 const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));
                 meta["settings"]["texture"]=settings.describe();
@@ -185,7 +186,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             statistics_.sourceBytesRead+=source.size();++statistics_.filesRead;
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
-            const auto extension=path.extension().string();Json document;
+            const auto extension=assetExtension(path);Json document;
             if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial")document=Json::parse(source);
             if(extension==".azscene") {
                 document={{"resources",Json::array()}};
@@ -214,7 +215,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             dependencies.insert(id);
         };
         for (const auto& dep : metadata.at(record.id).value("dependencies", Json::array())) add(dep.get<std::string>());
-        const auto extension = record.path.extension().string();
+        const auto extension = assetExtension(record.path);
         if(extension==".azscript") {
             const auto& document=documents.at(record.id);
             if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1
@@ -243,8 +244,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                     const auto uri = object.value("uri", std::string());
                     if (uri.empty() || uri.rfind("data:", 0) == 0) continue;
                     const auto slash = record.virtualPath.find(":/");
-                    const auto relative = (std::filesystem::path(record.virtualPath.substr(slash + 2)).parent_path() / uri).lexically_normal();
-                    const auto virtualPath = record.virtualPath.substr(0, slash + 2) + relative.generic_string();
+                    const auto relative = (std::filesystem::u8path(record.virtualPath.substr(slash + 2)).parent_path() / std::filesystem::u8path(uri)).lexically_normal();
+                    const auto virtualPath = record.virtualPath.substr(0, slash + 2) + relative.generic_u8string();
                     static_cast<void>(project_.resolve(virtualPath)); add(virtualPath);
                 }
         }
@@ -262,7 +263,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                         throw std::runtime_error("Imported output hash is stale: "+output.first);
                     continue;
                 }
-                const std::filesystem::path relative(output.first);
+                const auto relative=std::filesystem::u8path(output.first);
                 const auto resolved=std::filesystem::weakly_canonical(base/relative);const auto inside=resolved.lexically_relative(base);
                 if(relative.is_absolute()||relative.has_root_name()||inside.empty()||*inside.begin()==".."||generationHash(bytes(resolved,check))!=output.second)
                     throw std::runtime_error("Imported output hash is stale: "+output.first);
@@ -343,8 +344,11 @@ void AssetDatabase::writePack(const std::filesystem::path& destination) const {
         const auto& record = entry.second;
         const auto separator = record.virtualPath.find(":/");
         const auto relative = record.virtualPath.substr(0, separator) + "/" + record.virtualPath.substr(separator + 2);
-        write(destination / relative, readSource(record.id));
-        write((destination / relative).string() + ".azmeta", bytes(record.path.string() + ".azmeta"));
+        const auto target=destination/std::filesystem::u8path(relative);
+        write(target, readSource(record.id));
+        auto targetMetadata=target;targetMetadata+=".azmeta";
+        auto sourceMetadata=record.path;sourceMetadata+=".azmeta";
+        write(targetMetadata, bytes(sourceMetadata));
         entries.push_back({{"id", record.id}, {"path", relative}, {"contentHash", record.contentHash}, {"dependencies", record.dependencies}});
         if(record.generation)entries.back()["generation"]=record.generation->toJson();
         if(record.importGeneration)entries.back()["importGeneration"]=record.importGeneration->toJson();
@@ -355,7 +359,7 @@ std::filesystem::path AssetDatabase::resolvePack(const std::filesystem::path& di
     const auto document = Json::parse(bytes(directory / "manifest.azurepack"));
     if (!document.at("schemaVersion").is_number_integer() || document.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset pack version");
     for (const auto& entry : document.at("assets")) if (entry.at("id") == id) {
-        const std::filesystem::path relative(entry.at("path").get<std::string>());
+        const auto relative=std::filesystem::u8path(entry.at("path").get<std::string>());
         const auto base = std::filesystem::weakly_canonical(directory), result = std::filesystem::weakly_canonical(base / relative);
         const auto inside = result.lexically_relative(base);
         if (relative.is_absolute() || inside.empty() || *inside.begin() == ".." || hash(bytes(result)) != entry.at("contentHash").get<std::uint64_t>())

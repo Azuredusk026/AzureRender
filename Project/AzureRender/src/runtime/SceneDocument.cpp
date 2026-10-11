@@ -41,7 +41,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
     for (const SceneResource& resource : document.resources) {
         output << "resource " << std::quoted(resource.id) << ' '
                << std::quoted(resource.type) << ' '
-               << std::quoted(resource.path.string()) << '\n';
+               << std::quoted(resource.path.generic_u8string()) << '\n';
     }
     output << "nodeCount " << document.nodes.size() << '\n';
     for (const SceneNode& node : document.nodes) {
@@ -153,7 +153,7 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             || key != "resource") {
             throw std::runtime_error("Invalid .azscene resource");
         }
-        resource.path = resourcePath;
+        resource.path = std::filesystem::u8path(resourcePath);
         document.resources.push_back(std::move(resource));
     }
     if (!(input >> key >> nodeCount) || key != "nodeCount") {

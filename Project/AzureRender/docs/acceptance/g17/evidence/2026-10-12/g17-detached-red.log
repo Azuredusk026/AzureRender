@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 148: AzureEditor.AssetWorkflow
+1/1 Test #148: AzureEditor.AssetWorkflow ........***Failed    0.41 sec
+[1791736914415][info][editor][code=0] Opened scene: startup
+[1791736914547][info][editor][code=0] Imported asset: 导入 模型.GLTF (48 vertices)
+[1791736914616][info][editor][code=0] Saved scene: C:\Users\23587\AppData\Local\Temp\azure-assets-44446181212500\assets\startup.azscene
+[1791736914634][info][editor][code=0] Opened scene: startup
+[1791736914640][info][editor][code=0] Opened scene: startup
+[1791736914644][info][editor][code=0] Selected node: Placed Object
+[1791736914658][info][editor][code=0] Undo
+[1791736914685][info][editor][code=0] Opened scene: startup
+[1791736914690][info][editor][code=0] ERROR [asset.place]: No mapping for the Unicode character exists in the target multi-byte code page.
+asset.place: [{"code":"OperationFailed","message":"No mapping for the Unicode character exists in the target multi-byte code page."}]
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.42 sec
+
+The following tests FAILED:
+	148 - AzureEditor.AssetWorkflow (Failed)
+Errors while running CTest

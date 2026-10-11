@@ -104,12 +104,12 @@ GIF、PSD、SVG、USD 等记录为后续候选。
 领域适配器负责模型、图像或音频转换。
 任务服务负责进度、取消和结果发布。
 
-拟新增 `src/assets/AssetFormatRegistry.hpp/.cpp`。
-拟新增 `src/assets/AssetTransfer.hpp/.cpp`。
+格式注册位于 `src/assets/AssetFormatRegistry.hpp/.cpp`。
+共享传输位于 `src/assets/AssetTransfer.hpp/.cpp`。
 模型、图像、音频适配器置于对应子目录。
 UI 和自动入口调用同一资产操作服务。
 
-拟议接口以本节为实施设计，尚未实现。
+格式注册与传输接口已通过 G17 自动验证。
 
 ```cpp
 enum class AssetDomain { Model, Image, Audio };
@@ -187,13 +187,13 @@ NVIDIA 与 Intel 执行材质和纹理运行验证。
 实现本计划声明的格式注册与传输类型。
 扩展 `AssetImportJob` 的准备与发布契约。
 
-- [ ] 新建 `tests/AssetFormatRegistryTests.cpp`。
-- [ ] 先验证探测歧义、非法描述及大小写匹配失败。
-- [ ] 实现注册、能力查询与版本化请求校验。
-- [ ] 接入现有 glTF 导入，保持既有行为通过。
-- [ ] 验证中文路径、取消、过期与暂存恢复。
-- [ ] 在 CMake 注册 CPU 测试并更新公共契约。
-- [ ] 同步格式参考与来源清单，提交 `feat(g17)`。
+- [x] 新建 `tests/AssetFormatRegistryTests.cpp`。
+- [x] 先验证探测歧义、非法描述及大小写匹配失败。
+- [x] 实现注册、能力查询与版本化请求校验。
+- [x] 接入现有 glTF 导入，保持既有行为通过。
+- [x] 验证中文路径、取消、过期与暂存恢复。
+- [x] 在 CMake 注册 CPU 测试并更新公共契约。
+- [x] 同步格式参考与来源清单，提交 `feat(g17)`。
 
 交付为可查询的格式能力与共享执行边界。
 验证使用 `AzureAssets.FormatRegistry`。

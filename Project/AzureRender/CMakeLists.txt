@@ -300,6 +300,8 @@ add_library(AzureRenderCore STATIC
     src/assets/MaterialData.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
+    src/assets/AssetFormatRegistry.cpp
+    src/assets/AssetTransfer.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/ResourceAccessProfile.cpp
     src/render/VisibilityPrototype.cpp
@@ -1906,3 +1908,9 @@ install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/asset-format-manifest.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-10-authoring-usability.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
+
+if(BUILD_TESTING)
+    add_executable(AzureAssetFormatRegistryTests tests/AssetFormatRegistryTests.cpp)
+    target_link_libraries(AzureAssetFormatRegistryTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.FormatRegistry COMMAND AzureAssetFormatRegistryTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf")
+endif()

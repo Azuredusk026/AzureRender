@@ -28,8 +28,8 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
         const auto expanded=expandPrefabs(context->sourceLevel_,*context->assets_);
         for(const auto& resource:expanded.at("resources"))context->resourceReferences_[context->assets_->resolveReference(resource.at("asset").get<std::string>())]=resource.at("asset").get<std::string>();
     }else for(const auto& resource:context->scene_.resources){
-        for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_string();}
-        if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_string();}
+        for(const auto& mount:context->project_->mounts){auto relative=resource.path.lexically_relative(mount.second);if(!relative.empty() && *relative.begin()!="..")context->resourceReferences_[resource.path]=mount.first+":/"+relative.generic_u8string();}
+        if(!context->resourceReferences_.count(resource.path)){const auto relative=resource.path.lexically_relative(ResourceLocator().publicAsset(""));if(relative.empty()||*relative.begin()=="..")throw std::runtime_error("Resource has no portable project identity");context->resourceReferences_[resource.path]="engine:/assets_public/"+relative.generic_u8string();}
     }
     context->capturePrefabSources();context->syncComponents();context->checkpointSaved();return context;
 }
@@ -50,12 +50,12 @@ void EditorContext::reloadProjectContent() {
 }
 std::string EditorContext::commitImport(AssetImportJob& job){
     const auto path=job.finish();
-    try{auto candidate=std::make_unique<AssetDatabase>(*assets_);candidate->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_string();
-        const auto id=candidate->idForPath(reference);const auto sidecar=path.string()+".azmeta";
+    try{auto candidate=std::make_unique<AssetDatabase>(*assets_);candidate->refresh();const auto mount=project_->mounts.begin();const auto reference=mount->first+":/"+path.lexically_relative(mount->second).generic_u8string();
+        const auto id=candidate->idForPath(reference);auto sidecar=path;sidecar+=".azmeta";
         std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;input.close();metadata["importGeneration"]=job.summary().at("generation");
         std::ofstream output(sidecar);output<<metadata.dump(2);output.close();if(!output)throw std::runtime_error("Cannot save import provenance");candidate->refresh(true);
         beginEdit();assets_.swap(candidate);scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;
-        importSummary_=job.summary();log("Imported asset: "+path.filename().string()+" ("+std::to_string(importSummary_.at("vertices").get<std::size_t>())+" vertices)");return id;
+        importSummary_=job.summary();log("Imported asset: "+path.filename().u8string()+" ("+std::to_string(importSummary_.at("vertices").get<std::size_t>())+" vertices)");return id;
     }catch(...){std::filesystem::remove_all(job.destination);throw;}
 }
 std::string EditorContext::importAsset(const std::filesystem::path& path){
@@ -77,11 +77,11 @@ void EditorContext::placeResource(const std::string& resource,const std::string&
     if(std::none_of(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return entry.id==resource;})){
         if(!assets_)throw std::invalid_argument("Unknown resource");
         const auto path=assets_->resolveReference(resource);
-        if(path.extension()!=".gltf"&&path.extension()!=".glb")throw std::invalid_argument("Placement requires a registered model asset");
+        if(!assetTypeRegistry().matches(path,{"model"}))throw std::invalid_argument("Placement requires a registered model asset");
         const auto existing=std::find_if(scene_.resources.begin(),scene_.resources.end(),[&](const auto& entry){return resolvedResourcePath(entry).lexically_normal()==path.lexically_normal();});
         if(existing!=scene_.resources.end())reference=existing->id;
         else{
-            static_cast<void>(loadGltfAsset(path.string()));
+            static_cast<void>(loadGltfAsset(path.u8string()));
             const auto record=std::find_if(assets_->records().begin(),assets_->records().end(),[&](const auto& entry){return entry.second.path==path;});
             if(record==assets_->records().end())throw std::invalid_argument("Model requires an asset database identity");
             reference=record->first;attach=path;

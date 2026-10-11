@@ -1,0 +1,37 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start  55: AzureAssets.ProceduralHost
+ 1/14 Test  #55: AzureAssets.ProceduralHost ................   Passed   37.24 sec
+      Start 114: AzureEngine.MaterialFixtureGpu
+ 2/14 Test #114: AzureEngine.MaterialFixtureGpu ............   Passed   20.67 sec
+      Start 156: AzureEditor.DocumentGuardGpu
+ 3/14 Test #156: AzureEditor.DocumentGuardGpu ..............   Passed   47.16 sec
+      Start 173: AzureRender.CharacterIblComputeGpu
+ 4/14 Test #173: AzureRender.CharacterIblComputeGpu ........   Passed    2.33 sec
+      Start 174: AzureRender.CharacterSkinningComputeGpu
+ 5/14 Test #174: AzureRender.CharacterSkinningComputeGpu ...   Passed    2.41 sec
+      Start 182: AzureRender.CharacterMorphComputeGpu
+ 6/14 Test #182: AzureRender.CharacterMorphComputeGpu ......   Passed   18.75 sec
+      Start 187: AzureEditor.ProductizationGpu
+ 7/14 Test #187: AzureEditor.ProductizationGpu .............   Passed   61.55 sec
+      Start 190: AzureEditor.PropertiesGpu
+ 8/14 Test #190: AzureEditor.PropertiesGpu .................   Passed   32.92 sec
+      Start 195: AzureEditor.ContentTransactionsGpu
+ 9/14 Test #195: AzureEditor.ContentTransactionsGpu ........   Passed   82.75 sec
+      Start 200: AzureEditor.ContentNavigationGpu
+10/14 Test #200: AzureEditor.ContentNavigationGpu ..........   Passed   65.42 sec
+      Start 207: AzureEditor.NodeAdditionGpu
+11/14 Test #207: AzureEditor.NodeAdditionGpu ...............   Passed   45.77 sec
+      Start 219: AzureEditor.AuthoringGpu
+12/14 Test #219: AzureEditor.AuthoringGpu ..................   Passed   65.99 sec
+      Start 225: AzureEditor.ViewportNavigationGpu
+13/14 Test #225: AzureEditor.ViewportNavigationGpu .........   Passed  110.18 sec
+      Start 226: AzureEditor.SceneGeometryGpu
+14/14 Test #226: AzureEditor.SceneGeometryGpu ..............   Passed    7.03 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Label Time Summary:
+gpu    = 600.16 sec*proc (14 tests)
+
+Total Test time (real) = 600.18 sec

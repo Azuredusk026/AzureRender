@@ -1803,8 +1803,10 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::Model model;
     std::string warning;
     std::string error;
-    const std::filesystem::path filePath(path);
-    const bool loaded = filePath.extension() == ".glb"
+    const auto filePath = std::filesystem::u8path(path);
+    auto extension=filePath.extension().u8string();
+    std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char c){return static_cast<char>(std::tolower(c));});
+    const bool loaded = extension == ".glb"
         ? loader.LoadBinaryFromFile(&model, &error, &warning, path)
         : loader.LoadASCIIFromFile(&model, &error, &warning, path);
     if (!warning.empty()) {

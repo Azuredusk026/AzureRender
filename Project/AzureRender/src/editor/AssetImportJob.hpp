@@ -5,6 +5,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include "runtime/AssetDatabase.hpp"
+#include "assets/AssetTransfer.hpp"
 namespace azurerender {
 class AssetImportJob {
 public:
@@ -18,7 +19,6 @@ public:
     const std::filesystem::path destination;
 private:
     void prepare(const std::filesystem::path& source);
-    void copy(const std::filesystem::path& source,const std::filesystem::path& target);
     void checkCancel() const;
     std::filesystem::path staging_;
     std::atomic<bool> cancelled_{false};
@@ -26,6 +26,7 @@ private:
     std::future<void> work_;
     std::string filename_;
     nlohmann::json summary_;
+    AssetTransferReport transfer_;
 };
 // Validates existing project content without publishing from a worker thread.
 class AssetReimportJob final {

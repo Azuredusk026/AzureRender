@@ -23,11 +23,33 @@ int main(int argc,char** argv){
         context->scene().resources.push_back({"virtual-alias","gltf",std::filesystem::u8path("assets:/model.gltf")});
         context->scene().resources.push_back({"absolute-alias","gltf",root/"assets/model.gltf"});
         const auto catalog=apply(session,"assets.catalog");unsigned matches=0;
+        const auto formats=apply(session,"asset.formats");
+        require(formats.size()==2,"Public format discovery must advertise verified model readers");
+        for(const auto& format:formats)require(format.at("read").get<bool>()&&!format.at("write").get<bool>()&&format.at("settingsVersion")==1,"Public capabilities must report read/write and version separately");
         for(const auto& entry:catalog)if(entry.at("id")==id){++matches;require(entry.at("type")=="model"&&entry.at("ready").get<bool>(),"Catalog must classify actual resources through registration");}
         const auto models=apply(session,"assets.catalog",{{"type","model"}});
         std::size_t sceneOrder=models.size(),unusedOrder=models.size();for(std::size_t i=0;i<models.size();++i){if(models[i].at("id")==id)sceneOrder=i;if(models[i].at("path")=="assets:/unused.gltf")unusedOrder=i;}
         require(sceneOrder<unusedOrder,"Catalog ordering must prioritize scene resources independently of random UUID ordering");
         require(matches==1,"Virtual and absolute scene references must merge into one database identity");
+        const auto importSource=root/std::filesystem::u8path(u8"导入 模型.GLTF");
+        std::filesystem::copy_file(argv[1],importSource);
+        const auto imported=apply(session,"asset.import",{{"path",importSource.u8string()}}).get<std::string>();
+        require(!imported.empty(),"Public import must accept UTF-8 paths and uppercase registered extensions");
+        const auto pack=root/std::filesystem::u8path(u8"移动资源包");context->assets().writePack(pack);
+        require(std::filesystem::is_regular_file(AssetDatabase::resolvePack(pack,imported)),"UTF-8 imported names must survive portable resource packing");
+        // Catalog-only aliases above have no authored portable references.
+        auto& resources=context->scene().resources;
+        resources.erase(std::remove_if(resources.begin(),resources.end(),[](const auto& resource){return resource.id=="virtual-alias"||resource.id=="absolute-alias";}),resources.end());
+        context->save();
+        const auto reloaded=EditorContext::openProject(root/"project.azureproject");
+        require(reloaded->assets().resolve(imported)==context->assets().resolve(imported),"Imported UTF-8 model identity must survive save and reopen");
+        apply(session,"asset.place",{{"asset",imported},{"origin",{2,4,3}},{"direction",{0,-1,0}}});
+        apply(session,"history.undo");
+        const auto detachedModel=root/"assets"/std::filesystem::u8path(u8"放置 模型.GLTF");
+        std::filesystem::copy_file(argv[1],detachedModel);context->assets().refresh();
+        const auto detached=context->assets().idForPath(u8"assets:/放置 模型.GLTF");
+        apply(session,"asset.place",{{"asset",detached},{"origin",{2,4,3}},{"direction",{0,-1,0}}});
+        apply(session,"history.undo");
         const auto before=context->scene().nodes.size();const auto undo=context->undoCount();
         apply(session,"asset.place",{{"asset",id},{"origin",{2,4,3}},{"direction",{0,-1,0}}});
         require(context->scene().nodes.size()==before+1&&context->selectedNode()->translation==std::array<float,3>{2,0,3},"Ray placement must intersect the shared fallback plane");

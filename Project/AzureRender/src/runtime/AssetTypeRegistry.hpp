@@ -6,8 +6,10 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <optional>
+#include "assets/AssetFormatRegistry.hpp"
 namespace azurerender {
-struct AssetTypeDescriptor { std::string id,label;std::vector<std::string> extensions;bool placeable=false; };
+struct AssetTypeDescriptor { std::string id,label;std::vector<std::string> extensions;bool placeable=false;std::optional<AssetDomain> domain; };
 class AssetTypeRegistry {
 public:
     void add(AssetTypeDescriptor descriptor) {
@@ -31,11 +33,13 @@ private:
 };
 inline AssetTypeRegistry& assetTypeRegistry() {
     static auto registry=[] {AssetTypeRegistry value;
-        value.add({"model","Models",{".gltf",".glb"},true});value.add({"script","Scripts",{".lua"}});
+        std::vector<std::string> modelExtensions;
+        for(const auto& format:assetFormatRegistry().list(AssetDomain::Model))if(format.canRead)modelExtensions.insert(modelExtensions.end(),format.extensions.begin(),format.extensions.end());
+        value.add({"model","Models",modelExtensions,true,AssetDomain::Model});value.add({"script","Scripts",{".lua"}});
         value.add({"managed-script","Managed scripts",{".azscript",".cs",".dll"}});value.add({"prefab","Prefabs",{".azureprefab"},true});
-        value.add({"animation","Animation graphs / JSON",{".json"}});value.add({"audio","Audio",{".wav"}});
+        value.add({"animation","Animation graphs / JSON",{".json"}});value.add({"audio","Audio",{".wav"},false,AssetDomain::Audio});
         value.add({"ui","UI documents",{".rml"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
-        value.add({"image","Images",{".png",".jpg",".jpeg",".ppm",".hdr"}});value.add({"font","Fonts",{".ttf",".otf"}});
+        value.add({"image","Images",{".png",".jpg",".jpeg",".ppm",".hdr"},false,AssetDomain::Image});value.add({"font","Fonts",{".ttf",".otf"}});
         value.add({"material","Materials",{".azurematerial"}});
         value.add({"shader","Shaders",{".azshader",".slang",".glsl",".spv"}});value.add({"text","Text",{".txt",".md"}});
         return value;}();return registry;

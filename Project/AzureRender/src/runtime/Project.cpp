@@ -151,7 +151,7 @@ SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
     if (sceneFile.extension() == ".azurelevel") { AssetDatabase assets(*this); assets.refresh(); return Level::load(sceneFile, assets).scene; }
     auto scene = SceneDocument::load(sceneFile);
     for (auto& resource : scene.resources) {
-        const auto path = resource.path.generic_string();
+        const auto path = resource.path.generic_u8string();
         if (path.find(":/") != std::string::npos)
             resource.path = resolve(path);
         else {
@@ -182,13 +182,13 @@ std::filesystem::path Project::resolve(const std::string& virtualPath) const {
     if (mount == "engine") {
         const ResourceLocator locator;
         if (relative.rfind("assets_public/", 0) == 0)
-            return inside(locator.publicAsset(""), relative.substr(14));
+            return inside(locator.publicAsset(""), std::filesystem::u8path(relative.substr(14)));
         if (relative.rfind("shaders/", 0) == 0)
-            return inside(locator.shaderDirectory(), relative.substr(8));
+            return inside(locator.shaderDirectory(), std::filesystem::u8path(relative.substr(8)));
         throw std::runtime_error("Unknown engine resource namespace: " + virtualPath);
     }
     const auto found = mounts.find(mount);
     if (found == mounts.end()) throw std::runtime_error("Unknown project mount: " + mount);
-    return inside(found->second, relative);
+    return inside(found->second, std::filesystem::u8path(relative));
 }
 }  // namespace azurerender

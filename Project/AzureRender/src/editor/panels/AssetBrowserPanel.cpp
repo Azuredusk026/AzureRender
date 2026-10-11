@@ -80,9 +80,11 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
             }observeWidget("assets.directory");
             if(ui::button("Reload Assets"))static_cast<void>(session_->execute(EditorCommand::ReloadAssets));ImGui::Separator();
         }
-        drawPathInput("glTF / GLB source",importPath_,"import",false,{".gltf",".glb"});
+        std::vector<std::string> importExtensions;
+        for(const auto& format:assetFormatRegistry().list(AssetDomain::Model))if(format.canRead)importExtensions.insert(importExtensions.end(),format.extensions.begin(),format.extensions.end());
+        drawPathInput("Model source",importPath_,"import",false,importExtensions);
         ui::ButtonOptions import;import.disabled=view.importing()||session_->playing()||session_->building()||importPath_.empty();
-        import.tooltip="Select a glTF or GLB file. Import continues when this panel is closed.";
+        import.tooltip="Select a supported model file. Import continues when this panel is closed.";
         if(ui::button("Import",import)){const auto result=session_->edit("asset.import-start",{{"path",importPath_}});if(result)ImGui::CloseCurrentPopup();}observeWidget("asset.import");
         if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button("Cancel Import"))session_->edit("asset.import-cancel");observeWidget("asset.import-cancel");}
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
