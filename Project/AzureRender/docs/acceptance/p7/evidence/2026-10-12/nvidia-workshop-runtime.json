@@ -1,0 +1,36 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 1,
+  "fixedSteps": 30,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "authored-model",
+      "translation": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "authored-audio",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    }
+  ],
+  "presentationErrors": [],
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "workshop",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.2712000000000002,
+  "uiDrawCalls": 0
+}

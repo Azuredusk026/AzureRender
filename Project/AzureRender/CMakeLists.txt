@@ -1970,6 +1970,13 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.AudioWorkflow COMMAND AzureEditorAudioWorkflowTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
     set_tests_properties(AzureEditor.AudioWorkflow PROPERTIES FIXTURES_REQUIRED AudioCodecFixtures)
     add_executable(AzureAssetRoundTripTests tests/AssetRoundTripTests.cpp)
+    add_executable(AzureFirstBatchAuthoringTests tests/FirstBatchAuthoringTests.cpp)
+    target_link_libraries(AzureFirstBatchAuthoringTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.FirstBatchAuthoring COMMAND AzureFirstBatchAuthoringTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g19/evidence/2026-10-12/image-fixtures"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g20/evidence/2026-10-12/audio-fixtures"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g18/evidence/2026-10-12/converted-fixtures/fbx-target/animated.glb")
     add_executable(AzureEditorAssetTransferTests tests/EditorAssetTransferTests.cpp)
     target_link_libraries(AzureEditorAssetTransferTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.AssetTransfer COMMAND AzureEditorAssetTransferTests

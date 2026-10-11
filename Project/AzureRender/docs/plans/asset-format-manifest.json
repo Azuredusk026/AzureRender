@@ -91,17 +91,18 @@
     {
       "id": "P7",
       "summary": "第一批格式制作与交付验收",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "U17"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/p7/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "G22",
       "summary": "压缩纹理与 mip 交换",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "P7"
       ],
@@ -209,7 +210,9 @@
     }
   },
   "implementedFormats": {},
-  "evidence": {},
+  "evidence": {
+    "firstBatchDelivery": "docs/acceptance/p7/evidence/2026-10-12/manifest.json"
+  },
   "complete": false,
   "prerequisiteGate": "AllAutomaticGates",
   "manualReview": {
