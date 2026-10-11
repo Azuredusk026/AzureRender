@@ -5,6 +5,9 @@
 > 日期：2026-10-10
 > 范围：Windows 编辑器、Player 与双游戏流程
 
+当前待项与交付顺序见[后续开发路线](2026-10-11-next-development.md)。
+最新测量来源见[设备环境验收](../acceptance/p5/closure/device-environment.md)。
+
 ## 目标与依据
 
 本计划先完成 P5 的必需验收。

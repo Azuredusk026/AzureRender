@@ -22,6 +22,8 @@
 执行状态见[开发总计划](azure-engine-plan.md)。
 机器状态见[格式阶段清单](asset-format-manifest.json)。
 
+当前验收待项与格式阶段依赖见[后续开发路线](2026-10-11-next-development.md)。
+
 技术基础沿用 C++17、CMake、vcpkg 和 Python。
 模型运行格式沿用 glTF 2.0 与 GLB。
 图像处理复用 stb 与 OpenEXR。

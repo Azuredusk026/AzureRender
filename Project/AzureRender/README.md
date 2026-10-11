@@ -230,5 +230,6 @@ Windows 缓存读取共享发布所需的删除访问。
 温度、热降频与后台占用保留原始观察。
 规则和实测见[设备环境验收](docs/acceptance/p5/closure/device-environment.md)。
 
+后续任务与阶段顺序见[开发路线](docs/plans/2026-10-11-next-development.md)。
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。

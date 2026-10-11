@@ -12,6 +12,10 @@ U6 与 U7 当前处于 Complete。
 P4 当前处于 Active。
 问题与步骤见[交互体验实施计划](2026-10-07-editor-usability.md)。
 
+后续任务、依赖与交付顺序见[后续开发路线](2026-10-11-next-development.md)。
+P5、U15、U16 与 P6 的剩余门禁优先完成。
+随后连续推进 G17 至 P8 的资产格式拓展。
+
 制作能力见[编辑器产品化实施计划](2026-10-09-editor-productization.md)。
 来源与评估见[Hazel 与 Fermion 调研](../research/2026-10-09-hazel-fermion.md)。
 该计划为 Active，涵盖十一阶段与三个可选专项。
