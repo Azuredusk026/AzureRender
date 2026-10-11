@@ -140,7 +140,7 @@ class PlatformerScenario:
             # Recovery can occur between network observations. A full metre
             # below the tested support proves the deliberately driven fall.
             if position[1]<support_top-1:self.sawFall=True
-            if self.phase=='fall-drive' and now-self.phaseStarted>=1.4:
+            if self.phase=='fall-drive' and (self.sawFall or now-self.phaseStarted>=1.4):
                 self.key(68,False);self.transition('fall-recover',now)
             elif self.phase=='fall-recover':
                 expected=self.platforms[4 if self.checkpointFall else 0]['z']

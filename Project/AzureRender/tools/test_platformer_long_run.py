@@ -175,4 +175,103 @@ class LandingAlignment(unittest.TestCase):
         self.assertEqual(h.events[-2:],[
             dict(action='key',key=83,down=False),dict(action='key',key=87,down=True)])
 
+observedFall=json.loads((root/'tests/fixtures/platformer-observed-fall.json').read_text(encoding='utf-8'))
+class ObservedFallBoundary(unittest.TestCase):
+    def harness(self,checkpoint=False):
+        h=BackgroundScanHarness();h.state=copy.deepcopy(observedFall['value'])
+        h.phase='fall-drive';h.phaseStarted=observedFall['phaseStarted'];h.keys={68}
+        h.checkpointFall=checkpoint;h.sawFall=False;h.savedCoins=0
+        if checkpoint:
+            h.savedCoins=5;h.state['tasks'][0]['collected']=5
+            h.state['characters'][0]['position'][1]=h.platforms[4]['top']-1.1
+        return h
+    def update(self,h):h._update(observedFall['seconds'])
+    def recover(self,h):
+        hero=h.state['characters'][0];p=h.platforms[4 if h.checkpointFall else 0]
+        hero['position']=[0.,p['top'],p['z']];hero['grounded']=True
+    def test_observed_fall_releases_input_before_cutoff_without_counting_recovery(self):
+        h=self.harness();self.assertLess(observedFall['seconds']-h.phaseStarted,1.4)
+        self.update(h)
+        self.assertTrue(h.sawFall);self.assertFalse(h.keys)
+        self.assertEqual(h.events,[dict(action='key',key=68,down=False)])
+        self.assertEqual(h.phase,'fall-recover');self.assertEqual(h.counts['startFallRecoveries'],0)
+    def test_observed_fall_and_centered_grounded_return_count_once(self):
+        for checkpoint in (False,True):
+            h=self.harness(checkpoint);self.update(h);self.recover(h)
+            self.update(h);self.assertEqual(h.phase,'walk')
+            key='checkpointFallRecoveries' if checkpoint else 'startFallRecoveries'
+            self.assertEqual(h.counts[key],1)
+    def test_airborne_or_off_center_return_cannot_count_recovery(self):
+        for condition in ('airborne','side','route'):
+            h=self.harness();self.update(h);self.recover(h)
+            hero=h.state['characters'][0]
+            if condition=='airborne':hero['grounded']=False
+            elif condition=='side':hero['position'][0]=.41
+            else:hero['position'][2]=.41
+            self.update(h);self.assertEqual(h.counts['startFallRecoveries'],0,msg=condition)
+            self.assertEqual(h.phase,'fall-recover',msg=condition)
+    def test_checkpoint_recovery_requires_preserved_coins(self):
+        h=self.harness(True);self.update(h);self.recover(h)
+        h.state['tasks'][0]['collected']=4
+        with self.assertRaisesRegex(AssertionError,'Recovery must preserve coins'):self.update(h)
+        self.assertEqual(h.counts['checkpointFallRecoveries'],0)
+    def test_duration_fallback_releases_input_without_inventing_fall_evidence(self):
+        h=self.harness();self.recover(h);h._update(h.phaseStarted+1.5)
+        self.assertEqual(h.phase,'fall-recover');self.assertFalse(h.keys);self.assertFalse(h.sawFall)
+        h._update(h.phaseStarted+.1);self.assertEqual(h.counts['startFallRecoveries'],0)
+    def test_grounded_position_alone_cannot_prove_fall_recovery(self):
+        h=self.harness();h.phase='fall-recover';self.recover(h)
+        self.update(h);self.assertEqual(h.counts['startFallRecoveries'],0)
+        self.assertEqual(h.phase,'fall-recover')
+
+
+import threading
+import tempfile
+from unittest.mock import patch
+from long_run_telemetry import LiveGpuTiming, AsyncProgressWriter
+
+class LongRunTelemetryRules(unittest.TestCase):
+    def test_incremental_csv_preserves_partial_rows_and_never_duplicates_frames(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'timing.csv'
+            with LiveGpuTiming(path) as reader:
+                self.assertEqual(reader.read(),[])
+                path.write_bytes(b'frame,frameMs\n1,3.25\n2,4.')
+                self.assertEqual(reader.read(),[3.25]);self.assertEqual(reader.read(),[])
+                with path.open('ab') as writer:writer.write(b'5\n3,6.75\n')
+                self.assertEqual(reader.read(),[4.5,6.75]);self.assertEqual(reader.read(),[])
+            path.unlink();self.assertFalse(path.exists())
+    def test_progress_publish_returns_while_storage_is_blocked_and_close_flushes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'progress.json';entered=threading.Event();release=threading.Event()
+            returned=threading.Event();original=Path.write_text;errors=[]
+            def delayed(target,*args,**kwargs):
+                entered.set();release.wait(5);return original(target,*args,**kwargs)
+            writer=AsyncProgressWriter(path);record={'seconds':60,'working':1234}
+            def publish():
+                try:writer.publish(record)
+                except BaseException as error:errors.append(error)
+                finally:returned.set()
+            with patch.object(Path,'write_text',delayed):
+                publisher=threading.Thread(target=publish);publisher.start()
+                try:
+                    self.assertTrue(entered.wait(2));self.assertTrue(returned.wait(.5))
+                    record['seconds']=999
+                    self.assertFalse(path.exists())
+                finally:
+                    release.set();publisher.join(3);writer.close()
+            self.assertFalse(errors);self.assertFalse(publisher.is_alive())
+            self.assertEqual(json.loads(path.read_text(encoding='utf-8')),{'seconds':60,'working':1234})
+    def test_progress_write_failure_propagates_when_its_owner_closes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(OSError):
+                with AsyncProgressWriter(Path(directory)/'absent'/'progress.json') as writer:
+                    writer.publish({'seconds':60})
+    def test_invalid_complete_csv_row_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'timing.csv';path.write_bytes(b'frame,frameMs\n1,bad\n')
+            with LiveGpuTiming(path) as reader:
+                with self.assertRaises(ValueError):reader.read()
+
+
 if __name__=='__main__':unittest.main()

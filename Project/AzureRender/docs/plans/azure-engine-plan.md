@@ -17,6 +17,10 @@ P4 当前处于 Active。
 目录回收候选的正式性能八轮通过、七轮待修。
 缺页与原目标复测见[诊断验收](../acceptance/p5/closure/pagefault-trace-results.md)。
 平台观测阻塞按[专项计划](2026-10-11-longrun-observation.md)推进。
+共享观测与正式平台长跑见[机制验收](../acceptance/p5/closure/observation-control.md)。
+本轮新增 CPU 回归三百二十六项通过。
+GPU 关联一百二十八项，本轮新增执行零项。
+完整性能、因果归因与人工制作保持待验。
 
 P5、U15、U16 与 P6 的剩余门禁优先完成。
 随后连续推进 G17 至 P8 的资产格式拓展。

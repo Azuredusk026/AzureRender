@@ -12,6 +12,7 @@ import time
 from build_game import verify_package, digest
 from run_playable_performance import stats
 from gpu_environment import environment_errors,snapshot,wait_and_record
+from long_run_telemetry import LiveGpuTiming, AsyncProgressWriter
 
 
 def periodic_statistics(rows,warm_frame):
@@ -160,13 +161,14 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
         '--resource-root',str(package/'share/AzureRender'),'--width','1920','--height','1080',
         '--game-actions',str(output/'input.json'),'--gpu-timing','--gpu-timing-output',str(timing),'--runtime-report',str(runtime)]
     if scenario:command+=scenario.arguments()
-    csv_path=timing.with_suffix('.csv');observations=[];gpu=[];gpu_windows=[];minute=[];pending=b'';csv_offset=0
+    csv_path=timing.with_suffix('.csv');observations=[];gpu=[];gpu_windows=[];minute=[]
     checks=dict(minimized=False,restored=False,resized=False,finalExtent=[]);peak=0;warm_frame=0;window_events=[]
     warm_seconds=max(11,min(120,seconds/3))
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
     try:ctypes.WinDLL('user32').SetProcessDPIAware()
     except AttributeError:pass
-    with (output/'stdout.log').open('w',encoding='utf-8') as stdout,(output/'stderr.log').open('w',encoding='utf-8') as stderr:
+    with LiveGpuTiming(csv_path) as gpu_reader, AsyncProgressWriter(output/'progress.json') as progress_writer, \
+            (output/'stdout.log').open('w',encoding='utf-8') as stdout,(output/'stderr.log').open('w',encoding='utf-8') as stderr:
         process=subprocess.Popen(command,cwd=package,env=env,stdout=stdout,stderr=stderr,startupinfo=info)
         window=NativeWindow(process.pid);startup=time.monotonic()
         try:
@@ -188,19 +190,13 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
                     window_events.append(dict(seconds=elapsed,event='resize',extent=window.extent(),passed=large))
                 if scenario and not window.user.IsIconic(window.handle):scenario.update(elapsed)
                 mem=process_memory(process.pid);peak=max(peak,mem['peak'])
-                if csv_path.exists():
-                    with csv_path.open('rb') as stream:
-                        stream.seek(csv_offset);pending+=stream.read();csv_offset=stream.tell()
-                    lines=pending.split(b'\n');pending=lines.pop()
-                    for line in lines:
-                        if line and not line.startswith(b'frame,'):
-                            value=float(line.split(b',')[-1]);gpu.append(value);minute.append(value)
+                values=gpu_reader.read();gpu.extend(values);minute.extend(values)
                 observations.append(dict(seconds=elapsed,gpuFrames=len(gpu),**mem))
                 if elapsed<warm_seconds:warm_frame=len(gpu)
                 if elapsed>=next_minute:
                     gpu_windows.append(dict(endSeconds=elapsed,frames=len(minute),**stats(minute)));minute=[];next_minute+=60
                     print(json.dumps(dict(seconds=round(elapsed),gpuFrames=len(gpu),workingMiB=round(mem['working']/1024**2,1))),flush=True)
-                    (output/'progress.json').write_text(json.dumps(observations[-1]),encoding='utf-8')
+                    progress_writer.publish(observations[-1])
                 if elapsed>=seconds:break
                 time.sleep(.02 if scenario else .5)
             if scenario:scenario.release()

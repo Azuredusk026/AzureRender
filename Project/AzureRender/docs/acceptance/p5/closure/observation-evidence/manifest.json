@@ -1,0 +1,634 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "fc5ea0a97abea1c180be8778ac4e0732e4cc56aea8242fdb013be344cdf5e851",
+  "sourceInputCount": 928,
+  "files": [
+    {
+      "path": "prior-observed-fall-red.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\observed-fall-red.log",
+      "originalSha256": "3e20b19da5da0a2f0601bb3ecb028e8bb233236de5573dd902dd51f2f34ed2d6",
+      "archivedContentSha256": "3e20b19da5da0a2f0601bb3ecb028e8bb233236de5573dd902dd51f2f34ed2d6",
+      "compressedSha256": "8e14b9ee9f32067cb4c69389bea8510232e38ff160b3db39714cb2c5398877f6",
+      "originalBytes": 926,
+      "archivedBytes": 926,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-observed-fall-green.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\observed-fall-green.log",
+      "originalSha256": "28464b0f48336c29190108f3310e84354bda82d6e6cef7d722199ea46bf22640",
+      "archivedContentSha256": "28464b0f48336c29190108f3310e84354bda82d6e6cef7d722199ea46bf22640",
+      "compressedSha256": "f598e05beac01cc3b559505f32e8ce872a7f8781eeccdf53e0e51686e6e207b7",
+      "originalBytes": 103,
+      "archivedBytes": 103,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-suite-red.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-suite-red.log",
+      "originalSha256": "c66d6e9197dab674fee09288bd497af9cc0bc0e57b3684ff8c466e7b9bba4991",
+      "archivedContentSha256": "c66d6e9197dab674fee09288bd497af9cc0bc0e57b3684ff8c466e7b9bba4991",
+      "compressedSha256": "920d92a96643597613b1864a7dbd368d533afb98d34c76444fd2410fefb97f5a",
+      "originalBytes": 2472,
+      "archivedBytes": 2472,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-suite-green.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-suite-green.log",
+      "originalSha256": "34e3ed98554673edce1ccd5f0dd3ca666cbd884b3fdbec8026cec433f7f46521",
+      "archivedContentSha256": "34e3ed98554673edce1ccd5f0dd3ca666cbd884b3fdbec8026cec433f7f46521",
+      "compressedSha256": "512c6a61f293c5c07739798d6eb0b48ca160af32b894e47e4d73043ba833f267",
+      "originalBytes": 146,
+      "archivedBytes": 146,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-telemetry-red.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\telemetry-red.log",
+      "originalSha256": "c9d24b8be70f7b1db6931d07e32b803a6b3fbf90c5071312aeb9ce60bc9e3762",
+      "archivedContentSha256": "c9d24b8be70f7b1db6931d07e32b803a6b3fbf90c5071312aeb9ce60bc9e3762",
+      "compressedSha256": "2c150b1953cf2c96f4dc2a78597d2ec36f8be7929b3cb1b1412dc70255e6e996",
+      "originalBytes": 275,
+      "archivedBytes": 275,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-telemetry-green.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\telemetry-green.log",
+      "originalSha256": "b5d5ec585ef8c727f8420d26bcaad223c08d447512f45eaa003a25a2fc9bf358",
+      "archivedContentSha256": "b5d5ec585ef8c727f8420d26bcaad223c08d447512f45eaa003a25a2fc9bf358",
+      "compressedSha256": "6dcb71ade97b363136a679935efe991c81a60c0c63be64231f9820a61509377d",
+      "originalBytes": 150,
+      "archivedBytes": 150,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-probe-association.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-probe-association.json",
+      "originalSha256": "9cb18d184af7a718553267cddd665a04e5e958af31f907f56048a80e7893034d",
+      "archivedContentSha256": "9cb18d184af7a718553267cddd665a04e5e958af31f907f56048a80e7893034d",
+      "compressedSha256": "873f08c3cbd0f17f7e931b40bba4170cd8075f572b0953f985e7b202177d7c29",
+      "originalBytes": 338,
+      "archivedBytes": 338,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-probe-completion.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-probe-completion.json",
+      "originalSha256": "6e5a6588b802a568cacb6fe94cbb319eff0da4ecb434802f3bf70aad3e0c7045",
+      "archivedContentSha256": "6e5a6588b802a568cacb6fe94cbb319eff0da4ecb434802f3bf70aad3e0c7045",
+      "compressedSha256": "88eb945f5fa9f1fbcf27af64888340a549f030d5059ba7b6cc3566a7e41c792f",
+      "originalBytes": 356,
+      "archivedBytes": 356,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-candidate-probe-error.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-candidate-probe\\error.json",
+      "originalSha256": "fe956acb5759864d03bf94c79516d9d0d54fb2112d4ea4c4a9d2c37f3de21c4e",
+      "archivedContentSha256": "fe956acb5759864d03bf94c79516d9d0d54fb2112d4ea4c4a9d2c37f3de21c4e",
+      "compressedSha256": "d9695e1deac77037d2f126950a83eb00342f350ef7d3e40a2a66719aa314c6a3",
+      "originalBytes": 154,
+      "archivedBytes": 154,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-cadence-profile-error.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-cadence-profile\\error.json",
+      "originalSha256": "b09fb488387a3f472c059632aeedaf90faa3cfc8b7b0a020c79e879b1c9b2673",
+      "archivedContentSha256": "b09fb488387a3f472c059632aeedaf90faa3cfc8b7b0a020c79e879b1c9b2673",
+      "compressedSha256": "dd678ed1c07e7ce7f772a47d9a36bf846a359fe7cea546d079cdc9a336180ff1",
+      "originalBytes": 260,
+      "archivedBytes": 260,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-cadence-profile-host-cadence-profile.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-cadence-profile\\host-cadence-profile.json",
+      "originalSha256": "27455e46e39a8d419e04264cab3c8b397b4440daa5fe1a1850840de0878db8df",
+      "archivedContentSha256": "27455e46e39a8d419e04264cab3c8b397b4440daa5fe1a1850840de0878db8df",
+      "compressedSha256": "a3bf4c4a8d1fcac4963aef0b7f685d483b6436b3213d91ac3a1470a060d48609",
+      "originalBytes": 23097,
+      "archivedBytes": 23097,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-candidate-probe.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-candidate-probe.log",
+      "originalSha256": "929a97d04a9142246807a95f8e09d147487002916708ce23f0e188f21b02c5cd",
+      "archivedContentSha256": "929a97d04a9142246807a95f8e09d147487002916708ce23f0e188f21b02c5cd",
+      "compressedSha256": "712fd9f8196106b7a9e00eaa68f1f4477fc689dd8ef354b119403fb306a7f74f",
+      "originalBytes": 1070,
+      "archivedBytes": 1070,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-fall-cadence-profile.log.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\fall-cadence-profile.log",
+      "originalSha256": "66ba90dc99a22762af46d27de9636374a0ad5e9480afce12b994218a1005ad55",
+      "archivedContentSha256": "66ba90dc99a22762af46d27de9636374a0ad5e9480afce12b994218a1005ad55",
+      "compressedSha256": "10867cf3bc0dc9664c1953d8ebf09dabcb7b8f608943c4c08268b4a39ddef82c",
+      "originalBytes": 1619,
+      "archivedBytes": 1619,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "prior-platformer-longrun-error.json.gz",
+      "source": "build\\p5-directory-reclamation-2026-10-11\\platformer-longrun\\error.json",
+      "originalSha256": "97c493f895a75de2512fe6dbb95be124834fc409349fc9341fe8af7b4096303b",
+      "archivedContentSha256": "97c493f895a75de2512fe6dbb95be124834fc409349fc9341fe8af7b4096303b",
+      "compressedSha256": "3e94a742997df998a8dbf41fb58702b9ad1e750de861349606a378620589f9c2",
+      "originalBytes": 162,
+      "archivedBytes": 162,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "both-build.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\both-build.log",
+      "originalSha256": "26f54a629166b635c52fb030c65205d10efe9e40ec83b1ce3f04f750e9985ca2",
+      "archivedContentSha256": "26f54a629166b635c52fb030c65205d10efe9e40ec83b1ce3f04f750e9985ca2",
+      "compressedSha256": "4117453d05c53151d57c1da24396e35aa762ded138df1f9910f72f05cf6f81f4",
+      "originalBytes": 2299,
+      "archivedBytes": 2299,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "debug-provenance.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\debug-provenance.json",
+      "originalSha256": "55ab0d0a73399523d3073220ef20b690944c0dc9b163474c0223a4d0efbf948b",
+      "archivedContentSha256": "55ab0d0a73399523d3073220ef20b690944c0dc9b163474c0223a4d0efbf948b",
+      "compressedSha256": "d2c63dcb9e1f1ca507f6fcc01847b496cd7756d8f1cc256dcc1c65d43433937e",
+      "originalBytes": 150445,
+      "archivedBytes": 150445,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "release-provenance.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\release-provenance.json",
+      "originalSha256": "fb5e771da126ae709f2be1ade4028dbd60a301c61f9aca8a1de1fb9f29bc3b6e",
+      "archivedContentSha256": "fb5e771da126ae709f2be1ade4028dbd60a301c61f9aca8a1de1fb9f29bc3b6e",
+      "compressedSha256": "5a39321646f04e10e765f06c1a1ae5d65ec4f95a50a61b1e91653bfdd8b9af56",
+      "originalBytes": 147547,
+      "archivedBytes": 147547,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "debug-cpu-regression.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\debug-cpu-regression.log",
+      "originalSha256": "043d499ecda172eff2ea3d387b9511e9d0997bdcbd57174e6a89186817c64f4d",
+      "archivedContentSha256": "043d499ecda172eff2ea3d387b9511e9d0997bdcbd57174e6a89186817c64f4d",
+      "compressedSha256": "641d7bb551dd76b0d274d336ea158b55200c1d0bb0e60dae18c0264795e337c0",
+      "originalBytes": 21629,
+      "archivedBytes": 21629,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "release-cpu-regression.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\release-cpu-regression.log",
+      "originalSha256": "64ff1e7526d7fd886a4e6603f547b7c497a58fbf98e391749eb2b11ede59d150",
+      "archivedContentSha256": "64ff1e7526d7fd886a4e6603f547b7c497a58fbf98e391749eb2b11ede59d150",
+      "compressedSha256": "9761c92a1eb4e8ea409fdb2801edabaebf2d8fb95bcca8ea48526c6da71078d4",
+      "originalBytes": 21633,
+      "archivedBytes": 21633,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-association.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-association.json",
+      "originalSha256": "898af7841a7a5efcc585b80fd3a8ab952081f3de47833567bee3f155e34a824d",
+      "archivedContentSha256": "898af7841a7a5efcc585b80fd3a8ab952081f3de47833567bee3f155e34a824d",
+      "compressedSha256": "24c836dcf630babf493426ec2bfcef71cc3dc0606762193b9dd94adb85debd23",
+      "originalBytes": 23071,
+      "archivedBytes": 23071,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "status.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\status.json",
+      "originalSha256": "89d4a00daaf9fd1817bedd8d77e90c228e0f173018f9f8d6936d81b856a688e7",
+      "archivedContentSha256": "89d4a00daaf9fd1817bedd8d77e90c228e0f173018f9f8d6936d81b856a688e7",
+      "compressedSha256": "c4367a9d7c57e115419f9f6f94f05b251a1050e2687786795859428432a8cd99",
+      "originalBytes": 1120,
+      "archivedBytes": 1120,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "delivery.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\delivery.log",
+      "originalSha256": "8fda905d6855cb932406a5dc15b516487e6e420e81cafa15892b92b4af6b29f9",
+      "archivedContentSha256": "8fda905d6855cb932406a5dc15b516487e6e420e81cafa15892b92b4af6b29f9",
+      "compressedSha256": "42b3c7159ceec7ceba5678fb175468d1ccf832e9d33d77ab2403abc3628e555f",
+      "originalBytes": 2331,
+      "archivedBytes": 2331,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "arena-delivery-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\arena-delivery\\summary.json",
+      "originalSha256": "6a642d123c82c03410dd54b98155119573eaff2586a4caf68bf5d44775a2fd53",
+      "archivedContentSha256": "6a642d123c82c03410dd54b98155119573eaff2586a4caf68bf5d44775a2fd53",
+      "compressedSha256": "29bfc7f8263f6daffaca1110e06ef1bae6fb28b7b1e538acea9bf3accbc6e777",
+      "originalBytes": 108937,
+      "archivedBytes": 108937,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "run-observation-acceptance.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\run-observation-acceptance.py",
+      "originalSha256": "ff896b34128cee2d78d6a36d650fb92cc13d233dde21038479c421f514ee7f42",
+      "archivedContentSha256": "ff896b34128cee2d78d6a36d650fb92cc13d233dde21038479c421f514ee7f42",
+      "compressedSha256": "a736eefc25203e514625972bf66dafa3a8d2dd51f7501bb765d9667ae0613b97",
+      "originalBytes": 4132,
+      "archivedBytes": 4132,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "verify-gpu-equivalence.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\verify-gpu-equivalence.py",
+      "originalSha256": "5a471fd7e753386f64c1264bd5c12c6cd921381c63b235b947cbc8a0997dbc06",
+      "archivedContentSha256": "5a471fd7e753386f64c1264bd5c12c6cd921381c63b235b947cbc8a0997dbc06",
+      "compressedSha256": "06f5cd6c325f26f0fd1bd3d0c201465db8bfef014472832f193b163efec29262",
+      "originalBytes": 1721,
+      "archivedBytes": 1721,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "operator-review-operator-checklist.md.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\operator-review\\operator-checklist.md",
+      "originalSha256": "9e9dad643722d15b2a3407fc1558a6b7fc4534e37aa5fa4f9e2ed58c7c64782d",
+      "archivedContentSha256": "9e9dad643722d15b2a3407fc1558a6b7fc4534e37aa5fa4f9e2ed58c7c64782d",
+      "compressedSha256": "40042be69ab8d8b934e7418d0d6a75a4c3b8e2cc0119f0128dc51542fc03be0b",
+      "originalBytes": 3503,
+      "archivedBytes": 3503,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "operator-review-feedback-template.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\operator-review\\feedback-template.json",
+      "originalSha256": "5d0ef25014fe2c01e79ae64960e9ee129d6f3a6063faf87cfe03cdcf1ae61380",
+      "archivedContentSha256": "5d0ef25014fe2c01e79ae64960e9ee129d6f3a6063faf87cfe03cdcf1ae61380",
+      "compressedSha256": "4413bbd42aef0be3dd7b2343fccb3af92c28178d9e427fe5f619a4dc59cd684b",
+      "originalBytes": 8894,
+      "archivedBytes": 8894,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\summary.json",
+      "originalSha256": "9a03e7bd5fa6daeac5527968b5f200e3c7b4d40d3f05aa7b10bb3bd369f2c7d9",
+      "archivedContentSha256": "48002fbdcc87d04b5540c1a3cf6f704b907213ef1271c80fa43616af1e77c2aa",
+      "compressedSha256": "a8a067c513a09eb562661aa5016bf4e0787ce99c460d33e05b8b7f7b397a77b1",
+      "originalBytes": 606058,
+      "archivedBytes": 9555,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "standard-probe-input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\input.json",
+      "originalSha256": "9574d6ab121b4d3cfd337ddec15d6c0b6f89409748896c20310692e74b3d4450",
+      "archivedContentSha256": "9574d6ab121b4d3cfd337ddec15d6c0b6f89409748896c20310692e74b3d4450",
+      "compressedSha256": "f3b8f73d353f0d40a8f2af4e7197e99801788ddeee43ca8124960c73464a65bc",
+      "originalBytes": 561339,
+      "archivedBytes": 561339,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\environment.json",
+      "originalSha256": "f339ec176a8f0bd36b9e1d8a2a18a59d6d28fd344ad48cc85aa9aca0967978b3",
+      "archivedContentSha256": "80eaa9fea5077269d756385fa125403d6282b498dcb46af10e2dd94016b401fb",
+      "compressedSha256": "8675eda01f3c48ca58e6b14e5115e73c94774c18860a011ea45addb668bcf525",
+      "originalBytes": 601404,
+      "archivedBytes": 5098,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "standard-probe-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\stdout.log",
+      "originalSha256": "f85074b85c4fb3402a090ec9b37fb7230296faf84d1315a4b7d863f0153531ec",
+      "archivedContentSha256": "f85074b85c4fb3402a090ec9b37fb7230296faf84d1315a4b7d863f0153531ec",
+      "compressedSha256": "d7a5f8a7512ab13234c45605e1124990df53f2fdf9c5c20eefe39f463ab283b1",
+      "originalBytes": 2260,
+      "archivedBytes": 2260,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\stderr.log",
+      "originalSha256": "e7c719323333aaf129995f89d93d0dfaaaa5944292325ed897df1a4337cc2c8e",
+      "archivedContentSha256": "e7c719323333aaf129995f89d93d0dfaaaa5944292325ed897df1a4337cc2c8e",
+      "compressedSha256": "91ad9066148ee3315b7fa323c7d9d12d1387edb4d31e6a626cb6be6ce8de07e0",
+      "originalBytes": 1146,
+      "archivedBytes": 1146,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\timing.json",
+      "originalSha256": "41cb46cc1bf32ebc23a3095333102d395b473a0802c4931bc4ed66ce47919596",
+      "archivedContentSha256": "41cb46cc1bf32ebc23a3095333102d395b473a0802c4931bc4ed66ce47919596",
+      "compressedSha256": "e906dc82b0ef5e5f545a793757c0ea42533f79effede0d097763415821a13efc",
+      "originalBytes": 438830,
+      "archivedBytes": 438830,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\timing.csv",
+      "originalSha256": "62b122b4b745a3f0017ce52754cca44d9c66ec8a78e317b215bd0c358a12aaf0",
+      "archivedContentSha256": "62b122b4b745a3f0017ce52754cca44d9c66ec8a78e317b215bd0c358a12aaf0",
+      "compressedSha256": "23391221fbc20bf798baaa08e5869099539cb2c61e0bab9248d720fae6540d77",
+      "originalBytes": 907301,
+      "archivedBytes": 907301,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-observation.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\observation.json",
+      "originalSha256": "c0d745e6c14bcb2ab3fe6efb68820f82fa9c67e3fb7e36dd6276fed874cbf69f",
+      "archivedContentSha256": "c0d745e6c14bcb2ab3fe6efb68820f82fa9c67e3fb7e36dd6276fed874cbf69f",
+      "compressedSha256": "9b77de4c94a4c458e3d498e1664372ad33d9be5d612249edaf419688bff965f0",
+      "originalBytes": 28689,
+      "archivedBytes": 28689,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "standard-probe-runtime.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\standard-probe\\runtime.json",
+      "originalSha256": "ae3f3d6d9e5cb0ba35bdb620695c5571caec69d94680e9377f332a7aa117c74c",
+      "archivedContentSha256": "ae3f3d6d9e5cb0ba35bdb620695c5571caec69d94680e9377f332a7aa117c74c",
+      "compressedSha256": "c05f32bbefb9e171db678b7c8504f861c29bd020bef19858f8645d35960e7288",
+      "originalBytes": 11110333,
+      "archivedBytes": 11110333,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\summary.json",
+      "originalSha256": "5a53d52d7edabed41971a093a248cfdccdc6e7522306ba77545da03a9a4269d1",
+      "archivedContentSha256": "bca8b52b3d56c4c259e41b472c081b858594df224fc0016b94a493ee18e239c4",
+      "compressedSha256": "8d7c41be8f6143679363134aa03e1b81ed0b363fa04d399e217141b1340b1187",
+      "originalBytes": 532294,
+      "archivedBytes": 10296,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "platformer-probe-input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\input.json",
+      "originalSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "archivedContentSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "compressedSha256": "6958442ef055200411e0c8f77c5dbc6a5075d31616521a23fb5a2c8d27ab707a",
+      "originalBytes": 35,
+      "archivedBytes": 35,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\environment.json",
+      "originalSha256": "a7560ee88f845a0421603200f57e0ef8ae3bbc8467510e47f288f9862a464fa6",
+      "archivedContentSha256": "e5b0d75c48242de4905c7b0e0dbaf25f5814d2c8657a2730a7f0703d877cebbc",
+      "compressedSha256": "1e796c26982059ca08a19bba4db4338538bf773109cab4a9ea1ee7198c432477",
+      "originalBytes": 526248,
+      "archivedBytes": 4486,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "platformer-probe-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\stdout.log",
+      "originalSha256": "79eb502f8301a4cac6aa0edd00f20073426bcbf95755924abb645c8c60a93490",
+      "archivedContentSha256": "79eb502f8301a4cac6aa0edd00f20073426bcbf95755924abb645c8c60a93490",
+      "compressedSha256": "b024f134a9e930947cf3e3b32424907f39eb6b94a413a295225a3f854e6255e2",
+      "originalBytes": 2998,
+      "archivedBytes": 2998,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\stderr.log",
+      "originalSha256": "b95e693cacda7a005fe9dbe5e42677b9de07806f4bc758884650c38222f793e0",
+      "archivedContentSha256": "b95e693cacda7a005fe9dbe5e42677b9de07806f4bc758884650c38222f793e0",
+      "compressedSha256": "5412f4aa07c84a0916c9b29a1c282c067e523e7b1cfe8282293f92181aec95e4",
+      "originalBytes": 1791,
+      "archivedBytes": 1791,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\timing.json",
+      "originalSha256": "7e732b9354125cdab51bb95ad0658295c0889bfed7609eae114f25f685515e95",
+      "archivedContentSha256": "7e732b9354125cdab51bb95ad0658295c0889bfed7609eae114f25f685515e95",
+      "compressedSha256": "5e9bce09ff7c93abc81bb0f9e973e8ff1f5c215be475951dc6e1f3089d2bc3b1",
+      "originalBytes": 447278,
+      "archivedBytes": 447278,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\timing.csv",
+      "originalSha256": "59e53a2b5766358ca9adb65296ab29a25fc520119723487e09328e0a7802b6f5",
+      "archivedContentSha256": "59e53a2b5766358ca9adb65296ab29a25fc520119723487e09328e0a7802b6f5",
+      "compressedSha256": "5b103ebef5a7c76d5414190642991ec496fb2a35d3c0b4eef60c10777e0b7917",
+      "originalBytes": 1334462,
+      "archivedBytes": 1334462,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-observation.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\observation.json",
+      "originalSha256": "6b0b1d8bf25b3fc0cff32355b3ec8af1124ac2b65f3fe27dac729600f07ca873",
+      "archivedContentSha256": "6b0b1d8bf25b3fc0cff32355b3ec8af1124ac2b65f3fe27dac729600f07ca873",
+      "compressedSha256": "5bb027abf2f4b25f12960c6ce3055a58661d99ebb897dbe70fe76f6ca6e1c19b",
+      "originalBytes": 603561,
+      "archivedBytes": 603561,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-route.jsonl.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\route.jsonl",
+      "originalSha256": "f660529f41c93cddce222c87e08affc3970e82045a94ee38917b19264eb7bf91",
+      "archivedContentSha256": "f660529f41c93cddce222c87e08affc3970e82045a94ee38917b19264eb7bf91",
+      "compressedSha256": "443463df40f4e3a654f349cd3b1aa1358168d062a9f86fbf803043a1032be61a",
+      "originalBytes": 1039163,
+      "archivedBytes": 1039163,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-probe-runtime.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-probe\\runtime.json",
+      "originalSha256": "7dd1b7df8b70c4f26399fa2af3650195d3016afaaeca478b52d3dbdcab3271c3",
+      "archivedContentSha256": "7dd1b7df8b70c4f26399fa2af3650195d3016afaaeca478b52d3dbdcab3271c3",
+      "compressedSha256": "1210f3f0f7d941daa55249838057e77201590a9fe4f44ff390f39e0015daa2f0",
+      "originalBytes": 14094852,
+      "archivedBytes": 14094852,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-summary.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\summary.json",
+      "originalSha256": "0b74e326cbe13d7325317740a5b213c17c75a2c9c89453e7d44db965de8f8afa",
+      "archivedContentSha256": "52d6be7c8b44e22e101d36cb85103c389fa2eea3060a973306735650e14519a2",
+      "compressedSha256": "8540e4666e22c9dd394eb68509d5100dfced6024bca43942476f681f91959cd9",
+      "originalBytes": 624938,
+      "archivedBytes": 27951,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "platformer-longrun-input.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\input.json",
+      "originalSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "archivedContentSha256": "a431a107e675d0560eca269d4886ffaf7c48fecb44db23fb4088cd15db1a1e59",
+      "compressedSha256": "6958442ef055200411e0c8f77c5dbc6a5075d31616521a23fb5a2c8d27ab707a",
+      "originalBytes": 35,
+      "archivedBytes": 35,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-environment.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\environment.json",
+      "originalSha256": "a9981d7451d6d5484dfdea3d72d6c23adab991ebb27df1e0d471bd153cfcfede",
+      "archivedContentSha256": "2b24cdf1fda9c8c01f942e4da658bc12e3947e9d2638cbeb1cd8a8c191b12c63",
+      "compressedSha256": "34a0d67d5a422b43113deda0b151eced6a37c6ed380c38011890b0e546f30012",
+      "originalBytes": 601392,
+      "archivedBytes": 5082,
+      "kind": "DerivedWithoutRawDriverXml"
+    },
+    {
+      "path": "platformer-longrun-stdout.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\stdout.log",
+      "originalSha256": "64519cec63d229db68053a92ea449b207b9d493695d8374969233c7ed9d0663a",
+      "archivedContentSha256": "64519cec63d229db68053a92ea449b207b9d493695d8374969233c7ed9d0663a",
+      "compressedSha256": "39843c72aa3aee8bdd393b469af0e4cea4e62858eb5c7ebeb96f2f7e2f70475f",
+      "originalBytes": 3003,
+      "archivedBytes": 3003,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-stderr.log.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\stderr.log",
+      "originalSha256": "ba748feb30de1e15b2717646d742a5a003f79fdb82f1ed3f41fb5818c8db3048",
+      "archivedContentSha256": "ba748feb30de1e15b2717646d742a5a003f79fdb82f1ed3f41fb5818c8db3048",
+      "compressedSha256": "ecb9465233dfc79f02e33dbf93f68933fead52a1f9b5f14756346d73f2713a90",
+      "originalBytes": 18396,
+      "archivedBytes": 18396,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-timing.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\timing.json",
+      "originalSha256": "0d48ad329c4d6f8c9658cfac398ba42d7e8d630a2553278092970d96a70b08de",
+      "archivedContentSha256": "0d48ad329c4d6f8c9658cfac398ba42d7e8d630a2553278092970d96a70b08de",
+      "compressedSha256": "69e51eb339b4f7f4a6228dbabc931f3a23146a6f1dedea4453b440073856dacf",
+      "originalBytes": 1023735,
+      "archivedBytes": 1023735,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-timing.csv.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\timing.csv",
+      "originalSha256": "b7b2219b590808373abe2910ae9514f8e9a1287bf49a3c8bf125b3c8c06e5de8",
+      "archivedContentSha256": "b7b2219b590808373abe2910ae9514f8e9a1287bf49a3c8bf125b3c8c06e5de8",
+      "compressedSha256": "d33963fb714069434e262c41f2d69704247ea17a403fb51633bba1af7d338eed",
+      "originalBytes": 19970254,
+      "archivedBytes": 19970254,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-observation.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\observation.json",
+      "originalSha256": "82044fff04851bbb6fb3caae2cafa62646932b2935bc4318de02a1cc35baeba0",
+      "archivedContentSha256": "82044fff04851bbb6fb3caae2cafa62646932b2935bc4318de02a1cc35baeba0",
+      "compressedSha256": "651328beb2c222a833d51aedb13c7af92d6eee5a36422e22520a594bd4cdc97e",
+      "originalBytes": 8959833,
+      "archivedBytes": 8959833,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-route.jsonl.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\route.jsonl",
+      "originalSha256": "2b2cde29be5b7a25c533e10addc62cdbc952c1b46aa35b1ee80faf03676f447e",
+      "archivedContentSha256": "2b2cde29be5b7a25c533e10addc62cdbc952c1b46aa35b1ee80faf03676f447e",
+      "compressedSha256": "82294b21c87117afe8ce690eecfbfdca4a56b004c697fe229283b452af8ccd2b",
+      "originalBytes": 17033559,
+      "archivedBytes": 17033559,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-runtime.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\runtime.json",
+      "originalSha256": "a329a1da09bf4202b6bcf8c33eef48f9a86fc7b707214e4b911e477dd79e93ad",
+      "archivedContentSha256": "a329a1da09bf4202b6bcf8c33eef48f9a86fc7b707214e4b911e477dd79e93ad",
+      "compressedSha256": "0316aaa6749c90790057f492b49a9133dc9f813d4c16cb13b0b3ce0796aa0310",
+      "originalBytes": 14135750,
+      "archivedBytes": 14135750,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-longrun-observed-modules.json.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\platformer-longrun\\observed-modules.json",
+      "originalSha256": "246775182d378a540cb4a39154a3384a0567744cd7d7f19b6acc7800aeb822df",
+      "archivedContentSha256": "246775182d378a540cb4a39154a3384a0567744cd7d7f19b6acc7800aeb822df",
+      "compressedSha256": "b8f82b16d68954bced74604b7a602f8382361678fc5d2487952d8f1b8053873d",
+      "originalBytes": 2684,
+      "archivedBytes": 2684,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "platformer-observed-fall.json.gz",
+      "source": "tests\\fixtures\\platformer-observed-fall.json",
+      "originalSha256": "8e6c4b12be231e288c4361af8a86d2c4fcf058142f3229d44ab53c947d622aa4",
+      "archivedContentSha256": "8e6c4b12be231e288c4361af8a86d2c4fcf058142f3229d44ab53c947d622aa4",
+      "compressedSha256": "74f8a3ac7610c91bbc4c1dec4a630083851d6f09eb3cc60fe5bff49a43662a6c",
+      "originalBytes": 1888,
+      "archivedBytes": 1888,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-run_playable_long_run.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-snapshot-p\\tools\\run_playable_long_run.py",
+      "originalSha256": "3be4c711de0548a29a49f9eef2669857d919d86751df4768df6d1e3b1a2e2411",
+      "archivedContentSha256": "3be4c711de0548a29a49f9eef2669857d919d86751df4768df6d1e3b1a2e2411",
+      "compressedSha256": "6b322246aabd9545079eb96f1c539ea242eadff568c7353d5e55f9a251b458c0",
+      "originalBytes": 20823,
+      "archivedBytes": 20823,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-run_platformer_long_run.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-snapshot-p\\tools\\run_platformer_long_run.py",
+      "originalSha256": "ff7509c07c2068ce3d780c14ad47aaa7e2ce89fe057ad5ec52567e574cf6d77b",
+      "archivedContentSha256": "ff7509c07c2068ce3d780c14ad47aaa7e2ce89fe057ad5ec52567e574cf6d77b",
+      "compressedSha256": "c5c28164bd365ca7482dc3743b28b6fddf42087e79e73fb894490b936a1889b1",
+      "originalBytes": 14743,
+      "archivedBytes": 14743,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-test_platformer_long_run.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-snapshot-p\\tools\\test_platformer_long_run.py",
+      "originalSha256": "f5223db321af6dbe28086629ef2443d578be6e4cfd69765e56202afe3395ac04",
+      "archivedContentSha256": "f5223db321af6dbe28086629ef2443d578be6e4cfd69765e56202afe3395ac04",
+      "compressedSha256": "5cc84fecbc0b0dc8e7605e373391f300b47675684fa613b00ab62be4f3b18bfb",
+      "originalBytes": 18213,
+      "archivedBytes": 18213,
+      "kind": "OriginalBytes"
+    },
+    {
+      "path": "source-long_run_telemetry.py.gz",
+      "source": "build\\p5-observation-control-2026-10-11\\source-snapshot-p\\tools\\long_run_telemetry.py",
+      "originalSha256": "83f8cdbf0b69f6e0ab7b288fb2fffa260caa656ec7b292a54a1efdf71d4e122c",
+      "archivedContentSha256": "83f8cdbf0b69f6e0ab7b288fb2fffa260caa656ec7b292a54a1efdf71d4e122c",
+      "compressedSha256": "dd2d2f0bcbe286a8879a881e41246afb6f774f1af19641a7fe202fbba1170993",
+      "originalBytes": 2012,
+      "archivedBytes": 2012,
+      "kind": "OriginalBytes"
+    }
+  ],
+  "cpuTestsNewlyExecuted": 326,
+  "gpuTestsNewlyExecuted": 0,
+  "gpuTestsAssociated": 128,
+  "fullStageComplete": false,
+  "physicalInputVerified": false,
+  "subjectiveAudioVerified": false,
+  "authoringEfficiencyVerified": false
+}

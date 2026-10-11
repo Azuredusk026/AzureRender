@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+长跑观测机制与正式平台路线见[验收记录](docs/acceptance/p5/closure/observation-control.md)。
+完整性能、归因与人工体验按各阶段门禁维护。
+
 缺页追踪与原目标复测见[诊断记录](docs/acceptance/p5/closure/pagefault-trace-results.md)。
 正式性能、完整归因与实体使用按阶段证据验收。
 
