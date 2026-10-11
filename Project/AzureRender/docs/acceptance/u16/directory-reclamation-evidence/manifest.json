@@ -1,0 +1,1065 @@
+{
+  "schemaVersion": 1,
+  "sourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4",
+  "status": "DirectoryReclamationMechanismVerified",
+  "cpuTests": 326,
+  "gpuTests": 128,
+  "localCancellationBudgetMilliseconds": 100,
+  "originalFailureMilliseconds": 131.5906,
+  "fullU16Acceptance": false,
+  "physicalOperatorVerification": false,
+  "formalPerformanceAcceptance": false,
+  "memoryGrowthRootCauseResolved": false,
+  "files": {
+    "both-build.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\both-build.log",
+      "originalBytes": 14825,
+      "originalSha256": "5aa7107b58c56e397242f63e6fb153f729fe8c20efd690114b396ddf3e80e599",
+      "storedBytes": 1874,
+      "sha256": "49404567c865da895287627a089b2e2ec7c3d45d03a475f3a20b0a255c296c1c"
+    },
+    "debug-provenance.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-provenance.json",
+      "originalBytes": 150341,
+      "originalSha256": "6147bc9def3b74a3194d91d0d737bd6a47083209bd2d217d27f68a59b452a8d6",
+      "storedBytes": 52583,
+      "sha256": "d7e4207db99d68d79a19188ace352771b27ef0356287e68db559bc227d39b467"
+    },
+    "release-provenance.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-provenance.json",
+      "originalBytes": 147443,
+      "originalSha256": "30a54bd2e52710480073ecd865a3bf46df55dc720c257935ffe9b03df8242969",
+      "storedBytes": 51982,
+      "sha256": "14576a9c7a9de6ab8b8ae3199da102200197ffdbc6f50674b3f54d4462753bc7"
+    },
+    "debug-cpu-regression.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-cpu-regression.log",
+      "originalBytes": 21961,
+      "originalSha256": "08e0a0485f4569423ce358e1c3e3e739c7f7ecef7bc701d0147e665c3aca6796",
+      "storedBytes": 3809,
+      "sha256": "ac32b8e0a949137dad75b92e06ff923501c100a7f4d029aedc597b82dc681bc8"
+    },
+    "release-cpu-regression.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-cpu-regression.log",
+      "originalBytes": 21965,
+      "originalSha256": "39b1632edc3ed3ec09f0aed96b30b2a4ab7cc9b3e217fa3d199f9a385f1eec8e",
+      "storedBytes": 3781,
+      "sha256": "67453ef826d85461535d1c9f049cbaa3b4de8fd50bbbbbdc115cac27a1045c97"
+    },
+    "gpu-summary.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\gpu-summary.json",
+      "originalBytes": 39037,
+      "originalSha256": "af2778a07f55b03069327dbf2cea2b5c190d359ee93703335844df4e549073d0",
+      "storedBytes": 2778,
+      "sha256": "ff0b66c0edb2be1619bcbc141e16663326ea6eeba831475e2e58ec8fedd9e4cf"
+    },
+    "debug-gpu-inventory.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-gpu-inventory.json",
+      "originalBytes": 71331,
+      "originalSha256": "d300e9eeae2f00c5578b24ccc6d8cdf202411e60cd247f2def716593840d6bdb",
+      "storedBytes": 3416,
+      "sha256": "6e6a3671bf37901be931705becb338ef66c7286c055f7fcbbd064696a7c24791"
+    },
+    "release-gpu-inventory.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-gpu-inventory.json",
+      "originalBytes": 71711,
+      "originalSha256": "a4ee3087bde001070ce9cc05e91bb25e2770ba41e189166f26f2a4fc7a65cc57",
+      "storedBytes": 3416,
+      "sha256": "d938a50d8f40443c25e49b237a0def72678bc94e9b73c5b9e158b77313d05b4c"
+    },
+    "native-input-window.json.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\native-input-window.json",
+      "originalBytes": 255,
+      "originalSha256": "e29b5af446b7121a6e910ce6a6d1005c0dc8652a3f09e95d68b2246b9cc0f6bf",
+      "storedBytes": 212,
+      "sha256": "a4d22ac080331b0fd5d0556845fa63a2beebb626ffcea6894c0af10a01417969"
+    },
+    "run-gpu-regression.py.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\run-gpu-regression.py",
+      "originalBytes": 2314,
+      "originalSha256": "535753db0b5f08fdf150bd2bcd657581c6453a4a3d3eea339f5d42beb66d8de8",
+      "storedBytes": 1009,
+      "sha256": "0103f9a44c0bc4282c5ff9f0930ca702f35d01833651d5d37cc6a72255f80110"
+    },
+    "debug-AzureRender.VisibilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.VisibilityGpu.log",
+      "originalBytes": 11102,
+      "originalSha256": "eb30f507e44dee9d2866b89a092e0dde32349a808027f561f54403bb12abe431",
+      "storedBytes": 1811,
+      "sha256": "d077d6f250b5055d7ae56c254eef6865e766c021da4912d68390c16013da4cc8"
+    },
+    "debug-AzureRender.SkinningGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.SkinningGpu.log",
+      "originalBytes": 1462,
+      "originalSha256": "850c33627fd461d3ee93fd00a5503d583c79b58ed78cb9e2a4fcafdbd3ca9413",
+      "storedBytes": 541,
+      "sha256": "99501b7db648b9fceaa8ec280c105eb6acb583ac72910f4a8be2f60c36fabb97"
+    },
+    "debug-AzureRender.ShadowTileBoundsGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.ShadowTileBoundsGpu.log",
+      "originalBytes": 1507,
+      "originalSha256": "0f175bac9be9db606596e37c068ce1acc08025330a2df66493f9c79c6dc84de3",
+      "storedBytes": 557,
+      "sha256": "e0d0d2390cfd8f7aa13ae2c45b1147236d9cc57aa35a75a9125375d08a386c07"
+    },
+    "debug-AzureRender.ShadowFilteringGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.ShadowFilteringGpu.log",
+      "originalBytes": 1549,
+      "originalSha256": "1fee63e2614618d3519c2c8b70464f8db6fb488c50b74283a282edc6b82fc2dc",
+      "storedBytes": 592,
+      "sha256": "07de16bf75c8fd872bfd5905050e80337f20e928c2625b420a1d0b823f24be52"
+    },
+    "debug-AzureRender.SurfaceResponseGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.SurfaceResponseGpu.log",
+      "originalBytes": 2446,
+      "originalSha256": "bf7668ed42e960e52b7d5708d5aff61cdc25bc5c4e719d347906cee45ac6152f",
+      "storedBytes": 685,
+      "sha256": "b5353bcef1fffdbb501b4cc4dfaf94392bd132cfe0f4d96f016217693d3f8622"
+    },
+    "debug-AzureRender.ShaderComposition.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.ShaderComposition.log",
+      "originalBytes": 1789,
+      "originalSha256": "7d15ca9071a9fa48470e84a31f6cae132e69db38b449384459faaddbe6cd3906",
+      "storedBytes": 588,
+      "sha256": "5c4c7b3b3fb45bfcfea2340b620fce89c26706c8d4a8a4d3e2d67d7945258555"
+    },
+    "debug-AzureRender.SamplingGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.SamplingGpu.log",
+      "originalBytes": 2040,
+      "originalSha256": "a19d971b7baf656f2ac48aeefa5bf925062be40f684d0b5b8ffb58e61d7132b5",
+      "storedBytes": 795,
+      "sha256": "bb6220a8fb81ad0b47446ec5605ced13754b99c4e0708a4aaa8d1617955484db"
+    },
+    "debug-AzureRender.SamplingHostGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.SamplingHostGpu.log",
+      "originalBytes": 1690,
+      "originalSha256": "7bc5a522868bfbf3a7b020b93cbe2642c9a0f91da10dbad9d6a8ebf2f1de2d43",
+      "storedBytes": 641,
+      "sha256": "8fe82861920e69faf3dc325ccd370027d10eae6d5832819de5e1476127293087"
+    },
+    "debug-AzureRender.PreviewHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.PreviewHost.log",
+      "originalBytes": 4584,
+      "originalSha256": "264be90ab6b341b0bfd9d5d805f083fc2aed7e1539d73e8f503d5947bcf65e74",
+      "storedBytes": 1078,
+      "sha256": "96f1d35c43f968fb0d94ca31e2a40f03d23792078f98b6fe683e5096dbf57033"
+    },
+    "debug-AzureEditor.SelectionGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.SelectionGpu.log",
+      "originalBytes": 1899,
+      "originalSha256": "505695c2a5d896e3928ba0d9e836b067500c4a95b7553b9b60ef0344752594c4",
+      "storedBytes": 660,
+      "sha256": "7cdf473246fa5ad59c0b2cbac002a5f2453a64329082bdec60a277feab3856ea"
+    },
+    "debug-AzureEditor.GizmoGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.GizmoGpu.log",
+      "originalBytes": 1965,
+      "originalSha256": "d00c13bd20ecbff51a6e757ea0630ec563446e5ac9998cbe6463205d38b6a994",
+      "storedBytes": 661,
+      "sha256": "828b61aaacb733bffc174020af813c247e97557bfb3eac3bff46e67830e6132b"
+    },
+    "debug-AzureEditor.DevtoolsHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.DevtoolsHost.log",
+      "originalBytes": 1881,
+      "originalSha256": "ba552bc9844f545b140594ed24edb1257e75cd8361e57c78f7cd94ebebdf9df2",
+      "storedBytes": 676,
+      "sha256": "bb72233a1f754435213713491a0bd503bcfc308a146dacebf1279c07102768f7"
+    },
+    "debug-AzureEditor.ProposalHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ProposalHost.log",
+      "originalBytes": 2270,
+      "originalSha256": "c45b90520c1b3b652a285e5c9b204a65157da2c89f8b16526020868a99a801c1",
+      "storedBytes": 795,
+      "sha256": "17f362afbc47bad8b3096428e37a7eade79b65ed4e445e9fc7ff230dc84d8291"
+    },
+    "debug-AzureAssets.ProceduralHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureAssets.ProceduralHost.log",
+      "originalBytes": 3272,
+      "originalSha256": "21608d677d653d2bbc97fe38e92f1a441962f9921bf44f59c109fd15295accca",
+      "storedBytes": 985,
+      "sha256": "494a8e84808efa139882335739c5c61cddd81a6e528d1df819d8d0e8c569f6b0"
+    },
+    "debug-AzureEditor.SettingsHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.SettingsHost.log",
+      "originalBytes": 1918,
+      "originalSha256": "c4fe7b822f008d9c932bc8f155408109fb3503a066592bdcef97c2ab22eefda6",
+      "storedBytes": 705,
+      "sha256": "89408ed93900625923de21c51d5ed212b2ffef0d3fc367d4445646a3cbe00d7e"
+    },
+    "debug-AzureEditor.ObservationHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ObservationHost.log",
+      "originalBytes": 1756,
+      "originalSha256": "f4e4ecf7963dba57101a573751c27f732dacaf1a0a99551e530ff623f82e3f37",
+      "storedBytes": 651,
+      "sha256": "ebd165d9e0603a29773bd9c25c76bf212e3a36be20e439d31db7c384f26d0693"
+    },
+    "debug-AzureEngine.SceneInspectorHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.SceneInspectorHost.log",
+      "originalBytes": 1784,
+      "originalSha256": "6b80adf7f8b2922f5435518bceb16f5b21dd569098a388a50748fe0bb75d6d85",
+      "storedBytes": 659,
+      "sha256": "128478afc7d8af25c818ecab51f7dc029440059df93482163a7e5e82945d4fca"
+    },
+    "debug-AzureEngine.RegisteredComponentHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.RegisteredComponentHost.log",
+      "originalBytes": 22501,
+      "originalSha256": "0f956993462b4856f8bae7e4d922726468ed676aedc2a09b22b2a0f603370877",
+      "storedBytes": 4904,
+      "sha256": "f23b36d3dabc3b3fc0508184da11a213eed8be212a8a4fb2131f67ba041ea824"
+    },
+    "debug-AzureEngine.ManagedWorkflows.coreclr.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.ManagedWorkflows.coreclr.log",
+      "originalBytes": 2093,
+      "originalSha256": "3145e9242be0b72f146ee81241ec161166c0eb6260c9afd055dc7f5b200c1b18",
+      "storedBytes": 783,
+      "sha256": "16c4b5e01731569a11707ece0b55d244e68e3e0e608f8c6bd71ff9e5507f03d4"
+    },
+    "debug-AzureEngine.ManagedWorkflows.nativeaot.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.ManagedWorkflows.nativeaot.log",
+      "originalBytes": 2107,
+      "originalSha256": "960589cb5bfa8f1b5ab7769db07b4a72e7fb33be63ff1dc0d52de71d06c7f051",
+      "storedBytes": 779,
+      "sha256": "2d2ada2baee81a0edf1333b299ce6011c827ec43671c8d11ab8851e5a4fa1c23"
+    },
+    "debug-AzureRender.SceneVisibilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.SceneVisibilityGpu.log",
+      "originalBytes": 1928,
+      "originalSha256": "c14b4a91e013683ab8111128933a0fd0503ebdda898444e2a27268385517f8b7",
+      "storedBytes": 759,
+      "sha256": "a31cc72cbba8b8abf2560774fe8309771659ec7607c6f6b560d32330bd4cea82"
+    },
+    "debug-AzureEngine.LocomotionPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.LocomotionPlayer.log",
+      "originalBytes": 4262,
+      "originalSha256": "f58f7d4fdfed9becfa8f0cabb742150291060140331e1ba456c5068a76b33f80",
+      "storedBytes": 936,
+      "sha256": "b64f77794a8baff63fa7d0f31284a870d8850dc0a8a812be870d91a11daa2a89"
+    },
+    "debug-AzureEditor.WorkspaceGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.WorkspaceGpu.log",
+      "originalBytes": 3106,
+      "originalSha256": "f78ec2728fdda98460f310a71615c0c708fe9a269d5814fcc65bc28e323f0af6",
+      "storedBytes": 1071,
+      "sha256": "5ed1a0a2625c63cf7896365952bf4e68ec92f9686806805c6904d0dad5c43d8f"
+    },
+    "debug-AzureEngine.MaterialFixtureGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.MaterialFixtureGpu.log",
+      "originalBytes": 1917,
+      "originalSha256": "241c54c5f29d7da8b1901df59db9be21565e45c71538f15f1ae74f326524c37f",
+      "storedBytes": 790,
+      "sha256": "fc40745fea0606f5011cc2d873a2a1bcc011f375c512c441e1ec55082cbdcee0"
+    },
+    "debug-AzureEngine.IndependentAnimationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.IndependentAnimationGpu.log",
+      "originalBytes": 1686,
+      "originalSha256": "9adbd833bfcad8dc16de200ba7be3e28eacc55b7e3c7c8356da280046f068b50",
+      "storedBytes": 658,
+      "sha256": "6cec1c3a84f2e26851479316141aa76ba3a1e7911deaf2c3730114d2d77db45f"
+    },
+    "debug-AzureEngine.ThirdPersonPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.ThirdPersonPlayer.log",
+      "originalBytes": 1689,
+      "originalSha256": "39689aea8bff73c9dc02f5035d2fe9a3b0afc5f3e20cd66fda9fedf784634898",
+      "storedBytes": 702,
+      "sha256": "481b0376dfa6b00e2fb2be1249bb017e969ac4453bd167811ca71a11efa70ec2"
+    },
+    "debug-AzureEngine.PlayablePlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.PlayablePlayer.log",
+      "originalBytes": 1590,
+      "originalSha256": "88d2c857db80c885f0411442a53b71a1038ca2f73549bb19b6b03154a572b097",
+      "storedBytes": 622,
+      "sha256": "95fa872a2bdca038d5d5bb450e6627601bb45a83db3f966e538e7b4c102a5ff7"
+    },
+    "debug-AzureEngine.OptionalRuntimeTrace.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.OptionalRuntimeTrace.log",
+      "originalBytes": 1570,
+      "originalSha256": "82e80861511b9a4074bb2cdfa95611bf6b35b781f4d58c473293a0a5bf6c4f1f",
+      "storedBytes": 604,
+      "sha256": "15f572ba5a5ddfe871fa83012862e99271dab629fc5eefbe7aea3293aaa9da36"
+    },
+    "debug-AzureEngine.RuntimeSpawnGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.RuntimeSpawnGpu.log",
+      "originalBytes": 1568,
+      "originalSha256": "78c0f076d1fa6989882777801b9760ba26ad7c00c2fbea080c16d3d65c912f68",
+      "storedBytes": 612,
+      "sha256": "f9a07af5a0701a955bad79b8928fce06c2873ebc15f05228adaad1838e50520f"
+    },
+    "debug-AzureEngine.PresentationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.PresentationGpu.log",
+      "originalBytes": 1618,
+      "originalSha256": "99f8834e6d85b00c7c198c75f6e2aab8378016bd3ba84fd3ffcab2306a476fc0",
+      "storedBytes": 609,
+      "sha256": "a41f9ca927a48b346d7d2ba2287d2d7212c0d236e623244cf2eef5f9cc2c9711"
+    },
+    "debug-AzureEngine.EditorHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.EditorHost.log",
+      "originalBytes": 23403,
+      "originalSha256": "f659c54ad921742ab692c9fae09bd383b460b0177b94e41f34ea19ffa4d3f245",
+      "storedBytes": 5026,
+      "sha256": "f5a3ea4283eead39b060d063546ce3cfe926ab4a0065aeef578da94680294be5"
+    },
+    "debug-AzureEngine.EditorPlayable.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.EditorPlayable.log",
+      "originalBytes": 1591,
+      "originalSha256": "ec8aded34c2cdcba163e134e86f0ff732b432d1836ac176bedce62373e21d3ab",
+      "storedBytes": 624,
+      "sha256": "5c45001e60daf921d8d81b28b9f6edfaa63f816e391609e002ba966cfcdfee11"
+    },
+    "debug-AzureEditor.NativeInputGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.NativeInputGpu.log",
+      "originalBytes": 2881,
+      "originalSha256": "67660177ef517a66a66c9362b84061addf6656032a18255e6b82a2c99d7ef2cd",
+      "storedBytes": 905,
+      "sha256": "e7b67a01effcc84641f43b46863a2973d56dcfd2106eaaf23a576beb677bab3f"
+    },
+    "release-AzureEditor.NativeInputGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.NativeInputGpu.log",
+      "originalBytes": 2897,
+      "originalSha256": "88191db0157bea1af59b6366ce0d6d283235ce2d9cfafcb8089ccf996f3be7d5",
+      "storedBytes": 903,
+      "sha256": "84a3767abcccce0ce5bf3eb47ece12019b0bf980a50f0c58b5ac34ab72c3c57f"
+    },
+    "debug-AzureEngine.LevelPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.LevelPlayer.log",
+      "originalBytes": 1525,
+      "originalSha256": "2eb4e7153397776352eba678e9a4c3396720e4d4e5ba0cfd30c4182f7d5490b0",
+      "storedBytes": 586,
+      "sha256": "47340bd54cdd3156fe3cdb0cea27cff880481c5d84df72626af2b9f7622d7977"
+    },
+    "debug-AzureEngine.PhysicsPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.PhysicsPlayer.log",
+      "originalBytes": 1505,
+      "originalSha256": "81d9a50fefd5ba68bf53ca19a5c52ac97fbca4dcbdba7867ce0ee43d3fb4b9a4",
+      "storedBytes": 573,
+      "sha256": "192ec4ac45231f751ad3ebdd6dabc6f13be3b58fe141b19e467c825d41280c2c"
+    },
+    "debug-AzureEngine.ScriptPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.ScriptPlayer.log",
+      "originalBytes": 2568,
+      "originalSha256": "71927a443cc895afc7ac947f6a7cef6b8842626aff25e921c1f3bf27a4a25527",
+      "storedBytes": 1007,
+      "sha256": "e7c7bb8d368f0836de6caaf64d7c5f358e29aba5e1cb8eaafee4e748df77c019"
+    },
+    "debug-AzureEditor.ContentGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ContentGpu.log",
+      "originalBytes": 2071,
+      "originalSha256": "f9d5ec5c60800eda0e86e02fd95a79837960d6640f2b035be8c476d7b9cb6af4",
+      "storedBytes": 689,
+      "sha256": "79f29a37b11a3a4215ce0fb1ca52d7f749c2ef6a35cf23db05c8f43dd1d0a086"
+    },
+    "debug-AzureEditor.UsabilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.UsabilityGpu.log",
+      "originalBytes": 2035,
+      "originalSha256": "5115e67ce7b572412f3643c235579a8c33fb632185c3ffdc51a57b9742fc7b98",
+      "storedBytes": 675,
+      "sha256": "1be637a2040eacee4e65383e32c876dd72e00ace44fc5818147b60fe4ae89ac1"
+    },
+    "debug-AzureEditor.DocumentGuardGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.DocumentGuardGpu.log",
+      "originalBytes": 2018,
+      "originalSha256": "724b985e73c7ad7144789e1b4e977c6d2e0dae76005a7b8c8725bc13a983ffb3",
+      "storedBytes": 647,
+      "sha256": "c03b140315d5e586e74102c4307756f8bdfcadfe5482843edefa2f2d46e907a6"
+    },
+    "debug-AzureRender.VisualRegression.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.VisualRegression.log",
+      "originalBytes": 2222,
+      "originalSha256": "3fc453f8f24ee25f979c887457abc341844e1c564eba2901967e887c6b1c73af",
+      "storedBytes": 695,
+      "sha256": "4c8678b631e0adcd1a3b67f9f291d13c89e95f2578e7451cef32d4976fc8f0f6"
+    },
+    "debug-AzureRender.VisualRegressionLegacyDescriptors.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.VisualRegressionLegacyDescriptors.log",
+      "originalBytes": 2321,
+      "originalSha256": "123e909b97bfcca4e03ee188589dc92955fa3102cfc6d50827c8f1b7d5240702",
+      "storedBytes": 731,
+      "sha256": "14b0ad1363676423d6e8c58354dd5e38210a5e1bf5bf69bf04ce744bd7d489fd"
+    },
+    "debug-AzureRender.BlackholeComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.BlackholeComputeGpu.log",
+      "originalBytes": 1666,
+      "originalSha256": "b4c15faa1732385e9afef78332b78cd5ca756ecd7124d434c6eaaa9b3429e595",
+      "storedBytes": 599,
+      "sha256": "56822ea87bc308ebf1c41e5ac237d4db28ecc6385195343ff1b37c0e6fe1b2a0"
+    },
+    "debug-AzureRender.CharacterIblComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.CharacterIblComputeGpu.log",
+      "originalBytes": 1656,
+      "originalSha256": "27e2a7a556eff34e5657d3e3d538395669ea43727e3e4170bed9e6a4b99035b6",
+      "storedBytes": 600,
+      "sha256": "e4599ede2e7cf7e11ee5523861fcbcb1eee0beb220d6b26acd4055b3d3ef7f63"
+    },
+    "debug-AzureRender.CharacterSkinningComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.CharacterSkinningComputeGpu.log",
+      "originalBytes": 1690,
+      "originalSha256": "ebb375a38f6b64a83e774a7f1549884eddfe04dff3a440497de80093aa393636",
+      "storedBytes": 602,
+      "sha256": "53dbc22d432ce77274436a7718a416341ec0289b5b4dd2c9c4aefd2fe5d0a2f4"
+    },
+    "debug-AzureRender.R3Comparison.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.R3Comparison.log",
+      "originalBytes": 1623,
+      "originalSha256": "0db405182be2c0a951edd280fa3bedec611e75c201bfeed01575e00465c850f8",
+      "storedBytes": 597,
+      "sha256": "bf2d2f28316383ba5eeeb9aab620c0cd5a6377135c3527a731db83e510461f94"
+    },
+    "debug-AzureRender.R3TransparentComparison.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.R3TransparentComparison.log",
+      "originalBytes": 1686,
+      "originalSha256": "0eeba1577df0500c334534b2bef839ebfae3a89fbb22327e3fe147e21595e6d8",
+      "storedBytes": 612,
+      "sha256": "7758e8a32c347b74c41540969d9228c6795e1b36031d4d2cd177ea8bfe88af4f"
+    },
+    "debug-AzureRender.AuditRegressions.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.AuditRegressions.log",
+      "originalBytes": 1507,
+      "originalSha256": "c7cf8ba6f55131ef146baa73693745b2752ede99cabdb631e65d64aedd029fe2",
+      "storedBytes": 561,
+      "sha256": "d470fa1e38459a9ee0bbec3df44f13e74fb9a8a4b0dbab9b996feb308403ba05"
+    },
+    "debug-AzureRender.VisualRegressionLegacySkinning.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.VisualRegressionLegacySkinning.log",
+      "originalBytes": 2338,
+      "originalSha256": "b7b7b6c57568056b2d3ab5d05c01876c91bdb3b09fc79de37bc9464c1d5ca748",
+      "storedBytes": 731,
+      "sha256": "daef727474501573738a8396574e9b6a44e730e535425e5b7a71cb0f5a9e8f92"
+    },
+    "debug-AzureRender.CharacterMorphComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.CharacterMorphComputeGpu.log",
+      "originalBytes": 1690,
+      "originalSha256": "2c8800ab2837419bf788360525b24d0b30998dbea3a5ec133ebf13f25da57fd0",
+      "storedBytes": 618,
+      "sha256": "412e46d150d3df6455e5a55f76cd5f0bc57c705a8fd52c81c35c0e4c38dc6e5a"
+    },
+    "debug-AzureRender.ClusteredLightingGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureRender.ClusteredLightingGpu.log",
+      "originalBytes": 1635,
+      "originalSha256": "5ca5d37d574592460721254052af094040d8ff0f62db607443560163cf85453f",
+      "storedBytes": 598,
+      "sha256": "b8e27c7d6af941453842a31d3f16100aa151445e8b2634034e2c4d61625e5525"
+    },
+    "debug-AzureEditor.ProductizationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ProductizationGpu.log",
+      "originalBytes": 2574,
+      "originalSha256": "db8c3b0d0cd4cf2242466f06d9ea3e27b00c09a33940683c7249e31d1beac36f",
+      "storedBytes": 812,
+      "sha256": "0f1a579ca08c4e7654e7e2acbbdf2c959045d5dc387ca06fd81e991f56b8c519"
+    },
+    "debug-AzureEditor.PropertiesGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.PropertiesGpu.log",
+      "originalBytes": 1822,
+      "originalSha256": "d25fcd5b557418b36b5c47756327d7884a5f6c924ac6a3da927ef7b1c4d004ac",
+      "storedBytes": 696,
+      "sha256": "3f8bc16396b76acfa3defd1eea39f6c199bb80ef103822c8e126c1bf179e8000"
+    },
+    "debug-AzureEditor.ContentTransactionsGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ContentTransactionsGpu.log",
+      "originalBytes": 1839,
+      "originalSha256": "d71a9b8b83ba96fc57e71599cab5cdba8ceb24b42741014367cb226a7f80b32f",
+      "storedBytes": 697,
+      "sha256": "917549587de86a8c1a8ec4fba363f066bbf5ce6731634c864500e7dab5afff97"
+    },
+    "debug-AzureEditor.ContentNavigationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ContentNavigationGpu.log",
+      "originalBytes": 1845,
+      "originalSha256": "6b2947cf6f0c02d84643f9f0fa7999140b8b188584b3e0ee5981d33debaff558",
+      "storedBytes": 702,
+      "sha256": "c0fd08a7b51836ad82200bcad0f546152fd888b1b619202f9e41e8967fdbd170"
+    },
+    "debug-AzureGame.PlatformerCompletion.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureGame.PlatformerCompletion.log",
+      "originalBytes": 2099,
+      "originalSha256": "f6b3b83d894af8bd474891b0f0612c5c178ef6e198c03271d1f1ebe941c816a8",
+      "storedBytes": 761,
+      "sha256": "a5d486800e80d8188e2f39f4668c3c834264125c9284d831634a0a59420ee560"
+    },
+    "debug-AzureEngine.LiveGameState.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.LiveGameState.log",
+      "originalBytes": 1639,
+      "originalSha256": "887414ab592f244b98996cbc57c60df847a044c2ecddb4757b9a4187e7766aa7",
+      "storedBytes": 590,
+      "sha256": "8ea8a632a8888f2da0651ddf71ac45c6817c0d195d142c7488ecbeabe0953c56"
+    },
+    "debug-AzureEditor.NodeAdditionGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.NodeAdditionGpu.log",
+      "originalBytes": 1551,
+      "originalSha256": "5ee70fe0966d29e4325f180df22a4374eab9dd79203023e3f7ed65743bd1ddd6",
+      "storedBytes": 562,
+      "sha256": "97fcab5a8e8b33e907e6b71e7fb24a7d57c885b0a732daa349079b56a4eea18a"
+    },
+    "debug-AzureGame.GameSequence.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureGame.GameSequence.log",
+      "originalBytes": 2361,
+      "originalSha256": "e0fc6f5946f123611ee4a23d567db0a8a779f8f58f445e10539b19a0350c6f69",
+      "storedBytes": 867,
+      "sha256": "40578407c1775f0601ae141e98b2d17394d5ce13df22eda9d174b38eee37edab"
+    },
+    "debug-AzureGame.ExplorationCompletion.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureGame.ExplorationCompletion.log",
+      "originalBytes": 1923,
+      "originalSha256": "328ac738c8bfb9db9b9d7d498b04f513ac2ce6aad51949fee2a2d2d86ef005d7",
+      "storedBytes": 731,
+      "sha256": "4c2cdcc35a85b4d75d94b8ed0605569c4b47aa8bc52a517711d036a1b38fe232"
+    },
+    "debug-AzureEditor.AuthoringGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.AuthoringGpu.log",
+      "originalBytes": 1540,
+      "originalSha256": "8e6ae8b41cf82d13e33eb8f4b146dc38051ae6ad13dcfd6cd8527d92e0cbca0b",
+      "storedBytes": 553,
+      "sha256": "a4dcf46eb4b437a866a1cd547d780d2ffd4acb733c1429a88de412e592daa2d5"
+    },
+    "debug-AzureEditor.SimulationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.SimulationGpu.log",
+      "originalBytes": 1892,
+      "originalSha256": "f4ffbab01ecd13ef091f518888a7b220fbae198ce3944f48b00e0b0d04dafed3",
+      "storedBytes": 640,
+      "sha256": "7a7dfc1a6a11a1719d51c79431d670c31201dff6a86bb170246842b82d13ad6b"
+    },
+    "debug-AzureEditor.ViewportNavigationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.ViewportNavigationGpu.log",
+      "originalBytes": 1938,
+      "originalSha256": "ad1f3e79d31cacb9746bf2a056166378980f25c622dee9d16424561a36aee8a6",
+      "storedBytes": 764,
+      "sha256": "f34e573b21c1debee9010283905a3ea997909a3189dd2f70633713244fb31afe"
+    },
+    "debug-AzureEditor.SceneGeometryGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEditor.SceneGeometryGpu.log",
+      "originalBytes": 1830,
+      "originalSha256": "6f7c2a6616352a18162021154ad433ce86f107d7f8fcaee16d185c771166197d",
+      "storedBytes": 697,
+      "sha256": "e66056675ab5e56dad62e6d9137eed3d2a0f9718fd6b268de8002f2eb3e65a97"
+    },
+    "debug-AzureEngine.RendererResidency.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\debug-AzureEngine.RendererResidency.log",
+      "originalBytes": 1551,
+      "originalSha256": "5a6f001f72ba120008096c2c7c0f2497bb216098dadbc91cdacfdb48b47ca26c",
+      "storedBytes": 552,
+      "sha256": "9a58eb08b8f550e17581d66266c408b149ac0a6a5bd45d0c3cf86a2ff8266336"
+    },
+    "release-AzureRender.VisibilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.VisibilityGpu.log",
+      "originalBytes": 11138,
+      "originalSha256": "ab4466b6c0a226cd23bddc1df84a7b396bf737495b01377c9401b919863b084b",
+      "storedBytes": 1815,
+      "sha256": "96c4457ada13e242b3074e6246b2238ece07a36dde5254117a847f08e2310640"
+    },
+    "release-AzureRender.SkinningGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.SkinningGpu.log",
+      "originalBytes": 1478,
+      "originalSha256": "d401ce2aa2375a6b04f66c7aa1eeacf6db7489e77982c464dedd9e7b9166905f",
+      "storedBytes": 542,
+      "sha256": "68149249b6504bf903fb6fc1170a8921331598da193e785991acc974ccf95b1f"
+    },
+    "release-AzureRender.ShadowTileBoundsGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.ShadowTileBoundsGpu.log",
+      "originalBytes": 1523,
+      "originalSha256": "8d49edf792fc5f6ccb7c0c13154e014e6578fbfb24dca8d17a5424723881819c",
+      "storedBytes": 557,
+      "sha256": "c9e17a58d2e3a0744983a51cf29e34606408f6a029f024eb9668ba897eda2e26"
+    },
+    "release-AzureRender.ShadowFilteringGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.ShadowFilteringGpu.log",
+      "originalBytes": 1565,
+      "originalSha256": "afa5e61d512233d7912aad35c2dc007726f7ca826c7a3e49f0eaf5e525c43603",
+      "storedBytes": 593,
+      "sha256": "19600522ec54ce9464b49e9f79b3bd38621cd4efb54d68e6d10afeed1bcc5b34"
+    },
+    "release-AzureRender.SurfaceResponseGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.SurfaceResponseGpu.log",
+      "originalBytes": 2462,
+      "originalSha256": "c2ec533764aec2892bd54258c4d8c424983d2b8c099fe2e41f4400237b297d53",
+      "storedBytes": 686,
+      "sha256": "49e0245d433a27f14646eb3925a8fc9519c0ef6b59eea6b88b9f7eaee3af20cf"
+    },
+    "release-AzureRender.ShaderComposition.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.ShaderComposition.log",
+      "originalBytes": 1811,
+      "originalSha256": "4fd259b3d4afa24fdf9fe710e31f5e369e8dd9808884a7fd6c5580d7b75b94db",
+      "storedBytes": 587,
+      "sha256": "602c3557e177b4cf6009b642628eb9a82b713a7fbafbeef1ef56651481171bc8"
+    },
+    "release-AzureRender.SamplingGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.SamplingGpu.log",
+      "originalBytes": 2058,
+      "originalSha256": "38dee3d49073dc3f9cf03f59c453b5c2bf037a9c1ae82a54ac131963b356589d",
+      "storedBytes": 798,
+      "sha256": "bfa20f1201cdad935057205177f326ea977bba48d4c7b4bd52c49ca74f8be8d2"
+    },
+    "release-AzureRender.SamplingHostGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.SamplingHostGpu.log",
+      "originalBytes": 1706,
+      "originalSha256": "33f8d5c90e8761819599f923d1cf8c10ad931157ab075afd73eadd14ff016cf8",
+      "storedBytes": 641,
+      "sha256": "8d62c1685a0388d42b9d592b3552c644f74427576190d2e6698df3d1a5d5955b"
+    },
+    "release-AzureRender.PreviewHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.PreviewHost.log",
+      "originalBytes": 4570,
+      "originalSha256": "7f630f5ba09f79236f44aa2c4600bfc010b5032a03d7500bc1ab6b046e06c982",
+      "storedBytes": 1071,
+      "sha256": "5aa8dcb009bd7784310e9f6b11ff3f9bd73030d441211b7f0a3cd85caeffcb6f"
+    },
+    "release-AzureEditor.SelectionGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.SelectionGpu.log",
+      "originalBytes": 1915,
+      "originalSha256": "6ad3e5c2380bfff726cabb99e29e817e023574357b9c6c10a28958a34362875f",
+      "storedBytes": 661,
+      "sha256": "9c5c84ce84c775a597efa99e98f5bc00ba0b4e699986e3e78fad01c3042215fb"
+    },
+    "release-AzureEditor.GizmoGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.GizmoGpu.log",
+      "originalBytes": 1981,
+      "originalSha256": "f04bcc8cc32bdb1c2a59d70cb61e41842a28ab0601455d4c1e99dcd1723b1ef0",
+      "storedBytes": 663,
+      "sha256": "5fd104b2118c62b7972912ad9299fcfd1f5cdc68e405b0f1efd25af0f8bf89af"
+    },
+    "release-AzureEditor.DevtoolsHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.DevtoolsHost.log",
+      "originalBytes": 1897,
+      "originalSha256": "3e8c89a93e0ab6bbaa924a01b38038b0dd3fb9485c9f2dd48da885e46900d804",
+      "storedBytes": 677,
+      "sha256": "85705e78752367e42dbf5bcf20620d1d0735d0586b4e5417c02327d237eda402"
+    },
+    "release-AzureEditor.ProposalHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ProposalHost.log",
+      "originalBytes": 2284,
+      "originalSha256": "852f8ddd30689e8e17cfc8fe3547dc1da094080faab4ec12c2a8ee2f905f1ad4",
+      "storedBytes": 796,
+      "sha256": "cae89826a9c45fdca6d3da646973a19cb3058ff43e892c6c6fb0e72b4bfb4b17"
+    },
+    "release-AzureAssets.ProceduralHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureAssets.ProceduralHost.log",
+      "originalBytes": 3269,
+      "originalSha256": "d2beca1e4cb05b95b6458be02909e346e09c037998229ab7b71a89f8f45acacf",
+      "storedBytes": 992,
+      "sha256": "978e378d8b83646fcb9ea1b22f4458a55f7556e7fc1b33038841f9fbecce4867"
+    },
+    "release-AzureEditor.SettingsHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.SettingsHost.log",
+      "originalBytes": 1932,
+      "originalSha256": "79b2895e106be5f590b5a3bfa5d5303f462bec669ac6b40b3d5f9aa8f185cc61",
+      "storedBytes": 705,
+      "sha256": "77652917262c000930c7f28b8146bf3ba89218293683711d2f638a2b647883c7"
+    },
+    "release-AzureEditor.ObservationHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ObservationHost.log",
+      "originalBytes": 1770,
+      "originalSha256": "335b4197d13988effb95d8e332cbf1f43b731ba2bbd8d833fd6c9cab087eda74",
+      "storedBytes": 650,
+      "sha256": "5e1ce01b68dc154bb8df573b7f41e5aa4d4561901ea484ee25e8b2beccafa2c2"
+    },
+    "release-AzureEngine.SceneInspectorHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.SceneInspectorHost.log",
+      "originalBytes": 1800,
+      "originalSha256": "4d8e14243cc4f006ffaf4764a3ce51f18842746d75556d84901e68d9d29cb739",
+      "storedBytes": 659,
+      "sha256": "df0195b7d3ba2ba753fa445d3b40264e0660155924492845e71a7d1e0002d8f8"
+    },
+    "release-AzureEngine.RegisteredComponentHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.RegisteredComponentHost.log",
+      "originalBytes": 22510,
+      "originalSha256": "11f275c48ed50bb0b0d095d4717706bda84e4dcc210cb96b5991e0becdb40732",
+      "storedBytes": 4906,
+      "sha256": "bcb08562454d35604a1ca247cfc7fe0ca659537c1333df19af1ff9e430b74bc6"
+    },
+    "release-AzureEngine.ManagedWorkflows.coreclr.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.ManagedWorkflows.coreclr.log",
+      "originalBytes": 2328,
+      "originalSha256": "e4020ec5fb0028787bfe14f7eaab22ec85ebff2959d323a744558426dc607241",
+      "storedBytes": 903,
+      "sha256": "013665eb7096659b20ad05e69dc69d8f9316c29b65ecd3937ec92dce1c57eb40"
+    },
+    "release-AzureEngine.ManagedWorkflows.nativeaot.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.ManagedWorkflows.nativeaot.log",
+      "originalBytes": 2343,
+      "originalSha256": "e3f2fb724d5d8378ce95a2a761eba00c7f5c00ac33a44a7476c2c7411d190524",
+      "storedBytes": 907,
+      "sha256": "06161263e2ca20a160894c680b6c988bbb68e3028a1854324f8e052a16a18c4f"
+    },
+    "release-AzureRender.SceneVisibilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.SceneVisibilityGpu.log",
+      "originalBytes": 1942,
+      "originalSha256": "13ab64b09f0e80276b0d482dd5476f76d17e1e55c691a1a4abf2f51eedaa21d9",
+      "storedBytes": 759,
+      "sha256": "52f6887794e7f977ff23f55456d48b32376626899db33d01a75f6793e7a4b3f8"
+    },
+    "release-AzureEngine.LocomotionPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.LocomotionPlayer.log",
+      "originalBytes": 4276,
+      "originalSha256": "68ef9879a303daa8c1025635a182986c6bd039f3b04cd9b2b79f40b33a9c2bd2",
+      "storedBytes": 934,
+      "sha256": "24a8ccf8aa6e172af7511736aec418779f752865579c0ff3101bca323aef58f7"
+    },
+    "release-AzureEditor.WorkspaceGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.WorkspaceGpu.log",
+      "originalBytes": 3120,
+      "originalSha256": "e18e30316d45e93ad872937bb7bedf15586382e4a5c9a728af1c646f37480ffa",
+      "storedBytes": 1074,
+      "sha256": "ed227cbf952cc0c8563402cecefe313d599617fd3d34a5e5899bd2e2e441cd8d"
+    },
+    "release-AzureEngine.MaterialFixtureGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.MaterialFixtureGpu.log",
+      "originalBytes": 1931,
+      "originalSha256": "57468a9232a21b4f054e0232bb80de885c78c0afdd3a55bc5de3922a65c4fe7b",
+      "storedBytes": 791,
+      "sha256": "2fd598d76c24e1b4bfb5f13b90b55edb7ec3b4a091a9ec7ecc53cf61f7e8c7d6"
+    },
+    "release-AzureEngine.IndependentAnimationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.IndependentAnimationGpu.log",
+      "originalBytes": 1700,
+      "originalSha256": "22de456090e31fbeb5afecef0af1e4123660fb2b3c2a0abaf58dbb61c334ce0f",
+      "storedBytes": 661,
+      "sha256": "c19e8642d89b80d223cf568b7c9e43704186587a416f52ec10af3a35b8337634"
+    },
+    "release-AzureEngine.ThirdPersonPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.ThirdPersonPlayer.log",
+      "originalBytes": 1703,
+      "originalSha256": "fcd8fc2f47512fdc850d952290a10f4364a67c445a066feaa6ea716795e7fe3e",
+      "storedBytes": 706,
+      "sha256": "9098b6ad3f9576cb663fbe513c9d9fbdbd8363ee1ffff75b4fe2c1afde10ff19"
+    },
+    "release-AzureEngine.PlayablePlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.PlayablePlayer.log",
+      "originalBytes": 1604,
+      "originalSha256": "7d4c4ee4d2f43b60bcca73e97ce4cc5f56129829129eef3dd888b670bf97a038",
+      "storedBytes": 622,
+      "sha256": "efd96ec468d7a0b8cb582ba1d2704c147230390c737da03fce1e0779bb8330ac"
+    },
+    "release-AzureEngine.OptionalRuntimeTrace.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.OptionalRuntimeTrace.log",
+      "originalBytes": 1584,
+      "originalSha256": "f225f453bc3b9067c1a6a897a66ef134bee36e762abf4a63ad14b528221ec778",
+      "storedBytes": 605,
+      "sha256": "b3f6022e22713880ec114777d81103c7aa645c77b6a4614c63f319862bfa4c12"
+    },
+    "release-AzureEngine.RuntimeSpawnGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.RuntimeSpawnGpu.log",
+      "originalBytes": 1582,
+      "originalSha256": "33a86a8c50c382d77bbb300d7082b2d150197a7e80dcd3bd179aacc018e88f0a",
+      "storedBytes": 613,
+      "sha256": "1164f5613e28a88fab5553163bb9709c8d02cf7aa5674e2b8d1b99825378f623"
+    },
+    "release-AzureEngine.PresentationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.PresentationGpu.log",
+      "originalBytes": 1632,
+      "originalSha256": "12a5d86d1c2973755e6d12b8cb07dc25e117060d55e9f672f253ea39e2ad0803",
+      "storedBytes": 610,
+      "sha256": "0d6a5887292e0ec5e37c7d09ef249eba3d7a59fb3242793bba83bb812a1393f8"
+    },
+    "release-AzureEngine.EditorHost.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.EditorHost.log",
+      "originalBytes": 23594,
+      "originalSha256": "df1789dd99cf13ef1a1e501469a0dc8da6beeac64615c58fe98ec636ebf4f3a9",
+      "storedBytes": 5064,
+      "sha256": "f7dc4999e54ab594bb6422cc5de6d38003c923bf852899a564ee7c3e18a158d3"
+    },
+    "release-AzureEngine.EditorPlayable.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.EditorPlayable.log",
+      "originalBytes": 1605,
+      "originalSha256": "938f69988d701b864de3ba464b21a729cb8509455329975e16d501c79757a602",
+      "storedBytes": 624,
+      "sha256": "6500bc2f313511ea76e773ecf283b2b1fd62934652f6a739a94b8b98f612eff3"
+    },
+    "release-AzureEngine.LevelPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.LevelPlayer.log",
+      "originalBytes": 1539,
+      "originalSha256": "d886370b6a19c786030caa1dbd3c471688934df0f96d56c9f715ef05b75b91bb",
+      "storedBytes": 584,
+      "sha256": "cce1ec03bf9a9c9f56151705336f1ee0bfcaac8a64ffc73a81c20c6f46cd8d8c"
+    },
+    "release-AzureEngine.PhysicsPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.PhysicsPlayer.log",
+      "originalBytes": 1519,
+      "originalSha256": "844ad95180e8226020b11e36c3c806028163b9fe7d48168c456a83b6e3170547",
+      "storedBytes": 573,
+      "sha256": "17d412d76f2059a98a8195b0ebb7beb2b3ff35e87cb8fde99e7e3331304a79b8"
+    },
+    "release-AzureEngine.ScriptPlayer.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.ScriptPlayer.log",
+      "originalBytes": 2583,
+      "originalSha256": "b86376f7c87b490a69fe81e7a84b7474415233eb1860d7cabf2b62a4d489a2b1",
+      "storedBytes": 1009,
+      "sha256": "25f8cf8ad924bea714bb569e471961f3d70bdedd99c66184bddac6baca106ae9"
+    },
+    "release-AzureEditor.ContentGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ContentGpu.log",
+      "originalBytes": 2087,
+      "originalSha256": "3867995a71c0f2b2573e653dafc59dd819dcf2fa70b3e404c9887d80712a4c48",
+      "storedBytes": 689,
+      "sha256": "95901bf504228a3221bbbac5d0a10e1215c83cdefe14271c82f2083b828cd796"
+    },
+    "release-AzureEditor.UsabilityGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.UsabilityGpu.log",
+      "originalBytes": 2051,
+      "originalSha256": "5494b0d265551a30f323a656a3dabaa5d201f62d1d7307910fe134c5720bc973",
+      "storedBytes": 675,
+      "sha256": "c08bf1f15a95d7162802acc25eb12e8d62c5972b8d1ddfa335fedf4722a59c81"
+    },
+    "release-AzureEditor.DocumentGuardGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.DocumentGuardGpu.log",
+      "originalBytes": 2034,
+      "originalSha256": "d0af124976bd60959a291b8c4b3e3bb3483e77d99c048f794406351eb7edb82f",
+      "storedBytes": 647,
+      "sha256": "d4db27826832b96eccbcd4fa04e7e9fb11d9586918a0af7b34dc9eba600d6d5a"
+    },
+    "release-AzureRender.VisualRegression.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.VisualRegression.log",
+      "originalBytes": 2240,
+      "originalSha256": "727e4bd52e128f8d6a16a91e0074c19892cd79a263316d7cd33c0be54afd3b5e",
+      "storedBytes": 694,
+      "sha256": "e7d71c1d39ac295fc42ad9e092b7e63d52754e7a74b206f61bc324a5e6bcf6ee"
+    },
+    "release-AzureRender.VisualRegressionLegacyDescriptors.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.VisualRegressionLegacyDescriptors.log",
+      "originalBytes": 2339,
+      "originalSha256": "bafbce0d2db11907d1c41894f3d8551e41645c2afc573792a21394e5698246fb",
+      "storedBytes": 733,
+      "sha256": "a010d1db23b0dd84cffb1f9d76dd813f1cfe53ad131a3477c6bfa641a1cc8f25"
+    },
+    "release-AzureRender.BlackholeComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.BlackholeComputeGpu.log",
+      "originalBytes": 1682,
+      "originalSha256": "b8b99e39a605668144e3e50d1a21ec6b4946168b89785eaebd7e13edeab0b9f3",
+      "storedBytes": 600,
+      "sha256": "f8bcafa41f1069cdfff723c20debe022d471862b6240d0bbf4f58342bd4daa97"
+    },
+    "release-AzureRender.CharacterIblComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.CharacterIblComputeGpu.log",
+      "originalBytes": 1672,
+      "originalSha256": "28610a36068f44db2975405a5a7b9093d7e69ac0e4d19f59b245a5297d748576",
+      "storedBytes": 600,
+      "sha256": "91399e6685428818033da9f07cc8442948ebd966d0da47c6d02679777b2d5f64"
+    },
+    "release-AzureRender.CharacterSkinningComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.CharacterSkinningComputeGpu.log",
+      "originalBytes": 1706,
+      "originalSha256": "883e7a651b9bc28544af4cd0c69ee4da985f4afe801db01405746d251c3b153a",
+      "storedBytes": 602,
+      "sha256": "da916a8b0fd28331c7592a549f9d41294f500a83973d82627eacb86d61f18faa"
+    },
+    "release-AzureRender.R3Comparison.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.R3Comparison.log",
+      "originalBytes": 1639,
+      "originalSha256": "3b7d5fb7f4b17bff09319191ff633445c58d27b4681857acc0100fcc14ff828d",
+      "storedBytes": 597,
+      "sha256": "423534d39c904bea68a1618bffa38037ca29df90653528bab9e748a2bfa377a2"
+    },
+    "release-AzureRender.R3TransparentComparison.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.R3TransparentComparison.log",
+      "originalBytes": 1702,
+      "originalSha256": "1161b4b46f4667c78d8b48982b201d6e8a45ed4c38b845b2ec6c80c21a663a06",
+      "storedBytes": 613,
+      "sha256": "a99a2e5210ca9388161ae7df6fa5b480b0a91f58fc6c32427fc2840219a61a0a"
+    },
+    "release-AzureRender.AuditRegressions.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.AuditRegressions.log",
+      "originalBytes": 1521,
+      "originalSha256": "3cafdac1eaae8e7041d054dc4f9cb3549945c295495bd2b549d79b9060dbe61e",
+      "storedBytes": 560,
+      "sha256": "4d5444e394ebabfba4a0ae5840e938d3ab3c92489b3ed01984d6fb2e71cdadbf"
+    },
+    "release-AzureRender.VisualRegressionLegacySkinning.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.VisualRegressionLegacySkinning.log",
+      "originalBytes": 2356,
+      "originalSha256": "e8da26ad335602a8efbced0bdbb4249cd9558fb34ae1db796ffd4774d3dd8fc1",
+      "storedBytes": 732,
+      "sha256": "3bd49165cd5cf0600b48c43181b6b27943968bde836d69f165bf061d58963fc5"
+    },
+    "release-AzureRender.CharacterMorphComputeGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.CharacterMorphComputeGpu.log",
+      "originalBytes": 1706,
+      "originalSha256": "37e718baff7bb0bbd9d124dacff18848052d2c44e6fd2f6bfd9a275a3eecbb2b",
+      "storedBytes": 618,
+      "sha256": "d38e47dc69341eb7717bfe9dd9e933b561b0c84a7f1fb736661e7f66053ab8a8"
+    },
+    "release-AzureRender.ClusteredLightingGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureRender.ClusteredLightingGpu.log",
+      "originalBytes": 1651,
+      "originalSha256": "bc7305cbb68837d20baf2cb9f64c3ebb721ab1b090568fb96960b835acfed1b7",
+      "storedBytes": 598,
+      "sha256": "4ab621e41949c3b37d46f19de2c37c6f34e2832c5a3e591a848f0933dee28886"
+    },
+    "release-AzureEditor.ProductizationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ProductizationGpu.log",
+      "originalBytes": 2590,
+      "originalSha256": "1192f4a7c16202ad60ddf1c5c8fedbc7da25669642168080ef7826822ee9fe5e",
+      "storedBytes": 813,
+      "sha256": "5512f0960838d847d680b2abcad875445795d2964f10590af63e2c9857dd6c81"
+    },
+    "release-AzureEditor.PropertiesGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.PropertiesGpu.log",
+      "originalBytes": 1840,
+      "originalSha256": "e68d1d85f1e48fb0fbc8934225ab50e182a59900879f8acce3f53c4c1d1bc194",
+      "storedBytes": 695,
+      "sha256": "84defb1e31deeff9144fe1cd6e9564525fee73b5ffb09a7d6a9ba6d433e0fb3c"
+    },
+    "release-AzureEditor.ContentTransactionsGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ContentTransactionsGpu.log",
+      "originalBytes": 1857,
+      "originalSha256": "6bb756d44fcfc92ff3d74ab66f319c685208ad330fd84dd077996e8f91927f38",
+      "storedBytes": 698,
+      "sha256": "cdba1608344e39a3d35b9478633712611dc873442d84fac2504e4ba3c3f0a5b7"
+    },
+    "release-AzureEditor.ContentNavigationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ContentNavigationGpu.log",
+      "originalBytes": 1863,
+      "originalSha256": "e400ddcdaf2ff0d18326acd57fd2f9c24081701db25c4e95c12ede9c15a30127",
+      "storedBytes": 706,
+      "sha256": "2f26dff9c6c72750461150456287f920da21e80c62da876cd35cf5b6a4c977df"
+    },
+    "release-AzureGame.PlatformerCompletion.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureGame.PlatformerCompletion.log",
+      "originalBytes": 2117,
+      "originalSha256": "403afb211e2f7cfd912ebc8e49cc9c9ecd15b24856beca38896276659bbf19ca",
+      "storedBytes": 759,
+      "sha256": "2998f49fc30b3b67cb741f0944c287a80493ee326544fbe06fa7c72ba91cf583"
+    },
+    "release-AzureEngine.LiveGameState.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.LiveGameState.log",
+      "originalBytes": 1655,
+      "originalSha256": "27fd9fe873c0f3b2b284c56226455809c29e916f64dc6a46a2364a6594b1e02d",
+      "storedBytes": 591,
+      "sha256": "f2bbdcdf11a0a59fa80dc6c809d8bf8d4b886f82da6aa01b2da551dc8a10c261"
+    },
+    "release-AzureEditor.NodeAdditionGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.NodeAdditionGpu.log",
+      "originalBytes": 1567,
+      "originalSha256": "fb4a0c4828a1e18206a959d6ae8ac687e5ddbc98db42834a49e952da429efd3d",
+      "storedBytes": 562,
+      "sha256": "12e5b28fcb02cdb88de51725b1513ea95f58191c1125e4c8661e2f8f5659034c"
+    },
+    "release-AzureGame.GameSequence.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureGame.GameSequence.log",
+      "originalBytes": 2378,
+      "originalSha256": "79b25e46d1f1740f3ca1a1c0570e0648d12dac9cea0b404a1bb9bae06a9e91ea",
+      "storedBytes": 867,
+      "sha256": "1edae3933d119f998628f44fb600bb279cd456c5ee4256b014db7745bbf0bb17"
+    },
+    "release-AzureGame.ExplorationCompletion.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureGame.ExplorationCompletion.log",
+      "originalBytes": 1941,
+      "originalSha256": "97e89f60b255ad3e4a70dc3b1dc4ea24ce880adac4ac814258d2d426f03a1e60",
+      "storedBytes": 733,
+      "sha256": "ed1a9d29da3f038d9455ff2eda1a23c9ab1b3618f4d6f0a1d29b86dbcdb74746"
+    },
+    "release-AzureEditor.AuthoringGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.AuthoringGpu.log",
+      "originalBytes": 1558,
+      "originalSha256": "381ecfa7fd9e4e34233537a3d9dc9669c393fbbf30ad6e2078000cd1d71e3635",
+      "storedBytes": 555,
+      "sha256": "f598e1a59113115f5f0ba3e28f2e03d0ac0e5c9e7b2d22b25ed54e30b76df7a7"
+    },
+    "release-AzureEditor.SimulationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.SimulationGpu.log",
+      "originalBytes": 1910,
+      "originalSha256": "1bd12129ee59b70ffb78f7fc2508c0cc35c624e6f69afde59a2a7c2cea28581a",
+      "storedBytes": 642,
+      "sha256": "acbe9c130429f9484bf6bfc3626a1c9c0a67523c4378ce93e6ff80bb904f9ef3"
+    },
+    "release-AzureEditor.ViewportNavigationGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.ViewportNavigationGpu.log",
+      "originalBytes": 1956,
+      "originalSha256": "065d59d47f9ab0ea0c049c169c7550e2cffa007514848f14a975b158adbf6cf3",
+      "storedBytes": 765,
+      "sha256": "e527c4f6bf34492ce2e56d36e7d3538eaa8de225c49510905b5e66b02027d49c"
+    },
+    "release-AzureEditor.SceneGeometryGpu.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEditor.SceneGeometryGpu.log",
+      "originalBytes": 1846,
+      "originalSha256": "65f60bb8605872d53900609da45f35b9af45e67fd211469d686311efe0882612",
+      "storedBytes": 700,
+      "sha256": "33f45644f9537aacbb1d1af468f971891b06b782f2d34caeeef0ca359e24b2d4"
+    },
+    "release-AzureEngine.RendererResidency.log.gz": {
+      "source": "build\\p5-directory-reclamation-2026-10-11\\release-AzureEngine.RendererResidency.log",
+      "originalBytes": 1567,
+      "originalSha256": "5b05b2f92e7ec8e599fc143bf1a6f6c0ee83032b9047a2f4fcf7c05553d7f5fd",
+      "storedBytes": 553,
+      "sha256": "82e70ad4068fa64ca731b1aedac1c589a8300c5feb8042312dcd4f01ac45d7c8"
+    },
+    "local/directory-scale-baseline.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-scale-baseline.log",
+      "originalBytes": 1639,
+      "originalSha256": "191aa9674325ee035929119d527445e9a86294e353343bf2a2808e8e1e0458d7",
+      "storedBytes": 608,
+      "sha256": "a5af737cb969b9059d2fd424bda41f8d7fca3331579e05150bc62e39791a1e42"
+    },
+    "local/directory-timing-red.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-timing-red.log",
+      "originalBytes": 1680,
+      "originalSha256": "11a2f864ccb5b7cea27ba6cf79fe7f632bda8c46e66aa3dc608b486fcaabf2fb",
+      "storedBytes": 697,
+      "sha256": "0ff6c572e688e701eeb44838601346ab15806ee66ba496f74150fe867602afd1"
+    },
+    "local/directory-reclamation-debug-green.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-reclamation-debug-green.log",
+      "originalBytes": 7444,
+      "originalSha256": "9097eaab23f7e590758a129c39a9352c8c0f49c4dff194b0ec760e9117923d26",
+      "storedBytes": 1608,
+      "sha256": "8adb045c0807c4b9eecdc7017f2066fadee345a3ce88e521437545e9f12a1d44"
+    },
+    "local/directory-repeat-debug-green.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-repeat-debug-green.log",
+      "originalBytes": 1877,
+      "originalSha256": "83e68c1c1fb980411830bbc0f8810b2394025a201e32b7728693682867f7a35d",
+      "storedBytes": 733,
+      "sha256": "1f5452472e10774f6293ab4043d591a12957edf2f520e90c22ff755d3b62b3fd"
+    },
+    "local/directory-release-green.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-release-green.log",
+      "originalBytes": 7678,
+      "originalSha256": "1f139b7e0edc89c5cd2d71757b03009d8601178e116918a22498bcb27321945b",
+      "storedBytes": 1630,
+      "sha256": "573c253f271ced267996856d7eb27fb538b1a4b796739e769aea4c54a20424d7"
+    },
+    "local/directory-both-config-build.log.gz": {
+      "source": "build\\p5-system-trace-2026-10-11\\directory-both-config-build.log",
+      "originalBytes": 5309,
+      "originalSha256": "a5aa3b7028e8aab33c36e7adcc5012c3515f5ae19aebf9e68101a5c91575265b",
+      "storedBytes": 990,
+      "sha256": "ce2671af807076da95f5dd2a63654390d94645e0f6e037db0350273dd8159eee"
+    },
+    "candidate/src/editor/content/ContentDirectoryModel.cpp.gz": {
+      "source": "src/editor/content/ContentDirectoryModel.cpp",
+      "originalBytes": 8687,
+      "originalSha256": "73b888213b489c55037c59a9685a9f9acb5a12f43b9c03763c725f21c9877536",
+      "storedBytes": 2670,
+      "sha256": "512582c6c1b72cd37f39a15d79ce43a7207d91a3cd7101c41c5894b59740561c"
+    },
+    "baseline/src/editor/content/ContentDirectoryModel.cpp.gz": {
+      "source": "3f063f7:Project/AzureRender/src/editor/content/ContentDirectoryModel.cpp",
+      "originalBytes": 7921,
+      "originalSha256": "946f674bf5db7563407082c7ceb6e6b1f9ec82d222d9a625402d6cd1ad935d4b",
+      "storedBytes": 2402,
+      "sha256": "a4dc2d9fe0fa12ca33fc366640992cf2dec800283265fa38690abd1927f7dedf"
+    },
+    "candidate/src/editor/content/ContentDirectoryModel.hpp.gz": {
+      "source": "src/editor/content/ContentDirectoryModel.hpp",
+      "originalBytes": 1807,
+      "originalSha256": "af690d8176666dcb005fb945192b97135fc0243deddddc5047f6c601690f03f2",
+      "storedBytes": 670,
+      "sha256": "dd6347c8152d575978bd18996c1126b324a4761edba958aed0a6cd418996b9f4"
+    },
+    "baseline/src/editor/content/ContentDirectoryModel.hpp.gz": {
+      "source": "3f063f7:Project/AzureRender/src/editor/content/ContentDirectoryModel.hpp",
+      "originalBytes": 1702,
+      "originalSha256": "9ad7aeaa1c446551d06638af573c50844cdc758b48f0c0606ede6e4c826e4cf0",
+      "storedBytes": 632,
+      "sha256": "06df864f662df6558bc5dfdcb81e6a5901e04a37f4ba9937338bb322c353304c"
+    },
+    "candidate/tests/ContentDirectoryScaleTests.cpp.gz": {
+      "source": "tests/ContentDirectoryScaleTests.cpp",
+      "originalBytes": 5638,
+      "originalSha256": "47a53fa6599b120cc0ee064fca36adf27e59746664a34dcdb6aca71a2c820a76",
+      "storedBytes": 1855,
+      "sha256": "72a828ddb64b5209b21f4e28f11511f52fc59e3ca396c7f0b8b1ae80504139c7"
+    },
+    "baseline/tests/ContentDirectoryScaleTests.cpp.gz": {
+      "source": "3f063f7:Project/AzureRender/tests/ContentDirectoryScaleTests.cpp",
+      "originalBytes": 4491,
+      "originalSha256": "ec05852faa0adcb9b68f86c45e08c314daa151b9dc2588806712d31cbf7a101e",
+      "storedBytes": 1615,
+      "sha256": "5b5728143f088e34d9b18a899cc6850fa249a27a0168f7ed07f9c34a19cc161c"
+    }
+  }
+}

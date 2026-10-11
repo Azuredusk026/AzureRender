@@ -14,9 +14,22 @@ std::string lower(std::string value){for(auto& c:value)c=static_cast<char>(std::
 std::string signature(const EditorContext& context){auto value=nlohmann::json::array();for(const auto& resource:context.scene().resources)value.push_back({resource.id,resource.path.generic_u8string()});for(const auto& node:context.scene().nodes)value.push_back(node.resourceId);return value.dump();}
 }
 void ContentDirectoryModel::cancelRefresh(){if(pending_.valid()){cancelled_->store(true);try{pending_.get();}catch(const std::exception&){}cancelled_.reset();}nextPoll_=std::chrono::steady_clock::now()+std::chrono::milliseconds(300);}
-void ContentDirectoryModel::reset(){cancelRefresh();owner_=nullptr;revision_=0;databaseOwner_=nullptr;databaseVersion_=0;sceneSignature_.clear();catalog_=nlohmann::json::array();snapshots_.clear();stamps_.clear();directories_=nlohmann::json::array();diagnostics_=nlohmann::json::array();}
+void ContentDirectoryModel::retireCatalog(){
+    if(catalog_.empty()&&snapshots_.empty())return;
+    // One owned reclamation job bounds retained data. It contains no document
+    // pointer, and the model joins it before destruction or another retirement.
+    if(reclamation_.valid())reclamation_.get();
+    reclamation_=std::async(std::launch::async,[catalog=std::move(catalog_),snapshots=std::move(snapshots_)]() mutable {
+        // Async shared states may retain the callable until future destruction.
+        // Move its payload to locals so the worker releases the final owners.
+        const auto retired=std::make_pair(std::move(catalog),std::move(snapshots));
+        static_cast<void>(retired);
+    });
+    catalog_=nlohmann::json::array();snapshots_.clear();
+}
+void ContentDirectoryModel::reset(){cancelRefresh();retireCatalog();owner_=nullptr;revision_=0;databaseOwner_=nullptr;databaseVersion_=0;sceneSignature_.clear();stamps_.clear();directories_=nlohmann::json::array();diagnostics_=nlohmann::json::array();}
 void ContentDirectoryModel::rebuild(EditorContext& context,bool enumerate){
-    catalog_=assetCatalog(context);++catalogBuilds_;owner_=&context;revision_=context.revision();++version_;snapshots_.clear();
+    auto catalog=assetCatalog(context);retireCatalog();catalog_=std::move(catalog);++catalogBuilds_;owner_=&context;revision_=context.revision();++version_;
     sceneSignature_=signature(context);databaseOwner_=context.isProject()?&context.assets():nullptr;databaseVersion_=databaseOwner_?databaseOwner_->version():0;
     if(!enumerate)return;
     directories_=nlohmann::json::array();diagnostics_=nlohmann::json::array();stamps_.clear();

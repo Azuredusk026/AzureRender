@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+内容目录通过自有任务回收缓存与快照。
+万文件取消及连续重置按一百毫秒验收。
+机制与证据见[目录回收验收](docs/acceptance/u16/directory-reclamation.md)。
+
 系统追踪已核验采集与已知调用覆盖。
 完整内存归因仍待验收。
 结果见[系统追踪验收](docs/acceptance/p5/closure/system-trace-results.md)。

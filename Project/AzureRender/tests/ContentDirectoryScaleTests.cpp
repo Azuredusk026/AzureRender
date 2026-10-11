@@ -36,9 +36,19 @@ int main(){
         std::filesystem::create_directory(root/"assets/cancelled");std::ofstream(root/"assets/cancelled/new.txt")<<"cancel";
         std::this_thread::sleep_for(std::chrono::milliseconds(320));model.poll(*context);
         if(!model.statistics().at("refreshing").get<bool>())throw std::runtime_error("External change must start the cancellable scan");
-        start=std::chrono::steady_clock::now();model.reset();const auto resetMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
-        std::cout<<nlohmann::json{{"directoryResetMs",resetMs}}.dump()<<std::endl;
+        start=std::chrono::steady_clock::now();model.cancelRefresh();const auto cancelledAt=std::chrono::steady_clock::now();model.reset();const auto resetAt=std::chrono::steady_clock::now();
+        const auto resetMs=std::chrono::duration<double,std::milli>(resetAt-start).count();
+        std::cout<<nlohmann::json{{"directoryResetMs",resetMs},{"scanCancellationMs",std::chrono::duration<double,std::milli>(cancelledAt-start).count()},{"snapshotReleaseMs",std::chrono::duration<double,std::milli>(resetAt-cancelledAt).count()}}.dump()<<std::endl;
         if(resetMs>100)throw std::runtime_error("Directory teardown must cancel in at most 100ms");
+        for(int cycle=0;cycle<3;++cycle){
+            model.snapshot(*context,"assets","large","text");
+            start=std::chrono::steady_clock::now();model.reset();model.reset();
+            const auto repeatedMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+            std::cout<<nlohmann::json{{"directoryResetCycle",cycle},{"unretainedSnapshotResetMs",repeatedMs}}.dump()<<std::endl;
+            if(repeatedMs>100)throw std::runtime_error("Repeated directory teardown must retain the 100ms budget");
+            if(model.statistics().at("snapshots")!=0||!model.tree().empty())throw std::runtime_error("Reset must immediately clear visible content");
+        }
+        if(snapshot->assets.size()!=10000)throw std::runtime_error("Retired immutable snapshots must remain valid for their consumers");
         std::size_t peakBytes=0;
 #ifdef _WIN32
         PROCESS_MEMORY_COUNTERS memory{};memory.cb=sizeof(memory);if(GetProcessMemoryInfo(GetCurrentProcess(),&memory,sizeof(memory)))peakBytes=memory.PeakWorkingSetSize;

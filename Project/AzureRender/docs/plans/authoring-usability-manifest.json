@@ -47,14 +47,47 @@
       "severity": "performance",
       "summary": "Debug 内容目录取消存在超预算观察",
       "owner": "ContentDirectoryModel",
-      "status": "OriginalFailureRetainedIsolatedRecheckPassedCausePending",
+      "status": "DirectoryReclamationMechanismAndFullRegressionVerifiedPhysicalInputPending",
       "source": "src/editor/content/ContentDirectoryModel.cpp",
       "test": "AzureEditor.ContentDirectoryScale",
       "productionUiVerified": false,
       "physicalInputVerified": false,
       "budgetMilliseconds": 100,
       "firstObservedMilliseconds": 104.2468,
-      "isolatedMilliseconds": 89.2848
+      "isolatedMilliseconds": 89.2848,
+      "acceptance": "docs/acceptance/u16/directory-reclamation.md",
+      "candidateSourceHash": "41804e80288acf248965027b991f4af357ff57b757d100c77dcf2f1e31ca70f4",
+      "originalFailureRetained": true,
+      "newBaselineFailureMilliseconds": 131.5906,
+      "timedBaseline": {
+        "totalMilliseconds": 85.5773,
+        "scanCancellationMilliseconds": 14.3392,
+        "snapshotReleaseMilliseconds": 71.2381
+      },
+      "candidateLocalMeasurements": {
+        "Debug": {
+          "resetMilliseconds": 15.88,
+          "repeatedResetMaximumMilliseconds": 0.3449,
+          "cachedP95Milliseconds": 0.0215
+        },
+        "Release": {
+          "resetMilliseconds": 1.9381,
+          "repeatedResetMaximumMilliseconds": 0.0219,
+          "cachedP95Milliseconds": 0.0011
+        }
+      },
+      "cpuRegressionTestsPassed": 326,
+      "nativeInputRegressionConfigurationsPassed": [
+        "Debug",
+        "Release"
+      ],
+      "mechanism": "SingleOwnedAsyncCatalogReclamation",
+      "fullRegression": {
+        "cpuTestsPassed": 326,
+        "gpuTestsPassed": 128,
+        "acceptance": "docs/acceptance/u16/directory-reclamation-evidence/manifest.json",
+        "physicalOperatorVerification": false
+      }
     },
     {
       "id": "UX-005",
