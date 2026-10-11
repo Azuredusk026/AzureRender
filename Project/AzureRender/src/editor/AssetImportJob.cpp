@@ -2,6 +2,7 @@
 #include "assets/GltfLoader.hpp"
 #include "assets/GenerationManifest.hpp"
 #include "assets/TextureImportSettings.hpp"
+#include "assets/audio/AudioCodec.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include <stb_image.h>
 #include <array>
@@ -55,6 +56,7 @@ AssetReimportJob::AssetReimportJob(AssetRecord asset,std::vector<AssetRecord> in
                 static_cast<void>(buildTextureMipChain(pixels.pixels,pixels.width,pixels.height,texture.semantic()));
             }
         }
+        else if(assetTypeRegistry().matches(asset.path,{"audio"}))static_cast<void>(validateAudioFile(asset.path,[this]{return cancelled_.load();}));
         check();progress_=1;
         return nlohmann::json{{"asset",asset.id},{"validatedInputs",inputs.size()},{"settings",settings}};
     });

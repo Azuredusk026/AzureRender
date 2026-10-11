@@ -72,6 +72,9 @@ endif()
 find_package(assimp 6.0.4 EXACT CONFIG REQUIRED)
 find_package(TIFF REQUIRED)
 find_package(WebP CONFIG REQUIRED)
+find_package(FLAC CONFIG REQUIRED)
+find_package(Vorbis CONFIG REQUIRED)
+find_package(mp3lame CONFIG REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
@@ -308,6 +311,9 @@ add_library(AzureRenderCore STATIC
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
     src/assets/image/ImageFormatAdapter.cpp
+    src/assets/audio/AudioCodec.cpp
+    src/assets/audio/AudioFormatAdapter.cpp
+    src/runtime/MiniaudioImpl.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
     src/assets/model/ModelFormatAdapter.cpp
@@ -371,7 +377,6 @@ add_library(AzureRuntime STATIC
     src/runtime/AnimationStateMachine.cpp
     src/runtime/PresentationRuntime.cpp
     src/runtime/AudioRuntime.cpp
-    src/runtime/MiniaudioImpl.cpp
 )
 add_custom_target(AzureScriptBindingCheck
     COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_script_bindings.py" --check
@@ -516,8 +521,10 @@ target_link_libraries(AzureRenderCore PRIVATE assimp::assimp TIFF::TIFF WebP::we
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
+target_include_directories(AzureRenderCore SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 if(WIN32)
     target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
+    target_link_libraries(AzureRenderCore PRIVATE winmm ole32 uuid)
 endif()
 target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime AzureAI)
 if(TARGET imgui::imgui)
@@ -1606,7 +1613,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
+foreach(_pkg libvorbis libogg libflac mp3lame tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -1941,3 +1948,16 @@ endif()
 
 install(FILES docs/runtime/image-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES docs/licenses/image-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
+install(FILES docs/licenses/audio-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
+install(FILES docs/runtime/audio-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+
+if(BUILD_TESTING)
+    add_executable(AzureAudioCodecTests tests/AudioCodecTests.cpp)
+    target_link_libraries(AzureAudioCodecTests PRIVATE AzureRuntime FLAC::FLAC Vorbis::vorbisenc mp3lame::mp3lame)
+    add_test(NAME AzureAssets.AudioFormats COMMAND AzureAudioCodecTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
+    set_tests_properties(AzureAssets.AudioFormats PROPERTIES FIXTURES_SETUP AudioCodecFixtures)
+    add_executable(AzureEditorAudioWorkflowTests tests/EditorAudioWorkflowTests.cpp)
+    target_link_libraries(AzureEditorAudioWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.AudioWorkflow COMMAND AzureEditorAudioWorkflowTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
+    set_tests_properties(AzureEditor.AudioWorkflow PROPERTIES FIXTURES_REQUIRED AudioCodecFixtures)
+endif()

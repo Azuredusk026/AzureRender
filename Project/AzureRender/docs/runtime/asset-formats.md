@@ -84,3 +84,10 @@ PNG、JPEG、BMP、TGA、PPM、HDR、EXR、TIFF、WebP 可读取。
 图像导入摘要记录精度、方向及材质损失。
 纹理重导入校验设置、解码与 mip。
 图像标识沿用内容事务的保存与发布契约。
+
+## 音频输入
+
+WAV、MP3、FLAC 与 Ogg Vorbis 通过公共格式注册。
+导入与重导入验证全部样本，并保留资产标识。
+短音效预解码，长音频采用实际流式数据源。
+契约见[音频导入](audio-format-import.md)。

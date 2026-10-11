@@ -2,6 +2,7 @@
 #include "assets/GltfLoader.hpp"
 #include "assets/model/ModelFormatAdapter.hpp"
 #include "assets/image/ImageCodec.hpp"
+#include "assets/audio/AudioCodec.hpp"
 #include <array>
 #include <fstream>
 #include <sstream>
@@ -82,7 +83,7 @@ const AssetFormatRegistry& assetFormatRegistry() {
             };
             format.prepare=prepareGltf;result.add(std::move(format));
         }
-        registerModelFormats(result);registerImageFormats(result);return result;
+        registerModelFormats(result);registerImageFormats(result);registerAudioFormats(result);return result;
     }();return registry;
 }
 AssetTransferReport prepareAssetCopy(const AssetTransferRequest& request,const AssetCancellation& cancelled) {

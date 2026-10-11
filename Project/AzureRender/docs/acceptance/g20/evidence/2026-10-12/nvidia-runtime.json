@@ -1,0 +1,54 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 4,
+  "fixedSteps": 15,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "music-wav",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "music-flac",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "music-mp3",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "music-ogg",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    }
+  ],
+  "presentationErrors": [],
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "audio",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.18979999999999997,
+  "uiDrawCalls": 0
+}

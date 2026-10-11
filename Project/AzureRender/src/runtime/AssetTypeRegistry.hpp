@@ -37,7 +37,10 @@ inline AssetTypeRegistry& assetTypeRegistry() {
         for(const auto& format:assetFormatRegistry().list(AssetDomain::Model))if(format.canRead)modelExtensions.insert(modelExtensions.end(),format.extensions.begin(),format.extensions.end());
         value.add({"model","Models",modelExtensions,true,AssetDomain::Model});value.add({"script","Scripts",{".lua"}});
         value.add({"managed-script","Managed scripts",{".azscript",".cs",".dll"}});value.add({"prefab","Prefabs",{".azureprefab"},true});
-        value.add({"animation","Animation graphs / JSON",{".json"}});value.add({"audio","Audio",{".wav"},false,AssetDomain::Audio});
+        value.add({"animation","Animation graphs / JSON",{".json"}});
+        std::vector<std::string> audioExtensions;
+        for(const auto& format:assetFormatRegistry().list(AssetDomain::Audio))if(format.canRead)audioExtensions.insert(audioExtensions.end(),format.extensions.begin(),format.extensions.end());
+        value.add({"audio","Audio",audioExtensions,false,AssetDomain::Audio});
         value.add({"ui","UI documents",{".rml"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
         std::vector<std::string> imageExtensions;
         for(const auto& format:assetFormatRegistry().list(AssetDomain::Image))if(format.canRead)imageExtensions.insert(imageExtensions.end(),format.extensions.begin(),format.extensions.end());

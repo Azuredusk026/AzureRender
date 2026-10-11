@@ -40,6 +40,18 @@
     {
       "name": "libwebp",
       "version>=": "1.6.0"
+    },
+    {
+      "name": "libvorbis",
+      "version>=": "1.3.7"
+    },
+    {
+      "name": "libflac",
+      "version>=": "1.5.0"
+    },
+    {
+      "name": "mp3lame",
+      "version>=": "3.100"
     }
   ],
   "overrides": [
@@ -64,6 +76,20 @@
       "name": "libwebp",
       "version": "1.6.0",
       "port-version": 3
+    },
+    {
+      "name": "libvorbis",
+      "version": "1.3.7",
+      "port-version": 4
+    },
+    {
+      "name": "libflac",
+      "version": "1.5.0"
+    },
+    {
+      "name": "mp3lame",
+      "version": "3.100",
+      "port-version": 17
     }
   ]
 }

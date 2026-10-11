@@ -48,17 +48,18 @@
     {
       "id": "G20",
       "summary": "音频解码与资源生命周期",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "G19"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "G21",
       "summary": "通用导出与往返验证",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "G20"
       ],
@@ -283,6 +284,46 @@
       "transformsSource": true,
       "settingsVersion": 1,
       "generatorVersion": 1
+    },
+    {
+      "id": "wav",
+      "domain": "audio",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+    },
+    {
+      "id": "mp3",
+      "domain": "audio",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+    },
+    {
+      "id": "flac",
+      "domain": "audio",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+    },
+    {
+      "id": "vorbis",
+      "domain": "audio",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
     }
   ]
 }

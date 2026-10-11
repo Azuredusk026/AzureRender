@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <memory>
 #include <vector>
+#include "assets/audio/AudioCodec.hpp"
 namespace azurerender {
 class AudioRuntime {
 public:
@@ -14,6 +15,7 @@ public:
     void stop(Handle handle);
     void release(Handle handle);
     bool playing(Handle handle) const;
+    AudioDescription description(Handle handle) const;
     void pauseAll(bool paused);
     bool hasDevice() const;
     std::vector<float> mix(std::uint32_t frames);

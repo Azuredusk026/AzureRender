@@ -1,7 +1,7 @@
 # 资产输入与输出格式拓展实施计划
 
 > 文档类型：后续实施计划
-> 状态：G19 自动门禁通过，G20 执行中
+> 状态：G20 自动门禁通过，G21 执行中
 > 日期：2026-10-11
 > 范围：模型、图像、音频及资产交换工作流
 
@@ -58,8 +58,8 @@ P5 剩余归因、正式性能及最终交付在 P8 验收。
 | 材质图像 | 统一精度解码，按槽转换为八位像素 | `src/assets/GltfLoader.cpp` |
 | 环境图像 | 统一解码，保持线性半精度范围 | `src/render/EnvironmentAsset.cpp` |
 | 图像重导入 | 解码、设置校验与语义化 mip 生成 | `src/editor/AssetImportJob.cpp` |
-| 音频登记 | WAV | `src/runtime/AssetTypeRegistry.hpp` |
-| 音频运行 | miniaudio 文件加载、播放与离线混音 | `src/runtime/AudioRuntime.cpp` |
+| 音频登记 | WAV、MP3、FLAC、Ogg Vorbis | `src/runtime/AssetTypeRegistry.hpp` |
+| 音频运行 | 统一探测、预解码或流式播放及离线混音 | `src/runtime/AudioRuntime.cpp` |
 | 程序化模型 | 专用 glTF 写入器 | `src/assets/generators/ProceduralGltfWriter.cpp` |
 | 内容修改 | 事务、引用维护、撤销与恢复 | `src/editor/content/ContentOperationService.cpp` |
 | 独立发布 | 依赖收集、目录移动与清单校验 | `tools/build_game.py` |
@@ -250,15 +250,15 @@ TIFF/WebP 评估对应库并固定许可与版本。
 配置 WAV、MP3、FLAC 与 Ogg Vorbis 解码能力。
 通过离线混音验证样本，再复核真实听感。
 
-- [ ] 新建 `tests/AudioCodecTests.cpp`。
-- [ ] 使用可再分发正弦、脉冲和静音夹具。
-- [ ] 先验证四格式导入、时长与样本断言。
-- [ ] 实现采样率、声道、循环和解码策略。
-- [ ] 明确短音效预解码与长音频流式边界。
-- [ ] 验证截断、错误容器、取消与重复释放。
-- [ ] 验证预览、场景切换和独立发布。
-- [ ] 记录操作者听感与输出设备。
-- [ ] 更新音频指南与许可，提交 `feat(g20)`。
+- [x] 新建 `tests/AudioCodecTests.cpp`。
+- [x] 使用可再分发正弦、脉冲和静音夹具。
+- [x] 先验证四格式导入、时长与样本断言。
+- [x] 实现采样率、声道、循环和解码策略。
+- [x] 明确短音效预解码与长音频流式边界。
+- [x] 验证截断、错误容器、取消与重复释放。
+- [x] 验证预览、场景切换和独立发布。
+- [ ] 在 P8 记录操作者听感与输出设备。
+- [x] 更新音频指南与许可，提交 `feat(g20)`。
 
 验证使用 `AzureAssets.AudioFormats`。
 离线结果覆盖时长、波形、峰值与静音。
