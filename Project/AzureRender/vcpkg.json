@@ -61,6 +61,14 @@
     {
       "name": "ktx",
       "version>=": "4.4.2"
+    },
+    {
+      "name": "opus",
+      "version>=": "1.6.1"
+    },
+    {
+      "name": "opusfile",
+      "version>=": "0.12+20221121"
     }
   ],
   "overrides": [
@@ -107,6 +115,15 @@
     {
       "name": "ktx",
       "version": "4.4.2"
+    },
+    {
+      "name": "opus",
+      "version": "1.6.1"
+    },
+    {
+      "name": "opusfile",
+      "version": "0.12+20221121",
+      "port-version": 1
     }
   ]
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "repo": "xiph/opus",
+    "ref": "v1.6.1",
+    "url": "https://codeload.github.com/xiph/opus/tar.gz/v1.6.1",
+    "sha512": "b9a504f8576c977df57caee808412ab95e7424e9a64e3dd4045f05616c3ed58706bc3549195b61e25721e299547509d15206d246d96f1a307b82562b703b412c",
+    "bytes": 4888071
+  },
+  {
+    "repo": "xiph/opusfile",
+    "ref": "9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+    "url": "https://codeload.github.com/xiph/opusfile/tar.gz/9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166",
+    "sha512": "17e323d6c031330f10b045a1438cd7ba44e2ac313ec7b3d69a8041dfa927c3f501d04246d974109fbd68dfa1a8d7b63584d96caed69ad5e38b68358aa35af65a",
+    "bytes": 149358
+  }
+]

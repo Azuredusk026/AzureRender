@@ -75,6 +75,8 @@ find_package(WebP CONFIG REQUIRED)
 find_package(FLAC CONFIG REQUIRED)
 find_package(Vorbis CONFIG REQUIRED)
 find_package(mp3lame CONFIG REQUIRED)
+find_package(Opus CONFIG REQUIRED)
+find_package(OpusFile CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
@@ -317,6 +319,7 @@ add_library(AzureRenderCore STATIC
     src/assets/image/ImageEncoder.cpp
     src/assets/image/ImageFormatAdapter.cpp
     src/assets/audio/AudioCodec.cpp
+    src/assets/audio/CompressedAudioAdapter.cpp
     src/assets/audio/AudioEncoder.cpp
     src/assets/audio/AudioFormatAdapter.cpp
     src/runtime/MiniaudioImpl.cpp
@@ -526,7 +529,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
-target_link_libraries(AzureRenderCore PRIVATE Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
+target_link_libraries(AzureRenderCore PRIVATE Opus::opus OpusFile::opusfile mp3lame::mp3lame Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -1626,7 +1629,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg directxtex directxmath ktx zstd egl-registry opengl-registry libvorbis libogg libflac mp3lame tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
+foreach(_pkg opus opusfile directxtex directxmath ktx zstd egl-registry opengl-registry libvorbis libogg libflac mp3lame tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -1976,6 +1979,11 @@ install(FILES docs/runtime/asset-exchange.md DESTINATION "${CMAKE_INSTALL_DATADI
 
 if(BUILD_TESTING)
     add_executable(AzureAudioCodecTests tests/AudioCodecTests.cpp)
+    add_executable(AzureCompressedAudioFormatsTests tests/CompressedAudioFormatsTests.cpp)
+    target_link_libraries(AzureCompressedAudioFormatsTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.CompressedAudioGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_compressed_audio_workflows.py" --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureEditor.CompressedAudioGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 420)
+    add_test(NAME AzureAssets.CompressedAudioFormats COMMAND AzureCompressedAudioFormatsTests "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g23/evidence/2026-10-12/audio-fixtures" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf")
     target_link_libraries(AzureAudioCodecTests PRIVATE AzureRuntime FLAC::FLAC Vorbis::vorbisenc mp3lame::mp3lame)
     add_test(NAME AzureAssets.AudioFormats COMMAND AzureAudioCodecTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
     set_tests_properties(AzureAssets.AudioFormats PROPERTIES FIXTURES_SETUP AudioCodecFixtures)
@@ -2016,3 +2024,10 @@ if(BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g20/evidence/2026-10-12/audio-fixtures"
         "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g18/evidence/2026-10-12/converted-fixtures/fbx-target/animated.glb")
 endif()
+
+if(WIN32)
+    target_link_libraries(AzureRenderCore PRIVATE mfplat mfreadwrite mfuuid ole32 propsys)
+endif()
+
+install(FILES docs/licenses/compressed-audio-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
+install(DIRECTORY docs/licenses/compressed-audio DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")

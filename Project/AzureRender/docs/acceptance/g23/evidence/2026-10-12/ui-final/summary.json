@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "productionUiWorkflows": 2,
+  "unicodeDestinations": true,
+  "results": [
+    {
+      "format": "opus",
+      "bitrate": 96000,
+      "result": {
+        "bitrate": 96000,
+        "channels": 1,
+        "domain": "audio",
+        "duration": 0.5,
+        "effectiveFrames": 24000,
+        "encoderDelay": 312,
+        "encoderPadding": 648,
+        "frames": 24000,
+        "generation": {
+          "dependencyHashes": {},
+          "generatorId": "azure.opus-export",
+          "generatorVersion": 1,
+          "inputHashes": {
+            "tone.wav": "fnv1a64:ea97dc639cf99424"
+          },
+          "licenseSource": "LicenseRef-External-Asset",
+          "outputHashes": {
+            "tone.opus": "fnv1a64:41ef9ff988c3c138"
+          },
+          "parametersHash": "fnv1a64:3c9bafef3a5c1949",
+          "schemaVersion": 1
+        },
+        "losses": [
+          "Opus uses perceptual coding at 48000 Hz; tags and samples outside [-1,1] are normalized"
+        ],
+        "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g23-compressed-audio-2026-10-12\\ui-final\\压缩音频 🎵 opus\\tone.opus",
+        "packetFrames": 960,
+        "quality": 0.6,
+        "sampleRate": 48000
+      }
+    },
+    {
+      "format": "mp3",
+      "bitrate": 96000,
+      "result": {
+        "bitrate": 96000,
+        "channels": 1,
+        "domain": "audio",
+        "duration": 0.5,
+        "effectiveFrames": 12000,
+        "encoderDelay": 576,
+        "encoderPadding": 672,
+        "frames": 12000,
+        "generation": {
+          "dependencyHashes": {},
+          "generatorId": "azure.mp3-export",
+          "generatorVersion": 1,
+          "inputHashes": {
+            "tone.wav": "fnv1a64:ea97dc639cf99424"
+          },
+          "licenseSource": "LicenseRef-External-Asset",
+          "outputHashes": {
+            "tone.mp3": "fnv1a64:034a8bf049d444cb"
+          },
+          "parametersHash": "fnv1a64:3c9bafef3a5c1949",
+          "schemaVersion": 1
+        },
+        "losses": [
+          "MP3 uses perceptual coding; source tags and samples outside [-1,1] are normalized"
+        ],
+        "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g23-compressed-audio-2026-10-12\\ui-final\\压缩音频 🎵 mp3\\tone.mp3",
+        "quality": 0.6,
+        "sampleRate": 24000
+      }
+    }
+  ],
+  "manualReview": "P8"
+}

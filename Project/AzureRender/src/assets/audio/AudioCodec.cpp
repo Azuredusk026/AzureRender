@@ -1,4 +1,5 @@
 #include "assets/audio/AudioCodec.hpp"
+#include "assets/audio/CompressedAudioAdapter.hpp"
 #include <miniaudio.h>
 #include <algorithm>
 #include <array>
@@ -39,28 +40,28 @@ public:
         result.frames=frames;result.duration=static_cast<double>(frames)/result.sampleRate;result.streaming=result.duration>30;return result;
     }
 };
+class NativeReader final:public AudioFrameReader {
+    std::vector<unsigned char> bytes_;Decoder decoder_;AudioDescription description_;
+public:
+    NativeReader(const std::filesystem::path& path,const AssetCancellation& cancel):bytes_(azurerender::read(path,cancel)),decoder_(bytes_,{}),description_(decoder_.description()){}
+    AudioDescription description()const override{return description_;}
+    std::uint64_t read(float* samples,std::uint64_t frames,const AssetCancellation& cancel)override{check(cancel);ma_uint64 got=0;const auto status=ma_decoder_read_pcm_frames(&decoder_.decoder,samples,std::min<std::uint64_t>(frames,4096),&got);if(status!=MA_SUCCESS&&status!=MA_AT_END)throw std::runtime_error("Audio sample decode failed");for(std::size_t i=0;i<got*description_.channels;++i)if(!std::isfinite(samples[i]))throw std::runtime_error("Non-finite audio samples");check(cancel);return got;}
+    void seek(std::uint64_t frame,const AssetCancellation& cancel)override{check(cancel);if(frame>description_.frames||ma_decoder_seek_to_pcm_frame(&decoder_.decoder,frame)!=MA_SUCCESS)throw std::runtime_error("Audio seek is outside the valid frame range");}
+};
 }
-AudioDescription probeAudioFile(const std::filesystem::path& path,const AssetCancellation& cancel){
-    const auto bytes=read(path,cancel);Decoder decoder(bytes,{});auto result=decoder.description();check(cancel);return result;
-}
+std::unique_ptr<AudioFrameReader> openAudioFileReader(const std::filesystem::path& path,const AssetCancellation& cancel){auto reader=openCompressedAudioReader(path,cancel);if(reader)return reader;return std::make_unique<NativeReader>(path,cancel);}
+AudioDescription probeAudioFile(const std::filesystem::path& path,const AssetCancellation& cancel){auto reader=openAudioFileReader(path,cancel);check(cancel);return reader->description();}
 AudioDescription validateAudioFile(const std::filesystem::path& path,const AssetCancellation& cancel){
-    const auto bytes=read(path,cancel);Decoder decoder(bytes,{});const auto result=decoder.description();
-    std::vector<float> block(static_cast<std::size_t>(4096)*result.channels);ma_uint64 total=0;
-    while(total<result.frames){check(cancel);ma_uint64 got=0;const auto count=std::min<ma_uint64>(4096,result.frames-total);
-        const auto status=ma_decoder_read_pcm_frames(&decoder.decoder,block.data(),count,&got);
-        if((status!=MA_SUCCESS&&status!=MA_AT_END)||got==0)throw std::runtime_error("Invalid or truncated audio samples");
-        for(std::size_t i=0;i<static_cast<std::size_t>(got)*result.channels;++i)if(!std::isfinite(block[i]))throw std::runtime_error("Non-finite audio samples");total+=got;
-    }check(cancel);return result;
+    auto reader=openAudioFileReader(path,cancel);const auto result=reader->description();std::vector<float> block(4096*result.channels);std::uint64_t total=0;
+    while(total<result.frames){const auto got=reader->read(block.data(),std::min<std::uint64_t>(4096,result.frames-total),cancel);if(!got)throw std::runtime_error("Invalid or truncated audio samples");total+=got;}check(cancel);return result;
 }
 DecodedAudio decodeAudioFile(const std::filesystem::path& path,const AudioDecodeSettings& settings,const AssetCancellation& cancel){
-    const auto bytes=read(path,cancel);Decoder decoder(bytes,settings);DecodedAudio result;result.description=decoder.description();
-    const auto channels=result.description.channels;const auto frames=result.description.frames;
-    if(frames>settings.maxDecodedBytes/(sizeof(float)*channels))throw std::invalid_argument("Decoded audio exceeds its byte budget");
-    result.samples.resize(static_cast<std::size_t>(frames)*channels);ma_uint64 total=0;
-    while(total<frames){check(cancel);ma_uint64 got=0;const auto count=std::min<ma_uint64>(4096,frames-total);
-        const auto status=ma_decoder_read_pcm_frames(&decoder.decoder,result.samples.data()+static_cast<std::size_t>(total)*channels,count,&got);
-        if(status!=MA_SUCCESS&&status!=MA_AT_END)throw std::runtime_error("Audio sample decode failed");if(got==0)throw std::runtime_error("Truncated audio samples");total+=got;
-    }
-    for(float value:result.samples)if(!std::isfinite(value))throw std::runtime_error("Non-finite audio samples");check(cancel);return result;
+    if((settings.sampleRate&&(settings.sampleRate<8000||settings.sampleRate>192000))||settings.channels>8||!settings.maxDecodedBytes||settings.maxDecodedBytes>256ULL*1024*1024)throw std::invalid_argument("Invalid audio conversion settings or decoded budget");
+    auto reader=openAudioFileReader(path,cancel);DecodedAudio result;result.description=reader->description();const auto channels=result.description.channels;const auto frames=result.description.frames;
+    if(frames>settings.maxDecodedBytes/(sizeof(float)*channels))throw std::invalid_argument("Decoded audio exceeds its byte budget");result.samples.resize(static_cast<std::size_t>(frames)*channels);
+    std::uint64_t total=0;while(total<frames){const auto got=reader->read(result.samples.data()+total*channels,std::min<std::uint64_t>(4096,frames-total),cancel);if(!got)throw std::runtime_error("Truncated audio samples");total+=got;}
+    const auto targetRate=settings.sampleRate?settings.sampleRate:result.description.sampleRate,targetChannels=settings.channels?settings.channels:channels;
+    if(targetRate!=result.description.sampleRate||targetChannels!=channels){const auto count=ma_convert_frames(nullptr,0,ma_format_f32,targetChannels,targetRate,result.samples.data(),frames,ma_format_f32,channels,result.description.sampleRate);if(!count||count>settings.maxDecodedBytes/(sizeof(float)*targetChannels))throw std::invalid_argument("Converted audio exceeds its decoded budget");std::vector<float> converted(static_cast<std::size_t>(count)*targetChannels);check(cancel);const auto got=ma_convert_frames(converted.data(),count,ma_format_f32,targetChannels,targetRate,result.samples.data(),frames,ma_format_f32,channels,result.description.sampleRate);if(!got)throw std::runtime_error("Audio sample conversion failed");converted.resize(static_cast<std::size_t>(got)*targetChannels);result.samples=std::move(converted);result.description.frames=got;result.description.channels=targetChannels;result.description.sampleRate=targetRate;result.description.duration=double(got)/targetRate;result.description.streaming=result.description.duration>30;}
+    check(cancel);return result;
 }
 }

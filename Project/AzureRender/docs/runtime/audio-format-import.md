@@ -1,6 +1,8 @@
 # 音频导入与播放
 
 WAV、MP3、FLAC 与 Ogg Vorbis 使用统一注册入口。
+Opus、AAC 与 M4A 沿用同一导入与播放契约。
+AAC/M4A 使用 Windows 系统媒体解码服务。
 公共导入操作复制来源，并验证完整音频样本。
 导入摘要记录采样率、声道、帧数和播放策略。
 音频资源通过稳定资产标识引用。
@@ -51,3 +53,5 @@ Windows 文件读取使用宽字符路径接口。
 
 依赖来源见[音频源码清单](../licenses/audio-codecs-source.json)。
 生成夹具采用 `CC0-1.0`。
+
+压缩音频规则见[压缩音频交换](compressed-audio.md)。
