@@ -22,13 +22,15 @@ int main(){try{
     sample.committed=true;sample.commitMs=2;sample.loading=true;sample.cachedCandidates=2;
     sample.requestGeneration=9;sample.loadError="candidate failed";sample.buffers=49;sample.images=71;
     sample.bufferBytes=7470152;sample.imageBytes=124575232;
+    sample.uiActiveGeometry=5;sample.uiRetiredGeometry=3;sample.uiBuffers=16;
     for(std::uint64_t i=1;i<=5;++i){sample.frame=i;trace.record(sample);}
     std::ostringstream output;trace.write(output);auto data=nlohmann::json::parse(output.str());
     check(data.size()==3 && data[0]["frame"]==3 && data[2]["frame"]==5);
     auto expected=nlohmann::json{{"frame",3},{"revision",7},{"workMs",1.5},{"waitMs",.25},
         {"physicsMaxMs",.75},{"committed",true},{"commitMs",2},{"loading",true},
         {"cachedCandidates",2},{"requestGeneration",9},{"loadError","candidate failed"},
-        {"buffers",49},{"images",71},{"bufferBytes",7470152},{"imageBytes",124575232}};
+        {"buffers",49},{"images",71},{"bufferBytes",7470152},{"imageBytes",124575232},
+        {"uiActiveGeometry",5},{"uiRetiredGeometry",3},{"uiBuffers",16}};
     check(data[0]==expected);
     bool zero=false,large=false;
     try{ResourceFrameTrace invalid(0);}catch(const std::invalid_argument&){zero=true;}

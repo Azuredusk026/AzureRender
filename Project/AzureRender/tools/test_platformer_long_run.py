@@ -87,4 +87,92 @@ class BackgroundScanBoundary(unittest.TestCase):
   h=BackgroundScanHarness();h.state['levelReference']=h.exploration
   with self.assertRaises(AssertionError):h._update(observedScan['seconds'])
 
+class CheckpointSetup(unittest.TestCase):
+ def harness(self):
+  h=BackgroundScanHarness();h.state['loading']=False;h.state['checkpointActivated']=True
+  h.index=4;h.checkpointTested=False;h.phase='land';h.phaseStarted=25.
+  h.state['tasks'][0]['collected']=4;h.state['tasks'][0]['completed']=False
+  hero=h.state['characters'][0];hero['position']=[-.94602567,h.platforms[4]['top'],h.platforms[4]['z']-.032475]
+  hero['grounded']=True;h.keys=set();return h
+ def test_side_landing_prepares_checkpoint_before_intentional_fall(self):
+  h=self.harness();h.advance(h.state,25.55)
+  self.assertEqual(h.phase,'checkpoint-align');self.assertFalse(h.checkpointTested)
+  self.assertFalse(h.keys)
+ def test_pending_checkpoint_coin_cannot_set_recovery_baseline(self):
+  h=self.harness();h.phase='checkpoint-align';h.state['characters'][0]['position'][0]=0.
+  h._update(25.7);self.assertEqual(h.phase,'checkpoint-align');self.assertFalse(h.keys)
+  self.assertFalse(h.checkpointTested)
+ def test_alignment_moves_towards_center_and_saves_collected_coin(self):
+  h=self.harness();h.phase='checkpoint-align';h._update(25.7);self.assertIn(68,h.keys)
+  h.state['characters'][0]['position'][0]=-.1;h.state['tasks'][0]['collected']=5
+  h._update(25.9);self.assertEqual(h.phase,'fall-drive');self.assertTrue(h.checkpointTested)
+  self.assertEqual(h.savedCoins,5);self.assertTrue(h.checkpointFall)
+ def test_alignment_from_opposite_side_uses_left_input(self):
+  h=self.harness();h.phase='checkpoint-align';h.state['characters'][0]['position'][0]=.7
+  h._update(25.7);self.assertIn(65,h.keys);self.assertNotIn(68,h.keys)
+ def test_airborne_checkpoint_cannot_start_recovery_test(self):
+  h=self.harness();h.phase='checkpoint-align';h.state['characters'][0]['position'][0]=0.
+  h.state['characters'][0]['grounded']=False;h.state['tasks'][0]['collected']=5
+  h._update(25.7);self.assertEqual(h.phase,'checkpoint-align');self.assertFalse(h.checkpointTested)
+
+observedLanding=json.loads((root/'tests/fixtures/platformer-landing-overshoot.json').read_text(encoding='utf-8'))
+class LandingAlignment(unittest.TestCase):
+    def harness(self):
+        h=BackgroundScanHarness()
+        h.state=copy.deepcopy(observedLanding['value'])
+        h.phase='land';h.phaseStarted=observedLanding['seconds']-1;h.keys=set()
+        return h
+    def update(self,h):h._update(observedLanding['seconds'])
+    def test_recorded_supported_stop_enters_correction_without_counting(self):
+        h=self.harness();self.update(h)
+        self.assertEqual(h.phase,'landing-align')
+        self.assertEqual(h.counts['mandatoryLandings'],0)
+    def test_correction_uses_backward_input_for_past_center(self):
+        h=self.harness();h.phase='landing-align';self.update(h)
+        self.assertIn(83,h.keys);self.assertNotIn(87,h.keys)
+        self.assertEqual(h.counts['mandatoryLandings'],0)
+    def test_correction_uses_forward_input_from_opposite_side(self):
+        h=self.harness();h.phase='landing-align'
+        h.state['characters'][0]['position'][2]=h.platforms[1]['z']+1
+        self.update(h);self.assertIn(87,h.keys);self.assertNotIn(83,h.keys)
+    def test_corrected_stop_waits_for_braking_before_original_landing_check(self):
+        h=self.harness();h.phase='landing-align';h.keys={83}
+        hero=h.state['characters'][0];hero['position'][2]=h.platforms[1]['z']-.1
+        hero['velocity'][2]=1.;self.update(h)
+        self.assertFalse(h.keys);self.assertEqual(h.phase,'landing-align')
+        self.assertEqual(h.counts['mandatoryLandings'],0)
+        hero['velocity'][2]=0.;self.update(h)
+        self.assertEqual(h.phase,'land');self.assertEqual(h.counts['mandatoryLandings'],0)
+        self.update(h);self.assertEqual(h.counts['mandatoryLandings'],1)
+    def test_airborne_or_lower_surface_cannot_begin_correction(self):
+        for airborne in (True,False):
+            h=self.harness();hero=h.state['characters'][0]
+            if airborne:hero['grounded']=False
+            else:hero['position'][1]=h.platforms[1]['top']-.2
+            self.update(h);self.assertEqual(h.phase,'land');self.assertFalse(h.keys)
+    def test_ground_outside_target_surface_cannot_begin_correction(self):
+        h=self.harness();h.state['characters'][0]['position'][2]=h.platforms[1]['z']-h.platforms[1]['halfLength']-.1
+        self.update(h);self.assertEqual(h.phase,'land');self.assertFalse(h.keys)
+    def test_completed_goal_does_not_receive_corrective_movement(self):
+        h=self.harness();h.state['tasks'][0]['completed']=True
+        self.update(h);self.assertEqual(h.phase,'land');self.assertFalse(h.keys)
+    def test_correction_releases_input_if_support_or_height_is_lost(self):
+        for mode in ('airborne','lower','outside','completed'):
+            h=self.harness();h.phase='landing-align';h.keys={83}
+            hero=h.state['characters'][0]
+            if mode=='airborne':hero['grounded']=False
+            elif mode=='lower':hero['position'][1]=h.platforms[1]['top']-.2
+            elif mode=='outside':hero['position'][2]=h.platforms[1]['z']-h.platforms[1]['halfLength']-.1
+            else:h.state['tasks'][0]['completed']=True
+            self.update(h);self.assertFalse(h.keys,msg=mode)
+            self.assertEqual(h.phase,'land',msg=mode)
+            self.assertEqual(h.counts['mandatoryLandings'],0)
+    def test_reversing_correction_releases_old_direction_first(self):
+        h=self.harness();h.phase='landing-align';h.keys={83}
+        h.state['characters'][0]['position'][2]=h.platforms[1]['z']+1
+        self.update(h)
+        self.assertEqual(h.keys,{87})
+        self.assertEqual(h.events[-2:],[
+            dict(action='key',key=83,down=False),dict(action='key',key=87,down=True)])
+
 if __name__=='__main__':unittest.main()

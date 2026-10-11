@@ -10,11 +10,14 @@ struct ResourceFrameSample {
     std::uint64_t frame=0,revision=0;
     double workMs=0,waitMs=0,physicsMaxMs=0;
     bool committed=false;
+    std::uint32_t uiActiveGeometry=0;
     double commitMs=0;
     bool loading=false;
+    std::uint32_t uiRetiredGeometry=0;
     std::uint64_t cachedCandidates=0,requestGeneration=0;
     std::string loadError;
     std::uint64_t buffers=0,images=0,bufferBytes=0,imageBytes=0;
+    std::uint64_t uiBuffers=0;
 };
 class ResourceFrameTrace {
 public:
@@ -37,7 +40,9 @@ public:
             {"committed",value.committed},{"commitMs",value.commitMs},{"loading",value.loading},
             {"cachedCandidates",value.cachedCandidates},{"requestGeneration",value.requestGeneration},
             {"loadError",value.loadError},{"buffers",value.buffers},{"images",value.images},
-            {"bufferBytes",value.bufferBytes},{"imageBytes",value.imageBytes}};
+            {"bufferBytes",value.bufferBytes},{"imageBytes",value.imageBytes},
+            {"uiActiveGeometry",value.uiActiveGeometry},{"uiRetiredGeometry",value.uiRetiredGeometry},
+            {"uiBuffers",value.uiBuffers}};
             output<<row.dump();
         }
         output<<']';

@@ -75,8 +75,8 @@ class PlatformerScenario:
         self.transition('fall-drive',now)
     def advance(self,state,now):
         if self.index==4 and not self.checkpointTested:
-            assert state['checkpointActivated'];self.checkpointTested=True
-            self.begin_fall(True,state,now)
+            assert state['checkpointActivated'];self.release()
+            self.transition('checkpoint-align',now)
         elif self.index==7:self.transition('finish',now)
         else:self.transition('walk',now)
     def update(self,now):
@@ -124,6 +124,15 @@ class PlatformerScenario:
         # switches wait in the explicit preloading/loading phases above.
         assert state['levelReference']==self.course
         hero=next(c for c in state['characters'] if c['node']=='hero');position=hero['position']
+        if self.phase=='checkpoint-align':
+            # Moving support can leave a side offset at the checkpoint. Finish
+            # the ordinary center coin pickup before measuring fall recovery.
+            self.key(65,hero['grounded'] and position[0]>.15)
+            self.key(68,hero['grounded'] and position[0]<-.15)
+            if hero['grounded'] and abs(position[0])<=.15 and state['tasks'][0]['collected']==self.index+1:
+                self.release();self.checkpointTested=True
+                self.begin_fall(True,state,now)
+            return
         if self.phase=='start':
             self.index=0;self.checkpointTested=False;self.begin_fall(False,state,now);return
         if self.phase in ('fall-drive','fall-recover'):
@@ -148,6 +157,21 @@ class PlatformerScenario:
                 self.pulse(32,now);self.transition('jump',now)
             return
         target=self.platforms[min(7,self.index+1)]
+        if self.phase=='landing-align':
+            # Correct the supported position using ordinary movement, then
+            # wait for braking before the unchanged strict landing check.
+            delta=position[2]-target['z']
+            if (not hero['grounded'] or position[1]<=target['top']-.1
+                    or abs(delta)>=target['halfLength'] or state['tasks'][0]['completed']):
+                self.release();self.transition('land',now);return
+            if getattr(self,'landingBraking',False) or abs(delta)<=.15:
+                self.release();self.landingBraking=True
+                if abs(hero['velocity'][2])<.05:self.transition('land',now)
+            elif delta<0:
+                self.key(87,False);self.key(83,True)
+            else:
+                self.key(83,False);self.key(87,True)
+            return
         if self.phase=='jump':
             # A completed goal disables movement before the controller's
             # stop point. Keep the existing grounded landing check.
@@ -165,6 +189,9 @@ class PlatformerScenario:
                     self.relative=position[self.axis]-body['position'][self.axis]
                     self.low=self.high=position[self.axis];self.transition('ride',now)
                 else:self.advance(state,now)
+            elif (hero['grounded'] and position[1]>target['top']-.1
+                  and abs(position[2]-target['z'])<target['halfLength'] and not state['tasks'][0]['completed']):
+                self.release();self.landingBraking=False;self.transition('landing-align',now)
             return
         if self.phase=='ride':
             platform=self.platforms[self.index]

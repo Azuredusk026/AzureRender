@@ -209,5 +209,9 @@ P5 保持 Active，性能与人工门禁按实际证据维护。
 当前结果见[软件候选验收](docs/acceptance/p5/closure/software-candidate-2026-10-11.md)。
 正式性能与人工复核保持待验。
 
+界面几何使用共享缓冲页，保留在途退休规则。
+当前来源回归与实测见[界面驻留验收](docs/acceptance/p5/closure/ui-residency.md)。
+历史内存归因和人工门禁继续按实际结果维护。
+
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。

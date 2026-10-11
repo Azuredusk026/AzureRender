@@ -102,6 +102,17 @@
       "productionUiVerified": false,
       "physicalInputVerified": false,
       "acceptance": "docs/acceptance/p5/closure/software-candidate-2026-10-11.md"
+    },
+    {
+      "id": "UX-009",
+      "severity": "major",
+      "summary": "同一项目的并行规划争用资产缓存临时文件",
+      "owner": "AssetDatabase",
+      "status": "SharedTemporaryPathRaceReproducedNotFixed",
+      "source": "src/runtime/AssetDatabase.cpp",
+      "productionUiVerified": false,
+      "physicalInputVerified": false,
+      "acceptance": "docs/acceptance/p5/closure/ui-residency.md"
     }
   ],
   "taskBaseline": {
@@ -186,5 +197,41 @@
     },
     "finalToolSourceHash": "c5f25bf90e4a873e9c2187fd3adb17a9ce1b23227a2dbce0b78d9fd52e04beaf",
     "controllerByteEquivalent": true
+  },
+  "uiResidencyCandidate": {
+    "sourceHash": "3ed9f9c0a2addbbff59b7e827c8b589e7a688622bfb6f413b84440741c909122",
+    "acceptance": "docs/acceptance/p5/closure/ui-residency.md",
+    "releaseTests": 228,
+    "debugTests": 226,
+    "deliveryChecks": 10,
+    "formalPerformancePassed": false,
+    "formalPassedRounds": 11,
+    "formalTotalRounds": 15,
+    "longRuns": {
+      "platformer": {
+        "status": "passed",
+        "actualSeconds": 1800.0940000000046,
+        "frames": 359492,
+        "workingSetGrowth": 0.03357213410688131
+      },
+      "standard": {
+        "status": "passed",
+        "actualSeconds": 1800.25,
+        "frames": 238053,
+        "workingSetGrowth": 0.009294837898497166
+      }
+    },
+    "packageHashes": {
+      "engine": "4ad5612ec53cfda101ea5f04ac0e9ee89f4f36762cb20b6278db35c21fdb142b",
+      "exploration": "ac3743ac981c3cc7af7bb00337eeedb1a4f6408420feeae0e9a291efd423dae7",
+      "platformer": "69f47ad36158b8248ff6183515926456355b967f796148204a96c65b856bacdf",
+      "scene_inspector": "db824dca71e89088ca469ffebd45aa52c5e34314650f9038e47bdcd4c73e221a",
+      "authored-exploration": "1d859b118894378178139b99765ef4885f55407d858c6dfc1d54e6e036654963",
+      "authored-inspection": "b9b9163c0770b81f16645af849298cfe902f815d2ee3894688721c696035ffb0"
+    },
+    "physicalInputVerified": false,
+    "subjectiveAudioVerified": false,
+    "authoringEfficiencyVerified": false,
+    "priorWorkingSetCauseResolved": false
   }
 }

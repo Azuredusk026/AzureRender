@@ -4,6 +4,10 @@
 #include <filesystem>
 #include <memory>
 namespace azurerender {
+struct GameUiGeometryStatistics {
+    std::uint32_t activeGeometry=0,retiredGeometry=0;
+    std::uint64_t buffers=0,bufferBytes=0;
+};
 class GameUiRenderer final: public Rml::RenderInterface {
 public:
     GameUiRenderer(rhi::IRhi& rhi,VkRenderPass renderPass,const std::filesystem::path& shaders);
@@ -11,6 +15,7 @@ public:
     void beginFrame(std::uint64_t serial,VkExtent2D extent);
     void record(rhi::ICommandRecorder& commands);
     std::uint64_t drawCalls() const;
+    GameUiGeometryStatistics statistics() const;
     Rml::CompiledGeometryHandle CompileGeometry(Rml::Span<const Rml::Vertex> vertices,Rml::Span<const int> indices) override;
     void RenderGeometry(Rml::CompiledGeometryHandle geometry,Rml::Vector2f translation,Rml::TextureHandle texture) override;
     void ReleaseGeometry(Rml::CompiledGeometryHandle geometry) override;

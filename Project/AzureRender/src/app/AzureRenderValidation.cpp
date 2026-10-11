@@ -20,13 +20,16 @@ void AzureRenderApp::initializeValidation() {
     observations_->add("game.state",[this]{return ObservationValue(observeGameState().dump());});
     observations_->add("render.residency",[this]{
         const auto& allocation=gpuAllocator_.statistics();
+        const auto ui=gameUiRenderer_?gameUiRenderer_->statistics():GameUiGeometryStatistics{};
         return ObservationValue(nlohmann::json{
             {"frame",gameplayFrame_},{"renderer",sceneRenderer_?std::string(sceneRenderer_->name()):std::string()},
             {"activeResourceKey",rendererResourceKey_},{"cachedResourceKey",preparedResourceKey_},
             {"entries",static_cast<unsigned>(!!sceneRenderer_)+static_cast<unsigned>(!!preparedRenderer_)},
             {"cachedReady",preparedRendererReady_},{"cachedLastSubmission",preparedRendererLastSubmission_},
             {"completedSubmission",graphicsCompleted_},{"buffers",allocation.liveBuffers},{"images",allocation.liveImages},
-            {"bufferBytes",allocation.liveBufferBytes},{"imageBytes",allocation.liveImageBytes}}.dump());
+            {"bufferBytes",allocation.liveBufferBytes},{"imageBytes",allocation.liveImageBytes},
+            {"uiActiveGeometry",ui.activeGeometry},{"uiRetiredGeometry",ui.retiredGeometry},
+            {"uiBuffers",ui.buffers},{"uiBufferBytes",ui.bufferBytes}}.dump());
     });
     observations_->add("engine.frameCount",[this]{return ObservationValue(static_cast<std::int64_t>(gameplayFrame_));});
     observations_->add("engine.screenshots",[this]{return ObservationValue(static_cast<std::int64_t>(validationScreenshots_));});

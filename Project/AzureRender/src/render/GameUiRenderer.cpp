@@ -15,9 +15,12 @@ struct GameUiRenderer::Impl {
     VkPipelineLayout layout=VK_NULL_HANDLE;
     VkPipeline pipeline=VK_NULL_HANDLE;
     VkSampler sampler=VK_NULL_HANDLE;
-    struct Geometry {rhi::GpuBuffer vertices,indices;std::uint32_t count=0;std::uint64_t retire=0;};
+    struct Range {VkDeviceSize offset=0,size=0;};
+    struct Page {rhi::GpuBuffer buffer;std::vector<Range> free;std::size_t references=0;};
+    struct Geometry {std::uintptr_t page=0;Range range;VkDeviceSize indexOffset=0;std::uint32_t count=0;std::uint64_t retire=0;};
     struct Texture {rhi::GpuImage image;VkImageView view=VK_NULL_HANDLE;VkDescriptorSet set=VK_NULL_HANDLE;std::uint64_t retire=0;};
     std::map<std::uintptr_t,Geometry> geometry;
+    std::map<std::uintptr_t,Page> pages;
     std::map<std::uintptr_t,Texture> textures;
     std::vector<VkDescriptorSet> spareSets;
     struct Push {std::array<float,16> matrix;std::array<float,2> translation;std::array<float,2> extent;};
@@ -27,9 +30,52 @@ struct GameUiRenderer::Impl {
     VkExtent2D extent{640,360};VkRect2D scissor{{0,0},{640,360}};
     bool clipping=false;
     std::uint64_t serial=0,totalDraws=0;
-    std::uintptr_t next=1,white=0;
+    std::uintptr_t next=1,nextPage=1,white=0;
     explicit Impl(rhi::IRhi& backend):rhi(backend){}
-    void destroy(Geometry& value){rhi.allocator().destroyBuffer(value.vertices);rhi.allocator().destroyBuffer(value.indices);}
+    Geometry allocateGeometry(VkDeviceSize bytes,VkDeviceSize vertexBytes){
+        static_assert(sizeof(int)==4 && sizeof(Rml::Vertex)%4==0,"UI indices require four-byte aligned storage");
+        auto page=pages.end();std::size_t slot=0;
+        for(auto candidate=pages.begin();candidate!=pages.end();++candidate){
+            const auto found=std::find_if(candidate->second.free.begin(),candidate->second.free.end(),
+                [bytes](const Range& range){return range.size>=bytes;});
+            if(found!=candidate->second.free.end()){
+                page=candidate;slot=static_cast<std::size_t>(found-candidate->second.free.begin());break;
+            }
+        }
+        if(page==pages.end()){
+            VkDeviceSize capacity=64*1024;while(capacity<bytes)capacity*=2;
+            Page value;value.free.reserve(16);value.free.push_back({0,capacity});
+            value.buffer=rhi.allocator().createBuffer(capacity,VK_BUFFER_USAGE_VERTEX_BUFFER_BIT|VK_BUFFER_USAGE_INDEX_BUFFER_BIT,true);
+            try{page=pages.emplace(nextPage++,std::move(value)).first;}
+            catch(...){rhi.allocator().destroyBuffer(value.buffer);throw;}
+        }
+        auto& value=page->second;
+        // Reserve free-list storage before taking a range. Retirement and
+        // exception rollback can then return ranges without allocating.
+        const auto required=value.free.size()+value.references+1;
+        if(value.free.capacity()<required)value.free.reserve(std::max(required,value.free.capacity()*2));
+        Geometry result;result.page=page->first;result.range={value.free[slot].offset,bytes};
+        result.indexOffset=result.range.offset+vertexBytes;
+        value.free[slot].offset+=bytes;value.free[slot].size-=bytes;
+        if(!value.free[slot].size)value.free.erase(value.free.begin()+static_cast<std::ptrdiff_t>(slot));
+        ++value.references;return result;
+    }
+    void destroy(Geometry& value){
+        if(!value.page)return;
+        auto page=pages.find(value.page);auto& storage=page->second;
+        if(--storage.references==0){rhi.allocator().destroyBuffer(storage.buffer);pages.erase(page);}
+        else{
+            storage.free.push_back(value.range);
+            std::sort(storage.free.begin(),storage.free.end(),[](const Range& a,const Range& b){return a.offset<b.offset;});
+            std::size_t count=0;
+            for(const auto& range:storage.free){
+                if(count && storage.free[count-1].offset+storage.free[count-1].size==range.offset)storage.free[count-1].size+=range.size;
+                else storage.free[count++]=range;
+            }
+            storage.free.resize(count);
+        }
+        value.page=0;
+    }
     void destroy(Texture& value){if(value.view)rhi.destroyImageView(value.view);rhi.allocator().destroyImage(value.image);if(value.set)spareSets.push_back(value.set);}
     ~Impl(){for(auto& item:geometry)destroy(item.second);for(auto& item:textures)destroy(item.second);if(pipeline)rhi.destroyPipeline(pipeline);if(layout)rhi.destroyPipelineLayout(layout);if(pool)rhi.destroyDescriptorPool(pool);if(setLayout)rhi.destroyDescriptorSetLayout(setLayout);if(sampler)rhi.destroySampler(sampler);}
     void initialize(VkRenderPass pass,const std::filesystem::path& shaders){
@@ -60,11 +106,11 @@ void GameUiRenderer::beginFrame(std::uint64_t serial,VkExtent2D extent){
 Rml::CompiledGeometryHandle GameUiRenderer::CompileGeometry(Rml::Span<const Rml::Vertex> vertices,Rml::Span<const int> indices){
     if(vertices.empty()||indices.empty())return 0;if(vertices.size()>1000000||indices.size()>3000000)throw std::invalid_argument("Game UI geometry exceeds limit");
     for(auto index:indices)if(index<0||static_cast<std::size_t>(index)>=vertices.size())throw std::invalid_argument("Game UI index out of bounds");
-    Impl::Geometry value;auto& allocator=impl_->rhi.allocator();
-    value.vertices=allocator.createBuffer(vertices.size()*sizeof(Rml::Vertex),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,true);
-    try{value.indices=allocator.createBuffer(indices.size()*sizeof(int),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,true);
-        std::memcpy(value.vertices.mapped,vertices.data(),static_cast<std::size_t>(value.vertices.size));std::memcpy(value.indices.mapped,indices.data(),static_cast<std::size_t>(value.indices.size));
-        allocator.flush(value.vertices,0,value.vertices.size);allocator.flush(value.indices,0,value.indices.size);value.count=static_cast<std::uint32_t>(indices.size());
+    const auto vertexBytes=vertices.size()*sizeof(Rml::Vertex),indexBytes=indices.size()*sizeof(int);
+    auto value=impl_->allocateGeometry(vertexBytes+indexBytes,vertexBytes);auto& allocator=impl_->rhi.allocator();
+    try{const auto& buffer=impl_->pages.at(value.page).buffer;auto* data=static_cast<std::byte*>(buffer.mapped);
+        std::memcpy(data+value.range.offset,vertices.data(),vertexBytes);std::memcpy(data+value.indexOffset,indices.data(),indexBytes);
+        allocator.flush(buffer,value.range.offset,value.range.size);value.count=static_cast<std::uint32_t>(indices.size());
         const auto handle=impl_->next++;impl_->geometry.emplace(handle,value);return handle;
     }catch(...){impl_->destroy(value);throw;}
 }
@@ -104,9 +150,20 @@ void GameUiRenderer::SetScissorRegion(Rml::Rectanglei region){impl_->scissor={{r
 void GameUiRenderer::SetTransform(const Rml::Matrix4f* transform){if(transform)std::copy_n(transform->data(),16,impl_->transform.begin());else impl_->transform={1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};}
 void GameUiRenderer::record(rhi::ICommandRecorder& commands){commands.setViewport(static_cast<float>(impl_->extent.width),static_cast<float>(impl_->extent.height));commands.bindPipeline(impl_->pipeline);
     for(const auto& draw:impl_->draws){const auto& mesh=impl_->geometry.at(draw.geometry);const auto& texture=impl_->textures.at(draw.texture);
-        commands.setScissor(draw.clip.extent,draw.clip.offset);commands.bindDescriptorSet(impl_->layout,texture.set);commands.bindVertexBuffer(mesh.vertices.buffer,0);commands.bindIndexBuffer(mesh.indices.buffer,0);
+        const auto buffer=impl_->pages.at(mesh.page).buffer.buffer;
+        commands.setScissor(draw.clip.extent,draw.clip.offset);commands.bindDescriptorSet(impl_->layout,texture.set);commands.bindVertexBuffer(buffer,mesh.range.offset);commands.bindIndexBuffer(buffer,mesh.indexOffset);
         commands.pushConstants(impl_->layout,VK_SHADER_STAGE_VERTEX_BIT,0,&draw.push,sizeof(draw.push));commands.drawIndexed(mesh.count,0);++impl_->totalDraws;}
     commands.setScissor(impl_->extent);
 }
 std::uint64_t GameUiRenderer::drawCalls()const{return impl_->totalDraws;}
+GameUiGeometryStatistics GameUiRenderer::statistics()const{
+    GameUiGeometryStatistics result;
+    for(const auto& item:impl_->geometry){
+        const auto& value=item.second;
+        if(value.retire)++result.retiredGeometry;else ++result.activeGeometry;
+    }
+    result.buffers=impl_->pages.size();
+    for(const auto& item:impl_->pages)result.bufferBytes+=item.second.buffer.size;
+    return result;
+}
 }

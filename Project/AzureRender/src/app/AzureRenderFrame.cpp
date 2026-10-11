@@ -372,6 +372,11 @@ void AzureRenderApp::drawFrame() {
             sample.loadError=levelSession_?levelSession_->lastError():std::string();
             sample.buffers=allocation.liveBuffers;sample.images=allocation.liveImages;
             sample.bufferBytes=allocation.liveBufferBytes;sample.imageBytes=allocation.liveImageBytes;
+            if(gameUiRenderer_){
+                const auto ui=gameUiRenderer_->statistics();
+                sample.uiActiveGeometry=ui.activeGeometry;sample.uiRetiredGeometry=ui.retiredGeometry;
+                sample.uiBuffers=ui.buffers;
+            }
             resourceFrameSamples_.record(sample);
             sampledLevelRevision_=revision;
         }
