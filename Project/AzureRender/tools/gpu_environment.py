@@ -4,6 +4,7 @@ import json
 import re
 import subprocess
 import time
+import threading
 import xml.etree.ElementTree as ET
 
 DEFAULT_POLICY=dict(idleSeconds=10,temperatureRange=4,maxIdleUtilization=10,startHeadroom=2)
@@ -34,12 +35,20 @@ def parse_snapshot(xml):
         reasons=gpu.find('clocks_throttle_reasons');prefix='clocks_throttle_reason_'
     def reason(name):return reasons.findtext(prefix+name) if reasons is not None else None
     def active(name):return {'Active':True,'Not Active':False}.get(reason(name))
+    def metric(path,unit):
+        match=re.fullmatch(r'\s*(-?\d+(?:\.\d+)?)\s*'+re.escape(unit)+r'\s*',gpu.findtext(path) or '')
+        return float(match[1]) if match else None
+    power_path='gpu_power_readings' if gpu.find('gpu_power_readings') is not None else 'power_readings'
     return dict(temperature=temperature,thermalLimit=min(limits) if limits else None,
         thermalLimits=limits,thermalMargin=margin,relativeThermalThreshold=max(relative) if relative else None,
         relativeThermalThresholds=relative,targetTemperature=number(gpu.findtext('temperature/gpu_target_temperature')),
         thermalLimitStatus='Reported' if limits else 'RelativeReported' if relative else 'Unavailable',
         thermalSlowdown=dict(hardware=active('hw_thermal_slowdown'),software=active('sw_thermal_slowdown')),
         powerCap=reason('sw_power_cap'),gpuUtilization=number(gpu.findtext('utilization/gpu_util')),
+        powerDrawWatts=metric(power_path+('/instant_power_draw' if power_path=='gpu_power_readings' else '/power_draw'),'W'),
+        powerLimitWatts=metric(power_path+('/current_power_limit' if power_path=='gpu_power_readings' else '/power_limit'),'W'),
+        graphicsClockMHz=metric('clocks/graphics_clock','MHz'),
+        smClockMHz=metric('clocks/sm_clock','MHz'),memoryClockMHz=metric('clocks/mem_clock','MHz'),
         gpu=gpu.findtext('product_name'),driver=root.findtext('driver_version'),
         deviceId=gpu.get('id'),rawXml=xml)
 
@@ -116,11 +125,31 @@ def startup_errors(samples,policy=None):
 
 
 def environment_errors(evidence):
-    if not isinstance(evidence,dict) or evidence.get('schemaVersion')!=1:
+    if not isinstance(evidence,dict) or evidence.get('schemaVersion') not in (1,2):
         return ['device environment evidence is missing or unsupported']
     try:
         policy=policy_values(evidence.get('policy'))
-        return startup_errors(evidence.get('startup'),policy)+device_errors(evidence.get('final'),policy=policy)
+        errors=startup_errors(evidence.get('startup'),policy)+device_errors(evidence.get('final'),policy=policy)
+        if evidence['schemaVersion']==2:
+            if evidence.get('coverage')!='PeriodicDuringRun':errors.append('run telemetry coverage is missing')
+            duration=evidence.get('runSeconds')
+            if not valid_number(duration) or duration<0:errors.append('run telemetry duration is invalid')
+            samples=evidence.get('runObservations')
+            if not isinstance(samples,list) or len(samples)<2:
+                errors.append('run telemetry observations are missing')
+            else:
+                for index,row in enumerate(samples):
+                    errors.extend(f'run observation {index}: '+error for error in device_errors(row,policy=policy))
+                times=[row.get('seconds') if isinstance(row,dict) else None for row in samples]
+                if (any(not valid_number(t) or t<0 for t in times)
+                        or times[0]!=0 or any(b<=a for a,b in zip(times,times[1:]))):
+                    errors.append('run telemetry observation times are invalid')
+                elif (any(b-a>20 for a,b in zip(times,times[1:]))
+                        or (valid_number(duration) and not math.isclose(times[-1],duration,abs_tol=1e-6))):
+                    errors.append('run telemetry contains an unobserved interval')
+            failures=evidence.get('monitorErrors')
+            if not isinstance(failures,list) or failures:errors.append('run telemetry monitor failed: '+str(failures))
+        return errors
     except (TypeError,ValueError) as error:return [str(error)]
 
 
@@ -152,3 +181,44 @@ def wait_and_record(path,*,policy=None,**options):
         result.update(errorType=type(error).__name__,error=str(error))
         raise
     finally:path.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+
+
+class RunEnvironmentMonitor:
+    """Own a single driver-query thread; input and memory observation never wait on it."""
+    def __init__(self,evidence,*,path=None,read=snapshot,interval=5):
+        if not valid_number(interval) or not 0<interval<=5:raise ValueError('Invalid run telemetry interval')
+        self.evidence=evidence;self.path=path;self.read=read;self.interval=interval
+        self.stop=threading.Event();self.closed=False;self.started=False
+        self.samples=[];self.errors=[]
+        self.worker=threading.Thread(target=self._run,name='azure-gpu-environment',daemon=True)
+
+    def _observe(self,seconds=None):
+        try:
+            row=dict(self.read())
+            row['seconds']=time.perf_counter()-self.start if seconds is None else seconds
+            self.samples.append(row)
+        except Exception as error:
+            self.errors.append(type(error).__name__+': '+str(error))
+
+    def _run(self):
+        self._observe(0)
+        while not self.stop.wait(self.interval):self._observe()
+
+    def __enter__(self):
+        if self.started or self.closed:raise RuntimeError('Run telemetry monitor already used')
+        self.start=time.perf_counter();self.started=True;self.worker.start()
+        return self
+
+    def close(self):
+        if self.closed:return
+        self.closed=True
+        if not self.started:raise RuntimeError('Run telemetry monitor was not started')
+        self.stop.set();self.worker.join()
+        self._observe()
+        duration=self.samples[-1]['seconds'] if self.samples else time.perf_counter()-self.start
+        self.evidence.update(schemaVersion=2,coverage='PeriodicDuringRun',runSeconds=duration,
+            runObservations=self.samples,monitorErrors=self.errors,
+            final={key:value for key,value in self.samples[-1].items() if key!='seconds'} if self.samples else None)
+        if self.path is not None:self.path.write_text(json.dumps(self.evidence,indent=2)+'\n',encoding='utf-8')
+
+    def __exit__(self,*args):self.close()

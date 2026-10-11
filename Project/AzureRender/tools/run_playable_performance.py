@@ -13,7 +13,7 @@ import time
 from create_playable_project import create
 from test_independent_animation_gpu import component
 from performance_budget import BUDGETS, validate_round, working_set_growth
-from gpu_environment import snapshot,wait_and_record
+from gpu_environment import snapshot,wait_and_record,RunEnvironmentMonitor
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -134,7 +134,7 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         command += ['--editor-actions',str(task.resolve())]
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
     peak=0;start=time.monotonic();observations=[]
-    with output.with_suffix('.stdout.log').open('w',encoding='utf-8') as stdout,output.with_suffix('.stderr.log').open('w',encoding='utf-8') as stderr:
+    with RunEnvironmentMonitor(environment,path=environment_path), output.with_suffix('.stdout.log').open('w',encoding='utf-8') as stdout,output.with_suffix('.stderr.log').open('w',encoding='utf-8') as stderr:
         process=subprocess.Popen(command,cwd=ROOT,stdout=stdout,stderr=stderr,startupinfo=info)
         try:
             while process.poll() is None:
@@ -151,7 +151,6 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         finally:
             if process.poll() is None:process.kill();process.wait()
             output.with_suffix('.memory.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
-    environment['final']=snapshot()
     environment_path.write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     if process.returncode:raise RuntimeError(f'Player failed: {process.returncode}, {output}')
     data=json.loads(timing.read_text(encoding='utf-8'))

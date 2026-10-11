@@ -11,7 +11,7 @@ import subprocess
 import time
 from build_game import verify_package, digest
 from run_playable_performance import stats
-from gpu_environment import environment_errors,snapshot,wait_and_record
+from gpu_environment import environment_errors,snapshot,wait_and_record,RunEnvironmentMonitor
 from long_run_telemetry import LiveGpuTiming, AsyncProgressWriter
 
 
@@ -167,7 +167,7 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
     info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
     try:ctypes.WinDLL('user32').SetProcessDPIAware()
     except AttributeError:pass
-    with LiveGpuTiming(csv_path) as gpu_reader, AsyncProgressWriter(output/'progress.json') as progress_writer, \
+    with RunEnvironmentMonitor(environment,path=environment_path), LiveGpuTiming(csv_path) as gpu_reader, AsyncProgressWriter(output/'progress.json') as progress_writer, \
             (output/'stdout.log').open('w',encoding='utf-8') as stdout,(output/'stderr.log').open('w',encoding='utf-8') as stderr:
         process=subprocess.Popen(command,cwd=package,env=env,stdout=stdout,stderr=stderr,startupinfo=info)
         window=NativeWindow(process.pid);startup=time.monotonic()
@@ -215,7 +215,6 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
                 else:process.kill();process.wait()
             (output/'observation.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
             if scenario:scenario.close()
-    environment['final']=snapshot()
     environment_path.write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     # The final flushed CSV is authoritative, including shutdown frames.
     import csv

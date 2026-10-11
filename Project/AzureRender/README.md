@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+正式测量使用运行期间的周期设备观察。
+范围与证据见[环境观察验收](docs/acceptance/p5/closure/run-environment-monitor.md)。
+
 各阶段自动门禁按[执行计划](docs/plans/2026-10-11-automatic-through-p8.md)连续推进。
 实体操作、听感和制作效率在 P8 集中复核。
 

@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import threading
 
 
 class GpuEnvironmentTests(unittest.TestCase):
@@ -131,6 +132,85 @@ class GpuEnvironmentTests(unittest.TestCase):
         self.assertEqual(data['errorType'],'TimeoutError')
         self.assertEqual(len(data['observations']),4)
         self.assertTrue(module.environment_errors(data))
+
+    def continuous(self):
+        return dict(schemaVersion=2, policy={}, startup=self.window(), final=self.device(),
+            coverage='PeriodicDuringRun', runSeconds=20,
+            runObservations=[dict(self.device(),seconds=s) for s in (0,5,10,15,20)],
+            monitorErrors=[])
+
+    def test_midrun_slowdown_is_rejected_even_when_endpoints_are_ready(self):
+        data=self.continuous()
+        self.assertEqual(self.module().environment_errors(data),[])
+        data['runObservations'][2]['thermalSlowdown']['software']=True
+        errors=self.module().environment_errors(data)
+        self.assertTrue(any('software thermal slowdown is active' in error for error in errors),errors)
+
+    def test_missing_midrun_samples_or_monitor_failure_is_rejected(self):
+        for field,value in [('runObservations',[]),('runSeconds',float('nan')),
+                            ('monitorErrors',['driver query failed']),('coverage','StartupWindowAndEndObservation')]:
+            data=self.continuous();data[field]=value
+            self.assertTrue(self.module().environment_errors(data),field)
+        data=self.continuous();data['runObservations']=[data['runObservations'][0]]
+        self.assertTrue(self.module().environment_errors(data))
+        data=self.continuous();data['runObservations'][2]['seconds']=4
+        self.assertTrue(self.module().environment_errors(data))
+
+    def test_long_unobserved_interval_is_rejected(self):
+        data=self.continuous();data['runSeconds']=60
+        data['runObservations']=[dict(self.device(),seconds=s) for s in (0,5,60)]
+        self.assertTrue(self.module().environment_errors(data))
+
+    def test_driver_power_and_clock_are_retained_for_correlation(self):
+        xml='''<nvidia_smi_log><gpu><power_readings><power_draw>42.50 W</power_draw>
+        <power_limit>100.00 W</power_limit></power_readings><clocks><graphics_clock>2100 MHz</graphics_clock>
+        <sm_clock>2100 MHz</sm_clock><mem_clock>8001 MHz</mem_clock></clocks></gpu></nvidia_smi_log>'''
+        device=self.module().parse_snapshot(xml)
+        self.assertEqual(device.get('powerDrawWatts'),42.5)
+        self.assertEqual(device.get('graphicsClockMHz'),2100)
+        self.assertEqual(device.get('memoryClockMHz'),8001)
+
+    def test_modern_driver_instant_power_and_enforced_limit_are_retained(self):
+        xml='''<nvidia_smi_log><gpu><gpu_power_readings><average_power_draw>79.88 W</average_power_draw>
+        <instant_power_draw>79.51 W</instant_power_draw><current_power_limit>80.00 W</current_power_limit>
+        </gpu_power_readings></gpu></nvidia_smi_log>'''
+        device=self.module().parse_snapshot(xml)
+        self.assertEqual(device.get('powerDrawWatts'),79.51)
+        self.assertEqual(device.get('powerLimitWatts'),80)
+
+    def test_monitor_owns_thread_and_preserves_raw_observations(self):
+        module=self.module();self.assertTrue(hasattr(module,'RunEnvironmentMonitor'))
+        observed=threading.Event()
+        def read():
+            observed.set();return self.device()
+        evidence=dict(schemaVersion=1,startup=self.window(),policy={})
+        monitor=module.RunEnvironmentMonitor(evidence,read=read,interval=.01)
+        with monitor:
+            self.assertTrue(observed.wait(timeout=2))
+        monitor.close()
+        self.assertFalse(monitor.worker.is_alive())
+        self.assertGreaterEqual(len(evidence['runObservations']),2)
+        self.assertEqual(evidence['runObservations'][0]['seconds'],0)
+        self.assertEqual(module.environment_errors(evidence),[])
+
+    def test_monitor_query_failure_is_saved_and_fails_acceptance(self):
+        module=self.module();self.assertTrue(hasattr(module,'RunEnvironmentMonitor'))
+        evidence=dict(schemaVersion=1,startup=self.window(),policy={})
+        def read():raise RuntimeError('driver unavailable')
+        with module.RunEnvironmentMonitor(evidence,read=read,interval=.01):pass
+        self.assertTrue(any('driver unavailable' in error for error in evidence['monitorErrors']))
+        self.assertTrue(module.environment_errors(evidence))
+
+    def test_failed_workload_still_writes_the_environment_evidence(self):
+        module=self.module();evidence=dict(schemaVersion=1,startup=self.window(),policy={})
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'environment.json'
+            with self.assertRaisesRegex(RuntimeError,'workload failed'):
+                with module.RunEnvironmentMonitor(evidence,path=path,read=self.device,interval=.01):
+                    raise RuntimeError('workload failed')
+            data=json.loads(path.read_text(encoding='utf-8'))
+            self.assertEqual(data['schemaVersion'],2)
+            self.assertGreaterEqual(len(data['runObservations']),2)
 
 
 if __name__=='__main__':unittest.main()
