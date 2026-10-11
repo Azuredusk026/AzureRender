@@ -1,7 +1,9 @@
 # AzureRender 工程
 
 帧调度候选的回归与范围见[机制验收](docs/acceptance/p5/closure/frame-pacing.md)。
-人工待项在 P8 复核，正式 GPU 门禁等待空闲环境。
+人工待项在 P8 复核，非桌面输入 GPU 回归通过。
+正式性能十四轮通过，一轮热状态失败。
+来源与待项见[本轮验收](docs/acceptance/p5/closure/automatic-resume.md)。
 
 正式测量使用运行期间的周期设备观察。
 范围与证据见[环境观察验收](docs/acceptance/p5/closure/run-environment-monitor.md)。

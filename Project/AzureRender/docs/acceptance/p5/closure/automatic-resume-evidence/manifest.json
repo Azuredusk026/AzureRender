@@ -1,0 +1,1871 @@
+{
+  "schemaVersion": 1,
+  "status": "AutomaticRegressionVerifiedFormalThermalGateBlocked",
+  "sourceHash": "2f5618d62593c83a59a4000654b3e14a2ee9e80dc8a6a77a4ace41ab3a37b901",
+  "previousEvidence": "../frame-pacing-partial-evidence/manifest.json",
+  "currentCpuTests": 326,
+  "gpuVerifiedUniqueTests": 128,
+  "gpuCurrentSourcePassedTests": 96,
+  "gpuByteEquivalentAssociatedTests": 32,
+  "newGpuTestsPassed": 41,
+  "pendingNonDesktopGpuTests": 0,
+  "fullGpuRegressionPassed": false,
+  "nativeDesktopInputDeferredToP8": 2,
+  "formalRounds": 15,
+  "formalPassedRounds": 14,
+  "formalPerformancePassed": false,
+  "currentSourceLongRuns": 0,
+  "priorWorkingSetCauseResolved": false,
+  "manualReviewPhase": "P8",
+  "phaseComplete": false,
+  "blockingRound": "exploration-2",
+  "failureType": "DriverSoftwareThermalSlowdown",
+  "rounds": [
+    {
+      "load": "standard",
+      "round": 1,
+      "passed": true,
+      "gpuP95Ms": 6.26224,
+      "cpuP95Ms": 2.6198099999999966,
+      "physicsP95Ms": 0.41722,
+      "workingSetGrowth": 0.002798342247883445,
+      "peakWorkingSetBytes": 233336832,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 47.0,
+      "peakTemperature": 73.0,
+      "peakPowerWatts": 49.04,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "standard",
+      "round": 2,
+      "passed": true,
+      "gpuP95Ms": 6.2684544,
+      "cpuP95Ms": 2.6467900000000206,
+      "physicsP95Ms": 0.42135999999999996,
+      "workingSetGrowth": 0.0031590529940013212,
+      "peakWorkingSetBytes": 234078208,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 50.0,
+      "peakTemperature": 75.0,
+      "peakPowerWatts": 50.19,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "standard",
+      "round": 3,
+      "passed": true,
+      "gpuP95Ms": 6.273688,
+      "cpuP95Ms": 2.6456300000000046,
+      "physicsP95Ms": 0.41281,
+      "workingSetGrowth": 0.0032668714379560093,
+      "peakWorkingSetBytes": 234360832,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 50.0,
+      "peakTemperature": 76.0,
+      "peakPowerWatts": 49.87,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "editor",
+      "round": 1,
+      "passed": true,
+      "gpuP95Ms": 5.4451392,
+      "cpuP95Ms": 6.762589999999965,
+      "physicsP95Ms": 0.4111749999999998,
+      "workingSetGrowth": 0.008591892857697792,
+      "peakWorkingSetBytes": 266989568,
+      "deviceLocalPeakBytes": 304152576,
+      "startupTemperature": 51.0,
+      "peakTemperature": 55.0,
+      "peakPowerWatts": 16.74,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "editor",
+      "round": 2,
+      "passed": true,
+      "gpuP95Ms": 5.6140496,
+      "cpuP95Ms": 6.82092499999998,
+      "physicsP95Ms": 0.41254499999999994,
+      "workingSetGrowth": 0.006296250233194467,
+      "peakWorkingSetBytes": 266534912,
+      "deviceLocalPeakBytes": 304152576,
+      "startupTemperature": 49.0,
+      "peakTemperature": 54.0,
+      "peakPowerWatts": 16.58,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "editor",
+      "round": 3,
+      "passed": true,
+      "gpuP95Ms": 5.4776768,
+      "cpuP95Ms": 6.349095000000013,
+      "physicsP95Ms": 0.40082999999999996,
+      "workingSetGrowth": 0.0070496730810944985,
+      "peakWorkingSetBytes": 267141120,
+      "deviceLocalPeakBytes": 304152576,
+      "startupTemperature": 49.0,
+      "peakTemperature": 54.0,
+      "peakPowerWatts": 16.4,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "stress",
+      "round": 1,
+      "passed": true,
+      "gpuP95Ms": 7.8237552,
+      "cpuP95Ms": 4.598774999999983,
+      "physicsP95Ms": 1.0693549999999998,
+      "workingSetGrowth": 0.018116380876576743,
+      "peakWorkingSetBytes": 241221632,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 49.0,
+      "peakTemperature": 79.0,
+      "peakPowerWatts": 56.6,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "stress",
+      "round": 2,
+      "passed": true,
+      "gpuP95Ms": 7.8159744,
+      "cpuP95Ms": 4.4674099999999966,
+      "physicsP95Ms": 1.0471199999999996,
+      "workingSetGrowth": 0.01850057111211112,
+      "peakWorkingSetBytes": 241065984,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 52.0,
+      "peakTemperature": 81.0,
+      "peakPowerWatts": 56.65,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "stress",
+      "round": 3,
+      "passed": true,
+      "gpuP95Ms": 7.8393952,
+      "cpuP95Ms": 4.508379999999995,
+      "physicsP95Ms": 1.0748749999999998,
+      "workingSetGrowth": 0.018423055632438512,
+      "peakWorkingSetBytes": 241156096,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 52.0,
+      "peakTemperature": 82.0,
+      "peakPowerWatts": 57.59,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "exploration",
+      "round": 1,
+      "passed": true,
+      "gpuP95Ms": 9.1752384,
+      "cpuP95Ms": 2.532574999999995,
+      "physicsP95Ms": 0.42882999999999993,
+      "workingSetGrowth": 0.0028333447122277367,
+      "peakWorkingSetBytes": 243040256,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 53.0,
+      "peakTemperature": 86.0,
+      "peakPowerWatts": 65.64,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "exploration",
+      "round": 2,
+      "passed": false,
+      "gpuP95Ms": 9.4722896,
+      "cpuP95Ms": 2.4880799999999925,
+      "physicsP95Ms": 0.42495499999999997,
+      "workingSetGrowth": 0.002989204700737824,
+      "peakWorkingSetBytes": 241348608,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 54.0,
+      "peakTemperature": 87.0,
+      "peakPowerWatts": 66.23,
+      "softwareSlowdownSeconds": [
+        20.744552900003328,
+        25.88305940000282,
+        39.46429630000057
+      ],
+      "failures": [
+        "device environment: software thermal slowdown is active",
+        "device environment: run observation 4: software thermal slowdown is active",
+        "device environment: run observation 5: software thermal slowdown is active",
+        "device environment: run observation 7: driver relative thermal headroom is insufficient",
+        "device environment: run observation 8: software thermal slowdown is active"
+      ]
+    },
+    {
+      "load": "exploration",
+      "round": 3,
+      "passed": true,
+      "gpuP95Ms": 9.7556112,
+      "cpuP95Ms": 2.588554999999983,
+      "physicsP95Ms": 0.4672049999999999,
+      "workingSetGrowth": 0.0032742482943051154,
+      "peakWorkingSetBytes": 242860032,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 54.0,
+      "peakTemperature": 85.0,
+      "peakPowerWatts": 66.11,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "platformer",
+      "round": 1,
+      "passed": true,
+      "gpuP95Ms": 5.972696,
+      "cpuP95Ms": 2.4415599999999804,
+      "physicsP95Ms": 0.5419149999999998,
+      "workingSetGrowth": 0.002310731672899191,
+      "peakWorkingSetBytes": 237105152,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 54.0,
+      "peakTemperature": 62.0,
+      "peakPowerWatts": 23.15,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "platformer",
+      "round": 2,
+      "passed": true,
+      "gpuP95Ms": 5.9760816,
+      "cpuP95Ms": 2.325665000000008,
+      "physicsP95Ms": 0.519535,
+      "workingSetGrowth": 0.0024290215267632753,
+      "peakWorkingSetBytes": 236158976,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 50.0,
+      "peakTemperature": 59.0,
+      "peakPowerWatts": 23.39,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    },
+    {
+      "load": "platformer",
+      "round": 3,
+      "passed": true,
+      "gpuP95Ms": 6.0062207999999995,
+      "cpuP95Ms": 2.405415000000028,
+      "physicsP95Ms": 0.5322399999999999,
+      "workingSetGrowth": 0.0031618179570063187,
+      "peakWorkingSetBytes": 237056000,
+      "deviceLocalPeakBytes": 277610496,
+      "startupTemperature": 49.0,
+      "peakTemperature": 58.0,
+      "peakPowerWatts": 24.56,
+      "softwareSlowdownSeconds": [],
+      "failures": []
+    }
+  ],
+  "files": [
+    {
+      "file": "run__cpu-summary.json.gz",
+      "source": "build/automatic-resume-2026-10-11/cpu-summary.json",
+      "originalBytes": 187,
+      "originalSha256": "d51e1c35a36449f356be360f29e4a851ed834ed787b81eb65f8c9e3718fa2d3f",
+      "compressedSha256": "d935777f72b9f5639da038a88404a7d8f36c702477e5cc8a7574ff6c6d7c88cd"
+    },
+    {
+      "file": "run__current-package-verification.json.gz",
+      "source": "build/automatic-resume-2026-10-11/current-package-verification.json",
+      "originalBytes": 177,
+      "originalSha256": "01f965097727f240aeb88340132454dac9c5709055ea3ffa088f02a41e31e2f4",
+      "compressedSha256": "d5bddec05700e6f8233d9a3f609e60a040148496ee1a3ead08cd968af870dcf5"
+    },
+    {
+      "file": "run__debug-cpu.log.gz",
+      "source": "build/automatic-resume-2026-10-11/debug-cpu.log",
+      "originalBytes": 21629,
+      "originalSha256": "6f6c2bd1c67492761c87a24c3d96a0757bc70044620a9c93fb2aa9a5ed6107ab",
+      "compressedSha256": "72aa631e1abbab0b8fd7f5d6195005f0cf23c67b7ef651f99b1641ee53f28143"
+    },
+    {
+      "file": "run__environment-probe.json.gz",
+      "source": "build/automatic-resume-2026-10-11/environment-probe.json",
+      "originalBytes": 2332,
+      "originalSha256": "0972b41e9f82d2cd389f17de652b53765748ae1f064e3996a9e27a35bf02cf67",
+      "compressedSha256": "5eb19bb9d2a019b6ba93148c0fe244225c0c97f44fbdb02b95faa1432064a995"
+    },
+    {
+      "file": "run__environment-summary.json.gz",
+      "source": "build/automatic-resume-2026-10-11/environment-summary.json",
+      "originalBytes": 1437,
+      "originalSha256": "09b1449562cba5906fee08dad8414933c633b394bd37b067cbe22b2fcbdc45da",
+      "compressedSha256": "c2583284d375119fcec4ddb358c908e0cd5fa11b39d0d84fe9235676d153a4d1"
+    },
+    {
+      "file": "run__formal-verification.json.gz",
+      "source": "build/automatic-resume-2026-10-11/formal-verification.json",
+      "originalBytes": 8043,
+      "originalSha256": "ce07f611c0039f237dbb60771cf3519e591763af0b91f409cff69673d60a315e",
+      "compressedSha256": "303a2cb7d1c5fcdfc97488683500db2e54a56f48cfc69ca325d7b71e6bbcb9f7"
+    },
+    {
+      "file": "run__idle-after-user-pause.json.gz",
+      "source": "build/automatic-resume-2026-10-11/idle-after-user-pause.json",
+      "originalBytes": 443964,
+      "originalSha256": "d61a4c5eef2c164ede4c6a150a8bc66d5348e6a6cfd8d896729fc99cfb783f21",
+      "compressedSha256": "c4d96b0b5fd73fe7cf336ab24e332d8a45e565e2ae032e76e379272710b29e7e"
+    },
+    {
+      "file": "run__previous-evidence-verification.json.gz",
+      "source": "build/automatic-resume-2026-10-11/previous-evidence-verification.json",
+      "originalBytes": 306,
+      "originalSha256": "6bed1d8d07c351b354fc647f9e721bf15e1504abe8ce61d12f76b6ca72dc4356",
+      "compressedSha256": "4b4d91cfb01123c9bc72b276e34c62dcead7103b518c5f1f0e7d62fbcce567d7"
+    },
+    {
+      "file": "run__release-cpu.log.gz",
+      "source": "build/automatic-resume-2026-10-11/release-cpu.log",
+      "originalBytes": 21633,
+      "originalSha256": "0081f17838043fdaf6589180ab241cc46ca23fda7ae4b0a1024234c17a04adb5",
+      "compressedSha256": "cbf808b459d4f1a52840e738a4bd298f05cec2280bf7b1bb8434ef0644c21e5d"
+    },
+    {
+      "file": "run__verify-cpu.py.gz",
+      "source": "build/automatic-resume-2026-10-11/verify-cpu.py",
+      "originalBytes": 1031,
+      "originalSha256": "6a141a6d6b5dadb340456e0af3f2392bfd4cddc1567e7cbd338a97c6a8b4fe06",
+      "compressedSha256": "9de91c8073a5e2aa748a636492e589a9d706cb1371554443c922d908b42a9e9e"
+    },
+    {
+      "file": "pacing-idle-1791730890865026400-release-AzureEngine.PlayablePackage.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791730890865026400-release-AzureEngine.PlayablePackage.log",
+      "originalBytes": 3968,
+      "originalSha256": "4b1a8419cc6bcc1160da33b09e4518eaf652759364c2ef7dc64188bd890c0b59",
+      "compressedSha256": "f36bf88f87c0e2d11397e13909d5ed140514ab783132ff5dbc48ae4e3b9488e5"
+    },
+    {
+      "file": "pacing-idle-1791731079699670300-release-AzureEditor.WorkspaceGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791731079699670300-release-AzureEditor.WorkspaceGpu.log",
+      "originalBytes": 3211,
+      "originalSha256": "8e40f40f3085c0b92a66dd2219d5492532934d7838cdf1deb19141ce66351217",
+      "compressedSha256": "d90820d2ea859e2fc9c6b3188793854d345bd6024dfa38fee68626511b6344d7"
+    },
+    {
+      "file": "pacing-idle-1791731304299937200-release-AzureEngine.MaterialFixtureGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791731304299937200-release-AzureEngine.MaterialFixtureGpu.log",
+      "originalBytes": 2022,
+      "originalSha256": "48448715c1cc7450069fc34c8765fbbd0cabb2236dce87ed603b0fbebba69715",
+      "compressedSha256": "4138f62e6965e98a8e5cff4000cc97e32d1f9ea2b4f6cf6ded0e89d08ed5a684"
+    },
+    {
+      "file": "pacing-idle-1791731971650477500-release-AzureEngine.IndependentAnimationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791731971650477500-release-AzureEngine.IndependentAnimationGpu.log",
+      "originalBytes": 1791,
+      "originalSha256": "565e8b56472df0f9e1ea824d204d4c6d9358cb204a3c85766b8bcc308258cb94",
+      "compressedSha256": "ff090b5cd05a8f752adf7c4e294dec6c5433f7bc8ec5f55a8837f2e31f8d7129"
+    },
+    {
+      "file": "pacing-idle-1791731990186137900-release-AzureEngine.ThirdPersonPlayer.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791731990186137900-release-AzureEngine.ThirdPersonPlayer.log",
+      "originalBytes": 1794,
+      "originalSha256": "f6ca88814dbd4802896ab1219f81a627d07b3d084d10911114f5f474acd640b9",
+      "compressedSha256": "28d92db1449462c26e51931386e17f6d9b5f318e4522103bcd0a8d4320da2459"
+    },
+    {
+      "file": "pacing-idle-1791732012857260500-release-AzureEngine.PlayablePlayer.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732012857260500-release-AzureEngine.PlayablePlayer.log",
+      "originalBytes": 1695,
+      "originalSha256": "23b0b79867046553ac62959a18188da7738ddb694ec5b65e462ef29446db6691",
+      "compressedSha256": "56028aab1b59e2ef90a2d11847d32caad2cc0293fb189aeb105180267e3b3f8d"
+    },
+    {
+      "file": "pacing-idle-1791732043232613200-release-AzureEngine.OptionalRuntimeTrace.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732043232613200-release-AzureEngine.OptionalRuntimeTrace.log",
+      "originalBytes": 1675,
+      "originalSha256": "e6ff8a10adaa7fe1934de58186771787617a093fc5239a575eb2ef35d4707b7d",
+      "compressedSha256": "b13207016743f290aa4f2d4d97cdd06ec133fb78c6d0c129fd79c7a862c21077"
+    },
+    {
+      "file": "pacing-idle-1791732061806393700-release-AzureEngine.RuntimeSpawnGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732061806393700-release-AzureEngine.RuntimeSpawnGpu.log",
+      "originalBytes": 1673,
+      "originalSha256": "4cacaf659c5b04187f6e3bf453300f369c800b51c93530255685954f738fe8fb",
+      "compressedSha256": "4c028909b6a47456b6a707773a84eefd1feabaa11dd5ea325935fe4824719413"
+    },
+    {
+      "file": "pacing-idle-1791732082479594700-release-AzureEngine.PresentationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732082479594700-release-AzureEngine.PresentationGpu.log",
+      "originalBytes": 1723,
+      "originalSha256": "f0b904abbf40755408378e10063c31049cf878d3478bfc40e9e1981035437f28",
+      "compressedSha256": "b42f84e98f223dbd1e128b3a4727eede90b5f169113ea95bf156ae19aa4caf3e"
+    },
+    {
+      "file": "pacing-idle-1791732104447192300-release-AzureEngine.EditorHost.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732104447192300-release-AzureEngine.EditorHost.log",
+      "originalBytes": 24274,
+      "originalSha256": "336afe4057d12eeac4ccf42f90db7f0f56a7f8057a1912ee038691328cbb6e20",
+      "compressedSha256": "22c6b422516d82a8cb04431eb892d3f388af9f7f35501fd4a4b85812dbe67aff"
+    },
+    {
+      "file": "pacing-idle-1791732125381322500-release-AzureEngine.EditorPlayable.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732125381322500-release-AzureEngine.EditorPlayable.log",
+      "originalBytes": 1696,
+      "originalSha256": "f8039cc9c4433a329ce0bb7c1e1b7e3272e76a02be2b3455902dc581ce2cf873",
+      "compressedSha256": "f905c847fb1b1cadc86ae1e5e2c98f31d6f2f0eae05e295f8000a4a86bd22c84"
+    },
+    {
+      "file": "pacing-idle-1791732153660796300-release-AzureEngine.PhysicsPlayer.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732153660796300-release-AzureEngine.PhysicsPlayer.log",
+      "originalBytes": 1610,
+      "originalSha256": "3652ff3bf6a292f0b1826c9dd4ebe0eca61a35a0ee0e8b2759e6deb687f26ab9",
+      "compressedSha256": "c0c063932231040d900dcbba3b482c02fed807bf9ca6af1996fc933f1a611ea8"
+    },
+    {
+      "file": "pacing-idle-1791732169784721100-release-AzureEngine.ScriptPlayer.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732169784721100-release-AzureEngine.ScriptPlayer.log",
+      "originalBytes": 2662,
+      "originalSha256": "db6705b67b1618c8078ba2256f07cc2847914f781552ac9f7de2c36e2a447303",
+      "compressedSha256": "a59f83a9e60c7573343ec740706ce1e58e5a12b2bb9ae0cceeee0c5a1545eb30"
+    },
+    {
+      "file": "pacing-idle-1791732185952816300-release-AzureEditor.ContentGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732185952816300-release-AzureEditor.ContentGpu.log",
+      "originalBytes": 2178,
+      "originalSha256": "b3aaac76d6fd093f4ee2c7413805958945a4765ba192768a9e57c3aea56c3b25",
+      "compressedSha256": "ae23091a46444f15645d0b13b64b1d158a47bc14ce7bd7310e53f1112d98c1de"
+    },
+    {
+      "file": "pacing-idle-1791732238941820200-release-AzureEditor.UsabilityGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732238941820200-release-AzureEditor.UsabilityGpu.log",
+      "originalBytes": 2142,
+      "originalSha256": "ae01ba49ff113fce1ec4825ff2827b32cc1194d50551c3981102672960bf1b5d",
+      "compressedSha256": "31b6340e9804e6c664ad05ce3a021fdbdfb705075831d95368c3e2e2c524e4a4"
+    },
+    {
+      "file": "pacing-idle-1791732286128472100-release-AzureEditor.DocumentGuardGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732286128472100-release-AzureEditor.DocumentGuardGpu.log",
+      "originalBytes": 2125,
+      "originalSha256": "93c7a7c07a5ed4b866eed927c192b3c984fa8dce5981b0fcf4f20fdb6bbd2d2d",
+      "compressedSha256": "e5b80924db71713d1ab9deb0ba2385890fc302d5ea8085d7c711b048d764a79f"
+    },
+    {
+      "file": "pacing-idle-1791732337708640800-release-AzureRender.VisualRegression.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732337708640800-release-AzureRender.VisualRegression.log",
+      "originalBytes": 2331,
+      "originalSha256": "b139bc8eb07f3d406a5ae315854937892762722c22dddf431215debf631ba4dd",
+      "compressedSha256": "321d9ec9aaa930349fadbe7d29d75ed168c32c18fdc32d551407a965a49f2c82"
+    },
+    {
+      "file": "pacing-idle-1791732357844822700-release-AzureRender.VisualRegressionLegacyDescriptors.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732357844822700-release-AzureRender.VisualRegressionLegacyDescriptors.log",
+      "originalBytes": 2430,
+      "originalSha256": "0c3363f39ece2d683744e10b9796e8aa70292c18f2b9cfc2908ecedf3b216fcc",
+      "compressedSha256": "77a4db7544b7783998ca012e370717cbd4af24412c4ab249fd302d927146f954"
+    },
+    {
+      "file": "pacing-idle-1791732382999531300-release-AzureRender.BlackholeComputeGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732382999531300-release-AzureRender.BlackholeComputeGpu.log",
+      "originalBytes": 1773,
+      "originalSha256": "edaf2bbdaf12193047634567620b74125b69318ad66d9d86459297bb3db5c8b7",
+      "compressedSha256": "a59e0daa1022b986a509da4da7294a075bed9e30249f000ebaa5c4725ca4670b"
+    },
+    {
+      "file": "pacing-idle-1791732401197937100-release-AzureRender.CharacterIblComputeGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732401197937100-release-AzureRender.CharacterIblComputeGpu.log",
+      "originalBytes": 1763,
+      "originalSha256": "b06c5f530a5955c053bc077001652d6f1a784d102238226506efd09ea93b9b1a",
+      "compressedSha256": "0170df29a8eee061f2b80758dac20eaeb20160c23e5a721b0ee8905a8bf4038b"
+    },
+    {
+      "file": "pacing-idle-1791732419355141800-release-AzureRender.CharacterSkinningComputeGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732419355141800-release-AzureRender.CharacterSkinningComputeGpu.log",
+      "originalBytes": 1797,
+      "originalSha256": "fc0460950cd24743f0d6ed624f55b496c569ec84049e74b69c0160e8a43125f8",
+      "compressedSha256": "b296caab42915d9395f1f522075ccbee003830d7adc670a7152ec840069471bc"
+    },
+    {
+      "file": "pacing-idle-1791732432314304000-release-AzureRender.R3Comparison.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732432314304000-release-AzureRender.R3Comparison.log",
+      "originalBytes": 1730,
+      "originalSha256": "c5ab58e4d483c4d343052099f3bd7f258980ad27b8cf36c70c49ccf164fb603a",
+      "compressedSha256": "f49a31c62045185ff3ef418ca4efbc747851a6ead929abf22213137fd491294b"
+    },
+    {
+      "file": "pacing-idle-1791732450921052700-release-AzureRender.R3TransparentComparison.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732450921052700-release-AzureRender.R3TransparentComparison.log",
+      "originalBytes": 1793,
+      "originalSha256": "bb837afd9ab633d0a18b4d59c72cb0ddcfda3058b2b5daa59a16263db2533e09",
+      "compressedSha256": "74117eeccd93f55aeaab7253568b72f8494ebe7e19a806cacfea93bebaf8efad"
+    },
+    {
+      "file": "pacing-idle-1791732476405134500-release-AzureRender.AuditRegressions.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732476405134500-release-AzureRender.AuditRegressions.log",
+      "originalBytes": 1612,
+      "originalSha256": "1b05b2aeeeb922879c8965b519c585f91e8e46b8407908e798aa3a23594586ed",
+      "compressedSha256": "c4ea1a208db43359ef030a8970ddbbb088af32e70c5a18d7b46bb078784352a6"
+    },
+    {
+      "file": "pacing-idle-1791732494378826500-release-AzureRender.VisualRegressionLegacySkinning.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732494378826500-release-AzureRender.VisualRegressionLegacySkinning.log",
+      "originalBytes": 2447,
+      "originalSha256": "0aa8870fd807d6dee4ea864fd83de02044b3c5cac0600053923f4b8fe0eef4d9",
+      "compressedSha256": "e8d96bc177436a48c0b9986294e2fcb188a5cf99b94e672a060b9148bd011959"
+    },
+    {
+      "file": "pacing-idle-1791732514396034500-release-AzureRender.CharacterMorphComputeGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732514396034500-release-AzureRender.CharacterMorphComputeGpu.log",
+      "originalBytes": 1797,
+      "originalSha256": "415ecbc6f74f56c1fdb611abe88fa7170efad5a12f8fca9b2d7f57bed55d1ffc",
+      "compressedSha256": "29cec0ea613278a53e0419be40a6c44cf5fc0c1b37460ba60d8faa48c1f4d86b"
+    },
+    {
+      "file": "pacing-idle-1791732540542687500-release-AzureRender.ClusteredLightingGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732540542687500-release-AzureRender.ClusteredLightingGpu.log",
+      "originalBytes": 1742,
+      "originalSha256": "f98f1923e9651b003ec111d4555831fc5308e32e1b270a64d5675009aa96c71e",
+      "compressedSha256": "4876ed2819339cf3ad428412d1d12016283e862f3b6d95e28ae6a5bb1e7d0891"
+    },
+    {
+      "file": "pacing-idle-1791732559386558900-release-AzureEditor.ProductizationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732559386558900-release-AzureEditor.ProductizationGpu.log",
+      "originalBytes": 2681,
+      "originalSha256": "3e4092d71bcae57c676a8ba6e8deb655294bb893300717e1b504408c85e2f6d6",
+      "compressedSha256": "304a26c88fe89695d32f3b9903197136f1bc25c478b36245517a682369dd8378"
+    },
+    {
+      "file": "pacing-idle-1791732606445765800-release-AzureEditor.PropertiesGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732606445765800-release-AzureEditor.PropertiesGpu.log",
+      "originalBytes": 1931,
+      "originalSha256": "48863c0ce3460e8ec647d5484923611a69d6a5811768646ac5106ccf2e8dae18",
+      "compressedSha256": "73570809801a2eae7a6baefb76551465981ac365f7cd34850235eee9cc634f84"
+    },
+    {
+      "file": "pacing-idle-1791732639645494100-release-AzureEditor.ContentTransactionsGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732639645494100-release-AzureEditor.ContentTransactionsGpu.log",
+      "originalBytes": 1948,
+      "originalSha256": "8510849df8c232866cc65f20e6e85fddc3d91942ebf5b506f89a6a9dea01a0c5",
+      "compressedSha256": "da280bd4c009a33a93590137e42a484754e920ec663f42f8a39ff19a3670d22f"
+    },
+    {
+      "file": "pacing-idle-1791732689550585000-release-AzureEditor.ContentNavigationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732689550585000-release-AzureEditor.ContentNavigationGpu.log",
+      "originalBytes": 1954,
+      "originalSha256": "69f96f62d729a50f8cafec9e61fa5d7b269a11183cf0e5253e862ccecfa46ae4",
+      "compressedSha256": "774549a4c6574254334813057112e97b914f3a1a8a2c56813e0139d936de6051"
+    },
+    {
+      "file": "pacing-idle-1791732731933873100-release-AzureGame.PlatformerCompletion.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732731933873100-release-AzureGame.PlatformerCompletion.log",
+      "originalBytes": 2208,
+      "originalSha256": "fd6eb5a422d34305291ec36de3d169a562a3a821b0178ecb1e345f2e14754128",
+      "compressedSha256": "a33d855ea41d6fce56d360b0ddd9a6fcd050c591a269c6bab28c80eeae06bf32"
+    },
+    {
+      "file": "pacing-idle-1791732761584402400-release-AzureEngine.LiveGameState.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732761584402400-release-AzureEngine.LiveGameState.log",
+      "originalBytes": 1746,
+      "originalSha256": "fb7097ef98a838b247c1642611fe0f81e082b22dcd085cb3b7a53e986b35227d",
+      "compressedSha256": "90e414c2211bad1dac6df1b858dda4360999da819fbcd22e5e4c1122907d13e2"
+    },
+    {
+      "file": "pacing-idle-1791732775574114200-release-AzureEditor.NodeAdditionGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732775574114200-release-AzureEditor.NodeAdditionGpu.log",
+      "originalBytes": 1658,
+      "originalSha256": "5c5636b4eeaa9bbbf075d3f97b8c23f3871e9a5b61c83a132617282056c4751b",
+      "compressedSha256": "619b8b934851ec0332340519aabcc689db2387468041ad96c46369573de04ace"
+    },
+    {
+      "file": "pacing-idle-1791732819834510100-release-AzureGame.GameSequence.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732819834510100-release-AzureGame.GameSequence.log",
+      "originalBytes": 2469,
+      "originalSha256": "0064c2b8642ebdfda52656af658e541952fd1f50a2d597b4f7b76f483818fb59",
+      "compressedSha256": "e8133e5a3c6dac0e18d51716aaabdf62bb96cfd9a5dafdbed7950fb0bdd65818"
+    },
+    {
+      "file": "pacing-idle-1791732896042058400-release-AzureGame.ExplorationCompletion.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732896042058400-release-AzureGame.ExplorationCompletion.log",
+      "originalBytes": 2032,
+      "originalSha256": "ba5f35d71da0a68e1a881de0619da91a741800a1de62508525cd524fe51dc3e6",
+      "compressedSha256": "028764b1cd10e7345dac7dc660ce937139b7c2b88a0819d2791dcad6f983d6eb"
+    },
+    {
+      "file": "pacing-idle-1791732916350861200-release-AzureEditor.AuthoringGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732916350861200-release-AzureEditor.AuthoringGpu.log",
+      "originalBytes": 1649,
+      "originalSha256": "a54e89f2f4a1c4deda86efa3775d37590f2a25c6a79f1bc1002fd85fa9b568ad",
+      "compressedSha256": "284599a818e13acf4037552411dcfd368a91a850482ee13dd71fbbd8f0f8a41f"
+    },
+    {
+      "file": "pacing-idle-1791732963461416200-release-AzureEditor.SimulationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791732963461416200-release-AzureEditor.SimulationGpu.log",
+      "originalBytes": 2001,
+      "originalSha256": "54dcb370992a079f1fa3970dc1fc19415bf213e113943037afdde909a2a7b4d9",
+      "compressedSha256": "a0b801a6b5b1cdcc63b1be070aa3e595847c89e3b504f1f587ec27358b01f2bd"
+    },
+    {
+      "file": "pacing-idle-1791733013808299600-release-AzureEditor.ViewportNavigationGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791733013808299600-release-AzureEditor.ViewportNavigationGpu.log",
+      "originalBytes": 2047,
+      "originalSha256": "3aabaef305f4c82663df8d3db1e9dc1b75457af5f0acb8b12b0045798a9fee06",
+      "compressedSha256": "02bc784a9ff9f34d97a848b8a216e2f04b402941799ec58385b0a868dfe30535"
+    },
+    {
+      "file": "pacing-idle-1791733092234511300-release-AzureEditor.SceneGeometryGpu.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791733092234511300-release-AzureEditor.SceneGeometryGpu.log",
+      "originalBytes": 1937,
+      "originalSha256": "b33aeb2de0ff2cf0012ac9435fe7a88655b7abf4721f6c031d5230a3c591959e",
+      "compressedSha256": "1153e6510a53ea5459f8faa2b5d07d1067e55e74acf73dd4b55608f676534b04"
+    },
+    {
+      "file": "pacing-idle-1791733108352018500-release-AzureEngine.RendererResidency.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-1791733108352018500-release-AzureEngine.RendererResidency.log",
+      "originalBytes": 1658,
+      "originalSha256": "c47b45c9070e4bf4480bc28a7d7f051043c530cef920b2bd3bae8918d5d6ab7b",
+      "compressedSha256": "b8ab22cf4cb97ebed68d68b881285af37e374518747bb0ca0162c1f5ee53c4e3"
+    },
+    {
+      "file": "pacing-idle-environment-1791730890865026400.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791730890865026400.json",
+      "originalBytes": 529703,
+      "originalSha256": "109e6d819464b065c56ac140136bbfc91de03d0f60eb848c11ea636c56b88f89",
+      "compressedSha256": "4b1e6c570eb44f61b3ebb553a3244559382b221576d025e1cedc6863641244c6"
+    },
+    {
+      "file": "pacing-idle-environment-1791731079699670300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791731079699670300.json",
+      "originalBytes": 2572045,
+      "originalSha256": "1543501574322b029f34f08f45e36081c7a76c14fe298280139b5e41ae516a08",
+      "compressedSha256": "54b3ebb18d9807fe582252ee723c2b94fb09a808a71fab0dfe85b21ba2eb2b7f"
+    },
+    {
+      "file": "pacing-idle-environment-1791731304299937200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791731304299937200.json",
+      "originalBytes": 529717,
+      "originalSha256": "c3e1cc7460b78d9b27c76b1360dcfe3daf249a121705f8237c898358bed9c029",
+      "compressedSha256": "2011b277f0cc93059486141eac087b4d7599c5e385c6bead7a5084901859813b"
+    },
+    {
+      "file": "pacing-idle-environment-1791731330424745900.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791731330424745900.json",
+      "originalBytes": 2723559,
+      "originalSha256": "6fe240d680bedad80e9049ea71d7b7cbf1d9c70927f7b5278239001a48783c7b",
+      "compressedSha256": "1802ac348d5b98f8e1b96ce6130fb57c223c8c19c2813113076ff3aaf21b0dcd"
+    },
+    {
+      "file": "pacing-idle-environment-1791731971650477500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791731971650477500.json",
+      "originalBytes": 443934,
+      "originalSha256": "0f277e2558016f79aa0587d0db80db65390dc1c31a421b6d5c675a3a0bd4cfb6",
+      "compressedSha256": "0d23b3bbed61c4f49230357ce71913c83bc1de6d8d79ff95957dccb87f3dcdf2"
+    },
+    {
+      "file": "pacing-idle-environment-1791731990186137900.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791731990186137900.json",
+      "originalBytes": 443990,
+      "originalSha256": "778e4553a547ce12da6c79436df40a1f9d6d619c5ac6b2edbd3ba13e03a842b8",
+      "compressedSha256": "e011399158cfb29bb28a20dcfa5674d31f92a2707541b29bc61ea9a6fb8c45be"
+    },
+    {
+      "file": "pacing-idle-environment-1791732012857260500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732012857260500.json",
+      "originalBytes": 443964,
+      "originalSha256": "e5f43fa82e51efb9fd7f20288da1c0e3343ff7771bc46600dfbaf24e38469645",
+      "compressedSha256": "153e0c2799e10928df9b22e74501f257223db2b4fff490c77381848c6b9eab8b"
+    },
+    {
+      "file": "pacing-idle-environment-1791732043232613200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732043232613200.json",
+      "originalBytes": 443962,
+      "originalSha256": "7da90f1aca0be2537a6a832002b509377f7a00c6ac0a4562344902cc9e2de07c",
+      "compressedSha256": "6c58aded31e78bc1c581221645b39c495414120a5e91d38f5d662d3e4f93d1b9"
+    },
+    {
+      "file": "pacing-idle-environment-1791732061806393700.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732061806393700.json",
+      "originalBytes": 517929,
+      "originalSha256": "9035928213bc8f849ddc4eab73826c7671a4e87994d77d6a754e22f73c757a33",
+      "compressedSha256": "0a20d4070d3a960f045c0bc8b96656fa2365415f08e55cb6100e79db4f9af11f"
+    },
+    {
+      "file": "pacing-idle-environment-1791732082479594700.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732082479594700.json",
+      "originalBytes": 517924,
+      "originalSha256": "4efdc17af22fa916b749b4cd9defc0c978a19c65c7b453548de81b4f562e3b59",
+      "compressedSha256": "917abe24ad3b3a2e5f5283d44aa9c7e29f30f3a81b906b15c1ab5e88643cb412"
+    },
+    {
+      "file": "pacing-idle-environment-1791732104447192300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732104447192300.json",
+      "originalBytes": 517928,
+      "originalSha256": "40345919d0d0e152f62b78a15c69221386a3dd43260e4858d755eba4f27ce1d3",
+      "compressedSha256": "2dd867566b75afe5cdd27f4ff5ca8e7fd3c427c1de2802e30a35e82a226f4e07"
+    },
+    {
+      "file": "pacing-idle-environment-1791732125381322500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732125381322500.json",
+      "originalBytes": 517917,
+      "originalSha256": "7ae4adb5a7129e8bb322369066656810cc3add8f64f97e5407787a406ca2dfda",
+      "compressedSha256": "9f7f8fdcc36b70ddce66b1488e44a548fc573cfae126d4d3ef4b32f8d38c4daf"
+    },
+    {
+      "file": "pacing-idle-environment-1791732153660796300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732153660796300.json",
+      "originalBytes": 443912,
+      "originalSha256": "8e745e1eac805e719cb4ab9aa8b5c755a4b35dac5cb77f394ca95103bcca4971",
+      "compressedSha256": "98f6c6497cc2d944a2665e9633e50b116dbb4586ea410419e444fbe85220e844"
+    },
+    {
+      "file": "pacing-idle-environment-1791732169784721100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732169784721100.json",
+      "originalBytes": 443934,
+      "originalSha256": "cb926503ea331e0a6500922cb648bfd42e40d63a1e56f6c491ee127cc9be9889",
+      "compressedSha256": "1cf2f66700713fa7b4cbb012a5bff62bfb1949e8871956e74429597f23e6ac24"
+    },
+    {
+      "file": "pacing-idle-environment-1791732185952816300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732185952816300.json",
+      "originalBytes": 443964,
+      "originalSha256": "85bca5cd214977e1af4f315554b8d8288c90236868e21b9ede920bb28f64c482",
+      "compressedSha256": "de6ba5703c488e3cde4edf93f27fe1c294dadf0ce7b1a47bbd9eded5c6e7b31e"
+    },
+    {
+      "file": "pacing-idle-environment-1791732238941820200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732238941820200.json",
+      "originalBytes": 517911,
+      "originalSha256": "15ae1ea1726ee544732a7a87a3f68f2ac3c24c05b28ec9f50d95496c89d72f7b",
+      "compressedSha256": "65723d513564a884caf6fe70506e49ef4bc578296468a60ddee421597c495cd4"
+    },
+    {
+      "file": "pacing-idle-environment-1791732286128472100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732286128472100.json",
+      "originalBytes": 517854,
+      "originalSha256": "a1deb93507e523fea0afc49b9fbb7541104961d2d7e59868af8448173c34b791",
+      "compressedSha256": "f2d22f9158bf3dd979293867fcdc63a78bf0e4da286a274c12ba6e05d626bda8"
+    },
+    {
+      "file": "pacing-idle-environment-1791732337708640800.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732337708640800.json",
+      "originalBytes": 443934,
+      "originalSha256": "9eca01e7019a05ae3c44b4c5a4501c75777283f8c7c1982bf08b151f587d1622",
+      "compressedSha256": "d685f9c5666dcbc1c4f76be5e53085edc4faf9b8a2d6bc57e909bfc6d76ec23e"
+    },
+    {
+      "file": "pacing-idle-environment-1791732357844822700.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732357844822700.json",
+      "originalBytes": 517926,
+      "originalSha256": "75e00ed8d2b3a76aef2990949ea1bd1502d777db6705a9358aa7e50f75d73565",
+      "compressedSha256": "2b310ba5eb5e3e2ce36ffa5f87c57a8629567f75016f9c95013a7f3b487144de"
+    },
+    {
+      "file": "pacing-idle-environment-1791732382999531300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732382999531300.json",
+      "originalBytes": 517929,
+      "originalSha256": "ca148986dd1e091ea91c9fc8c137078850e69a378728f5b0b7c16a12c2d82b4c",
+      "compressedSha256": "62ea0ebe5c400799974bcdec0ca8f03052dfed159a42d646ef4a711f1e35d310"
+    },
+    {
+      "file": "pacing-idle-environment-1791732401197937100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732401197937100.json",
+      "originalBytes": 517923,
+      "originalSha256": "904efaf9a52cbdde6ed6f70a876d6f47b34e3ec4e62d4e1a812f23f04a6f27f0",
+      "compressedSha256": "70805a221c2c3f2424738e056a49140ae1747e2b3f7b6014f0e0d06dbf9f7b69"
+    },
+    {
+      "file": "pacing-idle-environment-1791732419355141800.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732419355141800.json",
+      "originalBytes": 443978,
+      "originalSha256": "f49c9188c01e07be254a442d2f32d78dc4b55dfa1778adc89187702c493a5d7c",
+      "compressedSha256": "c2ee83781489b709ad09e266660891914e0603bf38965e637fea44690a3f6ae9"
+    },
+    {
+      "file": "pacing-idle-environment-1791732432314304000.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732432314304000.json",
+      "originalBytes": 443962,
+      "originalSha256": "ad466867b0bc15889b4d89100603d28c406a381318f09baacd678836da0d372f",
+      "compressedSha256": "fbbf64613850aeeb154b55ab2e6b17d0c5f429221b1e2c27c94039057a6ec5c1"
+    },
+    {
+      "file": "pacing-idle-environment-1791732450921052700.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732450921052700.json",
+      "originalBytes": 517933,
+      "originalSha256": "316bb1a63dbd7228a947c8be5a63134242324b9a2d7f9f6c6d8f41e193fd4eac",
+      "compressedSha256": "80b1ea731b03f771e723b73618a11557259a05bf004f44e1e6360a7321da6721"
+    },
+    {
+      "file": "pacing-idle-environment-1791732476405134500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732476405134500.json",
+      "originalBytes": 517866,
+      "originalSha256": "e0ba3048ef94a6a71a16ec596f58c59ae91c33e1abcf5e8b828f6a9e8ce2e481",
+      "compressedSha256": "68fdc8ca99ff86fd45cdb4682a2c83cdaff8ee48a28db96f0f2353eb49a0e1ce"
+    },
+    {
+      "file": "pacing-idle-environment-1791732494378826500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732494378826500.json",
+      "originalBytes": 443958,
+      "originalSha256": "7a06205bf2290253c583d5eb1644a5a2c204f7989466de24aa97de94089a3526",
+      "compressedSha256": "f79fe87afbc8f21777aa02d7e1af6aa5b5a13bfbbaf83217fb826dd50ad6fff1"
+    },
+    {
+      "file": "pacing-idle-environment-1791732514396034500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732514396034500.json",
+      "originalBytes": 517924,
+      "originalSha256": "a9785586c58dd24618d20bffd0fdf80db12921a6515cdc9f705f68bb49db86a3",
+      "compressedSha256": "e77eebd4ee311a24eeba6e2de6d389eb3fe3bed096850958acae610f0b4a9f23"
+    },
+    {
+      "file": "pacing-idle-environment-1791732540542687500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732540542687500.json",
+      "originalBytes": 517900,
+      "originalSha256": "beee4530eebb5e76b3d92cf119fecdeddd937754616bc9a64d17118d28165708",
+      "compressedSha256": "d21ec0a088972559a80992b4d36ac861e2bf92a3ed219ca569b00eea51934c61"
+    },
+    {
+      "file": "pacing-idle-environment-1791732559386558900.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732559386558900.json",
+      "originalBytes": 443990,
+      "originalSha256": "9836370d7c2aaabe2da9082a4722acea319890de8ea36a172fa7adb3a4652103",
+      "compressedSha256": "092df89c5046466b12d694d6113046f9efcfe0543174c403de94ea015da04a2d"
+    },
+    {
+      "file": "pacing-idle-environment-1791732606445765800.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732606445765800.json",
+      "originalBytes": 517916,
+      "originalSha256": "a99fe74df37a590f3349929737cfc98741596599d08c8765dc14524c7e686e25",
+      "compressedSha256": "5a374146788875952816608a342bcb1113df2f832c579b465a6a41bb0d427dce"
+    },
+    {
+      "file": "pacing-idle-environment-1791732639645494100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732639645494100.json",
+      "originalBytes": 517893,
+      "originalSha256": "022aba1906e3df5c7c45c8bc60ef5d1f8376dbe6a08111c51c46c633592d9628",
+      "compressedSha256": "859a9bb754d326c991418ad196b28c1e595805959f505200b945b8415d394f00"
+    },
+    {
+      "file": "pacing-idle-environment-1791732689550585000.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732689550585000.json",
+      "originalBytes": 517930,
+      "originalSha256": "795b18cb021d3d12b618851284dfaeb534908e225a7b989b85928c6d5374d2f2",
+      "compressedSha256": "cc6ef4dcc4287d24498c7886dedf2ecc53fc52e5fcb63e057f442fb4378d3231"
+    },
+    {
+      "file": "pacing-idle-environment-1791732731933873100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732731933873100.json",
+      "originalBytes": 517925,
+      "originalSha256": "fe2a74305f023cdf4d51298da626199544109358df7a8941f38722fde5d79e76",
+      "compressedSha256": "0bd693d53307b2b2c93a0f0b8b0793467d0c69212911c10bde93d6d3ddbed738"
+    },
+    {
+      "file": "pacing-idle-environment-1791732761584402400.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732761584402400.json",
+      "originalBytes": 443958,
+      "originalSha256": "a57ee7d6fb19f301435227160a317f3498569f6cdefa11b22c3d424d9f4f2d6c",
+      "compressedSha256": "bcfcf48c90d0b1e9d3b5a55a0750d9901ac7d54afc2a43e696dc829f67a14689"
+    },
+    {
+      "file": "pacing-idle-environment-1791732775574114200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732775574114200.json",
+      "originalBytes": 517934,
+      "originalSha256": "68fa2eeab05b558887c6c1f1c89829d6f8ee5f1443d6c68a3abc4b9fe5ab9999",
+      "compressedSha256": "13872af9f259fb493a84a97091078a47a040915b147613bee20446ca5c191974"
+    },
+    {
+      "file": "pacing-idle-environment-1791732819834510100.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732819834510100.json",
+      "originalBytes": 517889,
+      "originalSha256": "671213310e1bfe88a7e9f8398bc19f2c98989112b44fb47e518cbd23e5fa0c9f",
+      "compressedSha256": "b56af42403fbd1d1af30f5c7be23b7d743893e4fd00f2702de2c8d0172cf78a0"
+    },
+    {
+      "file": "pacing-idle-environment-1791732896042058400.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732896042058400.json",
+      "originalBytes": 443992,
+      "originalSha256": "34afee07d21e73b30e78ff43024758bb68952f6cc26c595601b0fa6ab1e958c2",
+      "compressedSha256": "1550ebbaf012395a8743d174672906dd1e299d00a187246ad5f38f59b8c68550"
+    },
+    {
+      "file": "pacing-idle-environment-1791732916350861200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732916350861200.json",
+      "originalBytes": 517914,
+      "originalSha256": "57e8a5e2641106b965d3f7b7a809c008f20a4a9b382e712ddbc1c16cef4944ba",
+      "compressedSha256": "6a26911c9054b615ad800237e592340d05b1304866622c5118429ff6dbbc86d0"
+    },
+    {
+      "file": "pacing-idle-environment-1791732963461416200.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791732963461416200.json",
+      "originalBytes": 443940,
+      "originalSha256": "c252d7ecb436af806b68cf3447a6dfafa27f5884f3ba533bad4cb13c1afb4577",
+      "compressedSha256": "43b1b92e6486e9aaf037b7f7a39b195124c72a4f423f27a435c58b27eef15a5c"
+    },
+    {
+      "file": "pacing-idle-environment-1791733013808299600.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791733013808299600.json",
+      "originalBytes": 517934,
+      "originalSha256": "9f729ace6e7bc16aaaf35502fcb2673aa5a4b4964bbb4fa221ee86c75de8441b",
+      "compressedSha256": "9869ea894361fab7a6b258b75a823fc6ee69730f271e538a2a4b715a73e95819"
+    },
+    {
+      "file": "pacing-idle-environment-1791733092234511300.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791733092234511300.json",
+      "originalBytes": 443938,
+      "originalSha256": "eb96861c34a052141ca9ebfde1600382dba9e0ad032baafcc918052dae751eaf",
+      "compressedSha256": "e4689aaba5429012ab8fc1899062f9a2e1edcdd795d54009989c5bdd576f2cbe"
+    },
+    {
+      "file": "pacing-idle-environment-1791733108352018500.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-environment-1791733108352018500.json",
+      "originalBytes": 443926,
+      "originalSha256": "b8bb509877ebd958235dc1c7ef600ea8b25cf6fbd95c00c373b0a66ca7bc6249",
+      "compressedSha256": "9f3bfe195500a8bab74cbde9c80868829f2bb89d9fdb525f56a68850f2d82d22"
+    },
+    {
+      "file": "pacing-idle-gpu-partial.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-idle-gpu-partial.json",
+      "originalBytes": 42982,
+      "originalSha256": "b5794ed60382eb1c357c6e7d2d65ebd078483388399e9db8947e526d04cc7e05",
+      "compressedSha256": "9fba67501715e34cac3c2d6b49fb489f11b257af3662ff00884a6c8214c9572d"
+    },
+    {
+      "file": "pacing-tool-gpu-summary.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-tool-gpu-summary.json",
+      "originalBytes": 86284,
+      "originalSha256": "e0a237fedb6286c5c82199c8c812ab49142f9ccd4ef69c7f6ab8904a73a20d7f",
+      "compressedSha256": "5b1fdb69c75c3592c863158c48f4747d6115b87529b79c935702894770e8a895"
+    },
+    {
+      "file": "pacing-formal-performance.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance.log",
+      "originalBytes": 4182,
+      "originalSha256": "c3fa9edcdf6347e61f51f4735645a5e8e71d5a1d92081c5d2fb905b87f2c20ae",
+      "compressedSha256": "2dc405379d953dc62afbb773b21093c7a7dced13af558d2b51dc30dc4d99cf0e"
+    },
+    {
+      "file": "resume-idle-pacing.py.gz",
+      "source": "build/p8-automatic-2026-10-11/resume-idle-pacing.py",
+      "originalBytes": 4708,
+      "originalSha256": "ce79259af82f5c73c5104f09ad963784cb94ef2f9e3ef45326952ce3020b127c",
+      "compressedSha256": "6b954897d9a01099e959353a4f60f51929733c066688d05e557f922dfed7dbb0"
+    },
+    {
+      "file": "formal__editor-1.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.csv",
+      "originalBytes": 110249,
+      "originalSha256": "58828ff8fb5f8a13e769bf29bf59bd5342dcaf44dcc83e6ff1bbb908cb3383d8",
+      "compressedSha256": "89f3e5a989268d7c9fbe3c3b7cfc1f4f19bec379032f2cc956a0f050f307c5b4"
+    },
+    {
+      "file": "formal__editor-1.editor.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.editor.json",
+      "originalBytes": 30,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "compressedSha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94"
+    },
+    {
+      "file": "formal__editor-1.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.environment.json",
+      "originalBytes": 1260139,
+      "originalSha256": "24290ee78281bbe049a00655888939380e9857b6e629531c1824f6b3a987de30",
+      "compressedSha256": "a9a66b1c46e6792a085c2383a6d9cf9791246e3baf572961686e2f61ec330bcf"
+    },
+    {
+      "file": "formal__editor-1.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__editor-1.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.json",
+      "originalBytes": 124326,
+      "originalSha256": "607da723736791d7170b2aaf1b0851401311864435f2a6285fe920b5b539cbfc",
+      "compressedSha256": "7b28f4580313fa03b3b34de2096869e32f1c02737305fd3418ec64af57d1f3fd"
+    },
+    {
+      "file": "formal__editor-1.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.memory.json",
+      "originalBytes": 99573,
+      "originalSha256": "4eaa4062e2b9d8a209a6ccbe08dc135ba0ee84c389f69d2a2c92c8ac8ec01830",
+      "compressedSha256": "43225d77af8d181e99915e3d4aa6edf283da6877093154e33eb77af1c353528a"
+    },
+    {
+      "file": "formal__editor-1.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.stderr.log",
+      "originalBytes": 1015,
+      "originalSha256": "26a3a52cb0ad1cd1c65e220d09b2cfdb9be0f1a4f8e2e13998866341b56558be",
+      "compressedSha256": "2e09e57281fd128d3cc98ff365feeaae9676b6b7047ae8d326c046dcb2e1ba70"
+    },
+    {
+      "file": "formal__editor-1.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-1.stdout.log",
+      "originalBytes": 2802,
+      "originalSha256": "9da6b3f09032310f181baada6e095c4e6f746a6669fa16ee1043ad2cd8487ba6",
+      "compressedSha256": "86149a93294d6b63a6961100050b3fa8edbb4d799907b8dd45aa75a98869058f"
+    },
+    {
+      "file": "formal__editor-2.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.csv",
+      "originalBytes": 110249,
+      "originalSha256": "b5aea0c3953efdf19a11fc0606c22e4b7de500c0510faa60e48325d0ae6e17ef",
+      "compressedSha256": "47c3b15b203f6a1cd8ddee92571e744a37f70d7d74783ef1e4cb5f580543e620"
+    },
+    {
+      "file": "formal__editor-2.editor.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.editor.json",
+      "originalBytes": 30,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "compressedSha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94"
+    },
+    {
+      "file": "formal__editor-2.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.environment.json",
+      "originalBytes": 1186224,
+      "originalSha256": "086e54cdd3442b6260e7c707f6b13e7e9c4299123a9edf367735a6b4dfe21cfb",
+      "compressedSha256": "4bc8242e6b0940ec5e0342520987eec6134ca224792b7d2309a81d52d34abce2"
+    },
+    {
+      "file": "formal__editor-2.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__editor-2.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.json",
+      "originalBytes": 124328,
+      "originalSha256": "2200b044b64bd13297f921e895befdfc9d593a336c21b33c2973cf3a257c32a1",
+      "compressedSha256": "62fe30d59e418ab6fc71e5d8cf1f9b733e73a9db29fec3a1b09a310ac2877c05"
+    },
+    {
+      "file": "formal__editor-2.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.memory.json",
+      "originalBytes": 98657,
+      "originalSha256": "cae28dffad88f07cae330a990700a7c3dfc2db0aba721f78b493e44f419869a2",
+      "compressedSha256": "bf8c06d5583b679f3c3aa27aa762622bf3e62d0247101a50b3aeceb7ac9a02dc"
+    },
+    {
+      "file": "formal__editor-2.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.stderr.log",
+      "originalBytes": 1015,
+      "originalSha256": "8bc6bb31bb749635ee281f4e756cc0cc4454080532c847e80e2b55b535ccdbbf",
+      "compressedSha256": "d4d3f7dfb33984ca935571762aa025be605ce162cc5788b6c253edf723c63c34"
+    },
+    {
+      "file": "formal__editor-2.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-2.stdout.log",
+      "originalBytes": 2802,
+      "originalSha256": "0c747a65ec126df60798d0aef3153cb2b820dd13236bef45acd31a8bfb128fb0",
+      "compressedSha256": "a619c9e3b4a2f8f8d9e044435ca744de17052982b736bae3219f63eda18bc13b"
+    },
+    {
+      "file": "formal__editor-3.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.csv",
+      "originalBytes": 110249,
+      "originalSha256": "e79e2774760a40d773e048323eff61ce0fe51d31bddf8dc61709ab338b10fe3c",
+      "compressedSha256": "0834d1543e67d0d81dd91c7ffe39754398c834b409376872411671bbf84ae58f"
+    },
+    {
+      "file": "formal__editor-3.editor.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.editor.json",
+      "originalBytes": 30,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "compressedSha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94"
+    },
+    {
+      "file": "formal__editor-3.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.environment.json",
+      "originalBytes": 1186206,
+      "originalSha256": "edbaba0e20399a848d3eebb7036c504e0dcff65b3bb418ce6cede92dfb6fcb25",
+      "compressedSha256": "022b3b76fc3316577117e5fc73884bd65ce3adb9ae5b37d4a335155b1099f787"
+    },
+    {
+      "file": "formal__editor-3.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__editor-3.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.json",
+      "originalBytes": 124122,
+      "originalSha256": "0fcf788cf016afead8cf3f6769d0faa6da7b6d1a341735026cebc1cd07588e14",
+      "compressedSha256": "fe41f5b4f36896b169cec13007935f5230e6facf44430da435f3a76910c4cf51"
+    },
+    {
+      "file": "formal__editor-3.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.memory.json",
+      "originalBytes": 98839,
+      "originalSha256": "0547e383733ae4a4f89d60fc9d0aa26a50c35a53a8fc32b1c4a0e1f525a42bc2",
+      "compressedSha256": "b0414c070f0f6ca32543d64fd5abe4e44ab25ee6a0ef81e3df36af2aa44af4c4"
+    },
+    {
+      "file": "formal__editor-3.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.stderr.log",
+      "originalBytes": 1015,
+      "originalSha256": "d8f7c5a395e309e74523bca71df323cd3c88b56fb5b09c185a03bab515f689f2",
+      "compressedSha256": "6a04d4460b80b2202bcfbf388f267f162a39228d89342f3986a4ecf06d0a1f34"
+    },
+    {
+      "file": "formal__editor-3.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/editor-3.stdout.log",
+      "originalBytes": 2802,
+      "originalSha256": "a1c320dca4efd6e697ef87136472fdd91ff3227c4d211921bbaf659a59562e06",
+      "compressedSha256": "009b77addc8bf1020c288563e0622c88b03054267f44f8d93991829cec69ed2e"
+    },
+    {
+      "file": "formal__exploration-1.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.csv",
+      "originalBytes": 110270,
+      "originalSha256": "43604c797939a4bfb993c4a4b9af351325701dda14d6f62a4ea84ef712501637",
+      "compressedSha256": "d658628cb3c1a66d2ec512fcd1cffa0438e5344dab4ec1d6fd0915850f068aed"
+    },
+    {
+      "file": "formal__exploration-1.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.environment.json",
+      "originalBytes": 1260193,
+      "originalSha256": "2025746556dc263b4478369b8a0a602814249e4d89f026458f08823c56f85872",
+      "compressedSha256": "5a72bb4a72fe1e3e4d50f9585ba3e3eafd27cd8e3e25559f48edb75064988b61"
+    },
+    {
+      "file": "formal__exploration-1.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__exploration-1.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.json",
+      "originalBytes": 122088,
+      "originalSha256": "7588ebd44793c84df2a961596249980bd07276df25b58ded8741aed02935167b",
+      "compressedSha256": "553d3bf92731e3c560a950870526266f28bb41b1b5383a1e0673b0b5b1ecfd56"
+    },
+    {
+      "file": "formal__exploration-1.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.memory.json",
+      "originalBytes": 98758,
+      "originalSha256": "e7a7180c9b1eb7054f902de2fe6e3a1a9773bdc39a7cef94980eebbc7be5e228",
+      "compressedSha256": "ae6d22a65803a42e812c0b0f250db1446875e53f3b81e0006f138cfe425a2c71"
+    },
+    {
+      "file": "formal__exploration-1.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "e732e82ba9a0823cca72e298955b347151595975dc930fa801b618dd671d851b",
+      "compressedSha256": "862506072932c2ab871482a44b539ca05dc85d3f7fd91d852da0e530eb724257"
+    },
+    {
+      "file": "formal__exploration-1.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-1.stdout.log",
+      "originalBytes": 2072,
+      "originalSha256": "ba047a7e747264b9fcdb9e7604cd06b41fa904568068d05202719812d809abfa",
+      "compressedSha256": "f0ac1d467880f881829c5649bb9cbd36eebaf89ad8bd06f34d1bf43bfd07284b"
+    },
+    {
+      "file": "formal__exploration-2.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.csv",
+      "originalBytes": 110289,
+      "originalSha256": "a93d8eef8835dbbfda6e133d32f83bfa5a6a7c3fe7bbe26fd8e7cf1df89b292f",
+      "compressedSha256": "1f63635d553585188b111fceebbc92c0e8c927a9041c7afe3fc6d0c8b7fb5970"
+    },
+    {
+      "file": "formal__exploration-2.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.environment.json",
+      "originalBytes": 1260199,
+      "originalSha256": "d42b1db5bd6c529300478a1330921aa67641e72b80a81c57fd8f81f81a561cd0",
+      "compressedSha256": "b9e9d1c2d8c1f434a118faca512e3906bbb7653ead027abda723b64d8bba5405"
+    },
+    {
+      "file": "formal__exploration-2.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__exploration-2.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.json",
+      "originalBytes": 122050,
+      "originalSha256": "d3d1cde8f6a064e18e88d0f68a625dd54df7d38d8eca2271a0aac49512c9e9f5",
+      "compressedSha256": "d0a2fb7a02fcf36ddb142303314fc2c005ddbe52c2e60eaac736c5696a7c7094"
+    },
+    {
+      "file": "formal__exploration-2.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.memory.json",
+      "originalBytes": 98688,
+      "originalSha256": "9b3a9778ca844b1f2ee83709fa5b11b3d3017654ae11758fe4164fffd6052c99",
+      "compressedSha256": "51d4b219114e29ee9140ed69c8df83d50e90513030d9b4e3be0f270f2b3a479c"
+    },
+    {
+      "file": "formal__exploration-2.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "dad25a049c90daeff7541037995284984d45b44e4b712f7c1aa772c441684c73",
+      "compressedSha256": "4dee743ffe5c943690c70fc89645e77ebc9b1984879b0378c0bb2777c77e5fa9"
+    },
+    {
+      "file": "formal__exploration-2.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-2.stdout.log",
+      "originalBytes": 2073,
+      "originalSha256": "7427edaf8d79ae24ac03fd6be7c0b8d4371b40e5b73c7599435b143245f00737",
+      "compressedSha256": "fab69f2a71c674cc18f85949e9b4b6dc7e14dd895a3226eb7e60e215a929cf8f"
+    },
+    {
+      "file": "formal__exploration-3.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.csv",
+      "originalBytes": 110316,
+      "originalSha256": "cbd586f632a7f2330790df56e3e4ad4ff6b9e5529ae6657c60ebe069822a5a54",
+      "compressedSha256": "63a0b53ca8ba089552473d9b7e35e99567f7581ae0970fcf502b2e5c8dea1576"
+    },
+    {
+      "file": "formal__exploration-3.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.environment.json",
+      "originalBytes": 1260209,
+      "originalSha256": "399ba536bbbd636355f6805f8aef6d5f1d534d25fab1248a090a8552f5174bbf",
+      "compressedSha256": "2246a2d7e9ae35b758119c01ad66c6f582b35667d2f4394286168ffaee078593"
+    },
+    {
+      "file": "formal__exploration-3.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__exploration-3.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.json",
+      "originalBytes": 121996,
+      "originalSha256": "f435aeb606460324ab651267275713a74c193156dca33fe45065d0380e5b58a9",
+      "compressedSha256": "5541cc04387bfd1efe2504f9108850bd19b5bad553c674b96ddf48b42b1b9b04"
+    },
+    {
+      "file": "formal__exploration-3.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.memory.json",
+      "originalBytes": 98516,
+      "originalSha256": "90d741d888d4ab4e0176b95f279ea4b6e245a0626a851b985a1f4c2e3387cae9",
+      "compressedSha256": "330872950ee5b0c18c5c6749401ea7605e6ad77a9c29bef0519e574837228c64"
+    },
+    {
+      "file": "formal__exploration-3.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "2f659b0560357b77fdf5a8cc2d6287fb9e4a08248a721502ba5d0f670bfc16ad",
+      "compressedSha256": "58ea916b48cea06b592d5d54979bf1ce6c4514c08b71b0e80214bdf07c4acfb9"
+    },
+    {
+      "file": "formal__exploration-3.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/exploration-3.stdout.log",
+      "originalBytes": 2073,
+      "originalSha256": "c3da61d132cf3eaedccb41d809c00764963132b6d8c932d51a6b92c3fde100eb",
+      "compressedSha256": "a188235c8074a5dc0d624f97df7ba4ec1ee323c62330e835a302e6d4405e873b"
+    },
+    {
+      "file": "formal__frozen-inputs.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/frozen-inputs.json",
+      "originalBytes": 128822,
+      "originalSha256": "9dc431adf03ea6d6d9bacc082542c43ef7c99e62044fbd79608d60e080a002b0",
+      "compressedSha256": "cfc4fb94e310a1a17eddb9a83de5a8d51d66d7c9d428d2fe18d09017f955b7b8"
+    },
+    {
+      "file": "formal__partial.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/partial.json",
+      "originalBytes": 20107459,
+      "originalSha256": "7e32d44334b8695451ec7d0bdc05d4c31bbdb9e4c087ad9cdf141ee4be8aea40",
+      "compressedSha256": "6bdbf1c018d88e704ff0210edb59008673cb09008ab95d9e0a32cb57508418ed"
+    },
+    {
+      "file": "formal__platformer-1.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.csv",
+      "originalBytes": 110249,
+      "originalSha256": "cb05b10ce275166f57a03f6be2eae7987ef43643cf962131744c61012bd1e328",
+      "compressedSha256": "4299fcb92acb851366b902cf1a9ad72c6fcd4eaa156605a8d9089c7a36aeb03f"
+    },
+    {
+      "file": "formal__platformer-1.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.environment.json",
+      "originalBytes": 1260195,
+      "originalSha256": "754805f458b0a14f192093a1d74e0b2c890ebed60131028c6dc874a4e8c3f420",
+      "compressedSha256": "77c032613cf587f04f59c020a16db96fe076898a1e5490617f21cda37c9a1922"
+    },
+    {
+      "file": "formal__platformer-1.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__platformer-1.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.json",
+      "originalBytes": 121992,
+      "originalSha256": "ad97c15187b9a706fb789c7100d519ee6e42455222eb0ef5215f6ab5e4b6b029",
+      "compressedSha256": "64c2aeb23c2b7d47bc62569a52a8d2805d5513f5eb3bd7575501ed53b2c0f56c"
+    },
+    {
+      "file": "formal__platformer-1.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.memory.json",
+      "originalBytes": 98129,
+      "originalSha256": "61a62322cf008791addce301bf3d996d352132d86d23d7c2427ae19dd0ae8bb5",
+      "compressedSha256": "71e3650def9df746cae603bfacb977a3152b4d2e160b1b609591147cdb60c259"
+    },
+    {
+      "file": "formal__platformer-1.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "3295ac0aa61278633e8fdc89123c6281330c5b464f97d701379e25d1b182ea4a",
+      "compressedSha256": "5b55db042beaddc00c86866ca90c6b030abf61d44fa05c024984465c7f489e01"
+    },
+    {
+      "file": "formal__platformer-1.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-1.stdout.log",
+      "originalBytes": 2070,
+      "originalSha256": "92c724638ea52da614253e3b6a730a7edab4f13c214f50aa700ed7d476e6bb2f",
+      "compressedSha256": "f0d630689e15690576064a0f407f84c9777ac5c272d1ffbf11efb4720d359baa"
+    },
+    {
+      "file": "formal__platformer-2.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.csv",
+      "originalBytes": 110249,
+      "originalSha256": "e4343787e9740c71aa75974a4b6b3fc457ff73cf374cae71e93c65181ad7008c",
+      "compressedSha256": "755d398e00dd68cc73d3374a2ff399be869ea089a5ccb242d4ff9bd01b0e9a58"
+    },
+    {
+      "file": "formal__platformer-2.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.environment.json",
+      "originalBytes": 1260197,
+      "originalSha256": "75d8e0a139ff583823486e0eb48682a84f67728ab77d7944967e5965c890007f",
+      "compressedSha256": "75decc48cc3e96e2bbb8f24f9b629d09dac70b88eef8dc764ada325170a3d791"
+    },
+    {
+      "file": "formal__platformer-2.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__platformer-2.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.json",
+      "originalBytes": 122088,
+      "originalSha256": "34511dcb18d81a522e7e158dc90a3d0f454dbd45329624403a682be0b4db8bba",
+      "compressedSha256": "389e0f420e426112636240e9f63112df9beefe540215943ca7b64fbaa9551d05"
+    },
+    {
+      "file": "formal__platformer-2.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.memory.json",
+      "originalBytes": 98047,
+      "originalSha256": "a73efcc301bca3700fc957862a7dfe6892fa3422c14a45533eeea35f7929046d",
+      "compressedSha256": "b9874e040ea1172bcc9df7e8131264710dab6009f33310563f3a32a5cd2b9af2"
+    },
+    {
+      "file": "formal__platformer-2.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "104ef5b2ab413ce67c1d5621fbe1ad6ecb24ed6a70ea7f99fd530f0df5a5e6c3",
+      "compressedSha256": "bb1c64bd1a8327eb3db1ffd6d125bac111a87832790b35553fcc5febdfa20116"
+    },
+    {
+      "file": "formal__platformer-2.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-2.stdout.log",
+      "originalBytes": 2070,
+      "originalSha256": "217bd2e4bf2d84bf823ab7157821c8c9fcc5e633bc574af74b10234cbc40daef",
+      "compressedSha256": "7e09cc2aadd3f00aa46a0af990356da255ab20a6580728d86eb7292329632bd3"
+    },
+    {
+      "file": "formal__platformer-3.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.csv",
+      "originalBytes": 110249,
+      "originalSha256": "569b1abb002d1c9d99dcd189e508b3ae56c996ece32076a5c1f336f7d4278850",
+      "compressedSha256": "ebbd46762651ef55e3630822a57fe57e5b3e584a19b72456db5a226d069c858a"
+    },
+    {
+      "file": "formal__platformer-3.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.environment.json",
+      "originalBytes": 1260138,
+      "originalSha256": "2ba99a267fe31a50d421a4b8c46d99c3030ff1f97714eb2b7fc96f1a3fd25527",
+      "compressedSha256": "1ebe674bfc0d47c7a791c3dbf165f262581c4c204109631e56125c49f2ae386a"
+    },
+    {
+      "file": "formal__platformer-3.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__platformer-3.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.json",
+      "originalBytes": 122199,
+      "originalSha256": "95b8f1dfb14a697567000206b1f1e8674adacbf43b54af2c1c50e16d22231aee",
+      "compressedSha256": "14567a6c181681bda324e3eb42c9e9bb403713f141ba6e1e4c46b756030d20d5"
+    },
+    {
+      "file": "formal__platformer-3.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.memory.json",
+      "originalBytes": 97949,
+      "originalSha256": "ed74d19d74e0ffd8bb1c5ba408c2216d184ccc35e0739d7f98e422d30c4d962e",
+      "compressedSha256": "b83c2ae658423f4df38611cd7476f5c566aaa2fc680e02a23188d15372163feb"
+    },
+    {
+      "file": "formal__platformer-3.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.stderr.log",
+      "originalBytes": 394,
+      "originalSha256": "c2b09f3d160f0ad410fbaa24442ad34eef061032602ba8a5529a39eb0e4a1ace",
+      "compressedSha256": "84c8ad08e2db975529caf0b806a1c1768b2875f20ba686f7a1e2c8ec85b89ce9"
+    },
+    {
+      "file": "formal__platformer-3.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/platformer-3.stdout.log",
+      "originalBytes": 2070,
+      "originalSha256": "ae4f102bfbe88b3aa2f84196b86567a7d28e86d6a6fca64a681e8907fa28bd5a",
+      "compressedSha256": "895f29f3671b1ec0b442365748ea6f1d093a480a318f8e5e83670e6fe508c737"
+    },
+    {
+      "file": "formal__standard-1.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.csv",
+      "originalBytes": 110249,
+      "originalSha256": "c5102bbacc81fb3c3a2522291925a72ee52f83a9c6b2e4cb10cb7c8a57e88717",
+      "compressedSha256": "1423b2833adcc99dbb2c536f822ca19198ab939f652da6238d340c798038dd38"
+    },
+    {
+      "file": "formal__standard-1.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.environment.json",
+      "originalBytes": 1186240,
+      "originalSha256": "e212045ea3d1495d0054a666a14d26297dc0cbb74702c032556d2bb2d1069b9f",
+      "compressedSha256": "e289198565380ff7ef56dfcda3b2ce8b4ed3f3951a1014f9a3d42acbdcd33f4e"
+    },
+    {
+      "file": "formal__standard-1.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__standard-1.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.json",
+      "originalBytes": 121684,
+      "originalSha256": "d6e10915aad104a8aae86f3387b38fdd9f46488e443ad1d41fbf7507c4267363",
+      "compressedSha256": "9e6ca3faf8f87f8490d2acfae35dbbfec5956a1c3ef02516a2be0d42a7fc851f"
+    },
+    {
+      "file": "formal__standard-1.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.memory.json",
+      "originalBytes": 98615,
+      "originalSha256": "602fd9aa92170cc3d10f9fabb67982e14f3ba394baa0563d4b8f2b0646c63756",
+      "compressedSha256": "f02d122174d728c9403b282da6e1bd74ac9fee3129052f76a9468b0c32dcf1c9"
+    },
+    {
+      "file": "formal__standard-1.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "18874be6f09a182c1e3763a0a45f35b5ba94b2aa2e5b33bebd6ee732ffe1ccd8",
+      "compressedSha256": "97941a29562f5c8cc29df91ac69eaa3d0fa9e3ed878c04e470e155d96728409e"
+    },
+    {
+      "file": "formal__standard-1.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-1.stdout.log",
+      "originalBytes": 2067,
+      "originalSha256": "d2a7f4cea8d35d74b939292e2a0167cffe4b764dbbad1ae9aab3f210b47a79f3",
+      "compressedSha256": "70a4343d7a60a7468517ca83e2fb52131c0b97991b277907335b226114a439c5"
+    },
+    {
+      "file": "formal__standard-2.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.csv",
+      "originalBytes": 110249,
+      "originalSha256": "c23d354bb4499d1b3a73b0640edc868c6ca90d52a226044ba671c4b7e5d63e99",
+      "compressedSha256": "b0a2e246019bae120f06f9f44fdba76f8416a0a0be8121bfb7bdc373f7344674"
+    },
+    {
+      "file": "formal__standard-2.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.environment.json",
+      "originalBytes": 1260225,
+      "originalSha256": "23c9cc687ccc2ffd92087629d78c6a52bf2a88e609c15b1619b6d174691e36cc",
+      "compressedSha256": "e846f2ec0eaf7efbf259dc033c4a292c12a8074a6e0342f7de754e775cabb166"
+    },
+    {
+      "file": "formal__standard-2.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__standard-2.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.json",
+      "originalBytes": 121710,
+      "originalSha256": "243fef86b6ef955baa47b910c276d46b4b404ad640d6c671e04881cf8a5814bd",
+      "compressedSha256": "17cba219b023a7c69b86e50e5ba3bed78a2b427266a41330f3df5cad148528a9"
+    },
+    {
+      "file": "formal__standard-2.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.memory.json",
+      "originalBytes": 98163,
+      "originalSha256": "7697081ad2ff1119a51e9522fb8bbeae6608d1a77514825225133e495140e329",
+      "compressedSha256": "1deada2a7e0a4e1adb8676409baf6b57a2e7874e19e36f122b67692b508c75de"
+    },
+    {
+      "file": "formal__standard-2.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "ba83a14feb1f310a0a6eef7867dd4104fc4a12d12c429f51f6b6528f9bf7a9ad",
+      "compressedSha256": "07611dc62c0f61aa27300651c844a02f816fff0ef0c5b59aa0ae96b2766e9203"
+    },
+    {
+      "file": "formal__standard-2.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-2.stdout.log",
+      "originalBytes": 2067,
+      "originalSha256": "bad7519319dffb2ccecec360f75ba8bf95b83c4dbb66d859672917a41e5bc437",
+      "compressedSha256": "3a7f89be57c8ec8b5e40efb27aba4c9dfe806032e2fb7ba140aa858ab0a2d622"
+    },
+    {
+      "file": "formal__standard-3.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.csv",
+      "originalBytes": 110249,
+      "originalSha256": "5f6ec19ee21bc9d895ffe4ef31faa292e0085cd82764f15ab8f4c488a9d0a8a3",
+      "compressedSha256": "32b26bebf2a9bf2a06f5e5981a70ac98bb228438b74f906d6bb212e8092c41a2"
+    },
+    {
+      "file": "formal__standard-3.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.environment.json",
+      "originalBytes": 1334166,
+      "originalSha256": "d9e22ba7733cb07d34accea7793c4764d79e7350fdaf0ba22979ae1ad44a25d9",
+      "compressedSha256": "82fcd3c43a655f387460ee589058ad8beea50f71d8f831bbe31cff983a9091b0"
+    },
+    {
+      "file": "formal__standard-3.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__standard-3.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.json",
+      "originalBytes": 121696,
+      "originalSha256": "d4fa36df3ac2d0fe03bc978a14c68cf4f01bb15b7cf1324b81610df7a2d057a0",
+      "compressedSha256": "472dba00d6e376981f21dd9cf942ca62e2ef2ba5de42a28f3afd2afa606f33b7"
+    },
+    {
+      "file": "formal__standard-3.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.memory.json",
+      "originalBytes": 98389,
+      "originalSha256": "1c8c52d6054b267633e267407a853d467ae960d23fe126f552656d87461d07fa",
+      "compressedSha256": "54a0d31298da145af74d3d0f2206c63cec532540094360a298698836ff13a4ff"
+    },
+    {
+      "file": "formal__standard-3.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "5c00583fe4d5dea14063a95797e4dedc405bf71c15544f52c7378b8d37789d9b",
+      "compressedSha256": "71900ff6aa8e699d0ceb8ece0a25b1a8c564327edc6a8d42f1ae67c634086083"
+    },
+    {
+      "file": "formal__standard-3.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/standard-3.stdout.log",
+      "originalBytes": 2067,
+      "originalSha256": "1ceacd27c32150b8a7a40702b5632a2ff9eb67bbf956320a93fb962eb3b564f7",
+      "compressedSha256": "88c7665a6ac7ca7e9511fea03c6c107d9abbb60ebb40784192f414e68de1f547"
+    },
+    {
+      "file": "formal__stress-1.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.csv",
+      "originalBytes": 110249,
+      "originalSha256": "0da2ed9750a11793f2ae86cacc95f156a6484be194ca367ce98431addf15a6a1",
+      "compressedSha256": "1f57282bf220e64a8966ad96dc23b3c5af6116a5d5ecc2a39942422e33e00803"
+    },
+    {
+      "file": "formal__stress-1.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.environment.json",
+      "originalBytes": 1186269,
+      "originalSha256": "eae7874aa2ff26c5e498110e77a13ac025860198262efa7200d7772b0dc7e3d1",
+      "compressedSha256": "1365ba0cc53b4e6e87fd55a3cdb2b7e24cf44acb0080484be02798afc644dc2b"
+    },
+    {
+      "file": "formal__stress-1.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__stress-1.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.json",
+      "originalBytes": 120995,
+      "originalSha256": "b4f5f44f0efb418914d92a93e29151b26e16236e47f52b5a61118abc4ec52939",
+      "compressedSha256": "18dc730d3d35fdf477a803e15f342c9466f5e564d96ec2507c83afcd84c23e78"
+    },
+    {
+      "file": "formal__stress-1.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.memory.json",
+      "originalBytes": 99404,
+      "originalSha256": "0c2e3ee0f575b4cad1a9e16c9d246426879b959809ded910c9d9fc8bae3dbbac",
+      "compressedSha256": "3cfa1a8427a8e1b76c44318c2a7fce60742c2dc2f61fce8455a484b5df214490"
+    },
+    {
+      "file": "formal__stress-1.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "48d5359729bac43add6ce10dae7430f4280439489208f4de70bb59f4e7807257",
+      "compressedSha256": "45fdf6b73a9093c50f3c2f80b3d7f9604b8af350edf9886baf0e1cc4a8a06c1b"
+    },
+    {
+      "file": "formal__stress-1.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-1.stdout.log",
+      "originalBytes": 2064,
+      "originalSha256": "4b3c2889feea93bf4e35f30245003e0edad547478cf1212d74685363933a5bc0",
+      "compressedSha256": "1c0d609396435b51b50a63e5f1a93ddf7d6c5cc242116f7675bcbe15253d1a3d"
+    },
+    {
+      "file": "formal__stress-2.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.csv",
+      "originalBytes": 110249,
+      "originalSha256": "69e85aa56720cda20c764302700c83a2cbe8763892f8134ed367933d698def0d",
+      "compressedSha256": "1cd90f5d1c5793684787382967fbc5dfc2985782bb9c4acaf56ce0df138c3d97"
+    },
+    {
+      "file": "formal__stress-2.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.environment.json",
+      "originalBytes": 1260176,
+      "originalSha256": "bd097d0ab4fe80ad4f4985135bbba9b5181b905fd5b93059afa22f24a6e9e16e",
+      "compressedSha256": "b3a57a133bf63d24793c1e3ef02e040abfd27fbaf2ba167911206a22db23a4a8"
+    },
+    {
+      "file": "formal__stress-2.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__stress-2.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.json",
+      "originalBytes": 121074,
+      "originalSha256": "0c073b5d6165af914b4984914ca6a3643468ab6722d566e69a9410c105b431df",
+      "compressedSha256": "f93c09ea6adde171ed0576da253784450238a563d01f33bc34813fef20d44389"
+    },
+    {
+      "file": "formal__stress-2.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.memory.json",
+      "originalBytes": 98760,
+      "originalSha256": "a93713a123c18d0d3306eef0793135063d87769c990ab48c27f753975a1366d7",
+      "compressedSha256": "41d845755c15b5448ebb1fb15cb98bd059e849678866405908bbf65d7245c326"
+    },
+    {
+      "file": "formal__stress-2.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "90c208a2615c4f803473d6dcb226caba0d185187cd2afdd20027014d6ef16f89",
+      "compressedSha256": "b301d6f86052a74a3d5fb160575b5c13f5d517dc66f0e34ecedfab4bb6a9a01b"
+    },
+    {
+      "file": "formal__stress-2.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-2.stdout.log",
+      "originalBytes": 2064,
+      "originalSha256": "3fad88a153fbddfc7156c603b4d96804b36545ab23aab8a8fa8e86e277861acd",
+      "compressedSha256": "7e7188259376bddb3a3f5723f45d5a72b433a4ad39548e7d4c9653c3c4e2273e"
+    },
+    {
+      "file": "formal__stress-3.csv.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.csv",
+      "originalBytes": 110249,
+      "originalSha256": "8fcf11a18b46074106017de23a3c75d01090c45db9f19789a5cb893b38c692ab",
+      "compressedSha256": "a008fe38edd16ff850aeb078f33cbd63c6cd399d1ace8c5b0cc9b1865e8f8010"
+    },
+    {
+      "file": "formal__stress-3.environment.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.environment.json",
+      "originalBytes": 1260165,
+      "originalSha256": "2fa4681df866a5e26032e82aaa2b108e208548a6d7fa0643ff2a4eda9a8f8f10",
+      "compressedSha256": "88eccb2f925a769ff7c907817a985d8c7010bad207f34ddebb4c7a9284c91ba1"
+    },
+    {
+      "file": "formal__stress-3.input.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.input.json",
+      "originalBytes": 1687,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "compressedSha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224"
+    },
+    {
+      "file": "formal__stress-3.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.json",
+      "originalBytes": 121139,
+      "originalSha256": "316b4046fbdb035d6846213a5dfc2c9aaa8af9278f41f6870b24f4dc0ef49269",
+      "compressedSha256": "6a01385568508a568bc6e6f018a47e0647567b4a8262e9c57d444d7891504f31"
+    },
+    {
+      "file": "formal__stress-3.memory.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.memory.json",
+      "originalBytes": 98809,
+      "originalSha256": "32d07d2cd3a70c85e9d610b8829e00ecc1d66bd7a35dcd99f82c13ff40e5e552",
+      "compressedSha256": "52dd6daba3915fe479ece1eedcd624f9ccd917c2482101743ae521eb93de22e6"
+    },
+    {
+      "file": "formal__stress-3.stderr.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.stderr.log",
+      "originalBytes": 393,
+      "originalSha256": "a69ed7940fac79980b3a7db08b657ea481b4012098e880d669c19ecbe411fb31",
+      "compressedSha256": "4f8c04b0072037910a19079648f695fa049d18e64aaf044e884140dce9081a9e"
+    },
+    {
+      "file": "formal__stress-3.stdout.log.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/stress-3.stdout.log",
+      "originalBytes": 2064,
+      "originalSha256": "f0fc5429bc379f5107a268efbd87168de8563c903634fe122781b9cc91bb8193",
+      "compressedSha256": "add913cad18dbbf52145f40ac195d8b5d7dd8bfaaf0d47a4c8efaed00629b0da"
+    },
+    {
+      "file": "formal__summary.json.gz",
+      "source": "build/p8-automatic-2026-10-11/pacing-formal-performance/summary.json",
+      "originalBytes": 20201274,
+      "originalSha256": "203e78a1a681eddcd98bf8c97e4d688ac91d5ae2ba5393976cb193621b375bbb",
+      "compressedSha256": "2c375fe2781d17bee7dbba29d277e97897704e71d891d0d73c9fb52d7ac77dee"
+    },
+    {
+      "file": "debug-provenance.json.gz",
+      "source": "build/ninja-msvc-debug/build-provenance.json",
+      "originalBytes": 150659,
+      "originalSha256": "3d2357f784776fd399a76c4a0f1008801114c2e41e025f212d4cfd654c302db4",
+      "compressedSha256": "8c086b6c2714bd8db0cd8375ad97bd7bf543e4cbacc4193c7afdf5f8fdf6dc67"
+    },
+    {
+      "file": "release-provenance.json.gz",
+      "source": "build/ninja-msvc-release/build-provenance.json",
+      "originalBytes": 147761,
+      "originalSha256": "ce008941c6037a77a491b0db1882ee278188a39746a207ae5c73e7dde0e90d3a",
+      "compressedSha256": "f62a87f4f86d2c5a3d2c7196aae8e2d2d530e0e1ada7c17145f64e4ad809ac9b"
+    },
+    {
+      "file": "package__cycles.input.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/cycles.input.json",
+      "originalBytes": 4574,
+      "originalSha256": "a782cd4bb3a8c0fbba0308ccc47cc438bc32b182e07391f645eb3a2d646f03f4",
+      "compressedSha256": "46635e5cd08f0319a4e641a73d68f37f716c392d9a1681574d0d8889601297d7"
+    },
+    {
+      "file": "package__cycles.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/cycles.json",
+      "originalBytes": 387414,
+      "originalSha256": "03fde94323367df87607971a44482d6dea04bc4089aa7351715686f8058da5aa",
+      "compressedSha256": "236b084b1803e3c6afc4823d251dd21e06977c5462e85111065adbe564b14d1b"
+    },
+    {
+      "file": "package__cycles.log.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/cycles.log",
+      "originalBytes": 6264,
+      "originalSha256": "8abac0846017a62b66e47e8ae9436404bf43fc3c80e8602454abaefcab590e09",
+      "compressedSha256": "19d981f31e920214af207ec0e328b78c4716aaaf4d472d9a53568751a5bf2323"
+    },
+    {
+      "file": "package__cycles.runtime.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/cycles.runtime.json",
+      "originalBytes": 8776383,
+      "originalSha256": "c125ea2f2d73f4f6d9601339f4db52abf8f092373ca4cb7ed2b59bb0a2c1d381",
+      "compressedSha256": "bf7efe2240a087b7e3e61eca628383d0168adb87a8f486212adcce0741f0de5e"
+    },
+    {
+      "file": "package__cycles.summary.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/cycles.summary.json",
+      "originalBytes": 1284,
+      "originalSha256": "9d6dfbd887de490021e59fd02dbc7b417c7d9ad5a4511806386c7164a64f36f7",
+      "compressedSha256": "9512eaf30a06fefc2e35d33fb3d8358038635dd94d4664503bbebf8fa49c7c22"
+    },
+    {
+      "file": "package__editor.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/editor.json",
+      "originalBytes": 70709,
+      "originalSha256": "f2d70f3b8e743a4ad1af512732d0561826bf4915b74fa6ce464c2667c089420c",
+      "compressedSha256": "9827286b660eadcbdbf30f9e135b3e2952cd8119892320c71674c7af8c01f85a"
+    },
+    {
+      "file": "package__editor.log.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/editor.log",
+      "originalBytes": 3744,
+      "originalSha256": "4673cdf0f8653d6b5926bd58603b441e89afc1c52af14c92d8c6742e86a36d20",
+      "compressedSha256": "7c35ceb92ee449958fc088d8b165b0a849bf606b8867eb4d7beec734608a7518"
+    },
+    {
+      "file": "package__entry.log.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/entry.log",
+      "originalBytes": 1937,
+      "originalSha256": "b2af6c9f31b951cacd1a0d66fb30c1459ec5bf5c178ffa1e18123fd92f715665",
+      "compressedSha256": "10811b29f1f82649789fa14b56a0cf03859395208549e1fd6e46d792c06170eb"
+    },
+    {
+      "file": "package__install.log.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/install.log",
+      "originalBytes": 2631218,
+      "originalSha256": "bc359df9bd9b8d5ef4a6d44a6cd3cec0252e0e49ced0117330da0a6e58e9a63e",
+      "compressedSha256": "66d8af32d9e982b8912cf0aab5197a6c355fd03feffd59de2b996336389ce117"
+    },
+    {
+      "file": "package__summary.json.gz",
+      "source": "build/ninja-msvc-release/playable-package/evidence/summary.json",
+      "originalBytes": 2449,
+      "originalSha256": "4be794bc908cb0cc19eccf8405f638f42b0f33aa5d953215c4aa543dbce349b3",
+      "compressedSha256": "f54373c66c50d951ee2ca02ec5268122fddf43b530ffbc736bc8b3ec767d3f65"
+    },
+    {
+      "file": "verification__repository-audit.json.gz",
+      "source": "build/automatic-resume-2026-10-11/repository-audit.json",
+      "originalBytes": 859,
+      "originalSha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d",
+      "compressedSha256": "9e61fe52c3445c18223b122efc56a2fd08f1b95f254ea78bf382aa79f3dc95e2"
+    },
+    {
+      "file": "verification__docs-build.log.gz",
+      "source": "build/automatic-resume-2026-10-11/docs-build.log",
+      "originalBytes": 5169,
+      "originalSha256": "be7df1af3a1d2d9182871ae911592ecb143666d3652479e05e0571901bb255b3",
+      "compressedSha256": "91f79d46ca57b4dd319f31b4053475dd76c776a75668f35ddf8f0eec86404bd8"
+    },
+    {
+      "file": "verification__baseline-verification.json.gz",
+      "source": "build/automatic-resume-2026-10-11/baseline-verification.json",
+      "originalBytes": 536,
+      "originalSha256": "c23132354d0aa85b21627dfbcb4228b6be8d6a3c21f447722d5bdbfc539509f2",
+      "compressedSha256": "b94f6f34f6e86be5da7caf9f50b7555af573a83feb2d54aac7ccb15cc56ba454"
+    },
+    {
+      "file": "verification__document-transformations.json.gz",
+      "source": "build/automatic-resume-2026-10-11/document-transformations.json",
+      "originalBytes": 4018,
+      "originalSha256": "b4a1e1fdc826ffbd269324f9652a5b5095371cb25f077b32a762733d2f542895",
+      "compressedSha256": "17c1bbfa9c429d1a4474a756c310edd0d5f2e531b160810467831d8c8ba77d39"
+    },
+    {
+      "file": "verification__sync-docs.py.gz",
+      "source": "build/automatic-resume-2026-10-11/sync-docs.py",
+      "originalBytes": 4809,
+      "originalSha256": "118db2fb1eea3cc6f358269b6321e6267b1e8e444c79009165303c078839c9c6",
+      "compressedSha256": "f1def38dfa42faf2c05b3cac3536576d7189553f42e5444b9560e28d4df29b98"
+    },
+    {
+      "file": "verification__final-style.log.gz",
+      "source": "build/automatic-resume-2026-10-11/final-style.log",
+      "originalBytes": 48,
+      "originalSha256": "c1fc539f1c2399f88f59756b28039b60d4f5dce8ee1c21ba5a1371ea0a4a966e",
+      "compressedSha256": "d40c71dcbf08ab1638a51cd13d6a2f0294b2cf76ed070df64a4759abac031f0f"
+    },
+    {
+      "file": "verification__final-verification.json.gz",
+      "source": "build/automatic-resume-2026-10-11/final-verification.json",
+      "originalBytes": 228,
+      "originalSha256": "7c455871fcafb647ce415892dad1485d043dab876e328e9b168c746cef55692e",
+      "compressedSha256": "4fd6cc65fa7ebe5911a84bedd48e2cf5eda0a0b9c5b3d1abe75b12d1470055bb"
+    }
+  ],
+  "strictDocumentationBuildPassed": true,
+  "repositoryAuditPassed": true,
+  "unrelatedTrackedFilesBytePreserved": true,
+  "documentationStyleVerifiedFiles": 107,
+  "isolatedStagingVerified": true
+}

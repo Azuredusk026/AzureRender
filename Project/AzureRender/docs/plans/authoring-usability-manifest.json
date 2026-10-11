@@ -410,23 +410,25 @@
   },
   "framePacingCandidate": {
     "sourceHash": "2f5618d62593c83a59a4000654b3e14a2ee9e80dc8a6a77a4ace41ab3a37b901",
-    "status": "PartialVerifiedPendingIdleGpuEnvironment",
-    "acceptance": "docs/acceptance/p5/closure/frame-pacing.md",
-    "evidence": "docs/acceptance/p5/closure/frame-pacing-partial-evidence/manifest.json",
+    "status": "AutomaticRegressionVerifiedFormalThermalGateBlocked",
+    "acceptance": "docs/acceptance/p5/closure/automatic-resume.md",
+    "evidence": "docs/acceptance/p5/closure/automatic-resume-evidence/manifest.json",
     "cpuFullSuitePassedUniqueTests": 326,
     "additionalCpuChecksPassed": 6,
-    "gpuVerifiedUniqueTests": 87,
-    "gpuCurrentSourcePassedTests": 55,
+    "gpuVerifiedUniqueTests": 128,
+    "gpuCurrentSourcePassedTests": 96,
     "gpuByteEquivalentAssociatedTests": 32,
-    "pendingNonDesktopGpuTests": 41,
+    "pendingNonDesktopGpuTests": 0,
     "fullGpuRegressionPassed": false,
-    "formalRounds": 0,
+    "formalRounds": 15,
     "formalPerformancePassed": false,
     "currentSourceLongRuns": 0,
     "priorWorkingSetCauseResolved": false,
     "offlinePackageIntegrityVerified": 9,
     "currentRegressionArtifactsPlayerByteEquivalent": 4,
     "manualReviewPhase": "P8",
-    "complete": false
+    "complete": false,
+    "formalPassedRounds": 14,
+    "blockingRound": "exploration-2"
   }
 }
