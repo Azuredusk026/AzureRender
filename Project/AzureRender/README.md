@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+OBS 层对照、正式十五轮及驱动提交见[诊断验收](docs/acceptance/p5/closure/obs-layer-control.md)。
+人工验收保持待验，结果按真实操作填写。
+
 长跑观测机制与正式平台路线见[验收记录](docs/acceptance/p5/closure/observation-control.md)。
 完整性能、归因与人工体验按各阶段门禁维护。
 

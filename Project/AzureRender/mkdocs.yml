@@ -31,6 +31,7 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - OBS 层对照与工作集复现: acceptance/p5/closure/obs-layer-control.md
   - 长跑观测与路线验收: acceptance/p5/closure/observation-control.md
   - 缺页与原目标复测: acceptance/p5/closure/pagefault-trace-results.md
   - 长跑观测实施计划: plans/2026-10-11-longrun-observation.md
