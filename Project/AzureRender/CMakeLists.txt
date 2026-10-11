@@ -70,6 +70,8 @@ if(MSVC AND CMAKE_GENERATOR MATCHES "Ninja")
 endif()
 
 find_package(assimp 6.0.4 EXACT CONFIG REQUIRED)
+find_package(TIFF REQUIRED)
+find_package(WebP CONFIG REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
@@ -304,6 +306,8 @@ add_library(AzureRenderCore STATIC
     src/assets/MaterialData.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
+    src/assets/image/ImageCodec.cpp
+    src/assets/image/ImageFormatAdapter.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
     src/assets/model/ModelFormatAdapter.cpp
@@ -508,7 +512,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
-target_link_libraries(AzureRenderCore PRIVATE assimp::assimp)
+target_link_libraries(AzureRenderCore PRIVATE assimp::assimp TIFF::TIFF WebP::webp)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -908,9 +912,9 @@ if(BUILD_TESTING)
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
-    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp)
+    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/assets/image/ImageCodec.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
-    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE OpenEXR::OpenEXR)
+    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
     add_test(NAME AzureRender.EnvironmentAsset COMMAND AzureRenderEnvironmentAssetTests)
     add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1153,6 +1157,7 @@ if(BUILD_TESTING)
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
+        src/assets/image/ImageCodec.cpp
         src/assets/TextureImportSettings.cpp
         src/render/EnvironmentAsset.cpp
         src/render/RenderSettings.cpp
@@ -1169,7 +1174,7 @@ if(BUILD_TESTING)
             AzureFoundation
             Vulkan::Vulkan
             nlohmann_json::nlohmann_json
-            OpenEXR::OpenEXR)
+            OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
     target_compile_options(AzureRenderNullRhiPassTests PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
@@ -1601,7 +1606,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
+foreach(_pkg tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -1926,3 +1931,13 @@ if(BUILD_TESTING)
     target_link_libraries(AzureModelFormatAdapterTests PRIVATE AzureRuntime assimp::assimp)
     add_test(NAME AzureAssets.ModelFormats COMMAND AzureModelFormatAdapterTests)
 endif()
+
+if(BUILD_TESTING)
+    add_executable(AzureImageCodecTests tests/ImageCodecTests.cpp)
+    target_link_libraries(AzureImageCodecTests PRIVATE AzureRenderCore TIFF::TIFF WebP::webp)
+    target_include_directories(AzureImageCodecTests PRIVATE "${STB_INCLUDE_DIR}")
+    add_test(NAME AzureAssets.ImageFormats COMMAND AzureImageCodecTests)
+endif()
+
+install(FILES docs/runtime/image-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES docs/licenses/image-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")

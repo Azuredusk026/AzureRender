@@ -1,4 +1,5 @@
 #include "GltfLoader.hpp"
+#include "assets/image/ImageCodec.hpp"
 #include "BrowRegions.hpp"
 #include "scene/TransformParity.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
@@ -733,13 +734,26 @@ std::vector<std::uint8_t> decodeImageRgba(
     const int imageIndex,
     const std::array<double, 4>& factor,
     std::uint32_t& width,
-    std::uint32_t& height) {
+    std::uint32_t& height,bool encodedColor=true) {
     const auto& image = model.images.at(static_cast<std::size_t>(imageIndex));
     if (image.width <= 0 || image.height <= 0 || image.image.empty()) {
         throw std::runtime_error("glTF material image did not decode");
     }
     width = static_cast<std::uint32_t>(image.width);
     height = static_cast<std::uint32_t>(image.height);
+    azurerender::DecodedImage typed;typed.width=width;typed.height=height;typed.sourceChannels=4;
+    const auto count=static_cast<std::size_t>(width)*height*4;
+    if(image.component!=4)throw std::runtime_error("Material decoder requires RGBA image data");
+    if(image.bits==8)typed.rgba8=image.image;
+    else if(image.bits==16) {
+        if(image.image.size()!=count*2)throw std::runtime_error("Invalid sixteen-bit image storage");
+        typed.precision=azurerender::ImagePrecision::UInt16;typed.rgba16.resize(count);std::memcpy(typed.rgba16.data(),image.image.data(),count*2);
+    } else if(image.bits==32) {
+        if(image.image.size()!=count*4)throw std::runtime_error("Invalid float image storage");
+        typed.precision=azurerender::ImagePrecision::Float32;typed.colorSpace=azurerender::ImageColorSpace::Linear;
+        typed.rgba32.resize(count);std::memcpy(typed.rgba32.data(),image.image.data(),count*4);
+    } else throw std::runtime_error("Unsupported image precision");
+    const auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
     std::vector<std::uint8_t> pixels(
         static_cast<std::size_t>(width) * height * 4);
     for (std::size_t pixel = 0;
@@ -748,8 +762,8 @@ std::vector<std::uint8_t> decodeImageRgba(
         const std::size_t source = pixel * static_cast<std::size_t>(image.component);
         for (std::size_t channel = 0; channel < 4; ++channel) {
             const std::uint8_t sourceValue = channel < static_cast<std::size_t>(image.component)
-                ? image.image[source + channel]
-                : (channel == 3 ? 255 : image.image[source]);
+                ? converted.pixels[source + channel]
+                : (channel == 3 ? 255 : converted.pixels[source]);
             pixels[pixel * 4 + channel] = static_cast<std::uint8_t>(
                 static_cast<double>(sourceValue) * std::clamp(factor[channel], 0.0, 1.0));
         }
@@ -1109,7 +1123,7 @@ AssetMaterial loadMaterial(
             normalImage,
             kNoFactor,
             result.normalWidth,
-            result.normalHeight);
+            result.normalHeight,false);
     } else {
         result.normalWidth = 2;
         result.normalHeight = 2;
@@ -1125,7 +1139,7 @@ AssetMaterial loadMaterial(
             metallicRoughnessImage,
             kNoFactor,
             result.metallicRoughnessWidth,
-            result.metallicRoughnessHeight);
+            result.metallicRoughnessHeight,false);
     } else {
         result.metallicRoughnessWidth = 2;
         result.metallicRoughnessHeight = 2;
@@ -1174,7 +1188,7 @@ AssetMaterial loadMaterial(
             styleMaskImage,
             kNoFactor,
             result.styleMaskWidth,
-            result.styleMaskHeight);
+            result.styleMaskHeight,false);
     } else {
         result.styleMaskWidth = 2;
         result.styleMaskHeight = 2;
@@ -1206,7 +1220,7 @@ AssetMaterial loadMaterial(
             hairDataImage,
             kNoFactor,
             result.hairDataWidth,
-            result.hairDataHeight);
+            result.hairDataHeight,false);
     } else {
         result.hairDataWidth = 2;
         result.hairDataHeight = 2;
@@ -1222,7 +1236,7 @@ AssetMaterial loadMaterial(
             faceSdfImage,
             kNoFactor,
             result.faceSdf.width,
-            result.faceSdf.height);
+            result.faceSdf.height,false);
         const std::size_t distanceChannel =
             static_cast<std::size_t>(result.faceSdf.channel);
         const std::size_t maskChannel =
@@ -1797,9 +1811,35 @@ const char* assetMaterialClassName(const AssetMaterialClass value) {
     return "generic";
 }
 
-namespace { LoadedAsset importGltfModel(const tinygltf::Model&); }
+namespace {
+LoadedAsset importGltfModel(const tinygltf::Model&);
+bool decodeGltfImage(tinygltf::Image* image,int,std::string* error,std::string* warning,
+    int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void*) {
+    try {
+        if(size<=0||size>64*1024*1024)throw std::invalid_argument("glTF image exceeds the source budget");
+        const auto decoded=azurerender::decodeImageBytes({bytes,bytes+size});
+        if((requestedWidth>0&&decoded.width!=static_cast<unsigned>(requestedWidth))||
+           (requestedHeight>0&&decoded.height!=static_cast<unsigned>(requestedHeight)))throw std::invalid_argument("glTF image dimensions differ from the declaration");
+        auto material=azurerender::convertImageToRgba8(decoded);
+        image->width=static_cast<int>(decoded.width);image->height=static_cast<int>(decoded.height);
+        image->component=4;
+        if(decoded.precision==azurerender::ImagePrecision::UInt8) {
+            image->bits=8;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE;image->image=decoded.rgba8;
+        }else if(decoded.precision==azurerender::ImagePrecision::UInt16) {
+            image->bits=16;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT;image->image.resize(decoded.rgba16.size()*2);
+            std::memcpy(image->image.data(),decoded.rgba16.data(),image->image.size());
+        }else {
+            image->bits=32;image->pixel_type=TINYGLTF_COMPONENT_TYPE_FLOAT;image->image.resize(decoded.rgba32.size()*4);
+            std::memcpy(image->image.data(),decoded.rgba32.data(),image->image.size());
+        }
+        if(warning)for(const auto& loss:material.losses)*warning+="Image "+image->name+": "+loss+"\n";
+        return true;
+    }catch(const std::exception& e){if(error)*error+=e.what();return false;}
+}
+}
 LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::TinyGLTF loader;
+    loader.SetImageLoader(decodeGltfImage,nullptr);
     tinygltf::Model model;
     std::string warning;
     std::string error;
@@ -1836,7 +1876,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
 }
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
-    tinygltf::TinyGLTF loader;tinygltf::Model model;std::string error,warning;bool external=false;
+    tinygltf::TinyGLTF loader;loader.SetImageLoader(decodeGltfImage,nullptr);tinygltf::Model model;std::string error,warning;bool external=false;
     tinygltf::FsCallbacks fs;
     fs.FileExists=[&](const std::string&,void*){external=true;return false;};
     fs.ExpandFilePath=[](const std::string& path,void*){return path;};
@@ -2037,15 +2077,8 @@ void sampleAnimation(const LoadedAsset& asset, std::size_t animationIndex, float
 }
 
 AssetImage loadAssetImage(const std::string& path){
-    std::ifstream input(std::filesystem::u8path(path),std::ios::binary|std::ios::ate);
-    if(!input)throw std::runtime_error("Cannot open material image: "+path);
-    const auto size=input.tellg();if(size<=0||size>64*1024*1024)throw std::invalid_argument("Image source exceeds the 64 MiB budget");
-    std::vector<unsigned char> bytes(static_cast<std::size_t>(size));input.seekg(0);input.read(reinterpret_cast<char*>(bytes.data()),static_cast<std::streamsize>(size));
-    if(!input)throw std::runtime_error("Cannot read complete material image");
-    int width=0,height=0,channels=0;
-    if(!stbi_info_from_memory(bytes.data(),static_cast<int>(bytes.size()),&width,&height,&channels)||width<1||height<1||width>8192||height>8192)throw std::invalid_argument("Unsupported image or image dimensions exceed 8192");
-    auto* pixels=stbi_load_from_memory(bytes.data(),static_cast<int>(bytes.size()),&width,&height,&channels,4);
-    if(!pixels)throw std::runtime_error("Cannot decode material image");
-    AssetImage result;result.width=static_cast<std::uint32_t>(width);result.height=static_cast<std::uint32_t>(height);
-    try{result.pixels.assign(pixels,pixels+static_cast<std::size_t>(width)*height*4);}catch(...){stbi_image_free(pixels);throw;}stbi_image_free(pixels);return result;
+    const auto image=azurerender::decodeImageFile(std::filesystem::u8path(path));
+    auto converted=azurerender::convertImageToRgba8(image);
+    AssetImage result;result.width=image.width;result.height=image.height;
+    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);return result;
 }

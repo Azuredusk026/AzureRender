@@ -1,6 +1,6 @@
 #include "render/EnvironmentAsset.hpp"
 
-#include <stb_image.h>
+#include "assets/image/ImageCodec.hpp"
 #include <OpenEXR/ImfInputFile.h>
 #include <OpenEXR/ImfFrameBuffer.h>
 
@@ -18,39 +18,14 @@ namespace {
 
 constexpr float kPi = 3.14159265358979323846F;
 
-std::string lowerExtension(const std::filesystem::path& path) {
-    std::string extension = path.extension().string();
-    std::transform(
-        extension.begin(), extension.end(), extension.begin(),
-        [](const unsigned char value) {
-            return static_cast<char>(std::tolower(value));
-        });
-    return extension;
-}
-
 struct ByteImage {
-    std::vector<std::uint8_t> pixels;
+    std::vector<float> pixels;
     int width = 0;
     int height = 0;
 };
-
 ByteImage loadByteImage(const std::filesystem::path& path) {
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    unsigned char* data = stbi_load(
-        path.string().c_str(), &width, &height, &channels, 4);
-    if (data == nullptr) {
-        throw std::runtime_error(
-            "Failed to decode environment image: " + path.string());
-    }
-    ByteImage image;
-    image.width = width;
-    image.height = height;
-    image.pixels.assign(
-        data, data + static_cast<std::size_t>(width) * height * 4);
-    stbi_image_free(data);
-    return image;
+    const auto decoded=decodeImageFile(path);
+    return {imageLinearRgba(decoded),static_cast<int>(decoded.width),static_cast<int>(decoded.height)};
 }
 
 std::filesystem::path findCubeFace(
@@ -75,12 +50,6 @@ std::filesystem::path findCubeFace(
     throw std::runtime_error(
         "Cube environment is missing the _" + std::string(suffix)
         + " face in " + directory.string());
-}
-
-float srgbToLinear(const float value) {
-    return value <= 0.04045F
-        ? value / 12.92F
-        : std::pow((value + 0.055F) / 1.055F, 2.4F);
 }
 
 EnvironmentImage loadCubeDirectory(const std::filesystem::path& directory) {
@@ -153,9 +122,9 @@ EnvironmentImage loadCubeDirectory(const std::filesystem::path& directory) {
             const std::size_t targetPixel =
                 (static_cast<std::size_t>(y) * output.width + x) * 4;
             for (std::size_t channel = 0; channel < 3; ++channel) {
-                const float encoded = image.pixels[sourcePixel + channel] / 255.0F;
+                const float encoded = image.pixels[sourcePixel + channel];
                 output.rgba16f[targetPixel + channel] =
-                    environmentFloatToHalf(srgbToLinear(encoded));
+                    environmentFloatToHalf(encoded);
             }
             output.rgba16f[targetPixel + 3] = environmentFloatToHalf(1.0F);
         }
@@ -192,7 +161,7 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
     if (source.path.empty()) {
         throw std::invalid_argument("Environment source path is empty");
     }
-    const std::filesystem::path path(source.path);
+    const auto path=std::filesystem::u8path(source.path);
     EnvironmentImage output;
     const bool cube = source.projection == EnvironmentProjection::CubeFaces
         || (source.projection == EnvironmentProjection::Auto
@@ -200,76 +169,15 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
     if (cube) {
         return loadCubeDirectory(path);
     }
-    if (lowerExtension(path) == ".exr") {
-        try {
-            Imf::InputFile file(path.string().c_str());
-            const Imath::Box2i window = file.header().dataWindow();
-            const int width = window.max.x - window.min.x + 1;
-            const int height = window.max.y - window.min.y + 1;
-            if (width <= 0 || height <= 0) {
-                throw std::runtime_error("OpenEXR has an empty data window");
-            }
-            std::vector<float> red(static_cast<std::size_t>(width) * height);
-            std::vector<float> green(red.size());
-            std::vector<float> blue(red.size());
-            Imf::FrameBuffer frame;
-            const auto makeSlice = [window, width](std::vector<float>& values) {
-                return Imf::Slice::Make(
-                    Imf::FLOAT,
-                    values.data(), window, sizeof(float), sizeof(float) * width);
-            };
-            frame.insert("R", makeSlice(red));
-            frame.insert("G", makeSlice(green));
-            frame.insert("B", makeSlice(blue));
-            file.setFrameBuffer(frame);
-            file.readPixels(window.min.y, window.max.y);
-            output.width = static_cast<std::uint32_t>(width);
-            output.height = static_cast<std::uint32_t>(height);
-            output.rgba16f.resize(red.size() * 4);
-            for (std::size_t index = 0; index < red.size(); ++index) {
-                output.rgba16f[index * 4] = environmentFloatToHalf(red[index]);
-                output.rgba16f[index * 4 + 1] = environmentFloatToHalf(green[index]);
-                output.rgba16f[index * 4 + 2] = environmentFloatToHalf(blue[index]);
-                output.rgba16f[index * 4 + 3] = environmentFloatToHalf(1.0F);
-            }
-            output.description = path.string() + " (OpenEXR linear HDR)";
-            return output;
-        } catch (const std::exception& error) {
-            throw std::runtime_error(
-                "Failed to decode OpenEXR environment " + path.string() + ": " + error.what());
-        }
+    const auto decoded=decodeImageFile(path);
+    const auto linear=imageLinearRgba(decoded);
+    output.width=decoded.width;output.height=decoded.height;
+    output.rgba16f.resize(linear.size());
+    for(std::size_t i=0;i<linear.size();++i) {
+        if(std::abs(linear[i])>65504.F)throw std::runtime_error("Environment pixels exceed finite RGBA16F range: "+path.u8string());
+        output.rgba16f[i]=environmentFloatToHalf(linear[i]);
     }
-
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    if (lowerExtension(path) == ".hdr") {
-        float* data = stbi_loadf(path.string().c_str(), &width, &height, &channels, 4);
-        if (data == nullptr) {
-            throw std::runtime_error("Failed to decode HDR environment: " + path.string());
-        }
-        const std::size_t count = static_cast<std::size_t>(width) * height * 4;
-        output.rgba16f.resize(count);
-        for (std::size_t index = 0; index < count; ++index) {
-            output.rgba16f[index] = environmentFloatToHalf(
-                std::clamp(data[index], 0.0F, 64.0F));
-        }
-        stbi_image_free(data);
-    } else {
-        const ByteImage image = loadByteImage(path);
-        width = image.width;
-        height = image.height;
-        output.rgba16f.resize(image.pixels.size());
-        for (std::size_t index = 0; index < image.pixels.size(); ++index) {
-            const float encoded = image.pixels[index] / 255.0F;
-            output.rgba16f[index] = environmentFloatToHalf(
-                index % 4 == 3 ? encoded : srgbToLinear(encoded));
-        }
-    }
-    output.width = static_cast<std::uint32_t>(width);
-    output.height = static_cast<std::uint32_t>(height);
-    output.description = path.string();
-    return output;
+    output.description=path.u8string();return output;
 }
 
-}  // namespace azurerender
+} // namespace azurerender

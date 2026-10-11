@@ -1,6 +1,7 @@
 #include "assets/AssetTransfer.hpp"
 #include "assets/GltfLoader.hpp"
 #include "assets/model/ModelFormatAdapter.hpp"
+#include "assets/image/ImageCodec.hpp"
 #include <array>
 #include <fstream>
 #include <sstream>
@@ -81,8 +82,12 @@ const AssetFormatRegistry& assetFormatRegistry() {
             };
             format.prepare=prepareGltf;result.add(std::move(format));
         }
-        registerModelFormats(result);return result;
+        registerModelFormats(result);registerImageFormats(result);return result;
     }();return registry;
+}
+AssetTransferReport prepareAssetCopy(const AssetTransferRequest& request,const AssetCancellation& cancelled) {
+    AssetTransferReport report;report.entry=request.source.filename();
+    copyInput(request.source,request.staging/report.entry,request,report,cancelled);return report;
 }
 AssetTransferReport prepareAssetTransfer(const AssetTransferRequest& request,const AssetFormatRegistry& registry,const AssetCancellation& cancelled) {
     check(cancelled);

@@ -1,7 +1,7 @@
 # 资产输入与输出格式拓展实施计划
 
 > 文档类型：后续实施计划
-> 状态：G18 自动门禁通过，G19 执行中
+> 状态：G19 自动门禁通过，G20 执行中
 > 日期：2026-10-11
 > 范围：模型、图像、音频及资产交换工作流
 
@@ -54,9 +54,9 @@ P5 剩余归因、正式性能及最终交付在 P8 验收。
 | --- | --- | --- |
 | 模型导入 | 接受七种模型输入，后台准备与校验 | `src/editor/AssetImportJob.cpp` |
 | 模型运行 | 加载网格、材质、骨架及动画 | `src/assets/GltfLoader.cpp` |
-| 图像登记 | PNG、JPEG、PPM、HDR | `src/runtime/AssetTypeRegistry.hpp` |
-| 材质图像 | stb 解码，普通贴图存储八位像素 | `src/assets/GltfLoader.cpp` |
-| 环境图像 | EXR/HDR 浮点解码与其他图像解码 | `src/render/EnvironmentAsset.cpp` |
+| 图像登记 | 九种第一批输入格式 | `src/runtime/AssetTypeRegistry.hpp` |
+| 材质图像 | 统一精度解码，按槽转换为八位像素 | `src/assets/GltfLoader.cpp` |
+| 环境图像 | 统一解码，保持线性半精度范围 | `src/render/EnvironmentAsset.cpp` |
 | 图像重导入 | 解码、设置校验与语义化 mip 生成 | `src/editor/AssetImportJob.cpp` |
 | 音频登记 | WAV | `src/runtime/AssetTypeRegistry.hpp` |
 | 音频运行 | miniaudio 文件加载、播放与离线混音 | `src/runtime/AudioRuntime.cpp` |
@@ -228,15 +228,15 @@ Blender 生成夹具时记录版本与脚本。
 复用 `TextureImportSettings` 与 mip 语义。
 TIFF/WebP 评估对应库并固定许可与版本。
 
-- [ ] 新建 `tests/ImageCodecTests.cpp` 与颜色夹具。
-- [ ] 先验证格式、精度、透明和错误输入断言。
-- [ ] 接入第一批全部图像输入格式。
-- [ ] 描述像素类型、颜色空间、方向与通道。
-- [ ] 为材质显式转换高精度输入并记录损失。
-- [ ] 环境图像保持线性浮点范围与亮度。
-- [ ] 验证灰度、十六位、负窗口与畸形尺寸。
-- [ ] 验证 mip、采样和双设备实际像素。
-- [ ] 更新图像说明与许可，提交 `feat(g19)`。
+- [x] 新建 `tests/ImageCodecTests.cpp` 与颜色夹具。
+- [x] 先验证格式、精度、透明和错误输入断言。
+- [x] 接入第一批全部图像输入格式。
+- [x] 描述像素类型、颜色空间、方向与通道。
+- [x] 为材质显式转换高精度输入并记录损失。
+- [x] 环境图像保持线性浮点范围与亮度。
+- [x] 验证灰度、十六位、负窗口与畸形尺寸。
+- [x] 验证 mip、采样和双设备实际像素。
+- [x] 更新图像说明与许可，提交 `feat(g19)`。
 
 验证使用 `AzureAssets.ImageFormats`。
 图像尺寸与解码预算沿用既有受支持上限。

@@ -2,6 +2,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "resources/ResourceLocator.hpp"
 #include <stb_image_write.h>
+#include <webp/encode.h>
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -22,5 +23,16 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  const auto asset=loadGltfAsset((root/"model.gltf").string());const auto& actual=asset.materials[0].textureSettings[1];
  if(actual.describe()!=settings.describe())throw std::runtime_error("Image import settings must reach the normal material slot");
  if(actual.semantic()!=TextureFilterSemantic::Normal||actual.sampler(1,8).addressV!=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE)throw std::runtime_error("Material sampling must consume normal settings");
+ unsigned char* webp=nullptr;const auto webpSize=WebPEncodeLosslessRGBA(pixels,2,2,8,&webp);
+ if(!webpSize)throw std::runtime_error("Cannot create WebP material fixture");
+ {std::ofstream file(root/"normal.webp",std::ios::binary);file.write(reinterpret_cast<const char*>(webp),webpSize);}WebPFree(webp);
+ source["images"][image]["uri"]="normal.webp";std::ofstream(root/"webp.gltf")<<source.dump();
+ const auto webpAsset=loadGltfAsset((root/"webp.gltf").u8string());
+ if(webpAsset.materials[0].normalPixels!=asset.materials[0].normalPixels)throw std::runtime_error("External WebP must reach the same production normal texture pixels");
+ const float linearNormal[]={.5F,.5F,1.F,.5F,.5F,1.F,.5F,.5F,1.F,.5F,.5F,1.F};
+ if(!stbi_write_hdr((root/"normal.hdr").string().c_str(),2,2,3,linearNormal))throw std::runtime_error("Cannot create linear normal fixture");
+ source["images"][image]["uri"]="normal.hdr";std::ofstream(root/"linear.gltf")<<source.dump();
+ const auto linearAsset=loadGltfAsset((root/"linear.gltf").u8string());
+ if(linearAsset.materials[0].normalPixels[0]!=128||linearAsset.materials[0].normalPixels[1]!=128)throw std::runtime_error("Linear floating-point normal data must avoid color gamma encoding");
  std::filesystem::remove_all(root);return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}}

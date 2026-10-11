@@ -39,7 +39,9 @@ inline AssetTypeRegistry& assetTypeRegistry() {
         value.add({"managed-script","Managed scripts",{".azscript",".cs",".dll"}});value.add({"prefab","Prefabs",{".azureprefab"},true});
         value.add({"animation","Animation graphs / JSON",{".json"}});value.add({"audio","Audio",{".wav"},false,AssetDomain::Audio});
         value.add({"ui","UI documents",{".rml"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
-        value.add({"image","Images",{".png",".jpg",".jpeg",".ppm",".hdr"},false,AssetDomain::Image});value.add({"font","Fonts",{".ttf",".otf"}});
+        std::vector<std::string> imageExtensions;
+        for(const auto& format:assetFormatRegistry().list(AssetDomain::Image))if(format.canRead)imageExtensions.insert(imageExtensions.end(),format.extensions.begin(),format.extensions.end());
+        value.add({"image","Images",imageExtensions,false,AssetDomain::Image});value.add({"font","Fonts",{".ttf",".otf"}});
         value.add({"material","Materials",{".azurematerial"}});
         value.add({"shader","Shaders",{".azshader",".slang",".glsl",".spv"}});value.add({"text","Text",{".txt",".md"}});
         return value;}();return registry;

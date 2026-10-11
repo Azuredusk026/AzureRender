@@ -194,7 +194,7 @@ struct LoadedAsset {
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
-struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;};
+struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;std::vector<std::string> losses;};
 [[nodiscard]] AssetImage loadAssetImage(const std::string& path);
 // Candidate validation consumes embedded data without filesystem access.
 [[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);

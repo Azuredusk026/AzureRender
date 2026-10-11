@@ -54,8 +54,9 @@ std::string EditorContext::commitImport(AssetImportJob& job){
         const auto id=candidate->idForPath(reference);auto sidecar=path;sidecar+=".azmeta";
         std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;input.close();metadata["importGeneration"]=job.summary().at("generation");
         std::ofstream output(sidecar);output<<metadata.dump(2);output.close();if(!output)throw std::runtime_error("Cannot save import provenance");candidate->refresh(true);
-        beginEdit();assets_.swap(candidate);scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;
-        importSummary_=job.summary();log("Imported asset: "+path.filename().u8string()+" ("+std::to_string(importSummary_.at("vertices").get<std::size_t>())+" vertices)");return id;
+        beginEdit();assets_.swap(candidate);
+        if(job.summary().value("domain",std::string("model"))=="model") {scene_.resources.push_back({id,"gltf",path});resourceReferences_[path]=id;}
+        importSummary_=job.summary();log("Imported asset: "+path.filename().u8string());return id;
     }catch(...){std::filesystem::remove_all(job.destination);throw;}
 }
 std::string EditorContext::importAsset(const std::filesystem::path& path){

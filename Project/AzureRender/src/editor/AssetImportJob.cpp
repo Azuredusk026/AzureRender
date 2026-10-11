@@ -11,9 +11,11 @@ namespace azurerender {
 AssetImportJob::AssetImportJob(std::filesystem::path source,std::filesystem::path staging,std::filesystem::path target):destination(std::move(target)),staging_(std::move(staging)),filename_(source.filename().u8string()) {
     const auto extension=assetExtension(source);
     bool supported=false;
-    for(const auto& format:assetFormatRegistry().list(AssetDomain::Model))
+    for(const auto& pair:assetFormatRegistry().formats()) {
+        const auto& format=pair.second;
         supported=supported||(format.canRead&&std::find(format.extensions.begin(),format.extensions.end(),extension)!=format.extensions.end());
-    if(!supported)throw std::invalid_argument("Import expects a supported model format");
+    }
+    if(!supported)throw std::invalid_argument("Import expects a registered readable asset format");
     work_=std::async(std::launch::async,[this,source]{prepare(source);});
 }
 AssetImportJob::~AssetImportJob(){cancel();if(work_.valid())work_.wait();discardAssetTransfer(transfer_);}
@@ -47,13 +49,10 @@ AssetReimportJob::AssetReimportJob(AssetRecord asset,std::vector<AssetRecord> in
             discardAssetTransfer(report);
         }
         else if(assetTypeRegistry().matches(asset.path,{"image"})) {
-            int width=0,height=0,channels=0;
-            std::unique_ptr<unsigned char,void(*)(void*)> pixels(stbi_load(asset.path.u8string().c_str(),&width,&height,&channels,4),stbi_image_free);
-            if(!pixels)throw std::runtime_error("Cannot decode reimported image");
+            const auto pixels=loadAssetImage(asset.path.u8string());check();
             const auto texture=TextureImportSettings::parse(settings.value("texture",nlohmann::json::object()));
             if(texture.mipPolicy=="generate") {
-                const auto size=static_cast<std::size_t>(width)*static_cast<std::size_t>(height)*4;
-                static_cast<void>(buildTextureMipChain({pixels.get(),pixels.get()+size},static_cast<unsigned>(width),static_cast<unsigned>(height),texture.semantic()));
+                static_cast<void>(buildTextureMipChain(pixels.pixels,pixels.width,pixels.height,texture.semantic()));
             }
         }
         check();progress_=1;

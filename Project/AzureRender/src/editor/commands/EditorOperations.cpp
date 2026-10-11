@@ -119,7 +119,10 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"content.undo",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json{session.undoContent();return nullptr;});
     registry.add({"content.redo",1,schema(),true,false,true},[&session](EditorContext&,const Json&)->Json{session.redoContent();return nullptr;});
     registry.add({"content.discard",1,schema({{"planId",text}},{"planId"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.content().discard(a.at("planId").get<std::string>());return nullptr;});
-    registry.add({"asset.reimport",1,schema({{"asset",text},{"settings",{{"type","object"}}},{"baseFingerprint",text}},{"asset","settings","baseFingerprint"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return {{"task",session.startReimport(a)}};});
+    const auto textureImportSchema=schema({{"schemaVersion",{{"type","integer"},{"minimum",1},{"maximum",1}}},
+        {"usage",text},{"colorSpace",text},{"filter",text},{"wrapU",text},{"wrapV",text},{"mipPolicy",text},
+        {"anisotropy",{{"type","number"},{"minimum",1},{"maximum",16}}}});
+    registry.add({"asset.reimport",1,schema({{"asset",text},{"settings",schema({{"texture",textureImportSchema}})},{"baseFingerprint",text}},{"asset","settings","baseFingerprint"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return {{"task",session.startReimport(a)}};});
     registry.add({"texture.describe",1,schema({{"assets",{{"type","array"},{"items",text}}}},{"assets"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{return session.content().textureSettings(a.at("assets").get<std::vector<std::string>>());});
     registry.add({"asset.inspect",1,schema({{"asset",text}},{"asset"}),false,false,false},[&session](EditorContext& context,const Json& a)->Json {
         auto result=session.content().inspect(a.at("asset").get<std::string>());const auto id=result.at("id").get<std::string>();

@@ -1,0 +1,149 @@
+{
+  "crossFormat": [
+    {
+      "run": 0,
+      "frame": 0,
+      "materialMaxDifference": 0,
+      "fullFrameMaxDifference": 0,
+      "differentPixels": 0,
+      "differentRange": null
+    },
+    {
+      "run": 0,
+      "frame": 1,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 31,
+      "differentRange": [
+        588,
+        636,
+        52,
+        685
+      ]
+    },
+    {
+      "run": 0,
+      "frame": 2,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 37,
+      "differentRange": [
+        588,
+        635,
+        50,
+        685
+      ]
+    },
+    {
+      "run": 1,
+      "frame": 0,
+      "materialMaxDifference": 0,
+      "fullFrameMaxDifference": 0,
+      "differentPixels": 0,
+      "differentRange": null
+    },
+    {
+      "run": 1,
+      "frame": 1,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 28,
+      "differentRange": [
+        612,
+        634,
+        50,
+        684
+      ]
+    },
+    {
+      "run": 1,
+      "frame": 2,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 32,
+      "differentRange": [
+        590,
+        631,
+        50,
+        93
+      ]
+    },
+    {
+      "run": 2,
+      "frame": 0,
+      "materialMaxDifference": 0,
+      "fullFrameMaxDifference": 1,
+      "differentPixels": 2,
+      "differentRange": [
+        637,
+        643,
+        682,
+        683
+      ]
+    },
+    {
+      "run": 2,
+      "frame": 1,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 29,
+      "differentRange": [
+        588,
+        629,
+        52,
+        95
+      ]
+    },
+    {
+      "run": 2,
+      "frame": 2,
+      "materialMaxDifference": 2,
+      "fullFrameMaxDifference": 2,
+      "differentPixels": 28,
+      "differentRange": [
+        591,
+        642,
+        50,
+        684
+      ]
+    }
+  ],
+  "sameFormatControl": [
+    {
+      "run": 0,
+      "sameFormatDifferentPixels": 1,
+      "maximumDifference": 1,
+      "differentRange": [
+        639,
+        639,
+        683,
+        683
+      ]
+    },
+    {
+      "run": 1,
+      "sameFormatDifferentPixels": 1,
+      "maximumDifference": 1,
+      "differentRange": [
+        639,
+        639,
+        683,
+        683
+      ]
+    },
+    {
+      "run": 2,
+      "sameFormatDifferentPixels": 3,
+      "maximumDifference": 1,
+      "differentRange": [
+        637,
+        643,
+        682,
+        683
+      ]
+    }
+  ],
+  "firstFrameMaterialEquality": true,
+  "laterFramesObservedMaximumDifference": 2,
+  "productionVisualBudgetUnchanged": true
+}

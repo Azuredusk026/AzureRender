@@ -1249,12 +1249,12 @@
       "contextualNodeAddition"
     ],
     "uiVerificationPending": [],
-    "gpuSchedule": "User requested keeping the game running and completing other work first",
+    "gpuSchedule": "Sequential functional GPU verification; formal performance and long runs in P8",
     "p5AcceptancePhase": "P8",
     "p6AutomaticComplete": true,
     "p6AutomaticEvidence": "docs/acceptance/p6/automatic-2026-10-12/manifest.json",
     "formalPerformanceEvidence": "docs/acceptance/p5/closure/automatic-resume.md",
-    "currentAutomaticPhase": "G19",
+    "currentAutomaticPhase": "G20",
     "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json"
   }
 }

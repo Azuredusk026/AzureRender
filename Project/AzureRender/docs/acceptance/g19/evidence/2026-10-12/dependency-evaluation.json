@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "vcpkgBaseline": "2bc124dac8436f5d8e108273aacf3f68d9824185",
+  "packages": [
+    {
+      "name": "tiff",
+      "installedVersion": "4.7.2",
+      "portVersion": "0",
+      "repository": "https://gitlab.com/libtiff/libtiff",
+      "archiveSha512": "c4dcde3c79e5d69c7231f8862e2e5a83d90d9cce694fb2a4804800b2f8f1bc9db504b9252d81dce872eec8358b33a3a1dbdddcbb6181f6fb8d1d7fc0e9a9fc6a",
+      "licenseSha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade",
+      "distribution": "Installed runtime libraries with complete upstream copyright notices",
+      "vcpkgPortTree": "a9a8ba148c5c2295dbcf22fe4f6ee5de135b0e33"
+    },
+    {
+      "name": "libwebp",
+      "installedVersion": "1.6.0",
+      "portVersion": "3",
+      "repository": "https://github.com/webmproject/libwebp",
+      "archiveSha512": "298e0ad4c09392213baf5abb69d330c6203b618800073fe2df91d01d35034197c5d3e29a74573b06971473c52c74514f0e6e0f6c8162f923e2dd15cb1a692aef",
+      "licenseSha256": "050b5ba2c8eb0bd3b996e12ef79312a1c62237f2de1b3c609843f00bb74744f3",
+      "distribution": "Installed runtime libraries with complete upstream copyright notices",
+      "vcpkgPortTree": "c2ed152baa0795e889f73476fd0bc8e35dafd40b"
+    },
+    {
+      "name": "libjpeg-turbo",
+      "installedVersion": "3.2.0",
+      "portVersion": "0",
+      "repository": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+      "archiveSha512": "1ce063e9e126d55019385da3a6ff4521a9a3958edeab15e2465ae3435026dac6e598277eea066173ada47da37159d0f7812b2227869c10dd141dcfe2ddeab720",
+      "licenseSha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579",
+      "distribution": "Installed runtime libraries with complete upstream copyright notices",
+      "vcpkgPortTree": "c7d2d8cbb868863a698862a0da02b4af225f3c72"
+    },
+    {
+      "name": "liblzma",
+      "installedVersion": "5.8.3",
+      "portVersion": "0",
+      "repository": "https://github.com/tukaani-project/xz",
+      "archiveSha512": "8fb5e6a13397d259d8ff7484f9b63f8a6752ff1c63e1a4601170ad8175aadefb5126a1cae7f73370bfc6c2a0b4e1c0bad57a58fc5b781d3f7d45e5a483c091cc",
+      "licenseSha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+      "distribution": "Installed runtime libraries with complete upstream copyright notices",
+      "vcpkgPortTree": "ae94eaf58eb64ce5b0dfba7769095c43c6c65d71"
+    }
+  ],
+  "fixtureLicense": "CC0-1.0",
+  "fixtureSource": "tests/ImageCodecTests.cpp and tests/TextureMaterialImportTests.cpp",
+  "scope": "Raster decoding only; command line converters are not required"
+}

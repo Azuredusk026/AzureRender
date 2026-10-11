@@ -27,6 +27,8 @@ struct AssetTransferReport {
 };
 AssetTransferReport prepareAssetTransfer(const AssetTransferRequest& request,
     const AssetFormatRegistry& registry,const AssetCancellation& cancelled);
+AssetTransferReport prepareAssetCopy(const AssetTransferRequest& request,
+    const AssetCancellation& cancelled);
 std::filesystem::path publishAssetTransfer(AssetTransferReport& report,
     const AssetCancellation& cancelled={});
 void discardAssetTransfer(AssetTransferReport& report) noexcept;

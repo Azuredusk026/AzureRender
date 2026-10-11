@@ -1,4 +1,5 @@
 #include "editor/EditorSession.hpp"
+#include "runtime/AssetTypeRegistry.hpp"
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -39,6 +40,12 @@ int main(int argc,char** argv){
         std::filesystem::copy_file(argv[1],importSource);
         const auto imported=apply(session,"asset.import",{{"path",importSource.u8string()}}).get<std::string>();
         require(!imported.empty(),"Public import must accept UTF-8 paths and uppercase registered extensions");
+        const auto imageSource=root/std::filesystem::u8path(u8"导入 图像.PPM");
+        {std::ofstream image(imageSource,std::ios::binary);image<<"P6\n1 1\n255\n";const char pixel[]={static_cast<char>(255),0,0};image.write(pixel,3);}
+        const auto resourceCount=context->scene().resources.size();
+        const auto importedImage=apply(session,"asset.import",{{"path",imageSource.u8string()}}).get<std::string>();
+        require(context->scene().resources.size()==resourceCount,"Image import must preserve model scene resource membership");
+        require(assetTypeRegistry().classify(context->assets().resolve(importedImage))->id=="image","Imported image must have a stable registered domain");
         const auto modelSource=root/std::filesystem::u8path(u8"转换 模型.OBJ");
         std::ofstream(modelSource)<<"v 0 0 0\nv 2 0 0\nv 0 3 0\nf 1 2 3\n";
         const auto converted=apply(session,"asset.import",{{"path",modelSource.u8string()}}).get<std::string>();
@@ -48,6 +55,12 @@ int main(int argc,char** argv){
         auto& authoredResources=context->scene().resources;
         authoredResources.erase(std::remove_if(authoredResources.begin(),authoredResources.end(),[](const auto& resource){return resource.id=="virtual-alias"||resource.id=="absolute-alias";}),authoredResources.end());
         context->save();
+        const auto imageFingerprint=std::to_string(context->assets().records().at(importedImage).fingerprint);
+        apply(session,"asset.reimport",{{"asset",importedImage},{"settings",{{"texture",{{"mipPolicy","generate"}}}}},{"baseFingerprint",imageFingerprint}});
+        const auto imageDeadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
+        while(std::chrono::steady_clock::now()<imageDeadline){session.pollTasks();if(session.tasks().report().back().at("state")!="running")break;std::this_thread::sleep_for(std::chrono::milliseconds(1));}
+        require(session.tasks().report().back().at("state")=="completed","Image reimport must validate semantics and mip generation through the public job");
+        std::filesystem::remove(imageSource);
         const auto fingerprint=std::to_string(context->assets().records().at(converted).fingerprint);
         apply(session,"asset.reimport",{{"asset",converted},{"settings",Json::object()},{"baseFingerprint",fingerprint}});
         const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
@@ -56,6 +69,7 @@ int main(int argc,char** argv){
         std::filesystem::remove(modelSource);
         const auto pack=root/std::filesystem::u8path(u8"移动资源包");context->assets().writePack(pack);
         require(std::filesystem::is_regular_file(AssetDatabase::resolvePack(pack,imported)),"UTF-8 imported names must survive portable resource packing");
+        require(std::filesystem::is_regular_file(AssetDatabase::resolvePack(pack,importedImage)),"Imported image remains portable after source removal");
         require(std::filesystem::is_regular_file(AssetDatabase::resolvePack(pack,converted)),"Converted provenance and embedded data must remain portable after source removal");
         // Catalog-only aliases above have no authored portable references.
         auto& resources=context->scene().resources;
@@ -63,6 +77,7 @@ int main(int argc,char** argv){
         context->save();
         const auto reloaded=EditorContext::openProject(root/"project.azureproject");
         require(reloaded->assets().resolve(imported)==context->assets().resolve(imported),"Imported UTF-8 model identity must survive save and reopen");
+        require(reloaded->assets().resolve(importedImage)==context->assets().resolve(importedImage),"Image identity survives save and reopen");
         require(reloaded->assets().resolve(converted)==context->assets().resolve(converted),"Converted asset references must survive save and reopen");
         apply(session,"asset.place",{{"asset",imported},{"origin",{2,4,3}},{"direction",{0,-1,0}}});
         apply(session,"history.undo");
