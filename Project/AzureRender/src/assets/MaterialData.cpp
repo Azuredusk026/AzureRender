@@ -56,7 +56,11 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     validate();AssetMaterial result;result.name=typeId;result.materialProfileExplicit=true;
     auto image=[&](const std::string& slot,std::vector<std::uint8_t>& pixels,std::uint32_t& width,std::uint32_t& height,std::array<std::uint8_t,4> fallback){
         width=height=1;pixels.assign(fallback.begin(),fallback.end());
-        if(textures.contains(slot)){const auto loaded=loadAssetImage(resolve(textures.at(slot).at("asset").get<std::string>()).u8string());pixels=loaded.pixels;width=loaded.width;height=loaded.height;}
+        if(textures.contains(slot)){const auto loaded=loadAssetImage(resolve(textures.at(slot).at("asset").get<std::string>()).u8string());pixels=loaded.pixels;width=loaded.width;height=loaded.height;
+            const std::map<std::string,std::size_t> slots={{"albedo",0},{"normal",1},{"metallicRoughness",2},{"emissive",3}};
+            result.authoredMipLevels[slots.at(slot)]=static_cast<unsigned>(loaded.mipLevels.size());
+            for(std::size_t level=1;level<loaded.mipLevels.size();++level)pixels.insert(pixels.end(),loaded.mipLevels[level].rgba8.begin(),loaded.mipLevels[level].rgba8.end());
+            if(slot=="normal"&&loaded.sourceCompression=="bc5")reconstructBc5NormalPixels(pixels);}
     };
     image("albedo",result.baseColorPixels,result.baseColorWidth,result.baseColorHeight,{255,255,255,255});
     const std::map<std::string,std::size_t> textureSlots={{"albedo",0},{"normal",1},{"metallicRoughness",2},{"emissive",3}};

@@ -2,7 +2,7 @@
 
 ## 支持范围
 
-公共导入接受九种图像格式。
+公共导入接受注册表声明的图像格式。
 格式能力通过 `asset.formats` 查询。
 文件筛选与资产分类使用同一注册描述。
 图片按独立资源保存，材质通过引用使用。
@@ -17,6 +17,7 @@
 | EXR | 扫描线 RGB 或 Y，及可选透明 | OpenEXR |
 | TIFF | 连续扫描线 RGB 或灰度 | libtiff 4.7.2 |
 | WebP | 静态八位颜色及透明 | libwebp 1.6.0 |
+| DDS、KTX2 | 二维 RGBA、BC 与 Basis，及原始 mip | DirectXTex、KTX-Software |
 
 PNM 使用 `.ppm` 扩展名接入。
 TIFF 接受 `.tif` 与 `.tiff`。
@@ -81,3 +82,5 @@ HDR 的亮度在半精度有限范围内保留。
 
 阶段证据见 [G19 验收](../acceptance/g19/2026-10-12.md)。
 人工操作和最终性能在 P8 集中复核。
+
+二维容器的设置与范围见[纹理容器交换](texture-containers.md)。

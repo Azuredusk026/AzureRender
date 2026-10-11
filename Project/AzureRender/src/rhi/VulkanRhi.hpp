@@ -27,6 +27,7 @@ public:
           pipelineInspection_(pipelineInspection) {}
 
     GpuAllocator& allocator() override { return *allocator_; }
+    bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
 
     void copyBuffer(
         const GpuBuffer& source,

@@ -1,4 +1,5 @@
 #include "assets/image/ImageCodec.hpp"
+#include "assets/image/TextureContainerAdapter.hpp"
 #include "assets/AssetTransfer.hpp"
 #include <stb_image.h>
 #include <tiffio.h>
@@ -137,6 +138,7 @@ DecodedImage readExr(const std::vector<unsigned char>& bytes,const AssetCancella
 }
 DecodedImage decodeImageBytes(const std::vector<unsigned char>& bytes,const AssetCancellation& cancel) {
     check(cancel);if(bytes.empty()||bytes.size()>sourceBudget)throw std::invalid_argument("Image source exceeds the 64 MiB budget or is empty");
+    if(isTextureContainer(bytes))return decodeTextureContainer(bytes,cancel);
     if(isTiff(bytes))return readTiff(bytes,cancel);if(isExr(bytes))return readExr(bytes,cancel);if(isPnm(bytes))return readPnm(bytes,cancel);
     DecodedImage out;int w=0,h=0,c=0;const auto n=static_cast<int>(bytes.size());
     if(isWebp(bytes)) {
@@ -178,6 +180,10 @@ ImageRgba8 convertImageToRgba8(const DecodedImage& image,bool encodeLinearRgb) {
         if(encodeLinearRgb&&image.colorSpace==ImageColorSpace::Linear&&i%4!=3)v=v<=.0031308F?12.92F*v:1.055F*std::pow(v,1.F/2.4F)-.055F;
         out.pixels[i]=static_cast<std::uint8_t>(std::lround(v*255));}
     if(clipped)out.losses.push_back("Values outside [0,1] clipped for material storage");return out;
+}
+void reconstructBc5NormalPixels(std::vector<std::uint8_t>& pixels){
+    if(pixels.size()%4)throw std::invalid_argument("BC5 normal pixels require RGBA storage");
+    for(std::size_t i=0;i<pixels.size();i+=4){float x=pixels[i]/255.F*2-1,y=pixels[i+1]/255.F*2-1;const float length=std::sqrt(x*x+y*y);if(length>1){x/=length;y/=length;pixels[i]=static_cast<std::uint8_t>(std::lround((x*.5F+.5F)*255));pixels[i+1]=static_cast<std::uint8_t>(std::lround((y*.5F+.5F)*255));}const float z=std::sqrt(std::max(0.F,1-x*x-y*y));pixels[i+2]=static_cast<std::uint8_t>(std::lround((z*.5F+.5F)*255));pixels[i+3]=255;}
 }
 std::vector<float> imageLinearRgba(const DecodedImage& image) {
     const auto count=sizeFor(image.width,image.height,4);std::vector<float> out(count);

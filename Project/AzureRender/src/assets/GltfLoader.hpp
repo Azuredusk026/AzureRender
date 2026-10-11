@@ -1,6 +1,7 @@
 #pragma once
 
 #include "assets/TextureImportSettings.hpp"
+#include "assets/image/ImageCodec.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -74,6 +75,7 @@ struct AssetFaceSdfProfile {
 };
 
 struct AssetMaterial {
+    std::array<unsigned,8> authoredMipLevels{};
     std::array<azurerender::TextureImportSettings,8> textureSettings=[] {
         std::array<azurerender::TextureImportSettings,8> result;
         const char* usage[]={"albedo","normal","roughness","emissive","mask","albedo","packed-normal","linear"};
@@ -194,7 +196,7 @@ struct LoadedAsset {
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
-struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;std::vector<std::string> losses;};
+struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;std::vector<std::string> losses;std::vector<azurerender::ImageMipLevel> mipLevels;std::string sourceCompression;};
 [[nodiscard]] AssetImage loadAssetImage(const std::string& path);
 // Candidate validation consumes embedded data without filesystem access.
 [[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);

@@ -1,5 +1,6 @@
 #include "assets/image/ImageEncoder.hpp"
 #include "assets/image/ImageCodec.hpp"
+#include "assets/image/TextureContainerAdapter.hpp"
 #include <stb_image_write.h>
 #include <tiffio.h>
 #include <webp/encode.h>
@@ -56,7 +57,12 @@ void tiff(const std::filesystem::path& path,const DecodedImage& image,const Asse
 AssetTransferReport prepareImageExport(const AssetTransferRequest& request,const AssetCancellation& cancel){
     const auto settings=normalizeImageExportSettings(request.formatId,request.settings);const int quality=settings.value("quality",100);
     const auto image=decodeImageFile(request.source,cancel);AssetTransferReport report;report.entry=request.source.stem();report.entry+="."+request.formatId;const auto target=request.staging/report.entry;
-    if(request.formatId=="tiff")tiff(target,image,cancel);
+    if(request.formatId=="dds"||request.formatId=="ktx2"){
+        const auto bytes=encodeTextureContainer(image,request.formatId,settings,cancel);std::ofstream output(target,std::ios::binary);output.write(reinterpret_cast<const char*>(bytes.data()),bytes.size());output.close();if(!output)throw std::runtime_error("Texture container write failed");
+        report.losses=convertImageToRgba8(image,false).losses;
+        if(settings.at("compression")!="rgba")report.losses.push_back("Block compression changes pixel samples");
+        if(settings.at("compression")=="bc5")report.losses.push_back("BC5 stores red and green channels; normal usage reconstructs positive Z");
+    }else if(request.formatId=="tiff")tiff(target,image,cancel);
     else if(request.formatId=="exr"){
         auto pixels=imageLinearRgba(image);Imf::Header header(image.width,image.height);const char* names[]={"R","G","B","A"};for(auto name:names)header.channels().insert(name,Imf::Channel(Imf::FLOAT));Imf::FrameBuffer frame;
         for(int c=0;c<4;++c)frame.insert(names[c],Imf::Slice(Imf::FLOAT,reinterpret_cast<char*>(pixels.data()+c),4*sizeof(float),static_cast<std::size_t>(image.width)*4*sizeof(float)));
@@ -82,17 +88,27 @@ AssetTransferReport prepareImageExport(const AssetTransferRequest& request,const
         }
         if(!status||bytes.value.empty())throw std::runtime_error("Image encoding failed or exceeds its byte budget");std::ofstream output(target,std::ios::binary);for(std::size_t offset=0;offset<bytes.value.size();){check(cancel);const auto count=std::min<std::size_t>(65536,bytes.value.size()-offset);output.write(reinterpret_cast<const char*>(bytes.value.data()+offset),count);offset+=count;}output.close();if(!output)throw std::runtime_error("Image output write failed");
     }
+    if(image.mipLevels.size()>1&&request.formatId!="dds"&&request.formatId!="ktx2")report.losses.push_back("Output stores the base image and omits authored mip levels");
     check(cancel);if(std::filesystem::file_size(target)>outputBudget)throw std::runtime_error("Encoded image exceeds 64 MiB");const auto decoded=decodeImageFile(target,cancel);report.outputs={report.entry};report.generation.outputHashes[report.entry.generic_u8string()]=assetTransferFingerprint(target,cancel);
-    report.summary={{"domain","image"},{"width",decoded.width},{"height",decoded.height},{"precision",decoded.precision==ImagePrecision::UInt8?"uint8":decoded.precision==ImagePrecision::UInt16?"uint16":"float32"},{"colorSpace",decoded.colorSpace==ImageColorSpace::Linear?"linear":"srgb"},{"losses",report.losses},{"quality",quality}};return report;
+    report.summary={{"domain","image"},{"width",decoded.width},{"height",decoded.height},{"mipLevels",decoded.mipLevels.empty()?1:decoded.mipLevels.size()},{"compression",decoded.sourceCompression},{"precision",decoded.precision==ImagePrecision::UInt8?"uint8":decoded.precision==ImagePrecision::UInt16?"uint16":"float32"},{"colorSpace",decoded.colorSpace==ImageColorSpace::Linear?"linear":"srgb"},{"losses",report.losses},{"quality",quality}};return report;
 }
 nlohmann::json normalizeImageExportSettings(const std::string& format,const nlohmann::json& settings){
     if(!settings.is_object())throw std::invalid_argument("Image export settings must be an object");
+    if(format=="dds"||format=="ktx2"){
+        for(const auto& field:settings.items())if(field.key()!="compression")throw std::invalid_argument("Unknown texture export setting");
+        if(settings.contains("compression")&&!settings.at("compression").is_string())throw std::invalid_argument("Compression requires a string");
+        const auto compression=settings.value("compression",std::string("rgba"));
+        const std::vector<std::string> allowed=format=="dds"?std::vector<std::string>{"rgba","bc1","bc3","bc5","bc7"}:std::vector<std::string>{"rgba","basis"};
+        if(std::find(allowed.begin(),allowed.end(),compression)==allowed.end())throw std::invalid_argument("Unsupported container compression");return {{"compression",compression}};
+    }
     const bool qualitySupported=format=="jpeg"||format=="webp";
     for(auto it=settings.begin();it!=settings.end();++it)if(it.key()!="quality"||!qualitySupported)throw std::invalid_argument("Unknown image export setting: "+it.key());
     auto result=settings;if(qualitySupported){if(settings.contains("quality")&&!settings.at("quality").is_number_integer())throw std::invalid_argument("Image quality must be an integer");const int quality=settings.value("quality",100);if(quality<1||quality>100)throw std::invalid_argument("Image quality must be within [1,100]");result["quality"]=quality;}return result;
 }
 AssetTransferReport planImageExport(const AssetTransferRequest& request,const AssetCancellation& cancel){
     const auto image=decodeImageFile(request.source,cancel);AssetTransferReport report;report.summary={{"domain","image"},{"width",image.width},{"height",image.height}};
+    if(request.formatId=="dds"||request.formatId=="ktx2"){const auto settings=normalizeImageExportSettings(request.formatId,request.settings);report.losses=convertImageToRgba8(image,false).losses;if(settings.at("compression")!="rgba")report.losses.push_back("Block compression changes pixel samples");if(settings.at("compression")=="bc5")report.losses.push_back("BC5 stores red and green channels; normal usage reconstructs positive Z");return report;}
+    if(image.mipLevels.size()>1)report.losses.push_back("Output stores the base image and omits authored mip levels");
     if(request.formatId=="jpeg")report.losses.push_back("JPEG uses lossy RGB coding and omits alpha");
     if(request.formatId=="hdr")report.losses.push_back("HDR stores nonnegative RGB radiance with shared-exponent precision and omits alpha");
     if(request.formatId!="tiff"&&request.formatId!="exr"&&request.formatId!="hdr"&&!(request.formatId=="png"&&image.precision==ImagePrecision::UInt16)){

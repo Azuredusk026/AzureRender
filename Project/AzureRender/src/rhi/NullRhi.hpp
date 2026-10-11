@@ -5,6 +5,7 @@
 #include <deque>
 #include <memory>
 #include <string>
+#include <set>
 #include <vector>
 
 namespace azurerender::rhi {
@@ -58,8 +59,13 @@ private:
 class NullRhi final : public IRhi {
 public:
     std::vector<RecordedCall> calls;
+    struct ImageUpload {unsigned width,height,levels;std::vector<std::uint8_t> pixels;};
+    bool collectImageUploads=false;
+    std::vector<ImageUpload> imageUploads;
+    std::set<VkFormat> unavailableSampledFormats;
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
+    bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}
 
     void copyBuffer(
         const GpuBuffer& source,

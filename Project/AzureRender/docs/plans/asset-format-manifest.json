@@ -102,17 +102,18 @@
     {
       "id": "G22",
       "summary": "压缩纹理与 mip 交换",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "P7"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/g22/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "G23",
       "summary": "压缩音频与容器交换",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "G22"
       ],
@@ -211,7 +212,8 @@
   },
   "implementedFormats": {},
   "evidence": {
-    "firstBatchDelivery": "docs/acceptance/p7/evidence/2026-10-12/manifest.json"
+    "firstBatchDelivery": "docs/acceptance/p7/evidence/2026-10-12/manifest.json",
+    "textureContainers": "docs/acceptance/g22/evidence/2026-10-12/manifest.json"
   },
   "complete": false,
   "prerequisiteGate": "AllAutomaticGates",
@@ -339,6 +341,41 @@
       "generatorVersion": 1,
       "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json",
       "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
+    },
+    {
+      "id": "dds",
+      "domain": "image",
+      "read": true,
+      "write": true,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g22/evidence/2026-10-12/manifest.json",
+      "runtimePath": "BudgetedRgbaMipChain",
+      "textureDimensions": "Single2D",
+      "compression": [
+        "rgba",
+        "bc1",
+        "bc3",
+        "bc5",
+        "bc7"
+      ]
+    },
+    {
+      "id": "ktx2",
+      "domain": "image",
+      "read": true,
+      "write": true,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g22/evidence/2026-10-12/manifest.json",
+      "runtimePath": "BudgetedRgbaMipChain",
+      "textureDimensions": "Single2D",
+      "compression": [
+        "rgba",
+        "basis-uastc"
+      ]
     }
   ]
 }

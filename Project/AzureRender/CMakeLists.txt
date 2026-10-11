@@ -6,7 +6,7 @@ project(
     AzureRender
     VERSION 0.1.0
     DESCRIPTION "Portfolio-first Vulkan stylized renderer"
-    LANGUAGES CXX
+    LANGUAGES C CXX
 )
 
 include(CTest)
@@ -108,6 +108,8 @@ endif()
 find_package(RmlUi CONFIG REQUIRED)
 find_path(MINIAUDIO_INCLUDE_DIR miniaudio.h REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
+find_package(directxtex CONFIG REQUIRED)
+find_package(Ktx CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(OpenEXR CONFIG REQUIRED)
@@ -311,6 +313,7 @@ add_library(AzureRenderCore STATIC
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
+    src/assets/image/TextureContainerAdapter.cpp
     src/assets/image/ImageEncoder.cpp
     src/assets/image/ImageFormatAdapter.cpp
     src/assets/audio/AudioCodec.cpp
@@ -523,7 +526,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
-target_link_libraries(AzureRenderCore PRIVATE assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
+target_link_libraries(AzureRenderCore PRIVATE Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -925,9 +928,10 @@ if(BUILD_TESTING)
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
-    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/assets/image/ImageCodec.cpp)
+    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/assets/image/ImageCodec.cpp
+    src/assets/image/TextureContainerAdapter.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
-    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
+    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE Vulkan::Vulkan Microsoft::DirectXTex KTX::ktx OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
     add_test(NAME AzureRender.EnvironmentAsset COMMAND AzureRenderEnvironmentAssetTests)
     add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1171,6 +1175,7 @@ if(BUILD_TESTING)
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
         src/assets/image/ImageCodec.cpp
+    src/assets/image/TextureContainerAdapter.cpp
         src/assets/TextureImportSettings.cpp
         src/render/EnvironmentAsset.cpp
         src/render/RenderSettings.cpp
@@ -1187,7 +1192,7 @@ if(BUILD_TESTING)
             AzureFoundation
             Vulkan::Vulkan
             nlohmann_json::nlohmann_json
-            OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
+            OpenEXR::OpenEXR TIFF::TIFF WebP::webp Microsoft::DirectXTex KTX::ktx)
     target_compile_options(AzureRenderNullRhiPassTests PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
@@ -1621,7 +1626,7 @@ install(
         "${CMAKE_CURRENT_SOURCE_DIR}/third_party/imgui/LICENSE.txt"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses"
     RENAME "imgui-LICENSE.txt")
-foreach(_pkg libvorbis libogg libflac mp3lame tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
+foreach(_pkg directxtex directxmath ktx zstd egl-registry opengl-registry libvorbis libogg libflac mp3lame tiff libwebp libjpeg-turbo liblzma libspng assimp jhasse-poly2tri kubazip minizip pugixml rapidjson utfcpp glfw3 tinygltf stb openexr imath libdeflate openjph nlohmann-json joltphysics lua sol2 rmlui miniaudio freetype libpng zlib bzip2 brotli manifold clipper2 tbb hwloc)
     if(EXISTS
         "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/share/${_pkg}/copyright")
         install(
@@ -1952,9 +1957,18 @@ if(BUILD_TESTING)
     target_link_libraries(AzureImageCodecTests PRIVATE AzureRenderCore TIFF::TIFF WebP::webp)
     target_include_directories(AzureImageCodecTests PRIVATE "${STB_INCLUDE_DIR}")
     add_test(NAME AzureAssets.ImageFormats COMMAND AzureImageCodecTests)
+    add_executable(AzureTextureContainerTests tests/TextureContainerTests.cpp)
+    target_link_libraries(AzureTextureContainerTests PRIVATE AzureEditor KTX::ktx)
+    add_dependencies(AzureTextureContainerTests AzureRenderShaders)
+    add_test(NAME AzureAssets.TextureContainers COMMAND AzureTextureContainerTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf" "${CMAKE_CURRENT_BINARY_DIR}/shaders")
+    add_test(NAME AzureEditor.TextureContainersGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_texture_container_workflows.py" --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureEditor.TextureContainersGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 420)
 endif()
 
 install(FILES docs/runtime/image-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES docs/runtime/texture-containers.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES docs/licenses/texture-containers-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
+install(DIRECTORY docs/licenses/ktx DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES docs/licenses/image-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES docs/licenses/audio-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES docs/runtime/audio-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")

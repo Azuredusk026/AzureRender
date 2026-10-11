@@ -729,12 +729,14 @@ std::vector<std::uint32_t> readIndices(
     return result;
 }
 
+struct AuthoredImageData{std::vector<azurerender::ImageMipLevel> levels;std::string compression;};
+using AuthoredImageMips=std::map<int,AuthoredImageData>;
 std::vector<std::uint8_t> decodeImageRgba(
     const tinygltf::Model& model,
     const int imageIndex,
     const std::array<double, 4>& factor,
     std::uint32_t& width,
-    std::uint32_t& height,bool encodedColor=true) {
+    std::uint32_t& height,bool encodedColor=true,const AuthoredImageMips* authored=nullptr,unsigned* levelCount=nullptr,bool normalUsage=false) {
     const auto& image = model.images.at(static_cast<std::size_t>(imageIndex));
     if (image.width <= 0 || image.height <= 0 || image.image.empty()) {
         throw std::runtime_error("glTF material image did not decode");
@@ -768,6 +770,11 @@ std::vector<std::uint8_t> decodeImageRgba(
                 static_cast<double>(sourceValue) * std::clamp(factor[channel], 0.0, 1.0));
         }
     }
+    if(authored){const auto found=authored->find(imageIndex);if(found!=authored->end()){
+        if(levelCount)*levelCount=static_cast<unsigned>(found->second.levels.size());
+        for(std::size_t level=1;level<found->second.levels.size();++level){const auto& samples=found->second.levels[level].rgba8;for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*std::clamp(factor[i%4],0.,1.)));}
+        if(normalUsage&&found->second.compression=="bc5")azurerender::reconstructBc5NormalPixels(pixels);
+    }}
     return pixels;
 }
 
@@ -819,7 +826,7 @@ std::array<float, 4> readMaterialVectorExtra(
 
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
-    const tinygltf::Material* material) {
+    const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr) {
     AssetMaterial result;
     int baseColorImage = -1;
     int normalImage = -1;
@@ -1092,7 +1099,7 @@ AssetMaterial loadMaterial(
             baseColorImage,
             {1.0, 1.0, 1.0, 1.0},
             result.baseColorWidth,
-            result.baseColorHeight);
+            result.baseColorHeight,true,authored,&result.authoredMipLevels[0]);
     } else {
         result.baseColorWidth = 2;
         result.baseColorHeight = 2;
@@ -1123,7 +1130,7 @@ AssetMaterial loadMaterial(
             normalImage,
             kNoFactor,
             result.normalWidth,
-            result.normalHeight,false);
+            result.normalHeight,false,authored,&result.authoredMipLevels[1],true);
     } else {
         result.normalWidth = 2;
         result.normalHeight = 2;
@@ -1139,7 +1146,7 @@ AssetMaterial loadMaterial(
             metallicRoughnessImage,
             kNoFactor,
             result.metallicRoughnessWidth,
-            result.metallicRoughnessHeight,false);
+            result.metallicRoughnessHeight,false,authored,&result.authoredMipLevels[2]);
     } else {
         result.metallicRoughnessWidth = 2;
         result.metallicRoughnessHeight = 2;
@@ -1172,7 +1179,7 @@ AssetMaterial loadMaterial(
             specularEmissiveImage,
             kNoFactor,
             result.specularEmissiveWidth,
-            result.specularEmissiveHeight);
+            result.specularEmissiveHeight,true,authored,&result.authoredMipLevels[3]);
     } else {
         result.specularEmissiveWidth = 2;
         result.specularEmissiveHeight = 2;
@@ -1188,7 +1195,7 @@ AssetMaterial loadMaterial(
             styleMaskImage,
             kNoFactor,
             result.styleMaskWidth,
-            result.styleMaskHeight,false);
+            result.styleMaskHeight,false,authored,&result.authoredMipLevels[4]);
     } else {
         result.styleMaskWidth = 2;
         result.styleMaskHeight = 2;
@@ -1204,7 +1211,7 @@ AssetMaterial loadMaterial(
             matcapImage,
             kNoFactor,
             result.matcapWidth,
-            result.matcapHeight);
+            result.matcapHeight,true,authored,&result.authoredMipLevels[5]);
     } else {
         result.matcapWidth = 2;
         result.matcapHeight = 2;
@@ -1220,7 +1227,7 @@ AssetMaterial loadMaterial(
             hairDataImage,
             kNoFactor,
             result.hairDataWidth,
-            result.hairDataHeight,false);
+            result.hairDataHeight,false,authored,&result.authoredMipLevels[6]);
     } else {
         result.hairDataWidth = 2;
         result.hairDataHeight = 2;
@@ -1236,7 +1243,7 @@ AssetMaterial loadMaterial(
             faceSdfImage,
             kNoFactor,
             result.faceSdf.width,
-            result.faceSdf.height,false);
+            result.faceSdf.height,false,authored,&result.authoredMipLevels[7]);
         const std::size_t distanceChannel =
             static_cast<std::size_t>(result.faceSdf.channel);
         const std::size_t maskChannel =
@@ -1812,14 +1819,15 @@ const char* assetMaterialClassName(const AssetMaterialClass value) {
 }
 
 namespace {
-LoadedAsset importGltfModel(const tinygltf::Model&);
-bool decodeGltfImage(tinygltf::Image* image,int,std::string* error,std::string* warning,
-    int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void*) {
+LoadedAsset importGltfModel(const tinygltf::Model&,const AuthoredImageMips* authored=nullptr);
+bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,std::string* warning,
+    int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void* userData) {
     try {
         if(size<=0||size>64*1024*1024)throw std::invalid_argument("glTF image exceeds the source budget");
         const auto decoded=azurerender::decodeImageBytes({bytes,bytes+size});
         if((requestedWidth>0&&decoded.width!=static_cast<unsigned>(requestedWidth))||
            (requestedHeight>0&&decoded.height!=static_cast<unsigned>(requestedHeight)))throw std::invalid_argument("glTF image dimensions differ from the declaration");
+        if(userData&&!decoded.mipLevels.empty())(*static_cast<AuthoredImageMips*>(userData))[imageIndex]={decoded.mipLevels,decoded.sourceCompression};
         auto material=azurerender::convertImageToRgba8(decoded);
         image->width=static_cast<int>(decoded.width);image->height=static_cast<int>(decoded.height);
         image->component=4;
@@ -1839,7 +1847,7 @@ bool decodeGltfImage(tinygltf::Image* image,int,std::string* error,std::string* 
 }
 LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::TinyGLTF loader;
-    loader.SetImageLoader(decodeGltfImage,nullptr);
+    AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);
     tinygltf::Model model;
     std::string warning;
     std::string error;
@@ -1856,7 +1864,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     if (!loaded) {
         throw std::runtime_error("Unable to load glTF asset: " + error);
     }
-    auto asset=importGltfModel(model);
+    auto asset=importGltfModel(model,&authored);
     for(std::size_t index=0;index<model.materials.size();++index) {
         const auto& material=model.materials[index];
         const int textures[]={material.pbrMetallicRoughness.baseColorTexture.index,material.normalTexture.index,material.pbrMetallicRoughness.metallicRoughnessTexture.index,material.emissiveTexture.index,material.occlusionTexture.index};
@@ -1876,7 +1884,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
 }
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
-    tinygltf::TinyGLTF loader;loader.SetImageLoader(decodeGltfImage,nullptr);tinygltf::Model model;std::string error,warning;bool external=false;
+    tinygltf::TinyGLTF loader;AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);tinygltf::Model model;std::string error,warning;bool external=false;
     tinygltf::FsCallbacks fs;
     fs.FileExists=[&](const std::string&,void*){external=true;return false;};
     fs.ExpandFilePath=[](const std::string& path,void*){return path;};
@@ -1889,18 +1897,18 @@ LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
         :loader.LoadASCIIFromString(&model,&error,&warning,bytes.data(),size,"");
     if(external)throw std::invalid_argument("Embedded model candidates require embedded buffers and images");
     if(!loaded)throw std::invalid_argument("Invalid embedded model candidate: "+error);
-    return importGltfModel(model);
+    return importGltfModel(model,&authored);
 }
 namespace {
-LoadedAsset importGltfModel(const tinygltf::Model& model){
+LoadedAsset importGltfModel(const tinygltf::Model& model,const AuthoredImageMips* authored){
     LoadedAsset asset;
     asset.materials.reserve(model.materials.size() + 1);
     for (const auto& material : model.materials) {
-        asset.materials.push_back(loadMaterial(model, &material));
+        asset.materials.push_back(loadMaterial(model, &material,authored));
     }
     const std::uint32_t fallbackMaterial =
         static_cast<std::uint32_t>(asset.materials.size());
-    asset.materials.push_back(loadMaterial(model, nullptr));
+    asset.materials.push_back(loadMaterial(model, nullptr,authored));
     loadNodes(model, asset);
     const std::vector<Matrix4> nodeWorldTransforms =
         calculateNodeWorldTransforms(model);
@@ -2080,5 +2088,5 @@ AssetImage loadAssetImage(const std::string& path){
     const auto image=azurerender::decodeImageFile(std::filesystem::u8path(path));
     auto converted=azurerender::convertImageToRgba8(image);
     AssetImage result;result.width=image.width;result.height=image.height;
-    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);return result;
+    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);result.mipLevels=image.mipLevels;result.sourceCompression=image.sourceCompression;return result;
 }

@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "source": "C:\\Users\\23587\\Tools\\vcpkg\\buildtrees\\ktx\\src\\v4.4.2-16f9ed2e07.clean\\tests\\testimages\\cyan_rgb_reference_basis.ktx2",
+  "sourceSha256": "2b2ceb5627e3f70969c7d99d5c75d462d156c0df0a431c747e43c9307d6cb131",
+  "supercompressionScheme": 1,
+  "dimensions": [
+    64,
+    64
+  ],
+  "extrema": [
+    [
+      2,
+      2
+    ],
+    [
+      255,
+      255
+    ],
+    [
+      255,
+      255
+    ],
+    [
+      255,
+      255
+    ]
+  ],
+  "report": {
+    "colorSpace": "srgb",
+    "compression": "",
+    "domain": "image",
+    "entry": "cyan_rgb_reference_basis.png",
+    "generation": {
+      "dependencyHashes": {},
+      "generatorId": "azure.png-export",
+      "generatorVersion": 1,
+      "inputHashes": {
+        "cyan_rgb_reference_basis.ktx2": "fnv1a64:ad5002db1a7511e9"
+      },
+      "licenseSource": "LicenseRef-External-Asset",
+      "outputHashes": {
+        "cyan_rgb_reference_basis.png": "fnv1a64:00f8f59c00ad05c6"
+      },
+      "parametersHash": "fnv1a64:c2f8389b51b8d6f4",
+      "schemaVersion": 1
+    },
+    "height": 64,
+    "losses": [],
+    "mipLevels": 1,
+    "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\etc1s-output\\cyan_rgb_reference_basis.png",
+    "precision": "uint8",
+    "quality": 100,
+    "width": 64
+  },
+  "cyanMaxChannelError": 2
+}

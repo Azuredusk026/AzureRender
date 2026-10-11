@@ -158,7 +158,7 @@ void NullRhi::copyBufferToImage(
     const std::uint32_t width,
     const std::uint32_t height,
     const std::uint32_t mipLevels) {
-    (void)source;(void)mipLevels;
+    if(collectImageUploads){ImageUpload upload{width,height,mipLevels,{}};const auto* begin=static_cast<const std::uint8_t*>(source.mapped);if(begin)upload.pixels.assign(begin,begin+source.size);imageUploads.push_back(std::move(upload));}
     calls.push_back(
         {"copyBufferToImage",
          hexHandle(destination.image) + " " + std::to_string(width) + "x"

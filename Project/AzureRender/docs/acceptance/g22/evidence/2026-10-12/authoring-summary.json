@@ -1,0 +1,23 @@
+{
+  "actualMipUpload": true,
+  "boundedFailures": true,
+  "passed": true,
+  "workflows": [
+    {
+      "material": "fe9e17b5-63bc-4eb8-bf56-8fc6bc5c7b5f",
+      "mipLevels": 3,
+      "name": "dds",
+      "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\authoring\\dds-exchange\\bc7.ktx2",
+      "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\authoring\\dds\\project.azureproject",
+      "texture": "54ffd3ff-546d-4b92-950d-36de2fbd89bc"
+    },
+    {
+      "material": "01fae2f4-11cc-4a31-bac5-e5e17878b299",
+      "mipLevels": 3,
+      "name": "basis",
+      "output": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\authoring\\basis-exchange\\basis.dds",
+      "project": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\g22-texture-containers-2026-10-12\\authoring\\basis\\project.azureproject",
+      "texture": "469581a3-8130-40bc-8179-cb8a1885b188"
+    }
+  ]
+}

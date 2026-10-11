@@ -100,6 +100,11 @@ void VulkanRhi::transitionImageLayout(
     });
 }
 
+bool VulkanRhi::supportsSampledImage(VkFormat format,bool linearFilter) const {
+    VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,format,&properties);
+    const VkFormatFeatureFlags required=VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT|(linearFilter?VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT:0);
+    return (properties.optimalTilingFeatures&required)==required;
+}
 void VulkanRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,

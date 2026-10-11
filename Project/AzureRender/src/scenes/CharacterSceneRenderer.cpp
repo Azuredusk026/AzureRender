@@ -1291,8 +1291,14 @@ void CharacterSceneRenderer::uploadTextureData(
     GpuTexture& texture,
     const std::uint32_t requestedMipLevels,TextureFilterSemantic semantic,float alphaCutoff,const TextureImportSettings* importSettings) {
     std::vector<std::uint8_t> filtered;unsigned mipLevels=requestedMipLevels;
+    if(!rhi_->supportsSampledImage(format,!importSettings||importSettings->filter=="linear"))throw std::runtime_error("Device does not support the decoded texture sampling format");
     if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==1){
-        if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
+        const auto baseBytes=std::size_t(width)*height*4;
+        if(requestedMipLevels>1&&pixels.size()>baseBytes){
+            std::size_t expected=0;unsigned w=width,h=height;for(unsigned level=0;level<requestedMipLevels;++level){expected+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);}
+            if(pixels.size()!=expected)throw std::invalid_argument("Authored texture mip storage is invalid");filtered.assign(pixels.begin(),pixels.end());
+        }else if(requestedMipLevels==1&&pixels.size()>baseBytes)filtered.assign(pixels.begin(),pixels.begin()+baseBytes);
+        else if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
     }
     const bool cpuMips=!filtered.empty();
     const VkDeviceSize size = static_cast<VkDeviceSize>(cpuMips?filtered.size():pixels.size())
@@ -1352,7 +1358,7 @@ void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std
 void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
     const auto& m=asset.materials.at(index);auto& g=materials.at(index);
     const auto& settings=m.textureSettings.at(slot);
-    const auto mipLevels=settings.mipPolicy=="none"?1U:0U;
+    const auto mipLevels=settings.mipPolicy=="none"?1U:m.authoredMipLevels.at(slot);
     const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
     switch(slot){
     case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,colorFormat,false,g.baseColor,mipLevels,settings.semantic(),m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0,&settings);break;

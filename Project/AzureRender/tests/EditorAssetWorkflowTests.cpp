@@ -30,7 +30,7 @@ int main(int argc,char** argv){
             bool found=false;for(const auto& format:formats)if(format.at("id")==reader)found=true;
             require(found,"Public format discovery must advertise each verified model reader");
         }
-        const std::vector<std::string> writers={"gltf","glb","obj","stl","ply","png","jpeg","bmp","tga","hdr","exr","tiff","webp","wav","flac","vorbis"};
+        const std::vector<std::string> writers={"gltf","glb","obj","stl","ply","png","jpeg","bmp","tga","hdr","exr","tiff","webp","dds","ktx2","wav","flac","vorbis"};
         for(const auto& format:formats){const auto name=format.at("id").get<std::string>();const bool writable=std::find(writers.begin(),writers.end(),name)!=writers.end();require(format.at("read").get<bool>()&&format.at("write").get<bool>()==writable&&format.at("settingsVersion")==1,"Public discovery reports the independently verified read/write matrix and version");}
         for(const auto& entry:catalog)if(entry.at("id")==id){++matches;require(entry.at("type")=="model"&&entry.at("ready").get<bool>(),"Catalog must classify actual resources through registration");}
         const auto models=apply(session,"assets.catalog",{{"type","model"}});

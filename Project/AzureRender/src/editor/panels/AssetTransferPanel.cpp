@@ -18,6 +18,9 @@ void ImGuiEditorLayer::drawAssetTransferPanel(){
             for(auto field=fields.begin();field!=fields.end();++field){const auto& descriptor=field.value();auto& value=exportRequest_["settings"][field.key()];if(value.is_null())value=descriptor.at("default");bool changed=false;
                 if(descriptor.at("type")=="integer"){int integer=value.get<int>();changed=ImGui::InputInt(field.key().c_str(),&integer);if(changed)value=integer;}
                 else if(descriptor.at("type")=="number"){double number=value.get<double>();changed=ImGui::InputDouble(field.key().c_str(),&number);if(changed)value=number;}
+                else if(descriptor.at("type")=="string"&&descriptor.contains("enum")){
+                    if(ImGui::BeginCombo(field.key().c_str(),value.get_ref<const std::string&>().c_str())){for(const auto& option:descriptor.at("enum")){const auto text=option.get<std::string>();if(ImGui::Selectable(text.c_str(),value==option)){value=option;changed=true;}observeWidget("export.setting."+field.key()+"."+text);}ImGui::EndCombo();}
+                }
                 if(changed)exportImpact_=nullptr;observeWidget("export.setting."+field.key());}}
         const auto destinationBefore=exportDestination_;drawPathInput("Output directory",exportDestination_,"export",true);if(exportDestination_!=destinationBefore)exportImpact_=nullptr;
         if(ui::button("Preview export")){auto request=exportRequest_;request["format"]=exportFormat_;request["destination"]=exportDestination_;const auto result=session_->edit("asset.export-plan",request);if(result)exportImpact_=result.value;}observeWidget("export.plan");

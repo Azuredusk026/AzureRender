@@ -52,7 +52,7 @@ AssetReimportJob::AssetReimportJob(AssetRecord asset,std::vector<AssetRecord> in
         else if(assetTypeRegistry().matches(asset.path,{"image"})) {
             const auto pixels=loadAssetImage(asset.path.u8string());check();
             const auto texture=TextureImportSettings::parse(settings.value("texture",nlohmann::json::object()));
-            if(texture.mipPolicy=="generate") {
+            if(texture.mipPolicy=="generate"&&pixels.mipLevels.empty()) {
                 static_cast<void>(buildTextureMipChain(pixels.pixels,pixels.width,pixels.height,texture.semantic()));
             }
         }

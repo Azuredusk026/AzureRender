@@ -1,0 +1,27 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "fixedSteps": 30,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "authored-model",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    }
+  ],
+  "presentationErrors": [],
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "dds",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.2715,
+  "uiDrawCalls": 0
+}
