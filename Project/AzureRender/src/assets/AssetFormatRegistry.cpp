@@ -16,7 +16,7 @@ void AssetFormatRegistry::add(AssetFormatDescriptor descriptor) {
         throw std::invalid_argument("Invalid asset format descriptor");
     if(descriptor.canRead&&(!descriptor.probe||!descriptor.prepare))
         throw std::invalid_argument("Readable formats require content probing and preparation");
-    if(descriptor.canWrite&&!descriptor.prepare)throw std::invalid_argument("Writable formats require preparation");
+    if(descriptor.canWrite&&(!descriptor.prepare||!descriptor.plan||!descriptor.normalizeExportSettings))throw std::invalid_argument("Writable formats require preparation, planning and settings validation");
     for(auto& extension:descriptor.extensions) {
         if(extension.size()<2||extension.front()!='.'||extension.find_first_of("/\\ \t")!=std::string::npos)
             throw std::invalid_argument("Invalid asset format extension");

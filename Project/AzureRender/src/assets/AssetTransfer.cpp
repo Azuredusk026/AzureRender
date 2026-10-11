@@ -3,6 +3,7 @@
 #include "assets/model/ModelFormatAdapter.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include "assets/audio/AudioCodec.hpp"
+#include "assets/AssetExportJob.hpp"
 #include <array>
 #include <fstream>
 #include <sstream>
@@ -81,7 +82,12 @@ const AssetFormatRegistry& assetFormatRegistry() {
                 const std::string prefix(bytes.begin(),bytes.end());
                 return prefix.find('{')!=std::string::npos&&prefix.find("\"asset\"")!=std::string::npos&&prefix.find("\"version\"")!=std::string::npos;
             };
-            format.prepare=prepareGltf;result.add(std::move(format));
+            format.canWrite=true;
+            format.plan=inspectModelExport;format.normalizeExportSettings=normalizeModelExportSettings;
+            format.exportSettingsSchema={{"type","object"},{"properties",nlohmann::json::object()},{"additionalProperties",false}};
+            format.prepare=[](const AssetTransferRequest& request,const AssetCancellation& cancel){
+                return request.operation==AssetTransferOperation::Export?prepareModelExport(request,cancel):prepareGltf(request,cancel);
+            };result.add(std::move(format));
         }
         registerModelFormats(result);registerImageFormats(result);registerAudioFormats(result);return result;
     }();return registry;
@@ -90,13 +96,17 @@ AssetTransferReport prepareAssetCopy(const AssetTransferRequest& request,const A
     AssetTransferReport report;report.entry=request.source.filename();
     copyInput(request.source,request.staging/report.entry,request,report,cancelled);return report;
 }
+std::string assetTransferFingerprint(const std::filesystem::path& path,const AssetCancellation& cancelled){return fingerprint(path,cancelled);}
 AssetTransferReport prepareAssetTransfer(const AssetTransferRequest& request,const AssetFormatRegistry& registry,const AssetCancellation& cancelled) {
     check(cancelled);
+    if(request.operation==AssetTransferOperation::ExportPlan)return planAssetExport(request,registry,cancelled);
+    if(request.scene&&request.operation!=AssetTransferOperation::Export)throw std::invalid_argument("Scene selection belongs to export requests");
     const auto& format=request.formatId.empty()?registry.detect(request.source):registry.require(request.formatId);
     if(request.settingsVersion!=format.settingsVersion||!request.settings.is_object()||request.maxSourceBytes==0)
         throw std::invalid_argument("Unsupported asset transfer settings or budget");
     if(request.operation==AssetTransferOperation::Export||request.operation==AssetTransferOperation::ExportPlan) {
         if(!format.canWrite)throw std::invalid_argument("Asset format does not support export");
+        if(registry.detect(request.source).domain!=format.domain)throw std::invalid_argument("Export source and target domains differ");
     } else {
         if(!format.canRead||registry.detect(request.source).id!=format.id)throw std::invalid_argument("Asset content differs from the requested format");
     }
@@ -108,12 +118,17 @@ AssetTransferReport prepareAssetTransfer(const AssetTransferRequest& request,con
     // The caller supplies a unique task directory. Preparation owns only the directory it creates.
     if(!std::filesystem::create_directories(request.staging))throw std::runtime_error("Cannot acquire asset staging directory");
     try {
+        const auto exporting=request.operation==AssetTransferOperation::Export;
+        std::string sourceHash;
+        if(exporting){if(std::filesystem::file_size(request.source)>request.maxSourceBytes)throw std::invalid_argument("Export source exceeds its byte budget");sourceHash=fingerprint(request.source,cancelled);}
         auto report=format.prepare(request,cancelled);check(cancelled);
+        if(exporting){if(fingerprint(request.source,cancelled)!=sourceHash)throw std::runtime_error("Export source changed during preparation");report.sourceFingerprints[request.source]=sourceHash;report.generation.inputHashes[request.source.filename().generic_u8string()]=sourceHash;}
         report.formatId=format.id;report.settingsVersion=request.settingsVersion;report.settings=request.settings;
         report.staging=request.staging;report.destination=request.destination;
-        report.generation.generatorId="azure."+format.id+"-import";report.generation.generatorVersion=format.generatorVersion;
+        report.generation.generatorId="azure."+format.id+(exporting?"-export":"-import");report.generation.generatorVersion=format.generatorVersion;
         report.generation.licenseSource="LicenseRef-External-Asset";
         report.generation.parametersHash=generationHash(nlohmann::json{{"filename",request.source.filename().generic_u8string()},{"settings",request.settings},{"settingsVersion",request.settingsVersion},{"generatorVersion",format.generatorVersion}}.dump());
+        if(request.scene)report.generation.parametersHash=generationHash(report.generation.parametersHash+report.summary.at("scene").dump());
         if(report.outputs.empty()||!within(report.staging/report.entry,report.staging))throw std::runtime_error("Asset adapter produced an invalid entry");
         for(const auto& path:report.outputs)if(path.is_absolute()||!within(report.staging/path,report.staging)||!std::filesystem::is_regular_file(report.staging/path))throw std::runtime_error("Asset adapter produced an invalid output");
         report.summary["generation"]=GenerationManifest::fromJson(report.generation.toJson()).toJson();return report;
@@ -123,17 +138,24 @@ void discardAssetTransfer(AssetTransferReport& report) noexcept {
     if(report.staging.empty())return;
     std::error_code error;std::filesystem::remove_all(report.staging,error);report.staging.clear();
 }
-std::filesystem::path publishAssetTransfer(AssetTransferReport& report,const AssetCancellation& cancelled) {
+std::filesystem::path publishAssetTransfer(AssetTransferReport& report,const AssetCancellation& cancelled,bool replaceExisting) {
+    std::filesystem::path backup;
     try {
         check(cancelled);
-        if(report.staging.empty()||std::filesystem::exists(report.destination))throw std::runtime_error("Asset destination is occupied or staging is unavailable");
+        if(report.staging.empty()||(std::filesystem::exists(report.destination)&&!replaceExisting))throw std::runtime_error("Asset destination is occupied or staging is unavailable");
+        if(replaceExisting&&report.generation.generatorId.find("-export")==std::string::npos)throw std::invalid_argument("Replacement is reserved for explicit export publication");
         for(const auto& pair:report.sourceFingerprints)if(fingerprint(pair.first,cancelled)!=pair.second)throw std::runtime_error("Asset source changed before publication");
         for(const auto& path:report.outputs) {
             const auto expected=report.generation.outputHashes.find(path.generic_u8string());
             if(expected==report.generation.outputHashes.end()||fingerprint(report.staging/path,cancelled)!=expected->second)throw std::runtime_error("Asset output changed before publication");
         }
         check(cancelled);std::filesystem::create_directories(report.destination.parent_path());
-        std::filesystem::rename(report.staging,report.destination);report.staging.clear();return report.destination/report.entry;
+        if(std::filesystem::exists(report.destination)){
+            if(!std::filesystem::is_directory(report.destination)||std::filesystem::is_symlink(report.destination))throw std::invalid_argument("Export replacement requires a regular directory");
+            backup=report.staging;backup+=".backup";if(std::filesystem::exists(backup))throw std::runtime_error("Export backup directory is occupied");std::filesystem::rename(report.destination,backup);}
+        try{check(cancelled);std::filesystem::rename(report.staging,report.destination);}
+        catch(...){if(!backup.empty()&&std::filesystem::exists(backup))std::filesystem::rename(backup,report.destination);throw;}
+        report.staging.clear();if(!backup.empty()){std::error_code error;std::filesystem::remove_all(backup,error);if(error)report.warnings.push_back("Published output retains its previous directory at "+backup.u8string());}return report.destination/report.entry;
     } catch(...) {discardAssetTransfer(report);throw;}
 }
 }

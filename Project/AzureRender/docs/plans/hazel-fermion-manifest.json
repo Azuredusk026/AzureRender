@@ -1254,7 +1254,7 @@
     "p6AutomaticComplete": true,
     "p6AutomaticEvidence": "docs/acceptance/p6/automatic-2026-10-12/manifest.json",
     "formalPerformanceEvidence": "docs/acceptance/p5/closure/automatic-resume.md",
-    "currentAutomaticPhase": "G21",
+    "currentAutomaticPhase": "U17",
     "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json"
   }
 }

@@ -75,6 +75,7 @@ find_package(WebP CONFIG REQUIRED)
 find_package(FLAC CONFIG REQUIRED)
 find_package(Vorbis CONFIG REQUIRED)
 find_package(mp3lame CONFIG REQUIRED)
+find_package(ZLIB REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
@@ -310,12 +311,15 @@ add_library(AzureRenderCore STATIC
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
+    src/assets/image/ImageEncoder.cpp
     src/assets/image/ImageFormatAdapter.cpp
     src/assets/audio/AudioCodec.cpp
+    src/assets/audio/AudioEncoder.cpp
     src/assets/audio/AudioFormatAdapter.cpp
     src/runtime/MiniaudioImpl.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
+    src/assets/AssetExportJob.cpp
     src/assets/model/ModelFormatAdapter.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/ResourceAccessProfile.cpp
@@ -517,7 +521,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
-target_link_libraries(AzureRenderCore PRIVATE assimp::assimp TIFF::TIFF WebP::webp)
+target_link_libraries(AzureRenderCore PRIVATE assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -1128,7 +1132,7 @@ if(BUILD_TESTING)
     target_include_directories(
         AzureRenderExtensionRegistryTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(
-        AzureRenderExtensionRegistryTests PRIVATE Vulkan::Vulkan)
+        AzureRenderExtensionRegistryTests PRIVATE Vulkan::Vulkan nlohmann_json::nlohmann_json)
     add_test(
         NAME AzureRender.ExtensionRegistry
         COMMAND AzureRenderExtensionRegistryTests)
@@ -1484,7 +1488,9 @@ endif()
 set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT AzureRender)
 
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
-install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+add_executable(AzureAssetExchange tools/asset-exchange/main.cpp)
+target_link_libraries(AzureAssetExchange PRIVATE AzureRenderCore AzurePlatform)
+install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler AzureAssetExchange RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/contracts/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/contracts")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
@@ -1950,6 +1956,7 @@ install(FILES docs/runtime/image-format-import.md DESTINATION "${CMAKE_INSTALL_D
 install(FILES docs/licenses/image-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES docs/licenses/audio-codecs-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(FILES docs/runtime/audio-format-import.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES docs/runtime/asset-exchange.md DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 
 if(BUILD_TESTING)
     add_executable(AzureAudioCodecTests tests/AudioCodecTests.cpp)
@@ -1960,4 +1967,14 @@ if(BUILD_TESTING)
     target_link_libraries(AzureEditorAudioWorkflowTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.AudioWorkflow COMMAND AzureEditorAudioWorkflowTests "${CMAKE_CURRENT_BINARY_DIR}/audio-codec-fixtures")
     set_tests_properties(AzureEditor.AudioWorkflow PROPERTIES FIXTURES_REQUIRED AudioCodecFixtures)
+    add_executable(AzureAssetRoundTripTests tests/AssetRoundTripTests.cpp)
+    add_test(NAME AzureTools.AssetExchange COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_asset_exchange.py" "$<TARGET_FILE:AzureAssetExchange>"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g19/evidence/2026-10-12/image-fixtures/alpha.png")
+    target_link_libraries(AzureAssetRoundTripTests PRIVATE AzureRenderCore assimp::assimp)
+    add_test(NAME AzureAssets.RoundTrip COMMAND AzureAssetRoundTripTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/test_model.gltf"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g19/evidence/2026-10-12/image-fixtures"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g20/evidence/2026-10-12/audio-fixtures"
+        "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g18/evidence/2026-10-12/converted-fixtures/fbx-target/animated.glb")
 endif()

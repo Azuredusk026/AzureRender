@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "unchangedSinceG18": [
+    "src/app/AzureRenderApp.cpp",
+    "src/app/AzureRenderApp.hpp",
+    "src/app/AzureRenderCapture.cpp",
+    "src/app/AzureRenderSupport.cpp",
+    "src/editor/commands/EditService.cpp",
+    "src/editor/commands/EditService.hpp",
+    "src/runtime/EngineSettings.cpp",
+    "tests/EngineSettingsTests.cpp",
+    "tests/PipelineInspectionTests.cpp",
+    "tools/run_playable_long_run.py",
+    "tools/run_playable_performance.py",
+    "tools/test_level_player.py",
+    "tools/test_validation_protocol.py"
+  ],
+  "initialUserEditsPreserved": true
+}

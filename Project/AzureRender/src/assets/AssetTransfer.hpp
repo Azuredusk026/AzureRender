@@ -3,9 +3,11 @@
 #include "assets/GenerationManifest.hpp"
 #include <cstdint>
 #include <nlohmann/json.hpp>
+#include <memory>
 
 namespace azurerender {
 enum class AssetTransferOperation { Import, Reimport, ExportPlan, Export };
+struct ModelExportScene;
 struct AssetTransferRequest {
     AssetTransferOperation operation=AssetTransferOperation::Import;
     std::string formatId;
@@ -13,6 +15,7 @@ struct AssetTransferRequest {
     unsigned settingsVersion=1;
     std::uint64_t maxSourceBytes=512ULL*1024*1024;
     nlohmann::json settings=nlohmann::json::object();
+    std::shared_ptr<const ModelExportScene> scene;
 };
 struct AssetTransferReport {
     std::string formatId;
@@ -30,6 +33,8 @@ AssetTransferReport prepareAssetTransfer(const AssetTransferRequest& request,
 AssetTransferReport prepareAssetCopy(const AssetTransferRequest& request,
     const AssetCancellation& cancelled);
 std::filesystem::path publishAssetTransfer(AssetTransferReport& report,
-    const AssetCancellation& cancelled={});
+    const AssetCancellation& cancelled={},bool replaceExisting=false);
 void discardAssetTransfer(AssetTransferReport& report) noexcept;
+std::string assetTransferFingerprint(const std::filesystem::path& path,
+    const AssetCancellation& cancelled={});
 }

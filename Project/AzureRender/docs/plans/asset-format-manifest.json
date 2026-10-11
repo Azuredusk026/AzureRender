@@ -59,17 +59,18 @@
     {
       "id": "G21",
       "summary": "通用导出与往返验证",
-      "status": "Active",
+      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
       "dependsOn": [
         "G20"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
-      "automaticComplete": false
+      "automaticComplete": true,
+      "evidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "U17",
       "summary": "导入导出与重导入体验",
-      "status": "Planned",
+      "status": "Active",
       "dependsOn": [
         "G21"
       ],
@@ -226,46 +227,51 @@
       "id": "gltf",
       "domain": "model",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": false,
       "settingsVersion": 1,
-      "generatorVersion": 1
+      "generatorVersion": 1,
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "glb",
       "domain": "model",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": false,
       "settingsVersion": 1,
-      "generatorVersion": 1
+      "generatorVersion": 1,
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "obj",
       "domain": "model",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": true,
       "settingsVersion": 1,
-      "generatorVersion": 1
+      "generatorVersion": 1,
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "stl",
       "domain": "model",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": true,
       "settingsVersion": 1,
-      "generatorVersion": 1
+      "generatorVersion": 1,
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "ply",
       "domain": "model",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": true,
       "settingsVersion": 1,
-      "generatorVersion": 1
+      "generatorVersion": 1,
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "dae",
@@ -289,11 +295,12 @@
       "id": "wav",
       "domain": "audio",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": false,
       "settingsVersion": 1,
       "generatorVersion": 1,
-      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json",
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "mp3",
@@ -309,21 +316,23 @@
       "id": "flac",
       "domain": "audio",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": false,
       "settingsVersion": 1,
       "generatorVersion": 1,
-      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json",
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     },
     {
       "id": "vorbis",
       "domain": "audio",
       "read": true,
-      "write": false,
+      "write": true,
       "transformsSource": false,
       "settingsVersion": 1,
       "generatorVersion": 1,
-      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json",
+      "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
     }
   ]
 }

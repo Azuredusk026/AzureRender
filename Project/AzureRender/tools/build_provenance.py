@@ -19,6 +19,9 @@ def product_paths(build_dir, configuration):
     suffix = ".exe" if __import__("os").name == "nt" else ""
     products=[prefix / (name + suffix) for name in
         ("AzureRender", "AzurePlayer", "AzureMetaGen", "AzureGeometryCompiler")]
+    exchange=prefix / ("AzureAssetExchange" + suffix)
+    if exchange.is_file():
+        products.append(exchange)
     cache=build_dir/'CMakeCache.txt'
     if cache.is_file() and 'AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE:BOOL=ON' in cache.read_text(encoding='utf-8'):
         products += [build_dir/'managed'/name for name in (

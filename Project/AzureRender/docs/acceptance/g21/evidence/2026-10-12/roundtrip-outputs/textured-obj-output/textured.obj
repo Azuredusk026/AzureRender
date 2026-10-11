@@ -1,0 +1,22 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v6.0.0)
+
+mtllib textured.mtl
+
+# 3 vertex positions
+v 0 0 0
+v 2 0 0
+v 0 3 0
+
+# 3 UV coordinates
+vt 0 0 0
+vt 1 0 0
+vt 0 1 0
+
+# 0 vertex normals
+
+# Mesh 'defaultobject' with 1 faces
+g defaultobject
+usemtl Surface
+f  1/1 2/2 3/3
+

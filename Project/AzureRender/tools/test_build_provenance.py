@@ -65,6 +65,21 @@ class ProvenanceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "AzureGeometryCompiler"):
                 build_provenance.verify(root, manifest)
 
+    def test_exchange_tool_tampering_is_rejected(self):
+        import os
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            tool=root/('AzureAssetExchange.exe' if os.name=='nt' else 'AzureAssetExchange')
+            tool.write_bytes(b'original exchange')
+            products=build_provenance.product_paths(root,'Release')
+            self.assertIn(tool,products)
+            for product in products:
+                if not product.exists():product.write_bytes(b'compiled executable')
+            manifest=build_provenance.describe(root,products)
+            tool.write_bytes(b'altered exchange')
+            with self.assertRaisesRegex(ValueError,'AzureAssetExchange'):
+                build_provenance.verify(root,manifest)
+
     def test_rejects_changed_source_and_binary(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

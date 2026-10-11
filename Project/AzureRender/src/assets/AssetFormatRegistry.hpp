@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 namespace azurerender {
 enum class AssetDomain { Model, Image, Audio };
@@ -18,6 +19,9 @@ struct AssetFormatDescriptor {
     bool canRead=false, canWrite=false, transformsSource=false;
     std::function<bool(const std::vector<unsigned char>&)> probe;
     std::function<AssetTransferReport(const AssetTransferRequest&,const AssetCancellation&)> prepare;
+    std::function<AssetTransferReport(const AssetTransferRequest&,const AssetCancellation&)> plan;
+    std::function<nlohmann::json(const nlohmann::json&)> normalizeExportSettings;
+    nlohmann::json exportSettingsSchema=nlohmann::json::object();
 };
 class AssetFormatRegistry {
 public:
