@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+帧调度候选的回归与范围见[机制验收](docs/acceptance/p5/closure/frame-pacing.md)。
+人工待项在 P8 复核，正式 GPU 门禁等待空闲环境。
+
 正式测量使用运行期间的周期设备观察。
 范围与证据见[环境观察验收](docs/acceptance/p5/closure/run-environment-monitor.md)。
 
