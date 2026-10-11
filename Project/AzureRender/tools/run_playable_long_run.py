@@ -11,6 +11,7 @@ import subprocess
 import time
 from build_game import verify_package, digest
 from run_playable_performance import stats
+from gpu_environment import environment_errors,snapshot,wait_and_record
 
 
 def periodic_statistics(rows,warm_frame):
@@ -24,6 +25,7 @@ def periodic_statistics(rows,warm_frame):
 
 
 def evaluate(data, formal=True):
+    assert not environment_errors(data.get('environment')), 'Device environment is missing or invalid'
     assert data['realTime'] and data['actualSeconds'] >= (1800 if formal else 0), 'Real 30-minute run required'
     assert data['frames'] > 0 and data['exitCode'] == 0 and data['released'], 'Normal exit and release required'
     assert not data['validationErrors'] and not data['scriptErrors'] and not data['presentationErrors'] and not data['loadErrors'], 'Runtime errors'
@@ -135,7 +137,7 @@ def process_memory(pid):
     finally:kernel.CloseHandle(handle)
 
 
-def run(package,output,seconds=1800,probe=False,*,scenario=None):
+def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utilization=10):
     package=package.resolve();output=output.resolve();output.mkdir(parents=True,exist_ok=True)
     assert os.name=='nt' and seconds >= (15 if probe else 1800)
     verify_package(package)
@@ -150,6 +152,8 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None):
         (output/'input.json').write_text(json.dumps(dict(schemaVersion=1,actions=actions)),encoding='utf-8')
     timing=output/'timing.json';runtime=output/'runtime.json'
     assert not timing.exists(), 'Use a fresh evidence directory'
+    environment_path=output/'environment.json'
+    environment=wait_and_record(environment_path,policy=dict(maxIdleUtilization=max_idle_utilization))
     env=isolated_environment()
     if scenario:env.update(scenario.environment())
     command=[str(package/'bin/AzurePlayer.exe'),'--project',str(package/'game/project.azureproject'),
@@ -215,6 +219,8 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None):
                 else:process.kill();process.wait()
             (output/'observation.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
             if scenario:scenario.close()
+    environment['final']=snapshot()
+    environment_path.write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     # The final flushed CSV is authoritative, including shutdown frames.
     import csv
     with csv_path.open(encoding='utf-8') as stream:all_gpu=[float(row['frameMs']) for row in csv.DictReader(stream)]
@@ -232,7 +238,7 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None):
     if scenario is None:assert len(commits)==switches+restarts, (len(commits),switches,restarts)
     log=(output/'stdout.log').read_text(encoding='utf-8')+'\n'+(output/'stderr.log').read_text(encoding='utf-8')
     cpu=data['cpuFrame']
-    summary=dict(status='measured',actualSeconds=actual,realTime='--fixed-frame-step' not in command,
+    summary=dict(status='measured',environment=environment,actualSeconds=actual,realTime='--fixed-frame-step' not in command,
         exitCode=process.returncode,frames=data['samples'],switches=switches,restarts=restarts,commits=len(commits),
         validationErrors=log.count('Validation Error')+log.count('VUID-'),released='Allocator after unload: buffers=0 images=0' in log,
         scriptErrors=game['scriptErrors'],presentationErrors=game['presentationErrors'],loadErrors=sorted(set(row['loadError'] for row in resources if row['loadError'])),
@@ -298,8 +304,9 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--package',required=True,type=Path)
     parser.add_argument('--output',required=True,type=Path);parser.add_argument('--seconds',type=float,default=1800)
     parser.add_argument('--probe',action='store_true');parser.add_argument('--reanalyse',action='store_true')
-    parser.add_argument('--provenance',type=Path);args=parser.parse_args()
+    parser.add_argument('--provenance',type=Path)
+    parser.add_argument('--max-idle-gpu-utilization',type=float,default=10);args=parser.parse_args()
     if args.reanalyse:
         if not args.provenance:parser.error('--reanalyse requires --provenance')
         reanalyse(args.package,args.output,args.provenance)
-    else:run(args.package,args.output,args.seconds,args.probe)
+    else:run(args.package,args.output,args.seconds,args.probe,max_idle_utilization=args.max_idle_gpu_utilization)

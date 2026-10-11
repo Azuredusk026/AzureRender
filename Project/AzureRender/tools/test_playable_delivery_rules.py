@@ -5,6 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from run_playable_long_run import evaluate, inputs, periodic_statistics
+from test_performance_budget import passing_round
 
 
 class DeliveryRules(unittest.TestCase):
@@ -31,7 +32,7 @@ class DeliveryRules(unittest.TestCase):
         self.assertEqual(held,set())
 
     def valid(self):
-        return dict(actualSeconds=1801,realTime=True,frames=108000,exitCode=0,
+        return dict(environment=passing_round()['environment'],actualSeconds=1801,realTime=True,frames=108000,exitCode=0,
             validationErrors=0,released=True,scriptErrors=[],presentationErrors=[],loadErrors=[],
             switches=12,restarts=12,windowChecks=dict(minimized=True,restored=True,resized=True,finalExtent=[1920,1080]),
             gpu=dict(p95=4),cpu=dict(p95=3),physics=dict(p95=1),
@@ -42,6 +43,12 @@ class DeliveryRules(unittest.TestCase):
 
     def test_valid_real_time_delivery(self):
         evaluate(self.valid())
+
+    def test_thermal_environment_is_required_for_long_run(self):
+        data=self.valid();del data['environment']
+        with self.assertRaises(AssertionError):evaluate(data)
+        data=self.valid();data['environment']['final']['thermalSlowdown']['software']=True
+        with self.assertRaises(AssertionError):evaluate(data)
 
     def test_duration_cannot_be_replaced_by_simulated_frames(self):
         for field,value in (('actualSeconds',1799),('realTime',False)):

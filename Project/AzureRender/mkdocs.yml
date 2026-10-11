@@ -31,6 +31,8 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 设备环境测量验收: acceptance/p5/closure/device-environment.md
+  - 设备环境测量计划: plans/2026-10-11-performance-environment.md
   - 资产缓存并发验收: acceptance/u16/cache-publication.md
   - 资产缓存发布计划: plans/2026-10-11-cache-publication.md
   - 平台界面缓冲驻留: acceptance/p5/closure/ui-residency.md

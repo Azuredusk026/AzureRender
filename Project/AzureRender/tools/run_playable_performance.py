@@ -13,6 +13,7 @@ import time
 from create_playable_project import create
 from test_independent_animation_gpu import component
 from performance_budget import BUDGETS, validate_round, working_set_growth
+from gpu_environment import snapshot,wait_and_record
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -63,9 +64,7 @@ def fixture(root, stress=False, character=None):
 
 
 def thermal():
-    result=subprocess.run(['nvidia-smi','--query-gpu=temperature.gpu,driver_version,name','--format=csv,noheader,nounits'],capture_output=True,text=True,check=True)
-    fields=result.stdout.strip().split(',')
-    return dict(temperature=int(fields[0]),driver=fields[1].strip(),gpu=fields[2].strip())
+    return snapshot()
 
 
 def memory_snapshot(pid):
@@ -116,11 +115,10 @@ def freeze_products(source, player, editor):
     return {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 
 
-def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1800):
-    initial=thermal()
-    while initial['temperature']>55:
-        print(f"Cooling GPU: {initial['temperature']} C",flush=True)
-        time.sleep(10);initial=thermal()
+def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1800,max_idle_utilization=10):
+    environment_path=output.with_suffix('.environment.json')
+    environment=wait_and_record(environment_path,policy=dict(maxIdleUtilization=max_idle_utilization))
+    initial=dict(environment['startup'][-1]);initial.pop('seconds')
     timing=output.with_suffix('.json')
     if timing.exists():raise FileExistsError(timing)
     events=[]
@@ -153,6 +151,8 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
         finally:
             if process.poll() is None:process.kill();process.wait()
             output.with_suffix('.memory.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
+    environment['final']=snapshot()
+    environment_path.write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     if process.returncode:raise RuntimeError(f'Player failed: {process.returncode}, {output}')
     data=json.loads(timing.read_text(encoding='utf-8'))
     assert data['sceneTriangles']>0 and data['skinnedVertices']>0,'Scene complexity must survive renderer unload'
@@ -163,7 +163,7 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
     if len(cpu['workSamplesMs'][warmup:])!=samples:raise ValueError('Incomplete CPU measurement')
     physics=cpu['physicsSamplesMs'][sum(cpu['physicsStepCounts'][:warmup]):]
     result={'gpu':stats(gpu),'cpu':stats(cpu['workSamplesMs'][warmup:]),'wait':stats(cpu['waitSamplesMs'][warmup:]),
-            'physics':stats(physics),'initialDevice':initial,'peakWorkingSetBytes':peak,
+            'physics':stats(physics),'initialDevice':initial,'environment':environment,'peakWorkingSetBytes':peak,
             'allocator':data['allocator'],'submission':data['submission'], 'samples':samples,'warmup':warmup,
             'complexity':{key:data[key] for key in ('uniqueMeshes','sceneTriangles','skinnedVertices','transparentTriangles','jointCapacity','vertexCapacity')},
             'sceneExtent':[data['sceneWidth'],data['sceneHeight']]}
@@ -182,6 +182,7 @@ def main():
     parser.add_argument('--player',type=Path,required=True);parser.add_argument('--editor',type=Path,required=True)
     parser.add_argument('--character',type=Path);parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--exploration',type=Path);parser.add_argument('--platformer',type=Path)
+    parser.add_argument('--max-idle-gpu-utilization',type=float,default=10)
     args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=False)
     from build_provenance import inputs
     frozen_inputs=inputs(ROOT)
@@ -206,7 +207,8 @@ def main():
         for i in range(3):
             if editor:os.environ['AZURERENDER_EDITOR_CONFIG']=str(args.output.resolve()/f'editor-config-{i+1}')
             try:
-                result=run(args.editor if editor else args.player,folder/'project.azureproject',args.output/f'{name}-{i+1}',editor,stress)
+                result=run(args.editor if editor else args.player,folder/'project.azureproject',args.output/f'{name}-{i+1}',editor,stress,
+                    max_idle_utilization=args.max_idle_gpu_utilization)
             except Exception as error:
                 result={'passed':False,'errorType':type(error).__name__,'error':str(error)}
             results[name].append(result)

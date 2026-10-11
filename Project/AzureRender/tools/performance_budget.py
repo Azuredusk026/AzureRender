@@ -1,5 +1,6 @@
 """Strict P5 budgets; callers retain raw observations and every failure."""
 import math
+from gpu_environment import device_errors,environment_errors
 
 BUDGETS = dict(gpuP95Ms=16.6, playerCpuP95Ms=8, editorCpuP95Ms=10,
     physicsP95Ms=2, stableWorkingSetGrowth=.05,
@@ -32,7 +33,15 @@ def validate_round(result: dict, *, editor: bool) -> list[str]:
     allocator=result.get('allocator',{})
     bounded('deviceLocalPeakBytes',allocator.get('deviceLocalPeakBytes') if isinstance(allocator,dict) else None,1.5*1024**3)
     initial=result.get('initialDevice',{})
-    bounded('initial temperature',initial.get('temperature') if isinstance(initial,dict) else None,55)
+    errors.extend('initial environment: '+error for error in device_errors(initial))
+    errors.extend('device environment: '+error for error in environment_errors(result.get('environment')))
+    environment=result.get('environment')
+    if isinstance(environment,dict) and isinstance(environment.get('startup'),list) and environment['startup']:
+        recorded=environment['startup'][-1]
+        if isinstance(initial,dict) and isinstance(recorded,dict):
+            for field in ('temperature','thermalLimit','thermalMargin','relativeThermalThreshold',
+                          'targetTemperature','gpuUtilization','thermalSlowdown'):
+                if initial.get(field)!=recorded.get(field):errors.append('initial environment differs from raw startup: '+field)
     try:
         growth=working_set_growth(result.get('workingSetSamplesBytes',[]))
         bounded('stableWorkingSetGrowth',growth,.05)

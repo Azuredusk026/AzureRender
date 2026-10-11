@@ -232,5 +232,6 @@ class PlatformerScenario:
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--package',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);p.add_argument('--seconds',type=float,default=1800)
-    p.add_argument('--probe',action='store_true');a=p.parse_args()
-    run(a.package,a.output,a.seconds,a.probe,scenario=PlatformerScenario())
+    p.add_argument('--probe',action='store_true')
+    p.add_argument('--max-idle-gpu-utilization',type=float,default=10);a=p.parse_args()
+    run(a.package,a.output,a.seconds,a.probe,scenario=PlatformerScenario(),max_idle_utilization=a.max_idle_gpu_utilization)

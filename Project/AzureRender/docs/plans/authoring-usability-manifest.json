@@ -274,5 +274,95 @@
     "subjectiveAudioVerified": false,
     "authoringEfficiencyVerified": false,
     "priorWorkingSetCauseResolved": false
+  },
+  "deviceEnvironmentCandidate": {
+    "sourceHash": "32636fe8bc21a8208d6916c18ba71c6afe341b1a1eeb737b2d7109ba67e1c6a8",
+    "acceptance": "docs/acceptance/p5/closure/device-environment.md",
+    "currentCpuTests": 326,
+    "priorGpuTests": 130,
+    "priorGpuSourceHash": "b2af43f8a206f6edc16e30c259e41f6230fa64adf6b261e8fd7cbf4dec9b64c2",
+    "runtimeDependenciesByteEquivalent": true,
+    "deliveryChecks": 10,
+    "formalPerformancePassed": false,
+    "formalPassedRounds": 7,
+    "formalTotalRounds": 15,
+    "longRuns": {
+      "platformer": {
+        "status": "passed",
+        "actualSeconds": 1800.125,
+        "frames": 334401,
+        "workingSetGrowth": 0.005308961392426426
+      },
+      "standard": {
+        "status": "failed",
+        "actualSeconds": 1800.062,
+        "frames": 235480,
+        "workingSetGrowth": 0.013833662706254968
+      }
+    },
+    "packageHashes": {
+      "engine": "c241a800e61d0a93c10086bf30f4c1662eea0fe21bbc427acfb0018a96a4bcec",
+      "exploration": "cc18c51c070dbacde1b411612b251d3e8002ce6c91c91fc1d92e81fd0ab533e6",
+      "platformer": "c999569a80c377ea00cfa82f9a7d4fac02c90216f283a6910fcf373a5ea79bf5",
+      "scene_inspector": "26270ed70f6144063c82a44c772aa586b46a8eceef63b1a7e0b0a9b15c24b467",
+      "authored-exploration": "72cdbed545e4818dd5b3f9d5ba870c34cf7fc938daf0fd0aad917441fa5df80c",
+      "authored-inspection": "754729c2545273deb2c57bd5866ad48eb8a4083da4bfbfab4ab04c7ae13c1f7a"
+    },
+    "physicalInputVerified": false,
+    "subjectiveAudioVerified": false,
+    "authoringEfficiencyVerified": false,
+    "priorWorkingSetCauseResolved": false,
+    "captureComparison": {
+      "noCaptureObservationQualified": true,
+      "observedProcessCount": 15,
+      "comparisonPassedRounds": 10,
+      "sameSourcesProductsScenesAndBudgets": true,
+      "failedRounds": {
+        "standard-2": [
+          "SoftwareThermalSlowdownAtEnd"
+        ],
+        "standard-3": [
+          "SoftwareThermalSlowdownAtEnd"
+        ],
+        "editor-2": [
+          "WorkingSetGrowthOverBudget"
+        ],
+        "stress-2": [
+          "SoftwareThermalSlowdownAtEnd",
+          "WorkingSetGrowthOverBudget"
+        ],
+        "platformer-1": [
+          "SoftwareThermalSlowdownAtEnd"
+        ]
+      }
+    },
+    "additionalEntryProbes": {
+      "preview": {
+        "status": "passed",
+        "combinations": 4,
+        "roundsPerCombination": 1,
+        "warmup": 300,
+        "samples": 1800
+      },
+      "cinematic": {
+        "status": "failed",
+        "rounds": 3,
+        "framesPerRound": 300,
+        "gpuBudgetPassed": true,
+        "medianGpuMs": 18.696097,
+        "failedEndThermalRounds": [
+          2,
+          3
+        ]
+      }
+    }
+  },
+  "rejectedDeviceEnvironmentCandidate": {
+    "sourceHash": "3cdb6f659eda85ee63b4cd6bd0bde6ce94a8df2c2aa1324acbe599bb3d9eee7b",
+    "status": "RejectedThermalReferencePolicy",
+    "evidence": "docs/acceptance/p5/closure/rejected-environment-evidence/manifest.json",
+    "formalRounds": 15,
+    "originalPassedRounds": 6,
+    "longRunsExecuted": false
   }
 }

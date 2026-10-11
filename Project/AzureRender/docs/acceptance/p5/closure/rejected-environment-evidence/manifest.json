@@ -1,0 +1,1981 @@
+{
+  "status": "RejectedThermalReferencePolicy",
+  "reason": "T.Limit is relative telemetry and must be evaluated directly",
+  "schemaVersion": 1,
+  "sourceHash": "3cdb6f659eda85ee63b4cd6bd0bde6ce94a8df2c2aa1324acbe599bb3d9eee7b",
+  "currentCpuTests": 326,
+  "priorGpuTests": 130,
+  "associatedTotal": 456,
+  "priorGpuSourceHash": "b2af43f8a206f6edc16e30c259e41f6230fa64adf6b261e8fd7cbf4dec9b64c2",
+  "deliveryChecks": 10,
+  "formalRounds": 15,
+  "formalPassedRounds": 6,
+  "formalPerformancePassed": false,
+  "longRuns": {},
+  "physicalInputVerified": false,
+  "subjectiveAudioVerified": false,
+  "authoringEfficiencyVerified": false,
+  "priorWorkingSetCauseResolved": false,
+  "files": {
+    "method/acceptance-status.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/acceptance-status.json",
+      "originalBytes": 827,
+      "storedBytes": 264,
+      "originalSha256": "98bfd9eb26a2e7866ddf037ad68b6c4db78650c9b72929204937a29e9b59b82e",
+      "sha256": "e1709c9f1e36ec59f702ec9233544d4173f2133869c04206664a0914a1357983",
+      "compressed": true
+    },
+    "method/acceptance.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/acceptance.py",
+      "originalBytes": 4312,
+      "storedBytes": 1676,
+      "originalSha256": "2e8e939649e204bcc4fff5d2d4ee63a2f951ea2cefcfe694abbcb483583995c3",
+      "sha256": "0017357964ba0020a3dc063b8de3be40a47e44f6a9005f8f4b80fd5721dfa430",
+      "compressed": true
+    },
+    "method/analyze_working_sets.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/analyze_working_sets.py",
+      "originalBytes": 1423,
+      "storedBytes": 711,
+      "originalSha256": "6c7c12c459f56eaa165ed220565f66e74b8b9749694995bbcfccbf971b55d77d",
+      "sha256": "12bebb66a3dbb073aa8ef708e602ead2af50159ec32bf36abc30120a080e213c",
+      "compressed": true
+    },
+    "method/archive_evidence.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/archive_evidence.py",
+      "originalBytes": 4288,
+      "storedBytes": 1713,
+      "originalSha256": "ad5ba0489bbbfe41e300445d3d576ef5ca2f08668c051f1dee2861d3b1c2054c",
+      "sha256": "cb1d04a9ba6100b881bce1539f8506eea0fe2612c3ff8bdb08aa4c640b642f6a",
+      "compressed": true
+    },
+    "method/archive_rejected_candidate.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/archive_rejected_candidate.py",
+      "originalBytes": 4347,
+      "storedBytes": 1773,
+      "originalSha256": "ffdf33861d3a8c0c76fb39a2d9a4ae287f13437546296ae0aeb8b34a44694722",
+      "sha256": "03610dd7b97dd4672833930682d15a9d4f09ac045a04699f01bdc6a3ac62286c",
+      "compressed": true
+    },
+    "method/budget-green-final.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/budget-green-final.log",
+      "originalBytes": 115,
+      "storedBytes": 60,
+      "originalSha256": "72d81d7267291f77f96b52fab4b70a652d9051dcc912d781978829581b031b1b",
+      "sha256": "14a19f1eeed82a1230b76cd59155227ff70638378962e698fef9259529361b21",
+      "compressed": true
+    },
+    "method/budget-green.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/budget-green.log",
+      "originalBytes": 114,
+      "storedBytes": 60,
+      "originalSha256": "7fa2c3f39772ba088198b95aa567e627f67c3902377d56005c27e26c62e660a9",
+      "sha256": "94e34932200ef237c7ca3a24c726ca6e738e353a57dc07a19338b17af2f8d7a1",
+      "compressed": true
+    },
+    "method/budget-red.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/budget-red.log",
+      "originalBytes": 1617,
+      "storedBytes": 454,
+      "originalSha256": "f7bb7cd8d39954d0d80a279f26b2db84003b26fcd1fc1ca830406d63d986d143",
+      "sha256": "4c1753ee6e0b5972fe55e3aed5a0548c26e8e6ceca3312017fcac10d9ba69351",
+      "compressed": true
+    },
+    "method/build.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/build.log",
+      "originalBytes": 11529,
+      "storedBytes": 2091,
+      "originalSha256": "948d677cb9304a9f2ee857bb4ac3cd1312ac98b9719f9e69b37d653fce8eb05e",
+      "sha256": "f6b76d7f51790d99da29d779c3d333d200678d0c16d20e464975ac08e53fd360",
+      "compressed": true
+    },
+    "method/check_end_observation.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/check_end_observation.py",
+      "originalBytes": 1235,
+      "storedBytes": 566,
+      "originalSha256": "c5557d6ae569c7c4544788891dc067effe9efe4b4a10f09022b3be6bddc9ebdc",
+      "sha256": "540266760abf18c6b7806bd0241aa19f48f40b569f225e1467ec44a9978b5f3f",
+      "compressed": true
+    },
+    "method/collect_system_trace.ps1.gz": {
+      "source": "build/p5-device-environment-2026-10-11/collect_system_trace.ps1",
+      "originalBytes": 7831,
+      "storedBytes": 2492,
+      "originalSha256": "83603ce74fddc366210f0d874c9757f725d8e4a5a3b88455c5bf61e824d02d35",
+      "sha256": "47e125f47bf3e4c8496fa528743afc9327593ea7b0a3ab282699c58db6b1beb0",
+      "compressed": true
+    },
+    "method/create_operator_packet.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/create_operator_packet.py",
+      "originalBytes": 4697,
+      "storedBytes": 2340,
+      "originalSha256": "f7240948c6550d9ea3d33711b2ee56185014f85d0bda394affe8b189596e2afb",
+      "sha256": "449c8828cd269ec3714ea9645d68ee54512314608c6fa5f72e3522973b78cd06",
+      "compressed": true
+    },
+    "method/debug-cpu.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/debug-cpu.log",
+      "originalBytes": 21629,
+      "storedBytes": 3782,
+      "originalSha256": "32790fd07e29a9a96c3d7be0c59b3254287b9d5ae6d9ce7ecc2cf86372a9039c",
+      "sha256": "9ae716c8b21959f1fee1c16bb35683aa78989e9c6117e834fcd2eb077eb02601",
+      "compressed": true
+    },
+    "method/debug-provenance.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/debug-provenance.json",
+      "originalBytes": 150343,
+      "storedBytes": 52576,
+      "originalSha256": "2365193867d542d278a3865e5b0d80a244e88ec6bc063ebe81829678c16d1906",
+      "sha256": "d4906d45aab9044556e0780d9193a7f856d9a07a1df3797e6c72defec2d8b835",
+      "compressed": true
+    },
+    "method/delivery.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/delivery.log",
+      "originalBytes": 2325,
+      "storedBytes": 670,
+      "originalSha256": "0928ce35b8ba179cc18c03123dd7b1f82227c23a5ccfbbc44f959d3c52bd03b5",
+      "sha256": "02fcea5976b167f94ad28bad267001bf78983cedbafba2a874155333c2f849b9",
+      "compressed": true
+    },
+    "method/dependency-equivalence.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/dependency-equivalence.json",
+      "originalBytes": 21401,
+      "storedBytes": 6116,
+      "originalSha256": "211c184628eea19019f0314ff84f63a3868c61e7b63cf595602d28c0f4130001",
+      "sha256": "f656b8336d866cc8c85413b00bc4474ae4471111b12cb8e43c9639f3ddcdd7d2",
+      "compressed": true
+    },
+    "method/detached-launch.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/detached-launch.json",
+      "originalBytes": 191,
+      "storedBytes": 168,
+      "originalSha256": "224b43731e75978dc43548eff17f28c27610c1e2e16f1fb3685cf2ec4424bf45",
+      "sha256": "937e884689749fe00fb3b7d34a44a110c4e3a0c13084c3d78099e64bfc46fe64",
+      "compressed": true
+    },
+    "method/end-observation-check.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/end-observation-check.json",
+      "originalBytes": 203,
+      "storedBytes": 112,
+      "originalSha256": "3515963b8be053bad14f1812e1439c453e52297cc5e3ebed61457cbb8cc3ef2c",
+      "sha256": "6c9ee4d8720f46f80cd65a7795cc5fe2037af90de4e966d1b473f751670b66fc",
+      "compressed": true
+    },
+    "method/environment-green-final.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/environment-green-final.log",
+      "originalBytes": 114,
+      "storedBytes": 60,
+      "originalSha256": "05d70ee8f702c9c9501390c517a27899df0965abb89316d4ee938cd649985b84",
+      "sha256": "b6fad9ab37476898e69aa31fbacf9dbfce6c59d51eba0718456466e08a735b8e",
+      "compressed": true
+    },
+    "method/environment-green.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/environment-green.log",
+      "originalBytes": 112,
+      "storedBytes": 59,
+      "originalSha256": "aef01720f32f1a6cf9268a8b134d242ab554bcaed42337093573a84c2424883c",
+      "sha256": "cc8c76710d7abec4f1f4b44a64282de33efc4217b57e2e4349e2a4defbb99d78",
+      "compressed": true
+    },
+    "method/environment-red.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/environment-red.log",
+      "originalBytes": 7432,
+      "storedBytes": 856,
+      "originalSha256": "6ca4438f5e110d15cef6337e9d585c79fbfbac831187c9431d71947063bbe6c6",
+      "sha256": "544bc25d2b62dd5d6c7efe2706933c2d578e48e00b3713a5c31d050e45a03c7b",
+      "compressed": true
+    },
+    "method/formal-performance.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance.log",
+      "originalBytes": 4258,
+      "storedBytes": 1239,
+      "originalSha256": "cfad54a2d1494b1cecaf11642ae4dfb80baf1f8c83a7c1583ec32c678524bec2",
+      "sha256": "9de1fd8fbf05733264ab9d64cbaac51747a2ac031107c954291a63664c98f9ad",
+      "compressed": true
+    },
+    "method/identity-red.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/identity-red.log",
+      "originalBytes": 685,
+      "storedBytes": 319,
+      "originalSha256": "e338efa629b19d6904fbb28723971ef013e655527ce90b87155d321afd70a956",
+      "sha256": "b06ea0245491b463357cdd1ee1aaffbd8f7eed9797eea83370fd849bb950c75a",
+      "compressed": true
+    },
+    "method/inventory.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/inventory.log",
+      "originalBytes": 34,
+      "storedBytes": 52,
+      "originalSha256": "7b3392451f8b2db5e8e06c20bd300d8f423a9a7055d65cd69160df5d2dd9e671",
+      "sha256": "779fdf4cc3b81c460590a1a3afea70a9157c4903ec227e29ef868e80de2fd3b6",
+      "compressed": true
+    },
+    "method/inventory_regression.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/inventory_regression.py",
+      "originalBytes": 1879,
+      "storedBytes": 998,
+      "originalSha256": "684accc508ddce1c307dce829842903a6bbbaa1b229bf23789f02286ca25b3af",
+      "sha256": "0a8d0df75ace062a3568132b5d25fd3b5de23064168692e94d501e99892994c0",
+      "compressed": true
+    },
+    "method/longrun-red.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/longrun-red.log",
+      "originalBytes": 697,
+      "storedBytes": 311,
+      "originalSha256": "a0852e76933bcf5b676ac80c3c7bb1b275d3d08035d7cbc6fc585643bfb45161",
+      "sha256": "d4f1137c89484f33f110c23441e010af2cf9959ca91413a8e914bc27b55d3ee0",
+      "compressed": true
+    },
+    "method/native-environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/native-environment.json",
+      "originalBytes": 515662,
+      "storedBytes": 30448,
+      "originalSha256": "2e776b16d7cfe2335c802399b29740d4343f2d2f9ae853ef520e6b3305089d2a",
+      "sha256": "40b5eee1549ae466b2f9a40ab2056e71f74738c655d45bcca914ee31b4013c81",
+      "compressed": true
+    },
+    "method/owned-child.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/owned-child.json",
+      "originalBytes": 95,
+      "storedBytes": 107,
+      "originalSha256": "3bf8e007ab4641e19648a6e2731f8dc865ad04301e061498fbc27e7e40f2c25f",
+      "sha256": "7166c3387c13745cda77824d768a91f6a51d26018808a13db1a3858c9b9bbd64",
+      "compressed": true
+    },
+    "method/probe_remaining_entries.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/probe_remaining_entries.py",
+      "originalBytes": 1612,
+      "storedBytes": 786,
+      "originalSha256": "9734fa0ca82f65659764b2367397e0aef8fa10705b6e851d363e868088d7f74a",
+      "sha256": "9f630455798e961235cc8dd8088ea82774e076f862b46446c921f660e8226302",
+      "compressed": true
+    },
+    "method/rebuild.cmd.gz": {
+      "source": "build/p5-device-environment-2026-10-11/rebuild.cmd",
+      "originalBytes": 440,
+      "storedBytes": 263,
+      "originalSha256": "9fa0b193e7bb966e38bb2552cfddc2e96db94be097cd8230187731dbbbd65633",
+      "sha256": "3ccca5b051899a1393a1e1d9da694ae15b6cbfb3330aad7a3d20d621805c18fb",
+      "compressed": true
+    },
+    "method/regression-inventory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/regression-inventory.json",
+      "originalBytes": 18919,
+      "storedBytes": 2169,
+      "originalSha256": "127d42eba85168ed112243349f06d3135531d8c3840c2003e090a95ceee124a4",
+      "sha256": "d121e89a686d14177bbd7802e329f64546a85b559b05f98c6cfaef59d793b7fb",
+      "compressed": true
+    },
+    "method/regression-status.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/regression-status.json",
+      "originalBytes": 571,
+      "storedBytes": 271,
+      "originalSha256": "eca00487d2a6b81dc1c8c1cd3580c494f1cace7ece8af86509bad310261dd25d",
+      "sha256": "13191170c2ec321f67993e0064a7efe57193227b17272e2f0f40300d8933e7a0",
+      "compressed": true
+    },
+    "method/regression.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/regression.log",
+      "originalBytes": 80,
+      "storedBytes": 66,
+      "originalSha256": "1dcef84368d797f846c363a8124cefc657477fc33508c8bf464d9253f66dfe85",
+      "sha256": "c1349c51c65f559eef07da59042cce6624b5ef64bf230f4e68907cbd88f9ff2c",
+      "compressed": true
+    },
+    "method/regression.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/regression.py",
+      "originalBytes": 1844,
+      "storedBytes": 879,
+      "originalSha256": "6eea47786490c32a23d081b336018b6a49c51f3533332d2e7ff605a308468643",
+      "sha256": "519863f56a628545f0bbee2093b2786c86e516adcc4ad03da04b6eea963fd4b1",
+      "compressed": true
+    },
+    "method/release-cpu.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/release-cpu.log",
+      "originalBytes": 21633,
+      "storedBytes": 3780,
+      "originalSha256": "0acdc99d965326a35f9ebc54eb29fd9af476951b7bd1af4346c39f1630e853dc",
+      "sha256": "bea3b3eefcdefc59baa7d5372ba0dbc42a7134565a838c5574c4e0dd3652943d",
+      "compressed": true
+    },
+    "method/release-provenance.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/release-provenance.json",
+      "originalBytes": 147445,
+      "storedBytes": 51976,
+      "originalSha256": "107630e9394ef339bc4e454db4a8c0a14a7693e41629304f988e01f9b195d889",
+      "sha256": "c8c2a5166133f37bb2f62c23ae84ce35e14392d66eb088935ff596b5099a986b",
+      "compressed": true
+    },
+    "method/runner.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/runner.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "method/runner.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/runner.stdout.log",
+      "originalBytes": 275,
+      "storedBytes": 156,
+      "originalSha256": "3dfb738e68c44f3e566cb106e8553e4fd0a7b28e25bdba4143fced0c6235e7ae",
+      "sha256": "7d1e20d315c3611411682c90e28e8fcfa801385d6aa6eb9cd1e7d1c7f5dcbd09",
+      "compressed": true
+    },
+    "method/runtime-equivalence.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/runtime-equivalence.json",
+      "originalBytes": 1341,
+      "storedBytes": 337,
+      "originalSha256": "0209dd0d8c65cf7b3d0bf603a5a2d1507b9c1be4d6452b415e68b91a24c00588",
+      "sha256": "120c93387e238f394e1e299382c42752673f2a0499c189cdb8ba0d6e0aac2497",
+      "compressed": true
+    },
+    "method/scheduler-stopped.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/scheduler-stopped.json",
+      "originalBytes": 235,
+      "storedBytes": 203,
+      "originalSha256": "cb6653c899f4b5e3ad9f2e83184591518c697871300c4239d9b048cf46bb30ee",
+      "sha256": "1d19966428bddec0f76262e9a3479a69e7f8e943611c24386b394983382c1d61",
+      "compressed": true
+    },
+    "method/stage_environment_candidate.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/stage_environment_candidate.py",
+      "originalBytes": 3774,
+      "storedBytes": 1650,
+      "originalSha256": "ae5b51836bbf54a41b2ef0567cd84d8b6f070e929d5e53d98214a0addef07703",
+      "sha256": "5600ee7332e438d8d519e897e79d6d80f7a10d82d583ecc315d8de6c0f224257",
+      "compressed": true
+    },
+    "method/sync_documents.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/sync_documents.py",
+      "originalBytes": 8717,
+      "storedBytes": 3842,
+      "originalSha256": "398149fa315ca90e402eeabeca06f51480c2473ead984beb60ec769caa0d79af",
+      "sha256": "6da1de24269057dfbc9a91f2c94dc4661db1ae057d4d3ef1c4a3ba7e81d89a44",
+      "compressed": true
+    },
+    "method/verified_delivery.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/verified_delivery.py",
+      "originalBytes": 11387,
+      "storedBytes": 3993,
+      "originalSha256": "d76bd6cfa17f736f5f34e3a3c95842f7e894d721db9fad4e47207a1f1740138e",
+      "sha256": "c1b408f0aea03b62c2fb1da01964a0afb9f366a800e6fcaece1d49c3e1a4d8dc",
+      "compressed": true
+    },
+    "method/verify_environment_candidate.py.gz": {
+      "source": "build/p5-device-environment-2026-10-11/verify_environment_candidate.py",
+      "originalBytes": 6054,
+      "storedBytes": 2143,
+      "originalSha256": "62c3b2538970676353a9a9dd61e3f2ba1f7076e6ed0d56f9ac62baf8837395fe",
+      "sha256": "cb583358996c2b9f084e8adc7b78bd8d0fd937ecfd7e2441a2a0c98b23e8fb69",
+      "compressed": true
+    },
+    "method/working-set-observation-analysis.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/working-set-observation-analysis.json",
+      "originalBytes": 8999,
+      "storedBytes": 2090,
+      "originalSha256": "07cd8004e185eea5b4d5722b3549fe939326c2fc0d837fdecfbc4531261d2342",
+      "sha256": "0c33fde1dfd9c91a058dd3ca7b6f00b6c89f65d6b56c714908f88a1fbe1b388f",
+      "compressed": true
+    },
+    "formal-performance/editor-1.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 28519,
+      "originalSha256": "378d0dba1dc357ce6902b626343048017e63140e8e3f062b9e4e55cc28aefa78",
+      "sha256": "d8ced7e814f58e0ec135a56a19c1ac0c7452475fd54b18c74414806c7e618d7f",
+      "compressed": true
+    },
+    "formal-performance/editor-1.editor.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-1.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.environment.json",
+      "originalBytes": 589430,
+      "storedBytes": 34784,
+      "originalSha256": "304b7b6057c413a81b2806df0bc311244a52b91f9b8b60f7b96f54226b1d4de0",
+      "sha256": "44f7a7217c5134bba6d3f648ce4e6f267b841446aa37ff23b27efe82f6cceb5e",
+      "compressed": true
+    },
+    "formal-performance/editor-1.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-1.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.json",
+      "originalBytes": 125785,
+      "storedBytes": 31482,
+      "originalSha256": "c64a01a08b5d04e3c43e84589ca23d5cd0613ce03fbb5ef14e9ebb3dde5807b7",
+      "sha256": "7b7ffb0c8144c28c1f1e0b206dbc535761a7e8ca0d47cf47bf8f82d4d23fa8a6",
+      "compressed": true
+    },
+    "formal-performance/editor-1.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.memory.json",
+      "originalBytes": 22646,
+      "storedBytes": 1722,
+      "originalSha256": "80c9a5128ddb2e5f0c3f2dcff92e305b5369b9d99fb929b8938fd890a538aabd",
+      "sha256": "a7659643d1b05889c83aaeb8f4050bd4913b0ffb5ed3ae7d3447d70042af825b",
+      "compressed": true
+    },
+    "formal-performance/editor-1.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 365,
+      "originalSha256": "003ca0f1b06625a6c116659a149fab9fa282e1129ecefd37b202662bdf5038cc",
+      "sha256": "909d1312085ba3c0df0fbd6c7fa238b073c3a6496ab772c0707039816a93d7df",
+      "compressed": true
+    },
+    "formal-performance/editor-1.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-1.stdout.log",
+      "originalBytes": 2808,
+      "storedBytes": 1199,
+      "originalSha256": "1b4f5f94755dbf0cbcd2e5f59e45d9195a2b785bf1280ab28d829cb6e08ca8b4",
+      "sha256": "be4b28217666e2b88df98a67a26baebef2a9762320b42402ddfeaad4f40aa7e9",
+      "compressed": true
+    },
+    "formal-performance/editor-2.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 28789,
+      "originalSha256": "420a950555ed48073c92df0f82b41bb14bc670cb833542a46345c627ac69f58f",
+      "sha256": "7889d98539d356e96e7a44f33b3fcd46f0eacec3ae33b85d0386a6f01cf3ae9b",
+      "compressed": true
+    },
+    "formal-performance/editor-2.editor.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-2.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.environment.json",
+      "originalBytes": 589430,
+      "storedBytes": 34805,
+      "originalSha256": "3e09ae8dc78104c8c90232a63ecf00156882a3e89afefd494cd8422293ba7e6c",
+      "sha256": "639d303932a439b495df74bfb4d2f6a2e3343abf4ff67239a2e6313d683f3b43",
+      "compressed": true
+    },
+    "formal-performance/editor-2.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-2.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.json",
+      "originalBytes": 125571,
+      "storedBytes": 33078,
+      "originalSha256": "bc2041a0cc80e812819d3a0ca606346cdb4514dadedb15993acf9f637390bfbd",
+      "sha256": "96b0aa056023a2c5deb50404569c22e7436c4f432c595d44e7ef19a46e6564f0",
+      "compressed": true
+    },
+    "formal-performance/editor-2.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.memory.json",
+      "originalBytes": 21308,
+      "storedBytes": 1677,
+      "originalSha256": "34d2343ad2b424c8684be7c80584ab87f1ee7ef4d90a629ac81da490277857f0",
+      "sha256": "6132776534790c53446989479b315ed8cdc87c8f9e95861aaa9fb01bf9e45459",
+      "compressed": true
+    },
+    "formal-performance/editor-2.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 362,
+      "originalSha256": "b54c66c4459ac60453bdfee6ab8030480dc3f5073c232f8dd4c90945fc079885",
+      "sha256": "afb9833f80116f0d7f3813d3c5dd31c0e0467db5e050a3f2bc9f6f9ccfc4a90a",
+      "compressed": true
+    },
+    "formal-performance/editor-2.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-2.stdout.log",
+      "originalBytes": 2808,
+      "storedBytes": 1202,
+      "originalSha256": "6aa816990aac40a557d6d5f9777b2153d527e44d22a5e8095fd7db78a3707617",
+      "sha256": "ff8b425a41ca19f2fa0860b7e694b60ef16e57a2e93151c5678aa8f511968fd4",
+      "compressed": true
+    },
+    "formal-performance/editor-3.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 28733,
+      "originalSha256": "c76d3929ba9d454a32e4e59912605a3f5fecdb16ecbe83f494846e30c632b8eb",
+      "sha256": "f38596f1c22ffd432b8a953cc78df3ea72301305d38408343a8af725b0482797",
+      "compressed": true
+    },
+    "formal-performance/editor-3.editor.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.editor.json",
+      "originalBytes": 30,
+      "storedBytes": 50,
+      "originalSha256": "0ce29cf5eee0f4abcc0a0c71d0518ce2f56d3eb5e61f941e4b68e5f3ab3e7b1d",
+      "sha256": "54e322161c0d8cef14591e7aeb33d757488089a2b6e38dc345cc51df6654fd94",
+      "compressed": true
+    },
+    "formal-performance/editor-3.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.environment.json",
+      "originalBytes": 589417,
+      "storedBytes": 34771,
+      "originalSha256": "4be28545e13cd147a08da76a81433fafc651f78ac472db8e3ff9db5ddb79c734",
+      "sha256": "90ed1c5ad37cc85946a34d170d266aec20c31e5243df7a34da1072f78f77ecab",
+      "compressed": true
+    },
+    "formal-performance/editor-3.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/editor-3.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.json",
+      "originalBytes": 125679,
+      "storedBytes": 32769,
+      "originalSha256": "aa225a434da0d8e542ac7ef71e9a5a1f7b59a082bffb298eb7cffbab14058641",
+      "sha256": "63804f7418916115f26661ea845c7b591a5e9274e8212ffa566bb68009877f12",
+      "compressed": true
+    },
+    "formal-performance/editor-3.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.memory.json",
+      "originalBytes": 21041,
+      "storedBytes": 1534,
+      "originalSha256": "8501a4391266c47fa1fda134b7f7b7d0634312369b0932c6f95f928cb0a77c0c",
+      "sha256": "5690ddfae6d51cbf639e2e35245780b9aba4d2260137a1614b22cd1e2bd259c6",
+      "compressed": true
+    },
+    "formal-performance/editor-3.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.stderr.log",
+      "originalBytes": 1015,
+      "storedBytes": 363,
+      "originalSha256": "696650e6495a6f15a4be00294006c0c39f18ec0180b33ffe4e41cb375419b316",
+      "sha256": "29a2082358215b5808ebb931fad8d0aab817c6e8cb3aaace40aa5a2d3ad2f5f5",
+      "compressed": true
+    },
+    "formal-performance/editor-3.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/editor-3.stdout.log",
+      "originalBytes": 2808,
+      "storedBytes": 1201,
+      "originalSha256": "b324d3d96b782d73ccb1f0820129e3c13e64f0791376570eea4e42115e6c2b9c",
+      "sha256": "e954737f8b8827c034206d2440bbdf5a05f1444ba4f7ba7224b19dbb8d418af0",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.csv",
+      "originalBytes": 112429,
+      "storedBytes": 34130,
+      "originalSha256": "4f4ed1cb5de5e37ba335ae4bd032910eb40d41a6fa3d102dd4a5e279b3cbfbf6",
+      "sha256": "0db1c262bc2f857fdd808a3d85622e529b089d8d3cb951a333e718042763b49f",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.environment.json",
+      "originalBytes": 589438,
+      "storedBytes": 34770,
+      "originalSha256": "99a48cb5f232208c7d5fe583b573e6ddddf5b019d87969c3a144ebdfb0b06c88",
+      "sha256": "b9bf27e9010baac22e59b5c50b2c10858c277c4dac1268d459c386a010d6b4d4",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.json",
+      "originalBytes": 120807,
+      "storedBytes": 37278,
+      "originalSha256": "c08ae81cba64d23d6023681ff458b34ec888ee792e12dc474a293d98387ac976",
+      "sha256": "330c833d421f1f30a9f187b70451eb43e969386eed36ed1e779cdaec21a71612",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.memory.json",
+      "originalBytes": 65161,
+      "storedBytes": 3311,
+      "originalSha256": "4a3225e927ba967e43f61e933e1c80ed64e7951332e329a6557ffb23b3f945c7",
+      "sha256": "9f066c4ee3a031c395ee5f69c91ec1ef998f672b320830bd605a9d26be377212",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 254,
+      "originalSha256": "a93bdb8901df35836550cecbf9bd129594cbf822c97f02a0600db4125f57e52e",
+      "sha256": "3a9c0777e27f1a04db80358257a1ec260bf03a0494438b3354c5efd45dd7b227",
+      "compressed": true
+    },
+    "formal-performance/exploration-1.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-1.stdout.log",
+      "originalBytes": 2080,
+      "storedBytes": 1179,
+      "originalSha256": "f5e8157c9434260ca084fd5f364269693703665e587f40984caf3aea2f1e6544",
+      "sha256": "37a1895a9c7931b2aa566616418eea4c8d5173e037859bacd67b52b36bc59111",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.csv",
+      "originalBytes": 112482,
+      "storedBytes": 34894,
+      "originalSha256": "5110d153a8b88d54f98161a99c994148c90ca75cecf6711797315dec3b440130",
+      "sha256": "e1209e125b349af59b80c88bba0e1eb625f8404c603e79e7a4db21a7098ce8af",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.environment.json",
+      "originalBytes": 736729,
+      "storedBytes": 43245,
+      "originalSha256": "531b69032500aa6f9c618d8323280c3102ed0995e8a39502178c7d6caedb68a5",
+      "sha256": "1b27ca30de44883a29953cfe692900450880ce44ff982b546632cd7d32f36b48",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.json",
+      "originalBytes": 120835,
+      "storedBytes": 37556,
+      "originalSha256": "055001f3e88783a4819cafe1059660b3ed37929da42453aee8a485a09b0d7968",
+      "sha256": "bfead3cfd05d67f6bdab7d967e553289515d1db91655feddc9c966c45b3c5be8",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.memory.json",
+      "originalBytes": 65450,
+      "storedBytes": 3359,
+      "originalSha256": "8701399bef3f2411a7a8a3e3803d85fbb45b66463ad7bddb6ee7ded19d95f0cf",
+      "sha256": "8c44b746a59c828e570084dc3a483233eac3ec57ab212721bc1dede845af6ccd",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 254,
+      "originalSha256": "66dfe96703c2a6e62cbb6bcbdd7f78899a76a2f8b9182b50a088ee83830020f5",
+      "sha256": "0d2ab9fea826d1b726ef439eab5ffe33a64e8ba6c545f04c63622f1979de6c2d",
+      "compressed": true
+    },
+    "formal-performance/exploration-2.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-2.stdout.log",
+      "originalBytes": 2080,
+      "storedBytes": 1182,
+      "originalSha256": "f8bfc6bd69a5066cedda2ba1df5f77894457dbd12de5b972a5a6d85f5d51fd8f",
+      "sha256": "48a24955ac822e002f0124c6d0bec02fa12017cc6a0afb810fb55154819cc2f1",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.csv",
+      "originalBytes": 112428,
+      "storedBytes": 33833,
+      "originalSha256": "ddacb2035aaf421e70b610ca57b9159c7b4c2dbc0dfd8dc12cba6f1b7cfe9da6",
+      "sha256": "e34f94e69631297fd3552d4c3780140a9c4526fc1c697a1a07041afc257f70b7",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.environment.json",
+      "originalBytes": 589439,
+      "storedBytes": 34789,
+      "originalSha256": "fc109cbf367b9bb8fc84622e5496f065f7cefeb0b2e32bbf19a05bd813714b31",
+      "sha256": "3f478f2605fcaf431867ce632d2d44606da1abd3cf0552894d2a518a0acbf65b",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.json",
+      "originalBytes": 120735,
+      "storedBytes": 37366,
+      "originalSha256": "79fdd0cae6a91234c926d2877e9f49e98ec29e21229bf1a5947dc7613a3aa265",
+      "sha256": "6cfb1c7cf4cdac23ffee52f271e46ee87e5e565c8b5a6354d1409e24c47aa925",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.memory.json",
+      "originalBytes": 65720,
+      "storedBytes": 3307,
+      "originalSha256": "8f77911c56df55eb94e401ce57637a449b1f10f206dd3413bf4c4e928044e475",
+      "sha256": "ee19a34856345e633af77f2d03ab72c45878ea8d65063778b9bad97c1ce7523a",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 253,
+      "originalSha256": "da905adcbcc6fda142e76a171843a07b754dfef1680a9478e9dbf1bed4a6faa8",
+      "sha256": "c6714ee6ed45c45bc6882877a53efa45ed671c2556ed27bd57d6a76129a2de7f",
+      "compressed": true
+    },
+    "formal-performance/exploration-3.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/exploration-3.stdout.log",
+      "originalBytes": 2080,
+      "storedBytes": 1184,
+      "originalSha256": "c6e63fd9d2a8b89a8a30b7eaf0bd390f872bc6a32c5e68ef331b09c1dccb6fa0",
+      "sha256": "35fdb0dc5a813ea15f989857ee7e50edb7f550a68d0e5ab4ed1e005385b78913",
+      "compressed": true
+    },
+    "formal-performance/frozen-inputs.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/frozen-inputs.json",
+      "originalBytes": 128504,
+      "storedBytes": 48868,
+      "originalSha256": "71c8b708031e8335aea3dd0ce6d3ebd60b3777de52d1c73349afb96a3c0e6716",
+      "sha256": "6b28efbe746f422510379687e82ff5538579f5e4752e31cb73e06ea6f4964988",
+      "compressed": true
+    },
+    "formal-performance/partial.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/partial.json",
+      "originalBytes": 10174073,
+      "storedBytes": 619685,
+      "originalSha256": "21e33f2a4e2a698f98a14ea85786cba7dbb11e33f3613791e26e8f79f41b327e",
+      "sha256": "651ff9f60d638b9ec67e02c022735b953cae44457b1e12c61714c3a2e1812edc",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31314,
+      "originalSha256": "bee2cde06d687640b19b5240519b0ac11652d2c5718cc3e5eb2451d998e94994",
+      "sha256": "15c9b4815b826f3d6015a3e2abb896f764df14339a6a8f1a4e53c1356c5339ab",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.environment.json",
+      "originalBytes": 589450,
+      "storedBytes": 34798,
+      "originalSha256": "f2e34d6f6d0e3cc0f67f1b4829bb07e7a169a67d0b001d8309eea05fb2d8a604",
+      "sha256": "b322d9506177902cfe29cdbeb07d71273df229ee649b3d8ec087571df7ead0e8",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.json",
+      "originalBytes": 119748,
+      "storedBytes": 36015,
+      "originalSha256": "19082f0e8258a7420a7e6360826042856d457aa888352633f4071d21d2e0e5f8",
+      "sha256": "113b91a8c61c94f09931ab09534b7e2f05f2966a1922d56c68ce728ddb239f18",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.memory.json",
+      "originalBytes": 30354,
+      "storedBytes": 2131,
+      "originalSha256": "2acc0e7ed6292588b63fda665873e30b384145bb0eab712bc854d0ffca52c9b0",
+      "sha256": "b0788f3feab957b58acd642c191fcf05c3971207f8d1d1660aa6743a246ce489",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 253,
+      "originalSha256": "5678ecf8ceafb99efc31c7cd0c7786a2cc093e764ca29a71ed55083f846cf3b6",
+      "sha256": "8f287c6d4f168911708f2f4f4df7077ba7a44f6828ff8b5bc6f7fa3faaee6ccb",
+      "compressed": true
+    },
+    "formal-performance/platformer-1.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-1.stdout.log",
+      "originalBytes": 2074,
+      "storedBytes": 1183,
+      "originalSha256": "9a504498ccc68f7b125f6fa89f582cd23739f9baec18a23e8f6c87076b5feb93",
+      "sha256": "06543999a4ea3486808e943eb3c5e258beba356f5c999c617859417a4ea0823a",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.csv",
+      "originalBytes": 110249,
+      "storedBytes": 31632,
+      "originalSha256": "b99806f50c02fe9d7f5018608748113b5101ac640594baefc1ce963fcc541763",
+      "sha256": "d3bc41957789e93d2ddc800c134ee9e3cc1f69ea1045a613542910078daf5f25",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.environment.json",
+      "originalBytes": 589448,
+      "storedBytes": 34792,
+      "originalSha256": "b4a47020c18b97302c279b06751004431ec0d5ee9d4a35c5cdaabcaa61513c3a",
+      "sha256": "36baa302da084d1668f204ce5d65c55455ecefb0d9c9db4853f5cae26cabc945",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.json",
+      "originalBytes": 119755,
+      "storedBytes": 36348,
+      "originalSha256": "c72329f452defecab8ddc327a2562b8c362b2c8c3d8d1160aa0ad3e83a0748ba",
+      "sha256": "705cc3c80a005c1c344ef343272e6e5db0f7e055c01f55b75d874df1ddee19aa",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.memory.json",
+      "originalBytes": 30106,
+      "storedBytes": 1949,
+      "originalSha256": "6adb42b2510c1b32c253fcf6e403ce12d2dd33b283b46c1ac55097632977a441",
+      "sha256": "a9633841c4f26d5ab058ee1749501acc2e36bb9fd250d2ae61bf9773d7d5d315",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "a5d707c422dede29ba62ee99551c23dbf5b97f5fd757bfb919b9b61468c1a4bb",
+      "sha256": "502c4bc78308f0112882f9458f09b94c1f2affde736973dd14dd8d70cb52bbf3",
+      "compressed": true
+    },
+    "formal-performance/platformer-2.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-2.stdout.log",
+      "originalBytes": 2074,
+      "storedBytes": 1184,
+      "originalSha256": "d53530e5e9767db8ef37d69fb9241de236cd5e5bea010e681add2166ebb6fab5",
+      "sha256": "5e66c7f2ba42254f9f49fe9c999efe71cba44ea7af1f97ff8f25289f9ad95097",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.csv",
+      "originalBytes": 110249,
+      "storedBytes": 30208,
+      "originalSha256": "582919d861481816e069fa6e8c68fc6ef47cbd6ac7edb819e743d44658d7836d",
+      "sha256": "ead3776804038af740c861db463a99c344d37af197e84ae580662ebb0871fecd",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.environment.json",
+      "originalBytes": 589451,
+      "storedBytes": 34822,
+      "originalSha256": "a9bdb7151e9546ea1fe54cad5c25a0f99dfd98565eddb3b5401ead5a5ba46a95",
+      "sha256": "9c73afe0ef8412f1b071d7c52d95ae66ecb3676826dfe34909c6f52d9e75e245",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.json",
+      "originalBytes": 119784,
+      "storedBytes": 36020,
+      "originalSha256": "445416f170b7c50a5fce3fafc2188e41623fff2fe91e0e8c319f7c006c46ecdd",
+      "sha256": "35e348d92ebc00256b85cb8ae2958f505cb9d3265a21e556bbfb6913f5ce5728",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.memory.json",
+      "originalBytes": 29988,
+      "storedBytes": 1952,
+      "originalSha256": "86e9eb6ba3ee3dfe68f9cba78dddedb78815ef90c0a09e8952d03a51ad2d682c",
+      "sha256": "c223bacfbe16f4f3ecd1b190916b0bfbd0d5870e3474052f229eb767f81b3725",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.stderr.log",
+      "originalBytes": 394,
+      "storedBytes": 252,
+      "originalSha256": "4e1f6a8e89b11091af261e8f37b24e52d0667c78b8ca5226a4fe490c588009c0",
+      "sha256": "34d03b13cad8bfc81c831cc6c9f17dca2dfab9d8caa6a4edd9e839497ef04ff5",
+      "compressed": true
+    },
+    "formal-performance/platformer-3.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/platformer-3.stdout.log",
+      "originalBytes": 2074,
+      "storedBytes": 1181,
+      "originalSha256": "da25989a29f40e534a6e58cd20ae1edcdfdafc9ad9cb4e331c6bd5920088c24a",
+      "sha256": "ab492e2212b5501cb60334aa082829b43c05fb5c3319660aa09f785d7f3581dc",
+      "compressed": true
+    },
+    "formal-performance/standard-1.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.csv",
+      "originalBytes": 110250,
+      "storedBytes": 31334,
+      "originalSha256": "23f2bfc2e11857490b0a738f378024f74cf84f2c6c3ebf6a2a7cd4f41094f613",
+      "sha256": "1dc77d6e825b834c458f6cf9ebb15a6b690f53b15695a2bd387f8bd6fe11ad90",
+      "compressed": true
+    },
+    "formal-performance/standard-1.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.environment.json",
+      "originalBytes": 515680,
+      "storedBytes": 30481,
+      "originalSha256": "abdf3e929f9e97e814cf1474772865facb5c22d64c6531d1e948b900f0b6a3d5",
+      "sha256": "b6128157c9bbe7c4caabab08e7c638938113b0a37838446a67629494e58d5414",
+      "compressed": true
+    },
+    "formal-performance/standard-1.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-1.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.json",
+      "originalBytes": 118623,
+      "storedBytes": 36388,
+      "originalSha256": "d6c372142713c0ecc3d5acab7db42931cdcc215175111cc8604729fed321bca2",
+      "sha256": "a2136791e4893bdc1fed6a923a28035a524e8014ab01832e62fc0f3e148f5216",
+      "compressed": true
+    },
+    "formal-performance/standard-1.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.memory.json",
+      "originalBytes": 44231,
+      "storedBytes": 2747,
+      "originalSha256": "5c05229e3be7b0017990e47de164a3d63ab70340b087b1ddab565c854b56c9c5",
+      "sha256": "676b8f3a29cbfcfabc4a2269eb3144ac1f9d7e374fab220473425308cb2b1bd9",
+      "compressed": true
+    },
+    "formal-performance/standard-1.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 251,
+      "originalSha256": "4eaf5bdcb198463b30328306c24e8d024f29d6e85feb7ba6b36ed4ab5f808126",
+      "sha256": "852ca61512a99af4510642f15fa1aeb830f542ebb58b1d2cdb669ec0099fceba",
+      "compressed": true
+    },
+    "formal-performance/standard-1.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-1.stdout.log",
+      "originalBytes": 2072,
+      "storedBytes": 1184,
+      "originalSha256": "805d11e2f48645ad49257e31120b7e70be8bd7c71f3bd24e86c3f17a03785b13",
+      "sha256": "d15854ee481e20e5175878c3451e683fa790c6fd73a38afe2154a38957bb2203",
+      "compressed": true
+    },
+    "formal-performance/standard-2.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.csv",
+      "originalBytes": 110254,
+      "storedBytes": 31964,
+      "originalSha256": "421d976b64854c6af8a89096af249350328dcdce44506e63f877be6c57b62dfd",
+      "sha256": "140f54e2ff33a904214675983927de2a99d69de76e18298c21a81f6a2761a2af",
+      "compressed": true
+    },
+    "formal-performance/standard-2.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.environment.json",
+      "originalBytes": 589400,
+      "storedBytes": 34785,
+      "originalSha256": "521579a392f6a128f77d81a821625ece30de74bb9fa7a36ab132b255589975e0",
+      "sha256": "ac0d154b6a956957d093e6f5f25a877ed1dc9464d1bb233db41fef505883c3c8",
+      "compressed": true
+    },
+    "formal-performance/standard-2.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-2.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.json",
+      "originalBytes": 118678,
+      "storedBytes": 36872,
+      "originalSha256": "9a261f39a139f36a895f2a2d66f03cd2a2410828d9dae0484a470a7cd6653e65",
+      "sha256": "44554e5bc1fef25e89e89ce5e345b0cefbb8b0d7234b49ab9720e0c7e8a01db8",
+      "compressed": true
+    },
+    "formal-performance/standard-2.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.memory.json",
+      "originalBytes": 44608,
+      "storedBytes": 2509,
+      "originalSha256": "058cf86cef8485cf63ea1132b8748c2d09c1edd3d0ef328a94ed880882e3ab56",
+      "sha256": "e7ccf1f0d7e86153aad310fb026deb345c88de442e07a9f572fcfad721e8b720",
+      "compressed": true
+    },
+    "formal-performance/standard-2.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 253,
+      "originalSha256": "4e35f3ad68148670dfa7fce44fa19fce2ef2b2cf0000bc9ebe27e2b95dde0316",
+      "sha256": "76ad7309103b7bdad4218653a826c33e5c94587bf6ea16edcdca26dc02aa5177",
+      "compressed": true
+    },
+    "formal-performance/standard-2.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-2.stdout.log",
+      "originalBytes": 2072,
+      "storedBytes": 1184,
+      "originalSha256": "72cd71f73ce9967bd2bbe079e92ddd46f820329e00f50b3db1347ef6aea13ee5",
+      "sha256": "989d29ea158e2ebecce63b5f14a69c382be7d7b473eb9e27a15dfa52fcc6acf6",
+      "compressed": true
+    },
+    "formal-performance/standard-3.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.csv",
+      "originalBytes": 110260,
+      "storedBytes": 32626,
+      "originalSha256": "1c82322e515c9c344c75eeee8d1e7b4caf0fab7fed96e940b387007f1972c00f",
+      "sha256": "2d08055c7237a1663bd7cfb102bf9bc6c36eaac8a9f68f25363049ae9972043f",
+      "compressed": true
+    },
+    "formal-performance/standard-3.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.environment.json",
+      "originalBytes": 589405,
+      "storedBytes": 34792,
+      "originalSha256": "0e50c46b79d3dd70d4bae92fcb55bbb6be1fcb792f251324abd832aa5fbe428a",
+      "sha256": "ce982a99807f2e691b0a1a38d60d3b8dca4e37990e47f57ebb692aea70637780",
+      "compressed": true
+    },
+    "formal-performance/standard-3.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/standard-3.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.json",
+      "originalBytes": 118647,
+      "storedBytes": 36743,
+      "originalSha256": "a6dea6b833dae72d0309515855a26349c5cd48c5284a6008e0c318a68b572967",
+      "sha256": "517492c5c674a11353b021b33f2d6a9f87aacace0b5358745e2d0a1e4574d841",
+      "compressed": true
+    },
+    "formal-performance/standard-3.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.memory.json",
+      "originalBytes": 45802,
+      "storedBytes": 2356,
+      "originalSha256": "0408147bc596dbac5be56fc5a772c9692eb47a0931b14e35fec37a54a3a7d7d7",
+      "sha256": "72ce0ace1b13afe7890a7cc3a1965eed97b45d6ac3c12da0da0b868e78e17cad",
+      "compressed": true
+    },
+    "formal-performance/standard-3.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "39734dadb9e38797a0c613ad26049ff2dc6588d4cf93a2fe784c6363e935972e",
+      "sha256": "2e580828823407cdcbbea33e2dce54fb13a2a97892a91c92f42efff42b535ff3",
+      "compressed": true
+    },
+    "formal-performance/standard-3.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/standard-3.stdout.log",
+      "originalBytes": 2072,
+      "storedBytes": 1180,
+      "originalSha256": "a4966e6067ea75aee6e2e0fc6e303d51321e3ffcc0efce3ab933d55d916ccd99",
+      "sha256": "4e6fbc857c72926b663f9f54c60151987f73091d48d10c6508509d335e6cdc9e",
+      "compressed": true
+    },
+    "formal-performance/stress-1.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.csv",
+      "originalBytes": 110769,
+      "storedBytes": 33686,
+      "originalSha256": "3e01c276cbbd638008510a0f8d64c2403ca595ffe2205d03a5f3e36fe2655536",
+      "sha256": "abc5f8fcd35cbaa5af844bbf8501d89c675d5e416dba8efbe8e208e7d483f529",
+      "compressed": true
+    },
+    "formal-performance/stress-1.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.environment.json",
+      "originalBytes": 589420,
+      "storedBytes": 34775,
+      "originalSha256": "6c62eb62e6752608f9ccbf0dd0561745d9040436576cc1da408b45fc2bb06dcf",
+      "sha256": "04e7f9283dd2ecc2fa2a880c7f335b588aa0ec92c412bb928422fe2e2b52db59",
+      "compressed": true
+    },
+    "formal-performance/stress-1.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-1.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.json",
+      "originalBytes": 118818,
+      "storedBytes": 37577,
+      "originalSha256": "2f7b4af2652578f1bb33c6572d5e6c15d3b49cc89e184277e38baa18c7ca9f70",
+      "sha256": "3a0c97bf23e032813819c1ce82a0b18f9e9b485696521ffcdc4b579b4cf1df1c",
+      "compressed": true
+    },
+    "formal-performance/stress-1.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.memory.json",
+      "originalBytes": 55374,
+      "storedBytes": 4307,
+      "originalSha256": "5b98e79de31348fdffef76a91c19151db2271cf1d4fdb2bd7accadc69eeb8416",
+      "sha256": "3a6bb6bfe8a2de1a91217086f18c8c05e057b85cdcace9682729b76d51886d70",
+      "compressed": true
+    },
+    "formal-performance/stress-1.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "6b4560a3466b4c807b7a09f18b4b77f1412910fe176e30e08b3ad1af7a38ae8a",
+      "sha256": "5f3ce0d79372d58547ba576efded7768d4bab003cee6d48b4662498e6083e49f",
+      "compressed": true
+    },
+    "formal-performance/stress-1.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-1.stdout.log",
+      "originalBytes": 2071,
+      "storedBytes": 1183,
+      "originalSha256": "c4f8ffdc6a026e74ef22f228066b567b25eeb7c9165f35b4a5abc1b6b6a0b28a",
+      "sha256": "5f787f0b9ed48ec25c23240a4a6067ec115970cc1893e6ad3ba01131e7847cd3",
+      "compressed": true
+    },
+    "formal-performance/stress-2.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.csv",
+      "originalBytes": 110797,
+      "storedBytes": 33527,
+      "originalSha256": "86101774eda1c99344210e7987b0206907510fa5ad31829e5c9411ecd8999404",
+      "sha256": "bd80be30563f5cde6a10fcb7b64487ba020e1ab54bc05dcd1a51eea98f69b0d6",
+      "compressed": true
+    },
+    "formal-performance/stress-2.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.environment.json",
+      "originalBytes": 589426,
+      "storedBytes": 34782,
+      "originalSha256": "a2f9ab32b5b95910d40ce70f5625d76ed9b6cca7dbfdd2e259ca527fd1d974cc",
+      "sha256": "817cab6b9e6c656d62fafc0ba628e3df5061a732cacd1db0130a0e33f563d98d",
+      "compressed": true
+    },
+    "formal-performance/stress-2.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-2.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.json",
+      "originalBytes": 118817,
+      "storedBytes": 37404,
+      "originalSha256": "10a434006c9cf8dfdeb4233cfd8cf0f3108b1d4a99b94ed0bfc09cd8f83b008b",
+      "sha256": "e4fd18c7ec32711bfd1cb39078dd900b642f3b07bc3462273a47407c1543a454",
+      "compressed": true
+    },
+    "formal-performance/stress-2.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.memory.json",
+      "originalBytes": 55317,
+      "storedBytes": 3836,
+      "originalSha256": "7c077b9ffa4db20981993d4ce7c994dccc84ee13cb5c8d8db93839bfd821d52d",
+      "sha256": "7d77eca6378c1f1574a77509effbfe4ba3aabaee4fe918d83fc8417728927a15",
+      "compressed": true
+    },
+    "formal-performance/stress-2.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 252,
+      "originalSha256": "cb0416e0ec06b82f19363d0042ff4cb12635c4135915028cbc5ca31b5fc9bd05",
+      "sha256": "c1171e43bbf5968541669fc51cb0a122797e6321d082eb15fc60a0ea812958c2",
+      "compressed": true
+    },
+    "formal-performance/stress-2.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-2.stdout.log",
+      "originalBytes": 2071,
+      "storedBytes": 1184,
+      "originalSha256": "7309eeffdba61a32f81091f7a9f6e073c6e5916dc02df20b48faf20cc68f7608",
+      "sha256": "3b39a5cac6db1a86852cab40b60b5d7976a1e1944c5554fb31c9e403361f8fd5",
+      "compressed": true
+    },
+    "formal-performance/stress-3.csv.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.csv",
+      "originalBytes": 110872,
+      "storedBytes": 34026,
+      "originalSha256": "978e3a6e9b48d25ca5a1bb744d8d3317541edc4442a055f265d0a4252f51cc33",
+      "sha256": "9733fc4c66055336f17b0bc83bc50e9276318b1e003c6d499e0520976f46540c",
+      "compressed": true
+    },
+    "formal-performance/stress-3.environment.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.environment.json",
+      "originalBytes": 589389,
+      "storedBytes": 34787,
+      "originalSha256": "84e72b25e4275a33348a2b992f423aaf9c1e6ef910b9e0fd95d836b14ceb24b3",
+      "sha256": "80d3aca8934aa29378fcaff9597b221e0f6e530cdf38c1f879197d1e071cc646",
+      "compressed": true
+    },
+    "formal-performance/stress-3.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.input.json",
+      "originalBytes": 1687,
+      "storedBytes": 211,
+      "originalSha256": "543ac945498b2855eb60cf25b61532c8b8a7791af6e11a3557139bd52d42cd23",
+      "sha256": "552e8a21007b793a496f54aade37ba2ad1f440d214538632a0c73906d26f5224",
+      "compressed": true
+    },
+    "formal-performance/stress-3.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.json",
+      "originalBytes": 118871,
+      "storedBytes": 37469,
+      "originalSha256": "b24e1c0fe81555c3f5b1688269b9624ac6ea724eee8cfd5eac1267e9c3675b67",
+      "sha256": "339f181ebb2927c6ad1eca8326ec1eda84c670b07df4e72e8c5ac1bd83fc7301",
+      "compressed": true
+    },
+    "formal-performance/stress-3.memory.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.memory.json",
+      "originalBytes": 56096,
+      "storedBytes": 4615,
+      "originalSha256": "7737622253c5dafe754a7214765df45a370709fd2003642b6e24065baa97874d",
+      "sha256": "98ad00befa4540b781057dedeb5959fe765286492ef01e55a50b592bb26936c6",
+      "compressed": true
+    },
+    "formal-performance/stress-3.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.stderr.log",
+      "originalBytes": 393,
+      "storedBytes": 251,
+      "originalSha256": "8ae50bebf71e1026224ea540b990fa975c3df47e19e06db047f5811d572199da",
+      "sha256": "7a2f1c7e2961e8246f92d7a6b49d39a1e837e50276cbc3e32d51347ac985fae7",
+      "compressed": true
+    },
+    "formal-performance/stress-3.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/stress-3.stdout.log",
+      "originalBytes": 2071,
+      "storedBytes": 1179,
+      "originalSha256": "9617a141ad84f6751a9cf12df8896f223739dd443539dcf99cd19977e9f4ce06",
+      "sha256": "c03544ffdb72676011e62130720d8eb5c23f9ac148714c02a8bac616df9df270",
+      "compressed": true
+    },
+    "formal-performance/summary.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/formal-performance/summary.json",
+      "originalBytes": 10244501,
+      "storedBytes": 635737,
+      "originalSha256": "1c22530ae572314cb345c3d5514b77c35d6ec8de2b8c9c77cdd993f63ff7e37b",
+      "sha256": "a774fc4afc322e8cdf4e248e72f74272afb75b7f3bcc58a3df0151bdd8368948",
+      "compressed": true
+    },
+    "delivery/entry-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-authored-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1667,
+      "originalSha256": "93ef5a19d65ceae89dae95526163a7371e4373d5a756cfb34452569b4e888222",
+      "sha256": "1abf20aeecae664269e633eafb565bd47344e3048f782db866abcbdc4bc6b05d",
+      "compressed": true
+    },
+    "delivery/entry-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-authored-exploration.stdout.log",
+      "originalBytes": 1599,
+      "storedBytes": 946,
+      "originalSha256": "053903bb27cf350e18b44c98eea67f9cdc48084b29deae2c43601fef8f364207",
+      "sha256": "fc81564ff0a1da14080433ab93a288e5d7b36ac08616e63aed0dc177ec8a53dc",
+      "compressed": true
+    },
+    "delivery/entry-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-authored-inspection.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1662,
+      "originalSha256": "57b31a888beede34ed6fdfdab16a0d72599bdc169215c374f482b2412493d87c",
+      "sha256": "01e80c8e58c08bd08f1bdc82dfd2a434adecad6beabb557f19fbf51becb2103c",
+      "compressed": true
+    },
+    "delivery/entry-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-authored-inspection.stdout.log",
+      "originalBytes": 1620,
+      "storedBytes": 960,
+      "originalSha256": "d420bb6b5fe450eb02fa102da6ca8f562f36f5202726d7d6d2fff2772e74e0cf",
+      "sha256": "c1a430297cb2ab79912aae9da21d49cb96f20fb4c621c3c0786a1a47f6bf7a72",
+      "compressed": true
+    },
+    "delivery/entry-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1665,
+      "originalSha256": "e428d954e4c0ec4a084cc815d905bce7d01a1d0669a536bdd7a8ccc4bdd0cabb",
+      "sha256": "43f7227734756979cf53016cb5848e8cbbcb2f6a2e6258b77fca204d76a7096d",
+      "compressed": true
+    },
+    "delivery/entry-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-exploration.stdout.log",
+      "originalBytes": 1509,
+      "storedBytes": 938,
+      "originalSha256": "39faafa16a0f2b8423c8ecaa1ac493d326c1f712b409a5263cd0aa8c803a49f7",
+      "sha256": "3318c8946cb7cf2dbb4f8da0d4f3cc2e4462e4064c274ba461d43c767d3e9f17",
+      "compressed": true
+    },
+    "delivery/entry-platformer.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-platformer.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1666,
+      "originalSha256": "408ce4aba33d6f4972a4ca16b426008e65b68c63459de85cd28bf9fcbbd91fa0",
+      "sha256": "7af9c2bbf59819daa2d82b5bf7cdedf867fe48ccfe93484e5802e689da648d54",
+      "compressed": true
+    },
+    "delivery/entry-platformer.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-platformer.stdout.log",
+      "originalBytes": 1509,
+      "storedBytes": 942,
+      "originalSha256": "6129bec12d9aaf7cfd31fdba269d8cfe1a8d6753ada0655c351703da9315f9ce",
+      "sha256": "c4c7f5f5130e24e946aa3113f33be8d8f8e8b5bb97cad1c202b417e8d64eaff4",
+      "compressed": true
+    },
+    "delivery/entry-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-scene_inspector.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1663,
+      "originalSha256": "f331cb5f6b1ea24754c9209bdd16586560383905c171b74542fee14930c65321",
+      "sha256": "99af3d52bc0864903e6243751306b5c7a2041cb1e4c7bb58385a93aa5ae53890",
+      "compressed": true
+    },
+    "delivery/entry-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/entry-scene_inspector.stdout.log",
+      "originalBytes": 1476,
+      "storedBytes": 898,
+      "originalSha256": "fdb737da761d9376c50a248b38a2a527f3fb3dd9ec59792f9b306133c9a09ba0",
+      "sha256": "711463aad2820fe822b82b983d72c29018d40ae5b00c4ad0a7650fb574527475",
+      "compressed": true
+    },
+    "delivery/install.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/install.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/install.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/install.stdout.log",
+      "originalBytes": 1975903,
+      "storedBytes": 52715,
+      "originalSha256": "7b56069813b26373d51fff74a874738d7d0468d40f069ced8412ce085af620b2",
+      "sha256": "f15ff754228b6fce95f96e8aa37fd6e1581ec1754266c45033d6911a54c8ba63",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-exploration.stderr.log",
+      "originalBytes": 17334,
+      "storedBytes": 1695,
+      "originalSha256": "8944e83b74d232da9d99747112672f70c2a5e1d9abe3e5f8659a43c9b4a18bce",
+      "sha256": "c25c53ddb34349b9bc6eb4a2b919f051e65cbfd40e0e96121f97c2656e035015",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-exploration.stdout.log",
+      "originalBytes": 2204,
+      "storedBytes": 1215,
+      "originalSha256": "2a8ff093d6c9dea3b393920a0a8c0a2bc5ff50fc7bc5e4593bdeb7f467040c65",
+      "sha256": "6d6cead8fb53046e4acbf364b1ed7bea0da3cb9d19cfc3d1f545b068fd8f2f95",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-inspection.stderr.log",
+      "originalBytes": 17333,
+      "storedBytes": 1694,
+      "originalSha256": "52eb466651b1cf7a6ee70cb71b806c8c6b96148d346aba0adbf14e2708812ec1",
+      "sha256": "680dfb59b6d41ac83bc8dfe0f58d3b40455fce9d919574b00bbfdc0b4e697a07",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-inspection.stdout.log",
+      "originalBytes": 2224,
+      "storedBytes": 1221,
+      "originalSha256": "fb31300461db329eeb69dce98868c15ec8e4ed91b2bede5969df2c5a9fdc6dd7",
+      "sha256": "70304e339c9512807b1ec1d44091b2becdbdda674a321d3d5c1da0bfe5e01490",
+      "compressed": true
+    },
+    "delivery/intel-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-exploration.stderr.log",
+      "originalBytes": 17699,
+      "storedBytes": 1759,
+      "originalSha256": "09da30b8a2c4cf985a5846d9bbe8e9bd82ae3ac8e80010317bbb3dd2244434cf",
+      "sha256": "97b0a45bbcb294a6d5fa0bc620bef06d06df09ebe863ab9b67bccb415be20fb1",
+      "compressed": true
+    },
+    "delivery/intel-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-exploration.stdout.log",
+      "originalBytes": 2842,
+      "storedBytes": 1257,
+      "originalSha256": "9247eea4a702ac8e2831d97401c6e49aea4e782df663571200a001e48cb3e01f",
+      "sha256": "8428372ada8267f39ce5c00fb09b7c151323771eea50d33f71f72dc8bdebf1d6",
+      "compressed": true
+    },
+    "delivery/intel-platformer.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-platformer.stderr.log",
+      "originalBytes": 17402,
+      "storedBytes": 1729,
+      "originalSha256": "89ca1e04d2411bc6dd3ddcc493977f27e757bbeda55fe2a055db7f24f67aabb4",
+      "sha256": "29038565d3d6598273f2771d2d0d57cc0bb7690de2a4814c6a25a055a2ec7c1c",
+      "compressed": true
+    },
+    "delivery/intel-platformer.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-platformer.stdout.log",
+      "originalBytes": 2107,
+      "storedBytes": 1214,
+      "originalSha256": "350ba0acbbc9f31f502447f89b3b0ce5e83a02efeda29bdadc34cfb1421a0ec8",
+      "sha256": "b70de7567203e5bc4013f2007f5430e980dbbe7dd864aa2100579cf893b523f0",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-scene_inspector.stderr.log",
+      "originalBytes": 17335,
+      "storedBytes": 1695,
+      "originalSha256": "1f29f6c30b82537aed80ec2166049ddd15e310efe8534fa2113c9aedfce56115",
+      "sha256": "97220b2525fa3ce60d86811fa8c9f600b5bf229162fe0dbbbe6347f292fae19b",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-scene_inspector.stdout.log",
+      "originalBytes": 2072,
+      "storedBytes": 1166,
+      "originalSha256": "8f03f1b018ea80f9979f4ef70fc207666ca301a7785ba610e42736941d42604c",
+      "sha256": "a8d79eb8a1279a3b2ea24cb567d162dfa39eb19f0beccac09fb39490cbfdb04c",
+      "compressed": true
+    },
+    "delivery/isolated-AzurePlayer.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/isolated-AzurePlayer.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/isolated-AzurePlayer.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/isolated-AzurePlayer.stdout.log",
+      "originalBytes": 515,
+      "storedBytes": 250,
+      "originalSha256": "8f6c7241e74651d6dc97228e0100dc63e4749efaff21b4103f4f964c176550f7",
+      "sha256": "4e63c424d685079d6022568488c8d19e0955e371f2d61516098366dfa0885241",
+      "compressed": true
+    },
+    "delivery/isolated-AzureRender.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/isolated-AzureRender.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/isolated-AzureRender.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/isolated-AzureRender.stdout.log",
+      "originalBytes": 1049,
+      "storedBytes": 288,
+      "originalSha256": "6d76e64428a3c261757a2127951a4fa126fc8474eae723b15d430141756f644a",
+      "sha256": "5d707de41484acc4c7a5a6575994e5563abc5f98b5fd94ee5c944b02e850ede5",
+      "compressed": true
+    },
+    "delivery/manifest-verify.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/manifest-verify.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/manifest-verify.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/manifest-verify.stdout.log",
+      "originalBytes": 232,
+      "storedBytes": 189,
+      "originalSha256": "7fa6ee1bd43c04215c56b694f5c2954215ab6c626471e1405ff6893fb750e904",
+      "sha256": "a1b5d702c405f75af5a3aca3fa3a74a9baff6fc8f8260615544cfa0b59298ef8",
+      "compressed": true
+    },
+    "delivery/manifest-write.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/manifest-write.stderr.log",
+      "originalBytes": 0,
+      "storedBytes": 20,
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+      "compressed": true
+    },
+    "delivery/manifest-write.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/manifest-write.stdout.log",
+      "originalBytes": 179,
+      "storedBytes": 169,
+      "originalSha256": "8649124ea445314dbcf49d21cc4c9bb999402e92e658ffbfefaac43e11a261e7",
+      "sha256": "cf4f88c89ff7e75a0dd2c3aa1a9bb17393417207666efd0e53a92f508e9bcbfa",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-exploration.stderr.log",
+      "originalBytes": 17327,
+      "storedBytes": 1666,
+      "originalSha256": "c3e6e8599f571d34880f20a3dc0ca12231ceccc44c05b018b24caac2b4e8bf03",
+      "sha256": "d1bbe2f85c0a9daca8c7cc381851001e72a60cdd0d2d6e7970d7c43825956ff6",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-exploration.stdout.log",
+      "originalBytes": 2183,
+      "storedBytes": 1187,
+      "originalSha256": "603da710062a89526d7c925501afde760bc0d58577392b1823fd22457ced42ca",
+      "sha256": "963e7f14aff91b9247dd3814ed81664bb23dac5e36ac55e1b719c5f0cc0501f5",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-inspection.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1663,
+      "originalSha256": "409533e08b05144391332d204e537013d25e7df5fbab67ca2d4decc5c5538201",
+      "sha256": "0afd43cc6c33dc2e76284d1336dd120fa8b05f3bef09deb79679080ad01c4c62",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-inspection.stdout.log",
+      "originalBytes": 2203,
+      "storedBytes": 1199,
+      "originalSha256": "75d4996c7cf390fb1acf098bbaaaffbf56828efc7f5f3f5d1fcf883f11ab6163",
+      "sha256": "c477bd93656800e6da368f18ac5759aba76fffd07c4fba07b3912c246b553c65",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-exploration.stderr.log",
+      "originalBytes": 17699,
+      "storedBytes": 1721,
+      "originalSha256": "4e4fd2928c6241efb1b57364165c662c8e329d9de8afc2fb3e3e645c420d091e",
+      "sha256": "d4ff713e26080de2ec3ee002b5464d6508e2e6fac57e2dba173b254867411622",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-exploration.stdout.log",
+      "originalBytes": 2820,
+      "storedBytes": 1242,
+      "originalSha256": "9ee43460b7519c17dce5e4430eda741ffd69d1bccc62e0b43e880122983ab99a",
+      "sha256": "42ec317c2f9c4238503bc128755e73b1634b454f2f446b0dbc8e6a4b156b351b",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-platformer.stderr.log",
+      "originalBytes": 17395,
+      "storedBytes": 1698,
+      "originalSha256": "7eb3def8c6dcc42a8caa16869d570b922e5d9670e907a111517fda9726d2678a",
+      "sha256": "f49e37a387c08f2e847db6e74f4d301d816ea04203fecfb081b3a8b57b92f36b",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-platformer.stdout.log",
+      "originalBytes": 2086,
+      "storedBytes": 1193,
+      "originalSha256": "abbd0abe064a0c43a5fd16de45cc2c94ac93d6346c0c1f10418d263b814baa2e",
+      "sha256": "75fce31a84ce769ea4e41baa58d556def5fb1613d48d2b82e8ba4b2a6ea91a82",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector.stderr.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-scene_inspector.stderr.log",
+      "originalBytes": 17326,
+      "storedBytes": 1664,
+      "originalSha256": "6d5e38e3f240971f04ae32eaa10a0d24ae012b23f108fcc69f07d7f0f441a60e",
+      "sha256": "d9df3f91a2bcda82dba65e5bbf753d65e6ebb513169107b463ebf91761a66f40",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector.stdout.log.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-scene_inspector.stdout.log",
+      "originalBytes": 2055,
+      "storedBytes": 1147,
+      "originalSha256": "c8fbc5d74eb8e5d2deb63f4cf76913d7f0c883cf83d8d01c2a8f60f1089b9112",
+      "sha256": "750ce7e0ae2c3e199bf2b742761e825a124ac4f98b43b46ee002bb09e75e2b22",
+      "compressed": true
+    },
+    "delivery/partial.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/partial.json",
+      "originalBytes": 100871,
+      "storedBytes": 4934,
+      "originalSha256": "c034398ff2e705051c0dbd9eba47e75df292f35dfeebb12acadf367c57b17525",
+      "sha256": "3ec0c5e109e08a2f2a33115af03b77677c47e8c54f3974484499f2bb3f0d8649",
+      "compressed": true
+    },
+    "delivery/platformer.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/platformer.input.json",
+      "originalBytes": 3391,
+      "storedBytes": 276,
+      "originalSha256": "c584b22e26201a9b845e02ac0d664772d1169cdf663f2d68abdb9fb989206573",
+      "sha256": "59e33635183390f24f6e0cbc4d4aed3c2e6f716638687beeb5a8127cb5919589",
+      "compressed": true
+    },
+    "delivery/sequence.input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/sequence.input.json",
+      "originalBytes": 6943,
+      "storedBytes": 513,
+      "originalSha256": "e771116d5c295428bb98feb8c87be4bef6a2ccfc33f71ee3c7bdccc48f8a7dfa",
+      "sha256": "bbe321aece73131dd7dc18bb18792fab514a9992ae51c1273d2e1f4ace5310fd",
+      "compressed": true
+    },
+    "delivery/summary.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/summary.json",
+      "originalBytes": 108930,
+      "storedBytes": 5823,
+      "originalSha256": "6bc42d993ef985bed8187629b6ff800fe5b8e435f4d5df5dcb83105287d01a14",
+      "sha256": "10bd2828b7a2f210186b245710ecb41cd0b8e179145ad69243549c2245185b02",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-exploration/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-exploration/runtime.json",
+      "originalBytes": 22232,
+      "storedBytes": 910,
+      "originalSha256": "0a533e6c348fb1fdcb0f99eee6797ab8392a5fcb19219f245d2b060449c1b2fc",
+      "sha256": "d86ee7d502ad6221150a6d6a1fa39b473f3ae67ae09c7ece989fbcfe2eb14457",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-exploration/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-exploration/timing.json",
+      "originalBytes": 7164,
+      "storedBytes": 1885,
+      "originalSha256": "7ebcb38c242f61e236a7a30b7066696e59399e4da830589ab3cd4fe8f1b0e678",
+      "sha256": "5ffa5a6fb588fc093279d8e9275e05d072a56bc6770608f59f629562b39af217",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-inspection/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-inspection/runtime.json",
+      "originalBytes": 22171,
+      "storedBytes": 907,
+      "originalSha256": "7ebff1171a29ee556c752641fa184310225fe5c5dc200887e9a6f2369e78aba9",
+      "sha256": "3adc756ab7d0353d3a5de72f3a77cd2c8793e63f80e47bbbc442b514e2f62dc2",
+      "compressed": true
+    },
+    "delivery/nvidia-authored-inspection/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-authored-inspection/timing.json",
+      "originalBytes": 7210,
+      "storedBytes": 1911,
+      "originalSha256": "ce8a802701d34a9ab647f52b787f3b3fab75b8b13c5aa719f75d7019802015c7",
+      "sha256": "93e71de50eb02b96a1fc95eeca08377e550d638edda2637a03d2c0c82b7804f5",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-exploration/runtime.json",
+      "originalBytes": 4379572,
+      "storedBytes": 123220,
+      "originalSha256": "5e415071ed24104fe2b7431416f3f1be40572fe4837aa947f71bfb78f0e8548c",
+      "sha256": "5658ce77eb7b5b5ae503a244e8391a4974ee744c5bbbe4eb714af42d713b5a93",
+      "compressed": true
+    },
+    "delivery/nvidia-exploration/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-exploration/timing.json",
+      "originalBytes": 216395,
+      "storedBytes": 60559,
+      "originalSha256": "6ffe3c32978395f67b726ee0e286bc08c38377761b948d010f0619a617e796f3",
+      "sha256": "65b8bc5b11dea1026e10b38695c99f8397daaf9124cad0092b877c9dfe9c882e",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-platformer/runtime.json",
+      "originalBytes": 1092959,
+      "storedBytes": 45622,
+      "originalSha256": "b5a28cae05f1bbaa78b18f8ddf84bce51a430df5d362fcf164c46117930272ad",
+      "sha256": "8c8a235c768135e662a4483f998caca41ddf191dd678a9e57e45b0cae014289b",
+      "compressed": true
+    },
+    "delivery/nvidia-platformer/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-platformer/timing.json",
+      "originalBytes": 52491,
+      "storedBytes": 15229,
+      "originalSha256": "3c8e4e3ce65b26e4651a3ede5b272fe79ed07409183d655cbd94e2251161b7b3",
+      "sha256": "f0a97f2a66571404ae0b6c04423251b79f232163cc5d5e84fa778126293f6c08",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-scene_inspector/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-scene_inspector/runtime.json",
+      "originalBytes": 21736,
+      "storedBytes": 849,
+      "originalSha256": "dec4bb5707000b174c66a697109a00f45773a1a717b417e7cd953fdb64787928",
+      "sha256": "5bf8b1deed2f762d2d4ed881f849d46fddd89032453af178fadd16bf58f6b146",
+      "compressed": true
+    },
+    "delivery/nvidia-scene_inspector/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/nvidia-scene_inspector/timing.json",
+      "originalBytes": 7120,
+      "storedBytes": 1852,
+      "originalSha256": "4144d9875438e733b88577dbead5f7e0d805bb57078cfb37927e1e999cdf716a",
+      "sha256": "c38ab9c74bd81480ec1f9cffe1b669356972e882e80de45390c9fc43e03804da",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-exploration/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-exploration/runtime.json",
+      "originalBytes": 22244,
+      "storedBytes": 913,
+      "originalSha256": "cc3f13fabcad1ecf0a910549c78bf956a64df0eba24cf4d290d2c88382b034a8",
+      "sha256": "78aef60c63a792379da2bb32b094faa30b6a5f2a1ddcf7f529eefbc6ca828950",
+      "compressed": true
+    },
+    "delivery/intel-authored-exploration/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-exploration/timing.json",
+      "originalBytes": 9389,
+      "storedBytes": 2057,
+      "originalSha256": "a82ee5ac63bea8117d8fac6805845749b4b53f4c005f568d93f3c257f5538169",
+      "sha256": "a443455573034d1c615ba0c376fbdb1417072a1f41bb1747704ae08b09a5e3cb",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-inspection/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-inspection/runtime.json",
+      "originalBytes": 22171,
+      "storedBytes": 907,
+      "originalSha256": "4b31ba7ae32997f4e8bb7087489189f46b12d94de7eaac15092d0f3a505a6007",
+      "sha256": "8def7a15b2b23ab8a93c5303e15216c8368cfc5b35fa0fb0a19b97cb8ce854ea",
+      "compressed": true
+    },
+    "delivery/intel-authored-inspection/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-authored-inspection/timing.json",
+      "originalBytes": 9357,
+      "storedBytes": 2040,
+      "originalSha256": "e78580f287ce718d928088528a8b5f2e5e08b9d5aa063b5e59a818a14592c3c6",
+      "sha256": "c6847d826cc7dbe90595585f96ec558e3f9bd3863f4a8aa5442a13ba14f04d3d",
+      "compressed": true
+    },
+    "delivery/intel-exploration/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-exploration/runtime.json",
+      "originalBytes": 4340229,
+      "storedBytes": 122060,
+      "originalSha256": "bd6b3e2f9a9b26eb8e2fc23cb43996a4b1cef954284bddab4c51084f91d80211",
+      "sha256": "3e346b0fdaba63d54958e77cd0581d51e70366f92f27aa0ffee82e572e9179e6",
+      "compressed": true
+    },
+    "delivery/intel-exploration/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-exploration/timing.json",
+      "originalBytes": 221093,
+      "storedBytes": 70096,
+      "originalSha256": "2094b9b6672c6e9babf2ef87f515522daff6ac945c68c838e9b8fccb43244a32",
+      "sha256": "d3830537fc1df7e0f841b3f797f753bb5124e4f94b06cd93d40cd0e2aeb8daed",
+      "compressed": true
+    },
+    "delivery/intel-platformer/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-platformer/runtime.json",
+      "originalBytes": 1092943,
+      "storedBytes": 45675,
+      "originalSha256": "267d1cfdc213711f3d669bbc3a6c0a837f39c47d1a817e038b103fe0713bdb2a",
+      "sha256": "48eef4534107b70ed21d54c5032e1d621b20dff8a74b6c7fe42fc19370125dcc",
+      "compressed": true
+    },
+    "delivery/intel-platformer/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-platformer/timing.json",
+      "originalBytes": 55302,
+      "storedBytes": 17255,
+      "originalSha256": "844d1fdcd9eb5bad0cc2b52b178cdd7392087bcdadc127afe729844090e55663",
+      "sha256": "4461920580d7a7666b7c86ed4835cf4e0afee0824c32fd0e229e423ca12d0d61",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/input.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-scene_inspector/input.json",
+      "originalBytes": 210,
+      "storedBytes": 130,
+      "originalSha256": "3636e37beab26a56d25d8bb22eb83567cec720f0d98153f64874c5aef605d27c",
+      "sha256": "53473120cb895de9433ba2dab0b37150869bd9f9ec5b193abe8772f28813c286",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/runtime.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-scene_inspector/runtime.json",
+      "originalBytes": 21723,
+      "storedBytes": 846,
+      "originalSha256": "0ae170771231a243944eb67f94babafbd5f958488f9a91cc2ebe45757ed391fc",
+      "sha256": "883c2d46155df6fe50e64a181080599a924b5b397be16104b107e864262c0962",
+      "compressed": true
+    },
+    "delivery/intel-scene_inspector/timing.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/intel-scene_inspector/timing.json",
+      "originalBytes": 9361,
+      "storedBytes": 2012,
+      "originalSha256": "07adb7200ac80ad5f0317d6acc21dba5a8251c2fa1873fdd742f59bebfbaf13f",
+      "sha256": "338ba77495feb55b7215e9f31508e1e02554b1c108ab093f08fd9d5164394331",
+      "compressed": true
+    },
+    "delivery/provenance.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/packages/provenance.json",
+      "originalBytes": 115981,
+      "storedBytes": 46330,
+      "originalSha256": "ca1000c18162009e1e37b2231f97ad88b75b2ef1cecdd1523a12e3f7a14ff1ab",
+      "sha256": "4712243f598263f23a286df4b58c7721958f54a1cd858827b6ef86a6fbccaee2",
+      "compressed": true
+    },
+    "package-manifests/engine.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved Engine/install_manifest.json",
+      "originalBytes": 1443810,
+      "storedBytes": 277711,
+      "originalSha256": "8da44ab810c836bfc1bf0f546e11759e5d5dab870c63cbf3bcfce17ccec23b36",
+      "sha256": "d6c429f01a982a4748de3e56e75991674c3b9d20bcde09b6a3d42ec91e3062a0",
+      "compressed": true
+    },
+    "package-manifests/exploration.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved exploration/game_manifest.json",
+      "originalBytes": 103722,
+      "storedBytes": 19790,
+      "originalSha256": "06e595e4dc1e1ec3b30f425cbb6c70a0d49b19cbfd6604965273623cb1d1138a",
+      "sha256": "f9998494f4ea35eec0dee053ef0a0f6c7523f68645fc950d085393393f584cfa",
+      "compressed": true
+    },
+    "package-manifests/platformer.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved platformer/game_manifest.json",
+      "originalBytes": 89500,
+      "storedBytes": 20691,
+      "originalSha256": "430d86436bad7a7f3da27ef86725556793a0009edfa169d0086fc94206a0761e",
+      "sha256": "808106dfc56d8740040bfae7597b8c11d0d76866f1f58e608025c14326662fff",
+      "compressed": true
+    },
+    "package-manifests/scene_inspector.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved scene_inspector/game_manifest.json",
+      "originalBytes": 81604,
+      "storedBytes": 19378,
+      "originalSha256": "2125f048e5770b6684c34c6af593511a0ccb8212daaa0bb9731867914612fd76",
+      "sha256": "0501ad217087c27a6c6074e5ba81c01c71e2b0f65abc39505b6f377c8d162399",
+      "compressed": true
+    },
+    "package-manifests/authored-exploration.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved authored-exploration/game_manifest.json",
+      "originalBytes": 86120,
+      "storedBytes": 20754,
+      "originalSha256": "a6a07fd3a1dc3771f96f8a3317468b4b15ed8be5a8f63e438f4378252e5418eb",
+      "sha256": "b0329d12713768171133359acded1ccc05c7413bdcfcae9c3d7e3c537f45a602",
+      "compressed": true
+    },
+    "package-manifests/authored-inspection.json.gz": {
+      "source": "build/p5-device-environment-2026-10-11/arena-delivery/Moved authored-inspection/game_manifest.json",
+      "originalBytes": 83473,
+      "storedBytes": 19996,
+      "originalSha256": "854dbc66ee53143b3ac35ed4af8016af405d5502b831169bdcbac2dd9ca121b5",
+      "sha256": "0caa5e9825b31227ee8a869d203d6a551a38a70c1ccad5ee47d3881979ba3015",
+      "compressed": true
+    },
+    "baseline-gpu/release.log.gz": {
+      "source": "build/p5-cache-publication-2026-10-11/release-gpu.log",
+      "originalBytes": 9279,
+      "storedBytes": 1861,
+      "originalSha256": "8f9bf0bd9fcc1aade0bfcf4a3a1175e4dfa2da57b9f8d9fd9088f38468e33900",
+      "sha256": "43cae602783c9aacfe7a0715f16bd04a78f262762b808cd487943480f32cd5d7",
+      "compressed": true
+    },
+    "baseline-gpu/debug.log.gz": {
+      "source": "build/p5-cache-publication-2026-10-11/debug-gpu.log",
+      "originalBytes": 8974,
+      "storedBytes": 1818,
+      "originalSha256": "7a595124e7e43aa483dade758869c24549624a891d6efd6128e4ac8c71f84ed2",
+      "sha256": "0b14ae421f5331160beb3a966ea526f61380fe6eba7c8e0f9cbe3782fc9602cf",
+      "compressed": true
+    },
+    "source/tools/gpu_environment.py.gz": {
+      "source": "tools/gpu_environment.py",
+      "originalBytes": 7038,
+      "storedBytes": 2300,
+      "originalSha256": "3b96062735c4691bc95d0edb3886c49ac6e54fc4f7bbeeabbafec049870131d0",
+      "sha256": "f77689acd5d0bf8c23bd31f46fd53ad1ea869e5ce7515fb24ac6b81a6a713647",
+      "compressed": true
+    },
+    "source/tools/performance_budget.py.gz": {
+      "source": "tools/performance_budget.py",
+      "originalBytes": 3095,
+      "storedBytes": 1162,
+      "originalSha256": "d7d7d67c406a7ed9b6efccc604b45297b90b2368e943cf4a7b62771ca2d03831",
+      "sha256": "407e435318c7e0589de95c73c93f87111760a0a994d66332c7a0bf5afe8627a5",
+      "compressed": true
+    },
+    "source/tools/run_playable_performance.py.gz": {
+      "source": "tools/run_playable_performance.py",
+      "originalBytes": 14251,
+      "storedBytes": 4890,
+      "originalSha256": "de705a4f5e0e88aaf194eb0bf9228c4dedd782d2e792b94c027fa4ca718e16bd",
+      "sha256": "02b611da34d9fe99f846c0188139e59bfdd2db2c49f6a4f95af004076ba4c7ca",
+      "compressed": true
+    },
+    "source/tools/run_playable_long_run.py.gz": {
+      "source": "tools/run_playable_long_run.py",
+      "originalBytes": 21093,
+      "storedBytes": 6291,
+      "originalSha256": "64ee3d4776a000c2f9afcf713f6ea337d1f35aebf9ea0bd317fb0593270982ed",
+      "sha256": "7e3d348d1cae5c02d21b685961f0f3228df76e8ecf37cacc98c327256ebad0c5",
+      "compressed": true
+    },
+    "source/tools/run_platformer_long_run.py.gz": {
+      "source": "tools/run_platformer_long_run.py",
+      "originalBytes": 14725,
+      "storedBytes": 4428,
+      "originalSha256": "b361c7da2caf792e130b395343c48c07cc219f99934ed0f6712c14d8773af7de",
+      "sha256": "4abaf156a1094c35bf2aae5aed4abd145a087f51ef02eaa440ad517f706cd075",
+      "compressed": true
+    },
+    "source/tools/run_preview_comparison.py.gz": {
+      "source": "tools/run_preview_comparison.py",
+      "originalBytes": 6016,
+      "storedBytes": 2355,
+      "originalSha256": "ba1367e6a632b2d7d4c2fac0c55411e529a7618910353d1e4588afefeee5f114",
+      "sha256": "e7f0ea4ae80a2b981744fd5f08cb75630474669a3a130d951d49309441d293f4",
+      "compressed": true
+    },
+    "source/tools/measure_runtime_performance.py.gz": {
+      "source": "tools/measure_runtime_performance.py",
+      "originalBytes": 2788,
+      "storedBytes": 1221,
+      "originalSha256": "b339ea8ff1b14cafe205c2095bedc832ecc474fec0947e8c1d832b55cafced3d",
+      "sha256": "6b9733167949dd482fcd712da279bedea65b0eff559a082b62b848856fc5a76a",
+      "compressed": true
+    },
+    "source/tools/test_gpu_environment.py.gz": {
+      "source": "tools/test_gpu_environment.py",
+      "originalBytes": 5693,
+      "storedBytes": 1575,
+      "originalSha256": "914335a53f98e6f7e6899208dbb92b486f3cf35894334da0dbf727c3743bcab2",
+      "sha256": "09b5218af1c88df764b14f0c2bf4e1dd2e97f91f090547846b9edc3b7813f293",
+      "compressed": true
+    },
+    "source/tools/test_performance_budget.py.gz": {
+      "source": "tools/test_performance_budget.py",
+      "originalBytes": 4311,
+      "storedBytes": 1287,
+      "originalSha256": "ed082a74db9b29306248004d4feed30a1e9bad9f95de67e182eadbaa0ad5a9da",
+      "sha256": "ca080fa8cd4d9fc0e82eb2cd2c41a221ed83aa19b1b2cd8c432432aff2e8f5f2",
+      "compressed": true
+    },
+    "source/tools/test_playable_delivery_rules.py.gz": {
+      "source": "tools/test_playable_delivery_rules.py",
+      "originalBytes": 4887,
+      "storedBytes": 1657,
+      "originalSha256": "de015d3c084bdaa815c94f5bb0e299a20bc5a691dd4222aa2ed456df5cfc317a",
+      "sha256": "e8cd3a309ed6db6abe33594036add6de46b860a5f653531ed57e8cc972d8d52a",
+      "compressed": true
+    }
+  }
+}

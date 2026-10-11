@@ -7,10 +7,15 @@ from performance_budget import working_set_growth, validate_round
 
 
 def passing_round():
+    device=dict(temperature=65,thermalLimit=87,gpuUtilization=0,
+        thermalSlowdown={'hardware':False,'software':False})
     return dict(gpu={'p95': 16.6}, cpu={'p95': 8}, physics={'p95': 2},
         samples=1800, warmup=300, peakWorkingSetBytes=2*1024**3,
         allocator={'deviceLocalPeakBytes': 1.5*1024**3},
-        initialDevice={'temperature': 55}, workingSetSamplesBytes=[100]*9+[105],
+        initialDevice=copy.deepcopy(device), environment=dict(schemaVersion=1,
+            policy=dict(idleSeconds=10,temperatureRange=4,maxIdleUtilization=10,startHeadroom=2),
+            startup=[dict(copy.deepcopy(device),seconds=s) for s in (0,5,10)],final=copy.deepcopy(device)),
+        workingSetSamplesBytes=[100]*9+[105],
         stableWorkingSetGrowth=.05)
 
 
@@ -57,9 +62,27 @@ class FormalBudgetTests(unittest.TestCase):
         result=passing_round(); result['stableWorkingSetGrowth']=0
         self.assertTrue(validate_round(result, editor=False))
 
-    def test_thermal_gate(self):
-        result=passing_round(); result['initialDevice']['temperature']=56
-        self.assertTrue(validate_round(result, editor=False))
+    def test_stable_device_above_55_is_a_valid_environment(self):
+        self.assertEqual(validate_round(passing_round(), editor=False), [])
+
+    def test_active_thermal_slowdown_is_not_a_valid_round(self):
+        for source in ('hardware','software'):
+            result=passing_round()
+            result['environment']['final']['thermalSlowdown'][source]=True
+            self.assertTrue(all(not row['thermalSlowdown'][source] for row in result['environment']['startup']))
+            self.assertTrue(validate_round(result, editor=False),source)
+
+    def test_environment_evidence_is_required(self):
+        result=passing_round();del result['environment']
+        self.assertTrue(validate_round(result,editor=False))
+
+    def test_initial_device_matches_the_recorded_startup(self):
+        result=passing_round();result['initialDevice']['temperature']=70
+        self.assertTrue(validate_round(result,editor=False))
+
+    def test_relative_margin_matches_the_recorded_startup(self):
+        result=passing_round();result['initialDevice']['thermalMargin']=3
+        self.assertTrue(validate_round(result,editor=False))
 
     def test_validation_preserves_raw_evidence(self):
         result=passing_round(); before=copy.deepcopy(result)

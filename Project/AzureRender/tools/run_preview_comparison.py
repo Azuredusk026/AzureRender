@@ -9,7 +9,8 @@ import shutil
 import subprocess
 import time
 from create_playable_project import create
-from run_playable_performance import memory, stats, thermal
+from run_playable_performance import memory, stats
+from gpu_environment import wait_and_record,snapshot,environment_errors
 from build_provenance import inputs
 
 
@@ -20,9 +21,7 @@ def run(executable, project, folder, enabled, samples, warmup, cooling):
                dict(frame=50,action='click',target='preview.camera')] if enabled else []
     path=folder/'ui.json';path.write_text(json.dumps(actions),encoding='utf-8')
     env=dict(os.environ,AZURERENDER_EDITOR_CONFIG=str(folder/'config'),AZURERENDER_EDITOR_UI_ACTIONS=str(path))
-    if cooling:
-        while thermal()['temperature']>55:
-            print('Waiting for GPU cooling before preview sampling',flush=True);time.sleep(10)
+    environment=wait_and_record(folder/'environment.json') if cooling else None
     start=time.monotonic();peak=0
     startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
     with (folder/'stdout.log').open('w',encoding='utf-8') as stdout,(folder/'stderr.log').open('w',encoding='utf-8') as stderr:
@@ -35,6 +34,9 @@ def run(executable, project, folder, enabled, samples, warmup, cooling):
             time.sleep(.05)
     logs=(folder/'stdout.log').read_text(encoding='utf-8')+(folder/'stderr.log').read_text(encoding='utf-8')
     assert process.returncode==0,logs[-4000:]
+    if environment is not None:
+        environment['final']=snapshot()
+        (folder/'environment.json').write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     assert not any(word in logs.lower() for word in ('vuid-','validation error','hazard detected')),logs[-4000:]
     assert 'Allocator after unload: buffers=0 images=0' in logs
     data=json.loads((folder/'timing.json').read_text(encoding='utf-8'))
@@ -52,7 +54,9 @@ def run(executable, project, folder, enabled, samples, warmup, cooling):
                 deviceLocalPeakBytes=data['allocator']['deviceLocalPeakBytes'],samples=samples,warmup=warmup,
                 elapsedSeconds=time.monotonic()-start,previewEnabled=enabled,developer=previews,
                 settings=dict(window=[1920,1080],cameraExtent=[320,180],thumbnailExtent=[128,128],capacity=3))
-    result['passed']=result['gpu']['p95']<=16.6 and result['cpu']['p95']<=10 and peak<=2*1024**3 and result['deviceLocalPeakBytes']<=1.5*1024**3
+    result['environment']=environment
+    result['formalEnvironmentVerified']=environment is not None and not environment_errors(environment)
+    result['passed']=result['gpu']['p95']<=16.6 and result['cpu']['p95']<=10 and peak<=2*1024**3 and result['deviceLocalPeakBytes']<=1.5*1024**3 and result['formalEnvironmentVerified']
     print(folder.name,json.dumps({name:result[name] for name in ('gpu','cpu','passed')}),flush=True)
     return result
 

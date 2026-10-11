@@ -77,7 +77,15 @@ python tools/run_playable_performance.py `
   --output build/performance/playable
 ```
 
-私有主角使用可选参数 `--character <GLB>`。输出目录必须使用新的路径。每轮开始时 GPU 温度至多为 55°C。
+私有主角使用可选参数 `--character <GLB>`。
+输出目录使用新的路径。
+每轮记录驱动热限制、温度和降频状态。
+启动依据稳定空闲窗口与设备热余量判断。
+
+后台 GPU 占用上限默认百分之十。
+`--max-idle-gpu-utilization` 可声明设备的桌面上限。
+每轮保存完整环境观察与等待失败诊断。
+具体规则见[设备环境计划](../plans/2026-10-11-performance-environment.md)。
 
 预算由 `tools/performance_budget.py` 统一解释。
 压力负载 GPU P95 上限为 16.6 毫秒。
