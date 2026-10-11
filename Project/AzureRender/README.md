@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+P5 剩余门禁在 P8 集中验收。
+U15 至 G23 按自身功能、回归及发布门禁连续推进。
+范围见[P8 集中门禁](docs/plans/2026-10-12-p5-deferred-to-p8.md)。
+
 帧调度候选的回归与范围见[机制验收](docs/acceptance/p5/closure/frame-pacing.md)。
 人工待项在 P8 复核，非桌面输入 GPU 回归通过。
 正式性能十四轮通过，一轮热状态失败。
