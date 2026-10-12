@@ -37,7 +37,8 @@
         "commitTitle": "feat(f4): 完成模块装配与类型契约验收",
         "commit": "c22c47a816a698cd96b63bfbdb4c710be796a617"
       },
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "status": "Complete"
     },
     {
       "id": "G8",
@@ -61,7 +62,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(g8): 完成共享机制与应用玩法分层验收",
         "commit": "7a5c521d888e964a979383f7b4ccf0809accd0f4"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "U3",
@@ -85,7 +87,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(u3): 完成统一编辑操作与文档事务验收",
         "commit": "989a429e427e0c7fdcf65d8f63b1a022bbfbff3b"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "F5",
@@ -111,7 +114,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(f5): 完成观察内容与开发工具闭环验收",
         "commit": "87ea8f0e8bfc9baa3427bba8e384b7adf270fe5f"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "U4",
@@ -137,7 +141,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(u4): 完成界面基础与设置体系验收",
         "commit": "3451c5c7c44ec227d09033e35b079ec43151384a"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "G9",
@@ -161,7 +166,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(g9): 完成有界内容提案与模型接入验收",
         "commit": "2bfe82be7cb2fc1ec7efd8d17fb18bcfad86c188"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "R7",
@@ -185,7 +191,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(r7): 完成开发期重载与资产预览验收",
         "commit": "56fc957c5898885784c98963f4227e1e5710fd31"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "G10",
@@ -208,7 +215,8 @@
         "adoption": "adapted-adoption",
         "commitTitle": "feat(g10): 完成程序化内容与文本动画原型验收",
         "commit": "d99f5bc6e3f2bf84cf9670b34708310d46fcb137"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "R8",
@@ -231,7 +239,8 @@
         "adoption": "verified-prototype-retained",
         "commitTitle": "feat(r8): 完成着色模块与算法组合原型验收",
         "commit": "c997d78c72a2fdbf5b9e18a7469c2ea4f1807514"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "R9",
@@ -254,7 +263,8 @@
         "adoption": "verified-prototype-retained",
         "commitTitle": "feat(r9): 完成资源索引与可见性原型验收",
         "commit": "17823b2215ad9c999c83c2cb29b7ba84aa692215"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "G11",
@@ -277,7 +287,8 @@
         "adoption": "verified-prototype-retained",
         "commitTitle": "feat(g11): 完成脚本服务与生成绑定原型验收",
         "commit": "fee5b81dab112a6cacacb5b60ccc6008ced3dc08"
-      }
+      },
+      "status": "Complete"
     },
     {
       "id": "P3",
@@ -309,7 +320,8 @@
         "C3",
         "C4"
       ],
-      "gateReference": "docs/plans/2026-10-06-engine-evolution.md"
+      "gateReference": "docs/plans/2026-10-06-engine-evolution.md",
+      "status": "Complete"
     }
   ],
   "tasks": [
@@ -3960,5 +3972,21 @@
     "strictHistoricalByteAudit": "reported independently; unresolved original bytes remain explicit limits",
     "sourceArchive": "current source files copied as exact bytes and checked against frozen build inputs",
     "interfaceDelivery": "interface-source-snapshots-and-schemas"
-  }
+  },
+  "status": "Complete",
+  "currentStageStatuses": {
+    "F4": "Complete",
+    "G8": "Complete",
+    "U3": "Complete",
+    "F5": "Complete",
+    "U4": "Complete",
+    "G9": "Complete",
+    "R7": "Complete",
+    "G10": "Complete",
+    "R8": "Complete",
+    "R9": "Complete",
+    "G11": "Complete",
+    "P3": "Complete"
+  },
+  "currentStageStatusSource": "docs/plans/stage-status.json"
 }

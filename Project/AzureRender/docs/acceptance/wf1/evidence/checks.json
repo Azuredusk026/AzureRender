@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stage": "WF1",
+  "statusToolTests": {
+    "passed": 14,
+    "failed": 0
+  },
+  "repositoryAuditTests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "stageCount": 56,
+  "acceptanceCount": 18,
+  "runtimeTests": "UI8 evidence reused within its recorded source and artifact scope",
+  "source": [
+    {
+      "path": "tools/check_stage_status.py",
+      "sha256": "12fd6b935353597042b1f1b4bac4a765d6812968cc4df0b3ca985a24b58e10ad"
+    },
+    {
+      "path": "tools/test_stage_status.py",
+      "sha256": "5b57790dc83ddcc16fa1a17a678942d50cc8309c413967149a0550567732bcc3"
+    }
+  ]
+}

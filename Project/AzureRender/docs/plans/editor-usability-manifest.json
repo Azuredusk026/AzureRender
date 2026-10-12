@@ -16,7 +16,8 @@
     },
     {
       "id": "P4",
-      "status": "Active"
+      "status": "Ready",
+      "recordedStatus": "Active"
     }
   ],
   "issues": [
@@ -549,5 +550,13 @@
       "evidence": "../acceptance/u7/2026-10-08.md",
       "commitPhase": "u7"
     }
-  ]
+  ],
+  "currentStageStatuses": {
+    "U5": "Complete",
+    "U6": "Complete",
+    "U7": "Complete",
+    "P4": "Ready"
+  },
+  "status": "Ready",
+  "currentStageStatusSource": "docs/plans/stage-status.json"
 }

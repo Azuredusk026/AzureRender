@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "AutomatedAuthoringAndInteractionVerifiedPhysicalInputPending",
+  "status": "Ready",
   "workflows": [
     "exploration",
     "inspection"
@@ -445,5 +445,12 @@
       "evidence": "docs/acceptance/u16/automatic-2026-10-12/manifest.json"
     },
     "finalAcceptancePhase": "P8"
+  },
+  "currentStageStatusSource": "docs/plans/stage-status.json",
+  "recordedStatus": "AutomatedAuthoringAndInteractionVerifiedPhysicalInputPending",
+  "currentStageStatuses": {
+    "U15": "Ready",
+    "U16": "Ready",
+    "P6": "Ready"
   }
 }

@@ -1,5 +1,8 @@
 # AzureRender
 
+阶段代号与状态见[统一状态表](plans/current-stage-status.md)。
+下一步验收操作见[收尾流程](acceptance/phase-closure.md)。
+
 当前工作区检查与待项见[交付结果](acceptance/ui8/2026-10-12.md)。
 
 安装版项目制作见[项目中心指南](tutorials/project-center.md)。

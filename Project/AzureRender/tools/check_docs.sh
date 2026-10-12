@@ -17,6 +17,8 @@ done
 test -f mkdocs.yml
 test -f requirements-docs.txt
 test -f tools/check_doc_style.py
+python tools/check_stage_status.py
+python tools/test_stage_status.py
 
 rg -q 'SceneRendererRegistry' docs/architecture.md
 rg -q 'vkAcquireNextImageKHR' docs/architecture.md

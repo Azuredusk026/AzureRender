@@ -5,27 +5,32 @@
     {
       "id": "U14",
       "implementation": "complete",
-      "commit": "0d0dd0c"
+      "commit": "0d0dd0c",
+      "status": "Complete"
     },
     {
       "id": "B1",
       "implementation": "complete",
       "commit": "181e6fe",
-      "originalLongRun": "pending"
+      "originalLongRun": "pending",
+      "status": "Ready"
     },
     {
       "id": "G24",
       "implementation": "complete",
-      "commit": "795c4d4"
+      "commit": "795c4d4",
+      "status": "Complete"
     },
     {
       "id": "G14",
       "implementation": "complete",
-      "commit": "e0b04c2"
+      "commit": "e0b04c2",
+      "status": "Complete"
     },
     {
       "id": "P9",
-      "implementation": "complete"
+      "implementation": "complete",
+      "status": "Ready"
     }
   ],
   "inputFormats": 29,
@@ -39,7 +44,7 @@
     "physical keyboard/mouse and sound review"
   ],
   "deferredManifest": "docs/plans/p8-deferred-acceptance-manifest.json",
-  "status": "automatic implementation complete; deferred acceptance pending",
+  "status": "Ready",
   "checks": {
     "debugCpu": 186,
     "releaseCpu": 186,
@@ -49,5 +54,14 @@
     "materialPlayerReplays": 2,
     "rendererResidencyWorkflows": 2
   },
-  "evidence": "docs/acceptance/p9/evidence/2026-10-12/manifest.json"
+  "evidence": "docs/acceptance/p9/evidence/2026-10-12/manifest.json",
+  "currentStageStatusSource": "docs/plans/stage-status.json",
+  "currentStageStatuses": {
+    "U14": "Complete",
+    "B1": "Ready",
+    "G24": "Complete",
+    "G14": "Complete",
+    "P9": "Ready"
+  },
+  "recordedStatus": "automatic implementation complete; deferred acceptance pending"
 }

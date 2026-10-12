@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "FinalAcceptancePending",
+  "status": "Ready",
   "plan": "docs/plans/2026-10-11-asset-format-expansion.md",
   "roadmap": "docs/plans/2026-10-11-next-development.md",
   "executionAuthorized": true,
@@ -15,62 +15,67 @@
     {
       "id": "G17",
       "summary": "格式注册与传输契约",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "P6"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g17/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g17/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G18",
       "summary": "模型互操作与动画保真",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G17"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g18/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g18/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G19",
       "summary": "图像解码与精度语义",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G18"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g19/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g19/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G20",
       "summary": "音频解码与资源生命周期",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G19"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g20/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G21",
       "summary": "通用导出与往返验证",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G20"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "U17",
       "summary": "导入导出与重导入体验",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G21"
       ],
@@ -86,45 +91,49 @@
           "resolutionEvidence": "docs/acceptance/u17/evidence/2026-10-12/manifest.json"
         }
       ],
-      "evidence": "docs/acceptance/u17/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/u17/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "P7",
       "summary": "第一批格式制作与交付验收",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "U17"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/p7/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/p7/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G22",
       "summary": "压缩纹理与 mip 交换",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "P7"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g22/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g22/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "G23",
       "summary": "压缩音频与容器交换",
-      "status": "AutomaticVerifiedFinalAcceptanceDeferred",
+      "status": "Ready",
       "dependsOn": [
         "G22"
       ],
       "dependencyGate": "StageFunctionalRegressionAndDeliveryGates",
       "automaticComplete": true,
-      "evidence": "docs/acceptance/g23/evidence/2026-10-12/manifest.json"
+      "evidence": "docs/acceptance/g23/evidence/2026-10-12/manifest.json",
+      "recordedStatus": "AutomaticVerifiedFinalAcceptanceDeferred"
     },
     {
       "id": "P8",
       "summary": "完整格式能力收口",
-      "status": "AutomaticChecksExecutedFinalGatesPending",
+      "status": "Ready",
       "dependsOn": [
         "G23"
       ],
@@ -146,7 +155,8 @@
         "PhysicalInput",
         "SubjectiveAudio",
         "HumanAuthoringEfficiency"
-      ]
+      ],
+      "recordedStatus": "AutomaticChecksExecutedFinalGatesPending"
     }
   ],
   "firstBatch": {
@@ -652,5 +662,19 @@
   ],
   "extensionsPlan": "docs/plans/2026-10-12-content-expansion.md",
   "currentInputFormatCount": 29,
-  "currentOutputFormatCount": 20
+  "currentOutputFormatCount": 20,
+  "recordedStatus": "FinalAcceptancePending",
+  "currentStageStatuses": {
+    "G17": "Ready",
+    "G18": "Ready",
+    "G19": "Ready",
+    "G20": "Ready",
+    "G21": "Ready",
+    "U17": "Ready",
+    "P7": "Ready",
+    "G22": "Ready",
+    "G23": "Ready",
+    "P8": "Ready"
+  },
+  "currentStageStatusSource": "docs/plans/stage-status.json"
 }

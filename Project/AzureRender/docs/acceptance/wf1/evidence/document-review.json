@@ -1,0 +1,19 @@
+{
+  "boundary_action": "KEEP",
+  "content_actions": [
+    "FACT-CHECK",
+    "RESTRUCTURE"
+  ],
+  "title_review": "PASS",
+  "quality": {
+    "scope": "阶段状态与验收收尾",
+    "structure": "状态、检查结果及执行步骤分别维护",
+    "depth": "完成判断、移交及依赖有明确规则",
+    "implementation": "主清单、六份镜像及生成页面经工具核验",
+    "evidence": "14 项行为检查及 4 项既有审计检查通过",
+    "writing": "中文定稿，文风检查通过",
+    "titles": "按阶段状态与完成问题命名",
+    "informationArchitecture": "总计划、README 和文档首页链接统一状态页",
+    "visual": "本批没有界面变更，使用状态表表达关系"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-10",
-  "status": "Active",
+  "status": "Ready",
   "scope": "implementation-and-game-acceptance",
   "azureBaseCommit": "a070b0ba99016137e85f4faa33b9527cd7ba28b1",
   "repos": {
@@ -880,7 +880,7 @@
     },
     {
       "id": "G15",
-      "status": "Active",
+      "status": "Complete",
       "kind": "main",
       "items": [],
       "evidence": [],
@@ -897,7 +897,8 @@
         "albedo, normal and roughness interpretation",
         "camera, collision and performance regression"
       ],
-      "plan": "docs/plans/2026-10-09-editor-productization.md"
+      "plan": "docs/plans/2026-10-09-editor-productization.md",
+      "recordedStatus": "Active"
     },
     {
       "id": "G16",
@@ -927,7 +928,7 @@
     },
     {
       "id": "P5",
-      "status": "Active",
+      "status": "Ready",
       "kind": "main",
       "items": [
         "A01",
@@ -961,11 +962,12 @@
       "commit": null,
       "dependsOn": [
         "G16"
-      ]
+      ],
+      "recordedStatus": "Active"
     },
     {
       "id": "U14",
-      "status": "Planned",
+      "status": "Complete",
       "kind": "optional",
       "items": [
         "C01",
@@ -976,11 +978,12 @@
       "commit": null,
       "dependsOn": [
         "P5"
-      ]
+      ],
+      "recordedStatus": "Planned"
     },
     {
       "id": "G14",
-      "status": "Planned",
+      "status": "Complete",
       "kind": "optional",
       "items": [
         "C02",
@@ -990,11 +993,12 @@
       "commit": null,
       "dependsOn": [
         "P5"
-      ]
+      ],
+      "recordedStatus": "Planned"
     },
     {
       "id": "R10",
-      "status": "Planned",
+      "status": "Pending",
       "kind": "optional",
       "items": [
         "C03"
@@ -1003,7 +1007,8 @@
       "commit": null,
       "dependsOn": [
         "P5"
-      ]
+      ],
+      "recordedStatus": "Planned"
     }
   ],
   "azureInspectedFiles": [
@@ -1259,5 +1264,23 @@
     "currentAutomaticStatus": "ActionableToolCleanupCompleteFinalGatesDeferred",
     "latestAutomaticEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md",
     "latestFinalGateEvidence": "docs/acceptance/p8/2026-10-12.md"
-  }
+  },
+  "currentStageStatuses": {
+    "U8": "Complete",
+    "U9": "Complete",
+    "G12": "Complete",
+    "U10": "Complete",
+    "U11": "Complete",
+    "U12": "Complete",
+    "G13": "Complete",
+    "U13": "Complete",
+    "G15": "Complete",
+    "G16": "Complete",
+    "P5": "Ready",
+    "U14": "Complete",
+    "G14": "Complete",
+    "R10": "Pending"
+  },
+  "recordedStatus": "Active",
+  "currentStageStatusSource": "docs/plans/stage-status.json"
 }

@@ -1,5 +1,10 @@
 # Azure Engine 开发总计划
 
+当前阶段使用完成、Ready、开发中、待完成四种状态。
+代号和状态见[统一状态表](current-stage-status.md)。
+验收顺序与完成条件见[收尾流程](../acceptance/phase-closure.md)。
+本轮流程修复见[执行计划](2026-10-12-workflow-repair.md)。
+
 ## 资源浏览器与日志面板
 
 资源查找、空状态与日志工具栏使用公共控件。

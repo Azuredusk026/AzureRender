@@ -2,7 +2,7 @@
 
 > 文档类型：正式实施计划
 > 日期：2026-10-10
-> 状态：Active，U8/U9/G12/U10/U11/U12/G13/U13/G15/G16 Complete，P5 验收中
+> 状态：Ready。阶段状态见[统一状态表](current-stage-status.md)。
 > 执行方式：按阶段顺序实施，每阶段独立验收与提交
 > 依据：[Hazel 与 Fermion 借鉴评估](../research/2026-10-09-hazel-fermion.md)
 > 约束：仓库根目录的 `AGENT.md`

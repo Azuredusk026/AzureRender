@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+阶段状态见[当前状态](docs/plans/current-stage-status.md)。
+阶段收尾与验收顺序见[执行说明](docs/acceptance/phase-closure.md)。
+
 工作区迁移与本轮检查见[交付结果](docs/acceptance/ui8/2026-10-12.md)。
 Debug 与 Release 各 187 项 CPU 回归通过。
 
