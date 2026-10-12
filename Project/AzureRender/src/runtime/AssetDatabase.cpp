@@ -1,6 +1,7 @@
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
 #include "assets/TextureImportSettings.hpp"
+#include "assets/Scene2D.hpp"
 #include "assets/AssetFormatRegistry.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include <algorithm>
@@ -187,7 +188,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if (!candidate.emplace(id, AssetRecord{id, virtualPath, path, hash(source + meta.value("settings", Json::object()).dump() + "importer-v1"), hash(source), {}}).second)
                 throw std::runtime_error("Duplicate asset UUID: " + id);
             const auto extension=assetExtension(path);Json document;
-            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial")document=Json::parse(source);
+            if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscript" || extension==".azurematerial" || extension==".azure2d")document=Json::parse(source);
+            if(extension==".azure2d")document=Scene2D::parse(document).encode();
             if(extension==".azscene") {
                 document={{"resources",Json::array()}};
                 const auto scene=SceneDocument::load(path);
@@ -216,6 +218,14 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
         };
         for (const auto& dep : metadata.at(record.id).value("dependencies", Json::array())) add(dep.get<std::string>());
         const auto extension = assetExtension(record.path);
+        if(extension==".azure2d") {
+            for(const auto& item:documents.at(record.id).at("items"))if(item.contains("image")) {
+                const auto slash=record.virtualPath.find(":/");
+                const auto relative=(std::filesystem::u8path(record.virtualPath.substr(slash+2)).parent_path()/std::filesystem::u8path(item.at("image").get<std::string>())).lexically_normal();
+                const auto reference=record.virtualPath.substr(0,slash+2)+relative.generic_u8string();
+                static_cast<void>(project_.resolve(reference));add(reference);
+            }
+        }
         if(extension==".azscript") {
             const auto& document=documents.at(record.id);
             if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1

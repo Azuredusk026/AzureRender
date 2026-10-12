@@ -317,6 +317,7 @@ add_library(AzureRenderCore STATIC
     src/assets/PrimitiveGenerator.cpp
     src/assets/MaterialData.cpp
     src/assets/MaterialGraph.cpp
+    src/assets/Scene2D.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
@@ -340,6 +341,7 @@ add_library(AzureRenderCore STATIC
     src/render/VisibilityPrototype.cpp
     src/render/RendererCore.cpp
     src/render/GameUiRenderer.cpp
+    src/render/Renderer2D.cpp
     src/render/RenderGraph.cpp
     src/render/RenderViewService.cpp
     src/render/RenderViewOutput.cpp
@@ -1890,6 +1892,18 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.MaterialSlotEditing COMMAND AzureMaterialSlotEditingTests)
     add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
     add_executable(AzureMaterialGraphTests tests/MaterialGraphTests.cpp)
+    add_executable(AzureRenderer2DTests tests/Renderer2DTests.cpp)
+    target_link_libraries(AzureRenderer2DTests PRIVATE AzureRenderCore RmlUi::RmlUi)
+    add_dependencies(AzureRenderer2DTests AzureRenderShaders)
+    add_test(NAME AzureRender.Renderer2D COMMAND AzureRenderer2DTests "${SHADER_BINARY_DIR}")
+    add_executable(AzureScene2DTests tests/Scene2DTests.cpp)
+    add_executable(AzureScene2DDependencyTests tests/Scene2DDependencyTests.cpp)
+    target_link_libraries(AzureScene2DDependencyTests PRIVATE AzureRuntime)
+    add_test(NAME AzureAssets.Scene2DDependencies COMMAND AzureScene2DDependencyTests)
+    add_executable(AzureScene2DWorkflowTests tests/Scene2DWorkflowTests.cpp)
+    target_link_libraries(AzureScene2DWorkflowTests PRIVATE AzureRuntime AzureRenderCore)
+    add_dependencies(AzureScene2DWorkflowTests AzureRenderShaders)
+    add_test(NAME AzureEngine.Scene2DWorkflow COMMAND AzureScene2DWorkflowTests "${SHADER_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/samples/2d/scene.azure2d" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/fonts/LatoLatin-Regular.ttf")
     add_executable(AzureExtendedImageFormatsTests tests/ExtendedImageFormatsTests.cpp)
     add_executable(AzureExtendedAssetWorkflowTests tests/ExtendedAssetWorkflowTests.cpp)
     target_link_libraries(AzureExtendedAssetWorkflowTests PRIVATE AzureEditor)
@@ -1907,6 +1921,8 @@ if(BUILD_TESTING)
     add_test(NAME AzureAssets.UsdaFormat COMMAND AzureUsdaFormatTests)
     target_link_libraries(AzureExtendedImageFormatsTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.ExtendedImageFormats COMMAND AzureExtendedImageFormatsTests)
+    target_link_libraries(AzureScene2DTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.Scene2D COMMAND AzureScene2DTests)
     add_executable(AzureMaterialGraphEditingTests tests/MaterialGraphEditingTests.cpp)
     target_link_libraries(AzureMaterialGraphEditingTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.MaterialGraphEditing COMMAND AzureMaterialGraphEditingTests)

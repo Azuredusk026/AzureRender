@@ -1,4 +1,5 @@
 #include "render/GameUiRenderer.hpp"
+#include "assets/image/ImageCodec.hpp"
 #include <RmlUi/Core/Matrix4.h>
 #include <stb_image.h>
 #include <algorithm>
@@ -140,9 +141,13 @@ Rml::TextureHandle GameUiRenderer::GenerateTexture(Rml::Span<const Rml::byte> so
         allocator.destroyBuffer(staging);const auto handle=impl_->next++;impl_->textures.emplace(handle,value);return handle;
     }catch(...){allocator.destroyBuffer(staging);impl_->destroy(value);throw;}
 }
-Rml::TextureHandle GameUiRenderer::LoadTexture(Rml::Vector2i& dimensions,const Rml::String& source){int width=0,height=0,channels=0;auto* bytes=stbi_load(source.c_str(),&width,&height,&channels,4);if(!bytes)return 0;
-    for(std::size_t i=0;i<static_cast<std::size_t>(width)*height;++i)for(unsigned c=0;c<3;++c)bytes[i*4+c]=static_cast<unsigned char>(static_cast<unsigned>(bytes[i*4+c])*bytes[i*4+3]/255);
-    try{const auto result=GenerateTexture({bytes,static_cast<std::size_t>(width)*height*4},{width,height});stbi_image_free(bytes);dimensions={width,height};return result;}catch(...){stbi_image_free(bytes);throw;}
+Rml::TextureHandle GameUiRenderer::LoadTexture(Rml::Vector2i& dimensions,const Rml::String& source){
+    DecodedImage image;ImageRgba8 converted;
+    try{image=decodeImageFile(std::filesystem::u8path(source));converted=convertImageToRgba8(image);}catch(const std::exception&){return 0;}
+    auto& bytes=converted.pixels;
+    for(std::size_t i=0;i<bytes.size();i+=4)for(unsigned c=0;c<3;++c)bytes[i+c]=static_cast<unsigned char>(static_cast<unsigned>(bytes[i+c])*bytes[i+3]/255);
+    dimensions={static_cast<int>(image.width),static_cast<int>(image.height)};
+    return GenerateTexture({bytes.data(),bytes.size()},dimensions);
 }
 void GameUiRenderer::ReleaseTexture(Rml::TextureHandle texture){auto found=impl_->textures.find(texture);if(found!=impl_->textures.end())found->second.retire=impl_->serial+3;}
 void GameUiRenderer::EnableScissorRegion(bool enable){impl_->clipping=enable;}

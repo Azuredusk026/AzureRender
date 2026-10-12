@@ -1,4 +1,5 @@
 #include "runtime/GameUi.hpp"
+#include "assets/Scene2D.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <RmlUi/Core.h>
 #include <cmath>
@@ -26,9 +27,14 @@ struct GameUi::Impl: Rml::EventListener {
         ++users;registered=true;
         try{
             if(!Rml::LoadFontFace(font.generic_string()))throw std::runtime_error("Game UI font failed to load");
+            if(path.extension()==".azure2d"){
+                if(!Rml::LoadFontFace(font.generic_string(),"AzureGame",Rml::Style::FontStyle::Normal))throw std::runtime_error("2D font failed to load");
+                const auto cjk=font.parent_path()/"NotoSansCJKsc-Regular.otf";
+                if(std::filesystem::is_regular_file(cjk)&&!Rml::LoadFontFace(cjk.generic_string(),true))throw std::runtime_error("2D Chinese fallback font failed to load");
+            }
             context=Rml::CreateContext("azure-ui-"+std::to_string(++contextCounter),{640,360},&renderer);
             if(!context)throw std::runtime_error("Game UI context failed to initialize");
-            document=context->LoadDocument(path.generic_string());if(!document)throw std::runtime_error("Game UI document failed to load");
+            document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),path.generic_string()):context->LoadDocument(path.generic_string());if(!document)throw std::runtime_error("Game UI document failed to load");
             document->AddEventListener("click",this);document->Show();
         }catch(...){clear();throw;}
     }

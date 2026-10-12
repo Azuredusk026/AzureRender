@@ -376,3 +376,7 @@ Windows 缓存读取共享发布所需的删除访问。
 
 GIF、PSD、SVG 和 USDA 通过公共导入服务接入。
 范围见[扩展格式说明](docs/assets/extended-formats.md)。
+
+二维场景支持精灵、矩形及中文文本。
+二维图元与投影标签沿用公共渲染资源契约。
+使用方式见[二维内容说明](docs/runtime/scene-2d.md)。

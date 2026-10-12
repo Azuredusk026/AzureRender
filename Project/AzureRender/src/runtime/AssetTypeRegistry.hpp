@@ -41,7 +41,7 @@ inline AssetTypeRegistry& assetTypeRegistry() {
         std::vector<std::string> audioExtensions;
         for(const auto& format:assetFormatRegistry().list(AssetDomain::Audio))if(format.canRead)audioExtensions.insert(audioExtensions.end(),format.extensions.begin(),format.extensions.end());
         value.add({"audio","Audio",audioExtensions,false,AssetDomain::Audio});
-        value.add({"ui","UI documents",{".rml"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
+        value.add({"ui","UI documents",{".rml",".azure2d"}});value.add({"ui-style","UI styles",{".rcss"}});value.add({"level","Levels",{".azurelevel",".azscene"}});
         std::vector<std::string> imageExtensions;
         for(const auto& format:assetFormatRegistry().list(AssetDomain::Image))if(format.canRead)imageExtensions.insert(imageExtensions.end(),format.extensions.begin(),format.extensions.end());
         value.add({"image","Images",imageExtensions,false,AssetDomain::Image});value.add({"font","Fonts",{".ttf",".otf"}});
