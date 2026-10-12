@@ -28,16 +28,16 @@ std::string bytes(const std::filesystem::path& path, const std::function<void()>
         const auto nativeError=GetLastError();
         throw std::runtime_error("Cannot read asset: " + path.u8string()+" (Windows error "+std::to_string(nativeError)+")");
 #else
-        throw std::runtime_error("Cannot read asset: " + path.string());
+        throw std::runtime_error("Cannot read asset: " + path.u8string());
 #endif
     }
-    const auto size=input.tellg();if(size<0)throw std::runtime_error("Cannot size asset: "+path.string());
+    const auto size=input.tellg();if(size<0)throw std::runtime_error("Cannot size asset: "+path.u8string());
     std::string data(static_cast<std::size_t>(size),'\0');input.seekg(0);
     for(std::size_t offset=0;offset<data.size();){
         if(check)check();const auto count=std::min<std::size_t>(1024*1024,data.size()-offset);
         input.read(data.data()+offset,static_cast<std::streamsize>(count));offset+=count;
     }
-    if (!input) throw std::runtime_error("Asset read failed: " + path.string());
+    if (!input) throw std::runtime_error("Asset read failed: " + path.u8string());
     return data;
 }
 std::string cacheBytes(const std::filesystem::path& path) {
@@ -78,7 +78,7 @@ void write(const std::filesystem::path& path, const std::string& data) {
     std::filesystem::create_directories(path.parent_path());
     auto temporary = path;temporary += ".tmp";
     { std::ofstream output(temporary, std::ios::binary); output << data; output.flush();
-      if (!output) throw std::runtime_error("Cannot write asset file: " + path.string()); }
+      if (!output) throw std::runtime_error("Cannot write asset file: " + path.u8string()); }
     std::filesystem::copy_file(temporary, path, std::filesystem::copy_options::overwrite_existing);
     std::filesystem::remove(temporary);
 }
@@ -141,7 +141,7 @@ std::uint64_t read64(const std::string& value, std::size_t offset) {
 }
 void cache(const std::filesystem::path& path, const AssetRecord& record) {
     const auto source = bytes(record.path);
-    if (hash(source) != record.contentHash) throw std::runtime_error("Asset changed during import: " + record.path.string());
+    if (hash(source) != record.contentHash) throw std::runtime_error("Asset changed during import: " + record.path.u8string());
     std::string data = "AZCACHE1"; append64(data, record.fingerprint); append64(data, source.size()); data += source;
     writeCache(path, data);
 }

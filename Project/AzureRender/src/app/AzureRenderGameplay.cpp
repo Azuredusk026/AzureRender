@@ -128,7 +128,7 @@ void AzureRenderApp::synchronizeGameUi(){
         gameUi_.reset();gameUiPath_.clear();
         if(!path.empty()){
             if(!gameUiRenderer_)gameUiRenderer_=std::make_unique<azurerender::GameUiRenderer>(*rhi_,postProcessRenderPass_,resourceLocator_.shaderDirectory());
-            gameUi_=std::make_unique<azurerender::GameUi>(path,resourceLocator_.publicAsset("fonts/LatoLatin-Regular.ttf"),*gameUiRenderer_);gameUiPath_=path;
+            gameUi_=std::make_unique<azurerender::GameUi>(std::filesystem::u8path(path),resourceLocator_.publicAsset("fonts/LatoLatin-Regular.ttf"),*gameUiRenderer_);gameUiPath_=path;
             gameUi_->setActionHandler([this](std::string action){
                 auto* runtime=activeRuntime();if(!runtime)return;
                 if(action=="pause"){

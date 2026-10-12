@@ -46,6 +46,8 @@ int main() {
         auto edit = [&](const std::string& text) { std::ofstream(project.file) << text; };
         edit(R"({"schemaVersion":1,"id":"x","name":"x","mounts":[{"name":"assets","path":"assets"}],"startupScene":"assets:/startup.azscene","scripting":{"schemaVersion":99,"backend":"lua"}})");
         rejects([&] { Project::load(project.file); });
+        edit(R"({"schemaVersion":1,"id":"x","name":"x","engine":{"id":"AzureRender","projectApiVersion":99},"mounts":[{"name":"assets","path":"assets"}],"startupScene":"assets:/startup.azscene"})");
+        rejects([&] { Project::load(project.file); });
         edit(R"({"schemaVersion":99})");
         rejects([&] { Project::load(project.file); });
         edit(

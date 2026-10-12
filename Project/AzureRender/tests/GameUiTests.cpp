@@ -31,10 +31,11 @@ int main(int argc,char** argv){
   ui.resize(1280,720,2);ui.update(1.0/60.0);ui.render();
   bool rejected=false;try{ui.setText("missing","text");}catch(const std::exception&){rejected=true;}
   if(!rejected)throw std::runtime_error("Unknown UI element must be rejected");
-  const auto folder=std::filesystem::temp_directory_path()/"azure-ui-relative-image";std::filesystem::create_directories(folder);
+  const auto folder=std::filesystem::temp_directory_path()/std::filesystem::u8path(u8"azure-ui 中文 🌟 relative-image");std::filesystem::create_directories(folder);
+  const auto font=folder/"font.ttf";std::filesystem::copy_file(argv[2],font,std::filesystem::copy_options::overwrite_existing);
   const auto image=folder/std::filesystem::u8path(u8"精灵.svg");std::ofstream(image)<<"<svg width='16' height='16'/>";
   std::ofstream(folder/"scene.azure2d")<<u8R"({"schemaVersion":1,"size":[640,360],"items":[{"id":"tile","kind":"sprite","rect":[0,0,16,16],"image":"精灵.svg"}]})";
-  {azurerender::GameUi sprites(folder/"scene.azure2d",argv[2],renderer);sprites.update(.016);sprites.render();}
+  {azurerender::GameUi sprites(folder/"scene.azure2d",font,renderer);sprites.update(.016);sprites.render();}
   std::filesystem::remove_all(folder);
   if(renderer.imageLoads!=1||std::filesystem::u8path(renderer.lastImage)!=image)throw std::runtime_error("Windows 2D documents must resolve relative Unicode textures against their own directory");
   std::cout<<"RmlUi document, text binding, button action, DPI resize and invalid element handling passed\n";

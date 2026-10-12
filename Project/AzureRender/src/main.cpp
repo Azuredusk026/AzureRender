@@ -9,6 +9,7 @@
 #include "platform/NativeArguments.hpp"
 #include "editor/EditorContext.hpp"
 #include "editor/EditorSession.hpp"
+#include "editor/EditorWorkspace.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "editor/SceneModel.hpp"
@@ -26,7 +27,7 @@
 
 int main(const int argumentCount, char** argumentValues) {
     azurerender::RuntimeDiagnostics::instance().configure(
-        "captures/azurerender.log.jsonl");
+        (azurerender::EditorWorkspace::configDirectory()/"logs/azurerender.log.jsonl").u8string());
     try {
         const auto native=azurerender::nativeArguments(argumentCount,argumentValues);
         std::vector<std::string> arguments(native.begin()+1,native.end());

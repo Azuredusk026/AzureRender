@@ -121,6 +121,7 @@ public:
     void setPlacementRaycast(PlacementRaycast query){placementRaycast_=std::move(query);}
     std::array<float,3> placementPosition(const nlohmann::json& parameters) const;
     bool building() const noexcept { return build_ != nullptr; }
+    std::string buildProgress() const { return build_ ? build_->progress() : std::string{}; }
     const GameBuildResult& buildResult() const noexcept { return buildResult_; }
 
     [[nodiscard]] EditorContext& context() noexcept { return *context_; }

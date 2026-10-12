@@ -223,7 +223,7 @@ void AzureRenderApp::createEditorUiRenderPass() {
 
 
 void AzureRenderApp::createGraphicsPipeline() {
-    const std::string shaderDirectory = resourceLocator_.shaderDirectory().string();
+    const std::string shaderDirectory = resourceLocator_.shaderDirectory().u8string();
     const auto innerOutlineVertexCode =
         readBinaryFile(shaderDirectory + "/inner_outline.vert.spv");
     const auto innerOutlineFragmentCode =

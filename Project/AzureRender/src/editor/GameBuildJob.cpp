@@ -25,15 +25,19 @@ std::wstring quote(const std::wstring& value) {
 }
 GameBuildJob::GameBuildJob(const std::filesystem::path& project, const std::filesystem::path& install,
                           const std::filesystem::path& output, bool replace) {
-    const auto tool = ResourceLocator().publicAsset("test_model.gltf").parent_path().parent_path() / "tools/build_game.py";
+    const auto engine=std::filesystem::absolute(install);
+    const auto tool = engine / "share/AzureRender/tools/build_game.py";
+    const auto python = tool.parent_path()/"python/python.exe";
+    if(!std::filesystem::is_regular_file(python))throw std::runtime_error("Installed Python builder runtime missing: "+python.u8string());
     if (!std::filesystem::is_regular_file(tool)) throw std::runtime_error("Game build tool missing: " + tool.string());
     const auto log = project.parent_path() / ".azure/game-build.log";
+    log_=log;
     std::filesystem::create_directories(log.parent_path());
     work_ = std::async(std::launch::async, [=] {
         const auto start = std::chrono::steady_clock::now(); GameBuildResult result;
         try {
 #ifdef _WIN32
-        std::wstring command = L"python " + quote(tool.wstring()) + L" --project " + quote(project.wstring())
+        std::wstring command = quote(python.wstring())+L" " + quote(tool.wstring()) + L" --project " + quote(project.wstring())
             + L" --install " + quote(std::filesystem::absolute(install).wstring())
             + L" --output " + quote(std::filesystem::absolute(output).wstring()) + (replace ? L" --replace" : L"");
         SECURITY_ATTRIBUTES attributes{sizeof(SECURITY_ATTRIBUTES), nullptr, TRUE};
@@ -43,7 +47,7 @@ GameBuildJob::GameBuildJob(const std::filesystem::path& project, const std::file
         startup.hStdOutput = startup.hStdError = file;
         startup.hStdInput = CreateFileW(L"NUL", GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, &attributes, OPEN_EXISTING, 0, nullptr);
         PROCESS_INFORMATION process{};
-        const bool launched = CreateProcessW(nullptr, command.data(), nullptr, nullptr, TRUE, CREATE_NO_WINDOW, nullptr, nullptr, &startup, &process) != 0;
+        const bool launched = CreateProcessW(python.c_str(), command.data(), nullptr, nullptr, TRUE, CREATE_NO_WINDOW, nullptr, nullptr, &startup, &process) != 0;
         const auto error = GetLastError();
         CloseHandle(file); if(startup.hStdInput != INVALID_HANDLE_VALUE) CloseHandle(startup.hStdInput);
         if (launched) {
@@ -64,5 +68,10 @@ GameBuildJob::GameBuildJob(const std::filesystem::path& project, const std::file
     });
 }
 bool GameBuildJob::ready() const { return work_.valid() && work_.wait_for(std::chrono::seconds(0)) == std::future_status::ready; }
+std::string GameBuildJob::progress() const {
+    std::ifstream input(log_);std::string line,last;
+    while(std::getline(input,line))if(line.rfind("[stage]",0)==0)last=line;
+    return last.empty()?"Starting installed game builder":last;
+}
 GameBuildResult GameBuildJob::finish() { return work_.get(); }
 }

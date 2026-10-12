@@ -56,7 +56,7 @@ std::shared_ptr<EditorContext> ProjectOpenService::create(const std::string& tem
 void ProjectOpenService::remember(const Project& project) {
     auto candidate=nlohmann::json::array();
     candidate.push_back({{"id",project.id},{"name",project.name},{"path",project.file.u8string()}});
-    for(const auto& record:records_)if(record.at("path")!=project.file.u8string()&&candidate.size()<16)candidate.push_back(record);
+    for(const auto& record:records_)if(record.at("path")!=project.file.u8string()&&record.at("id")!=project.id&&candidate.size()<16)candidate.push_back(record);
     std::filesystem::create_directories(history_.parent_path());
     const auto pending=history_.parent_path()/("recent-"+newDocumentIdentity()+".pending");
     try {

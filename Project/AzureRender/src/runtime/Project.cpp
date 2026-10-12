@@ -15,12 +15,12 @@ namespace azurerender {
 namespace {
 std::filesystem::path inside(const std::filesystem::path& root, const std::filesystem::path& path) {
     if (path.empty() || path.is_absolute() || path.has_root_name())
-        throw std::runtime_error("Project path must be relative: " + path.string());
+        throw std::runtime_error("Project path must be relative: " + path.u8string());
     const auto base = std::filesystem::weakly_canonical(root);
     const auto result = std::filesystem::weakly_canonical(base / path);
     const auto relative = result.lexically_relative(base);
     if (relative.empty() || *relative.begin() == "..")
-        throw std::runtime_error("Project path escapes mount: " + path.string());
+        throw std::runtime_error("Project path escapes mount: " + path.u8string());
     return result;
 }
 bool mountName(const std::string& name) {
@@ -47,7 +47,7 @@ std::string uuid() {
 void Project::create(const std::filesystem::path& directory, const std::string& projectName) {
     if (projectName.empty()) throw std::runtime_error("Project name must be nonempty");
     if (std::filesystem::exists(directory) && !std::filesystem::is_empty(directory))
-        throw std::runtime_error("Project directory must be empty: " + directory.string());
+        throw std::runtime_error("Project directory must be empty: " + directory.u8string());
     std::filesystem::create_directories(directory / "assets");
     SceneDocument scene = SceneDocument::fromAsset("engine:/assets_public/test_model.gltf");
     scene.sceneId = "startup";
@@ -55,6 +55,7 @@ void Project::create(const std::filesystem::path& directory, const std::string& 
     scene.save(directory / "assets/startup.azscene");
     const nlohmann::json document = {
         {"schemaVersion", kSchemaVersion},
+        {"engine", {{"id","AzureRender"},{"projectApiVersion",1},{"createdWith",AZURERENDER_VERSION}}},
         {"id", uuid()},
         {"name", projectName},
         {"mounts", nlohmann::json::array({{{"name", "assets"}, {"path", "assets"}}})},
@@ -62,13 +63,13 @@ void Project::create(const std::filesystem::path& directory, const std::string& 
     std::ofstream output(directory / "project.azureproject");
     output << document.dump(2) << '\n';
     output.flush();
-    if (!output) throw std::runtime_error("Cannot write project: " + directory.string());
+    if (!output) throw std::runtime_error("Cannot write project: " + directory.u8string());
 }
 void Project::createGame(const std::filesystem::path& directory, const std::string& projectName) {
     if (projectName.empty()) throw std::runtime_error("Project name must be nonempty");
     const auto target = std::filesystem::absolute(directory).lexically_normal();
     if (std::filesystem::exists(target) && !std::filesystem::is_empty(target))
-        throw std::runtime_error("Project directory must be empty: " + target.string());
+        throw std::runtime_error("Project directory must be empty: " + target.u8string());
     const auto candidate = target.parent_path() / (".azure-template-" + uuid());
     try {
         const auto source = ResourceLocator().publicAsset("gameplay");
@@ -84,6 +85,7 @@ void Project::createGame(const std::filesystem::path& directory, const std::stri
         std::ifstream input(source / "project.azureproject");
         nlohmann::json document; input >> document;
         document["id"] = uuid(); document["name"] = projectName;
+        document["engine"]={{"id","AzureRender"},{"projectApiVersion",1},{"createdWith",AZURERENDER_VERSION}};
         { std::ofstream output(candidate / "project.azureproject"); output << document.dump(2) << '\n';
           output.flush(); if (!output) throw std::runtime_error("Cannot write game project"); }
         static_cast<void>(Project::load(candidate / "project.azureproject").loadStartupScene());
@@ -101,6 +103,11 @@ Project Project::load(const std::filesystem::path& path) {
         if (!document.at("schemaVersion").is_number_integer() ||
             document.at("schemaVersion") != kSchemaVersion)
             throw std::runtime_error("Unsupported project schemaVersion");
+        if(document.contains("engine")) {
+            const auto& engine=document.at("engine");
+            if(!engine.is_object() || engine.value("id",std::string{})!="AzureRender" || !engine.contains("projectApiVersion") || !engine.at("projectApiVersion").is_number_integer() || engine.at("projectApiVersion")!=1)
+                throw std::runtime_error("Incompatible engine project API; this engine supports version 1");
+        }
         Project project;
         if(document.contains("scripting")) {
             project.scriptingConfiguration=document.at("scripting");
@@ -132,7 +139,7 @@ Project Project::load(const std::filesystem::path& path) {
             const auto root =
                 inside(project.file.parent_path(), entry.at("path").get<std::string>());
             if (!std::filesystem::is_directory(root))
-                throw std::runtime_error("Mount directory missing: " + root.string());
+                throw std::runtime_error("Mount directory missing: " + root.u8string());
             if (!project.mounts.emplace(name, root).second)
                 throw std::runtime_error("Duplicate project mount: " + name);
         }
@@ -141,7 +148,7 @@ Project Project::load(const std::filesystem::path& path) {
             throw std::runtime_error("startupScene missing");
         return project;
     } catch (const std::exception& error) {
-        throw std::runtime_error("Project '" + path.string() + "': " + error.what());
+        throw std::runtime_error("Project '" + path.u8string() + "': " + error.what());
     }
 }
 SceneDocument Project::loadStartupScene() const {
@@ -163,7 +170,7 @@ SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
                 (sceneFile.parent_path() / resource.path).lexically_relative(file.parent_path()));
         }
         if (!std::filesystem::is_regular_file(resource.path))
-            throw std::runtime_error("Scene resource missing: " + resource.path.string());
+            throw std::runtime_error("Scene resource missing: " + resource.path.u8string());
     }
     if(std::any_of(scene.nodes.begin(),scene.nodes.end(),[](const auto& node){return !node.materialSlots.empty();})){
         AssetDatabase assets(*this);assets.refresh();resolveSceneMaterials(scene,assets);

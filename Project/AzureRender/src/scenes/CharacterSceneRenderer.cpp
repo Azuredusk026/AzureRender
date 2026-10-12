@@ -1376,7 +1376,7 @@ void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std:
 void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
 
     const auto loadPpmTexture = [](const std::string& path) {
-        std::ifstream stream(path);
+        std::ifstream stream(std::filesystem::u8path(path));
         if (!stream) {
             throw std::runtime_error("Could not open toon-ramp atlas: " + path);
         }

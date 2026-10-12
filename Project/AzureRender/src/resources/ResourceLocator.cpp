@@ -14,7 +14,7 @@ namespace azurerender {
 
 namespace {
 
-std::filesystem::path executableDirectory() {
+std::filesystem::path processExecutableDirectory() {
 #ifdef _WIN32
     std::wstring buffer(32768, L'\0');
     const DWORD length = GetModuleFileNameW(
@@ -45,6 +45,13 @@ void appendUnique(
 
 }  // namespace
 
+std::filesystem::path ResourceLocator::executableDirectory() { return processExecutableDirectory(); }
+std::filesystem::path ResourceLocator::installationRoot() const {
+    const auto executable=processExecutableDirectory();
+    const auto root=std::filesystem::weakly_canonical(executable/"..");
+    if(std::filesystem::is_regular_file(root/"share/AzureRender/runtime-build.json"))return root;
+    return {};
+}
 ResourceLocator::ResourceLocator(std::filesystem::path explicitRoot) {
     if (explicitRoot.empty()) {
         if (const char* environment = std::getenv("AZURERENDER_RESOURCE_ROOT")) {
@@ -54,13 +61,17 @@ ResourceLocator::ResourceLocator(std::filesystem::path explicitRoot) {
     if (!explicitRoot.empty()) {
         appendUnique(roots_, std::move(explicitRoot));
     }
-    const auto executable = executableDirectory();
+    const auto executable = processExecutableDirectory();
     appendUnique(roots_, executable);
     appendUnique(roots_, executable / "../share/AzureRender");
+    // An installation has a closed resource boundary; missing files stay missing.
+    const bool installed=std::filesystem::is_regular_file(executable/"../share/AzureRender/runtime-build.json");
+    if(!installed) {
 #ifdef AZURERENDER_DEVELOPMENT_ROOT
-    appendUnique(roots_, AZURERENDER_DEVELOPMENT_ROOT);
+        appendUnique(roots_, AZURERENDER_DEVELOPMENT_ROOT);
 #endif
-    appendUnique(roots_, std::filesystem::current_path());
+        appendUnique(roots_, std::filesystem::current_path());
+    }
 }
 
 std::filesystem::path ResourceLocator::find(
@@ -74,10 +85,10 @@ std::filesystem::path ResourceLocator::find(
     }
     std::string searched;
     for (const auto& root : roots_) {
-        searched += "\n  " + (root / relative).string();
+        searched += "\n  " + (root / relative).u8string();
     }
     throw std::runtime_error(
-        std::string("Missing ") + type + " resource '" + relative.string()
+        std::string("Missing ") + type + " resource '" + relative.u8string()
         + "'; searched:" + searched);
 }
 

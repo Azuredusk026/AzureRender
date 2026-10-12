@@ -704,7 +704,7 @@ VkImageView AzureRenderApp::createImageView(
 }
 
 std::vector<char> AzureRenderApp::readBinaryFile(const std::string& path) {
-    std::ifstream file(path, std::ios::ate | std::ios::binary);
+    std::ifstream file(std::filesystem::u8path(path), std::ios::ate | std::ios::binary);
     if (!file) {
         throw std::runtime_error("Unable to open shader: " + path);
     }

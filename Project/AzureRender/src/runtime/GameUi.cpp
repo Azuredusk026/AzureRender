@@ -3,6 +3,7 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <RmlUi/Core.h>
 #include <cmath>
+#include <cstdio>
 #include <stdexcept>
 namespace azurerender {
 namespace {
@@ -14,6 +15,20 @@ struct System: Rml::SystemInterface {
     }
 };
 System systemInterface;
+// RmlUi's file contract receives UTF-8 paths from project documents.
+struct Files: Rml::FileInterface {
+    Rml::FileHandle Open(const Rml::String& path) override {
+#ifdef _WIN32
+        return reinterpret_cast<Rml::FileHandle>(_wfopen(std::filesystem::u8path(path).c_str(),L"rb"));
+#else
+        return reinterpret_cast<Rml::FileHandle>(std::fopen(path.c_str(),"rb"));
+#endif
+    }
+    void Close(Rml::FileHandle file) override {std::fclose(reinterpret_cast<FILE*>(file));}
+    size_t Read(void* buffer,size_t size,Rml::FileHandle file) override {return std::fread(buffer,1,size,reinterpret_cast<FILE*>(file));}
+    bool Seek(Rml::FileHandle file,long offset,int origin) override {return std::fseek(reinterpret_cast<FILE*>(file),offset,origin)==0;}
+    size_t Tell(Rml::FileHandle file) override {return std::ftell(reinterpret_cast<FILE*>(file));}
+} fileInterface;
 unsigned users=0,contextCounter=0;
 }
 struct GameUi::Impl: Rml::EventListener {
@@ -23,18 +38,18 @@ struct GameUi::Impl: Rml::EventListener {
     bool down=false,registered=false;
     Impl(const std::filesystem::path& path,const std::filesystem::path& font,Rml::RenderInterface& renderer){
         if(!std::filesystem::is_regular_file(path)||!std::filesystem::is_regular_file(font))throw std::runtime_error("Game UI document or font missing");
-        if(users==0){Rml::SetSystemInterface(&systemInterface);Rml::SetRenderInterface(&renderer);if(!Rml::Initialise())throw std::runtime_error("RmlUi initialization failed");}
+        if(users==0){Rml::SetSystemInterface(&systemInterface);Rml::SetRenderInterface(&renderer);Rml::SetFileInterface(&fileInterface);if(!Rml::Initialise())throw std::runtime_error("RmlUi initialization failed");}
         ++users;registered=true;
         try{
-            if(!Rml::LoadFontFace(font.generic_string()))throw std::runtime_error("Game UI font failed to load");
+            if(!Rml::LoadFontFace(font.generic_u8string()))throw std::runtime_error("Game UI font failed to load");
             if(path.extension()==".azure2d"){
-                if(!Rml::LoadFontFace(font.generic_string(),"AzureGame",Rml::Style::FontStyle::Normal))throw std::runtime_error("2D font failed to load");
+                if(!Rml::LoadFontFace(font.generic_u8string(),"AzureGame",Rml::Style::FontStyle::Normal))throw std::runtime_error("2D font failed to load");
                 const auto cjk=font.parent_path()/"NotoSansCJKsc-Regular.otf";
-                if(std::filesystem::is_regular_file(cjk)&&!Rml::LoadFontFace(cjk.generic_string(),true))throw std::runtime_error("2D Chinese fallback font failed to load");
+                if(std::filesystem::is_regular_file(cjk)&&!Rml::LoadFontFace(cjk.generic_u8string(),true))throw std::runtime_error("2D Chinese fallback font failed to load");
             }
             context=Rml::CreateContext("azure-ui-"+std::to_string(++contextCounter),{640,360},&renderer);
             if(!context)throw std::runtime_error("Game UI context failed to initialize");
-            document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),Rml::StringUtilities::Replace(path.generic_u8string(), ':', '|')):context->LoadDocument(path.generic_string());if(!document)throw std::runtime_error("Game UI document failed to load");
+            document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),Rml::StringUtilities::Replace(path.generic_u8string(), ':', '|')):context->LoadDocument(path.generic_u8string());if(!document)throw std::runtime_error("Game UI document failed to load");
             document->AddEventListener("click",this);document->Show();
         }catch(...){clear();throw;}
     }

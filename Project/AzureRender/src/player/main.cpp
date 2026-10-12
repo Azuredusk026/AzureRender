@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
             for (const auto& item : assets.records()) {
                 const auto& path = item.second.path;
                 if(path.extension()==".azurelevel")static_cast<void>(azurerender::Level::load(path,assets));
-                if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.string()));
+                if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.u8string()));
             }
             azurerender::RuntimeLifecycle runtime;runtime.loadScene(project.loadStartupScene());runtime.start();
             azurerender::GameRuntime game(runtime,azurerender::application::systems(),azurerender::application::configuration(project));

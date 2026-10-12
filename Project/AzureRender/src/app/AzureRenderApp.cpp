@@ -97,7 +97,7 @@ void AzureRenderApp::run(
     if(!options.projectFile.empty() && !options.editorMode)
     runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options](auto&) {
     if (!options.projectFile.empty() && !options.editorMode)
-        levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(options.projectFile), runtime_);
+        levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(std::filesystem::u8path(options.projectFile)), runtime_);
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
@@ -532,7 +532,7 @@ void AzureRenderApp::buildRenderContext(
             context.scene.nodes.push_back(std::move(root));
         }
     }
-    context.shaderDirectory = resourceLocator_.shaderDirectory().string();
+    context.shaderDirectory = resourceLocator_.shaderDirectory().u8string();
 #if AZURE_WITH_EDITOR
     if(!activeShaderDirectory_.empty())context.shaderDirectory=activeShaderDirectory_;
 #endif
@@ -542,7 +542,7 @@ void AzureRenderApp::buildRenderContext(
         if (renderSettings_.sceneType == azurerender::SceneType::Blackhole) {
             const auto candidate = privateRoot / "Space_Skybox";
             if (std::filesystem::is_directory(candidate)) {
-                context.environment.path = candidate.string();
+                context.environment.path = candidate.u8string();
                 context.environment.projection =
                     azurerender::EnvironmentProjection::CubeFaces;
             }
@@ -550,13 +550,13 @@ void AzureRenderApp::buildRenderContext(
             const auto candidate = privateRoot / "EveningSkyHDRI007B_2K"
                 / "EveningSkyHDRI007B_2K_TONEMAPPED.jpg";
             if (std::filesystem::is_regular_file(candidate)) {
-                context.environment.path = candidate.string();
+                context.environment.path = candidate.u8string();
                 context.environment.projection =
                     azurerender::EnvironmentProjection::Equirectangular;
             }
         }
     }
-    context.rampAtlasPath = resourceLocator_.rampAtlas().string();
+    context.rampAtlasPath = resourceLocator_.rampAtlas().u8string();
     effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
     context.renderSettings = &effectiveRenderSettings_;
 }

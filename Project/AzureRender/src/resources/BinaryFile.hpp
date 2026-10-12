@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fstream>
+#include <filesystem>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -9,7 +10,7 @@ namespace azurerender {
 
 // Reads a whole file as bytes. Throws std::runtime_error when unreadable.
 [[nodiscard]] inline std::vector<char> readBinaryFile(const std::string& path) {
-    std::ifstream file(path, std::ios::ate | std::ios::binary);
+    std::ifstream file(std::filesystem::u8path(path), std::ios::ate | std::ios::binary);
     if (!file) {
         throw std::runtime_error("Unable to open file: " + path);
     }

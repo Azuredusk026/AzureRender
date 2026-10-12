@@ -2092,3 +2092,14 @@ install(DIRECTORY docs/licenses/compressed-audio DESTINATION "${CMAKE_INSTALL_DA
 # Installed editor startup uses the existing GLFW/Vulkan backend and project services.
 target_sources(AzureEditor PRIVATE src/editor/projects/ProjectCenterController.cpp src/editor/projects/ProjectCenterView.cpp)
 target_sources(AzureRenderHost PRIVATE src/app/ProjectCenterHost.cpp)
+
+if(WIN32)
+    add_executable(AzureGameLauncher WIN32 src/launcher/main.cpp)
+    set_property(TARGET AzureGameLauncher PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    target_link_libraries(AzureGameLauncher PRIVATE nlohmann_json::nlohmann_json shell32)
+    install(TARGETS AzureGameLauncher RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+endif()
+
+if(WIN32)
+    install(CODE "execute_process(COMMAND \"${Python3_EXECUTABLE}\" \"${CMAKE_CURRENT_SOURCE_DIR}/tools/install_python_runtime.py\" --destination \"\${CMAKE_INSTALL_PREFIX}/share/AzureRender/tools/python\" COMMAND_ERROR_IS_FATAL ANY)")
+endif()

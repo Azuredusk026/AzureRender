@@ -19,7 +19,7 @@ class GamePackageRules(unittest.TestCase):
         self.install = self.root / "engine"
         share = self.install / "share/AzureRender"
         (self.install / "bin").mkdir(parents=True)
-        for name in ["AzurePlayer.exe", "AzureRender.exe", "AzureMetaGen.exe", "rmlui.dll"]:
+        for name in ["AzureGameLauncher.exe", "AzurePlayer.exe", "AzureRender.exe", "AzureMetaGen.exe", "rmlui.dll"]:
             (self.install / "bin" / name).write_bytes(b"MZ fixture")
         for name in ["shaders/game-ui.vert.spv", "shaders/game-ui.frag.spv", "assets_public/fonts/LatoLatin-Regular.ttf"]:
             path = share / name
@@ -42,6 +42,12 @@ class GamePackageRules(unittest.TestCase):
 
     def build(self, **kwargs):
         return build_game.build_game(self.project, self.install, self.output, validator=self.validate, **kwargs)
+
+    def test_native_executable_entry(self):
+        manifest=self.build()
+        self.assertEqual(manifest['entry'], 'Game.exe')
+        self.assertTrue((self.output/'Game.exe').is_file())
+        self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
 
     def test_portable_tree_and_hashes(self):
         cache = self.project.parent / "content/.azure"
