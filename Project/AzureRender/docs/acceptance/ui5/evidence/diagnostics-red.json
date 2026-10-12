@@ -1,0 +1,23 @@
+{
+  "passed": false,
+  "assertion": "Active diagnostics must keep the compact log toolbar accessible",
+  "source": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui5\\diagnostics-red\\run-72a3e551\\scene_inspector\\compact-error\\runtime.json",
+  "consolePanel": {
+    "docked": true,
+    "open": true,
+    "rect": [
+      0.0,
+      616.0,
+      827.0,
+      80.0
+    ]
+  },
+  "searchRect": [
+    8.0,
+    698.0,
+    669.0,
+    22.0
+  ],
+  "actualSearch": "",
+  "expectedSearch": "导入错误"
+}

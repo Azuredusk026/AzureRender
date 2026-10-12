@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_panel_design.py", line 76, in <module>
+    run(args.executable.resolve(), args.output.resolve(), args.cases)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_panel_design.py", line 53, in run
+    assert restored['contentView']['matchingAssets'] > 0 and not restored['contentView']['search']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

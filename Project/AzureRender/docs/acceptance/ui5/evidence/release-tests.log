@@ -1,0 +1,26 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+      Start  39: AzureEditor.UiFoundation
+ 1/10 Test  #39: AzureEditor.UiFoundation .............   Passed    0.08 sec
+      Start  40: AzureEditor.ConsoleLogModel
+ 2/10 Test  #40: AzureEditor.ConsoleLogModel ..........   Passed    0.07 sec
+      Start  41: AzureEditor.PanelContext
+ 3/10 Test  #41: AzureEditor.PanelContext .............   Passed    0.15 sec
+      Start  64: AzureEditor.EditTransaction
+ 4/10 Test  #64: AzureEditor.EditTransaction ..........   Passed    0.85 sec
+      Start  76: AzureEditor.Workspace
+ 5/10 Test  #76: AzureEditor.Workspace ................   Passed    0.18 sec
+      Start 148: AzureEditor.ContentWorkflow
+ 6/10 Test #148: AzureEditor.ContentWorkflow ..........   Passed    0.32 sec
+      Start 150: AzureEditor.AssetWorkflow
+ 7/10 Test #150: AzureEditor.AssetWorkflow ............   Passed    1.67 sec
+      Start 193: AzureEditor.ContentOperations
+ 8/10 Test #193: AzureEditor.ContentOperations ........   Passed    3.23 sec
+      Start 196: AzureEditor.ContentEditingWorkflow
+ 9/10 Test #196: AzureEditor.ContentEditingWorkflow ...   Passed    0.60 sec
+      Start 198: AzureEditor.ContentNavigation
+10/10 Test #198: AzureEditor.ContentNavigation ........   Passed    0.68 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =   7.90 sec

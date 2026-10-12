@@ -164,6 +164,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"nodeCount",context->scene().nodes.size()},{"gizmoTranslation",context->gizmoTranslation()},
         {"gizmoRotation",context->gizmoRotation()},{"gizmoScale",context->gizmoScale()},{"visibleAssets",visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
+    data["consoleView"]=consoleView_;data["contentView"]=contentView_;
     data["previewMode"]=session_->previewMode();
     data["document"]=context->documentVersion().describe();
     data["documents"]=session_->documents().describe(context->documentId());

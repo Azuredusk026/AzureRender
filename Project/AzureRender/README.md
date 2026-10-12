@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+资源查找与日志操作见[面板指南](docs/tutorials/browser-console.md)。
+资源与日志迁移结果见[阶段验证](docs/acceptance/ui5/2026-10-12.md)。
+
 安装版入口、UI 与发布能力见[产品化状态](docs/ui-productization-status.md)。
 自动工作流与剩余复核见[交付验证](docs/acceptance/ui4/2026-10-12.md)。
 

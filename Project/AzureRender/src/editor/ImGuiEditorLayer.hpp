@@ -1,4 +1,5 @@
 #pragma once
+#include "editor/console/ConsoleLogModel.hpp"
 
 #include "EditorCameraController.hpp"
 #include "EditorSession.hpp"
@@ -175,9 +176,15 @@ private:
     ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_,referenceFilter_;
 #endif
     int consoleLevel_ = 0;
+    ConsoleLogModel consoleLogs_;
+    bool consoleAutoFollow_=true;
+    nlohmann::json consoleView_=nlohmann::json::object(),contentView_=nlohmann::json::object();
+    std::string consoleLastLine_;
+    std::string consoleLastFeedback_;
     bool assetGrid_ = false;
     std::string assetDirectory_;
     std::string assetMount_;
+    std::string assetNavigationDiagnostic_;
     std::vector<std::pair<std::string,std::string>> assetNavigation_={{"",""}};
     std::size_t assetNavigationIndex_=0;
     std::uint64_t assetPreviewHandle_=0;

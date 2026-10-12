@@ -467,6 +467,7 @@ add_library(AzureEditor STATIC
     src/editor/SelectionService.cpp
     src/editor/ui/Widgets.cpp
     src/editor/ui/AppChrome.cpp
+    src/editor/console/ConsoleLogModel.cpp
     src/editor/commands/EditRegistry.cpp
     src/editor/commands/EditService.cpp
     src/editor/commands/EditTransaction.cpp
@@ -686,6 +687,9 @@ if(BUILD_TESTING)
     add_executable(AzureUiFoundationTests tests/UiFoundationTests.cpp)
     target_link_libraries(AzureUiFoundationTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.UiFoundation COMMAND AzureUiFoundationTests)
+    add_executable(AzureConsoleLogModelTests tests/ConsoleLogModelTests.cpp)
+    target_link_libraries(AzureConsoleLogModelTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ConsoleLogModel COMMAND AzureConsoleLogModelTests)
     add_executable(AzurePanelContextTests tests/PanelContextTests.cpp)
     target_link_libraries(AzurePanelContextTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.PanelContext COMMAND AzurePanelContextTests)
@@ -1867,6 +1871,10 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEditor.ContentDirectoryScale PROPERTIES TIMEOUT 180)
     add_test(NAME AzureEditor.ContentNavigationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_content_navigation.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/content-navigation-ui-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.ContentNavigationGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+    add_test(NAME AzureEditor.PanelDesignGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_panel_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/panel-design-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.PanelDesignGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
+    add_test(NAME AzureEditor.PanelDiagnosticsGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_panel_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/panel-diagnostics-ui-${CMAKE_BUILD_TYPE}" --cases diagnostics)
+    set_tests_properties(AzureEditor.PanelDiagnosticsGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 120)
 endif()
 
 if(BUILD_TESTING)

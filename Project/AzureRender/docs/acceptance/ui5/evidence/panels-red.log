@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_panel_design.py", line 66, in <module>
+    run(args.executable.resolve(), args.output.resolve())
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_editor_panel_design.py", line 24, in run
+    assert 'consoleView' in baseline, 'Console must expose its actual visible log snapshot'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Console must expose its actual visible log snapshot

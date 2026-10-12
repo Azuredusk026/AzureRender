@@ -1,0 +1,14 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 40: AzureEditor.ConsoleLogModel
+1/1 Test #40: AzureEditor.ConsoleLogModel ......***Failed    0.08 sec
+Warning header must produce warning severity
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	 40 - AzureEditor.ConsoleLogModel (Failed)
+Errors while running CTest
