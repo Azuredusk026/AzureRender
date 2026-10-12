@@ -46,6 +46,7 @@ bool button(const char* label,const ButtonOptions& options) {
     const auto theme=ThemeTokens::dark();ScopedStyle style;
     style.color(ImGuiCol_Button,options.selected?theme.selected:options.variant==ButtonVariant::Primary?theme.accent:options.variant==ButtonVariant::Danger?theme.error:theme.control)
         .color(ImGuiCol_ButtonHovered,theme.hover).color(ImGuiCol_ButtonActive,theme.selected);
+    if(options.variant==ButtonVariant::Primary||options.variant==ButtonVariant::Danger)style.color(ImGuiCol_Text,theme.recessed);
     ScopedDisabled disabled(options.disabled);const auto clicked=ImGui::Button(label,options.size);
     if(!options.tooltip.empty()&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("%s",options.tooltip.c_str());
     return clicked;

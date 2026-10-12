@@ -28,14 +28,14 @@ GameBuildJob::GameBuildJob(const std::filesystem::path& project, const std::file
     const auto engine=std::filesystem::absolute(install);
     const auto tool = engine / "share/AzureRender/tools/build_game.py";
     const auto python = tool.parent_path()/"python/python.exe";
-    if(!std::filesystem::is_regular_file(python))throw std::runtime_error("Installed Python builder runtime missing: "+python.u8string());
-    if (!std::filesystem::is_regular_file(tool)) throw std::runtime_error("Game build tool missing: " + tool.string());
     const auto log = project.parent_path() / ".azure/game-build.log";
     log_=log;
     std::filesystem::create_directories(log.parent_path());
     work_ = std::async(std::launch::async, [=] {
         const auto start = std::chrono::steady_clock::now(); GameBuildResult result;
         try {
+        if(!std::filesystem::is_regular_file(python))throw std::runtime_error("Installed Python builder runtime missing: "+python.u8string());
+        if(!std::filesystem::is_regular_file(tool))throw std::runtime_error("Game build tool missing: "+tool.u8string());
 #ifdef _WIN32
         std::wstring command = quote(python.wstring())+L" " + quote(tool.wstring()) + L" --project " + quote(project.wstring())
             + L" --install " + quote(std::filesystem::absolute(install).wstring())

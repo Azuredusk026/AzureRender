@@ -7,6 +7,7 @@
 #include "EditorTheme.hpp"
 #include "EditorToolbar.hpp"
 #include "resources/ResourceLocator.hpp"
+#include "foundation/Environment.hpp"
 #include <GLFW/glfw3.h>
 #include <cstdlib>
 #include "reflection/Registry.hpp"
@@ -88,6 +89,7 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
         throw std::invalid_argument("ImGui editor requires an editor session");
     }
     context_ = &session_->context();
+    installPath_=ResourceLocator{}.installationRoot().u8string();
     if(!context_->isProject())workspace_.setVisible("projects",true);
     EditorPanelRegistry registry;
     const auto addPanel = [&registry](
@@ -174,8 +176,8 @@ void ImGuiEditorLayer::initialize(
     EditorTheme::apply(dpi_);
     const auto font=ResourceLocator{}.publicAsset("fonts/NotoSansCJKsc-Regular.otf");
     if(io.Fonts->AddFontFromFileTTF(font.u8string().c_str(),14)==nullptr)throw std::runtime_error("Editor font could not be loaded");
-    if(uiFrame_==0)if(const auto* path=std::getenv("AZURERENDER_EDITOR_UI_ACTIONS")) {
-        std::ifstream file(std::filesystem::u8path(path));file>>uiActions_;
+    if(uiFrame_==0)if(const auto path=environmentPath("AZURERENDER_EDITOR_UI_ACTIONS")) {
+        std::ifstream file(*path);file>>uiActions_;
         if(!uiActions_.is_array())throw std::invalid_argument("UI actions must be an array");
     }
 
@@ -366,6 +368,10 @@ void ImGuiEditorLayer::drawPanels() {
         {"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},
         {"activeId",ImGui::GetCurrentContext()->ActiveId},
         {"movingWindow",ImGui::GetCurrentContext()->MovingWindow?ImGui::GetCurrentContext()->MovingWindow->Name:""}});
+    if(uiFrame_%12==0)if(const auto path=environmentPath("AZURERENDER_UI_OBSERVATION")) {
+        auto snapshot=workspaceSnapshot(false);snapshot["phase"]="Editor";snapshot["frame"]=uiFrame_;
+        std::ofstream output(*path);output<<snapshot.dump();
+    }
 }
 void ImGuiEditorLayer::completePreviewTextures(std::uint64_t completed){
     for(auto it=previewTextures_.begin();it!=previewTextures_.end();){

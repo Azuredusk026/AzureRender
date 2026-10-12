@@ -1,5 +1,12 @@
 # AzureRender 工程
 
+双击安装目录中的 bin/AzureRender.exe 进入项目中心。
+项目可以独立创建、重开、编辑保存与 GUI 发布。
+发布目录包含项目命名的游戏 exe、Runtime 与资源。
+
+使用步骤见[项目中心指南](docs/tutorials/project-center.md)。
+模块边界见[应用与 UI 架构](docs/architecture-ui-productization.md)。
+
 音频设备通知通过有界队列处理重路由。
 关闭先结束通知任务，再释放音频设备。
 短时结果见[关闭修复](docs/acceptance/b1/2026-10-12.md)。

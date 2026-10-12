@@ -1,4 +1,5 @@
 #include "ResourceLocator.hpp"
+#include "foundation/Environment.hpp"
 
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
@@ -54,8 +55,8 @@ std::filesystem::path ResourceLocator::installationRoot() const {
 }
 ResourceLocator::ResourceLocator(std::filesystem::path explicitRoot) {
     if (explicitRoot.empty()) {
-        if (const char* environment = std::getenv("AZURERENDER_RESOURCE_ROOT")) {
-            explicitRoot = environment;
+        if (const auto environment = environmentPath("AZURERENDER_RESOURCE_ROOT")) {
+            explicitRoot = *environment;
         }
     }
     if (!explicitRoot.empty()) {

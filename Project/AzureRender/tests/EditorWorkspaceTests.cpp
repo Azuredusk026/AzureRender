@@ -4,9 +4,17 @@
 #include "editor/EditorCameraController.hpp"
 #include <fstream>
 #include <stdexcept>
+#include <cstdlib>
 using namespace azurerender;
 void check(bool value,const char* text){if(!value)throw std::runtime_error(text);}
 int main(){try{
+#ifdef _WIN32
+ const auto* previous=_wgetenv(L"AZURERENDER_EDITOR_CONFIG");const std::wstring saved=previous?previous:L"";
+ const auto unicode=std::filesystem::temp_directory_path()/std::filesystem::u8path(u8"用户设置 🌟");
+ _wputenv_s(L"AZURERENDER_EDITOR_CONFIG",unicode.c_str());
+ const auto resolved=EditorWorkspace::configDirectory();_wputenv_s(L"AZURERENDER_EDITOR_CONFIG",saved.c_str());
+ check(resolved==unicode,"Environment configuration paths preserve Unicode");
+#endif
  EditorViewportInput focus;focus.frameRequested=true;focus.frameTarget={4,2,-3};
  std::array<float,3> camera={0,0,0},target={0,0,0};
  check(EditorCameraController::apply(focus,camera,target),"Focus command must move camera");

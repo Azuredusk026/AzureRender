@@ -1,5 +1,6 @@
 #include "EditorWorkspace.hpp"
 #include "ui/UiMetrics.hpp"
+#include "foundation/Environment.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
@@ -89,10 +90,10 @@ void EditorWorkspace::save(const std::filesystem::path& directory) const {
     std::filesystem::remove(pending);
 }
 std::filesystem::path EditorWorkspace::configDirectory() {
-    if(const char* value=std::getenv("AZURERENDER_EDITOR_CONFIG"))return std::filesystem::u8path(value);
-    if(const char* value=std::getenv("LOCALAPPDATA"))return std::filesystem::u8path(value)/"AzureRender/editor";
-    if(const char* value=std::getenv("XDG_CONFIG_HOME"))return std::filesystem::u8path(value)/"AzureRender/editor";
-    if(const char* value=std::getenv("HOME"))return std::filesystem::u8path(value)/".config/AzureRender/editor";
+    if(const auto path=environmentPath("AZURERENDER_EDITOR_CONFIG"))return *path;
+    if(const auto path=environmentPath("LOCALAPPDATA"))return *path/"AzureRender/editor";
+    if(const auto path=environmentPath("XDG_CONFIG_HOME"))return *path/"AzureRender/editor";
+    if(const auto path=environmentPath("HOME"))return *path/".config/AzureRender/editor";
     return std::filesystem::temp_directory_path()/"AzureRender/editor";
 }
 EditorWorkspaceLayout EditorWorkspace::layout(float width,float height,float dpi,bool compact) {

@@ -25,6 +25,7 @@ void ImGuiEditorLayer::drawBuildPanel(PanelContext& panelContext) {
     const auto& view=panelContext.view();
     if(!ImGui::Begin("Build Game###build",workspace_.open("build"))){ImGui::End();return;}
     static bool replace = false;
+    ui::sectionHeading("Build Windows game","Publish a movable game folder with its own executable, runtime and resources.");
     drawPathInput("New game directory",projectPath_,"project",true);
     const auto parent=std::filesystem::u8path(projectPath_).parent_path();
     const bool validProject=!projectPath_.empty()&&!parent.empty()&&std::filesystem::is_directory(parent);
@@ -43,9 +44,19 @@ void ImGuiEditorLayer::drawBuildPanel(PanelContext& panelContext) {
     build.tooltip="Build requires an idle project, a Release engine installation and an output directory.";
     if(ui::button("Build Windows game",build))session_->startBuild(std::filesystem::u8path(installPath_),std::filesystem::u8path(outputPath_),replace);
     observeWidget("project.build");
-    if(session_->building())ImGui::TextUnformatted("Building... You can continue inspecting panels.");
-    else if(!session_->buildResult().message.empty())ImGui::TextWrapped("%s (%.0f ms)",session_->buildResult().message.c_str(),session_->buildResult().milliseconds);
+    if(session_->building())ui::taskFeedback(session_->buildProgress(),"The stage comes from the installed publishing tool. You can inspect panels while it runs.");
+    else if(!session_->buildResult().message.empty()) {
+        ui::resultMessage(session_->buildResult().passed?"Game package completed":"Game package failed",!session_->buildResult().passed);
+        ui::card("Build result",[&]{ImGui::TextWrapped("%s",session_->buildResult().message.c_str());});
+    }
     if(!outputPath_.empty())ImGui::TextWrapped("Result directory: %s",outputPath_.c_str());
+    ui::ButtonOptions reveal;reveal.disabled=outputPath_.empty()||!std::filesystem::is_directory(std::filesystem::u8path(outputPath_));
+    if(ui::button("Open output directory",reveal))session_->edit("path.reveal",{{"path",outputPath_}});observeWidget("project.build.reveal");
+    if(view.isProject()) {
+        ImGui::SameLine();const auto log=session_->context().project().file.parent_path()/".azure/game-build.log";
+        ui::ButtonOptions showLog;showLog.disabled=!std::filesystem::is_regular_file(log);
+        if(ui::button("Open build log",showLog))session_->edit("path.reveal",{{"path",log.u8string()}});observeWidget("project.build.log");
+    }
     ImGui::End();
 }
 

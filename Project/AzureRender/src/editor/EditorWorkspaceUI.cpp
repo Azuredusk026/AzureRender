@@ -194,6 +194,7 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["dirty"]=context->dirty();data["undoCount"]=context->undoCount();data["selection"]=session_->selection().selected();
     data["settings"]=session_->settings().describe();
     data["project"]=context->isProject()?nlohmann::json{{"id",context->project().id},{"name",context->project().name},{"path",context->project().file.u8string()}}:nlohmann::json::object();
+    data["build"]={{"running",session_->building()},{"passed",session_->buildResult().passed},{"message",session_->buildResult().message},{"progress",session_->buildProgress()},{"install",installPath_},{"output",outputPath_}};
     for(const auto& panel:workspace_.panels()) {
         const auto* window=ImGui::FindWindowByName(panel.title.c_str());
         data["panels"][panel.id]={{"open",panel.visible},{"docked",window&&window->DockId!=0},

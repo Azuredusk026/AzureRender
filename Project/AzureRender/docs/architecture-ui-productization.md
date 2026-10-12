@@ -25,3 +25,20 @@
 游戏入口读取同目录的 game-launch.json。
 包内 Runtime、资源与配置依据入口位置解析。
 Windows 路径在系统调用边界使用宽字符。
+
+## 公共 UI 与验证入口
+
+公共控件采用即时绘制函数。
+sectionHeading、card 与 taskFeedback 统一反馈。
+ThemeTokens 声明语义颜色，UiMetrics 声明尺度。
+面板按现有注册接口接入工作区。
+
+项目中心与编辑器可输出只读界面快照。
+AZURERENDER_UI_OBSERVATION 指定观察文件。
+项目中心输入文件采用既有回放事件格式。
+回放修改输入队列，控件调用生产项目服务。
+
+启动验证通过显式环境配置启用。
+AZURERENDER_STARTUP_VALIDATION_ENDPOINT 指定端点。
+AZURERENDER_STARTUP_VALIDATION_TOKEN 提供会话令牌。
+验证通道的认证与操作范围沿用既有服务。

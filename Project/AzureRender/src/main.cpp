@@ -12,6 +12,7 @@
 #include "editor/EditorWorkspace.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
+#include "foundation/Environment.hpp"
 #include "editor/SceneModel.hpp"
 #include "devtools/GeometryProcessCompiler.hpp"
 
@@ -26,9 +27,9 @@
 
 
 int main(const int argumentCount, char** argumentValues) {
-    azurerender::RuntimeDiagnostics::instance().configure(
-        (azurerender::EditorWorkspace::configDirectory()/"logs/azurerender.log.jsonl").u8string());
     try {
+        azurerender::RuntimeDiagnostics::instance().configure(
+            azurerender::EditorWorkspace::configDirectory()/"logs/azurerender.log.jsonl");
         const auto native=azurerender::nativeArguments(argumentCount,argumentValues);
         std::vector<std::string> arguments(native.begin()+1,native.end());
         if(arguments.size()==1 && std::filesystem::u8path(arguments.front()).extension()==".azureproject")
@@ -37,6 +38,10 @@ int main(const int argumentCount, char** argumentValues) {
         azurerender::ParsedCommandLine commandLine =
             azurerender::parseCommandLine(arguments);
         AzureRenderOptions& options = commandLine.options;
+        // Opt-in startup observation can attach the existing authenticated service.
+        if(projectCenter)if(const auto endpoint=azurerender::environmentPath("AZURERENDER_STARTUP_VALIDATION_ENDPOINT")) {
+            options.validationEndpoint=endpoint->u8string();options.validationTokenEnvironment="AZURERENDER_STARTUP_VALIDATION_TOKEN";
+        }
 #if defined(_WIN32) && defined(_MSC_VER)
         // Automated runs report fatal errors to their caller instead of opening a modal dialog.
         if(options.smokeFrameLimit>0 || options.captureFrameLimit>0) {
@@ -164,6 +169,12 @@ int main(const int argumentCount, char** argumentValues) {
             static_cast<azurerender::DiagnosticCode>(
                 azurerender::diagnosticExitCode(exception.what())),
             exception.what());
+#if defined(_WIN32) && defined(_MSC_VER)
+        if(argumentCount<=1&&!std::getenv("AZURERENDER_UI_OBSERVATION")) {
+            const auto message=std::filesystem::u8path(exception.what()).wstring();
+            MessageBoxW(nullptr,message.c_str(),L"AzureRender startup failed",MB_OK|MB_ICONERROR);
+        }
+#endif
         return azurerender::diagnosticExitCode(exception.what());
     }
 

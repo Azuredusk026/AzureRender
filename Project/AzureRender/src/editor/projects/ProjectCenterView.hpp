@@ -1,11 +1,12 @@
 #pragma once
 #include "ProjectCenterController.hpp"
+#include <functional>
 namespace azurerender {
 class ProjectCenterView final {
 public:
-    void draw(ProjectCenterController& controller);
+    void draw(ProjectCenterController& controller,const std::function<void(const std::string&)>& observe={});
 private:
-    std::string projectPath_, parent_, name_="Monica", diagnostic_;
+    std::string projectPath_, parent_, name_="NewProject", diagnostic_;
     int template_=1;
 };
 }

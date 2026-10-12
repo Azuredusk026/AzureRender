@@ -4,11 +4,15 @@
 #include "editor/EditorTheme.hpp"
 #include "editor/projects/ProjectCenterController.hpp"
 #include "editor/projects/ProjectCenterView.hpp"
+#include "foundation/Environment.hpp"
+#include "editor/ui/ProjectCenterPlayback.hpp"
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_vulkan.h>
 #include <stdexcept>
 #include <algorithm>
+#include <cstdlib>
+#include <fstream>
 namespace {
 void check(VkResult result) { if(result!=VK_SUCCESS)throw std::runtime_error("Project center Vulkan error: "+std::to_string(result)); }
 }
@@ -48,6 +52,8 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
         azurerender::ProjectCenterController controller(azurerender::EditorWorkspace::configDirectory()/"recent-projects.json");
         azurerender::ProjectCenterView view;if(!initialProject.empty())controller.open(std::filesystem::u8path(initialProject));
         std::uint64_t frames=0;
+        const auto observation=azurerender::environmentPath("AZURERENDER_UI_OBSERVATION");
+        azurerender::ui::ProjectCenterPlayback playback;nlohmann::json widgets=nlohmann::json::object();
         while(!frontend_->shouldClose() || controller.busy()) {
             frontend_->pollEvents();controller.poll();if(frontend_->shouldClose()&&!controller.busy())break;
             if(auto ready=controller.takeReady()){release();return ready;}
@@ -55,7 +61,11 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
             const auto [w,h]=frontend_->framebufferSize();if(w<=0||h<=0){glfwWaitEventsTimeout(.05);continue;}
             if(w!=window.Width||h!=window.Height) {vkDeviceWaitIdle(device_);ImGui_ImplVulkanH_CreateOrResizeWindow(instance_,physicalDevice_,device_,&window,graphicsQueueFamily_,nullptr,w,h,2,0);}
             float dpi=1,dy=1;glfwGetWindowContentScale(frontend_->nativeHandle(),&dpi,&dy);if(std::abs(dpi-scale)>.01F){scale=dpi;azurerender::EditorTheme::apply(scale);}
-            ImGui_ImplVulkan_NewFrame();ImGui_ImplGlfw_NewFrame();ImGui::NewFrame();view.draw(controller);ImGui::Render();
+            ImGui_ImplVulkan_NewFrame();ImGui_ImplGlfw_NewFrame();playback.beginFrame(frames,widgets);ImGui::NewFrame();
+            widgets=nlohmann::json::object();
+            view.draw(controller,[&](const std::string& id){const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();widgets[id]={a.x,a.y,b.x-a.x,b.y-a.y};});
+            if(observation&&frames%12==0){std::ofstream output(*observation);output<<nlohmann::json{{"phase","ProjectCenter"},{"frame",frames},{"widgets",widgets},{"busy",controller.busy()},{"diagnostic",controller.diagnostic()},{"recent",controller.recent()},{"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},{"focusLost",io.AppFocusLost},{"display",{io.DisplaySize.x,io.DisplaySize.y}}}.dump();}
+            ImGui::Render();
             const auto& semaphores=window.FrameSemaphores[window.SemaphoreIndex];
             auto acquired=vkAcquireNextImageKHR(device_,window.Swapchain,UINT64_MAX,semaphores.ImageAcquiredSemaphore,VK_NULL_HANDLE,&window.FrameIndex);
             if(acquired==VK_ERROR_OUT_OF_DATE_KHR){window.Width=0;continue;}if(acquired!=VK_SUBOPTIMAL_KHR)check(acquired);
@@ -68,7 +78,7 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
             VkPresentInfoKHR present{VK_STRUCTURE_TYPE_PRESENT_INFO_KHR};present.waitSemaphoreCount=1;present.pWaitSemaphores=&renderComplete;present.swapchainCount=1;present.pSwapchains=&window.Swapchain;present.pImageIndices=&window.FrameIndex;
             const auto result=vkQueuePresentKHR(presentQueue_,&present);if(result==VK_ERROR_OUT_OF_DATE_KHR||result==VK_SUBOPTIMAL_KHR)window.Width=0;else check(result);
             window.SemaphoreIndex=(window.SemaphoreIndex+1)%window.SemaphoreCount;
-            if(options.smokeFrameLimit>0&&++frames>=options.smokeFrameLimit)break;
+            ++frames;if(options.smokeFrameLimit>0&&frames>=options.smokeFrameLimit)break;
         }
         release();return {};
     }catch(...){release();throw;}

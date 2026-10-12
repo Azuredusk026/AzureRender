@@ -12,4 +12,7 @@ bool button(const char* label,const ButtonOptions& options={});
 bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags=0);
 void propertyRow(const char* label,const UiMetrics& metrics,const std::function<void()>& draw);
 void resultMessage(const std::string& message,bool failed);
+void sectionHeading(const char* title,const char* description="");
+void card(const char* id,const std::function<void()>& draw);
+void taskFeedback(const std::string& stage,const char* detail="");
 }

@@ -32,8 +32,6 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
     const auto selected=view.selectedNode()?std::optional<SceneNode>(*view.selectedNode()):std::nullopt;
     if (selected) {
         const auto* node=&*selected;
-        drawMaterialSlots(*node);
-        if(panelContext.selection().selected().size()==1)drawPhysicsAuthoring(*node);
         ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
         ImGui::Text("Node: %s", node->name.c_str());
         ImGui::Text("Id: %s", node->id.c_str());
@@ -47,6 +45,10 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         if(ui::inputText("##name",name))session_->edit("node.rename",{{"value",name}},"details-name");
         if(ImGui::IsItemDeactivatedAfterEdit())session_->edit("history.end-edit");
         observeWidget("name");
+        ImGui::EndDisabled();
+        drawMaterialSlots(*node);
+        if(panelContext.selection().selected().size()==1)drawPhysicsAuthoring(*node);
+        ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
         ImGui::TextUnformatted("Prefab Source");auto prefab=node->prefabSource;ImGui::SetNextItemWidth(-1);
         if(ui::inputText("##prefab",prefab,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.prefab-source",{{"value",prefab}},"details-prefab");
         ImGui::TextUnformatted("Instance Of");auto instance=node->instanceOf;ImGui::SetNextItemWidth(-1);
