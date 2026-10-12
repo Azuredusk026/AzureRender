@@ -458,6 +458,7 @@ add_library(AzureEditor STATIC
     src/editor/panels/SettingsPanel.cpp
     src/editor/panels/OutlinerPanel.cpp
     src/editor/panels/InspectorPanel.cpp
+    src/editor/panels/ViewportPanel.cpp
     src/editor/panels/AssetBrowserPanel.cpp
     src/editor/panels/CapturePanel.cpp
     src/editor/panels/AnimationPanel.cpp
@@ -1877,6 +1878,8 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEditor.PanelDiagnosticsGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 120)
     add_test(NAME AzureEditor.SelectionDesignGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_selection_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/selection-design-ui-${CMAKE_BUILD_TYPE}")
     set_tests_properties(AzureEditor.SelectionDesignGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 180)
+    add_test(NAME AzureEditor.ViewportDesignGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_viewport_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/viewport-design-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.ViewportDesignGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 180)
 endif()
 
 if(BUILD_TESTING)

@@ -1,0 +1,18 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start  39: AzureEditor.UiFoundation
+1/6 Test  #39: AzureEditor.UiFoundation ..........   Passed    0.06 sec
+    Start  76: AzureEditor.Workspace
+2/6 Test  #76: AzureEditor.Workspace .............   Passed    0.11 sec
+    Start 142: AzureEditor.SelectionBounds
+3/6 Test #142: AzureEditor.SelectionBounds .......   Passed    0.06 sec
+    Start 145: AzureEditor.GizmoController
+4/6 Test #145: AzureEditor.GizmoController .......   Passed    0.08 sec
+    Start 152: AzureRender.EditorCameraService
+5/6 Test #152: AzureRender.EditorCameraService ...   Passed    0.05 sec
+    Start 241: AzureEditor.ViewportOverlays
+6/6 Test #241: AzureEditor.ViewportOverlays ......   Passed    0.11 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Total Test time (real) =   0.50 sec
