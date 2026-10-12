@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Active",
+  "status": "Ready",
   "plan": "docs/plans/2026-10-11-asset-format-expansion.md",
   "roadmap": "docs/plans/2026-10-11-next-development.md",
   "executionAuthorized": true,
@@ -133,7 +133,7 @@
     {
       "id": "P8",
       "summary": "完整格式能力收口",
-      "status": "Active",
+      "status": "Ready",
       "dependsOn": [
         "G23"
       ],
@@ -674,7 +674,7 @@
     "P7": "Ready",
     "G22": "Ready",
     "G23": "Ready",
-    "P8": "Active"
+    "P8": "Ready"
   },
   "currentStageStatusSource": "docs/plans/stage-status.json"
 }

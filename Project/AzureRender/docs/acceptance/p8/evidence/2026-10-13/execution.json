@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-13",
+  "phase": "P8",
+  "phaseState": "Ready",
+  "automaticWorkCompleteWithinAvailableConditions": true,
+  "phaseComplete": false,
+  "tasks": [
+    {
+      "id": "P8.1",
+      "state": "Complete",
+      "result": "passed",
+      "work": "最终候选与六包绑定"
+    },
+    {
+      "id": "P8.2",
+      "state": "Ready",
+      "result": "pending",
+      "work": "历史归因",
+      "blocker": "三项历史失败缺少现场证据"
+    },
+    {
+      "id": "P8.3",
+      "state": "Ready",
+      "result": "failed",
+      "work": "持续运行",
+      "standard": "passed",
+      "platform": "failed",
+      "repair": "unitTestsPassedLiveProbeBlocked",
+      "blocker": "GPU 连续空闲门禁"
+    },
+    {
+      "id": "P8.4",
+      "state": "Ready",
+      "result": "notExecuted",
+      "work": "十五轮正式性能",
+      "executedRounds": 0,
+      "blocker": "GPU 连续空闲门禁"
+    },
+    {
+      "id": "P8.5",
+      "state": "Ready",
+      "result": "notExecuted",
+      "work": "实体复核",
+      "blocker": "操作者的十二项真实记录"
+    },
+    {
+      "id": "P8.6",
+      "state": "Pending",
+      "result": "pending",
+      "work": "最终完成判断",
+      "blocker": "十八项必需验收尚未全部通过"
+    }
+  ],
+  "requiredAcceptance": [
+    {
+      "id": "P5-causality",
+      "result": "pending"
+    },
+    {
+      "id": "P5-performance",
+      "result": "failed"
+    },
+    {
+      "id": "P5-long-run",
+      "result": "failed"
+    },
+    {
+      "id": "P5-delivery",
+      "result": "pending"
+    },
+    {
+      "id": "UX-008-causality",
+      "result": "pending"
+    },
+    {
+      "id": "P4-input",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P5-D-gameplay",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P5-D-audio",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U15-baseline",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U16-recovery",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P6-authoring",
+      "result": "notExecuted"
+    },
+    {
+      "id": "G20-audio",
+      "result": "notExecuted"
+    },
+    {
+      "id": "U17-transfer",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P7-exchange",
+      "result": "notExecuted"
+    },
+    {
+      "id": "G23-audio",
+      "result": "notExecuted"
+    },
+    {
+      "id": "P8-final",
+      "result": "notExecuted"
+    },
+    {
+      "id": "UI8-input-ime",
+      "result": "notExecuted"
+    },
+    {
+      "id": "UI8-directory-causality",
+      "result": "pending"
+    }
+  ],
+  "commits": [
+    "54c172f",
+    "5c9543e",
+    "98a1d88",
+    "9933729",
+    "15f3b0d"
+  ],
+  "fullCpu": {
+    "Debug": 187,
+    "Release": 187
+  },
+  "affectedControllerCtest": {
+    "Debug": "2/2 passed",
+    "Release": "2/2 passed"
+  },
+  "reuse": "Unchanged runtime artifacts; affected controller and cleanup tests rerun in both configurations.",
+  "nextActions": [
+    "GPU 连续空闲后验证失焦恢复，再执行平台 1800 秒长跑及十五轮性能",
+    "操作者填写当前候选的实体复核表",
+    "补充历史失败现场证据并完成三项归因",
+    "全部必需项通过后执行 P8.6 完成判断"
+  ]
+}

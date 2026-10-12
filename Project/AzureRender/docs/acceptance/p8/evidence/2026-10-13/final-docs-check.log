@@ -1,0 +1,14 @@
+Stage status verified: 56 stages, 18 acceptance items.
+................
+----------------------------------------------------------------------
+Ran 16 tests in 4.560s
+
+OK
+Documentation prose style passed for 134 files.
+warning: in the working copy of 'Project/AzureRender/docs/runtime/edit-operations.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/docs/runtime/game-publishing.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/commands/EditService.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/src/editor/commands/EditService.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tests/PipelineInspectionTests.cpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/AzureRender/tools/test_validation_protocol.py', LF will be replaced by CRLF the next time Git touches it
+{"schemaVersion": 1, "status": "passed", "trackedToolState": [], "danglingLinks": [], "ignoreProbes": [{"path": "Project/AzureRender/build/hygiene-probe.txt", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".codemaker/codemap/hygiene-probe.log", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": ".env", "expectedIgnored": true, "ignored": true, "passed": true}, {"path": "Project/AzureRender/src/main.cpp", "expectedIgnored": false, "ignored": false, "passed": true}, {"path": "Project/AzureRender/assets_public/hygiene-probe.gltf", "expectedIgnored": false, "ignored": false, "passed": true}]}
