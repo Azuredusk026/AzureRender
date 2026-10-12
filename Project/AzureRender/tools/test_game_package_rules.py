@@ -53,6 +53,7 @@ class GamePackageRules(unittest.TestCase):
         self.assertFalse((self.output / "bin/AzureRender.exe").exists())
         self.assertFalse((self.output / "bin/AzureMetaGen.exe").exists())
         self.assertFalse((self.output / "game/assets/.azure").exists())
+
         (self.output / "game/assets/start.azurelevel").write_text("tamper")
         with self.assertRaises(ValueError):
             build_game.verify_package(self.output)
@@ -93,6 +94,10 @@ class GamePackageRules(unittest.TestCase):
         (self.install / "share/AzureRender/assets_public/fonts/LatoLatin-Regular.ttf").unlink()
         with self.assertRaises(ValueError):
             self.build()
+
+    def test_vector_and_chinese_licenses_are_required(self):
+        self.assertIn("NanoSVG-LICENSE.txt", build_game.REQUIRED_LICENSES)
+        self.assertIn("NotoSansCJK-LICENSE.txt", build_game.REQUIRED_LICENSES)
 
     def test_output_cannot_overlap_inputs(self):
         with self.assertRaises(ValueError):

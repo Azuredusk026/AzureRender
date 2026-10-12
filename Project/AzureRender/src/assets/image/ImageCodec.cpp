@@ -1,4 +1,5 @@
 #include "assets/image/ImageCodec.hpp"
+#include "assets/image/SvgCodec.hpp"
 #include "assets/image/TextureContainerAdapter.hpp"
 #include "assets/AssetTransfer.hpp"
 #include <stb_image.h>
@@ -138,9 +139,12 @@ DecodedImage readExr(const std::vector<unsigned char>& bytes,const AssetCancella
 }
 DecodedImage decodeImageBytes(const std::vector<unsigned char>& bytes,const AssetCancellation& cancel) {
     check(cancel);if(bytes.empty()||bytes.size()>sourceBudget)throw std::invalid_argument("Image source exceeds the 64 MiB budget or is empty");
+    if(isSvgImage(bytes))return decodeSvgImage(bytes,cancel);
     if(isTextureContainer(bytes))return decodeTextureContainer(bytes,cancel);
     if(isTiff(bytes))return readTiff(bytes,cancel);if(isExr(bytes))return readExr(bytes,cancel);if(isPnm(bytes))return readPnm(bytes,cancel);
     DecodedImage out;int w=0,h=0,c=0;const auto n=static_cast<int>(bytes.size());
+    if(prefix(bytes,{'G','I','F'}))out.sourceLosses.push_back("GIF imports the first composited frame; animation timing is not retained");
+    if(prefix(bytes,{'8','B','P','S'}))out.sourceLosses.push_back("PSD imports the composited image; layers and editing metadata are not retained");
     if(isWebp(bytes)) {
         if(!WebPGetInfo(bytes.data(),bytes.size(),&w,&h))throw std::runtime_error("Invalid WebP image");
         const auto count=sizeFor(w,h,1);out.rgba8.resize(count);
@@ -171,7 +175,7 @@ DecodedImage decodeImageFile(const std::filesystem::path& path,const AssetCancel
     }catch(const std::exception& e){auto ext=path.extension().u8string();std::transform(ext.begin(),ext.end(),ext.begin(),[](unsigned char c){return static_cast<char>(std::tolower(c));});throw std::runtime_error(std::string("Cannot decode ")+(ext==".exr"?"EXR image ":"image ")+path.u8string()+": "+e.what());}
 }
 ImageRgba8 convertImageToRgba8(const DecodedImage& image,bool encodeLinearRgb) {
-    const auto count=sizeFor(image.width,image.height,1);ImageRgba8 out;
+    const auto count=sizeFor(image.width,image.height,1);ImageRgba8 out;out.losses=image.sourceLosses;
     if(image.precision==ImagePrecision::UInt8){if(image.rgba8.size()!=count)throw std::invalid_argument("Invalid RGBA image size");out.pixels=image.rgba8;return out;}
     if((image.precision==ImagePrecision::UInt16?image.rgba16.size():image.rgba32.size())!=count)throw std::invalid_argument("Invalid RGBA image size");
     out.pixels.resize(count);out.losses.push_back("Pixel precision converted to UInt8");bool clipped=false;

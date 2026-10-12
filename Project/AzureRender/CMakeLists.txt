@@ -71,6 +71,10 @@ endif()
 
 find_package(assimp 6.0.4 EXACT CONFIG REQUIRED)
 find_package(TIFF REQUIRED)
+find_package(pugixml CONFIG REQUIRED)
+if(MSVC)
+    set_source_files_properties(src/assets/image/SvgCodec.cpp PROPERTIES COMPILE_OPTIONS "/wd4702")
+endif()
 find_package(WebP CONFIG REQUIRED)
 find_package(FLAC CONFIG REQUIRED)
 find_package(Vorbis CONFIG REQUIRED)
@@ -316,6 +320,7 @@ add_library(AzureRenderCore STATIC
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
+    src/assets/image/SvgCodec.cpp
     src/assets/image/TextureContainerAdapter.cpp
     src/assets/image/ImageEncoder.cpp
     src/assets/image/ImageFormatAdapter.cpp
@@ -329,6 +334,7 @@ add_library(AzureRenderCore STATIC
     src/assets/AssetTransfer.cpp
     src/assets/AssetExportJob.cpp
     src/assets/model/ModelFormatAdapter.cpp
+    src/assets/model/UsdaFormatAdapter.cpp
     src/diagnostics/GpuCapabilityReport.cpp
     src/render/ResourceAccessProfile.cpp
     src/render/VisibilityPrototype.cpp
@@ -531,7 +537,7 @@ if(WIN32)
 endif()
 target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nlohmann_json::nlohmann_json RmlUi::RmlUi
     GPUOpen::VulkanMemoryAllocator OpenEXR::OpenEXR)
-target_link_libraries(AzureRenderCore PRIVATE Opus::opus OpusFile::opusfile mp3lame::mp3lame Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
+target_link_libraries(AzureRenderCore PRIVATE pugixml::pugixml Opus::opus OpusFile::opusfile mp3lame::mp3lame Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
@@ -938,7 +944,8 @@ if(BUILD_TESTING)
     add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/assets/image/ImageCodec.cpp
     src/assets/image/TextureContainerAdapter.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
-    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE Vulkan::Vulkan Microsoft::DirectXTex KTX::ktx OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
+    target_sources(AzureRenderEnvironmentAssetTests PRIVATE src/assets/image/SvgCodec.cpp)
+    target_link_libraries(AzureRenderEnvironmentAssetTests PRIVATE pugixml::pugixml Vulkan::Vulkan Microsoft::DirectXTex KTX::ktx OpenEXR::OpenEXR TIFF::TIFF WebP::webp)
     add_test(NAME AzureRender.EnvironmentAsset COMMAND AzureRenderEnvironmentAssetTests)
     add_executable(AzureRenderRenderGraphTests tests/RenderGraphTests.cpp src/render/RenderGraph.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureRenderRenderGraphTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1194,9 +1201,12 @@ if(BUILD_TESTING)
             "${CMAKE_CURRENT_SOURCE_DIR}/src"
             "${TINYGLTF_INCLUDE_DIR}"
             "${STB_INCLUDE_DIR}")
+    target_sources(AzureRenderNullRhiPassTests PRIVATE src/assets/image/SvgCodec.cpp)
+    target_sources(AzureRenderNullRhiPassTests PRIVATE src/assets/MaterialGraph.cpp)
     target_link_libraries(
         AzureRenderNullRhiPassTests PRIVATE
             AzureFoundation
+            pugixml::pugixml
             Vulkan::Vulkan
             nlohmann_json::nlohmann_json
             OpenEXR::OpenEXR TIFF::TIFF WebP::webp Microsoft::DirectXTex KTX::ktx)
@@ -1736,6 +1746,8 @@ install(FILES
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/gknextengine/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "gkNextEngine-LICENSE.txt")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/nanosvg/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "NanoSVG-LICENSE.txt")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/nanosvg/SOURCE.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "NanoSVG-source.json")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/script-services.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/managed-scripts.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g11-implementation.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
@@ -1878,6 +1890,11 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.MaterialSlotEditing COMMAND AzureMaterialSlotEditingTests)
     add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
     add_executable(AzureMaterialGraphTests tests/MaterialGraphTests.cpp)
+    add_executable(AzureExtendedImageFormatsTests tests/ExtendedImageFormatsTests.cpp)
+    add_executable(AzureExtendedAssetWorkflowTests tests/ExtendedAssetWorkflowTests.cpp)
+    target_link_libraries(AzureExtendedAssetWorkflowTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.ExtendedAssetWorkflow COMMAND AzureExtendedAssetWorkflowTests)
+    add_executable(AzureUsdaFormatTests tests/UsdaFormatTests.cpp)
     add_executable(AzureAudioNotificationQueueTests tests/AudioNotificationQueueTests.cpp)
     add_executable(AzureAudioDeviceShutdownTests tests/AudioDeviceShutdownTests.cpp)
     target_link_libraries(AzureAudioDeviceShutdownTests PRIVATE AzureRuntime)
@@ -1886,6 +1903,10 @@ if(BUILD_TESTING)
     target_link_libraries(AzureAudioNotificationQueueTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRuntime.AudioNotificationQueue COMMAND AzureAudioNotificationQueueTests)
     set_tests_properties(AzureRuntime.AudioNotificationQueue PROPERTIES TIMEOUT 10)
+    target_link_libraries(AzureUsdaFormatTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.UsdaFormat COMMAND AzureUsdaFormatTests)
+    target_link_libraries(AzureExtendedImageFormatsTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.ExtendedImageFormats COMMAND AzureExtendedImageFormatsTests)
     add_executable(AzureMaterialGraphEditingTests tests/MaterialGraphEditingTests.cpp)
     target_link_libraries(AzureMaterialGraphEditingTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.MaterialGraphEditing COMMAND AzureMaterialGraphEditingTests)

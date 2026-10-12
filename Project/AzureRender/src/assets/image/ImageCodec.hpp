@@ -21,6 +21,7 @@ struct DecodedImage {
     // Authored levels include the base level. Empty means a single ordinary image.
     std::vector<ImageMipLevel> mipLevels;
     std::string sourceCompression;
+    std::vector<std::string> sourceLosses;
 };
 struct ImageRgba8 {
     std::vector<std::uint8_t> pixels;

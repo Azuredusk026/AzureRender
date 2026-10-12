@@ -370,3 +370,9 @@ Windows 缓存读取共享发布所需的删除访问。
 后续任务与阶段顺序见[开发路线](docs/plans/2026-10-11-next-development.md)。
 资产格式后续阶段见[拓展计划](docs/plans/2026-10-11-asset-format-expansion.md)。
 当前验收完成后推进模型、图像、音频及导出交换。
+
+
+## 二维内容与扩展格式
+
+GIF、PSD、SVG 和 USDA 通过公共导入服务接入。
+范围见[扩展格式说明](docs/assets/extended-formats.md)。

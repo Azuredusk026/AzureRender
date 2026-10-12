@@ -1189,3 +1189,9 @@ All notable public changes are recorded here. Versions follow Semantic Versionin
 - 大纲在遍历结束后提交引用写入。
 - 最近目录控件使用内部标签，支持窄面板。
 - U12 纳入右键漂浮、环视与飞行速度验收。
+
+
+## 二维内容与扩展格式
+
+GIF、PSD、SVG 和 USDA 通过公共导入服务接入。
+范围见[扩展格式说明](docs/assets/extended-formats.md)。

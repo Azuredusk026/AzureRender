@@ -11,7 +11,7 @@ import uuid
 
 REQUIRED_LICENSES = [name + "-LICENSE.txt" for name in [
     "glfw3", "tinygltf", "stb", "openexr", "imath", "libdeflate", "openjph", "nlohmann-json",
-    "joltphysics", "lua", "sol2", "rmlui", "miniaudio", "freetype", "libpng", "zlib", "bzip2", "brotli", "LatoLatin"]]
+    "joltphysics", "lua", "sol2", "rmlui", "miniaudio", "freetype", "libpng", "zlib", "bzip2", "brotli", "LatoLatin", "NanoSVG", "NotoSansCJK"]]
 PRIVATE_NAMES = {"assets_private", "captures", "portfolio"}
 GENERATED_NAMES = {".azure", ".git", "__pycache__"}
 

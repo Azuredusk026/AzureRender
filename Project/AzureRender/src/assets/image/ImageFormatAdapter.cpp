@@ -2,6 +2,7 @@
 #include "assets/AssetTransfer.hpp"
 #include "assets/image/ImageEncoder.hpp"
 #include "assets/image/TextureContainerAdapter.hpp"
+#include "assets/image/SvgCodec.hpp"
 #include <algorithm>
 #include <cstring>
 namespace azurerender {
@@ -14,16 +15,18 @@ bool isExr(const std::vector<unsigned char>& b){return prefix(b,{0x76,0x2f,0x31,
 bool isWebp(const std::vector<unsigned char>& b){return b.size()>=12&&prefix(b,{'R','I','F','F'})&&std::memcmp(b.data()+8,"WEBP",4)==0;}
 }
 void registerImageFormats(AssetFormatRegistry& registry) {
-    for(const std::string id:{"png","jpeg","bmp","tga","ppm","hdr","exr","tiff","webp","dds","ktx2"}) {
+    for(const std::string id:{"png","jpeg","bmp","tga","ppm","hdr","exr","tiff","webp","dds","ktx2","gif","psd","svg"}) {
         AssetFormatDescriptor format;format.id=id;format.label=id;format.domain=AssetDomain::Image;format.canRead=true;format.extensions={"."+id};
         if(id=="jpeg")format.extensions.push_back(".jpg");if(id=="tiff")format.extensions.push_back(".tif");
         format.features={"rgba","top-left","precision","color-space"};
-        format.canWrite=id!="ppm";
+        format.canWrite=id!="ppm"&&id!="gif"&&id!="psd"&&id!="svg";
         if(format.canWrite){format.plan=planImageExport;format.normalizeExportSettings=[id](const nlohmann::json& settings){return normalizeImageExportSettings(id,settings);};
             format.exportSettingsSchema={{"type","object"},{"properties",nlohmann::json::object()},{"additionalProperties",false}};
             if(id=="jpeg"||id=="webp")format.exportSettingsSchema["properties"]["quality"]={{"type","integer"},{"minimum",1},{"maximum",100},{"default",100}};}
         if(id=="dds"||id=="ktx2")format.exportSettingsSchema["properties"]["compression"]={{"type","string"},{"enum",id=="dds"?nlohmann::json({"rgba","bc1","bc3","bc5","bc7"}):nlohmann::json({"rgba","basis"})},{"default","rgba"}};
         format.probe=[id](const std::vector<unsigned char>& b){
+            if(id=="gif")return prefix(b,{'G','I','F','8','7','a'})||prefix(b,{'G','I','F','8','9','a'});
+            if(id=="psd")return prefix(b,{'8','B','P','S',0,1});if(id=="svg")return isSvgImage(b);
             if(id=="dds")return prefix(b,{'D','D','S',' '});if(id=="ktx2")return b.size()>=12&&b[0]==0xab&&isTextureContainer(b);
             if(id=="png")return prefix(b,{137,80,78,71,13,10,26,10});if(id=="jpeg")return prefix(b,{255,216,255});
             if(id=="bmp")return prefix(b,{'B','M'});if(id=="tiff")return isTiff(b);if(id=="exr")return isExr(b);if(id=="webp")return isWebp(b);
