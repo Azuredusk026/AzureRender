@@ -1,5 +1,8 @@
 # AzureRender
 
+下一批从 P8.1 最终候选准备开始。
+具体条件见[验收队列](acceptance/wf2/2026-10-13.md)。
+
 阶段代号与状态见[统一状态表](plans/current-stage-status.md)。
 下一步验收操作见[收尾流程](acceptance/phase-closure.md)。
 

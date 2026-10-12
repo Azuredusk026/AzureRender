@@ -1,0 +1,19 @@
+{
+  "boundary_action": "KEEP",
+  "content_actions": [
+    "FACT-CHECK",
+    "RESTRUCTURE"
+  ],
+  "title_review": "PASS",
+  "quality": {
+    "scope": "状态汇总与集中验收的实际执行准备",
+    "structure": "来源、队列、条件和原运行结果分别列出",
+    "depth": "明确候选来源差异及门禁依赖",
+    "implementation": "项目状态随当前活动或可执行阶段汇总",
+    "evidence": "820 个输入、6 项产物、17 份证据及原六包已核对",
+    "writing": "中文定稿，短句及文风检查通过",
+    "titles": "按验收准备问题命名",
+    "informationArchitecture": "总状态、阶段表和收尾流程有统一入口",
+    "visual": "状态和执行条件采用表格，本批没有 UI 改动"
+  }
+}

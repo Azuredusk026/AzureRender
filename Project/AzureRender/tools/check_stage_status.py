@@ -112,8 +112,13 @@ def render(data: dict, page: Path, root: Path) -> str:
     def link(path: str) -> str:
         return Path(os.path.relpath(root / path, page.parent)).as_posix()
 
+    required = [s for s in data['stages'] if s.get('kind') != 'candidate']
+    statuses = {s['status'] for s in required}
+    project_state = ('Active' if 'Active' in statuses else 'Ready' if 'Ready' in statuses
+                     else 'Pending' if 'Pending' in statuses else 'Complete')
     lines = [
         '# 当前阶段状态', '',
+        f'项目状态：{STATES[project_state]}。', '',
         '本页回答各阶段处于什么状态，下一项工作是什么。',
         '阶段状态取值为完成、Ready、开发中、待完成。',
         '完成表示本阶段规定的交付和检查已满足。',

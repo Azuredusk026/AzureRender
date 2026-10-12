@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-12",
+  "updated": "2026-10-13",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -683,7 +683,8 @@
       "evidence": [
         "docs/plans/hazel-fermion-manifest.json"
       ],
-      "requiredAcceptance": []
+      "requiredAcceptance": [],
+      "kind": "candidate"
     },
     {
       "id": "WF1",
@@ -700,14 +701,14 @@
     {
       "id": "WF2",
       "name": "验收执行队列与准备报告",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "本阶段交付",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "WF1"
       ],
       "evidence": [
-        "docs/plans/2026-10-12-workflow-repair.md"
+        "docs/acceptance/wf2/2026-10-13.md"
       ],
       "requiredAcceptance": []
     },

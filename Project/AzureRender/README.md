@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+下一批从 P8.1 最终候选准备开始。
+执行条件见[验收队列](docs/acceptance/wf2/2026-10-13.md)。
+
 阶段状态见[当前状态](docs/plans/current-stage-status.md)。
 阶段收尾与验收顺序见[执行说明](docs/acceptance/phase-closure.md)。
 

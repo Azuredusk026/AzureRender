@@ -100,6 +100,15 @@ class StageStatusTests(unittest.TestCase):
         (self.root / 'status.md').write_text('# Stale\n', encoding='utf-8')
         self.assertNotEqual(self.run_check().returncode, 0)
 
+    def test_project_is_ready_when_only_acceptance_remains(self):
+        self.assertEqual(self.run_check('--write-page').returncode, 0)
+        self.assertIn('项目状态：Ready。', (self.root / 'status.md').read_text(encoding='utf-8'))
+
+    def test_project_reports_active_work(self):
+        self.data['stages'][1]['status'] = 'Active'
+        self.assertEqual(self.run_check('--write-page').returncode, 0)
+        self.assertIn('项目状态：开发中。', (self.root / 'status.md').read_text(encoding='utf-8'))
+
 
 if __name__ == '__main__':
     unittest.main()
