@@ -237,7 +237,8 @@
         "gltf",
         "obj",
         "ply",
-        "stl"
+        "stl",
+        "usda"
       ],
       "output": [
         "glb",
@@ -259,7 +260,10 @@
         "ppm",
         "tga",
         "tiff",
-        "webp"
+        "webp",
+        "gif",
+        "psd",
+        "svg"
       ],
       "output": [
         "bmp",
@@ -604,6 +608,49 @@
       "generatorVersion": 1,
       "evidence": "docs/acceptance/g19/evidence/2026-10-12/manifest.json",
       "exportEvidence": "docs/acceptance/g21/evidence/2026-10-12/manifest.json"
+    },
+    {
+      "id": "gif",
+      "domain": "image",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g24/2026-10-12.md"
+    },
+    {
+      "id": "psd",
+      "domain": "image",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g24/2026-10-12.md"
+    },
+    {
+      "id": "svg",
+      "domain": "image",
+      "read": true,
+      "write": false,
+      "transformsSource": false,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g24/2026-10-12.md"
+    },
+    {
+      "id": "usda",
+      "domain": "model",
+      "read": true,
+      "write": false,
+      "transformsSource": true,
+      "settingsVersion": 1,
+      "generatorVersion": 1,
+      "evidence": "docs/acceptance/g24/2026-10-12.md"
     }
-  ]
+  ],
+  "extensionsPlan": "docs/plans/2026-10-12-content-expansion.md",
+  "currentInputFormatCount": 29,
+  "currentOutputFormatCount": 20
 }

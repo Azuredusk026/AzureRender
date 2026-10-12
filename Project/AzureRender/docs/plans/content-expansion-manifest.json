@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "plan": "docs/plans/2026-10-12-content-expansion.md",
+  "stages": [
+    {
+      "id": "U14",
+      "implementation": "complete",
+      "commit": "0d0dd0c"
+    },
+    {
+      "id": "B1",
+      "implementation": "complete",
+      "commit": "181e6fe",
+      "originalLongRun": "pending"
+    },
+    {
+      "id": "G24",
+      "implementation": "complete",
+      "commit": "795c4d4"
+    },
+    {
+      "id": "G14",
+      "implementation": "complete",
+      "commit": "e0b04c2"
+    },
+    {
+      "id": "P9",
+      "implementation": "complete"
+    }
+  ],
+  "inputFormats": 29,
+  "outputFormats": 20,
+  "materialCanvas": "typed value and texture nodes to one registered material output",
+  "scene2d": "pixel-coordinate rectangles, sprites and RmlUi Chinese text",
+  "usdProfile": "ASCII static root Mesh with vertex normals; strict rejection of unsupported fields",
+  "deferred": [
+    "original 1800-second audio shutdown race",
+    "formal thermal performance gates",
+    "physical keyboard/mouse and sound review"
+  ],
+  "deferredManifest": "docs/plans/p8-deferred-acceptance-manifest.json",
+  "status": "automatic implementation complete; deferred acceptance pending",
+  "checks": {
+    "debugCpu": 186,
+    "releaseCpu": 186,
+    "pathFixDebug": 4,
+    "pathFixRelease": 4,
+    "deliveryProjects": 2,
+    "materialPlayerReplays": 2,
+    "rendererResidencyWorkflows": 2
+  },
+  "evidence": "docs/acceptance/p9/evidence/2026-10-12/manifest.json"
+}

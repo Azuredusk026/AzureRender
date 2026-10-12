@@ -9,7 +9,6 @@ namespace {
 void materialGraphCanvas(EditorSession& session,const std::string& asset,const nlohmann::json& document,float scale){
     auto material=MaterialData::parse(document);
     auto graph=material.authoringGraph.is_null()?MaterialGraphModel::fromMaterial(material).encode():material.authoringGraph;
-    if(!ImGui::CollapsingHeader("Material graph",ImGuiTreeNodeFlags_DefaultOpen))return;
     ImGui::TextWrapped("Drag nodes to arrange the canvas. Connections compile the same material parameters and textures as the form.");
     ImGui::BeginChild("Material graph canvas",{0,260*scale},true,ImGuiWindowFlags_HorizontalScrollbar);
     const auto origin=ImGui::GetCursorScreenPos();auto* draw=ImGui::GetWindowDrawList();
@@ -57,7 +56,8 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
     if(refreshed)materialSnapshot_=refreshed.value;
     ImGui::BeginChild("Material parameters",{0,-42*dpi_},false);
     if(materialSnapshot_.contains("document")){
-        materialGraphCanvas(*session_,materialAsset_,materialSnapshot_.at("document"),dpi_);
+        const bool graphOpen=ImGui::CollapsingHeader("Material graph");observeWidget("material.graph.toggle");
+        if(graphOpen)materialGraphCanvas(*session_,materialAsset_,materialSnapshot_.at("document"),dpi_);
         ImGui::TextUnformatted(materialSnapshot_.at("document").at("typeId").get<std::string>().c_str());
         if(session_->developerServices().image){const auto preview=session_->edit("preview.asset",{{"asset",materialAsset_}});if(preview)if(const auto texture=previewTexture(preview.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{160*dpi_,160*dpi_});}
         for(const auto& field:materialSnapshot_.at("type").items()){

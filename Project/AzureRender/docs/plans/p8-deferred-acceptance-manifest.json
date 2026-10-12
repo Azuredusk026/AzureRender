@@ -43,9 +43,11 @@
       "status": "RealRunsObservedFinalGatesFailed",
       "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
       "toolCleanupStatus": "BoundedCleanupVerified",
-      "runtimeShutdownStatus": "CauseUnconfirmed",
+      "runtimeShutdownStatus": "NotificationReentrancyFixedShortChecksPassed",
       "owner": "平台与音频生命周期",
-      "retryTrigger": "宿主关闭问题定位并完成受影响短时回归"
+      "retryTrigger": "相关关闭机制修复后集中复核原始长跑竞态",
+      "repairEvidence": "docs/acceptance/p9/2026-10-12.md",
+      "originalRaceAcceptance": "1800-second replay pending"
     },
     {
       "id": "P5-delivery",

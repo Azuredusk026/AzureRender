@@ -12,8 +12,8 @@
 #pragma warning(pop)
 #endif
 
-#include "runtime/AudioDeviceNotifications.hpp"
-#include "runtime/AudioNotificationQueue.hpp"
+#include "assets/audio/AudioDeviceNotifications.hpp"
+#include "assets/audio/AudioNotificationQueue.hpp"
 #include <map>
 #include <string>
 

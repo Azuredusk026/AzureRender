@@ -92,7 +92,6 @@ add_custom_target(AzureEngineContracts ALL
         --source "${CMAKE_CURRENT_SOURCE_DIR}"
         --manifest "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
         --output "${CMAKE_CURRENT_BINARY_DIR}/contracts"
-    BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/contracts/manifest.json"
     COMMENT "Generating verified engine interface snapshots and schemas"
     VERBATIM)
 if(BUILD_TESTING)
@@ -329,8 +328,8 @@ add_library(AzureRenderCore STATIC
     src/assets/audio/CompressedAudioAdapter.cpp
     src/assets/audio/AudioEncoder.cpp
     src/assets/audio/AudioFormatAdapter.cpp
-    src/runtime/MiniaudioImpl.cpp
-    src/runtime/AudioNotificationQueue.cpp
+    src/assets/audio/MiniaudioImpl.cpp
+    src/assets/audio/AudioNotificationQueue.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
     src/assets/AssetExportJob.cpp
@@ -1750,6 +1749,9 @@ install(FILES
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/gknextengine/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "gkNextEngine-LICENSE.txt")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/nanosvg/LICENSE.txt" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "NanoSVG-LICENSE.txt")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/nanosvg/SOURCE.json" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses" RENAME "NanoSVG-source.json")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/assets/extended-formats.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/assets")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/scene-2d.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/content-expansion-manifest.json" "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-12-content-expansion.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/runtime/script-services.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/runtime")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/managed-scripts.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/tutorials")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/g11-implementation.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")

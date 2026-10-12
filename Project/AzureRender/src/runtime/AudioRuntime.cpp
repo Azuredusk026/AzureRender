@@ -1,5 +1,5 @@
 #include "runtime/AudioRuntime.hpp"
-#include "runtime/AudioDeviceNotifications.hpp"
+#include "assets/audio/AudioDeviceNotifications.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <miniaudio.h>
 #include <cmath>

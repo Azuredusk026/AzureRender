@@ -90,7 +90,8 @@ P5 剩余归因、正式性能及最终交付在 P8 验收。
 FBX 与 DAE 的导出通过 glTF/GLB 交换完成。
 骨架与动画重点覆盖 glTF、GLB 和 FBX 输入。
 其他格式按其实际表达能力报告保留字段。
-GIF、PSD、SVG、USD 等记录为后续候选。
+GIF、PSD、SVG 和 USDA 按 G24 范围实施。
+具体保真范围见[扩展格式说明](../assets/extended-formats.md)。
 
 第一批是 G17 至 G21、U17 和 P7 的验收范围。
 第二批是 G22、G23 和 P8 的验收范围。

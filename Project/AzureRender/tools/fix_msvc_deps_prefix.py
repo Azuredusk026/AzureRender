@@ -55,6 +55,7 @@ def probe_prefix(cxx_compiler: str, work_dir: pathlib.Path) -> bytes:
 
 
 def repair(build_dir: pathlib.Path) -> bool:
+    build_dir = build_dir.resolve()
     cache = build_dir / "CMakeCache.txt"
     if not cache.is_file():
         print(f"skip {build_dir}: no CMakeCache.txt", file=sys.stderr)
@@ -68,7 +69,7 @@ def repair(build_dir: pathlib.Path) -> bool:
 
     compiler = None
     for line in cache.read_bytes().splitlines():
-        if line.startswith(b"CMAKE_CXX_COMPILER:FILEPATH="):
+        if re.match(rb"^CMAKE_CXX_COMPILER:(?:FILEPATH|STRING)=", line):
             compiler = line.split(b"=", 1)[1].decode("utf-8").strip()
             break
     if compiler is None:

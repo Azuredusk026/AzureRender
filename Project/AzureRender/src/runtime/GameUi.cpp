@@ -34,7 +34,7 @@ struct GameUi::Impl: Rml::EventListener {
             }
             context=Rml::CreateContext("azure-ui-"+std::to_string(++contextCounter),{640,360},&renderer);
             if(!context)throw std::runtime_error("Game UI context failed to initialize");
-            document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),path.generic_string()):context->LoadDocument(path.generic_string());if(!document)throw std::runtime_error("Game UI document failed to load");
+            document=path.extension()==".azure2d"?context->LoadDocumentFromMemory(Scene2D::load(path).toRml(),Rml::StringUtilities::Replace(path.generic_u8string(), ':', '|')):context->LoadDocument(path.generic_string());if(!document)throw std::runtime_error("Game UI document failed to load");
             document->AddEventListener("click",this);document->Show();
         }catch(...){clear();throw;}
     }
