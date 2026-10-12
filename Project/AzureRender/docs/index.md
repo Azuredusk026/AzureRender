@@ -1,5 +1,7 @@
 # AzureRender
 
+当前工作区检查与待项见[交付结果](acceptance/ui8/2026-10-12.md)。
+
 安装版项目制作见[项目中心指南](tutorials/project-center.md)。
 入口、UI 与独立发布范围见[产品化状态](ui-productization-status.md)。
 本轮证据和剩余限制见[交付验证](acceptance/ui4/2026-10-12.md)。

@@ -31,6 +31,12 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 选择与属性操作: tutorials/selection-properties.md
+  - 场景视口操作: tutorials/viewport-workspace.md
+  - 剩余工作区计划: plans/2026-10-12-remaining-ui.md
+  - 层级与属性验证: acceptance/ui6/2026-10-12.md
+  - 场景视口验证: acceptance/ui7/2026-10-12.md
+  - 工作区交付检查: acceptance/ui8/2026-10-12.md
   - 资源与日志操作: tutorials/browser-console.md
   - 资源与日志迁移计划: plans/2026-10-12-browser-console-ui.md
   - 项目中心与独立交付: ui-productization-status.md

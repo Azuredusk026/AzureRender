@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+工作区迁移与本轮检查见[交付结果](docs/acceptance/ui8/2026-10-12.md)。
+Debug 与 Release 各 187 项 CPU 回归通过。
+
 相机、变换与场景视口见[视口指南](docs/tutorials/viewport-workspace.md)。
 
 对象选择与属性操作见[编辑指南](docs/tutorials/selection-properties.md)。
