@@ -1,4 +1,5 @@
 #include "MaterialEditingService.hpp"
+#include "editor/graph/MaterialGraphModel.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include <set>
 namespace azurerender {
@@ -60,6 +61,7 @@ MaterialDocument MaterialEditingService::previewField(const EditorContext& conte
     auto document=MaterialDocument::load(record.path);
     if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);if(value.is_null())document.textures.erase(slot);else document.textures[slot]=value;}
     else {if(!document.parameters.contains(field))throw std::invalid_argument("Unknown material parameter");document.parameters[field]=value;}
+    if(!document.authoringGraph.is_null()){auto graph=MaterialGraphModel::parse(document.authoringGraph);graph.setField(field,value);document.authoringGraph=graph.encode();}
     document.validate();
     for(const auto& texture:document.textures.items()){
         const auto path=context.assets().resolve(texture.value().at("asset").get<std::string>());
@@ -81,7 +83,9 @@ Json MaterialEditingService::execute(EditorContext& context,ContentOperationServ
     auto document=MaterialDocument::load(record.path);auto& history=history_[id];const auto before=document.encode();
     if(history.current!=before){history.undo.clear();history.redo.clear();history.current=before;}
     if(operation=="material.describe")return {{"asset",id},{"document",before},{"type",MaterialTypeRegistry::builtins().type(document.typeId).parameters},{"textures",MaterialTypeRegistry::builtins().type(document.typeId).textures},{"canUndo",!history.undo.empty()},{"canRedo",!history.redo.empty()}};
-    if(operation=="material.field"){
+    if(operation=="material.graph"){
+        const auto graph=MaterialGraphModel::parse(args.at("graph"));document=graph.compile();document.authoringGraph=graph.encode();
+    }else if(operation=="material.field"){
         document=previewField(context,id,args.at("field").get<std::string>(),args.at("value"));
     }else if(operation=="material.undo"){
         if(history.undo.empty())throw std::invalid_argument("Material undo history is empty");document=MaterialDocument::parse(history.undo.back());

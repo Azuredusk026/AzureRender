@@ -1,9 +1,52 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "editor/ui/Widgets.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
+#include "editor/graph/MaterialGraphModel.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
+namespace {
+void materialGraphCanvas(EditorSession& session,const std::string& asset,const nlohmann::json& document,float scale){
+    auto material=MaterialData::parse(document);
+    auto graph=material.authoringGraph.is_null()?MaterialGraphModel::fromMaterial(material).encode():material.authoringGraph;
+    if(!ImGui::CollapsingHeader("Material graph",ImGuiTreeNodeFlags_DefaultOpen))return;
+    ImGui::TextWrapped("Drag nodes to arrange the canvas. Connections compile the same material parameters and textures as the form.");
+    ImGui::BeginChild("Material graph canvas",{0,260*scale},true,ImGuiWindowFlags_HorizontalScrollbar);
+    const auto origin=ImGui::GetCursorScreenPos();auto* draw=ImGui::GetWindowDrawList();
+    const auto position=[&](const nlohmann::json& node){return ImVec2(origin.x+node.at("position")[0].get<float>()*scale,origin.y+node.at("position")[1].get<float>()*scale);};
+    const auto output=std::find_if(graph["nodes"].begin(),graph["nodes"].end(),[](const auto& node){return node.at("id")=="output";});
+    for(const auto& link:graph["links"]){
+        const auto source=std::find_if(graph["nodes"].begin(),graph["nodes"].end(),[&](const auto& node){return node.at("id")==link.at("source");});
+        auto a=position(*source),b=position(*output);a.x+=150*scale;a.y+=25*scale;b.y+=25*scale;
+        draw->AddBezierCubic(a,{a.x+60*scale,a.y},{b.x-60*scale,b.y},b,IM_COL32(90,180,230,255),2*scale);
+    }
+    bool changed=false;
+    for(auto& node:graph["nodes"]){
+        const auto id=node.at("id").get<std::string>();ImGui::PushID(id.c_str());auto p=position(node);
+        ImGui::SetCursorScreenPos(p);ImGui::InvisibleButton("node",{150*scale,50*scale});
+        if(ImGui::IsItemActive()&&ImGui::IsMouseDragging(0)){const auto delta=ImGui::GetMouseDragDelta();p.x+=delta.x;p.y+=delta.y;}
+        draw->AddRectFilled(p,{p.x+150*scale,p.y+50*scale},id=="output"?IM_COL32(85,85,95,255):IM_COL32(30,65,95,255),5*scale);
+        draw->AddText({p.x+8*scale,p.y+7*scale},IM_COL32_WHITE,id.c_str());
+        if(ImGui::IsItemDeactivated()){const auto delta=ImGui::GetMouseDragDelta();if(std::abs(delta.x)+std::abs(delta.y)>1){node["position"]={node["position"][0].get<float>()+delta.x/scale,node["position"][1].get<float>()+delta.y/scale};changed=true;}}
+        ImGui::PopID();
+    }
+    ImGui::SetCursorPos({1000*scale,1400*scale});ImGui::Dummy({1,1});ImGui::EndChild();
+    for(const auto& field:material.parameters.items()){
+        auto& links=graph["links"];const auto found=std::find_if(links.begin(),links.end(),[&](const auto& link){return link.at("slot")==field.key();});
+        const auto current=found==links.end()?std::string("Default"):found->at("source").get<std::string>();
+        if(ImGui::BeginCombo((field.key()+" input").c_str(),current.c_str())){
+            if(ImGui::Selectable("Default",found==links.end())){if(found!=links.end())links.erase(found);changed=true;}
+            for(const auto& node:graph["nodes"]){
+                if(node.at("kind")!="value"||node.at("value").type()!=field.value().type())continue;
+                const auto id=node.at("id").get<std::string>();
+                if(ImGui::Selectable(id.c_str(),current==id)){links.erase(std::remove_if(links.begin(),links.end(),[&](const auto& link){return link.at("slot")==field.key();}),links.end());links.push_back({{"source",id},{"target","output"},{"slot",field.key()}});changed=true;}
+            }ImGui::EndCombo();
+        }
+    }
+    if(changed)session.edit("material.graph",{{"asset",asset},{"graph",graph}});
+    if(material.authoringGraph.is_null()&&ImGui::Button("Save graph"))session.edit("material.graph",{{"asset",asset},{"graph",graph}});
+}
+}
 void ImGuiEditorLayer::drawMaterialAssetPanel(){
     if(materialDialogRequested_){ImGui::OpenPopup("Material asset");materialDialogRequested_=false;}
     const auto work=ImGui::GetMainViewport()->WorkSize;
@@ -14,6 +57,7 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
     if(refreshed)materialSnapshot_=refreshed.value;
     ImGui::BeginChild("Material parameters",{0,-42*dpi_},false);
     if(materialSnapshot_.contains("document")){
+        materialGraphCanvas(*session_,materialAsset_,materialSnapshot_.at("document"),dpi_);
         ImGui::TextUnformatted(materialSnapshot_.at("document").at("typeId").get<std::string>().c_str());
         if(session_->developerServices().image){const auto preview=session_->edit("preview.asset",{{"asset",materialAsset_}});if(preview)if(const auto texture=previewTexture(preview.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{160*dpi_,160*dpi_});}
         for(const auto& field:materialSnapshot_.at("type").items()){

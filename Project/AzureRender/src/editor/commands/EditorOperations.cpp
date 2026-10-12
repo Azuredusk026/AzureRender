@@ -48,8 +48,8 @@ EditRegistry editorOperations(EditorSession& session) {
         });
     };
     registry.add({"preview.types",1,schema(),false,false,false},[](EditorContext&,const Json&)->Json{return ThumbnailProviderRegistry::builtins().types();});
-    for(const auto* operation:{"material.types","material.create","material.describe","material.field","material.undo","material.redo","material.save"}){
-        registry.add({operation,1,schema({{"type",text},{"destination",text},{"asset",text},{"field",text},{"value",Json::object()}}),false,false,std::string(operation)!="material.types"&&std::string(operation)!="material.describe"},[&session,operation](EditorContext& context,const Json& args)->Json {
+    for(const auto* operation:{"material.types","material.create","material.describe","material.field","material.graph","material.undo","material.redo","material.save"}){
+        registry.add({operation,1,schema({{"type",text},{"destination",text},{"asset",text},{"field",text},{"value",Json::object()},{"graph",{{"type","object"},{"additionalProperties",true}}}}),false,false,std::string(operation)!="material.types"&&std::string(operation)!="material.describe"},[&session,operation](EditorContext& context,const Json& args)->Json {
             if(std::string(operation)=="material.types")return MaterialTypeRegistry::builtins().describe();
             session.contentDirectories().cancelRefresh();
             const auto result=session.materials().execute(context,session.content(),operation,args);

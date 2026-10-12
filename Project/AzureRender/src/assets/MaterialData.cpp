@@ -1,4 +1,5 @@
 #include "MaterialData.hpp"
+#include "assets/MaterialGraph.hpp"
 #include <cmath>
 #include <fstream>
 #include <set>
@@ -31,12 +32,13 @@ MaterialTypeRegistry& MaterialTypeRegistry::builtins(){
 MaterialData MaterialData::defaults(const std::string& type){MaterialData result;result.typeId=type;for(const auto& field:MaterialTypeRegistry::builtins().type(type).parameters.items())result.parameters[field.key()]=field.value().at("default");return result;}
 MaterialData MaterialData::parse(const Json& source){
     if(!source.is_object()||source.at("schemaVersion")!=kSchemaVersion)throw std::invalid_argument("Unsupported material schema");
-    for(const auto& field:source.items())if(field.key()!="schemaVersion"&&field.key()!="typeId"&&field.key()!="parameters"&&field.key()!="textures")throw std::invalid_argument("Unknown material field: "+field.key());
-    auto result=defaults(source.at("typeId").get<std::string>());result.parameters=source.at("parameters");result.textures=source.value("textures",Json::object());result.validate();return result;
+    for(const auto& field:source.items())if(field.key()!="schemaVersion"&&field.key()!="typeId"&&field.key()!="parameters"&&field.key()!="textures"&&field.key()!="authoringGraph")throw std::invalid_argument("Unknown material field: "+field.key());
+    auto result=defaults(source.at("typeId").get<std::string>());result.parameters=source.at("parameters");result.textures=source.value("textures",Json::object());result.authoringGraph=source.value("authoringGraph",Json(nullptr));result.validate();return result;
 }
 MaterialData MaterialData::load(const std::filesystem::path& path){std::ifstream input(path);if(!input)throw std::runtime_error("Cannot open material: "+path.u8string());Json data;input>>data;return parse(data);}
-Json MaterialData::encode()const{validate();return {{"schemaVersion",kSchemaVersion},{"typeId",typeId},{"parameters",parameters},{"textures",textures}};}
+Json MaterialData::encode()const{validate();Json out={{"schemaVersion",kSchemaVersion},{"typeId",typeId},{"parameters",parameters},{"textures",textures}};if(!authoringGraph.is_null())out["authoringGraph"]=authoringGraph;return out;}
 void MaterialData::validate()const{
+    if(!authoringGraph.is_null()){const auto compiled=MaterialGraph::parse(authoringGraph).compile();if(compiled.typeId!=typeId||compiled.parameters!=parameters||compiled.textures!=textures)throw std::invalid_argument("Material graph and compiled values differ");}
     const auto& type=MaterialTypeRegistry::builtins().type(typeId);
     if(!parameters.is_object()||!textures.is_object()||parameters.size()!=type.parameters.size())throw std::invalid_argument("Material parameters require all registered fields");
     for(const auto& field:type.parameters.items()){

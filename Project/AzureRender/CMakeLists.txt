@@ -312,6 +312,7 @@ add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
     src/assets/MaterialData.cpp
+    src/assets/MaterialGraph.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
     src/assets/image/ImageCodec.cpp
@@ -1875,6 +1876,12 @@ if(BUILD_TESTING)
     target_link_libraries(AzureMaterialSlotEditingTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.MaterialSlotEditing COMMAND AzureMaterialSlotEditingTests)
     add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
+    add_executable(AzureMaterialGraphTests tests/MaterialGraphTests.cpp)
+    add_executable(AzureMaterialGraphEditingTests tests/MaterialGraphEditingTests.cpp)
+    target_link_libraries(AzureMaterialGraphEditingTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.MaterialGraphEditing COMMAND AzureMaterialGraphEditingTests)
+    target_link_libraries(AzureMaterialGraphTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureAssets.MaterialGraph COMMAND AzureMaterialGraphTests)
     target_link_libraries(AzureMaterialDocumentTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.MaterialDocument COMMAND AzureMaterialDocumentTests)
     add_executable(AzureEditorProjectionTests tests/EditorProjectionTests.cpp)

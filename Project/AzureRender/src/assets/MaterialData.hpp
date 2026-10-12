@@ -24,6 +24,7 @@ struct MaterialData {
     static constexpr unsigned kSchemaVersion=1;
     std::string typeId;
     nlohmann::json parameters=nlohmann::json::object(),textures=nlohmann::json::object();
+    nlohmann::json authoringGraph=nullptr;
     static MaterialData defaults(const std::string&);
     static MaterialData parse(const nlohmann::json&);
     static MaterialData load(const std::filesystem::path&);
