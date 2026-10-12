@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-13",
+  "deliveryProof": "delivery-provenance.json",
+  "deliveryProofSha256": "e29d350bc22b14a08cd9bedd7d56e22a086791bdac97fa90a28924a6c87c5800",
+  "controllerProof": "release-controller-provenance.json",
+  "controllerProofSha256": "3bc31b50e69f9f9a240a761cfbe7e21c7f9a763bef9c8c6d05f78ff8e2728820",
+  "changedInputs": [
+    "tools/test_platformer_long_run.py",
+    "tools/run_platformer_long_run.py"
+  ],
+  "runtimeProductsIdentical": true,
+  "standardDriverIdentical": true,
+  "nativeLauncherSha256": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+  "packages": [
+    {
+      "kind": "engine",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-engine.zip",
+      "sha256": "2ef0f98552e08c24d632b70347f9c2e13948a2ed947096112d8bcd58a2177fc1",
+      "bytes": 307019738,
+      "files": 9349
+    },
+    {
+      "kind": "exploration",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-exploration.zip",
+      "sha256": "26d634a0912e83a21b6b42960a40f15da7162516bccd4d8688207d656903d95e",
+      "bytes": 37927665,
+      "files": 609
+    },
+    {
+      "kind": "platformer",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-platformer.zip",
+      "sha256": "d1581900ff90b5edbbc4d128691c77422365e1cd5156ce81fa1f0f663e7a5f9b",
+      "bytes": 34636955,
+      "files": 531
+    },
+    {
+      "kind": "scene_inspector",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-scene_inspector.zip",
+      "sha256": "4f9359fd26fc5046d1f3fcd2052dae51cba514b2575d8aaaeb5f53c59ef7fa86",
+      "bytes": 33483123,
+      "files": 485
+    },
+    {
+      "kind": "authored-exploration",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-authored-exploration.zip",
+      "sha256": "a0116d67a2e18b7d28d0bc5e27731c3a6f1b6d4e6a8e211cfdeeb3e9440d4cf6",
+      "bytes": 33526895,
+      "files": 511
+    },
+    {
+      "kind": "authored-inspection",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-13\\arena-delivery-final\\packages\\Azure-P8-final-authored-inspection.zip",
+      "sha256": "148b5ab0eecf406cad007f1813e0342d6719bf25c43d6fd5477df78610c5d694",
+      "bytes": 33494590,
+      "files": 495
+    }
+  ]
+}

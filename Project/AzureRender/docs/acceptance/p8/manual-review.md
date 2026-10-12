@@ -5,8 +5,10 @@
 候选包来源见本阶段证据中的交付清单。
 复核前核对压缩包及解压文件的哈希。
 
-绑定清单见[候选指纹](evidence/2026-10-12/manual-candidate-binding.json)。
-包文件及哈希见[交付来源](evidence/2026-10-12/arena-delivery/packages/provenance.json)。
+绑定清单见[候选指纹](evidence/2026-10-13/manual-candidate-binding.json)。
+包文件及哈希见[交付来源](evidence/2026-10-13/delivery-provenance.json)。
+
+当前包及填写入口见[本批实体复核](2026-10-13-physical-review.md)。
 
 ## 候选与环境
 

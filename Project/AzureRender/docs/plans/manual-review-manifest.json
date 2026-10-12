@@ -85,5 +85,7 @@
       "scope": "最终候选的全部实体操作、听感和制作复核"
     }
   ],
-  "complete": false
+  "complete": false,
+  "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-13/manual-candidate-binding.json",
+  "currentReviewPage": "docs/acceptance/p8/2026-10-13-physical-review.md"
 }
