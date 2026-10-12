@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "implementationCommits": [
+    "f745cfd",
+    "19395d4",
+    "a45ede1"
+  ],
+  "headAtCollection": "a45ede149354c22bcb36a61ecfd8fa0865ff6ced",
+  "source": {
+    "origin": "working tree with pre-existing user changes",
+    "inventory": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\ui4\\source-inventory.json",
+    "inventorySha256": "87ba838d60f4116964489cf394e4fe276a5d44f4296d5e8784033f3531859140",
+    "files": 813
+  },
+  "technology": {
+    "imgui": "1.92.8 docking",
+    "platform": "GLFW",
+    "renderer": "Vulkan",
+    "qt": false
+  },
+  "guiWorkflow": "passed through production ImGui input replay",
+  "errorRecovery": "passed",
+  "nativeEntry": "passed",
+  "cpu": {
+    "Release": {
+      "initialPassed": 185,
+      "initialTotal": 186,
+      "initialFailure": "AzureEditor.EditTransaction",
+      "affectedRetest": "3/3 passed"
+    },
+    "Debug": {
+      "initialPassed": 185,
+      "initialTotal": 186,
+      "remainingFailure": "AzureEditor.ContentDirectoryScale timeout at unchanged 180 seconds",
+      "affectedRetest": "3/3 passed"
+    }
+  },
+  "manualPending": [
+    "physical double-click and mouse/keyboard",
+    "Chinese IME composition"
+  ],
+  "directoryDiagnostic": {
+    "fixtureMs": 7255.5662,
+    "projectOpenedAtMs": 165531.3897,
+    "firstSnapshotAtMs": 172085.8712,
+    "cachedSamplesAtMs": 172163.2888,
+    "timeoutSeconds": 180
+  },
+  "artifacts": [
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureRender.exe",
+      "sha256": "231f956e19b8aa1f95f9f89cfd0657f21479a67acecf251578a506bf4ba00481",
+      "bytes": 8149504
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzurePlayer.exe",
+      "sha256": "9f9cb18c46f8db31d1cb89a8a3b90a5f3608f73e1a080a091a5d85b3eed04fd9",
+      "bytes": 4994560
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\bin\\AzureGameLauncher.exe",
+      "sha256": "f50166d03e0d776ebda7f9e28a79bcd451106c8a533f45cb47a694664298569f",
+      "bytes": 378880
+    },
+    {
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎\\install_manifest.json",
+      "sha256": "06afdda557ddba8dcd68df9fe76c1f81c495698f023c3e3470f41f68dcab7ea1",
+      "bytes": 2031183
+    }
+  ],
+  "evidence": [
+    {
+      "path": "gui-workflow.json",
+      "source": "ui4/gui-workflow-hover-fixed/summary.json",
+      "sha256": "5486c4ac17d79f4afbcbb143150e293e565ded38721660efd71a7dddbff85230"
+    },
+    {
+      "path": "gui-recovery.json",
+      "source": "ui4/gui-project-recovery-final/summary.json",
+      "sha256": "38cef10b7d3877d94dea92d52df301777c0f9cb54db3ac05e3550b8c489826ab"
+    },
+    {
+      "path": "native-entry.json",
+      "source": "ui4/native-entry-delivery/summary.json",
+      "sha256": "ceb4da2e0ce03f1bee5ff4739527226275bc3e2fe9884df82040d98987e3910e"
+    },
+    {
+      "path": "release-cpu.log",
+      "source": "final-release-tests.log",
+      "sha256": "dd477d2a6f24b20106b874f68649c4e34c708e0857d52a75181d2cf64873b878"
+    },
+    {
+      "path": "debug-cpu.log",
+      "source": "final-debug-tests.log",
+      "sha256": "cd3d62bc2f8c4fb402a46f6d2b0eda20826a1cec5418c61c6524a4ae4d7b5e30"
+    },
+    {
+      "path": "release-affected.log",
+      "source": "ui4/release-affected-tests.log",
+      "sha256": "1e3855d3cc27103ee729a0d3666b410d88a0bcbc8931b69d09886e6d639295f5"
+    },
+    {
+      "path": "debug-affected.log",
+      "source": "ui4/debug-affected-tests.log",
+      "sha256": "f9fef524deeac965baf22c8c5607a2eefb9bef9f724bb0dccdd2a010051ac73c"
+    },
+    {
+      "path": "debug-directory-isolated.log",
+      "source": "debug-directory-isolated.log",
+      "sha256": "23938604e87f7d61c216d5ac7182039302f98280e151c819b56177c683e869d2"
+    },
+    {
+      "path": "debug-directory-diagnostic.log",
+      "source": "debug-directory-instrumented.log",
+      "sha256": "c8e3ff4bb3f766c05f9dc6328ac8ba9c76981253a57ec22dd4ddb51085648a45"
+    },
+    {
+      "path": "workspace-gpu.log",
+      "source": "ui3-workspace-gpu-final.log",
+      "sha256": "f4415c7cf1f63388a4431cdfcb64429d378075f602ce28825d65d05f61a6d21d"
+    },
+    {
+      "path": "install-verify.log",
+      "source": "ui4/install-verify.log",
+      "sha256": "87e9fb361735ffd0675da9bb7248bd1859cf294df61400dc3938fd910b8b153f"
+    },
+    {
+      "path": "site-build.log",
+      "source": "ui4/site-build.log",
+      "sha256": "96cb189ad1f5949da4d5783ea8c59d4c6895ff4926eafebd147cce5d87f89c0b"
+    },
+    {
+      "path": "package-rules.log",
+      "source": "ui2-package-rules.log",
+      "sha256": "6aa1cde0610abe21a6f9836f2a0e135e56733e1555ca7f2ccd86dd5cb37e0be4"
+    },
+    {
+      "path": "debug-build.log",
+      "source": "ui4/debug-affected-build.log",
+      "sha256": "2cbb6a565b5184ff180b5d6fc5fac2706c6593d35f432137b0122ca033fe9462"
+    },
+    {
+      "path": "release-build.log",
+      "source": "final-release-build.log",
+      "sha256": "36bfc9ce1f2cb7b42f2565be5ce821b226981406aec29bf81024fb645fee49c4"
+    }
+  ]
+}

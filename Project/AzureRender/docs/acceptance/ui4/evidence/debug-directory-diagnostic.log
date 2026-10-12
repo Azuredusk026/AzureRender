@@ -1,0 +1,33 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+UpdateCTestConfiguration  from :D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Parse Config file:D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+UpdateCTestConfiguration  from :D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Parse Config file:D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/DartConfiguration.tcl
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 200
+    Start 200: AzureEditor.ContentDirectoryScale
+
+200: Test command: D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug\AzureContentDirectoryScaleTests.exe
+200: Test timeout computed to be: 180
+200: {"elapsedMs":7255.5662,"phase":"fixture-created"}
+200: [1791808353951][info][editor][code=0] Opened scene: startup
+200: {"elapsedMs":165531.3897,"phase":"project-opened"}
+200: {"elapsedMs":172085.8712,"phase":"first-snapshot"}
+200: {"elapsedMs":172163.2888,"phase":"cached-samples"}
+1/1 Test #200: AzureEditor.ContentDirectoryScale ...***Timeout 180.05 sec
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) = 180.08 sec
+
+The following tests FAILED:
+	200 - AzureEditor.ContentDirectoryScale (Timeout)
+Errors while running CTest
+Output from these tests are in: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug/Testing/Temporary/LastTest.log
+Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.

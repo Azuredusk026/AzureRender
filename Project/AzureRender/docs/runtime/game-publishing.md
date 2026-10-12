@@ -2,9 +2,13 @@
 
 > 文档类型：使用说明
 > 适用范围：Windows x64、Release、项目 Schema v1
-> 更新日期：2026-10-05
+> 更新日期：2026-10-12
 
 ## 创建与编辑
+
+双击 `bin/AzureRender.exe` 进入项目中心。
+中心支持新建项目、打开文档和最近项目。
+完整 GUI 步骤见[项目中心指南](../tutorials/project-center.md)。
 
 游戏模板包含两个关卡、角色控制脚本、触发器、动画、界面和音效。项目使用公开资产，按挂载路径访问文件。每次创建生成独立项目标识和资产侧车。
 
@@ -19,7 +23,10 @@ AzureRender 同样提供 `--create-game <空目录>`。编辑器的 Build Game �
 
 ## 准备引擎安装树
 
-发布需要 Release x64 安装树，以及构建机上的 Python 3.11+。安装树包含 Player、依赖 DLL 和 MSVC 运行库。着色器、公开资源、字体和第三方许可随包分发。独立游戏的运行依赖为 Windows 与 Vulkan 驱动。
+发布使用 Release x64 安装树内的工具与 Python。
+安装树包含编辑器、Player、游戏入口和依赖 DLL。
+着色器、公开资源、字体和第三方许可随包分发。
+独立游戏的运行依赖为 Windows 与 Vulkan 驱动。
 
 ```powershell
 cmake --build "<Release 构建目录>"
@@ -30,14 +37,23 @@ cmake --install "<Release 构建目录>" --config Release --prefix "D:/AzureEngi
 
 ## 构建游戏
 
-编辑器处于编辑态时，在 Build Game 面板填写引擎安装目录和游戏输出目录。点击 Build Windows game 后保存当前关卡并启动后台构建。面板显示结果与耗时，日志保存在项目 `.azure/game-build.log`。
+编辑器处于编辑态时，打开 Build Game 面板。
+填写引擎安装目录和独立的游戏输出目录。
+点击 Build Windows game，保存关卡并启动后台构建。
+面板显示真实阶段、结果与耗时。
+
+面板提供输出目录和日志入口。
+日志保存在项目 `.azure/game-build.log`。
+缺少构建工具或 Python 时，任务返回错误。
+任务结束后恢复场景编辑。
 
 构建期间锁定场景编辑。已有游戏包可通过 Replace existing game package 选项替换。目标目录必须与项目和引擎输入目录分离。
 
 也可在终端执行安装树内的构建工具：
 
 ```powershell
-python "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
+& "D:/AzureEngine/share/AzureRender/tools/python/python.exe" `
+  "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
   --project "D:/Games/MyGame/project.azureproject" `
   --install "D:/AzureEngine" --output "D:/Delivery/MyGame"
 ```
@@ -48,6 +64,8 @@ python "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
 
 | 路径 | 内容 |
 | --- | --- |
+| `<项目名称>.exe` | 原生游戏入口，读取包内启动描述 |
+| `game-launch.json` | 包内项目、Player 与运行参数 |
 | `start-game.cmd` | 使用包内相对路径启动 Player |
 | `bin/` | Player 和 Release DLL |
 | `game/project.azureproject` | 独立项目配置 |
@@ -57,13 +75,20 @@ python "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
 | `GAME-GUIDE.md` | 项目提供的操作与任务说明 |
 | `QUALITY.json` | 项目提供的质量配置与启动分辨率 |
 
-分发整个游戏目录，双击 `start-game.cmd` 运行。目录可移动，也支持含空格的路径。运行时在可写目录生成缓存和诊断记录。
+分发整个游戏目录，双击项目命名的 exe 运行。
+Monica 项目的入口为 `Monica.exe`。
+入口依据自身位置加载包内 Runtime 与项目。
+目录支持移动，以及中文和空格路径。
+
+运行时在可写目录生成缓存和诊断记录。
+启动失败的日志为 `captures/game-startup.log`。
 
 ```powershell
-python "D:/AzureEngine/share/AzureRender/tools/build_game.py" --verify "D:/Delivery/MyGame"
+& "D:/AzureEngine/share/AzureRender/tools/python/python.exe" `
+  "D:/AzureEngine/share/AzureRender/tools/build_game.py" --verify "D:/Delivery/MyGame"
 ```
 
-清单验证检查不可变文件，并允许 `game/.azure/` 缓存和 `captures/` 诊断输出。发布复制规则排除缓存、临时文件和版本控制目录。私有资产、捕获与作品集目录触发发布边界错误。游戏包只分发 Player 可执行文件。
+清单验证检查不可变文件，并允许 `game/.azure/` 缓存和 `captures/` 诊断输出。发布复制规则排除缓存、临时文件和版本控制目录。私有资产、捕获与作品集目录触发发布边界错误。游戏包包含原生入口、Player 及其运行依赖。
 
 项目根目录可提供 `GAME-GUIDE.md` 与 `QUALITY.json`。构建复制这两份普通文件，并登记 SHA-256。质量说明的 `width` 与 `height` 为 1 至 8192 的整数。启动脚本使用该分辨率，命令行参数可覆盖它。
 

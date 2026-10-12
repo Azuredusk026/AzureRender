@@ -1,0 +1,10 @@
+{
+  "root": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure Native 中文 k1h7nleu",
+  "install": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ui-productization-2026-10-12\\安装版引擎",
+  "project": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure Native 中文 k1h7nleu\\Monica\\project.azureproject",
+  "package": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure Native 中文 k1h7nleu\\移动后的发布",
+  "entry": "Monica.exe",
+  "isolatedPython": true,
+  "movedNativeLaunch": true,
+  "missingRuntimeRejected": true
+}

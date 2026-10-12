@@ -31,6 +31,14 @@ theme:
         name: 切换到浅色模式
 
 nav:
+  - 项目中心与独立交付: ui-productization-status.md
+  - 从项目中心制作游戏: tutorials/project-center.md
+  - 编辑器 UI 架构: architecture-ui-productization.md
+  - ImGui 产品化计划: plans/2026-10-12-imgui-productization.md
+  - 项目中心验证: acceptance/ui1/2026-10-12.md
+  - 独立入口验证: acceptance/ui2/2026-10-12.md
+  - 公共 UI 验证: acceptance/ui3/2026-10-12.md
+  - 制作交付验证: acceptance/ui4/2026-10-12.md
   - OBS 层对照与工作集复现: acceptance/p5/closure/obs-layer-control.md
   - 长跑观测与路线验收: acceptance/p5/closure/observation-control.md
   - 缺页与原目标复测: acceptance/p5/closure/pagefault-trace-results.md

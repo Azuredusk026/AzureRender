@@ -1,5 +1,9 @@
 # AzureRender
 
+安装版项目制作见[项目中心指南](tutorials/project-center.md)。
+入口、UI 与独立发布范围见[产品化状态](ui-productization-status.md)。
+本轮证据和剩余限制见[交付验证](acceptance/ui4/2026-10-12.md)。
+
 完整格式与最终交付见[P8 验收](acceptance/p8/2026-10-12.md)。
 实体操作、听感与制作效率见[集中复核表](acceptance/p8/manual-review.md)。
 历史原因及覆盖限制见[归因复核](acceptance/p8/historical-causality.md)。

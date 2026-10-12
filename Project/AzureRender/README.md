@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+安装版入口、UI 与发布能力见[产品化状态](docs/ui-productization-status.md)。
+自动工作流与剩余复核见[交付验证](docs/acceptance/ui4/2026-10-12.md)。
+
 双击安装目录中的 bin/AzureRender.exe 进入项目中心。
 项目可以独立创建、重开、编辑保存与 GUI 发布。
 发布目录包含项目命名的游戏 exe、Runtime 与资源。
