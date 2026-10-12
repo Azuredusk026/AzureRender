@@ -44,6 +44,7 @@
 
 namespace azurerender {
 class EditorSession;
+class EditorContext;
 class EditorAutomation;
 class GlfwFrontend;
 class ImGuiEditorLayer;
@@ -60,6 +61,9 @@ public:
     ~AzureRenderApp();
 
     void run(const AzureRenderOptions& options = {});
+#if AZURE_WITH_EDITOR
+    std::shared_ptr<azurerender::EditorContext> showProjectCenter(const AzureRenderOptions& options, const std::string& initialProject = {});
+#endif
     [[nodiscard]] const azurerender::RenderSettings& currentRenderSettings()
         const { return effectiveRenderSettings_; }
 

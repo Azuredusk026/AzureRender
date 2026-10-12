@@ -2088,3 +2088,7 @@ endif()
 
 install(FILES docs/licenses/compressed-audio-source.json DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
 install(DIRECTORY docs/licenses/compressed-audio DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/licenses")
+
+# Installed editor startup uses the existing GLFW/Vulkan backend and project services.
+target_sources(AzureEditor PRIVATE src/editor/projects/ProjectCenterController.cpp src/editor/projects/ProjectCenterView.cpp)
+target_sources(AzureRenderHost PRIVATE src/app/ProjectCenterHost.cpp)

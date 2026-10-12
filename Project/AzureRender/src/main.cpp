@@ -30,6 +30,9 @@ int main(const int argumentCount, char** argumentValues) {
     try {
         const auto native=azurerender::nativeArguments(argumentCount,argumentValues);
         std::vector<std::string> arguments(native.begin()+1,native.end());
+        if(arguments.size()==1 && std::filesystem::u8path(arguments.front()).extension()==".azureproject")
+            arguments={"--project",arguments.front()};
+        const bool projectCenter=arguments.empty();
         azurerender::ParsedCommandLine commandLine =
             azurerender::parseCommandLine(arguments);
         AzureRenderOptions& options = commandLine.options;
@@ -80,6 +83,14 @@ int main(const int argumentCount, char** argumentValues) {
                 "cli", "Scene created: " + commandLine.createScenePath);
             return EXIT_SUCCESS;
         }
+        if(projectCenter) {
+            std::shared_ptr<azurerender::EditorContext> context;
+            { AzureRenderApp startup;context=startup.showProjectCenter(options); }
+            if(!context)return EXIT_SUCCESS;
+            options.editorMode=true;options.projectFile=context->project().file.u8string();
+            options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
+            options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));
+        }
         if (!commandLine.editorScenePath.empty()) {
             scenePath = commandLine.editorScenePath;
             options.editorMode = true;
@@ -110,8 +121,11 @@ int main(const int argumentCount, char** argumentValues) {
             }
         }
 
-        if(options.editorMode && !options.projectFile.empty()){
-            auto context=azurerender::EditorContext::openProject(std::filesystem::u8path(options.projectFile));
+        if(options.editorMode && !options.projectFile.empty() && !options.editorSession){
+            std::shared_ptr<azurerender::EditorContext> context;
+            try {context=azurerender::EditorContext::openProject(std::filesystem::u8path(options.projectFile));}
+            catch(const std::exception&) { AzureRenderApp startup;context=startup.showProjectCenter(options,options.projectFile); }
+            if(!context)return EXIT_SUCCESS;options.projectFile=context->project().file.u8string();
             options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
             if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.u8string();
             options.editorSession=std::make_shared<azurerender::EditorSession>(std::move(context));

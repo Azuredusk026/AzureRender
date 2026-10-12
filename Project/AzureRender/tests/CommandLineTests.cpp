@@ -34,6 +34,9 @@ void expectError(
 }  // namespace
 
 int main() try {
+    const auto directProject=azurerender::parseCommandLine({"--project",u8"D:/用户项目/Monica.azureproject"});
+    require(directProject.options.editorMode && directProject.options.projectFile==u8"D:/用户项目/Monica.azureproject",
+        "Project shortcut must enter editor and preserve Unicode paths");
     static_cast<void>(azurerender::parseCommandLine({"--editor-project","project.azureproject","--editor-close-policy","discard"}));
     expectError(CommandLineErrorCode::InvalidValue,"--editor-close-policy",{"--editor-project","project.azureproject","--editor-close-policy","invalid"});
     const auto development=azurerender::parseCommandLine({"--shader-reload","Shader config with spaces.json","--preview-views","Views with spaces.json"});

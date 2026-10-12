@@ -45,6 +45,7 @@ constexpr const char* kHelp =
     "  --asset <gltf/glb>                  Character asset\n"
     "  --scene <azscene>                   Load a saved scene\n"
     "  --editor <azscene>                  Open the editor\n"
+    "  --project <azureproject>            Open a project in the editor\n"
     "  --editor-project <azureproject>     Open a game project\n"
     "  --create-game <empty-directory>     Create a playable game template\n"
     "  --editor-close-policy <policy>     ask (default), save, discard\n"
@@ -326,7 +327,7 @@ ParsedCommandLine parseCommandLine(
         } else if (argument == "--create-game") {
             parsed.createGamePath = requireValue(arguments,index,argument);
             if(arguments.size()!=2)fail(CommandLineErrorCode::InvalidCombination,argument,"--create-game is a standalone command");
-        } else if (argument == "--editor-project") {
+        } else if (argument == "--editor-project" || argument == "--project") {
             parsed.options.projectFile = requireValue(arguments,index,argument);parsed.options.editorMode=true;
         } else if (argument == "--editor-close-policy") {
             const auto value=requireValue(arguments,index,argument);
