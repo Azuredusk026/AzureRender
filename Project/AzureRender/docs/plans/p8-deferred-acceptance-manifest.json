@@ -30,16 +30,22 @@
     {
       "id": "P5-performance",
       "originPhase": "P5-C",
-      "summary": "五类负载各三轮正式性能，当前候选十四轮通过",
+      "summary": "五类负载各三轮正式性能，完整门禁十一轮通过",
       "status": "Measured11Of15Passed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json"
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "owner": "设备环境与性能调查",
+      "retryTrigger": "设备热状态改善或相关性能机制修复通过"
     },
     {
       "id": "P5-long-run",
       "originPhase": "P5-E",
       "summary": "标准与平台各实际运行一千八百秒",
       "status": "RealRunsObservedFinalGatesFailed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json"
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "toolCleanupStatus": "BoundedCleanupVerified",
+      "runtimeShutdownStatus": "CauseUnconfirmed",
+      "owner": "平台与音频生命周期",
+      "retryTrigger": "宿主关闭问题定位并完成受影响短时回归"
     },
     {
       "id": "P5-delivery",
@@ -75,5 +81,7 @@
   },
   "finalCandidateBindingRequired": true,
   "latestAcceptance": "docs/acceptance/p8/2026-10-12.md",
-  "latestSourceHash": "e92878225aabd0f98e3e0ed25b246f38af512a69f751818de0c1503212a9bd7e"
+  "latestSourceHash": "e92878225aabd0f98e3e0ed25b246f38af512a69f751818de0c1503212a9bd7e",
+  "verificationPolicy": "docs/plans/azure-engine-plan.md",
+  "cleanupEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md"
 }

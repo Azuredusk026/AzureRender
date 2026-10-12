@@ -1255,6 +1255,9 @@
     "p6AutomaticEvidence": "docs/acceptance/p6/automatic-2026-10-12/manifest.json",
     "formalPerformanceEvidence": "docs/acceptance/p5/closure/automatic-resume.md",
     "currentAutomaticPhase": "P8",
-    "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json"
+    "deferredAcceptanceManifest": "docs/plans/p8-deferred-acceptance-manifest.json",
+    "currentAutomaticStatus": "ActionableToolCleanupCompleteFinalGatesDeferred",
+    "latestAutomaticEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md",
+    "latestFinalGateEvidence": "docs/acceptance/p8/2026-10-12.md"
   }
 }

@@ -8,11 +8,13 @@ import os
 from pathlib import Path
 import statistics
 import subprocess
+import sys
 import time
 from build_game import verify_package, digest
 from run_playable_performance import stats
 from gpu_environment import environment_errors,snapshot,wait_and_record,RunEnvironmentMonitor
 from long_run_telemetry import LiveGpuTiming, AsyncProgressWriter
+from long_run_cleanup import finalize_run
 
 
 def periodic_statistics(rows,warm_frame):
@@ -207,14 +209,9 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
                 error=str(error),scenario=type(scenario).__name__ if scenario else 'standard'),indent=2)+'\n',encoding='utf-8')
             raise
         finally:
-            if process.poll() is None:
-                if window.handle:
-                    window.restore();window.close()
-                    try:process.wait(timeout=20)
-                    except subprocess.TimeoutExpired:process.kill();process.wait()
-                else:process.kill();process.wait()
-            (output/'observation.json').write_text(json.dumps(observations,indent=2)+'\n',encoding='utf-8')
-            if scenario:scenario.close()
+            cleanup=finalize_run(process,window,output,observations,scenario)
+            if cleanup['errors'] and sys.exc_info()[0] is None:
+                raise RuntimeError('Long-run cleanup failed: '+str(cleanup['errors']))
     environment_path.write_text(json.dumps(environment,indent=2)+'\n',encoding='utf-8')
     # The final flushed CSV is authoritative, including shutdown frames.
     import csv
