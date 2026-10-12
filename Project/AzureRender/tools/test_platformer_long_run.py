@@ -274,4 +274,25 @@ class LongRunTelemetryRules(unittest.TestCase):
                 with self.assertRaises(ValueError):reader.read()
 
 
+observedFocus=json.loads((root/'tests/fixtures/platformer-focus-loss.json').read_text(encoding='utf-8'))
+class LiveFocusRecovery(unittest.TestCase):
+    def harness(self):
+        h=BackgroundScanHarness();h.state=copy.deepcopy(observedFocus['value'])
+        h.phase='walk';h.phaseStarted=observedFocus['seconds']-1;h.index=0;h.keys={87}
+        return h
+    def test_recorded_focus_loss_reacquires_focus_and_replays_held_keys(self):
+        h=self.harness();started=h.phaseStarted;h._update(observedFocus['seconds'])
+        self.assertEqual(h.events[:2],[dict(action='focus',focused=True),dict(action='key',key=87,down=True)])
+        self.assertEqual(h.phaseStarted,started);self.assertEqual(h.counts['mandatoryLandings'],0)
+    def test_focused_state_keeps_existing_key_edge_semantics(self):
+        h=self.harness();h.state['focused']=True;h._update(observedFocus['seconds'])
+        self.assertFalse(h.events)
+    def test_recovery_preserves_route_timeout(self):
+        h=self.harness();h.phaseStarted=observedFocus['seconds']-46
+        with self.assertRaisesRegex(AssertionError,'Timed out'):h._update(observedFocus['seconds'])
+    def test_lost_focus_does_not_invent_fall_or_landing(self):
+        h=self.harness();h.phase='fall-recover';h.checkpointFall=False;h.sawFall=False;h.savedCoins=0
+        h._update(observedFocus['seconds'])
+        self.assertEqual(h.counts['startFallRecoveries'],0);self.assertEqual(h.counts['mandatoryLandings'],0)
+
 if __name__=='__main__':unittest.main()

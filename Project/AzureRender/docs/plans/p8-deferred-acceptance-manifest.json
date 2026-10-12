@@ -41,13 +41,16 @@
       "originPhase": "P5-E",
       "summary": "标准与平台各实际运行一千八百秒",
       "status": "RealRunsObservedFinalGatesFailed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-13/long-run-manifest.json",
       "toolCleanupStatus": "BoundedCleanupVerified",
       "runtimeShutdownStatus": "NotificationReentrancyFixedShortChecksPassed",
       "owner": "平台与音频生命周期",
-      "retryTrigger": "相关关闭机制修复后集中复核原始长跑竞态",
+      "retryTrigger": "连续十秒 GPU 利用率不超过 10%，验证失焦恢复并执行平台 1800 秒长跑",
       "repairEvidence": "docs/acceptance/p9/2026-10-12.md",
-      "originalRaceAcceptance": "1800-second replay pending"
+      "originalRaceAcceptance": "1800-second replay pending",
+      "latestStandardResult": "passed",
+      "controllerRepair": "FocusCacheResynchronizedUnitTestsPassed",
+      "latestPlatformResult": "failed"
     },
     {
       "id": "P5-delivery",

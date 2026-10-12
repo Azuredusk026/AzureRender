@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start  9: AzureTools.PlatformerLongRunRules
+1/2 Test  #9: AzureTools.PlatformerLongRunRules ...   Passed    0.98 sec
+    Start 10: AzureTools.LongRunCleanup
+2/2 Test #10: AzureTools.LongRunCleanup ...........   Passed    6.23 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   7.21 sec

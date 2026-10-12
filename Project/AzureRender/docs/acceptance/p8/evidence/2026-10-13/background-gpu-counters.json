@@ -1,0 +1,50 @@
+[
+  {
+    "Name": "pid_20720_luid_0x00000000_0x000176DD_phys_0_eng_4_engtype_Copy",
+    "UtilizationPercentage": 10
+  },
+  {
+    "Name": "pid_10176_luid_0x00000000_0x00015E81_phys_0_eng_0_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_12_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_13_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_14_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_15_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_16_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_11_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_17_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_19_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_1_engtype_3D",
+    "UtilizationPercentage": 0
+  },
+  {
+    "Name": "pid_2548_luid_0x00000000_0x00017649_phys_0_eng_20_engtype_3D",
+    "UtilizationPercentage": 0
+  }
+]

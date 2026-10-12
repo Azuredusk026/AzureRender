@@ -101,6 +101,13 @@ class PlatformerScenario:
             if now>=until:self.key(code,False);del self.pulses[code]
         if not state['loading']:self.revisions[state['levelRevision']]=state['levelReference']
         assert now-self.phaseStarted<45,'Timed out in platform route phase: '+self.phase
+        if state.get('focused') is False:
+            # Losing focus releases the runtime's held input. Reacquire through
+            # the public input channel and synchronize this client's key cache.
+            held=sorted(self.keys);self.keys.clear()
+            self.input(action='focus',focused=True)
+            for code in held:self.key(code,True)
+            self.event('focus-recovered',seconds=now,keys=held)
         if self.phase=='boot':
             # Window recovery exercises complete at nine seconds. A resize can
             # block the native message loop; route control starts afterwards.

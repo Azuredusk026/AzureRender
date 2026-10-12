@@ -1,0 +1,21 @@
+...................................F..............
+======================================================================
+FAIL: test_recorded_focus_loss_reacquires_focus_and_replays_held_keys (__main__.LiveFocusRecovery.test_recorded_focus_loss_reacquires_focus_and_replays_held_keys)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_platformer_long_run.py", line 285, in test_recorded_focus_loss_reacquires_focus_and_replays_held_keys
+    self.assertEqual(h.events[:2],[dict(action='focus',focused=True),dict(action='key',key=87,down=True)])
+AssertionError: Lists differ: [] != [{'action': 'focus', 'focused': True}, {'a[35 chars]rue}]
+
+Second list contains 2 additional elements.
+First extra element 0:
+{'action': 'focus', 'focused': True}
+
+- []
++ [{'action': 'focus', 'focused': True},
++  {'action': 'key', 'down': True, 'key': 87}]
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.073s
+
+FAILED (failures=1)
