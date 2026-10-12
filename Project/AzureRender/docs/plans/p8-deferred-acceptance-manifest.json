@@ -34,7 +34,9 @@
       "status": "Measured11Of15Passed",
       "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
       "owner": "设备环境与性能调查",
-      "retryTrigger": "设备热状态改善或相关性能机制修复通过"
+      "retryTrigger": "设备热状态改善或相关性能机制修复通过",
+      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-13/performance-status.json",
+      "currentAttempt": "NotExecutedAfterSharedEnvironmentFailure"
     },
     {
       "id": "P5-long-run",

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "task": "P8.4",
+  "state": "Ready",
+  "result": "notExecuted",
+  "executedRounds": 0,
+  "plannedRounds": 15,
+  "workloads": [
+    "standard",
+    "editor",
+    "stress",
+    "exploration",
+    "platformer"
+  ],
+  "roundsPerWorkload": 3,
+  "warmupFrames": 300,
+  "sampleFrames": 1800,
+  "width": 1920,
+  "height": 1080,
+  "budgets": {
+    "gpuP95Ms": 16.6,
+    "playerCpuP95Ms": 8,
+    "editorCpuP95Ms": 10,
+    "physicsP95Ms": 2,
+    "stableWorkingSetGrowth": 0.05,
+    "peakWorkingSetBytes": 2147483648,
+    "deviceLocalBytes": 1610612736.0
+  },
+  "blocker": "Continuous ten-second idle window not met",
+  "environmentEvidence": "focus-probe-blocked-environment.json.gz",
+  "candidateSourceHash": "5f97157164064be32352bcca8cb27eb3ce916d528816eca5faf4f3beb11b35f3",
+  "sourceProof": "release-controller-provenance.json",
+  "retryTrigger": "Observed idle GPU utilization <=10% for ten seconds with valid driver thermal status"
+}
