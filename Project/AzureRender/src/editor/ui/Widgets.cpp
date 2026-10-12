@@ -6,23 +6,25 @@ PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohman
     PropertyEditEvent result;result.value=state.at("value");
     const auto label=field.label+(field.unit.empty()?std::string():" ("+field.unit+")");
     ImGui::TextUnformatted(label.c_str());
-    if(state.at("mixed").get<bool>()) {ImGui::SameLine();ImGui::TextDisabled("Mixed");}
+    if(state.at("mixed").get<bool>()) {ui::nextToolbarItem(ImGui::CalcTextSize("多个值").x);ui::statusText("多个值",StatusKind::Neutral);}
     ImGui::SetNextItemWidth(-1);
     const auto sample=[&]{result.began=result.began||ImGui::IsItemActivated();result.ended=result.ended||ImGui::IsItemDeactivatedAfterEdit();};
     const auto format="%."+std::to_string(field.precision)+"f";
     if(field.kind==reflection::Kind::Vector3) {
         auto values=result.value.get<std::array<float,3>>();
         const char* axes[]={"X","Y","Z"};
-        const ImVec4 colors[]={{.70F,.18F,.18F,1},{.18F,.55F,.25F,1},{.18F,.36F,.70F,1}};
-        const auto width=std::max(40.F,(ImGui::GetContentRegionAvail().x-2*ImGui::GetStyle().ItemSpacing.x)/3);
+        const auto available=ImGui::GetContentRegionAvail().x;
+        const auto metrics=UiMetrics::fromScale(scale);
+        const bool stacked=available<3*metrics.vectorAxisMinWidth;
+        const auto width=stacked?available:(available-2*ImGui::GetStyle().ItemSpacing.x)/3;
         ImGui::BeginGroup();
         for(int axis=0;axis<3;++axis) {
-            if(axis)ImGui::SameLine();ImGui::PushID(axis);ImGui::BeginGroup();
-            ImGui::PushStyleColor(ImGuiCol_Button,colors[axis]);
-            if(ImGui::Button(axes[axis],{22*scale,0})){result.changed=true;result.ended=true;result.axis=axis;result.value=defaults.at(axis);}
+            if(axis&&!stacked)ImGui::SameLine();ImGui::PushID(axis);ImGui::BeginGroup();
+            ImGui::PushStyleColor(ImGuiCol_Button,ThemeTokens::axis(axis));
+            if(ImGui::Button(axes[axis],{metrics.axisButtonWidth,0})){result.changed=true;result.ended=true;result.axis=axis;result.value=defaults.at(axis);}
             observe("axis.reset."+field.name+"."+std::to_string(axis));ImGui::PopStyleColor();
             if(ImGui::IsItemHovered())ImGui::SetTooltip("Reset %s to its declared default",axes[axis]);
-            ImGui::SameLine(0,2*scale);ImGui::SetNextItemWidth(std::max(16.F,width-24*scale));
+            ImGui::SameLine(0,metrics.axisSpacing);ImGui::SetNextItemWidth(std::max(16.F,width-metrics.axisButtonWidth-metrics.axisSpacing));
             const auto axisFormat=state.at("mixedAxes").at(axis).get<bool>()?"---":format.c_str();
             if(ImGui::DragFloat("##value",&values[axis],.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum),axisFormat)){result.changed=true;result.axis=axis;result.value=values[axis];}
             observe("axis.value."+field.name+"."+std::to_string(axis));sample();ImGui::EndGroup();ImGui::PopID();

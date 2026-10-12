@@ -2,6 +2,10 @@
 #include <imgui.h>
 namespace azurerender::ui {
 struct ThemeTokens {
+    static ImVec4 axis(int index) {
+        const ImVec4 colors[]={{.70F,.18F,.18F,1},{.18F,.55F,.25F,1},{.18F,.36F,.70F,1}};
+        return colors[index];
+    }
     ImVec4 text, muted, surface, recessed, border, control, hover, accent, selected, error, success, warning;
     static ThemeTokens dark() {
         auto rgb=[](int r,int g,int b){return ImVec4(r/255.F,g/255.F,b/255.F,1);};

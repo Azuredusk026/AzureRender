@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+对象选择与属性操作见[编辑指南](docs/tutorials/selection-properties.md)。
+
 资源查找与日志操作见[面板指南](docs/tutorials/browser-console.md)。
 资源与日志迁移结果见[阶段验证](docs/acceptance/ui5/2026-10-12.md)。
 

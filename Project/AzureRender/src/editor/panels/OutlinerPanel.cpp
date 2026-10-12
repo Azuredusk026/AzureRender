@@ -28,14 +28,14 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.0F, 0.0F, 0.20F, 0.72F);
 #endif
     if(!ImGui::Begin("Scene Outliner###outliner",workspace_.open("outliner"))){ImGui::End();return;}
-    outlinerFilter_.Draw("##Search objects",-1);observeWidget("outliner.search");
+    ui::searchField("##Search objects","搜索对象名称或标识",outlinerFilter_);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
-    if (ui::button("Add")) {
+    if (ui::button("添加")) {
         session_->edit("node.add");
     }
     observeWidget("outliner.add");
-    ImGui::SameLine();
-    if(ui::button("Actions"))ImGui::OpenPopup("Node actions");
+    ui::nextToolbarItem(ui::buttonWidth("操作"));
+    if(ui::button("操作"))ImGui::OpenPopup("Node actions");
     observeWidget("outliner.actions");
     if(ImGui::BeginPopup("Node actions")) {
         if(ImGui::MenuItem("Delete",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.delete");
@@ -46,7 +46,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         ImGui::EndPopup();
     }
     if (nodes.empty()) {
-        ImGui::TextUnformatted("(empty scene)");
+        ui::emptyState("场景中没有对象","使用添加按钮创建对象。");
         ImGui::End();
         return;
     }
@@ -64,8 +64,8 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     }
     std::vector<std::string> visible;
     std::optional<nlohmann::json> drop;
-    ImGui::SameLine();ImGui::Selectable("Root",false,0,{40*dpi_,ImGui::GetFrameHeight()});observeWidget("hierarchy.root");
-    if(ImGui::IsItemHovered())ImGui::SetTooltip("Drop an object here to move it to the scene root");
+    ui::nextToolbarItem(ui::buttonWidth("根目录"));ImGui::Selectable("根目录",false,0,{ui::buttonWidth("根目录"),ImGui::GetFrameHeight()});observeWidget("hierarchy.root");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip("拖放对象到此处，恢复为场景根节点");
     if(ImGui::BeginDragDropTarget()) {
         if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_NODE"))drop={{"id",static_cast<const char*>(payload->Data)},{"parent",""}};
         ImGui::EndDragDropTarget();
@@ -88,6 +88,10 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     if(outlinerFilter_.IsActive()) {
         for(const auto& node:nodes)if(outlinerFilter_.PassFilter(node.name.c_str())||outlinerFilter_.PassFilter(node.id.c_str()))visible.push_back(node.id);
     }else collect(collect,"");
+    if(visible.empty()){
+        ui::emptyState("没有匹配的对象","清除搜索后查看场景层级。");
+        if(ui::button("清除搜索"))outlinerFilter_.Clear();observeWidget("outliner.clear-search");
+    }
     std::string referenceCandidate;
     const auto selectionClick=[&](const SceneNode& node) {
         const auto& io=ImGui::GetIO();

@@ -1875,6 +1875,8 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEditor.PanelDesignGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
     add_test(NAME AzureEditor.PanelDiagnosticsGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_panel_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/panel-diagnostics-ui-${CMAKE_BUILD_TYPE}" --cases diagnostics)
     set_tests_properties(AzureEditor.PanelDiagnosticsGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 120)
+    add_test(NAME AzureEditor.SelectionDesignGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_selection_design.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/selection-design-ui-${CMAKE_BUILD_TYPE}")
+    set_tests_properties(AzureEditor.SelectionDesignGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 180)
 endif()
 
 if(BUILD_TESTING)
