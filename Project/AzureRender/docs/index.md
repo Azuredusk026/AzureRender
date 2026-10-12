@@ -182,3 +182,5 @@ Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配�
 
 资产格式后续阶段见[拓展计划](plans/2026-10-11-asset-format-expansion.md)。
 当前制作与验收完成后按该路线连续执行。
+
+本批候选、检查结果与待项见[P8 执行记录](acceptance/p8/2026-10-13.md)。

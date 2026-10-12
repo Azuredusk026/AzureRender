@@ -54,7 +54,9 @@
       "originPhase": "P5-E",
       "summary": "最终同源六包、双设备、移动及隔离运行",
       "status": "AutomaticVerifiedPhysicalInputPending",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json"
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-13/manifest.json",
+      "automaticResult": "passed",
+      "candidateBinding": "docs/acceptance/p8/evidence/2026-10-13/delivery-provenance.json"
     },
     {
       "id": "UX-008-causality",
