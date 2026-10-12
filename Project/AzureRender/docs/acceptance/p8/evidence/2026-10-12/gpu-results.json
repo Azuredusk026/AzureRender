@@ -1,0 +1,13 @@
+{
+  "debug": {
+    "passed": true,
+    "tests": 69
+  },
+  "release": {
+    "passed": true,
+    "tests": 69,
+    "firstPass": 68,
+    "isolatedRetest": 1,
+    "originalFailureRetained": true
+  }
+}

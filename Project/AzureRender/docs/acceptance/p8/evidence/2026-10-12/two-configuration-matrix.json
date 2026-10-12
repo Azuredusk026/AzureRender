@@ -1,0 +1,1433 @@
+{
+  "passed": true,
+  "debug": [
+    {
+      "domain": "audio",
+      "exportSettings": {},
+      "extensions": [
+        ".aac"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "aac",
+      "label": "aac",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".bmp"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "bmp",
+      "label": "bmp",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {},
+      "extensions": [
+        ".dae"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "dae",
+      "label": "dae",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": false
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "compression": {
+            "default": "rgba",
+            "enum": [
+              "rgba",
+              "bc1",
+              "bc3",
+              "bc5",
+              "bc7"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".dds"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "dds",
+      "label": "dds",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".exr"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "exr",
+      "label": "exr",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {},
+      "extensions": [
+        ".fbx"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "fbx",
+      "label": "fbx",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": false
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".flac"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "flac",
+      "label": "flac",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".glb"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "skin",
+        "animation"
+      ],
+      "generatorVersion": 1,
+      "id": "glb",
+      "label": "GLB 2.0",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".gltf"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "skin",
+        "animation"
+      ],
+      "generatorVersion": 1,
+      "id": "gltf",
+      "label": "glTF 2.0",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".hdr"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "hdr",
+      "label": "hdr",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "quality": {
+            "default": 100,
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".jpeg",
+        ".jpg"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "jpeg",
+      "label": "jpeg",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "compression": {
+            "default": "rgba",
+            "enum": [
+              "rgba",
+              "basis"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ktx2"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "ktx2",
+      "label": "ktx2",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {},
+      "extensions": [
+        ".m4a"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "m4a",
+      "label": "m4a",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "bitrate": {
+            "default": 128000,
+            "maximum": 320000,
+            "minimum": 8000,
+            "type": "integer"
+          },
+          "channels": {
+            "default": 0,
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".mp3"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "mp3",
+      "label": "mp3",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".obj"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "obj",
+      "label": "obj",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "bitrate": {
+            "default": 128000,
+            "maximum": 512000,
+            "minimum": 6000,
+            "type": "integer"
+          },
+          "channels": {
+            "default": 0,
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ogg",
+        ".opus"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "opus",
+      "label": "opus",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".ply"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "ply",
+      "label": "ply",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".png"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "png",
+      "label": "png",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {},
+      "extensions": [
+        ".ppm"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "ppm",
+      "label": "ppm",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".stl"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "stl",
+      "label": "stl",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".tga"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "tga",
+      "label": "tga",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".tif",
+        ".tiff"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "tiff",
+      "label": "tiff",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "quality": {
+            "default": 0.6,
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ogg"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "vorbis",
+      "label": "vorbis",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".wav"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "wav",
+      "label": "wav",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "quality": {
+            "default": 100,
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".webp"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "webp",
+      "label": "webp",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    }
+  ],
+  "release": [
+    {
+      "domain": "audio",
+      "exportSettings": {},
+      "extensions": [
+        ".aac"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "aac",
+      "label": "aac",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".bmp"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "bmp",
+      "label": "bmp",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {},
+      "extensions": [
+        ".dae"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "dae",
+      "label": "dae",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": false
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "compression": {
+            "default": "rgba",
+            "enum": [
+              "rgba",
+              "bc1",
+              "bc3",
+              "bc5",
+              "bc7"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".dds"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "dds",
+      "label": "dds",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".exr"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "exr",
+      "label": "exr",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {},
+      "extensions": [
+        ".fbx"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "fbx",
+      "label": "fbx",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": false
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".flac"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "flac",
+      "label": "flac",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".glb"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "skin",
+        "animation"
+      ],
+      "generatorVersion": 1,
+      "id": "glb",
+      "label": "GLB 2.0",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".gltf"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "skin",
+        "animation"
+      ],
+      "generatorVersion": 1,
+      "id": "gltf",
+      "label": "glTF 2.0",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".hdr"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "hdr",
+      "label": "hdr",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "quality": {
+            "default": 100,
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".jpeg",
+        ".jpg"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "jpeg",
+      "label": "jpeg",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "compression": {
+            "default": "rgba",
+            "enum": [
+              "rgba",
+              "basis"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ktx2"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "ktx2",
+      "label": "ktx2",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {},
+      "extensions": [
+        ".m4a"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "m4a",
+      "label": "m4a",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "bitrate": {
+            "default": 128000,
+            "maximum": 320000,
+            "minimum": 8000,
+            "type": "integer"
+          },
+          "channels": {
+            "default": 0,
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".mp3"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "mp3",
+      "label": "mp3",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".obj"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "obj",
+      "label": "obj",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "bitrate": {
+            "default": 128000,
+            "maximum": 512000,
+            "minimum": 6000,
+            "type": "integer"
+          },
+          "channels": {
+            "default": 0,
+            "maximum": 2,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ogg",
+        ".opus"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "opus",
+      "label": "opus",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".ply"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "ply",
+      "label": "ply",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".png"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "png",
+      "label": "png",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {},
+      "extensions": [
+        ".ppm"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "ppm",
+      "label": "ppm",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": false
+    },
+    {
+      "domain": "model",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".stl"
+      ],
+      "features": [
+        "geometry",
+        "materials",
+        "canonical-glb",
+        "axis-unit-settings",
+        "loss-report"
+      ],
+      "generatorVersion": 1,
+      "id": "stl",
+      "label": "stl",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": true,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".tga"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "tga",
+      "label": "tga",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "extensions": [
+        ".tif",
+        ".tiff"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "tiff",
+      "label": "tiff",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "quality": {
+            "default": 0.6,
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".ogg"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "vorbis",
+      "label": "vorbis",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "audio",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "channels": {
+            "default": 0,
+            "maximum": 8,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "sampleRate": {
+            "default": 0,
+            "maximum": 192000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".wav"
+      ],
+      "features": [
+        "sample-rate",
+        "channels",
+        "loop",
+        "streaming",
+        "float32"
+      ],
+      "generatorVersion": 1,
+      "id": "wav",
+      "label": "wav",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    },
+    {
+      "domain": "image",
+      "exportSettings": {
+        "additionalProperties": false,
+        "properties": {
+          "quality": {
+            "default": 100,
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "extensions": [
+        ".webp"
+      ],
+      "features": [
+        "rgba",
+        "top-left",
+        "precision",
+        "color-space"
+      ],
+      "generatorVersion": 1,
+      "id": "webp",
+      "label": "webp",
+      "read": true,
+      "settingsVersion": 1,
+      "transformsSource": false,
+      "write": true
+    }
+  ]
+}

@@ -14,9 +14,9 @@
 | 形状 | 参数与合法缩放 |
 | --- | --- |
 | `box` | `halfExtent` 乘各轴缩放的绝对值 |
-| `sphere` | `radius`；各轴绝对缩放相等 |
-| `capsule` | `radius` 和圆柱 `halfHeight`；X/Z 绝对缩放相等 |
-| `mesh` | `mesh` 模型引用；静态实体，合法三角形 |
+| `sphere` | `radius`。各轴绝对缩放相等 |
+| `capsule` | `radius` 和圆柱 `halfHeight`。X/Z 绝对缩放相等 |
+| `mesh` | `mesh` 模型引用。静态实体，合法三角形 |
 
 静态网格需先设置模型引用，再选择网格形状。
 网格使用模型的实际三角形与对象变换。
@@ -82,7 +82,7 @@ View 菜单提供碰撞和铰链辅助显示策略。
 | --- | --- |
 | `preview.simulate` | 校验并启动独立模拟 |
 | `preview.pause/resume/step/stop` | 共用预览生命周期 |
-| `component.fields` | `type` 与 `values`；原子修改相关字段 |
+| `component.fields` | `type` 与 `values`。原子修改相关字段 |
 | `PhysicsWorld::setMeshResolver` | 使用内容引用解析碰撞三角形 |
 | `PhysicsWorld::validateScene` | 启动前校验形状、端点与运动类型 |
 | `PhysicsWorld::hingeAngle` | 查询铰链当前角度 |

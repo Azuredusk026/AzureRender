@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 308, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe,max_idle_utilization=args.max_idle_gpu_utilization)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 145, in run
+    if scenario is None:assert (package/'game/assets/alternate.azurelevel').is_file(), 'Alternating exploration level required'
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Alternating exploration level required

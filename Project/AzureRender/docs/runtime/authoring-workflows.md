@@ -26,8 +26,8 @@ Ctrl+S 保存活动文档。
 | `document.open` | `path` 为场景路径、虚拟引用或资产标识 |
 | `document.activate` | `id` 为打开文档的稳定标识 |
 | `document.describe` | 查询路径、版本、历史、活动与脏状态 |
-| `document.save` | 可选 `id`；默认保存活动文档 |
-| `document.close` | `id` 与可选 `decision`；关闭指定标签 |
+| `document.save` | 可选 `id`。默认保存活动文档 |
+| `document.close` | `id` 与可选 `decision`。关闭指定标签 |
 
 文档激活在下一次会话轮询时完成。
 保存只写目标文档对应的文件。
@@ -49,11 +49,11 @@ Ctrl+S 保存活动文档。
 | 操作 | 参数与结果 |
 | --- | --- |
 | `animation.seek` | `node`、`time`，以及可选状态和混合参数 |
-| `animation.play` | `node`；创建或继续对应时间轴 |
-| `animation.pause` | `node`；冻结对应时间轴 |
-| `animation.clear` | 可选 `node`；释放指定或全部时间轴 |
+| `animation.play` | `node`。创建或继续对应时间轴 |
+| `animation.pause` | `node`。冻结对应时间轴 |
+| `animation.clear` | 可选 `node`。释放指定或全部时间轴 |
 | `animation.describe` | 查询各对象的状态、时间、播放及混合 |
-| `animation.configure` | `node`、`speed` 与 `loop`；设置独立播放策略 |
+| `animation.configure` | `node`、`speed` 与 `loop`。设置独立播放策略 |
 
 时间定位范围为零至六百秒。
 状态与骨架引用遵守动画组件的领域校验。
@@ -85,9 +85,9 @@ Lua 模板生成 `.lua`，托管模板生成 `.cs`。
 | 操作 | 参数与结果 |
 | --- | --- |
 | `script.backends` | 查询后端、扩展名与模板版本 |
-| `script.template` | `backend` 与 `path`；返回资产标识 |
-| `script.reveal` | `asset`；在内容浏览器揭示对应脚本 |
-| `script.reload` | `backend`；检查与活动运行后端一致 |
+| `script.template` | `backend` 与 `path`。返回资产标识 |
+| `script.reveal` | `asset`。在内容浏览器揭示对应脚本 |
+| `script.reload` | `backend`。检查与活动运行后端一致 |
 
 Lua 模板可通过脚本组件直接装配。
 托管源码按[脚本服务](script-services.md)构建。
@@ -118,7 +118,7 @@ Lua 模板可通过脚本组件直接装配。
 | 操作 | 参数与结果 |
 | --- | --- |
 | `diagnostic.query` | 按来源、严重性、错误码、文档或文本筛选 |
-| `diagnostic.reveal` | `id` 为问题标识；排队执行目标定位 |
+| `diagnostic.reveal` | `id` 为问题标识。排队执行目标定位 |
 
 ## 领域内容辅助
 
@@ -171,9 +171,9 @@ Lua 模板可通过脚本组件直接装配。
 
 | 操作 | 参数与结果 |
 | --- | --- |
-| `prefab.create` | `nodes` 与 `path`；返回源资产和内容事务 |
-| `prefab.overrides` | `instance`；返回来源指纹、冲突与字段范围 |
-| `prefab.revert` | `instance` 与 `fields`；按场景事务还原 |
+| `prefab.create` | `nodes` 与 `path`。返回源资产和内容事务 |
+| `prefab.overrides` | `instance`。返回来源指纹、冲突与字段范围 |
+| `prefab.revert` | `instance` 与 `fields`。按场景事务还原 |
 | `prefab.apply` | `instance`、`fields` 与 `baseFingerprint` |
 | `prefab.undo-apply` | 恢复最近一次源应用及受影响文档 |
 | `prefab.redo-apply` | 重做最近一次源应用及受影响文档 |

@@ -1,0 +1,19 @@
+{
+  "status": "ForegroundBlockResolvedByDismissingSystemOverlay",
+  "observed": [
+    {
+      "target": 922014,
+      "foregroundBefore": 262822,
+      "foregroundAfter": 262822,
+      "foregroundTitle": "快速设置",
+      "callerThread": 4720,
+      "foregroundThread": 21972,
+      "attached": true,
+      "activated": false,
+      "lastError": 0
+    }
+  ],
+  "debugOriginalRetest": "Passed",
+  "releaseOriginalRetest": "Passed",
+  "assertionsUnchanged": true
+}

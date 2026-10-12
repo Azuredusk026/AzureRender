@@ -1,0 +1,36 @@
+{
+  "standard": {
+    "status": "failed",
+    "actualSeconds": 1800.218000000008,
+    "normalExit": true,
+    "released": true,
+    "workingSetGrowth": 0.018158021629813392,
+    "switches": 33,
+    "restarts": 34,
+    "remainingGate": "One software thermal slowdown observation"
+  },
+  "platformer": {
+    "status": "ShutdownTimedOut",
+    "observedSeconds": 1800.0,
+    "normalExit": false,
+    "released": false,
+    "counts": {
+      "completedRoutes": 84,
+      "mandatoryLandings": 588,
+      "startFallRecoveries": 84,
+      "checkpointFallRecoveries": 84,
+      "horizontalRides": 84,
+      "verticalRides": 84,
+      "restarts": 83,
+      "switches": 167
+    },
+    "observationsPersisted": false,
+    "environmentFinalized": false,
+    "remainingGate": "Normal shutdown and complete telemetry finalization"
+  },
+  "shortProbe": {
+    "status": "EnvironmentBlocked",
+    "started": false,
+    "error": "background GPU load exceeds declared idle limit"
+  }
+}

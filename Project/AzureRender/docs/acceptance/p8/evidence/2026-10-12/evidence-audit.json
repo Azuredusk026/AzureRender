@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "gitByteDifferences": [],
+  "phaseCount": 9,
+  "rawCommittedFiles": 1430,
+  "workingTreeBytes": true,
+  "gitBlobBytes": true,
+  "phases": [
+    {
+      "phase": "G17",
+      "files": 60,
+      "manifestSha256": "956073c3dd12b84e1a17cdd2e0ffcf789dac401e0994c2055db038daed87401a"
+    },
+    {
+      "phase": "G18",
+      "files": 238,
+      "manifestSha256": "40f843a2cb144bba512cd1422c0bc7ed5c23212e095560c1237cf76ef3077c2c"
+    },
+    {
+      "phase": "G19",
+      "files": 357,
+      "manifestSha256": "716fd2ba4f12fd03d6355e9cd46e9668c2e8082072f73e8c622d0fd259e67f2e"
+    },
+    {
+      "phase": "G20",
+      "files": 93,
+      "manifestSha256": "401b0eb59b03feb9e20403991d8ff3e7d23d7bf1acf62c32a6ae2b6657a78c2c"
+    },
+    {
+      "phase": "G21",
+      "files": 132,
+      "manifestSha256": "523062c4d9ad7042f669d8a6c0bbcd54031658893a324da26855f7e8b48eff10"
+    },
+    {
+      "phase": "U17",
+      "files": 129,
+      "manifestSha256": "57500a258dfc58cf77a79b10e50c275276f6157f59232eab7ae7ad1435104481"
+    },
+    {
+      "phase": "P7",
+      "files": 72,
+      "manifestSha256": "277ac9be2ba8f96d6dc358c055057b21ad1077efdd3a336f7c40319ad544c4ff"
+    },
+    {
+      "phase": "G22",
+      "files": 201,
+      "manifestSha256": "9e191559adb5aefb230481a14dbb93f535f44f9e406082c1d4c8a8290f0b3b52"
+    },
+    {
+      "phase": "G23",
+      "files": 148,
+      "manifestSha256": "14222f18f84ef694756322df5f011fa6db324b31ad8c0aee647cc3f6e07f36a4"
+    }
+  ]
+}

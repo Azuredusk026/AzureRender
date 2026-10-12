@@ -1,0 +1,50 @@
+[
+  {
+    "path": "docs/plans/azure-engine-plan.md",
+    "semicolon": 1,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/plans/2026-10-11-asset-format-expansion.md",
+    "semicolon": 5,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/plans/2026-10-09-character-rendering-repair.md",
+    "semicolon": 1,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/plans/2026-10-09-editor-productization.md",
+    "semicolon": 1,
+    "emDash": 0,
+    "enDash": 14
+  },
+  {
+    "path": "docs/runtime/asset-exchange.md",
+    "semicolon": 3,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/runtime/authoring-workflows.md",
+    "semicolon": 13,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/runtime/content-navigation.md",
+    "semicolon": 6,
+    "emDash": 0,
+    "enDash": 0
+  },
+  {
+    "path": "docs/runtime/physics-authoring.md",
+    "semicolon": 4,
+    "emDash": 0,
+    "enDash": 0
+  }
+]

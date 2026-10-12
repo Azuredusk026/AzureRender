@@ -71,13 +71,13 @@ Third-person camera 创建第三人称相机组件。
 
 | 操作 | 参数与结果 |
 | --- | --- |
-| `content.directory` | `mount`、`path`、`type`、`search`、`refresh`；返回目录快照 |
-| `asset.open` | `asset`；返回类型、标签与目标操作 |
-| `asset.place` | `asset`、`origin`、`direction`；执行场景放置 |
-| `asset.generate` | 生成器、输出、参数、来源许可；返回资产 UUID |
+| `content.directory` | `mount`、`path`、`type`、`search`、`refresh`。返回目录快照 |
+| `asset.open` | `asset`。返回类型、标签与目标操作 |
+| `asset.place` | `asset`、`origin`、`direction`。执行场景放置 |
+| `asset.generate` | 生成器、输出、参数、来源许可。返回资产 UUID |
 | `node.presets` | 查询已注册对象预设 |
-| `node.create-preset` | `preset`、可选 `id`；创建可撤销对象 |
-| `path.reveal` | `path`；通过 Windows 文件管理器揭示来源 |
+| `node.create-preset` | `preset`、可选 `id`。创建可撤销对象 |
+| `path.reveal` | `path`。通过 Windows 文件管理器揭示来源 |
 
 目录路径使用挂载内的相对路径。
 父级越界、绝对路径及未知挂载会被拒绝。

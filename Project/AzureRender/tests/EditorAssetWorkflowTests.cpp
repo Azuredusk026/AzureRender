@@ -26,6 +26,7 @@ int main(int argc,char** argv){
         context->scene().resources.push_back({"absolute-alias","gltf",root/"assets/model.gltf"});
         const auto catalog=apply(session,"assets.catalog");unsigned matches=0;
         const auto formats=apply(session,"asset.formats");
+        std::cout<<"Verified format matrix: "<<formats.dump()<<'\n';
         for(const std::string reader:{"gltf","glb","obj","stl","ply","dae","fbx"}) {
             bool found=false;for(const auto& format:formats)if(format.at("id")==reader)found=true;
             require(found,"Public format discovery must advertise each verified model reader");

@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "missing": [
+    "bmp",
+    "exr",
+    "hdr",
+    "jpeg",
+    "png",
+    "ppm",
+    "tga",
+    "tiff",
+    "webp"
+  ]
+}

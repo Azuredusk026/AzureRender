@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\audit-evidence.py", line 8, in <module>
+    file=p.parent/row['path'];data=file.read_bytes();assert hashlib.sha256(data).hexdigest()==row['sha256'],file
+                                   ^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\23587\AppData\Local\Programs\Python\Python311\python311.zip\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\docs\\acceptance\\p8\\evidence\\2026-10-12\\docs\\acceptance\\p8\\evidence\\2026-10-12\\archive-results-final.log'

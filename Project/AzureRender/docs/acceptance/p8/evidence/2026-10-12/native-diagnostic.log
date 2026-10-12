@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\native-diagnostic.py", line 254, in <module>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\native-diagnostic.py", line 254, in <listcomp>
+    results=[run(args.executable.resolve(),root/workflow,workflow) for workflow in ('exploration','inspector')]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\native-diagnostic.py", line 192, in run
+    before=state()['camera'];mouse(0x200,x+24,y-18,2);turned=state()
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\native-diagnostic.py", line 90, in mouse
+    activate_window()
+  File "D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\native-diagnostic.py", line 84, in activate_window
+    assert activated or actual==window.handle,detail
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'target': 922014, 'foregroundBefore': 262822, 'foregroundAfter': 262822, 'foregroundTitle': '快速设置', 'callerThread': 4720, 'foregroundThread': 21972, 'attached': True, 'activated': False, 'lastError': 0}

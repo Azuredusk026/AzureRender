@@ -1,0 +1,9 @@
+[1791767000230][info][gpu][code=0] GPU capability report: captures\gpu_capabilities.json
+[1791767000563][info][render][code=0] Character texture access: indexed, requested slots=147, stage sampler limit=1048576
+[1791767000581][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1791767000628][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1791767000643][info][audio][code=0] Decoded source: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\final-formal-performance\platformer\assets\audio\coin.wav
+[1791767000643][info][audio][code=0] Decoded source: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\final-formal-performance\platformer\assets\audio\finish.wav
+[1791767000644][info][audio][code=0] Decoded source: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\final-formal-performance\platformer\assets\audio\jump.wav
+[1791767000645][info][audio][code=0] Decoded source: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\final-formal-performance\platformer\assets\audio\land.wav
+[1791767000645][info][audio][code=0] Decoded source: D:\Assigment\2609\FYP\Project\AzureRender\build\p8-format-closure-2026-10-12\final-formal-performance\platformer\assets\audio\respawn.wav

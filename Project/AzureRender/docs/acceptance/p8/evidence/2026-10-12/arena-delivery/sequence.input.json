@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "frame": 15,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 19,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 30,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 165,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 180,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 218,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 232,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 236,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 248,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 285,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 300,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 502,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 518,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 555,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 570,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 574,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 585,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 622,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 638,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 668,
+      "action": "key",
+      "key": 32,
+      "down": true
+    },
+    {
+      "frame": 671,
+      "action": "key",
+      "key": 32,
+      "down": false
+    },
+    {
+      "frame": 855,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 870,
+      "action": "key",
+      "key": 65,
+      "down": true
+    },
+    {
+      "frame": 908,
+      "action": "key",
+      "key": 65,
+      "down": false
+    },
+    {
+      "frame": 922,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 926,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 938,
+      "action": "key",
+      "key": 68,
+      "down": true
+    },
+    {
+      "frame": 975,
+      "action": "key",
+      "key": 68,
+      "down": false
+    },
+    {
+      "frame": 990,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 1132,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 1148,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 1151,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 1162,
+      "action": "key",
+      "key": 87,
+      "down": true
+    },
+    {
+      "frame": 1275,
+      "action": "key",
+      "key": 87,
+      "down": false
+    },
+    {
+      "frame": 1335,
+      "action": "key",
+      "key": 69,
+      "down": true
+    },
+    {
+      "frame": 1336,
+      "action": "key",
+      "key": 69,
+      "down": false
+    },
+    {
+      "frame": 1337,
+      "action": "wait-level",
+      "reference": "assets:/platformer/platformer.azurelevel",
+      "timeoutFrames": 900
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1347,
+      "key": 68
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1367,
+      "key": 68
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1407,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1418,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1419,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1434,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1450,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1457,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1458,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1473,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1489,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1497,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1498,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1514,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1560,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1568,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1569,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1585,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1601,
+      "key": 68
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1621,
+      "key": 68
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1661,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1669,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1670,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1687,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1733,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1740,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1741,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1760,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1776,
+      "key": 87
+    },
+    {
+      "action": "key",
+      "down": true,
+      "frame": 1783,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1784,
+      "key": 32
+    },
+    {
+      "action": "key",
+      "down": false,
+      "frame": 1804,
+      "key": 87
+    }
+  ]
+}

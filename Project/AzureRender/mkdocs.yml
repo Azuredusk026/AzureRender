@@ -49,6 +49,9 @@ nav:
   - 进程内内存诊断: acceptance/p5/closure/native-memory-trace.md
   - 游戏输入回放: runtime/game-input-replay.md
   - 资产格式拓展计划: plans/2026-10-11-asset-format-expansion.md
+  - P8 完整格式与最终交付: acceptance/p8/2026-10-12.md
+  - P8 集中人工复核: acceptance/p8/manual-review.md
+  - P8 历史失败归因: acceptance/p8/historical-causality.md
   - 平台跳跃关卡: runtime/platformer-gameplay.md
   - 项目总览: index.md
   - P3 引擎交付验收: acceptance/p3/2026-10-07.md

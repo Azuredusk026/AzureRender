@@ -1,0 +1,41 @@
+{"seconds": 60, "gpuFrames": 3228, "workingMiB": 259.4}
+{"seconds": 120, "gpuFrames": 6604, "workingMiB": 276.6}
+{"seconds": 180, "gpuFrames": 9952, "workingMiB": 284.5}
+{"seconds": 240, "gpuFrames": 13321, "workingMiB": 285.2}
+{"seconds": 300, "gpuFrames": 16692, "workingMiB": 286.4}
+{"seconds": 360, "gpuFrames": 20062, "workingMiB": 287.2}
+{"seconds": 420, "gpuFrames": 23437, "workingMiB": 287.4}
+{"seconds": 480, "gpuFrames": 26813, "workingMiB": 287.2}
+{"seconds": 540, "gpuFrames": 30158, "workingMiB": 287.3}
+{"seconds": 600, "gpuFrames": 33535, "workingMiB": 288.0}
+{"seconds": 660, "gpuFrames": 36909, "workingMiB": 287.5}
+{"seconds": 720, "gpuFrames": 40284, "workingMiB": 287.5}
+{"seconds": 780, "gpuFrames": 43651, "workingMiB": 288.1}
+{"seconds": 840, "gpuFrames": 47027, "workingMiB": 287.1}
+{"seconds": 900, "gpuFrames": 50370, "workingMiB": 287.5}
+{"seconds": 960, "gpuFrames": 53746, "workingMiB": 287.9}
+{"seconds": 1020, "gpuFrames": 57123, "workingMiB": 288.3}
+{"seconds": 1080, "gpuFrames": 60496, "workingMiB": 288.3}
+{"seconds": 1140, "gpuFrames": 63872, "workingMiB": 288.3}
+{"seconds": 1200, "gpuFrames": 67245, "workingMiB": 288.3}
+{"seconds": 1260, "gpuFrames": 70594, "workingMiB": 288.8}
+{"seconds": 1320, "gpuFrames": 73962, "workingMiB": 288.0}
+{"seconds": 1380, "gpuFrames": 77336, "workingMiB": 288.1}
+{"seconds": 1440, "gpuFrames": 80707, "workingMiB": 288.0}
+{"seconds": 1500, "gpuFrames": 84082, "workingMiB": 288.0}
+{"seconds": 1560, "gpuFrames": 87458, "workingMiB": 288.3}
+{"seconds": 1620, "gpuFrames": 90834, "workingMiB": 288.3}
+{"seconds": 1680, "gpuFrames": 94186, "workingMiB": 288.5}
+{"seconds": 1740, "gpuFrames": 97558, "workingMiB": 288.6}
+{"seconds": 1800, "gpuFrames": 100936, "workingMiB": 288.7}
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 308, in <module>
+    else:run(args.package,args.output,args.seconds,args.probe,max_idle_utilization=args.max_idle_gpu_utilization)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 260, in run
+    else:evaluate(summary,formal=not probe)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\run_playable_long_run.py", line 29, in evaluate
+    assert not environment_errors(data.get('environment')), 'Device environment is missing or invalid'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Device environment is missing or invalid

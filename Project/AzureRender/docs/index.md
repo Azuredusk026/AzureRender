@@ -1,5 +1,9 @@
 # AzureRender
 
+完整格式与最终交付见[P8 验收](acceptance/p8/2026-10-12.md)。
+实体操作、听感与制作效率见[集中复核表](acceptance/p8/manual-review.md)。
+历史原因及覆盖限制见[归因复核](acceptance/p8/historical-causality.md)。
+
 角色展示的采样与材质问题见[画面根由报告](research/2026-10-09-character-presentation-refinement.md)。
 完整执行步骤见[画面优化计划](plans/2026-10-09-character-presentation-refinement.md)。
 五段视频与验收见[展示验收](acceptance/character/2026-10-09-refinement.md)。

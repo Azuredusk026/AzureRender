@@ -1,0 +1,341 @@
+Thread 27688 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99ce2639f ntdll+639f RtlInitializeResource+9bf
+  7ff99ce9c87f ntdll+7c87f RtlRaiseStatus+48f
+  7ff99ce9bff2 ntdll+7bff2 RtlEnterCriticalSection+f2
+  7ff98b1f439b MMDevApi+439b
+  7ff7dcda44fa AzurePlayer+1c44fa
+  7ff7dcde0c74 AzurePlayer+200c74
+  7ff7dcde9fa5 AzurePlayer+209fa5
+  7ff7dcceee5c AzurePlayer+10ee5c
+  7ff7dcc0aa30 AzurePlayer+2aa30
+  7ff7dccb5937 AzurePlayer+d5937
+  7ff7dcc1baeb AzurePlayer+3baeb
+  7ff7dcc22b37 AzurePlayer+42b37
+  7ff7dcbf506d AzurePlayer+1506d
+  7ff7dcf704cc AzurePlayer+3904cc
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 24604 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff908832368 MSVCP140+12368 Cnd_wait+28
+  7ff7dcc268fe AzurePlayer+468fe
+  7ff7dcbfaf15 AzurePlayer+1af15
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 3428 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff908832368 MSVCP140+12368 Cnd_wait+28
+  7ff7dcc268fe AzurePlayer+468fe
+  7ff7dcbfaf15 AzurePlayer+1af15
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 13008 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff908832368 MSVCP140+12368 Cnd_wait+28
+  7ff7dcc268fe AzurePlayer+468fe
+  7ff7dcbfaf15 AzurePlayer+1af15
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 5204 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff908832368 MSVCP140+12368 Cnd_wait+28
+  7ff7dcc268fe AzurePlayer+468fe
+  7ff7dcbfaf15 AzurePlayer+1af15
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 6236 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff7dcd90b0d AzurePlayer+1b0b0d
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 19916 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff7dcdeb3d6 AzurePlayer+20b3d6
+  7ff7dcdce4fd AzurePlayer+1ee4fd
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 24436 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff993aa63c8 CoreMessaging+263c8 CoreUICallSend+16268
+  7ff993aa60a3 CoreMessaging+260a3 CoreUICallSend+15f43
+  7ff993aa5cfe CoreMessaging+25cfe CoreUICallSend+15b9e
+  7ff993a993bc CoreMessaging+193bc CoreUICallSend+925c
+  7ff993a98947 CoreMessaging+18947 CoreUICallSend+87e7
+  7ff993a96f74 CoreMessaging+16f74 CoreUICallSend+6e14
+  7ff993a96b0d CoreMessaging+16b0d CoreUICallSend+69ad
+  7ff993a99e38 CoreMessaging+19e38 CoreUICallSend+9cd8
+  7ff993b0d5ea CoreMessaging+8d5ea CoreUICallCreateEndpointHost+250a
+  7ff993b076df CoreMessaging+876df CoreUICreate+6a1f
+  7ff993ad1f0b CoreMessaging+51f0b CoreUICallSend+41dab
+  7ff977b2ae0d inputhost+5ae0d SetInputFocus+642d
+  7ff977b21c99 inputhost+51c99 CreateInputDeviceWatcher+1499
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 9548 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff92ac385a0 graphics-hook64+85a0
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 28796 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff8e34296f7 nvoglv64+a696f7 DrvPresentBuffers+e9b7
+  7ff8e3428ca8 nvoglv64+a68ca8 DrvPresentBuffers+df68
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 6560 priorSuspend=0
+  7ff99a631324 win32u+1324 NtUserGetMessage+14
+  7ff99b9cfad2 USER32+3fad2 GetMessageW+22
+  7ff92ac37737 graphics-hook64+7737
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 14120 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e33f66ca nvoglv64+a366ca DrvValidateVersion+c06a
+  7ff8e3901502 nvoglv64+f41502 vkGetInstanceProcAddr+facd2
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 26112 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e33f66ca nvoglv64+a366ca DrvValidateVersion+c06a
+  7ff8e39121c2 nvoglv64+f521c2 vkGetInstanceProcAddr+10b992
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 31624 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e33f66ca nvoglv64+a366ca DrvValidateVersion+c06a
+  7ff8e391ebf4 nvoglv64+f5ebf4 vkGetInstanceProcAddr+1183c4
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 27048 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e33f66ca nvoglv64+a366ca DrvValidateVersion+c06a
+  7ff8e38feeed nvoglv64+f3eeed vkGetInstanceProcAddr+f86bd
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 28712 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e33f66ca nvoglv64+a366ca DrvValidateVersion+c06a
+  7ff8e3a2e256 nvoglv64+106e256 vk_icdNegotiateLoaderICDInterfaceVersion+cf6c6
+  7ff8e3a24ab8 nvoglv64+1064ab8 vk_icdNegotiateLoaderICDInterfaceVersion+c5f28
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 32256 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff92b888640 nvwgf2umx+928640 NVDEV_Thunk+23ab0
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 16096 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff92b080396 nvwgf2umx+120396 NVAPI_DirectMethods+32956
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 676 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff92b8ead5f nvwgf2umx+98ad5f NVDEV_Thunk+861cf
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 15996 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff999fd3d2d msvcp_win+23d2d std::time_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat+bbd
+  7ff999fcf4a9 msvcp_win+1f4a9 Cnd_wait+19
+  7ff8bc06eb3a D3D12Core+4eb3a
+  7ff8bc06ea54 D3D12Core+4ea54
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 8516 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff999fd3d2d msvcp_win+23d2d std::time_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat+bbd
+  7ff999fcf4a9 msvcp_win+1f4a9 Cnd_wait+19
+  7ff8bc06eb3a D3D12Core+4eb3a
+  7ff8bc06ea54 D3D12Core+4ea54
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 18808 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff999fd3d2d msvcp_win+23d2d std::time_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat+bbd
+  7ff999fcf4a9 msvcp_win+1f4a9 Cnd_wait+19
+  7ff8bc06eb3a D3D12Core+4eb3a
+  7ff8bc06ea54 D3D12Core+4ea54
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 30012 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff999fd3d2d msvcp_win+23d2d std::time_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat+bbd
+  7ff999fcf4a9 msvcp_win+1f4a9 Cnd_wait+19
+  7ff8bc06eb3a D3D12Core+4eb3a
+  7ff8bc06ea54 D3D12Core+4ea54
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 30756 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff9993e944a mswsock+944a
+  7ff9993e9124 mswsock+9124
+  7ff99b3e1601 WS2_32+11601 select+201
+  7ff7dcc8b30f AzurePlayer+ab30f
+  7ff7dcc8a3e1 AzurePlayer+aa3e1
+  7ff99a6637b0 ucrtbase+37b0 wcsrchr+150
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 2792 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff92b68ea42 nvwgf2umx+72ea42 OpenAdapter10+1439c2
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 30372 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff92b1a8191 nvwgf2umx+248191 NVENCODEAPI_Thunk+495d1
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 11288 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff92b8e6c87 nvwgf2umx+986c87 NVDEV_Thunk+820f7
+  7ff92b9c0dfa nvwgf2umx+a60dfa NVDEV_Thunk+15c26a
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 32964 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff92b080396 nvwgf2umx+120396 NVAPI_DirectMethods+32956
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 14124 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff98b738775 igd10um64xe+178775 OpenAdapter10_2+5bd5
+  7ff98b73886b igd10um64xe+17886b OpenAdapter10_2+5ccb
+  7ff98b61e300 igd10um64xe+5e300
+  7ff98b61e1d9 igd10um64xe+5e1d9
+  7ff98b61c7ac igd10um64xe+5c7ac
+  7ff98b7367d6 igd10um64xe+1767d6 OpenAdapter10_2+3c36
+  7ff98b771a2a igd10um64xe+1b1a2a OpenAdapter10_2+3ee8a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 27068 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99cebdd6e ntdll+9dd6e RtlSleepConditionVariableSRW+1de
+  7ff99a11f518 KERNELBASE+1f518 SleepConditionVariableSRW+38
+  7ff98b738775 igd10um64xe+178775 OpenAdapter10_2+5bd5
+  7ff98b73886b igd10um64xe+17886b OpenAdapter10_2+5ccb
+  7ff98b61e300 igd10um64xe+5e300
+  7ff98b61e1d9 igd10um64xe+5e1d9
+  7ff98b61e154 igd10um64xe+5e154
+  7ff98b61df18 igd10um64xe+5df18
+  7ff98b7367d6 igd10um64xe+1767d6 OpenAdapter10_2+3c36
+  7ff98b771a2a igd10um64xe+1b1a2a OpenAdapter10_2+3ee8a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 23276 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff8e37d6c26 nvoglv64+e16c26 vk_gr2608GetInstanceProcAddr+42896
+  7ff8e33f85e8 nvoglv64+a385e8 DrvValidateVersion+df88
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 27904 priorSuspend=0
+  7ff99cf83d84 ntdll+163d84 ZwWaitForMultipleObjects+14
+  7ff99a11f233 KERNELBASE+1f233 WaitForMultipleObjectsEx+123
+  7ff99a11f101 KERNELBASE+1f101 WaitForMultipleObjects+11
+  7ff92b080396 nvwgf2umx+120396 NVAPI_DirectMethods+32956
+  7ff92bdcf11a nvwgf2umx+e6f11a NVDEV_Thunk+56a58a
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 30384 priorSuspend=0
+  7ff99cf832b4 ntdll+1632b4 NtWaitForSingleObject+14
+  7ff99a11895f KERNELBASE+1895f WaitForSingleObjectEx+af
+  7ff98b1f6ddc MMDevApi+6ddc Ordinal10+f4c
+  7ff98b1f5e0c MMDevApi+5e0c Ordinal11+16c
+  7ff98b1f5cda MMDevApi+5cda Ordinal11+3a
+  7ff97e6f3c13 AUDIOSES+73c13 Ordinal4+1b3a3
+  7ff97e69e9c7 AUDIOSES+1e9c7 DllGetClassObject+15377
+  7ff97e69e00c AUDIOSES+1e00c DllGetClassObject+149bc
+  7ff97e69c9c4 AUDIOSES+1c9c4 DllGetClassObject+13374
+  7ff97e69c20c AUDIOSES+1c20c DllGetClassObject+12bbc
+  7ff97e6de9a7 AUDIOSES+5e9a7 Ordinal4+6137
+  7ff7dcda1c4d AzurePlayer+1c1c4d
+  7ff7dcda2b5e AzurePlayer+1c2b5e
+  7ff7dcda2fc1 AzurePlayer+1c2fc1
+  7ff7dcd83d5a AzurePlayer+1a3d5a
+  7ff98b243b91 MMDevApi+53b91 Ordinal6+d11
+  7ff98b1f7b51 MMDevApi+7b51 DllCanUnloadNow+881
+  7ff98b235356 MMDevApi+45356 Ordinal14+626
+  7ff98b1f6231 MMDevApi+6231 Ordinal10+3a1
+  7ff99cef621d ntdll+d621d TpAlpcUnregisterCompletionList+4fd
+  7ff99ce9e4c9 ntdll+7e4c9 RtlRaiseStatus+20d9
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 26812 priorSuspend=0
+  7ff99cf86e84 ntdll+166e84 ZwWaitForAlertByThreadId+14
+  7ff99ce2639f ntdll+639f RtlInitializeResource+9bf
+  7ff99ce9c87f ntdll+7c87f RtlRaiseStatus+48f
+  7ff99ce9bff2 ntdll+7bff2 RtlEnterCriticalSection+f2
+  7ff98b20f20a MMDevApi+1f20a Ordinal5+13fea
+  7ff999c489b1 CFGMGR32+189b1 CM_Get_DevNode_Registry_Property_ExA+c51
+  7ff999c48734 CFGMGR32+18734 CM_Get_DevNode_Registry_Property_ExA+9d4
+  7ff999c4e67d CFGMGR32+1e67d SwDeviceGetLifetime+16d
+  7ff99ce9d460 ntdll+7d460 RtlRaiseStatus+1070
+  7ff99ce9e4b1 ntdll+7e4b1 RtlRaiseStatus+20c1
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
+Thread 31544 priorSuspend=0
+  7ff99cf86ee4 ntdll+166ee4 ZwWaitForWorkViaWorkerFactory+14
+  7ff99ce9e02e ntdll+7e02e RtlRaiseStatus+1c3e
+  7ff99b10e8d7 KERNEL32+2e8d7 BaseThreadInitThunk+17
+  7ff99ce28d9c ntdll+8d9c RtlUserThreadStart+2c
