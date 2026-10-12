@@ -1,4 +1,5 @@
 #include "runtime/AudioRuntime.hpp"
+#include "runtime/AudioDeviceNotifications.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <miniaudio.h>
 #include <cmath>
@@ -7,6 +8,7 @@
 namespace azurerender {
 struct AudioRuntime::Impl {
     ma_engine engine{};
+    std::unique_ptr<AudioDeviceNotificationGuard> notifications;
     struct Sound;
     struct ReaderSource {ma_data_source_base base{};Sound* owner=nullptr;};
     struct Sound {
@@ -32,8 +34,10 @@ struct AudioRuntime::Impl {
             RuntimeDiagnostics::instance().warning("audio","Audio device unavailable; offline mixer active");
         } else device=requested;
         if (result != MA_SUCCESS) throw std::runtime_error("Audio engine initialization failed");
+        try{if(device)notifications=deferAudioDeviceNotifications(ma_engine_get_device(&engine));}
+        catch(...){ma_engine_uninit(&engine);throw;}
     }
-    ~Impl(){sounds.clear();ma_engine_uninit(&engine);}
+    ~Impl(){if(notifications)notifications->shutdown();sounds.clear();ma_engine_uninit(&engine);notifications.reset();}
 };
 AudioRuntime::AudioRuntime(bool device):impl_(std::make_unique<Impl>(device)){}
 AudioRuntime::~AudioRuntime()=default;

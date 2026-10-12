@@ -324,6 +324,7 @@ add_library(AzureRenderCore STATIC
     src/assets/audio/AudioEncoder.cpp
     src/assets/audio/AudioFormatAdapter.cpp
     src/runtime/MiniaudioImpl.cpp
+    src/runtime/AudioNotificationQueue.cpp
     src/assets/AssetFormatRegistry.cpp
     src/assets/AssetTransfer.cpp
     src/assets/AssetExportJob.cpp
@@ -1877,6 +1878,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.MaterialSlotEditing COMMAND AzureMaterialSlotEditingTests)
     add_executable(AzureMaterialDocumentTests tests/MaterialDocumentTests.cpp)
     add_executable(AzureMaterialGraphTests tests/MaterialGraphTests.cpp)
+    add_executable(AzureAudioNotificationQueueTests tests/AudioNotificationQueueTests.cpp)
+    add_executable(AzureAudioDeviceShutdownTests tests/AudioDeviceShutdownTests.cpp)
+    target_link_libraries(AzureAudioDeviceShutdownTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRuntime.AudioDeviceShutdown COMMAND AzureAudioDeviceShutdownTests)
+    set_tests_properties(AzureRuntime.AudioDeviceShutdown PROPERTIES TIMEOUT 20 SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
+    target_link_libraries(AzureAudioNotificationQueueTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRuntime.AudioNotificationQueue COMMAND AzureAudioNotificationQueueTests)
+    set_tests_properties(AzureRuntime.AudioNotificationQueue PROPERTIES TIMEOUT 10)
     add_executable(AzureMaterialGraphEditingTests tests/MaterialGraphEditingTests.cpp)
     target_link_libraries(AzureMaterialGraphEditingTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.MaterialGraphEditing COMMAND AzureMaterialGraphEditingTests)
