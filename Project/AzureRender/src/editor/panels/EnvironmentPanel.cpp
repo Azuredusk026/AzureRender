@@ -1,5 +1,6 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "editor/ui/Widgets.hpp"
+#include "runtime/EngineSettings.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 namespace azurerender {
 void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
@@ -8,6 +9,8 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
     ImGui::TextUnformatted("Scene rendering and presentation");
     ImGui::BeginDisabled(session_->playing()||session_->building());
     const RenderSettings& settings = view.renderSettings();
+    const auto effective=resolveRenderSettings(session_->settings(),settings);
+    if(effective.showcasePlatformFeature){
     if (ImGui::BeginCombo(
             "Showcase Look",
             std::string(showcasePresetName(settings.showcasePreset)).c_str())) {
@@ -29,6 +32,8 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
     if (ImGui::Checkbox("Showcase Platform", &platform)) {
         session_->edit("render.settings",{{"values",{{"platform",platform}}}},"render-platform");
     }
+    }
+    if(effective.faceSdfFeature){
     bool faceSdf = settings.faceSdf.enabled;
     if (ImGui::Checkbox("Face SDF", &faceSdf)) {
         session_->edit("render.settings",{{"values",{{"faceSdf",faceSdf}}}},"render-faceSdf");
@@ -41,6 +46,8 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
     if (ImGui::SliderFloat("Face SDF Softness", &softness, 0.001F, 0.5F)) {
         session_->edit("render.settings",{{"values",{{"faceSoftness",softness}}}},"render-faceSoftness");
     }
+    }
+    if(!effective.faceSdfFeature&&!effective.showcasePlatformFeature)ui::statusText("项目设置可启用专用渲染特性。",ui::StatusKind::Neutral);
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
         session_->edit("render.settings",{{"values",{{"outline",outline}}}},"render-outline");

@@ -247,6 +247,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
+    faceSdfPrepared_=renderSettings_->faceSdfFeature;platformPrepared_=renderSettings_->showcasePlatformFeature;
+    faceSdfTextureCount_=0;
     gpuCullingEnabled_ = context.gpuCulling;
     visibilityPrototype_ = context.visibilityPrototype && context.gpuCulling;
     multiDrawIndirect_ = context.multiDrawIndirect;
@@ -266,7 +268,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     asset_ = context.preparedMeshes && context.preparedMeshes->count(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string())
         ? *context.preparedMeshes->at(std::filesystem::u8path(resolvedAssetPath).lexically_normal().generic_u8string()) : loadGltfAsset(resolvedAssetPath);
     for (const AssetMaterial& material : asset_.materials) {
-        if (!material.faceSdf.present) {
+        if (!faceSdfPrepared_||!material.faceSdf.present) {
             continue;
         }
         if (faceSdfHeadNode_.has_value()
@@ -297,7 +299,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             "asset", "Face SDF light frame: bind-relative head rotation");
     }
     footPivot_ = estimateFootPivot(asset_);
-    appendShowcasePlatform(asset_, footPivot_);
+    if(platformPrepared_)appendShowcasePlatform(asset_, footPivot_);
     azurerender::RuntimeDiagnostics::instance().print(
         "asset",
         "Turntable foot pivot: [" + std::to_string(footPivot_[0]) + ", "
@@ -403,6 +405,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
 
 void CharacterSceneRenderer::onLoad(const RenderContext& context){
     while(!prepareLoad(context,std::numeric_limits<double>::max())){}
+    RuntimeDiagnostics::instance().info("render","Optional resources: faceSdfTextures="+std::to_string(faceSdfTextureCount_)+", showcasePlatform="+(platformPrepared_?"true":"false"));
 }
 bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double budgetMs){
     const auto start=std::chrono::steady_clock::now();
@@ -414,6 +417,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     return loadJobs_.empty();
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
 }
@@ -588,6 +592,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
 std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
     const LoadedAsset& mesh, const AssetPose& pose, const Matrix4& model) const {
     const AssetFaceSdfProfile* profile = nullptr;
+    if(!faceSdfPrepared_)return {0,0,-1,0};
     for (const auto& material : mesh.materials) if (material.faceSdf.present) { profile = &material.faceSdf; break; }
     if (!profile || profile->headNode >= pose.nodeWorldMatrices.size()) return {0,0,-1,0};
     const auto head = multiply(model, pose.nodeWorldMatrices[profile->headNode]);
@@ -1106,6 +1111,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
     (void)context;
     loadJobs_.clear();loadInitialized_=false;destroyResources();
+    faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
 }
 
 void CharacterSceneRenderer::appendHudText(std::ostringstream& text) const {
@@ -1188,6 +1194,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
+         << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"
          << "  \"sceneTriangles\": " << triangles << ",\n"
          << "  \"skinnedVertices\": " << skinned << ",\n"
          << "  \"transparentTriangles\": " << transparent << ",\n"
@@ -1368,7 +1376,7 @@ void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std:
     case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,colorFormat,false,g.styleMask,mipLevels,settings.semantic(),0,&settings);break;
     case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,colorFormat,false,g.matcap,mipLevels,settings.semantic(),0,&settings);break;
     case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,colorFormat,false,g.hairData,mipLevels,settings.semantic(),0,&settings);break;
-    case 7:{static const std::vector<std::uint8_t> fallback(16,0);uploadTextureData(m.faceSdf.present?m.faceSdf.pixels:fallback,m.faceSdf.present?m.faceSdf.width:2,m.faceSdf.present?m.faceSdf.height:2,colorFormat,false,g.faceSdf,mipLevels,settings.semantic(),0,&settings);break;}
+    case 7:{if(faceSdfPrepared_&&m.faceSdf.present){uploadTextureData(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,colorFormat,false,g.faceSdf,mipLevels,settings.semantic(),0,&settings);++faceSdfTextureCount_;}break;}
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }
@@ -2082,7 +2090,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             appendTexture(material.styleMask);
             appendTexture(material.matcap);
             appendTexture(material.hairData);
-            appendTexture(material.faceSdf);
+            appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
         }
         for (const auto& resource : additionalResources_) {
             for (const GpuMaterial& material : resource->gpuMaterials) {
@@ -2093,7 +2101,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 appendTexture(material.styleMask);
                 appendTexture(material.matcap);
                 appendTexture(material.hairData);
-                appendTexture(material.faceSdf);
+                appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
             }
         }
 
@@ -2255,8 +2263,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             writeImage(
                 descriptorIndex,
                 12,
-                gpuMaterial.faceSdf.view,
-                gpuMaterial.faceSdf.sampler,
+                gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.view:gpuMaterial.normal.view,
+                gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.sampler:gpuMaterial.normal.sampler,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
             rhi::DescriptorBufferWrite jointWrite{};
@@ -2868,7 +2876,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     frameMainLight_ = lightDirection;
     uniform.faceLightDirection = {0, 0, -1, 0};
     uniform.faceSdfParameters = {
-        settings.faceSdf.enabled ? 1.0F : 0.0F,
+        faceSdfPrepared_&&settings.faceSdf.enabled ? 1.0F : 0.0F,
         settings.faceSdf.threshold,
         settings.faceSdf.softness,
         settings.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,

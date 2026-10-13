@@ -61,6 +61,8 @@ public:
     void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
+    bool faceSdfPrepared_=false,platformPrepared_=false;
+    std::uint32_t faceSdfTextureCount_=0;
     struct GpuMaterial;
     void initializeLoad(const RenderContext& context);
     std::deque<std::function<void()>> loadJobs_;

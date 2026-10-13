@@ -40,7 +40,7 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
     return levelSession_?&levelSession_->assets():nullptr;
 }
 bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
-    if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
+    if(rendererResourceKey_==level.resourceKey && renderSettings_.sceneType==level.scene.renderSettings.sceneType && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
         return true;
     }
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();context.preparedMeshes=&level.preparedMeshes;
@@ -48,7 +48,7 @@ bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
         releasePreparedRenderer();
         auto registry=azurerender::BuiltinRendererCatalog::createRegistry();
         preparedRenderer_=registry.create(azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()));
-        preparedRenderSettings_=level.scene.renderSettings;preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
+        preparedRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,level.scene.renderSettings);preparedResourceKey_=level.resourceKey;preparedRendererReady_=false;
     }
     if(preparedRendererReady_)return true;
     context.renderSettings=&preparedRenderSettings_;
@@ -60,6 +60,7 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
     invalidatePreviews();
 #endif
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();
+    auto targetSettings=azurerender::resolveRenderSettings(*engineSettings_,level.scene.renderSettings);context.renderSettings=&targetSettings;
     if(rendererResourceKey_==level.resourceKey && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!context.scene.resources.empty()) && sceneRenderer_->reuseScene(context)){
         renderSettings_=level.scene.renderSettings;return;
     }

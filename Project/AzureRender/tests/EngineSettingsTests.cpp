@@ -7,6 +7,13 @@ using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
     SettingRegistry registry;registerEngineSettings(registry);RenderSettings render;render.grade.exposureEv=1.5F;
+    RenderSettings basic;basic.sceneType=SceneType::Sample;
+    check(!resolveRenderSettings(registry,basic).faceSdf.enabled,"Generic scenes must not activate character face shading by default");
+    check(!resolveRenderSettings(registry,basic).characterPresentation.platformEnabled,"Generic scenes must not generate showcase platforms");
+    check(resolveRenderSettings(registry,render).faceSdf.enabled,"Legacy character scenes retain their declared face behavior");
+    check(registry.set("render.features.face-sdf",false,SettingSource::Project).passed,"Project can disable a render feature");registry.applyPending();
+    check(!resolveRenderSettings(registry,render).faceSdf.enabled,"Explicit project disable wins over legacy selection");
+    check(!registry.set("render.features.unknown",true,SettingSource::Project).passed,"Unknown features produce a typed settings diagnostic");
     check(registry.get("runtime.vsync")==true,"Default synchronized presentation is explicit");
     check(registry.set("runtime.vsync",false,SettingSource::CommandLine).passed,"Startup presentation override");
     registry.applyPending();check(registry.get("runtime.vsync")==false,"Startup override reaches the shared setting");

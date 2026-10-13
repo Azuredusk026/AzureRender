@@ -1,8 +1,11 @@
 #include "EngineSettings.hpp"
 #include "InputPreferences.hpp"
+#include "extensions/BuiltinRenderFeatures.hpp"
 namespace azurerender {
 void registerEngineSettings(SettingRegistry& r) {
     registerRenderSettings(r);registerInputPreferences(r);
+    for(const auto& descriptor:builtinRenderFeatures().descriptors())
+        r.add({"render.features."+descriptor.id,"可选渲染特性："+descriptor.id,false,{},{},false,true,false});
     r.add({"runtime.maxFrameRate","Maximum host frame rate (0 is unlimited)",60,0,1000,false,true,false});
     r.add({"runtime.vsync","Synchronized surface presentation",true,{},{},false,true,true});
     r.add({"diagnostics.verbose","Verbose development diagnostics",false,{},{},false,true,false});
@@ -27,6 +30,11 @@ void RenderSettingOverlay::apply(const SettingRegistry& registry,RenderSettings&
     validateRenderSettings(settings);
 }
 RenderSettings resolveRenderSettings(const SettingRegistry& registry,RenderSettings authored) {
-    RenderSettingOverlay overlay;overlay.apply(registry,authored);return authored;
+    RenderSettingOverlay overlay;overlay.apply(registry,authored);
+    const auto enabled=[&](const std::string& id){const auto key="render.features."+id;return registry.source(key)==SettingSource::Default?authored.sceneType==SceneType::Character:registry.get(key).get<bool>();};
+    authored.faceSdfFeature=enabled("face-sdf");authored.showcasePlatformFeature=enabled("showcase-platform");
+    authored.faceSdf.enabled=authored.faceSdf.enabled&&authored.faceSdfFeature;
+    authored.characterPresentation.platformEnabled=authored.characterPresentation.platformEnabled&&authored.showcasePlatformFeature;
+    return authored;
 }
 }

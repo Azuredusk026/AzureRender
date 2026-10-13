@@ -239,12 +239,16 @@ EditRegistry editorOperations(EditorSession& session) {
                 for(const auto& entry:descriptions.items())if(entry.key().rfind("editor.shortcuts.",0)==0 && entry.key()!=name && entry.value().at("value")==value)throw EditRejection("Scene shortcut is already assigned");
             }
             const auto result=session.settings().set(a.at("name").get<std::string>(),a.at("value"),settingSource(a));
-            if(!result.passed)throw EditRejection(result.diagnostic);return {{"queued",true}};
+            if(!result.passed)throw EditRejection(result.diagnostic);
+            if(name.rfind("render.features.",0)==0){session.settings().applyPending();session.assetReloadRequested_=true;}
+            return {{"queued",true}};
         });
     registry.add({"settings.reset",1,schema({{"name",text},{"source",text}},{"name"}),false,false,false},
         [&session,settingSource](EditorContext&,const Json& a)->Json {
             const auto result=session.settings().reset(a.at("name").get<std::string>(),settingSource(a));
-            if(!result.passed)throw EditRejection(result.diagnostic);return {{"queued",true}};
+            if(!result.passed)throw EditRejection(result.diagnostic);
+            if(a.at("name").get<std::string>().rfind("render.features.",0)==0){session.settings().applyPending();session.assetReloadRequested_=true;}
+            return {{"queued",true}};
         });
     registry.add({"settings.describe",1,schema({{"search",text}}),false,false,false},
         [&session](EditorContext&,const Json& a)->Json{return session.settings().describe(a.value("search",std::string()));});

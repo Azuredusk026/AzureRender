@@ -95,6 +95,7 @@ struct CharacterPresentationSettings {
 
 struct RenderSettings {
     static constexpr std::uint32_t kSchemaVersion = 9;
+    bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;
     float cameraNear = .1F;

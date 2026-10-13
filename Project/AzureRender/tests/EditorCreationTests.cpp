@@ -55,6 +55,8 @@ int main(int argc,char** argv){
         require(bool(task),"External drop enters the registered import task");
         require(wait(task.value.get<std::string>()).at("state")=="completed","Drop must import and place real geometry");
         require(context->selectedNode()->parentId==parent,"Hierarchy drop must preserve the captured parent");
+        const auto droppedBody=context->componentData(context->selectedNode()->id,"azure.rigid-body");
+        require(!droppedBody.is_null()&&droppedBody.at("shape")=="mesh","Dropped model receives collision from its actual geometry");
         const auto nodesBefore=context->scene().nodes.size();
         const auto stale=session.edit("asset.import-drop",{{"path",source.u8string()},{"place",true}});
         require(bool(stale),"Start stale drop fixture");session.edit("node.rename",{{"value","Changed while importing"}});

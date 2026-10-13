@@ -28,7 +28,9 @@ std::string EditorSession::startDropImport(const nlohmann::json& request) {
                 const auto asset=candidate.publishPreparedImport(*job);
                 const auto* type=assetTypeRegistry().classify(candidate.assets().resolveReference(asset));
                 const bool place=request.value("place",false)&&type&&type->placeable;
-                if(place){candidate.placeAssetAt(asset,position);if(!parent.empty())candidate.reparentNode(candidate.selectedNode()->id,parent);
+                if(place){candidate.placeAssetAt(asset,position);
+                    if(type->id=="model"){candidate.addGameplayComponent("azure.rigid-body");candidate.setComponentFields("azure.rigid-body",{{"shape","mesh"},{"mesh",asset}});}
+                    if(!parent.empty())candidate.reparentNode(candidate.selectedNode()->id,parent);
                     candidate.setSelectedNodeName(nextObjectName(candidate.scene(),source.stem().u8string()));}
                 transaction.validate();transaction.commit({});assetReloadRequested_=true;
                 if(place)selection_->requestReveal();
