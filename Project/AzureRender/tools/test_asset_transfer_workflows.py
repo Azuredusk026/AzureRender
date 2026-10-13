@@ -30,8 +30,12 @@ def run(executable, root):
     assert Path(tasks[0]['result']['output']).parent.resolve() == output.resolve()
     assert not exported['dirty'] and exported['feedback'] == []
     subtree = root / '场景 子树'
-    actions = [dict(frame=25, action='click', target=next(key for key in baseline['widgets'] if key.startswith('node.') and not key.endswith('.expand'))),
-               dict(frame=32, action='click', target='outliner.actions'),
+    bounds = baseline['panels']['outliner']['rect']
+    target = 'node.hero:body'
+    rect = baseline['widgets'][target]
+    assert bounds[1] + 60 < rect[1] and rect[1] + rect[3] < bounds[1] + bounds[3] - 8
+    actions = [dict(frame=25, action='click', target=target),
+               dict(frame=32, action='click', button='right', target=target),
                dict(frame=40, action='click', target='outliner.export'),
                dict(frame=48, action='click', target='export.path'),
                dict(frame=51, action='key', key='A', down=True, ctrl=True),

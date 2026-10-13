@@ -7,7 +7,7 @@
 using namespace azurerender;
 static void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 int main(int argc,char** argv){
-    const auto root=std::filesystem::temp_directory_path()/("azure-creation-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+    const auto root=std::filesystem::temp_directory_path()/std::filesystem::u8path("azure-creation-中文 路径-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
     int code=0;
     try {
         require(argc==2,"Project fixture required");

@@ -176,7 +176,9 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         if(ImGui::BeginPopup("Viewport context")){
             if(ImGui::MenuItem("聚焦选择","F",false,!session_->selection().selected().empty()))session_->edit("viewport.frame-selection");
             if(ImGui::MenuItem("复制","Ctrl+D",false,!session_->selection().selected().empty()))session_->edit("node.duplicate");
+            observeWidget("viewport.duplicate");
             if(ImGui::MenuItem("删除","Delete",false,!session_->selection().selected().empty()))session_->edit("node.delete");
+            observeWidget("viewport.delete");
             if(ImGui::BeginMenu("创建对象")){ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){session_->edit("node.create-preset",{{"preset",preset}});});ImGui::EndMenu();}
             ImGui::EndPopup();
         }

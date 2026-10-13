@@ -16,9 +16,9 @@ def run(executable,output):
             level=json.loads(path.read_text(encoding='utf-8'));level['nodes']=[];level['prefabs']=[];level['lights']=[]
             empty=json.dumps(level,indent=2)+'\n';path.write_text(empty,encoding='utf-8')
             disabled=launch(executable,case,'disabled',(1280,720),dpi,[
-                dict(frame=25,action='click',target='outliner.actions'),
-                dict(frame=30,action='click',target='outliner.delete'),
-                dict(frame=35,action='click',target='outliner.duplicate'),
+                dict(frame=25,action='click',target='viewport.image',button='right'),
+                dict(frame=30,action='click',target='viewport.delete'),
+                dict(frame=35,action='click',target='viewport.duplicate'),
                 dict(frame=40,action='key',key='Escape',down=True),
                 dict(frame=41,action='key',key='Escape',down=False)],capture=False)
             assert disabled['nodeCount']==0 and disabled['undoCount']==0

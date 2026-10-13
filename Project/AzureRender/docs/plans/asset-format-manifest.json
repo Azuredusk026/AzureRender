@@ -133,7 +133,7 @@
     {
       "id": "P8",
       "summary": "完整格式能力收口",
-      "status": "Pending",
+      "status": "Ready",
       "dependsOn": [
         "G23"
       ],
@@ -674,7 +674,7 @@
     "P7": "Ready",
     "G22": "Ready",
     "G23": "Ready",
-    "P8": "Pending"
+    "P8": "Ready"
   },
   "recordedStatus": "FinalAcceptancePending"
 }

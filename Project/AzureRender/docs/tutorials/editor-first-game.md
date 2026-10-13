@@ -111,7 +111,7 @@ Ctrl+D 复制选中对象，Delete 删除。Ctrl+Z 撤销，Ctrl+Y 重做。Ctrl
 
 从 View 或左侧 Tools 打开 Settings。
 搜索名称后查看当前值与获胜来源。
-Write source 选择会话覆盖或用户偏好。
+写入来源选择会话、用户偏好或项目设置。
 修改值在下一帧边界生效。
 
 Reset source 恢复该来源以下的有效值。
@@ -121,7 +121,10 @@ Save user preferences 保存用户层。
 
 `editor.scale` 设置系统 DPI 的倍率。
 `editor.compact` 控制紧凑布局。
-`input.cameraSensitivity` 设置相机鼠标灵敏度。
+`editor.camera.lookDegreesPerPixel` 设置视口转向灵敏度。
+`editor.camera.orbitDegreesPerPixel` 设置环绕灵敏度。
+项目渲染与游戏输入设置写入项目配置。
+点击保存项目设置，关闭并重开后检查当前值。
 完整类型与来源见[UI 和设置说明](../runtime/ui-settings.md)。
 
 ![独立检视工具中的设置面板](images/settings.png)

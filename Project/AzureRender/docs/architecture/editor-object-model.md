@@ -159,3 +159,20 @@ Player 与编辑器使用同一设置和装配描述。
 创建、复制、移动及历史操作请求展开定位。
 祖先展开状态和选择使用稳定标识。
 父子循环被拒绝，失败保持文档和历史。
+
+## 制作流程与文件边界
+
+基础创建归属 `editor/content`。
+外部事件接入归属 `editor/input`。
+材料操作归属 `editor/material`，脚本模板归属 `editor/scripts`。
+面板通过生产编辑服务调用这些功能。
+
+项目资产生成由 `runtime/AssetGeneration.cpp` 持有。
+原生文件路径保留平台编码，文本接口使用 UTF-8。
+元数据路径通过路径对象追加扩展名。
+资源加载和生成验证消费同一资产标识。
+
+集成工具为 `tools/test_editor_general_workflow.py`。
+它创建场景项目，并通过生产服务完成制作与重开。
+人工素材由 `tools/prepare_editor_review_assets.py` 准备。
+来源、许可和内容指纹随素材清单保存。

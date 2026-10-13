@@ -82,7 +82,9 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             if(ImGui::MenuItem("聚焦对象","F"))pending=[this,select]{select();session_->edit("viewport.frame-selection");};
             const bool writable=!session_->playing()&&!session_->building();
             if(ImGui::MenuItem("复制","Ctrl+D",false,writable))pending=[this,select]{select();session_->edit("node.duplicate");};
+            observeWidget("outliner.duplicate");
             if(ImGui::MenuItem("删除","Delete",false,writable))pending=[this,select]{select();session_->edit("node.delete");};
+            observeWidget("outliner.delete");
             if(ImGui::BeginMenu("创建子对象",writable)){
                 ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset,id]{session_->edit("node.create-preset",{{"preset",preset},{"parent",id}});};});ImGui::EndMenu();
             }
@@ -90,6 +92,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
                 ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndMenu();
             }
             if(ImGui::MenuItem("导出子树",nullptr,false,writable&&view.isProject()&&!session_->context().dirty()))pending=[this,id]{exportRequest_={{"node",id}};exportDialogRequested_=true;};
+            observeWidget("outliner.export");
             ImGui::EndPopup();
         }
         if(ImGui::BeginDragDropSource()) {

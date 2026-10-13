@@ -28,7 +28,7 @@ std::string AssetDatabase::generateAsset(const GeneratorRegistry& generators,con
     const nlohmann::json& parameters,const std::vector<std::string>& inputs,const std::vector<std::string>& dependencies,
     const std::string& license,std::function<void(const std::string&)> validate,std::function<void()> check) {
     if(!validate||output.rfind("engine:/",0)==0)throw std::invalid_argument("Generation requires project output and content validator");
-    const auto path=project_.resolve(output);const auto sidecar=std::filesystem::path(path.string()+".azmeta");
+    const auto path=project_.resolve(output);auto sidecar=path;sidecar+=".azmeta";
     if(path.extension()==".azmeta"||path.extension()==".tmp")throw std::invalid_argument("Generation output requires an asset extension");
     GenerationRequest request;request.parameters=parameters;request.outputReference=output;request.licenseSource=license;request.check=check;
     if(inputs.size()+dependencies.size()>1023||parameters.dump().size()>2*1024*1024)throw std::invalid_argument("Generation input budget exceeded");
@@ -57,7 +57,7 @@ std::string AssetDatabase::generateAsset(const GeneratorRegistry& generators,con
         metadata["generation"]=result.manifest.toJson();save(sidecar,metadata.dump(2));
         AssetDatabase candidate=*this;candidate.refresh(true,check);
         if(path.extension()==".azurelevel"||path.extension()==".azureprefab")static_cast<void>(Level::load(path,candidate));
-        else if(path.extension()==".gltf"||path.extension()==".glb")static_cast<void>(loadGltfAsset(path.string()));
+        else if(path.extension()==".gltf"||path.extension()==".glb")static_cast<void>(loadGltfAsset(path.u8string()));
         else if(path.extension()==".json") { const auto document=nlohmann::json::parse(result.bytes);
             if(document.contains("states"))static_cast<void>(AnimationStateMachine::parse(document)); }
         if(check)check();const auto id=candidate.idForPath(output);records_.swap(candidate.records_);sources_.swap(candidate.sources_);statistics_=candidate.statistics_;version_=candidate.version_;return id;
