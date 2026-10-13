@@ -314,6 +314,7 @@ target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
+    src/assets/primitives/RoundPrimitives.cpp
     src/assets/MaterialData.cpp
     src/assets/MaterialGraph.cpp
     src/assets/Scene2D.cpp
@@ -508,6 +509,8 @@ add_library(AzureEditor STATIC
     src/editor/content/AssetEditorRegistry.cpp
     src/editor/content/AssetExportService.cpp
     src/editor/content/NodePresetRegistry.cpp
+    src/editor/content/SceneNaming.cpp
+    src/editor/content/BuiltinGeometryService.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp
     src/editor/GameBuildJob.cpp
@@ -1869,6 +1872,9 @@ if(BUILD_TESTING)
     add_executable(AzurePrimitiveGeneratorTests tests/PrimitiveGeneratorTests.cpp)
     target_link_libraries(AzurePrimitiveGeneratorTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.PrimitiveGenerator COMMAND AzurePrimitiveGeneratorTests)
+    add_executable(AzureEditorCreationTests tests/EditorCreationTests.cpp)
+    target_link_libraries(AzureEditorCreationTests PRIVATE AzureEditor)
+    add_test(NAME AzureEditor.Creation COMMAND AzureEditorCreationTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/scene_inspector")
     add_executable(AzureContentDirectoryScaleTests tests/ContentDirectoryScaleTests.cpp)
     target_link_libraries(AzureContentDirectoryScaleTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.ContentDirectoryScale COMMAND AzureContentDirectoryScaleTests)

@@ -1,6 +1,6 @@
 # AzureRender 工程
 
-下一批从 ED0 源码审查开始，连续推进至 ED7。
+下一项任务为 ED2。
 开发任务见[编辑器实施计划](docs/plans/2026-10-14-editor-generalization.md)。
 全部开发交付后执行 P8 集中验收。
 

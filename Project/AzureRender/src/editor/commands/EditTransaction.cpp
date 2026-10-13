@@ -90,6 +90,10 @@ void EditTransaction::commit(const std::string& mergeKey) {
         const bool merge=!mergeKey.empty()&&target.mergeKey_==mergeKey&&target.mergeRevision_==target.revision_
             &&target.mergeSelection_==target.selectedNodes_&&!target.undoStack_.empty();
         if(!merge)target.beginEdit();else ++target.revision_;
+        // Creation may register an immutable project asset in the candidate.
+        // Publish its database together with the document that refers to it.
+        if(candidate_->assets_&&target.assets_&&candidate_->assets_->version()!=target.assets_->version())
+            target.assets_=std::move(candidate_->assets_);
         target.scene_=std::move(candidate_->scene_);target.components_=std::move(candidate_->components_);
         target.sourceLevel_=std::move(candidate_->sourceLevel_);target.resourceReferences_=std::move(candidate_->resourceReferences_);
         target.prefabBaselines_=std::move(candidate_->prefabBaselines_);target.prefabFingerprints_=std::move(candidate_->prefabFingerprints_);

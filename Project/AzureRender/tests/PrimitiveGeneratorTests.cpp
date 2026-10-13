@@ -10,7 +10,7 @@ int main(){
     std::filesystem::create_directories(root);int status=0;
     try{
         const auto registry=GeneratorRegistry::builtins();
-        for(const auto* kind:{"cube","plane","sphere","cylinder"}){
+        for(const auto* kind:{"cube","plane","sphere","cylinder","capsule","torus"}){
             GenerationRequest request;request.parameters={{"kind",kind},{"size",{2,4,6}},{"segments",12}};request.outputReference="assets:/shape.glb";request.licenseSource="Azure primitive generator";
             const auto output=registry.generate("azure.primitive",request);const auto path=root/(std::string(kind)+".glb");
             std::ofstream(path,std::ios::binary).write(output.bytes.data(),static_cast<std::streamsize>(output.bytes.size()));
@@ -32,7 +32,7 @@ int main(){
             request.parameters["size"]={2,0,6};bool rejected=false;try{registry.generate("azure.primitive",request);}catch(const std::exception&){rejected=true;}if(!rejected)throw std::runtime_error("Zero dimensions must be rejected");
             request.parameters["size"]={2,4,6};request.parameters["segments"]=1000000;rejected=false;try{registry.generate("azure.primitive",request);}catch(const std::exception&){rejected=true;}if(!rejected)throw std::runtime_error("Unbounded tessellation must be rejected");
         }
-        std::cout<<"Four loaded primitives, sizes, unit normals, deterministic provenance and input budgets passed\n";
+        std::cout<<"Six loaded primitives, sizes, unit normals, deterministic provenance and input budgets passed\n";
     }catch(const std::exception& error){std::cerr<<error.what()<<'\n';status=1;}
     std::filesystem::remove_all(root);return status;
 }

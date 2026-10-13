@@ -1,4 +1,5 @@
 #include "editor/EditorContext.hpp"
+#include "editor/content/SceneNaming.hpp"
 #include "editor/AssetImportJob.hpp"
 #include "editor/content/ContentOperationService.hpp"
 #include "runtime/Prefab.hpp"
@@ -96,7 +97,8 @@ void EditorContext::createNode(const std::string& requestedId,const std::string&
     const auto nodeId=requestedId.empty()?identity("node-"):requestedId;
     if(nodeId.empty() || nodeId.size()>128 || std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==nodeId;}))throw std::invalid_argument("Duplicate or invalid node identity: "+nodeId);
     if(!parentId.empty()&&std::none_of(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& node){return node.id==parentId;}))throw std::invalid_argument("Unknown parent: "+parentId);
-    beginEdit();SceneNode node;node.id=nodeId;node.name=nodeId;node.parentId=parentId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
+    const auto name=nextObjectName(scene_,"Empty");
+    beginEdit();SceneNode node;node.id=nodeId;node.name=name;node.parentId=parentId;node.visible=false;scene_.nodes.push_back(std::move(node));rebuildEntities();selectNode(scene_.nodes.size()-1);
 }
 void EditorContext::placePrefab(const std::string& asset,const std::string& instance){
     if(!assets_)throw std::logic_error("Prefab placement requires a project");

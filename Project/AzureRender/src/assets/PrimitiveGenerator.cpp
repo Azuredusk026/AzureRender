@@ -1,23 +1,14 @@
 #include "PrimitiveGenerator.hpp"
 #include "assets/GeneratorRegistry.hpp"
+#include "primitives/PrimitiveMesh.hpp"
 #include <array>
 #include <cmath>
 #include <cstring>
 namespace azurerender {
 namespace {
-using Vec=std::array<float,3>;
+using primitives::Vec;
+using primitives::Mesh;
 constexpr float pi=3.14159265358979323846F;
-struct Mesh {
-    std::vector<float> vertices;
-    std::vector<std::uint32_t> indices;
-    Vec minimum{1e20F,1e20F,1e20F},maximum{-1e20F,-1e20F,-1e20F};
-    std::uint32_t vertex(Vec position,Vec normal,float u,float v){
-        const auto id=static_cast<std::uint32_t>(vertices.size()/8);float length=0;for(float x:normal)length+=x*x;length=std::sqrt(length);
-        for(int axis=0;axis<3;++axis){minimum[axis]=std::min(minimum[axis],position[axis]);maximum[axis]=std::max(maximum[axis],position[axis]);vertices.push_back(position[axis]);}
-        for(float x:normal)vertices.push_back(x/length);vertices.push_back(u);vertices.push_back(v);return id;
-    }
-    void triangle(std::uint32_t a,std::uint32_t b,std::uint32_t c){indices.insert(indices.end(),{a,b,c});}
-};
 void grid(Mesh& mesh,const Vec& size,const Vec& center,const Vec& tangent,const Vec& bitangent,const Vec& normal,unsigned segments){
     const auto base=static_cast<std::uint32_t>(mesh.vertices.size()/8);
     for(unsigned y=0;y<=segments;++y)for(unsigned x=0;x<=segments;++x){
@@ -77,7 +68,7 @@ std::string generate(const GenerationRequest& request){
             for(unsigned x=0;x<=segments;++x){const float angle=static_cast<float>(x)/segments*2*pi,c=std::cos(angle),s=std::sin(angle);mesh.vertex({c*size[0]*.5F,sign*size[1]*.5F,s*size[2]*.5F},{0,static_cast<float>(sign),0},c*.5F+.5F,s*.5F+.5F);}
             for(unsigned x=0;x<segments;++x)if(sign<0)mesh.triangle(center,first+x,first+x+1);else mesh.triangle(center,first+x+1,first+x);
         }
-    }else throw std::invalid_argument("Unknown primitive kind");
+    }else if(!primitives::roundPrimitive(mesh,kind,size,segments,request.check))throw std::invalid_argument("Unknown primitive kind");
     return encode(mesh);
 }
 }
