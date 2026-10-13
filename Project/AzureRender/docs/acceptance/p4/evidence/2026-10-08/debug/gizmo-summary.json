@@ -1,0 +1,30 @@
+[
+  {
+    "workflow": "exploration",
+    "passed": true,
+    "commit": true,
+    "singleUndo": true,
+    "escape": true,
+    "focusLoss": true,
+    "undo": true,
+    "snap": true,
+    "rotationSnap": true,
+    "scaleSnap": true,
+    "uniformScale": true,
+    "planar": true
+  },
+  {
+    "workflow": "inspector",
+    "passed": true,
+    "commit": true,
+    "singleUndo": true,
+    "escape": true,
+    "focusLoss": true,
+    "undo": true,
+    "snap": true,
+    "rotationSnap": true,
+    "scaleSnap": true,
+    "uniformScale": true,
+    "planar": true
+  }
+]

@@ -48,17 +48,25 @@ nav:
   - 公共 UI 验证: acceptance/ui3/2026-10-12.md
   - 制作交付验证: acceptance/ui4/2026-10-12.md
   - 资源与日志验证: acceptance/ui5/2026-10-12.md
+  - 项目总览: index.md
+  - 项目现状: project-status.md
+  - 开发总计划: plans/azure-engine-plan.md
+  - 后续开发路线: plans/2026-10-11-next-development.md
+  - 编辑器体验与通用能力计划: plans/2026-10-14-editor-generalization.md
+  - 协作与验收: development-workflow.md
+  - 二维内容: runtime/scene-2d.md
+  - 扩展格式范围: assets/extended-formats.md
+  - P9 内容扩展集成: acceptance/p9/2026-10-12.md
   - OBS 层对照与工作集复现: acceptance/p5/closure/obs-layer-control.md
   - 长跑观测与路线验收: acceptance/p5/closure/observation-control.md
   - 缺页与原目标复测: acceptance/p5/closure/pagefault-trace-results.md
   - 长跑观测实施计划: plans/2026-10-11-longrun-observation.md
-  - 后续开发路线: plans/2026-10-11-next-development.md
   - 设备环境测量验收: acceptance/p5/closure/device-environment.md
   - 设备环境测量计划: plans/2026-10-11-performance-environment.md
   - 资产缓存并发验收: acceptance/u16/cache-publication.md
   - 资产缓存发布计划: plans/2026-10-11-cache-publication.md
   - 平台界面缓冲驻留: acceptance/p5/closure/ui-residency.md
-  - 当前软件候选验收: acceptance/p5/closure/software-candidate-2026-10-11.md
+  - 历史软件候选验收: acceptance/p5/closure/software-candidate-2026-10-11.md
   - 外部恢复与文档保护: acceptance/p5/closure/document-guard-scan.md
   - 管线执行信息: acceptance/p5/closure/pipeline-inspection.md
   - 映射追踪与性能边界: acceptance/p5/closure/mapping-inspection.md
@@ -70,11 +78,12 @@ nav:
   - P8 集中人工复核: acceptance/p8/manual-review.md
   - P8 历史失败归因: acceptance/p8/historical-causality.md
   - 平台跳跃关卡: runtime/platformer-gameplay.md
-  - 项目总览: index.md
   - P3 引擎交付验收: acceptance/p3/2026-10-07.md
   - U5 交互与文档安全验收: acceptance/u5/2026-10-08.md
   - U6 选择与变换验收: acceptance/u6/2026-10-08.md
   - U7 内容制作验收: acceptance/u7/2026-10-08.md
+  - P4 交互体验验收: acceptance/p4/2026-10-08.md
+  - 实体键鼠复核表: acceptance/p4/physical-input.md
   - 内容制作服务: runtime/content-workflows.md
   - 编辑器交互教程: tutorials/editor-interaction.md
   - 构建与使用: getting-started.md
@@ -111,13 +120,15 @@ nav:
       - 对象属性与引用编辑: runtime/property-editing.md
       - 项目入口与工作区: runtime/project-workspace.md
       - gkNextEngine 借鉴评估: research/2026-10-06-gknextengine.md
+      - Hazel 与 Fermion 借鉴评估: research/2026-10-09-hazel-fermion.md
       - 编辑器交互体验审查: research/2026-10-07-editor-usability.md
       - 双工作流制作体验审查: research/2026-10-10-authoring-usability.md
   - 计划:
-      - Azure Engine 总计划: plans/azure-engine-plan.md
       - P5 收口与用户体验计划: plans/2026-10-10-p5-closure-and-user-experience.md
+      - 编辑器产品化候选计划: plans/2026-10-09-editor-productization.md
       - 编辑器交互体验实施计划: plans/2026-10-07-editor-usability.md
       - U7 内容制作细则: plans/2026-10-08-content-workflows.md
+      - P4 体验验收细则: plans/2026-10-08-editor-acceptance.md
       - 引擎架构与 AI 原生实施计划: plans/2026-10-06-engine-evolution.md
       - 引擎基础与操作契约: plans/2026-10-06-engine-foundation-steps.md
       - AI 原生工具与编辑器: plans/2026-10-06-ai-native-editor-steps.md

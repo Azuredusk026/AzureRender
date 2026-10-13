@@ -1,0 +1,879 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "task": "右键观察及出界释放",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "rightLook",
+            "outsideRelease"
+          ]
+        },
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "navigationDirections"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "飞行、加速、停止与失焦",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "flight",
+            "flightRelease",
+            "focusRelease"
+          ]
+        },
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "flight",
+            "focusRelease"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "大纲单击、双击与定位",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "singleOnlySelects",
+            "doubleFrames",
+            "fFrames"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "工具切换及文本归属",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "tools"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "世界、局部与多选变换",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/gizmo-summary.json",
+          "fields": [
+            "commit",
+            "singleUndo"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "取消及吸附",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/gizmo-summary.json",
+          "fields": [
+            "escape",
+            "snap",
+            "rotationSnap",
+            "scaleSnap"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "搜索、多选及拾取",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/selection-summary.json",
+          "fields": [
+            "filteredCtrl",
+            "filteredRange",
+            "blankClear"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "节点及层级制作",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "reparent",
+            "rootDrop"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "导入及射线放置",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "closedImport",
+            "geometryPlacement"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "属性、组件及错误恢复",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "longName",
+            "longComponent",
+            "reset",
+            "remove",
+            "errorDismiss"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "保存、关闭及重开",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "saveReopen"
+          ]
+        },
+        {
+          "file": "debug/documents-summary.json",
+          "fields": [
+            "passed"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "运行预览及独立构建",
+      "configuration": "debug",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "previewCameraRestore",
+            "sceneBytes"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "右键观察及出界释放",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "rightLook",
+            "outsideRelease"
+          ]
+        },
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "navigationDirections"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "飞行、加速、停止与失焦",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "flight",
+            "flightRelease",
+            "focusRelease"
+          ]
+        },
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "flight",
+            "focusRelease"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "大纲单击、双击与定位",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "singleOnlySelects",
+            "doubleFrames",
+            "fFrames"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "工具切换及文本归属",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/native-summary.json",
+          "fields": [
+            "tools"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "世界、局部与多选变换",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/gizmo-summary.json",
+          "fields": [
+            "commit",
+            "singleUndo"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "取消及吸附",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/gizmo-summary.json",
+          "fields": [
+            "escape",
+            "snap",
+            "rotationSnap",
+            "scaleSnap"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "搜索、多选及拾取",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/selection-summary.json",
+          "fields": [
+            "filteredCtrl",
+            "filteredRange",
+            "blankClear"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "节点及层级制作",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "reparent",
+            "rootDrop"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "导入及射线放置",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "closedImport",
+            "geometryPlacement"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "属性、组件及错误恢复",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "longName",
+            "longComponent",
+            "reset",
+            "remove",
+            "errorDismiss"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "保存、关闭及重开",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/content-summary.json",
+          "fields": [
+            "saveReopen"
+          ]
+        },
+        {
+          "file": "debug/documents-summary.json",
+          "fields": [
+            "passed"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "运行预览及独立构建",
+      "configuration": "debug",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "debug/usability-summary.json",
+          "fields": [
+            "previewCameraRestore",
+            "sceneBytes"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "右键观察及出界释放",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "rightLook",
+            "outsideRelease"
+          ]
+        },
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "navigationDirections"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "飞行、加速、停止与失焦",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "flight",
+            "flightRelease",
+            "focusRelease"
+          ]
+        },
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "flight",
+            "focusRelease"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "大纲单击、双击与定位",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "singleOnlySelects",
+            "doubleFrames",
+            "fFrames"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "工具切换及文本归属",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "tools"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "世界、局部与多选变换",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/gizmo-summary.json",
+          "fields": [
+            "commit",
+            "singleUndo"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "取消及吸附",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/gizmo-summary.json",
+          "fields": [
+            "escape",
+            "snap",
+            "rotationSnap",
+            "scaleSnap"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "搜索、多选及拾取",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/selection-summary.json",
+          "fields": [
+            "filteredCtrl",
+            "filteredRange",
+            "blankClear"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "节点及层级制作",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "reparent",
+            "rootDrop"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "导入及射线放置",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "closedImport",
+            "geometryPlacement"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "属性、组件及错误恢复",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "longName",
+            "longComponent",
+            "reset",
+            "remove",
+            "errorDismiss"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "保存、关闭及重开",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "saveReopen"
+          ]
+        },
+        {
+          "file": "release/documents-summary.json",
+          "fields": [
+            "passed"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "运行预览及独立构建",
+      "configuration": "release",
+      "workflow": "exploration",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "previewCameraRestore",
+            "sceneBytes"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "右键观察及出界释放",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "rightLook",
+            "outsideRelease"
+          ]
+        },
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "navigationDirections"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "飞行、加速、停止与失焦",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "flight",
+            "flightRelease",
+            "focusRelease"
+          ]
+        },
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "flight",
+            "focusRelease"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "大纲单击、双击与定位",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "singleOnlySelects",
+            "doubleFrames",
+            "fFrames"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "工具切换及文本归属",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/native-summary.json",
+          "fields": [
+            "tools"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "世界、局部与多选变换",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/gizmo-summary.json",
+          "fields": [
+            "commit",
+            "singleUndo"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "取消及吸附",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/gizmo-summary.json",
+          "fields": [
+            "escape",
+            "snap",
+            "rotationSnap",
+            "scaleSnap"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "搜索、多选及拾取",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/selection-summary.json",
+          "fields": [
+            "filteredCtrl",
+            "filteredRange",
+            "blankClear"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "节点及层级制作",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "reparent",
+            "rootDrop"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "导入及射线放置",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "closedImport",
+            "geometryPlacement"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "属性、组件及错误恢复",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "longName",
+            "longComponent",
+            "reset",
+            "remove",
+            "errorDismiss"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "保存、关闭及重开",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/content-summary.json",
+          "fields": [
+            "saveReopen"
+          ]
+        },
+        {
+          "file": "release/documents-summary.json",
+          "fields": [
+            "passed"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    },
+    {
+      "task": "运行预览及独立构建",
+      "configuration": "release",
+      "workflow": "inspector",
+      "machinePassed": true,
+      "evidence": [
+        {
+          "file": "release/usability-summary.json",
+          "fields": [
+            "previewCameraRestore",
+            "sceneBytes"
+          ]
+        }
+      ],
+      "physicalKeyboardMouse": "NotExecuted"
+    }
+  ],
+  "sharedChecks": [
+    "workflow-supplement-summary.json",
+    "workspace-input-summary.json",
+    "delivery-summary.json"
+  ],
+  "physicalKeyboardMouse": "NotExecuted"
+}

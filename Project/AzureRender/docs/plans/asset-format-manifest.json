@@ -133,7 +133,7 @@
     {
       "id": "P8",
       "summary": "完整格式能力收口",
-      "status": "Ready",
+      "status": "Pending",
       "dependsOn": [
         "G23"
       ],
@@ -663,7 +663,7 @@
   "extensionsPlan": "docs/plans/2026-10-12-content-expansion.md",
   "currentInputFormatCount": 29,
   "currentOutputFormatCount": 20,
-  "recordedStatus": "FinalAcceptancePending",
+  "currentStageStatusSource": "docs/plans/stage-status.json",
   "currentStageStatuses": {
     "G17": "Ready",
     "G18": "Ready",
@@ -674,7 +674,7 @@
     "P7": "Ready",
     "G22": "Ready",
     "G23": "Ready",
-    "P8": "Ready"
+    "P8": "Pending"
   },
-  "currentStageStatusSource": "docs/plans/stage-status.json"
+  "recordedStatus": "FinalAcceptancePending"
 }

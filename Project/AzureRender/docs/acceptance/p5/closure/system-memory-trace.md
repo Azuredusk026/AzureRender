@@ -45,7 +45,7 @@ wpr -start VirtualAllocation -start ResidentSet -filemode -instancename AzureP5M
 程序正常退出后保存系统事件文件。
 
 ```powershell
-./build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/project.azureproject --game-actions build/p5-system-trace/input.json --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --gpu-timing --gpu-timing-output build/p5-system-trace/timing.json --runtime-report build/p5-system-trace/runtime.json
+./build/ninja-msvc-release/AzurePlayer.exe --project assets_public/exploration/project.azureproject --game-actions build/p5-system-trace/input.json --width 1920 --height 1080 --fixed-frame-step --smoke-frames 2100 --gpu-timing --gpu-timing-output build/p5-system-trace/timing.json
 wpr -stop build/p5-system-trace/memory.etl -instancename AzureP5Memory
 ```
 
@@ -53,6 +53,16 @@ wpr -stop build/p5-system-trace/memory.etl -instancename AzureP5Memory
 启动失败时保留错误，不操作其他追踪会话。
 命令参数已按本机 WPR 帮助核对。
 实际采集与覆盖见[系统追踪验收](system-trace-results.md)。
+
+本机候选另提供 `collect_system_trace.ps1`。
+本轮方法位于 `build/p5-system-trace-2026-10-11/`。
+启动条件包含来源一致和既有验收批次结束。
+脚本核验冻结来源后采集对应的负载。
+
+脚本为每次采集创建独立会话与目录。
+退出时保存自有会话的事件文件。
+观察、程序退出码及文件哈希一起保留。
+具体权限和采集结果按实际运行记录。
 
 ## 归因与门禁
 

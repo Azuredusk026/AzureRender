@@ -1,0 +1,376 @@
+{
+  "date": "2026-10-12",
+  "skills": [
+    "D:/Assigment/HIT/Note/skills/kb-authoring/SKILL.md",
+    "D:/Assigment/HIT/Note/skills/kb-structure-audit/SKILL.md",
+    "D:/Assigment/HIT/Note/skills/kb-fact-check/SKILL.md"
+  ],
+  "migrationMap": [
+    {
+      "source": "Project/AzureRender/README.md",
+      "snapshot": "Project/AzureRender/docs/history/2026-10-12-planning/readme-snapshot.md",
+      "currentRole": "历史证据索引；当前正文按读者问题组织"
+    },
+    {
+      "source": "Project/AzureRender/docs/index.md",
+      "snapshot": "Project/AzureRender/docs/history/2026-10-12-planning/index.md",
+      "currentRole": "历史证据索引；当前正文按读者问题组织"
+    },
+    {
+      "source": "Project/AzureRender/docs/plans/azure-engine-plan.md",
+      "snapshot": "Project/AzureRender/docs/history/2026-10-12-planning/azure-engine-plan.md",
+      "currentRole": "历史证据索引；当前正文按读者问题组织"
+    },
+    {
+      "source": "Project/AzureRender/docs/plans/2026-10-11-next-development.md",
+      "snapshot": "Project/AzureRender/docs/history/2026-10-12-planning/2026-10-11-next-development.md",
+      "currentRole": "历史证据索引；当前正文按读者问题组织"
+    }
+  ],
+  "documents": [
+    {
+      "path": "AGENT.md",
+      "mainQuestion": "如何约束仓库的自动开发与验收？",
+      "boundary_action": "KEEP",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "引擎开发与 AI 协作约束",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "仓库规则",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "0a3b3ebbf74e0052715ae850f7b131c7ab07e99c08c5027c7558e8466669d14b",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/README.md",
+      "mainQuestion": "从哪里了解和使用引擎？",
+      "boundary_action": "REWRITE",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "AzureRender 工程",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "项目入口",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "67e750095ba0b0cfe5d8908cfe4cc941a52ea75ee0e4315fa3040f21aa742262",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/index.md",
+      "mainQuestion": "文档应按什么顺序阅读？",
+      "boundary_action": "REWRITE",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "AzureRender 文档",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "文档导读",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "8050dca5f2932ad95ae3a6497034dd2de34243fd0ffd7d5bf5a0f5c3ca87bba7",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/project-status.md",
+      "mainQuestion": "引擎现在能做什么，还有什么待验？",
+      "boundary_action": "CREATE",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "项目现状",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "当前状态",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "3a017af328ecd859a009d480477d089a7370d71b4736fcae77dd8d1536fa6a38",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/development-workflow.md",
+      "mainQuestion": "自动执行何时推进、验收、提问和停止？",
+      "boundary_action": "CREATE",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "协作与验收",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "协作说明",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "3a249de181902ca68c2eb8371f71a073747839617eb4d34d70069cc398275824",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/plans/azure-engine-plan.md",
+      "mainQuestion": "哪些工作完成，下一批按什么顺序推进？",
+      "boundary_action": "SPLIT",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "开发总计划",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "优先级与阶段",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "ebbc5ba113fa2b2f5a046643863acff9c8774a687d2cbf85172f2e53d27b5b25",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/plans/2026-10-11-next-development.md",
+      "mainQuestion": "下一批具体交付什么，完成条件是什么？",
+      "boundary_action": "REWRITE",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "后续开发路线",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "后续任务",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "9c578a7106e85335c5a961b640df568d7643784fb47405693f282018d9906b27",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/runtime/scene-2d.md",
+      "mainQuestion": "怎样引用二维文档及使用图元接口？",
+      "boundary_action": "KEEP",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "二维内容与投影标签",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "二维使用说明",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "0e0ee3dff417f5f9746d9cf16d49af0112962a0335b2ca98eafd0f15e8e234e8",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/runtime/material-authoring.md",
+      "mainQuestion": "怎样创建、编辑、连接和赋值材质？",
+      "boundary_action": "KEEP",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "材质制作与槽位覆盖",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "材质使用说明",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "cf46a4f6c2a495d2f3de17bac92aebb7a29ffd4fe5d34af187cfe170dcd6825a",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    },
+    {
+      "path": "Project/AzureRender/docs/plans/2026-10-09-editor-productization.md",
+      "mainQuestion": "产品化专项的目标与实现边界是什么？",
+      "boundary_action": "KEEP",
+      "content_actions": [
+        "核对主问题、正文范围与标题",
+        "按读者任务整理正文或补齐入口"
+      ],
+      "title_review": {
+        "adopted": "编辑器产品化与基础制作实施计划",
+        "status": "已复读正文与标题"
+      },
+      "category_review": "专项规格",
+      "sectionOwnership": "当前状态归项目现状，执行约束归 AGENT.md，使用方法归对应指南，历史证据归原验收页",
+      "confidence": "高：来源与职责可核对；用户可读性反馈待实际阅读",
+      "sha256": "bf6515d524e41987dfb603cc3ef868772417c95d5b03471e47acb242ce12a340",
+      "quality_matrix": {
+        "Scope": "已复读：每页说明一个主问题，完整二维编辑器与程序图列为候选。",
+        "Structure": "已复读：导读、现状、顺序、规则、使用和历史证据分归属。",
+        "Depth": "按页面任务解释边界和下一动作，技术细节引用专项。",
+        "Implementation": "本轮修改仅为文档；运行结论来自阶段证据。",
+        "Evidence": "关键计数、提交和组件标识核对来源；短检、全回归和人工待项分列。",
+        "Writing Style": "已复读具体主语和自然段；10份活动文档句段检查通过。",
+        "Title": "已复读标题与正文职责，保留技术说明的既有标题。",
+        "Information Architecture": "状态、任务、规则各有主入口，历史快照保留索引。",
+        "Visuals": "表格用于比较能力、范围与待项；图片仅作展示，非当前验收证据。"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "position": "docs/project-status.md：检查证据",
+      "claim": "两配置各186项CPU全回归，最后路径修复各4项",
+      "conditions": "P9来源；最后局部复测单列",
+      "source": "docs/acceptance/p9/2026-10-12.md",
+      "verdict": "依据支持"
+    },
+    {
+      "id": "C2",
+      "position": "docs/project-status.md：能力表",
+      "claim": "29种输入与20种输出",
+      "conditions": "公共格式注册；每种语义按格式指南",
+      "source": "docs/plans/content-expansion-manifest.json",
+      "verdict": "条件结论"
+    },
+    {
+      "id": "C3",
+      "position": "docs/project-status.md：待项表",
+      "claim": "P8十五轮十一轮完整门禁通过",
+      "conditions": "G23冻结候选；四轮热状态失败",
+      "source": "docs/acceptance/p8/2026-10-12.md",
+      "verdict": "实践观察"
+    },
+    {
+      "id": "C4",
+      "position": "docs/runtime/scene-2d.md：接入项目",
+      "claim": "组件标识 azure.game-ui，资源字段 asset",
+      "conditions": "当前源码",
+      "source": "src/ecs/GameComponents.hpp:195",
+      "verdict": "依据支持"
+    },
+    {
+      "id": "C5",
+      "position": "docs/runtime/material-authoring.md：使用材质画布",
+      "claim": "展开Material graph，拖动布局，用参数列表选择数值输入",
+      "conditions": "当前桌面面板；纹理仍通过表单编辑",
+      "source": "src/editor/panels/MaterialAssetPanel.cpp",
+      "verdict": "依据支持"
+    },
+    {
+      "id": "C6",
+      "position": "docs/project-status.md：交付表",
+      "claim": "五项实现提交与阶段对应",
+      "conditions": "当前Git提交记录",
+      "source": "git log -5 --oneline",
+      "verdict": "依据支持"
+    }
+  ],
+  "checks": {
+    "styleFiles": 10,
+    "style": "passed",
+    "localLinkFiles": 14,
+    "localLinks": 384,
+    "localLinkErrors": [],
+    "siteBuild": "passed: python -m mkdocs build --strict, exit 0",
+    "runtimeTests": "not run: documentation scope",
+    "remainingSiteInfo": [
+      "既有角色研究页含一处缺失锚点的 INFO 提示；未纳入本轮正文改写。"
+    ],
+    "renderedPages": "4 key generated HTML pages checked for expected content"
+  },
+  "humanReadability": "尚未取得用户实际阅读反馈"
+}

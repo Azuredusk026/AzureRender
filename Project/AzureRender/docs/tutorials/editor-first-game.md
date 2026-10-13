@@ -22,11 +22,41 @@ python tools/create_editor_tutorial.py --output "D:/Games/My Exploration"
 
 ![工作区与制作入口](images/workspace.png)
 
+## 使用安装版创建模板项目
+
+从安装树根目录打开内置检视项目。
+
+```powershell
+./bin/AzureRender.exe --editor-project ./share/AzureRender/assets_public/scene_inspector/project.azureproject
+```
+
+从 `File → Projects...` 打开项目入口。
+选择 `Scene inspection` 或 `Playable game`。
+填写名称与父目录，点击 `Create project`。
+
+目标应为父目录下尚未存在的新子目录。
+后台创建完成后，工作区激活新项目。
+有未保存内容时，按提示保存、放弃或取消。
+项目入口细节见[项目工作区](../runtime/project-workspace.md)。
+
+制作空场景时，先选中模板中已有的根对象。
+按 Delete 清空对象，Ctrl+Z 可恢复模板内容。
+空场景中，大纲 Add 创建并选择根对象。
+选中对象后，Add 创建其子对象。
+
 ## 认识工作区
 
 顶部工具栏提供 Save、Move、Rotate、Scale 和运行控制。右侧 Scene Outliner 选择对象，Details 编辑组件。底部 Content Browser 浏览资源。左侧 Tools 或顶部 View 菜单显示工具面板。
 
-按住右键旋转相机，中键平移，滚轮缩放。Focus Selected 将镜头对准选中对象。操作柄端点可拖动，变换模式由工具栏选择。文本框内的按键由文本控件处理。
+按住右键进入环视与六向漂浮。
+WASD 移动，Q/E 升降，Shift 加速。
+右键期间滚轮调整漂浮速度。
+释放右键、Esc 或失焦后恢复常规输入。
+
+单击大纲选择对象，双击或 F 将镜头对准选择。
+非导航状态下，W/E/R 切换移动、旋转和缩放。
+操纵器端点可拖动，文本框按键由控件处理。
+具体参数与焦点规则见[视口导航](../runtime/viewport-navigation.md)。
 
 ![默认停靠布局](images/workspace.png)
 

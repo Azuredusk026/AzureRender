@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -713,16 +713,127 @@
       "requiredAcceptance": []
     },
     {
+      "id": "ED0",
+      "name": "源码审查与职责契约",
+      "status": "Complete",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/acceptance/ed0/2026-10-14.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED1",
+      "name": "基础创建、命名与碰撞策略",
+      "status": "Ready",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED0"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED2",
+      "name": "层级与对象操作",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED3",
+      "name": "组件生命周期与属性引用",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED4",
+      "name": "外部拖放与视口交互",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED3"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED5",
+      "name": "设置分层与统一工作区",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED4"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED6",
+      "name": "可选渲染特性与项目隔离",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED5"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "ED7",
+      "name": "制作集成与交付准备",
+      "status": "Pending",
+      "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
+      "checksPassed": false,
+      "dependsOn": [
+        "ED6"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-editor-generalization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
       "id": "P8",
       "name": "最终交付验收",
-      "status": "Ready",
-      "scope": "全部原有门禁与最终候选绑定",
+      "status": "Pending",
+      "scope": "全部原有门禁、本轮编辑器工作流与最终候选绑定",
       "checksPassed": false,
       "dependsOn": [
         "UI8",
         "U14",
         "G24",
-        "G14"
+        "G14",
+        "ED7"
       ],
       "evidence": [
         "docs/acceptance/p8/2026-10-13.md",
@@ -746,7 +857,8 @@
         "G23-audio",
         "P8-final",
         "UI8-input-ime",
-        "UI8-directory-causality"
+        "UI8-directory-causality",
+        "ED-workflow"
       ]
     }
   ],
@@ -894,6 +1006,13 @@
       "result": "pending",
       "transferEvidence": "docs/acceptance/ui8/2026-10-12.md",
       "source": "docs/acceptance/ui8/2026-10-12.md"
+    },
+    {
+      "id": "ED-workflow",
+      "originPhase": "ED7",
+      "ownerPhase": "P8",
+      "result": "notExecuted",
+      "transferEvidence": "docs/plans/2026-10-14-editor-generalization.md"
     }
   ],
   "mirrors": [
@@ -907,5 +1026,16 @@
   "acceptanceSources": [
     "docs/plans/p8-deferred-acceptance-manifest.json",
     "docs/plans/manual-review-manifest.json"
+  ],
+  "executionOrder": [
+    "ED0",
+    "ED1",
+    "ED2",
+    "ED3",
+    "ED4",
+    "ED5",
+    "ED6",
+    "ED7",
+    "P8"
   ]
 }

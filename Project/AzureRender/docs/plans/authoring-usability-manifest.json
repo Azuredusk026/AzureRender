@@ -447,10 +447,10 @@
     "finalAcceptancePhase": "P8"
   },
   "currentStageStatusSource": "docs/plans/stage-status.json",
-  "recordedStatus": "AutomatedAuthoringAndInteractionVerifiedPhysicalInputPending",
   "currentStageStatuses": {
     "U15": "Ready",
     "U16": "Ready",
     "P6": "Ready"
-  }
+  },
+  "recordedStatus": "AutomatedAuthoringAndInteractionVerifiedPhysicalInputPending"
 }

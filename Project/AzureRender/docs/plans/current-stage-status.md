@@ -70,7 +70,15 @@ Ready 表示依赖满足，可以开始执行。
 | R10 | 渲染扩展候选 | 待完成 | 候选规格与实施范围待落实。[记录](hazel-fermion-manifest.json) |
 | WF1 | 阶段状态与一致性检查 | 完成 | 本阶段交付。[记录](../acceptance/wf1/2026-10-12.md) |
 | WF2 | 验收执行队列与准备报告 | 完成 | 本阶段交付。[记录](../acceptance/wf2/2026-10-13.md) |
-| P8 | 最终交付验收 | Ready | 全部原有门禁与最终候选绑定。[记录](../acceptance/p8/2026-10-13.md) |
+| ED0 | 源码审查与职责契约 | 完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](../acceptance/ed0/2026-10-14.md) |
+| ED1 | 基础创建、命名与碰撞策略 | Ready | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED2 | 层级与对象操作 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED3 | 组件生命周期与属性引用 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED4 | 外部拖放与视口交互 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED5 | 设置分层与统一工作区 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED6 | 可选渲染特性与项目隔离 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| ED7 | 制作集成与交付准备 | 待完成 | 本轮开发交付及受影响短检查，正式验收归属 P8。[记录](2026-10-14-editor-generalization.md) |
+| P8 | 最终交付验收 | 待完成 | 全部原有门禁、本轮编辑器工作流与最终候选绑定。[记录](../acceptance/p8/2026-10-13.md) |
 
 ## 最终收尾
 
@@ -98,5 +106,6 @@ P8 完成前，项目的完整交付验收仍待完成。
 | P8-final | P8 | P8 | 未执行 |
 | UI8-input-ime | UI8 | P8 | 未执行 |
 | UI8-directory-causality | UI8 | P8 | 待验 |
+| ED-workflow | ED7 | P8 | 未执行 |
 
 详细步骤见[验收收尾流程](../acceptance/phase-closure.md)。

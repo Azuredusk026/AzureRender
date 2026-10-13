@@ -17,6 +17,10 @@
     {
       "id": "P4",
       "status": "Ready",
+      "machineStatus": "Verified",
+      "physicalKeyboardMouse": "NotExecuted",
+      "evidence": "../acceptance/p4/2026-10-08.md",
+      "completionCommit": "PendingPhysicalInput",
       "recordedStatus": "Active"
     }
   ],
@@ -33,7 +37,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX02",
@@ -47,7 +52,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX03",
@@ -61,7 +67,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX04",
@@ -75,7 +82,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX05",
@@ -89,7 +97,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX06",
@@ -103,7 +112,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX07",
@@ -117,7 +127,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX08",
@@ -135,7 +146,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX09",
@@ -153,7 +165,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX10",
@@ -171,7 +184,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX11",
@@ -189,7 +203,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX12",
@@ -207,7 +222,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX13",
@@ -225,7 +241,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX14",
@@ -243,7 +260,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX15",
@@ -261,7 +279,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX16",
@@ -279,7 +298,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u6/2026-10-08.md",
-      "commitPhase": "u6"
+      "commitPhase": "u6",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX17",
@@ -295,7 +315,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX18",
@@ -311,7 +332,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX19",
@@ -324,7 +346,8 @@
         "AzureRender.EditorSession"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX20",
@@ -340,7 +363,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX21",
@@ -356,7 +380,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX22",
@@ -372,7 +397,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX23",
@@ -388,7 +414,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX24",
@@ -404,7 +431,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX25",
@@ -420,7 +448,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX26",
@@ -436,7 +465,8 @@
         "AzureEditor.DocumentGuardGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX27",
@@ -452,7 +482,8 @@
         "AzureEditor.DocumentGuardGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX28",
@@ -466,7 +497,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX29",
@@ -480,7 +512,8 @@
         "AzureEditor.WorkspaceGpu"
       ],
       "evidence": "../acceptance/u5/2026-10-08.md",
-      "commitPhase": "u5"
+      "commitPhase": "u5",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX30",
@@ -496,7 +529,8 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX31",
@@ -509,11 +543,13 @@
         "AzureEditor.ContentWorkflow",
         "AzureEditor.TaskService",
         "AzureEditor.AssetWorkflow",
-        "AzureEditor.ContentGpu"
+        "AzureEditor.ContentGpu",
+        "AzureEditor.NativeInputGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
       "commitPhase": "u7",
-      "nativeDialogVerification": "PendingP4"
+      "nativeDialogVerification": "VerifiedP4",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     },
     {
       "id": "UX32",
@@ -523,13 +559,20 @@
       "phase": "U5/P4",
       "status": "PartiallyVerified",
       "verifiedPhases": [
-        "U5"
+        "U5",
+        "P4"
       ],
       "tests": [
         "AzureRender.EditorInputRouter",
         "AzureEditor.UsabilityGpu",
-        "AzureEditor.DocumentGuardGpu"
-      ]
+        "AzureEditor.DocumentGuardGpu",
+        "AzureEditor.NativeInputGpu",
+        "AzureEditor.WorkspaceGpu"
+      ],
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json",
+      "verificationScope": "MachineOnly",
+      "physicalKeyboardMouse": "NotExecuted",
+      "evidence": "../acceptance/p4/2026-10-08.md"
     },
     {
       "id": "UX33",
@@ -548,15 +591,16 @@
         "AzureEditor.ContentGpu"
       ],
       "evidence": "../acceptance/u7/2026-10-08.md",
-      "commitPhase": "u7"
+      "commitPhase": "u7",
+      "p4MachineEvidence": "../acceptance/p4/evidence/2026-10-08/tasks.json"
     }
   ],
+  "currentStageStatusSource": "docs/plans/stage-status.json",
   "currentStageStatuses": {
     "U5": "Complete",
     "U6": "Complete",
     "U7": "Complete",
     "P4": "Ready"
   },
-  "status": "Ready",
-  "currentStageStatusSource": "docs/plans/stage-status.json"
+  "status": "Ready"
 }

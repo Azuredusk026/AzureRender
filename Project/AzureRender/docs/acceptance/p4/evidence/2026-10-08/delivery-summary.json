@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "engine": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p4\\delivery\\run-1791412928031021400\\Moved Engine",
+  "installManifestSha256": "711d7ab70158b080b2c6ccafc7f19bfe37795ddf3235f40dc9cc1472f7e3c89f",
+  "packages": [
+    {
+      "workflow": "exploration",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p4\\delivery\\run-1791412928031021400\\Moved exploration",
+      "inputsHidden": true,
+      "isolatedEnvironment": true,
+      "result": {
+        "frames": 940,
+        "actions": 38,
+        "completionSeconds": 221.0,
+        "fixedSteps": 14085,
+        "restarts": 2,
+        "validationErrors": 0,
+        "released": true
+      },
+      "manifestSha256": "41b2f988a7cee1b68cb8b0aff45a851e415a7a039af051476724cb588646ee9a"
+    },
+    {
+      "workflow": "inspector",
+      "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p4\\delivery\\run-1791412928031021400\\Moved inspector",
+      "inputsHidden": true,
+      "isolatedEnvironment": true,
+      "result": {
+        "passed": true,
+        "released": true,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+      },
+      "manifestSha256": "4d699aa89baf5896c3ce830e313dccb88e5b192e365689788b76cdd0f1151257"
+    }
+  ]
+}

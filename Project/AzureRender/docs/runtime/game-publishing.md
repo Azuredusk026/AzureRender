@@ -131,6 +131,11 @@ python tools/run_playable_long_run.py `
 
 短时探针使用 `--probe --seconds 60`，结果登记为探针。正式验收要求连续运行至少 1800 秒。完整预算与结果见[可玩关卡性能与加载](playable-performance.md)和 [P1 验收](../acceptance/p1/2026-10-05.md)。
 
+探索发布包的后继平台使用实时路线长跑。
+工具为 `tools/run_platformer_long_run.py`。
+它核验跳跃、承载、金币、恢复与重复通关。
+命令和覆盖见[平台长跑入口](../acceptance/p5/closure/platformer-long-run.md)。
+
 游戏表现遵循 [项目编辑与游戏界面](editor-game-ui.md)的动画和界面能力边界。模板使用公开测试模型展示玩法链路。Android 状态为 Deferred。
 
 发布工具由项目自行实现，复用 AssetDatabase、Level、安装许可和 Player。Python 标准库承担文件复制、进程调用和 SHA-256 计算。

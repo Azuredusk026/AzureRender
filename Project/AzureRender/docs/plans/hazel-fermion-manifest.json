@@ -1265,6 +1265,7 @@
     "latestAutomaticEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md",
     "latestFinalGateEvidence": "docs/acceptance/p8/2026-10-12.md"
   },
+  "currentStageStatusSource": "docs/plans/stage-status.json",
   "currentStageStatuses": {
     "U8": "Complete",
     "U9": "Complete",
@@ -1281,6 +1282,5 @@
     "G14": "Complete",
     "R10": "Pending"
   },
-  "recordedStatus": "Active",
-  "currentStageStatusSource": "docs/plans/stage-status.json"
+  "recordedStatus": "Active"
 }

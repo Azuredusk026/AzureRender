@@ -3973,7 +3973,7 @@
     "sourceArchive": "current source files copied as exact bytes and checked against frozen build inputs",
     "interfaceDelivery": "interface-source-snapshots-and-schemas"
   },
-  "status": "Complete",
+  "currentStageStatusSource": "docs/plans/stage-status.json",
   "currentStageStatuses": {
     "F4": "Complete",
     "G8": "Complete",
@@ -3988,5 +3988,5 @@
     "G11": "Complete",
     "P3": "Complete"
   },
-  "currentStageStatusSource": "docs/plans/stage-status.json"
+  "status": "Complete"
 }

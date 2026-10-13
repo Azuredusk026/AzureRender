@@ -1,0 +1,10 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start 46: AzureEditor.EditService
+1/2 Test #46: AzureEditor.EditService ..........   Passed    0.12 sec
+    Start 47: AzureEditor.EditTransaction
+2/2 Test #47: AzureEditor.EditTransaction ......   Passed    0.59 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.72 sec

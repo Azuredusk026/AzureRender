@@ -35,8 +35,8 @@
       "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
       "owner": "设备环境与性能调查",
       "retryTrigger": "设备热状态改善或相关性能机制修复通过",
-      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-13/performance-status.json",
-      "currentAttempt": "NotExecutedAfterSharedEnvironmentFailure"
+      "currentAttempt": "NotExecutedAfterSharedEnvironmentFailure",
+      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-13/performance-status.json"
     },
     {
       "id": "P5-long-run",
@@ -51,8 +51,8 @@
       "repairEvidence": "docs/acceptance/p9/2026-10-12.md",
       "originalRaceAcceptance": "1800-second replay pending",
       "latestStandardResult": "passed",
-      "controllerRepair": "FocusCacheResynchronizedUnitTestsPassed",
-      "latestPlatformResult": "failed"
+      "latestPlatformResult": "failed",
+      "controllerRepair": "FocusCacheResynchronizedUnitTestsPassed"
     },
     {
       "id": "P5-delivery",

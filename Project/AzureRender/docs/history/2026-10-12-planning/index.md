@@ -1,0 +1,178 @@
+> 历史快照：2026-10-12 文档整理前的工作区内容。
+> 当前状态见[项目现状](../../project-status.md)。
+
+# AzureRender
+
+完整格式与最终交付见[P8 验收](../../acceptance/p8/2026-10-12.md)。
+实体操作、听感与制作效率见[集中复核表](../../acceptance/p8/manual-review.md)。
+历史原因及覆盖限制见[归因复核](../../acceptance/p8/historical-causality.md)。
+
+角色展示的采样与材质问题见[画面根由报告](../../research/2026-10-09-character-presentation-refinement.md)。
+完整执行步骤见[画面优化计划](../../plans/2026-10-09-character-presentation-refinement.md)。
+五段视频与验收见[展示验收](../../acceptance/character/2026-10-09-refinement.md)。
+
+引擎交付范围见[交付说明](../../runtime/engine-delivery.md)。
+两种项目的使用步骤见[复用教程](../../tutorials/engine-reuse.md)。
+
+交互体验步骤见[体验实施计划](../../plans/2026-10-07-editor-usability.md)。
+问题证据见[体验审查](../../research/2026-10-07-editor-usability.md)。
+
+编辑器产品化候选见[完整制作计划](../../plans/2026-10-09-editor-productization.md)。
+来源与分级见[Hazel 与 Fermion 调研](../../research/2026-10-09-hazel-fermion.md)。
+
+操作说明见[编辑器交互教程](../../tutorials/editor-interaction.md)。
+漂浮、六轴视图与辅助见[视口导航](../../runtime/viewport-navigation.md)。
+独立模拟与机构制作见[物理制作](../../runtime/physics-authoring.md)。
+场景文档、动画、脚本与 Prefab 见[内容制作](../../runtime/authoring-workflows.md)。
+探索路线与 Blender 见[环境制作](../../runtime/exploration-environment.md)。
+内容制作契约见[内容制作服务](../../runtime/content-workflows.md)。
+完整交互门禁见[P4 验收记录](../../acceptance/p4/2026-10-08.md)。
+
+AzureRender 提供原生 Vulkan 渲染核心、Windows 编辑器与独立 Player。公开探索项目包含角色、相机、交互和完整任务。资产、物理、Lua、动画、声音与游戏界面由引擎运行时管理。
+
+首次使用请阅读[构建与使用](../../getting-started.md)。制作关卡请阅读[从空关卡制作并发布游戏](../../tutorials/editor-first-game.md)。运行和交付见[探索关卡](../../runtime/exploration-gameplay.md)与[游戏发布](../../runtime/game-publishing.md)。
+
+![编辑器工作区与公开探索关卡](../../media/editor-workspace.png)
+
+公开场景由 Release 构建捕获。设备为 RTX 4060 Laptop，分辨率为 1920×1080。编辑器与探索场景采用 100 实体负载。
+
+
+## 能力总览
+
+[脚本服务](../../runtime/script-services.md)提供统一绑定与对象守卫。
+Lua 为默认后端，托管后端通过可选模块接入。
+使用步骤见[托管脚本教程](../../tutorials/managed-scripts.md)。
+
+[内容提案](../../runtime/content-proposals.md)提供可选模型接入。领域适配器校验预算、版本和引用。
+
+面板与用户偏好见[UI 与设置](../../runtime/ui-settings.md)。制作文档和生效渲染设置各自持有状态。
+
+验证入口见[观察与内容来源](../../runtime/observations-generation.md)。操作组合见[开发命令参考](../../reference/developer-cli.md)。
+
+编辑接口见[编辑操作与文档事务](../../runtime/edit-operations.md)。生产工具共享类型、版本与失败恢复规则。
+
+| 层级 | 当前实现 |
+| --- | --- |
+| Vulkan 宿主 | Instance、Validation、设备与 Queue、Swapchain、Render Pass、Pipeline、Descriptor、同步、查询池、资源销毁 |
+| 场景扩展 | `ISceneRenderer` 生命周期、能力声明、Registry、Shader Feature Catalog |
+| 公共图像管线 | HDR Scene Color、Depth、Normal、阴影贴图、Bloom、描边、Tone Mapping、最终 Present |
+| Character | glTF、蒙皮动画、材质分类、Toon Ramp、Face SDF、Hair KK/AO、PCSS、眉毛 Overlay |
+| Blackhole | 光线积分、吸积盘噪声、多普勒、Beaming、引力红移、双 History TAA |
+| 工具 | 编辑器、命令行 QA、确定性 PNG、GPU Timing JSON、图像比较、发布门禁 |
+| 游戏运行时 | UUID 资产、版本化关卡、Prefab、Jolt 物理、Lua 脚本与独立 Player |
+| 游戏表现与发布 | RmlUi、动画状态机、miniaudio、公开游戏模板与 Windows 游戏包 |
+
+## 公开探索项目
+
+![机器人侧面行走](../../media/robot-walk-side.png)
+
+公开机器人按角色速度驱动语义动画。WASD 控制方向，Shift 加速。
+
+![探索关卡与任务界面](../../media/exploration.png)
+
+探索关卡包含交互、收集、门、检查点和终点。运行入口见[探索关卡说明](../../runtime/exploration-gameplay.md)。
+
+## 开发路线
+
+[引擎实施计划](../../plans/2026-10-06-engine-evolution.md)安排全部 18 项借鉴。[架构调研](../../research/2026-10-06-gknextengine.md)提供源码和可行性依据。阶段依次建立公共契约、AI 原生编辑能力与专项原型。F4 至 P3 的功能与交付验收已完成。
+
+当前阶段入口为 [开发总计划](../../plans/azure-engine-plan.md)。F1 至 P1、F3、R6、G7、U2 和 P2 已完成。[角色与可玩关卡计划](../../plans/third-person-playable-plan.md)定义外观、动画、3C、玩法和工程验收。
+
+## 原生 Vulkan 的边界
+
+AzureRender 直接调用 Vulkan API 来管理资源和每一帧的执行。项目不依赖 Unreal、Unity、bgfx 或其他渲染框架。GLFW 只创建窗口和 Surface。Dear ImGui 提供编辑器控件。
+
+tinygltf 和 stb 解析资产，nlohmann/json 读取数据文件。Shader 使用 GLSL 编写，再由 Vulkan SDK 的 `glslc` 编译为 SPIR-V。
+
+因此，“原生 Vulkan 自研”描述的是渲染后端、场景架构和算法实现，而不是声称项目没有任何第三方依赖。
+
+## 系统概览
+
+```mermaid
+flowchart TB
+    CLI[CLI / .azscene / Editor] --> App[AzureRenderApp]
+    App --> Host[Vulkan Host]
+    Host --> Registry[Renderer Registry]
+    Registry --> Character[Character Renderer]
+    Registry --> Blackhole[Blackhole Renderer]
+    Registry --> Sample[Sample Renderer]
+    Character --> HDR[HDR Scene Color + Depth + Normal]
+    Blackhole --> HDR
+    Sample --> HDR
+    HDR --> Composite[Outline / Bloom / Grade / Tone Mapping]
+    Composite --> Swapchain[Swapchain / Capture / Present]
+    App --> QA[QA + GPU Timing + Manifest]
+```
+
+宿主一次只运行一个 Scene Renderer。新场景通过 Registry 注册，不需要修改主帧循环。场景从只读 `RenderContext` 取得宿主提供的 Vulkan 对象。它只释放自己创建的资源。
+
+## 两个场景
+
+### 风格化角色
+
+角色路径不直接套用统一的 PBR 材质。材质分类决定 Ramp、AO、镜面和轮廓。Face SDF 控制脸部阴影形状。
+
+Hair HN/P 提供发束法线和双层 Kajiya-Kay 高光。2048 阴影贴图配合 PCSS 生成软阴影。
+
+[阅读角色渲染原理](../../character-rendering.md)
+
+### 黑洞模拟
+
+黑洞路径在 Fragment Shader 中积分光线路径。射线会采样程序化吸积盘和环境背景。吸积盘包含旋转体密度、周期噪声和稀疏结构。
+
+多普勒频移、相对论增亮和引力红移让盘面两侧呈现明显差异。双 History 时间累积负责稳定采样噪声。
+
+[阅读黑洞模拟原理](../../blackhole-rendering.md)
+
+## 阅读路线
+
+引擎化开发：
+
+1. [Azure Engine 开发总计划](../../plans/azure-engine-plan.md)
+2. [开发与运行时文档规范](../../documentation-standard.md)
+3. [运行时渲染图](../../runtime/render-graph.md)
+4. [脚本与玩法](../../runtime/scripts-gameplay.md)
+
+第一次运行项目：
+
+1. [构建与使用](../../getting-started.md)
+2. [资产、场景与编辑器](../../assets-and-editor.md)
+3. [参数与接口参考](../../reference.md)
+
+理解实现：
+
+1. [渲染器架构与 Vulkan 实现](../../architecture.md)
+2. [风格化角色渲染](../../character-rendering.md)
+3. [黑洞模拟](../../blackhole-rendering.md)
+
+继续开发或准备发布：
+
+1. [开发、测试与发布](../../development-and-release.md)
+2. [参数与接口参考](../../reference.md)
+
+## 当前状态与边界
+
+- Character 和 Blackhole 均可通过同一可执行文件运行，并支持确定性捕获。
+- Renderer SDK 当前是进程内 C++ 接口，不承诺跨 DLL 的二进制 ABI。
+- `.azscene` 当前 Schema 为 v4，`RenderSettings` 当前 Schema 为 v9。
+- 黑洞是视觉导向的 Schwarzschild 近似模拟，不是科研级广义相对论求解器。
+- 私有角色用于本机美术验收，公共 CI 和作品集必须使用可再分发资产。
+- Android、动态插件 ABI 和完整资产生产管线不属于 `0.1.0-rc1` 的发布承诺。
+
+文档只描述当前可验证实现。历史阶段计划、旧验收记录和源 DOCX 保留在仓库归档或 Git 历史中，不作为当前接口依据。
+
+编辑器交互步骤见[交互教程](../../tutorials/editor-interaction.md)。
+内容类型、引用和任务见[内容制作服务](../../runtime/content-workflows.md)。
+
+平台跳跃与连续通关见[平台关卡](../../runtime/platformer-gameplay.md)。
+
+产品化验收与人工操作记录见[P5 验收](../../acceptance/p5/2026-10-10.md)。
+输入与对象创建修复见[U16 记录](../../acceptance/u16/2026-10-10.md)。
+真实制作与移动交付见[P6 验收表](../../acceptance/p6/2026-10-10.md)。
+
+后续执行步骤见[P5 收口与用户体验计划](../../plans/2026-10-10-p5-closure-and-user-experience.md)。
+路线先完成性能与人工门禁，再推进制作体验优化。
+计划状态为 Active，验收状态按阶段证据维护。
+
+资产格式后续阶段见[拓展计划](../../plans/2026-10-11-asset-format-expansion.md)。
+当前制作与验收完成后按该路线连续执行。
