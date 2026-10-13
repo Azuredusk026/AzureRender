@@ -466,7 +466,7 @@ void main() {
             - styleMask * mix(0.04, 0.13, material.styleParameters.y),
         0.0,
         1.0);
-    vec4 faceSdfSample = texture(AZ_TEX_FACE_SDF, textureCoordinate);
+    vec4 faceSdfSample = vec4(0.0);
     float faceSdfEligible = material.materialClass == 2U
         ? materialFeatureEnabled(4U)
         : 0.0;
@@ -475,6 +475,9 @@ void main() {
         * faceSdfEligible;
     if (qaEffectMode == 8 && qaEffectDisabled) {
         faceSdfEnabled = 0.0;
+    }
+    if (faceSdfEnabled > 0.0) {
+        faceSdfSample = texture(AZ_TEX_FACE_SDF, textureCoordinate);
     }
     float faceCoordinate = camera.faceSdfParameters.w > 0.5
         ? 1.0 - faceSdfSample.r
