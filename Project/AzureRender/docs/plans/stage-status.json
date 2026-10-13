@@ -825,8 +825,8 @@
     {
       "id": "P8",
       "name": "最终交付验收",
-      "status": "Active",
-      "scope": "全部原有门禁、本轮编辑器工作流与最终候选绑定",
+      "status": "Ready",
+      "scope": "开发与机器批次已整理，实体操作及其余正式条件待满足",
       "checksPassed": false,
       "dependsOn": [
         "UI8",
@@ -860,7 +860,8 @@
         "UI8-input-ime",
         "UI8-directory-causality",
         "ED-workflow"
-      ]
+      ],
+      "remainingEvidence": "docs/acceptance/p8/evidence/2026-10-14/execution.json"
     }
   ],
   "acceptance": [
@@ -870,7 +871,8 @@
       "ownerPhase": "P8",
       "result": "pending",
       "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
-      "source": "docs/plans/p8-deferred-acceptance-manifest.json"
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P5-performance",
@@ -878,15 +880,19 @@
       "ownerPhase": "P8",
       "result": "failed",
       "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
-      "source": "docs/plans/p8-deferred-acceptance-manifest.json"
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+      "evidence": "docs/acceptance/p8/evidence/2026-10-14/performance-summary.json"
     },
     {
       "id": "P5-long-run",
       "originPhase": "P5",
       "ownerPhase": "P8",
-      "result": "failed",
+      "result": "passed",
       "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
-      "source": "docs/plans/p8-deferred-acceptance-manifest.json"
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+      "evidence": "docs/acceptance/p8/evidence/2026-10-14/long-run-final-status.json"
     },
     {
       "id": "P5-delivery",
@@ -894,7 +900,8 @@
       "ownerPhase": "P8",
       "result": "pending",
       "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
-      "source": "docs/plans/p8-deferred-acceptance-manifest.json"
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "UX-008-causality",
@@ -902,7 +909,8 @@
       "ownerPhase": "P8",
       "result": "pending",
       "transferEvidence": "docs/plans/2026-10-12-p5-deferred-to-p8.md",
-      "source": "docs/plans/p8-deferred-acceptance-manifest.json"
+      "source": "docs/plans/p8-deferred-acceptance-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P4-input",
@@ -910,7 +918,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P5-D-gameplay",
@@ -918,7 +927,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P5-D-audio",
@@ -926,7 +936,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "U15-baseline",
@@ -934,7 +945,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "U16-recovery",
@@ -942,7 +954,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P6-authoring",
@@ -950,7 +963,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "G20-audio",
@@ -958,7 +972,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "U17-transfer",
@@ -966,7 +981,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P7-exchange",
@@ -974,7 +990,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "G23-audio",
@@ -982,7 +999,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "P8-final",
@@ -990,7 +1008,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/plans/manual-review-manifest.json",
-      "source": "docs/plans/manual-review-manifest.json"
+      "source": "docs/plans/manual-review-manifest.json",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "UI8-input-ime",
@@ -998,7 +1017,8 @@
       "ownerPhase": "P8",
       "result": "notExecuted",
       "transferEvidence": "docs/acceptance/ui8/2026-10-12.md",
-      "source": "docs/acceptance/ui8/2026-10-12.md"
+      "source": "docs/acceptance/ui8/2026-10-12.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "UI8-directory-causality",
@@ -1006,14 +1026,16 @@
       "ownerPhase": "P8",
       "result": "pending",
       "transferEvidence": "docs/acceptance/ui8/2026-10-12.md",
-      "source": "docs/acceptance/ui8/2026-10-12.md"
+      "source": "docs/acceptance/ui8/2026-10-12.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     },
     {
       "id": "ED-workflow",
       "originPhase": "ED7",
       "ownerPhase": "P8",
       "result": "notExecuted",
-      "transferEvidence": "docs/plans/2026-10-14-editor-generalization.md"
+      "transferEvidence": "docs/plans/2026-10-14-editor-generalization.md",
+      "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
     }
   ],
   "mirrors": [

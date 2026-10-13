@@ -1,14 +1,14 @@
 # AzureRender 工程
 
-当前任务为 P8 集中验收。
+ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 开发任务见[编辑器实施计划](docs/plans/2026-10-14-editor-generalization.md)。
-全部开发交付后执行 P8 集中验收。
+本轮机器批次已收尾，实体与历史条件待满足。
 
 阶段状态见[当前状态](docs/plans/current-stage-status.md)。
 阶段收尾与验收顺序见[执行说明](docs/acceptance/phase-closure.md)。
 
-工作区迁移与本轮检查见[交付结果](docs/acceptance/ui8/2026-10-12.md)。
-Debug 与 Release 各 187 项 CPU 回归通过。
+工作区迁移记录见[UI8 交付结果](docs/acceptance/ui8/2026-10-12.md)。
+本轮检查见[P8 收尾记录](docs/acceptance/p8/2026-10-14.md)。
 
 相机、变换与场景视口见[视口指南](docs/tutorials/viewport-workspace.md)。
 
@@ -79,7 +79,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 
 `src/` 保存模块实现，`shaders/` 保存着色器，`tests/` 保存契约测试。`tools/` 保存构建与验收工具，`docs/` 保存使用说明、计划和证据。架构入口为[引擎基础](docs/runtime/engine-foundation.md)和[渲染器架构](docs/architecture.md)。
 
-最近一轮证据见[P9 集成验收](docs/acceptance/p9/2026-10-12.md)。延期条件见[P8 清单](docs/plans/p8-deferred-acceptance-manifest.json)。阶段交付记录见[变更记录](CHANGELOG.md)，整理前的索引见[历史快照](docs/history/2026-10-12-planning/readme-snapshot.md)。
+本轮证据见[P8 集中收尾](docs/acceptance/p8/2026-10-14.md)。延期条件见[P8 清单](docs/plans/p8-deferred-acceptance-manifest.json)。阶段交付记录见[变更记录](CHANGELOG.md)，整理前的索引见[历史快照](docs/history/2026-10-12-planning/readme-snapshot.md)。
 
 ## 资产与许可
 

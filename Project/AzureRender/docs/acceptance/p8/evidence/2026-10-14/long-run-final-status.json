@@ -1,0 +1,16 @@
+[
+  {
+    "workload": "standard",
+    "exitCode": 0,
+    "evidence": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-14\\standard-long-run-final",
+    "runtimeHash": "2921c4a07f5cf25999c558214a221b6dc1487b204e293ec8cda024c8c0dcfe3b",
+    "packageManifestHash": "57da4ff3c54927237fa7205e1a9c74e6549f068f848a0303a4d1f499ac71cbd3"
+  },
+  {
+    "workload": "platformer",
+    "exitCode": 0,
+    "evidence": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-14\\platformer-long-run-final",
+    "runtimeHash": "2921c4a07f5cf25999c558214a221b6dc1487b204e293ec8cda024c8c0dcfe3b",
+    "packageManifestHash": "d0ea46308684f2f21d5cf8a72805db7a2860737d2fd8bef835c0410a5fd5317a"
+  }
+]

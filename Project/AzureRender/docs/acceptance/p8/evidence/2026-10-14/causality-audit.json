@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-14",
+  "task": "P8.2",
+  "inputs": [
+    {
+      "path": "docs/acceptance/p5/closure/system-trace-results.md",
+      "sha256": "d63ace8501671d2170ee5e08644f3a960a94429a6af0b612343f25f0fea94e37",
+      "bytes": 4197,
+      "currentSha256": "d63ace8501671d2170ee5e08644f3a960a94429a6af0b612343f25f0fea94e37",
+      "unchanged": true
+    },
+    {
+      "path": "docs/acceptance/p5/closure/native-memory-trace.md",
+      "sha256": "08ae1d54f833df714038462126e2422d2df26d78639097a49e6919e865300850",
+      "bytes": 3143,
+      "currentSha256": "08ae1d54f833df714038462126e2422d2df26d78639097a49e6919e865300850",
+      "unchanged": true
+    },
+    {
+      "path": "docs/acceptance/p5/closure/pagefault-trace-results.md",
+      "sha256": "406b16c7b990c79ffbcf58b5bdd705e8125ae8c0a3aac71454c5805c4802c8d9",
+      "bytes": 4589,
+      "currentSha256": "406b16c7b990c79ffbcf58b5bdd705e8125ae8c0a3aac71454c5805c4802c8d9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/acceptance/p5/closure/software-candidate-2026-10-11.md",
+      "sha256": "4ba923d6ed46dbe573ef290b020393247ae4932a3b2c5de4016fd64377f7e76e",
+      "bytes": 8122,
+      "currentSha256": "4ba923d6ed46dbe573ef290b020393247ae4932a3b2c5de4016fd64377f7e76e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/acceptance/ui4/evidence/manifest.json",
+      "sha256": "ea3cde43a162bb76adf679245b6c3894ae1fd14d8683e6c3bcbb2be53298ae3c",
+      "bytes": 5394,
+      "currentSha256": "ea3cde43a162bb76adf679245b6c3894ae1fd14d8683e6c3bcbb2be53298ae3c",
+      "unchanged": true
+    },
+    {
+      "path": "docs/acceptance/ui8/evidence/manifest.json",
+      "sha256": "73470d4b253eee3bdf35851c3a833ac16acee3623f4369c8f187a46beca7e7d8",
+      "bytes": 8963,
+      "currentSha256": "73470d4b253eee3bdf35851c3a833ac16acee3623f4369c8f187a46beca7e7d8",
+      "unchanged": true
+    },
+    {
+      "path": "build/p5-system-trace-2026-10-11/player-lifetime-analysis.json",
+      "sha256": "c4561f817bc5731d59bbc22d91a65b2a5246e06f2d087047de97c69762536ccf",
+      "bytes": 46231,
+      "currentSha256": "c4561f817bc5731d59bbc22d91a65b2a5246e06f2d087047de97c69762536ccf",
+      "unchanged": true
+    }
+  ],
+  "items": [
+    {
+      "id": "P5-causality",
+      "result": "pending",
+      "observation": "Known virtual allocation coverage and one NVIDIA-resident region verified; historical over-budget workload not reproduced in traces.",
+      "missing": "A trace reproducing the original growth, with heap/mapping ownership and time-aligned residency.",
+      "retryTrigger": "Current formal batch reproduces working-set growth; then capture affected workload once."
+    },
+    {
+      "id": "UX-008-causality",
+      "result": "pending",
+      "observation": "Original target recreation passed. Original failure recorded AccessDenied at rename; no contemporaneous handle or ACL snapshot.",
+      "missing": "Handle owner, file-operation trace, or ACL state at the actual rename failure.",
+      "retryTrigger": "Production project.create reproduces AccessDenied; capture failing target and open handles."
+    },
+    {
+      "id": "UI8-directory-causality",
+      "result": "pending",
+      "observation": "Debug initial project loading accounted for about 158 seconds. Current Debug and Release pass the original 180-second budget. Regex microbenchmark excludes it as the main source.",
+      "missing": "Per-operation filesystem/resource timings from the historical timeout.",
+      "retryTrigger": "Original ContentDirectoryScale exceeds 180 seconds again; profile project loading with matched fixture and storage conditions."
+    }
+  ],
+  "previousAudit": "docs\\acceptance\\p8\\evidence\\2026-10-13\\causality-audit.json",
+  "currentObservation": "Fresh Unicode authoring succeeds; original AccessDenied and timeout scenes have no additional historical capture."
+}

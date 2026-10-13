@@ -1,0 +1,50 @@
+[
+  {
+    "task": "ui-hints-debug-build",
+    "exitCode": 0
+  },
+  {
+    "task": "ui-hints-debug-tests",
+    "exitCode": 0
+  },
+  {
+    "task": "ui-hints-release-build",
+    "exitCode": 0
+  },
+  {
+    "task": "ui-hints-release-tests",
+    "exitCode": 0
+  },
+  {
+    "task": "refresh-review-install",
+    "exitCode": 0
+  },
+  {
+    "task": "gui-delivery",
+    "exitCode": 0
+  },
+  {
+    "task": "material-authoring",
+    "exitCode": 0
+  },
+  {
+    "task": "2d-delivery",
+    "exitCode": 0
+  },
+  {
+    "task": "refresh-install",
+    "exitCode": 0
+  },
+  {
+    "task": "delivery-resume",
+    "exitCode": 0
+  },
+  {
+    "task": "focus-probe",
+    "exitCode": 1
+  },
+  {
+    "task": "focus-probe-retest",
+    "exitCode": 1
+  }
+]

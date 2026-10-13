@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "install": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\p8-final-2026-10-14\\Moved Engine",
+  "root": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure GUI 中文 2lgzafl1",
+  "package": "C:\\Users\\23587\\AppData\\Local\\Temp\\Azure GUI 中文 2lgzafl1\\移动后的 GUI 发布",
+  "guiCreate": true,
+  "guiReopen": true,
+  "guiEditSave": true,
+  "unsavedCloseCancel": true,
+  "guiPublish": true,
+  "movedNativeEntry": true,
+  "sourceProjectUnavailable": true,
+  "input": "production Dear ImGui replay",
+  "physicalInput": "not performed"
+}

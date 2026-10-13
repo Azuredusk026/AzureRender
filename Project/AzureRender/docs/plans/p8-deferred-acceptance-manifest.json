@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "P8ExecutedFinalGatesPending",
+  "status": "MachineBatchRecordedFinalConditionsPending",
   "authorization": "当前会话要求将 P5 剩余条件转入 P8 并连续推进",
   "executionPhase": "P8",
   "blocksIntermediateProgress": false,
@@ -25,50 +25,71 @@
           "evidence": "docs/acceptance/g18/evidence/2026-10-12/debug-final-cpu.log.gz"
         }
       ],
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json"
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/causality-audit.json",
+      "previousCandidateEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "previousCandidateStatus": "HistoricalCauseUnconfirmed"
     },
     {
       "id": "P5-performance",
       "originPhase": "P5-C",
-      "summary": "五类负载各三轮正式性能，完整门禁十一轮通过",
-      "status": "Measured11Of15Passed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "summary": "五类负载各三轮正式性能，按原预算核对",
+      "status": "Measured10Of15ThermalGateFailed",
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/performance-summary.json",
       "owner": "设备环境与性能调查",
       "retryTrigger": "设备热状态改善或相关性能机制修复通过",
-      "currentAttempt": "NotExecutedAfterSharedEnvironmentFailure",
-      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-13/performance-status.json"
+      "currentAttempt": "failed",
+      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-14/performance-summary.json",
+      "previousCandidateEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "previousCandidateStatus": "Measured11Of15Passed",
+      "automaticResult": "failed",
+      "currentAttemptDiagnosis": "docs/acceptance/p8/evidence/2026-10-14/performance-diagnosis.json",
+      "previousCandidateAttempt": {
+        "currentAttempt": "NotExecutedAfterSharedEnvironmentFailure",
+        "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-13/performance-status.json"
+      }
     },
     {
       "id": "P5-long-run",
       "originPhase": "P5-E",
       "summary": "标准与平台各实际运行一千八百秒",
-      "status": "RealRunsObservedFinalGatesFailed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-13/long-run-manifest.json",
+      "status": "FormalLongRunsPassed",
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/long-run-final-status.json",
       "toolCleanupStatus": "BoundedCleanupVerified",
       "runtimeShutdownStatus": "NotificationReentrancyFixedShortChecksPassed",
       "owner": "平台与音频生命周期",
       "retryTrigger": "连续十秒 GPU 利用率不超过 10%，验证失焦恢复并执行平台 1800 秒长跑",
       "repairEvidence": "docs/acceptance/p9/2026-10-12.md",
-      "originalRaceAcceptance": "1800-second replay pending",
+      "originalRaceAcceptance": "1800-second formal replay passed",
       "latestStandardResult": "passed",
-      "latestPlatformResult": "failed",
-      "controllerRepair": "FocusCacheResynchronizedUnitTestsPassed"
+      "latestPlatformResult": "passed",
+      "controllerRepair": "FocusCacheResynchronizedUnitTestsPassed",
+      "previousCandidateEvidence": "docs/acceptance/p8/evidence/2026-10-13/long-run-manifest.json",
+      "previousCandidateStatus": "RealRunsObservedFinalGatesFailed",
+      "previousStandardResult": "passed",
+      "previousPlatformResult": "failed",
+      "previousOriginalRaceAcceptance": "1800-second replay pending",
+      "currentAttempt": "passed",
+      "currentAttemptEvidence": "docs/acceptance/p8/evidence/2026-10-14/long-run-final-status.json"
     },
     {
       "id": "P5-delivery",
       "originPhase": "P5-E",
       "summary": "最终同源六包、双设备、移动及隔离运行",
       "status": "AutomaticVerifiedPhysicalInputPending",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-13/manifest.json",
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/delivery.json",
       "automaticResult": "passed",
-      "candidateBinding": "docs/acceptance/p8/evidence/2026-10-13/delivery-provenance.json"
+      "candidateBinding": "docs/acceptance/p8/evidence/2026-10-14/delivery-provenance.json",
+      "previousCandidateEvidence": "docs/acceptance/p8/evidence/2026-10-13/manifest.json",
+      "previousCandidateStatus": "AutomaticVerifiedPhysicalInputPending"
     },
     {
       "id": "UX-008-causality",
       "originPhase": "U16",
       "summary": "原创建目标的历史失败因果说明",
       "status": "HistoricalCauseUnconfirmed",
-      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json"
+      "latestEvidence": "docs/acceptance/p8/evidence/2026-10-14/causality-audit.json",
+      "previousCandidateEvidence": "docs/acceptance/p8/evidence/2026-10-12/manifest.json",
+      "previousCandidateStatus": "HistoricalCauseUnconfirmed"
     }
   ],
   "budgets": {
@@ -89,8 +110,11 @@
     ]
   },
   "finalCandidateBindingRequired": true,
-  "latestAcceptance": "docs/acceptance/p8/2026-10-12.md",
-  "latestSourceHash": "e92878225aabd0f98e3e0ed25b246f38af512a69f751818de0c1503212a9bd7e",
+  "latestAcceptance": "docs/acceptance/p8/2026-10-14.md",
+  "latestSourceHash": "4f4bacb2824de564d68f90de1f517f52f1807c67b332e2eaab293176e2b567d2",
   "verificationPolicy": "docs/plans/azure-engine-plan.md",
-  "cleanupEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md"
+  "cleanupEvidence": "docs/acceptance/p8/2026-10-12-bounded-cleanup.md",
+  "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json",
+  "previousSourceHash": "e92878225aabd0f98e3e0ed25b246f38af512a69f751818de0c1503212a9bd7e",
+  "measuredSourceHash": "1179fe9b3e86d3bd48bab78990e33febfd84a7b55a1096287848c48e158fafe2"
 }
