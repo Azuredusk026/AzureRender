@@ -4,6 +4,7 @@
 #include "reflection/Registry.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
+#include "editor/properties/ObjectReferences.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
@@ -52,10 +53,15 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         drawMaterialSlots(*node);
         if(panelContext.selection().selected().size()==1)drawPhysicsAuthoring(*node);
         ImGui::BeginDisabled(panelContext.selection().selected().size()>1);
-        ImGui::TextUnformatted("预制体来源");auto prefab=node->prefabSource;ImGui::SetNextItemWidth(-1);
-        if(ui::inputText("##prefab",prefab,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.prefab-source",{{"value",prefab}},"details-prefab");
-        ImGui::TextUnformatted("实例来源");auto instance=node->instanceOf;ImGui::SetNextItemWidth(-1);
-        if(ui::inputText("##instance",instance,ImGuiInputTextFlags_EnterReturnsTrue))session_->edit("node.instance",{{"value",instance}},"details-instance");
+        if(view.isProject())for(const auto& link:objectReferences(session_->context(),*node)){
+            ImGui::PushID(link.at("label").get<std::string>().c_str());
+            ImGui::TextUnformatted(link.at("label").get<std::string>().c_str());
+            ui::statusText(link.at("id").get<std::string>().c_str(),link.at("valid").get<bool>()?ui::StatusKind::Neutral:ui::StatusKind::Warning);
+            if(ui::button("定位资源",{ui::ButtonVariant::Default,false,!link.at("valid").get<bool>()}))session_->edit("reference.reveal",{{"kind","asset"},{"id",link.at("id")}});
+            if(!link.at("message").get<std::string>().empty())ui::resultMessage(link.at("message").get<std::string>(),true);
+            ImGui::PopID();
+        }
+        if(!node->instanceOf.empty()){ImGui::TextUnformatted("预制体内对象标识（只读）");ImGui::TextWrapped("%s",node->instanceOf.c_str());}
         ImGui::EndDisabled();
     }
     const auto owners=panelContext.selection().selected();
@@ -64,14 +70,6 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         if(owners.size()>1)ui::statusText((std::to_string(owners.size())+" 个对象 · 共享组件").c_str(),ui::StatusKind::Info);
         std::vector<std::string> types{"azure.transform"};
         if(view.isProject()) {
-            ImGui::BeginDisabled(owners.size()>1);
-            if(ImGui::BeginCombo("添加组件","选择类型")) {
-                for(const auto& [type,descriptor]:runtimeComponentRegistry().metadata().types()) {
-                    (void)descriptor;
-                    if(type!="azure.transform"&&type!="azure.renderable"&&ImGui::Selectable(type.c_str()))session_->edit("component.add",{{"type",type}});
-                }ImGui::EndCombo();
-            }
-            ImGui::EndDisabled();
             for(const auto& [type,descriptor]:runtimeComponentRegistry().metadata().types()) {
                 (void)descriptor;if(type!="azure.transform"&&type!="azure.renderable")types.push_back(type);
             }
@@ -79,10 +77,11 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         for(const auto& type:types) {
             const auto fields=PropertyEditorRegistry::selection(view,owners,type);if(fields.empty())continue;
             ImGui::PushID(type.c_str());
-            const bool open=ImGui::CollapsingHeader(type=="azure.transform"?"变换":type.c_str(),type=="azure.transform"?ImGuiTreeNodeFlags_DefaultOpen:0);
+            const auto description=runtimeComponentRegistry().describe(type);
+            const bool open=ImGui::CollapsingHeader(description.at("label").get<std::string>().c_str(),type=="azure.transform"?ImGuiTreeNodeFlags_DefaultOpen:0);
             observeWidget("component."+type);
             if(ImGui::BeginPopupContextItem("Component actions")) {
-                if(type!="azure.transform"&&ImGui::MenuItem("Remove component",nullptr,false,owners.size()==1))session_->edit("component.remove",{{"type",type}});
+                if(description.at("removable").get<bool>()&&ImGui::MenuItem("移除组件",nullptr,false,owners.size()==1))session_->edit("component.remove",{{"type",type}});
                 observeWidget("component.remove."+type);ImGui::EndPopup();
             }
             if(open)for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties) {
@@ -133,6 +132,30 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
                 for(const auto& error:session_->feedback().report())if(error.at("source")=="component.batch-field"&&error.at("message").get<std::string>().find(field.name)!=std::string::npos)ui::resultMessage(error.at("message").get<std::string>(),true);
                 ImGui::PopID();
             }ImGui::PopID();
+        }
+        if(view.isProject()){
+            ImGui::Separator();ImGui::BeginDisabled(owners.size()!=1);
+            if(ui::button("添加组件"))ImGui::OpenPopup("Add component");observeWidget("component.add");
+            if(ImGui::BeginPopup("Add component")){
+                ui::searchField("##Component search","搜索名称、类型或分类",componentFilter_);
+                std::map<std::string,std::vector<nlohmann::json>> groups;
+                for(const auto& entry:runtimeComponentRegistry().metadata().types()){
+                    const auto info=runtimeComponentRegistry().describe(entry.first);
+                    if(!info.at("removable").get<bool>()||!session_->context().componentData(owners.front(),entry.first).is_null())continue;
+                    const auto search=info.at("label").get<std::string>()+" "+entry.first+" "+info.at("category").get<std::string>();
+                    if(componentFilter_.PassFilter(search.c_str()))groups[info.at("category").get<std::string>()].push_back(info);
+                }
+                std::string add;
+                for(const auto& group:groups){ImGui::TextDisabled("%s",group.first.c_str());for(const auto& info:group.second){
+                    bool compatible=true;for(const auto& conflict:info.at("conflicts"))if(!session_->context().componentData(owners.front(),conflict.get<std::string>()).is_null())compatible=false;
+                    ImGui::BeginDisabled(!compatible);
+                    if(ImGui::Selectable((info.at("label").get<std::string>()+"##"+info.at("type").get<std::string>()).c_str()))add=info.at("type");
+                    observeWidget("component.add."+info.at("type").get<std::string>());ImGui::EndDisabled();
+                    if(!compatible&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("与现有组件冲突；请使用单独的对象。");
+                }}
+                ImGui::EndPopup();if(!add.empty())session_->edit("component.add",{{"type",add}});
+            }
+            ImGui::EndDisabled();
         }
         if(session_->references().active()) {
             ImGui::Separator();ui::statusText("从层级、视口或资源面板选择兼容引用；Esc 取消。",ui::StatusKind::Info);

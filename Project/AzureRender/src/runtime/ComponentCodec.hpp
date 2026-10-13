@@ -5,6 +5,7 @@ inline void validateComponents(const nlohmann::json& components) {
     if (!components.is_object()) throw std::invalid_argument("Components must be a type-keyed object");
     const auto& registry = runtimeComponentRegistry();
     for (const auto& item : components.items()) registry.validate(item.key(), item.value());
+    registry.validateComposition(components);
 }
 inline void installComponents(ecs::World& world, ecs::Entity entity, const nlohmann::json& components) {
     validateComponents(components);

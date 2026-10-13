@@ -37,7 +37,7 @@ void EditorContext::reparentNode(const std::string& id,const std::string& parent
 }
 void EditorContext::removeGameplayComponent(const std::string& type) {
     if(!selectedNode())throw std::invalid_argument("Component removal requires a selection");
-    if(type=="azure.transform"||type=="azure.renderable")throw std::invalid_argument("This component is required by the scene node");
+    if(!runtimeComponentRegistry().describe(type).at("removable").get<bool>())throw std::invalid_argument("This component is required by the scene node");
     runtimeComponentRegistry().metadata().type(type);
     auto data=runtimeComponents().at(selectedNode()->id);if(!data.contains(type))throw std::invalid_argument("Node lacks component: "+type);
     data.erase(type);validateComponentReferences(*selectedNode(),data,scene_);beginEdit();components_[selectedNode()->id]=std::move(data);rebuildEntities();

@@ -14,6 +14,11 @@ struct ComponentBinding {
     std::function<Json()> defaults;
     std::function<void(const Json&)> validate;
 };
+struct ComponentPresentation {
+    std::string label, category;
+    std::vector<std::string> requires, conflicts;
+    bool removable=true;
+};
 class ComponentRegistry final {
 public:
     explicit ComponentRegistry(reflection::Registry metadata = {})
@@ -67,10 +72,16 @@ public:
     void validate(const std::string& type, const Json& envelope) const;
     void validateWrite(const std::string& type, const std::string& field, const Json& value, bool toolAccess = true) const;
     Json describe(const std::string& type) const;
+    void setPresentation(const std::string& type,ComponentPresentation value) {
+        if(sealed_)throw std::logic_error("Component registration is sealed");
+        binding(type);presentations_[type]=std::move(value);
+    }
+    void validateComposition(const Json& components) const;
 private:
     const ComponentBinding& binding(const std::string& type) const;
     std::shared_ptr<reflection::Registry> metadata_;
     std::map<std::string, ComponentBinding> bindings_;
+    std::map<std::string, ComponentPresentation> presentations_;
     bool sealed_=false;
 };
 ComponentRegistry makeRuntimeComponentRegistry();

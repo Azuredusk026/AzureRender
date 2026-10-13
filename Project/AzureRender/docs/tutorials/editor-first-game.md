@@ -206,3 +206,12 @@ python tools/test_editor_workspace.py --executable build/ninja-msvc-release/Azur
 基础几何资源保存在项目生成目录。
 Cube、Sphere 和 Capsule 带有对应碰撞形状。
 Empty 用于组织层级，Torus 由用户配置碰撞。
+
+在属性底部点击添加组件，可搜索名称和分类。
+列表只显示尚未添加的组件，冲突项显示为禁用。
+组件标题右键菜单提供移除操作。
+支持启用状态的组件在字段中显示启用开关。
+
+模型和预制体来源提供资源定位按钮。
+预制体内部标识用于说明来源，按只读信息展示。
+组件引用通过兼容列表、拖放或选取按钮修改。

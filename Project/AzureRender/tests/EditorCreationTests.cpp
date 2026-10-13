@@ -19,6 +19,9 @@ int main(int argc,char** argv){
         auto id=create("empty");require(context->selectedNode()->name=="Empty0","Empty gets a readable name");
         require(session.selection().consumeReveal(),"Creation must reveal its selected object in the hierarchy");
         require(context->componentData(id,"azure.rigid-body").is_null(),"Empty must have no implicit collider");
+        const auto sourceBefore=context->documentContent();
+        require(!session.edit("node.prefab-source",{{"value","made-up-prefab"}}),"Project provenance cannot be forged by editing a text field");
+        require(context->documentContent()==sourceBefore,"Invalid provenance preserves the document");
         auto cube=create("cube");require(context->selectedNode()->name=="Cube0"&&context->selectedNode()->visible,"Cube must be named and visible");
         require(!loadGltfAsset(context->assets().resolveReference(context->selectedNode()->resourceId).u8string()).vertices.empty(),"Created geometry must actually load");
         require(context->componentData(cube,"azure.rigid-body").at("shape")=="box","Cube must use box collision");

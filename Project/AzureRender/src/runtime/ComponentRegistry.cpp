@@ -53,10 +53,40 @@ Json ComponentRegistry::describe(const std::string& type) const {
             {"tooltip", property.tooltip}, {"readOnly", property.readOnly}, {"toolVisible", property.toolVisible},
             {"unit",property.unit},{"precision",property.precision},{"batchEditable",property.batchEditable},
             {"reference",property.reference},{"assetTypes",property.assetTypes},{"referenceDefault",property.referenceDefault}});
-    return {{"type", type}, {"id", descriptor.id}, {"version", descriptor.version}, {"properties", properties}};
+    const auto found=presentations_.find(type);
+    const auto info=found==presentations_.end()?ComponentPresentation{type,"扩展"}:found->second;
+    std::string enabled,visible;
+    for(const auto& field:descriptor.properties)if(field.kind==reflection::Kind::Boolean){
+        if(field.name=="enabled")enabled=field.name;
+        if(field.name=="visible")visible=field.name;
+    }
+    return {{"type", type}, {"id", descriptor.id}, {"version", descriptor.version}, {"properties", properties},
+        {"label",info.label},{"category",info.category},{"requires",info.requires},{"conflicts",info.conflicts},
+        {"removable",info.removable},{"multiple",false},{"enabledField",enabled},{"visibleField",visible}};
+}
+void ComponentRegistry::validateComposition(const Json& components) const {
+    for(const auto& component:components.items()){
+        const auto info=describe(component.key());
+        for(const auto& required:info.at("requires"))if(!components.contains(required.get<std::string>()))
+            throw std::invalid_argument(component.key()+": missing component "+required.get<std::string>());
+        for(const auto& conflict:info.at("conflicts"))if(components.contains(conflict.get<std::string>()))
+            throw std::invalid_argument(component.key()+": incompatible component "+conflict.get<std::string>());
+    }
 }
 ComponentRegistry makeRuntimeComponentRegistry() {
     ComponentRegistry result(reflection::makeRuntimeRegistry()); registerGeneratedComponents(result);
+    result.setPresentation("azure.transform",{"变换","场景",{},{},false});
+    result.setPresentation("azure.renderable",{"渲染可见性","场景",{},{},false});
+    result.setPresentation("azure.rigid-body",{"刚体","物理",{}, {"azure.character"}});
+    result.setPresentation("azure.character",{"角色控制器","物理",{}, {"azure.rigid-body"}});
+    result.setPresentation("azure.hinge",{"铰链约束","物理"});
+    result.setPresentation("azure.third-person-camera",{"第三人称相机","场景"});
+    result.setPresentation("azure.animator",{"动画播放器","呈现"});
+    result.setPresentation("azure.audio-source",{"音频源","呈现"});
+    result.setPresentation("azure.game-ui",{"游戏界面文档","呈现"});
+    result.setPresentation("azure.script",{"脚本","行为"});
+    for(const auto& entry:std::vector<std::pair<std::string,std::string>>{{"interactable","交互目标"},{"collectible","收集物"},{"door","门状态"},{"checkpoint","检查点"},{"task-state","任务状态"}})
+        result.setPresentation("azure."+entry.first,{entry.second,"应用行为"});
     result.addValidation("azure.rigid-body",[](const Json& value){
         game::RigidBody body;body.shape=value.at("shape");body.radius=value.at("radius");body.halfHeight=value.at("halfHeight");body.halfExtent=value.at("halfExtent");body.dynamic=value.at("dynamic");body.kinematic=value.at("kinematic");body.trigger=value.at("trigger");body.mesh=value.at("mesh");validateRigidBody(body);
     });

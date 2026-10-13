@@ -206,8 +206,7 @@ nlohmann::json EditorContext::componentData(const std::string& node,const std::s
 }
 void EditorContext::validateComponentReferences(const SceneNode& node,const nlohmann::json& data,const SceneDocument& scene)const {
     validateComponents(data);
-    if(data.contains("azure.character") && data.contains("azure.rigid-body"))
-        throw std::invalid_argument("Node "+node.id+": character and rigid-body require separate nodes");
+    runtimeComponentRegistry().validateComposition(data);
     for(const auto& component:data.items())for(const auto& field:runtimeComponentRegistry().metadata().type(component.key()).properties){
         if(field.reference.empty()||!component.value().at("data").contains(field.name))continue;
         const auto reference=component.value().at("data").at(field.name).get<std::string>();if(reference.empty())continue;
@@ -239,8 +238,8 @@ void EditorContext::validateComponentReferences(const SceneNode& node,const nloh
     }
 }
 void EditorContext::addGameplayComponent(const std::string& type){
-    if(!selectedNode())return;
-    if(!componentData(selectedNode()->id,type).is_null())return;
+    if(!selectedNode())throw std::invalid_argument("Component addition requires a selection");
+    if(!componentData(selectedNode()->id,type).is_null())throw std::invalid_argument("Node already has component: "+type);
         auto data=runtimeComponents().at(selectedNode()->id);data[type]=runtimeComponentRegistry().defaults(type);
         for(const auto& field:runtimeComponentRegistry().metadata().type(type).properties)
             if(field.referenceDefault=="selected-node")data[type]["data"][field.name]=selectedNode()->id;

@@ -361,6 +361,7 @@ void EditorContext::setSelectedNodeVisible(const bool visible) {
 }
 
 void EditorContext::setSelectedNodePrefab(std::string prefabSource) {
+    if(isProject())throw std::invalid_argument("Prefab provenance is read-only; use prefab placement and authoring operations");
     SceneNode* node = selectedNode();
     if (node == nullptr || node->prefabSource == prefabSource) return;
     beginEdit();
@@ -368,6 +369,7 @@ void EditorContext::setSelectedNodePrefab(std::string prefabSource) {
 }
 
 void EditorContext::setSelectedNodeInstance(std::string instanceOf) {
+    if(isProject())throw std::invalid_argument("Prefab local identity is read-only; use prefab placement and authoring operations");
     SceneNode* node = selectedNode();
     if (node == nullptr || node->instanceOf == instanceOf) return;
     beginEdit();
