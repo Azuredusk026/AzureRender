@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+#include <chrono>
 #ifdef _WIN32
 #define NOMINMAX
 #include <windows.h>
@@ -19,7 +20,7 @@ std::size_t privateMemoryBytes(){
 using namespace azurerender;
 void check(bool value) { if(!value)throw std::runtime_error("Script runtime contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data){std::ofstream(p)<<data;}
-int main(){auto root=std::filesystem::temp_directory_path()/"azure_script_tests";std::filesystem::remove_all(root);
+int main(){auto root=std::filesystem::temp_directory_path()/("azure_script_tests_"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
  try {
   Project::create(root,"Scripts");auto project=Project::load(root/"project.azureproject");
   write(root/"assets/good.lua",R"(function update(dt) self:set('azure.transform','translation',{3,4,5}) end
