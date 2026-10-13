@@ -94,6 +94,16 @@ void EditorToolbar::status(EditorSession& s,float dpi) {
     else if(c.importing()){ImGui::SameLine();ImGui::Text("Import %.0f%%",c.importProgress()*100);}
     for(const auto& task:s.tasks().report())if(task.at("state")=="running"){ImGui::SameLine();ImGui::Text("%s %.0f%%",task.at("source").get<std::string>().c_str(),task.at("progress").get<float>()*100);break;}
     if(!s.lastError().empty()){ImGui::SameLine();ui::resultMessage(s.lastError(),true);}
+    const char* help="操作提示";
+    const float helpWidth=ImGui::CalcTextSize(help).x;
+    const float contentRight=ImGui::GetItemRectMax().x-ImGui::GetWindowPos().x;
+    if(contentRight+helpWidth+24*dpi<ImGui::GetWindowWidth()){
+        ImGui::SameLine(ImGui::GetWindowWidth()-helpWidth-16*dpi);ImGui::TextDisabled("%s",help);
+        if(ImGui::IsItemHovered())ImGui::SetTooltip("右键拖动：飞行视角\nWASD：移动，E/Q：升降\nShift：加速，右键加滚轮：飞行速度\nAlt 加左键：环绕，中键：平移，滚轮：缩放\n%s / %s / %s：移动 / 旋转 / 缩放\nF：聚焦选择，Ctrl+S：保存，Ctrl+P：运行或停止",
+            s.settings().get("editor.shortcuts.move").get<std::string>().c_str(),
+            s.settings().get("editor.shortcuts.rotate").get<std::string>().c_str(),
+            s.settings().get("editor.shortcuts.scale").get<std::string>().c_str());
+    }
     ImGui::End();ImGui::PopStyleVar();
 }
 }

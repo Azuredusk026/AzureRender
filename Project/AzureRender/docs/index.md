@@ -45,4 +45,4 @@ AzureRender 提供 Windows 编辑器、原生 Vulkan 渲染核心与独立 Playe
 
 最近的内容扩展与修复见[P9 验收](acceptance/p9/2026-10-12.md)。正式性能、长跑与人工待项见[P8 验收](acceptance/p8/2026-10-12.md)和[集中复核表](acceptance/p8/manual-review.md)。历史诊断按候选来源查询，[计划快照](history/2026-10-12-planning/azure-engine-plan.md)保留整理前的证据索引。
 
-本批候选、检查结果与待项见[P8 执行记录](acceptance/p8/2026-10-13.md)。
+本批候选、检查结果与待项见[P8 执行记录](acceptance/p8/2026-10-14.md)。

@@ -146,7 +146,6 @@ void ImGuiEditorLayer::drawWorkspace() {
             if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
             observeWidget(std::string("tool.")+id);
         }
-        ImGui::Separator();ImGui::TextWrapped("Hold RMB: fly / look\nWASD: move | E/Q: up/down\nShift: accelerate\nRMB + wheel: flight speed\nAlt + LMB: orbit\nMMB: pan | Wheel: zoom\nW/E/R: move/rotate/scale\nF / outliner double click: frame\nView: axes, projection, helpers\nCtrl+S: save\nCtrl+P: play / stop");
         ImGui::End();
     }
 }
