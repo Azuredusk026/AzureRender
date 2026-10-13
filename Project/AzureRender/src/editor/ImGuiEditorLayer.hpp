@@ -190,6 +190,7 @@ private:
     std::uint64_t assetPreviewHandle_=0;
     std::string assetPreviewTitle_;
     bool assetPreviewRequested_=false;
+    bool focusObjectName_=false;
     std::string primitiveKind_="cube",primitiveName_="Primitive.glb";
     std::string materialName_="Material.azurematerial",materialAsset_;
     bool materialDialogRequested_=false;

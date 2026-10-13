@@ -510,6 +510,7 @@ add_library(AzureEditor STATIC
     src/editor/content/AssetExportService.cpp
     src/editor/content/NodePresetRegistry.cpp
     src/editor/content/SceneNaming.cpp
+    src/editor/ui/ObjectCreationMenu.cpp
     src/editor/content/BuiltinGeometryService.cpp
     src/editor/AssetImportJob.cpp
     src/editor/EditorSession.cpp

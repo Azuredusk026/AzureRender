@@ -1,6 +1,6 @@
 # AzureRender 文档
 
-下一项任务为 ED2。
+下一项任务为 ED3。
 开发任务见[编辑器实施计划](plans/2026-10-14-editor-generalization.md)。
 全部开发交付后执行 P8 集中验收。
 

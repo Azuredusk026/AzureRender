@@ -44,6 +44,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
         ImGui::TextUnformatted("名称");
         auto name=node->name;
         ImGui::SetNextItemWidth(-1);
+        if(focusObjectName_){ImGui::SetKeyboardFocusHere();focusObjectName_=false;}
         if(ui::inputText("##name",name))session_->edit("node.rename",{{"value",name}},"details-name");
         if(ImGui::IsItemDeactivatedAfterEdit())session_->edit("history.end-edit");
         observeWidget("name");

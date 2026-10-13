@@ -12,6 +12,7 @@ public:
     std::string active() const;
     const std::string& anchor() const noexcept{return anchor_;}
     bool consumeReveal(){const bool result=reveal_;reveal_=false;return result;}
+    void requestReveal() noexcept {reveal_=true;}
 private:const EditorContext& context_;EditService& edits_;
     std::string anchor_;
     bool reveal_=false;

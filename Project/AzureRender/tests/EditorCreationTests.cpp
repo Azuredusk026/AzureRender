@@ -17,6 +17,7 @@ int main(int argc,char** argv){
             require(bool(result),"Registered creation preset must succeed");return context->selectedNode()->id;
         };
         auto id=create("empty");require(context->selectedNode()->name=="Empty0","Empty gets a readable name");
+        require(session.selection().consumeReveal(),"Creation must reveal its selected object in the hierarchy");
         require(context->componentData(id,"azure.rigid-body").is_null(),"Empty must have no implicit collider");
         auto cube=create("cube");require(context->selectedNode()->name=="Cube0"&&context->selectedNode()->visible,"Cube must be named and visible");
         require(!loadGltfAsset(context->assets().resolveReference(context->selectedNode()->resourceId).u8string()).vertices.empty(),"Created geometry must actually load");
@@ -31,8 +32,17 @@ int main(int argc,char** argv){
         const auto parent=create("empty");context->setGizmoTranslation({3,0,0});const auto child=create("cube",parent);
         require(context->selectedNode()->parentId==parent,"Child preset preserves requested hierarchy");
         const auto before=context->documentContent();const auto history=context->undoCount();
+        require(!session.edit("node.reparent",{{"id",parent},{"parent",child}}),"Hierarchy cycles must be rejected");
+        require(context->documentContent()==before&&context->undoCount()==history,"Rejected cycle preserves document and history");
+        require(bool(session.edit("node.rename",{{"value","子对象"}})),"Rename uses the shared operation");
+        require(context->selectedNode()->id==child,"Rename preserves stable identity");
+        require(bool(session.edit("node.duplicate")),"Context action duplicates through the service");
+        require(context->selectedNode()->id!=child&&context->selectedNode()->parentId==parent,"Duplicate has independent identity and preserves parent");
+        require(bool(session.edit("history.undo")),"Duplicate is undoable");
+        require(session.selection().consumeReveal(),"Undo requests hierarchy reveal");
+        const auto afterUndo=context->documentContent();const auto afterUndoHistory=context->undoCount();
         require(!session.edit("node.create-preset",{{"preset","cube"},{"parent","missing"}}),"Invalid parent is rejected");
-        require(context->documentContent()==before&&context->undoCount()==history,"Failed creation protects document and history");
+        require(context->documentContent()==afterUndo&&context->undoCount()==afterUndoHistory,"Failed creation protects document and history");
         context->save();auto reopened=EditorContext::openProject(root/"project.azureproject");
         require(std::any_of(reopened->scene().nodes.begin(),reopened->scene().nodes.end(),[&](const auto& node){return node.id==child&&node.parentId==parent;}),"Creation hierarchy survives save and reopen");
         std::cout<<"Real geometry, naming, colliders, hierarchy, rollback and reopen passed\n";

@@ -195,3 +195,14 @@ python tools/test_editor_workspace.py --executable build/ninja-msvc-release/Azur
 ```
 
 验收报告记录实际耗时、构建结果与截图。人工实体键鼠复核需要可交互的前台窗口。公开资源遵守工程许可，私有素材按本机授权范围使用。
+
+## 基础对象与层级菜单
+
+在层级的创建菜单选择 Cube、Sphere 或其他预设。
+节点右键菜单可以创建子对象、复制及删除。
+重命名会定位到属性面板的名称输入框。
+新对象自动选中，其祖先路径自动展开。
+
+基础几何资源保存在项目生成目录。
+Cube、Sphere 和 Capsule 带有对应碰撞形状。
+Empty 用于组织层级，Torus 由用户配置碰撞。

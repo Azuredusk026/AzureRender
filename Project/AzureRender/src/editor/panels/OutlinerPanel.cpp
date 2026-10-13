@@ -1,6 +1,7 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "editor/ui/Widgets.hpp"
 #include "editor/ui/UiScopes.hpp"
+#include "editor/ui/ObjectCreationMenu.hpp"
 #include "reflection/Registry.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
@@ -30,29 +31,30 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     if(!ImGui::Begin("Scene Outliner###outliner",workspace_.open("outliner"))){ImGui::End();return;}
     ui::searchField("##Search objects","搜索对象名称或标识",outlinerFilter_);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
+    std::function<void()> pending;
     if (ui::button("添加")) {
-        session_->edit("node.add");
+        pending=[this]{session_->edit("node.add");};
     }
     observeWidget("outliner.add");
-    ui::nextToolbarItem(ui::buttonWidth("操作"));
-    if(ui::button("操作"))ImGui::OpenPopup("Node actions");
-    observeWidget("outliner.actions");
-    if(ImGui::BeginPopup("Node actions")) {
-        if(ImGui::MenuItem("Delete",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.delete");
-        observeWidget("outliner.delete");
-        if(ImGui::MenuItem("Duplicate",nullptr,false,view.selectedNode()!=nullptr))session_->edit("node.duplicate");
-        observeWidget("outliner.duplicate");
-        if(ImGui::MenuItem("Export subtree",nullptr,false,view.isProject()&&view.selectedNode()&&!session_->context().dirty())){exportRequest_={{"node",view.selectedNode()->id}};exportDialogRequested_=true;}observeWidget("outliner.export");
+    ui::nextToolbarItem(ui::buttonWidth("创建"));
+    if(ui::button("创建"))ImGui::OpenPopup("Create root");
+    if(ImGui::BeginPopup("Create root")){
+        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};},[&](const auto& id){observeWidget(id);});
         ImGui::EndPopup();
     }
     if (nodes.empty()) {
+        if(ImGui::BeginPopupContextWindow("Empty hierarchy",ImGuiPopupFlags_MouseButtonRight|ImGuiPopupFlags_NoOpenOverItems)){
+            ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndPopup();
+        }
         ui::emptyState("场景中没有对象","使用添加按钮创建对象。");
         ImGui::End();
+        if(pending)pending();
         return;
     }
     std::string reveal;
     if(panelContext.selection().consumeReveal()) {
         reveal=panelContext.selection().active();
+        if(!reveal.empty())openNodeIds_.insert(reveal);
         auto parent=reveal;
         while(!parent.empty()) {
             auto it=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.id==parent;});
@@ -72,6 +74,23 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     }
     ImGui::Separator();ImGui::BeginChild("hierarchy-list",{0,0});
     const auto dragItem=[&](const SceneNode& node) {
+        if(ImGui::BeginPopupContextItem("Object actions")){
+            const auto id=node.id;
+            const auto select=[this,id]{session_->selection().set({id});};
+            if(ImGui::MenuItem("重命名","Details"))pending=[this,select]{select();workspace_.setVisible("inspector",true);focusObjectName_=true;ImGui::SetWindowFocus("Details###inspector");};
+            if(ImGui::MenuItem("聚焦对象","F"))pending=[this,select]{select();session_->edit("viewport.frame-selection");};
+            const bool writable=!session_->playing()&&!session_->building();
+            if(ImGui::MenuItem("复制","Ctrl+D",false,writable))pending=[this,select]{select();session_->edit("node.duplicate");};
+            if(ImGui::MenuItem("删除","Delete",false,writable))pending=[this,select]{select();session_->edit("node.delete");};
+            if(ImGui::BeginMenu("创建子对象",writable)){
+                ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset,id]{session_->edit("node.create-preset",{{"preset",preset},{"parent",id}});};});ImGui::EndMenu();
+            }
+            if(ImGui::BeginMenu("创建根对象",writable)){
+                ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndMenu();
+            }
+            if(ImGui::MenuItem("导出子树",nullptr,false,writable&&view.isProject()&&!session_->context().dirty()))pending=[this,id]{exportRequest_={{"node",id}};exportDialogRequested_=true;};
+            ImGui::EndPopup();
+        }
         if(ImGui::BeginDragDropSource()) {
             ImGui::SetDragDropPayload("AZURE_NODE",node.id.c_str(),node.id.size()+1);
             ImGui::TextUnformatted(node.name.c_str());ImGui::EndDragDropSource();
@@ -133,10 +152,14 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             ImGui::SameLine();ImGui::TextDisabled("%s",nodes[index].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
     }else drawNode(drawNode,"");
+    if(ImGui::BeginPopupContextWindow("Hierarchy creation",ImGuiPopupFlags_MouseButtonRight|ImGuiPopupFlags_NoOpenOverItems)){
+        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndPopup();
+    }
     ImGui::EndChild();
     if(!referenceCandidate.empty())session_->edit("reference.deliver",{{"kind","node"},{"id",referenceCandidate}});
-    if(drop)session_->edit("node.reparent",*drop);
     ImGui::End();
+    if(drop)session_->edit("node.reparent",*drop);
+    if(pending)pending();
 }
 
 
