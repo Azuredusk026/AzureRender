@@ -217,6 +217,19 @@ class PlatformerScenario:
             self.event('complete',frame=state['frame'],counts=self.counts)
             self.oldRevision=state['levelRevision'];self.pulse(82,now);self.transition('restart',now)
     def finalize(self,resources,warm_frame):
+        pending=[row for row in resources if row['committed'] and row['revision'] not in self.revisions]
+        if pending:
+            assert len(pending)==1 and self.phase in ('restart','loading'), 'Unowned shutdown transition'
+            row=pending[0]
+            assert row['revision']==self.oldRevision+1 and not row['loading'], 'Invalid shutdown transition revision'
+            assert row['frame']==max(r['frame'] for r in resources if r['committed']), 'Shutdown transition must be the final commit'
+            assert self.oldRevision in self.revisions, 'Shutdown transition lacks its previous identity'
+            if self.phase=='restart':
+                reference=self.revisions[self.oldRevision];self.counts['restarts']+=1
+            else:
+                reference=self.desired;self.counts['switches']+=self.oldReference!=reference
+            self.revisions[row['revision']]=reference
+            self.shutdownTransition=dict(frame=row['frame'],revision=row['revision'],reference=reference,phase=self.phase)
         groups={}
         for row in resources:
             if row['frame']<=warm_frame+240 or row['loading'] or row['committed']:continue
@@ -227,6 +240,7 @@ class PlatformerScenario:
         by_level={name:{key:max(r[key] for r in rows)/min(r[key] for r in rows)-1
             for key in ('buffers','images','bufferBytes','imageBytes')} for name,rows in groups.items()}
         return dict(**self.counts,controllerErrors=self.errors,liveObservation=True,courseCoins=self.courseCoins,
+            shutdownTransition=getattr(self,'shutdownTransition',None),
             sameLevelResidencyGrowth=by_level,revisionReferences=self.revisions,
             residencyGrowth={key:max(row[key] for row in by_level.values()) for key in next(iter(by_level.values()))})
     def close(self):

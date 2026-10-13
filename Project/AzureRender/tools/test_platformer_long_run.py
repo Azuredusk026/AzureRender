@@ -295,4 +295,35 @@ class LiveFocusRecovery(unittest.TestCase):
         h._update(observedFocus['seconds'])
         self.assertEqual(h.counts['startFallRecoveries'],0);self.assertEqual(h.counts['mandatoryLandings'],0)
 
+class ShutdownTransitionAccounting(unittest.TestCase):
+    def harness(self, phase='restart'):
+        h=PlatformerScenario();h.phase=phase;h.oldRevision=24
+        h.oldReference=h.course;h.desired=h.exploration
+        h.revisions={24:h.course};h.event=lambda *args,**fields:None
+        rows=[dict(frame=9840,revision=24,loading=False,committed=False,
+                   buffers=84,images=323,bufferBytes=22497392,imageBytes=330748416),
+              dict(frame=9913,revision=25,loading=False,committed=True,
+                   buffers=84,images=323,bufferBytes=22497392,imageBytes=330748416)]
+        return h,rows
+    def test_restart_committed_during_shutdown_is_accounted(self):
+        h,rows=self.harness();result=h.finalize(rows,0)
+        self.assertEqual(result['restarts'],1)
+        self.assertEqual(result['revisionReferences'][25],h.course)
+    def test_requested_level_committed_during_shutdown_is_accounted(self):
+        h,rows=self.harness('loading');result=h.finalize(rows,0)
+        self.assertEqual(result['switches'],1)
+        self.assertEqual(result['revisionReferences'][25],h.exploration)
+    def test_unowned_shutdown_commit_is_rejected(self):
+        h,rows=self.harness('walk')
+        with self.assertRaises(AssertionError):h.finalize(rows,0)
+    def test_repeated_finalization_preserves_exact_counts(self):
+        h,rows=self.harness();h.finalize(rows,0);result=h.finalize(rows,0)
+        self.assertEqual(result['restarts'],1)
+    def test_finalization_uses_receipt_after_route_journal_is_closed(self):
+        import io
+        h,rows=self.harness();h.event=PlatformerScenario.event.__get__(h)
+        h.journal=io.StringIO();h.journal.close()
+        result=h.finalize(rows,0)
+        self.assertEqual(result['shutdownTransition']['frame'],9913)
+
 if __name__=='__main__':unittest.main()
