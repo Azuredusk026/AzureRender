@@ -1,4 +1,5 @@
 #include "runtime/EngineSettings.hpp"
+#include "rhi/PresentationPolicy.hpp"
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #if AZURE_WITH_EDITOR
@@ -353,11 +354,8 @@ VkSurfaceFormatKHR AzureRenderApp::chooseSurfaceFormat(
 }
 
 VkPresentModeKHR AzureRenderApp::choosePresentMode(
-    const std::vector<VkPresentModeKHR>& presentModes) {
-    return std::find(presentModes.begin(), presentModes.end(), VK_PRESENT_MODE_MAILBOX_KHR)
-            != presentModes.end()
-        ? VK_PRESENT_MODE_MAILBOX_KHR
-        : VK_PRESENT_MODE_FIFO_KHR;
+    const std::vector<VkPresentModeKHR>& presentModes, bool synchronized) {
+    return azurerender::rhi::selectPresentMode(presentModes, synchronized);
 }
 
 VkExtent2D AzureRenderApp::chooseExtent(

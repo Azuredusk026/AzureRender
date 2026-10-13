@@ -165,6 +165,7 @@ def run(executable,project,output,editor=False,stress=False,warmup=300,samples=1
             'physics':stats(physics),'initialDevice':initial,'environment':environment,'peakWorkingSetBytes':peak,
             'allocator':data['allocator'],'submission':data['submission'], 'samples':samples,'warmup':warmup,
             'complexity':{key:data[key] for key in ('uniqueMeshes','sceneTriangles','skinnedVertices','transparentTriangles','jointCapacity','vertexCapacity')},
+            'framePacing':data.get('framePacing'),
             'sceneExtent':[data['sceneWidth'],data['sceneHeight']]}
     result['workingSetSamplesBytes']=[row['working'] for row in observations]
     result['stableWorkingSetGrowth']=working_set_growth(result['workingSetSamplesBytes'])

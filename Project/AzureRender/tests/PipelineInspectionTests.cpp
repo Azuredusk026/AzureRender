@@ -1,4 +1,5 @@
 #include "rhi/PipelineInspection.hpp"
+#include "rhi/PresentationPolicy.hpp"
 
 #include <iostream>
 #include <stdexcept>
@@ -34,6 +35,20 @@ VkResult VKAPI_CALL query(VkDevice, const VkPipelineInfoKHR* info,
 }
 int main() {
     try {
+        const std::vector<VkPresentModeKHR> modes{VK_PRESENT_MODE_MAILBOX_KHR, VK_PRESENT_MODE_FIFO_KHR};
+        require(selectPresentMode(modes, true) == VK_PRESENT_MODE_FIFO_KHR,
+                "Synchronized presentation uses FIFO even when MAILBOX is available");
+        require(selectPresentMode(modes, false) == VK_PRESENT_MODE_MAILBOX_KHR,
+                "Asynchronous presentation prefers MAILBOX");
+        require(selectPresentMode({VK_PRESENT_MODE_FIFO_KHR}, false) == VK_PRESENT_MODE_FIFO_KHR,
+                "Unsupported MAILBOX falls back to the supported FIFO mode");
+        for (const auto& invalid : {std::vector<VkPresentModeKHR>{},
+                                   std::vector<VkPresentModeKHR>{VK_PRESENT_MODE_MAILBOX_KHR}}) {
+            bool rejected = false;
+            try { static_cast<void>(selectPresentMode(invalid, true)); }
+            catch (const std::invalid_argument&) { rejected = true; }
+            require(rejected, "Invalid surface capabilities cannot select an unadvertised mode");
+        }
         const auto device = reinterpret_cast<VkDevice>(uintptr_t{1});
         const auto pipeline = reinterpret_cast<VkPipeline>(uintptr_t{2});
         PipelineInspection unsupported(device, false, true, query);

@@ -1,9 +1,35 @@
 #include "runtime/EngineSettings.hpp"
+#include "foundation/FramePacing.hpp"
+#include <cmath>
+#include <limits>
 #include <iostream>
 using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
     SettingRegistry registry;registerEngineSettings(registry);RenderSettings render;render.grade.exposureEv=1.5F;
+    check(registry.get("runtime.vsync")==true,"Default synchronized presentation is explicit");
+    check(registry.set("runtime.vsync",false,SettingSource::CommandLine).passed,"Startup presentation override");
+    registry.applyPending();check(registry.get("runtime.vsync")==false,"Startup override reaches the shared setting");
+    check(!registry.set("runtime.vsync",1,SettingSource::Console).passed,"Presentation setting requires a boolean");
+    registry.start();
+    check(!registry.set("runtime.vsync",true,SettingSource::Console).passed,"Presentation changes require a new host session");
+    check(registry.set("runtime.maxFrameRate",100,SettingSource::Console).passed,"Frame rate is a shared runtime setting");
+    registry.applyPending();
+    check(std::abs(framePacingWaitSeconds(.005,registry.get("runtime.maxFrameRate").get<unsigned>())-.005)<1e-12,"Wait only for the remaining frame budget");
+    check(framePacingWaitSeconds(.02,60)==0,"Slow frames are never delayed or caught up by skipping work");
+    check(framePacingWaitSeconds(.005,0)==0,"Unlimited mode has no pacing wait");
+    check(std::abs(framePacingWaitSeconds(0,60)-1.0/60)<1e-12,"An empty frame uses its complete time budget");
+    check(!registry.set("runtime.maxFrameRate",-1,SettingSource::Console).passed,"Negative rate is rejected");
+    check(!registry.set("runtime.maxFrameRate",1001,SettingSource::Console).passed,"Out of range rate is rejected");
+    check(!registry.set("runtime.maxFrameRate",60.5,SettingSource::Console).passed,"Fractional frame rates are rejected");
+    check(registry.set("runtime.maxFrameRate",0,SettingSource::Console).passed,"Unlimited setting is valid");
+    registry.applyPending();check(framePacingWaitSeconds(.005,registry.get("runtime.maxFrameRate").get<unsigned>())==0,"Runtime changes reach the pacing contract");
+    check(registry.reset("runtime.maxFrameRate",SettingSource::Console).passed,"Frame rate can be reset");registry.applyPending();
+    check(framePacingWaitSeconds(.005,registry.get("runtime.maxFrameRate").get<unsigned>())>0,"Reset restores the configured pacing policy");
+    for(double elapsed:{-1.0,std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN()}) {
+        bool rejected=false;try{static_cast<void>(framePacingWaitSeconds(elapsed,60));}catch(const std::invalid_argument&){rejected=true;}
+        check(rejected,"Invalid elapsed time cannot become a sleep duration");
+    }
     RenderSettingOverlay overlay;overlay.apply(registry,render);
     check(render.grade.exposureEv==1.5F,"Project rendering retained without an override");
     check(registry.set("render.exposure",2.0,SettingSource::Console).passed,"Validated render override");registry.applyPending();overlay.apply(registry,render);

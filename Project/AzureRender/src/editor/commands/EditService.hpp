@@ -18,6 +18,6 @@ private:
     EditRegistry registry_;
     Enabled enabled_;
     std::uint64_t sequence_=0;
-    EditResult run(const std::vector<EditRequest>& requests,bool batch);
+    EditResult run(const std::vector<EditRequest>& requests,bool batch,bool useCurrentVersion=false);
 };
 }

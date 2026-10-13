@@ -620,6 +620,10 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << "  \"width\": " << swapchainExtent_.width << ",\n"
         << "  \"height\": " << swapchainExtent_.height << ",\n"
         << "  \"samples\": " << gpuTiming_.samples << ",\n"
+        << "  \"framePacing\": " << nlohmann::json{{"maximumRate", engineSettings_->get("runtime.maxFrameRate")},
+            {"vsync", engineSettings_->get("runtime.vsync")},
+            {"presentMode", selectedPresentMode_ == VK_PRESENT_MODE_MAILBOX_KHR ? "MAILBOX" : "FIFO"},
+            {"waitFrames", framePacingWaitFrames_}, {"waitMilliseconds", framePacingWaitMilliseconds_}}.dump() << ",\n"
         << "  \"pipelineInspection\": " << (pipelineInspection_ ? pipelineInspection_->jsonReport() : "null") << ",\n"
         << "  \"runtimeTraceFrames\": " << gameRouteFrames_.size() << ",\n"
         << "  \"timestampPeriodNanoseconds\": "

@@ -89,6 +89,9 @@ private:
     std::array<std::uint64_t,2> graphicsFrameSubmissions_{};
     azurerender::SettingRegistry playerSettings_;
     azurerender::SettingRegistry* engineSettings_=nullptr;
+    double framePacingWaitMilliseconds_=0;
+    std::uint64_t framePacingWaitFrames_=0;
+    VkPresentModeKHR selectedPresentMode_=VK_PRESENT_MODE_FIFO_KHR;
     azurerender::RenderSettings effectiveRenderSettings_;
     void initializeSettings();
     std::uint64_t settingsRevision_=0;
@@ -453,7 +456,7 @@ private:
     [[nodiscard]] static VkSurfaceFormatKHR chooseSurfaceFormat(
         const std::vector<VkSurfaceFormatKHR>& formats);
     [[nodiscard]] static VkPresentModeKHR choosePresentMode(
-        const std::vector<VkPresentModeKHR>& presentModes);
+        const std::vector<VkPresentModeKHR>& presentModes, bool synchronized);
     [[nodiscard]] VkExtent2D chooseExtent(const VkSurfaceCapabilitiesKHR& capabilities) const;
     [[nodiscard]] static std::vector<char> readBinaryFile(const std::string& path);
     [[nodiscard]] VkShaderModule createShaderModule(const std::vector<char>& code) const;

@@ -3,6 +3,8 @@
 namespace azurerender {
 void registerEngineSettings(SettingRegistry& r) {
     registerRenderSettings(r);registerInputPreferences(r);
+    r.add({"runtime.maxFrameRate","Maximum host frame rate (0 is unlimited)",60,0,1000,false,true,false});
+    r.add({"runtime.vsync","Synchronized surface presentation",true,{},{},false,true,true});
     r.add({"diagnostics.verbose","Verbose development diagnostics",false,{},{},false,true,false});
     r.add({"developer.maxViews","Maximum owned auxiliary render views",3,1,3,false,true,true});
 }

@@ -1,4 +1,5 @@
 #include "runtime/InputPreferences.hpp"
+#include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
@@ -40,6 +41,7 @@
 #include <stdexcept>
 #include <utility>
 #include <unordered_map>
+#include <thread>
 
 using namespace azurerender::internal;
 
@@ -359,9 +361,19 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 #if AZURE_WITH_EDITOR
         if(runOptions_.editorSession && runOptions_.editorSession->closeReady())break;
 #endif
+        const auto hostFrameStart = std::chrono::steady_clock::now();
         frontend_->pollEvents();
         if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
+        const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - hostFrameStart).count();
+        const auto maximumRate = engineSettings_->get("runtime.maxFrameRate").get<unsigned>();
+        const double waitSeconds = azurerender::framePacingWaitSeconds(elapsed, maximumRate);
+        if (waitSeconds > 0) {
+            const auto waitStart = std::chrono::steady_clock::now();
+            std::this_thread::sleep_for(std::chrono::duration<double>(waitSeconds));
+            framePacingWaitMilliseconds_ += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - waitStart).count();
+            ++framePacingWaitFrames_;
+        }
         ++renderedFrames;
         if (smokeFrameLimit > 0 && renderedFrames >= smokeFrameLimit) {
             if(validation_&&!validation_->complete())continue;
@@ -1321,7 +1333,9 @@ void AzureRenderApp::createLogicalDevice() {
 void AzureRenderApp::createSwapchain() {
     const SwapchainSupport support = querySwapchainSupport(physicalDevice_);
     const VkSurfaceFormatKHR surfaceFormat = chooseSurfaceFormat(support.formats);
-    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes);
+    const VkPresentModeKHR presentMode = choosePresentMode(support.presentModes,
+        engineSettings_->get("runtime.vsync").get<bool>());
+    selectedPresentMode_ = presentMode;
     const VkExtent2D extent = chooseExtent(support.capabilities);
 
     std::uint32_t imageCount = support.capabilities.minImageCount + 1;

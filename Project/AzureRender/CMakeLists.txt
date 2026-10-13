@@ -1742,6 +1742,7 @@ install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-ai-native-editor-steps.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-06-engine-specialized-steps.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-07-editor-usability.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-08-editor-acceptance.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/editor-usability-manifest.json"
     "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
@@ -1785,6 +1786,8 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/tutorials/editor-interaction.md"
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-08-content-workflows.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/2026-10-08.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7")
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/u7/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/u7/evidence" OPTIONAL)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p4/2026-10-08.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p4/physical-input.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p4")
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p4/evidence/" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p4/evidence" OPTIONAL)
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-rendering-repair.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/research/2026-10-09-character-rendering-diagnosis.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/research")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/2026-10-09-character-presentation-refinement.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/plans")
@@ -1896,6 +1899,8 @@ if(BUILD_TESTING)
     set_tests_properties(AzureGame.PlatformerCompletion PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureEngine.LiveGameState COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_live_game_state.py" --player "$<TARGET_FILE:AzurePlayer>" --project "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/platformer/project.azureproject" --output "${CMAKE_CURRENT_BINARY_DIR}/live-game-state")
     set_tests_properties(AzureEngine.LiveGameState PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+    add_test(NAME AzureEditor.NodeAdditionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_node_addition.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/node-addition-ui")
+    set_tests_properties(AzureEditor.NodeAdditionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
     add_test(NAME AzureGame.GameSequence COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_sequence.py" --executable "$<TARGET_FILE:AzurePlayer>" --planner "$<TARGET_FILE:AzurePlatformerFlowTests>" --exploration "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/exploration/project.azureproject" --platformer "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/platformer/project.azureproject" --output "${CMAKE_CURRENT_BINARY_DIR}/game-sequence")
     set_tests_properties(AzureGame.GameSequence PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     target_link_libraries(AzureExplorationDesignTests PRIVATE AzureRuntime)
@@ -1988,8 +1993,6 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEditor.SceneGeometryGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 180)
     add_test(NAME AzureEngine.RendererResidency COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_renderer_residency.py" --player "$<TARGET_FILE:AzurePlayer>" --output "${CMAKE_CURRENT_BINARY_DIR}/renderer-residency")
     set_tests_properties(AzureEngine.RendererResidency PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
-    add_test(NAME AzureEditor.NodeAdditionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_editor_node_addition.py" --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/node-addition")
-    set_tests_properties(AzureEditor.NodeAdditionGpu PROPERTIES LABELS "gpu" RUN_SERIAL TRUE TIMEOUT 300)
 endif()
 
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/2026-10-10.md" "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/p5/physical-input.md" DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/docs/acceptance/p5")

@@ -231,6 +231,7 @@ def run(package,output,seconds=1800,probe=False,*,scenario=None,max_idle_utiliza
     log=(output/'stdout.log').read_text(encoding='utf-8')+'\n'+(output/'stderr.log').read_text(encoding='utf-8')
     cpu=data['cpuFrame']
     summary=dict(status='measured',environment=environment,actualSeconds=actual,realTime='--fixed-frame-step' not in command,
+        framePacing=data.get('framePacing'),
         exitCode=process.returncode,frames=data['samples'],switches=switches,restarts=restarts,commits=len(commits),
         validationErrors=log.count('Validation Error')+log.count('VUID-'),released='Allocator after unload: buffers=0 images=0' in log,
         scriptErrors=game['scriptErrors'],presentationErrors=game['presentationErrors'],loadErrors=sorted(set(row['loadError'] for row in resources if row['loadError'])),

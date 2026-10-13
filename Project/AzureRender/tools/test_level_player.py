@@ -14,18 +14,25 @@ with tempfile.TemporaryDirectory() as directory:
  (root/'captures/gpu_capabilities.json').unlink(missing_ok=True)
  report=root/'reload.json';log=root/'reload.log'
  with log.open('w') as output:
-  process=subprocess.Popen([str(exe),'--project',str(project/'project.azureproject'),'--smoke-frames','3000','--fixed-frame-step','--runtime-report',str(report)],cwd=root,stdout=output,stderr=subprocess.STDOUT)
-  deadline=time.monotonic()+20
-  while not (root/'captures/gpu_capabilities.json').exists():
-   assert process.poll() is None,log.read_text()
-   assert time.monotonic()<deadline,'Player initialization timed out'
-   time.sleep(0.05)
-  time.sleep(0.8)
-  (project/'assets/start.azurelevel').write_text('{broken')
-  time.sleep(0.7)
-  level['nodes'][0]['components']['azure.transform']['data']['translation']=[1,0,0]
-  (project/'assets/start.azurelevel').write_text(json.dumps(level))
-  assert process.wait(timeout=45)==0,log.read_text()
+  # This fixed-step microbatch checks hot reload, not real-time frame pacing.
+  process=subprocess.Popen([str(exe),'--project',str(project/'project.azureproject'),'--smoke-frames','3000','--fixed-frame-step','--set','runtime.maxFrameRate=0','--runtime-report',str(report)],cwd=root,stdout=output,stderr=subprocess.STDOUT)
+  try:
+   deadline=time.monotonic()+20
+   while not (root/'captures/gpu_capabilities.json').exists():
+    assert process.poll() is None,log.read_text()
+    assert time.monotonic()<deadline,'Player initialization timed out'
+    time.sleep(0.05)
+   time.sleep(0.8)
+   (project/'assets/start.azurelevel').write_text('{broken')
+   time.sleep(0.7)
+   level['nodes'][0]['components']['azure.transform']['data']['translation']=[1,0,0]
+   (project/'assets/start.azurelevel').write_text(json.dumps(level))
+   assert process.wait(timeout=45)==0,log.read_text()
+  finally:
+   if process.poll() is None:
+    process.terminate()
+    try:process.wait(timeout=5)
+    except subprocess.TimeoutExpired:process.kill();process.wait()
  data=json.loads(report.read_text());assert data['levelRevision']>=2 and data['nodes'][0]['translation'][0]==1,data
  text=log.read_text();assert 'VUID-' not in text and 'Validation Error' not in text and 'Allocator after unload: buffers=0 images=0' in text
  print('Native JSON level, reflected components, failed reload retention and Vulkan hot reload passed')
