@@ -29,6 +29,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.0F, 0.0F, 0.20F, 0.72F);
 #endif
     if(!ImGui::Begin("Scene Outliner###outliner",workspace_.open("outliner"))){ImGui::End();return;}
+    {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();widgets_["outliner.drop-region"]={p.x,p.y,s.x,s.y};}
     ui::searchField("##Search objects","搜索对象名称或标识",outlinerFilter_);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
     std::function<void()> pending;

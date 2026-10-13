@@ -1,5 +1,6 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "editor/ui/Widgets.hpp"
+#include "editor/ui/ObjectCreationMenu.hpp"
 #include "editor/GameplayDebugGeometry.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "render/RenderMath.hpp"
@@ -164,10 +165,21 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(ImGui::IsMouseClicked(ImGuiMouseButton_Right))navigationButton_=ImGuiMouseButton_Right;
             else if(ImGui::IsMouseClicked(ImGuiMouseButton_Middle))navigationButton_=ImGuiMouseButton_Middle;
             else if(navIo.KeyAlt && ImGui::IsMouseClicked(ImGuiMouseButton_Left))navigationButton_=ImGuiMouseButton_Left;
-            if(navigationButton_>=0){ImGui::SetWindowFocus();viewportFocused_=true;}
+            if(navigationButton_>=0){navigationMoved_=false;ImGui::SetWindowFocus();viewportFocused_=true;}
         }
-        if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false)))navigationButton_=-1;
+        if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationMoved_=true;
+        if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false))){
+            const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationMoved_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
+            navigationButton_=-1;if(contextClick)ImGui::OpenPopup("Viewport context");
+        }
         setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
+        if(ImGui::BeginPopup("Viewport context")){
+            if(ImGui::MenuItem("聚焦选择","F",false,!session_->selection().selected().empty()))session_->edit("viewport.frame-selection");
+            if(ImGui::MenuItem("复制","Ctrl+D",false,!session_->selection().selected().empty()))session_->edit("node.duplicate");
+            if(ImGui::MenuItem("删除","Delete",false,!session_->selection().selected().empty()))session_->edit("node.delete");
+            if(ImGui::BeginMenu("创建对象")){ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){session_->edit("node.create-preset",{{"preset",preset}});});ImGui::EndMenu();}
+            ImGui::EndPopup();
+        }
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();
             if(navigationAllowed && navigationButton_==ImGuiMouseButton_Right){if(io.MouseWheel!=0){const auto changed=session_->edit("viewport.fly-speed",{{"steps",io.MouseWheel}});if(changed)settingsSaveRequested_=true;}}

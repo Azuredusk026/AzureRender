@@ -7,6 +7,9 @@ int main(){
     if(tool.operation!="viewport.gizmo-mode" || tool.mode!=0){std::cerr<<"W must select move\n";return 1;}
     event.key="E";if(EditorInputRouter::route(event).mode!=1)return 2;
     event.key="R";if(EditorInputRouter::route(event).mode!=2)return 3;
+    event.viewport=false;event.key="E";
+    if(EditorInputRouter::route(event).mode!=1){std::cerr<<"Hierarchy focus must select the same transform tool\n";return 18;}
+    event.viewport=true;
     event.text=true;if(EditorInputRouter::route(event).consumed)return 4;
     event.text=false;event.modal=true;if(EditorInputRouter::route(event).consumed)return 5;
     event.modal=false;event.navigating=true;if(EditorInputRouter::route(event).operation!="")return 6;

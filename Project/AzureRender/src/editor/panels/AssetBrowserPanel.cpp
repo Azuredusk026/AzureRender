@@ -29,6 +29,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
     setFallbackPanelRect(0.0F, 0.72F, 0.50F, 0.28F);
 #endif
     if(!ImGui::Begin("Content Browser###assets",workspace_.open("assets"))){ImGui::End();return;}
+    {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();widgets_["assets.drop-region"]={p.x,p.y,s.x,s.y};}
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const auto reveal=session_->consumeAssetReveal();
     if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();assetMount_.clear();selectedAssets_={reveal};}

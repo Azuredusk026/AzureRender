@@ -60,6 +60,7 @@ std::string EditorContext::commitImport(AssetImportJob& job){
         importSummary_=job.summary();log("Imported asset: "+path.filename().u8string());return id;
     }catch(...){std::filesystem::remove_all(job.destination);throw;}
 }
+std::string EditorContext::publishPreparedImport(AssetImportJob& job){return commitImport(job);}
 std::string EditorContext::importAsset(const std::filesystem::path& path){
     if(!assets_)throw std::logic_error("Asset import requires a project");const auto id=identity("asset-");
     AssetImportJob job(path,project_->file.parent_path()/".azure/imports"/id,project_->mounts.begin()->second/"imports"/id);return commitImport(job);

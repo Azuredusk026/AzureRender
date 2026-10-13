@@ -3,6 +3,7 @@
 #include "assets/GltfLoader.hpp"
 #include <chrono>
 #include <iostream>
+#include <thread>
 using namespace azurerender;
 static void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 int main(int argc,char** argv){
@@ -48,6 +49,18 @@ int main(int argc,char** argv){
         require(context->documentContent()==afterUndo&&context->undoCount()==afterUndoHistory,"Failed creation protects document and history");
         context->save();auto reopened=EditorContext::openProject(root/"project.azureproject");
         require(std::any_of(reopened->scene().nodes.begin(),reopened->scene().nodes.end(),[&](const auto& node){return node.id==child&&node.parentId==parent;}),"Creation hierarchy survives save and reopen");
+        const auto source=context->resourceStatuses().back().path;
+        const auto wait=[&](const std::string& task){for(unsigned i=0;i<1000;++i){session.pollTasks();for(const auto& item:session.tasks().report())if(item.at("id")==task&&item.at("state")!="running")return item;std::this_thread::sleep_for(std::chrono::milliseconds(5));}throw std::runtime_error("Drop import exceeded its short budget");};
+        const auto task=session.edit("asset.import-drop",{{"path",source.u8string()},{"place",true},{"parent",parent},{"position",{0,0,0}}});
+        require(bool(task),"External drop enters the registered import task");
+        require(wait(task.value.get<std::string>()).at("state")=="completed","Drop must import and place real geometry");
+        require(context->selectedNode()->parentId==parent,"Hierarchy drop must preserve the captured parent");
+        const auto nodesBefore=context->scene().nodes.size();
+        const auto stale=session.edit("asset.import-drop",{{"path",source.u8string()},{"place",true}});
+        require(bool(stale),"Start stale drop fixture");session.edit("node.rename",{{"value","Changed while importing"}});
+        require(wait(stale.value.get<std::string>()).at("state")=="failed"&&context->scene().nodes.size()==nodesBefore,"Changed document rejects asynchronous placement");
+        const auto cancelled=session.edit("asset.import-drop",{{"path",source.u8string()}});require(bool(cancelled),"Start cancellation fixture");
+        session.edit("tasks.cancel",{{"id",cancelled.value}});require(wait(cancelled.value.get<std::string>()).at("state")=="cancelled","Cancelled drop releases unpublished work");
         std::cout<<"Real geometry, naming, colliders, hierarchy, rollback and reopen passed\n";
     }catch(const std::exception& error){std::cerr<<error.what()<<'\n';code=1;}
     std::filesystem::remove_all(root);return code;

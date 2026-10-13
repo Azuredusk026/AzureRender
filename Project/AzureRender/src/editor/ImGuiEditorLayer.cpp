@@ -318,6 +318,7 @@ void ImGuiEditorLayer::drawPanels() {
         ImGui::BeginDisabled((session_->playing() || session_->building()) && !editable && panel->id()!="build" && panel->id()!="settings");auto panelContext=session_->panelContext();panel->draw(panelContext);ImGui::EndDisabled();
     }
     drawAssetTransferPanel();
+    processFileDrops();
     const auto* nav=ImGui::GetCurrentContext()->NavWindow;
     const bool sceneFocus=viewportFocused_ || (nav && std::string(nav->Name).find("###outliner")!=std::string::npos);
     const bool modal=ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel);

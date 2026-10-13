@@ -1,6 +1,7 @@
 #include "ViewportOverlayRegistry.hpp"
 #include "scene/SceneDescription.hpp"
 #include "render/RenderMath.hpp"
+#include "editor/ui/ViewportDesignTokens.hpp"
 #include <algorithm>
 namespace azurerender {
 void ViewportOverlayRegistry::add(std::string id,std::string label,Provider provider){
@@ -26,10 +27,14 @@ ViewportOverlayRegistry ViewportOverlayRegistry::builtins(){
         const float scale=request.view.projection==CameraProjectionKind::Orthographic?request.view.orthoHeight:distance;
         const auto step=std::pow(10.F,std::floor(std::log10(std::max(scale*.15F,.001F))));
         const float x=std::floor(request.view.target[0]/step)*step,z=std::floor(request.view.target[2]/step)*step;
-        for(int i=-20;i<=20;++i){const float coordinate=static_cast<float>(i)*step;const float alpha=i%5==0?.38F:.18F;
-            lines.push_back({{x+coordinate,0,z-20*step},{x+coordinate,0,z+20*step},{.58F,.63F,.70F,alpha},{}});
-            lines.push_back({{x-20*step,0,z+coordinate},{x+20*step,0,z+coordinate},{.58F,.63F,.70F,alpha},{}});
-        }return lines;
+        const auto color=[&](float value){return static_cast<long long>(std::llround(value/step))%5==0?ui::ViewportDesignTokens::majorGrid:ui::ViewportDesignTokens::minorGrid;};
+        for(int i=-20;i<=20;++i){const float coordinate=static_cast<float>(i)*step;
+            lines.push_back({{x+coordinate,0,z-20*step},{x+coordinate,0,z+20*step},color(x+coordinate),{}});
+            lines.push_back({{x-20*step,0,z+coordinate},{x+20*step,0,z+coordinate},color(z+coordinate),{}});
+        }
+        lines.push_back({{x-20*step,0,0},{x+20*step,0,0},ui::ViewportDesignTokens::xAxis,{}});
+        lines.push_back({{0,0,z-20*step},{0,0,z+20*step},ui::ViewportDesignTokens::zAxis,{}});
+        return lines;
     });
     result.add("light","Light ranges",[](const auto& request){
         std::vector<ViewportOverlayLine> lines;const auto scene=request.context.scene().renderDescription();const auto world=scene::resolveNodeWorldTransforms(scene);

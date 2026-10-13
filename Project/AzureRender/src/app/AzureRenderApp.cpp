@@ -211,6 +211,10 @@ void AzureRenderApp::run(
 #endif
 }
 
+void AzureRenderApp::fileDropCallback(GLFWwindow* window,int count,const char** paths) {
+    auto* app=static_cast<AzureRenderApp*>(glfwGetWindowUserPointer(window));
+    if(app&&app->frontend_)app->frontend_->recordFileDrop(count,paths);
+}
 void AzureRenderApp::initWindow() {
     azurerender::GlfwFrontendConfig config;
     config.width = runOptions_.width;
@@ -227,6 +231,7 @@ void AzureRenderApp::initWindow() {
     config.framebufferSizeCallback = framebufferResizeCallback;
     config.keyCallback = keyCallback;
     config.scrollCallback = scrollCallback;
+    config.dropCallback = fileDropCallback;
     frontend_ = std::make_unique<azurerender::GlfwFrontend>(config);
     lastRotationTime_ = frontend_->timeSeconds();
     azurerender::RuntimeDiagnostics::instance().print(
@@ -363,6 +368,9 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 #endif
         const auto hostFrameStart = std::chrono::steady_clock::now();
         frontend_->pollEvents();
+#if AZURE_WITH_EDITOR
+        for(auto& drop:frontend_->consumeFileDrops())if(editorLayer_)editorLayer_->queueFileDrop(std::move(drop));
+#endif
         if(validation_)validation_->pump(gameplayFrame_);
         drawFrame();
         const double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - hostFrameStart).count();

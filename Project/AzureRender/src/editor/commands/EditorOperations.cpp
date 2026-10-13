@@ -281,6 +281,7 @@ EditRegistry editorOperations(EditorSession& session) {
             c.notifyAssetVersionChanged();session.assetReloadRequested_=true;c.log("Generated asset: "+output);return id;
         });
     registry.add({"asset.import-start",1,schema({{"path",text}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json { session.startImportTask(std::filesystem::u8path(a.at("path").get<std::string>()));return nullptr; });
+    registry.add({"asset.import-drop",1,schema({{"path",text},{"place",boolean},{"parent",text},{"position",vector}},{"path"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{return session.startDropImport(a);});
     registry.add({"asset.import-cancel",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json { session.cancelImportTask();return nullptr; });
     registry.add({"asset.import-poll",1,schema(),true,false,true},[](EditorContext& c,const Json&)->Json { const auto value=c.pollImport();return value?Json(*value):Json(nullptr); });
     registry.add({"tasks.cancel",1,schema({{"id",text}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json{session.tasks_->cancel(a.at("id").get<std::string>());return nullptr;});

@@ -485,6 +485,7 @@ private:
         std::uint32_t mipLevels = 1) const;
 
     static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
+    static void fileDropCallback(GLFWwindow* window,int count,const char** paths);
     static void keyCallback(
         GLFWwindow* window,
         int key,

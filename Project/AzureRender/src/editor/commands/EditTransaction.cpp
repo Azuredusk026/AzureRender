@@ -59,7 +59,8 @@ void EditTransaction::commit(const std::string& mergeKey) {
         if(index>=candidate_->scene_.nodes.size())throw std::invalid_argument("Candidate selection is out of range");
     if(!candidate_->selectedNodes_.empty()&&candidate_->selectedNodeIndex_>=candidate_->scene_.nodes.size())
         throw std::invalid_argument("Candidate active selection is out of range");
-    const bool changed=target.documentContent()!=candidate_->documentContent()||target.prefabBaselines_!=candidate_->prefabBaselines_||target.prefabFingerprints_!=candidate_->prefabFingerprints_;
+    const bool assetsChanged=candidate_->assets_&&target.assets_&&candidate_->assets_->version()!=target.assets_->version();
+    const bool changed=assetsChanged||target.documentContent()!=candidate_->documentContent()||target.prefabBaselines_!=candidate_->prefabBaselines_||target.prefabFingerprints_!=candidate_->prefabFingerprints_;
     const bool selection=target.selectedNodes_!=candidate_->selectedNodes_;
     if(!changed&&!selection)return;
     if(changed) {
@@ -94,6 +95,7 @@ void EditTransaction::commit(const std::string& mergeKey) {
         // Publish its database together with the document that refers to it.
         if(candidate_->assets_&&target.assets_&&candidate_->assets_->version()!=target.assets_->version())
             target.assets_=std::move(candidate_->assets_);
+        target.importSummary_=candidate_->importSummary_;
         target.scene_=std::move(candidate_->scene_);target.components_=std::move(candidate_->components_);
         target.sourceLevel_=std::move(candidate_->sourceLevel_);target.resourceReferences_=std::move(candidate_->resourceReferences_);
         target.prefabBaselines_=std::move(candidate_->prefabBaselines_);target.prefabFingerprints_=std::move(candidate_->prefabFingerprints_);

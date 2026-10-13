@@ -125,6 +125,7 @@ public:
     std::size_t redoCount() const noexcept { return redoStack_.size(); }
     void closeEditMerge() noexcept { mergeKey_.clear(); }
     void notifyAssetVersionChanged() { ++revision_;closeEditMerge();clearAnimationPreview(); }
+    std::string publishPreparedImport(AssetImportJob& job);
     void refreshMaterialBindings(){resolveSceneMaterials(scene_,assets());}
     [[nodiscard]] std::vector<ResourceStatus> resourceStatuses() const;
     std::size_t reloadChangedAssets();

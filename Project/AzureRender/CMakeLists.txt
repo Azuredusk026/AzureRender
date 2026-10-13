@@ -483,6 +483,7 @@ add_library(AzureEditor STATIC
     src/editor/documents/EditorFeedback.cpp
     src/editor/documents/EditorTaskService.cpp
     src/editor/input/EditorInputRouter.cpp
+    src/editor/input/ExternalFileDrop.cpp
     src/editor/EditorCameraController.cpp
     src/editor/EditorContext.cpp
     src/editor/EditorProjectEditing.cpp
@@ -510,6 +511,7 @@ add_library(AzureEditor STATIC
     src/editor/content/AssetExportService.cpp
     src/editor/content/NodePresetRegistry.cpp
     src/editor/content/SceneNaming.cpp
+    src/editor/content/ExternalDropImport.cpp
     src/editor/ui/ObjectCreationMenu.cpp
     src/editor/content/BuiltinGeometryService.cpp
     src/editor/AssetImportJob.cpp

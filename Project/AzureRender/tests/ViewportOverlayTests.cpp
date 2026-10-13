@@ -9,7 +9,7 @@ int main(){try{
     EditorContext context(document,std::filesystem::temp_directory_path()/"azure-overlay-fixture.azscene");EditorViewDescriptor view;
     auto registry=ViewportOverlayRegistry::builtins();
     const ViewportOverlayRequest request{context,view};
-    require(registry.collect(request,{{"grid","all"}},{}).size()==82,"Grid helpers must have a bounded line count");
+    require(registry.collect(request,{{"grid","all"}},{}).size()==84,"Grid helpers include two distinct world axes within a bounded budget");
     require(registry.collect(request,{{"light","selected"}},{}).empty(),"Selected helper policy must exclude unselected objects");
     require(registry.collect(request,{{"light","selected"}},{"root"}).size()==96,"Selected lights must expose their actual range geometry");
     registry.add("fixture","Independent helper",[](const auto&){return std::vector<ViewportOverlayLine>{{{0,0,0},{1,0,0},{1,1,1,1},"other"}};});

@@ -111,6 +111,8 @@ public:
     std::string consumeWorkspacePreset() {auto result=workspacePreset_;workspacePreset_.clear();return result;}
 
     void startImportTask(const std::filesystem::path& path);
+    std::string startDropImport(const nlohmann::json& request);
+    bool dropImporting() const;
     void cancelImportTask();
     const EditorTaskService& tasks() const{return *tasks_;}
     const EditorFeedback& feedback() const{return feedback_;}

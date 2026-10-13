@@ -21,7 +21,7 @@ EditorInputResult EditorInputRouter::route(const EditorInputEvent& input,const s
     if(e.playing){if(e.simulating&&e.scene&&e.key=="F")return {true,"viewport.frame-selection",-1};return {};}
     if(e.scene && e.key=="Delete")return {true,"node.delete",-1};
     if(e.scene && e.key=="F")return {true,"viewport.frame-selection",-1};
-    if(e.viewport) {
+    if(e.viewport||e.scene) {
         if(e.key=="W")return {true,"viewport.gizmo-mode",0};
         if(e.key=="E")return {true,"viewport.gizmo-mode",1};
         if(e.key=="R")return {true,"viewport.gizmo-mode",2};

@@ -6,6 +6,8 @@
 #include "runtime/GameUi.hpp"
 #include "IEditorPanel.hpp"
 #include "EditorWorkspace.hpp"
+#include "platform/FileDropEvent.hpp"
+#include <deque>
 
 #include <vulkan/vulkan.h>
 
@@ -46,6 +48,7 @@ public:
     void setPreviewSubmission(std::uint64_t submission){previewSubmission_=submission;}
     nlohmann::json workspaceSnapshot(bool includeHistory = true) const;
     void queueInputEvent(nlohmann::json event);
+    void queueFileDrop(FileDropEvent event){if(fileDrops_.size()<32)fileDrops_.push_back({std::move(event),session_->context().documentId()});}
     void setCameraState(std::array<float,3> position,std::array<float,3> target){cameraPosition_=position;cameraTarget_=target;}
     void setGameUi(GameUi* ui) { gameUi_=ui; }
     std::uint64_t debugLineCount() const noexcept { return debugLineCount_; }
@@ -66,6 +69,9 @@ public:
     }
 
 private:
+    struct CapturedFileDrop {FileDropEvent event;std::string document;};
+    std::deque<CapturedFileDrop> fileDrops_;
+    void processFileDrops();
     struct PreviewTexture {VkDescriptorSet texture=VK_NULL_HANDLE;std::uint64_t lastUse=0;};
     std::map<std::uint64_t,PreviewTexture> previewTextures_;
     std::uint64_t previewSubmission_=0;
@@ -191,6 +197,7 @@ private:
     std::string assetPreviewTitle_;
     bool assetPreviewRequested_=false;
     bool focusObjectName_=false;
+    bool navigationMoved_=false;
     std::string primitiveKind_="cube",primitiveName_="Primitive.glb";
     std::string materialName_="Material.azurematerial",materialAsset_;
     bool materialDialogRequested_=false;
