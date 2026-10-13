@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "runtime/ProjectSettings.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/EditorSession.hpp"
 #include "editor/EditorWorkspace.hpp"
@@ -28,7 +29,10 @@ void AzureRenderApp::initializeSettings() {
     if(runOptions_.editorSession)runOptions_.editorSession->setUserSettingsPath(std::filesystem::u8path(user));
 #endif
     load(user,SettingSource::UserFile,false);
-    load(runOptions_.projectSettingsFile,SettingSource::Project,true);
+    if(runOptions_.projectSettingsFile.empty()&&!runOptions_.projectFile.empty()){
+        const auto result=loadProjectSettings(*engineSettings_,Project::load(std::filesystem::u8path(runOptions_.projectFile)));
+        if(!result.passed)throw std::invalid_argument(result.diagnostic);
+    }else load(runOptions_.projectSettingsFile,SettingSource::Project,true);
     const auto result=engineSettings_->replaceLayer(runOptions_.settingOverrides,SettingSource::CommandLine);
     if(!result.passed)throw std::invalid_argument(result.diagnostic);
     engineSettings_->start();

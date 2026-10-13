@@ -49,6 +49,14 @@ class GamePackageRules(unittest.TestCase):
         self.assertTrue((self.output/'Game.exe').is_file())
         self.assertEqual(json.loads((self.output/'game-launch.json').read_text())['project'], 'game/project.azureproject')
 
+    def test_project_settings_survive_portable_packaging(self):
+        settings = self.project.parent / "config/engine-settings.json"
+        settings.parent.mkdir()
+        settings.write_text(json.dumps({"schemaVersion": 1, "values": {"render.exposure": 1.25}}), encoding="utf-8")
+        self.build()
+        self.assertEqual((self.output / "game/config/engine-settings.json").read_bytes(), settings.read_bytes())
+        build_game.verify_package(self.output)
+
     def test_portable_tree_and_hashes(self):
         cache = self.project.parent / "content/.azure"
         cache.mkdir()

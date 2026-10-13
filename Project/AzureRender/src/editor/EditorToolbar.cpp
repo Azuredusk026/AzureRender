@@ -1,6 +1,7 @@
 #include "EditorToolbar.hpp"
 #include "ui/Widgets.hpp"
 #include "ui/UiScopes.hpp"
+#include "ui/ObjectCreationMenu.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
@@ -42,12 +43,11 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
             item("Reset Layout",nullptr,EditorCommand::ResetLayout);ImGui::EndMenu();
         }observe("menu.View");
         if(ImGui::BeginMenu("Tools")) {
-            for(const auto& id:{"build","animation","gameplay-debug","capture"}) {
-                if(ImGui::MenuItem(id)) {
-                    workspace.setVisible(id,true);
-                    for(const auto& panel:workspace.panels())if(panel.id==id)ImGui::SetWindowFocus(panel.title.c_str());
+            for(const auto& panel:workspace.panels()) {
+                if(ImGui::MenuItem(panel.title.substr(0,panel.title.find("###")).c_str())) {
+                    workspace.setVisible(panel.id,true);ImGui::SetWindowFocus(panel.title.c_str());
                 }
-                observe(std::string("tool.")+id);
+                observe(std::string("tool.")+panel.id);
             }
             ImGui::EndMenu();
         }observe("menu.Tools");
@@ -63,12 +63,17 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
         ImGui::SameLine();
     };
     button("Save","save",EditorCommand::Save);
+    if(ui::button("创建",{ui::ButtonVariant::Toolbar,false,s.playing()||s.building()}))ImGui::OpenPopup("Toolbar creation");observe("toolbar.create");
+    if(ImGui::BeginPopup("Toolbar creation")){ui::objectCreationMenu(s.nodePresets().describe(),[&](const auto& preset){s.edit("node.create-preset",{{"preset",preset}});},observe);ImGui::EndPopup();}
+    ImGui::SameLine();ImGui::TextDisabled("|");ImGui::SameLine();
     auto& context=s.context();
     for(const auto& entry:{std::pair<const char*,EditorContext::GizmoMode>{"Move",EditorContext::GizmoMode::Translate},{"Rotate",EditorContext::GizmoMode::Rotate},{"Scale",EditorContext::GizmoMode::Scale}}) {
         ImGui::BeginDisabled(s.playing()||s.building());
         if(ImGui::Selectable(entry.first,context.gizmoMode()==entry.second,0,{55*dpi,0}))s.edit("viewport.gizmo-mode",{{"value",static_cast<unsigned>(entry.second)}});
+        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",s.settings().get(std::string("editor.shortcuts.")+(entry.second==EditorContext::GizmoMode::Translate?"move":entry.second==EditorContext::GizmoMode::Rotate?"rotate":"scale")).get<std::string>().c_str());
         observe(std::string("mode.")+entry.first);ImGui::EndDisabled();ImGui::SameLine();
     }
+    ImGui::TextDisabled("|");ImGui::SameLine();
     button("Play","play",EditorCommand::Play);
     button("Simulate","simulate",EditorCommand::Simulate);
     const bool paused=s.runtime()&&s.runtime()->state()==RuntimeLifecycle::State::Paused;
@@ -87,6 +92,7 @@ void EditorToolbar::status(EditorSession& s,float dpi) {
     ImGui::Text("%s | %s%s",c.isProject()?c.project().name.c_str():"Scene",c.scene().sceneId.c_str(),c.dirty()?" * Unsaved":"");
     if(s.building()){ImGui::SameLine();ImGui::TextUnformatted("Building game...");}
     else if(c.importing()){ImGui::SameLine();ImGui::Text("Import %.0f%%",c.importProgress()*100);}
+    for(const auto& task:s.tasks().report())if(task.at("state")=="running"){ImGui::SameLine();ImGui::Text("%s %.0f%%",task.at("source").get<std::string>().c_str(),task.at("progress").get<float>()*100);break;}
     if(!s.lastError().empty()){ImGui::SameLine();ui::resultMessage(s.lastError(),true);}
     ImGui::End();ImGui::PopStyleVar();
 }

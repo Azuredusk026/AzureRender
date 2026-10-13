@@ -32,6 +32,7 @@ public:
     SettingSource source(const std::string& name) const;
     Json describe(const std::string& search={}) const;
     void saveUser(const std::filesystem::path& path) const;
+    void saveLayer(const std::filesystem::path& path,SettingSource source) const;
     SettingResult load(const std::filesystem::path& path, SettingSource source);
 private:
     struct Entry {

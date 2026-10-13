@@ -783,21 +783,21 @@
     {
       "id": "ED5",
       "name": "设置分层与统一工作区",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "ED4"
       ],
       "evidence": [
-        "docs/plans/2026-10-14-editor-generalization.md"
+        "docs/acceptance/ed5/2026-10-14.md"
       ],
       "requiredAcceptance": []
     },
     {
       "id": "ED6",
       "name": "可选渲染特性与项目隔离",
-      "status": "Pending",
+      "status": "Ready",
       "scope": "本轮开发交付及受影响短检查，正式验收归属 P8",
       "checksPassed": false,
       "dependsOn": [

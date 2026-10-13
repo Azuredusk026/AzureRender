@@ -70,7 +70,11 @@ SettingRegistry::Json SettingRegistry::describe(const std::string& search) const
     }return result;
 }
 void SettingRegistry::saveUser(const std::filesystem::path& path) const {
-    checkThread();Json values=Json::object();for(const auto& [name,e]:entries_)if(e.descriptor.persistent&&!e.descriptor.readOnly&&e.layers[2])values[name]=*e.layers[2];
+    saveLayer(path,SettingSource::UserFile);
+}
+void SettingRegistry::saveLayer(const std::filesystem::path& path,SettingSource source) const {
+    checkThread();const auto layer=index(source);if(source!=SettingSource::Project&&source!=SettingSource::UserFile)throw std::invalid_argument("Only persistent settings layers can be saved");
+    Json values=Json::object();for(const auto& [name,e]:entries_)if(e.descriptor.persistent&&!e.descriptor.readOnly&&e.layers[layer])values[name]=*e.layers[layer];
     if(!path.parent_path().empty())std::filesystem::create_directories(path.parent_path());
     auto pending=path;pending+=".pending";
     {std::ofstream output(pending,std::ios::binary);output<<Json{{"schemaVersion",1},{"values",values}}.dump(2);if(!output)throw std::runtime_error("Settings save failed");}

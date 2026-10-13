@@ -139,11 +139,6 @@ void ImGuiEditorLayer::drawWorkspace() {
         ImGui::Begin("Create & Project###project",nullptr,flags);
         ImGui::PushFont(nullptr,16);ImGui::TextUnformatted("PROJECT");ImGui::PopFont();
         if(context_->isProject()){ImGui::TextWrapped("%s",context_->project().name.c_str());ImGui::TextDisabled("%s",context_->scene().sceneId.c_str());}
-        ImGui::Separator();ImGui::TextUnformatted("Create objects");
-        ImGui::BeginDisabled(session_->playing()||session_->building());
-        if(ImGui::Button("Empty Node",{-1,0}))session_->edit("node.create");observeWidget("create.empty");
-        if(ImGui::Button("Duplicate Selected",{-1,0}))session_->edit("node.duplicate");
-        ImGui::EndDisabled();
         ImGui::Separator();ImGui::TextUnformatted("Tools");
         for(const auto& id:{"assets","animation","scripts","problems","assistance","prefabs","gameplay-debug","build","capture","console","settings","environment","projects"}) {
             const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});

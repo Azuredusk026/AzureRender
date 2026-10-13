@@ -2,6 +2,7 @@
 #include "editor/EditorSession.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/LevelRenderSettings.hpp"
+#include "runtime/ProjectSettings.hpp"
 #include "editor/content/AssetCatalog.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include "editor/preview/ThumbnailProviderRegistry.hpp"
@@ -225,11 +226,13 @@ EditRegistry editorOperations(EditorSession& session) {
         const auto source=a.value("source",std::string("console"));
         if(source=="console")return SettingSource::Console;
         if(source=="user-file")return SettingSource::UserFile;
-        throw EditRejection("Editor writes require console or user-file source");
+        if(source=="project")return SettingSource::Project;
+        throw EditRejection("Unsupported settings write source");
     };
     registry.add({"settings.set",1,schema({{"name",text},{"value",Json::object()},{"source",text}},{"name","value"}),false,false,false},
         [&session,settingSource](EditorContext&,const Json& a)->Json {
             const auto name=a.at("name").get<std::string>();
+            if(settingSource(a)==SettingSource::Project&&(!session.context().isProject()||!projectSetting(name)))throw EditRejection("Setting belongs to editor preferences");
             if(name.rfind("editor.shortcuts.",0)==0){const auto value=a.at("value").get<std::string>();
                 if(value.size()!=1||value[0]<'A'||value[0]>'Z')throw EditRejection("Scene shortcuts require one uppercase letter");
                 const auto descriptions=session.settings().describe();
@@ -245,6 +248,10 @@ EditRegistry editorOperations(EditorSession& session) {
         });
     registry.add({"settings.describe",1,schema({{"search",text}}),false,false,false},
         [&session](EditorContext&,const Json& a)->Json{return session.settings().describe(a.value("search",std::string()));});
+    registry.add({"settings.project-save",1,schema(),false,false,true},[&session](EditorContext& c,const Json&)->Json{
+        if(!c.isProject())throw EditRejection("Project settings require a project");session.settings().applyPending();
+        const auto path=projectSettingsPath(c.project());session.settings().saveLayer(path,SettingSource::Project);return {{"path",path.u8string()}};
+    });
     for(const auto& item:std::vector<std::pair<std::string,EditorCommand>>{
             {"document.reload",EditorCommand::Reload},
             {"history.undo",EditorCommand::Undo},{"history.redo",EditorCommand::Redo},

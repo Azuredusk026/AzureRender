@@ -1,12 +1,13 @@
 #include "editor/ImGuiEditorLayer.hpp"
 #include "editor/ui/Widgets.hpp"
 #include "editor/ui/UiScopes.hpp"
+#include "runtime/ProjectSettings.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <cstring>
 namespace azurerender {
 void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
     if(!ImGui::Begin("Settings###settings",workspace_.open("settings"))){ImGui::End();return;}
-    const char* categories[]={"Editor preferences","Project configuration","Renderer diagnostics","Content assistance"};
+    const char* categories[]={"编辑器偏好","项目设置","渲染诊断","内容辅助"};
     if(ImGui::BeginCombo("Category",categories[settingsCategory_])){
         for(int category=0;category<4;++category){
             const bool selected=settingsCategory_==category;
@@ -22,21 +23,23 @@ void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
             const auto& project=session_->context().project();
             ImGui::TextWrapped("Project: %s",project.name.c_str());ImGui::TextWrapped("Startup: %s",project.startupScene.c_str());
             ImGui::TextWrapped("Configuration: %s",project.file.u8string().c_str());
-            ImGui::TextWrapped("Runtime systems and input bindings belong to the project document.");
+            ImGui::TextWrapped("保存位置：%s",projectSettingsPath(project).u8string().c_str());
         }else ImGui::TextUnformatted("Open a project to inspect its configuration.");
-        ImGui::End();return;
+        if(!session_->context().isProject()){ImGui::End();return;}
     }
     settingsFilter_.Draw("Search settings",-1);observeWidget("settings.search");
     auto& registry=session_->settings();const auto descriptors=registry.describe();
     const char* sources[]={"Console override","User preference"};ImGui::Combo("Write source",&settingSourceIndex_,sources,2);observeWidget("settings.source");
-    const auto source=settingSourceIndex_==0?SettingSource::Console:SettingSource::UserFile;
+    const auto source=settingsCategory_==1?SettingSource::Project:settingSourceIndex_==0?SettingSource::Console:SettingSource::UserFile;
+    ImGui::TextWrapped("覆盖顺序：默认、安装配置、个人偏好、项目、启动参数、临时覆盖。");
     for(const auto& field:descriptors.items()) {
         const bool editor=field.key().rfind("editor.",0)==0;
         const bool ai=field.key().rfind("ai.",0)==0;
-        if((settingsCategory_==0&&!editor)||(settingsCategory_==3&&!ai)||(settingsCategory_==2&&(editor||ai)))continue;
+        if((settingsCategory_==0&&!editor)||(settingsCategory_==1&&!projectSetting(field.key()))||(settingsCategory_==3&&!ai)||(settingsCategory_==2&&(editor||ai)))continue;
         if(!settingsFilter_.PassFilter(field.key().c_str()))continue;
         ui::ScopedId id(field.key().c_str());const auto& d=field.value();auto value=d.at("pending");
-        ImGui::TextUnformatted(field.key().c_str());ImGui::TextDisabled("%s",d.at("source").get<std::string>().c_str());
+        ImGui::TextWrapped("%s",d.at("description").get<std::string>().c_str());ImGui::TextDisabled("%s | %s",field.key().c_str(),d.at("source").get<std::string>().c_str());
+        if(d.at("startupOnly").get<bool>())ImGui::TextDisabled("启动时生效");
         bool changed=false;
         {ui::ScopedDisabled disabled(d.at("readOnly").get<bool>()||d.at("startupOnly").get<bool>());
         ui::propertyRow("Value",ui::UiMetrics::fromScale(dpi_),[&] {
@@ -52,7 +55,10 @@ void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
         if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",d.at("description").get<std::string>().c_str());
         ImGui::Separator();
     }
-    if(ui::button("Save user preferences"))settingsSaveRequested_=true;
+    if(ui::button(settingsCategory_==1?"保存项目设置":"保存个人偏好")){
+        if(settingsCategory_==1){const auto result=session_->edit("settings.project-save");settingDiagnostic_=result?std::string():session_->lastError();}
+        else settingsSaveRequested_=true;
+    }
     observeWidget("settings.save");ui::resultMessage(settingDiagnostic_,true);ImGui::End();
 }
 }

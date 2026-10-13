@@ -169,6 +169,12 @@ def build_game(project, install, output, replace=False, validator=None):
             copy_tree(source, game / mount["name"])
             mount["path"] = mount["name"]
         (game / "project.azureproject").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        settings = project.parent / "config/engine-settings.json"
+        if settings.exists() or settings.is_symlink():
+            if not settings.is_file() or is_reparse(settings):
+                raise ValueError("Project settings must be a regular file")
+            (game / "config").mkdir(exist_ok=True)
+            shutil.copy2(settings, game / "config/engine-settings.json")
         for name in ["shaders", "assets_public", "licenses"]:
             copy_tree(share / name, candidate / "share/AzureRender" / name)
         shutil.copy2(share / "runtime-build.json", candidate / "share/AzureRender/runtime-build.json")

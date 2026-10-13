@@ -186,7 +186,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             else if(navigationAllowed && hovered && !orientationOver)viewportInput_.zoomSteps += io.MouseWheel;
             const float sx=session_->settings().get("editor.camera.invertX").get<bool>()?-1.F:1.F;
             const float sy=session_->settings().get("editor.camera.invertY").get<bool>()?-1.F:1.F;
-            const auto sensitivity=cameraSensitivity(session_->settings());
+            const auto sensitivity=session_->settings().get("editor.camera.lookDegreesPerPixel").get<float>()*.01745329252F/.008F;
             const auto mouseDelta=navigationButton_>=0 && !ImGui::IsMouseClicked(navigationButton_)?io.MouseDelta:ImVec2{0,0};
             if(navigationButton_==ImGuiMouseButton_Right) {
                 viewportInput_.lookDeltaX+=mouseDelta.x*sensitivity*sx;
@@ -197,7 +197,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 viewportInput_.flySpeed=session_->settings().get("editor.camera.flySpeed").get<float>()*(io.KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
                 viewportInput_.deltaSeconds=io.DeltaTime;
             }else if(navigationButton_==ImGuiMouseButton_Left) {
-                const auto orbitSensitivity=session_->settings().get("editor.camera.orbitSensitivity").get<float>();
+                const auto orbitSensitivity=session_->settings().get("editor.camera.orbitDegreesPerPixel").get<float>()*.01745329252F/.008F*session_->settings().get("editor.camera.orbitSensitivity").get<float>();
                 viewportInput_.orbitDeltaX+=mouseDelta.x*orbitSensitivity*sx;
                 viewportInput_.orbitDeltaY+=mouseDelta.y*orbitSensitivity*sy;
             }else if(navigationButton_==ImGuiMouseButton_Middle){viewportInput_.panDeltaX+=mouseDelta.x;viewportInput_.panDeltaY+=mouseDelta.y;}

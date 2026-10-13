@@ -61,6 +61,11 @@ int main(int argc,char** argv){
         require(wait(stale.value.get<std::string>()).at("state")=="failed"&&context->scene().nodes.size()==nodesBefore,"Changed document rejects asynchronous placement");
         const auto cancelled=session.edit("asset.import-drop",{{"path",source.u8string()}});require(bool(cancelled),"Start cancellation fixture");
         session.edit("tasks.cancel",{{"id",cancelled.value}});require(wait(cancelled.value.get<std::string>()).at("state")=="cancelled","Cancelled drop releases unpublished work");
+        require(bool(session.edit("settings.set",{{"name","render.exposure"},{"value",1.25},{"source","project"}})),"Project settings use typed registry writes");
+        require(bool(session.edit("settings.project-save")),"Project settings have a production save operation");
+        EditorSession settingsReopened(EditorContext::openProject(root/"project.azureproject"));
+        require(settingsReopened.settings().get("render.exposure")==1.25,"Project settings survive reopening");
+        require(!session.edit("settings.set",{{"name","editor.camera.flySpeed"},{"value",9.0},{"source","project"}}),"Personal camera preferences cannot leak into a project layer");
         std::cout<<"Real geometry, naming, colliders, hierarchy, rollback and reopen passed\n";
     }catch(const std::exception& error){std::cerr<<error.what()<<'\n';code=1;}
     std::filesystem::remove_all(root);return code;

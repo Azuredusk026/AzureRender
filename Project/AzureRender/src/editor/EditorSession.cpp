@@ -5,6 +5,7 @@
 #include "projects/ProjectCreateJob.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
+#include "runtime/ProjectSettings.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "gameplay/SharedSystems.hpp"
 #include "runtime/physics/PhysicsShapeFactory.hpp"
@@ -192,6 +193,8 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.camera.boost","Editor flight acceleration",4.,1.,100.,false,true,false});
     settings_.add({"editor.camera.rawMouse","Use raw mouse motion during captured flight",true,{},{},false,true,false});
     settings_.add({"editor.camera.orbitSensitivity","Editor orbit sensitivity",1.,.01,10.,false,true,false});
+    settings_.add({"editor.camera.lookDegreesPerPixel","编辑相机转向灵敏度（度/像素）",.15,.001,5.,false,true,false});
+    settings_.add({"editor.camera.orbitDegreesPerPixel","编辑相机环绕灵敏度（度/像素）",.15,.001,5.,false,true,false});
     for(const auto& binding:std::vector<std::pair<const char*,const char*>>{{"move","W"},{"rotate","E"},{"scale","R"},{"select","Q"},{"frame","F"}})
         settings_.add({std::string("editor.shortcuts.")+binding.first,"Scene shortcut (one uppercase letter)",binding.second,{},{},false,true,false});
     selection_=std::make_unique<SelectionService>(*context_,*edits_);
@@ -201,6 +204,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     settings_.add({"editor.gizmo.rotateStep","Gizmo rotation snap degrees",15.,.1,90.,false,true,false});
     settings_.add({"editor.gizmo.scaleStep","Gizmo scale snap step",.1,.001,10.,false,true,false});
     retainDocument();
+    if(context_->isProject()){const auto result=loadProjectSettings(settings_,context_->project());if(!result.passed)throw std::invalid_argument(result.diagnostic);settings_.applyPending();}
 }
 bool EditorSession::editEnabled(const EditDescriptor& descriptor) const {
     if(descriptor.id.rfind("document.",0)==0&&descriptor.id!="document.decision"&&descriptor.id!="document.close"&&(context_->importing()||creatingProject_||pendingProject_||!pendingDocument_.empty()||!closingDocument_.empty()))return false;
@@ -245,6 +249,7 @@ void EditorSession::activatePendingProject() {
         std::unique_ptr<ProposalController> proposals;
         if(model_)proposals=std::make_unique<ProposalController>(*pendingProject_,*edits,generators_,*model_);
         projects_->remember(pendingProject_->project());
+        const auto settingsResult=loadProjectSettings(settings_,pendingProject_->project());if(!settingsResult.passed)throw EditRejection(settingsResult.diagnostic);settings_.applyPending();
         references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
         context_=std::move(pendingProject_);proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
