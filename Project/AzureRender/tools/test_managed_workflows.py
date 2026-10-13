@@ -34,7 +34,7 @@ def verify(build,backend,evidence,configuration):
         report=evidence/(workflow+'-player.json')
         run(workflow+'-player',[player,'--project',project/'project.azureproject','--fixed-frame-step','--smoke-frames','100',
             '--game-actions',actions,'--runtime-report',report])
-        data=json.loads(report.read_text());hero=next(n for n in data['nodes'] if n['id']=='hero')
+        data=json.loads(report.read_text(encoding="utf-8"));hero=next(n for n in data['nodes'] if n['id']=='hero')
         assert data['activeScripts']==1 and not data['scriptErrors'],data
         if workflow=='annotation':assert hero['translation']==[4,5,6],data
         else:assert hero['translation'][2]<-2 and data['animationFrames']>0,data
@@ -43,7 +43,7 @@ def verify(build,backend,evidence,configuration):
             report=evidence/'preview.json'
             run('annotation-preview',[editor,'--editor-close-policy', 'save', '--editor-project',project/'project.azureproject','--editor-actions',task,
                 '--runtime-report',report,'--fixed-frame-step','--smoke-frames','13'])
-            preview=json.loads(report.read_text());assert preview['editorPlaySteps']==9 and preview['editStateRestored'] and preview['observedScriptErrors']==0,preview
+            preview=json.loads(report.read_text(encoding="utf-8"));assert preview['editorPlaySteps']==9 and preview['editStateRestored'] and preview['observedScriptErrors']==0,preview
             assert all(row['passed'] for row in preview['editorActions']),preview
         results.append({'workflow':workflow,'translation':hero['translation'],'activeScripts':data['activeScripts']})
     packageResult=None
@@ -58,7 +58,7 @@ def verify(build,backend,evidence,configuration):
         try:
             report=evidence/'moved.json'
             run('annotation-moved',[env['COMSPEC'],'/d','/c','start-game.cmd','--fixed-frame-step','--smoke-frames','20','--runtime-report',report],moved,env)
-            data=json.loads(report.read_text());assert not data['scriptErrors'] and data['activeScripts']==1,data
+            data=json.loads(report.read_text(encoding="utf-8"));assert not data['scriptErrors'] and data['activeScripts']==1,data
             module=next(p for p in moved.glob('game/assets/managed/*.dll') if p.name.startswith('Azure.Engine'))
             saved=module.read_bytes();module.write_bytes(saved+b' altered')
             try:

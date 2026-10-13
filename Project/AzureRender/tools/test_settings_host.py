@@ -109,7 +109,7 @@ def run(executable, output, workflow):
     assert workspace['uiErrors'] == []
     assert workspace['panels']['settings']['open']
     assert workspace['settings']['diagnostics.verbose']['value'] is True
-    diagnostic_rows = [json.loads(line) for line in (folder / 'captures/azurerender.log.jsonl').read_text(encoding='utf-8').splitlines()]
+    diagnostic_rows = [json.loads(line) for line in (config / 'logs/azurerender.log.jsonl').read_text(encoding='utf-8').splitlines()]
     assert any('Applied setting layers:' in row['message'] for row in diagnostic_rows), 'Verbose diagnostics did not consume the setting'
     screenshots = list((folder / 'captures').glob('u4-settings-*.png'))
     assert len(screenshots) == 1, 'Production screenshot missing'

@@ -96,7 +96,12 @@ def run(executable, output, workflow):
             activate_window()
             rect=state()['widgets'][identity];point=wintypes.POINT(int(rect[0]+rect[2]/2),int(rect[1]+rect[3]/2))
             assert window.user.ClientToScreen(window.handle,ctypes.byref(point))
+            # Refresh enter/leave state after capture release and window resizing.
+            assert window.user.SetCursorPos(point.x-3,point.y-3);wait(2)
             assert window.user.SetCursorPos(point.x,point.y);wait(5)
+            actual=wintypes.POINT();assert window.user.GetCursorPos(ctypes.byref(actual))
+            evidence.append(dict(nativeClickTarget=identity,expectedScreen=[point.x,point.y],
+                                 actualScreen=[actual.x,actual.y],foreground=window.user.GetForegroundWindow()==window.handle))
             for flag in (2,4):
                 event=Input(0,InputUnion(MouseInput(0,0,0,flag,0,0)))
                 assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
@@ -130,7 +135,11 @@ def run(executable, output, workflow):
             pending=None;pool=None
             if via_browse:
                 activate_window();wait(10)
-                native_click_widget('assets.import-create');native_click_widget(identity,settle=False)
+                native_click_widget('assets.import-create')
+                if identity not in state()['widgets']:
+                    call('screenshot',label='native-import-missing-'+workflow);wait(5)
+                    raise AssertionError('Native click did not open the import popup; inspect cursor and foreground evidence')
+                native_click_widget(identity,settle=False)
             else:
                 pool=ThreadPoolExecutor(max_workers=1)
                 purpose=identity.split('.')[0]

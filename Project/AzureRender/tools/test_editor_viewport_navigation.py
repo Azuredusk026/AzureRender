@@ -37,9 +37,16 @@ def run(executable,output):
         dict(frame=40,action='mouse',target='viewport.image',button='right',down=False)],capture=False)
     ratio=abs(boosted['camera']['position'][2]-baseline['camera']['position'][2])/movements['forward']
     assert math.isclose(ratio,4,rel_tol=.01),ratio
+    # A stationary right click opens a context menu, which owns keyboard input.
+    context=launch(executable,output,'context-tool-blocked',(1280,720),1,held+[
+        dict(frame=30,action='mouse',target='viewport.image',button='right',down=False),
+        dict(frame=34,action='key',key='E',down=True),dict(frame=35,action='key',key='E',down=False)],capture=False)
+    assert 'viewport.duplicate' in context['widgets']
+    assert context['gizmoMode']==0 and context['camera']==baseline['camera']
     for key,mode in [('W',0),('E',1),('R',2)]:
         result=launch(executable,output,'tool-'+key,(1280,720),1,held+[
             dict(frame=30,action='mouse',target='viewport.image',button='right',down=False),
+            dict(frame=31,action='key',key='Escape',down=True),dict(frame=32,action='key',key='Escape',down=False),
             dict(frame=34,action='key',key=key,down=True),dict(frame=35,action='key',key=key,down=False)],capture=False)
         assert result['gizmoMode']==mode and result['camera']==baseline['camera'],(key,result['gizmoMode'])
     for name,exit_events in [
@@ -61,7 +68,7 @@ def run(executable,output):
         assert result['view']['projection']=='orthographic' and result['activeSelection']=='asset-a',(axis,result.get('view'),result['activeSelection'])
         assert result['view']['orthoHeight']>0 and result['feedback']==[],result['feedback']
         orientations.append(axis)
-    summary={'passed':True,'heldWheelAdjustsSpeed':True,'sixDirections':True,'shiftSpeedRatio':ratio,'releasedToolKeys':['W','E','R'],'escapeReleases':True,'exitCases':['focus','popup','dpi','outside'],'nativeCaptureRestored':True,'axisViewsPicked':orientations,'physicalKeyboardMouse':'not performed'}
+    summary={'passed':True,'heldWheelAdjustsSpeed':True,'sixDirections':True,'shiftSpeedRatio':ratio,'releasedToolKeys':['W','E','R'],'contextMenuBlocksToolKeys':True,'escapeReleases':True,'exitCases':['focus','popup','dpi','outside'],'nativeCaptureRestored':True,'axisViewsPicked':orientations,'physicalKeyboardMouse':'not performed'}
     (output/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8');print(json.dumps(summary))
     return output
 
