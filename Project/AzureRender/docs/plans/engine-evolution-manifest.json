@@ -861,8 +861,8 @@
           "UiMetrics"
         ],
         "interfaceFiles": [
-          "src/editor/ui/ThemeTokens.hpp",
-          "src/editor/ui/UiMetrics.hpp"
+          "src/ui/ThemeTokens.hpp",
+          "src/ui/UiMetrics.hpp"
         ],
         "tests": [
           "AzureEditor.UiFoundation",

@@ -16,13 +16,16 @@ void EditorTheme::apply(float dpiScale) {
     c[ImGuiCol_FrameBg]=tokens.control;c[ImGuiCol_FrameBgHovered]=tokens.hover;
     c[ImGuiCol_FrameBgActive]=tokens.selected;c[ImGuiCol_CheckMark]=tokens.accent;
     c[ImGuiCol_Button]=tokens.control;c[ImGuiCol_ButtonHovered]=tokens.hover;
-    c[ImGuiCol_ButtonActive]=tokens.selected;c[ImGuiCol_Header]=tokens.selected;
+    c[ImGuiCol_ButtonActive]=tokens.selected;c[ImGuiCol_Header]=tokens.control;
     c[ImGuiCol_HeaderHovered]=tokens.hover;c[ImGuiCol_HeaderActive]=tokens.selected;
     c[ImGuiCol_TitleBg]=tokens.recessed;c[ImGuiCol_TitleBgActive]=tokens.control;
     c[ImGuiCol_MenuBarBg]=tokens.recessed;c[ImGuiCol_Tab]=tokens.surface;
     c[ImGuiCol_TabSelected]=tokens.selected;c[ImGuiCol_TabHovered]=tokens.hover;
+    c[ImGuiCol_TabDimmed]=tokens.surface;c[ImGuiCol_TabDimmedSelected]=tokens.control;
+    c[ImGuiCol_TabSelectedOverline]=tokens.accent;c[ImGuiCol_TabDimmedSelectedOverline]=tokens.muted;
+    c[ImGuiCol_NavCursor]=tokens.accent;c[ImGuiCol_Separator]=tokens.border;
     c[ImGuiCol_DockingEmptyBg]=tokens.recessed;
-    style.WindowPadding={8,8};style.FramePadding={8,4};style.ItemSpacing={8,4};
+    style.WindowPadding={8,8};style.FramePadding={8,7};style.ItemSpacing={8,4};
     style.WindowRounding=6;style.FrameRounding=4;style.PopupRounding=6;
     style.WindowBorderSize=1;style.FrameBorderSize=1;style.TabBorderSize=0;
     style.FontSizeBase=14;style.FontScaleDpi=metrics.scale;

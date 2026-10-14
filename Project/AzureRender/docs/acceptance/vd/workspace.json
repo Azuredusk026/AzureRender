@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "dpiCases": 10,
+  "realImGuiEvents": 16,
+  "chineseSaveReload": true,
+  "runControls": true,
+  "panelPersistence": true,
+  "corruptionRecovery": true,
+  "iniIntegrity": true,
+  "textFocusProtection": true,
+  "dynamicDpi": true,
+  "layoutReset": true,
+  "gizmoModes": 3,
+  "scriptAssets": true,
+  "viewportPicking": true,
+  "dockDragPersistence": true,
+  "hitErrors": [
+    {
+      "case": "1920x1080-1",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 1.7631603668633034e-05,
+      "rasterErrorPixels": 0.5036541319688376
+    },
+    {
+      "case": "1280x720-1",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 5.415360533334024e-06,
+      "rasterErrorPixels": 0.6019005327664945
+    },
+    {
+      "case": "1920x1080-1.25",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 7.469196361853392e-06,
+      "rasterErrorPixels": 0.6359332678496703
+    },
+    {
+      "case": "1280x720-1.25",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 2.9648308668583923e-05,
+      "rasterErrorPixels": 0.5947750572129186
+    },
+    {
+      "case": "1920x1080-1.5",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 3.535280711730593e-05,
+      "rasterErrorPixels": 0.4679308606196173
+    },
+    {
+      "case": "1280x720-1.5",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 2.0102805251553946e-05,
+      "rasterErrorPixels": 0.5972050361360656
+    },
+    {
+      "case": "1920x1080-2",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 2.816052074194886e-06,
+      "rasterErrorPixels": 0.4048184898801992
+    },
+    {
+      "case": "1280x720-2",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 3.2961328599867556e-06,
+      "rasterErrorPixels": 0.14551110863286
+    },
+    {
+      "case": "1280x720-0.75",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 1.0580983484942408e-06,
+      "rasterErrorPixels": 0.5200488811547187
+    },
+    {
+      "case": "3840x2160-3",
+      "projectionErrorPixels": 6.103515636368684e-05,
+      "handleProjectionErrorPixels": 3.699529997902573e-07,
+      "rasterErrorPixels": 0.01220666129700021
+    }
+  ]
+}

@@ -10,7 +10,15 @@ void check(bool value,const char* reason){if(!value)throw std::runtime_error(rea
 int main(){const auto root=std::filesystem::temp_directory_path()/"azure_playable_quest";
 try{
     std::filesystem::remove_all(root);
-    std::filesystem::copy(AZURE_QUEST_PROJECT,root,std::filesystem::copy_options::recursive);
+    // Copy authoring content only; source caches may change during parallel tests.
+    const std::filesystem::path source=AZURE_QUEST_PROJECT;
+    std::filesystem::create_directories(root);
+    for(std::filesystem::recursive_directory_iterator it(source),end;it!=end;++it){
+        if(it->path().filename()==".azure"){it.disable_recursion_pending();continue;}
+        const auto target=root/it->path().lexically_relative(source);
+        if(it->is_directory())std::filesystem::create_directories(target);
+        else if(it->is_regular_file())std::filesystem::copy_file(it->path(),target);
+    }
     RuntimeLifecycle runtime;LevelSession levels(Project::load(root/"project.azureproject"),runtime);runtime.start();
     GameRuntime game(runtime,application::systems(),application::explorationConfiguration());ScriptRuntime scripts(runtime,game,levels.assets());std::map<std::string,std::string> ui;
     scripts.setUiHandler([&](auto id,auto text){ui[id]=text;});

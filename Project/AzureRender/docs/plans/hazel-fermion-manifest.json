@@ -1049,7 +1049,7 @@
       "sha256": "a029dba4e50f0666892dfca17d02449ac7438e94b5b01b6eb4a7049a414e4249"
     },
     {
-      "file": "src/editor/ui/Widgets.hpp",
+      "file": "src/ui/Widgets.hpp",
       "sha256": "2aebe3417e7ba14214c9b7d8b8a7fe55ef576edf29eba62cd86d42de20ff1aaf"
     },
     {

@@ -38,7 +38,7 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
     const bool renderGrid=presentation.assetGrid_&&!compact;
     const bool wide=compact||ImGui::GetContentRegionAvail().x>metrics.widePanelWidth;
     const auto gridWidth=ImGui::GetFrameHeight()+ImGui::CalcTextSize("网格").x+metrics.spacing;
-    const auto searchWidth=wide?ImGui::GetContentRegionAvail().x-metrics.filterWidth-gridWidth-3*metrics.spacing-(compact?ui::buttonWidth("+")+metrics.spacing:0):-1;
+    const auto searchWidth=wide?ImGui::GetContentRegionAvail().x-metrics.filterWidth-gridWidth-3*metrics.spacing-(compact?ui::buttonWidth("+")+ui::buttonWidth("清除")+2*metrics.spacing:0):-1;
     ui::searchField("##Search assets","搜索名称或路径",presentation.assetFilter_,searchWidth);services_.observe("assets.search");
     if(ImGui::IsItemHovered())ImGui::SetTooltip("按名称或路径筛选资源");
     ui::nextToolbarItem(metrics.filterWidth);ImGui::SetNextItemWidth(metrics.filterWidth);
@@ -49,6 +49,13 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         for(const auto& [id,type]:types){if(ImGui::Selectable(type.label.c_str(),presentation.assetTypeId_==id))presentation.assetTypeId_=id;services_.observe("type."+type.label);}
         ImGui::EndCombo();
     }services_.observe("assets.type");ui::nextToolbarItem(gridWidth);ImGui::Checkbox("网格",&presentation.assetGrid_);services_.observe("assets.grid");
+    if(compact){
+        ui::nextToolbarItem(ui::buttonWidth("清除"));
+        ImGui::BeginDisabled(!presentation.assetFilter_.IsActive()&&presentation.assetTypeId_.empty());
+        if(ui::button("清除")){presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();}
+        services_.observe("assets.clear-filters");ImGui::EndDisabled();
+        if(ImGui::IsItemHovered())ImGui::SetTooltip("清除搜索和类型筛选");
+    }
     auto& directories=services_.session.contentDirectories();
     const auto navigate=[&](const std::string& mount,const std::string& path){
         if(presentation.assetMount_==mount&&presentation.assetDirectory_==path)return;
@@ -242,11 +249,11 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         }}ImGui::EndTable();
     }
     if(resources.empty()){
-        if(!compact||(!presentation.assetFilter_.IsActive()&&presentation.assetTypeId_.empty()))
-            ui::emptyState("没有匹配的资源",compact?"":"调整搜索、类型或目录，也可导入和创建资源。");
-        if(presentation.assetFilter_.IsActive()||!presentation.assetTypeId_.empty()){
+        if(!compact&&(presentation.assetFilter_.IsActive()||!presentation.assetTypeId_.empty())){
             if(ui::button(compact?"无匹配 · 清除筛选":"清除筛选")){presentation.assetFilter_.Clear();presentation.assetTypeId_.clear();}services_.observe("assets.clear-filters");
         }
+        if(!compact||(!presentation.assetFilter_.IsActive()&&presentation.assetTypeId_.empty()))
+            ui::emptyState("没有匹配的资源",compact?"":"调整搜索、类型或目录，也可导入和创建资源。");
     }
     ImGui::EndChild();services_.textureDialog();services_.materialDialog();
     if(presentation.assetPreviewRequested_){ImGui::OpenPopup("Asset preview");presentation.assetPreviewRequested_=false;}

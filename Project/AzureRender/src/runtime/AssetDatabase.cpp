@@ -21,6 +21,14 @@
 namespace azurerender {
 namespace {
 using Json = nlohmann::json;
+#ifdef _WIN32
+std::wstring nativeFilePath(const std::filesystem::path& path) {
+    const auto value=std::filesystem::absolute(path).lexically_normal().native();
+    if(value.rfind(L"\\\\?\\",0)==0)return value;
+    if(value.rfind(L"\\\\",0)==0)return L"\\\\?\\UNC\\"+value.substr(2);
+    return L"\\\\?\\"+value;
+}
+#endif
 std::string bytes(const std::filesystem::path& path, const std::function<void()>& check={}) {
     std::ifstream input(path, std::ios::binary|std::ios::ate);
     if (!input) {
@@ -112,7 +120,7 @@ void writeCache(const std::filesystem::path& path, const std::string& data) {
          if(!output)throw std::runtime_error("Cannot write asset cache: "+path.u8string());}
         std::error_code error;
 #ifdef _WIN32
-        if(!MoveFileExW(payload.c_str(),path.c_str(),MOVEFILE_WRITE_THROUGH))
+        if(!MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_WRITE_THROUGH))
             error={static_cast<int>(GetLastError()),std::system_category()};
 #else
         fs::rename(payload,path,error);
@@ -122,7 +130,7 @@ void writeCache(const std::filesystem::path& path, const std::string& data) {
         if(error && fs::is_regular_file(path)){
             if(cacheBytes(path)==data)error.clear();
 #ifdef _WIN32
-            else if(MoveFileExW(payload.c_str(),path.c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH))
+            else if(MoveFileExW(nativeFilePath(payload).c_str(),nativeFilePath(path).c_str(),MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH))
                 error.clear();
             else error={static_cast<int>(GetLastError()),std::system_category()};
 #endif

@@ -29,9 +29,11 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
 #endif
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const bool compact=EditorWorkspace::layout(ImGui::GetIO().DisplaySize.x,ImGui::GetIO().DisplaySize.y,dpi_,session_->settings().get("editor.compact").get<bool>()).compact;
-    if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{metrics.spacing,metrics.axisSpacing});}
-    if(!ImGui::Begin("场景###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(3);return;}
-    drawDocumentTabs();
+    if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{metrics.spacing,metrics.axisSpacing});}
+    if(!ImGui::Begin("场景###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(2);return;}
+    // Dock titles use the shared padding; compact controls only affect panel contents.
+    if(compact)ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{metrics.padding,0});
+    if(!compact||session_->documents().describe(context_->documentId(),false).size()>1)drawDocumentTabs();
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
@@ -244,8 +246,9 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     viewportAcceptsShortcuts_ = (viewportFocused_ || navigationButton_>=0)
         && !ImGui::GetIO().WantTextInput
         && !ImGui::IsAnyItemActive();
+    if(compact)ImGui::PopStyleVar();
     ImGui::End();
-    if(compact)ImGui::PopStyleVar(3);
+    if(compact)ImGui::PopStyleVar(2);
 }
 
 }

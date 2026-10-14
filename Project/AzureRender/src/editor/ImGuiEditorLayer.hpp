@@ -169,6 +169,7 @@ private:
     nlohmann::json uiErrors_=nlohmann::json::array(),widgets_=nlohmann::json::object();
     std::size_t uiCursor_ = 0;
     bool injectedMouseDown_ = false;
+    bool injectedClickPending_ = false;
     bool injectedFocus_=true;
     std::array<float,2> uiMousePosition_{0,0};
     std::array<float,4> imageRect_{};

@@ -138,6 +138,9 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     registry.registerFactory({"panel.inspector",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<InspectorPanel>(services);inspectorPanel_=panel.get();return panel;});
     registry.registerFactory({"panel.assets",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<AssetBrowserPanel>(services);assetPanel_=panel.get();return panel;});
     panels_=registry.createAll();
+    // Stable workspace order also keeps docking tab submission deterministic.
+    const auto order=[this](std::string_view id){const auto& declarations=workspace_.panels();return std::find_if(declarations.begin(),declarations.end(),[&](const auto& panel){return panel.id==id;})-declarations.begin();};
+    std::stable_sort(panels_.begin(),panels_.end(),[&](const auto& a,const auto& b){return order(a->id())<order(b->id());});
     auto extensions=session_->panelRegistry().createAll();
     for(auto& panel:extensions) {
         workspace_.registerPanel(std::string(panel->id()),std::string(panel->title()));

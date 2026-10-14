@@ -62,6 +62,8 @@ void ImGuiEditorLayer::injectUiEvents() {
     if(uiActions_.empty())return;
     auto& io=ImGui::GetIO();io.AddFocusEvent(injectedFocus_);io.AddMousePosEvent(uiMousePosition_[0],uiMousePosition_[1]);
     if(injectedMouseDown_){io.AddMouseButtonEvent(injectedClickButton_,false);injectedMouseDown_=false;}
+    // Overlapping controls (including dock tabs) require a hovered frame before press.
+    if(injectedClickPending_){io.AddMouseButtonEvent(injectedClickButton_,true);injectedMouseDown_=true;injectedClickPending_=false;}
     while(uiCursor_<uiActions_.size()&&uiActions_[uiCursor_].at("frame").get<std::uint64_t>()<=uiFrame_) {
         const auto action=uiActions_[uiCursor_++];
         try {
@@ -77,7 +79,8 @@ void ImGuiEditorLayer::injectUiEvents() {
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Ctrl),action.value("ctrl",false));
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Shift),action.value("shift",false));
                 io.AddKeyEvent(static_cast<ImGuiKey>(ImGuiMod_Alt),action.value("alt",false));
-                io.AddMouseButtonEvent(index,action.value("down",true));injectedMouseDown_=kind=="click";injectedClickButton_=index;
+                if(kind=="click") {injectedClickPending_=true;injectedClickButton_=index;}
+                else io.AddMouseButtonEvent(index,action.value("down",true));
             }else if(kind=="focus"){injectedFocus_=action.at("focused").get<bool>();io.AddFocusEvent(injectedFocus_);}
             else if(kind=="text")io.AddInputCharactersUTF8(action.at("text").get<std::string>().c_str());
             else if(kind=="wheel")io.AddMouseWheelEvent(action.value("x",0.F),action.value("y",0.F));

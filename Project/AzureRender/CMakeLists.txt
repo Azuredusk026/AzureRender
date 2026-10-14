@@ -2148,3 +2148,13 @@ endif()
 
 target_sources(AzurePlatform PRIVATE src/platform/WindowIcon.cpp)
 install(DIRECTORY assets_public/brand DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")
+
+if(MSVC)
+    get_property(AZURE_LOCAL_TARGETS DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
+    foreach(AZURE_LOCAL_TARGET IN LISTS AZURE_LOCAL_TARGETS)
+        get_target_property(AZURE_LOCAL_TYPE ${AZURE_LOCAL_TARGET} TYPE)
+        if(AZURE_LOCAL_TYPE STREQUAL "EXECUTABLE")
+            target_sources(${AZURE_LOCAL_TARGET} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/windows-application.manifest")
+        endif()
+    endforeach()
+endif()

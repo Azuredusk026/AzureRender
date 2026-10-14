@@ -31,7 +31,7 @@ void EditorChrome::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,co
     ImGui::SetNextWindowPos(vp->Pos);ImGui::SetNextWindowSize({vp->Size.x,layout.menu});
     ImGui::Begin("Menu###editor-menu",nullptr,barFlags|ImGuiWindowFlags_MenuBar);
     if(ImGui::BeginMenuBar()) {
-        ui::brandMark(ImGui::GetFontSize());ImGui::SameLine();
+        ui::brandMark(ImGui::GetFontSize());ImGui::SameLine();ImGui::TextUnformatted("AzureRender");
         auto item=[&](const char* label,const char* shortcut,EditorCommand command){
             const std::map<std::string,const char*> names={{"Save","保存"},{"Reload","重新加载场景"},{"Undo","撤销"},{"Redo","重做"},{"Reload Assets","重新加载资源"},{"Reset Layout","重置布局"}};
             const auto name=names.find(label);

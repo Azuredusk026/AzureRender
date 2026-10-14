@@ -35,6 +35,7 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     (folder/'stdout.log').write_bytes(result.stdout.encode());(folder/'stderr.log').write_bytes(result.stderr.encode())
     assert result.returncode==0,f'Exit code: {result.returncode}\n'+result.stdout+result.stderr
     assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr
+    assert '[imgui-error]' not in result.stdout + result.stderr, result.stdout + result.stderr
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']
     required={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings','projects','environment'}
@@ -50,7 +51,7 @@ def main(executable,root):
     root.mkdir(parents=True,exist_ok=True);create(root/'game')
     results={}
     hitErrors=[]
-    cases=[(dpi,size) for dpi in (1,1.5,2) for size in ((1920,1080),(1280,720))]
+    cases=[(dpi,size) for dpi in (1,1.25,1.5,2) for size in ((1920,1080),(1280,720))]
     cases += [(.75,(1280,720)),(3,(3840,2160))]
     for dpi,size in cases:
         name=f'{size[0]}x{size[1]}-{dpi}'
@@ -100,7 +101,7 @@ def main(executable,root):
             from PIL import Image
             rect=results[name]['panels']['outliner']['rect']
             color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((round(rect[0]+12),round(rect[1]+rect[3]-20)))
-            assert max(abs(a-b) for a,b in zip(color,(21,23,27)))<=2,color
+            assert max(abs(a-b) for a,b in zip(color,(20,20,20)))<=2,color
     actions=[]
     def click(frame,target):actions.append(dict(frame=frame,action='click',target=target))
     def key(frame,key,down=True,ctrl=False):actions.append(dict(frame=frame,action='key',key=key,down=down,ctrl=ctrl))

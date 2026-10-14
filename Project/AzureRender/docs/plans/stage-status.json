@@ -1018,14 +1018,15 @@
     {
       "id": "VD6",
       "name": "集中验证与交付",
-      "status": "Active",
+      "status": "Ready",
       "scope": "界面现代化与职责分层",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "VD5"
       ],
       "evidence": [
-        "docs/plans/2026-10-14-ui-modernization.md"
+        "docs/acceptance/vd/2026-10-14.md",
+        "docs/acceptance/vd/manifest.json"
       ],
       "requiredAcceptance": [
         "VD6-HUMAN"
@@ -1219,7 +1220,7 @@
       "originPhase": "VD6",
       "result": "pending",
       "description": "集中确认中文输入、实体拖拽、焦点与连续制作体验",
-      "evidence": "docs/plans/2026-10-14-ui-modernization.md"
+      "evidence": "docs/acceptance/vd/2026-10-14.md"
     }
   ],
   "mirrors": [
