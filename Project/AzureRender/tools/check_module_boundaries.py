@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 
 ALLOWED = {
+    'AzureUi': set(),
     'AzureScriptingHost': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore'},
     'AzureLuaScripting': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore', 'AzureScriptingHost'},
     'AzureManagedScripting': {'AzureFoundation', 'AzureRuntime', 'AzureReflection', 'AzureRenderCore', 'AzureScriptingHost'},
@@ -19,9 +20,9 @@ ALLOWED = {
     'AzureRuntime': {'AzureFoundation', 'AzureReflection', 'AzureRenderCore'},
     'AzureGameplay': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime'},
     'AzureProjectRuntime': {'AzureFoundation', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureLuaScripting', 'AzureManagedScripting', 'AzureScriptingHost'},
-    'AzureEditor': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureAI'},
+    'AzureEditor': {'AzureUi', 'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureAI'},
     'AzurePlayerHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation'},
-    'AzureRenderHost': {'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation', 'AzureAI', 'AzureDevtools', 'AzureProcedural'},
+    'AzureRenderHost': {'AzureUi', 'AzureFoundation', 'AzurePlatform', 'AzureRenderCore', 'AzureReflection', 'AzureRuntime', 'AzureEditor', 'AzureGameplay', 'AzureProjectRuntime', 'AzureValidation', 'AzureAI', 'AzureDevtools', 'AzureProcedural'},
 }
 
 # CMake's codemodel includes the script libraries linked through project assembly.
@@ -96,7 +97,7 @@ def owner(path):
     if area == 'diagnostics':
         return 'AzureRenderCore' if path.name.startswith('GpuCapability') else 'AzureFoundation'
     return {'foundation':'AzureFoundation', 'resources':'AzureFoundation', 'platform':'AzurePlatform', 'reflection':'AzureReflection',
-            'runtime':'AzureRuntime', 'editor':'AzureEditor', 'assets':'AzureRenderCore',
+            'ui':'AzureUi', 'runtime':'AzureRuntime', 'editor':'AzureEditor', 'assets':'AzureRenderCore',
             'render':'AzureRenderCore', 'rhi':'AzureRenderCore', 'scene':'AzureRenderCore',
             'scenes':'AzureRenderCore'}.get(area)
 

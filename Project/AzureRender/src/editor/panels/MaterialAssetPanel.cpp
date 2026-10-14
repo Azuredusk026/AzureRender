@@ -10,7 +10,7 @@ namespace {
 void materialGraphCanvas(EditorSession& session,const std::string& asset,const nlohmann::json& document,float scale){
     auto material=MaterialData::parse(document);
     auto graph=material.authoringGraph.is_null()?MaterialGraphModel::fromMaterial(material).encode():material.authoringGraph;
-    ImGui::TextWrapped("Drag nodes to arrange the canvas. Connections compile the same material parameters and textures as the form.");
+    ImGui::TextWrapped("拖动节点调整布局，通过连接设置输出参数和纹理。");
     ImGui::BeginChild("Material graph canvas",{0,260*scale},true,ImGuiWindowFlags_HorizontalScrollbar);
     const auto origin=ImGui::GetCursorScreenPos();auto* draw=ImGui::GetWindowDrawList();
     const auto position=[&](const nlohmann::json& node){return ImVec2(origin.x+node.at("position")[0].get<float>()*scale,origin.y+node.at("position")[1].get<float>()*scale);};
@@ -44,7 +44,7 @@ void materialGraphCanvas(EditorSession& session,const std::string& asset,const n
         }
     }
     if(changed)session.edit("material.graph",{{"asset",asset},{"graph",graph}});
-    if(material.authoringGraph.is_null()&&ImGui::Button("Save graph"))session.edit("material.graph",{{"asset",asset},{"graph",graph}});
+    if(material.authoringGraph.is_null()&&ui::button("保存节点图"))session.edit("material.graph",{{"asset",asset},{"graph",graph}});
 }
 }
 void ImGuiEditorLayer::drawMaterialAssetPanel(){
@@ -57,7 +57,7 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
     if(refreshed)assetPanel_->presentation.materialSnapshot_=refreshed.value;
     ImGui::BeginChild("Material parameters",{0,-42*dpi_},false);
     if(assetPanel_->presentation.materialSnapshot_.contains("document")){
-        const bool graphOpen=ImGui::CollapsingHeader("Material graph");observeWidget("material.graph.toggle");
+        const bool graphOpen=ImGui::CollapsingHeader("材质节点图");observeWidget("material.graph.toggle");
         if(graphOpen)materialGraphCanvas(*session_,assetPanel_->presentation.materialAsset_,assetPanel_->presentation.materialSnapshot_.at("document"),dpi_);
         ImGui::TextUnformatted(assetPanel_->presentation.materialSnapshot_.at("document").at("typeId").get<std::string>().c_str());
         if(session_->developerServices().image){const auto preview=session_->edit("preview.asset",{{"asset",assetPanel_->presentation.materialAsset_}});if(preview)if(const auto texture=previewTexture(preview.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{160*dpi_,160*dpi_});}
@@ -80,7 +80,7 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
                 }ImGui::EndCombo();
             }observeWidget("material.texture."+slot.key());
         }
-        ImGui::TextWrapped("Parameters publish to this asset. Scene slot assignments use scene history.");
+        ImGui::TextWrapped("参数修改保存到材质资源；场景材质槽分配支持撤销。");
         if(ui::button("Undo material",{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canUndo").get<bool>()}))session_->edit("material.undo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.undo");ImGui::SameLine();
         if(ui::button("Redo material",{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canRedo").get<bool>()}))session_->edit("material.redo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.redo");
         for(const auto& error:session_->feedback().report())if(error.at("source").get<std::string>().rfind("material.",0)==0)ImGui::TextWrapped("%s",error.at("message").get<std::string>().c_str());
@@ -90,7 +90,7 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
 }
 void ImGuiEditorLayer::drawMaterialSlots(const SceneNode& node){
     if(node.resourceId.empty()||!session_->context().isProject())return;
-    const bool open=ImGui::CollapsingHeader("Materials");observeWidget("material.slots-header");if(!open)return;
+    const bool open=ImGui::CollapsingHeader("材质槽");observeWidget("material.slots-header");if(!open)return;
     const auto result=session_->edit("material.slots",{{"node",node.id}});if(!result)return;
     const auto label=[&](const std::string& id){const auto& records=session_->context().assets().records();const auto found=records.find(id);return found==records.end()?id:found->second.virtualPath;};
     for(const auto& slot:result.value.at("slots")){
@@ -103,11 +103,11 @@ void ImGuiEditorLayer::drawMaterialSlots(const SceneNode& node){
         }observeWidget("material.slot."+id);
         if(ImGui::BeginDragDropTarget()){if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))session_->edit("material.assign",{{"nodes",session_->selection().selected()},{"slotId",id},{"material",std::string(static_cast<const char*>(payload->Data))}});ImGui::EndDragDropTarget();}
         if(ui::button("Reset slot",{ui::ButtonVariant::Default,false,assigned.empty()}))session_->edit("material.reset-slot",{{"nodes",session_->selection().selected()},{"slotId",id}});observeWidget("material.reset."+id);
-        if(!slot.at("stable").get<bool>())ImGui::TextWrapped("Anonymous or duplicate source names use an index slot. Set azureSlotId in the model for stable reimport mapping.");
+        if(!slot.at("stable").get<bool>())ImGui::TextWrapped("模型材质槽名称重复或缺失。可在源模型中设置 azureSlotId，保持重新导入时的对应关系。");
         ImGui::PopID();
     }
     for(const auto& diagnostic:result.value.at("diagnostics")){
-        const auto id=diagnostic.at("slot").get<std::string>();ImGui::TextWrapped("Missing source slot: %s",id.c_str());
+        const auto id=diagnostic.at("slot").get<std::string>();ImGui::TextWrapped("缺少源材质槽：%s",id.c_str());
         if(ui::button(("Clear missing slot##"+id).c_str()))session_->edit("material.reset-slot",{{"nodes",session_->selection().selected()},{"slotId",id}});
     }
 }

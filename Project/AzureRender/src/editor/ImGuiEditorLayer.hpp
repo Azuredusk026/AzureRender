@@ -179,6 +179,7 @@ private:
     int settingSourceIndex_=0;
     std::string settingDiagnostic_;
     bool settingsSaveRequested_=false,compactPreference_=false;
+    bool buildReplace_=false;
 #ifdef AZURERENDER_HAS_IMGUI
     ImGuiTextFilter consoleFilter_;
 #endif

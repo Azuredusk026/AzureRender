@@ -42,7 +42,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
         if(task.at("state")=="running") {
             ImGui::ProgressBar(task.at("progress").get<float>());
             const auto id=task.at("id").get<std::string>();ImGui::PushID(id.c_str());
-            if(ui::button("Cancel task"))session_->edit("tasks.cancel",{{"id",id}});
+            if(ui::button("取消任务"))session_->edit("tasks.cancel",{{"id",id}});
             observeWidget("tasks.cancel."+id);ImGui::PopID();
         }
         const auto diagnostic=task.at("diagnostic").get<std::string>();

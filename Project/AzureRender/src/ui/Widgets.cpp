@@ -11,9 +11,10 @@ bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags) {
 }
 bool button(const char* label,const ButtonOptions& options) {
     const auto theme=ThemeTokens::dark();ScopedStyle style;
+    const bool filled=!options.selected&&(options.variant==ButtonVariant::Primary||options.variant==ButtonVariant::Danger);
     style.color(ImGuiCol_Button,options.selected?theme.selected:options.variant==ButtonVariant::Primary?theme.accent:options.variant==ButtonVariant::Danger?theme.error:theme.control)
-        .color(ImGuiCol_ButtonHovered,theme.hover).color(ImGuiCol_ButtonActive,theme.selected);
-    if(options.variant==ButtonVariant::Primary||options.variant==ButtonVariant::Danger)style.color(ImGuiCol_Text,theme.recessed);
+        .color(ImGuiCol_ButtonHovered,filled?theme.accent:theme.hover).color(ImGuiCol_ButtonActive,filled?theme.accent:theme.selected);
+    if(filled)style.color(ImGuiCol_Text,theme.recessed);
     ScopedDisabled disabled(options.disabled);const auto clicked=ImGui::Button(label,options.size);
     if(!options.tooltip.empty()&&ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))ImGui::SetTooltip("%s",options.tooltip.c_str());
     return clicked;

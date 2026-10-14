@@ -2147,4 +2147,4 @@ if(WIN32)
 endif()
 
 target_sources(AzurePlatform PRIVATE src/platform/WindowIcon.cpp)
-install(DIRECTORY assets_public/brand DESTINATION assets_public)
+install(DIRECTORY assets_public/brand DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")

@@ -17,7 +17,7 @@ void ProjectCenterView::draw(ProjectCenterController& controller,const std::func
     const auto width=std::min(920*scale,ImGui::GetContentRegionAvail().x);
     ImGui::SetCursorPosX(std::max(ImGui::GetStyle().WindowPadding.x,(viewport->WorkSize.x-width)/2));
     ImGui::BeginChild("Center content",{width,0},ImGuiChildFlags_AlwaysUseWindowPadding);
-    ImGui::Spacing();ImGui::PushFont(nullptr,28*scale);ui::brandMark(40*scale);ImGui::SameLine();ImGui::TextColored(tokens.accent,"AzureRender");ImGui::PopFont();
+    ImGui::Spacing();ImGui::PushFont(nullptr,24);ui::brandMark(40*scale);ImGui::SameLine();ImGui::TextColored(tokens.accent,"AzureRender");ImGui::PopFont();
     ui::sectionHeading("项目中心","创建独立项目，或打开已有项目继续制作。");
     ImGui::Separator();
     if(controller.busy())ui::taskFeedback(controller.operation(),"任务完成后进入编辑器。关闭窗口会等待当前项目事务结束。");

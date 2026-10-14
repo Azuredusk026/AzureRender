@@ -9,7 +9,7 @@ import unittest
 CHECKER = Path(__file__).with_name('check_module_boundaries.py')
 
 class BoundaryTests(unittest.TestCase):
-    def run_case(self, runtime_include='', editor_include='', dependency='', host_include=None):
+    def run_case(self, runtime_include='', editor_include='', dependency='', host_include=None, ui_include=None):
         with tempfile.TemporaryDirectory(prefix='azure-boundary-') as temporary:
             root = Path(temporary)
             for module in ['runtime', 'editor', 'gameplay']:
@@ -28,6 +28,10 @@ class BoundaryTests(unittest.TestCase):
                 {'name':'AzureEditor', 'id':'editor', 'sources':[{'path':'src/editor/Panel.cpp'}], 'dependencies':[{'id':'runtime'}]},
                 {'name':'AzureGameplay', 'id':'gameplay', 'sources':[{'path':'src/gameplay/Mechanism.cpp'}], 'dependencies':[{'id':'runtime'}]},
             ]
+            if ui_include is not None:
+                (root/'src/ui').mkdir()
+                (root/'src/ui/Widgets.cpp').write_text(ui_include,encoding='utf-8')
+                targets.append({'name':'AzureUi','id':'ui','sources':[{'path':'src/ui/Widgets.cpp'}]})
             if host_include is not None:
                 (root/'src/player').mkdir()
                 (root/'src/player/Host.cpp').write_text(host_include,encoding='utf-8')
@@ -39,6 +43,11 @@ class BoundaryTests(unittest.TestCase):
                 {'name':t['name'], 'id':t['id'], 'jsonFile':t['id']+'.json'} for t in targets]}]}
             (reply/'codemodel-v2.json').write_text(json.dumps(model), encoding='utf-8')
             return subprocess.run([sys.executable,str(CHECKER),'--source',str(root),'--build-dir',str(root/'build')],capture_output=True,text=True)
+
+    def test_ui_cannot_include_editor(self):
+        result=self.run_case(ui_include='#include "editor/Panel.hpp"\n')
+        self.assertNotEqual(result.returncode,0,result.stdout)
+        self.assertIn('AzureUi',result.stdout)
 
     def test_allowed_editor_dependency(self):
         result = self.run_case(editor_include='#include "runtime/Core.hpp"\n')

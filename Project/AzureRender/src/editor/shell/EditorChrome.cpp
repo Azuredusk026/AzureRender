@@ -5,6 +5,7 @@
 #include "ui/AppChrome.hpp"
 #include "ui/BrandMark.hpp"
 #include <algorithm>
+#include <map>
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
@@ -32,7 +33,9 @@ void EditorChrome::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,co
     if(ImGui::BeginMenuBar()) {
         ui::brandMark(ImGui::GetFontSize());ImGui::SameLine();
         auto item=[&](const char* label,const char* shortcut,EditorCommand command){
-            if(ImGui::MenuItem(label,shortcut,false,enabled(s,command)))static_cast<void>(s.execute(command));
+            const std::map<std::string,const char*> names={{"Save","保存"},{"Reload","重新加载场景"},{"Undo","撤销"},{"Redo","重做"},{"Reload Assets","重新加载资源"},{"Reset Layout","重置布局"}};
+            const auto name=names.find(label);
+            if(ImGui::MenuItem(name==names.end()?label:name->second,shortcut,false,enabled(s,command)))static_cast<void>(s.execute(command));
             observe(std::string("menu.")+label);
         };
         if(ImGui::BeginMenu("文件")){if(ImGui::MenuItem("项目中心…"))workspace.setVisible("projects",true);observe("menu.Projects");item("Save","Ctrl+S",EditorCommand::Save);item("Reload",nullptr,EditorCommand::Reload);ImGui::EndMenu();}observe("menu.File");

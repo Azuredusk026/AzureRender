@@ -1,8 +1,10 @@
 # AzureRender 工程
 
+界面操作与模块归属见[编辑器界面说明](docs/tutorials/editor-interface.md)。
+
 界面改进方向见[实施方案](docs/plans/2026-10-14-ui-modernization.md)。
 可直接打开[视觉提案](docs/design/ui-modernization/preview.html)。
-VD0 研究与设计完成，VD1 至 VD4 完成，VD5 开发中，VD6 待完成。
+VD0 研究与设计完成，VD1 至 VD5 完成，VD6 开发中。
 
 构建目录、临时输出和定期清理见[产物管理](docs/development/artifact-retention.md)。
 
