@@ -40,6 +40,13 @@ def run(executable, output):
         assert next(n for n in level['nodes'] if n['id'] == child)['parentId'] == parent
         host.click('mode.Rotate')
         assert host.workspace()['gizmoMode'] == 1
+        scripts=host.edit('assets.catalog',type='script')
+        script=next(row for row in scripts if row['path'].endswith('.lua'))
+        host.click('script.attach-picker');host.click('script.attach.'+script['id'])
+        host.edit('document.save')
+        level=json.loads(level_path.read_text(encoding='utf-8'))
+        component=next(n for n in level['nodes'] if n['id']==child)['components']['azure.script']
+        assert component['data']['asset']==script['id']
         host.screenshot('authoring-workspace')
     (root / 'summary.json').write_text(json.dumps(dict(passed=True, physicalInput=False,
         sceneContainer=True, emptySpaceUnparent=True, undoRestoresParent=True,

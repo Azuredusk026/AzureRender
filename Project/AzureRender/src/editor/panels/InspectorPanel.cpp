@@ -157,6 +157,30 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
             }
             ImGui::EndDisabled();
         }
+        if(view.isProject()&&owners.size()==1){
+            ImGui::Separator();
+            const bool hasScript=!view.componentData(owners.front(),"azure.script").is_null();
+            ImGui::BeginDisabled(hasScript);
+            if(ui::button("附加脚本"))ImGui::OpenPopup("Attach script");observeWidget("script.attach-picker");
+            if(ImGui::BeginDragDropTarget()){
+                if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_RESOURCE"))session_->edit("script.attach",{{"node",owners.front()},{"asset",static_cast<const char*>(payload->Data)}});
+                ImGui::EndDragDropTarget();
+            }
+            if(ImGui::BeginPopup("Attach script")){
+                for(const auto* type:{"script","managed-script"})for(const auto& asset:session_->edit("assets.catalog",{{"type",type}}).value){
+                    const auto path=asset.at("path").get<std::string>();
+                    const auto extension=std::filesystem::u8path(path).extension();
+                    if(extension!=".lua"&&extension!=".azscript")continue;
+                    if(ImGui::Selectable(path.c_str()))session_->edit("script.attach",{{"node",owners.front()},{"asset",asset.at("id")}});
+                    observeWidget("script.attach."+asset.at("id").get<std::string>());
+                }
+                if(ImGui::MenuItem("新建脚本…")){workspace_.setVisible("scripts",true);ImGui::SetWindowFocus("Script Authoring###scripts");}
+                ImGui::EndPopup();
+            }
+            ImGui::EndDisabled();
+            if(hasScript)ImGui::TextDisabled("在脚本组件中更换脚本引用。");
+            else ImGui::TextDisabled("也可将脚本资源拖到附加脚本按钮。");
+        }
         if(session_->references().active()) {
             ImGui::Separator();ui::statusText("从层级、视口或资源面板选择兼容引用；Esc 取消。",ui::StatusKind::Info);
             if(ui::button("取消选取"))session_->edit("reference.cancel");observeWidget("reference.cancel");

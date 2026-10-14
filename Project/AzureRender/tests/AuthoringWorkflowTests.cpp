@@ -20,6 +20,13 @@ int main(int argc,char** argv){if(argc!=2)return 2;try{
     require(!session.edit("script.template",{{"backend","coreclr"},{"path","assets:/9Invalid.cs"}}),"Managed source validates its class identifier");
     require(static_cast<bool>(session.edit("script.reveal",{{"asset",context->assets().idForPath("assets:/Controller.cs")}})),"Managed source is revealable through the registered asset type");
     require(context->documentContent()==original&&!context->dirty(),"Script source creation leaves scene content intact");
+    const auto owner=context->selectedNode()->id;
+    require(static_cast<bool>(session.edit("script.attach",{{"node",owner},{"asset",id}})),"Attach script and component in one operation");
+    require(context->componentData(owner,"azure.script").at("asset")==id,"Attachment stores the asset identity");
+    require(static_cast<bool>(session.edit("history.undo")),"Script attachment is one undo step");
+    require(context->documentContent()==original,"Undo attachment restores the complete scene");
+    require(!session.edit("script.attach",{{"node",owner},{"asset","assets:/Controller.cs"}}),"Unbuilt managed source cannot masquerade as a runnable script");
+    require(context->documentContent()==original,"Rejected attachment leaves no empty component");
     std::ifstream templateInput(root/"assets/Controller.lua");std::string templateSource{std::istreambuf_iterator<char>(templateInput),{}};templateInput.close();
     const auto init=templateSource.find("function init()\nend");require(init!=std::string::npos,"Lua template exports the production global init callback");
     templateSource.replace(init,std::string("function init()\nend").size(),"function init()\n    self:set('azure.transform','translation',{7,0,0})\nend");

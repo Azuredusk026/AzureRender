@@ -76,3 +76,7 @@ AZURERENDER_STARTUP_VALIDATION_TOKEN 提供会话令牌。
 工作区提供停靠区域，视口负责变换工具与方向交互。
 View 菜单统一管理面板的显示和隐藏。
 资源面板负责资产创建，场景创建调用对象菜单。
+
+脚本附加由 `editor/scripts` 注册事务操作。
+属性面板和脚本面板共享 `script.attach`。
+源文件创建与场景附加分别拥有资产和文档生命周期。

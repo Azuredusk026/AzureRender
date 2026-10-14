@@ -76,7 +76,7 @@ Unity 的场景容器与普通 GameObject 有不同职责。
 
 ## 执行顺序
 
-以下为执行计划。UX-A、UX-B 已完成，UX-C 开发中。
+以下为执行计划。UX-A 至 UX-C 已完成，UX-D 开发中。
 
 UX-A 修改层级面板、编辑操作和层级服务。
 补充同级移动、解除父级和撤销测试。
@@ -145,3 +145,15 @@ Debug 编辑器与创建测试构建通过。
 Debug 构建及 `AzureEditor.Workspace` 通过。
 实际 ImGui 拖放、保存与撤销回放通过。
 截图已检查，证据位于 `build/ux-2026-10-14/usability`。
+
+## UX-C 验证记录
+
+属性面板支持选择脚本和拖入脚本资源。
+脚本面板可创建 Lua 源文件并附加到选中物体。
+`script.attach` 在一个事务中添加组件和资产引用。
+已有脚本通过组件属性更换，附加入口避免覆盖。
+C# 源文件需通过既有托管构建流程生成 `.azscript`。
+本轮未实现 C# 自动编译与直接附加源文件。
+Debug 构建及 `AzureEditor.AuthoringWorkflow` 通过。
+实际 ImGui 脚本选择、附加和保存回放通过。
+证据位于 `build/ux-2026-10-14/script-ui`。

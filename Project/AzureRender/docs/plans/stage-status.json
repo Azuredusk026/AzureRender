@@ -892,9 +892,9 @@
     {
       "id": "UX-C",
       "name": "组件与脚本",
-      "status": "Active",
+      "status": "Complete",
       "scope": "Unity 操作习惯与通用编辑器职责",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "UX-B"
       ],
@@ -906,7 +906,7 @@
     {
       "id": "UX-D",
       "name": "设置与扩展归属",
-      "status": "Pending",
+      "status": "Active",
       "scope": "Unity 操作习惯与通用编辑器职责",
       "checksPassed": false,
       "dependsOn": [

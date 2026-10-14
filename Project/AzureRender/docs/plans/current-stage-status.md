@@ -81,8 +81,8 @@ Ready 表示依赖满足，可以开始执行。
 | P8 | 最终交付验收 | Ready | 开发与机器批次已整理，实体操作及其余正式条件待满足。[记录](../acceptance/p8/2026-10-14.md) |
 | UX-A | 创建与层级 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-B | 工作区与视口 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
-| UX-C | 组件与脚本 | 开发中 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
-| UX-D | 设置与扩展归属 | 待完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
+| UX-C | 组件与脚本 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
+| UX-D | 设置与扩展归属 | 开发中 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-E | 集中交互复核 | 待完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 
 ## 最终收尾
