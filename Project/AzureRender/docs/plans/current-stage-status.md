@@ -84,6 +84,13 @@ Ready 表示依赖满足，可以开始执行。
 | UX-C | 组件与脚本 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-D | 设置与扩展归属 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-E | 集中交互复核 | Ready | Unity 操作习惯与通用编辑器职责。[记录](../acceptance/ux/2026-10-14.md) |
+| VD0 | 参考研究与视觉设计 | 完成 | 界面改进方案与设计资源。[记录](2026-10-14-ui-modernization.md) |
+| VD1 | 公共界面基础 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
+| VD2 | 品牌与项目中心 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
+| VD3 | 工作台与视口外壳 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
+| VD4 | 层级属性与资源面板 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
+| VD5 | 设置制作与发布界面 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
+| VD6 | 集中验证与交付 | 待完成 | 界面改进实施候选。[记录](2026-10-14-ui-modernization.md) |
 
 ## 最终收尾
 
@@ -113,5 +120,6 @@ P8 完成前，项目的完整交付验收仍待完成。
 | UI8-directory-causality | UI8 | P8 | 待验 |
 | ED-workflow | ED7 | P8 | 未执行 |
 | UX-E-HUMAN | UX-E | UX-E | 待验 |
+| VD6-HUMAN | VD6 | VD6 | 待验 |
 
 详细步骤见[验收收尾流程](../acceptance/phase-closure.md)。

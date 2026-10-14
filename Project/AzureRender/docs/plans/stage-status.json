@@ -932,6 +932,111 @@
       "requiredAcceptance": [
         "UX-E-HUMAN"
       ]
+    },
+    {
+      "id": "VD0",
+      "name": "参考研究与视觉设计",
+      "kind": "candidate",
+      "status": "Complete",
+      "scope": "界面改进方案与设计资源",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD1",
+      "name": "公共界面基础",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD0"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD2",
+      "name": "品牌与项目中心",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD3",
+      "name": "工作台与视口外壳",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD4",
+      "name": "层级属性与资源面板",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD3"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD5",
+      "name": "设置制作与发布界面",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD4"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "VD6",
+      "name": "集中验证与交付",
+      "kind": "candidate",
+      "status": "Pending",
+      "scope": "界面改进实施候选",
+      "checksPassed": false,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-14-ui-modernization.md"
+      ],
+      "requiredAcceptance": [
+        "VD6-HUMAN"
+      ]
     }
   ],
   "acceptance": [
@@ -1114,6 +1219,14 @@
       "result": "pending",
       "description": "新版交互的集中实体操作与使用体验确认",
       "evidence": "docs/acceptance/ux/2026-10-14.md"
+    },
+    {
+      "id": "VD6-HUMAN",
+      "ownerPhase": "VD6",
+      "originPhase": "VD6",
+      "result": "pending",
+      "description": "集中确认中文输入、实体拖拽、焦点与连续制作体验",
+      "evidence": "docs/plans/2026-10-14-ui-modernization.md"
     }
   ],
   "mirrors": [
