@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+构建目录、临时输出和定期清理见[产物管理](docs/development/artifact-retention.md)。
+
 UX-A 至 UX-D 完成，UX-E 为 Ready。
 自动检查已完成，新版使用体验等待集中确认。
 交付入口与结果见[本轮交付](docs/acceptance/ux/2026-10-14.md)。

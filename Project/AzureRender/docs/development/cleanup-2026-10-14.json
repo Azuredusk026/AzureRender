@@ -1,0 +1,392 @@
+{
+  "date": "2026-10-14",
+  "status": "完成",
+  "deletedLogicalBytes": 98056551334,
+  "freeDiskBytesAfter": 133337903104,
+  "legacyDirectories": [
+    {
+      "name": "acceptance-budget-sync",
+      "bytes": 354096
+    },
+    {
+      "name": "automatic-cleanup-2026-10-12",
+      "bytes": 1818866
+    },
+    {
+      "name": "automatic-forward-2026-10-12",
+      "bytes": 1854576661
+    },
+    {
+      "name": "automatic-resume-2026-10-11",
+      "bytes": 562570883
+    },
+    {
+      "name": "blackhole-assessment",
+      "bytes": 10238876
+    },
+    {
+      "name": "blackhole-optimization",
+      "bytes": 79380933
+    },
+    {
+      "name": "docs-editor-plan-2026-10-14",
+      "bytes": 679405313
+    },
+    {
+      "name": "docs-g15",
+      "bytes": 325203886
+    },
+    {
+      "name": "docs-g16",
+      "bytes": 325330518
+    },
+    {
+      "name": "docs-g16-final",
+      "bytes": 326138614
+    },
+    {
+      "name": "docs-productization",
+      "bytes": 305453451
+    },
+    {
+      "name": "docs-productization-u12",
+      "bytes": 312660276
+    },
+    {
+      "name": "docs-reset-2026-10-12",
+      "bytes": 670260363
+    },
+    {
+      "name": "docs-u13",
+      "bytes": 314957827
+    },
+    {
+      "name": "docs-u13-final",
+      "bytes": 315027059
+    },
+    {
+      "name": "docs-u13-verified",
+      "bytes": 319968406
+    },
+    {
+      "name": "docs-u9",
+      "bytes": 303976751
+    },
+    {
+      "name": "docs-u9-final",
+      "bytes": 304420884
+    },
+    {
+      "name": "ed-session-2026-10-14",
+      "bytes": 387048473
+    },
+    {
+      "name": "evolution",
+      "bytes": 5623520491
+    },
+    {
+      "name": "f1",
+      "bytes": 78023985
+    },
+    {
+      "name": "f2",
+      "bytes": 788211667
+    },
+    {
+      "name": "f3",
+      "bytes": 43229848
+    },
+    {
+      "name": "feature-expansion-2026-10-12",
+      "bytes": 1496851928
+    },
+    {
+      "name": "g-phases",
+      "bytes": 0
+    },
+    {
+      "name": "g0",
+      "bytes": 31343617
+    },
+    {
+      "name": "g1",
+      "bytes": 34268
+    },
+    {
+      "name": "g18-dependency-evaluation-2026-10-12",
+      "bytes": 1127788337
+    },
+    {
+      "name": "g19-dependency-evaluation-2026-10-12",
+      "bytes": 1038805562
+    },
+    {
+      "name": "g2",
+      "bytes": 21084
+    },
+    {
+      "name": "g20-dependency-evaluation-2026-10-12",
+      "bytes": 1042318673
+    },
+    {
+      "name": "g21-dependency-evaluation-2026-10-12",
+      "bytes": 1021543048
+    },
+    {
+      "name": "g22-dependency-evaluation-2026-10-12",
+      "bytes": 40085972
+    },
+    {
+      "name": "g22-texture-containers-2026-10-12",
+      "bytes": 2351646211
+    },
+    {
+      "name": "g23-compressed-audio-2026-10-12",
+      "bytes": 1999192866
+    },
+    {
+      "name": "g23-dependency-evaluation-2026-10-12",
+      "bytes": 11328309
+    },
+    {
+      "name": "g3",
+      "bytes": 37008
+    },
+    {
+      "name": "g4",
+      "bytes": 137236
+    },
+    {
+      "name": "g5",
+      "bytes": 2528968091
+    },
+    {
+      "name": "g6",
+      "bytes": 655303076
+    },
+    {
+      "name": "g7",
+      "bytes": 2310621018
+    },
+    {
+      "name": "implementation-2026-10-10",
+      "bytes": 6448337058
+    },
+    {
+      "name": "next-development-plan-2026-10-11",
+      "bytes": 527507853
+    },
+    {
+      "name": "next-plan-site",
+      "bytes": 392041533
+    },
+    {
+      "name": "p0",
+      "bytes": 36097414
+    },
+    {
+      "name": "p1",
+      "bytes": 331843794
+    },
+    {
+      "name": "p2",
+      "bytes": 349278247
+    },
+    {
+      "name": "p4",
+      "bytes": 875576964
+    },
+    {
+      "name": "p5-cache-publication-2026-10-11",
+      "bytes": 2006495112
+    },
+    {
+      "name": "p5-device-environment-2026-10-11",
+      "bytes": 891304947
+    },
+    {
+      "name": "p5-directory-reclamation-2026-10-11",
+      "bytes": 3301253289
+    },
+    {
+      "name": "p5-observation-control-2026-10-11",
+      "bytes": 5318150121
+    },
+    {
+      "name": "p5-p6-closure-2026-10-10",
+      "bytes": 2005859880
+    },
+    {
+      "name": "p5-p6-closure-candidate-2026-10-11",
+      "bytes": 738303418
+    },
+    {
+      "name": "p5-p6-delivery-investigation-2026-10-11",
+      "bytes": 1468948688
+    },
+    {
+      "name": "p5-p6-implementation-2026-10-10",
+      "bytes": 1779144091
+    },
+    {
+      "name": "p5-p6-inspection-2026-10-11",
+      "bytes": 532391727
+    },
+    {
+      "name": "p5-relative-thermal-2026-10-11",
+      "bytes": 2179002167
+    },
+    {
+      "name": "p5-relative-thermal-docs-final-site",
+      "bytes": 527069074
+    },
+    {
+      "name": "p5-relative-thermal-docs-site",
+      "bytes": 527007108
+    },
+    {
+      "name": "p5-system-trace-2026-10-11",
+      "bytes": 1697490183
+    },
+    {
+      "name": "p5-ui-residency-2026-10-11",
+      "bytes": 2435468803
+    },
+    {
+      "name": "p7-first-batch-delivery-2026-10-12",
+      "bytes": 1079863661
+    },
+    {
+      "name": "p8-automatic-2026-10-11",
+      "bytes": 2349391384
+    },
+    {
+      "name": "p8-final-2026-10-13",
+      "bytes": 2125007987
+    },
+    {
+      "name": "p8-format-closure-2026-10-12",
+      "bytes": 3363382042
+    },
+    {
+      "name": "quality-plan-site",
+      "bytes": 24650049
+    },
+    {
+      "name": "r1-graph-evidence",
+      "bytes": 4519966
+    },
+    {
+      "name": "r1-performance",
+      "bytes": 19403
+    },
+    {
+      "name": "r2-site",
+      "bytes": 3628047
+    },
+    {
+      "name": "r4-captures",
+      "bytes": 8179128
+    },
+    {
+      "name": "r4-lifecycle",
+      "bytes": 2748852
+    },
+    {
+      "name": "r4-performance",
+      "bytes": 3919484
+    },
+    {
+      "name": "r5",
+      "bytes": 1923383742
+    },
+    {
+      "name": "r6",
+      "bytes": 66859195
+    },
+    {
+      "name": "u0",
+      "bytes": 221721
+    },
+    {
+      "name": "u1",
+      "bytes": 42219318
+    },
+    {
+      "name": "u17-asset-transfer-2026-10-12",
+      "bytes": 1536421143
+    },
+    {
+      "name": "u2",
+      "bytes": 375681583
+    },
+    {
+      "name": "u5",
+      "bytes": 291183999
+    },
+    {
+      "name": "u6",
+      "bytes": 194945189
+    },
+    {
+      "name": "u7",
+      "bytes": 676055326
+    },
+    {
+      "name": "ui-productization-2026-10-12",
+      "bytes": 1623116433
+    },
+    {
+      "name": "ux-audit",
+      "bytes": 314691768
+    },
+    {
+      "name": "workflow-repair-2026-10-12",
+      "bytes": 450466
+    }
+  ],
+  "additional": [
+    {
+      "path": "build\\ninja-debug",
+      "bytes": 112035898
+    },
+    {
+      "path": "build\\ninja-release",
+      "bytes": 86691533
+    },
+    {
+      "path": "build\\ninja-msvc-g11-off",
+      "bytes": 661133049
+    },
+    {
+      "path": "build\\ninja-msvc-p3-off",
+      "bytes": 664989557
+    },
+    {
+      "path": "build\\ninja-msvc-release-symbols",
+      "bytes": 2119781483
+    },
+    {
+      "path": "site",
+      "bytes": 680937377
+    },
+    {
+      "path": "captures/character",
+      "framesRemoved": 15341,
+      "bytes": 13764066649
+    }
+  ],
+  "currentExeSha256": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1",
+  "verification": {
+    "cleanupTests": 6,
+    "readonlyFailuresResolved": 2,
+    "legacyCandidatesRemaining": 0,
+    "primaryDependenciesPreserved": true
+  },
+  "automation": {
+    "id": "azurerender",
+    "schedule": "每周日 10:00",
+    "retentionDays": 14,
+    "scope": "build/runs 下结束且停止写入超过保留期的目录"
+  }
+}

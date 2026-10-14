@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "current": {
+    "path": "ux-2026-10-14/Engine",
+    "sourceCommit": "2065b6f",
+    "exeSha256": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1"
+  },
+  "milestones": [
+    {
+      "path": "p8-final-2026-10-14",
+      "name": "P8 集中交付",
+      "status": "Ready",
+      "evidence": "docs/acceptance/p8/2026-10-14.md"
+    }
+  ],
+  "preservedBuilds": [
+    "ninja-msvc-debug",
+    "ninja-msvc-release"
+  ],
+  "runRetentionDays": 14
+}
