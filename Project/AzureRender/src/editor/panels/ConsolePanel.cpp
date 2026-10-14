@@ -25,7 +25,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
-    if(!ImGui::Begin("Console###console",workspace_.open("console"))){ImGui::End();return;}
+    if(!ImGui::Begin("日志###console",workspace_.open("console"))){ImGui::End();return;}
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const auto tasks=session_->tasks().report(),feedback=session_->feedback().report();
     const auto developer=session_->developerServices().report?session_->developerServices().report():nlohmann::json::object();

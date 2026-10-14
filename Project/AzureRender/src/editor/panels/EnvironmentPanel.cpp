@@ -3,7 +3,7 @@
 #ifdef AZURERENDER_HAS_IMGUI
 namespace azurerender {
 void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
-    if(!ImGui::Begin("Environment###environment",workspace_.open("environment"))){ImGui::End();return;}
+    if(!ImGui::Begin("环境###environment",workspace_.open("environment"))){ImGui::End();return;}
     const auto& view=context.view();
     ImGui::TextUnformatted("Scene rendering and presentation");
     ImGui::BeginDisabled(session_->playing()||session_->building());

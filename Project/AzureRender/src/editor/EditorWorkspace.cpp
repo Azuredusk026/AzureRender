@@ -19,11 +19,11 @@ std::uint64_t layoutHash(const std::filesystem::path& path) {
 }
 void EditorWorkspace::reset() {
     preset_="custom";
-    panels_={{"viewport","Viewport###viewport"},{"outliner","Scene Outliner###outliner"},
-        {"inspector","Details###inspector"},{"assets","Content Browser###assets"},
-        {"capture","Capture###capture",false},{"console","Console###console"},
-        {"build","Build Game###build",false},{"animation","Animation Preview###animation",false},
-        {"gameplay-debug","Gameplay Debug###gameplay-debug",false},{"settings","Settings###settings",false},{"projects","Projects###projects",false},{"environment","Environment###environment",false}};
+    panels_={{"viewport","场景###viewport"},{"outliner","场景层级###outliner"},
+        {"inspector","属性###inspector"},{"assets","资源###assets"},
+        {"capture","捕获###capture",false},{"console","日志###console"},
+        {"build","发布项目###build",false},{"animation","动画预览###animation",false},
+        {"gameplay-debug","运行诊断###gameplay-debug",false},{"settings","设置###settings",false},{"projects","项目中心###projects",false},{"environment","环境###environment",false}};
     panels_.insert(panels_.end(),extraPanels_.begin(),extraPanels_.end());
 }
 void EditorWorkspace::preset(const std::string& id) {

@@ -28,7 +28,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.0F, 0.0F, 0.20F, 0.72F);
 #endif
-    if(!ImGui::Begin("Scene Outliner###outliner",workspace_.open("outliner"))){ImGui::End();return;}
+    if(!ImGui::Begin("场景层级###outliner",workspace_.open("outliner"))){ImGui::End();return;}
     {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();widgets_["outliner.drop-region"]={p.x,p.y,s.x,s.y};}
     ui::searchField("##Search objects","搜索对象名称或标识",outlinerFilter_);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
@@ -81,7 +81,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         if(ImGui::BeginPopupContextItem("Object actions")){
             const auto id=node.id;
             const auto select=[this,id]{session_->selection().set({id});};
-            if(ImGui::MenuItem("重命名","Details"))pending=[this,select]{select();workspace_.setVisible("inspector",true);focusObjectName_=true;ImGui::SetWindowFocus("Details###inspector");};
+            if(ImGui::MenuItem("重命名","Details"))pending=[this,select]{select();workspace_.setVisible("inspector",true);focusObjectName_=true;ImGui::SetWindowFocus("属性###inspector");};
             if(ImGui::MenuItem("聚焦对象","F"))pending=[this,select]{select();session_->edit("viewport.frame-selection");};
             const bool writable=!session_->playing()&&!session_->building();
             if(ImGui::MenuItem("复制","Ctrl+D",false,writable))pending=[this,select]{select();session_->edit("node.duplicate");};

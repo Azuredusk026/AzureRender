@@ -24,7 +24,7 @@ void setFallbackPanelRect(float x,float y,float width,float height) {
 void ImGuiEditorLayer::drawGameplayDebugPanel(PanelContext& panelContext){
     const auto& view=panelContext.view();
     ImGui::SetNextWindowSize({370,280},ImGuiCond_FirstUseEver);
-    if(!ImGui::Begin("Gameplay Debug###gameplay-debug",workspace_.open("gameplay-debug"))){ImGui::End();return;}
+    if(!ImGui::Begin("运行诊断###gameplay-debug",workspace_.open("gameplay-debug"))){ImGui::End();return;}
     auto overlay=session_->debugOverlay;
     if(ImGui::Checkbox("Collision and camera overlay",&overlay))session_->edit("viewport.debug-overlay",{{"enabled",overlay}});
     const auto scene=session_->viewScene();auto* runtime=session_->runtime();auto* game=session_->game();

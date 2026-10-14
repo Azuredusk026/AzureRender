@@ -24,7 +24,7 @@ void setFallbackPanelRect(float x,float y,float width,float height) {
 void ImGuiEditorLayer::drawAnimationPanel(PanelContext& panelContext){
     const auto& view=panelContext.view();
     ImGui::SetNextWindowSize({360,260},ImGuiCond_FirstUseEver);
-    if(!ImGui::Begin("Animation Preview###animation",workspace_.open("animation"))){ImGui::End();return;}
+    if(!ImGui::Begin("动画预览###animation",workspace_.open("animation"))){ImGui::End();return;}
     if(view.isProject() && view.selectedNode()){
         try{
             const auto data=view.componentData(view.selectedNode()->id,"azure.animator");

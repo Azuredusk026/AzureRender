@@ -4,7 +4,7 @@
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::drawProblemsPanel(PanelContext&){
-    if(!ImGui::Begin("Problems###problems",workspace_.open("problems"))){ImGui::End();return;}
+    if(!ImGui::Begin("问题###problems",workspace_.open("problems"))){ImGui::End();return;}
     ImGui::SetNextItemWidth(-1);ui::inputText("Search problems",problemSearch_);observeWidget("problems.search");
     const auto report=session_->diagnostics().query({{"text",problemSearch_}});
     ImGui::Text("Capacity: %u | Dropped: %u",report.at("capacity").get<unsigned>(),report.at("dropped").get<unsigned>());

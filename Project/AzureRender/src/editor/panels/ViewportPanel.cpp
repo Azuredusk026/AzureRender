@@ -30,7 +30,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const bool compact=EditorWorkspace::layout(ImGui::GetIO().DisplaySize.x,ImGui::GetIO().DisplaySize.y,dpi_,session_->settings().get("editor.compact").get<bool>()).compact;
     if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{metrics.spacing,metrics.axisSpacing});}
-    if(!ImGui::Begin("Viewport###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(3);return;}
+    if(!ImGui::Begin("场景###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(3);return;}
     drawDocumentTabs();
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
@@ -38,10 +38,10 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
         for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
             const char* shortcut=entry.second==0?"W":entry.second==1?"E":entry.second==2?"R":"Q";
-            if(ui::button(compact?shortcut:entry.first,{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
+            if(ui::button(compact?shortcut:entry.second==0?"移动":entry.second==1?"旋转":entry.second==2?"缩放":"平移",{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
             observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
         }
-        ImGui::EndDisabled();if(!compact)ImGui::NewLine();
+        ImGui::EndDisabled();ui::nextToolbarItem(ui::buttonWidth("聚焦选择"));
         if(ui::button("聚焦选择",{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ui::nextToolbarItem(ui::buttonWidth("正交"));

@@ -29,7 +29,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.76F, 0.0F, 0.24F, 0.72F);
 #endif
-    if(!ImGui::Begin("Details###inspector",workspace_.open("inspector"))){ImGui::End();return;}
+    if(!ImGui::Begin("属性###inspector",workspace_.open("inspector"))){ImGui::End();return;}
     ImGui::BeginDisabled(session_->playing() || session_->building());
     if(session_->playing()||session_->building())ui::statusText("当前会话保护文档写入",ui::StatusKind::Warning);
     const auto selected=view.selectedNode()?std::optional<SceneNode>(*view.selectedNode()):std::nullopt;
@@ -175,7 +175,7 @@ void ImGuiEditorLayer::drawInspectorPanel(PanelContext& panelContext) {
                     if(ImGui::Selectable(path.c_str()))session_->edit("script.attach",{{"node",owners.front()},{"asset",asset.at("id")}});
                     observeWidget("script.attach."+asset.at("id").get<std::string>());
                 }
-                if(ImGui::MenuItem("新建脚本…")){workspace_.setVisible("scripts",true);ImGui::SetWindowFocus("Script Authoring###scripts");}
+                if(ImGui::MenuItem("新建脚本…")){workspace_.setVisible("scripts",true);ImGui::SetWindowFocus("脚本制作###scripts");}
                 ImGui::EndPopup();
             }
             ImGui::EndDisabled();

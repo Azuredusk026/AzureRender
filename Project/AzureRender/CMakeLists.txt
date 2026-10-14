@@ -443,7 +443,7 @@ if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
 else()
     target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=0)
 endif()
-add_library(AzureUi STATIC src/ui/Widgets.cpp src/ui/Feedback.cpp src/ui/Containers.cpp src/ui/BrandMark.cpp)
+add_library(AzureUi STATIC src/ui/Widgets.cpp src/ui/Feedback.cpp src/ui/Containers.cpp src/ui/BrandMark.cpp src/ui/AppChrome.cpp)
 target_link_libraries(AzureUi PUBLIC imgui::imgui)
 target_include_directories(AzureUi PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
@@ -525,6 +525,7 @@ add_library(AzureEditor STATIC
     src/editor/EditorWorkspace.cpp
     src/editor/EditorWorkspaceUI.cpp
     src/editor/EditorTheme.cpp
+    src/editor/shell/EditorChrome.cpp
     src/editor/EditorToolbar.cpp
     src/editor/ImGuiEditorLayer.cpp
 )

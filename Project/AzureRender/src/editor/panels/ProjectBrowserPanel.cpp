@@ -3,7 +3,7 @@
 #ifdef AZURERENDER_HAS_IMGUI
 namespace azurerender {
 void ImGuiEditorLayer::drawProjectBrowserPanel(PanelContext&) {
-    if(!ImGui::Begin("Projects###projects",workspace_.open("projects"))){ImGui::End();return;}
+    if(!ImGui::Begin("项目中心###projects",workspace_.open("projects"))){ImGui::End();return;}
     ui::sectionHeading("Projects","Create, open and resume independently stored projects.");
     ImGui::BeginDisabled(session_->playing()||session_->building()||session_->context().importing());
     drawPathInput("Project document",projectOpenPath_,"project.open",false,{"azureproject"});

@@ -1,7 +1,7 @@
 # AzureRender 界面改进计划
 
 日期：2026-10-14。
-状态：VD0 完成；VD1 至 VD2 完成，VD3 开发中，VD4 至 VD6 待完成。
+状态：VD0 完成；VD1 至 VD3 完成，VD4 开发中，VD5 至 VD6 待完成。
 本轮按已确认方案实施界面现代化。
 引擎界面的实施从 VD1 开始。
 
@@ -155,7 +155,7 @@
 | 0 | VD0 | 参考研究、标志提案和视觉预览 | 完成 |
 | 1 | VD1 | 公共主题、图标、控件与容器 | 完成 |
 | 2 | VD2 | 品牌入口、项目中心与真实加载反馈 | 完成 |
-| 3 | VD3 | 主工作台、工具栏和视口布局 | 待完成 |
+| 3 | VD3 | 主工作台、工具栏和视口布局 | 完成 |
 | 4 | VD4 | 层级、属性与资源面板统一 | 待完成 |
 | 5 | VD5 | 设置、制作工具与发布体验统一 | 待完成 |
 | 6 | VD6 | 集中工作流验证与一次人工复核 | 待完成 |
@@ -223,13 +223,13 @@
 用户可见结果：工具位置稳定，视口清楚且易操作。
 依赖：VD1、VD2。
 
-- [ ] 新增 `src/editor/shell/EditorChrome.hpp/.cpp`，组合顶栏与状态区。
-- [ ] 在 `src/ui/AppChrome.hpp/.cpp` 提供业务无关的外壳容器。
-- [ ] 修改 `EditorToolbar.cpp/.hpp`，集中命令名称、图标和禁用原因。
-- [ ] 修改 `EditorWorkspace.cpp` 与 `EditorWorkspaceUI.cpp`，实现宽度预算与布局恢复。
-- [ ] 修改 `panels/ViewportPanel.cpp` 与 `editor/viewport/` 相关浮层。
-- [ ] 将常用中文名称与稳定 ID 分开维护。
-- [ ] 增加低频操作的更多菜单和可恢复侧栏。
+- [x] 新增 `src/editor/shell/EditorChrome.hpp/.cpp`，组合顶栏与状态区。
+- [x] 在 `src/ui/AppChrome.hpp/.cpp` 提供业务无关的外壳容器。
+- [x] 修改 `EditorToolbar.cpp/.hpp`，集中命令名称、图标和禁用原因。
+- [x] 修改 `EditorWorkspace.cpp` 与 `EditorWorkspaceUI.cpp`，实现宽度预算与布局恢复。
+- [x] 修改 `panels/ViewportPanel.cpp` 与 `editor/viewport/` 相关浮层。
+- [x] 将常用中文名称与稳定 ID 分开维护。
+- [x] 增加低频操作的更多菜单和可恢复侧栏。
 
 命令执行仍使用 `EditorSession::execute` 与 `edit`。
 工具条根据测量宽度安排项目、运行组和发布入口。
@@ -380,3 +380,14 @@ Debug 引擎、基础控件与工作区测试目标构建通过。
 Debug 引擎及项目流程测试构建通过。
 项目流程测试通过，覆盖快照、刷新及记录移除。
 屏幕布局与端到端交付在 VD6 集中检查。
+
+### VD3 实施记录
+
+工作台实现位于 `editor/shell/EditorChrome.cpp`。
+公共工具条位置计算由 `ui/AppChrome.cpp` 提供。
+主菜单、面板标题和运行工具使用中文显示名称。
+停靠与操作观察继续使用稳定标识。
+运行组按文字测量排布，低频操作进入更多菜单。
+视口工具按剩余宽度续排，窗口菜单恢复隐藏面板。
+Debug 引擎构建与工作区测试通过。
+集中回放继续检查窗口尺寸、拾取和焦点行为。

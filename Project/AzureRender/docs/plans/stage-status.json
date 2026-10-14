@@ -976,9 +976,9 @@
     {
       "id": "VD3",
       "name": "工作台与视口外壳",
-      "status": "Active",
+      "status": "Complete",
       "scope": "界面现代化与职责分层",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "VD2"
       ],
@@ -990,7 +990,7 @@
     {
       "id": "VD4",
       "name": "层级属性与资源面板",
-      "status": "Pending",
+      "status": "Active",
       "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [

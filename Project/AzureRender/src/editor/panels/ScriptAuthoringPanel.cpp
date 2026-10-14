@@ -4,7 +4,7 @@
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::drawScriptAuthoringPanel(PanelContext& panel){
-    if(!ImGui::Begin("Script Authoring###scripts",workspace_.open("scripts"))){ImGui::End();return;}
+    if(!ImGui::Begin("脚本制作###scripts",workspace_.open("scripts"))){ImGui::End();return;}
     if(!panel.view().isProject()){ImGui::TextUnformatted("Open a project to create scripts.");ImGui::End();return;}
     ImGui::BeginDisabled(session_->playing()||session_->building());
     if(ImGui::BeginCombo("Backend",scriptTemplateBackend_.c_str())){

@@ -4,7 +4,7 @@
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::drawPrefabAuthoringPanel(PanelContext& panel){
-    if(!ImGui::Begin("Prefab Authoring###prefabs",workspace_.open("prefabs"))){ImGui::End();return;}
+    if(!ImGui::Begin("预制体制作###prefabs",workspace_.open("prefabs"))){ImGui::End();return;}
     if(!panel.view().isProject()){ImGui::TextUnformatted("Open a project to author prefabs.");ImGui::End();return;}
     ImGui::BeginDisabled(session_->playing()||session_->building());
     ImGui::SetNextItemWidth(-1);ui::inputText("Source output",prefabOutputPath_);observeWidget("prefab.output");

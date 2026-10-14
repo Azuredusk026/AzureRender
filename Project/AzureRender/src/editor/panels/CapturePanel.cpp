@@ -22,7 +22,7 @@ void setFallbackPanelRect(float x,float y,float width,float height) {
 }
 #endif
 void ImGuiEditorLayer::drawCapturePanel(PanelContext&) {
-    if(!ImGui::Begin("Capture###capture",workspace_.open("capture"))){ImGui::End();return;}
+    if(!ImGui::Begin("捕获###capture",workspace_.open("capture"))){ImGui::End();return;}
     std::array<char, 128> label{};
     const std::string& current = session_->captureLabel();
     std::memcpy(label.data(), current.data(),

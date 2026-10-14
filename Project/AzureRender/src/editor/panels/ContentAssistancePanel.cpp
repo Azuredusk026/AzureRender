@@ -4,7 +4,7 @@
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::drawContentAssistancePanel(PanelContext& panel){
-    if(!ImGui::Begin("Content Assistance###assistance",workspace_.open("assistance"))){ImGui::End();return;}
+    if(!ImGui::Begin("内容辅助###assistance",workspace_.open("assistance"))){ImGui::End();return;}
     if(!session_->modelAvailable()){
         ImGui::TextWrapped("Content assistance requires an enabled model service. Materials, textures and physics remain available through their authoring controls.");observeWidget("assistance.unavailable");ImGui::End();return;
     }

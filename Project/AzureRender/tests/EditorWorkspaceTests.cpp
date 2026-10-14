@@ -1,4 +1,5 @@
 #include "editor/EditorWorkspace.hpp"
+#include "ui/AppChrome.hpp"
 #include <iostream>
 #include <cmath>
 #include "editor/EditorCameraController.hpp"
@@ -19,6 +20,8 @@ int main(){try{
  std::array<float,3> camera={0,0,0},target={0,0,0};
  check(EditorCameraController::apply(focus,camera,target),"Focus command must move camera");
  check(target[0]==4 && target[2]==-3 && camera[2]>target[2],"Focus selected world coordinates");
+ check(ui::toolbarGroupStart(1280,100,400,200)>=100,"Run controls preserve left action space");
+ check(ui::toolbarGroupStart(800,180,400,220)==180,"Narrow toolbar reserves publish space before centering");
  EditorWorkspace workspace;
  check(workspace.panels().size()==12,"Standard panels, settings, projects and environment registered");
  check(!workspace.visible("settings"),"Settings extension is closed by default");

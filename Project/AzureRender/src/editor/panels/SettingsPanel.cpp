@@ -6,7 +6,7 @@
 #include <cstring>
 namespace azurerender {
 void ImGuiEditorLayer::drawSettingsPanel(PanelContext&) {
-    if(!ImGui::Begin("Settings###settings",workspace_.open("settings"))){ImGui::End();return;}
+    if(!ImGui::Begin("设置###settings",workspace_.open("settings"))){ImGui::End();return;}
     const char* categories[]={"编辑器偏好","项目设置","渲染诊断","内容辅助"};
     if(ImGui::BeginCombo("Category",categories[workspace_.settingsCategory])){
         for(int category=0;category<4;++category){

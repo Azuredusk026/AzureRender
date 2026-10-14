@@ -23,7 +23,7 @@ void setFallbackPanelRect(float x,float y,float width,float height) {
 #endif
 void ImGuiEditorLayer::drawBuildPanel(PanelContext& panelContext) {
     const auto& view=panelContext.view();
-    if(!ImGui::Begin("Build Game###build",workspace_.open("build"))){ImGui::End();return;}
+    if(!ImGui::Begin("发布项目###build",workspace_.open("build"))){ImGui::End();return;}
     static bool replace = false;
     ui::sectionHeading("Build Windows game","Publish a movable game folder with its own executable, runtime and resources.");
     drawPathInput("New game directory",projectPath_,"project",true);
