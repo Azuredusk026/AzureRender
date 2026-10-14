@@ -443,6 +443,10 @@ if(AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE)
 else()
     target_compile_definitions(AzureProjectRuntime PRIVATE AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=0)
 endif()
+add_library(AzureUi STATIC src/ui/Widgets.cpp src/ui/Feedback.cpp src/ui/Containers.cpp src/ui/BrandMark.cpp)
+target_link_libraries(AzureUi PUBLIC imgui::imgui)
+target_include_directories(AzureUi PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+
 add_library(AzureEditor STATIC
     src/editor/documents/EditorDocumentManager.cpp
     src/editor/animation/AnimationPreviewService.cpp
@@ -456,6 +460,7 @@ add_library(AzureEditor STATIC
     src/editor/ai/ProposalController.cpp
     src/editor/ai/ProposalOperations.cpp
     src/editor/ai/adapters/ProposalAdapters.cpp
+    src/editor/panels/UiCatalogPanel.cpp
     src/editor/panels/SettingsPanel.cpp
     src/editor/panels/OutlinerPanel.cpp
     src/editor/panels/InspectorPanel.cpp
@@ -467,8 +472,7 @@ add_library(AzureEditor STATIC
     src/editor/panels/BuildPanel.cpp
     src/editor/panels/ConsolePanel.cpp
     src/editor/SelectionService.cpp
-    src/editor/ui/Widgets.cpp
-    src/editor/ui/AppChrome.cpp
+    src/editor/properties/PropertyWidgets.cpp
     src/editor/console/ConsoleLogModel.cpp
     src/editor/commands/EditRegistry.cpp
     src/editor/commands/EditService.cpp
@@ -555,7 +559,7 @@ if(WIN32)
     target_link_libraries(AzureRuntime PRIVATE winmm ole32 uuid)
     target_link_libraries(AzureRenderCore PRIVATE winmm ole32 uuid)
 endif()
-target_link_libraries(AzureEditor PUBLIC AzureRuntime AzurePlatform AzureProjectRuntime AzureAI)
+target_link_libraries(AzureEditor PUBLIC AzureUi AzureRuntime AzurePlatform AzureProjectRuntime AzureAI)
 if(TARGET imgui::imgui)
     target_sources(AzureEditor PRIVATE third_party/ImGuizmo/ImGuizmo.cpp src/editor/viewport/ViewportGizmo.cpp)
     set_source_files_properties(third_party/ImGuizmo/ImGuizmo.cpp PROPERTIES COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/wd4245>")

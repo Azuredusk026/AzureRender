@@ -1,6 +1,6 @@
 #include "ProjectCenterView.hpp"
-#include "editor/ui/Widgets.hpp"
-#include "editor/ui/Icons.hpp"
+#include "ui/Widgets.hpp"
+#include "ui/Icons.hpp"
 #include "platform/PathSelection.hpp"
 #include "editor/EditorWorkspace.hpp"
 #include <imgui.h>

@@ -1,6 +1,6 @@
 #include "ImGuiEditorLayer.hpp"
 #include "EditorTheme.hpp"
-#include "editor/ui/Widgets.hpp"
+#include "ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <GLFW/glfw3.h>
 #include <imgui_internal.h>

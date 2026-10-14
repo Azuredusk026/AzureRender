@@ -1,5 +1,5 @@
 #include "editor/ImGuiEditorLayer.hpp"
-#include "editor/ui/Widgets.hpp"
+#include "ui/Widgets.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
 #include "editor/graph/MaterialGraphModel.hpp"
 #ifdef AZURERENDER_HAS_IMGUI

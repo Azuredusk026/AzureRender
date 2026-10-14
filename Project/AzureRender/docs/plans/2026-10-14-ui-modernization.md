@@ -1,8 +1,8 @@
 # AzureRender 界面改进计划
 
 日期：2026-10-14。
-状态：VD0 完成；VD1 至 VD6 待完成。
-本轮交付为研究、视觉提案和可执行计划。
+状态：VD0 完成；VD1 完成，VD2 开发中，VD3 至 VD6 待完成。
+本轮按已确认方案实施界面现代化。
 引擎界面的实施从 VD1 开始。
 
 ## 先看要做成什么
@@ -153,7 +153,7 @@
 | 顺序 | 代号 | 交付物 | 状态 |
 | --- | --- | --- | --- |
 | 0 | VD0 | 参考研究、标志提案和视觉预览 | 完成 |
-| 1 | VD1 | 公共主题、图标、控件与容器 | 待完成 |
+| 1 | VD1 | 公共主题、图标、控件与容器 | 完成 |
 | 2 | VD2 | 品牌入口、项目中心与真实加载反馈 | 待完成 |
 | 3 | VD3 | 主工作台、工具栏和视口布局 | 待完成 |
 | 4 | VD4 | 层级、属性与资源面板统一 | 待完成 |
@@ -170,14 +170,14 @@
 用户可见结果：按钮、输入、图标和面板状态一致。
 依赖：VD0 的设计参数与源码核对。
 
-- [ ] 提取 `ThemeTokens`、`UiMetrics`、`UiScopes` 和基础控件至 `src/ui/`。
-- [ ] 新增 `src/ui/UiContext.hpp`、`Containers.hpp/.cpp`、`BrandMark.hpp/.cpp`。
-- [ ] 将 `propertyEditor` 与 `PropertyEditEvent` 放入 `src/editor/properties/`。
-- [ ] 将现有 `ui/AppChrome.cpp` 的消息与卡片能力归入基础控件。
-- [ ] 为窗口、子窗口和浮层补充成对收尾作用域。
-- [ ] 扩充 `Icons.hpp`，覆盖文件、搜索、创建、变换、运行、设置和发布。
-- [ ] 新增开发用 `src/editor/panels/UiCatalogPanel.cpp`，呈现全部控件状态。
-- [ ] 在 `CMakeLists.txt` 建立 `AzureUi` 并更新实际使用方包含路径。
+- [x] 提取 `ThemeTokens`、`UiMetrics`、`UiScopes` 和基础控件至 `src/ui/`。
+- [x] 新增 `src/ui/UiContext.hpp`、`Containers.hpp/.cpp`、`BrandMark.hpp/.cpp`。
+- [x] 将 `propertyEditor` 与 `PropertyEditEvent` 放入 `src/editor/properties/`。
+- [x] 将现有 `ui/AppChrome.cpp` 的消息与卡片能力归入基础控件。
+- [x] 为窗口、子窗口和浮层补充成对收尾作用域。
+- [x] 扩充 `Icons.hpp`，覆盖文件、搜索、创建、变换、运行、设置和发布。
+- [x] 新增开发用 `src/editor/panels/UiCatalogPanel.cpp`，呈现全部控件状态。
+- [x] 在 `CMakeLists.txt` 建立 `AzureUi` 并更新实际使用方包含路径。
 
 接口：基础按钮保留 `button(label, options)` 的调用语义。
 领域属性控件继续返回开始、变更、结束和取消事件。
@@ -359,3 +359,12 @@ UI 提案本身只做文档、资源和预览检查。
 SVG 源文件通过 XML 解析检查。
 本轮未执行引擎构建、GPU 回归或实体输入验收。
 各分辨率与 DPI 的引擎验证归入 VD6。
+
+### VD1 实施记录
+
+公共控件位于 `src/ui/`，由 `AzureUi` 编译。
+属性编辑事件与绘制保留在 `editor/properties/`。
+控件目录通过窗口菜单打开。
+Debug 引擎、基础控件与工作区测试目标构建通过。
+基础控件和工作区两项测试通过。
+公共目录未发现编辑器、运行时或渲染层头文件依赖。

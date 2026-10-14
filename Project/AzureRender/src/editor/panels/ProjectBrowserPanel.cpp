@@ -1,5 +1,5 @@
 #include "editor/ImGuiEditorLayer.hpp"
-#include "editor/ui/Widgets.hpp"
+#include "ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 namespace azurerender {
 void ImGuiEditorLayer::drawProjectBrowserPanel(PanelContext&) {

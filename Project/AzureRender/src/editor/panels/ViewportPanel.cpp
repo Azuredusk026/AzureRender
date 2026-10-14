@@ -1,5 +1,5 @@
 #include "editor/ImGuiEditorLayer.hpp"
-#include "editor/ui/Widgets.hpp"
+#include "ui/Widgets.hpp"
 #include "editor/ui/ObjectCreationMenu.hpp"
 #include "editor/GameplayDebugGeometry.hpp"
 #include "runtime/InputPreferences.hpp"

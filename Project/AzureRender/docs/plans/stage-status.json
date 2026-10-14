@@ -936,9 +936,8 @@
     {
       "id": "VD0",
       "name": "参考研究与视觉设计",
-      "kind": "candidate",
       "status": "Complete",
-      "scope": "界面改进方案与设计资源",
+      "scope": "界面现代化与职责分层",
       "checksPassed": true,
       "dependsOn": [],
       "evidence": [
@@ -949,10 +948,9 @@
     {
       "id": "VD1",
       "name": "公共界面基础",
-      "kind": "candidate",
-      "status": "Pending",
-      "scope": "界面改进实施候选",
-      "checksPassed": false,
+      "status": "Complete",
+      "scope": "界面现代化与职责分层",
+      "checksPassed": true,
       "dependsOn": [
         "VD0"
       ],
@@ -964,9 +962,8 @@
     {
       "id": "VD2",
       "name": "品牌与项目中心",
-      "kind": "candidate",
-      "status": "Pending",
-      "scope": "界面改进实施候选",
+      "status": "Active",
+      "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [
         "VD1"
@@ -979,9 +976,8 @@
     {
       "id": "VD3",
       "name": "工作台与视口外壳",
-      "kind": "candidate",
       "status": "Pending",
-      "scope": "界面改进实施候选",
+      "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [
         "VD2"
@@ -994,9 +990,8 @@
     {
       "id": "VD4",
       "name": "层级属性与资源面板",
-      "kind": "candidate",
       "status": "Pending",
-      "scope": "界面改进实施候选",
+      "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [
         "VD3"
@@ -1009,9 +1004,8 @@
     {
       "id": "VD5",
       "name": "设置制作与发布界面",
-      "kind": "candidate",
       "status": "Pending",
-      "scope": "界面改进实施候选",
+      "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [
         "VD4"
@@ -1024,9 +1018,8 @@
     {
       "id": "VD6",
       "name": "集中验证与交付",
-      "kind": "candidate",
       "status": "Pending",
-      "scope": "界面改进实施候选",
+      "scope": "界面现代化与职责分层",
       "checksPassed": false,
       "dependsOn": [
         "VD5"

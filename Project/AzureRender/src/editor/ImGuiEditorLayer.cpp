@@ -5,6 +5,7 @@
 #include <cstdio>
 #include "input/EditorInputRouter.hpp"
 #include "EditorTheme.hpp"
+#include "panels/UiCatalogPanel.hpp"
 #include "EditorToolbar.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "foundation/Environment.hpp"
@@ -123,6 +124,8 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("assistance", "Content Assistance", [this](PanelContext& context) { drawContentAssistancePanel(context); });
     addPanel("scripts", "Script Authoring", [this](PanelContext& context) { drawScriptAuthoringPanel(context); });
     addPanel("problems", "Problems", [this](PanelContext& context) { drawProblemsPanel(context); });
+    workspace_.registerPanel("ui-catalog","控件目录",false);
+    addPanel("ui-catalog", "控件目录", [](PanelContext&) { drawUiCatalog(); });
     panels_ = registry.createAll();
     auto extensions=session_->panelRegistry().createAll();
     for(auto& panel:extensions) {

@@ -1,6 +1,6 @@
 #include "editor/ImGuiEditorLayer.hpp"
-#include "editor/ui/Widgets.hpp"
-#include "editor/ui/UiScopes.hpp"
+#include "ui/Widgets.hpp"
+#include "ui/UiScopes.hpp"
 #include "editor/ui/ObjectCreationMenu.hpp"
 #include "reflection/Registry.hpp"
 #include "runtime/ComponentRegistry.hpp"

@@ -1,6 +1,6 @@
 #include "editor/ImGuiEditorLayer.hpp"
-#include "editor/ui/Widgets.hpp"
-#include "editor/ui/UiScopes.hpp"
+#include "ui/Widgets.hpp"
+#include "ui/UiScopes.hpp"
 #include "runtime/ProjectSettings.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <cstring>
