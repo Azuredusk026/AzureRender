@@ -25,6 +25,7 @@ struct GLFWwindow;
 
 namespace azurerender {
 
+class OutlinerPanel; class InspectorPanel; class AssetBrowserPanel;
 class ImGuiEditorLayer final {
 public:
     explicit ImGuiEditorLayer(std::shared_ptr<EditorSession> session);
@@ -94,9 +95,6 @@ private:
 #endif
     std::array<float,16> viewportGizmoMatrix_{};
     void drawViewportPanel(PanelContext& context);
-    void drawOutlinerPanel(PanelContext& context);
-    void drawInspectorPanel(PanelContext& context);
-    void drawAssetBrowserPanel(PanelContext& context);
     void drawTextureAssetPanel();
     void drawAssetTransferPanel();
     void drawMaterialAssetPanel();
@@ -123,6 +121,9 @@ private:
     EditorContext* context_ = nullptr;
     GameUi* gameUi_=nullptr;
     std::vector<std::unique_ptr<IEditorPanel>> panels_;
+    OutlinerPanel* outlinerPanel_=nullptr;
+    InspectorPanel* inspectorPanel_=nullptr;
+    AssetBrowserPanel* assetPanel_=nullptr;
     VkDevice device_ = VK_NULL_HANDLE;
     VkDescriptorPool descriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> viewportTextures_;
@@ -179,41 +180,16 @@ private:
     std::string settingDiagnostic_;
     bool settingsSaveRequested_=false,compactPreference_=false;
 #ifdef AZURERENDER_HAS_IMGUI
-    ImGuiTextFilter outlinerFilter_,assetFilter_,consoleFilter_,referenceFilter_,componentFilter_;
+    ImGuiTextFilter consoleFilter_;
 #endif
     int consoleLevel_ = 0;
     ConsoleLogModel consoleLogs_;
     bool consoleAutoFollow_=true;
-    nlohmann::json consoleView_=nlohmann::json::object(),contentView_=nlohmann::json::object();
+    nlohmann::json consoleView_=nlohmann::json::object();
     std::string consoleLastLine_;
     std::string consoleLastFeedback_;
-    bool assetGrid_ = false;
-    std::string assetDirectory_;
-    std::string assetMount_;
-    std::string assetNavigationDiagnostic_;
-    std::vector<std::pair<std::string,std::string>> assetNavigation_={{"",""}};
-    std::size_t assetNavigationIndex_=0;
-    std::uint64_t assetPreviewHandle_=0;
-    std::string assetPreviewTitle_;
-    bool assetPreviewRequested_=false;
-    bool focusObjectName_=false;
     bool navigationMoved_=false;
-    std::string primitiveKind_="cube",primitiveName_="Primitive.glb";
-    std::string materialName_="Material.azurematerial",materialAsset_;
-    bool materialDialogRequested_=false;
-    nlohmann::json materialSnapshot_;
-    std::array<float,3> primitiveSize_{1,1,1};
-    int primitiveSegments_=12;
-    std::set<std::string> selectedAssets_,textureFields_;
-    nlohmann::json exportRequest_=nlohmann::json::object(),exportImpact_;
-    std::string exportFormat_,exportDestination_,exportTask_;
-    bool exportDialogRequested_=false,exportReplace_=false;
-    nlohmann::json textureSnapshot_,contentImpact_,contentRequest_,dependencySnapshot_;
-    std::string contentValue_,contentOperation_;
-    bool contentDialogRequested_=false,textureDialogRequested_=false,dependencyDialogRequested_=false;
-    std::string assetTypeId_,importPath_,prefabInstance_,installPath_,outputPath_,projectPath_;
-    std::set<std::string> openNodeIds_;
-    nlohmann::json visibleAssets_=nlohmann::json::array();
+    std::string prefabInstance_,installPath_,outputPath_,projectPath_;
 };
 
 }  // namespace azurerender

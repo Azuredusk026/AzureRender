@@ -38,7 +38,7 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']
     required={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings','projects','environment'}
-    extensions={'scripts','problems','assistance','prefabs'}
+    extensions={'scripts','problems','assistance','prefabs','ui-catalog'}
     assert data['version']==3 and required <= set(data['panels']) <= required | extensions,data
     assert data['image']['width']>=480 and data['image']['height']>=270,data['image']
     assert all('open' in panel for panel in data['panels'].values())

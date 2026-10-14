@@ -2,7 +2,7 @@
 
 ## 界面改进实施
 
-VD0 研究与设计完成，VD1 至 VD3 完成，VD4 开发中，VD5 至 VD6 待完成。
+VD0 研究与设计完成，VD1 至 VD4 完成，VD5 开发中，VD6 待完成。
 范围、文件边界与验证安排见[界面改进计划](2026-10-14-ui-modernization.md)。
 外观见[可交互视觉提案](../design/ui-modernization/preview.html)。
 实施依次覆盖公共控件、项目中心、工作台和业务面板。

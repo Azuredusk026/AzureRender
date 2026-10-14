@@ -1,21 +1,22 @@
+#include "editor/panels/CorePanels.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
 void ImGuiEditorLayer::drawTextureAssetPanel() {
-    if(contentDialogRequested_){ImGui::OpenPopup("Content request");contentDialogRequested_=false;}
-    if(textureDialogRequested_){ImGui::OpenPopup("Texture settings");textureDialogRequested_=false;}
-    if(dependencyDialogRequested_){ImGui::OpenPopup("Asset dependencies");dependencyDialogRequested_=false;}
+    if(assetPanel_->presentation.contentDialogRequested_){ImGui::OpenPopup("Content request");assetPanel_->presentation.contentDialogRequested_=false;}
+    if(assetPanel_->presentation.textureDialogRequested_){ImGui::OpenPopup("Texture settings");assetPanel_->presentation.textureDialogRequested_=false;}
+    if(assetPanel_->presentation.dependencyDialogRequested_){ImGui::OpenPopup("Asset dependencies");assetPanel_->presentation.dependencyDialogRequested_=false;}
     if(ImGui::BeginPopupModal("Content request",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::TextUnformatted(contentOperation_.c_str());
-        ui::inputText("Name / destination",contentValue_);observeWidget("content.value");
+        ImGui::TextUnformatted(assetPanel_->presentation.contentOperation_.c_str());
+        ui::inputText("Name / destination",assetPanel_->presentation.contentValue_);observeWidget("content.value");
         if(ui::button("Preview impact")) {
-            auto request=contentRequest_;request["dryRun"]=true;
-            if(contentOperation_=="content.create-directory"||contentOperation_=="asset.rename")request["name"]=contentValue_;
-            else request["destination"]=contentValue_;
-            const auto result=session_->edit(contentOperation_,request);
-            if(result){contentImpact_=result.value;ImGui::CloseCurrentPopup();}
+            auto request=assetPanel_->presentation.contentRequest_;request["dryRun"]=true;
+            if(assetPanel_->presentation.contentOperation_=="content.create-directory"||assetPanel_->presentation.contentOperation_=="asset.rename")request["name"]=assetPanel_->presentation.contentValue_;
+            else request["destination"]=assetPanel_->presentation.contentValue_;
+            const auto result=session_->edit(assetPanel_->presentation.contentOperation_,request);
+            if(result){assetPanel_->presentation.contentImpact_=result.value;ImGui::CloseCurrentPopup();}
         }observeWidget("content.plan");ImGui::SameLine();
         if(ui::button("Cancel"))ImGui::CloseCurrentPopup();observeWidget("content.cancel-request");
         ImGui::EndPopup();
@@ -24,19 +25,19 @@ void ImGuiEditorLayer::drawTextureAssetPanel() {
     if(ImGui::BeginPopupModal("Texture settings",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
         const auto position=ImGui::GetWindowPos(),size=ImGui::GetWindowSize();
         widgets_["texture.dialog"]={position.x,position.y,size.x,size.y};
-        ImGui::Text("%zu image asset(s)",textureSnapshot_.at("assets").size());
+        ImGui::Text("%zu image asset(s)",assetPanel_->presentation.textureSnapshot_.at("assets").size());
         ImGui::TextWrapped("Choose the fields to apply. Mixed fields keep each asset's value until selected.");
-        auto& values=textureSnapshot_["values"];
+        auto& values=assetPanel_->presentation.textureSnapshot_["values"];
         const std::map<std::string,std::vector<const char*>> choices{
             {"usage",{"albedo","emissive","normal","mask","roughness","linear","packed-normal"}},
             {"colorSpace",{"srgb","linear"}},{"filter",{"linear","nearest"}},
             {"wrapU",{"repeat","clamp","mirror"}},{"wrapV",{"repeat","clamp","mirror"}},
             {"mipPolicy",{"generate","none"}}};
         for(const auto& [field,options]:choices) {
-            ImGui::PushID(field.c_str());bool enabled=textureFields_.count(field)!=0;
-            if(ImGui::Checkbox("##apply",&enabled)){if(enabled)textureFields_.insert(field);else textureFields_.erase(field);}observeWidget("texture.enable."+field);
+            ImGui::PushID(field.c_str());bool enabled=assetPanel_->presentation.textureFields_.count(field)!=0;
+            if(ImGui::Checkbox("##apply",&enabled)){if(enabled)assetPanel_->presentation.textureFields_.insert(field);else assetPanel_->presentation.textureFields_.erase(field);}observeWidget("texture.enable."+field);
             ImGui::SameLine();const auto current=values.at(field).get<std::string>();
-            const bool mixed=std::find(textureSnapshot_["mixed"].begin(),textureSnapshot_["mixed"].end(),nlohmann::json(field))!=textureSnapshot_["mixed"].end();
+            const bool mixed=std::find(assetPanel_->presentation.textureSnapshot_["mixed"].begin(),assetPanel_->presentation.textureSnapshot_["mixed"].end(),nlohmann::json(field))!=assetPanel_->presentation.textureSnapshot_["mixed"].end();
             ImGui::BeginDisabled(!enabled);ImGui::SetNextItemWidth(170*dpi_);
             if(ImGui::BeginCombo(field.c_str(),mixed&&!enabled?"Mixed":current.c_str())) {
                 for(const auto* option:options) {
@@ -45,52 +46,52 @@ void ImGuiEditorLayer::drawTextureAssetPanel() {
                 }ImGui::EndCombo();
             }observeWidget("texture."+field);ImGui::EndDisabled();ImGui::PopID();
         }
-        bool anisotropy=textureFields_.count("anisotropy")!=0;
-        if(ImGui::Checkbox("##anisotropy-apply",&anisotropy)){if(anisotropy)textureFields_.insert("anisotropy");else textureFields_.erase("anisotropy");}
+        bool anisotropy=assetPanel_->presentation.textureFields_.count("anisotropy")!=0;
+        if(ImGui::Checkbox("##anisotropy-apply",&anisotropy)){if(anisotropy)assetPanel_->presentation.textureFields_.insert("anisotropy");else assetPanel_->presentation.textureFields_.erase("anisotropy");}
         observeWidget("texture.enable.anisotropy");ImGui::SameLine();ImGui::BeginDisabled(!anisotropy);
         float amount=values.at("anisotropy").get<float>();if(ImGui::SliderFloat("Anisotropy",&amount,1,16,"%.0f"))values["anisotropy"]=amount;
         observeWidget("texture.anisotropy");ImGui::EndDisabled();
-        ui::ButtonOptions apply;apply.disabled=textureFields_.empty()||session_->context().dirty()||session_->reimporting();
+        ui::ButtonOptions apply;apply.disabled=assetPanel_->presentation.textureFields_.empty()||session_->context().dirty()||session_->reimporting();
         if(ui::button("Preview impact",apply)) {
             auto fields=nlohmann::json::object(),assets=nlohmann::json::array();
-            for(const auto& field:textureFields_)fields[field]=values.at(field);
-            for(const auto& asset:textureSnapshot_.at("assets"))assets.push_back(asset.at("id"));
+            for(const auto& field:assetPanel_->presentation.textureFields_)fields[field]=values.at(field);
+            for(const auto& asset:assetPanel_->presentation.textureSnapshot_.at("assets"))assets.push_back(asset.at("id"));
             const auto result=session_->edit("texture.settings",{{"assets",assets},{"values",fields},{"dryRun",true}});
-            if(result){contentOperation_="texture.settings";contentImpact_=result.value;ImGui::CloseCurrentPopup();}
+            if(result){assetPanel_->presentation.contentOperation_="texture.settings";assetPanel_->presentation.contentImpact_=result.value;ImGui::CloseCurrentPopup();}
         }observeWidget("texture.plan");ImGui::SameLine();
         if(ui::button("Cancel"))ImGui::CloseCurrentPopup();observeWidget("texture.cancel");
         ImGui::EndPopup();
     }
-    if(!contentImpact_.is_null()&&!contentImpact_.empty()&&!ImGui::IsPopupOpen("Content impact"))ImGui::OpenPopup("Content impact");
+    if(!assetPanel_->presentation.contentImpact_.is_null()&&!assetPanel_->presentation.contentImpact_.empty()&&!ImGui::IsPopupOpen("Content impact"))ImGui::OpenPopup("Content impact");
     ImGui::SetNextWindowSize({560*dpi_,0},ImGuiCond_Always);
     if(ImGui::BeginPopupModal("Content impact",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::TextWrapped("Apply %s to the following files:",contentOperation_.c_str());
+        ImGui::TextWrapped("Apply %s to the following files:",assetPanel_->presentation.contentOperation_.c_str());
         ImGui::BeginChild("Affected files",{500*dpi_,180*dpi_});
-        for(const auto& path:contentImpact_.at("affected"))ImGui::TextUnformatted(path.get<std::string>().c_str());
+        for(const auto& path:assetPanel_->presentation.contentImpact_.at("affected"))ImGui::TextUnformatted(path.get<std::string>().c_str());
         ImGui::EndChild();
         ui::ButtonOptions apply;apply.disabled=session_->context().dirty()||session_->reimporting();
         apply.tooltip="Save scene changes before publishing content operations.";
         if(ui::button("Apply",apply)) {
-            const auto result=session_->edit(contentOperation_,{{"planId",contentImpact_.at("id")}});
-            if(result){contentImpact_=nullptr;selectedAssets_.clear();ImGui::CloseCurrentPopup();}
+            const auto result=session_->edit(assetPanel_->presentation.contentOperation_,{{"planId",assetPanel_->presentation.contentImpact_.at("id")}});
+            if(result){assetPanel_->presentation.contentImpact_=nullptr;assetPanel_->presentation.selectedAssets_.clear();ImGui::CloseCurrentPopup();}
         }observeWidget("content.apply");ImGui::SameLine();
-        if(ui::button("Cancel")){session_->edit("content.discard",{{"planId",contentImpact_.at("id")}});contentImpact_=nullptr;ImGui::CloseCurrentPopup();}
+        if(ui::button("Cancel")){session_->edit("content.discard",{{"planId",assetPanel_->presentation.contentImpact_.at("id")}});assetPanel_->presentation.contentImpact_=nullptr;ImGui::CloseCurrentPopup();}
         observeWidget("content.cancel-impact");ImGui::EndPopup();
     }
     ImGui::SetNextWindowSize({560*dpi_,0},ImGuiCond_Always);
     if(ImGui::BeginPopupModal("Asset dependencies",nullptr,ImGuiWindowFlags_AlwaysAutoResize)) {
-        if(dependencySnapshot_.contains("path")) {
-            ImGui::TextWrapped("%s",dependencySnapshot_.at("path").get<std::string>().c_str());
-            ImGui::Text("Type: %s",dependencySnapshot_.at("type").get<std::string>().c_str());
-            ImGui::Text("Source: %s",dependencySnapshot_.at("ready").get<bool>()?"Available":"Missing");
-            if(dependencySnapshot_.value("sourceChanged",false)||dependencySnapshot_.value("activeChanged",false))ImGui::TextWrapped("Source or active content changed. Validate with Reimport or Reload Assets.");
+        if(assetPanel_->presentation.dependencySnapshot_.contains("path")) {
+            ImGui::TextWrapped("%s",assetPanel_->presentation.dependencySnapshot_.at("path").get<std::string>().c_str());
+            ImGui::Text("Type: %s",assetPanel_->presentation.dependencySnapshot_.at("type").get<std::string>().c_str());
+            ImGui::Text("Source: %s",assetPanel_->presentation.dependencySnapshot_.at("ready").get<bool>()?"Available":"Missing");
+            if(assetPanel_->presentation.dependencySnapshot_.value("sourceChanged",false)||assetPanel_->presentation.dependencySnapshot_.value("activeChanged",false))ImGui::TextWrapped("Source or active content changed. Validate with Reimport or Reload Assets.");
             for(const auto* field:{"dependencies","referencedBy"})if(ImGui::CollapsingHeader(field))
-                for(const auto& row:dependencySnapshot_.at(field))ImGui::TextWrapped("%s",row.at("path").get<std::string>().c_str());
-            for(const auto* field:{"id","fingerprint","source","settings","generation","importGeneration","diagnostic"})if(dependencySnapshot_.contains(field)&&ImGui::CollapsingHeader(field))
-                ImGui::TextWrapped("%s",dependencySnapshot_.at(field).dump(2).c_str());
+                for(const auto& row:assetPanel_->presentation.dependencySnapshot_.at(field))ImGui::TextWrapped("%s",row.at("path").get<std::string>().c_str());
+            for(const auto* field:{"id","fingerprint","source","settings","generation","importGeneration","diagnostic"})if(assetPanel_->presentation.dependencySnapshot_.contains(field)&&ImGui::CollapsingHeader(field))
+                ImGui::TextWrapped("%s",assetPanel_->presentation.dependencySnapshot_.at(field).dump(2).c_str());
         }else {
-            ImGui::TextWrapped("%s dependencies:",dependencySnapshot_.at("direction").get<std::string>().c_str());
-            for(const auto& id:dependencySnapshot_.at("assets")) {
+            ImGui::TextWrapped("%s dependencies:",assetPanel_->presentation.dependencySnapshot_.at("direction").get<std::string>().c_str());
+            for(const auto& id:assetPanel_->presentation.dependencySnapshot_.at("assets")) {
                 const auto& record=session_->context().assets().records().at(id.get<std::string>());
                 ImGui::TextWrapped("%s",record.virtualPath.c_str());
             }

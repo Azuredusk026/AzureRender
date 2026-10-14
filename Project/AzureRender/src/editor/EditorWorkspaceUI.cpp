@@ -1,3 +1,4 @@
+#include "editor/panels/CorePanels.hpp"
 #include "ImGuiEditorLayer.hpp"
 #include "EditorTheme.hpp"
 #include "ui/Widgets.hpp"
@@ -143,10 +144,10 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
         {"widgets",widgets_},{"uiErrors",uiErrors_},{"historyCount",uiHistory_.size()},{"diagnostic",workspace_.diagnostic},
         {"selectedName",context->selectedNode()?context->selectedNode()->name:""},
         {"nodeCount",context->scene().nodes.size()},{"gizmoTranslation",context->gizmoTranslation()},
-        {"gizmoRotation",context->gizmoRotation()},{"gizmoScale",context->gizmoScale()},{"visibleAssets",visibleAssets_}};
+        {"gizmoRotation",context->gizmoRotation()},{"gizmoScale",context->gizmoScale()},{"visibleAssets",assetPanel_->presentation.visibleAssets_}};
     data["camera"]={{"position",cameraPosition_},{"target",cameraTarget_}};
     data["viewportView"]={{"projection",session_->viewportView().projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"editCameraActive",session_->editCameraActive()}};
-    data["consoleView"]=consoleView_;data["contentView"]=contentView_;
+    data["consoleView"]=consoleView_;data["contentView"]=assetPanel_->presentation.contentView_;
     data["previewMode"]=session_->previewMode();
     data["document"]=context->documentVersion().describe();
     data["documents"]=session_->documents().describe(context->documentId());
@@ -163,8 +164,8 @@ nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     data["navigation"]={{"mode",navigationButton_==1?"fly":navigationButton_==2?"pan":navigationButton_==0?"orbit":"idle"},{"speed",session_->settings().get("editor.camera.flySpeed")},{"cursorCaptured",navigationCursorCaptured_}};
     data["navigation"]["nativeCursorMode"]=window_&&glfwGetInputMode(window_,GLFW_CURSOR)==GLFW_CURSOR_DISABLED?"disabled":"normal";
     data["navigation"]["rawMouse"]=window_&&glfwRawMouseMotionSupported()&&glfwGetInputMode(window_,GLFW_RAW_MOUSE_MOTION)==GLFW_TRUE;
-    data["materialEditor"]={{"asset",materialAsset_},{"snapshot",materialSnapshot_}};
-    data["contentNavigation"]={{"mount",assetMount_},{"path",assetDirectory_},{"historyIndex",assetNavigationIndex_},{"historySize",assetNavigation_.size()},{"selected",selectedAssets_},{"previewHandle",assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
+    data["materialEditor"]={{"asset",assetPanel_->presentation.materialAsset_},{"snapshot",assetPanel_->presentation.materialSnapshot_}};
+    data["contentNavigation"]={{"mount",assetPanel_->presentation.assetMount_},{"path",assetPanel_->presentation.assetDirectory_},{"historyIndex",assetPanel_->presentation.assetNavigationIndex_},{"historySize",assetPanel_->presentation.assetNavigation_.size()},{"selected",assetPanel_->presentation.selectedAssets_},{"previewHandle",assetPanel_->presentation.assetPreviewHandle_},{"statistics",session_->contentDirectories().statistics()}};
     if(includeHistory)data["history"]=uiHistory_;
     data["gizmoSpace"]=context->gizmoSpace()==EditorContext::GizmoSpace::World?"world":"local";
     data["gizmoPivot"]=context->gizmoPivot()==EditorContext::GizmoPivot::Active?"active":"bounds";

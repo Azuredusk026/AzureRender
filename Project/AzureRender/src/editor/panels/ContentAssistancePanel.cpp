@@ -1,3 +1,4 @@
+#include "editor/panels/CorePanels.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
@@ -19,8 +20,8 @@ void ImGuiEditorLayer::drawContentAssistancePanel(PanelContext& panel){
     if(proposalDomain_=="physics"||proposalDomain_=="scene"){
         if(const auto* node=panel.view().selectedNode())if(ui::button("Use selected object"))proposalTarget_=node->id;observeWidget("ai.use-node");
     }else if(proposalDomain_=="material"||proposalDomain_=="texture"){
-        ui::ButtonOptions pick;pick.disabled=selectedAssets_.size()!=1;
-        if(ui::button("Use selected asset",pick))proposalTarget_=*selectedAssets_.begin();observeWidget("ai.use-asset");
+        ui::ButtonOptions pick;pick.disabled=assetPanel_->presentation.selectedAssets_.size()!=1;
+        if(ui::button("Use selected asset",pick))proposalTarget_=*assetPanel_->presentation.selectedAssets_.begin();observeWidget("ai.use-asset");
     }
     ImGui::SetNextItemWidth(-1);ImGui::InputText("Instruction",proposalInstruction_.data(),proposalInstruction_.size());observeWidget("ai.instruction");
     ui::ButtonOptions generate;generate.disabled=state=="Generating"||session_->playing()||session_->building()||proposalInstruction_[0]=='\0';

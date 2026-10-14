@@ -2,7 +2,7 @@
 
 界面改进方向见[实施方案](docs/plans/2026-10-14-ui-modernization.md)。
 可直接打开[视觉提案](docs/design/ui-modernization/preview.html)。
-VD0 研究与设计完成，VD1 至 VD3 完成，VD4 开发中，VD5 至 VD6 待完成。
+VD0 研究与设计完成，VD1 至 VD4 完成，VD5 开发中，VD6 待完成。
 
 构建目录、临时输出和定期清理见[产物管理](docs/development/artifact-retention.md)。
 

@@ -1,3 +1,4 @@
+#include "editor/panels/CorePanels.hpp"
 #include "ui/BrandMark.hpp"
 #include "platform/WindowIcon.hpp"
 #include "runtime/InputPreferences.hpp"
@@ -107,9 +108,6 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
             });
     };
     addPanel("viewport", "Viewport", [this](PanelContext& context) { drawViewportPanel(context); });
-    addPanel("outliner", "Scene Outliner", [this](PanelContext& context) { drawOutlinerPanel(context); });
-    addPanel("inspector", "Inspector", [this](PanelContext& context) { drawInspectorPanel(context); });
-    addPanel("assets", "Asset Browser", [this](PanelContext& context) { drawAssetBrowserPanel(context); });
     addPanel("capture", "Capture", [this](PanelContext& context) { drawCapturePanel(context); });
     addPanel("console", "Console", [this](PanelContext& context) { drawConsolePanel(context); });
     addPanel("build", "Build Game", [this](PanelContext& context) { drawBuildPanel(context); });
@@ -128,7 +126,18 @@ ImGuiEditorLayer::ImGuiEditorLayer(std::shared_ptr<EditorSession> session)
     addPanel("problems", "Problems", [this](PanelContext& context) { drawProblemsPanel(context); });
     workspace_.registerPanel("ui-catalog","控件目录",false);
     addPanel("ui-catalog", "控件目录", [](PanelContext&) { drawUiCatalog(); });
-    panels_ = registry.createAll();
+    CorePanelServices services{*session_,workspace_,dpi_,widgets_,
+        [this](const auto& id){observeWidget(id);},
+        [this]{inspectorPanel_->presentation.focusObjectName_=true;},
+        [this](nlohmann::json request){assetPanel_->presentation.exportRequest_=std::move(request);assetPanel_->presentation.exportDialogRequested_=true;},
+        [this](const auto& node){drawMaterialSlots(node);},[this](const auto& node){drawPhysicsAuthoring(node);},
+        [this]{drawTextureAssetPanel();},[this]{drawMaterialAssetPanel();},
+        [this](auto handle){return previewTexture(handle);},
+        [this](const auto* label,auto& value,const auto& purpose,bool directory,const auto& extensions){drawPathInput(label,value,purpose,directory,extensions);}};
+    registry.registerFactory({"panel.outliner",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<OutlinerPanel>(services);outlinerPanel_=panel.get();return panel;});
+    registry.registerFactory({"panel.inspector",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<InspectorPanel>(services);inspectorPanel_=panel.get();return panel;});
+    registry.registerFactory({"panel.assets",1,{"editor.panel"},{}},[this,services]{auto panel=std::make_unique<AssetBrowserPanel>(services);assetPanel_=panel.get();return panel;});
+    panels_=registry.createAll();
     auto extensions=session_->panelRegistry().createAll();
     for(auto& panel:extensions) {
         workspace_.registerPanel(std::string(panel->id()),std::string(panel->title()));
