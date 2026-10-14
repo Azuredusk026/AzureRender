@@ -2,6 +2,7 @@
 #include "ui/Widgets.hpp"
 #include "ui/UiScopes.hpp"
 #include "ui/ObjectCreationMenu.hpp"
+#include <algorithm>
 #ifdef AZURERENDER_HAS_IMGUI
 #include <imgui.h>
 namespace azurerender {
@@ -36,22 +37,19 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
         if(ImGui::BeginMenu("View")){
             for(auto& panel:workspace.panels()) {
                 std::string title=panel.title.substr(0,panel.title.find("###"));
-                ImGui::MenuItem(title.c_str(),nullptr,&panel.visible);observe("panel."+panel.id);
+                ImGui::MenuItem(title.c_str(),nullptr,&panel.visible);observe("panel."+panel.id);observe("tool."+panel.id);
             }
             ImGui::Separator();
             for(const auto* preset:{"authoring","debugging"}){if(ImGui::MenuItem(preset))s.edit("workspace.preset",{{"id",preset}});observe(std::string("layout.")+preset);}
             item("Reset Layout",nullptr,EditorCommand::ResetLayout);ImGui::EndMenu();
         }observe("menu.View");
-        if(ImGui::BeginMenu("Tools")) {
-            for(const auto& panel:workspace.panels()) {
-                if(ImGui::MenuItem(panel.title.substr(0,panel.title.find("###")).c_str())) {
-                    workspace.setVisible(panel.id,true);ImGui::SetWindowFocus(panel.title.c_str());
-                }
-                observe(std::string("tool.")+panel.id);
-            }
-            ImGui::EndMenu();
-        }observe("menu.Tools");
-        if(ImGui::BeginMenu("Help")){ImGui::TextUnformatted("Editor tutorial: docs/tutorials/editor-first-game.md");ImGui::TextUnformatted("WASD move | Shift sprint | Space jump");ImGui::EndMenu();}observe("menu.Help");
+        if(ImGui::BeginMenu("GameObject")) {
+            ImGui::BeginDisabled(s.playing()||s.building());
+            const auto parent=s.context().selectedNode()?s.context().selectedNode()->id:std::string();
+            ui::objectCreationMenu(s.nodePresets().describe(),[&](const auto& preset){s.edit("node.create-preset",{{"preset",preset},{"parent",parent}});},observe);
+            ImGui::EndDisabled();ImGui::EndMenu();
+        }observe("menu.GameObject");
+        if(ImGui::BeginMenu("Help")){ImGui::TextUnformatted("Editor tutorial: docs/tutorials/editor-first-game.md");ImGui::TextUnformatted("W/E/R: transform | F: frame selection | Ctrl+S: save");ImGui::EndMenu();}observe("menu.Help");
         ImGui::EndMenuBar();
     }ImGui::End();
     ImGui::SetNextWindowPos({vp->Pos.x,vp->Pos.y+layout.menu});ImGui::SetNextWindowSize({vp->Size.x,layout.toolbar});
@@ -63,17 +61,8 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
         ImGui::SameLine();
     };
     button("Save","save",EditorCommand::Save);
-    if(ui::button("创建",{ui::ButtonVariant::Toolbar,false,s.playing()||s.building()}))ImGui::OpenPopup("Toolbar creation");observe("toolbar.create");
-    if(ImGui::BeginPopup("Toolbar creation")){ui::objectCreationMenu(s.nodePresets().describe(),[&](const auto& preset){s.edit("node.create-preset",{{"preset",preset}});},observe);ImGui::EndPopup();}
-    ImGui::SameLine();ImGui::TextDisabled("|");ImGui::SameLine();
     auto& context=s.context();
-    for(const auto& entry:{std::pair<const char*,EditorContext::GizmoMode>{"Move",EditorContext::GizmoMode::Translate},{"Rotate",EditorContext::GizmoMode::Rotate},{"Scale",EditorContext::GizmoMode::Scale}}) {
-        ImGui::BeginDisabled(s.playing()||s.building());
-        if(ImGui::Selectable(entry.first,context.gizmoMode()==entry.second,0,{55*dpi,0}))s.edit("viewport.gizmo-mode",{{"value",static_cast<unsigned>(entry.second)}});
-        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s",s.settings().get(std::string("editor.shortcuts.")+(entry.second==EditorContext::GizmoMode::Translate?"move":entry.second==EditorContext::GizmoMode::Rotate?"rotate":"scale")).get<std::string>().c_str());
-        observe(std::string("mode.")+entry.first);ImGui::EndDisabled();ImGui::SameLine();
-    }
-    ImGui::TextDisabled("|");ImGui::SameLine();
+    ImGui::SameLine(std::max(ImGui::GetCursorPosX(),ImGui::GetWindowWidth()*.5F-150*dpi));
     button("Play","play",EditorCommand::Play);
     button("Simulate","simulate",EditorCommand::Simulate);
     const bool paused=s.runtime()&&s.runtime()->state()==RuntimeLifecycle::State::Paused;

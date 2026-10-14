@@ -57,8 +57,7 @@ def run(executable, root):
     assert provenance['generation']['generatorId'] == 'azure.primitive'
     assert generated['nodeCount'] == placed['nodeCount'] and not generated['dirty']
     light = launch(executable, root, 'create-light', (1920, 1080), 1, [
-        dict(frame=25, action='click', target='assets.import-create'),
-        dict(frame=32, action='click', target='assets.create-object'),
+        dict(frame=32, action='click', target='outliner.create'),
         dict(frame=40, action='click', target='preset.light'),
         dict(frame=46, action='click', target='save')], capture=False)
     assert light['nodeCount'] == placed['nodeCount'] + 1 and light['feedback'] == []

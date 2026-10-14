@@ -58,6 +58,9 @@ class EditorHost:
         return result.get('value') if passed else result
     def frames(self,count=6):self.call('wait-frames',frames=count)
     def click(self,target,**fields):
+        if target.startswith('tool.') and not self.workspace()['panels'][target[5:]]['open']:
+            self.click('menu.View')
+            target='panel.'+target[5:]
         self.call('input',event=dict(action='click',target=target,**fields));self.frames()
     def screenshot(self,label):
         self.call('screenshot',label=label);self.frames()

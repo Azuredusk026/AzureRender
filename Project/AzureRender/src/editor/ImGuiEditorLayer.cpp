@@ -354,7 +354,10 @@ void ImGuiEditorLayer::drawPanels() {
         if(window->DockNode && window->DockNode->TabBar) {
             const auto* bar=window->DockNode->TabBar;
             for(const auto& tab:bar->Tabs)if(tab.Window==window)
+                {
                 widgets_["tab."+panel.id]={bar->BarRect.Min.x+tab.Offset,bar->BarRect.Min.y,tab.Width,bar->BarRect.GetHeight()};
+                widgets_["tool."+panel.id]=widgets_["tab."+panel.id];
+                }
         }
     }
 #endif

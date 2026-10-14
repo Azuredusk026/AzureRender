@@ -110,11 +110,6 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
                 }observeWidget("material.create."+id);
             }ImGui::EndMenu();
         }observeWidget("assets.create-material");
-        if(ImGui::BeginMenu("Create object")){
-            for(const auto& preset:session_->nodePresets().describe()){
-                const auto id=preset.at("id").get<std::string>();if(ImGui::MenuItem(preset.at("label").get<std::string>().c_str()))session_->edit("node.create-preset",{{"preset",id}});observeWidget("preset."+id);
-            }ImGui::EndMenu();
-        }observeWidget("assets.create-object");
         if(ImGui::BeginMenu("Generate primitive")){
             if(ImGui::BeginCombo("Shape",primitiveKind_.c_str())){for(const auto* kind:{"cube","plane","sphere","cylinder"})if(ImGui::Selectable(kind,primitiveKind_==kind))primitiveKind_=kind;ImGui::EndCombo();}observeWidget("primitive.kind");
             ImGui::InputFloat3("Dimensions",primitiveSize_.data());observeWidget("primitive.size");
@@ -130,9 +125,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
         if(ui::button("Undo content transaction"))session_->edit("content.undo");observeWidget("content.undo");ImGui::EndDisabled();
         ImGui::BeginDisabled(!view.isProject()||session_->playing()||session_->building()||session_->reimporting());
         if(ui::button("Redo content transaction"))session_->edit("content.redo");observeWidget("content.redo");ImGui::EndDisabled();
-        ui::inputText("Prefab instance",prefabInstance_);
         ImGui::BeginDisabled(session_->playing()||session_->building());
-        if(ui::button("Create empty node"))session_->edit("node.create",{{"id",prefabInstance_}});
         if(ImGui::BeginCombo("Place Prefab","Choose asset")){
             for(const auto& row:session_->edit("assets.catalog",{{"type","prefab"}}).value)if(ImGui::Selectable(row.at("path").get<std::string>().c_str()))
                 session_->edit("asset.place",{{"asset",row.at("id")},{"origin",{0,5,0}},{"direction",{0,-1,0}}});

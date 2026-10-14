@@ -98,8 +98,8 @@ void ImGuiEditorLayer::injectUiEvents() {
 }
 void ImGuiEditorLayer::drawWorkspace() {
     const auto* vp=ImGui::GetMainViewport();const auto layout=EditorWorkspace::layout(vp->Size.x,vp->Size.y,dpi_,session_->settings().get("editor.compact").get<bool>());
-    const auto hostPos=ImVec2(vp->Pos.x+layout.left,vp->Pos.y+layout.menu+layout.toolbar);
-    const auto hostSize=ImVec2(vp->Size.x-layout.left,vp->Size.y-layout.menu-layout.toolbar-layout.status);
+    const auto hostPos=ImVec2(vp->Pos.x,vp->Pos.y+layout.menu+layout.toolbar);
+    const auto hostSize=ImVec2(vp->Size.x,vp->Size.y-layout.menu-layout.toolbar-layout.status);
     ImGui::SetNextWindowPos(hostPos);ImGui::SetNextWindowSize(hostSize);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize,0);
     constexpr auto flags=ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove
@@ -119,8 +119,8 @@ void ImGuiEditorLayer::drawWorkspace() {
             ImGui::DockBuilderSetNodePos(dockspace,hostPos);ImGui::DockBuilderSetNodeSize(dockspace,hostSize);
             ImGuiID center=dockspace;
             const auto right=ImGui::DockBuilderSplitNode(center,ImGuiDir_Right,layout.right/hostSize.x,nullptr,&center);
-            ImGuiID details=right;
-            const auto objects=ImGui::DockBuilderSplitNode(details,ImGuiDir_Up,.42F,nullptr,&details);
+            const auto objects=ImGui::DockBuilderSplitNode(center,ImGuiDir_Left,layout.left/(hostSize.x-layout.right),nullptr,&center);
+            const auto details=right;
             const auto bottom=ImGui::DockBuilderSplitNode(center,ImGuiDir_Down,layout.bottom/hostSize.y,nullptr,&center);
             for(const auto& panel:workspace_.panels()) {
                 const auto target=(panel.id=="viewport"||panel.id=="projects")?center:panel.id=="outliner"?objects:(panel.id=="inspector"||panel.id=="environment"||panel.id=="settings")?details:bottom;
@@ -134,20 +134,7 @@ void ImGuiEditorLayer::drawWorkspace() {
     ImGui::DockSpace(dockspace,{0,0},ImGuiDockNodeFlags_PassthruCentralNode);
 #endif
     ImGui::End();ImGui::PopStyleVar(2);
-    if(layout.left>0) {
-        ImGui::SetNextWindowPos({vp->Pos.x,hostPos.y});ImGui::SetNextWindowSize({layout.left,hostSize.y});
-        ImGui::Begin("Create & Project###project",nullptr,flags);
-        ImGui::PushFont(nullptr,16);ImGui::TextUnformatted("PROJECT");ImGui::PopFont();
-        if(context_->isProject()){ImGui::TextWrapped("%s",context_->project().name.c_str());ImGui::TextDisabled("%s",context_->scene().sceneId.c_str());}
-        ImGui::Separator();ImGui::TextUnformatted("Tools");
-        for(const auto& id:{"assets","animation","scripts","problems","assistance","prefabs","gameplay-debug","build","capture","console","settings","environment","projects"}) {
-            const auto& panel=*std::find_if(workspace_.panels().begin(),workspace_.panels().end(),[&](const auto& p){return p.id==id;});
-            const auto title=panel.title.substr(0,panel.title.find("###"));
-            if(ImGui::Button(title.c_str(),{-1,0})){workspace_.setVisible(id,true);ImGui::SetWindowFocus(panel.title.c_str());}
-            observeWidget(std::string("tool.")+id);
-        }
-        ImGui::End();
-    }
+
 }
 nlohmann::json ImGuiEditorLayer::workspaceSnapshot(bool includeHistory) const {
     const auto* context=&session_->context();

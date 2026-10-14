@@ -15,7 +15,7 @@ struct EditorWorkspaceLayout {
 };
 class EditorWorkspace {
 public:
-    static constexpr int version = 2;
+    static constexpr int version = 3;
     EditorWorkspace() { reset(); }
     void reset();
     void preset(const std::string& id);

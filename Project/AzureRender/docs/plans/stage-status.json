@@ -878,9 +878,9 @@
     {
       "id": "UX-B",
       "name": "工作区与视口",
-      "status": "Active",
+      "status": "Complete",
       "scope": "Unity 操作习惯与通用编辑器职责",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "UX-A"
       ],
@@ -892,7 +892,7 @@
     {
       "id": "UX-C",
       "name": "组件与脚本",
-      "status": "Pending",
+      "status": "Active",
       "scope": "Unity 操作习惯与通用编辑器职责",
       "checksPassed": false,
       "dependsOn": [

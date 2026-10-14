@@ -13,6 +13,15 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     folder=root/name;folder.mkdir(parents=True)
     config=config or folder/'config'
     project=root/'game/project.azureproject'
+    opened={'viewport','outliner','inspector','assets','console'}
+    expanded=[]
+    for action in actions:
+        target=action.get('target','')
+        if target.startswith('tool.') and target[5:] not in opened:
+            expanded.append(dict(frame=action['frame']-4,action='click',target='menu.View'))
+            action=dict(action,target='panel.'+target[5:]);opened.add(target[5:])
+        expanded.append(action)
+    actions=sorted(expanded,key=lambda a:a['frame'])
     task=folder/'ui-input.json';task.write_text(json.dumps(actions,ensure_ascii=False),encoding='utf-8')
     env=os.environ.copy();env['AZURERENDER_EDITOR_CONFIG']=str(config)
     env['AZURERENDER_EDITOR_UI_ACTIONS']=str(task);env['AZURERENDER_EDITOR_DPI']=str(dpi)
@@ -129,8 +138,8 @@ def main(executable,root):
     dynamic=launch(executable,root,'dynamic-dpi',(1280,720),1,[dict(frame=25,action='dpi',scale=2),dict(frame=35,action='dpi',scale=1.5)])
     assert dynamic['dpi']==1.5 and all(p['docked'] for key,p in dynamic['panels'].items() if p['open'])
     reset=launch(executable,root,'reset',(1920,1080),1,[dict(frame=25,action='click',target='menu.View'),dict(frame=29,action='click',target='menu.Reset Layout')],capture=False,config=config)
-    assert all(reset['panels'][key]['open'] and reset['panels'][key]['docked'] for key in {'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug'})
-    assert all(not reset['panels'][key]['open'] for key in {'scripts','problems','assistance','prefabs'} & set(reset['panels']))
+    assert all(reset['panels'][key]['open'] and reset['panels'][key]['docked'] for key in {'viewport','outliner','inspector','assets','console'})
+    assert all(not reset['panels'][key]['open'] for key in {'scripts','problems','assistance','prefabs','capture','build','animation','gameplay-debug'} & set(reset['panels']))
     for mode,field,baseline in (('Move','gizmoTranslation',0),('Rotate','gizmoRotation',0),('Scale','gizmoScale',1)):
         events=[dict(frame=25,action='click',target='node.hero:body'),dict(frame=28,action='click',target='focus'),dict(frame=30,action='click',target='mode.'+mode),
             dict(frame=35,action='mouse',target='gizmo.0',down=True),dict(frame=38,action='mouse',target='gizmo.0',down=True,offset=[30,0]),dict(frame=41,action='mouse',target='gizmo.0',down=False,offset=[30,0])]

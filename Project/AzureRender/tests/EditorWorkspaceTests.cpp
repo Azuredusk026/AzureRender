@@ -22,6 +22,7 @@ int main(){try{
  EditorWorkspace workspace;
  check(workspace.panels().size()==12,"Standard panels, settings, projects and environment registered");
  check(!workspace.visible("settings"),"Settings extension is closed by default");
+ check(!workspace.visible("capture")&&!workspace.visible("build")&&!workspace.visible("animation"),"Authoring workspace keeps specialist tools closed until requested");
  workspace.setVisible("settings",true);
  for(float dpi:{1.F,1.5F,2.F})for(auto size:{std::array<float,2>{1920,1080},std::array<float,2>{1280,720}}){
   auto layout=EditorWorkspace::layout(size[0],size[1],dpi);

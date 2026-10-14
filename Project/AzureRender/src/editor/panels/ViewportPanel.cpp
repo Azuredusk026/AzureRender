@@ -35,6 +35,12 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     viewportFocused_ = ImGui::IsWindowFocused(
         ImGuiFocusedFlags_RootAndChildWindows);
     if (!viewportTextures_.empty()) {
+        ImGui::BeginDisabled(session_->playing()||session_->building());
+        for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
+            if(ui::button(entry.first,{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
+            observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
+        }
+        ImGui::EndDisabled();ImGui::NewLine();
         if(ui::button("聚焦选择",{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ui::nextToolbarItem(ui::buttonWidth("正交"));

@@ -21,9 +21,9 @@ void EditorWorkspace::reset() {
     preset_="custom";
     panels_={{"viewport","Viewport###viewport"},{"outliner","Scene Outliner###outliner"},
         {"inspector","Details###inspector"},{"assets","Content Browser###assets"},
-        {"capture","Capture###capture"},{"console","Console###console"},
-        {"build","Build Game###build"},{"animation","Animation Preview###animation"},
-        {"gameplay-debug","Gameplay Debug###gameplay-debug"},{"settings","Settings###settings",false},{"projects","Projects###projects",false},{"environment","Environment###environment",false}};
+        {"capture","Capture###capture",false},{"console","Console###console"},
+        {"build","Build Game###build",false},{"animation","Animation Preview###animation",false},
+        {"gameplay-debug","Gameplay Debug###gameplay-debug",false},{"settings","Settings###settings",false},{"projects","Projects###projects",false},{"environment","Environment###environment",false}};
     panels_.insert(panels_.end(),extraPanels_.begin(),extraPanels_.end());
 }
 void EditorWorkspace::preset(const std::string& id) {
@@ -31,7 +31,7 @@ void EditorWorkspace::preset(const std::string& id) {
     reset();preset_=id;
     for(auto& panel:panels_) {
         if(std::any_of(extraPanels_.begin(),extraPanels_.end(),[&](const auto& p){return p.id==panel.id;}))continue;
-        panel.visible=panel.id=="viewport"||panel.id=="outliner"||panel.id=="inspector"||panel.id=="assets"||panel.id=="environment"||
+        panel.visible=panel.id=="viewport"||panel.id=="outliner"||panel.id=="inspector"||panel.id=="assets"||
             (id=="debugging"&&(panel.id=="console"||panel.id=="gameplay-debug"||panel.id=="capture"));
     }
 }
@@ -62,6 +62,7 @@ bool EditorWorkspace::load(const std::filesystem::path& directory) noexcept {
     if(!std::filesystem::exists(directory/"workspace.json"))return false;
     try {
         std::ifstream file(directory/"workspace.json");nlohmann::json state;file>>state;
+        if(state.at("version")==2)return false;
         if(state.at("version")!=version)throw std::runtime_error("layout version");
         if(std::filesystem::exists(directory/"layout.ini") &&
             state.at("layoutHash").get<std::uint64_t>()!=layoutHash(directory/"layout.ini"))
@@ -102,7 +103,7 @@ EditorWorkspaceLayout EditorWorkspace::layout(float width,float height,float dpi
     const auto metrics=ui::UiMetrics::fromScale(dpi);
     EditorWorkspaceLayout r;r.menu=metrics.menuHeight;r.toolbar=metrics.toolbarHeight;r.status=metrics.statusHeight;
     r.compact=compact || width/dpi<1280 || height/dpi<720;
-    r.left=r.compact?0:220*dpi;r.right=std::min(320*dpi,width*.26F);
+    r.left=std::min(240*dpi,width*.20F);r.right=std::min(320*dpi,width*.26F);
     r.bottom=r.compact?80*dpi:220*dpi;
     r.viewportWidth=width-r.left-r.right;
     r.viewportHeight=height-r.menu-r.toolbar-r.status-r.bottom-36*dpi;
