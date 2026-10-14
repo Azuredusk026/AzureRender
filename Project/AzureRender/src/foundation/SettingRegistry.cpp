@@ -65,7 +65,7 @@ SettingRegistry::Json SettingRegistry::describe(const std::string& search) const
         const auto [value,source]=resolve(e.layers);const auto [pending,pendingSource]=resolve(e.pending);const auto& d=e.descriptor;
         Json layers=Json::object();for(std::size_t i=0;i<6;++i)if(e.layers[i])layers[settingSourceName(static_cast<SettingSource>(i))]=*e.layers[i];
         result[name]={{"type",d.defaultValue.is_boolean()?"boolean":d.defaultValue.is_string()?"string":d.defaultValue.is_number_integer()?"integer":"number"},{"description",d.description},{"value",value},{"default",d.defaultValue},{"source",settingSourceName(source)},
-            {"pending",pending},{"pendingSource",settingSourceName(pendingSource)},{"layers",layers},{"readOnly",d.readOnly},{"persistent",d.persistent},{"startupOnly",d.startupOnly}};
+            {"pending",pending},{"pendingSource",settingSourceName(pendingSource)},{"layers",layers},{"readOnly",d.readOnly},{"persistent",d.persistent},{"startupOnly",d.startupOnly},{"editorVisible",d.editorVisible}};
         if(d.minimum)result[name]["minimum"]=*d.minimum;if(d.maximum)result[name]["maximum"]=*d.maximum;
     }return result;
 }

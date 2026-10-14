@@ -5,7 +5,7 @@ namespace azurerender {
 void registerEngineSettings(SettingRegistry& r) {
     registerRenderSettings(r);registerInputPreferences(r);
     for(const auto& descriptor:builtinRenderFeatures().descriptors())
-        r.add({"render.features."+descriptor.id,"可选渲染特性："+descriptor.id,false,{},{},false,true,false});
+        r.add({"render.features."+descriptor.id,"可选渲染特性："+descriptor.id,false,{},{},false,true,false,false});
     r.add({"runtime.maxFrameRate","Maximum host frame rate (0 is unlimited)",60,0,1000,false,true,false});
     r.add({"runtime.vsync","Synchronized surface presentation",true,{},{},false,true,true});
     r.add({"diagnostics.verbose","Verbose development diagnostics",false,{},{},false,true,false});

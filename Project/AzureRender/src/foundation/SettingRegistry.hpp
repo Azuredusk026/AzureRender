@@ -13,6 +13,7 @@ struct SettingDescriptor {
     nlohmann::json defaultValue;
     std::optional<double> minimum, maximum;
     bool readOnly=false, persistent=false, startupOnly=false;
+    bool editorVisible=true;
 };
 struct SettingResult { bool passed=false; std::string diagnostic; };
 class SettingRegistry {

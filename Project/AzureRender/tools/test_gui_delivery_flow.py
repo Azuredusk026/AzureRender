@@ -256,7 +256,7 @@ def run(install, output, replay=False):
         ui.until(lambda s: s.get('dirty') and s.get('documentGuard') == 0)
         ui.click('save')
         ui.until(lambda s: not s.get('dirty', True))
-        ui.click('menu.Tools'); ui.click('tool.build')
+        ui.click('build')
         if 'project.build' not in ui.state().get('widgets', {}): ui.click('tab.build')
         assert Path(ui.state()['build']['install']) == install
         ui.fill('output.path', str(published))

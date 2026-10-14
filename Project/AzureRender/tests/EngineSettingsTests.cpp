@@ -7,6 +7,8 @@ using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
     SettingRegistry registry;registerEngineSettings(registry);RenderSettings render;render.grade.exposureEv=1.5F;
+    check(!registry.describe().at("render.features.face-sdf").value("editorVisible",true),"Extension controls are code-owned rather than generic editor settings");
+    check(registry.describe().at("render.exposure").value("editorVisible",false),"General rendering controls remain available");
     RenderSettings basic;basic.sceneType=SceneType::Sample;
     check(!resolveRenderSettings(registry,basic).faceSdf.enabled,"Generic scenes must not activate character face shading by default");
     check(!resolveRenderSettings(registry,basic).characterPresentation.platformEnabled,"Generic scenes must not generate showcase platforms");

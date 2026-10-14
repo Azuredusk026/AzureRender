@@ -32,6 +32,7 @@ public:
     static std::array<float,2> ndcToScreen(float x, float y) { return {(x+1)*.5F,(y+1)*.5F}; }
     nlohmann::json snapshot() const;
     std::string diagnostic;
+    int settingsCategory=0;
     std::map<std::string,std::string> overlayPolicies{{"grid","all"},{"light","selected"},{"camera","selected"}};
 private:
     std::string preset_="custom";

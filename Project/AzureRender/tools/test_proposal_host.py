@@ -61,7 +61,7 @@ def run(executable,output,workflow):
             edit('ai.generate',runId=runId,domain=domain,target='document',instruction='Produce the declared structured candidate')
         frames();assert query('ai.available') is True
         initial=query('document.version');count=query('scene.nodeCount')
-        click('tool.assistance');frames();click('ai.instruction')
+        click('menu.View');frames();click('panel.assistance');frames();click('ai.instruction')
         call('input',event=dict(action='text',text='Create a scene candidate'))
         frames();click('ai.generate');wait('Ready')
         assert query('document.version')==initial,'Preview changed authored content'

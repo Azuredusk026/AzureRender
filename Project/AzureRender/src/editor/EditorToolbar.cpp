@@ -33,7 +33,11 @@ void EditorToolbar::draw(EditorSession& s,EditorWorkspace& workspace,float dpi,c
             observe(std::string("menu.")+label);
         };
         if(ImGui::BeginMenu("File")){if(ImGui::MenuItem("Projects..."))workspace.setVisible("projects",true);observe("menu.Projects");item("Save","Ctrl+S",EditorCommand::Save);item("Reload",nullptr,EditorCommand::Reload);ImGui::EndMenu();}observe("menu.File");
-        if(ImGui::BeginMenu("Edit")){item("Undo","Ctrl+Z",EditorCommand::Undo);item("Redo","Ctrl+Y",EditorCommand::Redo);item("Reload Assets",nullptr,EditorCommand::ReloadAssets);ImGui::EndMenu();}observe("menu.Edit");
+        if(ImGui::BeginMenu("Edit")){item("Undo","Ctrl+Z",EditorCommand::Undo);item("Redo","Ctrl+Y",EditorCommand::Redo);item("Reload Assets",nullptr,EditorCommand::ReloadAssets);
+            ImGui::Separator();
+            if(ImGui::MenuItem("Project Settings...")){workspace.settingsCategory=1;workspace.setVisible("settings",true);ImGui::SetWindowFocus("Settings###settings");}observe("menu.project-settings");
+            if(ImGui::MenuItem("Preferences...")){workspace.settingsCategory=0;workspace.setVisible("settings",true);ImGui::SetWindowFocus("Settings###settings");}observe("menu.preferences");
+            ImGui::EndMenu();}observe("menu.Edit");
         if(ImGui::BeginMenu("View")){
             for(auto& panel:workspace.panels()) {
                 std::string title=panel.title.substr(0,panel.title.find("###"));

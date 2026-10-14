@@ -48,6 +48,12 @@ def run(executable, output):
         component=next(n for n in level['nodes'] if n['id']==child)['components']['azure.script']
         assert component['data']['asset']==script['id']
         host.screenshot('authoring-workspace')
+        host.click('menu.Edit');host.click('menu.project-settings')
+        settings=host.workspace()['widgets']
+        assert 'setting.render.exposure' in settings
+        assert not any(key.startswith('setting.render.features.') or key=='setting.render.blackholeQuality' for key in settings)
+        assert 'settings.source' not in settings
+        host.screenshot('project-settings')
     (root / 'summary.json').write_text(json.dumps(dict(passed=True, physicalInput=False,
         sceneContainer=True, emptySpaceUnparent=True, undoRestoresParent=True,
         layout=True, viewportTools=True), indent=2), encoding='utf-8')

@@ -74,7 +74,8 @@ def run(executable, output, workflow):
         wait('render.exposure', 1.25)
         edit('settings.set', name='editor.scale', value=1.0, source='user-file')
         frames()
-        event('click', target='tool.settings')
+        event('click', target='menu.View');frames()
+        event('click', target='panel.settings')
         frames()
         event('click', target='settings.category')
         frames()
@@ -86,6 +87,8 @@ def run(executable, output, workflow):
         event('click', target='setting.diagnostics.verbose')
         wait('setting.diagnostics.verbose', True)
         assert call('query', name='setting.source.diagnostics.verbose') == 'console'
+        event('click', target='settings.category');frames()
+        event('click', target='settings.category.0');frames()
         event('click', target='settings.save')
         frames()
         saved = json.loads(user.read_text(encoding='utf-8'))

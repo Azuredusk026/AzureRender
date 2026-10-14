@@ -39,7 +39,7 @@ def launch(executable, root, name, size, dpi, actions=(), capture=True, config=N
     data=json.loads(report.read_text(encoding='utf-8'))['editorWorkspace']
     required={'viewport','outliner','inspector','assets','capture','console','build','animation','gameplay-debug','settings','projects','environment'}
     extensions={'scripts','problems','assistance','prefabs'}
-    assert data['version']==2 and required <= set(data['panels']) <= required | extensions,data
+    assert data['version']==3 and required <= set(data['panels']) <= required | extensions,data
     assert data['image']['width']>=480 and data['image']['height']>=270,data['image']
     assert all('open' in panel for panel in data['panels'].values())
     assert data['uiErrors']==[],data['uiErrors']
@@ -98,8 +98,9 @@ def main(executable,root):
         hitErrors.append(dict(case=name,projectionErrorPixels=error,handleProjectionErrorPixels=handleError,rasterErrorPixels=rasterError))
         if dpi==1 and size[0]==1920:
             from PIL import Image
-            color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((110,700))
-            assert max(abs(a-b) for a,b in zip(color,(32,35,41)))<=2,color
+            rect=results[name]['panels']['outliner']['rect']
+            color=Image.open(root/name/'capture/frame_000015.png').convert('RGB').getpixel((round(rect[0]+12),round(rect[1]+rect[3]-20)))
+            assert max(abs(a-b) for a,b in zip(color,(21,23,27)))<=2,color
     actions=[]
     def click(frame,target):actions.append(dict(frame=frame,action='click',target=target))
     def key(frame,key,down=True,ctrl=False):actions.append(dict(frame=frame,action='key',key=key,down=down,ctrl=ctrl))

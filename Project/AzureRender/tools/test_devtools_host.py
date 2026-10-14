@@ -134,7 +134,8 @@ def run(executable, output, workflow, config):
         click('assets.grid')
         edit('preview.clear');frames()
         # Camera preview is rendered through a real panel and stops when hidden.
-        click('tool.capture')
+        click('menu.View');frames()
+        click('panel.capture')
         click('preview.camera');frames(15)
         camera = status()['camera'];assert camera and camera['renderCount'] > 1
         camera_handle=edit('preview.camera',enabled=True)['handle']
