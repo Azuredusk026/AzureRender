@@ -19,6 +19,8 @@ def run(executable, output):
         assert not panels['capture']['open'] and not panels['build']['open']
         assert 'outliner.add' not in state['widgets']
         assert 'hierarchy.root' in state['widgets']
+        host.click('hierarchy.root')
+        assert host.workspace()['selection']==[]
         host.click('hierarchy.empty')
         host.click('outliner.create'); host.click('preset.empty')
         parent = host.workspace()['selection'][0]
@@ -47,6 +49,15 @@ def run(executable, output):
         level=json.loads(level_path.read_text(encoding='utf-8'))
         component=next(n for n in level['nodes'] if n['id']==child)['components']['azure.script']
         assert component['data']['asset']==script['id']
+        host.edit('preview.simulate');host.frames()
+        before=host.workspace()
+        host.click('viewport.image',button='right')
+        host.click('viewport.duplicate')
+        assert host.workspace()['nodeCount']==before['nodeCount']
+        assert host.workspace()['feedback']==before['feedback']
+        host.call('input',event=dict(action='key',key='Escape',down=True));host.frames()
+        host.call('input',event=dict(action='key',key='Escape',down=False));host.frames()
+        host.edit('preview.stop');host.frames()
         host.screenshot('authoring-workspace')
         host.click('menu.Edit');host.click('menu.project-settings')
         settings=host.workspace()['widgets']

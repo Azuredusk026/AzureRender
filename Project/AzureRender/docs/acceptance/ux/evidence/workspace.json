@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "dpiCases": 8,
+  "realImGuiEvents": 16,
+  "chineseSaveReload": true,
+  "runControls": true,
+  "panelPersistence": true,
+  "corruptionRecovery": true,
+  "iniIntegrity": true,
+  "textFocusProtection": true,
+  "dynamicDpi": true,
+  "layoutReset": true,
+  "gizmoModes": 3,
+  "scriptAssets": true,
+  "viewportPicking": true,
+  "dockDragPersistence": true,
+  "hitErrors": [
+    {
+      "case": "1920x1080-1",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 5.193462072838884e-06,
+      "rasterErrorPixels": 0.502172081519822
+    },
+    {
+      "case": "1280x720-1",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 1.0793133583320014e-05,
+      "rasterErrorPixels": 0.6448061550495245
+    },
+    {
+      "case": "1920x1080-1.5",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 4.634055346741661e-05,
+      "rasterErrorPixels": 0.10148677024096742
+    },
+    {
+      "case": "1280x720-1.5",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 2.7359584294117667e-05,
+      "rasterErrorPixels": 0.6541436695224498
+    },
+    {
+      "case": "1920x1080-2",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 3.8500277753428236e-05,
+      "rasterErrorPixels": 0.31241642996525343
+    },
+    {
+      "case": "1280x720-2",
+      "projectionErrorPixels": 0.0,
+      "handleProjectionErrorPixels": 5.547881062284432e-05,
+      "rasterErrorPixels": 0.30858819365437284
+    },
+    {
+      "case": "1280x720-0.75",
+      "projectionErrorPixels": 3.051757818184342e-05,
+      "handleProjectionErrorPixels": 2.9607728833980218e-05,
+      "rasterErrorPixels": 0.5262377977862206
+    },
+    {
+      "case": "3840x2160-3",
+      "projectionErrorPixels": 6.103515636368684e-05,
+      "handleProjectionErrorPixels": 9.268110693483322e-05,
+      "rasterErrorPixels": 0.20297354048193483
+    }
+  ]
+}

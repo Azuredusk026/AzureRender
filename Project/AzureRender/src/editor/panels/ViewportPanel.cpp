@@ -37,10 +37,11 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     if (!viewportTextures_.empty()) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
         for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
-            if(ui::button(entry.first,{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
+            const char* shortcut=entry.second==0?"W":entry.second==1?"E":entry.second==2?"R":"Q";
+            if(ui::button(compact?shortcut:entry.first,{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
             observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
         }
-        ImGui::EndDisabled();ImGui::NewLine();
+        ImGui::EndDisabled();if(!compact)ImGui::NewLine();
         if(ui::button("聚焦选择",{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
             session_->edit("viewport.frame-selection");
         }observeWidget("focus");ui::nextToolbarItem(ui::buttonWidth("正交"));
@@ -181,12 +182,13 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
         if(ImGui::BeginPopup("Viewport context")){
             if(ImGui::MenuItem("聚焦选择","F",false,!session_->selection().selected().empty()))session_->edit("viewport.frame-selection");
+            ImGui::BeginDisabled(session_->playing()||session_->building());
             if(ImGui::MenuItem("复制","Ctrl+D",false,!session_->selection().selected().empty()))session_->edit("node.duplicate");
             observeWidget("viewport.duplicate");
             if(ImGui::MenuItem("删除","Delete",false,!session_->selection().selected().empty()))session_->edit("node.delete");
             observeWidget("viewport.delete");
             if(ImGui::BeginMenu("创建对象")){ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){session_->edit("node.create-preset",{{"preset",preset}});});ImGui::EndMenu();}
-            ImGui::EndPopup();
+            ImGui::EndDisabled();ImGui::EndPopup();
         }
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
             const ImGuiIO& io = ImGui::GetIO();

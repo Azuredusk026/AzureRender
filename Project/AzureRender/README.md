@@ -1,6 +1,8 @@
 # AzureRender 工程
 
-当前开发任务为 UX-A 至 UX-E 的交互优化。
+UX-A 至 UX-D 完成，UX-E 为 Ready。
+自动检查已完成，新版使用体验等待集中确认。
+交付入口与结果见[本轮交付](docs/acceptance/ux/2026-10-14.md)。
 范围与阶段记录见[交互优化计划](docs/editor-usability-audit.md)。
 用户已反馈人工复核基本可用，交互体验需要优化。
 

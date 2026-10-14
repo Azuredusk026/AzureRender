@@ -75,6 +75,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     const auto sceneLabel=view.scene().sceneId+(session_->context().dirty()?" *":"")+"###scene-container";
     const bool sceneOpen=ImGui::TreeNodeEx(sceneLabel.c_str(),ImGuiTreeNodeFlags_DefaultOpen|ImGuiTreeNodeFlags_SpanAvailWidth|ImGuiTreeNodeFlags_OpenOnArrow);
     observeWidget("hierarchy.root");acceptDrop("");
+    if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
     if(ImGui::IsItemHovered())ImGui::SetTooltip("场景容器：拖入对象可移到场景顶层");
     const auto dragItem=[&](const SceneNode& node) {
         if(ImGui::BeginPopupContextItem("Object actions")){
@@ -103,7 +104,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
         }
         // The top edge inserts a sibling; the row body parents the drop.
         const bool sibling=ImGui::GetIO().MousePos.y<ImGui::GetItemRectMin().y+5*dpi_;
-        if(sibling && ImGui::GetDragDropPayload()) {
+        if(sibling && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem) && ImGui::GetDragDropPayload()) {
             const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();
             ImGui::GetWindowDrawList()->AddLine(a,{b.x,a.y},ImGui::GetColorU32(ImGuiCol_DragDropTarget),2*dpi_);
         }

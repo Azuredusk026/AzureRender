@@ -35,7 +35,7 @@ void ImGuiEditorLayer::drawAssetBrowserPanel(PanelContext& panelContext) {
     if(!reveal.empty()) {assetFilter_.Clear();assetTypeId_.clear();assetDirectory_.clear();assetMount_.clear();selectedAssets_={reveal};}
     const bool compact=ImGui::GetContentRegionAvail().y<metrics.compactPanelHeight;
     const bool renderGrid=assetGrid_&&!compact;
-    const bool wide=ImGui::GetContentRegionAvail().x>metrics.widePanelWidth;
+    const bool wide=compact||ImGui::GetContentRegionAvail().x>metrics.widePanelWidth;
     const auto gridWidth=ImGui::GetFrameHeight()+ImGui::CalcTextSize("网格").x+metrics.spacing;
     const auto searchWidth=wide?ImGui::GetContentRegionAvail().x-metrics.filterWidth-gridWidth-3*metrics.spacing-(compact?ui::buttonWidth("+")+metrics.spacing:0):-1;
     ui::searchField("##Search assets","搜索名称或路径",assetFilter_,searchWidth);observeWidget("assets.search");

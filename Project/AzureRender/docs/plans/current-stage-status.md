@@ -1,6 +1,6 @@
 # 当前阶段状态
 
-项目状态：开发中。
+项目状态：Ready。
 
 本页回答各阶段处于什么状态，下一项工作是什么。
 阶段状态取值为完成、Ready、开发中、待完成。
@@ -83,7 +83,7 @@ Ready 表示依赖满足，可以开始执行。
 | UX-B | 工作区与视口 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-C | 组件与脚本 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
 | UX-D | 设置与扩展归属 | 完成 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
-| UX-E | 集中交互复核 | 开发中 | Unity 操作习惯与通用编辑器职责。[记录](../editor-usability-audit.md) |
+| UX-E | 集中交互复核 | Ready | Unity 操作习惯与通用编辑器职责。[记录](../acceptance/ux/2026-10-14.md) |
 
 ## 最终收尾
 
@@ -112,5 +112,6 @@ P8 完成前，项目的完整交付验收仍待完成。
 | UI8-input-ime | UI8 | P8 | 未执行 |
 | UI8-directory-causality | UI8 | P8 | 待验 |
 | ED-workflow | ED7 | P8 | 未执行 |
+| UX-E-HUMAN | UX-E | UX-E | 待验 |
 
 详细步骤见[验收收尾流程](../acceptance/phase-closure.md)。

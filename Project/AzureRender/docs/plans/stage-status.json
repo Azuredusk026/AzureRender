@@ -920,16 +920,18 @@
     {
       "id": "UX-E",
       "name": "集中交互复核",
-      "status": "Active",
+      "status": "Ready",
       "scope": "Unity 操作习惯与通用编辑器职责",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "UX-D"
       ],
       "evidence": [
-        "docs/editor-usability-audit.md"
+        "docs/acceptance/ux/2026-10-14.md"
       ],
-      "requiredAcceptance": []
+      "requiredAcceptance": [
+        "UX-E-HUMAN"
+      ]
     }
   ],
   "acceptance": [
@@ -1104,6 +1106,14 @@
       "result": "notExecuted",
       "transferEvidence": "docs/plans/2026-10-14-editor-generalization.md",
       "currentCandidateBinding": "docs/acceptance/p8/evidence/2026-10-14/manual-candidate-binding.json"
+    },
+    {
+      "id": "UX-E-HUMAN",
+      "originPhase": "UX-E",
+      "ownerPhase": "UX-E",
+      "result": "pending",
+      "description": "新版交互的集中实体操作与使用体验确认",
+      "evidence": "docs/acceptance/ux/2026-10-14.md"
     }
   ],
   "mirrors": [
@@ -1127,6 +1137,11 @@
     "ED5",
     "ED6",
     "ED7",
+    "UX-A",
+    "UX-B",
+    "UX-C",
+    "UX-D",
+    "UX-E",
     "P8"
   ]
 }
