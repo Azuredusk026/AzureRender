@@ -1,3 +1,5 @@
+#include "ui/BrandMark.hpp"
+#include "platform/WindowIcon.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "ImGuiEditorLayer.hpp"
 #include "render/RenderMath.hpp"
@@ -160,6 +162,7 @@ void ImGuiEditorLayer::initialize(
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 #endif
     window_=window;
+    setWindowIcon(window_,64,ui::brandPixels(64));
     configDirectory_=EditorWorkspace::configDirectory();
     try{session_->setPathHistoryFile(configDirectory_/"path-history.json");}catch(const std::exception& error){session_->log(std::string("Path history: ")+error.what());}
     const bool restored=workspace_.load(configDirectory_);

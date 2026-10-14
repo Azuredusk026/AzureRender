@@ -1,3 +1,5 @@
+#include "ui/BrandMark.hpp"
+#include "platform/WindowIcon.hpp"
 #include "AzureRenderApp.hpp"
 #include "platform/GlfwFrontend.hpp"
 #include "editor/EditorWorkspace.hpp"
@@ -20,6 +22,7 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
     runOptions_=options; runOptions_.captureDirectory=(azurerender::EditorWorkspace::configDirectory()/"logs").u8string();
     azurerender::GlfwFrontendConfig config;config.width=options.width;config.height=options.height;config.title="AzureRender - Project Center";
     frontend_=std::make_unique<azurerender::GlfwFrontend>(config);
+    azurerender::setWindowIcon(frontend_->nativeHandle(),64,azurerender::ui::brandPixels(64));
     createInstance();setupDebugMessenger();createSurface();pickPhysicalDevice();createLogicalDevice();
     if(findQueueFamilies(physicalDevice_).present!=findQueueFamilies(physicalDevice_).graphics)
         throw std::runtime_error("Project center requires a graphics queue supporting presentation");

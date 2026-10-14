@@ -2144,3 +2144,6 @@ endif()
 if(WIN32)
     install(CODE "execute_process(COMMAND \"${Python3_EXECUTABLE}\" \"${CMAKE_CURRENT_SOURCE_DIR}/tools/install_python_runtime.py\" --destination \"\${CMAKE_INSTALL_PREFIX}/share/AzureRender/tools/python\" COMMAND_ERROR_IS_FATAL ANY)")
 endif()
+
+target_sources(AzurePlatform PRIVATE src/platform/WindowIcon.cpp)
+install(DIRECTORY assets_public/brand DESTINATION assets_public)

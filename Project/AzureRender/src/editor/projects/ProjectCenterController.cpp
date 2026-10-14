@@ -2,15 +2,17 @@
 #include <chrono>
 #include <stdexcept>
 namespace azurerender {
-ProjectCenterController::ProjectCenterController(std::filesystem::path history) : service_(std::move(history)) {}
+ProjectCenterController::ProjectCenterController(std::filesystem::path history) : service_(std::move(history)) { refreshRecent(); }
+void ProjectCenterController::refreshRecent(){if(!busy())recent_=service_.recent();}
+void ProjectCenterController::forget(const std::string& path){if(busy())return;try{service_.forget(path);refreshRecent();}catch(const std::exception& e){diagnostic_=e.what();}}
 void ProjectCenterController::open(std::filesystem::path path) {
     if(busy()) throw std::logic_error("A project task is already running");
-    diagnostic_.clear(); operation_="Validating and loading project"; state_=ApplicationState::ProjectLoading;
+    diagnostic_.clear(); operation_="正在校验并加载项目"; state_=ApplicationState::ProjectLoading;
     task_=std::async(std::launch::async,[this,path=std::move(path)] { return service_.open(path); });
 }
 void ProjectCenterController::create(std::string kind,std::filesystem::path destination,std::string name) {
     if(busy()) throw std::logic_error("A project task is already running");
-    diagnostic_.clear(); operation_="Creating template and validating project"; state_=ApplicationState::ProjectLoading;
+    diagnostic_.clear(); operation_="正在创建模板并校验项目"; state_=ApplicationState::ProjectLoading;
     task_=std::async(std::launch::async,[this,kind=std::move(kind),destination=std::move(destination),name=std::move(name)] { return service_.create(kind,destination,name); });
 }
 void ProjectCenterController::poll() {

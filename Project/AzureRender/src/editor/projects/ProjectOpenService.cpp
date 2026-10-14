@@ -17,8 +17,8 @@ ProjectOpenService::ProjectOpenService(std::filesystem::path history):history_(s
     }catch(const std::exception&){records_=nlohmann::json::array();}
 }
 nlohmann::json ProjectOpenService::templates() {
-    return nlohmann::json::array({{{"id","scene"},{"label","Scene inspection"}},
-        {{"id","game"},{"label","Playable game"}}});
+    return nlohmann::json::array({{{"id","scene"},{"label","场景项目"},{"description","包含可编辑场景与基础资源"}},
+        {{"id","game"},{"label","可玩项目"},{"description","包含运行入口与游戏配置"}}});
 }
 std::shared_ptr<EditorContext> ProjectOpenService::open(const std::filesystem::path& path) const {
     if(path.extension()!=".azureproject")throw std::invalid_argument("Select a .azureproject document");
@@ -57,6 +57,14 @@ void ProjectOpenService::remember(const Project& project) {
     auto candidate=nlohmann::json::array();
     candidate.push_back({{"id",project.id},{"name",project.name},{"path",project.file.u8string()}});
     for(const auto& record:records_)if(record.at("path")!=project.file.u8string()&&record.at("id")!=project.id&&candidate.size()<16)candidate.push_back(record);
+    persist(std::move(candidate));
+}
+void ProjectOpenService::forget(const std::string& path){
+    auto candidate=nlohmann::json::array();
+    for(const auto& record:records_)if(record.at("path")!=path)candidate.push_back(record);
+    persist(std::move(candidate));
+}
+void ProjectOpenService::persist(nlohmann::json candidate){
     std::filesystem::create_directories(history_.parent_path());
     const auto pending=history_.parent_path()/("recent-"+newDocumentIdentity()+".pending");
     try {

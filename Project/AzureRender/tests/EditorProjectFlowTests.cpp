@@ -1,6 +1,7 @@
 #include "editor/EditorSession.hpp"
 #include "editor/EditorWorkspace.hpp"
 #include "editor/projects/ProjectOpenService.hpp"
+#include "editor/projects/ProjectCenterController.hpp"
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -40,6 +41,20 @@ int main() {
         require(rejected&&!std::filesystem::exists(root/"late-cancelled"),"Cancellation after validation must reclaim outputs");
         for(const auto& entry:std::filesystem::directory_iterator(root))require(entry.path().filename().u8string().rfind(".azure-project-",0)!=0,"Temporary project must be reclaimed");
         projects.remember(first->project());projects.remember(second->project());
+        {
+            ProjectCenterController center(root/"recent.json");
+            const auto cached=center.recent();
+            const auto source=std::filesystem::u8path(cached.at(0).at("path").get<std::string>());
+            const auto moved=source.parent_path()/"temporarily-moved.azureproject";
+            std::filesystem::rename(source,moved);
+            require(center.recent()==cached,"Drawing recent projects reads a stable snapshot without disk probes");
+            center.refreshRecent();
+            require(!center.recent().at(0).at("available").get<bool>(),"Explicit refresh diagnoses moved projects");
+            std::filesystem::rename(moved,source);
+            center.forget(source.u8string());
+            require(center.recent().size()==1&&std::filesystem::exists(source),"Forgetting history preserves project content");
+            projects.remember(second->project());
+        }
         ProjectOpenService restored(root/"recent.json");
         require(restored.recent().size()==2,"Recent projects must survive restart");
         std::filesystem::remove(second->project().file);

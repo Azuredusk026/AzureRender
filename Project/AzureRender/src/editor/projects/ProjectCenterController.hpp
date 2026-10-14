@@ -13,7 +13,9 @@ public:
     ApplicationState state() const { return state_; }
     const std::string& diagnostic() const { return diagnostic_; }
     const std::string& operation() const { return operation_; }
-    nlohmann::json recent() const { return service_.recent(); }
+    const nlohmann::json& recent() const { return recent_; }
+    void refreshRecent();
+    void forget(const std::string& path);
     std::shared_ptr<EditorContext> takeReady();
 private:
     ProjectOpenService service_;
@@ -21,5 +23,6 @@ private:
     std::future<std::shared_ptr<EditorContext>> task_;
     std::shared_ptr<EditorContext> ready_;
     std::string diagnostic_, operation_;
+    nlohmann::json recent_=nlohmann::json::array();
 };
 }

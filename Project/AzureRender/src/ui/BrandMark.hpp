@@ -1,3 +1,5 @@
 #pragma once
 #include <imgui.h>
-namespace azurerender::ui { void brandMark(float size); }
+#include <vector>
+namespace azurerender::ui { void brandMark(float size);
+std::vector<unsigned char> brandPixels(int size); }

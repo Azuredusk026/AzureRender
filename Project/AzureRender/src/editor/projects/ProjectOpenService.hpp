@@ -12,9 +12,11 @@ public:
         const std::function<bool()>& cancelled={});
     std::shared_ptr<EditorContext> open(const std::filesystem::path& path) const;
     void remember(const Project& project);
+    void forget(const std::string& path);
     nlohmann::json recent() const;
     static nlohmann::json templates();
 private:
+    void persist(nlohmann::json candidate);
     std::filesystem::path history_;
     nlohmann::json records_=nlohmann::json::array();
 };
