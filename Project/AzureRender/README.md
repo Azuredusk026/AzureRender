@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+当前开发任务为 UX-A 至 UX-E 的交互优化。
+范围与阶段记录见[交互优化计划](docs/editor-usability-audit.md)。
+用户已反馈人工复核基本可用，交互体验需要优化。
+
 ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 开发任务见[编辑器实施计划](docs/plans/2026-10-14-editor-generalization.md)。
 本轮机器批次已收尾，实体与历史条件待满足。

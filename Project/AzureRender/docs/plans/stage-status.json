@@ -862,6 +862,74 @@
         "ED-workflow"
       ],
       "remainingEvidence": "docs/acceptance/p8/evidence/2026-10-14/execution.json"
+    },
+    {
+      "id": "UX-A",
+      "name": "创建与层级",
+      "status": "Complete",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": true,
+      "dependsOn": [],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-B",
+      "name": "工作区与视口",
+      "status": "Active",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": false,
+      "dependsOn": [
+        "UX-A"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-C",
+      "name": "组件与脚本",
+      "status": "Pending",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": false,
+      "dependsOn": [
+        "UX-B"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-D",
+      "name": "设置与扩展归属",
+      "status": "Pending",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": false,
+      "dependsOn": [
+        "UX-C"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "UX-E",
+      "name": "集中交互复核",
+      "status": "Pending",
+      "scope": "Unity 操作习惯与通用编辑器职责",
+      "checksPassed": false,
+      "dependsOn": [
+        "UX-D"
+      ],
+      "evidence": [
+        "docs/editor-usability-audit.md"
+      ],
+      "requiredAcceptance": []
     }
   ],
   "acceptance": [

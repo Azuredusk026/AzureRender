@@ -57,6 +57,7 @@ public:
     const std::vector<std::size_t>& selectedNodes() const noexcept { return selectedNodes_; }
     void duplicateSelection();
     void reparentNode(const std::string& id,const std::string& parent);
+    void moveNodes(const std::vector<std::string>& ids,const std::string& parent,const std::string& before={});
     void removeGameplayComponent(const std::string& type);
     void resetComponentField(const std::string& type,const std::string& field);
     void deleteSelection();

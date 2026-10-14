@@ -79,6 +79,7 @@ EditRegistry editorOperations(EditorSession& session) {
     document("node.remove",schema({{"index",integer}},{"index"}),[](auto& c,const auto& a) { c.removeNode(a.at("index").template get<std::size_t>()); });
     document("node.duplicate",schema(),[](auto& c,const auto&) { c.duplicateSelection(); });
     document("node.reparent",schema({{"id",text},{"parent",text}},{"id","parent"}),[](auto& c,const auto& a){c.reparentNode(a.at("id").template get<std::string>(),a.at("parent").template get<std::string>());});
+    document("node.move",schema({{"ids",{{"type","array"},{"items",text}}},{"parent",text},{"before",text}},{"ids","parent"}),[](auto& c,const auto& a){c.moveNodes(a.at("ids").template get<std::vector<std::string>>(),a.at("parent").template get<std::string>(),a.value("before",std::string()));});
     document("node.delete",schema(),[](auto& c,const auto&) { c.deleteSelection(); });
     registry.add({"selection.click",1,schema({{"id",text},{"ctrl",boolean},{"shift",boolean},{"visible",{{"type","array"},{"items",text}}}},{"id"}),false,false,false},[&session](EditorContext&,const Json& a)->Json {
         session.selection().click(a.at("id").get<std::string>(),a.value("ctrl",false),a.value("shift",false),a.value("visible",std::vector<std::string>{}));return nullptr;

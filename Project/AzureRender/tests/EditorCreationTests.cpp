@@ -35,7 +35,15 @@ int main(int argc,char** argv){
         create("plane");create("cylinder");create("game-ui");create("light");create("camera");
         const auto parent=create("empty");context->setGizmoTranslation({3,0,0});const auto child=create("cube",parent);
         require(context->selectedNode()->parentId==parent,"Child preset preserves requested hierarchy");
+        require(bool(session.edit("node.move",{{"ids",{child}},{"parent",""},{"before",parent}})),"Child can be moved beside its parent");
+        const auto moved=std::find_if(context->scene().nodes.begin(),context->scene().nodes.end(),[&](const auto& n){return n.id==child;});
+        const auto parentRow=std::find_if(context->scene().nodes.begin(),context->scene().nodes.end(),[&](const auto& n){return n.id==parent;});
+        require(moved->parentId.empty()&&moved<parentRow,"Sibling move preserves requested ordering");
+        require(bool(session.edit("history.undo")),"Hierarchy move is undoable");
+        require(std::find_if(context->scene().nodes.begin(),context->scene().nodes.end(),[&](const auto& n){return n.id==child;})->parentId==parent,"Undo restores the parent");
         const auto before=context->documentContent();const auto history=context->undoCount();
+        require(!session.edit("node.move",{{"ids",{cube,parent}},{"parent",child}}),"A mixed valid and cyclic group is rejected atomically");
+        require(context->documentContent()==before&&context->undoCount()==history,"Failed group move restores every object and history");
         require(!session.edit("node.reparent",{{"id",parent},{"parent",child}}),"Hierarchy cycles must be rejected");
         require(context->documentContent()==before&&context->undoCount()==history,"Rejected cycle preserves document and history");
         require(bool(session.edit("node.rename",{{"value","子对象"}})),"Rename uses the shared operation");

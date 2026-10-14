@@ -33,25 +33,16 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     ui::searchField("##Search objects","搜索对象名称或标识",outlinerFilter_);observeWidget("outliner.search");
     const auto& nodes = view.scene().nodes;
     std::function<void()> pending;
-    if (ui::button("添加")) {
-        pending=[this]{session_->edit("node.add");};
-    }
-    observeWidget("outliner.add");
-    ui::nextToolbarItem(ui::buttonWidth("创建"));
+    const bool writable=!session_->playing()&&!session_->building();
+    ImGui::BeginDisabled(!writable);
     if(ui::button("创建"))ImGui::OpenPopup("Create root");
+    observeWidget("outliner.create");
     if(ImGui::BeginPopup("Create root")){
-        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};},[&](const auto& id){observeWidget(id);});
+        const auto parent=view.selectedNode()?view.selectedNode()->id:std::string();
+        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset,parent]{session_->edit("node.create-preset",{{"preset",preset},{"parent",parent}});};},[&](const auto& id){observeWidget(id);});
         ImGui::EndPopup();
     }
-    if (nodes.empty()) {
-        if(ImGui::BeginPopupContextWindow("Empty hierarchy",ImGuiPopupFlags_MouseButtonRight|ImGuiPopupFlags_NoOpenOverItems)){
-            ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndPopup();
-        }
-        ui::emptyState("场景中没有对象","使用添加按钮创建对象。");
-        ImGui::End();
-        if(pending)pending();
-        return;
-    }
+    ImGui::EndDisabled();
     std::string reveal;
     if(panelContext.selection().consumeReveal()) {
         reveal=panelContext.selection().active();
@@ -67,13 +58,24 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
     }
     std::vector<std::string> visible;
     std::optional<nlohmann::json> drop;
-    ui::nextToolbarItem(ui::buttonWidth("根目录"));ImGui::Selectable("根目录",false,0,{ui::buttonWidth("根目录"),ImGui::GetFrameHeight()});observeWidget("hierarchy.root");
-    if(ImGui::IsItemHovered())ImGui::SetTooltip("拖放对象到此处，恢复为场景根节点");
-    if(ImGui::BeginDragDropTarget()) {
-        if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_NODE"))drop={{"id",static_cast<const char*>(payload->Data)},{"parent",""}};
-        ImGui::EndDragDropTarget();
-    }
+    const auto acceptDrop=[&](const std::string& parent,const std::string& before=std::string()) {
+        if(!writable)return;
+        if(ImGui::BeginDragDropTarget()) {
+            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_NODE")) {
+                const std::string id=static_cast<const char*>(payload->Data);
+                std::vector<std::string> ids;
+                for(auto index:view.selectedNodes())ids.push_back(nodes.at(index).id);
+                if(std::find(ids.begin(),ids.end(),id)==ids.end())ids={id};
+                drop={{"ids",ids},{"parent",parent},{"before",before}};
+            }
+            ImGui::EndDragDropTarget();
+        }
+    };
     ImGui::Separator();ImGui::BeginChild("hierarchy-list",{0,0});
+    const auto sceneLabel=view.scene().sceneId+(session_->context().dirty()?" *":"")+"###scene-container";
+    const bool sceneOpen=ImGui::TreeNodeEx(sceneLabel.c_str(),ImGuiTreeNodeFlags_DefaultOpen|ImGuiTreeNodeFlags_SpanAvailWidth|ImGuiTreeNodeFlags_OpenOnArrow);
+    observeWidget("hierarchy.root");acceptDrop("");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip("场景容器：拖入对象可移到场景顶层");
     const auto dragItem=[&](const SceneNode& node) {
         if(ImGui::BeginPopupContextItem("Object actions")){
             const auto id=node.id;
@@ -99,10 +101,13 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             ImGui::SetDragDropPayload("AZURE_NODE",node.id.c_str(),node.id.size()+1);
             ImGui::TextUnformatted(node.name.c_str());ImGui::EndDragDropSource();
         }
-        if(ImGui::BeginDragDropTarget()) {
-            if(const auto* payload=ImGui::AcceptDragDropPayload("AZURE_NODE"))drop={{"id",static_cast<const char*>(payload->Data)},{"parent",node.id}};
-            ImGui::EndDragDropTarget();
+        // The top edge inserts a sibling; the row body parents the drop.
+        const bool sibling=ImGui::GetIO().MousePos.y<ImGui::GetItemRectMin().y+5*dpi_;
+        if(sibling && ImGui::GetDragDropPayload()) {
+            const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();
+            ImGui::GetWindowDrawList()->AddLine(a,{b.x,a.y},ImGui::GetColorU32(ImGuiCol_DragDropTarget),2*dpi_);
         }
+        acceptDrop(sibling?node.parentId:node.id,sibling?node.id:std::string());
         if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\nDouble-click: frame object",node.name.c_str(),node.id.c_str());
     };
     const auto collect=[&](const auto& self,const std::string& parent)->void {
@@ -149,6 +154,7 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             if(open){self(self,node.id);ImGui::TreePop();}ImGui::PopID();
         }
     };
+    if(sceneOpen) {
     if(outlinerFilter_.IsActive()) {
         for(std::size_t index=0;index<nodes.size();++index)if(std::find(visible.begin(),visible.end(),nodes[index].id)!=visible.end()) {
             ImGui::PushID(nodes[index].id.c_str());ImGui::Selectable(label(nodes[index]).c_str(),selected(index),0,{ImGui::GetContentRegionAvail().x,0});
@@ -156,13 +162,19 @@ void ImGuiEditorLayer::drawOutlinerPanel(PanelContext& panelContext) {
             ImGui::SameLine();ImGui::TextDisabled("%s",nodes[index].resourceId.empty()?"Node":"Mesh");ImGui::PopID();
         }
     }else drawNode(drawNode,"");
-    if(ImGui::BeginPopupContextWindow("Hierarchy creation",ImGuiPopupFlags_MouseButtonRight|ImGuiPopupFlags_NoOpenOverItems)){
-        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndPopup();
+    ImGui::TreePop();
+    }
+    ImGui::InvisibleButton("##root-drop-space",{ImGui::GetContentRegionAvail().x,std::max(24.F,ImGui::GetContentRegionAvail().y)});
+    observeWidget("hierarchy.empty");acceptDrop("");
+    if(ImGui::IsItemClicked()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
+    if(ImGui::BeginPopupContextItem("Hierarchy creation")){
+        ImGui::BeginDisabled(!writable);
+        ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{session_->edit("node.create-preset",{{"preset",preset}});};});ImGui::EndDisabled();ImGui::EndPopup();
     }
     ImGui::EndChild();
     if(!referenceCandidate.empty())session_->edit("reference.deliver",{{"kind","node"},{"id",referenceCandidate}});
     ImGui::End();
-    if(drop)session_->edit("node.reparent",*drop);
+    if(drop)session_->edit("node.move",*drop);
     if(pending)pending();
 }
 

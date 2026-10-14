@@ -23,8 +23,8 @@ def run(executable,output):
                 dict(frame=41,action='key',key='Escape',down=False)],capture=False)
             assert disabled['nodeCount']==0 and disabled['undoCount']==0
             assert disabled['feedback']==[]
-            actions=[dict(frame=25,action='click',target='outliner.add'),
-                dict(frame=32,action='click',target='outliner.add'),dict(frame=38,action='click',target='save')]
+            actions=[dict(frame=23,action='click',target='outliner.create'),dict(frame=28,action='click',target='preset.empty'),
+                dict(frame=30,action='click',target='outliner.create'),dict(frame=35,action='click',target='preset.empty'),dict(frame=38,action='click',target='save')]
             created=launch(executable,case,'add-root-child',(1280,720),dpi,actions,capture=False)
             assert created['nodeCount']==2 and created['undoCount']==2 and len(created['selection'])==1
             saved=json.loads(path.read_text(encoding='utf-8'))['nodes']

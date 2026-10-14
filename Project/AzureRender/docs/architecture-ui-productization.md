@@ -65,3 +65,10 @@ AZURERENDER_UI_OBSERVATION 指定观察文件。
 AZURERENDER_STARTUP_VALIDATION_ENDPOINT 指定端点。
 AZURERENDER_STARTUP_VALIDATION_TOKEN 提供会话令牌。
 验证通道的认证与操作范围沿用既有服务。
+
+## 场景容器与层级移动
+
+场景容器属于编辑器视图，顶层对象使用空父标识。
+层级移动通过 `node.move` 统一提交事务。
+服务处理多选、同级顺序、变换保持和循环校验。
+面板负责拖放目标及插入位置反馈。

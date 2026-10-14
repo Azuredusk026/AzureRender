@@ -5,6 +5,32 @@
 #include "scene/SceneDescription.hpp"
 #include <set>
 namespace azurerender {
+void EditorContext::moveNodes(const std::vector<std::string>& ids,const std::string& parent,const std::string& before) {
+    std::set<std::string> requested(ids.begin(),ids.end());
+    if(requested.empty())throw std::invalid_argument("Select an object to move");
+    const auto find=[&](const std::string& id){return std::find_if(scene_.nodes.begin(),scene_.nodes.end(),[&](const auto& n){return n.id==id;});};
+    for(const auto& id:requested)if(find(id)==scene_.nodes.end())throw std::invalid_argument("Unknown moved object");
+    if(!before.empty()&&(find(before)==scene_.nodes.end()||find(before)->parentId!=parent||requested.count(before)))throw std::invalid_argument("Invalid sibling insertion target");
+    std::vector<std::string> roots,selection;
+    for(auto index:selectedNodes_)selection.push_back(scene_.nodes.at(index).id);
+    for(const auto& n:scene_.nodes)if(requested.count(n.id)){
+        auto ancestor=n.parentId;bool included=false;
+        while(!ancestor.empty()){if(requested.count(ancestor)){included=true;break;}ancestor=find(ancestor)->parentId;}
+        if(!included)roots.push_back(n.id);
+    }
+    // The registered operation executes on a transaction candidate, so any
+    // invalid cycle or transform rejects the whole group without partial writes.
+    for(const auto& id:roots)reparentNode(id,parent);
+    beginEdit();
+    std::vector<SceneNode> moved;
+    for(const auto& id:roots){const auto it=find(id);moved.push_back(*it);scene_.nodes.erase(it);}
+    const auto position=before.empty()?scene_.nodes.end():find(before);
+    scene_.nodes.insert(position,moved.begin(),moved.end());
+    rebuildEntities();
+    std::vector<std::size_t> indices;
+    for(const auto& id:selection)indices.push_back(static_cast<std::size_t>(find(id)-scene_.nodes.begin()));
+    selectNodes(std::move(indices));
+}
 void EditorContext::placeAssetAt(const std::string& asset,const std::array<float,3>& position) {
     for(const auto value:position)if(!std::isfinite(value))throw std::invalid_argument("Placement position must be finite");
     std::filesystem::path path;

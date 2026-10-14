@@ -269,7 +269,7 @@ ProposalController& EditorSession::proposals(){if(!proposals_)throw EditRejectio
 EditResult EditorSession::edit(const std::string& command,nlohmann::json parameters,std::string mergeKey) {
     if(command=="node.select"||command=="selection.click"||command.rfind("preview.",0)==0||command=="document.reload")references_.cancel();
     auto result=edits_->current(command,parameters,std::move(mergeKey));
-    if(result&&selection_&&(command=="node.create"||command=="node.add"||command=="node.create-preset"||command=="node.duplicate"||command=="node.reparent"||command=="asset.place"||command=="history.undo"||command=="history.redo"))selection_->requestReveal();
+    if(result&&selection_&&(command=="node.create"||command=="node.add"||command=="node.create-preset"||command=="node.duplicate"||command=="node.move"||command=="node.reparent"||command=="asset.place"||command=="history.undo"||command=="history.redo"))selection_->requestReveal();
     if(!result) {
         lastError_=result.diagnostics.empty()?"Edit failed":result.diagnostics.front().value("message",std::string("Edit rejected"));
         recordError(command,lastError_,parameters);
@@ -289,7 +289,7 @@ void EditorSession::recordError(const std::string& source,const std::string& mes
 EditResult EditorSession::editRequest(const EditRequest& request){
     if(request.commandId=="node.select"||request.commandId=="selection.click"||request.commandId.rfind("preview.",0)==0||request.commandId=="document.reload")references_.cancel();
     auto result=edits_->execute(request);
-    if(result&&selection_&&(request.commandId=="node.create"||request.commandId=="node.add"||request.commandId=="node.create-preset"||request.commandId=="node.duplicate"||request.commandId=="node.reparent"||request.commandId=="asset.place"||request.commandId=="history.undo"||request.commandId=="history.redo"))selection_->requestReveal();
+    if(result&&selection_&&(request.commandId=="node.create"||request.commandId=="node.add"||request.commandId=="node.create-preset"||request.commandId=="node.duplicate"||request.commandId=="node.move"||request.commandId=="node.reparent"||request.commandId=="asset.place"||request.commandId=="history.undo"||request.commandId=="history.redo"))selection_->requestReveal();
     if(!result)recordError(request.commandId,result.diagnostics.empty()?"Edit rejected":result.diagnostics.front().value("message",std::string("Edit rejected")),request.parameters);
     return result;
 }
