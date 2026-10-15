@@ -22,11 +22,10 @@ std::vector<ViewportOverlayLine> ViewportOverlayRegistry::collect(const Viewport
 ViewportOverlayRegistry ViewportOverlayRegistry::builtins(){
     ViewportOverlayRegistry result;
     result.add("skeleton","Animation skeleton",[](const auto& request){return request.skeleton?*request.skeleton:std::vector<ViewportOverlayLine>{};});
-    result.add("grid","Ground grid",[](const auto& request){
-        std::vector<ViewportOverlayLine> lines;const auto distance=internal::vectorLength(internal::subtract(request.view.position,request.view.target));
-        const float scale=request.view.projection==CameraProjectionKind::Orthographic?request.view.orthoHeight:distance;
-        const auto step=std::pow(10.F,std::floor(std::log10(std::max(scale*.15F,.001F))));
-        const float x=std::floor(request.view.target[0]/step)*step,z=std::floor(request.view.target[2]/step)*step;
+    result.add("grid","Ground grid",[](const auto&){
+        std::vector<ViewportOverlayLine> lines;
+        // World-space references have a fixed origin, metre spacing and extent.
+        constexpr float step=1.F,x=0.F,z=0.F;
         const auto color=[&](float value){return static_cast<long long>(std::llround(value/step))%5==0?ui::ViewportDesignTokens::majorGrid:ui::ViewportDesignTokens::minorGrid;};
         for(int i=-20;i<=20;++i){const float coordinate=static_cast<float>(i)*step;
             lines.push_back({{x+coordinate,0,z-20*step},{x+coordinate,0,z+20*step},color(x+coordinate),{}});

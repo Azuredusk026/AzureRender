@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1031,6 +1031,90 @@
       "requiredAcceptance": [
         "VD6-HUMAN"
       ]
+    },
+    {
+      "id": "WC1",
+      "name": "固定世界网格与轴",
+      "status": "Ready",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": true,
+      "dependsOn": [
+        "VD5"
+      ],
+      "evidence": [
+        "docs/acceptance/wc/2026-10-15.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC2",
+      "name": "世界方向天空与纯色设置",
+      "status": "Pending",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": false,
+      "dependsOn": [
+        "WC1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-15-world-camera-rendering.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC3",
+      "name": "编辑游戏与最终渲染相机",
+      "status": "Pending",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": false,
+      "dependsOn": [
+        "WC2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-15-world-camera-rendering.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC4",
+      "name": "中英双语界面",
+      "status": "Pending",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": false,
+      "dependsOn": [
+        "WC3"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-15-world-camera-rendering.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC5",
+      "name": "路径追踪与独立演示",
+      "status": "Pending",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": false,
+      "dependsOn": [
+        "WC4"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-15-world-camera-rendering.md"
+      ],
+      "requiredAcceptance": []
+    },
+    {
+      "id": "WC6",
+      "name": "交互修复与集中交付",
+      "status": "Pending",
+      "scope": "世界参照、相机与渲染",
+      "checksPassed": false,
+      "dependsOn": [
+        "WC5"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-15-world-camera-rendering.md"
+      ],
+      "requiredAcceptance": []
     }
   ],
   "acceptance": [
@@ -1236,6 +1320,12 @@
     "docs/plans/manual-review-manifest.json"
   ],
   "executionOrder": [
+    "WC1",
+    "WC2",
+    "WC3",
+    "WC4",
+    "WC5",
+    "WC6",
     "ED0",
     "ED1",
     "ED2",

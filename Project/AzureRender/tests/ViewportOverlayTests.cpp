@@ -10,6 +10,13 @@ int main(){try{
     auto registry=ViewportOverlayRegistry::builtins();
     const ViewportOverlayRequest request{context,view};
     require(registry.collect(request,{{"grid","all"}},{}).size()==84,"Grid helpers include two distinct world axes within a bounded budget");
+    const auto fixedGrid=registry.collect(request,{{"grid","all"}},{});
+    for(const auto projection:{CameraProjectionKind::Perspective,CameraProjectionKind::Orthographic}){
+        EditorViewDescriptor moved=view;moved.position={1234,450,-900};moved.target={1200,2,-800};moved.orthoHeight=500;moved.projection=projection;
+        const auto changed=registry.collect({context,moved},{{"grid","all"}},{});
+        require(changed.size()==fixedGrid.size(),"Camera movement preserves reference geometry count");
+        for(std::size_t i=0;i<changed.size();++i)require(changed[i].from==fixedGrid[i].from&&changed[i].to==fixedGrid[i].to&&changed[i].color==fixedGrid[i].color,"World grid and axes remain fixed across camera movement, zoom and projection");
+    }
     require(registry.collect(request,{{"light","selected"}},{}).empty(),"Selected helper policy must exclude unselected objects");
     require(registry.collect(request,{{"light","selected"}},{"root"}).size()==96,"Selected lights must expose their actual range geometry");
     registry.add("fixture","Independent helper",[](const auto&){return std::vector<ViewportOverlayLine>{{{0,0,0},{1,0,0},{1,1,1,1},"other"}};});

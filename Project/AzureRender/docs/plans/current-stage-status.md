@@ -91,6 +91,12 @@ Ready 表示依赖满足，可以开始执行。
 | VD4 | 层级属性与资源面板 | 完成 | 界面现代化与职责分层。[记录](2026-10-14-ui-modernization.md) |
 | VD5 | 设置制作与发布界面 | 完成 | 界面现代化与职责分层。[记录](2026-10-14-ui-modernization.md) |
 | VD6 | 集中验证与交付 | Ready | 界面现代化与职责分层。[记录](../acceptance/vd/2026-10-14.md) |
+| WC1 | 固定世界网格与轴 | Ready | 世界参照、相机与渲染。[记录](../acceptance/wc/2026-10-15.md) |
+| WC2 | 世界方向天空与纯色设置 | 待完成 | 世界参照、相机与渲染。[记录](2026-10-15-world-camera-rendering.md) |
+| WC3 | 编辑游戏与最终渲染相机 | 待完成 | 世界参照、相机与渲染。[记录](2026-10-15-world-camera-rendering.md) |
+| WC4 | 中英双语界面 | 待完成 | 世界参照、相机与渲染。[记录](2026-10-15-world-camera-rendering.md) |
+| WC5 | 路径追踪与独立演示 | 待完成 | 世界参照、相机与渲染。[记录](2026-10-15-world-camera-rendering.md) |
+| WC6 | 交互修复与集中交付 | 待完成 | 世界参照、相机与渲染。[记录](2026-10-15-world-camera-rendering.md) |
 
 ## 最终收尾
 
