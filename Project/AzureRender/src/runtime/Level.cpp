@@ -19,10 +19,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
     level.scene.sceneId = expanded.at("id").get<std::string>();
     if (level.scene.sceneId.empty()) throw std::runtime_error("Level id must be nonempty");
     const auto sceneType = expanded.value("sceneType", "character");
-    if (sceneType == "character") level.scene.renderSettings.sceneType = SceneType::Character;
-    else if (sceneType == "sample") level.scene.renderSettings.sceneType = SceneType::Sample;
-    else if (sceneType == "blackhole") level.scene.renderSettings.sceneType = SceneType::Blackhole;
-    else throw std::runtime_error("Unknown level sceneType");
+    level.scene.renderSettings.sceneType=sceneTypeFromString(sceneType);
     if(expanded.contains("renderSettings"))decodeLevelRenderSettings(level.scene.renderSettings,expanded.at("renderSettings"));
     std::set<std::string> resources;
     for (const auto& source : expanded.at("resources")) {

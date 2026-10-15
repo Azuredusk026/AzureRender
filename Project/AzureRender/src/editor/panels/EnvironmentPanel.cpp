@@ -9,6 +9,16 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
     ImGui::TextUnformatted(ui::tr("Scene rendering and presentation"));
     ImGui::BeginDisabled(session_->playing()||session_->building());
     const RenderSettings& settings = view.renderSettings();
+    int renderer=settings.sceneType==SceneType::PathTracing?1:0;
+    if(ui::combo(ui::tr("渲染模式###renderer"),&renderer,"实时渲染\0路径追踪\0"))
+        session_->edit("render.settings",{{"values",{{"renderer",renderer?"pathtracing":"character"}}}},"renderer");
+    if(renderer){
+        ImGui::Text(ui::tr("已累积 %u / %u 个采样"),renderSamples_,renderTargetSamples_);
+        int samples=static_cast<int>(settings.pathTraceSamples),bounces=static_cast<int>(settings.pathTraceBounces);
+        if(ImGui::SliderInt(ui::tr("目标采样数###pt-samples"),&samples,1,4096))session_->edit("render.settings",{{"values",{{"pathTraceSamples",samples}}}},"pt-samples");
+        if(ImGui::SliderInt(ui::tr("散射次数###pt-bounces"),&bounces,1,16))session_->edit("render.settings",{{"values",{{"pathTraceBounces",bounces}}}},"pt-bounces");
+        ImGui::TextWrapped("%s",ui::tr("静止时累积采样，移动相机或修改场景后重新开始。"));
+    }
     int skyMode=static_cast<int>(settings.sky.mode);
     if(ui::combo(ui::tr("天空背景###sky-mode"),&skyMode,"程序天空\0环境贴图\0纯色\0"))
         session_->edit("render.settings",{{"values",{{"skyMode",skyMode}}}},"sky-mode");

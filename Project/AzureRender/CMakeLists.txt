@@ -262,6 +262,8 @@ compile_shader("${SHADER_SOURCE_DIR}/game-ui.vert")
 compile_shader("${SHADER_SOURCE_DIR}/game-ui.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
+compile_shader("${SHADER_SOURCE_DIR}/pathtracing.comp")
+compile_shader("${SHADER_SOURCE_DIR}/pathtracing.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_taa.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/blackhole_taa.frag"
@@ -356,6 +358,8 @@ add_library(AzureRenderCore STATIC
     src/rhi/VulkanRhi.cpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
     src/scenes/CharacterSceneRenderer.cpp
+    src/scenes/pathtracing/PathTracingSceneRenderer.cpp
+    src/render/pathtracing/TraceScene.cpp
     src/scenes/BlackholeSceneRenderer.cpp
     src/scenes/BuiltinRendererCatalog.cpp
     src/scenes/SampleSceneRenderer.cpp
@@ -676,6 +680,9 @@ if(BUILD_TESTING)
     add_executable(AzureCameraSystemTests tests/CameraSystemTests.cpp)
     target_link_libraries(AzureCameraSystemTests PRIVATE AzureRuntime)
     add_test(NAME AzureRuntime.CameraSystem COMMAND AzureCameraSystemTests)
+    add_executable(AzurePathTracingTests tests/PathTracingTests.cpp)
+    target_link_libraries(AzurePathTracingTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.PathTracing COMMAND AzurePathTracingTests)
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
@@ -1207,7 +1214,9 @@ if(BUILD_TESTING)
         AzureRenderNullRhiPassTests
         src/assets/MaterialData.cpp
         tests/NullRhiPassTests.cpp
-        src/scenes/BlackholeSceneRenderer.cpp
+        src/scenes/pathtracing/PathTracingSceneRenderer.cpp
+    src/render/pathtracing/TraceScene.cpp
+    src/scenes/BlackholeSceneRenderer.cpp
         src/render/ComputePass.cpp
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp

@@ -102,7 +102,7 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 10;
+    static constexpr std::uint32_t kSchemaVersion = 11;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;
@@ -143,6 +143,8 @@ struct RenderSettings {
     BlackholeSettings blackhole;
     CharacterPresentationSettings characterPresentation;
     SkySettings sky;
+    std::uint32_t pathTraceSamples=256;
+    std::uint32_t pathTraceBounces=6;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

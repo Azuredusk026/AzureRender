@@ -166,6 +166,8 @@ void AzureRenderApp::drawFrame() {
         runOptions_.editorSession->context().setViewportCameraMatrices(view,projection);
         runOptions_.editorSession->context().setDebugProjection(multiply(projection,view));
         editorLayer_->newFrame((fixedSimulation_||runOptions_.fixedFrameStep)?fixedDeltaSeconds_:0.F);
+        const auto* renderState=sceneRenderer_?sceneRenderer_->sceneState():nullptr;
+        editorLayer_->setRenderProgress(renderState?renderState->accumulatedSamples:0,renderState?renderState->targetSamples:0);
         editorLayer_->drawPanels();
         azurerender::EditorViewportInput viewportInput =
             editorLayer_->consumeViewportInput();

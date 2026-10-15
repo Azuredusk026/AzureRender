@@ -604,3 +604,11 @@
 {"否","no"},
 {"循环","loop"},
 {"单次","once"},
+
+{"渲染模式","Renderer"},
+{"实时渲染","Rasterization"},
+{"路径追踪","Path tracing"},
+{"目标采样数","Target samples"},
+{"散射次数","Bounces"},
+{"静止时累积采样，移动相机或修改场景后重新开始。","Samples accumulate while stationary. Camera and scene changes restart accumulation."},
+{"已累积 %u / %u 个采样","Accumulated %u / %u samples"},

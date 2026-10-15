@@ -176,6 +176,7 @@ void validateRenderSettings(const RenderSettings& settings) {
                 + std::to_string(maximum));
         }
     };
+    if(settings.pathTraceSamples<1||settings.pathTraceSamples>65536||settings.pathTraceBounces<1||settings.pathTraceBounces>16) throw std::invalid_argument("Path tracing requires 1..65536 samples and 1..16 bounces");
     if (static_cast<std::uint32_t>(settings.sky.mode)>2) throw std::invalid_argument("Unknown sky mode");
     requireRange(settings.sky.intensity,0.F,32.F,"sky.intensity");
     requireRange(settings.sky.rotationDegrees,-360.F,360.F,"sky.rotationDegrees");

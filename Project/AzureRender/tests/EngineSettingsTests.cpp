@@ -9,6 +9,10 @@
 using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
+    RenderSettings tracing;
+    decodeLevelRenderSettings(tracing,{{"renderer","pathtracing"},{"pathTraceSamples",64},{"pathTraceBounces",6}});
+    const auto savedTracing=encodeLevelRenderSettings(tracing);
+    check(savedTracing.contains("renderer")&&savedTracing.at("renderer")=="pathtracing","Path tracing mode persists through scene settings");
     RenderSettings sky;
     decodeLevelRenderSettings(sky,{{"skyMode",2},{"skyColor",{.1F,.2F,.3F}},{"skyIntensity",1.5F},{"skyRotation",90.F}});
     const auto savedSky=encodeLevelRenderSettings(sky);

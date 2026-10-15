@@ -28,6 +28,8 @@ namespace azurerender {
 class OutlinerPanel; class InspectorPanel; class AssetBrowserPanel;
 class ImGuiEditorLayer final {
 public:
+    void setRenderProgress(unsigned samples,unsigned target){renderSamples_=samples;renderTargetSamples_=target;}
+
     explicit ImGuiEditorLayer(std::shared_ptr<EditorSession> session);
     ImGuiEditorLayer(const ImGuiEditorLayer&) = delete;
     ImGuiEditorLayer& operator=(const ImGuiEditorLayer&) = delete;
@@ -70,6 +72,8 @@ public:
     }
 
 private:
+    unsigned renderSamples_=0,renderTargetSamples_=0;
+
     struct CapturedFileDrop {FileDropEvent event;std::string document;};
     std::deque<CapturedFileDrop> fileDrops_;
     void processFileDrops();

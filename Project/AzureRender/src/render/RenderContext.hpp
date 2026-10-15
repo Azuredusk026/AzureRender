@@ -48,6 +48,7 @@ struct SceneSubmissionCounters {
 // editor integration (picking, gizmos, HUD). A renderer without pickable
 // geometry (e.g. the blackhole renderer) leaves the pointer null.
 struct RendererSceneState {
+    std::uint32_t accumulatedSamples=0,targetSamples=0;
     struct Pickable { std::string node; const LoadedAsset* asset=nullptr; std::array<float,16> model{}; const AssetPose* pose=nullptr; std::array<float,2> morph{}; };
     std::vector<Pickable> pickables;
     const LoadedAsset* asset = nullptr;

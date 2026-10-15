@@ -264,6 +264,7 @@ nlohmann::json EditorContext::levelDocument()const{
     if(!assets_)throw std::logic_error("Level serialization requires a project");
     const auto source=sourceLevel_.is_object()?sourceLevel_:nlohmann::json::object();
     auto document=source;document["id"]=scene_.sceneId;document["nodes"]=nlohmann::json::array();document["resources"]=nlohmann::json::array();document["lights"]=nlohmann::json::array();
+    document["sceneType"]=sceneTypeName(renderSettings().sceneType);
     document["renderSettings"]=encodeLevelRenderSettings(renderSettings());
     const auto data=runtimeComponents();std::set<std::string> prefabResources,liveInstances;
     if(document.contains("prefabs"))for(auto& instance:document["prefabs"])instance["overrides"]=nlohmann::json::object();

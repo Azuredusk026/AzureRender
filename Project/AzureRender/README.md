@@ -2,7 +2,7 @@
 
 当前开发范围见[世界参照、相机与渲染计划](docs/plans/2026-10-15-world-camera-rendering.md)。
 按 WC1 至 WC6 推进，完整画面与工作流验证集中在 WC6。
-WC1 至 WC4 的实现与短测试通过，WC5 开发中。
+WC1 至 WC5 已通过受影响检查，WC6 开发中。
 
 界面操作与模块归属见[编辑器界面说明](docs/tutorials/editor-interface.md)。
 

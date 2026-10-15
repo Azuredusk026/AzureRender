@@ -421,6 +421,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         report << nlohmann::json{{"scene", scene.sceneId}, {"nodes", nodes}, {"levelRevision", levelSession_ ? levelSession_->revision() : 0}, {"fixedSteps", gameRuntime_ ? gameRuntime_->steps() : 0}, {"simulationMilliseconds", gameRuntime_ ? gameRuntime_->simulationMilliseconds() : 0.0}, {"activeScripts", scriptRuntime_ ? scriptRuntime_->activeCount() : 0}, {"scriptErrors", scriptRuntime_ ? scriptRuntime_->errors() : std::vector<std::string>{}}}.dump(2);
         report.close();
         std::ifstream saved(std::filesystem::u8path(runOptions_.runtimeReportPath));nlohmann::json data;saved>>data;saved.close();
+        if(sceneRenderer_){data["renderer"]=std::string(sceneRenderer_->name());if(const auto* state=sceneRenderer_->sceneState())data["renderProgress"]={{"samples",state->accumulatedSamples},{"target",state->targetSamples}};}
         data["uiDrawCalls"]=uiDrawCalls_;data["animationFrames"]=animationFrames_;data["audioStarts"]=audioStarts_;data["presentationErrors"]=presentationErrors_;
 #if AZURE_WITH_EDITOR
         data["developer"]=devtoolsReport_;

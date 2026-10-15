@@ -15,13 +15,15 @@ enum class SceneType : std::uint32_t {
     Character = 0,
     Blackhole = 1,
     Sample = 2,
-    Count = 3,
+    PathTracing = 3,
+    Count = 4,
 };
 
 // Converts a CLI/scene document scene-type name into the enum. Unknown names
 // throw so configuration errors surface at parse time instead of at render
 // time.
 [[nodiscard]] inline SceneType sceneTypeFromString(const std::string& name) {
+    if (name == "pathtracing") return SceneType::PathTracing;
     if (name == "character") {
         return SceneType::Character;
     }
@@ -38,6 +40,7 @@ enum class SceneType : std::uint32_t {
 
 [[nodiscard]] inline const char* sceneTypeName(const SceneType type) noexcept {
     switch (type) {
+    case SceneType::PathTracing: return "pathtracing";
     case SceneType::Character:
         return "character";
     case SceneType::Blackhole:

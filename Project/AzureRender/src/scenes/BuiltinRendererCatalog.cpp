@@ -3,6 +3,7 @@
 #include "BlackholeSceneRenderer.hpp"
 #include "CharacterSceneRenderer.hpp"
 #include "SampleSceneRenderer.hpp"
+#include "pathtracing/PathTracingSceneRenderer.hpp"
 
 #include <memory>
 
@@ -16,6 +17,7 @@ std::string BuiltinRendererCatalog::documentRendererId(SceneType requested, bool
 
 SceneRendererRegistry BuiltinRendererCatalog::createRegistry() {
     SceneRendererRegistry registry;
+    registry.registerFactory({"pathtracing",1,{"geometry","progressive","capture"},{}},[]{return std::make_unique<PathTracingSceneRenderer>();});
     registry.registerFactory(
         {"character", 1, {"geometry", "editor", "capture"}, {}},
         [] { return std::make_unique<CharacterSceneRenderer>(); });
@@ -35,6 +37,7 @@ BuiltinRendererCatalog::shaderFeatures() {
         {"character.outline", "character", {"outline.vert", "outline.frag"}},
         {"blackhole.trace", "blackhole", {"blackhole.vert", "blackhole.frag"}},
         {"blackhole.temporal", "blackhole", {"blackhole_taa.frag", "blackhole_composite.frag"}},
+        {"pathtracing.integrator", "pathtracing", {"pathtracing.comp", "pathtracing.frag"}},
         {"sample.clear", "sample", {}},
     };
     return features;

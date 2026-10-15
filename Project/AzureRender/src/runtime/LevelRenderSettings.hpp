@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -16,6 +16,9 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
     auto settings=target;
+    settings.sceneType=sceneTypeFromString(data.value("renderer",std::string(sceneTypeName(settings.sceneType))));
+    settings.pathTraceSamples=data.value("pathTraceSamples",settings.pathTraceSamples);
+    settings.pathTraceBounces=data.value("pathTraceBounces",settings.pathTraceBounces);
     settings.sky.mode=data.value("skyMode",settings.sky.mode);
     if(data.contains("skyColor")&&(!data.at("skyColor").is_array()||data.at("skyColor").size()!=3))throw std::invalid_argument("Sky color requires three channels");
     settings.sky.color=data.value("skyColor",settings.sky.color);
