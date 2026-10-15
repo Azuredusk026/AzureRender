@@ -1,12 +1,13 @@
+#include "ui/localization/Localization.hpp"
 #include "PropertyWidgets.hpp"
 #include "ui/Widgets.hpp"
 #include <algorithm>
 namespace azurerender::ui {
 PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohmann::json& state,const nlohmann::json& defaults,float scale,const std::function<void(const std::string&)>& observe) {
     PropertyEditEvent result;result.value=state.at("value");
-    const auto label=field.label+(field.unit.empty()?std::string():" ("+field.unit+")");
+    const auto label=std::string(ui::tr(field.label.c_str()))+(field.unit.empty()?std::string():" ("+field.unit+")");
     ImGui::TextUnformatted(label.c_str());
-    if(state.at("mixed").get<bool>()) {ui::nextToolbarItem(ImGui::CalcTextSize("多个值").x);ui::statusText("多个值",StatusKind::Neutral);}
+    if(state.at("mixed").get<bool>()) {ui::nextToolbarItem(ImGui::CalcTextSize(ui::tr("多个值")).x);ui::statusText(ui::tr("多个值"),StatusKind::Neutral);}
     ImGui::SetNextItemWidth(-1);
     const auto sample=[&]{result.began=result.began||ImGui::IsItemActivated();result.ended=result.ended||ImGui::IsItemDeactivatedAfterEdit();};
     const auto format="%."+std::to_string(field.precision)+"f";
@@ -23,7 +24,7 @@ PropertyEditEvent propertyEditor(const reflection::Property& field,const nlohman
             ImGui::PushStyleColor(ImGuiCol_Button,ThemeTokens::axis(axis));
             if(ImGui::Button(axes[axis],{metrics.axisButtonWidth,0})){result.changed=true;result.ended=true;result.axis=axis;result.value=defaults.at(axis);}
             observe("axis.reset."+field.name+"."+std::to_string(axis));ImGui::PopStyleColor();
-            if(ImGui::IsItemHovered())ImGui::SetTooltip("Reset %s to its declared default",axes[axis]);
+            if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("Reset %s to its declared default"),axes[axis]);
             ImGui::SameLine(0,metrics.axisSpacing);ImGui::SetNextItemWidth(std::max(16.F,width-metrics.axisButtonWidth-metrics.axisSpacing));
             const auto axisFormat=state.at("mixedAxes").at(axis).get<bool>()?"---":format.c_str();
             if(ImGui::DragFloat("##value",&values[axis],.01F,static_cast<float>(field.minimum),static_cast<float>(field.maximum),axisFormat)){result.changed=true;result.axis=axis;result.value=values[axis];}

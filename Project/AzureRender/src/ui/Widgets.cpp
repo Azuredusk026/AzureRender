@@ -1,8 +1,16 @@
+#include "ui/localization/Localization.hpp"
+#include <cstring>
+#include <vector>
 #include "Widgets.hpp"
 #include "UiScopes.hpp"
 #include <algorithm>
 namespace azurerender::ui {
 
+bool combo(const char* label,int* current,const char* items){
+    std::vector<const char*> translated;
+    for(const char* item=items;*item;item+=std::strlen(item)+1)translated.push_back(tr(item));
+    return ImGui::Combo(tr(label),current,translated.data(),static_cast<int>(translated.size()));
+}
 bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags) {
     const auto resize=[](ImGuiInputTextCallbackData* data)->int {
         auto& text=*static_cast<std::string*>(data->UserData);text.resize(static_cast<std::size_t>(data->BufTextLen));data->Buf=text.data();return 0;
@@ -20,6 +28,6 @@ bool button(const char* label,const ButtonOptions& options) {
     return clicked;
 }
 void propertyRow(const char* label,const UiMetrics& metrics,const std::function<void()>& draw) {
-    ScopedId id(label);ImGui::TextUnformatted(label);ImGui::SameLine(metrics.propertyLabelWidth);ImGui::SetNextItemWidth(-1);draw();
+    ScopedId id(label);ImGui::TextUnformatted(tr(label));ImGui::SameLine(metrics.propertyLabelWidth);ImGui::SetNextItemWidth(-1);draw();
 }
 }

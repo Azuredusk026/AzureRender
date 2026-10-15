@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "CorePanels.hpp"
 #include "editor/PanelContext.hpp"
 #include "ui/Widgets.hpp"
@@ -29,16 +30,16 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.0F, 0.0F, 0.20F, 0.72F);
 #endif
-    if(!ImGui::Begin("场景层级###outliner",services_.workspace.open("outliner"))){ImGui::End();return;}
+    if(!ImGui::Begin(ui::tr("场景层级###outliner"),services_.workspace.open("outliner"))){ImGui::End();return;}
     {const auto p=ImGui::GetWindowPos(),s=ImGui::GetWindowSize();services_.widgets["outliner.drop-region"]={p.x,p.y,s.x,s.y};}
-    ui::searchField("##Search objects","搜索对象名称或标识",presentation.outlinerFilter_);services_.observe("outliner.search");
+    ui::searchField("##Search objects",ui::tr("搜索对象名称或标识"),presentation.outlinerFilter_);services_.observe("outliner.search");
     const auto& nodes = view.scene().nodes;
     std::function<void()> pending;
     const bool writable=!services_.session.playing()&&!services_.session.building();
     ImGui::BeginDisabled(!writable);
-    if(ui::button("创建"))ImGui::OpenPopup("Create root");
+    if(ui::button(ui::tr("创建")))ImGui::OpenPopup(ui::tr("Create root"));
     services_.observe("outliner.create");
-    if(ImGui::BeginPopup("Create root")){
+    if(ImGui::BeginPopup(ui::tr("Create root"))){
         const auto parent=view.selectedNode()?view.selectedNode()->id:std::string();
         ui::objectCreationMenu(services_.session.nodePresets().describe(),[&](const auto& preset){pending=[this,preset,parent]{services_.session.edit("node.create-preset",{{"preset",preset},{"parent",parent}});};},[&](const auto& id){services_.observe(id);});
         ImGui::EndPopup();
@@ -77,25 +78,25 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     const bool sceneOpen=ImGui::TreeNodeEx(sceneLabel.c_str(),ImGuiTreeNodeFlags_DefaultOpen|ImGuiTreeNodeFlags_SpanAvailWidth|ImGuiTreeNodeFlags_OpenOnArrow);
     services_.observe("hierarchy.root");acceptDrop("");
     if(ImGui::IsItemClicked()&&!ImGui::IsItemToggledOpen()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
-    if(ImGui::IsItemHovered())ImGui::SetTooltip("场景容器：拖入对象可移到场景顶层");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("场景容器：拖入对象可移到场景顶层"));
     const auto dragItem=[&](const SceneNode& node) {
-        if(ImGui::BeginPopupContextItem("Object actions")){
+        if(ImGui::BeginPopupContextItem(ui::tr("Object actions"))){
             const auto id=node.id;
             const auto select=[this,id]{services_.session.selection().set({id});};
-            if(ImGui::MenuItem("重命名","Details"))pending=[this,select]{select();services_.workspace.setVisible("inspector",true);services_.rename();ImGui::SetWindowFocus("属性###inspector");};
-            if(ImGui::MenuItem("聚焦对象","F"))pending=[this,select]{select();services_.session.edit("viewport.frame-selection");};
+            if(ImGui::MenuItem(ui::tr("重命名"),"Details"))pending=[this,select]{select();services_.workspace.setVisible("inspector",true);services_.rename();ImGui::SetWindowFocus(ui::tr("属性###inspector"));};
+            if(ImGui::MenuItem(ui::tr("聚焦对象"),"F"))pending=[this,select]{select();services_.session.edit("viewport.frame-selection");};
             const bool writable=!services_.session.playing()&&!services_.session.building();
-            if(ImGui::MenuItem("复制","Ctrl+D",false,writable))pending=[this,select]{select();services_.session.edit("node.duplicate");};
+            if(ImGui::MenuItem(ui::tr("复制"),"Ctrl+D",false,writable))pending=[this,select]{select();services_.session.edit("node.duplicate");};
             services_.observe("outliner.duplicate");
-            if(ImGui::MenuItem("删除","Delete",false,writable))pending=[this,select]{select();services_.session.edit("node.delete");};
+            if(ImGui::MenuItem(ui::tr("删除"),"Delete",false,writable))pending=[this,select]{select();services_.session.edit("node.delete");};
             services_.observe("outliner.delete");
-            if(ImGui::BeginMenu("创建子对象",writable)){
+            if(ImGui::BeginMenu(ui::tr("创建子对象"),writable)){
                 ui::objectCreationMenu(services_.session.nodePresets().describe(),[&](const auto& preset){pending=[this,preset,id]{services_.session.edit("node.create-preset",{{"preset",preset},{"parent",id}});};});ImGui::EndMenu();
             }
-            if(ImGui::BeginMenu("创建根对象",writable)){
+            if(ImGui::BeginMenu(ui::tr("创建根对象"),writable)){
                 ui::objectCreationMenu(services_.session.nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{services_.session.edit("node.create-preset",{{"preset",preset}});};});ImGui::EndMenu();
             }
-            if(ImGui::MenuItem("导出子树",nullptr,false,writable&&view.isProject()&&!services_.session.context().dirty()))pending=[this,id]{services_.exportSelection({{"node",id}});};
+            if(ImGui::MenuItem(ui::tr("导出子树"),nullptr,false,writable&&view.isProject()&&!services_.session.context().dirty()))pending=[this,id]{services_.exportSelection({{"node",id}});};
             services_.observe("outliner.export");
             ImGui::EndPopup();
         }
@@ -110,7 +111,7 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
             ImGui::GetWindowDrawList()->AddLine(a,{b.x,a.y},ImGui::GetColorU32(ImGuiCol_DragDropTarget),2*services_.dpi);
         }
         acceptDrop(sibling?node.parentId:node.id,sibling?node.id:std::string());
-        if(ImGui::IsItemHovered())ImGui::SetTooltip("%s\n%s\nDouble-click: frame object",node.name.c_str(),node.id.c_str());
+        if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("%s\n%s\nDouble-click: frame object"),node.name.c_str(),node.id.c_str());
     };
     const auto collect=[&](const auto& self,const std::string& parent)->void {
         for(const auto& node:nodes)if(node.parentId==parent){visible.push_back(node.id);if(presentation.openNodeIds_.count(node.id))self(self,node.id);}
@@ -119,8 +120,8 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
         for(const auto& node:nodes)if(presentation.outlinerFilter_.PassFilter(node.name.c_str())||presentation.outlinerFilter_.PassFilter(node.id.c_str()))visible.push_back(node.id);
     }else collect(collect,"");
     if(visible.empty()){
-        ui::emptyState("没有匹配的对象","清除搜索后查看场景层级。");
-        if(ui::button("清除搜索"))presentation.outlinerFilter_.Clear();services_.observe("outliner.clear-search");
+        ui::emptyState(ui::tr("没有匹配的对象"),ui::tr("清除搜索后查看场景层级。"));
+        if(ui::button(ui::tr("清除搜索")))presentation.outlinerFilter_.Clear();services_.observe("outliner.clear-search");
     }
     std::string referenceCandidate;
     const auto selectionClick=[&](const SceneNode& node) {
@@ -169,7 +170,7 @@ void OutlinerPanel::draw(PanelContext& panelContext) {
     ImGui::InvisibleButton("##root-drop-space",{ImGui::GetContentRegionAvail().x,std::max(24.F,ImGui::GetContentRegionAvail().y)});
     services_.observe("hierarchy.empty");acceptDrop("");
     if(ImGui::IsItemClicked()&&!ImGui::GetDragDropPayload())panelContext.selection().set({});
-    if(ImGui::BeginPopupContextItem("Hierarchy creation")){
+    if(ImGui::BeginPopupContextItem(ui::tr("Hierarchy creation"))){
         ImGui::BeginDisabled(!writable);
         ui::objectCreationMenu(services_.session.nodePresets().describe(),[&](const auto& preset){pending=[this,preset]{services_.session.edit("node.create-preset",{{"preset",preset}});};});ImGui::EndDisabled();ImGui::EndPopup();
     }

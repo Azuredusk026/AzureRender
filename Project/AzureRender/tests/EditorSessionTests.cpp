@@ -56,6 +56,17 @@ int main() {
     auto context = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset(assetPath), scenePath);
     azurerender::EditorSession session(context);
+    if(!session.settings().describe().contains("editor.language")){std::cerr<<"Language preference must be registered\n";return 86;}
+    if(session.settings().set("editor.language",2,azurerender::SettingSource::UserFile).passed)return 87;
+    if(!session.settings().set("editor.language",1,azurerender::SettingSource::UserFile).passed)return 88;
+    session.settings().applyPending();
+    const auto languageFile=uniquePath("-language.json");session.settings().saveUser(languageFile);
+    azurerender::EditorSession reopenedLanguage(context);
+    if(!reopenedLanguage.settings().load(languageFile,azurerender::SettingSource::UserFile).passed)return 89;
+    reopenedLanguage.settings().applyPending();std::filesystem::remove(languageFile);
+    if(reopenedLanguage.settings().get("editor.language")!=1)return 90;
+
+
     {
         const auto original=context->renderSettings().sky.mode;
         if(!session.edit("render.settings",{{"values",{{"skyMode",2},{"skyColor",{.1F,.2F,.3F}}}}})

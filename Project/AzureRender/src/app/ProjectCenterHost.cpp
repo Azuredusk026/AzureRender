@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "ui/BrandMark.hpp"
 #include "platform/WindowIcon.hpp"
 #include "AzureRenderApp.hpp"
@@ -19,6 +20,12 @@ namespace {
 void check(VkResult result) { if(result!=VK_SUCCESS)throw std::runtime_error("Project center Vulkan error: "+std::to_string(result)); }
 }
 std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(const AzureRenderOptions& options,const std::string& initialProject) {
+    azurerender::ui::setLanguage(azurerender::ui::Language::Chinese);
+    try{
+        std::ifstream preferences(azurerender::EditorWorkspace::configDirectory()/"settings.json");
+        if(preferences){nlohmann::json data;preferences>>data;const int language=data.at("values").value("editor.language",0);
+            if(language==1)azurerender::ui::setLanguage(azurerender::ui::Language::English);}
+    }catch(const std::exception&){/* The editor settings loader reports malformed preferences. */}
     runOptions_=options; runOptions_.captureDirectory=(azurerender::EditorWorkspace::configDirectory()/"logs").u8string();
     azurerender::GlfwFrontendConfig config;config.width=options.width;config.height=options.height;config.title="AzureRender - Project Center";
     frontend_=std::make_unique<azurerender::GlfwFrontend>(config);

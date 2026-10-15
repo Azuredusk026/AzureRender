@@ -184,6 +184,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     edits_=std::make_unique<EditService>(*context_,editorOperations(*this),[this](const EditDescriptor& descriptor){return editEnabled(descriptor);});
     registerEngineSettings(settings_);
     registerModelSettings(settings_);
+    settings_.add({"editor.language","Language",0,0,1,false,true,false});
     settings_.add({"editor.scale","Interface scale multiplier",1.0,.75,3.,false,true,false});
     settings_.add({"editor.compact","Compact workspace",false,{},{},false,true,false});
     settings_.add({"editor.camera.invertX","Invert horizontal editor camera input",false,{},{},false,true,false});

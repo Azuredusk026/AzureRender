@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #include "ui/UiScopes.hpp"
@@ -22,28 +23,28 @@ void setFallbackPanelRect(float x,float y,float width,float height) {
 }
 #endif
 void ImGuiEditorLayer::drawCapturePanel(PanelContext&) {
-    if(!ImGui::Begin("捕获###capture",workspace_.open("capture"))){ImGui::End();return;}
+    if(!ImGui::Begin(ui::tr("捕获###capture"),workspace_.open("capture"))){ImGui::End();return;}
     std::array<char, 128> label{};
     const std::string& current = session_->captureLabel();
     std::memcpy(label.data(), current.data(),
         std::min(current.size(), label.size() - 1));
-    if (ImGui::InputText("Label", label.data(), label.size())) {
+    if (ImGui::InputText(ui::tr("Label"), label.data(), label.size())) {
         session_->setCaptureLabel(label.data());
     }
-    if (ui::button("Capture Viewport")) {
+    if (ui::button(ui::tr("Capture Viewport"))) {
         static_cast<void>(session_->execute(EditorCommand::Capture));
     }
     ImGui::SameLine();
-    ImGui::TextUnformatted("PNG + semantic label");
+    ImGui::TextUnformatted(ui::tr("PNG + semantic label"));
     if(session_->developerServices().image){
-        if(ImGui::Checkbox("Camera preview",&cameraPreviewEnabled_))session_->edit("preview.camera",{{"enabled",cameraPreviewEnabled_}});
+        if(ImGui::Checkbox(ui::tr("Camera preview"),&cameraPreviewEnabled_))session_->edit("preview.camera",{{"enabled",cameraPreviewEnabled_}});
         observeWidget("preview.camera");
         if(cameraPreviewEnabled_){
             const auto result=session_->edit("preview.camera",{{"enabled",true}});
             if(result && result.value.contains("handle"))try{
                 if(const auto texture=previewTexture(result.value.at("handle").get<std::uint64_t>()))
                     ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{240*dpi_,135*dpi_});
-                if(ui::button("Capture Camera"))session_->edit("preview.capture",{{"handle",result.value.at("handle")},{"label",session_->captureLabel()}});
+                if(ui::button(ui::tr("Capture Camera")))session_->edit("preview.capture",{{"handle",result.value.at("handle")},{"label",session_->captureLabel()}});
                 observeWidget("preview.capture");
             }catch(const std::exception& error){session_->log(error.what());}
         }

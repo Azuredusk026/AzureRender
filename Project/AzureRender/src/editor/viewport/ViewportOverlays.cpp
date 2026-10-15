@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
 #include "ImViewGuizmo.h"
@@ -11,7 +12,7 @@ bool ImGuiEditorLayer::drawViewportOrientation(ImVec2 origin,ImVec2 size){
     const auto result=ImViewGuizmo::Draw(session_->viewportView(),{origin.x+size.x-58*dpi_,origin.y+58*dpi_},dpi_,enabled);draw->PopClipRect();
     for(const auto& axis:result.axes)widgets_[std::string("viewport.axis.")+axis.id]={axis.position.x-axis.radius,axis.position.y-axis.radius,2*axis.radius,2*axis.radius};
     if(result.clicked)session_->edit("viewport.orientation",{{"axis",result.clicked}});
-    if(result.hovered)ImGui::SetTooltip("Click an axis for an orthographic view. View menu provides all six directions.");
+    if(result.hovered)ImGui::SetTooltip(ui::tr("Click an axis for an orthographic view. View menu provides all six directions."));
     return result.hovered;
 }
 void ImGuiEditorLayer::drawViewportOverlays(ImVec2 origin,ImVec2 size){

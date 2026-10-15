@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/panels/CorePanels.hpp"
 #include "ImGuiEditorLayer.hpp"
 #include "EditorTheme.hpp"
@@ -14,11 +15,11 @@ namespace azurerender {
 void ImGuiEditorLayer::drawPathInput(const char* label,std::string& value,const std::string& purpose,bool directory,const std::vector<std::string>& extensions) {
     ImGui::PushID(purpose.c_str());ImGui::TextUnformatted(label);ImGui::SetNextItemWidth(-1);
     ui::inputText("##path",value);observeWidget(purpose+".path");
-    if(ui::button("Browse...")){
+    if(ui::button(ui::tr("Browse..."))){
         const auto result=session_->edit("path.choose",{{"purpose",purpose},{"title",label},{"directory",directory},{"extensions",extensions}});
         if(result&&!result.value.value("cancelled",true))value=result.value.at("path").get<std::string>();
     }observeWidget(purpose+".browse");ImGui::SameLine();ImGui::SetNextItemWidth(-1);
-    if(ImGui::BeginCombo("##Recent","Recent directories")){
+    if(ImGui::BeginCombo("##Recent",ui::tr("Recent directories"))){
         for(const auto& path:session_->pathHistory().directories(purpose))if(ImGui::Selectable(path.c_str())){
             if(directory)value=path;
             else{
@@ -108,7 +109,7 @@ void ImGuiEditorLayer::drawWorkspace() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{0,0});ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize,0);
     constexpr auto flags=ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove
         |ImGuiWindowFlags_NoDocking|ImGuiWindowFlags_NoBringToFrontOnFocus|ImGuiWindowFlags_NoSavedSettings;
-    ImGui::Begin("Workspace###workspace-host",nullptr,flags);
+    ImGui::Begin(ui::tr("Workspace###workspace-host"),nullptr,flags);
 #ifdef IMGUI_HAS_DOCK
     const auto dockspace=ImGui::GetID("AzureWorkspace");
     const auto preset=session_->consumeWorkspacePreset();

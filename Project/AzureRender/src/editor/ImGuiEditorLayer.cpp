@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/panels/CorePanels.hpp"
 #include "ui/BrandMark.hpp"
 #include "platform/WindowIcon.hpp"
@@ -299,6 +300,7 @@ void ImGuiEditorLayer::newFrame(float fixedDeltaSeconds) {
     if(fixedDeltaSeconds>0)ImGui::GetIO().DeltaTime=fixedDeltaSeconds;
     float nextDpi=1,scaleY=1;glfwGetWindowContentScale(window_,&nextDpi,&scaleY);
     session_->settings().applyPending();
+    ui::setLanguage(static_cast<ui::Language>(session_->settings().get("editor.language").get<int>()));
     const auto compact=session_->settings().get("editor.compact").get<bool>();
     if(compactPreference_!=compact){compactPreference_=compact;workspaceRebuildRequested_=true;dockingLayoutInitialized_=false;}
     if(settingsSaveRequested_) {

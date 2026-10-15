@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #include "editor/ui/ObjectCreationMenu.hpp"
@@ -30,7 +31,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const bool compact=EditorWorkspace::layout(ImGui::GetIO().DisplaySize.x,ImGui::GetIO().DisplaySize.y,dpi_,session_->settings().get("editor.compact").get<bool>()).compact;
     if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{metrics.spacing,metrics.axisSpacing});}
-    if(!ImGui::Begin(session_->editCameraActive()?"场景###viewport":"游戏###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(2);return;}
+    if(!ImGui::Begin(session_->editCameraActive()?ui::tr("场景###viewport"):ui::tr("游戏###viewport"),workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(2);return;}
     // Dock titles use the shared padding; compact controls only affect panel contents.
     if(compact)ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{metrics.padding,0});
     if(!compact||session_->documents().describe(context_->documentId(),false).size()>1)drawDocumentTabs();
@@ -40,15 +41,15 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         ImGui::BeginDisabled(session_->playing()||session_->building());
         for(const auto& entry:std::vector<std::pair<const char*,unsigned>>{{"Hand",3},{"Move",0},{"Rotate",1},{"Scale",2}}) {
             const char* shortcut=entry.second==0?"W":entry.second==1?"E":entry.second==2?"R":"Q";
-            if(ui::button(compact?shortcut:entry.second==0?"移动":entry.second==1?"旋转":entry.second==2?"缩放":"平移",{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
+            if(ui::button(compact?shortcut:entry.second==0?ui::tr("移动"):entry.second==1?ui::tr("旋转"):entry.second==2?ui::tr("缩放"):ui::tr("平移"),{ui::ButtonVariant::Toolbar,static_cast<unsigned>(context_->gizmoMode())==entry.second}))session_->edit("viewport.gizmo-mode",{{"value",entry.second}});
             observeWidget(std::string("mode.")+entry.first);ImGui::SameLine();
         }
-        ImGui::EndDisabled();ui::nextToolbarItem(ui::buttonWidth("聚焦选择"));
-        if(ui::button("聚焦选择",{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
+        ImGui::EndDisabled();ui::nextToolbarItem(ui::buttonWidth(ui::tr("聚焦选择")));
+        if(ui::button(ui::tr("聚焦选择"),{ui::ButtonVariant::Toolbar,false,context_->selectedNodes().empty()})) {
             session_->edit("viewport.frame-selection");
-        }observeWidget("focus");ui::nextToolbarItem(ui::buttonWidth("正交"));
-        if(ui::button(session_->viewportView().projection==CameraProjectionKind::Orthographic?"正交":"透视",{ui::ButtonVariant::Toolbar,session_->viewportView().projection==CameraProjectionKind::Orthographic}))ImGui::OpenPopup("Viewport view options");observeWidget("viewport.view-options");ui::nextToolbarItem(ui::buttonWidth("变换选项"));
-        if(ImGui::BeginPopup("Viewport view options")){
+        }observeWidget("focus");ui::nextToolbarItem(ui::buttonWidth(ui::tr("正交")));
+        if(ui::button(session_->viewportView().projection==CameraProjectionKind::Orthographic?ui::tr("正交"):ui::tr("透视"),{ui::ButtonVariant::Toolbar,session_->viewportView().projection==CameraProjectionKind::Orthographic}))ImGui::OpenPopup(ui::tr("Viewport view options"));observeWidget("viewport.view-options");ui::nextToolbarItem(ui::buttonWidth(ui::tr("变换选项")));
+        if(ImGui::BeginPopup(ui::tr("Viewport view options"))){
             ImGui::BeginDisabled(!session_->editCameraActive()||session_->building()||session_->gizmo().active());
             for(const auto* axis:{"+X","-X","+Y","-Y","+Z","-Z"}){if(ImGui::MenuItem(axis))session_->edit("viewport.orientation",{{"axis",axis}});observeWidget(std::string("viewport.orientation.")+axis);}
             ImGui::Separator();for(const auto* kind:{"perspective","orthographic"}){if(ImGui::MenuItem(kind))session_->edit("viewport.projection",{{"value",kind}});observeWidget(std::string("viewport.projection.")+kind);}
@@ -62,8 +63,8 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             }
             ImGui::EndDisabled();ImGui::EndPopup();
         }
-        if(ui::button("变换选项",{ui::ButtonVariant::Toolbar}))ImGui::OpenPopup("Transform options");observeWidget("gizmo.options");
-        if(ImGui::BeginPopup("Transform options")) {
+        if(ui::button(ui::tr("变换选项"),{ui::ButtonVariant::Toolbar}))ImGui::OpenPopup(ui::tr("Transform options"));observeWidget("gizmo.options");
+        if(ImGui::BeginPopup(ui::tr("Transform options"))) {
             ImGui::BeginDisabled(session_->gizmo().active());
             for(const auto* space:{"world","local"}) {
                 if(ImGui::Selectable(space,(context_->gizmoSpace()==EditorContext::GizmoSpace::World)==(std::string(space)=="world")))session_->edit("viewport.gizmo-options",{{"space",space}});
@@ -75,8 +76,8 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
                 observeWidget(std::string("gizmo.pivot.")+pivot);
             }
             bool snap=session_->settings().get("editor.gizmo.snap").get<bool>();
-            if(ImGui::Checkbox("Snap (Ctrl)",&snap))session_->edit("settings.set",{{"name","editor.gizmo.snap"},{"value",snap}});observeWidget("gizmo.snap");
-            for(const auto& entry:std::vector<std::pair<const char*,const char*>>{{"Move step","editor.gizmo.moveStep"},{"Rotate degrees","editor.gizmo.rotateStep"},{"Scale step","editor.gizmo.scaleStep"}}) {
+            if(ImGui::Checkbox(ui::tr("Snap (Ctrl)"),&snap))session_->edit("settings.set",{{"name","editor.gizmo.snap"},{"value",snap}});observeWidget("gizmo.snap");
+            for(const auto& entry:std::vector<std::pair<const char*,const char*>>{{ui::tr("Move step"),"editor.gizmo.moveStep"},{ui::tr("Rotate degrees"),"editor.gizmo.rotateStep"},{ui::tr("Scale step"),"editor.gizmo.scaleStep"}}) {
                 float step=session_->settings().get(entry.second).get<float>();
                 if(ImGui::InputFloat(entry.first,&step))session_->edit("settings.set",{{"name",entry.second},{"value",step}});
             }
@@ -165,7 +166,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             const auto selected=session_->game()->renderCamera();
             if(!selected.view){
                 auto* draw=ImGui::GetWindowDrawList();
-                draw->AddText({itemMin.x+12,itemMin.y+12},IM_COL32(255,205,105,255),"未找到启用的游戏相机，正在使用默认视角");
+                draw->AddText({itemMin.x+12,itemMin.y+12},IM_COL32(255,205,105,255),ui::tr("未找到启用的游戏相机，正在使用默认视角"));
             }
         }
         const bool hovered=ImGui::IsItemHovered();
@@ -186,17 +187,17 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         if(navigationButton_>=0&&ImGui::IsMouseDragging(navigationButton_,3*dpi_))navigationMoved_=true;
         if(navigationButton_>=0 && (!ImGui::IsMouseDown(navigationButton_) || ImGui::IsKeyPressed(ImGuiKey_Escape,false))){
             const bool contextClick=navigationButton_==ImGuiMouseButton_Right&&!navigationMoved_&&ImGui::IsMouseReleased(ImGuiMouseButton_Right);
-            navigationButton_=-1;if(contextClick)ImGui::OpenPopup("Viewport context");
+            navigationButton_=-1;if(contextClick)ImGui::OpenPopup(ui::tr("Viewport context"));
         }
         setNavigationCapture(navigationButton_==ImGuiMouseButton_Right);
-        if(ImGui::BeginPopup("Viewport context")){
-            if(ImGui::MenuItem("聚焦选择","F",false,!session_->selection().selected().empty()))session_->edit("viewport.frame-selection");
+        if(ImGui::BeginPopup(ui::tr("Viewport context"))){
+            if(ImGui::MenuItem(ui::tr("聚焦选择"),"F",false,!session_->selection().selected().empty()))session_->edit("viewport.frame-selection");
             ImGui::BeginDisabled(session_->playing()||session_->building());
-            if(ImGui::MenuItem("复制","Ctrl+D",false,!session_->selection().selected().empty()))session_->edit("node.duplicate");
+            if(ImGui::MenuItem(ui::tr("复制"),"Ctrl+D",false,!session_->selection().selected().empty()))session_->edit("node.duplicate");
             observeWidget("viewport.duplicate");
-            if(ImGui::MenuItem("删除","Delete",false,!session_->selection().selected().empty()))session_->edit("node.delete");
+            if(ImGui::MenuItem(ui::tr("删除"),"Delete",false,!session_->selection().selected().empty()))session_->edit("node.delete");
             observeWidget("viewport.delete");
-            if(ImGui::BeginMenu("创建对象")){ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){session_->edit("node.create-preset",{{"preset",preset}});});ImGui::EndMenu();}
+            if(ImGui::BeginMenu(ui::tr("创建对象"))){ui::objectCreationMenu(session_->nodePresets().describe(),[&](const auto& preset){session_->edit("node.create-preset",{{"preset",preset}});});ImGui::EndMenu();}
             ImGui::EndDisabled();ImGui::EndPopup();
         }
         if (hovered || navigationButton_>=0 || viewportGizmoDragActive_) {
@@ -244,8 +245,8 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     if(!viewportTextures_.empty()){
         auto* draw=ImGui::GetWindowDrawList();const bool flying=navigationButton_==ImGuiMouseButton_Right;
         const float speed=session_->settings().get("editor.camera.flySpeed").get<float>()*(flying&&ImGui::GetIO().KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
-        char status[160];if(flying)std::snprintf(status,sizeof(status),"Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release",static_cast<double>(speed));
-        else std::snprintf(status,sizeof(status),"%s | RMB: fly / look\nWheel: zoom | F: frame",session_->viewportView().projection==CameraProjectionKind::Orthographic?"Orthographic":"Perspective");
+        char status[160];if(flying)std::snprintf(status,sizeof(status),ui::tr("Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release"),static_cast<double>(speed));
+        else std::snprintf(status,sizeof(status),"%s | RMB: fly / look\nWheel: zoom | F: frame",session_->viewportView().projection==CameraProjectionKind::Orthographic?ui::tr("Orthographic"):ui::tr("Perspective"));
         const auto theme=ui::ThemeTokens::dark();auto background=theme.recessed;background.w=.84F;
         const ImVec2 lower{imageRect_[0]+imageRect_[2],imageRect_[1]+imageRect_[3]},hud{imageRect_[0]+metrics.padding,lower.y-46*dpi_};
         draw->PushClipRect({imageRect_[0],imageRect_[1]},lower,true);draw->AddRectFilled({hud.x-4*dpi_,hud.y-2*dpi_},{std::min(lower.x,hud.x+330*dpi_),hud.y+42*dpi_},ImGui::ColorConvertFloat4ToU32(background),4*dpi_);draw->AddText(hud,ImGui::ColorConvertFloat4ToU32(theme.text),status);draw->PopClipRect();

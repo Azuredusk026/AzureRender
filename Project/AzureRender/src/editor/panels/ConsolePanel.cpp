@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #include "ui/UiScopes.hpp"
@@ -25,7 +26,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
 #ifndef IMGUI_HAS_DOCK
     setFallbackPanelRect(0.50F, 0.72F, 0.50F, 0.28F);
 #endif
-    if(!ImGui::Begin("日志###console",workspace_.open("console"))){ImGui::End();return;}
+    if(!ImGui::Begin(ui::tr("日志###console"),workspace_.open("console"))){ImGui::End();return;}
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const auto tasks=session_->tasks().report(),feedback=session_->feedback().report();
     const auto developer=session_->developerServices().report?session_->developerServices().report():nlohmann::json::object();
@@ -42,7 +43,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
         if(task.at("state")=="running") {
             ImGui::ProgressBar(task.at("progress").get<float>());
             const auto id=task.at("id").get<std::string>();ImGui::PushID(id.c_str());
-            if(ui::button("取消任务"))session_->edit("tasks.cancel",{{"id",id}});
+            if(ui::button(ui::tr("取消任务")))session_->edit("tasks.cancel",{{"id",id}});
             observeWidget("tasks.cancel."+id);ImGui::PopID();
         }
         const auto diagnostic=task.at("diagnostic").get<std::string>();
@@ -51,15 +52,15 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
     for(const auto& error:feedback) {
         const auto id=error.at("id").get<std::string>();ImGui::PushID(id.c_str());
         ui::resultMessage(error.at("source").get<std::string>()+": "+error.at("message").get<std::string>(),true);
-        if(ui::button("Dismiss"))session_->edit("feedback.dismiss",{{"id",id}});
+        if(ui::button(ui::tr("Dismiss")))session_->edit("feedback.dismiss",{{"id",id}});
         observeWidget("feedback.dismiss."+id);
         if(id==latestFeedback&&id!=consoleLastFeedback_)ImGui::SetScrollHereY(1);
         ImGui::PopID();
     }
     if(!developer.empty()){
         if(developer.at("shaderAvailable").get<bool>()){
-            ImGui::Text("Shader reload: %s",developer.at("shaderState").get<std::string>().c_str());
-            if(ui::button("Rebuild shaders"))session_->edit("developer.shader-rebuild");observeWidget("developer.shader-rebuild");
+            ImGui::Text(ui::tr("Shader reload: %s"),developer.at("shaderState").get<std::string>().c_str());
+            if(ui::button(ui::tr("Rebuild shaders")))session_->edit("developer.shader-rebuild");observeWidget("developer.shader-rebuild");
             const auto diagnostic=developer.at("shaderDiagnostic").get<std::string>();if(!diagnostic.empty())ui::resultMessage(diagnostic,developer.at("shaderState")=="failed");
         }
     }
@@ -68,34 +69,34 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
     if(auto* presentation=session_->presentation())for(const auto& error:presentation->errors())ui::resultMessage("Presentation: "+error,true);
     consoleLastFeedback_=latestFeedback;ImGui::EndChild();observeWidget("console.diagnostics-region");
     };
-    if(!compact&&hasDetails&&ImGui::CollapsingHeader("任务与诊断",ImGuiTreeNodeFlags_DefaultOpen)){
+    if(!compact&&hasDetails&&ImGui::CollapsingHeader(ui::tr("任务与诊断"),ImGuiTreeNodeFlags_DefaultOpen)){
         drawDetails(std::max(ImGui::GetFrameHeight(),std::min(metrics.controlHeight*4,ImGui::GetContentRegionAvail().y*.35F)));
     }
     const auto searchWidth=ImGui::GetContentRegionAvail().x>metrics.widePanelWidth?ImGui::GetContentRegionAvail().x-metrics.filterWidth-metrics.spacing:-1;
-    ui::searchField("##Search logs","搜索日志",consoleFilter_,searchWidth);observeWidget("console.search");
+    ui::searchField("##Search logs",ui::tr("搜索日志"),consoleFilter_,searchWidth);observeWidget("console.search");
     ui::nextToolbarItem(metrics.filterWidth);ImGui::SetNextItemWidth(metrics.filterWidth);
-    const char* labels[]={"全部级别","警告及错误","仅错误"};
+    const char* labels[]={ui::tr("全部级别"),ui::tr("警告及错误"),ui::tr("仅错误")};
     const char* ids[]={"console.level.info","console.level.warning","console.level.error"};
     if(ImGui::BeginCombo("##Level",labels[consoleLevel_])){
         for(int index=0;index<3;++index){if(ImGui::Selectable(labels[index],consoleLevel_==index))consoleLevel_=index;observeWidget(ids[index]);}
         ImGui::EndCombo();
     }observeWidget("console.level");
     bool paused=consoleLogs_.paused();
-    ImGui::Checkbox("暂停日志",&paused);consoleLogs_.setPaused(paused);observeWidget("console.pause");
-    if(ImGui::IsItemHovered())ImGui::SetTooltip("固定日志快照；后台任务继续运行");
-    ui::nextToolbarItem(ImGui::GetFrameHeight()+ImGui::CalcTextSize("自动跟随").x+metrics.spacing);
-    ImGui::Checkbox("自动跟随",&consoleAutoFollow_);observeWidget("console.follow");
+    ImGui::Checkbox(ui::tr("暂停日志"),&paused);consoleLogs_.setPaused(paused);observeWidget("console.pause");
+    if(ImGui::IsItemHovered())ImGui::SetTooltip(ui::tr("固定日志快照；后台任务继续运行"));
+    ui::nextToolbarItem(ImGui::GetFrameHeight()+ImGui::CalcTextSize(ui::tr("自动跟随")).x+metrics.spacing);
+    ImGui::Checkbox(ui::tr("自动跟随"),&consoleAutoFollow_);observeWidget("console.follow");
     consoleLogs_.update(RuntimeDiagnostics::instance().messages());
     const auto minimum=static_cast<DiagnosticLevel>(consoleLevel_);
     const auto rows=consoleLogs_.visible(minimum,[&](const auto& text){return consoleFilter_.PassFilter(text.c_str());});
-    ui::nextToolbarItem(ui::buttonWidth("复制可见日志"));
-    if(ui::button("复制可见日志",{ui::ButtonVariant::Default,false,rows.empty()}))ImGui::SetClipboardText(consoleLogs_.copyVisible(rows).c_str());observeWidget("console.copy");
+    ui::nextToolbarItem(ui::buttonWidth(ui::tr("复制可见日志")));
+    if(ui::button(ui::tr("复制可见日志"),{ui::ButtonVariant::Default,false,rows.empty()}))ImGui::SetClipboardText(consoleLogs_.copyVisible(rows).c_str());observeWidget("console.copy");
     if(compact&&hasDetails){
-        ui::nextToolbarItem(ui::buttonWidth("任务与诊断"));
-        if(ui::button("任务与诊断"))ImGui::OpenPopup("Console diagnostics");observeWidget("console.diagnostics");
+        ui::nextToolbarItem(ui::buttonWidth(ui::tr("任务与诊断")));
+        if(ui::button(ui::tr("任务与诊断")))ImGui::OpenPopup(ui::tr("Console diagnostics"));observeWidget("console.diagnostics");
         const auto display=ImGui::GetIO().DisplaySize;
         ImGui::SetNextWindowSize({std::min(metrics.widePanelWidth*2,display.x-metrics.spacing*4),0},ImGuiCond_Appearing);
-        if(ImGui::BeginPopup("Console diagnostics")){
+        if(ImGui::BeginPopup(ui::tr("Console diagnostics"))){
             drawDetails(std::min(metrics.controlHeight*12,display.y*.6F));
             ImGui::EndPopup();
         }
@@ -107,7 +108,7 @@ void ImGuiEditorLayer::drawConsolePanel(PanelContext&) {
         consoleView_["visible"].push_back({{"level",diagnosticLevelName(entry.level)},{"text",entry.text}});
         ui::statusText(entry.text.c_str(),entry.level==DiagnosticLevel::Error?ui::StatusKind::Error:entry.level==DiagnosticLevel::Warning?ui::StatusKind::Warning:ui::StatusKind::Neutral);
     }
-    if(rows.empty())ui::emptyState("没有匹配的日志","调整搜索或级别；恢复日志可查看最新诊断。");
+    if(rows.empty())ui::emptyState(ui::tr("没有匹配的日志"),ui::tr("调整搜索或级别；恢复日志可查看最新诊断。"));
     const auto latest=consoleLogs_.entries().empty()?std::string():consoleLogs_.entries().back().text;
     if(consoleAutoFollow_&&!paused&&latest!=consoleLastLine_&&ImGui::GetScrollY()>=ImGui::GetScrollMaxY()-ImGui::GetTextLineHeightWithSpacing())ImGui::SetScrollHereY(1);
     consoleLastLine_=latest;ImGui::EndChild();

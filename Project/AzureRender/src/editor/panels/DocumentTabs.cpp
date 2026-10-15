@@ -1,3 +1,4 @@
+#include "ui/localization/Localization.hpp"
 #include "editor/ImGuiEditorLayer.hpp"
 #include "ui/Widgets.hpp"
 #ifdef AZURERENDER_HAS_IMGUI
@@ -10,7 +11,7 @@ void ImGuiEditorLayer::drawDocumentTabs(){
     const auto documents=session_->documents().describe(active,false);
     bool requestClosePopup=false;
     ImGui::BeginDisabled(session_->playing()||session_->building()||session_->gizmo().active());
-    if(ImGui::BeginTabBar("Scene documents",ImGuiTabBarFlags_FittingPolicyScroll)){
+    if(ImGui::BeginTabBar(ui::tr("Scene documents"),ImGuiTabBarFlags_FittingPolicyScroll)){
         for(const auto& document:documents){
             const auto id=document.at("id").get<std::string>();
             const auto path=std::filesystem::u8path(document.at("path").get<std::string>());
@@ -29,9 +30,9 @@ void ImGuiEditorLayer::drawDocumentTabs(){
         ImGui::EndTabBar();
     }
     ImGui::EndDisabled();
-    if(requestClosePopup)ImGui::OpenPopup("Close modified scene");
-    if(ImGui::BeginPopupModal("Close modified scene",nullptr,ImGuiWindowFlags_AlwaysAutoResize)){
-        ImGui::TextUnformatted("Save changes to this scene before closing?");
+    if(requestClosePopup)ImGui::OpenPopup(ui::tr("Close modified scene"));
+    if(ImGui::BeginPopupModal(ui::tr("Close modified scene"),nullptr,ImGuiWindowFlags_AlwaysAutoResize)){
+        ImGui::TextUnformatted(ui::tr("Save changes to this scene before closing?"));
         for(const auto& choice:std::vector<std::pair<const char*,const char*>>{{"Save","save"},{"Discard","discard"},{"Cancel","cancel"}}){
             if(ui::button(choice.first)){const auto result=session_->edit("document.close",{{"id",documentCloseTarget_},{"decision",choice.second}});if(result){documentCloseTarget_.clear();ImGui::CloseCurrentPopup();}}
             observeWidget(std::string("document.close.")+choice.second);ImGui::SameLine();
