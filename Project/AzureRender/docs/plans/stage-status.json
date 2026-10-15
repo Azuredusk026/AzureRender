@@ -1147,21 +1147,21 @@
     {
       "id": "PT2",
       "name": "法线与材质输入",
-      "status": "Active",
+      "status": "Complete",
       "scope": "下一轮路径追踪补齐与公开演示",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "PT1"
       ],
       "evidence": [
-        "docs/plans/2026-10-15-pathtracing-completion.md"
+        "docs/acceptance/pt/2026-10-15.md"
       ],
       "requiredAcceptance": []
     },
     {
       "id": "PT3",
       "name": "面光源与环境采样",
-      "status": "Pending",
+      "status": "Active",
       "scope": "下一轮路径追踪补齐与公开演示",
       "checksPassed": false,
       "dependsOn": [

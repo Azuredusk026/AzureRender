@@ -56,6 +56,7 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
    material.albedo=tracing::appendTexture(pixels,m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,true);
    material.surface=tracing::appendTexture(pixels,m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,false);
    material.emission=tracing::appendTexture(pixels,m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,true);
+   material.normal=tracing::appendTexture(pixels,m.normalPixels,m.normalWidth,m.normalHeight,false);
    material.properties={m.emissiveStrength,static_cast<float>(m.alphaMode),m.alphaCutoff,m.doubleSided?1.F:0.F};materials.push_back(material);
   }
   meshes_.emplace(resource.id,std::move(mesh));

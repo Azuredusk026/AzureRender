@@ -3,9 +3,9 @@
 #include "sky.glsl"
 layout(local_size_x=8,local_size_y=8) in;
 layout(std140,binding=0) uniform Params {vec4 origin,right,up,forward,skyColor,sky;uvec4 counts,image;} p;
-struct Triangle{vec4 p0,e1,e2,uv01,uv2material;};
+struct Triangle{vec4 p0,e1,e2,uv01,uv2material,n0,n1,n2,t0,t1,t2;};
 struct Node{vec4 minimum,maximum;uvec4 links;};
-struct Material{uvec4 albedo,surface,emission;vec4 properties;};
+struct Material{uvec4 albedo,surface,emission,normal;vec4 properties;};
 struct Light{vec4 position,radiance;};
 layout(std430,binding=1) readonly buffer Triangles{Triangle triangles[];};
 layout(std430,binding=2) readonly buffer Nodes{Node nodes[];};
@@ -29,7 +29,7 @@ bool boxHit(Node n,vec3 origin,vec3 direction,float limit){
   else{float a=(n.minimum[axis]-origin[axis])/direction[axis],b=(n.maximum[axis]-origin[axis])/direction[axis];nearT=max(nearT,min(a,b));farT=min(farT,max(a,b));}
  }return farT>=nearT;
 }
-bool intersect(vec3 origin,vec3 direction,inout float distance,out uint triangle,out vec2 uv){
+bool intersect(vec3 origin,vec3 direction,inout float distance,out uint triangle,out vec2 uv,out vec2 bary){
  if(p.counts.y==0u)return false;
  uint stack[64];uint top=1u;stack[0]=0u;bool hit=false;
  while(top>0u){Node n=nodes[stack[--top]];if(!boxHit(n,origin,direction,distance))continue;
@@ -42,7 +42,7 @@ bool intersect(vec3 origin,vec3 direction,inout float distance,out uint triangle
    vec2 coord=t.uv01.xy*(1-u-v)+t.uv01.zw*u+t.uv2material.xy*v;float alpha=texel(m.albedo,coord).a;
    if(m.properties.y>.5&&m.properties.y<1.5&&alpha<m.properties.z)continue;
    if(m.properties.y>1.5&&random()>alpha)continue;
-   distance=d;triangle=id;uv=coord;hit=true;
+   distance=d;triangle=id;uv=coord;bary=vec2(u,v);hit=true;
   }
  }return hit;
 }
@@ -57,21 +57,26 @@ vec3 hemisphere(vec3 n){float r=sqrt(random()),a=2*PI*random();vec3 tangent=norm
 vec3 trace(vec3 origin,vec3 direction){
  vec3 result=vec3(0),throughput=vec3(1);
  for(uint bounce=0;bounce<p.counts.w;++bounce){
-  float distance=bounce==0?p.up.w:1e30;uint index;vec2 uv;
-  if(!intersect(origin,direction,distance,index,uv)){result+=throughput*sky(direction);break;}
-  Triangle t=triangles[index];Material m=materials[uint(t.uv2material.z)];vec3 n=normalize(cross(t.e1.xyz,t.e2.xyz));if(dot(n,direction)>0)n=-n;
+  float distance=bounce==0?p.up.w:1e30;uint index;vec2 uv,bary;
+  if(!intersect(origin,direction,distance,index,uv,bary)){result+=throughput*sky(direction);break;}
+  Triangle t=triangles[index];Material m=materials[uint(t.uv2material.z)];
+  vec3 ng=normalize(cross(t.e1.xyz,t.e2.xyz));vec3 n=normalize(t.n0.xyz*(1-bary.x-bary.y)+t.n1.xyz*bary.x+t.n2.xyz*bary.y);
+  if(dot(n,ng)<0)n=-n;
+  vec4 tangent=t.t0*(1-bary.x-bary.y)+t.t1*bary.x+t.t2*bary.y;vec3 axis=normalize(tangent.xyz-n*dot(n,tangent.xyz));
+  vec3 mapped=texel(m.normal,uv).xyz*2-1;n=normalize(mat3(axis,cross(n,axis)*sign(tangent.w),n)*mapped);
+  if(dot(ng,direction)>0){ng=-ng;n=-n;}if(dot(n,-direction)<=0)n=ng;
   vec3 position=origin+direction*distance;vec3 albedo=texel(m.albedo,uv).rgb;vec4 surface=texel(m.surface,uv);
   result+=throughput*texel(m.emission,uv).rgb*m.properties.x;
   // Point lights are delta emitters and are sampled separately from the BSDF.
   for(uint light=0;light<p.counts.z;++light){Light l=lights[light];if(l.position.w<.5)continue;
    vec3 delta=l.position.xyz-position;float d=length(delta);vec3 ld=delta/max(d,.0001);float cosine=max(dot(n,ld),0);
-   if(cosine>0){float shadowDistance=d-.002;uint shadowId;vec2 shadowUv;if(!intersect(position+n*.001,ld,shadowDistance,shadowId,shadowUv))result+=throughput*evaluateBsdf(n,-direction,ld,albedo,clamp(surface.b,0,1),max(.045,surface.g))*l.radiance.rgb*cosine/max(d*d,.01);}
+   if(cosine>0){float shadowDistance=d-.002;uint shadowId;vec2 shadowUv,shadowBary;if(!intersect(position+ng*.001,ld,shadowDistance,shadowId,shadowUv,shadowBary))result+=throughput*evaluateBsdf(n,-direction,ld,albedo,clamp(surface.b,0,1),max(.045,surface.g))*l.radiance.rgb*cosine/max(d*d,.01);}
   }
   float metal=clamp(surface.b,0,1),rough=max(.045,surface.g);vec3 v=-direction;
   direction=sampleBsdf(n,v,albedo,metal,rough);
   float pdf=bsdfPdf(n,v,direction,albedo,metal,rough);if(pdf<=0)break;
   throughput*=evaluateBsdf(n,v,direction,albedo,metal,rough)*max(dot(n,direction),0)/pdf;
-  origin=position+n*.001;
+  origin=position+ng*.001;
   if(bounce>=2){float survival=clamp(max(max(throughput.r,throughput.g),throughput.b),.05,.95);if(random()>survival)break;throughput/=survival;}
  }return result;
 }

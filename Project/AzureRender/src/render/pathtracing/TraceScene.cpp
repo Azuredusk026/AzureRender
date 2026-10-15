@@ -10,6 +10,15 @@ using namespace internal;
 namespace {
 Vec4 packed(Vector3 p,float w=0){return {p[0],p[1],p[2],w};}
 Vector3 xyz(const Vec4& p){return {p[0],p[1],p[2]};}
+Vector3 direction(const Matrix4& m,Vector3 v){return {m[0]*v[0]+m[4]*v[1]+m[8]*v[2],m[1]*v[0]+m[5]*v[1]+m[9]*v[2],m[2]*v[0]+m[6]*v[1]+m[10]*v[2]};}
+float determinant(const Matrix4& m){return dot(Vector3{m[0],m[1],m[2]},cross(Vector3{m[4],m[5],m[6]},Vector3{m[8],m[9],m[10]}));}
+Vector3 normalDirection(const Matrix4& m,Vector3 n){
+ const Vector3 a{m[0],m[1],m[2]},b{m[4],m[5],m[6]},c{m[8],m[9],m[10]};
+ const auto value=addVectors(addVectors(scaleVector(cross(b,c),n[0]),scaleVector(cross(c,a),n[1])),scaleVector(cross(a,b),n[2]));
+ const float d=dot(a,cross(b,c));if(std::abs(d)<1e-12F)throw std::invalid_argument("Singular tracing normal transform");
+ return normalize(scaleVector(value,1/d));
+}
+
 }
 std::array<std::uint32_t,4> appendTexture(std::vector<std::uint32_t>& pixels,const std::vector<std::uint8_t>& rgba,unsigned width,unsigned height,bool srgb){
     if(!width||!height||rgba.size()<static_cast<std::size_t>(width)*height*4)throw std::invalid_argument("Invalid tracing texture");
@@ -53,7 +62,15 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
                 if(vectorLength(cross(e1,e2))<1e-10F)continue;
                 const auto& ua=asset.vertices.at(a).texcoord;const auto& ub=asset.vertices.at(b).texcoord;const auto& uc=asset.vertices.at(c).texcoord;
                 const auto& material=asset.materials.at(primitive.materialIndex);
-                result.triangles.push_back({packed(pa),packed(e1),packed(e2),{ua[0],ua[1],ub[0],ub[1]},{uc[0],uc[1],static_cast<float>(mesh.materialBase+primitive.materialIndex),material.emissiveStrength>0?1.F:0.F}});
+                Triangle triangle{packed(pa),packed(e1),packed(e2),{ua[0],ua[1],ub[0],ub[1]},{uc[0],uc[1],static_cast<float>(mesh.materialBase+primitive.materialIndex),material.emissiveStrength>0?1.F:0.F}};
+                const auto frame=[&](unsigned v){
+                    const auto& vertex=asset.vertices.at(v);auto normal=vertex.normal;Vector3 tangent{vertex.tangent[0],vertex.tangent[1],vertex.tangent[2]};
+                    if(asset.hasSkin){Vector3 sn{},st{};for(unsigned j=0;j<4;++j)if(vertex.weights[j]>0){const auto& joint=pose.jointMatrices.at(vertex.joints[j]);sn=addVectors(sn,scaleVector(normalDirection(joint,normal),vertex.weights[j]));st=addVectors(st,scaleVector(direction(joint,tangent),vertex.weights[j]));}normal=normalize(sn);tangent=normalize(st);}
+                    normal=normalDirection(world,normal);tangent=direction(world,tangent);tangent=subtract(tangent,scaleVector(normal,dot(normal,tangent)));
+                    if(vectorLength(tangent)<1e-8F)tangent=cross(std::abs(normal[1])<.99F?Vector3{0,1,0}:Vector3{1,0,0},normal);
+                    return std::pair<Vec4,Vec4>{packed(normal),packed(normalize(tangent),vertex.tangent[3]*(determinant(world)<0?-1.F:1.F))};
+                };
+                const auto fa=frame(a),fb=frame(b),fc=frame(c);triangle.n0=fa.first;triangle.n1=fb.first;triangle.n2=fc.first;triangle.t0=fa.second;triangle.t1=fb.second;triangle.t2=fc.second;result.triangles.push_back(triangle);
             }
         }
     }
