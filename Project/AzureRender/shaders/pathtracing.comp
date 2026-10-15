@@ -54,11 +54,12 @@ vec3 sky(vec3 direction){
 }
 vec3 hemisphere(vec3 n){float r=sqrt(random()),a=2*PI*random();vec3 tangent=normalize(cross(abs(n.y)<.99?vec3(0,1,0):vec3(1,0,0),n));return tangent*(r*cos(a))+cross(n,tangent)*(r*sin(a))+n*sqrt(max(0,1-r*r));}
 #include "pathtracing/bsdf.glsl"
+#include "pathtracing/lighting.glsl"
 vec3 trace(vec3 origin,vec3 direction){
- vec3 result=vec3(0),throughput=vec3(1);
+ vec3 result=vec3(0),throughput=vec3(1),previous=origin;float previousPdf=0;
  for(uint bounce=0;bounce<p.counts.w;++bounce){
   float distance=bounce==0?p.up.w:1e30;uint index;vec2 uv,bary;
-  if(!intersect(origin,direction,distance,index,uv,bary)){result+=throughput*sky(direction);break;}
+  if(!intersect(origin,direction,distance,index,uv,bary)){result+=throughput*sky(direction)*(bounce==0?1:powerWeight(previousPdf,environmentPdf(direction)));break;}
   Triangle t=triangles[index];Material m=materials[uint(t.uv2material.z)];
   vec3 ng=normalize(cross(t.e1.xyz,t.e2.xyz));vec3 n=normalize(t.n0.xyz*(1-bary.x-bary.y)+t.n1.xyz*bary.x+t.n2.xyz*bary.y);
   if(dot(n,ng)<0)n=-n;
@@ -66,17 +67,14 @@ vec3 trace(vec3 origin,vec3 direction){
   vec3 mapped=texel(m.normal,uv).xyz*2-1;n=normalize(mat3(axis,cross(n,axis)*sign(tangent.w),n)*mapped);
   if(dot(ng,direction)>0){ng=-ng;n=-n;}if(dot(n,-direction)<=0)n=ng;
   vec3 position=origin+direction*distance;vec3 albedo=texel(m.albedo,uv).rgb;vec4 surface=texel(m.surface,uv);
-  result+=throughput*texel(m.emission,uv).rgb*m.properties.x;
-  // Point lights are delta emitters and are sampled separately from the BSDF.
-  for(uint light=0;light<p.counts.z;++light){Light l=lights[light];if(l.position.w<.5)continue;
-   vec3 delta=l.position.xyz-position;float d=length(delta);vec3 ld=delta/max(d,.0001);float cosine=max(dot(n,ld),0);
-   if(cosine>0){float shadowDistance=d-.002;uint shadowId;vec2 shadowUv,shadowBary;if(!intersect(position+ng*.001,ld,shadowDistance,shadowId,shadowUv,shadowBary))result+=throughput*evaluateBsdf(n,-direction,ld,albedo,clamp(surface.b,0,1),max(.045,surface.g))*l.radiance.rgb*cosine/max(d*d,.01);}
-  }
+  float emissionWeight=bounce==0?1:powerWeight(previousPdf,areaPdf(index,previous,position,direction));
+  result+=throughput*texel(m.emission,uv).rgb*m.properties.x*emissionWeight;
+  result+=throughput*directLighting(position,ng,n,-direction,albedo,clamp(surface.b,0,1),max(.045,surface.g));
   float metal=clamp(surface.b,0,1),rough=max(.045,surface.g);vec3 v=-direction;
   direction=sampleBsdf(n,v,albedo,metal,rough);
   float pdf=bsdfPdf(n,v,direction,albedo,metal,rough);if(pdf<=0)break;
   throughput*=evaluateBsdf(n,v,direction,albedo,metal,rough)*max(dot(n,direction),0)/pdf;
-  origin=position+ng*.001;
+  previousPdf=pdf;previous=position;origin=position+ng*.001;
   if(bounce>=2){float survival=clamp(max(max(throughput.r,throughput.g),throughput.b),.05,.95);if(random()>survival)break;throughput/=survival;}
  }return result;
 }

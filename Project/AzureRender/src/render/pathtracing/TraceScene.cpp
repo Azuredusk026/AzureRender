@@ -27,6 +27,15 @@ std::array<std::uint32_t,4> appendTexture(std::vector<std::uint32_t>& pixels,con
     for(std::size_t i=0;i<static_cast<std::size_t>(width)*height;++i)pixels.push_back(static_cast<unsigned>(rgba[i*4])|(static_cast<unsigned>(rgba[i*4+1])<<8)|(static_cast<unsigned>(rgba[i*4+2])<<16)|(static_cast<unsigned>(rgba[i*4+3])<<24));
     return {start,width,height,srgb?1U:0U};
 }
+std::vector<float> environmentDistribution(unsigned width,unsigned height,const std::vector<std::uint16_t>& rgba,unsigned columns,unsigned rows){
+ if(!width||!height||!columns||!rows||rgba.size()!=static_cast<std::size_t>(width)*height*4)throw std::invalid_argument("Invalid environment distribution");
+ const auto half=[](std::uint16_t h){const unsigned e=(h>>10)&31,m=h&1023;return (h&32768?-1.F:1.F)*(e?std::ldexp(1.F+static_cast<float>(m)/1024,static_cast<int>(e)-15):std::ldexp(static_cast<float>(m),-24));};
+ std::vector<float> result(columns*rows*2);double total=0;
+ for(unsigned y=0;y<rows;++y)for(unsigned x=0;x<columns;++x){const auto pixel=(static_cast<std::size_t>(std::min(height-1,(2*y+1)*height/(2*rows)))*width+std::min(width-1,(2*x+1)*width/(2*columns)))*4;
+ const float luminance=std::max(.001F,.2126F*half(rgba[pixel])+.7152F*half(rgba[pixel+1])+.0722F*half(rgba[pixel+2]));
+ const float weight=luminance*(std::cos(3.14159265359F*static_cast<float>(y)/static_cast<float>(rows))-std::cos(3.14159265359F*static_cast<float>(y+1)/static_cast<float>(rows)));result[columns*rows+y*columns+x]=weight;total+=weight;}
+ float cumulative=0;for(unsigned i=0;i<columns*rows;++i){result[columns*rows+i]=static_cast<float>(result[columns*rows+i]/total);cumulative+=result[columns*rows+i];result[i]=cumulative;}result[columns*rows-1]=1;return result;
+}
 void buildBvh(Geometry& geometry){
     geometry.nodes.clear();if(geometry.triangles.empty())return;
     if(geometry.triangles.size()>1000000)throw std::invalid_argument("Path tracing scene exceeds one million triangles");

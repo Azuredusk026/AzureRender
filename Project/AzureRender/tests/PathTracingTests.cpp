@@ -18,5 +18,9 @@ int main(){try{
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");
  std::vector<unsigned> pixels;auto texture=tracing::appendTexture(pixels,{255,128,0,255},1,1,true);require(pixels[0]==0xff0080ff&&texture[3]==1,"Texture channel order and color space");
  bool rejected=false;try{tracing::appendTexture(pixels,{},1,1,false);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"Malformed texture rejected");
+ auto distribution=tracing::environmentDistribution(1,1,{0x3c00,0x3c00,0x3c00,0x3c00},8,4);
+ require(distribution.size()==64,"Environment stores probability and cumulative arrays");
+ require(std::abs(distribution[31]-1.F)<1e-6F,"Environment distribution integrates to one");
+ float total=0;for(unsigned i=32;i<64;++i)total+=distribution[i];require(std::abs(total-1.F)<1e-5F,"Environment cell probabilities sum to one");
  std::cout<<"Path tracing BVH, hierarchy, visibility and atlas passed\n";return 0;
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

@@ -11,6 +11,7 @@ struct Light {Vec4 position{},radiance{};};
 struct Geometry {std::vector<Triangle> triangles;std::vector<BvhNode> nodes;std::vector<Light> lights;};
 struct Mesh {LoadedAsset asset;std::uint32_t materialBase=0;};
 using Meshes=std::map<std::string,Mesh>;
+std::vector<float> environmentDistribution(unsigned width,unsigned height,const std::vector<std::uint16_t>& rgba,unsigned columns=64,unsigned rows=32);
 void buildBvh(Geometry& geometry);
 Geometry buildGeometry(const scene::SceneDescription&,const Meshes&,const std::vector<NodeAnimationFrame>&);
 std::uint64_t sceneFingerprint(const scene::SceneDescription&,const std::vector<NodeAnimationFrame>&);

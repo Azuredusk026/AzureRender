@@ -47,6 +47,8 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
  environmentView_=rhi_->createImageView(environment_.image,VK_FORMAT_R16G16B16A16_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
  rhi::SamplerDesc sampler;sampler.addressV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;environmentSampler_=rhi_->createSampler(sampler);
  std::vector<tracing::Material> materials;std::vector<unsigned> pixels;
+ const auto distribution=tracing::environmentDistribution(environment.width,environment.height,environment.rgba16f);
+ pixels.resize(distribution.size());std::memcpy(pixels.data(),distribution.data(),distribution.size()*sizeof(float));
  for(const auto& resource:c.scene.resources){
   tracing::Mesh mesh;
   if(c.preparedMeshes&&c.preparedMeshes->count(resource.path))mesh.asset=*c.preparedMeshes->at(resource.path);else mesh.asset=loadGltfAsset(resource.path);
