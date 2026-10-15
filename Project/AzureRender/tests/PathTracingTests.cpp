@@ -1,6 +1,7 @@
 #include "render/pathtracing/TraceScene.hpp"
 #include <iostream>
 #include "assets/MaterialData.hpp"
+#include "runtime/LevelRenderSettings.hpp"
 #include <stdexcept>
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
@@ -26,5 +27,7 @@ int main(){try{
  auto glass=MaterialData::defaults("azure.pbr");glass.parameters["transmission"]=1.;glass.parameters["ior"]=1.33;glass.parameters["thickness"]=.1;
  const auto interpreted=glass.interpret([](const auto&){return std::filesystem::path();});
  require(interpreted.transmission==1&&std::abs(interpreted.ior-1.33F)<1e-5F,"Material service retains physical transmission");
+ RenderSettings settings;settings.pathTraceDenoise=true;settings.pathTraceSeed=17;RenderSettings reopened;
+ decodeLevelRenderSettings(reopened,encodeLevelRenderSettings(settings));require(reopened.pathTraceDenoise&&reopened.pathTraceSeed==17,"Denoise and seed survive settings persistence");
  std::cout<<"Path tracing BVH, hierarchy, visibility and atlas passed\n";return 0;
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

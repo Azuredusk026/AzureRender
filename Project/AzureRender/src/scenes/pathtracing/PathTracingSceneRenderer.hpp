@@ -26,7 +26,7 @@ private:
  VkPipelineLayout layout_=VK_NULL_HANDLE;VkPipeline compute_=VK_NULL_HANDLE,display_=VK_NULL_HANDLE;
  std::vector<VkDescriptorSet> sets_;std::vector<Slot> slots_;
  rhi::GpuImage environment_;VkImageView environmentView_=VK_NULL_HANDLE;VkSampler environmentSampler_=VK_NULL_HANDLE;
- rhi::GpuBuffer materials_,pixels_,history_;
+ rhi::GpuBuffer materials_,pixels_,history_,guides_;
  RendererSceneState state_;std::vector<AssetPose> poses_;
  tracing::Meshes meshes_;tracing::Geometry geometry_;scene::SceneDescription scene_;
  RenderSettings settings_;Uniform uniform_{};std::uint64_t fingerprint_=0,generation_=1,resets_=0;

@@ -84,6 +84,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << document.renderSettings.sky.color[0] << ' ' << document.renderSettings.sky.color[1] << ' ' << document.renderSettings.sky.color[2] << ' '
            << document.renderSettings.sky.intensity << ' ' << document.renderSettings.sky.rotationDegrees << '\n'
            << "pathTracing " << document.renderSettings.pathTraceSamples << ' ' << document.renderSettings.pathTraceBounces << '\n'
+           << "pathTracingPreview " << document.renderSettings.pathTraceDenoise << ' ' << document.renderSettings.pathTraceSeed << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -253,6 +254,8 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     }
     if(renderSettingsVersion>=11 && (!(input>>key>>document.renderSettings.pathTraceSamples>>document.renderSettings.pathTraceBounces)||key!="pathTracing"))
         throw std::runtime_error("Invalid .azscene pathTracing");
+    if(renderSettingsVersion>=12 && (!(input>>key>>document.renderSettings.pathTraceDenoise>>document.renderSettings.pathTraceSeed)||key!="pathTracingPreview"))
+        throw std::runtime_error("Invalid .azscene pathTracingPreview");
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)
         || key != "innerOutlineEnabled") {

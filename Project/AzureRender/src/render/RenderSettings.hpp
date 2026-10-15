@@ -102,7 +102,7 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 11;
+    static constexpr std::uint32_t kSchemaVersion = 12;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;
@@ -145,6 +145,8 @@ struct RenderSettings {
     SkySettings sky;
     std::uint32_t pathTraceSamples=256;
     std::uint32_t pathTraceBounces=6;
+    bool pathTraceDenoise=false;
+    std::uint32_t pathTraceSeed=0;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

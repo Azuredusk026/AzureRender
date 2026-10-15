@@ -18,7 +18,8 @@ void PathTracingSceneRenderer::allocateHistory(const RenderContext& c){
  const auto size=static_cast<VkDeviceSize>(width_)*height_*16;
  if(!size||size>maxBuffer_)throw std::runtime_error("Path tracing viewport exceeds device storage range");
  allocator_->destroyBuffer(history_);history_=allocator_->createBuffer(size,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,false);
- for(auto set:sets_)rhi_->writeDescriptorBuffer({set,5,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,history_.buffer,history_.size});
+ allocator_->destroyBuffer(guides_);guides_=allocator_->createBuffer(size,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,false);
+ for(auto set:sets_){rhi_->writeDescriptorBuffer({set,5,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,history_.buffer,history_.size});rhi_->writeDescriptorBuffer({set,8,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,guides_.buffer,guides_.size});}
  samples_=0;++resets_;
 }
 void PathTracingSceneRenderer::onLoad(const RenderContext& c){
@@ -27,7 +28,7 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
  settings_=*c.renderSettings;
  VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(c.physicalDevice,&properties);
  maxBuffer_=properties.limits.maxStorageBufferRange;
- if(properties.limits.maxPerStageDescriptorStorageBuffers<6)throw std::runtime_error("Path tracing requires six storage buffer descriptors");
+ if(properties.limits.maxPerStageDescriptorStorageBuffers<7)throw std::runtime_error("Path tracing requires seven storage buffer descriptors");
  unsigned queueCount=0;vkGetPhysicalDeviceQueueFamilyProperties(c.physicalDevice,&queueCount,nullptr);
  std::vector<VkQueueFamilyProperties> queues(queueCount);vkGetPhysicalDeviceQueueFamilyProperties(c.physicalDevice,&queueCount,queues.data());
  if(c.graphicsQueueFamily>=queueCount||!(queues[c.graphicsQueueFamily].queueFlags&VK_QUEUE_COMPUTE_BIT))throw std::runtime_error("Path tracing requires a compute capable graphics queue");
@@ -70,9 +71,10 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
  upload(pixels_,pixels.data(),pixels.size()*sizeof(unsigned),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT);
  std::vector<rhi::DescriptorBindingDesc> bindings{{0,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_FRAGMENT_BIT}};
  for(unsigned i=1;i<=6;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT|(i==5?VK_SHADER_STAGE_FRAGMENT_BIT:0U)});
+ bindings.push_back({8,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT|VK_SHADER_STAGE_FRAGMENT_BIT});
  bindings.push_back({7,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_COMPUTE_BIT});
  setLayout_=rhi_->createDescriptorSetLayout(bindings);
- pool_=rhi_->createDescriptorPool({{{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,c.maxFramesInFlight},{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,c.maxFramesInFlight*6},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,c.maxFramesInFlight}},c.maxFramesInFlight});
+ pool_=rhi_->createDescriptorPool({{{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,c.maxFramesInFlight},{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,c.maxFramesInFlight*7},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,c.maxFramesInFlight}},c.maxFramesInFlight});
  sets_=rhi_->allocateDescriptorSets(pool_,setLayout_,c.maxFramesInFlight);slots_.resize(c.maxFramesInFlight);
  layout_=rhi_->createPipelineLayout(setLayout_,nullptr);
  const auto module=[&](const char* file){return rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/"+file));};
@@ -107,9 +109,9 @@ void PathTracingSceneRenderer::updateFrame(const SceneFrameData& frame){
  const float scale=ortho?camera.orthoHeight*.5F:std::tan(camera.fov*.5F);
  for(unsigned i=0;i<3;++i){next.origin[i]=camera.position[i];next.forward[i]=forward[i];next.right[i]=right[i]*scale*static_cast<float>(width_)/static_cast<float>(height_);next.up[i]=up[i]*scale;next.skyColor[i]=settings_.sky.color[i];}
  next.origin[3]=ortho?1.F:0.F;next.forward[3]=camera.nearPlane;next.up[3]=camera.farPlane;
- next.sky={static_cast<float>(settings_.sky.mode),settings_.sky.intensity,settings_.sky.rotationDegrees*.01745329252F,0};
+ next.sky={static_cast<float>(settings_.sky.mode),settings_.sky.intensity,settings_.sky.rotationDegrees*.01745329252F,settings_.pathTraceDenoise?1.F:0.F};
  next.counts={static_cast<unsigned>(geometry_.triangles.size()),static_cast<unsigned>(geometry_.nodes.size()),static_cast<unsigned>(geometry_.lights.size()),settings_.pathTraceBounces};
- next.image={width_,height_,0,settings_.pathTraceSamples};
+ next.image={width_,height_,0,settings_.pathTraceSeed};
  auto previous=uniform_;previous.image[2]=0;
  if(std::memcmp(&previous,&next,sizeof(next))!=0){samples_=0;++resets_;}
  uniform_=next;uniform_.image[2]=samples_;
@@ -128,8 +130,10 @@ void PathTracingSceneRenderer::recordScene(const RenderContext& c){
  auto& cmd=*c.commands;
  if(samples_<settings_.pathTraceSamples){
   cmd.bufferBarrier({history_.buffer,0,VK_WHOLE_SIZE,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
+  cmd.bufferBarrier({guides_.buffer,0,VK_WHOLE_SIZE,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_WRITE_BIT});
   cmd.bindComputePipeline(compute_);cmd.bindComputeDescriptorSet(layout_,sets_.at(current_));cmd.dispatch((width_+7)/8,(height_+7)/8,1);
-  cmd.bufferBarrier({history_.buffer,0,VK_WHOLE_SIZE,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});++samples_;
+  cmd.bufferBarrier({history_.buffer,0,VK_WHOLE_SIZE,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+  cmd.bufferBarrier({guides_.buffer,0,VK_WHOLE_SIZE,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});++samples_;
  }
  state_.accumulatedSamples=samples_;state_.targetSamples=settings_.pathTraceSamples;
  if(c.shadowRenderPass&&c.shadowFramebuffer){VkClearValue clear{};clear.depthStencil={1,0};cmd.beginRenderPass({c.shadowRenderPass,c.shadowFramebuffer,{c.shadowMapSize,c.shadowMapSize},{clear}});cmd.endRenderPass();}
@@ -140,7 +144,7 @@ void PathTracingSceneRenderer::recordScene(const RenderContext& c){
  if(c.gpuTimingEnabled)cmd.writeTimestamp(c.timestampQueryPool,2,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
 }
 void PathTracingSceneRenderer::onSwapchainRecreate(const RenderContext& c){allocateHistory(c);}
-void PathTracingSceneRenderer::appendHudText(std::ostringstream& out)const{out<<"Path tracing: "<<samples_<<" / "<<settings_.pathTraceSamples<<" samples, "<<settings_.pathTraceBounces<<" bounces\n";}
+void PathTracingSceneRenderer::appendHudText(std::ostringstream& out)const{out<<"Path tracing: "<<samples_<<" / "<<settings_.pathTraceSamples<<" samples, "<<settings_.pathTraceBounces<<" bounces, "<<geometry_.triangles.size()<<" triangles\n";}
 void PathTracingSceneRenderer::appendCaptureManifestFields(std::ostream& out)const{out<<"  \"pathTracingSamples\": "<<samples_<<",\n  \"pathTracingResets\": "<<resets_<<",\n";}
 void PathTracingSceneRenderer::onUnload(const RenderContext&){
  if(!rhi_||!allocator_)return;
@@ -148,6 +152,6 @@ void PathTracingSceneRenderer::onUnload(const RenderContext&){
  display_=compute_=VK_NULL_HANDLE;layout_=VK_NULL_HANDLE;pool_=VK_NULL_HANDLE;setLayout_=VK_NULL_HANDLE;
  for(auto& s:slots_){allocator_->destroyBuffer(s.uniform);allocator_->destroyBuffer(s.triangles);allocator_->destroyBuffer(s.nodes);allocator_->destroyBuffer(s.lights);}slots_.clear();sets_.clear();
  rhi_->destroySampler(environmentSampler_);rhi_->destroyImageView(environmentView_);environmentSampler_=VK_NULL_HANDLE;environmentView_=VK_NULL_HANDLE;allocator_->destroyImage(environment_);
- allocator_->destroyBuffer(history_);allocator_->destroyBuffer(materials_);allocator_->destroyBuffer(pixels_);meshes_.clear();
+ allocator_->destroyBuffer(guides_);allocator_->destroyBuffer(history_);allocator_->destroyBuffer(materials_);allocator_->destroyBuffer(pixels_);meshes_.clear();
 }
 }

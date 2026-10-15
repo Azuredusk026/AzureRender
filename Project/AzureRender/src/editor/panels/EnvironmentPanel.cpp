@@ -14,6 +14,8 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
         session_->edit("render.settings",{{"values",{{"renderer",renderer?"pathtracing":"character"}}}},"renderer");
     if(renderer){
         ImGui::Text(ui::tr("已累积 %u / %u 个采样"),renderSamples_,renderTargetSamples_);
+        bool denoise=settings.pathTraceDenoise;
+        if(ImGui::Checkbox(ui::tr("预览降噪###pt-denoise"),&denoise))session_->edit("render.settings",{{"values",{{"pathTraceDenoise",denoise}}}},"pt-denoise");
         int samples=static_cast<int>(settings.pathTraceSamples),bounces=static_cast<int>(settings.pathTraceBounces);
         if(ImGui::SliderInt(ui::tr("目标采样数###pt-samples"),&samples,1,4096))session_->edit("render.settings",{{"values",{{"pathTraceSamples",samples}}}},"pt-samples");
         if(ImGui::SliderInt(ui::tr("散射次数###pt-bounces"),&bounces,1,16))session_->edit("render.settings",{{"values",{{"pathTraceBounces",bounces}}}},"pt-bounces");
