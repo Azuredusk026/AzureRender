@@ -30,7 +30,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
     const auto metrics=ui::UiMetrics::fromScale(dpi_);
     const bool compact=EditorWorkspace::layout(ImGui::GetIO().DisplaySize.x,ImGui::GetIO().DisplaySize.y,dpi_,session_->settings().get("editor.compact").get<bool>()).compact;
     if(compact){ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,{metrics.padding,0});ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing,{metrics.spacing,metrics.axisSpacing});}
-    if(!ImGui::Begin("场景###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(2);return;}
+    if(!ImGui::Begin(session_->editCameraActive()?"场景###viewport":"游戏###viewport",workspace_.open("viewport"))){cancelViewportGizmo();navigationButton_=-1;setNavigationCapture(false);ImGui::End();if(compact)ImGui::PopStyleVar(2);return;}
     // Dock titles use the shared padding; compact controls only affect panel contents.
     if(compact)ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,{metrics.padding,0});
     if(!compact||session_->documents().describe(context_->documentId(),false).size()>1)drawDocumentTabs();
@@ -161,10 +161,17 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
             if(consumed||gameUi_->wantsKeyboard())viewportAcceptsShortcuts_=false;
             if(viewportFocused_){for(auto character:ImGui::GetIO().InputQueueCharacters)gameUi_->character(character);}
         }
+        if(!session_->editCameraActive()&&session_->game()){
+            const auto selected=session_->game()->renderCamera();
+            if(!selected.view){
+                auto* draw=ImGui::GetWindowDrawList();
+                draw->AddText({itemMin.x+12,itemMin.y+12},IM_COL32(255,205,105,255),"未找到启用的游戏相机，正在使用默认视角");
+            }
+        }
         const bool hovered=ImGui::IsItemHovered();
-        drawViewportOverlays(itemMin,imageSize);
-        const bool orientationOver=drawViewportOrientation(itemMin,imageSize);
-        const bool gizmoOver=orientationOver||drawViewportGizmo(itemMin,imageSize);
+        if(session_->editCameraActive())drawViewportOverlays(itemMin,imageSize);
+        const bool orientationOver=session_->editCameraActive()&&drawViewportOrientation(itemMin,imageSize);
+        const bool gizmoOver=orientationOver||(session_->editCameraActive()&&drawViewportGizmo(itemMin,imageSize));
         const auto& navIo=ImGui::GetIO();
         const bool navigationAllowed=session_->editCameraActive() && !session_->building() && !navIo.WantTextInput
             && !ImGui::IsPopupOpen(nullptr,ImGuiPopupFlags_AnyPopupId|ImGuiPopupFlags_AnyPopupLevel)

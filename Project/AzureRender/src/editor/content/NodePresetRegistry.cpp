@@ -29,7 +29,8 @@ void NodePresetRegistry::create(EditorContext& context,const std::string& id,con
 }
 NodePresetRegistry NodePresetRegistry::builtins(){
     NodePresetRegistry result;result.add({"empty","Empty",{}});
-    result.add({"camera","Camera",{"azure.third-person-camera"}});
+    result.add({"camera","Camera",{"azure.camera"}});
+    result.add({"follow-camera","Third Person Camera",{"azure.third-person-camera"}});
     result.add({"game-ui","Game UI",{"azure.game-ui"}});
     result.add({"light","Point Light",{},nlohmann::json::array({{{"color",{1,1,1}},{"intensity",2},{"radius",8},{"enabled",true}}})});
     for(const auto& pair:std::vector<std::pair<std::string,std::string>>{{"cube","Cube"},{"plane","Plane"},{"sphere","Sphere"},{"cylinder","Cylinder"},{"capsule","Capsule"},{"torus","Torus"}}){

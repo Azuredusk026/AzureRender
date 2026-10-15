@@ -80,6 +80,8 @@ ComponentRegistry makeRuntimeComponentRegistry() {
     result.setPresentation("azure.rigid-body",{"刚体","物理",{}, {"azure.character"}});
     result.setPresentation("azure.character",{"角色控制器","物理",{}, {"azure.rigid-body"}});
     result.setPresentation("azure.hinge",{"铰链约束","物理"});
+    result.setPresentation("azure.camera",{"游戏相机","场景"});
+    result.addValidation("azure.camera",[](const Json& value){if(value.at("nearPlane").get<float>()>=value.at("farPlane").get<float>())throw std::invalid_argument("Camera requires near < far");});
     result.setPresentation("azure.third-person-camera",{"第三人称相机","场景"});
     result.setPresentation("azure.animator",{"动画播放器","呈现"});
     result.setPresentation("azure.audio-source",{"音频源","呈现"});

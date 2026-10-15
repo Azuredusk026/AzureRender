@@ -54,7 +54,11 @@ int main(){
         require(context->undoCount()==undo+1,"Preset creation must form one undo unit");
         run(session,"history.undo");require(context->scene().lights.empty()&&context->scene().nodes.size()==nodeCount,"Undo must remove the light and its owning node");
         run(session,"node.create-preset",{{"preset","camera"},{"id","work-camera"}});
-        require(!context->componentData("work-camera","azure.third-person-camera").is_null(),"Camera preset must instantiate a registered camera component");
+        require(!context->componentData("work-camera","azure.camera").is_null(),"Camera preset must instantiate a registered camera component");
+        const auto cameraUndo=context->undoCount();
+        run(session,"viewport.camera-preview",{{"node","work-camera"}});
+        require(session.viewportView().position==std::array<float,3>{0,0,0}&&session.viewportView().target==std::array<float,3>{0,0,-1},"Camera preview uses the authored camera pose");
+        require(context->undoCount()==cameraUndo,"Camera preview does not mutate the scene document");
         run(session,"history.undo");
         std::filesystem::copy(root,relocated,std::filesystem::copy_options::recursive);
         auto movedContext=EditorContext::openProject(relocated/"project.azureproject");EditorSession moved(movedContext);

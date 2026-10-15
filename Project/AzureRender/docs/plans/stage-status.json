@@ -1063,21 +1063,21 @@
     {
       "id": "WC3",
       "name": "编辑游戏与最终渲染相机",
-      "status": "Active",
+      "status": "Ready",
       "scope": "世界参照、相机与渲染",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "VD5"
       ],
       "evidence": [
-        "docs/plans/2026-10-15-world-camera-rendering.md"
+        "docs/acceptance/wc/2026-10-15.md"
       ],
       "requiredAcceptance": []
     },
     {
       "id": "WC4",
       "name": "中英双语界面",
-      "status": "Pending",
+      "status": "Active",
       "scope": "世界参照、相机与渲染",
       "checksPassed": false,
       "dependsOn": [

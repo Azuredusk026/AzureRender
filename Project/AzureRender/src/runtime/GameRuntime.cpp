@@ -99,6 +99,14 @@ SceneDocument GameRuntime::renderScene() {
     }
     return scene;
 }
+GameCameraSelection GameRuntime::renderCamera(){
+    auto selected=resolveGameCamera(runtime_,renderScene());
+    if(!selected.view&&hasCamera_){
+        CameraViewDescriptor view;view.position=renderCameraPosition();view.target=renderCameraTarget();
+        selected.view=view;selected.node="follow-camera";selected.diagnostic.clear();
+    }
+    return selected;
+}
 std::array<float,3> GameRuntime::renderCameraPosition() const {
     auto position=camera_.position();const float alpha=renderAlpha();
     for(unsigned axis=0;axis<3;++axis)position[axis]=previousCameraPosition_[axis]+(position[axis]-previousCameraPosition_[axis])*alpha;

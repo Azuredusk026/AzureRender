@@ -365,9 +365,9 @@ set(AZURE_GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(AZURE_REFLECTION_OUTPUT "${AZURE_GENERATED_DIR}/reflection/GeneratedRegistry.hpp")
 set(AZURE_COMPONENT_OUTPUT "${AZURE_GENERATED_DIR}/runtime/GeneratedComponents.hpp")
 add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}" "${AZURE_COMPONENT_OUTPUT}"
-    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
+    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp ecs/CameraComponents.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp
+    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp src/ecs/CameraComponents.hpp
     VERBATIM)
 add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTION_OUTPUT}")
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
@@ -392,6 +392,7 @@ add_library(AzureRuntime STATIC
     src/runtime/LevelSession.cpp
     src/runtime/PhysicsWorld.cpp
     src/runtime/physics/PhysicsShapeFactory.cpp
+    src/runtime/camera/GameCameraService.cpp
     src/runtime/GameRuntime.cpp
     src/runtime/GameUi.cpp
     src/runtime/AnimationStateMachine.cpp
@@ -669,6 +670,9 @@ if(BUILD_TESTING)
     add_executable(AzureProceduralProcessTests tests/ProceduralProcessTests.cpp)
     target_link_libraries(AzureProceduralProcessTests PRIVATE AzureDevtools)
     add_test(NAME AzureAssets.ProceduralProcess COMMAND AzureProceduralProcessTests "$<TARGET_FILE:AzureGeometryCompiler>" "${CMAKE_CURRENT_BINARY_DIR}/procedural-process-tests")
+    add_executable(AzureCameraSystemTests tests/CameraSystemTests.cpp)
+    target_link_libraries(AzureCameraSystemTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRuntime.CameraSystem COMMAND AzureCameraSystemTests)
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)

@@ -53,6 +53,10 @@ void InspectorPanel::draw(PanelContext& panelContext) {
         if(ImGui::IsItemDeactivatedAfterEdit())services_.session.edit("history.end-edit");
         services_.observe("name");
         ImGui::EndDisabled();
+        if(!view.componentData(node->id,"azure.camera").is_null()){
+            if(ui::button("查看相机视角"))services_.session.edit("viewport.camera-preview",{{"node",node->id}});
+            services_.observe("camera.preview");
+        }
         services_.materialSlots(*node);
         if(panelContext.selection().selected().size()==1)services_.physics(*node);
         ImGui::BeginDisabled(panelContext.selection().selected().size()>1);

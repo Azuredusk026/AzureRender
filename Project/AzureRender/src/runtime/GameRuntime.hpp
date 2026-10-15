@@ -1,5 +1,6 @@
 #pragma once
 #include "runtime/InputActions.hpp"
+#include "runtime/camera/GameCameraService.hpp"
 #include "runtime/GameComponents.hpp"
 #include "runtime/PhysicsWorld.hpp"
 #include "runtime/ThirdPersonCamera.hpp"
@@ -37,6 +38,7 @@ public:
     bool hasCamera() const { return hasCamera_; }
     void cameraInput(float x, float y, float scroll);
     SceneDocument renderScene();
+    GameCameraSelection renderCamera();
     std::array<float,3> renderCameraPosition() const;
     std::array<float,3> renderCameraTarget() const;
 private:

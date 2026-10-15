@@ -634,8 +634,15 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
     {elapsed=game?game->advance(rawDeltaSeconds):runtime_.beginFrame(rawDeltaSeconds);if(presentationRuntime_)presentationRuntime_->update(elapsed);}
     const float deltaSeconds=static_cast<float>(elapsed);
-    if(game&&game->hasCamera()&&!qaHarnessEnabled_){
-        cameraPosition_=game->renderCameraPosition();cameraTarget_=game->renderCameraTarget();autoRotate_=false;rotationAngle_=0;
+    std::optional<azurerender::CameraViewDescriptor> gameView;
+    bool sceneViewActive=false;
+#if AZURE_WITH_EDITOR
+    sceneViewActive=runOptions_.editorSession&&runOptions_.editorSession->editCameraActive();
+#endif
+    if(game&&!qaHarnessEnabled_&&!sceneViewActive){
+        gameView=game->renderCamera().view;
+        const auto view=gameView.value_or(azurerender::CameraViewDescriptor{});
+        cameraPosition_=view.position;cameraTarget_=view.target;autoRotate_=false;rotationAngle_=0;
     }
     if(auto* presentation=activePresentation())frame.animations=presentation->animations();
 #if AZURE_WITH_EDITOR
@@ -674,6 +681,16 @@ void AzureRenderApp::buildSceneFrameData(
         effectiveRenderSettings_.cameraView=session.viewportView();effectiveRenderSettings_.cameraNear=session.viewportView().nearPlane;effectiveRenderSettings_.cameraFar=session.viewportView().farPlane;
     }
 #endif
+    azurerender::CameraViewDescriptor fallback;
+    fallback.position=cameraPosition_;fallback.target=cameraTarget_;
+    fallback.nearPlane=effectiveRenderSettings_.cameraNear;fallback.farPlane=effectiveRenderSettings_.cameraFar;
+    const auto editingView=sceneViewActive?effectiveRenderSettings_.cameraView:std::optional<azurerender::CameraViewDescriptor>{};
+    frame.camera=azurerender::selectRenderCamera(editingView,gameView,fallback);
+    effectiveRenderSettings_.cameraView=frame.camera.view;
+    effectiveRenderSettings_.cameraNear=frame.camera.view.nearPlane;
+    effectiveRenderSettings_.cameraFar=frame.camera.view.farPlane;
+    effectiveRenderSettings_.shadowDistance=std::clamp(effectiveRenderSettings_.shadowDistance,
+        frame.camera.view.nearPlane+(frame.camera.view.farPlane-frame.camera.view.nearPlane)*.001F,frame.camera.view.farPlane);
     frame.renderSettings = &effectiveRenderSettings_;
     frame.cameraPosition[0] = cameraPosition_[0];
     frame.cameraPosition[1] = cameraPosition_[1];

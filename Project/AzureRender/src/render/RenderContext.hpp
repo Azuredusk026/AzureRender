@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "render/EnvironmentAsset.hpp"
+#include "render/RenderCamera.hpp"
 #include "scene/SceneDescription.hpp"
 
 // Defined in assets/GltfLoader.hpp (global namespace).
@@ -104,6 +105,7 @@ struct SceneFrameData {
     float cameraPosition[3]{0.0F, 0.0F, 0.0F};
     float cameraTarget[3]{0.0F, 0.0F, 0.0F};
     bool cameraOverride=false;
+    RenderCamera camera;
     float rotationAngle = 0.0F;
 
     std::uint32_t qaIsolationMode = 0;

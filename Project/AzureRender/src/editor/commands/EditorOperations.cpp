@@ -1,6 +1,8 @@
 #include "editor/commands/EditRegistry.hpp"
 #include "editor/EditorSession.hpp"
 #include "runtime/ComponentRegistry.hpp"
+#include "runtime/camera/GameCameraService.hpp"
+#include "scene/SceneDescription.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #include "runtime/ProjectSettings.hpp"
 #include "editor/content/AssetCatalog.hpp"
@@ -326,6 +328,17 @@ EditRegistry editorOperations(EditorSession& session) {
         const auto category=a.at("category").get<std::string>(),policy=a.at("policy").get<std::string>();
         if(!session.viewportOverlays().contains(category)||(policy!="hidden"&&policy!="selected"&&policy!="all"))throw EditRejection("Invalid viewport helper category or visibility policy");
         session.viewportOverlayPolicies()[category]=policy;return nullptr;
+    });
+    registry.add({"viewport.camera-preview",1,schema({{"node",text}},{"node"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{
+        const auto node=a.at("node").get<std::string>();const auto data=c.componentData(node,"azure.camera");
+        if(data.is_null())throw EditRejection("Selected object has no GameCamera");
+        game::GameCamera camera;runtimeComponentRegistry().metadata().decode("azure.camera",&camera,{{"type","azure.camera"},{"version",1},{"data",data}});
+        const auto scene=c.scene().renderDescription();const auto matrices=scene::resolveNodeWorldTransforms(scene);
+        for(std::size_t i=0;i<scene.nodes.size();++i)if(scene.nodes[i].id==node){
+            const auto view=gameCameraView(camera,matrices[i]);
+            static_cast<CameraViewDescriptor&>(session.viewportView_)=view;session.viewportViewChanged_=true;return nullptr;
+        }
+        throw EditRejection("Camera owner no longer exists");
     });
     registry.add({"viewport.orientation",1,schema({{"axis",text}},{"axis"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
         auto candidate=session.viewportView_;EditorCameraService::orient(candidate,a.at("axis").get<std::string>());session.viewportView_=candidate;session.viewportViewChanged_=true;return nullptr;
