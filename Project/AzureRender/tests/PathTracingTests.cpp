@@ -1,10 +1,11 @@
 #include "render/pathtracing/TraceScene.hpp"
 #include <iostream>
+#include "assets/MaterialData.hpp"
 #include <stdexcept>
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 int main(){try{
- static_assert(sizeof(tracing::Triangle)==176);static_assert(sizeof(tracing::BvhNode)==48);static_assert(sizeof(tracing::Material)==80);
+ static_assert(sizeof(tracing::Triangle)==176);static_assert(sizeof(tracing::BvhNode)==48);static_assert(sizeof(tracing::Material)==128);
  tracing::Geometry geometry;
  for(unsigned i=0;i<17;++i)geometry.triangles.push_back({{static_cast<float>(i),0,0,0},{1,0,0,0},{0,1,0,0},{},{}});
  tracing::buildBvh(geometry);unsigned count=0;
@@ -22,5 +23,8 @@ int main(){try{
  require(distribution.size()==64,"Environment stores probability and cumulative arrays");
  require(std::abs(distribution[31]-1.F)<1e-6F,"Environment distribution integrates to one");
  float total=0;for(unsigned i=32;i<64;++i)total+=distribution[i];require(std::abs(total-1.F)<1e-5F,"Environment cell probabilities sum to one");
+ auto glass=MaterialData::defaults("azure.pbr");glass.parameters["transmission"]=1.;glass.parameters["ior"]=1.33;glass.parameters["thickness"]=.1;
+ const auto interpreted=glass.interpret([](const auto&){return std::filesystem::path();});
+ require(interpreted.transmission==1&&std::abs(interpreted.ior-1.33F)<1e-5F,"Material service retains physical transmission");
  std::cout<<"Path tracing BVH, hierarchy, visibility and atlas passed\n";return 0;
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

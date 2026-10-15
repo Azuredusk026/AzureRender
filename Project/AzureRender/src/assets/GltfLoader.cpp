@@ -839,6 +839,27 @@ AssetMaterial loadMaterial(
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
+        const auto scalar=[&](const char* extension,const char* field,float fallback){
+            const auto it=material->extensions.find(extension);if(it==material->extensions.end()||!it->second.Has(field))return fallback;
+            const auto& v=it->second.Get(field);if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble()))throw std::runtime_error("Invalid physical material field");return static_cast<float>(v.GetNumberAsDouble());};
+        result.transmission=scalar("KHR_materials_transmission","transmissionFactor",0);
+        result.ior=scalar("KHR_materials_ior","ior",1.5F);result.thickness=scalar("KHR_materials_volume","thicknessFactor",0);
+        result.attenuationDistance=scalar("KHR_materials_volume","attenuationDistance",0);
+        if(result.transmission<0||result.transmission>1||result.ior<1||result.ior>3||result.thickness<0||result.attenuationDistance<0)throw std::runtime_error("Physical material parameter outside supported range");
+        const auto volume=material->extensions.find("KHR_materials_volume");
+        if(volume!=material->extensions.end()&&volume->second.Has("attenuationColor")){
+            const auto& color=volume->second.Get("attenuationColor");if(!color.IsArray()||color.ArrayLen()!=3)throw std::runtime_error("Invalid attenuation color");
+            for(unsigned channel=0;channel<3;++channel){if(!color.Get(static_cast<int>(channel)).IsNumber())throw std::runtime_error("Invalid attenuation channel");result.attenuationColor[channel]=static_cast<float>(color.Get(static_cast<int>(channel)).GetNumberAsDouble());if(result.attenuationColor[channel]<0||result.attenuationColor[channel]>1)throw std::runtime_error("Attenuation color outside unit range");}
+        }
+        const auto transmission=material->extensions.find("KHR_materials_transmission");
+        if(transmission!=material->extensions.end()&&transmission->second.Has("transmissionTexture")){
+            const auto& info=transmission->second.Get("transmissionTexture");const int texture=info.Get("index").GetNumberAsInt();
+            if(info.Has("texCoord")&&info.Get("texCoord").GetNumberAsInt()!=0)throw std::runtime_error("Transmission requires texture coordinates zero");
+            result.transmissionPixels=decodeImageRgba(model,model.textures.at(static_cast<std::size_t>(texture)).source,{1,1,1,1},result.transmissionWidth,result.transmissionHeight,false,authored,nullptr);
+        }
+        for(const auto& extension:material->extensions)if(extension.first!="KHR_materials_transmission"&&extension.first!="KHR_materials_volume"&&extension.first!="KHR_materials_ior"&&extension.first!="KHR_materials_emissive_strength")
+            azurerender::RuntimeDiagnostics::instance().warning("asset","Unsupported material extension: "+extension.first);
+
         const auto& sourceFactor = material->pbrMetallicRoughness.baseColorFactor;
         if (sourceFactor.size() == 4) {
             std::copy(sourceFactor.begin(), sourceFactor.end(), factor.begin());
@@ -1187,6 +1208,13 @@ AssetMaterial loadMaterial(
             0, 0, 0, 255, 0, 0, 0, 255,
             0, 0, 0, 255, 0, 0, 0, 255,
         };
+    }
+    if(material&&result.emissiveStrength>0){
+        for(std::size_t i=0;i<result.specularEmissivePixels.size();++i){const unsigned channel=static_cast<unsigned>(i%4);if(channel==3)continue;
+            double value=specularEmissiveImage>=0?result.specularEmissivePixels[i]/255.:1.;value=value<=.04045?value/12.92:std::pow((value+.055)/1.055,2.4);
+            value*=material->emissiveFactor[channel]/result.emissiveStrength;value=value<=.0031308?value*12.92:1.055*std::pow(value,1/2.4)-.055;
+            result.specularEmissivePixels[i]=static_cast<std::uint8_t>(std::round(std::clamp(value,0.,1.)*255));}
+        const auto strength=material->extensions.find("KHR_materials_emissive_strength");if(strength!=material->extensions.end()&&strength->second.Has("emissiveStrength"))result.emissiveStrength*=static_cast<float>(strength->second.Get("emissiveStrength").GetNumberAsDouble());
     }
     if (styleMaskImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};

@@ -112,6 +112,10 @@ struct AssetMaterial {
     std::vector<std::uint8_t> hairDataPixels;
     std::uint32_t hairDataWidth = 0;
     std::uint32_t hairDataHeight = 0;
+    float transmission=0,ior=1.5F,thickness=0,attenuationDistance=0;
+    std::array<float,3> attenuationColor{1,1,1};
+    std::vector<std::uint8_t> transmissionPixels{255,255,255,255};
+    std::uint32_t transmissionWidth=1,transmissionHeight=1;
     float emissiveStrength = 0.0F;
     std::array<float, 4> aoColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> lamShadowColor{1.0F, 1.0F, 1.0F, 0.0F};

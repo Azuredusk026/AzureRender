@@ -20,6 +20,11 @@ MaterialTypeRegistry& MaterialTypeRegistry::builtins(){
             {"roughness",{{"type","number"},{"default",.75},{"min",0},{"max",1}}},
             {"metallic",{{"type","number"},{"default",0.},{"min",0},{"max",1}}},
             {"emissiveStrength",{{"type","number"},{"default",0.},{"min",0},{"max",32}}},
+            {"transmission",{{"type","number"},{"default",0.},{"min",0},{"max",1}}},
+            {"ior",{{"type","number"},{"default",1.5},{"min",1},{"max",3}}},
+            {"thickness",{{"type","number"},{"default",0.},{"min",0},{"max",1000}}},
+            {"attenuationDistance",{{"type","number"},{"default",0.},{"min",0},{"max",100000}}},
+            {"attenuationColor",{{"type","color"},{"default",{1.,1.,1.,1.}},{"min",0},{"max",1}}},
             {"doubleSided",{{"type","boolean"},{"default",false}}}};
         Json textures={{"albedo","albedo"},{"normal","normal"},{"metallicRoughness","roughness"},{"emissive","emissive"}};
         out.add({"azure.pbr","PBR",parameters,textures,[](AssetMaterial& result,const Json&){result.materialFeatures=0;result.styleParameters={0,0,1,0};}});
@@ -82,6 +87,8 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     result.styleMaskWidth=result.styleMaskHeight=result.matcapWidth=result.matcapHeight=result.hairDataWidth=result.hairDataHeight=1;
     result.styleMaskPixels={255,255,255,255};result.matcapPixels={255,255,255,255};result.hairDataPixels={128,128,255,255};
     result.emissiveStrength=parameters.at("emissiveStrength").get<float>();result.doubleSided=parameters.at("doubleSided").get<bool>();
+    result.transmission=parameters.value("transmission",0.F);result.ior=parameters.value("ior",1.5F);result.thickness=parameters.value("thickness",0.F);result.attenuationDistance=parameters.value("attenuationDistance",0.F);
+    if(parameters.contains("attenuationColor"))for(unsigned c=0;c<3;++c)result.attenuationColor[c]=parameters.at("attenuationColor")[c].get<float>();
     MaterialTypeRegistry::builtins().type(typeId).interpret(result,parameters);return result;
 }
 std::vector<std::string> materialSlotIds(const LoadedAsset& mesh){
