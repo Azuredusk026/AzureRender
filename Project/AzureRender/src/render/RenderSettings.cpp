@@ -176,6 +176,10 @@ void validateRenderSettings(const RenderSettings& settings) {
                 + std::to_string(maximum));
         }
     };
+    if (static_cast<std::uint32_t>(settings.sky.mode)>2) throw std::invalid_argument("Unknown sky mode");
+    requireRange(settings.sky.intensity,0.F,32.F,"sky.intensity");
+    requireRange(settings.sky.rotationDegrees,-360.F,360.F,"sky.rotationDegrees");
+    for(float value:settings.sky.color)requireRange(value,0.F,1.F,"sky.color");
     if (blackholeQualityName(settings.blackhole.quality) == "unknown") {
         throw std::invalid_argument("Unknown blackhole quality profile");
     }

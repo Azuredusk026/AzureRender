@@ -56,6 +56,15 @@ int main() {
     auto context = std::make_shared<azurerender::EditorContext>(
         azurerender::SceneDocument::fromAsset(assetPath), scenePath);
     azurerender::EditorSession session(context);
+    {
+        const auto original=context->renderSettings().sky.mode;
+        if(!session.edit("render.settings",{{"values",{{"skyMode",2},{"skyColor",{.1F,.2F,.3F}}}}})
+            ||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 81;
+        if(!session.execute(azurerender::EditorCommand::Undo)||context->renderSettings().sky.mode!=original)return 82;
+        if(!session.execute(azurerender::EditorCommand::Redo)||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 83;
+        if(session.edit("render.settings",{{"values",{{"skyMode",99}}}})||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 84;
+        if(!session.execute(azurerender::EditorCommand::Undo))return 85;
+    }
     // Returning to the saved content clears the document marker.
     context->save();
     session.edit("node.rename",{{"value","edited"}});

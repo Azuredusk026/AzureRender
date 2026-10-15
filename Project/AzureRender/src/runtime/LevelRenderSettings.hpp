@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -16,6 +16,11 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
     auto settings=target;
+    settings.sky.mode=data.value("skyMode",settings.sky.mode);
+    if(data.contains("skyColor")&&(!data.at("skyColor").is_array()||data.at("skyColor").size()!=3))throw std::invalid_argument("Sky color requires three channels");
+    settings.sky.color=data.value("skyColor",settings.sky.color);
+    settings.sky.intensity=data.value("skyIntensity",settings.sky.intensity);
+    settings.sky.rotationDegrees=data.value("skyRotation",settings.sky.rotationDegrees);
     settings.outline.silhouetteWidthPixels=data.value("outlinePixels",settings.outline.silhouetteWidthPixels);
     settings.antiAliasing=data.value("antiAliasing",settings.antiAliasing);
     settings.cameraNear=data.value("cameraNear",settings.cameraNear);

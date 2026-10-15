@@ -1,4 +1,7 @@
 #include "runtime/EngineSettings.hpp"
+#include "runtime/LevelRenderSettings.hpp"
+#include "runtime/SceneDocument.hpp"
+#include <chrono>
 #include "foundation/FramePacing.hpp"
 #include <cmath>
 #include <limits>
@@ -6,6 +9,19 @@
 using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
+    RenderSettings sky;
+    decodeLevelRenderSettings(sky,{{"skyMode",2},{"skyColor",{.1F,.2F,.3F}},{"skyIntensity",1.5F},{"skyRotation",90.F}});
+    const auto savedSky=encodeLevelRenderSettings(sky);
+    check(savedSky.contains("skyMode")&&savedSky.at("skyMode")==2,"Sky mode persists through scene settings");
+    check(savedSky.at("skyColor")==nlohmann::json({.1F,.2F,.3F}),"Solid sky color persists");
+    for(const auto& invalid:{nlohmann::json{{"skyMode",3}},nlohmann::json{{"skyIntensity",-1}},nlohmann::json{{"skyColor",{1,2}}}}){
+        bool rejected=false;try{decodeLevelRenderSettings(sky,invalid);}catch(const std::exception&){rejected=true;}
+        check(rejected&&encodeLevelRenderSettings(sky)==savedSky,"Invalid sky edit is rejected atomically");
+    }
+    auto skyScene=SceneDocument::fromAsset("test.gltf");skyScene.renderSettings=sky;
+    const auto skyFile=std::filesystem::temp_directory_path()/("azure-sky-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azscene");
+    skyScene.save(skyFile);const auto reopenedSky=SceneDocument::load(skyFile);std::filesystem::remove(skyFile);
+    check(reopenedSky.renderSettings.sky.mode==sky.sky.mode&&reopenedSky.renderSettings.sky.color==sky.sky.color,"Standalone scene sky survives save and reopen");
     SettingRegistry registry;registerEngineSettings(registry);RenderSettings render;render.grade.exposureEv=1.5F;
     check(!registry.describe().at("render.features.face-sdf").value("editorVisible",true),"Extension controls are code-owned rather than generic editor settings");
     check(registry.describe().at("render.exposure").value("editorVisible",false),"General rendering controls remain available");

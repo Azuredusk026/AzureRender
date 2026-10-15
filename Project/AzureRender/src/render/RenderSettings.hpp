@@ -93,8 +93,16 @@ struct CharacterPresentationSettings {
     bool platformEnabled = true;
 };
 
+enum class SkyMode : std::uint32_t { Procedural = 0, Environment = 1, Solid = 2 };
+struct SkySettings {
+    SkyMode mode = SkyMode::Procedural;
+    std::array<float,3> color{.035F,.045F,.065F};
+    float intensity = 1.F;
+    float rotationDegrees = 0.F;
+};
+
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 9;
+    static constexpr std::uint32_t kSchemaVersion = 10;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;
@@ -134,6 +142,7 @@ struct RenderSettings {
     GradeSettings grade;
     BlackholeSettings blackhole;
     CharacterPresentationSettings characterPresentation;
+    SkySettings sky;
 };
 
 void validateRenderSettings(const RenderSettings& settings);

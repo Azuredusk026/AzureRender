@@ -1049,25 +1049,25 @@
     {
       "id": "WC2",
       "name": "世界方向天空与纯色设置",
-      "status": "Pending",
+      "status": "Ready",
       "scope": "世界参照、相机与渲染",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
-        "WC1"
+        "VD5"
       ],
       "evidence": [
-        "docs/plans/2026-10-15-world-camera-rendering.md"
+        "docs/acceptance/wc/2026-10-15.md"
       ],
       "requiredAcceptance": []
     },
     {
       "id": "WC3",
       "name": "编辑游戏与最终渲染相机",
-      "status": "Pending",
+      "status": "Active",
       "scope": "世界参照、相机与渲染",
       "checksPassed": false,
       "dependsOn": [
-        "WC2"
+        "VD5"
       ],
       "evidence": [
         "docs/plans/2026-10-15-world-camera-rendering.md"
@@ -1081,7 +1081,7 @@
       "scope": "世界参照、相机与渲染",
       "checksPassed": false,
       "dependsOn": [
-        "WC3"
+        "VD5"
       ],
       "evidence": [
         "docs/plans/2026-10-15-world-camera-rendering.md"
@@ -1095,7 +1095,7 @@
       "scope": "世界参照、相机与渲染",
       "checksPassed": false,
       "dependsOn": [
-        "WC4"
+        "VD5"
       ],
       "evidence": [
         "docs/plans/2026-10-15-world-camera-rendering.md"

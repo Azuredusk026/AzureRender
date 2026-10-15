@@ -13,6 +13,13 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    vec4 mainLightDirection;
+    vec4 cascadeDepthRanges;
+    vec4 skyRight;
+    vec4 skyUp;
+    vec4 skyForward;
+    vec4 skyColor;
+    vec4 skyParameters;
 } camera;
 
 // The background samples the equirect environment so external HDR assets are
@@ -37,69 +44,31 @@ vec2 directionToEquirectangular(vec3 direction) {
     return vec2(u, v);
 }
 
+// Infinite sky uses orientation and projection, never camera translation.
 void main() {
-    vec2 uv = clamp(screenUv, vec2(0.0), vec2(1.0));
-    float vertical = smoothstep(0.0, 1.0, uv.y);
-    float preset = floor(camera.showcaseParameters.x + 0.5);
+    vec3 direction=normalize(camera.skyForward.xyz
+        +(screenUv.x*2.0-1.0)*camera.skyRight.xyz
+        +(1.0-screenUv.y*2.0)*camera.skyUp.xyz);
+    float angle=camera.skyParameters.z;
+    direction.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*direction.xz;
     vec3 color;
-    if (preset == 4.0) {
-        vec3 bottomColor = vec3(0.002, 0.003, 0.005);
-        vec3 topColor = vec3(0.008, 0.010, 0.014);
-        color = mix(bottomColor, topColor, vertical);
-    } else if (preset == 3.0) {
-        vec3 bottomColor = vec3(0.008, 0.012, 0.018);
-        vec3 topColor = vec3(0.024, 0.032, 0.044);
-        color = mix(bottomColor, topColor, vertical);
-        vec2 haloOffset = (uv - vec2(0.50, 0.56)) * vec2(1.0, 0.82);
-        float halo = exp(-dot(haloOffset, haloOffset) * 5.6);
-        color += vec3(0.010, 0.018, 0.030) * halo;
-    } else if (preset == 1.0) {
-        vec3 bottomColor = vec3(0.030, 0.035, 0.038);
-        vec3 topColor = vec3(0.075, 0.082, 0.086);
-        color = mix(bottomColor, topColor, vertical);
-        vec2 haloOffset = (uv - vec2(0.50, 0.51)) * vec2(0.92, 0.72);
-        float halo = exp(-dot(haloOffset, haloOffset) * 5.2);
-        color += vec3(0.050, 0.057, 0.058) * halo;
-        float floorSeparation = smoothstep(0.30, 0.44, 1.0 - uv.y);
-        color += vec3(0.010, 0.012, 0.012) * floorSeparation;
-    } else if (preset == 2.0) {
-        vec3 bottomColor = vec3(0.030, 0.034, 0.040);
-        vec3 topColor = vec3(0.080, 0.086, 0.092);
-        color = mix(bottomColor, topColor, vertical);
-        vec2 haloOffset = (uv - vec2(0.50, 0.55)) * vec2(1.0, 0.82);
-        float halo = exp(-dot(haloOffset, haloOffset) * 5.0);
-        color += vec3(0.020, 0.022, 0.024) * halo;
-    } else {
-        vec3 bottomColor = vec3(0.010, 0.016, 0.028);
-        vec3 topColor = vec3(0.038, 0.060, 0.080);
-        color = mix(bottomColor, topColor, vertical);
-        vec2 haloOffset = (uv - vec2(0.50, 0.56)) * vec2(1.05, 0.82);
-        float halo = exp(-dot(haloOffset, haloOffset) * 5.2);
-        color += vec3(0.038, 0.016, 0.028) * halo;
+    if(camera.skyParameters.x>1.5){
+        color=camera.skyColor.rgb;
+    }else if(camera.skyParameters.x>.5){
+        color=texture(AZ_TEX_ENVIRONMENT,directionToEquirectangular(direction)).rgb;
+    }else{
+        // Linear HDR colors: a warm horizon, blue zenith, muted ground and sun.
+        float elevation=max(direction.y,0.0);
+        vec3 horizon=vec3(.54,.66,.78);
+        vec3 zenith=vec3(.055,.17,.38);
+        vec3 sky=mix(horizon,zenith,pow(elevation,.45));
+        vec3 sunDirection=normalize(vec3(.48,.72,.5));
+        float alignment=max(dot(direction,sunDirection),0.0);
+        sky+=vec3(1.0,.66,.3)*pow(alignment,24.0)*.35;
+        sky+=vec3(8.0,6.4,4.5)*smoothstep(.9995,.99985,alignment);
+        vec3 ground=mix(vec3(.12,.14,.17),horizon,exp(min(direction.y,0.0)*18.0));
+        color=mix(ground,sky,smoothstep(-.025,.025,direction.y));
     }
-
-    if (camera.qaParameters.x > 0.5) {
-        color = vec3(0.018, 0.024, 0.040);
-    }
-
-    // Sample the shared HDR environment (equirect) as the backdrop. The
-    // procedural gradient above remains as a subtle tint fallback so the
-    // environment stays visible without overpowering the subject.
-    vec2 envUv = directionToEquirectangular(
-        normalize(vec3(
-            uv.x * 2.0 - 1.0,
-            uv.y * 2.0 - 1.0,
-            1.0)));
-    vec3 environmentColor = texture(AZ_TEX_ENVIRONMENT, envUv).rgb * 1.15;
-    // Endfield previously suppressed the loaded sky to 8%, making the
-    // environment indistinguishable from its procedural fallback.
-    float environmentMix = preset == 1.0 ? 0.82 : 0.88;
-    color = mix(color, environmentColor, environmentMix);
-
-    vec2 vignetteOffset = uv - vec2(0.5);
-    float vignette = smoothstep(0.20, 0.78, dot(vignetteOffset, vignetteOffset));
-    float vignetteFloor = preset == 1.0 ? 0.92 : (preset == 2.0 ? 0.82 : 0.68);
-    color *= mix(1.0, vignetteFloor, vignette);
-    outputColor = vec4(color, 1.0);
-    outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
+    outputColor=vec4(color*camera.skyParameters.y,1.0);
+    outputNormal=vec4(.5,.5,1.0,0.0);
 }

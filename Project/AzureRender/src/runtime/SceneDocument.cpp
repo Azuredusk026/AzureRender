@@ -80,6 +80,9 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "shadowDistance " << document.renderSettings.shadowDistance << '\n'
            << "outlinePixels " << document.renderSettings.outline.silhouetteWidthPixels << '\n'
            << "antiAliasing " << document.renderSettings.antiAliasing << '\n'
+           << "sky " << static_cast<unsigned>(document.renderSettings.sky.mode) << ' '
+           << document.renderSettings.sky.color[0] << ' ' << document.renderSettings.sky.color[1] << ' ' << document.renderSettings.sky.color[2] << ' '
+           << document.renderSettings.sky.intensity << ' ' << document.renderSettings.sky.rotationDegrees << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -240,6 +243,13 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         throw std::runtime_error("Missing .azscene outlinePixels");
     if(renderSettingsVersion>=9 && (!(input>>key>>document.renderSettings.antiAliasing)||key!="antiAliasing"))
         throw std::runtime_error("Missing .azscene antiAliasing");
+    if(renderSettingsVersion>=10){
+        unsigned mode=0;
+        auto& sky=document.renderSettings.sky;
+        if(!(input>>key>>mode>>sky.color[0]>>sky.color[1]>>sky.color[2]>>sky.intensity>>sky.rotationDegrees)||key!="sky"||mode>2)
+            throw std::runtime_error("Invalid .azscene sky");
+        sky.mode=static_cast<SkyMode>(mode);
+    }
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)
         || key != "innerOutlineEnabled") {

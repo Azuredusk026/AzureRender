@@ -2822,6 +2822,12 @@ void CharacterSceneRenderer::updateUniformBuffer(
 
     UniformBufferObject uniform{};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
+    const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
+    uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};
+    uniform.skyUp={cameraUp[0]*skyScale,cameraUp[1]*skyScale,cameraUp[2]*skyScale,0};
+    uniform.skyForward={cameraForward[0],cameraForward[1],cameraForward[2],0};
+    uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
+    uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };

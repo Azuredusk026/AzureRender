@@ -166,6 +166,7 @@ private:
         std::array<float, 4> faceSdfShadowColor{};
         std::array<float, 4> mainLightDirection{};
         std::array<float, 4> cascadeDepthRanges{};
+        std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
     };
 
     // Per-instance transforms uploaded to the instance storage buffer. The

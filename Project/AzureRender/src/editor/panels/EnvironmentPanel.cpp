@@ -8,6 +8,22 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
     ImGui::TextUnformatted("Scene rendering and presentation");
     ImGui::BeginDisabled(session_->playing()||session_->building());
     const RenderSettings& settings = view.renderSettings();
+    int skyMode=static_cast<int>(settings.sky.mode);
+    if(ImGui::Combo("天空背景###sky-mode",&skyMode,"程序天空\0环境贴图\0纯色\0"))
+        session_->edit("render.settings",{{"values",{{"skyMode",skyMode}}}},"sky-mode");
+    if(settings.sky.mode==SkyMode::Solid){
+        auto color=settings.sky.color;
+        if(ImGui::ColorEdit3("背景颜色###sky-color",color.data()))
+            session_->edit("render.settings",{{"values",{{"skyColor",color}}}},"sky-color");
+    }
+    float intensity=settings.sky.intensity;
+    if(ImGui::SliderFloat("天空亮度###sky-intensity",&intensity,0.F,8.F))
+        session_->edit("render.settings",{{"values",{{"skyIntensity",intensity}}}},"sky-intensity");
+    if(settings.sky.mode!=SkyMode::Solid){
+        float rotation=settings.sky.rotationDegrees;
+        if(ImGui::SliderFloat("天空朝向###sky-rotation",&rotation,-180.F,180.F,"%.0f"))
+            session_->edit("render.settings",{{"values",{{"skyRotation",rotation}}}},"sky-rotation");
+    }
     float outline = settings.outline.strength;
     if (ImGui::SliderFloat("Outline", &outline, 0.0F, 2.0F)) {
         session_->edit("render.settings",{{"values",{{"outline",outline}}}},"render-outline");
