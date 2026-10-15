@@ -31,7 +31,7 @@ vec3 sampleBsdf(vec3 n,vec3 v,vec3 albedo,float metal,float rough){
  mat3 basis=surfaceBasis(n);float spec=specularProbability(albedo,metal),trans=(1-spec)*materialTransmission*(1-metal),choice=random();
  if(choice<spec+trans){
   float a=rough*rough,u=random(),phi=2*PI*random();float c=sqrt((1-u)/(1+(a*a-1)*u));
-  vec3 h=basis*vec3(sqrt(max(0,1-c*c))*cos(phi),sqrt(max(0,1-c*c))*sin(phi),c);if(dot(v,h)<=0)return -n;
+  vec3 h=basis*vec3(sqrt(max(0,1-c*c))*cos(phi),sqrt(max(0,1-c*c))*sin(phi),c);if(dot(v,h)<=0)return vec3(0);
   if(choice>=spec){vec3 l=refract(-v,h,1/materialEta);if(length(l)>.1)return l;}
   return reflect(-v,h);
  }

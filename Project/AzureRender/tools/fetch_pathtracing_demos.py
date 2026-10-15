@@ -35,6 +35,12 @@ def fetch(output, refresh=False):
         item['sha256']=digest(data)
         return item
     with ThreadPoolExecutor(max_workers=4) as pool: lock['files']=list(pool.map(download,lock['files']))
+    if lock.get('licenseDocument'):
+        item=lock['licenseDocument'];path=output/item['path'];path.parent.mkdir(parents=True,exist_ok=True)
+        data=path.read_bytes() if path.exists() else b''
+        if digest(data)!=item['sha256']:data=request(item['url'])
+        if digest(data)!=item['sha256']:raise ValueError('License hash mismatch')
+        path.write_bytes(data)
     LOCK.parent.mkdir(parents=True,exist_ok=True)
     if refresh: LOCK.write_text(json.dumps(lock,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (output/'SOURCES.json').write_text(json.dumps(lock,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

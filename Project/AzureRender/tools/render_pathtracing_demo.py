@@ -1,5 +1,5 @@
 """Capture actual Player output at controlled sample counts without frame dumps."""
-import argparse,json,subprocess,time
+import argparse,hashlib,json,subprocess,time
 from pathlib import Path
 def run(executable,project,output,samples=(64,256,1024),seed=0,size=(640,480),denoise=False):
     project=Path(project).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
@@ -28,7 +28,14 @@ def run(executable,project,output,samples=(64,256,1024),seed=0,size=(640,480),de
     assert 'Allocator after unload: buffers=0 images=0' in result.stdout,result.stdout[-2000:]
     assert json.loads((output/'validation.json').read_text(encoding='utf-8'))['passed']
     for sample in samples:assert (output/f'captures/samples-{sample}.png').is_file()
-    record={'project':str(project),'samples':list(samples),'seed':seed,'size':size,'denoise':denoise,'seconds':time.perf_counter()-start,'validationEnabled':'Validation layer: enabled' in result.stdout,'released':True}
+    exe=Path(executable).resolve();shaderRoot=exe.parent/'shaders'
+    if not shaderRoot.is_dir():shaderRoot=exe.parent.parent/'share/AzureRender/shaders'
+    fingerprints={str(exe):hashlib.sha256(exe.read_bytes()).hexdigest()}
+    for name in ('pathtracing.comp.spv','pathtracing.frag.spv'):
+        path=shaderRoot/name;fingerprints[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
+    device=next((line.removeprefix('Selected GPU: ') for line in result.stdout.splitlines() if line.startswith('Selected GPU: ')),'unknown')
+    settings=scene['renderSettings']
+    record={'project':str(project),'samples':list(samples),'seed':seed,'size':size,'denoise':denoise,'seconds':time.perf_counter()-start,'timeScope':'process including startup and shutdown','device':device,'bounces':settings['pathTraceBounces'],'exposure':settings.get('exposure',0),'environment':{k:settings.get(k) for k in ('skyMode','skyIntensity','skyColor','skyRotation')},'fingerprints':fingerprints,'validationEnabled':'Validation layer: enabled' in result.stdout,'released':True}
     (output/'summary.json').write_text(json.dumps(record,indent=2),encoding='utf-8');print(json.dumps(record),flush=True);return record
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',required=True);p.add_argument('--project',required=True);p.add_argument('--output',required=True);p.add_argument('--samples',nargs='+',type=int,default=[64,256,1024]);p.add_argument('--seed',type=int,default=0);p.add_argument('--width',type=int,default=640);p.add_argument('--height',type=int,default=480);p.add_argument('--denoise',action='store_true');a=p.parse_args();run(a.executable,a.project,a.output,a.samples,a.seed,(a.width,a.height),a.denoise)

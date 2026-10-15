@@ -1,0 +1,564 @@
+{
+  "date": "2026-10-15",
+  "sourceBaseCommit": "fc3e2cb00fafbc311345c8a01d3b543c36a80b51",
+  "sourceFiles": {
+    "shaders\\pathtracing\\bsdf.glsl": "5a984e97b41de068dccbf916fe8e8abd1661e28af19074fafb804c32442d3d16",
+    "shaders\\pathtracing\\lighting.glsl": "8df353430daa013c71d75c847445e38233886d6f1f9af65b3af67f2caa6dff18",
+    "shaders\\pathtracing.comp": "cc34d131ec9022820cb24fdd249bc5fdfdbaece49ea8742a861be60bbf16e159",
+    "shaders\\pathtracing.frag": "c17c32ed63177a629d6e7383f0a8db002c95b84de2718ff84032c86e2d89543e",
+    "src\\render\\pathtracing\\TraceScene.cpp": "df6ecae3628826e37f5ac01637784c66e2077790814331b56cb902dbc73a9605",
+    "src\\scenes\\pathtracing\\PathTracingSceneRenderer.cpp": "1f6ab40dc3907d721f4a195981ce21949349bc41ea7af7c23ce6c639f4bc3a99",
+    "src\\assets\\GltfLoader.cpp": "d808037330b3eeedcac65c71f804d325b06cc382aea010c91c78c68028b6e63f",
+    "src\\runtime\\AssetDatabase.cpp": "5b6ff418bab872ccdb9441734878964d35dbf696eeccd0b09d90690c96847356"
+  },
+  "models": {
+    "DamagedHelmet": {
+      "raw": {
+        "project": "D:\\Project\\AzureRenderDemos\\DamagedHelmet\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": false,
+        "seconds": 16.857348300000012,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "denoised": {
+        "project": "D:\\Project\\AzureRenderDemos\\DamagedHelmet\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 16.979415799996787,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "variant": {
+        "project": "D:\\Project\\AzureRenderDemos\\DamagedHelmet\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 16.40991589999976,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "settings": {
+        "antiAliasing": 1,
+        "background": true,
+        "bloomEnabled": false,
+        "bloomStrength": 0.1599999964237213,
+        "bloomThreshold": 1.0499999523162842,
+        "cameraFar": 100.0,
+        "cameraNear": 0.10000000149011612,
+        "contrast": 1.0,
+        "diagnosticView": 0,
+        "diffuseBandThreshold": 0.4000000059604645,
+        "exposure": 0.0,
+        "faceSdf": true,
+        "faceSoftness": 0.07999999821186066,
+        "faceThreshold": 0.5,
+        "innerOutline": true,
+        "outline": 0.0,
+        "outlineColor": [
+          0.00800000037997961,
+          0.013000000268220901,
+          0.02199999988079071
+        ],
+        "outlineDepth": 0.18000000715255737,
+        "outlineNormal": 0.20000000298023224,
+        "outlinePixels": 0.800000011920929,
+        "pathTraceBounces": 10,
+        "pathTraceDenoise": true,
+        "pathTraceSamples": 256,
+        "pathTraceSeed": 0,
+        "platform": false,
+        "renderer": "pathtracing",
+        "saturation": 1.0,
+        "shadowDistance": 100.0,
+        "shadowRadius": 8.0,
+        "showcasePreset": 0,
+        "silhouetteOutline": true,
+        "skyColor": [
+          0.15000000596046448,
+          0.18000000715255737,
+          0.25
+        ],
+        "skyIntensity": 1.0,
+        "skyMode": 2,
+        "skyRotation": 0.0,
+        "styleMaskStrength": 1.0,
+        "stylized": false,
+        "tint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "toneMapping": true
+      }
+    },
+    "ABeautifulGame": {
+      "raw": {
+        "project": "D:\\Project\\AzureRenderDemos\\ABeautifulGame\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": false,
+        "seconds": 38.20543080000061,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "denoised": {
+        "project": "D:\\Project\\AzureRenderDemos\\ABeautifulGame\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 37.04240959999879,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "variant": {
+        "project": "D:\\Project\\AzureRenderDemos\\ABeautifulGame\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 25.156433600001037,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 1,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "settings": {
+        "antiAliasing": 1,
+        "background": true,
+        "bloomEnabled": false,
+        "bloomStrength": 0.1599999964237213,
+        "bloomThreshold": 1.0499999523162842,
+        "cameraFar": 100.0,
+        "cameraNear": 0.10000000149011612,
+        "contrast": 1.0,
+        "diagnosticView": 0,
+        "diffuseBandThreshold": 0.4000000059604645,
+        "exposure": 0.0,
+        "faceSdf": true,
+        "faceSoftness": 0.07999999821186066,
+        "faceThreshold": 0.5,
+        "innerOutline": true,
+        "outline": 0.0,
+        "outlineColor": [
+          0.00800000037997961,
+          0.013000000268220901,
+          0.02199999988079071
+        ],
+        "outlineDepth": 0.18000000715255737,
+        "outlineNormal": 0.20000000298023224,
+        "outlinePixels": 0.800000011920929,
+        "pathTraceBounces": 10,
+        "pathTraceDenoise": true,
+        "pathTraceSamples": 256,
+        "pathTraceSeed": 0,
+        "platform": false,
+        "renderer": "pathtracing",
+        "saturation": 1.0,
+        "shadowDistance": 100.0,
+        "shadowRadius": 8.0,
+        "showcasePreset": 0,
+        "silhouetteOutline": true,
+        "skyColor": [
+          0.15000000596046448,
+          0.18000000715255737,
+          0.25
+        ],
+        "skyIntensity": 1.0,
+        "skyMode": 2,
+        "skyRotation": 0.0,
+        "styleMaskStrength": 1.0,
+        "stylized": false,
+        "tint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "toneMapping": true
+      }
+    },
+    "TransmissionRoughnessTest": {
+      "raw": {
+        "project": "D:\\Project\\AzureRenderDemos\\TransmissionRoughnessTest\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": false,
+        "seconds": 14.632311200002732,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "denoised": {
+        "project": "D:\\Project\\AzureRenderDemos\\TransmissionRoughnessTest\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 15.189261400002579,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "variant": {
+        "project": "D:\\Project\\AzureRenderDemos\\TransmissionRoughnessTest\\project.azureproject",
+        "samples": [
+          256
+        ],
+        "seed": 0,
+        "size": [
+          640,
+          480
+        ],
+        "denoise": true,
+        "seconds": 14.555901799998537,
+        "timeScope": "process including startup and shutdown",
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bounces": 10,
+        "exposure": 0.0,
+        "environment": {
+          "skyMode": 2,
+          "skyIntensity": 1.0,
+          "skyColor": [
+            0.15000000596046448,
+            0.18000000715255737,
+            0.25
+          ],
+          "skyRotation": 0.0
+        },
+        "fingerprints": {
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\bin\\AzurePlayer.exe": "fb38f7d1dad0011bd7cc66b9cb0becb22bd4b54c7da0ead1503ac356819066d7",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.comp.spv": "9c11d890e40e1a452e98307471088e1771893e85ce7f0a5be33d3ab8ac2c5bc6",
+          "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ux-2026-10-14\\Engine\\share\\AzureRender\\shaders\\pathtracing.frag.spv": "9aeafc7f6e98e1bc7954ded8afa1699be5c0ad9bf2da477bac8ca43119e22fdc"
+        },
+        "validationEnabled": false,
+        "released": true
+      },
+      "settings": {
+        "antiAliasing": 1,
+        "background": true,
+        "bloomEnabled": false,
+        "bloomStrength": 0.1599999964237213,
+        "bloomThreshold": 1.0499999523162842,
+        "cameraFar": 100.0,
+        "cameraNear": 0.10000000149011612,
+        "contrast": 1.0,
+        "diagnosticView": 0,
+        "diffuseBandThreshold": 0.4000000059604645,
+        "exposure": 0.0,
+        "faceSdf": true,
+        "faceSoftness": 0.07999999821186066,
+        "faceThreshold": 0.5,
+        "innerOutline": true,
+        "outline": 0.0,
+        "outlineColor": [
+          0.00800000037997961,
+          0.013000000268220901,
+          0.02199999988079071
+        ],
+        "outlineDepth": 0.18000000715255737,
+        "outlineNormal": 0.20000000298023224,
+        "outlinePixels": 0.800000011920929,
+        "pathTraceBounces": 10,
+        "pathTraceDenoise": true,
+        "pathTraceSamples": 256,
+        "pathTraceSeed": 0,
+        "platform": false,
+        "renderer": "pathtracing",
+        "saturation": 1.0,
+        "shadowDistance": 100.0,
+        "shadowRadius": 8.0,
+        "showcasePreset": 0,
+        "silhouetteOutline": true,
+        "skyColor": [
+          0.15000000596046448,
+          0.18000000715255737,
+          0.25
+        ],
+        "skyIntensity": 1.0,
+        "skyMode": 2,
+        "skyRotation": 0.0,
+        "styleMaskStrength": 1.0,
+        "stylized": false,
+        "tint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "toneMapping": true
+      }
+    }
+  },
+  "scope": {
+    "main": "Release NVIDIA 640x480 256 samples 10 bounces",
+    "convergence": "Debug NVIDIA raw 320x240 seeds 0/1/2, 64/256/1024 samples",
+    "intel": "Release 320x240 8 samples and independent moved packages",
+    "input": "Production editor command service; physical keyboard and mouse not claimed"
+  },
+  "evidenceHashes": {
+    "pt6-editor-stable.json": "625fd371e7187ee53712f44dfa3b08429cf94b2b97587b39cbdd43d5b0b356dd",
+    "pt7-comparisons.json": "4a5a6359a58a0bf69fb96f56e593e0ad6cc16fbfa9f711822dda019ac311e804",
+    "pt7-convergence.json": "6690d3b01b29d8d519cc288a17a5d2b4a655d30f1cee5c5426b5a2fb3b2c4024",
+    "pt7-delivery.json": "b003a2f8dd599a4644f7134a0914c017f5fedaafafbd832dce4a47d8bf4f8981",
+    "pt7-final-validation.json": "2983cada17f50062c5b347da98897516041bf3fa7c41974c00721b67ad4e1eea",
+    "pt7-modes.json": "ac73492671137cb994092a1386df601b50b69cbb75367b7286abda3c82fda54e",
+    "pt7-packaged-intel.json": "957fa3c701aafc18d203ad0ca24a17c1fa08f63e0dd51f7b07d8ae59d43acad5",
+    "pt7-project-boundaries.json": "c9ddf4ef61558b00ab1d899259f7a62dab409321fd239cf72b9cd6ad92bb9f29",
+    "sources.json": "586d507144c8d30f245c23cd6bc347571b7b041ff80b0e58cb4ac5394fbd57fc",
+    "ABeautifulGame\\comparison.png": "f6e34762230ab157c9da70275f9a94aefcce932d4f78f211c15cceb0fd469663",
+    "ABeautifulGame\\denoised-runtime.json": "2b04f6e4699b39ed855a5708191662fc21ffb9005b90a24321f2d6428ad2ec9d",
+    "ABeautifulGame\\denoised.png": "945800d7295b157e2d876e9e92f2bc774aa2edb4dbabec99ee14d5d679c3e7c9",
+    "ABeautifulGame\\editor.json": "f71fca839d90b63c2b043e0e80249be2d96906e22804b71f89bd71febfdd22a5",
+    "ABeautifulGame\\editor.log": "b5f75939ff3e477e14140fd69e318b2e403bbbed620fc41b84f76a2bbde8be66",
+    "ABeautifulGame\\game_manifest.json": "0b03dedf6e7089337efebef6a711d4798f3a95181f05918b1dc2fe820eb2184b",
+    "ABeautifulGame\\intel.log": "1c2eac9ce1771d7828c3689c48f977594bebcd5ca0241b841d0226b7b1c7a45a",
+    "ABeautifulGame\\packaged-intel.log": "cae73a8d869b82d47a20ab108cde964e3000ba7ee6fdac4c84bd3dd681652384",
+    "ABeautifulGame\\raw-runtime.json": "ac3a78059bde40d5b0a9c46e8d67237fb5ea67f63990c0ab873def9b4f5dc7ab",
+    "ABeautifulGame\\raw-seed0-1024.png": "619fa61f9b0616f06c446849ead063bb9180a913e271a63c7ae37c0588f1536c",
+    "ABeautifulGame\\raw-seed0-256.png": "ce757a9d3eaa9bd4b8d810f48d3b0906b201314038dbf47a98442c1316b8a822",
+    "ABeautifulGame\\raw-seed0-64.png": "c04598677536148e002af439a736296f24721f50ff1e8d85a4bd8d17ca291ea7",
+    "ABeautifulGame\\raw.png": "9f3d273a61b34760bf77f69cb9b7ba2ea80f4d6f2a3f2429a0c1b26690f67104",
+    "ABeautifulGame\\standalone.json": "ca896c61ac316b413c7aea21967461304ef0d4a30c4ad8ba9347d7fc9b5015e5",
+    "ABeautifulGame\\standalone.log": "b1673df5a8baff2d430bcd02a2897c185c769d3f60411aafdd8539c26c3e2f91",
+    "ABeautifulGame\\variant.png": "575401187f51693af89a302336e8e6d6a6202aa0d6872d98c588f84a19b5763c",
+    "checks\\pt7-cpu.log": "a888ee92afab040efef0e2761e6b43c5fb9792f5272adb370d64d0110301395b",
+    "checks\\pt7-debug-asset-isolation.log": "01a68ed0695d235e388f819e1da69e3e316c2b68455d8267fc28b661a3a8801a",
+    "checks\\pt7-debug-assets-final.log": "d4e3f2a3b738ebb0d1e600a4eef3d7e7cb4e36b7174a20584e5cb7dbe0f3d576",
+    "checks\\pt7-debug-delivery-build.log": "5251e83fdf1e12cb4ba48a752c5bf10838685fc39c3f052adf08c0e0eb8b904d",
+    "checks\\pt7-denoise-build.log": "2a0797d466e6431b7cfb2a5e713a2402fdd4241165fd363b790746fa63c3f249",
+    "checks\\pt7-release-asset-isolation.log": "56545ed983d3f607c0fe08150191bd7cd9683b1b8a71472ccd562cb1483d5b60",
+    "checks\\pt7-release-assets-final.log": "214fce5fbf3cd616893c6f38dc14a34ea0d08db46013bdeb55aca3923364ced9",
+    "checks\\pt7-release-cpu-full.log": "5985ad6e1abc783ced5429b114dff6d8806016231e62bb6cb90c699119411952",
+    "checks\\pt7-release-delivery-build.log": "722cb15a1c30112bd8f2f4a40b7f2e9b383bdb3901835e396799ad0c3ffedb70",
+    "checks\\pt7-scale-detail.log": "424260f3b8f27e085b05b1e6f5ecbed58e27ea5f289916a99d056ed4083cd4d5",
+    "checks\\pt7-scale-fixed.log": "7cf941b896476aced2930b87fb88df34b59a4b9034e250415222d30c16bab673",
+    "checks\\pt7-scale.log": "1f7771a01c7535b5ffd448c60ce7cb251d077e2a523e198e84f13898d7c43490",
+    "DamagedHelmet\\comparison.png": "e059d26fc5ad3c3ba88107112a54a9f2546e2d43d9a54f58c257c816b56d703e",
+    "DamagedHelmet\\denoised-runtime.json": "ee90dfc4d39e07267b16153a490bb80bf134f403ca4eaf4c9b01860369b2c5aa",
+    "DamagedHelmet\\denoised.png": "a8d46094951e19d1f16a77f9f49edd03875a55d9c23d0a2c2e5f49997c0e3a4f",
+    "DamagedHelmet\\editor.json": "7e111a8a4d589e7ff040d495db1752c689850c7a8111170d5852412d84d2ad26",
+    "DamagedHelmet\\editor.log": "3e2d701e4c0c596e2ed87ccc3dd0e12ae643d4bf7da06c65f016e88b2bfc33a7",
+    "DamagedHelmet\\game_manifest.json": "8f3ebd46b91578bf89239d1fcb622f39f51562c105e83ea4aea29ff046e11bec",
+    "DamagedHelmet\\intel.log": "153b9a402a11fe2b35ff1268a2e4937a077a2bed2a9c6e7a4990306cd80e027a",
+    "DamagedHelmet\\packaged-intel.log": "0e010151e8b6e01d2194e21c16bc84759e527bf3a9cb9864e382136a76e74ff5",
+    "DamagedHelmet\\raw-runtime.json": "3e8381a10316386bb18108a5fbc282026b10c79855536a98a8bf282e1879422d",
+    "DamagedHelmet\\raw-seed0-1024.png": "0b08706c2dfc63e681e7eb6bf6a47de55c9d10d033fb5961a3eed77e8a5b3aa8",
+    "DamagedHelmet\\raw-seed0-256.png": "0c6ae303ac193a6b16b1549ff7b4c6885128f4494a9f4d07f03687770ada6a32",
+    "DamagedHelmet\\raw-seed0-64.png": "ac7337a1a1339fb8a8527487a439c56edbb3f60bbc809dd96683da485c20338b",
+    "DamagedHelmet\\raw.png": "c19ca530d14cb0083eeb7103c158defa085403de8b3a02b524fe0903944088d8",
+    "DamagedHelmet\\standalone.json": "e641644622d31c68e7a99d3ce438735d8fef11de4aeac6c668acae0fdcaee4f1",
+    "DamagedHelmet\\standalone.log": "9920635544990fd3b31e5ea683eb88f8f9e43cf66d94367ec7893f75f3348aeb",
+    "DamagedHelmet\\variant.png": "d5c872683b8c288a68d34a5bc7a6ea8e66e23bc11b982dad686885719d193983",
+    "TransmissionRoughnessTest\\comparison.png": "f9305773e2f1bf94c2af0307d341e009452105fe9e0e3dab251716b903cb0462",
+    "TransmissionRoughnessTest\\denoised-runtime.json": "64576716376ce44a9244828100f976299e7bba8980b8aba4234b15a9796fe6b0",
+    "TransmissionRoughnessTest\\denoised.png": "1ce4f25e145781a3e2afa3ad4d495e2174175a440ace67644d2dc9fd22d50487",
+    "TransmissionRoughnessTest\\editor.json": "7cde50810cfd2db9b97777cecf557d7d774c52d0b880d80bf2369acecd404695",
+    "TransmissionRoughnessTest\\editor.log": "b1e91eeafd5981fc5337dc085759c4579009fddc36d98258d33d9df9b912fc09",
+    "TransmissionRoughnessTest\\game_manifest.json": "88310e37a93cb5e0105594859250753a90124bb94b79f2ddaaa862e1dde6332c",
+    "TransmissionRoughnessTest\\intel.log": "8f223891a82d3b11fbbb7d0c91688b40c22002aaf97c0746bcc5c34811d60ed6",
+    "TransmissionRoughnessTest\\packaged-intel.log": "a398c90ff0b047f07af1e51ba93a296f748fd0d3c5d95e4234cd80087549be62",
+    "TransmissionRoughnessTest\\raw-runtime.json": "03431fc5db3c5ebeff5252f9c466b449ea9df33a04e86fa07f325f3a743d45fc",
+    "TransmissionRoughnessTest\\raw-seed0-1024.png": "ac7e1acd8835c469fa348ab81eb6b84cf314fdfb032a6cd4289bd836b1b87662",
+    "TransmissionRoughnessTest\\raw-seed0-256.png": "6a40fe07922f084b915c532748f634dd8b09d4cf24b69ecd14a73a41315a23f2",
+    "TransmissionRoughnessTest\\raw-seed0-64.png": "567eff9262e401abe5bb27404f2bf02ab580597e8954b017fa03f9c665e7511f",
+    "TransmissionRoughnessTest\\raw.png": "de3e9b7a7fd3d1cb44221ec119c039b4666c0f6de7f3043f9149b9db6aeb33d7",
+    "TransmissionRoughnessTest\\standalone.json": "6cb9fc6ab568b6a642f263c516463401042d51df1a4cf86929e37a533347a270",
+    "TransmissionRoughnessTest\\standalone.log": "2499728e90d74c2700b6973ddba79193f77ae89fa19fc5c4825419a7afbd2caf",
+    "TransmissionRoughnessTest\\variant.png": "ecc03a96c3643f14864021b201b9b07dc0d95a4a78f9bcc0155441a3775b76f5"
+  }
+}

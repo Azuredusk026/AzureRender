@@ -1,0 +1,20 @@
+{
+  "DamagedHelmet": {
+    "effect": "mirrored-lighting",
+    "meanAbsoluteDifference": 0.08393303206699344,
+    "samples": 256,
+    "denoise": true
+  },
+  "ABeautifulGame": {
+    "effect": "single-bounce",
+    "meanAbsoluteDifference": 0.08032658462690632,
+    "samples": 256,
+    "denoise": true
+  },
+  "TransmissionRoughnessTest": {
+    "effect": "opaque-materials",
+    "meanAbsoluteDifference": 0.017927525871459692,
+    "samples": 256,
+    "denoise": true
+  }
+}

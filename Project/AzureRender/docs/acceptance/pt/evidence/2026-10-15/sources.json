@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "repository": "KhronosGroup/glTF-Sample-Assets",
+  "commit": "edc7c9e67c639d230715049ee31f9a96a6babbbe",
+  "models": [
+    "DamagedHelmet",
+    "ABeautifulGame",
+    "TransmissionRoughnessTest"
+  ],
+  "files": [
+    {
+      "path": "Models/ABeautifulGame/LICENSE.md",
+      "bytes": 932,
+      "sha256": "2f2bdb47880dcffc73bf532c69d48863c081708adc5f870ad21cfff6d7b9363e"
+    },
+    {
+      "path": "Models/ABeautifulGame/README.md",
+      "bytes": 3783,
+      "sha256": "35b650cc930a9c86de184f28e973e5122e26a0c20b88175e7c362e1faf97596b"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/ABeautifulGame.bin",
+      "bytes": 10829440,
+      "sha256": "727eea28752b2b0c35cad89e726f0bc6a1800c3fa8696867ccf3d0c39933f5fb"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/ABeautifulGame.gltf",
+      "bytes": 46214,
+      "sha256": "2e1b63ae34173c6e3251f749b1b8b97a32e92517aab2cfd4bfffd9158f4dd278"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_black_ORM.jpg",
+      "bytes": 630950,
+      "sha256": "2e02bf8975c9d0585b1b0a4fbb0448b99a20ce888b8065d37d71d2a6bb26a869"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_black_base_color.jpg",
+      "bytes": 403990,
+      "sha256": "3ebe3fe7859d6ae50327033fd4cb61253e81f2441baa3ae752edf309b7491973"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_black_normal.jpg",
+      "bytes": 850400,
+      "sha256": "243ed45b4e752f1dd6aa67673239afc8d54ce821ce081d1c8f8d8b877f4c5a3c"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_white_ORM.jpg",
+      "bytes": 622771,
+      "sha256": "08fa51b364f6a4484bec3c9e1e3ce8cd0371d0959f38799acbde06e9b910806d"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_white_base_color.jpg",
+      "bytes": 361127,
+      "sha256": "f1df1e4b755e95741a4170c73281fb5532394026f2683e5bd5478af053a4c40a"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Bishop_white_normal.jpg",
+      "bytes": 673915,
+      "sha256": "ffe7997b80f831d099d386483fe195beeee1ff37a11e5e95dad5a830975ec312"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Castle_ORM.jpg",
+      "bytes": 1371413,
+      "sha256": "1e00bd2b6cc122da8fb77f4bf5db590ec10cea609719a334518b6cae7f416d0c"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Castle_black_base_color.jpg",
+      "bytes": 394527,
+      "sha256": "025fdde8ae3a97c8d430e1ca2539acc36d071886ed4ff7c0396751094031b479"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Castle_normal.jpg",
+      "bytes": 491396,
+      "sha256": "91342101f6e3fdced973c247165d4e244c4410e647a524d23a763b122e9881ed"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Castle_white_base_color.jpg",
+      "bytes": 334252,
+      "sha256": "56aa97849639f9e5def51dd55edd1550038ec31cdd3a362060258ffa526b60ca"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Chessboard_ORM.jpg",
+      "bytes": 582751,
+      "sha256": "18c357a7aa4beac43c604ebd73dca129e0db505adc74c19dfd3767f8df3d51c5"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Chessboard_base_color.jpg",
+      "bytes": 529405,
+      "sha256": "31a0a9e3d82958f310ec6c817f13968bdddab4efe5b612d471b1c6177156a0a6"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Chessboard_normal.jpg",
+      "bytes": 727372,
+      "sha256": "b496ad48f281a4ccbcf2b08378ac4693f21c3942e34340e9cbcd8bec18765bc1"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_black_ORM.jpg",
+      "bytes": 782417,
+      "sha256": "e77a83078879b7068420d2f7ad76a02c3fc78bcf752e82e037754a242895f3da"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_black_base_color.jpg",
+      "bytes": 366216,
+      "sha256": "68d65ffad3ddae474e17a7c028c0ec65af0a15b0a46a5fb03b856eb40f8fe725"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_black_normal.jpg",
+      "bytes": 764089,
+      "sha256": "2fdf5d40f38cac95175f2e685476e28f12c7e0555fb4345df34cc05420cef66e"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_white_ORM.jpg",
+      "bytes": 822486,
+      "sha256": "a9b0bde70cc75d7763dd658a2d5f26f9edb2739f453a88291071e20111b4581c"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_white_base_color.jpg",
+      "bytes": 395138,
+      "sha256": "f64a03112150d2e55bf716b11467a18cf30cab799f9081c2236b8f4ff668fa53"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/King_white_normal.jpg",
+      "bytes": 961725,
+      "sha256": "9e9630daee38e7eb3e7188540a1a7be1f49187a13cd4b72588ec709f53ce0cea"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Knight_ORM.jpg",
+      "bytes": 350946,
+      "sha256": "64db87cfd2c2b31400248035817da7fc6e88e58f27ee02b540283e3aa38afc8e"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Knight_black_base_color.jpg",
+      "bytes": 244999,
+      "sha256": "68db3a457ad7d7e2c6ef19320614cb0976038a9b5d10dc596ef9fa8e0efe71ff"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Knight_normal.jpg",
+      "bytes": 215780,
+      "sha256": "28d817c0e3179b1bd76c99a8b634ab17cbdd55b9594ef4ec5843ff8cb2811f9f"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Knight_white_base_color.jpg",
+      "bytes": 395645,
+      "sha256": "89ab1100fce0e724249e433cdf4089a3edfdcd4d9aec9f14ba44f83b7284181e"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Pawn_ORM.jpg",
+      "bytes": 792174,
+      "sha256": "bb7ac27d4b650cf533e398e0477c9fbf129846d566e706d76146cdb947c3f17a"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Pawn_black_base_color.jpg",
+      "bytes": 315179,
+      "sha256": "e3a42ac61d090cf23b5722e20b8b993f087ca09689500b74dde61c8a28899e26"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Pawn_normal.jpg",
+      "bytes": 750313,
+      "sha256": "c1e2e201efcdc9184da793f6fe98bc54dace592274842dd7e42427a9294277c3"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Pawn_white_base_color.jpg",
+      "bytes": 303807,
+      "sha256": "46153b809dfcc35f1a3c3508310a25dc423062204e95b328dddd420cb3d60952"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_black_ORM.jpg",
+      "bytes": 741172,
+      "sha256": "4df982f977eae6da3239e9e7a02534633f07473010025cd742d55ad4d85976ca"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_black_base_color.jpg",
+      "bytes": 295346,
+      "sha256": "26132e8fb23808295c7d77fedf1e760730d097d138e66a5947e0cc3a7f9302ed"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_black_normal.jpg",
+      "bytes": 777060,
+      "sha256": "b2dfb93933b47ff4589eca6acd8c96b9b17521e024060e7e0fca1a7f95a9401e"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_white_ORM.jpg",
+      "bytes": 709227,
+      "sha256": "07fba609ee23a02ea22a3d1f6d76df87a0cfa8eca5bc38ddbe7a1258d7448b33"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_white_base_color.jpg",
+      "bytes": 309191,
+      "sha256": "2cc4b5295ff58d920cc23c13ee089821e193f6006c966af395824fc1c94ce4e0"
+    },
+    {
+      "path": "Models/ABeautifulGame/glTF/Queen_white_normal.jpg",
+      "bytes": 662916,
+      "sha256": "5270859cd49784272da97b92d9aeef4d6008033d654014b34328c7ea961cb282"
+    },
+    {
+      "path": "Models/ABeautifulGame/metadata.json",
+      "bytes": 1065,
+      "sha256": "80070530e19cba44b46bc0655ec94a2c67683d773697c9f17e3e5f5faffc4a91"
+    },
+    {
+      "path": "Models/DamagedHelmet/LICENSE.md",
+      "bytes": 951,
+      "sha256": "9ee9b071d55c4529173af454db46811b631de2f37182e58106e21865366cf865"
+    },
+    {
+      "path": "Models/DamagedHelmet/README.md",
+      "bytes": 1481,
+      "sha256": "dcc3f92c30a2e6f3a9dadae2ba9c759bdd7e0e29e41fc3c6fc68f682962b3eec"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/DamagedHelmet.bin",
+      "bytes": 558504,
+      "sha256": "61b33ead6aa3de23f39f02aaf0965bc3988575716a768f45b15d5ea3fb783fdf"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/DamagedHelmet.gltf",
+      "bytes": 4537,
+      "sha256": "efe99dfac198094a30c71dc02a4d3421f0eef6bf335aeb695daa4d62134cd93f"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/Default_AO.jpg",
+      "bytes": 361678,
+      "sha256": "7024051b65ed2ead8d24ebc9bd5ea61d4c21639a57b15dab29870668bcc6b90f"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/Default_albedo.jpg",
+      "bytes": 935629,
+      "sha256": "2dc95e87aeb0cd7c8a65ef0eb8b23212388da0534ca379811427a9a8780511f5"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/Default_emissive.jpg",
+      "bytes": 97499,
+      "sha256": "dd0057989f22f93a4ab796d06ebf85a7c12fbfae1d59a86ae8b0c54770dc1159"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/Default_metalRoughness.jpg",
+      "bytes": 1300661,
+      "sha256": "0f05e7ffbeaa974f7d2c83436b04109969966d64ab188cbc3a19a265a0a69ae0"
+    },
+    {
+      "path": "Models/DamagedHelmet/glTF/Default_normal.jpg",
+      "bytes": 517757,
+      "sha256": "f253ba09a90a86ffd8a807dc45d7953111f8b3421e15d7a21d1e915b01dd33c1"
+    },
+    {
+      "path": "Models/DamagedHelmet/metadata.json",
+      "bytes": 1109,
+      "sha256": "73c246a446390b1ced28f4c5685407415b6ccaad3d23ef9ece9c2e09d7f4ebf1"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/LICENSE.md",
+      "bytes": 795,
+      "sha256": "c123f42eb1ceabe4e771e0903f9a45287b3b0e0e602d27a5c0c9ebf47eb10e23"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/README.md",
+      "bytes": 6118,
+      "sha256": "88122c600c28fcdaa18e3815c10397bea357cf1b411115557805458b0d6af4ed"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/GridWithDetails.png",
+      "bytes": 27613,
+      "sha256": "6994d6799c1bb3883456e32d290ebdbf4d06e69ceda0b8159a87047f4cc486d8"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/IOR_Labels.png",
+      "bytes": 21200,
+      "sha256": "21559e79c4345d385a0eb91aecafecadc5842bda24b94ae22e6251f34e3d3bb1"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/RoughnessGrid-1.png",
+      "bytes": 290,
+      "sha256": "23ce73e3ddb30ccf2a6dbfef24494a0602e1f6ae014ff88cde0400897ce601af"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/RoughnessGrid.png",
+      "bytes": 184,
+      "sha256": "1a09a25a3e888fc3ff0e12d3ad7add59b34a3405019e6c3a1c788a287dd854c8"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/SmoothVsRough.png",
+      "bytes": 5285,
+      "sha256": "a90c26700a8b213c576e7a55ada714d99589998c94fda8f95a016446ab2f7aa3"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/TransmissionRoughnessTest.bin",
+      "bytes": 331712,
+      "sha256": "2090e0f5c32c736424ea8795d0bbf70825bb2aeedc0716401b8701c9feb46c2e"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/glTF/TransmissionRoughnessTest.gltf",
+      "bytes": 18102,
+      "sha256": "6c944a996eff0f34c5f7f1145bbe7c52d358ffd1f3a94d579b261f7f78e6b7f2"
+    },
+    {
+      "path": "Models/TransmissionRoughnessTest/metadata.json",
+      "bytes": 702,
+      "sha256": "298d81b528e141f2c363ca5fbe2a41dc95f84bb6394d215d6d82e9767b7cbd55"
+    }
+  ],
+  "licenseDocument": {
+    "path": "LICENSES/CC-BY-4.0.txt",
+    "sha256": "c8041334a99cb48852b2139253cbde5f8ac87e27f124aed51223e0d5bf0080eb",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/edc7c9e67c639d230715049ee31f9a96a6babbbe/LICENSES/CC-BY-4.0.txt"
+  }
+}

@@ -17,6 +17,8 @@ int main(){try{
  scene::SceneDescription scene;scene.nodes.push_back({"parent","","",{10,0,0}});scene.nodes.push_back({"child","triangle","parent",{0,2,0}});
  auto output=tracing::buildGeometry(scene,meshes,{});require(output.triangles.size()==1&&output.triangles[0].p0[0]==10&&output.triangles[0].p0[1]==2,"Hierarchy transforms reach tracing geometry");
  require(output.triangles[0].n0[1]>.99F,"Interpolated vertex normals reach tracing geometry");
+ scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
+ require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");
  std::vector<unsigned> pixels;auto texture=tracing::appendTexture(pixels,{255,128,0,255},1,1,true);require(pixels[0]==0xff0080ff&&texture[3]==1,"Texture channel order and color space");
  bool rejected=false;try{tracing::appendTexture(pixels,{},1,1,false);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"Malformed texture rejected");

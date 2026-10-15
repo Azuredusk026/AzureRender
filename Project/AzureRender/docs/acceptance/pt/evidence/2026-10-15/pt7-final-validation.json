@@ -1,0 +1,15 @@
+{
+  "project": "D:\\Project\\AzureRenderDemos\\DamagedHelmet\\project.azureproject",
+  "samples": [
+    8
+  ],
+  "seed": 0,
+  "size": [
+    320,
+    240
+  ],
+  "denoise": true,
+  "seconds": 7.027137999997649,
+  "validationEnabled": true,
+  "released": true
+}

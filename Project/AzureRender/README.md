@@ -1,7 +1,9 @@
 # AzureRender 工程
 
-下一轮范围见[路径追踪补齐与公开演示计划](docs/plans/2026-10-15-pathtracing-completion.md)。
-PT0 为 Ready，三个公开素材演示在 PT7 集中验收。
+三个公开模型工程已交付，支持编辑、保存和独立发布。
+PT0 至 PT7 已完成，历史 P8 待项按原清单维护。
+打开方法见[公开光追演示](docs/tutorials/public-pathtracing-demos.md)。
+本轮范围见[路径追踪实施计划](docs/plans/2026-10-15-pathtracing-completion.md)。
 WC1 至 WC6 完成，安装入口与演示项目已更新。
 操作步骤见[世界参照、相机与路径追踪](docs/tutorials/world-camera-rendering.md)。
 

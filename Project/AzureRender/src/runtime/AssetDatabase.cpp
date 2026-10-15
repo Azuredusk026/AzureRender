@@ -155,6 +155,9 @@ void cache(const std::filesystem::path& path, const AssetRecord& record) {
 }
 }
 std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<void()> check) {
+    // Patterns are immutable and shared across scans, including concurrent
+    // project planners. Compiling them per asset scales with directory size.
+    static const std::regex uuidPattern("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
     statistics_={};
     std::map<std::string, AssetRecord> candidate;
     std::map<std::string, Json> metadata;
@@ -185,7 +188,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             else { meta = {{"schemaVersion", 1}, {"id", uuid()}, {"settings", Json::object()}, {"dependencies", Json::array()}}; write(sidecar, meta.dump(2)); }
             if (!meta.at("schemaVersion").is_number_integer() || meta.at("schemaVersion") != 1) throw std::runtime_error("Unsupported asset metadata version");
             const auto id = meta.at("id").get<std::string>();
-            if (!std::regex_match(id, std::regex("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")))
+            if (!std::regex_match(id, uuidPattern))
                 throw std::runtime_error("Invalid asset UUID: " + sidecar.u8string());
             if(meta.value("settings",Json::object()).contains("texture")) {
                 const auto settings=TextureImportSettings::parse(meta.at("settings").at("texture"));

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+#include <chrono>
 #ifdef _WIN32
 #ifndef NOMINMAX
 #define NOMINMAX
@@ -14,8 +15,10 @@ using namespace azurerender;
 void check(bool value) { if (!value) throw std::runtime_error("Asset/level contract failed"); }
 void write(const std::filesystem::path& p,const std::string& data) { std::ofstream(p) << data; }
 int main() {
- auto root=std::filesystem::temp_directory_path()/"azure_asset_level_tests";
- std::filesystem::remove_all(root);
+ const auto token=std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
+ auto root=std::filesystem::temp_directory_path()/("azure_asset_level_tests-"+token);
+ for(unsigned attempt=0;!std::filesystem::create_directory(root);++attempt)
+     root=std::filesystem::temp_directory_path()/("azure_asset_level_tests-"+token+"-"+std::to_string(attempt));
  try {
   Project::create(root,"Assets");auto project=Project::load(root/"project.azureproject");
   write(root/"assets/data.txt","first");AssetDatabase db(project);db.refresh();

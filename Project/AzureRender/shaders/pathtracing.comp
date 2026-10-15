@@ -78,7 +78,7 @@ vec3 trace(vec3 origin,vec3 direction){
   if(materialTransmission>.999&&abs(materialIor-1)<1e-5){previousDelta=true;previous=position;origin=position+direction*.001;continue;}
   result+=throughput*directLighting(position,ng,n,-direction,albedo,clamp(surface.b,0,1),max(.045,surface.g));
   float metal=clamp(surface.b,0,1),rough=max(.045,surface.g);vec3 v=-direction;
-  direction=sampleBsdf(n,v,albedo,metal,rough);
+  direction=sampleBsdf(n,v,albedo,metal,rough);if(dot(direction,direction)<.5)break;
   float pdf=bsdfPdf(n,v,direction,albedo,metal,rough);if(pdf<=0)break;
   throughput*=evaluateBsdf(n,v,direction,albedo,metal,rough)*abs(dot(n,direction))/pdf;
   bool transmitted=dot(ng,direction)<0;

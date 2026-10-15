@@ -1,0 +1,20 @@
+{
+  "DamagedHelmet": {
+    "hashesVerified": true,
+    "intelStandalone": true,
+    "validationEnabled": false,
+    "released": true
+  },
+  "ABeautifulGame": {
+    "hashesVerified": true,
+    "intelStandalone": true,
+    "validationEnabled": false,
+    "released": true
+  },
+  "TransmissionRoughnessTest": {
+    "hashesVerified": true,
+    "intelStandalone": true,
+    "validationEnabled": false,
+    "released": true
+  }
+}

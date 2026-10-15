@@ -7,3 +7,5 @@ docs/acceptance/u16/*-evidence/** -text -whitespace
 docs/acceptance/p6/software-evidence/** -text -whitespace
 docs/acceptance/g8/evidence/** -text -whitespace
 docs/acceptance/p8/evidence/2026-10-14/** -text -whitespace
+docs/acceptance/pt/evidence/** -text -whitespace
+assets_public/pathtracing-CC-BY-4.0.txt -text

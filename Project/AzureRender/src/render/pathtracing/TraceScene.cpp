@@ -65,7 +65,7 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
         const auto& world=worlds[nodeIndex];
         for(const auto& primitive:asset.primitives){
             for(unsigned i=0;i+2<primitive.indexCount;i+=3){
-                const auto a=asset.indices.at(primitive.firstIndex+i),b=asset.indices.at(primitive.firstIndex+i+1),c=asset.indices.at(primitive.firstIndex+i+2);
+                const auto a=asset.indices.at(primitive.firstIndex+i);auto b=asset.indices.at(primitive.firstIndex+i+1),c=asset.indices.at(primitive.firstIndex+i+2);if(determinant(world)<0)std::swap(b,c);
                 const auto position=[&](unsigned v){return transformPosition(world,deformedVertexPosition(asset,v,asset.hasSkin?&pose:nullptr,morph));};
                 const auto pa=position(a),pb=position(b),pc=position(c);const auto e1=subtract(pb,pa),e2=subtract(pc,pa);
                 if(vectorLength(cross(e1,e2))<1e-10F)continue;

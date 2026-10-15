@@ -1,0 +1,23 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 206: AzureEditor.ContentDirectoryScale
+1/1 Test #206: AzureEditor.ContentDirectoryScale ...***Timeout 180.06 sec
+{"elapsedMs":10702.0561,"phase":"fixture-created"}
+[1792048487423][info][editor][code=0] Opened scene: startup
+{"elapsedMs":151226.31,"phase":"project-opened"}
+{"elapsedMs":158141.0396,"phase":"first-snapshot"}
+{"elapsedMs":158209.1285,"phase":"cached-samples"}
+{"elapsedMs":170878.8858,"phase":"external-refresh"}
+{"directoryResetMs":22.0038,"scanCancellationMs":21.885,"snapshotReleaseMs":0.1188}
+{"elapsedMs":171271.1906,"phase":"reset-cycle-start"}
+{"directoryResetCycle":0,"unretainedSnapshotResetMs":0.1706}
+{"elapsedMs":178193.3259,"phase":"reset-cycle-start"}
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) = 180.08 sec
+
+The following tests FAILED:
+	206 - AzureEditor.ContentDirectoryScale (Timeout)
+Errors while running CTest

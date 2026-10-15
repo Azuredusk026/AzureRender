@@ -1,5 +1,8 @@
 # AzureRender 文档
 
+公开模型演示见[打开、编辑与发布光追演示](tutorials/public-pathtracing-demos.md)。
+三个独立工程覆盖金属头盔、完整棋盘和粗糙玻璃。
+
 ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 开发任务见[编辑器实施计划](plans/2026-10-14-editor-generalization.md)。
 本轮机器批次已收尾，实体与历史条件待满足。

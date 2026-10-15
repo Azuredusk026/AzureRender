@@ -64,6 +64,9 @@ def build(sources,output):
         for filename in ('README.md','LICENSE.md','metadata.json'):shutil.copy2(sources/'Models'/name/filename,root/filename)
         source={'schemaVersion':1,'repository':lock['repository'],'commit':lock['commit'],'model':name,'license':'CC-BY-4.0','sourceFiles':[x for x in lock['files'] if '/'+name+'/' in x['path']],'processing':transforms,'placement':{'scale':scale,'position':position},'scene':'AzureRender original studio lighting and layout'}
         (root/'SOURCES.json').write_text(json.dumps(source,indent=2),encoding='utf-8')
+        licenses=assets/'licenses';licenses.mkdir(exist_ok=True)
+        for filename in ('README.md','LICENSE.md','metadata.json','SOURCES.json'):shutil.copy2(root/filename,licenses/filename)
+        shutil.copy2(Path(__file__).resolve().parents[1]/'assets_public/pathtracing-CC-BY-4.0.txt',licenses/'CC-BY-4.0.txt')
         results.append({'model':name,'project':str(project),'height':height,'camera':cameraPos,'pitch':pitch,'textureLimit':cap})
     print(json.dumps(results,indent=2));return results
 if __name__=='__main__':

@@ -298,5 +298,10 @@
       "bytes": 702,
       "sha256": "298d81b528e141f2c363ca5fbe2a41dc95f84bb6394d215d6d82e9767b7cbd55"
     }
-  ]
+  ],
+  "licenseDocument": {
+    "path": "LICENSES/CC-BY-4.0.txt",
+    "sha256": "c8041334a99cb48852b2139253cbde5f8ac87e27f124aed51223e0d5bf0080eb",
+    "url": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/edc7c9e67c639d230715049ee31f9a96a6babbbe/LICENSES/CC-BY-4.0.txt"
+  }
 }

@@ -1,0 +1,74 @@
+{
+  "DamagedHelmet": {
+    "editorBuild": true,
+    "playStop": true,
+    "movedPackage": "D:\\Project\\AzureRenderDemos\\Published\\中文演示 DamagedHelmet",
+    "entry": "DamagedHelmet Ray Tracing.exe",
+    "sourceUnavailable": true,
+    "standalone": true,
+    "intel": {
+      "project": "D:\\Project\\AzureRenderDemos\\DamagedHelmet\\project.azureproject",
+      "samples": [
+        8
+      ],
+      "seed": 0,
+      "size": [
+        320,
+        240
+      ],
+      "denoise": true,
+      "seconds": 7.910304200002429,
+      "validationEnabled": false,
+      "released": true
+    },
+    "publishAndLaunchSeconds": 16.525314400001662
+  },
+  "ABeautifulGame": {
+    "editorBuild": true,
+    "playStop": true,
+    "movedPackage": "D:\\Project\\AzureRenderDemos\\Published\\中文演示 ABeautifulGame",
+    "entry": "ABeautifulGame Ray Tracing.exe",
+    "sourceUnavailable": true,
+    "standalone": true,
+    "intel": {
+      "project": "D:\\Project\\AzureRenderDemos\\ABeautifulGame\\project.azureproject",
+      "samples": [
+        8
+      ],
+      "seed": 0,
+      "size": [
+        320,
+        240
+      ],
+      "denoise": true,
+      "seconds": 10.161391800000274,
+      "validationEnabled": false,
+      "released": true
+    },
+    "publishAndLaunchSeconds": 28.37362260000009
+  },
+  "TransmissionRoughnessTest": {
+    "editorBuild": true,
+    "playStop": true,
+    "movedPackage": "D:\\Project\\AzureRenderDemos\\Published\\中文演示 TransmissionRoughnessTest",
+    "entry": "TransmissionRoughnessTest Ray Tracing.exe",
+    "sourceUnavailable": true,
+    "standalone": true,
+    "intel": {
+      "project": "D:\\Project\\AzureRenderDemos\\TransmissionRoughnessTest\\project.azureproject",
+      "samples": [
+        8
+      ],
+      "seed": 0,
+      "size": [
+        320,
+        240
+      ],
+      "denoise": true,
+      "seconds": 7.150878600001306,
+      "validationEnabled": false,
+      "released": true
+    },
+    "publishAndLaunchSeconds": 161.85947370000213
+  }
+}
