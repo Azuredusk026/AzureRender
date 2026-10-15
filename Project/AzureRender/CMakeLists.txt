@@ -192,7 +192,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/sky.glsl"
+        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
