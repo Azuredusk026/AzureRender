@@ -1,6 +1,7 @@
 # AzureRender 工程
 
-当前开发范围见[世界参照、相机与渲染计划](docs/plans/2026-10-15-world-camera-rendering.md)。
+下一轮范围见[路径追踪补齐与公开演示计划](docs/plans/2026-10-15-pathtracing-completion.md)。
+PT0 为 Ready，三个公开素材演示在 PT7 集中验收。
 WC1 至 WC6 完成，安装入口与演示项目已更新。
 操作步骤见[世界参照、相机与路径追踪](docs/tutorials/world-camera-rendering.md)。
 

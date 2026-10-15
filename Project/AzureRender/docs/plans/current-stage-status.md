@@ -97,6 +97,14 @@ Ready 表示依赖满足，可以开始执行。
 | WC4 | 中英双语界面 | 完成 | 世界参照、相机与渲染。[记录](../acceptance/wc/2026-10-15.md) |
 | WC5 | 路径追踪与独立演示 | 完成 | 世界参照、相机与渲染。[记录](../acceptance/wc/2026-10-15.md) |
 | WC6 | 交互修复与集中交付 | 完成 | 世界参照、相机与渲染。[记录](../acceptance/wc/2026-10-15.md) |
+| PT0 | 公开素材与支持契约 | Ready | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT1 | 直接光与反射求值 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT2 | 法线与材质输入 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT3 | 面光源与环境采样 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT4 | 玻璃与粗糙透射 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT5 | 预览降噪与诊断 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT6 | 三个公开素材演示 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
+| PT7 | 集中验收与画面交付 | 待完成 | 下一轮路径追踪补齐与公开演示。[记录](2026-10-15-pathtracing-completion.md) |
 
 ## 最终收尾
 
