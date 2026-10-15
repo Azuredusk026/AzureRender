@@ -23,6 +23,8 @@ int main(int argc,char** argv){try{
     require(service.describe(b).at("extent")==nlohmann::json({128,256}),"Each view preserves its extent");
     service.request(a);service.request(a);service.request(b);
     RenderGraph graph;SceneFrameData frame;service.schedule(graph,frame,base,1);
+    require(service.describe(a).at("renderCameraPosition")==nlohmann::json({2,1,3}),"Renderer snapshot uses the independent preview camera");
+    require(service.describe(b).at("renderCameraPosition")==nlohmann::json({-2,2,1}),"Preview cameras remain independent");
     std::string error;require(graph.compile(error),"Independent views must form a valid graph");graph.execute(&commands);
     require(service.describe(a).at("renderCount")==1,"Repeated requests coalesce within one frame");
     require(service.describe(c).at("renderCount")==0,"A dormant view remains unscheduled");

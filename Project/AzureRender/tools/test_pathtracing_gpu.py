@@ -28,7 +28,7 @@ def run(executable, root):
         report=folder/'runtime.json'
         command=[str(executable),'--editor-project',str(project),'--editor-close-policy','discard','--width','960','--height','640','--fixed-frame-step','--smoke-frames','76','--editor-actions',str(task),'--runtime-report',str(report)]
         env=dict(os.environ,AZURERENDER_EDITOR_CONFIG=str(folder/'config'))
-        result=subprocess.run(command,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,encoding='utf-8',errors='replace',timeout=120)
+        result=subprocess.run(command,cwd=folder,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,encoding='utf-8',errors='replace',timeout=120)
         (folder/'run.log').write_text(result.stdout,encoding='utf-8')
         assert result.returncode==0,(name,result.returncode,result.stdout[-3000:])
         assert '[validation error]' not in result.stdout and 'VUID-' not in result.stdout,result.stdout
@@ -38,7 +38,7 @@ def run(executable, root):
         assert data['renderProgress']=={'samples':12,'target':12},data['renderProgress']
         assert all(a['passed'] for a in data.get('editorActions',[])),data
         assert len(data.get('editorActions',[]))==len(actions),data
-        results[name]={'samples':data['renderProgress'],'actions':len(actions),'validationErrors':0,'released':True}
+        results[name]={'samples':data['renderProgress'],'actions':len(actions),'validationEnabled':'Validation layer: enabled' in result.stdout,'reportedValidationErrors':0,'released':True}
     (root/'summary.json').write_text(json.dumps(results,indent=2),encoding='utf-8')
     print(json.dumps(results))
 

@@ -27,7 +27,7 @@ def run(executable, output):
         finally:
             if process.poll() is None:process.terminate();process.wait(timeout=10)
     text=(output/'window.log').read_text(encoding='utf-8')
-    assert '[validation warning]' not in text and 'VUID-' not in text,text[-4000:]
+    assert '[validation warning]' not in text and '[validation error]' not in text and 'VUID-' not in text,text[-4000:]
     result={'noArgumentWindow':True,'resize':True,'nativeClose':True,'validationErrors':False,'cwd':'unrelated directory','physicalKeyboardMouse':'not performed'}
     (output/'summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':

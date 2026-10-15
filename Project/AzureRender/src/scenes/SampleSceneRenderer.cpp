@@ -21,6 +21,7 @@ void SampleSceneRenderer::onLoad(const RenderContext& context) {
         || context.sceneRenderPass == VK_NULL_HANDLE) {
         throw std::invalid_argument("Sample renderer requires a valid host context");
     }
+    sky_.load(context);
     loaded_ = true;
 }
 
@@ -32,12 +33,14 @@ void SampleSceneRenderer::onSwapchainRecreate(const RenderContext& context) {
     if (!loaded_ || context.sceneRenderPass == VK_NULL_HANDLE) {
         throw std::logic_error("Sample renderer recreate outside loaded lifecycle");
     }
+    sky_.resize(context);
 }
 
-void SampleSceneRenderer::updateFrame(const SceneFrameData&) {
+void SampleSceneRenderer::updateFrame(const SceneFrameData& frame) {
     if (!loaded_) {
         throw std::logic_error("Sample renderer update before load");
     }
+    sky_.update(frame);
 }
 
 void SampleSceneRenderer::recordScene(const RenderContext& context) {
@@ -76,6 +79,9 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
     clearNormal.color = {{0.5F, 0.5F, 1.0F, 0.0F}};
     pass.clearValues = {clearColor, clearDepth, clearNormal};
     context.commands->beginRenderPass(pass);
+    context.commands->setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));
+    context.commands->setScissor(context.renderExtent);
+    sky_.draw(*context.commands);
     context.commands->endRenderPass();
     if (context.gpuTimingEnabled
         && context.timestampQueryPool != VK_NULL_HANDLE) {
@@ -87,6 +93,7 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
 }
 
 void SampleSceneRenderer::onUnload(const RenderContext&) {
+    sky_.release();
     loaded_ = false;
 }
 

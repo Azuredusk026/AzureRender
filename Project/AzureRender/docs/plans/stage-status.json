@@ -1035,7 +1035,7 @@
     {
       "id": "WC1",
       "name": "固定世界网格与轴",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
       "checksPassed": true,
       "dependsOn": [
@@ -1049,7 +1049,7 @@
     {
       "id": "WC2",
       "name": "世界方向天空与纯色设置",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
       "checksPassed": true,
       "dependsOn": [
@@ -1063,7 +1063,7 @@
     {
       "id": "WC3",
       "name": "编辑游戏与最终渲染相机",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
       "checksPassed": true,
       "dependsOn": [
@@ -1077,7 +1077,7 @@
     {
       "id": "WC4",
       "name": "中英双语界面",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
       "checksPassed": true,
       "dependsOn": [
@@ -1091,7 +1091,7 @@
     {
       "id": "WC5",
       "name": "路径追踪与独立演示",
-      "status": "Ready",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
       "checksPassed": true,
       "dependsOn": [
@@ -1105,14 +1105,14 @@
     {
       "id": "WC6",
       "name": "交互修复与集中交付",
-      "status": "Active",
+      "status": "Complete",
       "scope": "世界参照、相机与渲染",
-      "checksPassed": false,
+      "checksPassed": true,
       "dependsOn": [
         "VD5"
       ],
       "evidence": [
-        "docs/plans/2026-10-15-world-camera-rendering.md"
+        "docs/acceptance/wc/2026-10-15.md"
       ],
       "requiredAcceptance": []
     }

@@ -192,7 +192,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl"
+        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/sky.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -264,6 +264,7 @@ compile_shader("${SHADER_SOURCE_DIR}/blackhole.vert")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole.frag")
 compile_shader("${SHADER_SOURCE_DIR}/pathtracing.comp")
 compile_shader("${SHADER_SOURCE_DIR}/pathtracing.frag")
+compile_shader("${SHADER_SOURCE_DIR}/sky.frag")
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_taa.frag")
 compile_shader(
     "${SHADER_SOURCE_DIR}/blackhole_taa.frag"
@@ -360,6 +361,7 @@ add_library(AzureRenderCore STATIC
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/pathtracing/PathTracingSceneRenderer.cpp
     src/render/pathtracing/TraceScene.cpp
+    src/render/sky/SkyPass.cpp
     src/scenes/BlackholeSceneRenderer.cpp
     src/scenes/BuiltinRendererCatalog.cpp
     src/scenes/SampleSceneRenderer.cpp
@@ -1215,8 +1217,9 @@ if(BUILD_TESTING)
         src/assets/MaterialData.cpp
         tests/NullRhiPassTests.cpp
         src/scenes/pathtracing/PathTracingSceneRenderer.cpp
-    src/render/pathtracing/TraceScene.cpp
-    src/scenes/BlackholeSceneRenderer.cpp
+        src/render/pathtracing/TraceScene.cpp
+        src/render/sky/SkyPass.cpp
+        src/scenes/BlackholeSceneRenderer.cpp
         src/render/ComputePass.cpp
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
@@ -1224,7 +1227,7 @@ if(BUILD_TESTING)
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
         src/assets/image/ImageCodec.cpp
-    src/assets/image/TextureContainerAdapter.cpp
+        src/assets/image/TextureContainerAdapter.cpp
         src/assets/TextureImportSettings.cpp
         src/render/EnvironmentAsset.cpp
         src/render/RenderSettings.cpp

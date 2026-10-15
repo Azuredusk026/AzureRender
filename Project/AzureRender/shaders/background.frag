@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "sky.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -57,17 +59,7 @@ void main() {
     }else if(camera.skyParameters.x>.5){
         color=texture(AZ_TEX_ENVIRONMENT,directionToEquirectangular(direction)).rgb;
     }else{
-        // Linear HDR colors: a warm horizon, blue zenith, muted ground and sun.
-        float elevation=max(direction.y,0.0);
-        vec3 horizon=vec3(.54,.66,.78);
-        vec3 zenith=vec3(.055,.17,.38);
-        vec3 sky=mix(horizon,zenith,pow(elevation,.45));
-        vec3 sunDirection=normalize(vec3(.48,.72,.5));
-        float alignment=max(dot(direction,sunDirection),0.0);
-        sky+=vec3(1.0,.66,.3)*pow(alignment,24.0)*.35;
-        sky+=vec3(8.0,6.4,4.5)*smoothstep(.9995,.99985,alignment);
-        vec3 ground=mix(vec3(.12,.14,.17),horizon,exp(min(direction.y,0.0)*18.0));
-        color=mix(ground,sky,smoothstep(-.025,.025,direction.y));
+        color=azureProceduralSky(direction);
     }
     outputColor=vec4(color*camera.skyParameters.y,1.0);
     outputNormal=vec4(.5,.5,1.0,0.0);

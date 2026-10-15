@@ -1,0 +1,8 @@
+{
+  "noArgumentWindow": true,
+  "resize": true,
+  "nativeClose": true,
+  "validationErrors": false,
+  "cwd": "unrelated directory",
+  "physicalKeyboardMouse": "not performed"
+}

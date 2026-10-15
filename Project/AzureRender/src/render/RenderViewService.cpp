@@ -154,6 +154,12 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         view->context.currentFrame=recording.currentFrame;view->context.imageIndex=recording.currentFrame;
         view->frame=frame;view->frame.renderSettings=&view->descriptor.settings;
         view->frame.cameraOverride=true;
+        view->frame.camera={};
+        view->frame.camera.source=RenderCameraSource::SceneView;
+        view->frame.camera.view.position=view->descriptor.cameraPosition;
+        view->frame.camera.view.target=view->descriptor.cameraTarget;
+        view->frame.camera.view.nearPlane=view->descriptor.settings.cameraNear;
+        view->frame.camera.view.farPlane=view->descriptor.settings.cameraFar;
         view->frame.sceneSnapshot=std::make_shared<const scene::SceneDescription>(view->descriptor.scene);
         std::copy(view->descriptor.cameraPosition.begin(),view->descriptor.cameraPosition.end(),view->frame.cameraPosition);
         std::copy(view->descriptor.cameraTarget.begin(),view->descriptor.cameraTarget.end(),view->frame.cameraTarget);
@@ -190,7 +196,7 @@ void RenderViewService::release(RenderViewHandle handle){
 }
 nlohmann::json RenderViewService::describe(RenderViewHandle handle) const{
     const auto& view=*state_->slot(handle).view;return {{"schemaVersion",1},{"extent",{view.descriptor.extent.width,view.descriptor.extent.height}},
-        {"cameraPosition",view.descriptor.cameraPosition},{"cameraTarget",view.descriptor.cameraTarget},
+        {"renderCameraPosition",view.frame.camera.view.position},{"renderCameraTarget",view.frame.camera.view.target},{"cameraPosition",view.descriptor.cameraPosition},{"cameraTarget",view.descriptor.cameraTarget},
         {"renderCount",view.renderCount},{"colorImage",reinterpret_cast<std::uintptr_t>(view.images[0].image)},
         {"resolvedImage",reinterpret_cast<std::uintptr_t>(view.output->image().image)},
         {"outputFormat",view.descriptor.transfer==ViewColorTransfer::Linear?"rgba8-linear":"rgba8-srgb-encoded"},

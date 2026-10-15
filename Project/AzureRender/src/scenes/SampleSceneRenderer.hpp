@@ -1,11 +1,11 @@
 #pragma once
 
 #include "extensions/ISceneRenderer.hpp"
+#include "render/sky/SkyPass.hpp"
 
 namespace azurerender {
 
-// Minimal SDK example. It owns no GPU objects and only clears the attachments
-// supplied by the host, making lifecycle and ownership boundaries explicit.
+// Empty scenes retain the shared world-oriented sky and host attachments.
 class SampleSceneRenderer final : public ISceneRenderer {
 public:
     [[nodiscard]] std::string_view name() const noexcept override {
@@ -20,6 +20,7 @@ public:
     void onUnload(const RenderContext& context) override;
 
 private:
+    SkyPass sky_;
     bool loaded_ = false;
 };
 

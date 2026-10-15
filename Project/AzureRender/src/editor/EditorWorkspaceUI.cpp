@@ -136,6 +136,23 @@ void ImGuiEditorLayer::drawWorkspace() {
         dockingLayoutInitialized_=true;
         workspaceRebuildRequested_=false;
     }
+    // Preserve panel/tab placement while giving a restored compact viewport room.
+    if(layout.compact&&!ImGui::IsMouseDown(ImGuiMouseButton_Left)){
+        const auto* viewport=ImGui::FindWindowByName(ui::tr("场景###viewport"));
+        if(viewport&&viewport->DockNode&&viewport->DockNode->ID!=dockspace){
+            auto* child=viewport->DockNode;
+            float missing=480*dpi_+2*ui::UiMetrics::fromScale(dpi_).padding+4*dpi_-child->Size.x;
+            while(missing>0&&child->ParentNode){
+                auto* parent=child->ParentNode;
+                if(parent->SplitAxis==ImGuiAxis_X){
+                    auto* sibling=parent->ChildNodes[parent->ChildNodes[0]==child?1:0];
+                    const float reclaimed=std::min(missing,std::max(0.F,sibling->SizeRef.x-160*dpi_));
+                    sibling->SizeRef.x-=reclaimed;child->SizeRef.x+=reclaimed;missing-=reclaimed;
+                }
+                child=parent;
+            }
+        }
+    }
     ImGui::DockSpace(dockspace,{0,0},ImGuiDockNodeFlags_PassthruCentralNode);
 #endif
     ImGui::End();ImGui::PopStyleVar(2);

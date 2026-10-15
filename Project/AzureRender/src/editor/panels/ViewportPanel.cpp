@@ -246,7 +246,7 @@ void ImGuiEditorLayer::drawViewportPanel(PanelContext&) {
         auto* draw=ImGui::GetWindowDrawList();const bool flying=navigationButton_==ImGuiMouseButton_Right;
         const float speed=session_->settings().get("editor.camera.flySpeed").get<float>()*(flying&&ImGui::GetIO().KeyShift?session_->settings().get("editor.camera.boost").get<float>():1.F);
         char status[160];if(flying)std::snprintf(status,sizeof(status),ui::tr("Fly | %.2f m/s\nWASD  E/Q  Shift  Wheel speed  Esc release"),static_cast<double>(speed));
-        else std::snprintf(status,sizeof(status),"%s | RMB: fly / look\nWheel: zoom | F: frame",session_->viewportView().projection==CameraProjectionKind::Orthographic?ui::tr("Orthographic"):ui::tr("Perspective"));
+        else std::snprintf(status,sizeof(status),ui::tr("%s | RMB: fly / look\nWheel: zoom | F: frame"),session_->viewportView().projection==CameraProjectionKind::Orthographic?ui::tr("Orthographic"):ui::tr("Perspective"));
         const auto theme=ui::ThemeTokens::dark();auto background=theme.recessed;background.w=.84F;
         const ImVec2 lower{imageRect_[0]+imageRect_[2],imageRect_[1]+imageRect_[3]},hud{imageRect_[0]+metrics.padding,lower.y-46*dpi_};
         draw->PushClipRect({imageRect_[0],imageRect_[1]},lower,true);draw->AddRectFilled({hud.x-4*dpi_,hud.y-2*dpi_},{std::min(lower.x,hud.x+330*dpi_),hud.y+42*dpi_},ImGui::ColorConvertFloat4ToU32(background),4*dpi_);draw->AddText(hud,ImGui::ColorConvertFloat4ToU32(theme.text),status);draw->PopClipRect();

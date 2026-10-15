@@ -1,6 +1,9 @@
 #include "editor/SceneModel.hpp"
 
 #include <cassert>
+#ifdef _MSC_VER
+#include <crtdbg.h>
+#endif
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -71,6 +74,10 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
 }  // namespace
 
 int main() {
+#ifdef _MSC_VER
+    _CrtSetReportMode(_CRT_ASSERT,_CRTDBG_MODE_FILE);
+    _CrtSetReportFile(_CRT_ASSERT,_CRTDBG_FILE_STDERR);
+#endif
     // The data-driven look catalog rejects incompatible schemas before any
     // renderer state is changed.
     {
@@ -120,7 +127,7 @@ int main() {
             const std::string contents(
                 (std::istreambuf_iterator<char>(saved)),
                 std::istreambuf_iterator<char>());
-            assert(contents.find("renderSettingsVersion 9")
+            assert(contents.find("renderSettingsVersion "+std::to_string(azurerender::RenderSettings::kSchemaVersion))
                 != std::string::npos);
             assert(contents.find("schemaVersion "+std::to_string(azurerender::SceneDocument::kSchemaVersion)) != std::string::npos);
             assert(contents.find("lightCount 1") != std::string::npos);

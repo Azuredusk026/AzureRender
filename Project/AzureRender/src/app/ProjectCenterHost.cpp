@@ -34,6 +34,7 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
     if(findQueueFamilies(physicalDevice_).present!=findQueueFamilies(physicalDevice_).graphics)
         throw std::runtime_error("Project center requires a graphics queue supporting presentation");
     ImGui_ImplVulkanH_Window window;window.Surface=surface_;
+    window.AttachmentDesc.initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
     const VkFormat formats[]={VK_FORMAT_B8G8R8A8_UNORM,VK_FORMAT_R8G8B8A8_UNORM};
     window.SurfaceFormat=ImGui_ImplVulkanH_SelectSurfaceFormat(physicalDevice_,surface_,formats,2,VK_COLOR_SPACE_SRGB_NONLINEAR_KHR);
     const VkPresentModeKHR modes[]={VK_PRESENT_MODE_FIFO_KHR};
@@ -74,7 +75,7 @@ std::shared_ptr<azurerender::EditorContext> AzureRenderApp::showProjectCenter(co
             ImGui_ImplVulkan_NewFrame();ImGui_ImplGlfw_NewFrame();playback.beginFrame(frames,widgets);ImGui::NewFrame();
             widgets=nlohmann::json::object();
             view.draw(controller,[&](const std::string& id){const auto a=ImGui::GetItemRectMin(),b=ImGui::GetItemRectMax();widgets[id]={a.x,a.y,b.x-a.x,b.y-a.y};});
-            if(observation&&frames%12==0){std::ofstream output(*observation);output<<nlohmann::json{{"phase","ProjectCenter"},{"frame",frames},{"widgets",widgets},{"busy",controller.busy()},{"diagnostic",controller.diagnostic()},{"recent",controller.recent()},{"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},{"focusLost",io.AppFocusLost},{"display",{io.DisplaySize.x,io.DisplaySize.y}}}.dump();}
+            if(observation&&frames%12==0){std::ofstream output(*observation);output<<nlohmann::json{{"language",azurerender::ui::language()==azurerender::ui::Language::English?"en":"zh-CN"},{"phase","ProjectCenter"},{"frame",frames},{"widgets",widgets},{"busy",controller.busy()},{"diagnostic",controller.diagnostic()},{"recent",controller.recent()},{"mouse",{io.MousePos.x,io.MousePos.y}},{"mouseDown",io.MouseDown[0]},{"focusLost",io.AppFocusLost},{"display",{io.DisplaySize.x,io.DisplaySize.y}}}.dump();}
             ImGui::Render();
             const auto& semaphores=window.FrameSemaphores[window.SemaphoreIndex];
             auto acquired=vkAcquireNextImageKHR(device_,window.Swapchain,UINT64_MAX,semaphores.ImageAcquiredSemaphore,VK_NULL_HANDLE,&window.FrameIndex);

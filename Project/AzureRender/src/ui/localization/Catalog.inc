@@ -612,3 +612,4 @@
 {"散射次数","Bounces"},
 {"静止时累积采样，移动相机或修改场景后重新开始。","Samples accumulate while stationary. Camera and scene changes restart accumulation."},
 {"已累积 %u / %u 个采样","Accumulated %u / %u samples"},
+{"%s | 右键：移动与观察\n滚轮：缩放 | F：聚焦","%s | RMB: fly / look\nWheel: zoom | F: frame"},
