@@ -3,8 +3,9 @@
 ## 资源验证计划
 
 单角色、单场景、单动画与表情进入自主实施。
-对象为现有莱万汀，EV0 完成，EV1 至 EV3 开发中。
-EV4 至 EV8 待实施。
+对象为现有莱万汀，EV0 完成。
+EV1 诊断交付，原生读取待专用输入。
+EV2 至 EV7 开发中，EV8 待实施。
 范围见[资源验证实施计划](2026-10-16-endfield-resource-validation.md)。
 本机样本与 REA 证据见[调查记录](../research/2026-10-16-endfield-resource-validation.md)。
 
