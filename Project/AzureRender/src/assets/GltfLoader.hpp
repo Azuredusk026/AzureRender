@@ -1,6 +1,8 @@
 #pragma once
 
 #include "assets/TextureImportSettings.hpp"
+#include "assets/MorphTargetData.hpp"
+#include "animation/AnimationCurve.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include <array>
 #include <cstddef>
@@ -154,11 +156,13 @@ enum class AssetAnimationPath : std::uint32_t {
     Translation,
     Rotation,
     Scale,
+    Weights,
 };
 
 enum class AssetAnimationInterpolation : std::uint32_t {
     Step,
     Linear,
+    CubicSpline,
 };
 
 struct AssetAnimationSampler {
@@ -166,6 +170,7 @@ struct AssetAnimationSampler {
     std::vector<std::array<float, 4>> outputValues;
     AssetAnimationInterpolation interpolation =
         AssetAnimationInterpolation::Linear;
+    AnimationCurve curve;
 };
 
 struct AssetAnimationChannel {
@@ -197,6 +202,8 @@ struct LoadedAsset {
     std::vector<std::array<float, 16>> nodeWorldMatrices;
     bool hasSkin = false;
     std::uint32_t morphTargetCount = 0;
+    std::vector<MorphTargetRange> morphRanges;
+    std::vector<MorphWeightState> defaultMorphWeights;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
@@ -214,8 +221,10 @@ struct AssetPose {
     std::vector<AssetNodePose> local;
     std::vector<std::array<float, 16>> nodeWorldMatrices;
     std::vector<std::array<float, 16>> jointMatrices;
+    std::vector<MorphWeightState> morphWeights;
 };
 [[nodiscard]] AssetPose bindAnimationPose(const LoadedAsset& asset);
+void resolveAssetPose(const LoadedAsset& asset,AssetPose& pose);
 [[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true);
 [[nodiscard]] AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight);
 void sampleAnimation(

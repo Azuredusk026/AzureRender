@@ -24,6 +24,8 @@
 #include <stdexcept>
 #include <utility>
 
+#include "assets/GltfAccessorValidation.hpp"
+
 namespace {
 
 using Matrix4 = std::array<double, 16>;
@@ -425,6 +427,7 @@ void copyFloatAttribute(
     }
     const auto& accessor = model.accessors.at(static_cast<std::size_t>(attribute->second));
     if (accessor.componentType != TINYGLTF_COMPONENT_TYPE_FLOAT
+        || tinygltf::GetNumComponentsInType(static_cast<std::uint32_t>(accessor.type)) != static_cast<int>(componentCount)
         || accessor.count != vertices.size()) {
         throw std::runtime_error(std::string("Unsupported glTF attribute layout: ") + name);
     }
@@ -434,6 +437,7 @@ void copyFloatAttribute(
     for (std::size_t index = 0; index < vertices.size(); ++index) {
         std::array<float, 4> values{};
         std::memcpy(values.data(), source + index * stride, componentCount * sizeof(float));
+        for(std::size_t c=0;c<componentCount;++c)if(!std::isfinite(values[c]))throw std::invalid_argument("Vertex attribute must be finite");
         if (std::strcmp(name, "POSITION") == 0) {
             std::copy_n(values.begin(), componentCount, vertices[index].position.begin());
         } else if (std::strcmp(name, "NORMAL") == 0) {
@@ -567,49 +571,17 @@ void copySkinAttributes(
     }
 }
 
-void copyMorphTargets(
-    const tinygltf::Model& model,
-    const tinygltf::Primitive& primitive,
-    std::vector<AssetVertex>& vertices,
-    std::uint32_t& morphCount) {
-    morphCount = 0;
-    if (primitive.targets.empty()) {
-        return;
-    }
-    const std::size_t targetCount =
-        std::min<std::size_t>(primitive.targets.size(), 2);
-    for (std::size_t targetIndex = 0; targetIndex < targetCount;
-         ++targetIndex) {
-        const auto& target = primitive.targets[targetIndex];
-        const auto positionIt = target.find("POSITION");
-        if (positionIt == target.end()) {
-            continue;
-        }
-        const auto& accessor =
-            model.accessors.at(static_cast<std::size_t>(positionIt->second));
-        if (accessor.type != TINYGLTF_TYPE_VEC3
-            || accessor.count != vertices.size()) {
-            continue;
-        }
-        const unsigned char* source = accessorData(model, accessor);
-        const std::size_t stride = accessorStride(model, accessor);
-        constexpr std::size_t kComponents = 3;
-        for (std::size_t vertexIndex = 0;
-             vertexIndex < vertices.size();
-             ++vertexIndex) {
-            const float* delta3 = reinterpret_cast<const float*>(
-                source + vertexIndex * stride);
-            for (std::size_t component = 0; component < kComponents;
-                 ++component) {
-                const float delta = delta3[component];
-                if (targetIndex == 0) {
-                    vertices[vertexIndex].morph0[component] = delta;
-                } else {
-                    vertices[vertexIndex].morph1[component] = delta;
-                }
-            }
-        }
-        ++morphCount;
+void copyMorphTargets(const tinygltf::Model& model,const tinygltf::Primitive& primitive,
+    std::vector<AssetVertex>& vertices,std::uint32_t& morphCount) {
+    morphCount=static_cast<std::uint32_t>(primitive.targets.size());
+    // The first two position streams retain the legacy vertex layout.
+    for(std::size_t t=0;t<std::min<std::size_t>(2,primitive.targets.size());++t){
+        const auto found=primitive.targets[t].find("POSITION");if(found==primitive.targets[t].end())continue;
+        const auto& a=model.accessors.at(found->second);
+        if(a.type!=TINYGLTF_TYPE_VEC3||a.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||a.count!=vertices.size())
+            throw std::invalid_argument("Invalid morph POSITION accessor");
+        for(std::size_t v=0;v<vertices.size();++v)
+            std::memcpy((t?vertices[v].morph1:vertices[v].morph0).data(),accessorData(model,a)+v*accessorStride(model,a),12);
     }
 }
 
@@ -1452,137 +1424,49 @@ void loadJointMatrices(
     asset.hasSkin = true;
 }
 
-void loadAnimations(
-    const tinygltf::Model& model,
-    LoadedAsset& asset) {
-    asset.animations.reserve(model.animations.size());
-    for (const tinygltf::Animation& sourceAnimation : model.animations) {
-        AssetAnimation animation;
-        animation.name = sourceAnimation.name;
-        animation.startTime = std::numeric_limits<float>::max();
-        animation.endTime = std::numeric_limits<float>::lowest();
-        animation.samplers.reserve(sourceAnimation.samplers.size());
-        for (const tinygltf::AnimationSampler& sourceSampler
-             : sourceAnimation.samplers) {
-            if (sourceSampler.interpolation == "CUBICSPLINE") {
-                throw std::runtime_error(
-                    "CUBICSPLINE glTF animation is not supported yet");
-            }
-            AssetAnimationSampler sampler;
-            sampler.interpolation = sourceSampler.interpolation == "STEP"
-                ? AssetAnimationInterpolation::Step
-                : AssetAnimationInterpolation::Linear;
-            const auto& inputAccessor = model.accessors.at(
-                static_cast<std::size_t>(sourceSampler.input));
-            if (inputAccessor.type != TINYGLTF_TYPE_SCALAR
-                || inputAccessor.componentType
-                    != TINYGLTF_COMPONENT_TYPE_FLOAT) {
-                throw std::runtime_error(
-                    "Animation input accessor must contain float scalars");
-            }
-            const unsigned char* inputSource =
-                accessorData(model, inputAccessor);
-            const std::size_t inputStride =
-                accessorStride(model, inputAccessor);
-            sampler.inputTimes.resize(inputAccessor.count);
-            for (std::size_t index = 0;
-                 index < inputAccessor.count;
-                 ++index) {
-                std::memcpy(
-                    &sampler.inputTimes[index],
-                    inputSource + index * inputStride,
-                    sizeof(float));
-            }
-            if (sampler.inputTimes.empty()) {
-                throw std::runtime_error(
-                    "Animation sampler contains no keyframes");
-            }
-            animation.startTime = std::min(
-                animation.startTime,
-                sampler.inputTimes.front());
-            animation.endTime = std::max(
-                animation.endTime,
-                sampler.inputTimes.back());
-
-            const auto& outputAccessor = model.accessors.at(
-                static_cast<std::size_t>(sourceSampler.output));
-            if ((outputAccessor.type != TINYGLTF_TYPE_VEC3
-                 && outputAccessor.type != TINYGLTF_TYPE_VEC4)
-                || outputAccessor.componentType
-                    != TINYGLTF_COMPONENT_TYPE_FLOAT
-                || outputAccessor.count != inputAccessor.count) {
-                throw std::runtime_error(
-                    "Unsupported animation output accessor layout");
-            }
-            const std::size_t componentCount =
-                outputAccessor.type == TINYGLTF_TYPE_VEC4 ? 4 : 3;
-            const unsigned char* outputSource =
-                accessorData(model, outputAccessor);
-            const std::size_t outputStride =
-                accessorStride(model, outputAccessor);
-            sampler.outputValues.resize(outputAccessor.count);
-            for (std::size_t index = 0;
-                 index < outputAccessor.count;
-                 ++index) {
-                std::memcpy(
-                    sampler.outputValues[index].data(),
-                    outputSource + index * outputStride,
-                    componentCount * sizeof(float));
-            }
-            animation.samplers.push_back(std::move(sampler));
+void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
+    asset.defaultMorphWeights.resize(model.nodes.size());
+    for(std::size_t i=0;i<model.nodes.size();++i){
+        const auto& n=model.nodes[i];if(n.mesh<0)continue;const auto& m=model.meshes.at(n.mesh);
+        const auto count=m.primitives.empty()?0:m.primitives.front().targets.size();
+        if(count>kMorphTargetBudget)throw std::invalid_argument("Morph target budget exceeded at node "+std::to_string(i));
+        for(const auto& primitive:m.primitives)if(primitive.targets.size()!=count)throw std::invalid_argument("Mesh primitive morph counts differ");
+        const auto& source=n.weights.empty()?m.weights:n.weights;
+        if(!source.empty()&&source.size()!=count)throw std::invalid_argument("Morph default weight count mismatch");
+        auto& weights=asset.defaultMorphWeights[i];weights.assign(count,0);
+        for(std::size_t t=0;t<source.size();++t){if(!std::isfinite(source[t]))throw std::invalid_argument("Morph default weight must be finite");weights[t]=static_cast<float>(source[t]);}
+    }
+    for(const auto& source:model.animations){
+        AssetAnimation animation;animation.name=source.name;animation.startTime=std::numeric_limits<float>::max();
+        for(const auto& c:source.channels){
+            if(c.target_node<0||static_cast<std::size_t>(c.target_node)>=asset.nodes.size()||c.sampler<0)
+                throw std::invalid_argument("Invalid animation channel target");
+            AssetAnimationChannel channel;channel.nodeIndex=static_cast<std::uint32_t>(c.target_node);
+            if(c.target_path=="translation")channel.path=AssetAnimationPath::Translation;
+            else if(c.target_path=="rotation")channel.path=AssetAnimationPath::Rotation;
+            else if(c.target_path=="scale")channel.path=AssetAnimationPath::Scale;
+            else if(c.target_path=="weights")channel.path=AssetAnimationPath::Weights;
+            else throw std::invalid_argument("Unsupported glTF animation target path");
+            if(channel.path!=AssetAnimationPath::Weights&&asset.nodes[channel.nodeIndex].usesMatrix)throw std::invalid_argument("Animation cannot target a matrix-authored node");
+            const auto& src=source.samplers.at(c.sampler);AssetAnimationSampler sampler;auto& curve=sampler.curve;
+            curve.rotation=channel.path==AssetAnimationPath::Rotation;
+            curve.width=channel.path==AssetAnimationPath::Weights?asset.defaultMorphWeights[channel.nodeIndex].size():curve.rotation?4:3;
+            if(src.interpolation=="STEP"){curve.interpolation=CurveInterpolation::Step;sampler.interpolation=AssetAnimationInterpolation::Step;}
+            else if(src.interpolation=="CUBICSPLINE"){curve.interpolation=CurveInterpolation::CubicSpline;sampler.interpolation=AssetAnimationInterpolation::CubicSpline;}
+            else if(src.interpolation!="LINEAR"&&!src.interpolation.empty())throw std::invalid_argument("Unknown animation interpolation");
+            const auto& input=model.accessors.at(src.input);const auto& output=model.accessors.at(src.output);
+            const int expected=channel.path==AssetAnimationPath::Weights?TINYGLTF_TYPE_SCALAR:curve.rotation?TINYGLTF_TYPE_VEC4:TINYGLTF_TYPE_VEC3;
+            if(input.type!=TINYGLTF_TYPE_SCALAR||input.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||output.type!=expected||output.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT)
+                throw std::invalid_argument("Animation accessor does not match target path");
+            curve.times.resize(input.count);for(std::size_t i=0;i<input.count;++i)std::memcpy(&curve.times[i],accessorData(model,input)+i*accessorStride(model,input),4);
+            const std::size_t components=channel.path==AssetAnimationPath::Weights?1:curve.width;
+            curve.values.resize(output.count*components);for(std::size_t i=0;i<output.count;++i)std::memcpy(curve.values.data()+i*components,accessorData(model,output)+i*accessorStride(model,output),components*4);
+            validateCurve(curve);sampler.inputTimes=curve.times;
+            if(channel.path!=AssetAnimationPath::Weights){sampler.outputValues.resize(output.count);for(std::size_t i=0;i<output.count;++i)std::copy_n(curve.values.begin()+i*components,components,sampler.outputValues[i].begin());}
+            animation.startTime=std::min(animation.startTime,curve.times.front());animation.endTime=std::max(animation.endTime,curve.times.back());
+            channel.samplerIndex=static_cast<std::uint32_t>(animation.samplers.size());animation.samplers.push_back(std::move(sampler));animation.channels.push_back(channel);
         }
-
-        animation.channels.reserve(sourceAnimation.channels.size());
-        for (const tinygltf::AnimationChannel& sourceChannel
-             : sourceAnimation.channels) {
-            if (sourceChannel.target_node < 0
-                || sourceChannel.sampler < 0) {
-                throw std::runtime_error(
-                    "Animation channel has an invalid target");
-            }
-            AssetAnimationChannel channel;
-            channel.samplerIndex =
-                static_cast<std::uint32_t>(sourceChannel.sampler);
-            channel.nodeIndex =
-                static_cast<std::uint32_t>(sourceChannel.target_node);
-            if (channel.samplerIndex >= animation.samplers.size()
-                || channel.nodeIndex >= asset.nodes.size()) {
-                throw std::runtime_error(
-                    "Animation channel index is out of range");
-            }
-            if (asset.nodes[channel.nodeIndex].usesMatrix) {
-                throw std::runtime_error(
-                    "Animation cannot target a matrix-authored node");
-            }
-            if (sourceChannel.target_path == "translation") {
-                channel.path = AssetAnimationPath::Translation;
-            } else if (sourceChannel.target_path == "rotation") {
-                channel.path = AssetAnimationPath::Rotation;
-            } else if (sourceChannel.target_path == "scale") {
-                channel.path = AssetAnimationPath::Scale;
-            } else {
-                throw std::runtime_error(
-                    "Unsupported glTF animation target path");
-            }
-            const tinygltf::AnimationSampler& sourceSampler =
-                sourceAnimation.samplers.at(channel.samplerIndex);
-            const tinygltf::Accessor& outputAccessor =
-                model.accessors.at(
-                    static_cast<std::size_t>(sourceSampler.output));
-            const int expectedType =
-                channel.path == AssetAnimationPath::Rotation
-                ? TINYGLTF_TYPE_VEC4
-                : TINYGLTF_TYPE_VEC3;
-            if (outputAccessor.type != expectedType) {
-                throw std::runtime_error(
-                    "Animation output type does not match its target path");
-            }
-            animation.channels.push_back(channel);
-        }
-        if (animation.endTime < animation.startTime) {
-            animation.startTime = 0.0F;
-            animation.endTime = 0.0F;
-        }
+        if(animation.channels.empty())animation.startTime=animation.endTime=0;
         asset.animations.push_back(std::move(animation));
     }
 }
@@ -1593,11 +1477,12 @@ void appendPrimitive(
     const Matrix4& transform,
     const bool skinned,
     const std::uint32_t fallbackMaterial,
+    const std::uint32_t nodeIndex,
     LoadedAsset& asset) {
     if (primitive.mode != TINYGLTF_MODE_TRIANGLES) {
         throw std::runtime_error("Only triangle-list glTF primitives are supported");
     }
-    constexpr std::size_t kSupportedMorphTargetCount = 2;
+    constexpr std::size_t kSupportedMorphTargetCount = kMorphTargetBudget;
     if (primitive.targets.size() > kSupportedMorphTargetCount) {
         throw std::runtime_error(
             "glTF primitive has "
@@ -1673,6 +1558,45 @@ void appendPrimitive(
         draw.center[component] =
             (primitiveMin[component] + primitiveMax[component]) * 0.5F;
     }
+    if(!primitive.targets.empty()) {
+        MorphTargetRange range;range.node=nodeIndex;range.firstVertex=baseVertex;range.vertexCount=static_cast<std::uint32_t>(vertices.size());
+        const auto& mesh=model.meshes.at(model.nodes.at(nodeIndex).mesh);
+        for(std::size_t t=0;t<primitive.targets.size();++t){
+            MorphTargetData target;target.name="target-"+std::to_string(t);
+            if(mesh.extras.IsObject()&&mesh.extras.Has("targetNames")){
+                const auto& names=mesh.extras.Get("targetNames");
+                if(!names.IsArray()||names.ArrayLen()!=primitive.targets.size()||!names.Get(static_cast<int>(t)).IsString())throw std::invalid_argument("Invalid morph target names");
+                target.name=names.Get(static_cast<int>(t)).Get<std::string>();
+            }
+            const char* semantics[]={"POSITION","NORMAL","TANGENT"};
+            std::vector<std::array<float,3>>* outputs[]={&target.positions,&target.normals,&target.tangents};
+            for(unsigned semantic=0;semantic<3;++semantic){
+                auto& values=*outputs[semantic];values.resize(vertices.size());
+                const auto found=primitive.targets[t].find(semantics[semantic]);if(found==primitive.targets[t].end())continue;
+                const auto& a=model.accessors.at(found->second);
+                if(a.type!=TINYGLTF_TYPE_VEC3||a.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||a.count!=vertices.size())throw std::invalid_argument("Invalid morph target accessor");
+                for(std::size_t v=0;v<values.size();++v){
+                    std::memcpy(values[v].data(),accessorData(model,a)+v*accessorStride(model,a),12);
+                    for(float value:values[v])if(!std::isfinite(value))throw std::invalid_argument("Morph delta must be finite");
+                    if(!skinned){
+                        const auto delta=values[v];
+                        // Position and tangent deltas transform as vectors. Normal deltas
+                        // use the same inverse transpose as the base normal.
+                        if(semantic==1){
+                            const double a00=transform[0],a01=transform[4],a02=transform[8],a10=transform[1],a11=transform[5],a12=transform[9],a20=transform[2],a21=transform[6],a22=transform[10];
+                            const double det=a00*(a11*a22-a12*a21)-a01*(a10*a22-a12*a20)+a02*(a10*a21-a11*a20);
+                            if(std::abs(det)<1e-12)throw std::invalid_argument("Singular morph node transform");
+                            values[v]={static_cast<float>(((a11*a22-a12*a21)*delta[0]+(a12*a20-a10*a22)*delta[1]+(a10*a21-a11*a20)*delta[2])/det),
+                                static_cast<float>(((a02*a21-a01*a22)*delta[0]+(a00*a22-a02*a20)*delta[1]+(a01*a20-a00*a21)*delta[2])/det),
+                                static_cast<float>(((a01*a12-a02*a11)*delta[0]+(a02*a10-a00*a12)*delta[1]+(a00*a11-a01*a10)*delta[2])/det)};
+                        }else for(unsigned axis=0;axis<3;++axis)values[v][axis]=static_cast<float>(transform[axis]*delta[0]+transform[4+axis]*delta[1]+transform[8+axis]*delta[2]);
+                    }
+                }
+            }
+            range.targets.push_back(std::move(target));
+        }
+        asset.morphRanges.push_back(std::move(range));
+    }
     asset.vertices.insert(asset.vertices.end(), vertices.begin(), vertices.end());
     asset.indices.insert(asset.indices.end(), indices.begin(), indices.end());
     asset.primitives.push_back(draw);
@@ -1700,6 +1624,7 @@ void visitNode(
                 worldTransform,
                 skinned,
                 fallbackMaterial,
+                static_cast<std::uint32_t>(nodeIndex),
                 asset);
         }
     }
@@ -1847,7 +1772,7 @@ const char* assetMaterialClassName(const AssetMaterialClass value) {
 }
 
 namespace {
-LoadedAsset importGltfModel(const tinygltf::Model&,const AuthoredImageMips* authored=nullptr);
+LoadedAsset importGltfModel(tinygltf::Model&,const AuthoredImageMips* authored=nullptr);
 bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,std::string* warning,
     int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void* userData) {
     try {
@@ -1928,7 +1853,8 @@ LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     return importGltfModel(model,&authored);
 }
 namespace {
-LoadedAsset importGltfModel(const tinygltf::Model& model,const AuthoredImageMips* authored){
+LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* authored){
+    normalizeGltfAccessors(model);
     LoadedAsset asset;
     asset.materials.reserve(model.materials.size() + 1);
     for (const auto& material : model.materials) {
@@ -2065,9 +1991,14 @@ void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
     }
 }
 }
+void resolveAssetPose(const LoadedAsset& asset, AssetPose& pose) {
+    if(pose.local.size()!=asset.nodes.size())throw std::invalid_argument("Pose skeleton mismatch");
+    resolvePose(asset,pose);
+}
 AssetPose bindAnimationPose(const LoadedAsset& asset) {
     AssetPose pose;
     for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale});
+    pose.morphWeights=asset.defaultMorphWeights;
     resolvePose(asset, pose);
     return pose;
 }
@@ -2082,7 +2013,10 @@ AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationInd
         : animation.startTime;
     for (const auto& channel : animation.channels) {
         const auto& sampler = animation.samplers.at(channel.samplerIndex);
-        const auto value = sampleAnimationSampler(sampler, sampleTime, channel.path == AssetAnimationPath::Rotation);
+        if(channel.path==AssetAnimationPath::Weights){pose.morphWeights.at(channel.nodeIndex)=sampleCurve(sampler.curve,sampleTime);continue;}
+        auto value = std::array<float,4>{};
+        if(sampler.curve.width){const auto sampled=sampleCurve(sampler.curve,sampleTime);std::copy(sampled.begin(),sampled.end(),value.begin());}
+        else value=sampleAnimationSampler(sampler,sampleTime,channel.path==AssetAnimationPath::Rotation);
         auto& node = pose.local.at(channel.nodeIndex);
         if (channel.path == AssetAnimationPath::Rotation) node.rotation = normalizeQuaternion(value);
         else if (channel.path == AssetAnimationPath::Translation) std::copy_n(value.begin(), 3, node.translation.begin());
@@ -2103,6 +2037,12 @@ AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, c
             node.scale[axis] = from.local[i].scale[axis] * (1-weight) + to.local[i].scale[axis] * weight;
         }
         node.rotation = slerp(from.local[i].rotation, to.local[i].rotation, weight);
+    }
+    result.morphWeights=from.morphWeights;
+    if(result.morphWeights.size()!=to.morphWeights.size())throw std::invalid_argument("Morph pose node count mismatch");
+    for(std::size_t n=0;n<result.morphWeights.size();++n){
+        if(result.morphWeights[n].size()!=to.morphWeights[n].size())throw std::invalid_argument("Morph pose width mismatch");
+        for(std::size_t t=0;t<result.morphWeights[n].size();++t)result.morphWeights[n][t]=from.morphWeights[n][t]*(1-weight)+to.morphWeights[n][t]*weight;
     }
     resolvePose(asset, result);
     return result;
