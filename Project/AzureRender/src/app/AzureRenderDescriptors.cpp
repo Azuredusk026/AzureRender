@@ -22,11 +22,14 @@ void AzureRenderApp::createPostProcessDescriptorSetLayout() {
     shadowBinding.binding = 2;
     VkDescriptorSetLayoutBinding sceneColorBinding = normalBinding;
     sceneColorBinding.binding = 3;
+    VkDescriptorSetLayoutBinding gridBinding=normalBinding;
+    gridBinding.binding=4;gridBinding.descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
     const std::array bindings = {
         normalBinding,
         depthBinding,
         shadowBinding,
         sceneColorBinding,
+        gridBinding,
     };
     VkDescriptorSetLayoutCreateInfo layoutInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
@@ -69,8 +72,9 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
     poolSize.descriptorCount = descriptorCount * 4;
     VkDescriptorPoolCreateInfo poolInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
-    poolInfo.poolSizeCount = 1;
-    poolInfo.pPoolSizes = &poolSize;
+    const std::array poolSizes{poolSize,VkDescriptorPoolSize{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,descriptorCount}};
+    poolInfo.poolSizeCount = static_cast<std::uint32_t>(poolSizes.size());
+    poolInfo.pPoolSizes = poolSizes.data();
     poolInfo.maxSets = descriptorCount;
     vkCheck(
         vkCreateDescriptorPool(
@@ -96,7 +100,10 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
             postProcessDescriptorSets_.data()),
         "vkAllocateDescriptorSets(post process)");
 
+    groundGridUniforms_.resize(descriptorCount);
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
+        groundGridUniforms_[index]=gpuAllocator_.createBuffer(sizeof(GroundGridUniform),VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true);
+        const VkDescriptorBufferInfo gridInfo{groundGridUniforms_[index].buffer,0,sizeof(GroundGridUniform)};
         VkDescriptorImageInfo normalInfo{};
         normalInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         normalInfo.imageView = normalImageViews_[index];
@@ -115,7 +122,7 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         sceneColorInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         sceneColorInfo.imageView = sceneColorImageViews_[index];
         sceneColorInfo.sampler = screenAttachmentSampler_;
-        std::array<VkWriteDescriptorSet, 4> writes{};
+        std::array<VkWriteDescriptorSet, 5> writes{};
         writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
         writes[0].dstSet = postProcessDescriptorSets_[index];
         writes[0].dstBinding = 0;
@@ -145,6 +152,9 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         writes[3].descriptorType =
             VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         writes[3].pImageInfo = &sceneColorInfo;
+        writes[4]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
+        writes[4].dstSet=postProcessDescriptorSets_[index];writes[4].dstBinding=4;
+        writes[4].descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;writes[4].descriptorCount=1;writes[4].pBufferInfo=&gridInfo;
         vkUpdateDescriptorSets(
             device_,
             static_cast<std::uint32_t>(writes.size()),

@@ -15,7 +15,6 @@ layout(std430,binding=5) buffer History{vec4 history[];};
 layout(std430,binding=6) readonly buffer Lights{Light lights[];};
 layout(binding=7) uniform sampler2D environmentTexture;
 layout(std430,binding=8) buffer Guides{vec4 guides[];};
-uint guideIndex;
 const float PI=3.14159265359;
 uint rng;
 float random(){rng=rng*747796405u+2891336453u;uint word=((rng>>((rng>>28u)+4u))^rng)*277803737u;return float((word>>22u)^word)/4294967296.0;}
@@ -63,7 +62,6 @@ vec3 trace(vec3 origin,vec3 direction){
   float distance=bounce==0?p.up.w:1e30;uint index;vec2 uv,bary;
   if(!intersect(origin,direction,distance,index,uv,bary)){result+=throughput*sky(direction)*(previousDelta?1:powerWeight(previousPdf,environmentPdf(direction)));break;}
   Triangle t=triangles[index];Material m=materials[uint(t.uv2material.z)];
-  if(bounce==0)guides[guideIndex]=vec4(normalize(cross(t.e1.xyz,t.e2.xyz)),distance);
   throughput*=exp(-absorption*distance);
   vec3 ng=normalize(cross(t.e1.xyz,t.e2.xyz));vec3 n=normalize(t.n0.xyz*(1-bary.x-bary.y)+t.n1.xyz*bary.x+t.n2.xyz*bary.y);
   if(dot(n,ng)<0)n=-n;
@@ -89,7 +87,20 @@ vec3 trace(vec3 origin,vec3 direction){
 }
 void main(){
  uvec2 pixel=gl_GlobalInvocationID.xy;if(any(greaterThanEqual(pixel,p.image.xy)))return;
- uint index=pixel.y*p.image.x+pixel.x;guideIndex=index;guides[index]=vec4(0,0,0,-1);rng=index*9781u+(p.image.z+1)*6271u+0x68bc21ebu+p.image.w*1013904223u;random();
+ uint index=pixel.y*p.image.x+pixel.x;rng=index*9781u+(p.image.z+1)*6271u+0x68bc21ebu+p.image.w*1013904223u;random();
+ // Pixel-centre first hits provide stable scene depth and denoising guides.
+ // Radiance rays keep their independent subpixel jitter.
+ if(p.image.z==0u){
+ guides[index]=vec4(0,0,0,-1);
+ vec2 center=(vec2(pixel)+.5)/vec2(p.image.xy)*2-1;
+ vec3 centerOffset=p.right.xyz*center.x-p.up.xyz*center.y;
+ vec3 centerDirection=p.origin.w>.5?p.forward.xyz:normalize(p.forward.xyz+centerOffset);
+ vec3 centerOrigin=p.origin.xyz+(p.origin.w>.5?centerOffset:vec3(0))+centerDirection*p.forward.w;
+ float centerDistance=p.up.w;uint centerTriangle;vec2 centerUv,centerBary;
+ if(intersect(centerOrigin,centerDirection,centerDistance,centerTriangle,centerUv,centerBary)){
+  Triangle t=triangles[centerTriangle];guides[index]=vec4(normalize(cross(t.e1.xyz,t.e2.xyz)),centerDistance);
+ }
+ }
  vec2 screen=(vec2(pixel)+vec2(random(),random()))/vec2(p.image.xy)*2-1;
  vec3 offset=p.right.xyz*screen.x-p.up.xyz*screen.y;
  vec3 direction=p.origin.w>.5?p.forward.xyz:normalize(p.forward.xyz+offset);

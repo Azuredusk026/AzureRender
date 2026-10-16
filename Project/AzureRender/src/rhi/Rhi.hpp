@@ -109,6 +109,7 @@ struct GraphicsPipelineDesc {
 
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkPipelineLayout layout = VK_NULL_HANDLE;
+    VkCompareOp depthCompare = VK_COMPARE_OP_LESS;
 };
 
 struct RenderPassAttachmentDesc {

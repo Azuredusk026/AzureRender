@@ -15,6 +15,7 @@
 #endif
 #if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#include "editor/ui/ViewportDesignTokens.hpp"
 #endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
@@ -937,6 +938,23 @@ void AzureRenderApp::recordCommandBuffer(
     const VkBuffer screenshotBuffer,
     [[maybe_unused]] const azurerender::SceneFrameData& frame) {
     const auto recordingStart = std::chrono::steady_clock::now();
+    GroundGridUniform grid{};
+#if AZURE_WITH_EDITOR
+    if(editorUiEnabled_ && runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
+        auto& session=*runOptions_.editorSession;
+        const auto policy=session.viewportOverlayPolicies().find("grid");
+        if(policy!=session.viewportOverlayPolicies().end() && policy->second=="all"){
+            const auto& view=session.viewportView();
+            grid.viewProjection=azurerender::internal::multiply(azurerender::cameraProjectionMatrix(view,
+                static_cast<float>(renderExtent_.width)/renderExtent_.height),azurerender::cameraViewMatrix(view));
+            grid.minor=azurerender::ui::ViewportDesignTokens::minorGrid;grid.major=azurerender::ui::ViewportDesignTokens::majorGrid;
+            grid.xAxis=azurerender::ui::ViewportDesignTokens::xAxis;grid.zAxis=azurerender::ui::ViewportDesignTokens::zAxis;
+            grid.options={1,1,20,0};
+        }
+    }
+#endif
+    auto& gridBuffer=groundGridUniforms_.at(imageIndex);
+    std::memcpy(gridBuffer.mapped,&grid,sizeof(grid));gpuAllocator_.flush(gridBuffer,0,sizeof(grid));
     azurerender::RenderContext sceneContext;
     buildRenderContext(sceneContext);
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);

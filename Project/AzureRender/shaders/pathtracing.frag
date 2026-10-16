@@ -7,6 +7,15 @@ layout(location=1) out vec4 normal;
 void main(){
  uvec2 pixel=min(uvec2(gl_FragCoord.xy),p.image.xy-1u);uint index=pixel.y*p.image.x+pixel.x;
  color=history[index];normal=vec4(.5,.5,1,0);
+ vec4 firstHit=guides[index];
+ gl_FragDepth=1;
+ if(firstHit.w>=0){
+  vec2 screen=(vec2(pixel)+.5)/vec2(p.image.xy)*2-1;
+  vec3 direction=p.origin.w>.5?p.forward.xyz:normalize(p.forward.xyz+p.right.xyz*screen.x-p.up.xyz*screen.y);
+  float z=(firstHit.w+p.forward.w)*dot(direction,p.forward.xyz);
+  float n=p.forward.w,f=p.up.w;
+  gl_FragDepth=clamp(p.origin.w>.5?(z-n)/(f-n):f/(f-n)-f*n/((f-n)*z),0,1);
+ }
  if(p.sky.w>.5){vec4 guide=guides[index];vec3 sum=vec3(0);float weightSum=0;
   // Robust display-only luminance limit prevents isolated samples spreading
   // across the filter footprint. The radiance history remains untouched.

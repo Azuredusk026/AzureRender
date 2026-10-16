@@ -80,7 +80,7 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
  const auto module=[&](const char* file){return rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/"+file));};
  auto cs=module("pathtracing.comp.spv");try{compute_=rhi_->createComputePipeline({cs,layout_});}catch(...){rhi_->destroyShaderModule(cs);throw;}rhi_->destroyShaderModule(cs);
  auto vs=module("blackhole.vert.spv"),fs=module("pathtracing.frag.spv");
- rhi::GraphicsPipelineDesc desc{};desc.vertexShader=vs;desc.fragmentShader=fs;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=false;desc.depthWrite=false;desc.colorAttachmentCount=2;desc.renderPass=c.sceneRenderPass;desc.layout=layout_;
+ rhi::GraphicsPipelineDesc desc{};desc.vertexShader=vs;desc.fragmentShader=fs;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=true;desc.depthWrite=true;desc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;desc.colorAttachmentCount=2;desc.renderPass=c.sceneRenderPass;desc.layout=layout_;
  try{display_=rhi_->createGraphicsPipeline(desc);}catch(...){rhi_->destroyShaderModule(vs);rhi_->destroyShaderModule(fs);throw;}
  rhi_->destroyShaderModule(vs);rhi_->destroyShaderModule(fs);
  allocateHistory(c);

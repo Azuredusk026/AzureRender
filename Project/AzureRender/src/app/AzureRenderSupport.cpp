@@ -234,6 +234,8 @@ void AzureRenderApp::cleanupEditorViewportResources(
         postProcessDescriptorPool_ = VK_NULL_HANDLE;
     }
     postProcessDescriptorSets_.clear();
+    for(auto& buffer:groundGridUniforms_)gpuAllocator_.destroyBuffer(buffer);
+    groundGridUniforms_.clear();
 
     for (const auto framebuffer : swapchainFramebuffers_) {
         vkDestroyFramebuffer(device_, framebuffer, nullptr);

@@ -144,6 +144,11 @@ private:
         std::array<float,4> sampling{1,.1F,100,1};
     };
     static_assert(sizeof(PostProcessPushConstants) == 96);
+    struct GroundGridUniform {
+        std::array<float,16> viewProjection{};
+        std::array<float,4> minor{},major{},xAxis{},zAxis{},options{};
+    };
+    static_assert(sizeof(GroundGridUniform)==144);
 
     struct GpuTimingAccumulator {
         std::uint64_t samples = 0;
@@ -293,6 +298,7 @@ private:
     VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
     VkRenderPass editorUiRenderPass_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;
+    std::vector<azurerender::rhi::GpuBuffer> groundGridUniforms_;
     VkDescriptorPool postProcessDescriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> postProcessDescriptorSets_;
     VkPipelineLayout postProcessPipelineLayout_ = VK_NULL_HANDLE;

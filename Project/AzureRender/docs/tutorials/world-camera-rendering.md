@@ -24,6 +24,7 @@ python tools/create_pathtracing_project.py --output D:/Project/MyTracingDemo
 
 地面网格固定在世界原点，格距为一米。
 网格与坐标轴保持固定世界范围。
+物体按正常深度遮挡网格与坐标轴。
 右键配合移动键操作场景观察相机。
 在层级中选择游戏相机，点击“查看相机视角”。
 此操作调整观察位置，项目相机保持自身配置。
@@ -73,7 +74,8 @@ python tools/create_pathtracing_project.py --output D:/Project/MyTracingDemo
 
 | 内容 | 负责位置 |
 | --- | --- |
-| 世界网格和辅助线 | `editor/viewport` |
+| 网格显示策略与其他辅助线 | `editor/viewport` |
+| 网格深度合成 | `shaders/inner_outline.frag` |
 | 游戏相机选择 | `runtime/camera` |
 | 最终相机快照 | `render/RenderCamera.hpp` |
 | 程序天空函数 | `shaders/sky.glsl` |

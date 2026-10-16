@@ -459,7 +459,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
     depthStencil.depthTestEnable = desc.depthTest ? VK_TRUE : VK_FALSE;
     depthStencil.depthWriteEnable = desc.depthWrite ? VK_TRUE : VK_FALSE;
-    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
+    depthStencil.depthCompareOp = desc.depthCompare;
 
     std::vector<VkPipelineColorBlendAttachmentState> colorBlendAttachments(
         desc.colorAttachmentCount);

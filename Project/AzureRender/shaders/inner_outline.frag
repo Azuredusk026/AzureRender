@@ -4,6 +4,10 @@ layout(binding = 0) uniform sampler2D normalTexture;
 layout(binding = 1) uniform sampler2D depthTexture;
 layout(binding = 2) uniform sampler2D shadowTexture;
 layout(binding = 3) uniform sampler2D sceneColorTexture;
+layout(std140,binding=4) uniform GroundGrid {
+    mat4 viewProjection;
+    vec4 minorColor,majorColor,xAxis,zAxis,options;
+} grid;
 
 layout(push_constant) uniform OutlineParameters {
     float strength;
@@ -163,8 +167,38 @@ vec4 shadePixel(vec2 screenUv) {
     }
 }
 
+vec4 composeGroundGrid(vec4 scene,vec2 uv){
+    if(grid.options.x<.5 || outline.diagnosticView>.5)return scene;
+    mat4 inv=inverse(grid.viewProjection);
+    vec4 a=inv*vec4(uv*2-1,0,1),b=inv*vec4(uv*2-1,1,1);
+    vec3 nearPoint=a.xyz/a.w,farPoint=b.xyz/b.w;
+    vec3 ray=farPoint-nearPoint;
+    if(abs(ray.y)<1e-6)return scene;
+    float t=-nearPoint.y/ray.y;
+    vec3 point=nearPoint+t*ray;
+    vec4 clip=grid.viewProjection*vec4(point,1);
+    float depth=clip.z/clip.w;
+    vec2 width=max(fwidth(point.xz),vec2(1e-5));
+    vec2 minorDistance=abs(fract(point.xz-.5)-.5)/width;
+    vec2 majorDistance=abs(fract(point.xz/5-.5)-.5)*5/width;
+    float minor=1-clamp(min(minorDistance.x,minorDistance.y),0,1);
+    float major=1-clamp(min(majorDistance.x,majorDistance.y),0,1);
+    vec4 color=grid.minorColor;color.a*=minor;
+    if(major>0){color=grid.majorColor;color.a*=major;}
+    float xCoverage=1-clamp(abs(point.z)/width.y,0,1);
+    float zCoverage=1-clamp(abs(point.x)/width.x,0,1);
+    if(xCoverage>0){color=grid.xAxis;color.a*=xCoverage;}
+    if(zCoverage>0){color=grid.zAxis;color.a*=zCoverage;}
+    // Vulkan depth uses [0,1]. Equality lets the grid mark coplanar ground.
+    float sceneDepth=texture(depthTexture,uv).r;
+    if(t<0 || t>1 || clip.w<=0 || depth<0 || depth>1 || any(greaterThan(abs(point.xz),vec2(grid.options.z)))
+        || depth>sceneDepth+1e-6)return scene;
+    vec3 linearColor=pow(color.rgb,vec3(2.2));
+    return vec4(mix(scene.rgb,linearColor,color.a),scene.a);
+}
+
 float luma(vec3 rgb){return dot(rgb,vec3(.2126,.7152,.0722));}
-void main(){
+void resolveScene(){
     vec2 texel=1.0/vec2(textureSize(sceneColorTexture,0));
     if(outline.sampling.x>1.5){
         vec4 sum=vec4(0);
@@ -190,3 +224,4 @@ void main(){
         float lb=luma(b);outputColor=vec4(mix(center.rgb,lb<lo||lb>hi?a:b,.5),1);
     }else outputColor=shadePixel(screenUv);
 }
+void main(){resolveScene();outputColor=composeGroundGrid(outputColor,screenUv);}

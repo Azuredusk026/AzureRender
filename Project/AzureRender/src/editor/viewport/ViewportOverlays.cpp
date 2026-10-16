@@ -21,7 +21,9 @@ void ImGuiEditorLayer::drawViewportOverlays(ImVec2 origin,ImVec2 size){
     try{
         const auto scene=session_->viewScene();
         std::vector<ViewportOverlayLine> skeleton;const auto policy=session_->viewportOverlayPolicies().find("skeleton");if(policy!=session_->viewportOverlayPolicies().end()&&policy->second!="hidden")skeleton=session_->animations().skeletonLines(session_->context());
-        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView(),&scene,&skeleton},session_->viewportOverlayPolicies(),session_->selection().selected());
+        // The ground grid is composed by the renderer against scene depth.
+        auto policies=session_->viewportOverlayPolicies();policies["grid"]="hidden";
+        const auto lines=session_->viewportOverlays().collect({session_->context(),session_->viewportView(),&scene,&skeleton},policies,session_->selection().selected());
         for(const auto& line:lines){const auto segment=projectCameraSegment(session_->viewportView(),size.x/size.y,line.from,line.to);if(!segment)continue;
             const auto color=ImGui::ColorConvertFloat4ToU32({line.color[0],line.color[1],line.color[2],line.color[3]});
             draw->AddLine({origin.x+segment->from[0]*size.x,origin.y+segment->from[1]*size.y},{origin.x+segment->to[0]*size.x,origin.y+segment->to[1]*size.y},color,std::max(1.F,dpi_));
