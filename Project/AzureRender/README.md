@@ -119,7 +119,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 原生待机候选已进入引擎，材质与物理效果待完善。
 原生表情源已取得，演示保持中性。
 帝江号中心切片已与编队待机 01 完成联合技术采样。
-材质还原与场景编辑交付仍待验收。
+场景实例编辑与保存重开已验证，完整材质还原待验收。
 获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。
 实际证据见[原生资产验收](docs/acceptance/ev/native-assets.md)。
 历史画面基准与 GPU 性能验收保留待项。

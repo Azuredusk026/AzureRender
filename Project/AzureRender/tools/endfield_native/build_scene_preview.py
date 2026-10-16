@@ -1,0 +1,163 @@
+"""Build a source-bound static scene candidate inside factory-startup Blender.
+
+The pinned upstream supplies OBJ coordinates and approximate material nodes.
+Every selected draw keeps its source entity, mesh, material and submesh identity.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import struct
+import sys
+
+import bpy
+from mathutils import Matrix, Vector
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ('source-root', 'probe', 'inventory', 'output'):
+        parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--exchange', action='store_true')
+    parser.add_argument('--render', action='store_true')
+    args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+    source = args.source_root.resolve(strict=True)
+    probe = args.probe.resolve(strict=True)
+    inventory = args.inventory.resolve(strict=True)
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    sys.path.insert(0, str(source))
+    from blender_build_map02_chunk_20260727 import import_obj, unity_matrix
+    from blender_scene_materials import create_material
+    from endfield_scene_material_contract import load_catalog, reference_key
+    manifest_path = probe / 'scene_manifest.json'
+    manifest = json.loads(manifest_path.read_text(encoding='utf8'))
+    data = json.loads(inventory.read_text(encoding='utf8'))
+    if data['format'] != 'AzureEndfieldRawSceneInventory/1':
+        raise ValueError('Unsupported source instance inventory')
+    materials, textures = load_catalog((manifest_path,))
+    containers = {}
+    for row in manifest['Containers']:
+        path = row['Container'].casefold()
+        if path in containers and containers[path] != row['Asset']:
+            raise ValueError('Ambiguous source container: ' + path)
+        containers[path] = row['Asset']
+    meshes = {reference_key(row['Asset']): row for row in manifest['MeshExports']}
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete(use_global=False)
+    mesh_cache, material_cache, draw_cache = {}, {}, {}
+    audit = []
+    max_matrix_error = 0.0
+    basis = Matrix(((1,0,0,0), (0,0,-1,0), (0,1,0,0), (0,0,0,1)))
+    for row in data['renderers']:
+        entity = row['instance']
+        identity = 'native-' + str(entity['entity_id'])
+        parent = bpy.data.objects.new(identity, None)
+        bpy.context.collection.objects.link(parent)
+        parent['azureSourceId'] = identity
+        parent['nativeSourceChunk'] = entity['source']
+        parent.matrix_world = unity_matrix(struct.pack('<16f', *entity['matrix']))
+        reconstructed = basis.inverted() @ parent.matrix_world @ basis
+        max_matrix_error = max(max_matrix_error, max(abs(reconstructed[r][c] - entity['matrix'][c*4+r]) for r in range(4) for c in range(4)))
+        for index, pair in enumerate(row['pairs']):
+            draw = pair['draw']
+            if not draw['lod_min_squared'] <= 0 < draw['lod_max_squared']:
+                continue
+            path, separator, name = pair['mesh'].partition('##')
+            asset = containers[path]
+            if separator and asset['Name'].casefold() != name:
+                raise ValueError('Source mesh subasset identity mismatch')
+            key = reference_key(asset)
+            if key not in mesh_cache:
+                objects = import_obj(probe / meshes[key]['File'])
+                mesh_cache[key] = [obj.data for obj in objects]
+                for obj in objects:
+                    bpy.data.objects.remove(obj, do_unlink=True)
+            material_key = reference_key(containers[pair['material']])
+            if material_key not in material_cache:
+                material_cache[material_key] = create_material(materials[material_key], textures, True)
+            draw_key = (key, draw['submesh'], material_key)
+            if draw_key not in draw_cache:
+                mesh = mesh_cache[key][draw['submesh']].copy()
+                mesh.materials.clear()
+                mesh.materials.append(material_cache[material_key])
+                draw_cache[draw_key] = mesh
+            mesh = draw_cache[draw_key]
+            obj = bpy.data.objects.new(identity + '-draw-' + str(index), mesh)
+            bpy.context.collection.objects.link(obj)
+            obj.parent = parent
+            obj.matrix_basis = Matrix.Identity(4)
+            obj['azureSourceId'] = obj.name
+            obj['source_entity_id'] = entity['entity_id']
+            obj['source_mesh'] = pair['mesh']
+            obj['source_material'] = pair['material']
+            obj['source_submesh'] = draw['submesh']
+            audit.append(dict(entity=entity['entity_id'], mesh=pair['mesh'], material=pair['material'],
+                              submesh=draw['submesh'], vertices=len(mesh.vertices),
+                              triangles=sum(len(p.vertices)-2 for p in mesh.polygons)))
+    if max_matrix_error > 1e-4:
+        raise ValueError('Source world matrix round-trip exceeds tolerance')
+    bpy.context.view_layer.update()
+    observed_bounds = {}
+    for obj in bpy.context.scene.objects:
+        if obj.type != 'MESH':
+            continue
+        entity_id = obj['source_entity_id']
+        bounds = observed_bounds.setdefault(entity_id, [float('inf'), -float('inf')] * 3)
+        transform = basis.inverted() @ obj.matrix_world
+        used_vertices = {index for polygon in obj.data.polygons for index in polygon.vertices}
+        for index in used_vertices:
+            point = transform @ obj.data.vertices[index].co
+            for axis in range(3):
+                bounds[axis*2] = min(bounds[axis*2], point[axis])
+                bounds[axis*2+1] = max(bounds[axis*2+1], point[axis])
+    maximum_bounds_overflow = 0.0
+    for row in data['renderers']:
+        entity = row['instance']
+        actual = observed_bounds.get(entity['entity_id'])
+        expected = entity['world_bounds']
+        if actual is None or expected is None:
+            raise ValueError('Selected entity lacks geometry or source bounds')
+        maximum_bounds_overflow = max(maximum_bounds_overflow, max(
+            max(expected[a*2]-actual[a*2], actual[a*2+1]-expected[a*2+1], 0)
+            for a in range(3)))
+    if maximum_bounds_overflow > 1e-4:
+        raise ValueError('Selected geometry exceeds source world bounds')
+    if args.exchange:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
+        from export_scene_exchange import export_scene
+        exchange = export_scene(output / 'exchange/scene.azuresceneexchange', data['scene'] + '-native-slice')
+    else:
+        exchange = None
+    bpy.ops.export_scene.gltf(filepath=str(output / 'scene.glb'), export_format='GLB', export_animations=False, export_extras=True)
+    bpy.ops.wm.save_as_mainfile(filepath=str(output / 'scene.blend'))
+    report = dict(status='source_bound_technical_preview', objects=audit,
+                  source_entities=len(data['renderers']), shared_draw_resources=len(draw_cache),
+                  maximum_source_matrix_error=max_matrix_error, materials=len(material_cache),
+                  maximum_source_bounds_overflow=maximum_bounds_overflow,
+                  inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path)],
+                  exchange_resources=len(exchange['resources']) if exchange else None,
+                  limitations=['static LOD at squared distance zero', 'upstream material approximation',
+                               'whole meshes retained at slice boundary', 'game lighting and effects absent'])
+    (output / 'audit.json').write_text(json.dumps(report, indent=2), encoding='utf8')
+    if args.render:
+        scene = bpy.context.scene
+        scene.render.engine = 'CYCLES'
+        scene.cycles.samples = 12
+        scene.render.resolution_x, scene.render.resolution_y = 960, 640
+        scene.render.resolution_percentage = 100
+        scene.world.color = (.25, .25, .25)
+        bpy.ops.object.camera_add(location=(28,32,25))
+        camera = bpy.context.object
+        camera.rotation_euler = (Vector((0,0,2))-camera.location).to_track_quat('-Z','Y').to_euler()
+        camera.data.type, camera.data.ortho_scale = 'ORTHO', 55
+        scene.camera = camera
+        bpy.ops.object.light_add(type='SUN', location=(10,10,30))
+        bpy.context.object.rotation_euler = (.4,-.5,.3)
+        bpy.context.object.data.energy = 2
+        scene.render.filepath = str(output / 'scene.png')
+        bpy.ops.render.render(write_still=True)
+
+
+if __name__ == '__main__':
+    main()
