@@ -185,6 +185,8 @@ void main(){
         direction=clamp(direction/(min(abs(direction.x),abs(direction.y))+reduce),vec2(-8),vec2(8))*texel;
         vec3 a=.5*(shadePixel(screenUv+direction*(1.0/3.0-.5)).rgb+shadePixel(screenUv+direction*(2.0/3.0-.5)).rgb);
         vec3 b=a*.5+.25*(shadePixel(screenUv-direction*.5).rgb+shadePixel(screenUv+direction*.5).rgb);
-        float lb=luma(b);outputColor=vec4(lb<lo||lb>hi?a:b,1);
+        // Retain half the original coverage: a full directional replacement
+        // over-blurs narrow silhouettes against bright backgrounds.
+        float lb=luma(b);outputColor=vec4(mix(center.rgb,lb<lo||lb>hi?a:b,.5),1);
     }else outputColor=shadePixel(screenUv);
 }

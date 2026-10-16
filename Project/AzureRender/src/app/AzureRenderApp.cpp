@@ -933,7 +933,8 @@ void AzureRenderApp::configureQaHarness() {
         }
     }
     if (qaIsolationMode_ > 0) {
-        // Component isolation must not be contaminated by either outline path.
+        // Component isolation excludes the environment and both outline paths.
+        renderSettings_.characterPresentation.backgroundEnabled = false;
         renderSettings_.innerOutlineEnabled = false;
         renderSettings_.silhouetteOutlineEnabled = false;
     }

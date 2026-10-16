@@ -113,6 +113,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 ## 资源验证开发
 
 莱万汀资源验证按 EV0 至 EV8 推进。
-EV0 已完成来源清单与 Blender 五帧基线。
+通用形变、表情编辑、场景交换与材质恢复已交付。
+当前演示使用重定向 idle 与中性表情。
+原生动作、场景和表情需要兼容读取器或完整导出资源。
+历史画面基准与 GPU 性能验收保留待项。
 实施范围见[资源验证计划](docs/plans/2026-10-16-endfield-resource-validation.md)。
-当前证据见[基线验收](docs/acceptance/ev/ev0.md)。
+当前证据见[联合验收](docs/acceptance/ev/2026-10-16.md)。

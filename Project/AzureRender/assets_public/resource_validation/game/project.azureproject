@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "14c22e2a-639e-5f20-a5ce-6d7c0ab07cfb",
+  "name": "资源验证公共夹具",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "assets"
+    }
+  ],
+  "startupScene": "assets:/validation.azurelevel",
+  "runtime": {
+    "schemaVersion": 1,
+    "input": {},
+    "systems": [
+      {
+        "id": "camera",
+        "config": {
+          "mode": "orbit",
+          "target": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    ]
+  }
+}

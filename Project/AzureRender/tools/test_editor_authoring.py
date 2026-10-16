@@ -60,6 +60,9 @@ def retained_workflows(executable,root):
         host.edit('history.undo');host.frames();host.click('prefab.field.moving/name');host.click('prefab.apply')
         assert next(n for n in json.loads((project/'assets/NewPrefab.azureprefab').read_text())['nodes'] if n['id']=='moving')['name']=='Reusable door'
         host.screenshot('u13-prefab-source')
+        # Source history controls sit below the fold in the bottom dock.
+        host.call('input',event=dict(action='mouse',target='panelrect.prefabs',down=False));host.frames()
+        host.call('input',event=dict(action='wheel',y=-4));host.frames()
         host.click('prefab.undo-apply');assert next(n for n in json.loads((project/'assets/NewPrefab.azureprefab').read_text())['nodes'] if n['id']=='moving')['name']=='moving'
         host.click('prefab.redo-apply');assert next(n for n in json.loads((project/'assets/NewPrefab.azureprefab').read_text())['nodes'] if n['id']=='moving')['name']=='Reusable door'
 

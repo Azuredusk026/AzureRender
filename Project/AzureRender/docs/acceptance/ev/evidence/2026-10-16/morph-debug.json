@@ -1,0 +1,17 @@
+{
+  "instances": 2,
+  "targets": 3,
+  "independentWeights": [
+    0.8,
+    -0.6
+  ],
+  "computeVertexMeanDifference": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "thirdTargetChangedPixels": 87332,
+  "outlineChangedPixels": 13575,
+  "validationErrors": 0
+}

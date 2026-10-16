@@ -9,3 +9,5 @@ docs/acceptance/g8/evidence/** -text -whitespace
 docs/acceptance/p8/evidence/2026-10-14/** -text -whitespace
 docs/acceptance/pt/evidence/** -text -whitespace
 assets_public/pathtracing-CC-BY-4.0.txt -text
+assets_public/resource_validation/game/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/acceptance/ev/evidence/** -text -whitespace

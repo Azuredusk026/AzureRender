@@ -18,8 +18,10 @@ def run(executable, output):
     create(output / 'game')
     events = [dict(frame=25, action='click', target='menu.View'),
               dict(frame=29, action='click', target='layout.authoring'),
-              dict(frame=36, action='click', target='menu.File'),
-              dict(frame=40, action='click', target='menu.Projects')]
+              dict(frame=36, action='click', target='menu.View'),
+              dict(frame=40, action='click', target='panel.environment'),
+              dict(frame=47, action='click', target='menu.File'),
+              dict(frame=51, action='click', target='menu.Projects')]
     data = launch(executable, output, 'project-entry', (1920, 1080), 1, events)
     assert data['preset'] == 'authoring', data['preset']
     assert data['panels']['projects']['open'], data['panels']['projects']
@@ -70,7 +72,8 @@ def run(executable, output):
         for size,dpi in (((1280,720),1),((1920,1080),1),((2560,1440),1),((1920,1080),1.5),((2560,1440),1.5),((2560,1440),2)):
             case=f'{size[0]}x{size[1]}-{dpi}'
             result=launch(executable,folder,case,size,dpi,
-                [dict(frame=25,action='click',target='menu.View'),dict(frame=29,action='click',target='layout.authoring')],capture=False)
+                [dict(frame=25,action='click',target='menu.View'),dict(frame=29,action='click',target='layout.authoring'),
+                 dict(frame=36,action='click',target='menu.View'),dict(frame=40,action='click',target='panel.environment')],capture=False)
             assert result['preset']=='authoring'
             for panel in ('viewport','outliner','inspector','assets','environment'):
                 assert result['panels'][panel]['open'] and result['panels'][panel]['docked'],(workflow,case,panel)

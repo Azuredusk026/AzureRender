@@ -62,7 +62,7 @@ def run(executable, root, workflow):
     moved = launch(executable,root,'reparent',(1920,1080),1,drag,capture=False)
     authored=json.loads(level.read_text(encoding='utf-8'))
     assert next(n for n in authored['nodes'] if n['id']=='work-a')['parentId']=='work-b', 'Outliner drop must reparent through the production operation'
-    root_drop = [dict(frame=25,action='click',target='node.work-b',offset=[-139,0]),
+    root_drop = [dict(frame=25,action='click',target='node.work-b',offset=[-moved['widgets']['node.work-b'][2]/2+8,0]),
                  dict(frame=29,action='mouse',target='node.work-a',down=True),
                  dict(frame=32,action='mouse',target='node.work-a',down=True,offset=[8,0]),
                  dict(frame=36,action='mouse',target='hierarchy.root',down=True),
@@ -72,18 +72,18 @@ def run(executable, root, workflow):
     assert not next(n for n in authored['nodes'] if n['id']=='work-a').get('parentId'), 'Root drop must preserve the world transform'
     prompt='组件长文本_'+'abcdefghij'*60
     editing=[dict(frame=25,action='click',target='node.work-a'),
-             dict(frame=27,action='click',target='component.azure.transform'),
-             dict(frame=29,action='click',target='component.azure.interactable'),
-             dict(frame=33,action='click',target='field.azure.interactable.prompt'),
-             dict(frame=35,action='key',key='A',ctrl=True),dict(frame=36,action='key',key='A',ctrl=False,down=False),
-             dict(frame=37,action='text',text=prompt),dict(frame=40,action='key',key='Enter'),dict(frame=41,action='key',key='Enter',down=False)]
+             dict(frame=30,action='click',target='component.azure.transform'),
+             dict(frame=35,action='click',target='component.azure.interactable'),
+             dict(frame=40,action='click',target='field.azure.interactable.prompt'),
+             dict(frame=44,action='key',key='A',ctrl=True),dict(frame=45,action='key',key='A',ctrl=False,down=False),
+             dict(frame=46,action='text',text=prompt),dict(frame=49,action='key',key='Enter'),dict(frame=50,action='key',key='Enter',down=False)]
     launch(executable,root,'long-component',(1920,1080),1,editing,capture=False)
     authored=json.loads(level.read_text(encoding='utf-8'))
     node=next(n for n in authored['nodes'] if n['id']=='work-a')
     assert node['components']['azure.interactable']['data']['prompt']==prompt, 'Component strings must preserve full UTF-8 content'
-    reset=[dict(frame=25,action='click',target='node.work-a'),dict(frame=27,action='click',target='component.azure.transform'),dict(frame=29,action='click',target='component.azure.character'),
-           dict(frame=33,action='click',target='field.azure.character.speed',button='right'),
-           dict(frame=37,action='click',target='field.reset.azure.character.speed')]
+    reset=[dict(frame=25,action='click',target='node.work-a'),dict(frame=30,action='click',target='component.azure.transform'),dict(frame=35,action='click',target='component.azure.character'),
+           dict(frame=40,action='click',target='field.azure.character.speed',button='right'),
+           dict(frame=45,action='click',target='field.reset.azure.character.speed')]
     launch(executable,root,'reset-field',(1920,1080),1,reset,capture=False)
     authored=json.loads(level.read_text(encoding='utf-8'))
     assert next(n for n in authored['nodes'] if n['id']=='work-a')['components']['azure.character']['data']['speed']==4, 'Field menu must use registered defaults'

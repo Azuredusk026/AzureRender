@@ -150,7 +150,7 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         const auto& summary=view.importSummary();if(summary.contains("vertices"))ImGui::TextWrapped(ui::tr("Imported: %zu vertices, %zu joints, %zu materials"),summary.at("vertices").get<std::size_t>(),summary.at("joints").get<std::size_t>(),summary.at("materials").get<std::size_t>());
         ImGui::EndPopup();
     }
-    if(!compact){ui::nextToolbarItem(ui::buttonWidth(ui::tr("刷新资源")));if(ui::button(ui::tr("刷新资源")))static_cast<void>(services_.session.execute(EditorCommand::ReloadAssets));services_.observe("assets.reload");directoryFilter();}
+    if(!compact){ui::nextToolbarItem(ui::buttonWidth(ui::tr("刷新资源")));if(ui::button(ui::tr("刷新资源")))static_cast<void>(services_.session.execute(EditorCommand::ReloadAssets));services_.observe("assets.reload");ui::nextToolbarItem(ui::buttonWidth(ui::tr("后退")));directoryFilter();}
     if(!presentation.assetNavigationDiagnostic_.empty())ui::resultMessage(presentation.assetNavigationDiagnostic_,true);
     if(!compact){ui::statusText((std::to_string(resources.size())+ui::tr(" 项资源 · ")+std::to_string(presentation.selectedAssets_.size())+ui::tr(" 项已选")).c_str(),ui::StatusKind::Neutral);}
     if(renderGrid){int size=services_.session.settings().get("editor.thumbnailSize").get<int>();ImGui::SetNextItemWidth(120*services_.dpi);if(ImGui::SliderInt(ui::tr("Thumbnail size"),&size,64,192))services_.session.edit("settings.set",{{"name","editor.thumbnailSize"},{"value",size},{"source","user"}});services_.observe("assets.thumbnail-size");}

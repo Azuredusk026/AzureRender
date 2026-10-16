@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "sourceKind": "public-generated",
+  "sceneKind": "technical-platform-fixture",
+  "animation": "idle",
+  "animationIndex": 0,
+  "expressions": "neutral",
+  "nativeSceneVerified": false,
+  "nativeAnimationVerified": false,
+  "nativeExpressionVerified": false,
+  "files": [
+    {
+      "path": "ASSET-LICENSE.txt",
+      "sha256": "be53cb6c25774e09d7f8eff01d850a71de5ede9a916a7e9407ed9439e79327eb"
+    },
+    {
+      "path": "assets/character.gltf",
+      "sha256": "4c35b283bb2e7565e37c73c0764c73fbf323337b0c94b209178489b745544e1f"
+    },
+    {
+      "path": "assets/character.gltf.azmeta",
+      "sha256": "86c9e1921df075064746d4a5e5f66540aea49bcc1c06ca643fa390db83bac8ba"
+    },
+    {
+      "path": "assets/idle.json",
+      "sha256": "e06cb052b49ae2652e29694f78494e5d45fb59d0d4831afb836c5356eb09261c"
+    },
+    {
+      "path": "assets/idle.json.azmeta",
+      "sha256": "79d2f5d17fb8f915e8092ccb66cb7d6ad6220ead20a911147ca32347ea5cb2c8"
+    },
+    {
+      "path": "assets/platform.gltf",
+      "sha256": "46c61f6336131bd8417018f3818c25c4201006ef97db88b0ad8e8ec83d85f651"
+    },
+    {
+      "path": "assets/platform.gltf.azmeta",
+      "sha256": "a26b1ddbbf0fa98e30b78ac91732f614d610da3c43a2cfca41bff6bfda73f06e"
+    },
+    {
+      "path": "assets/validation.azurelevel",
+      "sha256": "447d5f168209f911f2a781d0cd858bff4f73f719600d0c99f2e05e88d8e20725"
+    },
+    {
+      "path": "assets/validation.azurelevel.azmeta",
+      "sha256": "1f8bd61b7340cd948dbf41313b2b9137facacaa55816d86fe2dfaf04dc4e9e78"
+    },
+    {
+      "path": "project.azureproject",
+      "sha256": "234675f5a4c355717fac1b726b124b5bd1afa8884078ffe1c1e69fd7b34aa2f4"
+    },
+    {
+      "path": "README.md",
+      "sha256": "5c6d1d690b0eedccca4c36fa957dd6d4457e43f248889f33ad61f5d7fcf2127e"
+    }
+  ],
+  "selection": {
+    "animation": "idle",
+    "expression": "neutral",
+    "nativeAnimationPreferred": true,
+    "nativeExpressionPending": true,
+    "scene": "technical fixture; final native scene pending"
+  }
+}

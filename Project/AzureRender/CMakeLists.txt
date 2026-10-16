@@ -381,6 +381,7 @@ target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
     src/assets/scene/SceneExchange.cpp
+    src/assets/scene/SceneExchange.hpp
     src/runtime/MaterialDocument.cpp
     src/runtime/ScriptRuntimeRegistry.cpp
     src/runtime/EngineSettings.cpp
@@ -1242,6 +1243,7 @@ if(BUILD_TESTING)
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
+        src/animation/ExpressionPose.cpp
         src/assets/image/ImageCodec.cpp
         src/assets/image/TextureContainerAdapter.cpp
         src/assets/TextureImportSettings.cpp
@@ -2183,6 +2185,23 @@ endif()
 
 target_sources(AzurePlatform PRIVATE src/platform/WindowIcon.cpp)
 install(DIRECTORY assets_public/brand DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/assets_public")
+
+if(BUILD_TESTING)
+    foreach(_ev_case IN ITEMS
+        "ResourceManifest|test_resource_validation_manifest.py"
+        "ResourceReader|test_resource_reader_probe.py"
+        "ResourceValidationRunner|test_resource_validation_runner.py"
+        "ValidationAssetExport|test_validation_asset_export.py"
+        "SceneExchange|test_scene_exchange.py"
+        "MaterialSemantics|test_material_semantics.py")
+        string(REPLACE "|" ";" _ev_parts "${_ev_case}")
+        list(GET _ev_parts 0 _ev_name)
+        list(GET _ev_parts 1 _ev_file)
+        add_test(NAME "AzureTools.${_ev_name}" COMMAND "${Python3_EXECUTABLE}"
+            -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p "${_ev_file}")
+        set_tests_properties("AzureTools.${_ev_name}" PROPERTIES LABELS tools TIMEOUT 120)
+    endforeach()
+endif()
 
 if(MSVC)
     get_property(AZURE_LOCAL_TARGETS DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)

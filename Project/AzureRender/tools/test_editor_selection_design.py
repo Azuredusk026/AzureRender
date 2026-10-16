@@ -2,12 +2,15 @@
 import argparse
 import json
 import shutil
+import uuid
 from pathlib import Path
 from test_editor_workspace import launch
 from create_playable_project import create
 
 
 def run(executable, root):
+    root = root / ('run-' + uuid.uuid4().hex[:8])
+    root.mkdir(parents=True)
     results = []
     for workflow in ('scene_inspector', 'exploration'):
         work = root / workflow

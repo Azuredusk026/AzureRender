@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "frames": 600,
+  "duration": 20.0,
+  "width": 1280,
+  "height": 720,
+  "expression": "neutral",
+  "animation": "retargeted idle",
+  "scene": "original technical platform",
+  "nativeSourceVerified": false,
+  "elapsed": 77.1880000000001,
+  "videoSha256": "6bb2e6422c8ea0fc78bb61301c7723998d88254b2e90dbf5a5f063523f3798ac",
+  "executableSha256": "0ea7b08b5e5abc891d0388125c91640844652fb0d19b2037f0901185be6e2922"
+}

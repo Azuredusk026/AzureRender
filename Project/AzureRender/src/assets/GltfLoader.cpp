@@ -1430,7 +1430,7 @@ void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
     for(std::size_t i=0;i<model.nodes.size();++i){
         const auto& n=model.nodes[i];if(n.mesh<0)continue;const auto& m=model.meshes.at(n.mesh);
         const auto count=m.primitives.empty()?0:m.primitives.front().targets.size();
-        if(count>kMorphTargetBudget)throw std::invalid_argument("Morph target budget exceeded at node "+std::to_string(i));
+        if(count>kMorphTargetBudget)throw std::invalid_argument("glTF node "+std::to_string(i)+" has "+std::to_string(count)+" Morph targets; this renderer supports at most "+std::to_string(kMorphTargetBudget));
         for(const auto& primitive:m.primitives)if(primitive.targets.size()!=count)throw std::invalid_argument("Mesh primitive morph counts differ");
         const auto& source=n.weights.empty()?m.weights:n.weights;
         if(!source.empty()&&source.size()!=count)throw std::invalid_argument("Morph default weight count mismatch");

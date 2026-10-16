@@ -35,6 +35,10 @@ def run(executable, root):
                    dict(frame=72, action='text', text=str(output)),
                    dict(frame=80, action='click', target='export.plan'),
                    dict(frame=92, action='click', target='export.start')]
+        # Let combo popups finish their initial sizing before targeting rows.
+        for action in actions:
+            if action['frame'] >= 48:
+                action['frame'] = 48 + 2 * (action['frame'] - 48)
         data = launch(executable, root, format_id, (1920, 1080), 1, actions)
         tasks = [task for task in data['tasks'] if task['source'] == 'asset.export']
         assert len(tasks) == 1 and tasks[0]['state'] == 'completed', tasks

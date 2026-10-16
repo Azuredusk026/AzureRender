@@ -88,3 +88,13 @@ Blender 5.1.2 实际导出五个节点及一个共享 GLB。
 正式目标通过仓库 `CMakeLists.txt` 注册。
 当前树 Release 构建与场景工作流复测通过。
 日志为主实施证据目录的 `scene-workflow.log`。
+
+## 角色联合流程
+
+真实编辑器已导入五个 Blender 场景节点。
+莱万汀 idle 定位、播放及暂停通过。
+保存后移动项目目录，独立 Player 重开通过。
+中性表情与原生场景待项分别保持用户选择和来源状态。
+
+证据见主实施目录的 `scene-host-final/summary.json`。
+同目录保存编辑器截图、操作记录及 Player 运行报告。

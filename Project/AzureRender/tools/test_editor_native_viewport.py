@@ -109,10 +109,14 @@ def run(executable, output, workflow):
                 if flag==2:wait(3)
             if settle:wait(5)
         def double_click_widget(identity):
+            activate_window()
             rect=state()['widgets'][identity];cx=rect[0]+rect[2]/2;cy=rect[1]+rect[3]/2
             mouse(0x200,cx-3,cy-3);mouse(0x200,cx,cy)
-            for message,buttons in ((0x201,1),(0x202,0),(0x201,1),(0x202,0)):
-                mouse(message,cx,cy,buttons,settle=False)
+            for flag in (2,4,2,4):
+                event=Input(0,InputUnion(MouseInput(0,0,0,flag,0,0)))
+                assert window.user.SendInput(1,ctypes.byref(event),ctypes.sizeof(Input))==1
+                evidence.append(dict(nativeMouseButton=flag,target=identity,inputSource='Win32 SendInput double click'))
+                wait(2)
             wait(8)
         user=window.user
         user.GetClassNameW.argtypes=[wintypes.HWND,wintypes.LPWSTR,ctypes.c_int]
@@ -174,10 +178,13 @@ def run(executable, output, workflow):
         version=json.loads(call('query',name='document.version'))
         call('edit',requestId='u12-native-mouse-mode',commandId='settings.set',baseVersion=version,
              parameters={'name':'editor.camera.rawMouse','value':raw_mouse})
+        activate_window()
         wait(20); baseline=state(); saved=call('query',name='document.contentHash')
         image=baseline['image'];x=image['x']+image['width']/2;y=image['y']+image['height']/2
         # A distinct second move refreshes GLFW/ImGui after queued enter/leave events.
-        post(0x7);mouse(0x200,x-3,y-3);mouse(0x200,x,y);mouse(0x201,x,y,1);mouse(0x202,x,y)
+        # Focus away from the selected object's transform handles.
+        focus_x=image['x']+20;focus_y=image['y']+20
+        post(0x7);mouse(0x200,focus_x-3,focus_y-3);mouse(0x200,focus_x,focus_y);mouse(0x201,focus_x,focus_y,1);mouse(0x202,focus_x,focus_y)
         for value,expected in (('E',1),('R',2),('W',0),('Q',3)):
             key(value,True);key(value,False);assert state()['gizmoMode']==expected,(value,state()['gizmoMode'])
         other='ground' if workflow=='exploration' else 'asset-b'

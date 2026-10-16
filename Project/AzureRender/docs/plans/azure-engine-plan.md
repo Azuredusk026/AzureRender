@@ -5,7 +5,9 @@
 单角色、单场景、单动画与表情进入自主实施。
 对象为现有莱万汀，EV0 完成。
 EV1 诊断交付，原生读取待专用输入。
-EV2 至 EV7 开发中，EV8 待实施。
+EV2 至 EV7 通用能力已实现，EV8 联合演示通过。
+原生来源、历史画面及性能验收保持待项。
+演示采用 idle 与中性表情，原生输入待提供。
 范围见[资源验证实施计划](2026-10-16-endfield-resource-validation.md)。
 本机样本与 REA 证据见[调查记录](../research/2026-10-16-endfield-resource-validation.md)。
 
