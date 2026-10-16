@@ -324,7 +324,7 @@ Matrix4 nodeTransform(const tinygltf::Node& node) {
     return result;
 }
 
-void transformVertex(AssetVertex& vertex, const Matrix4& transform) {
+void transformVertex(AssetVertex& vertex, const Matrix4& transform, std::array<float,2>* directionLengths=nullptr) {
     const auto position = vertex.position;
     vertex.position = {
         static_cast<float>(
@@ -388,6 +388,7 @@ void transformVertex(AssetVertex& vertex, const Matrix4& transform) {
     ty -= tangentDotNormal * vertex.normal[1];
     tz -= tangentDotNormal * vertex.normal[2];
     const double tangentLength = std::sqrt(tx * tx + ty * ty + tz * tz);
+    if(directionLengths)*directionLengths={static_cast<float>(length),static_cast<float>(tangentLength)};
     vertex.tangent = {
         static_cast<float>(tx / tangentLength),
         static_cast<float>(ty / tangentLength),
@@ -1512,9 +1513,10 @@ void appendPrimitive(
     if (primitive.attributes.find("TANGENT") == primitive.attributes.end()) {
         generateTangents(vertices, indices);
     }
+    std::vector<std::array<float,2>> directionLengths(vertices.size(),{1,1});
     if (!skinned) {
-        for (auto& vertex : vertices) {
-            transformVertex(vertex, transform);
+        for (std::size_t i=0;i<vertices.size();++i) {
+            transformVertex(vertices[i], transform, &directionLengths[i]);
         }
         if (azurerender::scene::mirroredTransform(transform)) {
             for (std::size_t i=0; i+2<indices.size(); i+=3)
@@ -1590,6 +1592,10 @@ void appendPrimitive(
                                 static_cast<float>(((a02*a21-a01*a22)*delta[0]+(a00*a22-a02*a20)*delta[1]+(a01*a20-a00*a21)*delta[2])/det),
                                 static_cast<float>(((a01*a12-a02*a11)*delta[0]+(a02*a10-a00*a12)*delta[1]+(a00*a11-a01*a10)*delta[2])/det)};
                         }else for(unsigned axis=0;axis<3;++axis)values[v][axis]=static_cast<float>(transform[axis]*delta[0]+transform[4+axis]*delta[1]+transform[8+axis]*delta[2]);
+                        if(semantic>0){const float length=directionLengths[v][semantic-1];
+                            if(length<1e-12F)throw std::invalid_argument("Degenerate morph direction basis");
+                            for(auto& value:values[v])value/=length;
+                        }
                     }
                 }
             }

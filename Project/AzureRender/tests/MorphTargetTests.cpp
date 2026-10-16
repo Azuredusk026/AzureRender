@@ -53,5 +53,8 @@ int main(){try{
     auto bad=fixture(8,true);bad["accessors"][3]["count"]=8;
     rejected=false;try{(void)loadEmbeddedGltfAsset(bad.dump());}catch(const std::exception&){rejected=true;}require(rejected,"Weight width mismatch must reject");
     require(animated.morphRanges[0].targets[7].normals.size()==3,"Normal deltas must survive");
+    auto scaled=fixture(1);scaled["nodes"][0]["scale"]={2,3,4};
+    const auto scaledAsset=loadEmbeddedGltfAsset(scaled.dump());
+    require(std::abs(scaledAsset.morphRanges[0].targets[0].normals[0][2]-.75F)<1e-6F,"Static normal morph must preserve base normalization scale");
     std::cout<<"Morph target budgets and weight animation passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
