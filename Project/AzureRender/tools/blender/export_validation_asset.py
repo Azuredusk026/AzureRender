@@ -6,6 +6,7 @@ import math
 from pathlib import Path
 import sys
 import bpy
+import numpy as np
 from mathutils import Matrix
 
 
@@ -16,9 +17,11 @@ def main():
     parser.add_argument('--duration', type=float, required=True)
     parser.add_argument('--clip', default='idle')
     parser.add_argument('--all-vertices', action='store_true')
+    parser.add_argument('--prepared-inspection', type=Path)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.output.exists(): raise FileExistsError(args.output)
     bpy.ops.wm.read_factory_settings(use_empty=True)
+    bpy.context.scene.render.fps = 60
     bpy.ops.import_scene.gltf(filepath=str(args.input.resolve()))
     scene = bpy.context.scene; scene.render.fps = 60
     armatures = [o for o in scene.objects if o.type == 'ARMATURE']
@@ -28,7 +31,23 @@ def main():
     if not rig.animation_data or not rig.animation_data.action: raise ValueError('No active imported action')
     action = rig.animation_data.action
     if args.clip not in action.name: raise ValueError('Imported action differs from requested clip: ' + action.name)
-    meshes = sorted([o for o in scene.objects if o.type == 'MESH'], key=lambda o:o.name)
+    meshes = sorted([o for o in scene.objects if o.type == 'MESH' and any(m.type=='ARMATURE' for m in o.modifiers)], key=lambda o:o.name)
+    if args.prepared_inspection:
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+        from validation_asset import read_glb, accessor
+        document,chunks=read_glb(args.input);binary=next(data for kind,data in chunks if kind==0x004e4942)
+        original=np.concatenate([accessor(document,binary,p['attributes']['POSITION']) for m in document['meshes'] for p in m['primitives']])
+        prepared=np.asarray(json.loads(args.prepared_inspection.read_text())['preparedPositions'])
+        if len(prepared)!=sum(len(o.data.vertices) for o in meshes):raise ValueError('Prepared geometry topology mismatch')
+        offset=0
+        for obj in meshes:
+            count=len(obj.data.vertices);raw=original[offset:offset+count]
+            imported=np.asarray([list(v.co) for v in obj.data.vertices]);homogeneous=np.c_[raw,np.ones(count)]
+            transform,_,rank,_=np.linalg.lstsq(homogeneous,imported,rcond=None)
+            if rank!=4 or np.max(np.linalg.norm(homogeneous@transform-imported,axis=1))>1e-5:raise ValueError('Prepared geometry correspondence mismatch')
+            corrected=imported+(prepared[offset:offset+count]-raw)@transform[:3]
+            for vertex,value in zip(obj.data.vertices,corrected):vertex.co=value
+            offset+=count
     times = sorted(set([args.duration*i/4 for i in range(5)] +
                        [min(args.duration,args.duration*i/4+1/120) for i in range(5)]))
     # Blender Z-up to glTF Y-up; transform matrices by basis conjugation.
@@ -53,7 +72,8 @@ def main():
             'transformOrder':'morph, skin, object world, Blender-to-glTF basis',
             'matrixStorage':'row-major','blenderVersion':bpy.app.version_string,
             'sourceSha256':hashlib.sha256(args.input.read_bytes()).hexdigest(),
-            'action':action.name,'sampleRate':60,'allVertices':args.all_vertices,'samples':samples}
+            'action':action.name,'sampleRate':60,'allVertices':args.all_vertices,
+            'enginePreparedGeometry':args.prepared_inspection is not None,'samples':samples}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     with args.output.open('x',encoding='utf-8') as f: json.dump(report,f,separators=(',',':') if args.all_vertices else None,indent=None if args.all_vertices else 2)
     print('VALIDATION_REFERENCE '+str(args.output.resolve()),flush=True)

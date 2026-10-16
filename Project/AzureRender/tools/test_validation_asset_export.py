@@ -1,9 +1,38 @@
 import copy
 import unittest
+import os
 import validation_asset as v
 
 
 class ValidationExportTests(unittest.TestCase):
+    @unittest.skipUnless(os.environ.get('AZURE_BLENDER'), 'Set AZURE_BLENDER for real importer time regression')
+    def test_blender_seconds_match_imported_keyframes(self):
+        import base64,json,struct,subprocess,tempfile
+        from pathlib import Path
+        binary=bytearray();views=[];accessors=[]
+        def add(values,kind,count,component=5126):
+            binary.extend(b'\0'*(-len(binary)%4));start=len(binary)
+            binary.extend(struct.pack('<'+('f' if component==5126 else 'H')*len(values),*values))
+            views.append({'buffer':0,'byteOffset':start,'byteLength':len(binary)-start})
+            accessors.append({'bufferView':len(views)-1,'componentType':component,'count':count,'type':kind})
+            return len(accessors)-1
+        position=add([0,0,0,0,1,0,0,0,1],'VEC3',3)
+        joints=add([0]*12,'VEC4',3,5123);weights=add([1,0,0,0]*3,'VEC4',3)
+        times=add([0,1],'SCALAR',2);values=add([0,0,0,1,0,0],'VEC3',2)
+        doc={'asset':{'version':'2.0'},'buffers':[{'byteLength':len(binary),'uri':'data:application/octet-stream;base64,'+base64.b64encode(binary).decode()}],
+             'bufferViews':views,'accessors':accessors,'nodes':[{'name':'rig','children':[1]},{'name':'joint'},{'name':'mesh','mesh':0,'skin':0}],
+             'skins':[{'joints':[1]}],'meshes':[{'primitives':[{'attributes':{'POSITION':position,'JOINTS_0':joints,'WEIGHTS_0':weights}}]}],
+             'scenes':[{'nodes':[0,2]}],'scene':0,'animations':[{'name':'idle','samplers':[{'input':times,'output':values,'interpolation':'LINEAR'}],
+             'channels':[{'sampler':0,'target':{'node':1,'path':'translation'}}]}]}
+        runs=Path(__file__).resolve().parents[1]/'build/runs';runs.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='blender-time-test-',dir=runs) as temp:
+            root=Path(temp);source=root/'linear.gltf';source.write_text(json.dumps(doc));output=root/'reference.json'
+            subprocess.run([os.environ['AZURE_BLENDER'],'--background','--factory-startup','--python',str(Path(__file__).parent/'blender/export_validation_asset.py'),
+                            '--','--input',str(source),'--output',str(output),'--duration','1','--clip','idle'],check=True,capture_output=True)
+            reference=json.loads(output.read_text())
+            for sample in reference['samples']:
+                self.assertAlmostEqual(sample['bones']['joint'][0][3],sample['time'],places=5)
+
     def fixture(self):
         return {'nodes': [{'name': 'root', 'children': [1]}, {'name': 'joint'}],
                 'skins': [{'joints': [0, 1]}]}
