@@ -109,3 +109,10 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 `assets_public/` 包含公共示例、测试资产和许可。`assets_private/` 保存本机授权素材。公开包与截图使用许可明确的资源，依赖许可见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
 本批最终候选与收尾进度见[P8 执行记录](docs/acceptance/p8/2026-10-14.md)。
+
+## 资源验证开发
+
+莱万汀资源验证按 EV0 至 EV8 推进。
+EV0 已完成来源清单与 Blender 五帧基线。
+实施范围见[资源验证计划](docs/plans/2026-10-16-endfield-resource-validation.md)。
+当前证据见[基线验收](docs/acceptance/ev/ev0.md)。

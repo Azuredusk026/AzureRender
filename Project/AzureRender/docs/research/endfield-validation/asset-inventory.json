@@ -1,0 +1,128 @@
+[
+  {
+    "file": "laevat_repaired_v2.glb",
+    "sha256": "4fbb2431d85d73015b44a3ffef260455123ed6593ba6b7b1fc7129ab77fa6753",
+    "bytes": 82160908,
+    "nodes": 469,
+    "skins": [
+      468
+    ],
+    "materials": 13,
+    "meshes": 1,
+    "morphCounts": [
+      0
+    ],
+    "targetNames": [],
+    "animations": [
+      {
+        "name": "Afterglow_ProceduralIdle",
+        "paths": [
+          "rotation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "laevat_g5_source_animated.glb",
+    "sha256": "95ef2d22c9ef061817073e7076c2924fdd3d6e06ccaf87405fd251bed0fbe892",
+    "bytes": 71624012,
+    "nodes": 469,
+    "skins": [
+      468
+    ],
+    "materials": 13,
+    "meshes": 1,
+    "morphCounts": [
+      0
+    ],
+    "targetNames": [],
+    "animations": [
+      {
+        "name": "idle",
+        "paths": [
+          "rotation",
+          "translation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      },
+      {
+        "name": "walk",
+        "paths": [
+          "rotation",
+          "translation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "laevat_g5_animated.glb",
+    "sha256": "dd4995ef0fdca1867d6802aa00b7591a6f9e64c6619637a0b087d8f8afca7fd6",
+    "bytes": 69671768,
+    "nodes": 469,
+    "skins": [
+      468
+    ],
+    "materials": 13,
+    "meshes": 1,
+    "morphCounts": [
+      0
+    ],
+    "targetNames": [],
+    "animations": [
+      {
+        "name": "idle",
+        "paths": [
+          "rotation",
+          "translation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      },
+      {
+        "name": "walk",
+        "paths": [
+          "rotation",
+          "translation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "laevat_idle_material_face_sdf.glb",
+    "sha256": "afc420ece28c05090aeb0c859b0bf7ffdced6f4e6dfce27cb1f6b8111ceade8d",
+    "bytes": 69406068,
+    "nodes": 469,
+    "skins": [
+      468
+    ],
+    "materials": 13,
+    "meshes": 1,
+    "morphCounts": [
+      0
+    ],
+    "targetNames": [],
+    "animations": [
+      {
+        "name": "Afterglow_ProceduralIdle",
+        "paths": [
+          "rotation"
+        ],
+        "interpolation": [
+          "LINEAR"
+        ]
+      }
+    ]
+  }
+]

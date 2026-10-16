@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "sourceKind": "procedural",
+  "sources": [
+    {
+      "id": "mechanical-panel",
+      "path": "mechanical_panel.gltf",
+      "sha256": "f8df7ac55db9d5dd2b4408cc0a6aa0d12c8a5049432392ac8fa17d2b48af4e7e",
+      "dependencies": []
+    }
+  ],
+  "tools": [],
+  "settings": {
+    "unit": "meter",
+    "up": "Y"
+  },
+  "outputs": [],
+  "counts": {
+    "vertices": 3,
+    "morphTargets": 3
+  },
+  "losses": [],
+  "evidence": []
+}

@@ -1,5 +1,15 @@
 # 开发总计划
 
+## 资源验证计划
+
+单角色、单场景、单动画与表情进入自主实施。
+对象为现有莱万汀，EV0 完成，EV1 至 EV3 开发中。
+EV4 至 EV8 待实施。
+范围见[资源验证实施计划](2026-10-16-endfield-resource-validation.md)。
+本机样本与 REA 证据见[调查记录](../research/2026-10-16-endfield-resource-validation.md)。
+
+## 当前交付记录
+
 本轮范围见[路径追踪补齐与公开演示计划](2026-10-15-pathtracing-completion.md)。
 PT0 至 PT7 已完成。
 金属、法线、玻璃和灯光采样已接入通用渲染模块。
