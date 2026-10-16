@@ -1,4 +1,5 @@
 #include "editor/commands/EditRegistry.hpp"
+#include "editor/scene/SceneImportService.hpp"
 #include "editor/EditorSession.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/camera/GameCameraService.hpp"
@@ -16,6 +17,7 @@ namespace azurerender {
 EditRegistry editorOperations(EditorSession& session) {
     using Json=nlohmann::json;
     EditRegistry registry;
+    registerSceneImportOperations(registry,session);
     registerPrefabAuthoringOperations(registry,session);
     const Json text={{"type","string"}},boolean={{"type","boolean"}},integer={{"type","integer"}},number={{"type","number"}};
     const Json vector={{"type","array"},{"minItems",3},{"maxItems",3},{"items",number}};

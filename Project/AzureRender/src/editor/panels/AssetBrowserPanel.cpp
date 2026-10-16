@@ -97,11 +97,18 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
             if(ui::button(ui::tr("Reload Assets")))static_cast<void>(services_.session.execute(EditorCommand::ReloadAssets));ImGui::Separator();
         }
         std::vector<std::string> importExtensions;
+        importExtensions.push_back(".azuresceneexchange");
         for(const auto& [id,format]:assetFormatRegistry().formats()){(void)id;if(format.canRead)importExtensions.insert(importExtensions.end(),format.extensions.begin(),format.extensions.end());}
         services_.pathInput(ui::tr("Asset source"),presentation.importPath_,"import",false,importExtensions);
         ui::ButtonOptions import;import.disabled=view.importing()||services_.session.playing()||services_.session.building()||presentation.importPath_.empty();
         import.tooltip=ui::tr("Select a supported model, image or audio file. Import continues when this panel is closed.");
-        if(ui::button(ui::tr("Import"),import)){const auto result=services_.session.edit("asset.import-start",{{"path",presentation.importPath_}});if(result)ImGui::CloseCurrentPopup();}services_.observe("asset.import");
+        if(ui::button(ui::tr("Import"),import)){
+            const bool exchange=std::filesystem::u8path(presentation.importPath_).extension()==".azuresceneexchange";
+            const auto result=services_.session.edit(exchange?"scene.import-start":"asset.import-start",{{"path",presentation.importPath_}});
+            if(result)ImGui::CloseCurrentPopup();
+        }services_.observe("asset.import");
+        if(std::filesystem::u8path(presentation.importPath_).extension()==".azuresceneexchange")
+            ImGui::TextWrapped("%s",ui::tr("场景交换包及其模型需放入项目资产目录。刷新资产后导入，任务面板可取消。"));
         if(view.importing()){ImGui::ProgressBar(view.importProgress());if(ui::button(ui::tr("Cancel Import")))services_.session.edit("asset.import-cancel");services_.observe("asset.import-cancel");}
         ui::ButtonOptions exportOptions;exportOptions.disabled=presentation.selectedAssets_.size()!=1||services_.session.context().dirty()||view.importing()||services_.session.playing()||services_.session.building()||services_.session.reimporting();
         if(ui::button(ui::tr("Export selected asset"),exportOptions)){presentation.exportRequest_={{"asset",*presentation.selectedAssets_.begin()}};presentation.exportDialogRequested_=true;ImGui::CloseCurrentPopup();}services_.observe("assets.export");

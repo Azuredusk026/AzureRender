@@ -190,6 +190,7 @@ private:
     friend class EditTransaction;
     friend class EditService;
     friend class PrefabAuthoringService;
+    friend class SceneImportService;
     friend class DocumentBatchTransaction;
     std::string documentId_=newDocumentIdentity();
     std::uint64_t revision_=1,mergeRevision_=0;

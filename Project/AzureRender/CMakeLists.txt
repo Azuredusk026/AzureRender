@@ -380,6 +380,7 @@ add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTI
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
 target_link_libraries(AzureReflection PUBLIC AzureFoundation nlohmann_json::nlohmann_json)
 add_library(AzureRuntime STATIC
+    src/assets/scene/SceneExchange.cpp
     src/runtime/MaterialDocument.cpp
     src/runtime/ScriptRuntimeRegistry.cpp
     src/runtime/EngineSettings.cpp
@@ -456,6 +457,7 @@ target_link_libraries(AzureUi PUBLIC imgui::imgui)
 target_include_directories(AzureUi PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 add_library(AzureEditor STATIC
+    src/editor/scene/SceneImportService.cpp
     src/editor/documents/EditorDocumentManager.cpp
     src/editor/animation/AnimationPreviewService.cpp
     src/editor/scripts/ScriptAuthoringRegistry.cpp
@@ -913,6 +915,10 @@ if(BUILD_TESTING)
     add_executable(AzureExpressionPoseTests tests/ExpressionPoseTests.cpp)
     target_link_libraries(AzureExpressionPoseTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ExpressionPose COMMAND AzureExpressionPoseTests)
+    add_executable(AzureSceneImportTests tests/SceneImportTests.cpp)
+    target_link_libraries(AzureSceneImportTests PRIVATE AzureEditor)
+    add_test(NAME AzureAssets.SceneImport COMMAND AzureSceneImportTests "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/resource_validation/mechanical_panel.gltf")
+    add_test(NAME AzureEditor.SceneImportWorkflow COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_import_workflow.py" --executable "$<TARGET_FILE:AzureSceneImportTests>")
     target_include_directories(AzureBrowRegionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureBrowRegionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.BrowRegions COMMAND AzureBrowRegionTests)

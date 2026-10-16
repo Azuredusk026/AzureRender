@@ -224,6 +224,7 @@ private:
     bool frameSelectionRequested_=false;
     std::string lastError_;
     EditorFeedback feedback_;
+    friend class SceneImportService;
     std::unique_ptr<EditorTaskService> tasks_;
     std::string importTask_;
     bool reimporting_=false;
