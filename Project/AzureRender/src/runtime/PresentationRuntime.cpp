@@ -1,5 +1,6 @@
 #include "runtime/PresentationRuntime.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include "animation/ExpressionPose.hpp"
 #include <fstream>
 namespace azurerender {
 PresentationRuntime::PresentationRuntime(RuntimeLifecycle& runtime,AssetDatabase& assets,bool device):runtime_(runtime),assets_(assets),audio_(device){}
@@ -42,6 +43,9 @@ void PresentationRuntime::update(double delta){
         try{if(value.state!=animation.state){animation.machine.select(value.state,value.locomotion?value.crossfade:0);animation.state=value.state;}animation.machine.advance(delta,value.playbackRate);
             frames_.push_back({animation.node,animation.machine.clip(),animation.machine.time(),animation.machine.loop(),
                 animation.machine.previousClip(),animation.machine.previousTime(),animation.machine.blend(),animation.machine.previousLoop(),{value.morph0,value.morph1}});
+            auto& frame=frames_.back();frame.morphOverrides=morphOverridesFromJson(value.morphOverrides);
+            if(!value.expression.empty())frame.expression=std::make_shared<ExpressionPose>(expressionPoseFromJson(nlohmann::json::parse(value.expression)));
+            frame.expressionWeight=value.expressionWeight;
         }catch(const std::exception& error){const auto key=animation.node+value.state;if(failed_.insert(key).second)errors_.push_back(error.what());}
     }
     if(!audio_.hasDevice()&&delta>0){const auto samples=audio_.mix(static_cast<std::uint32_t>(std::min(delta,0.25)*48000));for(float sample:samples)energy_+=sample*sample;}

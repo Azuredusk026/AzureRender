@@ -56,6 +56,16 @@ void ImGuiEditorLayer::drawAnimationPanel(PanelContext& panelContext){
                 bool skeleton=session_->viewportOverlayPolicies().count("skeleton")&&session_->viewportOverlayPolicies().at("skeleton")=="selected";
                 if(ImGui::Checkbox(ui::tr("Show selected skeleton"),&skeleton))session_->edit("viewport.overlay-policy",{{"category","skeleton"},{"policy",skeleton?"selected":"hidden"}});observeWidget("animation.skeleton");
                 if(ui::button(ui::tr("Set initial semantic")))session_->edit("component.field",{{"type","azure.animator"},{"field","state"},{"value",selected}});
+                const auto expression=data.value("expression",std::string());
+                if(!expression.empty()){
+                    const auto preset=nlohmann::json::parse(expression);
+                    ImGui::Text("%s",preset.at("id").get<std::string>().c_str());
+                    float weight=data.value("expressionWeight",1.F);
+                    if(ImGui::SliderFloat(ui::tr("表情强度"),&weight,0,1))session_->edit("animation.expression.weight",{{"weight",weight}});
+                    observeWidget("animation.expression.weight");
+                    if(ui::button(ui::tr("清除表情")))session_->edit("animation.expression.clear",{});
+                    observeWidget("animation.expression.clear");
+                }
                 ImGui::EndDisabled();
                 for(const auto& state:graph.at("states"))ImGui::Text(ui::tr("%s: clip %u, %s"),state.at("name").get<std::string>().c_str(),state.at("clip").get<unsigned>(),state.value("loop",true)?ui::tr("loop"):ui::tr("once"));
                 if(!timeline.empty())ImGui::Text(ui::tr("Clip %u, time %.3f, blend %.3f"),timeline.at("clip").get<unsigned>(),timeline.at("time").get<double>(),timeline.at("blend").get<float>());

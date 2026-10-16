@@ -26,6 +26,11 @@ void AnimationPreviewService::seek(EditorContext& context,const std::string& nod
     if(skeleton->nodes.size()>4096||skeleton->jointNodes.size()>1024)throw std::invalid_argument("Skeleton exceeds preview node budget");
     std::vector<AssetVertex>().swap(skeleton->vertices);std::vector<std::uint32_t>().swap(skeleton->indices);std::vector<AssetMaterial>().swap(skeleton->materials);std::vector<AssetPrimitive>().swap(skeleton->primitives);
     Track track{std::move(machine),{data.value("morph0",0.F),data.value("morph1",0.F)},found!=tracks_.end()&&found->second.playing,crossfade,previous,found==tracks_.end()?1:found->second.speed,found==tracks_.end()?true:found->second.loop,std::move(skeleton)};
+    track.morphOverrides=morphOverridesFromJson(data.value("morphOverrides",std::string()));
+    const auto expression=data.value("expression",std::string());
+    if(!expression.empty())track.expression=std::make_shared<ExpressionPose>(expressionPoseFromJson(nlohmann::json::parse(expression)));
+    track.expressionWeight=data.value("expressionWeight",1.F);
+    if(track.expression)static_cast<void>(applyExpressionPose(*track.skeleton,bindAnimationPose(*track.skeleton),*track.expression,track.expressionWeight));
     if(found==tracks_.end())track.loop=track.machine.loop();tracks_[node]=std::move(track);
 }
 void AnimationPreviewService::play(EditorContext& context,const std::string& node){synchronize(context);if(!tracks_.count(node))seek(context,node,{},0);tracks_.at(node).playing=true;}
@@ -47,6 +52,7 @@ std::vector<ViewportOverlayLine> AnimationPreviewService::skeletonLines(EditorCo
     for(const auto& [id,track]:tracks_){const auto node=std::find_if(scene.nodes.begin(),scene.nodes.end(),[&](const auto& value){return value.id==id;});if(node==scene.nodes.end())continue;
         const auto& asset=*track.skeleton;auto pose=sampleAnimationPose(asset,track.machine.clip(),static_cast<float>(track.machine.time()),track.loop);
         if(track.machine.blend()<1)pose=blendAnimationPoses(asset,sampleAnimationPose(asset,track.machine.previousClip(),static_cast<float>(track.machine.previousTime()),track.loop),pose,track.machine.blend());
+        if(track.expression)pose=applyExpressionPose(asset,pose,*track.expression,track.expressionWeight);
         const auto& transform=world.at(static_cast<std::size_t>(node-scene.nodes.begin()));
         for(const auto joint:asset.jointNodes){const auto parent=asset.nodes.at(joint).parent;if(parent<0)continue;
             const auto position=[&](std::size_t index){const auto& matrix=pose.nodeWorldMatrices.at(index);return internal::transformPosition(transform,{matrix[12],matrix[13],matrix[14]});};
@@ -58,6 +64,6 @@ nlohmann::json AnimationPreviewService::describe() const{
     auto result=nlohmann::json::object();for(const auto& [node,track]:tracks_)result[node]={{"state",track.machine.state()},{"time",track.machine.time()},{"playing",track.playing},{"clip",track.machine.clip()},{"blend",track.machine.blend()},{"crossfade",track.crossfade},{"previous",track.previous},{"speed",track.speed},{"loop",track.loop},{"joints",track.skeleton->jointNodes.size()}};return result;
 }
 std::vector<NodeAnimationFrame> AnimationPreviewService::frames() const{
-    std::vector<NodeAnimationFrame> result;for(const auto& [node,track]:tracks_){const auto& m=track.machine;result.push_back({node,m.clip(),m.time(),track.loop,m.previousClip(),m.previousTime(),m.blend(),track.loop,track.morph});}return result;
+    std::vector<NodeAnimationFrame> result;for(const auto& [node,track]:tracks_){const auto& m=track.machine;result.push_back({node,m.clip(),m.time(),track.loop,m.previousClip(),m.previousTime(),m.blend(),track.loop,track.morph});auto& frame=result.back();frame.morphOverrides=track.morphOverrides;frame.expression=track.expression;frame.expressionWeight=track.expressionWeight;}return result;
 }
 }

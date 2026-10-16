@@ -3,6 +3,7 @@
 #include "runtime/AnimationStateMachine.hpp"
 #include "assets/GltfLoader.hpp"
 #include "editor/viewport/ViewportOverlayRegistry.hpp"
+#include "animation/ExpressionPose.hpp"
 namespace azurerender {
 class AnimationPreviewService {
 public:
@@ -16,7 +17,7 @@ public:
     nlohmann::json describe() const;
     std::vector<NodeAnimationFrame> frames() const;
 private:
-    struct Track {AnimationStateMachine machine;std::array<float,2> morph;bool playing=false;double crossfade=.18;std::string previous;double speed=1;bool loop=true;std::shared_ptr<LoadedAsset> skeleton;};
+    struct Track {AnimationStateMachine machine;std::array<float,2> morph;bool playing=false;double crossfade=.18;std::string previous;double speed=1;bool loop=true;std::shared_ptr<LoadedAsset> skeleton;std::vector<float> morphOverrides;std::shared_ptr<const ExpressionPose> expression;float expressionWeight=1;};
     std::map<std::string,Track> tracks_;
     std::uint64_t revision_=0,assetVersion_=0;
     std::string fingerprint_;

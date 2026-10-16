@@ -153,7 +153,7 @@ struct Script {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
 };
-AZURE_TYPE("azure.animator", 3)
+AZURE_TYPE("azure.animator", 4)
 struct Animator {
     AZURE_FIELD("Graph asset", 0, 0)
     AZURE_FIELD_REFERENCE("asset", "animation", "")
@@ -174,6 +174,12 @@ struct Animator {
     float morph0 = 0;
     AZURE_FIELD("Morph weight one", 0, 1)
     float morph1 = 0;
+    AZURE_FIELD("Morph overrides", 0, 0)
+    std::string morphOverrides;
+    AZURE_FIELD("Expression pose", 0, 0)
+    std::string expression;
+    AZURE_FIELD("Expression blend", 0, 1)
+    float expressionWeight = 1;
     float playbackRate = 1;
     AZURE_FIELD("Locomotion profile", 0, 0)
     std::string locomotionProfile = "default";

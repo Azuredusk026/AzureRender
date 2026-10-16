@@ -9,6 +9,7 @@
 #include "runtime/AssetTypeRegistry.hpp"
 #include "editor/preview/ThumbnailProviderRegistry.hpp"
 #include "editor/viewport/EditorCameraService.hpp"
+#include "animation/ExpressionPose.hpp"
 #include <algorithm>
 #include <fstream>
 namespace azurerender {
@@ -192,6 +193,31 @@ EditRegistry editorOperations(EditorSession& session) {
         c.setComponentField(a.at("type").template get<std::string>(),a.at("field").template get<std::string>(),a.at("value"));
     });
     document("component.fields",schema({{"type",text},{"values",Json::object()}},{"type","values"}),[](auto& c,const auto& a){c.setComponentFields(a.at("type").template get<std::string>(),a.at("values"));});
+    auto expressionAsset=[](EditorContext& c){
+        if(!c.selectedNode())throw std::invalid_argument("Expression editing requires a selected node");
+        const auto& id=c.selectedNode()->resourceId;
+        const auto resource=std::find_if(c.scene().resources.begin(),c.scene().resources.end(),[&](const auto& r){return r.id==id;});
+        if(resource==c.scene().resources.end())throw std::invalid_argument("Expression requires a model resource");
+        return loadGltfAsset(resource->path.u8string());
+    };
+    document("animation.expression.apply",schema({{"preset",Json::object()},{"weight",number}},{"preset"}),[expressionAsset](auto& c,const auto& a){
+        const auto preset=expressionPoseFromJson(a.at("preset"));const auto weight=a.value("weight",1.F);const auto asset=expressionAsset(c);
+        static_cast<void>(applyExpressionPose(asset,bindAnimationPose(asset),preset,weight));
+        c.setComponentFields("azure.animator",{{"expression",expressionPoseToJson(preset).dump()},{"expressionWeight",weight}});
+    });
+    document("animation.expression.clear",schema(),[](auto& c,const auto&){c.setComponentField("azure.animator","expression","");});
+    document("animation.expression.weight",schema({{"weight",number}},{"weight"}),[](auto& c,const auto& a){c.setComponentField("azure.animator","expressionWeight",a.at("weight"));});
+    document("animation.morph.set",schema({{"targetId",text},{"weight",number}},{"targetId","weight"}),[expressionAsset](auto& c,const auto& a){
+        const auto asset=expressionAsset(c);const auto id=a.at("targetId").template get<std::string>();std::size_t target=0;bool found=false;
+        for(const auto& range:asset.morphRanges)for(std::size_t i=0;i<range.targets.size();++i)if(range.targets[i].name==id){
+            if(found&&target!=i)throw std::invalid_argument("Morph ID has inconsistent indices across nodes");target=i;found=true;
+        }
+        if(!found)throw std::invalid_argument("Unknown morph target ID: "+id);
+        const auto data=c.componentData(c.selectedNode()->id,"azure.animator");auto weights=morphOverridesFromJson(data.value("morphOverrides",std::string()));
+        if(weights.empty()){weights.resize(asset.morphTargetCount,0);if(!weights.empty())weights[0]=data.value("morph0",0.F);if(weights.size()>1)weights[1]=data.value("morph1",0.F);}
+        weights.resize(std::max(weights.size(),target+1),0);weights[target]=a.at("weight").template get<float>();
+        const auto serialized=Json{{"schemaVersion",1},{"weights",weights}}.dump();static_cast<void>(morphOverridesFromJson(serialized));c.setComponentField("azure.animator","morphOverrides",serialized);
+    });
     const auto ownerList=Json{{"type","array"},{"items",text},{"minItems",1},{"maxItems",4096}};
     document("component.batch-field",schema({{"nodes",ownerList},{"type",text},{"field",text},{"value",Json::object()},{"axis",integer},{"reset",boolean}},{"nodes","type","field"}),[](auto& c,const auto& a){PropertyEditorRegistry::apply(c,a);});
     registry.add({"reference.begin",1,schema({{"nodes",ownerList},{"type",text},{"field",text}},{"nodes","type","field"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json {session.references().begin(c,a);return nullptr;});

@@ -1,4 +1,5 @@
 #include "editor/EditorSession.hpp"
+#include "animation/ExpressionPose.hpp"
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -42,5 +43,28 @@ int main(int argc,char** argv){if(argc!=2)return 2;try{
     require(static_cast<bool>(session.edit("animation.play",{{"node","hero"}})),"A refreshed binding creates a new preview track");
     require(static_cast<bool>(session.edit("component.field",{{"type","azure.animator"},{"field","state"},{"value","walk"}})),"Rebind initial state using validated component metadata");
     session.advance(0);require(session.edit("animation.describe").value.empty(),"Content edits invalidate preview bindings before rendering");
-    std::filesystem::remove_all(root);std::cout<<"Independent skeleton timelines passed\n";return 0;
+    const auto model=std::find_if(context->scene().resources.begin(),context->scene().resources.end(),[&](const auto& r){return r.id==context->selectedNode()->resourceId;});
+    require(model!=context->scene().resources.end(),"Expression fixture has a model");
+    const auto asset=loadGltfAsset(model->path.u8string());ExpressionPose neutral;neutral.id="neutral-fixture";neutral.skeletonFingerprint=expressionSkeletonFingerprint(asset);
+    const auto preset=expressionPoseToJson(neutral);
+    require(static_cast<bool>(session.edit("history.end-edit")),"Close initial field edit");
+    require(static_cast<bool>(session.edit("animation.expression.apply",{{"preset",preset},{"weight",.5}})),"Apply validated neutral expression through production operation");
+    const auto expression=context->componentData("hero","azure.animator").at("expression");
+    require(!expression.get<std::string>().empty(),"Expression persists in component");
+    require(static_cast<bool>(session.edit("history.end-edit")),"Close expression transaction");
+    require(static_cast<bool>(session.edit("history.undo")),"Undo expression");
+    require(context->componentData("hero","azure.animator").value("expression",std::string()).empty(),"Undo restores neutral configuration");
+    require(static_cast<bool>(session.edit("history.redo")),"Redo expression");
+    require(context->componentData("hero","azure.animator").at("expression")==expression,"Redo restores preset");
+    require(static_cast<bool>(session.edit("document.save")),"Save expression configuration");
+    auto reopened=EditorContext::openProject(root/"project.azureproject");
+    require(reopened->componentData("hero","azure.animator").at("expression")==expression,"Reopen retains expression preset");
+    require(static_cast<bool>(session.edit("preview.play")),"Enter Play with expression");
+    require(static_cast<bool>(session.edit("preview.stop")),"Stop expression preview");
+    require(context->componentData("hero","azure.animator").at("expression")==expression,"Play Stop preserves authored expression");
+    auto invalid=preset;invalid["schemaVersion"]=9;
+    const auto beforeInvalid=context->documentContent();
+    require(!session.edit("animation.expression.apply",{{"preset",invalid}}),"Unknown preset schema rejected");
+    require(context->documentContent()==beforeInvalid,"Rejected expression keeps document unchanged");
+    std::filesystem::remove_all(root);std::cout<<"Independent skeleton timelines and expression authoring passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

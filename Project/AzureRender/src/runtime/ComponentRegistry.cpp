@@ -1,6 +1,7 @@
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/GeneratedComponents.hpp"
 #include "runtime/physics/PhysicsDescriptors.hpp"
+#include "animation/ExpressionPose.hpp"
 namespace azurerender {
 void ComponentRegistry::add(ComponentBinding value) {
     if(sealed_)throw std::logic_error("Component registration is sealed");
@@ -84,6 +85,11 @@ ComponentRegistry makeRuntimeComponentRegistry() {
     result.addValidation("azure.camera",[](const Json& value){if(value.at("nearPlane").get<float>()>=value.at("farPlane").get<float>())throw std::invalid_argument("Camera requires near < far");});
     result.setPresentation("azure.third-person-camera",{"第三人称相机","场景"});
     result.setPresentation("azure.animator",{"动画播放器","呈现"});
+    result.addValidation("azure.animator",[](const Json& value){
+        static_cast<void>(morphOverridesFromJson(value.value("morphOverrides",std::string())));
+        const auto expression=value.value("expression",std::string());
+        if(!expression.empty())static_cast<void>(expressionPoseFromJson(Json::parse(expression)));
+    });
     result.setPresentation("azure.audio-source",{"音频源","呈现"});
     result.setPresentation("azure.game-ui",{"游戏界面文档","呈现"});
     result.setPresentation("azure.script",{"脚本","行为"});

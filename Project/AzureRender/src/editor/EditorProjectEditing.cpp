@@ -6,6 +6,7 @@
 #include "runtime/LevelRenderSettings.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "assets/GltfLoader.hpp"
+#include "animation/ExpressionPose.hpp"
 #include "runtime/ComponentCodec.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
@@ -143,6 +144,10 @@ NodeAnimationFrame EditorContext::animationPose(const std::string& id,const std:
     NodeAnimationFrame frame{id,machine.clip(),machine.time(),machine.loop(),
         machine.previousClip(),machine.previousTime(),machine.blend(),machine.previousLoop(),
         {fields.value("morph0",0.0F),fields.value("morph1",0.0F)}};
+    frame.morphOverrides=morphOverridesFromJson(fields.value("morphOverrides",std::string()));
+    const auto expression=fields.value("expression",std::string());
+    if(!expression.empty())frame.expression=std::make_shared<ExpressionPose>(expressionPoseFromJson(nlohmann::json::parse(expression)));
+    frame.expressionWeight=fields.value("expressionWeight",1.F);
     return frame;
 }
 void EditorContext::selectNodes(std::vector<std::size_t> indices){
