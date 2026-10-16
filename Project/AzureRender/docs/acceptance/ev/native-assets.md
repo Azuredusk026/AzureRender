@@ -89,6 +89,65 @@ CRC 前有十四字节尾部，字段另行保留。
 原始缓冲和全部采样保留于 `animation-candidates/`。
 下一步验证轨道语义、绑定、坐标与引擎播放。
 
+## 原生候选数值与播放验证
+
+`tools/endfield_native/animation.py` 验证通用轨道候选。
+支持范围为直接变换轨道和恒定单位根数据。
+动态根运动、动态标量和肌肉曲线需独立求解。
+原始失败记录与采样数据完整保留。
+
+编队待机 01、02 均通过候选数值检查。
+各有 390 条轨道，全部唯一对应源骨架路径。
+两个动作均为 151 帧、60 Hz、2.5 秒。
+分别校验 605 和 594 个源常量绑定。
+
+待机 01 最大常量误差为 `1.4e-7`。
+待机 02 最大常量误差为 `1.5e-7`。
+根数据为三组恒定单位变换。
+17 条标量数据均恒定，控制器语义另行保留。
+
+`tools/endfield_native/build_preview.py` 创建技术预览。
+`tools/endfield_native/export_preview.py` 输出独立 GLB。
+两者通过 `--run-root` 和 `--clip` 指定输入。
+Blender 使用 `--background --factory-startup` 隔离运行。
+
+预览使用实际原生网格、蒙皮、贴图与采样姿态。
+蒙皮骨架包含 313 个骨骼，未使用轨道另行登记。
+待机 01 的源世界矩阵最大误差为 `3.31e-6`。
+材质采用基础贴图近似，衣摆物理尚未还原。
+
+待机 01 GLB 包含 313 个关节与 939 条动画通道。
+独立项目 `engine-native-probe/` 完成五帧播放采样。
+匹配构建的 Player 运行退出码为 0。
+Vulkan 校验无错误，卸载后缓冲和图像计数为零。
+
+报告为 `engine-native-report-rebuilt.json`。
+截图位于 `engine-native-capture-rebuilt/`。
+该结果证明技术接入，完整画面验收保持开放。
+正式演示动作和原生场景等待用户选择。
+
+首次运行使用的 Player 与共享着色器版本不匹配。
+对应日志保留于 `engine-native.stderr.log`。
+匹配 MSVC 14.44 环境重建后，描述符错误消失。
+本轮未修改引擎源代码。
+
+## 原生表情与场景目录
+
+已提取 `data_facemorph_avatar_laevat.asset`。
+资产绑定的 Avatar 与角色 Animator 完全一致。
+表情源包含 245 个控制项和 95 个骨骼基准姿态。
+247 条托管引用已完整解析，剩余字节为零。
+
+证据位于 `expression-source/`。
+控制器包含骨骼形变和着色参数映射。
+这些数据的引擎驱动仍需实现与验证。
+当前演示保持中性表情。
+
+已解码关卡描述、中文文本与情绪映射表。
+场景候选包括 O.M.V.帝江号、枢纽区和纯白空间。
+场景目录存在性已确认，几何闭包待选择后验证。
+源文件指纹集中保存于 `native-evidence-manifest.json`。
+
 ## 环境与测试
 
 Python 使用 3.11，运行库使用本机 .NET 9。
@@ -100,6 +159,11 @@ REA 原生分析后端当前未配置。
 `python tools/test_endfield_native.py`。
 四个用例覆盖有效布局、损坏、截断和未知协议。
 全部通过，运行入口帮助命令通过。
+
+动画验证命令为 `python tools/test_endfield_native_animation.py`。
+五个用例覆盖单位根、路径冲突和动态通道拒绝。
+非单位旋转也有独立拒绝检查，全部通过。
+两份真实待机候选完成数值与 Blender 输出验证。
 
 `tools/endfield_native/run_upstream.py` 提供隔离入口。
 指定上游源码目录、依赖目录和目标脚本。

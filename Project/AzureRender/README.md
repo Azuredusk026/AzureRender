@@ -115,7 +115,11 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 莱万汀资源验证按 EV0 至 EV8 推进。
 通用形变、表情编辑、场景交换与材质恢复已交付。
 当前演示使用重定向 idle 与中性表情。
-原生动作、场景和表情需要兼容读取器或完整导出资源。
+原生目录与资源包读取已通过本机验证。
+原生待机候选已进入引擎，材质与物理效果待完善。
+原生表情源已取得，场景选型等待确认。
+获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。
+实际证据见[原生资产验收](docs/acceptance/ev/native-assets.md)。
 历史画面基准与 GPU 性能验收保留待项。
 实施范围见[资源验证计划](docs/plans/2026-10-16-endfield-resource-validation.md)。
 当前证据见[联合验收](docs/acceptance/ev/2026-10-16.md)。
