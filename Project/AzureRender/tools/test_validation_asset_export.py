@@ -1,0 +1,84 @@
+import copy
+import unittest
+import validation_asset as v
+
+
+class ValidationExportTests(unittest.TestCase):
+    def fixture(self):
+        return {'nodes': [{'name': 'root', 'children': [1]}, {'name': 'joint'}],
+                'skins': [{'joints': [0, 1]}]}
+
+    def test_bind_difference_refuses_merge(self):
+        a = self.fixture(); b = copy.deepcopy(a)
+        b['nodes'][1]['translation'] = [1, 0, 0]
+        with self.assertRaisesRegex(ValueError, 'fingerprint'):
+            v.match_skeletons(a, b'', b, b'')
+
+    def test_inverse_bind_difference_refuses_merge(self):
+        import struct
+        a=self.fixture(); a['skins'][0]['inverseBindMatrices']=0
+        a['accessors']=[{'bufferView':0,'componentType':5126,'type':'MAT4','count':2}]
+        a['bufferViews']=[{'byteLength':128}]
+        values=[1.,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]*2
+        raw=struct.pack('<32f',*values); values[12]=.1
+        with self.assertRaisesRegex(ValueError,'fingerprint'):
+            v.match_skeletons(a,raw,a,struct.pack('<32f',*values))
+
+    def test_native_provenance_cannot_be_claimed(self):
+        with self.assertRaisesRegex(ValueError,'Native provenance'):
+            v.assemble('missing-target','missing-source','idle','missing-output','game-native')
+
+    def test_hierarchy_difference_refuses_merge(self):
+        a = self.fixture(); b = copy.deepcopy(a); b['nodes'][0]['children'] = []
+        with self.assertRaisesRegex(ValueError, 'fingerprint'):
+            v.match_skeletons(a, b'', b, b'')
+
+    def test_matching_skeleton_maps_nodes(self):
+        a = self.fixture()
+        self.assertEqual(v.match_skeletons(a, b'', a, b''), {0: 0, 1: 1})
+
+    def test_unnamed_nodes_have_stable_index_identity(self):
+        a = self.fixture(); a['nodes'].append({'mesh': 0})
+        self.assertEqual(v.match_skeletons(a, b'', a, b'')[2], 2)
+
+    def test_missing_curve_refused(self):
+        with self.assertRaisesRegex(ValueError, 'clip'):
+            v.select_clip({}, 'idle')
+
+    def test_normalized_weight_accessor(self):
+        doc = {'accessors':[{'bufferView':0,'componentType':5121,'type':'VEC4','count':1,'normalized':True}],
+               'bufferViews':[{'byteLength':4}]}
+        self.assertEqual(v.accessor(doc, bytes([255,0,0,0]),0).tolist(), [[1,0,0,0]])
+
+    def test_weight_restore_requires_same_topology(self):
+        a={'meshes':[{'primitives':[]}]}; b={'meshes':[]}
+        with self.assertRaisesRegex(ValueError,'topology'):
+            v.compatible_geometry(a,b'',b,b'')
+
+    def test_sample_grid_contains_endpoint_and_half_frames(self):
+        times = v.reference_times(1.0)
+        self.assertEqual(times[0], 0)
+        self.assertEqual(times[-1], 1)
+        self.assertIn(0.5 + 1/120, times)
+
+    def test_rotation_bake_preserves_unit_midpoint(self):
+        import numpy as np
+        values=v.resample([0,1],[[0,0,0,1],[0,0,1,0]],[.5],rotation=True)
+        self.assertTrue(np.allclose(values[0],[0,0,2**-.5,2**-.5]))
+
+    def test_step_bake_preserves_previous_value(self):
+        self.assertEqual(v.resample([0,1],[[0],[4]],[.5,1],interpolation='STEP').tolist(),[[0],[4]])
+
+    def test_comparator_detects_translation_error(self):
+        from compare_deformation_reference import compare
+        a = {'space': 'gltf-world', 'units': 'metres', 'samples': [{'time': 0, 'vertices': {'v': [0,0,0]}, 'bones': {}}]}
+        b = copy.deepcopy(a); b['samples'][0]['vertices']['v'][0] = .002
+        self.assertFalse(compare(a, b)['passed'])
+
+    def test_comparator_rejects_missing_sample(self):
+        from compare_deformation_reference import compare
+        a = {'space': 'gltf-world', 'units': 'metres', 'samples': []}
+        with self.assertRaises(ValueError): compare(a, a)
+
+
+if __name__ == '__main__': unittest.main()
