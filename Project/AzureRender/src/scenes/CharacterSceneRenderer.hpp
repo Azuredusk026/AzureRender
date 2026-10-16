@@ -12,6 +12,7 @@
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
 #include "render/SkinningBatch.hpp"
+#include "render/MorphGpuData.hpp"
 #include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
@@ -263,6 +264,9 @@ private:
     VkPipeline iblPrefilterPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> uniformBuffers_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
+    rhi::GpuBuffer morphTargetBuffer_;
+    std::array<rhi::GpuBuffer,kMaxFramesInFlight> morphWeightBuffers_{};
+    std::vector<MorphGpuMesh> morphGpuMeshes_;
     std::vector<rhi::GpuBuffer> oitIndexBuffers_;
     std::vector<rhi::GpuBuffer> instanceBuffers_;
     std::vector<rhi::GpuBuffer> lightBuffers_;
@@ -337,6 +341,7 @@ private:
         AssetPose pose;
         std::uint32_t meshKey = 0, jointBase = 0, vertexBase = 0;
         std::array<float, 2> morph{};
+        std::uint32_t morphWeightBase=0;
     };
     std::vector<InstancePose> instancePoses_;
     struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };

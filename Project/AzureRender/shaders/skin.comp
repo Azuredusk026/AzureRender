@@ -1,4 +1,8 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#define AZURE_MORPH_DATA_BINDING 3
+#define AZURE_MORPH_WEIGHT_BINDING 4
+#include "morph_data.glsl"
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
@@ -21,6 +25,9 @@ layout(push_constant) uniform SkinningParameters {
     uint outputBase;
     uint jointStride;
     uint instanceCount;
+    uint morphTableBase;
+    uint morphWeightBase;
+    uint morphWeightStride;
 } parameters;
 
 const uint vertexWordCount = 27u;
@@ -72,9 +79,11 @@ void main() {
         readFloat(base + 23u),
         readFloat(base + 24u),
         readFloat(base + 25u));
-    vec3 morphedPosition = position
-        + morph0 * parameters.morphWeights.x
-        + morph1 * parameters.morphWeights.y;
+    vec3 morphedPosition = position;
+    vec3 morphedTangent = tangent.xyz;
+    if(!applyAssetMorph(parameters.morphTableBase,vertexIndex,
+        parameters.morphWeightBase+instanceIndex*parameters.morphWeightStride,morphedPosition,normal,morphedTangent))
+        morphedPosition+=morph0*parameters.morphWeights.x+morph1*parameters.morphWeights.y;
 
     uint jointBase = parameters.jointBase + instanceIndex * parameters.jointStride;
     mat4 skinMatrix =
@@ -85,7 +94,7 @@ void main() {
     vec3 skinnedPosition =
         (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
-    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 
     skinnedVertices.words[destination + 0u] = floatBitsToUint(skinnedPosition.x);
     skinnedVertices.words[destination + 1u] = floatBitsToUint(skinnedPosition.y);

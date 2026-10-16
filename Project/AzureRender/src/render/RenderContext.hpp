@@ -18,6 +18,7 @@
 // Defined in assets/GltfLoader.hpp (global namespace).
 struct LoadedAsset;
 struct AssetPose;
+struct ExpressionPose;
 
 namespace azurerender {
 
@@ -94,6 +95,9 @@ struct NodeAnimationFrame {
     float blend = 1;
     bool previousLoop = true;
     std::array<float, 2> morph{};
+    std::vector<float> morphOverrides;
+    std::shared_ptr<const ExpressionPose> expression;
+    float expressionWeight=1;
 };
 struct SceneFrameData {
     float deltaSeconds = 0.0F;

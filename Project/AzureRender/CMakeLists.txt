@@ -192,7 +192,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
+        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -323,6 +323,7 @@ add_library(AzureRenderCore STATIC
     src/assets/Scene2D.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
+    src/animation/ExpressionPose.cpp
     src/assets/image/ImageCodec.cpp
     src/assets/image/SvgCodec.cpp
     src/assets/image/TextureContainerAdapter.cpp
@@ -909,6 +910,9 @@ if(BUILD_TESTING)
     add_executable(AzureAnimationCurveTests tests/AnimationCurveTests.cpp)
     target_include_directories(AzureAnimationCurveTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.AnimationCurve COMMAND AzureAnimationCurveTests)
+    add_executable(AzureExpressionPoseTests tests/ExpressionPoseTests.cpp)
+    target_link_libraries(AzureExpressionPoseTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ExpressionPose COMMAND AzureExpressionPoseTests)
     target_include_directories(AzureBrowRegionTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureBrowRegionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.BrowRegions COMMAND AzureBrowRegionTests)

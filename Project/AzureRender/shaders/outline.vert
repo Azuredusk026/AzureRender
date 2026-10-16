@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "morph_data.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -53,9 +55,10 @@ void main() {
     vec3 skinnedNormal = normalize(posedVector(3u));
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
-    vec3 morphedPosition = position
-        + morph0 * instanceData.instances[gl_InstanceIndex].morph.x
-        + morph1 * instanceData.instances[gl_InstanceIndex].morph.y;
+    vec3 morphedPosition=position,morphedNormal=normal,unusedTangent=vec3(0);
+    if(!applyAssetMorph(instanceData.instances[gl_InstanceIndex].meta.z,uint(gl_VertexIndex),
+        instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,morphedNormal,unusedTangent))
+        morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
@@ -64,7 +67,7 @@ void main() {
     vec3 skinnedPosition =
         (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
     vec3 skinnedNormal =
-        normalize(mat3(skinMatrix) * normal);
+        normalize(mat3(skinMatrix) * morphedNormal);
 #endif
     mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
     vec4 clip=mvp*vec4(skinnedPosition,1);

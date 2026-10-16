@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "morph_data.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -86,12 +88,14 @@ void main() {
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
         + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
-    vec3 morphedPosition = position + morph0 * instanceData.instances[gl_InstanceIndex].morph.x
-        + morph1 * instanceData.instances[gl_InstanceIndex].morph.y;
+    vec3 morphedPosition=position,morphedNormal=normal,morphedTangent=tangent.xyz;
+    if(!applyAssetMorph(instanceData.instances[gl_InstanceIndex].meta.z,uint(gl_VertexIndex),
+        instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,morphedNormal,morphedTangent))
+        morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
 
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
-    vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
-    vec3 skinnedTangent = normalize(mat3(skinMatrix) * tangent.xyz);
+    vec3 skinnedNormal = normalize(mat3(skinMatrix) * morphedNormal);
+    vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 #endif
     vec4 gizmoPosition = morphWeights.gizmoTransform * skinnedPosition;
     if (browOverlay && browMask > 0.5) {

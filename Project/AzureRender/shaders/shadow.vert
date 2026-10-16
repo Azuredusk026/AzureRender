@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "morph_data.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -54,9 +56,10 @@ void main() {
     vec4 skinnedPosition = vec4(posedVector(0u), 1.0);
 #else
     const uint jointBase = instanceData.instances[gl_InstanceIndex].meta.x;
-    vec3 morphedPosition = position
-        + morph0 * instanceData.instances[gl_InstanceIndex].morph.x
-        + morph1 * instanceData.instances[gl_InstanceIndex].morph.y;
+    vec3 morphedPosition=position,unusedNormal=vec3(0),unusedTangent=vec3(0);
+    if(!applyAssetMorph(instanceData.instances[gl_InstanceIndex].meta.z,uint(gl_VertexIndex),
+        instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,unusedNormal,unusedTangent))
+        morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
     mat4 skinMatrix =
         jointWeights.x * jointData.matrices[jointBase + jointIndices.x]
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]

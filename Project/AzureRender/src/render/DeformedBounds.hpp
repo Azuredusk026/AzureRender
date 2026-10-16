@@ -1,5 +1,6 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
+#include "assets/AssetDeformation.hpp"
 #include "scene/SceneDescription.hpp"
 #include <algorithm>
 #include <cmath>
@@ -8,9 +9,11 @@ namespace azurerender {
 // Every positive-weight joint encloses the original vertex. Their transformed
 // union encloses the normalized weighted sum, without scanning vertices per pose.
 struct JointBounds {
+    struct MorphEnvelope {std::uint32_t node=0;std::vector<scene::AxisAlignedBounds> targets;};
     struct Envelope {
         scene::AxisAlignedBounds base{}, morph0{}, morph1{};
         bool used=false;
+        std::vector<MorphEnvelope> morphs;
     };
     std::vector<Envelope> joints;
     static JointBounds build(const LoadedAsset& asset) {
@@ -26,13 +29,39 @@ struct JointBounds {
             }
             e.used=true;
         }
+        for(const auto& range:asset.morphRanges) {
+            const auto entry=result.joints.front().morphs.size();
+            for(auto& joint:result.joints)joint.morphs.push_back({range.node,std::vector<scene::AxisAlignedBounds>(range.targets.size())});
+            for(std::size_t i=0;i<range.vertexCount;++i){
+                const auto& vertex=asset.vertices.at(range.firstVertex+i);
+                for(unsigned slot=0;slot<(asset.hasSkin?4U:1U);++slot){
+                    if(asset.hasSkin&&vertex.weights[slot]<=0)continue;
+                    auto& targets=result.joints.at(asset.hasSkin?vertex.joints[slot]:0).morphs[entry].targets;
+                    for(std::size_t t=0;t<range.targets.size();++t)if(!range.targets[t].positions.empty()){
+                        const auto& delta=range.targets[t].positions.at(i);
+                        for(unsigned a=0;a<3;++a){targets[t].minimum[a]=std::min(targets[t].minimum[a],delta[a]);targets[t].maximum[a]=std::max(targets[t].maximum[a],delta[a]);}
+                    }
+                }
+            }
+        }
         return result;
     }
     scene::AxisAlignedBounds evaluate(const LoadedAsset& asset,const std::array<float,2>& weights,
-        const std::vector<std::array<float,16>>& matrices) const {
+        const std::vector<std::array<float,16>>& matrices,const AssetPose* pose=nullptr) const {
         scene::AxisAlignedBounds result{asset.boundsMin,asset.boundsMax};
         for(std::size_t joint=0;joint<joints.size();++joint){
             const auto& e=joints[joint];if(!e.used)continue;auto bounds=e.base;
+            if(!asset.morphRanges.empty()) {
+                const auto& states=pose?pose->morphWeights:asset.defaultMorphWeights;
+                for(const auto& morph:e.morphs){const auto& values=states.at(morph.node);
+                    if(values.size()!=morph.targets.size())throw std::invalid_argument("Morph bounds shape mismatch");
+                    for(std::size_t t=0;t<values.size();++t)for(unsigned axis=0;axis<3;++axis){
+                        const float w=values[t];const auto& delta=morph.targets[t];
+                        bounds.minimum[axis]+=w*(w>=0?delta.minimum[axis]:delta.maximum[axis]);
+                        bounds.maximum[axis]+=w*(w>=0?delta.maximum[axis]:delta.minimum[axis]);
+                    }
+                }
+            } else
             for(unsigned axis=0;axis<3;++axis)for(unsigned morph=0;morph<2;++morph){
                 const auto& delta=morph==0?e.morph0:e.morph1;
                 bounds.minimum[axis]+=weights[morph]*(weights[morph]>=0?delta.minimum[axis]:delta.maximum[axis]);

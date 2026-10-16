@@ -1,8 +1,10 @@
 #include "render/SkinningBatch.hpp"
+#include "render/MorphGpuData.hpp"
 #include "resources/BinaryFile.hpp"
 #include "support/VulkanComputeFixture.hpp"
 #include <array>
 #include <cstring>
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -11,7 +13,7 @@ int main(int argc,char** argv) try {
     if(argc!=2) throw std::invalid_argument("Expected skinning shader");
     test::VulkanComputeFixture host;
     auto& backend=*host.backend;
-    rhi::GpuBuffer input{},matrices{},output{};
+    rhi::GpuBuffer input{},matrices{},output{},morphData{},morphWeights{};
     VkDescriptorSetLayout setLayout=VK_NULL_HANDLE;
     VkDescriptorPool pool=VK_NULL_HANDLE;
     VkPipelineLayout layout=VK_NULL_HANDLE;
@@ -23,7 +25,7 @@ int main(int argc,char** argv) try {
         if(layout)backend.destroyPipelineLayout(layout);
         if(pool)backend.destroyDescriptorPool(pool);
         if(setLayout)backend.destroyDescriptorSetLayout(setLayout);
-        for(auto* buffer:{&input,&matrices,&output})host.allocator.destroyBuffer(*buffer);
+        for(auto* buffer:{&input,&matrices,&output,&morphData,&morphWeights})host.allocator.destroyBuffer(*buffer);
     });
     std::array<std::uint32_t,27> source{};
     const auto number=[&](unsigned word,float value){std::memcpy(&source[word],&value,sizeof(value));};
@@ -36,22 +38,31 @@ int main(int argc,char** argv) try {
     matrices=host.allocator.createBuffer(sizeof(joints),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     output=host.allocator.createBuffer(81*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memcpy(input.mapped,source.data(),sizeof(source));std::memcpy(matrices.mapped,joints.data(),sizeof(joints));
-    for(const auto* buffer:{&input,&matrices})host.allocator.flush(*buffer,0,buffer->size);
+    LoadedAsset fixture;fixture.vertices.resize(1);fixture.nodes.resize(1);MorphTargetRange targetRange;targetRange.vertexCount=1;targetRange.targets.resize(3);
+    targetRange.targets[2].positions={{{2,4,6}}};targetRange.targets[2].normals={{{1,0,0}}};targetRange.targets[2].tangents={{{0,1,0}}};fixture.morphRanges={targetRange};
+    std::vector<std::uint32_t> packed{0,0,0};const auto morphMesh=appendMorphGpuMesh(packed,fixture);
+    const std::array<float,6> values{0,0,.5F,0,0,-.25F};
+    morphData=host.allocator.createBuffer(packed.size()*4,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    morphWeights=host.allocator.createBuffer(sizeof(values),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(morphData.mapped,packed.data(),packed.size()*4);std::memcpy(morphWeights.mapped,values.data(),sizeof(values));
+    for(const auto* buffer:{&input,&matrices,&morphData,&morphWeights})host.allocator.flush(*buffer,0,buffer->size);
     setLayout=backend.createDescriptorSetLayout({
         {0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
         {1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
-        {2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
-    rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,3}};
+        {2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {3,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT},
+        {4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
+    rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,5}};
     pool=backend.createDescriptorPool(poolDesc);
     const auto set=backend.allocateDescriptorSets(pool,setLayout,1).front();
-    const rhi::GpuBuffer* buffers[]={&input,&matrices,&output};
-    for(unsigned i=0;i<3;++i)backend.writeDescriptorBuffer({set,i,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffers[i]->buffer,buffers[i]->size});
+    const rhi::GpuBuffer* buffers[]={&input,&matrices,&output,&morphData,&morphWeights};
+    for(unsigned i=0;i<5;++i)backend.writeDescriptorBuffer({set,i,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffers[i]->buffer,buffers[i]->size});
     const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_COMPUTE_BIT,sizeof(SkinningBatch)};
     layout=backend.createPipelineLayout(setLayout,&range);
     shader=backend.createShaderModule(readBinaryFile(argv[1]));
     pipeline=backend.createComputePipeline({shader,layout});backend.destroyShaderModule(shader);shader=VK_NULL_HANDLE;
     std::vector<std::uint32_t> baseline;
-    for(bool batched:{false,true}) {
+    for(bool full:{false,true})for(bool batched:{false,true}) {
         std::memset(output.mapped,0xCD,static_cast<std::size_t>(output.size));
         host.allocator.flush(output,0,output.size);
         host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer) {
@@ -60,7 +71,8 @@ int main(int argc,char** argv) try {
                 static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)});
             recorder.bindComputePipeline(pipeline);recorder.bindComputeDescriptorSet(layout,set);
             for(unsigned slice=0;slice<(batched?1U:2U);++slice) {
-                const SkinningBatch parameters{1,slice,{.25F,.5F},1+slice,1,batched?2U:1U};
+                SkinningBatch parameters{1,slice,{.25F,.5F},1+slice,1,batched?2U:1U};
+                if(full){parameters.morphTableBase=morphMesh.tableBase;parameters.morphWeightBase=slice*3;parameters.morphWeightStride=3;}
                 recorder.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&parameters,sizeof(parameters));
                 recorder.dispatch(1,parameters.instanceCount,1);
             }
@@ -71,8 +83,16 @@ int main(int argc,char** argv) try {
         const auto* words=static_cast<const std::uint32_t*>(output.mapped);
         for(unsigned i=0;i<27;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Skinning overwrote another output slice");
         const auto value=[&](unsigned word){float result;std::memcpy(&result,words+word,sizeof(result));return result;};
-        if(value(27)!=12.F || value(54)!=22.F || value(28)!=3.F || value(55)!=3.F)
+        if(!full&&(value(27)!=12.F || value(54)!=22.F || value(28)!=3.F || value(55)!=3.F))
             throw std::runtime_error("Skinning did not preserve independent joints and morph output");
+        if(full){
+            if(std::abs(value(27)-12.F)>1e-5F||std::abs(value(54)-20.5F)>1e-5F||std::abs(value(28)-4.F)>1e-5F||std::abs(value(55)-1.F)>1e-5F)
+                throw std::runtime_error("Third target and independent instance weights differ from CPU reference");
+            for(unsigned instance=0;instance<2;++instance){const float weight=values[instance*3+2],length=std::sqrt(1+weight*weight);const auto base=(instance+1)*27;
+                if(std::abs(value(base+3)-weight/length)>1e-5F||std::abs(value(base+4)-1/length)>1e-5F||std::abs(value(base+6)-1/length)>1e-5F||std::abs(value(base+7)-weight/length)>1e-5F)
+                    throw std::runtime_error("Morph normals and tangents differ from CPU reference");
+            }
+        }
         if(!batched)baseline.assign(words,words+81);
         else if(std::memcmp(baseline.data(),words,output.size))throw std::runtime_error("Batched deformation differs from individual slices");
     }

@@ -1,4 +1,5 @@
 #include "assets/AssetDeformation.hpp"
+#include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "assets/MaterialData.hpp"
 #include "render/ResourceAccessProfile.hpp"
@@ -384,6 +385,9 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     const std::uint64_t indexedSlots = kSharedTextureSlots
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     const auto& limits = context.descriptorLimits;
+    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<5)
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<9))
+        throw std::runtime_error("Morph layout v1 requires five storage buffers per stage and nine per descriptor set");
     DeviceCapabilities capabilities;
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
@@ -498,19 +502,22 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
 void CharacterSceneRenderer::ensureInstanceCapacity() {
     // The host has retired this frame slot's fence before updateFrame.
     // Grow only its storage; the other slots keep their in-flight buffers.
-    VkDeviceSize joints=0,vertices=0;
+    VkDeviceSize joints=0,vertices=0,morphBytes=0;
     for(const auto& instance:sceneInstances_){
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
         joints+=mesh.jointMatrices.size()*sizeof(std::array<float,16>);
         vertices+=mesh.vertices.size()*sizeof(AssetVertex);
+        morphBytes+=morphGpuMeshes_.at(instance.meshKey).weightCount*sizeof(float);
     }
-    const std::array<VkDeviceSize,3> required{joints,vertices,sceneInstances_.size()*sizeof(InstanceGpuData)};
-    const std::array<rhi::GpuBuffer*,3> slots{&jointBuffers_[currentFrame_],
-        computeSkinningEnabled_?&skinnedVertexBuffers_[currentFrame_]:nullptr,&instanceBuffers_[currentFrame_]};
-    std::array<rhi::GpuBuffer,3> candidates{};
+    if(morphBytes>kMorphGpuBudgetBytes)throw std::runtime_error("Instance morph weights exceed 128 MiB frame budget");
+    const std::array<VkDeviceSize,4> required{joints,vertices,sceneInstances_.size()*sizeof(InstanceGpuData),morphBytes};
+    const std::array<rhi::GpuBuffer*,4> slots{&jointBuffers_[currentFrame_],
+        computeSkinningEnabled_?&skinnedVertexBuffers_[currentFrame_]:nullptr,&instanceBuffers_[currentFrame_],&morphWeightBuffers_[currentFrame_]};
+    std::array<rhi::GpuBuffer,4> candidates{};
     try{
         for(unsigned i=0;i<slots.size();++i)if(slots[i]&&required[i]>slots[i]->size){
-            const auto bytes=std::max(required[i],slots[i]->size+slots[i]->size/2);
+            const auto growth=std::max(required[i],slots[i]->size+slots[i]->size/2);
+            const auto bytes=i==3?std::min<VkDeviceSize>(growth,kMorphGpuBudgetBytes):growth;
             candidates[i]=allocator_->createBuffer(bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
                 |(i==1?VK_BUFFER_USAGE_VERTEX_BUFFER_BIT:0),i!=1);
         }
@@ -525,6 +532,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
         const auto set=descriptorSets_[currentFrame_*count+material];
         rhi_->writeDescriptorBuffer({set,10,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
         rhi_->writeDescriptorBuffer({set,13,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,instanceBuffers_[currentFrame_].buffer,instanceBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[currentFrame_].buffer,morphWeightBuffers_[currentFrame_].size});
         if(computeSkinningEnabled_)rhi_->writeDescriptorBuffer({set,17,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
             skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
     }
@@ -532,6 +540,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
         const auto set=skinningDescriptorSets_[currentFrame_*meshResourceCount_+key];
         rhi_->writeDescriptorBuffer({set,1,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,jointBuffers_[currentFrame_].buffer,jointBuffers_[currentFrame_].size});
         rhi_->writeDescriptorBuffer({set,2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,skinnedVertexBuffers_[currentFrame_].buffer,skinnedVertexBuffers_[currentFrame_].size});
+        rhi_->writeDescriptorBuffer({set,4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[currentFrame_].buffer,morphWeightBuffers_[currentFrame_].size});
     }
 }
 void CharacterSceneRenderer::prepareInstancePoses() {
@@ -539,7 +548,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
     constexpr float kPi = 3.14159265358979323846F;
     instancePoses_.clear();
     skinningDispatches_.clear();
-    std::uint32_t jointBase = 0, vertexBase = 0;
+    std::uint32_t jointBase = 0, vertexBase = 0, morphWeightBase=0;
     for (auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
         const auto animation = std::find_if(animationFrames_.begin(), animationFrames_.end(),
@@ -557,9 +566,18 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             pose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
                 animationTime_);
         }
+        if(animation!=animationFrames_.end()&&animation->expression)
+            pose=applyExpressionPose(mesh,pose,*animation->expression,animation->expressionWeight);
+        if(!mesh.morphRanges.empty()){
+            for(auto& values:pose.morphWeights)for(unsigned index=0;index<std::min<std::size_t>(2,values.size());++index)
+                if(morph[index]!=0)values[index]=morph[index];
+            if(animation!=animationFrames_.end())applyMorphOverrides(mesh,pose,animation->morphOverrides);
+        }
+        const auto weights=flattenMorphGpuWeights(mesh,pose);
+        if(!weights.empty())std::memcpy(static_cast<float*>(morphWeightBuffers_[currentFrame_].mapped)+morphWeightBase,weights.data(),weights.size()*sizeof(float));
         std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
             pose.jointMatrices.data(), pose.jointMatrices.size()*sizeof(std::array<float,16>));
-        auto bounds = jointBounds_.at(instance.meshKey).evaluate(mesh, morph, pose.jointMatrices);
+        auto bounds = jointBounds_.at(instance.meshKey).evaluate(mesh, morph, pose.jointMatrices,&pose);
         bounds = expandBounds(bounds, materialDisplacementMargin(mesh));
         if (gizmoActive_) {
             const auto gizmo = multiply(translation(gizmoTranslation_[0],gizmoTranslation_[1],gizmoTranslation_[2]),
@@ -568,7 +586,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             bounds = includeTransformedBounds(bounds, gizmo);
         }
         instance.worldBounds = scene::transformBounds(bounds, instance.model);
-        instancePoses_.push_back({std::move(pose), instance.meshKey, jointBase, vertexBase, morph});
+        instancePoses_.push_back({std::move(pose), instance.meshKey, jointBase, vertexBase, morph,morphWeightBase});
         // Preserve stable pose slices for every instance. Only views that
         // consume deformed geometry require writing the GPU vertex slice.
         const auto& worldBounds = instance.worldBounds;
@@ -580,14 +598,18 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             });
         if (!cullingEnabled_ || requiredByMain || requiredByShadow) {
             const SkinningBatch slice{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,
-                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size()),1};
+                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size()),1,
+                morphGpuMeshes_.at(instance.meshKey).tableBase,morphWeightBase,morphGpuMeshes_.at(instance.meshKey).weightCount};
             if (skinningDispatches_.empty() || skinningDispatches_.back().meshKey!=instance.meshKey
                 || !appendSkinningSlice(skinningDispatches_.back().parameters,slice))
                 skinningDispatches_.push_back({instance.meshKey,slice});
         }
         jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size());
         vertexBase += static_cast<std::uint32_t>(mesh.vertices.size());
+        morphWeightBase+=static_cast<std::uint32_t>(weights.size());
     }
+    allocator_->flush(jointBuffers_[currentFrame_],0,jointBuffers_[currentFrame_].size);
+    allocator_->flush(morphWeightBuffers_[currentFrame_],0,morphWeightBuffers_[currentFrame_].size);
 }
 std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
     const LoadedAsset& mesh, const AssetPose& pose, const Matrix4& model) const {
@@ -794,7 +816,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const std::uint32_t meshKey = sceneInstances_[slot].meshKey;
         const auto& pose = instancePoses_.at(slot);
         const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey-1]->asset;
-        destination[slot].meta = {pose.jointBase, pose.vertexBase, 0, 0};
+        destination[slot].meta = {pose.jointBase, pose.vertexBase, morphGpuMeshes_.at(meshKey).tableBase, pose.morphWeightBase};
         destination[slot].faceLight = instanceFaceLight(mesh, pose.pose, model);
         destination[slot].morph = {pose.morph[0], pose.morph[1], 0, 0};
         // The same association as the per-frame uniform path so a single
@@ -808,6 +830,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 multiply(cascadeLightViewProjections_[cascade], model);
         }
     }
+    allocator_->flush(instanceBuffers_[currentFrame_],0,instanceBuffers_[currentFrame_].size);
 }
 
 const rhi::GpuBuffer& CharacterSceneRenderer::renderVertexBuffer(
@@ -863,6 +886,8 @@ void CharacterSceneRenderer::registerPasses(
     };
     const auto lightResource = importHostStorage(
         "character-lights", lightBuffers_[context.currentFrame]);
+    const auto morphTargetResource=importHostStorage("character-morph-targets-v1",morphTargetBuffer_);
+    const auto morphWeightResource=importHostStorage("character-morph-weights",morphWeightBuffers_[context.currentFrame]);
     const auto clusterHeaderResource = importHostStorage(
         "character-cluster-headers",
         clusterHeaderBuffers_[context.currentFrame]);
@@ -879,6 +904,8 @@ void CharacterSceneRenderer::registerPasses(
                     recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &dispatches);
             }, true);
         graph.use(*skinningPass, jointResource, RenderGraphUsage::Storage, false);
+        graph.use(*skinningPass,morphTargetResource,RenderGraphUsage::Storage,false);
+        graph.use(*skinningPass,morphWeightResource,RenderGraphUsage::Storage,false);
     }
 
     std::optional<RenderGraph::ResourceId> skinnedResource;
@@ -950,6 +977,8 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(shadow, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
+    graph.use(shadow,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(shadow,morphWeightResource,RenderGraphUsage::VertexStorage,false);
     if (skinnedResource) graph.use(shadow, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
@@ -1018,6 +1047,8 @@ void CharacterSceneRenderer::registerPasses(
     graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(prepass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
     graph.use(prepass,boundsResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,lightResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,clusterHeaderResource,RenderGraphUsage::FragmentStorage,false);
@@ -1083,6 +1114,8 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(main, jointResource, RenderGraphUsage::VertexStorage, false);
+    graph.use(main,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+    graph.use(main,morphWeightResource,RenderGraphUsage::VertexStorage,false);
     if (skinnedResource) graph.use(main, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(main, resources.color, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
@@ -1095,6 +1128,9 @@ void CharacterSceneRenderer::registerPasses(
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if (!instanceSnapshot_) throw std::logic_error("Direct recording requires a prepared snapshot");
     instanceSnapshot_->validateForRecording();
+    for(const auto* buffer:{&morphTargetBuffer_,&morphWeightBuffers_[context.currentFrame],&jointBuffers_[context.currentFrame],&instanceBuffers_[context.currentFrame]})
+        context.commands->bufferBarrier({buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
+            VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     recordComputeSkinning(context);
     recordShadowPass(context);
     context.commands->imageBarrier({context.shadowImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
@@ -1692,6 +1728,15 @@ void CharacterSceneRenderer::createAdditionalResources() {
 void CharacterSceneRenderer::createComputeSkinningResources() {
     meshResourceCount_ =
         static_cast<std::uint32_t>(additionalResources_.size() + 1);
+    std::vector<std::uint32_t> morphWords{0,0,0};
+    morphGpuMeshes_.clear();
+    for(std::uint32_t key=0;key<meshResourceCount_;++key)
+        morphGpuMeshes_.push_back(appendMorphGpuMesh(morphWords,key==0?asset_:additionalResources_[key-1]->asset));
+    morphTargetBuffer_=allocator_->createBuffer(morphWords.size()*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(morphTargetBuffer_.mapped,morphWords.data(),morphWords.size()*sizeof(std::uint32_t));
+    allocator_->flush(morphTargetBuffer_,0,morphTargetBuffer_.size);
+    for(auto& buffer:morphWeightBuffers_){buffer=allocator_->createBuffer(sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+        std::memset(buffer.mapped,0,sizeof(float));allocator_->flush(buffer,0,buffer.size);}
     if (!computeSkinningEnabled_) {
         azurerender::RuntimeDiagnostics::instance().info(
             "render", "Character skinning and morph: vertex-shader fallback path");
@@ -1715,13 +1760,15 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
         {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
         {2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {3, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
+        {4, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
     });
     const std::uint32_t descriptorSetCount =
         static_cast<std::uint32_t>(kMaxFramesInFlight) * meshResourceCount_;
     rhi::DescriptorPoolDesc descriptorPool{};
     descriptorPool.sizes = {{
         VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-        descriptorSetCount * 3,
+        descriptorSetCount * 5,
     }};
     descriptorPool.maxSets = descriptorSetCount;
     skinningDescriptorPool_ = rhi_->createDescriptorPool(descriptorPool);
@@ -1748,13 +1795,15 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         const std::size_t setIndex =
             frame * meshResourceCount_ + meshKey;
         const VkDescriptorSet set = skinningDescriptorSets_[setIndex];
-        const std::array<rhi::DescriptorBufferWrite, 3> writes = {{
+        const std::array<rhi::DescriptorBufferWrite, 5> writes = {{
             {set, 0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              source.buffer, source.size},
             {set, 1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              jointBuffers_[frame].buffer, jointBuffers_[frame].size},
             {set, 2, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              destination.buffer, destination.size},
+            {set,3,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size},
+            {set,4,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size},
         }};
         for (const rhi::DescriptorBufferWrite& write : writes) {
             rhi_->writeDescriptorBuffer(write);
@@ -1802,6 +1851,9 @@ void CharacterSceneRenderer::recordComputeSkinning(
     for (std::uint32_t meshKey = 0; meshKey < meshResourceCount_; ++meshKey) {
         recordComputeSkinningMesh(context, meshKey);
     }
+    const auto& output=skinnedVertexBuffers_[context.currentFrame];
+    context.commands->bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+        VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
 }
 
 void CharacterSceneRenderer::createUniformBuffers() {
@@ -1957,7 +2009,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 2)},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 7},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 9},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -1968,7 +2020,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 13},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 7},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 9},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2013,6 +2065,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
             {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, VK_SHADER_STAGE_FRAGMENT_BIT},
             {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+            {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
         });
         return;
     }
@@ -2042,6 +2096,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {18, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {19, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
+        {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+        {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
     });
 }
 
@@ -2132,6 +2188,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorBuffer(jointWrite);
             const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
             rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[frame];
@@ -2276,6 +2334,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorBuffer(jointWrite);
             const auto& output = computeSkinningEnabled_ ? skinnedVertexBuffers_[frame] : vertexBuffer_;
             rhi_->writeDescriptorBuffer({jointWrite.set, 17, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, output.buffer, output.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphTargetBuffer_.buffer,morphTargetBuffer_.size});
+            rhi_->writeDescriptorBuffer({jointWrite.set,22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,morphWeightBuffers_[frame].buffer,morphWeightBuffers_[frame].size});
 
             rhi::DescriptorBufferWrite instanceWrite{};
             instanceWrite.set = descriptorSets_[descriptorIndex];
@@ -2576,6 +2636,9 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     jointBuffers_.clear();
+    allocator_->destroyBuffer(morphTargetBuffer_);
+    for(auto& buffer:morphWeightBuffers_)allocator_->destroyBuffer(buffer);
+    morphGpuMeshes_.clear();
     for (auto& buffer : oitIndexBuffers_) {
         allocator_->destroyBuffer(buffer);
     }

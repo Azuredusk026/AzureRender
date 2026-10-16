@@ -1,5 +1,6 @@
 #include "render/pathtracing/TraceScene.hpp"
 #include "assets/AssetDeformation.hpp"
+#include "animation/ExpressionPose.hpp"
 #include "render/LinearMath.hpp"
 #include <algorithm>
 #include <cstring>
@@ -59,22 +60,31 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
         auto pose=bindAnimationPose(asset);std::array<float,2> morph{};
         const auto animation=std::find_if(animations.begin(),animations.end(),[&](const auto& a){return a.node==node.id;});
         if(animation!=animations.end()){
-            pose=sampleAnimationPose(asset,animation->clip,static_cast<float>(animation->time),animation->loop);morph=animation->morph;
-            if(animation->blend<1)pose=blendAnimationPoses(asset,sampleAnimationPose(asset,animation->previousClip,static_cast<float>(animation->previousTime),animation->previousLoop),pose,animation->blend);
+            if(!asset.animations.empty())pose=sampleAnimationPose(asset,animation->clip,static_cast<float>(animation->time),animation->loop);
+            morph=animation->morph;
+            if(!asset.animations.empty()&&animation->blend<1)pose=blendAnimationPoses(asset,sampleAnimationPose(asset,animation->previousClip,static_cast<float>(animation->previousTime),animation->previousLoop),pose,animation->blend);
+        }
+        if(animation!=animations.end()) {
+            if(animation->expression)pose=applyExpressionPose(asset,pose,*animation->expression,animation->expressionWeight);
+            if(!asset.morphRanges.empty()) {
+                for(auto& values:pose.morphWeights)for(unsigned i=0;i<std::min<std::size_t>(2,values.size());++i)if(morph[i]!=0)values[i]=morph[i];
+                applyMorphOverrides(asset,pose,animation->morphOverrides);
+            }
         }
         const auto& world=worlds[nodeIndex];
         for(const auto& primitive:asset.primitives){
             for(unsigned i=0;i+2<primitive.indexCount;i+=3){
                 const auto a=asset.indices.at(primitive.firstIndex+i);auto b=asset.indices.at(primitive.firstIndex+i+1),c=asset.indices.at(primitive.firstIndex+i+2);if(determinant(world)<0)std::swap(b,c);
-                const auto position=[&](unsigned v){return transformPosition(world,deformedVertexPosition(asset,v,asset.hasSkin?&pose:nullptr,morph));};
+                const auto position=[&](unsigned v){return transformPosition(world,deformedVertexPosition(asset,v,&pose,morph));};
                 const auto pa=position(a),pb=position(b),pc=position(c);const auto e1=subtract(pb,pa),e2=subtract(pc,pa);
                 if(vectorLength(cross(e1,e2))<1e-10F)continue;
                 const auto& ua=asset.vertices.at(a).texcoord;const auto& ub=asset.vertices.at(b).texcoord;const auto& uc=asset.vertices.at(c).texcoord;
                 const auto& material=asset.materials.at(primitive.materialIndex);
                 Triangle triangle{packed(pa),packed(e1),packed(e2),{ua[0],ua[1],ub[0],ub[1]},{uc[0],uc[1],static_cast<float>(mesh.materialBase+primitive.materialIndex),material.emissiveStrength>0?1.F:0.F}};
                 const auto frame=[&](unsigned v){
-                    const auto& vertex=asset.vertices.at(v);auto normal=vertex.normal;Vector3 tangent{vertex.tangent[0],vertex.tangent[1],vertex.tangent[2]};
-                    if(asset.hasSkin){Vector3 sn{},st{};for(unsigned j=0;j<4;++j)if(vertex.weights[j]>0){const auto& joint=pose.jointMatrices.at(vertex.joints[j]);sn=addVectors(sn,scaleVector(normalDirection(joint,normal),vertex.weights[j]));st=addVectors(st,scaleVector(direction(joint,tangent),vertex.weights[j]));}normal=normalize(sn);tangent=normalize(st);}
+                    const auto& vertex=asset.vertices.at(v);
+                    auto normal=deformedVertexDirection(asset,v,&pose,1);
+                    auto tangent=deformedVertexDirection(asset,v,&pose,2);
                     normal=normalDirection(world,normal);tangent=direction(world,tangent);tangent=subtract(tangent,scaleVector(normal,dot(normal,tangent)));
                     if(vectorLength(tangent)<1e-8F)tangent=cross(std::abs(normal[1])<.99F?Vector3{0,1,0}:Vector3{1,0,0},normal);
                     return std::pair<Vec4,Vec4>{packed(normal),packed(normalize(tangent),vertex.tangent[3]*(determinant(world)<0?-1.F:1.F))};
@@ -94,7 +104,11 @@ std::uint64_t sceneFingerprint(const scene::SceneDescription& scene,const std::v
     const auto text=[&](const std::string& value){for(unsigned char c:value){hash^=c;hash*=1099511628211ULL;}hash^=255;hash*=1099511628211ULL;};
     for(const auto& n:scene.nodes){text(n.id);text(n.resourceId);text(n.parentId);bytes(n.translation);bytes(n.rotation);bytes(n.scale);bytes(n.visible);}
     for(const auto& l:scene.lights){text(l.id);bytes(l.position);bytes(l.color);bytes(l.intensity);bytes(l.radius);bytes(l.enabled);}
-    for(const auto& a:animations){text(a.node);bytes(a.clip);bytes(a.time);bytes(a.loop);bytes(a.previousClip);bytes(a.previousTime);bytes(a.blend);bytes(a.previousLoop);bytes(a.morph);}
+    for(const auto& a:animations){text(a.node);bytes(a.clip);bytes(a.time);bytes(a.loop);bytes(a.previousClip);bytes(a.previousTime);bytes(a.blend);bytes(a.previousLoop);bytes(a.morph);bytes(a.expressionWeight);
+        for(float w:a.morphOverrides)bytes(w);
+        bytes(a.morphOverrides.size());
+        if(a.expression)text(expressionPoseToJson(*a.expression).dump());
+    }
     return hash;
 }
 }
