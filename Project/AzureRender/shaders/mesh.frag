@@ -50,6 +50,8 @@ layout(binding = 12) uniform sampler2D faceSdfTexture;
 struct ClusterLight {
     vec4 positionRadius;
     vec4 colorIntensity;
+    vec4 directionOuter;
+    vec4 coneType;
 };
 layout(std430, binding = 14) readonly buffer SceneLightBuffer {
     ClusterLight lights[];
@@ -564,6 +566,12 @@ void main() {
         float attenuation = rangeFalloff * rangeFalloff
             / (1.0 + distanceSquared * 0.12);
         vec3 pointDirection = toLight / max(distanceToLight, 0.001);
+        if (light.coneType.y > 0.5) {
+            float cone = clamp((dot(-pointDirection, light.directionOuter.xyz)
+                - light.directionOuter.w) / max(light.coneType.x-light.directionOuter.w, 0.000001), 0.0, 1.0);
+            if(light.coneType.x==light.directionOuter.w) cone=step(light.directionOuter.w,dot(-pointDirection,light.directionOuter.xyz));
+            attenuation *= cone * cone;
+        }
         float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
@@ -826,6 +834,25 @@ void main() {
     beautyColor = mix(beautyColor, baseColor.rgb, overlayVisible);
     if (overlayMaterial && overlayDisabled) {
         outputAlpha = 0.0;
+    }
+    if (camera.clusterLighting.x > .5) {
+        // Scene mode consumes only declared light/environment contributions.
+        // Specialized native character passes are selected separately.
+        float angle = camera.clusterLighting.z;
+        vec3 envNormal = shadedNormal;
+        vec3 envReflection = reflectionDirection;
+        envNormal.xz = mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
+        envReflection.xz = mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envReflection.xz;
+        float lastMip = float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1);
+        ambientDiffuse = diffuseColor * textureLod(AZ_TEX_ENVIRONMENT,
+            directionToEquirectangular(envNormal),lastMip).rgb * camera.clusterLighting.y * physicalAo;
+        ambientSpecular = fresnel * textureLod(AZ_TEX_ENVIRONMENT,
+            directionToEquirectangular(envReflection),roughness*lastMip).rgb * camera.clusterLighting.y;
+        directDiffuse = clusteredDiffuse;
+        directSpecular = clusteredSpecular;
+        emissive = specularEmissive.rgb * material.emissiveStrength * materialFeatureEnabled(8U);
+        beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular + emissive;
+        rimLighting=vec3(0);kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);
     }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {

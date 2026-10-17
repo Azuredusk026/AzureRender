@@ -81,7 +81,18 @@ scene::SceneDescription SceneDocument::renderDescription() const {
             light.intensity,
             light.radius,
             light.enabled,
+            light.shape,
         });
+        auto& shape = result.lights.back().shape;
+        shape.validate();
+        const auto local = shape.direction;
+        float lengthSquared = 0;
+        for (unsigned axis = 0; axis < 3; ++axis) {
+            shape.direction[axis] = world[axis]*local[0] + world[axis+4]*local[1] + world[axis+8]*local[2];
+            lengthSquared += shape.direction[axis]*shape.direction[axis];
+        }
+        if (!(lengthSquared > 1e-12F)) throw std::runtime_error("Degenerate light node transform");
+        for (auto& value : shape.direction) value /= std::sqrt(lengthSquared);
     }
     return result;
 }

@@ -24,7 +24,7 @@ nlohmann::json EditorContext::documentContent() const {
         {"scale",node.scale},{"prefabSource",node.prefabSource},{"instanceOf",node.instanceOf},{"materialSlots",node.materialSlots}});
     for(const auto& resource:scene_.resources)resources.push_back({{"id",resource.id},{"type",resource.type},{"path",resource.path.generic_u8string()}});
     for(const auto& light:scene_.lights)lights.push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},
-        {"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});
+        {"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled},{"shape",light.shape}});
     const auto& settings=renderSettings();auto render=encodeLevelRenderSettings(settings);
     render["schemaVersion"]=RenderSettings::kSchemaVersion;
     render["sceneType"]=static_cast<unsigned>(settings.sceneType);
@@ -69,6 +69,7 @@ void EditTransaction::commit(const std::string& mergeKey) {
         std::set<std::string> nodeIds,lightIds;
         for(const auto& node:candidate_->scene_.nodes)nodeIds.insert(node.id);
         for(const auto& light:candidate_->scene_.lights) {
+            light.shape.validate();
             if(light.id.empty()||!lightIds.insert(light.id).second||!nodeIds.count(light.nodeId)
                 ||!std::isfinite(light.radius)||light.radius<=0||!std::isfinite(light.intensity)||light.intensity<0)
                 throw std::invalid_argument("Invalid candidate light identity, reference or range");

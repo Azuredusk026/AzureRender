@@ -102,7 +102,7 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 12;
+    static constexpr std::uint32_t kSchemaVersion = 13;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;
@@ -128,6 +128,8 @@ struct RenderSettings {
 
     RenderPath renderPath = RenderPath::Traditional;
     bool stylizedLightingEnabled = true;
+    // Explicit local lights and authored environment, without showcase fill/rim.
+    bool sceneLightingEnabled = false;
     float styleMaskStrength = 1.0F;
     float diffuseBandThreshold = 0.40F;
     std::uint32_t showcasePreset = 0;

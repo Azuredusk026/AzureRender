@@ -86,12 +86,16 @@ int main() {
   write(root/"assets/body.azureprefab",prefab.dump());db.refresh();auto prefabId=db.idForPath("assets:/body.azureprefab");
   auto level=nlohmann::json::parse(R"({"schemaVersion":1,"id":"level","sceneType":"sample","resources":[{"id":"mesh","asset":"engine:/assets_public/test_model.gltf"}],"nodes":[],"prefabs":[{"instance":"instance","asset":"placeholder","overrides":{"node":{"components":{"azure.transform":{"data":{"translation":[7,8,9]}}}}}}]})");
   level["prefabs"][0]["asset"]=prefabId;
+  level["lights"]=nlohmann::json::array({{{"id","spot"},{"nodeId","instance:node"},
+      {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5}}}}});
   write(root/"assets/start.azurelevel",level.dump());db.refresh();auto parsed=Level::load(root/"assets/start.azurelevel",db);
   check(parsed.scene.nodes.size()==1 && parsed.scene.nodes[0].translation[0]==7);
   transform.translation={15,16,17};
   parsed.setComponent("instance:node","azure.transform",registry.encode("azure.transform",&transform),db);
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
+  check(reopened.scene.lights[0].shape.type==LightKind::Spot
+      && reopened.scene.lights[0].shape.innerCone==.25F);
   std::filesystem::create_directory(root/"blocked.azurelevel");
   bool saveFailed=false;try { parsed.save(root/"blocked.azurelevel"); }catch(const std::exception&){saveFailed=true;}
   check(saveFailed && std::filesystem::is_directory(root/"blocked.azurelevel"));

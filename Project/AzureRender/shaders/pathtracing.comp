@@ -6,7 +6,7 @@ layout(std140,binding=0) uniform Params {vec4 origin,right,up,forward,skyColor,s
 struct Triangle{vec4 p0,e1,e2,uv01,uv2material,n0,n1,n2,t0,t1,t2;};
 struct Node{vec4 minimum,maximum;uvec4 links;};
 struct Material{uvec4 albedo,surface,emission,normal,transmissionMap;vec4 properties,transmission,attenuation;};
-struct Light{vec4 position,radiance;};
+struct Light{vec4 position,radiance,directionOuter,coneType;};
 layout(std430,binding=1) readonly buffer Triangles{Triangle triangles[];};
 layout(std430,binding=2) readonly buffer Nodes{Node nodes[];};
 layout(std430,binding=3) readonly buffer Materials{Material materials[];};

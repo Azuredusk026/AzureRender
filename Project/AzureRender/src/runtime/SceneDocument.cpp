@@ -63,12 +63,17 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
     }
     output << "lightCount " << document.lights.size() << '\n';
     for (const SceneLight& light : document.lights) {
+        light.shape.validate();
         output << "light " << std::quoted(light.id) << ' '
                << std::quoted(light.nodeId) << ' '
                << light.color[0] << ' ' << light.color[1] << ' '
                << light.color[2] << ' ' << light.intensity << ' '
                << light.radius << ' ' << std::boolalpha << light.enabled
                << '\n';
+        output << "lightShape " << static_cast<int>(light.shape.type) << ' '
+               << light.shape.direction[0] << ' ' << light.shape.direction[1] << ' '
+               << light.shape.direction[2] << ' ' << light.shape.innerCone << ' '
+               << light.shape.outerCone << '\n';
     }
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
@@ -85,6 +90,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << document.renderSettings.sky.intensity << ' ' << document.renderSettings.sky.rotationDegrees << '\n'
            << "pathTracing " << document.renderSettings.pathTraceSamples << ' ' << document.renderSettings.pathTraceBounces << '\n'
            << "pathTracingPreview " << document.renderSettings.pathTraceDenoise << ' ' << document.renderSettings.pathTraceSeed << '\n'
+           << "sceneLighting " << std::boolalpha << document.renderSettings.sceneLightingEnabled << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -212,6 +218,15 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                 || !(light.radius > 0.0F) || !(light.intensity >= 0.0F)) {
                 throw std::runtime_error("Invalid .azscene light values");
             }
+            if (schemaVersion >= 5) {
+                int type = 0;
+                if (!(input >> key >> type >> light.shape.direction[0]
+                    >> light.shape.direction[1] >> light.shape.direction[2]
+                    >> light.shape.innerCone >> light.shape.outerCone) || key != "lightShape")
+                    throw std::runtime_error("Invalid .azscene light shape");
+                light.shape.type = static_cast<LightKind>(type);
+                light.shape.validate();
+            }
             document.lights.push_back(std::move(light));
         }
     }
@@ -256,6 +271,8 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         throw std::runtime_error("Invalid .azscene pathTracing");
     if(renderSettingsVersion>=12 && (!(input>>key>>document.renderSettings.pathTraceDenoise>>document.renderSettings.pathTraceSeed)||key!="pathTracingPreview"))
         throw std::runtime_error("Invalid .azscene pathTracingPreview");
+    if(renderSettingsVersion>=13 && (!(input>>key>>std::boolalpha>>document.renderSettings.sceneLightingEnabled)||key!="sceneLighting"))
+        throw std::runtime_error("Invalid .azscene sceneLighting");
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)
         || key != "innerOutlineEnabled") {

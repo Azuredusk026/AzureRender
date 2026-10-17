@@ -2891,6 +2891,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.skyForward={cameraForward[0],cameraForward[1],cameraForward[2],0};
     uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
     uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
+    uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };
@@ -2973,7 +2974,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
         }
         const Vector3 viewPosition = transformPosition(view, source.position);
         const float depth = -viewPosition[2];
-        if (!(depth > 0.0F) || source.radius <= 0.0F) {
+        if (depth + source.radius < renderSettings_->cameraNear || source.radius <= 0.0F) {
             continue;
         }
         const float clipX = projection[0] * viewPosition[0]
@@ -2985,9 +2986,6 @@ void CharacterSceneRenderer::updateClusteredLighting(
         const float clipW = projection[3] * viewPosition[0]
             + projection[7] * viewPosition[1]
             + projection[11] * viewPosition[2] + projection[15];
-        if (!(std::abs(clipW) > 1.0e-6F)) {
-            continue;
-        }
         RenderLight light{};
         std::uint64_t stableId = 1469598103934665603ULL;
         for (const unsigned char value : source.id) {
@@ -2998,14 +2996,17 @@ void CharacterSceneRenderer::updateClusteredLighting(
         light.position[0] = source.position[0];
         light.position[1] = source.position[1];
         light.position[2] = source.position[2];
-        light.clusterPosition[0] = clipX / clipW;
-        light.clusterPosition[1] = clipY / clipW;
+        light.clusterPosition[0] = std::abs(clipW)>1e-6F ? clipX / clipW : 0;
+        light.clusterPosition[1] = std::abs(clipW)>1e-6F ? clipY / clipW : 0;
         light.clusterPosition[2] = depth;
+        light.viewSpaceBounds = true;
+        light.viewPosition = {viewPosition[0],viewPosition[1],depth};
         for (std::size_t channel = 0; channel < 3; ++channel) {
             light.color[channel] = source.color[channel];
         }
         light.intensity = source.intensity;
         light.radius = source.radius;
+        light.shape = source.shape;
         lights.push_back(light);
     }
     frameLights_.setLights(std::move(lights), kMaxSceneLights);

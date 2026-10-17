@@ -57,14 +57,30 @@ public:
             };
             const float projectedRadius = desc_.orthographic
                 ? radius : radius / minimumDepth;
-            const float minimumX = light.clusterPosition[0]
+            float minimumX = light.clusterPosition[0]
                 - desc_.projectionScaleX * projectedRadius;
-            const float maximumX = light.clusterPosition[0]
+            float maximumX = light.clusterPosition[0]
                 + desc_.projectionScaleX * projectedRadius;
-            const float minimumY = light.clusterPosition[1]
+            float minimumY = light.clusterPosition[1]
                 - desc_.projectionScaleY * projectedRadius;
-            const float maximumY = light.clusterPosition[1]
+            float maximumY = light.clusterPosition[1]
                 + desc_.projectionScaleY * projectedRadius;
+            if (light.viewSpaceBounds) {
+                const auto interval = [&](unsigned axis, float projectionScale) {
+                    const float low = light.viewPosition[axis] - radius;
+                    const float high = light.viewPosition[axis] + radius;
+                    if (desc_.orthographic) return std::array<float,2>{low*projectionScale,high*projectionScale};
+                    // Project the clipped view-space AABB, not a sphere center
+                    // behind the camera. This is conservative at the near plane.
+                    const std::array<float,4> corners{low/minimumDepth,low/maximumDepth,
+                        high/minimumDepth,high/maximumDepth};
+                    return std::array<float,2>{*std::min_element(corners.begin(),corners.end())*projectionScale,
+                        *std::max_element(corners.begin(),corners.end())*projectionScale};
+                };
+                const auto x = interval(0, desc_.projectionScaleX);
+                const auto y = interval(1, desc_.projectionScaleY);
+                minimumX=x[0];maximumX=x[1];minimumY=y[0];maximumY=y[1];
+            }
             if (maximumX < -1.0F || minimumX > 1.0F
                 || maximumY < -1.0F || minimumY > 1.0F) {
                 continue;

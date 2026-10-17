@@ -10,7 +10,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
         {"saturation",settings.grade.saturation},{"contrast",settings.grade.contrast},{"tint",settings.grade.tint},{"toneMapping",settings.grade.toneMappingEnabled},
         {"bloomEnabled",settings.bloom.enabled},{"bloomThreshold",settings.bloom.threshold},{"bloomStrength",settings.bloom.strength},
         {"outlineDepth",settings.outline.depthThreshold},{"outlineNormal",settings.outline.normalThreshold},{"outlineColor",settings.outline.color},
-        {"stylized",settings.stylizedLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled},
+        {"stylized",settings.stylizedLightingEnabled},{"sceneLighting",settings.sceneLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled},
         {"styleMaskStrength",settings.styleMaskStrength},{"diffuseBandThreshold",settings.diffuseBandThreshold},{"diagnosticView",settings.diagnosticView}};
 }
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
@@ -25,6 +25,7 @@ inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::jso
     if(data.contains("skyColor")&&(!data.at("skyColor").is_array()||data.at("skyColor").size()!=3))throw std::invalid_argument("Sky color requires three channels");
     settings.sky.color=data.value("skyColor",settings.sky.color);
     settings.sky.intensity=data.value("skyIntensity",settings.sky.intensity);
+    settings.sceneLightingEnabled=data.value("sceneLighting",settings.sceneLightingEnabled);
     settings.sky.rotationDegrees=data.value("skyRotation",settings.sky.rotationDegrees);
     settings.outline.silhouetteWidthPixels=data.value("outlinePixels",settings.outline.silhouetteWidthPixels);
     settings.antiAliasing=data.value("antiAliasing",settings.antiAliasing);

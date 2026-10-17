@@ -2,6 +2,7 @@
 
 #include "render/RenderSettings.hpp"
 #include "assets/MaterialBinding.hpp"
+#include "render/LightShapeJson.hpp"
 
 #include <cstdint>
 #include <array>
@@ -34,7 +35,7 @@ struct SceneNode {
     std::map<std::string,MaterialBinding> resolvedMaterials;
 };
 
-// Point light attached to a scene node. The node supplies world placement;
+// Local light attached to a scene node. The node supplies world placement;
 // these fields describe the emitter's appearance and range.
 struct SceneLight {
     std::string id;
@@ -43,10 +44,11 @@ struct SceneLight {
     float intensity = 1.0F;
     float radius = 5.0F;
     bool enabled = true;
+    LightShape shape;
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 4;
+    static constexpr std::uint32_t kSchemaVersion = 5;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;

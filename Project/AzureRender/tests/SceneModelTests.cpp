@@ -64,6 +64,10 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
             || loadedLight.color != expectedLight.color
             || loadedLight.intensity != expectedLight.intensity
             || loadedLight.radius != expectedLight.radius
+            || loadedLight.shape.type != expectedLight.shape.type
+            || loadedLight.shape.direction != expectedLight.shape.direction
+            || loadedLight.shape.innerCone != expectedLight.shape.innerCone
+            || loadedLight.shape.outerCone != expectedLight.shape.outerCone
             || loadedLight.enabled != expectedLight.enabled) {
             return false;
         }
@@ -119,8 +123,12 @@ int main() {
         const auto scenePath = directory / "scene.azscene";
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.sceneId = "atomic-save-test";
+        document.renderSettings.sceneLightingEnabled = true;
         document.lights.push_back({
             "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
+        document.lights[0].shape.type = azurerender::LightKind::Spot;
+        document.lights[0].shape.innerCone = .25F;
+        document.lights[0].shape.outerCone = .5F;
         document.save(scenePath);
         {
             std::ifstream saved(scenePath);
@@ -136,6 +144,7 @@ int main() {
         }
         assert(std::filesystem::exists(scenePath));
         assert(loadedDocumentMatches(scenePath, document));
+        assert(azurerender::SceneDocument::load(scenePath).renderSettings.sceneLightingEnabled);
         assert(countTemporaryFiles(directory) == 0);
         std::filesystem::remove_all(directory);
     }

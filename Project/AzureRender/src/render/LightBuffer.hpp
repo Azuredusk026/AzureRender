@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <vector>
 #include <utility>
+#include "render/LightShape.hpp"
 
 namespace azurerender {
 
@@ -15,16 +16,22 @@ struct RenderLight {
     float color[3]{1.0F, 1.0F, 1.0F};
     float intensity = 1.0F;
     float radius = 1.0F;
+    LightShape shape;
+    bool viewSpaceBounds = false;
+    std::array<float, 3> viewPosition{};
 };
 
 struct RenderLightGpu {
     float positionRadius[4]{};
     float colorIntensity[4]{};
+    float directionOuter[4]{};
+    float coneType[4]{};
 };
 
 class LightBuffer final {
 public:
     void setLights(std::vector<RenderLight> lights, std::size_t maxLights = 1024) {
+        for (const auto& light : lights) light.shape.validate();
         std::sort(lights.begin(), lights.end(), [](const RenderLight& a, const RenderLight& b) {
             return a.stableId < b.stableId;
         });
@@ -45,6 +52,10 @@ public:
             value.colorIntensity[1] = light.color[1];
             value.colorIntensity[2] = light.color[2];
             value.colorIntensity[3] = light.intensity;
+            for (unsigned i=0; i<3; ++i) value.directionOuter[i] = light.shape.direction[i];
+            value.directionOuter[3] = std::cos(light.shape.outerCone);
+            value.coneType[0] = std::cos(light.shape.innerCone);
+            value.coneType[1] = static_cast<float>(light.shape.type);
             packed.push_back(value);
         }
         return packed;

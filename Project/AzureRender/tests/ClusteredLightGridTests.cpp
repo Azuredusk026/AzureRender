@@ -56,5 +56,19 @@ int main() {
         || ortho.indicesFor(1, 0, 0).size() != 1) {
         throw std::runtime_error("Orthographic near and far lights must occupy identical screen tiles");
     }
+    azurerender::ClusteredLightGrid perspective({4, 4, 4, .1F, 100.F});
+    azurerender::RenderLight behind;
+    behind.viewSpaceBounds = true;
+    behind.viewPosition = {0, 0, -.5F}; // Positive z is forward in this contract.
+    behind.clusterPosition[2] = -.5F;
+    behind.radius = 2;
+    perspective.assign({behind});
+    if (perspective.indicesFor(0,0,0).empty() || perspective.indicesFor(3,3,0).empty())
+        throw std::runtime_error("Light behind camera must cover visible influence volume");
+    behind.viewPosition = {100, 0, 10};
+    behind.clusterPosition[2] = 10;
+    behind.radius = 1;
+    perspective.assign({behind});
+    if (!perspective.gpuIndexData().empty()) throw std::runtime_error("Offscreen volume must be culled");
     return 0;
 }

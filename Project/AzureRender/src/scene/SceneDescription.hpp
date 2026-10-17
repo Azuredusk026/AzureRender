@@ -11,6 +11,7 @@
 
 #include "scene/TransformMath.hpp"
 #include "assets/MaterialBinding.hpp"
+#include "render/LightShape.hpp"
 
 namespace azurerender::scene {
 
@@ -43,6 +44,7 @@ struct SceneLightDesc {
     float intensity = 1.0F;
     float radius = 5.0F;
     bool enabled = true;
+    LightShape shape;
 };
 
 // Engine-provided scene content for renderers. Replaces the single-asset

@@ -1,4 +1,5 @@
 #pragma once
+#include "render/LightShape.hpp"
 
 #include "Entity.hpp"
 #include "reflection/Annotations.hpp"
@@ -41,7 +42,7 @@ struct NameComponent {
     std::array<char, 64> name{};
 };
 
-// Point light attached to a scene node entity. Position comes from that
+// Local light attached to a scene node entity. Position comes from that
 // entity's TransformComponent; color, intensity and radius are light data.
 struct LightEmitterComponent {
     std::string id;
@@ -49,6 +50,7 @@ struct LightEmitterComponent {
     float intensity = 1.0F;
     float radius = 5.0F;
     bool enabled = true;
+    azurerender::LightShape shape;
 };
 
 // A node may own several independently identified point-light emitters.

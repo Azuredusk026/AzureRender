@@ -13,6 +13,28 @@ from pathlib import Path
 import struct
 
 
+def preview_light_shape(row):
+    """Map documented Unity emitter axes/cones; leave radiometry to its audit.
+
+    Scene geometry conversion preserves Unity XYZ at the engine boundary.
+    Unity ZXY Euler composition is Ry*Rx*Rz and forward is local positive Z.
+    """
+    if row['light_type'] not in (0, 2) or row['shape'] != 0:
+        raise ValueError('Unsupported native emitter shape')
+    x, y, z = row['euler_zxy']
+    if not all(math.isfinite(v) for v in (x, y, z)):
+        raise ValueError('Nonfinite emitter rotation')
+    x, y = math.radians(x), math.radians(y)
+    shape = {'type': 'spot' if row['light_type'] == 0 else 'point',
+             'direction': [math.sin(y)*math.cos(x), -math.sin(x), math.cos(y)*math.cos(x)]}
+    if shape['type'] == 'spot':
+        inner, outer = row['inner_spot_angle'], row['spot_angle']
+        if not all(math.isfinite(v) for v in (inner, outer)) or not 0 <= inner <= outer <= 180 or outer == 0:
+            raise ValueError('Invalid native cone angles')
+        shape.update(innerCone=math.radians(inner)/2, outerCone=math.radians(outer)/2)
+    return shape
+
+
 def decode_light_fields(fields):
     if len(fields) not in (46,60):
         raise ValueError('Unsupported native light schema size')

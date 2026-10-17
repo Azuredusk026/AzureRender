@@ -123,6 +123,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 47 个场景材质支持表面通道烘焙。
 源灯光可读取，展示采用点光近似。
 完整着色与原生环境光照还原仍待验收。
+通用聚光与显式场景照明通过公开 GPU 夹具。
+分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。
 该展示提供 1080p、24 帧、16 秒的实际引擎录像。
 获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。

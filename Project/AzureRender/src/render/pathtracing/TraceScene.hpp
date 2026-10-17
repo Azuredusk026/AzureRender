@@ -7,7 +7,7 @@ using Vec4=std::array<float,4>;
 struct Triangle {Vec4 p0,e1,e2,uv01,uv2material,n0,n1,n2,t0,t1,t2;};
 struct BvhNode {Vec4 minimum,maximum;std::array<std::uint32_t,4> links{};};
 struct Material {std::array<std::uint32_t,4> albedo{},surface{},emission{},normal{},transmissionMap{};Vec4 properties{},transmission{},attenuation{};};
-struct Light {Vec4 position{},radiance{};};
+struct Light {Vec4 position{},radiance{},directionOuter{},coneType{};};
 struct Geometry {std::vector<Triangle> triangles;std::vector<BvhNode> nodes;std::vector<Light> lights;};
 struct Mesh {LoadedAsset asset;std::uint32_t materialBase=0;};
 using Meshes=std::map<std::string,Mesh>;

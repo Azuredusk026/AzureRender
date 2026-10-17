@@ -55,6 +55,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
         SceneLight light; light.id = source.at("id").get<std::string>(); light.nodeId = source.at("nodeId").get<std::string>();
         light.color = source.value("color", light.color); light.intensity = source.value("intensity", light.intensity);
         light.radius = source.value("radius", light.radius); light.enabled = source.value("enabled", light.enabled);
+        light.shape = source.value("shape", LightShape{});
         if (!lights.insert(light.id).second || !level.components.count(light.nodeId) || !std::isfinite(light.intensity) || light.intensity < 0
             || !std::isfinite(light.radius) || light.radius <= 0) throw std::runtime_error("Invalid level light");
         level.scene.lights.push_back(std::move(light));

@@ -217,7 +217,7 @@ void EditorContext::syncComponents() {
                     light.color,
                     light.intensity,
                     light.radius,
-                    light.enabled});
+                    light.enabled, light.shape});
             }
         }
         if (!emitters.empty()) {

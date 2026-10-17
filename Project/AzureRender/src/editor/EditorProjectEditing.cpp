@@ -296,7 +296,7 @@ nlohmann::json EditorContext::levelDocument()const{
         document["resources"].push_back({{"id",resource.id},{"asset",reference}});
     }
     for(const auto& light:scene_.lights){if(light.nodeId.find(':')!=std::string::npos && liveInstances.count(light.nodeId.substr(0,light.nodeId.find(':'))))continue;
-        document["lights"].push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},{"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled}});}
+        document["lights"].push_back({{"id",light.id},{"nodeId",light.nodeId},{"color",light.color},{"intensity",light.intensity},{"radius",light.radius},{"enabled",light.enabled},{"shape",light.shape}});}
     return document;
 }
 void EditorContext::capturePrefabSources(const std::map<std::string,nlohmann::json>& sources){

@@ -18,6 +18,10 @@ int main(){try{
  scene::SceneDescription scene;scene.nodes.push_back({"parent","","",{10,0,0}});scene.nodes.push_back({"child","triangle","parent",{0,2,0}});
  auto output=tracing::buildGeometry(scene,meshes,{});require(output.triangles.size()==1&&output.triangles[0].p0[0]==10&&output.triangles[0].p0[1]==2,"Hierarchy transforms reach tracing geometry");
  require(output.triangles[0].n0[1]>.99F,"Interpolated vertex normals reach tracing geometry");
+ scene.lights.push_back({"spot","",{0,1,0}});
+ const auto lightFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.type=LightKind::Spot;
+ require(tracing::sceneFingerprint(scene,{})!=lightFingerprint,"Light shape must invalidate tracing history");
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");
@@ -44,6 +48,8 @@ int main(){try{
  const auto interpreted=glass.interpret([](const auto&){return std::filesystem::path();});
  require(interpreted.transmission==1&&std::abs(interpreted.ior-1.33F)<1e-5F,"Material service retains physical transmission");
  RenderSettings settings;settings.pathTraceDenoise=true;settings.pathTraceSeed=17;RenderSettings reopened;
+ settings.sceneLightingEnabled=true;
  decodeLevelRenderSettings(reopened,encodeLevelRenderSettings(settings));require(reopened.pathTraceDenoise&&reopened.pathTraceSeed==17,"Denoise and seed survive settings persistence");
+ require(reopened.sceneLightingEnabled,"Explicit scene lighting survives settings persistence");
  std::cout<<"Path tracing BVH, hierarchy, visibility and atlas passed\n";return 0;
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

@@ -95,7 +95,13 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
     }
     buildBvh(result);
     for(std::size_t i=0;i<result.triangles.size();++i)if(result.triangles[i].uv2material[3]>0)result.lights.push_back({{static_cast<float>(i),0,0,0},{}});
-    for(const auto& light:scene.lights)if(light.enabled&&light.intensity>0)result.lights.push_back({{light.position[0],light.position[1],light.position[2],1},{light.color[0]*light.intensity,light.color[1]*light.intensity,light.color[2]*light.intensity,light.radius}});
+    for(const auto& light:scene.lights)if(light.enabled&&light.intensity>0){
+        light.shape.validate();
+        result.lights.push_back({{light.position[0],light.position[1],light.position[2],1},
+            {light.color[0]*light.intensity,light.color[1]*light.intensity,light.color[2]*light.intensity,light.radius},
+            {light.shape.direction[0],light.shape.direction[1],light.shape.direction[2],std::cos(light.shape.outerCone)},
+            {std::cos(light.shape.innerCone),static_cast<float>(light.shape.type),0,0}});
+    }
     return result;
 }
 std::uint64_t sceneFingerprint(const scene::SceneDescription& scene,const std::vector<NodeAnimationFrame>& animations){
@@ -103,7 +109,7 @@ std::uint64_t sceneFingerprint(const scene::SceneDescription& scene,const std::v
     const auto bytes=[&](const auto& value){const auto* p=reinterpret_cast<const unsigned char*>(&value);for(std::size_t i=0;i<sizeof(value);++i){hash^=p[i];hash*=1099511628211ULL;}};
     const auto text=[&](const std::string& value){for(unsigned char c:value){hash^=c;hash*=1099511628211ULL;}hash^=255;hash*=1099511628211ULL;};
     for(const auto& n:scene.nodes){text(n.id);text(n.resourceId);text(n.parentId);bytes(n.translation);bytes(n.rotation);bytes(n.scale);bytes(n.visible);}
-    for(const auto& l:scene.lights){text(l.id);bytes(l.position);bytes(l.color);bytes(l.intensity);bytes(l.radius);bytes(l.enabled);}
+    for(const auto& l:scene.lights){text(l.id);bytes(l.position);bytes(l.color);bytes(l.intensity);bytes(l.radius);bytes(l.enabled);bytes(l.shape.type);bytes(l.shape.direction);bytes(l.shape.innerCone);bytes(l.shape.outerCone);}
     for(const auto& a:animations){text(a.node);bytes(a.clip);bytes(a.time);bytes(a.loop);bytes(a.previousClip);bytes(a.previousTime);bytes(a.blend);bytes(a.previousLoop);bytes(a.morph);bytes(a.expressionWeight);
         for(float w:a.morphOverrides)bytes(w);
         bytes(a.morphOverrides.size());
