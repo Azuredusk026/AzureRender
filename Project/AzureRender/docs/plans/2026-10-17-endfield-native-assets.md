@@ -5,6 +5,7 @@
 场景编辑与保存重开通过，完整材质及物理效果待验收。
 实际结果见[原生资产验收](../acceptance/ev/native-assets.md)。
 材质烘焙、灯光参数与录像见[帝江号展示计划](2026-10-17-dijiang-lighting-video.md)。
+原生照明、反射与角色着色见[完整还原计划](2026-10-17-native-render-restoration.md)。
 
 ## 目标与完成条件
 
