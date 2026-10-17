@@ -66,6 +66,8 @@ constexpr const char* kHelp =
     "  --gpu-timing-output <json>          GPU pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
+    "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
+    "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal\n"
     "  --qa-light-scan                    Rotate the key light through 120 frames\n"
     "  --qa-animation                     Play animation with a fixed QA camera\n"
     "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
@@ -226,7 +228,7 @@ void validate(const ParsedCommandLine& parsed) {
     }
     if (!options.qaCamera.empty()
         && !isOneOf(options.qaCamera, {
-            "full-body-front", "face-front", "face-three-quarter",
+            "scene", "full-body-front", "face-front", "face-three-quarter",
             "face-three-quarter-left", "face-three-quarter-right",
             "face-side-left", "face-side-right", "back-detail", "lighting-sweep"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-camera",
@@ -240,7 +242,7 @@ void validate(const ParsedCommandLine& parsed) {
     }
     if (!options.qaLight.empty()
         && !isOneOf(options.qaLight, {
-            "neutral-material", "stylized-key", "specular-rim",
+            "scene", "neutral-material", "stylized-key", "specular-rim",
             "rear-emissive"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-light",
              "Unknown --qa-light: " + options.qaLight);
@@ -264,7 +266,8 @@ void validate(const ParsedCommandLine& parsed) {
             "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
             "outline", "shadow-map", "material-id", "style-mask", "ambient",
             "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
-            "bloom", "brow-mask"})) {
+            "bloom", "brow-mask", "roughness", "metallic", "direct-specular",
+            "reflection", "shaded-normal"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
     }

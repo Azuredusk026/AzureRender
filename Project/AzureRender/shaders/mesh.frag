@@ -891,6 +891,16 @@ void main() {
     } else if (qaIsolationMode == 16) {
         qaColor = vec3(eyebrowRegion > 0.5 ? 1.0 : 0.0);
         if (overlayMaterial) outputAlpha = eyebrowRegion > 0.5 ? 1.0 : 0.0;
+    } else if (qaIsolationMode == 17) {
+        qaColor = vec3(roughness);
+    } else if (qaIsolationMode == 18) {
+        qaColor = vec3(metallic);
+    } else if (qaIsolationMode == 19) {
+        qaColor = directSpecular;
+    } else if (qaIsolationMode == 20) {
+        qaColor = ambientSpecular;
+    } else if (qaIsolationMode == 21) {
+        qaColor = shadedNormal * 0.5 + 0.5;
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {

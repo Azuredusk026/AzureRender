@@ -621,7 +621,7 @@ void AzureRenderApp::buildSceneFrameData(
 #if AZURE_WITH_EDITOR
     sceneViewActive=runOptions_.editorSession&&runOptions_.editorSession->editCameraActive();
 #endif
-    if(game&&!qaHarnessEnabled_&&!sceneViewActive){
+    if(game&&(!qaHarnessEnabled_||qaCameraName_=="scene")&&!sceneViewActive){
         gameView=game->renderCamera().view;
         const auto view=gameView.value_or(azurerender::CameraViewDescriptor{});
         cameraPosition_=view.position;cameraTarget_=view.target;autoRotate_=false;rotationAngle_=0;
@@ -776,7 +776,9 @@ void AzureRenderApp::configureQaHarness() {
     qaCameraName_ = runOptions_.qaCamera.empty()
         ? "full-body-front"
         : runOptions_.qaCamera;
-    if (qaCameraName_ == "full-body-front") {
+    if (qaCameraName_ == "scene") {
+        // The runtime camera and authored world transform remain authoritative.
+    } else if (qaCameraName_ == "full-body-front") {
         if (!runOptions_.portfolioMode) {
             rotationAngle_ = 0.0F;
         }
@@ -842,7 +844,9 @@ void AzureRenderApp::configureQaHarness() {
     qaLightName_ = runOptions_.qaLight.empty()
         ? "stylized-key"
         : runOptions_.qaLight;
-    if (qaLightName_ == "neutral-material") {
+    if (qaLightName_ == "scene") {
+        // Component diagnostics evaluate the scene's existing lighting settings.
+    } else if (qaLightName_ == "neutral-material") {
         azurerender::applyShowcasePresetLook(renderSettings_, 2);
     } else if (qaLightName_ == "stylized-key") {
         azurerender::applyShowcasePresetLook(renderSettings_, 1);
@@ -859,7 +863,8 @@ void AzureRenderApp::configureQaHarness() {
     if (!runOptions_.renderSettings.stylizedLightingEnabled) {
         renderSettings_.stylizedLightingEnabled = false;
     }
-    renderSettings_.antiAliasing=runOptions_.renderSettings.antiAliasing;
+    if (qaLightName_ != "scene")
+        renderSettings_.antiAliasing=runOptions_.renderSettings.antiAliasing;
     if (!runOptions_.renderSettings.innerOutlineEnabled) {
         renderSettings_.innerOutlineEnabled = false;
     }
@@ -895,12 +900,12 @@ void AzureRenderApp::configureQaHarness() {
         ? "beauty"
         : runOptions_.qaIsolation;
 
-    constexpr std::array<const char*, 21> kIsolationNames = {
+    constexpr std::array<const char*, 26> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
         "direct-diffuse", "shadow-tint", "face-sdf", "overlay", "bloom",
-        "brow-mask",
+        "brow-mask", "roughness", "metallic", "direct-specular", "reflection", "shaded-normal",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -910,11 +915,12 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 21> kPostProcessViews = {
+    constexpr std::array<std::uint32_t, 26> kPostProcessViews = {
         0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 21> kShaderIsolationModes = {
+    constexpr std::array<std::uint32_t, 26> kShaderIsolationModes = {
         0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];
