@@ -319,6 +319,8 @@ NR1 确认表示后，按对应分支实现。
 活动骨骼与材质表情控制需同时核对。
 动作循环接缝和脚底接触纳入视频验收。
 
+追加材质证据见[角色层读取](../acceptance/nr/character-layers.md)。
+
 ## NR7：恢复环境体积与后处理
 
 文件：扩展 `src/render/RenderSettings.hpp`、`src/runtime/LevelRenderSettings.hpp`。
