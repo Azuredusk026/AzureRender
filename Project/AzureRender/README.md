@@ -125,6 +125,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 完整着色与原生环境光照还原仍待验收。
 通用聚光与显式场景照明通过公开 GPU 夹具。
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
+中枢物流已读取 21 个原生样条描述。
+运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。
 该展示提供 1080p、24 帧、16 秒的实际引擎录像。
 获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。
