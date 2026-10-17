@@ -42,6 +42,30 @@ int main() {
         const std::vector<std::uint16_t> expected{0x4400, 0x3800, 0x4000, 0x3c00,
                                                 0x3400, 0x4800, 0x3c00, 0x3c00};
         require(image.rgba16f == expected, "EXR preserves linear HDR, RGB order, offset and default alpha");
+        const auto authored = directory / "prefiltered.azenv";
+        // Two independently authored levels. The last level is HDR blue,
+        // deliberately different from any average of the red base pixels.
+        const auto writeAuthored = [&](unsigned count, bool truncate) {
+            std::ofstream out(authored, std::ios::binary);
+            out.write("AZENV001", 8);
+            for (unsigned value : {2U, 1U, count})
+                for (unsigned shift : {0U,8U,16U,24U}) out.put(char(value >> shift));
+            const std::array<unsigned short,12> values{0x4000,0,0,0x3c00,0x4000,0,0,0x3c00,0,0,0x4800,0x3c00};
+            for (unsigned i=0;i<(truncate?11U:12U);++i) {
+                out.put(char(values[i])); out.put(char(values[i]>>8));
+            }
+        };
+        writeAuthored(2, false);
+        const auto prefiltered=azurerender::loadEnvironmentImage({authored.string()});
+        require(prefiltered.rgba16f.size()==12 && prefiltered.rgba16f[10]==0x4800,
+            "Authored HDR mip must retain its independent radiance");
+        for (const bool truncated : {false,true}) {
+            writeAuthored(truncated?2:3, truncated);
+            bool failed=false;
+            try { (void)azurerender::loadEnvironmentImage({authored.string()}); }
+            catch (const std::exception&) { failed=true; }
+            require(failed,"Invalid authored mip count or truncated payload must fail");
+        }
         const auto broken = directory / "broken.exr";
         { std::ofstream out(broken, std::ios::binary); out << "invalid EXR"; }
         bool rejected = false;

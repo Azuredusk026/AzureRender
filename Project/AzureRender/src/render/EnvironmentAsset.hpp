@@ -22,6 +22,8 @@ struct EnvironmentImage {
     std::uint32_t width = 0;
     std::uint32_t height = 0;
     std::string description;
+    // Zero requests runtime filtering. Authored levels are packed base first.
+    std::uint32_t authoredMipLevels = 0;
 };
 
 // Loads an equirectangular image or a directory containing

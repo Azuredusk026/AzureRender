@@ -110,7 +110,7 @@ void VulkanRhi::copyBufferToImage(
     const GpuImage& destination,
     const std::uint32_t width,
     const std::uint32_t height,
-    const std::uint32_t mipLevels) {
+    const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
     runOneShot("copyBufferToImage", [&](VkCommandBuffer commandBuffer) {
         std::vector<VkBufferImageCopy> regions;
         VkDeviceSize offset=0;unsigned w=width,h=height;
@@ -119,7 +119,7 @@ void VulkanRhi::copyBufferToImage(
         region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         region.imageSubresource.layerCount = 1;
         region.imageExtent = {w, h, 1};
-        regions.push_back(region);offset+=VkDeviceSize(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);
+        regions.push_back(region);offset+=VkDeviceSize(w)*h*bytesPerTexel;w=std::max(w/2,1U);h=std::max(h/2,1U);
         }
         vkCmdCopyBufferToImage(
             commandBuffer,

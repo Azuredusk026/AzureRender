@@ -1344,7 +1344,17 @@ void CharacterSceneRenderer::uploadTextureData(
         }else if(requestedMipLevels==1&&pixels.size()>baseBytes)filtered.assign(pixels.begin(),pixels.begin()+baseBytes);
         else if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
     }
+    bool authoredHalfMips=false;
+    if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==2) {
+        if(requestedMipLevels>1&&pixels.size()>std::size_t(width)*height*4) {
+            std::size_t expected=0;unsigned w=width,h=height;
+            for(unsigned level=0;level<requestedMipLevels;++level){expected+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);}
+            if(pixels.size()!=expected)throw std::invalid_argument("Authored HDR mip storage is invalid");
+            authoredHalfMips=true;
+        }
+    }
     const bool cpuMips=!filtered.empty();
+    const bool suppliedMips=cpuMips||authoredHalfMips;
     const VkDeviceSize size = static_cast<VkDeviceSize>(cpuMips?filtered.size():pixels.size())
         * sizeof(typename std::decay_t<Pixels>::value_type);
     rhi::GpuBuffer staging = allocator_->createBuffer(
@@ -1370,8 +1380,8 @@ void CharacterSceneRenderer::uploadTextureData(
         VK_IMAGE_LAYOUT_UNDEFINED,
         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
         mipLevels);
-    rhi_->copyBufferToImage(staging, texture.image, width, height,cpuMips?mipLevels:1);
-    if (mipLevels > 1 && !cpuMips) {
+    rhi_->copyBufferToImage(staging, texture.image, width, height,suppliedMips?mipLevels:1,4*sizeof(typename std::decay_t<Pixels>::value_type));
+    if (mipLevels > 1 && !suppliedMips) {
         rhi_->generateMipmaps(texture.image, format, width, height, mipLevels);
     } else {
         rhi_->transitionImageLayout(
@@ -1467,12 +1477,14 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
     std::vector<std::uint16_t> environmentPixels;
     std::uint32_t environmentWidth = kEnvironmentWidth;
     std::uint32_t environmentHeight = kEnvironmentHeight;
+    std::uint32_t authoredEnvironmentMips = 0;
     if (!environmentSource_.path.empty()) {
         const EnvironmentImage environment =
             loadEnvironmentImage(environmentSource_);
         environmentPixels = environment.rgba16f;
         environmentWidth = environment.width;
         environmentHeight = environment.height;
+        authoredEnvironmentMips = environment.authoredMipLevels;
         azurerender::RuntimeDiagnostics::instance().print(
             "asset",
             "Environment: " + environment.description + " ("
@@ -1542,8 +1554,10 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
         VK_FORMAT_R16G16B16A16_SFLOAT,
         true,
         environmentTexture_,
-        kEnvironmentMipLevels);
-    if (computeIblEnabled_) {
+        authoredEnvironmentMips ? authoredEnvironmentMips : kEnvironmentMipLevels);
+    if (authoredEnvironmentMips) {
+        azurerender::RuntimeDiagnostics::instance().info("render", "Environment: preserved authored HDR mip chain; runtime prefilter skipped");
+    } else if (computeIblEnabled_) {
         createEnvironmentPrefilter();
     } else {
         azurerender::RuntimeDiagnostics::instance().info(

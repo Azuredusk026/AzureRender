@@ -157,12 +157,12 @@ void NullRhi::copyBufferToImage(
     const GpuImage& destination,
     const std::uint32_t width,
     const std::uint32_t height,
-    const std::uint32_t mipLevels) {
+    const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
     if(collectImageUploads){ImageUpload upload{width,height,mipLevels,{}};const auto* begin=static_cast<const std::uint8_t*>(source.mapped);if(begin)upload.pixels.assign(begin,begin+source.size);imageUploads.push_back(std::move(upload));}
     calls.push_back(
         {"copyBufferToImage",
          hexHandle(destination.image) + " " + std::to_string(width) + "x"
-             + std::to_string(height)});
+             + std::to_string(height) + " texelBytes=" + std::to_string(bytesPerTexel)});
 }
 
 void NullRhi::clearImage(const GpuImage& image) {

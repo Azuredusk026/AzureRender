@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
 #include <stdexcept>
 #include <string_view>
 
@@ -163,6 +164,38 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
     }
     const auto path=std::filesystem::u8path(source.path);
     EnvironmentImage output;
+    if (path.extension() == ".azenv") {
+        std::ifstream input(path, std::ios::binary);
+        const auto fail = [&]() { throw std::runtime_error("Invalid authored environment: " + path.u8string()); };
+        char magic[8]{}; input.read(magic,8);
+        if (!input || std::memcmp(magic,"AZENV001",8)) fail();
+        const auto uint32 = [&]() {
+            std::uint32_t value=0;
+            for(unsigned shift=0;shift<32;shift+=8) {
+                const int byte=input.get(); if(byte==EOF) fail();
+                value |= std::uint32_t(byte)<<shift;
+            }
+            return value;
+        };
+        output.width=uint32();output.height=uint32();output.authoredMipLevels=uint32();
+        if (!output.width || output.width>16384 || output.height*2ULL!=output.width
+            || !output.authoredMipLevels || source.projection==EnvironmentProjection::CubeFaces) fail();
+        unsigned maxLevels=1;for(unsigned size=output.width;size>1;size/=2)++maxLevels;
+        if(output.authoredMipLevels>maxLevels)fail();
+        std::size_t count=0;unsigned w=output.width,h=output.height;
+        for(unsigned level=0;level<output.authoredMipLevels;++level) {
+            count+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);
+        }
+        if(std::filesystem::file_size(path)!=20+count*2)fail();
+        output.rgba16f.resize(count);
+        for(auto& value:output.rgba16f) {
+            const int lo=input.get(),hi=input.get();if(lo==EOF||hi==EOF)fail();
+            value=static_cast<std::uint16_t>(lo|(hi<<8));
+            if((value&0x7c00)==0x7c00)fail();
+        }
+        output.description=path.u8string()+" (authored linear HDR mip chain)";
+        return output;
+    }
     const bool cube = source.projection == EnvironmentProjection::CubeFaces
         || (source.projection == EnvironmentProjection::Auto
             && std::filesystem::is_directory(path));

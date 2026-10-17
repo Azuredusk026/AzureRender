@@ -282,6 +282,8 @@ NR1 确认表示后，按对应分支实现。
 屏幕边缘回退、遮挡与角色是否进入反射分别验收。
 镜面反射与漫反射 GI 的重复能量贡献必须排除。
 
+原生读取与层级证据见[反射契约](../acceptance/nr/reflection-evidence.md)。
+
 ## NR6：恢复角色材质、受光与整体外观
 
 文件：扩展 `tools/endfield_native/material.py` 与角色转换工具。
