@@ -1,6 +1,6 @@
 # 当前阶段状态
 
-项目状态：Ready。
+项目状态：开发中。
 
 本页回答各阶段处于什么状态，下一项工作是什么。
 阶段状态取值为完成、Ready、开发中、待完成。
@@ -105,6 +105,19 @@ Ready 表示依赖满足，可以开始执行。
 | PT5 | 预览降噪与诊断 | 完成 | 下一轮路径追踪补齐与公开演示。[记录](../acceptance/pt/2026-10-15.md) |
 | PT6 | 三个公开素材演示 | 完成 | 下一轮路径追踪补齐与公开演示。[记录](../acceptance/pt/2026-10-15.md) |
 | PT7 | 集中验收与画面交付 | 完成 | 下一轮路径追踪补齐与公开演示。[记录](../acceptance/pt/2026-10-15.md) |
+| NR0 | 参考与诊断基准 | 开发中 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR1 | 有效场景与资源链 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR2 | 原生材质与颜色 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR3 | 直接光与局部阴影 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR4 | 原生全局光照 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR5 | 原生反射 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR6 | 角色着色与二级运动 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR7 | 环境后处理与场景动态 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR8 | 渲染联合验收 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR9 | 原生移动动作集 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR10 | WASD 与场景移动 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR11 | 速度驱动动画混合 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
+| NR12 | 可玩场景联合交付 | 待完成 | 原生可玩还原；局部证据按专项计划记录。[记录](2026-10-17-native-playable-restoration.md) |
 
 ## 最终收尾
 
@@ -135,5 +148,18 @@ P8 完成前，项目的完整交付验收仍待完成。
 | ED-workflow | ED7 | P8 | 未执行 |
 | UX-E-HUMAN | UX-E | UX-E | 待验 |
 | VD6-HUMAN | VD6 | VD6 | 待验 |
+| NR0.delivery | NR0 | NR0 | 未执行 |
+| NR1.delivery | NR1 | NR1 | 未执行 |
+| NR2.delivery | NR2 | NR2 | 未执行 |
+| NR3.delivery | NR3 | NR3 | 未执行 |
+| NR4.delivery | NR4 | NR4 | 未执行 |
+| NR5.delivery | NR5 | NR5 | 未执行 |
+| NR6.delivery | NR6 | NR6 | 未执行 |
+| NR7.delivery | NR7 | NR7 | 未执行 |
+| NR8.delivery | NR8 | NR8 | 未执行 |
+| NR9.delivery | NR9 | NR9 | 未执行 |
+| NR10.delivery | NR10 | NR10 | 未执行 |
+| NR11.delivery | NR11 | NR11 | 未执行 |
+| NR12.delivery | NR12 | NR12 | 未执行 |
 
 详细步骤见[验收收尾流程](../acceptance/phase-closure.md)。

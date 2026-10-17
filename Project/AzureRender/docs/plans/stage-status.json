@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-17",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1227,6 +1227,216 @@
         "docs/acceptance/pt/2026-10-15.md"
       ],
       "requiredAcceptance": []
+    },
+    {
+      "id": "NR0",
+      "name": "参考与诊断基准",
+      "status": "Active",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR0.delivery"
+      ]
+    },
+    {
+      "id": "NR1",
+      "name": "有效场景与资源链",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR0"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR1.delivery"
+      ]
+    },
+    {
+      "id": "NR2",
+      "name": "原生材质与颜色",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR2.delivery"
+      ]
+    },
+    {
+      "id": "NR3",
+      "name": "直接光与局部阴影",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR3.delivery"
+      ]
+    },
+    {
+      "id": "NR4",
+      "name": "原生全局光照",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR4.delivery"
+      ]
+    },
+    {
+      "id": "NR5",
+      "name": "原生反射",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR2"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR5.delivery"
+      ]
+    },
+    {
+      "id": "NR6",
+      "name": "角色着色与二级运动",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR3",
+        "NR4",
+        "NR5"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR6.delivery"
+      ]
+    },
+    {
+      "id": "NR7",
+      "name": "环境后处理与场景动态",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR6"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR7.delivery"
+      ]
+    },
+    {
+      "id": "NR8",
+      "name": "渲染联合验收",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR7"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR8.delivery"
+      ]
+    },
+    {
+      "id": "NR9",
+      "name": "原生移动动作集",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR9.delivery"
+      ]
+    },
+    {
+      "id": "NR10",
+      "name": "WASD 与场景移动",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR1"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR10.delivery"
+      ]
+    },
+    {
+      "id": "NR11",
+      "name": "速度驱动动画混合",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR9",
+        "NR10"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR11.delivery"
+      ]
+    },
+    {
+      "id": "NR12",
+      "name": "可玩场景联合交付",
+      "status": "Pending",
+      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "checksPassed": false,
+      "dependsOn": [
+        "NR8",
+        "NR11"
+      ],
+      "evidence": [
+        "docs/plans/2026-10-17-native-playable-restoration.md"
+      ],
+      "requiredAcceptance": [
+        "NR12.delivery"
+      ]
     }
   ],
   "acceptance": [
@@ -1417,6 +1627,97 @@
       "result": "pending",
       "description": "集中确认中文输入、实体拖拽、焦点与连续制作体验",
       "evidence": "docs/acceptance/vd/2026-10-14.md"
+    },
+    {
+      "id": "NR0.delivery",
+      "originPhase": "NR0",
+      "ownerPhase": "NR0",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR1.delivery",
+      "originPhase": "NR1",
+      "ownerPhase": "NR1",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR2.delivery",
+      "originPhase": "NR2",
+      "ownerPhase": "NR2",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR3.delivery",
+      "originPhase": "NR3",
+      "ownerPhase": "NR3",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR4.delivery",
+      "originPhase": "NR4",
+      "ownerPhase": "NR4",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR5.delivery",
+      "originPhase": "NR5",
+      "ownerPhase": "NR5",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR6.delivery",
+      "originPhase": "NR6",
+      "ownerPhase": "NR6",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR7.delivery",
+      "originPhase": "NR7",
+      "ownerPhase": "NR7",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR8.delivery",
+      "originPhase": "NR8",
+      "ownerPhase": "NR8",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR9.delivery",
+      "originPhase": "NR9",
+      "ownerPhase": "NR9",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR10.delivery",
+      "originPhase": "NR10",
+      "ownerPhase": "NR10",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR11.delivery",
+      "originPhase": "NR11",
+      "ownerPhase": "NR11",
+      "result": "notExecuted",
+      "evidence": null
+    },
+    {
+      "id": "NR12.delivery",
+      "originPhase": "NR12",
+      "ownerPhase": "NR12",
+      "result": "notExecuted",
+      "evidence": null
     }
   ],
   "mirrors": [
@@ -1432,6 +1733,19 @@
     "docs/plans/manual-review-manifest.json"
   ],
   "executionOrder": [
+    "NR0",
+    "NR1",
+    "NR2",
+    "NR3",
+    "NR4",
+    "NR5",
+    "NR6",
+    "NR7",
+    "NR8",
+    "NR9",
+    "NR10",
+    "NR11",
+    "NR12",
     "PT0",
     "PT1",
     "PT2",
