@@ -148,3 +148,20 @@ Bloom 算法、采样策略和共享参数由本项目实现。
 组合依据位于 `assets/shaders/common/PathTracingRenderer.slang`。
 参考提交与版权见本页 gkNextEngine 条目。
 使用范围见[着色模块说明](docs/runtime/shader-modules.md)。
+
+## 终末地离线资源读取
+
+字段契约参考 [Endfield Extractor](https://github.com/An1X3R/Endfield-map-extractor)。
+固定提交为 `6226108267942ec940cc65b6850ea8c49198c20f`。
+上游原创源码采用 MIT 许可。
+外部源码与发行包由本机任务目录持有。
+
+`tools/endfield_native/lighting.py` 参考灯光字段映射。
+对应上游文件为 `src/extractor_core/lights.py`。
+适配覆盖原始块读取、字段校验和当前版本布局。
+配对校验及来源指纹调用固定版本的上游接口。
+
+场景材质节点由上游转换器构建。
+本项目的通道烘焙工具执行 Blender 节点求值。
+游戏资产与转换产物保留于本机运行目录。
+依赖许可及来源记录见[原生资产验收](docs/acceptance/ev/native-assets.md)。

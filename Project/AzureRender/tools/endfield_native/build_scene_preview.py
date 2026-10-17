@@ -20,6 +20,7 @@ def main():
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--exchange', action='store_true')
     parser.add_argument('--render', action='store_true')
+    parser.add_argument('--bake-materials', type=int, metavar='RESOLUTION')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     source = args.source_root.resolve(strict=True)
     probe = args.probe.resolve(strict=True)
@@ -46,6 +47,7 @@ def main():
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     mesh_cache, material_cache, draw_cache = {}, {}, {}
+    bake_reports = []
     audit = []
     max_matrix_error = 0.0
     basis = Matrix(((1,0,0,0), (0,0,-1,0), (0,1,0,0), (0,0,0,1)))
@@ -76,6 +78,17 @@ def main():
             material_key = reference_key(containers[pair['material']])
             if material_key not in material_cache:
                 material_cache[material_key] = create_material(materials[material_key], textures, True)
+                if args.bake_materials:
+                    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
+                    from bake_material_channels import bake_material
+                    original = material_cache[material_key]
+                    baked, bake_report = bake_material(original, args.bake_materials,
+                        original.get('endfield_alpha_clip_threshold'))
+                    name = original.name
+                    original.name = name + '-source'
+                    baked.name = name
+                    material_cache[material_key] = baked
+                    bake_reports.append(bake_report)
             draw_key = (key, draw['submesh'], material_key)
             if draw_key not in draw_cache:
                 mesh = mesh_cache[key][draw['submesh']].copy()
@@ -137,6 +150,7 @@ def main():
                   maximum_source_bounds_overflow=maximum_bounds_overflow,
                   inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path)],
                   exchange_resources=len(exchange['resources']) if exchange else None,
+                  baked_materials=bake_reports,
                   limitations=['static LOD at squared distance zero', 'upstream material approximation',
                                'whole meshes retained at slice boundary', 'game lighting and effects absent'])
     (output / 'audit.json').write_text(json.dumps(report, indent=2), encoding='utf8')
