@@ -67,13 +67,17 @@ def validate_manifest(document, root):
                 raise ValueError('missing reference requires reason')
             result['pending'].append(identity)
             continue
-        if entry.get('status') != 'captured':
+        observed = entry.get('status') == 'observed'
+        if observed and (role != 'game_reference' or not isinstance(entry.get('reason'), str)
+                         or not entry['reason'].strip()):
+            raise ValueError('observed game reference requires pending calibration reason')
+        if entry.get('status') not in ('captured', 'observed'):
             raise ValueError('invalid reference status')
         if entry.get('game_version') != version:
             raise ValueError('reference version mismatch')
         if not isinstance(entry.get('source'), str) or not entry['source'].strip():
             raise ValueError('reference source is required')
-        if role == 'game_reference':
+        if role == 'game_reference' and not observed:
             _state(entry.get('state'))
         path = entry.get('path')
         if not isinstance(path, str) or not path:
@@ -87,7 +91,7 @@ def validate_manifest(document, root):
                 digest.update(block)
         if digest.hexdigest() != entry.get('sha256'):
             raise ValueError(f'reference sha256 mismatch: {identity}')
-        result['eligible' if role == 'game_reference' else 'auxiliary'].append(identity)
+        result['pending' if observed else 'eligible' if role == 'game_reference' else 'auxiliary'].append(identity)
     return result
 
 

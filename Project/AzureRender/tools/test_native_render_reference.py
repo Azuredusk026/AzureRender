@@ -34,6 +34,16 @@ class ReferenceTests(unittest.TestCase):
     def test_captured_reference_is_eligible(self):
         self.assertEqual(self.check(self.document)['eligible'], ['front'])
 
+    def test_observed_frame_is_hashed_but_pending_calibration(self):
+        row = self.document['entries'][0]
+        row.update(status='observed', reason='camera and quality calibration pending')
+        del row['state']['camera']
+        self.assertEqual(self.check(self.document)['pending'], ['front'])
+        self.assertEqual(self.check(self.document)['eligible'], [])
+        (self.root / 'frame.png').write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError, 'sha256'):
+            self.check(self.document)
+
     def test_missing_reference_is_pending_not_eligible(self):
         self.document['entries'] = [{'id': 'front', 'role': 'game_reference',
             'status': 'missing', 'reason': 'game capture pending'}]
