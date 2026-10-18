@@ -93,7 +93,8 @@ class IrradianceTests(unittest.TestCase):
             output = root / 'query.json'
             for extra in ([], ['--world', '0', '0', '0', '--lod', '0', '--file-index', '1']):
                 result = subprocess.run([sys.executable, '-m', 'endfield_native.irradiance', str(root),
-                                         '--output', str(output), *extra], capture_output=True, text=True)
+                                         '--output', str(output), *extra], capture_output=True, text=True,
+                                        cwd=Path(__file__).parent)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIsInstance(json.loads(output.read_text()), dict)
 
