@@ -127,7 +127,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 帝江号中心切片已与编队待机 01 完成联合技术采样。
 场景实例编辑与保存重开已验证。
 47 个场景材质支持表面通道烘焙。
-源灯光可读取，展示采用点光近似。
+当前版本可读取 232 个静态灯。
+联合候选使用 45 个点光及聚光。
+颜色、GI 与反射的十二帧结果见[联合验证](docs/acceptance/nr/joint-colour-lighting.md)。
 完整着色与原生环境光照还原仍待验收。
 通用聚光与显式场景照明通过公开 GPU 夹具。
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
