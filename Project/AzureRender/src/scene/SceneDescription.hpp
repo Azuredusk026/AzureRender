@@ -12,6 +12,7 @@
 #include "scene/TransformMath.hpp"
 #include "assets/MaterialBinding.hpp"
 #include "render/LightShape.hpp"
+#include "render/ReflectionProbe.hpp"
 
 namespace azurerender::scene {
 
@@ -54,6 +55,7 @@ struct SceneDescription {
     std::vector<SceneResourceDesc> resources;
     std::vector<SceneNodeDesc> nodes;
     std::vector<SceneLightDesc> lights;
+    ReflectionProbe reflectionProbe;
 };
 
 struct ResourceLayout {

@@ -168,6 +168,7 @@ private:
         std::array<float, 4> mainLightDirection{};
         std::array<float, 4> cascadeDepthRanges{};
         std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
+        std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
     };
 
     // Per-instance transforms uploaded to the instance storage buffer. The
@@ -254,6 +255,7 @@ private:
     rhi::GpuBuffer indexBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
     GpuTexture environmentTexture_;
+    GpuTexture reflectionProbeTexture_;
     GpuTexture toonRampTexture_;
     VkImageView environmentBaseMipView_ = VK_NULL_HANDLE;
     std::vector<VkImageView> environmentPrefilterViews_;

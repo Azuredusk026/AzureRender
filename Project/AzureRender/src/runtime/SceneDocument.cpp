@@ -75,6 +75,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << light.shape.direction[2] << ' ' << light.shape.innerCone << ' '
                << light.shape.outerCone << '\n';
     }
+    output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
@@ -229,6 +230,11 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
             }
             document.lights.push_back(std::move(light));
         }
+    }
+    if(schemaVersion>=6){
+        std::string payload;
+        if(!(input>>key>>std::quoted(payload))||key!="reflectionProbe")throw std::runtime_error("Missing reflection probe");
+        document.reflectionProbe=nlohmann::json::parse(payload).get<ReflectionProbe>();
     }
     if (!(input >> key >> document.renderSettings.showcasePreset)
         || key != "showcasePreset") {

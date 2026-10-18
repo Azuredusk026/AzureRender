@@ -27,7 +27,10 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfShadowColor;
     vec4 mainLightDirection;
     vec4 cascadeDepthRanges;
+    vec4 skyRight,skyUp,skyForward,skyColor,skyParameters;
+    vec4 probeCenter,probeHalfExtents,probeCapture,probeParameters;
 } camera;
+layout(binding=23) uniform sampler2D reflectionProbeTexture;
 
 #if defined(AZURE_BINDLESS)
 // One global array: slots 0..2 are the shared environment, shadow map and
@@ -853,6 +856,26 @@ void main() {
         emissive = specularEmissive.rgb * material.emissiveStrength * materialFeatureEnabled(8U);
         beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular + emissive;
         rimLighting=vec3(0);kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);
+    }
+    if(camera.probeParameters.x>.5){
+        vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);
+        float distanceToEdge=min(edge.x,min(edge.y,edge.z));
+        float weight=distanceToEdge>0.0?(camera.probeParameters.z>0.0?clamp(distanceToEdge/camera.probeParameters.z,0.0,1.0):1.0):0.0;
+        if(weight>0.0){
+            vec3 direction=reflectionDirection;
+            if(camera.probeParameters.w>.5){
+                vec3 safeDirection=mix(vec3(1e-8),direction,greaterThan(abs(direction),vec3(1e-8)));
+                vec3 face=camera.probeCenter.xyz+mix(-camera.probeHalfExtents.xyz,camera.probeHalfExtents.xyz,greaterThanEqual(direction,vec3(0.0)));
+                vec3 distances=mix(vec3(1e30),(face-worldPosition)/safeDirection,greaterThan(abs(direction),vec3(1e-8)));
+                float exitDistance=min(distances.x,min(distances.y,distances.z));
+                direction=worldPosition+reflectionDirection*exitDistance-camera.probeCapture.xyz;
+            }
+            float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
+            vec3 localSpecular=fresnel*textureLod(reflectionProbeTexture,directionToEquirectangular(direction),roughness*lastMip).rgb*camera.probeParameters.y;
+            vec3 blended=mix(ambientSpecular,localSpecular,weight);
+            beautyColor+=blended-ambientSpecular;
+            ambientSpecular=blended;
+        }
     }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {

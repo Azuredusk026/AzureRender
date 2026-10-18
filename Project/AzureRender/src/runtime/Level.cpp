@@ -21,6 +21,15 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
     const auto sceneType = expanded.value("sceneType", "character");
     level.scene.renderSettings.sceneType=sceneTypeFromString(sceneType);
     if(expanded.contains("renderSettings"))decodeLevelRenderSettings(level.scene.renderSettings,expanded.at("renderSettings"));
+    if(expanded.contains("reflectionProbe")){
+        level.scene.reflectionProbe=expanded.at("reflectionProbe").get<ReflectionProbe>();
+        if(!level.scene.reflectionProbe.texture.empty()){
+            level.scene.reflectionProbe.texture=assets.resolveReference(level.scene.reflectionProbe.texture).u8string();
+            level.resourceKey+="reflection:"+level.scene.reflectionProbe.texture;
+            for(const auto& record:assets.records())if(record.second.path==std::filesystem::u8path(level.scene.reflectionProbe.texture))
+                level.resourceKey+=":"+std::to_string(record.second.fingerprint);
+        }
+    }
     std::set<std::string> resources;
     for (const auto& source : expanded.at("resources")) {
         SceneResource resource{source.at("id").get<std::string>(), "gltf", assets.resolveReference(source.at("asset").get<std::string>())};

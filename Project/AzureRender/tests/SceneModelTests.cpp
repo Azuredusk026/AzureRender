@@ -123,6 +123,9 @@ int main() {
         const auto scenePath = directory / "scene.azscene";
         auto document = azurerender::SceneDocument::fromAsset("hero.glb");
         document.sceneId = "atomic-save-test";
+        document.reflectionProbe.texture="room.azenv";
+        document.reflectionProbe.halfExtents={5,3,4};
+        document.reflectionProbe.blendDistance=.5F;
         document.renderSettings.sceneLightingEnabled = true;
         document.lights.push_back({
             "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
@@ -130,6 +133,9 @@ int main() {
         document.lights[0].shape.innerCone = .25F;
         document.lights[0].shape.outerCone = .5F;
         document.save(scenePath);
+        const auto probeReloaded=azurerender::SceneDocument::load(scenePath).reflectionProbe;
+        assert(probeReloaded.texture=="room.azenv" && probeReloaded.halfExtents==document.reflectionProbe.halfExtents);
+        assert(probeReloaded.blendDistance==.5F);
         {
             std::ifstream saved(scenePath);
             const std::string contents(

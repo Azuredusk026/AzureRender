@@ -392,7 +392,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+2,13,4});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+3,14,4});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -421,6 +421,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     return loadJobs_.empty();
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
@@ -444,6 +445,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         // lights are refreshed before uniforms, culling and draw snapshots.
         scene_.nodes = frame.sceneSnapshot->nodes;
         scene_.lights = frame.sceneSnapshot->lights;
+        scene_.reflectionProbe = frame.sceneSnapshot->reflectionProbe;
     }
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
@@ -1564,6 +1566,13 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
             "render", "Character IBL: hardware mip fallback path");
     }
 
+    scene_.reflectionProbe.validate();
+    if(!scene_.reflectionProbe.texture.empty()){
+        const auto image=loadEnvironmentImage({scene_.reflectionProbe.texture,EnvironmentProjection::Auto});
+        uploadTextureData(image.rgba16f,image.width,image.height,VK_FORMAT_R16G16B16A16_SFLOAT,true,
+            reflectionProbeTexture_,image.authoredMipLevels?image.authoredMipLevels:1);
+        RuntimeDiagnostics::instance().info("render","Local reflection probe: "+image.description);
+    }
     const auto toonRamp = loadPpmTexture(rampAtlasPath_);
     uploadTextureData(
         toonRamp.pixels,
@@ -2022,7 +2031,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 2)},
+             frameCount * (textureSlots + 3)},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 9},
         };
         poolDesc.maxSets = frameCount;
@@ -2033,7 +2042,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 13},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 14},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 9},
     };
     poolDesc.maxSets = descriptorCount;
@@ -2081,6 +2090,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
             {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+            {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -2112,6 +2122,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
         {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
         {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
+        {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
     });
 }
 
@@ -2178,6 +2189,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
+            rhi_->writeDescriptorImage({descriptorSets_[frame],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
@@ -2263,6 +2276,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
@@ -2745,6 +2760,10 @@ void CharacterSceneRenderer::destroyResources() {
         environmentBaseMipView_ = VK_NULL_HANDLE;
     }
     rhi_->destroySampler(environmentTexture_.sampler);
+    rhi_->destroySampler(reflectionProbeTexture_.sampler);
+    rhi_->destroyImageView(reflectionProbeTexture_.view);
+    allocator_->destroyImage(reflectionProbeTexture_.image);
+    reflectionProbeTexture_={};
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
     rhi_->destroySampler(toonRampTexture_.sampler);
@@ -2967,6 +2986,11 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
     uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], frame.qaLightScan ? 1.0F : 0.0F};
+    const auto& probe=scene_.reflectionProbe;
+    uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],0};
+    uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
+    uniform.probeCapture={probe.capturePosition[0],probe.capturePosition[1],probe.capturePosition[2],0};
+    uniform.probeParameters={reflectionProbeTexture_.view!=VK_NULL_HANDLE?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,

@@ -6,6 +6,8 @@
 namespace azurerender {
 scene::SceneDescription SceneDocument::renderDescription() const {
     scene::SceneDescription result;
+    reflectionProbe.validate();
+    result.reflectionProbe = reflectionProbe;
     result.resources.reserve(this->resources.size());
     for (const azurerender::SceneResource& resource :
          this->resources) {
