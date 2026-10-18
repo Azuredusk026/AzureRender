@@ -21,12 +21,15 @@ def tile():
     return struct.pack('<3I2IQ', 1, 1, 0, 0, 28, (1 << 63) | 1) + sample() + sample(2)
 
 
-def index():
+def index(names=('variant',), branches=((0, ()), (123, (0,)))):
     def string(text):
         data = text.encode('utf-16le')
         return struct.pack('<I', len(data)) + data
-    return (struct.pack('<2I', 0x03000002, 1) + string('variant')
-            + struct.pack('<5I', 2, 0, 0, 123, 1) + struct.pack('<2I', 0, 2)
+    return (struct.pack('<2I', 0x03000002, len(names)) + b''.join(map(string, names))
+            + struct.pack('<I', len(branches))
+            + b''.join(struct.pack('<2I', key, len(states))
+                       + b''.join(struct.pack('<I', state) for state in states)
+                       for key, states in branches) + struct.pack('<I', 2)
             + string('iv_0_0.bytes') + string('iv_123_0.bytes')
             + bytes(116) + struct.pack('<2I', 0, 2)
             + struct.pack('<8I', 0x00404040, 0, 0, 60, 28, 32, 0, 0xffffffff)
@@ -135,7 +138,19 @@ class IrradianceTests(unittest.TestCase):
         result = parse_index(index())
         self.assertEqual(result['scenario_names'], ['variant'])
         self.assertEqual([row['file_index'] for row in result['tiles']], [0, 1])
-        self.assertEqual(result['branches'], [[0, 0], [123, 1]])
+        self.assertEqual(result['branches'], [
+            dict(branch_id=0, scenario_indices=[], scenario_names=[], local_state_mask=0),
+            dict(branch_id=123, scenario_indices=[0], scenario_names=['variant'], local_state_mask=1)])
+
+    def test_index_branch_lists_have_variable_lengths(self):
+        result = parse_index(index(('first', 'second'), ((0, ()), (71, (1,)), (99, (0, 1)))))
+        self.assertEqual([b['local_state_mask'] for b in result['branches']], [0, 2, 3])
+        self.assertEqual(result['branches'][2]['scenario_names'], ['first', 'second'])
+        self.assertEqual(result['files'], ['iv_0_0.bytes', 'iv_123_0.bytes'])
+
+    def test_index_rejects_unknown_scenario_reference(self):
+        with self.assertRaisesRegex(ValueError, 'scenario reference'):
+            parse_index(index(branches=((123, (1,)),)))
 
     def test_index_version_and_file_reference(self):
         bad = bytearray(index()); bad[3] = 4

@@ -54,8 +54,17 @@ def parse_index(data: bytes) -> dict:
     if reader.uint() != 0x03000002:
         raise ValueError('Unsupported irradiance index version')
     names = [reader.string() for _ in range(reader.count(4))]
-    branches = [list(struct.unpack('<2I', reader.take(8))) for _ in range(reader.count(8))]
-    reserved = reader.uint()
+    # Native loader 0x1800b65f4..0x1800b664a: each branch stores an
+    # opaque ID followed by a counted list of local scenario indices.
+    branches = []
+    for _ in range(reader.count(8)):
+        branch_id = reader.uint()
+        indices = [reader.uint() for _ in range(reader.count(4))]
+        if any(i >= len(names) for i in indices):
+            raise ValueError('Invalid irradiance scenario reference')
+        branches.append(dict(branch_id=branch_id, scenario_indices=indices,
+                             scenario_names=[names[i] for i in indices],
+                             local_state_mask=sum(1 << i for i in set(indices))))
     files = [reader.string() for _ in range(reader.count(4))]
     if not files or any(Path(name).name != name or '/' in name or '\\' in name for name in files):
         raise ValueError('Invalid irradiance file name')
@@ -77,8 +86,8 @@ def parse_index(data: bytes) -> dict:
     for tile in tiles:
         if tile['parent'] != 0xffffffff and tile['parent'] >= len(tiles):
             raise ValueError('Invalid irradiance parent reference')
-    return dict(schema='NativeIrradianceIndex/1', source_sha256=hashlib.sha256(data).hexdigest(),
-                scenario_names=names, branches=branches, reserved=reserved, files=files,
+    return dict(schema='NativeIrradianceIndex/2', source_sha256=hashlib.sha256(data).hexdigest(),
+                scenario_names=names, branches=branches, files=files,
                 raw_configuration=configuration, mappings=mappings, tiles=tiles, roots=roots)
 
 
