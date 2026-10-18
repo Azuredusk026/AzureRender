@@ -79,6 +79,11 @@ Alpha 0.4 的消费误差为零。
 完整重烘焙保留参考场景的资源标识和节点。
 场景画面验收由 NR2 联合对照执行。
 
+完整候选包含 60 个资源及 47 个材质。
+逐项比对确认全部顶点属性和索引相同。
+节点、资源标识及路径均与参考清单一致。
+材质透明状态及基色图的 Alpha 像素全部相同。
+
 本轮证据目录为：
 `build/runs/20261017-175206-nr-playable-integration-d4e789/`。
 
@@ -91,3 +96,4 @@ Alpha 0.4 的消费误差为零。
 | `bake-colour-green/exchange-metrics.json` | 正常 glTF 消费验证 |
 | `rebake-source-audit.json` | 原场景的未烘焙状态审计 |
 | `colour-corrected-exchange/rebake-manifest.json` | 完整候选及来源摘要 |
+| `full-colour-rebake-verification.json` | 几何、节点及透明度逐项比对 |
