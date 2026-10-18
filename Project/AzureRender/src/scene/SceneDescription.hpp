@@ -13,6 +13,7 @@
 #include "assets/MaterialBinding.hpp"
 #include "render/LightShape.hpp"
 #include "render/ReflectionProbe.hpp"
+#include "render/IrradianceVolumeBinding.hpp"
 
 namespace azurerender::scene {
 
@@ -56,6 +57,7 @@ struct SceneDescription {
     std::vector<SceneNodeDesc> nodes;
     std::vector<SceneLightDesc> lights;
     ReflectionProbe reflectionProbe;
+    IrradianceVolumeBinding irradianceVolume;
 };
 
 struct ResourceLayout {

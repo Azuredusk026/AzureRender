@@ -88,12 +88,19 @@ int main() {
   level["prefabs"][0]["asset"]=prefabId;
   ReflectionProbe probe;probe.texture="assets:/moved.txt";probe.halfExtents={3,4,5};probe.blendDistance=.75F;
   level["reflectionProbe"]=probe;
+  write(root/"assets/field.aziv","irradiance-source");db.refresh();
+  const auto giId=db.idForPath("assets:/field.aziv");
+  level["irradianceVolume"]={{"version",1},{"asset",giId},{"intensity",.5},{"enabled",false}};
   level["lights"]=nlohmann::json::array({{{"id","spot"},{"nodeId","instance:node"},
       {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5}}}}});
   write(root/"assets/start.azurelevel",level.dump());db.refresh();auto parsed=Level::load(root/"assets/start.azurelevel",db);
   check(parsed.scene.nodes.size()==1 && parsed.scene.nodes[0].translation[0]==7);
   check(parsed.scene.reflectionProbe.texture==db.resolve(id).u8string());
   check(parsed.scene.reflectionProbe.halfExtents==probe.halfExtents);
+  check(parsed.scene.irradianceVolume.asset==db.resolve(giId).u8string());
+  check(parsed.scene.irradianceVolume.intensity==.5F && !parsed.scene.irradianceVolume.enabled);
+  const auto& giDependencies=db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies;
+  check(std::find(giDependencies.begin(),giDependencies.end(),giId)!=giDependencies.end());
   check(std::find(db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.begin(),
       db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.end(),id)!=db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.end());
   transform.translation={15,16,17};
@@ -112,6 +119,7 @@ int main() {
   write(root/"assets/body.azureprefab",prefab.dump(2));auto dependencyChanges=db.refresh();
   check(std::find(dependencyChanges.begin(),dependencyChanges.end(),db.idForPath("assets:/start.azurelevel"))!=dependencyChanges.end());
   db.writePack(root/"pack");check(AssetDatabase::resolvePack(root/"pack",id).filename()=="moved.txt");
+  check(AssetDatabase::resolvePack(root/"pack",giId).filename()=="field.aziv");
   write(root/"pack/assets/moved.txt","damage");bool corrupt=false;try { AssetDatabase::resolvePack(root/"pack",id); } catch (const std::exception&) { corrupt=true; }check(corrupt);
   RuntimeLifecycle runtime;runtime.start();LevelSession session(project,runtime);session.request("assets:/start.azurelevel");
   auto settle=[&]{const auto end=std::chrono::steady_clock::now()+std::chrono::seconds(5);bool committed=false;

@@ -29,8 +29,10 @@ layout(binding = 0) uniform CameraData {
     vec4 cascadeDepthRanges;
     vec4 skyRight,skyUp,skyForward,skyColor,skyParameters;
     vec4 probeCenter,probeHalfExtents,probeCapture,probeParameters;
+    vec4 irradianceOriginSpacing,irradianceDimensionsEnabled,irradianceParameters;
 } camera;
 layout(binding=23) uniform sampler2D reflectionProbeTexture;
+layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
 
 #if defined(AZURE_BINDLESS)
 // One global array: slots 0..2 are the shared environment, shadow map and
@@ -271,6 +273,27 @@ vec3 hsvToRgb(vec3 hsv){
     vec3 triangle=clamp(abs(fract(vec3(hsv.x)+vec3(0,2.0/3.0,1.0/3.0))*6-3)-1,0,1);
     return hsv.z*mix(vec3(1),triangle,clamp(hsv.y,0,1));
 }
+vec4 evaluateIrradianceVolume(vec3 position,vec3 normal) {
+    if(camera.irradianceDimensionsEnabled.w<.5)return vec4(0);
+    vec3 q=(position-camera.irradianceOriginSpacing.xyz)/camera.irradianceOriginSpacing.w;
+    ivec3 dims=ivec3(camera.irradianceDimensionsEnabled.xyz);
+    if(any(lessThan(q,vec3(0)))||any(greaterThan(q,vec3(dims-ivec3(1)))))return vec4(0);
+    ivec3 lo=ivec3(floor(q)),hi=min(lo+ivec3(1),dims-ivec3(1));
+    vec3 f=q-vec3(lo);
+    vec4 red=vec4(0),green=vec4(0),blue=vec4(0);
+    float weight=0;
+    for(int z=0;z<2;++z)for(int y=0;y<2;++y)for(int x=0;x<2;++x){
+        ivec3 p=ivec3(x!=0?hi.x:lo.x,y!=0?hi.y:lo.y,z!=0?hi.z:lo.z);
+        int base=4*(p.x+dims.x*(p.y+dims.y*p.z));
+        float w=(x!=0?f.x:1-f.x)*(y!=0?f.y:1-f.y)*(z!=0?f.z:1-f.z)*irradianceCells[base+3].x;
+        red+=irradianceCells[base]*w;green+=irradianceCells[base+1]*w;blue+=irradianceCells[base+2]*w;
+        weight+=w;
+    }
+    vec4 basis=vec4(normal,1);
+    return vec4(max(vec3(dot(red,basis),dot(green,basis),dot(blue,basis)),vec3(0))*camera.irradianceParameters.x,
+        clamp(weight,0,1));
+}
+
 void main() {
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
@@ -856,6 +879,11 @@ void main() {
         emissive = specularEmissive.rgb * material.emissiveStrength * materialFeatureEnabled(8U);
         beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular + emissive;
         rimLighting=vec3(0);kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);
+    }
+    if(camera.irradianceDimensionsEnabled.w>.5){
+        vec4 volume=evaluateIrradianceVolume(worldPosition,shadedNormal);
+        vec3 blended=ambientDiffuse*(1-volume.w)+diffuseColor*volume.rgb*physicalAo;
+        beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
     if(camera.probeParameters.x>.5){
         vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);

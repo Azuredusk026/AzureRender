@@ -381,18 +381,19 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     }
     // The full material inventory must fit an ordinary descriptor layout.
     // Combined image samplers consume both sampler and sampled-image limits;
-    // the fragment stage also carries one uniform and three storage buffers.
+    // the fragment stage also carries one uniform and five storage buffers.
     const std::uint64_t indexedSlots = kSharedTextureSlots
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     const auto& limits = context.descriptorLimits;
     if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<5)
-        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<9))
-        throw std::runtime_error("Morph layout v1 requires five storage buffers per stage and nine per descriptor set");
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<10))
+        throw std::runtime_error("Scene layout requires five storage buffers per stage and ten per descriptor set");
+    irradianceBufferBudget_=limits.maxStorageBufferRange;
     DeviceCapabilities capabilities;
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+3,14,4});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+3,14,6});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -422,6 +423,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
+    if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
@@ -446,6 +448,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         scene_.nodes = frame.sceneSnapshot->nodes;
         scene_.lights = frame.sceneSnapshot->lights;
         scene_.reflectionProbe = frame.sceneSnapshot->reflectionProbe;
+        scene_.irradianceVolume = frame.sceneSnapshot->irradianceVolume;
     }
     if (frame.renderSettings != nullptr) {
         frameRenderSettings_ = *frame.renderSettings;
@@ -1573,6 +1576,25 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
             reflectionProbeTexture_,image.authoredMipLevels?image.authoredMipLevels:1);
         RuntimeDiagnostics::instance().info("render","Local reflection probe: "+image.description);
     }
+    scene_.irradianceVolume.validate();
+    irradianceVolume_={};
+    std::vector<std::array<float,4>> irradianceWords(4);
+    if(!scene_.irradianceVolume.asset.empty()){
+        irradianceVolume_=IrradianceVolume::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
+        irradianceWords.resize(irradianceVolume_.cells.size()*4);
+        for(std::size_t i=0;i<irradianceVolume_.cells.size();++i){
+            const auto& cell=irradianceVolume_.cells[i];
+            for(unsigned c=0;c<3;++c)irradianceWords[4*i+c]=cell.coefficients[c];
+            irradianceWords[4*i+3]={cell.weight,0,0,0};
+        }
+        RuntimeDiagnostics::instance().info("render","Irradiance volume: "+std::to_string(irradianceVolume_.cells.size())+" samples");
+    }
+    const auto irradianceBytes=irradianceWords.size()*sizeof(irradianceWords[0]);
+    if(irradianceBufferBudget_&&irradianceBytes>irradianceBufferBudget_)
+        throw std::runtime_error("Irradiance volume exceeds device storage buffer range");
+    irradianceBuffer_=allocator_->createBuffer(irradianceBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(irradianceBuffer_.mapped,irradianceWords.data(),irradianceBytes);
+    allocator_->flush(irradianceBuffer_,0,irradianceBytes);
     const auto toonRamp = loadPpmTexture(rampAtlasPath_);
     uploadTextureData(
         toonRamp.pixels,
@@ -2032,7 +2054,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 3)},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 9},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 10},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2043,7 +2065,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 14},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 9},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 10},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2091,6 +2113,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
             {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
             {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -2123,6 +2146,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {21,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
         {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
         {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
+        {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     });
 }
 
@@ -2189,6 +2213,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
             rhi_->writeDescriptorImage({descriptorSets_[frame],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -2276,6 +2301,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -2764,6 +2790,7 @@ void CharacterSceneRenderer::destroyResources() {
     rhi_->destroyImageView(reflectionProbeTexture_.view);
     allocator_->destroyImage(reflectionProbeTexture_.image);
     reflectionProbeTexture_={};
+    allocator_->destroyBuffer(irradianceBuffer_);irradianceBuffer_={};irradianceVolume_={};
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
     rhi_->destroySampler(toonRampTexture_.sampler);
@@ -2991,6 +3018,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
     uniform.probeCapture={probe.capturePosition[0],probe.capturePosition[1],probe.capturePosition[2],0};
     uniform.probeParameters={reflectionProbeTexture_.view!=VK_NULL_HANDLE?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
+    const auto& gi=scene_.irradianceVolume;
+    uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
+    uniform.irradianceDimensionsEnabled={float(irradianceVolume_.dimensions[0]),float(irradianceVolume_.dimensions[1]),float(irradianceVolume_.dimensions[2]),gi.enabled&&!irradianceVolume_.cells.empty()?1.F:0.F};
+    uniform.irradianceParameters={gi.intensity,0,0,0};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,

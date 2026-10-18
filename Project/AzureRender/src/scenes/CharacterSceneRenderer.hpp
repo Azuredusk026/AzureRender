@@ -1,5 +1,6 @@
 #include "assets/TextureMipChain.hpp"
 #pragma once
+#include "render/IrradianceVolume.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -169,6 +170,7 @@ private:
         std::array<float, 4> cascadeDepthRanges{};
         std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
         std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
+        std::array<float,4> irradianceOriginSpacing{},irradianceDimensionsEnabled{},irradianceParameters{};
     };
 
     // Per-instance transforms uploaded to the instance storage buffer. The
@@ -256,6 +258,9 @@ private:
     std::vector<GpuMaterial> gpuMaterials_;
     GpuTexture environmentTexture_;
     GpuTexture reflectionProbeTexture_;
+    IrradianceVolume irradianceVolume_;
+    rhi::GpuBuffer irradianceBuffer_;
+    VkDeviceSize irradianceBufferBudget_=0;
     GpuTexture toonRampTexture_;
     VkImageView environmentBaseMipView_ = VK_NULL_HANDLE;
     std::vector<VkImageView> environmentPrefilterViews_;

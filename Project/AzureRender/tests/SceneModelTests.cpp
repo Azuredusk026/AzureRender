@@ -126,6 +126,9 @@ int main() {
         document.reflectionProbe.texture="room.azenv";
         document.reflectionProbe.halfExtents={5,3,4};
         document.reflectionProbe.blendDistance=.5F;
+        document.irradianceVolume.asset="field.aziv";
+        document.irradianceVolume.intensity=.75F;
+        document.irradianceVolume.enabled=true;
         document.renderSettings.sceneLightingEnabled = true;
         document.lights.push_back({
             "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
@@ -136,6 +139,12 @@ int main() {
         const auto probeReloaded=azurerender::SceneDocument::load(scenePath).reflectionProbe;
         assert(probeReloaded.texture=="room.azenv" && probeReloaded.halfExtents==document.reflectionProbe.halfExtents);
         assert(probeReloaded.blendDistance==.5F);
+        const auto giReloaded=azurerender::SceneDocument::load(scenePath).irradianceVolume;
+        assert(giReloaded.asset=="field.aziv" && giReloaded.enabled && giReloaded.intensity==.75F);
+        auto invalidGi=nlohmann::json(document.irradianceVolume);invalidGi["version"]=999;
+        bool rejectedGi=false;
+        try{(void)invalidGi.get<azurerender::IrradianceVolumeBinding>();}catch(const std::invalid_argument&){rejectedGi=true;}
+        assert(rejectedGi);
         {
             std::ifstream saved(scenePath);
             const std::string contents(
@@ -147,6 +156,14 @@ int main() {
             assert(contents.find("lightCount 1") != std::string::npos);
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
+            auto legacy=contents;
+            const auto header=legacy.find("schemaVersion 7");assert(header!=std::string::npos);
+            legacy.replace(header,15,"schemaVersion 6");
+            const auto giLine=legacy.find("irradianceVolume ");assert(giLine!=std::string::npos);
+            legacy.erase(giLine,legacy.find('\n',giLine)-giLine+1);
+            const auto legacyPath=directory/"legacy.azscene";
+            {std::ofstream legacyFile(legacyPath);legacyFile<<legacy;}
+            assert(!azurerender::SceneDocument::load(legacyPath).irradianceVolume.enabled);
         }
         assert(std::filesystem::exists(scenePath));
         assert(loadedDocumentMatches(scenePath, document));

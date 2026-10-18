@@ -76,6 +76,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << light.shape.outerCone << '\n';
     }
     output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
+    output << "irradianceVolume " << std::quoted(nlohmann::json(document.irradianceVolume).dump()) << '\n';
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
@@ -235,6 +236,11 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         std::string payload;
         if(!(input>>key>>std::quoted(payload))||key!="reflectionProbe")throw std::runtime_error("Missing reflection probe");
         document.reflectionProbe=nlohmann::json::parse(payload).get<ReflectionProbe>();
+    }
+    if(schemaVersion>=7){
+        std::string payload;
+        if(!(input>>key>>std::quoted(payload))||key!="irradianceVolume")throw std::runtime_error("Missing irradiance volume");
+        document.irradianceVolume=nlohmann::json::parse(payload).get<IrradianceVolumeBinding>();
     }
     if (!(input >> key >> document.renderSettings.showcasePreset)
         || key != "showcasePreset") {

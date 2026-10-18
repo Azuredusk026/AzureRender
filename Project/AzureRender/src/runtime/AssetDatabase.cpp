@@ -205,6 +205,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 document={{"resources",Json::array()}};
                 const auto scene=SceneDocument::load(path);
                 if(!scene.reflectionProbe.texture.empty())document["reflectionProbe"]=scene.reflectionProbe;
+                if(!scene.irradianceVolume.asset.empty())document["irradianceVolume"]=scene.irradianceVolume;
                 for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
                 document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
             }

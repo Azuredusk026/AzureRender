@@ -8,6 +8,8 @@ scene::SceneDescription SceneDocument::renderDescription() const {
     scene::SceneDescription result;
     reflectionProbe.validate();
     result.reflectionProbe = reflectionProbe;
+    irradianceVolume.validate();
+    result.irradianceVolume = irradianceVolume;
     result.resources.reserve(this->resources.size());
     for (const azurerender::SceneResource& resource :
          this->resources) {

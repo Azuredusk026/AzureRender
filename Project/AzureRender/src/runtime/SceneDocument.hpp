@@ -4,6 +4,7 @@
 #include "assets/MaterialBinding.hpp"
 #include "render/LightShapeJson.hpp"
 #include "render/ReflectionProbeJson.hpp"
+#include "render/IrradianceVolumeJson.hpp"
 
 #include <cstdint>
 #include <array>
@@ -49,13 +50,14 @@ struct SceneLight {
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 6;
+    static constexpr std::uint32_t kSchemaVersion = 7;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;
     std::vector<SceneNode> nodes;
     std::vector<SceneLight> lights;
     ReflectionProbe reflectionProbe;
+    IrradianceVolumeBinding irradianceVolume;
     // Scene renderer selector persisted through renderSettings.sceneType.
     RenderSettings renderSettings;
 
