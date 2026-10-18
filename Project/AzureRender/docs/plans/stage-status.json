@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-17",
+  "updated": "2026-10-18",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1268,7 +1268,10 @@
         "NR1"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/runtime/scene-color-refraction.md",
+        "docs/acceptance/nr/native-glass.md",
+        "docs/acceptance/nr/upper-geometry.md"
       ],
       "requiredAcceptance": [
         "NR2.delivery"
@@ -1334,7 +1337,9 @@
         "NR5"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/character-surfaces.md",
+        "docs/acceptance/nr/character-face-sdf.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1350,7 +1355,9 @@
         "NR6"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/runtime/rigid-node-animation.md",
+        "docs/acceptance/nr/logistics-evidence.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"

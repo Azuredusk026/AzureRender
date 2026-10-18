@@ -905,6 +905,31 @@ void main() {
             ambientSpecular=blended;
         }
     }
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(materialFeatureEnabled(1024U)>.5) {
+        vec2 uv=gl_FragCoord.xy/camera.clusterDepth.zw;
+        vec2 mapUv=textureCoordinate*material.styleParameters.xy+material.styleParameters.zw;
+        vec2 offset=sceneRefractionOffset(texture(AZ_TEX_STYLE_MASK,mapUv).rg,material.hairParameters.z);
+        float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+        float fullDepth=texture(overlaySceneDepth,sceneRefractionMirrorUv(uv+offset)).r;
+        float quarterDepth=texture(overlaySceneDepth,sceneRefractionMirrorUv(uv+offset*.25)).r;
+        vec2 safeUv=sceneRefractionUv(uv,offset,fullDepth,quarterDepth,depth);
+        // The shared snapshot uses a nearest sampler. Perform linear filtering
+        // explicitly with mirrored texel addressing for this material model.
+        ivec2 extent=textureSize(opaqueSceneColor,0);
+        vec2 pixel=safeUv*vec2(extent)-.5;ivec2 first=ivec2(floor(pixel));vec2 f=fract(pixel);
+        vec3 taps[4];
+        for(int tap=0;tap<4;++tap) {
+            ivec2 p=first+ivec2(tap%2,tap/2);ivec2 period=extent*2;
+            p=ivec2(mod(vec2(p),vec2(period)));p=min(p,period-1-p);
+            taps[tap]=texelFetch(opaqueSceneColor,p,0).rgb;
+        }
+        vec3 background=mix(mix(taps[0],taps[1],f.x),mix(taps[2],taps[3],f.x),f.y);
+        background*=material.matcapColor.rgb*material.hairParameters.y;
+        beautyColor=sceneRefractionSurface(directDiffuse+ambientDiffuse,directSpecular+ambientSpecular,
+            background,outputAlpha,material.hairParameters.x)+emissive;
+    }
+#endif
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {
         qaColor = baseColor.rgb;

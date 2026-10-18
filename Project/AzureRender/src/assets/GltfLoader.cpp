@@ -167,6 +167,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "surface-ao") return MaterialFeatureSurfaceAo;
     if (value == "scene-tint") return MaterialFeatureSceneTint;
     if (value == "hair-ramp") return MaterialFeatureHairRamp;
+    if (value == "scene-refraction") return MaterialFeatureSceneRefraction;
     return 0;
 }
 
@@ -798,6 +799,56 @@ std::array<float, 4> readMaterialVectorExtra(
     return result;
 }
 
+int loadSceneRefraction(const tinygltf::Material& material,
+    const tinygltf::Model& model, AssetMaterial& result) {
+    if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return -1;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureSceneRefraction)!=0;
+    if(!enabled && !profile.Has("sceneRefraction"))return -1;
+    if(!enabled || !profile.Has("sceneRefraction") || result.materialProfileVersion!=2
+        || result.materialClass!=AssetMaterialClass::Generic || result.alphaMode!=AssetAlphaMode::Blend
+        || (result.materialFeatures&~(MaterialFeatureSceneRefraction|MaterialFeatureSurfaceAo|MaterialFeatureEmissiveMask)))
+        throw std::invalid_argument("sceneRefraction requires generic schema 2, transparent queue and compatible features");
+    const auto& glass=profile.Get("sceneRefraction");
+    if(!glass.IsObject())throw std::invalid_argument("sceneRefraction must be an object");
+    const auto scalar=[&](const char* name,float fallback,float maximum) {
+        if(!glass.Has(name))return fallback;
+        const auto& v=glass.Get(name);
+        if(!v.IsNumber())throw std::invalid_argument("Invalid sceneRefraction numeric field");
+        const double number=v.GetNumberAsDouble();
+        if(!std::isfinite(number)||number<0||number>maximum)throw std::invalid_argument("sceneRefraction field outside range");
+        return static_cast<float>(number);
+    };
+    const auto vector=[&](const char* name,std::array<float,4> fallback) {
+        if(!glass.Has(name))return fallback;
+        const auto& v=glass.Get(name);
+        if(!v.IsArray()||v.ArrayLen()!=4)throw std::invalid_argument("sceneRefraction vector requires four numbers");
+        for(unsigned i=0;i<4;++i) {
+            const auto& c=v.Get(static_cast<int>(i));
+            if(!c.IsNumber()||!std::isfinite(c.GetNumberAsDouble())||std::abs(c.GetNumberAsDouble())>65536)
+                throw std::invalid_argument("Invalid sceneRefraction vector component");
+            fallback[i]=static_cast<float>(c.GetNumberAsDouble());
+        }
+        return fallback;
+    };
+    // Material constants form a per-feature union. Public authoring uses the
+    // named object; glass reserves these slots instead of character styling.
+    result.styleParameters=vector("uvTransform",{1,1,0,0});
+    result.matcapColor=vector("tint",{1,1,1,1});
+    for(float c:result.matcapColor)if(c<0)throw std::invalid_argument("Refraction tint must be nonnegative");
+    result.hairParameters={scalar("contribution",.8F,1),scalar("brightness",1,64),scalar("distortionStrength",0,1),0};
+    result.featureParameters={0,0,0,0};
+    if(!glass.Has("texture"))throw std::invalid_argument("sceneRefraction requires a distortion texture");
+    const auto& texture=glass.Get("texture");
+    const double index=texture.IsNumber()?texture.GetNumberAsDouble():-1;
+    if(!std::isfinite(index)||index<0||std::floor(index)!=index||index>=model.textures.size())
+        throw std::invalid_argument("Invalid sceneRefraction texture index");
+    const int image=model.textures[static_cast<std::size_t>(index)].source;
+    if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+        throw std::invalid_argument("sceneRefraction distortion image is missing");
+    return image;
+}
+
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
     const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr) {
@@ -1086,6 +1137,8 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
+        const int distortionImage=loadSceneRefraction(*material,model,result);
+        if(distortionImage>=0)styleMaskImage=distortionImage;
     }
 
     if (baseColorImage >= 0) {

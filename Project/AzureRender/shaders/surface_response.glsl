@@ -3,6 +3,20 @@ float dielectricF0(float specular) {
     return 0.08 * clamp(specular, 0.0, 1.0);
 }
 
+float sceneRefractionWeight(float alpha,float contribution) {
+    return clamp((1.0-alpha)/max(1.0-contribution,.01),0.0,1.0);
+}
+vec2 sceneRefractionOffset(vec2 map,float strength) {return (map*2.0-1.0)*strength;}
+vec2 sceneRefractionUv(vec2 uv,vec2 offset,float fullDepth,float quarterDepth,float surfaceDepth) {
+    if(fullDepth>=surfaceDepth)return uv+offset;
+    if(quarterDepth>=surfaceDepth)return uv+offset*.25;
+    return uv;
+}
+vec2 sceneRefractionMirrorUv(vec2 uv) {return 1.0-abs(mod(uv,2.0)-1.0);}
+vec3 sceneRefractionSurface(vec3 diffuse,vec3 specular,vec3 background,float alpha,float contribution) {
+    return diffuse+mix(specular,background,sceneRefractionWeight(alpha,contribution));
+}
+
 vec3 toonIndirectChroma(vec3 ramp, float toonWeight, uint materialClass) {
     if (materialClass != 1U && materialClass != 2U) return vec3(1.0);
     float peak = max(max(ramp.r, ramp.g), ramp.b);

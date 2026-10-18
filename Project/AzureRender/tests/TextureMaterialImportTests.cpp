@@ -34,5 +34,26 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  source["images"][image]["uri"]="normal.hdr";std::ofstream(root/"linear.gltf")<<source.dump();
  const auto linearAsset=loadGltfAsset((root/"linear.gltf").u8string());
  if(linearAsset.materials[0].normalPixels[0]!=128||linearAsset.materials[0].normalPixels[1]!=128)throw std::runtime_error("Linear floating-point normal data must avoid color gamma encoding");
+ source["materials"][0]["alphaMode"]="BLEND";
+ source["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","generic"},{"features",{"scene-refraction"}},
+     {"sceneRefraction",{{"texture",texture},{"uvTransform",{.7,.7,0,0}},{"tint",{.8,.9,1,1}},{"contribution",.8},{"brightness",.271},{"distortionStrength",.008}}}};
+ std::ofstream(root/"glass.gltf")<<source.dump();
+ const auto glass=loadGltfAsset((root/"glass.gltf").u8string());const auto& g=glass.materials[0];
+ if(!(g.materialFeatures&1024U)||g.styleMaskPixels!=linearAsset.materials[0].normalPixels
+     ||std::abs(g.hairParameters[0]-.8F)>1e-6F||std::abs(g.hairParameters[1]-.271F)>1e-6F||g.styleParameters[0]!=.7F)
+     throw std::runtime_error("Named scene refraction must preserve linear distortion pixels and typed parameters");
+ for(const auto bad:nlohmann::json::array({-1,2,"wrong"})) {
+     auto invalid=source;invalid["materials"][0]["extras"]["azureRenderMaterial"]["sceneRefraction"]["contribution"]=bad;
+     std::ofstream(root/"invalid-glass.gltf")<<invalid.dump();bool rejected=false;
+     try{(void)loadGltfAsset((root/"invalid-glass.gltf").u8string());}catch(const std::exception&){rejected=true;}
+     if(!rejected)throw std::runtime_error("Invalid refraction contribution must be rejected");
+ }
+ auto missing=source;missing["textures"][texture]["source"]=-1;
+ std::ofstream(root/"missing-glass.gltf")<<missing.dump();bool missingRejected=false;
+ try{(void)loadGltfAsset((root/"missing-glass.gltf").u8string());}catch(const std::exception&){missingRejected=true;}
+ if(!missingRejected)throw std::runtime_error("Required refraction image cannot silently use a fallback");
+ source["materials"][0]["alphaMode"]="OPAQUE";std::ofstream(root/"opaque-glass.gltf")<<source.dump();bool rejected=false;
+ try{(void)loadGltfAsset((root/"opaque-glass.gltf").u8string());}catch(const std::exception&){rejected=true;}
+ if(!rejected)throw std::runtime_error("Scene refraction requires the transparent queue");
  std::filesystem::remove_all(root);return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}}

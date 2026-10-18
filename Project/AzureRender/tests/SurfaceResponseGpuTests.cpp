@@ -17,7 +17,7 @@ int main(int argc,char** argv) try {
         if(layout)backend.destroyPipelineLayout(layout);if(pool)backend.destroyDescriptorPool(pool);
         if(setLayout)backend.destroyDescriptorSetLayout(setLayout);host.allocator.destroyBuffer(output);
     });
-    output=host.allocator.createBuffer(24*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    output=host.allocator.createBuffer(38*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memset(output.mapped,0xCD,output.size);host.allocator.flush(output,0,output.size);
     setLayout=backend.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
     rhi::DescriptorPoolDesc desc;desc.maxSets=1;desc.sizes={{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1}};
@@ -29,14 +29,15 @@ int main(int argc,char** argv) try {
     host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
         commands.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_WRITE_BIT});
         commands.bindComputePipeline(pipeline);commands.bindComputeDescriptorSet(layout,set);
-        commands.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&contrast,sizeof(contrast));commands.dispatch(24,1,1);
+        commands.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&contrast,sizeof(contrast));commands.dispatch(38,1,1);
         commands.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
     });
     host.allocator.invalidate(output,0,output.size);const auto values=static_cast<const float*>(output.mapped);
     const double pi=3.141592653589793;
-    const double expected[]={0,.04,.04/(4*pi*std::pow(.2,4)),.04/(4*pi*std::pow(.8,4)),0,0, 1,.875,.8125, 1,.875,.8125, 1,1,1, 1,1,1, 1,1,1, 1,1,1};
+    const double expected[]={0,.04,.04/(4*pi*std::pow(.2,4)),.04/(4*pi*std::pow(.8,4)),0,0, 1,.875,.8125, 1,.875,.8125, 1,1,1, 1,1,1, 1,1,1, 1,1,1,
+        0,1,.5,.1,.75,.5,1,.7,.55,.5,.9,.1,-.004,.004};
     bool passed=true;
-    for(unsigned i=0;i<24;++i){
+    for(unsigned i=0;i<38;++i){
         std::cout<<"Surface probe "<<i<<": "<<values[i]<<" (expected "<<expected[i]<<")\n";
         passed&=std::isfinite(values[i]) && std::abs(values[i]-expected[i])<std::max(1e-6,std::abs(expected[i])*1e-4);
     }

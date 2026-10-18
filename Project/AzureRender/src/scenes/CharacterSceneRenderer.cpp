@@ -2014,7 +2014,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials)
-            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint))!=0;
+            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction))!=0;
     }
     if(!sampled)return;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
