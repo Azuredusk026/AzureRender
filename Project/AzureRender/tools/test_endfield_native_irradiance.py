@@ -35,6 +35,23 @@ def index():
 
 
 class IrradianceTests(unittest.TestCase):
+    def test_directional_coefficients_follow_actual_pixel_consumer(self):
+        self.assertTrue(callable(getattr(irradiance, 'decode_directional_coefficients', None)))
+        raw = sample(2)[:4] + bytes([255, 128, 0, 17, 0, 255, 128, 99, 128, 0, 255, 213])
+        result = irradiance.decode_directional_coefficients(raw)
+        for got, expected in zip(result, ([4, 4/255, -4, 2], [-4, 4, 4/255, 2], [4/255, -4, 4, 2])):
+            for a, b in zip(got, expected): self.assertAlmostEqual(a, b)
+
+    def test_directional_evaluation_uses_signed_normal_strength_and_final_clamp(self):
+        self.assertTrue(callable(getattr(irradiance, 'evaluate_directional_sample', None)))
+        raw = sample(2)[:4] + bytes([255, 128, 0, 17]) * 3
+        self.assertEqual(irradiance.evaluate_directional_sample(raw, (1, 0, 0)), [6.] * 3)
+        self.assertEqual(irradiance.evaluate_directional_sample(raw, (0, 0, 1)), [0.] * 3)
+        self.assertEqual(irradiance.evaluate_directional_sample(raw, (-1, 0, 0)), [0.] * 3)
+        self.assertEqual(irradiance.evaluate_directional_sample(raw, (1, 0, 0), (0, .5, 1)), [2., 4., 6.])
+        for normal in ((0, 0, 0), (2, 0, 0), (float('nan'), 0, 0)):
+            with self.assertRaises(ValueError): irradiance.evaluate_directional_sample(raw, normal)
+
     def test_world_address_matches_v3_lods_and_morton(self):
         self.assertTrue(callable(getattr(irradiance, 'world_address', None)))
         a = irradiance.world_address((1.5, 1.5, 1.5), 0)

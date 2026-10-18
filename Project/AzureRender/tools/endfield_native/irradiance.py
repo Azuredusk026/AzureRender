@@ -4,8 +4,9 @@ Evidence: native IrradianceVolumeAtlasBakeV3CS DXBC region upload and
 IrradianceVolumeIndirectUpdateV2CS spatial-hash lookup. V3 file-range,
 occupancy and hash identities were checked on both source scene branches.
 V3 clipmap update establishes world lattice selection and directional atlas
-byte normalization. Amplitude is the packed RGB term, not evaluated irradiance.
-Scenario selection and final normal-dependent evaluation remain explicit gaps.
+byte normalization. The deferred pixel consumer establishes signed linear
+coefficients and a clamped single-sample volume contribution. Scenario selection,
+region overrides, default SH and optional visibility processing are separate.
 """
 from __future__ import annotations
 
@@ -92,6 +93,35 @@ def decode_amplitude(sample: bytes) -> list[float]:
     return result
 
 
+def decode_directional_coefficients(sample: bytes) -> list[list[float]]:
+    """Return per-color [linear x,y,z,DC] for the direct V3 volume path.
+
+    Pixel source: deferred segment1-1001480, lines 2295..2411. Directional
+    RGB is remapped from UNORM by 4*u-2, then multiplied by amplitude.
+    Alpha in each directional RGBA group is not the DC coefficient.
+    """
+    amplitudes = decode_amplitude(sample)
+    return [[amplitude * (4 * value / 255 - 2) for value in sample[4 + 4*c:7 + 4*c]]
+            + [amplitude] for c, amplitude in enumerate(amplitudes)]
+
+
+def evaluate_directional_sample(sample: bytes, normal: tuple[float, float, float],
+                                directional_strength: tuple[float, float, float] = (1, 1, 1)) -> list[float]:
+    """Evaluate one sample with default SH=0 and optional visibility inactive.
+
+    This is the isolated volume contribution, not complete scene GI.
+    The caller supplies a unit world normal and per-color directional strength.
+    Shader lines 2520..2531 clamp after summation; interpolated/blended samples
+    must therefore combine coefficients before this final evaluation.
+    """
+    if (len(normal) != 3 or any(not math.isfinite(x) for x in normal)
+            or abs(sum(x*x for x in normal) - 1) > 1e-4
+            or len(directional_strength) != 3 or any(not math.isfinite(x) for x in directional_strength)):
+        raise ValueError('Directional evaluation requires a unit normal and finite strength')
+    return [max(coeff[3] + strength * sum(c*n for c, n in zip(coeff[:3], normal)), 0)
+            for coeff, strength in zip(decode_directional_coefficients(sample), directional_strength)]
+
+
 def world_address(position: tuple[float, float, float], lod: int) -> dict:
     """Address one V3 lattice sample, before interpolation/fallback.
 
@@ -163,6 +193,7 @@ class SparseTile:
         return dict(brick=list(brick), occupancy_bit=bit, sample_rank=rank, byte_offset=offset,
                     amplitude=decode_amplitude(raw), directional_rgba8=list(raw[4:]),
                     directional_atlas_unorm=[[x / 255 for x in raw[i:i + 4]] for i in (4, 8, 12)],
+                    directional_coefficients=decode_directional_coefficients(raw),
                     raw_sha256=hashlib.sha256(raw).hexdigest())
 
 
