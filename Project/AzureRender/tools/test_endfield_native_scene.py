@@ -1,7 +1,7 @@
 import struct
 import unittest
 
-from endfield_native.scene import validate_raw_header, merge_instances
+from endfield_native.scene import validate_raw_header, merge_instances, decode_chunk_data
 
 
 def empty_chunk():
@@ -13,6 +13,25 @@ def empty_chunk():
 
 
 class NativeSceneTests(unittest.TestCase):
+    def test_raw_and_compressed_share_the_validated_chunk_contract(self):
+        raw = empty_chunk()
+        self.assertIs(decode_chunk_data(raw), raw)
+        packed = struct.pack('<I', len(raw)) + b'packed'
+        def decompress(payload, size):
+            self.assertEqual((payload, size), (b'packed', 64))
+            return raw
+        self.assertEqual(decode_chunk_data(packed, decompress), raw)
+
+    def test_compressed_payload_requires_exact_size_and_valid_root(self):
+        packed = struct.pack('<I', 64) + b'packed'
+        for decoded in (bytes(64), empty_chunk()[:-1]):
+            with self.assertRaises(ValueError):
+                decode_chunk_data(packed, lambda payload, size: decoded)
+        for size in (0, 63, 256*1024*1024+1):
+            with self.assertRaises(ValueError):
+                decode_chunk_data(struct.pack('<I', size)+b'x',
+                                  lambda payload, expected: self.fail('Budget must precede decode'))
+
     def test_raw_root_is_not_a_compressed_size(self):
         validate_raw_header(empty_chunk())
 

@@ -26,6 +26,28 @@ def validate_raw_header(data):
         raise ValueError('Unsupported raw InitChunkData layout')
 
 
+def decode_chunk_data(data, decompress=None):
+    """Accept a validated raw chunk or a size-prefixed inverted-LZ4 chunk."""
+    try:
+        validate_raw_header(data)
+        return data
+    except ValueError:
+        pass
+    if len(data) < 5:
+        raise ValueError('Truncated scene chunk envelope')
+    expected = struct.unpack_from('<I', data)[0]
+    if not 64 <= expected <= 256*1024*1024:
+        raise ValueError('Scene chunk decompression size outside budget')
+    if decompress is None:
+        from extractor_core.lz4 import decompress_lz4_inv
+        decompress = decompress_lz4_inv
+    decoded = decompress(data[4:], expected)
+    if len(decoded) != expected:
+        raise ValueError('Scene chunk decoded length differs')
+    validate_raw_header(decoded)
+    return decoded
+
+
 def merge_instances(records):
     unique = {}
     duplicates = 0
@@ -73,11 +95,12 @@ def main():
     paths = build_path_id_index(args.path_hash)
     chunks, records, renderers = [], [], {}
     for entry in entries:
-        data = resources.read_virtual_file(args.vfs_root, 'C3442D43', entry.file_name)
-        validate_raw_header(data)
+        encoded = resources.read_virtual_file(args.vfs_root, 'C3442D43', entry.file_name)
+        data = decode_chunk_data(encoded)
         rows = list(iter_entities(data))
         columns = component_columns(data)
-        chunks.append(dict(path=entry.file_name, bytes=len(data), sha256=hashlib.sha256(data).hexdigest(), instances=len(rows)))
+        chunks.append(dict(path=entry.file_name, bytes=len(data), sha256=hashlib.sha256(data).hexdigest(),
+                           encoded_sha256=hashlib.sha256(encoded).hexdigest(), instances=len(rows)))
         for row in rows:
             row['matrix'] = list(struct.unpack('<16f', row.pop('matrix_blob')))
             row['source'] = entry.file_name
@@ -100,7 +123,7 @@ def main():
             renderers.setdefault(row['entity_id'], value)
     unique, duplicates = merge_instances(records)
     result = dict(format='AzureEndfieldRawSceneInventory/1', scene=args.scene,
-                  layout='raw_flatbuffer_game_1.0.14', bounds=bounds, chunks=chunks,
+                  layout='validated_flatbuffer_root8', bounds=bounds, chunks=chunks,
                   instances=unique, duplicates=duplicates, renderers=list(renderers.values()),
                   path_hash_sha256=hashlib.sha256(args.path_hash.read_bytes()).hexdigest(),
                   status='source_references_verified_visual_acceptance_pending')

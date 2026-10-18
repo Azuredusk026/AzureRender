@@ -61,12 +61,10 @@ def decode_light_fields(fields):
 
 def read_lights(vfs_root, path_hash, scene):
     from extractor_core import lights, resources
-    from endfield_native.scene import validate_raw_header
+    from endfield_native.scene import decode_chunk_data
 
     def raw(root, entry):
-        data = resources.read_virtual_file(root,'C3442D43',entry.file_name)
-        validate_raw_header(data)
-        return data
+        return decode_chunk_data(resources.read_virtual_file(root,'C3442D43',entry.file_name))
 
     def row(map_id, entity_id, name, mask, components, cookie_path, init_path, streaming_path):
         transform, light, additional = (components[k] for k in (1,131072,33554432))

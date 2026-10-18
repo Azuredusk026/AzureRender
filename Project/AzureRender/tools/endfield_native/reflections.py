@@ -100,13 +100,14 @@ def read_reflections(vfs_root, scene):
     from extractor_core import resources, flatbuffer as fb
     from extractor_core.projected_decals import streaming_records
     from extractor_core.scene_identity import validate_scene_id
+    from endfield_native.scene import decode_chunk_data
     validate_scene_id(scene)
     rows = []
     prefix = f'Data/Streaming/PC/{scene}/Streaming/InitChunkData_'
     for entry in resources.load_group(vfs_root, 'C3442D43').iter_files():
         if not entry.file_name.startswith(prefix):
             continue
-        data = resources.read_virtual_file(vfs_root, 'C3442D43', entry.file_name)
+        data = decode_chunk_data(resources.read_virtual_file(vfs_root, 'C3442D43', entry.file_name))
         stream = records = None
         for entity, rec in streaming_records(data).items():
             if rec.type_tag != 1:
@@ -127,7 +128,7 @@ def read_reflections(vfs_root, scene):
             name = data[ns+4:ns+4+fb.u32(data, ns)].decode('utf8')
             sp = entry.file_name.replace('/InitChunkData_', '/StreamingChunkData_')
             if stream is None:
-                stream = resources.read_virtual_file(vfs_root, 'C3442D43', sp)
+                stream = decode_chunk_data(resources.read_virtual_file(vfs_root, 'C3442D43', sp))
                 records = streaming_records(stream)
             if entity not in records or records[entity].type_tag != 1:
                 raise ValueError('Missing paired native probe record')
