@@ -89,9 +89,17 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         images = {}
         textures = {}
         for name in ('base','normal','orm','emission'):
-            image = bpy.data.images.new(source.name+'-'+name, width=resolution,height=resolution,alpha=True,float_buffer=True)
+            # Generated float images pack their linear buffer directly into PNG.
+            # glTF consumers decode color PNGs as sRGB, so explicitly encode the
+            # bounded color lanes into a straight-alpha byte image first.
+            image = bpy.data.images.new(source.name+'-'+name, width=resolution,height=resolution,alpha=True,float_buffer=False)
             image.colorspace_settings.name = 'sRGB' if name in ('base','emission') else 'Non-Color'
-            image.pixels.foreach_set(arrays[name].ravel())
+            image.alpha_mode = 'STRAIGHT'
+            pixels = np.clip(arrays[name],0.,1.).copy()
+            if name in ('base','emission'):
+                rgb = pixels[:,:3]
+                pixels[:,:3] = np.where(rgb<=.0031308,rgb*12.92,1.055*np.power(rgb,1/2.4)-.055)
+            image.pixels.foreach_set(pixels.ravel())
             image.update()
             image.pack()
             images[name] = image.name
@@ -117,7 +125,8 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         rl.new(textures['emission'].outputs['Color'],surface.inputs['Emission Color'])
         surface.inputs['Emission Strength'].default_value = peak
         return result, dict(source=source.name,resolution=resolution,images=images,
-                            emissionScale=peak,domain=result['azureBakeDomain'])
+                            emissionScale=peak,domain=result['azureBakeDomain'],
+                            colorEncoding='sRGB RGB; linear alpha and data maps',storage='RGBA8 straight alpha')
     finally:
         mesh = plane.data
         bpy.data.objects.remove(plane,do_unlink=True)

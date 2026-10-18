@@ -114,3 +114,20 @@ Vorbis 质量范围为零至一，默认值为 0.6。
 二维容器设置见[纹理容器交换](texture-containers.md)。
 
 压缩音频设置见[压缩音频交换](compressed-audio.md)。
+
+## Blender 材质烘焙
+
+离线适配器 `tools/blender/bake_material_channels.py` 捕获线性材质输入。
+基色与归一化发光的 RGB 编码为 sRGB。
+Alpha、法线及 ORM 保持线性数据语义。
+PNG 使用直通透明度，HDR 发光峰值由强度持有。
+
+公开夹具先通过 Blender 导出 GLB。
+`tools/test_blender_bake_exchange.py` 验证内嵌 PNG。
+测试按标准 glTF 规则恢复颜色和发光数值。
+验证范围包含半透明、混色、ORM 与 HDR 发光。
+
+`tools/blender/rebake_scene_exchange.py` 重建交换包材质。
+输入为未烘焙场景和参考交换清单。
+输出使用独立目录，并保存来源与生成器摘要。
+参考节点、层级、变换及资源标识保持一致。
