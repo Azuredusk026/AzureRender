@@ -134,6 +134,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 独立局部反射支持原作层级、盒投影与体积混合。
 公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
 中庭反射候选已完成四帧采样，整体照明仍待还原。
+方向辐照网格支持世界插值及场景资源定位。
+公共 GPU 验证见[网格契约](docs/runtime/irradiance-volumes.md)。
 中枢物流已读取 21 个原生样条描述。
 运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。
