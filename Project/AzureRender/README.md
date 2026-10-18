@@ -131,6 +131,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 完整着色与原生环境光照还原仍待验收。
 通用聚光与显式场景照明通过公开 GPU 夹具。
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
+独立局部反射支持原作层级、盒投影与体积混合。
+公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
+中庭反射候选已完成四帧采样，整体照明仍待还原。
 中枢物流已读取 21 个原生样条描述。
 运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。

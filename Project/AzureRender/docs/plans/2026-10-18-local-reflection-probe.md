@@ -92,6 +92,20 @@ CPU 日志为 `probe-cpu-tests.log`。
 原生逐轴影响权重保存在候选记录。
 当前公共配置使用标量边缘混合距离。
 
+中庭候选已执行四帧真实场景采样。
+采样为 640×360、60 帧，使用原生反射层级。
+场景保留原生形状灯候选与原生待机角色。
+进程退出码为零，缓冲与图像释放计数均归零。
+
+运行日志为 `local-reflection-player.log`。
+运行报告为 `local-reflection-runtime.json`。
+图像目录为 `local-reflection-frames`。
+命令保存在 `local-reflection-command.json`。
+
+反射内容在实际场景中可见，整体画面仍偏暗。
+该结果验证资源接入与生命周期。
+全局光照、灯光单位及探针激活继续单独验收。
+
 ## 公共工具
 
 `tools/native_render/probe_lab.py` 执行 GPU 夹具。
