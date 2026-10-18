@@ -60,14 +60,40 @@
 遮蔽接入需要明确的材质语义配置。
 场景专用灯及深度模板行为另行验收。
 
-当前 GLB 的 13 个网格均缺少显式切线。
-引擎按 UV 重建切线。
-源几何交换文件包含原生切线数组。
-源切线接入需验证导出后的顶点对应关系。
+表面通道候选通过引擎的 UV 切线重建路径消费。
+原生切线由独立切线候选显式提供。
+两份候选分别保留，支持联合场景画面对照。
 
 旧角色配置的 SDF 与公共夹具字节相同。
 该纹理的来源是 `assets_public/face_sdf_v1.png`。
 原生 SDF 验收使用游戏提取纹理及消费公式。
+
+## 原生切线保真
+
+源编号工具读取原始几何及 Blender 场景。
+它逐字节核对源位置、切线和手性数组。
+导出的对应夹具携带原始顶点编号。
+场景文件、源数据和夹具均记录 SHA256。
+
+编号工具为 `export_source_vertex_correspondence.py`。
+接入工具为 `endfield_native/character_tangents.py`。
+前者位于 `tools/blender`，后者位于 `tools`。
+接入前验证全部既有顶点属性及三角形索引。
+
+对应关系覆盖 13 个网格和 77,802 个顶点。
+源顶点经导出矩阵变换后的最大误差为 5.97×10⁻⁸ 米。
+每个目标顶点按编号读取其原生切线。
+切线方向经同一矩阵变换并归一化。
+
+正向旋转保留原手性，镜像变换翻转手性。
+输出仅追加切线缓冲和 `TANGENT` 属性。
+原始二进制前缀与既有访问器保持一致。
+节点、蒙皮、材质和两段原生动画保持一致。
+
+四项公共测试覆盖源编号和流保留规则。
+测试包含变换、镜像手性及非法源值拒绝。
+独立候选通过从来源重新生成的逐字节校验。
+GPU 外观验收随联合场景进行。
 
 ## 验证记录
 
@@ -88,3 +114,8 @@
 | `hero-native-surfaces.glb` | 独立角色表面候选 |
 | `hero-native-surfaces.json` | 通道、引用及输出摘要 |
 | `hero-material-semantic-audit.json` | 输入覆盖和夹具来源核对 |
+| `source-vertex-correspondence-verified.glb` | 原生顶点编号对应夹具 |
+| `source-vertex-correspondence-verified.json` | 对应夹具来源及导出矩阵 |
+| `hero-native-surfaces-tangents.glb` | 显式原生切线候选 |
+| `hero-native-tangents-verified.json` | 逐顶点复生成验证 |
+| `native-tangent-frame-audit.json` | 切线正交性及 UV 手性诊断 |
