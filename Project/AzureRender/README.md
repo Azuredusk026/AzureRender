@@ -140,6 +140,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 公共 GPU 验证见[网格契约](docs/runtime/irradiance-volumes.md)。
 中枢物流已读取 21 个原生样条描述。
 运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
+53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
+角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。
 该展示提供 1080p、24 帧、16 秒的实际引擎录像。
 获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。
