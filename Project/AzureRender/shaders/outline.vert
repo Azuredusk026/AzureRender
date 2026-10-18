@@ -28,6 +28,7 @@ struct InstanceTransforms {
     uvec4 meta;
     vec4 faceLight;
     vec4 morph;
+    mat4 faceFrame;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];

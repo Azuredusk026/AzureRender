@@ -1045,8 +1045,8 @@ AssetMaterial loadMaterial(
                     }
                     return faceSdf.Get(key).Get<std::string>();
                 };
-                if (requireNumber("schemaVersion")
-                    != static_cast<int>(AssetFaceSdfProfile::kSchemaVersion)) {
+                const int sdfVersion=requireNumber("schemaVersion");
+                if (sdfVersion!=1 && sdfVersion!=2) {
                     throw std::runtime_error(
                         "Unsupported faceSdf schemaVersion for "
                         + result.name);
@@ -1069,9 +1069,46 @@ AssetMaterial loadMaterial(
                 }
                 if (requireNumber("texCoord") != 0) {
                     throw std::runtime_error(
-                        "Face SDF v1 supports only TEXCOORD_0 for "
+                        "Face SDF supports only TEXCOORD_0 for "
                         + result.name);
                 }
+                result.faceSdf.schemaVersion=static_cast<std::uint32_t>(sdfVersion);
+                if(sdfVersion==2) {
+                    if(result.materialClass!=AssetMaterialClass::Face || result.materialProfileVersion!=2)
+                        throw std::runtime_error("Face SDF v2 requires a version 2 face material for "+result.name);
+                    const auto imageFor=[&](const char* key){const int index=requireNumber(key);
+                        if(index<0 || static_cast<std::size_t>(index)>=model.textures.size())
+                            throw std::runtime_error(std::string("Invalid faceSdf.")+key+" for "+result.name);
+                        const int image=model.textures[static_cast<std::size_t>(index)].source;
+                        if(image<0 || static_cast<std::size_t>(image)>=model.images.size())
+                            throw std::runtime_error(std::string("Missing faceSdf.")+key+" image for "+result.name);
+                        return image;};
+                    styleMaskImage=imageFor("maskTexture");matcapImage=imageFor("rampTexture");
+                    if(!faceSdf.Has("headBasis")||!faceSdf.Get("headBasis").IsArray()||faceSdf.Get("headBasis").ArrayLen()!=9)
+                        throw std::runtime_error("faceSdf.headBasis requires nine numbers for "+result.name);
+                    for(std::size_t i=0;i<9;++i){const auto& v=faceSdf.Get("headBasis").Get(static_cast<int>(i));
+                        if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble())||std::abs(v.GetNumberAsDouble())>1.0001)
+                            throw std::runtime_error("Invalid faceSdf.headBasis value for "+result.name);
+                        result.faceSdf.headBasis[i]=static_cast<float>(v.GetNumberAsDouble());}
+                    for(unsigned a=0;a<3;++a)for(unsigned b=0;b<3;++b){float d=0;
+                        for(unsigned c=0;c<3;++c)d+=result.faceSdf.headBasis[a*3+c]*result.faceSdf.headBasis[b*3+c];
+                        if(std::abs(d-(a==b?1.F:0.F))>1e-4F)throw std::runtime_error("faceSdf.headBasis must be orthonormal for "+result.name);}
+                    result.hairParameters={0,0,0,0};
+                    if(faceSdf.Has("lightAdjustment")) {
+                        const auto& adjustment=faceSdf.Get("lightAdjustment");
+                        if(!adjustment.IsArray()||adjustment.ArrayLen()!=3)throw std::runtime_error("faceSdf.lightAdjustment requires three numbers");
+                        for(int i=0;i<3;++i){const auto& v=adjustment.Get(i);
+                            if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble())||v.GetNumberAsDouble()<(i==0?0.:-1.)||v.GetNumberAsDouble()>1.)
+                                throw std::runtime_error("Invalid faceSdf.lightAdjustment value for "+result.name);
+                            result.hairParameters[static_cast<std::size_t>(i)]=static_cast<float>(v.GetNumberAsDouble());}
+                    }
+                    result.materialFeatures|=MaterialFeatureDualFaceSdf;
+                    result.textureSettings[5].usage="linear";result.textureSettings[5].colorSpace="linear";
+                    for(const unsigned slot:{4U,5U,7U}) {
+                        result.textureSettings[slot].wrapU="clamp";result.textureSettings[slot].wrapV="clamp";
+                        result.textureSettings[slot].mipPolicy="none";
+                    }
+                } else {
                 const std::string channel = requireString("channel");
                 const auto parseChannel = [&](const std::string& value,
                                               const char* key) {
@@ -1104,6 +1141,7 @@ AssetMaterial loadMaterial(
                 } else {
                     throw std::runtime_error(
                         "Unknown faceSdf.horizontalAxis for " + result.name);
+                }
                 }
                 result.faceSdf.headNodeName = requireString("headNode");
                 std::optional<std::uint32_t> headNode;
@@ -1266,7 +1304,7 @@ AssetMaterial loadMaterial(
             matcapImage,
             kNoFactor,
             result.matcapWidth,
-            result.matcapHeight,true,authored,&result.authoredMipLevels[5]);
+            result.matcapHeight,result.faceSdf.schemaVersion!=2,authored,&result.authoredMipLevels[5]);
     } else {
         result.matcapWidth = 2;
         result.matcapHeight = 2;
@@ -1303,7 +1341,7 @@ AssetMaterial loadMaterial(
             static_cast<std::size_t>(result.faceSdf.channel);
         const std::size_t maskChannel =
             static_cast<std::size_t>(result.faceSdf.maskChannel);
-        for (std::size_t pixel = 0;
+        for (std::size_t pixel = 0; result.faceSdf.schemaVersion==1 &&
              pixel < result.faceSdf.pixels.size();
              pixel += 4) {
             std::uint8_t distance =
@@ -1912,6 +1950,8 @@ LoadedAsset loadGltfAsset(const std::string& path) {
         const auto& material=model.materials[index];
         const int textures[]={material.pbrMetallicRoughness.baseColorTexture.index,material.normalTexture.index,material.pbrMetallicRoughness.metallicRoughnessTexture.index,material.emissiveTexture.index,material.occlusionTexture.index};
         for(std::size_t slot=0;slot<5;++slot) {
+            // A dual SDF mask has its own typed source, independent of glTF AO.
+            if(slot==4 && (asset.materials[index].materialFeatures&MaterialFeatureDualFaceSdf))continue;
             if(textures[slot]<0)continue;
             const auto image=model.textures.at(static_cast<std::size_t>(textures[slot])).source;
             if(image<0)continue;const auto& uri=model.images.at(static_cast<std::size_t>(image)).uri;
@@ -1949,6 +1989,14 @@ LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* auth
     asset.materials.reserve(model.materials.size() + 1);
     for (const auto& material : model.materials) {
         asset.materials.push_back(loadMaterial(model, &material,authored));
+    }
+    const AssetFaceSdfProfile* faceFrame=nullptr;
+    for(const auto& material:asset.materials)if(material.faceSdf.present) {
+        if(faceFrame && (faceFrame->schemaVersion==2 || material.faceSdf.schemaVersion==2)
+            && (faceFrame->schemaVersion!=material.faceSdf.schemaVersion || faceFrame->headNode!=material.faceSdf.headNode
+                ||faceFrame->headBasis!=material.faceSdf.headBasis))
+            throw std::runtime_error("A mesh resource requires a consistent dual face SDF frame");
+        faceFrame=&material.faceSdf;
     }
     const std::uint32_t fallbackMaterial =
         static_cast<std::uint32_t>(asset.materials.size());

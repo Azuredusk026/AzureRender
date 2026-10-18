@@ -55,5 +55,47 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  source["materials"][0]["alphaMode"]="OPAQUE";std::ofstream(root/"opaque-glass.gltf")<<source.dump();bool rejected=false;
  try{(void)loadGltfAsset((root/"opaque-glass.gltf").u8string());}catch(const std::exception&){rejected=true;}
  if(!rejected)throw std::runtime_error("Scene refraction requires the transparent queue");
+ // Independent RGBA inputs must survive the production loader unchanged.
+ const unsigned char sdfPixels[]={32,96,160,224,32,96,160,224,32,96,160,224,32,96,160,224};
+ const unsigned char maskPixels[]={17,83,149,215,17,83,149,215,17,83,149,215,17,83,149,215};
+ stbi_write_png((root/"face-sdf.png").string().c_str(),2,2,4,sdfPixels,8);
+ stbi_write_png((root/"face-mask.png").string().c_str(),2,2,4,maskPixels,8);
+ auto face=source;face["materials"][0]["alphaMode"]="OPAQUE";
+ const auto addTexture=[&](const char* uri){const int im=static_cast<int>(face["images"].size());face["images"].push_back({{"uri",uri}});
+     const int tx=static_cast<int>(face["textures"].size());face["textures"].push_back({{"source",im}});return tx;};
+ const int sdf=addTexture("face-sdf.png"),mask=addTexture("face-mask.png"),ramp=addTexture("face-sdf.png");
+ face["nodes"].push_back({{"name","FaceHead"}});
+ face["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","face"},{"features",{"face-sdf-eligible"}},
+     {"faceSdf",{{"schemaVersion",2},{"texture",sdf},{"maskTexture",mask},{"rampTexture",ramp},{"texCoord",0},{"headNode","FaceHead"},
+         {"headBasis",{1,0,0,0,1,0,0,0,1}},{"lightAdjustment",{0,0,0}}}}};
+ std::ofstream(root/"face.gltf")<<face.dump();
+ const auto dualFace=loadGltfAsset((root/"face.gltf").u8string());const auto& f=dualFace.materials[0];
+ if(f.faceSdf.pixels!=std::vector<std::uint8_t>(sdfPixels,sdfPixels+16)
+     ||f.styleMaskPixels!=std::vector<std::uint8_t>(maskPixels,maskPixels+16)
+     ||f.matcapPixels!=f.faceSdf.pixels||f.textureSettings[5].colorSpace!="linear"||!(f.materialFeatures&2048U))
+     throw std::runtime_error("Dual face SDF must preserve independent RGBA and linear ramp samples");
+ for(const char* key:{"texture","maskTexture","rampTexture"}) {
+     auto bad=face;bad["materials"][0]["extras"]["azureRenderMaterial"]["faceSdf"][key]=-1;
+     std::ofstream(root/"bad-face.gltf")<<bad.dump();bool denied=false;
+     try{(void)loadGltfAsset((root/"bad-face.gltf").u8string());}catch(const std::exception&){denied=true;}
+     if(!denied)throw std::runtime_error("Every dual face input requires a valid image");
+ }
+ for(const auto basis:nlohmann::json::array({{1,0,0,1,0,0,0,0,1},{2,0,0,0,1,0,0,0,1},{1,0,0}})) {
+     auto bad=face;bad["materials"][0]["extras"]["azureRenderMaterial"]["faceSdf"]["headBasis"]=basis;
+     std::ofstream(root/"bad-basis.gltf")<<bad.dump();bool denied=false;
+     try{(void)loadGltfAsset((root/"bad-basis.gltf").u8string());}catch(const std::exception&){denied=true;}
+     if(!denied)throw std::runtime_error("Face basis must contain three orthonormal axes");
+ }
+ auto conflicting=face;auto other=face["materials"][0];
+ other["extras"]["azureRenderMaterial"]["faceSdf"]["headBasis"]={-1,0,0,0,1,0,0,0,1};conflicting["materials"].push_back(other);
+ std::ofstream(root/"conflicting-face.gltf")<<conflicting.dump();bool frameRejected=false;
+ try{(void)loadGltfAsset((root/"conflicting-face.gltf").u8string());}catch(const std::exception&){frameRejected=true;}
+ if(!frameRejected)throw std::runtime_error("One shared mesh instance must declare a consistent face frame");
+ auto legacy=face;auto& old=legacy["materials"][0]["extras"]["azureRenderMaterial"]["faceSdf"];
+ old={{"schemaVersion",1},{"texture",sdf},{"texCoord",0},{"headNode","FaceHead"},{"channel","g"},{"maskChannel","a"},
+     {"shadowOnLowValues",true},{"horizontalAxis","left-to-right"}};
+ std::ofstream(root/"legacy-face.gltf")<<legacy.dump();const auto legacyFace=loadGltfAsset((root/"legacy-face.gltf").u8string());
+ if(legacyFace.materials[0].faceSdf.pixels[0]!=96||legacyFace.materials[0].faceSdf.pixels[3]!=224
+     ||(legacyFace.materials[0].materialFeatures&2048U))throw std::runtime_error("Face SDF v1 channel contract must remain available");
  std::filesystem::remove_all(root);return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';std::filesystem::remove_all(root);return 1;}}

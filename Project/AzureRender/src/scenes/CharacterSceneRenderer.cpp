@@ -283,7 +283,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             "Face SDF: material=" + material.name
                 + ", texture=" + std::to_string(material.faceSdf.width) + 'x'
                 + std::to_string(material.faceSdf.height)
-                + ", headNode=" + material.faceSdf.headNodeName);
+                + ", headNode=" + material.faceSdf.headNodeName
+                + ", schemaVersion=" + std::to_string(material.faceSdf.schemaVersion));
     }
     if (faceSdfHeadNode_.has_value()
         && *faceSdfHeadNode_ < asset_.nodeWorldMatrices.size()) {
@@ -297,7 +298,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             bindZ[0], bindZ[1], bindZ[2],
         };
         azurerender::RuntimeDiagnostics::instance().print(
-            "asset", "Face SDF light frame: bind-relative head rotation");
+            "asset", "Face SDF light frame: evaluated per instance");
     }
     footPivot_ = estimateFootPivot(asset_);
     if(platformPrepared_)appendShowcasePlatform(asset_, footPivot_);
@@ -634,6 +635,25 @@ std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
     return {light[0],light[1],light[2],1};
 }
 
+Matrix4 CharacterSceneRenderer::instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const Matrix4& model) const {
+    Matrix4 result=scale(1,1,1);
+    if(!faceSdfPrepared_)return result;
+    for(const auto& material:mesh.materials) {
+        const auto& profile=material.faceSdf;
+        if(!profile.present||profile.schemaVersion!=2)continue;
+        const auto head=multiply(model,pose.nodeWorldMatrices.at(profile.headNode));
+        Matrix4 basis=scale(1,1,1);
+        for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)basis[a*4+c]=profile.headBasis[a*3+c];
+        result=multiply(head,basis);
+        for(unsigned a=0;a<3;++a) {
+            const auto axis=normalize({result[a*4],result[a*4+1],result[a*4+2]});
+            for(unsigned c=0;c<3;++c)result[a*4+c]=axis[c];
+        }
+        return result;
+    }
+    return result;
+}
+
 void CharacterSceneRenderer::rebuildSceneInstances() {
     const auto primaryBounds = jointBounds_.at(0).evaluate(asset_, renderSettings_->morphWeights, asset_.jointMatrices);
     std::vector<scene::AxisAlignedBounds> meshBounds{primaryBounds};
@@ -824,6 +844,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         destination[slot].meta = {pose.jointBase, pose.vertexBase, morphGpuMeshes_.at(meshKey).tableBase, pose.morphWeightBase};
         destination[slot].faceLight = instanceFaceLight(mesh, pose.pose, model);
         destination[slot].morph = {pose.morph[0], pose.morph[1], 0, 0};
+        destination[slot].faceFrame = instanceFaceFrame(mesh,pose.pose,model);
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
         destination[slot].modelViewProjection =

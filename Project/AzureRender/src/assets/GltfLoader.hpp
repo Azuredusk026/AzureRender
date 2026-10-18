@@ -53,6 +53,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureSceneTint = 1U << 8U,
     MaterialFeatureHairRamp = 1U << 9U,
     MaterialFeatureSceneRefraction = 1U << 10U,
+    MaterialFeatureDualFaceSdf = 1U << 11U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -66,6 +67,8 @@ struct AssetFaceSdfProfile {
     static constexpr std::uint32_t kSchemaVersion = 1;
 
     bool present = false;
+    std::uint32_t schemaVersion = kSchemaVersion;
+    std::array<float,9> headBasis{1,0,0,0,1,0,0,0,1};
     std::vector<std::uint8_t> pixels;
     std::uint32_t width = 0;
     std::uint32_t height = 0;

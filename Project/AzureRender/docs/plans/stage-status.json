@@ -1339,7 +1339,8 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/character-surfaces.md",
-        "docs/acceptance/nr/character-face-sdf.md"
+          "docs/acceptance/nr/character-face-sdf.md",
+          "docs/runtime/dual-face-sdf.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"

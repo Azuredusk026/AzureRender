@@ -184,8 +184,9 @@ private:
         std::array<std::uint32_t, 4> meta{};
         std::array<float, 4> faceLight{};
         std::array<float, 4> morph{};
+        std::array<float,16> faceFrame{};
     };
-    static_assert(sizeof(InstanceGpuData) == 432);
+    static_assert(sizeof(InstanceGpuData) == 496);
 
     using SkinningPushConstants = SkinningBatch;
 
@@ -359,6 +360,7 @@ private:
     internal::Vector3 frameMainLight_{0,1,0};
     void prepareInstancePoses();
     std::array<float,4> instanceFaceLight(const LoadedAsset& mesh, const AssetPose& pose, const internal::Matrix4& model) const;
+    internal::Matrix4 instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const internal::Matrix4& model) const;
     // Per-resource visible span: (meshKey, firstSlot, count) in the
     // instance buffer's visible order.
     std::vector<std::array<std::uint32_t, 3>> visibleSpansByMeshKey_;

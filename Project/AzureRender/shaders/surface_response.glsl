@@ -1,3 +1,29 @@
+#define AZURE_FACE_SDF_V2 1
+
+vec2 faceSdfSampleUv(vec2 uv,float localLightX) {
+    return vec2(localLightX>0.0?uv.x:1.0-uv.x,uv.y);
+}
+vec3 faceSdfNormal(vec4 lightmap,float localLightX) {
+    float nx=(lightmap.b*2.0-1.0)*(localLightX>0.0?1.0:-1.0);
+    return normalize(vec3(nx,6.103515625e-5,1.0-abs(nx)));
+}
+// Inputs are in an orthonormal head frame. Vertical lights/cameras have a
+// defined horizontal fallback so poles cannot introduce NaNs into the ramp.
+float faceSdfRampCoordinate(vec4 lightmap,float geometryMix,vec3 localLight,
+    vec3 localCamera,float geometricNdotL,vec3 adjustment) {
+    vec3 horizontal=normalize(vec3(localLight.x,6.103515625e-5,localLight.z));
+    vec2 lightPlane=length(localLight.xz)>1e-6?normalize(localLight.xz):vec2(0,1);
+    vec2 cameraPlane=length(localCamera.xz)>1e-6?normalize(localCamera.xz):vec2(0,1);
+    float back=clamp(-dot(lightPlane,cameraPlane),0.0,1.0)
+        *clamp(-horizontal.z,0.0,1.0)*(1.0-adjustment.x);
+    float halfWrap=.5*clamp(horizontal.z+back*.5*(1.0-horizontal.z*horizontal.z)+adjustment.z,-1.0,1.0);
+    float threshold=clamp(.5-halfWrap,.001,.999);
+    float p=smoothstep(max(2.0*threshold-1.0,0.0),min(2.0*threshold,1.0),.5*(lightmap.r+lightmap.g));
+    float sdf=2.0*abs(p+halfWrap*ceil(halfWrap))-1.0;
+    float geometry=clamp(geometricNdotL+adjustment.y*adjustment.x,-1.0,1.0);
+    return clamp(.5+.5*mix(sdf,geometry,geometryMix),0.0,1.0);
+}
+
 float dielectricF0(float specular) {
     // UE's authored dielectric specular uses 0.5 for the usual 4% reflectance.
     return 0.08 * clamp(specular, 0.0, 1.0);

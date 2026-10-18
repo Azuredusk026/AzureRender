@@ -32,6 +32,7 @@ struct InstanceTransforms {
     uvec4 meta;
     vec4 faceLight;
     vec4 morph;
+    mat4 faceFrame;
 };
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
@@ -53,6 +54,7 @@ layout(location = 3) out vec3 worldPosition;
 layout(location = 4) out vec4 shadowPositions[4];
 layout(location = 8) out float eyebrowRegion;
 layout(location = 9) flat out vec4 instanceFaceDirection;
+layout(location = 10) flat out mat4 instanceFaceFrame;
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -74,6 +76,12 @@ vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset
 void main() {
     eyebrowRegion = browMask;
     instanceFaceDirection = instanceData.instances[gl_InstanceIndex].faceLight;
+    instanceFaceFrame=instanceData.instances[gl_InstanceIndex].faceFrame;
+    if((morphWeights.materialFeatures & 2048U)!=0U) {
+        mat4 model=instanceData.instances[gl_InstanceIndex].model;
+        instanceFaceFrame=model*morphWeights.gizmoTransform*inverse(model)*instanceFaceFrame;
+        for(int axis=0;axis<3;++axis)instanceFaceFrame[axis].xyz=normalize(instanceFaceFrame[axis].xyz);
+    }
     bool browOverlay =
         (morphWeights.materialFeatures & 64U) != 0U;
 #if defined(AZURE_COMPUTE_SKINNING)

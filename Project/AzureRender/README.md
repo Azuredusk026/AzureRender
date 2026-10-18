@@ -143,6 +143,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 单发射器已验证实际运动，支持[刚体节点动画](docs/runtime/rigid-node-animation.md)。
 53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
 角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
+脸部支持[双图距离场](docs/runtime/dual-face-sdf.md)与独立线性色带。
+原生局部算法已核验，完整角色着色仍待还原。
 透明表面支持[场景颜色折射](docs/runtime/scene-color-refraction.md)。
 中庭一个原生玻璃材质已进入[联合候选](docs/acceptance/nr/native-glass.md)。
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。

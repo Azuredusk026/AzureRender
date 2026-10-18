@@ -103,7 +103,7 @@ GPU 外观验收随联合场景进行。
 画面可见角色表面细节及上方建筑。
 完整专用着色与原生视觉误差门禁仍待验收。
 联合证据见[上层几何采样](upper-geometry.md)。
-面部公式与契约缺口见[脸部 SDF 证据](character-face-sdf.md)。
+脸部双图算法与原生待项见[脸部 SDF 证据](character-face-sdf.md)。
 
 ## 验证记录
 

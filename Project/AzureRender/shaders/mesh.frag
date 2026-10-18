@@ -125,6 +125,7 @@ layout(location = 3) in vec3 worldPosition;
 layout(location = 4) in vec4 shadowPositions[4];
 layout(location = 8) in float eyebrowRegion;
 layout(location = 9) flat in vec4 instanceFaceDirection;
+layout(location = 10) flat in mat4 instanceFaceFrame;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -376,6 +377,7 @@ void main() {
         0.62,
         texture(AZ_TEX_STYLE_MASK, textureCoordinate).r)
         * styleStrength;
+    if(materialFeatureEnabled(2048U)>0.5)styleMask=0.0;
     float normalVariance=max(1.0-normalSample.a,0.0);
     vec3 dx=dFdx(shadedNormal),dy=dFdy(shadedNormal);
     normalVariance+=min(dot(dx,dx)+dot(dy,dy),.25);
@@ -536,7 +538,20 @@ void main() {
         rampCoordinate,
         mix(0.44, 0.74, faceIllumination),
         faceSdfWeight);
-    vec3 classRamp = sampleToonRamp(rampCoordinate);
+    bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
+    if(dualFaceSdf) {
+        toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
+        mat3 headFrame=mat3(instanceFaceFrame);
+        vec3 localLight=transpose(headFrame)*lightDirection;
+        vec3 localCamera=transpose(headFrame)*(-camera.cameraForward.xyz);
+        faceSdfSample=textureLod(AZ_TEX_FACE_SDF,faceSdfSampleUv(textureCoordinate,localLight.x),0.0);
+        vec4 faceMask=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0);
+        rampCoordinate=faceSdfRampCoordinate(faceSdfSample,faceMask.g,localLight,localCamera,
+            dot(shadedNormal,lightDirection),material.hairParameters.xyz);
+        faceIllumination=rampCoordinate;
+        faceSdfWeight=0.0;
+    }
+    vec3 classRamp = dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0).rgb:sampleToonRamp(rampCoordinate);
     vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
@@ -662,7 +677,7 @@ void main() {
         tintedDiffuse,
         huePreservedHair,
         hairActive * 0.80);
-    float faceActive = material.materialClass == 2U ? 1.0 : 0.0;
+    float faceActive = material.materialClass == 2U && !dualFaceSdf ? 1.0 : 0.0;
     tintedDiffuse *= mix(vec3(1.0), vec3(0.86, 0.77, 0.74), faceActive);
     tintedDiffuse *= mix(
         vec3(1.0),
