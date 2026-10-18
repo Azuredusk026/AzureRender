@@ -1,13 +1,65 @@
 #include "assets/GltfLoader.hpp"
 #include "render/DeformedBounds.hpp"
+#include <cstring>
+#include <nlohmann/json.hpp>
 #include <cmath>
 #include <future>
 #include <iostream>
 #include <stdexcept>
 
 void check(bool condition, const char* message) { if (!condition) throw std::runtime_error(message); }
+std::string rigidFixture(bool mixedSkin=false) {
+    std::string json=R"({"asset":{"version":"2.0"},"buffers":[{"byteLength":92}],"bufferViews":[{"buffer":0,"byteOffset":0,"byteLength":36},{"buffer":0,"byteOffset":36,"byteLength":8},{"buffer":0,"byteOffset":44,"byteLength":24},{"buffer":0,"byteOffset":68,"byteLength":24}],"accessors":[{"bufferView":0,"componentType":5126,"count":3,"type":"VEC3","min":[0,0,0],"max":[1,1,0]},{"bufferView":1,"componentType":5126,"count":2,"type":"SCALAR","min":[0],"max":[2]},{"bufferView":2,"componentType":5126,"count":2,"type":"VEC3"},{"bufferView":3,"componentType":5126,"count":2,"type":"VEC3"}],"meshes":[{"primitives":[{"attributes":{"POSITION":0},"mode":4}]}],"nodes":[{"translation":[2,0,0],"children":[1]},{"mesh":0,"translation":[0,3,0]},{"mesh":0,"translation":[-5,0,0]}],"scenes":[{"nodes":[0,2]}],"scene":0,"animations":[{"samplers":[{"input":1,"output":2},{"input":1,"output":3,"interpolation":"STEP"}],"channels":[{"sampler":0,"target":{"node":0,"path":"translation"}},{"sampler":1,"target":{"node":1,"path":"scale"}}]}]})";
+    const float values[]={0,0,0, 1,0,0, 0,1,0, 0,2, 2,0,0, 4,0,0, 1,1,1, 0,0,0};
+    std::string binary(reinterpret_cast<const char*>(values),sizeof(values));
+    if(mixedSkin) {
+        auto source=nlohmann::json::parse(json);
+        source["skins"]=nlohmann::json::array({{{"joints",{0}}}});
+        source["nodes"][2]["skin"]=0;
+        source["bufferViews"].push_back({{"buffer",0},{"byteOffset",92},{"byteLength",12}});
+        source["bufferViews"].push_back({{"buffer",0},{"byteOffset",104},{"byteLength",48}});
+        source["accessors"].push_back({{"bufferView",4},{"componentType",5121},{"count",3},{"type","VEC4"}});
+        source["accessors"].push_back({{"bufferView",5},{"componentType",5126},{"count",3},{"type","VEC4"}});
+        source["meshes"][0]["primitives"][0]["attributes"]["JOINTS_0"]=4;
+        source["meshes"][0]["primitives"][0]["attributes"]["WEIGHTS_0"]=5;
+        binary.append(12,'\0');
+        const float weights[]={1,0,0,0,1,0,0,0,1,0,0,0};
+        binary.append(reinterpret_cast<const char*>(weights),sizeof(weights));
+        source["buffers"][0]["byteLength"]=binary.size();json=source.dump();
+    }
+    while(json.size()%4)json+=' ';
+    std::string result;
+    const auto append=[&](std::uint32_t word){result.append(reinterpret_cast<const char*>(&word),4);};
+    append(0x46546c67);append(2);append(static_cast<std::uint32_t>(28+json.size()+binary.size()));
+    append(static_cast<std::uint32_t>(json.size()));append(0x4e4f534a);result+=json;
+    append(static_cast<std::uint32_t>(binary.size()));append(0x004e4942);result+=binary;
+    return result;
+}
 int main() {
     try {
+        const auto rigid=loadEmbeddedGltfAsset(rigidFixture(),true);
+        const auto rigidBind=bindAnimationPose(rigid);
+        const auto moving=sampleAnimationPose(rigid,0,1,false);
+        const auto moved=azurerender::deformedVertexPosition(rigid,0,&moving,{0,0});
+        check(std::abs(moved[0]-3)<1e-6F && std::abs(moved[1]-3)<1e-6F,
+            "Unskinned mesh must follow its animated parent on the deformation path");
+        check(azurerender::deformedVertexPosition(rigid,3,&moving,{0,0})==std::array<float,3>{-5,0,0},
+            "Independent static mesh must preserve its bind transform");
+        const auto vanished=sampleAnimationPose(rigid,0,2,false);
+        check(azurerender::deformedVertexPosition(rigid,0,&vanished,{0,0})==azurerender::deformedVertexPosition(rigid,1,&vanished,{0,0}),
+            "STEP zero scale must collapse rigid geometry at the lifetime boundary");
+        check(azurerender::deformedVertexPosition(rigid,0,&rigidBind,{0,0})==std::array<float,3>{2,3,0},
+            "Rigid bind pose must preserve authored placement");
+        const auto rigidBounds=azurerender::JointBounds::build(rigid).evaluate(rigid,{0,0},moving.jointMatrices,&moving);
+        check(rigidBounds.maximum[0]>=4 && rigidBounds.minimum[0]<=-5,
+            "Animated rigid geometry must contribute its current bounds");
+        const auto mixed=loadEmbeddedGltfAsset(rigidFixture(true),true);
+        const auto mixedPose=sampleAnimationPose(mixed,0,1,false);
+        check(mixed.vertices[0].joints[0]==1 && mixed.vertices[3].joints[0]==0,
+            "Rigid palette entries must preserve real skin joint indices");
+        check(azurerender::deformedVertexPosition(mixed,0,&mixedPose,{0,0})==std::array<float,3>{3,3,0}
+            && azurerender::deformedVertexPosition(mixed,3,&mixedPose,{0,0})==std::array<float,3>{3,0,0},
+            "A mixed asset must animate rigid children and real skin through one palette");
         LoadedAsset asset;
         asset.hasSkin = true;
         asset.nodes.resize(2);

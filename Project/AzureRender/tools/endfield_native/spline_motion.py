@@ -74,3 +74,36 @@ def constant_timing(total_length, velocity, lifetime_fraction, emission_rate, si
     return {'simulation_lifetime': lifetime, 'wall_lifetime': lifetime / simulation_speed,
             'wall_emission_interval': 1 / (emission_rate * simulation_speed),
             'prewarm_count': math.ceil(prewarm)}
+
+
+def periodic_prewarm(lifetime, emission_rate, simulation_speed, wall_time):
+    """Bake a deterministic prewarmed constant-emission pool into reusable slots.
+
+    A slot's period includes its inactive gap; wrapping at lifetime would change
+    the source emission rate. Ages use simulation seconds, period wall seconds.
+    Phase zero is authored for the candidate; native live phase remains unknown.
+    Random values at later births and per-object alpha are outside this helper.
+    """
+    _number(lifetime, 'simulation lifetime')
+    _number(emission_rate, 'emission rate', positive=True)
+    _number(simulation_speed, 'simulation speed', positive=True)
+    _number(wall_time, 'wall time')
+    slots = lifetime * emission_rate
+    if not math.isfinite(slots) or slots > 1000000:
+        raise ValueError('periodic pool exceeds importer budget')
+    count = math.ceil(slots)
+    if not count:
+        return {'period': 0, 'ages': []}
+    period = count / emission_rate
+    wall_period = period / simulation_speed
+    time = wall_time * simulation_speed
+    for name, value in [('simulation period', period), ('wall period', wall_period), ('time', time)]:
+        _number(value, name, positive=name != 'time')
+    phase = math.fmod(time, period)
+    ages = []
+    for index in range(count):
+        offset = index / emission_rate
+        remaining = period - offset
+        age = phase-remaining if phase >= remaining else phase+offset
+        ages.append(age if age < lifetime else None)
+    return {'period': wall_period, 'ages': ages}

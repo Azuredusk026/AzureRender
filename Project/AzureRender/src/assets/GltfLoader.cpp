@@ -2,6 +2,7 @@
 #include "assets/image/ImageCodec.hpp"
 #include "BrowRegions.hpp"
 #include "scene/TransformParity.hpp"
+#include "scene/TransformEditing.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
@@ -1425,6 +1426,29 @@ void loadJointMatrices(
     asset.hasSkin = true;
 }
 
+// Rigid mesh nodes share the deformation palette with real skin joints.
+// Vertices retain their baked bind placement; pose * inverse(bind) supplies
+// only the node's animated delta. Existing skin indices remain unchanged.
+std::vector<int> loadRigidNodeJoints(const tinygltf::Model& model,
+    const std::vector<Matrix4>& world, LoadedAsset& asset) {
+    std::vector<int> mapping(model.nodes.size(),-1);
+    if(model.animations.empty() && model.skins.empty())return mapping;
+    for(std::size_t node=0;node<model.nodes.size();++node) {
+        if(model.nodes[node].mesh<0 || model.nodes[node].skin>=0)continue;
+        if(!asset.hasSkin)asset.jointMatrices.clear(); // Remove fallback identity.
+        std::array<float,16> bind{};
+        std::transform(world[node].begin(),world[node].end(),bind.begin(),
+            [](double v){return static_cast<float>(v);});
+        const auto inverse=azurerender::scene::inverseAffine(bind);
+        mapping[node]=static_cast<int>(asset.jointMatrices.size());
+        asset.jointNodes.push_back(static_cast<std::uint32_t>(node));
+        asset.inverseBindMatrices.push_back(inverse);
+        asset.jointMatrices.push_back({1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1});
+        asset.hasSkin=true;
+    }
+    return mapping;
+}
+
 void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
     asset.defaultMorphWeights.resize(model.nodes.size());
     for(std::size_t i=0;i<model.nodes.size();++i){
@@ -1479,6 +1503,7 @@ void appendPrimitive(
     const bool skinned,
     const std::uint32_t fallbackMaterial,
     const std::uint32_t nodeIndex,
+    const int rigidJoint,
     LoadedAsset& asset) {
     if (primitive.mode != TINYGLTF_MODE_TRIANGLES) {
         throw std::runtime_error("Only triangle-list glTF primitives are supported");
@@ -1517,6 +1542,10 @@ void appendPrimitive(
     if (!skinned) {
         for (std::size_t i=0;i<vertices.size();++i) {
             transformVertex(vertices[i], transform, &directionLengths[i]);
+            if(rigidJoint>=0) {
+                vertices[i].joints={static_cast<std::uint32_t>(rigidJoint),0,0,0};
+                vertices[i].weights={1,0,0,0};
+            }
         }
         if (azurerender::scene::mirroredTransform(transform)) {
             for (std::size_t i=0; i+2<indices.size(); i+=3)
@@ -1525,7 +1554,7 @@ void appendPrimitive(
     } else {
         for (const AssetVertex& vertex : vertices) {
             for (const std::uint32_t joint : vertex.joints) {
-                if (joint >= asset.jointMatrices.size()) {
+                if (joint >= model.skins.at(0).joints.size()) {
                     throw std::runtime_error(
                         "JOINTS_0 index exceeds the glTF skin joint count");
                 }
@@ -1613,6 +1642,7 @@ void visitNode(
     const int nodeIndex,
     const Matrix4& parentTransform,
     const std::uint32_t fallbackMaterial,
+    const std::vector<int>& rigidJoints,
     LoadedAsset& asset) {
     const auto& node = model.nodes.at(static_cast<std::size_t>(nodeIndex));
     const Matrix4 worldTransform = multiply(parentTransform, nodeTransform(node));
@@ -1631,11 +1661,12 @@ void visitNode(
                 skinned,
                 fallbackMaterial,
                 static_cast<std::uint32_t>(nodeIndex),
+                rigidJoints.at(static_cast<std::size_t>(nodeIndex)),
                 asset);
         }
     }
     for (const int child : node.children) {
-        visitNode(model, child, worldTransform, fallbackMaterial, asset);
+        visitNode(model, child, worldTransform, fallbackMaterial, rigidJoints, asset);
     }
 }
 
@@ -1881,13 +1912,14 @@ LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* auth
             [](const double value) { return static_cast<float>(value); });
     }
     loadJointMatrices(model, nodeWorldTransforms, asset);
+    const auto rigidJoints=loadRigidNodeJoints(model,nodeWorldTransforms,asset);
     loadAnimations(model, asset);
 
     if (!model.scenes.empty()) {
         const int sceneIndex = model.defaultScene >= 0 ? model.defaultScene : 0;
         const auto& scene = model.scenes.at(static_cast<std::size_t>(sceneIndex));
         for (const int node : scene.nodes) {
-            visitNode(model, node, identityMatrix(), fallbackMaterial, asset);
+            visitNode(model, node, identityMatrix(), fallbackMaterial, rigidJoints, asset);
         }
     } else {
         for (std::size_t index = 0; index < model.nodes.size(); ++index) {
@@ -1897,6 +1929,7 @@ LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* auth
                     static_cast<int>(index),
                     identityMatrix(),
                     fallbackMaterial,
+                    rigidJoints,
                     asset);
             }
         }

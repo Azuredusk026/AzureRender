@@ -1,4 +1,5 @@
 import unittest
+from endfield_native import spline_motion
 
 try:
     from endfield_native.spline_motion import advance_emission, sample_distance, constant_timing
@@ -56,6 +57,35 @@ class SplineMotionTests(unittest.TestCase):
     def test_emission_work_is_bounded(self):
         with self.assertRaises(ValueError):
             advance_emission(0, 1e10, 1, 1)
+
+    def test_periodic_pool_preserves_native_emission_interval_and_expiry(self):
+        evaluate = getattr(spline_motion, 'periodic_prewarm', None)
+        self.assertIsNotNone(evaluate, 'periodic source schedule is missing')
+        # A five-second life and two-second emission interval require three
+        # slots. Each slot stays absent for one second before its next birth.
+        self.assertEqual(evaluate(5, .5, 1, 0), {'period': 6, 'ages': [0, 2, 4]})
+        self.assertEqual(evaluate(5, .5, 1, 1)['ages'], [1, 3, None])
+        self.assertEqual(evaluate(5, .5, 1, 2)['ages'], [2, 4, 0])
+        self.assertEqual(evaluate(5, .5, 2, 1)['ages'], [2, 4, 0])
+        self.assertEqual(evaluate(5, .5, 1, 6)['ages'], [0, 2, 4])
+
+    def test_periodic_pool_agrees_with_incremental_birth_and_death(self):
+        evaluate = getattr(spline_motion, 'periodic_prewarm', None)
+        self.assertIsNotNone(evaluate)
+        ages, remainder = [0, 2, 4], 0
+        for step in range(1, 33):
+            births, remainder = advance_emission(remainder, .25, 2, .5)
+            ages = [a+.5 for a in ages if a+.5 < 5] + births
+            sampled = evaluate(5, .5, 2, step*.25)['ages']
+            self.assertEqual(sorted(ages), sorted(a for a in sampled if a is not None))
+
+    def test_periodic_pool_empty_and_invalid_input(self):
+        evaluate = getattr(spline_motion, 'periodic_prewarm', None)
+        self.assertIsNotNone(evaluate)
+        self.assertEqual(evaluate(0, 2, 1, 10), {'period': 0, 'ages': []})
+        for values in [(5, 0, 1, 0), (5, .5, 0, 0), (5, .5, 1, -1),
+                       (float('nan'), .5, 1, 0), (1e10, 1, 1, 0), (5, .5, 1e300, 1e300)]:
+            with self.assertRaises(ValueError): evaluate(*values)
 
 
 if __name__ == '__main__':
