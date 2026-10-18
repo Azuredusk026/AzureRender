@@ -3,8 +3,9 @@
 Evidence: native IrradianceVolumeAtlasBakeV3CS DXBC region upload and
 IrradianceVolumeIndirectUpdateV2CS spatial-hash lookup. V3 file-range,
 occupancy and hash identities were checked on both source scene branches.
-Amplitude is the packed unsigned RGB term, not evaluated irradiance.
-World-space lattice selection and scenario activation remain explicit inputs.
+V3 clipmap update establishes world lattice selection and directional atlas
+byte normalization. Amplitude is the packed RGB term, not evaluated irradiance.
+Scenario selection and final normal-dependent evaluation remain explicit gaps.
 """
 from __future__ import annotations
 
@@ -91,6 +92,54 @@ def decode_amplitude(sample: bytes) -> list[float]:
     return result
 
 
+def world_address(position: tuple[float, float, float], lod: int) -> dict:
+    """Address one V3 lattice sample, before interpolation/fallback.
+
+    Static source: IrradianceVolumeUpdateV3CS Full/PartialUpdateClipmap0/1/2.
+    The native world-domain guard is strict abs(position) < 2048.
+    """
+    if (len(position) != 3 or any(not math.isfinite(x) or abs(x) >= 2048 for x in position)
+            or type(lod) is not int or not 0 <= lod <= 2):
+        raise ValueError('Invalid V3 irradiance world position or LOD')
+    q = [math.floor(2 * x + .5) + 4096 for x in position]
+    outer = [(x >> (6 + lod)) << lod for x in q]
+    brick = [(x >> (2 + 2 * lod)) & ((16 >> lod) - 1) for x in q]
+    local = [(x >> (2 * lod)) & 3 for x in q]
+    bit = sum(((value >> b) & 1) << (3 * b + axis)
+              for axis, value in enumerate(local) for b in range(2))
+    return dict(tile=outer + [lod], brick=brick, local=local,
+                occupancy_bit=bit, quantized=q)
+
+
+def query_world(directory: Path, position: tuple[float, float, float], lod: int,
+                file_index: int) -> dict:
+    """Read exact source bytes for an explicitly selected file and LOD.
+
+    Missing samples return None; clipmap fallback, region overrides and
+    trilinear interpolation belong to the consuming renderer.
+    """
+    address = world_address(position, lod)
+    index = parse_index((directory / 'index.bytes').read_bytes())
+    if type(file_index) is not int or not 0 <= file_index < len(index['files']):
+        raise ValueError('Irradiance file selection is outside index')
+    rows = [row for row in index['tiles']
+            if row['file_index'] == file_index and row['coordinate'] == address['tile']]
+    if len(rows) > 1:
+        raise ValueError('Ambiguous irradiance world tile')
+    result = dict(world=list(position), lod=lod, file_index=file_index, address=address,
+                  source_file=index['files'][file_index], tile_index=None, sample=None)
+    if rows:
+        row = rows[0]
+        with (directory / result['source_file']).open('rb') as source:
+            source.seek(row['file_offset'])
+            tile = parse_sparse_tile(source.read(row['bytes']), row['header_bytes'])
+        result['tile_index'] = row['index']
+        result['sample'] = tile.sample(tuple(address['brick']), address['occupancy_bit'])
+        if result['sample']:
+            result['sample']['file_byte_offset'] = row['file_offset'] + result['sample']['byte_offset']
+    return result
+
+
 @dataclass
 class SparseTile:
     data: bytes
@@ -113,6 +162,7 @@ class SparseTile:
         raw = self.data[offset:offset + 16]
         return dict(brick=list(brick), occupancy_bit=bit, sample_rank=rank, byte_offset=offset,
                     amplitude=decode_amplitude(raw), directional_rgba8=list(raw[4:]),
+                    directional_atlas_unorm=[[x / 255 for x in raw[i:i + 4]] for i in (4, 8, 12)],
                     raw_sha256=hashlib.sha256(raw).hexdigest())
 
 
@@ -193,7 +243,19 @@ if __name__ == '__main__':
     parser.add_argument('--tile', type=int)
     parser.add_argument('--brick', type=int, nargs=3)
     parser.add_argument('--bit', type=int)
+    parser.add_argument('--world', type=float, nargs=3)
+    parser.add_argument('--lod', type=int)
+    parser.add_argument('--file-index', type=int)
     args = parser.parse_args()
-    result = inspect_directory(args.directory, args.tile, tuple(args.brick) if args.brick else None, args.bit)
+    if args.world is not None:
+        if args.lod is None or args.file_index is None or any(x is not None for x in (args.tile, args.brick, args.bit)):
+            parser.error('--world requires --lod and --file-index, with no tile/brick/bit query')
+        result = query_world(args.directory, tuple(args.world), args.lod, args.file_index)
+    else:
+        if args.lod is not None or args.file_index is not None:
+            parser.error('--lod and --file-index require --world')
+        result = inspect_directory(args.directory, args.tile, tuple(args.brick) if args.brick else None, args.bit)
     args.output.write_text(json.dumps(result, indent=2), encoding='utf-8')
-    print(json.dumps(result['counts']))
+    summary = result['counts'] if 'counts' in result else dict(
+        tile_index=result['tile_index'], found=result['sample'] is not None)
+    print(json.dumps(summary))

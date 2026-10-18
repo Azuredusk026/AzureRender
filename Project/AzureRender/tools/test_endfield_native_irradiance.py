@@ -1,6 +1,12 @@
 import struct
+import json
+import subprocess
+import sys
+from pathlib import Path
+import tempfile
 import unittest
 
+from endfield_native import irradiance
 from endfield_native.irradiance import decode_amplitude, parse_sparse_tile, parse_index
 
 
@@ -29,6 +35,51 @@ def index():
 
 
 class IrradianceTests(unittest.TestCase):
+    def test_world_address_matches_v3_lods_and_morton(self):
+        self.assertTrue(callable(getattr(irradiance, 'world_address', None)))
+        a = irradiance.world_address((1.5, 1.5, 1.5), 0)
+        self.assertEqual(a, dict(tile=[64, 64, 64, 0], brick=[0, 0, 0],
+                                 local=[3, 3, 3], occupancy_bit=63,
+                                 quantized=[4099, 4099, 4099]))
+        self.assertEqual(irradiance.world_address((2, 4, 6), 1)['local'], [1, 2, 3])
+        self.assertEqual(irradiance.world_address((8, 16, 24), 2)['local'], [1, 2, 3])
+        self.assertEqual(irradiance.world_address((-.26, 0, 0), 0)['tile'], [63, 64, 64, 0])
+        self.assertEqual(irradiance.world_address((-.25, 0, 0), 0)['tile'], [64, 64, 64, 0])
+        for position, lod in (((float('nan'), 0, 0), 0), ((2048, 0, 0), 0),
+                              ((0, 0), 0), ((0, 0, 0), 3)):
+            with self.assertRaises(ValueError): irradiance.world_address(position, lod)
+
+    def test_world_query_preserves_file_selection_and_source_bytes(self):
+        self.assertTrue(callable(getattr(irradiance, 'query_world', None)))
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'index.bytes').write_bytes(index())
+            (root / 'iv_0_0.bytes').write_bytes(tile())
+            second = bytearray(tile()); second[28:44] = sample(4)
+            (root / 'iv_123_0.bytes').write_bytes(second)
+            result = irradiance.query_world(root, (0, 0, 0), 0, 1)
+            self.assertEqual(result['source_file'], 'iv_123_0.bytes')
+            self.assertEqual(result['sample']['amplitude'], [4., 4., 4.])
+            self.assertEqual(result['sample']['file_byte_offset'], 28)
+            self.assertEqual(result['sample']['directional_atlas_unorm'],
+                             [[x / 255 for x in range(i, i + 4)] for i in (0, 4, 8)])
+            self.assertIsNone(irradiance.query_world(root, (.5, 0, 0), 0, 1)['sample'])
+            self.assertIsNone(irradiance.query_world(root, (32, 0, 0), 0, 1)['sample'])
+            with self.assertRaises(ValueError): irradiance.query_world(root, (0, 0, 0), 0, 2)
+
+    def test_cli_keeps_directory_inspection_and_world_query(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'index.bytes').write_bytes(index())
+            for name in ('iv_0_0.bytes', 'iv_123_0.bytes'):
+                (root / name).write_bytes(tile())
+            output = root / 'query.json'
+            for extra in ([], ['--world', '0', '0', '0', '--lod', '0', '--file-index', '1']):
+                result = subprocess.run([sys.executable, '-m', 'endfield_native.irradiance', str(root),
+                                         '--output', str(output), *extra], capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIsInstance(json.loads(output.read_text()), dict)
+
     def test_packed_hdr(self):
         self.assertEqual(decode_amplitude(sample(2)), [2., 2., 2.])
         self.assertEqual(decode_amplitude(sample(0)), [0., 0., 0.])
