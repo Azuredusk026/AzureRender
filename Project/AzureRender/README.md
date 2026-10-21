@@ -133,6 +133,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 完整着色与原生环境光照还原仍待验收。
 通用聚光与显式场景照明通过公开 GPU 夹具。
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
+局部灯支持[显式距离衰减](docs/runtime/local-light-attenuation.md)。
+原生指数来源与公共验证见[衰减证据](docs/acceptance/nr/light-attenuation.md)。
 独立局部反射支持原作层级、盒投影与体积混合。
 公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
 中庭反射候选已完成四帧采样，整体照明仍待还原。

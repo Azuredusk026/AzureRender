@@ -17,7 +17,7 @@ int main(int argc,char** argv) try {
         if(layout)backend.destroyPipelineLayout(layout);if(pool)backend.destroyDescriptorPool(pool);
         if(setLayout)backend.destroyDescriptorSetLayout(setLayout);host.allocator.destroyBuffer(output);
     });
-    constexpr unsigned probeCount=52;
+    constexpr unsigned probeCount=60;
     output=host.allocator.createBuffer(probeCount*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memset(output.mapped,0xCD,output.size);host.allocator.flush(output,0,output.size);
     setLayout=backend.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
@@ -37,7 +37,8 @@ int main(int argc,char** argv) try {
     const double pi=3.141592653589793;
     const double expected[]={0,.04,.04/(4*pi*std::pow(.2,4)),.04/(4*pi*std::pow(.8,4)),0,0, 1,.875,.8125, 1,.875,.8125, 1,1,1, 1,1,1, 1,1,1, 1,1,1,
         0,1,.5,.1,.75,.5,1,.7,.55,.5,.9,.1,-.004,.004,
-        1,0,.15625,.15625,.5,.8,.475,.2,.8,.8,std::sqrt(.5),6.103515625e-5/std::sqrt(.5),std::sqrt(.5),.5};
+        1,0,.15625,.15625,.5,.8,.475,.2,.8,.8,std::sqrt(.5),6.103515625e-5/std::sqrt(.5),std::sqrt(.5),.5,
+        1,std::pow(.9999,2)/2,std::pow(.9375,2)/26,0,1,std::pow(.99,3.5),std::pow(.75,3.5),0};
     bool passed=true;
     for(unsigned i=0;i<probeCount;++i){
         std::cout<<"Surface probe "<<i<<": "<<values[i]<<" (expected "<<expected[i]<<")\n";

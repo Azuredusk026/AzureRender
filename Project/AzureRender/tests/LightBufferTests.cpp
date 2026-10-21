@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
+#include <limits>
 
 int main() { try {
     azurerender::LightBuffer buffer;
@@ -43,4 +44,14 @@ int main() { try {
     spot.shape.validate();
     if(spot.shape.angularWeight({0,0,-1})!=1.F || spot.shape.angularWeight({1,0,0})!=0.F)
         throw std::runtime_error("Equal inner and outer cones must produce a hard edge");
+    spot.shape.falloff = azurerender::LightFalloff::RangePower;
+    spot.shape.falloffExponent = 3.5F;
+    buffer.setLights({spot});
+    if(buffer.gpuData()[0].coneType[2]!=2.F || buffer.gpuData()[0].coneType[3]!=3.5F)
+        throw std::runtime_error("GPU must receive the selected distance model and exponent");
+    for(float invalid : {0.F,-1.F,65.F,std::numeric_limits<float>::infinity()}) {
+        spot.shape.falloffExponent=invalid;rejected=false;
+        try {buffer.setLights({spot});} catch(const std::invalid_argument&) {rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid light falloff exponent must be rejected");
+    }
 } catch(const std::exception& error) { std::cerr<<error.what()<<'\n';return 1; } }

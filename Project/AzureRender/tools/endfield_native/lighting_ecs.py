@@ -30,6 +30,7 @@ def decode_buffers(common, light):
         intensity=scalar(common,16),color_temperature=scalar(common,20),
         range=scalar(light,24),spot_angle=scalar(light,36),
         inner_spot_angle=scalar(light,40),linear_length=scalar(light,144),
+        falloff_exponent=scalar(light,444),
         matrix=matrix,position=matrix[12:15],direction=matrix[8:11])
     for key,raw,offset in (('use_color_temperature',common,24),('enable_obb',light,92),
             ('is_sun_source',light,90),('shadow_only',light,91)):
@@ -38,6 +39,14 @@ def decode_buffers(common, light):
     if result['intensity']<0 or result['range']<0:
         raise ValueError('Negative ECS light intensity or range')
     return result
+
+
+def render_falloff(exponent):
+    """Map the compiled punctual falloff branches to the renderer contract."""
+    if not math.isfinite(exponent) or exponent==0 or exponent>64:
+        raise ValueError('Unsupported native light falloff exponent')
+    return dict(falloff='smooth-inverse-square' if exponent<0 else 'range-power',
+                falloffExponent=2 if exponent<0 else exponent)
 
 
 def merge_rows(rows):

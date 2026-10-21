@@ -6,6 +6,7 @@
 #endif
 #include "shadow_compare.glsl"
 #include "surface_response.glsl"
+#include "light_attenuation.glsl"
 
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
@@ -607,9 +608,7 @@ void main() {
         float distanceSquared = dot(toLight, toLight);
         float distanceToLight = sqrt(distanceSquared);
         float lightRadius = max(light.positionRadius.w, 0.001);
-        float rangeFalloff = clamp(1.0 - distanceToLight / lightRadius, 0.0, 1.0);
-        float attenuation = rangeFalloff * rangeFalloff
-            / (1.0 + distanceSquared * 0.12);
+        float attenuation=localLightDistanceWeight(distanceSquared,lightRadius,light.coneType.z,light.coneType.w);
         vec3 pointDirection = toLight / max(distanceToLight, 0.001);
         if (light.coneType.y > 0.5) {
             float cone = clamp((dot(-pointDirection, light.directionOuter.xyz)

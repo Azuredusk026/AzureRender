@@ -6,6 +6,7 @@
 
 namespace azurerender {
 enum class LightKind { Point = 0, Spot = 1 };
+enum class LightFalloff { Legacy = 0, SmoothInverseSquare = 1, RangePower = 2 };
 
 // Cone angles are half angles in radians. Direction points away from the emitter.
 // Scene documents store local direction; render snapshots store world direction.
@@ -14,10 +15,17 @@ struct LightShape {
     std::array<float, 3> direction{0, 0, -1};
     float innerCone = 0;
     float outerCone = .785398163F;
+    LightFalloff falloff = LightFalloff::Legacy;
+    float falloffExponent = 2;
 
     void validate() const {
         if (type != LightKind::Point && type != LightKind::Spot)
             throw std::invalid_argument("Unknown light type");
+        if (falloff != LightFalloff::Legacy && falloff != LightFalloff::SmoothInverseSquare
+            && falloff != LightFalloff::RangePower)
+            throw std::invalid_argument("Unknown light falloff");
+        if (!std::isfinite(falloffExponent) || falloffExponent<=0 || falloffExponent>64)
+            throw std::invalid_argument("Light falloff exponent must be in (0,64]");
         float length = 0;
         for (const float value : direction) {
             if (!std::isfinite(value)) throw std::invalid_argument("Non-finite light direction");

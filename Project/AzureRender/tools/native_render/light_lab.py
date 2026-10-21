@@ -6,6 +6,7 @@ import math
 from pathlib import Path
 import struct
 import subprocess
+import re
 
 
 def generate(root, mode):
@@ -31,6 +32,9 @@ def generate(root, mode):
         {'id':'light','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}}]
     lights = [] if mode=='dark' else [{'id':'light','nodeId':'light','intensity':3,'radius':10,
         'shape':{'type':'spot' if mode=='spot' else 'point','direction':[0,0,-1],'innerCone':.25,'outerCone':.5}}]
+    if mode in ('smooth-inverse-square','range-power'):
+        lights[0]['intensity']=.3
+        lights[0]['shape'].update(falloff=mode,falloffExponent=3.5)
     write('level.azurelevel', {'schemaVersion':1,'id':'light-lab','resources':[{'id':'plane','asset':'assets:/plane.gltf'}],
         'nodes':nodes,'lights':lights,'renderSettings':{'sceneLighting':True,'skyIntensity':0,
         'stylized':False,'background':False,'platform':False,'innerOutline':False,'silhouetteOutline':False,
@@ -49,7 +53,7 @@ def main():
     output = args.output.resolve()
     metrics = {}
     pictures = {}
-    for mode in ('dark','point','spot'):
+    for mode in ('dark','point','spot','smooth-inverse-square','range-power'):
         folder = output / mode
         if not args.verify_only:
             generate(folder, mode)
@@ -60,6 +64,11 @@ def main():
         if not args.verify_only:
             with (folder/'player.log').open('w', encoding='utf-8') as log:
                 subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=120)
+        log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
+        assert not re.search(r'VUID-|Validation Error|\[error\]',log),mode
+        assert 'Allocator after unload: buffers=0 images=0' in log,mode
+        runtime=json.loads((folder/'runtime.json').read_text())
+        assert not runtime['scriptErrors'] and not runtime['presentationErrors'],mode
         picture = Image.open(folder/'frames/frame_000000.png').convert('RGB')
         pictures[mode] = picture
         metrics[mode] = {'center':picture.getpixel((128,128)), 'corner':picture.getpixel((40,40)),
@@ -87,6 +96,18 @@ def main():
     assert max(metrics['spot']['center'])>0 and max(metrics['spot']['corner'])==0, metrics
     assert max(errors)<.01, metrics
     assert metrics['boundary_error_pixels']<=1, metrics
+    distance_errors={}
+    for model in ('smooth-inverse-square','range-power'):
+        distance_errors[model]=[]
+        for x in (128,150,175,205):
+            squared=4+(((x+.5)/256*8)-4)**2+(((128+.5)/256*8)-4)**2
+            legacy=(1-math.sqrt(squared)/10)**2/(1+squared*.12)
+            target=(1-(squared/100)**2)**2/(squared+1) if model=='smooth-inverse-square' else (1-squared/100)**3.5
+            measured=10*linear(pictures[model].getpixel((x,128))[0])/linear(pictures['point'].getpixel((x,128))[0])
+            distance_errors[model].append(abs(measured-target/legacy)/(target/legacy))
+        assert max(distance_errors[model])<.03,(model,distance_errors[model])
+    metrics['distance_relative_errors']=distance_errors
+    (output/'metrics.json').write_text(json.dumps(metrics,indent=2))
     print(json.dumps(metrics,indent=2))
 
 

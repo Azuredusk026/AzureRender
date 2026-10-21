@@ -15,6 +15,7 @@ def fixture():
     struct.pack_into('<ff',light,36,100,50)
     struct.pack_into('<f',light,144,-1)
     light[92]=1
+    struct.pack_into('<f',light,444,-1)
     # Native records contain legitimate packed sentinels outside decoded fields.
     struct.pack_into('<I',light,324,0x7fc00000)
     return bytes(common),bytes(light)
@@ -29,6 +30,20 @@ class EcsLightTests(unittest.TestCase):
         self.assertEqual(value['position'],[3,4,5]);self.assertEqual(value['direction'],[0,0,1])
         self.assertTrue(value['enable_obb']);self.assertTrue(value['use_color_temperature'])
         self.assertAlmostEqual(value['color'][0],.8)
+        self.assertEqual(value['falloff_exponent'],-1)
+
+    def test_native_falloff_exponent(self):
+        common,light=fixture();bad=bytearray(light)
+        struct.pack_into('<f',bad,444,6.24)
+        self.assertAlmostEqual(lighting_ecs.decode_buffers(common,bad)['falloff_exponent'],6.24,places=5)
+        struct.pack_into('<f',bad,444,float('nan'))
+        with self.assertRaises(ValueError):lighting_ecs.decode_buffers(common,bad)
+
+    def test_render_falloff_mapping(self):
+        self.assertEqual(lighting_ecs.render_falloff(-1),dict(falloff='smooth-inverse-square',falloffExponent=2))
+        self.assertEqual(lighting_ecs.render_falloff(6.24),dict(falloff='range-power',falloffExponent=6.24))
+        for invalid in (0,65,float('inf'),float('nan')):
+            with self.assertRaises(ValueError):lighting_ecs.render_falloff(invalid)
 
     def test_sizes_and_semantic_nonfinite_rejected(self):
         common,light=fixture()

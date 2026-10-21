@@ -22,6 +22,14 @@ int main(){try{
  const auto lightFingerprint=tracing::sceneFingerprint(scene,{});
  scene.lights[0].shape.type=LightKind::Spot;
  require(tracing::sceneFingerprint(scene,{})!=lightFingerprint,"Light shape must invalidate tracing history");
+ const auto shapeFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.falloff=LightFalloff::RangePower;
+ require(tracing::sceneFingerprint(scene,{})!=shapeFingerprint,"Distance model invalidates tracing history");
+ const auto falloffFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.falloffExponent=3.5F;
+ require(tracing::sceneFingerprint(scene,{})!=falloffFingerprint,"Falloff exponent invalidates tracing history");
+ const auto tracingLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
+ require(tracingLight.coneType[2]==2.F && tracingLight.coneType[3]==3.5F,"Tracing consumes the explicit distance model");
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");

@@ -1,6 +1,7 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "sky.glsl"
+#include "light_attenuation.glsl"
 layout(local_size_x=8,local_size_y=8) in;
 layout(std140,binding=0) uniform Params {vec4 origin,right,up,forward,skyColor,sky;uvec4 counts,image;} p;
 struct Triangle{vec4 p0,e1,e2,uv01,uv2material,n0,n1,n2,t0,t1,t2;};

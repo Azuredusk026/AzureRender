@@ -5,7 +5,10 @@ namespace azurerender {
 inline void to_json(nlohmann::json& value, const LightShape& shape) {
     shape.validate();
     value = {{"type", shape.type == LightKind::Spot ? "spot" : "point"},
-        {"direction", shape.direction}, {"innerCone", shape.innerCone}, {"outerCone", shape.outerCone}};
+        {"direction", shape.direction}, {"innerCone", shape.innerCone}, {"outerCone", shape.outerCone},
+        {"falloff",shape.falloff==LightFalloff::RangePower?"range-power":
+            shape.falloff==LightFalloff::SmoothInverseSquare?"smooth-inverse-square":"legacy"},
+        {"falloffExponent",shape.falloffExponent}};
 }
 inline void from_json(const nlohmann::json& value, LightShape& shape) {
     const auto type = value.value("type", std::string("point"));
@@ -14,6 +17,12 @@ inline void from_json(const nlohmann::json& value, LightShape& shape) {
     shape.direction = value.value("direction", shape.direction);
     shape.innerCone = value.value("innerCone", shape.innerCone);
     shape.outerCone = value.value("outerCone", shape.outerCone);
+    const auto falloff=value.value("falloff",std::string("legacy"));
+    if(falloff!="legacy" && falloff!="smooth-inverse-square" && falloff!="range-power")
+        throw std::invalid_argument("Unsupported light falloff");
+    shape.falloff=falloff=="range-power"?LightFalloff::RangePower:
+        falloff=="smooth-inverse-square"?LightFalloff::SmoothInverseSquare:LightFalloff::Legacy;
+    shape.falloffExponent=value.value("falloffExponent",2.F);
     shape.validate();
 }
 }

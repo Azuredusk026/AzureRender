@@ -1287,7 +1287,8 @@
         "NR2"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/light-attenuation.md"
       ],
       "requiredAcceptance": [
         "NR3.delivery"

@@ -56,6 +56,8 @@ public:
             value.directionOuter[3] = std::cos(light.shape.outerCone);
             value.coneType[0] = std::cos(light.shape.innerCone);
             value.coneType[1] = static_cast<float>(light.shape.type);
+            value.coneType[2] = static_cast<float>(light.shape.falloff);
+            value.coneType[3] = light.shape.falloffExponent;
             packed.push_back(value);
         }
         return packed;

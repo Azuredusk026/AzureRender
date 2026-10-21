@@ -1,11 +1,18 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "surface_response.glsl"
+#include "light_attenuation.glsl"
 layout(local_size_x=1) in;
 layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=52u) {
+        const float distancesSquared[4]=float[4](0,1,25,100);
+        result.values[i]=localLightDistanceWeight(distancesSquared[(i-52u)%4u],10,
+            i<56u?1.0:2.0,3.5);
+        return;
+    }
     if(i==0u)result.values[i]=max((0.0-.5)*parameters.contrast+.5,0.0);
     else if(i==1u)result.values[i]=dielectricF0(.5);
     else if(i==2u)result.values[i]=directSurfaceSpecular(vec3(.04),.2,1,1,1,1).r;

@@ -24,7 +24,8 @@ vec3 directLighting(vec3 position,vec3 ng,vec3 n,vec3 v,vec3 albedo,float metal,
   vec3 delta=target-position;float distance=length(delta);vec3 l=delta/max(distance,1e-8);float cosine=max(dot(n,l),0);
   if(!area&&light.coneType.y>.5){float cone=clamp((dot(-l,light.directionOuter.xyz)-light.directionOuter.w)/max(light.coneType.x-light.directionOuter.w,1e-6),0,1);if(light.coneType.x==light.directionOuter.w)cone=step(light.directionOuter.w,dot(-l,light.directionOuter.xyz));radiance*=cone*cone;}
   if(cosine>0&&dot(ng,l)>0&&visible(position,ng,l,distance-.002)){
-   if(area)pdf=areaPdf(uint(light.position.x),position,target,l);else radiance/=max(distance*distance,.01);
+   if(area)pdf=areaPdf(uint(light.position.x),position,target,l);
+   else radiance*=light.coneType.z>.5?localLightDistanceWeight(distance*distance,light.radiance.w,light.coneType.z,light.coneType.w):1.0/max(distance*distance,.01);
    float weight=area?powerWeight(pdf,bsdfPdf(n,v,l,albedo,metal,rough)):1;
    result+=evaluateBsdf(n,v,l,albedo,metal,rough)*radiance*cosine*weight/max(pdf,1e-12);
   }

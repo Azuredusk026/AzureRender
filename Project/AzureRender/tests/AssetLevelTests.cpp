@@ -92,7 +92,8 @@ int main() {
   const auto giId=db.idForPath("assets:/field.aziv");
   level["irradianceVolume"]={{"version",1},{"asset",giId},{"intensity",.5},{"enabled",false}};
   level["lights"]=nlohmann::json::array({{{"id","spot"},{"nodeId","instance:node"},
-      {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5}}}}});
+      {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5},
+          {"falloff","range-power"},{"falloffExponent",3.5}}}}});
   write(root/"assets/start.azurelevel",level.dump());db.refresh();auto parsed=Level::load(root/"assets/start.azurelevel",db);
   check(parsed.scene.nodes.size()==1 && parsed.scene.nodes[0].translation[0]==7);
   check(parsed.scene.reflectionProbe.texture==db.resolve(id).u8string());
@@ -110,6 +111,15 @@ int main() {
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
   check(reopened.scene.lights[0].shape.type==LightKind::Spot
       && reopened.scene.lights[0].shape.innerCone==.25F);
+  check(reopened.scene.lights[0].shape.falloff==LightFalloff::RangePower
+      && reopened.scene.lights[0].shape.falloffExponent==3.5F);
+  check(nlohmann::json::object().get<LightShape>().falloff==LightFalloff::Legacy);
+  for(const auto& bad : {nlohmann::json{{"falloff","unknown"}},
+          nlohmann::json{{"falloff","range-power"},{"falloffExponent",0}}}) {
+    bool rejected=false;
+    try { (void)bad.get<LightShape>(); } catch(const std::exception&) {rejected=true;}
+    check(rejected);
+  }
   std::filesystem::create_directory(root/"blocked.azurelevel");
   bool saveFailed=false;try { parsed.save(root/"blocked.azurelevel"); }catch(const std::exception&){saveFailed=true;}
   check(saveFailed && std::filesystem::is_directory(root/"blocked.azurelevel"));
