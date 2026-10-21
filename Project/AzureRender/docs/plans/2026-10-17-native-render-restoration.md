@@ -143,6 +143,11 @@ NR7 统一环境后处理，NR8 完成综合验收。
 
 ## NR1：恢复有效场景状态与完整依赖
 
+资源入口支持显式分层目录与物理块定位。
+本机启动索引及更新包导出已完成验证。
+挂载优先级、内容版本及实例完整性继续核验。
+来源和边界见[资源分层读取](../acceptance/nr/layered-content.md)。
+
 文件：扩展 `tools/endfield_native/lighting.py`、`scene.py`。
 新增 `tools/endfield_native/environment.py`。
 新增 `tools/endfield_native/render_inventory.py`。
