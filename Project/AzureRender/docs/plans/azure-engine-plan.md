@@ -9,6 +9,7 @@ NR12 负责画面、操控、发布与实录联合验收。
 执行任务见[可玩还原计划](2026-10-17-native-playable-restoration.md)。
 统一状态表登记全部 NR 阶段，局部证据随专项记录维护。
 阶段状态与验收见[完整还原计划](2026-10-17-native-render-restoration.md)。
+无遮挡参考与地标标定见[参考基准](../acceptance/nr/reference-baseline.md)。
 
 单角色、单场景、单动画与表情进入自主实施。
 对象为现有莱万汀，EV0 完成。

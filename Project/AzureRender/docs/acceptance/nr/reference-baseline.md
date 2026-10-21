@@ -81,3 +81,52 @@
 同条件重复采样后，测量噪声并冻结阈值。
 相机标定和遮罩固定后进入定量对照。
 资源解析及引擎机制实施可独立推进。
+
+## 无遮挡参考与地标标定
+
+用户确认的范围为实景中观测到的全部对象与效果。
+本轮拍照模式已隐藏角色和主要界面。
+底部仍可见 UID 和网络状态，正式遮罩须排除该区域。
+两次后续画面的俯仰不同，分别登记相机。
+它们的差异用于观察，固定机位噪声仍待采样。
+
+本轮运行目录为
+`build/runs/20261021-125515-native-scene-lighting-5e36f1`。
+`game-reference/atrium-photo-front-000.png` 保存接续画面。
+该文件的原始采集时间未在接续状态中保留。
+`atrium-photo-front-001.png` 与 `002.png` 有采集时间收据。
+`photo-reference-manifest.json` 登记文件摘要与待项。
+游戏内容版本尚未由当前安装的有效元数据核验。
+可执行文件的 Unity 版本分别记录。
+
+公共标定入口为 `native_render/camera_calibration.py`。
+输入格式为 `RenderCameraLandmarks/1`。
+每个地标记录身份、米制世界坐标和图像像素坐标。
+拟合至少需要六个非共面地标。
+另需两个独立验证地标，它们不参与拟合。
+图像原点位于左上角，纵坐标朝下。
+
+求解采用归一化直接线性变换，仅依赖 NumPy。
+输出相机位置、世界轴向、内参和垂直视场角。
+每个地标均保存重投影坐标与像素误差。
+共面、退化、非有限数据及相机背后的点会被拒绝。
+非法身份、分辨率和缺少验证点同样会拒绝。
+
+投影验收检查独立地标及拟合地标的误差上限。
+同时检查方形像素、居中主点和近零倾斜项。
+透视拟合通过只证明地标投影符合输入预算。
+版本、曝光、噪声和画质仍由正式参考门禁验证。
+本工具始终输出 `reference_qualified=false`。
+
+执行入口如下：
+
+```powershell
+python tools/native_render/camera_calibration.py landmarks.json --image reference.png --output calibration.json
+python -m unittest discover -s tools -p 'test_native_render*.py'
+```
+
+十四项测试覆盖参考清单与地标标定。
+其中五项标定测试覆盖米制位置、旋转及独立验证误差。
+错误对应点触发投影失败，共面数据触发拒绝。
+证据见 `camera-calibration-final-python.log`。
+真实场景地标和最终机位保持待验收。

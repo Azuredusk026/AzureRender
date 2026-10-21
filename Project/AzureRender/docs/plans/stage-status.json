@@ -1236,7 +1236,8 @@
       "checksPassed": false,
       "dependsOn": [],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/reference-baseline.md"
       ],
       "requiredAcceptance": [
         "NR0.delivery"
