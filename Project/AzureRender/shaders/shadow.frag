@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "node_opacity.glsl"
 
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
@@ -25,6 +27,7 @@ layout(push_constant) uniform MaterialData {
 #if defined(AZURE_BINDLESS)
     layout(offset = 136) uint textureBase;
 #endif
+    layout(offset = 140) float nodeOpacity;
 } material;
 
 #if defined(AZURE_BINDLESS)
@@ -34,13 +37,15 @@ layout(push_constant) uniform MaterialData {
 #endif
 
 layout(location = 0) in vec2 textureCoordinate;
+layout(location = 1) in vec3 opacityCoordinate;
 
 void main() {
+    if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
     float alpha = texture(AZ_TEX_BASE_COLOR, textureCoordinate).a;
     if (material.alphaMode == 1 && alpha < material.alphaCutoff) {
         discard;
     }
-    if (material.alphaMode == 2 && alpha < 0.35) {
+    if (material.alphaMode == 2 && alpha * material.nodeOpacity < 0.35) {
         discard;
     }
 }

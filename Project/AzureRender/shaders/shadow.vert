@@ -36,6 +36,7 @@ layout(std430, binding = 13) readonly buffer InstanceData {
 
 layout(push_constant) uniform ShadowParameters {
     layout(offset = 128) vec2 morphWeights;
+    layout(offset = 144) mat4 gizmoTransform;
     layout(offset = 208) uint cascadeIndex;
 } shadowParameters;
 
@@ -46,6 +47,7 @@ layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
 layout(location = 0) out vec2 textureCoordinate;
+layout(location = 1) out vec3 opacityCoordinate;
 
 #if defined(AZURE_COMPUTE_SKINNING)
 layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
@@ -53,6 +55,7 @@ float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceD
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 void main() {
+    opacityCoordinate=position;
 #if defined(AZURE_COMPUTE_SKINNING)
     vec4 skinnedPosition = vec4(posedVector(0u), 1.0);
 #else
@@ -71,6 +74,6 @@ void main() {
     gl_Position =
         instanceData.instances[gl_InstanceIndex]
             .cascadeLightModelViewProjection[shadowParameters.cascadeIndex]
-        * skinnedPosition;
+        * shadowParameters.gizmoTransform * skinnedPosition;
     textureCoordinate = texcoord;
 }

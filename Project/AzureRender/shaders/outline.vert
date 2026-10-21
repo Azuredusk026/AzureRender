@@ -40,9 +40,11 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
+layout(location = 0) out vec3 opacityCoordinate;
 
 layout(push_constant) uniform MorphWeights {
     layout(offset = 128) vec2 weights;
+    layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 
 #if defined(AZURE_COMPUTE_SKINNING)
@@ -51,6 +53,7 @@ float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceD
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 void main() {
+    opacityCoordinate=position;
 #if defined(AZURE_COMPUTE_SKINNING)
     vec3 skinnedPosition = posedVector(0u);
     vec3 skinnedNormal = normalize(posedVector(3u));
@@ -70,6 +73,8 @@ void main() {
     vec3 skinnedNormal =
         normalize(mat3(skinMatrix) * morphedNormal);
 #endif
+    skinnedPosition=(morphWeights.gizmoTransform*vec4(skinnedPosition,1)).xyz;
+    skinnedNormal=normalize(transpose(inverse(mat3(morphWeights.gizmoTransform)))*skinnedNormal);
     mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
     vec4 clip=mvp*vec4(skinnedPosition,1);
     vec4 shifted=mvp*vec4(skinnedPosition+skinnedNormal*.001,1);

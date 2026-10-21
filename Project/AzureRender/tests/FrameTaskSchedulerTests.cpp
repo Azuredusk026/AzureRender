@@ -13,6 +13,7 @@
 #include <cassert>
 #include <vector>
 #include <type_traits>
+#include <limits>
 
 static_assert(!std::is_copy_constructible_v<azurerender::RenderFrameSnapshot>);
 static_assert(!std::is_move_constructible_v<azurerender::RenderFrameSnapshot>);
@@ -33,6 +34,37 @@ int main() {
     sourceInstances[0].meshKey = 7;
     const azurerender::SceneInstanceSnapshot validInstances(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers);
     validInstances.validateForRecording();
+    std::vector<std::vector<float>> sourceOpacities{{0.4F, 1.0F}};
+    const azurerender::SceneInstanceSnapshot opacitySnapshot(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers, {}, sourceOpacities);
+    sourceOpacities[0][0] = 0;
+    opacitySnapshot.validateForRecording();
+    if (opacitySnapshot.nodeWorldOpacities[0][0] != 0.4F) return 1;
+    auto maskBuffers=validBuffers;
+    maskBuffers.outlineMaskImage=reinterpret_cast<VkImage>(std::uintptr_t{1});
+    bool incompleteMaskRejected=false;
+    try {
+        const azurerender::SceneInstanceSnapshot incompleteMask(sourceInstances,{0},{},{},{},{0},{},{},VK_NULL_HANDLE,0,{},maskBuffers);
+        incompleteMask.validateForRecording();
+    } catch(const std::logic_error&) { incompleteMaskRejected=true; }
+    if(!incompleteMaskRejected)return 1;
+    maskBuffers.outlineMaskFramebuffer=reinterpret_cast<VkFramebuffer>(std::uintptr_t{2});
+    maskBuffers.outlineMaskExtent={256,192};maskBuffers.outlineMaskTiles={0};
+    const azurerender::SceneInstanceSnapshot maskSnapshot(sourceInstances,{0},{},{},{},{0},{},{},VK_NULL_HANDLE,0,{},maskBuffers);
+    maskBuffers.outlineMaskTiles[0]=9;
+    maskSnapshot.validateForRecording();
+    if(maskSnapshot.buffers.outlineMaskTiles[0]!=0)return 1;
+    unsigned invalidOpacityRejected = 0;
+    for (const auto value : {-0.1F, 1.1F, std::numeric_limits<float>::quiet_NaN()}) {
+        try {
+            const azurerender::SceneInstanceSnapshot invalidOpacity(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers, {}, {{value}});
+            invalidOpacity.validateForRecording();
+        } catch (const std::logic_error&) { ++invalidOpacityRejected; }
+    }
+    try {
+        const azurerender::SceneInstanceSnapshot missingOpacity(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers, {}, {{1}, {1}});
+        missingOpacity.validateForRecording();
+    } catch (const std::logic_error&) { ++invalidOpacityRejected; }
+    if (invalidOpacityRejected != 4) return 1;
     bool invalidSpanRejected = false;
     try {
         const azurerender::SceneInstanceSnapshot invalidSpan(sourceInstances, {0}, {{7,0,2}}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers);

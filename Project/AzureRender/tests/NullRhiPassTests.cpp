@@ -454,17 +454,17 @@ int main() try {
     assert(bindlessBinds == 3);
     assert(legacyBinds > bindlessBinds);
 
-    // Four loaded materials use 36 texture slots. The three shared textures
-    // (environment, ramp, reflection) and three scene snapshots bring the
-    // sampled-image requirement to 42. One uniform and five storage buffers
-    // bring the per-stage resource requirement to 48. Each independent limit
+    // Four materials use 36 texture slots. Environment, shadow and ramp
+    // add three. Depth, color, reflection and outline mask add four more.
+    // This requires 43 sampled images. One uniform and five storage buffers
+    // bring the per-stage resource requirement to 49. Each independent limit
     // must fit exactly; reducing any one by one must select the fixed path.
     VkPhysicalDeviceLimits limits{};
-    limits.maxPerStageDescriptorSamplers = 42;
-    limits.maxDescriptorSetSamplers = 42;
-    limits.maxPerStageDescriptorSampledImages = 42;
-    limits.maxDescriptorSetSampledImages = 42;
-    limits.maxPerStageResources = 48;
+    limits.maxPerStageDescriptorSamplers = 43;
+    limits.maxDescriptorSetSamplers = 43;
+    limits.maxPerStageDescriptorSampledImages = 43;
+    limits.maxDescriptorSetSampledImages = 43;
+    limits.maxPerStageResources = 49;
     const auto limitedFrame = [&](const VkPhysicalDeviceLimits& value) {
         return runFrame(true, shaderDirectory, true, false, false, false,
                         0, false, false, 0, &value);

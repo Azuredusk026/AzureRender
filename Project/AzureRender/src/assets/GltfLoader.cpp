@@ -20,8 +20,10 @@
 #include <nlohmann/json.hpp>
 #include <functional>
 #include <iostream>
+#include <initializer_list>
 #include <limits>
 #include <optional>
+#include <set>
 #include <stdexcept>
 #include <utility>
 
@@ -1473,12 +1475,46 @@ std::vector<Matrix4> calculateNodeWorldTransforms(
     return worldTransforms;
 }
 
+const tinygltf::Value* nodeOpacityExtension(const tinygltf::ExtensionMap& extensions,
+    const tinygltf::Model& model, std::initializer_list<const char*> fields) {
+    const auto found=extensions.find("AZURE_node_opacity");
+    if(found==extensions.end())return nullptr;
+    const auto& value=found->second;
+    if(std::find(model.extensionsUsed.begin(),model.extensionsUsed.end(),"AZURE_node_opacity")==model.extensionsUsed.end())
+        throw std::invalid_argument("AZURE_node_opacity must be declared in extensionsUsed");
+    if(!value.IsObject()||!value.Has("schemaVersion")||!value.Get("schemaVersion").IsNumber()
+        ||value.Get("schemaVersion").GetNumberAsDouble()!=1)
+        throw std::invalid_argument("AZURE_node_opacity requires schemaVersion 1");
+    for(const auto& field:value.Get<tinygltf::Value::Object>()) {
+        const bool known=std::any_of(fields.begin(),fields.end(),[&](const char* name){return field.first==name;});
+        if(!known)throw std::invalid_argument("AZURE_node_opacity contains an unknown field: "+field.first);
+    }
+    return &value;
+}
+
+std::uint32_t nodeOpacityIndex(const tinygltf::Value& owner,const char* field,std::size_t limit) {
+    if(!owner.IsObject()||!owner.Has(field)||!owner.Get(field).IsNumber())
+        throw std::invalid_argument(std::string("AZURE_node_opacity requires index ")+field);
+    const double value=owner.Get(field).GetNumberAsDouble();
+    if(!std::isfinite(value)||value<0||value>=limit||std::floor(value)!=value)
+        throw std::invalid_argument(std::string("AZURE_node_opacity invalid index ")+field);
+    return static_cast<std::uint32_t>(value);
+}
+
 void loadNodes(const tinygltf::Model& model, LoadedAsset& asset) {
     asset.nodes.resize(model.nodes.size());
     for (std::size_t index = 0; index < model.nodes.size(); ++index) {
         const tinygltf::Node& source = model.nodes[index];
         AssetNode& destination = asset.nodes[index];
         destination.name = source.name;
+        if(const auto* extension=nodeOpacityExtension(source.extensions,model,{"schemaVersion","opacity"})) {
+            if(!extension->Has("opacity")||!extension->Get("opacity").IsNumber())
+                throw std::invalid_argument("AZURE_node_opacity requires numeric opacity");
+            const double value=extension->Get("opacity").GetNumberAsDouble();
+            if(!std::isfinite(value)||value<0||value>1)
+                throw std::invalid_argument("AZURE_node_opacity opacity must be in [0,1]");
+            destination.opacity=static_cast<float>(value);
+        }
         if (source.translation.size() == 3) {
             std::transform(
                 source.translation.begin(),
@@ -1631,33 +1667,57 @@ void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
     }
     for(const auto& source:model.animations){
         AssetAnimation animation;animation.name=source.name;animation.startTime=std::numeric_limits<float>::max();
-        for(const auto& c:source.channels){
-            if(c.target_node<0||static_cast<std::size_t>(c.target_node)>=asset.nodes.size()||c.sampler<0)
+        const auto appendChannel=[&](int sourceSampler,std::uint32_t nodeIndex,AssetAnimationPath path){
+            if(nodeIndex>=asset.nodes.size()||sourceSampler<0||static_cast<std::size_t>(sourceSampler)>=source.samplers.size())
                 throw std::invalid_argument("Invalid animation channel target");
-            AssetAnimationChannel channel;channel.nodeIndex=static_cast<std::uint32_t>(c.target_node);
-            if(c.target_path=="translation")channel.path=AssetAnimationPath::Translation;
-            else if(c.target_path=="rotation")channel.path=AssetAnimationPath::Rotation;
-            else if(c.target_path=="scale")channel.path=AssetAnimationPath::Scale;
-            else if(c.target_path=="weights")channel.path=AssetAnimationPath::Weights;
-            else throw std::invalid_argument("Unsupported glTF animation target path");
-            if(channel.path!=AssetAnimationPath::Weights&&asset.nodes[channel.nodeIndex].usesMatrix)throw std::invalid_argument("Animation cannot target a matrix-authored node");
-            const auto& src=source.samplers.at(c.sampler);AssetAnimationSampler sampler;auto& curve=sampler.curve;
+            AssetAnimationChannel channel;channel.nodeIndex=nodeIndex;channel.path=path;
+            if(path!=AssetAnimationPath::Weights&&path!=AssetAnimationPath::Opacity&&asset.nodes[channel.nodeIndex].usesMatrix)throw std::invalid_argument("Animation cannot target a matrix-authored node");
+            const auto& src=source.samplers.at(sourceSampler);AssetAnimationSampler sampler;auto& curve=sampler.curve;
             curve.rotation=channel.path==AssetAnimationPath::Rotation;
-            curve.width=channel.path==AssetAnimationPath::Weights?asset.defaultMorphWeights[channel.nodeIndex].size():curve.rotation?4:3;
+            curve.width=path==AssetAnimationPath::Opacity?1:path==AssetAnimationPath::Weights?asset.defaultMorphWeights[channel.nodeIndex].size():curve.rotation?4:3;
             if(src.interpolation=="STEP"){curve.interpolation=CurveInterpolation::Step;sampler.interpolation=AssetAnimationInterpolation::Step;}
             else if(src.interpolation=="CUBICSPLINE"){curve.interpolation=CurveInterpolation::CubicSpline;sampler.interpolation=AssetAnimationInterpolation::CubicSpline;}
             else if(src.interpolation!="LINEAR"&&!src.interpolation.empty())throw std::invalid_argument("Unknown animation interpolation");
             const auto& input=model.accessors.at(src.input);const auto& output=model.accessors.at(src.output);
-            const int expected=channel.path==AssetAnimationPath::Weights?TINYGLTF_TYPE_SCALAR:curve.rotation?TINYGLTF_TYPE_VEC4:TINYGLTF_TYPE_VEC3;
+            const bool scalar=path==AssetAnimationPath::Weights||path==AssetAnimationPath::Opacity;
+            const int expected=scalar?TINYGLTF_TYPE_SCALAR:curve.rotation?TINYGLTF_TYPE_VEC4:TINYGLTF_TYPE_VEC3;
             if(input.type!=TINYGLTF_TYPE_SCALAR||input.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||output.type!=expected||output.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT)
                 throw std::invalid_argument("Animation accessor does not match target path");
             curve.times.resize(input.count);for(std::size_t i=0;i<input.count;++i)std::memcpy(&curve.times[i],accessorData(model,input)+i*accessorStride(model,input),4);
-            const std::size_t components=channel.path==AssetAnimationPath::Weights?1:curve.width;
+            const std::size_t components=scalar?1:curve.width;
             curve.values.resize(output.count*components);for(std::size_t i=0;i<output.count;++i)std::memcpy(curve.values.data()+i*components,accessorData(model,output)+i*accessorStride(model,output),components*4);
             validateCurve(curve);sampler.inputTimes=curve.times;
+            if(path==AssetAnimationPath::Opacity) {
+                const std::size_t stride=curve.interpolation==CurveInterpolation::CubicSpline?3:1;
+                for(std::size_t key=0;key<curve.times.size();++key) {
+                    const float value=curve.values[key*stride+(stride==3?1:0)];
+                    if(value<0||value>1)throw std::invalid_argument("AZURE_node_opacity animation keys must be in [0,1]");
+                }
+            }
             if(channel.path!=AssetAnimationPath::Weights){sampler.outputValues.resize(output.count);for(std::size_t i=0;i<output.count;++i)std::copy_n(curve.values.begin()+i*components,components,sampler.outputValues[i].begin());}
             animation.startTime=std::min(animation.startTime,curve.times.front());animation.endTime=std::max(animation.endTime,curve.times.back());
             channel.samplerIndex=static_cast<std::uint32_t>(animation.samplers.size());animation.samplers.push_back(std::move(sampler));animation.channels.push_back(channel);
+        };
+        for(const auto& c:source.channels){
+            AssetAnimationPath path;
+            if(c.target_path=="translation")path=AssetAnimationPath::Translation;
+            else if(c.target_path=="rotation")path=AssetAnimationPath::Rotation;
+            else if(c.target_path=="scale")path=AssetAnimationPath::Scale;
+            else if(c.target_path=="weights")path=AssetAnimationPath::Weights;
+            else throw std::invalid_argument("Unsupported glTF animation target path");
+            appendChannel(c.sampler,static_cast<std::uint32_t>(c.target_node),path);
+        }
+        if(const auto* extension=nodeOpacityExtension(source.extensions,model,{"schemaVersion","channels"})) {
+            if(!extension->Has("channels")||!extension->Get("channels").IsArray()||extension->Get("channels").ArrayLen()==0)
+                throw std::invalid_argument("AZURE_node_opacity requires nonempty channels");
+            std::set<std::uint32_t> targets;
+            for(const auto& channel:extension->Get("channels").Get<tinygltf::Value::Array>()) {
+                const auto node=nodeOpacityIndex(channel,"node",asset.nodes.size());
+                const auto sampler=nodeOpacityIndex(channel,"sampler",source.samplers.size());
+                if(channel.Get<tinygltf::Value::Object>().size()!=2||!targets.insert(node).second)
+                    throw std::invalid_argument("AZURE_node_opacity contains unknown fields or a duplicate node channel");
+                appendChannel(static_cast<int>(sampler),node,AssetAnimationPath::Opacity);
+            }
         }
         if(animation.channels.empty())animation.startTime=animation.endTime=0;
         asset.animations.push_back(std::move(animation));
@@ -1741,6 +1801,7 @@ void appendPrimitive(
     draw.materialIndex = primitive.material >= 0
         ? static_cast<std::uint32_t>(primitive.material)
         : fallbackMaterial;
+    draw.nodeIndex = nodeIndex;
     std::array<float, 3> primitiveMin{};
     std::array<float, 3> primitiveMax{};
     primitiveMin.fill(std::numeric_limits<float>::max());
@@ -2137,11 +2198,15 @@ void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
         asset.nodes.size(),
         identityMatrix());
     std::vector<bool> calculated(asset.nodes.size(), false);
+    pose.nodeWorldOpacities.resize(asset.nodes.size());
     std::function<const Matrix4&(std::size_t)> calculate =
         [&](const std::size_t index) -> const Matrix4& {
         if (calculated[index]) {
             return worldTransforms[index];
         }
+        const float opacity=pose.local[index].opacity;
+        if(!std::isfinite(opacity)||opacity<0||opacity>1)
+            throw std::invalid_argument("Pose node opacity must be in [0,1]");
         Matrix4 local{};
         if (asset.nodes[index].usesMatrix) {
             std::transform(
@@ -2163,6 +2228,7 @@ void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
                   calculate(static_cast<std::size_t>(parent)),
                   local)
             : local;
+        pose.nodeWorldOpacities[index]=opacity*(parent>=0?pose.nodeWorldOpacities[parent]:1.0F);
         calculated[index] = true;
         return worldTransforms[index];
     };
@@ -2214,7 +2280,7 @@ void resolveAssetPose(const LoadedAsset& asset, AssetPose& pose) {
 }
 AssetPose bindAnimationPose(const LoadedAsset& asset) {
     AssetPose pose;
-    for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale});
+    for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale,node.opacity});
     pose.morphWeights=asset.defaultMorphWeights;
     resolvePose(asset, pose);
     return pose;
@@ -2235,7 +2301,8 @@ AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationInd
         if(sampler.curve.width){const auto sampled=sampleCurve(sampler.curve,sampleTime);std::copy(sampled.begin(),sampled.end(),value.begin());}
         else value=sampleAnimationSampler(sampler,sampleTime,channel.path==AssetAnimationPath::Rotation);
         auto& node = pose.local.at(channel.nodeIndex);
-        if (channel.path == AssetAnimationPath::Rotation) node.rotation = normalizeQuaternion(value);
+        if (channel.path == AssetAnimationPath::Opacity) node.opacity=std::clamp(value[0],0.0F,1.0F);
+        else if (channel.path == AssetAnimationPath::Rotation) node.rotation = normalizeQuaternion(value);
         else if (channel.path == AssetAnimationPath::Translation) std::copy_n(value.begin(), 3, node.translation.begin());
         else std::copy_n(value.begin(), 3, node.scale.begin());
     }
@@ -2254,6 +2321,7 @@ AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, c
             node.scale[axis] = from.local[i].scale[axis] * (1-weight) + to.local[i].scale[axis] * weight;
         }
         node.rotation = slerp(from.local[i].rotation, to.local[i].rotation, weight);
+        node.opacity=from.local[i].opacity*(1-weight)+to.local[i].opacity*weight;
     }
     result.morphWeights=from.morphWeights;
     if(result.morphWeights.size()!=to.morphWeights.size())throw std::invalid_argument("Morph pose node count mismatch");

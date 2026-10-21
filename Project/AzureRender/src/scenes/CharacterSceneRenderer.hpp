@@ -124,6 +124,14 @@ private:
     std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
     VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
     VkPipeline overlayDepthPipeline_=VK_NULL_HANDLE;
+    std::array<GpuTexture,kMaxFramesInFlight> outlineMasks_;
+    std::array<VkFramebuffer,kMaxFramesInFlight> outlineMaskFramebuffers_{};
+    VkRenderPass outlineMaskPass_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskPipeline_=VK_NULL_HANDLE;
+    VkExtent2D outlineMaskViewExtent_{};
+    std::uint32_t outlineMaskMaxDimension_=0;
+    void prepareOutlineMaskResources(const std::vector<std::vector<float>>& opacities,RecordingBufferSet& buffers);
+    void recordOutlineMask(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands);
     void createOverlayDepth(const RenderContext& context);
     void destroyOverlayDepth();
     void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
@@ -150,7 +158,7 @@ private:
         // Bindless mode: the draw's first material slot in the global texture
         // array. Ignored by the fixed-table shaders.
         std::uint32_t textureBaseIndex = 0;
-        std::uint32_t padding = 0;
+        float nodeOpacity = 1.0F;
         std::array<float, 16> gizmoTransform{
             1.0F, 0.0F, 0.0F, 0.0F,
             0.0F, 1.0F, 0.0F, 0.0F,
@@ -159,6 +167,8 @@ private:
         };
     };
     static_assert(sizeof(MorphPushConstants) == 80);
+    static_assert(offsetof(MorphPushConstants, nodeOpacity) == 12);
+    static_assert(offsetof(MorphPushConstants, gizmoTransform) == 16);
 
     struct UniformBufferObject {
         std::array<float, 4> cameraPosition{};

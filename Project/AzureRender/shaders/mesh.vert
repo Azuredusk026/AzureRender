@@ -47,14 +47,25 @@ layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
 layout(location = 8) in float browMask;
-layout(location = 0) out vec3 worldNormal;
-layout(location = 1) out vec4 worldTangent;
+#if defined(AZURE_OUTLINE_MASK)
+#define AZURE_VERTEX_OUTPUT(locationIndex)
+#else
+#define AZURE_VERTEX_OUTPUT(locationIndex) layout(location = locationIndex) out
+#endif
+AZURE_VERTEX_OUTPUT(0) vec3 worldNormal;
+AZURE_VERTEX_OUTPUT(1) vec4 worldTangent;
 layout(location = 2) out vec2 textureCoordinate;
-layout(location = 3) out vec3 worldPosition;
-layout(location = 4) out vec4 shadowPositions[4];
-layout(location = 8) out float eyebrowRegion;
+AZURE_VERTEX_OUTPUT(3) vec3 worldPosition;
+AZURE_VERTEX_OUTPUT(4) vec4 shadowPositions[4];
+AZURE_VERTEX_OUTPUT(8) float eyebrowRegion;
+#if defined(AZURE_OUTLINE_MASK)
+vec4 instanceFaceDirection;
+mat4 instanceFaceFrame;
+#else
 layout(location = 9) flat out vec4 instanceFaceDirection;
 layout(location = 10) flat out mat4 instanceFaceFrame;
+#endif
+AZURE_VERTEX_OUTPUT(14) vec3 opacityCoordinate;
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -74,6 +85,7 @@ float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceD
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 void main() {
+    opacityCoordinate=position;
     eyebrowRegion = browMask;
     instanceFaceDirection = instanceData.instances[gl_InstanceIndex].faceLight;
     instanceFaceFrame=instanceData.instances[gl_InstanceIndex].faceFrame;

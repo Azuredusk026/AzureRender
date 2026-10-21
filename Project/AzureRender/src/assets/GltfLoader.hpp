@@ -8,6 +8,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -152,6 +153,7 @@ struct AssetPrimitive {
     std::uint32_t indexCount = 0;
     std::uint32_t materialIndex = 0;
     std::array<float, 3> center{};
+    std::uint32_t nodeIndex = std::numeric_limits<std::uint32_t>::max();
 };
 
 struct AssetNode {
@@ -162,6 +164,7 @@ struct AssetNode {
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
     std::array<float, 16> localMatrix{};
     bool usesMatrix = false;
+    float opacity = 1.0F;
 };
 
 enum class AssetAnimationPath : std::uint32_t {
@@ -169,6 +172,7 @@ enum class AssetAnimationPath : std::uint32_t {
     Rotation,
     Scale,
     Weights,
+    Opacity,
 };
 
 enum class AssetAnimationInterpolation : std::uint32_t {
@@ -228,12 +232,14 @@ struct AssetNodePose {
     std::array<float, 3> translation{};
     std::array<float, 4> rotation{0, 0, 0, 1};
     std::array<float, 3> scale{1, 1, 1};
+    float opacity = 1.0F;
 };
 struct AssetPose {
     std::vector<AssetNodePose> local;
     std::vector<std::array<float, 16>> nodeWorldMatrices;
     std::vector<std::array<float, 16>> jointMatrices;
     std::vector<MorphWeightState> morphWeights;
+    std::vector<float> nodeWorldOpacities;
 };
 [[nodiscard]] AssetPose bindAnimationPose(const LoadedAsset& asset);
 void resolveAssetPose(const LoadedAsset& asset,AssetPose& pose);

@@ -19,7 +19,7 @@ AssetPose sampleAnimationBlend(const LoadedAsset& asset,
     }
     if(std::abs(total-1)>1e-5)throw std::invalid_argument("Animation blend weights must sum to one");
     auto result=bindAnimationPose(asset);std::vector<std::array<float,4>> reference;
-    for(auto& node:result.local){node.translation={};node.scale={};node.rotation={};}
+    for(auto& node:result.local){node.translation={};node.scale={};node.rotation={};node.opacity=0;}
     for(auto& weights:result.morphWeights)std::fill(weights.begin(),weights.end(),0.F);
     for(const auto& sample:samples){
         if(sample.weight==0)continue;
@@ -28,6 +28,7 @@ AssetPose sampleAnimationBlend(const LoadedAsset& asset,
         const float weight=static_cast<float>(sample.weight/total);
         for(std::size_t i=0;i<pose.local.size();++i){
             auto& dest=result.local[i];const auto& source=pose.local[i];float dot=0;
+            dest.opacity+=weight*source.opacity;
             for(unsigned axis=0;axis<4;++axis)dot+=reference[i][axis]*source.rotation[axis];
             for(unsigned axis=0;axis<3;++axis){
                 dest.translation[axis]+=weight*source.translation[axis];
@@ -40,6 +41,7 @@ AssetPose sampleAnimationBlend(const LoadedAsset& asset,
                 result.morphWeights[i][j]+=weight*pose.morphWeights[i][j];
     }
     for(std::size_t i=0;i<result.local.size();++i){
+        result.local[i].opacity=std::clamp(result.local[i].opacity,0.F,1.F);
         auto& q=result.local[i].rotation;double norm=0;for(float v:q)norm+=v*v;
         if(norm<1e-16)q=reference[i];
         else for(float& v:q)v=static_cast<float>(v/std::sqrt(norm));

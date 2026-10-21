@@ -3,6 +3,7 @@
 #include "scene/RenderBatching.hpp"
 #include "render/RenderSettings.hpp"
 #include <array>
+#include <cmath>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -22,6 +23,10 @@ struct RecordingBufferSet {
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
     std::vector<std::vector<std::size_t>> transparentPrimitives;
+    VkImage outlineMaskImage=VK_NULL_HANDLE;
+    VkFramebuffer outlineMaskFramebuffer=VK_NULL_HANDLE;
+    VkExtent2D outlineMaskExtent{};
+    std::vector<std::uint32_t> outlineMaskTiles;
 };
 
 // Published only as const storage. Visible entries use indices rather than
@@ -40,6 +45,7 @@ struct SceneInstanceSnapshot final {
     const std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViewSpans;
     const std::vector<std::size_t> indirectOffsets;
     const std::vector<std::size_t> transparentOffsets;
+    const std::vector<std::vector<float>> nodeWorldOpacities;
 
     SceneInstanceSnapshot(std::vector<scene::SceneInstance> source,
         std::vector<std::uint32_t> visible,
@@ -50,22 +56,34 @@ struct SceneInstanceSnapshot final {
         RenderSettings renderSettings = {}, VkBuffer indirectHandle = VK_NULL_HANDLE,
         std::uint32_t frame = 0, RecordingGizmoState gizmoState = {},
         RecordingBufferSet bufferSet = {},
-        std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews = {})
+        std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews = {},
+        std::vector<std::vector<float>> nodeOpacities = {})
         : settings(std::move(renderSettings)), indirectBuffer(indirectHandle), frameIndex(frame),
           gizmo(std::move(gizmoState)), buffers(std::move(bufferSet)), instances(std::move(source)), visibleIndices(std::move(visible)),
           opaqueSpans(std::move(opaque)), visibleSpans(std::move(visibleBatches)), shadowSpans(std::move(shadow)),
           shadowViewSpans(std::move(shadowViews)),
-          indirectOffsets(std::move(indirect)), transparentOffsets(std::move(transparent)) {}
+          indirectOffsets(std::move(indirect)), transparentOffsets(std::move(transparent)),
+          nodeWorldOpacities(std::move(nodeOpacities)) {}
 
     void validateForRecording() const {
         if (buffers.maxDrawIndirectCount == 0)
             throw std::logic_error("Snapshot indirect batch limit is zero");
         if (buffers.vertices.size() != buffers.indices.size())
             throw std::logic_error("Snapshot vertex/index resource counts differ");
+        if(buffers.outlineMaskImage!=VK_NULL_HANDLE
+            &&(buffers.outlineMaskFramebuffer==VK_NULL_HANDLE||!buffers.outlineMaskExtent.width
+                ||!buffers.outlineMaskExtent.height||buffers.outlineMaskTiles.size()!=instances.size()))
+            throw std::logic_error("Snapshot outline mask ownership incomplete");
         for (const auto index : visibleIndices)
             if (index >= instances.size()) throw std::out_of_range("Snapshot visible index");
         if (transparentOffsets.size() != instances.size())
             throw std::logic_error("Snapshot transparent offsets incomplete");
+        if (!nodeWorldOpacities.empty() && nodeWorldOpacities.size() != instances.size())
+            throw std::logic_error("Snapshot node opacity instances incomplete");
+        for (const auto& nodes : nodeWorldOpacities)
+            for (const float opacity : nodes)
+                if (!std::isfinite(opacity) || opacity < 0 || opacity > 1)
+                    throw std::logic_error("Snapshot node opacity outside [0,1]");
         if (indirectBuffer != VK_NULL_HANDLE && indirectOffsets.size() != instances.size())
             throw std::logic_error("Snapshot indirect offsets incomplete");
         for (std::size_t i = 0; i < instances.size(); ++i)

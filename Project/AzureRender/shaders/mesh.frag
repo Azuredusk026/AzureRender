@@ -1,5 +1,6 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
+#include "node_opacity.glsl"
 
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
@@ -92,6 +93,7 @@ layout(push_constant) uniform MaterialData {
 #if defined(AZURE_BINDLESS)
     layout(offset = 136) uint textureBase;
 #endif
+    layout(offset = 140) float nodeOpacity;
 } material;
 
 #if defined(AZURE_BINDLESS)
@@ -133,6 +135,7 @@ layout(location = 4) in vec4 shadowPositions[4];
 layout(location = 8) in float eyebrowRegion;
 layout(location = 9) flat in vec4 instanceFaceDirection;
 layout(location = 10) flat in mat4 instanceFaceFrame;
+layout(location = 14) in vec3 opacityCoordinate;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
@@ -321,6 +324,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 }
 
 void main() {
+    if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
         && materialFeatureEnabled(16U) > 0.5;
@@ -1099,6 +1103,7 @@ void main() {
         outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
         outputColor.a = 1.0;
     }
+    if (material.alphaMode == 2) outputColor.a *= material.nodeOpacity;
     float innerOutlineParticipation =
         (1.0 - platformMask)
         * (overlayMaterial ? 0.0 : 1.0)
