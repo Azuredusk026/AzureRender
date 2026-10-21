@@ -19,6 +19,7 @@ def run(executable, root):
     assets.mkdir(parents=True, exist_ok=False)
     surface(assets / 'face.gltf', double_sided=True)
     model = json.loads((assets / 'face.gltf').read_text())
+    model['materials'][0]['pbrMetallicRoughness']['baseColorFactor'] = [.8, .8, .8, 1]
     def accessor(values, kind, count):
         data = struct.pack('<' + 'f' * len(values), *values)
         buffer = len(model['buffers'])
@@ -65,12 +66,21 @@ def run(executable, root):
     project.write_text(json.dumps({'schemaVersion': 1, 'id': 'dual-face', 'name': 'Dual face contract',
         'mounts': [{'name': 'assets', 'path': 'assets'}], 'startupScene': 'assets:/scene.azurelevel'}))
     results = {}
-    for mode in ['head0', 'head180', 'fixed', 'mask', 'animated']:
+    for mode in ['head0', 'head180', 'fixed', 'mask', 'animated',
+                 'scene-head0', 'scene-head180', 'scene-mask', 'scene-fixed', 'scene-dark']:
+        scene_mode = mode.startswith('scene-')
+        level['renderSettings'].update(sceneLighting=scene_mode, skyIntensity=0)
+        level['lights'] = ([{'id': 'key', 'nodeId': 'key', 'color': [1, 1, 1],
+            'intensity': 8, 'radius': 10, 'enabled': mode != 'scene-dark'}] if scene_mode else [])
+        level['nodes'] = level['nodes'][:2]
+        if scene_mode:
+            level['nodes'].append({'id': 'key', 'components': {
+                'azure.transform': component('azure.transform', {'translation': [3, 0, 2]})}})
         model.pop('animations', None)
         if mode == 'animated':
             model['animations'] = animations
-        model['nodes'][head]['rotation'] = [0, 1, 0, 0] if mode == 'head180' else [0, 0, 0, 1]
-        if mode == 'mask':
+        model['nodes'][head]['rotation'] = [0, 1, 0, 0] if mode in ('head180', 'scene-head180') else [0, 0, 0, 1]
+        if mode in ('mask', 'scene-mask'):
             profile['faceSdf']['maskTexture'] = sdf
         else:
             profile['faceSdf']['maskTexture'] = mask
@@ -84,9 +94,11 @@ def run(executable, root):
         output = root / mode
         command = [str(executable.resolve()), '--project', str(project.resolve()), '--width', '320', '--height', '240',
             '--capture-dir', str(output.resolve()), '--capture-frames', '1', '--capture-fps', '4',
-            '--qa-isolation', 'diffuse-band', '--qa-light', 'scene',
+            '--qa-light', 'scene',
             '--runtime-report', str((root / (mode + '-runtime.json')).resolve())]
-        if mode == 'fixed':
+        if not scene_mode:
+            command += ['--qa-isolation', 'diffuse-band']
+        if mode in ('fixed', 'scene-fixed'):
             command += ['--disable-bindless', '--disable-compute-skinning', '--disable-parallel-recording']
         result = subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
         (root / (mode + '.log')).write_text(result.stdout + result.stderr, encoding='utf-8')
@@ -101,7 +113,16 @@ def run(executable, root):
     animation = float(np.abs(results['head0'] - results['animated']).mean())
     fallback = float(np.abs(results['head0'] - results['fixed']).mean())
     assert min(head, mask_response, animation) > 1 and fallback < .1, (head, mask_response, animation, fallback)
-    summary = {'frames': 5, 'headRotationResponse': head, 'independentMaskResponse': mask_response,
+    scene_head = float(np.abs(results['scene-head0'] - results['scene-head180']).mean())
+    scene_mask = float(np.abs(results['scene-head0'] - results['scene-mask']).mean())
+    scene_fallback = float(np.abs(results['scene-head0'] - results['scene-fixed']).mean())
+    # Ignore the host clear color outside the planar surface.
+    scene_dark = int(results['scene-dark'][85:155, 125:195].max())
+    assert min(scene_head, scene_mask) > 1, ('scene face response missing', scene_head, scene_mask)
+    assert scene_fallback < .1 and scene_dark == 0, (scene_fallback, scene_dark)
+    summary = {'frames': len(results), 'headRotationResponse': head, 'independentMaskResponse': mask_response,
+        'sceneHeadRotationResponse': scene_head, 'sceneIndependentMaskResponse': scene_mask,
+        'sceneFixedDescriptorCpuDifference': scene_fallback, 'sceneDarkMaximum': scene_dark,
         'headAnimationResponse': animation, 'fixedDescriptorCpuDifference': fallback, 'validationErrors': 0}
     (root / 'summary.json').write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary))

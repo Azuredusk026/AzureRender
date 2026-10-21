@@ -295,6 +295,16 @@ vec4 evaluateIrradianceVolume(vec3 position,vec3 normal) {
         clamp(weight,0,1));
 }
 
+float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample) {
+    mat3 headFrame=mat3(instanceFaceFrame);
+    vec3 localLight=transpose(headFrame)*direction;
+    vec3 localCamera=transpose(headFrame)*(-camera.cameraForward.xyz);
+    distanceSample=textureLod(AZ_TEX_FACE_SDF,faceSdfSampleUv(textureCoordinate,localLight.x),0.0);
+    float geometryMask=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
+    return faceSdfRampCoordinate(distanceSample,geometryMask,localLight,localCamera,
+        dot(normal,direction),material.hairParameters.xyz);
+}
+
 void main() {
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
     bool overlayMaterial = material.materialClass == 7U
@@ -541,13 +551,7 @@ void main() {
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
     if(dualFaceSdf) {
         toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
-        mat3 headFrame=mat3(instanceFaceFrame);
-        vec3 localLight=transpose(headFrame)*lightDirection;
-        vec3 localCamera=transpose(headFrame)*(-camera.cameraForward.xyz);
-        faceSdfSample=textureLod(AZ_TEX_FACE_SDF,faceSdfSampleUv(textureCoordinate,localLight.x),0.0);
-        vec4 faceMask=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0);
-        rampCoordinate=faceSdfRampCoordinate(faceSdfSample,faceMask.g,localLight,localCamera,
-            dot(shadedNormal,lightDirection),material.hairParameters.xyz);
+        rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample);
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
@@ -616,7 +620,13 @@ void main() {
         float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
-        clusteredDiffuse += diffuseColor * radiance * pointDiffuse * diffuseScale;
+        vec3 localDiffuseResponse=vec3(pointDiffuse);
+        if(dualFaceSdf) {
+            vec4 localDistanceSample;
+            float localCoordinate=dualFaceRampCoordinate(pointDirection,shadedNormal,localDistanceSample);
+            localDiffuseResponse=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0.0).rgb;
+        }
+        clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
             max(dot(shadedNormal, pointHalfDirection), 0.0), specularPower);
