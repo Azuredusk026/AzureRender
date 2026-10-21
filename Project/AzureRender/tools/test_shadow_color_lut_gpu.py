@@ -105,14 +105,14 @@ def run(player,root,require_validation=False):
         if mode.startswith('beauty'):continue
         expected=np.zeros(3) if mode=='disabled' else expected_lookup(red_pixels if mode=='constant' else pixels,color)
         error=np.abs(pixel-expected)
-        assert error.max()<=3,(mode,pixel.tolist(),expected.tolist(),error.tolist())
+        assert error.max()<=1,(mode,pixel.tolist(),expected.tolist(),error.tolist())
         metrics[mode]={'actual':pixel.tolist(),'expected':expected.tolist(),'maximumByteError':float(error.max())}
     assert np.array_equal(frames['identity'],frames['fixed']),'Indexed and fixed lookup differ'
     assert np.array_equal(frames['identity'],frames['flipped']),'Explicit orientation normalization differs'
     assert np.array_equal(frames['beauty-enabled'],frames['beauty-disabled']),'Lookup binding must not imply an unverified NPR composition'
     summary={'playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'frames':len(cases),'validationErrors':0,
         'validationRequired':require_validation,'validationEnabled':validation_enabled,
-        'scope':'Real material GPU lookup; full native NPR composition remains pending','byteTolerance':3,'cases':metrics,
+        'scope':'Real material GPU lookup; full native NPR composition and linear HDR 1% accuracy remain pending','byteTolerance':1,'cases':metrics,
         'fixedDifference':0,'flipDifference':0,'beautyDifference':0}
     (root/'summary.json').write_text(json.dumps(summary,indent=2));print(json.dumps(summary))
 

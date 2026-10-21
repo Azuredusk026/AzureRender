@@ -15,6 +15,34 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  const unsigned char pixels[]={128,128,255,255,128,128,255,255,128,128,255,255,128,128,255,255};
  if(!stbi_write_png((root/"normal.png").string().c_str(),2,2,4,pixels,8))throw std::runtime_error("Cannot create image fixture");
  std::ofstream(root/"model.gltf")<<source.dump();
+ // Material factors use nearest quantization on both image and constant paths.
+ const unsigned char whitePixels[]={255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255};
+ if(!stbi_write_png((root/"white.png").string().c_str(),2,2,4,whitePixels,8))throw std::runtime_error("Cannot create white factor fixture");
+ auto factorSource=source;
+ const auto whiteImage=factorSource["images"].size();factorSource["images"].push_back({{"uri","white.png"}});
+ const auto whiteTexture=factorSource["textures"].size();factorSource["textures"].push_back({{"source",whiteImage}});
+ auto& factorPbr=factorSource["materials"][0]["pbrMetallicRoughness"];factorPbr.erase("baseColorTexture");
+ const auto checkFactor=[&](const nlohmann::json& factor,const std::array<unsigned char,4>& expected){
+     factorPbr["baseColorFactor"]=factor;factorPbr.erase("baseColorTexture");
+     std::ofstream(root/"constant-factor.gltf")<<factorSource.dump();
+     const auto constant=loadGltfAsset((root/"constant-factor.gltf").string());
+     for(std::size_t pixel=0;pixel<constant.materials[0].baseColorPixels.size();++pixel)
+         if(constant.materials[0].baseColorPixels[pixel]!=expected[pixel%4])
+             throw std::runtime_error("Untextured linear baseColorFactor must use nearest sRGB/linear-alpha byte quantization");
+     factorPbr["baseColorTexture"]={{"index",whiteTexture}};
+     std::ofstream(root/"white-texture-factor.gltf")<<factorSource.dump();
+     const auto textured=loadGltfAsset((root/"white-texture-factor.gltf").string());
+     if(textured.materials[0].baseColorPixels!=constant.materials[0].baseColorPixels)
+         throw std::runtime_error("White texture and untextured baseColorFactor must share quantization semantics");
+ };
+ auto defaultWhite=factorSource;defaultWhite["materials"][0]["pbrMetallicRoughness"].erase("baseColorFactor");
+ std::ofstream(root/"default-white.gltf")<<defaultWhite.dump();
+ if(loadGltfAsset((root/"default-white.gltf").string()).materials[0].baseColorPixels!=std::vector<std::uint8_t>(16,255))
+     throw std::runtime_error("Untextured default-white material must preserve all four channels at byte 255");
+ checkFactor({.0005,.003,.01,.5},{2,10,25,128});
+ checkFactor({1,1,1,1},{255,255,255,255});
+ checkFactor({.18,.04,.7,1},{118,56,218,255});
+ checkFactor({0,0,0,0},{0,0,0,0});
  const auto settings=TextureImportSettings::parse({{"usage","normal"},{"wrapV","clamp"},{"filter","nearest"},{"mipPolicy","none"}});
  std::ofstream(root/"normal.png.azmeta")<<nlohmann::json{{"schemaVersion",1},{"id","00000000-0000-4000-8000-000000000001"},{"settings",{{"texture",{{"filter","nearest"}}}}},{"dependencies",nlohmann::json::array()}}.dump();
  const auto inherited=loadGltfAsset((root/"model.gltf").string());

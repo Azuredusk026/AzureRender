@@ -1193,9 +1193,12 @@ AssetMaterial loadMaterial(
         result.baseColorPixels.resize(16);
         for (std::size_t pixel = 0; pixel < 4; ++pixel) {
             for (std::size_t channel = 0; channel < 4; ++channel) {
+                const double value = std::clamp(factor[channel], 0.0, 1.0);
+                const double encoded = channel == 3 ? value : (value <= 0.0031308
+                    ? 12.92 * value : 1.055 * std::pow(value, 1.0 / 2.4) - 0.055);
                 result.baseColorPixels[pixel * 4 + channel] =
                     static_cast<std::uint8_t>(
-                        (channel == 3 ? std::clamp(factor[channel], 0.0, 1.0) : (factor[channel] <= 0.0031308 ? 12.92 * factor[channel] : 1.055 * std::pow(factor[channel], 1.0 / 2.4) - 0.055)) * 255.0);
+                        std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
             }
         }
     }
