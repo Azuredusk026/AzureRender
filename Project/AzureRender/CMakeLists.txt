@@ -1094,7 +1094,9 @@ if(BUILD_TESTING)
     target_link_libraries(AzureRenderFrameTaskSchedulerTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FrameTaskScheduler COMMAND AzureRenderFrameTaskSchedulerTests)
     add_executable(AzureRenderSurfaceLifecycleTests tests/SurfaceLifecycleTests.cpp)
+    target_sources(AzureRenderSurfaceLifecycleTests PRIVATE src/editor/documents/EditorTaskService.cpp)
     target_include_directories(AzureRenderSurfaceLifecycleTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderSurfaceLifecycleTests PRIVATE AzureValidation)
     add_test(NAME AzureRender.SurfaceLifecycle COMMAND AzureRenderSurfaceLifecycleTests)
     add_executable(
         AzureRenderCommandLineTests

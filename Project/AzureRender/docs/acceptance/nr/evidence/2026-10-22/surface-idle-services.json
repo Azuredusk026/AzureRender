@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "scope": "bounded zero-size surface wait and production host service polling",
+  "runtimeDiagnosis": {
+    "pid": 2996,
+    "mainThread": 33524,
+    "window": 6100618,
+    "isIconic": true,
+    "clientWidth": 0,
+    "clientHeight": 0,
+    "topFrame": "win32u!NtUserWaitMessage",
+    "directory": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/production-import-v4",
+    "files": [
+      "thread-stacks.txt",
+      "window-state.json"
+    ]
+  },
+  "eventWaitMaximumSeconds": 0.05,
+  "idleServices": [
+    "ValidationService::pump(currentFrame)",
+    "EditorSession::pollTasks()"
+  ],
+  "red": {
+    "configuration": "Debug",
+    "log": "red-debug.log",
+    "failure": "zero-size surface used the unbounded event wait instead of the timed wait"
+  },
+  "verification": [
+    {
+      "configuration": "Debug",
+      "tests": 2,
+      "failed": 0,
+      "seconds": 0.18,
+      "log": "green-debug.log"
+    },
+    {
+      "configuration": "Release",
+      "tests": 2,
+      "failed": 0,
+      "seconds": 0.11,
+      "log": "green-release.log"
+    }
+  ],
+  "ctestRegex": "^(AzureRender.SurfaceLifecycle|AzureEngine.Observation)$",
+  "buildTargets": [
+    "AzureRenderSurfaceLifecycleTests",
+    "AzureObservationTests"
+  ],
+  "evidenceDirectory": "build/runs/20261021-172156-native-render-evidence-623c52/surface-idle-cpu",
+  "integration": {
+    "fixedHostFrame": 17,
+    "queryCompletesDuringWait": true,
+    "readyEditorTaskCommitsDuringWait": true,
+    "frameWaitRemainsPendingDuringWait": true,
+    "frameWaitWallClockTimeoutRetained": true,
+    "restoredHostFrame": 18,
+    "frameWaitCompletesAfterResume": true,
+    "nativeCloseAndHostCloseTerminateWait": true
+  },
+  "hostBuild": {
+    "configuration": "Release",
+    "executable": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+    "executableSha256": "30697be3c36288406fc050c7786cb9a5ff974ab9aa019f921b586019ccad24b3",
+    "launchReceiptMatchesCurrentFile": true
+  },
+  "deviceVerification": {
+    "configuration": "Release",
+    "passed": true,
+    "gpuExecuted": true,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "uiDriver": "root sky",
+    "hostMode": "editor",
+    "fixedFrameStep": true,
+    "evidenceDirectory": "build/runs/20261021-172156-native-render-evidence-623c52/surface-idle-device/release",
+    "fixedHostFrame": 2189,
+    "frameSamples": [
+      2189,
+      2189,
+      2189,
+      2189
+    ],
+    "concurrentQuery": {
+      "status": "ready",
+      "frame": 2189
+    },
+    "waitFrameDeadlineMs": 1000,
+    "waitFrameResult": {
+      "code": "Timeout",
+      "elapsedMs": 1013.4059,
+      "message": "Request deadline elapsed",
+      "passed": false,
+      "schemaVersion": 1
+    },
+    "clientElapsedSeconds": 1.0159999999959837,
+    "restoredFrame": 2201,
+    "restoredStatus": "ready",
+    "restoredExtent": [
+      1920,
+      1080
+    ],
+    "cleanup": {
+      "returnCode": 0,
+      "forcedTermination": false,
+      "closeError": null,
+      "allocatorAfterUnloadZero": true,
+      "validationLogClean": true
+    },
+    "sourceProjectUnchanged": true,
+    "explicitValidationLayerEnabled": false,
+    "validationLayerLog": "Validation layer: disabled",
+    "sha256": {
+      "report.json": "62a100386273b71c7eeb0eed907a2bbfdf84c9183aa5a34fbf5a8bc8570d167d",
+      "host/cleanup.json": "3b405099988c51937ad615c080a05cf5d2a1db235dc952cfa38ecc368ecbf3ff",
+      "host/launch.json": "8a44519c3f7b3a370183d4436920856c2c7d696eb5c6aebf8b57ec4db7f19742",
+      "host/command.json": "0a2eab441a922fce17a69d6df2d4d7da12dda06b0fef3ca86124c9e18b8acc2a",
+      "host/runtime.json": "bf5eb41aa0af1b6123ee689f091c95163c8e5591ff3d51fd9f56cdbceb5b6e73",
+      "host/stdout.log": "3a9dd769eb0a66854259c46f8858cdc8f3e7884da8ae8f573df6613214616859",
+      "host/stderr.log": "5012347a0cf281f042b9aaf93db7755d25304951002cb7938dfbeac2b7be8678",
+      "host/captures/surface-before.png": "9cafa3cdb9bc33f0671543ba3b641a0df00c858ecd37ceffa2fe24835723a223",
+      "host/captures/surface-restored.png": "754cf92a9d142144039358075eac175b4d2c1b5bc58f24892595bb303f5d0b14"
+    },
+    "scriptSha256": "152bb789cf9e4978b3a65c611de58b868830f84f856f38751d6e63d796fa4aa7"
+  },
+  "sourceSnapshot": {
+    "gitHead": "c4a59e573b6edd137e9caab332d8e96e968835e0",
+    "sha256": {
+      "CMakeLists.txt": "2d2dc21cb4eeda2fbb86f0ccf54ab6caf033f7b24d70849b919b97f7dd593979",
+      "src/platform/SurfaceLifecycle.hpp": "7e7489e6f4ec60e172012ee49bfab40a68f73cbc07f3ce94ebc314ecd8efcafd",
+      "src/platform/GlfwFrontend.hpp": "30f75bf612cb44f5a2ab5fbd275d6d87c51f04094d9604a6eaeeda25f9186658",
+      "src/platform/GlfwFrontend.cpp": "03bb8d97328b2b563e9fb57a2f1bf73efd697164f9ea96c76dcace8de773228e",
+      "src/app/AzureRenderApp.hpp": "485c49d43f3baa4eaacafd40cfe5169cf43d357294a9f47735e552a3cc3341ee",
+      "src/app/AzureRenderSupport.cpp": "790e25843ed1ef51006259711dc6968827befbf58c4c05f2725e3076cde0f8db",
+      "src/app/AzureRenderFrame.cpp": "89b434869fe0df6f9f8a0ab1c8d14a9abf926dc4a9160bbdd285fba3bf82f5b4",
+      "tests/SurfaceLifecycleTests.cpp": "e6eb4e03e908a71dd3dcc664ecce30f8abe15516cb6fcbcd010691adc683078c"
+    },
+    "timing": "reviewed after the successful Release device run; executable hash still matches its launch receipt"
+  },
+  "remainingVerification": [
+    "real-time simulation delta and scene-time continuity after restoration",
+    "Debug actual minimize, restore and close",
+    "explicit Vulkan validation layer enabled for the same lifecycle scenario"
+  ]
+}

@@ -456,7 +456,7 @@ private:
         std::uint32_t width,
         std::uint32_t height,
         const std::string& outputPath = {}) const;
-    void recreateSwapchain();
+    bool recreateSwapchain();
     void recreateEditorViewportResources();
     void cleanupEditorViewportResources(bool destroySampler);
     void cleanupSwapchain();

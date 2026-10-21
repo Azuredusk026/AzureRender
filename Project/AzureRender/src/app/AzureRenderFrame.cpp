@@ -75,8 +75,8 @@ void AzureRenderApp::drawFrame() {
     }
 #endif
     const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
-    if(sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale)
-        recreateSwapchain();
+    if((sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale)
+        &&!recreateSwapchain())return;
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
 

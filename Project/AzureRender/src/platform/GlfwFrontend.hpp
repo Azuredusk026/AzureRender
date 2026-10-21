@@ -41,6 +41,7 @@ public:
     void recordFileDrop(int count,const char** paths);
     std::vector<FileDropEvent> consumeFileDrops(){auto result=std::move(fileDrops_);fileDrops_.clear();return result;}
     void waitEvents() const;
+    void waitEventsTimeout(double timeoutSeconds) const;
     void requestClose() const;
     VkSurfaceKHR createSurface(VkInstance instance) const;
 

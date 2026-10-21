@@ -74,6 +74,9 @@ void GlfwFrontend::recordFileDrop(int count,const char** paths) {
 void GlfwFrontend::waitEvents() const {
     glfwWaitEvents();
 }
+void GlfwFrontend::waitEventsTimeout(double timeoutSeconds) const {
+    glfwWaitEventsTimeout(timeoutSeconds);
+}
 
 void GlfwFrontend::requestClose() const {
     glfwSetWindowShouldClose(window_, GLFW_TRUE);

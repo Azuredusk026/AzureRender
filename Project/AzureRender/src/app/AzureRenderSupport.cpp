@@ -4,6 +4,7 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #if AZURE_WITH_EDITOR
 #include "editor/ImGuiEditorLayer.hpp"
+#include "editor/EditorSession.hpp"
 #endif
 #include "extensions/ISceneRenderer.hpp"
 #include "platform/GlfwFrontend.hpp"
@@ -125,8 +126,26 @@ bool AzureRenderApp::checkValidationLayerSupport() const {
         });
 }
 
-void AzureRenderApp::recreateSwapchain() {
-    if (!azurerender::waitForDrawableSurface(*frontend_)) return;
+bool AzureRenderApp::recreateSwapchain() {
+    const auto waitStart=frontend_->timeSeconds();
+    bool suspended=false;
+    const auto drawable=azurerender::waitForDrawableSurface(*frontend_,[this,&suspended] {
+        suspended=true;
+        if(validation_)validation_->pump(gameplayFrame_);
+#if AZURE_WITH_EDITOR
+        if(runOptions_.editorSession) {
+            runOptions_.editorSession->pollTasks();
+            if(runOptions_.editorSession->closeReady())return false;
+        }
+#endif
+        return true;
+    });
+    if(suspended) {
+        const auto pausedSeconds=std::max(0.0,frontend_->timeSeconds()-waitStart);
+        lastRotationTime_+=pausedSeconds;
+        pausedTimeOffset_+=pausedSeconds;
+    }
+    if(!drawable)return false;
 
     vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(swapchain recreate)");
     graphicsCompleted_=graphicsSubmission_;
@@ -164,6 +183,7 @@ void AzureRenderApp::recreateSwapchain() {
     azurerender::RuntimeDiagnostics::instance().print(
         "surface", "Swapchain recreated: " + std::to_string(swapchainExtent_.width)
             + "x" + std::to_string(swapchainExtent_.height));
+    return true;
 }
 
 void AzureRenderApp::recreateEditorViewportResources() {
