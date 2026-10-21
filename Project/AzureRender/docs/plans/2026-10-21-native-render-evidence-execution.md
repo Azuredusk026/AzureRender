@@ -70,6 +70,8 @@ UI 截图记录实际编码和像素尺寸。
 该样本的三个通道均满足百分之一误差条件。
 同批宿主的十条布局校验错误仍待定位。
 范围与收据见[抓帧链验证](../acceptance/nr/renderdoc-capture.md)。
+工具屏障改写及缩略图时序见[布局诊断](../acceptance/nr/renderdoc-layout-audit.md)。
+正常限帧取帧保留一条独立取图错误。
 
 ## 渲染实施顺序
 

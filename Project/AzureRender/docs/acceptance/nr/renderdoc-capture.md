@@ -222,6 +222,10 @@ python -m unittest discover -s tools -p 'test_native_render*.py'
 工具版本、层顺序及宿主截图路径需分别取证。
 当前 Debug 抓帧不能作为无校验错误的证据。
 
+屏障改写已定位至工具的呈现布局转换。
+正常限帧捕获与重放导出保留一条取图校验错误。
+源码、CPU 红绿检查及运行归因见[布局诊断](renderdoc-layout-audit.md)。
+
 ## 1.46 便携验证
 
 官方便携包使用内嵌 Python 3.8.20。
