@@ -21,7 +21,14 @@ def main():
     parser.add_argument('--exchange', action='store_true')
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--bake-materials', type=int, metavar='RESOLUTION')
+    parser.add_argument('--lod-policy', choices=('metric', 'highest'), default='metric')
+    parser.add_argument('--lod-metric-squared', type=float)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+    if args.lod_policy == 'highest' and args.lod_metric_squared is not None:
+        parser.error('--lod-metric-squared requires --lod-policy metric')
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from endfield_native.scene_lod import select_draw_indices
+    from endfield_native.mesh_binding import resolve_mesh_binding
     source = args.source_root.resolve(strict=True)
     probe = args.probe.resolve(strict=True)
     inventory = args.inventory.resolve(strict=True)
@@ -43,7 +50,6 @@ def main():
         if path in containers and containers[path] != row['Asset']:
             raise ValueError('Ambiguous source container: ' + path)
         containers[path] = row['Asset']
-    meshes = {reference_key(row['Asset']): row for row in manifest['MeshExports']}
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     mesh_cache, material_cache, draw_cache = {}, {}, {}
@@ -61,17 +67,15 @@ def main():
         parent.matrix_world = unity_matrix(struct.pack('<16f', *entity['matrix']))
         reconstructed = basis.inverted() @ parent.matrix_world @ basis
         max_matrix_error = max(max_matrix_error, max(abs(reconstructed[r][c] - entity['matrix'][c*4+r]) for r in range(4) for c in range(4)))
-        for index, pair in enumerate(row['pairs']):
+        selected = select_draw_indices(row['pairs'], policy=args.lod_policy,
+            metric_squared=args.lod_metric_squared if args.lod_metric_squared is not None else 0.0)
+        for index in selected:
+            pair = row['pairs'][index]
             draw = pair['draw']
-            if not draw['lod_min_squared'] <= 0 < draw['lod_max_squared']:
-                continue
-            path, separator, name = pair['mesh'].partition('##')
-            asset = containers[path]
-            if separator and asset['Name'].casefold() != name:
-                raise ValueError('Source mesh subasset identity mismatch')
+            asset, exported, alias = resolve_mesh_binding(pair['mesh'], containers, manifest['MeshExports'])
             key = reference_key(asset)
             if key not in mesh_cache:
-                objects = import_obj(probe / meshes[key]['File'])
+                objects = import_obj(probe / exported['File'])
                 mesh_cache[key] = [obj.data for obj in objects]
                 for obj in objects:
                     bpy.data.objects.remove(obj, do_unlink=True)
@@ -107,6 +111,10 @@ def main():
             obj['source_submesh'] = draw['submesh']
             audit.append(dict(entity=entity['entity_id'], mesh=pair['mesh'], material=pair['material'],
                               submesh=draw['submesh'], vertices=len(mesh.vertices),
+                              source_draw_index=index,
+                              source_mesh_object=asset,
+                              source_mesh_label_alias=alias,
+                              lod_interval=[draw['lod_min_squared'], draw['lod_max_squared']],
                               triangles=sum(len(p.vertices)-2 for p in mesh.polygons)))
     if max_matrix_error > 1e-4:
         raise ValueError('Source world matrix round-trip exceeds tolerance')
@@ -151,7 +159,9 @@ def main():
                   inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path)],
                   exchange_resources=len(exchange['resources']) if exchange else None,
                   baked_materials=bake_reports,
-                  limitations=['static LOD at squared distance zero', 'upstream material approximation',
+                  lod_policy=args.lod_policy,
+                  lod_metric_squared=(args.lod_metric_squared or 0.0) if args.lod_policy == 'metric' else None,
+                  limitations=['static authored LOD selection; runtime camera mapping unverified', 'upstream material approximation',
                                'whole meshes retained at slice boundary', 'game lighting and effects absent'])
     (output / 'audit.json').write_text(json.dumps(report, indent=2), encoding='utf8')
     if args.render:

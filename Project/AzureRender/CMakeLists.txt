@@ -2214,7 +2214,8 @@ if(BUILD_TESTING)
         "ResourceValidationRunner|test_resource_validation_runner.py"
         "ValidationAssetExport|test_validation_asset_export.py"
         "SceneExchange|test_scene_exchange.py"
-        "MaterialSemantics|test_material_semantics.py")
+        "MaterialSemantics|test_material_semantics.py"
+        "EndfieldNative|test_endfield_native*.py")
         string(REPLACE "|" ";" _ev_parts "${_ev_case}")
         list(GET _ev_parts 0 _ev_name)
         list(GET _ev_parts 1 _ev_file)

@@ -147,6 +147,8 @@ NR7 统一环境后处理，NR8 完成综合验收。
 本机启动索引及更新包导出已完成验证。
 挂载优先级、内容版本及实例完整性继续核验。
 来源和边界见[资源分层读取](../acceptance/nr/layered-content.md)。
+中央区及上层区已完成原作最高细节转换。
+精确对象绑定及范围见[几何细节证据](../acceptance/nr/source-geometry-detail.md)。
 
 文件：扩展 `tools/endfield_native/lighting.py`、`scene.py`。
 新增 `tools/endfield_native/environment.py`。

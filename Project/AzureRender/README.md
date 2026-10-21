@@ -128,6 +128,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 原生目录与资源包读取已通过本机验证。
 原生读取支持[显式资源分层](docs/acceptance/nr/layered-content.md)。
 更新目录与共享基础块可组合读取，并保留来源收据。
+场景转换支持[原作最高细节选择](docs/acceptance/nr/source-geometry-detail.md)。
 原生待机候选已进入引擎，材质与物理效果待完善。
 完整原生走跑已通过[两组速度混合回放](docs/acceptance/nr/native-locomotion.md)。
 原生表情源已取得，演示保持中性。
