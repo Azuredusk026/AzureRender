@@ -3,6 +3,7 @@
 #include <array>
 #include <cmath>
 #include <stdexcept>
+#include "render/LightInfluenceBox.hpp"
 
 namespace azurerender {
 enum class LightKind { Point = 0, Spot = 1, Directional = 2 };
@@ -17,8 +18,10 @@ struct LightShape {
     float outerCone = .785398163F;
     LightFalloff falloff = LightFalloff::Legacy;
     float falloffExponent = 2;
+    LightInfluenceBox influenceBox;
 
     void validate() const {
+        influenceBox.validate();
         if (type != LightKind::Point && type != LightKind::Spot && type != LightKind::Directional)
             throw std::invalid_argument("Unknown light type");
         if (falloff != LightFalloff::Legacy && falloff != LightFalloff::SmoothInverseSquare

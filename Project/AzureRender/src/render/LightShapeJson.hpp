@@ -2,13 +2,23 @@
 #include "render/LightShape.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
+inline void to_json(nlohmann::json& value,const LightInfluenceBox& box) {
+    box.validate();
+    value={{"enabled",box.enabled},{"worldToBox",box.worldToBox},{"falloffThreshold",box.falloffThreshold}};
+}
+inline void from_json(const nlohmann::json& value,LightInfluenceBox& box) {
+    box.enabled=value.value("enabled",false);
+    box.worldToBox=value.value("worldToBox",box.worldToBox);
+    box.falloffThreshold=value.value("falloffThreshold",.8F);
+    box.validate();
+}
 inline void to_json(nlohmann::json& value, const LightShape& shape) {
     shape.validate();
     value = {{"type", shape.type == LightKind::Directional ? "directional" : shape.type == LightKind::Spot ? "spot" : "point"},
         {"direction", shape.direction}, {"innerCone", shape.innerCone}, {"outerCone", shape.outerCone},
         {"falloff",shape.falloff==LightFalloff::RangePower?"range-power":
             shape.falloff==LightFalloff::SmoothInverseSquare?"smooth-inverse-square":"legacy"},
-        {"falloffExponent",shape.falloffExponent}};
+        {"falloffExponent",shape.falloffExponent},{"influenceBox",shape.influenceBox}};
 }
 inline void from_json(const nlohmann::json& value, LightShape& shape) {
     const auto type = value.value("type", std::string("point"));
@@ -23,6 +33,7 @@ inline void from_json(const nlohmann::json& value, LightShape& shape) {
     shape.falloff=falloff=="range-power"?LightFalloff::RangePower:
         falloff=="smooth-inverse-square"?LightFalloff::SmoothInverseSquare:LightFalloff::Legacy;
     shape.falloffExponent=value.value("falloffExponent",2.F);
+    shape.influenceBox=value.value("influenceBox",LightInfluenceBox{});
     shape.validate();
 }
 }

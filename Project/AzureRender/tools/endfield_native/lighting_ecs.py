@@ -31,6 +31,10 @@ def decode_buffers(common, light):
         range=scalar(light,24),spot_angle=scalar(light,36),
         inner_spot_angle=scalar(light,40),linear_length=scalar(light,144),
         falloff_exponent=scalar(light,444),
+        obb_relative_position=values(light,100,'3f'),
+        obb_half_extents=values(light,112,'3f'),
+        obb_orientation=values(light,124,'3f'),
+        obb_falloff_threshold=scalar(light,136),
         matrix=matrix,position=matrix[12:15],direction=matrix[8:11])
     for key,raw,offset in (('use_color_temperature',common,24),('enable_obb',light,92),
             ('is_sun_source',light,90),('shadow_only',light,91)):
@@ -47,6 +51,43 @@ def render_falloff(exponent):
         raise ValueError('Unsupported native light falloff exponent')
     return dict(falloff='smooth-inverse-square' if exponent<0 else 'range-power',
                 falloffExponent=2 if exponent<0 else exponent)
+
+
+def render_influence_box(fields):
+    """Convert inverse TRS and half packing used by LightCulling.PrepareCPUData.
+
+    Source box translation and Euler orientation are relative world coordinates.
+    The deferred shader subtracts light position before applying the packed rows.
+    Unity Euler order is Z, X, Y, with angles in degrees.
+    """
+    if not fields['enable_obb']:return {'enabled':False}
+    position=fields['position'];offset=fields['obb_relative_position']
+    extents=fields['obb_half_extents'];angles=fields['obb_orientation']
+    threshold=fields['obb_falloff_threshold']
+    if not all(math.isfinite(x) for x in [*position,*offset,*extents,*angles,threshold]):
+        raise ValueError('Nonfinite native influence box')
+    if min(extents)<=0 or not 0<=threshold<=1:
+        raise ValueError('Unsupported native influence box extents or threshold')
+    x,y,z=[math.radians(a) for a in angles]
+    sx,cx=math.sin(x),math.cos(x);sy,cy=math.sin(y),math.cos(y);sz,cz=math.sin(z),math.cos(z)
+    # R = Ry * Rx * Rz. Inverse rows are transposed rotation / half extent.
+    rotation=[[cy*cz+sy*sx*sz,-cy*sz+sy*sx*cz,sy*cx],
+              [cx*sz,cx*cz,-sx],[-sy*cz+cy*sx*sz,sy*sz+cy*sx*cz,cy*cx]]
+    rows=[]
+    try:
+        half=lambda f:struct.unpack('<e',struct.pack('<e',f))[0]
+        for i in range(3):
+            row=[rotation[j][i]/extents[i] for j in range(3)]
+            translation=-sum(a*b for a,b in zip(row,offset))
+            row=[half(a) for a in [*row,translation]]
+            row[3]-=sum(a*b for a,b in zip(row,position))
+            rows.append(row)
+    except (OverflowError,struct.error) as error:
+        raise ValueError('Native influence box exceeds half precision') from error
+    determinant=sum(rows[0][i]*(rows[1][(i+1)%3]*rows[2][(i+2)%3]-rows[1][(i+2)%3]*rows[2][(i+1)%3]) for i in range(3))
+    if not math.isfinite(determinant) or determinant==0:
+        raise ValueError('Packed native influence box is singular')
+    return dict(enabled=True,worldToBox=rows,falloffThreshold=threshold)
 
 
 def merge_rows(rows):

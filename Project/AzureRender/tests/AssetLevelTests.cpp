@@ -118,6 +118,17 @@ int main() {
   auto directional=nlohmann::json{{"type","directional"},{"direction",{0,0,-1}}}.get<LightShape>();
   check(nlohmann::json(directional).at("type")=="directional");
   check(directional.angularWeight({1,0,0})==1.F);
+  auto boxed=directional;
+  boxed.influenceBox.enabled=true;boxed.influenceBox.worldToBox[0][3]=3;
+  auto boxedDocument=level;boxedDocument["lights"][0]["shape"]=boxed;
+  auto boxedLevel=Level::parse(boxedDocument,db);boxedLevel.save(root/"assets/boxed.azurelevel");
+  const auto reopenedBox=Level::load(root/"assets/boxed.azurelevel",db).scene.lights[0].shape.influenceBox;
+  check(reopenedBox.enabled&&reopenedBox.worldToBox[0][3]==3);
+  check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
+  for(const auto& invalidBox:{nlohmann::json{{"falloffThreshold",-1}},
+          nlohmann::json{{"enabled",true},{"worldToBox",{{0,0,0,0},{0,0,0,0},{0,0,0,0}}}}}) {
+    bool rejected=false;try{(void)invalidBox.get<LightInfluenceBox>();}catch(const std::exception&){rejected=true;}check(rejected);
+  }
   auto directionalDocument=level;
   directionalDocument["lights"][0]["shape"]=directional;
   auto directionalLevel=Level::parse(directionalDocument,db);

@@ -39,6 +39,43 @@ class EcsLightTests(unittest.TestCase):
         struct.pack_into('<f',bad,444,float('nan'))
         with self.assertRaises(ValueError):lighting_ecs.decode_buffers(common,bad)
 
+    def test_native_obb_fields_preserve_three_component_orientation(self):
+        common,light=fixture();light=bytearray(light)
+        struct.pack_into('<10f',light,100,3,4,5,6,7,8,10,20,30,.75)
+        value=lighting_ecs.decode_buffers(common,light)
+        self.assertEqual(value['obb_relative_position'],[3,4,5])
+        self.assertEqual(value['obb_half_extents'],[6,7,8])
+        self.assertEqual(value['obb_orientation'],[10,20,30])
+        self.assertEqual(value['obb_falloff_threshold'],.75)
+
+    def test_native_obb_nonfinite_fields_are_rejected(self):
+        common,light=fixture()
+        for offset in (100,112,124,136):
+            invalid=bytearray(light);struct.pack_into('<f',invalid,offset,float('nan'))
+            with self.assertRaises(ValueError):lighting_ecs.decode_buffers(common,invalid)
+
+    def test_render_box_preserves_native_relative_world_space(self):
+        common,light=fixture();fields=lighting_ecs.decode_buffers(common,light)
+        fields.update(obb_relative_position=[1,2,3],obb_half_extents=[2,4,8],
+                      obb_orientation=[0,0,0],obb_falloff_threshold=.5)
+        box=lighting_ecs.render_influence_box(fields)
+        self.assertEqual(box['worldToBox'],[[.5,0,0,-2],[0,.25,0,-1.5],[0,0,.125,-1]])
+        self.assertEqual(box['falloffThreshold'],.5)
+        fields['obb_orientation']=[0,0,90]
+        box=lighting_ecs.render_influence_box(fields)
+        self.assertEqual(box['worldToBox'],[[0,.5,0,-3],[-.25,0,0,1],[0,0,.125,-1]])
+        fields.update(position=[0,0,0],obb_relative_position=[0,0,0],
+                      obb_half_extents=[1,1,1],obb_orientation=[90,90,0])
+        self.assertEqual(lighting_ecs.render_influence_box(fields)['worldToBox'],
+                         [[0,0,-1,0],[1,0,0,0],[0,-1,0,0]])
+        fields['enable_obb']=False
+        self.assertEqual(lighting_ecs.render_influence_box(fields),{'enabled':False})
+
+    def test_render_box_rejects_unrepresentable_source(self):
+        common,light=fixture();fields=lighting_ecs.decode_buffers(common,light)
+        fields.update(obb_half_extents=[1,1,0],obb_falloff_threshold=.5)
+        with self.assertRaises(ValueError):lighting_ecs.render_influence_box(fields)
+
     def test_render_falloff_mapping(self):
         self.assertEqual(lighting_ecs.render_falloff(-1),dict(falloff='smooth-inverse-square',falloffExponent=2))
         self.assertEqual(lighting_ecs.render_falloff(6.24),dict(falloff='range-power',falloffExponent=6.24))

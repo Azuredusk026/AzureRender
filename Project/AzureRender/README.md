@@ -138,6 +138,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 场景[方向光](docs/runtime/directional-lights.md)接入光栅及路径追踪。
 场景文档保存完整形状与衰减参数。
 显式场景照明按主方向光生成级联阴影。
+灯光支持独立世界空间的[盒状作用体积](docs/runtime/light-influence-boxes.md)。
 独立局部反射支持原作层级、盒投影与体积混合。
 公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
 中庭反射候选已完成四帧采样，整体照明仍待还原。

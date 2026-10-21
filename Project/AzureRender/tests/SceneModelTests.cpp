@@ -70,6 +70,9 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
             || loadedLight.shape.outerCone != expectedLight.shape.outerCone
             || loadedLight.shape.falloff != expectedLight.shape.falloff
             || loadedLight.shape.falloffExponent != expectedLight.shape.falloffExponent
+            || loadedLight.shape.influenceBox.enabled != expectedLight.shape.influenceBox.enabled
+            || loadedLight.shape.influenceBox.worldToBox != expectedLight.shape.influenceBox.worldToBox
+            || loadedLight.shape.influenceBox.falloffThreshold != expectedLight.shape.influenceBox.falloffThreshold
             || loadedLight.enabled != expectedLight.enabled) {
             return false;
         }
@@ -139,9 +142,13 @@ int main() {
         document.lights[0].shape.outerCone = .5F;
         document.lights[0].shape.falloff=azurerender::LightFalloff::RangePower;
         document.lights[0].shape.falloffExponent=3.5F;
+        document.lights[0].shape.influenceBox.enabled=true;
+        document.lights[0].shape.influenceBox.worldToBox[0]={0,.5F,0,-.5F};
+        document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
         const auto shapeReloaded=azurerender::SceneDocument::load(scenePath).lights[0].shape;
         assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
+        assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);
         auto directionalDocument=document;
         directionalDocument.lights[0].shape.type=azurerender::LightKind::Directional;
         directionalDocument.save(directory/"directional.azscene");
@@ -167,16 +174,31 @@ int main() {
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
             auto legacy=contents;
-            const auto header=legacy.find("schemaVersion 8");assert(header!=std::string::npos);
+            const auto header=legacy.find("schemaVersion 9");assert(header!=std::string::npos);
             legacy.replace(header,15,"schemaVersion 6");
             const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
             legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
+            const auto boxLine=legacy.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
+            legacy.erase(boxLine,legacy.find('\n',boxLine)-boxLine+1);
             const auto giLine=legacy.find("irradianceVolume ");assert(giLine!=std::string::npos);
             legacy.erase(giLine,legacy.find('\n',giLine)-giLine+1);
             const auto legacyPath=directory/"legacy.azscene";
             {std::ofstream legacyFile(legacyPath);legacyFile<<legacy;}
             assert(!azurerender::SceneDocument::load(legacyPath).irradianceVolume.enabled);
+            assert(!azurerender::SceneDocument::load(legacyPath).lights[0].shape.influenceBox.enabled);
             assert(azurerender::SceneDocument::load(legacyPath).lights[0].shape.falloff==azurerender::LightFalloff::Legacy);
+        }
+        {
+            std::ifstream saved(scenePath);
+            std::string versionEight((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
+            const auto header=versionEight.find("schemaVersion 9");assert(header!=std::string::npos);
+            versionEight.replace(header,15,"schemaVersion 8");
+            const auto boxLine=versionEight.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
+            versionEight.erase(boxLine,versionEight.find('\n',boxLine)-boxLine+1);
+            const auto path=directory/"version-eight.azscene";
+            {std::ofstream file(path);file<<versionEight;}
+            const auto reopened=azurerender::SceneDocument::load(path).lights[0].shape;
+            assert(!reopened.influenceBox.enabled&&reopened.falloff==azurerender::LightFalloff::RangePower&&reopened.falloffExponent==3.5F);
         }
         assert(std::filesystem::exists(scenePath));
         assert(loadedDocumentMatches(scenePath, document));

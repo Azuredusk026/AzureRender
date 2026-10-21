@@ -58,6 +58,8 @@ struct ClusterLight {
     vec4 colorIntensity;
     vec4 directionOuter;
     vec4 coneType;
+    vec4 boxRows[3];
+    vec4 boxParameters;
 };
 layout(std430, binding = 14) readonly buffer SceneLightBuffer {
     ClusterLight lights[];
@@ -621,6 +623,7 @@ void main() {
             attenuation *= cone * cone;
         }
         float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
+        attenuation*=lightInfluenceBoxWeight(worldPosition,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;

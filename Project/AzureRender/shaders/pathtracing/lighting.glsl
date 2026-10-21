@@ -22,6 +22,7 @@ vec3 directLighting(vec3 position,vec3 ng,vec3 n,vec3 v,vec3 albedo,float metal,
  if(p.counts.z>0u){uint chosen=min(p.counts.z-1u,uint(random()*float(p.counts.z)));Light light=lights[chosen];vec3 target=light.position.xyz;vec3 radiance=light.radiance.rgb;float pdf=1/float(p.counts.z);bool area=light.position.w<.5;
   if(area){uint index=uint(light.position.x);Triangle t=triangles[index];float u=sqrt(random()),w=random();vec2 b=vec2(u*(1-w),u*w);target=t.p0.xyz+t.e1.xyz*b.x+t.e2.xyz*b.y;Material m=materials[uint(t.uv2material.z)];vec2 uv=t.uv01.xy*(1-b.x-b.y)+t.uv01.zw*b.x+t.uv2material.xy*b.y;radiance=texel(m.emission,uv).rgb*m.properties.x;}
   bool directional=!area&&light.coneType.y>1.5;
+  if(!area)radiance*=lightInfluenceBoxWeight(position,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
   vec3 delta=target-position;float distance=directional?1e30:length(delta);vec3 l=directional?-light.directionOuter.xyz:delta/max(distance,1e-8);float cosine=max(dot(n,l),0);
   if(!area&&!directional&&light.coneType.y>.5){float cone=clamp((dot(-l,light.directionOuter.xyz)-light.directionOuter.w)/max(light.coneType.x-light.directionOuter.w,1e-6),0,1);if(light.coneType.x==light.directionOuter.w)cone=step(light.directionOuter.w,dot(-l,light.directionOuter.xyz));radiance*=cone*cone;}
   if(cosine>0&&dot(ng,l)>0&&visible(position,ng,l,distance-.002)){

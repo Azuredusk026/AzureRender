@@ -7,6 +7,22 @@
 
 int main() { try {
     azurerender::LightBuffer buffer;
+    azurerender::LightInfluenceBox box;
+    box.enabled=true;box.falloffThreshold=.5F;
+    assert(box.weight({0,0,0})==1.F);
+    assert(box.weight({.75F,0,0})==1.F);
+    assert(box.weight({.875F,0,0})==.25F);
+    assert(box.weight({0,1,0})==0.F);
+    assert(box.weight({0,0,-2})==0.F);
+    box.worldToBox[0]={0,.5F,0,-.5F};box.worldToBox[1]={-1,0,0,0};
+    box.validate();assert(box.weight({0,1,0})==1.F&&box.weight({2,1,0})==0.F);
+    box.falloffThreshold=1;assert(box.weight({0,1,0})==1.F&&box.weight({1,1,0})==0.F);
+    auto invalid=box;invalid.worldToBox[0]={0,0,0,0};bool rejectedBox=false;
+    try{invalid.validate();}catch(const std::invalid_argument&){rejectedBox=true;}assert(rejectedBox);
+    invalid=box;invalid.falloffThreshold=1.1F;rejectedBox=false;
+    try{invalid.validate();}catch(const std::invalid_argument&){rejectedBox=true;}assert(rejectedBox);
+    azurerender::RenderLight shaped;shaped.shape.influenceBox=box;buffer.setLights({shaped});
+    assert(buffer.gpuData()[0].boxRows==box.worldToBox&&buffer.gpuData()[0].boxParameters[0]==1.F);
     buffer.setLights({{9}, {2}, {5}});
     assert(buffer.lights().size() == 3);
     assert(buffer.lights()[0].stableId == 2);

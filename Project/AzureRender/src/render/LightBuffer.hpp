@@ -27,6 +27,8 @@ struct RenderLightGpu {
     float colorIntensity[4]{};
     float directionOuter[4]{};
     float coneType[4]{};
+    std::array<std::array<float,4>,3> boxRows{};
+    std::array<float,4> boxParameters{};
 };
 
 class LightBuffer final {
@@ -60,6 +62,8 @@ public:
             value.coneType[1] = static_cast<float>(light.shape.type);
             value.coneType[2] = static_cast<float>(light.shape.falloff);
             value.coneType[3] = light.shape.falloffExponent;
+            value.boxRows=light.shape.influenceBox.worldToBox;
+            value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,0,0};
             packed.push_back(value);
         }
         return packed;

@@ -34,6 +34,17 @@ int main(){try{
  scene.lights[0].shape.direction={0,1,0};
  const auto directionalLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
  require(directionalLight.coneType[1]==2.F&&directionalLight.directionOuter[1]==1.F,"Tracing preserves directional emitter direction");
+ const auto volumeFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.influenceBox.enabled=true;
+ require(tracing::sceneFingerprint(scene,{})!=volumeFingerprint,"Influence activation invalidates tracing history");
+ const auto boxFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.influenceBox.worldToBox[0][3]=3;
+ require(tracing::sceneFingerprint(scene,{})!=boxFingerprint,"Influence transform invalidates tracing history");
+ const auto thresholdFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.influenceBox.falloffThreshold=.5F;
+ require(tracing::sceneFingerprint(scene,{})!=thresholdFingerprint,"Influence fade invalidates tracing history");
+ const auto shapedLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
+ require(shapedLight.boxParameters[0]==1&&shapedLight.boxParameters[1]==.5F&&shapedLight.boxRows[0][3]==3,"Tracing retains the world-space influence volume");
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");

@@ -1,5 +1,15 @@
 #ifndef AZURE_LIGHT_ATTENUATION
 #define AZURE_LIGHT_ATTENUATION
+float lightInfluenceBoxWeight(vec3 position,vec4 row0,vec4 row1,vec4 row2,vec4 parameters) {
+    if(parameters.x<.5)return 1.0;
+    vec4 point=vec4(position,1);
+    vec3 coordinates=abs(vec3(dot(row0,point),dot(row1,point),dot(row2,point)));
+    float edge=max(max(coordinates.x,coordinates.y),coordinates.z);
+    if(parameters.y==1.0)return edge<1.0?1.0:0.0;
+    float inner=(1.0+parameters.y)*.5;
+    float weight=1.0-clamp((edge-inner)/(1.0-inner),0.0,1.0);
+    return weight*weight;
+}
 // Explicit models share distance/range semantics across raster and tracing.
 // The inverse-square model has a one-square-metre denominator offset.
 float localLightDistanceWeight(float distanceSquared,float radius,float model,float exponent) {
