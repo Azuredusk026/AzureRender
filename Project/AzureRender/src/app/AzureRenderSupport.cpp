@@ -234,6 +234,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
         postProcessDescriptorPool_ = VK_NULL_HANDLE;
     }
     postProcessDescriptorSets_.clear();
+    colorGradingLut_.reset();colorGradingLutKey_.clear();
     for(auto& buffer:groundGridUniforms_)gpuAllocator_.destroyBuffer(buffer);
     groundGridUniforms_.clear();
 

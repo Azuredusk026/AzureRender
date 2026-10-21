@@ -8,6 +8,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
         {"saturation",settings.grade.saturation},{"contrast",settings.grade.contrast},{"tint",settings.grade.tint},{"toneMapping",settings.grade.toneMappingEnabled},
+        {"gradeLut",{{"schemaVersion",ColorGradingLutSettings::kSchemaVersion},{"asset",settings.grade.lut.asset},{"exposureMultiplier",settings.grade.lut.exposureMultiplier}}},
         {"bloomEnabled",settings.bloom.enabled},{"bloomThreshold",settings.bloom.threshold},{"bloomStrength",settings.bloom.strength},
         {"outlineDepth",settings.outline.depthThreshold},{"outlineNormal",settings.outline.normalThreshold},{"outlineColor",settings.outline.color},
         {"stylized",settings.stylizedLightingEnabled},{"sceneLighting",settings.sceneLightingEnabled},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled},
@@ -38,6 +39,16 @@ inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::jso
     settings.faceSdf.enabled=data.value("faceSdf",settings.faceSdf.enabled);settings.faceSdf.threshold=data.value("faceThreshold",settings.faceSdf.threshold);settings.faceSdf.softness=data.value("faceSoftness",settings.faceSdf.softness);
     settings.outline.strength=data.value("outline",settings.outline.strength);settings.shadow.maximumFilterRadiusTexels=data.value("shadowRadius",settings.shadow.maximumFilterRadiusTexels);settings.grade.exposureEv=data.value("exposure",settings.grade.exposureEv);
     settings.grade.saturation=data.value("saturation",settings.grade.saturation);settings.grade.contrast=data.value("contrast",settings.grade.contrast);settings.grade.tint=data.value("tint",settings.grade.tint);settings.grade.toneMappingEnabled=data.value("toneMapping",settings.grade.toneMappingEnabled);
+    if(data.contains("gradeLut")){
+        const auto& lut=data.at("gradeLut");
+        if(!lut.is_object()||!lut.contains("schemaVersion")||!lut.at("schemaVersion").is_number_integer()||lut.at("schemaVersion")!=1)
+            throw std::invalid_argument("Unsupported color grading LUT settings version");
+        for(const auto& field:lut.items())if(field.key()!="schemaVersion"&&field.key()!="asset"&&field.key()!="exposureMultiplier")
+            throw std::invalid_argument("Unknown color grading LUT setting");
+        settings.grade.lut.asset=lut.at("asset").get<std::string>();
+        settings.grade.lut.exposureMultiplier=lut.at("exposureMultiplier").get<float>();
+        settings.grade.lut.resolvedAsset.clear();settings.grade.lut.resourceFingerprint.clear();
+    }
     settings.bloom.enabled=data.value("bloomEnabled",settings.bloom.enabled);settings.bloom.threshold=data.value("bloomThreshold",settings.bloom.threshold);settings.bloom.strength=data.value("bloomStrength",settings.bloom.strength);
     settings.outline.depthThreshold=data.value("outlineDepth",settings.outline.depthThreshold);settings.outline.normalThreshold=data.value("outlineNormal",settings.outline.normalThreshold);settings.outline.color=data.value("outlineColor",settings.outline.color);
     settings.stylizedLightingEnabled=data.value("stylized",settings.stylizedLightingEnabled);settings.innerOutlineEnabled=data.value("innerOutline",settings.innerOutlineEnabled);settings.silhouetteOutlineEnabled=data.value("silhouetteOutline",settings.silhouetteOutlineEnabled);

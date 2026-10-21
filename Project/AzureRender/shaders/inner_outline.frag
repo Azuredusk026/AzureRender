@@ -1,9 +1,12 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "color_grading_lut.glsl"
 
 layout(binding = 0) uniform sampler2D normalTexture;
 layout(binding = 1) uniform sampler2D depthTexture;
 layout(binding = 2) uniform sampler2D shadowTexture;
 layout(binding = 3) uniform sampler2D sceneColorTexture;
+layout(binding = 5) uniform sampler2D colorGradingLutTexture;
 layout(std140,binding=4) uniform GroundGrid {
     mat4 viewProjection;
     vec4 minorColor,majorColor,xAxis,zAxis,options;
@@ -22,6 +25,7 @@ layout(push_constant) uniform OutlineParameters {
     vec4 gradeParameters;
     vec4 gradeTint;
     vec4 sampling;
+    vec4 colorGradingLut;
 } outline;
 
 layout(location = 0) in vec2 screenUv;
@@ -149,6 +153,9 @@ vec4 shadePixel(vec2 screenUv) {
         hdrColor += bloom;
         hdrColor = mix(hdrColor, outline.outlineColor.rgb, edge);
         hdrColor *= exp2(outline.exposureEv);
+        if(outline.colorGradingLut.x>1.5)
+            return vec4(sampleColorGradingLut(colorGradingLutTexture,hdrColor,outline.colorGradingLut.x,
+                outline.colorGradingLut.y,outline.colorGradingLut.z),1);
         vec3 displayLinear = outline.toneMappingEnabled > 0.5
             ? acesFitted(hdrColor)
             : clamp(hdrColor, 0.0, 1.0);
@@ -224,4 +231,8 @@ void resolveScene(){
         float lb=luma(b);outputColor=vec4(mix(center.rgb,lb<lo||lb>hi?a:b,.5),1);
     }else outputColor=shadePixel(screenUv);
 }
-void main(){resolveScene();outputColor=composeGroundGrid(outputColor,screenUv);}
+void main(){
+    resolveScene();outputColor=composeGroundGrid(outputColor,screenUv);
+    if(outline.colorGradingLut.x>1.5&&outline.colorGradingLut.w>.5&&outline.diagnosticView<.5&&outline.bloomIsolation<.5)
+        outputColor.rgb=colorGradingLinearToSrgb(outputColor.rgb);
+}

@@ -1,6 +1,7 @@
 #include "Project.hpp"
 #include "MaterialDocument.hpp"
 #include "runtime/Level.hpp"
+#include "runtime/ColorGradingLutBinding.hpp"
 
 #include <fstream>
 #include <iomanip>
@@ -172,8 +173,12 @@ SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
         if (!std::filesystem::is_regular_file(resource.path))
             throw std::runtime_error("Scene resource missing: " + resource.path.u8string());
     }
-    if(std::any_of(scene.nodes.begin(),scene.nodes.end(),[](const auto& node){return !node.materialSlots.empty();})){
+    if(!scene.renderSettings.grade.lut.asset.empty()||std::any_of(scene.nodes.begin(),scene.nodes.end(),[](const auto& node){return !node.materialSlots.empty();})){
         AssetDatabase assets(*this);assets.refresh();resolveSceneMaterials(scene,assets);
+        auto& lut=scene.renderSettings.grade.lut;
+        if(!lut.asset.empty()){
+            resolveColorGradingLutSettings(lut,&assets);
+        }
     }
     return scene;
 }

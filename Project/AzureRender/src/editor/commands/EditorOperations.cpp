@@ -5,6 +5,7 @@
 #include "runtime/camera/GameCameraService.hpp"
 #include "scene/SceneDescription.hpp"
 #include "runtime/LevelRenderSettings.hpp"
+#include "runtime/ColorGradingLutBinding.hpp"
 #include "runtime/ProjectSettings.hpp"
 #include "editor/content/AssetCatalog.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
@@ -235,7 +236,9 @@ EditRegistry editorOperations(EditorSession& session) {
         auto settings=c.renderSettings();const auto& fields=a.at("values");const auto known=encodeLevelRenderSettings(settings);
         if(!fields.is_object())throw std::invalid_argument("Render settings require an object");
         for(const auto& field:fields.items())if(!known.contains(field.key()))throw std::invalid_argument("Unknown render setting: "+field.key());
-        decodeLevelRenderSettings(settings,fields);c.beginEdit();c.renderSettings()=settings;
+        decodeLevelRenderSettings(settings,fields);
+        if(fields.contains("gradeLut"))resolveColorGradingLutSettings(settings.grade.lut,c.isProject()?&c.assets():nullptr,c.scenePath().parent_path());
+        c.beginEdit();c.renderSettings()=settings;
     });
     document("render.preset",schema({{"value",integer}},{"value"}),[](auto& c,const auto& a) {
         const auto value=a.at("value").template get<unsigned>();if(value>4)throw std::invalid_argument("Unknown showcase preset");

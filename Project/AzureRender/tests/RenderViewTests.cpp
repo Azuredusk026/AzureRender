@@ -1,6 +1,8 @@
 #include "render/RenderViewService.hpp"
 #include "rhi/NullRhi.hpp"
 #include "scenes/SampleSceneRenderer.hpp"
+#include "render/ColorGradingLut.hpp"
+#include <chrono>
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
@@ -17,6 +19,10 @@ int main(int argc,char** argv){try{
     RenderViewService service(base,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
     RenderViewDescriptor descriptor;descriptor.rendererId="sample";descriptor.extent={256,128};
     descriptor.cameraPosition={2,1,3};const auto a=service.create(descriptor);
+    const auto lutPath=std::filesystem::temp_directory_path()/("azure-view-lut-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azlut");
+    saveColorGradingLut(lutPath,makeIdentityColorGradingLut(4,ColorGradingInputDomain::LogC3FullLog));
+    const auto removeLut=std::unique_ptr<void,std::function<void(void*)>>(reinterpret_cast<void*>(1),[&](void*){std::filesystem::remove(lutPath);});
+    descriptor.settings.grade.lut.asset=lutPath.generic_u8string();
     descriptor.extent={128,256};descriptor.cameraPosition={-2,2,1};const auto b=service.create(descriptor);
     const auto c=service.create(descriptor);reject([&]{service.create(descriptor);});
     require(service.describe(a).at("cameraPosition")==nlohmann::json({2,1,3}),"Each view preserves its camera");

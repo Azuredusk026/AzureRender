@@ -1,0 +1,35 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "color_grading_lut.glsl"
+layout(local_size_x=1) in;
+layout(binding=0) uniform sampler2D lutTexture;
+layout(std430,binding=1) readonly buffer Inputs { vec4 values[]; } inputs;
+layout(std430,binding=2) writeonly buffer Outputs { vec4 values[]; } outputs;
+layout(push_constant) uniform Parameters { vec4 lut; } parameters;
+vec3 unfilteredReference(vec3 coordinate,int dimension){
+    vec3 lattice=coordinate*float(dimension-1);
+    ivec3 lower=ivec3(floor(lattice)),upper=min(lower+ivec3(1),ivec3(dimension-1));
+    vec3 weight=fract(lattice);
+    vec3 planes[2];
+    for(int z=0;z<2;++z){
+        int slice=(z==0?lower.b:upper.b)*dimension;
+        vec3 first=mix(texelFetch(lutTexture,ivec2(slice+lower.r,lower.g),0).rgb,
+                       texelFetch(lutTexture,ivec2(slice+upper.r,lower.g),0).rgb,weight.r);
+        vec3 second=mix(texelFetch(lutTexture,ivec2(slice+lower.r,upper.g),0).rgb,
+                        texelFetch(lutTexture,ivec2(slice+upper.r,upper.g),0).rgb,weight.r);
+        planes[z]=mix(first,second,weight.g);
+    }
+    return mix(planes[0],planes[1],weight.b);
+}
+void main(){
+    uint index=gl_GlobalInvocationID.x;
+    vec3 result=sampleColorGradingLut(lutTexture,inputs.values[index].rgb,
+        parameters.lut.x,parameters.lut.y,parameters.lut.z);
+    if(parameters.lut.w>.5)result=colorGradingLinearToSrgb(result);
+    vec3 coordinate=colorGradingLutCoordinate(inputs.values[index].rgb*parameters.lut.y,parameters.lut.z);
+    vec3 reference=unfilteredReference(coordinate,int(parameters.lut.x));
+    if(parameters.lut.w>.5)reference=colorGradingLinearToSrgb(reference);
+    outputs.values[index*3]=vec4(result,1);
+    outputs.values[index*3+1]=vec4(coordinate,1);
+    outputs.values[index*3+2]=vec4(reference,1);
+}

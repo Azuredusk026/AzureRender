@@ -1,5 +1,6 @@
 #include "editor/EditorSession.hpp"
 #include "ecs/Components.hpp"
+#include "render/ColorGradingLut.hpp"
 
 #include <cassert>
 #include <chrono>
@@ -21,6 +22,19 @@ std::filesystem::path uniquePath(const std::string& suffix) {
 }  // namespace
 
 int main() {
+    {
+        const auto root=uniquePath("-relative-grade");std::filesystem::create_directory(root);
+        const auto path=root/"scene.azscene",lut=root/"grade.azlut";
+        azurerender::saveColorGradingLut(lut,azurerender::makeIdentityColorGradingLut());
+        auto document=azurerender::SceneDocument::fromAsset("test.gltf");document.save(path);
+        auto relativeContext=std::make_shared<azurerender::EditorContext>(document,path);
+        azurerender::EditorSession relativeSession(relativeContext);
+        if(!relativeSession.edit("render.settings",{{"values",{{"gradeLut",{{"schemaVersion",1},{"asset","grade.azlut"},{"exposureMultiplier",1}}}}}}))return 96;
+        relativeContext->save();relativeContext->reload();
+        if(relativeContext->renderSettings().grade.lut.asset!="grade.azlut"
+            ||relativeContext->renderSettings().grade.lut.resolvedAsset!=lut)return 97;
+        std::filesystem::remove_all(root);
+    }
     // Several independently identified emitters may share one scene node.
     {
         const auto path = uniquePath("-multiple-lights.azscene");
@@ -75,6 +89,17 @@ int main() {
         if(!session.execute(azurerender::EditorCommand::Redo)||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 83;
         if(session.edit("render.settings",{{"values",{{"skyMode",99}}}})||context->renderSettings().sky.mode!=azurerender::SkyMode::Solid)return 84;
         if(!session.execute(azurerender::EditorCommand::Undo))return 85;
+    }
+    {
+        const auto lutPath=uniquePath(".azlut");azurerender::saveColorGradingLut(lutPath,azurerender::makeIdentityColorGradingLut());
+        const auto fields=nlohmann::json{{"gradeLut",{{"schemaVersion",1},{"asset",lutPath.generic_u8string()},{"exposureMultiplier",1.5F}}}};
+        if(!session.edit("render.settings",{{"values",fields}})||context->renderSettings().grade.lut.resolvedAsset!=lutPath)return 91;
+        if(!session.execute(azurerender::EditorCommand::Undo)||!context->renderSettings().grade.lut.asset.empty())return 92;
+        if(!session.execute(azurerender::EditorCommand::Redo)||context->renderSettings().grade.lut.exposureMultiplier!=1.5F)return 93;
+        auto invalid=fields;invalid["gradeLut"]["asset"]="missing-color-grading.azlut";
+        if(session.edit("render.settings",{{"values",invalid}})||context->renderSettings().grade.lut.asset!=lutPath.generic_u8string())return 94;
+        if(!session.execute(azurerender::EditorCommand::Undo))return 95;
+        std::filesystem::remove(lutPath);
     }
     // Returning to the saved content clears the document marker.
     context->save();

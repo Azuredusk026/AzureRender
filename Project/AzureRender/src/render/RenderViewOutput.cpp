@@ -15,17 +15,23 @@ RenderViewOutput::RenderViewOutput(const RenderContext& context,VkImageView hdr,
     auto& rhi=*context.rhi;
     try{
         const auto extent=context.renderExtent;
+        const auto binding=context.renderSettings?context.renderSettings->grade.lut:ColorGradingLutSettings{};
+        const auto path=binding.resolvedAsset.empty()?std::filesystem::u8path(binding.asset):binding.resolvedAsset;
+        lut_=std::make_unique<ColorGradingLutGpu>(rhi,binding.asset.empty()?makeIdentityColorGradingLut():loadColorGradingLut(path),
+            binding.asset.empty()?ColorGradingLutUpload::IdentityPlaceholder:ColorGradingLutUpload::Float32);
         image_=context.allocator->createImage2D(extent.width,extent.height,VK_FORMAT_R8G8B8A8_UNORM,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
         view_=rhi.createImageView(image_.image,VK_FORMAT_R8G8B8A8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT,1);
         rhi::RenderPassDesc pass;pass.attachments={{VK_FORMAT_R8G8B8A8_UNORM,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,false,true,false}};
         pass.externalReadDependency=true;pass_=rhi.createRenderPass(pass);
         framebuffer_=rhi.createFramebuffer({pass_,{view_},extent.width,extent.height});
-        setLayout_=rhi.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
-        pool_=rhi.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1}},1});
+        setLayout_=rhi.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
+        pool_=rhi.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,2}},1});
         set_=rhi.allocateDescriptorSets(pool_,setLayout_,1).at(0);
         rhi.writeDescriptorImage({set_,0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,hdr,sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
-        const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_FRAGMENT_BIT,32};layout_=rhi.createPipelineLayout(setLayout_,&push);
+        rhi.writeDescriptorImage({set_,1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,lut_->view(),lut_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_FRAGMENT_BIT,48};layout_=rhi.createPipelineLayout(setLayout_,&push);
         vertex=rhi.createShaderModule(load(std::filesystem::u8path(context.shaderDirectory)/"blackhole.vert.spv"));
         fragment=rhi.createShaderModule(load(std::filesystem::u8path(context.shaderDirectory)/"view_resolve.frag.spv"));
         rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=vertex;pipeline.fragmentShader=fragment;
@@ -41,6 +47,7 @@ void RenderViewOutput::destroy() noexcept{
     if(pipeline_)rhi.destroyPipeline(pipeline_);
     if(layout_)rhi.destroyPipelineLayout(layout_);
     if(pool_)rhi.destroyDescriptorPool(pool_);
+    lut_.reset();
     if(setLayout_)rhi.destroyDescriptorSetLayout(setLayout_);
     if(framebuffer_)rhi.destroyFramebuffer(framebuffer_);
     if(pass_)rhi.destroyRenderPass(pass_);
@@ -55,9 +62,10 @@ void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,c
         commands.beginRenderPass(begin);commands.setViewport(static_cast<float>(image_.width),static_cast<float>(image_.height));
         commands.setScissor(context_.renderExtent);commands.bindPipeline(pipeline_);commands.bindDescriptorSet(layout_,set_);
         const auto grade=context_.renderSettings?context_.renderSettings->grade:GradeSettings{};
-        const std::array<float,8> transfer{grade.exposureEv,grade.saturation,grade.contrast,grade.toneMappingEnabled?1.F:0.F,
-            grade.tint[0],grade.tint[1],grade.tint[2],transfer_==ViewColorTransfer::SrgbEncoded?1.F:0.F};
-        commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,transfer.data(),32);commands.draw(3);commands.endRenderPass();
+        const std::array<float,12> transfer{grade.exposureEv,grade.saturation,grade.contrast,grade.toneMappingEnabled?1.F:0.F,
+            grade.tint[0],grade.tint[1],grade.tint[2],transfer_==ViewColorTransfer::SrgbEncoded?1.F:0.F,
+            grade.lut.asset.empty()?0.F:static_cast<float>(lut_->dimension()),grade.lut.exposureMultiplier,static_cast<float>(lut_->inputDomain()),0};
+        commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,transfer.data(),48);commands.draw(3);commands.endRenderPass();
     });
     graph.use(pass,hdr,RenderGraphUsage::Sampled,false);
     graph.attachment(pass,output,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);

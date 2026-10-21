@@ -1,6 +1,9 @@
 #include "SceneDocument.hpp"
+#include "runtime/LevelRenderSettings.hpp"
+#include "runtime/ColorGradingLutBinding.hpp"
 
 #include <chrono>
+#include <regex>
 #include <cstdio>
 #include <fstream>
 #include <iomanip>
@@ -101,6 +104,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
            << "gradeExposureEv " << document.renderSettings.grade.exposureEv << '\n'
+           << "gradeLut " << std::quoted(encodeLevelRenderSettings(document.renderSettings).at("gradeLut").dump()) << '\n'
            << "characterBackgroundEnabled " << std::boolalpha
            << document.renderSettings.characterPresentation.backgroundEnabled << '\n'
            << "characterPlatformEnabled " << std::boolalpha
@@ -319,6 +323,11 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         throw std::runtime_error("Missing .azscene gradeExposureEv");
     }
     // Blackhole settings and sceneRenderer are optional for backward
+    if(renderSettingsVersion>=14){
+        std::string serialized;
+        if(!(input>>key>>std::quoted(serialized))||key!="gradeLut")throw std::runtime_error("Missing .azscene gradeLut");
+        decodeLevelRenderSettings(document.renderSettings,{{"gradeLut",nlohmann::json::parse(serialized)}});
+    }
     // compatibility with schema v1 documents.
     // documents that predate the pluggable scene renderer.
     if (!(input >> key)) {
@@ -394,6 +403,14 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
     }
     document.renderSettings = migrateRenderSettings(
         document.renderSettings, renderSettingsVersion);
+    auto& lut=document.renderSettings.grade.lut;
+    if(!lut.asset.empty()){
+        static const std::regex assetId("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+        const auto lutPath=std::filesystem::u8path(lut.asset);
+        const bool projectReference=!lutPath.is_absolute()
+            &&(lut.asset.find(":/")!=std::string::npos||std::regex_match(lut.asset,assetId));
+        if(!projectReference)resolveColorGradingLutSettings(lut,nullptr,path.parent_path());
+    }
     return document;
 }
 

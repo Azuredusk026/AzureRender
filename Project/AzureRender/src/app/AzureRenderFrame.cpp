@@ -222,6 +222,9 @@ void AzureRenderApp::drawFrame() {
     synchronizeEditorRuntime();synchronizeGameUi();
     azurerender::SceneFrameData frameData;
     buildSceneFrameData(frameData);
+    // UI commands and Play/Stop may replace settings while building this frame.
+    // Bind the LUT only after the final settings are available for recording.
+    synchronizeColorGradingLut(effectiveRenderSettings_);
     const azurerender::RenderFrameSnapshot frameSnapshot(frameData);
     if (sceneRenderer_ != nullptr) {
         sceneRenderer_->updateFrame(frameSnapshot.frame());
@@ -1070,6 +1073,9 @@ void AzureRenderApp::recordCommandBuffer(
         },
         {static_cast<float>(effectiveRenderSettings_.antiAliasing),effectiveRenderSettings_.cameraNear,
          effectiveRenderSettings_.cameraFar,effectiveRenderSettings_.antiAliasing==2?2.0F:1.0F},
+        {effectiveRenderSettings_.grade.lut.asset.empty()?0.0F:static_cast<float>(colorGradingLut_->dimension()),
+         effectiveRenderSettings_.grade.lut.exposureMultiplier,static_cast<float>(colorGradingLut_->inputDomain()),
+         swapchainFormat_==VK_FORMAT_B8G8R8A8_SRGB||swapchainFormat_==VK_FORMAT_R8G8B8A8_SRGB?0.0F:1.0F},
     };
     vkCmdPushConstants(
         commandBuffer,

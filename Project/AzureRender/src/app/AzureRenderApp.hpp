@@ -19,6 +19,7 @@
 #include "render/GameUiRenderer.hpp"
 #include "assets/GltfLoader.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/ColorGradingLutGpu.hpp"
 #include "render/TransientResourcePool.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "rhi/GpuAllocator.hpp"
@@ -142,8 +143,10 @@ private:
         std::array<float, 4> gradeParameters{1.0F, 1.0F, 1.05F, 0.0F};
         std::array<float, 4> gradeTint{1.0F, 1.0F, 1.0F, 0.0F};
         std::array<float,4> sampling{1,.1F,100,1};
+        // dimension (0 disables lookup), exposure multiplier, input domain, output encoding.
+        std::array<float,4> colorGradingLut{0,1,0,0};
     };
-    static_assert(sizeof(PostProcessPushConstants) == 96);
+    static_assert(sizeof(PostProcessPushConstants) == 112);
     struct GroundGridUniform {
         std::array<float,16> viewProjection{};
         std::array<float,4> minor{},major{},xAxis{},zAxis{},options{};
@@ -301,6 +304,9 @@ private:
     std::vector<azurerender::rhi::GpuBuffer> groundGridUniforms_;
     VkDescriptorPool postProcessDescriptorPool_ = VK_NULL_HANDLE;
     std::vector<VkDescriptorSet> postProcessDescriptorSets_;
+    std::unique_ptr<azurerender::ColorGradingLutGpu> colorGradingLut_;
+    std::string colorGradingLutKey_;
+    void synchronizeColorGradingLut(const azurerender::RenderSettings& settings);
     VkPipelineLayout postProcessPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline innerOutlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline hudPipeline_ = VK_NULL_HANDLE;

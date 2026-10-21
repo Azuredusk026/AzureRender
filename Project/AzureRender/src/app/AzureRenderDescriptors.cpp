@@ -24,12 +24,14 @@ void AzureRenderApp::createPostProcessDescriptorSetLayout() {
     sceneColorBinding.binding = 3;
     VkDescriptorSetLayoutBinding gridBinding=normalBinding;
     gridBinding.binding=4;gridBinding.descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    VkDescriptorSetLayoutBinding lutBinding=normalBinding;lutBinding.binding=5;
     const std::array bindings = {
         normalBinding,
         depthBinding,
         shadowBinding,
         sceneColorBinding,
         gridBinding,
+        lutBinding,
     };
     VkDescriptorSetLayoutCreateInfo layoutInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
@@ -65,11 +67,12 @@ void AzureRenderApp::createPostProcessDescriptorSetLayout() {
 
 
 void AzureRenderApp::createPostProcessDescriptorSets() {
+    synchronizeColorGradingLut(renderSettings_);
     const std::uint32_t descriptorCount =
         static_cast<std::uint32_t>(swapchainImages_.size());
     VkDescriptorPoolSize poolSize{};
     poolSize.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    poolSize.descriptorCount = descriptorCount * 4;
+    poolSize.descriptorCount = descriptorCount * 5;
     VkDescriptorPoolCreateInfo poolInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
     const std::array poolSizes{poolSize,VkDescriptorPoolSize{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,descriptorCount}};
@@ -122,7 +125,8 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         sceneColorInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         sceneColorInfo.imageView = sceneColorImageViews_[index];
         sceneColorInfo.sampler = screenAttachmentSampler_;
-        std::array<VkWriteDescriptorSet, 5> writes{};
+        const VkDescriptorImageInfo lutInfo{colorGradingLut_->sampler(),colorGradingLut_->view(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+        std::array<VkWriteDescriptorSet, 6> writes{};
         writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
         writes[0].dstSet = postProcessDescriptorSets_[index];
         writes[0].dstBinding = 0;
@@ -155,6 +159,8 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         writes[4]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
         writes[4].dstSet=postProcessDescriptorSets_[index];writes[4].dstBinding=4;
         writes[4].descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;writes[4].descriptorCount=1;writes[4].pBufferInfo=&gridInfo;
+        writes[5]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};writes[5].dstSet=postProcessDescriptorSets_[index];writes[5].dstBinding=5;
+        writes[5].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;writes[5].descriptorCount=1;writes[5].pImageInfo=&lutInfo;
         vkUpdateDescriptorSets(
             device_,
             static_cast<std::uint32_t>(writes.size()),
@@ -162,4 +168,23 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
             0,
             nullptr);
     }
+}
+
+void AzureRenderApp::synchronizeColorGradingLut(const azurerender::RenderSettings& settings){
+    const auto& binding=settings.grade.lut;
+    const auto path=binding.resolvedAsset.empty()?std::filesystem::u8path(binding.asset):binding.resolvedAsset;
+    std::string key="identity";
+    if(!binding.asset.empty()){
+        key=path.generic_u8string()+":"+binding.resourceFingerprint+":"+std::to_string(std::filesystem::file_size(path))
+            +":"+std::to_string(std::filesystem::last_write_time(path).time_since_epoch().count());
+    }
+    if(colorGradingLut_&&colorGradingLutKey_==key)return;
+    const auto lut=binding.asset.empty()?azurerender::makeIdentityColorGradingLut():azurerender::loadColorGradingLut(path);
+    // A settings change is a load boundary: descriptors and immutable image are replaced only after completion.
+    vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(color grading LUT reload)");
+    auto candidate=std::make_unique<azurerender::ColorGradingLutGpu>(*rhi_,lut,binding.asset.empty()
+        ?azurerender::ColorGradingLutUpload::IdentityPlaceholder:azurerender::ColorGradingLutUpload::Float32);
+    for(const auto set:postProcessDescriptorSets_)
+        rhi_->writeDescriptorImage({set,5,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,candidate->view(),candidate->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+    colorGradingLut_=std::move(candidate);colorGradingLutKey_=std::move(key);
 }

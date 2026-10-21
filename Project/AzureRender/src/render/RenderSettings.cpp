@@ -133,6 +133,7 @@ RenderSettings migrateRenderSettings(
         settings.cameraNear=.1F;settings.cameraFar=100;settings.shadowDistance=100;
     }
     if (sourceSchemaVersion < 9) settings.antiAliasing = 1;
+    if (sourceSchemaVersion < 14) settings.grade.lut = {};
     validateRenderSettings(settings);
     return settings;
 }
@@ -247,6 +248,11 @@ void validateRenderSettings(const RenderSettings& settings) {
     requireRange(settings.grade.exposureEv, -8.0F, 8.0F, "grade.exposureEv");
     requireRange(settings.grade.saturation, 0.0F, 2.0F, "grade.saturation");
     requireRange(settings.grade.contrast, 0.0F, 2.0F, "grade.contrast");
+    if(!std::isfinite(settings.grade.lut.exposureMultiplier)||settings.grade.lut.exposureMultiplier<=0
+        ||settings.grade.lut.exposureMultiplier>65536.F)
+        throw std::invalid_argument("grade.lut.exposureMultiplier must be finite and in (0,65536]");
+    if(settings.grade.lut.asset.size()>4096||settings.grade.lut.asset.find('\0')!=std::string::npos)
+        throw std::invalid_argument("grade.lut.asset reference is invalid");
     for (const float channel : settings.grade.tint) {
         requireRange(channel, 0.0F, 2.0F, "grade.tint channel");
     }

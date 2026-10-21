@@ -46,6 +46,7 @@ inline AssetTypeRegistry& assetTypeRegistry() {
         for(const auto& format:assetFormatRegistry().list(AssetDomain::Image))if(format.canRead)imageExtensions.insert(imageExtensions.end(),format.extensions.begin(),format.extensions.end());
         value.add({"image","Images",imageExtensions,false,AssetDomain::Image});value.add({"font","Fonts",{".ttf",".otf"}});
         value.add({"material","Materials",{".azurematerial"}});
+        value.add({"color-grading-lut","颜色分级查找表",{".azlut"}});
         value.add({"shader","Shaders",{".azshader",".slang",".glsl",".spv"}});value.add({"text","Text",{".txt",".md"}});
         return value;}();return registry;
 }

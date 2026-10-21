@@ -1,5 +1,6 @@
 #pragma once
 #include "render/RenderViewService.hpp"
+#include "render/ColorGradingLutGpu.hpp"
 namespace azurerender {
 // Owned LDR resolve resources, separate from scene and temporal attachments.
 class RenderViewOutput final {
@@ -21,6 +22,7 @@ private:
     VkDescriptorSet set_=VK_NULL_HANDLE;
     VkPipelineLayout layout_=VK_NULL_HANDLE;
     VkPipeline pipeline_=VK_NULL_HANDLE;
+    std::unique_ptr<ColorGradingLutGpu> lut_;
     void destroy() noexcept;
 };
 }

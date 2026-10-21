@@ -122,6 +122,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 场景分项诊断与实景参考见[原生参考基准](docs/acceptance/nr/reference-baseline.md)。
 参考校验读取真实图像编码，并核验正式参考的像素尺寸。
 公开算法线索见[渲染资料核查](docs/research/2026-10-21-endfield-public-rendering.md)。
+后处理支持[版本化颜色查找表](docs/runtime/color-grading-lut.md)。
+主视口与辅助视口共享线性输出和曝光契约。
+数值、编辑帧及资源回归见[调色验收](docs/acceptance/nr/color-grading-lut.md)。
 材质支持独立[影色查找表](docs/runtime/shadow-color-lut.md)及 GPU 诊断。
 无纹理基色采用最近字节量化，详见[量化验证](docs/acceptance/nr/base-color-quantization.md)。
 原生动作与 WASD 的短路径结果见[操控验证](docs/acceptance/nr/playable-integration.md)。

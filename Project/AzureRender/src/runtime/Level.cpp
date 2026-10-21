@@ -1,5 +1,6 @@
 #include "runtime/Level.hpp"
 #include "runtime/LevelRenderSettings.hpp"
+#include "runtime/ColorGradingLutBinding.hpp"
 #include "runtime/Prefab.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/MaterialDocument.hpp"
@@ -21,6 +22,11 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
     const auto sceneType = expanded.value("sceneType", "character");
     level.scene.renderSettings.sceneType=sceneTypeFromString(sceneType);
     if(expanded.contains("renderSettings"))decodeLevelRenderSettings(level.scene.renderSettings,expanded.at("renderSettings"));
+    auto& lut=level.scene.renderSettings.grade.lut;
+    if(!lut.asset.empty()){
+        resolveColorGradingLutSettings(lut,&assets);
+        level.resourceKey+="gradeLut:"+lut.resourceFingerprint;level.reloadKey_+="gradeLut:"+lut.resourceFingerprint;
+    }
     if(expanded.contains("reflectionProbe")){
         level.scene.reflectionProbe=expanded.at("reflectionProbe").get<ReflectionProbe>();
         if(!level.scene.reflectionProbe.texture.empty()){

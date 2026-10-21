@@ -184,6 +184,11 @@ function(compile_shader source_file)
     endif()
     set(shader_output "${SHADER_BINARY_DIR}/${shader_name}.spv")
     set(shader_define_args)
+    set(shader_lut_dependency)
+    get_filename_component(shader_source_base "${source_file}" NAME)
+    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp")
+        set(shader_lut_dependency "${SHADER_SOURCE_DIR}/color_grading_lut.glsl")
+    endif()
     foreach(shader_define IN LISTS SHADER_DEFINES)
         list(APPEND shader_define_args "-D${shader_define}")
     endforeach()
@@ -192,7 +197,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
+        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -224,6 +229,7 @@ compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
 compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME character_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OPAQUE_SNAPSHOT=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_bindless.frag)
@@ -315,6 +321,8 @@ target_link_libraries(AzureGeometryCompiler PRIVATE AzureProcedural)
 add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
+    src/render/ColorGradingLut.cpp
+    src/render/ColorGradingLutGpu.cpp
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
     src/assets/primitives/RoundPrimitives.cpp
@@ -654,6 +662,11 @@ if(BUILD_TESTING)
     add_dependencies(AzureSurfaceResponseGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.SurfaceResponseGpu COMMAND AzureSurfaceResponseGpuTests "${SHADER_BINARY_DIR}/surface_response_test.comp.spv" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/showcase_looks.json")
     set_tests_properties(AzureRender.SurfaceResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureColorGradingLutGpuTests tests/ColorGradingLutGpuTests.cpp)
+    target_link_libraries(AzureColorGradingLutGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureColorGradingLutGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ColorGradingLutGpu COMMAND AzureColorGradingLutGpuTests "${SHADER_BINARY_DIR}/color_grading_lut_test.comp.spv")
+    set_tests_properties(AzureRender.ColorGradingLutGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     if(AZURE_ENABLE_SHADER_MODULE_PROTOTYPE)
         add_executable(AzureShaderModuleTests tests/ShaderModuleTests.cpp)
         target_link_libraries(AzureShaderModuleTests PRIVATE AzureRenderCore)
@@ -691,6 +704,9 @@ if(BUILD_TESTING)
     target_link_libraries(AzurePathTracingTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.PathTracing COMMAND AzurePathTracingTests)
     add_executable(AzureEngineSettingsTests tests/EngineSettingsTests.cpp)
+    add_executable(AzureColorGradingLutTests tests/ColorGradingLutTests.cpp)
+    target_link_libraries(AzureColorGradingLutTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRender.ColorGradingLut COMMAND AzureColorGradingLutTests)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
     add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
@@ -700,7 +716,13 @@ if(BUILD_TESTING)
         --executable "$<TARGET_FILE:AzureRender>" --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf"
         --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-fixture")
     set_tests_properties(AzureRender.SamplingGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_test(NAME AzureRender.ColorGradingLutProduction COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_color_grading_lut_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ColorGradingLutProduction PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     if(WIN32)
+        add_test(NAME AzureRender.ColorGradingLutEditor COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_color_grading_lut_editor_gpu.py"
+            --executable "$<TARGET_FILE:AzureRender>" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+        set_tests_properties(AzureRender.ColorGradingLutEditor PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
         add_test(NAME AzureRender.SamplingHostGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_sampling_host.py"
             --executable "$<TARGET_FILE:AzureRender>" --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-host")
         set_tests_properties(AzureRender.SamplingHostGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)

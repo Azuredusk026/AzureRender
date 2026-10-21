@@ -9,6 +9,10 @@
 using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
+    RenderSettings lutDefaults;
+    const auto lutJson=encodeLevelRenderSettings(lutDefaults);
+    check(lutJson.contains("gradeLut")&&lutJson.at("gradeLut").at("asset")=="",
+        "Color grading LUT configuration must persist through the public level settings contract");
     RenderSettings tracing;
     decodeLevelRenderSettings(tracing,{{"renderer","pathtracing"},{"pathTraceSamples",64},{"pathTraceBounces",6}});
     const auto savedTracing=encodeLevelRenderSettings(tracing);

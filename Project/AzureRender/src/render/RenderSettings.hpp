@@ -7,6 +7,7 @@
 #include <array>
 #include <cstdint>
 #include <filesystem>
+#include <string>
 #include <string_view>
 
 namespace azurerender {
@@ -45,14 +46,24 @@ struct OutlineSettings {
     std::array<float, 3> color{0.008F, 0.013F, 0.022F};
 };
 
-struct GradeSettings {
+struct ColorGradingLutSettings {
     static constexpr std::uint32_t kSchemaVersion = 1;
+    std::string asset;
+    float exposureMultiplier = 1.0F;
+    // Resolved by the content layer. Authoring serialization retains asset.
+    std::filesystem::path resolvedAsset;
+    std::string resourceFingerprint;
+};
+
+struct GradeSettings {
+    static constexpr std::uint32_t kSchemaVersion = 2;
 
     float exposureEv = 0.0F;
     float saturation = 1.0F;
     float contrast = 1.0F;
     std::array<float, 3> tint{1.0F, 1.0F, 1.0F};
     bool toneMappingEnabled = true;
+    ColorGradingLutSettings lut;
 };
 
 struct ShadowSettings {
@@ -102,7 +113,7 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 13;
+    static constexpr std::uint32_t kSchemaVersion = 14;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling.
     std::uint32_t antiAliasing = 1;

@@ -97,6 +97,9 @@ void AzureRenderApp::writeCaptureManifest(
     const std::filesystem::path rampAtlasPath = resourceLocator_.rampAtlas();
     const std::string rampProfileHash = fnv1a64FileHex(rampProfilePath);
     const std::string rampAtlasHash = fnv1a64FileHex(rampAtlasPath);
+    const auto& gradeLut=effectiveRenderSettings_.grade.lut;
+    const auto gradeLutPath=gradeLut.resolvedAsset.empty()?std::filesystem::u8path(gradeLut.asset):gradeLut.resolvedAsset;
+    const std::string gradeLutHash=gradeLut.asset.empty()?std::string{}:fnv1a64FileHex(gradeLutPath);
     std::ostringstream qaState;
     qaState
         << resolvedAssetPath_ << '|'
@@ -155,7 +158,8 @@ void AzureRenderApp::writeCaptureManifest(
         << '|' << renderSettings_.grade.exposureEv
         << '|' << renderSettings_.grade.saturation
         << '|' << renderSettings_.grade.contrast
-        << '|' << renderSettings_.grade.toneMappingEnabled;
+        << '|' << renderSettings_.grade.toneMappingEnabled
+        << '|' << gradeLut.asset << '|' << gradeLut.exposureMultiplier << '|' << gradeLutHash;
     for (const float channel : renderSettings_.grade.tint) {
         qaState << '|' << channel;
     }
@@ -270,7 +274,18 @@ void AzureRenderApp::writeCaptureManifest(
         << renderSettings_.grade.tint[1] << ", "
         << renderSettings_.grade.tint[2] << "],\n"
         << "    \"toneMappingEnabled\": "
-        << (renderSettings_.grade.toneMappingEnabled ? "true" : "false") << "\n"
+        << (renderSettings_.grade.toneMappingEnabled ? "true" : "false") << ",\n"
+        << "    \"lut\": {\n"
+        << "      \"schemaVersion\": " << azurerender::ColorGradingLutSettings::kSchemaVersion << ",\n"
+        << "      \"asset\": " << std::quoted(gradeLut.asset) << ",\n"
+        << "      \"exposureMultiplier\": " << gradeLut.exposureMultiplier << ",\n"
+        << "      \"dimension\": " << (gradeLut.asset.empty()?0:colorGradingLut_->dimension()) << ",\n"
+        << "      \"inputDomain\": " << std::quoted(gradeLut.asset.empty()?"linear":
+            (colorGradingLut_->inputDomain()==azurerender::ColorGradingInputDomain::Linear?"linear":"logc3-full-log")) << ",\n"
+        << "      \"outputDomain\": \"linear\",\n"
+        << "      \"fingerprintAlgorithm\": \"FNV-1a-64\",\n"
+        << "      \"fingerprint\": " << std::quoted(gradeLutHash) << "\n"
+        << "    }\n"
         << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
