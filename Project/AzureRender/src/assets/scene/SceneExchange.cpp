@@ -43,7 +43,8 @@ SceneImportProposal readSceneExchange(const std::filesystem::path& path,const st
   if(transform.contains("matrix")){
    const auto& values=transform.at("matrix");if(!values.is_array()||values.size()!=16)throw std::invalid_argument("Matrix requires 16 column-major values");
    internal::Matrix4 matrix{};for(unsigned i=0;i<16;++i)matrix[i]=values.at(i).get<float>();
-   const auto trs=scene::decomposeTrs(matrix);node.translation=trs.translation;node.rotation=trs.rotation;node.scale=trs.scale;
+   try{const auto trs=scene::decomposeTrs(matrix);node.translation=trs.translation;node.rotation=trs.rotation;node.scale=trs.scale;}
+   catch(const std::invalid_argument& error){throw std::invalid_argument("Scene node '"+node.id+"': "+error.what());}
   }
   for(auto& value:node.translation){value*=units;if(!std::isfinite(value))throw std::invalid_argument("Converted translation exceeds float range");}
   for(const auto value:node.scale)if(std::abs(value)<1e-7F)throw std::invalid_argument("Scene scale is singular");

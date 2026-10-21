@@ -37,9 +37,12 @@ inline DecomposedTransform decomposeTrs(const internal::Matrix4& matrix,const in
     for(unsigned a=0;a<3;++a)for(unsigned b=a+1;b<3;++b)
         if(std::abs(internal::dot(columns[a],columns[b]))>1e-4F)throw std::invalid_argument("Transform contains shear that local TRS cannot represent");
     constexpr float degrees=180.F/3.14159265358979323846F;
-    const float y=std::asin(std::clamp(columns[2][0],-1.F,1.F));
-    const float x=std::abs(std::cos(y))>1e-5F?std::atan2(columns[2][1],columns[2][2]):std::atan2(-columns[1][2],columns[1][1]);
-    const float z=std::abs(std::cos(y))>1e-5F?std::atan2(columns[1][0],columns[0][0]):0;
+    // Near a pole, the normalized sine can round to +/-1 while the matrix
+    // still retains a useful cosine. atan2 preserves that small component.
+    const float cosineY=std::hypot(columns[2][1],columns[2][2]);
+    const float y=std::atan2(columns[2][0],cosineY);
+    const float x=cosineY>1e-5F?std::atan2(columns[2][1],columns[2][2]):std::atan2(-columns[1][2],columns[1][1]);
+    const float z=cosineY>1e-5F?std::atan2(columns[1][0],columns[0][0]):0;
     result.rotation={x*degrees,y*degrees,z*degrees};
     const auto reconstructed=composeTrs(result.translation,result.rotation,result.scale);
     for(unsigned i=0;i<16;++i)if(std::abs(matrix[i]-reconstructed[i])>2e-4F*std::max(1.F,std::abs(matrix[i])))

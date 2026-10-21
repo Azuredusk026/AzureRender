@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "sourceHead": "7122db282799a6ebe4beab03ac0e2b391b86ec6a",
+  "sourceSha256": {
+    "src/scene/TransformEditing.hpp": "917eee65dca42d2b365f771865a0ef8c515e204af3748856ecbe0c5271f23170",
+    "src/assets/scene/SceneExchange.cpp": "5c6b2a26dd9d6989bbebcf5ab824a7820597f7bccf43f43842c9c30f47ffe9a8",
+    "tests/TransformEditingTests.cpp": "ff8b13e1ae6942c7ce4aaf672a7c7b8ce565b4ff5a218512638fa89067b5fc0d",
+    "tests/SceneImportTests.cpp": "685fb0859ce8b79ebfd7f7038aaf570adac404c8a1ab6e639cd3ccd4d21a7262"
+  },
+  "evidenceSha256": {
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/actual-matrix-red.log": "c931adf62f5b2fd2aee5d03ec3841c00edf6db18bde892660d5e0c6fa61f535a",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-actual-red.log": "a4766a478a1a19a3ac70d06fc048d417c00afb96602eefac48916ff40b0f87b6",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-final-debug.log": "193d4730eda037690da70871dab2e415f5f4181055ab4cd8bef81e235cf31dcf",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-final-release.log": "783862d9a61d483bac5d88ad3a420d691128da96fdcd81c4f22969c05a4384bb",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-green.log": "32a3c768b2464f7789e403f1711610d0896cb91189efea2a19a405c0ef884bda",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-host-debug.log": "2ac8a3768bb8058fb4d19b187b9942df4cc49c168fb7e6ed8730713ae86dd5e4",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-host-release.log": "1ee232d6d68dcdd401c3f2520c03beaf88deae9364416c4ab563688283c6b9b7",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-import-red.log": "ed8426bd7d2f62f0fb9c558b652a04e9147203d725420e27d736d3c7392e84df",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/build-red.log": "8a596f2941489812cf1622104ad651153444f725e7234686af055cc9f494213c",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/cpu-final-debug.log": "6be029b6598a0a4e162e43d788589dabdc45b5943b17c7a63e094880b0ce8a7b",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/cpu-final-release.log": "8d06cbcd55370a0f7ef9980d4615654b4a82c0c2f1df816a801aad91a0616078",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/green-debug.log": "763ed22ca26be3d2166ed10f363c4a3d1d1bab95803ad467485b974a5d23a7f5",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/import-context-red.log": "4197940e70545e06451f0a98a9adca311e0fc8d3ec4194a448b1b6db9fe38cea",
+    "build/runs/20261021-172156-native-render-evidence-623c52/trs-decomposition-cpu/red.log": "2d4ace42f08c1f4e23d0ab331d6132603ca77e13149556be4a67064e558ed569",
+    "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/trs-cpp-old-diagnosis.json": "c43a02a7ac6ea8618b91e708b9d1dffa5d25866be3484bafa5017ce7a5cf754a",
+    "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/trs-cpp-diagnosis.json": "6be826b21daa820f355ee9a2b408f008a39923ad92cf934af8a7e6d6ff9cb959",
+    "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-selected-material-package/scene.azuresceneexchange": "881de59b7113ba5972355e01f402eedf917131614bfd8dafba3023479d190f91"
+  },
+  "contract": {
+    "composition": "T * Rx * Ry * Rz * S",
+    "poleCosineThreshold": 1e-05,
+    "shearDotThreshold": 0.0001,
+    "reconstructionRelativeBudget": 0.0002,
+    "minimumAbsoluteScale": 1e-07
+  },
+  "sourceNodes": [
+    "structure-native-38805087",
+    "structure-native-54024768"
+  ],
+  "sourceMatrixColumnMajor": [
+    0,
+    0.7059292793273926,
+    0,
+    0,
+    0,
+    0,
+    -9.756230354309082,
+    0,
+    -10.965432167053223,
+    0,
+    0,
+    0,
+    -80.19000244140625,
+    9.139999389648438,
+    63.03000259399414,
+    1
+  ],
+  "cpu": {
+    "Debug": {
+      "tests": 6,
+      "passed": 6
+    },
+    "Release": {
+      "tests": 6,
+      "passed": 6
+    }
+  },
+  "matrixProbe": {
+    "failures": [],
+    "total": 1346,
+    "failed": 0
+  },
+  "hostSha256": {
+    "build/ninja-msvc-debug/AzureRender.exe": "a209de073477beaa0467e13dba55dd827a5a8eef2c989cfa5212a18cb1e71d7a",
+    "build/ninja-msvc-debug/AzurePlayer.exe": "6034c2f765404552e866cc19c1e4ed3a4f5f08e9bab59f7a6c6c09c7d3ec834f",
+    "build/ninja-msvc-release/AzureRender.exe": "f77169f3ae3afb6874c6ad8e1421bc43bf8b620f6509bad5192c8cc69d4ae5ef",
+    "build/ninja-msvc-release/AzurePlayer.exe": "d25431a2c116a40eb9c290853c4719d60da8841c67e3b546fbe36bbc2d13b9d3"
+  },
+  "provenance": {
+    "implementation": "Project-authored numeric fix using existing TRS convention.",
+    "thirdPartySourceAdded": false,
+    "matrix": "Measured transform values from the local native scene exchange.",
+    "syntheticFixtures": "Hand-derived 89.99 degree rotations and signed-scale roundtrips."
+  },
+  "limitations": [
+    "Full native scene production import and rendering are validated by the main NR1 workflow."
+  ]
+}

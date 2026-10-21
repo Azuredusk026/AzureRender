@@ -74,6 +74,9 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 使用契约见[纹理共享](docs/runtime/sampled-texture-cache.md)。
 画面与释放结果见[验收记录](docs/acceptance/nr/sampled-texture-cache.md)。
 
+场景矩阵导入支持近正负九十度旋转。
+分解精度与来源诊断见[变换验收](docs/acceptance/nr/trs-pole-decomposition.md)。
+
 编辑器支持场景层级、属性编辑、选择变换、内容导入、撤销重做和运行预览。运行时提供 ECS、物理、脚本、动画、声音及游戏界面。独立 Player 按项目数据运行，并通过 Windows 游戏包交付。
 
 最近一轮实现了类型化材质画布、像素坐标二维文档及 GIF、PSD、SVG、ASCII USD 导入。格式注册覆盖 29 种输入、20 种输出，各格式有明确支持边界。二维内容和材质图的范围见[项目现状](docs/project-status.md)。
