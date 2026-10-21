@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-18",
+  "updated": "2026-10-21",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1392,7 +1392,8 @@
         "NR1"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/acceptance/nr/native-locomotion.md"
       ],
       "requiredAcceptance": [
         "NR9.delivery"

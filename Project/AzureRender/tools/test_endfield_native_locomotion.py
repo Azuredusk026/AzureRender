@@ -1,5 +1,8 @@
 import copy
 import unittest
+import inspect
+from endfield_native.acl_timeline import build_sample_plan
+from test_endfield_native_acl_timeline import stream
 from endfield_native.locomotion_inventory import analyze_clip, append_animation, static_pose_override
 
 
@@ -42,9 +45,35 @@ class LocomotionTests(unittest.TestCase):
         self.assertEqual(result['root']['kind'], 'moving_root')
         self.assertFalse(result['loop']['authored_loop_verified'])
 
+    def test_explicit_decoder_domain_keeps_the_unverified_game_clock_visible(self):
+        c,h,f,p=self.fixture();c['stop']=1.02
+        plan=build_sample_plan(dict(root_motion=stream(2,True,2),float=stream(3,False,2),
+            transform=stream(3,False,2,track_type=12)),source_start=0,source_stop=1.02)
+        self.assertIn('decoder_timeline',inspect.signature(analyze_clip).parameters,
+            'Inventory must accept a separately evidenced decoder time domain')
+        with self.assertRaisesRegex(ValueError,'domain'):analyze_clip(c,h,f,p)
+        result=analyze_clip(c,h,f,p,decoder_timeline=plan)
+        self.assertEqual(result['time_domain']['kind'],'decoder_seconds')
+        self.assertFalse(result['time_domain']['game_time_mapping_verified'])
+        self.assertEqual(result['time_domain']['source_clip_interval_seconds'],[0,1.02])
+        plan['sample_times'][-1]=.9
+        with self.assertRaisesRegex(ValueError,'domain'):analyze_clip(c,h,f,p,decoder_timeline=plan)
+
     def test_reject_missing_bone(self):
         c, h, f, p = self.fixture()
         with self.assertRaisesRegex(ValueError, 'skeleton'): analyze_clip(c, h, f, p + ['absent'])
+
+    def test_decoder_plan_rejects_invalid_numeric_domains(self):
+        c,h,f,p=self.fixture()
+        plan=build_sample_plan(dict(root_motion=stream(2,True,2),float=stream(3,False,2),
+            transform=stream(3,False,2,track_type=12)),source_start=0,source_stop=1)
+        for field,value in [('source_clip_domain',[False,1]),('source_clip_domain',None),
+                            ('sample_times',[0,'bad',1]),('sample_times',None),
+                            ('decoder_duration',True),('decoder_duration','1')]:
+            candidate=copy.deepcopy(plan);candidate[field]=value
+            with self.subTest(field=field,value=value):
+                with self.assertRaises(ValueError):
+                    analyze_clip(c,h,f,p,decoder_timeline=candidate)
 
     def test_reject_version_and_duration(self):
         c, h, f, p = self.fixture(); c['version'] = 11

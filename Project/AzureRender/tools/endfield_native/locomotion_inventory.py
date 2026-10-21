@@ -7,6 +7,11 @@ import math
 import struct
 from pathlib import Path
 
+try:
+    from .acl_timeline import build_sample_plan
+except ImportError:
+    from acl_timeline import build_sample_plan
+
 
 def static_pose_override(document, node_names):
     """Use an explicit named node set's stored rest pose; preserve other animation."""
@@ -84,7 +89,7 @@ def append_animation(base, base_tail, source, source_tail, clip_name):
     return result,struct.pack('<I4s',len(blob),b'BIN\0')+bytes(blob)
 
 
-def analyze_clip(clip, hierarchy, frames, expected_paths, loop_source=None):
+def analyze_clip(clip, hierarchy, frames, expected_paths, loop_source=None, decoder_timeline=None):
     if clip['version'] != 10:
         raise ValueError('Unsupported clip version')
     paths = [row['path'] for row in hierarchy]
@@ -100,7 +105,25 @@ def analyze_clip(clip, hierarchy, frames, expected_paths, loop_source=None):
         raise ValueError('Invalid sample time domain')
     if not all(math.isfinite(clip[k]) for k in ('start', 'stop')) or clip['stop'] <= clip['start']:
         raise ValueError('Invalid clip time domain')
-    if abs(times[0]-clip['start']) > 1e-5 or abs(times[-1]-clip['stop']) > 1e-5:
+    expected_start,expected_stop=clip['start'],clip['stop']
+    domain_kind='source_clip_seconds'
+    if decoder_timeline is not None:
+        plan=decoder_timeline
+        if not isinstance(plan,dict) or plan.get('format')!='EndfieldAclTimeline/1' or plan.get('game_time_mapping_verified') is not False:
+            raise ValueError('Invalid decoder timeline domain provenance')
+        def finite_number(value):
+            return type(value) in (int,float) and math.isfinite(value)
+        source=plan.get('source_clip_domain',[])
+        if not isinstance(source,list) or len(source)!=2 or any(not finite_number(a) or abs(a-b)>1e-5
+                for a,b in zip(source,[clip['start'],clip['stop']])):
+            raise ValueError('Decoder timeline source domain mismatch')
+        planned=plan.get('sample_times',[]);duration=plan.get('decoder_duration',math.nan)
+        if not isinstance(planned,list) or len(planned)!=len(times) or not finite_number(duration) or duration<=0 or not planned:
+            raise ValueError('Decoder sample domain dimensions mismatch')
+        if any(not finite_number(a) or abs(a-b)>1e-5 for a,b in zip(planned,times)):
+            raise ValueError('Decoder sample domain does not match evaluated frames')
+        expected_start,expected_stop=0,duration;domain_kind='decoder_seconds'
+    if abs(times[0]-expected_start) > 1e-5 or abs(times[-1]-expected_stop) > 1e-5:
         raise ValueError('Incomplete sample domain')
     for frame in frames:
         if len(frame['locals']) != len(hierarchy):
@@ -127,6 +150,8 @@ def analyze_clip(clip, hierarchy, frames, expected_paths, loop_source=None):
             'source': {k: clip[k] for k in ('source','path_id','version','m_name')},
             'skeleton_sha256': hashlib.sha256(json.dumps(skeleton,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
             'skeleton_nodes': len(hierarchy), 'frames': len(frames), 'duration_seconds': duration,
+            'time_domain': {'kind': domain_kind, 'source_clip_interval_seconds': [clip['start'],clip['stop']],
+                            'evaluated_interval_seconds': [times[0],times[-1]], 'game_time_mapping_verified': False},
             'coordinates': 'Unity source local hierarchy; meters; Y up',
             'root': {'kind': 'moving_root' if distance > 1e-4 else 'in_place',
                      'displacement_m': [b-a for a,b in zip(roots[0],roots[-1])],
@@ -149,12 +174,24 @@ def main():
     parser.add_argument('--source-audit', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--loop-source', type=Path)
+    parser.add_argument('--decoder-timeline', type=Path)
     args = parser.parse_args()
     files = [args.decoded/'native/clip_audit.json', args.decoded/'humanoid/merged/source_hierarchy.json',
              args.decoded/'humanoid/merged/source_local_frames.json', args.source_audit]
     clip,hierarchy,frames,audit = [json.loads(p.read_text(encoding='utf-8-sig')) for p in files]
     loop_source = json.loads(args.loop_source.read_text(encoding='utf-8-sig')) if args.loop_source else None
-    result = analyze_clip(clip,hierarchy,frames,[x['path'] for x in audit['transforms']],loop_source)
+    timeline=json.loads(args.decoder_timeline.read_text(encoding='utf-8-sig')) if args.decoder_timeline else None
+    if timeline is not None:
+        buffers={}
+        for name in ('transform','root_motion','float'):
+            raw=args.decoded/'native'/(name+'.acl')
+            buffers[name]=raw.read_bytes()
+            files.append(raw)
+        regenerated=build_sample_plan(buffers,source_start=clip['start'],source_stop=clip['stop'])
+        if timeline!=regenerated:
+            raise ValueError('Decoder timeline does not match source buffers and clip domain')
+        files.append(args.decoder_timeline)
+    result = analyze_clip(clip,hierarchy,frames,[x['path'] for x in audit['transforms']],loop_source,timeline)
     if args.loop_source: files.append(args.loop_source)
     result['inputs'] = [{'path': str(p.resolve()), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]
     with args.output.open('x', encoding='utf8') as f:
