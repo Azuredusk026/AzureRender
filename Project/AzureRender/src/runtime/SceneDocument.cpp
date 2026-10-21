@@ -74,6 +74,8 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << light.shape.direction[0] << ' ' << light.shape.direction[1] << ' '
                << light.shape.direction[2] << ' ' << light.shape.innerCone << ' '
                << light.shape.outerCone << '\n';
+        output << "lightFalloff " << static_cast<int>(light.shape.falloff) << ' '
+               << light.shape.falloffExponent << '\n';
     }
     output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
     output << "irradianceVolume " << std::quoted(nlohmann::json(document.irradianceVolume).dump()) << '\n';
@@ -227,6 +229,12 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                     >> light.shape.innerCone >> light.shape.outerCone) || key != "lightShape")
                     throw std::runtime_error("Invalid .azscene light shape");
                 light.shape.type = static_cast<LightKind>(type);
+                if(schemaVersion>=8) {
+                    int falloff=0;
+                    if(!(input>>key>>falloff>>light.shape.falloffExponent)||key!="lightFalloff")
+                        throw std::runtime_error("Invalid .azscene light falloff");
+                    light.shape.falloff=static_cast<LightFalloff>(falloff);
+                }
                 light.shape.validate();
             }
             document.lights.push_back(std::move(light));

@@ -12,7 +12,8 @@
 #include <windows.h>
 #endif
 using namespace azurerender;
-void check(bool value) { if (!value) throw std::runtime_error("Asset/level contract failed"); }
+void checkAt(bool value,int line) { if (!value) throw std::runtime_error("Asset/level contract failed at line "+std::to_string(line)); }
+#define check(value) checkAt((value),__LINE__)
 void write(const std::filesystem::path& p,const std::string& data) { std::ofstream(p) << data; }
 int main() {
  const auto token=std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
@@ -114,6 +115,14 @@ int main() {
   check(reopened.scene.lights[0].shape.falloff==LightFalloff::RangePower
       && reopened.scene.lights[0].shape.falloffExponent==3.5F);
   check(nlohmann::json::object().get<LightShape>().falloff==LightFalloff::Legacy);
+  auto directional=nlohmann::json{{"type","directional"},{"direction",{0,0,-1}}}.get<LightShape>();
+  check(nlohmann::json(directional).at("type")=="directional");
+  check(directional.angularWeight({1,0,0})==1.F);
+  auto directionalDocument=level;
+  directionalDocument["lights"][0]["shape"]=directional;
+  auto directionalLevel=Level::parse(directionalDocument,db);
+  directionalLevel.save(root/"assets/directional.azurelevel");
+  check(Level::load(root/"assets/directional.azurelevel",db).scene.lights[0].shape.type==static_cast<LightKind>(2));
   for(const auto& bad : {nlohmann::json{{"falloff","unknown"}},
           nlohmann::json{{"falloff","range-power"},{"falloffExponent",0}}}) {
     bool rejected=false;

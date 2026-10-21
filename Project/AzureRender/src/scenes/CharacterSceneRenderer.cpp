@@ -3064,7 +3064,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         }
         const Vector3 viewPosition = transformPosition(view, source.position);
         const float depth = -viewPosition[2];
-        if (depth + source.radius < renderSettings_->cameraNear || source.radius <= 0.0F) {
+        if (source.shape.type!=LightKind::Directional
+            && (depth + source.radius < renderSettings_->cameraNear || source.radius <= 0.0F)) {
             continue;
         }
         const float clipX = projection[0] * viewPosition[0]

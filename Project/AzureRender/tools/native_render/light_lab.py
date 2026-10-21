@@ -35,6 +35,13 @@ def generate(root, mode):
     if mode in ('smooth-inverse-square','range-power'):
         lights[0]['intensity']=.3
         lights[0]['shape'].update(falloff=mode,falloffExponent=3.5)
+    if mode.startswith('directional-'):
+        lights[0]['intensity']=.3
+        lights[0]['radius']=.001
+        lights[0]['shape'].update(type='directional',falloff='range-power',falloffExponent=3.5)
+        if mode=='directional-far':
+            nodes[2]['components']['azure.transform']['data']['translation']=[10000,10000,-10000]
+        elif mode=='directional-back':lights[0]['shape']['direction']=[0,0,1]
     write('level.azurelevel', {'schemaVersion':1,'id':'light-lab','resources':[{'id':'plane','asset':'assets:/plane.gltf'}],
         'nodes':nodes,'lights':lights,'renderSettings':{'sceneLighting':True,'skyIntensity':0,
         'stylized':False,'background':False,'platform':False,'innerOutline':False,'silhouetteOutline':False,
@@ -53,7 +60,8 @@ def main():
     output = args.output.resolve()
     metrics = {}
     pictures = {}
-    for mode in ('dark','point','spot','smooth-inverse-square','range-power'):
+    for mode in ('dark','point','spot','smooth-inverse-square','range-power',
+                 'directional-near','directional-far','directional-back'):
         folder = output / mode
         if not args.verify_only:
             generate(folder, mode)
@@ -107,6 +115,10 @@ def main():
             distance_errors[model].append(abs(measured-target/legacy)/(target/legacy))
         assert max(distance_errors[model])<.03,(model,distance_errors[model])
     metrics['distance_relative_errors']=distance_errors
+    assert max(pictures['directional-near'].getpixel((128,128)))>0
+    assert pictures['directional-near'].tobytes()==pictures['directional-far'].tobytes(), 'Directional illumination depends on position or radius'
+    assert metrics['directional-back']['maximum']==0,'Directional emission has the wrong sign'
+    metrics['directional_translation_byte_difference']=0
     (output/'metrics.json').write_text(json.dumps(metrics,indent=2))
     print(json.dumps(metrics,indent=2))
 

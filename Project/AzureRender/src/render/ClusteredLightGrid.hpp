@@ -37,6 +37,10 @@ public:
         for (auto& cluster : clusters_) cluster.clear();
         for (std::size_t index = 0; index < lights.size(); ++index) {
             const RenderLight& light = lights[index];
+            if(light.shape.type==LightKind::Directional) {
+                for(auto& cluster:clusters_)cluster.push_back(static_cast<std::uint32_t>(index));
+                continue;
+            }
             const float radius = std::max(light.radius, 0.0F);
             const float centerDepth = light.clusterPosition[2];
             const float minimumDepth = std::max(

@@ -3,8 +3,9 @@
 
 #include <cassert>
 #include <stdexcept>
+#include <iostream>
 
-int main() {
+int main() try {
     azurerender::ClusteredLightGrid grid({2, 2, 2, 4.0F, 32.0F});
     azurerender::RenderLight first{};
     first.stableId = 10;
@@ -70,5 +71,13 @@ int main() {
     behind.radius = 1;
     perspective.assign({behind});
     if (!perspective.gpuIndexData().empty()) throw std::runtime_error("Offscreen volume must be culled");
+    behind.shape.type=static_cast<azurerender::LightKind>(2);
+    behind.radius=.001F;
+    behind.viewPosition={10000,10000,-10000};
+    behind.clusterPosition[2]=-10000;
+    perspective.assign({behind});
+    for(unsigned z=0;z<4;++z)for(unsigned y=0;y<4;++y)for(unsigned x=0;x<4;++x)
+        if(perspective.indicesFor(x,y,z)!=std::vector<std::uint32_t>{0})
+            throw std::runtime_error("Directional light must illuminate every cluster independently of position and radius");
     return 0;
-}
+} catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}

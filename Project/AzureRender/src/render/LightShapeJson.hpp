@@ -4,7 +4,7 @@
 namespace azurerender {
 inline void to_json(nlohmann::json& value, const LightShape& shape) {
     shape.validate();
-    value = {{"type", shape.type == LightKind::Spot ? "spot" : "point"},
+    value = {{"type", shape.type == LightKind::Directional ? "directional" : shape.type == LightKind::Spot ? "spot" : "point"},
         {"direction", shape.direction}, {"innerCone", shape.innerCone}, {"outerCone", shape.outerCone},
         {"falloff",shape.falloff==LightFalloff::RangePower?"range-power":
             shape.falloff==LightFalloff::SmoothInverseSquare?"smooth-inverse-square":"legacy"},
@@ -12,8 +12,8 @@ inline void to_json(nlohmann::json& value, const LightShape& shape) {
 }
 inline void from_json(const nlohmann::json& value, LightShape& shape) {
     const auto type = value.value("type", std::string("point"));
-    if (type != "point" && type != "spot") throw std::invalid_argument("Unsupported light shape");
-    shape.type = type == "spot" ? LightKind::Spot : LightKind::Point;
+    if (type != "point" && type != "spot" && type != "directional") throw std::invalid_argument("Unsupported light shape");
+    shape.type = type == "directional" ? LightKind::Directional : type == "spot" ? LightKind::Spot : LightKind::Point;
     shape.direction = value.value("direction", shape.direction);
     shape.innerCone = value.value("innerCone", shape.innerCone);
     shape.outerCone = value.value("outerCone", shape.outerCone);

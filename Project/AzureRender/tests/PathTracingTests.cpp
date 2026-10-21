@@ -30,6 +30,10 @@ int main(){try{
  require(tracing::sceneFingerprint(scene,{})!=falloffFingerprint,"Falloff exponent invalidates tracing history");
  const auto tracingLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
  require(tracingLight.coneType[2]==2.F && tracingLight.coneType[3]==3.5F,"Tracing consumes the explicit distance model");
+ scene.lights[0].shape.type=static_cast<LightKind>(2);
+ scene.lights[0].shape.direction={0,1,0};
+ const auto directionalLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
+ require(directionalLight.coneType[1]==2.F&&directionalLight.directionOuter[1]==1.F,"Tracing preserves directional emitter direction");
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");

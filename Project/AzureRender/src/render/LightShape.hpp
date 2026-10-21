@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 namespace azurerender {
-enum class LightKind { Point = 0, Spot = 1 };
+enum class LightKind { Point = 0, Spot = 1, Directional = 2 };
 enum class LightFalloff { Legacy = 0, SmoothInverseSquare = 1, RangePower = 2 };
 
 // Cone angles are half angles in radians. Direction points away from the emitter.
@@ -19,7 +19,7 @@ struct LightShape {
     float falloffExponent = 2;
 
     void validate() const {
-        if (type != LightKind::Point && type != LightKind::Spot)
+        if (type != LightKind::Point && type != LightKind::Spot && type != LightKind::Directional)
             throw std::invalid_argument("Unknown light type");
         if (falloff != LightFalloff::Legacy && falloff != LightFalloff::SmoothInverseSquare
             && falloff != LightFalloff::RangePower)
@@ -38,7 +38,7 @@ struct LightShape {
             throw std::invalid_argument("Invalid light cone half angles");
     }
     float angularWeight(const std::array<float, 3>& emitterToSurface) const {
-        if (type == LightKind::Point) return 1;
+        if (type != LightKind::Spot) return 1;
         const float cosine = direction[0]*emitterToSurface[0]
             + direction[1]*emitterToSurface[1] + direction[2]*emitterToSurface[2];
         if(innerCone==outerCone) return cosine>=std::cos(outerCone)?1.F:0.F;

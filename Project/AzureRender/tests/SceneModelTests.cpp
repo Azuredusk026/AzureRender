@@ -68,6 +68,8 @@ bool loadedDocumentMatches(const std::filesystem::path& path,
             || loadedLight.shape.direction != expectedLight.shape.direction
             || loadedLight.shape.innerCone != expectedLight.shape.innerCone
             || loadedLight.shape.outerCone != expectedLight.shape.outerCone
+            || loadedLight.shape.falloff != expectedLight.shape.falloff
+            || loadedLight.shape.falloffExponent != expectedLight.shape.falloffExponent
             || loadedLight.enabled != expectedLight.enabled) {
             return false;
         }
@@ -135,7 +137,15 @@ int main() {
         document.lights[0].shape.type = azurerender::LightKind::Spot;
         document.lights[0].shape.innerCone = .25F;
         document.lights[0].shape.outerCone = .5F;
+        document.lights[0].shape.falloff=azurerender::LightFalloff::RangePower;
+        document.lights[0].shape.falloffExponent=3.5F;
         document.save(scenePath);
+        const auto shapeReloaded=azurerender::SceneDocument::load(scenePath).lights[0].shape;
+        assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
+        auto directionalDocument=document;
+        directionalDocument.lights[0].shape.type=azurerender::LightKind::Directional;
+        directionalDocument.save(directory/"directional.azscene");
+        assert(azurerender::SceneDocument::load(directory/"directional.azscene").lights[0].shape.type==azurerender::LightKind::Directional);
         const auto probeReloaded=azurerender::SceneDocument::load(scenePath).reflectionProbe;
         assert(probeReloaded.texture=="room.azenv" && probeReloaded.halfExtents==document.reflectionProbe.halfExtents);
         assert(probeReloaded.blendDistance==.5F);
@@ -157,13 +167,16 @@ int main() {
             assert(contents.find("shadowMaximumFilterRadiusTexels 8")
                 != std::string::npos);
             auto legacy=contents;
-            const auto header=legacy.find("schemaVersion 7");assert(header!=std::string::npos);
+            const auto header=legacy.find("schemaVersion 8");assert(header!=std::string::npos);
             legacy.replace(header,15,"schemaVersion 6");
+            const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
+            legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
             const auto giLine=legacy.find("irradianceVolume ");assert(giLine!=std::string::npos);
             legacy.erase(giLine,legacy.find('\n',giLine)-giLine+1);
             const auto legacyPath=directory/"legacy.azscene";
             {std::ofstream legacyFile(legacyPath);legacyFile<<legacy;}
             assert(!azurerender::SceneDocument::load(legacyPath).irradianceVolume.enabled);
+            assert(azurerender::SceneDocument::load(legacyPath).lights[0].shape.falloff==azurerender::LightFalloff::Legacy);
         }
         assert(std::filesystem::exists(scenePath));
         assert(loadedDocumentMatches(scenePath, document));

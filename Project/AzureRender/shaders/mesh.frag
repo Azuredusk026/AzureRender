@@ -610,7 +610,11 @@ void main() {
         float lightRadius = max(light.positionRadius.w, 0.001);
         float attenuation=localLightDistanceWeight(distanceSquared,lightRadius,light.coneType.z,light.coneType.w);
         vec3 pointDirection = toLight / max(distanceToLight, 0.001);
-        if (light.coneType.y > 0.5) {
+        if(light.coneType.y>1.5) {
+            pointDirection=-light.directionOuter.xyz;
+            attenuation=1.0;
+        }
+        else if (light.coneType.y > 0.5) {
             float cone = clamp((dot(-pointDirection, light.directionOuter.xyz)
                 - light.directionOuter.w) / max(light.coneType.x-light.directionOuter.w, 0.000001), 0.0, 1.0);
             if(light.coneType.x==light.directionOuter.w) cone=step(light.directionOuter.w,dot(-pointDirection,light.directionOuter.xyz));

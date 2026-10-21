@@ -56,8 +56,8 @@ SceneImportProposal readSceneExchange(const std::filesystem::path& path,const st
  for(const auto& entry:data.value("lights",nlohmann::json::array())){
   check(cancelled);SceneLight light;light.id=identity(entry,"id");light.nodeId=entry.at("node").get<std::string>();if(!lights.insert(light.id).second||!nodes.count(light.nodeId))throw std::invalid_argument("Invalid scene light identity");
   const auto kind=entry.value("type",std::string("point"));
-  if(kind!="point"&&kind!="spot"){result.diagnostics.push_back({{"code","UnsupportedLight"},{"source",light.id},{"message","Unsupported local light shape"}});continue;}
-  light.shape=entry.value("shape",LightShape{});light.shape.type=kind=="spot"?LightKind::Spot:LightKind::Point;light.shape.validate();
+  if(kind!="point"&&kind!="spot"&&kind!="directional"){result.diagnostics.push_back({{"code","UnsupportedLight"},{"source",light.id},{"message","Unsupported light shape"}});continue;}
+  light.shape=entry.value("shape",LightShape{});light.shape.type=kind=="directional"?LightKind::Directional:kind=="spot"?LightKind::Spot:LightKind::Point;light.shape.validate();
   light.color=vector(entry,"color",{1,1,1});light.intensity=entry.value("intensity",1.F);light.radius=entry.value("radius",5.F)*units;light.enabled=entry.value("enabled",true);
   if(!std::isfinite(light.intensity)||light.intensity<0||!std::isfinite(light.radius)||light.radius<=0)throw std::invalid_argument("Invalid scene light range");result.scene.lights.push_back(light);
  }

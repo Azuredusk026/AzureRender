@@ -135,6 +135,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
 局部灯支持[显式距离衰减](docs/runtime/local-light-attenuation.md)。
 原生指数来源与公共验证见[衰减证据](docs/acceptance/nr/light-attenuation.md)。
+场景[方向光](docs/runtime/directional-lights.md)接入光栅及路径追踪。
+场景文档保存完整形状与衰减参数。
 独立局部反射支持原作层级、盒投影与体积混合。
 公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
 中庭反射候选已完成四帧采样，整体照明仍待还原。
