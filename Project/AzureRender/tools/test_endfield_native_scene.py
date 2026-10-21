@@ -1,7 +1,7 @@
 import struct
 import unittest
 
-from endfield_native.scene import validate_raw_header, merge_instances, decode_chunk_data
+from endfield_native.scene import validate_raw_header, merge_instances, decode_chunk_data, select_instance
 
 
 def empty_chunk():
@@ -13,6 +13,40 @@ def empty_chunk():
 
 
 class NativeSceneTests(unittest.TestCase):
+    def test_wall_origin_outside_region_keeps_intersecting_geometry(self):
+        wall = dict(x=0, y=-1.05, z=-45.01,
+                    world_bounds=[-40.4, 40.4, -2.5, 22.92, -156.6, -35.84])
+        region = [-40, 40, -3, 40, -40, 40]
+        self.assertTrue(select_instance(wall, region))
+        self.assertFalse(select_instance(wall, region, policy='origin'))
+        self.assertFalse(select_instance(wall, [-20, 20, -3, 40, -20, 20]))
+
+    def test_bridge_span_and_touching_boundary_are_conservatively_selected(self):
+        bridge = dict(x=100, y=2, z=0, world_bounds=[-10, 110, 2, 2, -1, 1])
+        self.assertTrue(select_instance(bridge, [-5, 5, 0, 5, -5, 5]))
+        self.assertTrue(select_instance(bridge, [-20, -10, 0, 5, -5, 5]))
+        self.assertFalse(select_instance(bridge, [-20, -10.01, 0, 5, -5, 5]))
+
+    def test_missing_bounds_uses_finite_half_open_origin(self):
+        point = dict(x=0, y=0, z=0, world_bounds=None)
+        self.assertTrue(select_instance(point, [-1, 1, -1, 1, -1, 1]))
+        self.assertFalse(select_instance(point, [-1, 0, -1, 1, -1, 1]))
+        with self.assertRaises(ValueError):
+            select_instance(dict(point, x=float('nan')), [-1, 1, -1, 1, -1, 1])
+
+    def test_invalid_selection_bounds_and_source_bounds_are_rejected(self):
+        point = dict(x=0, y=0, z=0, world_bounds=[-1, 1, -1, 1, -1, 1])
+        valid = [-2, 2, -2, 2, -2, 2]
+        for bounds in ([0, 0, -1, 1, -1, 1], [1, -1, -1, 1, -1, 1],
+                       [0]*5, [float('inf')]*6, [False, 1, -1, 1, -1, 1]):
+            with self.subTest(bounds=bounds), self.assertRaises(ValueError):
+                select_instance(point, bounds)
+        for bounds in ([1, -1, -1, 1, -1, 1], [0]*5, [float('nan')]*6):
+            with self.subTest(source=bounds), self.assertRaises(ValueError):
+                select_instance(dict(point, world_bounds=bounds), valid)
+        with self.assertRaisesRegex(ValueError, 'policy'):
+            select_instance(point, valid, policy='guess')
+
     def test_raw_and_compressed_share_the_validated_chunk_contract(self):
         raw = empty_chunk()
         self.assertIs(decode_chunk_data(raw), raw)
