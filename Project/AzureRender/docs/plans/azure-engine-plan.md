@@ -7,6 +7,7 @@ NR0 至 NR8 覆盖场景与角色原生渲染。
 NR9 至 NR11 覆盖原生移动动作、WASD 与动画混合。
 NR12 负责画面、操控、发布与实录联合验收。
 执行任务见[可玩还原计划](2026-10-17-native-playable-restoration.md)。
+公开资料、实景与抓帧按[证据执行计划](2026-10-21-native-render-evidence-execution.md)推进。
 统一状态表登记全部 NR 阶段，局部证据随专项记录维护。
 阶段状态与验收见[完整还原计划](2026-10-17-native-render-restoration.md)。
 无遮挡参考与地标标定见[参考基准](../acceptance/nr/reference-baseline.md)。

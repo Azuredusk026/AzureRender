@@ -116,6 +116,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 目标涵盖近乎原生画面、WASD 与原生运动动画混合。
 场景还原覆盖本机观测到的全部可见对象与效果。
 引擎缺失能力及验收见[可玩还原计划](docs/plans/2026-10-17-native-playable-restoration.md)。
+实景、公开资料与抓帧见[证据执行计划](docs/plans/2026-10-21-native-render-evidence-execution.md)。
 场景分项诊断与实景参考见[原生参考基准](docs/acceptance/nr/reference-baseline.md)。
 原生动作与 WASD 的短路径结果见[操控验证](docs/acceptance/nr/playable-integration.md)。
 速度驱动的多片段混合与步态同步已接入公共姿态入口。

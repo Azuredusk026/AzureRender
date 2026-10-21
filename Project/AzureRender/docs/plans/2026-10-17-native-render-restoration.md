@@ -5,6 +5,7 @@
 执行方式：NR0 至 NR8 按依赖推进并逐阶段验收。
 完整可玩交付包含 NR9 至 NR12。
 任务与操控规格见[可玩还原计划](2026-10-17-native-playable-restoration.md)。
+实景、公开资料与抓帧见[证据执行计划](2026-10-21-native-render-evidence-execution.md)。
 需求依据为原生场景照明、反射及角色正确渲染。
 
 ## 目标与范围
