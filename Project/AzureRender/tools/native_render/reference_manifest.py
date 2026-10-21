@@ -5,6 +5,22 @@ import json
 import math
 from pathlib import Path
 
+from PIL import Image, UnidentifiedImageError
+
+
+def inspect_reference_image(path):
+    """Read actual still-image encoding and pixels without resizing the source."""
+    try:
+        with Image.open(path) as image:
+            metadata = {'format': image.format, 'resolution': list(image.size)}
+            image.verify()
+        with Image.open(path) as image:
+            image.load()
+    except (OSError, ValueError, SyntaxError, UnidentifiedImageError,
+            Image.DecompressionBombError) as error:
+        raise ValueError(f'invalid reference image: {path}') from error
+    return metadata
+
 
 def _number(value):
     return type(value) in (int, float) and math.isfinite(value)
@@ -91,6 +107,10 @@ def validate_manifest(document, root):
                 digest.update(block)
         if digest.hexdigest() != entry.get('sha256'):
             raise ValueError(f'reference sha256 mismatch: {identity}')
+        image = inspect_reference_image(path)
+        if role == 'game_reference' and not observed:
+            if image['resolution'] != entry['state']['resolution']:
+                raise ValueError(f'reference image resolution mismatch: {identity}')
         result['pending' if observed else 'eligible' if role == 'game_reference' else 'auxiliary'].append(identity)
     return result
 

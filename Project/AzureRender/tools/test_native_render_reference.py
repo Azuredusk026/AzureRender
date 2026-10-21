@@ -3,6 +3,7 @@ import hashlib
 import tempfile
 import unittest
 from pathlib import Path
+from PIL import Image
 
 try:
     from native_render.reference_manifest import validate_manifest
@@ -15,14 +16,14 @@ class ReferenceTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        (self.root / 'frame.png').write_bytes(b'synthetic frame')
+        Image.new('RGB', (64, 32), (24, 80, 120)).save(self.root / 'frame.png')
         self.document = {
             'format': 'NativeRenderReference/1', 'game_version': '1.0.14',
             'entries': [{'id': 'front', 'role': 'game_reference', 'status': 'captured',
                 'game_version': '1.0.14', 'path': 'frame.png',
-                'sha256': hashlib.sha256(b'synthetic frame').hexdigest(),
+                'sha256': hashlib.sha256((self.root / 'frame.png').read_bytes()).hexdigest(),
                 'state': {'scene': 'synthetic-room', 'quest': 'fixture',
-                    'lighting': 'day', 'quality': 'high', 'resolution': [1920, 1080],
+                    'lighting': 'day', 'quality': 'high', 'resolution': [64, 32],
                     'camera': {'position': [0, 1, 2], 'rotation': [0, 0, 0, 1], 'fov_y': 60},
                     'exposure': 0, 'antialiasing': 'none', 'time': 0},
                 'source': 'local-game'}]}
@@ -85,6 +86,26 @@ class ReferenceTests(unittest.TestCase):
         self.document['entries'][0]['state']['camera']['fov_y'] = float('nan')
         with self.assertRaisesRegex(ValueError, 'camera'):
             self.check(self.document)
+
+    def test_declared_resolution_must_match_image_pixels(self):
+        self.document['entries'][0]['state']['resolution'] = [1920, 1080]
+        with self.assertRaisesRegex(ValueError, 'resolution'):
+            self.check(self.document)
+
+    def test_digest_does_not_qualify_non_image_or_truncated_image(self):
+        valid = (self.root / 'frame.png').read_bytes()
+        for payload in (b'not an image', valid[:48]):
+            with self.subTest(payload=payload[:12]):
+                (self.root / 'frame.png').write_bytes(payload)
+                self.document['entries'][0]['sha256'] = hashlib.sha256(payload).hexdigest()
+                with self.assertRaisesRegex(ValueError, 'image'):
+                    self.check(self.document)
+
+    def test_observed_image_reports_actual_encoding_and_dimensions(self):
+        from native_render.reference_manifest import inspect_reference_image
+        Image.new('RGB', (91, 47)).save(self.root / 'frame.png', format='JPEG')
+        result = inspect_reference_image(self.root / 'frame.png')
+        self.assertEqual(result, {'format': 'JPEG', 'resolution': [91, 47]})
 
 
 if __name__ == '__main__':
