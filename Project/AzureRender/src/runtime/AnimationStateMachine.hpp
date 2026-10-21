@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <optional>
+#include "animation/LocomotionBlend.hpp"
 namespace azurerender {
 class AnimationStateMachine {
 public:
@@ -18,10 +20,12 @@ public:
     double previousTime() const { return previousTime_; }
     bool previousLoop() const { return states_.at(previous_.empty() ? state_ : previous_).loop; }
     float blend() const { return duration_ > 0 ? static_cast<float>(std::min(elapsed_ / duration_, 1.0)) : 1.0F; }
+    const std::optional<LocomotionBlendProfile>& locomotionProfile() const noexcept { return locomotion_; }
 private:
     struct State { std::uint32_t clip; bool loop; };
     struct Transition { std::string from, to, parameter; bool value; double blendSeconds; };
     std::map<std::string, State> states_;
+    std::optional<LocomotionBlendProfile> locomotion_;
     std::vector<Transition> transitions_;
     std::map<std::string, bool> parameters_;
     std::string state_;

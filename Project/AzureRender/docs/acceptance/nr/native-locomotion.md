@@ -129,6 +129,11 @@ Blender 骨架世界矩阵最大误差为 `2.9802322e-6`。
 脚本、表现层及 Vulkan 校验无错误，卸载计数归零。
 运行姿态、衣摆、脚接触及原生视觉等价继续单独验收。
 
+七动作合并候选包含待机、专属入口和五段共享动作。
+五段共享动作均完成 Blender 世界矩阵检查。
+六段动作顺序播放完成 600 帧，运行及资源释放检查通过。
+行走、跑步与待机的速度混合见[混合证据](locomotion-blending.md)。
+
 本轮证据位于：
 `build/runs/20261021-125515-native-scene-lighting-5e36f1/`。
 六组解码结果见 `binding-projection-integration-final.json`。

@@ -1,3 +1,4 @@
+#include "animation/PresentedPose.hpp"
 #include "render/pathtracing/TraceScene.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "animation/ExpressionPose.hpp"
@@ -60,9 +61,7 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
         auto pose=bindAnimationPose(asset);std::array<float,2> morph{};
         const auto animation=std::find_if(animations.begin(),animations.end(),[&](const auto& a){return a.node==node.id;});
         if(animation!=animations.end()){
-            if(!asset.animations.empty())pose=sampleAnimationPose(asset,animation->clip,static_cast<float>(animation->time),animation->loop);
-            morph=animation->morph;
-            if(!asset.animations.empty()&&animation->blend<1)pose=blendAnimationPoses(asset,sampleAnimationPose(asset,animation->previousClip,static_cast<float>(animation->previousTime),animation->previousLoop),pose,animation->blend);
+            pose=samplePresentedAnimationPose(asset,*animation);morph=animation->morph;
         }
         if(animation!=animations.end()) {
             if(animation->expression)pose=applyExpressionPose(asset,pose,*animation->expression,animation->expressionWeight);
@@ -115,6 +114,7 @@ std::uint64_t sceneFingerprint(const scene::SceneDescription& scene,const std::v
     for(const auto& l:scene.lights){text(l.id);bytes(l.position);bytes(l.color);bytes(l.intensity);bytes(l.radius);bytes(l.enabled);bytes(l.shape.type);bytes(l.shape.direction);bytes(l.shape.innerCone);bytes(l.shape.outerCone);bytes(l.shape.falloff);bytes(l.shape.falloffExponent);bytes(l.shape.specularScale);}
     for(const auto& light:scene.lights){bytes(light.shape.influenceBox.enabled);bytes(light.shape.influenceBox.worldToBox);bytes(light.shape.influenceBox.falloffThreshold);}
     for(const auto& a:animations){text(a.node);bytes(a.clip);bytes(a.time);bytes(a.loop);bytes(a.previousClip);bytes(a.previousTime);bytes(a.blend);bytes(a.previousLoop);bytes(a.morph);bytes(a.expressionWeight);
+        for(const auto& sample:a.samples){bytes(sample.clip);bytes(sample.time);bytes(sample.weight);bytes(sample.loop);bytes(sample.duration);}bytes(a.samples.size());
         for(float w:a.morphOverrides)bytes(w);
         bytes(a.morphOverrides.size());
         if(a.expression)text(expressionPoseToJson(*a.expression).dump());

@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "render/EnvironmentAsset.hpp"
+#include "animation/AnimationClipSample.hpp"
 #include "render/RenderCamera.hpp"
 #include "scene/SceneDescription.hpp"
 
@@ -98,6 +99,7 @@ struct NodeAnimationFrame {
     std::vector<float> morphOverrides;
     std::shared_ptr<const ExpressionPose> expression;
     float expressionWeight=1;
+    std::vector<AnimationClipSample> samples;
 };
 struct SceneFrameData {
     float deltaSeconds = 0.0F;

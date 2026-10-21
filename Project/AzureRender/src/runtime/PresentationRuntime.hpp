@@ -25,7 +25,7 @@ private:
     RuntimeLifecycle& runtime_;
     AssetDatabase& assets_;
     AudioRuntime audio_;
-    struct Animation { std::string asset,state,node;AnimationStateMachine machine; };
+    struct Animation { std::string asset,state,node;AnimationStateMachine machine;LocomotionBlendState locomotion; };
     struct Sound { std::string key,node;AudioRuntime::Handle handle; };
     std::map<ecs::Entity,Animation> animations_;
     std::map<ecs::Entity,Sound> sounds_;

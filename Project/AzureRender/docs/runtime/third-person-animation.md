@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-10-04
+> 更新日期：2026-10-21
 > 源码入口：`GltfLoader.*`、`AnimationStateMachine.*`、`GameRuntime.*`、`ThirdPersonCamera.hpp`
 
 ## 资源、姿态与录制
@@ -24,14 +24,72 @@
 | `asset` | 动画状态图的资源引用 |
 | `state`、`enabled` | 当前语义状态与启用状态 |
 | `startTime` | 实体初始片段时间 |
-| `locomotion` | 由角色实际速度选择 idle 或 walk |
+| `locomotion` | 由角色实际速度驱动状态和速度混合 |
 | `referenceSpeed` | 行走片段的参考速度，单位为米每秒 |
 | `crossfade` | 状态淡化时长，默认 0.18 秒 |
 | `morph0`、`morph1` | 实例 Morph 权重 |
 
-状态图版本为 1。`states` 指定片段索引与循环标记，`initial` 指定初始状态，`transitions` 指定布尔条件和可选 `blendSeconds`。时间键与片段引用在导入、图解析和采样时校验。
+状态图支持版本一和版本二。
+`states` 指定片段索引与循环标记。
+`initial` 指定初始状态，`transitions` 指定布尔条件。
+过渡可配置 `blendSeconds`。
 
 淡化时长按模拟时间推进，片段时钟按播放速率推进。混合期间的新状态请求排队，在当前淡化完成后衔接。暂停冻结状态与时钟，单步推进一个固定步。
+
+## 速度混合配置
+
+版本二状态图通过 `locomotion` 配置一维速度混合。
+该对象使用版本一，实体须启用 `locomotion`。
+角色物理系统提供相对地面支撑的实际水平速度。
+混合状态由表现层按实体持有，场景重载时释放。
+
+```json
+{
+  "schemaVersion": 2,
+  "initial": "idle",
+  "states": [{"name": "idle", "clip": 0}, {"name": "walk", "clip": 1}],
+  "transitions": [],
+  "locomotion": {
+    "schemaVersion": 1,
+    "smoothingSeconds": 0.12,
+    "maximumCyclesPerSecond": 6,
+    "samples": [
+      {"clip": 0, "speed": 0, "duration": 2},
+      {"clip": 1, "speed": 2, "duration": 1},
+      {"clip": 2, "speed": 5, "duration": 0.5}
+    ]
+  }
+}
+```
+
+| 字段 | 单位、范围与默认值 |
+| --- | --- |
+| `samples` | 两至八点，首点速度为零，片段编号唯一 |
+| `speed` | 米每秒，严格递增，最大一百 |
+| `duration` | 秒，范围为 0.01 至六百，须匹配实际片段 |
+| `phaseOffset` | 归一化周期，范围为零至一，右端开区间，默认零 |
+| `smoothingSeconds` | 秒，范围为零至十，默认 0.15 |
+| `maximumCyclesPerSecond` | 周期每秒，大于零且不超过六十，默认六 |
+
+相邻速度点线性计算目标权重，权重随时间指数平滑。
+启停期间的新速度立即影响目标权重。
+移动片段共享步态相位，步长由权重、速度和时长计算。
+静止片段保留独立时钟，零时间步冻结权重和时钟。
+
+配置错误包含字段路径，采样时校验实际片段时长。
+版本一状态图采用双片段过渡契约。
+版本一声明 `locomotion` 或使用未知版本时拒绝加载。
+原地混合的角色位移由物理系统持有。
+
+`NodeAnimationFrame.samples` 保存带权片段列表。
+统一姿态入口混合局部位移、缩放、旋转和形态键。
+光栅、阴影与路径追踪共同消费该结果。
+根运动、接触约束与专用启停层按所属项目另行验收。
+
+公共 GPU 夹具为 `tools/native_render/locomotion_blend_lab.py`。
+它验证三段动作混合、步态同步和双角色独立状态。
+运行报告逐帧保存全部采样时间、权重和片段时长。
+实景证据见[速度混合验收](../acceptance/nr/locomotion-blending.md)。
 
 主角动作通过 `retarget_animation.py` 离线处理。工具读取 ufbx 0.17.1 的 30 Hz 采样，将世界绑定基底的旋转差映射到 Bip001，保留目标骨长，并将根水平位移配置为原地动作。导出记录动作来源哈希、映射、采样率、循环接缝与结果哈希。
 

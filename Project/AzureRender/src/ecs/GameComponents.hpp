@@ -181,6 +181,7 @@ struct Animator {
     AZURE_FIELD("Expression blend", 0, 1)
     float expressionWeight = 1;
     float playbackRate = 1;
+    float locomotionSpeed = 0;
     AZURE_FIELD("Locomotion profile", 0, 0)
     std::string locomotionProfile = "default";
 };

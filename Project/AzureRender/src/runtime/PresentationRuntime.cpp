@@ -24,7 +24,9 @@ void PresentationRuntime::synchronize(){
         try{std::ifstream file(assets_.resolveReference(value.asset));nlohmann::json graph;file>>graph;
             auto machine=AnimationStateMachine::parse(graph);machine.select(value.state);
             machine.advance(value.startTime);
-            animations_.emplace(entity,Animation{value.asset,value.state,runtime_.nodeId(entity),std::move(machine)});
+            LocomotionBlendState locomotion;
+            if(machine.locomotionProfile())evaluateLocomotion(*machine.locomotionProfile(),0,value.startTime,locomotion);
+            animations_.emplace(entity,Animation{value.asset,value.state,runtime_.nodeId(entity),std::move(machine),std::move(locomotion)});
         }catch(const std::exception& error){failure(key,error);}
     });
     runtime_.world().each<game::AudioSource>([&](auto entity,const auto& value){
@@ -44,6 +46,13 @@ void PresentationRuntime::update(double delta){
             frames_.push_back({animation.node,animation.machine.clip(),animation.machine.time(),animation.machine.loop(),
                 animation.machine.previousClip(),animation.machine.previousTime(),animation.machine.blend(),animation.machine.previousLoop(),{value.morph0,value.morph1}});
             auto& frame=frames_.back();frame.morphOverrides=morphOverridesFromJson(value.morphOverrides);
+            if(value.locomotion&&animation.machine.locomotionProfile()){
+                frame.samples=evaluateLocomotion(*animation.machine.locomotionProfile(),value.locomotionSpeed,
+                    delta,animation.locomotion).samples;
+                const auto dominant=std::max_element(frame.samples.begin(),frame.samples.end(),
+                    [](const auto& a,const auto& b){return a.weight<b.weight;});
+                frame.clip=dominant->clip;frame.time=dominant->time;frame.loop=true;frame.blend=1;
+            }else animation.locomotion={};
             if(!value.expression.empty())frame.expression=std::make_shared<ExpressionPose>(expressionPoseFromJson(nlohmann::json::parse(value.expression)));
             frame.expressionWeight=value.expressionWeight;
         }catch(const std::exception& error){const auto key=animation.node+value.state;if(failed_.insert(key).second)errors_.push_back(error.what());}

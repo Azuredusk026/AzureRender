@@ -65,6 +65,26 @@ int main(){try{
  morphAsset.morphRanges={range};morphAsset.defaultMorphWeights={{0,0,0}};
  auto morphed=tracing::buildGeometry(scene,meshes,{frame});
  require(morphed.triangles[0].p0[2]==2&&morphed.triangles[0].n0[2]>.99F,"Unskinned third target position and normal reach tracing");
+ {
+  auto animated=mesh;auto& asset=animated.asset;asset.hasSkin=true;asset.nodes.resize(1);asset.jointNodes={0};
+  const std::array<float,16> identity{1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+  asset.inverseBindMatrices={identity};asset.nodeWorldMatrices={identity};
+  for(auto& vertex:asset.vertices){vertex.weights={1,0,0,0};vertex.joints={0,0,0,0};}
+  AssetAnimation clip;clip.endTime=2;clip.samplers.push_back({{0,2},{{0,0,0,0},{4,0,0,0}}});
+  clip.channels.push_back({0,0,AssetAnimationPath::Translation});asset.animations={clip};
+  scene::SceneDescription weightedScene;weightedScene.nodes.push_back({"actor","animated",""});
+  tracing::Meshes weightedMeshes;weightedMeshes.emplace("animated",std::move(animated));
+  NodeAnimationFrame weightedFrame;weightedFrame.node="actor";
+  weightedFrame.samples={{0,0,.25F,false,2},{0,2,.75F,false,2}};
+  const auto weightedGeometry=tracing::buildGeometry(weightedScene,weightedMeshes,{weightedFrame});
+  require(std::abs(weightedGeometry.triangles[0].p0[0]-3)<1e-6F,"Weighted skin pose reaches tracing geometry");
+  for(int field=0;field<5;++field){auto changed=weightedFrame;auto& sample=changed.samples[0];
+   if(field==0)sample.clip=1;if(field==1)sample.time=.1;if(field==2)sample.weight=.3F;
+   if(field==3)sample.loop=true;if(field==4)sample.duration=1;
+   require(tracing::sceneFingerprint(weightedScene,{changed})!=tracing::sceneFingerprint(weightedScene,{weightedFrame}),
+       "Every weighted sample field invalidates tracing history");
+  }
+ }
  std::vector<unsigned> pixels;auto texture=tracing::appendTexture(pixels,{255,128,0,255},1,1,true);require(pixels[0]==0xff0080ff&&texture[3]==1,"Texture channel order and color space");
  bool rejected=false;try{tracing::appendTexture(pixels,{},1,1,false);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"Malformed texture rejected");
  auto distribution=tracing::environmentDistribution(1,1,{0x3c00,0x3c00,0x3c00,0x3c00},8,4);

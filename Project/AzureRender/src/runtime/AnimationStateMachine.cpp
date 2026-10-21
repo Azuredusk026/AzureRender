@@ -3,8 +3,11 @@
 #include <stdexcept>
 namespace azurerender {
 AnimationStateMachine AnimationStateMachine::parse(const nlohmann::json& document) {
-    if (document.at("schemaVersion") != 1) throw std::invalid_argument("Unsupported animation graph version");
+    const auto version=document.at("schemaVersion");
+    if (version != 1 && version != 2) throw std::invalid_argument("Unsupported animation graph version");
     AnimationStateMachine machine;
+    if(version==2)machine.locomotion_=locomotionBlendProfileFromJson(document.at("locomotion"));
+    else if(document.contains("locomotion"))throw std::invalid_argument("Locomotion requires animation graph version two");
     for (const auto& state : document.at("states")) {
         const auto name = state.at("name").get<std::string>();
         const auto clip = state.at("clip");

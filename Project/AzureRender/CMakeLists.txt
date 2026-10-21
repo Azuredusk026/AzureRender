@@ -323,6 +323,7 @@ add_library(AzureRenderCore STATIC
     src/assets/Scene2D.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
+    src/animation/AnimationBlend.cpp
     src/animation/ExpressionPose.cpp
     src/assets/image/ImageCodec.cpp
     src/assets/image/SvgCodec.cpp
@@ -903,6 +904,11 @@ if(BUILD_TESTING)
     target_compile_definitions(AzurePlayableQuestTests PRIVATE AZURE_QUEST_PROJECT="${CMAKE_CURRENT_SOURCE_DIR}/assets_public/exploration")
     add_test(NAME AzureEngine.PlayableQuest COMMAND AzurePlayableQuestTests)
     add_executable(AzureBrowRegionTests tests/BrowRegionTests.cpp)
+    add_executable(AzureLocomotionBlendTests tests/LocomotionBlendTests.cpp)
+    target_include_directories(AzureLocomotionBlendTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureLocomotionBlendTests PRIVATE nlohmann_json::nlohmann_json)
+    add_test(NAME AzureEngine.LocomotionBlend COMMAND AzureLocomotionBlendTests)
+
     add_executable(AzureAnimationPoseTests tests/AnimationPoseTests.cpp)
     target_include_directories(AzureAnimationPoseTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureAnimationPoseTests PRIVATE AzureRenderCore)
@@ -944,6 +950,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.LocomotionPlayer COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_locomotion_direction.py" --player "$<TARGET_FILE:AzurePlayer>")
     set_tests_properties(AzureEngine.LocomotionPlayer PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
+    add_test(NAME AzureEngine.LocomotionBlendGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/native_render/locomotion_blend_lab.py" --player "$<TARGET_FILE:AzurePlayer>")
+    set_tests_properties(AzureEngine.LocomotionBlendGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 360)
     add_test(NAME AzureEngine.AnimationRetarget COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_animation_retarget.py")
     add_test(NAME AzureEngine.SourceSkinRestore COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_skin_restore.py")
     add_test(NAME AzureEngine.GamePackageRules COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_game_package_rules.py")
@@ -1254,6 +1263,7 @@ if(BUILD_TESTING)
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
+        src/animation/AnimationBlend.cpp
         src/animation/ExpressionPose.cpp
         src/assets/image/ImageCodec.cpp
         src/assets/image/TextureContainerAdapter.cpp

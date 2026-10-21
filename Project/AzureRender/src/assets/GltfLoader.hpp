@@ -3,6 +3,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "assets/MorphTargetData.hpp"
 #include "animation/AnimationCurve.hpp"
+#include "animation/AnimationClipSample.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include <array>
 #include <cstddef>
@@ -231,6 +232,8 @@ struct AssetPose {
 void resolveAssetPose(const LoadedAsset& asset,AssetPose& pose);
 [[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true);
 [[nodiscard]] AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight);
+[[nodiscard]] AssetPose sampleAnimationBlend(const LoadedAsset& asset,
+    const std::vector<azurerender::AnimationClipSample>& samples);
 void sampleAnimation(
     const LoadedAsset& asset,
     std::size_t animationIndex,

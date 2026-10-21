@@ -1,3 +1,4 @@
+#include "animation/PresentedPose.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
@@ -563,10 +564,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         auto pose = bindAnimationPose(mesh);
         auto morph = renderSettings_->morphWeights;
         if (animation != animationFrames_.end()) {
-            pose = sampleAnimationPose(mesh, animation->clip, static_cast<float>(animation->time), animation->loop);
-            if (animation->blend < 1) pose = blendAnimationPoses(mesh,
-                sampleAnimationPose(mesh, animation->previousClip, static_cast<float>(animation->previousTime), animation->previousLoop),
-                pose, animation->blend);
+            pose = samplePresentedAnimationPose(mesh,*animation);
             morph = animation->morph;
             if (instance.meshKey == 0) { animationIndex_ = animation->clip; }
         } else if (!mesh.animations.empty()) {

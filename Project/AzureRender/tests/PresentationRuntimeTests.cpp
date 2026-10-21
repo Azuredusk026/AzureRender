@@ -8,6 +8,19 @@ void check(bool condition,const char* message){if(!condition)throw std::runtime_
 int main(int argc,char** argv){
  if(argc!=2)return 2;
  try{
+  const auto graph=AnimationStateMachine::parse({{"schemaVersion",2},{"initial","idle"},
+      {"states",{{{"name","idle"},{"clip",0}}}},{"transitions",nlohmann::json::array()},
+      {"locomotion",{{"schemaVersion",1},{"samples",{
+          {{"clip",0},{"speed",0},{"duration",2}},{{"clip",1},{"speed",1},{"duration",1}}}}}}});
+  check(graph.locomotionProfile().has_value(),"Version two graph exposes its validated locomotion profile");
+  for(int kind=0;kind<2;++kind){
+      nlohmann::json invalid={{"schemaVersion",kind==0?1:3},{"initial","idle"},
+          {"states",{{{"name","idle"},{"clip",0}}}},{"transitions",nlohmann::json::array()},
+          {"locomotion",{{"schemaVersion",1},{"samples",{
+              {{"clip",0},{"speed",0},{"duration",2}},{{"clip",1},{"speed",1},{"duration",1}}}}}}};
+      bool rejected=false;try{(void)AnimationStateMachine::parse(invalid);}catch(const std::exception&){rejected=true;}
+      check(rejected,"Version one locomotion extensions and unsupported graph versions must reject");
+  }
   RuntimeLifecycle runtime;LevelSession levels(Project::load(argv[1]),runtime);runtime.start();
   auto entity=runtime.entity("hero");
   runtime.world().addComponent(entity,game::Animator{"assets:/motion.json","idle",true});

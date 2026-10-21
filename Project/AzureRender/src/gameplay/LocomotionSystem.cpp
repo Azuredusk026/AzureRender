@@ -23,7 +23,9 @@ public:
             if(!animator.locomotion)return;
             const auto found=profiles_.find(animator.locomotionProfile);
             if(found==profiles_.end())throw std::invalid_argument("Unknown locomotion profile: " + animator.locomotionProfile);
-            const auto velocity=c.physics.velocity(entity);const float speed=std::hypot(velocity[0],velocity[2]);
+            const auto velocity=c.physics.velocity(entity),support=c.physics.groundVelocity(entity);
+            const float speed=std::hypot(velocity[0]-support[0],velocity[2]-support[2]);
+            animator.locomotionSpeed=speed;
             const bool moving=speed>found->second.threshold;
             animator.state=moving?found->second.moving:found->second.idle;
             animator.playbackRate=moving?speed/animator.referenceSpeed:1;

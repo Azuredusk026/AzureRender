@@ -1,5 +1,6 @@
 #include "assets/GltfLoader.hpp"
 #include "render/DeformedBounds.hpp"
+#include "animation/AnimationClipSample.hpp"
 #include <cstring>
 #include <nlohmann/json.hpp>
 #include <cmath>
@@ -38,6 +39,18 @@ std::string rigidFixture(bool mixedSkin=false) {
 int main() {
     try {
         const auto rigid=loadEmbeddedGltfAsset(rigidFixture(),true);
+        const auto weighted=sampleAnimationBlend(rigid,{{0,0,.25F,false,2},{0,2,.75F,false,2}});
+        check(std::abs(weighted.local[0].translation[0]-3.5F)<1e-6F,"Weighted clips blend in local space");
+        check(std::abs(weighted.local[1].scale[0]-.25F)<1e-6F,"Weighted scale reaches the resolved pose");
+        for(int kind=0;kind<4;++kind){
+            std::vector<azurerender::AnimationClipSample> samples{{0,0,1,false,2}};
+            if(kind==0)samples[0].clip=9;
+            if(kind==1)samples[0].weight=.5F;
+            if(kind==2)samples[0].duration=3;
+            if(kind==3)samples[0].weight=-1;
+            bool rejected=false;try{(void)sampleAnimationBlend(rigid,samples);}catch(const std::exception&){rejected=true;}
+            check(rejected,"Invalid weighted frame or bound duration rejects");
+        }
         const auto rigidBind=bindAnimationPose(rigid);
         const auto moving=sampleAnimationPose(rigid,0,1,false);
         const auto moved=azurerender::deformedVertexPosition(rigid,0,&moving,{0,0});
@@ -84,6 +97,23 @@ int main() {
         check(asset.nodeWorldMatrices == original, "Shared skeleton must stay immutable");
         auto blended = blendAnimationPoses(immutable, first, second, .25F);
         check(std::abs(blended.jointMatrices[0][12]-1.75F)<1e-6F, "Blend must interpolate local poses");
+        auto expressive=asset;expressive.defaultMorphWeights={{0,0},{0,0}};
+        for(std::size_t i=0;i<expressive.animations.size();++i){
+            auto& clip=expressive.animations[i];
+            const float sign=i==0?1.F:-1.F;
+            clip.samplers.push_back({{0,1},{{0,0,0,sign},{0,0,0,sign}}});
+            clip.channels.push_back({1,1,AssetAnimationPath::Rotation});
+            AssetAnimationSampler morph;
+            morph.curve={{0,1},{0,0,1,static_cast<float>(i)},2};
+            clip.samplers.push_back(morph);clip.channels.push_back({2,1,AssetAnimationPath::Weights});
+        }
+        const auto expressivePose=sampleAnimationBlend(expressive,{{0,1,.5F,false,1},{1,1,.5F,false,1}});
+        check(std::abs(expressivePose.local[1].rotation[3]-1)<1e-6F,
+            "Opposite quaternion signs must preserve orientation when blending");
+        check(expressivePose.morphWeights[1]==MorphWeightState{1,.5F},
+            "Weighted morph channels must reach the shared resolved pose");
+        check(std::abs(expressivePose.jointMatrices[0][12]-4)<1e-6F,
+            "Weighted translation must resolve through the skin palette");
         auto clamped = sampleAnimationPose(immutable, 0, 2, false);
         check(std::abs(clamped.jointMatrices[0][12]-2)<1e-6F, "Nonloop clips must hold their last key");
         auto worker = std::async(std::launch::async, [&] { return sampleAnimationPose(immutable, 1, .25F); });

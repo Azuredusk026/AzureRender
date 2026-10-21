@@ -46,6 +46,13 @@
 using namespace azurerender::internal;
 
 namespace {
+nlohmann::json animationObservation(const azurerender::NodeAnimationFrame& frame){
+    nlohmann::json samples=nlohmann::json::array();
+    for(const auto& sample:frame.samples)samples.push_back({{"clip",sample.clip},{"time",sample.time},
+        {"weight",sample.weight},{"loop",sample.loop},{"duration",sample.duration}});
+    return {{"node",frame.node},{"clip",frame.clip},{"time",frame.time},{"previousClip",frame.previousClip},
+        {"blend",frame.blend},{"morph",frame.morph},{"samples",std::move(samples)}};
+}
 
 constexpr std::array<const char*, 1> kValidationLayers = {
     "VK_LAYER_KHRONOS_validation",
@@ -431,8 +438,7 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
         data["replayDelayedFrames"]=gameInputReplay_?gameInputReplay_->delayedFrames():0;
         data["animations"]=nlohmann::json::array();
         if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
-            data["animations"].push_back({{"node",animation.node},{"clip",animation.clip},{"time",animation.time},
-                {"previousClip",animation.previousClip},{"blend",animation.blend},{"morph",animation.morph}});
+            data["animations"].push_back(animationObservation(animation));
 #if AZURE_WITH_EDITOR
         data["editorPlaying"]=runOptions_.editorSession && runOptions_.editorSession->playing();if(editorAutomation_)data.update(editorAutomation_->report());
         data["editorPreviewFrames"]=editorPreviewFrames_;
@@ -1727,6 +1733,9 @@ nlohmann::json AzureRenderApp::observeGameState() {
     if(!game)throw std::logic_error("Game observation requires an active project");
     nlohmann::json state;
     state["frame"]=gameplayFrame_;state["camera"]=cameraPosition_;state["target"]=cameraTarget_;state["focused"]=game->input().focused();
+    state["animations"]=nlohmann::json::array();
+    if(auto* presentation=activePresentation())for(const auto& animation:presentation->animations())
+        state["animations"].push_back(animationObservation(animation));
     state["characters"]=nlohmann::json::array();
     activeRuntime()->world().each<azurerender::game::Character>([&](auto entity,const auto&){
         const auto* transform=activeRuntime()->world().tryGet<azurerender::ecs::TransformComponent>(entity);

@@ -1,3 +1,4 @@
+#include "animation/PresentedPose.hpp"
 #include "PathTracingSceneRenderer.hpp"
 #include "assets/MaterialData.hpp"
 #include "resources/BinaryFile.hpp"
@@ -95,7 +96,7 @@ void PathTracingSceneRenderer::updateFrame(const SceneFrameData& frame){
  for(std::size_t i=0;i<scene.nodes.size();++i){const auto& node=scene.nodes[i];const auto found=meshes_.find(node.resourceId);if(!node.visible||found==meshes_.end())continue;
   const auto& asset=found->second.asset;auto pose=bindAnimationPose(asset);std::array<float,2> morph{};
   const auto animation=std::find_if(frame.animations.begin(),frame.animations.end(),[&](const auto& a){return a.node==node.id;});
-  if(animation!=frame.animations.end()){pose=sampleAnimationPose(asset,animation->clip,static_cast<float>(animation->time),animation->loop);morph=animation->morph;if(animation->blend<1)pose=blendAnimationPoses(asset,sampleAnimationPose(asset,animation->previousClip,static_cast<float>(animation->previousTime),animation->previousLoop),pose,animation->blend);}
+  if(animation!=frame.animations.end()){pose=samplePresentedAnimationPose(asset,*animation);morph=animation->morph;}
   poses_.push_back(std::move(pose));state_.pickables.push_back({node.id,&asset,worlds[i],asset.hasSkin?&poses_.back():nullptr,morph});
  }
  state_.asset=state_.pickables.empty()?nullptr:state_.pickables.front().asset;
