@@ -4,6 +4,7 @@
 PT0 至 PT7 已完成，历史 P8 待项按原清单维护。
 打开方法见[公开光追演示](docs/tutorials/public-pathtracing-demos.md)。
 本轮范围见[路径追踪实施计划](docs/plans/2026-10-15-pathtracing-completion.md)。
+
 WC1 至 WC6 完成，安装入口与演示项目已更新。
 操作步骤见[世界参照、相机与路径追踪](docs/tutorials/world-camera-rendering.md)。
 
@@ -13,6 +14,7 @@ WC1 至 WC6 完成，安装入口与演示项目已更新。
 可直接打开[视觉提案](docs/design/ui-modernization/preview.html)。
 VD0 研究与设计完成，VD1 至 VD5 完成，VD6 为 Ready。
 自动交付已验证，可进入集中人工复核。
+
 启动入口与证据见[界面交付记录](docs/acceptance/vd/2026-10-14.md)。
 
 构建目录、临时输出和定期清理见[产物管理](docs/development/artifact-retention.md)。
@@ -21,6 +23,7 @@ UX-A 至 UX-D 完成，UX-E 为 Ready。
 自动检查已完成，新版使用体验等待集中确认。
 交付入口与结果见[本轮交付](docs/acceptance/ux/2026-10-14.md)。
 范围与阶段记录见[交互优化计划](docs/editor-usability-audit.md)。
+
 用户已反馈人工复核基本可用，交互体验需要优化。
 
 ED0 至 ED7 开发交付完成，P8 状态为 Ready。
@@ -45,7 +48,7 @@ ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 
 AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、运行时和独立 Player 提供内容制作、游戏运行与发布能力。公开探索项目用于验证这些公共能力。
 
-## 从哪里开始
+## 阅读入口
 
 | 想了解什么 | 阅读入口 |
 | --- | --- |
@@ -72,9 +75,14 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 模式包含关闭、原生分辨率过滤和四子像素超采样。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
+
 原生中庭的三模式各完成 96 帧对齐采集。
 数值结果与展示视频见[中庭抗锯齿验收](docs/acceptance/nr/native-atrium-antialiasing.md)。
 后走廊接入后的三模式回归及视频见[联合复验](docs/acceptance/nr/native-atrium-antialiasing-post-corridor.md)。
+
+中庭后方结构、道具及走廊已接入正式和可玩工程。
+本轮共接入 605 个原生实例组与 283 份资源。
+启动入口、四向画面与验收边界见[中庭完整性](docs/acceptance/nr/atrium-completeness.md)。
 
 材质纹理按处理后像素与采样语义共享。
 缓存集中持有 GPU 对象，并提供驻留统计。
@@ -137,18 +145,22 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 目标涵盖近乎原生画面、WASD 与原生运动动画混合。
 场景还原覆盖本机观测到的全部可见对象与效果。
 引擎缺失能力及验收见[可玩还原计划](docs/plans/2026-10-17-native-playable-restoration.md)。
+
 实景、公开资料与抓帧见[证据执行计划](docs/plans/2026-10-21-native-render-evidence-execution.md)。
 捕获与重放使用[RenderDoc 证据工具](docs/acceptance/nr/renderdoc-capture.md)。
 夹具已取得原生浮点输出，抓帧布局校验仍待修复。
 场景分项诊断与实景参考见[原生参考基准](docs/acceptance/nr/reference-baseline.md)。
+
 参考校验读取真实图像编码，并核验正式参考的像素尺寸。
 公开算法线索见[渲染资料核查](docs/research/2026-10-21-endfield-public-rendering.md)。
 后处理支持[版本化颜色查找表](docs/runtime/color-grading-lut.md)。
 主视口与辅助视口共享线性输出和曝光契约。
+
 数值、编辑帧及资源回归见[调色验收](docs/acceptance/nr/color-grading-lut.md)。
 材质支持独立[影色查找表](docs/runtime/shadow-color-lut.md)及 GPU 诊断。
 无纹理基色采用最近字节量化，详见[量化验证](docs/acceptance/nr/base-color-quantization.md)。
 原生动作与 WASD 的短路径结果见[操控验证](docs/acceptance/nr/playable-integration.md)。
+
 速度驱动的多片段混合与步态同步已接入公共姿态入口。
 动画采用[碰撞解算后的实际运动速度](docs/acceptance/nr/actual-motion-velocity.md)。
 双角色与原生动作证据见[混合验证](docs/acceptance/nr/locomotion-blending.md)。
@@ -158,54 +170,67 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 通用形变、表情编辑、场景交换与材质恢复已交付。
 原生联合展示采用编队待机 01 与中性表情。
 原生目录与资源包读取已通过本机验证。
+
 原生读取支持[显式资源分层](docs/acceptance/nr/layered-content.md)。
 更新目录与共享基础块可组合读取，并保留来源收据。
 场景转换支持[原作最高细节选择](docs/acceptance/nr/source-geometry-detail.md)。
 空间筛选采用[世界包围盒相交](docs/research/2026-10-21-native-scene-geometry.md)。
+
 跨区域墙体保留完整几何、源变换及依赖收据。
 材质上传采用[可恢复的像素所有权移交](docs/acceptance/nr/material-pixel-lifetime.md)。
 多资源装载采用[单次容量统计](docs/acceptance/nr/joint-buffer-capacity.md)。
 中央区与上层区已完成[最高细节联合接入](docs/acceptance/nr/highest-detail-integration.md)。
+
 原生待机候选已进入引擎，材质与物理效果待完善。
 完整原生走跑已通过[两组速度混合回放](docs/acceptance/nr/native-locomotion.md)。
 原生表情源已取得，演示保持中性。
 帝江号中心切片已与编队待机 01 完成联合技术采样。
+
 场景实例编辑与保存重开已验证。
 47 个场景材质支持表面通道烘焙。
 当前版本可读取 232 个静态灯。
 联合候选使用 45 个点光及聚光。
+
 颜色、GI 与反射的十二帧结果见[联合验证](docs/acceptance/nr/joint-colour-lighting.md)。
 完整着色与原生环境光照还原仍待验收。
 通用聚光与显式场景照明通过公开 GPU 夹具。
 分项证据见[直接光机制](docs/acceptance/nr/local-lighting.md)。
+
 局部灯支持[显式距离衰减](docs/runtime/local-light-attenuation.md)。
 原生指数来源与公共验证见[衰减证据](docs/acceptance/nr/light-attenuation.md)。
 场景[方向光](docs/runtime/directional-lights.md)接入光栅及路径追踪。
 场景文档保存完整形状与衰减参数。
+
 显式场景照明按主方向光生成级联阴影。
 灯光支持独立世界空间的[盒状作用体积](docs/runtime/light-influence-boxes.md)。
 独立局部反射支持原作层级、盒投影与体积混合。
 公共 GPU 夹具及中庭候选见[反射接入](docs/plans/2026-10-18-local-reflection-probe.md)。
+
 中庭反射候选已完成四帧采样，整体照明仍待还原。
 方向辐照网格支持世界插值及场景资源定位。
 公共 GPU 验证见[网格契约](docs/runtime/irradiance-volumes.md)。
 中枢物流已读取 21 个原生样条描述。
+
 运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
 单发射器已验证实际运动，支持[刚体节点动画](docs/runtime/rigid-node-animation.md)。
 53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
 角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
+
 脸部支持[双图距离场](docs/runtime/dual-face-sdf.md)与独立线性色带。
 蓝色通道法线用于局部漫反射与轮廓光。
 分支范围与数值验证见[脸部法线证据](docs/acceptance/nr/face-sdf-normal.md)。
 局部场景灯逐灯消费脸部色带及头部动画。
+
 灯光支持[逐灯镜面倍率](docs/runtime/light-specular-response.md)，原生中庭源倍率已进入联合候选。
 原生局部算法已核验，完整角色着色仍待还原。
 透明表面支持[场景颜色折射](docs/runtime/scene-color-refraction.md)。
 中庭一个原生玻璃材质已进入[联合候选](docs/acceptance/nr/native-glass.md)。
+
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。
 该展示提供 1080p、24 帧、16 秒的实际引擎录像。
 获取主线见[原生资产计划](docs/plans/2026-10-17-endfield-native-assets.md)。
 实际证据见[原生资产验收](docs/acceptance/ev/native-assets.md)。
+
 历史画面基准与 GPU 性能验收保留待项。
 实施范围见[资源验证计划](docs/plans/2026-10-16-endfield-resource-validation.md)。
 当前证据见[联合验收](docs/acceptance/ev/2026-10-16.md)。

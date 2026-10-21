@@ -17,5 +17,140 @@
     "ninja-msvc-debug",
     "ninja-msvc-release"
   ],
-  "runRetentionDays": 14
+  "runRetentionDays": 14,
+  "preservedRuns": [
+    {
+      "path": "runs/20261021-172156-native-render-evidence-623c52",
+      "pathBase": "build",
+      "purpose": "原生中庭可玩项目、来源与验收证据保留。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "high-detail-joint/project/playable-safe.azureproject",
+      "videos": [
+        {
+          "path": "native-aa-final-v6/media/scene-aa1.mp4",
+          "bytes": 2836614,
+          "sha256": "4730bc62ae633caa1484db8d484b55756ef0fff385708c13127e2c68902685d4"
+        },
+        {
+          "path": "native-aa-final-v6/media/aa-comparison.mp4",
+          "bytes": 8656036,
+          "sha256": "e76b869653f86e975fadb8839182f642ed023ceeb9267c7ba3e59ce1a84e7db3"
+        },
+        {
+          "path": "joint-acceptance/playable-cli-v7/media/playable-walk.mp4",
+          "bytes": 4030754,
+          "sha256": "9d55ee1f19136d7b8fa5b78572cee0c9d215ea9f060b7b83e393fcc801442c09"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/media/scene-aa1.mp4",
+          "bytes": 1844118,
+          "sha256": "eae08618e504873311af977de2538478a1d708f737214650ee4b86cb9929a581"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/media/aa-comparison.mp4",
+          "bytes": 5626005,
+          "sha256": "9eca8f3b3a57f26fb9e96edbac597902f62316b3cde45dade3601b2a976d5e96"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/rear-96-frames-60fps.mp4",
+          "bytes": 189823,
+          "sha256": "f5aec6387f3be1cc7444619bebf59d230f8c7de76af2b23236b9adb057ef3a71"
+        }
+      ],
+      "storage": {
+        "measurementUtc": "2026-10-21T21:05:59.663367+00:00",
+        "unit": "bytes",
+        "files": 23407,
+        "logicalBytes": 32738828142,
+        "deduplicatedFileDataBytes": 22447078730,
+        "uniqueFiles": 20054,
+        "hardlinkedPaths": 4489,
+        "projectLogicalBytes": 4010239456,
+        "projectWithoutGeneratedCacheBytes": 1370346863,
+        "method": "os.stat(path, follow_symlinks=False); sum st_size once per (st_dev, st_ino).",
+        "scope": "任务目录的实时计量快照，排除本收据。",
+        "limits": "去重值表示文件数据量，独立于分配簇和可回收空间。"
+      },
+      "receipt": "rear-corridor-extension/final-retention.json",
+      "evidence": [
+        {
+          "path": "rear-corridor-extension/final-source-snapshot/receipt.json",
+          "bytes": 22976,
+          "sha256": "95674c7cffdcc5e1d0f307c1d3e72736c7d0218dfa005a73da8466c52ab6bff3"
+        },
+        {
+          "path": "rear-corridor-extension/production-world-verification.json",
+          "bytes": 102749,
+          "sha256": "9d43a49600b3b6d653dc4b8917324880a3580b4d405a7a843f7c7162e44645a0"
+        },
+        {
+          "path": "rear-corridor-extension/playable-world-verification.json",
+          "bytes": 101087,
+          "sha256": "80309e0745f0f56822207615a48f5f81366084ed5f3bac6732b0218e7e5d91a0"
+        },
+        {
+          "path": "rear-corridor-extension/clipping-production/receipt.json",
+          "bytes": 2380,
+          "sha256": "3ff96b911884d03d79b13055be7ed01336fa7005b3eaf1152c2cc8dc8de244df"
+        },
+        {
+          "path": "rear-corridor-extension/far100-front-semantic-corroboration.json",
+          "bytes": 1368,
+          "sha256": "3ac5ae88336608e2d944bbad2626ab2e0973a9fe81455e072f5516f421e989fd"
+        },
+        {
+          "path": "rear-corridor-extension/background-refresh-semantics.json",
+          "bytes": 4873,
+          "sha256": "523d7d0092fb1c1f25173294a882aee597838d3caadce5aef9239176cf3a8a0e"
+        },
+        {
+          "path": "rear-corridor-extension/visual-geometry-review.json",
+          "bytes": 15202,
+          "sha256": "44c4ce2ed350548af1e588dd78a7c6b24d4cdecc65a304578395190844c85ddf"
+        },
+        {
+          "path": "joint-acceptance/front-source-occupancy-v1/receipt.json",
+          "bytes": 8069,
+          "sha256": "4e73ab5c527f683a9740a7fc371054c1855348b27d5d1cb780517ba1269736be"
+        },
+        {
+          "path": "joint-acceptance/side-source-occupancy-v1/receipt.json",
+          "bytes": 303493,
+          "sha256": "bdc053fdec93bb48f498909b831ff78bed846d0cbfda4d79d39a8b7fc55ecf25"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-far100-v10/coverage/coverage.json",
+          "bytes": 902,
+          "sha256": "3de8657784f081a2d6c02e6e873896aa536b0eb1f9a4d3030181e54b651793c8"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/beauty-four-views-contact-sheet.png",
+          "bytes": 2612748,
+          "sha256": "b84d7d16c09ebf7265b3b4d1174bdb90088bf6616a7215ad3119a431633199d6"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/rear-source-comparison.png",
+          "bytes": 1018443,
+          "sha256": "0b7336e7ce9f6677ad3159275f800b2746a1d473e0f37fddd9d6f3082606d8e9"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/media.json",
+          "bytes": 47734,
+          "sha256": "a3c1b33427110a98a0785bfd068c81cea056f340435e6923ccbb965237590fc9"
+        },
+        {
+          "path": "joint-acceptance/post-corridor-v10/media/visual-review.json",
+          "bytes": 2727,
+          "sha256": "0fa669555d35fb46f8872c9137a85a074542c2fb9c92d9028a33632023d2ff38"
+        },
+        {
+          "path": "native-aa-post-corridor-v1/summary.json",
+          "bytes": 55744,
+          "sha256": "b3d192ccbdff58ecd1a20767397264964ea04c1464d9673029cae8d59ba6dd25"
+        }
+      ],
+      "historicalReceipt": "retention-receipt.json"
+    }
+  ]
 }

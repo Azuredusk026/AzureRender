@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1238,7 +1238,8 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/reference-baseline.md",
-        "docs/plans/2026-10-21-native-render-evidence-execution.md"
+        "docs/plans/2026-10-21-native-render-evidence-execution.md",
+        "docs/acceptance/nr/editor-resource-load-baseline.md"
       ],
       "requiredAcceptance": [
         "NR0.delivery"
@@ -1256,7 +1257,9 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/layered-content.md",
-        "docs/acceptance/nr/source-geometry-detail.md"
+        "docs/acceptance/nr/source-geometry-detail.md",
+        "docs/plans/2026-10-21-atrium-completeness-antialiasing.md",
+        "docs/acceptance/nr/atrium-completeness.md"
       ],
       "requiredAcceptance": [
         "NR1.delivery"
@@ -1367,7 +1370,8 @@
         "docs/runtime/rigid-node-animation.md",
         "docs/acceptance/nr/logistics-evidence.md",
         "docs/acceptance/nr/spatial-antialiasing.md",
-        "docs/acceptance/nr/native-atrium-antialiasing.md"
+        "docs/acceptance/nr/native-atrium-antialiasing.md",
+        "docs/acceptance/nr/atrium-completeness.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"
