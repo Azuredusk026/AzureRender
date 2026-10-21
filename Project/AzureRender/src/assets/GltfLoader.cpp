@@ -26,6 +26,7 @@
 #include <utility>
 
 #include "assets/GltfAccessorValidation.hpp"
+#include "assets/ShadowColorLut.hpp"
 
 namespace {
 
@@ -1358,6 +1359,34 @@ AssetMaterial loadMaterial(
             result.faceSdf.pixels[pixel + 1] = distance;
             result.faceSdf.pixels[pixel + 2] = distance;
             result.faceSdf.pixels[pixel + 3] = mask;
+        }
+    }
+    if(material && material->extras.Has("azureRenderMaterial")) {
+        const auto& profile=material->extras.Get("azureRenderMaterial");
+        if(profile.Has("shadowColorLut")) {
+            const auto& lut=profile.Get("shadowColorLut");
+            if(!lut.IsObject())throw std::invalid_argument("shadowColorLut requires an object");
+            for(const auto& field:lut.Get<tinygltf::Value::Object>())
+                if(field.first!="schemaVersion"&&field.first!="texture"&&field.first!="flipV")
+                    throw std::invalid_argument("Unknown shadowColorLut field: "+field.first);
+            if(!lut.Has("schemaVersion")||!lut.Get("schemaVersion").IsNumber()||lut.Get("schemaVersion").GetNumberAsDouble()!=1)
+                throw std::invalid_argument("Unsupported shadowColorLut schemaVersion");
+            const double index=lut.Has("texture")&&lut.Get("texture").IsNumber()?lut.Get("texture").GetNumberAsDouble():-1;
+            if(!std::isfinite(index)||std::floor(index)!=index||index<0||index>=model.textures.size())
+                throw std::invalid_argument("Invalid shadowColorLut.texture");
+            if(lut.Has("flipV")&&!lut.Get("flipV").IsBool())throw std::invalid_argument("shadowColorLut.flipV requires a boolean");
+            result.shadowColorLutPixels=decodeImageRgba(model,model.textures.at(static_cast<std::size_t>(index)).source,
+                {1,1,1,1},result.shadowColorLutWidth,result.shadowColorLutHeight,true,authored,nullptr);
+            azurerender::validateShadowColorLutDimensions(result.shadowColorLutWidth,result.shadowColorLutHeight);
+            if(result.shadowColorLutPixels.size()!=static_cast<std::size_t>(result.shadowColorLutWidth)*result.shadowColorLutHeight*4)
+                throw std::invalid_argument("shadowColorLut requires exactly one image level");
+            if(lut.Has("flipV")&&lut.Get("flipV").Get<bool>()) {
+                const auto stride=static_cast<std::size_t>(result.shadowColorLutWidth)*4;
+                for(std::uint32_t y=0;y<result.shadowColorLutHeight/2;++y)
+                    std::swap_ranges(result.shadowColorLutPixels.begin()+y*stride,result.shadowColorLutPixels.begin()+(y+1)*stride,
+                        result.shadowColorLutPixels.begin()+(result.shadowColorLutHeight-1-y)*stride);
+            }
+            result.materialFeatures|=MaterialFeatureShadowColorLut;
         }
     }
     return result;

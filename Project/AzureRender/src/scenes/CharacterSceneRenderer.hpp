@@ -82,9 +82,9 @@ private:
     static constexpr std::uint32_t kEnvironmentMipLevels = 7;
     static constexpr std::uint32_t kIblPrefilterSamples = 32;
     // Bindless texture array layout: shared slots come first (environment,
-    // shadow map, toon ramp), then per-material blocks of eight textures.
+    // shadow map, toon ramp), then per-material blocks of nine textures.
     static constexpr std::uint32_t kSharedTextureSlots = 3;
-    static constexpr std::uint32_t kMaterialTextureSlots = 8;
+    static constexpr std::uint32_t kMaterialTextureSlots = 9;
     static constexpr std::uint32_t kAssetVertexWordCount = 27;
 
     struct GpuTexture {
@@ -108,6 +108,7 @@ private:
         GpuTexture matcap;
         GpuTexture hairData;
         GpuTexture faceSdf;
+        GpuTexture shadowColorLut;
     };
 
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;

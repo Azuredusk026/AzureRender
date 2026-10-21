@@ -1,5 +1,21 @@
 #define AZURE_FACE_SDF_V2 1
 
+// The strip stores RGB colors in sRGB; sampler decoding precedes filtering.
+// Coordinates also use sRGB. Red runs within a slice, blue across slices,
+// and green along rows. The last blue slice clamps to itself at the endpoint.
+vec3 sampleShadowColorLut(sampler2D lut,vec3 linearColor) {
+    vec3 value=max(linearColor,vec3(0));
+    vec3 encoded=clamp(mix(1.055*pow(value,vec3(1.0/2.4))-.055,
+        12.92*value,lessThanEqual(value,vec3(.0031308))),0.0,1.0);
+    float dimension=float(textureSize(lut,0).y);
+    float slice=encoded.b*(dimension-1.0);
+    float first=floor(slice);
+    vec2 uv=vec2((first*dimension+encoded.r*(dimension-1.0)+.5)/(dimension*dimension),
+        (encoded.g*(dimension-1.0)+.5)/dimension);
+    vec2 next=uv+vec2(1.0/dimension,0);
+    return mix(textureLod(lut,uv,0).rgb,textureLod(lut,next,0).rgb,fract(slice));
+}
+
 vec2 faceSdfSampleUv(vec2 uv,float localLightX) {
     return vec2(localLightX>0.0?uv.x:1.0-uv.x,uv.y);
 }

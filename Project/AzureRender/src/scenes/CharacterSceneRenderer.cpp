@@ -364,7 +364,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     loadJobs_.push_back([this]{createVertexBuffer();});
     const auto materials=[this](const LoadedAsset& mesh,std::vector<GpuMaterial>& gpu){
         gpu.resize(mesh.materials.size());
-        for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<8;++slot)
+        for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)
             loadJobs_.push_back([this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
     };
     materials(asset_,gpuMaterials_);
@@ -396,7 +396,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+3,14,6});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+3,15,6});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -1432,7 +1432,7 @@ void CharacterSceneRenderer::uploadTextureData(
 
 void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std::vector<GpuMaterial>& gpuMaterials){
     gpuMaterials.resize(asset.materials.size());
-    for(std::size_t index=0;index<asset.materials.size();++index)for(unsigned slot=0;slot<8;++slot)uploadMaterialTexture(asset,gpuMaterials,index,slot);
+    for(std::size_t index=0;index<asset.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)uploadMaterialTexture(asset,gpuMaterials,index,slot);
 }
 void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
     const auto& m=asset.materials.at(index);auto& g=materials.at(index);
@@ -1448,6 +1448,7 @@ void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std:
     case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,colorFormat,false,g.matcap,mipLevels,settings.semantic(),0,&settings);break;
     case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,colorFormat,false,g.hairData,mipLevels,settings.semantic(),0,&settings);break;
     case 7:{if(faceSdfPrepared_&&m.faceSdf.present){uploadTextureData(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,colorFormat,false,g.faceSdf,mipLevels,settings.semantic(),0,&settings);++faceSdfTextureCount_;}break;}
+    case 8:uploadTextureData(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,colorFormat,false,g.shadowColorLut,1,settings.semantic(),0,&settings);break;
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }
@@ -2084,7 +2085,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 14},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 15},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 10},
     };
     poolDesc.maxSets = descriptorCount;
@@ -2167,6 +2168,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {22,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT},
         {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
         {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
+        {25,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
     });
 }
 
@@ -2216,6 +2218,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             appendTexture(material.matcap);
             appendTexture(material.hairData);
             appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
+            appendTexture(material.shadowColorLut);
         }
         for (const auto& resource : additionalResources_) {
             for (const GpuMaterial& material : resource->gpuMaterials) {
@@ -2227,6 +2230,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 appendTexture(material.matcap);
                 appendTexture(material.hairData);
                 appendTexture(material.faceSdf.view!=VK_NULL_HANDLE?material.faceSdf:material.normal);
+                appendTexture(material.shadowColorLut);
             }
         }
 
@@ -2399,6 +2403,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.view:gpuMaterial.normal.view,
                 gpuMaterial.faceSdf.view!=VK_NULL_HANDLE?gpuMaterial.faceSdf.sampler:gpuMaterial.normal.sampler,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
+            writeImage(descriptorIndex,25,gpuMaterial.shadowColorLut.view,gpuMaterial.shadowColorLut.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
             rhi::DescriptorBufferWrite jointWrite{};
             jointWrite.set = descriptorSets_[descriptorIndex];
@@ -2749,7 +2755,8 @@ void CharacterSceneRenderer::destroyResources() {
                  &material.styleMask,
                  &material.matcap,
                  &material.hairData,
-            &material.faceSdf}) {
+                 &material.faceSdf,
+                 &material.shadowColorLut}) {
             rhi_->destroySampler(texture->sampler);
             rhi_->destroyImageView(texture->view);
             allocator_->destroyImage(texture->image);
@@ -2772,7 +2779,8 @@ void CharacterSceneRenderer::destroyResources() {
                      &material.styleMask,
                      &material.matcap,
                      &material.hairData,
-                     &material.faceSdf}) {
+                     &material.faceSdf,
+                     &material.shadowColorLut}) {
                 rhi_->destroySampler(texture->sampler);
                 rhi_->destroyImageView(texture->view);
                 allocator_->destroyImage(texture->image);

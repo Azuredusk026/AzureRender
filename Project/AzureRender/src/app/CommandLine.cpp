@@ -267,7 +267,7 @@ void validate(const ParsedCommandLine& parsed) {
             "outline", "shadow-map", "material-id", "style-mask", "ambient",
             "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
             "bloom", "brow-mask", "roughness", "metallic", "direct-specular",
-            "reflection", "shaded-normal"})) {
+            "reflection", "shaded-normal", "shadow-color"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
     }

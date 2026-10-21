@@ -906,12 +906,12 @@ void AzureRenderApp::configureQaHarness() {
         ? "beauty"
         : runOptions_.qaIsolation;
 
-    constexpr std::array<const char*, 26> kIsolationNames = {
+    constexpr std::array<const char*, 27> kIsolationNames = {
         "beauty", "albedo", "world-normal", "depth", "diffuse-band",
         "shadow-visibility", "hair-kk", "rim", "specular", "emissive",
         "outline", "shadow-map", "material-id", "style-mask", "ambient",
         "direct-diffuse", "shadow-tint", "face-sdf", "overlay", "bloom",
-        "brow-mask", "roughness", "metallic", "direct-specular", "reflection", "shaded-normal",
+        "brow-mask", "roughness", "metallic", "direct-specular", "reflection", "shaded-normal", "shadow-color",
     };
     const auto isolation = std::find(
         kIsolationNames.begin(), kIsolationNames.end(), qaIsolationName_);
@@ -921,12 +921,12 @@ void AzureRenderApp::configureQaHarness() {
     }
     const std::uint32_t isolationIndex = static_cast<std::uint32_t>(
         std::distance(kIsolationNames.begin(), isolation));
-    constexpr std::array<std::uint32_t, 26> kPostProcessViews = {
+    constexpr std::array<std::uint32_t, 27> kPostProcessViews = {
         0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0,
     };
-    constexpr std::array<std::uint32_t, 26> kShaderIsolationModes = {
+    constexpr std::array<std::uint32_t, 27> kShaderIsolationModes = {
         0, 1, 0, 0, 2, 3, 4, 5, 6, 7, 0, 0, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-        17, 18, 19, 20, 21,
+        17, 18, 19, 20, 21, 22,
     };
     renderSettings_.diagnosticView = kPostProcessViews[isolationIndex];
     qaIsolationMode_ = kShaderIsolationModes[isolationIndex];

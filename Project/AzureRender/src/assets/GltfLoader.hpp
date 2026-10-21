@@ -55,6 +55,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureHairRamp = 1U << 9U,
     MaterialFeatureSceneRefraction = 1U << 10U,
     MaterialFeatureDualFaceSdf = 1U << 11U,
+    MaterialFeatureShadowColorLut = 1U << 12U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -82,14 +83,15 @@ struct AssetFaceSdfProfile {
 };
 
 struct AssetMaterial {
-    std::array<unsigned,8> authoredMipLevels{};
-    std::array<azurerender::TextureImportSettings,8> textureSettings=[] {
-        std::array<azurerender::TextureImportSettings,8> result;
-        const char* usage[]={"albedo","normal","roughness","emissive","mask","albedo","packed-normal","linear"};
+    std::array<unsigned,9> authoredMipLevels{};
+    std::array<azurerender::TextureImportSettings,9> textureSettings=[] {
+        std::array<azurerender::TextureImportSettings,9> result;
+        const char* usage[]={"albedo","normal","roughness","emissive","mask","albedo","packed-normal","linear","albedo"};
         for(std::size_t slot=0;slot<result.size();++slot) {
             result[slot].usage=usage[slot];
-            result[slot].colorSpace=slot==0||slot==3||slot==5?"srgb":"linear";
+            result[slot].colorSpace=slot==0||slot==3||slot==5||slot==8?"srgb":"linear";
         }
+        result[8].mipPolicy="none";result[8].wrapU=result[8].wrapV="clamp";result[8].anisotropy=1;
         return result;
     }();
     std::string name = "FallbackMaterial";
@@ -119,6 +121,9 @@ struct AssetMaterial {
     std::vector<std::uint8_t> hairDataPixels;
     std::uint32_t hairDataWidth = 0;
     std::uint32_t hairDataHeight = 0;
+    // Horizontal blue-slice strip: width = height squared, sRGB encoded.
+    std::vector<std::uint8_t> shadowColorLutPixels{255,255,255,255};
+    std::uint32_t shadowColorLutWidth=1,shadowColorLutHeight=1;
     float transmission=0,ior=1.5F,thickness=0,attenuationDistance=0;
     std::array<float,3> attenuationColor{1,1,1};
     std::vector<std::uint8_t> transmissionPixels{255,255,255,255};

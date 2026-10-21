@@ -37,7 +37,7 @@ layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells
 
 #if defined(AZURE_BINDLESS)
 // One global array: slots 0..2 are the shared environment, shadow map and
-// toon ramp; per-material blocks of 8 follow at 3 + materialIndex * 8.
+// toon ramp; per-material blocks of 9 follow at 3 + materialIndex * 9.
 layout(binding = 1) uniform sampler2D textureArray[];
 #else
 layout(binding = 1) uniform sampler2D baseColorTexture;
@@ -51,6 +51,7 @@ layout(binding = 8) uniform sampler2D hairDataTexture;
 layout(binding = 9) uniform sampler2D shadowMap;
 layout(binding = 11) uniform sampler2D toonRampTexture;
 layout(binding = 12) uniform sampler2D faceSdfTexture;
+layout(binding = 25) uniform sampler2D shadowColorLutTexture;
 #endif
 
 struct ClusterLight {
@@ -101,6 +102,7 @@ layout(push_constant) uniform MaterialData {
 #define AZ_TEX_MATCAP textureArray[nonuniformEXT(material.textureBase + 5u)]
 #define AZ_TEX_HAIR_DATA textureArray[nonuniformEXT(material.textureBase + 6u)]
 #define AZ_TEX_FACE_SDF textureArray[nonuniformEXT(material.textureBase + 7u)]
+#define AZ_TEX_SHADOW_COLOR_LUT textureArray[nonuniformEXT(material.textureBase + 8u)]
 #define AZ_TEX_ENVIRONMENT textureArray[0u]
 #define AZ_TEX_SHADOW textureArray[1u]
 #define AZ_TEX_TOON_RAMP textureArray[2u]
@@ -113,6 +115,7 @@ layout(push_constant) uniform MaterialData {
 #define AZ_TEX_MATCAP matcapTexture
 #define AZ_TEX_HAIR_DATA hairDataTexture
 #define AZ_TEX_FACE_SDF faceSdfTexture
+#define AZ_TEX_SHADOW_COLOR_LUT shadowColorLutTexture
 #define AZ_TEX_ENVIRONMENT environmentTexture
 #define AZ_TEX_SHADOW shadowMap
 #define AZ_TEX_TOON_RAMP toonRampTexture
@@ -1009,6 +1012,10 @@ void main() {
         qaColor = ambientSpecular;
     } else if (qaIsolationMode == 21) {
         qaColor = shadedNormal * 0.5 + 0.5;
+    } else if (qaIsolationMode == 22) {
+        qaColor = materialFeatureEnabled(4096U)>0.5
+            ? sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,baseColor.rgb)
+            : vec3(0);
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {
