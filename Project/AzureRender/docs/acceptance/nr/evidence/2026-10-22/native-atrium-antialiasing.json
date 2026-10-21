@@ -21,11 +21,13 @@
   },
   "source": {
     "project": {
-      "path": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/playable-safe.azureproject",
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azureproject.txt",
+      "originalPath": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/playable-safe.azureproject",
       "sha256": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d"
     },
     "scene": {
-      "path": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/assets/playable-safe.azurelevel",
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azurelevel.txt",
+      "originalPath": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/assets/playable-safe.azurelevel",
       "sha256": "432a34fb948720e00f74d79d7c3eacd90308b42503b0ff7e213b44324fce2b03"
     },
     "expectedSourceHashes": {
@@ -51,6 +53,11 @@
       "sha256": "c32e57dabeac40b0de6de096a6ef9e3616d8383154e033d335f44c9199b9baf0"
     },
     "executableSha256": "53f469001bfa07371cc8e56cc315aa2b519587d61d8c6fdf6f08d6ae79f3decd",
+    "executable": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/binary-snapshot/AzurePlayer-53f469001bfa.exe",
+      "originalPath": "build/ninja-msvc-release/AzurePlayer.exe",
+      "sha256": "53f469001bfa07371cc8e56cc315aa2b519587d61d8c6fdf6f08d6ae79f3decd"
+    },
     "compiledShaderCount": 47,
     "compiledShaderSha256": {
       "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
@@ -602,5 +609,12 @@
     "完整 NR12 状态由联合清单持有。"
   ],
   "gpuCaptureEvidenceRecorded": true,
-  "gpuExecutedForThisDocumentationTask": false
+  "gpuExecutedForThisDocumentationTask": false,
+  "projectionQualification": {
+    "renderSettingsCameraFar": 100,
+    "authoredGameCameraFarPlane": null,
+    "registeredGameCameraDefaultFarPlane": 1000,
+    "effectiveProjectionIndependentlyMeasured": false,
+    "scope": "Recorded render setting and GameCamera component defaults are distinct."
+  }
 }

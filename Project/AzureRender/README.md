@@ -74,6 +74,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
 原生中庭的三模式各完成 96 帧对齐采集。
 数值结果与展示视频见[中庭抗锯齿验收](docs/acceptance/nr/native-atrium-antialiasing.md)。
+后走廊接入后的三模式回归及视频见[联合复验](docs/acceptance/nr/native-atrium-antialiasing-post-corridor.md)。
 
 材质纹理按处理后像素与采样语义共享。
 缓存集中持有 GPU 对象，并提供驻留统计。

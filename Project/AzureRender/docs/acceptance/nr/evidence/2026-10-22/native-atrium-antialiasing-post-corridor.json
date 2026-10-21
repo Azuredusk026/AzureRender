@@ -1,0 +1,484 @@
+{
+  "format": "AzureNativeAtriumAntialiasingPostCorridorAcceptance/1",
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "passed-for-declared-aa-scope",
+  "passed": true,
+  "scope": {
+    "scene": "base01_lv001",
+    "state": "white-yellow-atrium",
+    "character": "laevat",
+    "runRoot": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1",
+    "content": [
+      "post-corridor-production-content",
+      "native-character-locomotion",
+      "native-logistics-animation"
+    ],
+    "nativeGamePixelEquivalenceAccepted": null,
+    "nr12Complete": false,
+    "historicalFar100CoverageGateReplaced": false,
+    "geometryVisibilityAccepted": null,
+    "resourceReadinessAccepted": null
+  },
+  "method": {
+    "reference": "docs/acceptance/nr/native-atrium-antialiasing.md",
+    "publicImplementation": "docs/acceptance/nr/spatial-antialiasing.md",
+    "summary": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/summary.json",
+      "sha256": "b3d192ccbdff58ecd1a20767397264964ea04c1464d9673029cae8d59ba6dd25"
+    },
+    "preparation": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/preparation.json",
+      "sha256": "25e25c8cee13c55ebb57bce3930e41d943c2846d26d2806d624db985845458db"
+    },
+    "publicGatesModified": false,
+    "gpuExecuted": true
+  },
+  "source": {
+    "project": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/playable-safe.azureproject.txt",
+      "sha256": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "originalPath": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/playable-safe.azureproject"
+    },
+    "scene": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/playable-safe.azurelevel.txt",
+      "sha256": "35eabfcb1ac41bfff188d727dfbb7458c4317c43371c183ef5f386aa4603fa8b",
+      "originalPath": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/assets/playable-safe.azurelevel"
+    },
+    "sourceHashes": {
+      "project": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "scene": "35eabfcb1ac41bfff188d727dfbb7458c4317c43371c183ef5f386aa4603fa8b"
+    },
+    "snapshotReceipt": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json",
+      "sha256": "95674c7cffdcc5e1d0f307c1d3e72736c7d0218dfa005a73da8466c52ab6bff3"
+    },
+    "verifiedSnapshotFiles": 52,
+    "sourceDocumentsModified": false,
+    "sourceCameraActivatedForAcceptance": true,
+    "cameraFar": 1000,
+    "defaultPlayer": {
+      "engineDefault": 1,
+      "sceneAuthored": 1,
+      "effective": 1,
+      "source": "scene-or-engine-default",
+      "projectSettings": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\high-detail-joint\\project\\config\\engine-settings.json",
+      "projectSettingsSha256": null,
+      "defaultPlayerCoveredByEdgeCase": true,
+      "commandLineAaOverride": false
+    }
+  },
+  "frozenCandidate": {
+    "record": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/candidate-binary.json",
+      "sha256": "c3b9516f75191b64ffbf580c136adf15b91b89b8480ecdf3cc3c6cc43185e074"
+    },
+    "executable": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/AzurePlayer-2f44ee9022a1.exe",
+      "sha256": "2f44ee9022a17ca5e7976e3232b943f36f06877502362829b0abf58fa83f716e"
+    },
+    "executableOriginalPath": "build/ninja-msvc-release/AzurePlayer.exe",
+    "compiledShaderCount": 47,
+    "shaderSnapshotReceipt": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-corridor-extension/final-source-snapshot/receipt.json",
+      "sha256": "95674c7cffdcc5e1d0f307c1d3e72736c7d0218dfa005a73da8466c52ab6bff3"
+    },
+    "captureToolSha256": "b83a297ae7c7d8e84f1bbc8046d0d8f99cb4e68c71d5a751d3be3d602b332f04"
+  },
+  "alignment": {
+    "passed": true,
+    "strictStateFields": [
+      "frame",
+      "camera",
+      "target",
+      "characters",
+      "animations",
+      "rigidBodies"
+    ],
+    "capturedFramesPerMode": 96,
+    "totalPngFrames": 288,
+    "actions": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/actions.json",
+      "sha256": "e96858e18422bb5d4c4705617e4beb9cbc7a58047ff843fcd63abec9ca309b2e"
+    },
+    "actionsPerMode": 7,
+    "delayedFramesPerMode": 0,
+    "fixedFrameStepSeconds": 0.016666666666666666,
+    "runtimeFrameRangeInclusive": [
+      1,
+      96
+    ],
+    "pngFrameRangeInclusive": [
+      0,
+      95
+    ],
+    "fieldOfViewDegrees": 55,
+    "cameraNear": 0.1,
+    "cameraFar": 1000,
+    "loadingComparedAsDeterministicField": false,
+    "readinessRequiresIndependentAcceptance": true,
+    "commonNonloadingRuntimeFrames": [
+      8,
+      17
+    ],
+    "commonNonloadingMeasuredPngIndices": [
+      16
+    ],
+    "loadingTrueMeasuredSamplesByMode": {
+      "off": 39,
+      "edge": 39,
+      "supersample": 39
+    },
+    "loadingMismatchFramesAgainstOff": {
+      "edge": 33,
+      "supersample": 32
+    }
+  },
+  "measurement": {
+    "referenceMode": "supersample",
+    "referenceDomain": "linear-display-rgb",
+    "stride": 2,
+    "sampleCount": 48,
+    "temporalPairCount": 47,
+    "edgeMeanAbsoluteErrors": {
+      "off": 0.015133453746481488,
+      "edge": 0.014306110271718353,
+      "supersample": 0.0
+    },
+    "edgeErrorRatio": 0.9453301613350825,
+    "edgeErrorReductionPercent": 5.4669838664917485,
+    "motionResidualRatio": 0.9509227559692771,
+    "motionResidualReductionPercent": 4.907724403072288,
+    "phaseAggregates": {
+      "static-input": {
+        "sampleCount": 8,
+        "edgeErrorRatio": 0.9428889469526341
+      },
+      "locomotion-input": {
+        "sampleCount": 40,
+        "edgeErrorRatio": 0.94581733370924
+      }
+    },
+    "flatMaximumByteDelta": 0.0,
+    "minimumFlatPixels": 106173,
+    "heroDisplacementMetres": 0.6729874081143186,
+    "sceneAnimationTimeSpansSeconds": {
+      "native-logistics-single": 1.5833333333333326
+    },
+    "nativeChecks": {
+      "edgeErrorImproved": true,
+      "motionResidualImproved": true,
+      "defaultPlayerCovered": true,
+      "staticEdgeErrorImproved": true,
+      "movingEdgeErrorImproved": true,
+      "flatPreserved": true,
+      "heroMoves": true,
+      "flatCoveragePresent": true,
+      "sceneAnimationAdvances": true
+    }
+  },
+  "captures": [
+    {
+      "name": "off",
+      "antiAliasing": 0,
+      "project": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/off/candidate.azureproject",
+        "sha256": "0e9c18356d432d3cb5246d88258cd2ac055078aace2e2c3ef8a306576b37c650"
+      },
+      "scene": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/off/native_aa/off.azurelevel",
+        "sha256": "d2d7b45c77a55bfc5b3db5fe37918bba646229e0898d4d2864c17bd4132cd29b"
+      },
+      "cameraComponent": {
+        "data": {
+          "enabled": true,
+          "farPlane": 1000.0,
+          "fieldOfView": 55,
+          "priority": 100
+        },
+        "type": "azure.camera",
+        "version": 1
+      },
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        1280,
+        720
+      ],
+      "cameraNear": 0.1,
+      "cameraFar": 1000,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "pngFrames": 96,
+      "runtimeFrames": 96,
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "startupSeconds": 104.21899999999732,
+      "wholeProcessSeconds": 148.39100000000326,
+      "loadingTrueFrames": 78,
+      "loadingFalseFrames": 18,
+      "validationLayerEnabled": false,
+      "errorOrFatalOrVuidMessages": 0,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "result": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/result.json",
+        "sha256": "c691af30b6cd17a00b21a5ce0fe60a3ae69e46e63e4929c8de8c036920460e3e"
+      },
+      "launch": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/launch.json",
+        "sha256": "6c2cf5ca9d17c0396ef6830ec211b73c3e78c65712a9466c9c77c75530942e12"
+      },
+      "command": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/command.json",
+        "sha256": "8005d0a6933a2e3f3880441494baa724076fcf6115df155312df956ea6209d44"
+      },
+      "manifest": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/frames/capture_manifest.json",
+        "sha256": "dcee334790afed211f240be60ab093b103669eab111c77979010f93d0fd121d9"
+      },
+      "runtime": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/runtime.json",
+        "sha256": "cbc6f62bf952684ebe37063e0613b85a328ab8ad230c5f535c53f9d89149b0f4"
+      },
+      "logs": [
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/stdout.log",
+          "sha256": "dd452e918ff4c0a5b904e43ca8157514e5dabd550d16c75aa37d1151ab1a4512"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/off/stderr.log",
+          "sha256": "1dc7e4a6107409a777448a0fbbc33febcf94c41d2578b36451410f9e1980fa11"
+        }
+      ]
+    },
+    {
+      "name": "edge",
+      "antiAliasing": 1,
+      "project": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/edge/candidate.azureproject",
+        "sha256": "966ec1bf39bfe83e2ab2020b0054c79a2821dd363f12b4528a3f8b863984cd12"
+      },
+      "scene": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/edge/native_aa/edge.azurelevel",
+        "sha256": "b2715722d89e522959cf9993d60e66743918c7d209550659206a4f73e9dbc08a"
+      },
+      "cameraComponent": {
+        "data": {
+          "enabled": true,
+          "farPlane": 1000.0,
+          "fieldOfView": 55,
+          "priority": 100
+        },
+        "type": "azure.camera",
+        "version": 1
+      },
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        1280,
+        720
+      ],
+      "cameraNear": 0.1,
+      "cameraFar": 1000,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "pngFrames": 96,
+      "runtimeFrames": 96,
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "startupSeconds": 119.25,
+      "wholeProcessSeconds": 162.48400000000402,
+      "loadingTrueFrames": 77,
+      "loadingFalseFrames": 19,
+      "validationLayerEnabled": false,
+      "errorOrFatalOrVuidMessages": 0,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "result": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/result.json",
+        "sha256": "0baf5fa85c1ed7b3b6187950deb06c82de80e5fc5c40bb19614534f3045ace4e"
+      },
+      "launch": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/launch.json",
+        "sha256": "44f2e4c203d52a400eec5c1fdbd89ca5cda3a138409ec43ba8d7b0d4a43945bf"
+      },
+      "command": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/command.json",
+        "sha256": "961e61951c17648da39f94710da4417eb47ade7c3862632fd65b5c92a462ffe2"
+      },
+      "manifest": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/frames/capture_manifest.json",
+        "sha256": "dc93eaf354513a414dccad9e3c4e3c0835594e710c1e49bf1d02cd35cd5b4628"
+      },
+      "runtime": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/runtime.json",
+        "sha256": "22199e01348375e838302b9ae4169b745db7506b2c3f3c92e096d9d9f8fe3b0d"
+      },
+      "logs": [
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/stdout.log",
+          "sha256": "658566a5d6980fa53fd619327e0d65c4437dac7444c9270379d49569453ae2a0"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/edge/stderr.log",
+          "sha256": "3a2c81ca006064558767e84e3a1aa776ddc644c60f5afb68c161cb366cf4c1c9"
+        }
+      ]
+    },
+    {
+      "name": "supersample",
+      "antiAliasing": 2,
+      "project": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/supersample/candidate.azureproject",
+        "sha256": "c5970c5b94e10c79cb2401fa0f31e7e47c19a04c99ab522933cf60584e8847bb"
+      },
+      "scene": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/projects/supersample/native_aa/supersample.azurelevel",
+        "sha256": "a6a5f27a065a4851a418834d1787caf68546970e704aae2cbe90c6574a9585f6"
+      },
+      "cameraComponent": {
+        "data": {
+          "enabled": true,
+          "farPlane": 1000.0,
+          "fieldOfView": 55,
+          "priority": 100
+        },
+        "type": "azure.camera",
+        "version": 1
+      },
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        2560,
+        1440
+      ],
+      "cameraNear": 0.1,
+      "cameraFar": 1000,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "pngFrames": 96,
+      "runtimeFrames": 96,
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "startupSeconds": 107.98399999999674,
+      "wholeProcessSeconds": 152.88999999999942,
+      "loadingTrueFrames": 78,
+      "loadingFalseFrames": 18,
+      "validationLayerEnabled": false,
+      "errorOrFatalOrVuidMessages": 0,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "result": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/result.json",
+        "sha256": "65ad9cf93cfe72ac092ec00e4e35a275f01e18ed52c4ba26e2f2b0c654665b4c"
+      },
+      "launch": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/launch.json",
+        "sha256": "4c61f8cc9e5c68169220b35be5c451dae78a4283f83940b7cc25783a7f2a3fe0"
+      },
+      "command": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/command.json",
+        "sha256": "988ba80e24c6cfa9d0f01903ba979593181afef192c14885e3f13a2e2215b7f3"
+      },
+      "manifest": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/frames/capture_manifest.json",
+        "sha256": "58d4d6bbbf7e55310931564367259303fc0f19559aeed054af6705031833f1a8"
+      },
+      "runtime": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/runtime.json",
+        "sha256": "6081b7fb96f70b23ac8e20dc7c0755c457ae0adec77910fd7f6b422fea6d1467"
+      },
+      "logs": [
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/stdout.log",
+          "sha256": "2a2c1fca46609ba8968292b3d151b9acc0d03d2ac2662aeb408dd634ae0e1ec9"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/supersample/stderr.log",
+          "sha256": "50a6da6efb24370e8628335279681941e879ab86238be5a5460846322f6da98d"
+        }
+      ]
+    }
+  ],
+  "budgets": {
+    "startupSeconds": 180,
+    "wholeProcessSeconds": 600
+  },
+  "media": {
+    "receipt": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/media.json",
+      "sha256": "15cf3b1b9c8db3e96473929f8051e6764b3add6f7a50c93dea441d82ff99359c"
+    },
+    "sourceSummarySha256Verified": true,
+    "videos": [
+      {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/scene-aa1.mp4",
+        "sha256": "eae08618e504873311af977de2538478a1d708f737214650ee4b86cb9929a581",
+        "width": 1280,
+        "height": 756,
+        "frames": 288,
+        "fps": 60.0,
+        "durationSeconds": 4.8,
+        "loops": 3,
+        "originalFrames": 96,
+        "playbackSpeed": 1,
+        "interpolated": false,
+        "fullDecodeVerified": true,
+        "encodeLog": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/scene-aa1.encode.log",
+          "sha256": "2161a13417c4146d8cb1ecb5289177fb6cfa2f06f7e307a4ac69a35fdb697875"
+        },
+        "decodeLog": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/scene-aa1.decode.log",
+          "sha256": "6ff8ef3d89776256393848e15ebb3edaa60bdffd56518bdf8035c9f29d5c5192"
+        }
+      },
+      {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/aa-comparison.mp4",
+        "sha256": "9eca8f3b3a57f26fb9e96edbac597902f62316b3cde45dade3601b2a976d5e96",
+        "width": 3840,
+        "height": 756,
+        "frames": 288,
+        "fps": 60.0,
+        "durationSeconds": 4.8,
+        "loops": 3,
+        "originalFrames": 96,
+        "playbackSpeed": 1,
+        "interpolated": false,
+        "fullDecodeVerified": true,
+        "encodeLog": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/aa-comparison.encode.log",
+          "sha256": "3c71549a679165bef47bdddd1996151aa8128dd700e10ed72af3730d23e211be"
+        },
+        "decodeLog": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/aa-comparison.decode.log",
+          "sha256": "79b940d2379ac41a90a0c6c46644a78e451bd73dafba6b473b34a5512947d4b3"
+        }
+      }
+    ],
+    "comparisonPng": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-post-corridor-v1/media/comparison.png",
+      "sha256": "fb976635ec3410800b9109355c170f5d54e0b8d6193d3cae7dbd1266d8982995"
+    },
+    "loopingLabelled": true,
+    "headerHeight": 36
+  },
+  "limits": {
+    "validationLayerEnabled": false,
+    "nativeGamePixelParityClaimed": false,
+    "measurementIncludesLoadingFrames": true,
+    "newCorridorGeometryAaBenefitClaimed": false,
+    "longMotionAndAdditionalViewsAccepted": false,
+    "additionalDevicesAccepted": false
+  }
+}

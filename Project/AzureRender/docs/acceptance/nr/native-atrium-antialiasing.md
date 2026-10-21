@@ -1,6 +1,6 @@
 # 原生中庭抗锯齿验收
 
-当前中庭候选通过三模式抗锯齿联合检查。
+本记录的冻结候选通过三模式抗锯齿联合检查。
 范围包含莱万汀、场景材质与动态传送仓。
 默认 Player 的有效采样模式为 1。
 完整画面复刻继续由 NR12 验收。
@@ -14,12 +14,19 @@
 三组均使用同一 Release Player 与 47 份着色器。
 冻结清单保存可执行文件及全部着色器摘要。
 来源工程和场景各自绑定 SHA-256。
-源文档保持原始内容。
+验收来源保存在冻结快照中。
 验收副本启用固定场景相机。
+
+来源快照包含[工程](../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azureproject.txt)和[场景](../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/source-snapshot/playable-safe.azurelevel.txt)。
+原路径和文件摘要保存在结构化清单。
+验收程序字节保存在[程序快照](../../../build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/binary-snapshot/AzurePlayer-53f469001bfa.exe)。
 
 每组输出 96 张 1280×720 PNG。
 固定步长为每帧 1/60 秒。
-相机视场角为 55 度，远裁剪为 100 米。
+相机视场角为 55 度。
+渲染设置的远裁剪字段为 100 米。
+场景相机省略远平面字段，类型默认 1000 米。
+该记录保留两项配置，实际投影未单独测量。
 场景相机和场景灯光在三组间保持一致。
 实际设备为 NVIDIA RTX 4060 Laptop GPU。
 
