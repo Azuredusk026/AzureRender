@@ -130,7 +130,12 @@ int main(const int argumentCount, char** argumentValues) {
         if(options.editorMode && !options.projectFile.empty() && !options.editorSession){
             std::shared_ptr<azurerender::EditorContext> context;
             try {context=azurerender::EditorContext::openProject(std::filesystem::u8path(options.projectFile));}
-            catch(const std::exception&) { AzureRenderApp startup;context=startup.showProjectCenter(options,options.projectFile); }
+            catch(const std::exception& error) {
+                azurerender::RuntimeDiagnostics::instance().warning(
+                    "project", std::string("Project opening failed: ") + error.what());
+                AzureRenderApp startup;
+                context=startup.showProjectCenter(options,options.projectFile);
+            }
             if(!context)return EXIT_SUCCESS;options.projectFile=context->project().file.u8string();
             options.sceneDocument=context->scene();options.renderSettings=context->renderSettings();
             if(!context->scene().resources.empty())options.assetPath=context->scene().resources.front().path.u8string();

@@ -259,6 +259,16 @@ void AzureRenderApp::initWindow() {
 }
 
 void AzureRenderApp::initVulkan(const std::string& assetPath) {
+    const auto phase = [](const char* name, auto&& initialize) {
+        auto& diagnostics = azurerender::RuntimeDiagnostics::instance();
+        diagnostics.info("startup", std::string("Starting ") + name);
+        const auto started = std::chrono::steady_clock::now();
+        initialize();
+        const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - started).count();
+        diagnostics.info("startup", std::string("Completed ") + name
+            + " in " + std::to_string(elapsed) + " ms");
+    };
     azurerender::RuntimeDiagnostics::instance().print(
         "gpu", "Validation layer: "
             + std::string(kEnableValidation ? "enabled" : "disabled"));
@@ -266,7 +276,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     setupDebugMessenger();
     createSurface();
     pickPhysicalDevice();
-    createLogicalDevice();
+    phase("logical device", [this] { createLogicalDevice(); });
     // The allocator must outlive every GPU resource, so it is created directly
     // after the device and torn down just before it.
     gpuAllocator_.initialize(
@@ -284,7 +294,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get());
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
-    createShadowResources();
+    phase("shadow resources", [this] { createShadowResources(); });
     createSwapchain();
     if (fixedSimulation_
         && (swapchainExtent_.width != runOptions_.width
@@ -304,7 +314,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createRenderPass();
     createPostProcessRenderPass();
     createEditorUiRenderPass();
-    createGraphicsPipeline();
+    phase("graphics pipelines", [this] { createGraphicsPipeline(); });
     createFramebuffers();
     createPostProcessFramebuffers();
     createEditorUiFramebuffers();
@@ -313,10 +323,10 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandBuffers();
     createSyncObjects();
     createTimestampQueryPools();
-    createSceneRenderer();
-    initEditorUi();
+    phase("scene renderer", [this] { createSceneRenderer(); });
+    phase("editor interface", [this] { initEditorUi(); });
 #if AZURE_WITH_EDITOR
-    initializeDevtools();
+    phase("developer views", [this] { initializeDevtools(); });
 #endif
 }
 

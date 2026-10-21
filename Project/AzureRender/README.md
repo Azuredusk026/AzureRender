@@ -62,6 +62,7 @@ AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、�
 新建或打开工程后进入编辑器，项目目录独立保存。
 GUI 发布产生项目命名的 exe 与完整游戏目录。
 启动和 UI 分层见[应用架构](docs/architecture-ui-productization.md)。
+项目打开与资源初始化记录见[启动诊断](docs/development/startup-diagnostics.md)。
 
 编辑器支持场景层级、属性编辑、选择变换、内容导入、撤销重做和运行预览。运行时提供 ECS、物理、脚本、动画、声音及游戏界面。独立 Player 按项目数据运行，并通过 Windows 游戏包交付。
 

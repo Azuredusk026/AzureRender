@@ -4,6 +4,7 @@
 执行方式：按本会话授权连续实施。
 阶段定义见[可玩还原计划](2026-10-17-native-playable-restoration.md)。
 正式状态由 `stage-status.json` 管理。
+后方区域与走样优先按[专项计划](2026-10-21-atrium-completeness-antialiasing.md)实施。
 
 ## 目标与依据
 

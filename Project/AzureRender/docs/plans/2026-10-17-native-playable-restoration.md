@@ -6,6 +6,7 @@
 执行方式：沿用本会话自主实施授权，逐任务验证和提交。
 需求依据：[原生渲染规格](2026-10-17-native-render-restoration.md)。
 资料、实景与抓帧任务见[证据执行计划](2026-10-21-native-render-evidence-execution.md)。
+后方资源与走样修复见[中庭完整性与抗锯齿计划](2026-10-21-atrium-completeness-antialiasing.md)。
 
 ## 目标与架构
 
