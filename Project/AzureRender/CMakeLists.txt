@@ -369,6 +369,7 @@ add_library(AzureRenderCore STATIC
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
     src/rhi/NullRhi.cpp
+    src/render/SampledTextureCache.cpp
     src/rhi/PipelineInspection.cpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/VulkanRhi.cpp
@@ -715,6 +716,15 @@ if(BUILD_TESTING)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
     add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
+    add_executable(AzureSampledTextureCacheTests tests/SampledTextureCacheTests.cpp src/render/SampledTextureCache.cpp src/rhi/NullRhi.cpp)
+    target_include_directories(AzureSampledTextureCacheTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureSampledTextureCacheTests PRIVATE Vulkan::Vulkan)
+    add_test(NAME AzureRender.SampledTextureCache COMMAND AzureSampledTextureCacheTests)
+    add_executable(AzureMaterialTextureSharingTests tests/MaterialTextureSharingTests.cpp)
+    target_link_libraries(AzureMaterialTextureSharingTests PRIVATE AzureRenderCore)
+    target_compile_definitions(AzureMaterialTextureSharingTests PRIVATE AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+    add_dependencies(AzureMaterialTextureSharingTests AzureRenderShaders)
+    add_test(NAME AzureRender.MaterialTextureSharing COMMAND AzureMaterialTextureSharingTests "${SHADER_BINARY_DIR}")
     target_include_directories(AzureTextureFilteringTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.TextureFiltering COMMAND AzureTextureFilteringTests)
     add_test(NAME AzureRender.SamplingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_render_sampling.py"
@@ -1295,6 +1305,7 @@ if(BUILD_TESTING)
         src/render/ComputePass.cpp
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
+        src/render/SampledTextureCache.cpp
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp

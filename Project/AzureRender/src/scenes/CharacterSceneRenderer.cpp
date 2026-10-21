@@ -243,6 +243,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     if (rhi_ == nullptr) {
         throw std::runtime_error("RenderContext must carry the engine RHI");
     }
+    materialTextureCache_=std::make_unique<SampledTextureCache>(*allocator_,*rhi_);
     bindlessTextures_ = context.bindlessTextures;
     cullingEnabled_ = context.cullingEnabled;
     computeIblEnabled_ = context.rgba16fStorageImage;
@@ -1262,6 +1263,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"transparentTriangles\": " << transparent << ",\n"
          << "  \"jointCapacity\": " << jointCapacity_ << ",\n"
          << "  \"vertexCapacity\": " << vertexCapacity_ << ",\n";
+    const auto textureStats=materialTextureCache_?materialTextureCache_->statistics():SampledTextureCacheStatistics{};
+    json << "  \"materialTextureCache\": {\"requests\": " << textureStats.requests
+         << ", \"hits\": " << textureStats.hits << ", \"uniqueTextures\": " << textureStats.uniqueTextures
+         << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
+         << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes << "},\n";
     json << "  \"animationIndex\": " << animationIndex_ << ",\n"
          << "  \"animation\": " << std::quoted(animationName) << ",\n";
 }
@@ -1439,16 +1445,24 @@ void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std:
     const auto& settings=m.textureSettings.at(slot);
     const auto mipLevels=settings.mipPolicy=="none"?1U:m.authoredMipLevels.at(slot);
     const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
+    const auto upload=[&](const std::vector<std::uint8_t>& pixels,unsigned width,unsigned height,
+                         SampledTextureBinding& binding,unsigned levels,float cutoff=0) {
+        if(!materialTextureCache_)throw std::logic_error("Material texture cache is not initialized");
+        SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
+        request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
+        request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
+        binding=materialTextureCache_->acquire(pixels,request);
+    };
     switch(slot){
-    case 0:uploadTextureData(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,colorFormat,false,g.baseColor,mipLevels,settings.semantic(),m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0,&settings);break;
-    case 1:uploadTextureData(m.normalPixels,m.normalWidth,m.normalHeight,colorFormat,false,g.normal,mipLevels,settings.semantic(),0,&settings);break;
-    case 2:uploadTextureData(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,colorFormat,false,g.metallicRoughness,mipLevels,settings.semantic(),0,&settings);break;
-    case 3:uploadTextureData(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,colorFormat,false,g.specularEmissive,mipLevels,settings.semantic(),0,&settings);break;
-    case 4:uploadTextureData(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,colorFormat,false,g.styleMask,mipLevels,settings.semantic(),0,&settings);break;
-    case 5:uploadTextureData(m.matcapPixels,m.matcapWidth,m.matcapHeight,colorFormat,false,g.matcap,mipLevels,settings.semantic(),0,&settings);break;
-    case 6:uploadTextureData(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,colorFormat,false,g.hairData,mipLevels,settings.semantic(),0,&settings);break;
-    case 7:{if(faceSdfPrepared_&&m.faceSdf.present){uploadTextureData(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,colorFormat,false,g.faceSdf,mipLevels,settings.semantic(),0,&settings);++faceSdfTextureCount_;}break;}
-    case 8:uploadTextureData(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,colorFormat,false,g.shadowColorLut,1,settings.semantic(),0,&settings);break;
+    case 0:upload(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0);break;
+    case 1:upload(m.normalPixels,m.normalWidth,m.normalHeight,g.normal,mipLevels);break;
+    case 2:upload(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels);break;
+    case 3:upload(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,g.specularEmissive,mipLevels);break;
+    case 4:upload(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
+    case 5:upload(m.matcapPixels,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;
+    case 6:upload(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
+    case 7:{if(faceSdfPrepared_&&m.faceSdf.present){upload(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
+    case 8:upload(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,1);break;
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }
@@ -2192,7 +2206,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             if(handle.slot!=images.size()) throw std::logic_error("Texture block slot order changed");
             images.push_back(*bindings.acquire(handle,0).resource);
         };
-        const auto appendTexture = [&appendInfo](const GpuTexture& texture) {
+        const auto appendTexture = [&appendInfo](const auto& texture) {
             VkDescriptorImageInfo info{};
             info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
             info.imageView = texture.view;
@@ -2746,22 +2760,6 @@ void CharacterSceneRenderer::destroyResources() {
     skinnedVertexBuffers_.clear();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
-    for (auto& material : gpuMaterials_) {
-        for (GpuTexture* texture : {
-                 &material.baseColor,
-                 &material.normal,
-                 &material.metallicRoughness,
-                 &material.specularEmissive,
-                 &material.styleMask,
-                 &material.matcap,
-                 &material.hairData,
-                 &material.faceSdf,
-                 &material.shadowColorLut}) {
-            rhi_->destroySampler(texture->sampler);
-            rhi_->destroyImageView(texture->view);
-            allocator_->destroyImage(texture->image);
-        }
-    }
     gpuMaterials_.clear();
     for (auto& resource : additionalResources_) {
         allocator_->destroyBuffer(resource->indexBuffer);
@@ -2770,25 +2768,10 @@ void CharacterSceneRenderer::destroyResources() {
             allocator_->destroyBuffer(buffer);
         }
         resource->skinnedVertexBuffers.clear();
-        for (auto& material : resource->gpuMaterials) {
-            for (GpuTexture* texture : {
-                     &material.baseColor,
-                     &material.normal,
-                     &material.metallicRoughness,
-                     &material.specularEmissive,
-                     &material.styleMask,
-                     &material.matcap,
-                     &material.hairData,
-                     &material.faceSdf,
-                     &material.shadowColorLut}) {
-                rhi_->destroySampler(texture->sampler);
-                rhi_->destroyImageView(texture->view);
-                allocator_->destroyImage(texture->image);
-            }
-        }
         resource->gpuMaterials.clear();
     }
     additionalResources_.clear();
+    materialTextureCache_.reset();
     if (iblPrefilterPipeline_ != VK_NULL_HANDLE) {
         rhi_->destroyPipeline(iblPrefilterPipeline_);
         iblPrefilterPipeline_ = VK_NULL_HANDLE;

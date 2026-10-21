@@ -1,6 +1,7 @@
 #include "assets/TextureMipChain.hpp"
 #pragma once
 #include "render/IrradianceVolume.hpp"
+#include "render/SampledTextureCache.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -100,15 +101,15 @@ private:
     static_assert(sizeof(IblPrefilterPushConstants) == 8);
 
     struct GpuMaterial {
-        GpuTexture baseColor;
-        GpuTexture normal;
-        GpuTexture metallicRoughness;
-        GpuTexture specularEmissive;
-        GpuTexture styleMask;
-        GpuTexture matcap;
-        GpuTexture hairData;
-        GpuTexture faceSdf;
-        GpuTexture shadowColorLut;
+        SampledTextureBinding baseColor;
+        SampledTextureBinding normal;
+        SampledTextureBinding metallicRoughness;
+        SampledTextureBinding specularEmissive;
+        SampledTextureBinding styleMask;
+        SampledTextureBinding matcap;
+        SampledTextureBinding hairData;
+        SampledTextureBinding faceSdf;
+        SampledTextureBinding shadowColorLut;
     };
 
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
@@ -258,6 +259,7 @@ private:
     rhi::GpuBuffer vertexBuffer_;
     rhi::GpuBuffer indexBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
+    std::unique_ptr<SampledTextureCache> materialTextureCache_;
     GpuTexture environmentTexture_;
     GpuTexture reflectionProbeTexture_;
     IrradianceVolume irradianceVolume_;
