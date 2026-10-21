@@ -227,6 +227,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 原生局部算法已核验，完整角色着色仍待还原。
 场景角色支持显式材质色带、高光及外轮廓。
 当前绑定与限制见[角色场景验收](docs/acceptance/nr/character-scene-lighting.md)。
+覆盖阴影支持[乘法颜色合成](docs/acceptance/nr/multiply-composite.md)。
+动态实例支持[节点透明度与渐隐描边](docs/acceptance/nr/node-opacity.md)。
+四机位工程视频及 WASD 回放见[角色与物流联合验证](docs/acceptance/nr/character-logistics-joint.md)。
 透明表面支持[场景颜色折射](docs/runtime/scene-color-refraction.md)。
 中庭一个原生玻璃材质已进入[联合候选](docs/acceptance/nr/native-glass.md)。
 
