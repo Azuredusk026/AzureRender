@@ -129,6 +129,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 原生读取支持[显式资源分层](docs/acceptance/nr/layered-content.md)。
 更新目录与共享基础块可组合读取，并保留来源收据。
 原生待机候选已进入引擎，材质与物理效果待完善。
+完整原生走跑已通过[两组速度混合回放](docs/acceptance/nr/native-locomotion.md)。
 原生表情源已取得，演示保持中性。
 帝江号中心切片已与编队待机 01 完成联合技术采样。
 场景实例编辑与保存重开已验证。
