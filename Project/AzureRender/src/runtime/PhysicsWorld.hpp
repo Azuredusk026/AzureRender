@@ -22,6 +22,10 @@ public:
     std::optional<RayHit> sphereSweep(const std::array<float,3>& origin, const std::array<float,3>& displacement,
         float radius, ecs::Entity ignore = ecs::kInvalidEntity) const;
     std::array<float,3> velocity(ecs::Entity entity) const;
+    // World-space displacement / dt from the last completed physics step.
+    // External transform corrections are excluded; velocity() retains the
+    // controller's integration velocity. No simulation step leaves this sample intact.
+    std::array<float,3> actualVelocity(ecs::Entity entity) const;
     std::array<float,3> groundVelocity(ecs::Entity entity) const;
     void setMeshResolver(CollisionMeshResolver resolver){meshResolver_=std::move(resolver);}
     void validateScene(RuntimeLifecycle&) const;

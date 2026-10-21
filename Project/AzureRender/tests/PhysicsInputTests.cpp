@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
-void check(bool value) { if (!value) throw std::runtime_error("Physics/input contract failed"); }
+void check(bool value,const char* reason="Physics/input contract failed") { if (!value) throw std::runtime_error(reason); }
 void setup(RuntimeLifecycle& runtime) {
  SceneDocument scene;SceneNode ground;ground.id="ground";ground.translation={0,-1,0};scene.nodes.push_back(ground);
  SceneNode hero;hero.id="hero";hero.translation={0,3,0};scene.nodes.push_back(hero);
@@ -14,7 +14,33 @@ void setup(RuntimeLifecycle& runtime) {
  game::RigidBody sensor;sensor.halfExtent={0.7F,2,2};sensor.trigger=true;runtime.world().addComponent(runtime.entity("trigger"),sensor);
  runtime.start();
 }
+void actualVelocityLifecycle() {
+ RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());
+ const auto hero=runtime.entity("hero");
+ check(game.physics().actualVelocity(hero)==std::array<float,3>{},"Unsimulated characters have no displacement sample");
+ for(int i=0;i<180;++i)game.advance(1.0/60);
+ game.input().key(68,true);for(int i=0;i<60;++i)game.advance(1.0/60);
+ const auto sample=game.physics().actualVelocity(hero);
+ check(std::abs(sample[0]-4)<.001F&&std::abs(sample[2])<.001F,"Free resolved motion uses meters per second");
+ runtime.pause();const auto steps=game.steps();game.advance(.1);
+ check(game.physics().actualVelocity(hero)==sample&&game.steps()==steps,"Pause preserves the last completed physics sample");
+ runtime.step();game.advance(.1);
+ check(game.steps()==steps+1&&game.physics().actualVelocity(hero)[0]<sample[0],"A paused single step replaces exactly one motion sample");
+ runtime.resume();for(int i=0;i<60;++i)game.advance(1.0/60);
+ auto* transform=runtime.world().tryGet<ecs::TransformComponent>(hero);transform->translation={-4,3,2};
+ game.advance(1.0/60);const auto teleported=game.physics().actualVelocity(hero);
+ check(std::hypot(teleported[0],teleported[2])<.001F&&std::abs(teleported[1])<1,
+     "External position corrections must not become displacement velocity spikes");
+ runtime.defer([hero](auto& world){world.destroyEntity(hero);});game.advance(1.0/60);
+ check(game.physics().actualVelocity(hero)==std::array<float,3>{},"Deleted characters release displacement samples on the next step");
+ SceneDocument replacement;SceneNode node;node.id="hero";node.translation={100,5,100};replacement.nodes.push_back(node);
+ runtime.replaceScene(replacement,[](auto& candidate){candidate.world().addComponent(candidate.entity("hero"),game::Character{});});
+ game.advance(1.0/60);const auto restored=game.physics().actualVelocity(runtime.entity("hero"));
+ check(std::hypot(restored[0],restored[2])<.001F&&restored[1]<0&&restored[1]>-.5F,
+     "Scene replacement starts a new physical sample without carrying the old position or input");
+}
 int main() {try {
+ actualVelocityLifecycle();
  InputActions input;input.configure(application::explorationConfiguration().at("input"));input.bind("jump",32);input.key(32,true);input.key(32,true);check(input.pressed("jump") && input.down("jump"));
  input.endStep();check(!input.pressed("jump") && input.down("jump"));input.setFocused(false);check(!input.down("jump"));
  input.setFocused(true);input.key(82,true);check(input.pressed("restart"));input.endStep();check(!input.pressed("restart"));

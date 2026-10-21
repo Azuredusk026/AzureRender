@@ -46,7 +46,7 @@ struct PhysicsWorld::Impl {
     JPH::TempAllocatorImpl allocator{16 * 1024 * 1024};
     JPH::JobSystemSingleThreaded jobs{1024};
     struct Body { JPH::BodyID id; std::string node; game::RigidBody settings; std::array<float, 3> scale; };
-    struct Character { JPH::Ref<JPH::CharacterVirtual> value; std::string node; game::Character settings; float groundAge = 1, jumpBuffer = 0; bool jumping = false; };
+    struct Character { JPH::Ref<JPH::CharacterVirtual> value; std::string node; game::Character settings; float groundAge = 1, jumpBuffer = 0; bool jumping = false; std::array<float,3> actualVelocity{}; };
     std::map<ecs::Entity, Body> bodies;
     std::map<ecs::Entity, Character> characters;
     struct HingeState {JPH::Ref<JPH::TwoBodyConstraint> value;ecs::Entity a,b;game::Hinge settings;};
@@ -181,7 +181,9 @@ std::vector<PhysicsEvent> PhysicsWorld::step(RuntimeLifecycle& runtime, float dt
         JPH::CharacterVirtual::ExtendedUpdateSettings update;
         update.mWalkStairsStepUp = {0,settings.stepHeight,0};
         if (vertical > 0) update.mStickToFloorStepDown = JPH::Vec3::sZero();
+        const auto startPosition = character.GetPosition();
         character.ExtendedUpdate(dt, p.system.GetGravity(), update, p.system.GetDefaultBroadPhaseLayerFilter(1), p.system.GetDefaultLayerFilter(1), {}, {}, p.allocator);
+        state.actualVelocity = array(JPH::Vec3(character.GetPosition() - startPosition) / dt);
         transform.translation = array(JPH::Vec3(character.GetPosition()));
         transform.translation[1] -= settings.centerOffset;
     });
@@ -222,6 +224,10 @@ std::optional<RayHit> PhysicsWorld::raycast(const std::array<float, 3>& origin, 
 std::array<float,3> PhysicsWorld::velocity(ecs::Entity entity) const {
     const auto found=impl_->characters.find(entity);
     return found==impl_->characters.end()?std::array<float,3>{}:array(found->second.value->GetLinearVelocity());
+}
+std::array<float,3> PhysicsWorld::actualVelocity(ecs::Entity entity) const {
+    const auto found=impl_->characters.find(entity);
+    return found==impl_->characters.end()?std::array<float,3>{}:found->second.actualVelocity;
 }
 std::array<float,3> PhysicsWorld::groundVelocity(ecs::Entity entity) const {
     const auto found=impl_->characters.find(entity);

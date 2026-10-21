@@ -130,6 +130,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 无纹理基色采用最近字节量化，详见[量化验证](docs/acceptance/nr/base-color-quantization.md)。
 原生动作与 WASD 的短路径结果见[操控验证](docs/acceptance/nr/playable-integration.md)。
 速度驱动的多片段混合与步态同步已接入公共姿态入口。
+动画采用[碰撞解算后的实际运动速度](docs/acceptance/nr/actual-motion-velocity.md)。
 双角色与原生动作证据见[混合验证](docs/acceptance/nr/locomotion-blending.md)。
 原生走跑完整时域及端点来源见[动作证据](docs/acceptance/nr/native-locomotion.md)。
 

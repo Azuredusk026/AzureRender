@@ -81,6 +81,53 @@ int main() {
         game.input().key(340,false);settle(game);check(std::abs(speed(game,runtime)-2)<.04F,"Release Shift must return to walking");
         game.input().setFocused(false);settle(game);check(speed(game,runtime)<.001F,"Focus loss must stop movement");
     });
+    test("blocked motion returns locomotion to idle",[] {
+        RuntimeLifecycle runtime;setup(runtime);
+        game::Animator animator;animator.locomotion=true;
+        runtime.world().addComponent(runtime.entity("hero"),animator);
+        const auto wall=runtime.world().createEntity();
+        runtime.world().addComponent(wall,ecs::TransformComponent{{0,1,-2},{},{1,1,1}});
+        game::RigidBody body;body.halfExtent={4,2,.1F};runtime.world().addComponent(wall,body);
+        GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
+        game.input().key(87,true);game.input().key(340,true);
+        for(unsigned i=0;i<120;++i)game.advance(1.0/60);
+        const auto stopped=position(runtime);settle(game);
+        check(std::hypot(position(runtime)[0]-stopped[0],position(runtime)[2]-stopped[2])<.001F,
+            "The capsule must stay blocked while forward input remains held");
+        check(game.input().down("move-forward")&&speed(game,runtime)>4.9F,
+            "Blocked motion must retain its requested velocity contract");
+        const auto* state=runtime.world().tryGet<game::Animator>(runtime.entity("hero"));
+        check(state->state=="idle"&&state->locomotionSpeed<.01F,
+            "Locomotion must use resolved displacement instead of a blocked velocity request");
+    });
+    test("wall sliding retains tangential locomotion",[] {
+        RuntimeLifecycle runtime;setup(runtime);game::Animator animator;animator.locomotion=true;
+        runtime.world().addComponent(runtime.entity("hero"),animator);
+        const auto wall=runtime.world().createEntity();
+        runtime.world().addComponent(wall,ecs::TransformComponent{{0,1,-2},{},{1,1,1}});
+        game::RigidBody body;body.halfExtent={20,2,.1F};runtime.world().addComponent(wall,body);
+        GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
+        game.input().key(87,true);game.input().key(68,true);for(unsigned i=0;i<120;++i)game.advance(1.0/60);
+        const auto* state=runtime.world().tryGet<game::Animator>(runtime.entity("hero"));
+        check(state->state=="walk"&&std::abs(state->locomotionSpeed-1.41421356F)<.01F,
+            "A wall must remove blocked velocity while preserving the visible sliding speed");
+    });
+    test("moving support does not drive idle locomotion",[] {
+        RuntimeLifecycle runtime;setup(runtime);
+        runtime.world().tryGet<game::RigidBody>(runtime.entity("ground"))->kinematic=true;
+        game::Animator animator;animator.locomotion=true;runtime.world().addComponent(runtime.entity("hero"),animator);
+        GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
+        auto* platform=runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("ground"));
+        for(unsigned i=0;i<120;++i){platform->translation[0]+=.005F;game.advance(1.0/60);}
+        const auto hero=runtime.entity("hero");const auto* state=runtime.world().tryGet<game::Animator>(hero);
+        check(position(runtime)[0]>.55F&&game.physics().grounded(hero),"The source support must carry the idle capsule");
+        check(std::abs(game.physics().actualVelocity(hero)[0]-.3F)<.01F&&state->locomotionSpeed<.01F&&state->state=="idle",
+            "Locomotion must subtract support motion from resolved world displacement");
+        game.input().key(87,true);
+        for(unsigned i=0;i<60;++i){platform->translation[0]+=.005F;game.advance(1.0/60);}
+        check(state->state=="walk"&&std::abs(state->locomotionSpeed-2)<.01F,
+            "Moving support must preserve character-relative walking speed");
+    });
     test("pause releases held controls",[] {
         RuntimeLifecycle runtime;setup(runtime);GameRuntime game(runtime,application::systems(),application::explorationConfiguration());settle(game);
         game.input().key(87,true);game.input().key(340,true);game.advance(1.0/60);
