@@ -212,7 +212,9 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 中枢物流已读取 21 个原生样条描述。
 
 运行语义与实例接入见[物流样条证据](docs/acceptance/nr/logistics-evidence.md)。
-单发射器已验证实际运动，支持[刚体节点动画](docs/runtime/rigid-node-animation.md)。
+十发射器候选含 91 个槽位，已完成四秒实际采样。
+源材质、运动及待项见[物流联合验收](docs/acceptance/nr/logistics-multiclip.md)。
+离线管线见[路径资产转换](docs/assets/native-spline-conversion.md)。
 53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
 角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
 
@@ -223,6 +225,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 
 灯光支持[逐灯镜面倍率](docs/runtime/light-specular-response.md)，原生中庭源倍率已进入联合候选。
 原生局部算法已核验，完整角色着色仍待还原。
+场景角色支持显式材质色带、高光及外轮廓。
+当前绑定与限制见[角色场景验收](docs/acceptance/nr/character-scene-lighting.md)。
 透明表面支持[场景颜色折射](docs/runtime/scene-color-refraction.md)。
 中庭一个原生玻璃材质已进入[联合候选](docs/acceptance/nr/native-glass.md)。
 

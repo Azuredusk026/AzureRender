@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR1-L1 / NR7-L2",
+  "status": "candidate-visual-pending",
+  "source": "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+  "seed": 20261022,
+  "sampleRate": 30,
+  "blenderVersion": "5.1.2",
+  "sourceInputs": {
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-probe\\scene_manifest.json": "87432c33c6401208154533ad412350e55a03124120143651fcb6c58387c24cfd",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-production.json": "6214602a63e5821ab5815a312891ff64379cf16c17cc08c3ab5faf71c6377686",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-world-transforms.json": "de65c0e637476c92a4a046e6a13ad0b2a6f380c71a0f97f7dd84c53774ff4c2f",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-render-dependencies.json": "2c84779068f4fcc50524da83099a1eb1343a29d7221e667419d3108f97de030e",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\build_native_spline_clips.py": "efb6efa6ae560c7907b86c6a5d3a14008b5f15565e09301850e6d1e00957f03a",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\endfield_native\\spline_bake.py": "00c7a51a3b350c6afc513de03d61b87885dd1e4dda1265d06f249c70c7996e71",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\native_spline_materials.py": "da1e38e1f0570b71d22cbe8fa997d9dfb3cb06e4eff0d57a96ab5b4529780929",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\bake_material_channels.py": "53d6f70616841ac6d0b6eb2112923965bc5a36bc29cc24829e9b0cea2d524b41",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_materials.py": "4b252679ee22acf21dce79883c827e6b5dfac37e7997e5feec454b33db41ef92",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_effect_layers.py": "0e86ed1ee51cad5880f819e71c8272d21b3d655d304c19f9a7fce1513b88e18f",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\endfield_scene_material_contract.py": "67e2462aa52668c545793486bfea25c67c7896df0076c2c0904d30fd38d42b79",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_effects.py": "0a6c634d6da5db9539fee6ce4428c74439fcf2072f5ced75d687a0d1fcbc6622",
+    "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_build_map02_chunk_20260727.py": "aa0b84579c9c80c297556d801fd59831a3e9b36b450b946ce0626a330eac96f4"
+  },
+  "emitterCount": 10,
+  "slotCount": 91,
+  "emitters": [
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        -2497047741292843556
+      ],
+      "name": "down_b_s01",
+      "period": 46.42857142857143,
+      "slotCount": 13,
+      "opacityChannels": 13,
+      "outputSha256": "e918b44f2316c2908b54ebe44eeb562b99c3f2206dc5bfb5d0ec039d114637d9",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        -3509905701753098788
+      ],
+      "name": "up_b_s01",
+      "period": 35.714285714285715,
+      "slotCount": 6,
+      "opacityChannels": 6,
+      "outputSha256": "948a6fceb057c659d71e07836711adbbc326514671622d28ebda23dd9a460d8e",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        1336551774902447580
+      ],
+      "name": "down_b_s03",
+      "period": 63.63636363636363,
+      "slotCount": 7,
+      "opacityChannels": 7,
+      "outputSha256": "c1c1701b9b556aaa59c2c4c08e6bbdb81fe2de09097181d4c7b34bc64943ea4e",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        1528091306686508508
+      ],
+      "name": "up_b_s03",
+      "period": 42.30769230769231,
+      "slotCount": 11,
+      "opacityChannels": 11,
+      "outputSha256": "4ead4a27e56a21fde3da36c270b2406b3f5efd240bb883ea75eaa237f52793b4",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        2250553681777946076
+      ],
+      "name": "up_b_s02",
+      "period": 45.45454545454545,
+      "slotCount": 10,
+      "opacityChannels": 10,
+      "outputSha256": "0d00e0d2f2b557fc49b56d4ff730127c51a9721c92ae5a1fc4ee00f79ba05558",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        3997669629930597852
+      ],
+      "name": "down_b_s04",
+      "period": 52.77777777777778,
+      "slotCount": 19,
+      "opacityChannels": 19,
+      "outputSha256": "2f6693d57efde18554db27e0163ed7f0dd0f6329f7ddbffc9b9dc3f58ce9b9d0",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        4130565661650677212
+      ],
+      "name": "down_b_s02",
+      "period": 51.282051282051285,
+      "slotCount": 10,
+      "opacityChannels": 10,
+      "outputSha256": "8239ec664910ce84efc66c38d4befddbfc6bdb6005f4750bafa71ae02df653ae",
+      "meshCount": 1
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        4989925933958589916
+      ],
+      "name": "up_q_02",
+      "period": 50.0,
+      "slotCount": 4,
+      "opacityChannels": 4,
+      "outputSha256": "42cc020a6276bef460cbd0711a7f051839f48bf2256a477cb310382da88b5684",
+      "meshCount": 4
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        725874476306034140
+      ],
+      "name": "up_q_01",
+      "period": 50.0,
+      "slotCount": 3,
+      "opacityChannels": 3,
+      "outputSha256": "08e0b4849bd305e960f197ce88812cb5a8723e6414d8116c80f756152cb92028",
+      "meshCount": 4
+    },
+    {
+      "identity": [
+        "CAB-a7fefe6ada3624a2d940d5251e1d655c",
+        8728274918347664860
+      ],
+      "name": "up_b_s04",
+      "period": 41.66666666666667,
+      "slotCount": 8,
+      "opacityChannels": 8,
+      "outputSha256": "8bc138f327fbe841d2d257aae0c30ad288e7468f8c949cc06a299d5e44d5f86d",
+      "meshCount": 1
+    }
+  ],
+  "verification": {
+    "nativeToolSuite": {
+      "passed": 154,
+      "failed": 0
+    },
+    "materialBakeFixture": {
+      "passed": true,
+      "RGBAEmission": true,
+      "opacity": true,
+      "mixedAddressing": true,
+      "HDRGain": true,
+      "unsupportedStateRejection": true,
+      "freshReview": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\material-final-review\\result.json"
+    },
+    "actualPlayer": {
+      "exitCode": 0,
+      "width": 960,
+      "height": 540,
+      "frames": 60,
+      "fps": 15,
+      "durationSeconds": 4,
+      "validationEnabled": false,
+      "scriptErrors": 0,
+      "presentationErrors": 0,
+      "unloadedBuffers": 0,
+      "unloadedImages": 0
+    },
+    "rebuiltAssetsByteIdenticalToCaptured": true,
+    "rigidWorldInputs": {
+      "passed": 6,
+      "rejectedCases": [
+        "scale",
+        "shear",
+        "reflection",
+        "non-affine"
+      ],
+      "receipt": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\spline-rigid-verification.json"
+    }
+  },
+  "evidenceRoot": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71",
+  "limits": [
+    "candidate activation set and global phase",
+    "source Euler values interpreted as degrees",
+    "stable slot random samples; native resampling pending",
+    "source alpha curve mapped to generic node opacity; native consumer pending",
+    "static shader UV snapshot",
+    "VFX depth soft blend and complete unlit consumption pending",
+    "native scene visual equivalent pending"
+  ],
+  "nativeActivationVerified": false,
+  "nativeGlobalPhaseVerified": false,
+  "nativeRandomVerified": false,
+  "buildReceipt": "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\logistics-ten-emitter-rigid-validated\\receipt.json"
+}
