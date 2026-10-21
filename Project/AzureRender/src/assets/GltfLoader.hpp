@@ -56,6 +56,8 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureSceneRefraction = 1U << 10U,
     MaterialFeatureDualFaceSdf = 1U << 11U,
     MaterialFeatureShadowColorLut = 1U << 12U,
+    MaterialFeatureDiffuseRamp = 1U << 13U,
+    MaterialFeatureSilhouetteOutline = 1U << 14U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {

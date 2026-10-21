@@ -3522,7 +3522,14 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     commands.bindVertexBuffer(
         (snapshot != nullptr ? snapshot->buffers.vertices.at(0) : renderVertexBuffer(0, context.currentFrame).buffer), 0);
     commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(0) : renderIndexBuffer(0).buffer), 0);
-    if (settings.silhouetteOutlineEnabled) {
+    const auto hasMaterialOutline=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
+            return (material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0;
+        });
+    };
+    bool materialOutlines=hasMaterialOutline(asset_);
+    for(const auto& resource:additionalResources_)materialOutlines=materialOutlines||hasMaterialOutline(resource->asset);
+    if (settings.silhouetteOutlineEnabled || materialOutlines) {
         commands.bindPipeline(outlinePipeline_);
         MorphPushConstants outlineMorphConstants{};
         outlineMorphConstants.weights = settings.morphWeights;
@@ -3561,6 +3568,8 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
                         continue;
                     }
+                    if((settings.sceneLightingEnabled || !settings.silhouetteOutlineEnabled)
+                        &&!(outlineMaterial.materialFeatures&MaterialFeatureSilhouetteOutline))continue;
                     if (!bindlessTextures_) {
                         const std::size_t descriptorIndex =
                             context.currentFrame * totalMaterialCount()

@@ -45,7 +45,9 @@ def restore_shadow_luts(document,audit,sources,payloads,artifacts):
         payload=payloads[key]
         image=Image.open(BytesIO(payload))
         if image.height<2 or image.height>64 or image.width!=image.height**2:raise ValueError('Invalid shadow LUT strip dimensions')
-        profile=material.setdefault('extras',{}).setdefault('azureRenderMaterial',{'schemaVersion':2,'class':'generic'})
+        from endfield_native.character_profiles import material_class
+        profile=material.setdefault('extras',{}).setdefault('azureRenderMaterial',
+            {'schemaVersion':2,'class':material_class(material['name'])})
         if 'shadowColorLut' in profile:raise ValueError('Target shadow LUT is already configured')
         images=result.setdefault('images',[]);textures=result.setdefault('textures',[])
         images.append({'name':ref['name'],'uri':'data:image/png;base64,'+base64.b64encode(payload).decode('ascii')})

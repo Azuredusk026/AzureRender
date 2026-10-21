@@ -200,7 +200,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
+        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -1021,6 +1021,9 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.SceneRefractionGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.DualFaceSdfGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_dual_face_sdf_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.DualFaceSdfGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.SceneCharacterGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_character_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureEngine.SceneCharacterGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ThirdPersonPlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_third_person_player.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.IndependentAnimationGpu AzureEngine.ThirdPersonPlayer PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.PlayablePlayer COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_playable_player.py" --executable $<TARGET_FILE:AzurePlayer>)
@@ -2269,6 +2272,7 @@ if(BUILD_TESTING)
         "SceneExchange|test_scene_exchange.py"
         "MaterialSemantics|test_material_semantics.py"
         "NativeRenderEvidence|test_native_render*.py"
+        "NativeCharacter|test_native_character*.py"
         "EndfieldNative|test_endfield_native*.py")
         string(REPLACE "|" ";" _ev_parts "${_ev_case}")
         list(GET _ev_parts 0 _ev_name)

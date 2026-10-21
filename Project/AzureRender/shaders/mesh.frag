@@ -7,6 +7,7 @@
 #include "shadow_compare.glsl"
 #include "surface_response.glsl"
 #include "light_attenuation.glsl"
+#include "character_surface.glsl"
 
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
@@ -180,6 +181,14 @@ vec3 sampleToonRamp(float coordinate) {
         mix(minimumU, maximumU, clamp(coordinate, 0.0, 1.0)),
         (row + 0.5) / atlasSize.y);
     return texture(AZ_TEX_TOON_RAMP, uv).rgb;
+}
+
+vec3 materialDiffuseRamp(float coordinate) {
+    if(materialFeatureEnabled(8192U)>.5) {
+        float width=float(textureSize(AZ_TEX_STYLE_MASK,0).x);
+        return textureLod(AZ_TEX_STYLE_MASK,vec2((clamp(coordinate,0,1)*(width-1)+.5)/width,.5),0).rgb;
+    }
+    return sampleToonRamp(coordinate);
 }
 
 vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradient) {
@@ -387,13 +396,16 @@ void main() {
         textureCoordinate);
     float styleStrength = camera.renderingParameters.y;
     float diffuseBandThreshold = camera.renderingParameters.z;
+    bool sceneCharacter=camera.clusterLighting.x>.5
+        && sceneCharacterSurface(material.materialClass,material.materialProfileVersion);
+    if(sceneCharacter && diffuseBandThreshold<0.0)diffuseBandThreshold=.40;
     float bandEnabled = step(0.0, diffuseBandThreshold);
     float styleMask = smoothstep(
         0.08,
         0.62,
         texture(AZ_TEX_STYLE_MASK, textureCoordinate).r)
         * styleStrength;
-    if(materialFeatureEnabled(2048U)>0.5)styleMask=0.0;
+    if(materialFeatureEnabled(2048U)>0.5 || materialFeatureEnabled(8192U)>.5)styleMask=0.0;
     float normalVariance=max(1.0-normalSample.a,0.0);
     vec3 dx=dFdx(shadedNormal),dy=dFdy(shadedNormal);
     normalVariance+=min(dot(dx,dx)+dot(dy,dy),.25);
@@ -567,7 +579,7 @@ void main() {
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
-    vec3 classRamp = dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0).rgb:sampleToonRamp(rampCoordinate);
+    vec3 classRamp = dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0).rgb:materialDiffuseRamp(rampCoordinate);
     vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
@@ -608,6 +620,7 @@ void main() {
     uvec2 lightRange = clusterHeaderData.clusters[clusterIndex];
     vec3 clusteredDiffuse = vec3(0.0);
     vec3 clusteredSpecular = vec3(0.0);
+    vec3 sceneHairPrimary=vec3(0),sceneHairSecondary=vec3(0),sceneRim=vec3(0);
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
     for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
         uint lightIndex = clusterIndexData.indices[lightRange.x + lightOffset];
@@ -643,6 +656,10 @@ void main() {
             vec4 localDistanceSample;
             float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample);
             localDiffuseResponse=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0.0).rgb;
+        } else if(sceneCharacter) {
+            float coordinate=materialFeatureEnabled(8192U)>.5
+                ? dot(shadedNormal,pointDirection)*.5+.5 : pointDiffuse;
+            localDiffuseResponse=mix(vec3(pointDiffuse),materialDiffuseRamp(coordinate),toonWeight);
         }
         clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
@@ -653,6 +670,34 @@ void main() {
                 max(dot(shadedNormal, pointHalfDirection), 0.0), max(dot(viewDirection, pointHalfDirection), 0.0))
             : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
         clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
+        if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
+            vec3 highlightNormal=normalize(tangentToWorld*decodePackedHairNormal(hairData.ba));
+            vec2 lobes=characterHairLobes(shadedNormal,tangent,bitangent,highlightNormal,
+                viewDirection,pointDirection,tangentToWorld*material.matcapColor.xyz,
+                material.hairParameters.x,material.hairParameters.w);
+            vec2 bands=smoothstep(vec2(.5,.43)-max(fwidth(lobes),vec2(.12)),
+                vec2(.5,.43)+max(fwidth(lobes),vec2(.12)),lobes);
+            float visibility=smoothstep(-.20,.45,dot(geometricNormal,viewDirection));
+            vec2 rampExtent=vec2(textureSize(AZ_TEX_TOON_RAMP,0));
+            float hairRamp=dot(textureLod(AZ_TEX_TOON_RAMP,vec2(
+                clamp(lobes.x,.5/rampExtent.x,1-.5/rampExtent.x),
+                (material.hairParameters.z+.5)/rampExtent.y),0).rgb,vec3(.2126,.7152,.0722));
+            if(materialFeatureEnabled(512U)>.5) {
+                float width=float(textureSize(AZ_TEX_MATCAP,0).x);
+                hairRamp=textureLod(AZ_TEX_MATCAP,vec2((lobes.x*(width-1)+.5)/width,.5),0).r;
+            }
+            vec3 energy=radiance*pointDiffuse*material.hairParameters.y
+                *material.featureParameters.y*hairRamp;
+            sceneHairPrimary+=mix(baseColor.rgb,vec3(1,.68,.74),.18)
+                *bands.x*mix(.58,1.0,visibility)*.58*energy;
+            sceneHairSecondary+=mix(baseColor.rgb,vec3(.72,.88,1),.12)
+                *bands.y*mix(.35,.72,visibility)*.22*energy;
+        }
+        if(sceneCharacter && !(qaEffectMode==4 && qaEffectDisabled)) {
+            sceneRim+=radiance*pow(1.0-normalDotView,3.2)
+                *smoothstep(-.25,.65,dot(shadedNormal,pointDirection))
+                *material.styleParameters.w*.12;
+        }
     }
     directDiffuse += clusteredDiffuse * mix(1.0, 0.72, hairActive);
     float shadowRegion = 1.0 - smoothstep(0.38, 0.66, rampLuminance);
@@ -922,8 +967,19 @@ void main() {
         directDiffuse = clusteredDiffuse;
         directSpecular = clusteredSpecular;
         emissive = specularEmissive.rgb * material.emissiveStrength * materialFeatureEnabled(8U);
-        beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular + emissive;
         rimLighting=vec3(0);kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);
+        if(sceneCharacter) {
+            ambientDiffuse*=indirectChroma;
+            ambientSpecular*=material.styleParameters.z*dielectricSpecularWeight;
+            directSpecular*=material.styleParameters.z*dielectricSpecularWeight;
+            if(qaEffectMode==5 && qaEffectDisabled){ambientSpecular=vec3(0);directSpecular=vec3(0);}
+            kkSpecular=min(sceneHairPrimary,vec3(material.matcapColor.w));
+            secondaryKkSpecular=sceneHairSecondary;
+            rimLighting=sceneRim;
+        }
+        beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular
+            + emissive + kkSpecular + secondaryKkSpecular + rimLighting;
+        if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
     if(camera.irradianceDimensionsEnabled.w>.5){
         vec4 volume=evaluateIrradianceVolume(worldPosition,shadedNormal);
@@ -1051,6 +1107,7 @@ void main() {
             1.0,
             0.68,
             max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
+    if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
     outputNormal=vec4(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),0,0,1);

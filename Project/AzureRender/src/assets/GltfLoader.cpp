@@ -169,6 +169,8 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "scene-tint") return MaterialFeatureSceneTint;
     if (value == "hair-ramp") return MaterialFeatureHairRamp;
     if (value == "scene-refraction") return MaterialFeatureSceneRefraction;
+    if (value == "diffuse-ramp") return MaterialFeatureDiffuseRamp;
+    if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
     return 0;
 }
 
@@ -861,6 +863,7 @@ AssetMaterial loadMaterial(
     int styleMaskImage = -1;
     int matcapImage = -1;
     int hairDataImage = -1;
+    bool positiveHairNormalY=false;
     int faceSdfImage = -1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
@@ -939,6 +942,30 @@ AssetMaterial loadMaterial(
             result.hairParameters[3]=.1F;
         if(material->extras.IsObject() && material->extras.Has("azureRenderMaterial")){
             const auto& p=material->extras.Get("azureRenderMaterial");
+            const auto typedTexture=[&](const tinygltf::Value& owner,const char* field) {
+                const double index=owner.Has(field)&&owner.Get(field).IsNumber()?owner.Get(field).GetNumberAsDouble():-1;
+                if(!std::isfinite(index)||std::floor(index)!=index||index<0||index>=model.textures.size())
+                    throw std::runtime_error(std::string("Invalid character texture: ")+field+" for "+result.name);
+                const int image=model.textures[static_cast<std::size_t>(index)].source;
+                if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+                    throw std::runtime_error("Character texture has no image for "+result.name);
+                return image;
+            };
+            if(p.Has("diffuseRamp")) {
+                const auto& ramp=p.Get("diffuseRamp");
+                if(!ramp.IsObject()||!ramp.Has("schemaVersion")||!ramp.Get("schemaVersion").IsNumber()
+                    ||ramp.Get("schemaVersion").GetNumberAsDouble()!=1
+                    ||!(result.materialFeatures&MaterialFeatureDiffuseRamp)
+                    ||result.materialClass==AssetMaterialClass::Face||p.Has("faceSdf"))
+                    throw std::runtime_error("Invalid diffuseRamp profile for "+result.name);
+                for(const auto& field:ramp.Get<tinygltf::Value::Object>())
+                    if(field.first!="schemaVersion"&&field.first!="texture")throw std::runtime_error("Unknown diffuseRamp field");
+                styleMaskImage=typedTexture(ramp,"texture");
+                result.textureSettings[4].mipPolicy="none";
+                result.textureSettings[4].wrapU=result.textureSettings[4].wrapV="clamp";
+                result.textureSettings[4].anisotropy=1;
+            } else if(result.materialFeatures&MaterialFeatureDiffuseRamp)
+                throw std::runtime_error("diffuse-ramp requires a profile for "+result.name);
             if(p.Has("hair")){
                 const auto& h=p.Get("hair");
                 if(!h.IsObject() || !h.Has("power") || !h.Has("strength") || !h.Has("rampRow") || !h.Has("strandShift"))
@@ -956,6 +983,17 @@ AssetMaterial loadMaterial(
                 if(h.Has("upperLimit")){if(!h.Get("upperLimit").IsNumber())throw std::runtime_error("Hair upperLimit must be numeric");result.hairViewParameters[3]=static_cast<float>(h.Get("upperLimit").GetNumberAsDouble());}
                 for(float value:result.hairViewParameters)if(!std::isfinite(value)||std::abs(value)>16)throw std::runtime_error("Hair view profile is outside supported ranges");
                 if(result.hairViewParameters[3]<=0)throw std::runtime_error("Hair highlight limit must be positive");
+                if(h.Has("dataTexture")) {
+                    if(result.materialClass!=AssetMaterialClass::Hair||!(result.materialFeatures&MaterialFeatureHairAnisotropy))
+                        throw std::runtime_error("hair.dataTexture requires hair anisotropy");
+                    hairDataImage=typedTexture(h,"dataTexture");
+                    if(h.Has("dataNormalY")) {
+                        if(!h.Get("dataNormalY").IsString())throw std::runtime_error("hair.dataNormalY requires a direction");
+                        const auto direction=h.Get("dataNormalY").Get<std::string>();
+                        if(direction!="positive"&&direction!="negative")throw std::runtime_error("Invalid hair.dataNormalY direction");
+                        positiveHairNormalY=direction=="positive";
+                    }
+                } else if(h.Has("dataNormalY"))throw std::runtime_error("hair.dataNormalY requires dataTexture");
             }
         }
         if (
@@ -1293,6 +1331,9 @@ AssetMaterial loadMaterial(
             kNoFactor,
             result.styleMaskWidth,
             result.styleMaskHeight,false,authored,&result.authoredMipLevels[4]);
+        if((result.materialFeatures&MaterialFeatureDiffuseRamp)
+            &&(result.styleMaskWidth<2||result.styleMaskHeight!=1))
+            throw std::runtime_error("diffuseRamp requires a horizontal single-row image");
     } else {
         result.styleMaskWidth = 2;
         result.styleMaskHeight = 2;
@@ -1325,6 +1366,10 @@ AssetMaterial loadMaterial(
             kNoFactor,
             result.hairDataWidth,
             result.hairDataHeight,false,authored,&result.authoredMipLevels[6]);
+        if(positiveHairNormalY)for(std::size_t i=0;i<result.hairDataPixels.size();i+=4) {
+            result.hairDataPixels[i+1]=static_cast<std::uint8_t>(255-result.hairDataPixels[i+1]);
+            result.hairDataPixels[i+3]=static_cast<std::uint8_t>(255-result.hairDataPixels[i+3]);
+        }
     } else {
         result.hairDataWidth = 2;
         result.hairDataHeight = 2;

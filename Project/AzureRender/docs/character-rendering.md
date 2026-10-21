@@ -70,6 +70,11 @@ Profile 的 `features` 用来开启具体能力，比如 `stylized-shadow`、`ha
 衣料保留金属遮罩，扣件与纤维共享分类材质。
 金属类使用贴图底色作为法向反射率。
 
+画像版本 2 的角色表面支持场景逐灯照明。
+线性色带、头发数据及材质外轮廓使用显式字段。
+字段约束见[角色材质画像](runtime/character-material-profile.md)。
+真实资源的消费范围见[场景角色验收](acceptance/nr/character-scene-lighting.md)。
+
 普通表面、衣料、金属和地台使用 GGX 高光。
 可见度采用高度相关的 Smith 项。
 菲涅耳项由视线与半角方向计算。
