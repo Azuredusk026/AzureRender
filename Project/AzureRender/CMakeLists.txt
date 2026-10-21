@@ -2220,6 +2220,7 @@ if(BUILD_TESTING)
         "ValidationAssetExport|test_validation_asset_export.py"
         "SceneExchange|test_scene_exchange.py"
         "MaterialSemantics|test_material_semantics.py"
+        "NativeRenderEvidence|test_native_render*.py"
         "EndfieldNative|test_endfield_native*.py")
         string(REPLACE "|" ";" _ev_parts "${_ev_case}")
         list(GET _ev_parts 0 _ev_name)

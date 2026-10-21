@@ -117,6 +117,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 场景还原覆盖本机观测到的全部可见对象与效果。
 引擎缺失能力及验收见[可玩还原计划](docs/plans/2026-10-17-native-playable-restoration.md)。
 实景、公开资料与抓帧见[证据执行计划](docs/plans/2026-10-21-native-render-evidence-execution.md)。
+捕获与重放使用[RenderDoc 证据工具](docs/acceptance/nr/renderdoc-capture.md)。
+夹具已取得原生浮点输出，抓帧布局校验仍待修复。
 场景分项诊断与实景参考见[原生参考基准](docs/acceptance/nr/reference-baseline.md)。
 参考校验读取真实图像编码，并核验正式参考的像素尺寸。
 公开算法线索见[渲染资料核查](docs/research/2026-10-21-endfield-public-rendering.md)。
