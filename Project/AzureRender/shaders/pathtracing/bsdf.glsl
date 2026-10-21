@@ -6,7 +6,7 @@ float ggxD(float nh,float rough){float a=rough*rough,a2=a*a,d=nh*nh*(a2-1)+1;ret
 float smithG1(float cosine,float rough){float a=rough*rough;return 2*cosine/max(cosine+sqrt(a*a+(1-a*a)*cosine*cosine),1e-8);}
 float specularProbability(vec3 albedo,float metal){vec3 f0=mix(vec3(.04),albedo,metal);return clamp(max(max(f0.r,f0.g),f0.b),.1,.9);}
 vec3 baseF0(vec3 albedo,float metal){float f=(materialIor-1)/(materialIor+1);return mix(vec3(f*f),albedo,metal);}
-vec3 evaluateBsdf(vec3 n,vec3 v,vec3 l,vec3 albedo,float metal,float rough){
+vec3 evaluateLightBsdf(vec3 n,vec3 v,vec3 l,vec3 albedo,float metal,float rough,float specularScale){
  float nv=dot(n,v),nl=dot(n,l);if(nv<=0||abs(nl)<1e-7)return vec3(0);
  if(nl<0){if(materialTransmission<=0||metal>=1||abs(materialEta-1)<1e-5)return vec3(0);
   vec3 h=normalize(v+materialEta*l);if(dot(h,n)<0)h=-h;float vh=dot(v,h),lh=dot(l,h);if(vh*lh>=0)return vec3(0);
@@ -14,8 +14,9 @@ vec3 evaluateBsdf(vec3 n,vec3 v,vec3 l,vec3 albedo,float metal,float rough){
   return albedo*(1-metal)*materialTransmission*(1-f)*ggxD(max(dot(n,h),0),rough)*smithG1(nv,rough)*smithG1(abs(nl),rough)*abs(vh*lh)/max(nv*abs(nl)*denom*denom,1e-12);
  }
  vec3 h=normalize(v+l);float nh=max(dot(n,h),0),vh=max(dot(v,h),0);vec3 f=mix(vec3(dielectricFresnel(vh,materialEta)),fresnelSchlick(albedo,vh),metal);
- return (1-f)*(1-metal)*(1-materialTransmission)*albedo/PI+f*ggxD(nh,rough)*smithG1(nv,rough)*smithG1(nl,rough)/max(4*nv*nl,1e-8);
+ return (1-f)*(1-metal)*(1-materialTransmission)*albedo/PI+specularScale*f*ggxD(nh,rough)*smithG1(nv,rough)*smithG1(nl,rough)/max(4*nv*nl,1e-8);
 }
+vec3 evaluateBsdf(vec3 n,vec3 v,vec3 l,vec3 albedo,float metal,float rough){return evaluateLightBsdf(n,v,l,albedo,metal,rough,1);}
 float bsdfPdf(vec3 n,vec3 v,vec3 l,vec3 albedo,float metal,float rough){
  float nl=dot(n,l);if(dot(n,v)<=0||abs(nl)<1e-7)return 0;
  float spec=specularProbability(albedo,metal),trans=(1-spec)*materialTransmission*(1-metal),diff=1-spec-trans;

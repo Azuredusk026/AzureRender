@@ -22,6 +22,14 @@ def fixture():
 
 
 class EcsLightTests(unittest.TestCase):
+    def test_native_specular_scale_offset_and_validation(self):
+        common,light=fixture();light=bytearray(light)
+        struct.pack_into('<f',light,20,.195)
+        self.assertAlmostEqual(lighting_ecs.decode_buffers(common,light)['specular_intensity'],.195)
+        for value in (-1,float('nan'),float('inf')):
+            struct.pack_into('<f',light,20,value)
+            with self.assertRaises(ValueError):lighting_ecs.decode_buffers(common,light)
+
     def test_native_getter_offsets_and_matrix(self):
         common,light=fixture();value=lighting_ecs.decode_buffers(common,light)
         self.assertEqual((value['light_type'],value['shape']),(0,0))

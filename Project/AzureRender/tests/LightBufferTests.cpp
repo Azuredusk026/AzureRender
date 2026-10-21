@@ -7,6 +7,15 @@
 
 int main() { try {
     azurerender::LightBuffer buffer;
+    azurerender::RenderLight responseLight;
+    assert(responseLight.shape.specularScale==1.F);
+    responseLight.shape.specularScale=.195F;buffer.setLights({responseLight});
+    assert(buffer.gpuData()[0].boxParameters[2]==.195F);
+    for(float value:{-1.F,std::numeric_limits<float>::infinity(),std::numeric_limits<float>::quiet_NaN()}) {
+        responseLight.shape.specularScale=value;bool rejected=false;
+        try{buffer.setLights({responseLight});}catch(const std::invalid_argument&){rejected=true;}
+        assert(rejected);
+    }
     azurerender::LightInfluenceBox box;
     box.enabled=true;box.falloffThreshold=.5F;
     assert(box.weight({0,0,0})==1.F);

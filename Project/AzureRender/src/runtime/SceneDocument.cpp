@@ -77,6 +77,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
         output << "lightFalloff " << static_cast<int>(light.shape.falloff) << ' '
                << light.shape.falloffExponent << '\n';
         output << "lightInfluenceBox " << std::quoted(nlohmann::json(light.shape.influenceBox).dump()) << '\n';
+        output << "lightSpecularScale " << light.shape.specularScale << '\n';
     }
     output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
     output << "irradianceVolume " << std::quoted(nlohmann::json(document.irradianceVolume).dump()) << '\n';
@@ -241,6 +242,10 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                     if(!(input>>key>>std::quoted(payload))||key!="lightInfluenceBox")
                         throw std::runtime_error("Invalid .azscene light influence box");
                     light.shape.influenceBox=nlohmann::json::parse(payload).get<LightInfluenceBox>();
+                }
+                if(schemaVersion>=10) {
+                    if(!(input>>key>>light.shape.specularScale)||key!="lightSpecularScale")
+                        throw std::runtime_error("Invalid .azscene light specular scale");
                 }
                 light.shape.validate();
             }

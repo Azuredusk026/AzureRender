@@ -25,6 +25,10 @@ int main(){try{
  const auto shapeFingerprint=tracing::sceneFingerprint(scene,{});
  scene.lights[0].shape.falloff=LightFalloff::RangePower;
  require(tracing::sceneFingerprint(scene,{})!=shapeFingerprint,"Distance model invalidates tracing history");
+ const auto responseFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.specularScale=.195F;
+ require(tracing::sceneFingerprint(scene,{})!=responseFingerprint,"Light response invalidates tracing history");
+ require(tracing::buildGeometry(scene,meshes,{}).lights.back().boxParameters[2]==.195F,"Tracing receives light response");
  const auto falloffFingerprint=tracing::sceneFingerprint(scene,{});
  scene.lights[0].shape.falloffExponent=3.5F;
  require(tracing::sceneFingerprint(scene,{})!=falloffFingerprint,"Falloff exponent invalidates tracing history");

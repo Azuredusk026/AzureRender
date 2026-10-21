@@ -641,7 +641,7 @@ void main() {
             ? directSurfaceSpecular(f0, roughness, pointDiffuse, normalDotView,
                 max(dot(shadedNormal, pointHalfDirection), 0.0), max(dot(viewDirection, pointHalfDirection), 0.0))
             : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
-        clusteredSpecular += pointResponse * radiance;
+        clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
     }
     directDiffuse += clusteredDiffuse * mix(1.0, 0.72, hairActive);
     float shadowRegion = 1.0 - smoothstep(0.38, 0.66, rampLuminance);

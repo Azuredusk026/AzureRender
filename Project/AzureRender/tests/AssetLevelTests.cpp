@@ -118,13 +118,19 @@ int main() {
   auto directional=nlohmann::json{{"type","directional"},{"direction",{0,0,-1}}}.get<LightShape>();
   check(nlohmann::json(directional).at("type")=="directional");
   check(directional.angularWeight({1,0,0})==1.F);
-  auto boxed=directional;
+  auto boxed=directional;boxed.specularScale=.195F;
   boxed.influenceBox.enabled=true;boxed.influenceBox.worldToBox[0][3]=3;
   auto boxedDocument=level;boxedDocument["lights"][0]["shape"]=boxed;
   auto boxedLevel=Level::parse(boxedDocument,db);boxedLevel.save(root/"assets/boxed.azurelevel");
   const auto reopenedBox=Level::load(root/"assets/boxed.azurelevel",db).scene.lights[0].shape.influenceBox;
+  check(Level::load(root/"assets/boxed.azurelevel",db).scene.lights[0].shape.specularScale==.195F);
   check(reopenedBox.enabled&&reopenedBox.worldToBox[0][3]==3);
   check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
+  check(nlohmann::json::object().get<LightShape>().specularScale==1.F);
+  const auto responseShape=nlohmann::json{{"specularScale",.195F}}.get<LightShape>();
+  check(responseShape.specularScale==.195F);
+  bool rejectedResponse=false;try{(void)nlohmann::json{{"specularScale",-1}}.get<LightShape>();}catch(const std::exception&){rejectedResponse=true;}
+  check(rejectedResponse);
   for(const auto& invalidBox:{nlohmann::json{{"falloffThreshold",-1}},
           nlohmann::json{{"enabled",true},{"worldToBox",{{0,0,0,0},{0,0,0,0},{0,0,0,0}}}}}) {
     bool rejected=false;try{(void)invalidBox.get<LightInfluenceBox>();}catch(const std::exception&){rejected=true;}check(rejected);

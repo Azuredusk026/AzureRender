@@ -18,7 +18,8 @@ inline void to_json(nlohmann::json& value, const LightShape& shape) {
         {"direction", shape.direction}, {"innerCone", shape.innerCone}, {"outerCone", shape.outerCone},
         {"falloff",shape.falloff==LightFalloff::RangePower?"range-power":
             shape.falloff==LightFalloff::SmoothInverseSquare?"smooth-inverse-square":"legacy"},
-        {"falloffExponent",shape.falloffExponent},{"influenceBox",shape.influenceBox}};
+        {"falloffExponent",shape.falloffExponent},{"specularScale",shape.specularScale},
+        {"influenceBox",shape.influenceBox}};
 }
 inline void from_json(const nlohmann::json& value, LightShape& shape) {
     const auto type = value.value("type", std::string("point"));
@@ -33,6 +34,7 @@ inline void from_json(const nlohmann::json& value, LightShape& shape) {
     shape.falloff=falloff=="range-power"?LightFalloff::RangePower:
         falloff=="smooth-inverse-square"?LightFalloff::SmoothInverseSquare:LightFalloff::Legacy;
     shape.falloffExponent=value.value("falloffExponent",2.F);
+    shape.specularScale=value.value("specularScale",1.F);
     shape.influenceBox=value.value("influenceBox",LightInfluenceBox{});
     shape.validate();
 }

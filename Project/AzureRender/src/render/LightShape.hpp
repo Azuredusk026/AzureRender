@@ -18,10 +18,13 @@ struct LightShape {
     float outerCone = .785398163F;
     LightFalloff falloff = LightFalloff::Legacy;
     float falloffExponent = 2;
+    float specularScale = 1;
     LightInfluenceBox influenceBox;
 
     void validate() const {
         influenceBox.validate();
+        if (!std::isfinite(specularScale) || specularScale<0)
+            throw std::invalid_argument("Light specular scale must be finite and nonnegative");
         if (type != LightKind::Point && type != LightKind::Spot && type != LightKind::Directional)
             throw std::invalid_argument("Unknown light type");
         if (falloff != LightFalloff::Legacy && falloff != LightFalloff::SmoothInverseSquare

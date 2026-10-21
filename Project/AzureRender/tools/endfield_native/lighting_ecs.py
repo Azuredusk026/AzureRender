@@ -27,6 +27,7 @@ def decode_buffers(common, light):
         raise ValueError('Invalid ECS light affine matrix')
     result=dict(light_type=struct.unpack_from('<i',light,12)[0],
         shape=struct.unpack_from('<i',light,16)[0],color=values(common,0,'4f'),
+        specular_intensity=scalar(light,20),
         intensity=scalar(common,16),color_temperature=scalar(common,20),
         range=scalar(light,24),spot_angle=scalar(light,36),
         inner_spot_angle=scalar(light,40),linear_length=scalar(light,144),
@@ -40,8 +41,8 @@ def decode_buffers(common, light):
             ('is_sun_source',light,90),('shadow_only',light,91)):
         if raw[offset] not in (0,1):raise ValueError('Invalid ECS light boolean: '+key)
         result[key]=bool(raw[offset])
-    if result['intensity']<0 or result['range']<0:
-        raise ValueError('Negative ECS light intensity or range')
+    if result['intensity']<0 or result['range']<0 or result['specular_intensity']<0:
+        raise ValueError('Negative ECS light intensity, specular intensity or range')
     return result
 
 

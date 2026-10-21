@@ -63,7 +63,7 @@ public:
             value.coneType[2] = static_cast<float>(light.shape.falloff);
             value.coneType[3] = light.shape.falloffExponent;
             value.boxRows=light.shape.influenceBox.worldToBox;
-            value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,0,0};
+            value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,0};
             packed.push_back(value);
         }
         return packed;
