@@ -71,6 +71,38 @@ RG 用于表面，BA 用于独立高光法线。
 原生二维高光色带及专有眼睛通道具有独立实现范围。
 具体原生候选的绑定状态见[场景角色验收](../acceptance/nr/character-scene-lighting.md)。
 
+## 乘法合成
+
+画像版本 2 支持 `multiply-composite` 特征。
+`composite` 对象使用版本 1 及 `multiply` 模式。
+材质类别允许 `generic` 与 `overlay`。
+glTF 的 `alphaMode` 必须为 `BLEND`。
+
+```json
+{
+  "schemaVersion": 2,
+  "class": "overlay",
+  "features": ["overlay", "multiply-composite"],
+  "composite": {"schemaVersion": 1, "mode": "multiply"}
+}
+```
+
+线性颜色按 `Cdst * mix(1, tint, alpha)` 合成。
+`tint` 来自基础颜色纹理及其材质因子。
+`alpha` 同时消费纹理、材质因子与节点透明度。
+染色因子使用无光照颜色，场景光照作用于接收表面。
+
+该模式仅写主颜色附件，并保留目标透明度。
+法线附件和深度保持接收表面的值。
+覆盖层参与深度测试，阴影绘制跳过该模式。
+深度比较为 `LESS_OR_EQUAL`，支持同面滤片。
+透明实例及图元保持内容规定的提交顺序。
+
+特征表允许 `overlay` 与 `neutral-fallback` 配合使用。
+其他特征以及非法类别、版本和模式在加载时拒绝。
+配置对象与显式特征必须同时出现。
+原生模板、预深度和屏幕遮罩具有独立的验收范围。
+
 ## 轮廓与验证
 
 `silhouette-outline` 按材质开启背面壳外轮廓。

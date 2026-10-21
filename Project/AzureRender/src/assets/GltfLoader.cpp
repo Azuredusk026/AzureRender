@@ -173,6 +173,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "scene-refraction") return MaterialFeatureSceneRefraction;
     if (value == "diffuse-ramp") return MaterialFeatureDiffuseRamp;
     if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
+    if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
     return 0;
 }
 
@@ -804,6 +805,30 @@ std::array<float, 4> readMaterialVectorExtra(
     return result;
 }
 
+void loadMaterialComposite(const tinygltf::Material& material, const AssetMaterial& result) {
+    if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
+    if(!enabled&&!profile.Has("composite"))return;
+    constexpr std::uint32_t allowed=MaterialFeatureMultiplyComposite
+        |MaterialFeatureOverlay|MaterialFeatureNeutralFallback;
+    if(!enabled||!profile.Has("composite")
+        ||profile.Get("schemaVersion").GetNumberAsDouble()!=2
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Overlay)
+        ||result.alphaMode!=AssetAlphaMode::Blend||(result.materialFeatures&~allowed))
+        throw std::invalid_argument("multiply composite requires schema 2, generic or overlay class, BLEND and compatible features");
+    const auto& composite=profile.Get("composite");
+    if(!composite.IsObject()||!composite.Has("schemaVersion")
+        ||!composite.Get("schemaVersion").IsNumber()
+        ||composite.Get("schemaVersion").GetNumberAsDouble()!=1
+        ||!composite.Has("mode")||!composite.Get("mode").IsString()
+        ||composite.Get("mode").Get<std::string>()!="multiply")
+        throw std::invalid_argument("Invalid composite schemaVersion or mode");
+    for(const auto& field:composite.Get<tinygltf::Value::Object>())
+        if(field.first!="schemaVersion"&&field.first!="mode")
+            throw std::invalid_argument("Unknown composite field: "+field.first);
+}
+
 int loadSceneRefraction(const tinygltf::Material& material,
     const tinygltf::Model& model, AssetMaterial& result) {
     if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return -1;
@@ -1216,6 +1241,7 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
+        loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
     }

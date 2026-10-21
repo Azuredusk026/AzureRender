@@ -130,6 +130,76 @@ void testCharacterProfileTextures(const nlohmann::json& fixture, const std::file
     reject(invalid,"hair.dataNormalY", "Packed hair Y direction requires its source texture");
 }
 
+void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    auto& material=source["materials"][0];
+    material["alphaMode"]="BLEND";
+    material["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","overlay"},
+        {"features",{"overlay","multiply-composite"}},
+        {"composite",{{"schemaVersion",1},{"mode","multiply"}}}};
+    const auto load=[&](const Json& document) {
+        const auto path=directory/"multiply-composite.gltf";
+        std::ofstream(path)<<document.dump();
+        return loadGltfAsset(path.string());
+    };
+    const auto reject=[&](const Json& document) {
+        std::string failure;
+        try{(void)load(document);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("composite")!=std::string::npos,
+            "Invalid multiply composite must be rejected with its contract diagnostic");
+    };
+    const auto overlay=load(source).materials.at(0);
+    require(overlay.alphaMode==AssetAlphaMode::Blend
+        &&(overlay.materialFeatures&MaterialFeatureMultiplyComposite)!=0,
+        "Multiply composite must retain its explicit transparent feature");
+    auto generic=source;
+    generic["materials"][0]["extras"]["azureRenderMaterial"]["class"]="generic";
+    generic["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"multiply-composite"};
+    require(load(generic).materials.at(0).materialClass==AssetMaterialClass::Generic,
+        "Multiply filters must also support generic content");
+    for(const auto& version:Json::array({0,2,.5,"1"})) {
+        auto invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["schemaVersion"]=version;
+        reject(invalid);
+    }
+    for(const auto& version:Json::array({1,2.5})) {
+        auto invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=version;
+        reject(invalid);
+    }
+    for(const auto& mode:Json::array({"alpha-over",false,1})) {
+        auto invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["mode"]=mode;
+        reject(invalid);
+    }
+    for(const char* mode:{"OPAQUE","MASK"}) {
+        auto invalid=source;invalid["materials"][0]["alphaMode"]=mode;reject(invalid);
+    }
+    for(const char* category:{"hair","face","fabric"}) {
+        auto invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=category;
+        reject(invalid);
+    }
+    for(const char* feature:{"scene-tint","scene-refraction","brow-overlay","hair-anisotropy"}) {
+        auto invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back(feature);
+        reject(invalid);
+    }
+    auto invalid=source;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"].erase("composite");reject(invalid);
+    invalid=source;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"overlay"};reject(invalid);
+    invalid=source;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]["unknown"]=true;reject(invalid);
+    invalid=source;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"]=false;reject(invalid);
+    for(const char* field:{"schemaVersion","mode"}) {
+        invalid=source;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["composite"].erase(field);reject(invalid);
+    }
+}
+
 int main(int argc,char** argv) { try {
     require(argc==2,"Public material fixture path is required");
     nlohmann::json input;std::ifstream(argv[1])>>input;
@@ -159,6 +229,7 @@ int main(int argc,char** argv) { try {
     require(std::abs(m.hairParameters[2]-6)<.001F,"Hair ramp row must retain its semantic field");
     require(std::abs(m.hairParameters[3]-.07F)<.001F,"Strand shift must be independent from ramp row");
     testCharacterProfileTextures(input,directory);
+    testMultiplyComposite(input,directory);
     material["extras"]["azureRenderMaterial"]["hair"]["rampTexture"]=.5;
     material["extras"]["azureRenderMaterial"]["features"].push_back("hair-ramp");
     std::ofstream(path)<<input.dump();bool invalidRampRejected=false;

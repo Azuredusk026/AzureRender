@@ -85,6 +85,8 @@ struct VertexAttributeDesc {
     std::uint32_t offset = 0;
 };
 
+enum class PrimaryColorBlend { Alpha, Multiply };
+
 struct GraphicsPipelineDesc {
     VkShaderModule vertexShader = VK_NULL_HANDLE;
     VkShaderModule fragmentShader = VK_NULL_HANDLE;
@@ -104,6 +106,9 @@ struct GraphicsPipelineDesc {
 
     bool alphaBlend = false;
     bool premultipliedAlpha = false;
+    // Multiply consumes a precomputed RGB factor, preserves destination alpha
+    // and leaves every secondary attachment intact. Enabled by alphaBlend.
+    PrimaryColorBlend primaryColorBlend = PrimaryColorBlend::Alpha;
     // 0 for depth-only passes.
     std::uint32_t colorAttachmentCount = 0;
 

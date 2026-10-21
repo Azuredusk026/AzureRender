@@ -463,11 +463,23 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
 
     std::vector<VkPipelineColorBlendAttachmentState> colorBlendAttachments(
         desc.colorAttachmentCount);
-    for (auto& attachment : colorBlendAttachments) {
+    for (std::size_t index=0;index<colorBlendAttachments.size();++index) {
+        auto& attachment=colorBlendAttachments[index];
         attachment.colorWriteMask =
             VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
             | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
         if (desc.alphaBlend) {
+            if(desc.primaryColorBlend==PrimaryColorBlend::Multiply) {
+                if(index!=0) {attachment.colorWriteMask=0;continue;}
+                attachment.blendEnable=VK_TRUE;
+                attachment.srcColorBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstColorBlendFactor=VK_BLEND_FACTOR_SRC_COLOR;
+                attachment.colorBlendOp=VK_BLEND_OP_ADD;
+                attachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.alphaBlendOp=VK_BLEND_OP_ADD;
+                continue;
+            }
             attachment.blendEnable = VK_TRUE;
             attachment.srcColorBlendFactor = desc.premultipliedAlpha ? VK_BLEND_FACTOR_ONE : VK_BLEND_FACTOR_SRC_ALPHA;
             attachment.dstColorBlendFactor =

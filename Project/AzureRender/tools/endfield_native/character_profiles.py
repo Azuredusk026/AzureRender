@@ -16,6 +16,11 @@ import numpy as np
 from PIL import Image
 
 
+# Pinned source shader; pass 1 programs 10/11 use Zero/SrcColor RGB blending.
+# Matching a material name or a grayscale mask does not establish this contract.
+MULTIPLY_OVERLAY_SHADER = ('CAB-da44c449ed4aff035ab44ec6c74bdbfe', 1962491951764993823)
+
+
 def material_class(name):
     name = name.lower()
     if 'hairshadow' in name or 'eyeshadow' in name or 'eyewhiteshadow' in name:
@@ -69,6 +74,7 @@ def restore_profiles(document, audit, sources, payloads):
         features.discard('neutral-fallback')
         if kind == 'overlay':
             features = {'overlay'}
+            profile.pop('composite', None)
         else:
             features.add('stylized-shadow')
             if 'metallicRoughnessTexture' in material.get('pbrMetallicRoughness', {}):
@@ -132,6 +138,17 @@ def restore_profiles(document, audit, sources, payloads):
             row['bound'].append({'slot': '_BaseMap', 'target': 'baseColorTexture:tint-rgb/source-red-alpha',
                 'source': ref, 'sourcePngSha256': hashlib.sha256(payload).hexdigest(),
                 'outputPngSha256': hashlib.sha256(stream.getvalue()).hexdigest(), 'texture': index})
+            shader = source.get('shader', {}).get('resolved')
+            if shader and identity(shader) == MULTIPLY_OVERLAY_SHADER:
+                features.add('multiply-composite')
+                profile['composite'] = {'schemaVersion': 1, 'mode': 'multiply'}
+                row['compositeSource'] = {'shader': shader, 'pass': 1, 'programs': [10, 11],
+                    'colorBlend': {'source': 'Zero', 'destination': 'SrcColor'},
+                    'hostAlpha': 'preserve-destination'}
+                row['remainingNativeCompositeInputs'] = ['stencil', 'screen-gbuffer-suppression',
+                    'pre-depth', 'light-suppression', 'fog', 'vfx-grading', 'shadow-angle-offset']
+            else:
+                row['remainingNativeCompositeInputs'] = ['unverified-overlay-shader']
         profile['features'] = sorted(features)
         consumed = {entry['slot'] for entry in row['bound']}
         row['remainingNativeShaderInputs'] = [slot for slot in bindings if slot not in consumed

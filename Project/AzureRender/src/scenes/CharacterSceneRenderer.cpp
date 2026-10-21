@@ -2811,6 +2811,16 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        auto multiplyDesc=materialDesc;
+        multiplyDesc.primaryColorBlend=rhi::PrimaryColorBlend::Multiply;
+        multiplyDesc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
+        multiplyDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+        multiplyPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
+        multiplyDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
+        multiplyMirroredPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
+        multiplyDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        multiplyDesc.cullMode=VK_CULL_MODE_NONE;
+        multiplyDoubleSidedPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
         auto tintDesc=materialDesc;
         sceneTintPipeline_=rhi_->createGraphicsPipeline(tintDesc);
 
@@ -2892,6 +2902,9 @@ void CharacterSceneRenderer::destroyResources() {
              &blendPipeline_,
              &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
+             &multiplyPipeline_,
+             &multiplyMirroredPipeline_,
+             &multiplyDoubleSidedPipeline_,
              &sceneTintPipeline_,
              &outlinePipeline_,
              &outlineMirroredPipeline_,
@@ -3027,6 +3040,9 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &blendPipeline_,
              &blendMirroredPipeline_,
              &blendDoubleSidedPipeline_,
+             &multiplyPipeline_,
+             &multiplyMirroredPipeline_,
+             &multiplyDoubleSidedPipeline_,
              &sceneTintPipeline_,
              &outlinePipeline_,
              &outlineMirroredPipeline_,
@@ -3433,7 +3449,8 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
                 if (material.showcasePlatform > 0.5F
-                    || material.materialClass == AssetMaterialClass::Overlay) {
+                    || material.materialClass == AssetMaterialClass::Overlay
+                    || (material.materialFeatures&MaterialFeatureMultiplyComposite)) {
                     continue;
                 }
                 if (!bindlessTextures_) {
@@ -3910,7 +3927,10 @@ void CharacterSceneRenderer::drawPrimitive(
     const auto& gizmoScale = snapshot ? snapshot->gizmo.scale : gizmoScale_;
     if (active && selected == static_cast<std::int32_t>(&primitive - mesh.primitives.data()))
         mirrored ^= gizmoScale[0]*gizmoScale[1]*gizmoScale[2] < 0;
-    const VkPipeline pipeline = (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
+    const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
+    const VkPipeline pipeline = multiplyComposite
+        ? (material.doubleSided?multiplyDoubleSidedPipeline_:mirrored?multiplyMirroredPipeline_:multiplyPipeline_)
+        : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
         : (material.doubleSided ? opaqueDoubleSidedPipeline_ : mirrored ? opaqueMirroredPipeline_ : opaquePipeline_);
     commands.bindPipeline(pipeline);

@@ -288,6 +288,143 @@ void verifyJointBufferCapacities(const std::string& label,
         throw std::runtime_error("Capacity fixture did not release partial load resources");
 }
 
+void verifyMultiplyCompositeRecording(const std::filesystem::path& shaderDirectory,
+    const bool multiply) {
+    const auto require = [](bool condition, const char* message) {
+        if (!condition) throw std::runtime_error(message);
+    };
+    NullRhi rhi;
+    CharacterSceneRenderer renderer;
+    RenderSettings settings;
+    settings.faceSdfFeature = false;
+    settings.showcasePlatformFeature = false;
+    settings.characterPresentation.platformEnabled = false;
+    settings.characterPresentation.backgroundEnabled = false;
+    settings.silhouetteOutlineEnabled = false;
+    settings.innerOutlineEnabled = false;
+    RenderContext context{};
+    context.rhi = &rhi;
+    context.allocator = &rhi.allocator();
+    context.renderSettings = &settings;
+    context.shaderDirectory = shaderDirectory.string();
+    context.rampAtlasPath = (std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
+        / "assets_public/toon_ramp_atlas.ppm").string();
+    context.cullingEnabled = false;
+    context.sceneWorldCoordinates = true;
+    context.renderExtent = context.swapchainExtent = {128, 128};
+    context.sceneRenderPass = rhi.createRenderPass({});
+    const std::string mainPass = rhi.calls.back().detail;
+    context.shadowRenderPass = rhi.createRenderPass({});
+    const std::string shadowPass = rhi.calls.back().detail;
+
+    auto mesh = loadGltfAsset((std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
+        / "assets_public/test_model.gltf").string());
+    mesh.vertices.resize(3);
+    mesh.indices = {0, 1, 2};
+    mesh.primitives = {{0, 3, 0, {}}};
+    mesh.materials.resize(1);
+    mesh.hasSkin = false;
+    mesh.animations.clear();
+    mesh.morphRanges.clear();
+    mesh.morphTargetCount = 0;
+    auto& material = mesh.materials.front();
+    material.materialClass = AssetMaterialClass::Generic;
+    material.materialFeatures = MaterialFeatureNeutralFallback
+        | (multiply ? MaterialFeatureMultiplyComposite : 0U);
+    material.materialProfileVersion = 2;
+    material.materialProfileExplicit = true;
+    material.alphaMode = AssetAlphaMode::Blend;
+    material.showcasePlatform = 0;
+    const auto expectedFeatures = material.materialFeatures;
+    const std::string path = "composite-fixture/mesh.gltf";
+    const std::map<std::string, std::shared_ptr<const LoadedAsset>> preparedMeshes{
+        {path, std::make_shared<const LoadedAsset>(std::move(mesh))}};
+    context.preparedMeshes = &preparedMeshes;
+    context.scene.resources.push_back({"filter", path});
+    azurerender::scene::SceneNodeDesc node;
+    node.id = "filter";
+    node.resourceId = "filter";
+    context.scene.nodes.push_back(node);
+    renderer.onLoad(context);
+    const auto initialGraphics = countCalls(rhi.calls, "createGraphicsPipeline");
+    require(initialGraphics > 0, "Composite fixture must create real renderer pipelines");
+
+    struct Draws {
+        std::size_t shadows = 0;
+        std::vector<std::string> mainPipelines;
+    };
+    const auto capture = [&](bool selected) {
+        SceneFrameData frame{};
+        frame.renderSettings = &settings;
+        frame.cameraPosition[2] = 3;
+        frame.swapchainWidth = context.swapchainExtent.width;
+        frame.swapchainHeight = context.swapchainExtent.height;
+        frame.selectedPrimitiveIndex = selected ? 0 : -1;
+        renderer.updateFrame(frame);
+        NullCommandRecorder recorder;
+        context.commands = &recorder;
+        renderer.recordScene(context);
+        Draws result;
+        std::string pass, pipeline;
+        for (const auto& call : recorder.calls) {
+            if (call.name == "beginRenderPass") pass = call.detail.substr(0, call.detail.find(' '));
+            if (call.name == "endRenderPass") pass.clear();
+            if (call.name == "bindPipeline") pipeline = call.detail;
+            if (call.name != "drawIndexed") continue;
+            if (pass == shadowPass) ++result.shadows;
+            if (pass == mainPass) result.mainPipelines.push_back(pipeline);
+        }
+        const auto* state = renderer.sceneState();
+        require(state && state->asset, "Composite fixture must retain its loaded asset");
+        const auto& rendered = state->asset->materials.front();
+        require(rendered.materialClass == AssetMaterialClass::Generic
+            && rendered.alphaMode == AssetAlphaMode::Blend
+            && rendered.materialProfileVersion == 2
+            && rendered.materialFeatures == expectedFeatures,
+            "Selection and recording must preserve the composite material identity");
+        require(state->selectedPrimitiveIndex == frame.selectedPrimitiveIndex,
+            "Composite fixture must consume the production selection input");
+        require(result.mainPipelines.size() == 1, "A composite card must draw exactly once in the main pass");
+        require(multiply ? result.shadows == 0 : result.shadows > 0,
+            "Ordinary generic BLEND must cast shadows; multiply generic must not");
+        return result;
+    };
+    const auto ordinarySelection = capture(false);
+    const auto selected = capture(true);
+    require(selected.mainPipelines == ordinarySelection.mainPipelines,
+        "Selecting a composite card must retain its main pipeline");
+    require(selected.shadows == ordinarySelection.shadows,
+        "Selecting a composite card must retain its shadow eligibility");
+
+    context.renderExtent = context.swapchainExtent = {160, 96};
+    renderer.onSwapchainRecreate(context);
+    require(countCalls(rhi.calls, "destroyPipeline") == initialGraphics,
+        "Swapchain recreation must destroy every original graphics pipeline exactly once");
+    require(countCalls(rhi.calls, "createGraphicsPipeline") == initialGraphics * 2,
+        "Swapchain recreation must recreate the complete graphics pipeline set");
+    const auto recreated = capture(true);
+    require(recreated.mainPipelines != selected.mainPipelines,
+        "Rendering after recreation must bind a newly created pipeline");
+    renderer.onUnload(context);
+    require(rhi.allocator().statistics().liveBuffers == 0
+        && rhi.allocator().statistics().liveImages == 0
+        && rhi.allocator().statistics().liveBufferBytes == 0
+        && rhi.allocator().statistics().liveImageBytes == 0,
+        "Composite recreation and unload must release every allocation");
+    std::set<std::string> livePipelines;
+    for (const auto& call : rhi.calls) {
+        if (call.name == "createGraphicsPipeline" || call.name == "createComputePipeline")
+            require(livePipelines.insert(call.detail.substr(0, call.detail.find(' '))).second,
+                "Renderer pipeline handles must be unique while live");
+        if (call.name == "destroyPipeline")
+            require(livePipelines.erase(call.detail) == 1,
+                "Renderer pipelines must be destroyed exactly once");
+    }
+    require(livePipelines.empty(), "Unload must release every graphics and compute pipeline");
+    rhi.destroyRenderPass(context.shadowRenderPass);
+    rhi.destroyRenderPass(context.sceneRenderPass);
+}
+
 }  // namespace
 
 int main() try {
@@ -314,6 +451,10 @@ int main() try {
              "mesh_bindless.frag.spv",
              "character_snapshot.frag.spv",
              "character_snapshot_bindless.frag.spv",
+             "outline_mask.frag.spv",
+             "outline_mask_bindless.frag.spv",
+             "outline_mask.vert.spv",
+             "outline_mask_compute.vert.spv",
              "outline.vert.spv",
              "outline.frag.spv",
              "background.vert.spv",
@@ -333,6 +474,9 @@ int main() try {
         std::ofstream(shaderDirectory / name, std::ios::binary)
             .write(dummySpv.data(), 4);
     }
+
+    verifyMultiplyCompositeRecording(shaderDirectory, false);
+    verifyMultiplyCompositeRecording(shaderDirectory, true);
 
     // Aliases share a mesh key. Hidden nodes still reserve pose slices;
     // unknown/empty references add none, and an unused mesh keeps one slice.

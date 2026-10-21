@@ -324,6 +324,9 @@ private:
     VkPipeline blendPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline blendDoubleSidedPipeline_ = VK_NULL_HANDLE;
+    VkPipeline multiplyPipeline_ = VK_NULL_HANDLE;
+    VkPipeline multiplyMirroredPipeline_ = VK_NULL_HANDLE;
+    VkPipeline multiplyDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline sceneTintPipeline_ = VK_NULL_HANDLE;
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;

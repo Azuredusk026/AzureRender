@@ -90,6 +90,31 @@ class NativeCharacterProfileTests(unittest.TestCase):
         result, _ = subject.restore_profiles(doc, audit, raw, payloads)
         self.assertNotIn('silhouette-outline', result['materials'][0]['extras']['azureRenderMaterial']['features'])
 
+    def test_pinned_overlay_shader_enables_typed_multiply_and_records_native_gaps(self):
+        doc, audit, raw, payloads = self.fixture('M_hairshadow_fixture')
+        row = audit['materials'][0]
+        row['floats'] = [{'name': '_UseGrayAsAlpha', 'value': 1}]
+        row['colors'] = [{'name': '_BaseColor', 'rgba': [.25, .5, 1, .5]}]
+        row['textures'] = [dict(row['textures'][0], slot='_BaseMap')]
+        row['shader'] = {'resolved': {'source': 'CAB-da44c449ed4aff035ab44ec6c74bdbfe',
+            'path_id': 1962491951764993823, 'type': 'Shader', 'name': ''}}
+        payloads[('texture-cab', 2)] = png((128, 255, 255, 255))
+        result, report = subject.restore_profiles(doc, audit, raw, payloads)
+        profile = result['materials'][0]['extras']['azureRenderMaterial']
+        self.assertEqual(profile['composite'], {'schemaVersion': 1, 'mode': 'multiply'})
+        self.assertEqual(profile['features'], ['multiply-composite', 'overlay'])
+        self.assertEqual(report['materials'][0]['compositeSource']['colorBlend'],
+            {'source': 'Zero', 'destination': 'SrcColor'})
+        self.assertIn('stencil', report['materials'][0]['remainingNativeCompositeInputs'])
+        self.assertFalse(report['nativeVisualEquivalenceVerified'])
+        for key in ('nodes', 'skins', 'animations', 'meshes'):
+            self.assertEqual(result[key], doc[key])
+        row['shader']['resolved']['path_id'] += 1
+        other, other_report = subject.restore_profiles(result, audit, raw, payloads)
+        self.assertNotIn('composite', other['materials'][0]['extras']['azureRenderMaterial'])
+        self.assertNotIn('multiply-composite', other['materials'][0]['extras']['azureRenderMaterial']['features'])
+        self.assertIn('unverified-overlay-shader', other_report['materials'][0]['remainingNativeCompositeInputs'])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "stage": "NR6-C3",
+  "publicCompositeVerified": true,
+  "nativeVisualEquivalenceVerified": false,
+  "run": "build/runs/20261022-051129-character-logistics-restoration-0f2e71",
+  "contract": {
+    "profileVersion": 2,
+    "feature": "multiply-composite",
+    "compositeVersion": 1,
+    "mode": "multiply",
+    "materialClasses": [
+      "generic",
+      "overlay"
+    ],
+    "alphaMode": "BLEND",
+    "linearFormula": "destination * mix(1, tint, effectiveAlpha)",
+    "effectiveAlpha": "texture * materialFactor * nodeOpacity",
+    "depthCompare": "LESS_OR_EQUAL",
+    "depthWrite": false,
+    "secondaryAttachmentWrites": false,
+    "castsShadow": false,
+    "destinationAlpha": "preserve"
+  },
+  "sourceFingerprints": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "ec29aecaac5cbfe8d773d98dc92fa765ab2e7b255a7340d9d0e466fe66594215"
+    },
+    {
+      "path": "src/assets/GltfLoader.cpp",
+      "sha256": "2e4ad37f8599c29f0cb319fcaf185d56716c0f2b83b223b0ee26cb2526398002"
+    },
+    {
+      "path": "src/assets/GltfLoader.hpp",
+      "sha256": "ca85dfaa272939b3923d50722232fa7ca9258b3af220d61a06abbced95e0b40a"
+    },
+    {
+      "path": "src/rhi/Rhi.hpp",
+      "sha256": "e24f7497342dfdbb5130d653ddf24b9322e665af01b398b81282b946a4678cb1"
+    },
+    {
+      "path": "src/rhi/VulkanRhi.cpp",
+      "sha256": "79510392a343853b853e5f0cede517cf877e50b811e37099d49ebcefbf09e12e"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "sha256": "9c09df4ae5875f2547a74659fd3770908ec00dd8d4416861264aec159da7b3d4"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.hpp",
+      "sha256": "e355214b4230ed3113433c26b07bae43f47f0545603eae415349590a83d62436"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "sha256": "dc21e196ee85ed2e2a4038776ab97c235bd972758714c83036e932b64cdc91b5"
+    },
+    {
+      "path": "tests/CharacterRepairTests.cpp",
+      "sha256": "33b09dbf3b217513be8039644f42f9ed49af87543397a16846bc85d09a58eb5d"
+    },
+    {
+      "path": "tests/NullRhiPassTests.cpp",
+      "sha256": "a852b65381fcb10d24947937f3451f3b77109d1f6e75035d4668ef4dd85d99d4"
+    },
+    {
+      "path": "tools/endfield_native/character_profiles.py",
+      "sha256": "de1a4dc84c7771a29e3ff5af8b2cd2267a1c9dbb4566be1d138a940012d6f98e"
+    },
+    {
+      "path": "tools/test_native_character_profiles.py",
+      "sha256": "896610887169e21452967ed2c18cb88531d4e3eed7e6f8296ce72d66ae403d03"
+    },
+    {
+      "path": "tools/test_material_composite_gpu.py",
+      "sha256": "eab2fa692b82e83ee987b144fec12def85eff482a47b40ca2c88e0d48329de26"
+    }
+  ],
+  "sourceShader": {
+    "source": "CAB-da44c449ed4aff035ab44ec6c74bdbfe",
+    "pathId": 1962491951764993823,
+    "pass": 1,
+    "pixelPrograms": [
+      10,
+      11
+    ],
+    "colorBlend": [
+      "Zero",
+      "SrcColor"
+    ],
+    "nativeAlphaBlend": [
+      "One",
+      "One"
+    ],
+    "stencilReadMask": 20,
+    "state": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/native-shaders/shadow/overlay-state.json",
+      "sha256": "a0c9445a7193f66069b602b939f0b40dda52a413c643ff07a2e26598de08ee16"
+    },
+    "bytecodeManifest": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/native-shaders/shadow/bytecode/overlay-selected-manifest.json",
+      "sha256": "7ca6cdc6e00f6d3dad15bc17cda7d4523130b4ab1c42257f6c695d685a947de4"
+    }
+  },
+  "asset": {
+    "inputSha256": "683ce9ae3249942b4dc7049b06c74808b06021e4f9f972ae83668c71830d8015",
+    "outputSha256": "9efb58b36b4c0df32a7e13451b6e199d0c089b8305561dbd3cc2c2468008ba5c",
+    "profileReceipt": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/hero-profile-composite.json",
+      "sha256": "75eafd51bbe9774d3bb2e073b69db945cf5cf6865806fb5336c25b9d33db0f42"
+    },
+    "generatorSha256": "de1a4dc84c7771a29e3ff5af8b2cd2267a1c9dbb4566be1d138a940012d6f98e",
+    "animations": 9,
+    "channels": 8451,
+    "animationJsonPreserved": true,
+    "binaryTailPreserved": true,
+    "multiplyMaterials": [
+      "M_eyewhiteshadow_common_01",
+      "M_hairshadow_common_04"
+    ],
+    "jointInstall": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/joint-character-install.json",
+      "sha256": "6ca755b3f7c2803c9e16cf14db547b2ebd9003d161e970c50df54f2978368c8f"
+    }
+  },
+  "red": {
+    "loader": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/multiply-loader-red.log",
+      "sha256": "0807fb5d090d101c48656d0afb8f5c26cfd3628ff33f4f6ecec74b577556d4d5"
+    },
+    "rendererRecording": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/multiply-recording-red.log",
+      "sha256": "e6168d427c0ae3114d42df79c2b5dce8bb7feb834039dcf0466940afcb1c7f14"
+    },
+    "alphaFormula": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/material-composite-red/summary.json",
+      "sha256": "b20589bb05ce050293c6a9fafe013eb17261476401d4b4bffab205107b6d3db7"
+    },
+    "alphaFormulaMaximumError": 0.31732029250213434
+  },
+  "cpu": {
+    "release": {
+      "passedGroups": 4,
+      "failedGroups": 0,
+      "groups": [
+        "AzureRender.CharacterRepair",
+        "AzureRender.NullRhiPass",
+        "AzureTools.NativeCharacter",
+        "AzureTools.EndfieldNative"
+      ],
+      "log": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/multiply-cpu-release-final.log",
+        "sha256": "7a6a52678d0c7ab0507c68a1afabb6a8b742bc2a79179938dc78f1e1e05f9540"
+      }
+    },
+    "debug": {
+      "passedGroups": 4,
+      "failedGroups": 0,
+      "groups": [
+        "AzureRender.CharacterRepair",
+        "AzureRender.NullRhiPass",
+        "AzureTools.NativeCharacter",
+        "AzureTools.EndfieldNative"
+      ],
+      "log": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/multiply-cpu-debug-final.log",
+        "sha256": "27fcd611f5bb877cfdae85c46435a4c9d9d3bea6d627cc796798f327789882e9"
+      }
+    }
+  },
+  "gpu": {
+    "release": {
+      "summary": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/material-composite-green-release/summary.json",
+        "sha256": "0ad9e85a440fade1f2dcbcd24dd2049e0b9b698cd9a6684cfd97335dc376c3a3"
+      },
+      "captures": 23,
+      "playerSha256": "4b92862c5d72210757ad7b783940125f86582b917d994fc4aee5135edd6a69f6",
+      "sourceSnapshot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/c3-candidate-src",
+      "validationEnabled": false
+    },
+    "debug": {
+      "summary": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/material-composite-green-debug/summary.json",
+        "sha256": "c91e8e93d7a4a3a64cebd6c1b1803acbb78b9fc3d6a18111ac8390a7d9d67d01"
+      },
+      "captures": 23,
+      "playerSha256": "c96e79c4873e61b9d997f643903ec7aacdf4423432b8ba3b9bb83b0ebfd50f11",
+      "sourceFingerprints": "sourceFingerprints",
+      "validationEnabled": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "metrics": {
+      "receiverLinearMaximumError": 0.002403126005967371,
+      "zeroLinearMaximumError": 0.0,
+      "halfLinearMaximumError": 0.001742815520643537,
+      "fullLinearMaximumError": 0.000510854358105467,
+      "node-zeroLinearMaximumError": 0.0,
+      "node-halfLinearMaximumError": 0.0021725604620012884,
+      "combined-alphaLinearMaximumError": 0.0014729354154295327,
+      "coplanarLinearMaximumError": 0.000510854358105467,
+      "mirrorLinearMaximumError": 0.000510854358105467,
+      "double-backLinearMaximumError": 0.000510854358105467,
+      "alphaOverLinearMaximumError": 0.003500246282994224,
+      "depth-hiddenMaximumDifference": 0,
+      "culled-backMaximumDifference": 0,
+      "fallbackMaximumDifference": 0,
+      "beautyDirectLightResponse": 0.37770078811025826,
+      "beautyReceiverLinearRange": [
+        0.12743768043564743,
+        0.4620769996544071
+      ],
+      "beautyLinearMaximumError": 0.002009086815126876,
+      "normalsOpaqueControlResponse": 51,
+      "normalBaselineLinearMaximumError": 0.0030670049391295917,
+      "normalsMaximumDifference": 0,
+      "depth-attachmentOpaqueControlResponse": 25,
+      "depthBaselineLinearMaximumError": 0.0014868184970975307,
+      "depth-attachmentMaximumDifference": 0
+    },
+    "crossConfigurationMaximumPixelDifference": 0
+  },
+  "finalExecutables": {
+    "release": {
+      "path": "build/ninja-msvc-release/AzurePlayer.exe",
+      "sha256": "013d88ba8bbe0a6ba0af8b3cdbeb289cdb286ee24082ad76e216ee63e9f08b96"
+    },
+    "debug": {
+      "path": "build/ninja-msvc-debug/AzurePlayer.exe",
+      "sha256": "c96e79c4873e61b9d997f643903ec7aacdf4423432b8ba3b9bb83b0ebfd50f11"
+    }
+  },
+  "scope": {
+    "selection": "Production renderer CPU selection, shadow eligibility, pipeline identity and source coverage ordering; pixel selection remains unverified.",
+    "recreation": "Production renderer CPU swapchain recreation, unique pipeline destruction and zero live allocations.",
+    "limitations": [
+      "PNG RGB checks do not read destination alpha or raw normal RGBA.",
+      "Selection, shadow casting, mixed transparent ordering and resize are not GPU-verified by this script.",
+      "Beauty enables GI and a reflection probe together; their separate contributions are not isolated."
+    ]
+  },
+  "remainingNativeInputs": [
+    "stencil",
+    "screen-gbuffer-suppression",
+    "pre-depth",
+    "light-suppression",
+    "fog",
+    "vfx-grading",
+    "shadow-angle-offset"
+  ],
+  "reusedRegression": {
+    "receipt": "docs/acceptance/nr/evidence/2026-10-22/node-opacity.json",
+    "receiptSha256": "9f8516402af65512965f9c44b093715eb78b19b6f32c4b8ba3415e1b10360b4a",
+    "configuration": "Debug",
+    "tests": [
+      "AzureEngine.IndependentAnimationGpu",
+      "AzureEngine.SceneRefractionGpu",
+      "AzureEngine.SceneCharacterGpu"
+    ],
+    "passed": 3,
+    "failed": 0,
+    "log": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/opacity-audit/gizmo-debug-regression.log",
+    "scope": "Current workspace C3 defaults are disabled in these existing animation, scene refraction and scene character fixtures."
+  }
+}

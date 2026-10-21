@@ -326,8 +326,9 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 void main() {
     if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
-    bool overlayMaterial = material.materialClass == 7U
-        && materialFeatureEnabled(16U) > 0.5;
+    bool multiplyComposite = materialFeatureEnabled(32768U) > 0.5;
+    bool overlayMaterial = (material.materialClass == 7U
+        && materialFeatureEnabled(16U) > 0.5) || multiplyComposite;
     bool browOverlay = overlayMaterial
         && materialFeatureEnabled(64U) > 0.5;
     if (browOverlay) {
@@ -1035,6 +1036,7 @@ void main() {
             background,outputAlpha,material.hairParameters.x)+emissive;
     }
 #endif
+    if(multiplyComposite)beautyColor=baseColor.rgb;
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {
         qaColor = baseColor.rgb;
@@ -1098,12 +1100,17 @@ void main() {
         qaColor=hsvToRgb(hsv)*material.styleParameters.rgb;
     }
 #endif
+    float compositeCoverage=overlayDisabled?0.0:clamp(outputAlpha*material.nodeOpacity,0.0,1.0);
     outputColor = vec4(qaColor, outputAlpha);
     if (material.materialPadding == AZURE_SELECTED_PADDING) {
         outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
         outputColor.a = 1.0;
     }
     if (material.alphaMode == 2) outputColor.a *= material.nodeOpacity;
+    if(multiplyComposite) {
+        outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
+        outputColor.a=0.0;
+    }
     float innerOutlineParticipation =
         (1.0 - platformMask)
         * (overlayMaterial ? 0.0 : 1.0)
