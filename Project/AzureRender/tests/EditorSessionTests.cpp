@@ -1,6 +1,7 @@
 #include "editor/EditorSession.hpp"
 #include "ecs/Components.hpp"
 #include "render/ColorGradingLut.hpp"
+#include "EditorRenderResourceStateChecks.hpp"
 
 #include <cassert>
 #include <chrono>
@@ -22,6 +23,7 @@ std::filesystem::path uniquePath(const std::string& suffix) {
 }  // namespace
 
 int main() {
+    checkEditorRenderResourceState();
     {
         const auto root=uniquePath("-relative-grade");std::filesystem::create_directory(root);
         const auto path=root/"scene.azscene",lut=root/"grade.azlut";

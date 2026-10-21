@@ -484,6 +484,12 @@ void AzureRenderApp::createSceneRenderer() {
     sceneRenderer_ = registry.create(rendererId);
     azurerender::validateSceneRendererCapabilities(
         sceneRenderer_->capabilities());
+#if AZURE_WITH_EDITOR
+    if (runOptions_.editorSession) {
+        const auto loadedScene = runOptions_.editorSession->viewScene();
+        editorRenderResources_.load(loadedScene, [&] { sceneRenderer_->onLoad(context); });
+    } else
+#endif
     sceneRenderer_->onLoad(context);
     azurerender::RuntimeDiagnostics::instance().print(
         "render",

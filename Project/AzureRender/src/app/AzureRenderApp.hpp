@@ -32,6 +32,7 @@
 #include "devtools/ShaderHotReloader.hpp"
 #include "render/RenderViewService.hpp"
 #include "editor/preview/AssetThumbnailService.hpp"
+#include "editor/EditorRenderResourceState.hpp"
 #endif
 
 #include <GLFW/glfw3.h>
@@ -225,7 +226,10 @@ private:
 #if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::EditorAutomation> editorAutomation_;
 #endif
-    std::string gameUiPath_,editorResourceSignature_;
+    std::string gameUiPath_;
+#if AZURE_WITH_EDITOR
+    azurerender::EditorRenderResourceState editorRenderResources_;
+#endif
     std::uint64_t gameplayFrame_=0,uiSerial_=0,uiDrawCalls_=0,animationFrames_=0,audioStarts_=0;
     std::uint64_t editorPreviewFrames_=0;
     std::vector<std::string> presentationErrors_;
