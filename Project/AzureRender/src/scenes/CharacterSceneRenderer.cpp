@@ -41,6 +41,15 @@ namespace {
 
 static_assert(sizeof(AssetVertex) == 27 * sizeof(std::uint32_t));
 
+std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
+    std::uint64_t bytes=0;
+    for(const auto& m:asset.materials)
+        for(const auto* pixels:{&m.baseColorPixels,&m.normalPixels,&m.metallicRoughnessPixels,
+                &m.specularEmissivePixels,&m.styleMaskPixels,&m.matcapPixels,&m.hairDataPixels,
+                &m.faceSdf.pixels,&m.shadowColorLutPixels})bytes+=pixels->size();
+    return bytes;
+}
+
 Vector3 estimateFootPivot(const LoadedAsset& asset) {
     const float height = asset.boundsMax[1] - asset.boundsMin[1];
     const float footBand = asset.boundsMin[1] + height * 0.12F;
@@ -233,6 +242,8 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
 }
 
 void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
+    const auto prepareStart=std::chrono::steady_clock::now();
+    loadTimings_={};decodedMaterialPixelBytes_=0;
     shadowCascadeResolution_=context.shadowMapSize/2;
     allocator_ = context.allocator;
     if (allocator_ == nullptr) {
@@ -362,14 +373,24 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     const scene::ResourceLayout layout(scene_);
     applyMaterialBindings(asset_,layout.materials.at(0));
     jointBounds_.clear();jointBounds_.push_back(JointBounds::build(asset_));
-    loadJobs_.push_back([this]{createVertexBuffer();});
-    const auto materials=[this](const LoadedAsset& mesh,std::vector<GpuMaterial>& gpu){
+    const auto enqueue=[this](std::string label,double& elapsed,std::function<void()> action,bool alwaysReport=false) {
+        loadJobs_.push_back([label=std::move(label),&elapsed,action=std::move(action),alwaysReport] {
+            const auto start=std::chrono::steady_clock::now();action();
+            const auto ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+            elapsed+=ms;
+            if(alwaysReport||ms>=1000)RuntimeDiagnostics::instance().info("render","Scene load "+label+": "+std::to_string(ms)+" ms");
+        });
+    };
+    enqueue("mesh 0",loadTimings_.meshUploadMs,[this]{createVertexBuffer();});
+    const auto materials=[this,&enqueue](LoadedAsset& mesh,std::vector<GpuMaterial>& gpu,std::size_t key){
         gpu.resize(mesh.materials.size());
         for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)
-            loadJobs_.push_back([this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
+            enqueue("material resource="+std::to_string(key)+" material="+std::to_string(index)+" slot="+std::to_string(slot),
+                loadTimings_.materialUploadMs,[this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
     };
-    materials(asset_,gpuMaterials_);
-    loadJobs_.push_back([this]{createTexture(false);});
+    materials(asset_,gpuMaterials_,0);
+    decodedMaterialPixelBytes_=materialSourcePixelBytes(asset_);
+    enqueue("shared textures",loadTimings_.sharedTexturesMs,[this]{createTexture(false);},true);
     std::uint32_t textureBase=kSharedTextureSlots+kMaterialTextureSlots*static_cast<std::uint32_t>(asset_.materials.size());
     std::size_t materialBase=asset_.materials.size();
     for(std::size_t key=1;key<layout.paths.size();++key){
@@ -380,8 +401,16 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         resource->textureBase=textureBase;resource->globalMaterialBase=materialBase;
         textureBase+=kMaterialTextureSlots*static_cast<std::uint32_t>(resource->asset.materials.size());materialBase+=resource->asset.materials.size();
         auto* item=resource.get();jointBounds_.push_back(JointBounds::build(item->asset));
-        loadJobs_.push_back([this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer);});
-        materials(item->asset,item->gpuMaterials);additionalResources_.push_back(std::move(resource));
+        decodedMaterialPixelBytes_+=materialSourcePixelBytes(item->asset);
+        enqueue("mesh "+std::to_string(key),loadTimings_.meshUploadMs,[this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer);});
+        materials(item->asset,item->gpuMaterials,key);additionalResources_.push_back(std::move(resource));
+        if(key%16==0||key+1==layout.paths.size())loadJobs_.push_back([this,key] {
+            const auto& stats=materialTextureCache_->statistics();
+            RuntimeDiagnostics::instance().info("render","Scene material progress: resource="+std::to_string(key)
+                +", elapsedMs="+std::to_string(loadTimings_.materialUploadMs)+", hashMs="+std::to_string(stats.hashMs)
+                +", mipMs="+std::to_string(stats.mipMs)+", uploadMs="+std::to_string(stats.uploadMs)
+                +", transferredBytes="+std::to_string(stats.transferredPixelBytes)+", discardedBytes="+std::to_string(stats.discardedPixelBytes));
+        });
     }
     // The full material inventory must fit an ordinary descriptor layout.
     // Combined image samplers consume both sampler and sampled-image limits;
@@ -406,10 +435,13 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + ", requested slots=" + std::to_string(indexedSlots)
             + ", stage sampler limit="
             + std::to_string(limits.maxPerStageDescriptorSamplers));
-    loadJobs_.push_back([this]{createUniformBuffers();createJointBuffers();});
-    loadJobs_.push_back([this]{createComputeSkinningResources();createOitIndexBuffers();});
-    loadJobs_.push_back([this,context]{createOverlayDepth(context);for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();});
-    loadJobs_.push_back([this,context]{createGraphicsPipeline(context);buildSceneState();});
+    enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();},true);
+    enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
+    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
+    enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);buildSceneState();},true);
+    loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
+    RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
+        +" ms, materialPixelBytes="+std::to_string(decodedMaterialPixelBytes_));
 }
 
 void CharacterSceneRenderer::onLoad(const RenderContext& context){
@@ -1264,10 +1296,22 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"jointCapacity\": " << jointCapacity_ << ",\n"
          << "  \"vertexCapacity\": " << vertexCapacity_ << ",\n";
     const auto textureStats=materialTextureCache_?materialTextureCache_->statistics():SampledTextureCacheStatistics{};
+    auto sourcePixelBytes=materialSourcePixelBytes(asset_);
+    for(const auto& resource:additionalResources_)sourcePixelBytes+=materialSourcePixelBytes(resource->asset);
     json << "  \"materialTextureCache\": {\"requests\": " << textureStats.requests
          << ", \"hits\": " << textureStats.hits << ", \"uniqueTextures\": " << textureStats.uniqueTextures
          << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
-         << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes << "},\n";
+         << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes
+         << ", \"hashedPixelBytes\": " << textureStats.hashedPixelBytes << ", \"copiedPixelBytes\": " << textureStats.copiedPixelBytes
+         << ", \"transferredPixelBytes\": " << textureStats.transferredPixelBytes << ", \"discardedPixelBytes\": " << textureStats.discardedPixelBytes
+         << ", \"hashMs\": " << textureStats.hashMs << ", \"matchMs\": " << textureStats.matchMs
+         << ", \"mipMs\": " << textureStats.mipMs << ", \"uploadMs\": " << textureStats.uploadMs << "},\n";
+    json << "  \"sceneLoad\": {\"cpuPrepareMs\": " << loadTimings_.cpuPrepareMs
+         << ", \"meshUploadMs\": " << loadTimings_.meshUploadMs << ", \"materialUploadMs\": " << loadTimings_.materialUploadMs
+         << ", \"sharedTexturesMs\": " << loadTimings_.sharedTexturesMs << ", \"buffersMs\": " << loadTimings_.buffersMs
+         << ", \"skinningMs\": " << loadTimings_.skinningMs << ", \"descriptorsMs\": " << loadTimings_.descriptorsMs
+         << ", \"pipelinesMs\": " << loadTimings_.pipelinesMs << ", \"decodedMaterialPixelBytes\": " << decodedMaterialPixelBytes_
+         << ", \"remainingMaterialPixelBytes\": " << sourcePixelBytes << "},\n";
     json << "  \"animationIndex\": " << animationIndex_ << ",\n"
          << "  \"animation\": " << std::quoted(animationName) << ",\n";
 }
@@ -1436,22 +1480,24 @@ void CharacterSceneRenderer::uploadTextureData(
     texture.sampler = rhi_->createSampler(samplerDesc);
 }
 
-void CharacterSceneRenderer::uploadMaterialTextures(const LoadedAsset& asset,std::vector<GpuMaterial>& gpuMaterials){
+void CharacterSceneRenderer::uploadMaterialTextures(LoadedAsset& asset,std::vector<GpuMaterial>& gpuMaterials){
     gpuMaterials.resize(asset.materials.size());
     for(std::size_t index=0;index<asset.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)uploadMaterialTexture(asset,gpuMaterials,index,slot);
 }
-void CharacterSceneRenderer::uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
-    const auto& m=asset.materials.at(index);auto& g=materials.at(index);
+void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot){
+    auto& m=asset.materials.at(index);auto& g=materials.at(index);
     const auto& settings=m.textureSettings.at(slot);
     const auto mipLevels=settings.mipPolicy=="none"?1U:m.authoredMipLevels.at(slot);
     const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
-    const auto upload=[&](const std::vector<std::uint8_t>& pixels,unsigned width,unsigned height,
+    const auto upload=[&](std::vector<std::uint8_t>& pixels,unsigned width,unsigned height,
                          SampledTextureBinding& binding,unsigned levels,float cutoff=0) {
         if(!materialTextureCache_)throw std::logic_error("Material texture cache is not initialized");
         SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
         request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
         request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
-        binding=materialTextureCache_->acquire(pixels,request);
+        if(pixels.size()>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
+            "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(pixels.size()));
+        binding=materialTextureCache_->acquire(std::move(pixels),request);
     };
     switch(slot){
     case 0:upload(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0);break;
@@ -1981,10 +2027,18 @@ void CharacterSceneRenderer::createJointBuffers() {
     }
     jointCapacity_ = 0;
     vertexCapacity_ = 0;
+    std::vector<std::uint32_t> instanceCounts(additionalResources_.size() + 1,
+        scene_.nodes.size() == 1 ? qaInstanceCount_ : 0U);
+    if (scene_.nodes.size() != 1) {
+        const scene::ResourceLayout layout(scene_);
+        for (const auto& node : scene_.nodes) {
+            const auto key = layout.meshKey(node.resourceId);
+            if (key < instanceCounts.size()) ++instanceCounts[key];
+        }
+    }
     for (std::size_t key = 0; key <= additionalResources_.size(); ++key) {
         const auto& mesh = key == 0 ? asset_ : additionalResources_[key-1]->asset;
-        const auto count = scene_.nodes.size() == 1 ? qaInstanceCount_ : static_cast<std::uint32_t>(std::count_if(
-            scene_.nodes.begin(), scene_.nodes.end(), [&](const auto& node) { return scene::ResourceLayout(scene_).meshKey(node.resourceId) == key; }));
+        const auto count = instanceCounts[key];
         jointCapacity_ += static_cast<std::uint32_t>(mesh.jointMatrices.size()) * std::max(count, 1U);
         vertexCapacity_ += static_cast<std::uint32_t>(mesh.vertices.size()) * std::max(count, 1U);
     }

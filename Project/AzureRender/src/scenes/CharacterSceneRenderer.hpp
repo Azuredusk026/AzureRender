@@ -70,7 +70,12 @@ private:
     void initializeLoad(const RenderContext& context);
     std::deque<std::function<void()>> loadJobs_;
     bool loadInitialized_=false;
-    void uploadMaterialTexture(const LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot);
+    struct LoadTimings {
+        double cpuPrepareMs=0,meshUploadMs=0,materialUploadMs=0,sharedTexturesMs=0;
+        double buffersMs=0,skinningMs=0,descriptorsMs=0,pipelinesMs=0;
+    } loadTimings_;
+    std::uint64_t decodedMaterialPixelBytes_=0;
+    void uploadMaterialTexture(LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot);
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kClusterGridX = 16;
     static constexpr std::uint32_t kClusterGridY = 9;
@@ -405,7 +410,7 @@ private:
         GpuTexture& texture,
         std::uint32_t mipLevels = 1,TextureFilterSemantic semantic=TextureFilterSemantic::Linear,float alphaCutoff=0,const TextureImportSettings* importSettings=nullptr);
     void uploadMaterialTextures(
-        const LoadedAsset& asset,
+        LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);
     void createUniformBuffers();
     void createJointBuffers();

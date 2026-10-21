@@ -154,14 +154,39 @@ void failed_upload() {
     require(result.view&&cache.statistics().uniqueTextures==1,"A failed upload must allow the identical request to recover");
 }
 
+void transferred_inputs() {
+    SamplerFailureRhi backend;backend.backend.collectImageUploads=true;
+    SampledTextureCache cache(backend.allocator(),backend);
+    auto pixels=checker();const auto original=pixels;
+    reject([&]{cache.acquire(std::move(pixels),request());});
+    require(pixels==original,"Failed ownership transfer must retain the caller's input for recovery");
+    backend.failSampler=false;
+    const auto first=cache.acquire(std::move(pixels),request());
+    require(pixels.empty()&&pixels.capacity()==0,"Successful unique upload must release the caller's pixel allocation");
+    auto duplicate=original;
+    const auto second=cache.acquire(std::move(duplicate),request());
+    require(duplicate.empty()&&duplicate.capacity()==0,"An exact cache hit must release the redundant caller allocation");
+    require(first.view==second.view&&first.sampler==second.sampler,"Transferred inputs must retain exact shared identity");
+    // Sampler failure occurs after the first upload; only the successful
+    // retry uploads again. Subsequent exact hits must add no transfers.
+    require(backend.backend.imageUploads.size()==2&&backend.backend.imageUploads.back().pixels.size()==20
+        &&std::equal(original.begin(),original.end(),backend.backend.imageUploads.back().pixels.begin()),
+        "Transferred inputs must preserve the original base pixels and full mip chain");
+    require(cache.acquire(original,request()).view==first.view&&original==checker(),
+        "Borrowed inputs must remain unchanged and match transferred cache identities");
+    require(cache.statistics().requests==3&&cache.statistics().hits==2
+        &&cache.statistics().retainedPixelBytes==16,"Transferred ownership must retain one complete identity copy");
+}
+
 int main() {
     int failed=0;
     for(const auto& test:std::vector<std::pair<const char*,std::function<void()>>>{
             {"shared multi-resource texture",shared_resources},{"complete key isolation",isolated_keys},
             {"content hash collision",hash_collision},{"invalid input recovery",invalid_inputs},
-            {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload}}) {
+            {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload},
+            {"transferred input ownership",transferred_inputs}}) {
         try {test.second();std::cout<<"PASS "<<test.first<<'\n';}
         catch(const std::exception& e) {++failed;std::cerr<<"FAIL "<<test.first<<": "<<e.what()<<'\n';}
     }
-    std::cout<<6-failed<<"/6 sampled texture cache cases passed\n";return failed?1:0;
+    std::cout<<7-failed<<"/7 sampled texture cache cases passed\n";return failed?1:0;
 }

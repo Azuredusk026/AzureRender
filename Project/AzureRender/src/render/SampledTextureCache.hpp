@@ -34,6 +34,8 @@ struct SampledTextureUpload {
 struct SampledTextureCacheStatistics {
     std::uint64_t requests = 0, hits = 0, uniqueTextures = 0;
     std::uint64_t requestedBytes = 0, residentBytes = 0, retainedPixelBytes = 0;
+    std::uint64_t hashedPixelBytes = 0, copiedPixelBytes = 0, transferredPixelBytes = 0, discardedPixelBytes = 0;
+    double hashMs = 0, matchMs = 0, mipMs = 0, uploadMs = 0;
 };
 
 // Immutable RGBA8 material resources, scoped to one renderer and device.
@@ -48,10 +50,17 @@ public:
 
     SampledTextureBinding acquire(const std::vector<std::uint8_t>& pixels,
                                   const SampledTextureUpload& upload);
+    // A successful call consumes the input allocation. Failure preserves it.
+    // Misses transfer the identity bytes; hits release redundant storage.
+    SampledTextureBinding acquire(std::vector<std::uint8_t>&& pixels,
+                                  const SampledTextureUpload& upload);
     void clear() noexcept;
     const SampledTextureCacheStatistics& statistics() const noexcept { return statistics_; }
 
 private:
+    SampledTextureBinding acquireImpl(const std::vector<std::uint8_t>& pixels,
+                                     const SampledTextureUpload& upload,
+                                     std::vector<std::uint8_t>* consumed);
     struct Entry;
     rhi::IGpuAllocator& allocator_;
     rhi::IRhi& rhi_;

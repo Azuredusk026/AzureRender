@@ -208,6 +208,86 @@ std::vector<RecordedCall> runFrame(
     return recorder.calls;
 }
 
+void verifyJointBufferCapacities(const std::string& label,
+    const unsigned resourceCount, const std::vector<std::string>& resourceIds,
+    const std::uint32_t qaInstances, const std::uint32_t expectedJoints,
+    const std::uint32_t expectedVertices, const bool withAlias = false) {
+    NullRhi rhi;
+    CharacterSceneRenderer renderer;
+    RenderContext context{};
+    context.rhi = &rhi;
+    context.allocator = &rhi.allocator();
+    context.qaInstanceCount = qaInstances;
+    azurerender::RenderSettings settings;
+    settings.faceSdfFeature = false;
+    settings.showcasePlatformFeature = false;
+    context.renderSettings = &settings;
+    context.rampAtlasPath = (std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
+        / "assets_public/toon_ramp_atlas.ppm").string();
+    auto& limits = context.descriptorLimits;
+    limits.maxPerStageDescriptorSamplers = limits.maxDescriptorSetSamplers = 8192;
+    limits.maxPerStageDescriptorSampledImages = limits.maxDescriptorSetSampledImages = 8192;
+    limits.maxPerStageResources = 8192;
+
+    auto mesh = loadGltfAsset((std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR)
+        / "assets_public/test_model.gltf").string());
+    mesh.vertices.resize(3);
+    mesh.indices = {0, 1, 2};
+    mesh.primitives = {{0, 3, 0, {}}};
+    mesh.materials.resize(1);
+    mesh.hasSkin = false;
+    mesh.animations.clear();
+    mesh.morphRanges.clear();
+    mesh.morphTargetCount = 0;
+    mesh.jointMatrices.assign(2, azurerender::scene::identityMatrix());
+    const auto prepared = std::make_shared<const LoadedAsset>(std::move(mesh));
+    std::map<std::string, std::shared_ptr<const LoadedAsset>> preparedMeshes;
+    for (unsigned key = 0; key < resourceCount; ++key) {
+        const auto path = "capacity-fixture/mesh-" + std::to_string(key) + ".gltf";
+        context.scene.resources.push_back({"mesh-" + std::to_string(key), path});
+        if (resourceCount == 3) {
+            constexpr std::array<unsigned, 3> joints{2, 5, 11}, vertices{3, 7, 13};
+            auto shaped = std::make_shared<LoadedAsset>(*prepared);
+            shaped->jointMatrices.assign(joints[key], azurerender::scene::identityMatrix());
+            shaped->vertices.resize(vertices[key]);
+            preparedMeshes.emplace(path, std::move(shaped));
+        } else preparedMeshes.emplace(path, prepared);
+    }
+    if (withAlias)
+        context.scene.resources.push_back({"mesh-alias", "capacity-fixture/./mesh-0.gltf"});
+    context.preparedMeshes = &preparedMeshes;
+    for (const auto& id : resourceIds) {
+        azurerender::scene::SceneNodeDesc node;
+        node.id = "instance-" + std::to_string(context.scene.nodes.size());
+        node.resourceId = id;
+        node.visible = context.scene.nodes.size() != 3;
+        context.scene.nodes.push_back(std::move(node));
+    }
+    nlohmann::json report;
+    // A zero budget runs one production load job. Stop after buffer creation;
+    // shader compilation and real GPU resources are outside this CPU fixture.
+    for (unsigned step = 0; step < 100000; ++step) {
+        const bool complete = renderer.prepareLoad(context, 0);
+        std::ostringstream fields;
+        fields << '{'; renderer.appendCaptureManifestFields(fields); fields << "\"end\":0}";
+        report = nlohmann::json::parse(fields.str());
+        if (report.at("sceneLoad").at("buffersMs").get<double>() > 0) break;
+        if (complete) throw std::runtime_error("Capacity fixture never created buffers");
+    }
+    if (report.at("jointCapacity") != expectedJoints
+        || report.at("vertexCapacity") != expectedVertices)
+        throw std::runtime_error("Joint/vertex buffer capacity contract changed: " + label);
+    if (report.at("sceneLoad").at("buffersMs").get<double>() > 1000)
+        throw std::runtime_error("Joint buffer statistics exceeded the CPU budget: " + label);
+    std::cout << "Joint capacity " << label << ": joints=" << expectedJoints
+        << ", vertices=" << expectedVertices << ", buffersMs="
+        << report.at("sceneLoad").at("buffersMs") << '\n';
+    renderer.onUnload(context);
+    if (rhi.allocator().statistics().liveBuffers != 0
+        || rhi.allocator().statistics().liveImages != 0)
+        throw std::runtime_error("Capacity fixture did not release partial load resources");
+}
+
 }  // namespace
 
 int main() try {
@@ -253,6 +333,19 @@ int main() try {
         std::ofstream(shaderDirectory / name, std::ios::binary)
             .write(dummySpv.data(), 4);
     }
+
+    // Aliases share a mesh key. Hidden nodes still reserve pose slices;
+    // unknown/empty references add none, and an unused mesh keeps one slice.
+    verifyJointBufferCapacities("aliases-hidden-unknown-unused", 3,
+        {"mesh-0", "mesh-alias", "mesh-1", "mesh-1", "missing", ""}, 7, 25, 33, true);
+    verifyJointBufferCapacities("single-node-qa-for-each-resource", 3,
+        {"mesh-0"}, 7, 126, 161);
+    verifyJointBufferCapacities("empty-scene-minimum-slices", 3, {}, 7, 18, 23);
+    std::vector<std::string> largeCapacityInstances;
+    for (unsigned index = 0; index < 1764; ++index)
+        largeCapacityInstances.push_back("mesh-" + std::to_string(index % 365));
+    verifyJointBufferCapacities("367-resources-1764-nodes", 367,
+        largeCapacityInstances, 7, 3532, 5298);
 
     {
         NullRhi rhi;

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "passed",
+  "scope": "CPU verification of resource-key instance counting and joint/vertex buffer capacity",
+  "implementation": {
+    "module": "AzureRenderCore",
+    "function": "CharacterSceneRenderer::createJointBuffers",
+    "resourceLayoutConstructionsPerMultiNodeCall": 1,
+    "nodeTraversalsPerMultiNodeCall": 1,
+    "capacities": [
+      "jointCapacity",
+      "vertexCapacity"
+    ],
+    "sourceFiles": [
+      {
+        "path": "src/scenes/CharacterSceneRenderer.cpp",
+        "sha256AtVerification": "833dd02216affad1541728ed54c3ff9da714f65beda39a6c7a6e93f5dcdab78f"
+      },
+      {
+        "path": "tests/NullRhiPassTests.cpp",
+        "sha256AtVerification": "5bcb72527b295b891fd7b629b5287899eab79cab3cb5461fb7e53b2ae1b154da"
+      }
+    ]
+  },
+  "contract": {
+    "countingKey": "ResourceLayout::meshKey",
+    "resourceAliasIdentity": "normalized path and material bindings",
+    "hiddenNodesCount": true,
+    "singleNodeCountForEveryMesh": "max(RenderContext::qaInstanceCount,1)",
+    "unusedMeshMinimumInstances": 1,
+    "emptySceneMinimumInstances": 1,
+    "capacityArithmetic": "uint32_t",
+    "jointBufferFrames": 2,
+    "jointMatrixBytes": 64,
+    "emptyMainJointMatricesError": "Asset has no joint-matrix fallback"
+  },
+  "probes": {
+    "scope": "Production function body compiled in a CPU field fixture with the real ResourceLayout. The allocator records buffer sizes.",
+    "resources": 367,
+    "nodes": 1764,
+    "budgetFailure": {
+      "exitCode": 1,
+      "allocationBudget": 100000,
+      "allocationRequests": 100001,
+      "budgetExceeded": true,
+      "elapsedMs": 9.8554,
+      "jointCapacity": 0,
+      "vertexCapacity": 0,
+      "capacityContractPassed": false,
+      "functionSha256": "92d4150df78c7a947f8376a2d7f7c9d87046436fcb53b369cfc996b151a82352",
+      "sourceSha256AtMeasurement": "aec9cd6442f9d81de4b8de622b035a5ab46b3ee15ea2d6dcb9a5f712fffab766",
+      "result": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/red-result.json",
+        "sha256": "54c42afd3cd93ffdba4c4bb7756ca4f94dde4766401489979cecf2cfd6aab8bc"
+      },
+      "productionFunctionSnapshot": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/red-production-function.txt",
+        "sha256": "c083c318010e9c205e58acdb6af9309373ce1993f7daa7e317f8ac48f90c06a2"
+      }
+    },
+    "completedCapacity": {
+      "exitCode": 0,
+      "allocationBudget": 100000,
+      "allocationRequests": 4678,
+      "budgetExceeded": false,
+      "elapsedMs": 0.5895,
+      "jointCapacity": 3532,
+      "vertexCapacity": 5298,
+      "capacityContractPassed": true,
+      "functionSha256": "99caaad9ec8176777e3dbad30f268f9a1c66302863444627c731f8dd534658f5",
+      "sourceSha256AtMeasurement": "833dd02216affad1541728ed54c3ff9da714f65beda39a6c7a6e93f5dcdab78f",
+      "result": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/green-result.json",
+        "sha256": "665df168054b74222ab1cd347215fbf768f6a7785817416bb8c1ee03ece13bc2"
+      },
+      "productionFunctionSnapshot": {
+        "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/green-production-function.txt",
+        "sha256": "51a4f8c1392f39513a23708c78ff55d4f903d8a219ac2e28869a045d260818c5"
+      }
+    },
+    "abortedTimingRepresentsCompleteRun": false
+  },
+  "verification": [
+    {
+      "configuration": "Debug",
+      "tests": 4,
+      "failed": 0,
+      "fixtures": [
+        {
+          "name": "aliases-hidden-unknown-unused",
+          "jointCapacity": 25,
+          "vertexCapacity": 33,
+          "buffersMs": 1.0303
+        },
+        {
+          "name": "single-node-qa-for-each-resource",
+          "jointCapacity": 126,
+          "vertexCapacity": 161,
+          "buffersMs": 1.3132
+        },
+        {
+          "name": "empty-scene-minimum-slices",
+          "jointCapacity": 18,
+          "vertexCapacity": 23,
+          "buffersMs": 1.0356
+        },
+        {
+          "name": "367-resources-1764-nodes",
+          "jointCapacity": 3532,
+          "vertexCapacity": 5298,
+          "buffersMs": 7.2387
+        }
+      ],
+      "logs": [
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/debug-build.log",
+          "sha256": "2771d4d734b416245866b99830bb55cf54b72fcc23fd020435811618a8a8cc7e"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/debug-ctest.log",
+          "sha256": "b6959171c3949ce9b303ed7b7c47ee3928495a55a25139c4c4044d4d46359b39"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/debug-last-test.log",
+          "sha256": "0c2c37ea451fb677aa8b277d552c503905f29dc3c21bb46dbbe4891264cde187"
+        }
+      ]
+    },
+    {
+      "configuration": "Release",
+      "tests": 4,
+      "failed": 0,
+      "fixtures": [
+        {
+          "name": "aliases-hidden-unknown-unused",
+          "jointCapacity": 25,
+          "vertexCapacity": 33,
+          "buffersMs": 1.0119
+        },
+        {
+          "name": "single-node-qa-for-each-resource",
+          "jointCapacity": 126,
+          "vertexCapacity": 161,
+          "buffersMs": 1.1688
+        },
+        {
+          "name": "empty-scene-minimum-slices",
+          "jointCapacity": 18,
+          "vertexCapacity": 23,
+          "buffersMs": 0.897
+        },
+        {
+          "name": "367-resources-1764-nodes",
+          "jointCapacity": 3532,
+          "vertexCapacity": 5298,
+          "buffersMs": 2.2252
+        }
+      ],
+      "logs": [
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/release-build.log",
+          "sha256": "56b3456cbd10d8e3667346fd739e2fde136ddafbef85cabe40c2386fd8c4f60e"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/release-ctest.log",
+          "sha256": "97af0c482dc18ec87a8a544af8485a21bfeff320b1c7e7d19cc6f0bd7a364da7"
+        },
+        {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/release-last-test.log",
+          "sha256": "d7fc8a310ec6918997f23eefcc4c17bc6bdcacd79b404a12a5d035c4da29fac9"
+        }
+      ]
+    }
+  ],
+  "ctestRegex": "^AzureRender[.](NullRhiPass|SkinningBatch|SceneVisibility|ViewBatching)$",
+  "buildTargets": [
+    "AzureRenderNullRhiPassTests"
+  ],
+  "evidenceDirectory": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance",
+  "summary": {
+    "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/summary.json",
+    "sha256": "e01df04ac6d9f7972943c4d9b259bacca35692045b3e0019d752d6f599fa6e60"
+  },
+  "probeGenerator": {
+    "path": "build/runs/20261021-172156-native-render-evidence-623c52/rear-enclosure/joint-buffer-performance/run_probe.py",
+    "sha256": "1da0a8ccacf3426540fadcf492dca320f340c73e7fec1b3cecb7a0e6facaf1c5"
+  },
+  "cpuBackend": "NullRhi",
+  "gpuUsed": false,
+  "hostBuiltByThisVerification": false,
+  "productionProjectModified": false,
+  "productionHostVerification": "pending parent-controlled host build and native scene import; CPU timings are not full native-scene load measurements"
+}

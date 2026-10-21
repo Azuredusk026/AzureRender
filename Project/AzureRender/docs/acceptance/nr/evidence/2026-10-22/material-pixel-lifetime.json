@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "scope": "material input ownership and host load diagnostics",
+  "evidenceDirectory": "build/runs/20261021-172156-native-render-evidence-623c52/material-pixel-lifetime-cpu",
+  "red": {
+    "configuration": "Debug",
+    "log": "red-debug.log",
+    "failures": [
+      "Successful unique upload must release the caller's pixel allocation",
+      "Uploaded renderer materials must release CPU pixel allocations"
+    ]
+  },
+  "verification": [
+    {
+      "configuration": "Debug",
+      "tests": 4,
+      "failed": 0,
+      "seconds": 2.3,
+      "log": "green-final-debug.log"
+    },
+    {
+      "configuration": "Release",
+      "tests": 4,
+      "failed": 0,
+      "seconds": 1.05,
+      "log": "green-final-release.log"
+    }
+  ],
+  "ctestRegex": "^AzureRender\\.(SampledTextureCache|MaterialTextureSharing|TextureFiltering|NullRhiPass)$",
+  "buildTargets": [
+    "AzureSampledTextureCacheTests",
+    "AzureMaterialTextureSharingTests",
+    "AzureRenderNullRhiPassTests"
+  ],
+  "fixture": {
+    "source": "assets_public/texture_sharing",
+    "workflows": [
+      "disk",
+      "shared const preparedMeshes"
+    ],
+    "bindingModes": [
+      "fixed",
+      "indexed"
+    ],
+    "reloadsPerWorkflow": 2,
+    "decodedMaterialPixelBytes": 464,
+    "transferredPixelBytes": 132,
+    "discardedPixelBytes": 332,
+    "copiedPixelBytes": 0,
+    "remainingMaterialPixelBytes": 0,
+    "requests": 32,
+    "hits": 23,
+    "uniqueTextures": 9,
+    "residentBytes": 164,
+    "retainedPixelBytes": 132,
+    "liveImagesAfterUnload": 0,
+    "liveBuffersAfterUnload": 0
+  },
+  "hashProbe": {
+    "file": "hash-probe-debug.json",
+    "bytes": 33554432,
+    "checkedHash": 4246511045,
+    "pointerHash": 4246511045,
+    "checkedMs": 34.9761,
+    "pointerMs": 31.5214,
+    "limitation": "isolated CPU probe; production load timing remains required"
+  },
+  "gpuVerification": {
+    "passed": true,
+    "baseline": "material-texture-cache-cpu/gpu-baseline-release-v2",
+    "cases": [
+      {
+        "configuration": "debug",
+        "mode": "fixed",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\material-pixel-lifetime-cpu\\gpu-debug-final\\fixed\\captures\\frame_000000.png",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132,
+          "hashedPixelBytes": 464,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 132,
+          "discardedPixelBytes": 332,
+          "hashMs": 0.0042,
+          "matchMs": 0.041,
+          "mipMs": 0.1487,
+          "uploadMs": 5.198
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "changedPixels": 0,
+        "maximumChannelDifference": 0
+      },
+      {
+        "configuration": "debug",
+        "mode": "indexed",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\material-pixel-lifetime-cpu\\gpu-debug-final\\indexed\\captures\\frame_000000.png",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132,
+          "hashedPixelBytes": 464,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 132,
+          "discardedPixelBytes": 332,
+          "hashMs": 0.0089,
+          "matchMs": 0.0451,
+          "mipMs": 0.1481,
+          "uploadMs": 4.9726
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "changedPixels": 0,
+        "maximumChannelDifference": 0
+      },
+      {
+        "configuration": "release",
+        "mode": "fixed",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\material-pixel-lifetime-cpu\\gpu-release-final\\fixed\\captures\\frame_000000.png",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132,
+          "hashedPixelBytes": 464,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 132,
+          "discardedPixelBytes": 332,
+          "hashMs": 0.0023,
+          "matchMs": 0.0054,
+          "mipMs": 0.0565,
+          "uploadMs": 6.5127
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "changedPixels": 0,
+        "maximumChannelDifference": 0
+      },
+      {
+        "configuration": "release",
+        "mode": "indexed",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261021-172156-native-render-evidence-623c52\\material-pixel-lifetime-cpu\\gpu-release-final\\indexed\\captures\\frame_000000.png",
+        "imageSha256": "1d0ca7b0d3d3c1c34471bb98841026fa5343200936b30c16fe3e365d6777de4f",
+        "allocator": {
+          "bufferAllocations": 48,
+          "imageAllocations": 31,
+          "liveBuffers": 32,
+          "liveImages": 31,
+          "bufferBytes": 11898208,
+          "imageBytes": 94081024,
+          "liveBufferBytes": 10846064,
+          "liveImageBytes": 94081024,
+          "deviceLocalPeakBytes": 100663296
+        },
+        "cache": {
+          "requests": 32,
+          "hits": 23,
+          "uniqueTextures": 9,
+          "requestedBytes": 576,
+          "residentBytes": 164,
+          "retainedPixelBytes": 132,
+          "hashedPixelBytes": 464,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 132,
+          "discardedPixelBytes": 332,
+          "hashMs": 0.0023,
+          "matchMs": 0.0103,
+          "mipMs": 0.0574,
+          "uploadMs": 5.888
+        },
+        "allocatorAfterUnloadZero": true,
+        "validationLogClean": true,
+        "changedPixels": 0,
+        "maximumChannelDifference": 0
+      }
+    ],
+    "nativeLargeSceneAcceptance": "pending joint production import and reload",
+    "finalBinaries": [
+      {
+        "configuration": "debug",
+        "executable": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+        "sha256": "76d267b7ed7ce747a3b7a7adc97ee55e4f237401ae949839dda781ea4f6fee5d"
+      },
+      {
+        "configuration": "release",
+        "executable": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+        "sha256": "30697be3c36288406fc050c7786cb9a5ff974ab9aa019f921b586019ccad24b3"
+      }
+    ],
+    "candidateIncludes": "material pixel ownership, one-pass joint capacity and bounded surface services"
+  },
+  "warnings": [
+    "Release NullRhi target retains existing MSVC D9025 NDEBUG override warnings"
+  ],
+  "hostBuilds": [
+    {
+      "configuration": "Debug",
+      "targets": [
+        "AzureRender",
+        "AzurePlayer"
+      ],
+      "passed": true
+    },
+    {
+      "configuration": "Release",
+      "targets": [
+        "AzureRender",
+        "AzurePlayer"
+      ],
+      "passed": true
+    }
+  ],
+  "rootRepeat": {
+    "Debug": {
+      "tests": 4,
+      "failed": 0,
+      "seconds": 2.28
+    },
+    "Release": {
+      "tests": 4,
+      "failed": 0,
+      "seconds": 0.59,
+      "log": "root-release-serial.log"
+    },
+    "transientParallelFailure": "The two configurations share azr_nullrhi_shaders in the OS temporary directory. Concurrent runs raced its cleanup. Serial Release rerun passed all four; subsequent CPU runs use serial ownership.",
+    "finalAffectedCtest": {
+      "Debug": {
+        "tests": 9,
+        "failed": 0,
+        "seconds": 3.66
+      },
+      "Release": {
+        "tests": 9,
+        "failed": 0,
+        "seconds": 1.14
+      }
+    }
+  },
+  "sourceSha256": {
+    "src\\render\\SampledTextureCache.hpp": "394a52f1f3630fa3920790de80b5de98350306ec6f8c6f3016b3cf2b098b4805",
+    "src\\render\\SampledTextureCache.cpp": "3fde4119445ebe2a75d7dec41c89b6c054a550f7bbd1fe62fa7fcc70534caed3",
+    "src\\scenes\\CharacterSceneRenderer.hpp": "6110075dedd9eda797c6061102d203528c2f22a8af04a1417664d32f7952bb8b",
+    "src\\scenes\\CharacterSceneRenderer.cpp": "833dd02216affad1541728ed54c3ff9da714f65beda39a6c7a6e93f5dcdab78f",
+    "tests\\MaterialTextureSharingTests.cpp": "46ae2824afb4aa31dc83a3d4f87dfb877013bfdcabbf51bf62526720f59aaec8",
+    "tests\\SampledTextureCacheTests.cpp": "0145ca93f76773744b2508e95ac785906e2d5f108e59d1d5a567a7b6c51229b8"
+  }
+}
