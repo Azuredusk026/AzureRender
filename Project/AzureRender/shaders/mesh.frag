@@ -555,9 +555,15 @@ void main() {
         mix(0.44, 0.74, faceIllumination),
         faceSdfWeight);
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
+    vec3 faceLightingNormal=shadedNormal;
     if(dualFaceSdf) {
         toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
         rampCoordinate=dualFaceRampCoordinate(lightDirection,shadedNormal,faceSdfSample);
+        mat3 headFrame=mat3(instanceFaceFrame);
+        float localLightX=(transpose(headFrame)*lightDirection).x;
+        float geometryMix=textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).g;
+        faceLightingNormal=faceSdfWorldNormal(faceSdfSample,localLightX,
+            headFrame,shadedNormal,geometryMix);
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
@@ -625,7 +631,9 @@ void main() {
             if(light.coneType.x==light.directionOuter.w) cone=step(light.directionOuter.w,dot(-pointDirection,light.directionOuter.xyz));
             attenuation *= cone * cone;
         }
-        float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
+        vec3 localLightingNormal=dualFaceSdf && light.coneType.y<=1.5
+            ? faceLightingNormal : shadedNormal;
+        float pointDiffuse = max(dot(localLightingNormal, pointDirection), 0.0);
         attenuation*=lightInfluenceBoxWeight(worldPosition,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
@@ -633,7 +641,7 @@ void main() {
         vec3 localDiffuseResponse=vec3(pointDiffuse);
         if(dualFaceSdf) {
             vec4 localDistanceSample;
-            float localCoordinate=dualFaceRampCoordinate(pointDirection,shadedNormal,localDistanceSample);
+            float localCoordinate=dualFaceRampCoordinate(pointDirection,localLightingNormal,localDistanceSample);
             localDiffuseResponse=textureLod(AZ_TEX_MATCAP,vec2(localCoordinate,.5),0.0).rgb;
         }
         clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
@@ -736,8 +744,10 @@ void main() {
         ambientSpecular = vec3(0.0);
         directSpecular = vec3(0.0);
     }
-    float rim = pow(1.0 - normalDotView, 3.2)
-        * smoothstep(-0.25, 0.65, dot(shadedNormal, -fillDirection));
+    float rimNormalDotView=dualFaceSdf
+        ? abs(dot(faceLightingNormal,viewDirection)) : normalDotView;
+    float rim = pow(1.0 - rimNormalDotView, 3.2)
+        * smoothstep(-0.25, 0.65, dot(faceLightingNormal, -fillDirection));
     vec3 rimLighting =
         mix(rimColor, baseColor.rgb, 0.22)
         * rim

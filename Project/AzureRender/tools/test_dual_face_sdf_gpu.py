@@ -1,6 +1,7 @@
 """Verify independent face maps, head animation and descriptor fallback in Player."""
 import argparse
 import base64
+import copy
 import io
 import json
 import math
@@ -12,6 +13,123 @@ import tempfile
 import numpy as np
 from PIL import Image
 from create_visibility_fixture import surface, component
+
+
+def run_normal_checks(executable, root):
+    root.mkdir(parents=True, exist_ok=True)
+    assets = root / 'assets'
+    assets.mkdir(exist_ok=False)
+    surface(assets / 'surface.gltf', double_sided=True)
+    base = json.loads((assets / 'surface.gltf').read_text())
+    uv = struct.pack('<8f', 0, 0, 1, 0, 1, 1, 0, 1)
+    buffer = len(base['buffers'])
+    base['buffers'].append({'byteLength': len(uv), 'uri': 'data:application/octet-stream;base64,' + base64.b64encode(uv).decode()})
+    view = len(base['bufferViews'])
+    base['bufferViews'].append({'buffer': buffer, 'byteLength': len(uv)})
+    accessor = len(base['accessors'])
+    base['accessors'].append({'bufferView': view, 'componentType': 5126, 'count': 4, 'type': 'VEC2'})
+    base['meshes'][0]['primitives'][0]['attributes']['TEXCOORD_0'] = accessor
+    base['nodes'].append({'name': 'FaceHead'})
+    base['scenes'][0]['nodes'].append(1)
+    frames = {}
+
+    def render(name, blue, mask=0, angle=0, scene=False, isolation='rim', fixed=False, directional=False, sdf_enabled=True, dark=False):
+        model = copy.deepcopy(base)
+        model['materials'][0]['pbrMetallicRoughness'].update(baseColorFactor=[.8, .8, .8, 1], roughnessFactor=.6)
+        model['nodes'][1]['rotation'] = [0, math.sin(math.radians(angle)/2), 0, math.cos(math.radians(angle)/2)]
+        def image(pixels):
+            encoded = io.BytesIO()
+            Image.fromarray(np.array(pixels, dtype=np.uint8), 'RGBA').save(encoded, format='PNG')
+            model.setdefault('images', []).append({'uri': 'data:image/png;base64,' + base64.b64encode(encoded.getvalue()).decode()})
+            index = len(model.setdefault('textures', []))
+            model['textures'].append({'source': len(model['images']) - 1})
+            return index
+        sdf = image([[[128, 128, blue, 255]]])
+        mask_texture = image([[[0, mask, 0, 255]]])
+        ramp = image([[[round(x*255/31)]*3 + [255] for x in range(32)]])
+        model['materials'][0]['extras'] = {'azureRenderMaterial': {
+            'schemaVersion': 2, 'class': 'face', 'features': ['face-sdf-eligible'],
+            'styleParameters': [1, 1, 1, 1],
+            'faceSdf': {'schemaVersion': 2, 'texture': sdf, 'maskTexture': mask_texture, 'rampTexture': ramp,
+                'texCoord': 0, 'headNode': 'FaceHead', 'headBasis': [1, 0, 0, 0, 1, 0, 0, 0, 1]}}}
+        (assets / (name + '.gltf')).write_text(json.dumps(model))
+        level = {'schemaVersion': 1, 'id': name, 'sceneType': 'character',
+            'renderSettings': {'platform': False, 'silhouetteOutline': False, 'innerOutline': False,
+                'stylized': True, 'bloomEnabled': False, 'antiAliasing': 0, 'exposure': 0, 'saturation': 1,
+                'contrast': 1, 'toneMapping': False, 'sceneLighting': scene, 'skyIntensity': 0, 'faceSdf': sdf_enabled},
+            'resources': [{'id': 'face', 'asset': 'assets:/' + name + '.gltf'}],
+            'nodes': [{'id': 'face', 'resourceId': 'face'}, {'id': 'camera', 'components': {
+                'azure.transform': component('azure.transform', {'translation': [0, 0, 3]}),
+                'azure.camera': component('azure.camera', {'enabled': True, 'priority': 1, 'fieldOfView': 55})}}]}
+        if scene:
+            level['nodes'].append({'id': 'key', 'components': {
+                'azure.transform': component('azure.transform', {'translation': [3, 0, 2]})}})
+            light = {'id': 'key', 'nodeId': 'key', 'color': [1, 1, 1], 'intensity': 8, 'radius': 10, 'enabled': not dark}
+            if directional:
+                light['shape'] = {'type': 'directional', 'direction': [0, 0, -1]}
+            level['lights'] = [light]
+        (assets / (name + '.azurelevel')).write_text(json.dumps(level))
+        project = root / (name + '.azureproject')
+        project.write_text(json.dumps({'schemaVersion': 1, 'id': name, 'name': name,
+            'mounts': [{'name': 'assets', 'path': 'assets'}], 'startupScene': 'assets:/' + name + '.azurelevel'}))
+        output = root / name
+        output.mkdir()
+        command = [str(executable.resolve()), '--project', str(project.resolve()), '--width', '320', '--height', '240',
+            '--capture-dir', str((output / 'frames').resolve()), '--capture-frames', '1', '--fixed-frame-step',
+            '--qa-camera', 'scene', '--qa-light', 'scene', '--qa-isolation', isolation,
+            '--runtime-report', str((output / 'runtime.json').resolve())]
+        if fixed:
+            command += ['--disable-bindless', '--disable-compute-skinning', '--disable-parallel-recording']
+        (output / 'command.json').write_text(json.dumps(command, indent=2))
+        with (output / 'player.log').open('w', encoding='utf8') as log:
+            subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=120)
+        log = (output / 'player.log').read_text(encoding='utf8', errors='replace')
+        assert 'Validation layer: enabled' in log and not re.search(r'VUID-|Validation Error|\[error\]', log), name
+        assert 'Allocator after unload: buffers=0 images=0' in log, name
+        report = json.loads((output / 'runtime.json').read_text())
+        assert not report['scriptErrors'] and not report['presentationErrors'], name
+        frames[name] = np.asarray(Image.open(output / 'frames/frame_000000.png').convert('RGB'), dtype=np.int16)
+        return frames[name][100:140, 140:180]
+
+    metrics = {}
+    rim_low = render('rim-low', 32)
+    rim_high = render('rim-high', 223)
+    metrics['blueRimMeanDifference'] = float(np.abs(rim_low-rim_high).mean())
+    assert metrics['blueRimMeanDifference'] > 1, ('B channel must reach production rim', metrics)
+    masked_low = render('rim-mask-low', 32, mask=255)
+    masked_high = render('rim-mask-high', 223, mask=255)
+    assert np.array_equal(masked_low, masked_high), 'Geometry mask must suppress B-normal rim changes'
+    head = render('rim-head60', 223, angle=60)
+    metrics['headRimMean'] = float(head.mean())
+    metrics['baseRimMean'] = float(rim_high.mean())
+    assert metrics['headRimMean'] < metrics['baseRimMean'] * .2, 'Head-frame direction or main-light mirror is incorrect'
+    render('rim-fixed', 223, fixed=True)
+    assert np.array_equal(frames['rim-high'], frames['rim-fixed']), 'Fixed and indexed normal/rim paths differ'
+    local_low = render('local-low', 32, mask=128, scene=True, isolation='direct-diffuse')
+    local_high = render('local-high', 223, mask=128, scene=True, isolation='direct-diffuse')
+    metrics['blueLocalDiffuseMeanDifference'] = float(np.abs(local_low-local_high).mean())
+    assert metrics['blueLocalDiffuseMeanDifference'] > 1, 'B channel must reach punctual NdotL'
+    local_mask_low = render('local-mask-low', 32, mask=255, scene=True, isolation='direct-diffuse')
+    local_mask_high = render('local-mask-high', 223, mask=255, scene=True, isolation='direct-diffuse')
+    assert np.array_equal(local_mask_low, local_mask_high), 'Geometry mask must suppress B-normal punctual changes'
+    render('local-fixed', 223, mask=128, scene=True, isolation='direct-diffuse', fixed=True)
+    assert np.array_equal(frames['local-high'], frames['local-fixed']), 'Fixed and indexed punctual normal paths differ'
+    main_low = render('main-specular-low', 32, mask=128, scene=True, isolation='direct-specular', directional=True)
+    main_high = render('main-specular-high', 128, mask=128, scene=True, isolation='direct-specular', directional=True)
+    main_head = render('main-specular-head', 32, mask=128, angle=60, scene=True, isolation='direct-specular', directional=True)
+    assert main_low.max() > 5, 'Main specular stability test must contain a visible contribution'
+    assert np.array_equal(main_low, main_high) and np.array_equal(main_low, main_head), 'SDF normal must preserve main geometric specular'
+    disabled_low = render('disabled-low', 32, sdf_enabled=False)
+    disabled_high = render('disabled-high', 223, sdf_enabled=False)
+    assert np.array_equal(disabled_low, disabled_high), 'Disabled SDF must preserve geometric response'
+    dark = render('local-dark', 223, mask=128, scene=True, isolation='direct-diffuse', dark=True)
+    assert dark.max() == 0, 'Normal transport must not create light energy'
+    summary = {'frames': len(frames), 'validationErrors': 0, 'unloadResources': 0, 'metrics': metrics,
+        'fixedDifferences': 0, 'geometryMaskDifferences': 0, 'mainSpecularDifferences': 0,
+        'disabledDifferences': 0, 'mainSpecularMaximum': int(main_low.max()),
+        'scope': 'Native B-normal transport and selected production consumers; full native rim/light models remain pending'}
+    (root / 'summary.json').write_text(json.dumps(summary, indent=2))
+    return summary
 
 
 def run(executable, root):
@@ -124,6 +242,7 @@ def run(executable, root):
         'sceneHeadRotationResponse': scene_head, 'sceneIndependentMaskResponse': scene_mask,
         'sceneFixedDescriptorCpuDifference': scene_fallback, 'sceneDarkMaximum': scene_dark,
         'headAnimationResponse': animation, 'fixedDescriptorCpuDifference': fallback, 'validationErrors': 0}
+    summary['normal'] = run_normal_checks(executable, root / 'blue-normal')
     (root / 'summary.json').write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary))
 

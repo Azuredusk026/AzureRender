@@ -7,6 +7,21 @@ layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=60u) {
+#ifdef AZURE_FACE_SDF_WORLD_NORMAL
+        uint probe=(i-60u)/3u;
+        mat3 frame=probe==2u?mat3(0,0,-1,0,1,0,1,0,0)
+            :probe==5u?mat3(2,0,0,0,1,0,0,0,1):mat3(1);
+        float blue=probe==6u||probe==8u?.5:probe==7u?1.0:.75;
+        float side=probe==1u||probe==7u?-1.0:1.0;
+        float mask=probe==3u||probe==5u||probe==8u?.5:probe==4u?1.0:0.0;
+        vec3 geometry=probe==8u?-normalize(vec3(0,6.103515625e-5,1)):vec3(0,0,1);
+        result.values[i]=faceSdfWorldNormal(vec4(.2,.8,blue,.3),side,frame,geometry,mask)[(i-60u)%3u];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
     if(i>=52u) {
         const float distancesSquared[4]=float[4](0,1,25,100);
         result.values[i]=localLightDistanceWeight(distancesSquared[(i-52u)%4u],10,

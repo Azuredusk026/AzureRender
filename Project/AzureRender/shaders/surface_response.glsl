@@ -1,4 +1,5 @@
 #define AZURE_FACE_SDF_V2 1
+#define AZURE_FACE_SDF_WORLD_NORMAL 1
 
 // The strip stores RGB colors in sRGB; sampler decoding precedes filtering.
 // Coordinates also use sRGB. Red runs within a slice, blue across slices,
@@ -22,6 +23,13 @@ vec2 faceSdfSampleUv(vec2 uv,float localLightX) {
 vec3 faceSdfNormal(vec4 lightmap,float localLightX) {
     float nx=(lightmap.b*2.0-1.0)*(localLightX>0.0?1.0:-1.0);
     return normalize(vec3(nx,6.103515625e-5,1.0-abs(nx)));
+}
+vec3 faceSdfWorldNormal(vec4 lightmap,float localLightX,mat3 headFrame,
+    vec3 geometryNormal,float geometryMix) {
+    vec3 worldNormal=normalize(headFrame*faceSdfNormal(lightmap,localLightX));
+    vec3 blendedNormal=mix(worldNormal,geometryNormal,geometryMix);
+    return dot(blendedNormal,blendedNormal)>1e-12
+        ? normalize(blendedNormal) : geometryNormal;
 }
 // Inputs are in an orthonormal head frame. Vertical lights/cameras have a
 // defined horizontal fallback so poles cannot introduce NaNs into the ramp.

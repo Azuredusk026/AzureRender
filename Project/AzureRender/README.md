@@ -165,6 +165,8 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
 角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
 脸部支持[双图距离场](docs/runtime/dual-face-sdf.md)与独立线性色带。
+蓝色通道法线用于局部漫反射与轮廓光。
+分支范围与数值验证见[脸部法线证据](docs/acceptance/nr/face-sdf-normal.md)。
 局部场景灯逐灯消费脸部色带及头部动画。
 灯光支持[逐灯镜面倍率](docs/runtime/light-specular-response.md)，原生中庭源倍率已进入联合候选。
 原生局部算法已核验，完整角色着色仍待还原。
