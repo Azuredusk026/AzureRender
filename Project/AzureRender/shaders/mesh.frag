@@ -623,6 +623,7 @@ void main() {
         float pointDiffuse = max(dot(shadedNormal, pointDirection), 0.0);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
+        if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
         vec3 localDiffuseResponse=vec3(pointDiffuse);
         if(dualFaceSdf) {
             vec4 localDistanceSample;

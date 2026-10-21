@@ -54,4 +54,12 @@ int main() { try {
         try {buffer.setLights({spot});} catch(const std::invalid_argument&) {rejected=true;}
         if(!rejected)throw std::runtime_error("Invalid light falloff exponent must be rejected");
     }
+    azurerender::RenderLight shadowSun;
+    shadowSun.shape.type=azurerender::LightKind::Directional;
+    shadowSun.rasterShadowCaster=true;buffer.setLights({shadowSun});
+    if(buffer.gpuData()[0].directionOuter[3]!=1.F)
+        throw std::runtime_error("Primary directional must retain its raster shadow binding");
+    shadowSun.rasterShadowCaster=false;buffer.setLights({shadowSun});
+    if(buffer.gpuData()[0].directionOuter[3]!=0.F)
+        throw std::runtime_error("Secondary directionals must not sample another emitter's shadow map");
 } catch(const std::exception& error) { std::cerr<<error.what()<<'\n';return 1; } }

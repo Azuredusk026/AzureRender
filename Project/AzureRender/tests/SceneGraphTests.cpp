@@ -2,6 +2,7 @@
 #include "scene/Frustum.hpp"
 #include "scene/TransformSystem.hpp"
 #include "scene/SceneDescription.hpp"
+#include "scene/DirectionalLightSelection.hpp"
 
 #include <cassert>
 #include <cmath>
@@ -151,5 +152,16 @@ int main() {
     static_cast<void>(azurerender::scene::resolveNodeWorldTransforms(
         description, &sceneCycles));
     assert(sceneCycles > 0);
+    azurerender::scene::SceneLightDesc sun;
+    sun.id="b";sun.shape.type=azurerender::LightKind::Directional;sun.intensity=2;
+    std::vector<azurerender::scene::SceneLightDesc> suns{sun};
+    sun.id="a";suns.push_back(sun);
+    assert(azurerender::scene::primaryDirectionalLight(suns)->id=="a");
+    suns[0].intensity=3;
+    assert(azurerender::scene::primaryDirectionalLight(suns)->id=="b");
+    suns[0].enabled=false;suns[1].intensity=0;
+    assert(!azurerender::scene::primaryDirectionalLight(suns));
+    suns[0].enabled=true;suns[0].shape.type=azurerender::LightKind::Point;
+    assert(!azurerender::scene::primaryDirectionalLight(suns));
     return 0;
 }

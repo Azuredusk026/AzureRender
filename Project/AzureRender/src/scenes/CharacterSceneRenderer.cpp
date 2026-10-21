@@ -1,6 +1,7 @@
 #include "assets/AssetDeformation.hpp"
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "render/ResourceAccessProfile.hpp"
 #include "render/ResourceIndexTable.hpp"
@@ -2890,7 +2891,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
     Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
-    if (frame.qaLightScan) {
+    const auto* mainSceneLight=settings.sceneLightingEnabled?scene::primaryDirectionalLight(scene_.lights):nullptr;
+    if(mainSceneLight)lightDirection=scaleVector(mainSceneLight->shape.direction,-1.F);
+    if (frame.qaLightScan&&!mainSceneLight) {
         const float angle = 2.0F * kPi * static_cast<float>(frame.capturedFrames % 120) / 119.0F;
         const auto initial = lightDirection;
         lightDirection = {std::cos(angle) * initial[0] - std::sin(angle) * initial[2],
@@ -3033,7 +3036,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
         settings.faceSdf.mirrorHorizontal ? 1.0F : 0.0F,
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
-    uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], frame.qaLightScan ? 1.0F : 0.0F};
+    uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], (frame.qaLightScan||mainSceneLight) ? 1.0F : 0.0F};
     const auto& probe=scene_.reflectionProbe;
     uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],0};
     uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
@@ -3058,6 +3061,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
     (void)height;
     std::vector<RenderLight> lights;
     lights.reserve(scene_.lights.size());
+    const auto* mainSceneLight=renderSettings_->sceneLightingEnabled?scene::primaryDirectionalLight(scene_.lights):nullptr;
     for (const scene::SceneLightDesc& source : scene_.lights) {
         if (!source.enabled) {
             continue;
@@ -3098,6 +3102,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
         light.intensity = source.intensity;
         light.radius = source.radius;
         light.shape = source.shape;
+        light.rasterShadowCaster=mainSceneLight==&source;
         lights.push_back(light);
     }
     frameLights_.setLights(std::move(lights), kMaxSceneLights);

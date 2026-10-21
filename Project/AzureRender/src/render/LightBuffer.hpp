@@ -19,6 +19,7 @@ struct RenderLight {
     LightShape shape;
     bool viewSpaceBounds = false;
     std::array<float, 3> viewPosition{};
+    bool rasterShadowCaster = false;
 };
 
 struct RenderLightGpu {
@@ -53,7 +54,8 @@ public:
             value.colorIntensity[2] = light.color[2];
             value.colorIntensity[3] = light.intensity;
             for (unsigned i=0; i<3; ++i) value.directionOuter[i] = light.shape.direction[i];
-            value.directionOuter[3] = std::cos(light.shape.outerCone);
+            value.directionOuter[3] = light.shape.type==LightKind::Directional
+                ? (light.rasterShadowCaster?1.F:0.F) : std::cos(light.shape.outerCone);
             value.coneType[0] = std::cos(light.shape.innerCone);
             value.coneType[1] = static_cast<float>(light.shape.type);
             value.coneType[2] = static_cast<float>(light.shape.falloff);
