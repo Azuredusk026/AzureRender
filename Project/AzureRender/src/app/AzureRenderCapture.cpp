@@ -307,6 +307,7 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"
         << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
         << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
+        << "  \"antiAliasingPipeline\": \"linear-display-spatial-v1\",\n"
         << "  \"sceneRenderWidth\": " << sceneRenderExtent_.width << ",\n"
         << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
         << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"

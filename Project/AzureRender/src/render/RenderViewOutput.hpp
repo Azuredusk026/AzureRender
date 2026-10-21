@@ -1,6 +1,7 @@
 #pragma once
 #include "render/RenderViewService.hpp"
 #include "render/ColorGradingLutGpu.hpp"
+#include "render/SpatialAntiAliasing.hpp"
 namespace azurerender {
 // Owned LDR resolve resources, separate from scene and temporal attachments.
 class RenderViewOutput final {
@@ -23,6 +24,7 @@ private:
     VkPipelineLayout layout_=VK_NULL_HANDLE;
     VkPipeline pipeline_=VK_NULL_HANDLE;
     std::unique_ptr<ColorGradingLutGpu> lut_;
+    std::unique_ptr<SpatialAntiAliasing> spatial_;
     void destroy() noexcept;
 };
 }

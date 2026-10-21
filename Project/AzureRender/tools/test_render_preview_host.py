@@ -21,6 +21,8 @@ def run(executable, output):
         'grading': [dict(renderer='character', extent=[192,128], position=[2.8,2.1,3.2], target=[0,0,0], transfer='srgb'),
                     dict(renderer='character', extent=[192,128], position=[2.8,2.1,3.2], target=[0,0,0], transfer='srgb',
                          grade=dict(exposureEv=-3,saturation=0,tint=[.5,1,.5]))],
+        'sampling': [dict(renderer='blackhole',extent=[192,128],position=[0,3.5,22],target=[0,0,0],transfer='srgb',
+                          antiAliasing=mode) for mode in range(3)],
     }
     evidence = []
     for name, views in cases.items():
@@ -45,6 +47,11 @@ def run(executable, output):
         for index, expected in enumerate(views):
             view=runtime['views'][index]
             assert view['extent']==expected['extent']
+            if 'antiAliasing' in expected:
+                assert view['antiAliasing']==expected['antiAliasing']
+                scale=2 if expected['antiAliasing']==2 else 1
+                assert view['sceneExtent']==[value*scale for value in expected['extent']]
+                assert view['frameExtent']==view['sceneExtent'],'Renderer pixel uniforms use the physical scene size'
             assert all(math.isclose(actual,wanted,abs_tol=1e-5) for actual,wanted in zip(view['cameraPosition'],expected['position']))
             assert view['renderCount']==1,'Static views must suspend after the requested frame'
             image=Image.open(folder/'preview-images'/f'{index}.png').convert('RGB');images.append(image)
@@ -55,6 +62,9 @@ def run(executable, output):
             assert ImageChops.difference(images[0],images[1]).getbbox(),'Independent blackhole cameras must change rendered pixels'
         if name=='grading':
             assert ImageChops.difference(images[0],images[1]).getbbox(),'Each view must consume its independent grade settings'
+        if name=='sampling':
+            assert ImageChops.difference(images[0],images[1]).getbbox(),'The independent procedural renderer consumes edge filtering'
+            assert ImageChops.difference(images[0],images[2]).getbbox(),'The independent procedural renderer consumes supersampling'
         evidence.append(dict(case=name,views=runtime['views'],released=True,validationErrors=0))
     summary=dict(schemaVersion=1,status='passed',cases=evidence,physicalKeyboardMouse='not performed')
     (output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8');print(json.dumps(summary))

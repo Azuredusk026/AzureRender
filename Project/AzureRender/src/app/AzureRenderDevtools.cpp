@@ -27,6 +27,9 @@ RenderViewDescriptor AzureRenderApp::previewDescriptor(const nlohmann::json& par
     if(base.scene.resources.empty() && !parameters.contains("renderer"))descriptor.rendererId="sample";
     descriptor.scene=base.scene;descriptor.settings=effectiveRenderSettings_;
     descriptor.sceneWorldCoordinates=base.sceneWorldCoordinates;
+    if(parameters.contains("antiAliasing")){
+        descriptor.settings.antiAliasing=parameters.at("antiAliasing").get<int>();validateRenderSettings(descriptor.settings);
+    }
     if(parameters.contains("grade")){
         const auto& grade=parameters.at("grade");auto& result=descriptor.settings.grade;
         if(!grade.is_object())throw EditRejection("Preview grade requires an object");
@@ -44,7 +47,10 @@ RenderViewDescriptor AzureRenderApp::previewDescriptor(const nlohmann::json& par
     // UNORM presentation expects encoded samples; sRGB presentation encodes linear samples.
     descriptor.transfer=(swapchainFormat_==VK_FORMAT_B8G8R8A8_SRGB || swapchainFormat_==VK_FORMAT_R8G8B8A8_SRGB)
         ?ViewColorTransfer::Linear:ViewColorTransfer::SrgbEncoded;
-    if(parameters.value("transfer",std::string())=="srgb")descriptor.transfer=ViewColorTransfer::SrgbEncoded;
+    const auto transfer=parameters.value("transfer",std::string());
+    if(transfer=="srgb")descriptor.transfer=ViewColorTransfer::SrgbEncoded;
+    else if(transfer=="linear")descriptor.transfer=ViewColorTransfer::Linear;
+    else if(!transfer.empty())throw EditRejection("Preview transfer requires linear or srgb");
     return descriptor;
 }
 void AzureRenderApp::initializeDevtools(){

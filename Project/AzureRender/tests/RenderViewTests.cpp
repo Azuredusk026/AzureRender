@@ -2,6 +2,7 @@
 #include "rhi/NullRhi.hpp"
 #include "scenes/SampleSceneRenderer.hpp"
 #include "render/ColorGradingLut.hpp"
+#include "render/SpatialAntiAliasing.hpp"
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
@@ -24,7 +25,12 @@ int main(int argc,char** argv){try{
     const auto removeLut=std::unique_ptr<void,std::function<void(void*)>>(reinterpret_cast<void*>(1),[&](void*){std::filesystem::remove(lutPath);});
     descriptor.settings.grade.lut.asset=lutPath.generic_u8string();
     descriptor.extent={128,256};descriptor.cameraPosition={-2,2,1};const auto b=service.create(descriptor);
+    descriptor.settings.antiAliasing=2;
     const auto c=service.create(descriptor);reject([&]{service.create(descriptor);});
+    require(service.describe(c).at("sceneExtent")==nlohmann::json({256,512}),"Supersampling scales the auxiliary scene extent while preserving its output extent");
+    require(service.describe(c).at("extent")==nlohmann::json({128,256}),"Supersampling keeps the requested auxiliary output size");
+    require(service.describe(c).at("antiAliasing")==2,"Auxiliary diagnostics report the consumed AA mode");
+    descriptor.settings.antiAliasing=1;
     require(service.describe(a).at("cameraPosition")==nlohmann::json({2,1,3}),"Each view preserves its camera");
     require(service.describe(b).at("extent")==nlohmann::json({128,256}),"Each view preserves its extent");
     service.request(a);service.request(a);service.request(b);
@@ -66,5 +72,21 @@ int main(int argc,char** argv){try{
     RenderViewService broken(base,[](const std::string&)->std::unique_ptr<ISceneRenderer>{throw std::runtime_error("Renderer load failure");},[]{});
     reject([&]{broken.create(descriptor);});
     require(rhi.allocator().statistics().liveImages==beforeFailure,"Partial renderer creation releases every attachment");
+    rhi.unavailableSampledFormats.insert(SpatialAntiAliasing::kLinearFormat);
+    reject([&]{another.create(descriptor);});
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Unsupported spatial AA format releases partially created view outputs");
+    rhi.unavailableSampledFormats.clear();const auto recovered=another.create(descriptor);another.release(recovered);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"A failed AA allocation leaves the view service reusable");
+    auto limitedBase=base;limitedBase.descriptorLimits.maxImageDimension2D=4096;
+    RenderViewService limited(limitedBase,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
+    auto large=descriptor;large.settings.antiAliasing=2;large.extent={3000,3000};
+    reject([&]{limited.create(large);});
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Oversized AA scene extents fail before allocating attachments");
+    large.extent={2048,2048};const auto maximum=limited.create(large);limited.request(maximum);
+    RenderGraph extentGraph;limited.schedule(extentGraph,frame,base,1);
+    require(extentGraph.compile(error),"Physical supersampling dimensions form a valid graph");extentGraph.execute(&commands);
+    require(limited.describe(maximum).at("frameExtent")==nlohmann::json({4096,4096}),"Renderers consume the physical AA scene dimensions in their per-frame uniforms");
+    limited.release(maximum);limited.complete(1);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"The device-limit boundary remains usable after an oversized AA request");
     std::cout<<"View isolation, demand scheduling, generation and sampled-resource retirement passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

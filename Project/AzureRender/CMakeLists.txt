@@ -186,8 +186,11 @@ function(compile_shader source_file)
     set(shader_define_args)
     set(shader_lut_dependency)
     get_filename_component(shader_source_base "${source_file}" NAME)
-    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp")
+    if(shader_source_base STREQUAL "inner_outline.frag" OR shader_source_base STREQUAL "view_resolve.frag" OR shader_source_base STREQUAL "color_grading_lut_test.comp" OR shader_source_base STREQUAL "spatial_antialiasing.frag")
         set(shader_lut_dependency "${SHADER_SOURCE_DIR}/color_grading_lut.glsl")
+    endif()
+    if(shader_source_base STREQUAL "spatial_antialiasing.frag")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/spatial_antialiasing.glsl")
     endif()
     foreach(shader_define IN LISTS SHADER_DEFINES)
         list(APPEND shader_define_args "-D${shader_define}")
@@ -279,6 +282,7 @@ compile_shader(
 compile_shader("${SHADER_SOURCE_DIR}/blackhole_composite.frag")
 compile_shader("${SHADER_SOURCE_DIR}/clear.comp")
 compile_shader("${SHADER_SOURCE_DIR}/view_resolve.frag")
+compile_shader("${SHADER_SOURCE_DIR}/spatial_antialiasing.frag")
 compile_shader("${SHADER_SOURCE_DIR}/bloom_downsample.comp")
 compile_shader("${SHADER_SOURCE_DIR}/bloom_composite.comp")
 compile_shader("${SHADER_SOURCE_DIR}/ibl_prefilter.comp")
@@ -358,6 +362,7 @@ add_library(AzureRenderCore STATIC
     src/render/RenderGraph.cpp
     src/render/RenderViewService.cpp
     src/render/RenderViewOutput.cpp
+    src/render/SpatialAntiAliasing.cpp
     src/render/TransientResourcePool.cpp
     src/render/RenderSettings.cpp
     src/render/EnvironmentAsset.cpp
@@ -716,6 +721,14 @@ if(BUILD_TESTING)
         --executable "$<TARGET_FILE:AzureRender>" --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf"
         --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-fixture")
     set_tests_properties(AzureRender.SamplingGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_test(NAME AzureRender.SpatialAntiAliasingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>")
+    add_test(NAME AzureRender.SpatialAntiAliasingAuxiliaryGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
+        --executable "$<TARGET_FILE:AzureRender>" --auxiliary)
+    set_tests_properties(AzureRender.SpatialAntiAliasingGpu AzureRender.SpatialAntiAliasingAuxiliaryGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_test(NAME AzureRender.SpatialAntiAliasingTransferGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_transfer_gpu.py"
+        --executable "$<TARGET_FILE:AzureRender>")
+    set_tests_properties(AzureRender.SpatialAntiAliasingTransferGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_test(NAME AzureRender.ColorGradingLutProduction COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_color_grading_lut_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.ColorGradingLutProduction PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)

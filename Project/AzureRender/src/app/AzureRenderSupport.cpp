@@ -246,6 +246,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
         vkDestroyFramebuffer(device_, framebuffer, nullptr);
     }
     postProcessFramebuffers_.clear();
+    spatialAntiAliasing_.clear();
 
     const auto destroyImages = [this](
                                    auto& views,

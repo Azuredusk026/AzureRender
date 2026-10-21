@@ -64,6 +64,11 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 启动和 UI 分层见[应用架构](docs/architecture-ui-productization.md)。
 项目打开与资源初始化记录见[启动诊断](docs/development/startup-diagnostics.md)。
 
+主视口、辅助视口与 Player 共用空间抗锯齿。
+模式包含关闭、原生分辨率过滤和四子像素超采样。
+配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
+公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
+
 编辑器支持场景层级、属性编辑、选择变换、内容导入、撤销重做和运行预览。运行时提供 ECS、物理、脚本、动画、声音及游戏界面。独立 Player 按项目数据运行，并通过 Windows 游戏包交付。
 
 最近一轮实现了类型化材质画布、像素坐标二维文档及 GIF、PSD、SVG、ASCII USD 导入。格式注册覆盖 29 种输入、20 种输出，各格式有明确支持边界。二维内容和材质图的范围见[项目现状](docs/project-status.md)。

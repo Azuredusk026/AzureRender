@@ -223,6 +223,7 @@ void AzureRenderApp::createEditorUiRenderPass() {
 
 
 void AzureRenderApp::createGraphicsPipeline() {
+    createSpatialAntiAliasingResources();
     const std::string shaderDirectory = resourceLocator_.shaderDirectory().u8string();
     const auto innerOutlineVertexCode =
         readBinaryFile(shaderDirectory + "/inner_outline.vert.spv");
@@ -357,7 +358,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pColorBlendState = &colorBlending;
         pipelineInfo.pDynamicState = &dynamicState;
         pipelineInfo.layout = postProcessPipelineLayout_;
-        pipelineInfo.renderPass = postProcessRenderPass_;
+        pipelineInfo.renderPass = spatialAntiAliasing_.at(0)->inputPass();
         pipelineInfo.subpass = 0;
         vkCheck(
             vkCreateGraphicsPipelines(
@@ -401,6 +402,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.pStages = hudShaderStages.data();
         pipelineInfo.pVertexInputState = &hudVertexInput;
         pipelineInfo.layout = hudPipelineLayout_;
+        pipelineInfo.renderPass = postProcessRenderPass_;
         vkCheck(
             vkCreateGraphicsPipelines(
                 device_,
@@ -458,6 +460,7 @@ void AzureRenderApp::createFramebuffers() {
 }
 
 void AzureRenderApp::createPostProcessFramebuffers() {
+    createSpatialAntiAliasingResources();
     const std::vector<VkImageView>& targetViews = editorUiEnabled_
         ? editorViewportImageViews_
         : swapchainImageViews_;
@@ -481,6 +484,14 @@ void AzureRenderApp::createPostProcessFramebuffers() {
                 &postProcessFramebuffers_[index]),
             "vkCreateFramebuffer(post process)");
     }
+}
+
+void AzureRenderApp::createSpatialAntiAliasingResources(){
+    if(!spatialAntiAliasing_.empty())return;
+    const auto shaders=resourceLocator_.shaderDirectory().u8string();
+    for(std::size_t index=0;index<swapchainImages_.size();++index)
+        spatialAntiAliasing_.push_back(std::make_unique<azurerender::SpatialAntiAliasing>(
+            *rhi_,sceneRenderExtent_,shaders,postProcessRenderPass_));
 }
 
 void AzureRenderApp::createEditorUiFramebuffers() {

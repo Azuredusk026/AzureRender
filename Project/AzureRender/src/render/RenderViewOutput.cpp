@@ -14,7 +14,7 @@ RenderViewOutput::RenderViewOutput(const RenderContext& context,VkImageView hdr,
     VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE;
     auto& rhi=*context.rhi;
     try{
-        const auto extent=context.renderExtent;
+        const auto extent=context.swapchainExtent;
         const auto binding=context.renderSettings?context.renderSettings->grade.lut:ColorGradingLutSettings{};
         const auto path=binding.resolvedAsset.empty()?std::filesystem::u8path(binding.asset):binding.resolvedAsset;
         lut_=std::make_unique<ColorGradingLutGpu>(rhi,binding.asset.empty()?makeIdentityColorGradingLut():loadColorGradingLut(path),
@@ -25,6 +25,7 @@ RenderViewOutput::RenderViewOutput(const RenderContext& context,VkImageView hdr,
         rhi::RenderPassDesc pass;pass.attachments={{VK_FORMAT_R8G8B8A8_UNORM,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,false,true,false}};
         pass.externalReadDependency=true;pass_=rhi.createRenderPass(pass);
         framebuffer_=rhi.createFramebuffer({pass_,{view_},extent.width,extent.height});
+        spatial_=std::make_unique<SpatialAntiAliasing>(rhi,context.renderExtent,context.shaderDirectory,pass_);
         setLayout_=rhi.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
         pool_=rhi.createDescriptorPool({{{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,2}},1});
@@ -36,7 +37,7 @@ RenderViewOutput::RenderViewOutput(const RenderContext& context,VkImageView hdr,
         fragment=rhi.createShaderModule(load(std::filesystem::u8path(context.shaderDirectory)/"view_resolve.frag.spv"));
         rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=vertex;pipeline.fragmentShader=fragment;
         pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthTest=false;pipeline.depthWrite=false;
-        pipeline.colorAttachmentCount=1;pipeline.renderPass=pass_;pipeline.layout=layout_;
+        pipeline.colorAttachmentCount=1;pipeline.renderPass=spatial_->inputPass();pipeline.layout=layout_;
         pipeline_=rhi.createGraphicsPipeline(pipeline);
         rhi.destroyShaderModule(vertex);vertex=VK_NULL_HANDLE;rhi.destroyShaderModule(fragment);fragment=VK_NULL_HANDLE;
     }catch(...){if(vertex)rhi.destroyShaderModule(vertex);if(fragment)rhi.destroyShaderModule(fragment);destroy();throw;}
@@ -45,6 +46,7 @@ RenderViewOutput::~RenderViewOutput(){destroy();}
 void RenderViewOutput::destroy() noexcept{
     auto& rhi=*context_.rhi;
     if(pipeline_)rhi.destroyPipeline(pipeline_);
+    spatial_.reset();
     if(layout_)rhi.destroyPipelineLayout(layout_);
     if(pool_)rhi.destroyDescriptorPool(pool_);
     lut_.reset();
@@ -57,17 +59,28 @@ void RenderViewOutput::destroy() noexcept{
 void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,const std::string& name){
     rhi::ImageBarrierDesc initial{};initial.image=image_.image;
     const auto output=graph.importImage(name+"-ldr",initial);
-    const auto pass=graph.addCommandPass(name+"-resolve",[this](rhi::ICommandRecorder& commands){
-        rhi::RenderPassBeginDesc begin{pass_,framebuffer_,context_.renderExtent,{}};
-        commands.beginRenderPass(begin);commands.setViewport(static_cast<float>(image_.width),static_cast<float>(image_.height));
+    initial.image=spatial_->inputImage().image;
+    const auto linear=graph.importImage(name+"-linear-display",initial);
+    const auto gradePass=graph.addCommandPass(name+"-grade",[this](rhi::ICommandRecorder& commands){
+        rhi::RenderPassBeginDesc begin{spatial_->inputPass(),spatial_->inputFramebuffer(),context_.renderExtent,{}};
+        commands.beginRenderPass(begin);commands.setViewport(float(context_.renderExtent.width),float(context_.renderExtent.height));
         commands.setScissor(context_.renderExtent);commands.bindPipeline(pipeline_);commands.bindDescriptorSet(layout_,set_);
         const auto grade=context_.renderSettings?context_.renderSettings->grade:GradeSettings{};
         const std::array<float,12> transfer{grade.exposureEv,grade.saturation,grade.contrast,grade.toneMappingEnabled?1.F:0.F,
-            grade.tint[0],grade.tint[1],grade.tint[2],transfer_==ViewColorTransfer::SrgbEncoded?1.F:0.F,
+            grade.tint[0],grade.tint[1],grade.tint[2],0,
             grade.lut.asset.empty()?0.F:static_cast<float>(lut_->dimension()),grade.lut.exposureMultiplier,static_cast<float>(lut_->inputDomain()),0};
         commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,transfer.data(),48);commands.draw(3);commands.endRenderPass();
     });
-    graph.use(pass,hdr,RenderGraphUsage::Sampled,false);
-    graph.attachment(pass,output,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    graph.use(gradePass,hdr,RenderGraphUsage::Sampled,false);
+    graph.attachment(gradePass,linear,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    const auto resolvePass=graph.addCommandPass(name+"-resolve",[this](rhi::ICommandRecorder& commands){
+        commands.beginRenderPass({pass_,framebuffer_,context_.swapchainExtent,{}});
+        commands.setViewport(float(image_.width),float(image_.height));commands.setScissor(context_.swapchainExtent);
+        spatial_->resolve(commands,context_.renderSettings?context_.renderSettings->antiAliasing:1,
+            transfer_==ViewColorTransfer::SrgbEncoded,context_.renderSettings&&context_.renderSettings->diagnosticView!=0);
+        commands.endRenderPass();
+    });
+    graph.use(resolvePass,linear,RenderGraphUsage::Sampled,false);
+    graph.attachment(resolvePass,output,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 }
 }

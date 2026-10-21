@@ -1005,24 +1005,25 @@ void AzureRenderApp::recordCommandBuffer(
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
 #endif
     const auto scenePassCount = graph.passes().size();
-    const auto composite = graph.addPass("post-process-hud", [&] {
+    auto& spatial=*spatialAntiAliasing_.at(imageIndex);
+    const auto linearDisplay=importAttachment("linear-display",spatial.inputImage().image,VK_IMAGE_ASPECT_COLOR_BIT);
+    const auto gradePass=graph.addPass("post-process-grade", [&] {
     VkRenderPassBeginInfo postProcessPassInfo{
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
-    postProcessPassInfo.renderPass = postProcessRenderPass_;
-    postProcessPassInfo.framebuffer =
-        postProcessFramebuffers_[imageIndex];
+    postProcessPassInfo.renderPass = spatial.inputPass();
+    postProcessPassInfo.framebuffer = spatial.inputFramebuffer();
 
-    postProcessPassInfo.renderArea.extent = renderExtent_;
+    postProcessPassInfo.renderArea.extent = sceneRenderExtent_;
     vkCmdBeginRenderPass(
         commandBuffer,
         &postProcessPassInfo,
         VK_SUBPASS_CONTENTS_INLINE);
     VkViewport viewport{};
-    viewport.width = static_cast<float>(renderExtent_.width);
-    viewport.height = static_cast<float>(renderExtent_.height);
+    viewport.width = static_cast<float>(sceneRenderExtent_.width);
+    viewport.height = static_cast<float>(sceneRenderExtent_.height);
     viewport.maxDepth = 1.0F;
     VkRect2D scissor{};
-    scissor.extent = renderExtent_;
+    scissor.extent = sceneRenderExtent_;
     vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
     vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
     vkCmdBindPipeline(
@@ -1085,6 +1086,21 @@ void AzureRenderApp::recordCommandBuffer(
         sizeof(postProcessConstants),
         &postProcessConstants);
     vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+    vkCmdEndRenderPass(commandBuffer);
+    });
+    graph.use(gradePass,resources.color,azurerender::RenderGraphUsage::Sampled,false);
+    graph.use(gradePass,resources.depth,azurerender::RenderGraphUsage::Sampled,false);
+    graph.use(gradePass,resources.normal,azurerender::RenderGraphUsage::Sampled,false);
+    graph.use(gradePass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
+    graph.attachment(gradePass,linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    const auto composite=graph.addPass("post-process-hud",[&]{
+    VkRenderPassBeginInfo finalPass{VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO};
+    finalPass.renderPass=postProcessRenderPass_;finalPass.framebuffer=postProcessFramebuffers_[imageIndex];
+    finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
+    VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
+    VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
+    spatial.resolve(commandRecorder,effectiveRenderSettings_.antiAliasing,
+        swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB&&swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB,effectiveRenderSettings_.diagnosticView!=0);
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {
         vkCmdBindPipeline(
@@ -1108,10 +1124,7 @@ void AzureRenderApp::recordCommandBuffer(
     if(gameUiRenderer_ && gameUi_){const auto before=gameUiRenderer_->drawCalls();gameUiRenderer_->record(commandRecorder);uiDrawCalls_+=gameUiRenderer_->drawCalls()-before;}
     vkCmdEndRenderPass(commandBuffer);
     });
-    graph.use(composite, resources.color, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.depth, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.normal, azurerender::RenderGraphUsage::Sampled, false);
-    graph.use(composite, resources.shadow, azurerender::RenderGraphUsage::Sampled, false);
+    graph.use(composite,linearDisplay,azurerender::RenderGraphUsage::Sampled,false);
     graph.write(composite, output);
     const auto editor = graph.addPass("editor-ui", [&] {
 #if AZURE_WITH_EDITOR

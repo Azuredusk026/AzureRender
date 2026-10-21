@@ -204,35 +204,6 @@ vec4 composeGroundGrid(vec4 scene,vec2 uv){
     return vec4(mix(scene.rgb,linearColor,color.a),scene.a);
 }
 
-float luma(vec3 rgb){return dot(rgb,vec3(.2126,.7152,.0722));}
-void resolveScene(){
-    vec2 texel=1.0/vec2(textureSize(sceneColorTexture,0));
-    if(outline.sampling.x>1.5){
-        vec4 sum=vec4(0);
-        for(int y=0;y<2;++y)for(int x=0;x<2;++x)
-            sum+=shadePixel(screenUv+(vec2(x,y)-vec2(.5))*texel);
-        outputColor=sum*.25;
-    }else if(outline.sampling.x>.5 && outline.diagnosticView<.5){
-        vec4 center=shadePixel(screenUv);
-        vec3 nw=shadePixel(screenUv+vec2(-1,-1)*texel).rgb;
-        vec3 ne=shadePixel(screenUv+vec2(1,-1)*texel).rgb;
-        vec3 sw=shadePixel(screenUv+vec2(-1,1)*texel).rgb;
-        vec3 se=shadePixel(screenUv+vec2(1,1)*texel).rgb;
-        float lc=luma(center.rgb),lnw=luma(nw),lne=luma(ne),lsw=luma(sw),lse=luma(se);
-        float lo=min(lc,min(min(lnw,lne),min(lsw,lse))),hi=max(lc,max(max(lnw,lne),max(lsw,lse)));
-        if(hi-lo<max(.025,hi*.125)){outputColor=center;return;}
-        vec2 direction=vec2(-((lnw+lne)-(lsw+lse)),(lnw+lsw)-(lne+lse));
-        float reduce=max((lnw+lne+lsw+lse)*(.25*.125),.0078125);
-        direction=clamp(direction/(min(abs(direction.x),abs(direction.y))+reduce),vec2(-8),vec2(8))*texel;
-        vec3 a=.5*(shadePixel(screenUv+direction*(1.0/3.0-.5)).rgb+shadePixel(screenUv+direction*(2.0/3.0-.5)).rgb);
-        vec3 b=a*.5+.25*(shadePixel(screenUv-direction*.5).rgb+shadePixel(screenUv+direction*.5).rgb);
-        // Retain half the original coverage: a full directional replacement
-        // over-blurs narrow silhouettes against bright backgrounds.
-        float lb=luma(b);outputColor=vec4(mix(center.rgb,lb<lo||lb>hi?a:b,.5),1);
-    }else outputColor=shadePixel(screenUv);
-}
 void main(){
-    resolveScene();outputColor=composeGroundGrid(outputColor,screenUv);
-    if(outline.colorGradingLut.x>1.5&&outline.colorGradingLut.w>.5&&outline.diagnosticView<.5&&outline.bloomIsolation<.5)
-        outputColor.rgb=colorGradingLinearToSrgb(outputColor.rgb);
+    outputColor=composeGroundGrid(shadePixel(screenUv),screenUv);
 }

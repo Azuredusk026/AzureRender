@@ -74,13 +74,17 @@ struct RenderViewService::State {
         context.sceneWorldCoordinates=descriptor.sceneWorldCoordinates;
         context.gpuTimingEnabled=false;context.timestampQueryPool=VK_NULL_HANDLE;context.submissionCounters=nullptr;
         context.renderExtent=descriptor.extent;context.swapchainExtent=descriptor.extent;
+        if(descriptor.settings.antiAliasing==2){context.renderExtent.width*=2;context.renderExtent.height*=2;}
+        const auto imageLimit=context.descriptorLimits.maxImageDimension2D;
+        if(imageLimit&&(context.renderExtent.width>imageLimit||context.renderExtent.height>imageLimit||context.shadowMapSize>imageLimit))
+            throw std::invalid_argument("Render view sampling extent exceeds the device image limit");
         context.qaInstanceCount=1;context.preparedMeshes=nullptr;
         auto& rhi=*context.rhi;
         const auto shadowExtent=std::max(1u,context.shadowMapSize);
         const std::array<VkFormat,4> formats{context.sceneColorFormat,context.depthFormat,context.normalFormat,context.shadowFormat};
         for(std::size_t i=0;i<4;++i){
-            const bool depth=i==1 || i==3;const auto width=i==3?shadowExtent:descriptor.extent.width;
-            const auto height=i==3?shadowExtent:descriptor.extent.height;
+            const bool depth=i==1 || i==3;const auto width=i==3?shadowExtent:context.renderExtent.width;
+            const auto height=i==3?shadowExtent:context.renderExtent.height;
             view->images[i]=context.allocator->createImage2D(width,height,formats[i],
                 (depth?VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
             view->views[i]=rhi.createImageView(view->images[i].image,formats[i],depth?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT,1);
@@ -93,7 +97,7 @@ struct RenderViewService::State {
         view->scenePass=rhi.createRenderPass(pass);
         rhi::RenderPassDesc shadow;shadow.attachments={{formats[3],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
         shadow.depthAttachment=0;shadow.externalReadDependency=true;view->shadowPass=rhi.createRenderPass(shadow);
-        view->framebuffer=rhi.createFramebuffer({view->scenePass,{view->views[0],view->views[1],view->views[2]},descriptor.extent.width,descriptor.extent.height});
+        view->framebuffer=rhi.createFramebuffer({view->scenePass,{view->views[0],view->views[1],view->views[2]},context.renderExtent.width,context.renderExtent.height});
         view->shadowFramebuffer=rhi.createFramebuffer({view->shadowPass,{view->views[3]},shadowExtent,shadowExtent});
         view->sampler=rhi.createSampler({VK_FILTER_LINEAR,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,0,false});
         context.sceneRenderPass=view->scenePass;context.sceneFramebuffer=view->framebuffer;
@@ -163,7 +167,7 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         view->frame.sceneSnapshot=std::make_shared<const scene::SceneDescription>(view->descriptor.scene);
         std::copy(view->descriptor.cameraPosition.begin(),view->descriptor.cameraPosition.end(),view->frame.cameraPosition);
         std::copy(view->descriptor.cameraTarget.begin(),view->descriptor.cameraTarget.end(),view->frame.cameraTarget);
-        view->frame.swapchainWidth=view->descriptor.extent.width;view->frame.swapchainHeight=view->descriptor.extent.height;
+        view->frame.swapchainWidth=view->context.renderExtent.width;view->frame.swapchainHeight=view->context.renderExtent.height;
         view->renderer->updateFrame(view->frame);
         auto import=[&](std::size_t i){rhi::ImageBarrierDesc initial{};initial.image=view->images[i].image;
             initial.aspectMask=(i==1 || i==3)?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT;
@@ -196,6 +200,8 @@ void RenderViewService::release(RenderViewHandle handle){
 }
 nlohmann::json RenderViewService::describe(RenderViewHandle handle) const{
     const auto& view=*state_->slot(handle).view;return {{"schemaVersion",1},{"extent",{view.descriptor.extent.width,view.descriptor.extent.height}},
+        {"sceneExtent",{view.context.renderExtent.width,view.context.renderExtent.height}},{"antiAliasing",view.descriptor.settings.antiAliasing},
+        {"frameExtent",{view.frame.swapchainWidth,view.frame.swapchainHeight}},
         {"renderCameraPosition",view.frame.camera.view.position},{"renderCameraTarget",view.frame.camera.view.target},{"cameraPosition",view.descriptor.cameraPosition},{"cameraTarget",view.descriptor.cameraTarget},
         {"renderCount",view.renderCount},{"colorImage",reinterpret_cast<std::uintptr_t>(view.images[0].image)},
         {"resolvedImage",reinterpret_cast<std::uintptr_t>(view.output->image().image)},
