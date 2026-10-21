@@ -1,0 +1,606 @@
+{
+  "format": "AzureNativeAtriumAntialiasingAcceptance/1",
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "status": "passed-for-declared-aa-scope",
+  "passed": true,
+  "scope": {
+    "scene": "base01_lv001",
+    "state": "white-yellow-atrium",
+    "character": "laevat",
+    "content": [
+      "native-atrium-candidate",
+      "native-character-locomotion",
+      "native-logistics-animation"
+    ],
+    "runRoot": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6",
+    "renderer": "Release Player",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "nativePixelEquivalenceAccepted": null,
+    "nr12Complete": false
+  },
+  "source": {
+    "project": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/playable-safe.azureproject",
+      "sha256": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d"
+    },
+    "scene": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/assets/playable-safe.azurelevel",
+      "sha256": "432a34fb948720e00f74d79d7c3eacd90308b42503b0ff7e213b44324fce2b03"
+    },
+    "expectedSourceHashes": {
+      "project": "f7b5504f9ea0b975fe133b1eef7d53dc1c1a5c3ea57c3bfd508313f5cc74a07d",
+      "scene": "432a34fb948720e00f74d79d7c3eacd90308b42503b0ff7e213b44324fce2b03"
+    },
+    "sourceDocumentsModified": false,
+    "sourceCameraActivatedForAcceptance": true,
+    "defaultPlayer": {
+      "engineDefault": 1,
+      "sceneAuthored": 1,
+      "effective": 1,
+      "source": "scene-or-engine-default",
+      "projectSettingsSha256": null,
+      "defaultPlayerCoveredByEdgeCase": true,
+      "commandLineAaOverride": false
+    },
+    "projectSettingsPath": "build/runs/20261021-172156-native-render-evidence-623c52/high-detail-joint/project/config/engine-settings.json"
+  },
+  "frozenCandidate": {
+    "record": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/candidate-binary.json",
+      "sha256": "c32e57dabeac40b0de6de096a6ef9e3616d8383154e033d335f44c9199b9baf0"
+    },
+    "executableSha256": "53f469001bfa07371cc8e56cc315aa2b519587d61d8c6fdf6f08d6ae79f3decd",
+    "compiledShaderCount": 47,
+    "compiledShaderSha256": {
+      "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+      "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+      "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+      "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+      "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+      "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+      "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+      "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+      "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+      "character_depth.frag.spv": "7e3095f0c4450959069ee4fce746359d7f09bcae1477a8e5abdf8284b47ffb7a",
+      "character_depth_bindless.frag.spv": "0bf41c5761593f1742460b29bde84dedde90f30069fcf6e25c06ae6ef7e2755b",
+      "character_snapshot.frag.spv": "6a7dc42bca1573f6590ebbde8969dece309e955290669278a713aae72195aff2",
+      "character_snapshot_bindless.frag.spv": "36d90edbdff3e4d8088bbfcbdddf1f3a1017ba08e4f53b369623a0c74aa76543",
+      "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+      "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+      "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+      "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+      "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+      "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+      "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+      "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+      "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+      "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+      "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+      "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+      "mesh.frag.spv": "3bfb981909fe9e382b650a4a945e1cba9d28d038a74ab3eaa9dcaeb6ecb9e9c6",
+      "mesh.vert.spv": "7ab2c4a052eaff0750a9c3f550aab1b2fe48abc6a31dd61e86ddc5ecc14fb22d",
+      "mesh_bindless.frag.spv": "5c7002d7382ece1a52a03586e93fb7e9856120c7a84201b55d49203f0b4671e5",
+      "mesh_compute.vert.spv": "80c155458f306dbcb50157ecc0862b3e2393e2e209615a3ca8c3925be657228e",
+      "outline.frag.spv": "0d1ea9a50cdab74436a321fb93862a1daec3ef997168f9b53b9a84bebe99d921",
+      "outline.vert.spv": "a1bdc55a34607530ac92ca6dc4cde35dac10122fa11fcbc259dbf0eb2fb40b46",
+      "outline_compute.vert.spv": "1a7a44851fda272b18c1426db9de6919422361a3c91078ce3f982aa3883a1155",
+      "pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+      "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+      "shadow.frag.spv": "1c0bf146d9f816ee1fe0a84c387f8824a04ef20c5681556b165443181d7c4c4e",
+      "shadow.vert.spv": "83f678c54b7022192016e204f6c9781c824d11ace294e6ca3b18f3439281e7c6",
+      "shadow_bindless.frag.spv": "9eaf513d31ead8439112d00e6dd367990a9d2500abf849083db81e74d87e10c6",
+      "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+      "shadow_compute.vert.spv": "c7a921a1940e439df48a6cb8d9f559c77ca78b15417e11a06dc04b120501c066",
+      "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+      "skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+      "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+      "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+      "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+      "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+    },
+    "captureToolSha256": "b83a297ae7c7d8e84f1bbc8046d0d8f99cb4e68c71d5a751d3be3d602b332f04"
+  },
+  "alignment": {
+    "passed": true,
+    "capturedFramesPerMode": 96,
+    "modeCount": 3,
+    "totalPngFrames": 288,
+    "strictStateFields": [
+      "frame",
+      "camera",
+      "target",
+      "characters",
+      "animations",
+      "rigidBodies"
+    ],
+    "runtimeFrameRangeInclusive": [
+      1,
+      96
+    ],
+    "pngFrameRangeInclusive": [
+      0,
+      95
+    ],
+    "actions": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/actions.json",
+      "sha256": "e96858e18422bb5d4c4705617e4beb9cbc7a58047ff843fcd63abec9ca309b2e"
+    },
+    "actionsPerMode": 7,
+    "delayedFramesPerMode": 0,
+    "fixedFrameStepSeconds": 0.016666666666666666,
+    "inputKeys": [
+      "D",
+      "W",
+      "A"
+    ],
+    "fieldOfViewDegrees": 55,
+    "staticInputFrames": 16,
+    "locomotionPhaseFrames": 80,
+    "sourceDurationSeconds": 1.6,
+    "readinessStatus": "资源会话的就绪状态需要独立采集检查。",
+    "loadingTrueFramesByMode": {
+      "off": 69,
+      "edge": 68,
+      "supersample": 66
+    }
+  },
+  "measurement": {
+    "referenceMode": "supersample",
+    "referenceOutputExtent": [
+      1280,
+      720
+    ],
+    "referenceSceneExtent": [
+      2560,
+      1440
+    ],
+    "referenceDomain": "linear-display-rgb",
+    "stride": 2,
+    "sampleCount": 48,
+    "temporalPairCount": 47,
+    "edgeMeanAbsoluteErrors": {
+      "off": 0.015133453746481488,
+      "edge": 0.014306110271718353,
+      "supersample": 0.0
+    },
+    "edgeErrorRatio": 0.9453301613350825,
+    "edgeErrorReductionPercent": 5.4669838664917485,
+    "motionResidualRatio": 0.9509227559692771,
+    "motionResidualReductionPercent": 4.907724403072288,
+    "phaseAggregates": {
+      "static-input": {
+        "sampleCount": 8,
+        "edgeErrorRatio": 0.9428889469526341
+      },
+      "locomotion-input": {
+        "sampleCount": 40,
+        "edgeErrorRatio": 0.94581733370924
+      }
+    },
+    "flatMaximumByteDelta": 0.0,
+    "minimumFlatPixelsPerSample": 106173,
+    "heroDisplacementMeters": 0.6729874081143186,
+    "sceneAnimationTimeSpansSeconds": {
+      "native-logistics-single": 1.5833333333333326
+    },
+    "checks": {
+      "edgeErrorImproved": true,
+      "motionResidualImproved": true,
+      "defaultPlayerCovered": true,
+      "staticEdgeErrorImproved": true,
+      "movingEdgeErrorImproved": true,
+      "flatPreserved": true,
+      "heroMoves": true,
+      "flatCoveragePresent": true,
+      "sceneAnimationAdvances": true
+    },
+    "thresholds": {
+      "edgeErrorRatioExclusiveMaximum": 1,
+      "motionResidualRatioExclusiveMaximum": 1,
+      "phaseEdgeErrorRatioExclusiveMaximum": 1,
+      "flatMaximumByteDeltaInclusiveMaximum": 1,
+      "minimumFlatPixelsPerSample": 100,
+      "heroDisplacementMetersExclusiveMinimum": 0.05,
+      "sceneAnimationSecondsExclusiveMinimum": 0.1
+    },
+    "publicGatesModified": false
+  },
+  "captures": [
+    {
+      "mode": "off",
+      "quality": 0,
+      "capturedFrames": 96,
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        1280,
+        720
+      ],
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "cameraNear": 0.1,
+      "cameraFar": 100,
+      "cameraPosition": [
+        0,
+        1.90384,
+        12.7557
+      ],
+      "cameraTarget": [
+        0,
+        1.81668,
+        11.7595
+      ],
+      "replayedActions": 7,
+      "replayDelayedFrames": 0,
+      "startupSeconds": 100.43800000000192,
+      "wholeProcessSeconds": 136.04699999999866,
+      "passed": true,
+      "pngSequence": {
+        "frames": 96,
+        "first": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/frames/frame_000000.png",
+          "sha256": "434140b6054364fb382056859ab5b684afb1c4ffdd083cb1c95a2d7df124ea90"
+        },
+        "last": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/frames/frame_000095.png",
+          "sha256": "3e20fa4024282e4314548b51ca9af4bcff5414563ca055402d708e1d030a4d93"
+        },
+        "sha256": "8f5bfff23bae179ab7ce7ab78ba848eebf16ce0818bab3a7825830d031e47886",
+        "digestEncoding": "In frame order: UTF-8 filename, NUL, 32 raw SHA-256 bytes of that PNG."
+      },
+      "evidence": {
+        "project": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/off/candidate.azureproject",
+          "sha256": "0e9c18356d432d3cb5246d88258cd2ac055078aace2e2c3ef8a306576b37c650"
+        },
+        "scene": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/off/native_aa/off.azurelevel",
+          "sha256": "5315888916e3ecf52320d2ac0be698602f91e6ab4b2b41dbcaa549f63344f094"
+        },
+        "projectSettings": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/off/config/engine-settings.json",
+          "sha256": "c66d95bf0a5cf338688df23e6945a5a2a4958e23de0355a1ae6f4d199b7dcbfa"
+        },
+        "manifest": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/frames/capture_manifest.json",
+          "sha256": "c5d479af49d1846977c2e66f9631821a83609d32c28b221cb2b5a19619ccb7af"
+        },
+        "runtime": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/runtime.json",
+          "sha256": "640a437ec3d6d5ca58e1b35fe36dda693c87922db533b201aa263f1883b8eb20"
+        },
+        "launch": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/launch.json",
+          "sha256": "3b050c52e65c202e5d4d43c1ac00dc863055ec08c98ec95cf043eb27b52fcff8"
+        },
+        "result": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/result.json",
+          "sha256": "572dd4c9fd8a26b977fa155841e691803a017acb15ac364bd5f04edaf6ba4834"
+        },
+        "command": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/command.json",
+          "sha256": "bd06db5dbc50bcdbe5369c30b15b668cba4825a73d01251af16f1c8284d4e478"
+        },
+        "stdout": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/stdout.log",
+          "sha256": "6f0ac06bc6d5fa0c341389f66423058db234171250db7ebf8e164b4832d613de"
+        },
+        "stderr": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/stderr.log",
+          "sha256": "bbf9b858471dcef0a1c84c871eb41f573db4e761ccc4c0c202f0927ec2252fe7"
+        }
+      }
+    },
+    {
+      "mode": "edge",
+      "quality": 1,
+      "capturedFrames": 96,
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        1280,
+        720
+      ],
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "cameraNear": 0.1,
+      "cameraFar": 100,
+      "cameraPosition": [
+        0,
+        1.90384,
+        12.7557
+      ],
+      "cameraTarget": [
+        0,
+        1.81668,
+        11.7595
+      ],
+      "replayedActions": 7,
+      "replayDelayedFrames": 0,
+      "startupSeconds": 97.04699999999866,
+      "wholeProcessSeconds": 131.20300000000134,
+      "passed": true,
+      "pngSequence": {
+        "frames": 96,
+        "first": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/frames/frame_000000.png",
+          "sha256": "e32960b290551deac5c38707ef40cf3aebd30dec6e12d6285dc8553bfad15cab"
+        },
+        "last": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/frames/frame_000095.png",
+          "sha256": "72dcdc373483c397990b52c211bef223d70c7e1ec853635cbc93d67ea79aa1b7"
+        },
+        "sha256": "c7417b957d466250d7b9bc09791cc6adb7ab382379ff342fb7dfaba0ea769f7d",
+        "digestEncoding": "In frame order: UTF-8 filename, NUL, 32 raw SHA-256 bytes of that PNG."
+      },
+      "evidence": {
+        "project": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/edge/candidate.azureproject",
+          "sha256": "966ec1bf39bfe83e2ab2020b0054c79a2821dd363f12b4528a3f8b863984cd12"
+        },
+        "scene": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/edge/native_aa/edge.azurelevel",
+          "sha256": "176a1f70d8b6d88d5a0c79871860b4b438948a6dbe4812f8ee8b597b59d3f2c7"
+        },
+        "projectSettings": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/edge/config/engine-settings.json",
+          "sha256": "c66d95bf0a5cf338688df23e6945a5a2a4958e23de0355a1ae6f4d199b7dcbfa"
+        },
+        "manifest": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/frames/capture_manifest.json",
+          "sha256": "0dbb37c23d5d4d36a825da2e26777aba031df1bc19d812fc0fb775bf405a3a4b"
+        },
+        "runtime": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/runtime.json",
+          "sha256": "456734c0480618c3be498af204a94cf08268cda1650261c6afb5d90020ab68d9"
+        },
+        "launch": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/launch.json",
+          "sha256": "90b363fc73747acaa6ec527239172e089cbb730f1f0fcfcb7303c349829364dc"
+        },
+        "result": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/result.json",
+          "sha256": "fd6ab1c0c174d89ffff0b4ff668bcc9eab055de7b2ea8196514debc0723f8df2"
+        },
+        "command": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/command.json",
+          "sha256": "efb5e84fa10055bf2057d78da9e7479b90428369442586828a38c5e99cdbfb2b"
+        },
+        "stdout": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/stdout.log",
+          "sha256": "d19ae057a4717f34cc22b32c4995a007ff7a1cc2d86fbe9af10880c910b34b1e"
+        },
+        "stderr": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/edge/stderr.log",
+          "sha256": "f878cbe2c331987b8861a99013cec5118b10df2e47eef60472f81eaa59feac2c"
+        }
+      }
+    },
+    {
+      "mode": "supersample",
+      "quality": 2,
+      "capturedFrames": 96,
+      "outputExtent": [
+        1280,
+        720
+      ],
+      "sceneExtent": [
+        2560,
+        1440
+      ],
+      "fps": 60,
+      "durationSeconds": 1.6,
+      "cameraNear": 0.1,
+      "cameraFar": 100,
+      "cameraPosition": [
+        0,
+        1.90384,
+        12.7557
+      ],
+      "cameraTarget": [
+        0,
+        1.81668,
+        11.7595
+      ],
+      "replayedActions": 7,
+      "replayDelayedFrames": 0,
+      "startupSeconds": 96.15600000000268,
+      "wholeProcessSeconds": 132.60900000000402,
+      "passed": true,
+      "pngSequence": {
+        "frames": 96,
+        "first": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/frames/frame_000000.png",
+          "sha256": "539fde247179778b0941af3062893363cb4907802427ad07f1397bccccbe7c70"
+        },
+        "last": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/frames/frame_000095.png",
+          "sha256": "345028a12eb1cce4bc2be6eececaf8f8377ce01e128134f313f211784c675638"
+        },
+        "sha256": "d2dd4dcc5ccdfb77c58234e81f203c4b6f52232e7ac6ac4f94ac4953dc374773",
+        "digestEncoding": "In frame order: UTF-8 filename, NUL, 32 raw SHA-256 bytes of that PNG."
+      },
+      "evidence": {
+        "project": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/supersample/candidate.azureproject",
+          "sha256": "c5970c5b94e10c79cb2401fa0f31e7e47c19a04c99ab522933cf60584e8847bb"
+        },
+        "scene": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/supersample/native_aa/supersample.azurelevel",
+          "sha256": "3e769aeb7bea42ca71f9c288fea4cd13a4aec9bcb1ab880a9ccead23aed62d6d"
+        },
+        "projectSettings": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/projects/supersample/config/engine-settings.json",
+          "sha256": "c66d95bf0a5cf338688df23e6945a5a2a4958e23de0355a1ae6f4d199b7dcbfa"
+        },
+        "manifest": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/frames/capture_manifest.json",
+          "sha256": "6611dcf78dcdf0e3a98b528c3c339784f3818eb86b2d52fa2489f1b273fba7b4"
+        },
+        "runtime": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/runtime.json",
+          "sha256": "a13060ede681f50214cb806c51a98f61d3fa2de8e1529895fa89e2d452515b94"
+        },
+        "launch": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/launch.json",
+          "sha256": "2788c39eba4b23ce5c5dd733e7962c77798b76773ebff5c2e5d6f03f07fc8e9d"
+        },
+        "result": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/result.json",
+          "sha256": "3c03cf2ed91ad9e5b2fcbd5a6149984c7126681b2c9c45017566579a141b18c4"
+        },
+        "command": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/command.json",
+          "sha256": "050046b5928a4f6ee19d5b830a0c64c165e4e425bf72bc20157d7d1d611541d5"
+        },
+        "stdout": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/stdout.log",
+          "sha256": "716eb8926f018f2c1c0a572afc4d9b569dc56960b9a0a50ebcd846fce1779d02"
+        },
+        "stderr": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/supersample/stderr.log",
+          "sha256": "c742d7ccae048954af4d63f15ac2f99a8239b902b60d1b54baeb9dc36c6304c3"
+        }
+      }
+    }
+  ],
+  "lifecycle": {
+    "normalExitPerMode": true,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    },
+    "validationErrors": 0,
+    "errorLevelMessages": 0,
+    "budgetsSeconds": {
+      "startupSeconds": 180,
+      "wholeProcessSeconds": 600
+    },
+    "performanceScope": "进程耗时包含装载、渲染、读回与写盘。GPU 性能需要独立时间戳。",
+    "validationLayerEnabled": false
+  },
+  "media": {
+    "receipt": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/media.json",
+      "sha256": "4222119a942861381099e3c6bf56cdcb3147ffb2f8866dbd6eed964f9f366fce"
+    },
+    "sourceSummarySha256": "e9cc80493df89d0616cadb1706257650677d037fc1da29576011faef2bd5c408",
+    "videos": [
+      {
+        "width": 1280,
+        "height": 756,
+        "frames": 480,
+        "fps": 60.0,
+        "durationSeconds": 8.0,
+        "profile": "H.264 High",
+        "colorSpace": "BT.709",
+        "tracks": 1,
+        "audio": false,
+        "pixelFormat": "yuv420p",
+        "bitDepth": 8,
+        "sha256": "4730bc62ae633caa1484db8d484b55756ef0fff385708c13127e2c68902685d4",
+        "bytes": 2836614,
+        "originalFrames": 96,
+        "loops": 5,
+        "playbackSpeed": 1,
+        "interpolated": false,
+        "fullDecodeVerified": true,
+        "encoderSha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+        "headerHeight": 36,
+        "modes": [
+          "edge"
+        ],
+        "file": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/scene-aa1.mp4",
+          "sha256": "4730bc62ae633caa1484db8d484b55756ef0fff385708c13127e2c68902685d4"
+        },
+        "fullDecodeVerificationSource": "media/media.json"
+      },
+      {
+        "width": 3840,
+        "height": 756,
+        "frames": 480,
+        "fps": 60.0,
+        "durationSeconds": 8.0,
+        "profile": "H.264 High",
+        "colorSpace": "BT.709",
+        "tracks": 1,
+        "audio": false,
+        "pixelFormat": "yuv420p",
+        "bitDepth": 8,
+        "sha256": "e76b869653f86e975fadb8839182f642ed023ceeb9267c7ba3e59ce1a84e7db3",
+        "bytes": 8656036,
+        "originalFrames": 96,
+        "loops": 5,
+        "playbackSpeed": 1,
+        "interpolated": false,
+        "fullDecodeVerified": true,
+        "encoderSha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+        "headerHeight": 36,
+        "modes": [
+          "off",
+          "edge",
+          "supersample"
+        ],
+        "file": {
+          "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/aa-comparison.mp4",
+          "sha256": "e76b869653f86e975fadb8839182f642ed023ceeb9267c7ba3e59ce1a84e7db3"
+        },
+        "fullDecodeVerificationSource": "media/media.json"
+      }
+    ],
+    "comparisonPng": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/media/comparison.png",
+      "sha256": "93497bfd8b7abca02c28289c255ac3a0d250a9ebc4e976128d1bc24887cd8484"
+    },
+    "sourceFrames": 96,
+    "sourceFps": 60,
+    "loops": 5,
+    "sourceDurationSeconds": 1.6,
+    "presentationDurationSeconds": 8,
+    "headerHeightPixels": 36,
+    "interpolated": false,
+    "loopingLabelled": true,
+    "nativeGamePixelParityClaimed": false
+  },
+  "evidence": {
+    "preparation": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/preparation.json",
+      "sha256": "8f2495a7ed89ef40a7a24c61775e1bab4d11fc66cff385dadfec326686dce996"
+    },
+    "summary": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/summary.json",
+      "sha256": "e9cc80493df89d0616cadb1706257650677d037fc1da29576011faef2bd5c408"
+    },
+    "offByteBaseline": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/native-aa-final-v6/off/unfiltered-byte-baseline.json",
+      "sha256": "fea23e74736b1cdc8a10cabd5894cb0d8f84e018a25da7fded51612ba0633d58"
+    },
+    "publicAa": {
+      "path": "build/runs/20261021-172156-native-render-evidence-623c52/aa-public-evidence.json",
+      "sha256": "c1ffdd5c19ec22484758e99107cd642108090465490c3a5a06ca09c7f48de7e7"
+    },
+    "publicAcceptance": {
+      "path": "docs/acceptance/nr/spatial-antialiasing.md",
+      "sha256": "d7081a9e90db36c242f9d0e5d79f9d6a6a86eb895fc07c4648db543c11600ebd"
+    }
+  },
+  "limitations": [
+    "原生游戏像素等价仍需实景对照。",
+    "几何、材质和光照各自具有验收门禁。",
+    "角色脸部、头发及服装需近景验收。",
+    "固定相机覆盖本次输入及动画时间段。",
+    "更长运动、更多视角及其他设备仍需采集。",
+    "完全缺失的细小几何需要额外采样恢复。",
+    "完整 NR12 状态由联合清单持有。"
+  ],
+  "gpuCaptureEvidenceRecorded": true,
+  "gpuExecutedForThisDocumentationTask": false
+}

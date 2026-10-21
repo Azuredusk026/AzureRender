@@ -68,9 +68,11 @@ UNORM 附件由输出着色器编码。
 - [x] 检查重建、延迟释放与卸载归零。
 - [x] 复测现有采样门禁与辅助视口门禁。
 - [x] 记录 Debug 与 Release 公共夹具证据。
+- [x] 完成中庭候选三模式各 96 帧的数值对照。
 - [ ] 完成 NR12 原生场景静态与运动联合对照。
 
 公共能力的结果见[抗锯齿验收](../acceptance/nr/spatial-antialiasing.md)。
+候选数值与视频见[中庭验收](../acceptance/nr/native-atrium-antialiasing.md)。
 原生场景条目由上层计划与 NR12 联合验收。
 
 ## 量化条件

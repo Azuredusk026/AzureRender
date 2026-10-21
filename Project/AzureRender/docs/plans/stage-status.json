@@ -1365,7 +1365,9 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/runtime/rigid-node-animation.md",
-        "docs/acceptance/nr/logistics-evidence.md"
+        "docs/acceptance/nr/logistics-evidence.md",
+        "docs/acceptance/nr/spatial-antialiasing.md",
+        "docs/acceptance/nr/native-atrium-antialiasing.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"
