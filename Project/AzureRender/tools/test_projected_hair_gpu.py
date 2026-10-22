@@ -63,7 +63,7 @@ def cases():
     result = []
     for name in ('baseline', 'reverse-light', 'zero-parameters', 'secondary-directional',
                  'secondary-local', 'split-normals', 'mirrored', 'rotated',
-                 'dark', 'disabled', 'fixed', 'linear-control'):
+                 'dark', 'disabled', 'fixed', 'linear-control', 'frame-identity', 'frame-turned', 'frame-turned-fixed'):
         case = copy.deepcopy(default)
         case['name'] = name
         if name == 'reverse-light': case['reverse'] = True
@@ -80,6 +80,9 @@ def cases():
         for flag in ('dark', 'disabled', 'fixed'):
             if name == flag: case[flag] = True
         if name == 'linear-control': case['control'] = True
+        if name.startswith('frame-'):
+            case['materialFrame']=90 if 'turned' in name else 0
+            if name.endswith('-fixed'):case['fixed']=True
         result.append(case)
     return result
 
@@ -120,6 +123,7 @@ def expectation(case):
     turn = rotation(case['rotation'])
     mirror = np.diag([-1., 1., 1.]) if case['mirror'] else np.eye(3)
     frame = turn @ mirror
+    object_frame=frame @ rotation(case.get('materialFrame',0))
     tangent = (*tuple(frame[:, 0]), -1 if case['mirror'] else 1)
     bitangent = np.cross((0, 0, 1), tangent[:3]) * tangent[3]
     light = turn @ np.array([0., -.04 if case['reverse'] else .04, math.sqrt(1 - .04**2)])
@@ -141,7 +145,7 @@ def expectation(case):
         parameters = (source['r'] / 255, source['g'] / 255, 37 / 255, source['a'] / 255)
         coordinates = project_coordinates(half_vector=normalized(view + direction),
             highlight_normal=n, view=view, source_parameters=parameters, tangent=tangent,
-            object_x=frame[:, 0], object_y=frame[:, 1], object_z=frame[:, 2],
+            object_x=object_frame[:, 0], object_y=object_frame[:, 1], object_z=object_frame[:, 2],
             primary_shift=0, secondary_shift=0, range2=1, edge_fade_power=2, direction_x=0)
         ramp, rows = ramp_sample(coordinates.uv)
         energy = evaluate_energy(coordinates, ramp, parameters, 1, (0, 0, .5))
@@ -213,9 +217,15 @@ def model(case):
             'TEXCOORD_0': accessor([(.5, .5)] * 4, 2, 'VEC2')}
         primitives.append({'attributes': attributes, 'indices': accessor([0, 1, 2, 0, 2, 3], 1, 'SCALAR', indices=True),
                            'material': len(materials) - 1})
+    frame_nodes=[]
+    if 'materialFrame' in case:
+        angle=math.radians(case['materialFrame'])*.5
+        frame_nodes=[{'name':'HairFrame','rotation':[0,0,math.sin(angle),math.cos(angle)]}]
+        for material in materials:material['extras']['azureRenderMaterial']['hair']['projectedRamp']['frame']={
+            'schemaVersion':1,'node':'HairFrame','basis':[1,0,0,0,1,0,0,0,1]}
     return {'asset': {'version': '2.0', 'generator': 'Azure projected hair contract fixture',
             'extras': {'license': 'CC0-1.0'}}, 'scene': 0, 'scenes': [{'nodes': [0]}],
-        'nodes': [{'mesh': 0}], 'meshes': [{'primitives': primitives}], 'materials': materials,
+        'nodes': [{'mesh': 0}]+frame_nodes, 'meshes': [{'primitives': primitives}], 'materials': materials,
         'images': images, 'textures': textures, 'bufferViews': views, 'accessors': accessors,
         'buffers': [{'byteLength': len(binary), 'uri': 'data:application/octet-stream;base64,'
                      + base64.b64encode(binary).decode()}]}
@@ -269,6 +279,9 @@ def preflight(prepared):
         assert np.max(np.abs(values[name] - values['baseline'])) < 1e-12
     for name in ('dark', 'disabled'): assert np.max(values[name]) == 0
     assert np.max(np.abs(values['linear-control'] - linear(CONTROL[:3]))) == 0
+    assert np.array_equal(values['frame-identity'],values['baseline'])
+    assert np.max(np.abs(values['frame-turned']-values['baseline']))>.01
+    assert np.array_equal(values['frame-turned'],values['frame-turned-fixed'])
 
 
 def capture(player, case, project, root, expected, require_validation):

@@ -1,5 +1,6 @@
 #include "MaterialData.hpp"
 #include "assets/MaterialGraph.hpp"
+#include "assets/MaterialFrame.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <cmath>
 #include <fstream>
@@ -182,5 +183,6 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         if(!document.parameterOverride&&!losses.empty())RuntimeDiagnostics::instance().warning("material",
             "Full material replacement at slot "+id+" from "+binding.path+" discards source semantics: "+losses);
     }
+    static_cast<void>(resolveMaterialFrame(mesh));
 }
 }

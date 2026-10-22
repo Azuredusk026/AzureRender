@@ -5,6 +5,7 @@
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
+#include "assets/MaterialFrame.hpp"
 #include "render/ResourceAccessProfile.hpp"
 #include "render/ResourceIndexTable.hpp"
 #include "render/PrimitiveOpacity.hpp"
@@ -692,13 +693,11 @@ std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
 
 Matrix4 CharacterSceneRenderer::instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const Matrix4& model) const {
     Matrix4 result=scale(1,1,1);
-    if(!faceSdfPrepared_)return result;
-    for(const auto& material:mesh.materials) {
-        const auto& profile=material.faceSdf;
-        if(!profile.present||profile.schemaVersion!=2)continue;
-        const auto head=multiply(model,pose.nodeWorldMatrices.at(profile.headNode));
+    if(const auto frame=resolveMaterialFrame(mesh)) {
+        const auto& profile=*frame;
+        const auto head=multiply(model,pose.nodeWorldMatrices.at(profile.node));
         Matrix4 basis=scale(1,1,1);
-        for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)basis[a*4+c]=profile.headBasis[a*3+c];
+        for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)basis[a*4+c]=profile.basis[a*3+c];
         result=multiply(head,basis);
         for(unsigned a=0;a<3;++a) {
             const auto axis=normalize({result[a*4],result[a*4+1],result[a*4+2]});

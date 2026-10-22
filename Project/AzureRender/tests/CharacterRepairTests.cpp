@@ -167,6 +167,22 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     require(std::abs(hair.primaryShift+.02F)<.000001F&&std::abs(hair.secondaryShift-.02F)<.000001F
         &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
         "Signed shifts, independent normal scales and rotated source basis must survive loading");
+    auto framed=source;const auto frameNode=framed["nodes"].size();
+    framed["nodes"].push_back({{"name","independent-head"}});
+    framed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["frame"]={
+        {"schemaVersion",1},{"node","independent-head"},{"basis",{1,0,0,0,1,0,0,0,1}}};
+    const auto framedAsset=load(framed);const auto& actualFrame=framedAsset.materials[0].projectedHairRamp.frame;
+    require(actualFrame.present&&actualFrame.node==frameNode&&actualFrame.nodeName=="independent-head",
+        "Independent projected hair must resolve its explicit frame without a face SDF owner");
+    for(const auto& badFrame:Json::array({nullptr,{{"schemaVersion",1},{"node","missing"},{"basis",{1,0,0,0,1,0,0,0,1}}},
+        {{"schemaVersion",1},{"node","independent-head"},{"basis",{1,0,0,1,0,0,0,0,1}}}})){
+        auto invalid=framed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["frame"]=badFrame;
+        reject(invalid,"frame");
+    }
+    auto duplicateFrame=framed;duplicateFrame["nodes"].push_back({{"name","independent-head"}});reject(duplicateFrame,"frame");
+    auto conflictingFrame=framed;conflictingFrame["materials"][1]=conflictingFrame["materials"][0];
+    conflictingFrame["materials"][1]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["frame"]["basis"]={0,1,0,-1,0,0,0,0,1};
+    reject(conflictingFrame,"frames");
     auto strand=source;
     auto& strandProfile=strand["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"];
     strandProfile["surfaceResponse"]="strand-diffuse";strandProfile["diffuseScale"]=.96;

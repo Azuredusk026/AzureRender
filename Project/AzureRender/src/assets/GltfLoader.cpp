@@ -29,6 +29,7 @@
 
 #include "assets/GltfAccessorValidation.hpp"
 #include "assets/ShadowColorLut.hpp"
+#include "assets/MaterialFrame.hpp"
 
 namespace {
 
@@ -975,7 +976,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -998,6 +999,21 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         return static_cast<float>(number);
     };
     auto& target=result.projectedHairRamp;
+    if(source.Has("frame")){
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("frame");
+        if(!raw.is_object()||raw.size()!=3||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||!raw.at("node").is_string()||raw.at("node").get<std::string>().empty()
+            ||!raw.at("basis").is_array()||raw.at("basis").size()!=9)throw std::invalid_argument("Invalid projectedRamp.frame");
+        auto& frame=target.frame;frame.nodeName=raw.at("node").get<std::string>();
+        unsigned found=0;for(std::size_t index=0;index<model.nodes.size();++index)if(model.nodes[index].name==frame.nodeName){frame.node=static_cast<std::uint32_t>(index);++found;}
+        if(found!=1)throw std::invalid_argument("projectedRamp.frame requires one unique named node");
+        for(unsigned index=0;index<9;++index){const auto& value=raw.at("basis")[index];
+            if(!value.is_number()||!std::isfinite(value.get<double>())||std::abs(value.get<double>())>1.0001)throw std::invalid_argument("Invalid projectedRamp.frame basis");frame.basis[index]=value.get<float>();}
+        for(unsigned a=0;a<3;++a)for(unsigned b=0;b<3;++b){float dot=0;for(unsigned c=0;c<3;++c)dot+=frame.basis[a*3+c]*frame.basis[b*3+c];
+            if(std::abs(dot-(a==b?1.F:0.F))>1e-4F)throw std::invalid_argument("projectedRamp.frame basis must be orthonormal");}
+        frame.present=true;
+        result.materialFeatures|=MaterialFeatureExplicitHairFrame;
+    }
     if(source.Has("surfaceResponse")) {
         const auto& mode=source.Get("surfaceResponse");
         if(!mode.IsString()||(mode.Get<std::string>()!="layered"&&mode.Get<std::string>()!="strand-diffuse"))
@@ -2445,6 +2461,7 @@ LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* auth
         static_cast<std::uint32_t>(asset.materials.size());
     asset.materials.push_back(loadMaterial(model, nullptr,authored));
     loadNodes(model, asset);
+    static_cast<void>(azurerender::resolveMaterialFrame(asset));
     const std::vector<Matrix4> nodeWorldTransforms =
         calculateNodeWorldTransforms(model);
     asset.nodeWorldMatrices.resize(nodeWorldTransforms.size());

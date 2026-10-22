@@ -64,6 +64,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureEyeRadialSurface = 1U << 17U,
     MaterialFeatureUnlitSurface = 1U << 18U,
     MaterialFeatureNprDiffuse = 1U << 19U,
+    MaterialFeatureExplicitHairFrame = 1U << 20U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -88,6 +89,13 @@ struct AssetFaceSdfProfile {
     bool mirrorHorizontal = false;
     std::uint32_t headNode = 0;
     std::string headNodeName;
+};
+
+struct AssetMaterialFrame {
+    bool present=false;
+    std::uint32_t node=0;
+    std::string nodeName;
+    std::array<float,9> basis{1,0,0,0,1,0,0,0,1};
 };
 
 struct AssetMaterial {
@@ -145,6 +153,7 @@ struct AssetMaterial {
     struct ProjectedHairRamp {
         enum class SurfaceResponse : std::uint8_t { Layered, StrandDiffuse };
         bool present=false;
+        AssetMaterialFrame frame;
         float primaryShift=0,secondaryShift=0,intensity=1,secondaryRange=.5F;
         float edgeFade=1,specularNormalScale=1,directionX=0,surfaceNormalScale=1;
         std::array<float,3> secondaryColor{1,1,1};
