@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+渲染接入缺口与架构约束已纳入[当前计划](docs/plans/2026-10-22-render-capability-integration-audit.md)。
+环形多层高光、距离描边和公共材质制作仍有明确待项。
+专项候选与主项目接入分别验收。
+
 头发次级高光颜色已按实际帧完成线性转换。
 范围见[头发高光验收](docs/acceptance/nr/projected-hair.md)。
 

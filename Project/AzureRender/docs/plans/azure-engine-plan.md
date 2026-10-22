@@ -86,6 +86,10 @@ NR12 负责画面、操控、发布与实录联合验收。
 主辅视口与 Player 抗锯齿的公共及原生数值检查通过。
 
 角色与物流按[专项计划](2026-10-22-character-logistics-restoration.md)推进。
+接入风险及公共契约见[架构审计](2026-10-22-render-capability-integration-audit.md)。
+NR0-A1 固定有效入口，NR8-V2 管理候选晋升及跨入口验证。
+NR6-C15 至 C18 覆盖材质、GPU 绑定、多层高光和距离描边。
+主场景消费与原生外观分别验收，正式阶段状态保持待验。
 场景灯下的角色材质与高光已完成公共机制验证。
 十发射器物流候选包含 91 个槽位。
 四秒实际采样见[物流联合验收](../acceptance/nr/logistics-multiclip.md)。
