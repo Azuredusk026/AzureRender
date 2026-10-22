@@ -15,7 +15,7 @@ class NativeSkinFrameTests(unittest.TestCase):
         model = np.eye(4); model[:3, 3] = [10, 20, 30]
         offset = 256 * instance
         struct.pack_into('<16f', records, offset, *model.T.ravel())
-        struct.pack_into('<I', records, offset + 76, 16)
+        struct.pack_into('<I', records, offset + 76, 20)
         struct.pack_into('<I', records, offset + 80, 7)
         palette = np.zeros((13, 4), dtype='<f4')
         expected = np.eye(4); expected[:3, 3] = [10, 22, 30]
@@ -34,6 +34,11 @@ class NativeSkinFrameTests(unittest.TestCase):
         self.assertEqual(result['model_origin'], [10, 20, 30])
         self.assertEqual(result['bones'][0]['matrix_error'], 0)
         self.assertEqual(result['bones'][0]['position_error'], 0)
+
+    def test_rejects_reserved_frame_without_an_active_skin_palette(self):
+        instance,palette,binds=self.fixture()
+        struct.pack_into('<I',instance,76,16)
+        with self.assertRaisesRegex(ValueError,'active skin'):compare_skin_frame(instance,palette,binds)
 
     def test_uses_nonzero_draw_instance_offset(self):
         result = compare_skin_frame(*self.fixture(2), instance_index=2)

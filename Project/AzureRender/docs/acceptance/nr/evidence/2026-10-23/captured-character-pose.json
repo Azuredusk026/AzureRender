@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared",
+  "scope": "Captured diagnostic pose and material frame; native color equivalence and excluded draws remain pending.",
+  "meshes": [
+    {
+      "mesh": "S_actor_laevat_body_01_lod0",
+      "event": 783,
+      "flags": 52,
+      "paletteRow": 24772,
+      "vertices": 3346
+    },
+    {
+      "mesh": "S_actor_laevat_face_01_lod0",
+      "event": 804,
+      "flags": 52,
+      "paletteRow": 25075,
+      "vertices": 1792
+    },
+    {
+      "mesh": "S_actor_laevat_iris_01_lod0",
+      "event": 846,
+      "flags": 49,
+      "paletteRow": 25048,
+      "vertices": 210
+    },
+    {
+      "mesh": "S_actor_laevat_cloth_04_lod0",
+      "event": 868,
+      "flags": 49,
+      "paletteRow": 24691,
+      "vertices": 2820
+    },
+    {
+      "mesh": "S_actor_laevat_cloth_01_lod0",
+      "event": 889,
+      "flags": 52,
+      "paletteRow": 25378,
+      "vertices": 32031
+    },
+    {
+      "mesh": "S_actor_laevat_cloth_05_lod0",
+      "event": 910,
+      "flags": 52,
+      "paletteRow": 24700,
+      "vertices": 5106
+    },
+    {
+      "mesh": "S_actor_laevat_cloth_02_lod0",
+      "event": 928,
+      "flags": 52,
+      "paletteRow": 24526,
+      "vertices": 17536
+    },
+    {
+      "mesh": "S_actor_laevat_hair_01_lod0",
+      "event": 950,
+      "flags": 52,
+      "paletteRow": 25264,
+      "vertices": 11564
+    },
+    {
+      "mesh": "S_actor_laevat_cloth_03_lod0",
+      "event": 1383,
+      "flags": 52,
+      "paletteRow": 24907,
+      "vertices": 2122
+    },
+    {
+      "mesh": "S_actor_laevat_eyebrow_01_lod0",
+      "event": 825,
+      "deformation": "captured-float-vertex-stream",
+      "uvMaximumError": 2.9802322387695312e-08,
+      "vertices": 578
+    }
+  ],
+  "excludedMeshes": [
+    "S_actor_laevat_eyeshadow_01_lod0",
+    "S_actor_laevat_hairshadow_01_lod0",
+    "S_actor_laevat_vfxpart_01_lod0"
+  ],
+  "sourceSha256": "f91eb2c9cce2009d5c8753170e465b2c6151ddb5368859fa784fb0a8b7ee11f8",
+  "candidateSha256": "7ceccbcfbae4b8b44e3211200ce58a1bd2d4636b4a58b3269b639bb9b10143ea",
+  "candidate": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\joint-candidate\\content-character\\hero-capture-baked-10401-020919.glb",
+  "materialFrame": [
+    [
+      -0.9970895648002625,
+      0.036747194826602936,
+      -0.06679967045783997,
+      0.00433349609375
+    ],
+    [
+      0.04144105315208435,
+      0.9966651201248169,
+      -0.07029593735933304,
+      1.53741455078125
+    ],
+    [
+      -0.0639936700463295,
+      0.07285947352647781,
+      0.9952871203422546,
+      0.0205078125
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "camera": {
+    "position": [
+      0,
+      0.8800048828125,
+      3.29998779296875
+    ],
+    "rotation": [
+      0.7225715253360995,
+      0,
+      0
+    ],
+    "fieldOfView": 34.99999942174447
+  },
+  "lightDirection": [
+    -0.1472620368,
+    0.5299192667,
+    0.8351643085
+  ],
+  "captures": {
+    "status": "captured",
+    "playerSha256": "f55621bd72f84b19e2f8f88758d5616089e3bb3347cca81eb18d3cbc7ff78dc6",
+    "camera": {
+      "translation": [
+        0,
+        0.8800048828125,
+        3.29998779296875
+      ],
+      "rotation": [
+        -0.7225715253360995,
+        0,
+        0
+      ]
+    },
+    "captures": [
+      {
+        "mode": "beauty",
+        "imageSha256": "41f22dea1402cccfe9168431e0fbad1beb57a4651e19ce83eb8bea7589b5c02f"
+      },
+      {
+        "mode": "hair-kk",
+        "imageSha256": "b690a2c7bded889a9dc4dc578e96146e97db72886f298d492c2d8832ab0851b4"
+      }
+    ]
+  },
+  "run": "build/runs/20261023-020919-captured-character-alignment-070d71",
+  "checks": {
+    "skinFrame": 6,
+    "capturePose": 5,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    }
+  },
+  "artifacts": {
+    "e825-vb0-receipt.json": "e799ec0f30e63a8809059cf20c4441bfee8ea976beebe311c17e5e10e52a2f59",
+    "e825-vb1-receipt.json": "bcff49ebe5a6b3817b8088d4832946632cbda0ee882c60256a4f0613403de22f",
+    "capture-open.json": "4b38ce8face9c6a324065beefb4a9adcf0d31a5add5a93d01ea2c91715661638",
+    "aligned-captures.json": "c76e31b872000e79c502dfb9c6eee1757e3da08249267919b3caa37d0b6f03df"
+  }
+}

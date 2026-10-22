@@ -1,5 +1,6 @@
 # AzureRender 工程
 
+同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。
 投影头发支持显式虚拟主灯与独立条纹。
 数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。
 完整材质文档接入共享 glTF 解释器与 UUID 依赖。
