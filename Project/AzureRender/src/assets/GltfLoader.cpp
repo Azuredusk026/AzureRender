@@ -1625,8 +1625,9 @@ AssetMaterial loadMaterial(
             &&authoredProfile["azureRenderMaterial"].contains("nprDiffuse")) {
             const auto& npr=authoredProfile["azureRenderMaterial"]["nprDiffuse"];
             const std::set<std::string> fields{"schemaVersion","shadowScale","lightingInputs","shadowMask","baseAo"};
-            if(!npr.is_object()||npr.size()!=fields.size())throw std::invalid_argument("nprDiffuse requires all versioned fields");
-            for(const auto& field:npr.items())if(!fields.count(field.key()))throw std::invalid_argument("Unknown nprDiffuse field");
+            if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
+            for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
+            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1634,6 +1635,9 @@ AssetMaterial loadMaterial(
                 ||(npr["shadowMask"]!="none"&&npr["shadowMask"]!="style-mask-gb")
                 ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"))
                 throw std::invalid_argument("Invalid nprDiffuse input contract");
+            if(npr.contains("indirectNormal")&&(!npr["indirectNormal"].is_string()
+                ||(npr["indirectNormal"]!="surface"&&npr["indirectNormal"]!="world-horizontal")))
+                throw std::invalid_argument("Invalid nprDiffuse indirect normal mode");
             const auto& parentVersion=authoredProfile["azureRenderMaterial"]["schemaVersion"];
             if(!parentVersion.is_number_integer()||parentVersion!=2||!(result.materialFeatures&MaterialFeatureShadowColorLut)
                 ||result.projectedHairRamp.present||result.eyeSurface.present
@@ -1644,7 +1648,9 @@ AssetMaterial loadMaterial(
                 ||result.materialClass==AssetMaterialClass::Showcase
                 ||((result.materialFeatures&MaterialFeatureDiffuseRamp)&&npr["shadowMask"]=="style-mask-gb"))
                 throw std::invalid_argument("Incompatible nprDiffuse material owners");
-            result.nprDiffuse={true,npr["shadowScale"].get<float>(),npr["shadowMask"]=="style-mask-gb",npr["baseAo"]=="albedo-alpha"};
+            result.nprDiffuse={true,npr["shadowScale"].get<float>(),npr["shadowMask"]=="style-mask-gb",npr["baseAo"]=="albedo-alpha",
+                npr.value("indirectNormal",std::string("surface"))=="world-horizontal"
+                    ?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal:AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }
     }

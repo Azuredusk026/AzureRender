@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR6-C12-world-horizontal-indirect-normal",
+  "status": "public-mechanism-passed-source-body-candidate",
+  "formalNr6Status": "Pending",
+  "formalVisualAcceptance": false,
+  "materialTableBytes": 96,
+  "textureSlots": 9,
+  "red": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-indirect-red/indirect-surface/player.log",
+    "sha256": "196ccea85d25a76f5bb1feb4e1c3569958a3c31e2690d265906dfdef91309dd1"
+  },
+  "sources": {
+    "normalConsumers": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/native-diffuse-normal-consumers.json",
+      "sha256": "9d275fef32ab04d9043e60902eea340301a03eb503432dde81cb7d3143da7da1"
+    },
+    "skinShader": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/actor-skin-vulkan69-normal-audit.hlsl",
+      "sha256": "fa370b729b358c940c51fd1dc7d085b02c4134158bef560f4553715c56f79390"
+    },
+    "bodySourceParameters": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/material-slot-matrix.json",
+      "sha256": "638262f9791d1250cb6adace837696984062f31f5a5b9664f27555dd8ffc1eec"
+    }
+  },
+  "gpu": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-indirect-debug/summary.json",
+      "sha256": "342befa100e2c15d619a6b939394041d2166c090e1651f0a48292a77eef2edd2"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-indirect-release/summary.json",
+      "sha256": "4c0ce034c39d8ebaecafb2bc3f8e2afe3fb1a3b816aeef40bc410e48ffe6725a"
+    }
+  },
+  "build": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-debug-build.log",
+      "sha256": "104c0a12ebdbc0379b439581fbef1c36d3f434ca2416b26a6cc0c037ce71f7f1"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-release-build.log",
+      "sha256": "41ac41c06c09db45268057595dc9149baf751788aa1bb96951ff8c363d5389df"
+    }
+  },
+  "cpu": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-debug-cpu.log",
+      "sha256": "3a94147aead2d402e3f960ac0552ad644ec6c8579cd0986a6e1b1ee8c0a63f94"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-release-cpu.log",
+      "sha256": "1559be40781d0c129e2fe67e9cdca8b554aa6bb5367d7293a798dfae493e799e"
+    }
+  },
+  "sourceSnapshot": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-frozen-source/source-index.json",
+    "sha256": "d30dd8f0d86850ff9e8fc1505cd6df60ba137baa16ba04536371b648c3f654cb"
+  },
+  "shaderLink": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-frozen-source/shader-link.json",
+    "sha256": "276ca36fb42005139f18485636e16940db27c51c1b45cd9159c5b5ce539c54e8"
+  },
+  "actualCaptures": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/receipt.json",
+    "sha256": "59a0e1d699b742324631bb4a808c2fad9d7085dad86e5ea9b21cf5c1f9a7956c"
+  },
+  "captureInputs": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/source-index.json",
+    "sha256": "e7df3077600bd3f7dec2fe4cc2653e3497193aa235d53f3bb0043bfe10a5b65c"
+  },
+  "candidate": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-body-candidate.json",
+    "sha256": "dadded4a60b2750d5aa5d7aa27ba2fb6354fec0b55e844ee180320f54f403acd"
+  },
+  "defaultCompatibility": {
+    "baselineImage": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-main-shadow-fixed/npr/frames/frame_000000.png",
+      "sha256": "db713c3e972658e81b5de6dfeadad625cb919ead5c57f4c373b49ec6ae75e047"
+    },
+    "candidateImage": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/default/frames/frame_000000.png",
+      "sha256": "db713c3e972658e81b5de6dfeadad625cb919ead5c57f4c373b49ec6ae75e047"
+    },
+    "maximumByteDifference": 0
+  },
+  "bodyObservation": {
+    "default": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/default/frames/frame_000000.png",
+      "sha256": "db713c3e972658e81b5de6dfeadad625cb919ead5c57f4c373b49ec6ae75e047"
+    },
+    "horizontal": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/body/frames/frame_000000.png",
+      "sha256": "8ffd9cbbfea8e594fd563149c7e3ad48e063221ea14100df644ccd2b6a3f2dc0"
+    },
+    "fullbody": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/character-horizontal-body/fullbody/frames/frame_000000.png",
+      "sha256": "3175acc60a2662acaf72d339554ec630031829384cd49b2a74034332a096642c"
+    },
+    "changedPixels": 56896,
+    "bodyRoi": [
+      680,
+      800,
+      1000,
+      1030
+    ],
+    "roiChangedPixels": 46913,
+    "roiMeanByteDifference": 9.29794384057971
+  },
+  "fullTestOutput": {
+    "debug": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-ctest-debug-full.log",
+      "sha256": "fe734cb27aed6eed67d447caefa6985e389ffb3dccb5861faac5f3fb54459056"
+    },
+    "release": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/horizontal-ctest-release-full.log",
+      "sha256": "a446d737ca36a5490534dc0866470da54e36beee4137d6696f1b3a7e599f4e94"
+    }
+  },
+  "probeCount": 145,
+  "limitations": [
+    "Native radial face frame, cameraFacing and final environment globals are not verified.",
+    "Only source body01 selects horizontal mode; face, hair, eye and cloth retain their individual inputs.",
+    "Source samplers, native original mip chains and full appearance retain separate acceptance."
+  ]
+}

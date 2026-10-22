@@ -46,6 +46,22 @@ int main(){
   const auto packed=azurerender::packMaterialSurfaceProfile(response.materials[0]);
   require(std::abs(packed.rows[0][0]-.7F)<1e-6F&&packed.rows[0][1]==0&&packed.rows[0][2]==1,
     "NPR scale and source selectors must reach the immutable GPU table");
+  require(response.materials[0].nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::Surface
+    &&packed.rows[0][3]==0,"Omitted indirect normal mode must preserve the surface normal");
+  for(const char* mode:{"surface","world-horizontal"}) {
+    auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]=mode;
+    const auto configured=load(valid);
+    const bool horizontal=std::string(mode)=="world-horizontal";
+    require(configured.materials[0].nprDiffuse.indirectNormal==(horizontal
+      ?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal:AssetMaterial::NprDiffuse::IndirectNormal::Surface)
+      &&azurerender::packMaterialSurfaceProfile(configured.materials[0]).rows[0][3]==(horizontal?1.F:0.F),
+      "Explicit indirect normal mode must reach the immutable GPU table");
+  }
+  for(const auto& mode:std::vector<Json>{nullptr,true,0,1.5,Json::array(),Json::object(),"unknown","WORLD-HORIZONTAL"}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]=mode;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed indirect normal modes must fail import");
+  }
   for(const char* kind:{"generic","skin","face","fabric","metal"}) {
     auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
     require((load(valid).materials[0].materialFeatures&(1U<<19U))!=0,"NPR composition must support declared surface classes");

@@ -1,5 +1,8 @@
 # 开发总计划
 
+角色环境漫反射法线通过双配置分项检查。
+身体皮肤候选及范围见[法线验收](../acceptance/nr/character-indirect-normal.md)。
+
 原生方向场工具已接入三层及默认环境组合。
 角色颜色组合与逐灯接收范围已通过公共机制检查。
 主光遮挡通过[专项验收](../acceptance/nr/character-main-shadow.md)。

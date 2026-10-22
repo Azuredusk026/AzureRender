@@ -697,6 +697,9 @@ void main() {
     vec3 classRamp = classRampRgba.rgb;
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
+    vec3 indirectDiffuseNormal=shadedNormal;
+    if(nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0].w>.5)
+        indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     vec3 nprAmbientResponse=nprDiffuse
         ?materialNprDiffuse(baseColor,metallic,classRampRgba,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
     vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);
@@ -1136,7 +1139,7 @@ void main() {
         // Scene mode consumes only declared light/environment contributions.
         // Specialized native character passes are selected separately.
         float angle = camera.clusterLighting.z;
-        vec3 envNormal = shadedNormal;
+        vec3 envNormal = indirectDiffuseNormal;
         vec3 envReflection = reflectionDirection;
         envNormal.xz = mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
         envReflection.xz = mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envReflection.xz;
@@ -1167,7 +1170,7 @@ void main() {
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
     if(camera.irradianceDimensionsEnabled.w>.5){
-        vec4 volume=evaluateIrradianceVolume(worldPosition,shadedNormal);
+        vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }

@@ -4,6 +4,11 @@
 // Pure linear-color response. Illumination, specular and emission are owned
 // by the caller. Visibility inputs are explicit, independently supplied values.
 struct CharacterDiffuseResponse { vec3 color; float litMask; float aoMask; };
+// Native skin irradiance is evaluated on the world horizontal plane.
+// The nonzero vertical component also defines vertical and zero inputs.
+vec3 worldHorizontalDiffuseNormal(vec3 normal) {
+    return normalize(vec3(normal.x,6.103515625e-5,normal.z));
+}
 float characterDiffuseLuma(vec3 color) {
     return dot(color,vec3(.21267290413379669,.7151522040367126,.07217500358819962));
 }

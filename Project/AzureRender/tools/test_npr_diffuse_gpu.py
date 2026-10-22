@@ -4,6 +4,7 @@ The CPU oracle follows the literal source expression independently from the
 GLSL helper. Native runtime globals remain outside this host fixture.
 """
 import argparse
+import base64
 import copy
 import hashlib
 import json
@@ -44,6 +45,10 @@ def run(player,output,require_validation=False):
         ('volume-ramp-zero',True,0,255,.7,False,False),
         ('volume-scale',True,0,0,.35,False,False),
         ('volume-fixed',True,0,0,.7,True,False),
+        ('indirect-default',True,0,0,.7,False,False),
+        ('indirect-surface',True,0,0,.7,False,False),
+        ('indirect-horizontal',True,0,0,.7,False,False),
+        ('indirect-horizontal-fixed',True,0,0,.7,True,False),
         ('direct-shadow',False,0,0,.7,False,False),
         ('direct-lit',False,255,255,.7,False,False),
         ('direct-fixed',False,0,0,.7,True,False),
@@ -60,6 +65,7 @@ def run(player,output,require_validation=False):
     results=[];frames={};controls={}
     for name,volume,ramp_alpha,ao,scale,fixed,dark in cases:
         local=name.startswith('local-')
+        indirect=name.startswith('indirect-')
         folder=output/name;generate(folder,'point' if local else 'directional-near' if not volume and not dark else 'dark')
         model=json.loads((folder/'plane.gltf').read_text())
         Image.new('RGBA',(1,1),(200,140,90,ao)).save(folder/'base.png')
@@ -73,6 +79,18 @@ def run(player,output,require_validation=False):
             'styleParameters':[1,1,0,0],
             'nprDiffuse':{'schemaVersion':1,'shadowScale':scale,'lightingInputs':'host-scene-radiance',
                 'shadowMask':'none','baseAo':'albedo-alpha'}}
+        if indirect:
+            if name!='indirect-default':
+                profile['nprDiffuse']['indirectNormal']='world-horizontal' if 'horizontal' in name else 'surface'
+            # Attribute and view offsets identify the authored tilted world normal.
+            accessor=model['accessors'][model['meshes'][0]['primitives'][0]['attributes']['NORMAL']]
+            view=model['bufferViews'][accessor['bufferView']]
+            buffer=model['buffers'][view['buffer']]
+            blob=bytearray(base64.b64decode(buffer['uri'].split(',',1)[1]))
+            for vertex in range(accessor['count']):
+                offset=view.get('byteOffset',0)+accessor.get('byteOffset',0)+vertex*view.get('byteStride',12)
+                struct.pack_into('<3f',blob,offset,0,.8,.6)
+            buffer['uri']='data:application/octet-stream;base64,'+base64.b64encode(blob).decode()
         control=name.startswith(('specular-','emissive-'))
         if name=='plain-pbr' or name.endswith('-plain'):profile.pop('nprDiffuse')
         if name.startswith('emissive-'):
@@ -94,6 +112,7 @@ def run(player,output,require_validation=False):
             level['lights'][0]['shape']['direction']=[-2**-.5,0,-2**-.5]
         if volume:
             cell=[0,0,0,.7,0,0,0,.5,0,0,0,.3,1,0,0,0]
+            if indirect:cell=[0,.3,.1,.2,0,-.1,.2,.3,0,.05,.15,.1,1,0,0,0]
             (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
             level['irradianceVolume']={'version':1,'asset':'assets:/field.aziv','enabled':True,'intensity':1}
         (folder/'level.azurelevel').write_text(json.dumps(level))
@@ -121,7 +140,15 @@ def run(player,output,require_validation=False):
             controls[name]=dict(center=image[64,64].tolist(),validationEnabled='Validation layer: enabled' in log)
             continue
         expected=linear([200,140,90]) if name=='plain-pbr' else reference(linear([200,140,90]),linear([120,50,20]),np.array([180,150,170,ramp_alpha])/255,ao/255,scale)
-        expected*=np.array([.7,.5,.3]) if volume else 0 if dark else .3
+        if indirect:
+            # Source arithmetic is evaluated independently in double precision.
+            normal=np.array([0.,.8,.6])
+            if 'horizontal' in name:
+                normal=np.array([normal[0],2.**-14,normal[2]])
+                normal/=np.linalg.norm(normal)
+            coefficients=np.array([[0,.3,.1,.2],[0,-.1,.2,.3],[0,.05,.15,.1]])
+            expected*=np.maximum(coefficients@np.append(normal,1.),0)
+        else:expected*=np.array([.7,.5,.3]) if volume else 0 if dark else .3
         if name in ['surface-receiver','none-receiver','character-only-plain','main-shadow','main-shadow-field']:expected*=0
         if local:
             position=np.array([.03125,-.03125,0])
@@ -137,6 +164,9 @@ def run(player,output,require_validation=False):
     (output/'summary.json').write_text(json.dumps(summary,indent=2))
     assert max(c['maximumLinearError'] for c in results)<.008,results
     for a,b in [('volume-shadow','volume-fixed'),('direct-shadow','direct-fixed')]:assert np.array_equal(frames[a],frames[b]),(a,b)
+    assert np.array_equal(frames['indirect-default'],frames['indirect-surface']),'Explicit surface mode must preserve the default'
+    assert np.array_equal(frames['indirect-horizontal'],frames['indirect-horizontal-fixed']),'Horizontal indirect mode must match fixed and bindless descriptors'
+    assert np.max(np.abs(linear(frames['indirect-default'][64,64])-linear(frames['indirect-horizontal'][64,64])))>.005,'Directional SH must exercise the horizontal normal selector'
     for layer in ['specular','emissive']:
         assert np.array_equal(frames[layer+'-npr'],frames[layer+'-plain']),layer+' must remain independent from diffuse composition'
         assert max(controls[layer+'-npr']['center'])>0,layer+' positive control missing'

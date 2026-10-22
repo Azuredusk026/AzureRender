@@ -164,9 +164,11 @@ struct AssetMaterial {
         // Native capture bindings require a separate provenance contract.
     } eyeSurface;
     struct NprDiffuse {
+        enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal };
         bool present=false;
         float shadowScale=1;
         bool styleMaskGb=false,albedoAlpha=false;
+        IndirectNormal indirectNormal=IndirectNormal::Surface;
     } nprDiffuse;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
