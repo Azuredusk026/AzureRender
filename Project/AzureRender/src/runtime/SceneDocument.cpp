@@ -82,6 +82,8 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
         output << "lightInfluenceBox " << std::quoted(nlohmann::json(light.shape.influenceBox).dump()) << '\n';
         output << "lightSpecularScale " << light.shape.specularScale << '\n';
         output << "lightReceivers " << std::quoted(nlohmann::json(light.shape.receivers).dump()) << '\n';
+        output << "lightCharacterResponse " << std::quoted((light.shape.characterResponse.present
+            ?nlohmann::json(light.shape.characterResponse):nlohmann::json(nullptr)).dump()) << '\n';
     }
     output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
     output << "irradianceVolume " << std::quoted(nlohmann::json(document.irradianceVolume).dump()) << '\n';
@@ -260,6 +262,13 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
                     if(!(input>>key>>std::quoted(payload))||key!="lightReceivers")
                         throw std::runtime_error("Invalid .azscene light receivers");
                     light.shape.receivers=nlohmann::json::parse(payload).get<LightReceivers>();
+                }
+                if(schemaVersion>=12) {
+                    std::string payload;
+                    if(!(input>>key>>std::quoted(payload))||key!="lightCharacterResponse")
+                        throw std::runtime_error("Invalid .azscene character light response");
+                    const auto value=nlohmann::json::parse(payload);
+                    if(!value.is_null())light.shape.characterResponse=value.get<LightShape::CharacterResponse>();
                 }
                 light.shape.validate();
             }

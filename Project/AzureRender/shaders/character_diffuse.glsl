@@ -23,6 +23,14 @@ vec3 faceFrameRadialHorizontalDiffuseNormal(vec3 worldPosition,vec3 frameOrigin,
 float characterDiffuseLuma(vec3 color) {
     return dot(color,vec3(.21267290413379669,.7151522040367126,.07217500358819962));
 }
+// Explicit punctual-light adapter. Incident radiance already includes distance,
+// cone and volume weights; compression and wrapped diffuse remain independent.
+vec3 characterLocalLightRadiance(vec3 incident,float normalDotLight,vec2 response,float sceneVisibility) {
+    float denominator=max(max(max(incident.r,incident.g),incident.b)*(.5+.25*sceneVisibility),1.0);
+    float compression=1.0-response.y+response.y/denominator;
+    float wrapped=response.x+clamp(normalDotLight+.5,0.0,1.0)*(1.0-response.x);
+    return incident*(compression*wrapped);
+}
 vec3 characterDiffuseSaturation(vec3 color,float amount) {
     return mix(vec3(characterDiffuseLuma(color)),color,amount);
 }

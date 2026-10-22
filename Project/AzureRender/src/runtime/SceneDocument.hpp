@@ -50,7 +50,7 @@ struct SceneLight {
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 11;
+    static constexpr std::uint32_t kSchemaVersion = 12;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;

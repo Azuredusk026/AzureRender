@@ -8,6 +8,34 @@
 
 int main() { try {
     using Json=nlohmann::json;
+    const Json character={{"schemaVersion",1},{"diffuseFloor",.25},{"compression",.8}};
+    Json localShape={{"type","point"},{"characterResponse",character}};
+    auto local=localShape.get<azurerender::LightShape>();
+    if(!Json(local).contains("characterResponse")
+        ||Json(local)["characterResponse"]["diffuseFloor"].get<float>()!=.25F
+        ||Json(local)["characterResponse"]["compression"].get<float>()!=.8F)
+        throw std::runtime_error("Character local-light response must roundtrip through the public shape contract");
+    azurerender::RenderLight localLight;localLight.shape=local;azurerender::LightBuffer localBuffer;localBuffer.setLights({localLight});
+    const auto bytes=localBuffer.gpuData();
+    if(sizeof(bytes[0])!=144)throw std::runtime_error("Character response requires one explicit GPU light row");
+    const auto* packedResponse=reinterpret_cast<const float*>(&bytes[0])+32;
+    if(packedResponse[0]!=1||packedResponse[1]!=.25F||packedResponse[2]!=.8F||packedResponse[3]!=0)
+        throw std::runtime_error("GPU local response must preserve enabled, floor and compression");
+    for(const auto& bad:std::vector<Json>{nullptr,Json::array(),Json{{"schemaVersion",1}},
+        Json{{"schemaVersion",2},{"diffuseFloor",.25},{"compression",.8}},
+        Json{{"schemaVersion",true},{"diffuseFloor",.25},{"compression",.8}},
+        Json{{"schemaVersion",1},{"diffuseFloor",true},{"compression",.8}},
+        Json{{"schemaVersion",1},{"diffuseFloor",-.1},{"compression",.8}},
+        Json{{"schemaVersion",1},{"diffuseFloor",1.00000001},{"compression",.8}},
+        Json{{"schemaVersion",1},{"diffuseFloor",.25},{"compression",1.1}},
+        Json{{"schemaVersion",1},{"diffuseFloor",.25},{"compression",.8},{"unknown",1}}}) {
+        auto invalid=localShape;invalid["characterResponse"]=bad;bool rejected=false;
+        try{(void)invalid.get<azurerender::LightShape>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid local response inputs must fail import");
+    }
+    auto directionalResponse=localShape;directionalResponse["type"]="directional";bool rejectedDirectional=false;
+    try{(void)directionalResponse.get<azurerender::LightShape>();}catch(const std::exception&){rejectedDirectional=true;}
+    if(!rejectedDirectional)throw std::runtime_error("Local character response requires a punctual light");
     const Json receiver={{"schemaVersion",1},{"surfaces",true},{"characters",false}};
     Json authored=Json(azurerender::LightShape{});authored["receivers"]=receiver;
     auto parsed=authored.get<azurerender::LightShape>();

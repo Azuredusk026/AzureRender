@@ -44,6 +44,7 @@ int main() {
         const auto nodeId = document.nodes.front().id;
         document.lights.push_back({"first", nodeId, {1.0F, 0.0F, 0.0F}, 2.0F, 3.0F, true});
         document.lights.push_back({"second", nodeId, {0.0F, 1.0F, 0.0F}, 4.0F, 5.0F, false});
+        document.lights[0].shape.characterResponse={true,.25F,.8F};
         azurerender::EditorContext lightContext(std::move(document), path);
         const auto* component = lightContext.ecs().tryGet<azurerender::ecs::LightComponent>(
             lightContext.entityForNode(0));
@@ -52,8 +53,11 @@ int main() {
             || component->emitters[1].enabled) {
             return 1;
         }
+        const auto& response=component->emitters[0].shape.characterResponse;
+        if(!response.present||response.diffuseFloor!=.25F||response.compression!=.8F)return 98;
         lightContext.save();
         const auto loaded = azurerender::SceneDocument::load(path);
+        if(!loaded.lights[0].shape.characterResponse.present||loaded.lights[0].shape.characterResponse.compression!=.8F)return 99;
         if (loaded.lights.size() != 2
             || loaded.lights[0].id != "first"
             || loaded.lights[1].id != "second"

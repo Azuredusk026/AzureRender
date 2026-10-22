@@ -22,9 +22,20 @@ struct LightShape {
     float specularScale = 1;
     LightInfluenceBox influenceBox;
     LightReceivers receivers;
+    struct CharacterResponse {
+        bool present=false;
+        float diffuseFloor=0,compression=0;
+        void validate() const {
+            for(float value:{diffuseFloor,compression})if(!std::isfinite(value)||value<0||value>1)
+                throw std::invalid_argument("Character light response values must be in [0,1]");
+        }
+    } characterResponse;
 
     void validate() const {
         influenceBox.validate();
+        characterResponse.validate();
+        if(characterResponse.present&&type==LightKind::Directional)
+            throw std::invalid_argument("Character local-light response requires a punctual emitter");
         if (!std::isfinite(specularScale) || specularScale<0)
             throw std::invalid_argument("Light specular scale must be finite and nonnegative");
         if (type != LightKind::Point && type != LightKind::Spot && type != LightKind::Directional)

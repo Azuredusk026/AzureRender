@@ -2077,6 +2077,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ProjectedHairLightingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_lighting_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.ProjectedHairLightingGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CharacterLocalLightGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CharacterLocalLightGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureAssets.TextureMipBiasGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_texture_mip_bias_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureAssets.TextureMipBiasGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)

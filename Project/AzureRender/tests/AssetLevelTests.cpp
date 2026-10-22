@@ -125,6 +125,11 @@ int main() {
   const auto reopenedBox=Level::load(root/"assets/boxed.azurelevel",db).scene.lights[0].shape.influenceBox;
   check(Level::load(root/"assets/boxed.azurelevel",db).scene.lights[0].shape.specularScale==.195F);
   check(reopenedBox.enabled&&reopenedBox.worldToBox[0][3]==3);
+  auto characterDocument=level;
+  characterDocument["lights"][0]["shape"]={{"type","point"},{"characterResponse",{{"schemaVersion",1},{"diffuseFloor",.25},{"compression",.8}}}};
+  auto characterLevel=Level::parse(characterDocument,db);characterLevel.save(root/"assets/character-light.azurelevel");
+  const auto characterLight=Level::load(root/"assets/character-light.azurelevel",db).scene.lights[0].shape.characterResponse;
+  check(characterLight.present&&characterLight.diffuseFloor==.25F&&characterLight.compression==.8F);
   check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
   check(nlohmann::json::object().get<LightShape>().specularScale==1.F);
   const auto responseShape=nlohmann::json{{"specularScale",.195F}}.get<LightShape>();

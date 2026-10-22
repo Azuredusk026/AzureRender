@@ -13,7 +13,13 @@
 #include <iostream>
 
 namespace {
+std::string withoutCharacterLightResponse(std::string value) {
+    const auto line=value.find("lightCharacterResponse ");
+    if(line==std::string::npos)throw std::runtime_error("Expected current character light response field");
+    value.erase(line,value.find('\n',line)-line+1);return value;
+}
 std::string withoutLightReceivers(std::string value) {
+    value=withoutCharacterLightResponse(std::move(value));
     const auto line=value.find("lightReceivers ");
     if(line==std::string::npos)throw std::runtime_error("Expected current receiver field");
     value.erase(line,value.find('\n',line)-line+1);return value;
@@ -164,6 +170,13 @@ int main() {
         document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
         const auto shapeReloaded=azurerender::SceneDocument::load(scenePath).lights[0].shape;
+        auto responseDocument=document;
+        responseDocument.lights[0].shape.characterResponse={true,.25F,.8F};
+        responseDocument.save(directory/"character-response.azscene");
+        const auto localResponse=azurerender::SceneDocument::load(directory/"character-response.azscene").lights[0].shape.characterResponse;
+        if(!localResponse.present||localResponse.diffuseFloor!=.25F||localResponse.compression!=.8F) {
+            std::cerr<<"Scene documents must save and reopen the public character light response\n";return 1;
+        }
         assert(shapeReloaded.specularScale==.195F);
         assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
         assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);
@@ -206,7 +219,7 @@ int main() {
             auto legacy=withoutLightReceivers(contents);
             const auto responseLine=legacy.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             legacy.erase(responseLine,legacy.find('\n',responseLine)-responseLine+1);
-            const auto header=legacy.find("schemaVersion 11");assert(header!=std::string::npos);
+            const auto header=legacy.find("schemaVersion 12");assert(header!=std::string::npos);
             legacy.replace(header,16,"schemaVersion 6");
             const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
             legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
@@ -226,7 +239,7 @@ int main() {
             versionEight=withoutLightReceivers(versionEight);
             const auto responseLine=versionEight.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             versionEight.erase(responseLine,versionEight.find('\n',responseLine)-responseLine+1);
-            const auto header=versionEight.find("schemaVersion 11");assert(header!=std::string::npos);
+            const auto header=versionEight.find("schemaVersion 12");assert(header!=std::string::npos);
             versionEight.replace(header,16,"schemaVersion 8");
             const auto boxLine=versionEight.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
             versionEight.erase(boxLine,versionEight.find('\n',boxLine)-boxLine+1);
@@ -241,7 +254,7 @@ int main() {
             versionNine=withoutLightReceivers(versionNine);
             const auto line=versionNine.find("lightSpecularScale ");assert(line!=std::string::npos);
             versionNine.erase(line,versionNine.find('\n',line)-line+1);
-            const auto header=versionNine.find("schemaVersion 11");assert(header!=std::string::npos);
+            const auto header=versionNine.find("schemaVersion 12");assert(header!=std::string::npos);
             versionNine.replace(header,16,"schemaVersion 9");
             const auto path=directory/"version-nine.azscene";
             {std::ofstream file(path);file<<versionNine;}
@@ -252,7 +265,7 @@ int main() {
             std::ifstream saved(scenePath);
             std::string legacy((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
             legacy=withoutLightReceivers(legacy);
-            const auto header=legacy.find("schemaVersion 11");
+            const auto header=legacy.find("schemaVersion 12");
             legacy.replace(header,16,"schemaVersion 10");
             const auto path=directory/"version-ten.azscene";
             {std::ofstream file(path);file<<legacy;}
@@ -262,6 +275,15 @@ int main() {
             }
         }
         assert(std::filesystem::exists(scenePath));
+        {
+            std::ifstream file(scenePath);
+            auto legacy=withoutCharacterLightResponse(std::string((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>()));
+            const auto header=legacy.find("schemaVersion 12");legacy.replace(header,16,"schemaVersion 11");
+            const auto path=directory/"version-eleven.azscene";{std::ofstream out(path);out<<legacy;}
+            if(azurerender::SceneDocument::load(path).lights[0].shape.characterResponse.present) {
+                std::cerr<<"Version eleven must retain the default character response\n";return 1;
+            }
+        }
         assert(loadedDocumentMatches(scenePath, document));
         assert(azurerender::SceneDocument::load(scenePath).renderSettings.sceneLightingEnabled);
         assert(countTemporaryFiles(directory) == 0);

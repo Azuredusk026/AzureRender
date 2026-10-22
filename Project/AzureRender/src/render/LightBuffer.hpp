@@ -22,14 +22,18 @@ struct RenderLight {
     bool rasterShadowCaster = false;
 };
 
-struct RenderLightGpu {
+struct alignas(16) RenderLightGpu {
+    static constexpr unsigned kLayoutVersion=2;
     float positionRadius[4]{};
     float colorIntensity[4]{};
     float directionOuter[4]{};
     float coneType[4]{};
     std::array<std::array<float,4>,3> boxRows{};
     std::array<float,4> boxParameters{};
+    std::array<float,4> characterResponse{};
 };
+static_assert(sizeof(RenderLightGpu)==144);
+static_assert(offsetof(RenderLightGpu,characterResponse)==128);
 
 class LightBuffer final {
 public:
@@ -64,6 +68,8 @@ public:
             value.coneType[3] = light.shape.falloffExponent;
             value.boxRows=light.shape.influenceBox.worldToBox;
             value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,static_cast<float>(light.shape.receivers.mask())};
+            const auto& response=light.shape.characterResponse;
+            value.characterResponse={response.present?1.F:0.F,response.diffuseFloor,response.compression,0};
             packed.push_back(value);
         }
         return packed;

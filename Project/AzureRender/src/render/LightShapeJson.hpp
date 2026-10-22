@@ -2,6 +2,21 @@
 #include "ecs/LightShape.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
+inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& response) {
+    response.validate();value={{"schemaVersion",1},{"diffuseFloor",response.diffuseFloor},{"compression",response.compression}};
+}
+inline void from_json(const nlohmann::json& value,LightShape::CharacterResponse& response) {
+    if(!value.is_object()||value.size()!=3||!value.contains("schemaVersion")
+        ||!value["schemaVersion"].is_number_integer()||value["schemaVersion"]!=1
+        ||!value.contains("diffuseFloor")||!value["diffuseFloor"].is_number()
+        ||!value.contains("compression")||!value["compression"].is_number())
+        throw std::invalid_argument("Invalid character light response schema or fields");
+    for(const char* field:{"diffuseFloor","compression"}) {
+        const auto number=value.at(field).get<double>();
+        if(!std::isfinite(number)||number<0||number>1)throw std::invalid_argument("Character light response values must be in [0,1]");
+    }
+    response={true,value["diffuseFloor"].get<float>(),value["compression"].get<float>()};response.validate();
+}
 inline void to_json(nlohmann::json& value,const LightReceivers& receivers) {
     value={{"schemaVersion",1},{"surfaces",receivers.surfaces},{"characters",receivers.characters}};
 }
@@ -31,6 +46,7 @@ inline void to_json(nlohmann::json& value, const LightShape& shape) {
             shape.falloff==LightFalloff::SmoothInverseSquare?"smooth-inverse-square":"legacy"},
         {"falloffExponent",shape.falloffExponent},{"specularScale",shape.specularScale},
         {"influenceBox",shape.influenceBox},{"receivers",shape.receivers}};
+    if(shape.characterResponse.present)value["characterResponse"]=shape.characterResponse;
 }
 inline void from_json(const nlohmann::json& value, LightShape& shape) {
     const auto type = value.value("type", std::string("point"));
@@ -48,6 +64,7 @@ inline void from_json(const nlohmann::json& value, LightShape& shape) {
     shape.specularScale=value.value("specularScale",1.F);
     shape.influenceBox=value.value("influenceBox",LightInfluenceBox{});
     shape.receivers=value.value("receivers",LightReceivers{});
+    shape.characterResponse=value.value("characterResponse",LightShape::CharacterResponse{});
     shape.validate();
 }
 }

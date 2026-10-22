@@ -36,7 +36,7 @@ def color_response(base,ramp,visibility,view_alpha,scale,brightness,sat):
 
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
-    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input')
+    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]}
@@ -63,7 +63,11 @@ def run(player,output,selected=None,expected_validation=None):
             level['renderSettings']['nprLighting']=settings;level['lights'][0]['color']=[.2,.4,.6]
             if name=='disabled-lighting':settings['enabled']=False
             if name=='no-main':level['lights'][0]['enabled']=False
-            if name=='local-kk':level['lights'][0]['shape']['type']='point'
+            if name.startswith('local-'):level['lights'][0]['shape']['type']='point'
+            if name.startswith('local-response-'):
+                level['lights'][0]['intensity']=4
+                level['lights'][0]['shape'].update(characterResponse={'schemaVersion':1,'diffuseFloor':.25,'compression':1},
+                    specularScale=0 if 'zero' in name else 2)
             if name=='extra-kk':
                 light=copy.deepcopy(level['lights'][0]);light.update(id='extra',color=[.1,.2,.3],intensity=.2);level['lights'].append(light)
             level_path.write_text(json.dumps(level),encoding='utf-8')
@@ -82,24 +86,31 @@ def run(player,output,selected=None,expected_validation=None):
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             measured=[];wanted=[]
             energy_case=copy.deepcopy(case)
-            if name=='local-kk':energy_case['local']=True
+            if name.startswith('local-'):energy_case['local']=True
             energy_samples=hair.expectation(energy_case)
             for sample in energy_samples:
                 x,y=sample['pixel'];measured.append(hair.linear(pixels[y,x]))
                 response,lit=color_response(hair.linear(hair.CONTROL[:3]),ramp,vis/255,ramp[3],.55,.55,1.1)
-                main=LIGHTING['mainColor'];intensity=0 if name in ('no-main','local-kk') else .5
+                main=LIGHTING['mainColor'];intensity=0 if name=='no-main' or name.startswith('local-') else .5
                 ambient,direct=illumination(settings,[0,0,1],LIGHTING['ambientColor'],main,intensity,1,lit,1)
                 if isolation=='hair-kk':
                     weight=lit;spec_scale=(.55+(1-.55)*weight)*(.5+.5*weight)
                     raw=np.asarray(sample['linearRgb'])/(.5*3)
                     expected=raw*(ambient+direct)*spec_scale*3
                     if name in ('no-main','kk-disabled'):expected*=0
-                    if name=='local-kk':expected=np.asarray(sample['linearRgb'])*[.2,.4,.6]
+                    if name.startswith('local-'):expected=np.asarray(sample['linearRgb'])*[.2,.4,.6]
+                    if name.startswith('local-response-'):
+                        delta=np.array([0,.16,4])-sample['worldPoint'];distance=np.linalg.norm(delta);cosine=delta[2]/distance
+                        attenuation=(1-distance/10)**2/(1+.12*distance*distance)
+                        denominator=max(.6*4*attenuation*.75,1)
+                        expected*=np.clip(cosine+.5,0,1)*.75+.25
+                        expected*=8*cosine*(0 if 'zero' in name else 2)/denominator
                     if name=='extra-kk':expected+=raw*np.array([.1,.2,.3])*.2*3
                 else:expected=response*(ambient if isolation=='ambient' else direct)*(.5 if name=='diffuse-scale' else 1)
                 if name in ('disabled-lighting','absent-input'):expected=hair.linear(hair.CONTROL[:3])*.96*np.array([.2,.4,.6])*.5*ramp[:3]
                 wanted.append(expected)
             maximum=float(np.abs(np.asarray(measured)-wanted).max())
+            if name=='local-response-kk':assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
             report['captures'].append({'name':name,'maximumLinearError':maximum,'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
                 'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist()})
             assert maximum<=.008,(name,maximum,measured[0],wanted[0])
