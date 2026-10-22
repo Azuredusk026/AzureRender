@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R5",
+  "status": "public-filtering-passed",
+  "formalNr5Status": "Pending",
+  "nativeFrameEquivalenceVerified": false,
+  "formalPerformanceAcceptance": false,
+  "configurations": {
+    "debug": {
+      "analysis": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-analysis-debug-metadata-aware.json",
+        "sha256": "7dc0e0cba89efe1315f383347f9e061ed43d1f4ac5997aef1daea94b96dbcd2b"
+      },
+      "checks": 86,
+      "captures": 28,
+      "metrics": {
+        "indexed-pattern-normalized-softening": {
+          "baselineMean": 0.26471670904578143,
+          "candidateMean": 0.26566297289624496,
+          "energyRatio": 1.003574628340895,
+          "baseline": {
+            "contrast": 0.9899223915925006,
+            "variation": 0.5036590275793701
+          },
+          "candidate": {
+            "contrast": 0.17962610911427465,
+            "variation": 0.17154048370240732
+          },
+          "contrastRatio": 0.18145473891676284,
+          "variationRatio": 0.34058852181573335
+        },
+        "indexed-tilt-normalized-softening": {
+          "baselineMean": 0.2664921305008626,
+          "candidateMean": 0.2654118694241538,
+          "energyRatio": 0.9959463678170214,
+          "baseline": {
+            "contrast": 0.9410753936935877,
+            "variation": 0.5796689550076789
+          },
+          "candidate": {
+            "contrast": 0.2427707755977017,
+            "variation": 0.22043010451750367
+          },
+          "contrastRatio": 0.25797165373207853,
+          "variationRatio": 0.3802689493947172
+        },
+        "indexed-edge-softening": {
+          "baselineMean": 0.26575331742404934,
+          "candidateMean": 0.25891801502466016,
+          "energyRatio": 0.9742795218300796,
+          "baselineWidthPixels": 0.8043135462858755,
+          "candidateWidthPixels": 7.216449369473209,
+          "widthIncreasePixels": 6.4121358231873335,
+          "widthRatio": 8.972184296530898
+        },
+        "indexed-foreground-depth-rejection": {
+          "baselineMean": 0.5346874518534832,
+          "candidateMean": 0.48927263941812105,
+          "energyRatio": 0.9150628796731013,
+          "roiPixels": 251,
+          "baselineGreenMean": 0.0,
+          "candidateGreenMean": 0.0,
+          "greenRedRatio": 0.0
+        },
+        "indexed-zero-subpixel-compatible": {
+          "maximumByteError": 0
+        }
+      },
+      "captureStage": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-candidate-debug/summary.json",
+        "sha256": "825bac47b3f0a6fa734e9f15374031a4b22e1315e9c7b8a63bfb22b6447342df"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-roughness-green-debug.log",
+        "sha256": "c78b6d59e9bed369c1c0f1fe1fa3564c1964d76c6883dcda3c0007dfb76c9cd8"
+      }
+    },
+    "release": {
+      "analysis": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-analysis-release-metadata-aware.json",
+        "sha256": "96257e07147da52407f9c96ebfda8139f0951372048b851669e281f84dea0a9b"
+      },
+      "checks": 86,
+      "captures": 28,
+      "metrics": {
+        "indexed-pattern-normalized-softening": {
+          "baselineMean": 0.26471670904578143,
+          "candidateMean": 0.26566297289624496,
+          "energyRatio": 1.003574628340895,
+          "baseline": {
+            "contrast": 0.9899223915925006,
+            "variation": 0.5036590275793701
+          },
+          "candidate": {
+            "contrast": 0.17962610911427465,
+            "variation": 0.17154048370240732
+          },
+          "contrastRatio": 0.18145473891676284,
+          "variationRatio": 0.34058852181573335
+        },
+        "indexed-tilt-normalized-softening": {
+          "baselineMean": 0.2664921305008626,
+          "candidateMean": 0.2654118694241538,
+          "energyRatio": 0.9959463678170214,
+          "baseline": {
+            "contrast": 0.9410753936935877,
+            "variation": 0.5796689550076789
+          },
+          "candidate": {
+            "contrast": 0.2427707755977017,
+            "variation": 0.22043010451750367
+          },
+          "contrastRatio": 0.25797165373207853,
+          "variationRatio": 0.3802689493947172
+        },
+        "indexed-edge-softening": {
+          "baselineMean": 0.26575331742404934,
+          "candidateMean": 0.25891801502466016,
+          "energyRatio": 0.9742795218300796,
+          "baselineWidthPixels": 0.8043135462858755,
+          "candidateWidthPixels": 7.216449369473209,
+          "widthIncreasePixels": 6.4121358231873335,
+          "widthRatio": 8.972184296530898
+        },
+        "indexed-foreground-depth-rejection": {
+          "baselineMean": 0.5346874518534832,
+          "candidateMean": 0.48927263941812105,
+          "energyRatio": 0.9150628796731013,
+          "roiPixels": 251,
+          "baselineGreenMean": 0.0,
+          "candidateGreenMean": 0.0,
+          "greenRedRatio": 0.0
+        },
+        "indexed-zero-subpixel-compatible": {
+          "maximumByteError": 0
+        }
+      },
+      "captureStage": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-candidate-release/summary.json",
+        "sha256": "aae24f2ea53e4b8952518fd2098385eca15abcfff3e6193358a8d36040554b4b"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr/production-roughness-green-release.log",
+        "sha256": "4e64aa43a7dab0c8b68a26d520ed88a5048c2d2c2b2202a107deb5f73856d730"
+      }
+    }
+  },
+  "baselineCapture": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-baseline-release/summary.json",
+    "sha256": "21444439c9600cede7e8c31f72ff36a79c0c5d5ae7a40e42e550c9ba73499ad7"
+  },
+  "metadataIdentityDiagnostic": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/gpu-analysis-release.json",
+    "sha256": "651ecba6eebcf064ffa3658dc4ff83e211f32975bd9c321488a719ce4e24a426"
+  },
+  "cpuReference": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/cpu_green.log",
+    "sha256": "26f87c79f2a652b1e74cfb8beec26b1dbaa2343855dd6f75af228ac83a9802ad"
+  },
+  "cpuRed": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/cpu_red.log",
+    "sha256": "cc982467d35e49f49d18c1770ee504e57b31035ff05647ea02fe386b012e71c7"
+  },
+  "candidateEvidence": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/manifest.json",
+    "sha256": "09dd5a2cd44c203975ed5dee2bc43850a932544c31cb2bfe7abfbd68eabd5315"
+  },
+  "affectedGpuRegression": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/ssr-regression-debug.log",
+    "sha256": "7935fe041744268c8279d8a5bf63507b41770ee7f9e68af37e29172eb0c9c592"
+  },
+  "jointCapture": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/joint-production/receipt.json",
+    "sha256": "599271e0786cb212bb97ff52a63b301189bbe05377b0874469ea43f5e36ac5f0"
+  },
+  "video": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/joint-production/atrium-advanced-lighting.mp4",
+    "sha256": "bb33eebb2b86a19c8c87e16b99ff69fd2a45e7a35b9b64953f7b9cd3da2dbb2e"
+  },
+  "visualReview": {
+    "view": "wide-last",
+    "sourceCount": 1112,
+    "remaining": [
+      "floor UV domain and rebake",
+      "wall artifacts",
+      "hair highlights and mouth shadow",
+      "single-ray coverage",
+      "long-duration temporal stability",
+      "formal GPU performance"
+    ]
+  },
+  "sources": [
+    {
+      "path": "shaders/screen_space_reflection.glsl",
+      "sha256": "0df94e83a06c06d723eac66475223273c2d99642cc38e9c856245163aa189d57"
+    }
+  ],
+  "verificationScripts": [
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/capture_gpu.py",
+      "sha256": "88382b0172d1b65adf1cbe797123d8d4b4556403f0e48665be547209f4985811"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/analyze_gpu.py",
+      "sha256": "d2a661eae81b02d8089615df969dd30046843d3d8613750a0f857e741c917922"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/cpu_reference.py",
+      "sha256": "f59061c100c47f316b0858ad88cca1c4ebf7b8c53fa1b32a90c9b9b4eaafc010"
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-roughness/checks/test_reference.py",
+      "sha256": "88b2262ab0872294153dde77a0f6536b8d0a50e44384041b145f14db67a4ef0c"
+    }
+  ]
+}
