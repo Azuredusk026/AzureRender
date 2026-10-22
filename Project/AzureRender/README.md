@@ -1,6 +1,7 @@
 # AzureRender 工程
 
 角色材质支持显式的影色组合与逐灯接收范围。
+主光能量遮挡通过[双配置检查](docs/acceptance/nr/character-main-shadow.md)。
 原生组合候选的照明绑定与完整外观继续验收。
 实现及结果见[颜色与接收验收](docs/acceptance/nr/character-color-receivers.md)。
 

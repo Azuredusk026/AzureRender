@@ -1369,7 +1369,8 @@
         "docs/acceptance/nr/face-specular-control.md",
         "docs/acceptance/nr/character-probe-controls.md",
         "docs/acceptance/nr/eye-radial-surface.md",
-        "docs/acceptance/nr/character-color-receivers.md"
+        "docs/acceptance/nr/character-color-receivers.md",
+        "docs/acceptance/nr/character-main-shadow.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"

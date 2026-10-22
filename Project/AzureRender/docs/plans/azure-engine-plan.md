@@ -2,7 +2,8 @@
 
 原生方向场工具已接入三层及默认环境组合。
 角色颜色组合与逐灯接收范围已通过公共机制检查。
-过曝问题按[专项验收](../acceptance/nr/character-color-receivers.md)继续定位。
+主光遮挡通过[专项验收](../acceptance/nr/character-main-shadow.md)。
+完整角色照明及分部位材质继续验收。
 来源与运行待项见[组合验收](../acceptance/nr/irradiance-composition.md)。
 
 反射射线预计算通过双配置与动态遮挡回归。

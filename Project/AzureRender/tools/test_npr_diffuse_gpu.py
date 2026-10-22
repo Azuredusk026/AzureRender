@@ -15,6 +15,7 @@ import tempfile
 import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
+from create_visibility_fixture import surface,component
 
 
 def linear(value):
@@ -50,6 +51,8 @@ def run(player,output,require_validation=False):
         ('local-side',False,0,0,.7,False,False),
         ('surface-receiver',False,0,0,.7,False,False),('character-receiver',False,0,0,.7,False,False),
         ('none-receiver',False,0,0,.7,False,False),('character-only-plain',False,0,0,.7,False,False),
+        ('main-shadow-field',False,0,0,.7,False,False),('main-shadow',False,0,0,.7,False,False),
+        ('main-shadow-disabled',False,0,0,.7,False,False),
         ('dark',False,0,0,.7,False,True),
         ('plain-pbr',True,0,0,.7,False,False),
         ('specular-npr',False,0,0,.7,False,False),('specular-plain',False,0,0,.7,False,False),
@@ -83,6 +86,12 @@ def run(player,output,require_validation=False):
         if 'receiver' in name or name=='character-only-plain':
             level['lights'][0]['shape']['receivers']={'schemaVersion':1,'surfaces':name=='surface-receiver',
                 'characters':name in ['character-receiver','character-only-plain']}
+        if name.startswith('main-shadow'):
+            surface(folder/'blocker.gltf')
+            level['resources'].append({'id':'blocker','asset':'assets:/blocker.gltf'})
+            level['nodes'].append({'id':'blocker','resourceId':'blocker','components':{
+                'azure.transform':component('azure.transform',{'translation':[1,0,1],'scale':[.6,.6,.6]})}})
+            level['lights'][0]['shape']['direction']=[-2**-.5,0,-2**-.5]
         if volume:
             cell=[0,0,0,.7,0,0,0,.5,0,0,0,.3,1,0,0,0]
             (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
@@ -92,7 +101,10 @@ def run(player,output,require_validation=False):
             '--width','128','--height','128','--capture-dir',str(folder/'frames'),
             '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
             '--runtime-report',str(folder/'runtime.json')]
-        command+=['--qa-isolation','direct-specular' if name.startswith('specular-') else 'emissive'] if control else ['--qa-effect','specular','--qa-effect-state','disabled']
+        if name.startswith('main-shadow'):
+            command+=['--qa-isolation','shadow-visibility' if name.endswith('-field') else 'direct-diffuse']
+            if name.endswith('-disabled'):command+=['--qa-effect','shadow','--qa-effect-state','disabled']
+        else:command+=['--qa-isolation','direct-specular' if name.startswith('specular-') else 'emissive'] if control else ['--qa-effect','specular','--qa-effect-state','disabled']
         if fixed:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
         (folder/'command.json').write_text(json.dumps(command,indent=2))
         with (folder/'player.log').open('w',encoding='utf8') as stream:
@@ -110,7 +122,7 @@ def run(player,output,require_validation=False):
             continue
         expected=linear([200,140,90]) if name=='plain-pbr' else reference(linear([200,140,90]),linear([120,50,20]),np.array([180,150,170,ramp_alpha])/255,ao/255,scale)
         expected*=np.array([.7,.5,.3]) if volume else 0 if dark else .3
-        if name in ['surface-receiver','none-receiver','character-only-plain']:expected*=0
+        if name in ['surface-receiver','none-receiver','character-only-plain','main-shadow','main-shadow-field']:expected*=0
         if local:
             position=np.array([.03125,-.03125,0])
             light=np.array([2,0,0] if name=='local-side' else [0,0,-2 if name=='local-back' else 2])

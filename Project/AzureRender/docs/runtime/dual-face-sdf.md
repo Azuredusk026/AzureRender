@@ -120,6 +120,8 @@ ctest --test-dir build/ninja-msvc-debug -R 'AzureEngine.DualFaceSdfGpu|AzureRend
 原生附加灯的组合语义仍需独立核验。
 
 影色表已有独立输入与查表验证。
-完整原生漫反射组合与皮肤镜面仍待接入。
+显式漫反射组合见[颜色组合](npr-diffuse.md)。
+脸部环境方向法线与原生附加帧继续独立核验。
+皮肤镜面按其原生着色来源继续接入。
 原生参数和画面证据见[脸部证据](../acceptance/nr/character-face-sdf.md)。
 法线分项证据见[B 通道法线验证](../acceptance/nr/face-sdf-normal.md)。

@@ -784,7 +784,6 @@ void main() {
         attenuation*=lightInfluenceBoxWeight(worldPosition,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
-        vec3 unshadowedRadiance=radiance;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
         if(eyeRadial&&camera.clusterLighting.x>.5) {
             // This host adapter is independent from the unbound native NPR globals.
@@ -820,7 +819,10 @@ void main() {
             vec3 response=light.coneType.y>1.5
                 ?materialNprDiffuse(baseColor,metallic,localRamp,visibility,shadedNormal,viewDirection)
                 :nprAmbientResponse*pointDiffuse;
-            clusteredDiffuse+=response*unshadowedRadiance;
+            // Color selection and incident-energy visibility are independent.
+            // The native illumination expression gates its main-light term
+            // with scene visibility even when color selects an indoor tint.
+            clusteredDiffuse+=response*radiance;
         } else clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
