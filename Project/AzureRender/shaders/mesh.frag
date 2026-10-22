@@ -1071,6 +1071,8 @@ void main() {
             }
             float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
             vec3 localSpecular=fresnel*textureLod(reflectionProbeTexture,directionToEquirectangular(direction),roughness*lastMip).rgb*camera.probeParameters.y;
+            if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
+            if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);
             beautyColor+=blended-ambientSpecular;
             ambientSpecular=blended;

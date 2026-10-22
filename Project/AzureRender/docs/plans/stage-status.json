@@ -1358,7 +1358,8 @@
         "docs/acceptance/nr/outline-coverage.md",
         "docs/acceptance/nr/character-logistics-joint.md",
         "docs/acceptance/nr/character-logistics-restored.md",
-        "docs/acceptance/nr/face-specular-control.md"
+        "docs/acceptance/nr/face-specular-control.md",
+        "docs/acceptance/nr/character-probe-controls.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"

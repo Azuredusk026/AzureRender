@@ -1,5 +1,8 @@
 # 开发总计划
 
+角色局部探针的镜面权重与诊断开关已通过检查。
+双配置数值及实际脸部见[反射控制](../acceptance/nr/character-probe-controls.md)。
+
 脸部高光正控制已完成解析及完整 GPU 套件核对。
 门槛与原始记录见[正控制验收](../acceptance/nr/face-specular-control.md)。
 
