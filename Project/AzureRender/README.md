@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+主关卡与可玩入口已接入首批角色材质候选。
+四次捕获及原生待项见[接入验证](docs/acceptance/nr/main-character-integration.md)。
+
 公共材质文档的正值自发光强度启用对应功能位。
 CPU 与编辑回归范围见[解释验证](docs/acceptance/nr/material-document-emission.md)。
 

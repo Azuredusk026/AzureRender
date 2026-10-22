@@ -6,6 +6,8 @@
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
 新增任务为 NR0-A1、NR6-C15 至 C18、NR8-V2。
+首批角色候选已进入主项目与可玩入口。
+范围见[主场景接入](../acceptance/nr/main-character-integration.md)。
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。
 

@@ -74,6 +74,9 @@ CMake 显式编译 `mesh.frag` 及快照、索引变体。
 
 ## 实际内容入口
 
+以下为审计基线 `5a01bc5` 的内容快照。
+当前主场景接入见[运行记录](../acceptance/nr/main-character-integration.md)。
+
 中庭工作项目位于以下本机目录：
 
 ```text
@@ -81,7 +84,7 @@ build/runs/20261022-051129-character-logistics-restoration-0f2e71/joint-candidat
 ```
 
 `project.azureproject` 启动 `candidate:/scene.azurelevel`。
-主关卡和 `playable-safe.azurelevel` 均引用 `hero-profile.glb`。
+基线主关卡和可玩关卡均引用 `hero-profile.glb`。
 两者的材质槽覆盖数量均为零。
 下表哈希为本轮只读重算的 SHA-256 前 16 位。
 
@@ -93,7 +96,7 @@ build/runs/20261022-051129-character-logistics-restoration-0f2e71/joint-candidat
 
 主资产次级高光颜色仍为 `[0.672,0,0.004363678]`。
 候选线性颜色约为 `[0.4091444675,0,0.0003377460]`。
-候选通过专项检查，主场景晋升仍待执行。
+本表记录专项候选与基线的来源关系。
 两套骨架和加工结果须分别保存，像素比较使用同源资产。
 
 ## 渲染能力与断点
