@@ -167,6 +167,13 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     require(std::abs(hair.primaryShift+.02F)<.000001F&&std::abs(hair.secondaryShift-.02F)<.000001F
         &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
         "Signed shifts, independent normal scales and rotated source basis must survive loading");
+    auto handed=source;handed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["tangentSign"]=-1;
+    require(packMaterialSurfaceProfile(load(handed).materials[0]).rows[4][3]==-1,
+        "Explicit projected tangent orientation must reach its reserved GPU component");
+    for(const auto& value:Json::array({0,.5,2,true,"-1",nullptr})) {
+        auto invalid=handed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["tangentSign"]=value;
+        reject(invalid,"projectedRamp.tangentSign");
+    }
     auto virtualSource=source;
     virtualSource["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["virtualLight"]={
         {"schemaVersion",1},{"blend",1.0},{"objectGain",.75}};
@@ -392,11 +399,11 @@ void testMaterialSurfacePacking() {
     hair.edgeFade=.5F;hair.specularNormalScale=.6F;hair.directionX=.7F;hair.surfaceNormalScale=.8F;
     hair.secondaryColor={.9F,1,1.1F};hair.objectBasis={1,2,3,4,5,6,7,8,9};
     hair.surfaceResponse=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse;hair.diffuseScale=.96F;
-    const std::array<float,24> expectedHair{.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,1.1F,1,1,2,3,.96F,4,5,6,0,7,8,9,0};
+    const std::array<float,24> expectedHair{.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,1.1F,1,1,2,3,.96F,4,5,6,1,7,8,9,0};
     const auto packedHair=packProjectedHairSurfaceProfile(hair);
     for(std::size_t row=6;row<packedHair.rows.size();++row)require(packedHair.rows[row]==std::array<float,4>{},"Inactive extension rows must remain zero");
     require(std::memcmp(&packedHair,expectedHair.data(),sizeof(expectedHair))==0,
-        "Typed hair packing must preserve every byte of the existing six-row ABI");
+        "Typed hair packing must preserve every declared component of the six-row prefix");
     AssetMaterial material;material.materialClass=AssetMaterialClass::Eye;auto& eye=material.eyeSurface;eye.present=true;
     eye.parallaxScale=.15F;eye.matcapNormalScale=1.5F;eye.alphaPremultiply=.25F;eye.matcapShadowFloor=.75F;
     eye.highlightColor={2,3,4};eye.scatteringColor={5,6,7};eye.matcapColor={8,9,10,11};

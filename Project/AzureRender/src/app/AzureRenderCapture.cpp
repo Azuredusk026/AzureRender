@@ -143,9 +143,9 @@ void AzureRenderApp::writeCaptureManifest(
     }
     qaState
         << '|' << azurerender::BloomSettings::kSchemaVersion
-        << '|' << renderSettings_.bloom.enabled
-        << '|' << renderSettings_.bloom.threshold
-        << '|' << renderSettings_.bloom.strength;
+        << '|' << effectiveRenderSettings_.bloom.enabled
+        << '|' << effectiveRenderSettings_.bloom.threshold
+        << '|' << effectiveRenderSettings_.bloom.strength;
     qaState
         << '|' << azurerender::OutlineSettings::kSchemaVersion
         << '|' << renderSettings_.outline.strength
@@ -156,12 +156,12 @@ void AzureRenderApp::writeCaptureManifest(
     }
     qaState
         << '|' << azurerender::GradeSettings::kSchemaVersion
-        << '|' << renderSettings_.grade.exposureEv
-        << '|' << renderSettings_.grade.saturation
-        << '|' << renderSettings_.grade.contrast
-        << '|' << renderSettings_.grade.toneMappingEnabled
+        << '|' << effectiveRenderSettings_.grade.exposureEv
+        << '|' << effectiveRenderSettings_.grade.saturation
+        << '|' << effectiveRenderSettings_.grade.contrast
+        << '|' << effectiveRenderSettings_.grade.toneMappingEnabled
         << '|' << gradeLut.asset << '|' << gradeLut.exposureMultiplier << '|' << gradeLutHash;
-    for (const float channel : renderSettings_.grade.tint) {
+    for (const float channel : effectiveRenderSettings_.grade.tint) {
         qaState << '|' << channel;
     }
     qaState << '|' << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump();
@@ -248,9 +248,9 @@ void AzureRenderApp::writeCaptureManifest(
         << "    \"schemaVersion\": "
         << azurerender::BloomSettings::kSchemaVersion << ",\n"
         << "    \"enabled\": "
-        << (renderSettings_.bloom.enabled ? "true" : "false") << ",\n"
-        << "    \"threshold\": " << renderSettings_.bloom.threshold << ",\n"
-        << "    \"strength\": " << renderSettings_.bloom.strength << "\n"
+        << (effectiveRenderSettings_.bloom.enabled ? "true" : "false") << ",\n"
+        << "    \"threshold\": " << effectiveRenderSettings_.bloom.threshold << ",\n"
+        << "    \"strength\": " << effectiveRenderSettings_.bloom.strength << "\n"
         << "  },\n"
         << "  \"outlineSettings\": {\n"
         << "    \"schemaVersion\": "
@@ -268,15 +268,15 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"gradeSettings\": {\n"
         << "    \"schemaVersion\": "
         << azurerender::GradeSettings::kSchemaVersion << ",\n"
-        << "    \"exposureEv\": " << renderSettings_.grade.exposureEv << ",\n"
-        << "    \"saturation\": " << renderSettings_.grade.saturation << ",\n"
-        << "    \"contrast\": " << renderSettings_.grade.contrast << ",\n"
+        << "    \"exposureEv\": " << effectiveRenderSettings_.grade.exposureEv << ",\n"
+        << "    \"saturation\": " << effectiveRenderSettings_.grade.saturation << ",\n"
+        << "    \"contrast\": " << effectiveRenderSettings_.grade.contrast << ",\n"
         << "    \"tint\": ["
-        << renderSettings_.grade.tint[0] << ", "
-        << renderSettings_.grade.tint[1] << ", "
-        << renderSettings_.grade.tint[2] << "],\n"
+        << effectiveRenderSettings_.grade.tint[0] << ", "
+        << effectiveRenderSettings_.grade.tint[1] << ", "
+        << effectiveRenderSettings_.grade.tint[2] << "],\n"
         << "    \"toneMappingEnabled\": "
-        << (renderSettings_.grade.toneMappingEnabled ? "true" : "false") << ",\n"
+        << (effectiveRenderSettings_.grade.toneMappingEnabled ? "true" : "false") << ",\n"
         << "    \"lut\": {\n"
         << "      \"schemaVersion\": " << azurerender::ColorGradingLutSettings::kSchemaVersion << ",\n"
         << "      \"asset\": " << std::quoted(gradeLut.asset) << ",\n"

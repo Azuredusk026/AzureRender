@@ -27,6 +27,7 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
     for(unsigned axis=0;axis<3;++axis)for(unsigned component=0;component<3;++component)
         rows[axis+3][component]=hair.objectBasis[axis*3+component];
     rows[3][3]=hair.diffuseScale;
+    rows[4][3]=hair.tangentSign;
     if(hair.virtualLight)rows[6]={1,hair.virtualBlend,hair.objectGain,0};
     if(hair.line.present){
         rows[7]={hair.line.frequency,hair.line.strandShift,hair.line.range,hair.line.depth};

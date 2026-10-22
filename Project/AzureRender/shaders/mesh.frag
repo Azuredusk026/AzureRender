@@ -169,20 +169,16 @@ EyeSurfaceProfile loadEyeSurfaceProfile(uint index) {
 }
 
 // Packed normal z is reconstructed before the authored xy scale.
-vec3 projectedHairNormal(vec2 encoded,float scale) {
-    vec2 xy=vec2(encoded.x*2.0-1.0,1.0-encoded.y*2.0);
-    float z=sqrt(max(1.0-min(dot(xy,xy),1.0),0.0));
-    vec3 normal=normalize(worldNormal);
-    vec3 tangent=normalize(worldTangent.xyz-normal*dot(normal,worldTangent.xyz));
-    vec3 bitangent=cross(normal,tangent)*worldTangent.w;
-    return characterProjectedSafeNormalize(tangent*xy.x*scale+bitangent*xy.y*scale+normal*z,normal);
+vec3 projectedHairNormal(vec2 encoded,float scale,float tangentSign) {
+    return characterProjectedHairNormal(encoded,scale,worldNormal,vec4(worldTangent.xyz,worldTangent.w*tangentSign));
 }
 
 CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool directional,bool evaluateLine,out vec2 line) {
     ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
     vec4 parameters=texture(AZ_TEX_FACE_SDF,textureCoordinate);
     vec4 packedNormals=texture(AZ_TEX_HAIR_DATA,textureCoordinate);
-    vec3 normal=projectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y);
+    vec4 tangent=vec4(worldTangent.xyz,worldTangent.w*p.objectY.w);
+    vec3 normal=projectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y,p.objectY.w);
     mat3 frame=mat3(instanceFaceFrame);
     vec3 objectX=normalize(frame*p.objectX.xyz);
     vec3 objectY=normalize(frame*p.objectY.xyz);
@@ -192,7 +188,7 @@ CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool dir
     vec3 halfVector=adapter.x>.5&&directional?characterProjectedVirtualHalf(view,light,objectX,objectY,objectZ,adapter.y)
         :characterProjectedSafeNormalize(view+light,normal);
     CharacterProjectedHairCoordinates coordinates=characterProjectedHairCoordinates(
-        halfVector,normal,view,parameters,worldTangent,
+        halfVector,normal,view,parameters,tangent,
         objectX,objectY,objectZ,p.shiftsIntensityRange.x,p.shiftsIntensityRange.y,
         p.shiftsIntensityRange.w,p.edgeNormalDirection.x,p.edgeNormalDirection.z);
     vec3 ramp=textureLod(AZ_TEX_MATCAP,coordinates.uv,0.0).rgb;
@@ -202,7 +198,7 @@ CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool dir
     if(evaluateLine&&packed.rows[8].z>.5){
         vec4 uvTransform=packed.rows[9];
         float sampleValue=texture(AZ_TEX_SHADOW_COLOR_LUT,textureCoordinate*uvTransform.xy+uvTransform.zw).r;
-        vec3 strand=characterProjectedHairStrand(normal,worldTangent,parameters.r,objectX,objectY,p.edgeNormalDirection.z);
+        vec3 strand=characterProjectedHairStrand(normal,tangent,parameters.r,objectX,objectY,objectZ,p.edgeNormalDirection.z);
         line=characterProjectedHairLine(strand,normal,halfVector,textureCoordinate.x,sampleValue,parameters.g,energy.q,packed.rows[7],packed.rows[8].xy);
     }
     if(adapter.x>.5){energy.primary*=adapter.z;energy.secondary*=adapter.z;}
@@ -508,7 +504,7 @@ void main() {
         hairActive * 0.14));
     if(projectedHair) {
         ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
-        shadedNormal=projectedHairNormal(hairData.rg,p.edgeNormalDirection.w)*(gl_FrontFacing?1.0:-1.0);
+        shadedNormal=projectedHairNormal(hairData.rg,p.edgeNormalDirection.w,p.objectY.w)*(gl_FrontFacing?1.0:-1.0);
     }
 
     if(eyeRadial)shadedNormal=eyeCoordinates.lightingNormal;

@@ -40,7 +40,7 @@ def run(player,root,expected_validation="enabled"):
     project.write_text(json.dumps({"schemaVersion":1,"id":"public-color-grading-lut","name":"Public color grading fixture",
         "mounts":[{"name":"assets","path":"assets"}],"startupScene":"assets:/scene.azurelevel"}))
     frames={};cases={}
-    for name in ("default","linear","logc3-full-log","disabled","diagnostic","fixed"):
+    for name in ("default","linear","logc3-full-log","disabled","diagnostic","fixed","component-diagnostic"):
         level=copy.deepcopy(base)
         if name!="default":
             level["renderSettings"]["gradeLut"]={"schemaVersion":1,"asset":"" if name=="disabled" else "assets:/"+("logc3-full-log" if name=="logc3-full-log" else "linear")+".azlut","exposureMultiplier":1.7}
@@ -52,6 +52,7 @@ def run(player,root,expected_validation="enabled"):
             "--runtime-report",str(folder/"runtime.json")]
         if name=="fixed":command.extend(["--disable-bindless","--disable-compute-skinning","--disable-parallel-recording"])
         if name=="diagnostic":command.extend(["--qa-isolation","world-normal"])
+        if name=="component-diagnostic":command.extend(["--qa-isolation","hair-kk"])
         (folder/"command.json").write_text(json.dumps(command,indent=2))
         with (folder/"player.log").open("w",encoding="utf8") as log:
             subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=90)
@@ -64,13 +65,19 @@ def run(player,root,expected_validation="enabled"):
         manifest=json.loads((folder/"frames/capture_manifest.json").read_text())
         assert manifest["diagnosticView"]==("world-normal" if name=="diagnostic" else "beauty"),name
         lut_manifest=manifest["gradeSettings"]["lut"]
-        assert lut_manifest["dimension"]==(0 if name in ("default","disabled") else 2),name
+        if name!="component-diagnostic":assert lut_manifest["dimension"]==(0 if name in ("default","disabled") else 2),name
         if lut_manifest["dimension"]:
             assert lut_manifest["exposureMultiplier"]==1.7 and lut_manifest["fingerprint"],name
         frame=np.asarray(Image.open(folder/"frames/frame_000000.png").convert("RGB"),dtype=float)
         frames[name]=frame
         cases[name]={"pixel":frame[64,64].tolist(),"validationEnabled":expected_validation=="enabled",
             "validationErrorsDetected":0,"liveAllocationsAfterUnload":0}
+        if name=="component-diagnostic":
+            # Project the fixture's half-metre extent at z=0 through its
+            # 55-degree camera at z=3. Exclude raster edges and the sky.
+            radius=int(64*.5/(3*np.tan(np.deg2rad(55)*.5)))-1
+            assert np.max(frame[64-radius:64+radius,64-radius:64+radius])==0,(name,'Component isolation must bypass grading',frame[64,64].tolist())
+            assert lut_manifest['dimension']==0 and not manifest['gradeSettings']['toneMappingEnabled'],name
         if name in ("linear","logc3-full-log","fixed"):
             expected=np.rint(np.where(target<=.0031308,target*12.92,1.055*target**(1/2.4)-.055)*255)
             error=np.abs(frame[32:96,32:96]-expected).max()

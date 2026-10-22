@@ -9,6 +9,26 @@ except ImportError:
 
 
 class ProjectedHairMathTests(unittest.TestCase):
+    def test_reflected_frame_preserves_fractional_strand_blend(self):
+        args=dict(half_vector=(.1,.2,.97),highlight_normal=(.3,.2,.93),view=(.1,-.1,.98),
+            source_parameters=(.37,.8,0,.4),tangent=(.95,.1,-.3,1),
+            object_x=(1,0,0),object_y=(0,1,0),object_z=(0,0,1),
+            primary_shift=.16,secondary_shift=-.2,range2=.7,edge_fade_power=2,direction_x=.2)
+        expected=subject.project_coordinates(**args)
+        reflected=dict(args)
+        for field in ('half_vector','highlight_normal','view','object_x','object_y','object_z'):
+            value=args[field];reflected[field]=(-value[0],*value[1:])
+        reflected['tangent']=(-args['tangent'][0],*args['tangent'][1:3],-args['tangent'][3])
+        actual=subject.project_coordinates(**reflected)
+        self.assertVectorAlmostEqual(actual.uv,expected.uv)
+        self.assertAlmostEqual(actual.secondary_lobe,expected.secondary_lobe)
+
+    def test_explicit_tangent_sign_recovers_captured_normal(self):
+        actual=subject.project_normal(encoded=(.177737087,.240192235),scale=1,
+            normal=(-.810732484,-.348598927,.466073692),
+            tangent=(.583349943,-.538139224,.595795393,-1),tangent_sign=-1)
+        expected=(-.8112095,.545542955,.210528269)
+        self.assertLess(max(abs(a-b) for a,b in zip(actual,expected)),2e-7)
     def test_line_modulates_indirect_and_protects_primary_band(self):
         args=dict(strand=(0,1,0),normal=(0,0,1),half_vector=(1,0,0),
             u=.007,frequency=100,strand_shift=0,range1=.95,depth=.5,

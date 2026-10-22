@@ -22,7 +22,7 @@ import numpy as np
 from PIL import Image
 
 from create_visibility_fixture import component
-from endfield_native.projected_hair import project_coordinates, evaluate_energy, virtual_half_vector
+from endfield_native.projected_hair import project_coordinates, project_normal, evaluate_energy, virtual_half_vector
 
 
 SIZE = 128
@@ -64,7 +64,8 @@ def cases():
     for name in ('baseline', 'reverse-light', 'zero-parameters', 'secondary-directional',
                  'secondary-local', 'split-normals', 'mirrored', 'rotated',
                  'dark', 'disabled', 'fixed', 'linear-control', 'frame-identity', 'frame-turned', 'frame-turned-fixed',
-                 'virtual-main','virtual-fixed','virtual-zero-gain','virtual-point','virtual-control'):
+                 'virtual-main','virtual-fixed','virtual-zero-gain','virtual-point','virtual-control',
+                 'fractional-frame','fractional-frame-mirrored','tangent-normal-control','tangent-normal','tangent-normal-fixed'):
         case = copy.deepcopy(default)
         case['name'] = name
         if name == 'reverse-light': case['reverse'] = True
@@ -88,6 +89,12 @@ def cases():
             case['virtual']=name!='virtual-control';case['objectGain']=0 if name=='virtual-zero-gain' else 1
             case['fixed']=name=='virtual-fixed';case['local']=name=='virtual-point'
             case['lightY']=.6;case['primaryShift']=-1/3
+        if name.startswith('fractional-'):
+            case.update(materialFrame=45,primaryShift=.02,mirror=name.endswith('mirrored'))
+            case['left'].update(r=94,g=200);case['right'].update(r=160,g=200)
+        if name.startswith('tangent-normal'):
+            case.update(primaryShift=-.5,tangentSign=1 if name.endswith('control') else -1,fixed=name.endswith('fixed'))
+            for side in ('left','right'):case[side].update(r=0,normal=(128,128,128,192),specularScale=1)
         result.append(case)
     return result
 
@@ -144,16 +151,15 @@ def expectation(case):
         source = case[side]
         view = normalized(CAMERA - point)
         direction = normalized(point_light - point) if case['local'] else light
-        xy = np.asarray(source['normal'][2:]) / 255 * 2 - 1
-        z = math.sqrt(max(1 - min(float(xy @ xy), 1), 0))
-        n = normalized(np.asarray(tangent[:3]) * xy[0] * source['specularScale']
-                       + bitangent * xy[1] * source['specularScale'] + np.array([0, 0, z]))
+        n=project_normal(encoded=(source['normal'][2]/255,1-source['normal'][3]/255),
+            scale=source['specularScale'],normal=(0,0,1),tangent=tangent,tangent_sign=case.get('tangentSign',1))
         parameters = (source['r'] / 255, source['g'] / 255, 37 / 255, source['a'] / 255)
         half=virtual_half_vector(view=view,light=direction,object_x=object_frame[:,0],object_y=object_frame[:,1],object_z=object_frame[:,2],blend=1) if case.get('virtual') and not case['local'] else normalized(view+direction)
         coordinates = project_coordinates(half_vector=half,
             highlight_normal=n, view=view, source_parameters=parameters, tangent=tangent,
             object_x=object_frame[:, 0], object_y=object_frame[:, 1], object_z=object_frame[:, 2],
-            primary_shift=case.get('primaryShift',0), secondary_shift=0, range2=1, edge_fade_power=2, direction_x=0)
+            primary_shift=case.get('primaryShift',0), secondary_shift=0, range2=1, edge_fade_power=2, direction_x=0,
+            tangent_sign=case.get('tangentSign',1))
         ramp, rows = ramp_sample(coordinates.uv)
         energy = evaluate_energy(coordinates, ramp, parameters, 1, (0, 0, .5))
         attenuation = 1.
@@ -226,6 +232,8 @@ def model(case):
         primitives.append({'attributes': attributes, 'indices': accessor([0, 1, 2, 0, 2, 3], 1, 'SCALAR', indices=True),
                            'material': len(materials) - 1})
     frame_nodes=[]
+    if 'tangentSign' in case:
+        for material in materials:material['extras']['azureRenderMaterial']['hair']['projectedRamp']['tangentSign']=case['tangentSign']
     if case.get('virtual'):
         for material in materials:material['extras']['azureRenderMaterial']['hair']['projectedRamp']['virtualLight']={
             'schemaVersion':1,'blend':1,'objectGain':case['objectGain']}
@@ -297,6 +305,9 @@ def preflight(prepared):
     assert np.array_equal(values['virtual-main'],values['virtual-fixed'])
     assert np.max(np.abs(values['virtual-main']-values['virtual-control']))>.01
     assert np.max(values['virtual-zero-gain'])==0
+    assert np.array_equal(values['fractional-frame'],values['fractional-frame-mirrored'])
+    assert np.max(np.abs(values['tangent-normal']-values['tangent-normal-control']))>.01
+    assert np.array_equal(values['tangent-normal'],values['tangent-normal-fixed'])
 
 
 def capture(player, case, project, root, expected, require_validation):

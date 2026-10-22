@@ -42,6 +42,14 @@ def _sine(projection):
     return max(math.sqrt(max(1 - projection * projection, 0)), .0001)
 
 
+def project_normal(*,encoded,scale,normal,tangent,tangent_sign=1):
+    """Decode the host's packed normal convention with explicit tangent sign."""
+    n=normal;t=tangent[:3]
+    b=tuple(x*tangent[3]*tangent_sign for x in _cross(n,t))
+    xy=(2*encoded[0]-1,1-2*encoded[1]);z=math.sqrt(max(1-min(_dot(xy,xy),1),0))
+    return _normal(tuple(t[i]*xy[0]*scale+b[i]*xy[1]*scale+n[i]*z for i in range(3)),_normal(n,(0,0,1)))
+
+
 def virtual_half_vector(*, view, light, object_x, object_y, object_z, blend):
     """Main-light half vector from captured event 950 instructions 1175-1196."""
     v=_normal(view,(0,0,1))
@@ -55,7 +63,7 @@ def virtual_half_vector(*, view, light, object_x, object_y, object_z, blend):
 
 def project_coordinates(*, half_vector, highlight_normal, view, source_parameters,
                         tangent, object_x, object_y, object_z, primary_shift,
-                        secondary_shift, range2, edge_fade_power, direction_x):
+                        secondary_shift, range2, edge_fade_power, direction_x, tangent_sign=1):
     """Evaluate coordinates and lobe geometry without sampling the 2D ramp.
 
     Near-zero vectors use fixed fallbacks. A zero projected normal or view has
@@ -67,11 +75,12 @@ def project_coordinates(*, half_vector, highlight_normal, view, source_parameter
     h = _normal(half_vector, (0, 0, 1))
     axis = _normal(tuple(x * direction_x + y for x, y in zip(object_x, object_y)),
                    (0, 1, 0))
-    object_tangent = _cross(n, axis)
+    orientation=-1 if _dot(_cross(object_x,object_y),object_z)<0 else 1
+    object_tangent = tuple(x*orientation for x in _cross(n, axis))
     blend = tuple(a + source_parameters[0] * (b - a)
                   for a, b in zip(object_tangent, tangent[:3]))
-    handedness = 1 + source_parameters[0] * (tangent[3] - 1)
-    strand = tuple(value * handedness for value in _cross(n, blend))
+    handedness = 1 + source_parameters[0] * (tangent[3]*tangent_sign*orientation - 1)
+    strand = tuple(value * handedness*orientation for value in _cross(n, blend))
     fallback = _normal(tangent[:3], (1, 0, 0))
     primary = _normal(tuple(s + x * primary_shift for s, x in zip(strand, n)), fallback)
     secondary = _normal(tuple(s + x * secondary_shift for s, x in zip(strand, n)), fallback)

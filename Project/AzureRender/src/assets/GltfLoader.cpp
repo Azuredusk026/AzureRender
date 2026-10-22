@@ -976,7 +976,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -999,6 +999,10 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         return static_cast<float>(number);
     };
     auto& target=result.projectedHairRamp;
+    if(source.Has("tangentSign")){
+        target.tangentSign=scalar("tangentSign",-1,1);
+        if(target.tangentSign!=1&&target.tangentSign!=-1)throw std::invalid_argument("Invalid projectedRamp.tangentSign");
+    }
     if(source.Has("line")) {
         const auto& line=source.Get("line");
         const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("line");

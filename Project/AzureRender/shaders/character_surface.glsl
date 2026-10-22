@@ -43,9 +43,19 @@ vec3 characterProjectedVirtualHalf(vec3 view,vec3 light,vec3 objectX,vec3 object
     return halfVector*inversesqrt(max(dot(halfVector,halfVector),1.0/16384.0));
 }
 
-vec3 characterProjectedHairStrand(vec3 normal,vec4 tangent,float parameterR,vec3 objectX,vec3 objectY,float directionX){
+vec3 characterProjectedHairNormal(vec2 encoded,float scale,vec3 normal,vec4 tangent){
+    vec2 xy=vec2(encoded.x*2.0-1.0,1.0-encoded.y*2.0);
+    float z=sqrt(max(1.0-min(dot(xy,xy),1.0),0.0));
+    vec3 bitangent=cross(normal,tangent.xyz)*tangent.w;
+    return characterProjectedSafeNormalize(tangent.xyz*xy.x*scale+bitangent*xy.y*scale+normal*z,
+        characterProjectedSafeNormalize(normal,vec3(0,0,1)));
+}
+
+vec3 characterProjectedHairStrand(vec3 normal,vec4 tangent,float parameterR,vec3 objectX,vec3 objectY,vec3 objectZ,float directionX){
     vec3 axis=characterProjectedSafeNormalize(objectX*directionX+objectY,vec3(0,1,0));
-    return cross(normal,mix(cross(normal,axis),tangent.xyz,parameterR))*mix(1.0,tangent.w,parameterR);
+    float orientation=dot(cross(objectX,objectY),objectZ)<0.0?-1.0:1.0;
+    vec3 blend=mix(orientation*cross(normal,axis),tangent.xyz,parameterR);
+    return orientation*cross(normal,blend)*mix(1.0,tangent.w*orientation,parameterR);
 }
 
 float characterProjectedHairSine(float projection) {
@@ -60,7 +70,7 @@ CharacterProjectedHairCoordinates characterProjectedHairCoordinates(
     vec3 normal = characterProjectedSafeNormalize(highlightNormal, vec3(0, 0, 1));
     vec3 viewDirection = characterProjectedSafeNormalize(view, vec3(0, 0, 1));
     vec3 halfDirection = characterProjectedSafeNormalize(halfVector, vec3(0, 0, 1));
-    vec3 strand = characterProjectedHairStrand(normal,tangent,sourceParameters.r,objectX,objectY,directionX);
+    vec3 strand = characterProjectedHairStrand(normal,tangent,sourceParameters.r,objectX,objectY,objectZ,directionX);
     vec3 fallback = characterProjectedSafeNormalize(tangent.xyz, vec3(1, 0, 0));
     vec3 primary = characterProjectedSafeNormalize(
         strand + normal * primaryShift, fallback);

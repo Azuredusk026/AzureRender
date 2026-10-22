@@ -168,6 +168,7 @@ struct AssetMaterial {
         std::array<float,3> secondaryColor{1,1,1};
         SurfaceResponse surfaceResponse=SurfaceResponse::Layered;
         float diffuseScale=1;
+        float tangentSign=1;
         // Column-major source object axes expressed in the asset frame.
         std::array<float,9> objectBasis{1,0,0,0,1,0,0,0,1};
         std::vector<std::uint8_t> parameterPixels;

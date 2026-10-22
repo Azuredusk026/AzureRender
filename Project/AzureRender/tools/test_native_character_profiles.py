@@ -178,13 +178,22 @@ class NativeCharacterProfileTests(unittest.TestCase):
         self.assertEqual(projected['objectBasis'], [1, 0, 0, 0, 1, 0, 0, 0, 1])
         for key, source_index in (('rampTexture', 4), ('parameterTexture', 5)):
             uri = output['images'][output['textures'][projected[key]]['source']]['uri']
-            self.assertEqual(base64.b64decode(uri.split(',', 1)[1]), payloads[('texture-cab', source_index)])
+            actual=base64.b64decode(uri.split(',',1)[1]);source=payloads[('texture-cab',source_index)]
+            if key=='rampTexture':
+                expected=Image.open(BytesIO(source)).convert('RGBA').transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+                self.assertEqual(Image.open(BytesIO(actual)).convert('RGBA').tobytes(),expected.tobytes())
+            else:self.assertEqual(actual,source)
         for key in ('nodes', 'skins', 'animations', 'meshes'):
             self.assertEqual(output[key], doc[key])
         self.assertFalse(report['nativeVisualEquivalenceVerified'])
         self.assertIn('main-virtual-light-global-bindings', report['materials'][0]['remainingProjectedHairInputs'])
 
     def test_projected_hair_requires_pinned_shader_complete_source_and_linear_maps(self):
+        doc,audit,raw,payloads=self.projected_fixture()
+        output,_=subject.restore_profiles(doc,audit,raw,payloads,projected_tangent_sign=-1)
+        self.assertEqual(output['materials'][0]['extras']['azureRenderMaterial']['hair']['projectedRamp']['tangentSign'],-1)
+        for invalid in (0,.5,True):
+            with self.assertRaises(ValueError):subject.restore_profiles(doc,audit,raw,payloads,projected_tangent_sign=invalid)
         doc, audit, raw, payloads = self.projected_fixture()
         audit['materials'][0]['floats'] = [value for value in audit['materials'][0]['floats']
             if value['name'] != '_AnisotropyValue2']
@@ -202,6 +211,17 @@ class NativeCharacterProfileTests(unittest.TestCase):
         profile = other['materials'][0]['extras']['azureRenderMaterial']
         self.assertNotIn('hair-projected-ramp', profile['features'])
         self.assertNotIn('projectedRamp', profile['hair'])
+
+    def test_projected_ramp_uses_procedural_v_domain(self):
+        doc,audit,raw,payloads=self.projected_fixture()
+        image=Image.new('RGBA',(2,2));image.putdata([(10,20,30,40),(50,60,70,80),(90,100,110,120),(130,140,150,160)])
+        stream=BytesIO();image.save(stream,format='PNG');payloads[('texture-cab',4)]=stream.getvalue()
+        output,report=subject.restore_profiles(doc,audit,raw,payloads)
+        ramp=output['materials'][0]['extras']['azureRenderMaterial']['hair']['projectedRamp']['rampTexture']
+        uri=output['images'][output['textures'][ramp]['source']]['uri']
+        decoded=Image.open(BytesIO(base64.b64decode(uri.split(',',1)[1])))
+        self.assertEqual(decoded.getpixel((0,0)),image.getpixel((0,1)))
+        self.assertEqual(decoded.getpixel((1,1)),image.getpixel((1,0)))
 
     def test_pinned_hair_keeps_strand_parameters_out_of_metallic_roughness_and_ao(self):
         doc, audit, raw, payloads = self.projected_fixture()

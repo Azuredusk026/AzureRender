@@ -34,7 +34,9 @@ def material_class(name):
     return 'generic'
 
 
-def restore_profiles(document, audit, sources, payloads):
+def restore_profiles(document, audit, sources, payloads,*,projected_tangent_sign=1):
+    if type(projected_tangent_sign) not in (int,float) or projected_tangent_sign not in (-1,1):
+        raise ValueError('Projected tangent sign requires an explicit -1 or +1 convention')
     result = copy.deepcopy(document)
     source_by_name = {row['object']['name']: row for row in audit['materials']}
     if len(source_by_name) != len(audit['materials']):
@@ -99,13 +101,19 @@ def restore_profiles(document, audit, sources, payloads):
                 raise ValueError('Character data requires an explicit supported UV transform: ' + slot)
             return payload, binding, ref
 
-        def bind_texture(slot, target, allow_transform=False):
+        def bind_texture(slot, target, allow_transform=False,*,flip_v=False):
             payload, binding, ref = source_payload(slot, allow_transform)
             if binding['color_space'] != 0:
                 raise ValueError('Character data texture must be linear: ' + slot)
+            source_digest=hashlib.sha256(payload).hexdigest()
+            if flip_v:
+                with Image.open(BytesIO(payload)) as image:
+                    normalized=image.convert('RGBA').transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+                stream=BytesIO();normalized.save(stream,format='PNG');payload=stream.getvalue()
             index = append_texture(payload, ref['name'])
             row['bound'].append({'slot': slot, 'target': target, 'source': ref,
-                'sourcePngSha256': hashlib.sha256(payload).hexdigest(), 'texture': index})
+                'sourcePngSha256': source_digest,'normalizedPngSha256':hashlib.sha256(payload).hexdigest(),
+                'verticalNormalization':'procedural-native-v' if flip_v else 'mesh-uv','texture': index})
             return index
 
         if kind == 'hair':
@@ -132,7 +140,7 @@ def restore_profiles(document, audit, sources, payloads):
                 bounds = {'primaryShift': (-1, 1), 'secondaryShift': (-1, 1),
                     'intensity': (0, 16), 'secondaryRange': (0, 1), 'edgeFade': (0, 64),
                     'specularNormalScale': (0, 8), 'surfaceNormalScale': (0, 8), 'directionX': (-16, 16)}
-                projected = {'schemaVersion': 1}
+                projected = {'schemaVersion': 1,'tangentSign':projected_tangent_sign}
                 for original, target in source_fields.items():
                     if original not in floats:
                         raise ValueError('Missing active projected hair field: ' + original)
@@ -164,7 +172,7 @@ def restore_profiles(document, audit, sources, payloads):
                     if image.width < 2 or image.height < 2:
                         raise ValueError('Projected hair ramp requires two dimensions')
                 projected.update(parameterTexture=bind_texture('_MetallicGlossMap', 'hair.projectedRamp.parameterTexture'),
-                    rampTexture=bind_texture('_SpecRampMap', 'hair.projectedRamp.rampTexture'),
+                    rampTexture=bind_texture('_SpecRampMap', 'hair.projectedRamp.rampTexture',flip_v=True),
                     secondaryColor=linear_color, objectBasis=[1, 0, 0, 0, 1, 0, 0, 0, 1])
                 features.discard('hair-ramp')
                 features.discard('face-sdf-eligible')
@@ -273,6 +281,8 @@ def main():
     parser = argparse.ArgumentParser(__doc__)
     for name in ('input', 'source-root', 'output', 'report'):
         parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--projected-tangent-sign',type=int,choices=(-1,1),default=1,
+        help='Explicit converted tangent convention, verified against the captured vertex basis')
     args = parser.parse_args()
     if args.output.exists() or args.report.exists() or args.output.resolve() == args.report.resolve():
         raise ValueError('Outputs must be distinct new files')
@@ -290,7 +300,7 @@ def main():
             raise ValueError('Source image digest mismatch')
         payloads[(row['object']['source'], row['object']['path_id'])] = payload
     document, tail = read_asset(args.input)
-    output, report = restore_profiles(document, packets[names[0]], packets[names[1]], payloads)
+    output, report = restore_profiles(document, packets[names[0]], packets[names[1]], payloads,projected_tangent_sign=args.projected_tangent_sign)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_asset(args.output, output, tail)
     verified, verified_tail = read_asset(args.output)
@@ -299,7 +309,8 @@ def main():
     report.update(input=str(args.input.resolve()), inputSha256=hashlib.sha256(args.input.read_bytes()).hexdigest(),
         output=str(args.output.resolve()), outputSha256=hashlib.sha256(args.output.read_bytes()).hexdigest(),
         sourceFiles={name: hashlib.sha256((args.source_root / name).read_bytes()).hexdigest() for name in names},
-        generatorSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), binaryTailPreserved=True)
+        generatorSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), binaryTailPreserved=True,
+        projectedTangentSign=args.projected_tangent_sign)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2), encoding='utf8')
     print(json.dumps({'materials': len(report['materials']), 'binaryTailPreserved': True}))

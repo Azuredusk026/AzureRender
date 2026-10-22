@@ -508,7 +508,7 @@ azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
 }
 
 void AzureRenderApp::buildRenderContext(
-    azurerender::RenderContext& context) {
+    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings) {
     context.device = device_;
     context.physicalDevice = physicalDevice_;
     context.graphicsQueue = graphicsQueue_;
@@ -581,8 +581,11 @@ void AzureRenderApp::buildRenderContext(
 #endif
     context.environment.path = runOptions_.environmentPath;
     context.rampAtlasPath = resourceLocator_.rampAtlas().u8string();
-    effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
-    context.renderSettings = &effectiveRenderSettings_;
+    if(frameSettings)context.renderSettings=frameSettings;
+    else {
+        effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
+        context.renderSettings=&effectiveRenderSettings_;
+    }
 }
 
 void AzureRenderApp::buildSceneFrameData(
@@ -679,6 +682,13 @@ void AzureRenderApp::buildSceneFrameData(
         frame.timeSeconds = currentTime - pausedTimeOffset_;
     }
     effectiveRenderSettings_=azurerender::resolveRenderSettings(*engineSettings_,renderSettings_);
+    if(qaIsolationMode_>0){
+        // Apply component transfer after final frame-setting resolution.
+        // Authored grades remain in the scene document and setting layers.
+        effectiveRenderSettings_.grade=azurerender::GradeSettings{};
+        effectiveRenderSettings_.grade.toneMappingEnabled=false;
+        effectiveRenderSettings_.bloom.enabled=false;
+    }
 #if AZURE_WITH_EDITOR
     if(runOptions_.editorSession && runOptions_.editorSession->editCameraActive()){
         auto& session=*runOptions_.editorSession;session.synchronizeViewportCamera(cameraPosition_,cameraTarget_);
