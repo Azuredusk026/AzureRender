@@ -1232,14 +1232,16 @@
       "id": "NR0",
       "name": "参考与诊断基准",
       "status": "Active",
-      "scope": "原生可玩还原；局部证据按专项计划记录",
+      "scope": "九份原生帧加载及通道通过；参考标定与专项绑定待验",
       "checksPassed": false,
       "dependsOn": [],
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/reference-baseline.md",
         "docs/plans/2026-10-21-native-render-evidence-execution.md",
-        "docs/acceptance/nr/editor-resource-load-baseline.md"
+        "docs/acceptance/nr/editor-resource-load-baseline.md",
+        "docs/acceptance/nr/native-game-captures.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR0.delivery"
@@ -1260,7 +1262,8 @@
         "docs/acceptance/nr/source-geometry-detail.md",
         "docs/plans/2026-10-21-atrium-completeness-antialiasing.md",
         "docs/acceptance/nr/atrium-completeness.md",
-        "docs/acceptance/nr/logistics-multiclip.md"
+        "docs/acceptance/nr/logistics-multiclip.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR1.delivery"
@@ -1279,7 +1282,8 @@
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/runtime/scene-color-refraction.md",
         "docs/acceptance/nr/native-glass.md",
-        "docs/acceptance/nr/upper-geometry.md"
+        "docs/acceptance/nr/upper-geometry.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR2.delivery"
@@ -1297,7 +1301,8 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/light-attenuation.md",
-        "docs/acceptance/nr/directional-lighting.md"
+        "docs/acceptance/nr/directional-lighting.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR3.delivery"
@@ -1316,7 +1321,8 @@
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/irradiance-coverage.md",
         "docs/acceptance/nr/floor-surface-conversion.md",
-        "docs/acceptance/nr/irradiance-composition.md"
+        "docs/acceptance/nr/irradiance-composition.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR4.delivery"
@@ -1337,7 +1343,8 @@
         "docs/acceptance/nr/environment-specular.md",
         "docs/acceptance/nr/screen-space-reflections.md",
         "docs/acceptance/nr/reflection-roughness.md",
-        "docs/acceptance/nr/reflection-ray-math.md"
+        "docs/acceptance/nr/reflection-ray-math.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR5.delivery"
@@ -1371,7 +1378,8 @@
         "docs/acceptance/nr/eye-radial-surface.md",
         "docs/acceptance/nr/character-color-receivers.md",
         "docs/acceptance/nr/character-main-shadow.md",
-        "docs/acceptance/nr/character-indirect-normal.md"
+        "docs/acceptance/nr/character-indirect-normal.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1398,7 +1406,8 @@
         "docs/acceptance/nr/node-opacity.md",
         "docs/acceptance/nr/character-logistics-joint.md",
         "docs/acceptance/nr/unlit-surface.md",
-        "docs/acceptance/nr/character-logistics-restored.md"
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"
@@ -1416,7 +1425,8 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/character-logistics-joint.md",
-        "docs/acceptance/nr/character-logistics-restored.md"
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"
@@ -1484,7 +1494,8 @@
         "NR11"
       ],
       "evidence": [
-        "docs/plans/2026-10-17-native-playable-restoration.md"
+        "docs/plans/2026-10-17-native-playable-restoration.md",
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
       ],
       "requiredAcceptance": [
         "NR12.delivery"

@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-22T13:01:20.622204+00:00",
+  "status": "passed",
+  "scope": "offline-capture-and-receipt-verification",
+  "newGpuReplayExecuted": false,
+  "captureRoot": "build/runs/20261022-201845-endfield-capture-954719",
+  "captureCount": 9,
+  "totalBytes": 5521101932,
+  "captures": [
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame1058.rdc",
+      "bytes": 95178290,
+      "sha256": "03e2f3c55d2bb448e1aff8cde143f17fb2092ed3df155fd104775dd2a9d1e886",
+      "frame": 1058,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 7,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame1058-replay.json",
+        "bytes": 1482,
+        "sha256": "d1e48dbba3d9d2e768844355ff447f91a16a989f2fcfe0c633acce3c4c615e78"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame1058-passes.json",
+        "bytes": 2248,
+        "sha256": "bb2f8da2215bdd2b14c49621ff80a627e676566ce3bdf8ade23bf30bf945a41d"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame1058.png",
+        "bytes": 2064965,
+        "sha256": "cb392c746a47f6ddbe4d2f6cbf391f8018ce2d76db656f41de39bda84929a155"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame2399.rdc",
+      "bytes": 1028298168,
+      "sha256": "3b9f8c9323380d96aaeb384726f063430d27d11368ddf92f2fc211efced836c9",
+      "frame": 2399,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 12,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame2399-replay.json",
+        "bytes": 1485,
+        "sha256": "bfe6cacca1c9aae5e953e635cc6f64013e2f63f5aee870cfd0fa90539bd1ffed"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame2399-passes.json",
+        "bytes": 3694,
+        "sha256": "8dfef2d25cc0eb3f5fde29dd7fe6ed48ddca4dc5d57d8a2c3ee6a54961b72d5e"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame2399.png",
+        "bytes": 3419720,
+        "sha256": "1c50db813c7b6dcf40bc724820339c63801e546e5dfd6d1a58edb4184ac3e418"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc",
+      "bytes": 944717392,
+      "sha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+      "frame": 3534,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 12,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-replay.json",
+        "bytes": 1484,
+        "sha256": "39c40f3f53862f3974d9aba8d0053a73dfc8fd91d5e326a2434267563ab89771"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-passes.json",
+        "bytes": 3683,
+        "sha256": "ac42fe0b32382d75fc2420a2f686c6b50b08a85b0023491dc3e779aaed5a5e03"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.png",
+        "bytes": 3345111,
+        "sha256": "cc28709754a32f357c47cba7fe7086c9dbe5378241577916bf8a0fb340088f45"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame4697.rdc",
+      "bytes": 928329164,
+      "sha256": "70c7ae51a806b241e8fe80df11f77203728d1ef794b0622ca30e7eb69573faae",
+      "frame": 4697,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 12,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame4697-replay.json",
+        "bytes": 1484,
+        "sha256": "3feb44d7e7ec7b8280ecfff93bc6cdb0744b2999aac2855083171d6ad3334bff"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame4697-passes.json",
+        "bytes": 3685,
+        "sha256": "010e4a0b78294e916498f78b610c5977c34ae3dbf2c95d87a9191ac922f7e670"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame4697.png",
+        "bytes": 2637824,
+        "sha256": "f9c916ccbb3afeb01b4f8914eea8ddcc95fbe2a0205390c206fcd926cdd63c0d"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame5565.rdc",
+      "bytes": 1172707909,
+      "sha256": "976915dd1f14d7e8d57b261dd93b485dcf4178ff26d04c2c5631a0baa5a1bd91",
+      "frame": 5565,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 12,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame5565-replay.json",
+        "bytes": 1484,
+        "sha256": "0639a6693ce4ee905aa7c0c2605e0f0d17912745e761802ac358f50f5eee1902"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame5565-passes.json",
+        "bytes": 3685,
+        "sha256": "f9f205e3ef4f13492e975ad0b2b9c9b315de2d5def2444bf23a5037497d1e983"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame5565.png",
+        "bytes": 3164495,
+        "sha256": "aee3c93a1775dfb0d355d2fb92eb32050d51e9ab9e5279ab07d93cdee12e5949"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame6834.rdc",
+      "bytes": 373597799,
+      "sha256": "a071b34f5bf35705e2614bb9eb97f540f0be62fc33798b7b8a8c64882659f2fb",
+      "frame": 6834,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 9,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame6834-replay.json",
+        "bytes": 1484,
+        "sha256": "303927bc018b2afd49327079bcf94a52e3d5da277814970e5f263a33a299303a"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame6834-passes.json",
+        "bytes": 2840,
+        "sha256": "816077022e28a1b8d41047d28d651d1f6bd6cbf7816332863620e30813dc3a2d"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame6834.png",
+        "bytes": 3141262,
+        "sha256": "bae6ed108d402d530f8046c97787560bc9d2bddbd1e239ea4b48301d979277b3"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8402.rdc",
+      "bytes": 287888994,
+      "sha256": "07f294545af8134b6d3a48bda8e7b0f75271563622f48830d4ab2d67d1678734",
+      "frame": 8402,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 10,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8402-replay.json",
+        "bytes": 1483,
+        "sha256": "6460f00785272197d0273e7b93311e1011e0f578282118c93378ae8808dcdb44"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8402-passes.json",
+        "bytes": 3115,
+        "sha256": "cfe71e63183160ce96866fc4477a5e15edd4f99078b048fcbc99f5fd9a6b4d8b"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8402.png",
+        "bytes": 2944458,
+        "sha256": "0124ab22772ad2af7607a823ee42dd7cea9e00f1923c0a770f4d8cfcf057b764"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8877.rdc",
+      "bytes": 344968204,
+      "sha256": "b39b4247f21e2166e08c89d7b6d86627e9abe6a08ec332449e09abd8f6b73087",
+      "frame": 8877,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 9,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8877-replay.json",
+        "bytes": 1484,
+        "sha256": "69815dd7b32c8e77e40337ed1a45bc3d09c61e3cb7ee8b6af38d8ad5ddd06c11"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8877-passes.json",
+        "bytes": 2840,
+        "sha256": "6ed93e1b1d937a08a16d9bda1f8a25bde905c98744ac0f776d58dad25c2d4acb"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame8877.png",
+        "bytes": 2806098,
+        "sha256": "7d34376b0b25b9afed5669ebfcfe5db8cde47526029473128a36409eeb34d673"
+      }
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401.rdc",
+      "bytes": 345416012,
+      "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+      "frame": 10401,
+      "api": "GraphicsAPI.D3D11",
+      "loaded": true,
+      "passCount": 10,
+      "replayReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-replay.json",
+        "bytes": 1486,
+        "sha256": "2ce40b8c137a90830fa1f55b800b484f65e3253aeca7235d6ee793ecfaa5dd6b"
+      },
+      "passesReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-passes.json",
+        "bytes": 3115,
+        "sha256": "1cc526182c493faeda895953b929226dfa5202bdb307f011b8c025e6206bc1c4"
+      },
+      "thumbnail": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401.png",
+        "bytes": 1320792,
+        "sha256": "279db15261fde9409e9666171dd1f6d523c3c6a27a9be34e247389593425037f"
+      }
+    }
+  ],
+  "replayOutputs": [
+    {
+      "frame": 3534,
+      "presentEid": 12945,
+      "resourceId": "ResourceId::406",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "image": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-replayed.png",
+        "bytes": 6939843,
+        "sha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18"
+      },
+      "backbufferReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-backbuffer-receipt.json",
+        "bytes": 696,
+        "sha256": "ade0ac85da4dcc86dc1f7346ee9a346ace5d7295d82a56d0e4e6be188a85e052"
+      },
+      "inventory": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-inventory.json",
+        "bytes": 2298684,
+        "sha256": "adacb1f0be4cb1103920a5c76f4593c5c57290c7b98ab467d688b7187efa357f"
+      },
+      "inventoryReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-inventory-receipt.json",
+        "bytes": 994,
+        "sha256": "734fa13e4ea79166be86729f023c83cdd8eaf63710a17e510907ac164c928dd9"
+      },
+      "actions": 1046,
+      "drawDispatch": 1021
+    },
+    {
+      "frame": 10401,
+      "presentEid": 3460,
+      "resourceId": "ResourceId::406",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "image": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-replayed.png",
+        "bytes": 3698121,
+        "sha256": "4369bc18cd14c06a450f3a1bd126c037ae88b7fdc655331b46ee72a025a5a686"
+      },
+      "backbufferReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-backbuffer-receipt.json",
+        "bytes": 698,
+        "sha256": "a23133c28030090a4b388e4a50c8d65a33f526b8cd954d633d4d084819bb411d"
+      },
+      "inventory": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-inventory.json",
+        "bytes": 716753,
+        "sha256": "3953f5c84ebe80a6a2e48f6c396bb9446d4eb1da2286881a5b8a4f172af3e9f4"
+      },
+      "inventoryReceipt": {
+        "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401-inventory-receipt.json",
+        "bytes": 992,
+        "sha256": "b65c7cfef80eb833fec165efd66633f9c06ccaf8f79a7cd929d5259efbda7dbc"
+      },
+      "actions": 272,
+      "drawDispatch": 250
+    }
+  ],
+  "retentionMarker": {
+    "path": "build/runs/20261022-201845-endfield-capture-954719/.keep",
+    "bytes": 62,
+    "sha256": "36f849d6f126730f294a2f4ad9b49905f0914d2a4e14f69ca2d1215642a392d3"
+  },
+  "originalVerificationSummary": {
+    "path": "build/runs/20261022-201845-endfield-capture-954719/verification-summary.json",
+    "bytes": 2180,
+    "sha256": "2baa033521d6ecac7c6a3805205bbc24e005270091ced681c39951c731091d24"
+  },
+  "pending": [
+    "per-draw shader/resource/constant exports",
+    "face reserved-frame identity",
+    "active GI/default SH and floor UV",
+    "logistics timing and soft intersection",
+    "capture quality settings and camera calibration",
+    "NR0-NR12 final acceptance"
+  ],
+  "verificationTool": {
+    "path": "build/runs/20261022-210028-capture-plan-handoff-2e194d/verify_capture_handoff.py",
+    "sha256": "d75b3734cc614c9b7ecfa04a823ecb9abc71d89ec2fc448e04c621a72c6f4c18"
+  },
+  "officialReplayVersion": "1.46",
+  "visualReview": {
+    "frames": [
+      3534,
+      10401
+    ],
+    "confirmed": true,
+    "scope": "atrium and Laevatain full-body preview identity and visible output"
+  },
+  "formalStageCompletion": false
+}

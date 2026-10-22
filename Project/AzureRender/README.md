@@ -1,5 +1,10 @@
 # AzureRender 工程
 
+终末地九份 D3D11 原生帧通过官方 1.46 加载与通道查询。
+中庭与莱万汀各一帧完成 2560×1440 实际图像导出。
+证据见[原生帧验证](docs/acceptance/nr/native-game-captures.md)。
+当前实施暂停，接续入口为[还原计划与交接](docs/plans/2026-10-22-native-render-restoration-handoff.md)。
+
 角色材质支持显式[环境漫反射法线](docs/acceptance/nr/character-indirect-normal.md)。
 公共检查及身体皮肤候选已完成分项验证。
 
