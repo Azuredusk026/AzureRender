@@ -1332,7 +1332,8 @@
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/reflection-cube.md",
-        "docs/acceptance/nr/environment-specular.md"
+        "docs/acceptance/nr/environment-specular.md",
+        "docs/acceptance/nr/screen-space-reflections.md"
       ],
       "requiredAcceptance": [
         "NR5.delivery"

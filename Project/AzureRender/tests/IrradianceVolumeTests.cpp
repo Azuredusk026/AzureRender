@@ -1,4 +1,7 @@
 #include "render/IrradianceVolume.hpp"
+#if defined(NDEBUG)
+#error IrradianceVolumeTests requires active assertions
+#endif
 #include <cassert>
 #include <cmath>
 #include <limits>

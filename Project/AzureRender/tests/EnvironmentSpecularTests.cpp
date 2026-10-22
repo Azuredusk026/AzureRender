@@ -63,7 +63,13 @@ int main(int argc,char** argv) try {
     document.save(path);
     require(SceneDocument::load(path).renderSettings.environmentSpecularModel==EnvironmentSpecularModel::GgxMultiscatterFit,"text model round trip");
     std::ifstream saved(path);std::stringstream bytes;bytes<<saved.rdbuf();auto text=bytes.str();saved.close();
-    const auto version=text.find("renderSettingsVersion 15");require(version!=std::string::npos,"text schema version");
+    const auto currentVersion=std::string("renderSettingsVersion ")+std::to_string(RenderSettings::kSchemaVersion);
+    const auto version=text.find(currentVersion);require(version!=std::string::npos,"text schema version");
+    const auto reflection=text.find("screenSpaceReflection ");
+    if(reflection!=std::string::npos)text.erase(reflection,text.find('\n',reflection)+1-reflection);
+    text.replace(version,currentVersion.size(),"renderSettingsVersion 15");
+    std::ofstream version15(output/"version15.azscene");version15<<text;version15.close();
+    require(SceneDocument::load(output/"version15.azscene").renderSettings.environmentSpecularModel==EnvironmentSpecularModel::GgxMultiscatterFit,"version 15 text preserves model");
     text.replace(version,std::string("renderSettingsVersion 15").size(),"renderSettingsVersion 14");
     const auto model=text.find("environmentSpecularModel ");require(model!=std::string::npos,"text model present");
     text.erase(model,text.find('\n',model)+1-model);

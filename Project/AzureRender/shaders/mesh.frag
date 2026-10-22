@@ -14,6 +14,7 @@
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
 layout(binding = 19) uniform sampler2D opaqueSceneColor;
+#include "screen_space_reflection.glsl"
 #endif
 
 layout(binding = 0) uniform CameraData {
@@ -35,6 +36,8 @@ layout(binding = 0) uniform CameraData {
     vec4 probeCenter,probeHalfExtents,probeCapture,probeParameters;
     vec4 irradianceOriginSpacing,irradianceDimensionsEnabled,irradianceParameters;
     vec4 cameraRight,cameraUp;
+    mat4 screenReflectionWorldToClip;
+    vec4 screenReflectionTrace,screenReflectionQuality;
 } camera;
 layout(binding=23) uniform samplerCube reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
@@ -522,6 +525,10 @@ void main() {
     float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, lightDirection),0.0));
     int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
     bool qaEffectDisabled = camera.qaParameters.z < 0.5;
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+    // SSR radiance sources retain complete lighting under specular diagnostics.
+    if(camera.screenReflectionTrace.x>.5){qaEffectMode=0;qaEffectDisabled=false;}
+#endif
     if (qaEffectMode == 2 && qaEffectDisabled) {
         shadowVisibility = 1.0;
     }
@@ -1069,6 +1076,11 @@ void main() {
         + matcapAccent
         + emissive;
     int qaIsolationMode = int(floor(camera.qaParameters.x + 0.5));
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+    if(camera.screenReflectionTrace.x>.5)qaIsolationMode=0;
+#endif
+    vec3 sceneReflectionRadiance=vec3(0);
+    vec3 sceneReflectionResponse=environmentResponse;
     bool overlayDisabled = qaEffectMode == 9 && qaEffectDisabled;
     float overlayVisible = overlayMaterial && !overlayDisabled ? 1.0 : 0.0;
     beautyColor = mix(beautyColor, baseColor.rgb, overlayVisible);
@@ -1086,15 +1098,19 @@ void main() {
         float lastMip = float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1);
         ambientDiffuse = diffuseColor * textureLod(AZ_TEX_ENVIRONMENT,
             directionToEquirectangular(envNormal),lastMip).rgb * camera.clusterLighting.y * physicalAo;
-        ambientSpecular = environmentResponse * textureLod(AZ_TEX_ENVIRONMENT,
-            directionToEquirectangular(envReflection),roughness*lastMip).rgb * camera.clusterLighting.y;
+        sceneReflectionRadiance=textureLod(AZ_TEX_ENVIRONMENT,
+            directionToEquirectangular(envReflection),roughness*lastMip).rgb*camera.clusterLighting.y;
+        if(sceneCharacter)sceneReflectionResponse*=material.styleParameters.z*dielectricSpecularWeight;
+        if(qaEffectMode==5&&qaEffectDisabled)sceneReflectionResponse=vec3(0);
+        ambientSpecular=sceneReflectionResponse*sceneReflectionRadiance;
         directDiffuse = clusteredDiffuse;
         directSpecular = clusteredSpecular;
+        if(qaEffectMode==5&&qaEffectDisabled)directSpecular=vec3(0);
         emissive = specularEmissive.rgb * material.emissiveStrength * materialFeatureEnabled(8U);
         rimLighting=vec3(0);kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);
         if(sceneCharacter) {
             ambientDiffuse*=indirectChroma;
-            ambientSpecular*=material.styleParameters.z*dielectricSpecularWeight;
+            // Character response is applied to the shared incident radiance.
             directSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled){ambientSpecular=vec3(0);directSpecular=vec3(0);}
             kkSpecular=min(sceneHairPrimary,vec3(material.matcapColor.w));
@@ -1128,11 +1144,26 @@ void main() {
             if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);
+            if(camera.clusterLighting.x>.5){
+                vec3 localRadiance=textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
+                sceneReflectionRadiance=mix(sceneReflectionRadiance,localRadiance,weight);
+                blended=sceneReflectionResponse*sceneReflectionRadiance;
+            }
             beautyColor+=blended-ambientSpecular;
             ambientSpecular=blended;
         }
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
+        &&!overlayMaterial&&!(qaEffectMode==5&&qaEffectDisabled)){
+        vec4 screenReflection=traceScreenSpaceReflection(opaqueSceneColor,overlaySceneDepth,
+            camera.screenReflectionWorldToClip,camera.cameraPosition.xyz,camera.cameraForward.xyz,
+            worldPosition,shadedNormal,reflectionDirection,roughness,
+            camera.screenReflectionTrace,camera.screenReflectionQuality);
+        vec3 radiance=mix(sceneReflectionRadiance,screenReflection.rgb,screenReflection.a);
+        vec3 blended=sceneReflectionResponse*radiance;
+        beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+    }
     if(materialFeatureEnabled(1024U)>.5) {
         vec2 uv=gl_FragCoord.xy/camera.clusterDepth.zw;
         vec2 mapUv=textureCoordinate*material.styleParameters.xy+material.styleParameters.zw;

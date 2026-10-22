@@ -2,8 +2,39 @@
 #include "render/RenderSettings.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
+inline nlohmann::json encodeScreenSpaceReflection(const ScreenSpaceReflectionSettings& s){
+    return {{"schemaVersion",ScreenSpaceReflectionSettings::kSchemaVersion},{"enabled",s.enabled},
+        {"maxDistance",s.maxDistance},{"thickness",s.thickness},{"normalBias",s.normalBias},
+        {"maxSteps",s.maxSteps},{"maxRoughness",s.maxRoughness},{"edgeFade",s.edgeFade},{"strength",s.strength}};
+}
+inline void decodeScreenSpaceReflection(ScreenSpaceReflectionSettings& target,const nlohmann::json& data){
+    if(!data.is_object()||!data.contains("schemaVersion")||!data.at("schemaVersion").is_number_integer()
+        ||data.at("schemaVersion")!=ScreenSpaceReflectionSettings::kSchemaVersion)
+        throw std::invalid_argument("Unsupported screen reflection settings version");
+    for(const auto& field:data.items()){
+        const auto& key=field.key();
+        if(key!="schemaVersion"&&key!="enabled"&&key!="maxDistance"&&key!="thickness"&&key!="normalBias"
+            &&key!="maxSteps"&&key!="maxRoughness"&&key!="edgeFade"&&key!="strength")
+            throw std::invalid_argument("Unknown screen reflection setting");
+    }
+    auto value=target;
+    value.enabled=data.value("enabled",value.enabled);
+    value.maxDistance=data.value("maxDistance",value.maxDistance);
+    value.thickness=data.value("thickness",value.thickness);
+    value.normalBias=data.value("normalBias",value.normalBias);
+    value.maxRoughness=data.value("maxRoughness",value.maxRoughness);
+    value.edgeFade=data.value("edgeFade",value.edgeFade);
+    value.strength=data.value("strength",value.strength);
+    if(data.contains("maxSteps")){
+        const auto& steps=data.at("maxSteps");
+        if(!steps.is_number_integer()||steps<8||steps>256)
+            throw std::invalid_argument("screen reflection steps must be an integer within 8 and 256");
+        value.maxSteps=steps.get<std::uint32_t>();
+    }
+    validateScreenSpaceReflection(value);target=value;
+}
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"screenSpaceReflection",encodeScreenSpaceReflection(settings.screenSpaceReflection)},{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -17,6 +48,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
     auto settings=target;
+    if(data.contains("screenSpaceReflection"))decodeScreenSpaceReflection(settings.screenSpaceReflection,data.at("screenSpaceReflection"));
     settings.sceneType=sceneTypeFromString(data.value("renderer",std::string(sceneTypeName(settings.sceneType))));
     settings.pathTraceSamples=data.value("pathTraceSamples",settings.pathTraceSamples);
     settings.pathTraceBounces=data.value("pathTraceBounces",settings.pathTraceBounces);

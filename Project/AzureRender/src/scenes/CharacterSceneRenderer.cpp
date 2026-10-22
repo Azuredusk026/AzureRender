@@ -2271,7 +2271,8 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 }
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
-    bool sampled=false;
+    bool sampled=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
+        snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials)
@@ -2289,6 +2290,10 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         for(const auto& primitive:mesh.primitives){
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
+            const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,
+                snapshot.gizmo,&primitive-mesh.primitives.data());
+            commands.bindPipeline(m.doubleSided?overlayDepthDoubleSidedPipeline_
+                :mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
@@ -2835,8 +2840,12 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
-        depthDesc.colorAttachmentCount=2;depthDesc.cullMode=VK_CULL_MODE_NONE;
-        overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
+        depthDesc.colorAttachmentCount=2;
+        overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
+        depthDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
+        overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
+        depthDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;depthDesc.cullMode=VK_CULL_MODE_NONE;
+        overlayDepthDoubleSidedPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
@@ -2954,7 +2963,7 @@ void CharacterSceneRenderer::destroyResources() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
-             &overlayDepthPipeline_,&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -3091,7 +3100,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
-             &overlayDepthPipeline_,&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -3230,6 +3239,12 @@ void CharacterSceneRenderer::updateUniformBuffer(
     // The actual view rotation is independent of sky projection scale.
     uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],0};
     uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],0};
+    const auto& reflection=settings.screenSpaceReflection;
+    const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
+        qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    uniform.screenReflectionWorldToClip=multiply(projectionMatrix_,viewMatrix_);
+    uniform.screenReflectionTrace={reflectionActive?1.F:0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
+    uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
     const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
     uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};

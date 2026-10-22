@@ -125,6 +125,8 @@ private:
     std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
     VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
     VkPipeline overlayDepthPipeline_=VK_NULL_HANDLE;
+    VkPipeline overlayDepthMirroredPipeline_=VK_NULL_HANDLE;
+    VkPipeline overlayDepthDoubleSidedPipeline_=VK_NULL_HANDLE;
     std::array<GpuTexture,kMaxFramesInFlight> outlineMasks_;
     std::array<VkFramebuffer,kMaxFramesInFlight> outlineMaskFramebuffers_{};
     VkRenderPass outlineMaskPass_=VK_NULL_HANDLE;
@@ -192,8 +194,13 @@ private:
         std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
         std::array<float,4> irradianceOriginSpacing{},irradianceDimensionsEnabled{},irradianceParameters{};
         std::array<float,4> cameraRight{},cameraUp{};
+        std::array<float,16> screenReflectionWorldToClip{};
+        std::array<float,4> screenReflectionTrace{},screenReflectionQuality{};
     };
-    static_assert(sizeof(UniformBufferObject)==28*16);
+    static_assert(sizeof(UniformBufferObject)==34*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionWorldToClip)==28*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionTrace)==32*16);
+    static_assert(offsetof(UniformBufferObject,screenReflectionQuality)==33*16);
     static_assert(offsetof(UniformBufferObject,cameraRight)==26*16);
     static_assert(offsetof(UniformBufferObject,cameraUp)==27*16);
 

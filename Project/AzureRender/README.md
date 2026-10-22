@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+屏幕空间反射支持本帧角色、场景与探针回退。
+实际中庭与检查见[动态反射验收](docs/acceptance/nr/screen-space-reflections.md)。
+
 中庭方向光照覆盖扩展至后方及上下层。
 验证范围见[全局光照覆盖](docs/acceptance/nr/irradiance-coverage.md)。
 
