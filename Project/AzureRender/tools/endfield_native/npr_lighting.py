@@ -50,3 +50,17 @@ def decode_lighting(global_rows,object_rows,*,ambient_row,main_color_row,reflect
             'ambientWeightRows':[27,29,122]},
         'unverifiedInputs':(['volume-modulated ambient weight'] if modes[1]<.5 else [])
             +['material-specific color inputs','native grading and unclipped HDR output']}
+
+
+def decode_projected_hair_lighting(global_rows,object_rows,material_rows,*,ambient_row,main_color_row,shadow_color_row):
+    """Join caller-confirmed material Z/W shadow controls with captured light colors."""
+    decoded=decode_lighting(global_rows,object_rows,ambient_row=ambient_row,main_color_row=main_color_row)
+    row=material_rows.get(shadow_color_row)
+    if not isinstance(row,(list,tuple)) or len(row)!=4 or any(type(v) not in (int,float) or not math.isfinite(v) for v in row):
+        raise ValueError('Missing or invalid projected hair shadow-color row')
+    brightness,saturation=row[2:]
+    scale=decoded['materialShadowScale']
+    if any(not 0<=v<=16 for v in (brightness,saturation,scale)):
+        raise ValueError('Projected hair shadow parameters outside supported domain')
+    return dict(schemaVersion=1,shadowBrightness=brightness,shadowSaturation=saturation,shadowScale=scale,
+        ambientColor=decoded['settings']['ambientColor'],mainColor=decoded['mainLight']['color'])

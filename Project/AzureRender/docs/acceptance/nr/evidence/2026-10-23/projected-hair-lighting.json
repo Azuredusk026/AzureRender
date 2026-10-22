@@ -1,0 +1,1704 @@
+{
+  "schemaVersion": 1,
+  "status": "projected-hair-color-and-main-illumination-validation-passed",
+  "run": "build/runs/20261023-064510-projected-hair-lighting-dcc177",
+  "nativeInput": {
+    "schemaVersion": 1,
+    "frame": 10401,
+    "event": 950,
+    "sourceSha256": "0678f363a8624c3da7375ce4e0827d5b6f915516a32a7a2fa2349fad5d15a7ee",
+    "lighting": {
+      "schemaVersion": 1,
+      "shadowBrightness": 0.550000011920929,
+      "shadowSaturation": 1.100000023841858,
+      "shadowScale": 0.550000011920929,
+      "ambientColor": [
+        0.8783068656921387,
+        0.9302293062210083,
+        1.1216931343078613
+      ],
+      "mainColor": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "globalSpecularGain": 1.0,
+    "materialName": "M_actor_laevat_hair_01"
+  },
+  "layout": {
+    "version": 2,
+    "bytes": 192,
+    "textureSlots": 9
+  },
+  "tests": {
+    "cpuRelease": 7,
+    "cpuDebug": 7,
+    "sourceJoinCases": 7,
+    "surfaceProbesPerConfiguration": 172
+  },
+  "gpuBatches": [
+    {
+      "name": "gpu-release",
+      "summarySha256": "0bdbd807ed5e1b2593bccd482397f28edae86834889bacbdeef50343ff68074e",
+      "captures": [
+        {
+          "name": "direct",
+          "maximumLinearError": 0.001393519413900396,
+          "imageSha256": "19ada5995e3821a2ce31ec7eb740528ec8629273b13c5aef4731c79284e98cac",
+          "validationEnabled": false,
+          "measured": [
+            0.07036009569659588,
+            0.1301364766903643,
+            0.17788841598362912
+          ],
+          "expected": [
+            0.0693897902988546,
+            0.1287429572764639,
+            0.17899980458488898
+          ]
+        },
+        {
+          "name": "ambient",
+          "maximumLinearError": 0.0005263313360793359,
+          "imageSha256": "74344b5eb6fb0baf206fb06677d417740bde55a9ec115433d4a9330ae5b24020",
+          "validationEnabled": false,
+          "measured": [
+            0.028426039504420793,
+            0.05126945837404324,
+            0.07227185068231748
+          ],
+          "expected": [
+            0.028776682755789363,
+            0.051795789710122574,
+            0.07277992979605459
+          ]
+        },
+        {
+          "name": "dim-visibility",
+          "maximumLinearError": 0.00043172104808111844,
+          "imageSha256": "12ec5facc7af3bd73cf804913f99cab71ad27bccbda13b10dc405601fd022dde",
+          "validationEnabled": false,
+          "measured": [
+            0.024157632448504756,
+            0.05448027644244237,
+            0.08437621154414882
+          ],
+          "expected": [
+            0.02407234412356619,
+            0.05422352196871173,
+            0.08480793259222993
+          ]
+        },
+        {
+          "name": "diffuse-scale",
+          "maximumLinearError": 0.0008443160066715499,
+          "imageSha256": "4aa7e26370c1ff7011a0644a545522bb4f4e2d3cb3f969e57de0f7bf7cba01ee",
+          "validationEnabled": false,
+          "measured": [
+            0.03433980680868217,
+            0.06480326669290577,
+            0.08865558628577294
+          ],
+          "expected": [
+            0.0346948951494273,
+            0.06437147863823195,
+            0.08949990229244449
+          ]
+        },
+        {
+          "name": "kk",
+          "maximumLinearError": 0.0012530151755288377,
+          "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+          "validationEnabled": false,
+          "measured": [
+            0.03688945040110004,
+            0.0021246888848418626,
+            0.15292615199615017
+          ],
+          "expected": [
+            0.03742006095208272,
+            0.0022041505546221123,
+            0.15319943288598947
+          ]
+        },
+        {
+          "name": "kk-fixed",
+          "maximumLinearError": 0.0012530151755288377,
+          "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+          "validationEnabled": false,
+          "measured": [
+            0.03688945040110004,
+            0.0021246888848418626,
+            0.15292615199615017
+          ],
+          "expected": [
+            0.03742006095208272,
+            0.0022041505546221123,
+            0.15319943288598947
+          ]
+        },
+        {
+          "name": "kk-ambient",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": false,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "kk-disabled",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": false,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "local-kk",
+          "maximumLinearError": 0.00016799330948271703,
+          "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+          "validationEnabled": false,
+          "measured": [
+            0.00121410793419535,
+            0.0003035269835488375,
+            0.0
+          ],
+          "expected": [
+            0.0012335114986603782,
+            0.00015897710344450723,
+            0.0
+          ]
+        },
+        {
+          "name": "extra-kk",
+          "maximumLinearError": 0.0017020742576044634,
+          "imageSha256": "6de768eab497d8c8c87b7ec046ed170e3caeb65c2f1a974d88fff3ae53865792",
+          "validationEnabled": false,
+          "measured": [
+            0.03954623527673284,
+            0.0024282158683907,
+            0.18116424424986022
+          ],
+          "expected": [
+            0.03942633608695726,
+            0.0024628647815768644,
+            0.1825894684093657
+          ]
+        },
+        {
+          "name": "no-main",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": false,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "direct-fixed",
+          "maximumLinearError": 0.001393519413900396,
+          "imageSha256": "19ada5995e3821a2ce31ec7eb740528ec8629273b13c5aef4731c79284e98cac",
+          "validationEnabled": false,
+          "measured": [
+            0.07036009569659588,
+            0.1301364766903643,
+            0.17788841598362912
+          ],
+          "expected": [
+            0.0693897902988546,
+            0.1287429572764639,
+            0.17899980458488898
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compat-release",
+      "summarySha256": "bdc85ba3d6b72a46223953c661b8dfd755d45bce415c953cbc3389e469073ad6",
+      "captures": [
+        {
+          "name": "disabled-lighting",
+          "maximumLinearError": 0.0006680981517253118,
+          "imageSha256": "bfeb7849efb7d97a68a7d11e7b97f257db78f08ec6a8876aa73c2d616495544c",
+          "validationEnabled": false,
+          "measured": [
+            0.016807375752887384,
+            0.05612849004960009,
+            0.14412847085805777
+          ],
+          "expected": [
+            0.0169519025887592,
+            0.0567965882013254,
+            0.14456490562100693
+          ]
+        },
+        {
+          "name": "absent-input",
+          "maximumLinearError": 0.0006680981517253118,
+          "imageSha256": "bfeb7849efb7d97a68a7d11e7b97f257db78f08ec6a8876aa73c2d616495544c",
+          "validationEnabled": false,
+          "measured": [
+            0.016807375752887384,
+            0.05612849004960009,
+            0.14412847085805777
+          ],
+          "expected": [
+            0.0169519025887592,
+            0.0567965882013254,
+            0.14456490562100693
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gpu-debug",
+      "summarySha256": "a0a9bb4e2148783b02cf25bf9039868ff41b05c7dcbfc4534dc8fddca1dfc179",
+      "captures": [
+        {
+          "name": "direct",
+          "maximumLinearError": 0.001393519413900396,
+          "imageSha256": "19ada5995e3821a2ce31ec7eb740528ec8629273b13c5aef4731c79284e98cac",
+          "validationEnabled": true,
+          "measured": [
+            0.07036009569659588,
+            0.1301364766903643,
+            0.17788841598362912
+          ],
+          "expected": [
+            0.0693897902988546,
+            0.1287429572764639,
+            0.17899980458488898
+          ]
+        },
+        {
+          "name": "ambient",
+          "maximumLinearError": 0.0005263313360793359,
+          "imageSha256": "74344b5eb6fb0baf206fb06677d417740bde55a9ec115433d4a9330ae5b24020",
+          "validationEnabled": true,
+          "measured": [
+            0.028426039504420793,
+            0.05126945837404324,
+            0.07227185068231748
+          ],
+          "expected": [
+            0.028776682755789363,
+            0.051795789710122574,
+            0.07277992979605459
+          ]
+        },
+        {
+          "name": "dim-visibility",
+          "maximumLinearError": 0.00043172104808111844,
+          "imageSha256": "12ec5facc7af3bd73cf804913f99cab71ad27bccbda13b10dc405601fd022dde",
+          "validationEnabled": true,
+          "measured": [
+            0.024157632448504756,
+            0.05448027644244237,
+            0.08437621154414882
+          ],
+          "expected": [
+            0.02407234412356619,
+            0.05422352196871173,
+            0.08480793259222993
+          ]
+        },
+        {
+          "name": "diffuse-scale",
+          "maximumLinearError": 0.0008443160066715499,
+          "imageSha256": "4aa7e26370c1ff7011a0644a545522bb4f4e2d3cb3f969e57de0f7bf7cba01ee",
+          "validationEnabled": true,
+          "measured": [
+            0.03433980680868217,
+            0.06480326669290577,
+            0.08865558628577294
+          ],
+          "expected": [
+            0.0346948951494273,
+            0.06437147863823195,
+            0.08949990229244449
+          ]
+        },
+        {
+          "name": "kk",
+          "maximumLinearError": 0.0012530151755288377,
+          "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+          "validationEnabled": true,
+          "measured": [
+            0.03688945040110004,
+            0.0021246888848418626,
+            0.15292615199615017
+          ],
+          "expected": [
+            0.03742006095208272,
+            0.0022041505546221123,
+            0.15319943288598947
+          ]
+        },
+        {
+          "name": "kk-fixed",
+          "maximumLinearError": 0.0012530151755288377,
+          "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+          "validationEnabled": true,
+          "measured": [
+            0.03688945040110004,
+            0.0021246888848418626,
+            0.15292615199615017
+          ],
+          "expected": [
+            0.03742006095208272,
+            0.0022041505546221123,
+            0.15319943288598947
+          ]
+        },
+        {
+          "name": "kk-ambient",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": true,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "kk-disabled",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": true,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "local-kk",
+          "maximumLinearError": 0.00016799330948271703,
+          "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+          "validationEnabled": true,
+          "measured": [
+            0.00121410793419535,
+            0.0003035269835488375,
+            0.0
+          ],
+          "expected": [
+            0.0012335114986603782,
+            0.00015897710344450723,
+            0.0
+          ]
+        },
+        {
+          "name": "extra-kk",
+          "maximumLinearError": 0.0017020742576044634,
+          "imageSha256": "6de768eab497d8c8c87b7ec046ed170e3caeb65c2f1a974d88fff3ae53865792",
+          "validationEnabled": true,
+          "measured": [
+            0.03954623527673284,
+            0.0024282158683907,
+            0.18116424424986022
+          ],
+          "expected": [
+            0.03942633608695726,
+            0.0024628647815768644,
+            0.1825894684093657
+          ]
+        },
+        {
+          "name": "no-main",
+          "maximumLinearError": 0.0,
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "validationEnabled": true,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "direct-fixed",
+          "maximumLinearError": 0.001393519413900396,
+          "imageSha256": "19ada5995e3821a2ce31ec7eb740528ec8629273b13c5aef4731c79284e98cac",
+          "validationEnabled": true,
+          "measured": [
+            0.07036009569659588,
+            0.1301364766903643,
+            0.17788841598362912
+          ],
+          "expected": [
+            0.0693897902988546,
+            0.1287429572764639,
+            0.17899980458488898
+          ]
+        },
+        {
+          "name": "disabled-lighting",
+          "maximumLinearError": 0.0006680981517253118,
+          "imageSha256": "bfeb7849efb7d97a68a7d11e7b97f257db78f08ec6a8876aa73c2d616495544c",
+          "validationEnabled": true,
+          "measured": [
+            0.016807375752887384,
+            0.05612849004960009,
+            0.14412847085805777
+          ],
+          "expected": [
+            0.0169519025887592,
+            0.0567965882013254,
+            0.14456490562100693
+          ]
+        },
+        {
+          "name": "absent-input",
+          "maximumLinearError": 0.0006680981517253118,
+          "imageSha256": "bfeb7849efb7d97a68a7d11e7b97f257db78f08ec6a8876aa73c2d616495544c",
+          "validationEnabled": true,
+          "measured": [
+            0.016807375752887384,
+            0.05612849004960009,
+            0.14412847085805777
+          ],
+          "expected": [
+            0.0169519025887592,
+            0.0567965882013254,
+            0.14456490562100693
+          ]
+        }
+      ]
+    },
+    {
+      "name": "zero-ambient-release",
+      "summarySha256": "a78454dbcc59e7b86059887a3c65dcb1e323e61df06e0df2db175ac602550932",
+      "captures": [
+        {
+          "name": "kk-zero-ambient",
+          "maximumLinearError": 0.0012499072342236905,
+          "imageSha256": "d4401dfb94956ce0b11608835bd8c54ad2f20754188de8b2405be538d910f800",
+          "validationEnabled": false,
+          "measured": [
+            0.026241221894849898,
+            0.0015176349177441874,
+            0.10946171077829933
+          ],
+          "expected": [
+            0.026450682209902834,
+            0.0015717892442539886,
+            0.1089153128885955
+          ]
+        }
+      ]
+    },
+    {
+      "name": "zero-ambient-debug",
+      "summarySha256": "89d1acbb2d7f6d17e3a007e76e5bc732ab92540a576233eb17aacc96b20188cd",
+      "captures": [
+        {
+          "name": "kk-zero-ambient",
+          "maximumLinearError": 0.0012499072342236905,
+          "imageSha256": "d4401dfb94956ce0b11608835bd8c54ad2f20754188de8b2405be538d910f800",
+          "validationEnabled": true,
+          "measured": [
+            0.026241221894849898,
+            0.0015176349177441874,
+            0.10946171077829933
+          ],
+          "expected": [
+            0.026450682209902834,
+            0.0015717892442539886,
+            0.1089153128885955
+          ]
+        }
+      ]
+    },
+    {
+      "name": "legacy-hair",
+      "summarySha256": "f48ab8de8039b46149d58632ae40961b32eed29fd7750931a89d070f9c8dcc14",
+      "captures": [
+        {
+          "name": "baseline",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\baseline\\frames\\frame_000000.png",
+          "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "reverse-light",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\reverse-light\\frames\\frame_000000.png",
+          "imageSha256": "5fff271d4d2a9f10506206ce6755b5eb2efbae9ca16d808f3be2a513f5b5096a",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.048562510633006005
+          ],
+          "rightMeasuredMean": [
+            0.048562510633006005,
+            0.0031714486791680945,
+            0.0
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "zero-parameters",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\zero-parameters\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 0.0,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "secondary-directional",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\secondary-directional\\frames\\frame_000000.png",
+          "imageSha256": "ea0151fad0f8f30d173f039ebb807e7dc5ae576d93a7285bb04c9270dbb7f891",
+          "maximumLinearError": 0.002741651722259708,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.3674988668176669
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "secondary-local",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\secondary-local\\frames\\frame_000000.png",
+          "imageSha256": "22136d799a31581ff973aa0fe666eea6407431bd15ce362a70b911475caf0f96",
+          "maximumLinearError": 0.00020477824064939285,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0007588174588720934,
+            0.001517634917744187,
+            0.0058271123235298875
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "split-normals",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\split-normals\\frames\\frame_000000.png",
+          "imageSha256": "a3d1e1e014ca29acaa7217edc13ec178ff435795b120b7829378799c75607fc1",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.011954915869830066,
+            0.019342253686080963,
+            0.002903444148293501
+          ],
+          "sampledRampRows": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "mirrored",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\mirrored\\frames\\frame_000000.png",
+          "imageSha256": "86259ace478400c5cfbe2ce70acde7e38232a0161c8999556d4e647e3d14b3e7",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "rotated",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\rotated\\frames\\frame_000000.png",
+          "imageSha256": "917b74f396f07c4c62936d3fe2f8caa8408c74087957318c72763a3c9f897977",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "dark",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\dark\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 0.0,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "disabled",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\disabled\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 0.0,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "fixed",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\fixed\\frames\\frame_000000.png",
+          "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "linear-control",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\linear-control\\frames\\frame_000000.png",
+          "imageSha256": "111c6487ac11e5935f7b36f8f916cf8a5089b06ea19c23c4bafb029a97aaf582",
+          "maximumLinearError": 0.0,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.2501582847299534,
+            0.5028864580325686,
+            0.7529422167760776
+          ],
+          "rightMeasuredMean": [
+            0.2501582847299534,
+            0.5028864580325686,
+            0.7529422167760776
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "frame-identity",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\frame-identity\\frames\\frame_000000.png",
+          "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+          "maximumLinearError": 0.0008097507748809421,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.04856251063300598,
+            0.0031714486791680927,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.006109217290459617,
+            0.012075787364049625,
+            0.04856251063300598
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "frame-turned",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\frame-turned\\frames\\frame_000000.png",
+          "imageSha256": "e20b650439e61b54a3a077a37a93e0e47586a444cb30a0391124c6ecb0d3d56b",
+          "maximumLinearError": 0.0006875314657232012,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0029613228258166526,
+            0.005957787884165887,
+            0.024220031955137625
+          ],
+          "rightMeasuredMean": [
+            0.0062804619077257645,
+            0.01229206355893716,
+            0.04971360364229678
+          ],
+          "sampledRampRows": [
+            7
+          ]
+        },
+        {
+          "name": "frame-turned-fixed",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\frame-turned-fixed\\frames\\frame_000000.png",
+          "imageSha256": "e20b650439e61b54a3a077a37a93e0e47586a444cb30a0391124c6ecb0d3d56b",
+          "maximumLinearError": 0.0006875314657232012,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0029613228258166526,
+            0.005957787884165887,
+            0.024220031955137625
+          ],
+          "rightMeasuredMean": [
+            0.0062804619077257645,
+            0.01229206355893716,
+            0.04971360364229678
+          ],
+          "sampledRampRows": [
+            7
+          ]
+        },
+        {
+          "name": "virtual-main",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\virtual-main\\frames\\frame_000000.png",
+          "imageSha256": "33a05cabf25b6cced372872382d83767073dc5086931633abf48632a9d123a98",
+          "maximumLinearError": 0.0006122281902636584,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.04376947456255462,
+            0.0028835063437139554,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "virtual-fixed",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\virtual-fixed\\frames\\frame_000000.png",
+          "imageSha256": "33a05cabf25b6cced372872382d83767073dc5086931633abf48632a9d123a98",
+          "maximumLinearError": 0.0006122281902636584,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.04376947456255462,
+            0.0028835063437139554,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "virtual-zero-gain",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\virtual-zero-gain\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 0.0,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "virtual-point",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\virtual-point\\frames\\frame_000000.png",
+          "imageSha256": "7e59e7b7fb7e37c10eb8072b56c984e477ff2ff37b782f79a3e9108dc727574e",
+          "maximumLinearError": 7.810780123830941e-07,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "virtual-control",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\virtual-control\\frames\\frame_000000.png",
+          "imageSha256": "f1fea1b260673f4a3dd05eb043c345ed1e052f7ed48503c62e8749d448e1fc88",
+          "maximumLinearError": 0.0007701377957621547,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.026192888400049363,
+            0.008767065089178204,
+            0.02883907033539932
+          ],
+          "sampledRampRows": [
+            0,
+            7
+          ]
+        },
+        {
+          "name": "fractional-frame",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\fractional-frame\\frames\\frame_000000.png",
+          "imageSha256": "6ac7fd04e45c60ca1d2fbbbb3c240398621ad2ddb65fb66a4d42af7692f0442a",
+          "maximumLinearError": 0.001414209884201434,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0031406026344282206,
+            0.006285145427589163,
+            0.02487289351957763
+          ],
+          "rightMeasuredMean": [
+            0.020234956077874417,
+            0.040150246488742006,
+            0.15975785444790583
+          ],
+          "sampledRampRows": [
+            7
+          ]
+        },
+        {
+          "name": "fractional-frame-mirrored",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\fractional-frame-mirrored\\frames\\frame_000000.png",
+          "imageSha256": "a53d9c54c6d7cbfe1f5c4b0879fc1a1c11f2e56e72bad8aca66f99ab5cabdf86",
+          "maximumLinearError": 0.001414209884201434,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0031406026344282206,
+            0.006285145427589163,
+            0.02487289351957763
+          ],
+          "rightMeasuredMean": [
+            0.020234956077874417,
+            0.040150246488742006,
+            0.15975785444790583
+          ],
+          "sampledRampRows": [
+            7
+          ]
+        },
+        {
+          "name": "tangent-normal-control",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\tangent-normal-control\\frames\\frame_000000.png",
+          "imageSha256": "2fd81d2559cd93eccf81927b5d636434177c1c18a604dd9e7e0ac12f4f0b4f84",
+          "maximumLinearError": 0.0008513309801163049,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.05000664596540602,
+            0.0032687192817964644,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.04981128441666653,
+            0.0032687192817964644,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "tangent-normal",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\tangent-normal\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 5.7809760376798275e-65,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        },
+        {
+          "name": "tangent-normal-fixed",
+          "validationEnabled": false,
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          },
+          "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-064510-projected-hair-lighting-dcc177\\legacy-hair\\tangent-normal-fixed\\frames\\frame_000000.png",
+          "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+          "maximumLinearError": 5.7809760376798275e-65,
+          "linearErrorBudget": 0.008,
+          "leftMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rightMeasuredMean": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sampledRampRows": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "npr-regression",
+      "summarySha256": "b318e75bdae7c96ee35130368eddd5f2d3ecac174a8281979836950d5266cdf3",
+      "captures": [
+        {
+          "name": "composed",
+          "maximumLinearError": 0.001010887882328615,
+          "validationEnabled": false,
+          "imageSha256": "4cf3517f8263ba2c0168c563cfbdab09298eb410a806fcd02da0a67bd5f8fb06",
+          "measured": [
+            0.06847816984440017,
+            0.03954623527673284,
+            0.02217388479338738
+          ],
+          "expected": [
+            0.06746728196207155,
+            0.040055313739839324,
+            0.02222183570048165
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "fixed",
+          "maximumLinearError": 0.001010887882328615,
+          "validationEnabled": false,
+          "imageSha256": "4cf3517f8263ba2c0168c563cfbdab09298eb410a806fcd02da0a67bd5f8fb06",
+          "measured": [
+            0.06847816984440017,
+            0.03954623527673284,
+            0.02217388479338738
+          ],
+          "expected": [
+            0.06746728196207155,
+            0.040055313739839324,
+            0.02222183570048165
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "direct",
+          "maximumLinearError": 0.0005292968133693635,
+          "validationEnabled": false,
+          "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+          "measured": [
+            0.03688945040110004,
+            0.02315336617811041,
+            0.014443843596092545
+          ],
+          "expected": [
+            0.037154952821060974,
+            0.023682662991479773,
+            0.01443217990337867
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "ambient",
+          "maximumLinearError": 0.00031396016908327024,
+          "validationEnabled": false,
+          "imageSha256": "bde028041017ff40b8e34bc91d2113c396bdb99814c009eb2d1b2d88329ec25c",
+          "measured": [
+            0.0382043715953465,
+            0.027320891639074894,
+            0.019382360956935723
+          ],
+          "expected": [
+            0.03789041142626323,
+            0.02728775124726591,
+            0.019474139492757447
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "disabled",
+          "maximumLinearError": 0.0005086924417040534,
+          "validationEnabled": false,
+          "imageSha256": "38ec1caa0e0fb6760d4e3159d5f8745d0af74e7873c6c1f8bdf61855e0c92828",
+          "measured": [
+            0.0382043715953465,
+            0.02217388479338738,
+            0.010960094006488246
+          ],
+          "expected": [
+            0.038713064037050555,
+            0.022140163283785732,
+            0.011192034191239915
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "direction-positive",
+          "maximumLinearError": 0.0012367431527445516,
+          "validationEnabled": false,
+          "imageSha256": "3462444500894df6003afe96923374320a234140c7dedf4c599763826b32e190",
+          "measured": [
+            0.11953842798834562,
+            0.06847816984440017,
+            0.03560131487502034
+          ],
+          "expected": [
+            0.12077517114109017,
+            0.06884859609040267,
+            0.035920885550559306
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "direction-negative",
+          "maximumLinearError": 0.0006271686088098472,
+          "validationEnabled": false,
+          "imageSha256": "548331dfa9e5526d49d2f0e12438c4dc5e1e6ab9ca123723af75e8270f28f149",
+          "measured": [
+            0.05780543019106723,
+            0.03560131487502034,
+            0.019382360956935723
+          ],
+          "expected": [
+            0.05806000740106827,
+            0.034974146266210496,
+            0.01980435631517383
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "scene-volume",
+          "maximumLinearError": 0.0004851407652644024,
+          "validationEnabled": false,
+          "imageSha256": "e1218655b29c21a13ec30b71ead5adf951bf068d298be7ee235f95a5cfe0a45a",
+          "measured": [
+            0.05448027644244237,
+            0.030713443732993635,
+            0.016807375752887384
+          ],
+          "expected": [
+            0.053995135677177966,
+            0.03090589126281487,
+            0.01686644733997335
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "zero-radiance",
+          "maximumLinearError": 0.0,
+          "validationEnabled": false,
+          "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "point-only",
+          "maximumLinearError": 0.00015376785727774442,
+          "validationEnabled": false,
+          "imageSha256": "78b2833555da1644e7d4bcbb89476c4ac8f9468ef476f33eb158277abbf5ab97",
+          "measured": [
+            0.05448027644244237,
+            0.03688945040110004,
+            0.024157632448504756
+          ],
+          "expected": [
+            0.054622417817481006,
+            0.036856855702866925,
+            0.0243114003057825
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "surface-only",
+          "maximumLinearError": 0.00031396016908327024,
+          "validationEnabled": false,
+          "imageSha256": "bde028041017ff40b8e34bc91d2113c396bdb99814c009eb2d1b2d88329ec25c",
+          "measured": [
+            0.0382043715953465,
+            0.027320891639074894,
+            0.019382360956935723
+          ],
+          "expected": [
+            0.03789041142626323,
+            0.02728775124726591,
+            0.019474139492757447
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "additional-directional",
+          "maximumLinearError": 0.00016676073139523795,
+          "validationEnabled": false,
+          "imageSha256": "3c9eb7dffb50a1c4f6ff35912d2903d5dfdb673967e22401cfca8b6465c8cc20",
+          "measured": [
+            0.07421356838014963,
+            0.04518620438567554,
+            0.026241221894849898
+          ],
+          "expected": [
+            0.07438032911154487,
+            0.045326781188359734,
+            0.02621899076878162
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "main-shadow",
+          "maximumLinearError": 0.0009061766697694221,
+          "validationEnabled": false,
+          "imageSha256": "4db57525e387775fa6765729655f0d332811241fc8f557542ad213df17e82e5e",
+          "measured": [
+            0.03688945040110004,
+            0.02518685962736163,
+            0.016807375752887384
+          ],
+          "expected": [
+            0.03598327373133062,
+            0.02542618169401558,
+            0.017021112412665348
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "main-shadow-floor",
+          "maximumLinearError": 0.001010887882328615,
+          "validationEnabled": false,
+          "imageSha256": "4455be832dba1e4f01b45511e7c573c1469c0ea62865a00e4132f22c158da886",
+          "measured": [
+            0.06847816984440017,
+            0.03954623527673284,
+            0.02217388479338738
+          ],
+          "expected": [
+            0.06746728196207155,
+            0.040055313739839324,
+            0.02222183570048165
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "indoor-shadow",
+          "maximumLinearError": 0.00020711222151226227,
+          "validationEnabled": false,
+          "imageSha256": "b6e23c340c28cddf84d317c258ef2bd027da37e068ac48fa209c09a7c7dd6a6f",
+          "measured": [
+            0.04518620438567554,
+            0.03189603307301153,
+            0.021219010376003555
+          ],
+          "expected": [
+            0.04497909216416328,
+            0.03178272711751948,
+            0.021276390515831682
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "ambient-weight-quarter",
+          "maximumLinearError": 0.00045493403949476915,
+          "validationEnabled": false,
+          "imageSha256": "f74b854128966632804d338d292f9462cd550ef08b91ecc31be96952df995147",
+          "measured": [
+            0.04518620438567554,
+            0.027320891639074894,
+            0.01599629336550963
+          ],
+          "expected": [
+            0.04473303510631362,
+            0.027775825678569663,
+            0.016379593852654417
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "ambient-weight-zero",
+          "maximumLinearError": 0.0005292968133693635,
+          "validationEnabled": false,
+          "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+          "measured": [
+            0.03688945040110004,
+            0.02315336617811041,
+            0.014443843596092545
+          ],
+          "expected": [
+            0.037154952821060974,
+            0.023682662991479773,
+            0.01443217990337867
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "ambient-weight-direct",
+          "maximumLinearError": 0.0005292968133693635,
+          "validationEnabled": false,
+          "imageSha256": "4d970014e61ced57f34e1cc0a2279c41920530cb7f1cebc7b1f3be102af4cc25",
+          "measured": [
+            0.03688945040110004,
+            0.02315336617811041,
+            0.014443843596092545
+          ],
+          "expected": [
+            0.037154952821060974,
+            0.023682662991479773,
+            0.01443217990337867
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "ambient-weight-shadow",
+          "maximumLinearError": 0.0002964424820064357,
+          "validationEnabled": false,
+          "imageSha256": "17dce07423d72b72bdf7dd273984ccb9371ad6cb5e51afa6c05eb7adb96e6000",
+          "measured": [
+            0.026241221894849898,
+            0.018500220128379697,
+            0.012286488356915872
+          ],
+          "expected": [
+            0.026537664376856333,
+            0.018751808999336487,
+            0.012553070404340694
+          ],
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        }
+      ]
+    }
+  ],
+  "actual": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "control-beauty",
+        "imageSha256": "9ee5cfebdf7f1b3bb29d9b3c75acde6e424bc9b9f410fd1d1b00a77d3f206e8f",
+        "playerSha256": "4ff3ab03e3c9f4da7660e376103942a16bec07b81952b7a96ff73e2819d25a8a",
+        "validationEnabled": false
+      },
+      {
+        "name": "lit-beauty",
+        "imageSha256": "242dce051e6eb2bb80d3b903fbe0729d003584c6d9d5a5b06947ebf03e2ba40d",
+        "playerSha256": "4ff3ab03e3c9f4da7660e376103942a16bec07b81952b7a96ff73e2819d25a8a",
+        "validationEnabled": false
+      },
+      {
+        "name": "lit-kk",
+        "imageSha256": "f8cc3a2845b4668e957a7236ec0af8acb7476de9329984a6ef62a057924f8916",
+        "playerSha256": "4ff3ab03e3c9f4da7660e376103942a16bec07b81952b7a96ff73e2819d25a8a",
+        "validationEnabled": false
+      },
+      {
+        "name": "lit-kk-fixed",
+        "imageSha256": "f8cc3a2845b4668e957a7236ec0af8acb7476de9329984a6ef62a057924f8916",
+        "playerSha256": "28c280a3fabca613d16049593b229e1637964e3115c7723a9b12094e3d683159",
+        "validationEnabled": true
+      },
+      {
+        "name": "lit-documents",
+        "imageSha256": "242dce051e6eb2bb80d3b903fbe0729d003584c6d9d5a5b06947ebf03e2ba40d",
+        "playerSha256": "28c280a3fabca613d16049593b229e1637964e3115c7723a9b12094e3d683159",
+        "validationEnabled": true
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "left": "control-beauty",
+      "right": "../20261023-055814-sampler-mip-bias-f383f3/native-beauty",
+      "maximumByteDifference": 0,
+      "leftSha256": "9ee5cfebdf7f1b3bb29d9b3c75acde6e424bc9b9f410fd1d1b00a77d3f206e8f",
+      "rightSha256": "9ee5cfebdf7f1b3bb29d9b3c75acde6e424bc9b9f410fd1d1b00a77d3f206e8f"
+    },
+    {
+      "left": "lit-kk",
+      "right": "lit-kk-fixed",
+      "maximumByteDifference": 0,
+      "leftSha256": "f8cc3a2845b4668e957a7236ec0af8acb7476de9329984a6ef62a057924f8916",
+      "rightSha256": "f8cc3a2845b4668e957a7236ec0af8acb7476de9329984a6ef62a057924f8916"
+    },
+    {
+      "left": "lit-beauty",
+      "right": "lit-documents",
+      "maximumByteDifference": 0,
+      "leftSha256": "242dce051e6eb2bb80d3b903fbe0729d003584c6d9d5a5b06947ebf03e2ba40d",
+      "rightSha256": "242dce051e6eb2bb80d3b903fbe0729d003584c6d9d5a5b06947ebf03e2ba40d"
+    }
+  ],
+  "mainProject": {
+    "schemaVersion": 1,
+    "status": "main-project-startup-and-clean-unload-passed",
+    "imageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "previousImageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "maximumByteDifference": 0,
+    "changedPixels": 0
+  },
+  "geometryAndAnimationPreserved": true,
+  "diagnostic": {
+    "schemaVersion": 1,
+    "status": "diagnostic-only",
+    "region": [
+      1215,
+      160,
+      1340,
+      242
+    ],
+    "maskPolicy": "source red dominant: R>1.8G and R>1.5B",
+    "selectedPixels": 8553,
+    "meanEncodedRgbError": {
+      "control": 0.07143356036829947,
+      "lit": 0.05502911870543455
+    },
+    "pixel1280x195": {
+      "source": [
+        231.0,
+        105.0,
+        104.0
+      ],
+      "control": [
+        220.0,
+        92.0,
+        94.0
+      ],
+      "lit": [
+        226.0,
+        97.0,
+        98.0
+      ]
+    }
+  },
+  "failureEvidence": {
+    "input-red.log": "d34fa5a10e8d00bcc39e5904d85a254b2e0f1ffac3eed87c5a20d676d1273187",
+    "gpu-red.log": "47fb54c19aa83c3326a07c67e9c9082bae3bf4126afa6396226335a4da09d024",
+    "capture-join-red.log": "f482b0c1198db3ca9894fdecb5600357e77bb9e4e64311062151c45f09695d64"
+  },
+  "sourceFingerprints": {
+    "src/assets/GltfLoader.hpp": "cd037aef2010312fd2b594b7439773473fda1faba4d9d19746415920891c7a35",
+    "src/assets/GltfLoader.cpp": "389eba7e766f3ecef645458b896c81ea019c87bedd33b8d493e982eb1b8169e9",
+    "src/assets/MaterialSurfaceProfile.hpp": "b5985596c691b15db5379edc0ba41b67185fc47352a10ac2aab69968a22fee3d",
+    "shaders/mesh.frag": "55c5c2a05746c4205cb507ebfcc4f48aa225bf21026e35b560cc285f547e44bb",
+    "tools/endfield_native/npr_lighting.py": "6aa9cf4fd37b4a628120e29a0dd118d62812f5db404097bb2d8416dcc23a0dc3",
+    "tools/test_projected_hair_lighting_gpu.py": "d4869d60bac714b8507d37fd8ee579214e0cca643aeb149d70ef7c54c467ec01"
+  },
+  "remaining": [
+    "Native local-light default color and energy mode",
+    "Independent screen occlusion binding",
+    "Dynamic views and complete native appearance",
+    "Main-project content promotion"
+  ]
+}

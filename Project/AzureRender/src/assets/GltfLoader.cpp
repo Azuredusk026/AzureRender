@@ -976,7 +976,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign","lighting"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -1073,6 +1073,32 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
             :AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered;
     }
     if(source.Has("diffuseScale"))target.diffuseScale=scalar("diffuseScale",0,1);
+    if(source.Has("lighting")) {
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("lighting");
+        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"};
+        if(!raw.is_object()||raw.size()!=fields.size()||!raw.contains("schemaVersion")
+            ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||target.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+            ||!(result.materialFeatures&MaterialFeatureDiffuseRamp))
+            throw std::invalid_argument("Invalid projectedRamp.lighting ownership or version");
+        for(const auto& field:raw.items())if(!fields.count(field.key()))throw std::invalid_argument("Unknown projectedRamp.lighting field");
+        const auto number=[&](const nlohmann::json& value,float maximum) {
+            if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>maximum)
+                throw std::invalid_argument("Invalid projectedRamp.lighting value");
+            return value.get<float>();
+        };
+        auto& lighting=target.lighting;
+        lighting.shadowBrightness=number(raw.at("shadowBrightness"),16);
+        lighting.shadowSaturation=number(raw.at("shadowSaturation"),16);
+        lighting.shadowScale=number(raw.at("shadowScale"),16);
+        for(const auto* field:{"ambientColor","mainColor"}) {
+            const auto& value=raw.at(field);
+            if(!value.is_array()||value.size()!=3)throw std::invalid_argument("Invalid projectedRamp.lighting color");
+            auto& color=std::string(field)=="ambientColor"?lighting.ambientColor:lighting.mainColor;
+            for(unsigned i=0;i<3;++i)color[i]=number(value[i],64);
+        }
+        lighting.present=true;
+    }
     target.primaryShift=scalar("primaryShift",-1,1);target.secondaryShift=scalar("secondaryShift",-1,1);
     target.intensity=scalar("intensity",0,16);target.secondaryRange=scalar("secondaryRange",0,1);
     target.edgeFade=scalar("edgeFade",0,64);target.specularNormalScale=scalar("specularNormalScale",0,8);

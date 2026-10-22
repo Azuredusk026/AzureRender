@@ -33,6 +33,12 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
         rows[7]={hair.line.frequency,hair.line.strandShift,hair.line.range,hair.line.depth};
         rows[8]={hair.line.alternation,hair.line.saturation,1,hair.line.mainDiffuse?1.F:0.F};rows[9]=hair.line.uvTransform;
     }
+    if(hair.lighting.present) {
+        const auto& light=hair.lighting;
+        rows[5][3]=light.shadowScale;rows[6][3]=1;
+        rows[10]={light.ambientColor[0],light.ambientColor[1],light.ambientColor[2],light.shadowBrightness};
+        rows[11]={light.mainColor[0],light.mainColor[1],light.mainColor[2],light.shadowSaturation};
+    }
     return result;
 }
 

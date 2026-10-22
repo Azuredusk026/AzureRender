@@ -287,6 +287,45 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
         "Strand surface response and independent diffuse energy must survive loading");
     require(hair.surfaceResponse==AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered&&hair.diffuseScale==1,
         "Projected ramp defaults must retain the layered surface contract");
+    auto litStrand=strand;
+    require(stbi_write_png((directory/"lighting-ramp.png").string().c_str(),2,1,4,pixels.data(),8)!=0,
+        "Cannot write diffuse lighting ramp fixture");
+    litStrand["images"].push_back({{"uri","lighting-ramp.png"}});
+    litStrand["textures"].push_back({{"source",litStrand["images"].size()-1}});
+    auto& litProfile=litStrand["materials"][0]["extras"]["azureRenderMaterial"];
+    litProfile["features"].push_back("diffuse-ramp");
+    litProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",litStrand["textures"].size()-1}};
+    litProfile["hair"]["projectedRamp"]["lighting"]={{"schemaVersion",1},{"shadowBrightness",.55},
+        {"shadowSaturation",1.1},{"shadowScale",.4},{"ambientColor",{.8,.9,1.1}},{"mainColor",{1,.9,.7}}};
+    const auto litAsset=load(litStrand);const auto litPacked=packMaterialSurfaceProfile(litAsset.materials[0]);
+    require(litPacked.rows[5][3]==.4F&&litPacked.rows[6][3]==1
+        &&litPacked.rows[10]==std::array<float,4>{.8F,.9F,1.1F,.55F}
+        &&litPacked.rows[11]==std::array<float,4>{1,.9F,.7F,1.1F},
+        "Projected hair lighting must preserve typed colors and independent shadow controls");
+    for(const auto& field:{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"}) {
+        auto bad=litStrand;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"].erase(field);
+        reject(bad,"projectedRamp.lighting");
+    }
+    for(const auto* field:{"shadowScale","shadowBrightness","shadowSaturation"})
+        for(const auto& badValue:Json::array({true,nullptr,"1",-1,17})) {
+            auto bad=litStrand;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"][field]=badValue;
+            reject(bad,"projectedRamp.lighting");
+        }
+    for(const auto& badValue:Json::array({true,nullptr,"1",1.0,0,2})) {
+        auto bad=litStrand;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"]["schemaVersion"]=badValue;
+        reject(bad,"projectedRamp.lighting");
+    }
+    for(const auto& badValue:Json::array({true,nullptr,1,Json::array({1,1}),Json::array({1,1,-1}),Json::array({1,1,65})})) {
+        auto bad=litStrand;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"]["ambientColor"]=badValue;
+        reject(bad,"projectedRamp.lighting");
+    }
+    auto badLighting=litStrand;badLighting["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["surfaceResponse"]="layered";
+    reject(badLighting,"projectedRamp.lighting");
+    badLighting=litStrand;badLighting["materials"][0]["extras"]["azureRenderMaterial"].erase("diffuseRamp");
+    badLighting["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-projected-ramp"};
+    reject(badLighting,"projectedRamp.lighting");
+    badLighting=litStrand;badLighting["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"]["unknown"]=1;
+    reject(badLighting,"projectedRamp.lighting");
     strandProfile["surfaceResponse"]="layered";(void)load(strand);
     for(const auto& mode:Json::array({"unknown",1,true,nullptr})) {
         auto invalid=strand;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["surfaceResponse"]=mode;

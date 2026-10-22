@@ -490,6 +490,8 @@ void main() {
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
         &&loadProjectedHairSurfaceProfile(material.materialPadding>>1U).secondaryColor.w>.5;
+    bool projectedLighting=strandDiffuse&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
+        &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5;
     float projectedDiffuseScale=projectedHair
         ?loadProjectedHairSurfaceProfile(material.materialPadding>>1U).objectX.w:1.0;
     float hairBasePeak = max(
@@ -770,6 +772,7 @@ void main() {
     vec3 sceneMainDiffuse = vec3(0.0);
     vec3 clusteredSpecular = vec3(0.0);
     vec3 sceneHairPrimary=vec3(0),sceneHairSecondary=vec3(0),sceneRim=vec3(0);
+    vec3 mainHairPrimary=vec3(0),mainHairSecondary=vec3(0);
     vec3 eyeHostDiffuse=vec3(0),eyeHostMatcap=vec3(0);
     vec4 eyeMatcap=vec4(0);
     float eyeViewRampAlpha=0;
@@ -870,9 +873,13 @@ void main() {
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
             if(projectedHair) {
                 CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection,light.coneType.y>1.5);
-                sceneHairPrimary+=energy.primary*radiance*material.featureParameters.y;
-                // The observed local-light variant only contributes its main lobe.
-                if(light.coneType.y>1.5)sceneHairSecondary+=energy.secondary*radiance*material.featureParameters.y;
+                if(projectedLighting&&float(lightIndex)==camera.nprLightingParameters.y) {
+                    mainHairPrimary=energy.primary;mainHairSecondary=energy.secondary;
+                } else {
+                    sceneHairPrimary+=energy.primary*radiance*material.featureParameters.y;
+                    // The observed local-light variant only contributes its main lobe.
+                    if(light.coneType.y>1.5)sceneHairSecondary+=energy.secondary*radiance*material.featureParameters.y;
+                }
             } else {
             vec3 highlightNormal=normalize(tangentToWorld*decodePackedHairNormal(hairData.ba));
             vec2 lobes=characterHairLobes(shadedNormal,tangent,bitangent,highlightNormal,
@@ -1206,24 +1213,50 @@ void main() {
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
-    if(nprDiffuse&&camera.nprLightingParameters.x>.5){
+    if((nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5){
         float visibility=mix(shadowVisibility,1.0,camera.nprGainFloor.z);
-        CharacterDiffuseResponse response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
+        CharacterDiffuseResponse response;
         vec3 incident=camera.nprAmbientColor.rgb;
+        vec4 mainRadiance=camera.nprMainRadiance;
+        float hairViewAlpha=1.0;
+        float hairShadowScale=1.0;
+        if(projectedLighting) {
+            PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+            vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,lightDirection)*.5+.5,.5),0.0);
+            hairViewAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,-camera.cameraForward.xyz)*.5+.5,.5),0.0).a;
+            float characterVisibility=texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
+            float litMask=min(min(characterVisibility,physicalAo),ramp.a);
+            float aoMask=characterVisibility*physicalAo;
+            hairShadowScale=profile.rows[5].w;
+            vec3 shadowAlbedo=characterDiffuseSaturation(baseColor.rgb*profile.rows[10].w,profile.rows[11].w);
+            response=characterDiffuseWeightedResponse(baseColor.rgb,shadowAlbedo,0.0,hairShadowScale,ramp,
+                litMask,aoMask,clamp(hairViewAlpha*aoMask+ramp.a,0.0,1.0),visibility);
+            response.color*=projectedDiffuseScale/.96;
+            incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
+        } else response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
         if(camera.nprGainFloor.w>.5){
             vec3 envNormal=indirectDiffuseNormal;float angle=camera.clusterLighting.z;
             envNormal.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
             incident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(envNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
             if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);incident=mix(incident,volume.rgb,volume.w);}
         }
-        CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,camera.nprMainRadiance,
+        CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,mainRadiance,
             camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,
             physicalAo*camera.nprLightingParameters.z,response.litMask,visibility);
         vec3 combinedAmbient=response.color*illumination.ambient;
-        vec3 combinedDirect=response.color*illumination.direct+clusteredDiffuse;
+        vec3 combinedDirect=response.color*illumination.direct+clusteredDiffuse-(projectedLighting?sceneMainDiffuse:vec3(0));
         sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
+        if(projectedLighting) {
+            float weight=mix(hairViewAlpha*response.aoMask,response.litMask,visibility);
+            float scale=mix(hairShadowScale,1.0,weight)*(.5+.5*weight);
+            vec3 specularIllumination=(illumination.ambient+illumination.direct)*scale*material.featureParameters.y;
+            vec3 primary=min(sceneHairPrimary+mainHairPrimary*specularIllumination,vec3(material.matcapColor.w));
+            vec3 secondary=sceneHairSecondary+mainHairSecondary*specularIllumination;
+            beautyColor+=primary+secondary-kkSpecular-secondaryKkSpecular;
+            kkSpecular=primary;secondaryKkSpecular=secondary;
+        }
     }
     if(projectedHair&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].z>.5
         &&(camera.clusterLighting.x<.5||camera.mainLightDirection.w>.5)){
