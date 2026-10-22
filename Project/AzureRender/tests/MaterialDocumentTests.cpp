@@ -1,5 +1,8 @@
 #include "assets/MaterialData.hpp"
 #include "assets/PrimitiveGenerator.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
+#include <chrono>
+#include <fstream>
 #include <iostream>
 using namespace azurerender;
 int main(){try{
@@ -26,6 +29,24 @@ int main(){try{
     for(const auto& invalid:std::vector<nlohmann::json>{nlohmann::json{{"schemaVersion",2}},[&]{auto d=pbr.encode();d["parameters"]["roughness"]=-1;return d;}(),[&]{auto d=pbr.encode();d["textures"]["albedo"]={{"asset","assets:/bad.png"},{"usage","albedo"}};return d;}()}){bool rejected=false;try{MaterialData::parse(invalid);}catch(const std::exception&){rejected=true;}require(rejected,"Malformed material documents must fail deterministically");}
     LoadedAsset mesh;AssetMaterial a,b;a.name="A";b.name="B";mesh.materials={a,b};const auto slots=materialSlotIds(mesh);std::swap(mesh.materials[0],mesh.materials[1]);require(materialSlotIds(mesh)[1]==slots[0],"Named source slots must survive material table reordering");
     a.slotId="stable";b.slotId="stable";mesh.materials={a,b};bool duplicate=false;try{materialSlotIds(mesh);}catch(const std::exception&){duplicate=true;}require(duplicate,"Conflicting explicit slot IDs must be rejected");
+    const auto replacementPath=std::filesystem::temp_directory_path()/("azure-replacement-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azurematerial");
+    {std::ofstream output(replacementPath);output<<MaterialData::defaults("azure.pbr").encode();}
+    AssetMaterial source;source.name="face-slot";source.slotId="source-slot";source.materialClass=AssetMaterialClass::Face;
+    source.faceSdf.present=true;source.nprDiffuse.present=true;source.materialFeatures=MaterialFeatureDiffuseRamp;
+    mesh.materials={source};MaterialBinding binding;binding.path=replacementPath.u8string();
+    auto& messages=RuntimeDiagnostics::instance().messages();const auto firstMessage=messages.size();
+    applyMaterialBindings(mesh,{{"source-slot",binding}});
+    require(messages.size()>firstMessage,"Full replacement must diagnose lost character capabilities");
+    const auto& warning=messages.back();
+    require(warning.find("source-slot")!=std::string::npos&&warning.find("faceSdf")!=std::string::npos
+        &&warning.find("nprDiffuse")!=std::string::npos&&warning.find("diffuse-ramp")!=std::string::npos,
+        "Replacement diagnostic must identify the slot and discarded semantics");
+    require(mesh.materials[0].slotId==source.slotId&&mesh.materials[0].name==source.name&&!mesh.materials[0].faceSdf.present,
+        "Diagnostics must preserve explicit full replacement and stable slot identity");
+    const auto noLossMessages=messages.size();
+    applyMaterialBindings(mesh,{{"source-slot",binding}});
+    std::filesystem::remove(replacementPath);
+    require(messages.size()==noLossMessages,"Equivalent ordinary material replacement must remain quiet");
     std::cout<<"Material round trip, physical parameters, registered style interpretation and stable slot identities passed\n";
     return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

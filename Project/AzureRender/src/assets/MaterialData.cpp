@@ -1,5 +1,6 @@
 #include "MaterialData.hpp"
 #include "assets/MaterialGraph.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
 #include <cmath>
 #include <fstream>
 #include <set>
@@ -102,7 +103,28 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
     const auto slots=materialSlotIds(mesh);
     for(const auto& [id,binding]:bindings){const auto found=std::find(slots.begin(),slots.end(),id);if(found==slots.end())throw std::invalid_argument("Material slot disappeared during reimport: "+id);
         const auto index=static_cast<std::size_t>(found-slots.begin());const auto slotId=mesh.materials[index].slotId,name=mesh.materials[index].name;
-        mesh.materials[index]=MaterialData::load(std::filesystem::u8path(binding.path)).interpret([&](const std::string& uuid){return std::filesystem::u8path(binding.textures.at(uuid));});mesh.materials[index].slotId=slotId;mesh.materials[index].name=name;
+        auto replacement=MaterialData::load(std::filesystem::u8path(binding.path)).interpret([&](const std::string& uuid){return std::filesystem::u8path(binding.textures.at(uuid));});
+        const auto& source=mesh.materials[index];std::string losses;
+        const auto lost=[&](bool condition,const char* field){if(condition){if(!losses.empty())losses+=", ";losses+=field;}};
+        lost(source.materialClass!=replacement.materialClass,"class");
+        lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
+        lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
+        lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
+        lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
+        lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
+        lost(source.alphaMode!=replacement.alphaMode,"alphaMode");
+        lost(source.doubleSided!=replacement.doubleSided,"doubleSided");
+        const auto removed=source.materialFeatures&~replacement.materialFeatures;
+        for(const auto& [feature,label]:std::initializer_list<std::pair<std::uint32_t,const char*>>{
+            {MaterialFeatureHairAnisotropy,"hair-anisotropy"},{MaterialFeatureHairRamp,"hair-ramp"},
+            {MaterialFeatureDiffuseRamp,"diffuse-ramp"},{MaterialFeatureShadowColorLut,"shadow-color-lut"},
+            {MaterialFeatureSilhouetteOutline,"silhouette-outline"},{MaterialFeatureMultiplyComposite,"multiply-composite"},
+            {MaterialFeatureOverlay,"overlay"},{MaterialFeatureBrowOverlay,"brow-overlay"},
+            {MaterialFeatureSceneRefraction,"scene-refraction"},{MaterialFeatureUnlitSurface,"unlit-surface"}})
+            lost((removed&feature)!=0,label);
+        replacement.slotId=slotId;replacement.name=name;mesh.materials[index]=std::move(replacement);
+        if(!losses.empty())RuntimeDiagnostics::instance().warning("material",
+            "Full material replacement at slot "+id+" from "+binding.path+" discards source semantics: "+losses);
     }
 }
 }

@@ -27,3 +27,15 @@ build/runs/20261022-230758-main-material-integration-8fd37c/
 此次验证覆盖 CPU 生产解释与编辑回归。
 专项 GPU 自发光像素仍待验证。
 完整角色材质表达、覆盖语义及 C15 总体验收保持待项。
+
+## 完整替换诊断
+
+`applyMaterialBindings` 保持完整替换语义及槽位身份。
+特殊表面语义丢失时，通过公共诊断输出槽位及字段。
+普通等价材质替换保持安静。
+此诊断用于加载及编辑预览共用的生产路径。
+
+新增用例首先以缺少诊断失败。
+修复后验证 SDF、NPR、色带及槽位身份。
+Release 四项材质与编辑检查再次通过。
+日志为同目录 `material-replacement-regression.log`。
