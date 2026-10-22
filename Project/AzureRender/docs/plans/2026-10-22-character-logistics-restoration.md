@@ -469,6 +469,9 @@ GLB 与文档使用同一资产比较最终参数及纹理语义。
 稀疏覆盖及八次 GPU 对照见[参数覆盖验收](../acceptance/nr/material-parameter-overrides.md)。
 真实角色全槽单位覆盖的完整画面逐像素一致。
 完整画像表达和统一版本仍属于本项待验范围。
+画像加载器已校验原始 JSON 的整数版本及参数向量。
+重复功能声明会被拒绝，角色画像检查通过。
+专项范围见[画像输入验收](../acceptance/nr/material-profile-input-validation.md)。
 
 ## NR6-C16 材质输入与 GPU 绑定边界
 

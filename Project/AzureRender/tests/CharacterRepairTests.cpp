@@ -356,7 +356,7 @@ void testMaterialSurfacePacking() {
     const auto packedHair=packProjectedHairSurfaceProfile(hair);
     require(std::memcmp(&packedHair,expectedHair.data(),sizeof(packedHair))==0,
         "Typed hair packing must preserve every byte of the existing six-row ABI");
-    AssetMaterial material;auto& eye=material.eyeSurface;eye.present=true;
+    AssetMaterial material;material.materialClass=AssetMaterialClass::Eye;auto& eye=material.eyeSurface;eye.present=true;
     eye.parallaxScale=.15F;eye.matcapNormalScale=1.5F;eye.alphaPremultiply=.25F;eye.matcapShadowFloor=.75F;
     eye.highlightColor={2,3,4};eye.scatteringColor={5,6,7};eye.matcapColor={8,9,10,11};
     eye.directWeights={12,13,14};eye.uvScaleOffset={15,16,17,18};
@@ -366,7 +366,7 @@ void testMaterialSurfacePacking() {
         "Typed eye packing must preserve all authored and reserved components");
     const auto selected=packMaterialSurfaceProfile(material);
     require(std::memcmp(&selected,expectedEye.data(),sizeof(selected))==0,"Eye selects the typed eye record");
-    material.eyeSurface.present=false;material.projectedHairRamp=hair;
+    material.eyeSurface.present=false;material.materialClass=AssetMaterialClass::Hair;material.projectedHairRamp=hair;
     const auto generic=packMaterialSurfaceProfile(material);
     require(std::memcmp(&generic,expectedHair.data(),sizeof(generic))==0,"Other materials retain stable hair-compatible rows");
 }
@@ -658,6 +658,22 @@ int main(int argc,char** argv) { try {
     require(std::abs(int(m.metallicRoughnessPixels[2])-153)<=1,"Untextured metallicFactor must be preserved");
     require(std::abs(m.hairParameters[2]-6)<.001F,"Hair ramp row must retain its semantic field");
     require(std::abs(m.hairParameters[3]-.07F)<.001F,"Strand shift must be independent from ramp row");
+    for(const auto& version:std::vector<nlohmann::json>{1.5,2.5,true,nullptr}){
+        auto invalid=input;invalid["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=version;
+        std::ofstream(path)<<invalid.dump();bool rejected=false;
+        try{(void)loadGltfAsset(path.string());}catch(const std::exception&){rejected=true;}
+        require(rejected,"Material profile versions require an exact supported integer");
+    }
+    for(const auto& vector:std::vector<nlohmann::json>{nullptr,{1,2,3},{1,"bad",3,4}}){
+        auto invalid=input;invalid["materials"][0]["extras"]["azureRenderMaterial"]["styleParameters"]=vector;
+        std::ofstream(path)<<invalid.dump();bool rejected=false;
+        try{(void)loadGltfAsset(path.string());}catch(const std::exception&){rejected=true;}
+        require(rejected,"Authored material vectors must reject malformed values");
+    }
+    auto duplicateFeatures=input;duplicateFeatures["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-anisotropy"};
+    std::ofstream(path)<<duplicateFeatures.dump();bool duplicateRejected=false;
+    try{(void)loadGltfAsset(path.string());}catch(const std::exception&){duplicateRejected=true;}
+    require(duplicateRejected,"Duplicate material features must be rejected");
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
     testEyeRadialSurface(input,directory);

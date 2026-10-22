@@ -184,6 +184,32 @@ void loadMaterialProfile(
     const tinygltf::Material& material,
     AssetMaterial& result) {
     result.name = material.name.empty() ? "UnnamedMaterial" : material.name;
+    if(!material.extras_json_string.empty()) {
+        const auto authored=nlohmann::json::parse(material.extras_json_string);
+        if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
+            const auto& profile=authored.at("azureRenderMaterial");
+            const std::string context="azureRenderMaterial "+result.name
+                +(profile.is_object()&&profile.contains("composite")?" composite":"")
+                +(profile.is_object()&&profile.contains("surface")?" unlit surface":"")
+                +(profile.is_object()&&profile.contains("eyeSurface")?" eyeSurface":"");
+            if(!profile.is_object()||!profile.contains("schemaVersion")
+                ||!profile.at("schemaVersion").is_number_integer()
+                ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
+                throw std::invalid_argument(context+": unsupported schemaVersion");
+            for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
+                const auto& vector=profile.at(key);
+                if(!vector.is_array()||vector.size()!=4)throw std::invalid_argument(context+": invalid "+key);
+                for(const auto& value:vector)if(!value.is_number()||!std::isfinite(value.get<double>()))
+                    throw std::invalid_argument(context+": invalid "+key);
+            }
+            if(profile.contains("features")) {
+                const auto& features=profile.at("features");std::set<std::string> unique;
+                if(!features.is_array())throw std::invalid_argument(context+": features require a string array");
+                for(const auto& feature:features)if(!feature.is_string()||!unique.insert(feature.get<std::string>()).second)
+                    throw std::invalid_argument(context+": features require unique strings");
+            }
+        }
+    }
     if(material.extras.IsObject()&&material.extras.Has("azureSlotId")){
         const auto& identity=material.extras.Get("azureSlotId");
         if(!identity.IsString()||identity.Get<std::string>().empty())throw std::invalid_argument("azureSlotId requires a nonempty string");
