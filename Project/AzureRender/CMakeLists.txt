@@ -203,7 +203,7 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
-        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
+        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/environment_specular.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -624,6 +624,9 @@ add_dependencies(AzureRender AzureGeometryCompiler)
 add_dependencies(AzurePlayer AzureRenderShaders)
 
 if(BUILD_TESTING)
+    add_executable(AzureEnvironmentSpecularTests tests/EnvironmentSpecularTests.cpp src/render/RenderSettings.cpp src/runtime/SceneDocument.cpp)
+    target_link_libraries(AzureEnvironmentSpecularTests PRIVATE AzureRuntime AzureRenderCore)
+    add_test(NAME AzureRender.EnvironmentSpecular COMMAND AzureEnvironmentSpecularTests "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/environment_specular/dfg_reference.json" "${CMAKE_CURRENT_BINARY_DIR}/runs/environment-specular-cpu")
     add_test(NAME AzureTools.ScriptBindings COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_script_bindings.py")
     add_test(NAME AzureTools.PerformanceBudget COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_performance_budget.py")
     add_test(NAME AzureTools.GpuEnvironment COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_gpu_environment.py")
@@ -1067,6 +1070,10 @@ if(BUILD_TESTING)
         --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.CubeProbeGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.EnvironmentSpecularGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_environment_specular_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.EnvironmentSpecularGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureTools.CubemapEnvironment COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_cubemap_environment.py")
     add_test(NAME AzureEngine.ProjectedHairGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)

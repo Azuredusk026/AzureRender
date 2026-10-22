@@ -7,6 +7,7 @@
 #endif
 #include "shadow_compare.glsl"
 #include "surface_response.glsl"
+#include "environment_specular.glsl"
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 
@@ -557,6 +558,11 @@ void main() {
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     if(strandDiffuse)fresnel=vec3(0);
+    bool fittedEnvironment=camera.clusterLighting.x>.5&&camera.clusterLighting.w>.5
+        &&material.materialClass==0U;
+    vec3 environmentResponse=fittedEnvironment
+        ?ggxMultiscatterEnvironment(mix(vec3(.04),baseColor.rgb,metallic),roughness,normalDotView)
+        :fresnel;
     vec3 diffuseColor = baseColor.rgb * (1.0 - metallic) * projectedDiffuseScale;
     vec3 environmentDiffuse = textureLod(
         AZ_TEX_ENVIRONMENT,
@@ -1080,7 +1086,7 @@ void main() {
         float lastMip = float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1);
         ambientDiffuse = diffuseColor * textureLod(AZ_TEX_ENVIRONMENT,
             directionToEquirectangular(envNormal),lastMip).rgb * camera.clusterLighting.y * physicalAo;
-        ambientSpecular = fresnel * textureLod(AZ_TEX_ENVIRONMENT,
+        ambientSpecular = environmentResponse * textureLod(AZ_TEX_ENVIRONMENT,
             directionToEquirectangular(envReflection),roughness*lastMip).rgb * camera.clusterLighting.y;
         directDiffuse = clusteredDiffuse;
         directSpecular = clusteredSpecular;
@@ -1118,7 +1124,7 @@ void main() {
                 direction=worldPosition+reflectionDirection*exitDistance-camera.probeCapture.xyz;
             }
             float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
-            vec3 localSpecular=fresnel*textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
+            vec3 localSpecular=environmentResponse*textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
             if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);

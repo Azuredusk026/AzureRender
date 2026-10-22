@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R3",
+  "status": "public-contract-passed",
+  "nativeFrameEquivalenceVerified": false,
+  "formalNr5Status": "Pending",
+  "cpuReferenceCasesPerConfiguration": 1764,
+  "cpuMaximumAbsoluteError": 1.19209e-07,
+  "configurations": {
+    "debug": {
+      "gpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/gpu-production-debug/summary.json",
+        "sha256": "c3d2acc3ce100b43f980b3999ad59b52faa5c89a3a6abe79a0427c58c2febc80"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/cpu-production-debug-details.log",
+        "sha256": "5dc31625636c5a894ff22a0db9387a34461477d67edae4dca39f005a42984318"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/production-green-debug.log",
+        "sha256": "5d3dba0aecf407663f9f944b9a2ed19402c13340e86265aaf600cde81a2dbe2d"
+      },
+      "maximumQuantizationIntervalLinearError": 2.9456817674324703e-05,
+      "maximumDecodedCenterLinearError": 0.0010237330556490953,
+      "maximumOutputByteDelta": 1,
+      "backendMaximumByteDelta": 0,
+      "gpuCases": 40
+    },
+    "release": {
+      "gpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/gpu-production-release/summary.json",
+        "sha256": "4e362b4bfb6d04157e0bd3330a8399f89ca05d39e6aadf4bbf3fcdef6853a569"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/cpu-production-release-details.log",
+        "sha256": "d562c3413d10f214d3f864997c8eed3e4148be723a54beed9fc886a375980e4e"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/production-green-release.log",
+        "sha256": "bbb8e07009564fb6414fa434d0029ec20ac8c2f4ff79a8866739f0bd6f31648b"
+      },
+      "maximumQuantizationIntervalLinearError": 2.9456817674324703e-05,
+      "maximumDecodedCenterLinearError": 0.0010237330556490953,
+      "maximumOutputByteDelta": 1,
+      "backendMaximumByteDelta": 0,
+      "gpuCases": 40
+    }
+  },
+  "jointCapture": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/joint-production/receipt.json",
+    "sha256": "85d5c82fca4e7cec4e3203f2991ebb8319ebf028b646d24d5a3901d0aece5c88"
+  },
+  "candidateUpgrade": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/candidate-upgrade/receipt.json",
+    "sha256": "82e241279d72436deed111daabf05a37a7600c15051f3e5fc8890f165508923a"
+  },
+  "productionRed": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/production-red-debug.log",
+    "sha256": "a3047c9c3c171bd5ed3fb07837708c09225710a3c3ef420e3d7032f623ad9859"
+  },
+  "nativeStaticAnalysis": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/reflection-dfg/receipt.json",
+    "sha256": "060f4d32e247f541ad5580646b121b1ffa8a27c90f1d11646aca41eba3449ca4"
+  },
+  "visualReview": {
+    "views": [
+      "face",
+      "wide"
+    ],
+    "sourceCount": 1158,
+    "remaining": [
+      "hair highlights",
+      "mouth shadow",
+      "dynamic floor reflections",
+      "GI coverage and native bindings"
+    ]
+  },
+  "sources": [
+    {
+      "path": "src/render/EnvironmentSpecular.hpp",
+      "sha256": "fa0b819bcd7e2365226b6cd927e233971155b3d2ccdd0c30a6d824d936b0fb90"
+    },
+    {
+      "path": "shaders/environment_specular.glsl",
+      "sha256": "bfc83885b167d1a80c1247b0faf98301c6ae34f29279be0ff174b0fc990b6532"
+    },
+    {
+      "path": "src/render/RenderSettings.hpp",
+      "sha256": "ae6ba5ddf37359b3354608e53e5ee9a5540204869cfdcefe4c1f0db70027abca"
+    },
+    {
+      "path": "src/render/RenderSettings.cpp",
+      "sha256": "0e10c966e81160c1c84bcecd02ae12669e4ec5d734fa4211b18b0dcf5fb236b7"
+    },
+    {
+      "path": "src/runtime/LevelRenderSettings.hpp",
+      "sha256": "c77c3fcb72f9d5f10310756893ef06e5eba94af8d635bc5632e45ca5ef6e4db3"
+    },
+    {
+      "path": "src/runtime/SceneDocument.cpp",
+      "sha256": "63e80674f08367c8495587b4d85d56bbfda4920f8da4d67d61514e88ab7360f7"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "sha256": "27177fe9753263042c3917ed7b52a4b904191484de9cecf6e3e5838987701bc2"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "sha256": "210d574ed4f25bae95d4ad85710add74b0ae99e0d7097cc297611eb99cff7357"
+    },
+    {
+      "path": "tests/EnvironmentSpecularTests.cpp",
+      "sha256": "25dc72b756983191163aa4df7ea132bc03655a8dbe6310727f424ad1a7c2715d"
+    },
+    {
+      "path": "tools/test_environment_specular_gpu.py",
+      "sha256": "8c73b2d19a28de2b6e5805efa20647f5ba43bd0cccce3bf56f2f87c5f0eb50d6"
+    },
+    {
+      "path": "tests/fixtures/environment_specular/dfg_reference.json",
+      "sha256": "7a547d686fc9fcc12a4aa88809885c90053e27d9a50e8a9fdb337a902744e25b"
+    },
+    {
+      "path": "tests/fixtures/environment_specular/gpu_reference.json",
+      "sha256": "810c2bb4e7e67cfc051bf04a344c76d04a6079dc254d5154dd69054b3ce6c479"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "d79a0e0490935d4e6c5cecde8538912506cdd865c82a3d5b43b9b6df04c9c579"
+    }
+  ]
+}

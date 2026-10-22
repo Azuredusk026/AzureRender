@@ -1,5 +1,8 @@
 # 开发总计划
 
+环境镜面积分响应通过双配置数学及 GPU 检查。
+原生运行待项见[镜面响应验收](../acceptance/nr/environment-specular.md)。
+
 六面反射及独立投影原点通过双配置专项检查。
 原生外观待项见[六面反射验收](../acceptance/nr/reflection-cube.md)。
 

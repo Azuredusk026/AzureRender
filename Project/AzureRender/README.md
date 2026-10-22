@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+环境镜面支持显式多重散射拟合及介电反射率。
+验证与原生待项见[镜面响应验收](docs/acceptance/nr/environment-specular.md)。
+
 局部反射支持原生六面 HDR 层级与独立投影原点。
 公共机制及实景待项见[六面反射验收](docs/acceptance/nr/reflection-cube.md)。
 

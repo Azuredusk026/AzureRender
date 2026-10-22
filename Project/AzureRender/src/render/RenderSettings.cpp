@@ -134,6 +134,7 @@ RenderSettings migrateRenderSettings(
     }
     if (sourceSchemaVersion < 9) settings.antiAliasing = 1;
     if (sourceSchemaVersion < 14) settings.grade.lut = {};
+    if (sourceSchemaVersion < 15) settings.environmentSpecularModel=EnvironmentSpecularModel::LegacySchlick;
     validateRenderSettings(settings);
     return settings;
 }
@@ -178,6 +179,8 @@ void validateRenderSettings(const RenderSettings& settings) {
         }
     };
     if(settings.pathTraceSamples<1||settings.pathTraceSamples>65536||settings.pathTraceBounces<1||settings.pathTraceBounces>16) throw std::invalid_argument("Path tracing requires 1..65536 samples and 1..16 bounces");
+    if(environmentSpecularModelName(settings.environmentSpecularModel)=="unknown")
+        throw std::invalid_argument("Unknown environment specular model");
     if (static_cast<std::uint32_t>(settings.sky.mode)>2) throw std::invalid_argument("Unknown sky mode");
     requireRange(settings.sky.intensity,0.F,32.F,"sky.intensity");
     requireRange(settings.sky.rotationDegrees,-360.F,360.F,"sky.rotationDegrees");

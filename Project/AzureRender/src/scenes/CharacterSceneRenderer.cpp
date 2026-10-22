@@ -3237,7 +3237,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.skyForward={cameraForward[0],cameraForward[1],cameraForward[2],0};
     uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
     uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
-    uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
+    uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,float(settings.environmentSpecularModel)};
     uniform.cameraPosition = {
         cameraPosition_[0], cameraPosition_[1], cameraPosition_[2], 1.0F,
     };

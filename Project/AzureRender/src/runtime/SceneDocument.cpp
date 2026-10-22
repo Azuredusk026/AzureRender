@@ -100,6 +100,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "pathTracing " << document.renderSettings.pathTraceSamples << ' ' << document.renderSettings.pathTraceBounces << '\n'
            << "pathTracingPreview " << document.renderSettings.pathTraceDenoise << ' ' << document.renderSettings.pathTraceSeed << '\n'
            << "sceneLighting " << std::boolalpha << document.renderSettings.sceneLightingEnabled << '\n'
+           << "environmentSpecularModel " << std::quoted(std::string(environmentSpecularModelName(document.renderSettings.environmentSpecularModel))) << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -309,6 +310,12 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         throw std::runtime_error("Invalid .azscene pathTracingPreview");
     if(renderSettingsVersion>=13 && (!(input>>key>>std::boolalpha>>document.renderSettings.sceneLightingEnabled)||key!="sceneLighting"))
         throw std::runtime_error("Invalid .azscene sceneLighting");
+    if(renderSettingsVersion>=15){
+        std::string model;
+        if(!(input>>key>>std::quoted(model))||key!="environmentSpecularModel")
+            throw std::runtime_error("Invalid .azscene environmentSpecularModel");
+        document.renderSettings.environmentSpecularModel=environmentSpecularModelFromString(model);
+    }
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)
         || key != "innerOutlineEnabled") {
