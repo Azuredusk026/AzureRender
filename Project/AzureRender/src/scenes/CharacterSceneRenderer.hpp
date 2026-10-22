@@ -128,6 +128,8 @@ private:
     std::array<VkFramebuffer,kMaxFramesInFlight> outlineMaskFramebuffers_{};
     VkRenderPass outlineMaskPass_=VK_NULL_HANDLE;
     VkPipeline outlineMaskPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskMirroredPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineMaskDoubleSidedPipeline_=VK_NULL_HANDLE;
     VkExtent2D outlineMaskViewExtent_{};
     std::uint32_t outlineMaskMaxDimension_=0;
     void prepareOutlineMaskResources(const std::vector<std::vector<float>>& opacities,RecordingBufferSet& buffers);

@@ -193,11 +193,27 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 ## 轮廓与验证
 
 `silhouette-outline` 按材质开启背面壳外轮廓。
+显式外轮廓使用每实例独立的实面覆盖遮罩。
+壳片元在自身覆盖内部被丢弃，外缘保留描边。
+后景实例的覆盖保持前景实例的外缘。
+
+遮罩包含同实例可见的非透明表面。
+透明覆盖层与展示底座按各自绘制规则筛除。
+单面剔除、镜像绕序与双面状态跟随正式表面。
+节点渐隐继续使用完整覆盖及独立透明度。
+
+每次外壳绘制均设置有效瓦片或无瓦片哨兵。
+传统全局描边的全不透明实例保持无瓦片合批。
+遮罩图集受设备尺寸与每帧 128 MiB 预算约束。
+布局按实际渲染分辨率计算容量。
+
 内部边缘继续消费场景的 `innerOutline` 设置。
 通用场景表面使用其原有轮廓规则。
 场景角色特征可独立于全局 `stylized` 开关消费。
 
 `AzureRender.CharacterRepair` 验证画像加载和拒绝条件。
 `AzureTools.NativeCharacter` 验证原生材质转换。
+`AzureRender.OutlineCoverageRecording` 验证瓦片归属与剔除。
+`AzureEngine.SilhouetteCoverageGpu` 验证内部覆盖与实例重叠。
 场景灯光图像验证使用 `test_scene_character_gpu.py`。
 测试证据按程序与着色器指纹关联到验收批次。

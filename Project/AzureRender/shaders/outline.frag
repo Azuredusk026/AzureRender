@@ -11,7 +11,7 @@ layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
 void main() {
-    if(nodeOpacity.value<1.0) {
+    if(nodeOpacity.tile!=0xffffffffu) {
         ivec2 viewSize=ivec2(camera.depth.zw);
         uint columns=uint(textureSize(outlineMask,0).x/viewSize.x);
         ivec2 offset=ivec2(nodeOpacity.tile%columns,nodeOpacity.tile/columns)*viewSize;

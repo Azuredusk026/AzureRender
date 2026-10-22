@@ -2,6 +2,8 @@
 
 二维发丝高光与表面响应已通过双配置数值检查。
 范围及保留门禁见[高光验收](../acceptance/nr/projected-hair.md)。
+实例外轮廓覆盖与真实脸部已完成分项验证。
+结果及兼容待项见[外轮廓验收](../acceptance/nr/outline-coverage.md)。
 
 ## 资源验证计划
 

@@ -1,0 +1,243 @@
+{
+  "scope": "NR6 silhouette coverage and mask-culling parity; original joint hero assets retained",
+  "implementationVerified": true,
+  "allRequestedChecksPassed": false,
+  "status": "implementation-verified-with-unattributed-legacy-outline-failure",
+  "sourceBase": "f0dbcef656b005cf8c6ea20c6365f8278b6559bb",
+  "productionFiles": [
+    "CMakeLists.txt",
+    "src/scenes/CharacterSceneRenderer.cpp",
+    "src/scenes/CharacterSceneRenderer.hpp",
+    "src/render/OutlineMaskLayout.hpp",
+    "shaders/outline.frag"
+  ],
+  "builds": {
+    "debug": {
+      "passed": true,
+      "log": "build-debug.log"
+    },
+    "release": {
+      "passed": true,
+      "log": "build-release.log"
+    }
+  },
+  "cpu": {
+    "recordingCombinationsPerConfiguration": 48,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "affectedSuites": [
+      "PrimitiveOpacity",
+      "NodeOpacityRecording",
+      "OutlineCoverageRecording",
+      "FrameTaskScheduler",
+      "NullRhiPass"
+    ],
+    "logs": [
+      "cpu-debug.log",
+      "cpu-release.log",
+      "nullrhi-release.log"
+    ],
+    "redLog": "recording-red.log",
+    "redExpectedFailure": "Explicit opaque silhouettes and fading instances require a mask pass"
+  },
+  "ctestGpuRegistration": {
+    "debug": {
+      "name": "AzureEngine.SilhouetteCoverageGpu",
+      "properties": {
+        "LABELS": [
+          "gpu"
+        ],
+        "RUN_SERIAL": true,
+        "TIMEOUT": 600.0,
+        "WORKING_DIRECTORY": "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug"
+      },
+      "source": "ctest-gpu-registration-debug.json"
+    },
+    "release": {
+      "name": "AzureEngine.SilhouetteCoverageGpu",
+      "properties": {
+        "LABELS": [
+          "gpu"
+        ],
+        "RUN_SERIAL": true,
+        "TIMEOUT": 600.0,
+        "WORKING_DIRECTORY": "D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release"
+      },
+      "source": "ctest-gpu-registration-release.json"
+    }
+  },
+  "gpu": {
+    "red": {
+      "passed": false,
+      "metrics": {
+        "single-fullInteriorChangedPixels": 326,
+        "single-halfInteriorChangedPixels": 0,
+        "outerRimPixels": 472,
+        "halfOuterRimPixels": 238,
+        "overlapExpectedRimPixels": 262,
+        "overlapFullMissingRimPixels": 0,
+        "overlapHalfExpectedPixels": 130,
+        "overlapHalfMissingRimPixels": 0,
+        "fallbackMaximumDifference": 0,
+        "culledCardPrimaryMaximumDifference": 0,
+        "backface-halfMaximumDifference": 19,
+        "backface-fullMaximumDifference": 0,
+        "mirrored-backface-halfMaximumDifference": 19
+      },
+      "failures": [
+        "single-full must preserve opaque coverage interior",
+        "backface-half must retain the same visible silhouette without the culled card",
+        "mirrored-backface-half must retain the same visible silhouette without the culled card"
+      ]
+    },
+    "green": {
+      "debug": {
+        "passed": true,
+        "metrics": {
+          "single-fullInteriorChangedPixels": 0,
+          "single-halfInteriorChangedPixels": 0,
+          "outerRimPixels": 472,
+          "halfOuterRimPixels": 238,
+          "overlapExpectedRimPixels": 262,
+          "overlapFullMissingRimPixels": 0,
+          "overlapHalfExpectedPixels": 130,
+          "overlapHalfMissingRimPixels": 0,
+          "fallbackMaximumDifference": 0,
+          "culledCardPrimaryMaximumDifference": 0,
+          "backface-halfMaximumDifference": 0,
+          "backface-fullMaximumDifference": 0,
+          "mirrored-backface-halfMaximumDifference": 0
+        },
+        "failures": []
+      },
+      "release": {
+        "passed": true,
+        "metrics": {
+          "single-fullInteriorChangedPixels": 0,
+          "single-halfInteriorChangedPixels": 0,
+          "outerRimPixels": 472,
+          "halfOuterRimPixels": 238,
+          "overlapExpectedRimPixels": 262,
+          "overlapFullMissingRimPixels": 0,
+          "overlapHalfExpectedPixels": 130,
+          "overlapHalfMissingRimPixels": 0,
+          "fallbackMaximumDifference": 0,
+          "culledCardPrimaryMaximumDifference": 0,
+          "backface-halfMaximumDifference": 0,
+          "backface-fullMaximumDifference": 0,
+          "mirrored-backface-halfMaximumDifference": 0
+        },
+        "failures": []
+      }
+    },
+    "validation": {
+      "debug": {
+        "enabled": true,
+        "captures": 19,
+        "playerSha256": "6fb6b9c427845a12e9bde548b5fd294bf0bf23385b14af7d6cb41da2f57b1a67"
+      },
+      "release": {
+        "enabled": false,
+        "captures": 19,
+        "playerSha256": "0e6fc8f1945beddc48af45cee2a7595fbbacb1afdcc69afb24cb5de8f13751c1"
+      }
+    },
+    "nodeOpacity": {
+      "captures": 24,
+      "validationEnabled": true,
+      "validationErrors": 0,
+      "summary": "node-opacity-green/summary.json"
+    },
+    "legacyOutline": {
+      "status": "failed-unattributed",
+      "plannedCaptures": 12,
+      "completedCubeCaptures": 2,
+      "completedSphereCaptures": 4,
+      "cubeFailure": "public hard-edge cube contributes <=100 visible exterior pixels at full-body-front 720",
+      "cubeLog": "outline-compatibility-editor.log",
+      "sphereFixture": "legacy-sphere.gltf",
+      "sphereFixtureSource": "create_legacy_sphere.py",
+      "sphereLicense": "CC0-1.0",
+      "sphereLog": "outline-sphere.log",
+      "sphereFullBody720": {
+        "passed": true,
+        "changedExteriorPixels": 1330,
+        "exteriorDistanceP99Pixels": 1.4142135381698608
+      },
+      "sphereFace720": {
+        "passed": false,
+        "changedExteriorPixels": 1318,
+        "exteriorDistanceP99Pixels": 10,
+        "maximum": 2.25
+      },
+      "attribution": "No frozen pre-change executable tested with the same cube/sphere fixture; regression origin is unproven.",
+      "hostCorrection": "AzurePlayer rejects --asset; original test uses AzureRender --asset entry point",
+      "failedStartupLog": "outline-compatibility-green/full-body-front-720-enabled.log"
+    }
+  },
+  "realHero": {
+    "capturesPerStage": 2,
+    "comparison": "face-comparison/summary.json",
+    "memoryAllocations": {
+      "baseline": [
+        "Outline mask allocated: frame=0, instances=1, bytes=2073600"
+      ],
+      "hair-outline-disabled": [
+        "Outline mask allocated: frame=0, instances=1, bytes=2073600"
+      ]
+    },
+    "bangsInteriorDarkPixels": {
+      "red": 99,
+      "green": 46,
+      "greenHairOutlineDisabled": 46
+    },
+    "bangsInteriorGreenVersusHairOutlineDisabledMaximumDifference": 0,
+    "sourceProjects": "face-project-index.json",
+    "validationEnabled": false
+  },
+  "budget": {
+    "maskBudgetBytesPerFrame": 134217728,
+    "addedGraphicsPipelines": 2,
+    "capacityArithmetic": "capacity-audit.json",
+    "currentProjectInventory": "current-project-capacity.json",
+    "sourceInstancesWithExplicitOutline": 1,
+    "resourceCount": 402,
+    "releaseAfterEveryCapture": "buffers=0 images=0",
+    "formalPerformanceBenchmark": false
+  },
+  "indexes": {
+    "sources": "source-index.json",
+    "images": "image-index.json"
+  },
+  "limits": [
+    "Memory capacities use actual render extent; supersampling increases tile bytes.",
+    "This change verifies projected exterior coverage, not a complete native-game rendering match.",
+    "Release and real-face captures disable validation; the Debug 19-case and 24-case regressions enable it.",
+    "The legacy multi-camera outline script retains an unattributed failure; its gate has not passed."
+  ],
+  "schemaVersion": 1,
+  "recordedBeforeCommit": true,
+  "runRoot": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/character/outline-coverage",
+  "sourceFingerprints": {
+    "CMakeLists.txt": "d9bbd972d6f3ecf34941ada1544369850138ced4ff37ec7ea960856d295f25d1",
+    "src/scenes/CharacterSceneRenderer.cpp": "0f1f5bbf49af1a899e4734b29960e72383f19d3020f386ef10a6ccd50cb179e0",
+    "src/scenes/CharacterSceneRenderer.hpp": "fc1a8dd7ffcf5ea606441d5c09f09939c23a6df783c9a57e63d1d05a52411f63",
+    "src/render/OutlineMaskLayout.hpp": "9b902887879b2bfa7f1c655ffe21c388734d1357874a5860b423bdcadb53dc05",
+    "shaders/outline.frag": "7ed97680fe9076db29e28b37a25108ce59b3359638c784333e849efafb839d9e",
+    "tests/OutlineCoverageRecordingTests.cpp": "d4815387fb68d1ea9921adc5cf014c4b6e19f9e4b9d4e361a3c1e8c996222a10",
+    "tools/test_silhouette_coverage_gpu.py": "63641385c9423fc27a5786adb50add66080e7a11adcf84ceb8e2ceba0861afbc",
+    "docs/runtime/character-material-profile.md": "35b5efc90eeee79a0516ca10864ae4fee62e080b709b83757254553457b4ec42",
+    "build\\ninja-msvc-debug\\AzurePlayer.exe": "6fb6b9c427845a12e9bde548b5fd294bf0bf23385b14af7d6cb41da2f57b1a67",
+    "build\\ninja-msvc-debug\\AzureOutlineCoverageRecordingTests.exe": "f9e91e195ed901dc8b3ed9d5e460cf79d54a0129b36347ae45c88af2bfed5b4d",
+    "build\\ninja-msvc-debug\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "build\\ninja-msvc-release\\AzurePlayer.exe": "0e6fc8f1945beddc48af45cee2a7595fbbacb1afdcc69afb24cb5de8f13751c1",
+    "build\\ninja-msvc-release\\AzureOutlineCoverageRecordingTests.exe": "d186fe28c7bb89bf09d0fc13760021fed786389b9cce661e6ef516319f544ebf",
+    "build\\ninja-msvc-release\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "build/ninja-msvc-release/AzureRender.exe": "f2617a09ce18e9e1142ce36c0557f4caedeea563716f0d54c2881b10830e4644",
+    "build/ninja-msvc-debug/AzureRender.exe": "14926ab0eebed213e129a6a65c59ed4c2ecc39f0730225d35d718a2fef1eef9e"
+  },
+  "rawReceiptSha256": "6cbd16beab1f4eb5731869a2d995b100534766c690fde10518209f85265a0e42",
+  "imageIndexSha256": "1fb024c5fac8fa1d360acfe43d9e35127d612f41caaeb22748d430ce1e4ee626"
+}

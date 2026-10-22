@@ -12,7 +12,7 @@ struct OutlineMaskLayout {
     std::vector<std::uint32_t> instanceTiles;
 };
 
-// Each fading instance owns a full camera footprint. Other instances cannot
+// Each masked instance owns a full camera footprint. Other instances cannot
 // erase its outline when their silhouettes overlap in the camera view.
 inline OutlineMaskLayout makeOutlineMaskLayout(std::size_t instances,
     const std::vector<std::uint32_t>& masked, std::uint32_t viewWidth,

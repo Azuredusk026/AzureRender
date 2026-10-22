@@ -52,6 +52,12 @@ Matrix4 primitiveGizmoTransform(const RecordingGizmoState& state,std::size_t pri
             multiply(rotationZ(state.rotation[2]*radians),scale(state.scale[0],state.scale[1],state.scale[2]))));
 }
 
+bool primitiveMirroredTransform(const Matrix4& model,const RecordingGizmoState& gizmo,std::size_t primitive) {
+    const bool gizmoMirrored=gizmo.active&&gizmo.selectedPrimitive==static_cast<std::int32_t>(primitive)
+        &&gizmo.scale[0]*gizmo.scale[1]*gizmo.scale[2]<0;
+    return scene::mirroredTransform(model)!=gizmoMirrored;
+}
+
 std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
     std::uint64_t bytes=0;
     for(const auto& m:asset.materials)
@@ -2176,7 +2182,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
     if(outlineMaskPass_)rhi_->destroyRenderPass(outlineMaskPass_);outlineMaskPass_=VK_NULL_HANDLE;
 }
 void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::vector<float>>& opacities,RecordingBufferSet& buffers) {
-    std::vector<std::uint32_t> fading;
+    std::vector<std::uint32_t> masked;
     std::vector<bool> visible(sceneInstances_.size(),false);
     for(const auto& span:visibleSpansByMeshKey_)
         for(std::uint32_t index=span[1];index<span[1]+span[2];++index)visible[index]=true;
@@ -2187,15 +2193,16 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
         for(const auto& primitive:mesh.primitives){
             const auto& material=mesh.materials[primitive.materialIndex];
             if(material.alphaMode==AssetAlphaMode::Blend||material.materialClass==AssetMaterialClass::Overlay||material.showcasePlatform>.5F)continue;
+            const bool explicitOutline=(material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0;
             if((renderSettings_->sceneLightingEnabled||!renderSettings_->silhouetteOutlineEnabled)
-                &&!(material.materialFeatures&MaterialFeatureSilhouetteOutline))continue;
+                &&!explicitOutline)continue;
             forEachPrimitiveOpacityRun(opacities,primitive.nodeIndex,instance.sourceIndex,1,[&](const PrimitiveOpacityRun& run){
-                needed|=run.opacity>0&&run.opacity<1;
+                needed|=run.opacity>0&&(explicitOutline||run.opacity<1);
             });
         }
-        if(needed)fading.push_back(instance.sourceIndex);
+        if(needed)masked.push_back(instance.sourceIndex);
     }
-    const auto layout=makeOutlineMaskLayout(sceneInstances_.size(),fading,
+    const auto layout=makeOutlineMaskLayout(sceneInstances_.size(),masked,
         outlineMaskViewExtent_.width,outlineMaskViewExtent_.height,outlineMaskMaxDimension_);
     auto& mask=outlineMasks_[currentFrame_];
     if(mask.image.width!=layout.width||mask.image.height!=layout.height){
@@ -2209,7 +2216,7 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
             mask.view=rhi_->createImageView(mask.image.image,VK_FORMAT_R8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT,1);
             outlineMaskFramebuffers_[currentFrame_]=rhi_->createFramebuffer({outlineMaskPass_,{mask.view},layout.width,layout.height});
             RuntimeDiagnostics::instance().info("render","Outline mask allocated: frame="+std::to_string(currentFrame_)
-                +", instances="+std::to_string(fading.size())+", bytes="+std::to_string(std::uint64_t{layout.width}*layout.height));
+                +", instances="+std::to_string(masked.size())+", bytes="+std::to_string(std::uint64_t{layout.width}*layout.height));
         }
     }
     const auto& fallback=gpuMaterials_[0].baseColor;
@@ -2226,7 +2233,6 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
 }
 
 void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands) {
-    commands.bindPipeline(outlineMaskPipeline_);
     if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
     const auto columns=snapshot.buffers.outlineMaskExtent.width/context.renderExtent.width;
     for(const auto& span:snapshot.visibleSpans){
@@ -2246,6 +2252,10 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
                 if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay||m.showcasePlatform>.5F)continue;
                 forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,instance,1,[&](const PrimitiveOpacityRun& run){
                     if(run.opacity==0)return;
+                    const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(instance).model,
+                        snapshot.gizmo,&primitive-mesh.primitives.data());
+                    commands.bindPipeline(m.doubleSided?outlineMaskDoubleSidedPipeline_
+                        :mirrored?outlineMaskMirroredPipeline_:outlineMaskPipeline_);
                     const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
                     if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
                     MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
@@ -2859,8 +2869,15 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
         auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
         maskDesc.vertexShader=maskVertex;
-        maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;maskDesc.cullMode=VK_CULL_MODE_NONE;
-        outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);rhi_->destroyShaderModule(maskModule);rhi_->destroyShaderModule(maskVertex);
+        maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
+        maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+        maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+        maskDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
+        outlineMaskMirroredPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+        maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;maskDesc.cullMode=VK_CULL_MODE_NONE;
+        outlineMaskDoubleSidedPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+        rhi_->destroyShaderModule(maskModule);rhi_->destroyShaderModule(maskVertex);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
         outlineDesc.vertexShader = outlineVertexModule;
@@ -2941,7 +2958,8 @@ void CharacterSceneRenderer::destroyResources() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
-             &overlayDepthPipeline_,&outlineMaskPipeline_}) {
+             &overlayDepthPipeline_,&outlineMaskPipeline_,
+             &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -3080,7 +3098,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
-             &overlayDepthPipeline_,&outlineMaskPipeline_}) {
+             &overlayDepthPipeline_,&outlineMaskPipeline_,
+             &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
             *pipeline = VK_NULL_HANDLE;
@@ -3843,18 +3862,20 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                     }
                     forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,[&](const PrimitiveOpacityRun& run) {
                         if (run.opacity == 0) return;
-                        if(run.opacity==1){
-                            commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
-                                sizeof(MaterialPushConstants)+offsetof(MorphPushConstants,nodeOpacity),&run.opacity,sizeof(run.opacity));
-                            commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,run.firstInstance);
-                            if(counters){++counters->drawCalls;++counters->pushConstantUpdates;}
-                        }else for(std::uint32_t index=0;index<run.instanceCount;++index){
+                        for(std::uint32_t index=0;index<run.instanceCount;){
+                            const auto source=run.firstInstance+index;
+                            const auto tile=snapshot->buffers.outlineMaskTiles.at(source);
+                            std::uint32_t count=1;
+                            if(tile==std::numeric_limits<std::uint32_t>::max())
+                                while(index+count<run.instanceCount
+                                    &&snapshot->buffers.outlineMaskTiles.at(source+count)==tile)++count;
                             struct MaskPush {std::uint32_t tile;float opacity;};
-                            const MaskPush mask{snapshot->buffers.outlineMaskTiles.at(run.firstInstance+index),run.opacity};
+                            const MaskPush mask{tile,run.opacity};
                             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
                                 sizeof(MaterialPushConstants)+offsetof(MorphPushConstants,textureBaseIndex),&mask,sizeof(mask));
-                            commands.drawIndexed(primitive.indexCount,primitive.firstIndex,1,run.firstInstance+index);
+                            commands.drawIndexed(primitive.indexCount,primitive.firstIndex,count,source);
                             if(counters){++counters->drawCalls;++counters->pushConstantUpdates;}
+                            index+=count;
                         }
                     });
                 }
@@ -3953,12 +3974,9 @@ void CharacterSceneRenderer::drawPrimitive(
     }
     const bool blend = material.alphaMode == AssetAlphaMode::Blend;
     const auto& model = snapshot ? snapshot->instances.at(firstInstance).model : sceneInstances_.at(firstInstance).model;
-    bool mirrored = scene::mirroredTransform(model);
-    const auto selected = snapshot ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_;
-    const auto active = snapshot ? snapshot->gizmo.active : gizmoActive_;
-    const auto& gizmoScale = snapshot ? snapshot->gizmo.scale : gizmoScale_;
-    if (active && selected == static_cast<std::int32_t>(&primitive - mesh.primitives.data()))
-        mirrored ^= gizmoScale[0]*gizmoScale[1]*gizmoScale[2] < 0;
+    const RecordingGizmoState gizmo=snapshot? snapshot->gizmo
+        :RecordingGizmoState{selectedPrimitiveIndex_,gizmoActive_,gizmoTranslation_,gizmoRotation_,gizmoScale_};
+    const bool mirrored=primitiveMirroredTransform(model,gizmo,&primitive-mesh.primitives.data());
     const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
     const VkPipeline pipeline = multiplyComposite
         ? (material.doubleSided?multiplyDoubleSidedPipeline_:mirrored?multiplyMirroredPipeline_:multiplyPipeline_)
@@ -4011,8 +4029,6 @@ void CharacterSceneRenderer::drawPrimitive(
             textureBase
             + primitive.materialIndex * kMaterialTextureSlots;
     }
-    const RecordingGizmoState gizmo=snapshot? snapshot->gizmo
-        :RecordingGizmoState{selectedPrimitiveIndex_,gizmoActive_,gizmoTranslation_,gizmoRotation_,gizmoScale_};
     morphConstants.gizmoTransform=primitiveGizmoTransform(gizmo,&primitive-mesh.primitives.data());
     commands.pushConstants(
         pipelineLayout_,
