@@ -74,11 +74,20 @@
     "roughness": 0.75,
     "metallic": 0.0,
     "emissiveStrength": 0.0,
+    "transmission": 0.0,
+    "ior": 1.5,
+    "thickness": 0.0,
+    "attenuationDistance": 0.0,
+    "attenuationColor": [1.0, 1.0, 1.0, 1.0],
     "doubleSided": false
   },
   "textures": {}
 }
 ```
+
+正值 `emissiveStrength` 启用运行材质的自发光功能位。
+自发光颜色来自 `emissive` 纹理，缺省纹理为黑色。
+PBR 与 Stylized 使用相同的自发光解释规则。
 
 | 参数 | 范围 | 默认值 |
 | --- | --- | --- |

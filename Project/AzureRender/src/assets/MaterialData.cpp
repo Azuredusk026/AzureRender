@@ -89,7 +89,9 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     result.emissiveStrength=parameters.at("emissiveStrength").get<float>();result.doubleSided=parameters.at("doubleSided").get<bool>();
     result.transmission=parameters.value("transmission",0.F);result.ior=parameters.value("ior",1.5F);result.thickness=parameters.value("thickness",0.F);result.attenuationDistance=parameters.value("attenuationDistance",0.F);
     if(parameters.contains("attenuationColor"))for(unsigned c=0;c<3;++c)result.attenuationColor[c]=parameters.at("attenuationColor")[c].get<float>();
-    MaterialTypeRegistry::builtins().type(typeId).interpret(result,parameters);return result;
+    MaterialTypeRegistry::builtins().type(typeId).interpret(result,parameters);
+    if(result.emissiveStrength>0)result.materialFeatures|=MaterialFeatureEmissiveMask;
+    return result;
 }
 std::vector<std::string> materialSlotIds(const LoadedAsset& mesh){
     std::map<std::string,unsigned> names;for(const auto& material:mesh.materials)++names[material.name];

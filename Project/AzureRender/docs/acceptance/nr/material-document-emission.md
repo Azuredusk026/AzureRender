@@ -1,0 +1,29 @@
+# 材质文档自发光解释
+
+日期：2026-10-22。范围：NR6-C15 的自发光子项。
+公共材质文档通过 `MaterialData::interpret` 生成运行参数。
+正值自发光强度启用 `MaterialFeatureEmissiveMask`。
+注册类型的其他功能位保持各自语义。
+
+PBR 与 Stylized 均覆盖保存、解析和运行解释。
+零强度保留缺省功能位，颜色仍来自自发光纹理。
+纹理缺省值为黑色。
+材质文档示例包含注册表要求的完整参数。
+
+## 验证范围
+
+新增测试首先在缺少功能位时失败。
+失败信息为 `Saved emissive strength must enable the shader emission consumer`。
+修复后 Release 的四项材质检查通过。
+范围覆盖文档、材质图、材质图编辑及槽位编辑。
+
+运行记录位于以下目录：
+
+```text
+build/runs/20261022-230758-main-material-integration-8fd37c/
+```
+
+日志为 `material-contract-regression.log`。
+此次验证覆盖 CPU 生产解释与编辑回归。
+专项 GPU 自发光像素仍待验证。
+完整角色材质表达、覆盖语义及 C15 总体验收保持待项。

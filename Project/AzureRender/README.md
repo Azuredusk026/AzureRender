@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+公共材质文档的正值自发光强度启用对应功能位。
+CPU 与编辑回归范围见[解释验证](docs/acceptance/nr/material-document-emission.md)。
+
 渲染接入缺口与架构约束已纳入[当前计划](docs/plans/2026-10-22-render-capability-integration-audit.md)。
 环形多层高光、距离描边和公共材质制作仍有明确待项。
 专项候选与主项目接入分别验收。
