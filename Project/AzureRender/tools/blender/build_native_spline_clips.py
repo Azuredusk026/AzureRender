@@ -62,6 +62,7 @@ def main():
     inputs = [manifest_path, args.inventory, args.world, args.dependencies, Path(__file__),
               tools / 'endfield_native/spline_bake.py', tools / 'endfield_native/vfx_profile.py',
               tools / 'blender/native_spline_materials.py',
+              tools / 'blender/native_surface_materials.py',
               tools / 'blender/bake_material_channels.py']
     inputs.extend(args.extractor_src / name for name in (
         'blender_scene_materials.py', 'blender_scene_effect_layers.py',

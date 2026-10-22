@@ -1314,7 +1314,8 @@
       ],
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
-        "docs/acceptance/nr/irradiance-coverage.md"
+        "docs/acceptance/nr/irradiance-coverage.md",
+        "docs/acceptance/nr/floor-surface-conversion.md"
       ],
       "requiredAcceptance": [
         "NR4.delivery"

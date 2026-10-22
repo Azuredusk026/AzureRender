@@ -10,7 +10,8 @@ import json
 import bpy
 
 import blender_scene_effect_layers as _effects_source
-from blender_scene_materials import create_material as _create_surface, texture_image
+from blender_scene_materials import texture_image
+from native_surface_materials import create_material as _create_surface
 from endfield_scene_material_contract import reference_key, resolve_export_path, validate_texture_sampler
 from endfield_native.vfx_profile import unlit_vfx_profile
 

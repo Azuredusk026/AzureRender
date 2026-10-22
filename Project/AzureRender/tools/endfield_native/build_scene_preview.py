@@ -36,7 +36,8 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     sys.path.insert(0, str(source))
     from blender_build_map02_chunk_20260727 import import_obj, unity_matrix
-    from blender_scene_materials import create_material
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
+    from native_surface_materials import create_material
     from endfield_scene_material_contract import load_catalog, reference_key
     manifest_path = probe / 'scene_manifest.json'
     manifest = json.loads(manifest_path.read_text(encoding='utf8'))
@@ -156,7 +157,9 @@ def main():
                   source_entities=len(data['renderers']), shared_draw_resources=len(draw_cache),
                   maximum_source_matrix_error=max_matrix_error, materials=len(material_cache),
                   maximum_source_bounds_overflow=maximum_bounds_overflow,
-                  inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path)],
+                  inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path, Path(__file__),
+                      Path(__file__).resolve().parents[1] / 'blender/native_surface_materials.py',
+                      source / 'blender_scene_materials.py')],
                   exchange_resources=len(exchange['resources']) if exchange else None,
                   baked_materials=bake_reports,
                   lod_policy=args.lod_policy,

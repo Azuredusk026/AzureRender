@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+原生表面转换覆盖三通道颜色、金属度和粗糙度。
+公共入口与采样域范围见[地面材质验收](docs/acceptance/nr/floor-surface-conversion.md)。
+
 屏幕空间反射支持本帧角色、场景与探针回退。
 实际中庭与检查见[动态反射验收](docs/acceptance/nr/screen-space-reflections.md)。
 
