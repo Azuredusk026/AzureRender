@@ -698,8 +698,14 @@ void main() {
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
     vec3 indirectDiffuseNormal=shadedNormal;
-    if(nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0].w>.5)
-        indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
+    if(nprDiffuse) {
+        float normalMode=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0].w;
+        if(normalMode>1.5) {
+            if(dualFaceSdf)indirectDiffuseNormal=faceFrameRadialHorizontalDiffuseNormal(
+                worldPosition,instanceFaceFrame[3].xyz,geometricNormal,
+                textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).g);
+        } else if(normalMode>.5)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
+    }
     vec3 nprAmbientResponse=nprDiffuse
         ?materialNprDiffuse(baseColor,metallic,classRampRgba,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
     vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);

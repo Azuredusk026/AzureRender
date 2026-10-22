@@ -17,7 +17,7 @@ int main(int argc,char** argv) try {
         if(layout)backend.destroyPipelineLayout(layout);if(pool)backend.destroyDescriptorPool(pool);
         if(setLayout)backend.destroyDescriptorSetLayout(setLayout);host.allocator.destroyBuffer(output);
     });
-    constexpr unsigned probeCount=145;
+    constexpr unsigned probeCount=163;
     output=host.allocator.createBuffer(probeCount*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memset(output.mapped,0xCD,output.size);host.allocator.flush(output,0,output.size);
     setLayout=backend.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
@@ -62,7 +62,13 @@ int main(int argc,char** argv) try {
         0,horizontalEpsilon/horizontalTiltLength,.6/horizontalTiltLength,
         .6/horizontalTiltLength,horizontalEpsilon/horizontalTiltLength,0,
         -.6/horizontalTwoAxisLength,horizontalEpsilon/horizontalTwoAxisLength,-.8/horizontalTwoAxisLength,
-        0,1,0, 0,1,0, 0,1,0};
+        0,1,0, 0,1,0, 0,1,0,
+        .99999999813735485,.000061035156136313162,0,
+        0,.00010172525989033873,.99999999482598578,
+        .70710677767431018,.00011508899352390593,.70710677533281863,
+        -.99999999813735485,.000061035156136313162,0,
+        0,1,0,
+        0,.00000000006103515625,-1};
     static_assert(sizeof(expected)/sizeof(*expected)==probeCount);
     bool passed=true;
     for(unsigned i=0;i<probeCount;++i){

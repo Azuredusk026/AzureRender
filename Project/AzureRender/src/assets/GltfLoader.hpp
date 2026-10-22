@@ -164,7 +164,7 @@ struct AssetMaterial {
         // Native capture bindings require a separate provenance contract.
     } eyeSurface;
     struct NprDiffuse {
-        enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal };
+        enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal, FaceFrameRadialHorizontal };
         bool present=false;
         float shadowScale=1;
         bool styleMaskGb=false,albedoAlpha=false;

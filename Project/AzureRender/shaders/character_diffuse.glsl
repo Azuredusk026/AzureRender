@@ -9,6 +9,16 @@ struct CharacterDiffuseResponse { vec3 color; float litMask; float aoMask; };
 vec3 worldHorizontalDiffuseNormal(vec3 normal) {
     return normalize(vec3(normal.x,6.103515625e-5,normal.z));
 }
+// The frame origin is explicitly host-authored. Native reserved skin-frame
+// identity is a separate binding contract. Geometry and SDF blue normals
+// retain distinct consumers.
+vec3 faceFrameRadialHorizontalDiffuseNormal(vec3 worldPosition,vec3 frameOrigin,
+    vec3 geometryNormal,float geometryMix) {
+    vec3 radial=worldHorizontalDiffuseNormal(worldPosition-frameOrigin);
+    vec3 geometry=worldHorizontalDiffuseNormal(geometryNormal);
+    vec3 blended=mix(radial,geometry,geometryMix);
+    return dot(blended,blended)>1e-12?normalize(blended):geometry;
+}
 float characterDiffuseLuma(vec3 color) {
     return dot(color,vec3(.21267290413379669,.7151522040367126,.07217500358819962));
 }

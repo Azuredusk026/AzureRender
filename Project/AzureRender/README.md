@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+脸部径向环境法线已通过数值与真实近景检查。
+范围见[脸部法线验收](docs/acceptance/nr/face-radial-indirect.md)。
+
 双锚帧的 1271 个事件已有完整管线索引。
 范围见[绑定索引](docs/acceptance/nr/native-binding-index.md)。
 

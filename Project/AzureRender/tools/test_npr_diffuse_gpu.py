@@ -49,6 +49,14 @@ def run(player,output,require_validation=False):
         ('indirect-surface',True,0,0,.7,False,False),
         ('indirect-horizontal',True,0,0,.7,False,False),
         ('indirect-horizontal-fixed',True,0,0,.7,True,False),
+        ('face-radial',True,0,0,.7,False,False),
+        ('face-radial-mask',True,0,0,.7,False,False),
+        ('face-radial-shift',True,0,0,.7,False,False),
+        ('face-radial-fixed',True,0,0,.7,True,False),
+        ('face-surface',True,0,0,.7,False,False),
+        ('face-radial-sdf-off',True,0,0,.7,False,False),
+        ('face-surface-sdf-off',True,0,0,.7,False,False),
+        ('face-surface-flat-sdf-off',True,0,0,.7,False,False),
         ('direct-shadow',False,0,0,.7,False,False),
         ('direct-lit',False,255,255,.7,False,False),
         ('direct-fixed',False,0,0,.7,True,False),
@@ -62,10 +70,11 @@ def run(player,output,require_validation=False):
         ('plain-pbr',True,0,0,.7,False,False),
         ('specular-npr',False,0,0,.7,False,False),('specular-plain',False,0,0,.7,False,False),
         ('emissive-npr',False,0,0,.7,False,False),('emissive-plain',False,0,0,.7,False,False)]
-    results=[];frames={};controls={}
+    results=[];frames={};controls={};face_controls={}
     for name,volume,ramp_alpha,ao,scale,fixed,dark in cases:
         local=name.startswith('local-')
-        indirect=name.startswith('indirect-')
+        face=name.startswith('face-')
+        indirect=name.startswith('indirect-') or face
         folder=output/name;generate(folder,'point' if local else 'directional-near' if not volume and not dark else 'dark')
         model=json.loads((folder/'plane.gltf').read_text())
         Image.new('RGBA',(1,1),(200,140,90,ao)).save(folder/'base.png')
@@ -80,7 +89,24 @@ def run(player,output,require_validation=False):
             'nprDiffuse':{'schemaVersion':1,'shadowScale':scale,'lightingInputs':'host-scene-radiance',
                 'shadowMask':'none','baseAo':'albedo-alpha'}}
         if indirect:
-            if name!='indirect-default':
+            if face:
+                profile.update({'class':'face','features':['face-sdf-eligible']})
+                profile.pop('diffuseRamp')
+                profile['nprDiffuse']['indirectNormal']='surface' if name.startswith('face-surface') else 'face-frame-radial-horizontal'
+                Image.new('RGBA',(1,1),(128,128,230,255)).save(folder/'sdf.png')
+                Image.new('RGBA',(1,1),(0,128 if name=='face-radial-mask' else 0,0,255)).save(folder/'mask.png')
+                model['images'] += [{'uri':'sdf.png'},{'uri':'mask.png'}]
+                model['textures'] += [{'source':3},{'source':4}]
+                if name.endswith('-sdf-off') and name!='face-surface-flat-sdf-off':
+                    Image.new('RGBA',(1,1),(64,217,191,255)).save(folder/'normal.png')
+                    model['images'].append({'uri':'normal.png'})
+                    model['textures'].append({'source':5})
+                    material['normalTexture']={'index':5,'scale':1}
+                model['nodes'].append({'name':'FaceHead','translation':[1 if name=='face-radial-shift' else 0,0,0]})
+                model['scenes'][0]['nodes'].append(1)
+                profile['faceSdf']={'schemaVersion':2,'texture':3,'maskTexture':4,'rampTexture':2,
+                    'texCoord':0,'headNode':'FaceHead','headBasis':[1,0,0,0,1,0,0,0,1]}
+            elif name!='indirect-default':
                 profile['nprDiffuse']['indirectNormal']='world-horizontal' if 'horizontal' in name else 'surface'
             # Attribute and view offsets identify the authored tilted world normal.
             accessor=model['accessors'][model['meshes'][0]['primitives'][0]['attributes']['NORMAL']]
@@ -99,6 +125,7 @@ def run(player,output,require_validation=False):
         (folder/'plane.gltf').write_text(json.dumps(model))
         level=json.loads((folder/'level.azurelevel').read_text())
         level['renderSettings'].update(exposure=0,saturation=1,contrast=1)
+        if face:level['renderSettings']['faceSdf']=True
         if name in ['local-back','local-side']:
             next(n for n in level['nodes'] if n['id']=='light')['components']['azure.transform']['data']['translation']=[0,0,-2] if name=='local-back' else [2,0,0]
         if 'receiver' in name or name=='character-only-plain':
@@ -113,6 +140,7 @@ def run(player,output,require_validation=False):
         if volume:
             cell=[0,0,0,.7,0,0,0,.5,0,0,0,.3,1,0,0,0]
             if indirect:cell=[0,.3,.1,.2,0,-.1,.2,.3,0,.05,.15,.1,1,0,0,0]
+            if face:cell=[.3,0,-.3,.5,-.1,-.1,.2,.3,.02,.05,.15,.1,1,0,0,0]
             (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
             level['irradianceVolume']={'version':1,'asset':'assets:/field.aziv','enabled':True,'intensity':1}
         (folder/'level.azurelevel').write_text(json.dumps(level))
@@ -124,6 +152,12 @@ def run(player,output,require_validation=False):
             command+=['--qa-isolation','shadow-visibility' if name.endswith('-field') else 'direct-diffuse']
             if name.endswith('-disabled'):command+=['--qa-effect','shadow','--qa-effect-state','disabled']
         else:command+=['--qa-isolation','direct-specular' if name.startswith('specular-') else 'emissive'] if control else ['--qa-effect','specular','--qa-effect-state','disabled']
+        if face:
+            command+=['--qa-isolation','ambient']
+            if name.endswith('-sdf-off'):
+                # This override replaces the specular diagnostic switch; the
+                # ambient-only isolation excludes specular independently.
+                at=command.index('--qa-effect');command[at+1]='face-sdf'
         if fixed:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
         (folder/'command.json').write_text(json.dumps(command,indent=2))
         with (folder/'player.log').open('w',encoding='utf8') as stream:
@@ -136,6 +170,9 @@ def run(player,output,require_validation=False):
         assert not runtime['scriptErrors'] and not runtime['presentationErrors'],name
         image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))
         frames[name]=image
+        if name.endswith('-sdf-off'):
+            face_controls[name]=dict(center=image[64,64].tolist(),validationEnabled='Validation layer: enabled' in log)
+            continue
         if control:
             controls[name]=dict(center=image[64,64].tolist(),validationEnabled='Validation layer: enabled' in log)
             continue
@@ -143,10 +180,21 @@ def run(player,output,require_validation=False):
         if indirect:
             # Source arithmetic is evaluated independently in double precision.
             normal=np.array([0.,.8,.6])
-            if 'horizontal' in name:
+            if face and not name.startswith('face-surface'):
+                position=np.array([.03125,-.03125,0.])
+                origin=np.array([1. if name=='face-radial-shift' else 0.,0.,0.])
+                radial=np.array([position[0]-origin[0],2.**-14,position[2]-origin[2]])
+                radial/=np.linalg.norm(radial)
+                geometry=np.array([normal[0],2.**-14,normal[2]])
+                geometry/=np.linalg.norm(geometry)
+                mask=128/255 if name=='face-radial-mask' else 0.
+                normal=radial*(1-mask)+geometry*mask
+                normal=normal/np.linalg.norm(normal) if np.dot(normal,normal)>1e-12 else geometry
+            elif 'horizontal' in name:
                 normal=np.array([normal[0],2.**-14,normal[2]])
                 normal/=np.linalg.norm(normal)
             coefficients=np.array([[0,.3,.1,.2],[0,-.1,.2,.3],[0,.05,.15,.1]])
+            if face:coefficients=np.array([[.3,0,-.3,.5],[-.1,-.1,.2,.3],[.02,.05,.15,.1]])
             expected*=np.maximum(coefficients@np.append(normal,1.),0)
         else:expected*=np.array([.7,.5,.3]) if volume else 0 if dark else .3
         if name in ['surface-receiver','none-receiver','character-only-plain','main-shadow','main-shadow-field']:expected*=0
@@ -160,13 +208,19 @@ def run(player,output,require_validation=False):
         results.append(dict(name=name,actual=actual.tolist(),expected=expected.tolist(),maximumLinearError=error,
             validationEnabled='Validation layer: enabled' in log))
     summary=dict(status='captured',playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),
-        scope='explicit-host-lighting',budget=.008,cases=results,independentLayerControls=controls)
+        scope='explicit-host-lighting',budget=.008,cases=results,independentLayerControls=controls,faceIndirectControls=face_controls)
     (output/'summary.json').write_text(json.dumps(summary,indent=2))
     assert max(c['maximumLinearError'] for c in results)<.008,results
     for a,b in [('volume-shadow','volume-fixed'),('direct-shadow','direct-fixed')]:assert np.array_equal(frames[a],frames[b]),(a,b)
     assert np.array_equal(frames['indirect-default'],frames['indirect-surface']),'Explicit surface mode must preserve the default'
     assert np.array_equal(frames['indirect-horizontal'],frames['indirect-horizontal-fixed']),'Horizontal indirect mode must match fixed and bindless descriptors'
     assert np.max(np.abs(linear(frames['indirect-default'][64,64])-linear(frames['indirect-horizontal'][64,64])))>.005,'Directional SH must exercise the horizontal normal selector'
+    assert np.array_equal(frames['face-radial'],frames['face-radial-fixed']),'Face radial mode must match fixed and bindless descriptors'
+    assert np.array_equal(frames['face-radial-sdf-off'],frames['face-surface-sdf-off']),'Disabled SDF must fall back to the surface normal'
+    assert max(face_controls['face-radial-sdf-off']['center'])>0,'Disabled-SDF fallback requires a visible positive control'
+    assert np.max(np.abs(linear(frames['face-surface-sdf-off'][64,64])-linear(frames['face-surface-flat-sdf-off'][64,64])))>.005,'Disabled-SDF controls must consume the non-neutral normal map'
+    for name in ['face-radial-mask','face-radial-shift','face-surface']:
+        assert np.max(np.abs(linear(frames['face-radial'][64,64])-linear(frames[name][64,64])))>.005,('Face radial input must change directional SH',name)
     for layer in ['specular','emissive']:
         assert np.array_equal(frames[layer+'-npr'],frames[layer+'-plain']),layer+' must remain independent from diffuse composition'
         assert max(controls[layer+'-npr']['center'])>0,layer+' positive control missing'

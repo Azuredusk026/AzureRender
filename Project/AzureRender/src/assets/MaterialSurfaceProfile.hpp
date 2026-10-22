@@ -42,7 +42,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         PackedMaterialSurfaceProfile result;
         result.rows[0]={material.nprDiffuse.shadowScale,material.nprDiffuse.styleMaskGb?1.F:0.F,
             material.nprDiffuse.albedoAlpha?1.F:0.F,
-            material.nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal?1.F:0.F};
+            static_cast<float>(material.nprDiffuse.indirectNormal)};
         return result;
     }
     return material.eyeSurface.present?packEyeSurfaceProfile(material.eyeSurface)

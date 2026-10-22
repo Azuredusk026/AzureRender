@@ -1636,8 +1636,13 @@ AssetMaterial loadMaterial(
                 ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"))
                 throw std::invalid_argument("Invalid nprDiffuse input contract");
             if(npr.contains("indirectNormal")&&(!npr["indirectNormal"].is_string()
-                ||(npr["indirectNormal"]!="surface"&&npr["indirectNormal"]!="world-horizontal")))
+                ||(npr["indirectNormal"]!="surface"&&npr["indirectNormal"]!="world-horizontal"
+                    &&npr["indirectNormal"]!="face-frame-radial-horizontal")))
                 throw std::invalid_argument("Invalid nprDiffuse indirect normal mode");
+            const auto indirectNormal=npr.value("indirectNormal",std::string("surface"));
+            if(indirectNormal=="face-frame-radial-horizontal"&&(result.materialClass!=AssetMaterialClass::Face
+                ||!result.faceSdf.present||result.faceSdf.schemaVersion!=2))
+                throw std::invalid_argument("Face-frame radial indirect normal requires a version 2 face SDF material");
             const auto& parentVersion=authoredProfile["azureRenderMaterial"]["schemaVersion"];
             if(!parentVersion.is_number_integer()||parentVersion!=2||!(result.materialFeatures&MaterialFeatureShadowColorLut)
                 ||result.projectedHairRamp.present||result.eyeSurface.present
@@ -1649,8 +1654,9 @@ AssetMaterial loadMaterial(
                 ||((result.materialFeatures&MaterialFeatureDiffuseRamp)&&npr["shadowMask"]=="style-mask-gb"))
                 throw std::invalid_argument("Incompatible nprDiffuse material owners");
             result.nprDiffuse={true,npr["shadowScale"].get<float>(),npr["shadowMask"]=="style-mask-gb",npr["baseAo"]=="albedo-alpha",
-                npr.value("indirectNormal",std::string("surface"))=="world-horizontal"
-                    ?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal:AssetMaterial::NprDiffuse::IndirectNormal::Surface};
+                indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
+                    :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
+                    :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }
     }

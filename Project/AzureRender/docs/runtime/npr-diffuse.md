@@ -45,8 +45,8 @@
 该法线只用于场景环境漫反射与辐照体积。
 直接光、镜面及颜色选择的相机方向分别持有输入。
 
-以下径向模式属于尚未提交的工作区候选。
-双配置数值通过，真实角色及原生帧身份仍待验收。
+径向模式通过双配置数值与真实角色近景检查。
+范围见[脸部法线验收](../acceptance/nr/face-radial-indirect.md)。
 接续状态见[还原交接](../plans/2026-10-22-native-render-restoration-handoff.md)。
 
 `face-frame-radial-horizontal` 采用显式头部帧。

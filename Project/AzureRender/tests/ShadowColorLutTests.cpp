@@ -62,6 +62,42 @@ int main(){
     bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
     require(rejected,"Malformed indirect normal modes must fail import");
   }
+  auto face=composed;
+  face["nodes"].push_back({{"name","IndirectFaceHead"}});
+  face["scenes"][0]["nodes"].push_back(face["nodes"].size()-1);
+  auto& faceProfile=face["materials"][0]["extras"]["azureRenderMaterial"];
+  faceProfile["class"]="face";faceProfile["features"]={"face-sdf-eligible"};
+  faceProfile["faceSdf"]={{"schemaVersion",2},{"texture",index},{"maskTexture",index},{"rampTexture",index},
+    {"texCoord",0},{"headNode","IndirectFaceHead"},{"headBasis",{1,0,0,0,1,0,0,0,1}}};
+  faceProfile["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+  const unsigned char faceNormalPixels[]={192,217,191,255};
+  require(stbi_write_png((root/"face-normal.png").string().c_str(),1,1,4,faceNormalPixels,4)!=0,
+    "Cannot create the non-neutral face normal fixture");
+  face["images"].push_back({{"uri","face-normal.png"}});
+  face["textures"].push_back({{"source",face["images"].size()-1}});
+  face["materials"][0]["normalTexture"]={{"index",face["textures"].size()-1},{"scale",1}};
+  const auto faceResponse=load(face);
+  require(faceResponse.materials[0].textureSettings[1].colorSpace=="linear"
+    &&faceResponse.materials[0].normalWidth==1&&faceResponse.materials[0].normalHeight==1
+    &&faceResponse.materials[0].normalPixels==std::vector<std::uint8_t>(std::begin(faceNormalPixels),std::end(faceNormalPixels)),
+    "Face normal fixture must retain its non-neutral linear texture bytes");
+  require(faceResponse.materials[0].nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
+    &&azurerender::packMaterialSurfaceProfile(faceResponse.materials[0]).rows[0][3]==2,
+    "Explicit face-frame radial mode must survive import and GPU packing");
+  for(const char* kind:{"generic","skin","fabric","metal","face"}) {
+    auto invalid=composed;auto& p=invalid["materials"][0]["extras"]["azureRenderMaterial"];
+    p["class"]=kind;p["nprDiffuse"]["indirectNormal"]="face-frame-radial-horizontal";
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Face radial mode requires a face material with a resolved version 2 SDF frame");
+  }
+  auto legacyFace=face;auto& legacySdf=legacyFace["materials"][0]["extras"]["azureRenderMaterial"]["faceSdf"];
+  legacySdf["schemaVersion"]=1;legacySdf["channel"]="r";legacySdf["maskChannel"]="a";
+  legacySdf["shadowOnLowValues"]=true;legacySdf["horizontalAxis"]="left-to-right";
+  auto legacyControl=legacyFace;
+  legacyControl["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]="surface";
+  require(load(legacyControl).materials[0].faceSdf.schemaVersion==1,"Legacy SDF control must remain valid");
+  bool legacyRejected=false;try{load(legacyFace);}catch(const std::exception&){legacyRejected=true;}
+  require(legacyRejected,"Face radial indirect mode must reject a legacy SDF frame");
   for(const char* kind:{"generic","skin","face","fabric","metal"}) {
     auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
     require((load(valid).materials[0].materialFeatures&(1U<<19U))!=0,"NPR composition must support declared surface classes");
