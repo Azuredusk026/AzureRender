@@ -2069,6 +2069,7 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.SpecularInputGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ShadowColorLutGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shadow_color_lut_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureTools.NativeNprLighting COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_npr_lighting.py)
+    add_test(NAME AzureTools.NativeCapturedLights COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_captured_lights.py)
     add_test(NAME AzureTools.NativePostVs COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_postvs.py)
     add_test(NAME AzureEngine.NprIlluminationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_illumination_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

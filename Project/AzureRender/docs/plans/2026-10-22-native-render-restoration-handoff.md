@@ -25,6 +25,7 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 共享颜色核及头发的输入职责见[照明核对](../acceptance/nr/captured-hair-illumination.md)。
 全局环境权重及主灯条纹见[运行验证](../acceptance/nr/ambient-weight-and-main-line.md)。
 逐材质头发光色及双叶完整照明见[头发验证](../acceptance/nr/projected-hair-lighting.md)。
+局部灯原始输入、颜色模式及顺序见[灯记录](../acceptance/nr/captured-character-local-lights.md)。
 
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。

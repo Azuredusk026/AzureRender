@@ -1,0 +1,102 @@
+"""Decode the caller-confirmed CB3 light layout without reinterpreting mode bits as floats.
+
+Event identity, active-index selection and coordinate origin belong to the caller.
+Results retain raw records and list required runtime consumers independently from
+generic emitter geometry. A decoded emitter is not a claim of shader equivalence.
+"""
+import math
+import struct
+
+
+def _finite(value,minimum,maximum,name):
+    if type(value) not in (int,float) or not math.isfinite(value) or not minimum<=value<=maximum:
+        raise ValueError('Invalid captured light '+name)
+    return value
+
+
+def _direction(encoded):
+    x,y=[_finite(v,-1,1,'encoded axis') for v in encoded]
+    z=.5*y+.5-abs(x)
+    a=y-z
+    b=math.copysign(max(1-abs(z)-abs(a),.00048828125),x)
+    vector=[-z,a,b]  # Source zxy swizzle, then reflected world X.
+    length=math.sqrt(sum(v*v for v in vector))
+    if length<1e-8:raise ValueError('Invalid captured emitter axis')
+    return [v/length for v in vector]
+
+
+def decode_records(raw,indices,*,origin):
+    if len(raw)!=(6+256*8)*16:raise ValueError('Captured light constant block must contain 2054 rows')
+    if len(origin)!=3 or any(type(v) not in (int,float) or not math.isfinite(v) for v in origin):
+        raise ValueError('Captured light origin must have three finite coordinates')
+    indices=list(indices)
+    if len(indices)>256 or any(type(i) is not int or not 0<=i<256 for i in indices) or len(set(indices))!=len(indices):
+        raise ValueError('Invalid or duplicate captured light indices')
+    result=[]
+    for index in indices:
+        offset=(6+index*8)*16;record=bytes(raw[offset:offset+128])
+        rows=[struct.unpack_from('<4f',record,i*16) for i in range(8)]
+        word=lambda row,column:struct.unpack_from('<I',record,row*16+column*4)[0]
+        mode=word(3,3)
+        if mode not in (0,1,2,3,4,16):raise ValueError('Unsupported captured character light mode')
+        kind=rows[0][3]
+        if kind not in (0,1):raise ValueError('Unsupported captured emitter kind')
+        color=[_finite(c,0,65536,'color') for c in rows[0][:3]]
+        source_position=[_finite(v,-1e9,1e9,'position') for v in rows[1][:3]]
+        position=[v-o for v,o in zip(source_position,origin)];position[0]*=-1
+        inverse_range=_finite(rows[1][3],1e-8,1e6,'inverse range')
+        exponent=_finite(rows[6][3],-64,64,'falloff exponent')
+        if exponent==0:raise ValueError('Captured falloff exponent must be nonzero')
+        shape=dict(type='point' if kind else 'spot',direction=_direction(rows[2][:2]),
+            falloff='smooth-inverse-square' if exponent<0 else 'range-power',falloffExponent=2 if exponent<0 else exponent)
+        if not kind:
+            cosine=_finite(rows[2][2],0,1,'outer cone cosine');scale=_finite(rows[2][3],1e-8,1e9,'cone scale')
+            inner=cosine+1/scale
+            if inner>1+1e-6:raise ValueError('Captured inner cone cosine exceeds one')
+            shape.update(outerCone=math.acos(cosine),innerCone=math.acos(min(inner,1)))
+        length=_finite(max(rows[2][2],0) if kind else 0,0,65536,'linear emitter length')
+        parameters=[_finite(v,0,65536,'character parameters') for v in rows[4]]
+        response=dict(parameters=parameters)
+        if mode==0:
+            response.update(diffuseFloor=_finite(parameters[0],0,4,'diffuse wrap')*.25,
+                compression=_finite(parameters[1],0,1,'energy compression'))
+        specular=_finite(rows[7][2],0,65536,'specular scale');shape['specularScale']=specular
+        cookie=_finite(rows[7][3],-1,65535,'cookie index')
+        if int(cookie)!=cookie:raise ValueError('Captured cookie index must be integral')
+        flags=_finite(rows[5][3],0,3,'flags')
+        if int(flags)!=flags:raise ValueError('Captured light flags must be integral')
+        box={'enabled':bool(int(flags)&1)}
+        if box['enabled']:
+            packed=record[5*16:5*16+12]+record[6*16:6*16+12]
+            half=struct.unpack('<12e',packed);matrix=[]
+            for r in range(3):
+                axis=half[r*4:r*4+3];translation=half[r*4+3]+sum(a*(o-p) for a,o,p in zip(axis,origin,source_position))
+                matrix.append([-axis[0],axis[1],axis[2],translation])
+            if not all(math.isfinite(v) for row in matrix for v in row):raise ValueError('Nonfinite captured influence box')
+            determinant=sum(matrix[0][i]*(matrix[1][(i+1)%3]*matrix[2][(i+2)%3]-matrix[1][(i+2)%3]*matrix[2][(i+1)%3]) for i in range(3))
+            if abs(determinant)<1e-12:raise ValueError('Singular captured influence box')
+            threshold=_finite(rows[7][0],0,1,'box threshold')
+            box.update(worldToBox=matrix,falloffThreshold=threshold)
+        shape['influenceBox']=box
+        capabilities=['wrapped-compressed-character-light'] if mode==0 else [
+            'ordered-light-replace' if mode==4 else 'screen-depth' if mode==3 else 'character-mode-'+str(mode)]
+        if length:capabilities.append('linear-emitter')
+        if cookie>=0:capabilities.append('light-cookie')
+        result.append(dict(sourceIndex=index,mode=mode,composition='replace' if mode==4 else 'add',
+            characters=mode!=16,color=color,intensity=1,position=position,radius=1/inverse_range,shape=shape,
+            linearLength=length,response=response,cookieIndex=int(cookie),flags=int(flags),
+            rawShadowWords=[word(2,3),word(3,0)],requiredCapabilities=capabilities,rawRecordHex=record.hex()))
+    return result
+
+
+def default_character_light_color(color,attenuation,normal_dot_light,*,diffuse_floor,compression,scene_visibility):
+    """Captured default mode: unattenuated color for diffuse and primary KK consumers."""
+    for value,name in ((attenuation,'attenuation'),(diffuse_floor,'diffuse floor'),(compression,'compression'),(scene_visibility,'visibility')):
+        _finite(value,0,1,name)
+    _finite(normal_dot_light,-1,1,'normal cosine')
+    if len(color)!=3:raise ValueError('Captured light color requires three values')
+    color=[_finite(v,0,65536,'color') for v in color]
+    denominator=max(max(color)*attenuation*(.5+.25*scene_visibility),1)
+    energy=1-compression+compression/denominator
+    wrapped=diffuse_floor+min(max(normal_dot_light+.5,0),1)*(1-diffuse_floor)
+    return [value*energy*wrapped for value in color]

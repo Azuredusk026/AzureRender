@@ -1,0 +1,727 @@
+{
+  "schemaVersion": 1,
+  "status": "offline-captured-light-inputs-and-formula-verified",
+  "frame": 10401,
+  "event": 950,
+  "primitive": 1017,
+  "traceSha256": "80a1615d2e443a774626ea1b76833f9705292460bd998fcbb060dcf1ec7d781f",
+  "bufferSha256": "862f41a6eba651d3ddaf5c1e137bd21ce77bef10ee041f40376817cbbbdfb379",
+  "origin": [
+    -300,
+    300,
+    -300
+  ],
+  "records": [
+    {
+      "sourceIndex": 0,
+      "mode": 0,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        0.3499999940395355,
+        0.31684333086013794,
+        0.2755943238735199
+      ],
+      "intensity": 1,
+      "position": [
+        -0.08331298828125,
+        1.462799072265625,
+        0.281036376953125
+      ],
+      "radius": 0.45959470279340786,
+      "shape": {
+        "type": "point",
+        "direction": [
+          0.01631876297530666,
+          0.996258603930108,
+          0.0848674971363472
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          1.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "diffuseFloor": 0.25,
+        "compression": 1.0
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "wrapped-compressed-character-light"
+      ],
+      "rawRecordHex": "3333b33e4a39a23eb31a8d3e0000803f56f595c33dbb964307dc95c3cd400b40fd19763ff796643f000080bfffffff3fffffff3f0000803f0000803f000000000000803f0000803f000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 1,
+      "mode": 3,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        5.662053108215332,
+        7.0046539306640625,
+        8.0
+      ],
+      "intensity": 1,
+      "position": [
+        1.066986083984375,
+        1.28399658203125,
+        0.402008056640625
+      ],
+      "radius": 1.1499999588727965,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.8697552528438497,
+          0.0,
+          -0.49348333320440624
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.8088947123632426,
+        "innerCone": 0.7186376068767774,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.36800000071525574,
+          0.1940000057220459,
+          0.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1098920443,
+        3212836864
+      ],
+      "requiredCapabilities": [
+        "screen-depth"
+      ],
+      "rawRecordHex": "8a2fb5402026e0400000004100000000938896c35aa496438bcc95c3d49b5e3f325739be6754233f68b7303ffb318041000080bf0000803f0000803f030000007f6abc3ef0a7463e000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 2,
+      "mode": 0,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        1.0,
+        0.7564622759819031,
+        0.575444221496582
+      ],
+      "intensity": 1,
+      "position": [
+        0.001373291015625,
+        1.556732177734375,
+        0.172760009765625
+      ],
+      "radius": 0.17164486640212193,
+      "shape": {
+        "type": "point",
+        "direction": [
+          0.8333109493444116,
+          0.20295731774199274,
+          0.5141995613355685
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 1.0,
+      "response": {
+        "parameters": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diffuseFloor": 0.0,
+        "compression": 0.0
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "wrapped-compressed-character-light",
+        "linear-emitter"
+      ],
+      "rawRecordHex": "0000803f83a7413f5050133f0000803f2d0096c343c79643e3e995c3736eba40c58c553f3f28d0be0000803fffffff3fffffff3f0000803f0000803f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 3,
+      "mode": 3,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        16.1299991607666,
+        12.178779602050781,
+        9.52668285369873
+      ],
+      "intensity": 1,
+      "position": [
+        0.42498779296875,
+        1.746002197265625,
+        0.240997314453125
+      ],
+      "radius": 0.5843336512292233,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.9755590943948227,
+          -0.1811086747439018,
+          -0.124435128786291
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.4000000059604645,
+          0.800000011920929,
+          0.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "screen-depth"
+      ],
+      "rawRecordHex": "3d0a814148dc42414b6d18410000803f663696c37ddf964327e195c38d0ddb3fc0ec46bdd8c01e3f000080bfffffff3fffffff3f0000803f0000803f03000000cdcccc3ecdcc4c3f000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 4,
+      "mode": 2,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        0.5,
+        0.3347279727458954,
+        0.07678713649511337
+      ],
+      "intensity": 1,
+      "position": [
+        0.02105712890625,
+        1.65032958984375,
+        0.15899658203125
+      ],
+      "radius": 0.20822144021007694,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.0664943326977282,
+          -0.062158694066428065,
+          0.9958487839381239
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.6000000238418579,
+          0.949999988079071,
+          1.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "character-mode-2"
+      ],
+      "rawRecordHex": "0000003f7761ab3e93429d3d0000803fb20296c33ed39643a6eb95c3bbae994019b6e23e60ae7c3b000080bfffffff3fffffff3f0000803f0000803f020000009a99193f3333733f0000803f0000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 5,
+      "mode": 3,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        4.246540069580078,
+        5.253490447998047,
+        6.0
+      ],
+      "intensity": 1,
+      "position": [
+        0.8599853515625,
+        0.337005615234375,
+        0.1719970703125
+      ],
+      "radius": 1.1499999588727965,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.8697552528438497,
+          0.0,
+          -0.49348333320440624
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.8088947123632426,
+        "innerCone": 0.7186376068767774,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.30000001192092896,
+          0.1940000057220459,
+          0.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1098920443,
+        3212836864
+      ],
+      "requiredCapabilities": [
+        "screen-depth"
+      ],
+      "rawRecordHex": "a8e38740981ca8400000c04000000000146e96c3232b9643fce995c3d49b5e3f325739be6754233f68b7303ffb318041000080bf0000803f0000803f030000009a99993ef0a7463e000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 6,
+      "mode": 0,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        1.5,
+        1.0982012748718262,
+        0.790412187576294
+      ],
+      "intensity": 1,
+      "position": [
+        0.227996826171875,
+        1.549407958984375,
+        0.0360107421875
+      ],
+      "radius": 0.26348876431281376,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.6932293919156934,
+          -0.5692245775655128,
+          0.4420592612756366
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diffuseFloor": 0.0,
+        "compression": 0.0
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "wrapped-compressed-character-light"
+      ],
+      "rawRecordHex": "0000c03fdc918c3f74584a3f0000803f2f1d96c353c6964364fb95c305e572400bc9043e68fe943d000080bfffffff3fffffff3f0000803f0000803f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 7,
+      "mode": 0,
+      "composition": "add",
+      "characters": true,
+      "color": [
+        3.0,
+        2.3830394744873047,
+        1.0718302726745605
+      ],
+      "intensity": 1,
+      "position": [
+        0.0157470703125,
+        1.79229736328125,
+        0.076873779296875
+      ],
+      "radius": 0.14913939931828962,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.06623038850614238,
+          -0.03687537403383898,
+          0.9971227318781726
+        ],
+        "falloff": "range-power",
+        "falloffExponent": 2.0,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diffuseFloor": 0.0,
+        "compression": 0.0
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1073741823,
+        1073741823
+      ],
+      "requiredCapabilities": [
+        "wrapped-compressed-character-light"
+      ],
+      "rawRecordHex": "00004040b8831840bc31893f0000803f040296c36ae5964329f695c37a90d6406c02e83ec491da3c000080bfffffff3fffffff3f0000803f0000803f00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040cdcc4c3f000000000000803f000080bf"
+    },
+    {
+      "sourceIndex": 8,
+      "mode": 4,
+      "composition": "replace",
+      "characters": true,
+      "color": [
+        0.08664814382791519,
+        0.08664814382791519,
+        0.10413092374801636
+      ],
+      "intensity": 1,
+      "position": [
+        -0.050537109375,
+        1.0093994140625,
+        -1.1949462890625
+      ],
+      "radius": 1.4999999552965178,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.0,
+          0.0,
+          1.0
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.7562822165836128,
+        "innerCone": 0.7081301828995471,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        }
+      },
+      "linearLength": 0,
+      "response": {
+        "parameters": [
+          0.699999988079071,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "cookieIndex": -1,
+      "flags": 0,
+      "rawShadowWords": [
+        1106807800,
+        3212836864
+      ],
+      "requiredCapabilities": [
+        "ordered-light-replace"
+      ],
+      "rawRecordHex": "9574b13d9574b13d9842d53d0000000088f995c334819643f49896c3abaa2a3f0000003f0000000061363a3ff88bf841000080bf0000803f0000803f040000003333333f0000803f0000803f0000000000000000000000000000000000000000000000000000000000000000000080bfcdcc4c3f000000000000803f000080bf"
+    }
+  ],
+  "defaultColorChecks": [
+    {
+      "sourceIndex": 0,
+      "attenuation": 0.7536499500274658,
+      "normalDotLight": 0.2615962624549866,
+      "expected": [
+        0.28741902112960815,
+        0.26019087433815,
+        0.22631728649139404
+      ],
+      "decoded": [
+        0.28741901399971725,
+        0.2601908551401868,
+        0.22631728623029135
+      ],
+      "maximumAbsoluteError": 1.919796321914191e-08
+    },
+    {
+      "sourceIndex": 2,
+      "attenuation": 0.1484728455543518,
+      "normalDotLight": 0.057117342948913574,
+      "expected": [
+        0.5571173429489136,
+        0.4214382469654083,
+        0.32058995962142944
+      ],
+      "decoded": [
+        0.5571173429489136,
+        0.4214382532361256,
+        0.3205899556954819
+      ],
+      "maximumAbsoluteError": 6.270717278766824e-09
+    },
+    {
+      "sourceIndex": 7,
+      "attenuation": 0.00010360929445596412,
+      "normalDotLight": 0.07067519426345825,
+      "expected": [
+        1.7120256423950195,
+        1.3599414825439453,
+        0.6116669774055481
+      ],
+      "decoded": [
+        1.7120255827903748,
+        1.359941515040532,
+        0.6116669490760103
+      ],
+      "maximumAbsoluteError": 5.960464477539063e-08
+    }
+  ],
+  "orderedDeltas": [
+    {
+      "index": 0,
+      "mode": 0,
+      "before": [
+        1.0702877044677734,
+        0.18613839149475098,
+        0.19951018691062927
+      ],
+      "after": [
+        1.1789937019348145,
+        0.20360703766345978,
+        0.21572722494602203
+      ],
+      "delta": [
+        0.10870599746704102,
+        0.0174686461687088,
+        0.01621703803539276
+      ]
+    },
+    {
+      "index": 1,
+      "mode": 3,
+      "before": [
+        1.1789937019348145,
+        0.20360703766345978,
+        0.21572722494602203
+      ],
+      "after": [
+        1.1789937019348145,
+        0.20360703766345978,
+        0.21572722494602203
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 2,
+      "mode": 0,
+      "before": [
+        1.1789937019348145,
+        0.20360703766345978,
+        0.21572722494602203
+      ],
+      "after": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "delta": [
+        0.041510939598083496,
+        0.005574151873588562,
+        0.0045256465673446655
+      ]
+    },
+    {
+      "index": 3,
+      "mode": 3,
+      "before": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "after": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 4,
+      "mode": 2,
+      "before": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "after": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 5,
+      "mode": 3,
+      "before": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "after": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 6,
+      "mode": 0,
+      "before": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "after": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 7,
+      "mode": 0,
+      "before": [
+        1.220504641532898,
+        0.20918118953704834,
+        0.2202528715133667
+      ],
+      "after": [
+        1.2205936908721924,
+        0.20919373631477356,
+        0.220258891582489
+      ],
+      "delta": [
+        8.90493392944336e-05,
+        1.2546777725219727e-05,
+        6.020069122314453e-06
+      ]
+    },
+    {
+      "index": 8,
+      "mode": 4,
+      "before": [
+        1.2205936908721924,
+        0.20919373631477356,
+        0.220258891582489
+      ],
+      "after": [
+        1.1794253587722778,
+        0.20474468171596527,
+        0.21604283154010773
+      ],
+      "delta": [
+        -0.04116833209991455,
+        -0.004449054598808289,
+        -0.004216060042381287
+      ]
+    }
+  ],
+  "tests": {
+    "decoder": 7,
+    "nprRegression": 7
+  },
+  "runtimeStatus": "pending",
+  "sourceFingerprints": {
+    "tools/endfield_native/captured_lights.py": "04fa335e523581ee5cf3a96c3c3add6ae7dd540a31b27266d4041997f4f7de01",
+    "tools/test_native_captured_lights.py": "0746f12de96b89523dcd6b415e28034f6951c6c614a0bf831bb5fbd01d4c4991"
+  },
+  "failureEvidence": {
+    "decoder-red.log": "6051ba26afaaf8bc8ff272961b2a0a3527a02254f5b128f0b0b9c84aa1f564a6",
+    "decoder-validation-red.log": "9d2a3b5e5f32e73659ade28753c6e1cf0d13604cda730a105d9b0da5c719716c"
+  },
+  "run": "build/runs/20261023-070215-captured-character-local-lights-a7f0dc"
+}
