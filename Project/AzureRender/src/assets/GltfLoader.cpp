@@ -2391,9 +2391,10 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     for(const auto& material:asset.materials)validateEyeTextureSettings(material);
     return asset;
 }
-LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
+namespace {
+void parseEmbeddedGltf(const std::string& bytes,bool binary,tinygltf::Model& model,AuthoredImageMips& authored){
     if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
-    tinygltf::TinyGLTF loader;AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);tinygltf::Model model;std::string error,warning;bool external=false;
+    tinygltf::TinyGLTF loader;loader.SetImageLoader(decodeGltfImage,&authored);std::string error,warning;bool external=false;
     loader.SetStoreOriginalJSONForExtrasAndExtensions(true);
     tinygltf::FsCallbacks fs;
     fs.FileExists=[&](const std::string&,void*){external=true;return false;};
@@ -2409,7 +2410,17 @@ LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     if(!loaded)throw std::invalid_argument("Invalid embedded model candidate: "+error);
     validateEyeAuthoredAlpha(model,readAuthoredMaterialAlpha(
         reinterpret_cast<const unsigned char*>(bytes.data()),bytes.size(),binary));
+}
+}
+LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
+    tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
     return importGltfModel(model,&authored);
+}
+std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary){
+    tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
+    std::vector<AssetMaterial> materials;materials.reserve(model.materials.size());
+    for(const auto& source:model.materials){auto material=loadMaterial(model,&source,&authored);validateEyeTextureSettings(material);materials.push_back(std::move(material));}
+    return materials;
 }
 namespace {
 LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* authored){

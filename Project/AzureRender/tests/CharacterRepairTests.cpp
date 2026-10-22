@@ -658,6 +658,31 @@ int main(int argc,char** argv) { try {
     require(std::abs(int(m.metallicRoughnessPixels[2])-153)<=1,"Untextured metallicFactor must be preserved");
     require(std::abs(m.hairParameters[2]-6)<.001F,"Hair ramp row must retain its semantic field");
     require(std::abs(m.hairParameters[3]-.07F)<.001F,"Strand shift must be independent from ramp row");
+    auto standalone=input;
+    for(const char* key:{"buffers","bufferViews","accessors","meshes","scenes","scene","animations","skins"})standalone.erase(key);
+    // Preserve named nodes used by SDF profiles; geometry is not required.
+    for(auto& node:standalone["nodes"]){node.erase("mesh");node.erase("skin");}
+    for(auto& image:standalone["images"])if(image.contains("uri")&&image["uri"].get<std::string>().rfind("data:",0)!=0){
+        std::ifstream stream(directory/image["uri"].get<std::string>(),std::ios::binary);
+        require(bool(stream),"Standalone material fixture image must be readable");
+        const std::vector<unsigned char> data{std::istreambuf_iterator<char>(stream),{}};
+        const char* alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        std::string encoded;unsigned accumulator=0;int bits=-6;
+        for(unsigned char byte:data){accumulator=(accumulator<<8)|byte;bits+=8;while(bits>=0){encoded+=alphabet[(accumulator>>bits)&63];bits-=6;}}
+        if(bits>-6)encoded+=alphabet[((accumulator<<8)>>(bits+8))&63];
+        while(encoded.size()%4)encoded+='=';
+        image["uri"]="data:image/png;base64,"+encoded;
+    }
+    const auto standaloneMaterials=loadEmbeddedGltfMaterials(standalone.dump());
+    auto externalMaterial=standalone;externalMaterial["images"][0]["uri"]="external-image.png";
+    bool externalRejected=false;try{(void)loadEmbeddedGltfMaterials(externalMaterial.dump());}catch(const std::exception&){externalRejected=true;}
+    require(externalRejected,"Standalone embedded materials must reject external resource access");
+    require(standaloneMaterials.size()==input.at("materials").size(),"Material-only import must preserve the authored table");
+    const auto& independent=standaloneMaterials.at(0);
+    require(independent.materialClass==m.materialClass&&independent.materialFeatures==m.materialFeatures
+        &&independent.hairParameters==m.hairParameters&&independent.baseColorPixels==m.baseColorPixels
+        &&independent.metallicRoughnessPixels==m.metallicRoughnessPixels,
+        "Standalone and model materials must share physical, character and texture interpretation");
     for(const auto& version:std::vector<nlohmann::json>{1.5,2.5,true,nullptr}){
         auto invalid=input;invalid["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=version;
         std::ofstream(path)<<invalid.dump();bool rejected=false;
