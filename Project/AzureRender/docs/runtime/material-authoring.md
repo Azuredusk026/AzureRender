@@ -253,3 +253,14 @@ UUID 必须引用项目中的可解码图片。
 场景格式版本为 4，读取兼容版本 1 至 3。
 项目移动通过材质 UUID 和相对挂载恢复引用。
 操作教学见[编辑器制作入门](../tutorials/editor-first-game.md)。
+
+## 投影头发输入
+
+完整画像支持 `hair.projectedRamp.virtualLight`。
+该对象声明版本、主灯混合量及对象增益。
+独立条纹由 `hair.projectedRamp.line` 声明。
+字段和范围见[头发条纹验收](../acceptance/nr/projected-hair-line.md)。
+
+条纹纹理与其他完整画像纹理共同进入图片 UUID 表。
+材质保存时校验共享槽的合法组合。
+材质球、模型覆盖和 Player 共用同一解释器。

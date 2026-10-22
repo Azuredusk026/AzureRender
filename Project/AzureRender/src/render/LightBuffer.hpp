@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <vector>
 #include <utility>
-#include "render/LightShape.hpp"
+#include "ecs/LightShape.hpp"
 
 namespace azurerender {
 

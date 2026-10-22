@@ -6,12 +6,12 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=1;
+    static constexpr unsigned kLayoutVersion=2;
     using Row=std::array<float,4>;
-    std::array<Row,6> rows{};
+    std::array<Row,12> rows{};
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==96);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==192);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -27,6 +27,11 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
     for(unsigned axis=0;axis<3;++axis)for(unsigned component=0;component<3;++component)
         rows[axis+3][component]=hair.objectBasis[axis*3+component];
     rows[3][3]=hair.diffuseScale;
+    if(hair.virtualLight)rows[6]={1,hair.virtualBlend,hair.objectGain,0};
+    if(hair.line.present){
+        rows[7]={hair.line.frequency,hair.line.strandShift,hair.line.range,hair.line.depth};
+        rows[8]={hair.line.alternation,hair.line.saturation,1,0};rows[9]=hair.line.uvTransform;
+    }
     return result;
 }
 

@@ -167,6 +167,30 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     require(std::abs(hair.primaryShift+.02F)<.000001F&&std::abs(hair.secondaryShift-.02F)<.000001F
         &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
         "Signed shifts, independent normal scales and rotated source basis must survive loading");
+    auto virtualSource=source;
+    virtualSource["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["virtualLight"]={
+        {"schemaVersion",1},{"blend",1.0},{"objectGain",.75}};
+    const auto virtualAsset=load(virtualSource);
+    require(virtualAsset.materials[0].projectedHairRamp.virtualLight&&virtualAsset.materials[0].projectedHairRamp.objectGain==.75F,
+        "Projected hair must preserve explicit virtual-light parameters");
+    require(packMaterialSurfaceProfile(virtualAsset.materials[0]).rows[6]==std::array<float,4>{1,1,.75F,0},"Virtual-light parameters must reach the GPU layout");
+    auto striped=source;
+    striped["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["line"]={
+        {"schemaVersion",1},{"texture",texture},{"frequency",300},{"strandShift",.4},{"range",.95},{"depth",.22},
+        {"alternation",1},{"saturation",1.5},{"uvTransform",{9.3,1,-.32,0}}};
+    const auto stripedAsset=load(striped);const auto& line=stripedAsset.materials[0].projectedHairRamp.line;
+    require(line.present&&line.frequency==300&&line.pixels.size()>0,"Independent specular-line texture must reach its typed owner");
+    require(packMaterialSurfaceProfile(stripedAsset.materials[0]).rows[8]==std::array<float,4>{1,1.5F,1,0},"Line parameters must reach their dedicated GPU rows");
+    for(const auto& value:Json::array({-1,17,"1",true,nullptr})) {
+        auto invalid=virtualSource;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["virtualLight"]["objectGain"]=value;reject(invalid);
+    }
+    for(const char* field:{"schemaVersion","texture","frequency","strandShift","range","depth","alternation","saturation","uvTransform"}) {
+        auto invalid=striped;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["line"].erase(field);reject(invalid);
+    }
+    for(const auto& value:Json::array({-1,1.1,"1",true,nullptr})) {
+        auto invalid=striped;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["line"]["depth"]=value;reject(invalid);
+    }
+    auto lineConflict=striped;lineConflict["materials"][0]["extras"]["azureRenderMaterial"]["shadowColorLut"]={{"schemaVersion",1},{"texture",texture}};reject(lineConflict);
     auto framed=source;const auto frameNode=framed["nodes"].size();
     framed["nodes"].push_back({{"name","independent-head"}});
     framed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["frame"]={
@@ -370,7 +394,8 @@ void testMaterialSurfacePacking() {
     hair.surfaceResponse=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse;hair.diffuseScale=.96F;
     const std::array<float,24> expectedHair{.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,1.1F,1,1,2,3,.96F,4,5,6,0,7,8,9,0};
     const auto packedHair=packProjectedHairSurfaceProfile(hair);
-    require(std::memcmp(&packedHair,expectedHair.data(),sizeof(packedHair))==0,
+    for(std::size_t row=6;row<packedHair.rows.size();++row)require(packedHair.rows[row]==std::array<float,4>{},"Inactive extension rows must remain zero");
+    require(std::memcmp(&packedHair,expectedHair.data(),sizeof(expectedHair))==0,
         "Typed hair packing must preserve every byte of the existing six-row ABI");
     AssetMaterial material;material.materialClass=AssetMaterialClass::Eye;auto& eye=material.eyeSurface;eye.present=true;
     eye.parallaxScale=.15F;eye.matcapNormalScale=1.5F;eye.alphaPremultiply=.25F;eye.matcapShadowFloor=.75F;
@@ -378,13 +403,13 @@ void testMaterialSurfacePacking() {
     eye.directWeights={12,13,14};eye.uvScaleOffset={15,16,17,18};
     const std::array<float,24> expectedEye{.15F,1.5F,.25F,.75F,2,3,4,0,5,6,7,0,8,9,10,11,12,13,14,0,15,16,17,18};
     const auto packedEye=packEyeSurfaceProfile(eye);
-    require(std::memcmp(&packedEye,expectedEye.data(),sizeof(packedEye))==0,
+    require(std::memcmp(&packedEye,expectedEye.data(),sizeof(expectedEye))==0,
         "Typed eye packing must preserve all authored and reserved components");
     const auto selected=packMaterialSurfaceProfile(material);
-    require(std::memcmp(&selected,expectedEye.data(),sizeof(selected))==0,"Eye selects the typed eye record");
+    require(std::memcmp(&selected,expectedEye.data(),sizeof(expectedEye))==0,"Eye selects the typed eye record");
     material.eyeSurface.present=false;material.materialClass=AssetMaterialClass::Hair;material.projectedHairRamp=hair;
     const auto generic=packMaterialSurfaceProfile(material);
-    require(std::memcmp(&generic,expectedHair.data(),sizeof(generic))==0,"Other materials retain stable hair-compatible rows");
+    require(std::memcmp(&generic,expectedHair.data(),sizeof(expectedHair))==0,"Other materials retain stable hair-compatible rows");
 }
 
 void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {

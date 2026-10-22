@@ -9,6 +9,25 @@ except ImportError:
 
 
 class ProjectedHairMathTests(unittest.TestCase):
+    def test_line_modulates_indirect_and_protects_primary_band(self):
+        args=dict(strand=(0,1,0),normal=(0,0,1),half_vector=(1,0,0),
+            u=.007,frequency=100,strand_shift=0,range1=.95,depth=.5,
+            alternation=1,line_sample=.8,parameter_g=.5,q=(0,0,0),saturation=1.5)
+        factor,saturation=subject.line_response(**args)
+        self.assertAlmostEqual(factor,.8);self.assertAlmostEqual(saturation,1.1)
+        args['q']=(1,.1,.2)
+        self.assertVectorAlmostEqual(subject.line_response(**args),(1,1))
+        args.update(q=(0,0,0),alternation=0,u=.005)
+        self.assertAlmostEqual(subject.line_response(**args)[0],.75)
+        args['u']=.00501
+        self.assertAlmostEqual(subject.line_response(**args)[0],1)
+
+    def test_virtual_main_half_uses_projected_view_and_object_axes(self):
+        value=subject.virtual_half_vector(view=(0,0,1),light=(0,1,0),
+            object_x=(1,0,0),object_y=(0,1,0),object_z=(0,0,1),blend=1)
+        length=math.sqrt(13);y=3/length;z=1+2/length;normal=math.sqrt(y*y+z*z)
+        self.assertVectorAlmostEqual(value,(0,y/normal,z/normal))
+        self.assertGreater(abs(value[1]-math.sqrt(.5)),.1)
     def setUp(self):
         self.assertIsNotNone(subject, 'Projected hair reference contract is missing')
 

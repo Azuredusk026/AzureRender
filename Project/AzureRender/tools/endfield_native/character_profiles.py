@@ -87,7 +87,7 @@ def restore_profiles(document, audit, sources, payloads):
             'sourceKeywords': sorted(keywords), 'sourceFloats': floats, 'sourceColors': colors,
             'remainingNativeShaderInputs': []}
 
-        def source_payload(slot):
+        def source_payload(slot, allow_transform=False):
             if slot not in bindings:
                 raise ValueError('Missing active source slot: ' + slot)
             binding = bindings[slot]
@@ -95,12 +95,12 @@ def restore_profiles(document, audit, sources, payloads):
             if identity(ref) not in payloads:
                 raise ValueError('Missing source image: ' + slot)
             payload = payloads[identity(ref)]
-            if binding['scale'] != [1, 1] or binding['offset'] != [0, 0]:
+            if not allow_transform and (binding['scale'] != [1, 1] or binding['offset'] != [0, 0]):
                 raise ValueError('Character data requires an explicit supported UV transform: ' + slot)
             return payload, binding, ref
 
-        def bind_texture(slot, target):
-            payload, binding, ref = source_payload(slot)
+        def bind_texture(slot, target, allow_transform=False):
+            payload, binding, ref = source_payload(slot, allow_transform)
             if binding['color_space'] != 0:
                 raise ValueError('Character data texture must be linear: ' + slot)
             index = append_texture(payload, ref['name'])
@@ -179,6 +179,22 @@ def restore_profiles(document, audit, sources, payloads):
                 pbr.update(metallicFactor=0, roughnessFactor=1)
                 features.discard('surface-ao')
                 projected.update(surfaceResponse='strand-diffuse', diffuseScale=.96)
+                if '_SPECULAR_LINE' in keywords and floats.get('_SpecularLine')==1:
+                    fields={'_LineAmount':('frequency',0,65536),'_LineValue':('strandShift',0,1),
+                        '_LineRange':('range',0,1),'_LineIntensity':('depth',0,1),
+                        '_UseLineMap':('alternation',0,1),'_LineSaturation':('saturation',0,16)}
+                    line={'schemaVersion':1}
+                    for key,(target,minimum,maximum) in fields.items():
+                        value=floats.get(key)
+                        if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not minimum<=value<=maximum:
+                            raise ValueError('Invalid active specular line field: '+key)
+                        line[target]=2*value-1 if target=='strandShift' else value
+                    _,binding,_=source_payload('_LineMap',True)
+                    transform=list(binding['scale'])+list(binding['offset'])
+                    if len(transform)!=4 or any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) or abs(v)>65536 for v in transform):
+                        raise ValueError('Invalid specular line UV transform')
+                    line.update(texture=bind_texture('_LineMap','hair.projectedRamp.line.texture',True),uvTransform=transform)
+                    projected['line']=line
                 row['projectedHairSource'] = {'shader': shader, 'pass': 'ForwardLit', 'program': 263,
                     'parameterBlob': 45, 'objectBasisStatus': 'identity-candidate-runtime-frame-unverified',
                     'normalConvention': {'sourceBackFaceNormalFlip': 0,
@@ -200,6 +216,7 @@ def restore_profiles(document, audit, sources, payloads):
                     'object-basis-runtime-verification', 'source-sampler-runtime-binding',
                     'object-highlight-gain', 'direct-light-global-constants',
                     'parameter-B-shadow-ramp-screen-rim']
+                if 'line' in projected:row['remainingProjectedHairInputs'].remove('SPECULAR_LINE')
                 row['hostHairParameters'] = 'Projected ramp consumes source fields; legacy fields configure the fallback contract'
         if '_DIFF_RAMP_ON' in keywords and floats.get('_UseDiffRampMap') == 1 and kind != 'face':
             index = bind_texture('_DiffRampMap', 'diffuseRamp.texture')

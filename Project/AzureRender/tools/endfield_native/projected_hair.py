@@ -42,6 +42,17 @@ def _sine(projection):
     return max(math.sqrt(max(1 - projection * projection, 0)), .0001)
 
 
+def virtual_half_vector(*, view, light, object_x, object_y, object_z, blend):
+    """Main-light half vector from captured event 950 instructions 1175-1196."""
+    v=_normal(view,(0,0,1))
+    local=(_dot(v,object_x),.5+blend*(light[1]-.5),_dot(v,object_z))
+    virtual=tuple(2*(object_x[i]*local[0]+object_y[i]*local[1]+object_z[i]*local[2])+blend*light[i] for i in range(3))
+    virtual=_normal(virtual,(0,0,1))
+    half=tuple(a+b for a,b in zip(virtual,v))
+    inverse=1/math.sqrt(max(_dot(half,half),2**-14))
+    return tuple(value*inverse for value in half)
+
+
 def project_coordinates(*, half_vector, highlight_normal, view, source_parameters,
                         tangent, object_x, object_y, object_z, primary_shift,
                         secondary_shift, range2, edge_fade_power, direction_x):
@@ -85,3 +96,17 @@ def evaluate_energy(coordinates, ramp_sample, source_parameters, intensity, seco
     secondary_scale = (source_parameters[3] * coordinates.edge_fade
                        * coordinates.secondary_lobe * (1 - max(q)))
     return Energy(q, primary, tuple(value * secondary_scale for value in secondary_color))
+
+
+def line_response(*, strand, normal, half_vector, u, frequency, strand_shift,
+                  range1, depth, alternation, line_sample, parameter_g, q, saturation):
+    """Captured event 950 instructions 1219-1248; indirect factor and saturation."""
+    shifted=_normal(tuple(s+n*strand_shift for s,n in zip(strand,normal)),(1,0,0))
+    lobe=_sine(_dot(shifted,half_vector))**math.trunc(max(1-range1,0)*200)
+    phase=u*frequency-math.floor(u*frequency)
+    alternating=1.0 if phase>.5 else 0.0
+    weight=alternating+alternation*(1-line_sample-alternating)
+    base=1+depth*(weight-1)
+    protected=base+(1-base)*max(q)
+    factor=1+parameter_g*(protected-1)*lobe
+    return factor,saturation+(1-saturation)*factor

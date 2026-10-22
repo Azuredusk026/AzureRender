@@ -65,7 +65,7 @@ std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
     for(const auto& m:asset.materials)
         for(const auto* pixels:{&m.baseColorPixels,&m.normalPixels,&m.metallicRoughnessPixels,
                 &m.specularEmissivePixels,&m.styleMaskPixels,&m.matcapPixels,&m.hairDataPixels,
-                &m.faceSdf.pixels,&m.shadowColorLutPixels,&m.projectedHairRamp.parameterPixels})bytes+=pixels->size();
+                &m.faceSdf.pixels,&m.shadowColorLutPixels,&m.projectedHairRamp.parameterPixels,&m.projectedHairRamp.line.pixels})bytes+=pixels->size();
     return bytes;
 }
 
@@ -1558,7 +1558,8 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
     case 6:upload(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
     case 7:{if(m.projectedHairRamp.present){auto& h=m.projectedHairRamp;upload(h.parameterPixels,h.parameterWidth,h.parameterHeight,g.faceSdf,mipLevels);}
         else if(faceSdfPrepared_&&m.faceSdf.present){upload(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
-    case 8:upload(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,1);break;
+    case 8:if(m.projectedHairRamp.line.present){auto& line=m.projectedHairRamp.line;upload(line.pixels,line.width,line.height,g.shadowColorLut,mipLevels);}
+        else upload(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,1);break;
     default:throw std::runtime_error("Invalid material upload slot");
     }
 }

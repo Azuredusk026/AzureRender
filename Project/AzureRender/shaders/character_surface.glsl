@@ -36,6 +36,18 @@ vec3 characterProjectedSafeNormalize(vec3 value, vec3 fallback) {
     return length2 > 1e-12 ? value * inversesqrt(length2) : fallback;
 }
 
+vec3 characterProjectedVirtualHalf(vec3 view,vec3 light,vec3 objectX,vec3 objectY,vec3 objectZ,float blend){
+    vec3 local=vec3(dot(view,objectX),mix(.5,light.y,blend),dot(view,objectZ));
+    vec3 virtualLight=characterProjectedSafeNormalize(2.0*(objectX*local.x+objectY*local.y+objectZ*local.z)+blend*light,vec3(0,0,1));
+    vec3 halfVector=virtualLight+view;
+    return halfVector*inversesqrt(max(dot(halfVector,halfVector),1.0/16384.0));
+}
+
+vec3 characterProjectedHairStrand(vec3 normal,vec4 tangent,float parameterR,vec3 objectX,vec3 objectY,float directionX){
+    vec3 axis=characterProjectedSafeNormalize(objectX*directionX+objectY,vec3(0,1,0));
+    return cross(normal,mix(cross(normal,axis),tangent.xyz,parameterR))*mix(1.0,tangent.w,parameterR);
+}
+
 float characterProjectedHairSine(float projection) {
     return max(sqrt(max(1.0 - projection * projection, 0.0)), 0.0001);
 }
@@ -48,11 +60,7 @@ CharacterProjectedHairCoordinates characterProjectedHairCoordinates(
     vec3 normal = characterProjectedSafeNormalize(highlightNormal, vec3(0, 0, 1));
     vec3 viewDirection = characterProjectedSafeNormalize(view, vec3(0, 0, 1));
     vec3 halfDirection = characterProjectedSafeNormalize(halfVector, vec3(0, 0, 1));
-    vec3 axis = characterProjectedSafeNormalize(
-        objectX * directionX + objectY, vec3(0, 1, 0));
-    vec3 strand = cross(normal,
-        mix(cross(normal, axis), tangent.xyz, sourceParameters.r))
-        * mix(1.0, tangent.w, sourceParameters.r);
+    vec3 strand = characterProjectedHairStrand(normal,tangent,sourceParameters.r,objectX,objectY,directionX);
     vec3 fallback = characterProjectedSafeNormalize(tangent.xyz, vec3(1, 0, 0));
     vec3 primary = characterProjectedSafeNormalize(
         strand + normal * primaryShift, fallback);
@@ -89,6 +97,17 @@ CharacterProjectedHairEnergy characterProjectedHairEnergy(
         * coordinates.edgeFade * coordinates.secondaryLobe
         * (1.0 - max(max(q.r, q.g), q.b));
     return CharacterProjectedHairEnergy(q, primary, secondary);
+}
+
+vec2 characterProjectedHairLine(vec3 strand,vec3 normal,vec3 halfVector,float u,float lineSample,
+    float parameterG,vec3 q,vec4 shape,vec2 color) {
+    vec3 shifted=characterProjectedSafeNormalize(strand+normal*shape.y,vec3(1,0,0));
+    float lobe=pow(characterProjectedHairSine(dot(shifted,halfVector)),trunc(max(1.0-shape.z,0.0)*200.0));
+    float alternating=ceil(max(fract(u*shape.x)-.5,0.0));
+    float weight=mix(alternating,1.0-lineSample,color.x);
+    float base=mix(1.0,weight,shape.w);
+    float factor=1.0+parameterG*(mix(base,1.0,max(max(q.r,q.g),q.b))-1.0)*lobe;
+    return vec2(factor,mix(color.y,1.0,factor));
 }
 
 // Material-only terms. The caller supplies an explicit host light adapter.

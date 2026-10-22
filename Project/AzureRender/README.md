@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+投影头发支持显式虚拟主灯与独立条纹。
+数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。
 完整材质文档接入共享 glTF 解释器与 UUID 依赖。
 十三槽真实角色对照见[完整文档验收](docs/acceptance/nr/complete-material-document.md)。
 

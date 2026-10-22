@@ -1,5 +1,5 @@
 #pragma once
-#include "render/LightShape.hpp"
+#include "ecs/LightShape.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& value,const LightReceivers& receivers) {

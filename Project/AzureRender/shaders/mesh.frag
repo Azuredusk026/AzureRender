@@ -151,7 +151,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[6]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[12]; };
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
 } materialSurfaceProfiles;
@@ -177,7 +177,7 @@ vec3 projectedHairNormal(vec2 encoded,float scale) {
     return characterProjectedSafeNormalize(tangent*xy.x*scale+bitangent*xy.y*scale+normal*z,normal);
 }
 
-CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light) {
+CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool directional,bool evaluateLine,out vec2 line) {
     ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
     vec4 parameters=texture(AZ_TEX_FACE_SDF,textureCoordinate);
     vec4 packedNormals=texture(AZ_TEX_HAIR_DATA,textureCoordinate);
@@ -186,14 +186,30 @@ CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light) {
     vec3 objectX=normalize(frame*p.objectX.xyz);
     vec3 objectY=normalize(frame*p.objectY.xyz);
     vec3 objectZ=normalize(frame*p.objectZ.xyz);
-    // The host supplies actual scene light directions. Source main-light
-    // virtual-direction globals require an independent runtime binding audit.
+    // Scene directional lights use the material's explicit virtual adapter.
+    vec4 adapter=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6];
+    vec3 halfVector=adapter.x>.5&&directional?characterProjectedVirtualHalf(view,light,objectX,objectY,objectZ,adapter.y)
+        :characterProjectedSafeNormalize(view+light,normal);
     CharacterProjectedHairCoordinates coordinates=characterProjectedHairCoordinates(
-        characterProjectedSafeNormalize(view+light,normal),normal,view,parameters,worldTangent,
+        halfVector,normal,view,parameters,worldTangent,
         objectX,objectY,objectZ,p.shiftsIntensityRange.x,p.shiftsIntensityRange.y,
         p.shiftsIntensityRange.w,p.edgeNormalDirection.x,p.edgeNormalDirection.z);
     vec3 ramp=textureLod(AZ_TEX_MATCAP,coordinates.uv,0.0).rgb;
-    return characterProjectedHairEnergy(coordinates,ramp,parameters,p.shiftsIntensityRange.z,p.secondaryColor.rgb);
+    CharacterProjectedHairEnergy energy=characterProjectedHairEnergy(coordinates,ramp,parameters,p.shiftsIntensityRange.z,p.secondaryColor.rgb);
+    line=vec2(1);
+    PackedMaterialSurfaceProfile packed=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+    if(evaluateLine&&packed.rows[8].z>.5){
+        vec4 uvTransform=packed.rows[9];
+        float sampleValue=texture(AZ_TEX_SHADOW_COLOR_LUT,textureCoordinate*uvTransform.xy+uvTransform.zw).r;
+        vec3 strand=characterProjectedHairStrand(normal,worldTangent,parameters.r,objectX,objectY,p.edgeNormalDirection.z);
+        line=characterProjectedHairLine(strand,normal,halfVector,textureCoordinate.x,sampleValue,parameters.g,energy.q,packed.rows[7],packed.rows[8].xy);
+    }
+    if(adapter.x>.5){energy.primary*=adapter.z;energy.secondary*=adapter.z;}
+    return energy;
+}
+
+CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light,bool directional){
+    vec2 line;return projectedHairResponse(view,light,directional,false,line);
 }
 
 vec2 directionToEquirectangular(vec3 direction) {
@@ -847,7 +863,7 @@ void main() {
         clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
             if(projectedHair) {
-                CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection);
+                CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection,light.coneType.y>1.5);
                 sceneHairPrimary+=energy.primary*radiance*material.featureParameters.y;
                 // The observed local-light variant only contributes its main lobe.
                 if(light.coneType.y>1.5)sceneHairSecondary+=energy.secondary*radiance*material.featureParameters.y;
@@ -1059,7 +1075,7 @@ void main() {
     kkSpecular=min(kkSpecular,vec3(material.matcapColor.w));
     }
     if(projectedHair) {
-        CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,lightDirection);
+        CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,lightDirection,true);
         vec3 lightEnergy=keyColor*camera.showcaseParameters.y*keyVisibility
             *material.featureParameters.y*bandEnabled;
         kkSpecular=min(energy.primary*lightEnergy,vec3(material.matcapColor.w));
@@ -1183,6 +1199,13 @@ void main() {
         vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
+    }
+    if(projectedHair&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].z>.5
+        &&(camera.clusterLighting.x<.5||camera.mainLightDirection.w>.5)){
+        vec2 line;projectedHairResponse(viewDirection,lightDirection,true,true,line);
+        vec3 dark=ambientDiffuse*line.x;
+        vec3 adjusted=mix(vec3(dot(dark,vec3(.212673,.715152,.072175))),dark,line.y);
+        beautyColor+=adjusted-ambientDiffuse;ambientDiffuse=adjusted;
     }
     if(camera.probeParameters.x>.5){
         vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);

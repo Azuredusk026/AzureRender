@@ -154,6 +154,15 @@ struct AssetMaterial {
         enum class SurfaceResponse : std::uint8_t { Layered, StrandDiffuse };
         bool present=false;
         AssetMaterialFrame frame;
+        bool virtualLight=false;
+        float virtualBlend=1,objectGain=1;
+        struct SpecularLine {
+            bool present=false;
+            float frequency=1,strandShift=0,range=1,depth=0,alternation=1,saturation=1;
+            std::array<float,4> uvTransform{1,1,0,0};
+            std::vector<std::uint8_t> pixels;
+            std::uint32_t width=0,height=0;
+        } line;
         float primaryShift=0,secondaryShift=0,intensity=1,secondaryRange=.5F;
         float edgeFade=1,specularNormalScale=1,directionX=0,surfaceNormalScale=1;
         std::array<float,3> secondaryColor{1,1,1};

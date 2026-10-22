@@ -11,7 +11,7 @@
 
 #include "scene/TransformMath.hpp"
 #include "assets/MaterialBinding.hpp"
-#include "render/LightShape.hpp"
+#include "ecs/LightShape.hpp"
 #include "render/ReflectionProbe.hpp"
 #include "render/IrradianceVolumeBinding.hpp"
 

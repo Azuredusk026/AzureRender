@@ -1,5 +1,5 @@
 #pragma once
-#include "render/LightShape.hpp"
+#include "ecs/LightShape.hpp"
 
 #include "Entity.hpp"
 #include "reflection/Annotations.hpp"

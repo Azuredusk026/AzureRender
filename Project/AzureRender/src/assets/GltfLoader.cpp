@@ -976,7 +976,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -999,6 +999,46 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         return static_cast<float>(number);
     };
     auto& target=result.projectedHairRamp;
+    if(source.Has("line")) {
+        const auto& line=source.Get("line");
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("line");
+        if(!raw.is_object()||raw.size()!=9||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||profile.Has("shadowColorLut")||(result.materialFeatures&MaterialFeatureShadowColorLut))
+            throw std::invalid_argument("projectedRamp.line requires version 1 and exclusive slot 8 ownership");
+        const auto number=[&](const char* name,float minimum,float maximum) {
+            if(!raw.contains(name)||!raw.at(name).is_number())throw std::invalid_argument(std::string("Invalid projectedRamp.line.")+name);
+            const auto value=raw.at(name).get<double>();
+            if(!std::isfinite(value)||value<minimum||value>maximum)throw std::invalid_argument(std::string("Invalid projectedRamp.line.")+name);
+            return static_cast<float>(value);
+        };
+        auto& input=target.line;
+        input.frequency=number("frequency",0,65536);input.strandShift=number("strandShift",-1,1);
+        input.range=number("range",0,1);input.depth=number("depth",0,1);
+        input.alternation=number("alternation",0,1);input.saturation=number("saturation",0,16);
+        if(!raw.contains("uvTransform")||!raw.at("uvTransform").is_array()||raw.at("uvTransform").size()!=4)
+            throw std::invalid_argument("Invalid projectedRamp.line.uvTransform");
+        for(unsigned i=0;i<4;++i){const auto& value=raw.at("uvTransform")[i];
+            if(!value.is_number()||!std::isfinite(value.get<double>())||std::abs(value.get<double>())>65536)
+                throw std::invalid_argument("Invalid projectedRamp.line.uvTransform");
+            input.uvTransform[i]=value.get<float>();}
+        if(!line.Has("texture")||!line.Get("texture").IsInt())throw std::invalid_argument("Invalid projectedRamp.line.texture");
+        const auto texture=line.Get("texture").Get<int>();
+        if(texture<0||static_cast<std::size_t>(texture)>=model.textures.size()||model.textures[texture].source<0
+            ||static_cast<std::size_t>(model.textures[texture].source)>=model.images.size())
+            throw std::invalid_argument("Invalid projectedRamp.line.texture");
+        input.present=true;
+        result.textureSettings[8].usage="linear";result.textureSettings[8].colorSpace="linear";
+        result.textureSettings[8].wrapU=result.textureSettings[8].wrapV="repeat";
+        result.textureSettings[8].mipPolicy="generate";result.textureSettings[8].anisotropy=8;
+    }
+    if(source.Has("virtualLight")){
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("virtualLight");
+        if(!raw.is_object()||raw.size()!=3||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||!raw.at("blend").is_number()||!std::isfinite(raw.at("blend").get<double>())||raw.at("blend").get<double>()<0||raw.at("blend").get<double>()>1
+            ||!raw.at("objectGain").is_number()||!std::isfinite(raw.at("objectGain").get<double>())||raw.at("objectGain").get<double>()<0||raw.at("objectGain").get<double>()>16)
+            throw std::invalid_argument("Invalid projectedRamp.virtualLight");
+        target.virtualLight=true;target.virtualBlend=raw.at("blend").get<float>();target.objectGain=raw.at("objectGain").get<float>();
+    }
     if(source.Has("frame")){
         const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("frame");
         if(!raw.is_object()||raw.size()!=3||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
@@ -1635,6 +1675,12 @@ AssetMaterial loadMaterial(
         constexpr std::array<double,4> noFactor{1,1,1,1};auto& hair=result.projectedHairRamp;
         hair.parameterPixels=decodeImageRgba(model,projectedHairParameterImage,noFactor,
             hair.parameterWidth,hair.parameterHeight,false,authored,&result.authoredMipLevels[7]);
+        if(hair.line.present){
+            const auto& profile=material->extras.Get("azureRenderMaterial").Get("hair").Get("projectedRamp").Get("line");
+            const auto texture=profile.Get("texture").Get<int>();auto& line=hair.line;
+            line.pixels=decodeImageRgba(model,model.textures.at(texture).source,noFactor,
+                line.width,line.height,false,authored,&result.authoredMipLevels[8]);
+        }
     }
     if(material && material->extras.Has("azureRenderMaterial")) {
         const auto& profile=material->extras.Get("azureRenderMaterial");

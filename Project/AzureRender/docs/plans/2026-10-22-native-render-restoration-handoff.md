@@ -12,7 +12,8 @@
 八次 GPU 夹具与真实角色对照见[覆盖验收](../acceptance/nr/material-parameter-overrides.md)。
 C15 完整画像、UUID 依赖及编辑事务接入通过。
 证据见[完整文档验收](../acceptance/nr/complete-material-document.md)。
-当前进入 C16 的材质输入、坐标系和 GPU 绑定检查。
+当前执行 C16 的输入边界及 C17 的多层高光。
+虚拟主灯与独立条纹已接入公共材质契约。
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。
 

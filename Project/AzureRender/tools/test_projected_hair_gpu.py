@@ -22,7 +22,7 @@ import numpy as np
 from PIL import Image
 
 from create_visibility_fixture import component
-from endfield_native.projected_hair import project_coordinates, evaluate_energy
+from endfield_native.projected_hair import project_coordinates, evaluate_energy, virtual_half_vector
 
 
 SIZE = 128
@@ -63,7 +63,8 @@ def cases():
     result = []
     for name in ('baseline', 'reverse-light', 'zero-parameters', 'secondary-directional',
                  'secondary-local', 'split-normals', 'mirrored', 'rotated',
-                 'dark', 'disabled', 'fixed', 'linear-control', 'frame-identity', 'frame-turned', 'frame-turned-fixed'):
+                 'dark', 'disabled', 'fixed', 'linear-control', 'frame-identity', 'frame-turned', 'frame-turned-fixed',
+                 'virtual-main','virtual-fixed','virtual-zero-gain','virtual-point','virtual-control'):
         case = copy.deepcopy(default)
         case['name'] = name
         if name == 'reverse-light': case['reverse'] = True
@@ -83,6 +84,10 @@ def cases():
         if name.startswith('frame-'):
             case['materialFrame']=90 if 'turned' in name else 0
             if name.endswith('-fixed'):case['fixed']=True
+        if name.startswith('virtual-'):
+            case['virtual']=name!='virtual-control';case['objectGain']=0 if name=='virtual-zero-gain' else 1
+            case['fixed']=name=='virtual-fixed';case['local']=name=='virtual-point'
+            case['lightY']=.6;case['primaryShift']=-1/3
         result.append(case)
     return result
 
@@ -126,7 +131,8 @@ def expectation(case):
     object_frame=frame @ rotation(case.get('materialFrame',0))
     tangent = (*tuple(frame[:, 0]), -1 if case['mirror'] else 1)
     bitangent = np.cross((0, 0, 1), tangent[:3]) * tangent[3]
-    light = turn @ np.array([0., -.04 if case['reverse'] else .04, math.sqrt(1 - .04**2)])
+    light_y=case.get('lightY',.04)
+    light = turn @ np.array([0., -light_y if case['reverse'] else light_y, math.sqrt(1 - light_y**2)])
     point_light = turn @ np.array([0., .16, 4.])
     projection_scale = math.tan(math.radians(FOV) * .5) * CAMERA[2]
     for side, x, y in samples(case):
@@ -143,10 +149,11 @@ def expectation(case):
         n = normalized(np.asarray(tangent[:3]) * xy[0] * source['specularScale']
                        + bitangent * xy[1] * source['specularScale'] + np.array([0, 0, z]))
         parameters = (source['r'] / 255, source['g'] / 255, 37 / 255, source['a'] / 255)
-        coordinates = project_coordinates(half_vector=normalized(view + direction),
+        half=virtual_half_vector(view=view,light=direction,object_x=object_frame[:,0],object_y=object_frame[:,1],object_z=object_frame[:,2],blend=1) if case.get('virtual') and not case['local'] else normalized(view+direction)
+        coordinates = project_coordinates(half_vector=half,
             highlight_normal=n, view=view, source_parameters=parameters, tangent=tangent,
             object_x=object_frame[:, 0], object_y=object_frame[:, 1], object_z=object_frame[:, 2],
-            primary_shift=0, secondary_shift=0, range2=1, edge_fade_power=2, direction_x=0)
+            primary_shift=case.get('primaryShift',0), secondary_shift=0, range2=1, edge_fade_power=2, direction_x=0)
         ramp, rows = ramp_sample(coordinates.uv)
         energy = evaluate_energy(coordinates, ramp, parameters, 1, (0, 0, .5))
         attenuation = 1.
@@ -155,6 +162,7 @@ def expectation(case):
             attenuation = max(1 - distance / 10, 0)**2 / (1 + distance * distance * .12)
         expected = (np.asarray(energy.primary) + (0 if case['local'] else np.asarray(energy.secondary)))
         expected *= LIGHT_INTENSITY * attenuation * 3  # hair-kk isolation multiplier
+        expected *= case.get('objectGain',1)
         if case['dark'] or case['disabled']: expected[:] = 0
         if case['control']: expected = linear(CONTROL[:3])
         assert np.isfinite(expected).all() and (expected >= 0).all() and (expected < 1).all()
@@ -206,7 +214,7 @@ def model(case):
                 'hair': {'power': 200, 'strength': 4, 'rampRow': 3, 'strandShift': .1,
                     'upperLimit': 16, 'dataTexture': normals, 'dataNormalY': 'positive',
                     'projectedRamp': {'schemaVersion': 1, 'parameterTexture': parameters, 'rampTexture': ramp,
-                        'primaryShift': 0, 'secondaryShift': 0, 'intensity': 1, 'secondaryRange': 1,
+                        'primaryShift': case.get('primaryShift',0), 'secondaryShift': 0, 'intensity': 1, 'secondaryRange': 1,
                         'edgeFade': 2, 'specularNormalScale': data['specularScale'],
                         'surfaceNormalScale': data['surfaceScale'], 'directionX': 0,
                         'secondaryColor': [0, 0, .5], 'objectBasis': [1, 0, 0, 0, 1, 0, 0, 0, 1]}}}}})
@@ -218,6 +226,9 @@ def model(case):
         primitives.append({'attributes': attributes, 'indices': accessor([0, 1, 2, 0, 2, 3], 1, 'SCALAR', indices=True),
                            'material': len(materials) - 1})
     frame_nodes=[]
+    if case.get('virtual'):
+        for material in materials:material['extras']['azureRenderMaterial']['hair']['projectedRamp']['virtualLight']={
+            'schemaVersion':1,'blend':1,'objectGain':case['objectGain']}
     if 'materialFrame' in case:
         angle=math.radians(case['materialFrame'])*.5
         frame_nodes=[{'name':'HairFrame','rotation':[0,0,math.sin(angle),math.cos(angle)]}]
@@ -236,7 +247,8 @@ def prepare(case, root):
     assets.mkdir(parents=True)
     (assets / 'panels.gltf').write_text(json.dumps(model(case)), encoding='utf8')
     turn = rotation(case['rotation'])
-    direction = turn @ np.array([0, -.04 if case['reverse'] else .04, math.sqrt(1 - .04**2)])
+    light_y=case.get('lightY',.04)
+    direction = turn @ np.array([0, -light_y if case['reverse'] else light_y, math.sqrt(1 - light_y**2)])
     point = turn @ np.array([0, .16, 4.])
     level = {'schemaVersion': 1, 'id': case['name'], 'sceneType': 'character',
         'renderSettings': {'platform': False, 'background': False, 'silhouetteOutline': False,
@@ -282,6 +294,9 @@ def preflight(prepared):
     assert np.array_equal(values['frame-identity'],values['baseline'])
     assert np.max(np.abs(values['frame-turned']-values['baseline']))>.01
     assert np.array_equal(values['frame-turned'],values['frame-turned-fixed'])
+    assert np.array_equal(values['virtual-main'],values['virtual-fixed'])
+    assert np.max(np.abs(values['virtual-main']-values['virtual-control']))>.01
+    assert np.max(values['virtual-zero-gain'])==0
 
 
 def capture(player, case, project, root, expected, require_validation):
@@ -332,7 +347,7 @@ def run(player, output, *, prepare_only=False, require_validation=False):
     summary = {'schemaVersion': 1, 'status': 'prepared', 'caseCount': len(definitions), 'captures': [],
         'maximumLinearError': BUDGET, 'outputEncoding': 'sRGB', 'cpuPreflightPassed': True,
         'rayContract': {'camera': CAMERA.tolist(), 'fieldOfView': FOV, 'planeZ': 0, 'size': [SIZE, SIZE]},
-        'limitations': ['Native main-light virtual direction/global bindings are not reproduced by this fixture.',
+        'limitations': ['Main-light blend and object gain use explicit material inputs; captured shadow-field derivation is separate.',
             'This suite validates the explicit host projected-ramp contract and actual scene lights.',
             'Native SPECULAR_LINE and runtime object-frame equivalence require separate evidence.',
             'Prepared CPU expectations are not GPU execution evidence.']}

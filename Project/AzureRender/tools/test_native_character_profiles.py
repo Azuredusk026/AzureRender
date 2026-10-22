@@ -38,6 +38,22 @@ class NativeCharacterProfileTests(unittest.TestCase):
             payloads[('texture-cab', index)] = stream.getvalue()
         return doc, audit, raw, payloads
 
+    def test_specular_line_preserves_source_transform_and_signed_shift(self):
+        doc,audit,raw,payloads=self.projected_fixture()
+        raw[0]['data']['m_ValidKeywords'].append('_SPECULAR_LINE')
+        floats={'_SpecularLine':1,'_UseLineMap':1,'_LineAmount':300,'_LineValue':.7,
+            '_LineRange':.95,'_LineIntensity':.22,'_LineSaturation':1.5}
+        audit['materials'][0]['floats'] += [{'name':k,'value':v} for k,v in floats.items()]
+        audit['materials'][0]['textures'].append({'slot':'_LineMap','reference':{'resolved':{
+            'source':'texture-cab','path_id':6,'name':'line'}},'scale':[9.3,1],'offset':[-.32,0],'color_space':0})
+        payloads[('texture-cab',6)]=png((123,0,0,255))
+        result,report=subject.restore_profiles(doc,audit,raw,payloads)
+        line=result['materials'][0]['extras']['azureRenderMaterial']['hair']['projectedRamp']['line']
+        self.assertAlmostEqual(line['strandShift'],.4)
+        self.assertEqual(line['uvTransform'],[9.3,1,-.32,0])
+        self.assertEqual(line['frequency'],300)
+        self.assertNotIn('SPECULAR_LINE',report['materials'][0]['remainingProjectedHairInputs'])
+
     def fixture(self, name='M_actor_fixture_hair_01'):
         source = {'source': 'material-cab', 'path_id': 1, 'name': name}
         slots = {'_SplitNormalMap': (128, 128, 100, 200),

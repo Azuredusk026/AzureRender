@@ -3,8 +3,8 @@
 #include <array>
 #include <cmath>
 #include <stdexcept>
-#include "render/LightInfluenceBox.hpp"
-#include "render/LightReceivers.hpp"
+#include "ecs/LightInfluenceBox.hpp"
+#include "ecs/LightReceivers.hpp"
 
 namespace azurerender {
 enum class LightKind { Point = 0, Spot = 1, Directional = 2 };
