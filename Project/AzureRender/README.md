@@ -61,6 +61,9 @@ AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、�
 
 ## 当前可用能力
 
+角色材质支持二维发丝高光与独立表面响应。
+源参数、双配置检查及范围见[高光验收](docs/acceptance/nr/projected-hair.md)。
+
 双击安装目录中的 `bin/AzureRender.exe` 进入项目中心。
 新建或打开工程后进入编辑器，项目目录独立保存。
 GUI 发布产生项目命名的 exe 与完整游戏目录。

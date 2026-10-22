@@ -60,6 +60,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureDiffuseRamp = 1U << 13U,
     MaterialFeatureSilhouetteOutline = 1U << 14U,
     MaterialFeatureMultiplyComposite = 1U << 15U,
+    MaterialFeatureHairProjectedRamp = 1U << 16U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -138,6 +139,19 @@ struct AssetMaterial {
     std::array<float, 4> matcapColor{1.0F, 1.0F, 1.0F, 0.0F};
     std::array<float, 4> hairParameters{64.0F, 0.15F, 4.0F, 0.0F};
     std::array<float,4> hairViewParameters{0,0,0,1};
+    struct ProjectedHairRamp {
+        enum class SurfaceResponse : std::uint8_t { Layered, StrandDiffuse };
+        bool present=false;
+        float primaryShift=0,secondaryShift=0,intensity=1,secondaryRange=.5F;
+        float edgeFade=1,specularNormalScale=1,directionX=0,surfaceNormalScale=1;
+        std::array<float,3> secondaryColor{1,1,1};
+        SurfaceResponse surfaceResponse=SurfaceResponse::Layered;
+        float diffuseScale=1;
+        // Column-major source object axes expressed in the asset frame.
+        std::array<float,9> objectBasis{1,0,0,0,1,0,0,0,1};
+        std::vector<std::uint8_t> parameterPixels;
+        std::uint32_t parameterWidth=0,parameterHeight=0;
+    } projectedHairRamp;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

@@ -1,5 +1,6 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "rhi/NullRhi.hpp"
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <cstring>
@@ -12,10 +13,11 @@ namespace {
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 class Capture final:public rhi::ICommandRecorder {
 public:
-    struct Draw {unsigned pass,first;std::array<float,16> transform;};
+    struct Draw {unsigned pass,first;std::array<float,16> transform;unsigned materialAndSelection=0;bool materialUpdated=false;};
     std::vector<Draw> draws;
     std::array<unsigned char,212> constants{};
     unsigned pass=0;
+    bool materialUpdated=false;
     void beginRenderPass(const rhi::RenderPassBeginDesc&) override{++pass;}
     void endRenderPass() override{}
     void setViewport(float,float,float=0,float=0) override{}
@@ -27,6 +29,7 @@ public:
     void pushConstants(VkPipelineLayout,VkShaderStageFlags,unsigned offset,const void* data,unsigned size) override {
         require(offset+size<=constants.size(),"Push constants exceed the shared range");
         std::memcpy(constants.data()+offset,data,size);
+        if(offset<=124&&offset+size>=128)materialUpdated=true;
     }
     void bindVertexBuffer(VkBuffer,VkDeviceSize) override{}
     void bindIndexBuffer(VkBuffer,VkDeviceSize) override{}
@@ -34,6 +37,8 @@ public:
     void drawIndexed(unsigned,unsigned first,unsigned=1,unsigned=0) override {
         Draw draw{pass,first,{}};
         std::memcpy(draw.transform.data(),constants.data()+144,sizeof(draw.transform));
+        std::memcpy(&draw.materialAndSelection,constants.data()+124,sizeof(draw.materialAndSelection));
+        draw.materialUpdated=materialUpdated;materialUpdated=false;
         draws.push_back(draw);
     }
     void drawIndexedIndirect(VkBuffer,VkDeviceSize,unsigned,unsigned) override{}
@@ -61,6 +66,14 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute) {
     auto asset=std::make_shared<LoadedAsset>(loadGltfAsset(path));
     asset->nodes[0].opacity=.5F;
     for(auto& material:asset->materials)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
+    auto& projected=asset->materials.at(0);
+    projected.materialClass=AssetMaterialClass::Hair;
+    projected.materialProfileVersion=2;
+    projected.materialFeatures|=MaterialFeatureHairProjectedRamp|MaterialFeatureHairAnisotropy;
+    projected.projectedHairRamp.present=true;
+    projected.projectedHairRamp.parameterWidth=projected.projectedHairRamp.parameterHeight=2;
+    projected.projectedHairRamp.parameterPixels={0,128,0,255, 0,128,0,255, 0,128,0,255, 0,128,0,255};
+    projected.textureSettings[5].colorSpace=projected.textureSettings[7].colorSpace="linear";
     std::map<std::string,std::shared_ptr<const LoadedAsset>> prepared{{path,asset}};
     context.preparedMeshes=&prepared;
     context.scene.resources.push_back({"cube",path});
@@ -68,6 +81,9 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute) {
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
     settings.morphWeights={.4F,.6F};context.renderSettings=&settings;
     renderer.onLoad(context);
+    require(std::any_of(backend.calls.begin(),backend.calls.end(),[](const auto& call) {
+        return call.name=="writeDescriptorBuffer"&&call.detail.find(" binding=27")!=std::string::npos;
+    }),"Both descriptor paths must bind the immutable projected hair material table");
     SceneFrameData frame;frame.renderSettings=&settings;frame.swapchainWidth=256;frame.swapchainHeight=192;
     frame.gizmoActive=true;frame.selectedPrimitiveIndex=0;
     frame.gizmoTranslation[0]=.75F;frame.gizmoRotation[1]=30;frame.gizmoScale[0]=2;
@@ -75,6 +91,10 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute) {
     Capture capture;context.commands=&capture;renderer.recordScene(context);
     unsigned selected=0,unselected=0;
     for(const auto& draw:capture.draws) {
+        const auto primitive=std::find_if(asset->primitives.begin(),asset->primitives.end(),[&](const auto& value){return value.firstIndex==draw.first;});
+        require(primitive!=asset->primitives.end(),"Recorded draw must address a fixture primitive");
+        if(draw.materialUpdated)require((draw.materialAndSelection>>1U)==primitive->materialIndex,
+            "Each surface material update must retain its stable table index");
         if(draw.first==asset->primitives[0].firstIndex) {
             ++selected;
             if(std::abs(draw.transform[12]-.75F)>.00001F) {

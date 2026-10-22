@@ -67,9 +67,96 @@ RG 用于表面，BA 用于独立高光法线。
 | `cameraOffset` | 可选，三个有限数，绝对值至多 16 |
 | `upperLimit` | 可选，有限数，大于 0 且至多 16 |
 
-当前双叶高光使用引擎的幂次与偏移模型。
-原生二维高光色带及专有眼睛通道具有独立实现范围。
+上述双叶高光使用引擎的幂次与偏移模型。
+二维投影高光通过独立特征选择。
 具体原生候选的绑定状态见[场景角色验收](../acceptance/nr/character-scene-lighting.md)。
+
+## 二维投影高光
+
+`hair-projected-ramp` 选择版本 1 的投影模型。
+材质须使用版本 2、`hair` 类别及 `hair-anisotropy`。
+`hair.projectedRamp` 提供参数与纹理。
+`hair.dataTexture` 提供两组独立法线。
+
+`parameterTexture` 保留原始 RGBA 参数图。
+R 控制各向异性轴，G 控制主叶，A 控制次叶。
+`rampTexture` 保留至少 2×2 的二维线性色带。
+色带按双坐标、LOD 0、线性钳制采样。
+
+```json
+{
+  "schemaVersion": 1,
+  "parameterTexture": 5,
+  "rampTexture": 6,
+  "primaryShift": -0.02,
+  "secondaryShift": 0.02,
+  "intensity": 1.3,
+  "secondaryRange": 0.5,
+  "edgeFade": 5,
+  "specularNormalScale": 1,
+  "surfaceNormalScale": 1,
+  "directionX": 0,
+  "secondaryColor": [0.672, 0, 0.004363678],
+  "objectBasis": [1, 0, 0, 0, 1, 0, 0, 0, 1],
+  "surfaceResponse": "strand-diffuse",
+  "diffuseScale": 0.96
+}
+```
+
+`surfaceResponse` 与 `diffuseScale` 为可选字段。
+其余字段必须出现，未知字段和版本在加载时拒绝。
+偏移使用有符号值，源值转换式为 `2 * value - 1`。
+`objectBasis` 为列主序的正交单位基。
+对象基随实例和图元变换进入世界空间。
+
+`surfaceResponse` 默认为 `layered`。
+该响应将专用发丝高光叠加到通用表面。
+`strand-diffuse` 消费漫反射与专用发丝高光。
+其通用直射镜面与环境镜面贡献为零。
+
+`diffuseScale` 为 0 至 1 的有限数，默认为 1。
+该值独立控制漫反射能量。
+`strand-diffuse` 的场景灯漫反射倍率为 1。
+该模式通过显式缩放表达材质的能量系数。
+
+固定源着色器画像使用 `strand-diffuse` 与 0.96。
+转换器保留原始参数图，移除通用 ORM 绑定。
+该画像的参数 B 通道仍待原生阴影与色带支持。
+兼容粗糙度占位值为 1，金属度为 0。
+
+| 字段 | 范围 |
+| --- | --- |
+| `primaryShift`、`secondaryShift` | -1 至 1 |
+| `intensity` | 0 至 16 |
+| `secondaryRange` | 0 至 1 |
+| `edgeFade` | 0 至 64 |
+| 两项法线缩放 | 0 至 8 |
+| `directionX` | -16 至 16 |
+| `secondaryColor` 各分量 | 0 至 64 |
+
+两个法线均先重建 Z，再缩放 XY。
+表面法线消费背面翻转，高光法线保留原方向。
+投影视线与法线决定色带第二坐标。
+次叶指数为 `trunc(max(1 - secondaryRange, 0) * 200)`。
+
+方向灯消费主叶和次叶，局部灯消费主叶。
+半向量与光能来自宿主的实际场景灯光。
+源主灯虚拟方向和全局增益具有独立验收范围。
+独立条纹分支及原生采样器仍须运行证据核验。
+
+该模式独占材质纹理槽 5、6、7。
+分别存放二维色带、双法线与原始参数图。
+`hair-ramp`、脸部 SDF 与场景覆盖特征存在槽位冲突。
+加载器拒绝相应特征及输入对象的组合。
+
+材质表由渲染器加载并持有，卸载时统一释放。
+固定与索引路径使用同一表和稳定材质索引。
+片元阶段需要六个存储缓冲区。
+每个描述符集合需要十一个存储缓冲区。
+
+通用双叶高光、合成表面和原生候选分别验证。
+零投影及退化切线使用宿主的确定性保护。
+原生画面等价性须由真实场景对照建立。
 
 ## 乘法合成
 

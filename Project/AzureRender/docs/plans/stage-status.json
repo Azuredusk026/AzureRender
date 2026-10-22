@@ -1354,6 +1354,7 @@
         "docs/acceptance/nr/character-shadow-lut.md",
         "docs/acceptance/nr/character-scene-lighting.md",
         "docs/acceptance/nr/multiply-composite.md",
+        "docs/acceptance/nr/projected-hair.md",
         "docs/acceptance/nr/character-logistics-joint.md"
       ],
       "requiredAcceptance": [

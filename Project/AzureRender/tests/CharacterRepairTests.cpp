@@ -130,6 +130,84 @@ void testCharacterProfileTextures(const nlohmann::json& fixture, const std::file
     reject(invalid,"hair.dataNormalY", "Packed hair Y direction requires its source texture");
 }
 
+void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    const std::vector<std::uint8_t> pixels{17,63,107,211, 29,79,137,227, 43,97,151,239, 59,113,179,251};
+    require(stbi_write_png((directory/"projected-ramp.png").string().c_str(),2,2,4,pixels.data(),8)!=0,
+        "Cannot write two-dimensional hair fixture");
+    auto source=fixture;
+    const int image=static_cast<int>(source["images"].size());source["images"].push_back({{"uri","projected-ramp.png"}});
+    const int texture=static_cast<int>(source["textures"].size());source["textures"].push_back({{"source",image}});
+    auto& profile=source["materials"][0]["extras"]["azureRenderMaterial"];
+    profile={{"schemaVersion",2},{"class","hair"},{"features",{"hair-anisotropy","hair-projected-ramp"}},
+        {"hair",{{"power",200},{"strength",1},{"rampRow",3},{"strandShift",0},{"dataTexture",texture},
+            {"projectedRamp",{{"schemaVersion",1},{"parameterTexture",texture},{"rampTexture",texture},
+                {"primaryShift",-.02},{"secondaryShift",.02},{"intensity",1.3},{"secondaryRange",.5},
+                {"edgeFade",5},{"specularNormalScale",1.4},{"surfaceNormalScale",.8},{"directionX",.25},
+                {"secondaryColor",{.6,.1,.2}},{"objectBasis",{0,0,-1,0,1,0,1,0,0}}}}}}};
+    const auto load=[&](const Json& document) {
+        const auto path=directory/"projected-hair.gltf";std::ofstream(path)<<document.dump();return loadGltfAsset(path.string());
+    };
+    const auto reject=[&](const Json& document,const char* diagnostic="projectedRamp") {
+        std::string error;try{(void)load(document);}catch(const std::exception& failure){error=failure.what();}
+        if(error.find(diagnostic)==std::string::npos)throw std::runtime_error("Projected hair invalid input accepted: "+error
+            +"; "+document["materials"][0]["extras"]["azureRenderMaterial"]["hair"].dump());
+    };
+    const auto asset=load(source);const auto& material=asset.materials.at(0);const auto& hair=material.projectedHairRamp;
+    require(hair.present&&hair.parameterPixels==pixels&&hair.parameterWidth==2&&hair.parameterHeight==2,
+        "Projected hair must retain all four parameter channels independently from ORM");
+    require(material.matcapWidth==2&&material.matcapHeight==2&&material.matcapPixels==pixels,
+        "Projected hair must preserve both ramp dimensions and every linear byte");
+    require(material.textureSettings[5].colorSpace=="linear"&&material.textureSettings[5].wrapU=="clamp"
+        &&material.textureSettings[5].wrapV=="clamp"&&material.textureSettings[5].mipPolicy=="none"
+        &&material.textureSettings[5].anisotropy==1&&material.textureSettings[7].colorSpace=="linear",
+        "Projected ramp and parameter sampling must retain their independent linear semantics");
+    require(std::abs(hair.primaryShift+.02F)<.000001F&&std::abs(hair.secondaryShift-.02F)<.000001F
+        &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
+        "Signed shifts, independent normal scales and rotated source basis must survive loading");
+    auto strand=source;
+    auto& strandProfile=strand["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"];
+    strandProfile["surfaceResponse"]="strand-diffuse";strandProfile["diffuseScale"]=.96;
+    const auto strandAsset=load(strand);
+    require(strandAsset.materials[0].projectedHairRamp.surfaceResponse==AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+        &&std::abs(strandAsset.materials[0].projectedHairRamp.diffuseScale-.96F)<.000001F,
+        "Strand surface response and independent diffuse energy must survive loading");
+    require(hair.surfaceResponse==AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered&&hair.diffuseScale==1,
+        "Projected ramp defaults must retain the layered surface contract");
+    strandProfile["surfaceResponse"]="layered";(void)load(strand);
+    for(const auto& mode:Json::array({"unknown",1,true,nullptr})) {
+        auto invalid=strand;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["surfaceResponse"]=mode;
+        reject(invalid,"projectedRamp.surfaceResponse");
+    }
+    for(const auto& scale:Json::array({-1,1.1,".96",true,nullptr})) {
+        auto invalid=strand;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["diffuseScale"]=scale;
+        reject(invalid,"projectedRamp.diffuseScale");
+    }
+    for(const auto& version:Json::array({0,2,.5,"1"})) {
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["schemaVersion"]=version;reject(bad);
+    }
+    for(const char* field:{"primaryShift","secondaryShift","intensity","secondaryRange","edgeFade",
+        "specularNormalScale","surfaceNormalScale","directionX","secondaryColor","objectBasis","parameterTexture","rampTexture"}) {
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"].erase(field);reject(bad);
+    }
+    for(const char* field:{"primaryShift","secondaryShift","intensity","secondaryRange","edgeFade",
+        "specularNormalScale","surfaceNormalScale","directionX"}) {
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"][field]=1000;reject(bad);
+    }
+    for(const auto& index:Json::array({-1,.5,"1",99999}))for(const char* field:{"parameterTexture","rampTexture"}) {
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"][field]=index;reject(bad);
+    }
+    for(const char* conflict:{"hair-ramp","face-sdf-eligible","scene-tint","overlay","brow-overlay"}) {
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back(conflict);reject(bad);
+    }
+    auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy"};reject(bad);
+    bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"].erase("projectedRamp");reject(bad);
+    bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["unknown"]=1;reject(bad);
+    bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["objectBasis"]={1,0,0,1,0,0,0,0,1};reject(bad);
+    bad=source;bad["images"][image]["uri"]="diffuse-ramp.png";reject(bad);
+    bad=source;bad["textures"][texture]["source"]=-1;reject(bad,"Character texture has no image");
+}
+
 void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -229,6 +307,7 @@ int main(int argc,char** argv) { try {
     require(std::abs(m.hairParameters[2]-6)<.001F,"Hair ramp row must retain its semantic field");
     require(std::abs(m.hairParameters[3]-.07F)<.001F,"Strand shift must be independent from ramp row");
     testCharacterProfileTextures(input,directory);
+    testProjectedHairRamp(input,directory);
     testMultiplyComposite(input,directory);
     material["extras"]["azureRenderMaterial"]["hair"]["rampTexture"]=.5;
     material["extras"]["azureRenderMaterial"]["features"].push_back("hair-ramp");

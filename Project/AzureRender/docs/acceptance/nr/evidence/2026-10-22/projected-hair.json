@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-verified-with-existing-gate-failure",
+  "gitCommitCreated": false,
+  "freezeHead": "6e45ec3985192d806d57af6d4980c6499b4c1527",
+  "changedFiles": [
+    "CMakeLists.txt",
+    "docs/runtime/character-material-profile.md",
+    "src/assets/GltfLoader.hpp",
+    "src/assets/GltfLoader.cpp",
+    "src/scenes/CharacterSceneRenderer.hpp",
+    "src/scenes/CharacterSceneRenderer.cpp",
+    "shaders/mesh.frag",
+    "shaders/mesh.vert",
+    "shaders/character_surface.glsl",
+    "tests/CharacterRepairTests.cpp",
+    "tests/NodeOpacityRecordingTests.cpp",
+    "tests/MaterialTextureSharingTests.cpp",
+    "tests/NullRhiPassTests.cpp",
+    "tools/endfield_native/character_profiles.py",
+    "tools/endfield_native/projected_hair.py",
+    "tools/test_native_character_profiles.py",
+    "tools/test_native_character_projected_hair_math.py",
+    "tools/test_projected_hair_gpu.py",
+    "tools/test_projected_hair_surface_gpu.py"
+  ],
+  "build": {
+    "targets": [
+      "AzurePlayer",
+      "AzureRender",
+      "AzureCharacterRepairTests",
+      "AzureRenderNullRhiPassTests",
+      "AzureNodeOpacityRecordingTests",
+      "AzureMaterialTextureSharingTests",
+      "AzureTextureMaterialImportTests",
+      "AzureSampledTextureCacheTests"
+    ],
+    "Debug": {
+      "exit": 0,
+      "command": "cmd /d /c build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build_hair.cmd debug"
+    },
+    "Release": {
+      "exit": 0,
+      "command": "cmd /d /c build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build_hair.cmd release"
+    }
+  },
+  "verification": [
+    {
+      "name": "NativeCharacterPython",
+      "command": "python -m unittest discover -s tools -p 'test_native_character*.py'",
+      "exit": 0,
+      "tests": 31
+    },
+    {
+      "name": "DebugCpu",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/ninja-msvc-debug",
+        "-R",
+        "^(AzureRender\\.(CharacterRepair|NullRhiPass|NodeOpacityRecording|MaterialTextureSharing|SampledTextureCache)|AzureAssets\\.TextureMaterialImport|AzureTools\\.(NativeCharacter|EndfieldNative))$",
+        "--output-on-failure"
+      ],
+      "exit": 0,
+      "tests": 8
+    },
+    {
+      "name": "ReleaseCpu",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/ninja-msvc-release",
+        "-R",
+        "^(AzureRender\\.(CharacterRepair|NullRhiPass|NodeOpacityRecording|MaterialTextureSharing|SampledTextureCache)|AzureAssets\\.TextureMaterialImport|AzureTools\\.(NativeCharacter|EndfieldNative))$",
+        "--output-on-failure"
+      ],
+      "exit": 0,
+      "tests": 8
+    },
+    {
+      "name": "DebugGpuRegression",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/ninja-msvc-debug",
+        "-R",
+        "^(AzureEngine\\.(ProjectedHairGpu|ProjectedHairSurfaceGpu|SceneCharacterGpu|NodeOpacityGpu|MaterialCompositeGpu|DualFaceSdfGpu)|AzureRender.SpatialAntiAliasingTransferGpu)$",
+        "--output-on-failure"
+      ],
+      "exit": 8,
+      "tests": 7,
+      "passed": 6,
+      "failed": [
+        "AzureEngine.DualFaceSdfGpu"
+      ]
+    },
+    {
+      "name": "ReleaseGpuRegression",
+      "command": [
+        "ctest",
+        "--test-dir",
+        "build/ninja-msvc-release",
+        "-R",
+        "^(AzureEngine\\.(ProjectedHairGpu|ProjectedHairSurfaceGpu|SceneCharacterGpu))$",
+        "--output-on-failure"
+      ],
+      "exit": 0,
+      "tests": 3,
+      "newProjectedCaptures": 22
+    },
+    {
+      "name": "FinalGlslVariants",
+      "commandReceipt": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/shader-final/receipt.json",
+      "exit": 0,
+      "variants": 8
+    }
+  ],
+  "candidate": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/hero-source-strand-final.glb",
+    "sha256": "8642f0e738024a4eaba33c85099cda5bb7064f17dba25f0c544baf3240a25b7c",
+    "materials": 13,
+    "projectedHairMaterials": 1,
+    "binaryTailPreserved": true,
+    "geometryRigAnimationPreserved": true,
+    "sourceHairOrmRemoved": true,
+    "sourceHairGenericAoDisabled": true,
+    "facePbrBindingsPreserved": true,
+    "surfaceResponse": "strand-diffuse",
+    "diffuseScale": 0.96,
+    "productionJointHeroOverwritten": false
+  },
+  "pixelChecks": {
+    "projectedRampCapturesPerConfig": 12,
+    "surfaceCapturesPerConfig": 10,
+    "errorBudgetLinear": 0.008,
+    "fixedBindlessByteDifference": 0,
+    "debugValidationEnabled": true,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    },
+    "surfaceMaximumLinearError": 0.0013252993818627934
+  },
+  "existingGate": {
+    "name": "AzureEngine.DualFaceSdfGpu",
+    "assertion": "main_low.max() > 5",
+    "observedMaximum": 5,
+    "frozenHeadMaximum": 5,
+    "comparedFrames": 3,
+    "maximumByteDifference": 0,
+    "candidateShadersRestored": true,
+    "thresholdModified": false,
+    "status": "unresolved-baseline-gate"
+  },
+  "limitations": [
+    "Native visual equivalence has not been established.",
+    "Main virtual-light/global bindings, object highlight gain and SPECULAR_LINE remain unimplemented.",
+    "Source P.B shadow/ramp/screen-rim consumers remain pending; generic AO is disabled for the pinned hair conversion.",
+    "Object basis is an identity candidate; native runtime object-frame, sampler and active pass require frame evidence.",
+    "Pinned source conversion supports BackFaceNormalFlip=0; other values reject.",
+    "Face material generic surface/AO semantics remain a separate source audit; this hair model does not alter its bindings.",
+    "Frozen-HEAD comparison swaps only fragment shaders and establishes absence of a hair-fragment regression, not a full historical executable comparison."
+  ],
+  "artifacts": {
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/native-character-final.log": {
+      "sha256": "ba2b451b4f270e64393933aec8270d0ded2b2d15db54300451a8c72c4ec9ac9c"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/cpu-debug-final.log": {
+      "sha256": "5b8a697dc6796f35b0526f55d77f42d4c94d877959b8ff82d385b4577c54e759"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/cpu-release.log": {
+      "sha256": "4a693193523ae3b3dff6609717a9910fd596c9739825fcefd7b3b86dc40f8b94"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/gpu-regression-debug.log": {
+      "sha256": "ed8ec90d61ac2f21c9bdcc9288dc8f9f81078ab8752f4a5fb2cb070ae43d7337"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/gpu-regression-release.log": {
+      "sha256": "9befc83c2bd5c519fdd6baa893c9ef07b35d489dc64ca242be04050b3d4ec036"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/source-surface-semantics.json": {
+      "sha256": "b1c87cfd295a3552c9a138fd616d330c614f27c56b4221610ac978614d1bc238"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-baseline-receipt.json": {
+      "sha256": "6bda9a64c4d59fac499d2e2446ee8b2224496493c6f13405f83577bd59f7f791"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/source-fingerprints.json": {
+      "sha256": "1aaf5e1afff586341249c1d5d02cde536454fc285a3a0ecf693281c03a965d0e"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/hero-source-strand-final.json": {
+      "sha256": "383eec552ea7ecc9346692dee2577341f12372d4812cd76a8f63ea20f342fffd"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/gpu-debug-final/summary.json": {
+      "sha256": "2b93cab2a5527d44d58e830870e4d54d5dc339dde1223fb3e8398eafc1249b86"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/surface-gpu-debug/summary.json": {
+      "sha256": "0d065907e7c0fe17dc2d4d04a21d83e427b6aad07a43b6a8a5488764d875f307"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/shader-final/receipt.json": {
+      "sha256": "709451a9e72415814cbaf74cc86c5b89475c261ff630a3225a5a4b586cc5a0bd"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/red-surface-semantics.log": {
+      "sha256": "c7ba5fabeb4e5325192d768b627fd4ac65025d059ed0870d63a0be575aef1952"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/red-cpp-surface.log": {
+      "sha256": "8aaa9f4654fd82565184fbdb663aef80e650eba593ff428032e0f54861b34135"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/red-back-face.log": {
+      "sha256": "7bb6d997ca16a079a0da25358c52e99f4267c6626d621cc9086755688bc15384"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build-debug-ctest.log": {
+      "sha256": "54a9e237f79744d0dffade014916d36c487620e84d95ba64d54c5b7fff9f9e39"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build-release-ctest.log": {
+      "sha256": "45ae52eeff2285ae95bb6f02ae825a9a033444f279482ec92b7c19102854f81e"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build-release-final.log": {
+      "sha256": "618fdb4ced898b909f437e60797101763e0a3e78f7ff2d5999b61eb5f6398510"
+    },
+    "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/build-debug-null-validation.log": {
+      "sha256": "0cc10bd01707f2b53ae77a1ea8751d6e5673a0f949cf23a887a0dcd4b89b0999"
+    }
+  },
+  "binaries": {
+    "build/ninja-msvc-debug/AzurePlayer.exe": {
+      "sha256": "1fb4bee329f26c05f545c591080ab6f1d1b46b4276558f37c3d224047353f5f9"
+    },
+    "build/ninja-msvc-debug/AzureRender.exe": {
+      "sha256": "e9d9fe83d81a73546217c4664a609370d3c2ebfe431f73653b4a4ab617b1e141"
+    },
+    "build/ninja-msvc-release/AzurePlayer.exe": {
+      "sha256": "ef8335af2f55ffd49f00aac34ce00ab77bcdc41cc675da8d10adc4e62dd8ffb5"
+    },
+    "build/ninja-msvc-release/AzureRender.exe": {
+      "sha256": "6b744436aba06f9efa1f3676048a2e3efcfdd311d222572ab9d6454f1960ced6"
+    }
+  }
+}

@@ -174,6 +174,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "diffuse-ramp") return MaterialFeatureDiffuseRamp;
     if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
     if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
+    if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
     return 0;
 }
 
@@ -879,6 +880,102 @@ int loadSceneRefraction(const tinygltf::Material& material,
     return image;
 }
 
+int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int& rampImage) {
+    if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return -1;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureHairProjectedRamp)!=0;
+    const bool declared=profile.IsObject()&&profile.Has("hair")&&profile.Get("hair").IsObject()
+        &&profile.Get("hair").Has("projectedRamp");
+    if(!enabled&&!declared)return -1;
+    constexpr auto conflicts=MaterialFeatureHairRamp|MaterialFeatureFaceSdfEligible|MaterialFeatureDualFaceSdf
+        |MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite
+        |MaterialFeatureOverlay|MaterialFeatureBrowOverlay;
+    if(!enabled||!declared||profile.Get("schemaVersion").GetNumberAsDouble()!=2||result.materialClass!=AssetMaterialClass::Hair
+        ||!(result.materialFeatures&MaterialFeatureHairAnisotropy)||(result.materialFeatures&conflicts)
+        ||profile.Has("faceSdf")||profile.Get("hair").Has("rampTexture")
+        ||!profile.Get("hair").Has("dataTexture"))
+        throw std::invalid_argument("projectedRamp requires schema 2 hair, packed normals and exclusive texture slots");
+    const auto& source=profile.Get("hair").Get("projectedRamp");
+    if(!source.IsObject()||!source.Has("schemaVersion")||!source.Get("schemaVersion").IsNumber()
+        ||source.Get("schemaVersion").GetNumberAsDouble()!=1)
+        throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
+    const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
+        "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale"};
+    // TinyGLTF omits null extras. Retain the authored object so optional typed
+    // fields cannot silently turn invalid null values into their defaults.
+    if(!material.extras_json_string.empty()) {
+        const auto authored=nlohmann::json::parse(material.extras_json_string);
+        const auto& object=authored.at("azureRenderMaterial").at("hair").at("projectedRamp");
+        for(const auto& field:object.items()) {
+            if(std::find(fields.begin(),fields.end(),field.key())==fields.end())
+                throw std::invalid_argument("Unknown projectedRamp field: "+field.key());
+            if(field.value().is_null())throw std::invalid_argument("Invalid projectedRamp."+field.key());
+        }
+    }
+    for(const auto& field:source.Get<tinygltf::Value::Object>())
+        if(std::find(fields.begin(),fields.end(),field.first)==fields.end())
+            throw std::invalid_argument("Unknown projectedRamp field: "+field.first);
+    const auto scalar=[&](const char* name,float minimum,float maximum) {
+        const auto& value=source.Get(name);
+        const double number=value.IsNumber()?value.GetNumberAsDouble():std::numeric_limits<double>::quiet_NaN();
+        if(!std::isfinite(number)||number<minimum||number>maximum)
+            throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+        return static_cast<float>(number);
+    };
+    auto& target=result.projectedHairRamp;
+    if(source.Has("surfaceResponse")) {
+        const auto& mode=source.Get("surfaceResponse");
+        if(!mode.IsString()||(mode.Get<std::string>()!="layered"&&mode.Get<std::string>()!="strand-diffuse"))
+            throw std::invalid_argument("Invalid projectedRamp.surfaceResponse");
+        target.surfaceResponse=mode.Get<std::string>()=="strand-diffuse"
+            ?AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+            :AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered;
+    }
+    if(source.Has("diffuseScale"))target.diffuseScale=scalar("diffuseScale",0,1);
+    target.primaryShift=scalar("primaryShift",-1,1);target.secondaryShift=scalar("secondaryShift",-1,1);
+    target.intensity=scalar("intensity",0,16);target.secondaryRange=scalar("secondaryRange",0,1);
+    target.edgeFade=scalar("edgeFade",0,64);target.specularNormalScale=scalar("specularNormalScale",0,8);
+    target.surfaceNormalScale=scalar("surfaceNormalScale",0,8);target.directionX=scalar("directionX",-16,16);
+    const auto vector=[&](const char* name,float* destination,unsigned count,float minimum,float maximum) {
+        const auto& values=source.Get(name);
+        if(!values.IsArray()||values.ArrayLen()!=count)
+            throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+        for(unsigned i=0;i<count;++i) {
+            const auto& value=values.Get(i);
+            const double number=value.IsNumber()?value.GetNumberAsDouble():std::numeric_limits<double>::quiet_NaN();
+            if(!std::isfinite(number)||number<minimum||number>maximum)
+                throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+            destination[i]=static_cast<float>(number);
+        }
+    };
+    vector("secondaryColor",target.secondaryColor.data(),3,0,64);
+    vector("objectBasis",target.objectBasis.data(),9,-1,1);
+    for(unsigned a=0;a<3;++a)for(unsigned b=a;b<3;++b) {
+        float product=0;for(unsigned c=0;c<3;++c)product+=target.objectBasis[a*3+c]*target.objectBasis[b*3+c];
+        if(std::abs(product-(a==b?1.F:0.F))>.001F)
+            throw std::invalid_argument("projectedRamp.objectBasis must be orthonormal");
+    }
+    const auto texture=[&](const char* name) {
+        const auto& value=source.Get(name);
+        const double index=value.IsNumber()?value.GetNumberAsDouble():-1;
+        if(!std::isfinite(index)||index<0||std::floor(index)!=index||index>=model.textures.size())
+            throw std::invalid_argument(std::string("Invalid projectedRamp texture: ")+name);
+        const int image=model.textures[static_cast<std::size_t>(index)].source;
+        if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+            throw std::invalid_argument("projectedRamp texture has no image");
+        return image;
+    };
+    const int parameterImage=texture("parameterTexture");rampImage=texture("rampTexture");
+    target.present=true;
+    for(unsigned slot:{5U,7U}) {
+        result.textureSettings[slot].usage="linear";result.textureSettings[slot].colorSpace="linear";
+    }
+    auto& sampler=result.textureSettings[5];sampler.wrapU=sampler.wrapV="clamp";sampler.mipPolicy="none";sampler.anisotropy=1;
+    return parameterImage;
+}
+
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
     const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr) {
@@ -892,6 +989,7 @@ AssetMaterial loadMaterial(
     int hairDataImage = -1;
     bool positiveHairNormalY=false;
     int faceSdfImage = -1;
+    int projectedHairParameterImage=-1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
@@ -1244,6 +1342,7 @@ AssetMaterial loadMaterial(
         loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
+        projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
     }
 
     if (baseColorImage >= 0) {
@@ -1377,7 +1476,9 @@ AssetMaterial loadMaterial(
             matcapImage,
             kNoFactor,
             result.matcapWidth,
-            result.matcapHeight,result.faceSdf.schemaVersion!=2,authored,&result.authoredMipLevels[5]);
+            result.matcapHeight,result.faceSdf.schemaVersion!=2&&!result.projectedHairRamp.present,authored,&result.authoredMipLevels[5]);
+        if(result.projectedHairRamp.present&&(result.matcapWidth<2||result.matcapHeight<2))
+            throw std::invalid_argument("projectedRamp requires a two-dimensional ramp image");
     } else {
         result.matcapWidth = 2;
         result.matcapHeight = 2;
@@ -1436,6 +1537,11 @@ AssetMaterial loadMaterial(
             result.faceSdf.pixels[pixel + 2] = distance;
             result.faceSdf.pixels[pixel + 3] = mask;
         }
+    }
+    if(projectedHairParameterImage>=0) {
+        constexpr std::array<double,4> noFactor{1,1,1,1};auto& hair=result.projectedHairRamp;
+        hair.parameterPixels=decodeImageRgba(model,projectedHairParameterImage,noFactor,
+            hair.parameterWidth,hair.parameterHeight,false,authored,&result.authoredMipLevels[7]);
     }
     if(material && material->extras.Has("azureRenderMaterial")) {
         const auto& profile=material->extras.Get("azureRenderMaterial");
@@ -2092,6 +2198,7 @@ bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,st
 }
 LoadedAsset loadGltfAsset(const std::string& path) {
     tinygltf::TinyGLTF loader;
+    loader.SetStoreOriginalJSONForExtrasAndExtensions(true);
     AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);
     tinygltf::Model model;
     std::string warning;
@@ -2132,6 +2239,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
     tinygltf::TinyGLTF loader;AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);tinygltf::Model model;std::string error,warning;bool external=false;
+    loader.SetStoreOriginalJSONForExtrasAndExtensions(true);
     tinygltf::FsCallbacks fs;
     fs.FileExists=[&](const std::string&,void*){external=true;return false;};
     fs.ExpandFilePath=[](const std::string& path,void*){return path;};

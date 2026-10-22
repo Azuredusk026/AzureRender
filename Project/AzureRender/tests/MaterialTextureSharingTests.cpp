@@ -12,7 +12,7 @@ void require(bool value,const char* reason) {if(!value)throw std::runtime_error(
 void requireReleasedPixels(const AssetMaterial& material) {
     for(const auto* pixels:{&material.baseColorPixels,&material.normalPixels,&material.metallicRoughnessPixels,
             &material.specularEmissivePixels,&material.styleMaskPixels,&material.matcapPixels,
-            &material.hairDataPixels,&material.shadowColorLutPixels})
+            &material.hairDataPixels,&material.shadowColorLutPixels,&material.projectedHairRamp.parameterPixels})
         require(pixels->empty()&&pixels->capacity()==0,"Uploaded renderer materials must release CPU pixel allocations");
 }
 
@@ -70,8 +70,47 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
     }
 }
 
+void verifyProjectedPixels(bool bindless,const std::filesystem::path& shaders) {
+    rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
+    const auto source=std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR);
+    const auto path=(source/"assets_public/texture_sharing/material-a.gltf").generic_string();
+    auto prepared=std::make_shared<LoadedAsset>(loadGltfAsset(path));
+    auto& material=prepared->materials.at(0);auto& hair=material.projectedHairRamp;
+    material.materialClass=AssetMaterialClass::Hair;material.materialProfileVersion=2;
+    material.materialFeatures=MaterialFeatureHairProjectedRamp|MaterialFeatureHairAnisotropy;
+    hair.present=true;hair.parameterWidth=hair.parameterHeight=2;
+    const std::vector<std::uint8_t> sourcePixels{13,59,101,197, 23,71,113,211, 37,83,127,223, 47,97,139,239};
+    hair.parameterPixels=sourcePixels;
+    material.textureSettings[5].colorSpace=material.textureSettings[7].colorSpace="linear";
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes{{path,prepared}};
+    context.rhi=&backend;context.allocator=&backend.allocator();context.preparedMeshes=&meshes;
+    context.shaderDirectory=shaders.string();context.bindlessTextures=bindless;
+    context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
+    auto& limits=context.descriptorLimits;
+    limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
+    limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
+    limits.maxPerStageResources=4096;
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
+    context.scene.resources.push_back({"surface",path});scene::SceneNodeDesc node;node.id="surface";node.resourceId="surface";context.scene.nodes.push_back(node);
+    for(unsigned load=0;load<2;++load) {
+        renderer.onLoad(context);
+        require(hair.parameterPixels==sourcePixels,"Borrowed prepared hair parameters must retain their original allocation and bytes");
+        const auto* state=renderer.sceneState();require(state&&state->asset,"Projected material source must remain queryable");
+        for(const auto& output:state->asset->materials)requireReleasedPixels(output);
+        for(const auto& pickable:state->pickables)for(const auto& output:pickable.asset->materials)requireReleasedPixels(output);
+        std::ostringstream fields;fields<<'{';renderer.appendCaptureManifestFields(fields);fields<<"\"end\":0}";
+        const auto report=nlohmann::json::parse(fields.str());
+        require(report.at("sceneLoad").at("remainingMaterialPixelBytes")==0,
+            "Projected parameter uploads must release every renderer source pixel allocation");
+        renderer.onUnload(context);
+        require(backend.allocator().statistics().liveBuffers==0&&backend.allocator().statistics().liveImages==0,
+            "Projected parameters and immutable material table must release on every unload");
+    }
+}
+
 int main(int argc,char** argv) {try {
     require(argc==2,"Expected compiled shader directory");
     verify(false,argv[1]);verify(true,argv[1]);verify(false,argv[1],true);verify(true,argv[1],true);
+    verifyProjectedPixels(false,argv[1]);verifyProjectedPixels(true,argv[1]);
     std::cout<<"Public multi-resource fixture: fixed/indexed bindings and reload sharing passed\n";
 }catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}}

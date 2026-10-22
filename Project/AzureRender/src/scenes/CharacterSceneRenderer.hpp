@@ -289,6 +289,8 @@ private:
     VkPipelineLayout iblPrefilterPipelineLayout_ = VK_NULL_HANDLE;
     VkPipeline iblPrefilterPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> uniformBuffers_;
+    // Immutable material table. Owned from load through retirement at unload.
+    rhi::GpuBuffer projectedHairProfiles_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
     rhi::GpuBuffer morphTargetBuffer_;
     std::array<rhi::GpuBuffer,kMaxFramesInFlight> morphWeightBuffers_{};

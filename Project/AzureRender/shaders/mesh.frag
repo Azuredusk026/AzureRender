@@ -124,7 +124,7 @@ layout(push_constant) uniform MaterialData {
 #define AZ_TEX_TOON_RAMP toonRampTexture
 #endif
 
-// materialPadding 复用为选中标志(1 = 视口拾取高亮)。
+// Low bit selects the primitive; upper bits address the immutable material table.
 #define AZURE_SELECTED_PADDING 1U
 
 layout(location = 0) in vec3 worldNormal;
@@ -138,6 +138,45 @@ layout(location = 10) flat in mat4 instanceFaceFrame;
 layout(location = 14) in vec3 opacityCoordinate;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
+
+struct ProjectedHairProfile {
+    vec4 shiftsIntensityRange;
+    vec4 edgeNormalDirection;
+    vec4 secondaryColor;
+    vec4 objectX,objectY,objectZ;
+};
+layout(std430,binding=27) readonly buffer ProjectedHairProfiles {
+    ProjectedHairProfile profiles[];
+} projectedHairProfiles;
+
+// Packed normal z is reconstructed before the authored xy scale.
+vec3 projectedHairNormal(vec2 encoded,float scale) {
+    vec2 xy=vec2(encoded.x*2.0-1.0,1.0-encoded.y*2.0);
+    float z=sqrt(max(1.0-min(dot(xy,xy),1.0),0.0));
+    vec3 normal=normalize(worldNormal);
+    vec3 tangent=normalize(worldTangent.xyz-normal*dot(normal,worldTangent.xyz));
+    vec3 bitangent=cross(normal,tangent)*worldTangent.w;
+    return characterProjectedSafeNormalize(tangent*xy.x*scale+bitangent*xy.y*scale+normal*z,normal);
+}
+
+CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light) {
+    ProjectedHairProfile p=projectedHairProfiles.profiles[material.materialPadding>>1U];
+    vec4 parameters=texture(AZ_TEX_FACE_SDF,textureCoordinate);
+    vec4 packedNormals=texture(AZ_TEX_HAIR_DATA,textureCoordinate);
+    vec3 normal=projectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y);
+    mat3 frame=mat3(instanceFaceFrame);
+    vec3 objectX=normalize(frame*p.objectX.xyz);
+    vec3 objectY=normalize(frame*p.objectY.xyz);
+    vec3 objectZ=normalize(frame*p.objectZ.xyz);
+    // The host supplies actual scene light directions. Source main-light
+    // virtual-direction globals require an independent runtime binding audit.
+    CharacterProjectedHairCoordinates coordinates=characterProjectedHairCoordinates(
+        characterProjectedSafeNormalize(view+light,normal),normal,view,parameters,worldTangent,
+        objectX,objectY,objectZ,p.shiftsIntensityRange.x,p.shiftsIntensityRange.y,
+        p.shiftsIntensityRange.w,p.edgeNormalDirection.x,p.edgeNormalDirection.z);
+    vec3 ramp=textureLod(AZ_TEX_MATCAP,coordinates.uv,0.0).rgb;
+    return characterProjectedHairEnergy(coordinates,ramp,parameters,p.shiftsIntensityRange.z,p.secondaryColor.rgb);
+}
 
 vec2 directionToEquirectangular(vec3 direction) {
     const float pi = 3.14159265358979323846;
@@ -385,6 +424,11 @@ void main() {
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
     vec4 hairData = texture(AZ_TEX_HAIR_DATA, textureCoordinate);
     float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
+    bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
+    bool strandDiffuse=projectedHair
+        &&projectedHairProfiles.profiles[material.materialPadding>>1U].secondaryColor.w>.5;
+    float projectedDiffuseScale=projectedHair
+        ?projectedHairProfiles.profiles[material.materialPadding>>1U].objectX.w:1.0;
     float hairBasePeak = max(
         max(baseColor.r, baseColor.g),
         max(baseColor.b, 0.001));
@@ -395,6 +439,10 @@ void main() {
         shadedNormal,
         hairBaseNormal,
         hairActive * 0.14));
+    if(projectedHair) {
+        ProjectedHairProfile p=projectedHairProfiles.profiles[material.materialPadding>>1U];
+        shadedNormal=projectedHairNormal(hairData.rg,p.edgeNormalDirection.w)*(gl_FrontFacing?1.0:-1.0);
+    }
 
     vec4 packedMaterial = texture(AZ_TEX_METALLIC_ROUGHNESS, textureCoordinate);
     vec4 specularEmissive = texture(AZ_TEX_SPECULAR_EMISSIVE,
@@ -431,6 +479,7 @@ void main() {
     } else if (material.materialClass == 6U) {
         metallic = 0.0;
     }
+    if(strandDiffuse)metallic=0.0;
     vec3 lightDirection = showcasePreset == 1.0
         ? normalize(vec3(0.62, 0.68, 0.38))
         : normalize(vec3(0.48, 0.82, 0.32));
@@ -475,12 +524,14 @@ void main() {
         max(dot(shadedNormal, halfDirection), 0.0),
         specularPower);
     vec3 f0 = mix(vec3(dielectricF0(specularLevel)), baseColor.rgb, metallic);
+    if(strandDiffuse)f0=vec3(0);
     float normalDotView = max(dot(shadedNormal, viewDirection), 0.0);
     bool microfacetSurface = material.materialClass == 0U || material.materialClass == 4U
         || material.materialClass == 5U || material.materialClass == 9U;
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
-    vec3 diffuseColor = baseColor.rgb * (1.0 - metallic);
+    if(strandDiffuse)fresnel=vec3(0);
+    vec3 diffuseColor = baseColor.rgb * (1.0 - metallic) * projectedDiffuseScale;
     vec3 environmentDiffuse = textureLod(
         AZ_TEX_ENVIRONMENT,
         directionToEquirectangular(shadedNormal),
@@ -596,7 +647,7 @@ void main() {
             rampLuminance),
         toonWeight);
     ambientDiffuse *= ambientRampVisibility * indirectChroma;
-    float diffuseScale = mix(0.62, 0.68, toonWeight);
+    float diffuseScale = strandDiffuse ? 1.0 : mix(0.62, 0.68, toonWeight);
     vec3 directDiffuse =
         diffuseColor
         * (
@@ -676,6 +727,12 @@ void main() {
             : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
         clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
+            if(projectedHair) {
+                CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection);
+                sceneHairPrimary+=energy.primary*radiance*material.featureParameters.y;
+                // The observed local-light variant only contributes its main lobe.
+                if(light.coneType.y>1.5)sceneHairSecondary+=energy.secondary*radiance*material.featureParameters.y;
+            } else {
             vec3 highlightNormal=normalize(tangentToWorld*decodePackedHairNormal(hairData.ba));
             vec2 lobes=characterHairLobes(shadedNormal,tangent,bitangent,highlightNormal,
                 viewDirection,pointDirection,tangentToWorld*material.matcapColor.xyz,
@@ -697,6 +754,7 @@ void main() {
                 *bands.x*mix(.58,1.0,visibility)*.58*energy;
             sceneHairSecondary+=mix(baseColor.rgb,vec3(.72,.88,1),.12)
                 *bands.y*mix(.35,.72,visibility)*.22*energy;
+            }
         }
         if(sceneCharacter && !(qaEffectMode==4 && qaEffectDisabled)) {
             sceneRim+=radiance*pow(1.0-normalDotView,3.2)
@@ -814,7 +872,7 @@ void main() {
         rimLighting = vec3(0.0);
     }
     vec3 kkSpecular=vec3(0),secondaryKkSpecular=vec3(0);
-    if(hairActive>0.0) {
+    if(hairActive>0.0&&!projectedHair) {
     vec3 hairHighlightNormal = normalize(
         tangentToWorld * decodePackedHairNormal(hairData.ba));
     float hairShift = dot(hairHighlightNormal, tangent) * 0.16;
@@ -880,6 +938,13 @@ void main() {
     kkSpecular*=kkRamp;
     secondaryKkSpecular*=kkRamp;
     kkSpecular=min(kkSpecular,vec3(material.matcapColor.w));
+    }
+    if(projectedHair) {
+        CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,lightDirection);
+        vec3 lightEnergy=keyColor*camera.showcaseParameters.y*keyVisibility
+            *material.featureParameters.y*bandEnabled;
+        kkSpecular=min(energy.primary*lightEnergy,vec3(material.matcapColor.w));
+        secondaryKkSpecular=energy.secondary*lightEnergy;
     }
     if (qaEffectMode == 3 && qaEffectDisabled) {
         kkSpecular = vec3(0.0);
@@ -1102,7 +1167,7 @@ void main() {
 #endif
     float compositeCoverage=overlayDisabled?0.0:clamp(outputAlpha*material.nodeOpacity,0.0,1.0);
     outputColor = vec4(qaColor, outputAlpha);
-    if (material.materialPadding == AZURE_SELECTED_PADDING) {
+    if ((material.materialPadding & AZURE_SELECTED_PADDING) != 0U) {
         outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
         outputColor.a = 1.0;
     }

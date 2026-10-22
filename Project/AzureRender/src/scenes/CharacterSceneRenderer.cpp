@@ -57,7 +57,7 @@ std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
     for(const auto& m:asset.materials)
         for(const auto* pixels:{&m.baseColorPixels,&m.normalPixels,&m.metallicRoughnessPixels,
                 &m.specularEmissivePixels,&m.styleMaskPixels,&m.matcapPixels,&m.hairDataPixels,
-                &m.faceSdf.pixels,&m.shadowColorLutPixels})bytes+=pixels->size();
+                &m.faceSdf.pixels,&m.shadowColorLutPixels,&m.projectedHairRamp.parameterPixels})bytes+=pixels->size();
     return bytes;
 }
 
@@ -425,19 +425,19 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     }
     // The full material inventory must fit an ordinary descriptor layout.
     // Combined image samplers consume both sampler and sampled-image limits;
-    // the fragment stage also carries one uniform and five storage buffers.
+    // The fragment stage also carries one uniform and six storage buffers.
     const std::uint64_t indexedSlots = kSharedTextureSlots
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     const auto& limits = context.descriptorLimits;
-    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<5)
-        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<10))
-        throw std::runtime_error("Scene layout requires five storage buffers per stage and ten per descriptor set");
+    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<6)
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<11))
+        throw std::runtime_error("Scene layout requires six storage buffers per stage and eleven per descriptor set");
     irradianceBufferBudget_=limits.maxStorageBufferRange;
     DeviceCapabilities capabilities;
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+4,16,6});
+    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+4,16,7});
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -1550,7 +1550,8 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
     case 4:upload(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
     case 5:upload(m.matcapPixels,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;
     case 6:upload(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
-    case 7:{if(faceSdfPrepared_&&m.faceSdf.present){upload(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
+    case 7:{if(m.projectedHairRamp.present){auto& h=m.projectedHairRamp;upload(h.parameterPixels,h.parameterWidth,h.parameterHeight,g.faceSdf,mipLevels);}
+        else if(faceSdfPrepared_&&m.faceSdf.present){upload(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
     case 8:upload(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,1);break;
     default:throw std::runtime_error("Invalid material upload slot");
     }
@@ -2026,6 +2027,30 @@ void CharacterSceneRenderer::recordComputeSkinning(
 }
 
 void CharacterSceneRenderer::createUniformBuffers() {
+    // Six vec4 rows per material, in the same stable order as texture blocks.
+    using HairRows=std::array<std::array<float,4>,6>;
+    std::vector<HairRows> profiles;
+    const auto appendProfiles=[&](const LoadedAsset& mesh) {
+        for(const auto& material:mesh.materials) {
+            const auto& h=material.projectedHairRamp;
+            HairRows rows{};
+            rows[0]={h.primaryShift,h.secondaryShift,h.intensity,h.secondaryRange};
+            rows[1]={h.edgeFade,h.specularNormalScale,h.directionX,h.surfaceNormalScale};
+            rows[2]={h.secondaryColor[0],h.secondaryColor[1],h.secondaryColor[2],
+                h.surfaceResponse==AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse?1.F:0.F};
+            for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)rows[a+3][c]=h.objectBasis[a*3+c];
+            rows[3][3]=h.diffuseScale;
+            profiles.push_back(rows);
+        }
+    };
+    appendProfiles(asset_);for(const auto& resource:additionalResources_)appendProfiles(resource->asset);
+    const auto profileBytes=sizeof(HairRows)*profiles.size();
+    if(profiles.empty()||profiles.size()>std::numeric_limits<std::uint32_t>::max()/2
+        ||(irradianceBufferBudget_&&profileBytes>irradianceBufferBudget_))
+        throw std::runtime_error("Projected hair material table exceeds the device storage budget");
+    projectedHairProfiles_=allocator_->createBuffer(profileBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(projectedHairProfiles_.mapped,profiles.data(),profileBytes);
+    allocator_->flush(projectedHairProfiles_,0,profileBytes);
     const VkDeviceSize size = sizeof(UniformBufferObject);
     uniformBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
@@ -2225,7 +2250,8 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
                     if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
                     MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                         m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
-                        m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,0};
+                        m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,
+                        static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
                     MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;
                     morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
                     morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
@@ -2261,7 +2287,8 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
-                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,0};
+                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,
+                static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
@@ -2288,7 +2315,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 4)},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 10},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 11},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2299,7 +2326,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 16},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 10},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 11},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2349,6 +2376,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         });
         return;
     }
@@ -2384,6 +2412,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
         {25,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
         {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
+        {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     });
 }
 
@@ -2452,6 +2481,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,projectedHairProfiles_.buffer,projectedHairProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
@@ -2541,6 +2571,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,projectedHairProfiles_.buffer,projectedHairProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
@@ -2950,6 +2981,7 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     uniformBuffers_.clear();
+    allocator_->destroyBuffer(projectedHairProfiles_);
     for (auto& buffer : jointBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -3477,7 +3509,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                     static_cast<std::uint32_t>(material.materialClass),
                     material.materialFeatures,
                     material.materialProfileVersion,
-                    0,
+                    static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U),
                 };
                 commands.pushConstants(
                     pipelineLayout_,
@@ -3958,11 +3990,12 @@ void CharacterSceneRenderer::drawPrimitive(
             static_cast<std::uint32_t>(material.materialClass),
             material.materialFeatures,
             material.materialProfileVersion,
-            (snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
+            static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U) |
+            ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)
                 == static_cast<std::int32_t>(
                        &primitive - mesh.primitives.data())
             ? 1U
-            : 0U,
+            : 0U),
     };
     commands.pushConstants(
         pipelineLayout_,

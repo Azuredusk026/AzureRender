@@ -9,6 +9,7 @@ import copy
 import hashlib
 from io import BytesIO
 import json
+import math
 from pathlib import Path
 import sys
 
@@ -19,6 +20,7 @@ from PIL import Image
 # Pinned source shader; pass 1 programs 10/11 use Zero/SrcColor RGB blending.
 # Matching a material name or a grayscale mask does not establish this contract.
 MULTIPLY_OVERLAY_SHADER = ('CAB-da44c449ed4aff035ab44ec6c74bdbfe', 1962491951764993823)
+PROJECTED_HAIR_SHADER = ('CAB-623a5cbbe298e3f04194d1e14a05ebfe', -8095970123935614097)
 
 
 def material_class(name):
@@ -108,12 +110,88 @@ def restore_profiles(document, audit, sources, payloads):
 
         if kind == 'hair':
             features.add('hair-anisotropy')
-            hair = profile.setdefault('hair', {'power': 200, 'strength': floats.get('_AnisotropyIntensity', 1),
-                'rampRow': 3, 'strandShift': .1, 'cameraOffset': [0, 0, 0], 'upperLimit': 4})
+            hair = profile.setdefault('hair', {})
+            for key, value in {'power': 200, 'strength': floats.get('_AnisotropyIntensity', 1),
+                'rampRow': 3, 'strandShift': .1, 'cameraOffset': [0, 0, 0], 'upperLimit': 4}.items():
+                hair.setdefault(key, value)
+            features.discard('hair-projected-ramp')
+            hair.pop('projectedRamp', None)
             if '_SPECULAR_NORMALMAP' in keywords and floats.get('_UseSpecBumpMap') == 1:
                 hair['dataTexture'] = bind_texture('_SplitNormalMap', 'hair.dataTexture')
                 hair['dataNormalY'] = 'positive'
             row['hostHairParameters'] = 'Engine dual-lobe power/shift defaults; native anisotropy intensity supplies strength'
+            shader = source.get('shader', {}).get('resolved')
+            if (shader and identity(shader) == PROJECTED_HAIR_SHADER
+                    and '_SPEC_RAMP_ON' in keywords and floats.get('_UseSpecRampMap') == 1):
+                if floats.get('_BackFaceNormalFlip') != 0:
+                    raise ValueError('Unsupported projected hair back-face normal convention')
+                source_fields = {'_AnisotropyValue': 'primaryShift', '_AnisotropyValue2': 'secondaryShift',
+                    '_AnisotropyIntensity': 'intensity', '_AnisotropyRange2': 'secondaryRange',
+                    '_AnisotropyEdgeFade': 'edgeFade', '_SpecBumpScale': 'specularNormalScale',
+                    '_BumpScale': 'surfaceNormalScale', '_AnisotropyDirX': 'directionX'}
+                bounds = {'primaryShift': (-1, 1), 'secondaryShift': (-1, 1),
+                    'intensity': (0, 16), 'secondaryRange': (0, 1), 'edgeFade': (0, 64),
+                    'specularNormalScale': (0, 8), 'surfaceNormalScale': (0, 8), 'directionX': (-16, 16)}
+                projected = {'schemaVersion': 1}
+                for original, target in source_fields.items():
+                    if original not in floats:
+                        raise ValueError('Missing active projected hair field: ' + original)
+                    value = floats[original]
+                    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                        raise ValueError('Invalid active projected hair field: ' + original)
+                    projected[target] = 2 * value - 1 if target in ('primaryShift', 'secondaryShift') else value
+                    if not bounds[target][0] <= projected[target] <= bounds[target][1]:
+                        raise ValueError('Projected hair field is outside supported ranges: ' + original)
+                color = colors.get('_AnisotropyColor2')
+                if color is None:
+                    raise ValueError('Missing active projected hair field: _AnisotropyColor2')
+                if (len(color) != 4 or any(isinstance(value, bool) or not isinstance(value, (int, float))
+                        or not math.isfinite(value) for value in color)):
+                    raise ValueError('Invalid active projected hair field: _AnisotropyColor2')
+                if any(value < 0 or value > 64 for value in color[:3]):
+                    raise ValueError('Projected hair field is outside supported ranges: _AnisotropyColor2')
+                if '_SPECULAR_NORMALMAP' not in keywords or floats.get('_UseSpecBumpMap') != 1:
+                    raise ValueError('Missing active projected hair field: independent split normal')
+                ramp_payload, _, _ = source_payload('_SpecRampMap')
+                with Image.open(BytesIO(ramp_payload)) as image:
+                    if image.width < 2 or image.height < 2:
+                        raise ValueError('Projected hair ramp requires two dimensions')
+                projected.update(parameterTexture=bind_texture('_MetallicGlossMap', 'hair.projectedRamp.parameterTexture'),
+                    rampTexture=bind_texture('_SpecRampMap', 'hair.projectedRamp.rampTexture'),
+                    secondaryColor=list(color[:3]), objectBasis=[1, 0, 0, 0, 1, 0, 0, 0, 1])
+                features.discard('hair-ramp')
+                features.discard('face-sdf-eligible')
+                profile.pop('faceSdf', None)
+                hair.pop('rampTexture', None)
+                features.add('hair-projected-ramp')
+                hair['projectedRamp'] = projected
+                # This pinned program uses P.R for its strand axis and P.A for
+                # its secondary lobe. Neither is a metallic/roughness input.
+                pbr = material.setdefault('pbrMetallicRoughness', {})
+                pbr.pop('metallicRoughnessTexture', None)
+                pbr.update(metallicFactor=0, roughnessFactor=1)
+                features.discard('surface-ao')
+                projected.update(surfaceResponse='strand-diffuse', diffuseScale=.96)
+                row['projectedHairSource'] = {'shader': shader, 'pass': 'ForwardLit', 'program': 263,
+                    'parameterBlob': 45, 'objectBasisStatus': 'identity-candidate-runtime-frame-unverified',
+                    'normalConvention': {'sourceBackFaceNormalFlip': 0,
+                        'surfaceBackFaceSign': -1, 'highlightBackFaceSign': 1,
+                        'surfaceLines': [164, 172], 'highlightLines': [177, 190]},
+                    'shiftConversion': '2 * source anisotropy value - 1',
+                    'textureSemantics': {'parameterTexture': 'linear-original-RGBA',
+                        'rampTexture': 'linear-original-2D-RGB-LOD0'},
+                    'surfaceSemantics': {'metallic': 0, 'diffuseScale': .96,
+                        'roughnessStatus': 'host-compatibility-placeholder',
+                        'genericDirectSpecular': False, 'genericEnvironmentSpecular': False,
+                        'parameterB': 'source-shadow-ramp-screen-rim-consumers-pending',
+                        'evidence': {'diffuseScaleLines': [474, 476, 901, 906, 1078, 1134],
+                            'parameterBLines': [868, 920, 1075],
+                            'parameterALines': [1018, 1054]}}}
+                row['remainingProjectedHairInputs'] = ['main-virtual-light-global-bindings', 'SPECULAR_LINE',
+                    'object-basis-runtime-verification', 'source-sampler-runtime-binding',
+                    'object-highlight-gain', 'direct-light-global-constants',
+                    'parameter-B-shadow-ramp-screen-rim']
+                row['hostHairParameters'] = 'Projected ramp consumes source fields; legacy fields configure the fallback contract'
         if '_DIFF_RAMP_ON' in keywords and floats.get('_UseDiffRampMap') == 1 and kind != 'face':
             index = bind_texture('_DiffRampMap', 'diffuseRamp.texture')
             payload = payloads[identity(bindings['_DiffRampMap']['reference']['resolved'])]
@@ -142,6 +220,10 @@ def restore_profiles(document, audit, sources, payloads):
             if shader and identity(shader) == MULTIPLY_OVERLAY_SHADER:
                 features.add('multiply-composite')
                 profile['composite'] = {'schemaVersion': 1, 'mode': 'multiply'}
+                material['doubleSided'] = False
+                row['cullingSource'] = {'shader': shader, 'pass': 1, 'programs': [10, 11],
+                    'culling': {'value': 2, 'mode': 'Back'},
+                    'source': 'OverlayShadow shader pass state'}
                 row['compositeSource'] = {'shader': shader, 'pass': 1, 'programs': [10, 11],
                     'colorBlend': {'source': 'Zero', 'destination': 'SrcColor'},
                     'hostAlpha': 'preserve-destination'}

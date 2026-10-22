@@ -1045,6 +1045,11 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.SceneCharacterGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_character_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.SceneCharacterGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.ProjectedHairGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)
+    add_test(NAME AzureEngine.ProjectedHairSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_surface_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)
+    set_tests_properties(AzureEngine.ProjectedHairGpu AzureEngine.ProjectedHairSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.MaterialCompositeGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_composite_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.MaterialCompositeGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)

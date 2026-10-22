@@ -600,20 +600,30 @@ int main() try {
 
     // Four materials use 36 texture slots. Environment, shadow and ramp
     // add three. Depth, color, reflection and outline mask add four more.
-    // This requires 43 sampled images. One uniform and five storage buffers
-    // bring the per-stage resource requirement to 49. Each independent limit
+    // This requires 43 sampled images. One uniform and six storage buffers
+    // bring the per-stage resource requirement to 50. Each independent limit
     // must fit exactly; reducing any one by one must select the fixed path.
     VkPhysicalDeviceLimits limits{};
     limits.maxPerStageDescriptorSamplers = 43;
     limits.maxDescriptorSetSamplers = 43;
     limits.maxPerStageDescriptorSampledImages = 43;
     limits.maxDescriptorSetSampledImages = 43;
-    limits.maxPerStageResources = 49;
+    limits.maxPerStageResources = 50;
+    limits.maxPerStageDescriptorStorageBuffers = 6;
+    limits.maxDescriptorSetStorageBuffers = 11;
     const auto limitedFrame = [&](const VkPhysicalDeviceLimits& value) {
         return runFrame(true, shaderDirectory, true, false, false, false,
                         0, false, false, 0, &value);
     };
     assert(countCalls(limitedFrame(limits), "bindDescriptorSet") == bindlessBinds);
+    for(auto member:{&VkPhysicalDeviceLimits::maxPerStageDescriptorStorageBuffers,
+                    &VkPhysicalDeviceLimits::maxDescriptorSetStorageBuffers}) {
+        auto reduced=limits;--(reduced.*member);bool rejected=false;
+        try{(void)limitedFrame(reduced);}catch(const std::runtime_error& error) {
+            rejected=std::string(error.what()).find("storage buffers")!=std::string::npos;
+        }
+        assert(rejected);
+    }
     for (auto member : {&VkPhysicalDeviceLimits::maxPerStageDescriptorSamplers,
                         &VkPhysicalDeviceLimits::maxDescriptorSetSamplers,
                         &VkPhysicalDeviceLimits::maxPerStageDescriptorSampledImages,
