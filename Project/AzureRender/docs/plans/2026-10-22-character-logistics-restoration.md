@@ -668,6 +668,9 @@ GPU 检查使用 `tools/test_unlit_surface_gpu.py`。
 
 ## NR0-F1 原游戏帧数据
 
+抓帧会话入口见[接手说明](2026-10-22-endfield-capture-handoff.md)。
+工具、失败记录与管理员启动待项分别保留证据。
+
 抓帧工具采用用户指定的 RenderDuck v1.2 发行版本。
 分析工具采用官方 RenderDoc 和对应 MCP 桥接。
 发行文件记录 URL、版本、许可及 SHA-256。
