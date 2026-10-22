@@ -31,7 +31,7 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
     if(hair.virtualLight)rows[6]={1,hair.virtualBlend,hair.objectGain,0};
     if(hair.line.present){
         rows[7]={hair.line.frequency,hair.line.strandShift,hair.line.range,hair.line.depth};
-        rows[8]={hair.line.alternation,hair.line.saturation,1,0};rows[9]=hair.line.uvTransform;
+        rows[8]={hair.line.alternation,hair.line.saturation,1,hair.line.mainDiffuse?1.F:0.F};rows[9]=hair.line.uvTransform;
     }
     return result;
 }

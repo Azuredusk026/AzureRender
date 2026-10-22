@@ -198,6 +198,15 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     const auto stripedAsset=load(striped);const auto& line=stripedAsset.materials[0].projectedHairRamp.line;
     require(line.present&&line.frequency==300&&line.pixels.size()>0,"Independent specular-line texture must reach its typed owner");
     require(packMaterialSurfaceProfile(stripedAsset.materials[0]).rows[8]==std::array<float,4>{1,1.5F,1,0},"Line parameters must reach their dedicated GPU rows");
+    auto combinedLine=striped;
+    combinedLine["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["line"]["diffuseTarget"]="main-and-ambient";
+    require(packMaterialSurfaceProfile(load(combinedLine).materials[0]).rows[8][3]==1,
+        "Explicit main and ambient line modulation must reach its reserved GPU component");
+    for(const auto& value:Json::array({"all","",1,true,nullptr})) {
+        auto invalid=combinedLine;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["line"]["diffuseTarget"]=value;
+        reject(invalid,"diffuseTarget");
+    }
     // The actual sampled image owns metadata, including typed hair inputs.
     auto sampled=striped;
     std::filesystem::copy_file(directory/"projected-ramp.png",directory/"sampled-hair.png",

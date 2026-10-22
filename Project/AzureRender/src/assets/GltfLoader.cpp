@@ -1006,7 +1006,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     if(source.Has("line")) {
         const auto& line=source.Get("line");
         const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("line");
-        if(!raw.is_object()||raw.size()!=9||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+        if(!raw.is_object()||raw.size()!=9+(raw.contains("diffuseTarget")?1:0)||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
             ||profile.Has("shadowColorLut")||(result.materialFeatures&MaterialFeatureShadowColorLut))
             throw std::invalid_argument("projectedRamp.line requires version 1 and exclusive slot 8 ownership");
         const auto number=[&](const char* name,float minimum,float maximum) {
@@ -1016,6 +1016,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
             return static_cast<float>(value);
         };
         auto& input=target.line;
+        if(raw.contains("diffuseTarget")) {
+            const auto& value=raw.at("diffuseTarget");
+            if(!value.is_string()||(value!="ambient"&&value!="main-and-ambient"))
+                throw std::invalid_argument("Invalid projectedRamp.line.diffuseTarget");
+            input.mainDiffuse=value=="main-and-ambient";
+        }
         input.frequency=number("frequency",0,65536);input.strandShift=number("strandShift",-1,1);
         input.range=number("range",0,1);input.depth=number("depth",0,1);
         input.alternation=number("alternation",0,1);input.saturation=number("saturation",0,16);

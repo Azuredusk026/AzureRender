@@ -201,7 +201,8 @@ def restore_profiles(document, audit, sources, payloads,*,projected_tangent_sign
                     transform=list(binding['scale'])+list(binding['offset'])
                     if len(transform)!=4 or any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) or abs(v)>65536 for v in transform):
                         raise ValueError('Invalid specular line UV transform')
-                    line.update(texture=bind_texture('_LineMap','hair.projectedRamp.line.texture',True),uvTransform=transform)
+                    line.update(texture=bind_texture('_LineMap','hair.projectedRamp.line.texture',True),uvTransform=transform,
+                        diffuseTarget='main-and-ambient')
                     projected['line']=line
                 row['projectedHairSource'] = {'shader': shader, 'pass': 'ForwardLit', 'program': 263,
                     'parameterBlob': 45, 'objectBasisStatus': 'identity-candidate-runtime-frame-unverified',

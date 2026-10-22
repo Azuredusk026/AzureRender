@@ -6,6 +6,7 @@
 头发手性、色带及分层输入见[坐标约定](docs/acceptance/nr/projected-hair-coordinates.md)。
 图片采样、原生 mip 及完整文档见[输入验证](docs/acceptance/nr/typed-image-inputs.md)。
 共享颜色核与原生片元见[头发照明验证](docs/acceptance/nr/captured-hair-illumination.md)。
+全局环境权重与主灯条纹见[贡献验证](docs/acceptance/nr/ambient-weight-and-main-line.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。
 投影头发支持显式虚拟主灯与独立条纹。
 数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。

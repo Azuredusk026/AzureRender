@@ -767,6 +767,7 @@ void main() {
     uint clusterIndex = (clusterZ * gridY + clusterY) * gridX + clusterX;
     uvec2 lightRange = clusterHeaderData.clusters[clusterIndex];
     vec3 clusteredDiffuse = vec3(0.0);
+    vec3 sceneMainDiffuse = vec3(0.0);
     vec3 clusteredSpecular = vec3(0.0);
     vec3 sceneHairPrimary=vec3(0),sceneHairSecondary=vec3(0),sceneRim=vec3(0);
     vec3 eyeHostDiffuse=vec3(0),eyeHostMatcap=vec3(0);
@@ -853,7 +854,11 @@ void main() {
             // with scene visibility even when color selects an indoor tint.
             bool composedMain=camera.nprLightingParameters.x>.5&&float(lightIndex)==camera.nprLightingParameters.y;
             if(!composedMain)clusteredDiffuse+=response*radiance;
-        } else clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
+        } else {
+            vec3 contribution=diffuseColor* radiance*localDiffuseResponse*diffuseScale;
+            clusteredDiffuse+=contribution;
+            if(float(lightIndex)==camera.nprLightingParameters.y)sceneMainDiffuse=contribution;
+        }
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
             max(dot(shadedNormal, pointHalfDirection), 0.0), specularPower);
@@ -1212,9 +1217,11 @@ void main() {
             if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);incident=mix(incident,volume.rgb,volume.w);}
         }
         CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,camera.nprMainRadiance,
-            camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,physicalAo,response.litMask,visibility);
+            camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,
+            physicalAo*camera.nprLightingParameters.z,response.litMask,visibility);
         vec3 combinedAmbient=response.color*illumination.ambient;
         vec3 combinedDirect=response.color*illumination.direct+clusteredDiffuse;
+        sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
     }
@@ -1224,6 +1231,12 @@ void main() {
         vec3 dark=ambientDiffuse*line.x;
         vec3 adjusted=mix(vec3(dot(dark,vec3(.212673,.715152,.072175))),dark,line.y);
         beautyColor+=adjusted-ambientDiffuse;ambientDiffuse=adjusted;
+        if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].w>.5) {
+            vec3 mainDiffuse=camera.clusterLighting.x>.5?sceneMainDiffuse:directDiffuse;
+            vec3 adjustedMain=characterDiffuseSaturation(mainDiffuse*line.x,line.y);
+            vec3 difference=adjustedMain-mainDiffuse;
+            directDiffuse+=difference;beautyColor+=difference;
+        }
     }
     if(camera.probeParameters.x>.5){
         vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);

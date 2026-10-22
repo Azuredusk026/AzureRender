@@ -52,6 +52,7 @@ class NativeCharacterProfileTests(unittest.TestCase):
         self.assertAlmostEqual(line['strandShift'],.4)
         self.assertEqual(line['uvTransform'],[9.3,1,-.32,0])
         self.assertEqual(line['frequency'],300)
+        self.assertEqual(line.get('diffuseTarget'),'main-and-ambient')
         self.assertNotIn('SPECULAR_LINE',report['materials'][0]['remainingProjectedHairInputs'])
 
     def fixture(self, name='M_actor_fixture_hair_01'):

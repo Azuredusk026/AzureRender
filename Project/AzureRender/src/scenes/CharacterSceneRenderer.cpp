@@ -3325,7 +3325,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.nprGainFloor={npr.directionGain,npr.directionFloor,npr.shadowOverride,npr.useSceneIrradiance?1.F:0.F};
     uniform.nprAmbientColor={npr.ambientColor[0],npr.ambientColor[1],npr.ambientColor[2],npr.indoorMix};
     uniform.nprComposition={npr.outdoorGain,npr.shadowAmbientGain,npr.litAmbientMix,npr.mainColorMix};
-    uniform.nprMainRadiance={1,1,1,0};uniform.nprLightingParameters={npr.enabled&&settings.sceneLightingEnabled?1.F:0.F,-1,0,0};
+    uniform.nprMainRadiance={1,1,1,0};uniform.nprLightingParameters={npr.enabled&&settings.sceneLightingEnabled?1.F:0.F,-1,npr.ambientWeight,0};
     if(mainSceneLight){
         const auto id=stableSceneLightId(mainSceneLight->id);const auto& lights=frameLights_.lights();
         for(std::size_t index=0;index<lights.size();++index)if(lights[index].stableId==id){

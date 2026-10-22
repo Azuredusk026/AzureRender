@@ -5,7 +5,7 @@ from endfield_native import npr_lighting as subject
 
 class NprLightingTests(unittest.TestCase):
     def fixture(self):
-        global_rows={110:[1,1.05,.55,.8],111:[0,1,1,1],112:[.8,.9,1.1,1],113:[1.2,.9,.8,1],
+        global_rows={27:[1,1,1,1],29:[.2877224684,.2877224684,1,0],110:[1,1.05,.55,.8],111:[0,1,1,1],112:[.8,.9,1.1,1],113:[1.2,.9,.8,1],
             114:[1,.9,.8,1],115:[1,1,1,1],116:[0,1,0,0],117:[.15,1.5,.5,0],121:[.6,.8,0,0],122:[1,1,1,0]}
         object_rows={0:[0,-1,0,0],3:[.5,.5,.5,1.625]}
         return global_rows,object_rows
@@ -16,6 +16,16 @@ class NprLightingTests(unittest.TestCase):
         self.assertEqual(result['mainLight']['color'],[1,.9,.8])
         self.assertEqual(result['mainLight']['intensity'],1.625)
         self.assertEqual(result['mainLight']['incomingDirection'],[-.6,.8,0])
+
+    def test_ambient_weight_retains_global_blend_and_gain(self):
+        g,o=self.fixture()
+        self.assertAlmostEqual(subject.decode_lighting(g,o,ambient_row=112,main_color_row=115)['settings'].get('ambientWeight',-1),.2877224684)
+        g[29][0]=.2;g[27][0]=.5;g[122][3]=1
+        self.assertAlmostEqual(subject.decode_lighting(g,o,ambient_row=112,main_color_row=115)['settings'].get('ambientWeight',-1),.4)
+
+    def test_ambient_weight_requires_confirmed_global_rows(self):
+        g,o=self.fixture();del g[29]
+        with self.assertRaises(ValueError):subject.decode_lighting(g,o,ambient_row=112,main_color_row=115)
 
     def test_explicit_rows_and_blends_keep_light_groups_independent(self):
         g,o=self.fixture();g[122][1]=0;g[122][3]=1;g[111][3]=0

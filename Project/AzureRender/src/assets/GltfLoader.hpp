@@ -158,6 +158,7 @@ struct AssetMaterial {
         float virtualBlend=1,objectGain=1;
         struct SpecularLine {
             bool present=false;
+            bool mainDiffuse=false;
             float frequency=1,strandShift=0,range=1,depth=0,alternation=1,saturation=1;
             std::array<float,4> uvTransform{1,1,0,0};
             std::vector<std::uint8_t> pixels;

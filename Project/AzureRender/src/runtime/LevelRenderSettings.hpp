@@ -7,7 +7,7 @@ inline nlohmann::json encodeNprLighting(const NprLightingSettings& s){
     return {{"schemaVersion",1},{"enabled",s.enabled},{"useSceneIrradiance",s.useSceneIrradiance},
         {"ambientColor",s.ambientColor},{"ambientDirection",s.ambientDirection},{"directionBias",s.directionBias},
         {"directionGain",s.directionGain},{"directionFloor",s.directionFloor},{"outdoorGain",s.outdoorGain},
-        {"shadowAmbientGain",s.shadowAmbientGain},{"indoorMix",s.indoorMix},{"litAmbientMix",s.litAmbientMix},
+        {"shadowAmbientGain",s.shadowAmbientGain},{"ambientWeight",s.ambientWeight},{"indoorMix",s.indoorMix},{"litAmbientMix",s.litAmbientMix},
         {"mainColorMix",s.mainColorMix},{"shadowOverride",s.shadowOverride}};
 }
 inline void decodeNprLighting(NprLightingSettings& target,const nlohmann::json& data){
@@ -31,6 +31,7 @@ inline void decodeNprLighting(NprLightingSettings& target,const nlohmann::json& 
     value.directionBias=data.value("directionBias",value.directionBias);value.directionGain=data.value("directionGain",value.directionGain);
     value.directionFloor=data.value("directionFloor",value.directionFloor);value.outdoorGain=data.value("outdoorGain",value.outdoorGain);
     value.shadowAmbientGain=data.value("shadowAmbientGain",value.shadowAmbientGain);value.indoorMix=data.value("indoorMix",value.indoorMix);
+    value.ambientWeight=data.value("ambientWeight",value.ambientWeight);
     value.litAmbientMix=data.value("litAmbientMix",value.litAmbientMix);value.mainColorMix=data.value("mainColorMix",value.mainColorMix);
     value.shadowOverride=data.value("shadowOverride",value.shadowOverride);validateNprLighting(value);target=value;
 }

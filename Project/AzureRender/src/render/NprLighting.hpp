@@ -11,7 +11,7 @@ struct NprLightingSettings {
     bool enabled=false,useSceneIrradiance=false;
     std::array<float,3> ambientColor{1,1,1},ambientDirection{0,1,0};
     float directionBias=0,directionGain=0,directionFloor=1;
-    float outdoorGain=1,shadowAmbientGain=1;
+    float outdoorGain=1,shadowAmbientGain=1,ambientWeight=1;
     float indoorMix=0,litAmbientMix=0,mainColorMix=0,shadowOverride=0;
 };
 inline void validateNprLighting(const NprLightingSettings& s){
@@ -24,7 +24,7 @@ inline void validateNprLighting(const NprLightingSettings& s){
     for(float value:s.ambientDirection){range(value,-1,1);length2+=value*value;}
     if(std::abs(length2-1)>1e-4F)throw std::invalid_argument("NPR ambient direction must be normalized");
     range(s.directionBias,-1,1);range(s.directionGain,0,16);range(s.directionFloor,0,16);
-    range(s.outdoorGain,0,16);range(s.shadowAmbientGain,0,16);
+    range(s.outdoorGain,0,16);range(s.shadowAmbientGain,0,16);range(s.ambientWeight,0,16);
     for(float value:{s.indoorMix,s.litAmbientMix,s.mainColorMix,s.shadowOverride})range(value,0,1);
 }
 }

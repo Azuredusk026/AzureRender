@@ -27,6 +27,9 @@ def decode_lighting(global_rows,object_rows,*,ambient_row,main_color_row,reflect
     global_direction=row(global_rows,121);object_direction=row(object_rows,0)
     for v in modes:bounded(v,0,1)
     for v in blend:bounded(v,0,1)
+    ambient_base=bounded(row(global_rows,29)[0],0,1)
+    ambient_gain=bounded(row(global_rows,27)[0],0,16)
+    ambient_weight=bounded((ambient_base+blend[3]*(1-2*ambient_base))*ambient_gain,0,16)
     incoming=unit([global_direction[i]*modes[3]-object_direction[i]*(1-modes[3]) for i in range(3)])
     if reflect_x:incoming[0]*=-1;ambient_direction[0]*=-1
     color=[object_color[i]+blend[1]*(global_color[i]-object_color[i]) for i in range(3)]
@@ -37,11 +40,13 @@ def decode_lighting(global_rows,object_rows,*,ambient_row,main_color_row,reflect
     return {'settings':{'schemaVersion':1,'enabled':True,'ambientColor':list(ambient[:3]),
         'ambientDirection':ambient_direction,'directionBias':direction_parameters[0],
         'directionGain':direction_parameters[1],'directionFloor':direction_parameters[2],
-        'outdoorGain':gains[1],'shadowAmbientGain':gains[3],'indoorMix':modes[0],
+        'outdoorGain':gains[1],'shadowAmbientGain':gains[3],'ambientWeight':ambient_weight,'indoorMix':modes[0],
         'litAmbientMix':modes[1],'mainColorMix':blend[1],'shadowOverride':modes[2],
         'useSceneIrradiance':modes[1]<.5},
         'mainLight':{'incomingDirection':incoming,'color':color,'intensity':intensity},
         'materialShadowScale':bounded(gains[2],0,64),
         'sourceChoices':{'ambientRow':ambient_row,'mainColorRow':main_color_row,
-            'directionBlend':modes[3],'colorBlend':blend[1],'intensityBlend':blend[3]},
-        'unverifiedInputs':['source ambient-occlusion producer','material-specific color inputs','native grading and unclipped HDR output']}
+            'directionBlend':modes[3],'colorBlend':blend[1],'intensityBlend':blend[3],
+            'ambientWeightRows':[27,29,122]},
+        'unverifiedInputs':(['volume-modulated ambient weight'] if modes[1]<.5 else [])
+            +['material-specific color inputs','native grading and unclipped HDR output']}
