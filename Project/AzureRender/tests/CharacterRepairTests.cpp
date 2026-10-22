@@ -67,6 +67,8 @@ void testCharacterProfileTextures(const nlohmann::json& fixture, const std::file
     std::filesystem::remove(directory/"hair-data.png.azmeta");
     std::ofstream(directory/"diffuse-ramp.png.azmeta")<<Json{{"settings",{{"texture",{{"filter","nearest"}}}}}};
     reject(source,"fixed lookup sampler","Diffuse-ramp metadata must respect the fixed lookup contract");
+    std::ofstream(directory/"diffuse-ramp.png.azmeta")<<Json{{"settings",{{"texture",{{"mipBias",-1}}}}}};
+    reject(source,"fixed lookup sampler","Lookup textures must reject a mip-bias override");
     std::filesystem::remove(directory/"diffuse-ramp.png.azmeta");
     require((actual.materialFeatures&MaterialFeatureDiffuseRamp)!=0
         &&(actual.materialFeatures&MaterialFeatureSilhouetteOutline)!=0,
@@ -220,11 +222,13 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     sampledHair["projectedRamp"]["parameterTexture"]=sampledTexture;
     sampledHair["projectedRamp"]["line"]["texture"]=sampledTexture;
     const auto sampledSidecar=directory/"sampled-hair.png.azmeta";
-    std::ofstream(sampledSidecar)<<Json{{"settings",{{"texture",{{"anisotropy",16},{"wrapU","mirror"}}}}}};
+    std::ofstream(sampledSidecar)<<Json{{"settings",{{"texture",{{"anisotropy",16},{"wrapU","mirror"},{"mipBias",-1},{"mipFilter","nearest"}}}}}};
     const auto sampledMaterial=load(sampled).materials[0];
     for(unsigned slot:{6U,7U,8U})
         require(sampledMaterial.textureSettings[slot].anisotropy==16
             &&sampledMaterial.textureSettings[slot].wrapU=="mirror"
+            &&sampledMaterial.textureSettings[slot].mipBias==-1
+            &&!sampledMaterial.textureSettings[slot].sampler(8,16).mipmapLinear
             &&sampledMaterial.textureSettings[slot].colorSpace=="linear",
             "Typed hair samplers must inherit metadata from their selected source images");
     Json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",Json::object()},
@@ -238,7 +242,8 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     }
     const auto resolved=MaterialData::parse(complete).interpret([&](const auto& uuid){return imagePaths.at(uuid);});
     for(unsigned slot:{6U,7U,8U})
-        require(resolved.textureSettings[slot].anisotropy==16&&resolved.textureSettings[slot].wrapU=="mirror",
+        require(resolved.textureSettings[slot].anisotropy==16&&resolved.textureSettings[slot].wrapU=="mirror"&&resolved.textureSettings[slot].mipBias==-1
+            &&!resolved.textureSettings[slot].sampler(8,16).mipmapLinear,
             "Complete UUID materials must preserve typed image sampling metadata");
     std::ofstream(sampledSidecar)<<Json{{"settings",{{"texture",{{"usage","albedo"},{"colorSpace","srgb"}}}}}};
     reject(sampled,"typed texture color space");

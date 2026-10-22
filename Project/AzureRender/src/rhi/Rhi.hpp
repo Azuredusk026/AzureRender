@@ -32,6 +32,7 @@ struct SamplerDesc {
     float maxLod = 0.0F;
     bool mipmapLinear = true;
     float maxAnisotropy = 1.0F;
+    float mipLodBias = 0.0F;
 };
 
 struct DescriptorBindingDesc {

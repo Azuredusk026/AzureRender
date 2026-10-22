@@ -58,10 +58,14 @@ int main(int argc,char** argv){
         authoredResources.erase(std::remove_if(authoredResources.begin(),authoredResources.end(),[](const auto& resource){return resource.id=="virtual-alias"||resource.id=="absolute-alias";}),authoredResources.end());
         context->save();
         const auto imageFingerprint=std::to_string(context->assets().records().at(importedImage).fingerprint);
-        apply(session,"asset.reimport",{{"asset",importedImage},{"settings",{{"texture",{{"mipPolicy","generate"}}}}},{"baseFingerprint",imageFingerprint}});
+        apply(session,"asset.reimport",{{"asset",importedImage},{"settings",{{"texture",{{"mipPolicy","generate"},{"mipBias",-1},{"mipFilter","nearest"}}}}},{"baseFingerprint",imageFingerprint}});
         const auto imageDeadline=std::chrono::steady_clock::now()+std::chrono::seconds(5);
         while(std::chrono::steady_clock::now()<imageDeadline){session.pollTasks();if(session.tasks().report().back().at("state")!="running")break;std::this_thread::sleep_for(std::chrono::milliseconds(1));}
         require(session.tasks().report().back().at("state")=="completed","Image reimport must validate semantics and mip generation through the public job");
+        require(apply(session,"texture.describe",{{"assets",Json::array({importedImage})}}).at("values").at("mipBias")==-1,
+            "Public image reimport and texture authoring must preserve the same mip bias");
+        require(apply(session,"texture.describe",{{"assets",Json::array({importedImage})}}).at("values").at("mipFilter")=="nearest",
+            "Public image reimport must preserve independently authored mip filtering");
         std::filesystem::remove(imageSource);
         const auto fingerprint=std::to_string(context->assets().records().at(converted).fingerprint);
         apply(session,"asset.reimport",{{"asset",converted},{"settings",Json::object()},{"baseFingerprint",fingerprint}});

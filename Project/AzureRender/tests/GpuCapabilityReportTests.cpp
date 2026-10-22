@@ -32,6 +32,7 @@ int main() try {
     properties.driverVersion = 0x123456;
 
     VkPhysicalDeviceFeatures features{};
+    properties.limits.maxSamplerLodBias=16;
     features.samplerAnisotropy = VK_TRUE;
     features.shaderInt64 = VK_FALSE;
 
@@ -55,6 +56,7 @@ int main() try {
     const std::string text = formatGpuCapabilityReport(
         properties, features, vulkan12Features, extensions);
     const nlohmann::json report = parseReport(text);
+    require(report.at("resource_access").at("limits").value("max_sampler_lod_bias",-1.F)==16.F);
 
     // Schema contract: top-level fields exist with the expected types.
     require(report.contains("schema_version"));

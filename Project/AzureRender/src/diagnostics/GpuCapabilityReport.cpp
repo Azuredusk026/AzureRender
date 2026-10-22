@@ -60,6 +60,7 @@ std::string formatGpuCapabilityReport(
                 {"max_per_stage_descriptor_sampled_images", properties.limits.maxPerStageDescriptorSampledImages},
                 {"max_descriptor_set_sampled_images", properties.limits.maxDescriptorSetSampledImages},
                 {"max_per_stage_resources", properties.limits.maxPerStageResources},
+                {"max_sampler_lod_bias", properties.limits.maxSamplerLodBias},
                 {"max_per_stage_update_after_bind_samplers", indexing.maxPerStageDescriptorUpdateAfterBindSamplers},
                 {"max_set_update_after_bind_samplers", indexing.maxDescriptorSetUpdateAfterBindSamplers},
                 {"max_per_stage_update_after_bind_sampled_images", indexing.maxPerStageDescriptorUpdateAfterBindSampledImages},

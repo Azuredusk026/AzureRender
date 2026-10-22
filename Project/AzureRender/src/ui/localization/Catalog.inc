@@ -238,6 +238,8 @@
 {"语言","Language"},
 {"全部目录","All directories"},
 {"各向异性","Anisotropy"},
+{"多级纹理过滤","mipFilter"},
+{"多级纹理偏移","Mip bias"},
 {"抗锯齿","Anti-aliasing"},
 {"应用","Apply"},
 {"将 %s 应用到以下文件：","Apply %s to the following files:"},

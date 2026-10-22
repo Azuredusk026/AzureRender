@@ -63,10 +63,12 @@ int main(int argc,char** argv){
   reopened.undo();require(!std::filesystem::exists(root/"assets/nested/data.txt"),"Dependency tree undo must restore all files");
   write(root/"assets/a.png","texture A");write(root/"assets/b.png","texture B");
   ContentOperationService textures(Project::load(root/"project.azureproject"));
-  auto batch=textures.plan({{"operation","texture.settings"},{"assets",{"assets:/a.png","assets:/b.png"}},{"values",{{"filter","nearest"}}}});textures.apply(batch.at("id"));
+  auto batch=textures.plan({{"operation","texture.settings"},{"assets",{"assets:/a.png","assets:/b.png"}},{"values",{{"filter","nearest"},{"mipBias",-1}}}});textures.apply(batch.at("id"));
   require(nlohmann::json::parse(std::ifstream(root/"assets/a.png.azmeta")).at("settings").at("texture").at("filter")=="nearest","Texture batch must publish the selected fields");
   require(nlohmann::json::parse(std::ifstream(root/"assets/b.png.azmeta")).at("settings").at("texture").at("filter")=="nearest","Texture batch must include every selected image");
+  require(nlohmann::json::parse(std::ifstream(root/"assets/b.png.azmeta")).at("settings").at("texture").at("mipBias")==-1,"Texture transactions must publish the authored mip bias");
   textures.undo();
+  require(nlohmann::json::parse(std::ifstream(root/"assets/b.png.azmeta")).at("settings").value("texture",nlohmann::json::object()).value("mipBias",0)==0,"Texture undo must restore the previous sampling policy");
   const std::string binary("\x89PNG\xff\0",6);write(root/"assets/a.png",binary);
   auto binaryMove=textures.plan({{"operation","asset.rename"},{"asset","assets:/a.png"},{"name","binary.png"}});textures.apply(binaryMove.at("id"));
   textures.undo();

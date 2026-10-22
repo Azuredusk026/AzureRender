@@ -26,7 +26,7 @@ struct TimedSection {
 bool sameSampler(const rhi::SamplerDesc& a,const rhi::SamplerDesc& b) {
     return a.filter==b.filter&&a.addressU==b.addressU&&a.addressV==b.addressV
         &&a.addressW==b.addressW&&a.maxLod==b.maxLod
-        &&a.mipmapLinear==b.mipmapLinear&&a.maxAnisotropy==b.maxAnisotropy;
+        &&a.mipmapLinear==b.mipmapLinear&&a.maxAnisotropy==b.maxAnisotropy&&a.mipLodBias==b.mipLodBias;
 }
 bool sameUpload(const SampledTextureUpload& a,const SampledTextureUpload& b) {
     return a.width==b.width&&a.height==b.height&&a.format==b.format
@@ -90,6 +90,7 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     if(!std::isfinite(request.alphaCutoff)||request.alphaCutoff<0||request.alphaCutoff>1)
         throw std::invalid_argument("Texture alpha cutoff is invalid");
     if(!std::isfinite(request.sampler.maxLod)||request.sampler.maxLod<0
+        ||!std::isfinite(request.sampler.mipLodBias)
         ||!std::isfinite(request.sampler.maxAnisotropy)||request.sampler.maxAnisotropy<1
         ||(request.sampler.filter!=VK_FILTER_NEAREST&&request.sampler.filter!=VK_FILTER_LINEAR))
         throw std::invalid_argument("Texture sampler settings are invalid");

@@ -1813,7 +1813,7 @@ AssetMaterial loadMaterial(
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
             if(lookup&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU
                 ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
-                ||settings.anisotropy!=defaults.anisotropy))
+                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias))
                 throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
             result.textureSettings[slot]=std::move(settings);
         }

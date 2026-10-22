@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <stdexcept>
 #include <vector>
 
@@ -295,6 +296,7 @@ void VulkanRhi::destroyImageView(const VkImageView view) {
 }
 
 VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
+    if(!std::isfinite(desc.mipLodBias))throw std::invalid_argument("Sampler mip bias must be finite");
     VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
     samplerInfo.magFilter = desc.filter;
     samplerInfo.minFilter = desc.filter;
@@ -307,6 +309,7 @@ VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
     samplerInfo.maxLod = desc.maxLod;
     VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physicalDevice_,&features);
     VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+    samplerInfo.mipLodBias=std::clamp(desc.mipLodBias,-properties.limits.maxSamplerLodBias,properties.limits.maxSamplerLodBias);
     if(samplerAnisotropyEnabled_ && features.samplerAnisotropy && desc.maxAnisotropy>1){
         samplerInfo.anisotropyEnable=VK_TRUE;
         samplerInfo.maxAnisotropy=std::clamp(desc.maxAnisotropy,1.F,properties.limits.maxSamplerAnisotropy);

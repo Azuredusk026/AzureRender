@@ -8,6 +8,23 @@ int main(){try{
  require(normal.sampler(4,8).maxAnisotropy==8,"Sampler must clamp anisotropy to device support");
  require(normal.sampler(1,1).maxLod==0,"Single-level textures must remain within their image");
  auto color=TextureImportSettings::parse({{"usage","albedo"}});require(color.semantic()==TextureFilterSemantic::Srgb,"Color defaults must use sRGB filtering");
+ auto biased=TextureImportSettings::parse({{"mipBias",-1.0}});
+ require(biased.describe().at("mipBias")==-1.0,"Authored mip bias must survive image metadata interpretation");
+ require(biased.sampler(8,16).mipLodBias==-1,"Mip bias must reach the RHI sampler input");
+ require(color.describe().at("mipBias")==0.0,"Omitted mip bias must preserve compatible zero-bias sampling");
+ auto separate=TextureImportSettings::parse({{"filter","linear"},{"mipFilter","nearest"}});
+ require(separate.sampler(8,16).filter==VK_FILTER_LINEAR&&!separate.sampler(8,16).mipmapLinear,
+     "Minification and mip filtering must remain independently authored");
+ require(!TextureImportSettings::parse({{"filter","nearest"}}).sampler(8,16).mipmapLinear,
+     "Omitted mip filtering must preserve legacy nearest-filter metadata");
+ for(const auto& value:nlohmann::json::array({"cubic",1,true,nullptr})) {
+  bool invalid=false;try{(void)TextureImportSettings::parse({{"mipFilter",value}});}catch(const std::exception&){invalid=true;}
+  require(invalid,"Invalid mip filtering metadata must be rejected");
+ }
+ for(const auto& value:nlohmann::json::array({-17,17,true,"-1",nullptr})) {
+  bool invalid=false;try{(void)TextureImportSettings::parse({{"mipBias",value}});}catch(const std::exception&){invalid=true;}
+  require(invalid,"Invalid mip bias metadata must be rejected");
+ }
  bool rejected=false;try{TextureImportSettings::parse({{"usage","normal"},{"colorSpace","srgb"}});}catch(const std::exception&){rejected=true;}
  require(rejected,"Normal maps must reject gamma color space");
  rejected=false;try{TextureImportSettings::parse({{"filter","unknown"}});}catch(const std::exception&){rejected=true;}require(rejected,"Invalid filters must be rejected");

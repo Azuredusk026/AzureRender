@@ -2073,6 +2073,12 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.NprIlluminationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_illumination_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.NprIlluminationGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureAssets.TextureMipBiasGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_texture_mip_bias_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureAssets.TextureMipBiasGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEditor.TextureMipBiasGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_texture_mip_bias_ui.py"
+        --executable $<TARGET_FILE:AzureRender>)
+    set_tests_properties(AzureEditor.TextureMipBiasGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.NprDiffuseGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_diffuse_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.NprDiffuseGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     set_tests_properties(AzureEngine.ShadowColorLutGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)

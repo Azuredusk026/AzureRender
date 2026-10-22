@@ -32,6 +32,7 @@ void ImGuiEditorLayer::drawTextureAssetPanel() {
         const std::map<std::string,std::vector<const char*>> choices{
             {"usage",{"albedo","emissive","normal","mask","roughness","linear","packed-normal"}},
             {"colorSpace",{"srgb","linear"}},{"filter",{"linear","nearest"}},
+            {"mipFilter",{"linear","nearest"}},
             {"wrapU",{"repeat","clamp","mirror"}},{"wrapV",{"repeat","clamp","mirror"}},
             {"mipPolicy",{"generate","none"}}};
         for(const auto& [field,options]:choices) {
@@ -52,6 +53,11 @@ void ImGuiEditorLayer::drawTextureAssetPanel() {
         observeWidget("texture.enable.anisotropy");ImGui::SameLine();ImGui::BeginDisabled(!anisotropy);
         float amount=values.at("anisotropy").get<float>();if(ImGui::SliderFloat(ui::tr("Anisotropy"),&amount,1,16,"%.0f"))values["anisotropy"]=amount;
         observeWidget("texture.anisotropy");ImGui::EndDisabled();
+        bool mipBias=assetPanel_->presentation.textureFields_.count("mipBias")!=0;
+        if(ImGui::Checkbox("##mipBias-apply",&mipBias)){if(mipBias)assetPanel_->presentation.textureFields_.insert("mipBias");else assetPanel_->presentation.textureFields_.erase("mipBias");}
+        observeWidget("texture.enable.mipBias");ImGui::SameLine();ImGui::BeginDisabled(!mipBias);
+        float bias=values.at("mipBias").get<float>();if(ImGui::SliderFloat(ui::tr("Mip bias"),&bias,-16,16,"%.2f"))values["mipBias"]=bias;
+        observeWidget("texture.mipBias");ImGui::EndDisabled();
         ui::ButtonOptions apply;apply.disabled=assetPanel_->presentation.textureFields_.empty()||session_->context().dirty()||session_->reimporting();
         if(ui::button(ui::tr("Preview impact"),apply)) {
             auto fields=nlohmann::json::object(),assets=nlohmann::json::array();

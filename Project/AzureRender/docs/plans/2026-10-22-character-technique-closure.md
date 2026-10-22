@@ -37,6 +37,7 @@
 同帧头部基底通过矩阵比较。
 显式切线手性与程序色带方向见[坐标验证](../acceptance/nr/projected-hair-coordinates.md)。
 原生图片层级、可见图元及采样见[输入验证](../acceptance/nr/typed-image-inputs.md)。
+实际采样器及独立层级过滤见[状态验证](../acceptance/nr/sampler-filter-and-bias.md)。
 共享颜色核、环境遮蔽和照明乘积见[数值验证](../acceptance/nr/captured-hair-illumination.md)。
 环境权重和条纹的贡献归属见[运行验证](../acceptance/nr/ambient-weight-and-main-line.md)。
 主关卡与可玩入口引用 `hero-hair-linear-212213.glb`。
