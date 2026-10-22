@@ -59,8 +59,14 @@ MaterialDocument MaterialEditingService::previewField(const EditorContext& conte
     const auto& record=context.assets().records().at(asset);
     if(!assetTypeRegistry().matches(record.path,{"material"}))throw std::invalid_argument("Material operations require a material asset");
     auto document=MaterialDocument::load(record.path);
-    if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);if(value.is_null())document.textures.erase(slot);else document.textures[slot]=value;}
-    else {if(!document.parameters.contains(field))throw std::invalid_argument("Unknown material parameter");document.parameters[field]=value;}
+    if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);
+        if(!MaterialTypeRegistry::builtins().type(document.typeId).textures.contains(slot))throw std::invalid_argument("Unknown material texture");
+        if(value.is_null())document.textures.erase(slot);else document.textures[slot]=value;
+    }
+    else {
+        if(!MaterialTypeRegistry::builtins().type(document.typeId).parameters.contains(field))throw std::invalid_argument("Unknown material parameter");
+        if(document.parameterOverride&&value.is_null())document.parameters.erase(field);else document.parameters[field]=value;
+    }
     if(!document.authoringGraph.is_null()){auto graph=MaterialGraphModel::parse(document.authoringGraph);graph.setField(field,value);document.authoringGraph=graph.encode();}
     document.validate();
     for(const auto& texture:document.textures.items()){
@@ -74,7 +80,10 @@ Json MaterialEditingService::execute(EditorContext& context,ContentOperationServ
     if(!context.isProject())throw std::invalid_argument("Material authoring requires a project");
     if(operation=="material.types")return MaterialTypeRegistry::builtins().describe();
     if(operation=="material.create"){
-        const auto document=MaterialDocument::defaults(args.at("type").get<std::string>());
+        auto document=MaterialDocument::defaults(args.at("type").get<std::string>());
+        const auto mode=args.value("mode",std::string("replace"));
+        if(mode=="parameters"){document.parameterOverride=true;document.parameters=Json::object();}
+        else if(mode!="replace")throw std::invalid_argument("Unknown material mode");
         const auto plan=content.plan({{"operation","material.write"},{"destination",args.at("destination")},{"document",document.encode()},{"create",true}});
         const auto result=content.apply(plan.at("id").get<std::string>());context.assets().refresh();return {{"asset",context.assets().idForPath(args.at("destination").get<std::string>())},{"transaction",result}};
     }

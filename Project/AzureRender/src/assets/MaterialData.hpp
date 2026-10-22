@@ -22,6 +22,7 @@ private:
 };
 struct MaterialData {
     static constexpr unsigned kSchemaVersion=1;
+    bool parameterOverride=false;
     std::string typeId;
     nlohmann::json parameters=nlohmann::json::object(),textures=nlohmann::json::object();
     nlohmann::json authoringGraph=nullptr;
@@ -30,7 +31,8 @@ struct MaterialData {
     static MaterialData load(const std::filesystem::path&);
     nlohmann::json encode() const;
     void validate() const;
-    AssetMaterial interpret(const std::function<std::filesystem::path(const std::string&)>&) const;
+    AssetMaterial interpret(const std::function<std::filesystem::path(const std::string&)>&,
+        const AssetMaterial* source=nullptr) const;
 };
 std::vector<std::string> materialSlotIds(const LoadedAsset&);
 void applyMaterialBindings(LoadedAsset&,const std::map<std::string,MaterialBinding>&);

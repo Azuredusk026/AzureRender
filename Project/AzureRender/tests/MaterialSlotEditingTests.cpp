@@ -20,6 +20,16 @@ int main(){
         const auto content=context->documentContent();
         const auto first=run(session,"material.create",{{"type","azure.pbr"},{"destination","assets:/surface.azurematerial"}}).at("asset").get<std::string>();
         const auto second=run(session,"material.create",{{"type","azure.stylized"},{"destination","assets:/style.azurematerial"}}).at("asset").get<std::string>();
+        const auto patch=run(session,"material.create",{{"type","azure.pbr"},{"mode","parameters"},{"destination","assets:/patch.azurematerial"}}).at("asset").get<std::string>();
+        require(run(session,"material.describe",{{"asset",patch}}).at("document").at("parameters").empty(),"Parameter overrides start with inherited source fields");
+        run(session,"material.field",{{"asset",patch},{"field","emissiveStrength"},{"value",2.0}});
+        run(session,"material.undo",{{"asset",patch}});
+        require(run(session,"material.describe",{{"asset",patch}}).at("document").at("parameters").empty(),"Undo must restore inheritance rather than a numeric default");
+        run(session,"material.redo",{{"asset",patch}});
+        require(run(session,"material.describe",{{"asset",patch}}).at("document").at("schemaVersion")==2,"Sparse override mode must survive editing history");
+        run(session,"material.field",{{"asset",patch},{"field","emissiveStrength"},{"value",nullptr}});
+        require(!session.edit("material.field",{{"asset",patch},{"field","textures.typo"},{"value",nullptr}}),"Resetting an unknown texture must fail");
+        require(run(session,"material.describe",{{"asset",patch}}).at("document").at("parameters").empty(),"Resetting an override restores inheritance");
         require(context->documentContent()==content&&!context->dirty(),"Material asset creation must preserve the scene history");
         require(run(session,"preview.types").size()>=3,"Model, image and material preview providers must be discoverable");
         require(run(session,"asset.open",{{"asset",first}}).at("operation")=="material.describe","Material double click must target its registered editor");

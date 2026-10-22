@@ -25,8 +25,9 @@ build/runs/20261022-230758-main-material-integration-8fd37c/
 
 日志为 `material-contract-regression.log`。
 此次验证覆盖 CPU 生产解释与编辑回归。
-专项 GPU 自发光像素仍待验证。
-完整角色材质表达、覆盖语义及 C15 总体验收保持待项。
+专项 GPU 结果见[覆盖验收](material-parameter-overrides.md)。
+完整替换与参数覆盖均与 glTF 自发光输入逐像素一致。
+完整角色材质表达及 C15 总体验收保持待项。
 
 ## 完整替换诊断
 

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+公共材质支持保留源角色效果的参数覆盖。
+CPU、GPU 与真实角色对照见[覆盖验收](docs/acceptance/nr/material-parameter-overrides.md)。
+
 主关卡与可玩入口已接入首批角色材质候选。
 四次捕获及原生待项见[接入验证](docs/acceptance/nr/main-character-integration.md)。
 

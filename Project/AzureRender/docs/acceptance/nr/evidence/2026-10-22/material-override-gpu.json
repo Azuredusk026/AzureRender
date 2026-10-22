@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "captures": [
+    {
+      "name": "indexed-source",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "indexed-override",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "indexed-replace",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "indexed-zero",
+      "maximumLinearError": 0.0,
+      "imageSha256": "40ba815014874cd1b9850ce6745e5d2fd24014336761823dca8cc0e36114fa79"
+    },
+    {
+      "name": "fixed-source",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "fixed-override",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "fixed-replace",
+      "maximumLinearError": 0.0025345369341468194,
+      "imageSha256": "d297be233fb6e0ff33960294ff4b9aab236990bac4c4821a5b6e5291f342f858"
+    },
+    {
+      "name": "fixed-zero",
+      "maximumLinearError": 0.0,
+      "imageSha256": "40ba815014874cd1b9850ce6745e5d2fd24014336761823dca8cc0e36114fa79"
+    }
+  ],
+  "maximumLinearErrorBudget": 0.004,
+  "playerSha256": "cb2917948d49eb4dac0c4cd9f05080eccdd80e37e86fa8ac324b2476d2ce687a",
+  "scriptSha256": "6140446917b06e8357945bf21e7ede8590c6d28081816c2c169795a00495e8ec"
+}

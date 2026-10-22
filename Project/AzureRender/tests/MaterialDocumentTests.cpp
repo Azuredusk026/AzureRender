@@ -47,6 +47,44 @@ int main(){try{
     applyMaterialBindings(mesh,{{"source-slot",binding}});
     std::filesystem::remove(replacementPath);
     require(messages.size()==noLossMessages,"Equivalent ordinary material replacement must remain quiet");
+    const nlohmann::json patch={{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
+        {"parameters",{{"emissiveStrength",3.0}}},{"textures",nlohmann::json::object()}};
+    const auto patchDocument=MaterialData::parse(patch);
+    require(patchDocument.encode()==patch,"Sparse parameter overrides must round trip without adding defaults");
+    {std::ofstream output(replacementPath);output<<patchDocument.encode();}
+    source.emissiveStrength=.5F;source.baseColorPixels={71,82,93,255};source.baseColorWidth=source.baseColorHeight=1;
+    source.faceSdf.headNode=7;source.faceSdf.headNodeName="Head";source.faceSdf.pixels={9,8,7,6};
+    mesh.materials={source};const auto patchMessages=messages.size();applyMaterialBindings(mesh,{{"source-slot",binding}});
+    std::filesystem::remove(replacementPath);
+    const auto& patched=mesh.materials[0];
+    require(patched.emissiveStrength==3&&(patched.materialFeatures&MaterialFeatureEmissiveMask),"Override must reach its runtime consumer");
+    require(patched.faceSdf.present&&patched.faceSdf.headNode==7&&patched.faceSdf.pixels==source.faceSdf.pixels
+        &&patched.nprDiffuse.present&&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
+        "Parameter override must retain unselected source fields and character inputs");
+    require(messages.size()==patchMessages,"Preserving source semantics must not report replacement loss");
+    auto sidedPatch=patch;sidedPatch["parameters"]={{"doubleSided",false}};source.doubleSided=true;
+    {std::ofstream output(replacementPath);output<<sidedPatch;}
+    mesh.materials={source};applyMaterialBindings(mesh,{{"source-slot",binding}});std::filesystem::remove(replacementPath);
+    require(!mesh.materials[0].doubleSided&&messages.size()==patchMessages,"Explicit parameter edits must not report full replacement loss");
+    auto physicalPatch=patch;physicalPatch["parameters"]={{"transmission",.5}};
+    source.materialClass=AssetMaterialClass::Generic;source.specularInput.present=true;
+    bool incompatible=false;try{MaterialData::parse(physicalPatch).interpret([](const auto&){return std::filesystem::path();},&source);}catch(const std::exception&){incompatible=true;}
+    require(incompatible,"Parameter overrides must reject incompatible inherited surface owners");
+    for(const auto& invalidPatch:std::vector<nlohmann::json>{[&]{auto x=patch;x["mode"]="merge";return x;}(),
+        [&]{auto x=patch;x["parameters"]["typo"]=1;return x;}(),[&]{auto x=patch;x["parameters"]["emissiveStrength"]=nullptr;return x;}()}){
+        bool rejected=false;try{MaterialData::parse(invalidPatch);}catch(const std::exception&){rejected=true;}
+        require(rejected,"Override mode, fields and values must be strictly validated");
+    }
+    const auto instructions=std::filesystem::path(__FILE__).parent_path().parent_path()/"docs/runtime/material-authoring.md";
+    std::ifstream documentation(instructions);require(bool(documentation),"Material authoring reference must be readable");
+    std::string line,example;bool collecting=false;unsigned examples=0;
+    while(std::getline(documentation,line)){
+        if(!line.empty()&&line.back()=='\r')line.pop_back();
+        if(line=="```json"){collecting=true;example.clear();}
+        else if(collecting&&line=="```"){static_cast<void>(MaterialData::parse(nlohmann::json::parse(example)));++examples;collecting=false;}
+        else if(collecting)example+=line+'\n';
+    }
+    require(examples>=2&&!collecting,"Material examples must cover replacement and parameter inheritance");
     std::cout<<"Material round trip, physical parameters, registered style interpretation and stable slot identities passed\n";
     return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

@@ -62,8 +62,19 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
         if(graphOpen)materialGraphCanvas(*session_,assetPanel_->presentation.materialAsset_,assetPanel_->presentation.materialSnapshot_.at("document"),dpi_);
         ImGui::TextUnformatted(assetPanel_->presentation.materialSnapshot_.at("document").at("typeId").get<std::string>().c_str());
         if(session_->developerServices().image){const auto preview=session_->edit("preview.asset",{{"asset",assetPanel_->presentation.materialAsset_}});if(preview)if(const auto texture=previewTexture(preview.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{160*dpi_,160*dpi_});}
+        const auto& materialDocument=assetPanel_->presentation.materialSnapshot_.at("document");
+        const bool parameterOverride=materialDocument.value("mode",std::string())=="parameters";
+        if(parameterOverride)ImGui::TextWrapped(ui::tr("勾选需要覆盖的参数。其余参数和特殊效果继承源材质。"));
         for(const auto& field:assetPanel_->presentation.materialSnapshot_.at("type").items()){
-            const auto& specification=field.value();const auto value=assetPanel_->presentation.materialSnapshot_.at("document").at("parameters").at(field.key());const auto kind=specification.at("type").get<std::string>();
+            const auto& specification=field.value();const auto& parameters=materialDocument.at("parameters");
+            if(parameterOverride){
+                bool enabled=parameters.contains(field.key());
+                if(ImGui::Checkbox((std::string(ui::tr("覆盖"))+"###override-"+field.key()).c_str(),&enabled))
+                    session_->edit("material.field",{{"asset",assetPanel_->presentation.materialAsset_},{"field",field.key()},{"value",enabled?specification.at("default"):nlohmann::json(nullptr)}});
+                observeWidget("material.override."+field.key());ImGui::SameLine();
+                if(!parameters.contains(field.key())){ImGui::Text("%s (%s)",ui::tr(field.key().c_str()),ui::tr("继承"));continue;}
+            }
+            const auto value=parameters.at(field.key());const auto kind=specification.at("type").get<std::string>();
             nlohmann::json next=value;bool changed=false;
             if(kind=="color"){auto color=value.get<std::array<float,4>>();changed=ImGui::ColorEdit4(ui::tr(field.key().c_str()),color.data());next=color;}
             else if(kind=="boolean"){auto boolean=value.get<bool>();changed=ImGui::Checkbox(ui::tr(field.key().c_str()),&boolean);next=boolean;}
@@ -73,8 +84,9 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
         }
         for(const auto& slot:assetPanel_->presentation.materialSnapshot_.at("textures").items()){
             const auto& document=assetPanel_->presentation.materialSnapshot_.at("document");const auto current=document.at("textures").contains(slot.key())?document.at("textures").at(slot.key()).at("asset").get<std::string>():std::string();
-            if(ImGui::BeginCombo((std::string(ui::tr(slot.key().c_str()))+" "+ui::tr("texture")+"###"+slot.key()+"-texture").c_str(),current.empty()?ui::tr("None"):label(current).c_str())){
-                if(ImGui::Selectable(ui::tr("None"),current.empty()))session_->edit("material.field",{{"asset",assetPanel_->presentation.materialAsset_},{"field","textures."+slot.key()},{"value",nullptr}});
+            const auto emptyLabel=ui::tr(parameterOverride?"继承":"None");
+            if(ImGui::BeginCombo((std::string(ui::tr(slot.key().c_str()))+" "+ui::tr("texture")+"###"+slot.key()+"-texture").c_str(),current.empty()?emptyLabel:label(current).c_str())){
+                if(ImGui::Selectable(emptyLabel,current.empty()))session_->edit("material.field",{{"asset",assetPanel_->presentation.materialAsset_},{"field","textures."+slot.key()},{"value",nullptr}});
                 for(const auto& [id,record]:session_->context().assets().records())if(assetTypeRegistry().matches(record.path,{"image"})){
                     if(ImGui::Selectable(record.virtualPath.c_str(),current==id))session_->edit("material.field",{{"asset",assetPanel_->presentation.materialAsset_},{"field","textures."+slot.key()},{"value",{{"asset",id},{"usage",slot.value()}}}});
                     observeWidget("material.texture."+slot.key()+"."+id);
@@ -82,11 +94,13 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
             }observeWidget("material.texture."+slot.key());
         }
         ImGui::TextWrapped(ui::tr("参数修改保存到材质资源；场景材质槽分配支持撤销。"));
-        if(ui::button(ui::tr("Undo material"),{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canUndo").get<bool>()}))session_->edit("material.undo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.undo");ImGui::SameLine();
-        if(ui::button(ui::tr("Redo material"),{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canRedo").get<bool>()}))session_->edit("material.redo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.redo");
         for(const auto& error:session_->feedback().report())if(error.at("source").get<std::string>().rfind("material.",0)==0)ImGui::TextWrapped("%s",error.at("message").get<std::string>().c_str());
     }
     ImGui::EndChild();
+    if(assetPanel_->presentation.materialSnapshot_.contains("document")){
+        if(ui::button(ui::tr("Undo material"),{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canUndo").get<bool>()}))session_->edit("material.undo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.undo");ImGui::SameLine();
+        if(ui::button(ui::tr("Redo material"),{ui::ButtonVariant::Default,false,!assetPanel_->presentation.materialSnapshot_.at("canRedo").get<bool>()}))session_->edit("material.redo",{{"asset",assetPanel_->presentation.materialAsset_}});observeWidget("material.redo");ImGui::SameLine();
+    }
     if(ui::button(ui::tr("Close material"))){assetPanel_->presentation.materialAsset_.clear();assetPanel_->presentation.materialSnapshot_=nullptr;ImGui::CloseCurrentPopup();}observeWidget("material.close");ImGui::EndPopup();
 }
 void ImGuiEditorLayer::drawMaterialSlots(const SceneNode& node){

@@ -8,6 +8,9 @@
 新增任务为 NR0-A1、NR6-C15 至 C18、NR8-V2。
 首批角色候选已进入主项目与可玩入口。
 范围见[主场景接入](../acceptance/nr/main-character-integration.md)。
+公共材质已接入稀疏参数覆盖及共享编辑操作。
+八次 GPU 夹具与真实角色对照见[覆盖验收](../acceptance/nr/material-parameter-overrides.md)。
+下一项为完整画像表达及加载器、Schema 的统一版本。
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。
 

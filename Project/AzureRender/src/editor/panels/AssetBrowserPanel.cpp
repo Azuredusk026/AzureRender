@@ -117,13 +117,14 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         services_.observe("content.create-directory");
         if(ImGui::BeginMenu(ui::tr("Create material"))){
             ui::inputText("Name",presentation.materialName_);services_.observe("material.create-name");
-            for(const auto& type:MaterialTypeRegistry::builtins().describe()){
+            for(const auto& type:MaterialTypeRegistry::builtins().describe())for(const bool parameterOverride:{false,true}){
                 const auto id=type.at("id").get<std::string>();
-                if(ImGui::MenuItem(type.at("label").get<std::string>().c_str())){
+                const auto label=type.at("label").get<std::string>()+(parameterOverride?std::string(" - ")+ui::tr("参数覆盖"):std::string());
+                if(ImGui::MenuItem(label.c_str())){
                     const auto destination=(presentation.assetMount_.empty()?"assets:/":presentation.assetMount_+":/")+(presentation.assetDirectory_.empty()?"":presentation.assetDirectory_+"/")+presentation.materialName_;
-                    const auto created=services_.session.edit("material.create",{{"type",id},{"destination",destination}});
+                    const auto created=services_.session.edit("material.create",{{"type",id},{"mode",parameterOverride?"parameters":"replace"},{"destination",destination}});
                     if(created){presentation.materialAsset_=created.value.at("asset").get<std::string>();const auto opened=services_.session.edit("material.describe",{{"asset",presentation.materialAsset_}});if(opened){presentation.materialSnapshot_=opened.value;presentation.materialDialogRequested_=true;}}
-                }services_.observe("material.create."+id);
+                }services_.observe("material.create."+id+(parameterOverride?".parameters":""));
             }ImGui::EndMenu();
         }services_.observe("assets.create-material");
         if(ImGui::BeginMenu(ui::tr("Generate primitive"))){

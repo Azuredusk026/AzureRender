@@ -10,6 +10,7 @@ bool validId(const std::string& id){return !id.empty()&&id.size()<=64&&id.find_f
 MaterialGraph MaterialGraph::fromMaterial(const MaterialData& material){
     auto copy=material;copy.authoringGraph=nullptr;copy.validate();
     MaterialGraph graph;graph.document_={{"schemaVersion",1},{"typeId",copy.typeId},{"nodes",Json::array({{{"id","output"},{"kind","output"},{"position",{400,100}}}})},{"links",Json::array()}};
+    if(copy.parameterOverride){graph.document_["schemaVersion"]=2;graph.document_["mode"]="parameters";}
     for(const auto& field:copy.parameters.items())graph.setField(field.key(),field.value());
     for(const auto& field:copy.textures.items())graph.setField("textures."+field.key(),field.value());
     return graph;
@@ -18,8 +19,12 @@ MaterialGraph MaterialGraph::parse(const Json& document){MaterialGraph graph;gra
 Json MaterialGraph::encode()const{static_cast<void>(compile());return document_;}
 MaterialData MaterialGraph::compile()const{
     const auto& graph=document_;
-    if(!graph.is_object()||graph.size()!=4||graph.at("schemaVersion")!=1||!graph.at("nodes").is_array()||!graph.at("links").is_array()||graph.at("nodes").size()>128||graph.at("links").size()>64)throw std::invalid_argument("Invalid material graph schema or budget");
+    if(!graph.is_object()||!graph.at("schemaVersion").is_number_integer())throw std::invalid_argument("Invalid material graph version");
+    const bool patch=graph.at("schemaVersion")==2;
+    if(graph.size()!=(patch?5:4)||(!patch&&graph.at("schemaVersion")!=1)
+        ||(patch&&graph.at("mode")!="parameters")||!graph.at("nodes").is_array()||!graph.at("links").is_array()||graph.at("nodes").size()>128||graph.at("links").size()>64)throw std::invalid_argument("Invalid material graph schema or budget");
     auto material=MaterialData::defaults(graph.at("typeId").get<std::string>());
+    if(patch){material.parameterOverride=true;material.parameters=Json::object();}
     std::map<std::string,Json> nodes;unsigned outputs=0;
     for(const auto& node:graph.at("nodes")){
         const auto id=node.at("id").get<std::string>(),kind=node.at("kind").get<std::string>();
@@ -36,15 +41,17 @@ MaterialData MaterialGraph::compile()const{
         const auto& node=nodes.at(source);const bool texture=slot.rfind("textures.",0)==0;
         if(node.at("kind")!=(texture?"texture":"value"))throw std::invalid_argument("Graph port type mismatch");
         if(texture)material.textures[slot.substr(9)]=node.at("value");
-        else{if(!material.parameters.contains(slot))throw std::invalid_argument("Unknown material graph port");material.parameters[slot]=node.at("value");}
+        else{if(!MaterialTypeRegistry::builtins().type(material.typeId).parameters.contains(slot))throw std::invalid_argument("Unknown material graph port");material.parameters[slot]=node.at("value");}
     }
     material.validate();return material;
 }
 void MaterialGraph::setField(const std::string& field,const Json& value){
     auto candidate=document_;const bool texture=field.rfind("textures.",0)==0;const auto id="field_"+(texture?field.substr(9):field);
+    const auto& type=MaterialTypeRegistry::builtins().type(candidate.at("typeId").get<std::string>());
+    if(texture?!type.textures.contains(field.substr(9)):!type.parameters.contains(field))throw std::invalid_argument("Unknown material graph field");
     auto& links=candidate.at("links");links.erase(std::remove_if(links.begin(),links.end(),[&](const auto& link){return link.at("slot")==field;}),links.end());
     auto& nodes=candidate.at("nodes");auto found=std::find_if(nodes.begin(),nodes.end(),[&](const auto& node){return node.at("id")==id;});
-    if(texture&&value.is_null()){if(found!=nodes.end())nodes.erase(found);}
+    if(value.is_null()&&(texture||candidate.at("schemaVersion")==2)){if(found!=nodes.end())nodes.erase(found);}
     else{
         if(found==nodes.end()){nodes.push_back({{"id",id},{"kind",texture?"texture":"value"},{"position",{20,static_cast<int>(nodes.size())*90}},{"value",value}});}
         else (*found)["value"]=value;

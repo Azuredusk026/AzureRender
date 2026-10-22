@@ -7,14 +7,17 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-graph-
     Project::create(root,"Graph workflow");auto context=EditorContext::openProject(root/"project.azureproject");EditorSession session(context);
     auto run=[&](const auto& op,const Json& args){const auto result=session.edit(op,args);if(!result)throw std::runtime_error(result.diagnostics.dump());return result.value;};
     auto check=[](bool condition,const char* message){if(!condition)throw std::runtime_error(message);};
-    for(const auto* type:{"azure.pbr","azure.stylized"}){
-        const auto destination="assets:/"+std::string(type)+".azurematerial";
-        const auto asset=run("material.create",{{"type",type},{"destination",destination}}).at("asset").get<std::string>();
-        auto graph=MaterialGraph::fromMaterial(MaterialData::defaults(type));graph.setField("roughness",.2);
+    for(const auto* type:{"azure.pbr","azure.stylized"})for(const bool patch:{false,true}){
+        const auto destination="assets:/"+std::string(type)+(patch?"-override":"")+".azurematerial";
+        const auto asset=run("material.create",{{"type",type},{"mode",patch?"parameters":"replace"},{"destination",destination}}).at("asset").get<std::string>();
+        const auto created=MaterialData::load(context->assets().resolve(asset));
+        check(created.parameterOverride==patch,"Creation must preserve explicit mode");
+        auto graph=MaterialGraph::fromMaterial(created);graph.setField("roughness",.2);
         const auto saved=run("material.graph",{{"asset",asset},{"graph",graph.encode()}}).at("document");
         run("material.field",{{"asset",asset},{"field","roughness"},{"value",.6}});
         auto edited=run("material.describe",{{"asset",asset}}).at("document");
         check(MaterialGraph::parse(edited.at("authoringGraph")).compile().parameters.at("roughness")==.6,"Form and graph must share committed values");
+        if(patch)check(edited.at("parameters").size()==1&&edited.at("mode")=="parameters","Graph edits must preserve inherited fields");
         run("material.undo",{{"asset",asset}});check(run("material.describe",{{"asset",asset}}).at("document")==saved,"Undo must restore graph and compiled fields together");
         run("material.redo",{{"asset",asset}});check(run("material.describe",{{"asset",asset}}).at("document")==edited,"Redo must restore the complete graph transaction");
         auto bad=graph.encode();bad["links"][0]["source"]="missing";

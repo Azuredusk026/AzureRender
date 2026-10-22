@@ -24,5 +24,13 @@ int main(){try{
         bool stale=false;try{MaterialData::parse(bad);}catch(const std::exception&){stale=true;}
         check(stale,"Graph and runtime values must agree");
     }
+    const auto patch=MaterialData::parse({{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
+        {"parameters",{{"emissiveStrength",2.0}}},{"textures",nlohmann::json::object()}});
+    auto patchGraph=MaterialGraph::fromMaterial(patch);
+    check(patchGraph.compile().encode()==patch.encode(),"Override graphs must preserve mode and sparse fields");
+    patchGraph.setField("roughness",.5);
+    check(patchGraph.compile().parameters.size()==2,"Adding an override must not activate unrelated defaults");
+    auto removed=patchGraph.encode();removed["links"].erase(removed["links"].begin());
+    check(MaterialGraph::parse(removed).compile().parameters.size()==1,"Disconnected override inputs must inherit the source");
     std::cout<<"Material graph compilation, layouts, links and persistence passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}
