@@ -63,6 +63,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureHairProjectedRamp = 1U << 16U,
     MaterialFeatureEyeRadialSurface = 1U << 17U,
     MaterialFeatureUnlitSurface = 1U << 18U,
+    MaterialFeatureNprDiffuse = 1U << 19U,
 };
 
 enum class AssetFaceSdfChannel : std::uint32_t {
@@ -162,6 +163,11 @@ struct AssetMaterial {
         // Version 1 accepts explicit host-authored, host-lambert lighting.
         // Native capture bindings require a separate provenance contract.
     } eyeSurface;
+    struct NprDiffuse {
+        bool present=false;
+        float shadowScale=1;
+        bool styleMaskGb=false,albedoAlpha=false;
+    } nprDiffuse;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

@@ -102,7 +102,7 @@ Geometry buildGeometry(const scene::SceneDescription& scene,const Meshes& meshes
             {std::cos(light.shape.innerCone),static_cast<float>(light.shape.type),
                 static_cast<float>(light.shape.falloff),light.shape.falloffExponent},
             light.shape.influenceBox.worldToBox,
-            {light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,0}});
+            {light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,static_cast<float>(light.shape.receivers.mask())}});
     }
     return result;
 }
@@ -113,6 +113,7 @@ std::uint64_t sceneFingerprint(const scene::SceneDescription& scene,const std::v
     for(const auto& n:scene.nodes){text(n.id);text(n.resourceId);text(n.parentId);bytes(n.translation);bytes(n.rotation);bytes(n.scale);bytes(n.visible);}
     for(const auto& l:scene.lights){text(l.id);bytes(l.position);bytes(l.color);bytes(l.intensity);bytes(l.radius);bytes(l.enabled);bytes(l.shape.type);bytes(l.shape.direction);bytes(l.shape.innerCone);bytes(l.shape.outerCone);bytes(l.shape.falloff);bytes(l.shape.falloffExponent);bytes(l.shape.specularScale);}
     for(const auto& light:scene.lights){bytes(light.shape.influenceBox.enabled);bytes(light.shape.influenceBox.worldToBox);bytes(light.shape.influenceBox.falloffThreshold);}
+    for(const auto& light:scene.lights){bytes(light.shape.receivers.surfaces);bytes(light.shape.receivers.characters);}
     for(const auto& a:animations){text(a.node);bytes(a.clip);bytes(a.time);bytes(a.loop);bytes(a.previousClip);bytes(a.previousTime);bytes(a.blend);bytes(a.previousLoop);bytes(a.morph);bytes(a.expressionWeight);
         for(const auto& sample:a.samples){bytes(sample.clip);bytes(sample.time);bytes(sample.weight);bytes(sample.loop);bytes(sample.duration);}bytes(a.samples.size());
         for(float w:a.morphOverrides)bytes(w);

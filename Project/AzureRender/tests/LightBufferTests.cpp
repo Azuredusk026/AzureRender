@@ -1,4 +1,5 @@
 #include "render/LightBuffer.hpp"
+#include "render/LightShapeJson.hpp"
 #include <cassert>
 #include <cmath>
 #include <stdexcept>
@@ -6,6 +7,26 @@
 #include <limits>
 
 int main() { try {
+    using Json=nlohmann::json;
+    const Json receiver={{"schemaVersion",1},{"surfaces",true},{"characters",false}};
+    Json authored=Json(azurerender::LightShape{});authored["receivers"]=receiver;
+    auto parsed=authored.get<azurerender::LightShape>();
+    if(Json(parsed).value("receivers",Json{})!=receiver)
+        throw std::runtime_error("Light receiver selection must roundtrip through the production shape contract");
+    for(unsigned bits=0;bits<4;++bits) {
+        azurerender::RenderLight light;light.shape.receivers={bool(bits&1U),bool(bits&2U)};
+        azurerender::LightBuffer fixture;fixture.setLights({light});
+        if(fixture.gpuData()[0].boxParameters[3]!=static_cast<float>(bits))
+            throw std::runtime_error("GPU receiver bits must match the public receiver contract");
+    }
+    for(const auto& bad:std::vector<Json>{nullptr,Json::array(),Json{{"schemaVersion",1}},
+        Json{{"schemaVersion",2},{"surfaces",true},{"characters",false}},
+        Json{{"schemaVersion",1},{"surfaces",1},{"characters",false}},
+        Json{{"schemaVersion",1},{"surfaces",true},{"characters",false},{"unknown",1}}}) {
+        auto invalid=authored;invalid["receivers"]=bad;bool rejected=false;
+        try{(void)invalid.get<azurerender::LightShape>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Malformed receiver configuration must fail import");
+    }
     azurerender::LightBuffer buffer;
     azurerender::RenderLight responseLight;
     assert(responseLight.shape.specularScale==1.F);

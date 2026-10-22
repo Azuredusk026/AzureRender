@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+角色材质支持显式的影色组合与逐灯接收范围。
+原生组合候选的照明绑定与完整外观继续验收。
+实现及结果见[颜色与接收验收](docs/acceptance/nr/character-color-receivers.md)。
+
 原生 GI 工具支持三层组合及方向 Alpha 保留。
 离线验证与运行待项见[组合验收](docs/acceptance/nr/irradiance-composition.md)。
 

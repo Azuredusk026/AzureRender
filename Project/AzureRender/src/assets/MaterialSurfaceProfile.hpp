@@ -38,6 +38,12 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    if(material.nprDiffuse.present) {
+        PackedMaterialSurfaceProfile result;
+        result.rows[0]={material.nprDiffuse.shadowScale,material.nprDiffuse.styleMaskGb?1.F:0.F,
+            material.nprDiffuse.albedoAlpha?1.F:0.F,0};
+        return result;
+    }
     return material.eyeSurface.present?packEyeSurfaceProfile(material.eyeSurface)
         :packProjectedHairSurfaceProfile(material.projectedHairRamp);
 }

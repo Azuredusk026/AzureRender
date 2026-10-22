@@ -29,6 +29,11 @@ int main(){try{
  scene.lights[0].shape.specularScale=.195F;
  require(tracing::sceneFingerprint(scene,{})!=responseFingerprint,"Light response invalidates tracing history");
  require(tracing::buildGeometry(scene,meshes,{}).lights.back().boxParameters[2]==.195F,"Tracing receives light response");
+ const auto receiverFingerprint=tracing::sceneFingerprint(scene,{});
+ scene.lights[0].shape.receivers.surfaces=false;
+ require(tracing::sceneFingerprint(scene,{})!=receiverFingerprint,"Receiver selection invalidates tracing history");
+ require(tracing::buildGeometry(scene,meshes,{}).lights.back().boxParameters[3]==2.F,"Tracing receives the public receiver mask");
+ scene.lights[0].shape.receivers.surfaces=true;
  const auto falloffFingerprint=tracing::sceneFingerprint(scene,{});
  scene.lights[0].shape.falloffExponent=3.5F;
  require(tracing::sceneFingerprint(scene,{})!=falloffFingerprint,"Falloff exponent invalidates tracing history");

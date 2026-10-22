@@ -13,6 +13,35 @@ from pathlib import Path
 import struct
 
 
+def decode_character_light_data(raw):
+    """Read HGSharedLightData additional bytes at native offset 0x1a0.
+
+    UnityPlayer getter 0x180219250 copies two float4 rows at 0x1a0/0x1b0.
+    GetlightAdditionalData 0x1856c6210 independently writes the parameter row,
+    mode at +16, character flag at +20, scattering at +24 and falloff at +28.
+    Original shader Vulkan117 skips mode 16 before character local lighting.
+    """
+    if not isinstance(raw,(bytes,bytearray,memoryview)) or len(bytes(raw))!=32:
+        raise ValueError('Character light data requires exactly 32 bytes')
+    raw=bytes(raw)
+    parameters=list(struct.unpack_from('<4f',raw))
+    mode,only,scattering,falloff=struct.unpack_from('<iB3xff',raw,16)
+    if mode not in (0,1,2,3,4,16) or only not in (0,1):
+        raise ValueError('Unsupported native character light mode or flag')
+    if not all(math.isfinite(v) for v in [*parameters,scattering,falloff]) or scattering<0:
+        raise ValueError('Invalid native character light parameters')
+    return dict(npr_parameters=parameters,npr_type=mode,character_only=bool(only),
+        volumetric_scattering_intensity=scattering,falloff_exponent=falloff)
+
+
+def render_light_receivers(data):
+    """Map source receiver selection independently from its color modes."""
+    if not isinstance(data,dict) or type(data.get('npr_type')) is not int \
+            or data['npr_type'] not in (0,1,2,3,4,16) or type(data.get('character_only')) is not bool:
+        raise ValueError('Invalid character light receiver inputs')
+    return dict(schemaVersion=1,surfaces=not data['character_only'],characters=data['npr_type']!=16)
+
+
 def decode_buffers(common, light):
     if len(common)!=236 or len(light)!=448:
         raise ValueError('Unsupported ECS light buffer sizes')
@@ -36,7 +65,8 @@ def decode_buffers(common, light):
         obb_half_extents=values(light,112,'3f'),
         obb_orientation=values(light,124,'3f'),
         obb_falloff_threshold=scalar(light,136),
-        matrix=matrix,position=matrix[12:15],direction=matrix[8:11])
+        matrix=matrix,position=matrix[12:15],direction=matrix[8:11],
+        character_lighting=decode_character_light_data(light[416:448]))
     for key,raw,offset in (('use_color_temperature',common,24),('enable_obb',light,92),
             ('is_sun_source',light,90),('shadow_only',light,91)):
         if raw[offset] not in (0,1):raise ValueError('Invalid ECS light boolean: '+key)

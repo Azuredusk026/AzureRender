@@ -4,6 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "render/LightInfluenceBox.hpp"
+#include "render/LightReceivers.hpp"
 
 namespace azurerender {
 enum class LightKind { Point = 0, Spot = 1, Directional = 2 };
@@ -20,6 +21,7 @@ struct LightShape {
     float falloffExponent = 2;
     float specularScale = 1;
     LightInfluenceBox influenceBox;
+    LightReceivers receivers;
 
     void validate() const {
         influenceBox.validate();

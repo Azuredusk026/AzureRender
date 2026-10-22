@@ -1,4 +1,5 @@
 #include "assets/GltfLoader.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
 #include "resources/ResourceLocator.hpp"
 #include <stb_image_write.h>
 #include <chrono>
@@ -36,6 +37,47 @@ int main(){
   const auto& settings=asset.materials[0].textureSettings.at(8);
   require(settings.colorSpace=="srgb"&&settings.filter=="linear"&&settings.mipPolicy=="none"&&settings.wrapU=="clamp"&&settings.wrapV=="clamp","LUT sampling must decode sRGB before interpolation at LOD zero with edge clamping");
   const auto baseline=source;
+  auto composed=source;
+  auto& npr=composed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  npr={{"schemaVersion",1},{"shadowScale",.7},{"lightingInputs","host-scene-radiance"},
+    {"shadowMask","none"},{"baseAo","albedo-alpha"}};
+  const auto response=load(composed);
+  require((response.materials[0].materialFeatures&(1U<<19U))!=0,"NPR color composition must be explicitly selected");
+  const auto packed=azurerender::packMaterialSurfaceProfile(response.materials[0]);
+  require(std::abs(packed.rows[0][0]-.7F)<1e-6F&&packed.rows[0][1]==0&&packed.rows[0][2]==1,
+    "NPR scale and source selectors must reach the immutable GPU table");
+  for(const char* kind:{"generic","skin","face","fabric","metal"}) {
+    auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    require((load(valid).materials[0].materialFeatures&(1U<<19U))!=0,"NPR composition must support declared surface classes");
+  }
+  auto mask=composed;mask["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowMask"]="style-mask-gb";
+  require(azurerender::packMaterialSurfaceProfile(load(mask).materials[0]).rows[0][1]==1,"Source mask selector must survive packing");
+  for(const auto& bad:std::vector<Json>{nullptr,Json::array(),Json{{"schemaVersion",1}},
+    Json{{"schemaVersion",2},{"shadowScale",1},{"lightingInputs","host-scene-radiance"},{"shadowMask","none"},{"baseAo","one"}}}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Incomplete or unsupported NPR composition must fail import");
+  }
+  for(const auto& field:std::vector<std::pair<std::string,Json>>{{"schemaVersion",1.5},{"schemaVersion",true},
+    {"shadowScale",-1},{"shadowScale",65},{"shadowScale",nullptr},{"shadowScale",true},
+    {"lightingInputs","native-unverified"},{"shadowMask","unknown"},{"baseAo","packed-ao"},{"unknown",1}}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"][field.first]=field.second;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed NPR composition fields must fail import");
+  }
+  for(const char* kind:{"hair","eye","overlay","emissive","showcase"}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Incompatible material table owners must fail import");
+  }
+  auto noLut=composed;noLut["materials"][0]["extras"]["azureRenderMaterial"].erase("shadowColorLut");
+  bool missingRejected=false;try{load(noLut);}catch(const std::exception&){missingRejected=true;}
+  require(missingRejected,"NPR composition requires an explicit shadow LUT");
+  for(const auto& schema:std::vector<Json>{1,2.5,"2",nullptr}) {
+    auto invalid=composed;invalid["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=schema;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"NPR composition requires integer parent schema two");
+  }
   for(const auto& bad:std::vector<Json>{Json{{"schemaVersion",2},{"texture",index}},Json{{"schemaVersion",1.5},{"texture",index}},
      Json{{"schemaVersion",1},{"texture",-1}},Json{{"schemaVersion",1},{"texture",.5}},
      Json{{"schemaVersion",1},{"texture",index},{"flipV",1}},Json{{"schemaVersion",1},{"texture",index},{"unknown",true}}}){
