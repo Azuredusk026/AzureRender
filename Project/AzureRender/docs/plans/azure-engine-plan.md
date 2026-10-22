@@ -1,5 +1,8 @@
 # 开发总计划
 
+中庭原生方向场已覆盖后方的已知照明缺口。
+双配置检查及边界见[光照覆盖](../acceptance/nr/irradiance-coverage.md)。
+
 环境镜面积分响应通过双配置数学及 GPU 检查。
 原生运行待项见[镜面响应验收](../acceptance/nr/environment-specular.md)。
 

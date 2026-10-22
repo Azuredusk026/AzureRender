@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+中庭方向光照覆盖扩展至后方及上下层。
+验证范围见[全局光照覆盖](docs/acceptance/nr/irradiance-coverage.md)。
+
 环境镜面支持显式多重散射拟合及介电反射率。
 验证与原生待项见[镜面响应验收](docs/acceptance/nr/environment-specular.md)。
 

@@ -1,5 +1,7 @@
 # 网格辐照度资源
 
+原生场景的覆盖与来源见[中庭验证](../acceptance/nr/irradiance-coverage.md)。
+
 `AZIV0001` 保存通用规则网格的方向辐照系数。
 资源属于 RenderCore 的数据契约。
 数据文件自包含，路径由项目资源配置提供。
