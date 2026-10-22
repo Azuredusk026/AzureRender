@@ -33,7 +33,7 @@ def run_normal_checks(executable, root):
     base['scenes'][0]['nodes'].append(1)
     frames = {}
 
-    def render(name, blue, mask=0, angle=0, scene=False, isolation='rim', fixed=False, directional=False, sdf_enabled=True, dark=False):
+    def render(name, blue, mask=0, angle=0, scene=False, isolation='rim', fixed=False, directional=False, sdf_enabled=True, dark=False, intensity=8):
         model = copy.deepcopy(base)
         model['materials'][0]['pbrMetallicRoughness'].update(baseColorFactor=[.8, .8, .8, 1], roughnessFactor=.6)
         model['nodes'][1]['rotation'] = [0, math.sin(math.radians(angle)/2), 0, math.cos(math.radians(angle)/2)]
@@ -64,7 +64,7 @@ def run_normal_checks(executable, root):
         if scene:
             level['nodes'].append({'id': 'key', 'components': {
                 'azure.transform': component('azure.transform', {'translation': [3, 0, 2]})}})
-            light = {'id': 'key', 'nodeId': 'key', 'color': [1, 1, 1], 'intensity': 8, 'radius': 10, 'enabled': not dark}
+            light = {'id': 'key', 'nodeId': 'key', 'color': [1, 1, 1], 'intensity': intensity, 'radius': 10, 'enabled': not dark}
             if directional:
                 light['shape'] = {'type': 'directional', 'direction': [0, 0, -1]}
             level['lights'] = [light]
@@ -114,11 +114,29 @@ def run_normal_checks(executable, root):
     assert np.array_equal(local_mask_low, local_mask_high), 'Geometry mask must suppress B-normal punctual changes'
     render('local-fixed', 223, mask=128, scene=True, isolation='direct-diffuse', fixed=True)
     assert np.array_equal(frames['local-high'], frames['local-fixed']), 'Fixed and indexed punctual normal paths differ'
-    main_low = render('main-specular-low', 32, mask=128, scene=True, isolation='direct-specular', directional=True)
-    main_high = render('main-specular-high', 128, mask=128, scene=True, isolation='direct-specular', directional=True)
-    main_head = render('main-specular-head', 32, mask=128, angle=60, scene=True, isolation='direct-specular', directional=True)
+    reference8 = render('main-specular-reference8', 32, mask=128, scene=True, isolation='direct-specular', directional=True)
+    main_low = render('main-specular-low', 32, mask=128, scene=True, isolation='direct-specular', directional=True, intensity=16)
+    main_high = render('main-specular-high', 128, mask=128, scene=True, isolation='direct-specular', directional=True, intensity=16)
+    main_head = render('main-specular-head', 32, mask=128, angle=60, scene=True, isolation='direct-specular', directional=True, intensity=16)
     assert main_low.max() > 5, 'Main specular stability test must contain a visible contribution'
     assert np.array_equal(main_low, main_high) and np.array_equal(main_low, main_head), 'SDF normal must preserve main geometric specular'
+    # Independent peak bounds: .08*.22*mix(.7,.12,.6)*.03*intensity.
+    # These controls preserve the >5 predicate and geometric-SDF equality.
+    def linear(pixels):
+        encoded = pixels.astype(float) / 255
+        return np.where(encoded <= .04045, encoded / 12.92,
+                        ((encoded + .055) / 1.055) ** 2.4)
+    reference_linear = linear(reference8)
+    strong_linear = linear(main_low)
+    quantum = 1 / (255 * 12.92)  # Both peaks lie in the linear sRGB segment.
+    assert abs(reference_linear.max() - .001486848) <= quantum, 'Intensity8 analytic peak mismatch'
+    assert abs(strong_linear.max() - .002973696) <= quantum, 'Intensity16 analytic peak mismatch'
+    assert main_low.max() > reference8.max(), 'Directional intensity must increase specular'
+    pair_error = float(np.abs(strong_linear - 2 * reference_linear).max())
+    assert pair_error <= 1.5 * quantum + 1e-6, 'Directional 8-to-16 linear response mismatch'
+    metrics['mainSpecularReference8Maximum'] = int(reference8.max())
+    metrics['mainSpecularIntensity16Maximum'] = int(main_low.max())
+    metrics['mainSpecularLinearDoublingError'] = pair_error
     disabled_low = render('disabled-low', 32, sdf_enabled=False)
     disabled_high = render('disabled-high', 223, sdf_enabled=False)
     assert np.array_equal(disabled_low, disabled_high), 'Disabled SDF must preserve geometric response'

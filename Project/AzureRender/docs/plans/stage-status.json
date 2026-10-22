@@ -1357,7 +1357,8 @@
         "docs/acceptance/nr/projected-hair.md",
         "docs/acceptance/nr/outline-coverage.md",
         "docs/acceptance/nr/character-logistics-joint.md",
-        "docs/acceptance/nr/character-logistics-restored.md"
+        "docs/acceptance/nr/character-logistics-restored.md",
+        "docs/acceptance/nr/face-specular-control.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"

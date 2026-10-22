@@ -65,6 +65,7 @@ AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、�
 源参数、双配置检查及范围见[高光验收](docs/acceptance/nr/projected-hair.md)。
 显式角色外轮廓支持实例覆盖与独立渐隐。
 真实脸部及兼容待项见[外轮廓验收](docs/acceptance/nr/outline-coverage.md)。
+脸部数值控制及其范围见[高光正控制](docs/acceptance/nr/face-specular-control.md)。
 特效表面支持显式无光照颜色与透明度组合。
 来源及双配置检查见[特效验收](docs/acceptance/nr/unlit-surface.md)。
 

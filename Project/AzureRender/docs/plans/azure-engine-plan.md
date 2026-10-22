@@ -1,5 +1,8 @@
 # 开发总计划
 
+脸部高光正控制已完成解析及完整 GPU 套件核对。
+门槛与原始记录见[正控制验收](../acceptance/nr/face-specular-control.md)。
+
 无光照特效表面已通过双配置数值与生命周期检查。
 原生物流转换及范围见[特效验收](../acceptance/nr/unlit-surface.md)。
 

@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "scope": "Face SDF GPU positive-control calibration; no production shading changes",
+  "sourceBase": "ca2e1b9",
+  "testSha256": "e6ae10d56725e5ab78e95015edf89515a83370a13679e3c676bd7b8efbd2bf1d",
+  "summary": {
+    "frames": 10,
+    "headRotationResponse": 11.643680555555555,
+    "independentMaskResponse": 2.667556423611111,
+    "sceneHeadRotationResponse": 11.561597222222222,
+    "sceneIndependentMaskResponse": 2.0054557291666666,
+    "sceneFixedDescriptorCpuDifference": 0.0,
+    "sceneDarkMaximum": 0,
+    "headAnimationResponse": 9.849275173611112,
+    "fixedDescriptorCpuDifference": 0.0,
+    "validationErrors": 0,
+    "normal": {
+      "frames": 18,
+      "validationErrors": 0,
+      "unloadResources": 0,
+      "metrics": {
+        "blueRimMeanDifference": 75.42104166666667,
+        "headRimMean": 0.0,
+        "baseRimMean": 75.42104166666667,
+        "blueLocalDiffuseMeanDifference": 10.835,
+        "mainSpecularReference8Maximum": 5,
+        "mainSpecularIntensity16Maximum": 10,
+        "mainSpecularLinearDoublingError": 0.00030352698354883757
+      },
+      "fixedDifferences": 0,
+      "geometryMaskDifferences": 0,
+      "mainSpecularDifferences": 0,
+      "disabledDifferences": 0,
+      "mainSpecularMaximum": 10,
+      "scope": "Native B-normal transport and selected production consumers; full native rim/light models remain pending"
+    }
+  },
+  "inputs": {
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\AzurePlayer.exe": "2de230348c47293fcb33bd1a3b1c5d38ee0e335eadcaab87090c6ad17c20900b",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\character_snapshot.frag.spv": "919ed7a86a3f0780e22466b42d93fbce65ca4c38b9391dfa59a62b70b7e93783",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\character_snapshot_bindless.frag.spv": "3eb8c725a5b507386977d99993e8a14f03ff53219e9a15dd3f56a84781487e8d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\mesh.frag.spv": "d21ec8e671576245c2d3147a15220d5a153d9446c37e405e43714f067cd8efab",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\mesh_bindless.frag.spv": "70f1d91d8a26fbc53801c42d22dc94a6a51cb557d1ef6a4c5b61e543082b6399",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+    "build\\runs\\20261022-051129-character-logistics-restoration-0f2e71\\dual-face-specular-analysis\\calibrated-inputs\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+  },
+  "imageSha256": {
+    "calibrated-gpu-debug\\animated\\frame_000000.png": "cc7662c5f64017ad3a3653852f8c3fd94d2ae58fc8d675eec97a563bdea238af",
+    "calibrated-gpu-debug\\blue-normal\\disabled-high\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\disabled-low\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\local-dark\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\local-fixed\\frames\\frame_000000.png": "138cfff8d8f07ffa015e25b090f833a0d25c91928b85ebc9b7dbc5124b79e513",
+    "calibrated-gpu-debug\\blue-normal\\local-high\\frames\\frame_000000.png": "138cfff8d8f07ffa015e25b090f833a0d25c91928b85ebc9b7dbc5124b79e513",
+    "calibrated-gpu-debug\\blue-normal\\local-low\\frames\\frame_000000.png": "e18475439bc4740f58e264888b5af2af2d6af02eba1b49f7148aff7539d5e897",
+    "calibrated-gpu-debug\\blue-normal\\local-mask-high\\frames\\frame_000000.png": "1008907eca5bdf5d19806fa12fa4f957b9217c0e547fa0322dccf7a06f1f559a",
+    "calibrated-gpu-debug\\blue-normal\\local-mask-low\\frames\\frame_000000.png": "1008907eca5bdf5d19806fa12fa4f957b9217c0e547fa0322dccf7a06f1f559a",
+    "calibrated-gpu-debug\\blue-normal\\main-specular-head\\frames\\frame_000000.png": "86b9c54579953b27826c975d265af979652dc958b09846d5a321393c5773c277",
+    "calibrated-gpu-debug\\blue-normal\\main-specular-high\\frames\\frame_000000.png": "86b9c54579953b27826c975d265af979652dc958b09846d5a321393c5773c277",
+    "calibrated-gpu-debug\\blue-normal\\main-specular-low\\frames\\frame_000000.png": "86b9c54579953b27826c975d265af979652dc958b09846d5a321393c5773c277",
+    "calibrated-gpu-debug\\blue-normal\\main-specular-reference8\\frames\\frame_000000.png": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd",
+    "calibrated-gpu-debug\\blue-normal\\rim-fixed\\frames\\frame_000000.png": "965430b5ec6fbab37995844f86f09b262d38ada65590ffee3ed9b28561752c8b",
+    "calibrated-gpu-debug\\blue-normal\\rim-head60\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\rim-high\\frames\\frame_000000.png": "965430b5ec6fbab37995844f86f09b262d38ada65590ffee3ed9b28561752c8b",
+    "calibrated-gpu-debug\\blue-normal\\rim-low\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\rim-mask-high\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\blue-normal\\rim-mask-low\\frames\\frame_000000.png": "4c640f7c0849406762615a4dc18afb76d54d434886ee2062bfd33cd7399758c0",
+    "calibrated-gpu-debug\\fixed\\frame_000000.png": "93456e81c4fb181dd7d5697ed8fb0a3b84c2cc6549a60429ae6f91d51c021d14",
+    "calibrated-gpu-debug\\head0\\frame_000000.png": "93456e81c4fb181dd7d5697ed8fb0a3b84c2cc6549a60429ae6f91d51c021d14",
+    "calibrated-gpu-debug\\head180\\frame_000000.png": "cf01df609b68eaf65438cece0704530bf4fd0b3e81c40e3905fcdf036839a063",
+    "calibrated-gpu-debug\\mask\\frame_000000.png": "fa05dfe742b937cf557a7f2cdc6edef94555f20501d888252ee7298d6caf32a9",
+    "calibrated-gpu-debug\\scene-dark\\frame_000000.png": "e5bdf529dbe4356515542e5a3e31bdd536d96e865e0c0d265ed449da5d794f33",
+    "calibrated-gpu-debug\\scene-fixed\\frame_000000.png": "97ef2a45dc80742c30962328c900b01a889d6dec8d7e76862b1bc5f5dd3af6e5",
+    "calibrated-gpu-debug\\scene-head0\\frame_000000.png": "97ef2a45dc80742c30962328c900b01a889d6dec8d7e76862b1bc5f5dd3af6e5",
+    "calibrated-gpu-debug\\scene-head180\\frame_000000.png": "ebc289fdadf6ccea3b16e9ced73137b360c429747a51d27cb0d297ef0f379e8a",
+    "calibrated-gpu-debug\\scene-mask\\frame_000000.png": "62e669008caee00185f25836cc18ef66e577617a0a070f250e43e978a66a27e4"
+  },
+  "math": {
+    "schemaVersion": 1,
+    "status": "mathematically-bounded-fixture-understimulation",
+    "gpuExecuted": false,
+    "buildExecuted": false,
+    "productionChanged": false,
+    "cases": [
+      {
+        "mode": "current",
+        "case": "main-specular-low",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-low/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-low/player.log",
+          "sha256": "43533ffa668f82d70ba82edb8f4ed797e6751e052cf72d4fcacb4226d3828457"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-low/runtime.json",
+          "sha256": "4f59ce3ebffb96acc5e344bba263f735d4baf92b5eeddc93e147dbc8f9c46345"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      },
+      {
+        "mode": "current",
+        "case": "main-specular-high",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-high/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-high/player.log",
+          "sha256": "f4a4f187f8acc78e78fab03a9223fe6adc6f332b19c2056ddb73c851af798c0c"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-high/runtime.json",
+          "sha256": "6fa5ab108a168beb0e6db969e92ef958f36538c1052a588df26e0bc9b6d6a8fc"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      },
+      {
+        "mode": "current",
+        "case": "main-specular-head",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-head/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-head/player.log",
+          "sha256": "bcccb7d575583966f8cdb14d6b2e53839d2baddf2e30fc65d3a5ddb5d802294f"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-current/main-specular-head/runtime.json",
+          "sha256": "72501c86ced4a8f6c13e361809ad1e1589feefecaf67573502866aa528618626"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      },
+      {
+        "mode": "head",
+        "case": "main-specular-low",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-low/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-low/player.log",
+          "sha256": "7b7ac396d3c24ca130ce5a39deccc236c86240fb76b5dabfda073814925e3222"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-low/runtime.json",
+          "sha256": "4f59ce3ebffb96acc5e344bba263f735d4baf92b5eeddc93e147dbc8f9c46345"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      },
+      {
+        "mode": "head",
+        "case": "main-specular-high",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-high/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-high/player.log",
+          "sha256": "a9f41e5630c0b70dae63d9729e96bf891baca31bd99120f5069cd92432dc1ca2"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-high/runtime.json",
+          "sha256": "6fa5ab108a168beb0e6db969e92ef958f36538c1052a588df26e0bc9b6d6a8fc"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      },
+      {
+        "mode": "head",
+        "case": "main-specular-head",
+        "image": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-head/frames/frame_000000.png",
+          "sha256": "02244c99319ed3ee755ae74564d57b46136ba33a20c387146bbd884e0cbc37cd"
+        },
+        "log": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-head/player.log",
+          "sha256": "8b373d6cc50968f5c529cb02f4ec4cb27b3d244736a0d435d5591e9c7a6f747b"
+        },
+        "runtime": {
+          "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-normal-head/main-specular-head/runtime.json",
+          "sha256": "72501c86ced4a8f6c13e361809ad1e1589feefecaf67573502866aa528618626"
+        },
+        "roi": {
+          "x": 140,
+          "y": 100,
+          "width": 40,
+          "height": 40,
+          "minimum": 5,
+          "maximum": 5,
+          "mean": 5.0
+        }
+      }
+    ],
+    "allSixFramesByteIdentical": true,
+    "originalPredicate": "main_low.max() > 5",
+    "lightingUnits": {
+      "inputIntensity": 8,
+      "shaderRadianceMultiplier": 8,
+      "directionalDistanceAttenuation": 1,
+      "specularScale": 1,
+      "conversion": "direct scalar copy; no lux/lumen/pi conversion in this path"
+    },
+    "scalarDerivation": {
+      "specularLevel": 0.22,
+      "dielectricF0": 0.0176,
+      "roughness": 0.6,
+      "blinnExponent": 42,
+      "blinnEnergyCoefficient": 0.352,
+      "faceSpecularWeight": 0.03,
+      "peakLinearIntensity8": 0.0014868479999999998,
+      "peakLinearIntensity16": 0.0029736959999999996,
+      "peakEncodedByte8": 4.8985694207999995,
+      "peakEncodedByte16": 9.797138841599999,
+      "roundedPeak8": 5,
+      "roundedPeak16": 10
+    },
+    "independentIdealGeometricRoi": {
+      "linearMinimum": 0.001380143279430405,
+      "linearMaximum": 0.0014867745531017872,
+      "encodedMinimum": 4.547020048411412,
+      "encodedMaximum": 4.8983274426491485,
+      "roundedMinimum": 5,
+      "roundedMaximum": 5,
+      "limits": "Ideal flat geometry; exact per-pixel neutral-normal bias/GPU rounding is not claimed"
+    },
+    "causeClassification": {
+      "fixtureStimulus": "proven insufficient for unchanged >5 condition",
+      "quantization": "maps the bounded linear peak to byte5; does not indicate missing specular",
+      "directionalUnitBug": "no hidden unit conversion found; factor8 reaches the shader",
+      "hairProductionRegression": "excluded by existing identical whole-frame baseline/current captures",
+      "historicalProductionChange": "not established; old material weights predate this fixture"
+    },
+    "provenance": {
+      "thresholdCommit": "8bd73a2f",
+      "dielectricF0Commit": "eb916a6c",
+      "faceSpecularWeightCommit": "c4532450"
+    },
+    "falsifiableHypotheses": [
+      {
+        "hypothesis": "The current fixture fails because intensity8 is too weak for >5.",
+        "prediction": "A test-only intensity16 stimulus produces peak approximately10, unchanged SDF variants, and twice linear energy within quantization bounds."
+      },
+      {
+        "hypothesis": "SDF B or head rotation leaks into main geometric specular.",
+        "prediction": "With strengthened positive control, low/high/head captures differ. The unchanged equality assertion detects the leak."
+      },
+      {
+        "hypothesis": "There is a directional intensity conversion defect.",
+        "prediction": "An 8\u219216 intensity pair fails monotonicity or the quantization-aware 2x linear response check."
+      }
+    ],
+    "minimalRepair": "test-only directional main-specular intensity16; preserve >5 and equality; retain intensity8 reference and add 2x linear-response control",
+    "sources": [
+      {
+        "path": "tools/test_dual_face_sdf_gpu.py",
+        "sha256": "ad3fca61145d0b94adf3b4212945caa59810d737e949df7c03b5ee6dc8243e30"
+      },
+      {
+        "path": "tools/create_visibility_fixture.py",
+        "sha256": "2105e36d118cc66fd33f6dc4f22772b3e618b6f74a72e2e31302ed2262912377"
+      },
+      {
+        "path": "src/assets/GltfLoader.cpp",
+        "sha256": "0f6c769990cf34541deffe249849066cdf7290272e360f6b520ba74fa6becb56"
+      },
+      {
+        "path": "src/render/LightBuffer.hpp",
+        "sha256": "f189c7771ee52931892a265c4bd21256882ac19e9b086b49ac266e68408f2c62"
+      },
+      {
+        "path": "src/render/LightShape.hpp",
+        "sha256": "c2aede407167cd6fd97ac071728a77683e21a21f0330c5e17a3569b4cf531d49"
+      },
+      {
+        "path": "src/scenes/CharacterSceneRenderer.cpp",
+        "sha256": "0f1f5bbf49af1a899e4734b29960e72383f19d3020f386ef10a6ccd50cb179e0"
+      },
+      {
+        "path": "shaders/mesh.frag",
+        "sha256": "c94baed32a8cc35478a5913e2dd21740188a0096167fb68bb12e79a5e3023633"
+      },
+      {
+        "path": "shaders/surface_response.glsl",
+        "sha256": "8e4e58223b25c203ef97e2526b69b6e01ff4d3db9f900cbc15ae3692ba05241f"
+      },
+      {
+        "path": "shaders/view_resolve.frag",
+        "sha256": "776195c48d1ec0a3a2d7028813e4c8515f290011a1d08bd62133f3efca199e54"
+      }
+    ],
+    "baselineReceipt": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/hair-projected/dual-face-baseline-receipt.json",
+      "sha256": "6bda9a64c4d59fac499d2e2446ee8b2224496493c6f13405f83577bd59f7f791"
+    }
+  },
+  "originalFailureRetained": true,
+  "toleranceChanges": false,
+  "allFormalNrGatesPassed": false
+}
