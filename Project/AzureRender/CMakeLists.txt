@@ -373,6 +373,7 @@ add_library(AzureRenderCore STATIC
     src/render/TransientResourcePool.cpp
     src/render/RenderSettings.cpp
     src/render/EnvironmentAsset.cpp
+    src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
     src/rhi/NullRhi.cpp
@@ -1062,6 +1063,11 @@ if(BUILD_TESTING)
         --fixtures "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/eye_radial_surface"
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.EyeSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.CubeProbeGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_cube_probe_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.CubeProbeGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureTools.CubemapEnvironment COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_cubemap_environment.py")
     add_test(NAME AzureEngine.ProjectedHairGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)
     add_test(NAME AzureEngine.ProjectedHairSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_surface_gpu.py"
@@ -1098,7 +1104,7 @@ if(BUILD_TESTING)
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
-    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/assets/image/ImageCodec.cpp
+    add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/render/EnvironmentCubeTexture.cpp src/rhi/NullRhi.cpp src/assets/image/ImageCodec.cpp
     src/assets/image/TextureContainerAdapter.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")
     target_sources(AzureRenderEnvironmentAssetTests PRIVATE src/assets/image/SvgCodec.cpp)
@@ -1118,6 +1124,9 @@ if(BUILD_TESTING)
     add_executable(AzureRenderReflectionProbeTests tests/ReflectionProbeTests.cpp)
     target_include_directories(AzureRenderReflectionProbeTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureRenderReflectionProbeTests PRIVATE nlohmann_json::nlohmann_json)
+    target_compile_options(AzureRenderReflectionProbeTests PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
     add_test(NAME AzureRender.ReflectionProbe COMMAND AzureRenderReflectionProbeTests)
     add_executable(AzureRenderIrradianceVolumeTests tests/IrradianceVolumeTests.cpp)
     target_include_directories(AzureRenderIrradianceVolumeTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1259,7 +1268,7 @@ if(BUILD_TESTING)
     target_include_directories(
         AzureRenderSceneModelTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(
-        AzureRenderSceneModelTests PRIVATE AzureFoundation nlohmann_json::nlohmann_json)
+        AzureRenderSceneModelTests PRIVATE AzureRuntime nlohmann_json::nlohmann_json)
     # These test executables use assert as their verification contract.
     target_compile_options(AzureRenderSceneModelTests PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
@@ -1342,6 +1351,9 @@ if(BUILD_TESTING)
         AzureRenderNullRhiTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(
         AzureRenderNullRhiTests PRIVATE Vulkan::Vulkan)
+    target_compile_options(AzureRenderNullRhiTests PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
     add_test(
         NAME AzureRender.NullRhi
         COMMAND AzureRenderNullRhiTests)
@@ -1366,6 +1378,7 @@ if(BUILD_TESTING)
         src/assets/image/TextureContainerAdapter.cpp
         src/assets/TextureImportSettings.cpp
         src/render/EnvironmentAsset.cpp
+        src/render/EnvironmentCubeTexture.cpp
         src/render/RenderSettings.cpp
         src/diagnostics/RuntimeDiagnostics.cpp
         src/rhi/NullRhi.cpp

@@ -1618,6 +1618,8 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
     if (!environmentSource_.path.empty()) {
         const EnvironmentImage environment =
             loadEnvironmentImage(environmentSource_);
+        if(environment.projection==EnvironmentProjection::CubeFaces)
+            throw std::invalid_argument("Global environment requires an equirectangular source");
         environmentPixels = environment.rgba16f;
         environmentWidth = environment.width;
         environmentHeight = environment.height;
@@ -1702,12 +1704,16 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
     }
 
     scene_.reflectionProbe.validate();
-    if(!scene_.reflectionProbe.texture.empty()){
-        const auto image=loadEnvironmentImage({scene_.reflectionProbe.texture,EnvironmentProjection::Auto});
-        uploadTextureData(image.rgba16f,image.width,image.height,VK_FORMAT_R16G16B16A16_SFLOAT,true,
-            reflectionProbeTexture_,image.authoredMipLevels?image.authoredMipLevels:1);
-        RuntimeDiagnostics::instance().info("render","Local reflection probe: "+image.description);
+    EnvironmentImage probeImage;
+    if(!scene_.reflectionProbe.texture.empty()) {
+        probeImage=loadEnvironmentImage({scene_.reflectionProbe.texture,EnvironmentProjection::Auto});
+        RuntimeDiagnostics::instance().info("render","Local reflection probe: "+probeImage.description);
+    } else {
+        probeImage.width=probeImage.height=1;probeImage.authoredMipLevels=1;
+        probeImage.projection=EnvironmentProjection::CubeFaces;probeImage.rgba16f.resize(24);
+        for(unsigned face=0;face<6;++face)probeImage.rgba16f[face*4+3]=0x3c00;
     }
+    reflectionProbeTexture_=std::make_unique<EnvironmentCubeTexture>(*rhi_,std::move(probeImage));
     scene_.irradianceVolume.validate();
     irradianceVolume_={};
     std::vector<std::array<float,4>> irradianceWords(4);
@@ -2484,8 +2490,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
-            const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
-            rhi_->writeDescriptorImage({descriptorSets_[frame],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            const auto& probe=*reflectionProbeTexture_;
+            rhi_->writeDescriptorImage({descriptorSets_[frame],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view(),probe.sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
@@ -2574,8 +2580,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
-            const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
-            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view,probe.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            const auto& probe=*reflectionProbeTexture_;
+            rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view(),probe.sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],19,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,opaqueSceneColor_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],20,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,shadowBounds_[frame]->buffer().buffer,shadowBounds_[frame]->buffer().size});
@@ -3060,10 +3066,7 @@ void CharacterSceneRenderer::destroyResources() {
         environmentBaseMipView_ = VK_NULL_HANDLE;
     }
     rhi_->destroySampler(environmentTexture_.sampler);
-    rhi_->destroySampler(reflectionProbeTexture_.sampler);
-    rhi_->destroyImageView(reflectionProbeTexture_.view);
-    allocator_->destroyImage(reflectionProbeTexture_.image);
-    reflectionProbeTexture_={};
+    reflectionProbeTexture_.reset();
     allocator_->destroyBuffer(irradianceBuffer_);irradianceBuffer_={};irradianceVolume_={};
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
@@ -3299,8 +3302,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const auto& probe=scene_.reflectionProbe;
     uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],0};
     uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
-    uniform.probeCapture={probe.capturePosition[0],probe.capturePosition[1],probe.capturePosition[2],0};
-    uniform.probeParameters={reflectionProbeTexture_.view!=VK_NULL_HANDLE?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
+    const auto projectionOrigin=probe.projectionOrigin.value_or(probe.capturePosition);
+    uniform.probeCapture={projectionOrigin[0],projectionOrigin[1],projectionOrigin[2],0};
+    uniform.probeParameters={!probe.texture.empty()?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
     const auto& gi=scene_.irradianceVolume;
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
     uniform.irradianceDimensionsEnabled={float(irradianceVolume_.dimensions[0]),float(irradianceVolume_.dimensions[1]),float(irradianceVolume_.dimensions[2]),gi.enabled&&!irradianceVolume_.cells.empty()?1.F:0.F};

@@ -3,6 +3,7 @@
 #include "assets/image/ImageCodec.hpp"
 #include <OpenEXR/ImfInputFile.h>
 #include <OpenEXR/ImfFrameBuffer.h>
+#include <Imath/half.h>
 
 #include <algorithm>
 #include <array>
@@ -158,6 +159,54 @@ std::uint16_t environmentFloatToHalf(const float value) {
             | (mantissa >> 13));
 }
 
+EnvironmentImage environmentAsCubeFaces(EnvironmentImage image) {
+    const unsigned levels=std::max(image.authoredMipLevels,1U);
+    unsigned maxLevels=0;for(unsigned size=image.width;size;size/=2)++maxLevels;
+    const bool cube=image.projection==EnvironmentProjection::CubeFaces;
+    if(!image.width || !image.height || image.width>16384 || levels>maxLevels
+        || (cube?image.width!=image.height:std::uint64_t(image.height)*2!=image.width))
+        throw std::invalid_argument("Invalid environment projection or dimensions");
+    std::size_t count=0;unsigned w=image.width,h=image.height;
+    for(unsigned mip=0;mip<levels;++mip) {
+        count+=std::size_t(w)*h*4*(cube?6:1);w=std::max(1U,w/2);h=std::max(1U,h/2);
+    }
+    if(image.rgba16f.size()!=count || std::any_of(image.rgba16f.begin(),image.rgba16f.end(),
+        [](std::uint16_t value){return (value&0x7c00)==0x7c00;}))
+        throw std::invalid_argument("Invalid finite environment pixel storage");
+    if(cube)return image;
+    EnvironmentImage result;
+    result.width=std::max({1U,image.width/4,1U<<(levels-1)});
+    result.height=result.width;result.authoredMipLevels=levels;
+    result.projection=EnvironmentProjection::CubeFaces;
+    result.description=image.description+" (equirectangular -> cube faces)";
+    std::size_t sourceOffset=0;
+    w=image.width;h=image.height;
+    unsigned side=result.width;
+    const auto decoded=[](std::uint16_t value){Imath::half half;half.setBits(value);return float(half);};
+    for(unsigned mip=0;mip<levels;++mip) {
+        for(unsigned face=0;face<6;++face)for(unsigned y=0;y<side;++y)for(unsigned x=0;x<side;++x) {
+            const float u=2*(x+.5F)/side-1,v=2*(y+.5F)/side-1;
+            const std::array<std::array<float,3>,6> directions{{
+                {{1,-v,-u}},{{-1,-v,u}},{{u,1,v}},{{u,-1,-v}},{{u,-v,1}},{{-u,-v,-1}}}};
+            const auto& d=directions[face];
+            const float length=std::sqrt(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]);
+            const float sx=(std::atan2(d[2],d[0])/(2*kPi)+.5F)*w-.5F;
+            const float sy=std::clamp(std::acos(std::clamp(d[1]/length,-1.F,1.F))/kPi*h-.5F,0.F,float(h-1));
+            const int ix=int(std::floor(sx));const unsigned iy=unsigned(sy),jy=std::min(iy+1,h-1);
+            const unsigned ax=unsigned((ix%int(w)+int(w))%int(w)),bx=(ax+1)%w;
+            const float fx=sx-ix,fy=sy-iy;
+            for(unsigned channel=0;channel<4;++channel) {
+                const auto at=[&](unsigned px,unsigned py){return decoded(image.rgba16f[sourceOffset+(std::size_t(py)*w+px)*4+channel]);};
+                const float top=at(ax,iy)*(1-fx)+at(bx,iy)*fx;
+                const float bottom=at(ax,jy)*(1-fx)+at(bx,jy)*fx;
+                result.rgba16f.push_back(environmentFloatToHalf(top*(1-fy)+bottom*fy));
+            }
+        }
+        sourceOffset+=std::size_t(w)*h*4;w=std::max(1U,w/2);h=std::max(1U,h/2);side=std::max(1U,side/2);
+    }
+    return result;
+}
+
 EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
     if (source.path.empty()) {
         throw std::invalid_argument("Environment source path is empty");
@@ -168,7 +217,8 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
         std::ifstream input(path, std::ios::binary);
         const auto fail = [&]() { throw std::runtime_error("Invalid authored environment: " + path.u8string()); };
         char magic[8]{}; input.read(magic,8);
-        if (!input || std::memcmp(magic,"AZENV001",8)) fail();
+        const bool cube=std::memcmp(magic,"AZENV002",8)==0;
+        if (!input || (!cube && std::memcmp(magic,"AZENV001",8))) fail();
         const auto uint32 = [&]() {
             std::uint32_t value=0;
             for(unsigned shift=0;shift<32;shift+=8) {
@@ -178,13 +228,16 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
             return value;
         };
         output.width=uint32();output.height=uint32();output.authoredMipLevels=uint32();
-        if (!output.width || output.width>16384 || output.height*2ULL!=output.width
-            || !output.authoredMipLevels || source.projection==EnvironmentProjection::CubeFaces) fail();
+        if (!output.width || output.width>16384 || !output.authoredMipLevels) fail();
+        if(cube) {
+            if(output.width!=output.height || source.projection==EnvironmentProjection::Equirectangular)fail();
+            output.projection=EnvironmentProjection::CubeFaces;
+        } else if(output.height*2ULL!=output.width || source.projection==EnvironmentProjection::CubeFaces)fail();
         unsigned maxLevels=1;for(unsigned size=output.width;size>1;size/=2)++maxLevels;
         if(output.authoredMipLevels>maxLevels)fail();
         std::size_t count=0;unsigned w=output.width,h=output.height;
         for(unsigned level=0;level<output.authoredMipLevels;++level) {
-            count+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);
+            count+=std::size_t(w)*h*4*(cube?6:1);w=std::max(w/2,1U);h=std::max(h/2,1U);
         }
         if(std::filesystem::file_size(path)!=20+count*2)fail();
         output.rgba16f.resize(count);
@@ -193,7 +246,7 @@ EnvironmentImage loadEnvironmentImage(const SceneEnvironmentSource& source) {
             value=static_cast<std::uint16_t>(lo|(hi<<8));
             if((value&0x7c00)==0x7c00)fail();
         }
-        output.description=path.u8string()+" (authored linear HDR mip chain)";
+        output.description=path.u8string()+(cube?" (authored six-face linear HDR mip chain)":" (authored linear HDR mip chain)");
         return output;
     }
     const bool cube = source.projection == EnvironmentProjection::CubeFaces

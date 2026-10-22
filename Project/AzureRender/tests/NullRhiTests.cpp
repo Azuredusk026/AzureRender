@@ -1,7 +1,11 @@
+#ifdef NDEBUG
+#error Null RHI contract checks require active assertions.
+#endif
 #include "rhi/NullRhi.hpp"
 
 #include <cassert>
 #include <cstring>
+#include <cstdio>
 #include <string>
 #include <stdexcept>
 
@@ -110,6 +114,14 @@ int main() {
     allocator.destroyImage(image);
     assert(allocator.statistics().liveImages == 0);
     assert(allocator.statistics().liveImageBytes == 0);
+    VkImageCreateInfo cubeInfo{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};
+    cubeInfo.imageType=VK_IMAGE_TYPE_2D;cubeInfo.extent={2,2,1};
+    cubeInfo.mipLevels=1;cubeInfo.arrayLayers=6;cubeInfo.flags=VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
+    cubeInfo.format=VK_FORMAT_R8G8B8A8_UNORM;cubeInfo.usage=VK_IMAGE_USAGE_SAMPLED_BIT;
+    auto cube=allocator.createImage(cubeInfo,false);
+    if(allocator.statistics().liveImageBytes!=96){std::fprintf(stderr,"Cube allocations must retain all six layers\n");return 91;}
+    allocator.destroyImage(cube);
+    if(allocator.statistics().liveImageBytes!=0){std::fprintf(stderr,"Cube allocation must release every layer\n");return 92;}
 
     // The device mock mints distinct handles and logs creation.
     NullRhi rhi;

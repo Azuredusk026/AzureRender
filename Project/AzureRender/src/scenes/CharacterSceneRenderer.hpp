@@ -1,6 +1,7 @@
 #include "assets/TextureMipChain.hpp"
 #pragma once
 #include "render/IrradianceVolume.hpp"
+#include "render/EnvironmentCubeTexture.hpp"
 #include "render/SampledTextureCache.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
@@ -282,7 +283,7 @@ private:
     std::vector<GpuMaterial> gpuMaterials_;
     std::unique_ptr<SampledTextureCache> materialTextureCache_;
     GpuTexture environmentTexture_;
-    GpuTexture reflectionProbeTexture_;
+    std::unique_ptr<EnvironmentCubeTexture> reflectionProbeTexture_;
     IrradianceVolume irradianceVolume_;
     rhi::GpuBuffer irradianceBuffer_;
     VkDeviceSize irradianceBufferBudget_=0;

@@ -283,7 +283,9 @@ public:
         VkFormat format,
         VkImageAspectFlags aspect,
         std::uint32_t mipLevels,
-        std::uint32_t baseMipLevel = 0) = 0;
+        std::uint32_t baseMipLevel = 0,
+        VkImageViewType viewType = VK_IMAGE_VIEW_TYPE_2D,
+        std::uint32_t arrayLayers = 1) = 0;
     virtual void destroyImageView(VkImageView view) = 0;
     virtual VkSampler createSampler(const SamplerDesc& desc) = 0;
     virtual void destroySampler(VkSampler sampler) = 0;

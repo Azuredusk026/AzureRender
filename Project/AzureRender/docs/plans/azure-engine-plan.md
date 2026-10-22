@@ -1,5 +1,8 @@
 # 开发总计划
 
+六面反射及独立投影原点通过双配置专项检查。
+原生外观待项见[六面反射验收](../acceptance/nr/reflection-cube.md)。
+
 眼睛径向材质已通过双配置数值及生命周期检查。
 原生绑定待项见[眼睛验收](../acceptance/nr/eye-radial-surface.md)。
 

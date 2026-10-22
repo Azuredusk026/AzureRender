@@ -95,7 +95,9 @@ public:
         VkFormat format,
         VkImageAspectFlags aspect,
         std::uint32_t mipLevels,
-        std::uint32_t baseMipLevel = 0) override;
+        std::uint32_t baseMipLevel = 0,
+        VkImageViewType viewType = VK_IMAGE_VIEW_TYPE_2D,
+        std::uint32_t arrayLayers = 1) override;
     void destroyImageView(VkImageView view) override;
     VkSampler createSampler(const SamplerDesc& desc) override;
     void destroySampler(VkSampler sampler) override;

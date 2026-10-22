@@ -10,6 +10,7 @@ void SkyPass::load(const RenderContext& c){
  try{
   EnvironmentImage source;if(!c.environment.path.empty())source=loadEnvironmentImage(c.environment);
   else{source.width=source.height=1;source.rgba16f={environmentFloatToHalf(.1F),environmentFloatToHalf(.15F),environmentFloatToHalf(.25F),environmentFloatToHalf(1)};}
+  if(source.projection==EnvironmentProjection::CubeFaces)throw std::invalid_argument("Sky pass requires an equirectangular environment");
   const auto size=source.rgba16f.size()*sizeof(std::uint16_t);auto staging=allocator_->createBuffer(size,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
   try{
    std::memcpy(staging.mapped,source.rgba16f.data(),size);allocator_->flush(staging,0,size);

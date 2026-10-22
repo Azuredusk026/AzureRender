@@ -132,6 +132,12 @@ int main() {
         document.reflectionProbe.texture="room.azenv";
         document.reflectionProbe.halfExtents={5,3,4};
         document.reflectionProbe.blendDistance=.5F;
+        auto probePayload=nlohmann::json(document.reflectionProbe);
+        probePayload["version"]=2;
+        probePayload["center"]={3,4,5};
+        probePayload["capturePosition"]={1,2,3};
+        probePayload["projectionOrigin"]={3,4,5};
+        document.reflectionProbe=probePayload.get<azurerender::ReflectionProbe>();
         document.irradianceVolume.asset="field.aziv";
         document.irradianceVolume.intensity=.75F;
         document.irradianceVolume.enabled=true;
@@ -159,6 +165,15 @@ int main() {
         const auto probeReloaded=azurerender::SceneDocument::load(scenePath).reflectionProbe;
         assert(probeReloaded.texture=="room.azenv" && probeReloaded.halfExtents==document.reflectionProbe.halfExtents);
         assert(probeReloaded.blendDistance==.5F);
+        assert((probeReloaded.project({3,4,5},{1,0,0})==std::array<float,3>{5,0,0}));
+        auto defaultOriginDocument=document;
+        probePayload.erase("projectionOrigin");probePayload["version"]=1;
+        defaultOriginDocument.reflectionProbe=probePayload.get<azurerender::ReflectionProbe>();
+        defaultOriginDocument.save(directory/"capture-origin.azscene");
+        auto defaultProbe=azurerender::SceneDocument::load(directory/"capture-origin.azscene").reflectionProbe;
+        assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{7,2,2}));
+        defaultProbe.capturePosition={2,3,4};
+        assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{6,1,1}));
         const auto giReloaded=azurerender::SceneDocument::load(scenePath).irradianceVolume;
         assert(giReloaded.asset=="field.aziv" && giReloaded.enabled && giReloaded.intensity==.75F);
         auto invalidGi=nlohmann::json(document.irradianceVolume);invalidGi["version"]=999;

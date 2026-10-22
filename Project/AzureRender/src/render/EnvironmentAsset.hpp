@@ -24,6 +24,8 @@ struct EnvironmentImage {
     std::string description;
     // Zero requests runtime filtering. Authored levels are packed base first.
     std::uint32_t authoredMipLevels = 0;
+    // Cube payloads are mip-major, then +X,-X,+Y,-Y,+Z,-Z faces.
+    EnvironmentProjection projection = EnvironmentProjection::Equirectangular;
 };
 
 // Loads an equirectangular image or a directory containing
@@ -33,5 +35,9 @@ struct EnvironmentImage {
     const SceneEnvironmentSource& source);
 
 [[nodiscard]] std::uint16_t environmentFloatToHalf(float value);
+
+// Normalize a legacy latitude/longitude source for a hardware cube sampler.
+// Native cube levels retain every half-float texel unchanged.
+[[nodiscard]] EnvironmentImage environmentAsCubeFaces(EnvironmentImage image);
 
 }  // namespace azurerender

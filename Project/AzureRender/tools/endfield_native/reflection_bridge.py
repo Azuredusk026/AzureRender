@@ -32,13 +32,16 @@ def decode_serialized_probe(fields):
         raise ValueError(f'Only serialized baked/custom probe modes are supported: {mode}')
     importance_raw = read(9, 2, 'i')[0]
     signed_short = struct.unpack('<h', struct.pack('<H', importance_raw & 0xffff))[0]
+    matrix_a = read(4, 17, '16f')
     return {
         'mode': mode,
         'half_extent': [abs(x * .5) for x in read(0, 9, '3f')],
         'influence': read(3, 9, '3f'),
-        'matrix_a': read(4, 17, '16f'),
+        'matrix_a': matrix_a,
         'matrix_b': read(5, 17, '16f'),
         'matrix_source': 'serialized_static_snapshot',
+        # Matrix A places the normalized influence box in Unity world space.
+        'projection_origin': list(matrix_a[12:15]),
         'intensity': read(6, 4, 'f')[0],
         'box_projection': bool(read(7, 1, 'B')[0]),
         'importance': max(signed_short, 0),

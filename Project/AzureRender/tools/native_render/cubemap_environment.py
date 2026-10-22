@@ -7,11 +7,14 @@ import struct
 import numpy as np
 
 
-def convert(source, output, face_size, mips):
+def convert(source, output, face_size, mips, projection='equirectangular'):
     if face_size < 1 or mips < 1 or mips > face_size.bit_length():
         raise ValueError('Invalid cubemap dimensions or mip count')
-    width, height = face_size * 4, face_size * 2
-    payload = bytearray(b'AZENV001' + struct.pack('<III', width, height, mips))
+    if projection not in ('equirectangular', 'cube'):
+        raise ValueError('Unsupported environment projection')
+    cube = projection == 'cube'
+    width, height = (face_size, face_size) if cube else (face_size * 4, face_size * 2)
+    payload = bytearray((b'AZENV002' if cube else b'AZENV001') + struct.pack('<III', width, height, mips))
     inputs = []
     maximum = 0.
     for mip in range(mips):
@@ -39,6 +42,9 @@ def convert(source, output, face_size, mips):
                 raise ValueError(f'Cubemap exceeds finite HDR range: {path}')
             inputs.append({'file': str(path.resolve()), 'sha256': hashlib.sha256(raw).hexdigest()})
             maximum = max(maximum, float(np.max(pixels[..., :3])))
+            if cube:
+                payload.extend(pixels.astype('<f2').tobytes())
+                continue
             mask = face == index
             sx = np.clip((horizontal[mask] / magnitude[mask] * .5 + .5) * size - .5, 0, size-1)
             sy = np.clip((vertical[mask] / magnitude[mask] * .5 + .5) * size - .5, 0, size-1)
@@ -47,14 +53,16 @@ def convert(source, output, face_size, mips):
             fx, fy = (sx-ix)[:, None], (sy-iy)[:, None]
             image[mask] = ((pixels[iy, ix]*(1-fx)+pixels[iy, jx]*fx)*(1-fy)
                            +(pixels[jy, ix]*(1-fx)+pixels[jy, jx]*fx)*fy)
-        payload.extend(image.astype('<f2').tobytes())
+        if not cube:
+            payload.extend(image.astype('<f2').tobytes())
         width, height = max(1, width//2), max(1, height//2)
     output.write_bytes(payload)
     report = {'schema': 'CubemapEnvironmentConversion/1', 'mips': mips,
-        'source_face_size': face_size, 'output': str(output.resolve()),
+        'source_face_size': face_size, 'projection': projection, 'output': str(output.resolve()),
         'sha256': hashlib.sha256(payload).hexdigest(), 'maximum_source_rgb': maximum,
         'orientation': 'DDS basis matching EnvironmentAsset.cpp; game parity requires reference',
-        'resampling': 'bilinear per authored level; RGBA16F linear; no tone mapping', 'inputs': inputs}
+        'resampling': ('none; mip-major DDS face order; RGBA16F linear' if cube else
+                       'bilinear per authored level; RGBA16F linear; no tone mapping'), 'inputs': inputs}
     output.with_suffix(output.suffix+'.json').write_text(json.dumps(report, indent=2))
     return report
 
@@ -65,6 +73,7 @@ if __name__ == '__main__':
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--face-size',type=int,required=True)
     parser.add_argument('--mips',type=int,required=True)
+    parser.add_argument('--projection',choices=('equirectangular','cube'),default='equirectangular')
     args=parser.parse_args()
-    report=convert(args.source,args.output,args.face_size,args.mips)
+    report=convert(args.source,args.output,args.face_size,args.mips,args.projection)
     print(json.dumps({key:value for key,value in report.items() if key!='inputs'}))

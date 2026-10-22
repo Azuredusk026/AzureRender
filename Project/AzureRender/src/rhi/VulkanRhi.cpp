@@ -66,7 +66,7 @@ void VulkanRhi::transitionImageLayout(
         barrier.image = image.image;
         barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         barrier.subresourceRange.levelCount = mipLevels;
-        barrier.subresourceRange.layerCount = 1;
+        barrier.subresourceRange.layerCount = image.arrayLayers;
 
         VkPipelineStageFlags sourceStage = 0;
         VkPipelineStageFlags destinationStage = 0;
@@ -117,9 +117,9 @@ void VulkanRhi::copyBufferToImage(
         for(unsigned level=0;level<mipLevels;++level){
         VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource.mipLevel=level;
         region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        region.imageSubresource.layerCount = 1;
+        region.imageSubresource.layerCount = destination.arrayLayers;
         region.imageExtent = {w, h, 1};
-        regions.push_back(region);offset+=VkDeviceSize(w)*h*bytesPerTexel;w=std::max(w/2,1U);h=std::max(h/2,1U);
+        regions.push_back(region);offset+=VkDeviceSize(w)*h*bytesPerTexel*destination.arrayLayers;w=std::max(w/2,1U);h=std::max(h/2,1U);
         }
         vkCmdCopyBufferToImage(
             commandBuffer,
@@ -137,7 +137,7 @@ void VulkanRhi::clearImage(const GpuImage& image) {
         VkImageSubresourceRange range{};
         range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         range.levelCount = 1;
-        range.layerCount = 1;
+        range.layerCount = image.arrayLayers;
         vkCmdClearColorImage(
             commandBuffer,
             image.image,
@@ -174,7 +174,7 @@ void VulkanRhi::generateMipmaps(
             barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             barrier.subresourceRange.baseMipLevel = level - 1;
             barrier.subresourceRange.levelCount = 1;
-            barrier.subresourceRange.layerCount = 1;
+            barrier.subresourceRange.layerCount = image.arrayLayers;
             barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
             barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
             barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
@@ -197,7 +197,7 @@ void VulkanRhi::generateMipmaps(
             blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             blit.srcSubresource.mipLevel = level - 1;
             blit.srcSubresource.baseArrayLayer = 0;
-            blit.srcSubresource.layerCount = 1;
+            blit.srcSubresource.layerCount = image.arrayLayers;
             blit.dstOffsets[0] = {0, 0, 0};
             blit.dstOffsets[1] = {
                 mipWidth > 1 ? mipWidth / 2 : 1,
@@ -206,7 +206,7 @@ void VulkanRhi::generateMipmaps(
             blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             blit.dstSubresource.mipLevel = level;
             blit.dstSubresource.baseArrayLayer = 0;
-            blit.dstSubresource.layerCount = 1;
+            blit.dstSubresource.layerCount = image.arrayLayers;
             vkCmdBlitImage(
                 commandBuffer,
                 image.image,
@@ -247,7 +247,7 @@ void VulkanRhi::generateMipmaps(
         lastBarrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         lastBarrier.subresourceRange.baseMipLevel = mipLevels - 1;
         lastBarrier.subresourceRange.levelCount = 1;
-        lastBarrier.subresourceRange.layerCount = 1;
+        lastBarrier.subresourceRange.layerCount = image.arrayLayers;
         lastBarrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
         lastBarrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
         lastBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
@@ -271,15 +271,17 @@ VkImageView VulkanRhi::createImageView(
     const VkFormat format,
     const VkImageAspectFlags aspect,
     const std::uint32_t mipLevels,
-    const std::uint32_t baseMipLevel) {
+    const std::uint32_t baseMipLevel,
+    const VkImageViewType viewType,
+    const std::uint32_t arrayLayers) {
     VkImageViewCreateInfo createInfo{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
     createInfo.image = image;
-    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.viewType = viewType;
     createInfo.format = format;
     createInfo.subresourceRange.aspectMask = aspect;
     createInfo.subresourceRange.baseMipLevel = baseMipLevel;
     createInfo.subresourceRange.levelCount = std::max(mipLevels, 1U);
-    createInfo.subresourceRange.layerCount = 1;
+    createInfo.subresourceRange.layerCount = arrayLayers;
 
     VkImageView imageView = VK_NULL_HANDLE;
     vkCheck(

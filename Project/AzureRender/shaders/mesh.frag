@@ -35,7 +35,7 @@ layout(binding = 0) uniform CameraData {
     vec4 irradianceOriginSpacing,irradianceDimensionsEnabled,irradianceParameters;
     vec4 cameraRight,cameraUp;
 } camera;
-layout(binding=23) uniform sampler2D reflectionProbeTexture;
+layout(binding=23) uniform samplerCube reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
 
 #if defined(AZURE_BINDLESS)
@@ -1118,7 +1118,7 @@ void main() {
                 direction=worldPosition+reflectionDirection*exitDistance-camera.probeCapture.xyz;
             }
             float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
-            vec3 localSpecular=fresnel*textureLod(reflectionProbeTexture,directionToEquirectangular(direction),roughness*lastMip).rgb*camera.probeParameters.y;
+            vec3 localSpecular=fresnel*textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
             if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);

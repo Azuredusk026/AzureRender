@@ -73,18 +73,19 @@ GpuImage NullGpuAllocator::createImage(
     result.width = createInfo.extent.width;
     result.height = createInfo.extent.height;
     result.mipLevels = createInfo.mipLevels;
+    result.arrayLayers = createInfo.arrayLayers;
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
     statistics_.imageBytes += static_cast<VkDeviceSize>(createInfo.extent.width)
-        * createInfo.extent.height * 4;
-    statistics_.liveImageBytes+=static_cast<VkDeviceSize>(result.width)*result.height*4;
+        * createInfo.extent.height * 4 * createInfo.arrayLayers;
+    statistics_.liveImageBytes+=static_cast<VkDeviceSize>(result.width)*result.height*4*result.arrayLayers;
     return result;
 }
 
 void NullGpuAllocator::destroyImage(GpuImage& image) noexcept {
     if (image.image != VK_NULL_HANDLE && statistics_.liveImages > 0) {
         --statistics_.liveImages;
-        statistics_.liveImageBytes-=static_cast<VkDeviceSize>(image.width)*image.height*4;
+        statistics_.liveImageBytes-=static_cast<VkDeviceSize>(image.width)*image.height*4*image.arrayLayers;
     }
     image = GpuImage{};
 }
@@ -188,13 +189,17 @@ VkImageView NullRhi::createImageView(
     const VkFormat format,
     const VkImageAspectFlags aspect,
     const std::uint32_t mipLevels,
-    const std::uint32_t baseMipLevel) {
+    const std::uint32_t baseMipLevel,
+    const VkImageViewType viewType,
+    const std::uint32_t arrayLayers) {
     (void)image;
     (void)format;
     (void)aspect;
     (void)mipLevels;
     (void)baseMipLevel;
-    return mint<VkImageView>("createImageView");
+    const auto view=mint<VkImageView>("createImageView");
+    calls.back().detail+=" type="+std::to_string(viewType)+" layers="+std::to_string(arrayLayers);
+    return view;
 }
 
 void NullRhi::destroyImageView(const VkImageView view) {

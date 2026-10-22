@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+局部反射支持原生六面 HDR 层级与独立投影原点。
+公共机制及实景待项见[六面反射验收](docs/acceptance/nr/reflection-cube.md)。
+
 径向眼表面支持视差、Matcap 与显式宿主照明。
 公共验证及原生待项见[眼睛验收](docs/acceptance/nr/eye-radial-surface.md)。
 

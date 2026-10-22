@@ -33,7 +33,7 @@ public:
     void copyBufferToImage(const rhi::GpuBuffer& a,const rhi::GpuImage& b,unsigned w,unsigned h,unsigned l,unsigned bytes)override {backend.copyBufferToImage(a,b,w,h,l,bytes);}
     void clearImage(const rhi::GpuImage& image)override {backend.clearImage(image);}
     void generateMipmaps(const rhi::GpuImage& i,VkFormat f,unsigned w,unsigned h,unsigned l)override {backend.generateMipmaps(i,f,w,h,l);}
-    VkImageView createImageView(VkImage i,VkFormat f,VkImageAspectFlags a,unsigned l,unsigned b=0)override {return backend.createImageView(i,f,a,l,b);}
+    VkImageView createImageView(VkImage i,VkFormat f,VkImageAspectFlags a,unsigned l,unsigned b=0,VkImageViewType t=VK_IMAGE_VIEW_TYPE_2D,unsigned layers=1)override {return backend.createImageView(i,f,a,l,b,t,layers);}
     void destroyImageView(VkImageView value)override {backend.destroyImageView(value);}
     VkSampler createSampler(const rhi::SamplerDesc& desc)override {if(failSampler)throw std::runtime_error("Injected sampler creation failure");return backend.createSampler(desc);}
     void destroySampler(VkSampler value)override {backend.destroySampler(value);}

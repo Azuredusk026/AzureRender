@@ -35,6 +35,28 @@ class ReflectionBridgeTests(unittest.TestCase):
         p = decode_serialized_probe(fields(0))
         self.assertEqual(p['sh_coefficients'], list(range(27)))
 
+    def test_projection_origin_preserves_white_yellow_world_center(self):
+        for mode in (0, 2):
+            with self.subTest(mode=mode):
+                source = fields(mode)
+                source['0x10040000']['hex'] = struct.pack(
+                    '<16f', 4, 0, 0, 0, 0, 5, 0, 0, 0, 0, 6, 0,
+                    0, 11.601508140563965, -7.430000305175781, 1).hex()
+                decoded = decode_serialized_probe(source)
+                self.assertEqual(decoded.get('projection_origin'),
+                                 [0, 11.601508140563965, -7.430000305175781])
+
+    def test_projection_origin_rejects_nonfinite_matrix_values(self):
+        for key in ('0x10040000', '0x10050000'):
+            for axis, value in enumerate((float('nan'), float('inf'), -float('inf'))):
+                with self.subTest(matrix=key, axis=axis, value=value):
+                    source = fields()
+                    matrix = list(range(16))
+                    matrix[12 + axis] = value
+                    source[key]['hex'] = struct.pack('<16f', *matrix).hex()
+                    with self.assertRaises(ValueError):
+                        decode_serialized_probe(source)
+
     def test_shader_rows_preserve_shape_intensity_and_explicit_runtime_state(self):
         rows = pack_serialized_probe(fields(), array_layer=3, fade=.6)
         self.assertEqual(rows[1], (4, 5, 6, 3))
