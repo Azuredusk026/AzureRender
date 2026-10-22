@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR4-G5",
+  "status": "public-offline-composition-verified",
+  "formalNr4Status": "Pending",
+  "gpuExecuted": false,
+  "gameLaunched": false,
+  "nativeFrameEquivalenceVerified": false,
+  "nativeRuntimeDefaultCoefficientsVerified": false,
+  "currentSceneBindingChanged": false,
+  "publicRed": {
+    "tests": 21,
+    "failures": 21,
+    "reason": "public module explicitly pending implementation"
+  },
+  "publicTests": {
+    "tests": 24,
+    "failures": 0
+  },
+  "nativeToolSuite": {
+    "tests": 180,
+    "failures": 0
+  },
+  "oracle": {
+    "cases": 1000,
+    "maximumAbsoluteError": 1.7763568394002505e-15
+  },
+  "nativeSourceRecords": 61836,
+  "mutations": {
+    "discard-alpha": {
+      "tests": 24,
+      "failures": 4,
+      "errors": 0,
+      "rejected": true
+    },
+    "first-layer-only": {
+      "tests": 24,
+      "failures": 28,
+      "errors": 0,
+      "rejected": true
+    },
+    "drop-default-cross-term": {
+      "tests": 24,
+      "failures": 2,
+      "errors": 0,
+      "rejected": true
+    },
+    "swap-color-amplitudes": {
+      "tests": 24,
+      "failures": 1,
+      "errors": 0,
+      "rejected": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "tools/endfield_native/irradiance_composition.py",
+      "sha256": "4c62047f444cf8dbbe76073990a13066930f104a32c80ebf7144f2b3d11f849f",
+      "bytes": 8017
+    },
+    {
+      "path": "tools/test_endfield_native_irradiance_composition.py",
+      "sha256": "8ee0c1abe6c29378d3ec754a2163547d02350b9309641dfaa8e2602ad69eb75d",
+      "bytes": 13704
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/public-red.log",
+      "sha256": "311a068fba9fc0b3e7bee4787cd1a7096e5e2fa15184c923eb2b347ebcb5b242",
+      "bytes": 18422
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/public-first-check.log",
+      "sha256": "2ed36cf57355c2ec1f5081e1a80182fd6b0eed947c614c75dbd3780bf400139a",
+      "bytes": 6171
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/native-suite.log",
+      "sha256": "a59bbeccad288262caa12b25df61c10a513e82761862b8fe815c08a356beec4e",
+      "bytes": 29023
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/production-verification.json",
+      "sha256": "3ad529566fcc58c3e97ab1868f3da6ed0523880630b0be8b44521ebb04dd08a3",
+      "bytes": 688
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/production-mutations.json",
+      "sha256": "5890151d4f875062acf39b096853a89e703c6f90c2e16076912c38ad1c66b0fe",
+      "bytes": 449
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/source-audit.json",
+      "sha256": "cb8d1c35227c46f9f74d98442c83d89080813d56555270ac08f4489a8469ddfe",
+      "bytes": 10562
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/default-sources.json",
+      "sha256": "1f824ab73e4bd8bf876dd50a3ac8ff8a0e35322ef57c6d8300420df4131e0534",
+      "bytes": 4712
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/sky-metadata.json",
+      "sha256": "2cd6624001d4304817e91b0b57dba16c4dbe4a4f58fe8889db95c6a593a3d1a5",
+      "bytes": 22258
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/sky-native.json",
+      "sha256": "56b71be98804f5cfc40b4cfa8aa01fa2ef7e91bd0f2c6adebb0a69ce1ba3134e",
+      "bytes": 8473
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/production-assessment.md",
+      "sha256": "321eb546dea14f20bf10dd0146c539bf16196543338cba168da6f5de17cd73b7",
+      "bytes": 3585
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/verify_production.py",
+      "sha256": "ba8dd2fa584fa72b72bd07079cf1ef6fce8a5714609cdc79e65012e6fa004e2d",
+      "bytes": 2971
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/dxbc_oracle.py",
+      "sha256": "e297ab0b04829b1c78e7065a12cdc33898651d2af24742e30c132cfbf1a0b30a",
+      "bytes": 4166
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/check_production_mutations.py",
+      "sha256": "b752e2cb888d4dfb2f4f89d4a3aec7bc83047fb5b720f4d0eed20028368f3bb2",
+      "bytes": 1728
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/inspect_default_sources.py",
+      "sha256": "032219ab6de2980916921a9dda0bac8569196c9b6100266571312719163787ae",
+      "bytes": 3883
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/audit_sky_native.py",
+      "sha256": "82f42d7bd02f74b954ac07d7cf764e121c4cc6cc9b67ea1de8b1be41d6f6b075",
+      "bytes": 3857
+    },
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/finalize_production_receipt.py",
+      "sha256": "b2e3c68f2742734ccfdf960de2b8dc63e32ab5e53d781492028ae0dfd6ecb615",
+      "bytes": 2420
+    }
+  ],
+  "rootVerification": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/gi-activation-audit/root-native-suite.log",
+    "sha256": "01089b852217a398fb8bdbf3bbf1cd1f0e98114eaec89b376093c7a2431d265d"
+  }
+}

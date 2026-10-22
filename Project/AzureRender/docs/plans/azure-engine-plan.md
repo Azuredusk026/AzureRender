@@ -1,5 +1,8 @@
 # 开发总计划
 
+原生方向场工具已接入三层及默认环境组合。
+来源与运行待项见[组合验收](../acceptance/nr/irradiance-composition.md)。
+
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
 

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+原生 GI 工具支持三层组合及方向 Alpha 保留。
+离线验证与运行待项见[组合验收](docs/acceptance/nr/irradiance-composition.md)。
+
 反射射线预计算通过双配置图像及动态遮挡回归。
 真实中庭短测及边界见[射线验收](docs/acceptance/nr/reflection-ray-math.md)。
 
