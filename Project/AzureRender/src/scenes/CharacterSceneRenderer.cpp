@@ -4,6 +4,7 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
 #include "render/ResourceAccessProfile.hpp"
 #include "render/ResourceIndexTable.hpp"
 #include "render/PrimitiveOpacity.hpp"
@@ -2033,30 +2034,19 @@ void CharacterSceneRenderer::recordComputeSkinning(
 }
 
 void CharacterSceneRenderer::createUniformBuffers() {
-    // Six vec4 rows per material, in the same stable order as texture blocks.
-    using HairRows=std::array<std::array<float,4>,6>;
-    std::vector<HairRows> profiles;
+    // One typed, immutable record per stable asset material index.
+    std::vector<PackedMaterialSurfaceProfile> profiles;
     const auto appendProfiles=[&](const LoadedAsset& mesh) {
-        for(const auto& material:mesh.materials) {
-            const auto& h=material.projectedHairRamp;
-            HairRows rows{};
-            rows[0]={h.primaryShift,h.secondaryShift,h.intensity,h.secondaryRange};
-            rows[1]={h.edgeFade,h.specularNormalScale,h.directionX,h.surfaceNormalScale};
-            rows[2]={h.secondaryColor[0],h.secondaryColor[1],h.secondaryColor[2],
-                h.surfaceResponse==AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse?1.F:0.F};
-            for(unsigned a=0;a<3;++a)for(unsigned c=0;c<3;++c)rows[a+3][c]=h.objectBasis[a*3+c];
-            rows[3][3]=h.diffuseScale;
-            profiles.push_back(rows);
-        }
+        for(const auto& material:mesh.materials)profiles.push_back(packMaterialSurfaceProfile(material));
     };
     appendProfiles(asset_);for(const auto& resource:additionalResources_)appendProfiles(resource->asset);
-    const auto profileBytes=sizeof(HairRows)*profiles.size();
+    const auto profileBytes=sizeof(PackedMaterialSurfaceProfile)*profiles.size();
     if(profiles.empty()||profiles.size()>std::numeric_limits<std::uint32_t>::max()/2
         ||(irradianceBufferBudget_&&profileBytes>irradianceBufferBudget_))
-        throw std::runtime_error("Projected hair material table exceeds the device storage budget");
-    projectedHairProfiles_=allocator_->createBuffer(profileBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
-    std::memcpy(projectedHairProfiles_.mapped,profiles.data(),profileBytes);
-    allocator_->flush(projectedHairProfiles_,0,profileBytes);
+        throw std::runtime_error("Material surface table exceeds the device storage budget");
+    materialSurfaceProfiles_=allocator_->createBuffer(profileBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    std::memcpy(materialSurfaceProfiles_.mapped,profiles.data(),profileBytes);
+    allocator_->flush(materialSurfaceProfiles_,0,profileBytes);
     const VkDeviceSize size = sizeof(UniformBufferObject);
     uniformBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
@@ -2491,7 +2481,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
-            rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,projectedHairProfiles_.buffer,projectedHairProfiles_.size});
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
@@ -2581,7 +2571,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
-            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,projectedHairProfiles_.buffer,projectedHairProfiles_.size});
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
             const auto& probe=reflectionProbeTexture_.view!=VK_NULL_HANDLE?reflectionProbeTexture_:environmentTexture_;
@@ -2999,7 +2989,7 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     uniformBuffers_.clear();
-    allocator_->destroyBuffer(projectedHairProfiles_);
+    allocator_->destroyBuffer(materialSurfaceProfiles_);
     for (auto& buffer : jointBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -3234,6 +3224,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
 
     UniformBufferObject uniform{};
+    // The actual view rotation is independent of sky projection scale.
+    uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],0};
+    uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],0};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
     const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
     uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};

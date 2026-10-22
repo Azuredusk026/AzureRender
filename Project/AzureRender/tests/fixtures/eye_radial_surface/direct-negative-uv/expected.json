@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "case": {
+    "name": "direct-negative-uv",
+    "uv": [
+      -0.38,
+      1.62
+    ],
+    "parallax": 0.15,
+    "normalScale": 1,
+    "mirror": false,
+    "turn": 0,
+    "light": false,
+    "directWeights": [
+      1,
+      0,
+      0
+    ],
+    "matcapColor": [
+      0.2,
+      0.4,
+      0.8,
+      0.5
+    ],
+    "rampAlpha": 128,
+    "matcapMode": "rgba",
+    "baseMode": "pattern"
+  },
+  "samples": [
+    {
+      "pixel": [
+        44,
+        63
+      ],
+      "linearRgb": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "baseUv": [
+        -0.4034976175964956,
+        1.6201506257538238
+      ],
+      "matcapUv": [
+        0.38,
+        0.3799999999999999
+      ],
+      "lightingNormal": [
+        0.03186085244213853,
+        0.03186085244213856,
+        0.9989843703298468
+      ]
+    },
+    {
+      "pixel": [
+        63,
+        63
+      ],
+      "linearRgb": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "baseUv": [
+        -0.38061002942261074,
+        1.6201525073556529
+      ],
+      "matcapUv": [
+        0.38,
+        0.3799999999999999
+      ],
+      "lightingNormal": [
+        0.03186085244213853,
+        0.03186085244213856,
+        0.9989843703298468
+      ]
+    },
+    {
+      "pixel": [
+        83,
+        63
+      ],
+      "linearRgb": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "baseUv": [
+        -0.3565023824035044,
+        1.6201506257538238
+      ],
+      "matcapUv": [
+        0.38,
+        0.3799999999999999
+      ],
+      "lightingNormal": [
+        0.03186085244213853,
+        0.03186085244213856,
+        0.9989843703298468
+      ]
+    }
+  ],
+  "outputEncoding": "sRGB",
+  "maximumLinearError": 0.008,
+  "nativeEquivalenceClaimed": false,
+  "hostIlluminationModel": "host-lambert",
+  "acceptance": [
+    "No Vulkan validation errors or warnings.",
+    "Unload buffers=0 images=0.",
+    "CPU pixel rays and color conversion independent from production shader."
+  ]
+}

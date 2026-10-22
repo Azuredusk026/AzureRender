@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/eye-radial-material-v1.json",
+  "title": "AzureRender radial eye material profile",
+  "description": "A bounded host-authored eye profile inside glTF material extras.azureRenderMaterial. Texture references and sampler ownership are checked against the glTF model by the importer.",
+  "type": "object",
+  "required": ["schemaVersion", "class", "features", "eyeSurface"],
+  "properties": {
+    "schemaVersion": {"const": 2},
+    "class": {"const": "eye"},
+    "features": {
+      "type": "array", "uniqueItems": true,
+      "contains": {"const": "eye-radial-surface"},
+      "items": {"enum": ["eye-radial-surface", "silhouette-outline"]}
+    },
+    "eyeSurface": {"$ref": "#/$defs/eyeSurface"}
+  },
+  "not": {"anyOf": [
+    {"required": ["lamShadowColor"]}, {"required": ["matcapColor"]},
+    {"required": ["hair"]}, {"required": ["faceSdf"]},
+    {"required": ["diffuseRamp"]}, {"required": ["refraction"]},
+    {"required": ["sceneRefraction"]}, {"required": ["multiplyComposite"]},
+    {"required": ["composite"]}, {"required": ["shadowColorLut"]}, {"required": ["surface"]}
+  ]},
+  "$defs": {
+    "color3": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number", "minimum": 0, "maximum": 64}
+    },
+    "color4": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {"type": "number", "minimum": 0, "maximum": 64}
+    },
+    "eyeSurface": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "diffuseRampTexture", "matcapTexture", "parallaxScale", "matcapNormalScale", "alphaPremultiply", "highlightColor", "scatteringColor", "matcapColor", "uvScaleOffset", "lightingInputs"],
+      "properties": {
+        "schemaVersion": {"const": 1},
+        "diffuseRampTexture": {"type": "integer", "minimum": 0},
+        "matcapTexture": {"type": "integer", "minimum": 0},
+        "parallaxScale": {"type": "number", "minimum": 0, "maximum": 1},
+        "matcapNormalScale": {"type": "number", "minimum": 0, "maximum": 8},
+        "alphaPremultiply": {"type": "number", "minimum": 0, "maximum": 1},
+        "highlightColor": {"$ref": "#/$defs/color3"},
+        "scatteringColor": {"$ref": "#/$defs/color3"},
+        "matcapColor": {"$ref": "#/$defs/color4"},
+        "uvScaleOffset": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {"type": "number", "minimum": -65536, "maximum": 65536}
+        },
+        "lightingInputs": {
+          "type": "object", "additionalProperties": false,
+          "required": ["source", "illuminationModel", "matcapShadowFloor", "directWeights"],
+          "properties": {
+            "source": {"const": "host-authored"},
+            "illuminationModel": {"const": "host-lambert"},
+            "matcapShadowFloor": {"type": "number", "minimum": 0, "maximum": 1},
+            "directWeights": {"$ref": "#/$defs/color3"}
+          }
+        }
+      }
+    }
+  }
+}

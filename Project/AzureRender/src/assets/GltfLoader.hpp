@@ -61,6 +61,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureSilhouetteOutline = 1U << 14U,
     MaterialFeatureMultiplyComposite = 1U << 15U,
     MaterialFeatureHairProjectedRamp = 1U << 16U,
+    MaterialFeatureEyeRadialSurface = 1U << 17U,
     MaterialFeatureUnlitSurface = 1U << 18U,
 };
 
@@ -153,6 +154,14 @@ struct AssetMaterial {
         std::vector<std::uint8_t> parameterPixels;
         std::uint32_t parameterWidth=0,parameterHeight=0;
     } projectedHairRamp;
+    struct EyeSurface {
+        bool present=false;
+        float parallaxScale=0,matcapNormalScale=0,alphaPremultiply=0,matcapShadowFloor=0;
+        std::array<float,3> highlightColor{},scatteringColor{},directWeights{};
+        std::array<float,4> matcapColor{},uvScaleOffset{1,1,0,0};
+        // Version 1 accepts explicit host-authored, host-lambert lighting.
+        // Native capture bindings require a separate provenance contract.
+    } eyeSurface;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

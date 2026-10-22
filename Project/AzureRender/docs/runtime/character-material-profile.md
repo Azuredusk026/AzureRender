@@ -158,6 +158,32 @@ R 控制各向异性轴，G 控制主叶，A 控制次叶。
 零投影及退化切线使用宿主的确定性保护。
 原生画面等价性须由真实场景对照建立。
 
+## 径向眼表面
+
+`eye-radial-surface` 选择公共径向眼表面。
+画像使用版本 2、`eye` 类别和第 17 位特征。
+`eyeSurface` 对象使用版本 1。
+画像可组合 `silhouette-outline`。
+
+槽 0 提供基色，槽 4 提供单行漫反射色带。
+槽 5 提供 RGBA Matcap。
+基色与 Matcap 的 RGB 执行一次颜色解码。
+色带四通道和两项 Alpha 均保持线性。
+
+几何绘制模式为 `OPAQUE`。
+省略 `alphaMode` 使用 glTF 不透明默认值。
+显式字段按原始 JSON 类型和内容校验。
+眼表面遮罩使用基色 Alpha。
+
+照明来源须为 `host-authored`。
+照明模型须为 `host-lambert`。
+绑定 27 保存每材质六行、共九十六字节。
+固定与索引路径共用稳定材质索引。
+
+GI、反射和原生绑定各有独立适配契约。
+原生配方的 `readyForImport` 保持 `false`。
+完整配置和验收范围见[径向眼表面](eye-radial-surface.md)。
+
 ## 乘法合成
 
 画像版本 2 支持 `multiply-composite` 特征。

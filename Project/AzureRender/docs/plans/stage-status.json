@@ -1359,7 +1359,8 @@
         "docs/acceptance/nr/character-logistics-joint.md",
         "docs/acceptance/nr/character-logistics-restored.md",
         "docs/acceptance/nr/face-specular-control.md",
-        "docs/acceptance/nr/character-probe-controls.md"
+        "docs/acceptance/nr/character-probe-controls.md",
+        "docs/acceptance/nr/eye-radial-surface.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"

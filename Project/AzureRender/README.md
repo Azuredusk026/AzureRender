@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+径向眼表面支持视差、Matcap 与显式宿主照明。
+公共验证及原生待项见[眼睛验收](docs/acceptance/nr/eye-radial-surface.md)。
+
 三个公开模型工程已交付，支持编辑、保存和独立发布。
 PT0 至 PT7 已完成，历史 P8 待项按原清单维护。
 打开方法见[公开光追演示](docs/tutorials/public-pathtracing-demos.md)。

@@ -175,6 +175,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
     if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
     if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
+    if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
     if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
     return 0;
 }
@@ -1019,6 +1020,8 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     return parameterImage;
 }
 
+#include "EyeSurfaceLoader.inc"
+
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
     const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr) {
@@ -1387,6 +1390,7 @@ AssetMaterial loadMaterial(
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
         projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
+        loadEyeSurface(*material,model,result,styleMaskImage,matcapImage);
     }
 
     if (baseColorImage >= 0) {
@@ -2250,6 +2254,18 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     const auto filePath = std::filesystem::u8path(path);
     auto extension=filePath.extension().u8string();
     std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char c){return static_cast<char>(std::tolower(c));});
+    // Observe the existing source read; external image/buffer reads remain unchanged.
+    std::vector<bool> authoredAlpha;bool readRoot=false;
+    tinygltf::FsCallbacks fs{&tinygltf::FileExists,&tinygltf::ExpandFilePath,
+        [&](std::vector<unsigned char>* output,std::string* diagnostic,const std::string& file,void* user) {
+            const bool success=tinygltf::ReadWholeFile(output,diagnostic,file,user);
+            if(success&&!readRoot) {
+                authoredAlpha=readAuthoredMaterialAlpha(output->data(),output->size(),extension==".glb");
+                readRoot=true;
+            }
+            return success;
+        },&tinygltf::WriteWholeFile,&tinygltf::GetFileSizeInBytes,nullptr};
+    if(!loader.SetFsCallbacks(fs,&error))throw std::runtime_error("Cannot observe authored material fields: "+error);
     const bool loaded = extension == ".glb"
         ? loader.LoadBinaryFromFile(&model, &error, &warning, path)
         : loader.LoadASCIIFromFile(&model, &error, &warning, path);
@@ -2260,6 +2276,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     if (!loaded) {
         throw std::runtime_error("Unable to load glTF asset: " + error);
     }
+    validateEyeAuthoredAlpha(model,authoredAlpha);
     auto asset=importGltfModel(model,&authored);
     for(std::size_t index=0;index<model.materials.size();++index) {
         const auto& material=model.materials[index];
@@ -2278,6 +2295,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
             if(settings.contains("texture"))asset.materials[index].textureSettings[slot]=azurerender::TextureImportSettings::parse(settings.at("texture"),asset.materials[index].textureSettings[slot]);
         }
     }
+    for(const auto& material:asset.materials)validateEyeTextureSettings(material);
     return asset;
 }
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
@@ -2296,6 +2314,8 @@ LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
         :loader.LoadASCIIFromString(&model,&error,&warning,bytes.data(),size,"");
     if(external)throw std::invalid_argument("Embedded model candidates require embedded buffers and images");
     if(!loaded)throw std::invalid_argument("Invalid embedded model candidate: "+error);
+    validateEyeAuthoredAlpha(model,readAuthoredMaterialAlpha(
+        reinterpret_cast<const unsigned char*>(bytes.data()),bytes.size(),binary));
     return importGltfModel(model,&authored);
 }
 namespace {

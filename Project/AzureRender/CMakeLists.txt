@@ -1057,6 +1057,11 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.CharacterProbeGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_probe_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.CharacterProbeGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.EyeSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_eye_surface_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer>
+        --fixtures "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/eye_radial_surface"
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.EyeSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ProjectedHairGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)
     add_test(NAME AzureEngine.ProjectedHairSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_surface_gpu.py"

@@ -190,7 +190,11 @@ private:
         std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
         std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
         std::array<float,4> irradianceOriginSpacing{},irradianceDimensionsEnabled{},irradianceParameters{};
+        std::array<float,4> cameraRight{},cameraUp{};
     };
+    static_assert(sizeof(UniformBufferObject)==28*16);
+    static_assert(offsetof(UniformBufferObject,cameraRight)==26*16);
+    static_assert(offsetof(UniformBufferObject,cameraUp)==27*16);
 
     // Per-instance transforms uploaded to the instance storage buffer. The
     // host computes them with the same matrix helpers as the single-model
@@ -292,7 +296,7 @@ private:
     VkPipeline iblPrefilterPipeline_ = VK_NULL_HANDLE;
     std::vector<rhi::GpuBuffer> uniformBuffers_;
     // Immutable material table. Owned from load through retirement at unload.
-    rhi::GpuBuffer projectedHairProfiles_;
+    rhi::GpuBuffer materialSurfaceProfiles_;
     std::vector<rhi::GpuBuffer> jointBuffers_;
     rhi::GpuBuffer morphTargetBuffer_;
     std::array<rhi::GpuBuffer,kMaxFramesInFlight> morphWeightBuffers_{};

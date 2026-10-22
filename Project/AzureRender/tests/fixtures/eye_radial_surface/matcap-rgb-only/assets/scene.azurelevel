@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "id": "matcap-rgb-only",
+  "sceneType": "character",
+  "renderSettings": {
+    "platform": false,
+    "background": false,
+    "silhouetteOutline": false,
+    "innerOutline": false,
+    "stylized": false,
+    "sceneLighting": true,
+    "skyIntensity": 0,
+    "bloomEnabled": false,
+    "antiAliasing": 0,
+    "exposure": 0,
+    "toneMapping": false,
+    "contrast": 1,
+    "saturation": 1
+  },
+  "resources": [
+    {
+      "id": "eye",
+      "asset": "assets:/eye.gltf"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "eye",
+      "resourceId": "eye",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "camera",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              3
+            ]
+          }
+        },
+        "azure.camera": {
+          "type": "azure.camera",
+          "version": 1,
+          "data": {
+            "enabled": true,
+            "priority": 1,
+            "fieldOfView": 55
+          }
+        }
+      }
+    },
+    {
+      "id": "light",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {}
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "light",
+      "nodeId": "light",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "intensity": 0.4,
+      "radius": 10,
+      "enabled": true,
+      "shape": {
+        "type": "directional",
+        "direction": [
+          0,
+          0,
+          -1
+        ],
+        "falloff": "legacy"
+      }
+    }
+  ]
+}

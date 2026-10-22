@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "case": {
+    "name": "matcap-mirror",
+    "uv": [
+      0.75,
+      0.75
+    ],
+    "parallax": 0.15,
+    "normalScale": 1,
+    "mirror": true,
+    "turn": 0,
+    "light": true,
+    "directWeights": [
+      0,
+      0,
+      0
+    ],
+    "matcapColor": [
+      0.2,
+      0.4,
+      0.8,
+      0.5
+    ],
+    "rampAlpha": 128,
+    "matcapMode": "rgba",
+    "baseMode": "black"
+  },
+  "samples": [
+    {
+      "pixel": [
+        44,
+        63
+      ],
+      "linearRgb": [
+        0.11943482266446971,
+        0.03669349413075131,
+        0.06661763446324548
+      ],
+      "baseUv": [
+        0.7660628245288544,
+        0.7501029668239029
+      ],
+      "matcapUv": [
+        0.75,
+        0.25
+      ],
+      "lightingNormal": [
+        -0.08770580193070292,
+        0.08770580193070292,
+        0.9922778767136676
+      ]
+    },
+    {
+      "pixel": [
+        63,
+        63
+      ],
+      "linearRgb": [
+        0.11943482266446971,
+        0.03669349413075131,
+        0.06661763446324548
+      ],
+      "baseUv": [
+        0.7504170123006129,
+        0.7501042530751532
+      ],
+      "matcapUv": [
+        0.75,
+        0.25
+      ],
+      "lightingNormal": [
+        -0.08770580193070292,
+        0.08770580193070292,
+        0.9922778767136676
+      ]
+    },
+    {
+      "pixel": [
+        83,
+        63
+      ],
+      "linearRgb": [
+        0.11943482266446971,
+        0.03669349413075131,
+        0.06661763446324548
+      ],
+      "baseUv": [
+        0.7339371754711456,
+        0.7501029668239029
+      ],
+      "matcapUv": [
+        0.75,
+        0.25
+      ],
+      "lightingNormal": [
+        -0.08770580193070292,
+        0.08770580193070292,
+        0.9922778767136676
+      ]
+    }
+  ],
+  "outputEncoding": "sRGB",
+  "maximumLinearError": 0.008,
+  "nativeEquivalenceClaimed": false,
+  "hostIlluminationModel": "host-lambert",
+  "acceptance": [
+    "No Vulkan validation errors or warnings.",
+    "Unload buffers=0 images=0.",
+    "CPU pixel rays and color conversion independent from production shader."
+  ]
+}

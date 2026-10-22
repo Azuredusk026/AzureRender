@@ -1,4 +1,6 @@
 #include "assets/GltfLoader.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
+#include <cstring>
 #include "runtime/LevelRenderSettings.hpp"
 #include <nlohmann/json.hpp>
 #include <stb_image_write.h>
@@ -342,6 +344,292 @@ void testUnlitSurface(const nlohmann::json& fixture,const std::filesystem::path&
         "Legacy surfaces must retain their selected lighting model");
 }
 
+// Include before CharacterRepairTests.cpp main; call testEyeRadialSurface(input,directory).
+// The numeric feature bit permits a tests-only build against existing headers.
+void testMaterialSurfacePacking() {
+    AssetMaterial::ProjectedHairRamp hair;
+    hair.primaryShift=.1F;hair.secondaryShift=.2F;hair.intensity=.3F;hair.secondaryRange=.4F;
+    hair.edgeFade=.5F;hair.specularNormalScale=.6F;hair.directionX=.7F;hair.surfaceNormalScale=.8F;
+    hair.secondaryColor={.9F,1,1.1F};hair.objectBasis={1,2,3,4,5,6,7,8,9};
+    hair.surfaceResponse=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse;hair.diffuseScale=.96F;
+    const std::array<float,24> expectedHair{.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,1.1F,1,1,2,3,.96F,4,5,6,0,7,8,9,0};
+    const auto packedHair=packProjectedHairSurfaceProfile(hair);
+    require(std::memcmp(&packedHair,expectedHair.data(),sizeof(packedHair))==0,
+        "Typed hair packing must preserve every byte of the existing six-row ABI");
+    AssetMaterial material;auto& eye=material.eyeSurface;eye.present=true;
+    eye.parallaxScale=.15F;eye.matcapNormalScale=1.5F;eye.alphaPremultiply=.25F;eye.matcapShadowFloor=.75F;
+    eye.highlightColor={2,3,4};eye.scatteringColor={5,6,7};eye.matcapColor={8,9,10,11};
+    eye.directWeights={12,13,14};eye.uvScaleOffset={15,16,17,18};
+    const std::array<float,24> expectedEye{.15F,1.5F,.25F,.75F,2,3,4,0,5,6,7,0,8,9,10,11,12,13,14,0,15,16,17,18};
+    const auto packedEye=packEyeSurfaceProfile(eye);
+    require(std::memcmp(&packedEye,expectedEye.data(),sizeof(packedEye))==0,
+        "Typed eye packing must preserve all authored and reserved components");
+    const auto selected=packMaterialSurfaceProfile(material);
+    require(std::memcmp(&selected,expectedEye.data(),sizeof(selected))==0,"Eye selects the typed eye record");
+    material.eyeSurface.present=false;material.projectedHairRamp=hair;
+    const auto generic=packMaterialSurfaceProfile(material);
+    require(std::memcmp(&generic,expectedHair.data(),sizeof(generic))==0,"Other materials retain stable hair-compatible rows");
+}
+
+void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    constexpr std::uint32_t eyeBit=1U<<17U;
+    const std::vector<std::uint8_t> basePixels{128,64,224,128};
+    const std::vector<std::uint8_t> rampPixels{17,64,128,223, 96,32,224,160};
+    const std::vector<std::uint8_t> matcapPixels{32,96,160,224, 96,32,224,160,
+                                               17,83,149,215, 255,0,1,254};
+    require(stbi_write_png((directory/"eye-base.png").string().c_str(),1,1,4,basePixels.data(),4)!=0,
+        "Cannot write eye base fixture");
+    require(stbi_write_png((directory/"eye-ramp.png").string().c_str(),2,1,4,rampPixels.data(),8)!=0,
+        "Cannot write eye ramp fixture");
+    require(stbi_write_png((directory/"eye-matcap.png").string().c_str(),2,2,4,matcapPixels.data(),8)!=0,
+        "Cannot write eye Matcap fixture");
+    // Embedded geometry matches gpu-candidates/direct-linear-control/assets/eye.gltf.
+    auto source=Json::parse(R"eye({
+      "asset":{"version":"2.0"},"scene":0,"scenes":[{"nodes":[0]}],
+      "nodes":[{"mesh":0}],"meshes":[{"primitives":[{"attributes":{
+        "POSITION":0,"NORMAL":1,"TANGENT":2,"TEXCOORD_0":3},"indices":4,"material":0}]}],
+      "buffers":[{"byteLength":204,"uri":"data:application/octet-stream;base64,ZmZmv2ZmZr8AAAAAZmZmP2ZmZr8AAAAAZmZmP2ZmZj8AAAAAZmZmv2ZmZj8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAP1K4Hj9SuB4/UrgeP1K4Hj9SuB4/UrgeP1K4Hj9SuB4/AAABAAIAAAACAAMA"}],
+      "bufferViews":[{"buffer":0,"byteOffset":0,"byteLength":48},
+        {"buffer":0,"byteOffset":48,"byteLength":48},{"buffer":0,"byteOffset":96,"byteLength":64},
+        {"buffer":0,"byteOffset":160,"byteLength":32},{"buffer":0,"byteOffset":192,"byteLength":12}],
+      "accessors":[{"bufferView":0,"componentType":5126,"count":4,"type":"VEC3",
+        "min":[-0.9,-0.9,0],"max":[0.9,0.9,0]},
+        {"bufferView":1,"componentType":5126,"count":4,"type":"VEC3"},
+        {"bufferView":2,"componentType":5126,"count":4,"type":"VEC4"},
+        {"bufferView":3,"componentType":5126,"count":4,"type":"VEC2"},
+        {"bufferView":4,"componentType":5123,"count":6,"type":"SCALAR"}]
+    })eye");
+    source["images"]={{{"uri","eye-base.png"}},{{"uri","eye-ramp.png"}},{{"uri","eye-matcap.png"}}};
+    source["textures"]={{{"source",0},{"sampler",0}},{{"source",1},{"sampler",0}},{{"source",2},{"sampler",0}}};
+    source["samplers"]={{{"wrapS",33071},{"wrapT",33071},{"magFilter",9729},{"minFilter",9729}}};
+    Json authoredMaterial={{"name","radial-eye-fixture"},{"doubleSided",true},{"alphaMode","OPAQUE"}};
+    authoredMaterial["pbrMetallicRoughness"]={{"metallicFactor",0},{"roughnessFactor",1}};
+    authoredMaterial["pbrMetallicRoughness"]["baseColorTexture"]={{"index",0}};
+    Json authoredProfile={{"schemaVersion",2},{"class","eye"}};
+    authoredProfile["features"]=Json::array({"eye-radial-surface"});
+    Json authoredEye={
+        {"schemaVersion",1},{"diffuseRampTexture",1},{"matcapTexture",2},
+        {"parallaxScale",.15},{"matcapNormalScale",1},{"alphaPremultiply",.5},
+        {"highlightColor",{3.4415908,3.0091395,2.8109329}},
+        {"scatteringColor",{0,3.2831938,16.94838}},
+        {"matcapColor",{1.2754714,.23824833,.73298275,2}},
+        {"uvScaleOffset",{1,1,-.25,.5}}};
+    Json authoredLighting={{"source","host-authored"},{"illuminationModel","host-lambert"},
+        {"matcapShadowFloor",.3},{"directWeights",{1,.25,.5}}};
+    authoredEye["lightingInputs"]=authoredLighting;
+    authoredProfile["eyeSurface"]=authoredEye;
+    authoredMaterial["extras"]["azureRenderMaterial"]=authoredProfile;
+    source["materials"]=Json::array({authoredMaterial});
+    const auto path=directory/"eye-radial-surface.gltf";
+    const auto load=[&](const Json& document) {
+        std::ofstream(path)<<document.dump();
+        return loadGltfAsset(path.string());
+    };
+    const auto loadBinary=[&](const Json& document) {
+        auto raw=document.dump();while(raw.size()%4)raw.push_back(' ');
+        std::vector<unsigned char> bytes;
+        const auto word=[&](std::uint32_t value) {
+            for(unsigned byte=0;byte<4;++byte)bytes.push_back(static_cast<unsigned char>(value>>(byte*8U)));
+        };
+        word(0x46546c67U);word(2);word(static_cast<std::uint32_t>(20+raw.size()));
+        word(static_cast<std::uint32_t>(raw.size()));word(0x4e4f534aU);
+        bytes.insert(bytes.end(),raw.begin(),raw.end());
+        const auto binaryPath=directory/"eye-radial-surface.glb";
+        std::ofstream stream(binaryPath,std::ios::binary);
+        stream.write(reinterpret_cast<const char*>(bytes.data()),static_cast<std::streamsize>(bytes.size()));stream.close();
+        return loadGltfAsset(binaryPath.string());
+    };
+    const auto profile=[](Json& document) -> Json& {return document["materials"][0]["extras"]["azureRenderMaterial"];};
+    const auto eye=[&](Json& document) -> Json& {return profile(document)["eyeSurface"];};
+    const auto lighting=[&](Json& document) -> Json& {return eye(document)["lightingInputs"];};
+    const auto reject=[&](const Json& document,const char* property="",bool binary=false) {
+        std::string failure;
+        try{(void)(binary?loadBinary(document):load(document));}catch(const std::exception& error){failure=error.what();}
+        if(failure.empty()||(*property&&failure.find(property)==std::string::npos))
+            throw std::runtime_error(std::string("Eye invalid input requires rejection for ")+property
+                +"; actual diagnostic: "+failure);
+    };
+
+    // This first production load supplies a real semantic red before implementation.
+    const auto asset=load(source);
+    const auto& actual=asset.materials.at(0);
+    const auto sidecar=directory/"eye-base.png.azmeta";
+    std::ofstream(sidecar)<<Json{{"settings",{{"texture",{{"colorSpace","linear"}}}}}}.dump();
+    reject(source,"eyeSurface");
+    std::filesystem::remove(sidecar);
+    (void)load(source);
+    require(actual.materialClass==AssetMaterialClass::Eye&&(actual.materialFeatures&eyeBit)!=0,
+        "Explicit radial eye feature and class must survive production loading");
+    require(actual.alphaMode==AssetAlphaMode::Opaque&&actual.materialProfileVersion==2,
+        "Eye surfaces require opaque parent material schema 2");
+    require(actual.baseColorWidth==1&&actual.baseColorHeight==1&&actual.baseColorPixels==basePixels,
+        "Eye base must preserve raw sRGB RGB and independent linear alpha bytes");
+    require(actual.styleMaskWidth==2&&actual.styleMaskHeight==1&&actual.styleMaskPixels==rampPixels,
+        "Eye ramp must preserve both linear RGBA samples and horizontal dimensions");
+    require(actual.matcapWidth==2&&actual.matcapHeight==2&&actual.matcapPixels==matcapPixels,
+        "Eye Matcap must preserve all sRGB RGB and linear alpha source bytes");
+    require(actual.textureSettings[0].colorSpace=="srgb"&&actual.textureSettings[4].colorSpace=="linear"
+        &&actual.textureSettings[5].colorSpace=="srgb",
+        "Eye slots 0/4/5 require their independent color-space semantics");
+    for(const unsigned slot:{4U,5U}) {
+        const auto& settings=actual.textureSettings[slot];
+        require(settings.wrapU=="clamp"&&settings.wrapV=="clamp"&&settings.mipPolicy=="none"
+            &&settings.filter=="linear"&&settings.anisotropy==1,
+            "Eye ramp and Matcap require clamp linear sampling without mips or anisotropy");
+    }
+    const auto& imported=actual.eyeSurface;
+    require(imported.present&&std::abs(imported.parallaxScale-.15F)<1e-6F
+        &&imported.matcapNormalScale==1&&imported.alphaPremultiply==.5F
+        &&std::abs(imported.matcapShadowFloor-.3F)<1e-6F,"Typed eye scalar fields retain their explicit values");
+    const auto compareVector=[&](const auto& values,const Json& expected,const char* reason) {
+        require(values.size()==expected.size(),reason);
+        for(std::size_t index=0;index<values.size();++index)
+            require(std::abs(values[index]-expected[index].template get<float>())<1e-5F,reason);
+    };
+    for(const auto& field:std::array<std::pair<const char*,std::array<float,3>>,3>{{
+        {"highlightColor",imported.highlightColor},{"scatteringColor",imported.scatteringColor},
+        {"directWeights",imported.directWeights}}}) {
+        const auto& expected=std::string(field.first)=="directWeights"?lighting(source)[field.first]:eye(source)[field.first];
+        compareVector(field.second,expected,"Typed eye HDR colors and direct weights must remain unclamped");
+    }
+    compareVector(imported.matcapColor,eye(source)["matcapColor"],"Typed eye Matcap RGBA must remain unclamped");
+    compareVector(imported.uvScaleOffset,eye(source)["uvScaleOffset"],"Typed eye UV transform preserves signed components");
+    auto outline=source;profile(outline)["features"].push_back("silhouette-outline");
+    require((load(outline).materials.at(0).materialFeatures&MaterialFeatureSilhouetteOutline)!=0,
+        "Eye surfaces permit an independent silhouette outline");
+    auto omittedAlpha=source;omittedAlpha["materials"][0].erase("alphaMode");(void)load(omittedAlpha);
+    (void)loadBinary(source);(void)loadBinary(omittedAlpha);
+    auto alternate=fixture;
+    for(const char* section:{"images","textures","samplers"})alternate[section]=source[section];
+    alternate["materials"][0]=source["materials"][0];
+    require((load(alternate).materials.at(0).materialFeatures&eyeBit)!=0,
+        "Eye material loading must also work with an independent mesh fixture");
+    auto legacy=source;profile(legacy).erase("eyeSurface");profile(legacy)["features"]=Json::array();
+    require((load(legacy).materials.at(0).materialFeatures&eyeBit)==0,
+        "Legacy eye materials retain their explicit feature selection");
+
+    for(const auto& value:Json::array({nullptr,true,"2",0,1,1.9,2.1,3,1e300})) {
+        auto invalid=source;profile(invalid)["schemaVersion"]=value;reject(invalid,"schemaVersion");
+    }
+    for(const auto& value:Json::array({nullptr,true,"1",0,1.5,2,1e300})) {
+        auto invalid=source;eye(invalid)["schemaVersion"]=value;reject(invalid,"eyeSurface");
+    }
+    for(const char* field:{"schemaVersion","diffuseRampTexture","matcapTexture","parallaxScale",
+        "matcapNormalScale","alphaPremultiply","highlightColor","scatteringColor","matcapColor",
+        "uvScaleOffset","lightingInputs"}) {
+        auto invalid=source;eye(invalid).erase(field);reject(invalid,"eyeSurface");
+        invalid=source;eye(invalid)[field]=nullptr;reject(invalid,"eyeSurface");
+    }
+    for(const auto& value:Json::array({nullptr,true,0,"surface",Json::array()})) {
+        auto invalid=source;profile(invalid)["eyeSurface"]=value;reject(invalid,"eyeSurface");
+    }
+    auto invalid=source;profile(invalid).erase("eyeSurface");reject(invalid,"eyeSurface");
+    invalid=source;profile(invalid).erase("schemaVersion");reject(invalid,"schemaVersion");
+    invalid=source;profile(invalid).erase("class");reject(invalid);
+    invalid=source;profile(invalid)["class"]=nullptr;reject(invalid);
+    invalid=source;profile(invalid).erase("features");reject(invalid);
+    for(const auto& value:Json::array({nullptr,true,0,"eye-radial-surface",Json::array()})) {
+        invalid=source;profile(invalid)["features"]=value;reject(invalid);
+    }
+    invalid=source;profile(invalid)["features"].push_back("eye-radial-surface");reject(invalid,"features");
+    invalid=outline;profile(invalid)["features"].push_back("silhouette-outline");reject(invalid,"features");
+    invalid=source;profile(invalid)["features"].push_back(nullptr);reject(invalid,"features");
+    for(const char* category:{"generic","skin","face","hair","fabric","metal","overlay","emissive","showcase"}) {
+        invalid=source;profile(invalid)["class"]=category;reject(invalid);
+    }
+    for(const auto& alpha:Json::array({"MASK","BLEND",nullptr,true,0,"opaque",Json::object(),Json::array()})) {
+        invalid=source;invalid["materials"][0]["alphaMode"]=alpha;
+        reject(invalid,"eyeSurface");reject(invalid,"eyeSurface",true);
+    }
+    for(const auto& value:Json::array({nullptr,1})) {
+        invalid=source;eye(invalid)["unknown"]=value;reject(invalid,"eyeSurface");
+        invalid=source;lighting(invalid)["unknown"]=value;reject(invalid,"lightingInputs");
+    }
+    for(const char* field:{"source","illuminationModel","matcapShadowFloor","directWeights"}) {
+        invalid=source;lighting(invalid).erase(field);reject(invalid,"lightingInputs");
+        invalid=source;lighting(invalid)[field]=nullptr;reject(invalid,"lightingInputs");
+    }
+    for(const auto& value:Json::array({"native-capture","unknown",true,1,Json::array()})) {
+        invalid=source;lighting(invalid)["source"]=value;reject(invalid,"lightingInputs");
+    }
+    for(const auto& value:Json::array({"native-npr","unknown",true,1,Json::array()})) {
+        invalid=source;lighting(invalid)["illuminationModel"]=value;reject(invalid,"lightingInputs");
+    }
+    for(const char* field:{"parallaxScale","matcapNormalScale","alphaPremultiply"}) {
+        for(const auto& value:Json::array({true,"0",-.01,1e300,Json::array()})) {
+            invalid=source;eye(invalid)[field]=value;reject(invalid,field);
+        }
+        invalid=source;eye(invalid)[field]=std::string(field)=="matcapNormalScale"?8.01:1.01;reject(invalid,field);
+    }
+    for(const auto& value:Json::array({true,"0",-.01,1.01,1e300,Json::array()})) {
+        invalid=source;lighting(invalid)["matcapShadowFloor"]=value;reject(invalid,"matcapShadowFloor");
+    }
+    for(const char* field:{"highlightColor","scatteringColor","matcapColor","uvScaleOffset"}) {
+        const unsigned count=(std::string(field)=="matcapColor"||std::string(field)=="uvScaleOffset")?4:3;
+        for(const auto& value:Json::array({true,1,"color",Json::array(),Json::array({0,0})})) {
+            invalid=source;eye(invalid)[field]=value;reject(invalid,field);
+        }
+        invalid=source;eye(invalid)[field]=Json::array();
+        for(unsigned index=0;index<=count;++index)eye(invalid)[field].push_back(0);
+        reject(invalid,field);
+        for(const auto& value:Json::array({nullptr,true,"0",1e300})) {
+            invalid=source;eye(invalid)[field][0]=value;reject(invalid,field);
+        }
+        if(std::string(field)!="uvScaleOffset")for(const double value:{-.01,64.01}) {
+            invalid=source;eye(invalid)[field][0]=value;reject(invalid,field);
+        }
+    }
+    for(const auto& value:Json::array({true,1,"weights",Json::array(),Json::array({0,0}),Json::array({0,0,0,0})})) {
+        invalid=source;lighting(invalid)["directWeights"]=value;reject(invalid,"directWeights");
+    }
+    for(const auto& value:Json::array({nullptr,true,"0",-.01,64.01,1e300})) {
+        invalid=source;lighting(invalid)["directWeights"][0]=value;reject(invalid,"directWeights");
+    }
+    for(const char* field:{"diffuseRampTexture","matcapTexture"}) {
+        for(const auto& value:Json::array({true,"1",-1,.5,99999,1e300})) {
+            invalid=source;eye(invalid)[field]=value;reject(invalid,field);
+        }
+        const int index=std::string(field)=="diffuseRampTexture"?1:2;
+        for(const int image:{-1,99999}) {
+            invalid=source;invalid["textures"][index]["source"]=image;reject(invalid);
+        }
+        invalid=source;invalid["textures"][index].erase("source");reject(invalid);
+    }
+    for(const int image:{0,2}) {
+        invalid=source;invalid["textures"][1]["source"]=image;reject(invalid);
+    }
+    for(const char* feature:{"stylized-shadow","hair-anisotropy","face-sdf-eligible","emissive-mask",
+        "overlay","neutral-fallback","brow-overlay","surface-ao","scene-tint","hair-ramp",
+        "scene-refraction","dual-face-sdf","shadow-color-lut","diffuse-ramp","multiply-composite",
+        "hair-projected-ramp","unlit-surface"}) {
+        invalid=source;profile(invalid)["features"].push_back(feature);reject(invalid);
+    }
+    for(const char* field:{"lamShadowColor","matcapColor","hair","faceSdf","diffuseRamp","refraction","multiplyComposite"}) {
+        // Null fields must retain their authored ownership even if TinyGLTF omits them.
+        invalid=source;profile(invalid)[field]=nullptr;reject(invalid);
+        invalid=source;profile(invalid)[field]=Json::object();reject(invalid);
+    }
+    invalid=source;invalid["materials"][0]["extensions"]["KHR_materials_transmission"]={{"transmissionFactor",.1}};reject(invalid);
+    invalid=source;invalid["materials"][0]["extensions"]["KHR_materials_volume"]={{"thicknessFactor",.1}};reject(invalid);
+    for(const char* extension:{"KHR_materials_unlit","KHR_materials_ior","KHR_materials_emissive_strength","unknown"}) {
+        invalid=source;invalid["materials"][0]["extensions"][extension]=Json::object();reject(invalid,"eyeSurface");
+    }
+    invalid=source;invalid["textures"][0]["source"]=-1;reject(invalid,"baseColorTexture");
+    invalid=source;invalid["textures"][0]["extensions"]["unknown"]=Json::object();reject(invalid,"baseColorTexture");
+
+    // Inclusive endpoints and finite signed UV transforms are legal host inputs.
+    for(const double endpoint:{0.,1.}) {
+        auto legal=source;eye(legal)["parallaxScale"]=endpoint;eye(legal)["alphaPremultiply"]=endpoint;
+        eye(legal)["matcapNormalScale"]=endpoint*8;lighting(legal)["matcapShadowFloor"]=endpoint;
+        lighting(legal)["directWeights"]={endpoint*64,endpoint*64,endpoint*64};
+        eye(legal)["highlightColor"]={endpoint*64,endpoint*64,endpoint*64};
+        eye(legal)["scatteringColor"]={endpoint*64,endpoint*64,endpoint*64};
+        eye(legal)["matcapColor"]={endpoint*64,endpoint*64,endpoint*64,endpoint*64};
+        eye(legal)["uvScaleOffset"]={-2,0,-3,4};(void)load(legal);
+    }
+}
+
 int main(int argc,char** argv) { try {
     require(argc==2,"Public material fixture path is required");
     nlohmann::json input;std::ifstream(argv[1])>>input;
@@ -372,6 +660,8 @@ int main(int argc,char** argv) { try {
     require(std::abs(m.hairParameters[3]-.07F)<.001F,"Strand shift must be independent from ramp row");
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
+    testEyeRadialSurface(input,directory);
+    testMaterialSurfacePacking();
     testMultiplyComposite(input,directory);
     testUnlitSurface(input,directory);
     material["extras"]["azureRenderMaterial"]["hair"]["rampTexture"]=.5;

@@ -33,6 +33,7 @@ layout(binding = 0) uniform CameraData {
     vec4 skyRight,skyUp,skyForward,skyColor,skyParameters;
     vec4 probeCenter,probeHalfExtents,probeCapture,probeParameters;
     vec4 irradianceOriginSpacing,irradianceDimensionsEnabled,irradianceParameters;
+    vec4 cameraRight,cameraUp;
 } camera;
 layout(binding=23) uniform sampler2D reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
@@ -145,9 +146,21 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-layout(std430,binding=27) readonly buffer ProjectedHairProfiles {
-    ProjectedHairProfile profiles[];
-} projectedHairProfiles;
+struct PackedMaterialSurfaceProfile { vec4 rows[6]; };
+layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
+    PackedMaterialSurfaceProfile profiles[];
+} materialSurfaceProfiles;
+ProjectedHairProfile loadProjectedHairSurfaceProfile(uint index) {
+    PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[index];
+    return ProjectedHairProfile(p.rows[0],p.rows[1],p.rows[2],p.rows[3],p.rows[4],p.rows[5]);
+}
+struct EyeSurfaceProfile {
+    vec4 shape,highlight,scattering,matcap,directWeights,uvScaleOffset;
+};
+EyeSurfaceProfile loadEyeSurfaceProfile(uint index) {
+    PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[index];
+    return EyeSurfaceProfile(p.rows[0],p.rows[1],p.rows[2],p.rows[3],p.rows[4],p.rows[5]);
+}
 
 // Packed normal z is reconstructed before the authored xy scale.
 vec3 projectedHairNormal(vec2 encoded,float scale) {
@@ -160,7 +173,7 @@ vec3 projectedHairNormal(vec2 encoded,float scale) {
 }
 
 CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light) {
-    ProjectedHairProfile p=projectedHairProfiles.profiles[material.materialPadding>>1U];
+    ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
     vec4 parameters=texture(AZ_TEX_FACE_SDF,textureCoordinate);
     vec4 packedNormals=texture(AZ_TEX_HAIR_DATA,textureCoordinate);
     vec3 normal=projectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y);
@@ -364,7 +377,18 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 
 void main() {
     if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
+    bool eyeRadial=material.materialClass==6U&&materialFeatureEnabled(131072U)>.5;
+    EyeSurfaceProfile eyeProfile;
+    CharacterEyeCoordinates eyeCoordinates;
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
+    if(eyeRadial) {
+        eyeProfile=loadEyeSurfaceProfile(material.materialPadding>>1U);
+        vec2 originalUv=textureCoordinate*eyeProfile.uvScaleOffset.xy+eyeProfile.uvScaleOffset.zw;
+        mat3 worldToView=transpose(mat3(camera.cameraRight.xyz,camera.cameraUp.xyz,-camera.cameraForward.xyz));
+        eyeCoordinates=characterEyeCoordinates(originalUv,camera.cameraPosition.xyz-worldPosition,
+            worldNormal,worldTangent,worldToView,eyeProfile.shape.x,eyeProfile.shape.y);
+        baseColor=texture(AZ_TEX_BASE_COLOR,eyeCoordinates.baseUv);
+    }
     bool multiplyComposite = materialFeatureEnabled(32768U) > 0.5;
     bool overlayMaterial = (material.materialClass == 7U
         && materialFeatureEnabled(16U) > 0.5) || multiplyComposite;
@@ -426,9 +450,9 @@ void main() {
     float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
-        &&projectedHairProfiles.profiles[material.materialPadding>>1U].secondaryColor.w>.5;
+        &&loadProjectedHairSurfaceProfile(material.materialPadding>>1U).secondaryColor.w>.5;
     float projectedDiffuseScale=projectedHair
-        ?projectedHairProfiles.profiles[material.materialPadding>>1U].objectX.w:1.0;
+        ?loadProjectedHairSurfaceProfile(material.materialPadding>>1U).objectX.w:1.0;
     float hairBasePeak = max(
         max(baseColor.r, baseColor.g),
         max(baseColor.b, 0.001));
@@ -440,9 +464,11 @@ void main() {
         hairBaseNormal,
         hairActive * 0.14));
     if(projectedHair) {
-        ProjectedHairProfile p=projectedHairProfiles.profiles[material.materialPadding>>1U];
+        ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
         shadedNormal=projectedHairNormal(hairData.rg,p.edgeNormalDirection.w)*(gl_FrontFacing?1.0:-1.0);
     }
+
+    if(eyeRadial)shadedNormal=eyeCoordinates.lightingNormal;
 
     vec4 packedMaterial = texture(AZ_TEX_METALLIC_ROUGHNESS, textureCoordinate);
     vec4 specularEmissive = texture(AZ_TEX_SPECULAR_EMISSIVE,
@@ -677,6 +703,19 @@ void main() {
     vec3 clusteredDiffuse = vec3(0.0);
     vec3 clusteredSpecular = vec3(0.0);
     vec3 sceneHairPrimary=vec3(0),sceneHairSecondary=vec3(0),sceneRim=vec3(0);
+    vec3 eyeHostDiffuse=vec3(0),eyeHostMatcap=vec3(0);
+    vec4 eyeMatcap=vec4(0);
+    float eyeViewRampAlpha=0;
+    vec3 eyeDiffuseMultiplier=vec3(0);
+    float eyeAlphaMultiplier=1;
+    if(eyeRadial) {
+        eyeMatcap=textureLod(AZ_TEX_MATCAP,eyeCoordinates.matcapUv,0.0);
+        float viewCoordinate=dot(shadedNormal,-camera.cameraForward.xyz)*.5+.5;
+        eyeViewRampAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(viewCoordinate,.5),0.0).a;
+        eyeDiffuseMultiplier=characterEyeDiffuseMultiplier(baseColor,eyeCoordinates.whiteMask,
+            eyeProfile.highlight.rgb,eyeProfile.scattering.rgb);
+        eyeAlphaMultiplier=characterEyeAlphaMultiplier(baseColor.a,eyeProfile.shape.z);
+    }
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
     for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
         uint lightIndex = clusterIndexData.indices[lightRange.x + lightOffset];
@@ -707,6 +746,15 @@ void main() {
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
+        if(eyeRadial&&camera.clusterLighting.x>.5) {
+            // This host adapter is independent from the unbound native NPR globals.
+            vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,pointDirection)*.5+.5,.5),0.0);
+            vec3 illumination=radiance*pointDiffuse;
+            eyeHostDiffuse+=baseColor.rgb*eyeDiffuseMultiplier*ramp.rgb*illumination*eyeAlphaMultiplier;
+            float selection=light.coneType.y>1.5&&light.directionOuter.w>.5?1.0-shadowVisibility:0.0;
+            eyeHostMatcap+=characterEyeMatcap(eyeMatcap,eyeProfile.matcap,eyeViewRampAlpha,ramp.a,
+                selection,eyeProfile.shape.w,illumination);
+        }
         vec3 localDiffuseResponse=vec3(pointDiffuse);
         if(dualFaceSdf) {
             vec4 localDistanceSample;
@@ -1112,6 +1160,22 @@ void main() {
         directSpecular=vec3(0);ambientSpecular=vec3(0);
         kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=vec3(0);
         beautyColor=baseColor.rgb+emissive;
+    }
+    if(eyeRadial) {
+        if(camera.clusterLighting.x<.5) {
+            vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,lightDirection)*.5+.5,.5),0.0);
+            vec3 illumination=keyColor*camera.showcaseParameters.y*keyVisibility*max(dot(shadedNormal,lightDirection),0.0);
+            eyeHostDiffuse=baseColor.rgb*eyeDiffuseMultiplier*ramp.rgb*illumination*eyeAlphaMultiplier;
+            eyeHostMatcap=characterEyeMatcap(eyeMatcap,eyeProfile.matcap,eyeViewRampAlpha,ramp.a,
+                1.0-shadowVisibility,eyeProfile.shape.w,illumination);
+        }
+        directDiffuse=eyeHostDiffuse;directSpecular=eyeHostMatcap;
+        ambientDiffuse=vec3(0);ambientSpecular=vec3(0);
+        kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=vec3(0);
+        emissive=characterEyeDirect(baseColor,eyeCoordinates.whiteMask,eyeProfile.highlight.rgb,
+            eyeProfile.scattering.rgb,eyeProfile.directWeights.rgb,eyeProfile.shape.z);
+        beautyColor=directDiffuse+directSpecular+emissive;
+        outputAlpha=1.0;
     }
     if(multiplyComposite)beautyColor=baseColor.rgb;
     vec3 qaColor = beautyColor;

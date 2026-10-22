@@ -90,3 +90,61 @@ CharacterProjectedHairEnergy characterProjectedHairEnergy(
         * (1.0 - max(max(q.r, q.g), q.b));
     return CharacterProjectedHairEnergy(q, primary, secondary);
 }
+
+// Material-only terms. The caller supplies an explicit host light adapter.
+// The source NPR globals and their runtime bindings are separate evidence.
+struct CharacterEyeCoordinates {
+    vec2 baseUv;
+    vec3 lightingNormal;
+    vec2 matcapUv;
+    float whiteMask;
+};
+
+vec3 characterEyeSafeNormalize(vec3 value) {
+    float length2=dot(value,value);
+    return length2>1e-24?value*inversesqrt(length2):vec3(0,0,1);
+}
+
+CharacterEyeCoordinates characterEyeCoordinates(vec2 originalUv,vec3 view,
+    vec3 normal,vec4 tangent,mat3 worldToView,float parallaxScale,float normalScale) {
+    vec2 fracUv=fract(originalUv);
+    float radius2=dot(fracUv-vec2(.5),fracUv-vec2(.5));
+    float white=step(.25,radius2);
+    float weight=clamp((.25-radius2)*5.0,0.0,1.0);
+    weight=weight*weight*(3.0-2.0*weight);
+    vec3 crossed=cross(normal,tangent.xyz);
+    vec3 parallaxBitangent=crossed*(tangent.w>0.0?1.0:-1.0);
+    float normalLength=max(length(normal),1e-12);
+    vec3 projectedView=characterEyeSafeNormalize(vec3(dot(tangent.xyz,view),
+        dot(parallaxBitangent,view),dot(normal,view))/normalLength);
+    vec2 shifted=originalUv-projectedView.xy*vec2(1.0,.25)*parallaxScale*weight;
+    vec2 radial=fracUv*2.0-1.0;
+    vec3 matcapLocal=vec3(-radial*normalScale,sqrt(max(1.0-dot(radial,radial),0.0)));
+    vec3 lightingLocal=mix(matcapLocal*vec3(-.125,-.125,1),vec3(0,0,1),white);
+    vec3 bitangent=crossed*tangent.w;
+    mat3 sourceFrame=mat3(tangent.xyz,bitangent,normal);
+    vec3 lightNormal=characterEyeSafeNormalize(sourceFrame*lightingLocal);
+    vec3 matcapNormal=characterEyeSafeNormalize(worldToView*sourceFrame*matcapLocal);
+    return CharacterEyeCoordinates(shifted,lightNormal,matcapNormal.xy*.5+.5,white);
+}
+
+vec3 characterEyeDiffuseMultiplier(vec4 base,float white,vec3 highlight,vec3 scattering) {
+    return mix(vec3(1),highlight,white)*mix(vec3(1),scattering,base.a);
+}
+
+float characterEyeAlphaMultiplier(float alpha,float premultiply) {
+    return mix(1.0,alpha,premultiply);
+}
+
+vec3 characterEyeMatcap(vec4 sampleValue,vec4 color,float viewRampAlpha,
+    float lightRampAlpha,float shadowSelect,float shadowFloor,vec3 illumination) {
+    float ramp=mix(viewRampAlpha,min(lightRampAlpha,1.0),shadowSelect);
+    float intensity=(.5*ramp+.5)*(ramp*(1.0-shadowFloor)+shadowFloor);
+    return (sampleValue.rgb*color.a+sampleValue.a*color.rgb)*intensity*illumination;
+}
+
+vec3 characterEyeDirect(vec4 base,float white,vec3 highlight,vec3 scattering,
+    vec3 weights,float premultiply) {
+    return (base.rgb*weights.x+white*highlight*weights.y+base.a*scattering*weights.z)
+        *characterEyeAlphaMultiplier(base.a,premultiply);
+}

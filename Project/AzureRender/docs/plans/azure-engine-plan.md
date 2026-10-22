@@ -1,5 +1,8 @@
 # 开发总计划
 
+眼睛径向材质已通过双配置数值及生命周期检查。
+原生绑定待项见[眼睛验收](../acceptance/nr/eye-radial-surface.md)。
+
 角色局部探针的镜面权重与诊断开关已通过检查。
 双配置数值及实际脸部见[反射控制](../acceptance/nr/character-probe-controls.md)。
 
