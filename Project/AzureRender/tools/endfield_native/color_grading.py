@@ -1,4 +1,4 @@
-"""Source-bound LutBuilder2D ACES_modified candidates for the public .azlut contract.
+"""Source-bound grading candidates and captured strips for the public .azlut contract.
 
 Uniforms are shader-ready values. Authoring-to-uniform conversion and the active
 runtime values are deliberately recorded as unknown in every candidate receipt.
@@ -195,27 +195,65 @@ def build_candidate_lattice(dimension=32,parameters=None,curves=None):
     return rgba,receipt
 
 
-def write_azlut(path,pixels,input_fingerprint):
+def decode_captured_strip(payload,metadata):
+    """Decode an explicit mip-zero RGBA16F strip with replay provenance.
+
+    The caller verifies the grading binding and LogC input domain separately.
+    Captured texels remain exact when expanded from half to float storage.
+    """
+    n=metadata.get('height')
+    if (metadata.get('complete') is not True or metadata.get('format')!='R16G16B16A16_FLOAT'
+        or type(n) is not int or not 2<=n<=64 or metadata.get('width')!=n*n
+        or metadata.get('depth')!=1 or any(type(metadata.get(key)) is not int for key in ('width','depth','mip','slice','sample','bytes'))
+        or any(metadata.get(key)!=0 for key in ('mip','slice','sample'))):
+        raise ValueError('A complete mip-zero captured RGBA16F LUT strip is required')
+    if (len(payload)!=n*n*n*8 or metadata.get('bytes')!=len(payload)
+        or hashlib.sha256(payload).hexdigest()!=metadata.get('sha256')):
+        raise ValueError('Captured LUT payload length or digest mismatch')
+    pixels=np.frombuffer(payload,dtype='<f2').astype('<f4').reshape(n,n*n,4)
+    if not np.isfinite(pixels).all() or ((pixels<0)|(pixels>1)).any():
+        raise ValueError('Captured LUT pixels exceed the public linear output domain')
+    return pixels
+
+
+def write_azlut(path,pixels,input_fingerprint,*,evidence=1):
     pixels=np.asarray(pixels,dtype="<f4")
     if pixels.ndim!=3 or pixels.shape[2]!=4 or not 2<=pixels.shape[0]<=64 or pixels.shape[1]!=pixels.shape[0]**2:
         raise ValueError("LUT pixels require a complete N by N*N RGBA strip")
-    if not np.isfinite(pixels).all() or ((pixels<0)|(pixels>1)).any() or not input_fingerprint:
+    if not np.isfinite(pixels).all() or ((pixels<0)|(pixels>1)).any() or not input_fingerprint or type(evidence) is not int or evidence not in (1,2):
         raise ValueError("LUT pixels and provenance must satisfy the public resource contract")
     header={"schemaVersion":1,"dimension":pixels.shape[0],"width":pixels.shape[1],"height":pixels.shape[0],
         "inputDomain":"logc3-full-log","outputDomain":"linear","layout":"strip-rgb","precision":"float32-le","channels":4,
         "source":{"generator":"azure.endfield-native-color-grading","generatorVersion":GENERATOR_VERSION,
-            "inputFingerprint":input_fingerprint,"evidence":1}}
+            "inputFingerprint":input_fingerprint,"evidence":evidence}}
     encoded=json.dumps(header,separators=(",",":"),sort_keys=True).encode()
     Path(path).write_bytes(b"AZLUT001"+struct.pack("<I",len(encoded))+encoded+pixels.tobytes())
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source-shader",type=Path,required=True)
+    source_group=parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument("--source-shader",type=Path)
+    source_group.add_argument("--captured-strip",type=Path)
+    parser.add_argument("--capture-receipt",type=Path)
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--dimension",type=int,default=32)
     parser.add_argument("--parameters",type=Path,help="JSON with complete shader-space parameters and optional curves")
     args=parser.parse_args()
+    if args.captured_strip:
+        if not args.capture_receipt or args.parameters:parser.error('Captured strips require --capture-receipt and explicit source texels')
+        exported=json.loads(args.capture_receipt.read_text(encoding='utf-8'))
+        if exported.get('ok') is not True:raise ValueError('Successful replay export receipt required')
+        metadata=exported['data'];pixels=decode_captured_strip(args.captured_strip.read_bytes(),metadata)
+        args.output.parent.mkdir(parents=True,exist_ok=True)
+        write_azlut(args.output,pixels,metadata['sha256'],evidence=2)
+        receipt={'schemaVersion':1,'evidenceStatus':'runtime-captured','sourceExport':metadata,
+            'sourceReceiptSha256':hashlib.sha256(args.capture_receipt.read_bytes()).hexdigest(),
+            'inputDomain':'logc3-full-log','outputDomain':'linear','output':str(args.output.resolve()),
+            'outputSha256':hashlib.sha256(args.output.read_bytes()).hexdigest(),
+            'scope':'Exact captured LUT texels; exposure, bloom, vignette and sharpening are separate consumers'}
+        args.output.with_suffix('.receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        print(json.dumps({'output':str(args.output),'evidenceStatus':receipt['evidenceStatus'],'sha256':receipt['outputSha256']}));return
     source=args.source_shader.read_bytes()
     for token in (b"TONEMAPPING_ACES_MODIFIED",b"2.785084962844848",b"0.887121975421905",b"1.705051541328430"):
         if token not in source:

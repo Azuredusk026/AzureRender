@@ -60,6 +60,19 @@ class NativeColorGradingTests(unittest.TestCase):
             recovered=np.frombuffer(raw[12+length:],dtype="<f4").reshape(pixels.shape)
             np.testing.assert_array_equal(recovered,pixels)
 
+    def test_captured_half_float_strip_and_provenance(self):
+        import hashlib
+        m=self.module();pixels=np.arange(32,dtype='<f2').reshape(2,4,4)/32;payload=pixels.astype('<f2').tobytes()
+        metadata={'complete':True,'format':'R16G16B16A16_FLOAT','width':4,'height':2,'depth':1,
+            'mip':0,'slice':0,'sample':0,'bytes':len(payload),'sha256':hashlib.sha256(payload).hexdigest(),'eid':17,'rid':'ResourceId::7'}
+        decoded=m.decode_captured_strip(payload,metadata);np.testing.assert_array_equal(decoded,pixels.astype('<f4'))
+        with tempfile.TemporaryDirectory() as root:
+            path=Path(root)/'captured.azlut';m.write_azlut(path,decoded,metadata['sha256'],evidence=2)
+            raw=path.read_bytes();length=struct.unpack('<I',raw[8:12])[0]
+            self.assertEqual(json.loads(raw[12:12+length])['source']['evidence'],2)
+        for key,value in [('complete',False),('width',5),('depth',2),('format','R8G8B8A8_UNORM'),('sha256','wrong'),('bytes',0),('mip',1)]:
+            with self.assertRaises(ValueError):m.decode_captured_strip(payload,dict(metadata,**{key:value}))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "e82cadf",
+  "run": "build/runs/20261023-033116-postvs-linear-verification-591bef",
+  "geometry": [
+    {
+      "event": 804,
+      "outputVertices": 1792,
+      "candidateVertices": 1792,
+      "indices": 8718,
+      "uvMaximumError": 2.9802322387695312e-08,
+      "positionMaximumError": 2.448619406352563e-05,
+      "positionRmsError": 4.487125170067008e-06,
+      "normalMaximumError": 0.002283092588186264,
+      "sourceBounds": [
+        [
+          -0.07583507895469666,
+          1.4888817071914673,
+          -0.004006862640380859
+        ],
+        [
+          0.09073691070079803,
+          1.6829063892364502,
+          0.11577939987182617
+        ]
+      ]
+    },
+    {
+      "event": 950,
+      "outputVertices": 11564,
+      "candidateVertices": 11564,
+      "indices": 43044,
+      "uvMaximumError": 2.9802322387695312e-08,
+      "positionMaximumError": 2.6232022865606048e-05,
+      "positionRmsError": 3.820492596453059e-06,
+      "normalMaximumError": 0.001988915726542473,
+      "sourceBounds": [
+        [
+          -0.14387553930282593,
+          1.2089804410934448,
+          -0.1434481143951416
+        ],
+        [
+          0.1580737978219986,
+          1.7236125469207764,
+          0.13949298858642578
+        ]
+      ]
+    },
+    {
+      "event": 825,
+      "outputVertices": 578,
+      "candidateVertices": 578,
+      "indices": 1878,
+      "uvMaximumError": 2.9802322387695312e-08,
+      "positionMaximumError": 1.1926748300777466e-07,
+      "positionRmsError": 3.911476166553912e-08,
+      "normalMaximumError": 1.1920928955078125e-07,
+      "sourceBounds": [
+        [
+          -0.06458288431167603,
+          1.553749442100525,
+          0.07587862014770508
+        ],
+        [
+          0.0688367709517479,
+          1.5918285846710205,
+          0.10554242134094238
+        ]
+      ]
+    },
+    {
+      "event": 889,
+      "outputVertices": 32021,
+      "candidateVertices": 32031,
+      "indices": 102882
+    },
+    {
+      "event": 928,
+      "outputVertices": 17538,
+      "candidateVertices": 17541,
+      "indices": 61935
+    }
+  ],
+  "captures": {
+    "schemaVersion": 1,
+    "captures": [
+      {
+        "name": "native-grade-release",
+        "playerSha256": "d17ef543a56b9cd78d56424e7ddb03aa9812a0af2098cbeee34bcfaccd6fff7a",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-033116-postvs-linear-verification-591bef\\native-grade-release\\frames\\frame_000000.png",
+        "imageSha256": "6dfa18903faa23b11063020bb3d1f8666282a87fb11be1c62a2f488ac1fd8e7a",
+        "validationEnabled": false
+      },
+      {
+        "name": "native-grade-no-npr-release",
+        "playerSha256": "d17ef543a56b9cd78d56424e7ddb03aa9812a0af2098cbeee34bcfaccd6fff7a",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-033116-postvs-linear-verification-591bef\\native-grade-no-npr-release\\frames\\frame_000000.png",
+        "imageSha256": "33471d3ec977534c5d84960f077bdf8f4179f688b599ca2a1b64807f50d5fa77",
+        "validationEnabled": false
+      },
+      {
+        "name": "linear-transfer-release",
+        "playerSha256": "d17ef543a56b9cd78d56424e7ddb03aa9812a0af2098cbeee34bcfaccd6fff7a",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-033116-postvs-linear-verification-591bef\\linear-transfer-release\\frames\\frame_000000.png",
+        "imageSha256": "63f255efbbe2f05d68f6fce385ff235be4f98ff0486e1b46ee406b32e4f57e7b",
+        "validationEnabled": false
+      },
+      {
+        "name": "native-grade-debug",
+        "playerSha256": "3dd14cc8e7bae072635afa92826ddf1f7310bdef1f9d2bcaadddd4acdd3ddb84",
+        "image": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-033116-postvs-linear-verification-591bef\\native-grade-debug\\frames\\frame_000000.png",
+        "imageSha256": "6dfa18903faa23b11063020bb3d1f8666282a87fb11be1c62a2f488ac1fd8e7a",
+        "validationEnabled": true
+      }
+    ],
+    "status": "passed"
+  },
+  "sourceTextures": {
+    "e950-linear-target": {
+      "eid": 950,
+      "rid": "ResourceId::141976",
+      "format": "R11G11B10_FLOAT",
+      "width": 2560,
+      "height": 1440,
+      "bytes": 14745600,
+      "sha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e"
+    },
+    "pre-overlays-receipt": {
+      "eid": 1193,
+      "rid": "ResourceId::141976",
+      "format": "R11G11B10_FLOAT",
+      "width": 2560,
+      "height": 1440,
+      "bytes": 14745600,
+      "sha256": "53ec32668a658c60a775939a18a2ac8b1a8f9fc16af0ec87536f3bb549ce4350"
+    },
+    "pre-transparent-receipt": {
+      "eid": 1528,
+      "rid": "ResourceId::160216",
+      "format": "R11G11B10_FLOAT",
+      "width": 2560,
+      "height": 1440,
+      "bytes": 14745600,
+      "sha256": "b08f8803a2ecc8c27aa00b63c78244415cca2aefef7a34793abc65a3743433ec"
+    },
+    "grade-input-receipt": {
+      "eid": 1777,
+      "rid": "ResourceId::141843",
+      "format": "R16G16B16A16_FLOAT",
+      "width": 2560,
+      "height": 1440,
+      "bytes": 29491200,
+      "sha256": "ac841a76cdb6a81a1005d07e81354639e46ea043351694f8b2e7949a4ea9aa85"
+    },
+    "grade-lut-receipt": {
+      "eid": 1777,
+      "rid": "ResourceId::15724",
+      "format": "R16G16B16A16_FLOAT",
+      "width": 1024,
+      "height": 32,
+      "bytes": 262144,
+      "sha256": "764fdf43ceedf714b119d454b4674104d6e05a23609c12c567a2edc4ad2b07b0"
+    },
+    "bloom-receipt": {
+      "eid": 1777,
+      "rid": "ResourceId::141910",
+      "format": "R11G11B10_FLOAT",
+      "width": 1280,
+      "height": 720,
+      "bytes": 3686400,
+      "sha256": "8dc3ff815809fd1ab9a2e9fc41be94cd014d95b16ebd3defea505cf04dc92e47"
+    },
+    "grade-output-receipt": {
+      "eid": 1777,
+      "rid": "ResourceId::15929",
+      "format": "R8G8B8A8_UNORM",
+      "width": 2560,
+      "height": 1440,
+      "bytes": 14745600,
+      "sha256": "8d4821d9a644c9a454e5380ed2ce577ea251d2eb73b1a99750824b0f953b9394"
+    }
+  },
+  "postVsExports": [
+    {
+      "event": 804,
+      "manifestSha256": "64736a9c79ae99a1cfd3ac1cbc1e77ab7848e240a938a665b7f03c8a5e64d7fc",
+      "stride": 116,
+      "indices": 8718,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 207872,
+          "sha256": "1e248bf04bdabf5247c51529659c4daf4321124f47fa52129a37f0f2d5f53310"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 17436,
+          "sha256": "9efd0722771e8c3cf544bc276cabd27842b8531af6cf19b6cea5249373db973c"
+        }
+      ]
+    },
+    {
+      "event": 950,
+      "manifestSha256": "4a100aa3e59b16b58c16ad31a193f06364fa3e2a477d12e054ea9f8bab91ee24",
+      "stride": 132,
+      "indices": 43044,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 1526448,
+          "sha256": "49df748f07528ec2b1ee5a558adaa2d7c5e51f37ce38372f97d2145675afbbeb"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 86088,
+          "sha256": "2ab42c277510cad0ff47249acdc60d164c254f3264142ace510008dea8e9a14f"
+        }
+      ]
+    },
+    {
+      "event": 825,
+      "manifestSha256": "94e35727a3090d538d13ab0326084a57daf251f1089cb5f271ac8bbfb4fa4527",
+      "stride": 116,
+      "indices": 1878,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 67048,
+          "sha256": "42712935415ea8b3a91da9a5edba35d13c30d755f277346b2d8d3cb371ed90f8"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 3756,
+          "sha256": "766f1f03fb960dfc907ccf30c8cc0ff9f6a84a226520db8e1a6768a8d0dbc470"
+        }
+      ]
+    },
+    {
+      "event": 889,
+      "manifestSha256": "5100ff73e4344ac8332ecd2e319b08afb245172ce445a0ef21a1c2fa5605fb92",
+      "stride": 116,
+      "indices": 102882,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 3714436,
+          "sha256": "e3c27340935422cc6208766015bf99a51008eada1e9c5b832fa221d0d2297bbc"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 205764,
+          "sha256": "ee9dec6cf9021d71c8c60460c0e95aeccb06fe32a9eb0ae9631b133686c9ebf6"
+        }
+      ]
+    },
+    {
+      "event": 928,
+      "manifestSha256": "2c207a26473e7b23d13a875a3cb947e74f4c8d1f1747a1d2a0c1c64ee12956f6",
+      "stride": 124,
+      "indices": 61935,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 2174712,
+          "sha256": "5a8928334e548ecdb653a7a91bd54be6313fde5b03146176d8cb619bfdefb7db"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 123870,
+          "sha256": "9b4554ebc05ac8c9ee9ae4ef4a5e24e3d7be8b7b5735d464160b71a7c4f0ccea"
+        }
+      ]
+    },
+    {
+      "event": 1358,
+      "manifestSha256": "ab80b72dc91d7b6ea4bafdb1b0c380be06ff70c2f33ec35e08cc20fbbb6536bd",
+      "stride": 40,
+      "indices": 444,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 6240,
+          "sha256": "47aee10a012647b134f43341b5c070e9ba39ae78b4825d79fa4aeee538ec39e9"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 888,
+          "sha256": "da296fc0e5e1c83a3fcef955ca454d27f65da2dab2432805ae063ff8204b19b1"
+        }
+      ]
+    },
+    {
+      "event": 1230,
+      "manifestSha256": "9dab3bd7651a3ab2559f25cfa49cb312a95c6ea0bcde2aa6856966b66da27336",
+      "stride": 40,
+      "indices": 96,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 1440,
+          "sha256": "d84df1ba3439fa0199ddbfd5b80d473c7aeeb4548b5a11afa3bbd935d7166459"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 192,
+          "sha256": "32bf28f1198eb3579e6767d2082d12bd7617890df33fdd9258bb46fd4f55f779"
+        }
+      ]
+    },
+    {
+      "event": 1245,
+      "manifestSha256": "331128d7fe1f714d23d7583cd7be655f9f4c16cd7f99accee63bf881a7dc12eb",
+      "stride": 40,
+      "indices": 96,
+      "buffers": [
+        {
+          "file": "buffer_0.bin",
+          "bytes": 1440,
+          "sha256": "ed59dd8cbb2ce8f577f7b8226b15b77350bd71316b337d9a384d3859ab1e0518"
+        },
+        {
+          "file": "buffer_1.bin",
+          "bytes": 192,
+          "sha256": "32bf28f1198eb3579e6767d2082d12bd7617890df33fdd9258bb46fd4f55f779"
+        }
+      ]
+    }
+  ],
+  "scope": "Captured pose and LUT input evidence; full appearance remains pending",
+  "fixedDebugVsIndexedRelease": {
+    "differentPixels": 0,
+    "maximumByteError": 0
+  },
+  "capturedLut": {
+    "dimension": 32,
+    "exposureMultiplier": 1,
+    "evidence": 2,
+    "azlutSha256": "3b32dcb6d42bcc32e5077fbdb0852cddbc002a14479e5ef632b18d64660b8a24",
+    "halfToFloatTexelsExact": true
+  },
+  "limitations": [
+    "Native full-frame intermediates require an explicit Y flip for upright image comparisons",
+    "Captured LUT is consumed without flipping its strip rows",
+    "Bloom, vignette, sharpening, overlay depth and per-material illumination remain separate",
+    "Clothing index and vertex count differences remain open"
+  ],
+  "checks": {
+    "nativePostVs": 4,
+    "nativeGrading": 4,
+    "publicLutContract": "passed",
+    "debugValidationErrors": 0,
+    "allocationsAfterUnload": 0
+  }
+}

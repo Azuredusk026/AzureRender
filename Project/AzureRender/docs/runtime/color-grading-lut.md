@@ -106,6 +106,22 @@ Player 夹具验证主视口的输出编码与诊断旁路。
 CPU 参数换算与运行时常量作为待验证项记录。
 候选资源不代表当前游戏已激活的调色状态。
 
+实际纹素导入使用同一工具的采集入口。
+输入为原始 RGBA16F 条带及成功的重放收据。
+工具校验尺寸、子资源、字节数和 SHA-256。
+输出证据值为二，半精度纹素精确展开为浮点。
+
+```powershell
+python tools/endfield_native/color_grading.py `
+  --captured-strip <原始条带.bin> `
+  --capture-receipt <纹理导出收据.json> `
+  --output <采集资源.azlut>
+```
+
+实际绑定与输入域须通过来源着色器核对。
+独立曝光、辉光、暗角及锐化分别接入。
+锚帧证据见[捕获顶点与实际调色表](../acceptance/nr/captured-vertex-and-grading.md)。
+
 候选生成命令如下。
 来源参数指向已恢复的原生着色器证据。
 生成结果包含输入指纹和待验证项清单。
