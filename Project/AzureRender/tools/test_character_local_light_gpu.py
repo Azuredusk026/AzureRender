@@ -15,7 +15,7 @@ from test_npr_diffuse_gpu import linear,reference
 
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
-    names=('front','side','back','compressed','uncompressed','two-lights','fixed','disabled-scene-npr','no-receiver','pbr','pbr-control')
+    names=('front','side','back','compressed','uncompressed','two-lights','fixed','disabled-scene-npr','no-receiver','pbr','pbr-control','upper-light','lower-light')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]};frames={}
@@ -33,8 +33,9 @@ def run(player,output,selected=None,expected_validation=None):
             model_path.write_text(json.dumps(model),encoding='utf-8')
             path=folder/'level.azurelevel';level=json.loads(path.read_text());light=level['lights'][0]
             position=[2,0,0] if name=='side' else [0,0,-2] if name=='back' else [0,0,2]
+            if name in ('upper-light','lower-light'):position=[0,2 if name=='upper-light' else -2,.5];light['radius']=1
             level['nodes'][2]['components']['azure.transform']['data']['translation']=position
-            strong=name in ('compressed','uncompressed','two-lights');color=[8,4,2] if strong else [.8,.6,.4];intensity=1 if strong else 3 if name in ('side','back') else .7
+            strong=name in ('compressed','uncompressed','two-lights');color=[8,4,2] if strong else [.8,.6,.4];intensity=1 if strong else 3 if name in ('side','back','upper-light','lower-light') else .7
             light.update(color=color,intensity=intensity)
             compression=0 if name=='uncompressed' else 1
             if name!='pbr-control':light['shape']['characterResponse']={'schemaVersion':1,'diffuseFloor':.25,'compression':compression}
@@ -55,10 +56,11 @@ def run(player,output,selected=None,expected_validation=None):
             validation='Validation layer: enabled' in log
             if expected_validation:assert validation==(expected_validation=='enabled')
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            measured=linear(pixels[64,64]);expected=None;error=None
+            pixel_y=32 if name=='upper-light' else 96 if name=='lower-light' else 64
+            measured=linear(pixels[pixel_y,64]);expected=None;error=None
             if not name.startswith('pbr'):
-                delta=np.asarray(position)-[.03125,-.03125,0];distance=np.linalg.norm(delta);cosine=delta[2]/distance
-                attenuation=(1-distance/10)**2/(1+.12*distance*distance);incident=np.asarray(color)*intensity*attenuation
+                delta=np.asarray(position)-[.03125,4-(pixel_y+.5)/128*8,0];distance=np.linalg.norm(delta);cosine=delta[2]/distance
+                attenuation=(1-distance/light['radius'])**2/(1+.12*distance*distance);incident=np.asarray(color)*intensity*attenuation
                 # Literal source default-mode compression and wrap, independent of GLSL.
                 denominator=max(max(incident)*.75,1);incident*=1-compression+compression/denominator
                 incident*=.25+np.clip(cosine+.5,0,1)*.75
@@ -68,7 +70,7 @@ def run(player,output,selected=None,expected_validation=None):
                 response=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
                 expected=response*incident
                 if name=='no-receiver':expected[:]=0
-                if name in ('side','back'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
+                if name in ('side','back','upper-light','lower-light'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
                 error=float(np.abs(measured-expected).max())
             report['captures'].append({'name':name,'maximumLinearError':error,'measured':measured.tolist(),
                 'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation})

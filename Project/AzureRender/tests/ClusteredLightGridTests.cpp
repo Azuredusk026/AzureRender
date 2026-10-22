@@ -57,6 +57,20 @@ int main() try {
         || ortho.indicesFor(1, 0, 0).size() != 1) {
         throw std::runtime_error("Orthographic near and far lights must occupy identical screen tiles");
     }
+    for(bool orthographic:{false,true})for(unsigned axis=0;axis<2;++axis)for(float sign:{-1.F,1.F}) {
+        azurerender::ClusterGridDesc desc{4,4,1,.1F,10.F,axis==0?-1.F:1.F,axis==1?-1.F:1.F,orthographic};
+        azurerender::ClusteredLightGrid signedProjection(desc);
+        azurerender::RenderLight light;light.viewSpaceBounds=true;light.viewPosition={0,0,1};
+        light.viewPosition[axis]=sign*.6F;light.clusterPosition[axis]=-sign*.6F;light.clusterPosition[2]=1;light.radius=.2F;
+        signedProjection.assign({light});
+        const unsigned edge=sign>0?0:3,adjacent=sign>0?1:2;
+        if(signedProjection.indicesFor(axis==0?edge:2,axis==1?edge:2,0).empty()
+            ||signedProjection.indicesFor(axis==0?adjacent:2,axis==1?adjacent:2,0).empty())
+            throw std::runtime_error("Signed view-space projection must sort bounds and retain every touched tile");
+        light.viewSpaceBounds=false;signedProjection.assign({light});
+        if(signedProjection.indicesFor(axis==0?edge:2,axis==1?edge:2,0).empty())
+            throw std::runtime_error("Projected centre bounds must use absolute projection radii");
+    }
     azurerender::ClusteredLightGrid perspective({4, 4, 4, .1F, 100.F});
     azurerender::RenderLight behind;
     behind.viewSpaceBounds = true;

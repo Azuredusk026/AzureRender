@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 1,
+  "status": "clustered-projection-contract-gpu-and-real-character-verified",
+  "run": "build/runs/20261023-073632-clustered-signed-projection-3dd20e",
+  "tests": {
+    "cpuRelease": 4,
+    "cpuDebug": 4,
+    "mirroredProjectionScenarios": 8
+  },
+  "gpuBatches": [
+    {
+      "configuration": "release",
+      "playerSha256": "5f6de5e6eba2775e8a5b3352470002ff96dac1f6ae374000ec2808fb67baa069",
+      "captures": [
+        {
+          "name": "front",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": false
+        },
+        {
+          "name": "side",
+          "maximumLinearError": 0.0004587888705138085,
+          "measured": [
+            0.04518620438567554,
+            0.026241221894849898,
+            0.012983032342173012
+          ],
+          "expected": [
+            0.04564499325618935,
+            0.02610456260481325,
+            0.01319607057434836
+          ],
+          "imageSha256": "0f647df1b791a5a1a294da3fbf9f99c40031844e4bf6fb6a0a50b7bbddb705f6",
+          "validationEnabled": false
+        },
+        {
+          "name": "back",
+          "maximumLinearError": 0.00028957142788522613,
+          "measured": [
+            0.017641954488384078,
+            0.010329823029626936,
+            0.005181516702338386
+          ],
+          "expected": [
+            0.017931525916269304,
+            0.01025511469031953,
+            0.005184044615118012
+          ],
+          "imageSha256": "c9c8f5e7fafdacb776caf8666047b1bc9b6b5b0222766601f29a961b67448c4a",
+          "validationEnabled": false
+        },
+        {
+          "name": "compressed",
+          "maximumLinearError": 0.000885000853709933,
+          "measured": [
+            0.09305896284668745,
+            0.03560131487502034,
+            0.012983032342173012
+          ],
+          "expected": [
+            0.09217396199297752,
+            0.03514311632346942,
+            0.013323850227666566
+          ],
+          "imageSha256": "0d0e1b5cb961c9307d8496aceebb029f5f095b25fac488a3eb3e3e420564e779",
+          "validationEnabled": false
+        },
+        {
+          "name": "uncompressed",
+          "maximumLinearError": 0.0006894384046529922,
+          "measured": [
+            0.238397573812271,
+            0.09084171118340768,
+            0.03433980680868217
+          ],
+          "expected": [
+            0.239087012216924,
+            0.0911565750250625,
+            0.03456029743412007
+          ],
+          "imageSha256": "3e4593db38ed9d91ed25df19cba906ad24108636698cc74aca2c4b65c551bad5",
+          "validationEnabled": false
+        },
+        {
+          "name": "two-lights",
+          "maximumLinearError": 0.0009804369489416487,
+          "measured": [
+            0.15292615199615017,
+            0.05780543019106723,
+            0.02217388479338738
+          ],
+          "expected": [
+            0.15194571504720852,
+            0.057932260079735044,
+            0.021963924586196584
+          ],
+          "imageSha256": "957e06c4e099df7fe28b87aa623f0bcd20e5476a815f38120b964d0abd413469",
+          "validationEnabled": false
+        },
+        {
+          "name": "fixed",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": false
+        },
+        {
+          "name": "disabled-scene-npr",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": false
+        },
+        {
+          "name": "no-receiver",
+          "maximumLinearError": 0.0,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr",
+          "maximumLinearError": null,
+          "measured": [
+            0.01520851442291271,
+            0.009134058702220787,
+            0.004776953480693729
+          ],
+          "expected": null,
+          "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-control",
+          "maximumLinearError": null,
+          "measured": [
+            0.01520851442291271,
+            0.009134058702220787,
+            0.004776953480693729
+          ],
+          "expected": null,
+          "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+          "validationEnabled": false
+        },
+        {
+          "name": "upper-light",
+          "maximumLinearError": 0.00040146566060265954,
+          "measured": [
+            0.03954623527673284,
+            0.02315336617811041,
+            0.011612245179743885
+          ],
+          "expected": [
+            0.0399477009373355,
+            0.02284625729231821,
+            0.011548970505775257
+          ],
+          "imageSha256": "c28b95e889d91e635657e0738e3c7f22d5930f037c261e91c7ed93cb012415e6",
+          "validationEnabled": false
+        },
+        {
+          "name": "lower-light",
+          "maximumLinearError": 0.00040146566060265954,
+          "measured": [
+            0.03954623527673284,
+            0.02315336617811041,
+            0.011612245179743885
+          ],
+          "expected": [
+            0.0399477009373355,
+            0.02284625729231821,
+            0.011548970505775257
+          ],
+          "imageSha256": "ab47e9195cec36abf1389fb1b2e0216a67f8b4a75a4723789676f0e98bea421e",
+          "validationEnabled": false
+        }
+      ]
+    },
+    {
+      "configuration": "debug",
+      "playerSha256": "641a780a3a01b942e7640f98add704c2d693a38f18890a55a33b1db6b48e22ec",
+      "captures": [
+        {
+          "name": "front",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": true
+        },
+        {
+          "name": "side",
+          "maximumLinearError": 0.0004587888705138085,
+          "measured": [
+            0.04518620438567554,
+            0.026241221894849898,
+            0.012983032342173012
+          ],
+          "expected": [
+            0.04564499325618935,
+            0.02610456260481325,
+            0.01319607057434836
+          ],
+          "imageSha256": "0f647df1b791a5a1a294da3fbf9f99c40031844e4bf6fb6a0a50b7bbddb705f6",
+          "validationEnabled": true
+        },
+        {
+          "name": "back",
+          "maximumLinearError": 0.00028957142788522613,
+          "measured": [
+            0.017641954488384078,
+            0.010329823029626936,
+            0.005181516702338386
+          ],
+          "expected": [
+            0.017931525916269304,
+            0.01025511469031953,
+            0.005184044615118012
+          ],
+          "imageSha256": "c9c8f5e7fafdacb776caf8666047b1bc9b6b5b0222766601f29a961b67448c4a",
+          "validationEnabled": true
+        },
+        {
+          "name": "compressed",
+          "maximumLinearError": 0.000885000853709933,
+          "measured": [
+            0.09305896284668745,
+            0.03560131487502034,
+            0.012983032342173012
+          ],
+          "expected": [
+            0.09217396199297752,
+            0.03514311632346942,
+            0.013323850227666566
+          ],
+          "imageSha256": "0d0e1b5cb961c9307d8496aceebb029f5f095b25fac488a3eb3e3e420564e779",
+          "validationEnabled": true
+        },
+        {
+          "name": "uncompressed",
+          "maximumLinearError": 0.0006894384046529922,
+          "measured": [
+            0.238397573812271,
+            0.09084171118340768,
+            0.03433980680868217
+          ],
+          "expected": [
+            0.239087012216924,
+            0.0911565750250625,
+            0.03456029743412007
+          ],
+          "imageSha256": "3e4593db38ed9d91ed25df19cba906ad24108636698cc74aca2c4b65c551bad5",
+          "validationEnabled": true
+        },
+        {
+          "name": "two-lights",
+          "maximumLinearError": 0.0009804369489416487,
+          "measured": [
+            0.15292615199615017,
+            0.05780543019106723,
+            0.02217388479338738
+          ],
+          "expected": [
+            0.15194571504720852,
+            0.057932260079735044,
+            0.021963924586196584
+          ],
+          "imageSha256": "957e06c4e099df7fe28b87aa623f0bcd20e5476a815f38120b964d0abd413469",
+          "validationEnabled": true
+        },
+        {
+          "name": "fixed",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": true
+        },
+        {
+          "name": "disabled-scene-npr",
+          "maximumLinearError": 0.0001497769426062872,
+          "measured": [
+            0.016807375752887384,
+            0.00972121732023785,
+            0.004776953480693729
+          ],
+          "expected": [
+            0.01673609085518468,
+            0.009571440377631562,
+            0.004838441640776809
+          ],
+          "imageSha256": "7f199f762558ac349860fd1ac00cc47f8e2c9ee346986d0a27c19183fc670945",
+          "validationEnabled": true
+        },
+        {
+          "name": "no-receiver",
+          "maximumLinearError": 0.0,
+          "measured": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr",
+          "maximumLinearError": null,
+          "measured": [
+            0.01520851442291271,
+            0.009134058702220787,
+            0.004776953480693729
+          ],
+          "expected": null,
+          "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-control",
+          "maximumLinearError": null,
+          "measured": [
+            0.01520851442291271,
+            0.009134058702220787,
+            0.004776953480693729
+          ],
+          "expected": null,
+          "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+          "validationEnabled": true
+        },
+        {
+          "name": "upper-light",
+          "maximumLinearError": 0.00040146566060265954,
+          "measured": [
+            0.03954623527673284,
+            0.02315336617811041,
+            0.011612245179743885
+          ],
+          "expected": [
+            0.0399477009373355,
+            0.02284625729231821,
+            0.011548970505775257
+          ],
+          "imageSha256": "c28b95e889d91e635657e0738e3c7f22d5930f037c261e91c7ed93cb012415e6",
+          "validationEnabled": true
+        },
+        {
+          "name": "lower-light",
+          "maximumLinearError": 0.00040146566060265954,
+          "measured": [
+            0.03954623527673284,
+            0.02315336617811041,
+            0.011612245179743885
+          ],
+          "expected": [
+            0.0399477009373355,
+            0.02284625729231821,
+            0.011548970505775257
+          ],
+          "imageSha256": "ab47e9195cec36abf1389fb1b2e0216a67f8b4a75a4723789676f0e98bea421e",
+          "validationEnabled": true
+        }
+      ]
+    }
+  ],
+  "actual": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "control-beauty",
+        "imageSha256": "242dce051e6eb2bb80d3b903fbe0729d003584c6d9d5a5b06947ebf03e2ba40d",
+        "playerSha256": "5f6de5e6eba2775e8a5b3352470002ff96dac1f6ae374000ec2808fb67baa069",
+        "validationEnabled": false
+      },
+      {
+        "name": "points-beauty",
+        "imageSha256": "0f5c6d731ff69ee23f0cc852dd4a8f602e09e48c23e25ce4240678ceff407bc5",
+        "playerSha256": "5f6de5e6eba2775e8a5b3352470002ff96dac1f6ae374000ec2808fb67baa069",
+        "validationEnabled": false
+      },
+      {
+        "name": "points-kk",
+        "imageSha256": "4b8b55bf16025bfd16bb82178881a4fcb9715437bcabce9f92ced2abc1d53327",
+        "playerSha256": "5f6de5e6eba2775e8a5b3352470002ff96dac1f6ae374000ec2808fb67baa069",
+        "validationEnabled": false
+      },
+      {
+        "name": "points-kk-fixed",
+        "imageSha256": "4b8b55bf16025bfd16bb82178881a4fcb9715437bcabce9f92ced2abc1d53327",
+        "playerSha256": "641a780a3a01b942e7640f98add704c2d693a38f18890a55a33b1db6b48e22ec",
+        "validationEnabled": true
+      },
+      {
+        "name": "points-documents",
+        "imageSha256": "0f5c6d731ff69ee23f0cc852dd4a8f602e09e48c23e25ce4240678ceff407bc5",
+        "playerSha256": "641a780a3a01b942e7640f98add704c2d693a38f18890a55a33b1db6b48e22ec",
+        "validationEnabled": true
+      }
+    ]
+  },
+  "actualComparisons": [
+    {
+      "left": "control-beauty",
+      "right": "../20261023-071136-character-local-light-response-17b93e/control-beauty",
+      "maximumByteDifference": 0
+    },
+    {
+      "left": "points-kk",
+      "right": "points-kk-fixed",
+      "maximumByteDifference": 0
+    },
+    {
+      "left": "points-beauty",
+      "right": "points-documents",
+      "maximumByteDifference": 0
+    }
+  ],
+  "actualPointChange": {
+    "changedPixels": 102555,
+    "maximumByteChange": 72
+  },
+  "mainProject": {
+    "schemaVersion": 1,
+    "status": "main-project-startup-and-clean-unload-passed",
+    "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+    "previousImageSha256": "b4112fc3f1d22c582f5a6e2ab07b87282ef717f51ca3a0706b46d3c3ca542763",
+    "maximumByteDifference": 131,
+    "changedPixels": 1374
+  },
+  "diagnostic": {
+    "schemaVersion": 1,
+    "status": "diagnostic-only",
+    "region": [
+      1215,
+      160,
+      1340,
+      242
+    ],
+    "maskPolicy": "source red dominant: R>1.8G and R>1.5B",
+    "selectedPixels": 8553,
+    "meanEncodedRgbError": {
+      "control": 0.05502911870543455,
+      "points": 0.046113392159155255
+    },
+    "pixel1280x195": {
+      "source": [
+        231.0,
+        105.0,
+        104.0
+      ],
+      "control": [
+        226.0,
+        97.0,
+        98.0
+      ],
+      "points": [
+        231.0,
+        105.0,
+        103.0
+      ]
+    }
+  },
+  "sourceProjectSha256": "a96bc4b2508756db3bc8b29c7489b91480a1c86e909a6b709d1846b6efffdd2b",
+  "failureEvidence": {
+    "cpu-suite-red.log": "31fad9ac7542ec179a8f2968b19d7b3fa3b50e4617aa14594c6d89ef11f03141",
+    "gpu-red.log": "918647e57fae0d7172a32653a8f6385b7cfecc6b79ec55a5fa9dcf95cc591af4"
+  },
+  "sourceFingerprints": {
+    "src/render/ClusteredLightGrid.hpp": "20639a888a56267ad82b591142de65a20bc819f3a664f36bfff7b8bc37d49d57",
+    "src/scenes/CharacterSceneRenderer.cpp": "120a30700838185ef5c04cb1b7aac6479cf5fb0ef949368629ddea986a6e90a8",
+    "tests/ClusteredLightGridTests.cpp": "7848b42c46c9cfb1c557f89a4d1c5e03765ab9a8af55af61dc78fcd276f01be2",
+    "tools/test_character_local_light_gpu.py": "4cb25ef60a2a48e29b5c6f297c12c935fcd98eab548862ed58e4d0805566809a"
+  },
+  "remaining": [
+    "Native linear emitter",
+    "Screen-depth and ordered replacement modes",
+    "Dynamic character views",
+    "Skin, clothing, distance outline and content promotion"
+  ]
+}

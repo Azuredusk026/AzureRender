@@ -3406,8 +3406,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         kClusterGridZ,
         renderSettings_->cameraNear,
         renderSettings_->cameraFar,
-        std::abs(projection[0]),
-        std::abs(projection[5]),
+        projection[0],
+        projection[5],
         renderSettings_->cameraView && renderSettings_->cameraView->projection
             == CameraProjectionKind::Orthographic,
     });
