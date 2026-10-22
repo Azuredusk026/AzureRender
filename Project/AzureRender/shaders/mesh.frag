@@ -514,6 +514,10 @@ void main() {
     float roughness = clamp(sqrt(packedMaterial.g*packedMaterial.g+normalVariance*.25), 0.08, 1.0);
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
     float specularLevel = clamp(specularEmissive.a, 0.0, 1.0);
+    if(material.materialClass==0U||material.materialClass==4U||material.materialClass==5U) {
+        vec2 inputProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[5].zw;
+        specularLevel=clamp((inputProfile.x>.5?packedMaterial.a:specularEmissive.a)*inputProfile.y,0.0,1.0);
+    }
     // Character surface classes use authored packed maps from several source
     // conventions. Keep dielectric surfaces physically bounded while leaving
     // the dedicated Metal class untouched.

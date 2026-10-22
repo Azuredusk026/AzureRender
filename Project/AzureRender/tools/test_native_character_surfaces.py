@@ -1,5 +1,6 @@
 """Public source-channel fixtures for character surface exchange."""
 import copy
+import base64
 from io import BytesIO
 import unittest
 from PIL import Image
@@ -7,6 +8,32 @@ from endfield_native import character_surfaces as subject
 
 
 class CharacterSurfaceTests(unittest.TestCase):
+    def test_explicit_specular_preserves_each_source_channel(self):
+        png=BytesIO();Image.new('RGBA',(1,1),(51,76,102,204)).save(png,format='PNG')
+        obj={'source':'cab','path_id':1,'name':'cloth'}
+        tex={'source':'tex','path_id':2,'name':'parameter'}
+        row={'object':obj,'shader':{'resolved':{}},'colors':[],
+            'floats':[{'name':'_UseMetallicGlossMap','value':1}],
+            'textures':[{'slot':'_MetallicGlossMap','reference':{'resolved':tex},
+                         'scale':[1,1],'offset':[0,0],'color_space':0}]}
+        doc={'materials':[{'name':'cloth','extras':{'azureRenderMaterial':{
+            'schemaVersion':2,'class':'fabric','features':[]}}}]}
+        args=(doc,{'materials':[row]},[{'object':obj,'data':{}}],{('tex',2):png.getvalue()})
+        result,report=subject.restore_surfaces(*args,specular_materials=['cloth'])
+        payload=base64.b64decode(result['images'][0]['uri'].split(',')[1])
+        self.assertEqual(Image.open(BytesIO(payload)).getpixel((0,0)),(102,51,51,76))
+        self.assertEqual(result['materials'][0]['extras']['azureRenderMaterial']['specularInput'],
+            {'schemaVersion':1,'source':'metallic-roughness-alpha','scale':.5})
+        self.assertNotIn('source G specular',report['materials'][0]['bound'][0]['unconsumed_channels'])
+        doc['materials'][0]['emissiveTexture']={'index':97}
+        doc['materials'].append({'name':'other','extras':{'unrelated':1}})
+        restricted,_=subject.restore_surfaces(*args,specular_materials=['cloth'],specular_only=True)
+        self.assertEqual(restricted['materials'][0]['emissiveTexture'],{'index':97})
+        self.assertEqual(restricted['materials'][1],doc['materials'][1])
+        with self.assertRaises(ValueError):subject.restore_surfaces(*args,specular_materials=['missing'])
+        row['floats'][0]['value']=0
+        with self.assertRaises(ValueError):subject.restore_surfaces(*args,specular_materials=['cloth'])
+
     def test_unity_normal_and_hair_split_have_distinct_strength_order(self):
         pixels = Image.new('RGBA', (1, 1), (191, 128, 0, 255))
         unity = subject.normal_image(pixels, 0.5, 'unity-rag')

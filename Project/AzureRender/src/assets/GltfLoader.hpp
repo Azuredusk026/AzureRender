@@ -170,6 +170,12 @@ struct AssetMaterial {
         bool styleMaskGb=false,albedoAlpha=false;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
     } nprDiffuse;
+    struct SpecularInput {
+        enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };
+        bool present=false;
+        Source source=Source::EmissiveAlpha;
+        float scale=1;
+    } specularInput;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

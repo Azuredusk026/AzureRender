@@ -1622,6 +1622,32 @@ AssetMaterial loadMaterial(
     if(material && !material->extras_json_string.empty()) {
         const auto authoredProfile=nlohmann::json::parse(material->extras_json_string);
         if(authoredProfile.contains("azureRenderMaterial")&&authoredProfile["azureRenderMaterial"].is_object()
+            &&authoredProfile["azureRenderMaterial"].contains("specularInput")) {
+            const auto& parent=authoredProfile["azureRenderMaterial"];
+            const auto& input=parent["specularInput"];
+            if(!input.is_object()||input.size()!=3||!input.contains("schemaVersion")
+                ||!input.contains("source")||!input.contains("scale")
+                ||!input["schemaVersion"].is_number_integer()||input["schemaVersion"]!=1
+                ||!input["source"].is_string()
+                ||(input["source"]!="emissive-alpha"&&input["source"]!="metallic-roughness-alpha")
+                ||!input["scale"].is_number()||!std::isfinite(input["scale"].get<double>())
+                ||input["scale"].get<double>()<0||input["scale"].get<double>()>1)
+                throw std::invalid_argument("Invalid specularInput contract");
+            if(!parent.contains("schemaVersion")||!parent["schemaVersion"].is_number_integer()
+                ||parent["schemaVersion"]!=2
+                ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Fabric
+                    &&result.materialClass!=AssetMaterialClass::Metal)
+                ||result.projectedHairRamp.present||result.eyeSurface.present||result.faceSdf.present
+                ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite))
+                ||result.transmission!=0||result.thickness!=0)
+                throw std::invalid_argument("Incompatible specularInput material owners");
+            const bool orm=input["source"]=="metallic-roughness-alpha";
+            if(orm&&metallicRoughnessImage<0)
+                throw std::invalid_argument("specularInput requires a metallic roughness texture");
+            result.specularInput={true,orm?AssetMaterial::SpecularInput::Source::MetallicRoughnessAlpha
+                :AssetMaterial::SpecularInput::Source::EmissiveAlpha,input["scale"].get<float>()};
+        }
+        if(authoredProfile.contains("azureRenderMaterial")&&authoredProfile["azureRenderMaterial"].is_object()
             &&authoredProfile["azureRenderMaterial"].contains("nprDiffuse")) {
             const auto& npr=authoredProfile["azureRenderMaterial"]["nprDiffuse"];
             const std::set<std::string> fields{"schemaVersion","shadowScale","lightingInputs","shadowMask","baseAo"};

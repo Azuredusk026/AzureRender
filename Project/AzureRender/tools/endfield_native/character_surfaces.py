@@ -42,6 +42,17 @@ def orm_image(image):
     return Image.merge('RGBA', (blue, roughness, red, Image.new('L', image.size, 255)))
 
 
+def orm_specular_image(image):
+    """Pack native AO/roughness/metallic while preserving specular in alpha.
+
+    This opt-in layout stores the original green byte without scaling it.
+    The consuming material must explicitly declare the alpha input semantics.
+    """
+    red, green, blue, alpha = image.convert('RGBA').split()
+    roughness = alpha.point(lambda value: 255-value)
+    return Image.merge('RGBA', (blue, roughness, red, green))
+
+
 def color_image(image, color_space):
     if color_space == 1: return image.convert('RGBA')
     if color_space != 0: raise ValueError('Unknown native image color space')
@@ -51,8 +62,13 @@ def color_image(image, color_space):
     return Image.fromarray(np.rint(value*255).astype(np.uint8), 'RGBA')
 
 
-def restore_surfaces(document, audit, sources, payloads):
+def restore_surfaces(document, audit, sources, payloads, *, specular_materials=(), specular_only=False):
     result = copy.deepcopy(document)
+    selected=set(specular_materials)
+    if specular_only and not selected:raise ValueError('Specular-only conversion requires an explicit selection')
+    names=[m.get('name','') for m in result.get('materials',[])]
+    if any(names.count(name)!=1 for name in selected):
+        raise ValueError('Specular selection requires unique existing material names')
     by_name = {row['object']['name']: row for row in audit['materials']}
     if len(by_name) != len(audit['materials']): raise ValueError('Ambiguous native material names')
     raw = {identity(row['object']): row['data'] for row in sources if row.get('available', True)}
@@ -78,8 +94,11 @@ def restore_surfaces(document, audit, sources, payloads):
         return info, {'slot': binding['slot'], 'source': ref, 'source_png_sha256': hashlib.sha256(payloads[key]).hexdigest(),
                       'output_png_sha256': digest, 'target': role}
     for material in result.get('materials', []):
+        if specular_only and material.get('name') not in selected:continue
         source = by_name.get(material.get('name', ''))
-        if source is None: continue
+        if source is None:
+            if material.get('name') in selected:raise ValueError('Missing selected material source')
+            continue
         floats = {v['name']: v['value'] for v in source['floats']}
         colors = {v['name']: v['rgba'] for v in source['colors']}
         keywords = set(raw[identity(source['object'])].get('m_ValidKeywords', []))
@@ -87,12 +106,20 @@ def restore_surfaces(document, audit, sources, payloads):
         row = {'name': material['name'], 'source': source['object'], 'shader': source['shader']['resolved'],
                'bound': [], 'unbound_slots': [], 'parameters': {}}
         pbr = material.setdefault('pbrMetallicRoughness', {})
-        if '_Metallic' in floats and '_Smoothness' in floats:
+        specular=material['name'] in selected
+        if specular:
+            profile=material.get('extras',{}).get('azureRenderMaterial',{})
+            if (profile.get('schemaVersion')!=2 or profile.get('class') not in ('generic','fabric','metal')
+                    or floats.get('_UseMetallicGlossMap')!=1):
+                raise ValueError('Specular selection requires a supported profile and source parameter map')
+            if 'specularInput' in profile:raise ValueError('Specular input already authored')
+            profile['specularInput']={'schemaVersion':1,'source':'metallic-roughness-alpha','scale':.5}
+        if not specular_only and '_Metallic' in floats and '_Smoothness' in floats:
             metallic, smoothness = floats['_Metallic'], floats['_Smoothness']
             if not 0 <= metallic <= 1 or not 0 <= smoothness <= 1: raise ValueError('Out-of-range source surface factor')
             pbr.update(metallicFactor=metallic, roughnessFactor=1-smoothness)
             row['parameters'].update(metallic=metallic, smoothness=smoothness)
-        if '_NORMALMAP' in keywords and floats.get('_UseBumpMap') == 1:
+        if not specular_only and '_NORMALMAP' in keywords and floats.get('_UseBumpMap') == 1:
             split = '_SPECULAR_NORMALMAP' in keywords
             slot = '_SplitNormalMap' if split else '_BumpMap'
             if slot not in bindings: raise ValueError('Enabled normal lacks source texture: '+material['name'])
@@ -103,11 +130,14 @@ def restore_surfaces(document, audit, sources, payloads):
             row['bound'].append(evidence)
         if floats.get('_UseMetallicGlossMap') == 1:
             if '_MetallicGlossMap' not in bindings: raise ValueError('Enabled metallic map lacks source texture')
-            info, evidence = texture(bindings['_MetallicGlossMap'], orm_image, 'metallicRoughness')
+            info, evidence = texture(bindings['_MetallicGlossMap'], orm_specular_image if specular else orm_image, 'metallicRoughness')
             pbr.update(metallicRoughnessTexture=info, metallicFactor=1, roughnessFactor=1)
             evidence['unconsumed_channels'] = ['source G specular', 'source B AO retained in packed R; surface-ao feature inactive']
+            if specular:
+                evidence['unconsumed_channels'].remove('source G specular')
+                evidence['specular_input']={'source_channel':'G','target_channel':'A','scale':.5}
             row['bound'].append(evidence)
-        if '_EMISSION' in keywords:
+        if not specular_only and '_EMISSION' in keywords:
             if '_EmissionMap' not in bindings: raise ValueError('Enabled emission lacks source image')
             binding = bindings['_EmissionMap']
             info, evidence = texture(binding, lambda image: color_image(image, binding['color_space']), 'emissive')
@@ -130,6 +160,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('input', 'source-root', 'output', 'report'):
         parser.add_argument('--'+name, type=Path, required=True)
+    parser.add_argument('--specular-material',action='append',default=[])
+    parser.add_argument('--specular-only',action='store_true')
     args = parser.parse_args()
     if args.output.exists() or args.report.exists() or args.output.resolve() == args.report.resolve():
         raise ValueError('Outputs must be distinct new files')
@@ -145,7 +177,8 @@ def main():
         if hashlib.sha256(payload).hexdigest().lower() != row['png']['sha256'].lower(): raise ValueError('Source image digest mismatch')
         payloads[identity(row['object'])] = payload
     document, tail = read_asset(args.input)
-    result, report = restore_surfaces(document, packets['source_audit.json'], packets['material_sources.json'], payloads)
+    result, report = restore_surfaces(document, packets['source_audit.json'], packets['material_sources.json'], payloads,
+        specular_materials=args.specular_material,specular_only=args.specular_only)
     for key in ('nodes', 'meshes', 'skins', 'animations', 'accessors', 'bufferViews', 'buffers'):
         if result.get(key) != document.get(key): raise AssertionError('Structural change: '+key)
     args.output.parent.mkdir(parents=True, exist_ok=True)

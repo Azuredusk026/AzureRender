@@ -19,6 +19,10 @@ NR0 的参考门禁及 NR1 至 NR12 的正式条件保持待验。
 真实角色近景通过，跨姿态与完整照明继续验收。
 范围见[脸部法线验收](../acceptance/nr/face-radial-indirect.md)。
 
+服饰镜面输入通过双配置数值与真实模型检查。
+范围见[服饰镜面验收](../acceptance/nr/cloth-specular-input.md)。
+逐项顺序见[角色技术清单](2026-10-22-character-technique-closure.md)。
+
 ## 分项实现与证据
 
 角色环境漫反射法线通过双配置分项检查。

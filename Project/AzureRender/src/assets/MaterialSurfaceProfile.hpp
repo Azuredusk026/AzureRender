@@ -38,14 +38,20 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    PackedMaterialSurfaceProfile result;
     if(material.nprDiffuse.present) {
-        PackedMaterialSurfaceProfile result;
         result.rows[0]={material.nprDiffuse.shadowScale,material.nprDiffuse.styleMaskGb?1.F:0.F,
             material.nprDiffuse.albedoAlpha?1.F:0.F,
             static_cast<float>(material.nprDiffuse.indirectNormal)};
-        return result;
+    } else {
+        result=material.eyeSurface.present?packEyeSurfaceProfile(material.eyeSurface)
+            :packProjectedHairSurfaceProfile(material.projectedHairRamp);
     }
-    return material.eyeSurface.present?packEyeSurfaceProfile(material.eyeSurface)
-        :packProjectedHairSurfaceProfile(material.projectedHairRamp);
+    if(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
+        ||material.materialClass==AssetMaterialClass::Metal) {
+        result.rows[5][2]=static_cast<float>(material.specularInput.source);
+        result.rows[5][3]=material.specularInput.scale;
+    }
+    return result;
 }
 }
