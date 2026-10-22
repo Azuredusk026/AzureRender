@@ -96,7 +96,7 @@ R 控制各向异性轴，G 控制主叶，A 控制次叶。
   "specularNormalScale": 1,
   "surfaceNormalScale": 1,
   "directionX": 0,
-  "secondaryColor": [0.672, 0, 0.004363678],
+  "secondaryColor": [0.4091445, 0, 0.000337746],
   "objectBasis": [1, 0, 0, 0, 1, 0, 0, 0, 1],
   "surfaceResponse": "strand-diffuse",
   "diffuseScale": 0.96
@@ -132,7 +132,7 @@ R 控制各向异性轴，G 控制主叶，A 控制次叶。
 | `edgeFade` | 0 至 64 |
 | 两项法线缩放 | 0 至 8 |
 | `directionX` | -16 至 16 |
-| `secondaryColor` 各分量 | 0 至 64 |
+| `secondaryColor` 各线性颜色分量 | 0 至 64 |
 
 两个法线均先重建 Z，再缩放 XY。
 表面法线消费背面翻转，高光法线保留原方向。

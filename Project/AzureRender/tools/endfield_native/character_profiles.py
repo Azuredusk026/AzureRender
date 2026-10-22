@@ -150,6 +150,13 @@ def restore_profiles(document, audit, sources, payloads):
                     raise ValueError('Invalid active projected hair field: _AnisotropyColor2')
                 if any(value < 0 or value > 64 for value in color[:3]):
                     raise ValueError('Projected hair field is outside supported ranges: _AnisotropyColor2')
+                # This pinned ShaderLab Color property is stored in sRGB.
+                # Native draw 950 cb6[15] confirms linear upload; texture
+                # color-space flags are independent from uniform colors.
+                linear_color=[value/12.92 if value<=.04045 else ((value+.055)/1.055)**2.4
+                    for value in color[:3]]
+                if any(value>64 for value in linear_color):
+                    raise ValueError('Projected hair linear color exceeds supported range')
                 if '_SPECULAR_NORMALMAP' not in keywords or floats.get('_UseSpecBumpMap') != 1:
                     raise ValueError('Missing active projected hair field: independent split normal')
                 ramp_payload, _, _ = source_payload('_SpecRampMap')
@@ -158,7 +165,7 @@ def restore_profiles(document, audit, sources, payloads):
                         raise ValueError('Projected hair ramp requires two dimensions')
                 projected.update(parameterTexture=bind_texture('_MetallicGlossMap', 'hair.projectedRamp.parameterTexture'),
                     rampTexture=bind_texture('_SpecRampMap', 'hair.projectedRamp.rampTexture'),
-                    secondaryColor=list(color[:3]), objectBasis=[1, 0, 0, 0, 1, 0, 0, 0, 1])
+                    secondaryColor=linear_color, objectBasis=[1, 0, 0, 0, 1, 0, 0, 0, 1])
                 features.discard('hair-ramp')
                 features.discard('face-sdf-eligible')
                 profile.pop('faceSdf', None)
@@ -178,6 +185,8 @@ def restore_profiles(document, audit, sources, payloads):
                         'surfaceBackFaceSign': -1, 'highlightBackFaceSign': 1,
                         'surfaceLines': [164, 172], 'highlightLines': [177, 190]},
                     'shiftConversion': '2 * source anisotropy value - 1',
+                    'secondaryColorConversion': {'source':'sRGB-uniform','target':'linear',
+                        'sourceRgb':list(color[:3]),'linearRgb':linear_color},
                     'textureSemantics': {'parameterTexture': 'linear-original-RGBA',
                         'rampTexture': 'linear-original-2D-RGB-LOD0'},
                     'surfaceSemantics': {'metallic': 0, 'diffuseScale': .96,

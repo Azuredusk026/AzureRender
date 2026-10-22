@@ -155,7 +155,10 @@ class NativeCharacterProfileTests(unittest.TestCase):
             'intensity': 1.3, 'secondaryRange': .5, 'edgeFade': 5,
             'specularNormalScale': 1, 'surfaceNormalScale': .7, 'directionX': 0}.items():
             self.assertAlmostEqual(projected[key], expected)
-        self.assertEqual(projected['secondaryColor'], [.672, 0, .004363678])
+        # Frame 10401, draw 950, PS cb6[15].xyz contains the linear color.
+        for actual, expected in zip(projected['secondaryColor'],
+                [.40914449095726013, 0, .00033774596522562206]):
+            self.assertAlmostEqual(actual,expected,places=7)
         self.assertEqual(projected['objectBasis'], [1, 0, 0, 0, 1, 0, 0, 0, 1])
         for key, source_index in (('rampTexture', 4), ('parameterTexture', 5)):
             uri = output['images'][output['textures'][projected[key]]['source']]['uri']

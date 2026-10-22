@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+头发次级高光颜色已按实际帧完成线性转换。
+范围见[头发高光验收](docs/acceptance/nr/projected-hair.md)。
+
 服饰镜面参数支持独立来源与倍率。
 契约与范围见[服饰镜面验收](docs/acceptance/nr/cloth-specular-input.md)。
 
