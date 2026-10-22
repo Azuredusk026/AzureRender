@@ -2,6 +2,7 @@
 #include "AzureRenderInternal.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "extensions/ISceneRenderer.hpp"
+#include "runtime/LevelRenderSettings.hpp"
 
 #include "assets/image/ImageEncoder.hpp"
 
@@ -163,6 +164,7 @@ void AzureRenderApp::writeCaptureManifest(
     for (const float channel : renderSettings_.grade.tint) {
         qaState << '|' << channel;
     }
+    qaState << '|' << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump();
     qaState
         << '|'
         << rampProfileHash << '|'
@@ -307,6 +309,7 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"
         << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
         << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
+        << "  \"nprLighting\": " << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump() << ",\n"
         << "  \"antiAliasingPipeline\": \"linear-display-spatial-v1\",\n"
         << "  \"sceneRenderWidth\": " << sceneRenderExtent_.width << ",\n"
         << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"

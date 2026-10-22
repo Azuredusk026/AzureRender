@@ -136,6 +136,7 @@ RenderSettings migrateRenderSettings(
     if (sourceSchemaVersion < 14) settings.grade.lut = {};
     if (sourceSchemaVersion < 15) settings.environmentSpecularModel=EnvironmentSpecularModel::LegacySchlick;
     if(sourceSchemaVersion<16)settings.screenSpaceReflection={};
+    if(sourceSchemaVersion<17)settings.nprLighting={};
     validateRenderSettings(settings);
     return settings;
 }
@@ -168,6 +169,7 @@ void applyShowcasePresetLook(
 
 void validateRenderSettings(const RenderSettings& settings) {
     validateScreenSpaceReflection(settings.screenSpaceReflection);
+    validateNprLighting(settings.nprLighting);
     const auto requireRange = [](
                                   const float value,
                                   const float minimum,

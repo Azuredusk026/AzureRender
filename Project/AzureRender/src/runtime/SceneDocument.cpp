@@ -103,6 +103,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
            << "sceneLighting " << std::boolalpha << document.renderSettings.sceneLightingEnabled << '\n'
            << "environmentSpecularModel " << std::quoted(std::string(environmentSpecularModelName(document.renderSettings.environmentSpecularModel))) << '\n'
            << "screenSpaceReflection " << std::quoted(encodeScreenSpaceReflection(document.renderSettings.screenSpaceReflection).dump()) << '\n'
+           << "nprLighting " << std::quoted(encodeNprLighting(document.renderSettings.nprLighting).dump()) << '\n'
            << "innerOutlineEnabled " << std::boolalpha
            << document.renderSettings.innerOutlineEnabled << '\n'
            << "outlineStrength " << document.renderSettings.outline.strength << '\n'
@@ -329,6 +330,11 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         if(!(input>>key>>std::quoted(serialized))||key!="screenSpaceReflection")
             throw std::runtime_error("Invalid .azscene screenSpaceReflection");
         decodeScreenSpaceReflection(document.renderSettings.screenSpaceReflection,nlohmann::json::parse(serialized));
+    }
+    if(renderSettingsVersion>=17){
+        std::string serialized;
+        if(!(input>>key>>std::quoted(serialized))||key!="nprLighting")throw std::runtime_error("Invalid .azscene nprLighting");
+        decodeNprLighting(document.renderSettings.nprLighting,nlohmann::json::parse(serialized));
     }
     if (!(input >> key >> std::boolalpha
           >> document.renderSettings.innerOutlineEnabled)

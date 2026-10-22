@@ -43,6 +43,12 @@ namespace azurerender {
 
 namespace {
 
+std::uint64_t stableSceneLightId(std::string_view id){
+    std::uint64_t result=1469598103934665603ULL;
+    for(const unsigned char value:id){result^=value;result*=1099511628211ULL;}
+    return result;
+}
+
 static_assert(sizeof(AssetVertex) == 27 * sizeof(std::uint32_t));
 
 Matrix4 primitiveGizmoTransform(const RecordingGizmoState& state,std::size_t primitive) {
@@ -3314,6 +3320,21 @@ void CharacterSceneRenderer::updateUniformBuffer(
     };
     uniform.faceSdfShadowColor = settings.faceSdf.shadowColor;
     uniform.mainLightDirection = {lightDirection[0], lightDirection[1], lightDirection[2], (frame.qaLightScan||mainSceneLight) ? 1.0F : 0.0F};
+    const auto& npr=settings.nprLighting;
+    uniform.nprDirectionBias={npr.ambientDirection[0],npr.ambientDirection[1],npr.ambientDirection[2],npr.directionBias};
+    uniform.nprGainFloor={npr.directionGain,npr.directionFloor,npr.shadowOverride,npr.useSceneIrradiance?1.F:0.F};
+    uniform.nprAmbientColor={npr.ambientColor[0],npr.ambientColor[1],npr.ambientColor[2],npr.indoorMix};
+    uniform.nprComposition={npr.outdoorGain,npr.shadowAmbientGain,npr.litAmbientMix,npr.mainColorMix};
+    uniform.nprMainRadiance={1,1,1,0};uniform.nprLightingParameters={npr.enabled&&settings.sceneLightingEnabled?1.F:0.F,-1,0,0};
+    if(mainSceneLight){
+        const auto id=stableSceneLightId(mainSceneLight->id);const auto& lights=frameLights_.lights();
+        for(std::size_t index=0;index<lights.size();++index)if(lights[index].stableId==id){
+            uniform.nprLightingParameters[1]=static_cast<float>(index);
+            if(lights[index].shape.receivers.characters)
+                uniform.nprMainRadiance={lights[index].color[0],lights[index].color[1],lights[index].color[2],lights[index].intensity};
+            break;
+        }
+    }
     const auto& probe=scene_.reflectionProbe;
     uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],0};
     uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
@@ -3360,12 +3381,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
             + projection[7] * viewPosition[1]
             + projection[11] * viewPosition[2] + projection[15];
         RenderLight light{};
-        std::uint64_t stableId = 1469598103934665603ULL;
-        for (const unsigned char value : source.id) {
-            stableId ^= value;
-            stableId *= 1099511628211ULL;
-        }
-        light.stableId = stableId;
+        light.stableId = stableSceneLightId(source.id);
         light.position[0] = source.position[0];
         light.position[1] = source.position[1];
         light.position[2] = source.position[2];

@@ -2,6 +2,38 @@
 #include "render/RenderSettings.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
+inline nlohmann::json encodeNprLighting(const NprLightingSettings& s){
+    validateNprLighting(s);
+    return {{"schemaVersion",1},{"enabled",s.enabled},{"useSceneIrradiance",s.useSceneIrradiance},
+        {"ambientColor",s.ambientColor},{"ambientDirection",s.ambientDirection},{"directionBias",s.directionBias},
+        {"directionGain",s.directionGain},{"directionFloor",s.directionFloor},{"outdoorGain",s.outdoorGain},
+        {"shadowAmbientGain",s.shadowAmbientGain},{"indoorMix",s.indoorMix},{"litAmbientMix",s.litAmbientMix},
+        {"mainColorMix",s.mainColorMix},{"shadowOverride",s.shadowOverride}};
+}
+inline void decodeNprLighting(NprLightingSettings& target,const nlohmann::json& data){
+    if(!data.is_object()||!data.contains("schemaVersion")||!data.at("schemaVersion").is_number_integer()||data.at("schemaVersion")!=1)
+        throw std::invalid_argument("Unsupported NPR lighting settings version");
+    auto value=target;const auto shape=encodeNprLighting(value);
+    for(const auto& field:data.items()){
+        const auto& key=field.key();
+        if(!shape.contains(key))throw std::invalid_argument("Unknown NPR lighting setting: "+key);
+        if(key=="schemaVersion")continue;
+        if(key=="enabled"||key=="useSceneIrradiance"){
+            if(!field.value().is_boolean())throw std::invalid_argument("NPR lighting boolean required");
+        }else if(key=="ambientColor"||key=="ambientDirection"){
+            if(!field.value().is_array()||field.value().size()!=3)throw std::invalid_argument("NPR lighting vector requires three numbers");
+            for(const auto& component:field.value())if(!component.is_number())throw std::invalid_argument("NPR lighting vector requires numbers");
+        }else if(!field.value().is_number())throw std::invalid_argument("NPR lighting scalar requires a number");
+    }
+    value.enabled=data.value("enabled",value.enabled);value.useSceneIrradiance=data.value("useSceneIrradiance",value.useSceneIrradiance);
+    if(data.contains("ambientColor"))value.ambientColor=data.at("ambientColor").get<std::array<float,3>>();
+    if(data.contains("ambientDirection"))value.ambientDirection=data.at("ambientDirection").get<std::array<float,3>>();
+    value.directionBias=data.value("directionBias",value.directionBias);value.directionGain=data.value("directionGain",value.directionGain);
+    value.directionFloor=data.value("directionFloor",value.directionFloor);value.outdoorGain=data.value("outdoorGain",value.outdoorGain);
+    value.shadowAmbientGain=data.value("shadowAmbientGain",value.shadowAmbientGain);value.indoorMix=data.value("indoorMix",value.indoorMix);
+    value.litAmbientMix=data.value("litAmbientMix",value.litAmbientMix);value.mainColorMix=data.value("mainColorMix",value.mainColorMix);
+    value.shadowOverride=data.value("shadowOverride",value.shadowOverride);validateNprLighting(value);target=value;
+}
 inline nlohmann::json encodeScreenSpaceReflection(const ScreenSpaceReflectionSettings& s){
     return {{"schemaVersion",ScreenSpaceReflectionSettings::kSchemaVersion},{"enabled",s.enabled},
         {"maxDistance",s.maxDistance},{"thickness",s.thickness},{"normalBias",s.normalBias},
@@ -34,7 +66,7 @@ inline void decodeScreenSpaceReflection(ScreenSpaceReflectionSettings& target,co
     validateScreenSpaceReflection(value);target=value;
 }
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"screenSpaceReflection",encodeScreenSpaceReflection(settings.screenSpaceReflection)},{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"nprLighting",encodeNprLighting(settings.nprLighting)},{"screenSpaceReflection",encodeScreenSpaceReflection(settings.screenSpaceReflection)},{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -48,6 +80,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
     auto settings=target;
+    if(data.contains("nprLighting"))decodeNprLighting(settings.nprLighting,data.at("nprLighting"));
     if(data.contains("screenSpaceReflection"))decodeScreenSpaceReflection(settings.screenSpaceReflection,data.at("screenSpaceReflection"));
     settings.sceneType=sceneTypeFromString(data.value("renderer",std::string(sceneTypeName(settings.sceneType))));
     settings.pathTraceSamples=data.value("pathTraceSamples",settings.pathTraceSamples);

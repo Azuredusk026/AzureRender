@@ -24,7 +24,7 @@ int main(int argc,char** argv){
   check(reopened.screenSpaceReflection.maxDistance==31.125F,"transactional decode");
  }
  check(!migrateRenderSettings(settings,15).screenSpaceReflection.enabled,"schema15 default disabled");
- rejects([&]{(void)migrateRenderSettings(settings,17);},"reject future schema");
+ rejects([&]{(void)migrateRenderSettings(settings,RenderSettings::kSchemaVersion+1);},"reject future schema");
  check(screenSpaceReflectionActive(settings.screenSpaceReflection,true,0,true),"beauty active");
  check(screenSpaceReflectionActive(settings.screenSpaceReflection,true,6,true),"specular isolation active");
  check(screenSpaceReflectionActive(settings.screenSpaceReflection,true,20,true),"environment isolation active");

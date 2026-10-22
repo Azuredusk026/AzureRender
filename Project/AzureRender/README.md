@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
+数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。
 投影头发支持显式虚拟主灯与独立条纹。
 数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。

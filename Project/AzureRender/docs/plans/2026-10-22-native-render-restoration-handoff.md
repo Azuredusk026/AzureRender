@@ -14,6 +14,8 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 证据见[完整文档验收](../acceptance/nr/complete-material-document.md)。
 当前执行 C16 的输入边界及 C17 的多层高光。
 虚拟主灯与独立条纹已接入公共材质契约。
+C11 已接入显式照明组合，继续闭合 HDR 与调色链。
+范围见[照明验收](../acceptance/nr/npr-illumination.md)。
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。
 

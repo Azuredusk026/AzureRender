@@ -39,6 +39,7 @@ layout(binding = 0) uniform CameraData {
     vec4 cameraRight,cameraUp;
     mat4 screenReflectionWorldToClip;
     vec4 screenReflectionTrace,screenReflectionQuality;
+    vec4 nprDirectionBias,nprGainFloor,nprAmbientColor,nprComposition,nprMainRadiance,nprLightingParameters;
 } camera;
 layout(binding=23) uniform samplerCube reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
@@ -275,14 +276,17 @@ vec4 materialDiffuseRampRgba(float coordinate) {
     return vec4(materialDiffuseRamp(coordinate),1);
 }
 
-vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view) {
+CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view) {
     vec4 parameters=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0];
     vec2 mask=parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb);
     // Host scene lighting aliases both visibility inputs to the available
     // main-light map. Native per-character/global bindings are independent.
     return characterDiffuseResponse(base.rgb,shadow,metallic,parameters.x,ramp,
-        parameters.z>.5?base.a:1.0,mask,dot(normal,view),visibility,visibility).color;
+        parameters.z>.5?base.a:1.0,mask,dot(normal,view),visibility,visibility);
+}
+vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view){
+    return materialNprDiffuseResponse(base,metallic,ramp,visibility,normal,view).color;
 }
 
 vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradient) {
@@ -851,7 +855,8 @@ void main() {
             // Color selection and incident-energy visibility are independent.
             // The native illumination expression gates its main-light term
             // with scene visibility even when color selects an indoor tint.
-            clusteredDiffuse+=response*radiance;
+            bool composedMain=camera.nprLightingParameters.x>.5&&float(lightIndex)==camera.nprLightingParameters.y;
+            if(!composedMain)clusteredDiffuse+=response*radiance;
         } else clusteredDiffuse += diffuseColor * radiance * localDiffuseResponse * diffuseScale;
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
@@ -1199,6 +1204,23 @@ void main() {
         vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
+    }
+    if(nprDiffuse&&camera.nprLightingParameters.x>.5){
+        float visibility=mix(shadowVisibility,1.0,camera.nprGainFloor.z);
+        CharacterDiffuseResponse response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
+        vec3 incident=camera.nprAmbientColor.rgb;
+        if(camera.nprGainFloor.w>.5){
+            vec3 envNormal=indirectDiffuseNormal;float angle=camera.clusterLighting.z;
+            envNormal.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
+            incident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(envNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
+            if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);incident=mix(incident,volume.rgb,volume.w);}
+        }
+        CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,camera.nprMainRadiance,
+            camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,physicalAo,response.litMask,visibility);
+        vec3 combinedAmbient=response.color*illumination.ambient;
+        vec3 combinedDirect=response.color*illumination.direct+clusteredDiffuse;
+        beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
+        ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
     }
     if(projectedHair&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].z>.5
         &&(camera.clusterLighting.x<.5||camera.mainLightDirection.w>.5)){

@@ -67,6 +67,8 @@ int main(int argc,char** argv) try {
     const auto version=text.find(currentVersion);require(version!=std::string::npos,"text schema version");
     const auto reflection=text.find("screenSpaceReflection ");
     if(reflection!=std::string::npos)text.erase(reflection,text.find('\n',reflection)+1-reflection);
+    const auto npr=text.find("nprLighting ");
+    if(npr!=std::string::npos)text.erase(npr,text.find('\n',npr)+1-npr);
     text.replace(version,currentVersion.size(),"renderSettingsVersion 15");
     std::ofstream version15(output/"version15.azscene");version15<<text;version15.close();
     require(SceneDocument::load(output/"version15.azscene").renderSettings.environmentSpecularModel==EnvironmentSpecularModel::GgxMultiscatterFit,"version 15 text preserves model");

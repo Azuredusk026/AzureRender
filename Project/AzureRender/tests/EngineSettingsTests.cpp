@@ -9,6 +9,26 @@
 using namespace azurerender;
 void check(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 int main(){try{
+    RenderSettings styled;
+    decodeLevelRenderSettings(styled,{{"nprLighting",{{"schemaVersion",1},{"enabled",true},
+        {"ambientColor",{1.2,.9,.8}},{"ambientDirection",{0,1,0}},{"directionBias",.15},
+        {"directionGain",1.5},{"directionFloor",.5},{"outdoorGain",1.05},{"shadowAmbientGain",.8},
+        {"indoorMix",0},{"litAmbientMix",1},{"mainColorMix",1},{"shadowOverride",1},{"useSceneIrradiance",false}}}});
+    const auto styledJson=encodeLevelRenderSettings(styled);
+    check(styledJson.contains("nprLighting")&&styledJson.at("nprLighting").at("enabled")==true,
+        "NPR illumination must roundtrip through the shared scene settings contract");
+    for(const auto& mutation:{nlohmann::json{{"schemaVersion",1.5}},nlohmann::json{{"enabled",1}},
+        nlohmann::json{{"directionGain",true}},nlohmann::json{{"ambientDirection",{0,0,0}}},
+        nlohmann::json{{"ambientColor",{1,2}}},nlohmann::json{{"mainColorMix",-1}},nlohmann::json{{"unknown",1}}}){
+        auto invalid=styledJson;invalid["nprLighting"].update(mutation);bool rejected=false;
+        try{RenderSettings value;decodeLevelRenderSettings(value,invalid);}catch(const std::exception&){rejected=true;}
+        check(rejected,"Malformed NPR illumination must be rejected");
+    }
+    auto styleScene=SceneDocument::fromAsset("test.gltf");styleScene.renderSettings=styled;
+    const auto styleFile=std::filesystem::temp_directory_path()/("azure-npr-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azscene");
+    styleScene.save(styleFile);auto styleReopened=SceneDocument::load(styleFile);std::filesystem::remove(styleFile);
+    check(encodeNprLighting(styleReopened.renderSettings.nprLighting)==styledJson.at("nprLighting"),"Standalone scene must preserve NPR illumination");
+    check(!migrateRenderSettings(styled,16).nprLighting.enabled,"Earlier settings versions retain their compatible NPR mode");
     RenderSettings lutDefaults;
     const auto lutJson=encodeLevelRenderSettings(lutDefaults);
     check(lutJson.contains("gradeLut")&&lutJson.at("gradeLut").at("asset")=="",
