@@ -82,6 +82,17 @@ auto root=argc==4?std::filesystem::absolute(std::filesystem::u8path(argv[3])):st
     require(!registry.require("png").plan(flat,{}).losses.empty(),"Flattening authored mips is disclosed before export");
     auto flattened=prepareAssetTransfer(flat,registry,{});require(!flattened.losses.empty(),"Flattening loss remains in the actual export report");discardAssetTransfer(flattened);
     auto colored=image;colored.colorSpace=ImageColorSpace::Srgb;
+    auto midtone=colored;
+    for(auto& level:midtone.mipLevels)for(std::size_t i=0;i<level.rgba8.size();i+=4)
+        for(unsigned channel=0;channel<4;++channel)level.rgba8[i+channel]=std::array<unsigned char,4>{128,64,32,200}[channel];
+    midtone.rgba8=midtone.mipLevels.front().rgba8;
+    const auto encodedMidtone=encodeTextureContainer(midtone,"dds",{{"compression","bc7"}});
+    {std::ofstream output(root/"midtone.dds",std::ios::binary);output.write(reinterpret_cast<const char*>(encodedMidtone.data()),encodedMidtone.size());}
+    const auto decodedMidtone=decodeImageBytes(encodedMidtone);
+    {std::ofstream output(root/"midtone-decoded.rgba",std::ios::binary);output.write(reinterpret_cast<const char*>(decodedMidtone.rgba8.data()),decodedMidtone.rgba8.size());}
+    for(const auto& level:decodedMidtone.mipLevels)for(std::size_t i=0;i<level.rgba8.size();++i)
+        require(std::abs(int(level.rgba8[i])-int(std::array<unsigned char,4>{128,64,32,200}[i%4]))<=5,
+            "sRGB BC7 decoding must preserve stored midtone bytes across every mip");
     for(const std::string compression:{"bc3","bc7","basis"}){
         std::cerr<<"Checking "<<compression<<'\n';
         const auto encoded=encodeTextureContainer(colored,compression=="basis"?"ktx2":"dds",{{"compression",compression}});

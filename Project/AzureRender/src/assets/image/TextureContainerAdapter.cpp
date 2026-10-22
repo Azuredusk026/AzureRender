@@ -24,8 +24,10 @@ void extent(std::size_t width,std::size_t height,std::size_t levels){
 }
 ImageMipLevel pixels(const DirectX::Image& source,const AssetCancellation& cancel){
     check(cancel);DirectX::ScratchImage converted;const DirectX::Image* image=&source;
-    if(DirectX::IsCompressed(source.format)){dx(DirectX::Decompress(source,DXGI_FORMAT_R8G8B8A8_UNORM,converted));image=converted.GetImage(0,0,0);}
-    else if(source.format!=DXGI_FORMAT_R8G8B8A8_UNORM&&source.format!=DXGI_FORMAT_R8G8B8A8_UNORM_SRGB){dx(DirectX::Convert(source,DXGI_FORMAT_R8G8B8A8_UNORM,DirectX::TEX_FILTER_DEFAULT,.5F,converted));image=converted.GetImage(0,0,0);}
+    // Preserve encoded color bytes. The material's GPU view owns sRGB decoding.
+    const auto target=DirectX::IsSRGB(source.format)?DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:DXGI_FORMAT_R8G8B8A8_UNORM;
+    if(DirectX::IsCompressed(source.format)){dx(DirectX::Decompress(source,target,converted));image=converted.GetImage(0,0,0);}
+    else if(source.format!=target){dx(DirectX::Convert(source,target,DirectX::TEX_FILTER_DEFAULT,.5F,converted));image=converted.GetImage(0,0,0);}
     ImageMipLevel result{static_cast<unsigned>(image->width),static_cast<unsigned>(image->height),{}};result.rgba8.resize(image->width*image->height*4);
     for(std::size_t y=0;y<image->height;++y){check(cancel);std::memcpy(result.rgba8.data()+y*image->width*4,image->pixels+y*image->rowPitch,image->width*4);}return result;
 }

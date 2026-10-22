@@ -14,6 +14,10 @@ int main(){try{
             {"extras",{{"azureRenderMaterial",{{"schemaVersion",2},{"class","fabric"},{"features",{"silhouette-outline"}}}}}}}})}}}};
     const auto completeDocument=MaterialData::parse(complete);
     require(completeDocument.encode()==complete,"Complete material profiles must round trip without semantic loss");
+    bool settingsCountRejected=false;
+    try{(void)loadEmbeddedGltfMaterials(complete["surface"].dump(),false,{nlohmann::json::object()});}
+    catch(const std::exception& error){settingsCountRejected=std::string(error.what()).find("image table")!=std::string::npos;}
+    require(settingsCountRejected,"Embedded material import settings must match the source image table");
     require(MaterialGraph::fromMaterial(completeDocument).compile().encode()==complete,"Material graphs must preserve complete surface documents");
     const auto completeMaterial=completeDocument.interpret([](const auto&){return std::filesystem::path();});
     require(completeMaterial.materialClass==AssetMaterialClass::Fabric&&completeMaterial.doubleSided

@@ -1,4 +1,5 @@
 #include "assets/GltfLoader.hpp"
+#include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
 #include <cstring>
 #include "runtime/LevelRenderSettings.hpp"
@@ -58,6 +59,15 @@ void testCharacterProfileTextures(const nlohmann::json& fixture, const std::file
     require(actual.hairDataWidth==2&&actual.hairDataHeight==2&&actual.hairDataPixels==hairPixels,
         "Packed hair data must preserve all four linear channels by default");
     require(actual.textureSettings[6].colorSpace=="linear", "Packed hair texture must use linear sampling");
+    auto unrelatedAo=source;
+    unrelatedAo["materials"][0]["occlusionTexture"]={{"index",hair}};
+    std::ofstream(directory/"hair-data.png.azmeta")<<Json{{"settings",{{"texture",{{"filter","nearest"}}}}}};
+    require(load(unrelatedAo).materials[0].textureSettings[4].filter=="linear",
+        "An unrelated glTF AO image must not override the selected diffuse-ramp sampler");
+    std::filesystem::remove(directory/"hair-data.png.azmeta");
+    std::ofstream(directory/"diffuse-ramp.png.azmeta")<<Json{{"settings",{{"texture",{{"filter","nearest"}}}}}};
+    reject(source,"fixed lookup sampler","Diffuse-ramp metadata must respect the fixed lookup contract");
+    std::filesystem::remove(directory/"diffuse-ramp.png.azmeta");
     require((actual.materialFeatures&MaterialFeatureDiffuseRamp)!=0
         &&(actual.materialFeatures&MaterialFeatureSilhouetteOutline)!=0,
         "Explicit diffuse ramp and silhouette features must survive production loading");
@@ -188,6 +198,46 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     const auto stripedAsset=load(striped);const auto& line=stripedAsset.materials[0].projectedHairRamp.line;
     require(line.present&&line.frequency==300&&line.pixels.size()>0,"Independent specular-line texture must reach its typed owner");
     require(packMaterialSurfaceProfile(stripedAsset.materials[0]).rows[8]==std::array<float,4>{1,1.5F,1,0},"Line parameters must reach their dedicated GPU rows");
+    // The actual sampled image owns metadata, including typed hair inputs.
+    auto sampled=striped;
+    std::filesystem::copy_file(directory/"projected-ramp.png",directory/"sampled-hair.png",
+        std::filesystem::copy_options::overwrite_existing);
+    const int sampledImage=static_cast<int>(sampled["images"].size());
+    sampled["images"].push_back({{"uri","sampled-hair.png"}});
+    const int sampledTexture=static_cast<int>(sampled["textures"].size());
+    sampled["textures"].push_back({{"source",sampledImage}});
+    auto& sampledHair=sampled["materials"][0]["extras"]["azureRenderMaterial"]["hair"];
+    sampledHair["dataTexture"]=sampledTexture;
+    sampledHair["projectedRamp"]["parameterTexture"]=sampledTexture;
+    sampledHair["projectedRamp"]["line"]["texture"]=sampledTexture;
+    const auto sampledSidecar=directory/"sampled-hair.png.azmeta";
+    std::ofstream(sampledSidecar)<<Json{{"settings",{{"texture",{{"anisotropy",16},{"wrapU","mirror"}}}}}};
+    const auto sampledMaterial=load(sampled).materials[0];
+    for(unsigned slot:{6U,7U,8U})
+        require(sampledMaterial.textureSettings[slot].anisotropy==16
+            &&sampledMaterial.textureSettings[slot].wrapU=="mirror"
+            &&sampledMaterial.textureSettings[slot].colorSpace=="linear",
+            "Typed hair samplers must inherit metadata from their selected source images");
+    Json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",Json::object()},
+        {"textures",Json::object()},{"surface",{{"asset",{{"version","2.0"}}},
+            {"materials",Json::array({sampled["materials"][0]})},{"textures",sampled["textures"]}}}};
+    std::map<std::string,std::filesystem::path> imagePaths;
+    for(std::size_t index=0;index<sampled["images"].size();++index) {
+        auto uuid=std::string("00000000-0000-4000-8000-")+std::string(12-std::to_string(index).size(),'0')+std::to_string(index);
+        complete["textures"][std::to_string(index)]={{"asset",uuid},{"usage","linear"}};
+        imagePaths[uuid]=directory/std::filesystem::u8path(sampled["images"][index]["uri"].get<std::string>());
+    }
+    const auto resolved=MaterialData::parse(complete).interpret([&](const auto& uuid){return imagePaths.at(uuid);});
+    for(unsigned slot:{6U,7U,8U})
+        require(resolved.textureSettings[slot].anisotropy==16&&resolved.textureSettings[slot].wrapU=="mirror",
+            "Complete UUID materials must preserve typed image sampling metadata");
+    std::ofstream(sampledSidecar)<<Json{{"settings",{{"texture",{{"usage","albedo"},{"colorSpace","srgb"}}}}}};
+    reject(sampled,"typed texture color space");
+    bool rejectedUuid=false;
+    try{(void)MaterialData::parse(complete).interpret([&](const auto& uuid){return imagePaths.at(uuid);});}
+    catch(const std::exception& error){rejectedUuid=std::string(error.what()).find("typed texture color space")!=std::string::npos;}
+    require(rejectedUuid,"Complete UUID materials must reject incompatible typed image metadata");
+    std::filesystem::remove(sampledSidecar);
     for(const auto& value:Json::array({-1,17,"1",true,nullptr})) {
         auto invalid=virtualSource;invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["virtualLight"]["objectGain"]=value;reject(invalid);
     }

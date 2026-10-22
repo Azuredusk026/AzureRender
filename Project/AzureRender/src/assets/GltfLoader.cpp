@@ -1113,7 +1113,8 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
 
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
-    const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr) {
+    const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr,
+    const std::vector<nlohmann::json>* imageSettings=nullptr) {
     AssetMaterial result;
     int baseColorImage = -1;
     int normalImage = -1;
@@ -1125,6 +1126,8 @@ AssetMaterial loadMaterial(
     bool positiveHairNormalY=false;
     int faceSdfImage = -1;
     int projectedHairParameterImage=-1;
+    int projectedHairLineImage=-1;
+    int shadowColorLutImage=-1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
@@ -1682,7 +1685,8 @@ AssetMaterial loadMaterial(
         if(hair.line.present){
             const auto& profile=material->extras.Get("azureRenderMaterial").Get("hair").Get("projectedRamp").Get("line");
             const auto texture=profile.Get("texture").Get<int>();auto& line=hair.line;
-            line.pixels=decodeImageRgba(model,model.textures.at(texture).source,noFactor,
+            projectedHairLineImage=model.textures.at(texture).source;
+            line.pixels=decodeImageRgba(model,projectedHairLineImage,noFactor,
                 line.width,line.height,false,authored,&result.authoredMipLevels[8]);
         }
     }
@@ -1700,7 +1704,8 @@ AssetMaterial loadMaterial(
             if(!std::isfinite(index)||std::floor(index)!=index||index<0||index>=model.textures.size())
                 throw std::invalid_argument("Invalid shadowColorLut.texture");
             if(lut.Has("flipV")&&!lut.Get("flipV").IsBool())throw std::invalid_argument("shadowColorLut.flipV requires a boolean");
-            result.shadowColorLutPixels=decodeImageRgba(model,model.textures.at(static_cast<std::size_t>(index)).source,
+            shadowColorLutImage=model.textures.at(static_cast<std::size_t>(index)).source;
+            result.shadowColorLutPixels=decodeImageRgba(model,shadowColorLutImage,
                 {1,1,1,1},result.shadowColorLutWidth,result.shadowColorLutHeight,true,authored,nullptr);
             azurerender::validateShadowColorLutDimensions(result.shadowColorLutWidth,result.shadowColorLutHeight);
             if(result.shadowColorLutPixels.size()!=static_cast<std::size_t>(result.shadowColorLutWidth)*result.shadowColorLutHeight*4)
@@ -1779,6 +1784,32 @@ AssetMaterial loadMaterial(
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             result.materialFeatures|=MaterialFeatureNprDiffuse;
+        }
+    }
+    if(imageSettings) {
+        const int images[]={baseColorImage,normalImage,metallicRoughnessImage,specularEmissiveImage,
+            styleMaskImage,matcapImage,hairDataImage,
+            projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
+            projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
+        for(std::size_t slot=0;slot<9;++slot) {
+            if(images[slot]<0)continue;
+            const auto& raw=imageSettings->at(static_cast<std::size_t>(images[slot]));
+            if(raw.is_null())continue;
+            const auto defaults=result.textureSettings[slot];
+            auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
+            const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
+                ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
+                ||(slot==5&&(result.projectedHairRamp.present
+                    ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
+                ||(slot==8&&shadowColorLutImage>=0);
+            const bool typed=lookup||slot==6||slot==7||slot==8;
+            if(typed&&settings.colorSpace!=defaults.colorSpace)
+                throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
+            if(lookup&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU
+                ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
+                ||settings.anisotropy!=defaults.anisotropy))
+                throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
+            result.textureSettings[slot]=std::move(settings);
         }
     }
     return result;
@@ -2380,7 +2411,8 @@ const char* assetMaterialClassName(const AssetMaterialClass value) {
 }
 
 namespace {
-LoadedAsset importGltfModel(tinygltf::Model&,const AuthoredImageMips* authored=nullptr);
+LoadedAsset importGltfModel(tinygltf::Model&,const AuthoredImageMips* authored=nullptr,
+    const std::vector<nlohmann::json>* imageSettings=nullptr);
 bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,std::string* warning,
     int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void* userData) {
     try {
@@ -2439,24 +2471,17 @@ LoadedAsset loadGltfAsset(const std::string& path) {
         throw std::runtime_error("Unable to load glTF asset: " + error);
     }
     validateEyeAuthoredAlpha(model,authoredAlpha);
-    auto asset=importGltfModel(model,&authored);
-    for(std::size_t index=0;index<model.materials.size();++index) {
-        const auto& material=model.materials[index];
-        const int textures[]={material.pbrMetallicRoughness.baseColorTexture.index,material.normalTexture.index,material.pbrMetallicRoughness.metallicRoughnessTexture.index,material.emissiveTexture.index,material.occlusionTexture.index};
-        for(std::size_t slot=0;slot<5;++slot) {
-            // A dual SDF mask has its own typed source, independent of glTF AO.
-            if(slot==4 && (asset.materials[index].materialFeatures&MaterialFeatureDualFaceSdf))continue;
-            if(textures[slot]<0)continue;
-            const auto image=model.textures.at(static_cast<std::size_t>(textures[slot])).source;
-            if(image<0)continue;const auto& uri=model.images.at(static_cast<std::size_t>(image)).uri;
-            if(uri.empty()||uri.rfind("data:",0)==0)continue;
-            const auto sidecar=filePath.parent_path()/std::filesystem::u8path(uri+".azmeta");
-            if(!std::filesystem::exists(sidecar))continue;
-            std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;
-            const auto settings=metadata.value("settings",nlohmann::json::object());
-            if(settings.contains("texture"))asset.materials[index].textureSettings[slot]=azurerender::TextureImportSettings::parse(settings.at("texture"),asset.materials[index].textureSettings[slot]);
-        }
+    std::vector<nlohmann::json> imageSettings(model.images.size());
+    for(std::size_t index=0;index<model.images.size();++index) {
+        const auto& uri=model.images[index].uri;
+        if(uri.empty()||uri.rfind("data:",0)==0)continue;
+        const auto sidecar=filePath.parent_path()/std::filesystem::u8path(uri+".azmeta");
+        if(!std::filesystem::exists(sidecar))continue;
+        std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;
+        const auto settings=metadata.value("settings",nlohmann::json::object());
+        if(settings.contains("texture"))imageSettings[index]=settings.at("texture");
     }
+    auto asset=importGltfModel(model,&authored,&imageSettings);
     for(const auto& material:asset.materials)validateEyeTextureSettings(material);
     return asset;
 }
@@ -2485,19 +2510,23 @@ LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
     return importGltfModel(model,&authored);
 }
-std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary){
+std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary,
+    const std::vector<nlohmann::json>& imageSettings){
     tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
+    if(!imageSettings.empty()&&imageSettings.size()!=model.images.size())
+        throw std::invalid_argument("Image import settings must match the glTF image table");
     std::vector<AssetMaterial> materials;materials.reserve(model.materials.size());
-    for(const auto& source:model.materials){auto material=loadMaterial(model,&source,&authored);validateEyeTextureSettings(material);materials.push_back(std::move(material));}
+    for(const auto& source:model.materials){auto material=loadMaterial(model,&source,&authored,imageSettings.empty()?nullptr:&imageSettings);validateEyeTextureSettings(material);materials.push_back(std::move(material));}
     return materials;
 }
 namespace {
-LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* authored){
+LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* authored,
+    const std::vector<nlohmann::json>* imageSettings){
     normalizeGltfAccessors(model);
     LoadedAsset asset;
     asset.materials.reserve(model.materials.size() + 1);
     for (const auto& material : model.materials) {
-        asset.materials.push_back(loadMaterial(model, &material,authored));
+        asset.materials.push_back(loadMaterial(model, &material,authored,imageSettings));
     }
     const AssetFaceSdfProfile* faceFrame=nullptr;
     for(const auto& material:asset.materials)if(material.faceSdf.present) {

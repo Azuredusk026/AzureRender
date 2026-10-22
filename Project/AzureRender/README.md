@@ -4,6 +4,7 @@
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。
 实际顶点与采集调色表见[专项验证](docs/acceptance/nr/captured-vertex-and-grading.md)。
 头发手性、色带及分层输入见[坐标约定](docs/acceptance/nr/projected-hair-coordinates.md)。
+图片采样、原生 mip 及完整文档见[输入验证](docs/acceptance/nr/typed-image-inputs.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。
 投影头发支持显式虚拟主灯与独立条纹。
 数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。

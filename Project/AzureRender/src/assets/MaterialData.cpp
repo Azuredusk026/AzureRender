@@ -81,6 +81,7 @@ void MaterialData::validate()const{
 AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(const std::string&)>& resolve,const AssetMaterial* source)const{
     if(typeId=="azure.profile"){
         validate();auto document=surface;document["images"]=Json::array();std::uintmax_t sourceBytes=0;
+        std::vector<Json> imageSettings(textures.size());
         for(std::size_t index=0;index<textures.size();++index){
             const auto path=resolve(textures.at(std::to_string(index)).at("asset").get<std::string>());
             const auto size=std::filesystem::file_size(path);sourceBytes+=size;
@@ -92,8 +93,11 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
             for(unsigned char byte:bytes){accumulator=(accumulator<<8)|byte;bits+=8;while(bits>=0){encoded+=alphabet[(accumulator>>bits)&63];bits-=6;}}
             if(bits>-6)encoded+=alphabet[((accumulator<<8)>>(bits+8))&63];while(encoded.size()%4)encoded+='=';
             document["images"].push_back({{"uri","data:application/octet-stream;base64,"+encoded}});
+            std::ifstream sidecar(std::filesystem::u8path(path.u8string()+".azmeta"));
+            if(sidecar){Json metadata;sidecar>>metadata;const auto settings=metadata.value("settings",Json::object());
+                if(settings.contains("texture"))imageSettings[index]=settings.at("texture");}
         }
-        return loadEmbeddedGltfMaterials(document.dump()).at(0);
+        return loadEmbeddedGltfMaterials(document.dump(),false,imageSettings).at(0);
     }
     validate();if(parameterOverride&&!source)throw std::invalid_argument("Parameter override requires a source material");
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}

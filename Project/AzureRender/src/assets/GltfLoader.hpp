@@ -286,7 +286,9 @@ struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height
 // Candidate validation consumes embedded data without filesystem access.
 [[nodiscard]] LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary=false);
 // Material-only documents share the glTF decoder and embedded-resource boundary.
-[[nodiscard]] std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary=false);
+// Optional raw import settings are indexed by source image; null entries use role defaults.
+[[nodiscard]] std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary=false,
+    const std::vector<nlohmann::json>& imageSettings={});
 [[nodiscard]] const char* assetMaterialClassName(AssetMaterialClass value);
 struct AssetNodePose {
     std::array<float, 3> translation{};

@@ -20,6 +20,7 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。
 执行后顶点与实际调色表见[采集证据](../acceptance/nr/captured-vertex-and-grading.md)。
 切线手性、色带方向及诊断快照见[坐标验证](../acceptance/nr/projected-hair-coordinates.md)。
+九槽采样、容器颜色及原生 mip 见[输入验证](../acceptance/nr/typed-image-inputs.md)。
 
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。
