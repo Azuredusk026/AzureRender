@@ -20,6 +20,15 @@ int main(){
         const auto content=context->documentContent();
         const auto first=run(session,"material.create",{{"type","azure.pbr"},{"destination","assets:/surface.azurematerial"}}).at("asset").get<std::string>();
         const auto second=run(session,"material.create",{{"type","azure.stylized"},{"destination","assets:/style.azurematerial"}}).at("asset").get<std::string>();
+        const auto full=run(session,"material.create",{{"type","azure.profile"},{"destination","assets:/complete.azurematerial"}}).at("asset").get<std::string>();
+        const auto fullOriginal=run(session,"material.describe",{{"asset",full}}).at("document");
+        auto fullSurface=fullOriginal.at("surface");fullSurface["materials"][0]["alphaMode"]="MASK";
+        fullSurface["materials"][0]["extras"]["azureRenderMaterial"]["class"]="fabric";
+        run(session,"material.field",{{"asset",full},{"field","surface"},{"value",fullSurface}});
+        run(session,"material.undo",{{"asset",full}});
+        require(run(session,"material.describe",{{"asset",full}}).at("document")==fullOriginal,"Full profile undo must restore the complete document");
+        run(session,"material.redo",{{"asset",full}});run(session,"material.save",{{"asset",full}});
+        require(run(session,"material.describe",{{"asset",full}}).at("document").at("surface")==fullSurface,"Full profile edits must persist all fields");
         const auto patch=run(session,"material.create",{{"type","azure.pbr"},{"mode","parameters"},{"destination","assets:/patch.azurematerial"}}).at("asset").get<std::string>();
         require(run(session,"material.describe",{{"asset",patch}}).at("document").at("parameters").empty(),"Parameter overrides start with inherited source fields");
         run(session,"material.field",{{"asset",patch},{"field","emissiveStrength"},{"value",2.0}});
@@ -43,6 +52,11 @@ int main(){
         run(session,"material.redo",{{"asset",first}});run(session,"material.save",{{"asset",first}});
         {std::ofstream image(root/"assets/color.ppm",std::ios::binary);image<<"P6\n1 1\n255\n";const unsigned char pixel[]={180,90,40};image.write(reinterpret_cast<const char*>(pixel),3);}
         context->assets().refresh();const auto imageId=context->assets().idForPath("assets:/color.ppm");
+        run(session,"material.field",{{"asset",full},{"field","images"},{"value",{{"0",{{"asset",imageId},{"usage","linear"}}}}}});
+        fullSurface["textures"]=Json::array({{{"source",0}}});
+        fullSurface["materials"][0]["pbrMetallicRoughness"]["baseColorTexture"]={{"index",0}};
+        run(session,"material.field",{{"asset",full},{"field","surface"},{"value",fullSurface}});
+        require(context->assets().records().at(full).dependencies==std::vector<std::string>{imageId},"Full profile UUIDs must participate in asset dependency fingerprints");
         {const auto sidecar=root/"assets/color.ppm.azmeta";std::ifstream input(sidecar);Json metadata;input>>metadata;input.close();metadata["settings"]["texture"]={{"filter","nearest"},{"mipPolicy","none"},{"wrapU","clamp"}};std::ofstream output(sidecar);output<<metadata.dump();}
         context->assets().refresh();
         require(!session.edit("material.field",{{"asset",first},{"field","textures.albedo"},{"value",{{"asset",second},{"usage","albedo"}}}}),"Non-image texture references must be rejected without touching the asset");
@@ -89,6 +103,7 @@ int main(){
         require(!session.edit("asset.reimport",{{"asset",model},{"settings",Json::object()},{"baseFingerprint",std::to_string(context->assets().records().at(model).fingerprint)}}),"Missing assigned slots must reject reimport before publication");
         require(session.tasks().report().size()==taskCount,"Invalid slot mappings must reject before creating a task");context->scene().nodes.front().materialSlots=prior;context->scene().nodes.front().resourceId=priorResource;
         auto reopened=EditorContext::openProject(root/"project.azureproject");EditorSession other(reopened);
+        require(run(other,"material.describe",{{"asset",full}}).at("document").at("surface")==fullSurface,"Complete profiles must survive project reopening");
         require(run(other,"material.slots",{{"node","left"}}).at("slots")[0].at("override")==first,"Save and reopen must preserve UUID overrides");
         require(run(other,"material.describe",{{"asset",first}}).at("document").at("parameters").at("roughness")==.25,"Saved material parameters must survive reopening");
         run(other,"material.reset-slot",{{"nodes",{"left"}},{"slotId",slot}});

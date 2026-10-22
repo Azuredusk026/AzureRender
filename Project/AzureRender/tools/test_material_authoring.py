@@ -62,6 +62,28 @@ def run(executable, player, root):
     assert patch['schemaVersion'] == 2 and patch['mode'] == 'parameters', patch
     assert patch['parameters'] == {'baseColor': [.8, .8, .8, 1.]}, patch
     assert patched['feedback'] == [] and not patched['dirty']
+    surface = {'asset': {'version': '2.0'}, 'materials': [{'alphaMode': 'MASK',
+        'doubleSided': True, 'extras': {'azureRenderMaterial': {
+            'schemaVersion': 2, 'class': 'fabric', 'features': ['silhouette-outline']}}}]}
+    complete_actions = create_actions[:2] + [
+        dict(frame=40, action='click', target='material.create-name'),
+        dict(frame=43, action='key', key='A', down=True, ctrl=True),
+        dict(frame=44, action='key', key='A', down=False, ctrl=True),
+        dict(frame=45, action='key', key='A', down=False, ctrl=False),
+        dict(frame=47, action='text', text='Complete.azurematerial'),
+        dict(frame=54, action='click', target='material.create.azure.profile'),
+        dict(frame=62, action='click', target='material.surface.source'),
+        dict(frame=65, action='key', key='A', down=True, ctrl=True),
+        dict(frame=66, action='key', key='A', down=False, ctrl=True),
+        dict(frame=67, action='key', key='A', down=False, ctrl=False),
+        dict(frame=69, action='text', text=json.dumps(surface)),
+        dict(frame=76, action='click', target='material.surface.apply'),
+        dict(frame=84, action='click', target='material.undo'),
+        dict(frame=92, action='click', target='material.redo')]
+    complete_ui = launch(executable, root, 'create-complete', (1920, 1080), 1, complete_actions)
+    complete = json.loads((root / 'game/assets/Complete.azurematerial').read_text())
+    assert complete['schemaVersion'] == 3 and complete['surface'] == surface, complete
+    assert complete_ui['feedback'] == [] and not complete_ui['dirty']
     assign = [dict(frame=25, action='click', target='node.asset-a'),
               dict(frame=31, action='click', target='material.slots-header'),
               dict(frame=38, action='click', target='material.slot.name:stone'),
@@ -100,7 +122,7 @@ def run(executable, player, root):
         assert 'VUID-' not in result.stderr and 'Validation Error' not in result.stderr
         assert 'Allocator after unload: buffers=0 images=0' in result.stdout
     summary = dict(stage='U11', passed=True, types=['azure.pbr', 'azure.stylized'], actualSubmeshSlots=2,
-                   viewportMeanDifference=difference, playerRuns=2, parameterOverrideUi=True, physicalKeyboardMouse='not performed',
+                   viewportMeanDifference=difference, playerRuns=2, parameterOverrideUi=True, completeProfileUi=True, physicalKeyboardMouse='not performed',
                    releasePackaging='separate acceptance receipt')
     (root / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     print(json.dumps(summary))

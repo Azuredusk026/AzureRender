@@ -196,6 +196,9 @@ void loadMaterialProfile(
                 ||!profile.at("schemaVersion").is_number_integer()
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
+            const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","specularInput","nprDiffuse","surface","composite","sceneRefraction"};
+            for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
                 const auto& vector=profile.at(key);
                 if(!vector.is_array()||vector.size()!=4)throw std::invalid_argument(context+": invalid "+key);

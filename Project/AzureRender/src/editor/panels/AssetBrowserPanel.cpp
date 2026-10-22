@@ -118,7 +118,7 @@ void AssetBrowserPanel::draw(PanelContext& panelContext) {
         if(ImGui::BeginMenu(ui::tr("Create material"))){
             ui::inputText("Name",presentation.materialName_);services_.observe("material.create-name");
             for(const auto& type:MaterialTypeRegistry::builtins().describe())for(const bool parameterOverride:{false,true}){
-                const auto id=type.at("id").get<std::string>();
+                const auto id=type.at("id").get<std::string>();if(parameterOverride&&id=="azure.profile")continue;
                 const auto label=type.at("label").get<std::string>()+(parameterOverride?std::string(" - ")+ui::tr("参数覆盖"):std::string());
                 if(ImGui::MenuItem(label.c_str())){
                     const auto destination=(presentation.assetMount_.empty()?"assets:/":presentation.assetMount_+":/")+(presentation.assetDirectory_.empty()?"":presentation.assetDirectory_+"/")+presentation.materialName_;

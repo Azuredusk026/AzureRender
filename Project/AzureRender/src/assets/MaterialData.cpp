@@ -17,6 +17,7 @@ Json MaterialTypeRegistry::describe()const{auto out=Json::array();for(const auto
 MaterialTypeRegistry& MaterialTypeRegistry::builtins(){
     static auto registry=[] {
         MaterialTypeRegistry out;
+        out.add({"azure.profile","Surface profile",Json::object(),Json::object(),[](AssetMaterial&,const Json&){}});
         Json parameters={{"baseColor",{{"type","color"},{"default",{.8,.8,.8,1.}},{"min",0},{"max",1}}},
             {"roughness",{{"type","number"},{"default",.75},{"min",0},{"max",1}}},
             {"metallic",{{"type","number"},{"default",0.},{"min",0},{"max",1}}},
@@ -35,19 +36,26 @@ MaterialTypeRegistry& MaterialTypeRegistry::builtins(){
         }});return out;
     }();return registry;
 }
-MaterialData MaterialData::defaults(const std::string& type){MaterialData result;result.typeId=type;for(const auto& field:MaterialTypeRegistry::builtins().type(type).parameters.items())result.parameters[field.key()]=field.value().at("default");return result;}
+MaterialData MaterialData::defaults(const std::string& type){MaterialData result;result.typeId=type;for(const auto& field:MaterialTypeRegistry::builtins().type(type).parameters.items())result.parameters[field.key()]=field.value().at("default");if(type=="azure.profile")result.surface={{"asset",{{"version","2.0"}}},{"materials",Json::array({{{"extras",{{"azureRenderMaterial",{{"schemaVersion",2},{"class","generic"},{"features",Json::array()}}}}}}})}};return result;}
 MaterialData MaterialData::parse(const Json& source){
     if(!source.is_object()||!source.at("schemaVersion").is_number_integer()
-        ||(source.at("schemaVersion")!=1&&source.at("schemaVersion")!=2))throw std::invalid_argument("Unsupported material schema");
+        ||(source.at("schemaVersion")!=1&&source.at("schemaVersion")!=2&&source.at("schemaVersion")!=3))throw std::invalid_argument("Unsupported material schema");
     const bool patch=source.at("schemaVersion")==2;
     if(patch?(!source.contains("mode")||source.at("mode")!="parameters"):source.contains("mode"))throw std::invalid_argument("Invalid material mode");
-    for(const auto& field:source.items())if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="typeId"&&field.key()!="parameters"&&field.key()!="textures"&&field.key()!="authoringGraph")throw std::invalid_argument("Unknown material field: "+field.key());
-    auto result=defaults(source.at("typeId").get<std::string>());result.parameterOverride=patch;result.parameters=source.at("parameters");result.textures=source.value("textures",Json::object());result.authoringGraph=source.value("authoringGraph",Json(nullptr));result.validate();return result;
+    for(const auto& field:source.items())if(field.key()!="schemaVersion"&&field.key()!="mode"&&field.key()!="typeId"&&field.key()!="parameters"&&field.key()!="textures"&&field.key()!="authoringGraph"&&field.key()!="surface")throw std::invalid_argument("Unknown material field: "+field.key());
+    if((source.at("schemaVersion")==3)!=(source.at("typeId")=="azure.profile")||source.contains("surface")!=(source.at("schemaVersion")==3))throw std::invalid_argument("Surface profiles require material schema 3");
+    auto result=defaults(source.at("typeId").get<std::string>());result.parameterOverride=patch;result.parameters=source.at("parameters");result.textures=source.value("textures",Json::object());result.authoringGraph=source.value("authoringGraph",Json(nullptr));result.surface=source.value("surface",Json(nullptr));result.validate();return result;
 }
 MaterialData MaterialData::load(const std::filesystem::path& path){std::ifstream input(path);if(!input)throw std::runtime_error("Cannot open material: "+path.u8string());Json data;input>>data;return parse(data);}
-Json MaterialData::encode()const{validate();Json out={{"schemaVersion",parameterOverride?2:1},{"typeId",typeId},{"parameters",parameters},{"textures",textures}};if(parameterOverride)out["mode"]="parameters";if(!authoringGraph.is_null())out["authoringGraph"]=authoringGraph;return out;}
+Json MaterialData::encode()const{validate();Json out={{"schemaVersion",typeId=="azure.profile"?3:parameterOverride?2:1},{"typeId",typeId},{"parameters",parameters},{"textures",textures}};if(parameterOverride)out["mode"]="parameters";if(!surface.is_null())out["surface"]=surface;if(!authoringGraph.is_null())out["authoringGraph"]=authoringGraph;return out;}
 void MaterialData::validate()const{
-    if(!authoringGraph.is_null()){const auto compiled=MaterialGraph::parse(authoringGraph).compile();if(compiled.parameterOverride!=parameterOverride||compiled.typeId!=typeId||compiled.parameters!=parameters||compiled.textures!=textures)throw std::invalid_argument("Material graph and compiled values differ");}
+    if(typeId=="azure.profile"){
+        if(parameterOverride||!parameters.is_object()||!parameters.empty()||!surface.is_object()||!surface.contains("materials")||!surface["materials"].is_array()||surface["materials"].size()!=1)throw std::invalid_argument("Surface document requires exactly one material");
+        for(const auto& field:surface.items())if(field.key()!="asset"&&field.key()!="materials"&&field.key()!="textures"&&field.key()!="samplers"&&field.key()!="nodes")throw std::invalid_argument("Unknown surface document field: "+field.key());
+        if(!textures.is_object()||textures.size()>64)throw std::invalid_argument("Profile image table exceeds budget");
+        for(std::size_t index=0;index<textures.size();++index)if(!textures.contains(std::to_string(index)))throw std::invalid_argument("Profile images require contiguous numeric keys");
+    }else if(!surface.is_null())throw std::invalid_argument("Surface data requires a profile material");
+    if(!authoringGraph.is_null()){const auto compiled=MaterialGraph::parse(authoringGraph).compile();if(compiled.surface!=surface||compiled.parameterOverride!=parameterOverride||compiled.typeId!=typeId||compiled.parameters!=parameters||compiled.textures!=textures)throw std::invalid_argument("Material graph and compiled values differ");}
     const auto& type=MaterialTypeRegistry::builtins().type(typeId);
     if(!parameters.is_object()||!textures.is_object()||(!parameterOverride&&parameters.size()!=type.parameters.size()))throw std::invalid_argument("Material parameters require all registered fields");
     for(const auto& field:parameters.items())if(!type.parameters.contains(field.key()))throw std::invalid_argument("Unknown material parameter: "+field.key());
@@ -59,13 +67,33 @@ void MaterialData::validate()const{
         if(kind=="color"){if(!value.is_array()||value.size()!=4)throw std::invalid_argument("Material color requires four channels");for(const auto& item:value)number(item);}else number(value);
     }
     for(const auto& field:textures.items()){
-        if(!type.textures.contains(field.key())||!field.value().is_object()||field.value().size()!=2||field.value().at("usage")!=type.textures.at(field.key()))throw std::invalid_argument("Invalid material texture slot or usage");
+        if((typeId!="azure.profile"&&(!type.textures.contains(field.key())||field.value().at("usage")!=type.textures.at(field.key())))||!field.value().is_object()||field.value().size()!=2)throw std::invalid_argument("Invalid material texture slot or usage");
+        if(typeId=="azure.profile"){
+            const auto usage=field.value().at("usage").get<std::string>();
+            if(usage!="albedo"&&usage!="normal"&&usage!="roughness"&&usage!="emissive"&&usage!="linear"&&usage!="mask"&&usage!="packed-normal")throw std::invalid_argument("Invalid profile image usage");
+        }
         const auto id=field.value().at("asset").get<std::string>();
         if(id.size()!=36||id[8]!='-'||id[13]!='-'||id[18]!='-'||id[23]!='-')throw std::invalid_argument("Material textures require asset UUIDs");
         for(std::size_t index=0;index<id.size();++index)if(index!=8&&index!=13&&index!=18&&index!=23&&!std::isxdigit(static_cast<unsigned char>(id[index])))throw std::invalid_argument("Invalid material texture UUID");
     }
 }
 AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(const std::string&)>& resolve,const AssetMaterial* source)const{
+    if(typeId=="azure.profile"){
+        validate();auto document=surface;document["images"]=Json::array();std::uintmax_t sourceBytes=0;
+        for(std::size_t index=0;index<textures.size();++index){
+            const auto path=resolve(textures.at(std::to_string(index)).at("asset").get<std::string>());
+            const auto size=std::filesystem::file_size(path);sourceBytes+=size;
+            if(size>64*1024*1024||sourceBytes>64*1024*1024)throw std::invalid_argument("Profile images exceed aggregate source budget");
+            std::ifstream input(path,std::ios::binary);if(!input)throw std::invalid_argument("Cannot open profile image");
+            const std::vector<unsigned char> bytes{std::istreambuf_iterator<char>(input),{}};
+            if(bytes.size()>64*1024*1024)throw std::invalid_argument("Profile image exceeds source budget");
+            const char* alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";std::string encoded;unsigned accumulator=0;int bits=-6;
+            for(unsigned char byte:bytes){accumulator=(accumulator<<8)|byte;bits+=8;while(bits>=0){encoded+=alphabet[(accumulator>>bits)&63];bits-=6;}}
+            if(bits>-6)encoded+=alphabet[((accumulator<<8)>>(bits+8))&63];while(encoded.size()%4)encoded+='=';
+            document["images"].push_back({{"uri","data:application/octet-stream;base64,"+encoded}});
+        }
+        return loadEmbeddedGltfMaterials(document.dump()).at(0);
+    }
     validate();if(parameterOverride&&!source)throw std::invalid_argument("Parameter override requires a source material");
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
@@ -126,7 +154,11 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
     const auto slots=materialSlotIds(mesh);
     for(const auto& [id,binding]:bindings){const auto found=std::find(slots.begin(),slots.end(),id);if(found==slots.end())throw std::invalid_argument("Material slot disappeared during reimport: "+id);
         const auto index=static_cast<std::size_t>(found-slots.begin());const auto slotId=mesh.materials[index].slotId,name=mesh.materials[index].name;
-        const auto document=MaterialData::load(std::filesystem::u8path(binding.path));
+        auto document=MaterialData::load(std::filesystem::u8path(binding.path));
+        if(document.typeId=="azure.profile"){
+            document.authoringGraph=nullptr;document.surface["nodes"]=Json::array();
+            for(const auto& node:mesh.nodes)document.surface["nodes"].push_back({{"name",node.name}});
+        }
         auto replacement=document.interpret([&](const std::string& uuid){return std::filesystem::u8path(binding.textures.at(uuid));},&mesh.materials[index]);
         const auto& source=mesh.materials[index];std::string losses;
         const auto lost=[&](bool condition,const char* field){if(condition){if(!losses.empty())losses+=", ";losses+=field;}};

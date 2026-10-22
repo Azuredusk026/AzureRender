@@ -123,7 +123,70 @@ PBR 与 Stylized 使用相同的自发光解释规则。
 
 透射和厚度覆盖要求兼容的通用表面。
 专用 SDF、头发、眼睛、镜面或环境表面拒绝此组合。
-完整角色画像的独立文档表达属于 C15 待实施范围。
+
+## 完整表面画像
+
+版本 3 使用 `typeId: azure.profile`。
+`surface` 沿用 glTF 2.0 的材质结构。
+其中 `materials` 必须且只能包含一个材质。
+图片、采样器及特殊表面由公共 glTF 解释器消费。
+
+```json
+{
+  "schemaVersion": 3,
+  "typeId": "azure.profile",
+  "parameters": {},
+  "textures": {},
+  "surface": {
+    "asset": {"version": "2.0"},
+    "materials": [{
+      "alphaMode": "MASK",
+      "doubleSided": true,
+      "extras": {"azureRenderMaterial": {
+        "schemaVersion": 2,
+        "class": "fabric",
+        "features": ["silhouette-outline"]
+      }}
+    }]
+  }
+}
+```
+
+`textures` 是图片表，键为从零开始的连续数字字符串。
+每项具有图片 `asset` UUID 和 `usage`。
+`surface.textures` 的 `source` 索引该图片表。
+材质中的纹理索引引用 `surface.textures`。
+
+画像拥有颜色空间、采样器和纹理通道解释。
+图片表的 `usage` 声明资源类别。
+一次解释至多接收 64 张图片，原始字节总量至多 64 MiB。
+几何、外部 URI 和缓冲声明由材质文档拒绝。
+
+SDF 头节点按所绑定模型的节点名称解析。
+`surface.nodes` 提供独立解释时的命名节点。
+实际模型中的缺失节点和重名节点产生加载错误。
+角色、场景与原生常量身份由项目内容维护。
+
+创建菜单的 `Surface profile` 打开完整画像表单。
+表单提供画像与图片表，点击“应用画像”发布事务。
+材质图保存相同画像，撤销和重做涵盖完整文档。
+共享编辑操作的字段为 `surface` 与 `images`。
+
+结构说明见 `schemas/material_document.schema.json`。
+画像版本见 `schemas/azure_render_material.schema.json`。
+节点、纹理索引及合法组合由生产解释器校验。
+工具通过同一解释器输出结果。
+
+```text
+AzureMaterialValidator model.glb
+AzureMaterialValidator surface.azurematerial uuid-paths.json
+python tools/validate_material_profiles.py model.glb
+```
+
+UUID 路径文件是 UUID 到本机图片路径的 JSON 对象。
+`--describe` 返回已注册的材质字段。
+转换函数 `complete_material_document` 保留完整画像。
+实际角色对照见完整材质文档验收。
 
 | 参数 | 范围 | 默认值 |
 | --- | --- | --- |

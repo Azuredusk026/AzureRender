@@ -1,0 +1,20 @@
+{
+  "status": "complete-material-equivalence-passed",
+  "assetSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+  "playerSha256": "0dbacf96b4a387a7b88a1274ef2b7da713ba3c19f9c928f50f05f4fd1695e120",
+  "materials": 13,
+  "captures": [
+    {
+      "mode": "source",
+      "imageSha256": "5292f14c13cdf3fc1c47cbff5f3c34a0731a12d9dcad3b7b2bf236454cc3f37c",
+      "levelSha256": "553c4d1fd57dbfccd8dd065ca6616630a4c0d8caaa7a96ff07d13b90752f5ee8"
+    },
+    {
+      "mode": "documents",
+      "imageSha256": "5292f14c13cdf3fc1c47cbff5f3c34a0731a12d9dcad3b7b2bf236454cc3f37c",
+      "levelSha256": "ef65a95346519f5a82e4a5fc2a8071e83be9e6c3f1244a13e250f2406b230d70"
+    }
+  ],
+  "changedPixels": 0,
+  "maxByteDifference": 0
+}

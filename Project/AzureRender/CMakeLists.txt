@@ -332,6 +332,8 @@ target_link_libraries(AzureDevtools PUBLIC AzureRenderCore AzurePlatform AzurePr
 add_library(AzureProcedural STATIC src/assets/generators/ScadGenerator.cpp src/assets/generators/GeometryCompilerAdapter.cpp src/assets/generators/ProceduralGltfWriter.cpp src/assets/generators/RigTextGenerator.cpp)
 target_link_libraries(AzureProcedural PUBLIC AzureRenderCore PRIVATE manifold::manifold)
 add_executable(AzureGeometryCompiler tools/procedural/main.cpp)
+add_executable(AzureMaterialValidator tools/MaterialValidator.cpp)
+target_link_libraries(AzureMaterialValidator PRIVATE AzureRenderCore)
 target_link_libraries(AzureGeometryCompiler PRIVATE AzureProcedural)
 add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
@@ -1723,7 +1725,7 @@ set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT
 set_target_properties(AzureRender PROPERTIES INSTALL_RPATH "$ORIGIN")
 add_executable(AzureAssetExchange tools/asset-exchange/main.cpp)
 target_link_libraries(AzureAssetExchange PRIVATE AzureRenderCore AzurePlatform)
-install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler AzureAssetExchange RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(TARGETS AzureRender AzurePlayer AzureMetaGen AzureGeometryCompiler AzureAssetExchange AzureMaterialValidator RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/contracts/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/AzureRender/contracts")
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/docs/plans/engine-evolution-manifest.json"

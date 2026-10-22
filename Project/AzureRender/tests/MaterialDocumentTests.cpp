@@ -1,4 +1,5 @@
 #include "assets/MaterialData.hpp"
+#include "assets/MaterialGraph.hpp"
 #include "assets/PrimitiveGenerator.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <chrono>
@@ -7,6 +8,27 @@
 using namespace azurerender;
 int main(){try{
     auto require=[](bool condition,const char* message){if(!condition)throw std::runtime_error(message);};
+    const nlohmann::json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",nlohmann::json::object()},
+        {"textures",nlohmann::json::object()},{"surface",{{"asset",{{"version","2.0"}}},{"materials",nlohmann::json::array({{
+            {"name","complete-fabric"},{"alphaMode","MASK"},{"alphaCutoff",.37},{"doubleSided",true},
+            {"extras",{{"azureRenderMaterial",{{"schemaVersion",2},{"class","fabric"},{"features",{"silhouette-outline"}}}}}}}})}}}};
+    const auto completeDocument=MaterialData::parse(complete);
+    require(completeDocument.encode()==complete,"Complete material profiles must round trip without semantic loss");
+    require(MaterialGraph::fromMaterial(completeDocument).compile().encode()==complete,"Material graphs must preserve complete surface documents");
+    const auto completeMaterial=completeDocument.interpret([](const auto&){return std::filesystem::path();});
+    require(completeMaterial.materialClass==AssetMaterialClass::Fabric&&completeMaterial.doubleSided
+        &&completeMaterial.alphaMode==AssetAlphaMode::Mask&&std::abs(completeMaterial.alphaCutoff-.37F)<.00001F
+        &&(completeMaterial.materialFeatures&MaterialFeatureSilhouetteOutline),"Complete documents must consume profile and render state");
+    auto invalidComplete=complete;invalidComplete["surface"]["buffers"]=nlohmann::json::array();
+    bool geometryRejected=false;try{(void)MaterialData::parse(invalidComplete);}catch(const std::exception&){geometryRejected=true;}
+    require(geometryRejected,"Material documents must reject geometry and external resource containers");
+    auto incompatibleComplete=complete;
+    incompatibleComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-projected-ramp"};
+    bool ownerRejected=false;try{(void)MaterialData::parse(incompatibleComplete).interpret([](const auto&){return std::filesystem::path();});}catch(const std::exception&){ownerRejected=true;}
+    require(ownerRejected,"Complete documents must enforce the shared profile owner contract");
+    incompatibleComplete=complete;incompatibleComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["typo"]=1;
+    bool fieldRejected=false;try{(void)MaterialData::parse(incompatibleComplete).interpret([](const auto&){return std::filesystem::path();});}catch(const std::exception&){fieldRejected=true;}
+    require(fieldRejected,"Complete documents must reject unknown profile fields");
     auto pbr=MaterialData::defaults("azure.pbr");pbr.parameters["baseColor"]={.5,.25,.125,1};pbr.parameters["roughness"]=.3;pbr.parameters["metallic"]=.8;
     const auto material=MaterialData::parse(pbr.encode()).interpret([](const auto&)->std::filesystem::path{throw std::runtime_error("No texture expected");});
     require(material.baseColorPixels[0]>material.baseColorPixels[1]&&material.metallicRoughnessPixels[1]==77&&material.metallicRoughnessPixels[2]==204,"Runtime interpretation must consume actual linear color and PBR parameters");

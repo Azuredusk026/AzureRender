@@ -17,6 +17,12 @@ bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags) {
     };
     return ImGui::InputText(label,value.data(),value.capacity()+1,flags|ImGuiInputTextFlags_CallbackResize,resize,&value);
 }
+bool inputTextMultiline(const char* label,std::string& value,ImVec2 size) {
+    const auto resize=[](ImGuiInputTextCallbackData* data)->int {
+        auto& text=*static_cast<std::string*>(data->UserData);text.resize(static_cast<std::size_t>(data->BufTextLen));data->Buf=text.data();return 0;
+    };
+    return ImGui::InputTextMultiline(label,value.data(),value.capacity()+1,size,ImGuiInputTextFlags_CallbackResize,resize,&value);
+}
 bool button(const char* label,const ButtonOptions& options) {
     const auto theme=ThemeTokens::dark();ScopedStyle style;
     const bool filled=!options.selected&&(options.variant==ButtonVariant::Primary||options.variant==ButtonVariant::Danger);

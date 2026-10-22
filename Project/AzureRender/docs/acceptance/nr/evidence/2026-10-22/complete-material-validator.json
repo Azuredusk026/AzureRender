@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "document": "material-0.azurematerial",
+      "class": "skin",
+      "passed": true
+    },
+    {
+      "document": "material-1.azurematerial",
+      "class": "fabric",
+      "passed": true
+    },
+    {
+      "document": "material-10.azurematerial",
+      "class": "overlay",
+      "passed": true
+    },
+    {
+      "document": "material-11.azurematerial",
+      "class": "eye",
+      "passed": true
+    },
+    {
+      "document": "material-12.azurematerial",
+      "class": "generic",
+      "passed": true
+    },
+    {
+      "document": "material-2.azurematerial",
+      "class": "fabric",
+      "passed": true
+    },
+    {
+      "document": "material-3.azurematerial",
+      "class": "fabric",
+      "passed": true
+    },
+    {
+      "document": "material-4.azurematerial",
+      "class": "fabric",
+      "passed": true
+    },
+    {
+      "document": "material-5.azurematerial",
+      "class": "fabric",
+      "passed": true
+    },
+    {
+      "document": "material-6.azurematerial",
+      "class": "skin",
+      "passed": true
+    },
+    {
+      "document": "material-7.azurematerial",
+      "class": "overlay",
+      "passed": true
+    },
+    {
+      "document": "material-8.azurematerial",
+      "class": "face",
+      "passed": true
+    },
+    {
+      "document": "material-9.azurematerial",
+      "class": "hair",
+      "passed": true
+    },
+    {
+      "invalid": 0,
+      "rejected": true,
+      "diagnostic": "Unsupported material schema"
+    },
+    {
+      "invalid": 1,
+      "rejected": true,
+      "diagnostic": "azureRenderMaterial M_actor_laevat_body_01: unknown field typo"
+    },
+    {
+      "invalid": 2,
+      "rejected": true,
+      "diagnostic": "azureRenderMaterial M_actor_laevat_body_01: unsupported schemaVersion"
+    }
+  ],
+  "validatorSha256": "f8684785b35509bec9e6465d91c5661b160f76ac025ab7af5db72eebeb2f2cd7"
+}

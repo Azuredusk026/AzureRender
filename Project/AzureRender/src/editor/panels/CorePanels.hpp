@@ -39,6 +39,7 @@ struct AssetPanelState {
     std::string materialName_="Material.azurematerial",materialAsset_;
     bool materialDialogRequested_=false;
     nlohmann::json materialSnapshot_;
+    std::string materialDraftAsset_,materialSurfaceDraft_,materialImagesDraft_,materialDraftError_;
     std::array<float,3> primitiveSize_{1,1,1};
     int primitiveSegments_=12;
     std::set<std::string> selectedAssets_,textureFields_;

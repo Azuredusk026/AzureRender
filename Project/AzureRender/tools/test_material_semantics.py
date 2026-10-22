@@ -8,6 +8,21 @@ import sys
 
 
 class MaterialSemanticsTests(unittest.TestCase):
+    def test_complete_profile_preserves_special_inputs_and_remaps_dependencies(self):
+        import uuid
+        identity = str(uuid.uuid4())
+        source = {'textures': [{'source': 2}, {'source': 2}], 'samplers': [], 'nodes': [{'name': 'Head'}]}
+        material = {'alphaMode': 'MASK', 'doubleSided': True, 'normalTexture': {'index': 1},
+                    'extras': {'azureRenderMaterial': {'schemaVersion': 2, 'class': 'face',
+                        'faceSdf': {'texture': 0, 'headNode': 'Head'}}}}
+        document = self.tool.complete_material_document(material, source, {'2': identity})
+        self.assertEqual(document['textures'], {'0': {'asset': identity, 'usage': 'linear'}})
+        converted = document['surface']['materials'][0]
+        self.assertTrue(converted['doubleSided'])
+        self.assertEqual(converted['normalTexture']['index'], 0)
+        self.assertEqual(converted['extras']['azureRenderMaterial']['faceSdf']['texture'], 1)
+        self.assertEqual(material['normalTexture']['index'], 1)
+
     def setUp(self):
         path = Path(__file__).with_name('convert_material_semantics.py')
         self.assertTrue(path.exists(), 'Material conversion implementation is missing')

@@ -11,6 +11,7 @@ MaterialGraph MaterialGraph::fromMaterial(const MaterialData& material){
     auto copy=material;copy.authoringGraph=nullptr;copy.validate();
     MaterialGraph graph;graph.document_={{"schemaVersion",1},{"typeId",copy.typeId},{"nodes",Json::array({{{"id","output"},{"kind","output"},{"position",{400,100}}}})},{"links",Json::array()}};
     if(copy.parameterOverride){graph.document_["schemaVersion"]=2;graph.document_["mode"]="parameters";}
+    if(copy.typeId=="azure.profile"){graph.document_["schemaVersion"]=3;graph.document_["surface"]=copy.surface;graph.document_["images"]=copy.textures;return graph;}
     for(const auto& field:copy.parameters.items())graph.setField(field.key(),field.value());
     for(const auto& field:copy.textures.items())graph.setField("textures."+field.key(),field.value());
     return graph;
@@ -21,6 +22,13 @@ MaterialData MaterialGraph::compile()const{
     const auto& graph=document_;
     if(!graph.is_object()||!graph.at("schemaVersion").is_number_integer())throw std::invalid_argument("Invalid material graph version");
     const bool patch=graph.at("schemaVersion")==2;
+    if(graph.at("schemaVersion")==3){
+        if(graph.size()!=6||graph.at("typeId")!="azure.profile"||!graph.at("links").is_array()||graph.at("nodes")!=Json::array({{{"id","output"},{"kind","output"},{"position",graph.at("nodes").at(0).at("position")}}})||!graph.at("links").empty())throw std::invalid_argument("Invalid surface graph");
+        const auto& position=graph.at("nodes").at(0).at("position");
+        if(!position.is_array()||position.size()!=2)throw std::invalid_argument("Invalid surface graph position");
+        for(const auto& coordinate:position)if(!coordinate.is_number()||!std::isfinite(coordinate.get<double>())||std::abs(coordinate.get<double>())>1000000)throw std::invalid_argument("Invalid surface graph coordinate");
+        auto material=MaterialData::defaults("azure.profile");material.surface=graph.at("surface");material.textures=graph.at("images");material.validate();return material;
+    }
     if(graph.size()!=(patch?5:4)||(!patch&&graph.at("schemaVersion")!=1)
         ||(patch&&graph.at("mode")!="parameters")||!graph.at("nodes").is_array()||!graph.at("links").is_array()||graph.at("nodes").size()>128||graph.at("links").size()>64)throw std::invalid_argument("Invalid material graph schema or budget");
     auto material=MaterialData::defaults(graph.at("typeId").get<std::string>());

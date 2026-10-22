@@ -174,6 +174,51 @@ def material_document(material, texture_uuids):
     return {'schemaVersion': 1, 'typeId': 'azure.pbr', 'parameters': params, 'textures': textures}
 
 
+def complete_material_document(material, model, image_uuids):
+    """Preserve a full glTF material through the public profile document."""
+    surface_material = copy.deepcopy(material)
+    selected = []
+
+    def reference(index):
+        if type(index) is not int or not 0 <= index < len(model.get('textures', [])):
+            raise ValueError('Invalid source texture index')
+        if index not in selected:
+            selected.append(index)
+        return selected.index(index)
+
+    def walk(value):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if (key.endswith('Texture') or key == 'texture') and type(child) is int:
+                    value[key] = reference(child)
+                elif key.endswith('Texture') and isinstance(child, dict) and 'index' in child:
+                    child['index'] = reference(child['index'])
+                else:
+                    walk(child)
+        elif isinstance(value, list):
+            for child in value:
+                walk(child)
+
+    walk(surface_material)
+    images, textures, bindings = [], [], {}
+    for source_index in selected:
+        texture = copy.deepcopy(model['textures'][source_index])
+        image = texture['source']
+        if image not in images:
+            identity = image_uuids[str(image)]
+            if str(uuid.UUID(identity)) != identity.lower():
+                raise ValueError('Profile images require UUIDs')
+            bindings[str(len(images))] = {'asset': identity, 'usage': 'linear'}
+            images.append(image)
+        texture['source'] = images.index(image)
+        textures.append(texture)
+    surface = {'asset': {'version': '2.0'}, 'materials': [surface_material],
+               'textures': textures, 'samplers': copy.deepcopy(model.get('samplers', [])),
+               'nodes': [{'name': node.get('name', '')} for node in model.get('nodes', [])]}
+    return {'schemaVersion': 3, 'typeId': 'azure.profile', 'parameters': {},
+            'textures': bindings, 'surface': surface}
+
+
 def read_asset(path):
     raw = path.read_bytes()
     if path.suffix.lower() != '.glb':

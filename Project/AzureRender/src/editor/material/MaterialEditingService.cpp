@@ -59,6 +59,13 @@ MaterialDocument MaterialEditingService::previewField(const EditorContext& conte
     const auto& record=context.assets().records().at(asset);
     if(!assetTypeRegistry().matches(record.path,{"material"}))throw std::invalid_argument("Material operations require a material asset");
     auto document=MaterialDocument::load(record.path);
+    if(document.typeId=="azure.profile"){
+        if(field=="surface")document.surface=value;
+        else if(field=="images")document.textures=value;
+        else throw std::invalid_argument("Surface profiles expose surface and images fields");
+        if(!document.authoringGraph.is_null())document.authoringGraph=MaterialGraphModel::fromMaterial([&]{auto copy=document;copy.authoringGraph=nullptr;return copy;}()).encode();
+        document.validate();static_cast<void>(document.interpret([&](const auto& uuid){return context.assets().resolve(uuid);}));return document;
+    }
     if(field.rfind("textures.",0)==0){const auto slot=field.substr(9);
         if(!MaterialTypeRegistry::builtins().type(document.typeId).textures.contains(slot))throw std::invalid_argument("Unknown material texture");
         if(value.is_null())document.textures.erase(slot);else document.textures[slot]=value;
@@ -82,7 +89,7 @@ Json MaterialEditingService::execute(EditorContext& context,ContentOperationServ
     if(operation=="material.create"){
         auto document=MaterialDocument::defaults(args.at("type").get<std::string>());
         const auto mode=args.value("mode",std::string("replace"));
-        if(mode=="parameters"){document.parameterOverride=true;document.parameters=Json::object();}
+        if(mode=="parameters"){if(document.typeId=="azure.profile")throw std::invalid_argument("Surface profiles require full replacement");document.parameterOverride=true;document.parameters=Json::object();}
         else if(mode!="replace")throw std::invalid_argument("Unknown material mode");
         const auto plan=content.plan({{"operation","material.write"},{"destination",args.at("destination")},{"document",document.encode()},{"create",true}});
         const auto result=content.apply(plan.at("id").get<std::string>());context.assets().refresh();return {{"asset",context.assets().idForPath(args.at("destination").get<std::string>())},{"transaction",result}};
@@ -102,6 +109,7 @@ Json MaterialEditingService::execute(EditorContext& context,ContentOperationServ
         if(history.redo.empty())throw std::invalid_argument("Material redo history is empty");document=MaterialDocument::parse(history.redo.back());
     }else if(operation!="material.save")throw std::invalid_argument("Unknown material document operation");
     const auto after=document.encode();
+    if(document.typeId=="azure.profile")static_cast<void>(document.interpret([&](const auto& uuid){return context.assets().resolve(uuid);}));
     for(const auto& texture:document.textures.items()){
         const auto path=context.assets().resolve(texture.value().at("asset").get<std::string>());
         if(!assetTypeRegistry().matches(path,{"image"}))throw std::invalid_argument("Material texture must reference an image asset");

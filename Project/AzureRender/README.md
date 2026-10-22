@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+完整材质文档接入共享 glTF 解释器与 UUID 依赖。
+十三槽真实角色对照见[完整文档验收](docs/acceptance/nr/complete-material-document.md)。
+
 公共材质支持保留源角色效果的参数覆盖。
 CPU、GPU 与真实角色对照见[覆盖验收](docs/acceptance/nr/material-parameter-overrides.md)。
 

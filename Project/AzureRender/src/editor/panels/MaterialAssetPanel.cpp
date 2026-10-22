@@ -63,6 +63,25 @@ void ImGuiEditorLayer::drawMaterialAssetPanel(){
         ImGui::TextUnformatted(assetPanel_->presentation.materialSnapshot_.at("document").at("typeId").get<std::string>().c_str());
         if(session_->developerServices().image){const auto preview=session_->edit("preview.asset",{{"asset",assetPanel_->presentation.materialAsset_}});if(preview)if(const auto texture=previewTexture(preview.value.at("handle").get<std::uint64_t>()))ImGui::Image(static_cast<ImTextureID>(reinterpret_cast<std::uintptr_t>(texture)),{160*dpi_,160*dpi_});}
         const auto& materialDocument=assetPanel_->presentation.materialSnapshot_.at("document");
+        if(materialDocument.at("typeId")=="azure.profile"){
+            auto& state=assetPanel_->presentation;
+            const auto resetDraft=[&]{state.materialDraftAsset_=state.materialAsset_;state.materialSurfaceDraft_=materialDocument.at("surface").dump(2);state.materialImagesDraft_=materialDocument.at("textures").dump(2);state.materialDraftError_.clear();};
+            if(state.materialDraftAsset_!=state.materialAsset_)resetDraft();
+            ImGui::TextWrapped(ui::tr("完整画像沿用 glTF 材质结构。图片表使用连续数字键与项目图片 UUID。"));
+            ui::inputTextMultiline("##surface-document",state.materialSurfaceDraft_,{-1,180*dpi_});observeWidget("material.surface.source");
+            ui::inputTextMultiline("##surface-images",state.materialImagesDraft_,{-1,90*dpi_});observeWidget("material.surface.images");
+            if(ui::button(ui::tr("应用画像"))){
+                try{
+                    auto candidate=MaterialData::parse(materialDocument);candidate.authoringGraph=nullptr;
+                    candidate.surface=nlohmann::json::parse(state.materialSurfaceDraft_);candidate.textures=nlohmann::json::parse(state.materialImagesDraft_);
+                    const auto graph=MaterialGraphModel::fromMaterial(candidate);
+                    const auto applied=session_->edit("material.graph",{{"asset",state.materialAsset_},{"graph",graph.encode()}});
+                    if(applied)state.materialDraftError_.clear();
+                }catch(const std::exception& error){state.materialDraftError_=error.what();}
+            }observeWidget("material.surface.apply");ImGui::SameLine();
+            if(ui::button(ui::tr("重新读取画像")))resetDraft();observeWidget("material.surface.reload");
+            if(!state.materialDraftError_.empty())ImGui::TextWrapped("%s",state.materialDraftError_.c_str());
+        }
         const bool parameterOverride=materialDocument.value("mode",std::string())=="parameters";
         if(parameterOverride)ImGui::TextWrapped(ui::tr("勾选需要覆盖的参数。其余参数和特殊效果继承源材质。"));
         for(const auto& field:assetPanel_->presentation.materialSnapshot_.at("type").items()){

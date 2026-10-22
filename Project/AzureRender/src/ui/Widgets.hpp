@@ -9,6 +9,7 @@ struct ButtonOptions { ButtonVariant variant=ButtonVariant::Default;bool selecte
 bool button(const char* label,const ButtonOptions& options={});
 bool combo(const char* label,int* current,const char* items);
 bool inputText(const char* label,std::string& value,ImGuiInputTextFlags flags=0);
+bool inputTextMultiline(const char* label,std::string& value,ImVec2 size);
 void propertyRow(const char* label,const UiMetrics& metrics,const std::function<void()>& draw);
 void resultMessage(const std::string& message,bool failed);
 void sectionHeading(const char* title,const char* description="");

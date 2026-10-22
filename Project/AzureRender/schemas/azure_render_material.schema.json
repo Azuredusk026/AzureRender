@@ -1,19 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://azurerender.local/schema/material-profile-v1.json",
-  "title": "AzureRender glTF Material Profile v1",
+  "$id": "https://azurerender.local/schema/material-profile.json",
+  "title": "AzureRender glTF Material Profile",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schemaVersion",
-    "class",
-    "features",
-    "styleParameters",
-    "featureParameters"
+    "class"
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
     },
     "class": {
       "enum": [
@@ -40,7 +41,17 @@
           "emissive-mask",
           "overlay",
           "neutral-fallback",
-          "brow-overlay"
+          "brow-overlay",
+          "surface-ao",
+          "scene-tint",
+          "hair-ramp",
+          "scene-refraction",
+          "diffuse-ramp",
+          "silhouette-outline",
+          "multiply-composite",
+          "hair-projected-ramp",
+          "eye-radial-surface",
+          "unlit-surface"
         ]
       }
     },
@@ -53,7 +64,69 @@
       "$ref": "#/$defs/parameterVector"
     },
     "faceSdf": {
-      "$ref": "#/$defs/faceSdfProfile"
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "texture",
+        "texCoord",
+        "headNode"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "texCoord": {
+          "const": 0
+        },
+        "headNode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "hair": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "diffuseRamp": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "shadowColorLut": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "eyeSurface": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "specularInput": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "nprDiffuse": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "surface": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "composite": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "sceneRefraction": {
+      "type": "object",
+      "description": "Typed fields and ownership are validated by the production material interpreter."
     }
   },
   "$defs": {
@@ -62,9 +135,7 @@
       "minItems": 4,
       "maxItems": 4,
       "items": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 4.0
+        "type": "number"
       }
     },
     "faceSdfProfile": {
@@ -93,17 +164,30 @@
           "const": 0
         },
         "channel": {
-          "enum": ["r", "g", "b", "a"]
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
         },
         "maskChannel": {
-          "enum": ["r", "g", "b", "a"]
+          "enum": [
+            "r",
+            "g",
+            "b",
+            "a"
+          ]
         },
         "shadowOnLowValues": {
           "type": "boolean"
         },
         "horizontalAxis": {
           "description": "Which face side is stored at increasing U.",
-          "enum": ["left-to-right", "right-to-left"]
+          "enum": [
+            "left-to-right",
+            "right-to-left"
+          ]
         },
         "headNode": {
           "type": "string",
@@ -111,5 +195,6 @@
         }
       }
     }
-  }
+  },
+  "description": "Structural profile schema. Texture ownership, node bindings and valid feature combinations use AzureMaterialValidator and the production interpreter."
 }
