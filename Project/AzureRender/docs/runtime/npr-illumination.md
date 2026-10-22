@@ -1,5 +1,10 @@
 # 风格化漫反射照明
 
+共享颜色响应支持调用者提供显式混合权重。
+材质适配器拥有可见性和遮罩来源。
+颜色核统一消费亮部、影部、色带及环境选择量。
+原生片元的数值核对见[头发照明验证](../acceptance/nr/captured-hair-illumination.md)。
+
 场景通过 `renderSettings.nprLighting` 声明照明组合。
 消费者为显式声明 `nprDiffuse` 的材质。
 材质颜色与入射照明分别计算。

@@ -39,18 +39,14 @@ CharacterDiffuseIllumination characterDiffuseIllumination(vec3 normal,vec3 indir
     vec3 direct=characterDiffuseSaturation(mainRadiance.rgb*mainRadiance.a,litMask)*composition.x;
     return CharacterDiffuseIllumination(mix(shadow,ambient,visibility),direct*visibility);
 }
-CharacterDiffuseResponse characterDiffuseResponse(vec3 litAlbedo,vec3 shadowAlbedo,
-    float metallic,float shadowScale,vec4 ramp,float baseAo,vec2 shadowMask,
-    float cameraFacing,float characterVisibility,float sceneVisibility) {
+#define AZURE_CHARACTER_WEIGHTED_DIFFUSE 1
+// Material adapters own visibility and mask interpretation. Shared color
+// response consumes their explicit weights, including captured hair inputs.
+CharacterDiffuseResponse characterDiffuseWeightedResponse(vec3 litAlbedo,vec3 shadowAlbedo,
+    float metallic,float shadowScale,vec4 ramp,float litMask,float aoMask,
+    float shadowMix,float sceneVisibility) {
     vec3 lit=litAlbedo*(.96*(1.0-metallic));
     vec3 shadow=shadowAlbedo*(.96*(1.0-metallic)*shadowScale);
-    float cameraWeight=clamp((cameraFacing-.75)/(.25-.75),0.0,1.0);
-    cameraWeight=cameraWeight*cameraWeight*(3.0-2.0*cameraWeight);
-    float mask=max(shadowMask.x,shadowMask.y*cameraWeight);
-    float visibility=mix(1.0,characterVisibility,mask);
-    float litMask=min(min(visibility,baseAo),ramp.a);
-    float aoMask=baseAo*visibility;
-    float shadowMix=clamp(baseAo*((1.0-shadowMask.x)+visibility*shadowMask.x)+ramp.a,0.0,1.0);
     vec3 shadowColor=mix(characterDiffuseSaturation(.65*shadow,1.2),shadow,shadowMix);
     vec3 untinted=mix(shadowColor,lit,litMask);
     float chroma=max(max(ramp.r,ramp.g),ramp.b)-min(min(ramp.r,ramp.g),ramp.b);
@@ -58,5 +54,18 @@ CharacterDiffuseResponse characterDiffuseResponse(vec3 litAlbedo,vec3 shadowAlbe
     vec3 indoor=mix(shadow,characterDiffuseSaturation(lit,1.2),aoMask);
     vec3 outdoor=tinted*clamp(characterDiffuseLuma(untinted)/max(characterDiffuseLuma(tinted),.001),0.0,1.5);
     return CharacterDiffuseResponse(mix(indoor,outdoor,sceneVisibility),litMask,aoMask);
+}
+CharacterDiffuseResponse characterDiffuseResponse(vec3 litAlbedo,vec3 shadowAlbedo,
+    float metallic,float shadowScale,vec4 ramp,float baseAo,vec2 shadowMask,
+    float cameraFacing,float characterVisibility,float sceneVisibility) {
+    float cameraWeight=clamp((cameraFacing-.75)/(.25-.75),0.0,1.0);
+    cameraWeight=cameraWeight*cameraWeight*(3.0-2.0*cameraWeight);
+    float mask=max(shadowMask.x,shadowMask.y*cameraWeight);
+    float visibility=mix(1.0,characterVisibility,mask);
+    float litMask=min(min(visibility,baseAo),ramp.a);
+    float aoMask=baseAo*visibility;
+    float shadowMix=clamp(baseAo*((1.0-shadowMask.x)+visibility*shadowMask.x)+ramp.a,0.0,1.0);
+    return characterDiffuseWeightedResponse(litAlbedo,shadowAlbedo,metallic,shadowScale,
+        ramp,litMask,aoMask,shadowMix,sceneVisibility);
 }
 #endif

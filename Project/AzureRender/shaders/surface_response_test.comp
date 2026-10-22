@@ -8,6 +8,28 @@ layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=163u) {
+#ifdef AZURE_CHARACTER_WEIGHTED_DIFFUSE
+        // Captured visible primitive 1017: explicit material and host weights.
+        CharacterDiffuseResponse response=characterDiffuseWeightedResponse(
+            vec3(.56787109375,.1014404296875,.10821533203125),
+            vec3(.33250007033348083,.050309497863054276,.05440831184387207),
+            0.0,.550000011920929,vec4(1,1,1,.9588921666145325),
+            .8828107118606567,.8828107118606567,1.0,1.0);
+        CharacterDiffuseIllumination light=characterDiffuseIllumination(
+            vec3(-.09024213999509811,.37075215578079224,.9243371486663818),
+            vec3(.8783068656921387,.9302293062210083,1.1216931343078613),
+            vec4(1,1,1,1.6243867874145508),vec4(0,1,4.371138828673793e-8,.15000000596046448),
+            vec4(1.5,.5,0,0),vec4(1.0499999523162842,.800000011920929,1,1),
+            0.0,.28772246837615967,response.litMask,1.0);
+        vec3 illumination=light.ambient+light.direct;
+        uint probe=(i-163u)/3u,channel=(i-163u)%3u;
+        result.values[i]=(probe==0u?response.color:probe==1u?illumination:response.color*illumination)[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
     if(i>=145u) {
         uint probe=(i-145u)/3u;
         vec3 position=probe==4u?vec3(0):probe==5u?vec3(0,0,1e6):vec3(1,0,0);

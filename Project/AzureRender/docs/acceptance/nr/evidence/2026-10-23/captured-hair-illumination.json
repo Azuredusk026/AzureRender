@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "shared-color-and-native-illumination-numeric-validation-passed",
+  "scope": "Shared explicit-weight color kernel; captured hair sample; existing body adapter regression",
+  "nativeSource": {
+    "event": 950,
+    "primitive": 1017,
+    "pixel": [
+      1280,
+      1244
+    ],
+    "traceSha256": "80a1615d2e443a774626ea1b76833f9705292460bd998fcbb060dcf1ec7d781f",
+    "parameterB": 0.8828107118606567,
+    "baseAlpha": 1,
+    "screenOcclusion": 1,
+    "environmentOcclusion": 0.28772246837615967,
+    "viewRampAlpha": 0.9231860637664795,
+    "lightRampAlpha": 0.9588921666145325,
+    "shadowBrightness": 0.55,
+    "shadowSaturation": 1.1,
+    "shadowScale": 0.55,
+    "specularIlluminationWeight": 0.8917601704597473,
+    "diffuseResponse": [
+      0.5018435120582581,
+      0.08908353745937347,
+      0.09507887065410614
+    ],
+    "illumination": [
+      2.0871262550354004,
+      2.0894813537597656,
+      2.098165512084961
+    ],
+    "diffuseProduct": [
+      1.0474107265472412,
+      0.18613839149475098,
+      0.1994912028312683
+    ]
+  },
+  "gpuProbes": {
+    "release": 172,
+    "debug": 172,
+    "newNativeSamples": 9,
+    "errorBudget": "max(1e-6, abs(expected)*1e-4)",
+    "releaseLogSha256": "55cb8a5fbf7198029e44cee058f50eed1a43b32566cec6aff908f77f8fb8bc34",
+    "debugLogSha256": "d937326a9a318b857530e9771508de1f0bbf8755126b0ae900c8aa43499f0897"
+  },
+  "imageRegression": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "actualCharacterChangedPixels": 0,
+    "imageSha256": "00a4282f674982d8881bd591902edda79fe55eac62e6b8d6d5f8cb0ad384289f",
+    "illuminationCases": 19
+  },
+  "fingerprints": {
+    "shaders/character_diffuse.glsl": "dde07f36ab1bb4d2105bda1a4213d6eb7cc55671d92946355f36dc71ee5cbdf7",
+    "shaders/surface_response_test.comp": "576754fa4b8d7e25b6cc360ff66641a374c70394430bcf269ed38dfee7cf1478",
+    "tests/SurfaceResponseGpuTests.cpp": "07d8807cfe7861c59b4864b03d67f3803b54265774994b2b7b035feb346f5b3b",
+    "build/ninja-msvc-release/shaders/mesh.frag.spv": "18734f8ccc80c097accdbbb822c2b54a9e2df9c7a98a59964e23e5aef8699a22",
+    "build/ninja-msvc-debug/shaders/surface_response_test.comp.spv": "7669df1ce5271f4225c6ab8b6b497f741a6fc7510a8c0cb5b1598a465f23369a"
+  },
+  "run": "build/runs/20261023-052111-native-hair-illumination-response-e1d681",
+  "remaining": [
+    "Bind material-specific ambient and main colors",
+    "Keep environmental occlusion separate from screen occlusion and parameter B",
+    "Supply full illumination to projected specular",
+    "Apply source line color response to the combined diffuse term before local lights",
+    "Verify native complete colors and moving views"
+  ]
+}
