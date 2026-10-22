@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+双锚帧的 1271 个事件已有完整管线索引。
+范围见[绑定索引](docs/acceptance/nr/native-binding-index.md)。
+
 终末地九份 D3D11 原生帧通过官方 1.46 加载与通道查询。
 中庭与莱万汀各一帧完成 2560×1440 实际图像导出。
 证据见[原生帧验证](docs/acceptance/nr/native-game-captures.md)。
