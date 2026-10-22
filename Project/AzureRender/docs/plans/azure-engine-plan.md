@@ -1,5 +1,8 @@
 # 开发总计划
 
+反射射线预计算通过双配置与动态遮挡回归。
+短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
+
 中庭原生方向场已覆盖后方的已知照明缺口。
 双配置检查及边界见[光照覆盖](../acceptance/nr/irradiance-coverage.md)。
 

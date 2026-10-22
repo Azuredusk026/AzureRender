@@ -1335,7 +1335,8 @@
         "docs/acceptance/nr/reflection-cube.md",
         "docs/acceptance/nr/environment-specular.md",
         "docs/acceptance/nr/screen-space-reflections.md",
-        "docs/acceptance/nr/reflection-roughness.md"
+        "docs/acceptance/nr/reflection-roughness.md",
+        "docs/acceptance/nr/reflection-ray-math.md"
       ],
       "requiredAcceptance": [
         "NR5.delivery"

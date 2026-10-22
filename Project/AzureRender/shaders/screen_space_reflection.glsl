@@ -1,7 +1,6 @@
 #ifndef AZURE_SCREEN_SPACE_REFLECTION_GLSL
 #define AZURE_SCREEN_SPACE_REFLECTION_GLSL
-bool screenReflectionProject(mat4 worldToClip,vec3 position,out vec2 uv){
-    vec4 clip=worldToClip*vec4(position,1.0);
+bool screenReflectionProjectClip(vec4 clip,out vec2 uv){
     if(clip.w<=1e-6||clip.z<0.0||clip.z>clip.w)return false;
     uv=clip.xy/clip.w*.5+.5;
     return all(greaterThanEqual(uv,vec2(0)))&&all(lessThanEqual(uv,vec2(1)));
@@ -107,30 +106,36 @@ vec4 traceScreenSpaceReflection(sampler2D source,sampler2D depth,mat4 worldToCli
     float roughness,vec4 trace,vec4 quality){
     if(trace.x<.5||roughness>=quality.y)return vec4(0);
     vec3 origin=worldPosition+normal*trace.w;
+    // Projection and positive view depth are affine along the world-space ray.
+    // Evaluate from its origin for each distance, without cumulative stepping.
+    vec4 clipOrigin=worldToClip*vec4(origin,1.0);
+    vec4 clipDirection=worldToClip*vec4(rayDirection,0.0);
+    float depthOrigin=dot(origin-cameraPosition,cameraForward);
+    float depthDirection=dot(rayDirection,cameraForward);
     vec2 uv;float previousDistance=0.0;
-    if(!screenReflectionProject(worldToClip,origin,uv))return vec4(0);
-    float previousDelta=dot(origin-cameraPosition,cameraForward)-texture(depth,uv).r;
+    if(!screenReflectionProjectClip(clipOrigin,uv))return vec4(0);
+    float previousDelta=depthOrigin-texture(depth,uv).r;
     if(previousDelta>=0.0)return vec4(0); // The biased origin must be in visible free space.
     int steps=clamp(int(quality.x+.5),8,256);
     for(int i=1;i<=256;++i){
         if(i>steps)break;
         float distance=trace.y*float(i)/float(steps);
-        vec3 point=origin+rayDirection*distance;
-        if(!screenReflectionProject(worldToClip,point,uv))return vec4(0);
+        if(!screenReflectionProjectClip(clipOrigin+clipDirection*distance,uv))return vec4(0);
         float surfaceDepth=texture(depth,uv).r;
-        float delta=dot(point-cameraPosition,cameraForward)-surfaceDepth;
+        float delta=depthOrigin+depthDirection*distance-surfaceDepth;
         if(previousDelta<0.0&&delta>=0.0){
             float low=previousDistance,high=distance;
+            vec2 highUv=uv;float highSurfaceDepth=surfaceDepth,highDelta=delta;
             for(int refine=0;refine<6;++refine){
-                float middle=(low+high)*.5;vec3 candidate=origin+rayDirection*middle;vec2 candidateUv;
-                if(!screenReflectionProject(worldToClip,candidate,candidateUv))return vec4(0);
-                float separation=dot(candidate-cameraPosition,cameraForward)-texture(depth,candidateUv).r;
-                if(separation>=0.0)high=middle;else low=middle;
+                float middle=(low+high)*.5;vec2 candidateUv;
+                if(!screenReflectionProjectClip(clipOrigin+clipDirection*middle,candidateUv))return vec4(0);
+                float candidateDepth=texture(depth,candidateUv).r;
+                float separation=depthOrigin+depthDirection*middle-candidateDepth;
+                if(separation>=0.0){high=middle;highUv=candidateUv;highSurfaceDepth=candidateDepth;highDelta=separation;}
+                else low=middle;
             }
-            point=origin+rayDirection*high;
-            if(!screenReflectionProject(worldToClip,point,uv))return vec4(0);
-            surfaceDepth=texture(depth,uv).r;
-            delta=dot(point-cameraPosition,cameraForward)-surfaceDepth;
+            vec3 point=origin+rayDirection*high;
+            uv=highUv;surfaceDepth=highSurfaceDepth;delta=highDelta;
             if(surfaceDepth<=0.0||delta<0.0||delta>trace.z)return vec4(0);
             float confidence=screenReflectionConfidence(uv,roughness,high,trace,quality);
             vec4 filtered=screenReflectionFilteredRadiance(source,depth,worldToClip,

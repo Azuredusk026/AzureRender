@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R6",
+  "status": "public-ray-math-passed",
+  "formalNr5Status": "Pending",
+  "nativeFrameEquivalenceVerified": false,
+  "configurations": {
+    "debug": {
+      "capture": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-candidate-debug/summary.json",
+        "sha256": "6d7fedc435a20842da00d8d00f0cd828f9c10a5ff5b1c284008db80061389c2a"
+      },
+      "analysis": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-analysis-debug.json",
+        "sha256": "04f38f0465d7cc6cbc344ec17643e34d76b29ffb11106897f261a9cd937c6ef3"
+      },
+      "roughnessRegression": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/roughness-regression-debug.json",
+        "sha256": "53040b60fd8155e31af08940e41fbc95a374a3d62cdb868d7298897f9908e02b"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/build-debug.log",
+        "sha256": "dc8f443e6d67f2c8419eef241e2c4ddd1caf4bfd584158be150e55baac862afb"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/cpu-debug.log",
+        "sha256": "912dead63c611d729d585b6ea20fa0fe464b5cf75187b327296af86fd8cc4285"
+      },
+      "captures": 28,
+      "frames": 36,
+      "roughnessChecks": 86,
+      "maximumFixtureByteError": 0,
+      "validationEnabled": true
+    },
+    "release": {
+      "capture": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-candidate-release-disabled/summary.json",
+        "sha256": "b4908483f3b270e0a5f5c8f96b5f63212fea199b284effc8aaf03a158677f67b"
+      },
+      "analysis": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-analysis-release.json",
+        "sha256": "566d08a3faa16644468497c724156f5e0bba62d2ab8a48b992f18502d77c03de"
+      },
+      "roughnessRegression": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/roughness-regression-release.json",
+        "sha256": "fb6809ea5a42e94b12eb6b9e886e0047a03b61dbdc44837b76f5e9eab3bbd9e7"
+      },
+      "build": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/build-release.log",
+        "sha256": "b499026218e1aac472e4920b799f8f4d1f3a353926d98c4e5f131d72927566f2"
+      },
+      "cpu": {
+        "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/cpu-release.log",
+        "sha256": "159db3edf90e95e8897ad677639f17def860d011392a7e0f6973ae71c63586a9"
+      },
+      "captures": 28,
+      "frames": 36,
+      "roughnessChecks": 86,
+      "maximumFixtureByteError": 0,
+      "validationEnabled": false
+    }
+  },
+  "extendedRegression": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/ssr-extended-debug/summary.json",
+    "sha256": "0da0a4ec70c142a0ce738bc3976038823e9eb6c17e4a3af4e161e7ec3ddd964e"
+  },
+  "productionShaderLink": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/checks/production-shader-link.json",
+    "sha256": "fbaf8dbe40bad516153b613ca2ea62e58056fabfbc3a958a79fbe5244e0a5425"
+  },
+  "performance": {
+    "scope": "paired-short-diagnostic",
+    "formalPerformanceAcceptance": false,
+    "width": 1920,
+    "height": 1080,
+    "sourceCount": 1113,
+    "changedInputs": [
+      "shaders/screen_space_reflection.glsl",
+      "build/ninja-msvc-release/shaders/mesh.frag.spv",
+      "build/ninja-msvc-release/shaders/mesh_bindless.frag.spv"
+    ],
+    "baseline": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/performance-baseline-utf8/summary.json",
+      "sha256": "fcc27c48d52db025227632328c2d8b62761670b4101c07d34e654e015be31fe7"
+    },
+    "candidate": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/performance-candidate-utf8/summary.json",
+      "sha256": "9a8c9da12fcbbb4a7ca18838f617ad7d0328ecdca6041a7e87f26227c6eb7610"
+    },
+    "baselineMainSceneMs": 78.69351253333333,
+    "candidateMainSceneMs": 76.67966293333333,
+    "baselineDisabledMainSceneMs": 43.0295808,
+    "candidateDisabledMainSceneMs": 43.02017706666667,
+    "mainSceneMeanReductionPercent": 2.559104982315996
+  },
+  "candidate": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/manifest.json",
+    "sha256": "148f67ed1ebd2f44ce0f73609b5708e24f3c2b8bb3f687210b99b4e8707827d4"
+  },
+  "plan": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-plan.json",
+    "sha256": "7d288d225bf4f8027c53d2232c64f5c55f43afb94879c811f42dd3d3078bc51a"
+  },
+  "review": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/review.md",
+    "sha256": "4a36dc25650340114a8f3495c51d4f151f74797407d6a39b7655882ae35301d1"
+  },
+  "precision": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/checks/precision.json",
+    "sha256": "c7ddd4e89fab68e2f9980f79d518da018fe4e4c166a84dc7d60092160981c2ed"
+  },
+  "cpuReference": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/checks/green.log",
+    "sha256": "cf2c96778888542024a08322faa1bb4290e8def353a7e36d3b59081fb1525b87"
+  },
+  "cpuRed": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/checks/red.log",
+    "sha256": "34f6c82bc33fa729d47108b5d0db8209805f8b7eeb7b73384a30fd9b414c2454"
+  },
+  "sources": [
+    {
+      "path": "shaders/screen_space_reflection.glsl",
+      "sha256": "44afb9a4ec75bebb840d53e2ede3cfb017430368a11663a926fa0e5bc4920357"
+    }
+  ],
+  "diagnostics": [
+    {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/gpu-candidate-release/summary.json",
+      "sha256": "12d052dab3a5c579d3b531e544cf4addefae978b76ee4a718a38186e717b2e77"
+    }
+  ],
+  "limitations": [
+    "Float32 reassociation may choose a different depth texel at boundaries.",
+    "The performance batch is short and has no formal stable-idle-window or delivery-budget acceptance.",
+    "The remaining SSR cost needs resolution and hierarchical-depth evaluation.",
+    "Floor UV binding and native frame equivalence remain unresolved."
+  ]
+}

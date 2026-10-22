@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+反射射线预计算通过双配置图像及动态遮挡回归。
+真实中庭短测及边界见[射线验收](docs/acceptance/nr/reflection-ray-math.md)。
+
 粗糙反射支持投影足迹、深度门控及探针回退。
 双配置及实际中庭见[过滤验收](docs/acceptance/nr/reflection-roughness.md)。
 

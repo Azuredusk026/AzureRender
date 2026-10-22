@@ -191,7 +191,7 @@
   },
   "sources": [
     {
-      "path": "shaders/screen_space_reflection.glsl",
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/advanced-lighting/ssr-ray-math/base/shaders/screen_space_reflection.glsl",
       "sha256": "0df94e83a06c06d723eac66475223273c2d99642cc38e9c856245163aa189d57"
     }
   ],
