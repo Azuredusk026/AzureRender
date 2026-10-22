@@ -175,6 +175,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
     if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
     if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
+    if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
     return 0;
 }
 
@@ -806,6 +807,48 @@ std::array<float, 4> readMaterialVectorExtra(
     return result;
 }
 
+void loadUnlitSurface(const tinygltf::Material& material,const AssetMaterial& result) {
+    if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureUnlitSurface)!=0;
+    // Authored JSON retains null and unknown fields that TinyGLTF omits.
+    nlohmann::json authored;
+    if(!material.extras_json_string.empty())authored=nlohmann::json::parse(material.extras_json_string);
+    const bool authoredSurface=authored.is_object()&&authored.contains("azureRenderMaterial")
+        &&authored["azureRenderMaterial"].is_object()&&authored["azureRenderMaterial"].contains("surface");
+    if(!enabled&&!profile.Has("surface")&&!authoredSurface)return;
+    if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
+        const auto& raw=authored["azureRenderMaterial"];
+        if(!raw.contains("features")||!raw["features"].is_array())
+            throw std::invalid_argument("unlit surface requires explicit features");
+        std::vector<std::string> names;
+        for(const auto& value:raw["features"]) {
+            if(!value.is_string()||value.get<std::string>().empty())
+                throw std::invalid_argument("Invalid unlit surface feature");
+            const auto name=value.get<std::string>();
+            if(std::find(names.begin(),names.end(),name)!=names.end())
+                throw std::invalid_argument("Duplicate unlit surface feature");
+            names.push_back(name);
+        }
+    }
+    constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureEmissiveMask;
+    if(!enabled||!profile.Has("surface")||profile.Get("schemaVersion").GetNumberAsDouble()!=2
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Emissive)
+        ||(result.materialFeatures&~allowed)||result.transmission!=0||result.thickness!=0)
+        throw std::invalid_argument("unlit surface requires schema 2, generic or emissive class and compatible features");
+    const auto& surface=profile.Get("surface");
+    if(!surface.IsObject()||!surface.Has("schemaVersion")||!surface.Get("schemaVersion").IsNumber()
+        ||surface.Get("schemaVersion").GetNumberAsDouble()!=1||!surface.Has("lighting")
+        ||!surface.Get("lighting").IsString()||surface.Get("lighting").Get<std::string>()!="unlit")
+        throw std::invalid_argument("Invalid unlit surface schemaVersion or lighting");
+    for(const auto& field:surface.Get<tinygltf::Value::Object>())
+        if(field.first!="schemaVersion"&&field.first!="lighting")
+            throw std::invalid_argument("Unknown unlit surface field: "+field.first);
+    if(authoredSurface)for(const auto& field:authored["azureRenderMaterial"]["surface"].items())
+        if((field.key()!="schemaVersion"&&field.key()!="lighting")||field.value().is_null())
+            throw std::invalid_argument("Invalid unlit surface field: "+field.key());
+}
+
 void loadMaterialComposite(const tinygltf::Material& material, const AssetMaterial& result) {
     if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
@@ -1339,6 +1382,7 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
+        loadUnlitSurface(*material,result);
         loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;

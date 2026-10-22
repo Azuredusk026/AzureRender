@@ -12,6 +12,7 @@ import bpy
 import blender_scene_effect_layers as _effects_source
 from blender_scene_materials import create_material as _create_surface, texture_image
 from endfield_scene_material_contract import reference_key, resolve_export_path, validate_texture_sampler
+from endfield_native.vfx_profile import unlit_vfx_profile
 
 
 def _math(tree, operation, a, b):
@@ -126,6 +127,7 @@ def create_material(record, textures, pack_textures=True):
     expected = {'_SurfaceType': 1, '_SrcBlend': 1, '_DstBlend': 10, '_BlendMode': 0, '_ZWrite': 0}
     if any(floats.get(k) != v for k, v in expected.items()):
         raise ValueError('VFX blend/depth state requires a separate adapter: ' + record['Name'])
+    profile = unlit_vfx_profile(record)
     material = bpy.data.materials.new(record['Name'])
     material.use_nodes = True
     material.surface_render_method = 'BLENDED'
@@ -160,4 +162,8 @@ def create_material(record, textures, pack_textures=True):
     tree.links.new(_math(tree, 'MINIMUM', _math(tree, 'MAXIMUM', source.alpha, 0), 1), surface.inputs['Alpha'])
     material['azureSourceLimitations'] = json.dumps([
         *source.limitations, 'Static UV snapshot; runtime exposure and depth soft intersection pending'])
+    material['azureRenderMaterial'] = profile
+    material['azureNativeSource'] = json.dumps({
+        'source': record['Source'], 'pathId': record['PathId'],
+        'shaderSource': record['Shader']['Source'], 'shaderPathId': record['Shader']['PathId']})
     return material

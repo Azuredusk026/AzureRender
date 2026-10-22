@@ -1101,6 +1101,16 @@ void main() {
             background,outputAlpha,material.hairParameters.x)+emissive;
     }
 #endif
+    if(materialFeatureEnabled(262144U)>.5) {
+        // A public unlit surface consumes linear base color plus emission.
+        // Lighting diagnostics describe energy actually used by this model.
+        emissive=specularEmissive.rgb*material.emissiveStrength*materialFeatureEnabled(8U);
+        if(qaEffectMode==6&&qaEffectDisabled)emissive=vec3(0);
+        directDiffuse=vec3(0);ambientDiffuse=vec3(0);
+        directSpecular=vec3(0);ambientSpecular=vec3(0);
+        kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=vec3(0);
+        beautyColor=baseColor.rgb+emissive;
+    }
     if(multiplyComposite)beautyColor=baseColor.rgb;
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {

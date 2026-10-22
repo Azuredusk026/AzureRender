@@ -20,7 +20,7 @@ args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
 args.output = args.output.resolve()
 args.manifest = args.manifest.resolve()
 args.extractor_src = args.extractor_src.resolve()
-sys.path[:0] = [str(Path(__file__).parent), str(args.extractor_src)]
+sys.path[:0] = [str(Path(__file__).parents[1]), str(Path(__file__).parent), str(args.extractor_src)]
 from bake_material_channels import bake_material
 from endfield_scene_material_contract import load_catalog, reference_key
 
@@ -45,7 +45,7 @@ def replace_texture(record, prop):
 
 def sample(record):
     material = create_material(record, textures, True)
-    _, receipt = bake_material(material, 8)
+    baked, receipt = bake_material(material, 8)
     values = {}
     for key in ('base', 'emission'):
         image = bpy.data.images[receipt['images'][key]]
@@ -53,6 +53,10 @@ def sample(record):
         values[key][:3] = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4
                            for v in values[key][:3]]
     values['emission'][:3] = [v * receipt['emissionScale'] for v in values['emission'][:3]]
+    values['sourceProfile'] = (material['azureRenderMaterial'].to_dict()
+                               if 'azureRenderMaterial' in material else None)
+    values['bakedProfile'] = (baked['azureRenderMaterial'].to_dict()
+                              if 'azureRenderMaterial' in baked else None)
     return values
 
 
@@ -74,6 +78,12 @@ for family, expected in [('HGRP/LitEffect', [.2, .45, .95]),
         failures.append(f'{family} RGBA emission: {actual["emission"]} != {expected}')
     if family.endswith('VFXBaseV2') and abs(actual['base'][3] - .25) > .015:
         failures.append(f'effect opacity: {actual["base"][3]} != .25')
+    if family.endswith('VFXBaseV2'):
+        expected_profile = {'schemaVersion': 2, 'class': 'emissive',
+                            'features': ['emissive-mask', 'unlit-surface'],
+                            'surface': {'schemaVersion': 1, 'lighting': 'unlit'}}
+        if actual['sourceProfile'] != expected_profile or actual['bakedProfile'] != expected_profile:
+            failures.append('source and baked VFX require the explicit unlit surface profile')
 corners = bpy.data.images.new('WrapCorners', width=2, height=2, alpha=True)
 corners.colorspace_settings.name = 'Non-Color'
 corners.pixels[:] = [1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1]
@@ -107,12 +117,13 @@ actual = sample(record)['emission']
 results.append({'case': 'HDR exposure gain', 'actual': actual, 'expected': [.1, .8, 2]})
 if max(abs(a - b) for a, b in zip(actual, [.1, .8, 2])) > .035:
     failures.append(f'HDR effect gain: {actual} != [.1,.8,2]')
-for field, value in [('_BlendMode', 1), ('_ZWrite', 1)]:
+for field, value in [('_BlendMode', 1), ('_ZWrite', 1), ('_UseLighting', 1),
+                     ('_UseForceDynamicLighting', 1), ('_EnvLightStrength', .1)]:
     invalid = copy.deepcopy(record)
     invalid['Floats'][field] = value
     try:
         create_material(invalid, textures, True)
-    except ValueError:
+    except (ValueError, NotImplementedError):
         pass
     else:
         failures.append(f'unsupported source state silently accepted: {field}')

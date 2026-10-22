@@ -1,0 +1,1522 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR7-L3 public unlit surface and pinned logistics conversion",
+  "implementationVerified": true,
+  "nativeEquivalenceVerified": false,
+  "sourceBase": "616ce98",
+  "productionFiles": {
+    "CMakeLists.txt": "e3191f6d02ba912c6f8f7ddd85315fe5948697d4ef4a4e217ba6f897b26e7fd8",
+    "src/assets/GltfLoader.hpp": "046dda8dd6644a197ef41dcad594c3da11bc8e3de7fe8ead16658e521a8c2214",
+    "src/assets/GltfLoader.cpp": "1d33f1f1fb42cff10046591cd4aeff61728e61c9900f8a1621ae1a439edf39a7",
+    "shaders/mesh.frag": "f0704faa5c773fcfc503d5331d76a0c1ecb7f5433e504f6a01cee86c2715be7f",
+    "tools/endfield_native/vfx_profile.py": "c9c5c80b5740b14b645b447c907aa9a45b4e263b2b9fd99ef0476f6c27140e8f",
+    "tools/blender/native_spline_materials.py": "15cd4aee7439b8f17815b09fd25ff87ea06711b5366dda1203ad5f2250f8b8d6",
+    "tools/blender/build_native_spline_clips.py": "fb752be873539b087f407efc578fc8ceba45ed042c55726f34655c3e0712103a"
+  },
+  "testFiles": {
+    "tests/CharacterRepairTests.cpp": "1a5e6b38fbbda61436685e4cf25e7ef8ee2c1c2e7aed7e9cca9112d469db8681",
+    "tools/test_unlit_surface_gpu.py": "52813ef4650f1ab54c80aedcac02c63f72c0a8bce3b884cd2d9fbaaf17ea9e45",
+    "tools/test_native_vfx_profile.py": "0832227f1eca318b239dd3860a7d440e8d7c890250c21b27c6f9ff7efdeeac32",
+    "tools/blender/test_native_spline_materials.py": "3cd545b82cbf74e72a69ffba4982a253d3883be98f4372057f49ec927e424575"
+  },
+  "gpu": {
+    "debug": {
+      "schemaVersion": 1,
+      "metrics": {
+        "darkLinearMaximumError": 0.0013067797835095152,
+        "directLinearMaximumError": 0.0013067797835095152,
+        "indirectLinearMaximumError": 0.0013067797835095152,
+        "gi-onlyLinearMaximumError": 0.0013067797835095152,
+        "probe-onlyLinearMaximumError": 0.0013067797835095152,
+        "combinedLinearMaximumError": 0.0013067797835095152,
+        "showcaseLinearMaximumError": 0.0013067797835095152,
+        "fixedLinearMaximumError": 0.0013067797835095152,
+        "emissionLinearMaximumError": 0.00045376472326716377,
+        "halfLinearMaximumError": 0.0008605001138992374,
+        "node-halfLinearMaximumError": 0.0008605001138992374,
+        "combined-halfLinearMaximumError": 0.001355604802862509,
+        "depth-hiddenLinearMaximumError": 0.0010391649391195967,
+        "isolation-direct-diffuseMaximum": 0,
+        "isolation-ambientMaximum": 0,
+        "isolation-direct-specularMaximum": 0,
+        "isolation-reflectionMaximum": 0,
+        "isolation-hair-kkMaximum": 0,
+        "isolation-rimMaximum": 0,
+        "pbrLightingResponse": 0.8729386123958356,
+        "pbr-gi-isolatedResponse": 0.051320325388990194,
+        "pbr-probe-isolatedResponse": 0.024016652962341976,
+        "fixedMaximumDifference": 0
+      },
+      "failures": [],
+      "captures": [
+        {
+          "name": "dark",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "ceda08b9eeb707a1ab2258c651c76fbb3681a4e3245779544a46950c626da56b",
+          "validationEnabled": true
+        },
+        {
+          "name": "direct",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "a7d7162e4596e108abd10d92e9f86b82b988c8289db2c2bd6549f67db8934ed5",
+          "validationEnabled": true
+        },
+        {
+          "name": "indirect",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "5d1b25c2f210944935347e5d4ffebd09963837649e42384d13c3b34a1099ea4a",
+          "validationEnabled": true
+        },
+        {
+          "name": "gi-only",
+          "imageSha256": "35c8fb9f445477d2f636d8d5e0180cddec57647f797fd4e127f3f803097bce7d",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b5b5134a674c2e17e1aa39144bff3faee5edbdaf77192f79e7cb82a21dc5aad0",
+          "validationEnabled": true
+        },
+        {
+          "name": "probe-only",
+          "imageSha256": "161a5beda251930f995a8cded33c499f23c1da2bdb8e7d84301cdb5873f09ea5",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "db9effe42342f900c9adccda340ccd7cec9269f3428ba4f87d04ee4484b26a16",
+          "validationEnabled": true
+        },
+        {
+          "name": "combined",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "0d5995e128c688c239bfb6bcc7a16b58fac527b406eef81f9ff76a31e257a669",
+          "validationEnabled": true
+        },
+        {
+          "name": "showcase",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "81aff76b5f3e6956d30321d6e6887e4693fca665bfe9e3e255b61a076a4f8955",
+          "validationEnabled": true
+        },
+        {
+          "name": "fixed",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b79070e5370c9bf5bf687ea295ecdf51ae492acf4d43622ec12364a052f4996c",
+          "validationEnabled": true
+        },
+        {
+          "name": "emission",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "e1da6c0feeb1a5beb8fe82761c89f79336ad994b695d56bf33d54f8f2d186407",
+          "levelSha256": "99351e6e7359b0070e6082e76506b5d03f26edd931b145a7d5598daca8b74ca5",
+          "validationEnabled": true
+        },
+        {
+          "name": "half",
+          "imageSha256": "262f0fe76b8ed01176736bf8f302c0e480c7c2a4f615c9b4a05eef2d151fe35c",
+          "modelSha256": "6a25cbf5bc5909531ed60a765c2ca955252dda3fa99e91acc9daa779706a0b89",
+          "levelSha256": "13e2abd6b5ffd1935d73700b101ba167351fff4e75f39fe59d227cc65756d029",
+          "validationEnabled": true
+        },
+        {
+          "name": "node-half",
+          "imageSha256": "262f0fe76b8ed01176736bf8f302c0e480c7c2a4f615c9b4a05eef2d151fe35c",
+          "modelSha256": "e9a5b12ee7b95da0b5d22fb5142334019d0160b154e46af298b514ec3f39f30c",
+          "levelSha256": "0ecc271ef318b2ee15acc5fc2623295726c63deb1e2513e572ed5249d21734a2",
+          "validationEnabled": true
+        },
+        {
+          "name": "combined-half",
+          "imageSha256": "7fea624346bbb18f90d50a63ca3b7d48738b903532ca0f9a806491981aac9ffc",
+          "modelSha256": "e4e30a21382485abccbdfaad1dad5c995305e957140a9e54c81877df1b0a11d9",
+          "levelSha256": "d594c481675d3ea874875f66c74eec13e74d658087c8b041db9f1445b19dd469",
+          "validationEnabled": true
+        },
+        {
+          "name": "depth-hidden",
+          "imageSha256": "25233176a1b5cad2134865fe46c035a7ccf034e100663951ff35561981e72426",
+          "modelSha256": "ad3ea75a5afee628faee0651c3099a047c8737fa8f27b50ef2dc6f00bdf07274",
+          "levelSha256": "907b8436f95224a89850f1164c618efee40e2d5b3182f0db83d307f5bcd9c00e",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-direct-diffuse",
+          "imageSha256": "221cf14e20404cb6f4ec274eb9e3b08db7cf59e22da6edcc9ff26a1a47c8a115",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "f94b1b306ec3e4267296ac49387817a204c50acef805d629f717ddf1af2f7038",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-ambient",
+          "imageSha256": "d68e8bb81d6a5cc13deb60c09dfe66edc2d9ece32dd3b7ab98a82ea524e8e31d",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "e961d2bd2a9507eb594f0538f06ec7724e4160abd172aec83ad95e0714eab77e",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-direct-specular",
+          "imageSha256": "b0df016ce5620e1261c9d1ffc79bc3e9b6d4c067ac10f0286e76cdff63dccf62",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "8a94bd745c5423a9201f193d6c036f934a9e11422536e95419a978879e9fdef9",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-reflection",
+          "imageSha256": "13f9e5fad735de9f86bea65e50250cfce41101faab5564fb84091013f19b2c5c",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b72f66d2e24f791a1254e1a0547db865a03c47bff47a8c909b73b4f6f94feae9",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-hair-kk",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "bf64f1752f53cffdf6b4ad20205e0be9ed4ee13d501c05ef0518140c54667090",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-rim",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "225898ed328f87cf8133b5b5579c93347c1bfeeb18dd38caccbeb72a59118da2",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-dark",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "3b3485d685b3b5b4eb1ea432437ac5be43910b22d072885ef62214afc10c582d",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-light",
+          "imageSha256": "b516f19f32a243644e81138ec970c3ea123187cda64fc5343054e77f12b53176",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "b76b920f2e234fcc90059dcb1f2bc7d8599c6ac42b09ce990386cc6e2381a154",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-gi-off",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "281f48a502fad1391c68b917fb862bdb0d6a9a4e6d6aade718b5d1a7061576c9",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-gi-on",
+          "imageSha256": "5c93485213889dafc1b6d6e51d490d1ed4d1ac40164acba1122b322baad7f4aa",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "6598559b9ca6ac168bb36b043ea41d700452d3d1a3f9de83ea445fed4193055a",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-probe-off",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "e30be0d92c3a0dabdbd6bb971435e2c8a800f76e905288eef943ecd0dde7ce04",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-probe-on",
+          "imageSha256": "d4f875d18aa110189c4e49cfb1e869ee1c328ab3a5c730aacabc35f9888ec3fa",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "a45514842ff772ad35b0eb892abd1515fd068ce5531bb73f196bdf88c39b6be7",
+          "validationEnabled": true
+        }
+      ],
+      "linearTolerance": 0.008,
+      "playerSha256": "2de230348c47293fcb33bd1a3b1c5d38ee0e335eadcaab87090c6ad17c20900b",
+      "legacyLitRed": false,
+      "inputFingerprints": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "2de230348c47293fcb33bd1a3b1c5d38ee0e335eadcaab87090c6ad17c20900b",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\test_unlit_surface_gpu.py": "52813ef4650f1ab54c80aedcac02c63f72c0a8bce3b884cd2d9fbaaf17ea9e45",
+        "build\\ninja-msvc-debug\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "build\\ninja-msvc-debug\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "build\\ninja-msvc-debug\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "build\\ninja-msvc-debug\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "build\\ninja-msvc-debug\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "build\\ninja-msvc-debug\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "build\\ninja-msvc-debug\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "build\\ninja-msvc-debug\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "build\\ninja-msvc-debug\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "build\\ninja-msvc-debug\\shaders\\character_snapshot.frag.spv": "919ed7a86a3f0780e22466b42d93fbce65ca4c38b9391dfa59a62b70b7e93783",
+        "build\\ninja-msvc-debug\\shaders\\character_snapshot_bindless.frag.spv": "3eb8c725a5b507386977d99993e8a14f03ff53219e9a15dd3f56a84781487e8d",
+        "build\\ninja-msvc-debug\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "build\\ninja-msvc-debug\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "build\\ninja-msvc-debug\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "build\\ninja-msvc-debug\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "build\\ninja-msvc-debug\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "build\\ninja-msvc-debug\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "build\\ninja-msvc-debug\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "build\\ninja-msvc-debug\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "build\\ninja-msvc-debug\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "build\\ninja-msvc-debug\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "build\\ninja-msvc-debug\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+        "build\\ninja-msvc-debug\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-debug\\shaders\\mesh.frag.spv": "d21ec8e671576245c2d3147a15220d5a153d9446c37e405e43714f067cd8efab",
+        "build\\ninja-msvc-debug\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+        "build\\ninja-msvc-debug\\shaders\\mesh_bindless.frag.spv": "70f1d91d8a26fbc53801c42d22dc94a6a51cb557d1ef6a4c5b61e543082b6399",
+        "build\\ninja-msvc-debug\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+        "build\\ninja-msvc-debug\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+        "build\\ninja-msvc-debug\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+        "build\\ninja-msvc-debug\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+        "build\\ninja-msvc-debug\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+        "build\\ninja-msvc-debug\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "build\\ninja-msvc-debug\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+        "build\\ninja-msvc-debug\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+        "build\\ninja-msvc-debug\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+        "build\\ninja-msvc-debug\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "build\\ninja-msvc-debug\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+        "build\\ninja-msvc-debug\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "build\\ninja-msvc-debug\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+        "build\\ninja-msvc-debug\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+        "build\\ninja-msvc-debug\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "build\\ninja-msvc-debug\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+        "build\\ninja-msvc-debug\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+        "build\\ninja-msvc-debug\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      },
+      "scope": "Public surface output, lighting isolation, coverage, depth and resource lifetime",
+      "limitations": [
+        "Native VFX runtime binding and time-dependent sampling require separate evidence."
+      ]
+    },
+    "release": {
+      "schemaVersion": 1,
+      "metrics": {
+        "darkLinearMaximumError": 0.0013067797835095152,
+        "directLinearMaximumError": 0.0013067797835095152,
+        "indirectLinearMaximumError": 0.0013067797835095152,
+        "gi-onlyLinearMaximumError": 0.0013067797835095152,
+        "probe-onlyLinearMaximumError": 0.0013067797835095152,
+        "combinedLinearMaximumError": 0.0013067797835095152,
+        "showcaseLinearMaximumError": 0.0013067797835095152,
+        "fixedLinearMaximumError": 0.0013067797835095152,
+        "emissionLinearMaximumError": 0.00045376472326716377,
+        "halfLinearMaximumError": 0.0008605001138992374,
+        "node-halfLinearMaximumError": 0.0008605001138992374,
+        "combined-halfLinearMaximumError": 0.001355604802862509,
+        "depth-hiddenLinearMaximumError": 0.0010391649391195967,
+        "isolation-direct-diffuseMaximum": 0,
+        "isolation-ambientMaximum": 0,
+        "isolation-direct-specularMaximum": 0,
+        "isolation-reflectionMaximum": 0,
+        "isolation-hair-kkMaximum": 0,
+        "isolation-rimMaximum": 0,
+        "pbrLightingResponse": 0.8729386123958356,
+        "pbr-gi-isolatedResponse": 0.051320325388990194,
+        "pbr-probe-isolatedResponse": 0.024016652962341976,
+        "fixedMaximumDifference": 0
+      },
+      "failures": [],
+      "captures": [
+        {
+          "name": "dark",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "ceda08b9eeb707a1ab2258c651c76fbb3681a4e3245779544a46950c626da56b",
+          "validationEnabled": false
+        },
+        {
+          "name": "direct",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "a7d7162e4596e108abd10d92e9f86b82b988c8289db2c2bd6549f67db8934ed5",
+          "validationEnabled": false
+        },
+        {
+          "name": "indirect",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "5d1b25c2f210944935347e5d4ffebd09963837649e42384d13c3b34a1099ea4a",
+          "validationEnabled": false
+        },
+        {
+          "name": "gi-only",
+          "imageSha256": "35c8fb9f445477d2f636d8d5e0180cddec57647f797fd4e127f3f803097bce7d",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b5b5134a674c2e17e1aa39144bff3faee5edbdaf77192f79e7cb82a21dc5aad0",
+          "validationEnabled": false
+        },
+        {
+          "name": "probe-only",
+          "imageSha256": "161a5beda251930f995a8cded33c499f23c1da2bdb8e7d84301cdb5873f09ea5",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "db9effe42342f900c9adccda340ccd7cec9269f3428ba4f87d04ee4484b26a16",
+          "validationEnabled": false
+        },
+        {
+          "name": "combined",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "0d5995e128c688c239bfb6bcc7a16b58fac527b406eef81f9ff76a31e257a669",
+          "validationEnabled": false
+        },
+        {
+          "name": "showcase",
+          "imageSha256": "5be43e3e1a1d07a7e83ead48ca9bfdba3cd62356602d1fbe004a0138b2dcc242",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "81aff76b5f3e6956d30321d6e6887e4693fca665bfe9e3e255b61a076a4f8955",
+          "validationEnabled": false
+        },
+        {
+          "name": "fixed",
+          "imageSha256": "008a8a237d77b96ad250638b35d17f1b4ec3a52428794606e32862485f27a1f4",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b79070e5370c9bf5bf687ea295ecdf51ae492acf4d43622ec12364a052f4996c",
+          "validationEnabled": false
+        },
+        {
+          "name": "emission",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "e1da6c0feeb1a5beb8fe82761c89f79336ad994b695d56bf33d54f8f2d186407",
+          "levelSha256": "99351e6e7359b0070e6082e76506b5d03f26edd931b145a7d5598daca8b74ca5",
+          "validationEnabled": false
+        },
+        {
+          "name": "half",
+          "imageSha256": "262f0fe76b8ed01176736bf8f302c0e480c7c2a4f615c9b4a05eef2d151fe35c",
+          "modelSha256": "6a25cbf5bc5909531ed60a765c2ca955252dda3fa99e91acc9daa779706a0b89",
+          "levelSha256": "13e2abd6b5ffd1935d73700b101ba167351fff4e75f39fe59d227cc65756d029",
+          "validationEnabled": false
+        },
+        {
+          "name": "node-half",
+          "imageSha256": "262f0fe76b8ed01176736bf8f302c0e480c7c2a4f615c9b4a05eef2d151fe35c",
+          "modelSha256": "e9a5b12ee7b95da0b5d22fb5142334019d0160b154e46af298b514ec3f39f30c",
+          "levelSha256": "0ecc271ef318b2ee15acc5fc2623295726c63deb1e2513e572ed5249d21734a2",
+          "validationEnabled": false
+        },
+        {
+          "name": "combined-half",
+          "imageSha256": "7fea624346bbb18f90d50a63ca3b7d48738b903532ca0f9a806491981aac9ffc",
+          "modelSha256": "e4e30a21382485abccbdfaad1dad5c995305e957140a9e54c81877df1b0a11d9",
+          "levelSha256": "d594c481675d3ea874875f66c74eec13e74d658087c8b041db9f1445b19dd469",
+          "validationEnabled": false
+        },
+        {
+          "name": "depth-hidden",
+          "imageSha256": "25233176a1b5cad2134865fe46c035a7ccf034e100663951ff35561981e72426",
+          "modelSha256": "ad3ea75a5afee628faee0651c3099a047c8737fa8f27b50ef2dc6f00bdf07274",
+          "levelSha256": "907b8436f95224a89850f1164c618efee40e2d5b3182f0db83d307f5bcd9c00e",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-direct-diffuse",
+          "imageSha256": "221cf14e20404cb6f4ec274eb9e3b08db7cf59e22da6edcc9ff26a1a47c8a115",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "f94b1b306ec3e4267296ac49387817a204c50acef805d629f717ddf1af2f7038",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-ambient",
+          "imageSha256": "d68e8bb81d6a5cc13deb60c09dfe66edc2d9ece32dd3b7ab98a82ea524e8e31d",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "e961d2bd2a9507eb594f0538f06ec7724e4160abd172aec83ad95e0714eab77e",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-direct-specular",
+          "imageSha256": "b0df016ce5620e1261c9d1ffc79bc3e9b6d4c067ac10f0286e76cdff63dccf62",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "8a94bd745c5423a9201f193d6c036f934a9e11422536e95419a978879e9fdef9",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-reflection",
+          "imageSha256": "13f9e5fad735de9f86bea65e50250cfce41101faab5564fb84091013f19b2c5c",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "b72f66d2e24f791a1254e1a0547db865a03c47bff47a8c909b73b4f6f94feae9",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-hair-kk",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "bf64f1752f53cffdf6b4ad20205e0be9ed4ee13d501c05ef0518140c54667090",
+          "validationEnabled": false
+        },
+        {
+          "name": "isolation-rim",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "7d8c852e3a24139914b69a0b2cb1acdc18cbbafd48deaebc5c62fe9d01812d90",
+          "levelSha256": "225898ed328f87cf8133b5b5579c93347c1bfeeb18dd38caccbeb72a59118da2",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-dark",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "3b3485d685b3b5b4eb1ea432437ac5be43910b22d072885ef62214afc10c582d",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-light",
+          "imageSha256": "b516f19f32a243644e81138ec970c3ea123187cda64fc5343054e77f12b53176",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "b76b920f2e234fcc90059dcb1f2bc7d8599c6ac42b09ce990386cc6e2381a154",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-gi-off",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "281f48a502fad1391c68b917fb862bdb0d6a9a4e6d6aade718b5d1a7061576c9",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-gi-on",
+          "imageSha256": "5c93485213889dafc1b6d6e51d490d1ed4d1ac40164acba1122b322baad7f4aa",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "6598559b9ca6ac168bb36b043ea41d700452d3d1a3f9de83ea445fed4193055a",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-probe-off",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "e30be0d92c3a0dabdbd6bb971435e2c8a800f76e905288eef943ecd0dde7ce04",
+          "validationEnabled": false
+        },
+        {
+          "name": "pbr-probe-on",
+          "imageSha256": "d4f875d18aa110189c4e49cfb1e869ee1c328ab3a5c730aacabc35f9888ec3fa",
+          "modelSha256": "ab1b4b6532cde54f2e5281f085db183409a029591e2d9cc73302525fba64a108",
+          "levelSha256": "a45514842ff772ad35b0eb892abd1515fd068ce5531bb73f196bdf88c39b6be7",
+          "validationEnabled": false
+        }
+      ],
+      "linearTolerance": 0.008,
+      "playerSha256": "fb95d28f99886e581b3a9aba8514ef1a07f25e997f63fbc1cb0684a329b4d59d",
+      "legacyLitRed": false,
+      "inputFingerprints": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "fb95d28f99886e581b3a9aba8514ef1a07f25e997f63fbc1cb0684a329b4d59d",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\test_unlit_surface_gpu.py": "52813ef4650f1ab54c80aedcac02c63f72c0a8bce3b884cd2d9fbaaf17ea9e45",
+        "build\\ninja-msvc-release\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "build\\ninja-msvc-release\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "build\\ninja-msvc-release\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "build\\ninja-msvc-release\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "build\\ninja-msvc-release\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-release\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "build\\ninja-msvc-release\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "build\\ninja-msvc-release\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "build\\ninja-msvc-release\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "build\\ninja-msvc-release\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "build\\ninja-msvc-release\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "build\\ninja-msvc-release\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "build\\ninja-msvc-release\\shaders\\character_snapshot.frag.spv": "919ed7a86a3f0780e22466b42d93fbce65ca4c38b9391dfa59a62b70b7e93783",
+        "build\\ninja-msvc-release\\shaders\\character_snapshot_bindless.frag.spv": "3eb8c725a5b507386977d99993e8a14f03ff53219e9a15dd3f56a84781487e8d",
+        "build\\ninja-msvc-release\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "build\\ninja-msvc-release\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "build\\ninja-msvc-release\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "build\\ninja-msvc-release\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "build\\ninja-msvc-release\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "build\\ninja-msvc-release\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "build\\ninja-msvc-release\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "build\\ninja-msvc-release\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "build\\ninja-msvc-release\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "build\\ninja-msvc-release\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "build\\ninja-msvc-release\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+        "build\\ninja-msvc-release\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-release\\shaders\\mesh.frag.spv": "d21ec8e671576245c2d3147a15220d5a153d9446c37e405e43714f067cd8efab",
+        "build\\ninja-msvc-release\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+        "build\\ninja-msvc-release\\shaders\\mesh_bindless.frag.spv": "70f1d91d8a26fbc53801c42d22dc94a6a51cb557d1ef6a4c5b61e543082b6399",
+        "build\\ninja-msvc-release\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+        "build\\ninja-msvc-release\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+        "build\\ninja-msvc-release\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+        "build\\ninja-msvc-release\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+        "build\\ninja-msvc-release\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+        "build\\ninja-msvc-release\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+        "build\\ninja-msvc-release\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+        "build\\ninja-msvc-release\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+        "build\\ninja-msvc-release\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+        "build\\ninja-msvc-release\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "build\\ninja-msvc-release\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+        "build\\ninja-msvc-release\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+        "build\\ninja-msvc-release\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+        "build\\ninja-msvc-release\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "build\\ninja-msvc-release\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+        "build\\ninja-msvc-release\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "build\\ninja-msvc-release\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+        "build\\ninja-msvc-release\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+        "build\\ninja-msvc-release\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "build\\ninja-msvc-release\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+        "build\\ninja-msvc-release\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+        "build\\ninja-msvc-release\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      },
+      "scope": "Public surface output, lighting isolation, coverage, depth and resource lifetime",
+      "limitations": [
+        "Native VFX runtime binding and time-dependent sampling require separate evidence."
+      ]
+    }
+  },
+  "cpu": {
+    "debug": {
+      "passed": true,
+      "suites": 10,
+      "logSha256": "000e8128c5abea34788856cbac65dc4a5f720eea1424a9e5e185d2c1fdf69b1d",
+      "buildLogSha256": "640ec33cacd6c93c9b737d396c0975417a3ad02856da7a56b89a464156d7e0a0"
+    },
+    "release": {
+      "passed": true,
+      "suites": 10,
+      "logSha256": "c32e3261cf3e487f5d056d7564df49af5a30de22058cf30f53be1afcdf4f85e0",
+      "buildLogSha256": "2a29fdee3e702d0ec509b86468d2dc79b926e4bc5799a6dad49d0ba63b336811"
+    }
+  },
+  "red": {
+    "gpu-red-debug/summary.json": {
+      "schemaVersion": 1,
+      "metrics": {
+        "darkLinearMaximumError": 0.35027878267976215,
+        "directLinearMaximumError": 0.73,
+        "indirectLinearMaximumError": 0.227131678446182,
+        "combinedLinearMaximumError": 0.73,
+        "showcaseLinearMaximumError": 0.29078578283822343,
+        "fixedLinearMaximumError": 0.73,
+        "emissionLinearMaximumError": 0.00045376472326716377,
+        "halfLinearMaximumError": 0.17481379561432447,
+        "node-halfLinearMaximumError": 0.17481379561432447,
+        "combined-halfLinearMaximumError": 0.08698998234683232,
+        "depth-hiddenLinearMaximumError": 0.0010391649391195967,
+        "isolation-direct-diffuseMaximum": 255,
+        "isolation-ambientMaximum": 91,
+        "isolation-direct-specularMaximum": 107,
+        "isolation-reflectionMaximum": 50,
+        "isolation-hair-kkMaximum": 0,
+        "isolation-rimMaximum": 0,
+        "pbrLightingResponse": 0.8496744233610158,
+        "fixedMaximumDifference": 0
+      },
+      "failures": [
+        "dark violates unlit color or coverage",
+        "direct violates unlit color or coverage",
+        "indirect violates unlit color or coverage",
+        "combined violates unlit color or coverage",
+        "showcase violates unlit color or coverage",
+        "fixed violates unlit color or coverage",
+        "half violates unlit color or coverage",
+        "node-half violates unlit color or coverage",
+        "combined-half violates unlit color or coverage",
+        "isolation-direct-diffuse contains lighting energy",
+        "isolation-ambient contains lighting energy",
+        "isolation-direct-specular contains lighting energy",
+        "isolation-reflection contains lighting energy"
+      ],
+      "captures": [
+        {
+          "name": "dark",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "ceda08b9eeb707a1ab2258c651c76fbb3681a4e3245779544a46950c626da56b",
+          "validationEnabled": true
+        },
+        {
+          "name": "direct",
+          "imageSha256": "7293ae380770c74b0879240822de10439cc73fc55482f497a4e00486900ed0d7",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "a7d7162e4596e108abd10d92e9f86b82b988c8289db2c2bd6549f67db8934ed5",
+          "validationEnabled": true
+        },
+        {
+          "name": "indirect",
+          "imageSha256": "c3df572b3fc0359a79da140428c74fd8c3aae769fd331d2dc56f8b410ae67aa4",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "5d1b25c2f210944935347e5d4ffebd09963837649e42384d13c3b34a1099ea4a",
+          "validationEnabled": true
+        },
+        {
+          "name": "combined",
+          "imageSha256": "43eac14208944058b36244cb71c49ce7e00f1a07a0037a631796251e47c3f6a1",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "0d5995e128c688c239bfb6bcc7a16b58fac527b406eef81f9ff76a31e257a669",
+          "validationEnabled": true
+        },
+        {
+          "name": "showcase",
+          "imageSha256": "2f2e3eb8fcb48e45f0a48ae52d6d858f57815a2d1fc0719caf0202f99d22d0ba",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "81aff76b5f3e6956d30321d6e6887e4693fca665bfe9e3e255b61a076a4f8955",
+          "validationEnabled": true
+        },
+        {
+          "name": "fixed",
+          "imageSha256": "43eac14208944058b36244cb71c49ce7e00f1a07a0037a631796251e47c3f6a1",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "b79070e5370c9bf5bf687ea295ecdf51ae492acf4d43622ec12364a052f4996c",
+          "validationEnabled": true
+        },
+        {
+          "name": "emission",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "f7329a5765a1961307b895340ac8529bffaa7e8fa7b00992ee1c72549e392b8c",
+          "levelSha256": "99351e6e7359b0070e6082e76506b5d03f26edd931b145a7d5598daca8b74ca5",
+          "validationEnabled": true
+        },
+        {
+          "name": "half",
+          "imageSha256": "530dd91083bf8bc3afcd0cb6071ceee9d197d26c9d6b4b68592ac01f375efb87",
+          "modelSha256": "a80e4dbd38c6dcfc84417f35b259bcb4b4b40878a8056104753a7a8e81e90b4b",
+          "levelSha256": "13e2abd6b5ffd1935d73700b101ba167351fff4e75f39fe59d227cc65756d029",
+          "validationEnabled": true
+        },
+        {
+          "name": "node-half",
+          "imageSha256": "530dd91083bf8bc3afcd0cb6071ceee9d197d26c9d6b4b68592ac01f375efb87",
+          "modelSha256": "df9c31b0d960594271e42c1ab5cef5d676ef70a2c23c8b9313ef3ac11f3621a4",
+          "levelSha256": "0ecc271ef318b2ee15acc5fc2623295726c63deb1e2513e572ed5249d21734a2",
+          "validationEnabled": true
+        },
+        {
+          "name": "combined-half",
+          "imageSha256": "8d10ef0c346036911144a6899099c1771d76c5fb688f5b3e88b16218e9ef0872",
+          "modelSha256": "8b3f95e78b7ba53d540682fd042415b169057193d590ce7ee31c5ee3eb3451ec",
+          "levelSha256": "d594c481675d3ea874875f66c74eec13e74d658087c8b041db9f1445b19dd469",
+          "validationEnabled": true
+        },
+        {
+          "name": "depth-hidden",
+          "imageSha256": "25233176a1b5cad2134865fe46c035a7ccf034e100663951ff35561981e72426",
+          "modelSha256": "32441aa461df5a64ffe90414013c83de2905b9d27fcf8968593f58baf5131344",
+          "levelSha256": "907b8436f95224a89850f1164c618efee40e2d5b3182f0db83d307f5bcd9c00e",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-direct-diffuse",
+          "imageSha256": "50363fa5cb04a48a66132e0c8c5d09add51a5b919c80c2d6836f3d6738e7af4b",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "f94b1b306ec3e4267296ac49387817a204c50acef805d629f717ddf1af2f7038",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-ambient",
+          "imageSha256": "5c93485213889dafc1b6d6e51d490d1ed4d1ac40164acba1122b322baad7f4aa",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "e961d2bd2a9507eb594f0538f06ec7724e4160abd172aec83ad95e0714eab77e",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-direct-specular",
+          "imageSha256": "1c2cfbb97c6546cabacd4013f2236cd6ada8a109bf277be1d4ee4f8d4be8516c",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "8a94bd745c5423a9201f193d6c036f934a9e11422536e95419a978879e9fdef9",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-reflection",
+          "imageSha256": "d4f875d18aa110189c4e49cfb1e869ee1c328ab3a5c730aacabc35f9888ec3fa",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "b72f66d2e24f791a1254e1a0547db865a03c47bff47a8c909b73b4f6f94feae9",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-hair-kk",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "bf64f1752f53cffdf6b4ad20205e0be9ed4ee13d501c05ef0518140c54667090",
+          "validationEnabled": true
+        },
+        {
+          "name": "isolation-rim",
+          "imageSha256": "3cd768f23c531b058ef1c225f03e9326fbc6c9813ac0ee502344d58b3c9ecc6f",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "225898ed328f87cf8133b5b5579c93347c1bfeeb18dd38caccbeb72a59118da2",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-dark",
+          "imageSha256": "5f140bf548580ba4958effb9e21f6a26ad6659c01c27bdfa0d2c88543285a11c",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "3b3485d685b3b5b4eb1ea432437ac5be43910b22d072885ef62214afc10c582d",
+          "validationEnabled": true
+        },
+        {
+          "name": "pbr-light",
+          "imageSha256": "43eac14208944058b36244cb71c49ce7e00f1a07a0037a631796251e47c3f6a1",
+          "modelSha256": "a0d1812098482038edb7de49344773ad576b08ecbc363649de4f171256ffb10c",
+          "levelSha256": "6de5cf176eb751f0a2643ad9694cfd77b561d5bf26427cd5b65bdeef4e2157a1",
+          "validationEnabled": true
+        }
+      ],
+      "linearTolerance": 0.008,
+      "playerSha256": "6fb6b9c427845a12e9bde548b5fd294bf0bf23385b14af7d6cb41da2f57b1a67",
+      "legacyLitRed": true,
+      "inputFingerprints": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "6fb6b9c427845a12e9bde548b5fd294bf0bf23385b14af7d6cb41da2f57b1a67",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\test_unlit_surface_gpu.py": "9f1bbf0a184d8d646672d60c6740d8ddb30219c209fcbe86f8c4464061d43076",
+        "build\\ninja-msvc-debug\\shaders\\background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "build\\ninja-msvc-debug\\shaders\\background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "build\\ninja-msvc-debug\\shaders\\background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "build\\ninja-msvc-debug\\shaders\\blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "build\\ninja-msvc-debug\\shaders\\blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "build\\ninja-msvc-debug\\shaders\\blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "build\\ninja-msvc-debug\\shaders\\bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "build\\ninja-msvc-debug\\shaders\\bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "build\\ninja-msvc-debug\\shaders\\character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "build\\ninja-msvc-debug\\shaders\\character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "build\\ninja-msvc-debug\\shaders\\character_snapshot.frag.spv": "245cb0b7f518a1daa1668606b1d6c53cf181b2ab250853972c3004a75c917cd5",
+        "build\\ninja-msvc-debug\\shaders\\character_snapshot_bindless.frag.spv": "deffc48640291b7a6e6fd9642c6b2cccc8d22de57404a21d633bdba7748d2021",
+        "build\\ninja-msvc-debug\\shaders\\clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "build\\ninja-msvc-debug\\shaders\\color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "build\\ninja-msvc-debug\\shaders\\cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "build\\ninja-msvc-debug\\shaders\\editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "build\\ninja-msvc-debug\\shaders\\editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "build\\ninja-msvc-debug\\shaders\\game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "build\\ninja-msvc-debug\\shaders\\game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "build\\ninja-msvc-debug\\shaders\\hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "build\\ninja-msvc-debug\\shaders\\hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "build\\ninja-msvc-debug\\shaders\\ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "build\\ninja-msvc-debug\\shaders\\inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+        "build\\ninja-msvc-debug\\shaders\\inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "build\\ninja-msvc-debug\\shaders\\mesh.frag.spv": "d7b239ae5abb07887b842201ec4a849d46aeb3652e58888ea9a09d2f4436e480",
+        "build\\ninja-msvc-debug\\shaders\\mesh.vert.spv": "91d2350d95d5c1a286bd7222d78d86d3040346b1126ee1a0f5bfa87ccdc1f430",
+        "build\\ninja-msvc-debug\\shaders\\mesh_bindless.frag.spv": "d6dba0439ef189c1382e1ec62dbaaf4a3f82da082daea930fca59ac8674b1dc2",
+        "build\\ninja-msvc-debug\\shaders\\mesh_compute.vert.spv": "56ac991cffba0e57fb21d49588e8d8648aec92cbc7cfd15afffe53cba3d11904",
+        "build\\ninja-msvc-debug\\shaders\\outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+        "build\\ninja-msvc-debug\\shaders\\outline.vert.spv": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+        "build\\ninja-msvc-debug\\shaders\\outline_compute.vert.spv": "72d37cc9ada34c79ad525456cc144fed6cd15ba82e065ac22791fcfc33a7a61a",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask.vert.spv": "80b9ecfa3f1fd2b1dea4c93da4950117f50e86f6b6661f81fae08b384c512c85",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+        "build\\ninja-msvc-debug\\shaders\\outline_mask_compute.vert.spv": "4ee7d0e2e37e47141e834bc87c15bd3a71ab5655a39e11a0d9eb909f56a08753",
+        "build\\ninja-msvc-debug\\shaders\\pathtracing.comp.spv": "88322fbe2b402933218fa79e886d035abed769a449fcef963ac80eee7f6bdb7b",
+        "build\\ninja-msvc-debug\\shaders\\pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "build\\ninja-msvc-debug\\shaders\\shadow.frag.spv": "3d4dae2f7f80c0ad190ecc37f6e0e00c0ee2513a3be06796200939d7b9298daf",
+        "build\\ninja-msvc-debug\\shaders\\shadow.vert.spv": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+        "build\\ninja-msvc-debug\\shaders\\shadow_bindless.frag.spv": "e00496a5ed0f66a4a776d96881fcf6453204883485d4a82712d93ff7331aa20f",
+        "build\\ninja-msvc-debug\\shaders\\shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "build\\ninja-msvc-debug\\shaders\\shadow_compute.vert.spv": "4464815c6638a890f0dac62b6b1d47641374adb5fa4d24b15f32d987308bb79d",
+        "build\\ninja-msvc-debug\\shaders\\shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "build\\ninja-msvc-debug\\shaders\\skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+        "build\\ninja-msvc-debug\\shaders\\sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+        "build\\ninja-msvc-debug\\shaders\\spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "build\\ninja-msvc-debug\\shaders\\surface_response_test.comp.spv": "d09c5f4c32619b5f8776b420bf58367e3f675234a56f5848e58f1ce357c8e6d7",
+        "build\\ninja-msvc-debug\\shaders\\view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+        "build\\ninja-msvc-debug\\shaders\\visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      },
+      "scope": "Public surface output, lighting isolation, coverage, depth and resource lifetime",
+      "limitations": [
+        "Native VFX runtime binding and time-dependent sampling require separate evidence."
+      ]
+    },
+    "source-profile-red.json": {
+      "exitCode": 1,
+      "expectedFailure": "ModuleNotFoundError: No module named endfield_native.vfx_profile",
+      "missingConsumer": true
+    },
+    "blender-red-profile/result.json": {
+      "results": [
+        {
+          "family": "HGRP/LitEffect",
+          "actual": {
+            "base": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "emission": [
+              0.20155628115975813,
+              0.4507858082281588,
+              0.9473066712031907,
+              1.0
+            ],
+            "sourceProfile": null,
+            "bakedProfile": null
+          },
+          "expectedEmission": [
+            0.2,
+            0.45,
+            0.95
+          ]
+        },
+        {
+          "family": "HGRP/Effect/VFXBaseV2",
+          "actual": {
+            "base": [
+              0.0,
+              0.0,
+              0.0,
+              0.250980406999588
+            ],
+            "emission": [
+              0.10224173836055891,
+              0.4019778063926501,
+              0.7991028681774811,
+              1.0
+            ],
+            "sourceProfile": null,
+            "bakedProfile": null
+          },
+          "expectedEmission": [
+            0.1,
+            0.4,
+            0.8
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            -0.25,
+            1.75
+          ],
+          "actual": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            1.25,
+            -0.75
+          ],
+          "actual": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "wrap": [
+            0,
+            1
+          ],
+          "uv": [
+            1.75,
+            -0.25
+          ],
+          "actual": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            -2,
+            1
+          ],
+          "actual": [
+            0.5028864818904007,
+            0.0,
+            0.5028864818904007,
+            1.0
+          ],
+          "expected": [
+            0.5,
+            0,
+            0.5
+          ]
+        },
+        {
+          "case": "HDR exposure gain",
+          "actual": [
+            0.10253895313295493,
+            0.8039558044632551,
+            2.000000476837158,
+            1.0
+          ],
+          "expected": [
+            0.1,
+            0.8,
+            2
+          ]
+        }
+      ],
+      "failures": [
+        "source and baked VFX require the explicit unlit surface profile",
+        "unsupported source state silently accepted: _UseForceDynamicLighting",
+        "unsupported source state silently accepted: _EnvLightStrength"
+      ]
+    }
+  },
+  "conversion": {
+    "blender-green/result.json": {
+      "results": [
+        {
+          "family": "HGRP/LitEffect",
+          "actual": {
+            "base": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "emission": [
+              0.20155628115975813,
+              0.4507858082281588,
+              0.9473066712031907,
+              1.0
+            ],
+            "sourceProfile": null,
+            "bakedProfile": null
+          },
+          "expectedEmission": [
+            0.2,
+            0.45,
+            0.95
+          ]
+        },
+        {
+          "family": "HGRP/Effect/VFXBaseV2",
+          "actual": {
+            "base": [
+              0.0,
+              0.0,
+              0.0,
+              0.250980406999588
+            ],
+            "emission": [
+              0.10224173836055891,
+              0.4019778063926501,
+              0.7991028681774811,
+              1.0
+            ],
+            "sourceProfile": {
+              "schemaVersion": 2,
+              "class": "emissive",
+              "features": [
+                "emissive-mask",
+                "unlit-surface"
+              ],
+              "surface": {
+                "schemaVersion": 1,
+                "lighting": "unlit"
+              }
+            },
+            "bakedProfile": {
+              "schemaVersion": 2,
+              "class": "emissive",
+              "features": [
+                "emissive-mask",
+                "unlit-surface"
+              ],
+              "surface": {
+                "schemaVersion": 1,
+                "lighting": "unlit"
+              }
+            }
+          },
+          "expectedEmission": [
+            0.1,
+            0.4,
+            0.8
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            -0.25,
+            1.75
+          ],
+          "actual": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            1.25,
+            -0.75
+          ],
+          "actual": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "wrap": [
+            0,
+            1
+          ],
+          "uv": [
+            1.75,
+            -0.25
+          ],
+          "actual": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "expected": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "wrap": [
+            1,
+            0
+          ],
+          "uv": [
+            -2,
+            1
+          ],
+          "actual": [
+            0.5028864818904007,
+            0.0,
+            0.5028864818904007,
+            1.0
+          ],
+          "expected": [
+            0.5,
+            0,
+            0.5
+          ]
+        },
+        {
+          "case": "HDR exposure gain",
+          "actual": [
+            0.10253895313295493,
+            0.8039558044632551,
+            2.000000476837158,
+            1.0
+          ],
+          "expected": [
+            0.1,
+            0.8,
+            2
+          ]
+        }
+      ],
+      "failures": []
+    },
+    "source-profiles.json": [
+      {
+        "name": "M_fx_base01_lv001_ship_line_1124",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fx_cargostripe_03",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fx_cargostripe_04",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fxmap_base01_lv001_ship_zmdlogistics_03_line_01_fj_01",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fxmap_base01_lv001_ship_zmdlogistics_03_line_01_fj_02",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fxmap_base01_lv001_ship_zmdlogistics_03_line_01_fj_04",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      },
+      {
+        "name": "M_fxmap_base01_lv001_ship_zmdlogistics_03_line_01_fj_03",
+        "identity": [
+          "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+          -1430105248647086886
+        ],
+        "profile": {
+          "schemaVersion": 2,
+          "class": "emissive",
+          "features": [
+            "emissive-mask",
+            "unlit-surface"
+          ],
+          "surface": {
+            "schemaVersion": 1,
+            "lighting": "unlit"
+          }
+        }
+      }
+    ],
+    "export-reopen.json": {
+      "files": [
+        {
+          "file": "down_b_s01.glb",
+          "sha256": "e918b44f2316c2908b54ebe44eeb562b99c3f2206dc5bfb5d0ec039d114637d9",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 26,
+          "animationChannels": 26
+        },
+        {
+          "file": "up_b_s01.glb",
+          "sha256": "948a6fceb057c659d71e07836711adbbc326514671622d28ebda23dd9a460d8e",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 12,
+          "animationChannels": 12
+        },
+        {
+          "file": "down_b_s03.glb",
+          "sha256": "c1c1701b9b556aaa59c2c4c08e6bbdb81fe2de09097181d4c7b34bc64943ea4e",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 14,
+          "animationChannels": 14
+        },
+        {
+          "file": "up_b_s03.glb",
+          "sha256": "4ead4a27e56a21fde3da36c270b2406b3f5efd240bb883ea75eaa237f52793b4",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 22,
+          "animationChannels": 22
+        },
+        {
+          "file": "up_b_s02.glb",
+          "sha256": "0d00e0d2f2b557fc49b56d4ff730127c51a9721c92ae5a1fc4ee00f79ba05558",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 20,
+          "animationChannels": 20
+        },
+        {
+          "file": "down_b_s04.glb",
+          "sha256": "2f6693d57efde18554db27e0163ed7f0dd0f6329f7ddbffc9b9dc3f58ce9b9d0",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 38,
+          "animationChannels": 38
+        },
+        {
+          "file": "down_b_s02.glb",
+          "sha256": "8239ec664910ce84efc66c38d4befddbfc6bdb6005f4750bafa71ae02df653ae",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 20,
+          "animationChannels": 20
+        },
+        {
+          "file": "up_q_02.glb",
+          "sha256": "512377d401bc7e45f6459059b4b236cbe8d4a6dbf2c2849df01cf5be5c9f6600",
+          "materials": 4,
+          "unlitMaterials": [
+            {
+              "name": "M_fx_cargostripe_04-baked",
+              "profile": {
+                "schemaVersion": 2,
+                "class": "emissive",
+                "features": [
+                  "emissive-mask",
+                  "unlit-surface"
+                ],
+                "surface": {
+                  "schemaVersion": 1,
+                  "lighting": "unlit"
+                }
+              },
+              "identity": {
+                "source": "CAB-18813b4985006d21650766206a759c64",
+                "pathId": -1757653052599236848,
+                "shaderSource": "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+                "shaderPathId": -1430105248647086886
+              },
+              "alphaMode": "BLEND",
+              "emissiveFactor": [
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "name": "M_fx_base01_lv001_ship_line_1124-baked",
+              "profile": {
+                "schemaVersion": 2,
+                "class": "emissive",
+                "features": [
+                  "emissive-mask",
+                  "unlit-surface"
+                ],
+                "surface": {
+                  "schemaVersion": 1,
+                  "lighting": "unlit"
+                }
+              },
+              "identity": {
+                "source": "CAB-18813b4985006d21650766206a759c64",
+                "pathId": -8798255590680839040,
+                "shaderSource": "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+                "shaderPathId": -1430105248647086886
+              },
+              "alphaMode": "BLEND",
+              "emissiveFactor": [
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "nodes": 20,
+          "animationChannels": 8
+        },
+        {
+          "file": "up_q_01.glb",
+          "sha256": "17a43f75cb5f1305d77e9788a1a2cf2789e8eb8ffd63c32f9ecdbf3993353933",
+          "materials": 4,
+          "unlitMaterials": [
+            {
+              "name": "M_fx_cargostripe_03-baked",
+              "profile": {
+                "schemaVersion": 2,
+                "class": "emissive",
+                "features": [
+                  "emissive-mask",
+                  "unlit-surface"
+                ],
+                "surface": {
+                  "schemaVersion": 1,
+                  "lighting": "unlit"
+                }
+              },
+              "identity": {
+                "source": "CAB-18813b4985006d21650766206a759c64",
+                "pathId": -5077475702658895747,
+                "shaderSource": "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+                "shaderPathId": -1430105248647086886
+              },
+              "alphaMode": "BLEND",
+              "emissiveFactor": [
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "name": "M_fx_base01_lv001_ship_line_1124-baked",
+              "profile": {
+                "schemaVersion": 2,
+                "class": "emissive",
+                "features": [
+                  "emissive-mask",
+                  "unlit-surface"
+                ],
+                "surface": {
+                  "schemaVersion": 1,
+                  "lighting": "unlit"
+                }
+              },
+              "identity": {
+                "source": "CAB-18813b4985006d21650766206a759c64",
+                "pathId": -8798255590680839040,
+                "shaderSource": "CAB-9fe1ba4f3ce8edb2f54eb3e35709a336",
+                "shaderPathId": -1430105248647086886
+              },
+              "alphaMode": "BLEND",
+              "emissiveFactor": [
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "nodes": 15,
+          "animationChannels": 6
+        },
+        {
+          "file": "up_b_s04.glb",
+          "sha256": "8bc138f327fbe841d2d257aae0c30ad288e7468f8c949cc06a299d5e44d5f86d",
+          "materials": 1,
+          "unlitMaterials": [],
+          "nodes": 16,
+          "animationChannels": 16
+        }
+      ],
+      "scope": "Actual exported GLB JSON reopened; Player consumption validated separately",
+      "unlitMaterialCount": 4,
+      "inputs": {
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-probe\\scene_manifest.json": "87432c33c6401208154533ad412350e55a03124120143651fcb6c58387c24cfd",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-production.json": "6214602a63e5821ab5815a312891ff64379cf16c17cc08c3ab5faf71c6377686",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-world-transforms.json": "de65c0e637476c92a4a046e6a13ad0b2a6f380c71a0f97f7dd84c53774ff4c2f",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-151417-native-render-restoration-e7723b\\logistics-render-dependencies.json": "2c84779068f4fcc50524da83099a1eb1343a29d7221e667419d3108f97de030e",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\build_native_spline_clips.py": "fb752be873539b087f407efc578fc8ceba45ed042c55726f34655c3e0712103a",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\endfield_native\\spline_bake.py": "00c7a51a3b350c6afc513de03d61b87885dd1e4dda1265d06f249c70c7996e71",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\endfield_native\\vfx_profile.py": "c9c5c80b5740b14b645b447c907aa9a45b4e263b2b9fd99ef0476f6c27140e8f",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\native_spline_materials.py": "15cd4aee7439b8f17815b09fd25ff87ea06711b5366dda1203ad5f2250f8b8d6",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\tools\\blender\\bake_material_channels.py": "53d6f70616841ac6d0b6eb2112923965bc5a36bc29cc24829e9b0cea2d524b41",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_materials.py": "4b252679ee22acf21dce79883c827e6b5dfac37e7997e5feec454b33db41ef92",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_effect_layers.py": "0e86ed1ee51cad5880f819e71c8272d21b3d655d304c19f9a7fce1513b88e18f",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\endfield_scene_material_contract.py": "67e2462aa52668c545793486bfea25c67c7896df0076c2c0904d30fd38d42b79",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_scene_effects.py": "0a6c634d6da5db9539fee6ce4428c74439fcf2072f5ced75d687a0d1fcbc6622",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261017-000956-endfield-native-3caf73\\extractor\\src\\blender_build_map02_chunk_20260727.py": "aa0b84579c9c80c297556d801fd59831a3e9b36b450b946ce0626a330eac96f4"
+      }
+    },
+    "nativeReceiptSha256": "45c4a573e1929d6aa21320aa55014aa34df3a77834399016de8ee57f236d312d"
+  },
+  "limitations": [
+    "Native runtime bindings, activation and phase remain unverified.",
+    "Time-dependent UV and depth soft intersection require NR7-L4.",
+    "Eye and complete screen-space hair shadow remain separate.",
+    "Formal NR completion and historical failure gates retain their actual status."
+  ],
+  "loaderRed": {
+    "expectedFailure": "Unknown azureRenderMaterial feature 'unlit-surface'",
+    "sha256": "d548917f7b9395b046294cbd8d72a64fe3839189a946e6f8987b5df8d44d6119"
+  },
+  "nativePython": {
+    "tests": 61,
+    "passed": true,
+    "logSha256": "8e65963c87beef8d2050e5de1ad1283b6e6e1590a7846735d6354c1f53da0fe0"
+  },
+  "registeredVfxTest": {
+    "debug": {
+      "passed": true,
+      "logSha256": "15897610956f87cd2e19d020b4b881a93d6da539fed78b1d868c6718b82c000d",
+      "buildLogSha256": "54a9e237f79744d0dffade014916d36c487620e84d95ba64d54c5b7fff9f9e39"
+    },
+    "release": {
+      "passed": true,
+      "logSha256": "6e31671a988d2902269c8b998844abf85baa9c81a5e0d5d794bb659c514e7d50",
+      "buildLogSha256": "45ae52eeff2285ae95bb6f02ae825a9a033444f279482ec92b7c19102854f81e"
+    }
+  }
+}

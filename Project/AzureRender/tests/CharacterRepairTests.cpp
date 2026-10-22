@@ -278,6 +278,70 @@ void testMultiplyComposite(const nlohmann::json& fixture, const std::filesystem:
     }
 }
 
+void testUnlitSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    auto& material=source["materials"][0];
+    material["extras"]={{"azureRenderMaterial",{{"schemaVersion",2},{"class","emissive"},
+        {"features",{"emissive-mask","unlit-surface"}},
+        {"surface",{{"schemaVersion",1},{"lighting","unlit"}}}}}};
+    material.erase("extensions");
+    material["emissiveFactor"]={.1,.2,.3};
+    const auto path=directory/"unlit-surface.gltf";
+    const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string());};
+    const auto reject=[&](const Json& doc){
+        std::string failure;
+        try{(void)load(doc);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("unlit surface")!=std::string::npos,
+            "Invalid unlit surface requires its own diagnostic");
+    };
+    for(const char* category:{"generic","emissive"})for(const char* alpha:{"OPAQUE","MASK","BLEND"}) {
+        auto doc=source;doc["materials"][0]["extras"]["azureRenderMaterial"]["class"]=category;
+        doc["materials"][0]["alphaMode"]=alpha;
+        const auto actual=load(doc);
+        require((actual.materials[0].materialFeatures&(1U<<18U))!=0,
+            "Unlit surface feature must survive production glTF loading");
+        require(actual.materials[0].emissiveStrength>.29F,
+            "Unlit surfaces must preserve explicit emissive energy");
+    }
+    auto invalid=source;
+    auto profile=[&]() -> Json& {return invalid["materials"][0]["extras"]["azureRenderMaterial"];};
+    for(const Json& value:{Json(nullptr),Json(false),Json::array(),Json(1)}) {
+        invalid=source;profile()["surface"]=value;reject(invalid);
+    }
+    for(const Json& value:{Json(nullptr),Json(0),Json(1.5),Json(2),Json(true),Json("1")}) {
+        invalid=source;profile()["surface"]["schemaVersion"]=value;reject(invalid);
+    }
+    for(const Json& value:{Json(nullptr),Json(0),Json(true),Json("lit")}) {
+        invalid=source;profile()["surface"]["lighting"]=value;reject(invalid);
+    }
+    for(const char* field:{"schemaVersion","lighting"}) {
+        invalid=source;profile()["surface"].erase(field);reject(invalid);
+    }
+    invalid=source;profile()["surface"]["unknown"]=nullptr;reject(invalid);
+    invalid=source;profile()["features"].push_back(nullptr);reject(invalid);
+    invalid=source;profile()["features"].push_back("unlit-surface");reject(invalid);
+    invalid=source;profile().erase("surface");reject(invalid);
+    invalid=source;profile()["features"]={"emissive-mask"};reject(invalid);
+    invalid=source;profile()["schemaVersion"]=1;reject(invalid);
+    invalid=source;profile()["schemaVersion"]=1.9;reject(invalid);
+    for(const char* category:{"face","hair","overlay","fabric"}) {
+        invalid=source;profile()["class"]=category;reject(invalid);
+    }
+    for(const char* feature:{"scene-tint","scene-refraction","hair-anisotropy","silhouette-outline"}) {
+        invalid=source;profile()["features"].push_back(feature);reject(invalid);
+    }
+    invalid=source;
+    invalid["materials"][0]["extensions"]["KHR_materials_transmission"]={{"transmissionFactor",.1}};
+    reject(invalid);
+    invalid=source;
+    invalid["materials"][0]["extensions"]["KHR_materials_volume"]={{"thicknessFactor",.1}};
+    reject(invalid);
+    auto legacy=source;legacy["materials"][0].erase("extras");
+    require((load(legacy).materials[0].materialFeatures&(1U<<18U))==0,
+        "Legacy surfaces must retain their selected lighting model");
+}
+
 int main(int argc,char** argv) { try {
     require(argc==2,"Public material fixture path is required");
     nlohmann::json input;std::ifstream(argv[1])>>input;
@@ -309,6 +373,7 @@ int main(int argc,char** argv) { try {
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
     testMultiplyComposite(input,directory);
+    testUnlitSurface(input,directory);
     material["extras"]["azureRenderMaterial"]["hair"]["rampTexture"]=.5;
     material["extras"]["azureRenderMaterial"]["features"].push_back("hair-ramp");
     std::ofstream(path)<<input.dump();bool invalidRampRejected=false;

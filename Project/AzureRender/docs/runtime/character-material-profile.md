@@ -190,6 +190,40 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 配置对象与显式特征必须同时出现。
 原生模板、预深度和屏幕遮罩具有独立的验收范围。
 
+## 无光照表面
+
+画像版本 2 支持 `unlit-surface` 特征。
+`surface` 对象使用版本 1 和 `lighting: unlit`。
+材质类别允许 `generic` 与 `emissive`。
+
+```json
+{
+  "schemaVersion": 2,
+  "class": "emissive",
+  "features": ["emissive-mask", "unlit-surface"],
+  "surface": {"schemaVersion": 1, "lighting": "unlit"}
+}
+```
+
+输出为线性基础颜色与显式自发光之和。
+自发光消费 `emissive-mask` 及 glTF 自发光因子。
+基础纹理与自发光纹理各自执行颜色解码。
+直接照明、GI、反射与角色高光的贡献为零。
+
+透明度消费纹理、材质因子与节点透明度。
+普通透明混合使用直通 RGB，管线只预乘一次。
+深度测试、透明排序和节点生命周期遵循公共规则。
+不透明、裁切与透明表面均可使用该模型。
+
+特征表仅允许 `unlit-surface` 与 `emissive-mask`。
+加载器拒绝透射、厚度及不兼容的特征组合。
+配置与显式特征必须同时出现。
+非法版本、未知字段、空值及重复特征均被拒绝。
+
+`AzureEngine.UnlitSurfaceGpu` 检查输出及普通 PBR。
+原生转换按已核对的身份与照明开关选择该模型。
+实际运行常量、滚动纹理与软交界独立验收。
+
 ## 轮廓与验证
 
 `silhouette-outline` 按材质开启背面壳外轮廓。

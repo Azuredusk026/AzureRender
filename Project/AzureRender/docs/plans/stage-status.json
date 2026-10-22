@@ -1356,7 +1356,8 @@
         "docs/acceptance/nr/multiply-composite.md",
         "docs/acceptance/nr/projected-hair.md",
         "docs/acceptance/nr/outline-coverage.md",
-        "docs/acceptance/nr/character-logistics-joint.md"
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/character-logistics-restored.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1381,7 +1382,9 @@
         "docs/assets/native-spline-compiler.md",
         "docs/acceptance/nr/logistics-multiclip.md",
         "docs/acceptance/nr/node-opacity.md",
-        "docs/acceptance/nr/character-logistics-joint.md"
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/unlit-surface.md",
+        "docs/acceptance/nr/character-logistics-restored.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"
@@ -1398,7 +1401,8 @@
       ],
       "evidence": [
         "docs/plans/2026-10-17-native-playable-restoration.md",
-        "docs/acceptance/nr/character-logistics-joint.md"
+        "docs/acceptance/nr/character-logistics-joint.md",
+        "docs/acceptance/nr/character-logistics-restored.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"

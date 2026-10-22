@@ -1045,6 +1045,8 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.NodeOpacityGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.SilhouetteCoverageGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_silhouette_coverage_gpu.py" --executable $<TARGET_FILE:AzurePlayer> --run)
     set_tests_properties(AzureEngine.SilhouetteCoverageGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.UnlitSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_surface_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureEngine.UnlitSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.SceneRefractionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_refraction_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.SceneRefractionGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.DualFaceSdfGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_dual_face_sdf_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
@@ -2309,6 +2311,7 @@ if(BUILD_TESTING)
         "MaterialSemantics|test_material_semantics.py"
         "NativeRenderEvidence|test_native_render*.py"
         "NativeCharacter|test_native_character*.py"
+        "NativeVfxProfile|test_native_vfx_profile.py"
         "EndfieldNative|test_endfield_native*.py")
         string(REPLACE "|" ";" _ev_parts "${_ev_case}")
         list(GET _ev_parts 0 _ev_name)
