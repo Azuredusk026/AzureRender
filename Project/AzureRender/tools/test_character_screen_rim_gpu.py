@@ -81,7 +81,7 @@ def run(player,output,selected=None,expected_validation=None):
             if expected_validation:assert validation==(expected_validation=='enabled')
             if material_rim:
                 manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
-                assert manifest['materialSurfaceProfileLayoutVersion']==4 and manifest['lightBufferLayoutVersion']==3
+                assert manifest['materialSurfaceProfileLayoutVersion']==5 and manifest['lightBufferLayoutVersion']==3
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             x=64 if name=='interior' else 84;measured=linear(pixels[64,x]);point=np.array([(x+.5)/128*8-4,-.03125,0])
             delta=np.asarray(position)-point;squared=np.dot(delta,delta);distance=np.sqrt(squared);light=delta/distance

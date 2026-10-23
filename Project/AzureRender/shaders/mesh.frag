@@ -743,6 +743,12 @@ void main() {
         mix(0.44, 0.74, faceIllumination),
         faceSdfWeight);
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
+    bool signedMainRamp=false;
+    if(materialFeatureEnabled(524288U)>.5&&!dualFaceSdf) {
+        vec4 rampInput=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1];
+        signedMainRamp=rampInput.y>.5;
+        if(signedMainRamp)rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,rampInput.z);
+    }
     vec3 faceLightingNormal=shadedNormal;
     if(dualFaceSdf) {
         toonWeight=qaEffectMode==1 && qaEffectDisabled?0.0:1.0;
@@ -755,7 +761,8 @@ void main() {
         faceIllumination=rampCoordinate;
         faceSdfWeight=0.0;
     }
-    vec4 classRampRgba=dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0):materialDiffuseRampRgba(rampCoordinate);
+    vec4 classRampRgba=dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0)
+        :signedMainRamp?textureLod(AZ_TEX_STYLE_MASK,vec2(rampCoordinate,.5),0.0):materialDiffuseRampRgba(rampCoordinate);
     vec3 classRamp = classRampRgba.rgb;
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);

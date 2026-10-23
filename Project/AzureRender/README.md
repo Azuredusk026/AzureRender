@@ -3,6 +3,7 @@
 材质变体资源归属与实际片元核对见[合成验证](docs/acceptance/nr/character-composite-diagnosis.md)。
 逐材质 NPR 光色及真实皮肤色带见[光色验证](docs/acceptance/nr/npr-material-lighting.md)。
 材质边缘响应、视角色彩及正交切线见[边缘验证](docs/acceptance/nr/material-rim-and-view-tint.md)。
+有符号主光色带及身体输入见[色带验证](docs/acceptance/nr/signed-main-ramp.md)。
 
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。

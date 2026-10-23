@@ -70,6 +70,28 @@ int main(){
   colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
     {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
   const auto coloredMaterial=load(colored).materials[0];
+  auto signedRamp=colored;
+  require(stbi_write_png((root/"ramp.png").string().c_str(),4,1,4,pixels,16)!=0,"Cannot create ramp fixture");
+  signedRamp["images"].push_back({{"uri","ramp.png"}});
+  const auto rampTexture=signedRamp["textures"].size();
+  signedRamp["textures"].push_back({{"source",signedRamp["images"].size()-1}});
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("diffuse-ramp");
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["diffuseRamp"]={{"schemaVersion",1},{"texture",rampTexture}};
+  signedRamp["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["mainRamp"]={{"schemaVersion",1},{"bias",.2F}};
+  const auto signedRampMaterial=load(signedRamp).materials[0];
+  require(azurerender::packMaterialSurfaceProfile(signedRampMaterial).rows[1]==std::array<float,4>{0,1,.2F,0},
+    "Signed main-light ramp inputs must reach their owned material row");
+  auto missingRamp=signedRamp;missingRamp["materials"][0]["extras"]["azureRenderMaterial"].erase("diffuseRamp");
+  bool missingRampRejected=false;try{load(missingRamp);}catch(const std::exception&){missingRampRejected=true;}
+  require(missingRampRejected,"Explicit main ramp inputs require an owned diffuse ramp texture");
+  for(const auto& bad:std::vector<Json>{nullptr,true,Json::array(),Json{{"schemaVersion",1}},
+      Json{{"schemaVersion",2},{"bias",0}},Json{{"schemaVersion",1},{"bias",true}},
+      Json{{"schemaVersion",1},{"bias",-1.01}},Json{{"schemaVersion",1},{"bias",1.01}},
+      Json{{"schemaVersion",1},{"bias",0},{"extra",0}}}) {
+    auto invalid=signedRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["mainRamp"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid main ramp fields, versions and bias must fail import");
+  }
   auto viewColored=colored;
   auto& viewProfile=viewColored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
   viewProfile["rimResponse"]="view-facing";

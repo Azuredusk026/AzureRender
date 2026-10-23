@@ -1801,7 +1801,7 @@ AssetMaterial loadMaterial(
             if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
-                &&field.key()!="rimResponse"&&field.key()!="viewTint")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1872,6 +1872,16 @@ AssetMaterial loadMaterial(
                     tint.color[i]=value.get<float>();
                 }
                 tint.present=true;
+            }
+            if(npr.contains("mainRamp")) {
+                const auto& raw=npr.at("mainRamp");
+                if(!raw.is_object()||raw.size()!=2||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                    ||raw.at("schemaVersion")!=1||!raw.contains("bias")||!raw.at("bias").is_number()
+                    ||!std::isfinite(raw.at("bias").get<double>())||raw.at("bias").get<double>()<-1||raw.at("bias").get<double>()>1)
+                    throw std::invalid_argument("Invalid nprDiffuse.mainRamp fields or bias");
+                if((result.materialFeatures&MaterialFeatureDiffuseRamp)==0)
+                    throw std::invalid_argument("nprDiffuse.mainRamp requires diffuseRamp");
+                result.nprDiffuse.mainRamp={true,raw.at("bias").get<float>()};
             }
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }

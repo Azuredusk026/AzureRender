@@ -205,6 +205,10 @@ struct AssetMaterial {
             float scale=0;
             std::array<float,3> color{1,1,1};
         } viewTint;
+        struct MainRamp {
+            bool present=false;
+            float bias=0;
+        } mainRamp;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };
