@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "公共材质投影覆盖；对象图集与接收过滤继续待验",
+  "run": "build/runs/20261023-180520-object-shadow-atlas-e0651a",
+  "materialLayout": {
+    "version": 6,
+    "bytes": 192,
+    "textures": 9
+  },
+  "lightLayoutVersion": 3,
+  "instanceLayoutVersion": 1,
+  "source": [
+    {
+      "trace": "coverage-0-2444-1431-trace.json",
+      "sha256": "cd75f0107207594e31f82773a4fe8f12fee68a9bb0c09b3cb7491d895c8382b4",
+      "position": [
+        2444.5,
+        1431.5
+      ],
+      "alpha": 0.8692454695701599,
+      "coverage": 0.9323333501815796,
+      "noise": 0.5986881256103516,
+      "passed": true
+    },
+    {
+      "trace": "coverage-1-2431-1439-trace.json",
+      "sha256": "dee2637f96eef7791d02cdf713fabf6af81da32ca98a72ec47f265e0be9a2ee5",
+      "position": [
+        2431.5,
+        1439.5
+      ],
+      "alpha": 0.8876325488090515,
+      "coverage": 0.9421425461769104,
+      "noise": 0.8304386138916016,
+      "passed": true
+    },
+    {
+      "trace": "coverage-2-2576-1449-trace.json",
+      "sha256": "e3cc721bec3365729b396c6f4729e5422ea846b46e7486b182ad47ebda04e067",
+      "position": [
+        2576.5,
+        1449.5
+      ],
+      "alpha": 0.8100098967552185,
+      "coverage": 0.9000055193901062,
+      "noise": 0.6729488372802734,
+      "passed": true
+    },
+    {
+      "trace": "coverage-3-2587-1454-trace.json",
+      "sha256": "b2568b9c5764eb557a6a56a55fd1492b0b8fead8afc34b6ea91695a7d8b7b4fa",
+      "position": [
+        2587.5,
+        1454.5
+      ],
+      "alpha": 0.8371404409408569,
+      "coverage": 0.9149537682533264,
+      "noise": 0.34885740280151367,
+      "passed": true
+    }
+  ],
+  "materialInputs": {
+    "schemaVersion": 1,
+    "sourceModelSha256": "58675851e0bbe7bb59ad7daab455cd36bbc5e0db543052876a6b7f4cd3137c82",
+    "candidateSha256": "539878d8af4e363c1c09999471e54a852648c328a4bed337be0bd25bc1ad098a",
+    "policies": {
+      "M_actor_laevat_body_01": "geometry-shadow",
+      "M_actor_laevat_cloth_01": "geometry-shadow",
+      "M_actor_laevat_cloth_02": "geometry-shadow",
+      "M_actor_laevat_cloth_03": "sqrt-alpha-shadow",
+      "M_actor_laevat_cloth_04": "geometry-shadow",
+      "M_actor_laevat_cloth_05": "geometry-shadow",
+      "M_actor_laevat_brow_01": "geometry-shadow",
+      "M_actor_laevat_face_01": "geometry-shadow",
+      "M_actor_laevat_hair_01": "geometry-shadow",
+      "M_actor_laevat_iris_01": "geometry-shadow"
+    }
+  },
+  "checks": [
+    {
+      "config": "release",
+      "suite": "surface-numeric",
+      "probes": 260,
+      "passed": true
+    },
+    {
+      "config": "release",
+      "suite": "material-shadow-coverage",
+      "captures": 11,
+      "passed": true
+    },
+    {
+      "config": "release",
+      "suite": "node-opacity",
+      "captures": 9,
+      "passed": true
+    },
+    {
+      "config": "release",
+      "suite": "npr-shadow",
+      "captures": 3,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "surface-numeric",
+      "probes": 260,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "material-shadow-coverage",
+      "captures": 11,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "node-opacity",
+      "captures": 9,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "npr-shadow",
+      "captures": 3,
+      "passed": true
+    }
+  ],
+  "cpuGroupsPerConfiguration": 7,
+  "actualCaptures": [
+    {
+      "name": "baseline",
+      "config": "release",
+      "isolation": "beauty",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "imageSha256": "df9d0121ab76cb1b53c5d99851e6a8c9fc4e18edf7d22f4367f4fca9abcd2e42",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "native",
+      "config": "release",
+      "isolation": "beauty",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "imageSha256": "ce6d74b0c356493590d69c4acc474555a606f1aff19e7534754ee75769ea2c04",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "changedPixels": 6758,
+      "maximumCoverageByteDifference": 3
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "isolation": "beauty",
+      "playerSha256": "585e4dbdebc536bfab356a1f2780eb796018ee4b3cfe0360c81d342468f1e54e",
+      "imageSha256": "ce6d74b0c356493590d69c4acc474555a606f1aff19e7534754ee75769ea2c04",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "baseline-shadow",
+      "config": "release",
+      "isolation": "shadow-visibility",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "imageSha256": "8914ab5379afbc491c0239e874e683fe6bb7b59b5b9db7c1317c33b6ecdb0f9b",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            117,
+            117,
+            117
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            234,
+            234,
+            234
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            231,
+            231,
+            231
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            230,
+            230,
+            230
+          ]
+        }
+      ]
+    },
+    {
+      "name": "native-shadow",
+      "config": "release",
+      "isolation": "shadow-visibility",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "imageSha256": "1e73f4fefbac21fda521fa12c330f87961cd30bba2829848f704a49bc8cdb754",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            117,
+            117,
+            117
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            234,
+            234,
+            234
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            231,
+            231,
+            231
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            230,
+            230,
+            230
+          ]
+        }
+      ],
+      "changedPixels": 8342,
+      "maximumCoverageByteDifference": 23
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "isolation": "beauty",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "pixels": [],
+      "maximumByteDifference": 0
+    }
+  ],
+  "coverage": {
+    "release": {
+      "schemaVersion": 1,
+      "status": "passed",
+      "playerSha256": "edc9f07309e3d743fca350663828228428c7e4a53fd2f9bed1376f39bbfbbfea",
+      "captures": [
+        {
+          "name": "clear",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "legacy",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "geometry",
+          "shadowVisibility": 0.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "59cf278b708d1bea8d5d9325734a5c2ade4f282ae3211e8699243418b76613b5",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fixed",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-document",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fabric",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fade",
+          "shadowVisibility": 0.7451650489231775,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "be7fb46f105d140359f1ebb647c2767af7133e2f788dc6c34846209cecbe61ca",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "geometry-fade",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "multiply-default",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-multiply",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": false,
+          "imageSha256": "b69540d85e522969537ae4e144b4a254db7b442c8af0b9d4fc9fa68115a17faa",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        }
+      ]
+    },
+    "debug": {
+      "schemaVersion": 1,
+      "status": "passed",
+      "playerSha256": "585e4dbdebc536bfab356a1f2780eb796018ee4b3cfe0360c81d342468f1e54e",
+      "captures": [
+        {
+          "name": "clear",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "legacy",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "geometry",
+          "shadowVisibility": 0.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "59cf278b708d1bea8d5d9325734a5c2ade4f282ae3211e8699243418b76613b5",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fixed",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-document",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fabric",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "f0dfacf1d1bbf7618617494e0a7fc7a6051a984c61a12bf5744a892a30e56eec",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-fade",
+          "shadowVisibility": 0.7451650489231775,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "be7fb46f105d140359f1ebb647c2767af7133e2f788dc6c34846209cecbe61ca",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "geometry-fade",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "multiply-default",
+          "shadowVisibility": 1.0,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        },
+        {
+          "name": "sqrt-alpha-multiply",
+          "shadowVisibility": 0.5142663560011501,
+          "controlVisibility": 1.0,
+          "validationEnabled": true,
+          "imageSha256": "b69540d85e522969537ae4e144b4a254db7b442c8af0b9d4fc9fa68115a17faa",
+          "allocatorAfterUnload": {
+            "buffers": 0,
+            "images": 0
+          }
+        }
+      ]
+    }
+  },
+  "proofLogs": {
+    "coverage-red.log": "b73252e24e71c9a7d73a03b12c59945f6a457ede79c0a3fef8041cd3c5f10597",
+    "coverage-probe-release.log": "5cd4114053425c773a70315b5a50c891b700030558b14da96699cad6824a4537",
+    "coverage-multiply-red.log": "6abb0d5aa54b853c2429abebbe2fcb3f5d0fa53f1369958ff3768513728f601c",
+    "build-coverage-verified-release.log": "5bde03ea73839962647ae490f56b649a67cd29c003c92cdb6dc0d4f071934321",
+    "build-coverage-verified-debug.log": "e453b3af50d71dd21e581e8058d554ebfb2114fef2b19b767f30b70e2a89cb5f",
+    "cpu-coverage-verified-release.log": "0b430c02c1efa82054acbde99cf59c4baa0e5082b9a05c1d9d1575f4f301af39",
+    "cpu-coverage-verified-debug.log": "016ed4cc80857a4e91c4a6752d1d9cded1f0ee8bc7ba89efe141d417e571f7ea",
+    "probe-final-release.log": "1073995027a9b0bac1f9c0c6e4f9c9d0277c11d92d76ab83c49a3c3e5482efa7",
+    "probe-final-debug.log": "90ab5df15410c3e2b8faa3eb2e05c76f2857dbdde7171944a9c838ad9c3a7968"
+  },
+  "sourceFiles": {
+    "shaders/shadow.frag": "dd94cd0c8ac7790fb2dbe366a3bfb9f8578097abf30e8656248948aab4a7a55b",
+    "shaders/shadow_coverage.glsl": "08310d3b8eb64cfd6c671f9b0876842628bb2082ac9e200c4cb0aa6bda79016b",
+    "src/assets/GltfLoader.cpp": "f4e342f9951738d80d8b5a0df6efcfb43aa09ec4ae58f30599b229a80afeef42",
+    "src/scenes/CharacterSceneRenderer.cpp": "ae8b68b7b49aa4b8021c2a026f41c848adc4c847cbd225b355a195c5141ce637",
+    "tools/test_material_shadow_coverage_gpu.py": "8900818a9bf5d02b198c4740144c90c93f9c350e89c6905ced0239c2fbdadfd3"
+  },
+  "remaining": [
+    "注册对象投影组件、快照及有界图集",
+    "接收偏置、分布过滤及原生腿部阴影",
+    "完整角色动态图像门禁"
+  ],
+  "visualInspection": {
+    "image": "native/frames/frame_000000.png",
+    "result": "角色完整可见；覆盖细节与独立对象阴影分别验收"
+  },
+  "registeredCtest": {
+    "name": "AzureEngine.MaterialShadowCoverageGpu",
+    "config": "release",
+    "captures": 11,
+    "passed": true,
+    "logSha256": "c7626e1fe571549f52a3130b75a7452e05f138ab6be97f66e9e41c2bb3f0d535"
+  }
+}

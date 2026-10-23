@@ -178,6 +178,8 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
     if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
     if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
+    if (value == "geometry-shadow") return MaterialFeatureGeometryShadow;
+    if (value == "sqrt-alpha-shadow") return MaterialFeatureSqrtAlphaShadow;
     return 0;
 }
 
@@ -301,6 +303,9 @@ void loadMaterialProfile(
             result.materialFeatures |= flag;
         }
     }
+    const auto coverage=result.materialFeatures&MaterialFeatureShadowCoverageMask;
+    if(coverage&&(result.materialProfileVersion!=2||coverage==MaterialFeatureShadowCoverageMask||result.materialClass==AssetMaterialClass::Showcase))
+        throw std::runtime_error("Shadow coverage requires schema 2, a regular surface and one explicit mode for "+result.name);
     if ((result.materialFeatures & MaterialFeatureBrowOverlay) && result.materialProfileVersion == 1) {
         result.featureParameters[0] = std::min(result.featureParameters[0], 0.02F);
         result.styleParameters[0] = std::min(result.styleParameters[0], 0.0012F);
@@ -877,7 +882,7 @@ void loadUnlitSurface(const tinygltf::Material& material,const AssetMaterial& re
             names.push_back(name);
         }
     }
-    constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureEmissiveMask;
+    constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureEmissiveMask|MaterialFeatureShadowCoverageMask;
     if(!enabled||!profile.Has("surface")||profile.Get("schemaVersion").GetNumberAsDouble()!=2
         ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Emissive)
         ||(result.materialFeatures&~allowed)||result.transmission!=0||result.thickness!=0)
@@ -901,7 +906,7 @@ void loadMaterialComposite(const tinygltf::Material& material, const AssetMateri
     const bool enabled=(result.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
     if(!enabled&&!profile.Has("composite"))return;
     constexpr std::uint32_t allowed=MaterialFeatureMultiplyComposite
-        |MaterialFeatureOverlay|MaterialFeatureNeutralFallback;
+        |MaterialFeatureOverlay|MaterialFeatureNeutralFallback|MaterialFeatureShadowCoverageMask;
     if(!enabled||!profile.Has("composite")
         ||profile.Get("schemaVersion").GetNumberAsDouble()!=2
         ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Overlay)
@@ -927,7 +932,7 @@ int loadSceneRefraction(const tinygltf::Material& material,
     if(!enabled && !profile.Has("sceneRefraction"))return -1;
     if(!enabled || !profile.Has("sceneRefraction") || result.materialProfileVersion!=2
         || result.materialClass!=AssetMaterialClass::Generic || result.alphaMode!=AssetAlphaMode::Blend
-        || (result.materialFeatures&~(MaterialFeatureSceneRefraction|MaterialFeatureSurfaceAo|MaterialFeatureEmissiveMask)))
+        || (result.materialFeatures&~(MaterialFeatureSceneRefraction|MaterialFeatureSurfaceAo|MaterialFeatureEmissiveMask|MaterialFeatureShadowCoverageMask)))
         throw std::invalid_argument("sceneRefraction requires generic schema 2, transparent queue and compatible features");
     const auto& glass=profile.Get("sceneRefraction");
     if(!glass.IsObject())throw std::invalid_argument("sceneRefraction must be an object");

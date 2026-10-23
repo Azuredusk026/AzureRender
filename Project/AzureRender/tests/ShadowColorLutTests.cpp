@@ -54,6 +54,19 @@ int main(){
   const auto& settings=asset.materials[0].textureSettings.at(8);
   require(settings.colorSpace=="srgb"&&settings.filter=="linear"&&settings.mipPolicy=="none"&&settings.wrapU=="clamp"&&settings.wrapV=="clamp","LUT sampling must decode sRGB before interpolation at LOD zero with edge clamping");
   const auto baseline=source;
+  for(const auto& entry:std::vector<std::pair<const char*,std::uint32_t>>{{"geometry-shadow",1U<<21U},{"sqrt-alpha-shadow",1U<<22U}}) {
+    auto covered=source;covered["materials"][0]["extras"]["azureRenderMaterial"]["features"]={entry.first};
+    const auto configured=load(covered);
+    require((configured.materials[0].materialFeatures&entry.second)!=0,"Explicit shadow coverage must reach material flags");
+    auto legacyCoverage=covered;auto& legacyProfile=legacyCoverage["materials"][0]["extras"]["azureRenderMaterial"];
+    legacyProfile["schemaVersion"]=1;legacyProfile.erase("shadowColorLut");
+    bool rejectedLegacy=false;try{load(legacyCoverage);}catch(const std::exception&){rejectedLegacy=true;}
+    require(rejectedLegacy,"Explicit shadow coverage must reject legacy material profile versions");
+  }
+  auto conflictingCoverage=source;
+  conflictingCoverage["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"geometry-shadow","sqrt-alpha-shadow"};
+  bool coverageRejected=false;try{load(conflictingCoverage);}catch(const std::exception&){coverageRejected=true;}
+  require(coverageRejected,"Conflicting material shadow coverage modes must reject");
   auto composed=source;
   auto& npr=composed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
   npr={{"schemaVersion",1},{"shadowScale",.7},{"lightingInputs","host-scene-radiance"},

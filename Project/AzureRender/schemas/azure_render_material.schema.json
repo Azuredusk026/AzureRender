@@ -51,7 +51,9 @@
           "multiply-composite",
           "hair-projected-ramp",
           "eye-radial-surface",
-          "unlit-surface"
+          "unlit-surface",
+          "geometry-shadow",
+          "sqrt-alpha-shadow"
         ]
       }
     },

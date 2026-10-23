@@ -3,11 +3,23 @@
 #include "surface_response.glsl"
 #include "character_diffuse.glsl"
 #include "light_attenuation.glsl"
+#include "shadow_coverage.glsl"
 layout(local_size_x=1) in;
 layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=248u) {
+        if(i<252u)result.values[i]=shadowSqrtAlphaCoverage(i==248u?0.0:i==249u?.25:1.0,i==250u?.5:i==251u?0.0:1.0);
+        else if(i<256u) {
+            vec2 positions[4]=vec2[](vec2(2444.5,1431.5),vec2(2431.5,1439.5),vec2(2576.5,1449.5),vec2(2587.5,1454.5));
+            result.values[i]=shadowPixelNoise(positions[i-252u]);
+        } else {
+            float alpha[4]=float[](.8692454695701599,.8876325488090515,.8100098967552185,.8371404409408569);
+            result.values[i]=shadowSqrtAlphaCoverage(alpha[i-256u],1.0);
+        }
+        return;
+    }
     if(i>=240u) {
         if(i==247u)result.values[i]=characterMainRampCoordinate(vec3(-.8271552324,.2066847384,.5225856900),
             vec3(.1472620368,.5299192667,.8351643085),0);

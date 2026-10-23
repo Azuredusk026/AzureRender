@@ -181,7 +181,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
             {MaterialFeatureDiffuseRamp,"diffuse-ramp"},{MaterialFeatureShadowColorLut,"shadow-color-lut"},
             {MaterialFeatureSilhouetteOutline,"silhouette-outline"},{MaterialFeatureMultiplyComposite,"multiply-composite"},
             {MaterialFeatureOverlay,"overlay"},{MaterialFeatureBrowOverlay,"brow-overlay"},
-            {MaterialFeatureSceneRefraction,"scene-refraction"},{MaterialFeatureUnlitSurface,"unlit-surface"}})
+            {MaterialFeatureSceneRefraction,"scene-refraction"},{MaterialFeatureUnlitSurface,"unlit-surface"},
+            {MaterialFeatureGeometryShadow,"geometry-shadow"},{MaterialFeatureSqrtAlphaShadow,"sqrt-alpha-shadow"}})
             lost((removed&feature)!=0,label);
         replacement.slotId=slotId;replacement.name=name;mesh.materials[index]=std::move(replacement);
         if(!document.parameterOverride&&!losses.empty())RuntimeDiagnostics::instance().warning("material",

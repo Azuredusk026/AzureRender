@@ -6,6 +6,7 @@
 有符号主光色带及身体输入见[色带验证](docs/acceptance/nr/signed-main-ramp.md)。
 角色可见量来源及对象阴影生产见[阴影验证](docs/acceptance/nr/character-visibility-inputs.md)。
 实例 GPU 布局及原生投影输入见[实例验证](docs/acceptance/nr/instance-gpu-contract.md)。
+逐材质完整几何与平方根 Alpha 投影见[覆盖验证](docs/acceptance/nr/material-shadow-coverage.md)。
 
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。

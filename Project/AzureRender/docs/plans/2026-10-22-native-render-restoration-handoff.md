@@ -29,6 +29,9 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 原生对象阴影图、采样及剩余生产门禁见[来源验收](../acceptance/nr/character-visibility-inputs.md)。
 实例布局已统一，范围见[实例契约验证](../acceptance/nr/instance-gpu-contract.md)。
 后续对象记录继续使用独立版本、所有权与容量检查。
+完整几何与平方根 Alpha 已接入公共材质特征。
+原生运算及双配置范围见[投影覆盖验证](../acceptance/nr/material-shadow-coverage.md)。
+下一项接入有界对象图集、注册配置及独立过滤。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。

@@ -3545,9 +3545,10 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             for (const AssetPrimitive& primitive : mesh.primitives) {
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
+                const bool explicitCoverage=(material.materialFeatures&MaterialFeatureShadowCoverageMask)!=0;
                 if (material.showcasePlatform > 0.5F
-                    || material.materialClass == AssetMaterialClass::Overlay
-                    || (material.materialFeatures&MaterialFeatureMultiplyComposite)) {
+                    || (!explicitCoverage&&(material.materialClass == AssetMaterialClass::Overlay
+                        || (material.materialFeatures&MaterialFeatureMultiplyComposite)))) {
                     continue;
                 }
                 if (!bindlessTextures_) {

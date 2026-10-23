@@ -58,7 +58,7 @@ int main(){try{
     const auto replacementPath=std::filesystem::temp_directory_path()/("azure-replacement-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azurematerial");
     {std::ofstream output(replacementPath);output<<MaterialData::defaults("azure.pbr").encode();}
     AssetMaterial source;source.name="face-slot";source.slotId="source-slot";source.materialClass=AssetMaterialClass::Face;
-    source.faceSdf.present=true;source.nprDiffuse.present=true;source.materialFeatures=MaterialFeatureDiffuseRamp;
+    source.faceSdf.present=true;source.nprDiffuse.present=true;source.materialFeatures=MaterialFeatureDiffuseRamp|MaterialFeatureGeometryShadow;
     source.nprDiffuse.lighting={true,{1.2F,.8F,.6F},{.7F,.9F,1.1F}};
     source.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::ViewFacing;
     source.nprDiffuse.viewTint={true,.595F,{.38F,.12F,.14F}};
@@ -100,6 +100,7 @@ int main(){try{
         &&patched.nprDiffuse.mainRamp.present&&patched.nprDiffuse.mainRamp.bias==source.nprDiffuse.mainRamp.bias
         &&patched.nprDiffuse.shadowMask==source.nprDiffuse.shadowMask
         &&patched.nprDiffuse.characterVisibility==source.nprDiffuse.characterVisibility
+        &&(patched.materialFeatures&MaterialFeatureGeometryShadow)!=0
         &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");
     require(messages.size()==patchMessages,"Preserving source semantics must not report replacement loss");
