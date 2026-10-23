@@ -67,7 +67,7 @@ constexpr const char* kHelp =
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
     "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
-    "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal\n"
+    "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal, object-shadow-visibility\n"
     "  --qa-light-scan                    Rotate the key light through 120 frames\n"
     "  --qa-animation                     Play animation with a fixed QA camera\n"
     "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
@@ -267,7 +267,7 @@ void validate(const ParsedCommandLine& parsed) {
             "outline", "shadow-map", "material-id", "style-mask", "ambient",
             "direct-diffuse", "shadow-tint", "face-sdf", "overlay",
             "bloom", "brow-mask", "roughness", "metallic", "direct-specular",
-            "reflection", "shaded-normal", "shadow-color"})) {
+            "reflection", "shaded-normal", "shadow-color", "object-shadow-visibility"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
     }

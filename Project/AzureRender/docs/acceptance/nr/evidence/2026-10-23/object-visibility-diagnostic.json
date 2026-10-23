@@ -1,0 +1,1315 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Public object visibility diagnostic; native leg visibility mismatch remains open",
+  "run": "build/runs/20261023-205700-character-visibility-inputs-01a025",
+  "checks": [
+    {
+      "config": "release",
+      "cliLog": "build/runs/20261023-205700-character-visibility-inputs-01a025/cli-release.log",
+      "publicGpu": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "8338e65943ad0bc99dcc7f66992d08d519eb2abff4db8dae7bf10948e0a73ac2",
+        "captures": [
+          {
+            "name": "visibility",
+            "validationEnabled": false,
+            "objectPages": 1,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "shadowMean": 0.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "1d57fbda45dc8e1026505eaa6eecc758ab8a17bcca90ad5d3ee55f505e908b23"
+          },
+          {
+            "name": "visibility-lit",
+            "validationEnabled": false,
+            "objectPages": 1,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          },
+          {
+            "name": "visibility-disabled",
+            "validationEnabled": false,
+            "objectPages": 0,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          }
+        ]
+      }
+    },
+    {
+      "config": "debug",
+      "cliLog": "build/runs/20261023-205700-character-visibility-inputs-01a025/cli-debug.log",
+      "publicGpu": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "b0451cf6ff2d3e8f2c08ba29146e71505dd38a4f652cde9a9ad3094148a0b42d",
+        "captures": [
+          {
+            "name": "visibility",
+            "validationEnabled": true,
+            "objectPages": 1,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "shadowMean": 0.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "1d57fbda45dc8e1026505eaa6eecc758ab8a17bcca90ad5d3ee55f505e908b23"
+          },
+          {
+            "name": "visibility-lit",
+            "validationEnabled": true,
+            "objectPages": 1,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          },
+          {
+            "name": "visibility-disabled",
+            "validationEnabled": true,
+            "objectPages": 0,
+            "center": [
+              255,
+              255,
+              255
+            ],
+            "shadowMean": 255.0,
+            "control": [
+              255,
+              255,
+              255
+            ],
+            "imageSha256": "9a2c1556ebdc97b505ef35e0fee2c08de76b1e3c5e5b9d7c82e6bcd53cb5a6cc"
+          }
+        ]
+      }
+    }
+  ],
+  "actual": [
+    {
+      "playerSha256": "8338e65943ad0bc99dcc7f66992d08d519eb2abff4db8dae7bf10948e0a73ac2",
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        }
+      ],
+      "config": "release",
+      "imageSha256": "44f7be729360e24deca7bfdec4b9adcf3fd3d0148a6d310ceafe015236c93630",
+      "manifest": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-195500-object-shadow-gpu-6d1c49\\character\\object-shadow.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 2560,
+        "height": 1440,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 17,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": false,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": false,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "",
+            "exposureMultiplier": 1,
+            "dimension": 0,
+            "inputDomain": "linear",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": ""
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0.000195326,
+            0.000231458
+          ]
+        },
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "object-shadow-visibility",
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 100,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "ambientDirection": [
+            -0.0,
+            1.0,
+            4.371138828673793e-08
+          ],
+          "ambientWeight": 0.28772246837615967,
+          "directionBias": 0.15000000596046448,
+          "directionFloor": 0.5,
+          "directionGain": 1.5,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 1.0,
+          "mainColorMix": 1.0,
+          "outdoorGain": 1.0499999523162842,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 0.800000011920929,
+          "shadowOverride": 1.0,
+          "useSceneIrradiance": false
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "sceneRenderWidth": 2560,
+        "sceneRenderHeight": 1440,
+        "shadowDistance": 100,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateHash": "a407a0d67c2b7a8c",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          0,
+          0.880005,
+          3.29999
+        ],
+        "qaCameraTarget": [
+          0,
+          0.892616,
+          2.30007
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_actor_laevat_body_01",
+            "class": "skin",
+            "features": 2650113,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.9,
+              0.8,
+              0.35,
+              0
+            ],
+            "featureParameters": [
+              0.75,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "M_actor_laevat_cloth_01",
+            "class": "fabric",
+            "features": 2650249,
+            "profileVersion": 2,
+            "emissiveStrength": 4,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 2,
+            "name": "M_actor_laevat_cloth_02",
+            "class": "fabric",
+            "features": 2121865,
+            "profileVersion": 2,
+            "emissiveStrength": 9,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 3,
+            "name": "M_actor_laevat_cloth_03",
+            "class": "fabric",
+            "features": 4202625,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 4,
+            "name": "M_actor_laevat_cloth_04",
+            "class": "fabric",
+            "features": 2121857,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 5,
+            "name": "M_actor_laevat_cloth_05",
+            "class": "fabric",
+            "features": 2121865,
+            "profileVersion": 2,
+            "emissiveStrength": 9,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 6,
+            "name": "M_actor_laevat_brow_01",
+            "class": "skin",
+            "features": 2633729,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.9,
+              0.8,
+              0.35,
+              0.35
+            ],
+            "featureParameters": [
+              0.75,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 7,
+            "name": "M_eyewhiteshadow_common_01",
+            "class": "overlay",
+            "features": 32784,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "featureParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 0
+          },
+          {
+            "index": 8,
+            "name": "M_actor_laevat_face_01",
+            "class": "face",
+            "features": 2643973,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.85,
+              0.75,
+              0.15,
+              0
+            ],
+            "featureParameters": [
+              0.65,
+              0,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 9,
+            "name": "M_actor_laevat_hair_01",
+            "class": "hair",
+            "features": 3235843,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.4,
+              0
+            ],
+            "featureParameters": [
+              0.85,
+              1,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 10,
+            "name": "M_hairshadow_common_04",
+            "class": "overlay",
+            "features": 32784,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "featureParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 0
+          },
+          {
+            "index": 11,
+            "name": "M_actor_laevat_iris_01",
+            "class": "eye",
+            "features": 2105345,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.65,
+              0.5,
+              0.65,
+              0.25
+            ],
+            "featureParameters": [
+              0.5,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 12,
+            "name": "M_fx_laevat_toppotential_01",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 13,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 14,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 1,
+        "materialSurfaceProfileLayoutVersion": 7,
+        "instanceDataLayoutVersion": 2,
+        "objectShadowLayoutVersion": 1,
+        "objectShadowPrepared": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 92408,
+        "skinnedVertices": 77344,
+        "transparentTriangles": 3566,
+        "jointCapacity": 323,
+        "vertexCapacity": 77344,
+        "materialTextureCache": {
+          "requests": 122,
+          "hits": 77,
+          "uniqueTextures": 45,
+          "requestedBytes": 449861588,
+          "residentBytes": 304190700,
+          "retainedPixelBytes": 246516260,
+          "hashedPixelBytes": 355836312,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 246516260,
+          "discardedPixelBytes": 109320052,
+          "hashMs": 364.686,
+          "matchMs": 12.9054,
+          "mipMs": 938.849,
+          "uploadMs": 329.215
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 5057.5,
+          "meshUploadMs": 9.3136,
+          "materialUploadMs": 1658.05,
+          "sharedTexturesMs": 14.774,
+          "buffersMs": 0.0381,
+          "skinningMs": 0.5953,
+          "descriptorsMs": 1.5816,
+          "pipelinesMs": 5222.24,
+          "decodedMaterialPixelBytes": 355836316,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    },
+    {
+      "playerSha256": "b0451cf6ff2d3e8f2c08ba29146e71505dd38a4f652cde9a9ad3094148a0b42d",
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "rgb": [
+            255,
+            255,
+            255
+          ]
+        }
+      ],
+      "config": "debug",
+      "imageSha256": "44f7be729360e24deca7bfdec4b9adcf3fd3d0148a6d310ceafe015236c93630",
+      "manifest": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-195500-object-shadow-gpu-6d1c49\\character\\object-shadow.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 2560,
+        "height": 1440,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 17,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": false,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": false,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "",
+            "exposureMultiplier": 1,
+            "dimension": 0,
+            "inputDomain": "linear",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": ""
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0.000195326,
+            0.000231458
+          ]
+        },
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "object-shadow-visibility",
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 100,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "ambientDirection": [
+            -0.0,
+            1.0,
+            4.371138828673793e-08
+          ],
+          "ambientWeight": 0.28772246837615967,
+          "directionBias": 0.15000000596046448,
+          "directionFloor": 0.5,
+          "directionGain": 1.5,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 1.0,
+          "mainColorMix": 1.0,
+          "outdoorGain": 1.0499999523162842,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 0.800000011920929,
+          "shadowOverride": 1.0,
+          "useSceneIrradiance": false
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "sceneRenderWidth": 2560,
+        "sceneRenderHeight": 1440,
+        "shadowDistance": 100,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateHash": "a407a0d67c2b7a8c",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          0,
+          0.880005,
+          3.29999
+        ],
+        "qaCameraTarget": [
+          0,
+          0.892616,
+          2.30007
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_actor_laevat_body_01",
+            "class": "skin",
+            "features": 2650113,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.9,
+              0.8,
+              0.35,
+              0
+            ],
+            "featureParameters": [
+              0.75,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "M_actor_laevat_cloth_01",
+            "class": "fabric",
+            "features": 2650249,
+            "profileVersion": 2,
+            "emissiveStrength": 4,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 2,
+            "name": "M_actor_laevat_cloth_02",
+            "class": "fabric",
+            "features": 2121865,
+            "profileVersion": 2,
+            "emissiveStrength": 9,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 3,
+            "name": "M_actor_laevat_cloth_03",
+            "class": "fabric",
+            "features": 4202625,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 4,
+            "name": "M_actor_laevat_cloth_04",
+            "class": "fabric",
+            "features": 2121857,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 5,
+            "name": "M_actor_laevat_cloth_05",
+            "class": "fabric",
+            "features": 2121865,
+            "profileVersion": 2,
+            "emissiveStrength": 9,
+            "styleParameters": [
+              1,
+              1,
+              0.6,
+              0.5
+            ],
+            "featureParameters": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 6,
+            "name": "M_actor_laevat_brow_01",
+            "class": "skin",
+            "features": 2633729,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.9,
+              0.8,
+              0.35,
+              0.35
+            ],
+            "featureParameters": [
+              0.75,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 7,
+            "name": "M_eyewhiteshadow_common_01",
+            "class": "overlay",
+            "features": 32784,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "featureParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 0
+          },
+          {
+            "index": 8,
+            "name": "M_actor_laevat_face_01",
+            "class": "face",
+            "features": 2643973,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.85,
+              0.75,
+              0.15,
+              0
+            ],
+            "featureParameters": [
+              0.65,
+              0,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 9,
+            "name": "M_actor_laevat_hair_01",
+            "class": "hair",
+            "features": 3235843,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              0.4,
+              0
+            ],
+            "featureParameters": [
+              0.85,
+              1,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 10,
+            "name": "M_hairshadow_common_04",
+            "class": "overlay",
+            "features": 32784,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "featureParameters": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 0
+          },
+          {
+            "index": 11,
+            "name": "M_actor_laevat_iris_01",
+            "class": "eye",
+            "features": 2105345,
+            "profileVersion": 2,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              0.65,
+              0.5,
+              0.65,
+              0.25
+            ],
+            "featureParameters": [
+              0.5,
+              0,
+              1,
+              0
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          },
+          {
+            "index": 12,
+            "name": "M_fx_laevat_toppotential_01",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 13,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 14,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 1,
+        "materialSurfaceProfileLayoutVersion": 7,
+        "instanceDataLayoutVersion": 2,
+        "objectShadowLayoutVersion": 1,
+        "objectShadowPrepared": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 92408,
+        "skinnedVertices": 77344,
+        "transparentTriangles": 3566,
+        "jointCapacity": 323,
+        "vertexCapacity": 77344,
+        "materialTextureCache": {
+          "requests": 122,
+          "hits": 77,
+          "uniqueTextures": 45,
+          "requestedBytes": 449861588,
+          "residentBytes": 304190700,
+          "retainedPixelBytes": 246516260,
+          "hashedPixelBytes": 355836312,
+          "copiedPixelBytes": 0,
+          "transferredPixelBytes": 246516260,
+          "discardedPixelBytes": 109320052,
+          "hashMs": 331.273,
+          "matchMs": 17.5857,
+          "mipMs": 2539.06,
+          "uploadMs": 379.964
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 26378.4,
+          "meshUploadMs": 10.1013,
+          "materialUploadMs": 3297.3,
+          "sharedTexturesMs": 30.7469,
+          "buffersMs": 0.1774,
+          "skinningMs": 0.2883,
+          "descriptorsMs": 3.6428,
+          "pipelinesMs": 4975.66,
+          "decodedMaterialPixelBytes": 355836316,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    }
+  ],
+  "nativeLinearVisibility": [
+    0.0196078431372549,
+    1,
+    1,
+    1
+  ],
+  "candidateLinearVisibility": [
+    0,
+    1,
+    1,
+    1
+  ],
+  "fixedIndexedByteEqual": true
+}

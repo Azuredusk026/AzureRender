@@ -68,7 +68,7 @@ int main() try {
     const auto sceneDiagnostic=azurerender::parseCommandLine({"--qa-camera","scene","--qa-light","scene","--qa-isolation","beauty"});
     require(sceneDiagnostic.options.qaCamera=="scene" && sceneDiagnostic.options.qaLight=="scene",
             "Authored scene diagnostics must preserve camera and light selection");
-    for(const char* view:{"roughness","metallic","direct-specular","reflection","shaded-normal"})
+    for(const char* view:{"roughness","metallic","direct-specular","reflection","shaded-normal","object-shadow-visibility"})
         require(azurerender::parseCommandLine({"--qa-isolation",view}).options.qaIsolation==view,
                 "Surface and lighting components must be selectable independently");
     require(!defaults.options.pipelineInspectionDisabled,

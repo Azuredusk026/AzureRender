@@ -21,6 +21,7 @@ def component(kind,data):
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=['clear','shadow','shadow-fixed','shadow-document','disabled','mirrored-clear','mirrored','two-objects','ordinary','ordinary-disabled']
+    names+=['visibility','visibility-lit','visibility-disabled']
     if selected:
         assert set(selected)<=set(names);names=[name for name in names if name in selected]
     digest=hashlib.sha256(player.read_bytes()).hexdigest();frames={}
@@ -40,7 +41,7 @@ def run(player,output,selected=None,expected_validation=None):
                     nprDiffuse=dict(schemaVersion=1,shadowScale=.55,lightingInputs='host-scene-radiance',
                         shadowMask='one',baseAo='one',characterVisibility='object-shadow'))
             clear_model=copy.deepcopy(model)
-            if name not in ['clear','mirrored-clear']:
+            if name not in ['clear','mirrored-clear','visibility-lit']:
                 model['nodes'].append(dict(mesh=0,translation=[0,0,1],scale=[.125,.125,1]))
                 model['scenes'][0]['nodes'].append(1)
             (folder/'plane.gltf').write_text(json.dumps(model),encoding='utf-8')
@@ -74,6 +75,7 @@ def run(player,output,selected=None,expected_validation=None):
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene',
                 '--qa-light','scene','--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
             if name.endswith('fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name.startswith('visibility'):command+=['--qa-isolation','object-shadow-visibility']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
@@ -90,6 +92,11 @@ def run(player,output,selected=None,expected_validation=None):
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             target=pixels[126:130,200:204] if name=='two-objects' else pixels[126:130,150:154]
+            if name.startswith('visibility'):
+                assert manifest['qaIsolation']=='object-shadow-visibility'
+                assert pixels[124:132,84:92].min()==255,name
+                if name=='visibility':assert target.max()==0,name
+                else:assert target.min()==255,name
             report['captures'].append(dict(name=name,validationEnabled=validation,objectPages=pages,
                 center=pixels[128,152].tolist(),shadowMean=float(target.mean()),
                 control=pixels[128,88].tolist(),imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest()))

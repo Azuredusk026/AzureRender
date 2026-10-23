@@ -1538,6 +1538,8 @@ void main() {
         qaColor = materialFeatureEnabled(4096U)>0.5
             ? sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,baseColor.rgb)
             : vec3(0);
+    } else if (qaIsolationMode == 23) {
+        qaColor = vec3(materialObjectVisibility());
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {
