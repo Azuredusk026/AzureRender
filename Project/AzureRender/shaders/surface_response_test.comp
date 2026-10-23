@@ -4,11 +4,47 @@
 #include "character_diffuse.glsl"
 #include "light_attenuation.glsl"
 #include "shadow_coverage.glsl"
+#include "outline_projection.glsl"
 layout(local_size_x=1) in;
 layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=260u) {
+#ifdef AZURE_OUTLINE_PROJECTION
+        if(i<272u) {
+            vec4 clips[6]=vec4[](
+                vec4(-.07965397089719772,-2.37831449508667,.09996864199638367,3.2500927448272705),
+                vec4(-.06249742954969406,-1.677281141281128,.09996748715639114,3.366089344024658),
+                vec4(.03402160108089447,-1.1646257638931274,.09996692836284637,3.4220051765441895),
+                vec4(-.22130997478961945,-1.9103193283081055,.09996800869703293,3.3134255409240723),
+                vec4(-.12344367802143097,-1.9349374771118164,.09996731579303741,3.382972240447998),
+                vec4(-.1267758458852768,-1.9493024349212646,.09996730834245682,3.3842356204986572));
+            vec3 inputs[6]=vec3[](
+                vec3(.21705256047176152,.9225526557565397,.6583698347503064),
+                vec3(-.31153674486119964,-.8326210532974729,.7735465255438113),
+                vec3(-.07812791744235291,.9903072431341883,.6136463838465074),
+                vec3(.06160465257314935,.9939846602886677,.20188227634803924),
+                vec3(-.5622797136529165,.027983691300934945,.36390356924019607),
+                vec3(-.5577261878641394,.13000588015461575,.6349010991115196));
+            uint index=(i-260u)/2u,channel=(i-260u)%2u;
+            vec2 delta=outlineViewScaledOffset(clips[index].w,inputs[index].xy/vec2(.5625,1),
+                vec2(2560,1440),-3.1715948581695557,.5,.5,inputs[index].z);
+            result.values[i]=(clips[index].xy+delta)[channel];
+        } else {
+            uint index=i-272u;
+            float depth=index==3u?-1.0:index==5u?.01:3.0;
+            vec2 normal=index==2u?vec2(0):vec2(1,0);
+            vec2 extent=index==4u?vec2(5120,2880):vec2(2560,1440);
+            vec2 delta=outlineViewScaledOffset(depth,normal,extent,-3.1715948581695557,
+                index==6u?0.0:.0001,.5,index==1u?0.0:1.0);
+            result.values[i]=index==7u?delta.y:delta.x;
+        }
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
     if(i>=248u) {
         if(i<252u)result.values[i]=shadowSqrtAlphaCoverage(i==248u?0.0:i==249u?.25:1.0,i==250u?.5:i==251u?0.0:1.0);
         else if(i<256u) {

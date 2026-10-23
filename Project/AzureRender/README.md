@@ -14,6 +14,11 @@
 逐材质局部漫反射下限见[响应验证](docs/acceptance/nr/material-local-wrap.md)。
 对象接收位置与原生可见量见[坐标验证](docs/acceptance/nr/object-shadow-receiver.md)。
 
+眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
+完整眼部区域、层级边界及动态姿态继续验收。
+距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
+生产材质、平滑顶点流及外扩深度壳继续接入。
+
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。
 实际顶点与采集调色表见[专项验证](docs/acceptance/nr/captured-vertex-and-grading.md)。
@@ -188,8 +193,6 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
-眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
-完整眼部区域、层级边界及动态姿态继续验收。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
 
 原生中庭的三模式各完成 96 帧对齐采集。

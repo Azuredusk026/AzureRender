@@ -17,7 +17,7 @@ int main(int argc,char** argv) try {
         if(layout)backend.destroyPipelineLayout(layout);if(pool)backend.destroyDescriptorPool(pool);
         if(setLayout)backend.destroyDescriptorSetLayout(setLayout);host.allocator.destroyBuffer(output);
     });
-    constexpr unsigned probeCount=260;
+    constexpr unsigned probeCount=280;
     output=host.allocator.createBuffer(probeCount*sizeof(float),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memset(output.mapped,0xCD,output.size);host.allocator.flush(output,0,output.size);
     setLayout=backend.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT}});
@@ -86,12 +86,17 @@ int main(int argc,char** argv) try {
         0,.5,1,.625,0,1,.375,.7120813131332397,
         0,.5,.5,0,
         .5986881256103516,.8304386138916016,.6729488372802734,.34885740280151367,
-        .9323333501815796,.9421425461769104,.9000055193901062,.9149537682533264};
+        .9323333501815796,.9421425461769104,.9000055193901062,.9149537682533264,
+        -.07881700992584229,-2.37636399269104,-.06351333856582642,-1.6793442964553833,
+        .03320031240582466,-1.1626743078231812,-.22104781866073608,-1.9096735715866089,
+        -.12410147488117218,-1.9340804815292358,-.12791308760643005,-1.9478082656860352,
+        3.0/2560,0,0,0,3.0/5120,.01/2560,0,0};
     static_assert(sizeof(expected)/sizeof(*expected)==probeCount);
     bool passed=true;
     for(unsigned i=0;i<probeCount;++i){
         std::cout<<"Surface probe "<<i<<": "<<values[i]<<" (expected "<<expected[i]<<")\n";
-        passed&=std::isfinite(values[i]) && std::abs(values[i]-expected[i])<std::max(1e-6,std::abs(expected[i])*1e-4);
+        const double tolerance=i>=272u?1e-8:i>=260u?1e-5:std::max(1e-6,std::abs(expected[i])*1e-4);
+        passed&=std::isfinite(values[i]) && std::abs(values[i]-expected[i])<tolerance;
     }
     if(!passed)throw std::runtime_error("Surface response numeric contract failed");
     if(host.errors.load())throw std::runtime_error("Vulkan validation errors");

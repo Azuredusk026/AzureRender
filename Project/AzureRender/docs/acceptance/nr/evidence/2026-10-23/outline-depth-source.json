@@ -1,0 +1,966 @@
+{
+  "schemaVersion": 1,
+  "status": "source-and-projection-kernel-passed-production-integration-pending",
+  "run": "build/runs/20261023-232311-captured-hair-ring-closure-a1b608",
+  "scope": "C18-R1: native expanded-depth provenance, independent vertex reconstruction and shared XY projection; production bindings and outline depth/color paths remain pending",
+  "sourceCapture": {
+    "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401.rdc",
+    "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "bytes": 345416012
+  },
+  "geometryComparison": {
+    "schemaVersion": 1,
+    "sourceVertices": 11564,
+    "candidateVertices": 11564,
+    "indicesReversedEqual": true,
+    "maximumWorldError": 0.0,
+    "quantiles": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "depthShell": [
+    {
+      "eid": 422,
+      "vertices": 11564,
+      "pixelDistanceQuantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "manifestSha256": "d314755e6e62da7f6285375f8e15930524a3cd8465d595b7ec358bcd566de770"
+    },
+    {
+      "eid": 440,
+      "vertices": 11564,
+      "pixelDistanceQuantiles": [
+        0.0,
+        0.6619769195133953,
+        0.8537043210277214,
+        0.8818047794476107
+      ],
+      "manifestSha256": "35b87c246d74ea65ecb04e043d50699d2c028b6af4fa1c0003c7d0aa2338789e"
+    }
+  ],
+  "depthSampling": {
+    "schemaVersion": 1,
+    "rows": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "lightIndex": 3,
+        "uv": [
+          0.5122534036636353,
+          0.8864079713821411
+        ],
+        "surfaceDepth": 3.210204601287842,
+        "nativeRawDepth": 0.030941903591156006,
+        "nativeLinearDepth": 3.2308513998448287,
+        "nativeTap": {
+          "pixel": [
+            1311,
+            1276
+          ],
+          "raw": 0.030941903591156006,
+          "linear": 3.2308513998448287,
+          "delta": 0.020646798556986923
+        },
+        "centerTap": {
+          "pixel": [
+            1311,
+            1276
+          ],
+          "raw": 0.030941903591156006,
+          "linear": 3.2308513998448287,
+          "delta": 0.020646798556986923
+        },
+        "nativeDepthWeight": 0.0
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "lightIndex": 1,
+        "uv": [
+          0.5141177773475647,
+          0.8828262090682983
+        ],
+        "surfaceDepth": 3.21321439743042,
+        "nativeRawDepth": 0.030930930748581886,
+        "nativeLinearDepth": 3.231997183853865,
+        "nativeTap": {
+          "pixel": [
+            1316,
+            1271
+          ],
+          "raw": 0.030930930748581886,
+          "linear": 3.231997183853865,
+          "delta": 0.018782786423444886
+        },
+        "centerTap": {
+          "pixel": [
+            1316,
+            1271
+          ],
+          "raw": 0.030930930748581886,
+          "linear": 3.231997183853865,
+          "delta": 0.018782786423444886
+        },
+        "nativeDepthWeight": 0.0
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "lightIndex": 3,
+        "uv": [
+          0.5142074823379517,
+          0.8829330801963806
+        ],
+        "surfaceDepth": 3.21321439743042,
+        "nativeRawDepth": 0.030930930748581886,
+        "nativeLinearDepth": 3.231997183853865,
+        "nativeTap": {
+          "pixel": [
+            1316,
+            1271
+          ],
+          "raw": 0.030930930748581886,
+          "linear": 3.231997183853865,
+          "delta": 0.018782786423444886
+        },
+        "centerTap": {
+          "pixel": [
+            1316,
+            1271
+          ],
+          "raw": 0.030930930748581886,
+          "linear": 3.231997183853865,
+          "delta": 0.018782786423444886
+        },
+        "nativeDepthWeight": 0.0
+      }
+    ]
+  },
+  "nativePixelHistories": {
+    "predepth-1311-1276.json": [
+      {
+        "eid": 264,
+        "primitive": 0,
+        "depth": 0.0,
+        "passed": true
+      },
+      {
+        "eid": 440,
+        "primitive": 718,
+        "depth": 0.030941903591156006,
+        "passed": true
+      },
+      {
+        "eid": 460,
+        "primitive": 745,
+        "depth": 0.030941903591156006,
+        "passed": false
+      }
+    ],
+    "predepth-1316-1271.json": [
+      {
+        "eid": 264,
+        "primitive": 0,
+        "depth": 0.0,
+        "passed": true
+      },
+      {
+        "eid": 440,
+        "primitive": 721,
+        "depth": 0.030930930748581886,
+        "passed": true
+      },
+      {
+        "eid": 460,
+        "primitive": 745,
+        "depth": 0.030930930748581886,
+        "passed": false
+      }
+    ]
+  },
+  "projection": {
+    "idealSampling": {
+      "schemaVersion": 1,
+      "sourceEvent": 440,
+      "baseEvent": 422,
+      "vertices": 11564,
+      "maximumClipError": 5.185752164571511e-06,
+      "maximumPixelError": 0.001442942483019008,
+      "width": 0.5,
+      "depthScale": 0.0,
+      "smoothNormalEnabled": 1.0,
+      "projectionY": -3.1715948581695557,
+      "halfFov": 0.30610792853119,
+      "maskDimensions": [
+        512,
+        512
+      ],
+      "rows": [
+        {
+          "vertex": 6506,
+          "clip": [
+            -0.0796167179942131,
+            -1.9380401372909546,
+            0.09996764361858368,
+            3.3499550819396973
+          ],
+          "smoothCoordinates": [
+            -0.6299212598425197,
+            -0.07874015748031496
+          ],
+          "projectedDirection": [
+            0.5079590221491171,
+            0.42956012162360285
+          ],
+          "mask": [
+            0.38091394369508713,
+            0.38091394369508713
+          ],
+          "expectedClip": [
+            -0.078992560505867,
+            -1.9371488094329834,
+            0.0999678447842598,
+            3.3499550819396973
+          ],
+          "predictedClip": [
+            -0.07899616224783779,
+            -1.937153995185148,
+            0.09996764361858368,
+            3.3499550819396973
+          ],
+          "maximumClipError": 5.185752164571511e-06
+        },
+        {
+          "vertex": 4924,
+          "clip": [
+            -0.12344367802143097,
+            -1.9349374771118164,
+            0.09996731579303741,
+            3.382972240447998
+          ],
+          "smoothCoordinates": [
+            -0.8188976377952756,
+            -0.41732283464566927
+          ],
+          "projectedDirection": [
+            -0.5622797136529165,
+            0.027983691300934945
+          ],
+          "mask": [
+            0.3626510594989739,
+            0.3626510594989739
+          ],
+          "expectedClip": [
+            -0.12410147488117218,
+            -1.9340804815292358,
+            0.09996750950813293,
+            3.382972240447998
+          ],
+          "predictedClip": [
+            -0.12409766126057482,
+            -1.934085505933371,
+            0.09996731579303741,
+            3.382972240447998
+          ],
+          "maximumClipError": 5.024404135189897e-06
+        },
+        {
+          "vertex": 6193,
+          "clip": [
+            -0.03320539742708206,
+            -1.7402087450027466,
+            0.0999675765633583,
+            3.3569772243499756
+          ],
+          "smoothCoordinates": [
+            0.9606299212598425,
+            -0.15748031496062992
+          ],
+          "projectedDirection": [
+            0.2780941070743852,
+            0.8692404724055101
+          ],
+          "mask": [
+            0.3330303871018045,
+            0.3330303871018045
+          ],
+          "expectedClip": [
+            -0.03276650980114937,
+            -1.7392756938934326,
+            0.09996777027845383,
+            3.3569772243499756
+          ],
+          "predictedClip": [
+            -0.032768688270372555,
+            -1.7392803152410619,
+            0.0999675765633583,
+            3.3569772243499756
+          ],
+          "maximumClipError": 4.621347629241157e-06
+        },
+        {
+          "vertex": 6831,
+          "clip": [
+            -0.14457471668720245,
+            -2.280686855316162,
+            0.09996819496154785,
+            3.294963836669922
+          ],
+          "smoothCoordinates": [
+            0.8110236220472441,
+            -0.06299212598425197
+          ],
+          "projectedDirection": [
+            -0.2621239085608332,
+            -0.8847857415157997
+          ],
+          "mask": [
+            0.22116670801359065,
+            0.22116670801359065
+          ],
+          "expectedClip": [
+            -0.1448613554239273,
+            -2.2813189029693604,
+            0.09996838122606277,
+            3.294963836669922
+          ],
+          "predictedClip": [
+            -0.144859379310499,
+            -2.2813144555855676,
+            0.09996819496154785,
+            3.294963836669922
+          ],
+          "maximumClipError": 4.4473837927938575e-06
+        },
+        {
+          "vertex": 9613,
+          "clip": [
+            -0.07965397089719772,
+            -2.37831449508667,
+            0.09996864199638367,
+            3.2500927448272705
+          ],
+          "smoothCoordinates": [
+            0.9133858267716536,
+            0.007874015748031496
+          ],
+          "projectedDirection": [
+            0.21705256047176152,
+            0.9225526557565397
+          ],
+          "mask": [
+            0.6579167319571271,
+            0.6579167319571271
+          ],
+          "expectedClip": [
+            -0.07881700992584229,
+            -2.37636399269104,
+            0.09996882826089859,
+            3.2500927448272705
+          ],
+          "predictedClip": [
+            -0.07881870119833158,
+            -2.376367847448507,
+            0.09996864199638367,
+            3.2500927448272705
+          ],
+          "maximumClipError": 3.854757467003367e-06
+        },
+        {
+          "vertex": 9235,
+          "clip": [
+            0.11302729696035385,
+            -2.3010551929473877,
+            0.0999690443277359,
+            3.2094669342041016
+          ],
+          "smoothCoordinates": [
+            -0.9291338582677166,
+            0.05511811023622047
+          ],
+          "projectedDirection": [
+            0.5067324651632642,
+            -0.43411447315320245
+          ],
+          "mask": [
+            0.09786158969954534,
+            0.09786158969954534
+          ],
+          "expectedClip": [
+            0.11318375170230865,
+            -2.301269769668579,
+            0.09996922314167023,
+            3.2094669342041016
+          ],
+          "predictedClip": [
+            0.11318634057887296,
+            -2.3012733065195228,
+            0.0999690443277359,
+            3.2094669342041016
+          ],
+          "maximumClipError": 3.536850943675063e-06
+        }
+      ]
+    },
+    "quantizedSampling": {
+      "schemaVersion": 1,
+      "sourceEvent": 440,
+      "baseEvent": 422,
+      "vertices": 11564,
+      "maximumClipError": 2.5141144353035827e-06,
+      "maximumPixelError": 0.0005942505465131671,
+      "width": 0.5,
+      "depthScale": 0.0,
+      "smoothNormalEnabled": 1.0,
+      "projectionY": -3.1715948581695557,
+      "halfFov": 0.30610792853119,
+      "maskDimensions": [
+        512,
+        512
+      ],
+      "rows": [
+        {
+          "vertex": 9613,
+          "clip": [
+            -0.07965397089719772,
+            -2.37831449508667,
+            0.09996864199638367,
+            3.2500927448272705
+          ],
+          "smoothCoordinates": [
+            0.9133858267716536,
+            0.007874015748031496
+          ],
+          "projectedDirection": [
+            0.21705256047176152,
+            0.9225526557565397
+          ],
+          "mask": [
+            0.6583698347503064,
+            0.6583698347503064
+          ],
+          "expectedClip": [
+            -0.07881700992584229,
+            -2.37636399269104,
+            0.09996882826089859,
+            3.2500927448272705
+          ],
+          "predictedClip": [
+            -0.07881812595375239,
+            -2.3763665068054753,
+            0.09996864199638367,
+            3.2500927448272705
+          ],
+          "maximumClipError": 2.5141144353035827e-06
+        },
+        {
+          "vertex": 6202,
+          "clip": [
+            -0.06249742954969406,
+            -1.677281141281128,
+            0.09996748715639114,
+            3.366089344024658
+          ],
+          "smoothCoordinates": [
+            -0.937007874015748,
+            -0.2204724409448819
+          ],
+          "projectedDirection": [
+            -0.31153674486119964,
+            -0.8326210532974729
+          ],
+          "mask": [
+            0.7735465255438113,
+            0.7735465255438113
+          ],
+          "expectedClip": [
+            -0.06351333856582642,
+            -1.6793442964553833,
+            0.09996768832206726,
+            3.366089344024658
+          ],
+          "predictedClip": [
+            -0.06351454937607702,
+            -1.679346802424812,
+            0.09996748715639114,
+            3.366089344024658
+          ],
+          "maximumClipError": 2.505969428634458e-06
+        },
+        {
+          "vertex": 2177,
+          "clip": [
+            0.03402160108089447,
+            -1.1646257638931274,
+            0.09996692836284637,
+            3.4220051765441895
+          ],
+          "smoothCoordinates": [
+            -0.05511811023622047,
+            -1.0
+          ],
+          "projectedDirection": [
+            -0.07812791744235291,
+            0.9903072431341883
+          ],
+          "mask": [
+            0.6136463838465074,
+            0.6136463838465074
+          ],
+          "expectedClip": [
+            0.03320031240582466,
+            -1.1626743078231812,
+            0.09996713697910309,
+            3.4220051765441895
+          ],
+          "predictedClip": [
+            0.03320132720066739,
+            -1.1626767569457224,
+            0.09996692836284637,
+            3.4220051765441895
+          ],
+          "maximumClipError": 2.4491225412148765e-06
+        },
+        {
+          "vertex": 6811,
+          "clip": [
+            -0.22130997478961945,
+            -1.9103193283081055,
+            0.09996800869703293,
+            3.3134255409240723
+          ],
+          "smoothCoordinates": [
+            -0.5354330708661418,
+            -0.84251968503937
+          ],
+          "projectedDirection": [
+            0.06160465257314935,
+            0.9939846602886677
+          ],
+          "mask": [
+            0.20188227634803924,
+            0.20188227634803924
+          ],
+          "expectedClip": [
+            -0.22104781866073608,
+            -1.9096735715866089,
+            0.09996820241212845,
+            3.3134255409240723
+          ],
+          "predictedClip": [
+            -0.22104867717216664,
+            -1.9096757474364985,
+            0.09996800869703293,
+            3.3134255409240723
+          ],
+          "maximumClipError": 2.175849889596293e-06
+        },
+        {
+          "vertex": 4924,
+          "clip": [
+            -0.12344367802143097,
+            -1.9349374771118164,
+            0.09996731579303741,
+            3.382972240447998
+          ],
+          "smoothCoordinates": [
+            -0.8188976377952756,
+            -0.41732283464566927
+          ],
+          "projectedDirection": [
+            -0.5622797136529165,
+            0.027983691300934945
+          ],
+          "mask": [
+            0.36390356924019607,
+            0.36390356924019607
+          ],
+          "expectedClip": [
+            -0.12410147488117218,
+            -1.9340804815292358,
+            0.09996750950813293,
+            3.382972240447998
+          ],
+          "predictedClip": [
+            -0.12409991996175926,
+            -1.9340825634293517,
+            0.09996731579303741,
+            3.382972240447998
+          ],
+          "maximumClipError": 2.0819001158578487e-06
+        },
+        {
+          "vertex": 4922,
+          "clip": [
+            -0.1267758458852768,
+            -1.9493024349212646,
+            0.09996730834245682,
+            3.3842356204986572
+          ],
+          "smoothCoordinates": [
+            -0.8346456692913385,
+            -0.4015748031496063
+          ],
+          "projectedDirection": [
+            -0.5577261878641394,
+            0.13000588015461575
+          ],
+          "mask": [
+            0.6349010991115196,
+            0.6349010991115196
+          ],
+          "expectedClip": [
+            -0.12791308760643005,
+            -1.9478082656860352,
+            0.09996750205755234,
+            3.3842356204986572
+          ],
+          "predictedClip": [
+            -0.12791151644715895,
+            -1.9478103134163096,
+            0.09996730834245682,
+            3.3842356204986572
+          ],
+          "maximumClipError": 2.047730274457038e-06
+        }
+      ]
+    }
+  },
+  "actualRimDisabled": {
+    "schemaVersion": 1,
+    "playerSha256": "7f3c29dd82dcc0f862dd7165e8e2aae7cca44c20430775bd676d0bb4ce6e0af2",
+    "rows": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "source": [
+          116,
+          40,
+          43
+        ],
+        "baseline": [
+          252,
+          129,
+          121
+        ],
+        "rimOff": [
+          116,
+          40,
+          43
+        ],
+        "newMaximumByteError": 0
+      },
+      {
+        "pixel": [
+          1309,
+          166
+        ],
+        "source": [
+          118,
+          40,
+          43
+        ],
+        "baseline": [
+          248,
+          125,
+          118
+        ],
+        "rimOff": [
+          118,
+          40,
+          44
+        ],
+        "newMaximumByteError": 1
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "source": [
+          121,
+          44,
+          47
+        ],
+        "baseline": [
+          249,
+          127,
+          120
+        ],
+        "rimOff": [
+          122,
+          44,
+          48
+        ],
+        "newMaximumByteError": 1
+      },
+      {
+        "pixel": [
+          1327,
+          181
+        ],
+        "source": [
+          129,
+          51,
+          52
+        ],
+        "baseline": [
+          255,
+          131,
+          122
+        ],
+        "rimOff": [
+          129,
+          51,
+          52
+        ],
+        "newMaximumByteError": 0
+      },
+      {
+        "pixel": [
+          1313,
+          169
+        ],
+        "source": [
+          126,
+          45,
+          49
+        ],
+        "baseline": [
+          251,
+          125,
+          118
+        ],
+        "rimOff": [
+          126,
+          45,
+          49
+        ],
+        "newMaximumByteError": 0
+      },
+      {
+        "pixel": [
+          1314,
+          170
+        ],
+        "source": [
+          124,
+          46,
+          49
+        ],
+        "baseline": [
+          249,
+          127,
+          120
+        ],
+        "rimOff": [
+          125,
+          46,
+          50
+        ],
+        "newMaximumByteError": 1
+      },
+      {
+        "pixel": [
+          1314,
+          171
+        ],
+        "source": [
+          123,
+          46,
+          49
+        ],
+        "baseline": [
+          248,
+          127,
+          120
+        ],
+        "rimOff": [
+          124,
+          46,
+          50
+        ],
+        "newMaximumByteError": 1
+      },
+      {
+        "pixel": [
+          1315,
+          171
+        ],
+        "source": [
+          123,
+          45,
+          49
+        ],
+        "baseline": [
+          248,
+          127,
+          120
+        ],
+        "rimOff": [
+          123,
+          45,
+          49
+        ],
+        "newMaximumByteError": 0
+      }
+    ],
+    "imageSha256": "8006b00b6a822a35e065dbed4612096dd72963901bdce8af80eca3cbbf5eeeca",
+    "runtimeErrors": 0,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    }
+  },
+  "baselineHairRegions": {
+    "schemaVersion": 1,
+    "sourceEvent": 950,
+    "sourceSha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+    "candidateSha256": "509e3b9f53b495f6a07fa4e5b9d48de3cc523ef581406ae93aea8aa19e4854e6",
+    "regions": [
+      {
+        "name": "crown",
+        "box": [
+          1215,
+          160,
+          1340,
+          242
+        ],
+        "pixels": 7344,
+        "maximumByteError": 136,
+        "p95ByteError": 5.0,
+        "meanAbsoluteByteError": 1.3016975308641976,
+        "pixelsOverOneByte": 472
+      },
+      {
+        "name": "head",
+        "box": [
+          1140,
+          130,
+          1430,
+          440
+        ],
+        "pixels": 17017,
+        "maximumByteError": 137,
+        "p95ByteError": 24.0,
+        "meanAbsoluteByteError": 2.5765606942077532,
+        "pixelsOverOneByte": 2547
+      },
+      {
+        "name": "full",
+        "box": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "pixels": 17017,
+        "maximumByteError": 137,
+        "p95ByteError": 24.0,
+        "meanAbsoluteByteError": 2.5765606942077532,
+        "pixelsOverOneByte": 2547
+      }
+    ]
+  },
+  "gpu": {
+    "debug": {
+      "probeCount": 280,
+      "newProbeCount": 20,
+      "sourceClipTolerance": 1e-05,
+      "boundaryTolerance": 1e-08,
+      "gpuLogSha256": "dea34fe681330a28da9ec76675a4d6c60397a32427ca2fa30fc0e5edd4c91d1f",
+      "shaderSha256": "627d361537b854e8285acb1ee506120c9de3ef64a64220252a4d6e7e170a1ecc",
+      "productionShadersUnchanged": true
+    },
+    "release": {
+      "probeCount": 280,
+      "newProbeCount": 20,
+      "sourceClipTolerance": 1e-05,
+      "boundaryTolerance": 1e-08,
+      "gpuLogSha256": "c9ad8265f4841e46452640227c35e8af0d97dc568dd1ea660b361a7bd710d900",
+      "shaderSha256": "627d361537b854e8285acb1ee506120c9de3ef64a64220252a4d6e7e170a1ecc",
+      "productionShadersUnchanged": true
+    }
+  },
+  "rawInputs": {
+    "native-scene-depth.bin": {
+      "bytes": 14745600,
+      "sha256": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb"
+    },
+    "hair-uv-smooth-stream.bin": {
+      "bytes": 138768,
+      "sha256": "437aa0b2b8dcc21adadbf8d5f8e1ee8162bc8a90df123b1986beb2b39e1b2daa"
+    },
+    "outline-mask.dds": {
+      "bytes": 349700,
+      "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+    },
+    "rim-hair-1308-165-trace.json": {
+      "bytes": 4638625,
+      "sha256": "0026ff0b099a91e3285c7d13e2facd36dc9a15ad300f0ba8f208babdb7b50953"
+    },
+    "rim-hair-1313-170-trace.json": {
+      "bytes": 4683164,
+      "sha256": "b5df720722ca2279238e8dbb2a3906491159c4d455b91f40ef9ededd1536067d"
+    },
+    "e440-vs-disasm-receipt.json": {
+      "bytes": 45458,
+      "sha256": "a8bfb3c5d9135b7c602e684da3caa8748dde69804ca10e995f954e0583a07139"
+    },
+    "e440-vs-constants-receipt.json": {
+      "bytes": 1666257,
+      "sha256": "4acf835ef28970146b3953d0d0c799ee2d424cd3b24b839a174195d4ed4b29bf"
+    },
+    "e1138-vs-disasm-receipt.json": {
+      "bytes": 45557,
+      "sha256": "b67001b5f5678e9486bc0e9775738ac1166426340a7777385098d1a7e5ca572c"
+    },
+    "e1138-ps-disasm-receipt.json": {
+      "bytes": 176159,
+      "sha256": "a09d7153f8db0e45f6332d57b32b605874fda3b1aa77b8033847d753966db8db"
+    },
+    "e541-ps-disasm-receipt.json": {
+      "bytes": 2035,
+      "sha256": "4c30ffd7c8f889cf775b27c33fc662b1e422f87f177fbac08351fa347dc1b9a9"
+    }
+  },
+  "redTests": [
+    {
+      "log": "red-outline-gpu.log",
+      "sha256": "e4577bcc0072aa520fa39fa46487ff9ec93da475ce5ce20587b2f536718899ba",
+      "exitCode": 8
+    },
+    {
+      "log": "red-outline-boundary-gpu.log",
+      "sha256": "9c95cfad0132194fd4b85affb26d9f5895cdf3f0bfafdfabe5560bd34b7af40a",
+      "exitCode": 8
+    }
+  ],
+  "sourceFingerprints": {
+    "shaders/outline_projection.glsl": "6814f2aa59cf20a12cd411026067b08d567d2b2b6ee4a80609280b37ef19c2de",
+    "shaders/surface_response_test.comp": "743759e7ff18a3110a4d52f0967798e0e40f6639e8d8b29b9426fd778081aeb2",
+    "tests/SurfaceResponseGpuTests.cpp": "3d5a843420edb8167503436e60231045d16ffac6259b5e5fa977a510d3884107"
+  },
+  "remaining": [
+    "Versioned outline material, mask and optional vertex-stream contracts",
+    "Vertex-stage texture capacity and owned GPU records",
+    "Production depth-shell and color-outline draw integration",
+    "Depth bias and independent outline lighting",
+    "Animated, mirrored, scaled and multi-view acceptance; C17 full ring closure"
+  ]
+}
