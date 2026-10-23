@@ -59,9 +59,16 @@ int main(int argc,char** argv)try{
         MotionPoseHistory history;history.stage({old},oldView);history.commit(3);history.stage({now},{});
         MotionVectorDraw draw;draw.vertices=buffers[4].buffer;draw.indices=buffers[5].buffer;draw.indexCount=3;
         draw.push.camera[2]=3;const std::uint32_t noTile=UINT32_MAX;std::memcpy(&draw.push.camera[3],&noTile,4);draw.push.outline={.8F,32,32,1};
-        for(unsigned variant=0;variant<5;++variant){
-            auto packed=history.pack(identity,variant==0?0:3,8192);pass.prepare(variant%2,packed,input);draw.push.flags=variant==2?16:variant==3?512:variant==4?768:0;
-            draw.shell=variant>=3;
+        for(unsigned variant=0;variant<6;++variant){
+            auto packed=history.pack(identity,variant==0?0:3,8192);pass.prepare(variant%2,packed,input);draw.push.flags=variant==2?16:variant==3?512:variant==4?768:variant==5?18:0;
+            draw.shell=variant==3||variant==4;
+            if(variant==5)backend.executeOneShot([&](rhi::ICommandRecorder& commands){rhi::ImageBarrierDesc b;b.image=images[1].image;
+                b.oldLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+                b.srcStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.srcAccessMask=VK_ACCESS_SHADER_READ_BIT;
+                b.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;commands.imageBarrier(b);
+                VkClearColorValue transparent{{1,1,1,0}};commands.clearColorImage(b.image,b.newLayout,transparent);
+                b.oldLayout=b.newLayout;b.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.srcStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+                b.dstStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;commands.imageBarrier(b);});
             host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
                 for(unsigned i=0;i<6;++i){rhi::BufferBarrierDesc b;b.buffer=buffers[i].buffer;b.size=buffers[i].size;b.srcStageMask=VK_PIPELINE_STAGE_HOST_BIT;
                     b.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;b.dstStageMask=i<4?VK_PIPELINE_STAGE_VERTEX_SHADER_BIT:VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
@@ -79,21 +86,27 @@ int main(int argc,char** argv)try{
             });
             host.allocator.invalidate(buffers[6],0,buffers[6].size);const auto* values=static_cast<const float*>(buffers[6].mapped);
             for(unsigned y=1;y<31;++y)for(unsigned x=5;x<30;++x){auto pixel=y*32+x;const auto* motion=values+pixel*4;
-                const float expected[]{variant?.1F:0,0,variant==4?.27F:variant?.25F:0,variant==0||variant==2?-1.F:1.F};
+                const float expected[]{variant&&variant!=5?.1F:0,0,variant==4?.27F:variant&&variant!=5?.25F:0,variant==5?0.F:variant==0||variant==2?-1.F:1.F};
                 for(unsigned axis=0;axis<4;++axis)if(!std::isfinite(motion[axis])||std::abs(motion[axis]-expected[axis])>2e-6F)
                     {std::cerr<<"variant="<<variant<<" pixel="<<x<<','<<y<<" axis="<<axis<<" actual="<<motion[axis]<<" expected="<<expected[axis]<<'\n';
                     throw std::runtime_error("Actual motion attachment differs from independent translation, depth or reactive reference");}
-                if(std::abs(values[4096+pixel]-(variant==4?.27F:.25F))>1e-6F)throw std::runtime_error("Motion color-surface depth differs from drawn surface");}
+                if(std::abs(values[4096+pixel]-(variant==5?1.F:variant==4?.27F:.25F))>1e-6F)throw std::runtime_error("Motion color-surface depth differs from drawn surface");}
         }
         TemporalViewState camera;TemporalFrameInfo info;info.width=info.height=32;info.sceneGeneration=1;
         info.projection=info.viewProjection=identity;MotionPoseHistory temporalPoses;
-        for(unsigned phase=0;phase<5;++phase){
-            const auto slot=phase%2;info.cameraCut=phase>=3?1:0;const auto prepared=camera.prepare(info);
-            temporal.prepare(prepared,slot,0);temporalPoses.stage({now},{});
+        for(unsigned phase=0;phase<10;++phase){
+            const auto slot=phase%2;info.cameraCut=phase>=3?1:0;info.exposureScale=phase==8?2.F:phase==9?4.F:1.F;
+            const auto prepared=camera.prepare(info);
+            if(phase==9&&(!prepared.previous||prepared.previous->exposureScale!=2.F))throw std::runtime_error("Exposure changes must preserve unexposed HDR history");
+            auto currentPose=now;if(phase==6||phase==7)currentPose.model[12]=.2F;if(phase==7)currentPose.model[14]=.5F;
+            instance.model=instance.modelViewProjection=currentPose.model;
+            std::memcpy(buffers[0].mapped,&instance,sizeof(instance));host.allocator.flush(buffers[0],0,sizeof(instance));
+            temporal.prepare(prepared,slot,0);temporalPoses.stage({currentPose},{});
             pass.prepare(slot,temporalPoses.pack(identity,prepared.previousSubmission,8192),input);
-            draw.shell=false;draw.push.flags=phase==2?16:0;
+            draw.shell=false;draw.push.flags=phase==2||phase==5?16:0;
             auto* upload=static_cast<std::uint16_t*>(buffers[9].mapped);
             for(unsigned pixel=0;pixel<1024;++pixel){auto value=((pixel%32+pixel/32+phase)%2)?std::uint16_t(0x3c00):std::uint16_t(0);
+                if(phase==6)value=value?0x3a66:0x3266;
                 upload[pixel*4]=upload[pixel*4+1]=upload[pixel*4+2]=value;upload[pixel*4+3]=0x3800;}
             host.allocator.flush(buffers[9],0,buffers[9].size);
             RenderGraph graph;auto motion=temporal.importMotion(graph,"temporal-gpu");
@@ -119,6 +132,7 @@ int main(int argc,char** argv)try{
                 b.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;commands.imageBarrier(b);
                 rhi::BufferBarrierDesc previous;previous.buffer=pass.previous(slot).buffer;previous.size=pass.previous(slot).size;
                 previous.srcStageMask=VK_PIPELINE_STAGE_HOST_BIT;previous.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;previous.dstStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;previous.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;commands.bufferBarrier(previous);
+                previous.buffer=buffers[0].buffer;previous.size=buffers[0].size;commands.bufferBarrier(previous);
                 graph.execute(&commands);
                 b.oldLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
                 b.srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;b.srcAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;b.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_READ_BIT;commands.imageBarrier(b);
@@ -129,8 +143,9 @@ int main(int argc,char** argv)try{
             });
             host.allocator.invalidate(buffers[10],0,buffers[10].size);const auto* pixels=static_cast<const std::uint16_t*>(buffers[10].mapped);
             for(unsigned pixel=0;pixel<1024;++pixel)for(unsigned axis=0;axis<4;++axis){
+                if((phase==6||phase==7)&&(pixel%32<5||pixel%32>=30||pixel/32<1||pixel/32>=31))continue;
                 auto expected=axis==3?std::uint16_t(0x3800):upload[pixel*4+axis];
-                if(axis<3&&(phase==1||phase==4))expected=expected?0x2e66:0x3b33;
+                if(axis<3&&(phase==1||phase==4||phase==9))expected=expected?0x2e66:0x3b33;
                 if(std::abs(int(pixels[pixel*4+axis])-int(expected))>1){std::cerr<<"Temporal phase="<<phase<<" pixel="<<pixel<<" axis="<<axis<<" actual="<<pixels[pixel*4+axis]<<" expected="<<expected<<'\n';
                     throw std::runtime_error("HDR temporal output differs from independent history blend, reactive or camera-cut reference");}
             }
@@ -138,5 +153,5 @@ int main(int argc,char** argv)try{
         }
     }
     if(host.errors.load())throw std::runtime_error("Motion vector Vulkan validation errors");
-    std::cout<<"Motion vector GPU: 18750 motion checks and 20480 HDR history checks passed\n";return 0;
+    std::cout<<"Motion vector GPU: 22500 motion checks and 38768 HDR history checks, including translation, disocclusion and exposure changes passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -16,7 +16,14 @@ int main(int argc,char** argv)try{
         temporal.prepare(camera.prepare(info),0,0);temporalCheck(!temporal.preparedHistoryValid(),"First frame rejects history");
         temporalCheck(!temporal.commit(1),"Unrecorded preparation cannot advance GPU history");
         RenderGraph graph;auto motion=temporal.importMotion(graph,"fixture");
-        auto color=graph.addResource("color"),depth=graph.addResource("depth");temporal.schedule(graph,color,depth,motion,"fixture");
+        auto color=graph.addResource("color"),depth=graph.addResource("depth");
+        bool missingRejected=false;try{temporal.schedule(graph,color,depth,motion,"fixture");}catch(const std::logic_error&){missingRejected=true;}
+        temporalCheck(missingRejected&&graph.passes().empty()&&graph.resources().size()==4,"Missing motion writers reject atomically before graph mutation");
+        const auto producer=graph.addPass("motion-producer");graph.attachment(producer,motion[0],RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        missingRejected=false;try{temporal.schedule(graph,color,depth,motion,"fixture");}catch(const std::logic_error&){missingRejected=true;}
+        temporalCheck(missingRejected&&graph.passes().size()==1&&graph.resources().size()==4,"Missing surface-depth writer rejects before graph mutation");
+        graph.attachment(producer,motion[1],RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        temporal.schedule(graph,color,depth,motion,"fixture");
         std::string error;temporalCheck(graph.compile(error),"Temporal graph compiles");rhi::NullCommandRecorder commands;graph.execute(&commands);
         temporalCheck(temporal.commit(3)&&camera.commit(3),"Recorded state advances with actual submission");
         auto index=temporal.historyIndex();temporalCheck(temporal.historySubmission()==3&&!temporal.commit(3),"Duplicate submission cannot rotate history");
@@ -26,6 +33,9 @@ int main(int argc,char** argv)try{
         temporal.cancel();camera.cancel();info.cameraCut=0;
         TemporalPreparedFrame mismatch=camera.prepare(info);mismatch.previousSubmission=99;temporal.prepare(mismatch,1,0);
         temporalCheck(!temporal.preparedHistoryValid(),"Camera and attachment submissions must match");
+        auto other=graph.addResource("wrong-view-motion"),otherDepth=graph.addResource("wrong-view-depth");
+        bool foreignRejected=false;try{temporal.schedule(graph,color,depth,{other,otherDepth},"wrong-view");}catch(const std::invalid_argument&){foreignRejected=true;}
+        temporalCheck(foreignRejected,"Foreign motion resources cannot enter this view's resolve");
     }
     temporalCheck(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Temporal ownership releases all resources");
     bool rejected=false;try{TemporalReconstruction oversized(backend,backend.allocator(),{100000,100000},VK_FORMAT_D32_SFLOAT,{source},argv[1]);}catch(const std::invalid_argument&){rejected=true;}

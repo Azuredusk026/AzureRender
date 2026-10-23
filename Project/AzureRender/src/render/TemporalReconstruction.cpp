@@ -107,7 +107,17 @@ void TemporalReconstruction::prepare(const TemporalPreparedFrame& frame,std::uin
 }
 void TemporalReconstruction::schedule(RenderGraph& graph,RenderGraph::ResourceId color,RenderGraph::ResourceId depth,
     std::array<RenderGraph::ResourceId,2> motion,const std::string& name){
-    if(!pending_)throw std::logic_error("Temporal resolve requires a prepared view frame");const auto pending=*pending_;
+    if(!pending_)throw std::logic_error("Temporal resolve requires a prepared view frame");
+    if(motion[0]>=graph.resources().size()||motion[1]>=graph.resources().size()||motion[0]==motion[1]
+        ||graph.resources()[motion[0]].initial.image!=motion_->image().image
+        ||graph.resources()[motion[1]].initial.image!=motion_->surfaceDepthImage().image)
+        throw std::invalid_argument("Temporal graph motion resources must identify this view's distinct outputs");
+    for(auto resource:motion){
+        const bool produced=std::any_of(graph.passes().begin(),graph.passes().end(),[&](const auto& pass){
+            return std::find(pass.writes.begin(),pass.writes.end(),resource)!=pass.writes.end();});
+        if(!produced)throw std::logic_error("Temporal reconstruction requires both motion and color-surface depth producers");
+    }
+    const auto pending=*pending_;
     const auto import=[&](unsigned i){rhi::ImageBarrierDesc input;input.image=images_[i].image;
         if(i){input.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;input.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;input.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;}
         return graph.importImage(name+"-history-"+std::to_string(i),input);};

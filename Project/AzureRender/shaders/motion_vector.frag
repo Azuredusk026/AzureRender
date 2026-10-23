@@ -18,7 +18,11 @@ void main(){
         uint tile=floatBitsToUint(motion.camera.w);
         if(tile!=0xffffffffu){ivec2 extent=ivec2(motion.outline.yz);uint columns=uint(textureSize(coverageMask,0).x/extent.x);
             if(columns>0u&&texelFetch(coverageMask,ivec2(tile%columns,tile/columns)*extent+ivec2(gl_FragCoord.xy),0).r>.5)discard;}
-    }else if((motion.flags&3u)==1u&&texture(baseColor,textureCoordinate).a<motion.alphaCutoff)discard;
+    }else{
+        uint alphaMode=motion.flags&3u;
+        if(alphaMode==1u&&texture(baseColor,textureCoordinate).a<motion.alphaCutoff)discard;
+        if(alphaMode==2u&&texture(baseColor,textureCoordinate).a<=0)discard;
+    }
     outputMotion=azureMotionProjection(currentClip,previousClip,previousValid>=.999999);
     if(outputMotion.w==0||(motion.flags&16u)!=0u)outputMotion.w=-1;
     outputSurfaceDepth=gl_FragCoord.z;

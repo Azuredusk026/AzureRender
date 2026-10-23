@@ -184,6 +184,10 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         view->frame.camera.view.target=view->descriptor.cameraTarget;
         view->frame.camera.view.nearPlane=view->descriptor.settings.cameraNear;
         view->frame.camera.view.farPlane=view->descriptor.settings.cameraFar;
+        if(auto& authored=view->descriptor.settings.cameraView;authored){
+            authored->position=view->descriptor.cameraPosition;authored->target=view->descriptor.cameraTarget;
+            view->frame.camera.view=*authored;
+        }
         view->frame.sceneSnapshot=std::make_shared<const scene::SceneDescription>(view->descriptor.scene);
         std::copy(view->descriptor.cameraPosition.begin(),view->descriptor.cameraPosition.end(),view->frame.cameraPosition);
         std::copy(view->descriptor.cameraTarget.begin(),view->descriptor.cameraTarget.end(),view->frame.cameraTarget);
