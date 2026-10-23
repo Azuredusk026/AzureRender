@@ -63,6 +63,9 @@ public:
     bool collectImageUploads=false;
     std::vector<ImageUpload> imageUploads;
     std::set<VkFormat> unavailableSampledFormats;
+    std::vector<std::vector<DescriptorBindingDesc>> descriptorLayouts;
+    std::vector<DescriptorPoolDesc> descriptorPools;
+    std::vector<DescriptorImageWrite> descriptorImageWrites;
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
     bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}

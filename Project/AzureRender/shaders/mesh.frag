@@ -5,6 +5,7 @@
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
 #endif
+#define AZURE_SEPARATE_SHADOW_SAMPLER 1
 #include "shadow_compare.glsl"
 #include "surface_response.glsl"
 #include "character_diffuse.glsl"
@@ -45,8 +46,7 @@ layout(binding=23) uniform samplerCube reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
 
 #if defined(AZURE_BINDLESS)
-// One global array: slots 0..2 are the shared environment, shadow map and
-// toon ramp; per-material blocks of 9 follow at 3 + materialIndex * 9.
+// Indexed slots 0..1 are environment and toon ramp; material blocks follow.
 layout(binding = 1) uniform sampler2D textureArray[];
 #else
 layout(binding = 1) uniform sampler2D baseColorTexture;
@@ -57,11 +57,14 @@ layout(binding = 5) uniform sampler2D specularEmissiveTexture;
 layout(binding = 6) uniform sampler2D styleMaskTexture;
 layout(binding = 7) uniform sampler2D matcapTexture;
 layout(binding = 8) uniform sampler2D hairDataTexture;
-layout(binding = 9) uniform sampler2D shadowMap;
 layout(binding = 11) uniform sampler2D toonRampTexture;
 layout(binding = 12) uniform sampler2D faceSdfTexture;
 layout(binding = 25) uniform sampler2D shadowColorLutTexture;
 #endif
+
+layout(binding=9) uniform texture2D mainShadowDepth;
+layout(binding=28) uniform sampler sharedDepthSampler;
+#define AZ_TEX_SHADOW sampler2D(mainShadowDepth,sharedDepthSampler)
 
 struct ClusterLight {
     vec4 positionRadius;
@@ -115,8 +118,7 @@ layout(push_constant) uniform MaterialData {
 #define AZ_TEX_FACE_SDF textureArray[nonuniformEXT(material.textureBase + 7u)]
 #define AZ_TEX_SHADOW_COLOR_LUT textureArray[nonuniformEXT(material.textureBase + 8u)]
 #define AZ_TEX_ENVIRONMENT textureArray[0u]
-#define AZ_TEX_SHADOW textureArray[1u]
-#define AZ_TEX_TOON_RAMP textureArray[2u]
+#define AZ_TEX_TOON_RAMP textureArray[1u]
 #else
 #define AZ_TEX_BASE_COLOR baseColorTexture
 #define AZ_TEX_NORMAL normalTexture
@@ -128,7 +130,6 @@ layout(push_constant) uniform MaterialData {
 #define AZ_TEX_FACE_SDF faceSdfTexture
 #define AZ_TEX_SHADOW_COLOR_LUT shadowColorLutTexture
 #define AZ_TEX_ENVIRONMENT environmentTexture
-#define AZ_TEX_SHADOW shadowMap
 #define AZ_TEX_TOON_RAMP toonRampTexture
 #endif
 
@@ -334,7 +335,7 @@ vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradi
 vec2 filteredShadowBlockers(vec2 uv,float receiver,ivec2 lo,ivec2 hi,vec2 depthGradient) {
     vec2 extent=vec2(textureSize(AZ_TEX_SHADOW,0));
     vec2 point=uv*extent-.5;ivec2 base=ivec2(floor(point));vec2 weight=fract(point);
-    vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base,lo,hi);
+    vec4 depths=shadowTexelQuad(mainShadowDepth,sharedDepthSampler,base,lo,hi);
     depths-=shadowPlaneQuad(base,lo,hi,uv,extent,depthGradient);
     return shadowBlockerMoments(depths,receiver,weight);
 }
@@ -370,7 +371,7 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     for(int y=-2;y<=2;y+=2)for(int x=-2;x<=2;x+=2){
         vec4 weights=shadowBlockerGridWeights(ivec2(x,y),fraction);
         vec4 plane=interior?dot(vec2(x,y)-fraction,depthPerTexel)+vec4(0,depthPerTexel.x,depthPerTexel.y,depthPerTexel.x+depthPerTexel.y):shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient);
-        vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base+ivec2(x,y),lo,hi)-plane;
+        vec4 depths=shadowTexelQuad(mainShadowDepth,sharedDepthSampler,base+ivec2(x,y),lo,hi)-plane;
         vec4 mass=(vec4(1)-step(vec4(receiver),depths))*weights;
         sum+=dot(depths,mass);blockers+=dot(vec4(1),mass);
     }
@@ -384,7 +385,7 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
         vec4 planeDepths=vec4(receiver)+(interior?dot(vec2(x,y)-fraction,depthPerTexel)+vec4(0,depthPerTexel.x,depthPerTexel.y,depthPerTexel.x+depthPerTexel.y):shadowPlaneQuad(base+ivec2(x,y),lo,hi,uv,vec2(extent),depthGradient));
         float weight=dot(weights,vec4(1));
         if(weight<=0)continue;
-        vec4 depths=shadowTexelQuad(AZ_TEX_SHADOW,base+ivec2(x,y),lo,hi);
+        vec4 depths=shadowTexelQuad(mainShadowDepth,sharedDepthSampler,base+ivec2(x,y),lo,hi);
         visible+=dot(weights,step(planeDepths,depths));
         totalWeight+=weight;
     }

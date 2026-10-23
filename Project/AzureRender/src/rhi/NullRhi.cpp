@@ -273,7 +273,7 @@ void NullRhi::destroyPipeline(const VkPipeline pipeline) {
 
 VkDescriptorSetLayout NullRhi::createDescriptorSetLayout(
     const std::vector<DescriptorBindingDesc>& bindings) {
-    (void)bindings;
+    descriptorLayouts.push_back(bindings);
     return mint<VkDescriptorSetLayout>(
         "createDescriptorSetLayout");
 }
@@ -283,7 +283,7 @@ void NullRhi::destroyDescriptorSetLayout(const VkDescriptorSetLayout layout) {
 }
 
 VkDescriptorPool NullRhi::createDescriptorPool(const DescriptorPoolDesc& desc) {
-    (void)desc;
+    descriptorPools.push_back(desc);
     return mint<VkDescriptorPool>("createDescriptorPool");
 }
 
@@ -305,6 +305,7 @@ std::vector<VkDescriptorSet> NullRhi::allocateDescriptorSets(
 }
 
 void NullRhi::writeDescriptorImage(const DescriptorImageWrite& write) {
+    descriptorImageWrites.push_back(write);
     calls.push_back(
         {"writeDescriptorImage",
          "set=" + hexHandle(write.set) + " binding="

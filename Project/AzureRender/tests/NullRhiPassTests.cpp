@@ -6,6 +6,7 @@
 #include "render/GpuCullingResources.hpp"
 
 #include <cassert>
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -106,6 +107,46 @@ std::vector<RecordedCall> runFrame(
     }
 
     renderer.onLoad(context);
+    bool depthLayout=false;
+    for(const auto& layout:rhi.descriptorLayouts){
+        if(std::none_of(layout.begin(),layout.end(),[](const auto& binding){return binding.binding==27;}))continue;
+        const auto binding=[&](unsigned index){return std::find_if(layout.begin(),layout.end(),[&](const auto& value){return value.binding==index;});};
+        const auto image=binding(9),sampler=binding(28);
+        if(image==layout.end()||sampler==layout.end()||image->type!=VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE||sampler->type!=VK_DESCRIPTOR_TYPE_SAMPLER)
+            throw std::runtime_error("Main depth must use an independent image and a shared sampler");
+        unsigned images=0,samplers=0;
+        for(const auto& value:layout)if(value.stages&VK_SHADER_STAGE_FRAGMENT_BIT){
+            if(value.type==VK_DESCRIPTOR_TYPE_SAMPLER||value.type==VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)samplers+=value.count;
+            if(value.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE||value.type==VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)images+=value.count;
+        }
+        const auto array=binding(1);const auto expected=array->count>1?array->count+5:16;
+        if(images!=expected||samplers!=expected)throw std::runtime_error("Separated depth changed the baseline descriptor budget");
+        depthLayout=true;
+    }
+    if(!depthLayout)throw std::runtime_error("Main material descriptor layout was not recorded");
+    bool depthPool=false;
+    for(const auto& pool:rhi.descriptorPools){
+        unsigned images=0,samplers=0;
+        for(const auto& size:pool.sizes){
+            if(size.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE)images+=size.count;
+            if(size.type==VK_DESCRIPTOR_TYPE_SAMPLER)samplers+=size.count;
+        }
+        if(!images&&!samplers)continue;
+        if(images!=pool.maxSets||samplers!=pool.maxSets)throw std::runtime_error("Separated depth pool must own one image and one sampler per set");
+        depthPool=true;
+    }
+    unsigned depthImages=0,depthSamplers=0;
+    for(const auto& write:rhi.descriptorImageWrites){
+        if(write.binding==9&&write.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE){
+            if(write.sampler!=VK_NULL_HANDLE)throw std::runtime_error("Depth image write contains an unrelated sampler");
+            ++depthImages;
+        }
+        if(write.binding==28&&write.type==VK_DESCRIPTOR_TYPE_SAMPLER){
+            if(write.view!=VK_NULL_HANDLE)throw std::runtime_error("Shared sampler write contains an unrelated image");
+            ++depthSamplers;
+        }
+    }
+    if(!depthPool||!depthImages||depthImages!=depthSamplers)throw std::runtime_error("Separated depth allocation and descriptor writes disagree");
     SceneFrameData frame{};
     frame.renderSettings = &settings;
     frame.swapchainWidth = 1280;

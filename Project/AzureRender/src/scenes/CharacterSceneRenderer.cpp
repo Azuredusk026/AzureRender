@@ -452,7 +452,10 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    const auto access=ResourceAccessProfile::select(capabilities,{indexedSlots+4,16,7});
+    ResourceAccessRequirements requirements{indexedSlots+5,16,7};
+    requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
+    requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
+    const auto access=ResourceAccessProfile::select(capabilities,requirements);
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -1346,6 +1349,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
          << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
+         << "  \"materialTextureBindingLayoutVersion\": " << kTextureBindingLayoutVersion << ",\n"
+         << "  \"sharedMaterialTextureSlots\": " << kSharedTextureSlots << ",\n"
          << "  \"lightBufferLayoutVersion\": " << RenderLightGpu::kLayoutVersion << ",\n"
          << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
          << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"
@@ -2345,6 +2350,8 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 4)},
+            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount},
+            {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 11},
         };
         poolDesc.maxSets = frameCount;
@@ -2355,7 +2362,9 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 16},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 15},
+        {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount},
+        {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 11},
     };
     poolDesc.maxSets = descriptorCount;
@@ -2377,6 +2386,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
              VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              textureSlots,
              VK_SHADER_STAGE_FRAGMENT_BIT},
+            {9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {28,VK_DESCRIPTOR_TYPE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {10,
              VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
              1,
@@ -2424,7 +2435,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {6, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {7, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {8, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
-        {9, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
+        {9, VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1, kFragment},
+        {28, VK_DESCRIPTOR_TYPE_SAMPLER, 1, kFragment},
         {10, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_VERTEX_BIT},
         {11, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
         {12, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1, kFragment},
@@ -2447,6 +2459,10 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
+    const auto writeDepthBindings=[this](VkDescriptorSet set){
+        rhi_->writeDescriptorImage({set,9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+        rhi_->writeDescriptorImage({set,28,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,shadowSampler_,VK_IMAGE_LAYOUT_UNDEFINED});
+    };
     if (bindlessTextures_) {
         descriptorSets_ = rhi_->allocateDescriptorSets(
             descriptorPool_,
@@ -2474,14 +2490,6 @@ void CharacterSceneRenderer::createDescriptorSets() {
             appendInfo(info);
         };
         appendTexture(environmentTexture_);
-        {
-            VkDescriptorImageInfo shadowInfo{};
-            shadowInfo.imageLayout =
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
-            shadowInfo.imageView = shadowImageView_;
-            shadowInfo.sampler = shadowSampler_;
-            appendInfo(shadowInfo);
-        }
         appendTexture(toonRampTexture_);
         for (const GpuMaterial& material : gpuMaterials_) {
             appendTexture(material.baseColor);
@@ -2511,6 +2519,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
+            writeDepthBindings(uniformWrite.set);
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
@@ -2601,6 +2610,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
+            writeDepthBindings(uniformWrite.set);
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
@@ -2663,12 +2673,6 @@ void CharacterSceneRenderer::createDescriptorSets() {
                 gpuMaterial.hairData.view,
                 gpuMaterial.hairData.sampler,
                 VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-            writeImage(
-                descriptorIndex,
-                9,
-                shadowImageView_,
-                shadowSampler_,
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
             writeImage(
                 descriptorIndex,
                 11,

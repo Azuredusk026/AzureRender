@@ -43,16 +43,23 @@ float shadowContactRadius(float tileTexels, float maximumRadius) {
     return min(3.0 * tileTexels / 1024.0, maximumRadius);
 }
 
-vec4 shadowTexelQuad(sampler2D depthMap, ivec2 base, ivec2 lo, ivec2 hi) {
+#if defined(AZURE_SEPARATE_SHADOW_SAMPLER)
+vec4 shadowTexelQuad(texture2D depthMap,sampler depthSampler,ivec2 base,ivec2 lo,ivec2 hi) {
+#define AZURE_SHADOW_QUAD_TEXTURE sampler2D(depthMap,depthSampler)
+#else
+vec4 shadowTexelQuad(sampler2D depthMap,ivec2 base,ivec2 lo,ivec2 hi) {
+#define AZURE_SHADOW_QUAD_TEXTURE depthMap
+#endif
     if(all(greaterThanEqual(base,lo)) && all(lessThanEqual(base+ivec2(1),hi))) {
-        vec2 uv=(vec2(base)+1.0)/vec2(textureSize(depthMap,0));
-        return textureGather(depthMap,uv).wzxy;
+        vec2 uv=(vec2(base)+1.0)/vec2(textureSize(AZURE_SHADOW_QUAD_TEXTURE,0));
+        return textureGather(AZURE_SHADOW_QUAD_TEXTURE,uv).wzxy;
     }
-    return vec4(texelFetch(depthMap,clamp(base,lo,hi),0).r,
-                texelFetch(depthMap,clamp(base+ivec2(1,0),lo,hi),0).r,
-                texelFetch(depthMap,clamp(base+ivec2(0,1),lo,hi),0).r,
-                texelFetch(depthMap,clamp(base+ivec2(1),lo,hi),0).r);
+    return vec4(texelFetch(AZURE_SHADOW_QUAD_TEXTURE,clamp(base,lo,hi),0).r,
+                texelFetch(AZURE_SHADOW_QUAD_TEXTURE,clamp(base+ivec2(1,0),lo,hi),0).r,
+                texelFetch(AZURE_SHADOW_QUAD_TEXTURE,clamp(base+ivec2(0,1),lo,hi),0).r,
+                texelFetch(AZURE_SHADOW_QUAD_TEXTURE,clamp(base+ivec2(1),lo,hi),0).r);
 }
+#undef AZURE_SHADOW_QUAD_TEXTURE
 
 vec4 shadowDiskQuadWeights(vec2 offset, float radius) {
     vec4 x=offset.x+vec4(0,1,0,1),y=offset.y+vec4(0,0,1,1);

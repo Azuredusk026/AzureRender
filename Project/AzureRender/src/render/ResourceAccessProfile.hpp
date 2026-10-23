@@ -23,6 +23,12 @@ struct ResourceAccessRequirements {
     std::uint64_t fragmentBuffers = 0;
     bool requireDeviceAddress = false;
     bool requireUpdateAfterBind = false;
+    // Image totals include combined and image-only descriptors. Standalone
+    // samplers have independent stage limits and pool allocation counts.
+    std::uint64_t separateImageSlots = 0;
+    std::uint64_t separateSamplerSlots = 0;
+    std::uint64_t fixedSeparateImageSlots = 0;
+    std::uint64_t fixedSeparateSamplerSlots = 0;
 };
 struct ResourceAccessProfile {
     ResourceAccessMode mode = ResourceAccessMode::Unsupported;

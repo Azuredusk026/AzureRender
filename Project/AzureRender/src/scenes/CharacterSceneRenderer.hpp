@@ -89,9 +89,10 @@ private:
         * kClusterGridY * kClusterGridZ * kMaxSceneLights;
     static constexpr std::uint32_t kEnvironmentMipLevels = 7;
     static constexpr std::uint32_t kIblPrefilterSamples = 32;
-    // Bindless texture array layout: shared slots come first (environment,
-    // shadow map, toon ramp), then per-material blocks of nine textures.
-    static constexpr std::uint32_t kSharedTextureSlots = 3;
+    // Indexed textures start with environment and toon ramp. Depth images
+    // use an independent binding with a shared filtering sampler.
+    static constexpr std::uint32_t kTextureBindingLayoutVersion = 1;
+    static constexpr std::uint32_t kSharedTextureSlots = 2;
     static constexpr std::uint32_t kMaterialTextureSlots = 9;
     static constexpr std::uint32_t kAssetVertexWordCount = 27;
 

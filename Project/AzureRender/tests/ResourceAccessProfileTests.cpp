@@ -27,6 +27,21 @@ int main(){
         limits.maxPerStageResources=128;
         ResourceAccessRequirements request{35,11,4};
         require(ResourceAccessProfile::select(device,request).mode==ResourceAccessMode::Indexed,"Valid indexed layout rejected");
+        auto shared=device;
+        shared.limits.maxPerStageDescriptorSamplers=16;shared.limits.maxDescriptorSetSamplers=16;
+        ResourceAccessRequirements sharedDepth{17,17,7};
+        sharedDepth.separateImageSlots=sharedDepth.fixedSeparateImageSlots=2;
+        sharedDepth.separateSamplerSlots=sharedDepth.fixedSeparateSamplerSlots=1;
+        require(ResourceAccessProfile::select(shared,sharedDepth).mode==ResourceAccessMode::Indexed,
+            "Seventeen images sharing sixteen samplers must use independent limits");
+        auto fewerImages=shared;fewerImages.limits.maxPerStageDescriptorSampledImages=16;
+        require(ResourceAccessProfile::select(fewerImages,sharedDepth).mode==ResourceAccessMode::Unsupported,"Sampled-image capacity must remain independently bounded");
+        auto fewerSamplers=shared;fewerSamplers.limits.maxPerStageDescriptorSamplers=15;
+        require(ResourceAccessProfile::select(fewerSamplers,sharedDepth).mode==ResourceAccessMode::Unsupported,"Shared samplers must retain their sampler capacity check");
+        auto malformed=sharedDepth;malformed.separateImageSlots=18;
+        rejects([&]{ResourceAccessProfile::select(shared,malformed);},"Separate images cannot exceed total image descriptors");
+        malformed=sharedDepth;malformed.separateSamplerSlots=std::numeric_limits<std::uint64_t>::max();
+        rejects([&]{ResourceAccessProfile::select(shared,malformed);},"Separate sampler arithmetic must not overflow");
         for(unsigned field=0;field<5;++field){
             auto bounded=device;
             std::uint32_t* capacities[]={&bounded.limits.maxPerStageDescriptorSamplers,&bounded.limits.maxDescriptorSetSamplers,
@@ -66,6 +81,11 @@ int main(){
         updateLimits.maxUpdateAfterBindDescriptorsInAllPools=38;
         require(ResourceAccessProfile::select(updating,updates).mode==ResourceAccessMode::Unsupported,
             "Update-after-bind pool-wide capacity must be checked");
+        auto sharedUpdates=sharedDepth;sharedUpdates.requireUpdateAfterBind=true;
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=24;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Standalone samplers must count against pool-wide descriptor capacity");
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=25;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Exact separate-descriptor pool capacity must remain valid");
         auto huge=request;huge.sampledImageSlots=std::numeric_limits<std::uint64_t>::max();
         require(ResourceAccessProfile::select(device,huge).mode==ResourceAccessMode::Fixed,"Resource sums must not overflow");
         auto invalid=request;invalid.fixedSampledImageSlots=0;
