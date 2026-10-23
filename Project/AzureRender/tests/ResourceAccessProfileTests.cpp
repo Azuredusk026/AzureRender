@@ -34,6 +34,13 @@ int main(){
         sharedDepth.separateSamplerSlots=sharedDepth.fixedSeparateSamplerSlots=1;
         require(ResourceAccessProfile::select(shared,sharedDepth).mode==ResourceAccessMode::Indexed,
             "Seventeen images sharing sixteen samplers must use independent limits");
+        auto attachmentRequest=sharedDepth;attachmentRequest.fragmentColorAttachments=2;
+        auto attachmentDevice=shared;attachmentDevice.limits.maxPerStageResources=25;
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Unsupported,"Fragment color attachments must count against total stage resources");
+        attachmentDevice.limits.maxPerStageResources=26;
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Indexed,"Exact stage capacity must include color attachments without double counting samplers");
+        attachmentRequest.fragmentColorAttachments=std::numeric_limits<std::uint64_t>::max();
+        require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Unsupported,"Attachment resource arithmetic must not overflow");
         auto fewerImages=shared;fewerImages.limits.maxPerStageDescriptorSampledImages=16;
         require(ResourceAccessProfile::select(fewerImages,sharedDepth).mode==ResourceAccessMode::Unsupported,"Sampled-image capacity must remain independently bounded");
         auto fewerSamplers=shared;fewerSamplers.limits.maxPerStageDescriptorSamplers=15;
@@ -86,6 +93,10 @@ int main(){
         require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Standalone samplers must count against pool-wide descriptor capacity");
         updateLimits.maxUpdateAfterBindDescriptorsInAllPools=25;
         require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Exact separate-descriptor pool capacity must remain valid");
+        sharedUpdates.fragmentColorAttachments=2;updateLimits.maxPerStageUpdateAfterBindResources=25;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Update-after-bind stage totals must include color attachments");
+        updateLimits.maxPerStageUpdateAfterBindResources=26;
+        require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Color attachments must not consume descriptor pool slots");
         auto huge=request;huge.sampledImageSlots=std::numeric_limits<std::uint64_t>::max();
         require(ResourceAccessProfile::select(device,huge).mode==ResourceAccessMode::Fixed,"Resource sums must not overflow");
         auto invalid=request;invalid.fixedSampledImageSlots=0;

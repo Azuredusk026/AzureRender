@@ -28,14 +28,17 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 材质来源选择与常量接收遮罩通过双配置验证。
 原生对象阴影图、采样及剩余生产门禁见[来源验收](../acceptance/nr/character-visibility-inputs.md)。
 实例布局已统一，范围见[实例契约验证](../acceptance/nr/instance-gpu-contract.md)。
-后续对象记录继续使用独立版本、所有权与容量检查。
+对象记录使用独立版本、所有权与容量检查。
 完整几何与平方根 Alpha 已接入公共材质特征。
 原生运算及双配置范围见[投影覆盖验证](../acceptance/nr/material-shadow-coverage.md)。
 注册组件、公共投影及文档链路通过双配置检查。
 范围与宿主边界见[配置验证](../acceptance/nr/object-shadow-configuration.md)。
 独立深度绑定及共享采样器通过双配置检查。
 实际画面与范围见[共享采样验证](../acceptance/nr/shared-depth-sampling.md)。
-接续核对颜色附件容量，再接入对象图集及过滤。
+对象图集、在途记录及分布过滤已接入。
+原生深度对照与完整外观边界见[GPU 验证](../acceptance/nr/object-shadow-gpu.md)。
+腿部仍有七字节误差，继续分离可见量与局部灯贡献。
+随后推进完整头发环带、服饰和距离描边。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。

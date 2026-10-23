@@ -107,7 +107,7 @@ std::vector<RecordedCall> runFrame(
     }
 
     renderer.onLoad(context);
-    bool depthLayout=false;
+    bool depthLayout=false,objectLayout=false;
     for(const auto& layout:rhi.descriptorLayouts){
         if(std::none_of(layout.begin(),layout.end(),[](const auto& binding){return binding.binding==27;}))continue;
         const auto binding=[&](unsigned index){return std::find_if(layout.begin(),layout.end(),[&](const auto& value){return value.binding==index;});};
@@ -120,7 +120,9 @@ std::vector<RecordedCall> runFrame(
             if(value.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE||value.type==VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)images+=value.count;
         }
         const auto array=binding(1);const auto expected=array->count>1?array->count+5:16;
-        if(images!=expected||samplers!=expected)throw std::runtime_error("Separated depth changed the baseline descriptor budget");
+        objectLayout=binding(29)!=layout.end();
+        if(objectLayout&&binding(29)->type!=VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE)throw std::runtime_error("Object atlas must borrow the shared sampler");
+        if(images!=expected+(objectLayout?1U:0U)||samplers!=expected)throw std::runtime_error("Depth layout image/sampler budget differs from its selected capability");
         depthLayout=true;
     }
     if(!depthLayout)throw std::runtime_error("Main material descriptor layout was not recorded");
@@ -132,7 +134,7 @@ std::vector<RecordedCall> runFrame(
             if(size.type==VK_DESCRIPTOR_TYPE_SAMPLER)samplers+=size.count;
         }
         if(!images&&!samplers)continue;
-        if(images!=pool.maxSets||samplers!=pool.maxSets)throw std::runtime_error("Separated depth pool must own one image and one sampler per set");
+        if(images!=pool.maxSets*(objectLayout?2U:1U)||samplers!=pool.maxSets)throw std::runtime_error("Depth pool must match selected images and one shared sampler per set");
         depthPool=true;
     }
     unsigned depthImages=0,depthSamplers=0;
@@ -488,6 +490,12 @@ int main() try {
              "blackhole_taa.frag.spv",
              "blackhole_composite.frag.spv",
              "mesh.vert.spv",
+             "mesh_object.vert.spv",
+             "mesh_object_compute.vert.spv",
+             "mesh_object.frag.spv",
+             "mesh_object_bindless.frag.spv",
+             "character_snapshot_object.frag.spv",
+             "character_snapshot_object_bindless.frag.spv",
              "mesh.frag.spv",
              "mesh_bindless.frag.spv",
              "character_snapshot.frag.spv",
@@ -642,14 +650,14 @@ int main() try {
     // Four materials use 36 texture slots. Environment, shadow and ramp
     // add three. Depth, color, reflection and outline mask add four more.
     // This requires 43 sampled images. One uniform and six storage buffers
-    // bring the per-stage resource requirement to 50. Each independent limit
+    // and two color attachments bring the per-stage resource requirement to 52. Each independent limit
     // must fit exactly; reducing any one by one must select the fixed path.
     VkPhysicalDeviceLimits limits{};
     limits.maxPerStageDescriptorSamplers = 43;
     limits.maxDescriptorSetSamplers = 43;
     limits.maxPerStageDescriptorSampledImages = 43;
     limits.maxDescriptorSetSampledImages = 43;
-    limits.maxPerStageResources = 50;
+    limits.maxPerStageResources = 52;
     limits.maxPerStageDescriptorStorageBuffers = 6;
     limits.maxDescriptorSetStorageBuffers = 11;
     const auto limitedFrame = [&](const VkPhysicalDeviceLimits& value) {

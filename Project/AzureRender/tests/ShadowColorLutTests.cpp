@@ -90,6 +90,9 @@ int main(){
   require(independentPacked.rows[0][1]==2&&independentPacked.rows[3][0]==1,
     "Character visibility source and full receiver mask must have independent packed selectors");
   require(packed.rows[3][0]==0,"Omitted character visibility source must preserve the scene visibility alias");
+  independentNpr["characterVisibility"]="object-shadow";
+  require(azurerender::packMaterialSurfaceProfile(load(independent).materials[0]).rows[3][0]==2,
+    "Object shadow visibility must retain its explicit packed source");
   for(const auto& bad:std::vector<Json>{nullptr,true,0,"unknown"}) {
     auto invalid=independent;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["characterVisibility"]=bad;
     bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}

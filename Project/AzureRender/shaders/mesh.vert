@@ -58,6 +58,9 @@ layout(location = 9) flat out vec4 instanceFaceDirection;
 layout(location = 10) flat out mat4 instanceFaceFrame;
 #endif
 AZURE_VERTEX_OUTPUT(14) vec3 opacityCoordinate;
+#if defined(AZURE_OBJECT_SHADOW)
+layout(location=15) flat out uint instanceObjectShadow;
+#endif
 
 // Morph blend weights + per-primitive gizmo transform (driven by push
 // constants from RenderSettings). The vertex push range starts at byte 128
@@ -77,6 +80,9 @@ float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceD
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 void main() {
+#if defined(AZURE_OBJECT_SHADOW)
+    instanceObjectShadow=instanceData.instances[gl_InstanceIndex].objectShadowIndex;
+#endif
     opacityCoordinate=position;
     eyebrowRegion = browMask;
     instanceFaceDirection = instanceData.instances[gl_InstanceIndex].faceLight;

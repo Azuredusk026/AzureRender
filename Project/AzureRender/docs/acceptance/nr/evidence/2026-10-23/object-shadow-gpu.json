@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "status": "producer-and-filter-verified-full-native-appearance-pending",
+  "run": "build/runs/20261023-195500-object-shadow-gpu-6d1c49",
+  "scope": "有界对象深度、独立可见量及原生深度过滤；完整角色外观保留原门禁",
+  "layout": {
+    "instanceVersion": 2,
+    "instanceBytes": 496,
+    "objectIndexOffset": 424,
+    "objectRecordVersion": 1,
+    "headerBytes": 16,
+    "recordBytes": 96,
+    "capacity": 8,
+    "atlasExtent": [
+      4096,
+      2048
+    ],
+    "format": "D16_UNORM",
+    "logicalDepthBytes": 16777216,
+    "materialSurfaceVersion": 7,
+    "materialSurfaceBytes": 192,
+    "materialTextureSlots": 9,
+    "objectDepthBinding": 29,
+    "sharedDepthSamplerBinding": 28,
+    "fixedSamplers": 16,
+    "fixedImages": 17,
+    "baseFixedImages": 16,
+    "fragmentBuffers": 7,
+    "fragmentColorAttachments": 2,
+    "objectFragmentResources": 26
+  },
+  "checks": [
+    {
+      "config": "release",
+      "suite": "cpu",
+      "groups": 7
+    },
+    {
+      "config": "release",
+      "suite": "numerical",
+      "groups": 5,
+      "sourceQueries": 4
+    },
+    {
+      "config": "release",
+      "suite": "object",
+      "captures": 10,
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672"
+    },
+    {
+      "config": "release",
+      "suite": "coverage",
+      "captures": 11,
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672"
+    },
+    {
+      "config": "release",
+      "suite": "npr",
+      "captures": 3,
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672"
+    },
+    {
+      "config": "debug",
+      "suite": "cpu",
+      "groups": 7
+    },
+    {
+      "config": "debug",
+      "suite": "numerical",
+      "groups": 5,
+      "sourceQueries": 4
+    },
+    {
+      "config": "debug",
+      "suite": "object",
+      "captures": 10,
+      "playerSha256": "8b584cf63ef2bbdcc87dfcb5fe49fe3ae4a57c689ee7f33973ae6b039082de24"
+    },
+    {
+      "config": "debug",
+      "suite": "coverage",
+      "captures": 11,
+      "playerSha256": "8b584cf63ef2bbdcc87dfcb5fe49fe3ae4a57c689ee7f33973ae6b039082de24"
+    },
+    {
+      "config": "debug",
+      "suite": "npr",
+      "captures": 3,
+      "playerSha256": "8b584cf63ef2bbdcc87dfcb5fe49fe3ae4a57c689ee7f33973ae6b039082de24"
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "baseline",
+      "config": "release",
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672",
+      "imageSha256": "ce6d74b0c356493590d69c4acc474555a606f1aff19e7534754ee75769ea2c04",
+      "maximumByteDifference": 0,
+      "changedPixels": 0,
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "color": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "color": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "color": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "color": [
+            161,
+            138,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "name": "native",
+      "config": "release",
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672",
+      "imageSha256": "7eda65705fd01f62cd7407e75384cfc36b4458e416f580827513c7d59c320cd5",
+      "maximumByteDifference": 38,
+      "changedPixels": 35831,
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "color": [
+            81,
+            52,
+            45
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "color": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "color": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "color": [
+            161,
+            138,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "playerSha256": "8b584cf63ef2bbdcc87dfcb5fe49fe3ae4a57c689ee7f33973ae6b039082de24",
+      "imageSha256": "7eda65705fd01f62cd7407e75384cfc36b4458e416f580827513c7d59c320cd5",
+      "maximumByteDifference": 38,
+      "changedPixels": 35831,
+      "points": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "color": [
+            81,
+            52,
+            45
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "color": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "color": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "color": [
+            161,
+            138,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "playerSha256": "fc2e62aa215d3e3d4f2de7f6ecab99ae0b29bf7a92824a0c03496a750b048672",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "maximumByteDifference": 0,
+      "changedPixels": 0,
+      "points": []
+    }
+  ],
+  "sourceFilter": {
+    "frame": 10401,
+    "event": 699,
+    "sourceDepthSha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "forwardDepthSha256": "1608cb012b665ebec373cc6c32c73a0c44842ea5f59f3b638faa704d3b6b8d53",
+    "fixture": {
+      "width": 4096,
+      "height": 2048,
+      "queries": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "input": [
+            [
+              0.6224937438964844,
+              0.6982192993164062,
+              0.48090362548828125,
+              0
+            ],
+            [
+              1251,
+              520,
+              4,
+              2
+            ],
+            [
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          ],
+          "expected": [
+            0.01842176914215088,
+            61.0,
+            0.0196078431372549,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "input": [
+            [
+              0.6168365478515625,
+              0.8429946899414062,
+              0.7059288024902344,
+              0
+            ],
+            [
+              1276,
+              1163,
+              4,
+              2
+            ],
+            [
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          ],
+          "expected": [
+            1.0,
+            0.0,
+            1.0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "input": [
+            [
+              0.6147613525390625,
+              0.83782958984375,
+              0.6921424865722656,
+              0
+            ],
+            [
+              1281,
+              1139,
+              4,
+              2
+            ],
+            [
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          ],
+          "expected": [
+            1.0,
+            0.0,
+            1.0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "input": [
+            [
+              0.5947418212890625,
+              0.8218765258789062,
+              0.6635322570800781,
+              0
+            ],
+            [
+              1368,
+              1059,
+              4,
+              2
+            ],
+            [
+              0.5,
+              0.5,
+              0.25,
+              0.5
+            ]
+          ],
+          "expected": [
+            1.0,
+            0.0,
+            1.0,
+            1
+          ]
+        }
+      ]
+    },
+    "rotationProof": [
+      {
+        "pixel": [
+          1251,
+          919
+        ],
+        "phase": 12,
+        "directPhase": 15,
+        "flippedPhase": 12,
+        "maximumUvError": 0.0
+      },
+      {
+        "pixel": [
+          1276,
+          276
+        ],
+        "phase": 3,
+        "directPhase": 0,
+        "flippedPhase": 3,
+        "maximumUvError": 0.0
+      },
+      {
+        "pixel": [
+          1281,
+          300
+        ],
+        "phase": 7,
+        "directPhase": 4,
+        "flippedPhase": 7,
+        "maximumUvError": 0.0
+      },
+      {
+        "pixel": [
+          1368,
+          380
+        ],
+        "phase": 3,
+        "directPhase": 0,
+        "flippedPhase": 3,
+        "maximumUvError": 0.0
+      }
+    ],
+    "maximumError": 2.98023e-08,
+    "budget": 2e-07
+  },
+  "shaderBinaries": {
+    "identicalConfigurations": true,
+    "count": 59,
+    "binaries": [
+      {
+        "name": "background.frag.spv",
+        "sha256": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8"
+      },
+      {
+        "name": "background.vert.spv",
+        "sha256": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6"
+      },
+      {
+        "name": "background_bindless.frag.spv",
+        "sha256": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116"
+      },
+      {
+        "name": "blackhole.frag.spv",
+        "sha256": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5"
+      },
+      {
+        "name": "blackhole.vert.spv",
+        "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+      },
+      {
+        "name": "blackhole_composite.frag.spv",
+        "sha256": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db"
+      },
+      {
+        "name": "blackhole_taa.frag.spv",
+        "sha256": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf"
+      },
+      {
+        "name": "blackhole_taa_compute.frag.spv",
+        "sha256": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2"
+      },
+      {
+        "name": "bloom_composite.comp.spv",
+        "sha256": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42"
+      },
+      {
+        "name": "bloom_downsample.comp.spv",
+        "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26"
+      },
+      {
+        "name": "character_depth.frag.spv",
+        "sha256": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e"
+      },
+      {
+        "name": "character_depth_bindless.frag.spv",
+        "sha256": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6"
+      },
+      {
+        "name": "character_snapshot.frag.spv",
+        "sha256": "24e85b82e966d3c26763fe4076bf4ddc18b88a6f099ba99ca5d246dc8eb284b5"
+      },
+      {
+        "name": "character_snapshot_bindless.frag.spv",
+        "sha256": "acedf4fc3b1581f7c5fe9336d4850a9a6c0b66c97a466591cac3940bad32d024"
+      },
+      {
+        "name": "character_snapshot_object.frag.spv",
+        "sha256": "03e76c6193d8aa54da1ed4967b88422efb490cc30914f4941f30d2dfbb8aaefd"
+      },
+      {
+        "name": "character_snapshot_object_bindless.frag.spv",
+        "sha256": "fb67767d10f0b62cbd807b41fac12549810ea8d522f6db04500f1fec72d3e8d5"
+      },
+      {
+        "name": "clear.comp.spv",
+        "sha256": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3"
+      },
+      {
+        "name": "color_grading_lut_test.comp.spv",
+        "sha256": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447"
+      },
+      {
+        "name": "cull_indirect.comp.spv",
+        "sha256": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a"
+      },
+      {
+        "name": "editor_ui.frag.spv",
+        "sha256": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550"
+      },
+      {
+        "name": "editor_ui_srgb.frag.spv",
+        "sha256": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b"
+      },
+      {
+        "name": "game-ui.frag.spv",
+        "sha256": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e"
+      },
+      {
+        "name": "game-ui.vert.spv",
+        "sha256": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2"
+      },
+      {
+        "name": "hud.frag.spv",
+        "sha256": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73"
+      },
+      {
+        "name": "hud.vert.spv",
+        "sha256": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789"
+      },
+      {
+        "name": "ibl_prefilter.comp.spv",
+        "sha256": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510"
+      },
+      {
+        "name": "inner_outline.frag.spv",
+        "sha256": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76"
+      },
+      {
+        "name": "inner_outline.vert.spv",
+        "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f"
+      },
+      {
+        "name": "mesh.frag.spv",
+        "sha256": "041b4109fca29e2f4834ae056a94ae5f8f8e25701df58f16eca6625739c0bdd1"
+      },
+      {
+        "name": "mesh.vert.spv",
+        "sha256": "7b96ee9e2d69418e3d7203edcadd0ff32b0c85b67e5873aecf064fc59e42af79"
+      },
+      {
+        "name": "mesh_bindless.frag.spv",
+        "sha256": "13ad310eb6eaece0f0c1f2e7922ee2df6fc741d0d00e6cd72bcdabd7b4cd055e"
+      },
+      {
+        "name": "mesh_compute.vert.spv",
+        "sha256": "f6f9c0928bb0dfc44208f5037f08b3725aca238f3ac7b85312b57a0461c676a8"
+      },
+      {
+        "name": "mesh_object.frag.spv",
+        "sha256": "f0821748ab055999c174df3b71191903f69f726fac900f73ca52651e08d0790f"
+      },
+      {
+        "name": "mesh_object.vert.spv",
+        "sha256": "cf4a88c4f044397466584727dc95f25ccef371a24a781157701cdbd04b66d1db"
+      },
+      {
+        "name": "mesh_object_bindless.frag.spv",
+        "sha256": "8fba6ca41eff50f9991720f76164a67ff32a66a7458520ea050f9fef7c1b6440"
+      },
+      {
+        "name": "mesh_object_compute.vert.spv",
+        "sha256": "ab476e2667a137eb117ca06af02954ade47c78c815b61e5b77355e6d3952906a"
+      },
+      {
+        "name": "object_shadow_filter_test.comp.spv",
+        "sha256": "41d853e4a1ee61defbee05bc99a06defa46d440d5ec4cac53cf9e74194b775cf"
+      },
+      {
+        "name": "outline.frag.spv",
+        "sha256": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134"
+      },
+      {
+        "name": "outline.vert.spv",
+        "sha256": "89b19925e95cf701782777777a3fcf40437208319b46188ad55896f010f4b626"
+      },
+      {
+        "name": "outline_compute.vert.spv",
+        "sha256": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece"
+      },
+      {
+        "name": "outline_mask.frag.spv",
+        "sha256": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9"
+      },
+      {
+        "name": "outline_mask.vert.spv",
+        "sha256": "cb3505b020250cb49558a0c055215581b4f8a69fe2dbbb7ce6b3e4a8b482b2a2"
+      },
+      {
+        "name": "outline_mask_bindless.frag.spv",
+        "sha256": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d"
+      },
+      {
+        "name": "outline_mask_compute.vert.spv",
+        "sha256": "bcfaa8ffacbaf95a2c4bb329c78c8b39ce26a8800dd38cf4ee80159ec4d583ee"
+      },
+      {
+        "name": "pathtracing.comp.spv",
+        "sha256": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec"
+      },
+      {
+        "name": "pathtracing.frag.spv",
+        "sha256": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a"
+      },
+      {
+        "name": "scene_instance_layout_test.comp.spv",
+        "sha256": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984"
+      },
+      {
+        "name": "shadow.frag.spv",
+        "sha256": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245"
+      },
+      {
+        "name": "shadow.vert.spv",
+        "sha256": "2b4cb71f7ec302242f8341b33e481033c14a5edce3c853a44ca0a7ad039cf5b1"
+      },
+      {
+        "name": "shadow_bindless.frag.spv",
+        "sha256": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f"
+      },
+      {
+        "name": "shadow_bounds.comp.spv",
+        "sha256": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77"
+      },
+      {
+        "name": "shadow_compute.vert.spv",
+        "sha256": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e"
+      },
+      {
+        "name": "shadow_filter_test.comp.spv",
+        "sha256": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5"
+      },
+      {
+        "name": "skin.comp.spv",
+        "sha256": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26"
+      },
+      {
+        "name": "sky.frag.spv",
+        "sha256": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16"
+      },
+      {
+        "name": "spatial_antialiasing.frag.spv",
+        "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1"
+      },
+      {
+        "name": "surface_response_test.comp.spv",
+        "sha256": "b4079064cbec76a750d6e6eeabe12b8d8120c1f232d9d7531bf94bd1268ca76a"
+      },
+      {
+        "name": "view_resolve.frag.spv",
+        "sha256": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9"
+      },
+      {
+        "name": "visibility_prototype.comp.spv",
+        "sha256": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+      }
+    ]
+  },
+  "actualInput": {
+    "sourceModelSha256": "539878d8af4e363c1c09999471e54a852648c328a4bed337be0bd25bc1ad098a",
+    "candidateSha256": "e89d0ead3de1d79c40b265f1e7788e9725427947f931aa02877d469345a642b1",
+    "objectShadow": {
+      "center": [
+        -0.032922994611390845,
+        0.8817030359784858,
+        -0.07904755292348345
+      ],
+      "halfExtents": [
+        0.7967071888720466,
+        1.2499696266474514,
+        1.2407684771464365
+      ],
+      "normalBias": 0.009336411952972412,
+      "lightBias": 0.004668205976486206,
+      "enabled": true,
+      "filterRadiusX": 4,
+      "filterRadiusY": 2,
+      "atlasPage": 6
+    }
+  },
+  "sourceFiles": {
+    "CMakeLists.txt": "84aed49acd4e188b59c25ca8fdb5c7b6dc042a580610c6a51b2d99708adfe4bc",
+    "shaders/object_shadow.glsl": "1c2b4892ea0a60fc4e486b28a755a405f9a07c0335bec0096a921d34095595f8",
+    "shaders/object_shadow_filter_test.comp": "0038470de7c6bde6c11156ffd92cd0aa5c04c3fbd75fefc3ad3b0ce469be1472",
+    "shaders/instance_data.glsl": "0903ae4d362c522089281de78e13d045c2b16df2d732f572195ad16e96882886",
+    "shaders/mesh.frag": "ba017ba0872fa4ecee963919ba64e181f66c9383f08aa2482a4dc4a9e66ff687",
+    "shaders/mesh.vert": "c06c12c458ca35aca179bd5dc65bf0dcda39f5037604c4d85fbb0ad017448487",
+    "shaders/shadow.vert": "4aa3e23b8b8bc5a3f2925bc30a6634808b298ca07f6477527afd34b7f99a93b6",
+    "shaders/scene_instance_layout_test.comp": "ea308a9fbf18c45370c22ade9144633fadb8b4a8f4ac336b27044a6697de3273",
+    "src/render/ObjectShadow.hpp": "e18c7d91995b566a4b1408a8b8bb8fd5b8374f083f0d29f95065c36dadb28263",
+    "src/render/ObjectShadowAtlas.hpp": "59de59a8edbeb3114a3f178d117ed61ea951e830a6b75d14dcfbc1436637826e",
+    "src/render/SceneInstanceGpuData.hpp": "c6fd5b1db1188d916309cbbcad1a968d0441e5b6e072b8b267de367065be077a",
+    "src/render/SceneInstanceSnapshot.hpp": "018bfc0d39c0fc455fc5d924a108a0ddcdf0dc045fcde06f6d9da3f28ac9f487",
+    "src/render/ShadowTileBounds.hpp": "80d358016a5cdadeaf393a43b01bc432ab2582886bf1482b1f23f506a43bd9d4",
+    "src/render/ResourceAccessProfile.cpp": "7c8d411f343a5252bd7075d9c8398e1191e34a57cbec58bcf0829b85e13d807e",
+    "src/render/ResourceAccessProfile.hpp": "e3995ed503b34b824abadd69b7d5e122b4d3b4d2349fbfc9eb0cf50a9b506515",
+    "src/scenes/CharacterSceneRenderer.cpp": "79e10d965e4081543c933bd25db61704ed6a493c736fc5fc83ca6e110afb44a6",
+    "src/scenes/CharacterSceneRenderer.hpp": "78473ff9e8ff218e597d0f85004172cfa008368c782d3023c938d3b5bc67f649",
+    "src/assets/GltfLoader.cpp": "65fd652fc0a1450b68073d2ba3459f86b322eb8d73be57799bcac0cc7aba8c89",
+    "src/assets/GltfLoader.hpp": "04c3976d1aa538e6f5ab244442bd62a4d668366f85ee2c634cb8709a39da0751",
+    "src/assets/MaterialSurfaceProfile.hpp": "206478fa7df523f65c4188a73cd7552acf903bbb2c0a194fecf2c532aff42426",
+    "tests/ObjectShadowAtlasTests.cpp": "8468845b5f74eb97175cbfa0d5edcd54f33f171e96a90ebae5369ee74abb1ca0",
+    "tests/ObjectShadowRecordingTests.cpp": "c4f77dd83a08b39fd4863184ee47f7357ae312507153c2e2373fb868a226b3c6",
+    "tests/ObjectShadowFilteringGpuTests.cpp": "b2b9731797ba007993331d80a421302b915c2a24d26e1bcc6c02a5b4ea9497f2",
+    "tests/ResourceAccessProfileTests.cpp": "af98866a935ad46947974fc504b21594d4ace37b871a184341d67b0dd299624c",
+    "tests/SceneInstanceGpuLayoutTests.cpp": "ec18cb040cec3d435a3c2dd59f203c170969c1993eb265894565a6240f6a0113",
+    "tests/NullRhiPassTests.cpp": "4497fba765eb022e4987e062bdc257c075334911f9483541da6dc9f035d4ca68",
+    "tests/ShadowColorLutTests.cpp": "31665e01e5714ba1deb3392cedecb6bfce4cefff12336f655b9752ce24537ed4",
+    "tools/test_object_shadow_gpu.py": "5d5057a0eec9bb5a2ddfa8987c5c95deec3174546725d651d8c4a78fdfd127cf",
+    "tools/test_npr_illumination_gpu.py": "cc613e313d9d0efe76a6010368e1c6f374ca571ae5a15faa1cb267ade858b772",
+    "tools/test_character_screen_rim_gpu.py": "c196daec2ab5ad104266da7a9b4ba08f80cf2866dfab159a4237e490b9ca1b99"
+  },
+  "failureRecords": {
+    "gpu-contract-red.log": "92bd7e5fe2b718cf6e0c76a57359d71de60c071db2658f650ba325f10f60dba5",
+    "atlas-red.log": "b4a9f5b905d3978734a8339b35fbf643025c4cb2594e5fd1dd50c655d6772702",
+    "object-release-v2.log": "354d3e901185869f2035fc916ffce0087b5c44e5c44b732a5fcae4dca895a077",
+    "object-release-v4.log": "738b97b87e9a327ef1bd63324cbb694ca2ab6094bdbbfeb9a306d60a38c77ce5",
+    "object-release-v5.log": "738b97b87e9a327ef1bd63324cbb694ca2ab6094bdbbfeb9a306d60a38c77ce5",
+    "cpu-debug.log": "f580cf877de404922818bee986c52bb694095226c537873b2e5ff0239ed63a62"
+  },
+  "fixtureCorrections": [
+    "宽投影平面的偏置按过滤足迹配置",
+    "镜像材质使用同姿态零遮挡控制",
+    "精确容量包含两个颜色附件"
+  ],
+  "remaining": [
+    "真实腿部最大七字节差异：独立可见量、局部灯包裹及镜面输入",
+    "实际对象深度生产与全区域比较",
+    "动态姿态、前侧背机位及主项目晋升",
+    "完整多层头发、服饰和距离描边"
+  ]
+}

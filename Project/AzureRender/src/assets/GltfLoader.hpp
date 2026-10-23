@@ -214,7 +214,7 @@ struct AssetMaterial {
             bool present=false;
             float bias=0;
         } mainRamp;
-        enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow };
+        enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow };
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
     } nprDiffuse;
     struct SpecularInput {

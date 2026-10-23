@@ -29,6 +29,7 @@ struct ResourceAccessRequirements {
     std::uint64_t separateSamplerSlots = 0;
     std::uint64_t fixedSeparateImageSlots = 0;
     std::uint64_t fixedSeparateSamplerSlots = 0;
+    std::uint64_t fragmentColorAttachments = 0;
 };
 struct ResourceAccessProfile {
     ResourceAccessMode mode = ResourceAccessMode::Unsupported;

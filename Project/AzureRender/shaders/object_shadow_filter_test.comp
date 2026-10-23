@@ -1,0 +1,29 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+layout(local_size_x=1) in;
+layout(set=0,binding=0,std430) buffer Output { vec4 results[]; } outputData;
+layout(set=0,binding=20,std430) readonly buffer Records { vec2 values[]; } records;
+layout(set=0,binding=1,std430) readonly buffer Queries { vec4 values[]; } queries;
+layout(set=0,binding=9) uniform texture2D clearDepth;
+layout(set=0,binding=29) uniform texture2D objectDepth;
+layout(set=0,binding=28) uniform sampler sharedSampler;
+#include "object_shadow.glsl"
+vec2 objectShadowRecordPair(uint index) { return records.values[index]; }
+void main(){
+    uint i=gl_GlobalInvocationID.x;
+    if(i<4u){
+        ObjectShadowRecord r;
+        bool valid=objectShadowLoadRecord(3u,i,r);
+        outputData.results[i]=valid?vec4(r.worldToUnit[3].x,r.biasAndFilter.x,r.atlasRect.z,1):vec4(0);
+    }else if(i==4u){
+        ObjectShadowRecord r;objectShadowLoadRecord(3u,1u,r);
+        outputData.results[i]=vec4(objectShadowReceiver(r,vec3(.5),vec3(0,0,1)).z,
+            objectShadowReceiver(r,vec3(.5),vec3(0,0,-1)).z,
+            objectShadowDistribution(61,11.3707466,.4809036),objectShadowUnorm8(.0184217683));
+    }else{
+        uint j=(i-5u)*3u;vec4 a=queries.values[j],b=queries.values[j+1u],c=queries.values[j+2u];
+        vec2 filtered=objectShadowFilter(objectDepth,sharedSampler,a.xy,a.z,ivec2(b.xy),c,b.zw);
+        vec2 clear=objectShadowFilter(clearDepth,sharedSampler,vec2(.5),a.z,ivec2(0),vec4(0,0,1,1),vec2(0));
+        outputData.results[i]=vec4(filtered,objectShadowUnorm8(filtered.x),clear.x);
+    }
+}

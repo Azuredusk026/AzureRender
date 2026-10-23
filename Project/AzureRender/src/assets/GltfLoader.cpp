@@ -1842,9 +1842,10 @@ AssetMaterial loadMaterial(
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             if(npr.contains("characterVisibility")) {
                 const auto& source=npr.at("characterVisibility");
-                if(!source.is_string()||(source!="scene-visibility"&&source!="main-light-shadow"))
+                if(!source.is_string()||(source!="scene-visibility"&&source!="main-light-shadow"&&source!="object-shadow"))
                     throw std::invalid_argument("Invalid nprDiffuse.characterVisibility");
-                result.nprDiffuse.characterVisibility=source=="main-light-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow
+                result.nprDiffuse.characterVisibility=source=="object-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::ObjectShadow
+                    :source=="main-light-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow
                     :AssetMaterial::NprDiffuse::CharacterVisibility::SceneVisibility;
             }
             if(npr.contains("lighting")) {

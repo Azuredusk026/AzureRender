@@ -2,6 +2,7 @@
 
 #include "scene/RenderBatching.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/ObjectShadow.hpp"
 #include <array>
 #include <cmath>
 #include <memory>
@@ -46,6 +47,7 @@ struct SceneInstanceSnapshot final {
     const std::vector<std::size_t> indirectOffsets;
     const std::vector<std::size_t> transparentOffsets;
     const std::vector<std::vector<float>> nodeWorldOpacities;
+    const std::vector<ObjectShadowPage> objectShadowPages;
 
     SceneInstanceSnapshot(std::vector<scene::SceneInstance> source,
         std::vector<std::uint32_t> visible,
@@ -57,15 +59,23 @@ struct SceneInstanceSnapshot final {
         std::uint32_t frame = 0, RecordingGizmoState gizmoState = {},
         RecordingBufferSet bufferSet = {},
         std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews = {},
-        std::vector<std::vector<float>> nodeOpacities = {})
+        std::vector<std::vector<float>> nodeOpacities = {},
+        std::vector<ObjectShadowPage> objectPages = {})
         : settings(std::move(renderSettings)), indirectBuffer(indirectHandle), frameIndex(frame),
           gizmo(std::move(gizmoState)), buffers(std::move(bufferSet)), instances(std::move(source)), visibleIndices(std::move(visible)),
           opaqueSpans(std::move(opaque)), visibleSpans(std::move(visibleBatches)), shadowSpans(std::move(shadow)),
           shadowViewSpans(std::move(shadowViews)),
           indirectOffsets(std::move(indirect)), transparentOffsets(std::move(transparent)),
-          nodeWorldOpacities(std::move(nodeOpacities)) {}
+          nodeWorldOpacities(std::move(nodeOpacities)),objectShadowPages(std::move(objectPages)) {}
 
     void validateForRecording() const {
+        if(objectShadowPages.size()>kObjectShadowCapacity)throw std::logic_error("Snapshot object shadow capacity exceeded");
+        std::array<bool,kObjectShadowCapacity> occupied{};
+        for(const auto& page:objectShadowPages){
+            if(page.instanceIndex>=instances.size()||page.page>=kObjectShadowCapacity||occupied[page.page])
+                throw std::logic_error("Snapshot object shadow identity invalid");
+            occupied[page.page]=true;
+        }
         if (buffers.maxDrawIndirectCount == 0)
             throw std::logic_error("Snapshot indirect batch limit is zero");
         if (buffers.vertices.size() != buffers.indices.size())

@@ -14,6 +14,7 @@
 #include "render/GpuCullingResources.hpp"
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
+#include "render/ObjectShadowAtlas.hpp"
 #include "render/SceneInstanceGpuData.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
@@ -94,6 +95,7 @@ private:
     static constexpr std::uint32_t kTextureBindingLayoutVersion = 1;
     static constexpr std::uint32_t kSharedTextureSlots = 2;
     static constexpr std::uint32_t kMaterialTextureSlots = 9;
+    static constexpr std::uint32_t kMaterialColorAttachmentCount = 2;
     static constexpr std::uint32_t kAssetVertexWordCount = 27;
 
     struct GpuTexture {
@@ -265,6 +267,11 @@ private:
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
     VkSampler shadowSampler_ = VK_NULL_HANDLE;
     std::array<std::unique_ptr<ShadowTileBounds>,kMaxFramesInFlight> shadowBounds_;
+    std::unique_ptr<ObjectShadowAtlas> objectShadowAtlas_;
+    std::array<VkImageView,kMaxFramesInFlight> objectShadowBoundViews_{};
+    bool objectShadowPrepared_=false;
+    unsigned objectShadowMaxDimension_=0;
+    std::vector<ObjectShadowPage> objectShadowPages_;
 
     LoadedAsset asset_;
     std::vector<JointBounds> jointBounds_;
@@ -344,6 +351,7 @@ private:
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowPipeline_ = VK_NULL_HANDLE;
 
     // Per-frame state.
     std::size_t currentFrame_ = 0;
@@ -462,10 +470,13 @@ private:
         std::uint32_t height);
     void rebuildSceneInstances();
     void recordShadowPass(const RenderContext& context);
+    void prepareObjectShadows();
+    void recordObjectShadows(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands);
     void recordShadowDraws(const RenderContext& context,
         std::uint32_t firstCascade = 0, std::uint32_t cascadeCount = kShadowCascadeCount,
         const SceneInstanceSnapshot* snapshot = nullptr,
-        rhi::ICommandRecorder* recordingCommands = nullptr);
+        rhi::ICommandRecorder* recordingCommands = nullptr,
+        const ObjectShadowPage* objectPage = nullptr);
     void recordMainPass(const RenderContext& context);
     void recordMainDraws(const RenderContext& context, std::uint32_t stage = 0,
         const SceneInstanceSnapshot* snapshot = nullptr,

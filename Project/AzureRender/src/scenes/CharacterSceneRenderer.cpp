@@ -36,6 +36,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace azurerender::internal;
 
@@ -455,7 +456,22 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     ResourceAccessRequirements requirements{indexedSlots+5,16,7};
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
-    const auto access=ResourceAccessProfile::select(capabilities,requirements);
+    requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
+    auto access=ResourceAccessProfile::select(capabilities,requirements);
+    auto objectRequirements=requirements;
+    ++objectRequirements.sampledImageSlots;++objectRequirements.fixedSampledImageSlots;
+    ++objectRequirements.separateImageSlots;++objectRequirements.fixedSeparateImageSlots;
+    const auto objectAccess=ResourceAccessProfile::select(capabilities,objectRequirements);
+    const bool objectRequested=std::any_of(scene_.nodes.begin(),scene_.nodes.end(),[](const auto& node){return node.objectShadow&&node.objectShadow->enabled;});
+    objectShadowMaxDimension_=limits.maxImageDimension2D;
+    const bool objectFormat=rhi_->supportsSampledImage(VK_FORMAT_D16_UNORM,true)
+        &&(!objectShadowMaxDimension_||objectShadowMaxDimension_>=ObjectShadowAtlas::kWidth);
+    if(objectRequested){
+        if(!objectFormat||objectAccess.mode==ResourceAccessMode::Unsupported)
+            throw std::runtime_error("Object shadows require sampled D16, a 4096 atlas and one additional sampled-image slot: "+objectAccess.diagnostic);
+        access=objectAccess;
+    }
+    objectShadowPrepared_=objectFormat&&objectAccess.mode!=ResourceAccessMode::Unsupported&&objectAccess.mode==access.mode;
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
@@ -466,7 +482,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + std::to_string(limits.maxPerStageDescriptorSamplers));
     enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();},true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
-    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
+    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
     enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);buildSceneState();},true);
     loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
     RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
@@ -487,6 +503,8 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     return loadJobs_.empty();
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
+        [](const auto& node){return node.objectShadow&&node.objectShadow->enabled;}))return false;
     if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
@@ -570,7 +588,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
         std::move(visibleShadowSpansByMeshKey_), std::move(indirectInstanceOffsets_), std::move(transparentIndexOffsets_), std::move(visibleSpansByMeshKey_), *renderSettings_,
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
-        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities));
+        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_));
     visibleInstances_.clear();
 }
 
@@ -893,6 +911,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         }
     }
 
+    prepareObjectShadows();
     if (sceneInstances_.empty() || instanceBuffers_.empty()) {
         return;
     }
@@ -907,7 +926,9 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey-1]->asset;
         destination[slot].meta = {pose.jointBase, pose.vertexBase, morphGpuMeshes_.at(meshKey).tableBase, pose.morphWeightBase};
         destination[slot].faceLight = instanceFaceLight(mesh, pose.pose, model);
-        destination[slot].morph = {pose.morph[0], pose.morph[1], 0, 0};
+        destination[slot].morph = {pose.morph[0], pose.morph[1]};
+        destination[slot].objectShadowIndex=0;
+        destination[slot].instanceFlags=0;
         destination[slot].faceFrame = instanceFaceFrame(mesh,pose.pose,model);
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
@@ -920,7 +941,33 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
                 multiply(cascadeLightViewProjections_[cascade], model);
         }
     }
+    for(std::size_t index=0;index<objectShadowPages_.size();++index)
+        destination[objectShadowPages_[index].instanceIndex].objectShadowIndex=static_cast<std::uint32_t>(index+1);
     allocator_->flush(instanceBuffers_[currentFrame_],0,instanceBuffers_[currentFrame_].size);
+}
+
+void CharacterSceneRenderer::prepareObjectShadows(){
+    std::unordered_map<std::string,const ecs::ObjectShadowComponent*> settings;
+    for(const auto& node:scene_.nodes)if(node.objectShadow&&node.objectShadow->enabled)settings.emplace(node.id,&*node.objectShadow);
+    std::vector<ObjectShadowInput> inputs;
+    for(const auto& instance:sceneInstances_){
+        const auto found=settings.find(instance.nodeId);
+        if(found!=settings.end())inputs.push_back({*found->second,instance.model,instance.sourceIndex});
+    }
+    if(!inputs.empty()&&!objectShadowPrepared_)throw std::runtime_error("Object shadow layout is unavailable; reload the scene with a supported resource profile");
+    objectShadowPages_=buildObjectShadowFrame(inputs,internal::scaleVector(frameMainLight_,-1.F)).pages;
+    if(!objectShadowPrepared_)return;
+    std::vector<ObjectShadowGpuRecord> records;
+    for(const auto& page:objectShadowPages_)records.push_back(page.gpu);
+    shadowBounds_[currentFrame_]->writeObjectRecords(records);
+    if(!objectShadowPages_.empty())objectShadowAtlas_->ensureImage(objectShadowMaxDimension_);
+    const auto view=objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_;
+    if(objectShadowBoundViews_[currentFrame_]==view)return;
+    const std::size_t count=bindlessTextures_?1:totalMaterialCount();
+    for(std::size_t index=0;index<count;++index)
+        rhi_->writeDescriptorImage({descriptorSets_.at(currentFrame_*count+index),29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+    objectShadowBoundViews_[currentFrame_]=view;
 }
 
 const rhi::GpuBuffer& CharacterSceneRenderer::renderVertexBuffer(
@@ -978,6 +1025,7 @@ void CharacterSceneRenderer::registerPasses(
         "character-lights", lightBuffers_[context.currentFrame]);
     const auto morphTargetResource=importHostStorage("character-morph-targets-v1",morphTargetBuffer_);
     const auto morphWeightResource=importHostStorage("character-morph-weights",morphWeightBuffers_[context.currentFrame]);
+    const auto instanceResource=importHostStorage("character-instances-v2",instanceBuffers_[context.currentFrame]);
     const auto clusterHeaderResource = importHostStorage(
         "character-cluster-headers",
         clusterHeaderBuffers_[context.currentFrame]);
@@ -1067,18 +1115,40 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(shadow, indexResources[meshKey], RenderGraphUsage::IndexBuffer, false);
     }
     graph.use(shadow, jointResource, RenderGraphUsage::VertexStorage, false);
+    graph.use(shadow,instanceResource,RenderGraphUsage::VertexStorage,false);
     graph.use(shadow,morphTargetResource,RenderGraphUsage::VertexStorage,false);
     graph.use(shadow,morphWeightResource,RenderGraphUsage::VertexStorage,false);
     if (skinnedResource) graph.use(shadow, *skinnedResource, RenderGraphUsage::VertexStorage, false);
     graph.attachment(shadow, resources.shadow, RenderGraphUsage::DepthAttachment,
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     auto* bounds=shadowBounds_[context.currentFrame].get();
-    rhi::BufferBarrierDesc boundsInitial{};boundsInitial.buffer=bounds->buffer().buffer;boundsInitial.size=bounds->buffer().size;
+    rhi::BufferBarrierDesc boundsInitial{};boundsInitial.buffer=bounds->buffer().buffer;boundsInitial.size=bounds->depthBoundsBytes();
     boundsInitial.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;boundsInitial.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;
     const auto boundsResource=graph.importBuffer("shadow-tile-bounds",boundsInitial);
     const auto boundsPass=graph.addCommandPass("shadow-tile-bounds",[bounds](rhi::ICommandRecorder& commands){bounds->record(commands);});
     graph.use(boundsPass,resources.shadow,RenderGraphUsage::ComputeSampled,false);
     graph.use(boundsPass,boundsResource,RenderGraphUsage::Storage,true);
+    std::optional<RenderGraph::ResourceId> objectRecordsResource,objectAtlasResource;
+    if(objectShadowPrepared_){
+        auto initial=boundsInitial;initial.offset=bounds->objectRecordsOffset();initial.size=bounds->buffer().size-initial.offset;
+        initial.dstStageMask=VK_PIPELINE_STAGE_HOST_BIT;initial.dstAccessMask=VK_ACCESS_HOST_WRITE_BIT;
+        objectRecordsResource=graph.importBuffer("object-shadow-records-v1",initial);
+    }
+    if(!frozenInstances->objectShadowPages.empty()){
+        rhi::ImageBarrierDesc initial{};initial.image=objectShadowAtlas_->image().image;
+        initial.newLayout=VK_IMAGE_LAYOUT_UNDEFINED;initial.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        objectAtlasResource=graph.importImage("object-shadow-atlas",initial);
+        const auto objectPass=graph.addGraphicsPass("object-shadow-atlas",objectShadowAtlas_->beginDescription(),
+            [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){recordObjectShadows(*frozenContext,*frozenInstances,commands);});
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(objectPass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            graph.use(objectPass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+        }
+        for(const auto resource:{jointResource,instanceResource,morphTargetResource,morphWeightResource})
+            graph.use(objectPass,resource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(objectPass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        graph.attachment(objectPass,*objectAtlasResource,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    }
     const auto mainCounters = std::make_shared<SceneSubmissionCounters>();
     mainCounters->instances = frozenInstances->instances.size();
     mainCounters->visibleInstances = frozenInstances->visibleIndices.size();
@@ -1140,6 +1210,9 @@ void CharacterSceneRenderer::registerPasses(
     graph.use(prepass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
     graph.use(prepass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
     graph.use(prepass,boundsResource,RenderGraphUsage::FragmentStorage,false);
+    graph.use(prepass,instanceResource,RenderGraphUsage::VertexStorage,false);
+    if(objectRecordsResource)graph.use(prepass,*objectRecordsResource,RenderGraphUsage::FragmentStorage,false);
+    if(objectAtlasResource)graph.use(prepass,*objectAtlasResource,RenderGraphUsage::Sampled,false);
     graph.use(prepass,lightResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,clusterHeaderResource,RenderGraphUsage::FragmentStorage,false);
     graph.use(prepass,clusterIndexResource,RenderGraphUsage::FragmentStorage,false);
@@ -1217,6 +1290,9 @@ void CharacterSceneRenderer::registerPasses(
     }
     if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
     graph.use(main, boundsResource, RenderGraphUsage::FragmentStorage, false);
+    graph.use(main,instanceResource,RenderGraphUsage::VertexStorage,false);
+    if(objectRecordsResource)graph.use(main,*objectRecordsResource,RenderGraphUsage::FragmentStorage,false);
+    if(objectAtlasResource)graph.use(main,*objectAtlasResource,RenderGraphUsage::Sampled,false);
     graph.use(main, lightResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterHeaderResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main, clusterIndexResource, RenderGraphUsage::FragmentStorage, false);
@@ -1244,11 +1320,21 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
             VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     recordComputeSkinning(context);
     recordShadowPass(context);
+    if(!instanceSnapshot_->objectShadowPages.empty()){
+        context.commands->beginRenderPass(objectShadowAtlas_->beginDescription());
+        recordObjectShadows(context,*instanceSnapshot_,*context.commands);
+        context.commands->endRenderPass();
+        context.commands->imageBarrier({objectShadowAtlas_->image().image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+            VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    }
     context.commands->imageBarrier({context.shadowImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
     const auto& bounds=shadowBounds_[context.currentFrame];
-    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->buffer().size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
     bounds->record(*context.commands);
-    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->buffer().size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    if(objectShadowPrepared_)context.commands->bufferBarrier({bounds->buffer().buffer,bounds->objectRecordsOffset(),bounds->buffer().size-bounds->objectRecordsOffset(),
+        VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     rhi::RenderPassBeginDesc begin{};begin.renderPass=overlayDepthPass_;begin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];begin.extent=context.renderExtent;
     VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues={color,linear,depth};
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
@@ -1349,6 +1435,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
          << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
+         << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
+         << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
+         << "  \"objectShadowPages\": " << (instanceSnapshot_?instanceSnapshot_->objectShadowPages.size():0) << ",\n"
+         << "  \"objectShadowDepthBytes\": " << (objectShadowAtlas_&&objectShadowAtlas_->image().image?ObjectShadowAtlas::kDepthBytes:0) << ",\n"
          << "  \"materialTextureBindingLayoutVersion\": " << kTextureBindingLayoutVersion << ",\n"
          << "  \"sharedMaterialTextureSlots\": " << kSharedTextureSlots << ",\n"
          << "  \"lightBufferLayoutVersion\": " << RenderLightGpu::kLayoutVersion << ",\n"
@@ -2350,7 +2440,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
              frameCount * (textureSlots + 4)},
-            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount},
+            {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 11},
         };
@@ -2363,7 +2453,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 15},
-        {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount},
+        {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 11},
     };
@@ -2377,7 +2467,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             kSharedTextureSlots
             + kMaterialTextureSlots
                 * static_cast<std::uint32_t>(totalMaterialCount());
-        descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+        std::vector<rhi::DescriptorBindingDesc> bindings={
             {0,
              VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
              1,
@@ -2418,11 +2508,13 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
-        });
+        };
+        if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
     constexpr VkShaderStageFlags kFragment = VK_SHADER_STAGE_FRAGMENT_BIT;
-    descriptorSetLayout_ = rhi_->createDescriptorSetLayout({
+    std::vector<rhi::DescriptorBindingDesc> bindings={
         {0,
          VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
          1,
@@ -2455,13 +2547,18 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {25,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
         {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
         {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
-    });
+    };
+    if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
+    descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
+    objectShadowBoundViews_.fill(objectShadowPrepared_&&objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_);
     const auto writeDepthBindings=[this](VkDescriptorSet set){
         rhi_->writeDescriptorImage({set,9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
         rhi_->writeDescriptorImage({set,28,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,shadowSampler_,VK_IMAGE_LAYOUT_UNDEFINED});
+        if(objectShadowPrepared_)rhi_->writeDescriptorImage({set,29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+            objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
     };
     if (bindlessTextures_) {
         descriptorSets_ = rhi_->allocateDescriptorSets(
@@ -2742,13 +2839,13 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     const std::string shaderDirectory = context.shaderDirectory;
     const auto vertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
-            ? "/mesh_compute.vert.spv"
-            : "/mesh.vert.spv"));
+        azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
+            ? (computeSkinningEnabled_?"/mesh_object_compute.vert.spv":"/mesh_object.vert.spv")
+            : (computeSkinningEnabled_?"/mesh_compute.vert.spv":"/mesh.vert.spv")));
     const auto fragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
-            ? "/mesh_bindless.frag.spv"
-            : "/mesh.frag.spv"));
+        azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
+            ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
+            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")));
     const auto outlineVertexCode =
         azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
             ? "/outline_compute.vert.spv"
@@ -2846,7 +2943,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.vertexStride =
             static_cast<std::uint32_t>(sizeof(AssetVertex));
         materialDesc.vertexAttributes = materialAttributes;
-        materialDesc.colorAttachmentCount = 2;
+        materialDesc.colorAttachmentCount = kMaterialColorAttachmentCount;
         materialDesc.renderPass = context.sceneRenderPass;
         materialDesc.layout = pipelineLayout_;
         // The Vulkan lens flips Y and uses a positive-height viewport.
@@ -2861,7 +2958,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")));
+        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv"))));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
         depthDesc.colorAttachmentCount=2;
         overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
@@ -2942,6 +3039,11 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.colorAttachmentCount = 0;
         shadowDesc.renderPass = context.shadowRenderPass;
         shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
+        if(objectShadowPrepared_){
+            shadowDesc.renderPass=objectShadowAtlas_->renderPass();
+            shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
+            objectShadowPipeline_=rhi_->createGraphicsPipeline(shadowDesc);
+        }
     } catch (...) {
         rhi_->destroyShaderModule(shadowFragmentModule);
         rhi_->destroyShaderModule(shadowVertexModule);
@@ -2986,6 +3088,7 @@ void CharacterSceneRenderer::destroyResources() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
+             &objectShadowPipeline_,
              &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -2998,6 +3101,7 @@ void CharacterSceneRenderer::destroyResources() {
         pipelineLayout_ = VK_NULL_HANDLE;
     }
     for(auto& bounds:shadowBounds_)bounds.reset();
+    objectShadowAtlas_.reset();objectShadowPages_.clear();objectShadowPrepared_=false;objectShadowBoundViews_.fill(VK_NULL_HANDLE);
     if (descriptorPool_ != VK_NULL_HANDLE) {
         rhi_->destroyDescriptorPool(descriptorPool_);
         descriptorPool_ = VK_NULL_HANDLE;
@@ -3123,6 +3227,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
+             &objectShadowPipeline_,
              &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -3478,6 +3583,10 @@ void CharacterSceneRenderer::updateClusteredLighting(
     }
 }
 
+void CharacterSceneRenderer::recordObjectShadows(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    for(const auto& page:snapshot.objectShadowPages)recordShadowDraws(context,4,1,&snapshot,&commands,&page);
+}
+
 void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
     rhi::ICommandRecorder& commands = *context.commands;
     rhi::RenderPassBeginDesc shadowPass{};
@@ -3497,12 +3606,12 @@ void CharacterSceneRenderer::recordShadowPass(const RenderContext& context) {
 
 void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
     std::uint32_t firstCascade, std::uint32_t cascadeCount,
-    const SceneInstanceSnapshot* snapshot, rhi::ICommandRecorder* recordingCommands) {
+    const SceneInstanceSnapshot* snapshot, rhi::ICommandRecorder* recordingCommands,const ObjectShadowPage* objectPage) {
     if (snapshot == nullptr) throw std::logic_error("Shadow recording requires an instance snapshot");
     rhi::ICommandRecorder& commands = recordingCommands != nullptr ? *recordingCommands : *context.commands;
 
-    const std::uint32_t cascadeResolution = context.shadowMapSize / 2;
-    commands.bindPipeline(shadowPipeline_);
+    const std::uint32_t cascadeResolution = objectPage?kObjectShadowTileSize:context.shadowMapSize/2;
+    commands.bindPipeline(objectPage?objectShadowPipeline_:shadowPipeline_);
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
     }
@@ -3517,16 +3626,16 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
          cascade < firstCascade + cascadeCount;
          ++cascade) {
         const VkOffset2D cascadeOffset{
-            static_cast<std::int32_t>((cascade % 2) * cascadeResolution),
-            static_cast<std::int32_t>((cascade / 2) * cascadeResolution),
+            static_cast<std::int32_t>((objectPage?objectPage->page%kObjectShadowColumns:cascade%2)*cascadeResolution),
+            static_cast<std::int32_t>((objectPage?objectPage->page/kObjectShadowColumns:cascade/2)*cascadeResolution),
         };
         const float resolution = static_cast<float>(cascadeResolution);
         commands.setViewport(
             resolution, resolution,
             static_cast<float>(cascadeOffset.x),
             static_cast<float>(cascadeOffset.y));
-        commands.setScissor(
-            {cascadeResolution, cascadeResolution}, cascadeOffset);
+        if(objectPage)commands.setScissor({cascadeResolution-2,cascadeResolution-2},{cascadeOffset.x+1,cascadeOffset.y+1});
+        else commands.setScissor({cascadeResolution,cascadeResolution},cascadeOffset);
         commands.pushConstants(
             pipelineLayout_,
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
@@ -3536,7 +3645,9 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->pushConstantUpdates;
         }
-        const auto& cascadeSpans = snapshot->shadowViewSpans.empty()
+        std::vector<std::array<std::uint32_t,3>> objectSpans;
+        if(objectPage)objectSpans.push_back({snapshot->instances.at(objectPage->instanceIndex).meshKey,objectPage->instanceIndex,1});
+        const auto& cascadeSpans=objectPage?objectSpans:snapshot->shadowViewSpans.empty()
             ? snapshot->shadowSpans : snapshot->shadowViewSpans.at(cascade);
         for (const std::array<std::uint32_t, 3>& span : cascadeSpans) {
         const std::uint32_t meshKey = span[0];
@@ -3590,6 +3701,8 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 MorphPushConstants morphConstants{};
                 morphConstants.weights = snapshot->settings.morphWeights;
                 morphConstants.gizmoTransform=primitiveGizmoTransform(snapshot->gizmo,&primitive-mesh.primitives.data());
+                if(objectPage)morphConstants.gizmoTransform=internal::multiply(objectPage->worldToClip,
+                    internal::multiply(snapshot->instances.at(objectPage->instanceIndex).model,morphConstants.gizmoTransform));
                 if (bindlessTextures_) {
                     morphConstants.textureBaseIndex =
                         textureBase

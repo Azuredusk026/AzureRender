@@ -63,7 +63,8 @@ void main() {
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
 #endif
-    gl_Position =
+    gl_Position = shadowParameters.cascadeIndex==4u
+        ? shadowParameters.gizmoTransform * skinnedPosition :
         instanceData.instances[gl_InstanceIndex]
             .cascadeLightModelViewProjection[shadowParameters.cascadeIndex]
         * shadowParameters.gizmoTransform * skinnedPosition;

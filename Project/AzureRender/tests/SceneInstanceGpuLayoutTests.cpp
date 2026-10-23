@@ -8,11 +8,14 @@ using namespace azurerender;
 int main(int argc,char** argv)try{
     if(argc!=2)throw std::invalid_argument("Expected instance layout shader");
     static_assert(sizeof(SceneInstanceGpuData)==496);
+    static_assert(SceneInstanceGpuData::kLayoutVersion==2);
+    static_assert(offsetof(SceneInstanceGpuData,objectShadowIndex)==424);
+    static_assert(offsetof(SceneInstanceGpuData,instanceFlags)==428);
     constexpr unsigned words=sizeof(SceneInstanceGpuData)/sizeof(std::uint32_t),count=words*2;
     std::array<std::uint32_t,count> expected{};
     for(unsigned i=0;i<count;++i){
         const auto field=i%words;
-        if(field>=96&&field<100)expected[i]=0xD1230000U+i;
+        if((field>=96&&field<100)||field==106||field==107)expected[i]=0xD1230000U+i;
         else{const float value=float(i)+.125F;std::memcpy(&expected[i],&value,sizeof(value));}
     }
     test::VulkanComputeFixture host;auto& backend=*host.backend;

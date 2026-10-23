@@ -12,6 +12,11 @@ inline constexpr unsigned kObjectShadowCapacity=8;
 inline constexpr unsigned kObjectShadowTileSize=1024;
 inline constexpr unsigned kObjectShadowColumns=4;
 inline constexpr unsigned kObjectShadowRows=2;
+struct alignas(16) ObjectShadowGpuHeader {
+    static constexpr unsigned kLayoutVersion=1;
+    std::uint32_t version=kLayoutVersion,count=0,capacity=0,reserved=0;
+};
+static_assert(sizeof(ObjectShadowGpuHeader)==16);
 struct alignas(16) ObjectShadowGpuRecord {
     internal::Matrix4 worldToUnitShadow{};
     std::array<float,4> biasAndFilter{};

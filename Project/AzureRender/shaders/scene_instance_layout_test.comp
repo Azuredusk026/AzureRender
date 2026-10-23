@@ -1,6 +1,9 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "instance_data.glsl"
+#if AZURE_INSTANCE_DATA_LAYOUT_VERSION != 2
+#error Unexpected instance layout version
+#endif
 layout(local_size_x=1) in;
 layout(std430,binding=0) readonly buffer Input { InstanceTransforms instances[]; } source;
 layout(std430,binding=1) buffer Output { uint words[]; } result;
@@ -11,6 +14,8 @@ void main(){
     else if(field<96u){field-=32u;result.words[i]=floatBitsToUint(value.cascadeLightModelViewProjection[field/16u][(field%16u)/4u][field%4u]);}
     else if(field<100u)result.words[i]=value.meta[field-96u];
     else if(field<104u)result.words[i]=floatBitsToUint(value.faceLight[field-100u]);
-    else if(field<108u)result.words[i]=floatBitsToUint(value.morph[field-104u]);
+    else if(field<106u)result.words[i]=floatBitsToUint(value.morph[field-104u]);
+    else if(field==106u)result.words[i]=value.objectShadowIndex;
+    else if(field==107u)result.words[i]=value.instanceFlags;
     else{field-=108u;result.words[i]=floatBitsToUint(value.faceFrame[field/4u][field%4u]);}
 }
