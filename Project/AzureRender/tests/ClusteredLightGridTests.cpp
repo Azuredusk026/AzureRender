@@ -93,5 +93,11 @@ int main() try {
     for(unsigned z=0;z<4;++z)for(unsigned y=0;y<4;++y)for(unsigned x=0;x<4;++x)
         if(perspective.indicesFor(x,y,z)!=std::vector<std::uint32_t>{0})
             throw std::runtime_error("Directional light must illuminate every cluster independently of position and radius");
+    behind.shape.type=azurerender::LightKind::Spot;behind.shape.falloff=azurerender::LightFalloff::RangePower;
+    auto& modifier=behind.shape.characterResponse;modifier.present=true;modifier.schemaVersion=3;
+    modifier.projectedDistance=true;modifier.strength=.7F;perspective.assign({behind});
+    for(unsigned z=0;z<4;++z)for(unsigned y=0;y<4;++y)for(unsigned x=0;x<4;++x)
+        if(perspective.indicesFor(x,y,z)!=std::vector<std::uint32_t>{0})
+            throw std::runtime_error("Projected color slab must retain conservative cluster coverage");
     return 0;
 } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}

@@ -186,6 +186,15 @@ int main() {
             std::cerr<<"Scene documents must retain version two line-response fields\n";return 1;
         }
         assert(shapeReloaded.specularScale==.195F);
+        auto blendDocument=responseDocument;auto& blendShape=blendDocument.lights[0].shape;
+        blendShape.type=azurerender::LightKind::Spot;blendShape.falloff=azurerender::LightFalloff::RangePower;
+        blendShape.characterResponse={};auto& blendResponse=blendShape.characterResponse;
+        blendResponse.present=true;blendResponse.schemaVersion=3;blendResponse.strength=.7F;
+        blendResponse.facingWeight=.25F;blendResponse.projectedDistance=true;blendResponse.order=8;
+        blendDocument.save(directory/"blend-response.azscene");
+        const auto blendReloaded=azurerender::SceneDocument::load(directory/"blend-response.azscene").lights[0].shape.characterResponse;
+        if(!blendReloaded.isProjectedColorBlend()||blendReloaded.strength!=.7F||blendReloaded.facingWeight!=.25F||blendReloaded.order!=8)
+            throw std::runtime_error("Scene save and reopen must preserve ordered color composition");
         assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
         assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);
         if(shapeReloaded.receivers.characters||!shapeReloaded.receivers.surfaces) {

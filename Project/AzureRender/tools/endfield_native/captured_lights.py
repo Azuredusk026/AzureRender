@@ -121,6 +121,40 @@ def line_emitter_response(incoming,axis,length):
     return dict(direction=direction,factor=numerator/denominator)
 
 
+def color_blend_response(incoming,axis,radius,*,exponent,strength,facing_weight,normal,projected):
+    """Literal ordered color mode, including its axial spot distance option."""
+    for vector in (incoming,axis,normal):
+        if len(vector)!=3:raise ValueError('Color blend vectors require three coordinates')
+        for value in vector:_finite(value,-1e9,1e9,'blend vector')
+    dot=lambda a,b:sum(x*y for x,y in zip(a,b))
+    if abs(dot(axis,axis)-1)>1e-4 or abs(dot(normal,normal)-1)>1e-4:raise ValueError('Blend axes must be normalized')
+    _finite(radius,1e-8,1e9,'blend radius');_finite(exponent,.1,64,'blend exponent')
+    _finite(strength,0,1,'blend strength');_finite(facing_weight,0,1,'blend facing')
+    if type(projected) is not bool:raise ValueError('Blend projection requires a boolean')
+    incoming=[x*dot(incoming,axis) for x in axis] if projected else incoming
+    squared=dot(incoming,incoming);length=math.sqrt(squared)
+    direction=[x/length for x in incoming] if length>1e-6 else [0,0,0]
+    attenuation=max(1-min(squared/(radius*radius),1),0)**exponent
+    facing=min(max(dot(normal,direction)+.5,0),1);smooth=facing*facing*(3-2*facing)
+    return dict(direction=direction,weight=attenuation*strength*(1-facing_weight+facing_weight*smooth))
+
+
+def render_color_blend(record):
+    """Convert a confirmed replacement mode to the public ordered blend shape."""
+    if not isinstance(record,dict) or record.get('mode')!=4 or record.get('linearLength',0)!=0:
+        raise ValueError('A confirmed punctual color replacement is required')
+    import copy
+    shape=copy.deepcopy(record['shape']);parameters=record['response']['parameters']
+    strength=_finite(parameters[0],0,1,'blend strength');facing=_finite(parameters[3],0,1,'blend facing')
+    exponent=max(2*parameters[1],.1);_finite(exponent,.1,64,'blend exponent')
+    order=record['sourceIndex']
+    if type(order) is not int or not 0<=order<=65535:raise ValueError('Invalid blend order')
+    shape.update(falloff='range-power',falloffExponent=exponent,characterResponse=dict(schemaVersion=3,
+        composition='color-blend',strength=strength,facingWeight=facing,
+        projectedDistance=shape['type']=='spot' and parameters[2]>.5,order=order))
+    return shape
+
+
 def render_character_response(record):
     """Map a decoded default-mode record to the supported public color-response version."""
     if not isinstance(record,dict) or record.get('mode')!=0 or not isinstance(record.get('response'),dict):

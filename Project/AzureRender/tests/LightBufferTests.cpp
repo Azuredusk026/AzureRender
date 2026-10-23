@@ -8,6 +8,27 @@
 
 int main() { try {
     using Json=nlohmann::json;
+    const Json blend={{"schemaVersion",3},{"composition","color-blend"},{"strength",.7F},
+        {"facingWeight",.25},{"projectedDistance",true},{"order",8}};
+    Json blendShape={{"type","spot"},{"falloff","range-power"},{"characterResponse",blend}};
+    const auto blended=blendShape.get<azurerender::LightShape>();
+    if(Json(blended)["characterResponse"]!=blend)throw std::runtime_error("Color blend must preserve its explicit version and fields");
+    azurerender::RenderLight modifier;modifier.stableId=1;modifier.shape=blended;
+    azurerender::RenderLight earlier=modifier;earlier.stableId=20;earlier.shape.characterResponse.order=2;
+    azurerender::RenderLight physical;physical.stableId=30;
+    azurerender::LightBuffer ordered;ordered.setLights({modifier,physical,earlier});
+    if(ordered.lights()[0].stableId!=30||ordered.lights()[1].stableId!=20||ordered.lights()[2].stableId!=1)
+        throw std::runtime_error("Ordered blends must follow additive lights and their authored order");
+    const auto blendGpu=ordered.gpuData()[2].characterResponse;
+    if(blendGpu!=std::array<float,4>{3,.7F,.25F,8})throw std::runtime_error("Blend mode must reuse the existing GPU response row");
+    bool overflow=false;try{ordered.setLights({modifier,physical},1);}catch(const std::invalid_argument&){overflow=true;}
+    if(!overflow)throw std::runtime_error("Truncating ordered color composition must be rejected");
+    for(const auto& [field,bad]:std::vector<std::pair<std::string,Json>>{{"strength",1.00000001},{"strength",true},
+        {"facingWeight",-.1},{"projectedDistance",1},{"order",65536},{"order",2.5},{"composition","add"},{"extra",0}}) {
+        auto invalid=blendShape;invalid["characterResponse"][field]=bad;bool rejected=false;
+        try{(void)invalid.get<azurerender::LightShape>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid blend fields must be rejected: "+field);
+    }
     const Json character={{"schemaVersion",1},{"diffuseFloor",.25},{"compression",.8}};
     Json localShape={{"type","point"},{"characterResponse",character}};
     auto local=localShape.get<azurerender::LightShape>();

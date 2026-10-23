@@ -29,6 +29,7 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 局部颜色响应见[实际验证](../acceptance/nr/character-local-light-response.md)。
 投影方向、真实点光及主场景影响见[聚簇验证](../acceptance/nr/clustered-light-projection.md)。
 线形发射、方向积分及实际灯二见[线形验证](../acceptance/nr/character-line-light.md)。
+有序混合、实际权重及最终像素见[颜色混合](../acceptance/nr/character-color-blend.md)。
 
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。

@@ -3,10 +3,29 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& response) {
+    if(response.schemaVersion==3) {
+        response.validate();value={{"schemaVersion",3},{"composition","color-blend"},{"strength",response.strength},
+            {"facingWeight",response.facingWeight},{"projectedDistance",response.projectedDistance},{"order",response.order}};return;
+    }
     response.validate();value={{"schemaVersion",response.schemaVersion},{"diffuseFloor",response.diffuseFloor},{"compression",response.compression}};
     if(response.schemaVersion==2)value["linearLength"]=response.linearLength;
 }
 inline void from_json(const nlohmann::json& value,LightShape::CharacterResponse& response) {
+    if(value.is_object()&&value.contains("schemaVersion")&&value["schemaVersion"].is_number_integer()&&value["schemaVersion"]==3) {
+        if(value.size()!=6||!value.contains("composition")||value["composition"]!="color-blend"
+            ||!value.contains("projectedDistance")||!value["projectedDistance"].is_boolean()
+            ||!value.contains("order")||!value["order"].is_number_integer()||value["order"]<0||value["order"]>65535)
+            throw std::invalid_argument("Invalid ordered color blend fields");
+        for(const char* field:{"strength","facingWeight"}) {
+            if(!value.contains(field)||!value[field].is_number())throw std::invalid_argument("Missing color blend weight");
+            const double number=value[field].get<double>();
+            if(!std::isfinite(number)||number<0||number>1)throw std::invalid_argument("Invalid color blend weight");
+        }
+        response={};response.present=true;response.schemaVersion=3;
+        response.strength=value["strength"].get<float>();response.facingWeight=value["facingWeight"].get<float>();
+        response.projectedDistance=value["projectedDistance"].get<bool>();response.order=value["order"].get<unsigned>();
+        response.validate();return;
+    }
     if(!value.is_object()||!value.contains("schemaVersion")
         ||!value["schemaVersion"].is_number_integer()||(value["schemaVersion"]!=1&&value["schemaVersion"]!=2)
         ||value.size()!=(value["schemaVersion"]==2?4U:3U)

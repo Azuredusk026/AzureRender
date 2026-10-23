@@ -54,6 +54,16 @@ int main(){try{
  require(tracing::sceneFingerprint(scene,{})!=thresholdFingerprint,"Influence fade invalidates tracing history");
  const auto shapedLight=tracing::buildGeometry(scene,meshes,{}).lights.back();
  require(shapedLight.boxParameters[0]==1&&shapedLight.boxParameters[1]==.5F&&shapedLight.boxRows[0][3]==3,"Tracing retains the world-space influence volume");
+ const auto physicalLights=tracing::buildGeometry(scene,meshes,{}).lights.size();
+ const auto beforeBlend=tracing::sceneFingerprint(scene,{});
+ auto modifier=scene.lights[0];modifier.id="color-modifier";modifier.shape.type=LightKind::Point;modifier.shape.characterResponse.present=true;
+ modifier.shape.characterResponse.schemaVersion=3;modifier.shape.characterResponse.strength=.7F;
+ scene.lights.push_back(modifier);
+ require(tracing::buildGeometry(scene,meshes,{}).lights.size()==physicalLights,"Color composition must not emit physical photons");
+ const auto withBlend=tracing::sceneFingerprint(scene,{});
+ scene.lights.back().shape.characterResponse={};
+ require(tracing::sceneFingerprint(scene,{})!=withBlend,"Composition activation must invalidate photon history");
+ scene.lights.pop_back();require(tracing::sceneFingerprint(scene,{})==beforeBlend,"Removing a modifier restores the physical scene fingerprint");
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");

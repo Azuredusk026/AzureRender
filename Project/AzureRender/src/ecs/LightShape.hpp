@@ -27,11 +27,21 @@ struct LightShape {
         float diffuseFloor=0,compression=0;
         float linearLength=0;
         unsigned schemaVersion=1;
+        float strength=0,facingWeight=0;
+        bool projectedDistance=false;
+        unsigned order=0;
+        bool isColorBlend() const noexcept { return present&&schemaVersion==3; }
+        bool isProjectedColorBlend() const noexcept { return isColorBlend()&&projectedDistance; }
         void validate() const {
-            if((schemaVersion!=1&&schemaVersion!=2)||!std::isfinite(linearLength)||linearLength<0||linearLength>65536
+            if((schemaVersion<1||schemaVersion>3)||!std::isfinite(linearLength)||linearLength<0||linearLength>65536
                 ||(schemaVersion==1&&linearLength!=0))throw std::invalid_argument("Invalid character line-light version or length");
             for(float value:{diffuseFloor,compression})if(!std::isfinite(value)||value<0||value>1)
                 throw std::invalid_argument("Character light response values must be in [0,1]");
+            for(float value:{strength,facingWeight})if(!std::isfinite(value)||value<0||value>1)
+                throw std::invalid_argument("Color blend strength and facing weight must be in [0,1]");
+            if(order>65535||(schemaVersion==3&&(diffuseFloor!=0||compression!=0||linearLength!=0))
+                ||(schemaVersion!=3&&(strength!=0||facingWeight!=0||projectedDistance||order!=0)))
+                throw std::invalid_argument("Character response fields do not match their version");
         }
     } characterResponse;
 
@@ -40,6 +50,9 @@ struct LightShape {
         characterResponse.validate();
         if(characterResponse.present&&type==LightKind::Directional)
             throw std::invalid_argument("Character local-light response requires a punctual emitter");
+        if(characterResponse.isColorBlend()&&(falloff!=LightFalloff::RangePower
+            ||(characterResponse.projectedDistance&&type!=LightKind::Spot)))
+            throw std::invalid_argument("Color blend requires range power and spot-only projected distance");
         if(characterResponse.linearLength>0&&(type!=LightKind::Point||falloff==LightFalloff::Legacy))
             throw std::invalid_argument("Character line emitter requires a point shape and explicit distance model");
         if (!std::isfinite(specularScale) || specularScale<0)

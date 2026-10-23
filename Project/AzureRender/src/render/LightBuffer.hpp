@@ -40,8 +40,13 @@ public:
     void setLights(std::vector<RenderLight> lights, std::size_t maxLights = 1024) {
         for (const auto& light : lights) light.shape.validate();
         std::sort(lights.begin(), lights.end(), [](const RenderLight& a, const RenderLight& b) {
+            const auto& x=a.shape.characterResponse;const auto& y=b.shape.characterResponse;
+            if(x.isColorBlend()!=y.isColorBlend())return !x.isColorBlend();
+            if(x.isColorBlend()&&x.order!=y.order)return x.order<y.order;
             return a.stableId < b.stableId;
         });
+        if(lights.size()>maxLights&&std::any_of(lights.begin(),lights.end(),[](const RenderLight& l){return l.shape.characterResponse.isColorBlend();}))
+            throw std::invalid_argument("Ordered color composition exceeds the light budget");
         if (lights.size() > maxLights) lights.resize(maxLights);
         lights_ = std::move(lights);
     }
@@ -70,6 +75,7 @@ public:
             value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,static_cast<float>(light.shape.receivers.mask())};
             const auto& response=light.shape.characterResponse;
             value.characterResponse={response.present?1.F:0.F,response.diffuseFloor,response.compression,response.linearLength};
+            if(response.isColorBlend())value.characterResponse={response.projectedDistance?3.F:2.F,response.strength,response.facingWeight,static_cast<float>(response.order)};
             packed.push_back(value);
         }
         return packed;

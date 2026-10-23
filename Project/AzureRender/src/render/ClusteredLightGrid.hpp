@@ -37,7 +37,7 @@ public:
         for (auto& cluster : clusters_) cluster.clear();
         for (std::size_t index = 0; index < lights.size(); ++index) {
             const RenderLight& light = lights[index];
-            if(light.shape.type==LightKind::Directional) {
+            if(light.shape.type==LightKind::Directional||light.shape.characterResponse.isProjectedColorBlend()) {
                 for(auto& cluster:clusters_)cluster.push_back(static_cast<std::uint32_t>(index));
                 continue;
             }

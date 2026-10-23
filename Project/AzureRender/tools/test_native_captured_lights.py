@@ -90,6 +90,22 @@ class CapturedLightTests(unittest.TestCase):
         for incoming,axis,length in (([0,0,2],[0,0,0],1),([0,float('nan'),2],[1,0,0],1),([0,0,2],[1,0,0],-1)):
             with self.assertRaises(ValueError):subject.line_emitter_response(incoming,axis,length)
 
+    def test_color_blend_uses_axial_distance_and_literal_ordered_mix(self):
+        result=subject.color_blend_response([.050873,-.64279,-1.31818],[0,0,1],1.5,
+            exponent=2,strength=.7,facing_weight=0,normal=[0,0,1],projected=True)
+        self.assertAlmostEqual(result['weight'],.7*(1-(1.31818/1.5)**2)**2,places=12)
+        self.assertEqual(result['direction'],[0,0,-1])
+        self.assertAlmostEqual(result['weight'],.03630534,places=5)
+
+    def test_color_blend_adapter_keeps_range_projection_and_source_order(self):
+        raw=self.fixture(mode=4,kind=0);struct.pack_into('<4f',raw,(6+2)*16,.5,0,.5,4)
+        struct.pack_into('<4f',raw,(6+4)*16,.7,1,1,0)
+        light=self.decode(raw)[0];converted=subject.render_color_blend(light)
+        self.assertEqual(converted['characterResponse'],dict(schemaVersion=3,composition='color-blend',
+            strength=light['response']['parameters'][0],facingWeight=0,projectedDistance=True,order=0))
+        self.assertEqual(converted['falloff'],'range-power');self.assertEqual(converted['falloffExponent'],2)
+        with self.assertRaises(ValueError):subject.render_color_blend(self.decode(self.fixture())[0])
+
     def test_render_response_keeps_default_and_line_versions_explicit(self):
         point=self.decode(self.fixture())[0]
         response=subject.render_character_response(point)

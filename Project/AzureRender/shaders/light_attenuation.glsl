@@ -1,6 +1,11 @@
 #ifndef AZURE_LIGHT_ATTENUATION
 #define AZURE_LIGHT_ATTENUATION
 #define AZURE_LINE_LIGHT_GEOMETRY 1
+float characterColorBlendWeight(float attenuation,float normalDotLight,vec2 weights) {
+    float facing=clamp(normalDotLight+.5,0.0,1.0);
+    float smoothFacing=facing*facing*(3.0-2.0*facing);
+    return attenuation*weights.x*mix(1.0,smoothFacing,weights.y);
+}
 struct LineLightGeometry { vec3 direction;float factor; };
 LineLightGeometry lineLightGeometry(vec3 incoming,vec3 axis,float length) {
     float squared=dot(incoming,incoming);

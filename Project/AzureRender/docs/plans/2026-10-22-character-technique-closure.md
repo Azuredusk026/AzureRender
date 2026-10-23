@@ -41,6 +41,7 @@
 共享颜色核、环境遮蔽和照明乘积见[数值验证](../acceptance/nr/captured-hair-illumination.md)。
 环境权重和条纹的贡献归属见[运行验证](../acceptance/nr/ambient-weight-and-main-line.md)。
 逐材质光色及双叶完整照明见[头发照明](../acceptance/nr/projected-hair-lighting.md)。
+局部灯的有序颜色及分项组合见[混合验证](../acceptance/nr/character-color-blend.md)。
 主关卡与可玩入口引用 `hero-hair-linear-212213.glb`。
 首批接入范围为径向脸部、服饰镜面及头发线性颜色。
 四次对照及边界见[主场景接入](../acceptance/nr/main-character-integration.md)。

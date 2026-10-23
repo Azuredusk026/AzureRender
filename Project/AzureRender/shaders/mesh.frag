@@ -147,6 +147,26 @@ layout(location = 14) in vec3 opacityCoordinate;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 
+struct SceneLightSample { vec3 incoming;vec3 direction;float distanceSquared;float attenuation; };
+SceneLightSample sampleSceneLight(ClusterLight light,vec3 position,bool projectedDistance) {
+    vec3 toLight=light.positionRadius.xyz-position;
+    if(projectedDistance)toLight=light.directionOuter.xyz*dot(toLight,light.directionOuter.xyz);
+    float distanceSquared=dot(toLight,toLight);
+    float distanceToLight=sqrt(distanceSquared);
+    float lightRadius=max(light.positionRadius.w,.001);
+    float attenuation=localLightDistanceWeight(distanceSquared,lightRadius,light.coneType.z,light.coneType.w);
+    vec3 pointDirection=toLight/max(distanceToLight,.001);
+    if(light.coneType.y>1.5){pointDirection=-light.directionOuter.xyz;attenuation=1.0;}
+    else if(light.coneType.y>.5) {
+        float cone=clamp((dot(-pointDirection,light.directionOuter.xyz)-light.directionOuter.w)
+            /max(light.coneType.x-light.directionOuter.w,.000001),0.0,1.0);
+        if(light.coneType.x==light.directionOuter.w)cone=step(light.directionOuter.w,dot(-pointDirection,light.directionOuter.xyz));
+        attenuation*=cone*cone;
+    }
+    attenuation*=lightInfluenceBoxWeight(position,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
+    return SceneLightSample(toLight,pointDirection,distanceSquared,attenuation);
+}
+
 struct ProjectedHairProfile {
     vec4 shiftsIntensityRange;
     vec4 edgeNormalDirection;
@@ -823,30 +843,17 @@ void main() {
         ClusterLight light = sceneLightData.lights[lightIndex];
         uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
         if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
-        vec3 toLight = light.positionRadius.xyz - worldPosition;
-        float distanceSquared = dot(toLight, toLight);
-        float distanceToLight = sqrt(distanceSquared);
-        float lightRadius = max(light.positionRadius.w, 0.001);
-        float attenuation=localLightDistanceWeight(distanceSquared,lightRadius,light.coneType.z,light.coneType.w);
-        vec3 pointDirection = toLight / max(distanceToLight, 0.001);
-        if(light.coneType.y>1.5) {
-            pointDirection=-light.directionOuter.xyz;
-            attenuation=1.0;
-        }
-        else if (light.coneType.y > 0.5) {
-            float cone = clamp((dot(-pointDirection, light.directionOuter.xyz)
-                - light.directionOuter.w) / max(light.coneType.x-light.directionOuter.w, 0.000001), 0.0, 1.0);
-            if(light.coneType.x==light.directionOuter.w) cone=step(light.directionOuter.w,dot(-pointDirection,light.directionOuter.xyz));
-            attenuation *= cone * cone;
-        }
+        if(light.characterResponse.x==2.0||light.characterResponse.x==3.0)continue;
+        SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
+        vec3 toLight=sampled.incoming,pointDirection=sampled.direction;
+        float distanceSquared=sampled.distanceSquared,attenuation=sampled.attenuation;
         vec3 localLightingNormal=dualFaceSdf && light.coneType.y<=1.5
             ? faceLightingNormal : shadedNormal;
         float pointDiffuse = max(dot(localLightingNormal, pointDirection), 0.0);
-        attenuation*=lightInfluenceBoxWeight(worldPosition,light.boxRows[0],light.boxRows[1],light.boxRows[2],light.boxParameters);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
-        bool characterLight=light.characterResponse.x>.5&&(sceneCharacter||nprDiffuse);
+        bool characterLight=light.characterResponse.x==1.0&&(sceneCharacter||nprDiffuse);
         if(characterLight&&light.characterResponse.w>0.0) {
             LineLightGeometry line=lineLightGeometry(toLight,light.directionOuter.xyz,light.characterResponse.w);
             radiance*=line.factor*(light.coneType.z<1.5?distanceSquared+1.0:1.0);
@@ -1394,6 +1401,22 @@ void main() {
         outputAlpha=1.0;
     }
     if(multiplyComposite)beautyColor=baseColor.rgb;
+    if((nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5) {
+        for(uint lightOffset=0U;lightOffset<lightRange.y;++lightOffset) {
+            uint lightIndex=clusterIndexData.indices[lightRange.x+lightOffset];
+            if(lightIndex>=sceneLightCount)continue;
+            ClusterLight light=sceneLightData.lights[lightIndex];
+            if((light.characterResponse.x!=2.0&&light.characterResponse.x!=3.0)||(uint(light.boxParameters.w)&2U)==0U)continue;
+            SceneLightSample sampled=sampleSceneLight(light,worldPosition,light.characterResponse.x==3.0);
+            if(sampled.attenuation<=.0001)continue;
+            float weight=characterColorBlendWeight(sampled.attenuation,dot(geometricNormal,sampled.direction),light.characterResponse.yz);
+            vec3 target=light.colorIntensity.rgb*light.colorIntensity.w;
+            beautyColor=mix(beautyColor,target,weight);
+            directDiffuse=mix(directDiffuse,target,weight);
+            ambientDiffuse*=1.0-weight;directSpecular*=1.0-weight;ambientSpecular*=1.0-weight;
+            kkSpecular*=1.0-weight;secondaryKkSpecular*=1.0-weight;rimLighting*=1.0-weight;emissive*=1.0-weight;
+        }
+    }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {
         qaColor = baseColor.rgb;

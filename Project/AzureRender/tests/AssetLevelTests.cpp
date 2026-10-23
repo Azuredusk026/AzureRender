@@ -136,6 +136,12 @@ int main() {
   auto lineLevel=Level::parse(characterDocument,db);lineLevel.save(root/"assets/line-light.azurelevel");
   const auto lineLight=Level::load(root/"assets/line-light.azurelevel",db).scene.lights[0].shape.characterResponse;
   check(lineLight.present&&lineLight.schemaVersion==2&&lineLight.linearLength==1);
+  characterDocument["lights"][0]["shape"]["falloff"]="range-power";
+  characterDocument["lights"][0]["shape"]["characterResponse"]={{"schemaVersion",3},{"composition","color-blend"},
+      {"strength",.7F},{"facingWeight",.25F},{"projectedDistance",false},{"order",8}};
+  auto blendLevel=Level::parse(characterDocument,db);blendLevel.save(root/"assets/blend-light.azurelevel");
+  const auto blendLight=Level::load(root/"assets/blend-light.azurelevel",db).scene.lights[0].shape.characterResponse;
+  check(blendLight.isColorBlend()&&!blendLight.projectedDistance&&blendLight.strength==.7F&&blendLight.order==8);
   check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
   check(nlohmann::json::object().get<LightShape>().specularScale==1.F);
   const auto responseShape=nlohmann::json{{"specularScale",.195F}}.get<LightShape>();
