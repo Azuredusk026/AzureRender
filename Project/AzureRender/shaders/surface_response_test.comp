@@ -8,6 +8,19 @@ layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=172u) {
+#ifdef AZURE_LINE_LIGHT_GEOMETRY
+        uint probe=(i-172u)/4u,channel=(i-172u)%4u;
+        vec3 incoming=probe==1u?vec3(-.00103759765625,-.095458984375,.049530029296875)
+            :probe==2u?vec3(2,0,0):probe==3u?vec3(0):vec3(0,0,2);
+        vec3 axis=probe==1u?vec3(-.8333109617233276,.20295734703540802,.5141994953155518):vec3(1,0,0);
+        LineLightGeometry geometry=lineLightGeometry(incoming,axis,probe==1u?1.0:probe==4u?0.0:2.0);
+        result.values[i]=channel==3u?geometry.factor:geometry.direction[channel];
+#else
+        result.values[i]=-99.0;
+#endif
+        return;
+    }
     if(i>=163u) {
 #ifdef AZURE_CHARACTER_WEIGHTED_DIFFUSE
         // Captured visible primitive 1017: explicit material and host weights.

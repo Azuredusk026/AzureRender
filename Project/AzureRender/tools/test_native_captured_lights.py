@@ -78,5 +78,27 @@ class CapturedLightTests(unittest.TestCase):
         compressed=subject.default_character_light_color([8,4,2],1,1,diffuse_floor=0,compression=1,scene_visibility=1)
         self.assertEqual(compressed,[4/3,2/3,1/3])
 
+    def test_finite_line_direction_and_energy_have_independent_reference(self):
+        result=subject.line_emitter_response([0,0,2],[1,0,0],2)
+        self.assertEqual(result['direction'],[0,0,1])
+        self.assertAlmostEqual(result['factor'],2/(5*math.sqrt(5)),places=12)
+        point=subject.line_emitter_response([0,1,2],[1,0,0],0)
+        self.assertAlmostEqual(point['factor'],1/6)
+        for value in subject.line_emitter_response([2,0,0],[1,0,0],2)['direction']:self.assertTrue(math.isfinite(value))
+
+    def test_line_response_checks_direction_and_length(self):
+        for incoming,axis,length in (([0,0,2],[0,0,0],1),([0,float('nan'),2],[1,0,0],1),([0,0,2],[1,0,0],-1)):
+            with self.assertRaises(ValueError):subject.line_emitter_response(incoming,axis,length)
+
+    def test_render_response_keeps_default_and_line_versions_explicit(self):
+        point=self.decode(self.fixture())[0]
+        response=subject.render_character_response(point)
+        self.assertEqual(response,dict(schemaVersion=1,diffuseFloor=.25,compression=point['response']['compression']))
+        raw=self.fixture();struct.pack_into('<f',raw,(6+2)*16+8,1)
+        line=self.decode(raw)[0]
+        self.assertEqual(subject.render_character_response(line),dict(schemaVersion=2,diffuseFloor=.25,
+            compression=line['response']['compression'],linearLength=1))
+        with self.assertRaises(ValueError):subject.render_character_response(self.decode(self.fixture(mode=4))[0])
+
 
 if __name__=='__main__':unittest.main()

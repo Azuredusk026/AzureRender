@@ -69,7 +69,7 @@ public:
             value.boxRows=light.shape.influenceBox.worldToBox;
             value.boxParameters={light.shape.influenceBox.enabled?1.F:0.F,light.shape.influenceBox.falloffThreshold,light.shape.specularScale,static_cast<float>(light.shape.receivers.mask())};
             const auto& response=light.shape.characterResponse;
-            value.characterResponse={response.present?1.F:0.F,response.diffuseFloor,response.compression,0};
+            value.characterResponse={response.present?1.F:0.F,response.diffuseFloor,response.compression,response.linearLength};
             packed.push_back(value);
         }
         return packed;

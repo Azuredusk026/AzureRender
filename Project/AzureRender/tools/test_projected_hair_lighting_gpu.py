@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image
 import test_projected_hair_gpu as hair
 from test_npr_illumination_gpu import illumination
+from test_character_local_light_gpu import line_reference
 
 LUMA=np.array([.21267290413379669,.7151522040367126,.07217500358819962])
 SETTINGS=dict(schemaVersion=1,enabled=True,ambientColor=[.1,.1,.1],ambientDirection=[0,1,0],
@@ -36,7 +37,7 @@ def color_response(base,ramp,visibility,view_alpha,scale,brightness,sat):
 
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
-    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk')
+    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk','local-line-kk','local-line-kk-fixed')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]}
@@ -68,6 +69,10 @@ def run(player,output,selected=None,expected_validation=None):
                 level['lights'][0]['intensity']=4
                 level['lights'][0]['shape'].update(characterResponse={'schemaVersion':1,'diffuseFloor':.25,'compression':1},
                     specularScale=0 if 'zero' in name else 2)
+            if name.startswith('local-line-'):
+                level['lights'][0]['intensity']=8
+                level['lights'][0]['shape'].update(direction=[1,0,0],falloff='smooth-inverse-square',specularScale=2,
+                    characterResponse={'schemaVersion':2,'diffuseFloor':.25,'compression':0,'linearLength':4})
             if name=='extra-kk':
                 light=copy.deepcopy(level['lights'][0]);light.update(id='extra',color=[.1,.2,.3],intensity=.2);level['lights'].append(light)
             level_path.write_text(json.dumps(level),encoding='utf-8')
@@ -105,16 +110,27 @@ def run(player,output,selected=None,expected_validation=None):
                         denominator=max(.6*4*attenuation*.75,1)
                         expected*=np.clip(cosine+.5,0,1)*.75+.25
                         expected*=8*cosine*(0 if 'zero' in name else 2)/denominator
+                    if name.startswith('local-line-'):
+                        point=np.asarray(sample['worldPoint']);delta=np.array([0,.16,4])-point
+                        direction,factor=line_reference(delta,[1,0,0],4);view=hair.normalized(hair.CAMERA-point)
+                        side=case[sample['side']];parameters=(side['r']/255,side['g']/255,vis/255,side['a']/255)
+                        coordinates=hair.project_coordinates(half_vector=hair.normalized(view+direction),highlight_normal=(0,0,1),
+                            view=view,source_parameters=parameters,tangent=(1,0,0,1),object_x=(1,0,0),object_y=(0,1,0),object_z=(0,0,1),
+                            primary_shift=0,secondary_shift=0,range2=1,edge_fade_power=2,direction_x=0)
+                        sampled,_=hair.ramp_sample(coordinates.uv);primary=hair.evaluate_energy(coordinates,sampled,parameters,1,(0,0,.5)).primary
+                        q=np.dot(delta,delta)/100;incident=np.array([.2,.4,.6])*8*factor*max(1-q*q,0)**2
+                        incident*=.25+np.clip(direction[2]+.5,0,1)*.75
+                        expected=np.asarray(primary)*incident*max(direction[2],0)*2*3
                     if name=='extra-kk':expected+=raw*np.array([.1,.2,.3])*.2*3
                 else:expected=response*(ambient if isolation=='ambient' else direct)*(.5 if name=='diffuse-scale' else 1)
                 if name in ('disabled-lighting','absent-input'):expected=hair.linear(hair.CONTROL[:3])*.96*np.array([.2,.4,.6])*.5*ramp[:3]
                 wanted.append(expected)
             maximum=float(np.abs(np.asarray(measured)-wanted).max())
-            if name=='local-response-kk':assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
+            if name=='local-response-kk' or name.startswith('local-line-'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
             report['captures'].append({'name':name,'maximumLinearError':maximum,'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
                 'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist()})
             assert maximum<=.008,(name,maximum,measured[0],wanted[0])
-        for a,b in (('direct','direct-fixed'),('kk','kk-fixed')):
+        for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b])
         if 'disabled-lighting' in frames and 'absent-input' in frames:assert np.array_equal(frames['disabled-lighting'],frames['absent-input'])
         report['status']='passed'

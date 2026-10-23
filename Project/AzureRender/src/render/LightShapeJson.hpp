@@ -3,19 +3,29 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& response) {
-    response.validate();value={{"schemaVersion",1},{"diffuseFloor",response.diffuseFloor},{"compression",response.compression}};
+    response.validate();value={{"schemaVersion",response.schemaVersion},{"diffuseFloor",response.diffuseFloor},{"compression",response.compression}};
+    if(response.schemaVersion==2)value["linearLength"]=response.linearLength;
 }
 inline void from_json(const nlohmann::json& value,LightShape::CharacterResponse& response) {
-    if(!value.is_object()||value.size()!=3||!value.contains("schemaVersion")
-        ||!value["schemaVersion"].is_number_integer()||value["schemaVersion"]!=1
+    if(!value.is_object()||!value.contains("schemaVersion")
+        ||!value["schemaVersion"].is_number_integer()||(value["schemaVersion"]!=1&&value["schemaVersion"]!=2)
+        ||value.size()!=(value["schemaVersion"]==2?4U:3U)
         ||!value.contains("diffuseFloor")||!value["diffuseFloor"].is_number()
-        ||!value.contains("compression")||!value["compression"].is_number())
+        ||!value.contains("compression")||!value["compression"].is_number()
+        ||(value["schemaVersion"]==2&&(!value.contains("linearLength")||!value["linearLength"].is_number())))
         throw std::invalid_argument("Invalid character light response schema or fields");
     for(const char* field:{"diffuseFloor","compression"}) {
         const auto number=value.at(field).get<double>();
         if(!std::isfinite(number)||number<0||number>1)throw std::invalid_argument("Character light response values must be in [0,1]");
     }
-    response={true,value["diffuseFloor"].get<float>(),value["compression"].get<float>()};response.validate();
+    response={true,value["diffuseFloor"].get<float>(),value["compression"].get<float>()};
+    response.schemaVersion=value["schemaVersion"].get<unsigned>();
+    if(response.schemaVersion==2) {
+        const auto length=value["linearLength"].get<double>();
+        if(!std::isfinite(length)||length<0||length>65536)throw std::invalid_argument("Invalid character line-light length");
+        response.linearLength=static_cast<float>(length);
+    }
+    response.validate();
 }
 inline void to_json(nlohmann::json& value,const LightReceivers& receivers) {
     value={{"schemaVersion",1},{"surfaces",receivers.surfaces},{"characters",receivers.characters}};

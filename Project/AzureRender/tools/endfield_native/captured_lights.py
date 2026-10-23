@@ -100,3 +100,35 @@ def default_character_light_color(color,attenuation,normal_dot_light,*,diffuse_f
     energy=1-compression+compression/denominator
     wrapped=diffuse_floor+min(max(normal_dot_light+.5,0),1)*(1-diffuse_floor)
     return [value*energy*wrapped for value in color]
+
+
+def line_emitter_response(incoming,axis,length):
+    """Finite line geometry from the captured emitter branch, with defined axial fallbacks."""
+    if len(incoming)!=3 or len(axis)!=3:raise ValueError('Line vectors require three values')
+    incoming=[_finite(v,-1e9,1e9,'line incoming') for v in incoming]
+    axis=[_finite(v,-1,1,'line axis') for v in axis];_finite(length,0,65536,'line length')
+    if abs(sum(v*v for v in axis)-1)>1e-4:raise ValueError('Line axis must be normalized')
+    dot=lambda a,b:sum(x*y for x,y in zip(a,b))
+    unit=lambda v,fallback:[x/math.sqrt(dot(v,v)) for x in v] if dot(v,v)>1e-12 else fallback
+    centre=unit(incoming,[0,0,1])
+    if length==0:return dict(direction=centre,factor=1/(1+dot(incoming,incoming)))
+    projection=dot(incoming,axis)
+    direction=unit([v-a*projection for v,a in zip(incoming,axis)],centre)
+    a=[v-x*length*.5 for v,x in zip(incoming,axis)];b=[v+x*length*.5 for v,x in zip(incoming,axis)]
+    length_a=max(math.sqrt(dot(a,a)),1e-6);length_b=max(math.sqrt(dot(b,b)),1e-6)
+    numerator=min(max(.5*(dot(direction,a)/length_a+dot(direction,b)/length_b),0),1)
+    denominator=max(.5*(length_a*length_b+dot(a,b))+1,1)
+    return dict(direction=direction,factor=numerator/denominator)
+
+
+def render_character_response(record):
+    """Map a decoded default-mode record to the supported public color-response version."""
+    if not isinstance(record,dict) or record.get('mode')!=0 or not isinstance(record.get('response'),dict):
+        raise ValueError('Captured character mode requires a separate runtime consumer')
+    response=record['response']
+    floor=_finite(response.get('diffuseFloor'),0,1,'diffuse floor')
+    compression=_finite(response.get('compression'),0,1,'compression')
+    length=_finite(record.get('linearLength'),0,65536,'linear length')
+    result=dict(schemaVersion=2 if length else 1,diffuseFloor=floor,compression=compression)
+    if length:result['linearLength']=length
+    return result

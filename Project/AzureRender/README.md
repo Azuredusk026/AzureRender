@@ -10,6 +10,7 @@
 捕获局部灯的输入和组合顺序见[记录验证](docs/acceptance/nr/captured-character-local-lights.md)。
 公共局部灯颜色及场景兼容见[运行验证](docs/acceptance/nr/character-local-light-response.md)。
 实际矩阵投影与点光覆盖见[聚簇验证](docs/acceptance/nr/clustered-light-projection.md)。
+有限线形积分、旋转与主叶消费见[线形验证](docs/acceptance/nr/character-line-light.md)。
 共享颜色核与原生片元见[头发照明验证](docs/acceptance/nr/captured-hair-illumination.md)。
 全局环境权重与主灯条纹见[贡献验证](docs/acceptance/nr/ambient-weight-and-main-line.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。

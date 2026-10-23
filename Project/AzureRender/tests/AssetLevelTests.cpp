@@ -130,6 +130,12 @@ int main() {
   auto characterLevel=Level::parse(characterDocument,db);characterLevel.save(root/"assets/character-light.azurelevel");
   const auto characterLight=Level::load(root/"assets/character-light.azurelevel",db).scene.lights[0].shape.characterResponse;
   check(characterLight.present&&characterLight.diffuseFloor==.25F&&characterLight.compression==.8F);
+  characterDocument["lights"][0]["shape"]["falloff"]="smooth-inverse-square";
+  characterDocument["lights"][0]["shape"]["characterResponse"]["schemaVersion"]=2;
+  characterDocument["lights"][0]["shape"]["characterResponse"]["linearLength"]=1;
+  auto lineLevel=Level::parse(characterDocument,db);lineLevel.save(root/"assets/line-light.azurelevel");
+  const auto lineLight=Level::load(root/"assets/line-light.azurelevel",db).scene.lights[0].shape.characterResponse;
+  check(lineLight.present&&lineLight.schemaVersion==2&&lineLight.linearLength==1);
   check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
   check(nlohmann::json::object().get<LightShape>().specularScale==1.F);
   const auto responseShape=nlohmann::json{{"specularScale",.195F}}.get<LightShape>();

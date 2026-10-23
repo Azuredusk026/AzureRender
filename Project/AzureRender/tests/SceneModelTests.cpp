@@ -177,6 +177,14 @@ int main() {
         if(!localResponse.present||localResponse.diffuseFloor!=.25F||localResponse.compression!=.8F) {
             std::cerr<<"Scene documents must save and reopen the public character light response\n";return 1;
         }
+        auto lineDocument=responseDocument;auto& lineShape=lineDocument.lights[0].shape;
+        lineShape.type=azurerender::LightKind::Point;lineShape.falloff=azurerender::LightFalloff::SmoothInverseSquare;
+        lineShape.characterResponse.schemaVersion=2;lineShape.characterResponse.linearLength=1;
+        lineDocument.save(directory/"line-response.azscene");
+        const auto lineResponse=azurerender::SceneDocument::load(directory/"line-response.azscene").lights[0].shape.characterResponse;
+        if(lineResponse.schemaVersion!=2||lineResponse.linearLength!=1) {
+            std::cerr<<"Scene documents must retain version two line-response fields\n";return 1;
+        }
         assert(shapeReloaded.specularScale==.195F);
         assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
         assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);

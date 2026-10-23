@@ -36,6 +36,24 @@ int main() { try {
     auto directionalResponse=localShape;directionalResponse["type"]="directional";bool rejectedDirectional=false;
     try{(void)directionalResponse.get<azurerender::LightShape>();}catch(const std::exception&){rejectedDirectional=true;}
     if(!rejectedDirectional)throw std::runtime_error("Local character response requires a punctual light");
+    auto lineShape=localShape;lineShape["falloff"]="smooth-inverse-square";
+    lineShape["characterResponse"]["schemaVersion"]=2;lineShape["characterResponse"]["linearLength"]=1;
+    auto line=lineShape.get<azurerender::LightShape>();
+    if(Json(line)["characterResponse"]["linearLength"]!=1||Json(line)["characterResponse"]["schemaVersion"]!=2)
+        throw std::runtime_error("Version two line response must roundtrip without changing the authored version");
+    localLight.shape=line;localBuffer.setLights({localLight});const auto lineBytes=localBuffer.gpuData();
+    if(sizeof(lineBytes[0])!=144||(reinterpret_cast<const float*>(&lineBytes[0])+32)[3]!=1)
+        throw std::runtime_error("Line length must consume the existing GPU response row W");
+    for(const auto& value:Json::array({-1,65537,65536.00001,"1",true,nullptr})) {
+        auto bad=lineShape;bad["characterResponse"]["linearLength"]=value;bool rejected=false;
+        try{(void)bad.get<azurerender::LightShape>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid line length must fail import");
+    }
+    for(const auto* field:{"type","falloff"}) {
+        auto bad=lineShape;bad[field]=std::string(field)=="type"?"spot":"legacy";bool rejected=false;
+        try{(void)bad.get<azurerender::LightShape>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Line response requires a point shape and explicit distance model");
+    }
     const Json receiver={{"schemaVersion",1},{"surfaces",true},{"characters",false}};
     Json authored=Json(azurerender::LightShape{});authored["receivers"]=receiver;
     auto parsed=authored.get<azurerender::LightShape>();

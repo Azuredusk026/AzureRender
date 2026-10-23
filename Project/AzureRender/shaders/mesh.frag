@@ -847,6 +847,11 @@ void main() {
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
         bool characterLight=light.characterResponse.x>.5&&(sceneCharacter||nprDiffuse);
+        if(characterLight&&light.characterResponse.w>0.0) {
+            LineLightGeometry line=lineLightGeometry(toLight,light.directionOuter.xyz,light.characterResponse.w);
+            radiance*=line.factor*(light.coneType.z<1.5?distanceSquared+1.0:1.0);
+            pointDirection=line.direction;pointDiffuse=max(dot(localLightingNormal,pointDirection),0.0);
+        }
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
             dot(localLightingNormal,pointDirection),light.characterResponse.yz,characterSceneVisibility):radiance;
         if(eyeRadial&&camera.clusterLighting.x>.5) {
