@@ -7,6 +7,8 @@ namespace azurerender {
 struct CameraPickRay {internal::Vector3 origin,direction;};
 struct CameraScreenSegment {std::array<float,2> from,to;};
 inline void validateCameraView(const CameraViewDescriptor& view,float aspect){
+    for(float offset:{view.projectionOffsetX,view.projectionOffsetY})if(!std::isfinite(offset)||std::abs(offset)>2)
+        throw std::invalid_argument("Camera projection offsets must be finite and in [-2,2]");
     for(const auto& vector:{view.position,view.target,view.up})for(float value:vector)if(!std::isfinite(value))throw std::invalid_argument("Camera pose must be finite");
     const auto forward=internal::subtract(view.target,view.position);
     if(internal::vectorLength(forward)<1e-6F||internal::vectorLength(internal::cross(forward,view.up))<1e-6F)throw std::invalid_argument("Camera requires nondegenerate forward and up vectors");
@@ -14,16 +16,26 @@ inline void validateCameraView(const CameraViewDescriptor& view,float aspect){
         ||!std::isfinite(view.nearPlane)||!std::isfinite(view.farPlane)||view.nearPlane<=0||view.farPlane<=view.nearPlane)throw std::invalid_argument("Invalid camera projection");
 }
 inline internal::Matrix4 cameraViewMatrix(const CameraViewDescriptor& view){validateCameraView(view,1);return internal::lookAt(view.position,view.target,view.up);}
+inline internal::Vector3 cameraProjectionRayOffset(const CameraViewDescriptor& view,
+    const internal::Vector3& right,const internal::Vector3& up,float halfWidth,float halfHeight){
+    return internal::addVectors(internal::scaleVector(right,-view.projectionOffsetX*halfWidth),
+        internal::scaleVector(up,view.projectionOffsetY*halfHeight));
+}
 inline internal::Matrix4 cameraProjectionMatrix(const CameraViewDescriptor& view,float aspect){
     validateCameraView(view,aspect);
-    if(view.projection==CameraProjectionKind::Orthographic){const float height=view.orthoHeight*.5F;return internal::orthographic(-height*aspect,height*aspect,-height,height,view.nearPlane,view.farPlane);}
-    return internal::perspective(view.fov,aspect,view.nearPlane,view.farPlane);
+    if(view.projection==CameraProjectionKind::Orthographic){
+        const float height=view.orthoHeight*.5F;auto result=internal::orthographic(-height*aspect,height*aspect,-height,height,view.nearPlane,view.farPlane);
+        result[12]+=view.projectionOffsetX;result[13]+=view.projectionOffsetY;return result;
+    }
+    auto result=internal::perspective(view.fov,aspect,view.nearPlane,view.farPlane);
+    result[8]-=view.projectionOffsetX;result[9]-=view.projectionOffsetY;return result;
 }
 inline CameraPickRay cameraPickRay(const CameraViewDescriptor& view,float u,float v,float aspect){
     validateCameraView(view,aspect);if(!std::isfinite(u)||!std::isfinite(v))throw std::invalid_argument("Invalid viewport coordinates");
     const auto forward=internal::normalize(internal::subtract(view.target,view.position)),right=internal::normalize(internal::cross(forward,view.up)),up=internal::cross(right,forward);
     const auto h=view.projection==CameraProjectionKind::Orthographic?view.orthoHeight*.5F:std::tan(view.fov*.5F);
-    const auto offset=internal::addVectors(internal::scaleVector(right,(2*u-1)*h*aspect),internal::scaleVector(up,(1-2*v)*h));
+    const auto offset=internal::addVectors(cameraProjectionRayOffset(view,right,up,h*aspect,h),
+        internal::addVectors(internal::scaleVector(right,(2*u-1)*h*aspect),internal::scaleVector(up,(1-2*v)*h)));
     if(view.projection==CameraProjectionKind::Orthographic)return {internal::addVectors(view.position,offset),forward};
     return {view.position,internal::normalize(internal::addVectors(forward,offset))};
 }

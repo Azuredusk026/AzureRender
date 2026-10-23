@@ -17,7 +17,7 @@
 
 namespace azurerender {
 
-template <typename Interface>
+template <typename Interface,std::uint32_t ApiVersion=1>
 class ExtensionRegistry final {
 public:
     using Factory = std::function<std::unique_ptr<Interface>()>;
@@ -87,7 +87,7 @@ public:
         return result;
     }
 
-    static constexpr std::uint32_t kApiVersion = 1;
+    static constexpr std::uint32_t kApiVersion = ApiVersion;
 
 private:
     struct Entry {
@@ -101,6 +101,6 @@ private:
 using RenderFeatureRegistry = ExtensionRegistry<IRenderFeature>;
 using AssetImporterRegistry = ExtensionRegistry<IAssetImporter>;
 using EditorPanelRegistry = ExtensionRegistry<IEditorPanel>;
-using SceneRendererRegistry = ExtensionRegistry<ISceneRenderer>;
+using SceneRendererRegistry = ExtensionRegistry<ISceneRenderer,SceneRendererCapabilities::kApiVersion>;
 
 }  // namespace azurerender

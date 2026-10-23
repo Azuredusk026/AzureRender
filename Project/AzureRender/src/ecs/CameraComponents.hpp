@@ -2,7 +2,7 @@
 #include "reflection/Annotations.hpp"
 #include <cstdint>
 namespace azurerender::game {
-AZURE_TYPE("azure.camera", 1)
+AZURE_TYPE("azure.camera", 2)
 struct GameCamera {
     AZURE_FIELD("Enabled", 0, 1)
     bool enabled = true;
@@ -18,5 +18,11 @@ struct GameCamera {
     float nearPlane = .1F;
     AZURE_FIELD("Far plane", 0.002, 100000)
     float farPlane = 1000.F;
+    AZURE_FIELD("水平投影偏移", -2, 2)
+    AZURE_FIELD_EDITOR("NDC", 8, true)
+    float projectionOffsetX = 0;
+    AZURE_FIELD("垂直投影偏移", -2, 2)
+    AZURE_FIELD_EDITOR("NDC", 8, true)
+    float projectionOffsetY = 0;
 };
 }

@@ -104,8 +104,14 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
+    if(sceneRegistry.kApiVersion!=2||azurerender::SceneRendererCapabilities::kApiVersion!=2)
+        throw std::runtime_error("Camera view layout changes require scene renderer API version two");
+    bool oldSceneApiRejected=false;
+    try{sceneRegistry.registerFactory({"scene.old",1,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
+    catch(const std::runtime_error&){oldSceneApiRejected=true;}
+    if(!oldSceneApiRejected)throw std::runtime_error("An older scene renderer API must be rejected before registration");
     sceneRegistry.registerFactory(
-        {"scene.character", 1, {"render"}, {}},
+        {"scene.character", 2, {"render"}, {}},
         [] { return std::make_unique<TestSceneRenderer>(); });
     assert(sceneRegistry.contains("scene.character"));
     const auto selectedScene = sceneRegistry.create("scene.character");
@@ -118,6 +124,11 @@ int main() {
     assert(scenes[0]->diagnosticViewName(99) == "Unknown");
     azurerender::validateSceneRendererCapabilities(
         scenes[0]->capabilities());
+    azurerender::CameraViewDescriptor shiftedCamera;shiftedCamera.projectionOffsetX=.25F;
+    bool unsupportedOffset=false;
+    try{azurerender::validateSceneRendererCamera(scenes[0]->capabilities(),shiftedCamera);}
+    catch(const std::invalid_argument&){unsupportedOffset=true;}
+    if(!unsupportedOffset)throw std::runtime_error("A renderer must declare projection offset support explicitly");
     bool invalidCapabilitiesFailed = false;
     try {
         azurerender::SceneRendererCapabilities invalid;

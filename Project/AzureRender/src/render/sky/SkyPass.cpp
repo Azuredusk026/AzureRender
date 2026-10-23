@@ -1,5 +1,6 @@
 #include "SkyPass.hpp"
 #include "render/LinearMath.hpp"
+#include "render/CameraProjection.hpp"
 #include "resources/BinaryFile.hpp"
 #include <cstring>
 namespace azurerender {
@@ -38,6 +39,7 @@ void SkyPass::update(const SceneFrameData& f){
  const auto& camera=f.camera.view;const auto forward=normalize(subtract(camera.target,camera.position));const auto right=normalize(cross(forward,camera.up));const auto up=cross(right,forward);
  const float scale=camera.projection==CameraProjectionKind::Orthographic?0.F:std::tan(camera.fov*.5F);
  Uniform uniform;for(unsigned i=0;i<3;++i){uniform.right[i]=right[i]*scale*aspect_;uniform.up[i]=up[i]*scale;uniform.forward[i]=forward[i];uniform.color[i]=settings_.color[i];}
+ const auto shift=cameraProjectionRayOffset(camera,right,up,scale*aspect_,scale);for(unsigned i=0;i<3;++i)uniform.forward[i]+=shift[i];
  uniform.parameters={static_cast<float>(settings_.mode),settings_.intensity,settings_.rotationDegrees*.01745329252F,0};
  auto& buffer=uniforms_.at(frame_);std::memcpy(buffer.mapped,&uniform,sizeof(uniform));allocator_->flush(buffer,0,sizeof(uniform));
 }

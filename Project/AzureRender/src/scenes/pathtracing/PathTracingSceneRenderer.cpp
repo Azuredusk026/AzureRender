@@ -1,5 +1,6 @@
 #include "animation/PresentedPose.hpp"
 #include "PathTracingSceneRenderer.hpp"
+#include "render/CameraProjection.hpp"
 #include "assets/MaterialData.hpp"
 #include "resources/BinaryFile.hpp"
 #include "render/LinearMath.hpp"
@@ -110,6 +111,8 @@ void PathTracingSceneRenderer::updateFrame(const SceneFrameData& frame){
  const float scale=ortho?camera.orthoHeight*.5F:std::tan(camera.fov*.5F);
  for(unsigned i=0;i<3;++i){next.origin[i]=camera.position[i];next.forward[i]=forward[i];next.right[i]=right[i]*scale*static_cast<float>(width_)/static_cast<float>(height_);next.up[i]=up[i]*scale;next.skyColor[i]=settings_.sky.color[i];}
  next.origin[3]=ortho?1.F:0.F;next.forward[3]=camera.nearPlane;next.up[3]=camera.farPlane;
+ const auto rayOffset=cameraProjectionRayOffset(camera,right,up,scale*static_cast<float>(width_)/static_cast<float>(height_),scale);
+ for(unsigned i=0;i<3;++i)next.rayOffset[i]=rayOffset[i];
  next.sky={static_cast<float>(settings_.sky.mode),settings_.sky.intensity,settings_.sky.rotationDegrees*.01745329252F,settings_.pathTraceDenoise?1.F:0.F};
  next.counts={static_cast<unsigned>(geometry_.triangles.size()),static_cast<unsigned>(geometry_.nodes.size()),static_cast<unsigned>(geometry_.lights.size()),settings_.pathTraceBounces};
  next.image={width_,height_,0,settings_.pathTraceSeed};
@@ -146,7 +149,7 @@ void PathTracingSceneRenderer::recordScene(const RenderContext& c){
 }
 void PathTracingSceneRenderer::onSwapchainRecreate(const RenderContext& c){allocateHistory(c);}
 void PathTracingSceneRenderer::appendHudText(std::ostringstream& out)const{out<<"Path tracing: "<<samples_<<" / "<<settings_.pathTraceSamples<<" samples, "<<settings_.pathTraceBounces<<" bounces, "<<geometry_.triangles.size()<<" triangles\n";}
-void PathTracingSceneRenderer::appendCaptureManifestFields(std::ostream& out)const{out<<"  \"pathTracingSamples\": "<<samples_<<",\n  \"pathTracingResets\": "<<resets_<<",\n";}
+void PathTracingSceneRenderer::appendCaptureManifestFields(std::ostream& out)const{out<<"  \"pathTracingSamples\": "<<samples_<<",\n  \"pathTracingResets\": "<<resets_<<",\n  \"pathTracingCameraLayoutVersion\": "<<Uniform::kLayoutVersion<<",\n";}
 void PathTracingSceneRenderer::onUnload(const RenderContext&){
  if(!rhi_||!allocator_)return;
  rhi_->destroyPipeline(display_);rhi_->destroyPipeline(compute_);rhi_->destroyPipelineLayout(layout_);rhi_->destroyDescriptorPool(pool_);rhi_->destroyDescriptorSetLayout(setLayout_);

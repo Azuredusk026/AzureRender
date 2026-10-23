@@ -40,10 +40,19 @@ int main() {
         context->assets().refresh();
         context->addGameplayComponent("azure.script");
         context->setComponentField("azure.script","asset","assets:/inspect.lua");
+        context->addGameplayComponent("azure.camera");
+        context->setComponentField("azure.camera","projectionOffsetX",.25);
+        context->setComponentField("azure.camera","projectionOffsetY",-.5);
         context->save();
         auto reopened=EditorContext::openProject(root/"project.azureproject");
         require(reopened->componentData("tool","tool.asset-note").at("text")=="from editor","Saved registered component lost content");
         EditorSession session(reopened);
+        require(reopened->componentData("tool","azure.camera").at("projectionOffsetX")==.25,"Saved camera must retain its projection offset");
+        const auto preview=session.edit("viewport.camera-preview",{{"node","tool"}});
+        require(static_cast<bool>(preview)&&session.viewportView().projectionOffsetX==.25F&&session.viewportView().projectionOffsetY==-.5F,
+            "Registered camera fields must reach the editor preview through the production operation");
+        const auto described=session.edit("viewport.describe");
+        require(static_cast<bool>(described)&&described.value.at("projectionOffsetX")==.25,"Projection offsets must be observable in the shared viewport descriptor");
         require(session.execute(EditorCommand::Play),session.lastError().c_str());
         session.advance(1.0/60);
         require(session.scripts()->errors().empty(),"Lua failed to access registered component");

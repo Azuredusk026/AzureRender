@@ -317,7 +317,8 @@ prefabSource, instanceOf
 | 契约 | 版本 |
 | --- | ---: |
 | 应用 | 0.1.0-rc1 |
-| Renderer SDK / Registry API | 1 |
+| Renderer SDK / Registry API | 2 |
+| `azure.camera` / `CameraViewDescriptor` | 2 |
 | RenderSettings | 8 |
 | `.azscene` | 2 |
 | Material Profile | 1 |

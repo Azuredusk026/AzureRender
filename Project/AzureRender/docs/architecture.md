@@ -492,7 +492,8 @@ flowchart TB
 
 | 契约 | 当前版本 |
 | --- | ---: |
-| `ISceneRenderer` API | 1 |
+| `ISceneRenderer` API | 2 |
+| `azure.camera` / `CameraViewDescriptor` | 2 |
 | `RenderSettings` | 8 |
 | `.azscene` | 3 |
 | glTF Material Profile | 1 |

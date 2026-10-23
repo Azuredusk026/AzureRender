@@ -256,6 +256,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     SceneRendererCapabilities caps;
     caps.requiresSceneDepth = true;
     caps.requiresSceneNormal = true;
+    caps.supportsProjectionOffset=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -3206,10 +3207,11 @@ void CharacterSceneRenderer::updateUniformBuffer(
             const float halfWidth = halfHeight * aspect;
             const Vector3 sliceCenter = addVectors(
                 cameraPosition_, scaleVector(cameraForward, depth));
+            const auto projectionShift=settings.cameraView?cameraProjectionRayOffset(*settings.cameraView,cameraRight,cameraUp,halfWidth,halfHeight):Vector3{};
             for (const float vertical : {-1.0F, 1.0F}) {
                 for (const float horizontal : {-1.0F, 1.0F}) {
                     const Vector3 corner = addVectors(
-                        sliceCenter,
+                        addVectors(sliceCenter,projectionShift),
                         addVectors(
                             scaleVector(cameraRight, horizontal * halfWidth),
                             scaleVector(cameraUp, vertical * halfHeight)));
@@ -3264,6 +3266,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};
     uniform.skyUp={cameraUp[0]*skyScale,cameraUp[1]*skyScale,cameraUp[2]*skyScale,0};
     uniform.skyForward={cameraForward[0],cameraForward[1],cameraForward[2],0};
+    if(settings.cameraView){const auto shift=cameraProjectionRayOffset(*settings.cameraView,cameraRight,cameraUp,skyScale*aspect,skyScale);
+        for(unsigned axis=0;axis<3;++axis)uniform.skyForward[axis]+=shift[axis];}
     uniform.skyColor={settings.sky.color[0],settings.sky.color[1],settings.sky.color[2],1};
     uniform.skyParameters={static_cast<float>(settings.sky.mode),settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,0};
     uniform.clusterLighting={settings.sceneLightingEnabled?1.F:0.F,settings.sky.intensity,settings.sky.rotationDegrees*kPi/180.F,float(settings.environmentSpecularModel)};
@@ -3418,6 +3422,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         projection[5],
         renderSettings_->cameraView && renderSettings_->cameraView->projection
             == CameraProjectionKind::Orthographic,
+        renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[12]:-projection[8],
+        renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[13]:-projection[9],
     });
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();

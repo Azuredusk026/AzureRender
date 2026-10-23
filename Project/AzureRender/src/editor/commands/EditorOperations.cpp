@@ -353,7 +353,7 @@ EditRegistry editorOperations(EditorSession& session) {
         session.frameSelectionRequested_=true;return nullptr;
     });
     registry.add({"viewport.describe",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json {
-        const auto& view=session.viewportView_;return {{"projection",view.projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"position",view.position},{"target",view.target},{"up",view.up},{"fov",view.fov},{"orthoHeight",view.orthoHeight},{"near",view.nearPlane},{"far",view.farPlane}};
+        const auto& view=session.viewportView_;return {{"projection",view.projection==CameraProjectionKind::Orthographic?"orthographic":"perspective"},{"position",view.position},{"target",view.target},{"up",view.up},{"fov",view.fov},{"orthoHeight",view.orthoHeight},{"near",view.nearPlane},{"far",view.farPlane},{"projectionOffsetX",view.projectionOffsetX},{"projectionOffsetY",view.projectionOffsetY}};
     });
     registry.add({"viewport.overlays",1,schema(),false,false,false},[&session](EditorContext&,const Json&)->Json{return session.viewportOverlays().describe();});
     registry.add({"viewport.overlay-policy",1,schema({{"category",text},{"policy",text}},{"category","policy"}),false,false,true},[&session](EditorContext&,const Json& a)->Json{
@@ -364,7 +364,8 @@ EditRegistry editorOperations(EditorSession& session) {
     registry.add({"viewport.camera-preview",1,schema({{"node",text}},{"node"}),false,false,true},[&session](EditorContext& c,const Json& a)->Json{
         const auto node=a.at("node").get<std::string>();const auto data=c.componentData(node,"azure.camera");
         if(data.is_null())throw EditRejection("Selected object has no GameCamera");
-        game::GameCamera camera;runtimeComponentRegistry().metadata().decode("azure.camera",&camera,{{"type","azure.camera"},{"version",1},{"data",data}});
+        const auto& metadata=runtimeComponentRegistry().metadata();
+        game::GameCamera camera;metadata.decode("azure.camera",&camera,{{"type","azure.camera"},{"version",metadata.type("azure.camera").version},{"data",data}});
         const auto scene=c.scene().renderDescription();const auto matrices=scene::resolveNodeWorldTransforms(scene);
         for(std::size_t i=0;i<scene.nodes.size();++i)if(scene.nodes[i].id==node){
             const auto view=gameCameraView(camera,matrices[i]);

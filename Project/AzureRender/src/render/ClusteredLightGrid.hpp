@@ -21,6 +21,7 @@ struct ClusterGridDesc {
     float projectionScaleX = 1.0F;
     float projectionScaleY = 1.0F;
     bool orthographic = false;
+    float projectionOffsetX=0,projectionOffsetY=0;
 };
 
 class ClusteredLightGrid final {
@@ -30,6 +31,8 @@ public:
             || !(desc_.nearPlane > 0.0F) || !(desc_.farPlane > desc_.nearPlane)) {
             throw std::invalid_argument("Invalid clustered light grid");
         }
+        for(float offset:{desc_.projectionOffsetX,desc_.projectionOffsetY})if(!std::isfinite(offset)||std::abs(offset)>2)
+            throw std::invalid_argument("Invalid clustered projection offset");
         clusters_.resize(clusterCount());
     }
 
@@ -71,16 +74,17 @@ public:
                 + std::abs(desc_.projectionScaleY) * projectedRadius;
             if (light.viewSpaceBounds) {
                 const auto interval = [&](unsigned axis, float projectionScale) {
+                    const float offset=axis==0?desc_.projectionOffsetX:desc_.projectionOffsetY;
                     const float low = light.viewPosition[axis] - radius;
                     const float high = light.viewPosition[axis] + radius;
-                    if (desc_.orthographic) return std::array<float,2>{std::min(low*projectionScale,high*projectionScale),
-                        std::max(low*projectionScale,high*projectionScale)};
+                    if (desc_.orthographic) return std::array<float,2>{std::min(low*projectionScale,high*projectionScale)+offset,
+                        std::max(low*projectionScale,high*projectionScale)+offset};
                     // Project the clipped view-space AABB, not a sphere center
                     // behind the camera. This is conservative at the near plane.
                     const std::array<float,4> corners{low/minimumDepth*projectionScale,low/maximumDepth*projectionScale,
                         high/minimumDepth*projectionScale,high/maximumDepth*projectionScale};
-                    return std::array<float,2>{*std::min_element(corners.begin(),corners.end()),
-                        *std::max_element(corners.begin(),corners.end())};
+                    return std::array<float,2>{*std::min_element(corners.begin(),corners.end())+offset,
+                        *std::max_element(corners.begin(),corners.end())+offset};
                 };
                 const auto x = interval(0, desc_.projectionScaleX);
                 const auto y = interval(1, desc_.projectionScaleY);

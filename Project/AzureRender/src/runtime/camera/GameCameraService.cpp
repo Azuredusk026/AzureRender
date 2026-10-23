@@ -14,6 +14,7 @@ CameraViewDescriptor gameCameraView(const game::GameCamera& camera,const std::ar
         view.projection=camera.orthographic?CameraProjectionKind::Orthographic:CameraProjectionKind::Perspective;
         view.fov=camera.fieldOfView*.017453292519943295F;
         view.orthoHeight=camera.orthographicHeight;view.nearPlane=camera.nearPlane;view.farPlane=camera.farPlane;
+        view.projectionOffsetX=camera.projectionOffsetX;view.projectionOffsetY=camera.projectionOffsetY;
     validateCameraView(view,1.F);return view;
 }
 GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const SceneDocument& sceneDocument){

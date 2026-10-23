@@ -31,6 +31,8 @@ python tools/create_pathtracing_project.py --output D:/Project/MyTracingDemo
 
 游戏相机组件的类型为 `azure.camera`。
 项目可配置投影、裁剪面、启用状态和优先级。
+版本二支持水平与垂直的归一化投影偏移。
+子像素输入及消费范围见[相机投影偏移](../runtime/camera-projection-offset.md)。
 运行使用启用且优先级最高的游戏相机。
 缺少游戏相机时，界面显示默认视角提示。
 模拟模式继续使用场景观察相机。

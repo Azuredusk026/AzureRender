@@ -24,11 +24,17 @@ FrameSelectionResult EditorCameraService::frameSelection(EditorViewDescriptor& v
     auto candidate=view;for(unsigned a=0;a<3;++a)candidate.target[a]=(bounds.bounds.minimum[a]+bounds.bounds.maximum[a])*.5F;
     float distance=view.nearPlane,height=.001F;
     for(unsigned corner=0;corner<8;++corner){internal::Vector3 offset;for(unsigned a=0;a<3;++a)offset[a]=((corner&(1U<<a))?bounds.bounds.maximum[a]:bounds.bounds.minimum[a])-candidate.target[a];
-        const auto depth=internal::dot(offset,forward);const float extent=std::max(std::abs(internal::dot(offset,right))/aspect,std::abs(internal::dot(offset,up)))/.9F;
+        const auto depth=internal::dot(offset,forward);const float tangent=std::tan(view.fov*.5F);
+        const float x=internal::dot(offset,right)/aspect+(view.projection==CameraProjectionKind::Perspective?view.projectionOffsetX*depth*tangent:0);
+        const float y=internal::dot(offset,up)-(view.projection==CameraProjectionKind::Perspective?view.projectionOffsetY*depth*tangent:0);
+        const float extent=std::max(std::abs(x),std::abs(y))/.9F;
         height=std::max(height,extent*2);distance=std::max(distance,std::max(view.nearPlane*1.1F,view.projection==CameraProjectionKind::Perspective?extent/std::tan(view.fov*.5F):view.nearPlane*1.1F)-depth);
     }
     for(unsigned corner=0;corner<8;++corner){internal::Vector3 offset;for(unsigned a=0;a<3;++a)offset[a]=((corner&(1U<<a))?bounds.bounds.maximum[a]:bounds.bounds.minimum[a])-candidate.target[a];if(distance+internal::dot(offset,forward)>=view.farPlane)return {false,{}, {},0,"Selection exceeds camera clipping range"};}
-    candidate.position=internal::subtract(candidate.target,internal::scaleVector(forward,distance));if(view.projection==CameraProjectionKind::Orthographic)candidate.orthoHeight=height;view=candidate;
+    candidate.position=internal::subtract(candidate.target,internal::scaleVector(forward,distance));if(view.projection==CameraProjectionKind::Orthographic)candidate.orthoHeight=height;
+    const float halfHeight=view.projection==CameraProjectionKind::Orthographic?height*.5F:distance*std::tan(view.fov*.5F);
+    const auto shift=cameraProjectionRayOffset(view,right,up,halfHeight*aspect,halfHeight);
+    candidate.position=internal::subtract(candidate.position,shift);candidate.target=internal::subtract(candidate.target,shift);view=candidate;
     return {true,view.position,view.target,distance,{}};
 }
 FrameSelectionResult EditorCameraService::frameSelection(const SelectionBoundsResult& result,std::array<float,3> position,std::array<float,3> target,float fov,float aspect,float nearPlane,float farPlane){

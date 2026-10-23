@@ -3,12 +3,30 @@
 #include "runtime/RuntimeLifecycle.hpp"
 #include "ecs/CameraComponents.hpp"
 #include "render/RenderCamera.hpp"
+#include "scene/TransformMath.hpp"
 #include <iostream>
 using namespace azurerender;
 void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 int main(){try{
     auto registry=makeRuntimeComponentRegistry();
     const auto camera=registry.defaults("azure.camera");registry.validate("azure.camera",camera);
+    check(camera.at("version")==2,"Projection offsets require camera component version two");
+    for(const auto& property:registry.metadata().type("azure.camera").properties)
+        if(property.name=="projectionOffsetX"||property.name=="projectionOffsetY")
+            check(property.precision==8&&property.unit=="NDC","Subpixel offsets must retain adequate editor precision and an explicit unit");
+    auto shifted=camera;shifted["data"]["projectionOffsetX"]=.25;shifted["data"]["projectionOffsetY"]=-.5;
+    registry.validate("azure.camera",shifted);
+    for(const auto& bad:std::vector<nlohmann::json>{true,nullptr,"0",2.00000001,-2.00000001}) {
+        auto invalidOffset=shifted;invalidOffset["data"]["projectionOffsetX"]=bad;bool failed=false;
+        try{registry.validate("azure.camera",invalidOffset);}catch(const std::exception&){failed=true;}
+        check(failed,"Projection offsets must reject invalid types and out-of-range doubles");
+    }
+    auto legacy=camera;legacy["version"]=1;legacy["data"].erase("projectionOffsetX");legacy["data"].erase("projectionOffsetY");
+    game::GameCamera migrated;registry.metadata().decode("azure.camera",&migrated,legacy);
+    check(migrated.projectionOffsetX==0&&migrated.projectionOffsetY==0,"Version one cameras migrate to zero projection offsets");
+    game::GameCamera offsetCamera;offsetCamera.projectionOffsetX=.25F;offsetCamera.projectionOffsetY=-.5F;
+    const auto offsetView=gameCameraView(offsetCamera,scene::identityMatrix());
+    check(offsetView.projectionOffsetX==.25F&&offsetView.projectionOffsetY==-.5F,"Game camera projection offsets reach the shared render view");
     auto invalid=camera;invalid["data"]["nearPlane"]=100;invalid["data"]["farPlane"]=1;
     bool rejected=false;try{registry.validate("azure.camera",invalid);}catch(const std::exception&){rejected=true;}
     check(rejected,"Invalid clipping planes rejected");

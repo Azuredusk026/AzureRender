@@ -32,6 +32,8 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 有序混合、实际权重及最终像素见[颜色混合](../acceptance/nr/character-color-blend.md)。
 屏幕边缘及镜面消费者见[运行验证](../acceptance/nr/character-screen-light-modes.md)。
 完整九灯候选的图像误差仍待修复，按 C16-R1 继续定位。
+捕获子像素偏移已接入公共相机版本二。
+多片元输入与双配置检查见[投影验证](../acceptance/nr/camera-projection-offset.md)。
 
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。

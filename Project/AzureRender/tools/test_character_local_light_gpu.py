@@ -28,7 +28,7 @@ def line_reference(incoming,axis,length):
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=('front','side','back','compressed','uncompressed','two-lights','fixed','disabled-scene-npr','no-receiver','pbr','pbr-control','upper-light','lower-light',
-        'line-light','line-zero','line-zero-range','line-axis-x','line-axis-y','line-fixed','line-range','line-pbr','line-pbr-control')
+        'line-light','line-zero','line-zero-range','line-axis-x','line-axis-y','line-fixed','line-range','line-pbr','line-pbr-control','offset-camera')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]};frames={}
@@ -47,10 +47,15 @@ def run(player,output,selected=None,expected_validation=None):
             path=folder/'level.azurelevel';level=json.loads(path.read_text());light=level['lights'][0]
             position=[2,0,0] if name=='side' else [0,0,-2] if name=='back' else [0,0,2]
             if name in ('upper-light','lower-light'):position=[0,2 if name=='upper-light' else -2,.5];light['radius']=1
+            if name=='offset-camera':
+                position=[0,0,.5];light['radius']=1
+                camera=level['nodes'][1]['components']['azure.camera'];camera['version']=2
+                camera['data'].update(projectionOffsetX=.5,projectionOffsetY=.5)
             line=name.startswith('line-')
             if line:position=[0,0,1]
             level['nodes'][2]['components']['azure.transform']['data']['translation']=position
             strong=name in ('compressed','uncompressed','two-lights');color=[8,4,2] if strong else [.8,.6,.4];intensity=1 if strong else 3 if name in ('side','back','upper-light','lower-light') else .7
+            if name=='offset-camera':intensity=3
             light.update(color=color,intensity=intensity)
             if line:light.update(intensity=3);intensity=3
             if name in ('line-axis-x','line-axis-y'):light.update(intensity=9);intensity=9
@@ -80,10 +85,14 @@ def run(player,output,selected=None,expected_validation=None):
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             pixel_y=32 if name=='upper-light' else 96 if name=='lower-light' else 64
             pixel_x=80 if name in ('line-axis-x','line-axis-y') else 64
+            if name=='offset-camera':pixel_x=pixel_y=96
             measured=linear(pixels[pixel_y,pixel_x]);expected=None;error=None
             if name.startswith('pbr') or name.startswith('line-pbr'):assert max(measured)>.015,'PBR unchanged-path control must remain visibly lit'
             if not (name.startswith('pbr') or name.startswith('line-pbr')):
                 delta=np.asarray(position)-[(pixel_x+.5)/128*8-4,4-(pixel_y+.5)/128*8,0];distance=np.linalg.norm(delta);cosine=delta[2]/distance
+                if name=='offset-camera':
+                    delta=np.asarray(position)-[(pixel_x+.5)/128*8-6,6-(pixel_y+.5)/128*8,0]
+                    distance=np.linalg.norm(delta);cosine=delta[2]/distance
                 attenuation=(1-distance/light['radius'])**2/(1+.12*distance*distance);incident=np.asarray(color)*intensity*attenuation
                 if line:
                     direction,factor=line_reference(delta,[0,1,0] if name=='line-axis-y' else [1,0,0],0 if name.startswith('line-zero') else 4)
@@ -100,7 +109,7 @@ def run(player,output,selected=None,expected_validation=None):
                 response=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
                 expected=response*incident
                 if name=='no-receiver':expected[:]=0
-                if name in ('side','back','upper-light','lower-light'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
+                if name in ('side','back','upper-light','lower-light','offset-camera'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
                 error=float(np.abs(measured-expected).max())
             report['captures'].append({'name':name,'maximumLinearError':error,'measured':measured.tolist(),
                 'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation})

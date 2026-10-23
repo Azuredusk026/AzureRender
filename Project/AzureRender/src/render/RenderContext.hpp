@@ -64,14 +64,19 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 1;
+    static constexpr std::uint32_t kApiVersion = 2;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
     // Diagnostic view names shown by the engine HUD / technical sequence.
     // Index 0 must be the Beauty (final composite) name.
     std::vector<std::string> diagnosticViewNames;
+    bool supportsProjectionOffset=false;
 };
+inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
+    if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)
+        throw std::invalid_argument("Scene renderer does not support camera projection offsets");
+}
 
 inline void validateSceneRendererCapabilities(
     const SceneRendererCapabilities& capabilities) {

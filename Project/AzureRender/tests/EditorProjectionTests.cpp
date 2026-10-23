@@ -8,6 +8,28 @@ using namespace azurerender;
 int main(){try{
     EditorSession session(std::make_shared<EditorContext>(SceneDocument{},std::filesystem::temp_directory_path()/"azure-projection-fixture.azscene"));const auto before=session.context().documentContent();
     const auto require=[](bool result,const char* message){if(!result)throw std::runtime_error(message);};
+    for(auto kind:{CameraProjectionKind::Perspective,CameraProjectionKind::Orthographic}) {
+        auto shifted=session.viewportView();shifted.position={0,0,5};shifted.target={0,0,0};shifted.up={0,1,0};shifted.projection=kind;
+        for(auto offset:{std::array<float,2>{0,0},std::array<float,2>{.5F,-.25F},std::array<float,2>{-1.5F,1.25F}}) {
+            shifted.projectionOffsetX=offset[0];shifted.projectionOffsetY=offset[1];
+            auto matrix=internal::multiply(cameraProjectionMatrix(shifted,1.5F),cameraViewMatrix(shifted));
+            const float w=matrix[15];require(std::abs(matrix[12]/w-offset[0])<1e-5F&&std::abs(matrix[13]/w-offset[1])<1e-5F,
+                "A projection offset moves the optical-axis point in normalized viewport coordinates");
+            for(auto uv:{std::array<float,2>{.2F,.7F},std::array<float,2>{.5F,.5F}}) {
+                const auto ray=cameraPickRay(shifted,uv[0],uv[1],1.5F);const auto point=internal::addVectors(ray.origin,internal::scaleVector(ray.direction,3));
+                const auto screen=projectCameraSegment(shifted,1.5F,point,point);
+                require(screen&&std::abs(screen->from[0]-uv[0])<1e-5F&&std::abs(screen->from[1]-uv[1])<1e-5F,"Offset picking rays must reproject into their source viewport pixel");
+            }
+            SelectionBoundsResult bounds{true,{{-1,-2,-.5F},{1,2,.5F}},{}};
+            const auto framed=EditorCameraService::frameSelection(shifted,bounds,1.5F);require(framed.passed,"Offset camera framing must remain available");
+            matrix=internal::multiply(cameraProjectionMatrix(shifted,1.5F),cameraViewMatrix(shifted));
+            for(unsigned corner=0;corner<8;++corner){internal::Vector3 point;for(unsigned a=0;a<3;++a)point[a]=(corner&(1U<<a))?bounds.bounds.maximum[a]:bounds.bounds.minimum[a];
+                float clip[4]{};for(unsigned row=0;row<4;++row){clip[row]=matrix[12+row];for(unsigned a=0;a<3;++a)clip[row]+=matrix[a*4+row]*point[a];}
+                require(std::abs(clip[0]/clip[3])<=.951F&&std::abs(clip[1]/clip[3])<=.951F,"Offset framing must retain every selection corner inside the viewport");
+            }
+            shifted.position={0,0,5};shifted.target={0,0,0};
+        }
+    }
     for(const auto* axis:{"+X","-X","+Y","-Y","+Z","-Z"}){
         const auto oriented=session.edit("viewport.orientation",{{"axis",axis}});require(static_cast<bool>(oriented),"Six-axis orientations must use a registered production operation");
         const auto view=session.edit("viewport.describe");require(static_cast<bool>(view),"The shared view descriptor must be observable");

@@ -2070,6 +2070,10 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.ShadowColorLutGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shadow_color_lut_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureTools.NativeNprLighting COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_npr_lighting.py)
     add_test(NAME AzureTools.NativeCapturedLights COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_captured_lights.py)
+    add_test(NAME AzureTools.NativeCameraProjection COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_camera_projection.py)
+    add_test(NAME AzureRender.CameraProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_camera_projection_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CameraProjectionGpu PROPERTIES TIMEOUT 180 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureTools.NativePostVs COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_postvs.py)
     add_test(NAME AzureEngine.NprIlluminationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_illumination_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
@@ -2087,7 +2091,7 @@ if(BUILD_TESTING)
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterScreenRimGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureRender.ClusteredLightProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
-        --executable $<TARGET_FILE:AzurePlayer> --case upper-light --case lower-light
+        --executable $<TARGET_FILE:AzurePlayer> --case upper-light --case lower-light --case offset-camera
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.ClusteredLightProjectionGpu PROPERTIES TIMEOUT 120 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureAssets.TextureMipBiasGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_texture_mip_bias_gpu.py"

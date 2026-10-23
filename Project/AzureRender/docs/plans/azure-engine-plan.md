@@ -11,6 +11,7 @@
 双锚帧的完整事件与管线索引已通过检查。
 范围见[绑定索引](../acceptance/nr/native-binding-index.md)。
 随后核对角色、场景照明、地面反射和物流的实际绑定。
+相机版本二与真实子像素输入见[投影验证](../acceptance/nr/camera-projection-offset.md)。
 NR0 的参考门禁及 NR1 至 NR12 的正式条件保持待验。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。

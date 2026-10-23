@@ -79,6 +79,11 @@ void Registry::addMigration(const std::string& name, unsigned version, std::func
 }
 Registry makeRuntimeRegistry() {
     Registry registry; registerGeneratedTypes(registry);
+    registry.addMigration("azure.camera",1,[](Json data){
+        if(data.contains("projectionOffsetX")||data.contains("projectionOffsetY"))
+            throw std::invalid_argument("Projection offsets require camera version two");
+        data["projectionOffsetX"]=0;data["projectionOffsetY"]=0;return data;
+    });
     registry.addMigration("azure.rigid-body", 1, [](Json data) { return data; });
     registry.addMigration("azure.rigid-body", 2, [](Json data) { data["kinematic"]=false;return data; });
     registry.addMigration("azure.character", 1, [](Json data) { return data; });

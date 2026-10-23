@@ -700,6 +700,8 @@ void AzureRenderApp::buildSceneFrameData(
     fallback.nearPlane=effectiveRenderSettings_.cameraNear;fallback.farPlane=effectiveRenderSettings_.cameraFar;
     const auto editingView=sceneViewActive?effectiveRenderSettings_.cameraView:std::optional<azurerender::CameraViewDescriptor>{};
     frame.camera=azurerender::selectRenderCamera(editingView,gameView,fallback);
+    if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0))
+        azurerender::validateSceneRendererCamera(sceneRenderer_->capabilities(),frame.camera.view);
     effectiveRenderSettings_.cameraView=frame.camera.view;
     effectiveRenderSettings_.cameraNear=frame.camera.view.nearPlane;
     effectiveRenderSettings_.cameraFar=frame.camera.view.farPlane;

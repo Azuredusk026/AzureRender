@@ -4,12 +4,13 @@
 #include "render/RenderSettings.hpp"
 #include "rhi/IGpuAllocator.hpp"
 #include "rhi/Rhi.hpp"
+#include <cstddef>
 namespace azurerender {
 // Host owns the queue and fences. Each frame slot is updated after its fence.
 class PathTracingSceneRenderer final: public ISceneRenderer {
 public:
  std::string_view name() const noexcept override{return "pathtracing";}
- SceneRendererCapabilities capabilities() const override{return {true,true,{"Beauty"}};}
+ SceneRendererCapabilities capabilities() const override{return {true,true,{"Beauty"},true};}
  void onLoad(const RenderContext&) override;
  void onUnload(const RenderContext&) override;
  void onSwapchainRecreate(const RenderContext&) override;
@@ -19,7 +20,8 @@ public:
  void appendHudText(std::ostringstream&) const override;
  void appendCaptureManifestFields(std::ostream&) const override;
 private:
- struct Uniform {tracing::Vec4 origin,right,up,forward,skyColor,sky;std::array<unsigned,4> counts{},image{};};
+ struct Uniform {static constexpr unsigned kLayoutVersion=2;tracing::Vec4 origin,right,up,forward,skyColor,sky;std::array<unsigned,4> counts{},image{};tracing::Vec4 rayOffset{};};
+ static_assert(sizeof(Uniform)==144&&offsetof(Uniform,rayOffset)==128);
  struct Slot {rhi::GpuBuffer uniform,triangles,nodes,lights;std::uint64_t generation=0;};
  rhi::IRhi* rhi_=nullptr;rhi::IGpuAllocator* allocator_=nullptr;
  VkDescriptorSetLayout setLayout_=VK_NULL_HANDLE;VkDescriptorPool pool_=VK_NULL_HANDLE;

@@ -17,15 +17,15 @@ std::string BuiltinRendererCatalog::documentRendererId(SceneType requested, bool
 
 SceneRendererRegistry BuiltinRendererCatalog::createRegistry() {
     SceneRendererRegistry registry;
-    registry.registerFactory({"pathtracing",1,{"geometry","progressive","capture"},{}},[]{return std::make_unique<PathTracingSceneRenderer>();});
+    registry.registerFactory({"pathtracing",SceneRendererRegistry::kApiVersion,{"geometry","progressive","capture"},{}},[]{return std::make_unique<PathTracingSceneRenderer>();});
     registry.registerFactory(
-        {"character", 1, {"geometry", "editor", "capture"}, {}},
+        {"character", SceneRendererRegistry::kApiVersion, {"geometry", "editor", "capture"}, {}},
         [] { return std::make_unique<CharacterSceneRenderer>(); });
     registry.registerFactory(
-        {"blackhole", 1, {"fullscreen", "temporal", "capture"}, {}},
+        {"blackhole", SceneRendererRegistry::kApiVersion, {"fullscreen", "temporal", "capture"}, {}},
         [] { return std::make_unique<BlackholeSceneRenderer>(); });
     registry.registerFactory(
-        {"sample", 1, {"sdk-example", "capture"}, {}},
+        {"sample", SceneRendererRegistry::kApiVersion, {"sdk-example", "capture"}, {}},
         [] { return std::make_unique<SampleSceneRenderer>(); });
     return registry;
 }

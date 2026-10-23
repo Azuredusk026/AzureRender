@@ -32,7 +32,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
     default=dict(schemaVersion=1,enabled=True,ambientColor=[.3,.2,.1],ambientDirection=[0,1,0],
         directionBias=.15,directionGain=1.5,directionFloor=.5,outdoorGain=1.05,shadowAmbientGain=.8,
         indoorMix=0,litAmbientMix=1,mainColorMix=1,shadowOverride=0,useSceneIrradiance=False)
-    names=('composed','fixed','direct','ambient','disabled','direction-positive','direction-negative','scene-volume','zero-radiance','point-only','surface-only','additional-directional','main-shadow','main-shadow-floor','indoor-shadow','ambient-weight-quarter','ambient-weight-zero','ambient-weight-direct','ambient-weight-shadow')
+    names=('composed','fixed','direct','ambient','disabled','direction-positive','direction-negative','scene-volume','zero-radiance','point-only','surface-only','additional-directional','main-shadow','main-shadow-floor','indoor-shadow','ambient-weight-quarter','ambient-weight-zero','ambient-weight-direct','ambient-weight-shadow','offset-main-shadow','offset-main-lit')
     if selected:
         assert set(selected)<=set(names);names=tuple(name for name in names if name in selected)
     summary={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),
@@ -57,13 +57,16 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 'styleParameters':[1,1,0,0],'nprDiffuse':{'schemaVersion':1,'shadowScale':.55,'lightingInputs':'host-scene-radiance','shadowMask':'none','baseAo':'albedo-alpha'}}
             model_path.write_text(json.dumps(model))
             level_path=folder/'level.azurelevel';level=json.loads(level_path.read_text());level['renderSettings'].update(sceneLighting=True,skyIntensity=0,nprLighting=settings)
+            if name.startswith('offset-'):
+                camera=level['nodes'][1]['components']['azure.camera'];camera['version']=2
+                camera['data'].update(projectionOffsetX=.5,projectionOffsetY=.5)
             level['lights'][0].update(color=[.8,.6,.4],intensity=.7)
             if name=='surface-only':level['lights'][0]['shape']['receivers']={'schemaVersion':1,'surfaces':True,'characters':False}
             if name in ('ambient','zero-radiance'):level['lights'][0]['enabled']=False
             if name=='additional-directional':
                 extra=copy.deepcopy(level['lights'][0]);extra.update(id='additional',nodeId='additional',color=[1,1,1],intensity=.1)
                 level['lights'].append(extra);level['nodes'].append({'id':'additional','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}})
-            if name.startswith('main-shadow') or name in ('indoor-shadow','ambient-weight-shadow'):
+            if name.startswith('main-shadow') or name in ('indoor-shadow','ambient-weight-shadow','offset-main-shadow'):
                 surface(folder/'blocker.gltf');level['resources'].append({'id':'blocker','asset':'assets:/blocker.gltf'})
                 level['nodes'].append({'id':'blocker','resourceId':'blocker','components':{'azure.transform':component('azure.transform',{'translation':[1,0,1],'scale':[.6,.6,.6]})}})
                 level['lights'][0]['shape']['direction']=[-2**-.5,0,-2**-.5]
@@ -91,10 +94,10 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
             state_hashes[name]=manifest['qaStateHash']
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            measured=linear(pixels[64,64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
+            measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             main=np.array([.8,.6,.4]);intensity=.7
             if name in ('ambient','zero-radiance','point-only','surface-only'):main=np.ones(3);intensity=0
-            visibility=0 if name in ('main-shadow','indoor-shadow','ambient-weight-shadow') else 1
+            visibility=0 if name in ('main-shadow','indoor-shadow','ambient-weight-shadow','offset-main-shadow') else 1
             # No character shadow mask: scene visibility selects indoor color
             # independently of the base-AO/ramp lit mask.
             lit_mask=min(204/255,153/255)

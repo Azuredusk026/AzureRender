@@ -10,6 +10,7 @@ namespace azurerender {
 SceneRendererCapabilities SampleSceneRenderer::capabilities() const {
     SceneRendererCapabilities capabilities;
     capabilities.diagnosticViewNames = {"Beauty"};
+    capabilities.supportsProjectionOffset=true;
     return capabilities;
 }
 

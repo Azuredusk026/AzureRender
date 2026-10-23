@@ -3,7 +3,7 @@
 #include "sky.glsl"
 #include "light_attenuation.glsl"
 layout(local_size_x=8,local_size_y=8) in;
-layout(std140,binding=0) uniform Params {vec4 origin,right,up,forward,skyColor,sky;uvec4 counts,image;} p;
+layout(std140,binding=0) uniform Params {vec4 origin,right,up,forward,skyColor,sky;uvec4 counts,image;vec4 rayOffset;} p;
 struct Triangle{vec4 p0,e1,e2,uv01,uv2material,n0,n1,n2,t0,t1,t2;};
 struct Node{vec4 minimum,maximum;uvec4 links;};
 struct Material{uvec4 albedo,surface,emission,normal,transmissionMap;vec4 properties,transmission,attenuation;};
@@ -94,7 +94,7 @@ void main(){
  if(p.image.z==0u){
  guides[index]=vec4(0,0,0,-1);
  vec2 center=(vec2(pixel)+.5)/vec2(p.image.xy)*2-1;
- vec3 centerOffset=p.right.xyz*center.x-p.up.xyz*center.y;
+ vec3 centerOffset=p.right.xyz*center.x-p.up.xyz*center.y+p.rayOffset.xyz;
  vec3 centerDirection=p.origin.w>.5?p.forward.xyz:normalize(p.forward.xyz+centerOffset);
  vec3 centerOrigin=p.origin.xyz+(p.origin.w>.5?centerOffset:vec3(0))+centerDirection*p.forward.w;
  float centerDistance=p.up.w;uint centerTriangle;vec2 centerUv,centerBary;
@@ -103,7 +103,7 @@ void main(){
  }
  }
  vec2 screen=(vec2(pixel)+vec2(random(),random()))/vec2(p.image.xy)*2-1;
- vec3 offset=p.right.xyz*screen.x-p.up.xyz*screen.y;
+ vec3 offset=p.right.xyz*screen.x-p.up.xyz*screen.y+p.rayOffset.xyz;
  vec3 direction=p.origin.w>.5?p.forward.xyz:normalize(p.forward.xyz+offset);
  vec3 origin=p.origin.xyz+(p.origin.w>.5?offset:vec3(0))+direction*p.forward.w;
  vec3 color=trace(origin,direction);if(any(isnan(color))||any(isinf(color)))color=vec3(0);

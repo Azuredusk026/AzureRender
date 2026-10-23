@@ -99,5 +99,16 @@ int main() try {
     for(unsigned z=0;z<4;++z)for(unsigned y=0;y<4;++y)for(unsigned x=0;x<4;++x)
         if(perspective.indicesFor(x,y,z)!=std::vector<std::uint32_t>{0})
             throw std::runtime_error("Projected color slab must retain conservative cluster coverage");
+    for(bool ortho:{false,true})for(float sign:{-1.F,1.F}) {
+        azurerender::ClusterGridDesc shifted{4,4,1,.1F,10,sign,-1,ortho};shifted.projectionOffsetX=.75F;shifted.projectionOffsetY=-.5F;
+        azurerender::ClusteredLightGrid offsetGrid(shifted);azurerender::RenderLight local;
+        local.radius=.05F;local.viewSpaceBounds=true;local.viewPosition={sign*(ortho?-.5F:-1.F),0,2};
+        local.clusterPosition[0]=.25F;local.clusterPosition[1]=-.5F;local.clusterPosition[2]=2;
+        offsetGrid.assign({local});const auto indexed=offsetGrid.gpuHeaderData();
+        if(offsetGrid.indicesFor(2,0,0).empty()||offsetGrid.indicesFor(2,1,0).empty()||!offsetGrid.indicesFor(0,0,0).empty())
+            throw std::runtime_error("Offset camera lights must cover their translated viewport tiles");
+        local.viewSpaceBounds=false;offsetGrid.assign({local});
+        if(indexed!=offsetGrid.gpuHeaderData())throw std::runtime_error("Fallback NDC bounds must consume the offset exactly once");
+    }
     return 0;
 } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}

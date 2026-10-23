@@ -13,6 +13,7 @@
 有限线形积分、旋转与主叶消费见[线形验证](docs/acceptance/nr/character-line-light.md)。
 有序颜色混合、轴向距离及分项能量见[混合验证](docs/acceptance/nr/character-color-blend.md)。
 屏幕深度与镜面角色灯见[专项验证](docs/acceptance/nr/character-screen-light-modes.md)。
+捕获子像素相机与公共射线见[投影验证](docs/acceptance/nr/camera-projection-offset.md)。
 共享颜色核与原生片元见[头发照明验证](docs/acceptance/nr/captured-hair-illumination.md)。
 全局环境权重与主灯条纹见[贡献验证](docs/acceptance/nr/ambient-weight-and-main-line.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。

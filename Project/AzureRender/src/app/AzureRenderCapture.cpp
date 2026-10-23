@@ -165,6 +165,9 @@ void AzureRenderApp::writeCaptureManifest(
         qaState << '|' << channel;
     }
     qaState << '|' << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump();
+    if(effectiveRenderSettings_.cameraView){const auto& camera=*effectiveRenderSettings_.cameraView;
+        if(camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)
+            qaState<<"|camera-projection-v2|"<<camera.projectionOffsetX<<'|'<<camera.projectionOffsetY;}
     qaState
         << '|'
         << rampProfileHash << '|'
@@ -291,6 +294,9 @@ void AzureRenderApp::writeCaptureManifest(
         << "  },\n"
         << "  \"hudEnabled\": "
         << (hudEnabled_ ? "true" : "false") << ",\n"
+        << "  \"cameraProjection\": {\"schemaVersion\": " << azurerender::CameraViewDescriptor::kLayoutVersion
+        << ", \"offsetNdc\": [" << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetX:0)
+        << ", " << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetY:0) << "]},\n"
         << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
         << "  \"qaHarnessEnabled\": "
         << (qaHarnessEnabled_ ? "true" : "false") << ",\n"
