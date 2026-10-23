@@ -46,7 +46,7 @@ int main(int argc,char** argv) try {
         host.allocator.destroyImage(depth);host.allocator.destroyImage(clearDepth);
         for(auto* buffer:{&output,&records,&queryBuffer,&staging,&clearStaging})host.allocator.destroyBuffer(*buffer);
     });
-    const unsigned count=5+static_cast<unsigned>(expected.size());
+    const unsigned count=11+static_cast<unsigned>(expected.size());
     output=host.allocator.createBuffer(count*sizeof(Vec4),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     records=host.allocator.createBuffer(32+16+2*sizeof(ObjectShadowGpuRecord),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     queryBuffer=host.allocator.createBuffer(queries.size()*sizeof(Vec4),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
@@ -55,6 +55,7 @@ int main(int argc,char** argv) try {
     auto* bytes=static_cast<char*>(records.mapped);std::memcpy(bytes+32,&header,sizeof(header));
     ObjectShadowGpuRecord r{};r.worldToUnitShadow=internal::Matrix4{1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};r.biasAndFilter={.01F,.005F,0,0};r.atlasRect={0,0,.25F,.5F};
     std::memcpy(bytes+48,&r,sizeof(r));r.worldToUnitShadow[12]=3;r.biasAndFilter[0]=.02F;
+    r.receiverSampling={-.5F,.5F,1,0};
     std::memcpy(bytes+48+sizeof(r),&r,sizeof(r));std::memcpy(queryBuffer.mapped,queries.data(),queryBuffer.size);
     for(auto* buffer:{&output,&records,&queryBuffer})host.allocator.flush(*buffer,0,buffer->size);
     staging=host.allocator.createBuffer(pixels.size(),VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
@@ -96,6 +97,8 @@ int main(int argc,char** argv) try {
     });
     host.allocator.invalidate(output,0,output.size);const auto* actual=static_cast<const Vec4*>(output.mapped);
     std::vector<Vec4> allExpected={{0,0,0,0},{0,.01F,.25F,1},{3,.02F,.25F,1},{0,0,0,0},{.4995F,.515F,.0184217683F,5.F/255}};
+    // Reprojecting X gives NDC 2*.495/2=.495 vs .5, i.e. -0.5/200*2.
+    allExpected.insert(allExpected.end(),{{-.5F,.5F,1,0},{.495F,.245F,-2,1},{.495F,.245F,-2,1},{.4975F,.2475F,-2,1},{2,.245F,-.495F,1},{.5F,.25F,-2,1}});
     allExpected.insert(allExpected.end(),expected.begin(),expected.end());
     double maximumError=0;
     for(unsigned i=0;i<count;++i)for(unsigned c=0;c<4;++c){

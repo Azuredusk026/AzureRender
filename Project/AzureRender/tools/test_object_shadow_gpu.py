@@ -22,6 +22,7 @@ def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=['clear','shadow','shadow-fixed','shadow-document','disabled','mirrored-clear','mirrored','two-objects','ordinary','ordinary-disabled']
     names+=['visibility','visibility-lit','visibility-disabled']
+    names+=['receiver-zero','receiver-offset','receiver-normal','receiver-combined','receiver-fixed','receiver-document']
     if selected:
         assert set(selected)<=set(names);names=[name for name in names if name in selected]
     digest=hashlib.sha256(player.read_bytes()).hexdigest();frames={}
@@ -41,6 +42,10 @@ def run(player,output,selected=None,expected_validation=None):
                     nprDiffuse=dict(schemaVersion=1,shadowScale=.55,lightingInputs='host-scene-radiance',
                         shadowMask='one',baseAo='one',characterVisibility='object-shadow'))
             clear_model=copy.deepcopy(model)
+            if name.startswith('receiver-'):
+                Image.new('RGBA',(4,4),(230,128,205,255)).save(folder/'normal.png')
+                model['images'].append(dict(uri='normal.png'));model['textures'].append(dict(source=1))
+                receiver['normalTexture']=dict(index=1)
             if name not in ['clear','mirrored-clear','visibility-lit']:
                 model['nodes'].append(dict(mesh=0,translation=[0,0,1],scale=[.125,.125,1]))
                 model['scenes'][0]['nodes'].append(1)
@@ -55,11 +60,19 @@ def run(player,output,selected=None,expected_validation=None):
             settings=dict(enabled=not name.endswith('disabled'),center=[0,0,.5],halfExtents=[6,6,3],
                 normalBias=.1,lightBias=.05,filterRadiusX=4,filterRadiusY=2,atlasPage=6)
             receiver_node['components']={'azure.object-shadow':component('azure.object-shadow',settings)}
-            if name=='shadow-document':
+            if name.startswith('receiver-'):
+                settings.update(receiverPixelOffsetX=0 if name in ['receiver-zero','receiver-normal'] else -2,
+                    receiverPixelOffsetY=0 if name in ['receiver-zero','receiver-normal'] else 2,
+                    surfaceNormalBias=name not in ['receiver-zero','receiver-offset'])
+            if name in ['shadow-document','receiver-document']:
                 image_id=str(uuid.uuid4());material_id=str(uuid.uuid4())
                 (folder/'shadow.png.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=image_id,settings={},dependencies=[])))
-                (folder/'surface.azurematerial').write_text(json.dumps(complete_material_document(receiver,model,{'0':image_id})))
-                (folder/'surface.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=[image_id])))
+                texture_ids={'0':image_id}
+                if name=='receiver-document':
+                    normal_id=str(uuid.uuid4());texture_ids['1']=normal_id
+                    (folder/'normal.png.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=normal_id,settings={},dependencies=[])))
+                (folder/'surface.azurematerial').write_text(json.dumps(complete_material_document(receiver,model,texture_ids)))
+                (folder/'surface.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=list(texture_ids.values()))))
                 receiver_node['materialSlots']={'surface':material_id}
             if name.startswith('mirrored'):receiver_node['components']['azure.transform']=component('azure.transform',dict(scale=[-1,1,1]))
             if name=='two-objects':
@@ -75,7 +88,7 @@ def run(player,output,selected=None,expected_validation=None):
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene',
                 '--qa-light','scene','--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
             if name.endswith('fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
-            if name.startswith('visibility'):command+=['--qa-isolation','object-shadow-visibility']
+            if name.startswith(('visibility','receiver-')):command+=['--qa-isolation','object-shadow-visibility']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
@@ -86,7 +99,7 @@ def run(player,output,selected=None,expected_validation=None):
             runtime=json.loads((folder/'runtime.json').read_text(encoding='utf-8'));assert not runtime['scriptErrors'] and not runtime['presentationErrors']
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
             pages=0 if name.endswith('disabled') else 2 if name=='two-objects' else 1
-            assert manifest['objectShadowLayoutVersion']==1 and manifest['objectShadowPages']==pages
+            assert manifest['objectShadowLayoutVersion']==2 and manifest['objectShadowPages']==pages
             assert manifest['objectShadowDepthBytes']==(16*1024*1024 if pages else 0)
             assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==8
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
@@ -107,6 +120,12 @@ def run(player,output,selected=None,expected_validation=None):
                 assert np.array_equal(frames[name][124:132,84:92],frames[reference][124:132,84:92]),name
         for a,b in [('shadow','shadow-fixed'),('shadow','shadow-document'),('ordinary','ordinary-disabled')]:
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        for name in ['receiver-offset','receiver-normal','receiver-combined']:
+            if name in frames and 'receiver-zero' in frames:
+                assert np.any(frames[name]!=frames['receiver-zero']),name
+        for name in ['receiver-fixed','receiver-document']:
+            if name in frames and 'receiver-combined' in frames:
+                assert np.array_equal(frames[name],frames['receiver-combined']),name
         if 'disabled' in frames and 'clear' in frames:
             assert np.array_equal(frames['disabled'][124:132,148:156],frames['clear'][124:132,148:156])
         if 'two-objects' in frames:

@@ -15,14 +15,26 @@ int main(){
         std::filesystem::create_directories(root);
         auto& registry=runtimeComponentRegistry();auto envelope=registry.defaults("azure.object-shadow");
         require(envelope.at("version")==1&&envelope.at("data").at("atlasPage")==8,"Registered defaults or version missing");
+        auto receiver=envelope;receiver["data"]["receiverPixelOffsetX"]=-.5;receiver["data"]["receiverPixelOffsetY"]=.5;receiver["data"]["surfaceNormalBias"]=true;
+        registry.validate("azure.object-shadow",receiver);
+        auto sparse=envelope;sparse["data"].erase("receiverPixelOffsetX");sparse["data"].erase("receiverPixelOffsetY");sparse["data"].erase("surfaceNormalBias");
+        registry.validate("azure.object-shadow",sparse);
+        for(const auto& value:std::vector<Json>{3,-3,Json::array({0}),true,"0",nullptr}){
+            auto invalid=envelope;invalid["data"]["receiverPixelOffsetX"]=value;
+            rejects([&]{registry.validate("azure.object-shadow",invalid);});
+        }
+        auto invalid=envelope;invalid["data"]["surfaceNormalBias"]=1;
+        rejects([&]{registry.validate("azure.object-shadow",invalid);});
         for(const auto& change:std::vector<std::pair<std::string,Json>>{{"halfExtents",{0,1,1}},{"atlasPage",9},{"atlasPage",1.5},{"filterRadiusX",-1},{"normalBias",101},{"unknown",0}}){
             auto bad=envelope;bad["data"][change.first]=change.second;rejects([&]{registry.validate("azure.object-shadow",bad);});
         }
         auto bad=envelope;bad["version"]=2;rejects([&]{registry.validate("azure.object-shadow",bad);});
         SceneDocument document;SceneNode node;node.id="object";node.objectShadow=ecs::ObjectShadowComponent{};
         node.objectShadow->center={.125F,.25F,-.5F};node.objectShadow->atlasPage=6;node.objectShadow->normalBias=.00933641195F;document.nodes.push_back(node);
+        document.nodes[0].objectShadow->receiverPixelOffsetX=-.5F;document.nodes[0].objectShadow->receiverPixelOffsetY=.5F;document.nodes[0].objectShadow->surfaceNormalBias=true;
         const auto path=root/"shadow.azscene";document.save(path);auto reopened=SceneDocument::load(path);
         require(reopened.nodes[0].objectShadow&&reopened.nodes[0].objectShadow->normalBias==node.objectShadow->normalBias,"Saved shadow precision or presence lost");
+        require(reopened.nodes[0].objectShadow->receiverPixelOffsetX==-.5F&&reopened.nodes[0].objectShadow->receiverPixelOffsetY==.5F&&reopened.nodes[0].objectShadow->surfaceNormalBias,"Receiver settings lost during document roundtrip");
         std::string legacy;{std::ifstream file(path);legacy.assign(std::istreambuf_iterator<char>(file),{});}
         const auto field=legacy.find("objectShadow ");require(field!=std::string::npos,"Version thirteen must serialize an explicit optional shadow field");
         legacy.erase(field,legacy.find('\n',field)-field+1);const auto header=legacy.find("schemaVersion 13");

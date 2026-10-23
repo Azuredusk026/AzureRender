@@ -4,6 +4,7 @@ struct ObjectShadowRecord {
     mat4 worldToUnit;
     vec4 biasAndFilter;
     vec4 atlasRect;
+    vec4 receiverSampling;
 };
 // The caller supplies pairs from the shared depth-bounds/record buffer.
 vec2 objectShadowRecordPair(uint index);
@@ -11,12 +12,22 @@ bool objectShadowLoadRecord(uint depthPairCount,uint index,out ObjectShadowRecor
     if(index==0u)return false;
     uint start=(depthPairCount+1u)&~1u;
     uvec4 header=floatBitsToUint(vec4(objectShadowRecordPair(start),objectShadowRecordPair(start+1u)));
-    if(header.x!=1u || header.y>header.z || header.z>8u || index>header.y)return false;
-    start+=2u+(index-1u)*12u;
-    vec4 rows[6];
-    for(uint i=0u;i<6u;++i)rows[i]=vec4(objectShadowRecordPair(start+i*2u),objectShadowRecordPair(start+i*2u+1u));
+    if(header.x!=2u || header.y>header.z || header.z>8u || index>header.y)return false;
+    start+=2u+(index-1u)*14u;
+    vec4 rows[7];
+    for(uint i=0u;i<7u;++i)rows[i]=vec4(objectShadowRecordPair(start+i*2u),objectShadowRecordPair(start+i*2u+1u));
     record.worldToUnit=mat4(rows[0],rows[1],rows[2],rows[3]);
-    record.biasAndFilter=rows[4];record.atlasRect=rows[5];return true;
+    record.biasAndFilter=rows[4];record.atlasRect=rows[5];record.receiverSampling=rows[6];return true;
+}
+// Top-left pixel offsets move the receiver at constant view depth. Camera basis
+// and projection support both perspective and orthographic, including lens shift.
+vec3 objectShadowReceiverPosition(vec3 position,vec2 offset,mat4 worldToClip,
+    vec3 cameraRight,vec3 cameraUp,vec2 extent) {
+    float w=(worldToClip*vec4(position,1)).w;
+    vec2 scale=vec2((worldToClip*vec4(cameraRight,0)).x,(worldToClip*vec4(cameraUp,0)).y)*extent;
+    if(w<=0.0||any(lessThan(abs(scale),vec2(1e-6))))return position;
+    vec2 shift=2.0*w*offset/scale;
+    return position+cameraRight*shift.x+cameraUp*shift.y;
 }
 vec3 objectShadowReceiver(ObjectShadowRecord record,vec3 position,vec3 normal) {
     vec3 light=normalize(vec3(record.worldToUnit[0].z,record.worldToUnit[1].z,record.worldToUnit[2].z));

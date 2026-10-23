@@ -30,6 +30,14 @@ struct ObjectShadowComponent {
     float filterRadiusY = 2;
     AZURE_FIELD("图集分区（8 为自动）", 0, 8)
     std::uint32_t atlasPage = 8;
+    AZURE_FIELD("接收水平偏移", -2, 2)
+    AZURE_FIELD_EDITOR("px", 4, true)
+    float receiverPixelOffsetX = 0;
+    AZURE_FIELD("接收垂直偏移", -2, 2)
+    AZURE_FIELD_EDITOR("px", 4, true)
+    float receiverPixelOffsetY = 0;
+    AZURE_FIELD("表面法线偏置", 0, 1)
+    bool surfaceNormalBias = false;
 
     void validate() const {
         const auto bounded=[](float value,float minimum,float maximum){
@@ -38,6 +46,7 @@ struct ObjectShadowComponent {
         for(float value:center)if(!bounded(value,-100000,100000))throw std::invalid_argument("Object shadow center outside its finite range");
         for(float value:halfExtents)if(!bounded(value,.0001F,100000))throw std::invalid_argument("Object shadow half extents outside their positive range");
         for(float value:{filterRadiusX,filterRadiusY})if(!bounded(value,0,64))throw std::invalid_argument("Object shadow filter radius outside [0,64]");
+        for(float value:{receiverPixelOffsetX,receiverPixelOffsetY})if(!bounded(value,-2,2))throw std::invalid_argument("Object shadow receiver pixel offset outside [-2,2]");
         if(!bounded(normalBias,0,100)||!bounded(lightBias,0,100)||atlasPage>8)
             throw std::invalid_argument("Object shadow bias or atlas page outside its range");
     }

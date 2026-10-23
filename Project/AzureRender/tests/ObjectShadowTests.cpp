@@ -15,14 +15,17 @@ int main(){try{
     auto frame=buildObjectShadowFrame({input},{0,0,-1});
     require(frame.pages.size()==1&&frame.pages[0].instanceIndex==3&&frame.pages[0].page==0,"Automatic page assignment or instance ownership failed");
     const auto center=internal::transformPosition(frame.pages[0].gpu.worldToUnitShadow,{0,0,0});
+    require(frame.pages[0].gpu.receiverSampling==std::array<float,4>{0,0,0,0},"Default receiver must preserve fragment position and geometry normal");
     for(float value:center)near(value,.5F);
     const auto edge=internal::transformPosition(frame.pages[0].gpu.worldToUnitShadow,{-1,1,-1});
     near(edge[0],1);near(edge[1],1);near(edge[2],1);
     const auto clip=internal::transformPosition(frame.pages[0].worldToClip,{-1,1,-1});
     near(clip[0],1);near(clip[1],1);near(clip[2],1);
     config.center={.25F,.5F,-.75F};config.halfExtents={2,3,4};config.atlasPage=6;
+    config.receiverPixelOffsetX=-.5F;config.receiverPixelOffsetY=.5F;config.surfaceNormalBias=true;
     input={config,scene::composeTrs({3,4,5},{0,40,0},{-2,3,.5F}),7};
     frame=buildObjectShadowFrame({input},{.1F,-.5F,-.8F});
+    require(frame.pages[0].gpu.receiverSampling==std::array<float,4>{-.5F,.5F,1,0},"Receiver sampling settings failed GPU packing");
     auto worldCenter=internal::transformPosition(input.model,config.center);
     auto projected=internal::transformPosition(frame.pages[0].gpu.worldToUnitShadow,worldCenter);
     for(float value:projected)near(value,.5F);
@@ -45,6 +48,9 @@ int main(){try{
     auto bad=config;bad.atlasPage=9;rejects([&]{bad.validate();});bad=config;bad.filterRadiusX=-1;rejects([&]{bad.validate();});
     bad=config;bad.normalBias=std::numeric_limits<float>::quiet_NaN();rejects([&]{bad.validate();});
     bad=config;bad.center[0]=std::numeric_limits<float>::infinity();rejects([&]{bad.validate();});
+    for(float value:{-2.01F,2.01F,std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity()}){
+        bad=config;bad.receiverPixelOffsetX=value;rejects([&]{bad.validate();});
+    }
     auto overflowTransform=input;overflowTransform.model[0]=std::numeric_limits<float>::max();overflowTransform.settings.center[0]=100000;
     rejects([&]{buildObjectShadowFrame({overflowTransform},{0,0,-1});});
     std::cout<<"Object shadow projection, bounded ownership and invalid inputs passed\n";

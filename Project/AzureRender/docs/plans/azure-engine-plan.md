@@ -93,6 +93,7 @@ NR6-C15 至 C18 覆盖材质、GPU 绑定、多层高光和距离描边。
 对象图集及原生过滤范围见[GPU 验证](../acceptance/nr/object-shadow-gpu.md)。
 真实腿部保留七字节差异，完整角色外观继续待验。
 逐材质局部灯下限及实际候选见[响应验证](../acceptance/nr/material-local-wrap.md)。
+对象接收坐标已匹配原生可见量，见[分项验证](../acceptance/nr/object-shadow-receiver.md)。
 对象隔离测得腿部为零，原生目标为 `5/255`。
 肩部与两个脸部点一致，投影几何及接收位置继续核对。
 主场景消费与原生外观分别验收，正式阶段状态保持待验。

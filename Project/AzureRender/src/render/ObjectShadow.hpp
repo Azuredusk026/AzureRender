@@ -13,7 +13,7 @@ inline constexpr unsigned kObjectShadowTileSize=1024;
 inline constexpr unsigned kObjectShadowColumns=4;
 inline constexpr unsigned kObjectShadowRows=2;
 struct alignas(16) ObjectShadowGpuHeader {
-    static constexpr unsigned kLayoutVersion=1;
+    static constexpr unsigned kLayoutVersion=2;
     std::uint32_t version=kLayoutVersion,count=0,capacity=0,reserved=0;
 };
 static_assert(sizeof(ObjectShadowGpuHeader)==16);
@@ -21,11 +21,13 @@ struct alignas(16) ObjectShadowGpuRecord {
     internal::Matrix4 worldToUnitShadow{};
     std::array<float,4> biasAndFilter{};
     std::array<float,4> atlasRect{};
+    std::array<float,4> receiverSampling{};
 };
 static_assert(std::is_trivially_copyable_v<ObjectShadowGpuRecord>);
-static_assert(sizeof(ObjectShadowGpuRecord)==96);
+static_assert(sizeof(ObjectShadowGpuRecord)==112);
 static_assert(offsetof(ObjectShadowGpuRecord,biasAndFilter)==64);
 static_assert(offsetof(ObjectShadowGpuRecord,atlasRect)==80);
+static_assert(offsetof(ObjectShadowGpuRecord,receiverSampling)==96);
 struct ObjectShadowInput {
     ecs::ObjectShadowComponent settings;
     internal::Matrix4 model;
@@ -87,6 +89,7 @@ inline ObjectShadowFrame buildObjectShadowFrame(const std::vector<ObjectShadowIn
         for(unsigned column=0;column<4;++column)for(unsigned row=0;row<2;++row)
             entry.worldToClip[column*4+row]=2*matrix[column*4+row]-(column==3?1.F:0.F);
         entry.gpu.biasAndFilter={settings.normalBias,settings.lightBias,settings.filterRadiusX,settings.filterRadiusY};
+        entry.gpu.receiverSampling={settings.receiverPixelOffsetX,settings.receiverPixelOffsetY,settings.surfaceNormalBias?1.F:0.F,0};
         entry.gpu.atlasRect={float(page%kObjectShadowColumns)/kObjectShadowColumns,float(page/kObjectShadowColumns)/kObjectShadowRows,1.F/kObjectShadowColumns,1.F/kObjectShadowRows};
         result.pages.push_back(entry);
     }

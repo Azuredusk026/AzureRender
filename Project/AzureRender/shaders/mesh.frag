@@ -150,15 +150,18 @@ layout(location=15) flat in uint instanceObjectShadow;
 layout(binding=29) uniform texture2D objectShadowDepth;
 #include "object_shadow.glsl"
 vec2 objectShadowRecordPair(uint index) { return shadowBounds.values[index]; }
-float materialObjectVisibility(){
+float materialObjectVisibility(vec3 surfaceNormal){
     ivec2 extent=textureSize(AZ_TEX_SHADOW,0)/8;
     ObjectShadowRecord record;
     if(!objectShadowLoadRecord(uint(extent.x*extent.y),instanceObjectShadow,record))return 1.0;
-    return objectShadowVisibility(objectShadowDepth,sharedDepthSampler,record,worldPosition,normalize(worldNormal),
+    vec3 receiverPosition=objectShadowReceiverPosition(worldPosition,record.receiverSampling.xy,
+        camera.screenReflectionWorldToClip,camera.cameraRight.xyz,camera.cameraUp.xyz,camera.clusterDepth.zw);
+    vec3 receiverNormal=record.receiverSampling.z>.5?surfaceNormal:normalize(worldNormal);
+    return objectShadowVisibility(objectShadowDepth,sharedDepthSampler,record,receiverPosition,receiverNormal,
         ivec2(gl_FragCoord.x,camera.clusterDepth.w-gl_FragCoord.y));
 }
 #else
-float materialObjectVisibility(){return 1.0;}
+float materialObjectVisibility(vec3 surfaceNormal){return 1.0;}
 #endif
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
@@ -332,7 +335,7 @@ CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec
     vec4 parameters=profile.rows[0];
     vec2 mask=parameters.y>1.5?vec2(1,0):parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb);
-    float characterVisibility=profile.rows[3].x>1.5?materialObjectVisibility():profile.rows[3].x>.5?mainShadow:visibility;
+    float characterVisibility=profile.rows[3].x>1.5?materialObjectVisibility(normal):profile.rows[3].x>.5?mainShadow:visibility;
     return characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,metallic,parameters.x,ramp,
         parameters.z>.5?base.a:1.0,mask,dot(normal,view),characterVisibility,visibility);
 }
@@ -1541,7 +1544,7 @@ void main() {
             ? sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,baseColor.rgb)
             : vec3(0);
     } else if (qaIsolationMode == 23) {
-        qaColor = vec3(materialObjectVisibility());
+        qaColor = vec3(materialObjectVisibility(shadedNormal));
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {
