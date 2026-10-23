@@ -9,6 +9,27 @@ except ImportError:
 
 
 class ProjectedHairMathTests(unittest.TestCase):
+    def test_captured_visible_primary_and_secondary_lobes(self):
+        # Official frame 10401, event 950: upright pixels (1258,215),
+        # (1268,212), (1309,218). Expected values precede illumination.
+        samples=[
+            ((.9051864743232727,.5314453840255737),.7290030121803284,.7780070304870605,
+             (.65059894323349,.6287327408790588,.7834439873695374),1.,1.,
+             (.11162308976054192,.1078715082257986,.13441529124975204),(.11208641529083252,0.,.00009252656309399754)),
+            ((.8807920217514038,.8428359031677246),.9180609583854675,.7585858106613159,
+             (1.,1.,1.),.9857480525970459,.992874026298523,
+             (.20724505186080933,)*3,(.05414295196533203,0.,.00004469463601708412)),
+            ((.8684737682342529,.7333201169967651),.8563411235809326,.7443068027496338,
+             (.9743495583534241,.9734492897987366,.9812924265861511),.9957732558250427,1.,
+             (.18760830163955688,.18743498250842094,.18894515931606293),(.07046377658843994,0.,.00005816736666020006))]
+        for uv,edge,lobe,ramp,parameter_g,parameter_a,primary,secondary in samples:
+            with self.subTest(uv=uv):
+                actual=subject.evaluate_energy(subject.Coordinates(uv,edge,lobe),ramp,
+                    (0,parameter_g,0,parameter_a),1.2999999523162842,(.4091444674721517,0,.00033774597523219814))
+                self.assertLess(max(abs(a-b) for a,b in zip(actual.primary,primary)),3e-8)
+                self.assertLess(max(abs(a-b) for a,b in zip(actual.secondary,secondary)),3e-8)
+                self.assertGreater(min(actual.primary),.1)
+
     def test_reflected_frame_preserves_fractional_strand_blend(self):
         args=dict(half_vector=(.1,.2,.97),highlight_normal=(.3,.2,.93),view=(.1,-.1,.98),
             source_parameters=(.37,.8,0,.4),tangent=(.95,.1,-.3,1),

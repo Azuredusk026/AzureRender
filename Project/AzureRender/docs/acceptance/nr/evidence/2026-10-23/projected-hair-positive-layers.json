@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": 1,
+  "status": "positive-layer-and-material-consumption-verified-full-appearance-pending",
+  "run": "build\\runs\\20261023-135236-c17-positive-primary-validation-65aa55",
+  "implementationCommit": "4a58de4",
+  "sourceFrame": 10401,
+  "sourceEvent": 950,
+  "nativeLayers": [
+    {
+      "pixel": [
+        1258,
+        215
+      ],
+      "primitive": 9704,
+      "traceSha256": "73bbe61a86b60767fcd368d583057a5206d5dee9397c6205a34f16a2e523e14d",
+      "coordinates": {
+        "uv": [
+          0.9051864743232727,
+          0.5314453840255737
+        ],
+        "edge": 0.7290030121803284,
+        "secondaryLobe": 0.7780070304870605
+      },
+      "parameters": [
+        0,
+        1.0,
+        0.9469290971755981,
+        1.0
+      ],
+      "weight": 1.0,
+      "primary": [
+        0.11162309606442107,
+        0.10787151725944785,
+        0.1344152866720202
+      ],
+      "secondary": [
+        0.11208641162497097,
+        0.0,
+        9.25265624239012e-05
+      ],
+      "nativePrimary": [
+        0.11162308976054192,
+        0.1078715082257986,
+        0.13441529124975204
+      ],
+      "nativeSecondary": [
+        0.11208641529083252,
+        0.0,
+        9.252656309399754e-05
+      ],
+      "line": [
+        0.9836906844388674,
+        1.0081546577805662
+      ],
+      "nativeLine": 0.9836906790733337,
+      "illumination": [
+        1.772963047027588,
+        1.7744441032409668,
+        1.7799055576324463
+      ],
+      "objectGain": 1.0,
+      "predictedLit": [
+        0.39662869040202614,
+        0.19141197770868343,
+        0.23941120432097418
+      ],
+      "nativeLit": [
+        0.3966286778450012,
+        0.19141197204589844,
+        0.23941121995449066
+      ],
+      "finalOutput": [
+        1.5470494031906128,
+        0.4051109254360199,
+        0.4606083631515503,
+        1.0
+      ],
+      "errors": {
+        "primary": 9.0336492453158e-09,
+        "secondary": 3.665861544877025e-09,
+        "line": 5.365533684020818e-09,
+        "litObjectGain": 1.5633516481372567e-08,
+        "virtualHalf": 1.075846535469882e-08
+      }
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "primitive": 9637,
+      "traceSha256": "42eabfbc01742e1916a69b3fe9a0f9cf096c3a325dc741fe87cf18c273fc64d8",
+      "coordinates": {
+        "uv": [
+          0.8807920217514038,
+          0.8428359031677246
+        ],
+        "edge": 0.9180609583854675,
+        "secondaryLobe": 0.7585858106613159
+      },
+      "parameters": [
+        0,
+        0.9857480525970459,
+        0.9960784316062927,
+        0.992874026298523
+      ],
+      "weight": 1.0,
+      "primary": [
+        0.20724504261263038,
+        0.20724504261263038,
+        0.20724504261263038
+      ],
+      "secondary": [
+        0.05414294811625165,
+        0.0,
+        4.469463154422488e-05
+      ],
+      "nativePrimary": [
+        0.20724505186080933,
+        0.20724505186080933,
+        0.20724505186080933
+      ],
+      "nativeSecondary": [
+        0.05414295196533203,
+        0.0,
+        4.469463601708412e-05
+      ],
+      "line": [
+        0.9976708009464024,
+        1.0011645995267988
+      ],
+      "nativeLine": 0.9976708292961121,
+      "illumination": [
+        1.8962944746017456,
+        1.8972594738006592,
+        1.9008172750473022
+      ],
+      "objectGain": 1.0,
+      "predictedLit": [
+        0.4956686025464313,
+        0.3931976204950343,
+        0.39401991349374327
+      ],
+      "nativeLit": [
+        0.4956686198711395,
+        0.393197625875473,
+        0.3940199315547943
+      ],
+      "finalOutput": [
+        1.676614761352539,
+        0.5527067184448242,
+        0.5782466530799866,
+        1.0
+      ],
+      "errors": {
+        "primary": 9.248178944876173e-09,
+        "secondary": 3.84908038081333e-09,
+        "line": 2.8349709690900227e-08,
+        "litObjectGain": 1.806105104362743e-08,
+        "virtualHalf": 8.66147533695738e-08
+      }
+    },
+    {
+      "pixel": [
+        1309,
+        218
+      ],
+      "primitive": 4111,
+      "traceSha256": "b56f04b0bf7399a33ed667aece27250b7b82febbb552cdea558451635bf7064e",
+      "coordinates": {
+        "uv": [
+          0.8684737682342529,
+          0.7333201169967651
+        ],
+        "edge": 0.8563411235809326,
+        "secondaryLobe": 0.7443068027496338
+      },
+      "parameters": [
+        0,
+        0.9957732558250427,
+        0.9067673683166504,
+        1.0
+      ],
+      "weight": 1.0,
+      "primary": [
+        0.18760831738436626,
+        0.18743497315970792,
+        0.18894514749404942
+      ],
+      "secondary": [
+        0.07046378857210571,
+        0.0,
+        5.816737316701661e-05
+      ],
+      "nativePrimary": [
+        0.18760830163955688,
+        0.18743498250842094,
+        0.18894515931606293
+      ],
+      "nativeSecondary": [
+        0.07046377658843994,
+        0.0,
+        5.816736666020006e-05
+      ],
+      "line": [
+        0.9974470149228322,
+        1.001276492538584
+      ],
+      "nativeLine": 0.9974470138549805,
+      "illumination": [
+        1.6150188446044922,
+        1.617223858833313,
+        1.6253551244735718
+      ],
+      "objectGain": 1.0,
+      "predictedLit": [
+        0.41679131438646944,
+        0.3031243105736613,
+        0.3071975063619223
+      ],
+      "nativeLit": [
+        0.41679126024246216,
+        0.303124338388443,
+        0.30719754099845886
+      ],
+      "finalOutput": [
+        1.5976355075836182,
+        0.5092001557350159,
+        0.5095237493515015,
+        1.0
+      ],
+      "errors": {
+        "primary": 1.574480937294176e-08,
+        "secondary": 1.1983665768044993e-08,
+        "line": 1.0678516959572448e-09,
+        "litObjectGain": 5.414400727765667e-08,
+        "virtualHalf": 2.0138136491709702e-08
+      }
+    }
+  ],
+  "controls": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "captures": [
+      {
+        "name": "primary-off",
+        "disabled": [
+          "primary"
+        ],
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "004dbf517274bf5f8b6bf8cae6c3eb35467d5c82ba5f750c94ee69d216a152e7",
+        "visibleHairChangedPixels": 1751,
+        "maximumByteDifference": 45,
+        "visibleHairMeanAbsoluteByteDifference": 0.41619165148576914,
+        "points": [
+          {
+            "pixel": [
+              1258,
+              215
+            ],
+            "baseline": [
+              167,
+              90,
+              95
+            ],
+            "measured": [
+              156,
+              65,
+              68
+            ],
+            "difference": [
+              11,
+              25,
+              27
+            ]
+          },
+          {
+            "pixel": [
+              1268,
+              212
+            ],
+            "baseline": [
+              171,
+              105,
+              107
+            ],
+            "measured": [
+              151,
+              60,
+              64
+            ],
+            "difference": [
+              20,
+              45,
+              43
+            ]
+          },
+          {
+            "pixel": [
+              1309,
+              218
+            ],
+            "baseline": [
+              169,
+              100,
+              100
+            ],
+            "measured": [
+              152,
+              62,
+              65
+            ],
+            "difference": [
+              17,
+              38,
+              35
+            ]
+          },
+          {
+            "pixel": [
+              1280,
+              195
+            ],
+            "baseline": [
+              148,
+              64,
+              66
+            ],
+            "measured": [
+              148,
+              64,
+              66
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1373,
+              290
+            ],
+            "baseline": [
+              182,
+              98,
+              94
+            ],
+            "measured": [
+              182,
+              98,
+              94
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1196,
+              290
+            ],
+            "baseline": [
+              85,
+              31,
+              34
+            ],
+            "measured": [
+              85,
+              31,
+              34
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "name": "secondary-off",
+        "disabled": [
+          "secondary"
+        ],
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "bc75a934202a06cde4ade0d991e40630414b34e2a05a67ef72c3f4310b5b7090",
+        "visibleHairChangedPixels": 7838,
+        "maximumByteDifference": 36,
+        "visibleHairMeanAbsoluteByteDifference": 1.134551722787017,
+        "points": [
+          {
+            "pixel": [
+              1258,
+              215
+            ],
+            "baseline": [
+              167,
+              90,
+              95
+            ],
+            "measured": [
+              157,
+              90,
+              95
+            ],
+            "difference": [
+              10,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1268,
+              212
+            ],
+            "baseline": [
+              171,
+              105,
+              107
+            ],
+            "measured": [
+              166,
+              105,
+              107
+            ],
+            "difference": [
+              5,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1309,
+              218
+            ],
+            "baseline": [
+              169,
+              100,
+              100
+            ],
+            "measured": [
+              163,
+              100,
+              100
+            ],
+            "difference": [
+              6,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1280,
+              195
+            ],
+            "baseline": [
+              148,
+              64,
+              66
+            ],
+            "measured": [
+              146,
+              64,
+              66
+            ],
+            "difference": [
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1373,
+              290
+            ],
+            "baseline": [
+              182,
+              98,
+              94
+            ],
+            "measured": [
+              182,
+              98,
+              94
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1196,
+              290
+            ],
+            "baseline": [
+              85,
+              31,
+              34
+            ],
+            "measured": [
+              85,
+              31,
+              34
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "name": "line-off",
+        "disabled": [
+          "line"
+        ],
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "06656005ee678199e9fc42b352dcd8861a2b00df62c5c225abf6d493d0e650e1",
+        "visibleHairChangedPixels": 6474,
+        "maximumByteDifference": 4,
+        "visibleHairMeanAbsoluteByteDifference": 0.27948522066169124,
+        "points": [
+          {
+            "pixel": [
+              1258,
+              215
+            ],
+            "baseline": [
+              167,
+              90,
+              95
+            ],
+            "measured": [
+              167,
+              90,
+              96
+            ],
+            "difference": [
+              0,
+              0,
+              -1
+            ]
+          },
+          {
+            "pixel": [
+              1268,
+              212
+            ],
+            "baseline": [
+              171,
+              105,
+              107
+            ],
+            "measured": [
+              171,
+              105,
+              107
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1309,
+              218
+            ],
+            "baseline": [
+              169,
+              100,
+              100
+            ],
+            "measured": [
+              169,
+              100,
+              100
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1280,
+              195
+            ],
+            "baseline": [
+              148,
+              64,
+              66
+            ],
+            "measured": [
+              148,
+              64,
+              66
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1373,
+              290
+            ],
+            "baseline": [
+              182,
+              98,
+              94
+            ],
+            "measured": [
+              182,
+              98,
+              94
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1196,
+              290
+            ],
+            "baseline": [
+              85,
+              31,
+              34
+            ],
+            "measured": [
+              85,
+              31,
+              34
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "name": "all-off",
+        "disabled": [
+          "primary",
+          "secondary",
+          "line"
+        ],
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "9fab5191792a3cab8a0fef4d3be4bf51787a71f2af6c8f083efde6f6e718c5b7",
+        "visibleHairChangedPixels": 10339,
+        "maximumByteDifference": 45,
+        "visibleHairMeanAbsoluteByteDifference": 1.66041801335919,
+        "points": [
+          {
+            "pixel": [
+              1258,
+              215
+            ],
+            "baseline": [
+              167,
+              90,
+              95
+            ],
+            "measured": [
+              146,
+              66,
+              68
+            ],
+            "difference": [
+              21,
+              24,
+              27
+            ]
+          },
+          {
+            "pixel": [
+              1268,
+              212
+            ],
+            "baseline": [
+              171,
+              105,
+              107
+            ],
+            "measured": [
+              146,
+              60,
+              64
+            ],
+            "difference": [
+              25,
+              45,
+              43
+            ]
+          },
+          {
+            "pixel": [
+              1309,
+              218
+            ],
+            "baseline": [
+              169,
+              100,
+              100
+            ],
+            "measured": [
+              145,
+              62,
+              65
+            ],
+            "difference": [
+              24,
+              38,
+              35
+            ]
+          },
+          {
+            "pixel": [
+              1280,
+              195
+            ],
+            "baseline": [
+              148,
+              64,
+              66
+            ],
+            "measured": [
+              146,
+              64,
+              66
+            ],
+            "difference": [
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1373,
+              290
+            ],
+            "baseline": [
+              182,
+              98,
+              94
+            ],
+            "measured": [
+              182,
+              98,
+              94
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1196,
+              290
+            ],
+            "baseline": [
+              85,
+              31,
+              34
+            ],
+            "measured": [
+              85,
+              31,
+              34
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "name": "object-gain-off",
+        "disabled": [
+          "object-gain"
+        ],
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "43eba7a06cfc5465c681497c8bc101f76e9ce4c08e5bc9991315744afc83b03f",
+        "visibleHairChangedPixels": 8216,
+        "maximumByteDifference": 45,
+        "visibleHairMeanAbsoluteByteDifference": 1.5548177312883196,
+        "points": [
+          {
+            "pixel": [
+              1258,
+              215
+            ],
+            "baseline": [
+              167,
+              90,
+              95
+            ],
+            "measured": [
+              146,
+              65,
+              68
+            ],
+            "difference": [
+              21,
+              25,
+              27
+            ]
+          },
+          {
+            "pixel": [
+              1268,
+              212
+            ],
+            "baseline": [
+              171,
+              105,
+              107
+            ],
+            "measured": [
+              146,
+              60,
+              64
+            ],
+            "difference": [
+              25,
+              45,
+              43
+            ]
+          },
+          {
+            "pixel": [
+              1309,
+              218
+            ],
+            "baseline": [
+              169,
+              100,
+              100
+            ],
+            "measured": [
+              145,
+              62,
+              65
+            ],
+            "difference": [
+              24,
+              38,
+              35
+            ]
+          },
+          {
+            "pixel": [
+              1280,
+              195
+            ],
+            "baseline": [
+              148,
+              64,
+              66
+            ],
+            "measured": [
+              146,
+              64,
+              66
+            ],
+            "difference": [
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1373,
+              290
+            ],
+            "baseline": [
+              182,
+              98,
+              94
+            ],
+            "measured": [
+              182,
+              98,
+              94
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "pixel": [
+              1196,
+              290
+            ],
+            "baseline": [
+              85,
+              31,
+              34
+            ],
+            "measured": [
+              85,
+              31,
+              34
+            ],
+            "difference": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ungradedPixelObservations": [
+    {
+      "pixel": [
+        1258,
+        215
+      ],
+      "expected": [
+        167,
+        90,
+        95
+      ],
+      "measured": [
+        167,
+        90,
+        95
+      ],
+      "maximumByteError": 0
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "expected": [
+        173,
+        104,
+        106
+      ],
+      "measured": [
+        171,
+        105,
+        107
+      ],
+      "maximumByteError": 2
+    },
+    {
+      "pixel": [
+        1309,
+        218
+      ],
+      "expected": [
+        170,
+        100,
+        100
+      ],
+      "measured": [
+        169,
+        100,
+        100
+      ],
+      "maximumByteError": 1
+    }
+  ],
+  "pixelBudget": 1,
+  "pixelGatePassed": false,
+  "cpu": {
+    "configurations": [
+      "Debug",
+      "Release"
+    ],
+    "testsPerConfiguration": 11,
+    "ctest": "AzureTools.NativeProjectedHairMath"
+  },
+  "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+  "remaining": [
+    "positive pixel 1268,212 exceeds one-byte budget",
+    "ring width and discontinuity image metrics",
+    "dynamic shadow blend and front-side-back views",
+    "NR8-V2 production promotion"
+  ]
+}

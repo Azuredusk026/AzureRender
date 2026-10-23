@@ -17,6 +17,7 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 
 当前执行 C16 的输入边界及 C17 的多层高光。
 虚拟主灯与独立条纹已接入公共材质契约。
+三个真实正主叶及五份关闭对照见[分层验证](../acceptance/nr/projected-hair-positive-layers.md)。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。
