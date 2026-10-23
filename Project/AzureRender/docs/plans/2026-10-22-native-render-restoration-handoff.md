@@ -86,6 +86,7 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 运动与 HDR 历史的公共接入见[时序验证](../acceptance/nr/temporal-reconstruction-integration.md)。
 当前继续执行材质细节、连续运动及正式画质门禁。
 公共四倍尺寸与覆盖核对见[时序质量](../acceptance/nr/temporal-coverage-quality.md)。
+距离描边采样及线性深度历史见[覆盖契约](../acceptance/nr/outline-temporal-footprint.md)。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。

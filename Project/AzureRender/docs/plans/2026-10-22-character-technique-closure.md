@@ -73,6 +73,7 @@ R 控制扩张量，G 参与深度偏移。
 原生整区和动态机位继续执行 C18 门禁。
 
 机制及真实边界见[接入验证](../acceptance/nr/outline-material-integration.md)。
+采样尺度与近远细线门禁见[覆盖验证](../acceptance/nr/outline-temporal-footprint.md)。
 
 ## 实施与验收顺序
 

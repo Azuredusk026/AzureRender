@@ -9,9 +9,10 @@ constexpr auto hdrFormat=VK_FORMAT_R16G16B16A16_SFLOAT;
 struct alignas(16) TemporalUniform {
     std::array<float,4> frame{};
     std::array<float,16> inverseCurrent{},previous{};
-    std::array<float,4> limits{.001F,.01F,.9F,0};
+    std::array<float,4> limits{.001F,.02F,.9F,.01F};
+    std::array<float,4> previousDepthProjection{};
 };
-static_assert(sizeof(TemporalUniform)==160);
+static_assert(sizeof(TemporalUniform)==176);
 bool temporalInverse(const std::array<float,16>& source,std::array<float,16>& result){
     double work[4][8]{};
     for(unsigned row=0;row<4;++row){for(unsigned col=0;col<4;++col)work[row][col]=source[col*4+row];work[row][row+4]=1;}
@@ -101,6 +102,8 @@ void TemporalReconstruction::prepare(const TemporalPreparedFrame& frame,std::uin
     TemporalUniform uniform;uniform.frame={float(extent_.width),float(extent_.height),0,0};
     if(!temporalInverse(frame.current.viewProjection,uniform.inverseCurrent))next.valid=false;
     if(frame.previous)uniform.previous=frame.previous->viewProjection;
+    const auto& projection=frame.previous?frame.previous->projection:frame.current.projection;
+    uniform.previousDepthProjection={projection[10],projection[14],projection[11],projection[15]};
     uniform.frame[2]=next.valid?1.F:0.F;
     std::memcpy(uniforms_[slot].mapped,&uniform,sizeof(uniform));allocator_.flush(uniforms_[slot],0,sizeof(uniform));
     pending_=next;recorded_=false;

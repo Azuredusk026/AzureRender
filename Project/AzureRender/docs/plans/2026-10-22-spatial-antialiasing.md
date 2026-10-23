@@ -143,6 +143,7 @@ AA6 与 NR8-V2、NR12 联合验收主场景。
 GPU 数值夹具独立检查方向、透视与裁剪失败。
 运动附件及逐实例前帧变形按同一边界接入。
 已通过的公共基础见[提交验证](../acceptance/nr/temporal-motion-contract.md)。
+距离描边输出像素与细线能量见[覆盖验证](../acceptance/nr/outline-temporal-footprint.md)。
 具体接入顺序见[时序重建计划](2026-10-24-temporal-reconstruction-integration.md)。
 
 优先扩展现有视图输出与渲染图。

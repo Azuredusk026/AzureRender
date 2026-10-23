@@ -63,7 +63,9 @@ def run(player,output,selected=None,validation=None):
     names=['wide','zero','mask-zero','mask-half','fixed','document','uv1-zero','uv1-tilt','depth-only',
            'masked-clear','hidden','near','far','narrow-fov','resize','depth-positive','depth-negative',
            'two-assets','two-assets-fixed','uv1-mirror','fading','near-plane','morph','translated',
-           'octahedral-forward','octahedral-back','color-only']
+           'octahedral-forward','octahedral-back','color-only',
+           'minimum-supersample','minimum-supersample-fixed','minimum-reference',
+           'minimum-temporal','minimum-temporal-far','minimum-reference-far']
     if selected:
         assert set(selected)<=set(names);names=[name for name in names if name in selected]
     output.mkdir(parents=True,exist_ok=False);digest=hashlib.sha256(player.read_bytes()).hexdigest()
@@ -97,6 +99,9 @@ def run(player,output,selected=None,validation=None):
                 depthOffset=.1 if name=='depth-positive' else -.2 if name=='near-plane' else -.1 if name=='depth-negative' else 0,
                 depthPrepass=name!='color-only',normalSource='tangent-octahedral-uv1' if name.startswith('octahedral-') else 'tangent-uv1' if uv1 else 'geometry',
                 maskTexture=0,color=[1,0,0])
+            if name.startswith('minimum-'):
+                shape['width']=.01
+                shape['minimumPixels']=2 if name.startswith('minimum-reference') else .5
             material=dict(name='public-outline',alphaMode='MASK' if name=='masked-clear' else 'OPAQUE',
                 pbrMetallicRoughness=dict(baseColorTexture=dict(index=1),metallicFactor=0,roughnessFactor=1),
                 extras=dict(azureSlotId='outline',azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},
@@ -108,10 +113,15 @@ def run(player,output,selected=None,validation=None):
             (folder/'plane.gltf').write_text(json.dumps(model),encoding='utf-8')
             level=json.loads((folder/'level.azurelevel').read_text(encoding='utf-8'))
             camera=next(node for node in level['nodes'] if node['id']=='camera')['components']
-            distance=1.05 if name=='near-plane' else 3 if name=='near' else 10 if name=='far' else 5
+            # At distance three the source minimum-width law is in its
+            # constant output-pixel branch. Far attenuation is independent.
+            distance=1.05 if name=='near-plane' else 5 if name.endswith('-far') else 3 if name=='near' or name.startswith('minimum-') else 10 if name=='far' else 5
             camera['azure.transform']['data']['translation']=[0,0,distance]
             camera['azure.camera']['data']=dict(enabled=True,priority=1,fieldOfView=35 if name=='narrow-fov' else 55,nearPlane=.1,farPlane=20)
             level['lights'][0]['intensity']=1
+            if name.startswith('minimum-'):
+                level['renderSettings']['schemaVersion']=18
+                level['renderSettings']['antiAliasing']=3 if name.startswith('minimum-temporal') else 0 if name.startswith('minimum-reference') else 2
             if name=='translated':
                 next(node for node in level['nodes'] if node.get('resourceId')=='plane')['components']={
                     'azure.transform':dict(type='azure.transform',version=1,data=dict(translation=[.2,0,0]))}
@@ -142,11 +152,12 @@ def run(player,output,selected=None,validation=None):
                 (folder/'outline.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,dependencies=list(ids.values()),settings={})),encoding='utf-8')
                 next(node for node in level['nodes'] if node.get('resourceId')=='plane')['materialSlots']={'outline':material_id}
             (folder/'level.azurelevel').write_text(json.dumps(level),encoding='utf-8')
-            size=512 if name=='resize' else 256
+            size=1024 if name.startswith('minimum-reference') else 512 if name=='resize' else 256
+            capture_count=32 if name.startswith('minimum-temporal') else 2
             command=[str(player),'--project',str(folder/'lab.azureproject'),'--width',str(size),'--height',str(size),
-                '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
+                '--capture-dir',str(folder/'frames'),'--capture-frames',str(capture_count),'--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
                 '--runtime-report',str(folder/'runtime.json'),'--set','render.features.showcase-platform=false','--set','render.features.face-sdf=false']
-            if name in ['fixed','two-assets-fixed']:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ['fixed','two-assets-fixed','minimum-supersample-fixed']:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             with (folder/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
@@ -161,8 +172,10 @@ def run(player,output,selected=None,validation=None):
             assert manifest['outlineProjectionLayoutVersion']==1 and manifest['outlineProjectionMaterials']==materials
             assert manifest['outlineProjectionCoordinates']==coordinates
             assert manifest['outlineProjectionBytes']==16+materials*64+8*coordinates
-            frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
+            frame=folder/'frames'/f'frame_{capture_count-1:06d}.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
+            if name.startswith('minimum-temporal'):
+                assert manifest['antiAliasing']==3 and manifest['temporalHistorySubmission']>=32 and manifest['motionPreviousValidObjects']>0,name
+            else:assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             red=(pixels[:,:,0]>240)&(pixels[:,:,1]<4)&(pixels[:,:,2]<4)
             count=int(red.sum());assert count>8 if name in ['wide','fixed','document','uv1-zero','uv1-tilt','near','far','narrow-fov','resize','depth-positive','depth-negative'] else True,name
             if name in ['zero','mask-zero','depth-only','masked-clear','hidden','octahedral-back']:assert count==0,(name,count)
@@ -180,6 +193,37 @@ def run(player,output,selected=None,validation=None):
             rows.append(dict(name=name,outlinePixels=count,playerSha256=digest,imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest(),
                 validationEnabled='Validation layer: enabled' in log,outlineBytes=manifest['outlineProjectionBytes'],size=size,distance=distance,
                 maximumHorizontalBoundaryErrorPixels=boundary_error))
+        if 'minimum-reference' in frames:
+            def linear(pixels):
+                value=pixels.astype(float)/255
+                return np.where(value<=.04045,value/12.92,((value+.055)/1.055)**2.4)
+            reference=linear(frames['minimum-reference']).reshape(256,4,256,4,3).mean((1,3))
+            reference_mass=np.maximum(reference[:,:,0]-reference[:,:,1],0).sum()
+            assert reference_mass>0,'Independent outline reference must contain positive red coverage'
+            report['minimumSampling']=[]
+            for name in ['minimum-supersample','minimum-supersample-fixed']:
+                if name not in frames:continue
+                measured=linear(frames[name]);mass=np.maximum(measured[:,:,0]-measured[:,:,1],0).sum()
+                ratio=float(mass/reference_mass)
+                report['minimumSampling'].append(dict(name=name,minimumOutputPixels=.5,referenceMass=float(reference_mass),mass=float(mass),massRatio=ratio))
+                assert abs(ratio-1)<=.02,('Supersampling must preserve output-pixel minimum outline coverage within 2 percent',name,ratio)
+        if 'minimum-supersample' in frames and 'minimum-supersample-fixed' in frames:
+            assert np.array_equal(frames['minimum-supersample'],frames['minimum-supersample-fixed'])
+        report['minimumTemporal']=[]
+        temporal_failures=[]
+        for name,reference_name in [('minimum-temporal','minimum-reference'),('minimum-temporal-far','minimum-reference-far')]:
+            if name not in frames or reference_name not in frames:continue
+            def temporal_linear(pixels):
+                value=pixels.astype(float)/255
+                return np.where(value<=.04045,value/12.92,((value+.055)/1.055)**2.4)
+            reference=temporal_linear(frames[reference_name]).reshape(256,4,256,4,3).mean((1,3))
+            reference_mass=np.maximum(reference[:,:,0]-reference[:,:,1],0).sum();ratios=[]
+            for index in range(24,32):
+                pixels=temporal_linear(np.asarray(Image.open(output/name/'frames'/f'frame_{index:06d}.png').convert('RGB')))
+                ratios.append(float(np.maximum(pixels[:,:,0]-pixels[:,:,1],0).sum()/reference_mass))
+            report['minimumTemporal'].append(dict(name=name,referenceMass=float(reference_mass),lastEightMassRatios=ratios,meanMassRatio=float(np.mean(ratios))))
+            if max(abs(value-1) for value in ratios)>.02:temporal_failures.append((name,ratios))
+        assert not temporal_failures,('Temporal fine outline energy must stay within 2 percent on every converged phase',temporal_failures)
         if 'wide' in frames:
             for name in ['fixed','document','uv1-zero','octahedral-forward','color-only']:
                 if name in frames:assert np.array_equal(frames['wide'],frames[name]),name

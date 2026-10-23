@@ -196,6 +196,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 模式包含关闭、原生分辨率过滤和四子像素超采样。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
 模式三的运动、历史和资源契约见[时序抗锯齿](docs/runtime/temporal-antialiasing.md)。
+描边输出像素与细线能量见[覆盖验证](docs/acceptance/nr/outline-temporal-footprint.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。

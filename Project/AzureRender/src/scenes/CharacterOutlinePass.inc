@@ -1,5 +1,16 @@
 // Included by CharacterSceneRenderer.cpp after its shared primitive helpers.
 // Both shell passes consume the same frozen instance and deformation inputs.
+namespace {
+struct OutlinePushConstants {
+    float samplingScale=1,reserved=0;
+    std::uint32_t tile=UINT32_MAX;
+    float opacity=1;
+    std::array<float,16> gizmoTransform{};
+};
+static_assert(sizeof(OutlinePushConstants)==80);
+static_assert(offsetof(OutlinePushConstants,tile)==8);
+static_assert(offsetof(OutlinePushConstants,gizmoTransform)==16);
+}
 void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
     const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands,
     bool depthShell,SceneSubmissionCounters* counters) {
@@ -44,7 +55,7 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,120,indices.data(),sizeof(indices));
                 if(counters)counters->pushConstantUpdates+=2;
             }
-            MorphPushConstants morph{};morph.weights=settings.morphWeights;
+            OutlinePushConstants morph{};morph.samplingScale=settings.antiAliasing==2?2.F:1.F;
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,primitiveIndex);
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
                 sizeof(MaterialPushConstants),&morph,sizeof(morph));
@@ -60,7 +71,7 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
                     struct MaskPush {std::uint32_t tile;float opacity;};
                     const MaskPush coverage{tile,run.opacity};
                     commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
-                        sizeof(MaterialPushConstants)+offsetof(MorphPushConstants,textureBaseIndex),&coverage,sizeof(coverage));
+                        sizeof(MaterialPushConstants)+offsetof(OutlinePushConstants,tile),&coverage,sizeof(coverage));
                     commands.drawIndexed(primitive.indexCount,primitive.firstIndex,batch,source);
                     if(counters){++counters->drawCalls;++counters->pushConstantUpdates;}
                     index+=batch;

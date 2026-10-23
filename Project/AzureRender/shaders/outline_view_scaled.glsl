@@ -64,7 +64,7 @@ void main() {
     vec4 transform=outlineRecordVector(base+8u);
     vec2 mask=textureLod(PROJECTION_MASK,texcoord*transform.xy+transform.zw,0).rg;
     clip.xy+=outlineViewScaledOffset(clip.w,vec2(dot(centeredX,worldNormal),dot(centeredY,worldNormal)),
-        camera.clusterDepth.zw,length(centeredY),parameters.x,parameters.y,mask.r);
+        camera.clusterDepth.zw,length(centeredY),parameters.x,parameters.y*max(morphWeights.samplingScale,1.0),mask.r);
     vec3 rowZ=vec3(mvp[0].z,mvp[1].z,mvp[2].z)*modelInverse;
     vec3 rowW=vec3(mvp[0].w,mvp[1].w,mvp[2].w)*modelInverse;
     vec3 cameraInModel=modelInverse*(camera.cameraPosition.xyz-model[3].xyz);

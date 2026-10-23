@@ -37,8 +37,10 @@ layout(location = 0) out vec3 opacityCoordinate;
 layout(push_constant) uniform MorphWeights {
 #if defined(AZURE_VIEW_SCALED_OUTLINE)
     layout(offset = 124) uint materialIndex;
-#endif
+    layout(offset = 128) float samplingScale;
+#else
     layout(offset = 128) vec2 weights;
+#endif
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 

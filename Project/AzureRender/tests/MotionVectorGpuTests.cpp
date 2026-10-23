@@ -1,6 +1,7 @@
 #include "render/MotionVectorPass.hpp"
 #include "render/SceneInstanceGpuData.hpp"
 #include "render/TemporalReconstruction.hpp"
+#include "render/RenderMath.hpp"
 #include "assets/GltfLoader.hpp"
 #include "support/VulkanComputeFixture.hpp"
 #include <cmath>
@@ -94,19 +95,25 @@ int main(int argc,char** argv)try{
         }
         TemporalViewState camera;TemporalFrameInfo info;info.width=info.height=32;info.sceneGeneration=1;
         info.projection=info.viewProjection=identity;MotionPoseHistory temporalPoses;
-        for(unsigned phase=0;phase<10;++phase){
+        const MotionMatrix farProjection{1,0,0,0,0,-1,0,0,0,0,1000.F/(.1F-1000.F),-1,0,0,100.F/(.1F-1000.F),0};
+        for(unsigned phase=0;phase<14;++phase){
             const auto slot=phase%2;info.cameraCut=phase>=3?1:0;info.exposureScale=phase==8?2.F:phase==9?4.F:1.F;
+            info.projection=info.viewProjection=phase==10||phase==11?farProjection:identity;
             const auto prepared=camera.prepare(info);
             if(phase==9&&(!prepared.previous||prepared.previous->exposureScale!=2.F))throw std::runtime_error("Exposure changes must preserve unexposed HDR history");
             auto currentPose=now;if(phase==6||phase==7)currentPose.model[12]=.2F;if(phase==7)currentPose.model[14]=.5F;
-            instance.model=instance.modelViewProjection=currentPose.model;
+            if(phase==10||phase==11){currentPose.model[0]=currentPose.model[5]=50;currentPose.model[14]=phase==10?-50.25F:-200.25F;}
+            if(phase>=12){currentPose.model[0]=currentPose.model[5]=.25F;currentPose.model[12]=phase==12?-.5F:-.375F;}
+            instance.model=currentPose.model;instance.modelViewProjection=phase==10||phase==11?internal::multiply(farProjection,currentPose.model):currentPose.model;
             std::memcpy(buffers[0].mapped,&instance,sizeof(instance));host.allocator.flush(buffers[0],0,sizeof(instance));
             temporal.prepare(prepared,slot,0);temporalPoses.stage({currentPose},{});
-            pass.prepare(slot,temporalPoses.pack(identity,prepared.previousSubmission,8192),input);
+            pass.prepare(slot,temporalPoses.pack(prepared.previous?prepared.previous->viewProjection:identity,prepared.previousSubmission,8192),input);
             draw.shell=false;draw.push.flags=phase==2||phase==5?16:0;
             auto* upload=static_cast<std::uint16_t*>(buffers[9].mapped);
             for(unsigned pixel=0;pixel<1024;++pixel){auto value=((pixel%32+pixel/32+phase)%2)?std::uint16_t(0x3c00):std::uint16_t(0);
                 if(phase==6)value=value?0x3a66:0x3266;
+                if(phase>=12){const float x=2*(float(pixel%32)+.5F)/32-1,y=2*(float(pixel/32)+.5F)/32-1,cx=currentPose.model[12];
+                    value=x>=cx-.25F&&y>=-.25F&&x+y<=cx+.5F?0x3c00:0;}
                 upload[pixel*4]=upload[pixel*4+1]=upload[pixel*4+2]=value;upload[pixel*4+3]=0x3800;}
             host.allocator.flush(buffers[9],0,buffers[9].size);
             RenderGraph graph;auto motion=temporal.importMotion(graph,"temporal-gpu");
@@ -120,6 +127,19 @@ int main(int argc,char** argv)try{
             for(auto resource:motion)graph.attachment(motionPass,resource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
             temporal.schedule(graph,color,depth,motion,"temporal-gpu");std::string error;if(!graph.compile(error))throw std::runtime_error(error);
             host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
+                if(phase==10||phase==12){rhi::ImageBarrierDesc depthBarrier;depthBarrier.image=images[0].image;depthBarrier.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+                    depthBarrier.oldLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;depthBarrier.newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+                    depthBarrier.srcStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+                    depthBarrier.srcAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+                    depthBarrier.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;depthBarrier.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;commands.imageBarrier(depthBarrier);
+                    const float depth=phase==10?(-100*farProjection[10]+farProjection[14])/100:1;
+                    VkClearDepthStencilValue clear{depth,0};VkImageSubresourceRange range{VK_IMAGE_ASPECT_DEPTH_BIT,0,1,0,1};
+                    vkCmdClearDepthStencilImage(raw,images[0].image,depthBarrier.newLayout,&clear,1,&range);
+                    depthBarrier.oldLayout=depthBarrier.newLayout;depthBarrier.newLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+                    depthBarrier.srcStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;depthBarrier.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+                    depthBarrier.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT|VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+                    depthBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;commands.imageBarrier(depthBarrier);
+                }
                 rhi::BufferBarrierDesc uploadBarrier;uploadBarrier.buffer=buffers[9].buffer;uploadBarrier.size=buffers[9].size;
                 uploadBarrier.srcStageMask=VK_PIPELINE_STAGE_HOST_BIT;uploadBarrier.srcAccessMask=VK_ACCESS_HOST_WRITE_BIT;
                 uploadBarrier.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;uploadBarrier.dstAccessMask=VK_ACCESS_TRANSFER_READ_BIT;commands.bufferBarrier(uploadBarrier);
@@ -146,6 +166,7 @@ int main(int argc,char** argv)try{
                 if((phase==6||phase==7)&&(pixel%32<5||pixel%32>=30||pixel/32<1||pixel/32>=31))continue;
                 auto expected=axis==3?std::uint16_t(0x3800):upload[pixel*4+axis];
                 if(axis<3&&(phase==1||phase==4||phase==9))expected=expected?0x2e66:0x3b33;
+                if(phase>=12&&expected==0&&pixels[pixel*4+axis]<=0x21)continue;
                 if(std::abs(int(pixels[pixel*4+axis])-int(expected))>1){std::cerr<<"Temporal phase="<<phase<<" pixel="<<pixel<<" axis="<<axis<<" actual="<<pixels[pixel*4+axis]<<" expected="<<expected<<'\n';
                     throw std::runtime_error("HDR temporal output differs from independent history blend, reactive or camera-cut reference");}
             }
@@ -153,5 +174,5 @@ int main(int argc,char** argv)try{
         }
     }
     if(host.errors.load())throw std::runtime_error("Motion vector Vulkan validation errors");
-    std::cout<<"Motion vector GPU: 22500 motion checks and 38768 HDR history checks, including translation, disocclusion and exposure changes passed\n";return 0;
+    std::cout<<"Motion vector GPU: 22500 motion checks and 55152 HDR history checks, including far depth and moving silhouette rejection passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
