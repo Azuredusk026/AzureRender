@@ -2,6 +2,7 @@
 #include "scene/SceneDescription.hpp"
 
 #include <stdexcept>
+#include <unordered_set>
 
 namespace azurerender {
 scene::SceneDescription SceneDocument::renderDescription() const {
@@ -17,6 +18,7 @@ scene::SceneDescription SceneDocument::renderDescription() const {
             {resource.id, resource.path.u8string()});
     }
     result.nodes.reserve(this->nodes.size());
+    std::unordered_map<std::string,std::string> firstMaterialVariant;
     for (const azurerender::SceneNode& node : this->nodes) {
         azurerender::scene::SceneNodeDesc desc{};
         desc.id = node.id;
@@ -31,10 +33,23 @@ scene::SceneDescription SceneDocument::renderDescription() const {
             const auto resource=std::find_if(resources.begin(),resources.end(),[&](const auto& item){return item.id==node.resourceId;});
             if(resource==resources.end())throw std::invalid_argument("Material override requires a model resource");
             desc.resourceId=node.resourceId+"::materials::"+node.id;
+            if(std::any_of(result.resources.begin(),result.resources.end(),[&](const auto& item){return item.id==desc.resourceId;}))
+                throw std::invalid_argument("Generated material resource identity collides with an existing resource");
             result.resources.push_back({desc.resourceId,resource->path.u8string(),node.resolvedMaterials});
+            firstMaterialVariant.emplace(node.resourceId,desc.resourceId);
         }
         result.nodes.push_back(std::move(desc));
     }
+    std::unordered_set<std::string> referencedResources,replacedBases;
+    for(const auto& node:result.nodes)referencedResources.insert(node.resourceId);
+    for(std::size_t index=0;index<resources.size();++index){
+        const auto& id=resources[index].id;const auto variant=firstMaterialVariant.find(id);
+        if(variant==firstMaterialVariant.end()||referencedResources.count(id))continue;
+        const auto found=std::find_if(result.resources.begin(),result.resources.end(),[&](const auto& item){return item.id==variant->second;});
+        // Keep primary geometry ordering for animation and renderer preparation.
+        std::swap(result.resources[index],*found);replacedBases.insert(id);
+    }
+    result.resources.erase(std::remove_if(result.resources.begin(),result.resources.end(),[&](const auto& resource){return replacedBases.count(resource.id)!=0;}),result.resources.end());
     std::unordered_map<std::string, std::size_t> nodeIndices;
     nodeIndices.reserve(this->nodes.size());
     for (std::size_t index = 0; index < this->nodes.size(); ++index) {

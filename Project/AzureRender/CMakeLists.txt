@@ -2048,6 +2048,9 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/acceptance/g12/" DESTINATION
 
 if(BUILD_TESTING)
     add_executable(AzureContentOperationTests tests/ContentOperationTests.cpp)
+    add_executable(AzureSceneRenderSnapshotTests tests/SceneRenderSnapshotTests.cpp)
+    target_link_libraries(AzureSceneRenderSnapshotTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRuntime.SceneRenderSnapshot COMMAND AzureSceneRenderSnapshotTests)
     target_link_libraries(AzureContentOperationTests PRIVATE AzureEditor)
     add_test(NAME AzureEditor.ContentOperations COMMAND AzureContentOperationTests)
     add_executable(AzureTextureImportContractTests tests/TextureImportContractTests.cpp)
@@ -2071,6 +2074,7 @@ if(BUILD_TESTING)
     add_test(NAME AzureTools.NativeNprLighting COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_npr_lighting.py)
     add_test(NAME AzureTools.NativeCapturedLights COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_captured_lights.py)
     add_test(NAME AzureTools.NativeCameraProjection COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_camera_projection.py)
+    add_test(NAME AzureTools.NativeCapturePixels COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_capture_pixels.py)
     add_test(NAME AzureRender.CameraProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_camera_projection_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CameraProjectionGpu PROPERTIES TIMEOUT 180 LABELS "gpu" RUN_SERIAL TRUE)

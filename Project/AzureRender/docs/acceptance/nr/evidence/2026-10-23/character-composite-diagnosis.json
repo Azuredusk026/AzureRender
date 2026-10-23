@@ -1,0 +1,1152 @@
+{
+  "schemaVersion": 1,
+  "status": "partial-material-input-and-snapshot-verified",
+  "run": "build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5",
+  "completedCameraCommit": "b882869",
+  "currentSnapshotChange": "debug-release-cpu-and-gpu-verified",
+  "successfulActualCapturesBeforeSnapshotChange": 7,
+  "nativeData": {
+    "fragment-red.json": {
+      "budget": 1,
+      "passed": false,
+      "pixels": [
+        {
+          "pixel": [
+            1280,
+            195
+          ],
+          "expected": [
+            148,
+            64,
+            66
+          ],
+          "measured": [
+            148,
+            64,
+            66
+          ],
+          "maximumByteError": 0
+        },
+        {
+          "pixel": [
+            1280,
+            170
+          ],
+          "expected": [
+            73,
+            21,
+            26
+          ],
+          "measured": [
+            73,
+            22,
+            26
+          ],
+          "maximumByteError": 1
+        },
+        {
+          "pixel": [
+            1373,
+            290
+          ],
+          "expected": [
+            182,
+            99,
+            94
+          ],
+          "measured": [
+            182,
+            99,
+            95
+          ],
+          "maximumByteError": 1
+        },
+        {
+          "pixel": [
+            1196,
+            290
+          ],
+          "expected": [
+            85,
+            31,
+            34
+          ],
+          "measured": [
+            87,
+            37,
+            40
+          ],
+          "maximumByteError": 6
+        }
+      ]
+    },
+    "fragment-green.json": {
+      "budget": 1,
+      "passed": true,
+      "pixels": [
+        {
+          "pixel": [
+            1280,
+            195
+          ],
+          "expected": [
+            148,
+            64,
+            66
+          ],
+          "measured": [
+            148,
+            64,
+            66
+          ],
+          "maximumByteError": 0
+        },
+        {
+          "pixel": [
+            1280,
+            170
+          ],
+          "expected": [
+            73,
+            21,
+            26
+          ],
+          "measured": [
+            73,
+            21,
+            26
+          ],
+          "maximumByteError": 0
+        },
+        {
+          "pixel": [
+            1373,
+            290
+          ],
+          "expected": [
+            182,
+            99,
+            94
+          ],
+          "measured": [
+            182,
+            98,
+            94
+          ],
+          "maximumByteError": 1
+        },
+        {
+          "pixel": [
+            1196,
+            290
+          ],
+          "expected": [
+            85,
+            31,
+            34
+          ],
+          "measured": [
+            85,
+            31,
+            34
+          ],
+          "maximumByteError": 0
+        }
+      ]
+    },
+    "captured-rim-policy.json": {
+      "sourceConstant": "build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401\\e950-ps-constants.json",
+      "sourceGlobalRim": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "publicOverride": {
+        "schemaVersion": 2,
+        "mode": "parameters",
+        "typeId": "azure.stylized",
+        "parameters": {
+          "rimAmount": 0
+        },
+        "textures": {}
+      },
+      "slot": {
+        "name:M_actor_laevat_hair_01": "6775f273-82c7-4f89-84bc-aaf2ac679a04"
+      },
+      "generator": "endfield_native.npr_lighting.make_zero_global_rim_override"
+    },
+    "native-stage-pixels.json": [
+      {
+        "pixel": [
+          1280,
+          195
+        ],
+        "pre-overlays": [
+          1.171875,
+          0.203125,
+          0.21484375
+        ],
+        "pre-transparent": [
+          1.171875,
+          0.203125,
+          0.21484375
+        ],
+        "grade-input": [
+          1.158203125,
+          0.2021484375,
+          0.212890625,
+          0.0
+        ],
+        "grade-output": [
+          231,
+          105,
+          104,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1280,
+          170
+        ],
+        "pre-overlays": [
+          0.265625,
+          0.030029296875,
+          0.0400390625
+        ],
+        "pre-transparent": [
+          0.265625,
+          0.030029296875,
+          0.0400390625
+        ],
+        "grade-input": [
+          0.422607421875,
+          0.056884765625,
+          0.0667724609375,
+          0.0
+        ],
+        "grade-output": [
+          146,
+          29,
+          41,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "pre-overlays": [
+          1.875,
+          0.4921875,
+          0.4453125
+        ],
+        "pre-transparent": [
+          1.875,
+          0.4921875,
+          0.4453125
+        ],
+        "grade-input": [
+          1.2431640625,
+          0.340087890625,
+          0.311279296875,
+          0.0
+        ],
+        "grade-output": [
+          229,
+          142,
+          131,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1196,
+          290
+        ],
+        "pre-overlays": [
+          0.359375,
+          0.0537109375,
+          0.0625
+        ],
+        "pre-transparent": [
+          0.359375,
+          0.0537109375,
+          0.0625
+        ],
+        "grade-input": [
+          0.373779296875,
+          0.0631103515625,
+          0.0748291015625,
+          0.0
+        ],
+        "grade-output": [
+          137,
+          36,
+          46,
+          0
+        ]
+      }
+    ],
+    "native-hair-layers.json": [
+      {
+        "pixel": [
+          1280,
+          195
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "coordinates": {
+          "uv": [
+            0.005521650426089764,
+            0.9914361834526062
+          ],
+          "edge": 0.9957088828086853,
+          "secondaryLobe": 0.033962614834308624
+        },
+        "parameters": [
+          0,
+          0.5717860460281372,
+          0.8828107118606567,
+          0.8883649706840515
+        ],
+        "primary": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "secondary": [
+          0.01229140799613367,
+          0.0,
+          1.0146472821675495e-05
+        ],
+        "nativePrimary": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "nativeSecondary": [
+          0.012291408143937588,
+          0.0,
+          1.014647295960458e-05
+        ],
+        "line": [
+          1.0,
+          1.0
+        ],
+        "nativeLine": 1.0,
+        "weight": 1.0,
+        "illumination": [
+          1.8612160682678223,
+          1.863316297531128,
+          1.8710604906082153
+        ],
+        "objectGain": 1.0,
+        "errors": {
+          "primary": 0.0,
+          "secondary": 1.478039184099611e-10,
+          "line": 0.0
+        }
+      },
+      {
+        "pixel": [
+          1280,
+          170
+        ],
+        "q": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "coordinates": {
+          "uv": [
+            0.0,
+            0.0
+          ],
+          "edge": 0.5377975106239319,
+          "secondaryLobe": 1.2179685220217809e-21
+        },
+        "parameters": [
+          0,
+          0.014465552754700184,
+          0.4451361894607544,
+          0.03504997491836548
+        ],
+        "primary": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "secondary": [
+          9.393323323537795e-24,
+          0.0,
+          7.754123843050916e-27
+        ],
+        "nativePrimary": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "nativeSecondary": [
+          9.393322574734842e-24,
+          0.0,
+          7.75412367530949e-27
+        ],
+        "line": [
+          1.0,
+          1.0
+        ],
+        "nativeLine": 1.0,
+        "weight": 1.0,
+        "illumination": [
+          0.5055264830589294,
+          0.5076833963394165,
+          0.5156367421150208
+        ],
+        "objectGain": 1.0,
+        "errors": {
+          "primary": 0.0,
+          "secondary": 7.4880295239982715e-31,
+          "line": 0.0
+        }
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "q": [
+          7.946119663054524e-07,
+          7.946119663054524e-07,
+          1.059482663676206e-06
+        ],
+        "coordinates": {
+          "uv": [
+            0.00039756670594215393,
+            0.0
+          ],
+          "edge": 0.16988851130008698,
+          "secondaryLobe": 0.15322422981262207
+        },
+        "parameters": [
+          0,
+          0.05336080119013786,
+          0.8604104518890381,
+          0.16519416868686676
+        ],
+        "primary": [
+          1.1024293696537044e-08,
+          1.1024293696537044e-08,
+          1.4699058843855886e-08
+        ],
+        "secondary": [
+          0.0017593912115456054,
+          0.0,
+          1.4523653527942064e-06
+        ],
+        "nativePrimary": [
+          1.1024293700145904e-08,
+          1.1024293700145904e-08,
+          1.4699058636935547e-08
+        ],
+        "nativeSecondary": [
+          0.0017593911616131663,
+          0.0,
+          1.4523652680509258e-06
+        ],
+        "line": [
+          0.99977013902348,
+          1.00011493048826
+        ],
+        "nativeLine": 0.9997701644897461,
+        "weight": 1.0,
+        "illumination": [
+          1.282257318496704,
+          1.2853926420211792,
+          1.2969543933868408
+        ],
+        "objectGain": 1.0,
+        "errors": {
+          "primary": 2.069203386521607e-16,
+          "secondary": 4.993243904287403e-11,
+          "line": 2.5466266095897083e-08
+        }
+      },
+      {
+        "pixel": [
+          1196,
+          290
+        ],
+        "q": [
+          3.226222965552507e-08,
+          3.226222965552507e-08,
+          4.301630791000415e-08
+        ],
+        "coordinates": {
+          "uv": [
+            0.0009414594387635589,
+            0.0
+          ],
+          "edge": 0.002912806812673807,
+          "secondaryLobe": 0.08265890181064606
+        },
+        "parameters": [
+          0,
+          0.2552681863307953,
+          0.8788891434669495,
+          0.20325016975402832
+        ],
+        "primary": [
+          2.141235342759858e-09,
+          2.141235342759858e-09,
+          2.8549805700167213e-09
+        ],
+        "secondary": [
+          2.002206739522177e-05,
+          0.0,
+          1.6528079022620987e-08
+        ],
+        "nativePrimary": [
+          2.1412355222238943e-09,
+          2.1412355222238943e-09,
+          2.8549804187427696e-09
+        ],
+        "nativeSecondary": [
+          2.002206747420132e-05,
+          0.0,
+          1.6528078461419682e-08
+        ],
+        "line": [
+          0.9946514767602177,
+          1.0026742616198911
+        ],
+        "nativeLine": 0.9946514964103699,
+        "weight": 1.0,
+        "illumination": [
+          1.1103365421295166,
+          1.1138474941253662,
+          1.1267942190170288
+        ],
+        "objectGain": 1.0,
+        "errors": {
+          "primary": 1.7946403615497285e-16,
+          "secondary": 7.897955089952204e-14,
+          "line": 1.965015217209043e-08
+        }
+      }
+    ],
+    "native-rim-samples.json": [
+      {
+        "pixel": [
+          1280,
+          170
+        ],
+        "index": 3,
+        "uv": [
+          0.49957576394081116,
+          0.8794649243354797
+        ],
+        "rawDepth": 0.030886901542544365,
+        "depth": 3.236603021621704,
+        "depthDelta": 0.02762460708618164,
+        "depthWeight": 0.0,
+        "contribution": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "index": 1,
+        "uv": [
+          0.5377620458602905,
+          0.7984272837638855
+        ],
+        "rawDepth": 0.00371544249355793,
+        "depth": 26.842716217041016,
+        "depthDelta": 23.539087295532227,
+        "depthWeight": 1.0,
+        "contribution": [
+          0.06808537244796753,
+          0.07502683997154236,
+          0.08600492030382156
+        ]
+      },
+      {
+        "pixel": [
+          1373,
+          290
+        ],
+        "index": 3,
+        "uv": [
+          0.5378697514533997,
+          0.798441469669342
+        ],
+        "rawDepth": 0.00371544249355793,
+        "depth": 26.842716217041016,
+        "depthDelta": 23.539087295532227,
+        "depthWeight": 1.0,
+        "contribution": [
+          1.2053139209747314,
+          0.36006325483322144,
+          0.2946271598339081
+        ]
+      }
+    ],
+    "positive-primary-candidates.json": [
+      [
+        1268,
+        212,
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      [
+        1281,
+        212,
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      [
+        1309,
+        218,
+        [
+          255,
+          250,
+          245
+        ]
+      ],
+      [
+        1299,
+        215,
+        [
+          255,
+          242,
+          246
+        ]
+      ],
+      [
+        1258,
+        215,
+        [
+          255,
+          200,
+          218
+        ]
+      ]
+    ]
+  },
+  "tests": {
+    "nativePixelReaderCases": 3,
+    "nativeNprLightingCases": 10,
+    "snapshotReleaseCpuGroups": 5,
+    "debugBuild": "failed-C1060-compiler-heap-exhausted",
+    "fullCharacterAfterSnapshotChange": "failed-bad-allocation",
+    "smallMaterialGpu": "failed-bad-allocation"
+  },
+  "sourceExports": {
+    "after-hair-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\after-hair.bin",
+        "error": null,
+        "eid": 950,
+        "rid": "ResourceId::141976",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 14745600,
+        "sha256": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "before-hair-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\before-hair.bin",
+        "error": null,
+        "eid": 949,
+        "rid": "ResourceId::141976",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 14745600,
+        "sha256": "72a2b02bfe274fde9eb44d696a768b9d019276852e7e068be565d5322ce8f336",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1196-290-history-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1196-290-history.json",
+        "complete": true,
+        "modification_count": 1
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1196-290-trace-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1196-290-trace.json",
+        "eid": 1579,
+        "x": 1196,
+        "y": 1149,
+        "steps": 422,
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1280-170-history-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1280-170-history.json",
+        "complete": true,
+        "modification_count": 1
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1280-170-trace-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1280-170-trace.json",
+        "eid": 1579,
+        "x": 1280,
+        "y": 1269,
+        "steps": 446,
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1280-195-history-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1280-195-history.json",
+        "complete": true,
+        "modification_count": 1
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1280-195-trace-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1280-195-trace.json",
+        "eid": 1579,
+        "x": 1280,
+        "y": 1244,
+        "steps": 413,
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1373-290-history-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1373-290-history.json",
+        "complete": true,
+        "modification_count": 1
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-1373-290-trace-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-1373-290-trace.json",
+        "eid": 1579,
+        "x": 1373,
+        "y": 1149,
+        "steps": 422,
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-auxiliary-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-auxiliary.bin",
+        "error": null,
+        "eid": 1579,
+        "rid": "ResourceId::16349",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R16G16B16A16_FLOAT",
+        "bytes": 29491200,
+        "sha256": "b518710d6ed3c2992106e62a29db8fa8245dc8abe2bd84a98d48a2b3be72df35",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-current-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-current.bin",
+        "error": null,
+        "eid": 1579,
+        "rid": "ResourceId::160192",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 14745600,
+        "sha256": "b08f8803a2ecc8c27aa00b63c78244415cca2aefef7a34793abc65a3743433ec",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-history-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-history.bin",
+        "error": null,
+        "eid": 1579,
+        "rid": "ResourceId::141914",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 640,
+        "height": 360,
+        "depth": 1,
+        "format": "R8_UNORM",
+        "bytes": 230400,
+        "sha256": "1516b21572cdecd2baad775e49c4a2d235b7ce37c9692d90df6b9e0df92f820c",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-motion-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-motion.bin",
+        "error": null,
+        "eid": 1579,
+        "rid": "ResourceId::141846",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R10G10B10A2_UNORM",
+        "bytes": 14745600,
+        "sha256": "eb74fc2d3f2c4261d77b5d98e5f91c2b0c9c2dbe777f9ae74a85edc8db60b901",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    },
+    "taa-output-receipt.json": {
+      "ok": true,
+      "mode": "summary",
+      "data": {
+        "schema_version": 1,
+        "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261023-105023-character-composite-contribution-diagnosis-acb8e5\\taa-output.bin",
+        "error": null,
+        "eid": 1579,
+        "rid": "ResourceId::141843",
+        "mip": 0,
+        "slice": 0,
+        "sample": 0,
+        "width": 2560,
+        "height": 1440,
+        "depth": 1,
+        "format": "R16G16B16A16_FLOAT",
+        "bytes": 29491200,
+        "sha256": "ac841a76cdb6a81a1005d07e81354639e46ea043351694f8b2e7949a4ea9aa85",
+        "complete": true
+      },
+      "err": null,
+      "meta": {
+        "cap": "active",
+        "truncated": false
+      }
+    }
+  },
+  "failureEvidence": {
+    "snapshot-build-debug.log": "e767ad3cbfb9e29eb9f9d7e3c9ceb9962e6ea4786c1968e2804f3a08c87dbc20",
+    "authored-rim-fixed/player.log": "ab9c7e9da69caa92f737f0183f953bf220c174c0fcdd4a239c2865c6ddbfcec5",
+    "ownership-optimized-release/player.log": "0a07fd8f104515f26e98c222c85b4ce1727906d6c266a8e49be0dbdf83fb06d7",
+    "material-override-release/indexed-source/player.log": "ed95ad31f84da391c578eb3824a0b9e955dfe3712d0e526bbd2f892579a791d3"
+  },
+  "memoryObservation": {
+    "approximateAvailableCommitGiB": "less-than-1",
+    "largestPrivateProcess": "svchost",
+    "pid": 4928,
+    "approximatePrivateGiB": 39
+  },
+  "remaining": [
+    "C17 positive primary and ring shape",
+    "C18 production outline inputs",
+    "NR7 temporal history and final grading",
+    "C16 multi-view GPU residency budget",
+    "NR8-V2 production promotion and dynamics"
+  ],
+  "recoveryRun": "build\\runs\\20261023-133709-c16-memory-recovery-validation-e2b10e",
+  "recoveryValidation": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "cpu": [
+      {
+        "config": "release",
+        "tests": 5,
+        "passed": true
+      },
+      {
+        "config": "debug",
+        "tests": 5,
+        "passed": true
+      }
+    ],
+    "gpu": [
+      {
+        "name": "material-override-release",
+        "captures": 8,
+        "passed": true
+      },
+      {
+        "name": "material-override-debug",
+        "captures": 8,
+        "passed": true
+      },
+      {
+        "name": "control",
+        "config": "release",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 18.44,
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "a4f813e15db88705bf774fc68f8cc28cba8a6625c2169b8611a66aa1e7dc04c8",
+        "resourceLines": [
+          "[1792734246440][info][render][code=0] Character texture access: indexed, requested slots=138, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ],
+        "maximumByteDifference": 0
+      },
+      {
+        "name": "sparse",
+        "config": "release",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 33.78,
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "32b1a106ade95abc5df32fdceb7856ae86c91522746a300fbdd12f43118b4341",
+        "resourceLines": [
+          "[1792734275464][info][render][code=0] Character texture access: indexed, requested slots=138, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ],
+        "maximumByteDifference": 0
+      },
+      {
+        "name": "full",
+        "config": "release",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 36.74,
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "32b1a106ade95abc5df32fdceb7856ae86c91522746a300fbdd12f43118b4341",
+        "resourceLines": [
+          "[1792734311685][info][render][code=0] Character texture access: indexed, requested slots=138, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ],
+        "maximumByteDifference": 0
+      },
+      {
+        "name": "sparse-fixed",
+        "config": "debug",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 140.42,
+        "playerSha256": "9ce0c21a1d1266e63ff19fc2e307303e281b5715c5f495898dcb0ef472539f3b",
+        "imageSha256": "32b1a106ade95abc5df32fdceb7856ae86c91522746a300fbdd12f43118b4341",
+        "resourceLines": [
+          "[1792734425778][info][render][code=0] Character texture access: fixed, requested slots=138, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ],
+        "maximumByteDifference": 0
+      },
+      {
+        "name": "graded",
+        "config": "release",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 32.41,
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "bf6a7d9e93b2beca167334bdd28a8bdc463571ceb8576f2261c6685e137c1579",
+        "resourceLines": [
+          "[1792734485685][info][render][code=0] Character texture access: indexed, requested slots=138, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ]
+      },
+      {
+        "name": "main",
+        "config": "release",
+        "isolation": "beauty",
+        "passed": true,
+        "seconds": 217.47,
+        "playerSha256": "9ca0e62697633bc0612cba6289d1d55fdcc4ae8778adc26280ac342bb1493544",
+        "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+        "resourceLines": [
+          "[1792734682395][info][render][code=0] Character texture access: indexed, requested slots=7194, stage sampler limit=1048576",
+          "Allocator after unload: buffers=0 images=0"
+        ],
+        "maximumByteDifference": 0
+      }
+    ]
+  },
+  "visibleHairComparison": {
+    "schemaVersion": 1,
+    "stage": "source-event-950-vs-engine-beauty-before-grading",
+    "maskPixels": 17017,
+    "exposure": -2,
+    "sourceFormat": "R11G11B10_FLOAT",
+    "linearMeanAbsoluteError": 0.020608426078660962,
+    "linearMaximumError": 3.19846866159365,
+    "linearErrorPercentiles": {
+      "50": 0.002376033017683174,
+      "90": 0.025285688525952983,
+      "95": 0.08007783349617295,
+      "99": 0.28510253346008574
+    },
+    "quarterExposureClippedPixels": 14,
+    "byteMeanAbsoluteError": 2.5765606942077532,
+    "byteMaximumError": 137,
+    "sourceHashes": {
+      "before-hair.bin": "72a2b02bfe274fde9eb44d696a768b9d019276852e7e068be565d5322ce8f336",
+      "after-hair.bin": "7590b5bbe131bdd9960f3357dd4240f5b48208ebee9a5f713197431f9bafcf6e",
+      "native-hair-visible-mask.png": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    }
+  },
+  "processPeakSamples": [
+    {
+      "peakWorkingSetBytes": 1536483328,
+      "pid": 32364,
+      "peakPrivateBytes": 2604617728
+    },
+    {
+      "peakWorkingSetBytes": 2938036224,
+      "pid": 41628,
+      "peakPrivateBytes": 3109990400
+    },
+    {
+      "peakWorkingSetBytes": 1405796352,
+      "pid": 41988,
+      "peakPrivateBytes": 2447110144
+    },
+    {
+      "peakWorkingSetBytes": 1366740992,
+      "pid": 10364,
+      "peakPrivateBytes": 2396856320
+    }
+  ],
+  "processPeakScope": "Sampled complete-document and fixed-path actual-character processes; per-view GPU peak pending",
+  "verifiedSources": {
+    "src/runtime/SceneRenderSnapshot.cpp": "85de1b4644c6b363acc900db1823a2a056d2d863f4f2ffec4b4cc17bfef62a66",
+    "tests/SceneRenderSnapshotTests.cpp": "e0716df253e86a3f692df26cfcd1a28e48a2cac467fa38fdaaac9c7c5f8ec521",
+    "tools/endfield_native/capture_pixels.py": "54e7168cc26eefbafb5c9cc23637016219511f9cc8cbc8645af4fa24779beff1",
+    "tools/endfield_native/npr_lighting.py": "2c12d6bcd37d430dea2d3f4fd1338cbffd49130e30f8f24bc0828a07307498f0"
+  }
+}

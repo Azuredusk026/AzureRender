@@ -4,6 +4,18 @@ from endfield_native import npr_lighting as subject
 
 
 class NprLightingTests(unittest.TestCase):
+    def test_zero_global_rim_emits_existing_sparse_material_override(self):
+        expected=dict(schemaVersion=2,mode='parameters',typeId='azure.stylized',parameters={'rimAmount':0},textures={})
+        for row in ([0,0,0,1],[1,.5,.25,0]):
+            self.assertEqual(subject.make_zero_global_rim_override({118:row},rim_row=118),expected)
+
+    def test_nonzero_native_global_rim_requires_its_own_consumer(self):
+        with self.assertRaises(ValueError):subject.make_zero_global_rim_override({118:[.1,0,0,1]},rim_row=118)
+
+    def test_global_rim_override_rejects_missing_or_invalid_rows(self):
+        for rows in ({},{118:[0,0,0]},{118:[False,0,0,1]},{118:[0,0,float('nan'),1]},{118:[-1,0,0,1]}):
+            with self.assertRaises(ValueError):subject.make_zero_global_rim_override(rows,rim_row=118)
+
     def fixture(self):
         global_rows={27:[1,1,1,1],29:[.2877224684,.2877224684,1,0],110:[1,1.05,.55,.8],111:[0,1,1,1],112:[.8,.9,1.1,1],113:[1.2,.9,.8,1],
             114:[1,.9,.8,1],115:[1,1,1,1],116:[0,1,0,0],117:[.15,1.5,.5,0],121:[.6,.8,0,0],122:[1,1,1,0]}

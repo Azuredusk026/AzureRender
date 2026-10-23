@@ -2,6 +2,8 @@
 
 日期：2026-10-22。
 执行状态：已按用户指令恢复自主实施。
+C16-R3 的双配置构建、CPU 及 GPU 回归通过。
+恢复入口及剩余检查见[片元与合成核对](../acceptance/nr/character-composite-diagnosis.md)。
 当前执行逐技术点还原及真实模型验证。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

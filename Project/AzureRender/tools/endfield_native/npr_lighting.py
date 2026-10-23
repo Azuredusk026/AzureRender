@@ -7,6 +7,16 @@ uses the converter's reflected-X convention unless explicitly disabled.
 import math
 
 
+def make_zero_global_rim_override(global_rows,*,rim_row):
+    """Author the existing rim parameter only after confirming zero native global radiance."""
+    value=global_rows.get(rim_row)
+    if not isinstance(value,(list,tuple)) or len(value)!=4 or any(type(v) not in (int,float) or not math.isfinite(v) or v<0 or v>64 for v in value):
+        raise ValueError('Missing or invalid native global rim row')
+    if any(v*value[3]!=0 for v in value[:3]):
+        raise ValueError('Nonzero native global rim requires its explicit consumer')
+    return dict(schemaVersion=2,mode='parameters',typeId='azure.stylized',parameters={'rimAmount':0},textures={})
+
+
 def decode_lighting(global_rows,object_rows,*,ambient_row,main_color_row,reflect_x=True):
     def row(rows,index):
         value=rows.get(index)
