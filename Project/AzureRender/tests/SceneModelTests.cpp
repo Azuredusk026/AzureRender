@@ -13,7 +13,13 @@
 #include <iostream>
 
 namespace {
+std::string withoutObjectShadows(std::string value) {
+    for(auto line=value.find("objectShadow ");line!=std::string::npos;line=value.find("objectShadow "))
+        value.erase(line,value.find('\n',line)-line+1);
+    return value;
+}
 std::string withoutCharacterLightResponse(std::string value) {
+    value=withoutObjectShadows(std::move(value));
     const auto line=value.find("lightCharacterResponse ");
     if(line==std::string::npos)throw std::runtime_error("Expected current character light response field");
     value.erase(line,value.find('\n',line)-line+1);return value;
@@ -244,7 +250,7 @@ int main() {
             auto legacy=withoutLightReceivers(contents);
             const auto responseLine=legacy.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             legacy.erase(responseLine,legacy.find('\n',responseLine)-responseLine+1);
-            const auto header=legacy.find("schemaVersion 12");assert(header!=std::string::npos);
+            const auto header=legacy.find("schemaVersion 13");assert(header!=std::string::npos);
             legacy.replace(header,16,"schemaVersion 6");
             const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
             legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
@@ -264,7 +270,7 @@ int main() {
             versionEight=withoutLightReceivers(versionEight);
             const auto responseLine=versionEight.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             versionEight.erase(responseLine,versionEight.find('\n',responseLine)-responseLine+1);
-            const auto header=versionEight.find("schemaVersion 12");assert(header!=std::string::npos);
+            const auto header=versionEight.find("schemaVersion 13");assert(header!=std::string::npos);
             versionEight.replace(header,16,"schemaVersion 8");
             const auto boxLine=versionEight.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
             versionEight.erase(boxLine,versionEight.find('\n',boxLine)-boxLine+1);
@@ -279,7 +285,7 @@ int main() {
             versionNine=withoutLightReceivers(versionNine);
             const auto line=versionNine.find("lightSpecularScale ");assert(line!=std::string::npos);
             versionNine.erase(line,versionNine.find('\n',line)-line+1);
-            const auto header=versionNine.find("schemaVersion 12");assert(header!=std::string::npos);
+            const auto header=versionNine.find("schemaVersion 13");assert(header!=std::string::npos);
             versionNine.replace(header,16,"schemaVersion 9");
             const auto path=directory/"version-nine.azscene";
             {std::ofstream file(path);file<<versionNine;}
@@ -290,7 +296,7 @@ int main() {
             std::ifstream saved(scenePath);
             std::string legacy((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
             legacy=withoutLightReceivers(legacy);
-            const auto header=legacy.find("schemaVersion 12");
+            const auto header=legacy.find("schemaVersion 13");
             legacy.replace(header,16,"schemaVersion 10");
             const auto path=directory/"version-ten.azscene";
             {std::ofstream file(path);file<<legacy;}
@@ -303,7 +309,7 @@ int main() {
         {
             std::ifstream file(scenePath);
             auto legacy=withoutCharacterLightResponse(std::string((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>()));
-            const auto header=legacy.find("schemaVersion 12");legacy.replace(header,16,"schemaVersion 11");
+            const auto header=legacy.find("schemaVersion 13");legacy.replace(header,16,"schemaVersion 11");
             const auto path=directory/"version-eleven.azscene";{std::ofstream out(path);out<<legacy;}
             if(azurerender::SceneDocument::load(path).lights[0].shape.characterResponse.present) {
                 std::cerr<<"Version eleven must retain the default character response\n";return 1;

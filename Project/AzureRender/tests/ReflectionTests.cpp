@@ -4,10 +4,28 @@
 #include <iostream>
 #include <stdexcept>
 using namespace azurerender;
+struct FloatRangeFixture {
+ float scalar=.1F;
+ std::array<float,3> vector{.0001F,.1F,.01F};
+};
 void check(bool value) { if (!value) throw std::runtime_error("Reflection contract failed"); }
 int main() {
  try {
   auto registry = reflection::makeRuntimeRegistry();
+  registry.addType(reflection::reflectedType<FloatRangeFixture>("test.float-range",1,{
+   reflection::property<FloatRangeFixture>("scalar","Scalar",&FloatRangeFixture::scalar,.0001,.1),
+   reflection::property<FloatRangeFixture>("vector","Vector",&FloatRangeFixture::vector,.0001,.1)}));
+  FloatRangeFixture bounded,boundedCopy;
+  registry.decode("test.float-range",&boundedCopy,registry.encode("test.float-range",&bounded));
+  check(boundedCopy.scalar==bounded.scalar&&boundedCopy.vector==bounded.vector);
+  for(float value:{std::nextafter(.0001F,0.F),std::nextafter(.1F,1.F)}){
+   for(const auto& field:{"scalar","vector"}){
+    auto invalid=registry.encode("test.float-range",&bounded);
+    invalid["data"][field]=std::string(field)=="scalar"?nlohmann::json(value):nlohmann::json::array({value,.01F,.01F});
+    bool rejected=false;try{registry.decode("test.float-range",&boundedCopy,invalid);}catch(const std::exception&){rejected=true;}
+    check(rejected&&boundedCopy.scalar==bounded.scalar&&boundedCopy.vector==bounded.vector);
+   }
+  }
   ecs::TransformComponent original;
   original.translation = {1, 2, 3};
   auto data = registry.encode("azure.transform", &original);

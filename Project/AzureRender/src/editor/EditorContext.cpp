@@ -8,6 +8,7 @@ struct VisibilityComponent {
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "ecs/Components.hpp"
 #include "ecs/Entity.hpp"
+#include "runtime/ObjectShadowComponentCodec.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -27,6 +28,8 @@ EditorContext::EditorContext(
         throw std::invalid_argument("Editor scene path cannot be empty");
     }
     log("Opened scene: " + scene_.sceneId);
+    for(const auto& node:scene_.nodes)if(node.objectShadow)
+        components_[node.id]["azure.object-shadow"]=encodeObjectShadowComponent(node.objectShadow);
     if(scene_.nodes.empty())selectedNodes_.clear();
     rebuildEntities();
     refreshSelectedTransform();
@@ -185,7 +188,11 @@ void EditorContext::syncComponents() {
         if (entity == azurerender::ecs::kInvalidEntity) {
             continue;
         }
-        const SceneNode& node = scene_.nodes[index];
+        SceneNode& node = scene_.nodes[index];
+        const auto components=components_.find(node.id);
+        node.objectShadow=components==components_.end()?std::optional<ecs::ObjectShadowComponent>{}:objectShadowFromComponents(components->second);
+        if(node.objectShadow)ecsWorld_.addComponent(entity,*node.objectShadow);
+        else ecsWorld_.removeComponent<ecs::ObjectShadowComponent>(entity);
         // Name mirrors the scene node for Outliner/ECS bridges.
         ecsWorld_.addComponent(entity, azurerender::ecs::NameComponent{});
         azurerender::ecs::NameComponent* name =

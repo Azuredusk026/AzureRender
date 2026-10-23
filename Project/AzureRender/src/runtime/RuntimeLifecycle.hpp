@@ -72,6 +72,7 @@ class RuntimeLifecycle final {
             if (node.id.empty() || !parents.emplace(node.id, node.parentId).second)
                 throw std::invalid_argument("Duplicate or empty runtime node id");
         for (const auto& node : scene.nodes) {
+            if(node.objectShadow)node.objectShadow->validate();
             auto parent = node.parentId;
             std::size_t depth = 0;
             while (!parent.empty()) {
@@ -93,6 +94,7 @@ class RuntimeLifecycle final {
             world_.addComponent(
                 entity, ecs::TransformComponent{node.translation, node.rotation, node.scale});
             world_.addComponent(entity, ecs::RenderableComponent{0, node.visible});
+            if(node.objectShadow)world_.addComponent(entity,*node.objectShadow);
         }
     }
     SceneDocument snapshotScene() {
@@ -108,6 +110,9 @@ class RuntimeLifecycle final {
             }
             if (const auto* renderable = world_.tryGet<ecs::RenderableComponent>(entity))
                 node.visible = renderable->visible;
+            if(const auto* shadow=world_.tryGet<ecs::ObjectShadowComponent>(entity)){
+                shadow->validate();node.objectShadow=*shadow;
+            }else node.objectShadow.reset();
             if (!node.parentId.empty() && !nodeValid(node.parentId)) node.parentId.clear();
             result.nodes.push_back(std::move(node));
         }
@@ -129,6 +134,7 @@ class RuntimeLifecycle final {
         try{builder();}catch(...){pending_.swap(operations);pendingSpawns_.swap(reservations);throw;}
     }
     void validateSpawn(const SceneNode& node) {
+        if(node.objectShadow)node.objectShadow->validate();
         if(node.id.empty()||node.id.size()>128||nodes_.count(node.id)||pendingSpawns_.count(node.id))
             throw std::invalid_argument("Spawn identity is empty, too long or already reserved");
         if(nodes_.size()+pendingSpawns_.size()>=4096)throw std::invalid_argument("Spawn node capacity exceeded");
@@ -150,6 +156,7 @@ class RuntimeLifecycle final {
                 world.addComponent(entity,NodeIdentity{node.id});
                 world.addComponent(entity,ecs::TransformComponent{node.translation,node.rotation,node.scale});
                 world.addComponent(entity,ecs::RenderableComponent{0,node.visible});
+                if(node.objectShadow)world.addComponent(entity,*node.objectShadow);
                 if(configure)configure(world,entity);
                 nodes_.emplace(node.id,entity);scene_.nodes.swap(nodes);
             }catch(...){world.destroyEntity(entity);throw;}

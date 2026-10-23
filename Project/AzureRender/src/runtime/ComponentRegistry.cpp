@@ -78,6 +78,7 @@ ComponentRegistry makeRuntimeComponentRegistry() {
     ComponentRegistry result(reflection::makeRuntimeRegistry()); registerGeneratedComponents(result);
     result.setPresentation("azure.transform",{"变换","场景",{},{},false});
     result.setPresentation("azure.renderable",{"渲染可见性","场景",{},{},false});
+    result.setPresentation("azure.object-shadow",{"对象阴影","呈现"});
     result.setPresentation("azure.rigid-body",{"刚体","物理",{}, {"azure.character"}});
     result.setPresentation("azure.character",{"角色控制器","物理",{}, {"azure.rigid-body"}});
     result.setPresentation("azure.hinge",{"铰链约束","物理"});

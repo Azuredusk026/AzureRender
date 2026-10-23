@@ -5,6 +5,8 @@
 #include "render/LightShapeJson.hpp"
 #include "render/ReflectionProbeJson.hpp"
 #include "render/IrradianceVolumeJson.hpp"
+#include "ecs/ObjectShadow.hpp"
+#include <optional>
 
 #include <cstdint>
 #include <array>
@@ -35,6 +37,7 @@ struct SceneNode {
     std::string instanceOf;
     std::map<std::string,std::string> materialSlots;
     std::map<std::string,MaterialBinding> resolvedMaterials;
+    std::optional<ecs::ObjectShadowComponent> objectShadow;
 };
 
 // Local light attached to a scene node. The node supplies world placement;
@@ -50,7 +53,7 @@ struct SceneLight {
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 12;
+    static constexpr std::uint32_t kSchemaVersion = 13;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;

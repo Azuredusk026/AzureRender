@@ -32,6 +32,9 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 完整几何与平方根 Alpha 已接入公共材质特征。
 原生运算及双配置范围见[投影覆盖验证](../acceptance/nr/material-shadow-coverage.md)。
 下一项接入有界对象图集、注册配置及独立过滤。
+注册组件、公共投影及文档链路通过双配置检查。
+范围与宿主边界见[配置验证](../acceptance/nr/object-shadow-configuration.md)。
+后续分离深度图像与共享采样器，保持固定路径容量。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。

@@ -99,6 +99,10 @@ ComponentRegistry 与 MetadataGeneration 覆盖注册、权限和生成描述。
 
 RegisteredComponentHost 使用独立注册的 Vulkan 编辑宿主。它验证属性面板绘制、字段编辑及只读拒绝。完整阶段状态见[F4 验收](../acceptance/f4/2026-10-06.md)。
 
+浮点属性按存储类型的可表示边界校验。
+标量与三维向量的合法端点可保存重开。
+相邻越界浮点值及非法数值均被拒绝。
+
 ## 参考来源
 
 生成器与 Registry 为项目实现。JSON 使用 vcpkg 固定的 nlohmann/json，数据结构参考项目 ECS 组件和 Inspector 的属性需求。

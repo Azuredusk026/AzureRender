@@ -14,6 +14,8 @@
 #include "ecs/LightShape.hpp"
 #include "render/ReflectionProbe.hpp"
 #include "render/IrradianceVolumeBinding.hpp"
+#include "ecs/ObjectShadow.hpp"
+#include <optional>
 
 namespace azurerender::scene {
 
@@ -36,6 +38,7 @@ struct SceneNodeDesc {
     std::array<float, 3> rotation{0.0F, 0.0F, 0.0F};
     std::array<float, 3> scale{1.0F, 1.0F, 1.0F};
     bool visible = true;
+    std::optional<ecs::ObjectShadowComponent> objectShadow;
 };
 
 struct SceneLightDesc {

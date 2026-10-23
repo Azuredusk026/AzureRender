@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "对象阴影的组件、文档、投影与生命周期；图集绘制继续待验",
+  "run": "build/runs/20261023-190255-object-shadow-config-0c8cdf",
+  "component": {
+    "type": "azure.object-shadow",
+    "version": 1,
+    "maximumEnabledObjects": 8,
+    "automaticPage": 8
+  },
+  "sceneSchemaVersion": 13,
+  "gpuProjectionRecord": {
+    "bytes": 96,
+    "alignment": 16,
+    "offsets": {
+      "worldToUnitShadow": 0,
+      "biasAndFilter": 64,
+      "atlasRect": 80
+    },
+    "uploaded": false
+  },
+  "checks": [
+    {
+      "config": "release",
+      "suite": "cpu",
+      "groups": 12,
+      "passed": true
+    },
+    {
+      "config": "release",
+      "suite": "host-gpu",
+      "groups": 1,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "cpu",
+      "groups": 12,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "suite": "host-gpu",
+      "groups": 1,
+      "passed": true
+    }
+  ],
+  "sourceProjectionProof": {
+    "schemaVersion": 1,
+    "maximumAbsoluteError": 2.2372113800406268e-08,
+    "actualForwardDepthMatrix": [
+      [
+        -0.6180487275,
+        0.0,
+        -0.1089787334,
+        0.4710374773
+      ],
+      [
+        0.03680872545,
+        0.3392274678,
+        -0.2087525129,
+        0.1856125891
+      ],
+      [
+        0.05934309959,
+        -0.213544786,
+        -0.3365512192,
+        0.663633287
+      ]
+    ],
+    "sourceForwardDepthMatrix": [
+      [
+        -0.6180487275123596,
+        -9.49598355504122e-09,
+        -0.1089787557721138,
+        0.4710374894827396
+      ],
+      [
+        0.03680873662233353,
+        0.33922746777534485,
+        -0.20875252783298492,
+        0.18561258912086487
+      ],
+      [
+        0.059343110769987106,
+        -0.2135448008775711,
+        -0.3365512192249298,
+        0.6636333018541336
+      ]
+    ]
+  },
+  "floatBoundary": {
+    "reproduced": true,
+    "scalarAndVectorRoundtrip": true,
+    "adjacentOutsideValuesRejected": true
+  },
+  "builds": {
+    "release": {
+      "playerSha256": "ef7401c56300b4b4806b9d9b4624d843ea8ffa726038d18da69542f50a923da3",
+      "editorSha256": "f345a410a952400f1b4614df2bfa1905ac011a8c2fbd44605c0fa3411655de80",
+      "logSha256": "168f9fd0346815b9ef81f53487e9e50aa66a75b89e3fab69fbc5fc79cc3c5bcd"
+    },
+    "debug": {
+      "playerSha256": "8565c9fa7cc5dfd7b58d09d640e643f4d76340187fde79dd27e3b0063400f860",
+      "editorSha256": "c6ba43f379a40c4860e6b6f289d71413c795d6657e5298328f71383fc983bd70",
+      "logSha256": "9a63ef763bce10fc012567992e8c81e342aed99d36eed6197d3342b378961556"
+    }
+  },
+  "sourceFiles": {
+    "CMakeLists.txt": "9948560766915c6aab1686e6757d28ac72abd283f809a2da7f2ccd54c97a6efa",
+    "src/ecs/ObjectShadow.hpp": "89210881794a45981e5482ce4eb9fb4c5da140ce54fd89b7b803ac09a5cf4f6d",
+    "src/render/ObjectShadow.hpp": "e781f3de332010b30fc344ea1dbdb25ee341724b0b9c7dfa9ee98d8f967d28d7",
+    "src/runtime/ObjectShadowComponentCodec.hpp": "ac0993248e7790e0c5f85f23c3e8d3fbc727180d84a16efb30cdbba0bc4b8901",
+    "src/runtime/SceneDocument.cpp": "fa498b84c9ea178ff26b7b67e64dceac20333495ff6dd85561d855f39bcc7291",
+    "src/runtime/SceneRenderSnapshot.cpp": "97a41987f7ed8f96b594b6d9e0404dad5c61087519f072fb0524e03862be6185",
+    "src/runtime/RuntimeLifecycle.hpp": "0caf3759b88e6c80eaa0d6741330a766fc0bb370bbeabcf0d9edc35966d88885",
+    "src/editor/EditorContext.cpp": "3080b0fe98b2f42475df448da909ab1d4e58d5a01ab6e6985c39d191cea97d51",
+    "src/reflection/Registry.hpp": "5592ebca065940cb585df602363c06596ceed985081ace65f3dd7b5a5b197bbd",
+    "tests/ObjectShadowTests.cpp": "1cfc3f87eee3e817046ef8f59a035dd340313770aafa4231746c6673045eecca",
+    "tests/ObjectShadowDocumentTests.cpp": "06aa39a0de3d8d5592bbea2a036b319fd6b000a9f61161905a21882f96050dd8",
+    "tests/ReflectionTests.cpp": "ea62f2ad6213d8be0413f0e39ea784a36a1df8d944ae5acb2767b4ea890c559c"
+  },
+  "remaining": [
+    "共享深度采样器与独立图像的容量校验",
+    "在途 GPU 记录、图集绘制和接收过滤",
+    "两个对象、动画及完整原生角色图像验证"
+  ],
+  "moduleBoundaries": {
+    "passed": true,
+    "logSha256": "f7f75cdf3bc0da8cf95386134fa1d60da1484d78505818858bd8dd24939f84a2"
+  }
+}

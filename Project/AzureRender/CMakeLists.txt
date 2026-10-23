@@ -409,9 +409,9 @@ set(AZURE_GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(AZURE_REFLECTION_OUTPUT "${AZURE_GENERATED_DIR}/reflection/GeneratedRegistry.hpp")
 set(AZURE_COMPONENT_OUTPUT "${AZURE_GENERATED_DIR}/runtime/GeneratedComponents.hpp")
 add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}" "${AZURE_COMPONENT_OUTPUT}"
-    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp ecs/CameraComponents.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
+    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp ecs/CameraComponents.hpp ecs/ObjectShadow.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp src/ecs/CameraComponents.hpp
+    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp src/ecs/CameraComponents.hpp src/ecs/ObjectShadow.hpp
     VERBATIM)
 add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTION_OUTPUT}")
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
@@ -916,6 +916,12 @@ if(BUILD_TESTING)
     add_executable(AzureRegisteredComponentWorkflowTests tests/RegisteredComponentWorkflowTests.cpp)
     target_link_libraries(AzureRegisteredComponentWorkflowTests PRIVATE AzureEditor)
     add_test(NAME AzureEngine.RegisteredComponentWorkflow COMMAND AzureRegisteredComponentWorkflowTests)
+    add_executable(AzureObjectShadowTests tests/ObjectShadowTests.cpp)
+    target_link_libraries(AzureObjectShadowTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ObjectShadow COMMAND AzureObjectShadowTests)
+    add_executable(AzureObjectShadowDocumentTests tests/ObjectShadowDocumentTests.cpp)
+    target_link_libraries(AzureObjectShadowDocumentTests PRIVATE AzureEditor)
+    add_test(NAME AzureEngine.ObjectShadowDocument COMMAND AzureObjectShadowDocumentTests)
     add_executable(AzureRegisteredComponentHost src/main.cpp tests/RegisterHostExtension.cpp)
     target_link_libraries(AzureRegisteredComponentHost PRIVATE AzureRenderHost)
     add_dependencies(AzureRegisteredComponentHost AzureRenderShaders)

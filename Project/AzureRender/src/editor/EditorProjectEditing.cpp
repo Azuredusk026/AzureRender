@@ -10,6 +10,7 @@
 #include "runtime/ComponentCodec.hpp"
 #include "runtime/AnimationStateMachine.hpp"
 #include "runtime/AssetTypeRegistry.hpp"
+#include "runtime/ObjectShadowComponentCodec.hpp"
 #include <chrono>
 #include <fstream>
 #include <set>
@@ -24,6 +25,8 @@ std::shared_ptr<EditorContext> EditorContext::openProject(const std::filesystem:
     const auto scenePath=documentPath.empty()?project->resolve(project->startupScene):documentPath;
     Level level; if(scenePath.extension()==".azurelevel")level=Level::load(scenePath,*assets);else level.scene=project->loadScene(scenePath);
     auto context=std::make_shared<EditorContext>(level.scene,scenePath);
+    if(scenePath.extension()!=".azurelevel")for(const auto& node:level.scene.nodes)if(node.objectShadow)
+        level.components[node.id]["azure.object-shadow"]=encodeObjectShadowComponent(node.objectShadow);
     context->project_=std::move(project);context->assets_=std::move(assets);context->components_=std::move(level.components);
     if(scenePath.extension()==".azurelevel"){
         std::ifstream file(scenePath);file>>context->sourceLevel_;

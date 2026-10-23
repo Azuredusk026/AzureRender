@@ -51,7 +51,11 @@ Property property(std::string name, std::string label, F T::* member, double min
             const auto number = [&](const Json& v) {
                 if (!v.is_number()) throw std::invalid_argument("Expected numeric property");
                 const double n = v.get<double>();
-                if (!std::isfinite(n) || n < minimum || n > maximum)
+                // Persisted float endpoints retain their storage precision.
+                constexpr bool floatStorage = vector || std::is_same_v<F,float>;
+                const double lower = floatStorage ? static_cast<double>(static_cast<float>(minimum)) : minimum;
+                const double upper = floatStorage ? static_cast<double>(static_cast<float>(maximum)) : maximum;
+                if (!std::isfinite(n) || n < lower || n > upper)
                     throw std::out_of_range("Property outside declared range");
             };
             if constexpr (vector) {

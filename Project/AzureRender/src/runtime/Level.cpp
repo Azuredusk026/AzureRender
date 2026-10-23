@@ -4,6 +4,7 @@
 #include "runtime/Prefab.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include "runtime/MaterialDocument.hpp"
+#include "runtime/ObjectShadowComponentCodec.hpp"
 #include <fstream>
 #include <chrono>
 #include <atomic>
@@ -64,6 +65,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
         if (!node.resourceId.empty() && !resources.count(node.resourceId)) throw std::runtime_error("Node references unknown resource");
         node.visible = !node.resourceId.empty();
         auto data = source.value("components", nlohmann::json::object()); validateComponents(data);
+        node.objectShadow=objectShadowFromComponents(data);
         if (data.contains("azure.transform")) {
             ecs::TransformComponent transform; registry.decode("azure.transform", &transform, data.at("azure.transform"));
             node.translation = transform.translation; node.rotation = transform.rotation; node.scale = transform.scale;

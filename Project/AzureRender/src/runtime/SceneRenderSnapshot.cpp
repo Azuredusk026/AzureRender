@@ -28,6 +28,8 @@ scene::SceneDescription SceneDocument::renderDescription() const {
         desc.rotation = node.rotation;
         desc.scale = node.scale;
         desc.visible = node.visible;
+        if(node.objectShadow)node.objectShadow->validate();
+        desc.objectShadow = node.objectShadow;
         if(!node.materialSlots.empty()){
             if(node.resolvedMaterials.size()!=node.materialSlots.size())throw std::invalid_argument("Material bindings must be resolved before rendering");
             const auto resource=std::find_if(resources.begin(),resources.end(),[&](const auto& item){return item.id==node.resourceId;});

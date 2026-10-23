@@ -1,6 +1,7 @@
 #include "SceneDocument.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #include "runtime/ColorGradingLutBinding.hpp"
+#include "runtime/ObjectShadowComponentCodec.hpp"
 
 #include <chrono>
 #include <regex>
@@ -63,6 +64,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
                << std::quoted(node.instanceOf) << '\n';
         output<<"materialSlotCount "<<node.materialSlots.size()<<'\n';
         for(const auto& [slot,asset]:node.materialSlots)output<<"materialSlot "<<std::quoted(slot)<<' '<<std::quoted(asset)<<'\n';
+        output<<"objectShadow "<<std::quoted(encodeObjectShadowComponent(node.objectShadow).dump())<<'\n';
     }
     output << "lightCount " << document.lights.size() << '\n';
     for (const SceneLight& light : document.lights) {
@@ -211,6 +213,12 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         if(schemaVersion>=4){
             std::size_t count=0;if(!(input>>key>>count)||key!="materialSlotCount"||count>256)throw std::invalid_argument("Invalid material slot count");
             for(std::size_t slotIndex=0;slotIndex<count;++slotIndex){std::string slot,asset;if(!(input>>key>>std::quoted(slot)>>std::quoted(asset))||key!="materialSlot"||slot.empty()||asset.empty()||!node.materialSlots.emplace(slot,asset).second)throw std::invalid_argument("Invalid scene material slot");}
+        }
+        if(schemaVersion>=13){
+            std::string encoded;
+            if(!(input>>key>>std::quoted(encoded))||key!="objectShadow")throw std::invalid_argument("Missing scene object shadow field");
+            const auto value=Json::parse(encoded);
+            if(!value.is_null())node.objectShadow=decodeObjectShadowComponent(value);
         }
         document.nodes.push_back(std::move(node));
     }
