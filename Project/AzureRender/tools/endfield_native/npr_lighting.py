@@ -62,6 +62,12 @@ def decode_lighting(global_rows,object_rows,*,ambient_row,main_color_row,reflect
             +['material-specific color inputs','native grading and unclipped HDR output']}
 
 
+def decode_surface_lighting(global_rows,object_rows,*,ambient_row,main_color_row):
+    """Author explicit material colors from caller-confirmed capture rows."""
+    decoded=decode_lighting(global_rows,object_rows,ambient_row=ambient_row,main_color_row=main_color_row)
+    return dict(schemaVersion=1,ambientColor=decoded['settings']['ambientColor'],mainColor=decoded['mainLight']['color'])
+
+
 def decode_projected_hair_lighting(global_rows,object_rows,material_rows,*,ambient_row,main_color_row,shadow_color_row):
     """Join caller-confirmed material Z/W shadow controls with captured light colors."""
     decoded=decode_lighting(global_rows,object_rows,ambient_row=ambient_row,main_color_row=main_color_row)

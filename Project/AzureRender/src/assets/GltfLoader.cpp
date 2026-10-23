@@ -1785,7 +1785,7 @@ AssetMaterial loadMaterial(
             const std::set<std::string> fields{"schemaVersion","shadowScale","lightingInputs","shadowMask","baseAo"};
             if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
-            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal")throw std::invalid_argument("Unknown nprDiffuse field");
+            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1815,6 +1815,25 @@ AssetMaterial loadMaterial(
                 indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
+            if(npr.contains("lighting")) {
+                const auto& raw=npr.at("lighting");
+                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")
+                    ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+                    ||!raw.contains("ambientColor")||!raw.contains("mainColor"))
+                    throw std::invalid_argument("Invalid nprDiffuse.lighting fields or version");
+                auto& lighting=result.nprDiffuse.lighting;
+                for(const auto* field:{"ambientColor","mainColor"}) {
+                    const auto& value=raw.at(field);
+                    if(!value.is_array()||value.size()!=3)throw std::invalid_argument("Invalid nprDiffuse.lighting color");
+                    auto& color=std::string(field)=="ambientColor"?lighting.ambientColor:lighting.mainColor;
+                    for(unsigned i=0;i<3;++i) {
+                        if(!value[i].is_number()||!std::isfinite(value[i].get<double>())||value[i].get<double>()<0||value[i].get<double>()>64)
+                            throw std::invalid_argument("Invalid nprDiffuse.lighting color component");
+                        color[i]=value[i].get<float>();
+                    }
+                }
+                lighting.present=true;
+            }
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }
     }

@@ -35,6 +35,26 @@
 该值属于漫反射选择量，独立于物理遮蔽纹理。
 无子对象的材质遵循所属表面模型的规则。
 
+`lighting` 为可选的版本一对象。
+完整字段为 `schemaVersion`、`ambientColor` 及 `mainColor`。
+两组线性颜色均包含三个零至 64 的有限数值。
+缺省采用场景光色，启用时采用材质的显式光色。
+
+```json
+{
+  "lighting": {
+    "schemaVersion": 1,
+    "ambientColor": [1.2, 0.8, 0.6],
+    "mainColor": [0.7, 0.9, 1.1]
+  }
+}
+```
+
+光色覆盖由场景 NPR 照明组合消费。
+主灯强度、方向及局部灯继续由场景拥有。
+场景辐照启用时，环境入射量采用实际辐照结果。
+完整材质文档与 glTF 共用解析和校验。
+
 `indirectNormal` 为可选字符串，默认 `surface`。
 该模式使用完成法线贴图后的表面法线。
 `world-horizontal` 保留世界 X、Z 分量。

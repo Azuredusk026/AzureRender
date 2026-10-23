@@ -194,6 +194,10 @@ struct AssetMaterial {
         float shadowScale=1;
         bool styleMaskGb=false,albedoAlpha=false;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
+        struct Lighting {
+            bool present=false;
+            std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
+        } lighting;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };

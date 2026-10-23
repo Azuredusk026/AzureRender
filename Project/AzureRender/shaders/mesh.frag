@@ -1311,7 +1311,13 @@ void main() {
             hairShadowScale=profile.rows[5].w;
             response=hairDiffuseResponse;
             incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
-        } else response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
+        } else {
+            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
+            PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+            if(profile.rows[10].w>.5) {
+                incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
+            }
+        }
         if(camera.nprGainFloor.w>.5){
             vec3 envNormal=indirectDiffuseNormal;float angle=camera.clusterLighting.z;
             envNormal.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;

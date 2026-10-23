@@ -1344,6 +1344,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
          << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
          << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"
          << "  \"sceneTriangles\": " << triangles << ",\n"

@@ -59,6 +59,7 @@ int main(){try{
     {std::ofstream output(replacementPath);output<<MaterialData::defaults("azure.pbr").encode();}
     AssetMaterial source;source.name="face-slot";source.slotId="source-slot";source.materialClass=AssetMaterialClass::Face;
     source.faceSdf.present=true;source.nprDiffuse.present=true;source.materialFeatures=MaterialFeatureDiffuseRamp;
+    source.nprDiffuse.lighting={true,{1.2F,.8F,.6F},{.7F,.9F,1.1F}};
     mesh.materials={source};MaterialBinding binding;binding.path=replacementPath.u8string();
     auto& messages=RuntimeDiagnostics::instance().messages();const auto firstMessage=messages.size();
     applyMaterialBindings(mesh,{{"source-slot",binding}});
@@ -85,7 +86,10 @@ int main(){try{
     const auto& patched=mesh.materials[0];
     require(patched.emissiveStrength==3&&(patched.materialFeatures&MaterialFeatureEmissiveMask),"Override must reach its runtime consumer");
     require(patched.faceSdf.present&&patched.faceSdf.headNode==7&&patched.faceSdf.pixels==source.faceSdf.pixels
-        &&patched.nprDiffuse.present&&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
+        &&patched.nprDiffuse.present&&patched.nprDiffuse.lighting.present
+        &&patched.nprDiffuse.lighting.ambientColor==source.nprDiffuse.lighting.ambientColor
+        &&patched.nprDiffuse.lighting.mainColor==source.nprDiffuse.lighting.mainColor
+        &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");
     require(messages.size()==patchMessages,"Preserving source semantics must not report replacement loss");
     auto sidedPatch=patch;sidedPatch["parameters"]={{"doubleSided",false}};source.doubleSided=true;

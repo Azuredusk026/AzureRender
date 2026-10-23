@@ -48,6 +48,26 @@ int main(){
     "NPR scale and source selectors must reach the immutable GPU table");
   require(response.materials[0].nprDiffuse.indirectNormal==AssetMaterial::NprDiffuse::IndirectNormal::Surface
     &&packed.rows[0][3]==0,"Omitted indirect normal mode must preserve the surface normal");
+  require(packed.rows[10][3]==0,"Omitted material lighting must retain scene-owned colors");
+  auto colored=composed;
+  colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
+    {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
+  const auto coloredMaterial=load(colored).materials[0];
+  const auto coloredPacked=azurerender::packMaterialSurfaceProfile(coloredMaterial);
+  require(coloredPacked.rows[10]==std::array<float,4>{1.2F,.8F,.6F,1}
+    &&coloredPacked.rows[11]==std::array<float,4>{.7F,.9F,1.1F,0},
+    "Explicit material ambient and main colors must occupy the versioned union without changing its size");
+  for(const auto& value:std::vector<Json>{nullptr,true,Json::array(),Json{{"schemaVersion",1}},
+      Json{{"schemaVersion",2},{"ambientColor",{1,1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,true,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1,1}},{"mainColor",{1,-1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{65,1,1}},{"mainColor",{1,1,1}}},
+      Json{{"schemaVersion",1},{"ambientColor",{1,1,1}},{"mainColor",{1,1,1}},{"unknown",1}}}) {
+    auto invalid=colored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]=value;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed material lighting colors and versions must fail import");
+  }
   for(const char* mode:{"surface","world-horizontal"}) {
     auto valid=composed;valid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["indirectNormal"]=mode;
     const auto configured=load(valid);

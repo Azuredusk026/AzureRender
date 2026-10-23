@@ -4,6 +4,12 @@ from endfield_native import npr_lighting as subject
 
 
 class NprLightingTests(unittest.TestCase):
+    def test_surface_material_colors_follow_explicit_source_rows(self):
+        self.assertEqual(subject.decode_surface_lighting(*self.fixture(),ambient_row=113,main_color_row=114),
+            dict(schemaVersion=1,ambientColor=[1.2,.9,.8],mainColor=[1,.9,.8]))
+        g,o=self.fixture();g[122][1]=0
+        self.assertEqual(subject.decode_surface_lighting(g,o,ambient_row=113,main_color_row=114)['mainColor'],[.5,.5,.5])
+
     def test_zero_global_rim_emits_existing_sparse_material_override(self):
         expected=dict(schemaVersion=2,mode='parameters',typeId='azure.stylized',parameters={'rimAmount':0},textures={})
         for row in ([0,0,0,1],[1,.5,.25,0]):
