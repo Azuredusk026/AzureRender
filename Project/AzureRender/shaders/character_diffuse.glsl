@@ -5,6 +5,10 @@
 // by the caller. Visibility inputs are explicit, independently supplied values.
 struct CharacterDiffuseResponse { vec3 color; float litMask; float aoMask; };
 struct CharacterDiffuseIllumination { vec3 ambient; vec3 direct; };
+vec3 characterDiffuseViewTint(vec3 base,vec3 normal,vec3 view,vec4 tint) {
+    float weight=clamp((1.0-clamp(dot(normal,view),0.0,1.0))*tint.w,0.0,1.0);
+    return base*mix(vec3(1),tint.rgb,weight);
+}
 // Native skin irradiance is evaluated on the world horizontal plane.
 // The nonzero vertical component also defines vertical and zero inputs.
 vec3 worldHorizontalDiffuseNormal(vec3 normal) {

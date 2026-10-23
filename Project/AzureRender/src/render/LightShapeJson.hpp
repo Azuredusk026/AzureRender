@@ -3,6 +3,10 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& response) {
+    if(response.schemaVersion==5) {
+        response.validate();value={{"schemaVersion",5},{"composition","material-rim"},
+            {"width",response.rimWidth},{"surfaceTint",response.rimSurfaceTint}};return;
+    }
     if(response.schemaVersion==4) {
         response.validate();const bool rim=response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim;
         value={{"schemaVersion",4},{"composition",rim?"screen-rim":"specular-only"}};
@@ -17,6 +21,19 @@ inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& r
     if(response.schemaVersion==2)value["linearLength"]=response.linearLength;
 }
 inline void from_json(const nlohmann::json& value,LightShape::CharacterResponse& response) {
+    if(value.is_object()&&value.contains("schemaVersion")&&value["schemaVersion"].is_number_integer()&&value["schemaVersion"]==5) {
+        if(value.size()!=4||!value.contains("composition")||value["composition"]!="material-rim")
+            throw std::invalid_argument("Invalid material rim fields");
+        for(const auto& [field,maximum]:{std::pair{"width",16.0},std::pair{"surfaceTint",1.0}}) {
+            if(!value.contains(field)||!value[field].is_number())throw std::invalid_argument("Missing material rim field");
+            const auto number=value[field].get<double>();
+            if(!std::isfinite(number)||number<0||number>maximum)throw std::invalid_argument("Invalid material rim range");
+        }
+        response={};response.present=true;response.schemaVersion=5;
+        response.specialMode=LightShape::CharacterResponse::SpecialMode::MaterialRim;
+        response.rimWidth=value["width"].get<float>();response.rimSurfaceTint=value["surfaceTint"].get<float>();
+        response.validate();return;
+    }
     if(value.is_object()&&value.contains("schemaVersion")&&value["schemaVersion"].is_number_integer()&&value["schemaVersion"]==4) {
         if(!value.contains("composition")||!value["composition"].is_string())throw std::invalid_argument("Missing special character light composition");
         const bool rim=value["composition"]=="screen-rim";

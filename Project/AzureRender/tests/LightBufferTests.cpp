@@ -37,6 +37,18 @@ int main() { try {
     if(specialBuffer.gpuData()[0].characterResponse!=std::array<float,4>{4,.4F,.8F,0})
         throw std::runtime_error("Screen rim must preserve its response mode and parameters in 144 bytes");
     const Json specularOnly={{"schemaVersion",4},{"composition","specular-only"}};
+    const Json materialRim={{"schemaVersion",5},{"composition","material-rim"},{"width",.4F},{"surfaceTint",.8F}};
+    auto materialRimShape=Json{{"type","point"},{"characterResponse",materialRim}}.get<azurerender::LightShape>();
+    if(Json(materialRimShape)["characterResponse"]!=materialRim)throw std::runtime_error("Material rim width and tint must survive public serialization");
+    special.shape=materialRimShape;specialBuffer.setLights({special});
+    if(specialBuffer.gpuData()[0].characterResponse!=std::array<float,4>{6,.4F,.8F,0})
+        throw std::runtime_error("Material rim must preserve its distinct GPU response without growing the light record");
+    for(const auto& [field,bad]:std::vector<std::pair<std::string,Json>>{{"width",-1},{"width",16.00000001},
+        {"width",true},{"surfaceTint",1.00000001},{"surfaceTint",nullptr},{"composition","screen-rim"},{"extra",0}}) {
+        auto invalid=materialRim;invalid[field]=bad;bool rejected=false;
+        try{(void)invalid.get<azurerender::LightShape::CharacterResponse>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid material rim fields must be rejected: "+field);
+    }
     special.shape=Json{{"characterResponse",specularOnly}}.get<azurerender::LightShape>();specialBuffer.setLights({special});
     if(specialBuffer.gpuData()[0].characterResponse!=std::array<float,4>{5,0,0,0})
         throw std::runtime_error("Specular-only light must retain its distinct GPU consumer");

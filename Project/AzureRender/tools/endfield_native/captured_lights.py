@@ -189,6 +189,13 @@ def render_special_character_response(record):
     return dict(schemaVersion=4,composition='screen-rim',offsetScale=_finite(p[0],0,16,'rim offset'),surfaceTint=_finite(p[1],0,1,'rim tint'))
 
 
+def render_material_rim_response(record):
+    """Preserve an authored rim width for explicit material-selected consumers."""
+    if not isinstance(record,dict) or record.get('mode')!=3:raise ValueError('Material rim requires a confirmed rim record')
+    response=render_special_character_response(record)
+    return dict(schemaVersion=5,composition='material-rim',width=response['offsetScale'],surfaceTint=response['surfaceTint'])
+
+
 def render_character_response(record):
     """Map a decoded default-mode record to the supported public color-response version."""
     if not isinstance(record,dict) or record.get('mode')!=0 or not isinstance(record.get('response'),dict):

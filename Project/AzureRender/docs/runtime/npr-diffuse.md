@@ -55,6 +55,31 @@
 场景辐照启用时，环境入射量采用实际辐照结果。
 完整材质文档与 glTF 共用解析和校验。
 
+`rimResponse` 为可选字符串，默认 `screen-depth`。
+`view-facing` 为版本五材质边缘灯选择视角带状响应。
+灯响应及规范公式见[局部灯契约](character-local-light-response.md)。
+
+`viewTint` 使用可选版本一对象。
+完整字段为 `schemaVersion`、`scale` 和 `color`。
+倍率及三个线性颜色分量均为零至 64 的有限数值。
+省略对象时，亮部基色保持原值。
+
+```json
+{
+  "rimResponse": "view-facing",
+  "viewTint": {
+    "schemaVersion": 1,
+    "scale": 0.595,
+    "color": [0.38, 0.12, 0.14]
+  }
+}
+```
+
+颜色权重为 `clamp((1-clamp(dot(N,V),0,1))*scale,0,1)`。
+亮部基色乘以单位色与声明颜色的线性混合。
+视角边缘响应消费该亮部基色。
+影色查找表及基色 Alpha 继续消费原始输入。
+
 `indirectNormal` 为可选字符串，默认 `surface`。
 该模式使用完成法线贴图后的表面法线。
 `world-horizontal` 保留世界 X、Z 分量。

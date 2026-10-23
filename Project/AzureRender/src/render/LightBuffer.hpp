@@ -23,7 +23,7 @@ struct RenderLight {
 };
 
 struct alignas(16) RenderLightGpu {
-    static constexpr unsigned kLayoutVersion=2;
+    static constexpr unsigned kLayoutVersion=3;
     float positionRadius[4]{};
     float colorIntensity[4]{};
     float directionOuter[4]{};
@@ -78,6 +78,7 @@ public:
             if(response.isColorBlend())value.characterResponse={response.projectedDistance?3.F:2.F,response.strength,response.facingWeight,static_cast<float>(response.order)};
             if(response.present&&response.schemaVersion==4)value.characterResponse={
                 response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim?4.F:5.F,response.rimOffsetScale,response.rimSurfaceTint,0};
+            if(response.present&&response.schemaVersion==5)value.characterResponse={6,response.rimWidth,response.rimSurfaceTint,0};
             packed.push_back(value);
         }
         return packed;

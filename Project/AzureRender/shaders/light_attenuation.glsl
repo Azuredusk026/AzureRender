@@ -2,6 +2,18 @@
 #define AZURE_LIGHT_ATTENUATION
 #define AZURE_LINE_LIGHT_GEOMETRY 1
 #define AZURE_CHARACTER_SCREEN_RIM 1
+#define AZURE_CHARACTER_FACING_RIM 1
+vec3 characterFacingRimResponse(vec3 base,float tint,float width,vec3 normal,vec3 view,
+    vec3 light,vec3 cameraAxis,vec3 radial) {
+    vec3 planar=light-cameraAxis*dot(light,cameraAxis);
+    float squared=dot(planar,planar);
+    planar=squared>1e-12?planar*inversesqrt(squared):vec3(0);
+    float edge=1.0-abs(dot(normal,view));
+    float band=clamp((edge-(.8-.6*width))/(.1+.2*width),0.0,1.0);
+    band=band*band*(3.0-2.0*band);
+    float visibility=clamp(dot(radial,light)+1.0,0.0,1.0);
+    return (.5+tint*(base*.96-.5))*(band*visibility*clamp(dot(normal,planar),0.0,1.0));
+}
 vec3 characterScreenRimResponse(vec3 base,float tint,vec3 normal,vec3 light,vec3 cameraAxis,
     vec3 radial,float sceneDepth,float surfaceDepth) {
     vec3 planar=light-cameraAxis*dot(light,cameraAxis);

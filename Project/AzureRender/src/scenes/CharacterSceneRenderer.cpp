@@ -1345,6 +1345,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"lightBufferLayoutVersion\": " << RenderLightGpu::kLayoutVersion << ",\n"
          << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
          << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"
          << "  \"sceneTriangles\": " << triangles << ",\n"
@@ -2285,7 +2286,8 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         const auto& lights=frameLights_.lights();
         sampled|=std::any_of(lights.begin(),lights.end(),[](const RenderLight& light){
             const auto& response=light.shape.characterResponse;
-            return response.present&&response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim
+            return response.present&&(response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim
+                ||response.specialMode==LightShape::CharacterResponse::SpecialMode::MaterialRim)
                 &&light.shape.receivers.characters&&light.intensity>0;
         });
     }

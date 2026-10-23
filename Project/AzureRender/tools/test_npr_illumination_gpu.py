@@ -1,5 +1,6 @@
 """Measure scene-owned NPR illumination independently of material color."""
 import argparse
+import base64
 import copy
 import hashlib
 import json
@@ -36,6 +37,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
         indoorMix=0,litAmbientMix=1,mainColorMix=1,shadowOverride=0,useSceneIrradiance=False)
     names=('composed','fixed','direct','ambient','disabled','direction-positive','direction-negative','scene-volume','zero-radiance','point-only','surface-only','additional-directional','main-shadow','main-shadow-floor','indoor-shadow','ambient-weight-quarter','ambient-weight-zero','ambient-weight-direct','ambient-weight-shadow','offset-main-shadow','offset-main-lit')
     names+=tuple('material-colors'+suffix for suffix in ('','-fixed','-no-main','-volume','-disabled','-direct','-ambient','-zero','-fabric','-document'))
+    names+=('material-colors-view-tint','material-colors-view-tint-document')
     if selected:
         assert set(selected)<=set(names);names=tuple(name for name in names if name in selected)
     summary={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),
@@ -45,6 +47,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             print(name,flush=True);folder=output/name;generate(folder,'point' if name=='point-only' else 'directional-near')
             settings=copy.deepcopy(default)
             material_colors=name.startswith('material-colors')
+            view_tint='view-tint' in name
             if name in ('disabled','material-colors-disabled'):settings['enabled']=False
             if name.startswith('ambient-weight-'):settings['ambientWeight']=0 if name.endswith('zero') else .25
             if name in ('direct','zero-radiance','ambient-weight-direct'):settings.update(ambientColor=[0,0,0],litAmbientMix=0)
@@ -64,7 +67,14 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 if name=='material-colors-zero':colors.update(ambientColor=[0,0,0],mainColor=[0,0,0])
                 material['extras']['azureRenderMaterial']['nprDiffuse']['lighting']=colors
                 if name=='material-colors-fabric':material['extras']['azureRenderMaterial']['class']='fabric'
-                if name=='material-colors-document':material['extras']['azureSlotId']='surface'
+                if name.endswith('-document'):material['extras']['azureSlotId']='surface'
+            if view_tint:
+                material['extras']['azureRenderMaterial']['nprDiffuse']['viewTint']={'schemaVersion':1,'scale':.595,'color':[.38,.12,.14]}
+                accessor=model['accessors'][model['meshes'][0]['primitives'][0]['attributes']['NORMAL']]
+                buffer_view=model['bufferViews'][accessor['bufferView']];buffer=model['buffers'][buffer_view['buffer']]
+                prefix,encoded=buffer['uri'].split(',',1);data=bytearray(base64.b64decode(encoded))
+                for vertex in range(accessor['count']):struct.pack_into('<3f',data,buffer_view.get('byteOffset',0)+accessor.get('byteOffset',0)+vertex*buffer_view.get('byteStride',12),1,0,0)
+                buffer['uri']=prefix+','+base64.b64encode(data).decode('ascii')
             model_path.write_text(json.dumps(model))
             level_path=folder/'level.azurelevel';level=json.loads(level_path.read_text());level['renderSettings'].update(sceneLighting=True,skyIntensity=0,nprLighting=settings)
             if name.startswith('offset-'):
@@ -87,7 +97,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 cell=[0,0,0,.4,0,0,0,.3,0,0,0,.2,1,0,0,0]
                 (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
                 level['irradianceVolume']={'version':1,'asset':'assets:/field.aziv','enabled':True,'intensity':1}
-            if name=='material-colors-document':
+            if material_colors and name.endswith('-document'):
                 identities={str(i):str(uuid.uuid4()) for i in range(3)}
                 for i,p in enumerate(('base','lut','ramp')):
                     (folder/(p+'.png.azmeta')).write_text(json.dumps({'schemaVersion':1,'id':identities[str(i)],'settings':{},'dependencies':[]}))
@@ -111,10 +121,11 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             assert manifest['nprLighting']['enabled']==settings['enabled']
             assert manifest['nprLighting']['schemaVersion']==1
             assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
-            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==3
+            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==4
             state_hashes[name]=manifest['qaStateHash']
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
+            if view_tint:color=reference(linear([90,80,70])*(1-.595+.595*np.array([.38,.12,.14])),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             main=np.array([.8,.6,.4]);intensity=.7
             if name in ('ambient','zero-radiance','point-only','surface-only'):main=np.ones(3);intensity=0
             if name=='material-colors-no-main':intensity=0
@@ -150,6 +161,8 @@ def run(player,output,require_validation=False,selected=None,expected_validation
         if 'material-colors' in frames:
             for equivalent in ('material-colors-fixed','material-colors-fabric','material-colors-document'):
                 if equivalent in frames:assert np.array_equal(frames['material-colors'],frames[equivalent])
+        if 'material-colors-view-tint' in frames and 'material-colors-view-tint-document' in frames:
+            assert np.array_equal(frames['material-colors-view-tint'],frames['material-colors-view-tint-document'])
         if 'composed' in frames and 'disabled' in frames:assert np.max(np.abs(linear(frames['composed'][64,64])-linear(frames['disabled'][64,64])))>.01
         if 'direct' in frames and 'ambient-weight-direct' in frames:assert np.array_equal(frames['direct'],frames['ambient-weight-direct'])
         if 'zero-radiance' in frames:assert np.max(linear(frames['zero-radiance'][64,64]))==0

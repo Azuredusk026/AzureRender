@@ -6,6 +6,15 @@ from endfield_native import captured_lights as subject
 
 
 class CapturedLightTests(unittest.TestCase):
+    def test_material_rim_adapter_keeps_width_and_shadow_capability_checks(self):
+        raw=self.fixture(mode=3)
+        struct.pack_into('<I',raw,(6+2)*16+12,0x3fffffff);struct.pack_into('<I',raw,(6+3)*16,0x3fffffff)
+        light=self.decode(raw)[0]
+        self.assertEqual(subject.render_material_rim_response(light),dict(schemaVersion=5,composition='material-rim',
+            width=1,surfaceTint=light['response']['parameters'][1]))
+        for record in [self.decode(self.fixture(mode=3))[0],self.decode(self.fixture(mode=2))[0]]:
+            with self.assertRaises(ValueError):subject.render_material_rim_response(record)
+
     def fixture(self,kind=1,mode=0):
         raw=bytearray((6+8*256)*16);offset=6*16
         rows=((.35,.3,.25,kind),(-299.9,301.5,-299.7,2),(.5,0,-1,2),

@@ -365,6 +365,16 @@ Matrix4 nodeTransform(const tinygltf::Node& node) {
     return result;
 }
 
+std::array<float,3> orthogonalTangentFallback(const std::array<float,3>& normal) {
+    std::array<float,3> tangent=std::abs(normal[0])<.9F?std::array<float,3>{1,0,0}:std::array<float,3>{0,1,0};
+    const float projection=tangent[0]*normal[0]+tangent[1]*normal[1]+tangent[2]*normal[2];
+    for(unsigned i=0;i<3;++i)tangent[i]-=projection*normal[i];
+    const float length=std::sqrt(tangent[0]*tangent[0]+tangent[1]*tangent[1]+tangent[2]*tangent[2]);
+    if(!std::isfinite(length)||length<1e-8F)throw std::invalid_argument("Tangent fallback requires a finite normal");
+    for(auto& value:tangent)value/=length;
+    return tangent;
+}
+
 void transformVertex(AssetVertex& vertex, const Matrix4& transform, std::array<float,2>* directionLengths=nullptr) {
     const auto position = vertex.position;
     vertex.position = {
@@ -428,7 +438,11 @@ void transformVertex(AssetVertex& vertex, const Matrix4& transform, std::array<f
     tx -= tangentDotNormal * vertex.normal[0];
     ty -= tangentDotNormal * vertex.normal[1];
     tz -= tangentDotNormal * vertex.normal[2];
-    const double tangentLength = std::sqrt(tx * tx + ty * ty + tz * tz);
+    double tangentLength = std::sqrt(tx * tx + ty * ty + tz * tz);
+    if(!std::isfinite(tangentLength)||tangentLength<1e-8) {
+        const auto fallback=orthogonalTangentFallback(vertex.normal);
+        tx=fallback[0];ty=fallback[1];tz=fallback[2];tangentLength=1;
+    }
     if(directionLengths)*directionLengths={static_cast<float>(length),static_cast<float>(tangentLength)};
     vertex.tangent = {
         static_cast<float>(tx / tangentLength),
@@ -686,8 +700,9 @@ void generateTangents(
         const float length = std::sqrt(
             tangent[0] * tangent[0] + tangent[1] * tangent[1]
             + tangent[2] * tangent[2]);
-        if (length < 1.0e-8F) {
-            vertices[index].tangent = {1.0F, 0.0F, 0.0F, 1.0F};
+        if (!std::isfinite(length)||length < 1.0e-8F) {
+            const auto fallback=orthogonalTangentFallback(normal);
+            vertices[index].tangent = {fallback[0],fallback[1],fallback[2],1.0F};
             continue;
         }
         for (float& component : tangent) {
@@ -1785,7 +1800,8 @@ AssetMaterial loadMaterial(
             const std::set<std::string> fields{"schemaVersion","shadowScale","lightingInputs","shadowMask","baseAo"};
             if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
-            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting")throw std::invalid_argument("Unknown nprDiffuse field");
+            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
+                &&field.key()!="rimResponse"&&field.key()!="viewTint")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1833,6 +1849,29 @@ AssetMaterial loadMaterial(
                     }
                 }
                 lighting.present=true;
+            }
+            if(npr.contains("rimResponse")) {
+                const auto& mode=npr.at("rimResponse");
+                if(!mode.is_string()||(mode!="screen-depth"&&mode!="view-facing"))
+                    throw std::invalid_argument("Invalid nprDiffuse.rimResponse");
+                result.nprDiffuse.rimResponse=mode=="view-facing"?AssetMaterial::NprDiffuse::RimResponse::ViewFacing
+                    :AssetMaterial::NprDiffuse::RimResponse::ScreenDepth;
+            }
+            if(npr.contains("viewTint")) {
+                const auto& raw=npr.at("viewTint");
+                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                    ||raw.at("schemaVersion")!=1||!raw.contains("scale")||!raw.at("scale").is_number()
+                    ||!std::isfinite(raw.at("scale").get<double>())||raw.at("scale").get<double>()<0||raw.at("scale").get<double>()>64
+                    ||!raw.contains("color")||!raw.at("color").is_array()||raw.at("color").size()!=3)
+                    throw std::invalid_argument("Invalid nprDiffuse.viewTint fields or scale");
+                auto& tint=result.nprDiffuse.viewTint;tint.scale=raw.at("scale").get<float>();
+                for(unsigned i=0;i<3;++i) {
+                    const auto& value=raw.at("color").at(i);
+                    if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>64)
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint color");
+                    tint.color[i]=value.get<float>();
+                }
+                tint.present=true;
             }
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }

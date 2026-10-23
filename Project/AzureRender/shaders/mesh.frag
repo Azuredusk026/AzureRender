@@ -307,13 +307,17 @@ vec4 materialDiffuseRampRgba(float coordinate) {
     return vec4(materialDiffuseRamp(coordinate),1);
 }
 
+vec3 materialNprLitAlbedo(vec3 base,vec3 normal,vec3 view) {
+    vec4 tint=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[2];
+    return characterDiffuseViewTint(base,normal,view,tint);
+}
 CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view) {
     vec4 parameters=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0];
     vec2 mask=parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb);
     // Host scene lighting aliases both visibility inputs to the available
     // main-light map. Native per-character/global bindings are independent.
-    return characterDiffuseResponse(base.rgb,shadow,metallic,parameters.x,ramp,
+    return characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,metallic,parameters.x,ramp,
         parameters.z>.5?base.a:1.0,mask,dot(normal,view),visibility,visibility);
 }
 vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view){
@@ -846,7 +850,8 @@ void main() {
         uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
         if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
         bool colorBlend=light.characterResponse.x==2.0||light.characterResponse.x==3.0;
-        bool screenRim=light.characterResponse.x==4.0,specularOnly=light.characterResponse.x==5.0;
+        bool materialRim=light.characterResponse.x==6.0;
+        bool screenRim=light.characterResponse.x==4.0||materialRim,specularOnly=light.characterResponse.x==5.0;
         if(colorBlend) {
             if(characterLightComposition) {
                 SceneLightSample blendSample=sampleSceneLight(light,worldPosition,light.characterResponse.x==3.0);
@@ -869,6 +874,15 @@ void main() {
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
         if(screenRim) {
+            bool facingRim=materialRim&&nprDiffuse
+                &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>.5;
+            vec3 radial=worldPosition-instanceFaceFrame[3].xyz;radial.y=1.0/16384.0;radial=normalize(radial);
+            if(facingRim) {
+                if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001)
+                    sceneRim+=radiance*characterFacingRimResponse(materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
+                        light.characterResponse.z,light.characterResponse.y,shadedNormal,viewDirection,
+                        pointDirection,camera.cameraForward.xyz,radial);
+            } else {
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
             if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001) {
                 vec2 screenNormal=vec2(dot(shadedNormal,camera.cameraRight.xyz),-dot(shadedNormal,camera.cameraUp.xyz));
@@ -880,11 +894,11 @@ void main() {
                 vec2 depthUv=clamp(gl_FragCoord.xy/extent+offset,halfPixel,1.0-halfPixel);
                 float sceneDepth=textureLod(overlaySceneDepth,depthUv,0.0).r;
                 float surfaceDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
-                vec3 radial=worldPosition-instanceFaceFrame[3].xyz;radial.y=1.0/16384.0;radial=normalize(radial);
                 sceneRim+=radiance*characterScreenRimResponse(baseColor.rgb,light.characterResponse.z,shadedNormal,
                     pointDirection,camera.cameraForward.xyz,radial,sceneDepth,surfaceDepth);
             }
 #endif
+            }
             continue;
         }
         bool characterLight=light.characterResponse.x==1.0&&(sceneCharacter||nprDiffuse);

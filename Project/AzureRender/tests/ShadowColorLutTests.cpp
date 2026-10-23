@@ -28,6 +28,23 @@ int main(){
     {"shadowColorLut",{{"schemaVersion",1},{"texture",index},{"flipV",false}}}};
   auto load=[&](const Json& document){std::ofstream(root/"model.gltf")<<document.dump();return loadGltfAsset((root/"model.gltf").string());};
   const auto asset=load(source);
+  auto tangentFixture=source;unsigned tangentFixtureIndex=0;
+  for(auto& mesh:tangentFixture["meshes"])for(auto& primitive:mesh["primitives"]) {
+    const auto count=tangentFixture["accessors"][primitive["attributes"]["POSITION"].get<std::size_t>()]["count"].get<std::size_t>();
+    const auto name="parallel-normal-"+std::to_string(tangentFixtureIndex++)+".bin";
+    {std::ofstream output(root/name,std::ios::binary);const std::array<float,3> normal{1,0,0};
+      for(std::size_t vertex=0;vertex<count;++vertex)output.write(reinterpret_cast<const char*>(normal.data()),sizeof(normal));}
+    const auto buffer=tangentFixture["buffers"].size();tangentFixture["buffers"].push_back({{"byteLength",count*12},{"uri",name}});
+    const auto view=tangentFixture["bufferViews"].size();tangentFixture["bufferViews"].push_back({{"buffer",buffer},{"byteLength",count*12}});
+    const auto accessor=tangentFixture["accessors"].size();tangentFixture["accessors"].push_back({{"bufferView",view},{"componentType",5126},{"count",count},{"type","VEC3"}});
+    primitive["attributes"]["NORMAL"]=accessor;primitive["attributes"].erase("TANGENT");
+  }
+  const auto tangentAsset=load(tangentFixture);
+  for(const auto& vertex:tangentAsset.vertices) {
+    float dot=0,length=0;for(unsigned i=0;i<3;++i){dot+=vertex.normal[i]*vertex.tangent[i];length+=vertex.tangent[i]*vertex.tangent[i];}
+    require(std::isfinite(dot)&&std::abs(dot)<1e-5F&&std::isfinite(length)&&std::abs(length-1)<1e-5F,
+      "Generated tangent fallbacks must remain finite, unit and orthogonal to custom normals");
+  }
   require((asset.materials[0].materialFeatures&4096U)!=0,"Explicit shadow LUT must reach runtime material features");
   require(asset.materials[0].textureSettings.size()==9,"Shadow LUT requires an independent texture slot");
   require(asset.materials[0].shadowColorLutPixels==std::vector<std::uint8_t>(std::begin(pixels),std::end(pixels)),"LUT bytes must preserve source sRGB encoding");
@@ -53,6 +70,28 @@ int main(){
   colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
     {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
   const auto coloredMaterial=load(colored).materials[0];
+  auto viewColored=colored;
+  auto& viewProfile=viewColored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  viewProfile["rimResponse"]="view-facing";
+  viewProfile["viewTint"]={{"schemaVersion",1},{"scale",.595F},{"color",{.38F,.12F,.14F}}};
+  const auto viewPacked=azurerender::packMaterialSurfaceProfile(load(viewColored).materials[0]);
+  require(viewPacked.rows[1][0]==1&&viewPacked.rows[2]==std::array<float,4>{.38F,.12F,.14F,.595F},
+    "View rim selection and lit-albedo tint must reach distinct union fields");
+  require(packed.rows[1][0]==0&&packed.rows[2][3]==0,"Omitted rim response and view tint must retain compatible defaults");
+  for(const auto& bad:std::vector<Json>{nullptr,true,0,"unknown"}) {
+    auto invalid=viewColored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimResponse"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed rim response must reject before producing a GPU profile");
+  }
+  for(const auto& bad:std::vector<Json>{nullptr,Json{{"schemaVersion",2},{"scale",1},{"color",{1,1,1}}},
+      Json{{"schemaVersion",1},{"scale",true},{"color",{1,1,1}}},Json{{"schemaVersion",1},{"scale",65},{"color",{1,1,1}}},
+      Json{{"schemaVersion",1},{"scale",-1},{"color",{1,1,1}}},Json{{"schemaVersion",1},{"scale",1},{"color",{1,1}}},
+      Json{{"schemaVersion",1},{"scale",1},{"color",{1,false,1}}},Json{{"schemaVersion",1},{"scale",1},{"color",{1,1,65}}},
+      Json{{"schemaVersion",1},{"scale",1},{"color",{1,1,1}},{"extra",0}}}) {
+    auto invalid=viewColored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["viewTint"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed view tint fields and versions must reject");
+  }
   const auto coloredPacked=azurerender::packMaterialSurfaceProfile(coloredMaterial);
   require(coloredPacked.rows[10]==std::array<float,4>{1.2F,.8F,.6F,1}
     &&coloredPacked.rows[11]==std::array<float,4>{.7F,.9F,1.1F,0},

@@ -20,6 +20,8 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 三个真实正主叶及五份关闭对照见[分层验证](../acceptance/nr/projected-hair-positive-layers.md)。
 C11-R7 接入逐材质光色，范围见[皮肤验证](../acceptance/nr/npr-material-lighting.md)。
 独立角色可见量继续按 C16-R4 核对。
+C11-R8 的材质边缘响应及正交回退见[实际验证](../acceptance/nr/material-rim-and-view-tint.md)。
+身体输入、局部漫反射及独立镜面继续按 C16-R1 和 C9 核对。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。
