@@ -14,6 +14,9 @@
 相机版本二与真实子像素输入见[投影验证](../acceptance/nr/camera-projection-offset.md)。
 NR0 的参考门禁及 NR1 至 NR12 的正式条件保持待验。
 
+NR7-AA0 已核对原生时序输入、运动与历史 RGB 合成。
+单帧来源及连续序列边界见[时序核验](../acceptance/nr/native-temporal-inputs.md)。
+
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
 脸部径向法线候选通过双配置各 36 次 GPU 检查。
 单姿态头骨与原生预留帧已核对。
