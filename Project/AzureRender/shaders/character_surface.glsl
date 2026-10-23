@@ -161,6 +161,19 @@ vec3 characterEyeDiffuseMultiplier(vec4 base,float white,vec3 highlight,vec3 sca
     return mix(vec3(1),highlight,white)*mix(vec3(1),scattering,base.a);
 }
 
+CharacterDiffuseResponse characterEyeNprResponse(vec4 base,float white,vec3 highlight,vec3 scattering,
+    float metallic,float shadowScale,vec4 ramp,float viewRampAlpha,float sceneVisibility) {
+    vec3 lit=base.rgb*characterEyeDiffuseMultiplier(base,white,highlight,scattering)*(.96*(1.0-metallic));
+    vec3 shadow=base.rgb*(.96*(1.0-metallic)*shadowScale);
+    return characterDiffuseColorResponse(lit,shadow,lit,ramp,min(ramp.a,1.0),viewRampAlpha,
+        clamp(ramp.a+viewRampAlpha,0.0,1.0),sceneVisibility);
+}
+
+float characterEyeMainSaturation(vec3 color) {
+    float high=clamp(characterDiffuseLuma(color)-.5,0.0,.5);
+    return 1.0+high*high;
+}
+
 float characterEyeAlphaMultiplier(float alpha,float premultiply) {
     return mix(1.0,alpha,premultiply);
 }

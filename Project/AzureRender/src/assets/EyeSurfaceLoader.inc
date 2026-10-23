@@ -82,11 +82,11 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
     for(const auto& value:profile["features"]) {
         if(!value.is_string())fail("features","require nonempty strings");
         const auto name=value.get<std::string>();
-        if(name!="eye-radial-surface"&&name!="silhouette-outline")fail("features","incompatible feature "+name);
+        if(name!="eye-radial-surface"&&name!="silhouette-outline"&&name!="geometry-shadow")fail("features","incompatible feature "+name);
         if(!features.insert(name).second)fail("features","duplicate feature "+name);
     }
     if(!features.count("eye-radial-surface"))fail("features","missing eye-radial-surface");
-    constexpr std::uint32_t allowed=MaterialFeatureEyeRadialSurface|MaterialFeatureSilhouetteOutline;
+    constexpr std::uint32_t allowed=MaterialFeatureEyeRadialSurface|MaterialFeatureSilhouetteOutline|MaterialFeatureGeometryShadow;
     if((result.materialFeatures&~allowed)||result.transmission!=0||result.thickness!=0)
         fail("material","incompatible lighting, transmission or thickness");
     if(!material.extensions.empty())fail("extensions","material extension requires a separate eye adapter");
@@ -122,14 +122,23 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
     vector(source,"matcapColor",eye.matcapColor,0,64);
     vector(source,"uvScaleOffset",eye.uvScaleOffset,-65536,65536);
     const auto& lighting=source["lightingInputs"];
-    const std::set<std::string> lightFields{"source","illuminationModel","matcapShadowFloor","directWeights"};
     if(!lighting.is_object())fail("lightingInputs","require an object");
+    if(!lighting.contains("illuminationModel")||!lighting["illuminationModel"].is_string()
+        ||(lighting["illuminationModel"]!="host-lambert"&&lighting["illuminationModel"]!="npr-main-ambient"))
+        fail("lightingInputs.illuminationModel","require host-lambert or npr-main-ambient");
+    eye.nprLighting=lighting["illuminationModel"]=="npr-main-ambient";
+    std::set<std::string> lightFields{"source","illuminationModel","matcapShadowFloor","directWeights"};
+    if(eye.nprLighting)for(const char* field:{"ambientColor","mainColor","shadowScale"})lightFields.insert(field);
     for(const auto& field:lighting.items())if(!lightFields.count(field.key()))fail("lightingInputs."+field.key(),"unknown field");
     for(const auto& field:lightFields)if(!lighting.contains(field))fail("lightingInputs."+field,"required field missing");
-    if(lighting["source"]!="host-authored"||lighting["illuminationModel"]!="host-lambert")
-        fail("lightingInputs","require explicit host-authored host-lambert inputs");
+    if(lighting["source"]!="host-authored")fail("lightingInputs","require explicit host-authored inputs");
     eye.matcapShadowFloor=number(lighting["matcapShadowFloor"],"lightingInputs.matcapShadowFloor",0,1);
     vector(lighting,"directWeights",eye.directWeights,0,64,"lightingInputs.");
+    if(eye.nprLighting){
+        eye.shadowScale=number(lighting["shadowScale"],"lightingInputs.shadowScale",0,1);
+        vector(lighting,"ambientColor",eye.ambientColor,0,64,"lightingInputs.");
+        vector(lighting,"mainColor",eye.mainColor,0,64,"lightingInputs.");
+    }
     const auto sampler=[&](int index,const std::string& property,bool fixed) {
         azurerender::TextureImportSettings settings;
         settings.anisotropy=1;
@@ -145,8 +154,10 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
             };
             settings.wrapU=wrap(s.wrapS);settings.wrapV=wrap(s.wrapT);
             if(s.magFilter!=9729&&s.magFilter!=-1)fail(property,"require linear magnification");
-            if(s.minFilter!=9729&&s.minFilter!=9987&&s.minFilter!=-1)fail(property,"require linear minification");
+            if(s.minFilter!=9729&&s.minFilter!=9985&&s.minFilter!=9987&&s.minFilter!=-1)fail(property,"require linear minification");
             settings.mipPolicy=s.minFilter==9729?"none":"generate";
+            if(s.minFilter==9985)settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;
+            if(s.minFilter==9987)settings.mipFilter=azurerender::TextureImportSettings::MipFilter::Linear;
         }
         if(fixed&&(settings.wrapU!="clamp"||settings.wrapV!="clamp"||settings.mipPolicy!="none"))
             fail(property,"require explicit clamp, linear and no-mip sampler");
@@ -162,7 +173,7 @@ void loadEyeSurface(const tinygltf::Material& material,const tinygltf::Model& mo
         const int image=reference.source;
         if(image<0||static_cast<std::size_t>(image)>=model.images.size())fail(property,"texture image missing");
         if(!reference.extensions.empty())fail(property,"texture extension requires a separate adapter");
-        result.textureSettings[slot]=sampler(static_cast<int>(index),property,true);
+        result.textureSettings[slot]=sampler(static_cast<int>(index),property,slot==4||!eye.nprLighting);
         result.textureSettings[slot].colorSpace=slot==4?"linear":"srgb";
         result.textureSettings[slot].usage=slot==4?"linear":"albedo";
         return image;
@@ -192,6 +203,7 @@ void validateEyeTextureSettings(const AssetMaterial& material) {
         throw std::invalid_argument(material.name+" eyeSurface.textures: fixed color-space ownership violated");
     for(unsigned slot:{4U,5U}) {
         const auto& settings=material.textureSettings[slot];
+        if(slot==5&&material.eyeSurface.nprLighting)continue;
         if(settings.wrapU!="clamp"||settings.wrapV!="clamp"||settings.filter!="linear"
             ||settings.mipPolicy!="none"||settings.anisotropy!=1)
             throw std::invalid_argument(material.name+" eyeSurface.textures: fixed eye sampler violated");

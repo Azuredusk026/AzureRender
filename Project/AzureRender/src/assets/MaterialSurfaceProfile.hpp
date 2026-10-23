@@ -6,7 +6,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=8;
+    static constexpr unsigned kLayoutVersion=9;
     using Row=std::array<float,4>;
     std::array<Row,12> rows{};
 };
@@ -43,10 +43,16 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
 }
 
 inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::EyeSurface& eye) {
-    return {{{{eye.parallaxScale,eye.matcapNormalScale,eye.alphaPremultiply,eye.matcapShadowFloor},
+    PackedMaterialSurfaceProfile result{{{{eye.parallaxScale,eye.matcapNormalScale,eye.alphaPremultiply,eye.matcapShadowFloor},
         {eye.highlightColor[0],eye.highlightColor[1],eye.highlightColor[2],0},
         {eye.scatteringColor[0],eye.scatteringColor[1],eye.scatteringColor[2],0},
         eye.matcapColor,{eye.directWeights[0],eye.directWeights[1],eye.directWeights[2],0},eye.uvScaleOffset}}};
+    if(eye.nprLighting){
+        result.rows[6]={eye.shadowScale,0,0,1};
+        result.rows[7]={eye.ambientColor[0],eye.ambientColor[1],eye.ambientColor[2],0};
+        result.rows[8]={eye.mainColor[0],eye.mainColor[1],eye.mainColor[2],0};
+    }
+    return result;
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {

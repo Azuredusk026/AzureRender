@@ -185,11 +185,13 @@ struct AssetMaterial {
     } projectedHairRamp;
     struct EyeSurface {
         bool present=false;
+        bool nprLighting=false;
+        float shadowScale=1;
+        std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
         float parallaxScale=0,matcapNormalScale=0,alphaPremultiply=0,matcapShadowFloor=0;
         std::array<float,3> highlightColor{},scatteringColor{},directWeights{};
         std::array<float,4> matcapColor{},uvScaleOffset{1,1,0,0};
-        // Version 1 accepts explicit host-authored, host-lambert lighting.
-        // Native capture bindings require a separate provenance contract.
+        // Lighting uses either authored Lambert lights or the shared NPR frame.
     } eyeSurface;
     struct NprDiffuse {
         enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal, FaceFrameRadialHorizontal };

@@ -57,18 +57,23 @@ CharacterDiffuseIllumination characterDiffuseIllumination(vec3 normal,vec3 indir
 #define AZURE_CHARACTER_WEIGHTED_DIFFUSE 1
 // Material adapters own visibility and mask interpretation. Shared color
 // response consumes their explicit weights, including captured hair inputs.
+CharacterDiffuseResponse characterDiffuseColorResponse(vec3 lit,vec3 shadow,vec3 indoorLit,
+    vec4 ramp,float litMask,float aoMask,float shadowMix,float sceneVisibility) {
+    vec3 shadowColor=mix(characterDiffuseSaturation(.65*shadow,1.2),shadow,shadowMix);
+    vec3 untinted=mix(shadowColor,lit,litMask);
+    float chroma=max(max(ramp.r,ramp.g),ramp.b)-min(min(ramp.r,ramp.g),ramp.b);
+    vec3 tinted=untinted*(vec3(1.0-chroma)+ramp.rgb*chroma);
+    vec3 indoor=mix(shadow,indoorLit,aoMask);
+    vec3 outdoor=tinted*clamp(characterDiffuseLuma(untinted)/max(characterDiffuseLuma(tinted),.001),0.0,1.5);
+    return CharacterDiffuseResponse(mix(indoor,outdoor,sceneVisibility),litMask,aoMask);
+}
 CharacterDiffuseResponse characterDiffuseWeightedResponse(vec3 litAlbedo,vec3 shadowAlbedo,
     float metallic,float shadowScale,vec4 ramp,float litMask,float aoMask,
     float shadowMix,float sceneVisibility) {
     vec3 lit=litAlbedo*(.96*(1.0-metallic));
     vec3 shadow=shadowAlbedo*(.96*(1.0-metallic)*shadowScale);
-    vec3 shadowColor=mix(characterDiffuseSaturation(.65*shadow,1.2),shadow,shadowMix);
-    vec3 untinted=mix(shadowColor,lit,litMask);
-    float chroma=max(max(ramp.r,ramp.g),ramp.b)-min(min(ramp.r,ramp.g),ramp.b);
-    vec3 tinted=untinted*(vec3(1.0-chroma)+ramp.rgb*chroma);
-    vec3 indoor=mix(shadow,characterDiffuseSaturation(lit,1.2),aoMask);
-    vec3 outdoor=tinted*clamp(characterDiffuseLuma(untinted)/max(characterDiffuseLuma(tinted),.001),0.0,1.5);
-    return CharacterDiffuseResponse(mix(indoor,outdoor,sceneVisibility),litMask,aoMask);
+    return characterDiffuseColorResponse(lit,shadow,characterDiffuseSaturation(lit,1.2),
+        ramp,litMask,aoMask,shadowMix,sceneVisibility);
 }
 CharacterDiffuseResponse characterDiffuseResponse(vec3 litAlbedo,vec3 shadowAlbedo,
     float metallic,float shadowScale,vec4 ramp,float baseAo,vec2 shadowMask,

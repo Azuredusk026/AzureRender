@@ -1923,7 +1923,7 @@ AssetMaterial loadMaterial(
             const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
                 ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
                 ||(slot==5&&(result.projectedHairRamp.present
-                    ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
+                    ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
             const bool typed=lookup||slot==6||slot==7||slot==8;
             if(typed&&settings.colorSpace!=defaults.colorSpace)

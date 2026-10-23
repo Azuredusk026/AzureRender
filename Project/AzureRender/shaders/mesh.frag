@@ -486,6 +486,8 @@ void main() {
             worldNormal,worldTangent,worldToView,eyeProfile.shape.x,eyeProfile.shape.y);
         baseColor=texture(AZ_TEX_BASE_COLOR,eyeCoordinates.baseUv);
     }
+    bool eyeNpr=eyeRadial&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
+        &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5;
     bool multiplyComposite = materialFeatureEnabled(32768U) > 0.5;
     bool overlayMaterial = (material.materialClass == 7U
         && materialFeatureEnabled(16U) > 0.5) || multiplyComposite;
@@ -763,6 +765,7 @@ void main() {
         faceSdfWeight);
     bool dualFaceSdf=faceSdfEnabled>0.0 && materialFeatureEnabled(2048U)>0.5;
     bool signedMainRamp=false;
+    if(eyeNpr){signedMainRamp=true;rampCoordinate=characterMainRampCoordinate(shadedNormal,lightDirection,0);}
     if(materialFeatureEnabled(524288U)>.5&&!dualFaceSdf) {
         vec4 rampInput=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1];
         signedMainRamp=rampInput.y>.5;
@@ -786,6 +789,7 @@ void main() {
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
     vec3 indirectDiffuseNormal=shadedNormal;
+    if(eyeNpr)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     if(nprDiffuse) {
         float normalMode=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0].w;
         if(normalMode>1.5) {
@@ -856,15 +860,23 @@ void main() {
     float eyeViewRampAlpha=0;
     vec3 eyeDiffuseMultiplier=vec3(0);
     float eyeAlphaMultiplier=1;
+    CharacterDiffuseResponse eyeDiffuseResponse;
     if(eyeRadial) {
-        eyeMatcap=textureLod(AZ_TEX_MATCAP,eyeCoordinates.matcapUv,0.0);
+        eyeMatcap=eyeNpr?texture(AZ_TEX_MATCAP,eyeCoordinates.matcapUv):textureLod(AZ_TEX_MATCAP,eyeCoordinates.matcapUv,0.0);
         float viewCoordinate=dot(shadedNormal,-camera.cameraForward.xyz)*.5+.5;
         eyeViewRampAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(viewCoordinate,.5),0.0).a;
         eyeDiffuseMultiplier=characterEyeDiffuseMultiplier(baseColor,eyeCoordinates.whiteMask,
             eyeProfile.highlight.rgb,eyeProfile.scattering.rgb);
         eyeAlphaMultiplier=characterEyeAlphaMultiplier(baseColor.a,eyeProfile.shape.z);
+        if(eyeNpr) {
+            eyeDiffuseResponse=characterEyeNprResponse(baseColor,eyeCoordinates.whiteMask,
+                eyeProfile.highlight.rgb,eyeProfile.scattering.rgb,metallic,
+                materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].x,
+                classRampRgba,eyeViewRampAlpha,characterSceneVisibility);
+            localCharacterDiffuse=eyeDiffuseResponse.color;localCharacterResponseReady=true;
+        }
     }
-    bool characterLightComposition=(nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5;
+    bool characterLightComposition=(nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5;
     vec4 characterBlend=vec4(0,0,0,1);
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
     for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
@@ -938,7 +950,7 @@ void main() {
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
             dot(localLightingNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
         if(!specularOnly) {
-        if(eyeRadial&&camera.clusterLighting.x>.5) {
+        if(eyeRadial&&!eyeNpr&&camera.clusterLighting.x>.5) {
             // This host adapter is independent from the unbound native NPR globals.
             vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,pointDirection)*.5+.5,.5),0.0);
             vec3 illumination=radiance*pointDiffuse;
@@ -964,6 +976,16 @@ void main() {
                 localCharacterResponseReady=true;
             }
             clusteredDiffuse+=localCharacterDiffuse*characterRadiance;
+        } else if(eyeNpr) {
+            bool composedMain=float(lightIndex)==camera.nprLightingParameters.y;
+            if(!composedMain) {
+                vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,pointDirection)*.5+.5,.5),0);
+                CharacterDiffuseResponse response=characterEyeNprResponse(baseColor,eyeCoordinates.whiteMask,
+                    eyeProfile.highlight.rgb,eyeProfile.scattering.rgb,metallic,
+                    materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].x,
+                    ramp,eyeViewRampAlpha,light.coneType.y>1.5?shadowVisibility:1.0);
+                clusteredDiffuse+=response.color*radiance*(light.coneType.y>1.5?1.0:pointDiffuse);
+            }
         } else if(nprDiffuse) {
             float localCoordinate=dot(shadedNormal,pointDirection)*.5+.5;
             vec4 localRamp;
@@ -1342,13 +1364,16 @@ void main() {
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
-    if((nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5){
+    if((nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5){
         float visibility=mix(shadowVisibility,1.0,camera.nprGainFloor.z);
         CharacterDiffuseResponse response;
         vec3 incident=camera.nprAmbientColor.rgb;
         vec4 mainRadiance=camera.nprMainRadiance;
         float hairShadowScale=1.0;
-        if(projectedLighting) {
+        if(eyeNpr) {
+            PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+            response=eyeDiffuseResponse;incident=profile.rows[7].rgb;mainRadiance.rgb=profile.rows[8].rgb;
+        } else if(projectedLighting) {
             PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
             hairShadowScale=profile.rows[5].w;
             response=hairDiffuseResponse;
@@ -1371,6 +1396,16 @@ void main() {
             physicalAo*camera.nprLightingParameters.z,response.litMask,visibility);
         vec3 combinedAmbient=response.color*illumination.ambient;
         vec3 combinedDirect=response.color*illumination.direct+clusteredDiffuse-(projectedLighting?sceneMainDiffuse:vec3(0));
+        if(eyeNpr) {
+            combinedAmbient*=eyeAlphaMultiplier;
+            vec3 eyeMainDirect=response.color*illumination.direct*eyeAlphaMultiplier;
+            eyeHostMatcap=characterEyeMatcap(eyeMatcap,eyeProfile.matcap,eyeViewRampAlpha,classRampRgba.a,
+                visibility,eyeProfile.shape.w,illumination.ambient+illumination.direct)*(1.0-eyeCoordinates.whiteMask);
+            float saturation=characterEyeMainSaturation(combinedAmbient+eyeMainDirect+eyeHostMatcap);
+            combinedAmbient=characterDiffuseSaturation(combinedAmbient,saturation);
+            combinedDirect=characterDiffuseSaturation(eyeMainDirect,saturation)+clusteredDiffuse*eyeAlphaMultiplier;
+            eyeHostMatcap=characterDiffuseSaturation(eyeHostMatcap,saturation);
+        }
         sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
@@ -1477,12 +1512,12 @@ void main() {
             eyeHostMatcap=characterEyeMatcap(eyeMatcap,eyeProfile.matcap,eyeViewRampAlpha,ramp.a,
                 1.0-shadowVisibility,eyeProfile.shape.w,illumination);
         }
-        directDiffuse=eyeHostDiffuse;directSpecular=eyeHostMatcap;
-        ambientDiffuse=vec3(0);ambientSpecular=vec3(0);
-        kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=vec3(0);
+        if(!eyeNpr){directDiffuse=eyeHostDiffuse;ambientDiffuse=vec3(0);}
+        directSpecular=eyeHostMatcap;ambientSpecular=vec3(0);
+        kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=eyeNpr?sceneRim:vec3(0);
         emissive=characterEyeDirect(baseColor,eyeCoordinates.whiteMask,eyeProfile.highlight.rgb,
             eyeProfile.scattering.rgb,eyeProfile.directWeights.rgb,eyeProfile.shape.z);
-        beautyColor=directDiffuse+directSpecular+emissive;
+        beautyColor=directDiffuse+ambientDiffuse+directSpecular+emissive+rimLighting;
         outputAlpha=1.0;
     }
     if(multiplyComposite)beautyColor=baseColor.rgb;

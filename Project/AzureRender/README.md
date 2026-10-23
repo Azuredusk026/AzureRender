@@ -188,6 +188,8 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
+眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
+完整眼部区域、层级边界及动态姿态继续验收。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
 
 原生中庭的三模式各完成 96 帧对齐采集。

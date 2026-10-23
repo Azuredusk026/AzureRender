@@ -650,6 +650,32 @@ void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::p
     require((load(outline).materials.at(0).materialFeatures&MaterialFeatureSilhouetteOutline)!=0,
         "Eye surfaces permit an independent silhouette outline");
     auto omittedAlpha=source;omittedAlpha["materials"][0].erase("alphaMode");(void)load(omittedAlpha);
+    auto nprEye=source;
+    lighting(nprEye)["illuminationModel"]="npr-main-ambient";
+    lighting(nprEye)["ambientColor"]={1.2,.9,.8};
+    lighting(nprEye)["mainColor"]={1,.92,.86};
+    lighting(nprEye)["shadowScale"]=.55;
+    const auto nprMaterial=load(nprEye).materials.at(0);
+    require(nprMaterial.eyeSurface.nprLighting&&std::abs(nprMaterial.eyeSurface.shadowScale-.55F)<1e-6F,
+        "Eye NPR lighting fields must reach the typed material");
+    const auto nprPacked=packMaterialSurfaceProfile(nprMaterial);
+    require(nprPacked.rows[6]==std::array<float,4>{.55F,0,0,1}
+        &&nprPacked.rows[7]==std::array<float,4>{1.2F,.9F,.8F,0}
+        &&nprPacked.rows[8]==std::array<float,4>{1,.92F,.86F,0},"Eye NPR lighting must retain its explicit shared record fields");
+    for(const char* field:{"ambientColor","mainColor","shadowScale"}) {
+        auto invalid=nprEye;lighting(invalid).erase(field);reject(invalid,field);
+        for(const auto& value:Json::array({nullptr,true,"0",-1,65})) {
+            invalid=nprEye;lighting(invalid)[field]=value;reject(invalid,field);
+        }
+    }
+    auto nprMip=nprEye;nprMip["samplers"].push_back({{"wrapS",33071},{"wrapT",33071},{"magFilter",9729},{"minFilter",9987}});
+    nprMip["textures"][2]["sampler"]=1;
+    require(load(nprMip).materials.at(0).textureSettings[5].mipPolicy=="generate","Eye NPR Matcap must retain its authored mip sampler");
+    nprMip["samplers"][1]["minFilter"]=9985;
+    require(load(nprMip).materials.at(0).textureSettings[5].mipFilter==TextureImportSettings::MipFilter::Nearest,
+        "Eye NPR Matcap must distinguish linear filtering with nearest mip selection");
+    auto caster=nprEye;profile(caster)["features"].push_back("geometry-shadow");
+    require((load(caster).materials.at(0).materialFeatures&MaterialFeatureGeometryShadow)!=0,"Eye geometry shadow ownership must survive the eye profile");
     (void)loadBinary(source);(void)loadBinary(omittedAlpha);
     auto alternate=fixture;
     for(const char* section:{"images","textures","samplers"})alternate[section]=source[section];

@@ -11,7 +11,7 @@
     "features": {
       "type": "array", "uniqueItems": true,
       "contains": {"const": "eye-radial-surface"},
-      "items": {"enum": ["eye-radial-surface", "silhouette-outline"]}
+      "items": {"enum": ["eye-radial-surface", "silhouette-outline", "geometry-shadow"]}
     },
     "eyeSurface": {"$ref": "#/$defs/eyeSurface"}
   },
@@ -53,10 +53,20 @@
           "required": ["source", "illuminationModel", "matcapShadowFloor", "directWeights"],
           "properties": {
             "source": {"const": "host-authored"},
-            "illuminationModel": {"const": "host-lambert"},
+            "illuminationModel": {"enum": ["host-lambert", "npr-main-ambient"]},
             "matcapShadowFloor": {"type": "number", "minimum": 0, "maximum": 1},
-            "directWeights": {"$ref": "#/$defs/color3"}
-          }
+            "directWeights": {"$ref": "#/$defs/color3"},
+            "ambientColor": {"$ref": "#/$defs/color3"},
+            "mainColor": {"$ref": "#/$defs/color3"},
+            "shadowScale": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "allOf": [{
+            "if": {"properties": {"illuminationModel": {"const": "npr-main-ambient"}}},
+            "then": {"required": ["ambientColor", "mainColor", "shadowScale"]},
+            "else": {"not": {"anyOf": [
+              {"required": ["ambientColor"]}, {"required": ["mainColor"]}, {"required": ["shadowScale"]}
+            ]}}
+          }]
         }
       }
     }
