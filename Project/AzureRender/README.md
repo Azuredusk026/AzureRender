@@ -186,6 +186,8 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 主视口、辅助视口与 Player 共用空间抗锯齿。
 模式包含关闭、原生分辨率过滤和四子像素超采样。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
+完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
+时序历史、材质走样及主场景运动细节保持待验。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。
 
 原生中庭的三模式各完成 96 帧对齐采集。

@@ -84,7 +84,9 @@ NR12 负责画面、操控、发布与实录联合验收。
 固定遮罩来源覆盖与可见室内天空复核通过。
 
 100 米深度门禁保持失败，完整原生外观继续验收。
-主辅视口与 Player 抗锯齿的公共及原生数值检查通过。
+主辅视口与 Player 的空间抗锯齿已有数值证据。
+完整抗锯齿按[NR7-AA0 至 AA6](2026-10-22-spatial-antialiasing.md)实施。
+运动历史、发丝、高光、描边和主场景画质保持待验。
 
 角色与物流按[专项计划](2026-10-22-character-logistics-restoration.md)推进。
 接入风险及公共契约见[架构审计](2026-10-22-render-capability-integration-audit.md)。
